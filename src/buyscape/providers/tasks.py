@@ -85,6 +85,19 @@ class Reading(BaseModel):
         None, description="Model or part number only if legible on the item, label, plate or a Settings screen."
     )
     serial_text: str | None = None
+    brand_source: str | None = Field(
+        None,
+        description=(
+            "The exact line from visible_text that the brand was copied from. "
+            "Null if brand_text is null. Never write a line that is not there."
+        ),
+    )
+    model_source: str | None = Field(
+        None, description="The exact line from visible_text the model was copied from."
+    )
+    rating_source: str | None = Field(
+        None, description="The exact line from visible_text the rating was copied from."
+    )
     rating_text: str | None = Field(
         None, description="Capacity or rating as printed, for example '8kg', '1.5HP', '5.5kVA', '128GB'."
     )
@@ -110,6 +123,9 @@ class Reading(BaseModel):
             "rather than a photo taken of the item."
         ),
     )
+    # Filled in by corroboration, never by a model: how many transcribed lines
+    # a second reader independently produced from the same photographs.
+    corroborated_lines: int = 0
 
 
 class Candidate(BaseModel):
@@ -117,7 +133,7 @@ class Candidate(BaseModel):
     model: str
     variant: str | None = None
     score: float = Field(0.0, ge=0.0, le=1.0)
-    why: str = Field("", description="The specific evidence for this candidate.")
+    why: str = Field("", description="The specific evidence for this candidate, in at most twelve words.")
 
 
 class Identification(BaseModel):
@@ -159,12 +175,22 @@ def read_evidence(
     """Tier 1: read the item. Cheap model, high resolution, no identity guessing."""
     request = ModelRequest(
         task="read_evidence",
-        prompt_version="read_evidence.v3",
+        prompt_version="read_evidence.v4",
         system=(
             f"{HONESTY}\n\n"
             "Your job is to READ and DESCRIBE, not to work out which exact model "
             "this is. Transcribe text exactly as printed, including model numbers "
             "that look like noise.\n\n"
+            "The one thing you must never do is finish a specification table. If "
+            "a plate is half legible, transcribe the half you can read and stop. "
+            "Do not add the fuel tank capacity, the noise level, the dimensions, "
+            "the running time or the output of a machine because you know what "
+            "that product line usually has. A single invented number here becomes "
+            "a real price paid for the wrong machine. If you can read the model "
+            "number but not the rating, give the model and leave the rating null. "
+            "Every one of brand, model and rating must also name the exact line "
+            "of visible_text it was copied from, and that line must be one you "
+            "actually transcribed.\n\n"
             "Always fill in category, presentation, materials and an approximate "
             "weight. These are judgements, so give them even when no text is "
             "legible at all: an item with no readable label still has a shape, a "
@@ -182,7 +208,9 @@ def read_evidence(
             "new stock; what it is made of by rough mass share; and about what "
             "it weighs in kilograms.\n\n"
             "Read, literally: every legible line of text, then the brand, model, "
-            "serial and rating, each only if it is printed and readable.\n\n"
+            "serial and rating, each only if it is printed and readable, each "
+            "with the line it came from. Transcribe only what is in the picture. "
+            "A plate you can half read is half a plate, not a full specification.\n\n"
             "Also note visible damage, whether these look like catalogue images "
             "rather than photos of a real unit, and whether any is a screenshot "
             "of a phone gallery rather than a photo of the item."
@@ -204,9 +232,12 @@ def identify(
 ) -> tuple[Identification, CallMeta]:
     """Tier 2: rank a supplied shortlist. Retrieval is what makes this work."""
     shortlist = "\n".join(f"- {c}" for c in candidates) if candidates else "(none found)"
+    # The reader already transcribed the labels at full resolution. Ranking
+    # needs the shape and the colour, not the pixels, so three small images
+    # are enough and cost a fraction of the whole gallery.
     request = ModelRequest(
         task="identify",
-        prompt_version="identify.v1",
+        prompt_version="identify.v2",
         system=(
             f"{HONESTY}\n\n"
             "You are given photos, the text another system read off the item, "
@@ -225,11 +256,12 @@ def identify(
             f"Seller says: {seller_text or '(nothing)'}\n\n"
             f"Catalogue shortlist:\n{shortlist}\n\n"
             "Rank up to five candidates with a score each, then give your choice "
-            "or refuse."
+            "or refuse. Keep every explanation to one short line."
         ),
         output_schema=Identification,
-        images=images,
-        max_tokens=1600,
+        images=images[:3],
+        max_tokens=700,
+        image_max_side=1024,
     )
     ident, meta = provider.structured_call(request)
     return ident, meta  # type: ignore[return-value]
@@ -250,7 +282,7 @@ def extract_claims(provider: VisionProvider, seller_text: str) -> tuple[ClaimSet
         user_text=f"Seller's description:\n{seller_text}",
         output_schema=ClaimSet,
         images=(),
-        max_tokens=1200,
+        max_tokens=600,
     )
     claims, meta = provider.structured_call(request)
     return claims, meta  # type: ignore[return-value]

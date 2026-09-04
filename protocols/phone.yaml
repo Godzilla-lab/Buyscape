@@ -1,6 +1,15 @@
 category: phone
 version: 1
 display_name: Phone
+aliases:
+  - phone
+  - smartphone
+  - mobile phone
+  - cell phone
+  - handset
+  - feature phone
+  - satellite phone
+  - tablet
 shots:
   - id: code_shot
     ask: "Write the code {code} on paper and take one photo with the paper next to the phone."
@@ -15,6 +24,22 @@ shots:
     kind: screenshot
     checks: [is_screenshot, text_readable]
     extract: [model_name, storage_gb, imei]
+  - id: imei_dial
+    ask: "Dial *#06# and screenshot the IMEI that appears."
+    kind: screenshot
+    checks: [is_screenshot, text_readable]
+    extract: [imei]
+  - id: box_label
+    ask: "If you have the box, photograph the label showing the model, storage and IMEI."
+    required: false
+    checks: [text_readable]
+    extract: [model_name, storage_gb, imei]
+  - id: parts_history
+    ask: "iPhone: screenshot of Settings, General, About, Parts and Service History. Samsung: screenshot of the Samsung Members diagnostics result."
+    kind: screenshot
+    required: false
+    checks: [is_screenshot]
+    extract: [non_genuine_parts]
   - id: battery_health
     ask: "Screenshot of the battery health screen."
     kind: screenshot
@@ -30,6 +55,24 @@ shots:
     ask: "A short clip: press power, unlock, then open the camera app."
     kind: clip
     required: false
+questions:
+  - id: age_years
+    ask: "Roughly how old is it, in years?"
+    kind: number
+    unit: years
+    claim: age_years
+    checks_attr: year
+    # A quarter out is a misremembered year. More than that is a different
+    # machine, a different story, or a guess, and each is worth flagging.
+    tolerance: 0.25
+  - id: screen_replaced
+    ask: "Has the screen or battery ever been changed?"
+    kind: yesno
+    claim: screen_original
+  - id: account_signed_out
+    ask: "Is it signed out of iCloud or Google, so a new owner can set it up?"
+    kind: yesno
+    claim: activation_lock_off
 claims:
   - id: battery_health_pct
     kinds: [spec]
@@ -55,6 +98,18 @@ claims:
     worst_case: "assumed still locked to the previous account"
     pickup_check: "Seller signs out of iCloud or Google before payment"
     penalty: 0.35
+  - id: genuine_parts
+    kinds: [condition, provenance]
+    evidence_slots: [parts_history]
+    worst_case: "assumed replaced screen and battery"
+    pickup_check: "Agent opens Parts and Service History or the Samsung diagnostics screen"
+    penalty: 0.8
+  - id: original_authentic
+    kinds: [provenance]
+    evidence_slots: [settings_about, imei_dial]
+    worst_case: "assumed a clone until the IMEI on screen, tray and box agree"
+    pickup_check: "Agent dials *#06#, matches the IMEI to the tray and box, then weighs the phone"
+    penalty: 0.6
   - id: works
     kinds: [works]
     evidence_slots: [front_screen_on, power_on_clip]
@@ -62,6 +117,8 @@ claims:
     pickup_check: "Agent powers on and tests calls, camera and charging"
     penalty: 0.5
 pickup_protocol:
-  - "Confirm the IMEI on screen matches the IMEI on the tray or box."
+  - "Dial *#06# and match the IMEI to the SIM tray and the box before paying."
+  - "Weigh the phone. More than 5 percent off the catalogue weight is a clone or a swapped battery: refuse it."
+  - "Open Parts and Service History (iPhone) or Samsung Members diagnostics. Replaced parts are priced as replaced."
   - "Check the account is signed out before paying."
   - "Test charging port, speaker, camera and touch across the whole screen."

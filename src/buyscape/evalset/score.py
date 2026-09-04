@@ -20,10 +20,37 @@ from ..runner import Case, CaseResult
 _SPLIT_UNITS = re.compile(r"(\d+)\s*(gb|tb|mb|kva|kg|hp|kw|w)\b", re.I)
 
 
+# Words that make a different product at a different price: an iPhone 13 Pro
+# Max is not an iPhone 13. Titles carry these reliably, so a mismatch is real.
+TIER_WORDS = {"pro", "max", "plus", "ultra", "mini", "lite", "fe", "neo", "prime", "air"}
+
+
+_DECIMAL = re.compile(r"(\d)\.(\d)")
+_LETTER_PREFIX = re.compile(r"^[a-z]+(?=\d)")
+_LETTER_SUFFIX = re.compile(r"^(\d+)[a-z]+$")
+
+
 def _norm(text: str | None) -> set[str]:
-    """Tokenise, splitting a number from its unit so 512gb equals 512 gb."""
-    normalised = _SPLIT_UNITS.sub(r"\1 \2", (text or "").lower())
-    return set(tokens(normalised))
+    """Tokenise so the same number written two ways still meets.
+
+    512gb equals 512 gb; 4.5kva stays one number rather than a 4 and a 5;
+    KM5000i also answers to 5000i, because a plate code and a seller's
+    shorthand differ by exactly that prefix.
+    """
+    lowered = (text or "").lower().replace("+", " plus ")
+    # CL7800E-2R is CL7800E2R, but XT-LITE is also XT Lite: keep both forms.
+    lowered = lowered + " " + re.sub(r"(?<=[a-z0-9])-(?=[a-z0-9])", "", lowered)
+    lowered = _DECIMAL.sub(r"\1\2", lowered)
+    normalised = _SPLIT_UNITS.sub(r"\1 \2", lowered)
+    out = set(tokens(normalised))
+    for t in list(out):
+        stripped = _LETTER_PREFIX.sub("", t)
+        if stripped != t:
+            out.add(stripped)
+        digits = _LETTER_SUFFIX.match(stripped)
+        if digits:
+            out.add(digits.group(1))  # 350a and 5000i both answer to their number
+    return out
 
 
 def brand_matches(predicted: str | None, truth_title: str) -> bool:
@@ -58,6 +85,9 @@ def model_matches(brand: str | None, model: str | None, truth_title: str) -> boo
         return False
     # Both sides quote numbers and none agree: a wrong generation or capacity.
     if pred_numbers and truth_numbers and not (pred_numbers & truth_numbers):
+        return False
+    # Pro, Max, Plus, Ultra: same generation, different product, different price.
+    if (pred_words & TIER_WORDS) != (truth_words & TIER_WORDS):
         return False
     return True
 
@@ -144,6 +174,7 @@ def score(pairs: list[tuple[Case, CaseResult]]) -> Metrics:
                 "generator": {"generator", "petrol_generator", "diesel_generator", "generator_set"},
                 "split_ac": {"split_ac", "air_conditioner", "split_air_conditioner", "ac", "aircon"},
                 "washing_machine": {"washing_machine", "washer", "washing_machine_dryer"},
+                "laptop": {"laptop", "notebook", "macbook", "laptop_computer"},
             }
             if predicted in aliases.get(expected, {expected}) or expected in predicted:
                 m.category_correct += 1

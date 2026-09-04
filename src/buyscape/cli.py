@@ -2,15 +2,18 @@
 
 from __future__ import annotations
 
+import json
 import os
+import threading
 from concurrent.futures import ThreadPoolExecutor
+from datetime import datetime, timezone
 from pathlib import Path
 
 import typer
 from rich.console import Console
 from rich.table import Table
 
-from .evalset import jiji, score
+from .evalset import buyscrap, jiji, score
 from .identify.catalogue import load_catalogue
 from .pricing.sources import JijiComps, MaterialsFloor, ScrapIndex
 from .protocols.schema import load_protocols
@@ -27,13 +30,24 @@ ROOT = Path.cwd()
 # Named pairs, so a run is one flag. Reading and deciding are different jobs:
 # open Qwen beats Gemini 3 Pro on OCRBench v2 at a fraction of the price, while
 # frontier models earn their cost on identification and on refusing to answer.
+# A second reader from a different family. Fabrications are not reproducible
+# across families, so agreement between the two is evidence and disagreement
+# is a reason to ask the seller for a better photograph.
+DEFAULT_CORROBORATOR = "mistralai/mistral-small-3.2-24b-instruct"
+
 PRESETS: dict[str, tuple[str, str]] = {
-    # Everything frontier. The ceiling, and the answer key for the others.
-    "best": ("anthropic/claude-opus-5", "anthropic/claude-fable-5.1"),
-    # What production should probably ship: cheap reader, frontier decider.
-    "balanced": ("qwen/qwen3-vl-32b-instruct", "anthropic/claude-sonnet-5"),
+    # Cheap reader, cheap thinking decider. GLM 5.3 Flash scores within a
+    # point of Gemini 3.8 Flash on the intelligence index at a fifteenth of
+    # the price, and it does not depend on a free tier being up.
+    "balanced": ("qwen/qwen3-vl-32b-instruct", "z-ai/glm-5.3-flash"),
+    # Gemini 3.8 Flash on the Google AI Studio free tier: zero cost when it is
+    # not shedding load, which on 4 Sep 2026 it was.
+    "gemini-free": ("qwen/qwen3-vl-32b-instruct", "gemini-3.8-flash"),
     # Same shape, Google end to end. Runs on the free tier.
     "google": ("gemini-3.8-flash", "gemini-3.8-flash"),
+    # Frontier decider. Measured at 1.6 cents an item on 4 Sep 2026, which
+    # bought little over Gemini. Opt in by name only, never a default.
+    "sonnet": ("qwen/qwen3-vl-32b-instruct", "anthropic/claude-sonnet-5"),
     # Zero cost, for exercising the pipeline when no budget is available.
     "free": ("minimax/minimax-m3:free", "minimax/minimax-m3:free"),
     "cheap": ("qwen/qwen3-vl-32b-instruct", "google/gemini-3.8-flash"),
@@ -41,7 +55,48 @@ PRESETS: dict[str, tuple[str, str]] = {
     "grok": ("grok-4.6", "grok-4.6"),
 }
 DEFAULT_READER = "qwen/qwen3-vl-32b-instruct"
-DEFAULT_REASONER = "anthropic/claude-sonnet-5"
+DEFAULT_REASONER = "z-ai/glm-5.3-flash"
+
+
+def _load_buyscrap_cases(raw: Path, limit: int | None) -> list[Case]:
+    """The tenant's adverts. Titles are not model names, so the answer key is
+    the site category and the asking price; identification is not scored."""
+    cases: list[Case] = []
+    for listing in buyscrap.load(raw):
+        images = [raw / "media" / rel for rel in listing.media]
+        images = [p for p in images if p.exists()][:6]
+        if not images:
+            continue
+        cases.append(
+            Case(
+                id=listing.id,
+                images=images,
+                seller_text=listing.description,
+                category_hint=None,
+                slots_present=set(),
+                truth={
+                    "title": listing.title,
+                    "category": None,
+                    "site_category": listing.category,
+                    "price_ngn": listing.price_ngn,
+                    "is_used": listing.is_used,
+                    "url": listing.url,
+                },
+            )
+        )
+    return cases[:limit] if limit else cases
+
+
+def _load_dotenv(path: Path = ROOT / ".env") -> None:
+    """Keys live in .env. Read it so a run never silently falls back to replay."""
+    if not path.exists():
+        return
+    for line in path.read_text().splitlines():
+        line = line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, value = line.split("=", 1)
+        os.environ.setdefault(key.strip(), value.strip().strip('"').strip("'"))
 
 
 def _provider(model: str, fixtures: Path, mode: str) -> VisionProvider:
@@ -82,18 +137,25 @@ def _provider(model: str, fixtures: Path, mode: str) -> VisionProvider:
 def fetch_testset(
     out: Path = typer.Option(Path("eval/raw"), help="Where to cache listings and photos."),
     per_category: int = typer.Option(45, help="Listings to keep per category."),
+    only: list[str] = typer.Option(None, help="Fetch only these categories, leaving the rest cached."),
 ) -> None:
     """Pull a held-out set of real Lagos listings from Jiji. Run once."""
-    counts = jiji.build(out, per_category=per_category)
+    counts = jiji.build(out, per_category=per_category, only=tuple(only or ()))
     for category, n in counts.items():
         console.print(f"{category:18s} {n}")
 
 
 def _load_cases(raw: Path, limit: int | None, categories: list[str] | None) -> list[Case]:
     cases: list[Case] = []
+    seen: set[str] = set()
     for listing in jiji.load(raw):
         if categories and listing.category not in categories:
             continue
+        # The same advert can answer two category searches. Counting it twice
+        # would weight the gate towards whatever it is.
+        if listing.id in seen:
+            continue
+        seen.add(listing.id)
         images = [raw / "media" / rel for rel in listing.media]
         images = [p for p in images if p.exists()][:6]
         if not images:
@@ -144,13 +206,25 @@ def run(
     ),
     reader: str = typer.Option(DEFAULT_READER, help="Tier 1 model, or 'fake'."),
     reasoner: str = typer.Option(DEFAULT_REASONER, help="Tier 2 model, or 'fake'."),
+    corroborator: str = typer.Option(
+        DEFAULT_CORROBORATOR,
+        help="Second reader. Only text both readers produce counts as read. 'none' disables it.",
+    ),
     mode: str = typer.Option("auto", help="record | replay | auto"),
     limit: int = typer.Option(0, help="Cap the number of cases. 0 means all."),
     category: list[str] = typer.Option(None, help="Restrict to these categories."),
     workers: int = typer.Option(6, help="Cases to run at once. Cases are independent."),
+    budget_usd: float = typer.Option(
+        0.5,
+        help="Stop starting new cases once recorded spend reaches this. 0 means no cap.",
+    ),
     fixtures: Path = typer.Option(Path("eval/fixtures")),
+    testset: str = typer.Option(
+        "jiji", "--set", help="jiji (answer keys are model names) or buyscrap (the tenant's own adverts)."
+    ),
 ) -> None:
     """Run the engine over the test set and write the reports and the gate."""
+    _load_dotenv()
     if preset:
         if preset not in PRESETS:
             console.print(f"[red]Unknown preset {preset!r}. Choose from: {', '.join(PRESETS)}[/red]")
@@ -159,7 +233,10 @@ def run(
 
     protocols = load_protocols(ROOT / "protocols")
     catalogue = load_catalogue(ROOT / "catalogue")
-    cases = _load_cases(raw, limit or None, list(category) if category else None)
+    if testset == "buyscrap":
+        cases = _load_buyscrap_cases(ROOT / "eval" / "raw" / "buyscrap", limit or None)
+    else:
+        cases = _load_cases(raw, limit or None, list(category) if category else None)
     if not cases:
         console.print("[red]No cases found. Run fetch-testset first.[/red]")
         raise typer.Exit(1)
@@ -172,14 +249,30 @@ def run(
     materials = MaterialsFloor(ROOT / "tenants" / "scrap_index_lagos.yaml")
     reader_p = _provider(reader, fixtures, mode)
     reasoner_p = _provider(reasoner, fixtures, mode)
+    corroborator_p = (
+        None if corroborator in ("", "none") else _provider(corroborator, fixtures, mode)
+    )
 
     run_dir = out / f"{reader.replace('/', '_')}__{reasoner.replace('/', '_')}"
+    if testset != "jiji":
+        run_dir = run_dir.with_name(run_dir.name + f"__{testset}")
     (run_dir / "cases").mkdir(parents=True, exist_ok=True)
 
+    # Spend is checked before every case starts, so the overshoot is at most
+    # the cases already in flight. Replayed calls cost nothing.
+    spend = {"usd": 0.0}
+    lock = threading.Lock()
+
     def one(case: Case):
+        with lock:
+            if budget_usd and spend["usd"] >= budget_usd:
+                return case, None
         result = run_case(
-            case, protocols, catalogue, comps, scrap, reader_p, reasoner_p, materials
+            case, protocols, catalogue, comps, scrap, reader_p, reasoner_p, materials,
+            corroborator_p,
         )
+        with lock:
+            spend["usd"] += result.spent_usd
         (run_dir / "cases" / f"{case.id}.md").write_text(report_markdown(case, result))
         return case, result
 
@@ -189,20 +282,29 @@ def run(
         with ThreadPoolExecutor(max_workers=max(1, workers)) as pool:
             for case, result in pool.map(one, cases):
                 done += 1
-                status.update(f"[{done}/{len(cases)}] {case.id}")
-                pairs.append((case, result))
+                status.update(f"[{done}/{len(cases)}] {case.id} spent ${spend['usd']:.3f}")
+                if result is not None:
+                    pairs.append((case, result))
 
+    skipped = len(cases) - len(pairs)
+    if not pairs:
+        console.print(f"[red]Budget ${budget_usd:.2f} was already spent before any case ran.[/red]")
+        raise typer.Exit(1)
     metrics = score.score(pairs)
     summary = metrics.summary()
     summary["reader"] = reader
     summary["reasoner"] = reasoner
+    summary["corroborator"] = corroborator
+    summary["spend_usd"] = round(spend["usd"], 4)
+    summary["budget_usd"] = budget_usd
+    summary["skipped_for_budget"] = skipped
     score.write_summary(run_dir / "summary.json", summary)
 
     table = Table(title=f"Buyscape proof: reader {reader}, reasoner {reasoner}")
     table.add_column("metric")
     table.add_column("value", justify="right")
     for key, value in summary.items():
-        if key in ("failure_codes", "reader", "reasoner"):
+        if key in ("failure_codes", "reader", "reasoner", "corroborator"):
             continue
         table.add_row(key, str(value))
     console.print(table)
@@ -222,8 +324,79 @@ def run(
     console.print(gate)
     if summary["failure_codes"]:
         console.print(f"Loud failures: {summary['failure_codes']}")
+    per_case = spend["usd"] / len(pairs)
+    # Every run leaves a row in the ledger. The business question is the cost
+    # per item, and it is answered from this file, never from memory.
+    ledger = out / "spend.jsonl"
+    ledger.parent.mkdir(parents=True, exist_ok=True)
+    with ledger.open("a") as fh:
+        fh.write(
+            json.dumps(
+                {
+                    "at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+                    "reader": reader,
+                    "reasoner": reasoner,
+                    "mode": mode,
+                    "cases": len(pairs),
+                    "spend_usd": round(spend["usd"], 4),
+                    "spend_per_case_usd": round(per_case, 5),
+                    "model_cost_per_case_usd": summary.get("cost_per_case_usd"),
+                    "silent_wrong_rate": summary.get("silent_wrong_rate"),
+                    "model_top1_accuracy_with_label": summary.get("model_top1_accuracy_with_label"),
+                }
+            )
+            + "\n"
+        )
+    console.print(
+        f"Spend: ${spend['usd']:.3f} on {len(pairs)} cases, ${per_case:.4f} per case."
+        + (f" Budget ${budget_usd:.2f} reached, {skipped} cases not started." if skipped else "")
+    )
     console.print(f"Reports: {run_dir / 'cases'}")
     console.print("[green]GATE PASSED[/green]" if all_pass else "[red]GATE NOT PASSED[/red]")
+
+
+@app.command("fetch-buyscrap")
+def fetch_buyscrap(out: Path = typer.Option(ROOT / "eval" / "raw" / "buyscrap")) -> None:
+    """Cache every advert on buyscrap.com.ng, the tenant's own site, with photos."""
+    listings = buyscrap.fetch(out)
+    with_photos = sum(1 for l in listings if l.media)
+    console.print(f"{len(listings)} adverts cached, {with_photos} with photos, in {out}")
+    by_cat: dict[str, int] = {}
+    for l in listings:
+        by_cat[l.category] = by_cat.get(l.category, 0) + 1
+    for cat, n in sorted(by_cat.items(), key=lambda kv: -kv[1]):
+        console.print(f"  {n:3d}  {cat}")
+
+
+@app.command("spend")
+def spend_report(out: Path = typer.Option(ROOT / "docs" / "proof")) -> None:
+    """What every run cost, per model pair, and what one item costs on each."""
+    ledger = out / "spend.jsonl"
+    if not ledger.exists():
+        console.print("No runs recorded yet.")
+        return
+    rows = [json.loads(line) for line in ledger.read_text().splitlines() if line.strip()]
+    table = Table(title="LLM spend, all runs", expand=True)
+    for col in ("when", "reader", "reasoner", "cases", "spent $", "list $/item", "silent wrong"):
+        table.add_column(col, justify="right" if col not in ("when", "reader", "reasoner") else "left", overflow="fold")
+    total = 0.0
+    for r in rows:
+        total += r["spend_usd"]
+        table.add_row(
+            r["at"][5:16].replace("T", " "),
+            r["reader"].split("/")[-1],
+            r["reasoner"].split("/")[-1],
+            str(r["cases"]),
+            f"{r['spend_usd']:.3f}",
+            f"{r.get('model_cost_per_case_usd') or 0:.4f}",
+            "" if r.get("silent_wrong_rate") is None else f"{r['silent_wrong_rate']:.1%}",
+        )
+    console.print(table)
+    console.print(f"Total spent across recorded runs: ${total:.2f}")
+    console.print(
+        "Per item is what one valuation costs at list price with nothing cached. "
+        "That number has to stay small enough that a tenant pays it without noticing."
+    )
 
 
 @app.command("protocols")
@@ -234,7 +407,8 @@ def check_protocols() -> None:
         opening = ", ".join(s.id for s in p.opening_shots) or "none"
         console.print(
             f"{name:18s} v{p.version} shots={len(p.shots)} "
-            f"required={len(p.required_shots)} opens={opening} claims={len(p.claims)}"
+            f"required={len(p.required_shots)} opens={opening} "
+            f"questions={len(p.questions)} claims={len(p.claims)}"
         )
 
 

@@ -71,6 +71,9 @@ QUERIES: tuple[Query, ...] = (
         query="washing machine",
         must_include=("washing machine", "washer", "wash and dry"),
     ),
+    # The tenant's own adverts are mostly laptops, and Jiji titles here carry
+    # brand, model, RAM and processor, which makes them a strong answer key.
+    Query("laptop", slug="computers-and-laptops", must_include=("laptop", "macbook", "notebook")),
 )
 
 
@@ -229,13 +232,24 @@ def download_media(listings: list[Listing], root: Path, client: httpx.Client | N
             client.close()
 
 
-def build(out_dir: Path, per_category: int = 40, region: str = "lagos") -> dict[str, int]:
-    """Fetch and cache the whole test set with photos. Returns counts per category."""
+def build(
+    out_dir: Path,
+    per_category: int = 40,
+    region: str = "lagos",
+    only: tuple[str, ...] = (),
+) -> dict[str, int]:
+    """Fetch and cache the whole test set with photos. Returns counts per category.
+
+    `only` restricts the fetch to named categories, so adding one category
+    never re-downloads and re-writes the ones already cached.
+    """
     out_dir.mkdir(parents=True, exist_ok=True)
     media_root = out_dir / "media"
     counts: dict[str, int] = {}
     with httpx.Client(headers={"User-Agent": UA}, timeout=30.0) as client:
         for q in QUERIES:
+            if only and q.category not in only:
+                continue
             listings = fetch_category(q, per_category, region=region, client=client)
             download_media(listings, media_root, client=client)
             listings = [l for l in listings if l.media]
@@ -250,6 +264,7 @@ def build_price_pool(
     per_category: int = 400,
     region: str = "lagos",
     max_pages: int = 60,
+    only: tuple[str, ...] = (),
 ) -> dict[str, int]:
     """Cache a large pool of used listings for use as comparable prices only.
 
@@ -261,6 +276,8 @@ def build_price_pool(
     counts: dict[str, int] = {}
     with httpx.Client(headers={"User-Agent": UA}, timeout=30.0) as client:
         for q in QUERIES:
+            if only and q.category not in only:
+                continue
             kept: list[Listing] = []
             seen: set[str] = set()
             for page in range(1, max_pages + 1):

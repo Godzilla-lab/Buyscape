@@ -10,19 +10,23 @@ from __future__ import annotations
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
 
+from .answers import review_answers, unanswered
+from .assess import Assessment, CaptureRequest, assess, capture_requests
+from .claims.crosscheck import CrossCheck, Testimony, crosscheck
 from .claims.ledger import Claim, ClaimStatus, build_ledger
 from .identify import chain
-from .identify.catalogue import Entry
-from .pricing.engine import Quote, price
+from .identify.catalogue import Entry, tokens
+from .pricing.engine import Quote, cap_at_asking, price
 from .pricing.sources import (
     JijiComps,
     MaterialsFloor,
     ScrapIndex,
     SourceUnavailable,
     parse_rating,
+    parse_stated_weight_kg,
 )
-from .protocols.schema import Protocol
-from .providers.base import CostMeter, ImageRef, ProviderError, VisionProvider
+from .protocols.schema import Protocol, resolve
+from .providers.base import CostMeter, ImageRef, MissingFixture, ProviderError, VisionProvider
 from .providers.tasks import extract_claims
 
 
@@ -35,6 +39,16 @@ class Case:
     seller_text: str = ""
     category_hint: str | None = None
     slots_present: set[str] = field(default_factory=set)
+    # What the seller says they want for it, when they have said. A production
+    # input, never taken from the answer key: it caps the offer, never raises it.
+    asking_price: float | None = None
+    # What the seller answered when asked. Only they know the age, the drops
+    # and whether it still holds charge, and those move the price most.
+    answers: dict[str, str] = field(default_factory=dict)
+    # What the item said about itself, one record per protocol shot, and the
+    # opening shots the seller declined. Both are inputs, never model output.
+    testimony: list[Testimony] = field(default_factory=list)
+    refused_slots: set[str] = field(default_factory=set)
     truth: dict = field(default_factory=dict)
 
 
@@ -50,6 +64,12 @@ class CaseResult:
     reader_model: str
     reasoner_model: str
     error: str | None = None
+    crosscheck: CrossCheck | None = None
+    assessment: Assessment | None = None
+    asks: list[CaptureRequest] = field(default_factory=list)
+    questions: list = field(default_factory=list)
+    answer_notes: list[str] = field(default_factory=list)
+    spent_usd: float = 0.0  # cost_usd counts replayed calls at their recorded price; this does not
 
     @property
     def identified(self) -> bool:
@@ -65,6 +85,7 @@ def run_case(
     reader: VisionProvider,
     reasoner: VisionProvider,
     materials: MaterialsFloor | None = None,
+    corroborator: VisionProvider | None = None,
 ) -> CaseResult:
     meter = CostMeter()
     images = tuple(ImageRef(p) for p in case.images)
@@ -78,36 +99,104 @@ def run_case(
             reasoner,
             meter,
             case.category_hint,
+            corroborator,
         )
-    except ProviderError as exc:
+    except (ProviderError, MissingFixture) as exc:
+        code = "NO_FIXTURE" if isinstance(exc, MissingFixture) else "PROVIDER_ERROR"
         return CaseResult(
             case_id=case.id,
-            chain=chain.ChainResult(failure_code="PROVIDER_ERROR", reason=str(exc)),
+            chain=chain.ChainResult(failure_code=code, reason=str(exc)),
             ledger=[],
-            quote=Quote(failure_code="PROVIDER_ERROR", reason=str(exc)),
+            quote=Quote(failure_code=code, reason=str(exc)),
             cost_usd=meter.total_usd,
             latency_ms=meter.total_ms,
             cost_by_task=meter.by_task(),
             reader_model=reader.model,
             reasoner_model=reasoner.model,
             error=str(exc),
+            spent_usd=meter.spent_usd,
         )
 
+    # What the model called it is free text, so the protocol is resolved by
+    # name and alias rather than by an exact dictionary hit. A miss here used
+    # to send every 'portable generator' to the generic protocol, and with it
+    # went the rating plate and winding photos that price the thing.
     category = result.category or case.category_hint or "generic"
-    protocol = protocols.get(category) or protocols["generic"]
+    protocol = resolve(protocols, category) if result.category else (
+        protocols.get(category) or protocols["generic"]
+    )
+    category = protocol.category
+
+    # The item's own testimony, checked against itself, against the identity
+    # the chain chose and against the catalogue. No model is asked whether the
+    # item is genuine; two records that should agree and do not is the answer.
+    slots = set(case.slots_present) | {t.slot for t in case.testimony}
+    soft_flags = list(result.fraud_flags)
+    check = crosscheck(case.testimony, _entry_for(catalogue, category, result.model_key), result.model_key, case.refused_slots)
+    result.fraud_flags.extend(check.fraud_flags)
+    if check.fraud_flags:
+        result.links.append(chain.LinkLog("crosscheck", "fraud", "; ".join(check.fraud_flags)))
+    elif case.testimony:
+        result.links.append(
+            chain.LinkLog("crosscheck", "ok", "; ".join(check.notes) or "no overlapping records")
+        )
+
+    entry = _entry_for(catalogue, category, result.model_key)
+    review = review_answers(protocol, case.answers, entry)
+    if review.notes:
+        result.links.append(chain.LinkLog("answers", "checked", "; ".join(review.notes)))
 
     ledger: list[Claim] = []
     if case.seller_text.strip():
         try:
-            drafts, meta = extract_claims(reasoner, case.seller_text)
+            # Text in, claims out: the reader model does this at a fiftieth of
+            # the reasoner's price and the ledger rules do the judging anyway.
+            drafts, meta = extract_claims(reader, case.seller_text)
             meter.record(meta)
-            ledger = build_ledger(drafts.claims, protocol, case.slots_present)
-        except ProviderError:
+            ledger = build_ledger(
+                drafts.claims,
+                protocol,
+                slots,
+                contradictions=check.contradicted + review.contradictions,
+                refused_slots=case.refused_slots,
+            )
+        except (ProviderError, MissingFixture):
             ledger = []
+
+    # Answers are claims too: unprovable remotely, priced at the worst case,
+    # and checked against the catalogue where the catalogue knows.
+    if review.drafts:
+        ledger.extend(
+            build_ledger(
+                review.drafts, protocol, slots,
+                contradictions=check.contradicted + review.contradictions,
+                refused_slots=case.refused_slots,
+            )
+        )
+
+    # Declining to open a cover is a claim about what is behind it, and it is
+    # priced as the worst thing that could be there.
+    for shot in protocol.opening_shots:
+        if shot.id in case.refused_slots:
+            ledger.append(
+                Claim(
+                    text=f"Seller declined to open: {shot.ask}",
+                    kind="condition",
+                    attribute=None,
+                    value=None,
+                    status=ClaimStatus.REFUSED_TO_OPEN,
+                    required_evidence=[shot.id],
+                    worst_case="whatever is behind the cover is assumed to be the worst case",
+                    pickup_check="Agent opens it before any money moves",
+                    penalty=0.7,
+                )
+            )
 
     # Any shot the protocol requires that the seller never sent is an unproven
     # condition in its own right, so it is recorded like a claim.
-    missing = [s for s in protocol.required_shots if s.id not in case.slots_present]
+    missing = [
+        s for s in protocol.required_shots if s.id not in slots and s.id not in case.refused_slots
+    ]
     for shot in missing:
         ledger.append(
             Claim(
@@ -128,8 +217,19 @@ def run_case(
     weight_confident = False
     if materials is not None and reading is not None:
         shares = [(m.material, m.fraction) for m in reading.materials]
+        # A photograph of a yard of scrap has nothing in frame to give it
+        # scale, so a stated tonnage beats an estimate every time. It is still
+        # settled on the scale, so it can move the quoted total and never the
+        # rate per kilogram that the seller is actually paid.
         weight = reading.estimated_weight_kg
         weight_confident = (reading.weight_confidence or 0.0) >= 0.6
+        stated = parse_stated_weight_kg(case.seller_text)
+        if stated is not None and (weight is None or stated > (weight or 0)):
+            weight = stated
+            weight_confident = False
+            result.links.append(
+                chain.LinkLog("weight", "stated", f"{stated:g} kg from the seller's words")
+            )
         try:
             material_obs = materials.fetch(shares, weight)
         except SourceUnavailable:
@@ -161,16 +261,29 @@ def run_case(
         except SourceUnavailable:
             scrap_obs = []
 
-    quote = price(
-        comp_obs,
-        scrap_obs,
-        ledger,
-        materials=material_obs,
-        identified=identified,
-        weight_confident=weight_confident,
-    )
-    if result.fraud_flags:
-        quote.conditions = [f"Evidence flag: {f}" for f in result.fraud_flags] + quote.conditions
+    if check.fraud_suspected:
+        # A loud failure, by rule 8. The range is not reduced, it is withheld.
+        quote = Quote(
+            failure_code="FRAUD_SUSPECTED",
+            reason=(
+                "Records that should agree do not: "
+                + "; ".join(check.fraud_flags)
+                + ". No price until an agent has the item in hand."
+            ),
+            conditions=[f"Fraud signal: {f}" for f in check.fraud_flags],
+        )
+    else:
+        quote = price(
+            comp_obs,
+            scrap_obs,
+            ledger,
+            materials=material_obs,
+            identified=identified,
+            weight_confident=weight_confident,
+        )
+    quote = cap_at_asking(quote, case.asking_price)
+    if soft_flags:
+        quote.conditions = [f"Evidence flag: {f}" for f in soft_flags] + quote.conditions
     if not identified and not quote.is_failure and result.reason:
         quote.conditions.insert(0, f"Not identified: {result.reason}")
 
@@ -179,12 +292,36 @@ def run_case(
         chain=result,
         ledger=ledger,
         quote=quote,
+        assessment=assess(result, quote, ledger),
+        asks=capture_requests(result, protocol, slots),
+        questions=unanswered(protocol, case.answers),
+        answer_notes=review.notes,
         cost_usd=meter.total_usd,
         latency_ms=meter.total_ms,
         cost_by_task=meter.by_task(),
         reader_model=reader.model,
         reasoner_model=reasoner.model,
+        crosscheck=check,
+        spent_usd=meter.spent_usd,
     )
+
+
+def _entry_for(catalogue: dict[str, list[Entry]], category: str, key: str | None) -> Entry | None:
+    """The catalogue row behind an identification, so its facts can be checked.
+
+    Exact key first. Otherwise the most specific entry whose every token the
+    chosen name contains, so 'Samsung Galaxy S22 SM-S901E' still finds the
+    Galaxy S22 row. Nothing found means nothing is checked, honestly.
+    """
+    if not key:
+        return None
+    pool = catalogue.get(category) or [e for rows in catalogue.values() for e in rows]
+    for entry in pool:
+        if entry.key == key:
+            return entry
+    chosen = set(tokens(key))
+    fits = [e for e in pool if set(tokens(e.key)) and set(tokens(e.key)).issubset(chosen)]
+    return max(fits, key=lambda e: len(tokens(e.key)), default=None)
 
 
 def report_markdown(case: Case, result: CaseResult) -> str:
@@ -218,9 +355,23 @@ def report_markdown(case: Case, result: CaseResult) -> str:
         ]
         if r.visible_text:
             lines.append(f"- Text read: {' | '.join(r.visible_text[:8])}")
+    if c.corroboration_notes:
+        lines += ["", "## Two readers"] + [f"- {n}" for n in c.corroboration_notes]
+
     lines += ["", "## Chain"]
     for link in c.links:
         lines.append(f"- **{link.name}** -> {link.outcome}. {link.detail}")
+
+    if case.testimony or case.refused_slots or (result.crosscheck and result.crosscheck.fraud_flags):
+        lines += ["", "## Testimony"]
+        for record in case.testimony:
+            values = ", ".join(f"{k}={v}" for k, v in record.values.items())
+            lines.append(f"- {record.slot}: {values}")
+        for slot in sorted(case.refused_slots):
+            lines.append(f"- {slot}: seller declined to open")
+        if result.crosscheck:
+            lines += [f"- FRAUD: {f}" for f in result.crosscheck.fraud_flags]
+            lines += [f"- {n}" for n in result.crosscheck.notes]
 
     lines += ["", "## Identification"]
     if c.candidates:
@@ -234,6 +385,39 @@ def report_markdown(case: Case, result: CaseResult) -> str:
         lines.append(f"\n**Not identified: {c.failure_code}.** {c.reason}")
     if c.fraud_flags:
         lines.append("\nEvidence flags: " + "; ".join(c.fraud_flags))
+
+    if result.assessment:
+        a = result.assessment
+        lines += [
+            "",
+            "## How sure the engine is (back office)",
+            f"**{a.sentence()}**",
+            "",
+            f"- Identification confidence: {a.percent}% ({a.band})",
+            f"- Price confidence: {int(a.price_confidence * 100)}%",
+        ]
+        if a.alternatives:
+            lines.append("- It is weighing: " + ", ".join(f"{n} ({s})" for n, s in a.alternatives))
+        lines += [f"- {d}" for d in a.drivers]
+        lines.append("")
+        lines.append(
+            "These are stated strengths from the evidence, not calibrated "
+            "probabilities. They become calibrated once settled pickup prices exist."
+        )
+
+    if result.asks:
+        lines += ["", "## What the seller is asked for next (shown in the app)"]
+        for i, ask in enumerate(result.asks, 1):
+            label = {"video": "VIDEO", "text": "TEXT"}.get(ask.kind, "PHOTO")
+            lines.append(f"{i}. [{label}] {ask.ask}")
+            lines.append(f"   _why: {ask.because}_")
+
+    if result.questions:
+        lines += ["", "## What the seller is asked (only they know these)"]
+        for q in result.questions[:4]:
+            lines.append(f"- {q.ask}")
+    if result.answer_notes:
+        lines += ["", "## Checking their answers (back office)"] + [f"- {n}" for n in result.answer_notes]
 
     lines += ["", "## Claims"]
     if result.ledger:

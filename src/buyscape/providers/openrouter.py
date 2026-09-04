@@ -35,6 +35,11 @@ PRICES: dict[str, tuple[float, float]] = {
     "google/gemini-3.8-flash": (0.750, 3.750),
     "google/gemini-3.1-pro-preview": (2.000, 12.000),
     "anthropic/claude-haiku-4.5": (1.000, 5.000),
+    # Cheap thinking vision models, OpenRouter catalogue 2026-09-04.
+    "z-ai/glm-5.3-flash": (0.070, 0.250),
+    "openai/gpt-5.6-luna": (0.200, 1.200),
+    "qwen/qwen3.8-27b": (0.420, 3.000),
+    "google/gemini-3.5-flash-lite": (0.300, 2.500),
     "anthropic/claude-sonnet-5": (2.000, 10.000),
     "anthropic/claude-opus-5": (5.000, 25.000),
     "anthropic/claude-fable-5.1": (10.000, 50.000),
@@ -43,6 +48,20 @@ PRICES: dict[str, tuple[float, float]] = {
     "grok-4.5": (2.000, 6.000),
     "grok-4.3": (1.250, 2.500),
 }
+
+# Models that think before answering. Their thoughts count against max_tokens
+# and are billed as output, so they get a low effort setting and headroom.
+REASONING_MODELS = {
+    "z-ai/glm-5.3-flash",
+    "openai/gpt-5.6-luna",
+    "qwen/qwen3.8-27b",
+    "google/gemini-3.8-flash",
+    "google/gemini-3.5-flash-lite",
+}
+# High effort on purpose: these models are cheap enough that thinking hard
+# costs a fraction of a cent, and the decider must be right, not just cheap.
+REASONING_EFFORT = "high"
+REASONING_HEADROOM = 4096
 
 _FENCE = re.compile(r"```(?:json)?\s*(.*?)```", re.DOTALL)
 
@@ -109,7 +128,9 @@ class OpenRouterProvider:
         for img in request.images:
             if img.label:
                 parts.append({"type": "text", "text": f"[{img.label}]"})
-            parts.append({"type": "image_url", "image_url": {"url": img.data_url()}})
+            parts.append(
+                {"type": "image_url", "image_url": {"url": img.data_url(request.image_max_side)}}
+            )
         return parts
 
     def _cost(self, prompt_tokens: int, completion_tokens: int) -> float:
@@ -135,6 +156,13 @@ class OpenRouterProvider:
             "temperature": request.temperature,
             "response_format": {"type": "json_object"},
         }
+        if self._url == API_URL:
+            # OpenRouter returns the amount it actually billed. That number,
+            # not the list table, is what a spending cap must be measured on.
+            body["usage"] = {"include": True}
+            if self.model in REASONING_MODELS:
+                body["reasoning"] = {"effort": REASONING_EFFORT, "exclude": True}
+                body["max_tokens"] = request.max_tokens + REASONING_HEADROOM
         headers = {
             "Authorization": f"Bearer {self._key}",
             "Content-Type": "application/json",
@@ -142,6 +170,7 @@ class OpenRouterProvider:
         }
 
         last: Exception | None = None
+        spent = 0.0  # every attempt is billed, including the ones that fail validation
         for attempt in range(self._max_retries + 1):
             started = time.perf_counter()
             try:
@@ -155,6 +184,13 @@ class OpenRouterProvider:
                 usage = payload.get("usage") or {}
                 prompt_tokens = int(usage.get("prompt_tokens") or 0)
                 completion_tokens = int(usage.get("completion_tokens") or 0)
+                billed = usage.get("cost")
+                spent += (
+                    round(float(billed), 6)
+                    if billed is not None
+                    else self._cost(prompt_tokens, completion_tokens)
+                )
+                cost = round(spent, 6)
                 parsed = request.output_schema.model_validate(_extract_json(text))
                 meta = CallMeta(
                     provider=self.name,
@@ -163,7 +199,7 @@ class OpenRouterProvider:
                     latency_ms=int((time.perf_counter() - started) * 1000),
                     input_tokens=prompt_tokens,
                     output_tokens=completion_tokens,
-                    cost_usd=self._cost(prompt_tokens, completion_tokens),
+                    cost_usd=cost,
                     fixture_key=request.fixture_key(),
                 )
                 return parsed, meta

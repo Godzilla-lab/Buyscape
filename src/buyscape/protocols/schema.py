@@ -7,6 +7,7 @@ a category is a YAML file, never a code change.
 
 from __future__ import annotations
 
+import re
 from pathlib import Path
 
 import yaml
@@ -24,6 +25,38 @@ class Shot(BaseModel):
     )
     checks: list[str] = Field(default_factory=list)
     extract: list[str] = Field(default_factory=list)
+
+
+class Question(BaseModel):
+    """Something only the seller knows, asked so the answer can be checked.
+
+    A photograph cannot say how old a thing is, whether it was dropped, or
+    whether it still holds charge. The seller knows. Their answer is not taken
+    on trust: it becomes a claim priced at the worst case until proven, and
+    where the catalogue knows the truth the answer is checked against it.
+
+    Only ask what changes the price. Every question is one more reason for a
+    seller to abandon the form, so a question that cannot move the number or
+    cannot be checked does not belong in a protocol.
+    """
+
+    id: str
+    ask: str = Field(description="Plain language, one sentence, asked of the seller.")
+    kind: str = Field("choice", description="choice | number | yesno | text")
+    options: list[str] = Field(default_factory=list, description="For kind=choice.")
+    unit: str = ""
+    claim: str | None = Field(
+        None, description="The claim spec this answer fills, so it is priced like any claim."
+    )
+    checks_attr: str | None = Field(
+        None,
+        description=(
+            "A catalogue attribute this answer must agree with, for example "
+            "'year'. A seller who calls a 2011 laptop twenty years old is "
+            "either wrong about the item or wrong about the age."
+        ),
+    )
+    tolerance: float = Field(0.35, description="Fractional disagreement allowed against the attribute.")
 
 
 class ClaimSpec(BaseModel):
@@ -44,8 +77,17 @@ class Protocol(BaseModel):
     category: str
     version: int = 1
     display_name: str = ""
+    aliases: list[str] = Field(
+        default_factory=list,
+        description=(
+            "Other names for this kind of item. A model calls the same thing a "
+            "generator, a portable generator or a gasoline generator, and all "
+            "three must reach this protocol."
+        ),
+    )
     always_novel: bool = False
     shots: list[Shot] = Field(default_factory=list)
+    questions: list[Question] = Field(default_factory=list)
     claims: list[ClaimSpec] = Field(default_factory=list)
     pickup_protocol: list[str] = Field(default_factory=list)
 
@@ -86,6 +128,35 @@ class Protocol(BaseModel):
     @property
     def opening_shots(self) -> list[Shot]:
         return [s for s in self.shots if s.opens_item]
+
+
+def _words(text: str) -> set[str]:
+    return {w for w in re.split(r"[^a-z0-9]+", (text or "").lower()) if w}
+
+
+def resolve(protocols: dict[str, Protocol], spoken: str | None) -> Protocol:
+    """Find the protocol for whatever the model called this item.
+
+    Exact name first, then an alias, then the most specific name whose every
+    word appears in what was said: 'portable generator' reaches the generator
+    protocol, 'twin tub washing machine' reaches the washing machine one.
+    Anything genuinely new falls to the generic protocol, which is the point:
+    an unknown item is still weighed, opened and bought, never refused.
+    """
+    said = _words(spoken)
+    if not said:
+        return protocols["generic"]
+
+    best: Protocol | None = None
+    best_words = 0
+    for protocol in protocols.values():
+        if protocol.category == "generic":
+            continue
+        for name in [protocol.category, protocol.display_name, *protocol.aliases]:
+            words = _words(name)
+            if words and words.issubset(said) and len(words) > best_words:
+                best, best_words = protocol, len(words)
+    return best or protocols["generic"]
 
 
 def load_protocols(root: Path) -> dict[str, Protocol]:

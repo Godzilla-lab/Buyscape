@@ -43,7 +43,7 @@ class GoogleProvider:
         model: str,
         api_key: str | None = None,
         timeout: float = 180.0,
-        max_retries: int = 2,
+        max_retries: int = 4,
         client: httpx.Client | None = None,
     ) -> None:
         self.model = model
@@ -59,13 +59,9 @@ class GoogleProvider:
         for img in request.images:
             if img.label:
                 parts.append({"text": f"[{img.label}]"})
+            mime, data = img.encoded(request.image_max_side)
             parts.append(
-                {
-                    "inline_data": {
-                        "mime_type": img.mime,
-                        "data": base64.b64encode(img.path.read_bytes()).decode(),
-                    }
-                }
+                {"inline_data": {"mime_type": mime, "data": base64.b64encode(data).decode()}}
             )
         return parts
 
@@ -89,7 +85,11 @@ class GoogleProvider:
             "contents": [{"role": "user", "parts": self._parts(request)}],
             "generationConfig": {
                 "temperature": request.temperature,
-                "maxOutputTokens": request.max_tokens,
+                # Gemini 3.x thinks before it answers and the thoughts count
+                # against the output cap. Keep thinking low and leave room for
+                # it, or the JSON arrives truncated and the call is retried.
+                "maxOutputTokens": request.max_tokens + 4096,
+                "thinkingConfig": {"thinkingLevel": "high"},
                 "responseMimeType": "application/json",
             },
         }
@@ -97,10 +97,16 @@ class GoogleProvider:
         headers = {"x-goog-api-key": self._key, "Content-Type": "application/json"}
 
         last: Exception | None = None
+        spent = 0.0
         for attempt in range(self._max_retries + 1):
             started = time.perf_counter()
             try:
                 resp = self._client.post(url, json=body, headers=headers)
+                if resp.status_code in (429, 503):
+                    # The free tier meters requests per minute and sheds load
+                    # under demand. Both pass with patience, not with money.
+                    time.sleep(12.0 * (attempt + 1))
+                    raise ProviderError(f"HTTP {resp.status_code}: {resp.text[:200]}")
                 if resp.status_code != 200:
                     raise ProviderError(f"HTTP {resp.status_code}: {resp.text[:300]}")
                 payload = resp.json()
@@ -113,7 +119,10 @@ class GoogleProvider:
                 )
                 usage = payload.get("usageMetadata") or {}
                 prompt_tokens = int(usage.get("promptTokenCount") or 0)
-                completion_tokens = int(usage.get("candidatesTokenCount") or 0)
+                completion_tokens = int(usage.get("candidatesTokenCount") or 0) + int(
+                    usage.get("thoughtsTokenCount") or 0
+                )  # thoughts are billed as output on the paid tier
+                spent += self._cost(prompt_tokens, completion_tokens)
                 parsed = request.output_schema.model_validate(_extract_json(text))
                 return parsed, CallMeta(
                     provider=self.name,
@@ -122,7 +131,7 @@ class GoogleProvider:
                     latency_ms=int((time.perf_counter() - started) * 1000),
                     input_tokens=prompt_tokens,
                     output_tokens=completion_tokens,
-                    cost_usd=self._cost(prompt_tokens, completion_tokens),
+                    cost_usd=round(spent, 6),
                     fixture_key=request.fixture_key(),
                 )
             except (httpx.HTTPError, ProviderError, KeyError, ValidationError) as exc:

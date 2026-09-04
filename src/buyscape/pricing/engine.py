@@ -56,6 +56,30 @@ def _quantile(values: list[float], q: float) -> float:
     return float(statistics.quantiles(ordered, n=100, method="inclusive")[int(q * 100) - 1])
 
 
+def cap_at_asking(quote: Quote, asking: float | None) -> Quote:
+    """A buyback never offers more than the seller is asking.
+
+    Ten tons of circuit boards offered at four times the asking price is not
+    generosity, it is a rate estimate escaping into the real world. The seller
+    named their price, so that is the ceiling, whatever the per kilogram
+    estimate says. The floor is untouched: if the material really is worth
+    more, the agent finds that out on the scale and the seller keeps the
+    difference they asked for.
+    """
+    if asking is None or asking <= 0 or quote.is_failure or quote.high is None:
+        return quote
+    if quote.high > asking:
+        quote.high = round(asking, 2)
+        quote.low = round(min(quote.low or asking, asking), 2)
+        quote.ceiling = round(asking, 2)
+        quote.conditions.insert(
+            0,
+            "Capped at the price the seller asked for: the engine never offers "
+            "more than that, whatever the material rate suggests.",
+        )
+    return quote
+
+
 def price(
     comps: list[Observation],
     scrap: list[Observation],

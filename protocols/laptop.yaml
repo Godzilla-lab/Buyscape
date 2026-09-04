@@ -1,0 +1,106 @@
+category: laptop
+version: 1
+display_name: Laptop
+aliases:
+  - laptop
+  - notebook
+  - macbook
+  - laptop computer
+  - netbook
+  - chromebook
+  - ultrabook
+shots:
+  - id: code_shot
+    ask: "Write the code {code} on paper and take one photo with the paper next to the laptop."
+    checks: [code_matches, item_in_frame]
+  - id: lid_open_screen_on
+    ask: "Photo of the laptop open with the screen switched on, showing the desktop."
+    checks: [not_blurry, screen_on]
+  - id: bottom_sticker
+    ask: "Photo of the sticker on the underside showing the model, serial or service tag."
+    checks: [text_readable]
+    extract: [model_name, serial]
+  - id: about_screen
+    ask: "Screenshot of System Information (Windows) or About This Mac, showing the model, processor, RAM and storage."
+    kind: screenshot
+    checks: [is_screenshot, text_readable]
+    extract: [model_name, serial, cpu, ram_gb, storage_gb]
+  - id: battery_report
+    ask: "Screenshot of the battery health screen, or run 'powercfg /batteryreport' on Windows and screenshot the capacity lines."
+    kind: screenshot
+    required: false
+    extract: [battery_health_pct]
+  - id: bottom_panel_off
+    ask: "If the bottom panel comes off with a screwdriver, remove it and photograph the inside: RAM slots, drive and battery."
+    opens_item: true
+    required: false
+    extract: [ram_slots, storage_type]
+  - id: keyboard_ports_clip
+    ask: "A short clip typing a few keys, moving the trackpad, and plugging the charger in so the charge light shows."
+    kind: clip
+    required: false
+questions:
+  - id: age_years
+    ask: "Roughly how old is it, in years?"
+    kind: number
+    unit: years
+    claim: age_years
+    checks_attr: year
+    # A quarter out is a misremembered year. More than that is a different
+    # machine, a different story, or a guess, and each is worth flagging.
+    tolerance: 0.25
+  - id: holds_charge
+    ask: "Does it stay on for more than ten minutes with the charger unplugged?"
+    kind: yesno
+    claim: battery_health_pct
+  - id: ever_dropped
+    ask: "Has it ever been dropped, or had liquid spilled on it?"
+    kind: yesno
+    claim: screen_original
+  - id: what_is_wrong
+    ask: "What does not work on it? Say none if everything works."
+    kind: text
+    claim: works
+claims:
+  - id: ram_gb
+    kinds: [spec]
+    evidence_slots: [about_screen]
+    worst_case: "the smallest configuration this model shipped with"
+    pickup_check: "Agent opens System Information and reads the RAM"
+    penalty: 0.85
+  - id: storage_gb
+    kinds: [spec]
+    evidence_slots: [about_screen]
+    worst_case: "the smallest drive this model shipped with"
+    pickup_check: "Agent reads the drive size from System Information"
+    penalty: 0.85
+  - id: battery_health_pct
+    kinds: [spec, condition]
+    evidence_slots: [battery_report]
+    worst_case: "assumed the battery only works on the charger"
+    pickup_check: "Agent unplugs the charger and watches the battery for two minutes"
+    penalty: 0.8
+  - id: works
+    kinds: [works]
+    evidence_slots: [lid_open_screen_on, keyboard_ports_clip]
+    worst_case: "assumed faulty board, priced as e-waste"
+    pickup_check: "Agent boots it, types on every row of keys and tests the charger port"
+    penalty: 0.45
+  - id: screen_original
+    kinds: [condition]
+    evidence_slots: [lid_open_screen_on]
+    worst_case: "assumed cracked or replaced panel"
+    pickup_check: "Agent inspects the panel edges and looks for lines and dead pixels"
+    penalty: 0.8
+  - id: original_authentic
+    kinds: [provenance]
+    evidence_slots: [bottom_sticker, about_screen]
+    worst_case: "assumed the sticker and the system do not match"
+    pickup_check: "Agent matches the serial on the sticker to the serial in System Information or the BIOS"
+    penalty: 0.7
+pickup_protocol:
+  - "Boot it. Match the serial in BIOS or System Information to the sticker underneath."
+  - "Unplug the charger and watch the battery for two minutes."
+  - "Type on every row of keys, test the trackpad, every USB port, the charger port and the webcam."
+  - "If the panel comes off, open it: liquid marks, missing RAM or drive, swollen battery."
+  - "A laptop that will not boot is e-waste and is weighed, not identified."

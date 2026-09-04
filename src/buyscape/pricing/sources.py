@@ -64,18 +64,25 @@ class JijiComps:
         # every digit-bearing token in the key must appear in the comp. Token
         # overlap alone silently prices one model off another.
         want_numeric = {t for t in want if any(ch.isdigit() for ch in t)}
-        scored: list[tuple[float, dict]] = []
-        for row in self._rows:
-            if row.get("category") != category:
-                continue
-            have = set(tokens(row.get("title", "")))
-            if not have:
-                continue
-            if want_numeric and not want_numeric.issubset(have):
-                continue
-            overlap = len(want & have) / len(want)
-            if overlap >= 0.6:
-                scored.append((overlap, row))
+        def search(rows: list[dict]) -> list[tuple[float, dict]]:
+            found: list[tuple[float, dict]] = []
+            for row in rows:
+                have = set(tokens(row.get("title", "")))
+                if not have:
+                    continue
+                if want_numeric and not want_numeric.issubset(have):
+                    continue
+                overlap = len(want & have) / len(want)
+                if overlap >= 0.6:
+                    found.append((overlap, row))
+            return found
+
+        scored = search([r for r in self._rows if r.get("category") == category])
+        if not scored:
+            # The category the model chose is not where the comps happen to be
+            # filed. A model key is specific enough to search the whole pool:
+            # every number in it must still appear in the comp's title.
+            scored = search(self._rows)
         if not scored:
             raise SourceUnavailable(f"no used comps for {model_key!r}")
         scored.sort(key=lambda pair: pair[0], reverse=True)
@@ -184,10 +191,19 @@ class MaterialsFloor:
         self._derived: dict[str, list] = data.get("per_kg_derived") or {}
         self._observed_on = str(data["observed_on"])
         self._url = data.get("url")
+        # What the tenant itself advertises to buy at. Dated and attributable,
+        # so it counts as published: it is the price this business pays.
+        tenant = data.get("per_kg_tenant") or {}
+        self._tenant: dict[str, list] = tenant.get("rates") or {}
+        self._tenant_source = tenant.get("source")
+        self._tenant_observed_on = str(tenant.get("observed_on") or self._observed_on)
 
     def rate(self, material: str) -> tuple[float, float, bool]:
         """Return low, high and whether the rate is published or derived."""
         key = (material or "unknown").strip().lower()
+        if key in self._tenant:
+            low, high = self._tenant[key]
+            return float(low), float(high), True
         if key in self._published:
             low, high = self._published[key]
             return float(low), float(high), True
@@ -242,3 +258,44 @@ class MaterialsFloor:
                 note=f"{note}, high",
             ),
         ]
+
+
+# How a Lagos seller writes a quantity. Tons dominate scrap adverts, and the
+# number in the text is worth more than any estimate from a photograph: a heap
+# of boards in a yard has no scale in frame, but the seller weighed it.
+_QUANTITY = re.compile(
+    r"(\d[\d,]*(?:\.\d+)?)\s*"
+    r"(metric\s+tons?|tonnes?|tons?|kgs?|kilo(?:gram)?s?|g\b)",
+    re.I,
+)
+_TO_KG = {"ton": 1000.0, "tonne": 1000.0, "metric ton": 1000.0, "kg": 1.0, "kilo": 1.0, "kilogram": 1.0, "g": 0.001}
+
+
+def parse_stated_weight_kg(text: str) -> float | None:
+    """The weight the seller stated, in kilograms, or None.
+
+    For anything sold by weight this is the price, and no photograph can
+    supply it: a yard of scrap boards has nothing in frame to give it scale.
+    The seller does know, because they weighed it or bought it by the ton.
+
+    Using their number cannot be exploited. Material is paid per kilogram
+    against the scale at pickup, so overstating the tonnage moves the quoted
+    total and never the rate. The seller is quoted a rate and an estimate, and
+    the estimate is settled on the scale, which is exactly what the yard does.
+    """
+    best: float | None = None
+    for amount, unit in _QUANTITY.findall(text or ""):
+        try:
+            value = float(amount.replace(",", ""))
+        except ValueError:
+            continue
+        unit = unit.lower().rstrip("s").replace("metric ton", "ton")
+        unit = {"tonne": "ton", "kgs": "kg", "kilogram": "kilo"}.get(unit, unit)
+        factor = _TO_KG.get(unit)
+        if factor is None:
+            continue
+        kilos = value * factor
+        # Ignore obvious non weights: a 128gb phone, a 50 kg price typo.
+        if 0.05 <= kilos <= 5_000_000 and (best is None or kilos > best):
+            best = kilos
+    return best

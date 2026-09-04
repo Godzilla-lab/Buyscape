@@ -52,9 +52,16 @@ def build_ledger(
     protocol: Protocol,
     slots_present: set[str],
     contradictions: list[str] | None = None,
+    refused_slots: set[str] | None = None,
 ) -> list[Claim]:
-    """Map extracted claims onto protocol evidence and set each status."""
+    """Map extracted claims onto protocol evidence and set each status.
+
+    `contradictions` may name a claim by its text, its attribute or its spec
+    id. `refused_slots` are shots the seller declined to take: a claim that
+    leans on one is priced at the worst case with a status that says why.
+    """
     contradicted = {c.lower() for c in (contradictions or [])}
+    refused = set(refused_slots or ())
     ledger: list[Claim] = []
 
     for draft in drafts:
@@ -62,8 +69,14 @@ def build_ledger(
         required = list(spec.evidence_slots) if spec else []
         seen = [s for s in required if s in slots_present]
 
-        if draft.text.lower() in contradicted:
+        named = {draft.text.lower(), (draft.attribute or "").lower()}
+        if spec is not None:
+            named.add(spec.id.lower())
+        named.discard("")
+        if named & contradicted:
             status = ClaimStatus.CONTRADICTED
+        elif refused.intersection(required):
+            status = ClaimStatus.REFUSED_TO_OPEN
         elif not draft.checkable_remotely or not required:
             status = ClaimStatus.UNVERIFIABLE_REMOTE
         elif required and set(required).issubset(slots_present):

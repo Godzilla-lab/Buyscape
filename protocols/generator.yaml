@@ -1,6 +1,17 @@
 category: generator
 version: 1
 display_name: Generator
+aliases:
+  - generator
+  - gen set
+  - genset
+  - generating set
+  - power generator
+  - welding generator
+  - inverter generator
+  - solar generator
+  - portable power station
+  - generator set
 shots:
   - id: code_shot
     ask: "Write the code {code} on paper and photograph it next to the generator."
@@ -16,6 +27,12 @@ shots:
     ask: "Open the side cover and photograph the alternator windings."
     opens_item: true
     checks: [interior_visible]
+    extract: [winding]
+  - id: engine_plate
+    ask: "Close-up of the plate on the engine block showing the engine model and serial."
+    required: false
+    checks: [text_readable]
+    extract: [engine_model, serial]
   - id: engine_bay
     ask: "Photo of the engine, showing the recoil starter and carburettor."
   - id: start_clip
@@ -25,6 +42,20 @@ shots:
   - id: hours_meter
     ask: "Photo of the hours meter if it has one."
     required: false
+questions:
+  - id: age_years
+    ask: "Roughly how old is it, in years?"
+    kind: number
+    unit: years
+    claim: age_years
+  - id: starts_now
+    ask: "Does it start and run right now?"
+    kind: yesno
+    claim: starts
+  - id: last_serviced
+    ask: "When was it last serviced, and what was done?"
+    kind: text
+    claim: starts
 claims:
   - id: kva
     kinds: [spec]
@@ -47,4 +78,6 @@ claims:
 pickup_protocol:
   - "Start the generator and run it under load with a clamp meter on the output."
   - "Open the side cover and confirm the winding material before agreeing a price."
+  - "Scratch the winding varnish at one spot: copper shows red brown, aluminium shows silver. Aluminium sold as copper is refused, not repriced."
+  - "Match the serial on the engine plate to the serial on the rating plate."
   - "Drain or refuse any fuel tank the seller will not open."

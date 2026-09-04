@@ -55,7 +55,28 @@ money moves. The promise is "nothing hidden gets priced", not "we see inside".
     uv run buyscape run --reader fake --reasoner fake --limit 8
     uv run buyscape run --reader qwen/qwen3-vl-32b-instruct \
                         --reasoner google/gemini-3.8-flash
+    uv run buyscape run --preset balanced --budget-usd 0.5 stop once real spend hits the cap
+    uv run buyscape fetch-buyscrap            cache the tenant's own adverts with photos
+    uv run buyscape run --preset balanced --set buyscrap
+    uv run buyscape spend                     every run's cost and the cost per item
     uv run --group dev pytest
+
+Keys live in `.env` and the run command loads it. Every run appends to
+`docs/proof/spend.jsonl`. Replayed calls cost nothing and are not counted.
+
+## Spending rules
+
+- The default pair is Qwen3-VL-32B reading and GLM 5.3 Flash deciding, a
+  thinking vision model at 7 cents in and 25 cents out per million tokens.
+  `--preset gemini-free` is Gemini 3.8 Flash on the Google AI Studio free
+  tier for when it is up. Sonnet and Opus are opt-in by preset name and never
+  a default: on 4 Sep 2026 Sonnet 5 cost 1.6 cents an item.
+- Never re-record what is already recorded. Replay first, pay only for the
+  cases a prompt change actually invalidates.
+- The default cap is 50 cents a run. Anything above that is asked for, with
+  the estimated cost stated first.
+- The reasoner is only called when there is something to rank. Three quarters
+  of cases abstain and must cost nothing beyond the read.
 
 `OPENROUTER_API_KEY` enables real model calls. Without it only recorded calls
 replay, and the run says so rather than failing silently.
