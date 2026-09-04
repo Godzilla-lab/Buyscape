@@ -58,6 +58,32 @@ _SPLIT_UNITS = re.compile(r"(\d+)\s*(gb|tb|mb|kva|kg|hp|kw|w)\b", re.I)
 # Max is not an iPhone 13. Titles carry these reliably, so a mismatch is real.
 TIER_WORDS = {"pro", "max", "plus", "ultra", "mini", "lite", "fe", "neo", "prime", "air"}
 
+# Words that say what kind of thing this is and how big it is, never which
+# product it is. A match has to rest on a name or a plate code: two adverts
+# that share only "hp" and a capacity, or only "top" and "loader", are not the
+# same product, and letting those words carry a match scored a wrong brand as
+# the right answer.
+GENERIC_WORDS = {
+    # units
+    "hp", "kva", "kw", "kwh", "kg", "gb", "tb", "mb", "w", "v", "hz",
+    "inch", "inches", "litre", "litres", "liter", "liters", "l", "ml",
+    # form factor
+    "top", "front", "loader", "loading", "load", "tub", "twin", "split",
+    "inverter", "automatic", "manual", "portable", "standing", "window",
+    # category nouns
+    "generator", "generators", "gen", "genset", "machine", "machines",
+    "washing", "washer", "dryer", "conditioner", "conditioners", "air",
+    "ac", "laptop", "laptops", "notebook", "computer", "phone", "phones",
+    "smartphone", "unit", "units", "set", "series",
+    # fuel and material
+    "petrol", "diesel", "gasoline", "solar", "copper", "coil", "wire",
+    "gas", "electric",
+}
+
+
+# "Air Conditioner" names a category, not a tier. Without this, the tier rule
+# below fires on every split AC listing in the set and scores them all wrong.
+_CATEGORY_PHRASE = re.compile(r"\bair[ -]?condition(?:er|ers|ing)?\b", re.I)
 
 _DECIMAL = re.compile(r"(\d)\.(\d)")
 _LETTER_PREFIX = re.compile(r"^[a-z]+(?=\d)")
@@ -71,7 +97,7 @@ def _norm(text: str | None) -> set[str]:
     KM5000i also answers to 5000i, because a plate code and a seller's
     shorthand differ by exactly that prefix.
     """
-    lowered = (text or "").lower().replace("+", " plus ")
+    lowered = _CATEGORY_PHRASE.sub(" ", (text or "").lower()).replace("+", " plus ")
     # CL7800E-2R is CL7800E2R, but XT-LITE is also XT Lite: keep both forms.
     lowered = lowered + " " + re.sub(r"(?<=[a-z0-9])-(?=[a-z0-9])", "", lowered)
     lowered = _DECIMAL.sub(r"\1\2", lowered)
@@ -114,8 +140,9 @@ def model_matches(brand: str | None, model: str | None, truth_title: str) -> boo
     pred_words = predicted - pred_numbers
     truth_words = truth - truth_numbers
 
-    # Naming a different product entirely.
-    if not (pred_words & truth_words):
+    # Naming a different product entirely. Units are stripped from this test
+    # so that a shared "hp" or "kg" cannot stand in for a shared identity.
+    if not ((pred_words - GENERIC_WORDS) & (truth_words - GENERIC_WORDS)):
         return False
     # Both sides quote numbers and none agree: a wrong generation or capacity.
     if pred_numbers and truth_numbers and not (pred_numbers & truth_numbers):

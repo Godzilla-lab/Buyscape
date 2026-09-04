@@ -365,3 +365,33 @@ def test_a_model_code_and_a_rating_that_cannot_both_be_true(catalogue):
 
     assert code_rating_contradiction(Reading(model_text="iPhone 14 Pro")) is None
     assert code_rating_contradiction(Reading(rating_text="8kg")) is None
+
+
+def test_air_conditioner_is_a_category_not_a_tier_word():
+    """The bug that scored every split AC wrong.
+
+    "Air" is a tier word because an iPhone Air is not an iPhone. But "Air
+    Conditioner" is the name of the category every one of these listings
+    carries, so the rule fired on all 45 of them and the correct answer
+    scored as a miss.
+    """
+    assert model_matches("Hisense", "AS-12 1.5HP", "Hisense 1.5HP Efficient Split Air Conditioner")
+    assert model_matches("LG", "S4-Q18 2HP", "LG 2HP Split Air-conditioning Unit")
+    assert model_matches("Midea", "MSAF-12 1.5HP", "Midea 1.5hp Air Condition Inverter")
+    # The tier word still bites where it is genuinely a tier.
+    assert not model_matches("Apple", "MacBook Pro 13", "Apple MacBook Air 13 256GB")
+
+
+def test_a_unit_is_not_an_identity():
+    """The bug that let a wrong brand score as the right answer.
+
+    An appliance title is mostly brand, capacity and category. If the shared
+    word is allowed to be the unit itself, then "LG 1.5HP" and "Hisense 1.5HP"
+    share "hp", agree on 15, and the wrong brand scores correct. Capacity is
+    not identity, so units cannot carry the match on their own.
+    """
+    assert not model_matches("LG", "S4-Q12 1.5HP", "Hisense 1.5HP Split Air Conditioner")
+    assert not model_matches("Samsung", "AR12 1.5HP", "Hisense 1.5HP Split Air Conditioner")
+    assert not model_matches("LG", "T2108 8kg top loader", "Hisense 8kg Top Load Washing Machine")
+    # The right brand still matches on the same evidence.
+    assert model_matches("Hisense", "AS-12 1.5HP", "Hisense 1.5HP Split Air Conditioner")
