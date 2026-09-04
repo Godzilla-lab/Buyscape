@@ -1,0 +1,49 @@
+category: washing_machine
+version: 1
+display_name: Washing machine
+shots:
+  - id: code_shot
+    ask: "Write the code {code} on paper and photograph it next to the machine."
+    checks: [code_matches, item_in_frame]
+  - id: overall_front
+    ask: "One photo of the whole machine from the front with the door closed."
+    checks: [whole_item_visible]
+  - id: rating_plate
+    ask: "Close-up of the sticker with the model number, usually inside the door or on the back."
+    checks: [text_readable]
+    extract: [brand, model, capacity_kg, serial]
+  - id: drum
+    ask: "Open the door and photograph the inside of the drum."
+    opens_item: true
+    checks: [interior_visible]
+  - id: back_panel_off
+    ask: "If you can, take off the back panel and photograph the motor and belt."
+    opens_item: true
+    required: false
+  - id: power_on_clip
+    ask: "A short clip of the machine switched on with the panel lit."
+    kind: clip
+    required: false
+claims:
+  - id: capacity_kg
+    kinds: [spec]
+    evidence_slots: [rating_plate]
+    worst_case: "the smallest capacity this brand sells"
+    pickup_check: "Agent reads the rating plate"
+    penalty: 0.85
+  - id: spins
+    kinds: [works]
+    evidence_slots: [power_on_clip]
+    worst_case: "assumed does not spin"
+    pickup_check: "Agent runs a two minute cycle and records amps"
+    penalty: 0.5
+  - id: bearing_ok
+    kinds: [condition]
+    evidence_slots: [back_panel_off, power_on_clip]
+    worst_case: "assumed worn drum bearing"
+    pickup_check: "Agent checks drum play and listens on spin"
+    penalty: 0.85
+pickup_protocol:
+  - "Run a short cycle and record amps with the clamp meter."
+  - "Check drum bearing play and the door seal."
+  - "Weigh the machine and print the lot tag."

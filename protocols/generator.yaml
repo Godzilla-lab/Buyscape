@@ -1,0 +1,50 @@
+category: generator
+version: 1
+display_name: Generator
+shots:
+  - id: code_shot
+    ask: "Write the code {code} on paper and photograph it next to the generator."
+    checks: [code_matches, item_in_frame]
+  - id: overview
+    ask: "One photo of the whole generator from the front."
+    checks: [whole_item_visible]
+  - id: plate_kva
+    ask: "Close-up of the rating plate showing the kVA and model number."
+    checks: [text_readable]
+    extract: [brand, model, kva, serial]
+  - id: side_cover_off
+    ask: "Open the side cover and photograph the alternator windings."
+    opens_item: true
+    checks: [interior_visible]
+  - id: engine_bay
+    ask: "Photo of the engine, showing the recoil starter and carburettor."
+  - id: start_clip
+    ask: "A short clip of the generator starting and running."
+    kind: clip
+    required: false
+  - id: hours_meter
+    ask: "Photo of the hours meter if it has one."
+    required: false
+claims:
+  - id: kva
+    kinds: [spec]
+    evidence_slots: [plate_kva]
+    worst_case: "the smallest rating in this brand's range"
+    pickup_check: "Agent reads the rating plate"
+    penalty: 0.85
+  - id: winding_copper
+    kinds: [spec]
+    evidence_slots: [side_cover_off]
+    worst_case: "assumed aluminium windings"
+    pickup_check: "Agent opens the side cover and inspects the windings"
+    penalty: 0.75
+  - id: starts
+    kinds: [works]
+    evidence_slots: [start_clip]
+    worst_case: "assumed does not start"
+    pickup_check: "Agent starts the generator and runs it under load"
+    penalty: 0.5
+pickup_protocol:
+  - "Start the generator and run it under load with a clamp meter on the output."
+  - "Open the side cover and confirm the winding material before agreeing a price."
+  - "Drain or refuse any fuel tank the seller will not open."

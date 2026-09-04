@@ -1,0 +1,67 @@
+category: phone
+version: 1
+display_name: Phone
+shots:
+  - id: code_shot
+    ask: "Write the code {code} on paper and take one photo with the paper next to the phone."
+    checks: [code_matches, item_in_frame]
+  - id: front_screen_on
+    ask: "Photo of the front with the screen switched on, showing the home screen."
+    checks: [not_blurry, screen_on]
+  - id: back
+    ask: "Photo of the back of the phone."
+  - id: settings_about
+    ask: "Screenshot of Settings then About, showing the model name and storage."
+    kind: screenshot
+    checks: [is_screenshot, text_readable]
+    extract: [model_name, storage_gb, imei]
+  - id: battery_health
+    ask: "Screenshot of the battery health screen."
+    kind: screenshot
+    required: false
+  - id: screen_closeup
+    ask: "Close-up of the screen at an angle with the screen off, so scratches and cracks show."
+    required: false
+  - id: sim_tray_out
+    ask: "Pull out the SIM tray and photograph the open slot."
+    opens_item: true
+    required: false
+  - id: power_on_clip
+    ask: "A short clip: press power, unlock, then open the camera app."
+    kind: clip
+    required: false
+claims:
+  - id: battery_health_pct
+    kinds: [spec]
+    evidence_slots: [battery_health]
+    worst_case: "assumed 75 percent"
+    pickup_check: "Agent opens the battery health screen"
+    penalty: 0.9
+  - id: storage_gb
+    kinds: [spec]
+    evidence_slots: [settings_about]
+    worst_case: "smallest variant of this model"
+    pickup_check: "Agent reads storage from Settings"
+    penalty: 0.85
+  - id: screen_original
+    kinds: [condition]
+    evidence_slots: [screen_closeup, settings_about]
+    worst_case: "assumed replaced screen"
+    pickup_check: "Agent inspects the bezel and display panel"
+    penalty: 0.8
+  - id: activation_lock_off
+    kinds: [provenance]
+    evidence_slots: [settings_about]
+    worst_case: "assumed still locked to the previous account"
+    pickup_check: "Seller signs out of iCloud or Google before payment"
+    penalty: 0.35
+  - id: works
+    kinds: [works]
+    evidence_slots: [front_screen_on, power_on_clip]
+    worst_case: "assumed faulty"
+    pickup_check: "Agent powers on and tests calls, camera and charging"
+    penalty: 0.5
+pickup_protocol:
+  - "Confirm the IMEI on screen matches the IMEI on the tray or box."
+  - "Check the account is signed out before paying."
+  - "Test charging port, speaker, camera and touch across the whole screen."

@@ -1,0 +1,42 @@
+category: generic
+version: 1
+display_name: Something else
+always_novel: true
+shots:
+  - id: code_shot
+    ask: "Write the code {code} on a piece of paper and take one photo with the paper next to the item."
+    checks: [code_matches, item_in_frame]
+  - id: overview
+    ask: "One photo showing the whole item."
+    checks: [whole_item_visible, not_blurry]
+  - id: label_or_plate
+    ask: "Close-up of any label, sticker or metal plate showing the brand and model."
+    checks: [text_readable]
+    extract: [brand, model, serial, rating]
+  - id: opened
+    ask: "If it opens without tools, open it and photograph the inside."
+    opens_item: true
+    required: false
+  - id: damage
+    ask: "Photo of any damage, rust or missing parts."
+    required: false
+  - id: description
+    ask: "Tell us what it is, whether it works, and roughly how heavy it is."
+    kind: text
+claims:
+  - id: works
+    kinds: [works]
+    evidence_slots: [opened, damage]
+    worst_case: "assumed not working"
+    pickup_check: "Agent powers the item on before payment"
+    penalty: 0.55
+  - id: weight_kg
+    kinds: [spec]
+    evidence_slots: []
+    worst_case: "70 percent of the stated weight"
+    pickup_check: "Weigh on the scale and photograph the display"
+    penalty: 0.7
+pickup_protocol:
+  - "Open every compartment, cover and lid before agreeing a price."
+  - "Refuse sealed drums, tanks or any space the seller will not open."
+  - "Weigh on the scale, photograph the display, print the lot tag."

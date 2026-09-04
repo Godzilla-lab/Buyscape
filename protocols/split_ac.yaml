@@ -1,0 +1,47 @@
+category: split_ac
+version: 1
+display_name: Split air conditioner
+shots:
+  - id: code_shot
+    ask: "Write the code {code} on paper and photograph it next to the unit."
+    checks: [code_matches, item_in_frame]
+  - id: indoor_unit
+    ask: "One photo of the whole indoor unit."
+    checks: [whole_item_visible]
+  - id: outdoor_unit
+    ask: "One photo of the outdoor compressor unit."
+  - id: rating_plate
+    ask: "Close-up of the rating plate on the outdoor unit showing the model and HP."
+    checks: [text_readable]
+    extract: [brand, model, hp, refrigerant]
+  - id: grille_open
+    ask: "Open the front grille of the indoor unit and photograph the filters and coil."
+    opens_item: true
+    checks: [interior_visible]
+  - id: running_clip
+    ask: "A short clip with the unit running and the display lit."
+    kind: clip
+    required: false
+claims:
+  - id: hp
+    kinds: [spec]
+    evidence_slots: [rating_plate]
+    worst_case: "the smallest rating this brand sells"
+    pickup_check: "Agent reads the outdoor rating plate"
+    penalty: 0.85
+  - id: cools
+    kinds: [works]
+    evidence_slots: [running_clip]
+    worst_case: "assumed not cooling, compressor unproven"
+    pickup_check: "Agent runs the unit and measures amps with a clamp meter"
+    penalty: 0.5
+  - id: gas_intact
+    kinds: [condition]
+    evidence_slots: [running_clip, grille_open]
+    worst_case: "assumed needs a regas"
+    pickup_check: "Agent checks pressures with manifold gauges"
+    penalty: 0.85
+pickup_protocol:
+  - "Run the unit for five minutes and measure compressor amps."
+  - "Open the grille and check the coil and filters for damage."
+  - "Confirm both indoor and outdoor units are present and matched."
