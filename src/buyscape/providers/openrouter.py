@@ -1,7 +1,8 @@
-"""OpenRouter adapter: one key reaches Qwen, Gemini and Claude.
+"""Adapter for any OpenAI-compatible chat endpoint.
 
-Production will add direct adapters for Alibaba Model Studio, Google AI and
-Anthropic. Nothing outside this file changes when that happens.
+OpenRouter and xAI speak the same protocol, so they share one implementation
+and differ only in base URL and price table. Adding another such vendor is a
+new entry in ENDPOINTS, not a new file.
 """
 
 from __future__ import annotations
@@ -17,6 +18,7 @@ from pydantic import BaseModel, ValidationError
 from .base import CallMeta, ModelRequest, ProviderError
 
 API_URL = "https://openrouter.ai/api/v1/chat/completions"
+XAI_URL = "https://api.x.ai/v1/chat/completions"
 
 # USD per million tokens, list prices fetched 2026-09-03. Used only to report
 # cost per job; billing is whatever the provider actually charges.
@@ -36,6 +38,10 @@ PRICES: dict[str, tuple[float, float]] = {
     "anthropic/claude-sonnet-5": (2.000, 10.000),
     "anthropic/claude-opus-5": (5.000, 25.000),
     "anthropic/claude-fable-5.1": (10.000, 50.000),
+    # xAI, list prices fetched 2026-09-03, under the 200k prompt tier.
+    "grok-4.6": (2.000, 6.000),
+    "grok-4.5": (2.000, 6.000),
+    "grok-4.3": (1.250, 2.500),
 }
 
 _FENCE = re.compile(r"```(?:json)?\s*(.*?)```", re.DOTALL)
@@ -70,19 +76,30 @@ def _extract_json(text: str) -> dict:
 class OpenRouterProvider:
     """Calls one model and validates the reply against the requested schema."""
 
+    #: vendor -> (base url, env var holding the key)
+    ENDPOINTS: dict[str, tuple[str, str]] = {
+        "openrouter": (API_URL, "OPENROUTER_API_KEY"),
+        "xai": (XAI_URL, "XAI_API_KEY"),
+    }
+
     def __init__(
         self,
         model: str,
         api_key: str | None = None,
-        timeout: float = 120.0,
+        timeout: float = 180.0,
         max_retries: int = 2,
         client: httpx.Client | None = None,
+        vendor: str = "openrouter",
     ) -> None:
+        if vendor not in self.ENDPOINTS:
+            raise ProviderError(f"unknown vendor {vendor!r}")
         self.model = model
-        self.name = f"openrouter:{model}"
-        self._key = api_key or os.environ.get("OPENROUTER_API_KEY", "")
+        self.vendor = vendor
+        self.name = f"{vendor}:{model}"
+        self._url, env_var = self.ENDPOINTS[vendor]
+        self._key = api_key or os.environ.get(env_var, "")
         if not self._key:
-            raise ProviderError("OPENROUTER_API_KEY is not set")
+            raise ProviderError(f"{env_var} is not set")
         self._timeout = timeout
         self._max_retries = max_retries
         self._client = client or httpx.Client(timeout=timeout)
@@ -128,7 +145,7 @@ class OpenRouterProvider:
         for attempt in range(self._max_retries + 1):
             started = time.perf_counter()
             try:
-                resp = self._client.post(API_URL, json=body, headers=headers)
+                resp = self._client.post(self._url, json=body, headers=headers)
                 if resp.status_code >= 500 or resp.status_code == 429:
                     raise ProviderError(f"HTTP {resp.status_code}: {resp.text[:200]}")
                 if resp.status_code != 200:

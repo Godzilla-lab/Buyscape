@@ -13,9 +13,16 @@ from .base import CallMeta, ImageRef, ModelRequest, VisionProvider
 HONESTY = (
     "You are grading second-hand goods for a buyback company. A wrong confident "
     "answer costs the company real money, an honest 'I cannot tell' costs "
-    "nothing. Never guess a brand, model or number that you cannot actually "
-    "read or clearly recognise in the images. When the evidence is not there, "
-    "say so in the dedicated field and leave the value null."
+    "nothing.\n\n"
+    "Two kinds of field, and they have opposite rules.\n"
+    "READ fields (brand, model, serial, rating, visible text): copy only what is "
+    "literally legible in the image. Never infer these from a shape, a logo or a "
+    "colour. If it is not printed and readable, the value is null.\n"
+    "JUDGE fields (category, presentation, materials, weight, condition): give "
+    "your best assessment from what the picture shows, and use the confidence "
+    "field to say how sure you are. These are ordinary visual judgements and "
+    "leaving them empty is unhelpful, not cautious. Anyone can see that a "
+    "handset is a phone and that a fan is mostly steel and plastic."
 )
 
 
@@ -152,13 +159,16 @@ def read_evidence(
     """Tier 1: read the item. Cheap model, high resolution, no identity guessing."""
     request = ModelRequest(
         task="read_evidence",
-        prompt_version="read_evidence.v2",
+        prompt_version="read_evidence.v3",
         system=(
             f"{HONESTY}\n\n"
-            "Your job is to READ and DESCRIBE, not to identify. Transcribe text "
-            "exactly as printed, including model numbers that look like noise. "
-            "Do not infer a brand from a logo shape or a housing colour: if the "
-            "brand name is not legible somewhere, brand_text is null.\n\n"
+            "Your job is to READ and DESCRIBE, not to work out which exact model "
+            "this is. Transcribe text exactly as printed, including model numbers "
+            "that look like noise.\n\n"
+            "Always fill in category, presentation, materials and an approximate "
+            "weight. These are judgements, so give them even when no text is "
+            "legible at all: an item with no readable label still has a shape, a "
+            "size and a material, and it can still be bought for scrap.\n\n"
             "Two things matter as much as the text. First, whether this is one "
             "manufactured item, a heap or sack sold by weight, or something "
             "still sealed in its box. Second, what it is physically made of and "
@@ -166,13 +176,16 @@ def read_evidence(
             "its material even when nobody can tell what it is."
         ),
         user_text=(
-            "Read this item. Say whether it is a single unit, a mixed lot sold "
-            "by weight, or sealed new stock. Estimate what it is made of by "
-            "mass share and roughly what it weighs. List every legible line of "
-            "text, then fill in the brand, model, serial and rating fields only "
-            "from text you can actually read. Note visible damage. Say if these "
-            "are catalogue images rather than photos of a real unit, or a "
-            "screenshot of a phone gallery rather than a photo of the item."
+            "Describe this item.\n\n"
+            "Judge, always: what kind of thing it is and how confident you are; "
+            "whether it is a single unit, a mixed lot sold by weight, or sealed "
+            "new stock; what it is made of by rough mass share; and about what "
+            "it weighs in kilograms.\n\n"
+            "Read, literally: every legible line of text, then the brand, model, "
+            "serial and rating, each only if it is printed and readable.\n\n"
+            "Also note visible damage, whether these look like catalogue images "
+            "rather than photos of a real unit, and whether any is a screenshot "
+            "of a phone gallery rather than a photo of the item."
         ),
         output_schema=Reading,
         images=images,

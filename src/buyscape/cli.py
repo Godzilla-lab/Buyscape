@@ -37,6 +37,8 @@ PRESETS: dict[str, tuple[str, str]] = {
     # Zero cost, for exercising the pipeline when no budget is available.
     "free": ("minimax/minimax-m3:free", "minimax/minimax-m3:free"),
     "cheap": ("qwen/qwen3-vl-32b-instruct", "google/gemini-3.8-flash"),
+    # xAI, which has working credit while the other accounts do not.
+    "grok": ("grok-4.6", "grok-4.6"),
 }
 DEFAULT_READER = "qwen/qwen3-vl-32b-instruct"
 DEFAULT_REASONER = "anthropic/claude-sonnet-5"
@@ -51,18 +53,23 @@ def _provider(model: str, fixtures: Path, mode: str) -> VisionProvider:
     if model == "fake":
         return RecordingProvider(FakeProvider(), fixtures / "fake", mode="record")
 
+    if model.startswith("grok"):
+        vendor, key = "xai", "XAI_API_KEY"
+    elif "/" in model:
+        vendor, key = "openrouter", "OPENROUTER_API_KEY"
+    else:
+        vendor, key = "google", "GOOGLE_API_KEY"
+
     inner = None
-    is_google = "/" not in model
-    key = "GOOGLE_API_KEY" if is_google else "OPENROUTER_API_KEY"
     if os.environ.get(key):
-        if is_google:
+        if vendor == "google":
             from .providers.google import GoogleProvider
 
             inner = GoogleProvider(model)
         else:
             from .providers.openrouter import OpenRouterProvider
 
-            inner = OpenRouterProvider(model)
+            inner = OpenRouterProvider(model, vendor=vendor)
     elif mode != "replay":
         console.print(
             f"[yellow]{key} is not set, so only recorded calls can be replayed "
