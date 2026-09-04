@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sell it</title>
+<style>
+  html { background: #fff; }
+  body { margin: 0; color: #000; font: 17px/1.5 "Times New Roman", Times, Georgia, serif; }
+  main { max-width: 600px; margin: 0 auto; padding: 24px 18px 90px; }
+  h1 { font-size: 26px; font-weight: bold; margin: 0 0 4px; }
+  h2 { font-size: 19px; font-weight: bold; margin: 26px 0 8px; }
+  p { margin: 8px 0; }
+  hr { border: 0; border-top: 1px solid #000; margin: 28px 0; }
+  a { color: #0000ee; } a:visited { color: #551a8b; }
+  small, .small { font-size: 15px; }
+  .muted { color: #444; }
+  label { display: block; margin: 14px 0 4px; }
+  input[type=text], input[type=number], input[type=tel], textarea, select {
+    width: 100%; box-sizing: border-box; padding: 8px; border: 1px solid #000; border-radius: 0; background: #fff;
+    color: #000; font: inherit;
+  }
+  textarea { min-height: 90px; resize: vertical; }
+  .cats label { display: block; margin: 4px 0; cursor: pointer; }
+  .cats input { margin-right: 8px; }
+  .cats { column-count: 2; column-gap: 20px; }
+  @media (max-width: 420px) { .cats { column-count: 1; } }
+  button, .take { font: inherit; padding: 8px 16px; border: 1px solid #000; border-radius: 0; background: #fff; color: #000; cursor: pointer; }
+  button.primary { width: 100%; margin-top: 18px; padding: 12px; font-weight: bold; }
+  button:disabled { color: #888; border-color: #888; }
+  .code { font: bold 44px/1 "Courier New", Courier, monospace; letter-spacing: .2em; text-align: center; padding: 18px 10px; border: 1px solid #000; margin: 10px 0; }
+  .shot { padding: 12px 0; border-top: 1px dotted #999; }
+  .shot:first-child { border-top: 0; }
+  .shot .row { display: flex; gap: 10px; align-items: center; margin-top: 8px; flex-wrap: wrap; }
+  .take { display: inline-block; font-size: 15px; }
+  .take.done { background: #000; color: #fff; }
+  .shot input[type=file] { display: none; }
+  .thumbs { display: flex; gap: 8px; flex-wrap: wrap; }
+  .thumbs img, .thumbs video { width: 64px; height: 64px; object-fit: cover; border: 1px solid #000; display: block; }
+  .thumbs .x { position: relative; }
+  .thumbs .x a { position: absolute; top: -8px; right: -8px; background: #fff; border: 1px solid #000; width: 18px; height: 18px; font: 12px/18px "Courier New", monospace; text-align: center; text-decoration: none; color: #000; }
+  details summary { cursor: pointer; margin: 14px 0; }
+  .decline { margin-top: 8px; font-size: 15px; }
+  .decline input { margin-right: 8px; }
+  .offer { font-size: 34px; font-weight: bold; line-height: 1.15; margin: 8px 0; }
+  .status { min-height: 22px; margin-top: 8px; font-size: 15px; }
+  .status.err { color: #b00; }
+  ul { padding-left: 22px; margin: 6px 0; } li { margin: 4px 0; }
+  .link { font: 15px "Courier New", Courier, monospace; word-break: break-all; }
+  footer { margin-top: 40px; font-size: 14px; color: #444; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<main>
+  <h1 id="biz">Sell it</h1>
+  <p>Photos in, offer out. The final price is agreed when we pick it up. It can only hold or go up if the item matches what you send.</p>
+
+  <section id="stepWhat">
+    <hr>
+    <h2>1. What are you selling?</h2>
+    <div class="cats" id="cats"></div>
+    <label for="text">Tell us about it</label>
+    <textarea id="text" placeholder="What it is, whether it works, how much there is, anything we should know"></textarea>
+    <label for="asking">How much do you want for it? (<span id="cur">NGN</span>, leave 0 if you are not sure)</label>
+    <input type="number" id="asking" inputmode="numeric" min="0" step="1" value="0">
+    <label for="contact">Your WhatsApp number, so we can reach you</label>
+    <input type="tel" id="contact" inputmode="tel" placeholder="080...">
+    <button class="primary" id="startBtn">Next: the photos</button>
+    <div class="status" id="startStatus"></div>
+  </section>
+
+  <section id="stepPhotos" hidden>
+    <hr>
+    <h2>2. Your code</h2>
+    <p>Write this on a piece of paper. One photo must show the paper next to the item, so we know the photos are of your item, taken today.</p>
+    <div class="code" id="code"></div>
+
+    <h2>3. Take these photos</h2>
+    <div id="shots"></div>
+    <details id="optionalBox"><summary>More photos get you a firmer offer</summary><div id="optionalShots"></div></details>
+    <div class="shot">
+      <div>Anything else you want to show us</div>
+      <div class="row"><label class="take" for="extraFile">Add a photo</label><input type="file" id="extraFile" accept="image/*,.heic,.heif" multiple><div class="thumbs" id="extraThumbs"></div></div>
+    </div>
+
+    <div id="questions"></div>
+
+    <button class="primary" id="submitBtn">Get my offer</button>
+    <div class="status" id="submitStatus"></div>
+  </section>
+
+  <section id="stepOffer" hidden>
+    <hr>
+    <div id="offer"></div>
+  </section>
+
+  <footer id="resume" hidden>Come back to this any time: <span class="link" id="resumeLink"></span></footer>
+</main>
+
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const state = { tenant: null, session: null, category: null, refused: new Set() };
+
+  async function api(path, body) {
+    const res = await fetch(path, body ? { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) } : {});
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || res.statusText);
+    return data;
+  }
+  const readFile = (f) => new Promise((ok, no) => { const r = new FileReader(); r.onload = () => ok(r.result); r.onerror = no; r.readAsDataURL(f); });
+  function status(id, text, err) { const el = $(id); el.textContent = text; el.className = "status" + (err ? " err" : ""); }
+
+  // ----- step 1 -----
+  function drawCats() {
+    const cats = [...state.tenant.categories, ""];
+    $("cats").innerHTML = cats.map((c) => `<label><input type="radio" name="cat" value="${esc(c)}" ${(state.category || "") === c ? "checked" : ""}>${c ? esc(c) : "Not sure"}</label>`).join("");
+    for (const el of $("cats").querySelectorAll("input")) el.onchange = () => { state.category = el.value || null; };
+  }
+  $("startBtn").onclick = async () => {
+    $("startBtn").disabled = true; status("startStatus", "");
+    try {
+      const s = await api("/api/sessions", { category: state.category, text: $("text").value, asking: +$("asking").value || 0, contact: $("contact").value });
+      setSession(s);
+      history.replaceState(null, "", `/s/${s.id}`);
+      $("stepPhotos").scrollIntoView({ behavior: "smooth" });
+    } catch (e) { status("startStatus", e.message, true); }
+    $("startBtn").disabled = false;
+  };
+
+  // ----- step 2 -----
+  function setSession(s) {
+    state.session = s;
+    state.refused = new Set(s.shots.filter((x) => x.refused).map((x) => x.slot));
+    $("stepWhat").hidden = true; $("stepPhotos").hidden = false;
+    $("code").textContent = s.code;
+    $("resume").hidden = false; $("resumeLink").textContent = `${location.origin}/s/${s.id}`;
+    drawShots(); drawQuestions();
+    if (s.outcome) drawOffer(s.outcome); else $("stepOffer").hidden = true;
+  }
+  function shotHtml(x) {
+    const done = x.files.length > 0;
+    const accept = x.kind === "clip" ? "video/*" : x.kind === "screenshot" ? "image/*" : "image/*,.heic,.heif";
+    const capture = x.kind === "photo" ? 'capture="environment"' : "";
+    const verb = x.kind === "clip" ? "Record" : x.kind === "screenshot" ? "Add screenshot" : "Take photo";
+    return `<div class="shot" data-slot="${esc(x.slot)}">
+      <div>${esc(x.ask)}</div>
+      <div class="row">
+        <label class="take ${done ? "done" : ""}" for="f_${esc(x.slot)}">${done ? "Done. Add another" : verb}</label>
+        <input type="file" id="f_${esc(x.slot)}" accept="${accept}" ${capture} multiple>
+        <div class="thumbs">${x.files.map((f) => `<span class="x">${f.kind === "clip" ? `<video src="${f.url}" muted></video>` : `<img src="${f.url}" alt="">`}<a href="#" data-file="${esc(f.file)}" title="remove">x</a></span>`).join("")}</div>
+      </div>
+      ${x.opens_item ? `<label class="decline"><input type="checkbox" data-refuse="${esc(x.slot)}" ${state.refused.has(x.slot) ? "checked" : ""}>I would rather not open it. (We then assume the worst about what is inside.)</label>` : ""}
+    </div>`;
+  }
+  function drawShots() {
+    const s = state.session;
+    const required = s.shots.filter((x) => x.required), optional = s.shots.filter((x) => !x.required);
+    $("shots").innerHTML = required.map(shotHtml).join("");
+    $("optionalShots").innerHTML = optional.map(shotHtml).join("");
+    $("optionalBox").hidden = optional.length === 0;
+    $("extraThumbs").innerHTML = s.extra.map((f) => `<span class="x"><img src="${f.url}" alt=""><a href="#" data-file="${esc(f.file)}">x</a></span>`).join("");
+    for (const input of document.querySelectorAll("#stepPhotos input[type=file]")) input.onchange = (e) => upload(input.id === "extraFile" ? "extra" : input.closest(".shot").dataset.slot, e.target.files);
+    for (const x of document.querySelectorAll("#stepPhotos .thumbs a[data-file]")) x.onclick = async (e) => { e.preventDefault(); try { setSession(await api(`/api/sessions/${s.id}/remove`, { file: x.dataset.file })); } catch (err) { status("submitStatus", err.message, true); } };
+    for (const cb of document.querySelectorAll("[data-refuse]")) cb.onchange = () => { cb.checked ? state.refused.add(cb.dataset.refuse) : state.refused.delete(cb.dataset.refuse); };
+  }
+  async function upload(slot, files) {
+    for (const f of files) {
+      status("submitStatus", `Saving ${f.name}`);
+      try { setSession(await api(`/api/sessions/${state.session.id}/photos`, { slot, name: f.name, data: await readFile(f) })); }
+      catch (e) { status("submitStatus", e.message, true); return; }
+    }
+    status("submitStatus", "");
+  }
+  function drawQuestions() {
+    const qs = state.session.questions;
+    if (!qs.length) { $("questions").innerHTML = ""; return; }
+    $("questions").innerHTML = `<h2>4. A few questions</h2><p>Only you know these. Honest answers make the offer firmer, and we check them at pickup.</p>` + qs.map((q) => {
+      const v = esc(q.answer || "");
+      let field;
+      if (q.kind === "choice" && q.options.length) field = `<select data-q="${esc(q.id)}"><option value="">Choose</option>${q.options.map((o) => `<option ${o === q.answer ? "selected" : ""}>${esc(o)}</option>`).join("")}</select>`;
+      else if (q.kind === "yesno") field = `<select data-q="${esc(q.id)}"><option value="">Choose</option><option ${v === "yes" ? "selected" : ""}>yes</option><option ${v === "no" ? "selected" : ""}>no</option></select>`;
+      else field = `<input type="${q.kind === "number" ? "number" : "text"}" data-q="${esc(q.id)}" value="${v}" placeholder="${esc(q.unit || "")}">`;
+      return `<label>${esc(q.ask)}</label>${field}`;
+    }).join("");
+  }
+  $("submitBtn").onclick = async () => {
+    const s = state.session;
+    const answers = {};
+    for (const el of document.querySelectorAll("[data-q]")) answers[el.dataset.q] = el.value;
+    $("submitBtn").disabled = true;
+    status("submitStatus", "Looking at your photos. This takes about half a minute.");
+    try {
+      const next = await api(`/api/sessions/${s.id}/submit`, { answers, refused: [...state.refused], text: s.text, asking: s.asking, contact: s.contact });
+      setSession(next); status("submitStatus", "");
+      $("stepOffer").scrollIntoView({ behavior: "smooth" });
+    } catch (e) { status("submitStatus", e.message, true); }
+    $("submitBtn").disabled = false;
+  };
+
+  // ----- step 3 -----
+  function drawOffer(o) {
+    $("stepOffer").hidden = false;
+    let h = `<h2 style="margin-top:0">${o.low != null ? "Our offer" : "Where we are"}</h2><div class="offer">${esc(o.headline)}</div><p>${esc(o.detail || "")}</p>`;
+    if (o.next && o.next.length) {
+      h += `<h2>To firm this up, send</h2><ul>${o.next.map((n) => `<li>${esc(n.ask)}</li>`).join("")}</ul><p>Add them above and press Get my offer again.</p>`;
+    }
+    if (o.conditions && o.conditions.length) h += `<h2>What this offer assumes</h2><ul class="small">${o.conditions.map((c) => `<li>${esc(c)}</li>`).join("")}</ul>`;
+    if (o.pickup && o.pickup.length) h += `<h2>At pickup we will</h2><ul class="small">${o.pickup.map((c) => `<li>${esc(c)}</li>`).join("")}</ul>`;
+    if (o.low != null) h += `<p>We will message you on WhatsApp to arrange pickup.</p>`;
+    $("offer").innerHTML = h;
+  }
+
+  // ----- boot -----
+  (async () => {
+    try {
+      state.tenant = await api("/api/tenant");
+      $("biz").textContent = `Sell to ${state.tenant.display_name}`; $("cur").textContent = state.tenant.currency;
+      document.title = state.tenant.display_name;
+      drawCats();
+      const m = location.pathname.match(/^\/s\/([A-Za-z0-9._-]+)/);
+      if (m) setSession(await api(`/api/sessions/${m[1]}`));
+    } catch (e) { status("startStatus", e.message, true); }
+  })();
+})();
+</script>
+</body>
+</html>

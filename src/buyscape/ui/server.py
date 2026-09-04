@@ -1,23 +1,31 @@
-"""A local test page for the engine.
+"""The web surface: the seller's capture page, the back office, and a bench.
 
-Not infrastructure. One page on localhost so a person can drop photos in,
-pick a model pair, and read what the engine says before anything is launched.
-It runs the same code path as `buyscape assess`, writes the same report.md,
-and records and replays the same fixtures. Nothing here is a product surface:
-no accounts, no database, no API contract. Kill the process and it is gone.
+Three pages on one small stdlib server, no framework:
+
+    /            the seller: what are you selling, take these photos, here is
+                 the offer and what to send next. Tenant-branded from tenants/.
+    /office      the back office: every session, the engine's full view, the
+                 photos beside the handwritten code, and the settled price box.
+    /bench       the test bench: drop photos or replay a cached case through any
+                 model preset, and compare presets side by side.
+
+State is the `sessions/` directory. Every valuation runs the same `run_case`
+the command line runs, records and replays the same fixtures, and writes the
+same report.md. Setting BUYSCAPE_OFFICE_TOKEN gates the office and the bench.
 """
 
 from __future__ import annotations
 
 import base64
 import json
+import os
 import re
 import threading
 import webbrowser
 from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
-from urllib.parse import unquote, urlparse
+from urllib.parse import parse_qs, unquote, urlparse
 
 import yaml
 
@@ -28,15 +36,18 @@ from ..pricing.sources import JijiComps, MaterialsFloor, ScrapIndex
 from ..protocols.schema import load_protocols
 from ..runner import Case, CaseResult, report_markdown, run_case
 from ..tenant import load_tenant
+from .sessions import Store
 
-PAGE = Path(__file__).with_name("page.html")
+HERE = Path(__file__).parent
+PAGES = {"bench": HERE / "page.html", "seller": HERE / "seller.html", "office": HERE / "office.html"}
 SAFE_NAME = re.compile(r"[^A-Za-z0-9._-]+")
+STAFF_GETS = {"meta", "runs", "testset"}
 
 
 class Engine:
     """Everything a valuation needs, loaded once and shared between requests."""
 
-    def __init__(self, root: Path) -> None:
+    def __init__(self, root: Path, tenant: str = "buyscrap_ng") -> None:
         self.root = root
         self.protocols = load_protocols(root / "protocols")
         self.catalogue = load_catalogue(root / "catalogue")
@@ -47,19 +58,68 @@ class Engine:
         self.materials = MaterialsFloor(index)
         self.fixtures = root / "eval" / "fixtures"
         self.inbox = root / "eval" / "inbox"
-        self.lock = threading.Lock()
+        self.tenant_name = tenant
+        self.tenant = load_tenant(root / "tenants" / f"{tenant}.yaml")
+        # The pair the product runs on. Overridable for a cheaper or a free run.
+        self.preset = os.environ.get("BUYSCAPE_PRESET", "balanced")
+        self.mode = os.environ.get("BUYSCAPE_MODE", "auto")
+        self.store = Store(root, self.tenant, self.protocols, set(self.catalogue), self.value_case)
 
-    # ----- what the page needs to draw itself -----
+    # ----- the one way the engine is run -----
+
+    def value_case(
+        self,
+        case: Case,
+        tenant_name: str | None = None,
+        preset: str | None = None,
+        mode: str | None = None,
+        reader: str = "",
+        reasoner: str = "",
+        corroborator: str = "",
+        exclude: frozenset[str] = frozenset(),
+    ) -> tuple[CaseResult, str]:
+        _cli._load_dotenv(self.root / ".env")
+        preset = preset or self.preset
+        if preset == "fake":
+            pair = ("fake", "fake")  # exercises the pipeline without a model
+        elif preset in _cli.PRESETS:
+            pair = _cli.PRESETS[preset]
+        else:
+            raise ValueError(f"unknown preset {preset!r}")
+        reader = reader or pair[0]
+        reasoner = reasoner or pair[1]
+        corroborator = corroborator or _cli.DEFAULT_CORROBORATOR
+        if reader == "fake" or reasoner == "fake":
+            corroborator = "none"
+        mode = mode or self.mode
+        if mode not in ("record", "replay", "auto"):
+            raise ValueError(f"unknown mode {mode!r}")
+        tenant = self.tenant
+        if tenant_name and tenant_name != self.tenant_name:
+            tenant_file = self.root / "tenants" / f"{SAFE_NAME.sub('', tenant_name)}.yaml"
+            if not tenant_file.exists():
+                raise ValueError(f"no tenant file at {tenant_file}")
+            tenant = load_tenant(tenant_file)
+
+        comps = JijiComps(self.pool, exclude_ids=exclude)
+        reader_p = _cli._provider(reader, self.fixtures, mode)
+        reasoner_p = _cli._provider(reasoner, self.fixtures, mode)
+        corroborator_p = None if corroborator in ("", "none") else _cli._provider(corroborator, self.fixtures, mode)
+        result = run_case(
+            case, self.protocols, self.catalogue, comps, self.scrap, reader_p, reasoner_p,
+            self.materials, corroborator_p, tenant,
+        )
+        return result, report_markdown(case, result)
+
+    # ----- what the bench needs to draw itself -----
 
     def meta(self) -> dict:
         _cli._load_dotenv(self.root / ".env")
-        import os
-
         return {
             "presets": [
                 {"name": name, "reader": r, "reasoner": s} for name, (r, s) in _cli.PRESETS.items()
             ],
-            "default_preset": "balanced",
+            "default_preset": self.preset if self.preset in _cli.PRESETS else "balanced",
             "corroborator": _cli.DEFAULT_CORROBORATOR,
             "keys": {
                 "openrouter": bool(os.environ.get("OPENROUTER_API_KEY")),
@@ -147,31 +207,9 @@ class Engine:
             return None
         return path.read_text()
 
-    # ----- running one valuation -----
+    # ----- the bench: one valuation from dropped photos or a cached case -----
 
     def value(self, body: dict) -> dict:
-        _cli._load_dotenv(self.root / ".env")
-        preset = body.get("preset") or "balanced"
-        if preset == "fake":
-            pair = ("fake", "fake")  # exercises the pipeline without a model
-        elif preset in _cli.PRESETS:
-            pair = _cli.PRESETS[preset]
-        else:
-            raise ValueError(f"unknown preset {preset!r}")
-        reader = body.get("reader") or pair[0]
-        reasoner = body.get("reasoner") or pair[1]
-        corroborator = body.get("corroborator") or _cli.DEFAULT_CORROBORATOR
-        if reader == "fake" or reasoner == "fake":
-            corroborator = "none"
-        mode = body.get("mode") or "auto"
-        if mode not in ("record", "replay", "auto"):
-            raise ValueError(f"unknown mode {mode!r}")
-        tenant_name = body.get("tenant") or "buyscrap_ng"
-        tenant_file = self.root / "tenants" / f"{SAFE_NAME.sub('', tenant_name)}.yaml"
-        if not tenant_file.exists():
-            raise ValueError(f"no tenant file at {tenant_file}")
-        tenant = load_tenant(tenant_file)
-
         text = (body.get("text") or "").strip()
         asking = float(body.get("asking") or 0) or None
         answers = {str(k): str(v) for k, v in (body.get("answers") or {}).items() if str(v).strip()}
@@ -192,19 +230,19 @@ class Engine:
             folder = self._write_inbox(body.get("photos") or [], text, answers, body.get("label") or "")
             case = _cli.load_folder_case(folder, asking=asking)
 
-        comps = JijiComps(self.pool, exclude_ids=exclude)
-        reader_p = _cli._provider(reader, self.fixtures, mode)
-        reasoner_p = _cli._provider(reasoner, self.fixtures, mode)
-        corroborator_p = None if corroborator in ("", "none") else _cli._provider(corroborator, self.fixtures, mode)
-
-        result = run_case(
-            case, self.protocols, self.catalogue, comps, self.scrap, reader_p, reasoner_p,
-            self.materials, corroborator_p, tenant,
+        result, report = self.value_case(
+            case,
+            tenant_name=body.get("tenant"),
+            preset=body.get("preset") or self.preset,
+            mode=body.get("mode") or "auto",
+            reader=body.get("reader") or "",
+            reasoner=body.get("reasoner") or "",
+            corroborator=body.get("corroborator") or "",
+            exclude=exclude,
         )
-        report = report_markdown(case, result)
         if folder is not None:
             (folder / "report.md").write_text(report)
-        return self._payload(case, result, report, folder, reader, reasoner)
+        return self._payload(case, result, report, folder)
 
     def _write_inbox(self, photos: list[dict], text: str, answers: dict, label: str) -> Path:
         if not photos:
@@ -227,17 +265,15 @@ class Engine:
             (folder / "answers.yaml").write_text(yaml.safe_dump(answers, sort_keys=True))
         return folder
 
-    def _payload(
-        self, case: Case, result: CaseResult, report: str, folder: Path | None, reader: str, reasoner: str
-    ) -> dict:
+    def _payload(self, case: Case, result: CaseResult, report: str, folder: Path | None) -> dict:
         c, q, a = result.chain, result.quote, result.assessment
         return {
             "case_id": case.id,
             "folder": None if folder is None else str(folder.relative_to(self.root) if self.root in folder.parents else folder),
             "images": [self._url(p) for p in case.images],
             "report": report,
-            "reader": reader,
-            "reasoner": reasoner,
+            "reader": result.reader_model,
+            "reasoner": result.reasoner_model,
             "category": c.category,
             "identified": result.identified,
             "model_key": c.model_key,
@@ -285,9 +321,15 @@ class Engine:
             "answer_key": case.truth or None,
         }
 
+    # ----- files the pages may read -----
+
     def _roots(self) -> dict[str, Path]:
-        """The only directories the page may read photos from."""
-        return {"inbox": self.inbox.resolve(), "eval": (self.root / "eval").resolve()}
+        """The only directories the pages may read photos from."""
+        return {
+            "sessions": self.store.dir.resolve(),
+            "inbox": self.inbox.resolve(),
+            "eval": (self.root / "eval").resolve(),
+        }
 
     def _url(self, path: Path) -> str:
         target = path.resolve()
@@ -307,11 +349,19 @@ class Engine:
         return target
 
 
-class Handler(BaseHTTPRequestHandler):
-    engine: Engine  # set on the server class
+MIME = {
+    ".png": "image/png", ".webp": "image/webp", ".jpg": "image/jpeg", ".jpeg": "image/jpeg",
+    ".mp4": "video/mp4", ".mov": "video/quicktime", ".webm": "video/webm", ".3gp": "video/3gpp",
+}
 
+
+class Handler(BaseHTTPRequestHandler):
     def log_message(self, fmt: str, *args) -> None:  # quiet, the console is for results
         pass
+
+    @property
+    def engine(self) -> Engine:
+        return self.server.engine  # type: ignore[attr-defined]
 
     def _send(self, status: int, body: bytes, ctype: str = "application/json") -> None:
         self.send_response(status)
@@ -324,51 +374,107 @@ class Handler(BaseHTTPRequestHandler):
     def _json(self, status: int, payload) -> None:
         self._send(status, json.dumps(payload, default=str).encode())
 
+    def _page(self, name: str) -> None:
+        self._send(200, PAGES[name].read_bytes(), "text/html; charset=utf-8")
+
+    def _staff(self, url) -> bool:
+        """The office and the bench are for staff. A token, when one is set."""
+        want = os.environ.get("BUYSCAPE_OFFICE_TOKEN")
+        if not want:
+            return True
+        got = self.headers.get("Authorization", "").removeprefix("Bearer ").strip()
+        if not got:
+            got = (parse_qs(url.query).get("token") or [""])[0]
+        return got == want
+
     def do_GET(self) -> None:  # noqa: N802
         url = urlparse(self.path)
-        parts = [p for p in url.path.split("/") if p]
-        eng = self.server.engine  # type: ignore[attr-defined]
+        parts = [unquote(p) for p in url.path.split("/") if p]
+        eng = self.engine
         try:
-            if not parts:
-                self._send(200, PAGE.read_bytes(), "text/html; charset=utf-8")
-            elif parts == ["api", "meta"]:
-                self._json(200, eng.meta())
-            elif parts == ["api", "runs"]:
-                self._json(200, eng.runs())
-            elif len(parts) == 5 and parts[:2] == ["api", "runs"] and parts[3] == "cases":
-                text = eng.report(unquote(parts[2]), unquote(parts[4]))
-                if text is None:
-                    self._json(404, {"error": "no such report"})
+            if not parts or (parts[0] == "s" and len(parts) == 2):
+                self._page("seller")
+            elif parts in (["office"], ["bench"]):
+                if self._staff(url):
+                    self._page(parts[0])
                 else:
-                    self._json(200, {"report": text})
-            elif parts[:2] == ["api", "testset"] and len(parts) == 3:
-                self._json(200, eng.testset(parts[2]))
+                    self._send(401, b"<p>Staff only. Add ?token=YOUR_TOKEN to the address.</p>", "text/html")
+            elif parts == ["api", "tenant"]:
+                self._json(200, eng.store.tenant_view())
+            elif parts[:2] == ["api", "sessions"] and len(parts) == 3:
+                self._json(200, eng.store.seller_view(eng.store.load(parts[2])))
+            elif parts[:2] == ["api", "office"] or (len(parts) > 1 and parts[0] == "api" and parts[1] in STAFF_GETS):
+                if not self._staff(url):
+                    self._json(401, {"error": "staff token required"})
+                elif parts == ["api", "office", "sessions"]:
+                    self._json(200, eng.store.list())
+                elif len(parts) == 4 and parts[1:3] == ["office", "sessions"]:
+                    self._json(200, eng.store.office_view(eng.store.load(parts[3])))
+                elif parts == ["api", "meta"]:
+                    self._json(200, eng.meta())
+                elif parts == ["api", "runs"]:
+                    self._json(200, eng.runs())
+                elif len(parts) == 5 and parts[1] == "runs" and parts[3] == "cases":
+                    text = eng.report(parts[2], parts[4])
+                    if text is None:
+                        self._json(404, {"error": "no such report"})
+                    else:
+                        self._json(200, {"report": text})
+                elif len(parts) == 3 and parts[1] == "testset":
+                    self._json(200, eng.testset(parts[2]))
+                else:
+                    self._json(404, {"error": "not found"})
             elif parts and parts[0] == "files":
                 path = eng.file("/".join(parts[1:]))
                 if path is None:
                     self._json(404, {"error": "no such file"})
                 else:
-                    ctype = {"png": "image/png", "webp": "image/webp"}.get(path.suffix.lower().lstrip("."), "image/jpeg")
-                    self._send(200, path.read_bytes(), ctype)
+                    self._send(200, path.read_bytes(), MIME.get(path.suffix.lower(), "application/octet-stream"))
             else:
                 self._json(404, {"error": "not found"})
-        except Exception as exc:  # a test page must say what broke, never hang
+        except KeyError as exc:
+            self._json(404, {"error": f"no such session {exc}"})
+        except Exception as exc:  # a page must say what broke, never hang
             self._json(500, {"error": f"{type(exc).__name__}: {exc}"})
 
     def do_POST(self) -> None:  # noqa: N802
         url = urlparse(self.path)
-        eng = self.server.engine  # type: ignore[attr-defined]
+        parts = [unquote(p) for p in url.path.split("/") if p]
+        eng = self.engine
         length = int(self.headers.get("Content-Length") or 0)
         try:
             body = json.loads(self.rfile.read(length) or b"{}")
         except json.JSONDecodeError as exc:
             self._json(400, {"error": f"bad json: {exc}"})
             return
-        if url.path != "/api/value":
-            self._json(404, {"error": "not found"})
-            return
+        store = eng.store
         try:
-            self._json(200, eng.value(body))
+            if parts == ["api", "sessions"]:
+                self._json(200, store.create(body))
+            elif parts[:2] == ["api", "sessions"] and len(parts) == 4:
+                sid, action = parts[2], parts[3]
+                if action == "photos":
+                    self._json(200, store.add_photo(sid, body))
+                elif action == "remove":
+                    self._json(200, store.remove_photo(sid, body.get("file") or ""))
+                elif action == "submit":
+                    self._json(200, store.submit(sid, body))
+                else:
+                    self._json(404, {"error": "not found"})
+            elif parts[:3] == ["api", "office", "sessions"] and len(parts) == 5 and parts[4] == "settle":
+                if self._staff(url):
+                    self._json(200, store.settle(parts[3], body))
+                else:
+                    self._json(401, {"error": "staff token required"})
+            elif parts == ["api", "value"]:
+                if self._staff(url):
+                    self._json(200, eng.value(body))
+                else:
+                    self._json(401, {"error": "staff token required"})
+            else:
+                self._json(404, {"error": "not found"})
+        except KeyError as exc:
+            self._json(404, {"error": f"no such session {exc}"})
         except ValueError as exc:
             self._json(400, {"error": str(exc)})
         except Exception as exc:
@@ -383,14 +489,17 @@ class UiServer(ThreadingHTTPServer):
         self.engine = engine
 
 
-def make_server(root: Path, host: str = "127.0.0.1", port: int = 8765) -> UiServer:
-    return UiServer((host, port), Engine(root))
+def make_server(root: Path, host: str = "127.0.0.1", port: int = 8765, tenant: str = "buyscrap_ng") -> UiServer:
+    return UiServer((host, port), Engine(root, tenant))
 
 
-def serve(root: Path, host: str = "127.0.0.1", port: int = 8765, open_browser: bool = True) -> None:
-    server = make_server(root, host, port)
+def serve(
+    root: Path, host: str = "127.0.0.1", port: int = 8765, open_browser: bool = True, tenant: str = "buyscrap_ng"
+) -> None:
+    server = make_server(root, host, port, tenant)
     url = f"http://{host}:{server.server_address[1]}/"
-    print(f"Buyscape test page at {url}  (Ctrl+C stops it)")
+    print(f"{server.engine.tenant.display_name}: seller page {url}  office {url}office  bench {url}bench")
+    print(f"models: preset {server.engine.preset}, mode {server.engine.mode}. Ctrl+C stops it.")
     if open_browser:
         threading.Timer(0.5, webbrowser.open, args=(url,)).start()
     try:

@@ -36,7 +36,8 @@ def _get(url: str) -> tuple[int, dict | list | bytes]:
             body = res.read()
             return res.status, (json.loads(body) if res.headers.get_content_type() == "application/json" else body)
     except urllib.error.HTTPError as err:
-        return err.code, json.loads(err.read())
+        body = err.read()
+        return err.code, (json.loads(body) if err.headers.get_content_type() == "application/json" else body)
 
 
 def _post(url: str, payload: dict) -> tuple[int, dict]:
@@ -58,7 +59,11 @@ def _photo() -> str:
 
 def test_page_and_meta_load(base_url):
     status, page = _get(base_url + "/")
-    assert status == 200 and b"Buyscape test bench" in page
+    assert status == 200 and b"stepWhat" in page
+    status, page = _get(base_url + "/bench")
+    assert status == 200 and b"test bench" in page
+    status, page = _get(base_url + "/office")
+    assert status == 200 and b"Sessions" in page
     status, meta = _get(base_url + "/api/meta")
     assert status == 200
     assert any(p["name"] == "balanced" for p in meta["presets"])
@@ -128,3 +133,15 @@ def test_bad_input_is_a_loud_400(base_url):
     assert status == 400 and "no photos" in data["error"]
     status, data = _post(base_url + "/api/value", {"preset": "nope", "photos": [{"name": "a.jpg", "data": _photo()}]})
     assert status == 400 and "unknown preset" in data["error"]
+
+
+def test_staff_pages_need_the_token_when_one_is_set(base_url, monkeypatch):
+    monkeypatch.setenv("BUYSCAPE_OFFICE_TOKEN", "s3cret")
+    status, _ = _get(base_url + "/office")
+    assert status == 401
+    status, _ = _get(base_url + "/api/office/sessions")
+    assert status == 401
+    status, _ = _get(base_url + "/api/office/sessions?token=s3cret")
+    assert status == 200
+    status, _ = _get(base_url + "/")
+    assert status == 200, "the seller page is never gated"

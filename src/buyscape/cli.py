@@ -532,15 +532,18 @@ def assess(
 
 @app.command("ui")
 def ui(
-    port: int = typer.Option(8765, help="Port on localhost."),
+    port: int = typer.Option(8765, help="Port to listen on."),
+    host: str = typer.Option("127.0.0.1", help="Bind address. 0.0.0.0 lets a phone on the same wifi reach it."),
+    tenant: str = typer.Option("buyscrap_ng", help="Tenant config in tenants/, without .yaml."),
     no_browser: bool = typer.Option(False, "--no-browser", help="Do not open a browser tab."),
 ) -> None:
-    """A local test page: drop photos or pick a cached case, choose a model
-    pair, and read the result. Same code path as `assess`, same fixtures.
-    Not a product surface and not a server anyone else can reach."""
+    """Serve the seller page at /, the back office at /office and the test
+    bench at /bench. Same engine, same fixtures as `assess`. BUYSCAPE_PRESET
+    and BUYSCAPE_MODE pick the models; BUYSCAPE_OFFICE_TOKEN gates the office."""
     from .ui.server import serve
 
-    serve(ROOT, port=port, open_browser=not no_browser)
+    _load_dotenv()
+    serve(ROOT, host=host, port=port, open_browser=not no_browser, tenant=tenant)
 
 
 @app.command("fetch-buyscrap")

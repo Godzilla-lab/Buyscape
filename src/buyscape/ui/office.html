@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Back office</title>
+<style>
+  html { background: #fff; }
+  body { margin: 0; color: #000; font: 15px/1.5 Verdana, Geneva, Arial, sans-serif; }
+  header { padding: 14px 20px; border-bottom: 1px solid #000; display: flex; gap: 16px; align-items: baseline; }
+  header h1 { font-size: 18px; margin: 0; }
+  header a { margin-left: auto; }
+  header a + a { margin-left: 0; }
+  a { color: #0000ee; } a:visited { color: #551a8b; }
+  main { display: grid; grid-template-columns: minmax(280px, 360px) 1fr; gap: 24px; padding: 20px; }
+  @media (max-width: 900px) { main { grid-template-columns: 1fr; } }
+  section { min-width: 0; }
+  h2 { font-size: 15px; font-weight: bold; margin: 0 0 10px; text-transform: none; letter-spacing: 0; }
+  h3 { font-size: 15px; font-weight: bold; margin: 18px 0 6px; }
+  .muted { color: #444; } .small { font-size: 13px; }
+  .list div.row { padding: 8px 6px; border-top: 1px dotted #999; cursor: pointer; display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; }
+  .list div.row:hover, .list div.row.sel { background: #f0f0f0; }
+  .list .id, .tag, .code, pre, .link { font-family: "Courier New", Courier, monospace; }
+  .id { font-size: 13px; }
+  .tag { font-size: 12px; margin-right: 6px; }
+  .tag::before { content: "["; } .tag::after { content: "]"; }
+  .tag.bad { color: #b00; } .tag.good { color: #060; } .tag.warn { color: #850; }
+  .price { font-size: 24px; font-weight: bold; margin: 6px 0; }
+  .fail { font-size: 17px; font-weight: bold; color: #b00; margin: 8px 0; }
+  .thumbs { display: flex; gap: 10px; flex-wrap: wrap; margin: 8px 0; }
+  .thumbs figure { margin: 0; width: 120px; }
+  .thumbs img, .thumbs video { width: 120px; height: 120px; object-fit: cover; border: 1px solid #000; display: block; }
+  .thumbs figcaption { font-family: "Courier New", monospace; font-size: 11px; color: #444; word-break: break-all; }
+  .code { font-size: 26px; font-weight: bold; letter-spacing: .15em; }
+  ul, ol { padding-left: 20px; margin: 4px 0; } li { margin: 3px 0; }
+  input[type=text], input[type=number] { padding: 6px 8px; border: 1px solid #000; border-radius: 0; background: #fff; color: #000; font: inherit; }
+  button { font: inherit; padding: 6px 14px; border: 1px solid #000; border-radius: 0; background: #fff; color: #000; cursor: pointer; }
+  button.primary { font-weight: bold; }
+  button:disabled { color: #888; border-color: #888; }
+  .tabs { display: flex; gap: 6px; margin: 14px 0 10px; } .tabs button.active { background: #000; color: #fff; }
+  .md h1 { font-size: 17px; } .md h2 { font-size: 15px; margin-top: 16px; }
+  .md code { font-family: "Courier New", monospace; font-size: 13px; } .md p { margin: 6px 0; }
+  .status { min-height: 18px; font-size: 13px; margin-top: 6px; } .status.err { color: #b00; }
+  pre { white-space: pre-wrap; font-size: 12px; }
+  hr { border: 0; border-top: 1px solid #000; margin: 16px 0; }
+</style>
+</head>
+<body>
+<header><h1 id="title">Back office</h1><span class="muted small" id="count"></span><a href="/bench">test bench</a><a href="/">seller page</a></header>
+<main>
+  <section>
+    <h2>Sessions</h2>
+    <input type="text" id="filter" placeholder="filter by id, contact, category, status" style="width:100%">
+    <div class="list" id="list"></div>
+  </section>
+  <section id="detail"><p class="muted">Pick a session.</p></section>
+</main>
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const money = (n) => n == null ? "?" : Math.round(n).toLocaleString();
+  const token = new URLSearchParams(location.search).get("token") || localStorage.getItem("office_token") || "";
+  if (token) localStorage.setItem("office_token", token);
+  const state = { rows: [], sel: null };
+
+  async function api(path, body) {
+    const headers = { "Content-Type": "application/json" };
+    if (token) headers.Authorization = `Bearer ${token}`;
+    const res = await fetch(path, body ? { method: "POST", headers, body: JSON.stringify(body) } : { headers });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || res.statusText);
+    return data;
+  }
+  function md(text) {
+    const inline = (s) => esc(s).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>").replace(/`([^`]+)`/g, "<code>$1</code>");
+    const out = []; let list = null; const close = () => { if (list) { out.push(`</${list}>`); list = null; } };
+    for (const raw of text.split("\n")) {
+      const line = raw.replace(/\s+$/, ""); let m;
+      if ((m = line.match(/^(#{1,3}) (.*)/))) { close(); out.push(`<h${m[1].length}>${inline(m[2])}</h${m[1].length}>`); }
+      else if ((m = line.match(/^\s*[-*] (.*)/))) { if (list !== "ul") { close(); out.push("<ul>"); list = "ul"; } out.push(`<li>${inline(m[1])}</li>`); }
+      else if ((m = line.match(/^\s*\d+\. (.*)/))) { if (list !== "ol") { close(); out.push("<ol>"); list = "ol"; } out.push(`<li>${inline(m[1])}</li>`); }
+      else if (line.trim() === "") close();
+      else if (list && /^\s{2,}/.test(raw)) out[out.length - 1] = out[out.length - 1].replace(/<\/li>$/, `<br><span class="muted">${inline(line.trim())}</span></li>`);
+      else { close(); out.push(`<p>${inline(line)}</p>`); }
+    }
+    close(); return out.join("\n");
+  }
+  const statusTag = (s) => `<span class="tag ${s === "review" || s === "failed" ? "bad" : s === "quoted" || s === "settled" ? "good" : s === "needs_more" ? "warn" : ""}">${esc(s)}</span>`;
+
+  async function loadList() {
+    state.rows = await api("/api/office/sessions");
+    $("count").textContent = `${state.rows.length} sessions`;
+    drawList();
+  }
+  function drawList() {
+    const q = $("filter").value.toLowerCase();
+    const rows = state.rows.filter((r) => !q || [r.id, r.contact, r.category, r.status, r.model_key].join(" ").toLowerCase().includes(q));
+    $("list").innerHTML = rows.map((r) => `<div class="row ${state.sel === r.id ? "sel" : ""}" data-id="${esc(r.id)}">
+        <span class="id">${esc(r.id)}</span><span>${statusTag(r.status)}${r.duplicates ? '<span class="tag bad">dup photo</span>' : ""}</span>
+        <span class="small">${esc(r.category || "not sure")} · ${r.photos} photos · ${esc(r.contact || "no contact")}</span>
+        <span class="small">${r.settled ? `settled ${money(r.settled)}` : r.low != null ? `${money(r.low)} to ${money(r.high)}` : esc(r.failure_code || "")}</span>
+      </div>`).join("") || '<p class="muted">No sessions yet. Open the seller page and send something.</p>';
+    for (const el of $("list").querySelectorAll(".row")) el.onclick = () => open(el.dataset.id);
+  }
+  $("filter").oninput = drawList;
+
+  async function open(id) {
+    state.sel = id; drawList();
+    let s;
+    try { s = await api(`/api/office/sessions/${id}`); } catch (e) { $("detail").innerHTML = `<p class="fail">${esc(e.message)}</p>`; return; }
+    const r = s.result, q = r && r.quote, a = r && r.assessment;
+    let h = `<h2>${esc(s.id)} ${statusTag(s.status)}</h2>`;
+    h += `<div class="small muted">created ${esc(s.created_at)} · updated ${esc(s.updated_at)} · ${esc(s.category || "not sure")} under the ${esc(s.protocol)} protocol · contact <b>${esc(s.contact || "none")}</b> · asking ${s.asking ? money(s.asking) : "unknown"}</div>`;
+    h += `<p>${esc(s.text || "(no words from the seller)")}</p>`;
+    h += `<h3>Handwritten code <span class="code">${esc(s.code)}</span></h3><p class="small muted">Check the code shot shows this code on paper, next to the item. Nothing verifies it automatically yet.</p>`;
+    h += `<div class="thumbs">${s.photos.map((p) => `<figure>${p.kind === "clip" ? `<video src="${p.url}" controls></video>` : `<a href="${p.url}" target="_blank"><img src="${p.url}"></a>`}<figcaption>${esc(p.slot)}</figcaption></figure>`).join("") || '<span class="muted">no photos</span>'}</div>`;
+    if (s.duplicates && s.duplicates.length) h += `<p class="fail">Duplicate photos</p><ul class="small">${s.duplicates.map((d) => `<li>${esc(d.file)} also appears in session ${esc(d.session_id)}${d.same_contact ? " (same contact, probably the same seller again)" : " (different contact)"}</li>`).join("")}</ul>`;
+    if (s.refused && s.refused.length) h += `<p><span class="tag warn">declined to open</span> ${s.refused.map(esc).join(", ")}</p>`;
+    if (Object.keys(s.answers || {}).length) h += `<h3>Answers</h3><ul class="small">${Object.entries(s.answers).map(([k, v]) => `<li>${esc(k)}: ${esc(v)}</li>`).join("")}</ul>`;
+
+    if (!r) h += `<p class="muted">Not submitted yet.</p>`;
+    else {
+      h += `<h3>Engine</h3><div class="small muted">reader ${esc(r.reader)} · reasoner ${esc(r.reasoner)} · ${r.latency_ms} ms · $${(r.cost_usd || 0).toFixed(4)} at list, $${(r.spent_usd || 0).toFixed(4)} live</div>`;
+      if (q.failure_code) h += `<div class="fail">${esc(q.failure_code)}</div><p>${esc(q.reason || "")}</p>`;
+      else h += `<div class="price">${money(q.low)} to ${money(q.high)} ${esc(q.currency)}</div><div class="small"><span class="tag">${esc(q.basis)}</span><span class="tag">${esc(q.method)}</span><span class="tag">${q.observation_count} comps</span>${q.floor ? `<span class="tag">floor ${money(q.floor)}</span>` : ""}${q.weight_conditional ? '<span class="tag warn">settled on the scale</span>' : ""}</div><p>${esc(q.explanation || "")}</p>`;
+      h += r.identified ? `<p><span class="tag good">identified</span> <b>${esc(r.model_key)}</b> (${esc(r.category)})</p>` : `<p><span class="tag bad">${esc(r.failure_code || "abstained")}</span> ${esc(r.category || "unknown category")}. ${esc(r.reason || "")}</p>`;
+      if (r.fraud_flags && r.fraud_flags.length) h += `<p class="fail">Fraud flags</p><ul class="small">${r.fraud_flags.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>`;
+      if (a) h += `<p><b>${esc(a.sentence)}</b><br><span class="small muted">identification ${a.percent}% (${esc(a.band)}), price ${a.price_confidence}%</span></p><ul class="small">${a.drivers.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>`;
+      if (r.asks.length) h += `<h3>The seller was asked for</h3><ol class="small">${r.asks.map((x) => `<li><span class="tag">${esc(x.kind)}</span>${esc(x.ask)} <span class="muted">${esc(x.because)}</span></li>`).join("")}</ol>`;
+      if (r.answer_notes.length) h += `<h3>Checking their answers</h3><ul class="small">${r.answer_notes.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>`;
+      if (r.claims.length) h += `<h3>Claims</h3><ul class="small">${r.claims.map((c) => `<li><span class="tag ${c.status === "supported" ? "good" : "warn"}">${esc(c.status)}</span>${esc(c.text)}${c.worst_case ? `<br><span class="muted">priced as: ${esc(c.worst_case)}. ${esc(c.pickup_check || "")}</span>` : ""}</li>`).join("")}</ul>`;
+      h += `<h3>What the seller sees</h3><div class="small" style="border:1px solid #000;padding:10px"><b>${esc(s.seller.outcome.headline)}</b><p>${esc(s.seller.outcome.detail || "")}</p>${(s.seller.outcome.next || []).length ? `<ul>${s.seller.outcome.next.map((n) => `<li>${esc(n.ask)}</li>`).join("")}</ul>` : ""}</div>`;
+      h += `<div class="tabs"><button class="active" data-t="settle">Settle</button><button data-t="report">Full report</button><button data-t="json">JSON</button></div>`;
+      h += `<div id="t_settle">`;
+      if (s.settlement) h += `<p><span class="tag good">settled</span> <b>${money(s.settlement.price)} ${esc(q.currency)}</b> on ${esc(s.settlement.at)} ${s.settlement.note ? `· ${esc(s.settlement.note)}` : ""}</p>`;
+      h += `<p class="small muted">The price actually paid at pickup. Every one is a calibration row in sessions/settlements.jsonl.</p><div style="display:flex;gap:8px;flex-wrap:wrap"><input type="number" id="settlePrice" placeholder="paid ${esc(q.currency)}" min="1" step="1"><input type="text" id="settleNote" placeholder="note (what was different at pickup)" style="flex:1;min-width:200px"><button class="primary" id="settleBtn">Record</button></div><div class="status" id="settleStatus"></div></div>`;
+      h += `<div id="t_report" class="md" hidden>${md(r.report || "")}</div><pre id="t_json" hidden>${esc(JSON.stringify(s, null, 2))}</pre>`;
+    }
+    $("detail").innerHTML = h;
+    for (const b of $("detail").querySelectorAll(".tabs button")) b.onclick = () => {
+      for (const x of $("detail").querySelectorAll(".tabs button")) x.classList.toggle("active", x === b);
+      for (const t of ["settle", "report", "json"]) $(`t_${t}`).hidden = t !== b.dataset.t;
+    };
+    const btn = $("settleBtn");
+    if (btn) btn.onclick = async () => {
+      btn.disabled = true;
+      try { await api(`/api/office/sessions/${s.id}/settle`, { price: +$("settlePrice").value, note: $("settleNote").value }); await loadList(); open(s.id); }
+      catch (e) { $("settleStatus").textContent = e.message; $("settleStatus").className = "status err"; btn.disabled = false; }
+    };
+  }
+
+  (async () => {
+    try { const t = await api("/api/tenant"); $("title").textContent = `${t.display_name} back office`; document.title = $("title").textContent; await loadList(); }
+    catch (e) { $("list").innerHTML = `<p class="fail">${esc(e.message)}${e.message.includes("token") ? ". Open /office?token=YOUR_TOKEN" : ""}</p>`; }
+    setInterval(() => loadList().catch(() => {}), 15000);
+  })();
+})();
+</script>
+</body>
+</html>
