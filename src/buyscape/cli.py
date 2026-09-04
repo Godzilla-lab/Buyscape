@@ -10,6 +10,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 import typer
+import yaml
 from rich.console import Console
 from rich.table import Table
 
@@ -86,6 +87,64 @@ def _load_buyscrap_cases(raw: Path, limit: int | None) -> list[Case]:
             )
         )
     return cases[:limit] if limit else cases
+
+
+IMAGE_SUFFIXES = {".jpg", ".jpeg", ".png", ".webp"}
+HEIC_SUFFIXES = {".heic", ".heif"}
+
+
+def load_folder_case(
+    folder: Path, text: str = "", asking: float | None = None
+) -> Case:
+    """A folder of photos is a case: the seller's words in seller.txt, their
+    answers in answers.yaml, the photos in whatever the phone named them.
+
+    iPhones shoot HEIC, which the models do not accept, so each one is
+    converted to a JPEG beside it, once. The JPEG is what gets sent and what
+    the fixture is keyed on, so a rerun replays for free.
+    """
+    images: list[Path] = []
+    for path in sorted(folder.iterdir(), key=lambda p: p.name.lower()):
+        suffix = path.suffix.lower()
+        if suffix in HEIC_SUFFIXES:
+            jpeg = path.with_suffix(".jpg")
+            if not jpeg.exists():
+                import pillow_heif
+                from PIL import Image
+
+                pillow_heif.register_heif_opener()
+                with Image.open(path) as im:
+                    im.convert("RGB").save(jpeg, format="JPEG", quality=92)
+            images.append(jpeg)
+        elif suffix in IMAGE_SUFFIXES:
+            images.append(path)
+    images = sorted(set(images), key=lambda p: p.name.lower())
+    if not images:
+        raise FileNotFoundError(f"no photos in {folder}: expected jpg, png, webp or heic files")
+
+    words: list[str] = []
+    seller_file = folder / "seller.txt"
+    if seller_file.exists():
+        words.append(seller_file.read_text().strip())
+    if text.strip():
+        words.append(text.strip())
+
+    answers: dict[str, str] = {}
+    answers_file = folder / "answers.yaml"
+    if answers_file.exists():
+        for key, value in (yaml.safe_load(answers_file.read_text()) or {}).items():
+            # YAML reads a bare yes or no as a boolean. The seller said a word.
+            if isinstance(value, bool):
+                value = "yes" if value else "no"
+            answers[str(key)] = str(value)
+
+    return Case(
+        id=folder.resolve().name,
+        images=images[:8],
+        seller_text="\n".join(w for w in words if w),
+        asking_price=float(asking) if asking else None,
+        answers=answers,
+    )
 
 
 def _load_dotenv(path: Path = ROOT / ".env") -> None:
@@ -385,6 +444,90 @@ def run(
     )
     console.print(f"Reports: {run_dir / 'cases'}")
     console.print("[green]GATE PASSED[/green]" if all_pass else "[red]GATE NOT PASSED[/red]")
+
+
+@app.command("assess")
+def assess(
+    folder: Path = typer.Argument(..., help="A folder of photos, with optional seller.txt and answers.yaml."),
+    text: str = typer.Option("", "--text", help="The seller's words, if not in seller.txt."),
+    asking: float = typer.Option(0.0, help="What the seller wants for it, in the tenant currency. 0 means unknown."),
+    preset: str = typer.Option("balanced", help=f"Named model pair: {', '.join(PRESETS)}."),
+    reader: str = typer.Option("", help="Tier 1 model, or 'fake'. Overrides the preset."),
+    reasoner: str = typer.Option("", help="Tier 2 model, or 'fake'. Overrides the preset."),
+    corroborator: str = typer.Option(DEFAULT_CORROBORATOR, help="Second reader. 'none' disables it."),
+    mode: str = typer.Option("auto", help="record | replay | auto"),
+    prices: Path = typer.Option(Path("eval/prices"), help="Cached comparable prices."),
+    fixtures: Path = typer.Option(Path("eval/fixtures")),
+    tenant: str = typer.Option("buyscrap_ng", help="Tenant config in tenants/, without .yaml."),
+) -> None:
+    """Value one item from a folder of photos. Writes report.md into the folder."""
+    _load_dotenv()
+    if preset not in PRESETS:
+        console.print(f"[red]Unknown preset {preset!r}. Choose from: {', '.join(PRESETS)}[/red]")
+        raise typer.Exit(1)
+    reader = reader or PRESETS[preset][0]
+    reasoner = reasoner or PRESETS[preset][1]
+    if reader == "fake" or reasoner == "fake":
+        corroborator = "none"
+    tenant_file = ROOT / "tenants" / f"{tenant}.yaml"
+    if not tenant_file.exists():
+        console.print(f"[red]No tenant file at {tenant_file}[/red]")
+        raise typer.Exit(1)
+    try:
+        case = load_folder_case(folder, text=text, asking=asking or None)
+    except FileNotFoundError as exc:
+        console.print(f"[red]{exc}[/red]")
+        raise typer.Exit(1)
+
+    protocols = load_protocols(ROOT / "protocols")
+    catalogue = load_catalogue(ROOT / "catalogue")
+    tenant_config = load_tenant(tenant_file)
+    pool = prices if prices.exists() else ROOT / "eval" / "raw"
+    comps = JijiComps(pool)
+    scrap = ScrapIndex(ROOT / "tenants" / "scrap_index_lagos.yaml")
+    materials = MaterialsFloor(ROOT / "tenants" / "scrap_index_lagos.yaml")
+    reader_p = _provider(reader, fixtures, mode)
+    reasoner_p = _provider(reasoner, fixtures, mode)
+    corroborator_p = None if corroborator in ("", "none") else _provider(corroborator, fixtures, mode)
+
+    with console.status(f"Reading {len(case.images)} photos"):
+        result = run_case(
+            case, protocols, catalogue, comps, scrap, reader_p, reasoner_p, materials,
+            corroborator_p, tenant_config,
+        )
+    report = folder / "report.md"
+    report.write_text(report_markdown(case, result))
+
+    c, q = result.chain, result.quote
+    if c.reading:
+        console.print(
+            f"[bold]Seen:[/bold] {c.category or 'unknown'} "
+            f"(confidence {c.reading.category_confidence}), {c.reading.presentation}, "
+            f"about {c.reading.estimated_weight_kg} kg"
+        )
+    if result.identified:
+        console.print(f"[bold]Identified:[/bold] {c.model_key}")
+    else:
+        console.print(f"[bold]Not identified:[/bold] {c.failure_code or 'abstained'}. {c.reason or ''}")
+    if q.is_failure:
+        console.print(f"[red]{q.failure_code}[/red]: {q.reason}")
+    else:
+        console.print(
+            f"[bold]Price:[/bold] {q.low:,.0f} to {q.high:,.0f} {q.currency} "
+            f"({q.basis}, {q.method})"
+        )
+        console.print(q.explanation)
+        for condition in q.conditions[:8]:
+            console.print(f"  - {condition}")
+    if result.asks:
+        console.print("[bold]Send next:[/bold]")
+        for ask in result.asks[:5]:
+            console.print(f"  - {ask.ask}")
+    if result.questions:
+        console.print("[bold]Questions for the seller:[/bold]")
+        for question in result.questions[:5]:
+            console.print(f"  - {question.ask}")
+    console.print(f"Cost ${result.spent_usd:.4f} live, ${result.cost_usd:.4f} at recorded prices. Report: {report}")
 
 
 @app.command("fetch-buyscrap")
