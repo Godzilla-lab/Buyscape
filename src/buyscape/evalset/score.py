@@ -13,8 +13,42 @@ from pathlib import Path
 
 import re
 
+import yaml
+
 from ..identify.catalogue import tokens
 from ..runner import Case, CaseResult
+
+
+@dataclass
+class Verdicts:
+    """Decisions a person made by looking at the photos.
+
+    The listing title is the answer key, and outside phones it lies: sellers
+    title a generator by an inflated kVA while the plate reads otherwise. An
+    adjudication says what the plate actually showed and outranks the title.
+    The must-abstain set is ten cases nobody could identify from the photos,
+    and the engine must abstain on every one of them, every run.
+    """
+
+    adjudicated: dict[str, str] = field(default_factory=dict)  # case id -> correct | wrong
+    must_abstain: set[str] = field(default_factory=set)
+
+
+def load_verdicts(eval_dir: Path) -> Verdicts:
+    """Read eval/adjudications.yaml and eval/must_abstain.yaml if they exist."""
+    verdicts = Verdicts()
+    adjudications = eval_dir / "adjudications.yaml"
+    if adjudications.exists():
+        for row in yaml.safe_load(adjudications.read_text()) or []:
+            verdict = str(row["verdict"]).lower()
+            if verdict not in ("correct", "wrong"):
+                raise ValueError(f"adjudication for {row['id']} must be correct or wrong, not {verdict!r}")
+            verdicts.adjudicated[str(row["id"])] = verdict
+    must_abstain = eval_dir / "must_abstain.yaml"
+    if must_abstain.exists():
+        for row in yaml.safe_load(must_abstain.read_text()) or []:
+            verdicts.must_abstain.add(str(row["id"]))
+    return verdicts
 
 
 _SPLIT_UNITS = re.compile(r"(\d+)\s*(gb|tb|mb|kva|kg|hp|kw|w)\b", re.I)
@@ -106,6 +140,9 @@ class Metrics:
     with_label_correct: int = 0
     with_label_attempted: int = 0
     silent_wrong: int = 0
+    adjudicated: int = 0
+    must_abstain_listed: int = 0
+    must_abstain_held: int = 0
     priced: int = 0
     price_failures: int = 0
     ask_within_range: int = 0
@@ -131,6 +168,8 @@ class Metrics:
             "brand_accuracy_when_answered": self.rate(self.brand_correct, self.id_attempted),
             "abstention_rate": self.rate(self.abstained, self.total),
             "silent_wrong_rate": self.rate(self.silent_wrong, self.total),
+            "adjudicated": self.adjudicated,
+            "must_abstain_held": self.rate(self.must_abstain_held, self.must_abstain_listed),
             "priced": self.priced,
             "price_failures": self.price_failures,
             "asking_price_at_or_above_range": self.rate(self.ask_within_range, self.ask_scored),
@@ -146,11 +185,14 @@ GATE = {
     "model_top1_accuracy_with_label": 0.80,
     "silent_wrong_rate": 0.05,
     "asking_price_at_or_above_range": 0.80,
+    # Every hand-picked unidentifiable case must come back as an abstention.
+    "must_abstain_held": 1.0,
 }
 
 
-def score(pairs: list[tuple[Case, CaseResult]]) -> Metrics:
+def score(pairs: list[tuple[Case, CaseResult]], verdicts: Verdicts | None = None) -> Metrics:
     m = Metrics()
+    verdicts = verdicts or Verdicts()
     for case, result in pairs:
         m.total += 1
         m.cost_usd += result.cost_usd
@@ -183,11 +225,22 @@ def score(pairs: list[tuple[Case, CaseResult]]) -> Metrics:
         if used_label:
             m.with_label += 1
 
+        if case.id in verdicts.must_abstain:
+            m.must_abstain_listed += 1
+            # A provider error is not an abstention: nothing was decided.
+            if not result.identified and case_failure not in ("PROVIDER_ERROR", "NO_FIXTURE"):
+                m.must_abstain_held += 1
+
         if result.identified:
             m.id_attempted += 1
             if brand_matches(result.chain.brand, title):
                 m.brand_correct += 1
             correct = model_matches(result.chain.brand, result.chain.model, title)
+            verdict = verdicts.adjudicated.get(case.id)
+            if verdict:
+                # A person looked at the plate. Their word beats the title.
+                correct = verdict == "correct"
+                m.adjudicated += 1
             if correct:
                 m.id_correct += 1
             else:

@@ -109,6 +109,7 @@ class OpenRouterProvider:
         max_retries: int = 2,
         client: httpx.Client | None = None,
         vendor: str = "openrouter",
+        network_retries: int = 5,
     ) -> None:
         if vendor not in self.ENDPOINTS:
             raise ProviderError(f"unknown vendor {vendor!r}")
@@ -121,7 +122,9 @@ class OpenRouterProvider:
             raise ProviderError(f"{env_var} is not set")
         self._timeout = timeout
         self._max_retries = max_retries
+        self._network_retries = network_retries
         self._client = client or httpx.Client(timeout=timeout)
+        self._sleep = time.sleep
 
     def _content(self, request: ModelRequest) -> list[dict]:
         parts: list[dict] = [{"type": "text", "text": request.user_text}]
@@ -171,7 +174,9 @@ class OpenRouterProvider:
 
         last: Exception | None = None
         spent = 0.0  # every attempt is billed, including the ones that fail validation
-        for attempt in range(self._max_retries + 1):
+        failures = 0  # the model or the gateway answered badly
+        outages = 0  # the network itself failed: DNS, refused, timed out
+        while True:
             started = time.perf_counter()
             try:
                 resp = self._client.post(self._url, json=body, headers=headers)
@@ -203,8 +208,19 @@ class OpenRouterProvider:
                     fixture_key=request.fixture_key(),
                 )
                 return parsed, meta
+            except httpx.TransportError as exc:
+                # The network is down, not the model. A DNS blip lasts minutes,
+                # so wait it out: two seconds doubling to half a minute. Giving
+                # up here turns a whole run into PROVIDER_ERROR reports.
+                last = exc
+                outages += 1
+                if outages > self._network_retries:
+                    break
+                self._sleep(min(2.0 * 2 ** (outages - 1), 32.0))
             except (httpx.HTTPError, ProviderError, KeyError, ValidationError) as exc:
                 last = exc
-                if attempt < self._max_retries:
-                    time.sleep(1.5 * (attempt + 1))
+                failures += 1
+                if failures > self._max_retries:
+                    break
+                self._sleep(1.5 * failures)
         raise ProviderError(f"{self.name} failed after retries: {last}")

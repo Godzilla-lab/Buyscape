@@ -74,6 +74,14 @@ QUERIES: tuple[Query, ...] = (
     # The tenant's own adverts are mostly laptops, and Jiji titles here carry
     # brand, model, RAM and processor, which makes them a strong answer key.
     Query("laptop", slug="computers-and-laptops", must_include=("laptop", "macbook", "notebook")),
+    # The tenant's own adverts include a 75 inch television asked at 500,000
+    # that priced as 3,684 of scrap. The category on Jiji is mostly new stock,
+    # projectors and streaming sticks, so the words narrow it to sets.
+    Query(
+        "television",
+        slug="tv-dvd-equipment",
+        must_include=(" tv", "television", "inches", "inch", "smart tv"),
+    ),
 )
 
 

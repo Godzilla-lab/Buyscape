@@ -190,9 +190,10 @@ def _load_cases(raw: Path, limit: int | None, categories: list[str] | None) -> l
 def fetch_prices(
     out: Path = typer.Option(Path("eval/prices"), help="Where to cache the price pool."),
     per_category: int = typer.Option(400, help="Used listings to keep per category."),
+    only: list[str] = typer.Option(None, help="Fetch only these categories, leaving the rest cached."),
 ) -> None:
     """Cache a large pool of used asking prices. No photos, comps only."""
-    counts = jiji.build_price_pool(out, per_category=per_category)
+    counts = jiji.build_price_pool(out, per_category=per_category, only=tuple(only or ()))
     for category, n in counts.items():
         console.print(f"{category:18s} {n}")
 
@@ -269,10 +270,17 @@ def run(
     # the cases already in flight. Replayed calls cost nothing.
     spend = {"usd": 0.0}
     lock = threading.Lock()
+    # A run that cannot reach the provider must stop, not write a hundred
+    # PROVIDER_ERROR reports over the last good ones. Five in a row is an
+    # outage; one is a case that failed on its own.
+    outage = {"streak": 0, "why": None}
+    HALT_AFTER = 5
 
     def one(case: Case):
         with lock:
             if budget_usd and spend["usd"] >= budget_usd:
+                return case, None
+            if outage["why"]:
                 return case, None
         result = run_case(
             case, protocols, catalogue, comps, scrap, reader_p, reasoner_p, materials,
@@ -280,6 +288,12 @@ def run(
         )
         with lock:
             spend["usd"] += result.spent_usd
+            if result.chain.failure_code == "PROVIDER_ERROR":
+                outage["streak"] += 1
+                if outage["streak"] >= HALT_AFTER and not outage["why"]:
+                    outage["why"] = result.chain.reason
+            else:
+                outage["streak"] = 0
         (run_dir / "cases" / f"{case.id}.md").write_text(report_markdown(case, result))
         return case, result
 
@@ -294,10 +308,21 @@ def run(
                     pairs.append((case, result))
 
     skipped = len(cases) - len(pairs)
+    if outage["why"]:
+        # No summary: a run that lost the network proves nothing about the
+        # engine, and its numbers must not overwrite a run that finished.
+        ran = len(pairs) - outage["streak"]
+        console.print(
+            f"[red]Run halted: {HALT_AFTER} provider errors in a row after {ran} cases, "
+            f"{skipped} not started. Spent ${spend['usd']:.3f}. Last error: {outage['why']}[/red]"
+        )
+        console.print("Recorded calls are kept, so rerunning pays only for the cases that never ran.")
+        raise typer.Exit(2)
     if not pairs:
         console.print(f"[red]Budget ${budget_usd:.2f} was already spent before any case ran.[/red]")
         raise typer.Exit(1)
-    metrics = score.score(pairs)
+    verdicts = score.load_verdicts(ROOT / "eval")
+    metrics = score.score(pairs, verdicts)
     summary = metrics.summary()
     summary["reader"] = reader
     summary["reasoner"] = reasoner
