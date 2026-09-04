@@ -42,9 +42,11 @@ Shortlist from the catalogue:
     priced as: priced as if the worst case is true. Photo of the back of the phone.
 - [unverified] Required evidence 'settings_about' was not supplied
     priced as: priced as if the worst case is true. Screenshot of Settings then About, showing the model name and storage.
+- [unverified] Required evidence 'imei_dial' was not supplied
+    priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
-**195 to 492 NGN** (priced as material, width 0.863, method material_floor, 0 comparable prices)
+**185 to 492 NGN** (priced as material, width 0.9044, method material_floor, 0 comparable prices)
 
 The weight is estimated from the photos, so this price is settled on the scale at pickup.
 
@@ -60,6 +62,7 @@ Conditions attached to this price:
 - Required evidence 'front_screen_on' was not supplied -> not proven remotely. Photo of the front with the screen switched on, showing the home screen..
 - Required evidence 'back' was not supplied -> not proven remotely. Photo of the back of the phone..
 - Required evidence 'settings_about' was not supplied -> not proven remotely. Screenshot of Settings then About, showing the model name and storage..
+- Required evidence 'imei_dial' was not supplied -> not proven remotely. Dial *#06# and screenshot the IMEI that appears..
 
 ## Answer key (not shown to the engine)
 `{'title': 'New Apple iPhone 17 Pro Max 256 GB Orange', 'category': 'phone', 'price_ngn': 1800000, 'is_used': False, 'url': '/ikeja/mobile-phones/new-apple-iphone-17-pro-max-256-gb-orange-oIF6sfQHcYiePRevkkfaRkmC.html?page=2&pos=12&cur_pos=12&ads_per_page=23&ads_count=17061&lid=REVG8QZgOnrtgxCE'}`

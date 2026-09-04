@@ -43,11 +43,13 @@ Shortlist from the catalogue:
     priced as: priced as if the worst case is true. Photo of the back of the phone.
 - [unverified] Required evidence 'settings_about' was not supplied
     priced as: priced as if the worst case is true. Screenshot of Settings then About, showing the model name and storage.
+- [unverified] Required evidence 'imei_dial' was not supplied
+    priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
-**41 to 139 NGN** (priced as material, width 1.091, method scrap_band_only, 0 comparable prices)
+**39 to 139 NGN** (priced as material, width 1.1264, method scrap_band_only, 0 comparable prices)
 
-No usable comparable sales (0 found, 2 needed), so the range comes from the published Lagos buy band for this category, reduced by 0.6248 for unproven claims.
+No usable comparable sales (0 found, 2 needed), so the range comes from the published Lagos buy band for this category, reduced by 0.5936 for unproven claims.
 
 Scrap floor: 65 NGN
 
@@ -59,6 +61,7 @@ Conditions attached to this price:
 - Required evidence 'front_screen_on' was not supplied -> not proven remotely. Photo of the front with the screen switched on, showing the home screen..
 - Required evidence 'back' was not supplied -> not proven remotely. Photo of the back of the phone..
 - Required evidence 'settings_about' was not supplied -> not proven remotely. Screenshot of Settings then About, showing the model name and storage..
+- Required evidence 'imei_dial' was not supplied -> not proven remotely. Dial *#06# and screenshot the IMEI that appears..
 
 ## Answer key (not shown to the engine)
 `{'title': 'Vivo V15 256 GB', 'category': 'phone', 'price_ngn': 80000, 'is_used': True, 'url': '/ikeja/mobile-phones/vivo-v15-256-gb-p7b2hFlW1i08zvnKI85sdrWz.html?page=1&pos=16&cur_pos=16&ads_per_page=24&ads_count=17061&lid=s6u6iV4wdGHElRC1'}`

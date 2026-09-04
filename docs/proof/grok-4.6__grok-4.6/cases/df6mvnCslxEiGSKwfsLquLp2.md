@@ -43,9 +43,11 @@ Shortlist from the catalogue:
     priced as: priced as if the worst case is true. Photo of the back of the phone.
 - [unverified] Required evidence 'settings_about' was not supplied
     priced as: priced as if the worst case is true. Screenshot of Settings then About, showing the model name and storage.
+- [unverified] Required evidence 'imei_dial' was not supplied
+    priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
-**200 to 551 NGN** (priced as material, width 0.9315, method material_floor, 0 comparable prices)
+**190 to 551 NGN** (priced as material, width 0.9711, method material_floor, 0 comparable prices)
 
 The weight is estimated from the photos, so this price is settled on the scale at pickup.
 
@@ -61,6 +63,7 @@ Conditions attached to this price:
 - Required evidence 'front_screen_on' was not supplied -> not proven remotely. Photo of the front with the screen switched on, showing the home screen..
 - Required evidence 'back' was not supplied -> not proven remotely. Photo of the back of the phone..
 - Required evidence 'settings_about' was not supplied -> not proven remotely. Screenshot of Settings then About, showing the model name and storage..
+- Required evidence 'imei_dial' was not supplied -> not proven remotely. Dial *#06# and screenshot the IMEI that appears..
 
 ## Answer key (not shown to the engine)
 `{'title': 'New Apple iPhone 14 Pro 256 GB Silver', 'category': 'phone', 'price_ngn': 685000, 'is_used': False, 'url': '/ikeja/mobile-phones/new-apple-iphone-14-pro-256-gb-silver-df6mvnCslxEiGSKwfsLquLp2.html?page=2&pos=6&cur_pos=6&ads_per_page=23&ads_count=17061&lid=REVG8QZgOnrtgxCE'}`

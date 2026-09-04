@@ -33,7 +33,6 @@ Shortlist from the catalogue:
 
 ## Claims
 - [unverifiable_remote] Uk used
-    priced as: assumed still locked to the previous account. Seller signs out of iCloud or Google before payment
 - [unverifiable_remote] HUAWEI P20 Pro
 - [unverifiable_remote] working
     priced as: assumed faulty. Agent powers on and tests calls, camera and charging
@@ -47,6 +46,8 @@ Shortlist from the catalogue:
     priced as: priced as if the worst case is true. Photo of the back of the phone.
 - [unverified] Required evidence 'settings_about' was not supplied
     priced as: priced as if the worst case is true. Screenshot of Settings then About, showing the model name and storage.
+- [unverified] Required evidence 'imei_dial' was not supplied
+    priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
 **27 to 174 NGN** (priced as material, width 1.4534, method material_floor, 0 comparable prices)
@@ -57,7 +58,7 @@ Scrap floor: 91 NGN
 
 Conditions attached to this price:
 - Not identified: No brand or model is printed and legible on the device. The photo shows a wide-notch phone that does not match any shortlist design; seller text claims Huawei P20 Pro which is outside the shortlist and not confirmed by a label.
-- Uk used -> not proven remotely. Seller signs out of iCloud or Google before payment.
+- Uk used -> not proven remotely. Agent will confirm at pickup.
 - HUAWEI P20 Pro -> not proven remotely. Agent will confirm at pickup.
 - working -> not proven remotely. Agent powers on and tests calls, camera and charging.
 - just a little crack screen -> not proven remotely. Agent inspects the bezel and display panel.
@@ -65,6 +66,7 @@ Conditions attached to this price:
 - Required evidence 'front_screen_on' was not supplied -> not proven remotely. Photo of the front with the screen switched on, showing the home screen..
 - Required evidence 'back' was not supplied -> not proven remotely. Photo of the back of the phone..
 - Required evidence 'settings_about' was not supplied -> not proven remotely. Screenshot of Settings then About, showing the model name and storage..
+- Required evidence 'imei_dial' was not supplied -> not proven remotely. Dial *#06# and screenshot the IMEI that appears..
 
 ## Answer key (not shown to the engine)
 `{'title': 'Huawei P20 Pro 128 GB Blue', 'category': 'phone', 'price_ngn': 100000, 'is_used': True, 'url': '/surulere/mobile-phones/huawei-p20-pro-128-gb-blue-iPeWRfTka9vY8jNf69IREdve.html?page=2&pos=21&cur_pos=21&ads_per_page=23&ads_count=17061&lid=REVG8QZgOnrtgxCE'}`

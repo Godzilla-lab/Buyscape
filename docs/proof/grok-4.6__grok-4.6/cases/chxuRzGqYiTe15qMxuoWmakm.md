@@ -22,7 +22,7 @@ Photos: 1  |  reader: grok-4.6  |  reasoner: grok-4.6  |  cost: $0.0154  |  1057
 LED torch
 1.8 d' hits=['Nokia C32', 'Infinix Smart 8', 'Infinix Smart 9', 'Google Pixel 7', 'Google Pixel 8']
 - **identify** -> ok. chosen=Nokia 106 4G margin=0.05
-- **abstain** -> abstain. margin 0.05
+- **abstain** -> abstain. top score 0.05
 
 ## Identification
 Shortlist from the catalogue:
@@ -32,7 +32,7 @@ Shortlist from the catalogue:
   - Google Pixel 7 (0.2)
   - Google Pixel 8 (0.2)
 
-**Not identified: CANNOT_IDENTIFY.** Two candidates scored within 0.05 of each other, which is too close to call remotely.
+**Not identified: CANNOT_IDENTIFY.** The best candidate scored only 0.05, which is not sure enough to price.
 
 ## Claims
 - [unverifiable_remote] Up to 15.7 hrs/21.9 days talk/standby time
@@ -47,9 +47,11 @@ Shortlist from the catalogue:
     priced as: priced as if the worst case is true. Photo of the back of the phone.
 - [unverified] Required evidence 'settings_about' was not supplied
     priced as: priced as if the worst case is true. Screenshot of Settings then About, showing the model name and storage.
+- [unverified] Required evidence 'imei_dial' was not supplied
+    priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
-**27 to 85 NGN** (priced as material, width 1.0195, method material_floor, 0 comparable prices)
+**26 to 85 NGN** (priced as material, width 1.0569, method material_floor, 0 comparable prices)
 
 The weight is estimated from the photos, so this price is settled on the scale at pickup.
 
@@ -58,7 +60,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 42 NGN
 
 Conditions attached to this price:
-- Not identified: Two candidates scored within 0.05 of each other, which is too close to call remotely.
+- Not identified: The best candidate scored only 0.05, which is not sure enough to price.
 - Up to 15.7 hrs/21.9 days talk/standby time -> not proven remotely. Agent will confirm at pickup.
 - LED torch -> not proven remotely. Agent will confirm at pickup.
 - 1.8 display -> not proven remotely. Agent will confirm at pickup.
@@ -67,6 +69,7 @@ Conditions attached to this price:
 - Required evidence 'front_screen_on' was not supplied -> not proven remotely. Photo of the front with the screen switched on, showing the home screen..
 - Required evidence 'back' was not supplied -> not proven remotely. Photo of the back of the phone..
 - Required evidence 'settings_about' was not supplied -> not proven remotely. Screenshot of Settings then About, showing the model name and storage..
+- Required evidence 'imei_dial' was not supplied -> not proven remotely. Dial *#06# and screenshot the IMEI that appears..
 
 ## Answer key (not shown to the engine)
 `{'title': 'New Nokia 106 Black', 'category': 'phone', 'price_ngn': 13000, 'is_used': False, 'url': '/ikeja/mobile-phones/new-nokia-106-black-chxuRzGqYiTe15qMxuoWmakm.html?page=1&pos=13&cur_pos=13&ads_per_page=24&ads_count=17061&lid=s6u6iV4wdGHElRC1'}`

@@ -20,7 +20,7 @@ Photos: 1  |  reader: grok-4.6  |  reasoner: grok-4.6  |  cost: $0.0148  |  1445
 - **read_evidence** -> ok. category=portable generator brand=ELEPAQ model=SV22000E3 label=True lines=6
 - **retrieval** -> ok. query='ELEPAQ SV22000E3 ELEPAQ SV22000E3 YAEENE CONSTANT ENGINE KEY ON START 12V18Ah200CCA Long-l' hits=['Elepaq SV2200 2.5kVA', 'Elepaq SV6800 6.5kVA', 'Maxmech MX10000 10kVA', 'Kemage KM10000 10kVA']
 - **identify** -> ok. chosen=ELEPAQ SV22000E3 margin=0.05
-- **abstain** -> abstain. margin 0.05
+- **abstain** -> abstain. top score 0.15
 
 ## Identification
 Shortlist from the catalogue:
@@ -29,7 +29,7 @@ Shortlist from the catalogue:
   - Maxmech MX10000 10kVA (0.2333)
   - Kemage KM10000 10kVA (0.2333)
 
-**Not identified: CANNOT_IDENTIFY.** Two candidates scored within 0.05 of each other, which is too close to call remotely.
+**Not identified: CANNOT_IDENTIFY.** The best candidate scored only 0.15, which is not sure enough to price.
 
 ## Claims
 - [unverifiable_remote] ELEPAQ generator
@@ -57,7 +57,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 138,600 NGN
 
 Conditions attached to this price:
-- Not identified: Two candidates scored within 0.05 of each other, which is too close to call remotely.
+- Not identified: The best candidate scored only 0.15, which is not sure enough to price.
 - ELEPAQ generator -> not proven remotely. Weigh on the scale and photograph the display.
 - 10KVA -> not proven remotely. Weigh on the scale and photograph the display.
 - with copper coil -> not proven remotely. Weigh on the scale and photograph the display.

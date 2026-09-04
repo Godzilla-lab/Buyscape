@@ -20,7 +20,7 @@ Photos: 1  |  reader: grok-4.6  |  reasoner: grok-4.6  |  cost: $0.0155  |  1217
 - **read_evidence** -> ok. category=diesel generator brand=FIRMAN model=SDG12000SE label=True lines=6
 - **retrieval** -> ok. query='FIRMAN SDG12000SE FIRMAN SDG12000SE Diesel Generator Avr, CE Silent SDG12000SE Firman dies' hits=['Sumec Firman SPG2900 2.8kVA', 'Sumec Firman SPG3000 3.1kVA', 'Maxmech MX10000 10kVA', 'Kemage KM10000 10kVA', 'Sumec Firman ECO8990ES 6.5kVA']
 - **identify** -> ok. chosen=FIRMAN SDG12000SE margin=0.0
-- **abstain** -> abstain. margin 0.0
+- **abstain** -> abstain. top score 0.0
 
 ## Identification
 Shortlist from the catalogue:
@@ -30,7 +30,7 @@ Shortlist from the catalogue:
   - Kemage KM10000 10kVA (0.2333)
   - Sumec Firman ECO8990ES 6.5kVA (0.15)
 
-**Not identified: CANNOT_IDENTIFY.** Two candidates scored within 0.0 of each other, which is too close to call remotely.
+**Not identified: CANNOT_IDENTIFY.** The best candidate scored only 0.0, which is not sure enough to price.
 
 ## Claims
 - [unverifiable_remote] Firman diesel generator
@@ -58,7 +58,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 309,870 NGN
 
 Conditions attached to this price:
-- Not identified: Two candidates scored within 0.0 of each other, which is too close to call remotely.
+- Not identified: The best candidate scored only 0.0, which is not sure enough to price.
 - Firman diesel generator -> not proven remotely. Weigh on the scale and photograph the display.
 - 10kva -> not proven remotely. Weigh on the scale and photograph the display.
 - 100% copper coin -> not proven remotely. Weigh on the scale and photograph the display.

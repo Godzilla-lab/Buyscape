@@ -44,9 +44,11 @@ Shortlist from the catalogue:
     priced as: priced as if the worst case is true. Photo of the back of the phone.
 - [unverified] Required evidence 'settings_about' was not supplied
     priced as: priced as if the worst case is true. Screenshot of Settings then About, showing the model name and storage.
+- [unverified] Required evidence 'imei_dial' was not supplied
+    priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
-**168 to 546 NGN** (priced as material, width 1.0572, method material_floor, 0 comparable prices)
+**159 to 546 NGN** (priced as material, width 1.0937, method material_floor, 0 comparable prices)
 
 The weight is estimated from the photos, so this price is settled on the scale at pickup.
 
@@ -62,6 +64,7 @@ Conditions attached to this price:
 - Required evidence 'front_screen_on' was not supplied -> not proven remotely. Photo of the front with the screen switched on, showing the home screen..
 - Required evidence 'back' was not supplied -> not proven remotely. Photo of the back of the phone..
 - Required evidence 'settings_about' was not supplied -> not proven remotely. Screenshot of Settings then About, showing the model name and storage..
+- Required evidence 'imei_dial' was not supplied -> not proven remotely. Dial *#06# and screenshot the IMEI that appears..
 
 ## Answer key (not shown to the engine)
 `{'title': 'New Samsung Galaxy S26 Ultra 5G 512 GB Black', 'category': 'phone', 'price_ngn': 1550000, 'is_used': False, 'url': '/ikeja/mobile-phones/new-samsung-galaxy-s26-ultra-5g-512-gb-black-nNuDdzaVAx6523dc4IhgsD0E.html?page=1&pos=22&cur_pos=22&ads_per_page=24&ads_count=17061&lid=s6u6iV4wdGHElRC1'}`

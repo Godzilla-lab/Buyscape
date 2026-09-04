@@ -44,11 +44,13 @@ Shortlist from the catalogue:
     priced as: priced as if the worst case is true. Photo of the back of the phone.
 - [unverified] Required evidence 'settings_about' was not supplied
     priced as: priced as if the worst case is true. Screenshot of Settings then About, showing the model name and storage.
+- [unverified] Required evidence 'imei_dial' was not supplied
+    priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
-**56,825 to 191,100 NGN** (priced as a working item, width 1.0832, method uncalibrated_wide, 2 comparable prices)
+**53,982 to 191,100 NGN** (priced as a working item, width 1.1189, method uncalibrated_wide, 2 comparable prices)
 
-2 used asking prices, 20th to 80th percentile 192,000 to 273,000 NGN, converted to a buy range with the 0.45 to 0.7 ask-to-buy spread, then reduced by 0.6577 for unproven claims, floored at the scrap value 253.
+2 used asking prices, 20th to 80th percentile 192,000 to 273,000 NGN, converted to a buy range with the 0.45 to 0.7 ask-to-buy spread, then reduced by 0.6248 for unproven claims, floored at the scrap value 253.
 
 Scrap floor: 253 NGN
 
@@ -59,6 +61,7 @@ Conditions attached to this price:
 - Required evidence 'front_screen_on' was not supplied -> not proven remotely. Photo of the front with the screen switched on, showing the home screen..
 - Required evidence 'back' was not supplied -> not proven remotely. Photo of the back of the phone..
 - Required evidence 'settings_about' was not supplied -> not proven remotely. Screenshot of Settings then About, showing the model name and storage..
+- Required evidence 'imei_dial' was not supplied -> not proven remotely. Dial *#06# and screenshot the IMEI that appears..
 
 ## Answer key (not shown to the engine)
 `{'title': 'New Samsung Galaxy S20+ 5G 256 GB Black', 'category': 'phone', 'price_ngn': 270000, 'is_used': False, 'url': '/ikeja/mobile-phones/new-samsung-galaxy-s20-5g-256-gb-black-pC9BWTQbM94o1FM7HH3I08Jv.html?page=1&pos=7&cur_pos=7&ads_per_page=24&ads_count=17061&lid=s6u6iV4wdGHElRC1'}`

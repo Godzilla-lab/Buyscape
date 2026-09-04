@@ -36,9 +36,11 @@ No catalogue candidates matched.
     priced as: priced as if the worst case is true. Photo of the back of the phone.
 - [unverified] Required evidence 'settings_about' was not supplied
     priced as: priced as if the worst case is true. Screenshot of Settings then About, showing the model name and storage.
+- [unverified] Required evidence 'imei_dial' was not supplied
+    priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
-**121 to 351 NGN** (priced as material, width 0.9737, method material_floor, 0 comparable prices)
+**115 to 351 NGN** (priced as material, width 1.0124, method material_floor, 0 comparable prices)
 
 This item was not identified, so it is priced as material rather than as a working item: 0.4 kg of mixed_electronic 55%, glass 15%, plastic 15%, paper 15% (rates for glass, mixed_electronic, paper, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
@@ -52,6 +54,7 @@ Conditions attached to this price:
 - Required evidence 'front_screen_on' was not supplied -> not proven remotely. Photo of the front with the screen switched on, showing the home screen..
 - Required evidence 'back' was not supplied -> not proven remotely. Photo of the back of the phone..
 - Required evidence 'settings_about' was not supplied -> not proven remotely. Screenshot of Settings then About, showing the model name and storage..
+- Required evidence 'imei_dial' was not supplied -> not proven remotely. Dial *#06# and screenshot the IMEI that appears..
 
 ## Answer key (not shown to the engine)
 `{'title': 'New Tecno Camon 50 Pro 256 GB', 'category': 'phone', 'price_ngn': 500000, 'is_used': False, 'url': '/ikeja/mobile-phones/new-tecno-camon-50-pro-256-gb-aKcMvVIm0xZJD0S0xoDnjcW3.html?page=1&pos=12&cur_pos=12&ads_per_page=24&ads_count=17061&lid=s6u6iV4wdGHElRC1'}`

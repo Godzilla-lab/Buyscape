@@ -20,7 +20,7 @@ Photos: 1  |  reader: grok-4.6  |  reasoner: grok-4.6  |  cost: $0.0156  |  1711
 - **read_evidence** -> ok. category=portable generator brand=ELEPAQ model=SV6500 label=True lines=7
 - **retrieval** -> ok. query='ELEPAQ SV6500 ELEPAQ YAMAHA CE SV6500 SUMEC SV6500 Portable 1.5kva Elepaq constant generat' hits=['Elepaq SV2200 2.5kVA', 'Elepaq SV6800 6.5kVA', 'Sumec Firman ECO8990ES 6.5kVA', 'Thermocool TC2700 2.5kVA', 'Haier Thermocool HTG2700 2.5kVA']
 - **identify** -> ok. chosen=ELEPAQ SV6500 margin=0.1
-- **abstain** -> abstain. margin 0.1
+- **abstain** -> abstain. top score 0.25
 
 ## Identification
 Shortlist from the catalogue:
@@ -30,7 +30,7 @@ Shortlist from the catalogue:
   - Thermocool TC2700 2.5kVA (0.1833)
   - Haier Thermocool HTG2700 2.5kVA (0.1833)
 
-**Not identified: CANNOT_IDENTIFY.** Two candidates scored within 0.1 of each other, which is too close to call remotely.
+**Not identified: CANNOT_IDENTIFY.** The best candidate scored only 0.25, which is not sure enough to price.
 
 ## Claims
 - [unverifiable_remote] 1.5kva
@@ -60,7 +60,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 131,250 NGN
 
 Conditions attached to this price:
-- Not identified: Two candidates scored within 0.1 of each other, which is too close to call remotely.
+- Not identified: The best candidate scored only 0.25, which is not sure enough to price.
 - 1.5kva -> not proven remotely. Weigh on the scale and photograph the display.
 - Elepaq -> not proven remotely. Weigh on the scale and photograph the display.
 - sV 2500 -> not proven remotely. Weigh on the scale and photograph the display.

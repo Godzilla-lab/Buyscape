@@ -50,9 +50,11 @@ Shortlist from the catalogue:
     priced as: priced as if the worst case is true. Photo of the back of the phone.
 - [unverified] Required evidence 'settings_about' was not supplied
     priced as: priced as if the worst case is true. Screenshot of Settings then About, showing the model name and storage.
+- [unverified] Required evidence 'imei_dial' was not supplied
+    priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
-**74 to 246 NGN** (priced as material, width 1.0733, method material_floor, 0 comparable prices)
+**70 to 246 NGN** (priced as material, width 1.1093, method material_floor, 0 comparable prices)
 
 This item was not identified, so it is priced as material rather than as a working item: 0.2 kg of mixed_electronic 40%, glass 30%, aluminium 20%, plastic 10% (rates for glass, mixed_electronic, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
@@ -69,6 +71,7 @@ Conditions attached to this price:
 - Required evidence 'front_screen_on' was not supplied -> not proven remotely. Photo of the front with the screen switched on, showing the home screen..
 - Required evidence 'back' was not supplied -> not proven remotely. Photo of the back of the phone..
 - Required evidence 'settings_about' was not supplied -> not proven remotely. Screenshot of Settings then About, showing the model name and storage..
+- Required evidence 'imei_dial' was not supplied -> not proven remotely. Dial *#06# and screenshot the IMEI that appears..
 
 ## Answer key (not shown to the engine)
 `{'title': 'Apple iPhone 14 Pro 128 GB Gold', 'category': 'phone', 'price_ngn': 580000, 'is_used': True, 'url': '/ikeja/mobile-phones/apple-iphone-14-pro-128-gb-gold-CA2VNggUjKw9a4P5FnwvlS59.html?page=1&pos=9&cur_pos=9&ads_per_page=24&ads_count=17061&lid=s6u6iV4wdGHElRC1'}`

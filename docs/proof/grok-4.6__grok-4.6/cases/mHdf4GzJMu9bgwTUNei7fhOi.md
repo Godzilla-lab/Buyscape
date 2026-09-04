@@ -40,7 +40,6 @@ Shortlist from the catalogue:
 - [unverified] Good battery health
     priced as: assumed 75 percent. Agent opens the battery health screen
 - [unverifiable_remote] Direct UK used
-    priced as: assumed still locked to the previous account. Seller signs out of iCloud or Google before payment
 - [unverified] Required evidence 'code_shot' was not supplied
     priced as: priced as if the worst case is true. Write the code {code} on paper and take one photo with the paper next to the phone.
 - [unverified] Required evidence 'front_screen_on' was not supplied
@@ -49,9 +48,11 @@ Shortlist from the catalogue:
     priced as: priced as if the worst case is true. Photo of the back of the phone.
 - [unverified] Required evidence 'settings_about' was not supplied
     priced as: priced as if the worst case is true. Screenshot of Settings then About, showing the model name and storage.
+- [unverified] Required evidence 'imei_dial' was not supplied
+    priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
-**43 to 266 NGN** (priced as material, width 1.438, method material_floor, 0 comparable prices)
+**73 to 266 NGN** (priced as material, width 1.1335, method material_floor, 0 comparable prices)
 
 This item was not identified, so it is priced as material rather than as a working item: 0.23 kg of mixed_electronic 45%, glass 30%, aluminium 15%, plastic 10% (rates for glass, mixed_electronic, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
@@ -63,11 +64,12 @@ Conditions attached to this price:
 - 512 GB -> not proven remotely. Agent reads storage from Settings.
 - 2 physical sims -> not proven remotely. Agent will confirm at pickup.
 - Good battery health -> not proven remotely. Agent opens the battery health screen.
-- Direct UK used -> not proven remotely. Seller signs out of iCloud or Google before payment.
+- Direct UK used -> not proven remotely. Agent will confirm at pickup.
 - Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on paper and take one photo with the paper next to the phone..
 - Required evidence 'front_screen_on' was not supplied -> not proven remotely. Photo of the front with the screen switched on, showing the home screen..
 - Required evidence 'back' was not supplied -> not proven remotely. Photo of the back of the phone..
 - Required evidence 'settings_about' was not supplied -> not proven remotely. Screenshot of Settings then About, showing the model name and storage..
+- Required evidence 'imei_dial' was not supplied -> not proven remotely. Dial *#06# and screenshot the IMEI that appears..
 
 ## Answer key (not shown to the engine)
 `{'title': 'Samsung Galaxy S23 Ultra 512 GB Black', 'category': 'phone', 'price_ngn': 665000, 'is_used': True, 'url': '/ikeja/mobile-phones/samsung-galaxy-s23-ultra-512-gb-black-mHdf4GzJMu9bgwTUNei7fhOi.html?page=1&pos=3&cur_pos=3&ads_per_page=24&ads_count=17061&lid=s6u6iV4wdGHElRC1'}`

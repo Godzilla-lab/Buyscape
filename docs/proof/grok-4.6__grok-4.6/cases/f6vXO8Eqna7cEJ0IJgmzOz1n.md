@@ -34,7 +34,6 @@ Shortlist from the catalogue:
 
 ## Claims
 - [unverifiable_remote] Brand new
-    priced as: assumed replaced screen. Agent inspects the bezel and display panel
 - [unverifiable_remote] Samsung galaxy S10+
 - [unverified] Required evidence 'code_shot' was not supplied
     priced as: priced as if the worst case is true. Write the code {code} on paper and take one photo with the paper next to the phone.
@@ -44,9 +43,11 @@ Shortlist from the catalogue:
     priced as: priced as if the worst case is true. Photo of the back of the phone.
 - [unverified] Required evidence 'settings_about' was not supplied
     priced as: priced as if the worst case is true. Screenshot of Settings then About, showing the model name and storage.
+- [unverified] Required evidence 'imei_dial' was not supplied
+    priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
-**126 to 437 NGN** (priced as material, width 1.1003, method material_floor, 0 comparable prices)
+**143 to 437 NGN** (priced as material, width 1.0134, method material_floor, 0 comparable prices)
 
 The weight is estimated from the photos, so this price is settled on the scale at pickup.
 
@@ -56,12 +57,13 @@ Scrap floor: 205 NGN
 
 Conditions attached to this price:
 - Not identified: Box and OCR show S10+ / Galaxy S10+; none of the shortlist models (S21–S25) match. Brand is not independently printed as readable text on the shown face.
-- Brand new -> not proven remotely. Agent inspects the bezel and display panel.
+- Brand new -> not proven remotely. Agent will confirm at pickup.
 - Samsung galaxy S10+ -> not proven remotely. Agent will confirm at pickup.
 - Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on paper and take one photo with the paper next to the phone..
 - Required evidence 'front_screen_on' was not supplied -> not proven remotely. Photo of the front with the screen switched on, showing the home screen..
 - Required evidence 'back' was not supplied -> not proven remotely. Photo of the back of the phone..
 - Required evidence 'settings_about' was not supplied -> not proven remotely. Screenshot of Settings then About, showing the model name and storage..
+- Required evidence 'imei_dial' was not supplied -> not proven remotely. Dial *#06# and screenshot the IMEI that appears..
 
 ## Answer key (not shown to the engine)
 `{'title': 'New Samsung Galaxy S10 Plus 128 GB Black', 'category': 'phone', 'price_ngn': 270000, 'is_used': False, 'url': '/ikeja/mobile-phones/new-samsung-galaxy-s10-plus-128-gb-black-f6vXO8Eqna7cEJ0IJgmzOz1n.html?page=1&pos=5&cur_pos=5&ads_per_page=24&ads_count=17061&lid=s6u6iV4wdGHElRC1'}`

@@ -50,11 +50,13 @@ Evidence flags: looks like a catalogue or stock image
     priced as: priced as if the worst case is true. Photo of the back of the phone.
 - [unverified] Required evidence 'settings_about' was not supplied
     priced as: priced as if the worst case is true. Screenshot of Settings then About, showing the model name and storage.
+- [unverified] Required evidence 'imei_dial' was not supplied
+    priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
-**42 to 138 NGN** (priced as material, width 1.053, method scrap_band_only, 0 comparable prices)
+**40 to 138 NGN** (priced as material, width 1.0896, method scrap_band_only, 0 comparable prices)
 
-No usable comparable sales (0 found, 2 needed), so the range comes from the published Lagos buy band for this category, reduced by 0.5971 for unproven claims.
+No usable comparable sales (0 found, 2 needed), so the range comes from the published Lagos buy band for this category, reduced by 0.5672 for unproven claims.
 
 Scrap floor: 71 NGN
 
@@ -69,6 +71,7 @@ Conditions attached to this price:
 - Required evidence 'front_screen_on' was not supplied -> not proven remotely. Photo of the front with the screen switched on, showing the home screen..
 - Required evidence 'back' was not supplied -> not proven remotely. Photo of the back of the phone..
 - Required evidence 'settings_about' was not supplied -> not proven remotely. Screenshot of Settings then About, showing the model name and storage..
+- Required evidence 'imei_dial' was not supplied -> not proven remotely. Dial *#06# and screenshot the IMEI that appears..
 
 ## Answer key (not shown to the engine)
 `{'title': 'New Xiaomi Redmi 15C 4G 128 GB Black', 'category': 'phone', 'price_ngn': 184000, 'is_used': False, 'url': '/ikeja/mobile-phones/new-xiaomi-redmi-15c-4g-128-gb-black-49AZbJuI8cequB47qktu2gGO.html?page=2&pos=10&cur_pos=10&ads_per_page=23&ads_count=17061&lid=REVG8QZgOnrtgxCE'}`

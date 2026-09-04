@@ -20,7 +20,7 @@ Photos: 1  |  reader: grok-4.6  |  reasoner: grok-4.6  |  cost: $0.0149  |  1080
 - **read_evidence** -> ok. category=generator brand=ELEPAQ model=Y4000W label=True lines=6
 - **retrieval** -> ok. query='ELEPAQ Y4000W Y4000W ELEPAQ GASOLINE GENERATOR GT Y4000W CE CONSTANT Elepaq constant 4.5kv' hits=['Elepaq SV2200 2.5kVA', 'Elepaq SV6800 6.5kVA', 'Thermocool TC2700 2.5kVA', 'Haier Thermocool HTG2700 2.5kVA', 'Kemage KM6500 5.5kVA']
 - **identify** -> ok. chosen=ELEPAQ Y4000W margin=0.0
-- **abstain** -> abstain. margin 0.0
+- **abstain** -> abstain. top score 0.0
 
 ## Identification
 Shortlist from the catalogue:
@@ -30,7 +30,7 @@ Shortlist from the catalogue:
   - Haier Thermocool HTG2700 2.5kVA (0.1833)
   - Kemage KM6500 5.5kVA (0.15)
 
-**Not identified: CANNOT_IDENTIFY.** Two candidates scored within 0.0 of each other, which is too close to call remotely.
+**Not identified: CANNOT_IDENTIFY.** The best candidate scored only 0.0, which is not sure enough to price.
 
 ## Claims
 - [unverifiable_remote] Elepaq
@@ -60,7 +60,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 87,322 NGN
 
 Conditions attached to this price:
-- Not identified: Two candidates scored within 0.0 of each other, which is too close to call remotely.
+- Not identified: The best candidate scored only 0.0, which is not sure enough to price.
 - Elepaq -> not proven remotely. Agent will confirm at pickup.
 - constant 4.5kva -> not proven remotely. Agent reads the rating plate.
 - 4.5kva -> not proven remotely. Agent reads the rating plate.

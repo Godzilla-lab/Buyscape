@@ -42,10 +42,8 @@ Shortlist from the catalogue:
 - [unverifiable_remote] eSIM
 - [unverified] Factory unlocked
     priced as: assumed still locked to the previous account. Seller signs out of iCloud or Google before payment
-- [unverified] Cc- 3
-    priced as: assumed replaced screen. Agent inspects the bezel and display panel
-- [unverified] Open box
-    priced as: assumed replaced screen. Agent inspects the bezel and display panel
+- [unverifiable_remote] Cc- 3
+- [unverifiable_remote] Open box
 - [unverified] Required evidence 'code_shot' was not supplied
     priced as: priced as if the worst case is true. Write the code {code} on paper and take one photo with the paper next to the phone.
 - [unverified] Required evidence 'front_screen_on' was not supplied
@@ -54,6 +52,8 @@ Shortlist from the catalogue:
     priced as: priced as if the worst case is true. Photo of the back of the phone.
 - [unverified] Required evidence 'settings_about' was not supplied
     priced as: priced as if the worst case is true. Screenshot of Settings then About, showing the model name and storage.
+- [unverified] Required evidence 'imei_dial' was not supplied
+    priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
 **52 to 307 NGN** (priced as material, width 1.4211, method material_floor, 0 comparable prices)
@@ -68,12 +68,13 @@ Conditions attached to this price:
 - 128gb -> not proven remotely. Agent reads storage from Settings.
 - eSIM -> not proven remotely. Agent will confirm at pickup.
 - Factory unlocked -> not proven remotely. Seller signs out of iCloud or Google before payment.
-- Cc- 3 -> not proven remotely. Agent inspects the bezel and display panel.
-- Open box -> not proven remotely. Agent inspects the bezel and display panel.
+- Cc- 3 -> not proven remotely. Agent will confirm at pickup.
+- Open box -> not proven remotely. Agent will confirm at pickup.
 - Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on paper and take one photo with the paper next to the phone..
 - Required evidence 'front_screen_on' was not supplied -> not proven remotely. Photo of the front with the screen switched on, showing the home screen..
 - Required evidence 'back' was not supplied -> not proven remotely. Photo of the back of the phone..
 - Required evidence 'settings_about' was not supplied -> not proven remotely. Screenshot of Settings then About, showing the model name and storage..
+- Required evidence 'imei_dial' was not supplied -> not proven remotely. Dial *#06# and screenshot the IMEI that appears..
 
 ## Answer key (not shown to the engine)
 `{'title': 'Apple iPhone 16e 128 GB Black', 'category': 'phone', 'price_ngn': 530000, 'is_used': True, 'url': '/ikeja/mobile-phones/apple-iphone-16e-128-gb-black-fUqZ8yGAXxUx4YxXr6MeQgeB.html?page=1&pos=10&cur_pos=10&ads_per_page=24&ads_count=17061&lid=s6u6iV4wdGHElRC1'}`

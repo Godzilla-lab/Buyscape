@@ -33,7 +33,6 @@ Shortlist from the catalogue:
 
 ## Claims
 - [unverifiable_remote] New
-    priced as: assumed replaced screen. Agent inspects the bezel and display panel
 - [unverifiable_remote] iphone 14
 - [unverified] 256gb
     priced as: smallest variant of this model. Agent reads storage from Settings
@@ -45,9 +44,11 @@ Shortlist from the catalogue:
     priced as: priced as if the worst case is true. Photo of the back of the phone.
 - [unverified] Required evidence 'settings_about' was not supplied
     priced as: priced as if the worst case is true. Screenshot of Settings then About, showing the model name and storage.
+- [unverified] Required evidence 'imei_dial' was not supplied
+    priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
-**146 to 506 NGN** (priced as material, width 1.1024, method material_floor, 0 comparable prices)
+**165 to 506 NGN** (priced as material, width 1.0157, method material_floor, 0 comparable prices)
 
 The weight is estimated from the photos, so this price is settled on the scale at pickup.
 
@@ -57,13 +58,14 @@ Scrap floor: 278 NGN
 
 Conditions attached to this price:
 - Not identified: No brand, model, capacity or other identifying text is legible on the box (label/plate not readable). The photo only shows a shrink-wrapped white retail box with a phone graphic; seller wording cannot substitute for printed evidence.
-- New -> not proven remotely. Agent inspects the bezel and display panel.
+- New -> not proven remotely. Agent will confirm at pickup.
 - iphone 14 -> not proven remotely. Agent will confirm at pickup.
 - 256gb -> not proven remotely. Agent reads storage from Settings.
 - Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on paper and take one photo with the paper next to the phone..
 - Required evidence 'front_screen_on' was not supplied -> not proven remotely. Photo of the front with the screen switched on, showing the home screen..
 - Required evidence 'back' was not supplied -> not proven remotely. Photo of the back of the phone..
 - Required evidence 'settings_about' was not supplied -> not proven remotely. Screenshot of Settings then About, showing the model name and storage..
+- Required evidence 'imei_dial' was not supplied -> not proven remotely. Dial *#06# and screenshot the IMEI that appears..
 
 ## Answer key (not shown to the engine)
 `{'title': 'New Apple iPhone 14 256 GB Purple', 'category': 'phone', 'price_ngn': 580000, 'is_used': False, 'url': '/ikeja/mobile-phones/new-apple-iphone-14-256-gb-purple-rtdWIW4M4B2ZJ9U3XsjsPrmI.html?page=2&pos=14&cur_pos=14&ads_per_page=23&ads_count=17061&lid=REVG8QZgOnrtgxCE'}`

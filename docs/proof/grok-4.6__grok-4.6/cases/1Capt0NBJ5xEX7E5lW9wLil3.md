@@ -34,7 +34,6 @@ Shortlist from the catalogue:
 
 ## Claims
 - [unverifiable_remote] Brand new
-    priced as: assumed replaced screen. Agent inspects the bezel and display panel
 - [unverifiable_remote] samsung galaxy S21+ 5G
 - [unverified] 256gb storage
     priced as: smallest variant of this model. Agent reads storage from Settings
@@ -48,16 +47,18 @@ Shortlist from the catalogue:
     priced as: priced as if the worst case is true. Photo of the back of the phone.
 - [unverified] Required evidence 'settings_about' was not supplied
     priced as: priced as if the worst case is true. Screenshot of Settings then About, showing the model name and storage.
+- [unverified] Required evidence 'imei_dial' was not supplied
+    priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
-**50,511 to 259,000 NGN** (priced as a working item, width 1.3472, method uncalibrated_wide, 12 comparable prices)
+**56,983 to 259,000 NGN** (priced as a working item, width 1.2787, method uncalibrated_wide, 12 comparable prices)
 
-12 used asking prices, 20th to 80th percentile 251,000 to 370,000 NGN, converted to a buy range with the 0.45 to 0.7 ask-to-buy spread, then reduced by 0.4472 for unproven claims, floored at the scrap value 173.
+12 used asking prices, 20th to 80th percentile 251,000 to 370,000 NGN, converted to a buy range with the 0.45 to 0.7 ask-to-buy spread, then reduced by 0.5045 for unproven claims, floored at the scrap value 173.
 
 Scrap floor: 173 NGN
 
 Conditions attached to this price:
-- Brand new -> not proven remotely. Agent inspects the bezel and display panel.
+- Brand new -> not proven remotely. Agent will confirm at pickup.
 - samsung galaxy S21+ 5G -> not proven remotely. Agent will confirm at pickup.
 - 256gb storage -> not proven remotely. Agent reads storage from Settings.
 - 12gb ram -> not proven remotely. Agent reads storage from Settings.
@@ -65,6 +66,7 @@ Conditions attached to this price:
 - Required evidence 'front_screen_on' was not supplied -> not proven remotely. Photo of the front with the screen switched on, showing the home screen..
 - Required evidence 'back' was not supplied -> not proven remotely. Photo of the back of the phone..
 - Required evidence 'settings_about' was not supplied -> not proven remotely. Screenshot of Settings then About, showing the model name and storage..
+- Required evidence 'imei_dial' was not supplied -> not proven remotely. Dial *#06# and screenshot the IMEI that appears..
 
 ## Answer key (not shown to the engine)
 `{'title': 'New Samsung Galaxy S21+ 5G 256 GB Black', 'category': 'phone', 'price_ngn': 290000, 'is_used': False, 'url': '/ikeja/mobile-phones/new-samsung-galaxy-s21-5g-256-gb-black-1Capt0NBJ5xEX7E5lW9wLil3.html?page=1&pos=18&cur_pos=18&ads_per_page=24&ads_count=17061&lid=s6u6iV4wdGHElRC1'}`

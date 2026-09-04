@@ -41,8 +41,7 @@ Shortlist from the catalogue:
     priced as: smallest variant of this model. Agent reads storage from Settings
 - [unverified] 12GB RAM
     priced as: smallest variant of this model. Agent reads storage from Settings
-- [unverified] BRAND-NEW
-    priced as: assumed replaced screen. Agent inspects the bezel and display panel
+- [unverifiable_remote] BRAND-NEW
 - [unverified] Required evidence 'code_shot' was not supplied
     priced as: priced as if the worst case is true. Write the code {code} on paper and take one photo with the paper next to the phone.
 - [unverified] Required evidence 'front_screen_on' was not supplied
@@ -51,11 +50,13 @@ Shortlist from the catalogue:
     priced as: priced as if the worst case is true. Photo of the back of the phone.
 - [unverified] Required evidence 'settings_about' was not supplied
     priced as: priced as if the worst case is true. Screenshot of Settings then About, showing the model name and storage.
+- [unverified] Required evidence 'imei_dial' was not supplied
+    priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
-**62 to 297 NGN** (priced as material, width 1.3036, method scrap_band_only, 0 comparable prices)
+**70 to 297 NGN** (priced as material, width 1.2315, method scrap_band_only, 0 comparable prices)
 
-No usable comparable sales (0 found, 2 needed), so the range comes from the published Lagos buy band for this category, reduced by 0.4472 for unproven claims.
+No usable comparable sales (0 found, 2 needed), so the range comes from the published Lagos buy band for this category, reduced by 0.5045 for unproven claims.
 
 Scrap floor: 140 NGN
 
@@ -63,11 +64,12 @@ Conditions attached to this price:
 - SAMSUNG GALAXY A57 -> not proven remotely. Agent will confirm at pickup.
 - 256GB OF STORAGE -> not proven remotely. Agent reads storage from Settings.
 - 12GB RAM -> not proven remotely. Agent reads storage from Settings.
-- BRAND-NEW -> not proven remotely. Agent inspects the bezel and display panel.
+- BRAND-NEW -> not proven remotely. Agent will confirm at pickup.
 - Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on paper and take one photo with the paper next to the phone..
 - Required evidence 'front_screen_on' was not supplied -> not proven remotely. Photo of the front with the screen switched on, showing the home screen..
 - Required evidence 'back' was not supplied -> not proven remotely. Photo of the back of the phone..
 - Required evidence 'settings_about' was not supplied -> not proven remotely. Screenshot of Settings then About, showing the model name and storage..
+- Required evidence 'imei_dial' was not supplied -> not proven remotely. Dial *#06# and screenshot the IMEI that appears..
 
 ## Answer key (not shown to the engine)
 `{'title': 'New Samsung Galaxy A57 256 GB Blue', 'category': 'phone', 'price_ngn': 650000, 'is_used': False, 'url': '/apapa/mobile-phones/new-samsung-galaxy-a57-256-gb-blue-u8FVsNOX5YQFArsMMUtYnncJ.html?page=2&pos=17&cur_pos=17&ads_per_page=23&ads_count=17061&lid=REVG8QZgOnrtgxCE'}`

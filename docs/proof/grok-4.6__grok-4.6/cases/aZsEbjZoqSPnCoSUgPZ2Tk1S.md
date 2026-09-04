@@ -45,8 +45,7 @@ Shortlist from the catalogue:
     priced as: assumed 75 percent. Agent opens the battery health screen
 - [unverifiable_remote] Not Boosted
     priced as: assumed 75 percent. Agent opens the battery health screen
-- [unverified] used
-    priced as: assumed replaced screen. Agent inspects the bezel and display panel
+- [unverifiable_remote] used
 - [unverified] Required evidence 'code_shot' was not supplied
     priced as: priced as if the worst case is true. Write the code {code} on paper and take one photo with the paper next to the phone.
 - [unverified] Required evidence 'front_screen_on' was not supplied
@@ -55,6 +54,8 @@ Shortlist from the catalogue:
     priced as: priced as if the worst case is true. Photo of the back of the phone.
 - [unverified] Required evidence 'settings_about' was not supplied
     priced as: priced as if the worst case is true. Screenshot of Settings then About, showing the model name and storage.
+- [unverified] Required evidence 'imei_dial' was not supplied
+    priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
 **43 to 247 NGN** (priced as material, width 1.3998, method material_floor, 0 comparable prices)
@@ -70,11 +71,12 @@ Conditions attached to this price:
 - Factory unlocked -> not proven remotely. Seller signs out of iCloud or Google before payment.
 - Battery health 100% -> not proven remotely. Agent opens the battery health screen.
 - Not Boosted -> not proven remotely. Agent opens the battery health screen.
-- used -> not proven remotely. Agent inspects the bezel and display panel.
+- used -> not proven remotely. Agent will confirm at pickup.
 - Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on paper and take one photo with the paper next to the phone..
 - Required evidence 'front_screen_on' was not supplied -> not proven remotely. Photo of the front with the screen switched on, showing the home screen..
 - Required evidence 'back' was not supplied -> not proven remotely. Photo of the back of the phone..
 - Required evidence 'settings_about' was not supplied -> not proven remotely. Screenshot of Settings then About, showing the model name and storage..
+- Required evidence 'imei_dial' was not supplied -> not proven remotely. Dial *#06# and screenshot the IMEI that appears..
 
 ## Answer key (not shown to the engine)
 `{'title': 'Apple iPhone 11 64 GB Red', 'category': 'phone', 'price_ngn': 205000, 'is_used': True, 'url': '/ikeja/mobile-phones/apple-iphone-11-64-gb-red-aZsEbjZoqSPnCoSUgPZ2Tk1S.html?page=2&pos=8&cur_pos=8&ads_per_page=23&ads_count=17061&lid=REVG8QZgOnrtgxCE'}`

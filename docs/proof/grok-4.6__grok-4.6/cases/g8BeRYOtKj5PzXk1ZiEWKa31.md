@@ -33,7 +33,6 @@ Shortlist from the catalogue:
 
 ## Claims
 - [unverifiable_remote] Brand new
-    priced as: assumed replaced screen. Agent inspects the bezel and display panel
 - [unverifiable_remote] Apple iphone 15 pro max
 - [unverified] 256gb
     priced as: smallest variant of this model. Agent reads storage from Settings
@@ -46,9 +45,11 @@ Shortlist from the catalogue:
     priced as: priced as if the worst case is true. Photo of the back of the phone.
 - [unverified] Required evidence 'settings_about' was not supplied
     priced as: priced as if the worst case is true. Screenshot of Settings then About, showing the model name and storage.
+- [unverified] Required evidence 'imei_dial' was not supplied
+    priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
-**88 to 350 NGN** (priced as material, width 1.1965, method material_floor, 0 comparable prices)
+**99 to 350 NGN** (priced as material, width 1.1164, method material_floor, 0 comparable prices)
 
 The weight is estimated from the photos, so this price is settled on the scale at pickup.
 
@@ -58,7 +59,7 @@ Scrap floor: 176 NGN
 
 Conditions attached to this price:
 - Not identified: No brand, model, capacity or other text is legible on the box. The front graphic shows a Dynamic Island phone, which fits several 15-series models equally and does not match 11/12 Pro Max. Seller wording is not printed on the item.
-- Brand new -> not proven remotely. Agent inspects the bezel and display panel.
+- Brand new -> not proven remotely. Agent will confirm at pickup.
 - Apple iphone 15 pro max -> not proven remotely. Agent will confirm at pickup.
 - 256gb -> not proven remotely. Agent reads storage from Settings.
 - white -> not proven remotely. Agent will confirm at pickup.
@@ -66,6 +67,7 @@ Conditions attached to this price:
 - Required evidence 'front_screen_on' was not supplied -> not proven remotely. Photo of the front with the screen switched on, showing the home screen..
 - Required evidence 'back' was not supplied -> not proven remotely. Photo of the back of the phone..
 - Required evidence 'settings_about' was not supplied -> not proven remotely. Screenshot of Settings then About, showing the model name and storage..
+- Required evidence 'imei_dial' was not supplied -> not proven remotely. Dial *#06# and screenshot the IMEI that appears..
 
 ## Answer key (not shown to the engine)
 `{'title': 'New Apple iPhone 15 Pro Max 256 GB White', 'category': 'phone', 'price_ngn': 980000, 'is_used': False, 'url': '/ikeja/mobile-phones/new-apple-iphone-15-pro-max-256-gb-white-g8BeRYOtKj5PzXk1ZiEWKa31.html?page=1&pos=14&cur_pos=14&ads_per_page=24&ads_count=17061&lid=s6u6iV4wdGHElRC1'}`

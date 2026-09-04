@@ -33,9 +33,7 @@ No catalogue candidates matched.
     priced as: smallest variant of this model. Agent reads storage from Settings
 - [unverifiable_remote] Available on ash and sky blue
 - [unverifiable_remote] Direct UK used
-    priced as: assumed still locked to the previous account. Seller signs out of iCloud or Google before payment
-- [unverified] in very good condition
-    priced as: assumed replaced screen. Agent inspects the bezel and display panel
+- [unverifiable_remote] in very good condition
 - [unverified] Required evidence 'code_shot' was not supplied
     priced as: priced as if the worst case is true. Write the code {code} on paper and take one photo with the paper next to the phone.
 - [unverified] Required evidence 'front_screen_on' was not supplied
@@ -44,9 +42,11 @@ No catalogue candidates matched.
     priced as: priced as if the worst case is true. Photo of the back of the phone.
 - [unverified] Required evidence 'settings_about' was not supplied
     priced as: priced as if the worst case is true. Screenshot of Settings then About, showing the model name and storage.
+- [unverified] Required evidence 'imei_dial' was not supplied
+    priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
-**76 to 443 NGN** (priced as material, width 1.4084, method material_floor, 0 comparable prices)
+**116 to 443 NGN** (priced as material, width 1.1659, method material_floor, 0 comparable prices)
 
 This item was not identified, so it is priced as material rather than as a working item: 0.4 kg of glass 30%, mixed_electronic 35%, aluminium 15%, stainless 10%, plastic 10% (rates for glass, mixed_electronic, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
@@ -58,12 +58,13 @@ Conditions attached to this price:
 - 256gb -> not proven remotely. Agent reads storage from Settings.
 - 128gb -> not proven remotely. Agent reads storage from Settings.
 - Available on ash and sky blue -> not proven remotely. Agent will confirm at pickup.
-- Direct UK used -> not proven remotely. Seller signs out of iCloud or Google before payment.
-- in very good condition -> not proven remotely. Agent inspects the bezel and display panel.
+- Direct UK used -> not proven remotely. Agent will confirm at pickup.
+- in very good condition -> not proven remotely. Agent will confirm at pickup.
 - Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on paper and take one photo with the paper next to the phone..
 - Required evidence 'front_screen_on' was not supplied -> not proven remotely. Photo of the front with the screen switched on, showing the home screen..
 - Required evidence 'back' was not supplied -> not proven remotely. Photo of the back of the phone..
 - Required evidence 'settings_about' was not supplied -> not proven remotely. Screenshot of Settings then About, showing the model name and storage..
+- Required evidence 'imei_dial' was not supplied -> not proven remotely. Dial *#06# and screenshot the IMEI that appears..
 
 ## Answer key (not shown to the engine)
 `{'title': 'Apple iPhone 14 Pro 256 GB White', 'category': 'phone', 'price_ngn': 680000, 'is_used': True, 'url': '/ikeja/mobile-phones/apple-iphone-14-pro-256-gb-white-1tZaskvlnNM0IW2cxGQHddSL.html?page=1&pos=1&cur_pos=1&ads_per_page=24&ads_count=17061&lid=s6u6iV4wdGHElRC1'}`

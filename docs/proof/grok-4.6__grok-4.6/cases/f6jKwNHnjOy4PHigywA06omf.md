@@ -31,7 +31,6 @@ Shortlist from the catalogue:
 
 ## Claims
 - [unverifiable_remote] Uk used
-    priced as: assumed still locked to the previous account. Seller signs out of iCloud or Google before payment
 - [unverifiable_remote] iPhone Air
 - [unverified] Required evidence 'code_shot' was not supplied
     priced as: priced as if the worst case is true. Write the code {code} on paper and take one photo with the paper next to the phone.
@@ -41,9 +40,11 @@ Shortlist from the catalogue:
     priced as: priced as if the worst case is true. Photo of the back of the phone.
 - [unverified] Required evidence 'settings_about' was not supplied
     priced as: priced as if the worst case is true. Screenshot of Settings then About, showing the model name and storage.
+- [unverified] Required evidence 'imei_dial' was not supplied
+    priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
-**41 to 246 NGN** (priced as material, width 1.4207, method material_floor, 0 comparable prices)
+**97 to 246 NGN** (priced as material, width 0.8691, method material_floor, 0 comparable prices)
 
 This item was not identified, so it is priced as material rather than as a working item: 0.2 kg of mixed_electronic 40%, glass 30%, aluminium 20%, plastic 10% (rates for glass, mixed_electronic, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
@@ -51,12 +52,13 @@ Scrap floor: 139 NGN
 
 Conditions attached to this price:
 - Not identified: No brand, model or other text is legible on the device. The rear camera is a horizontal pill bar with one lens, which does not match XR, XS or SE. Seller's 'iPhone Air' claim is not printed on the item and is outside the shortlist.
-- Uk used -> not proven remotely. Seller signs out of iCloud or Google before payment.
+- Uk used -> not proven remotely. Agent will confirm at pickup.
 - iPhone Air -> not proven remotely. Agent will confirm at pickup.
 - Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on paper and take one photo with the paper next to the phone..
 - Required evidence 'front_screen_on' was not supplied -> not proven remotely. Photo of the front with the screen switched on, showing the home screen..
 - Required evidence 'back' was not supplied -> not proven remotely. Photo of the back of the phone..
 - Required evidence 'settings_about' was not supplied -> not proven remotely. Screenshot of Settings then About, showing the model name and storage..
+- Required evidence 'imei_dial' was not supplied -> not proven remotely. Dial *#06# and screenshot the IMEI that appears..
 
 ## Answer key (not shown to the engine)
 `{'title': 'Apple iPhone Air 256 GB White', 'category': 'phone', 'price_ngn': 1100000, 'is_used': True, 'url': '/ikeja/mobile-phones/apple-iphone-air-256-gb-white-f6jKwNHnjOy4PHigywA06omf.html?page=2&pos=5&cur_pos=5&ads_per_page=23&ads_count=17061&lid=REVG8QZgOnrtgxCE'}`

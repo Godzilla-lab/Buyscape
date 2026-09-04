@@ -37,9 +37,11 @@ No catalogue candidates matched.
     priced as: priced as if the worst case is true. Photo of the back of the phone.
 - [unverified] Required evidence 'settings_about' was not supplied
     priced as: priced as if the worst case is true. Screenshot of Settings then About, showing the model name and storage.
+- [unverified] Required evidence 'imei_dial' was not supplied
+    priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
-**64 to 173 NGN** (priced as material, width 0.9167, method material_floor, 0 comparable prices)
+**61 to 173 NGN** (priced as material, width 0.9567, method material_floor, 0 comparable prices)
 
 The weight is estimated from the photos, so this price is settled on the scale at pickup.
 
@@ -55,6 +57,7 @@ Conditions attached to this price:
 - Required evidence 'front_screen_on' was not supplied -> not proven remotely. Photo of the front with the screen switched on, showing the home screen..
 - Required evidence 'back' was not supplied -> not proven remotely. Photo of the back of the phone..
 - Required evidence 'settings_about' was not supplied -> not proven remotely. Screenshot of Settings then About, showing the model name and storage..
+- Required evidence 'imei_dial' was not supplied -> not proven remotely. Dial *#06# and screenshot the IMEI that appears..
 
 ## Answer key (not shown to the engine)
 `{'title': 'Apple iPhone 5s 16 GB Silver', 'category': 'phone', 'price_ngn': 35000, 'is_used': True, 'url': '/lekki/mobile-phones/apple-iphone-5s-16-gb-silver-BLmG08NLY4n1XehvZDQB1C0.html?page=1&pos=19&cur_pos=19&ads_per_page=24&ads_count=17061&lid=s6u6iV4wdGHElRC1'}`

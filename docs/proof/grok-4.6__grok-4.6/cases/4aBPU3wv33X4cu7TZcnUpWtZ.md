@@ -58,6 +58,8 @@ Shortlist from the catalogue:
     priced as: priced as if the worst case is true. Photo of the back of the phone.
 - [unverified] Required evidence 'settings_about' was not supplied
     priced as: priced as if the worst case is true. Screenshot of Settings then About, showing the model name and storage.
+- [unverified] Required evidence 'imei_dial' was not supplied
+    priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
 **45 to 261 NGN** (priced as material, width 1.4056, method material_floor, 0 comparable prices)
@@ -78,6 +80,7 @@ Conditions attached to this price:
 - Required evidence 'front_screen_on' was not supplied -> not proven remotely. Photo of the front with the screen switched on, showing the home screen..
 - Required evidence 'back' was not supplied -> not proven remotely. Photo of the back of the phone..
 - Required evidence 'settings_about' was not supplied -> not proven remotely. Screenshot of Settings then About, showing the model name and storage..
+- Required evidence 'imei_dial' was not supplied -> not proven remotely. Dial *#06# and screenshot the IMEI that appears..
 
 ## Answer key (not shown to the engine)
 `{'title': 'Apple iPhone 12 Pro Max 256 GB Gold', 'category': 'phone', 'price_ngn': 450000, 'is_used': True, 'url': '/ikeja/mobile-phones/apple-iphone-12-pro-max-256-gb-gold-4aBPU3wv33X4cu7TZcnUpWtZ.html?page=1&pos=17&cur_pos=17&ads_per_page=24&ads_count=17061&lid=s6u6iV4wdGHElRC1'}`

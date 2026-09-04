@@ -42,9 +42,11 @@ Shortlist from the catalogue:
     priced as: priced as if the worst case is true. Photo of the back of the phone.
 - [unverified] Required evidence 'settings_about' was not supplied
     priced as: priced as if the worst case is true. Screenshot of Settings then About, showing the model name and storage.
+- [unverified] Required evidence 'imei_dial' was not supplied
+    priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
-**148 to 441 NGN** (priced as material, width 0.9935, method material_floor, 0 comparable prices)
+**141 to 441 NGN** (priced as material, width 1.0317, method material_floor, 0 comparable prices)
 
 The weight is estimated from the photos, so this price is settled on the scale at pickup.
 
@@ -60,6 +62,7 @@ Conditions attached to this price:
 - Required evidence 'front_screen_on' was not supplied -> not proven remotely. Photo of the front with the screen switched on, showing the home screen..
 - Required evidence 'back' was not supplied -> not proven remotely. Photo of the back of the phone..
 - Required evidence 'settings_about' was not supplied -> not proven remotely. Screenshot of Settings then About, showing the model name and storage..
+- Required evidence 'imei_dial' was not supplied -> not proven remotely. Dial *#06# and screenshot the IMEI that appears..
 
 ## Answer key (not shown to the engine)
 `{'title': 'New Google Pixel 10 Pro 256 GB Black', 'category': 'phone', 'price_ngn': 1180000, 'is_used': False, 'url': '/ikeja/mobile-phones/new-google-pixel-10-pro-256-gb-black-uwCwS2zm5SW1qqARwmXQE1mT.html?page=2&pos=13&cur_pos=13&ads_per_page=23&ads_count=17061&lid=REVG8QZgOnrtgxCE'}`
