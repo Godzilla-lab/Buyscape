@@ -1,0 +1,78 @@
+# Case 3R6YKYsmI6DPKGwYJAgGdcKM
+
+Photos: 1  |  reader: grok-4.6  |  reasoner: grok-4.6  |  cost: $0.0139  |  133966 ms
+
+## What the engine saw
+- Presentation: single_unit
+- Category: generator (confidence 0.95)
+- Made of: steel 50%, plastic 20%, iron 15%, copper 10%, rubber 5%
+- Estimated weight: 45.0 kg (confidence 0.45)
+- Brand read off the item: FIRMAN
+- Model read off the item: nothing legible
+- Rating read: none
+- Label, plate or settings screen legible: yes
+- Damage noted: none
+- Looks like a catalogue image: no
+- Screenshot of a gallery: no
+- Text read: FIRMAN
+
+## Chain
+- **read_evidence** -> ok. category=generator brand=FIRMAN model=None label=True lines=1
+- **retrieval** -> ok. query='FIRMAN FIRMAN SUMEC FIRMAN ECO12990ES 12kva 100% copper wire
+2 years warranty.
+Automatic S' hits=['Sumec Firman SPG2900 2.8kVA', 'Sumec Firman SPG3000 3.1kVA', 'Sumec Firman ECO8990ES 6.5kVA', 'Sumec Firman SPG8800 8.1kVA']
+- **identify** -> refused. chosen=None None margin=None
+- **abstain** -> abstain. model refused
+
+## Identification
+Shortlist from the catalogue:
+  - Sumec Firman SPG2900 2.8kVA (0.55)
+  - Sumec Firman SPG3000 3.1kVA (0.4)
+  - Sumec Firman ECO8990ES 6.5kVA (0.3)
+  - Sumec Firman SPG8800 8.1kVA (0.3)
+
+**Not identified: CANNOT_IDENTIFY.** Only the brand word FIRMAN is literally legible. No model, variant, or kVA rating can be read from the photos or OCR. Seller claim ECO12990ES 12kVA is not printed on the item and is not in the shortlist, so no catalogue entry is supported.
+
+## Claims
+- [unverifiable_remote] SUMEC FIRMAN ECO12990ES
+- [unverified] 12kva
+    priced as: the smallest rating in this brand's range. Agent reads the rating plate
+- [unverifiable_remote] 100% copper wire
+    priced as: assumed aluminium windings. Agent opens the side cover and inspects the windings
+- [unverifiable_remote] 2 years warranty
+- [unverifiable_remote] Automatic Starter and Manual
+- [unverified] Required evidence 'code_shot' was not supplied
+    priced as: priced as if the worst case is true. Write the code {code} on paper and photograph it next to the generator.
+- [unverified] Required evidence 'overview' was not supplied
+    priced as: priced as if the worst case is true. One photo of the whole generator from the front.
+- [unverified] Required evidence 'plate_kva' was not supplied
+    priced as: priced as if the worst case is true. Close-up of the rating plate showing the kVA and model number.
+- [unverified] Required evidence 'side_cover_off' was not supplied
+    priced as: priced as if the worst case is true. Open the side cover and photograph the alternator windings.
+- [unverified] Required evidence 'engine_bay' was not supplied
+    priced as: priced as if the worst case is true. Photo of the engine, showing the recoil starter and carburettor.
+
+## Price
+**25,643 to 77,895 NGN** (priced as material, width 1.0093, method material_floor, 0 comparable prices)
+
+The weight is estimated from the photos, so this price is settled on the scale at pickup.
+
+This item was not identified, so it is priced as material rather than as a working item: 45 kg of steel 50%, plastic 20%, iron 15%, copper 10%, rubber 5% (rates for plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+
+Scrap floor: 60,637 NGN
+
+Conditions attached to this price:
+- Not identified: Only the brand word FIRMAN is literally legible. No model, variant, or kVA rating can be read from the photos or OCR. Seller claim ECO12990ES 12kVA is not printed on the item and is not in the shortlist, so no catalogue entry is supported.
+- SUMEC FIRMAN ECO12990ES -> not proven remotely. Agent will confirm at pickup.
+- 12kva -> not proven remotely. Agent reads the rating plate.
+- 100% copper wire -> not proven remotely. Agent opens the side cover and inspects the windings.
+- 2 years warranty -> not proven remotely. Agent will confirm at pickup.
+- Automatic Starter and Manual -> not proven remotely. Agent will confirm at pickup.
+- Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on paper and photograph it next to the generator..
+- Required evidence 'overview' was not supplied -> not proven remotely. One photo of the whole generator from the front..
+- Required evidence 'plate_kva' was not supplied -> not proven remotely. Close-up of the rating plate showing the kVA and model number..
+- Required evidence 'side_cover_off' was not supplied -> not proven remotely. Open the side cover and photograph the alternator windings..
+- Required evidence 'engine_bay' was not supplied -> not proven remotely. Photo of the engine, showing the recoil starter and carburettor..
+
+## Answer key (not shown to the engine)
+`{'title': 'Eco12990es 12kva Firman 100% Copper Automatic Manual', 'category': 'generator', 'price_ngn': 890000, 'is_used': False, 'url': '/ikeja/power-equipments/eco12990es-12kva-firman-100-copper-automatic-manual-3R6YKYsmI6DPKGwYJAgGdcKM.html?page=2&pos=7&cur_pos=7&ads_per_page=23&ads_count=15133&lid=jDmK55nggeXBjrth'}`

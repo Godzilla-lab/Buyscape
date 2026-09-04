@@ -11,12 +11,19 @@ import json
 from dataclasses import dataclass, field
 from pathlib import Path
 
+import re
+
 from ..identify.catalogue import tokens
 from ..runner import Case, CaseResult
 
 
+_SPLIT_UNITS = re.compile(r"(\d+)\s*(gb|tb|mb|kva|kg|hp|kw|w)\b", re.I)
+
+
 def _norm(text: str | None) -> set[str]:
-    return set(tokens(text or ""))
+    """Tokenise, splitting a number from its unit so 512gb equals 512 gb."""
+    normalised = _SPLIT_UNITS.sub(r"\1 \2", (text or "").lower())
+    return set(tokens(normalised))
 
 
 def brand_matches(predicted: str | None, truth_title: str) -> bool:
@@ -25,16 +32,34 @@ def brand_matches(predicted: str | None, truth_title: str) -> bool:
 
 
 def model_matches(brand: str | None, model: str | None, truth_title: str) -> bool:
-    """Every token of the predicted brand and model must appear in the title.
+    """Did the engine name the same product the seller was listing?
 
-    Strict on purpose: an iPhone 14 scored as correct for an iPhone 14 Pro is
-    exactly the error that produces a wrong price.
+    A listing title is a seller's shorthand, not a spec sheet, so extra detail
+    the engine read off the item is not an error: "Senci SC30000" against a
+    title of "Senci Petrol Generator 20kva" is a plate code the title never
+    carried. What is an error is contradicting the title, and numbers are where
+    that shows, because an iPhone 14 priced as an iPhone 13 costs real money.
+
+    So the rule is: the answer must share a word with the title, and where both
+    carry numbers at least one must agree. Detail the title simply omits passes.
     """
     predicted = _norm(brand) | _norm(model)
     if not predicted:
         return False
     truth = _norm(truth_title)
-    return predicted.issubset(truth)
+
+    pred_numbers = {t for t in predicted if any(c.isdigit() for c in t)}
+    truth_numbers = {t for t in truth if any(c.isdigit() for c in t)}
+    pred_words = predicted - pred_numbers
+    truth_words = truth - truth_numbers
+
+    # Naming a different product entirely.
+    if not (pred_words & truth_words):
+        return False
+    # Both sides quote numbers and none agree: a wrong generation or capacity.
+    if pred_numbers and truth_numbers and not (pred_numbers & truth_numbers):
+        return False
+    return True
 
 
 @dataclass
@@ -45,6 +70,7 @@ class Metrics:
     id_attempted: int = 0
     id_correct: int = 0
     id_wrong: int = 0
+    brand_correct: int = 0
     abstained: int = 0
     with_label: int = 0
     with_label_correct: int = 0
@@ -72,6 +98,7 @@ class Metrics:
                 self.with_label_correct, self.with_label_attempted
             ),
             "model_top1_accuracy_all_attempts": self.rate(self.id_correct, self.id_attempted),
+            "brand_accuracy_when_answered": self.rate(self.brand_correct, self.id_attempted),
             "abstention_rate": self.rate(self.abstained, self.total),
             "silent_wrong_rate": self.rate(self.silent_wrong, self.total),
             "priced": self.priced,
@@ -127,6 +154,8 @@ def score(pairs: list[tuple[Case, CaseResult]]) -> Metrics:
 
         if result.identified:
             m.id_attempted += 1
+            if brand_matches(result.chain.brand, title):
+                m.brand_correct += 1
             correct = model_matches(result.chain.brand, result.chain.model, title)
             if correct:
                 m.id_correct += 1

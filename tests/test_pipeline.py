@@ -172,3 +172,22 @@ def test_identification_lifts_the_price_above_the_material_floor():
     as_item = price(comps, [], [], materials=materials, identified=True)
     assert as_item.high > as_material.high
     assert as_item.basis == "resale"
+
+
+def test_scorer_does_not_punish_detail_the_listing_title_omits():
+    """A seller's title is shorthand, not a spec sheet.
+
+    These were all counted as failures by the first scorer, which made the
+    engine look worse than it was.
+    """
+    assert model_matches("Google", "Pixel Fold 512GB", "New Google Pixel Fold 512 GB Black")
+    assert model_matches("Nokia", "110 Africa Edition", "New Nokia 110 Green")
+    assert model_matches("Xiaomi", "Redmi 15C 256GB", "New Xiaomi Redmi 15C 4G 128 GB Black")
+
+
+def test_scorer_still_catches_the_errors_that_cost_money():
+    """A wrong generation is the error that produces a wrong price."""
+    assert not model_matches("Apple", "iPhone 14", "Apple iPhone 13 128 GB White")
+    assert not model_matches("Apple", "iPhone 12 Pro", "Apple iPhone 13 128 GB White")
+    assert not model_matches("Samsung", "Galaxy S22 Ultra", "Samsung Galaxy S23 Ultra 512 GB")
+    assert not model_matches("LG", "T2108", "Hisense 9kg Top Loader Washing Machine")
