@@ -59,6 +59,7 @@ money moves. The promise is "nothing hidden gets priced", not "we see inside".
     uv run buyscape fetch-buyscrap            cache the tenant's own adverts with photos
     uv run buyscape run --preset balanced --set buyscrap
     uv run buyscape spend                     every run's cost and the cost per item
+    uv run buyscape ui                        local test page: drop photos, pick a preset, read the result
     uv run --group dev pytest
 
 Keys live in `.env` and the run command loads it. Every run appends to

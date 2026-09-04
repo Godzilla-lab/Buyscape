@@ -530,6 +530,19 @@ def assess(
     console.print(f"Cost ${result.spent_usd:.4f} live, ${result.cost_usd:.4f} at recorded prices. Report: {report}")
 
 
+@app.command("ui")
+def ui(
+    port: int = typer.Option(8765, help="Port on localhost."),
+    no_browser: bool = typer.Option(False, "--no-browser", help="Do not open a browser tab."),
+) -> None:
+    """A local test page: drop photos or pick a cached case, choose a model
+    pair, and read the result. Same code path as `assess`, same fixtures.
+    Not a product surface and not a server anyone else can reach."""
+    from .ui.server import serve
+
+    serve(ROOT, port=port, open_browser=not no_browser)
+
+
 @app.command("fetch-buyscrap")
 def fetch_buyscrap(out: Path = typer.Option(ROOT / "eval" / "raw" / "buyscrap")) -> None:
     """Cache every advert on buyscrap.com.ng, the tenant's own site, with photos."""

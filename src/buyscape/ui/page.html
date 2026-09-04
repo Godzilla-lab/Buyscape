@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Buyscape test bench</title>
+<style>
+  :root {
+    --bg: #f6f5f1; --panel: #ffffff; --ink: #1c1b18; --muted: #6b6860; --line: #e2dfd6;
+    --accent: #0f6b4f; --accent-ink: #ffffff; --warn: #9a4b00; --bad: #a12626; --good: #1d6b3a;
+    --chip: #eeece5; --mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #141413; --panel: #1e1d1b; --ink: #ece9e1; --muted: #9c988e; --line: #33312d;
+      --accent: #4fc79c; --accent-ink: #0e1f18; --warn: #f0a04b; --bad: #f07070; --good: #6fd08f;
+      --chip: #2a2926;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.45 var(--sans); }
+  header { display: flex; align-items: baseline; gap: 16px; padding: 14px 22px; border-bottom: 1px solid var(--line); }
+  header h1 { font-size: 17px; margin: 0; letter-spacing: .01em; }
+  header .keys { margin-left: auto; display: flex; gap: 8px; }
+  .chip { background: var(--chip); border-radius: 999px; padding: 2px 10px; font-size: 12px; color: var(--muted); }
+  .chip.on { color: var(--good); }
+  .chip.off { color: var(--bad); }
+  main { display: grid; grid-template-columns: minmax(320px, 420px) 1fr; gap: 18px; padding: 18px 22px; }
+  @media (max-width: 900px) { main { grid-template-columns: 1fr; } }
+  section.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 16px; }
+  h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 0 0 10px; }
+  h3 { font-size: 14px; margin: 16px 0 6px; }
+  label { display: block; font-size: 12px; color: var(--muted); margin: 10px 0 4px; }
+  input[type=text], input[type=number], textarea, select {
+    width: 100%; padding: 7px 9px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg);
+    color: var(--ink); font: inherit;
+  }
+  textarea { min-height: 70px; resize: vertical; }
+  .row { display: flex; gap: 8px; }
+  .row > * { flex: 1; }
+  button { font: inherit; padding: 8px 14px; border-radius: 6px; border: 1px solid var(--line); background: var(--chip); color: var(--ink); cursor: pointer; }
+  button.primary { background: var(--accent); color: var(--accent-ink); border-color: transparent; font-weight: 600; }
+  button:disabled { opacity: .5; cursor: wait; }
+  .drop { border: 2px dashed var(--line); border-radius: 8px; padding: 18px; text-align: center; color: var(--muted); cursor: pointer; margin-top: 8px; }
+  .drop.over { border-color: var(--accent); color: var(--accent); }
+  .thumbs { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .thumbs img { width: 72px; height: 72px; object-fit: cover; border-radius: 6px; border: 1px solid var(--line); }
+  .thumbs .file { width: 72px; height: 72px; display: grid; place-items: center; font-size: 10px; border: 1px solid var(--line); border-radius: 6px; padding: 4px; overflow: hidden; word-break: break-all; }
+  .muted { color: var(--muted); }
+  .small { font-size: 12px; }
+  .status { margin-top: 10px; min-height: 18px; font-size: 12px; }
+  .status.err { color: var(--bad); }
+  details summary { cursor: pointer; color: var(--muted); font-size: 12px; }
+  .price { font-size: 26px; font-weight: 700; margin: 4px 0; }
+  .fail { font-size: 20px; font-weight: 700; color: var(--bad); }
+  .tag { display: inline-block; font-family: var(--mono); font-size: 11px; padding: 1px 6px; border-radius: 4px; background: var(--chip); margin-right: 4px; }
+  .tag.bad { color: var(--bad); }
+  .tag.good { color: var(--good); }
+  .tag.warn { color: var(--warn); }
+  ul { padding-left: 18px; margin: 4px 0; }
+  li { margin: 2px 0; }
+  .qa { display: grid; grid-template-columns: 1fr 180px; gap: 6px 10px; align-items: center; margin: 4px 0; }
+  table { border-collapse: collapse; width: 100%; font-size: 12.5px; }
+  th, td { text-align: left; padding: 5px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { color: var(--muted); font-weight: 500; }
+  td.num, th.num { text-align: right; font-family: var(--mono); }
+  .tabs { display: flex; gap: 4px; margin-bottom: 10px; }
+  .tabs button.active { background: var(--accent); color: var(--accent-ink); border-color: transparent; }
+  .md h1 { font-size: 16px; } .md h2 { font-size: 13px; text-transform: none; letter-spacing: 0; color: var(--ink); margin-top: 16px; }
+  .md code { font-family: var(--mono); font-size: 12px; background: var(--chip); padding: 1px 4px; border-radius: 3px; }
+  .md p { margin: 6px 0; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  @media (max-width: 1100px) { .two { grid-template-columns: 1fr; } }
+  .full { grid-column: 1 / -1; }
+  .caselist { max-height: 260px; overflow: auto; border: 1px solid var(--line); border-radius: 6px; }
+  .caselist div { padding: 4px 8px; cursor: pointer; font-family: var(--mono); font-size: 12px; border-bottom: 1px solid var(--line); }
+  .caselist div:hover, .caselist div.sel { background: var(--chip); }
+  .pass { color: var(--good); } .failv { color: var(--bad); }
+</style>
+</head>
+<body>
+<header>
+  <h1>Buyscape test bench</h1>
+  <span class="muted small">local only, same code path as <code>buyscape assess</code></span>
+  <div class="keys" id="keys"></div>
+</header>
+
+<main>
+  <section class="panel" id="input">
+    <h2>1. What is being sold</h2>
+
+    <div class="row">
+      <button id="modePhotos" class="active">My photos</button>
+      <button id="modeCached">A cached case</button>
+    </div>
+
+    <div id="photosBox">
+      <div class="drop" id="drop">Drop photos here, or click to choose<br><span class="small">jpg, png, webp, heic</span></div>
+      <input type="file" id="fileInput" accept="image/*,.heic,.heif" multiple hidden>
+      <div class="thumbs" id="thumbs"></div>
+      <label>Label for the folder (optional)</label>
+      <input type="text" id="label" placeholder="e.g. mums-old-fridge">
+    </div>
+
+    <div id="cachedBox" hidden>
+      <label>Test set</label>
+      <select id="setSel"><option value="jiji">jiji (answer keys are model names)</option><option value="buyscrap">buyscrap (the tenant's own adverts)</option></select>
+      <label>Case</label>
+      <input type="text" id="caseFilter" placeholder="filter by id or category">
+      <div class="caselist" id="caseList"></div>
+      <div class="thumbs" id="cachedThumbs"></div>
+      <details id="keyBox" hidden><summary>Show the answer key</summary><div class="small" id="keyText"></div></details>
+    </div>
+
+    <label>What the seller says</label>
+    <textarea id="text" placeholder="Their words, as typed. Leave empty to use the advert text of a cached case."></textarea>
+
+    <label>Asking price (NGN, 0 means unknown)</label>
+    <input type="number" id="asking" min="0" step="1" value="0">
+
+    <div id="answersBox"></div>
+
+    <h2 style="margin-top:18px">2. Which models</h2>
+    <label>Preset</label>
+    <select id="preset"></select>
+    <div class="row">
+      <div><label>Mode</label>
+        <select id="mode">
+          <option value="auto">auto (replay if recorded, else pay)</option>
+          <option value="replay">replay only (never pays)</option>
+          <option value="record">record (always pays)</option>
+        </select></div>
+      <div><label>Tenant</label><select id="tenant"></select></div>
+    </div>
+    <div class="row" style="margin-top:14px">
+      <button class="primary" id="runBtn">Value it</button>
+      <button id="compareBtn" title="Run the same input through every ticked preset">Run all ticked presets</button>
+    </div>
+    <div id="presetTicks" class="small" style="margin-top:8px"></div>
+    <div class="status" id="status"></div>
+  </section>
+
+  <section class="panel" id="output">
+    <h2>Result</h2>
+    <div class="tabs">
+      <button class="active" data-tab="summary">Summary</button>
+      <button data-tab="report">Full report</button>
+      <button data-tab="json">JSON</button>
+    </div>
+    <div id="summary"><p class="muted">Nothing run yet.</p></div>
+    <div id="report" class="md" hidden></div>
+    <pre id="json" hidden style="white-space:pre-wrap;font-size:11.5px"></pre>
+  </section>
+
+  <section class="panel full">
+    <h2>Compare presets on the same input</h2>
+    <table id="compare">
+      <thead><tr><th>preset</th><th>reader</th><th>reasoner</th><th>category</th><th>identified</th><th>price</th><th>failure</th><th class="num">confidence</th><th class="num">cost $</th><th class="num">ms</th></tr></thead>
+      <tbody></tbody>
+    </table>
+    <p class="muted small" id="compareNote">Tick presets above, then press Run all ticked presets. Replayed calls cost nothing.</p>
+  </section>
+
+  <section class="panel full">
+    <h2>Proof runs already on disk</h2>
+    <div class="two">
+      <div>
+        <label>Run</label>
+        <select id="runSel"></select>
+        <div id="gate"></div>
+        <label>Cases</label>
+        <input type="text" id="runFilter" placeholder="filter">
+        <div class="caselist" id="runCases"></div>
+      </div>
+      <div class="md" id="runReport"><p class="muted">Pick a case.</p></div>
+    </div>
+  </section>
+</main>
+
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const state = { meta: null, photos: [], useCached: false, cached: [], cachedSel: null, answers: {}, last: null, runs: [] };
+
+  const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const money = (n) => n == null ? "?" : Math.round(n).toLocaleString();
+
+  // A very small markdown renderer: enough for the case reports.
+  function md(text) {
+    const inline = (s) => esc(s).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>").replace(/`([^`]+)`/g, "<code>$1</code>").replace(/_(.+?)_/g, "<i>$1</i>");
+    const out = []; let list = null;
+    const close = () => { if (list) { out.push(`</${list}>`); list = null; } };
+    for (const raw of text.split("\n")) {
+      const line = raw.replace(/\s+$/, "");
+      let m;
+      if ((m = line.match(/^(#{1,3}) (.*)/))) { close(); out.push(`<h${m[1].length}>${inline(m[2])}</h${m[1].length}>`); }
+      else if ((m = line.match(/^\s*[-*] (.*)/))) { if (list !== "ul") { close(); out.push("<ul>"); list = "ul"; } out.push(`<li>${inline(m[1])}</li>`); }
+      else if ((m = line.match(/^\s*\d+\. (.*)/))) { if (list !== "ol") { close(); out.push("<ol>"); list = "ol"; } out.push(`<li>${inline(m[1])}</li>`); }
+      else if (line.trim() === "") { close(); }
+      else if (list && /^\s{2,}/.test(raw)) { out[out.length - 1] = out[out.length - 1].replace(/<\/li>$/, `<br><span class="muted">${inline(line.trim())}</span></li>`); }
+      else { close(); out.push(`<p>${inline(line)}</p>`); }
+    }
+    close(); return out.join("\n");
+  }
+
+  async function api(path, body) {
+    const res = await fetch(path, body ? { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) } : {});
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || res.statusText);
+    return data;
+  }
+
+  function setStatus(text, err) { const el = $("status"); el.textContent = text; el.className = "status" + (err ? " err" : ""); }
+
+  // ----- input side -----
+  $("modePhotos").onclick = () => setMode(false);
+  $("modeCached").onclick = () => setMode(true);
+  function setMode(cached) {
+    state.useCached = cached;
+    $("photosBox").hidden = cached; $("cachedBox").hidden = !cached;
+    $("modePhotos").classList.toggle("active", !cached); $("modeCached").classList.toggle("active", cached);
+    if (cached && !state.cached.length) loadTestset();
+  }
+
+  const drop = $("drop");
+  drop.onclick = () => $("fileInput").click();
+  drop.ondragover = (e) => { e.preventDefault(); drop.classList.add("over"); };
+  drop.ondragleave = () => drop.classList.remove("over");
+  drop.ondrop = (e) => { e.preventDefault(); drop.classList.remove("over"); addFiles(e.dataTransfer.files); };
+  $("fileInput").onchange = (e) => addFiles(e.target.files);
+  function addFiles(files) {
+    for (const f of files) {
+      const r = new FileReader();
+      r.onload = () => { state.photos.push({ name: f.name, data: r.result, isImage: f.type.startsWith("image/") && !/hei[cf]$/i.test(f.name) }); drawThumbs(); };
+      r.readAsDataURL(f);
+    }
+  }
+  function drawThumbs() {
+    $("thumbs").innerHTML = state.photos.map((p, i) => p.isImage
+      ? `<img src="${p.data}" title="${esc(p.name)} (click to remove)" data-i="${i}">`
+      : `<div class="file" title="click to remove" data-i="${i}">${esc(p.name)}</div>`).join("");
+    for (const el of $("thumbs").children) el.onclick = () => { state.photos.splice(+el.dataset.i, 1); drawThumbs(); };
+  }
+
+  $("setSel").onchange = loadTestset;
+  $("caseFilter").oninput = drawCases;
+  async function loadTestset() {
+    $("caseList").innerHTML = '<div class="muted">loading</div>';
+    try { state.cached = await api(`/api/testset/${$("setSel").value}`); } catch (e) { setStatus(e.message, true); state.cached = []; }
+    state.cachedSel = null; drawCases();
+  }
+  function drawCases() {
+    const q = $("caseFilter").value.toLowerCase();
+    const rows = state.cached.filter((c) => !q || c.id.toLowerCase().includes(q) || (c.category || "").toLowerCase().includes(q));
+    $("caseList").innerHTML = rows.slice(0, 400).map((c) => `<div data-id="${esc(c.id)}" class="${state.cachedSel && state.cachedSel.id === c.id ? "sel" : ""}">${esc(c.category || "?")} · ${esc(c.id)}</div>`).join("") || '<div class="muted">nothing cached</div>';
+    for (const el of $("caseList").children) el.onclick = () => pickCase(el.dataset.id);
+  }
+  function pickCase(id) {
+    state.cachedSel = state.cached.find((c) => c.id === id) || null; drawCases();
+    const c = state.cachedSel; if (!c) return;
+    $("cachedThumbs").innerHTML = c.images.map((u) => `<img src="${u}">`).join("");
+    $("text").value = c.text || ""; $("asking").value = c.asking_ngn || 0;
+    $("keyBox").hidden = false; $("keyBox").open = false;
+    $("keyText").textContent = `${c.answer_key} (site category ${c.category}, asking ${money(c.asking_ngn)} NGN)`;
+  }
+
+  function drawAnswers(questions) {
+    const box = $("answersBox");
+    if (!questions || !questions.length) { box.innerHTML = ""; return; }
+    box.innerHTML = `<h3>The seller's answers</h3><p class="small muted">Only they know these. Answers become claims priced at the worst case until proven.</p>` +
+      questions.map((q) => {
+        const v = esc(state.answers[q.id] || "");
+        let field;
+        if (q.kind === "choice" && q.options.length) field = `<select data-q="${esc(q.id)}"><option value="">not answered</option>${q.options.map((o) => `<option ${o === state.answers[q.id] ? "selected" : ""}>${esc(o)}</option>`).join("")}</select>`;
+        else if (q.kind === "yesno") field = `<select data-q="${esc(q.id)}"><option value="">not answered</option><option ${v === "yes" ? "selected" : ""}>yes</option><option ${v === "no" ? "selected" : ""}>no</option></select>`;
+        else field = `<input type="text" data-q="${esc(q.id)}" value="${v}" placeholder="${esc(q.unit || q.kind)}">`;
+        return `<div class="qa"><span class="small">${esc(q.ask)}</span>${field}</div>`;
+      }).join("");
+    for (const el of box.querySelectorAll("[data-q]")) el.onchange = () => { state.answers[el.dataset.q] = el.value; };
+  }
+
+  function request(preset) {
+    const body = {
+      preset, mode: $("mode").value, tenant: $("tenant").value,
+      text: $("text").value, asking: +$("asking").value || 0, answers: state.answers, label: $("label").value,
+    };
+    if (state.useCached) {
+      if (!state.cachedSel) throw new Error("pick a cached case first");
+      body.case_id = state.cachedSel.id; body.set = state.cachedSel.set;
+      if (body.text === (state.cachedSel.text || "")) body.text = "";
+    } else {
+      if (!state.photos.length) throw new Error("drop at least one photo first");
+      body.photos = state.photos.map((p) => ({ name: p.name, data: p.data }));
+    }
+    return body;
+  }
+
+  async function runOne(preset) {
+    const t0 = performance.now();
+    const data = await api("/api/value", request(preset));
+    data.wall_ms = Math.round(performance.now() - t0);
+    return data;
+  }
+
+  $("runBtn").onclick = async () => {
+    busy(true); setStatus("Reading photos, this takes 10 to 40 seconds live");
+    try { const data = await runOne($("preset").value); show(data); addCompareRow($("preset").value, data); setStatus(`Done in ${data.wall_ms} ms. Live spend $${data.spent_usd.toFixed(4)}.`); }
+    catch (e) { setStatus(e.message, true); }
+    busy(false);
+  };
+  $("compareBtn").onclick = async () => {
+    const ticked = [...document.querySelectorAll("#presetTicks input:checked")].map((i) => i.value);
+    if (!ticked.length) { setStatus("tick at least one preset", true); return; }
+    busy(true);
+    for (const p of ticked) {
+      setStatus(`Running ${p}`);
+      try { const data = await runOne(p); addCompareRow(p, data); show(data); }
+      catch (e) { addCompareRow(p, { error: e.message }); }
+    }
+    setStatus("All ticked presets done."); busy(false);
+  };
+  function busy(on) { $("runBtn").disabled = on; $("compareBtn").disabled = on; }
+
+  // ----- output side -----
+  for (const b of document.querySelectorAll(".tabs button")) b.onclick = () => {
+    for (const x of document.querySelectorAll(".tabs button")) x.classList.toggle("active", x === b);
+    for (const id of ["summary", "report", "json"]) $(id).hidden = id !== b.dataset.tab;
+  };
+
+  function show(d) {
+    state.last = d;
+    $("report").innerHTML = md(d.report || "");
+    $("json").textContent = JSON.stringify(d, null, 2);
+    const q = d.quote || {};
+    const a = d.assessment;
+    let h = `<div class="small muted">${esc(d.case_id)} · reader ${esc(d.reader)} · reasoner ${esc(d.reasoner)} · ${d.latency_ms} ms · $${(d.cost_usd || 0).toFixed(4)} at list, $${(d.spent_usd || 0).toFixed(4)} live${d.folder ? ` · saved to ${esc(d.folder)}` : ""}</div>`;
+    h += `<div class="thumbs">${(d.images || []).map((u) => `<img src="${u}">`).join("")}</div>`;
+    if (q.failure_code) h += `<div class="fail">${esc(q.failure_code)}</div><p>${esc(q.reason || "")}</p>`;
+    else {
+      h += `<div class="price">${money(q.low)} to ${money(q.high)} ${esc(q.currency)}</div>`;
+      h += `<div class="small"><span class="tag">${esc(q.basis)}</span><span class="tag">${esc(q.method)}</span><span class="tag">${q.observation_count} comps</span>${q.floor ? `<span class="tag">floor ${money(q.floor)}</span>` : ""}${q.weight_conditional ? `<span class="tag warn">settled on the scale</span>` : ""}</div>`;
+      h += `<p>${esc(q.explanation || "")}</p>`;
+    }
+    h += `<h3>Identification</h3>`;
+    h += d.identified ? `<p><span class="tag good">identified</span> <b>${esc(d.model_key)}</b> (${esc(d.category)})</p>`
+                      : `<p><span class="tag bad">${esc(d.failure_code || "abstained")}</span> ${esc(d.category || "unknown category")}. ${esc(d.reason || "")}</p>`;
+    if (a) h += `<p><b>${esc(a.sentence)}</b><br><span class="small muted">identification ${a.percent}% (${esc(a.band)}), price ${a.price_confidence}%</span></p><ul class="small">${a.drivers.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>`;
+    if (d.asks && d.asks.length) h += `<h3>Ask the seller for</h3><ol class="small">${d.asks.map((x) => `<li><span class="tag">${esc(x.kind)}</span>${esc(x.ask)} <span class="muted">${esc(x.because)}</span></li>`).join("")}</ol>`;
+    if (d.questions && d.questions.length) h += `<h3>Questions the engine wants answered</h3><p class="small muted">They are now in the form on the left. Fill them in and press Value it again. The photo reads replay for free.</p>`;
+    if (d.answer_notes && d.answer_notes.length) h += `<h3>Checking their answers</h3><ul class="small">${d.answer_notes.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>`;
+    if (q.conditions && q.conditions.length) h += `<h3>Conditions on this price</h3><ul class="small">${q.conditions.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>`;
+    if (d.answer_key) h += `<details><summary>Answer key (never shown to the engine)</summary><pre class="small">${esc(JSON.stringify(d.answer_key, null, 1))}</pre></details>`;
+    $("summary").innerHTML = h;
+    drawAnswers(d.questions);
+  }
+
+  function addCompareRow(preset, d) {
+    const tr = document.createElement("tr");
+    if (d.error && !d.quote) { tr.innerHTML = `<td>${esc(preset)}</td><td colspan="9" class="failv">${esc(d.error)}</td>`; }
+    else {
+      const q = d.quote || {};
+      tr.innerHTML = `<td>${esc(preset)}</td><td>${esc(d.reader)}</td><td>${esc(d.reasoner)}</td><td>${esc(d.category || "")}</td>` +
+        `<td>${d.identified ? esc(d.model_key) : '<span class="muted">no</span>'}</td>` +
+        `<td>${q.failure_code ? "" : `${money(q.low)} to ${money(q.high)}`}</td>` +
+        `<td>${esc(q.failure_code || d.failure_code || "")}</td>` +
+        `<td class="num">${d.assessment ? d.assessment.percent + "%" : ""}</td><td class="num">${(d.cost_usd || 0).toFixed(4)}</td><td class="num">${d.latency_ms || ""}</td>`;
+    }
+    $("compare").querySelector("tbody").prepend(tr);
+  }
+
+  // ----- proof runs -----
+  $("runSel").onchange = drawRun;
+  $("runFilter").oninput = drawRun;
+  function drawRun() {
+    const run = state.runs.find((r) => r.name === $("runSel").value); if (!run) return;
+    const s = run.summary;
+    $("gate").innerHTML = s ? `<table>${run.gate.map((g) => `<tr><td>${esc(g.metric)}</td><td class="num">${esc(g.measured)}</td><td class="num muted">needs ${esc(g.needs)}</td><td class="${g.passed === true ? "pass" : g.passed === false ? "failv" : "muted"}">${g.passed === true ? "PASS" : g.passed === false ? "FAIL" : "no data"}</td></tr>`).join("")}</table>` +
+      `<p class="small muted">${s.cases} cases, silent wrong ${((s.silent_wrong_rate || 0) * 100).toFixed(1)}%, abstained ${((s.abstention_rate || 0) * 100).toFixed(0)}%, $${(s.cost_per_case_usd || 0).toFixed(4)} per case, spent $${(s.spend_usd || 0).toFixed(3)}</p>`
+      : '<p class="small muted">No summary.json: this run did not finish.</p>';
+    const q = $("runFilter").value.toLowerCase();
+    $("runCases").innerHTML = run.cases.filter((c) => !q || c.toLowerCase().includes(q)).map((c) => `<div data-id="${esc(c)}">${esc(c)}</div>`).join("") || '<div class="muted">no case reports</div>';
+    for (const el of $("runCases").children) el.onclick = async () => {
+      for (const x of $("runCases").children) x.classList.toggle("sel", x === el);
+      try { const r = await api(`/api/runs/${encodeURIComponent(run.name)}/cases/${encodeURIComponent(el.dataset.id)}`); $("runReport").innerHTML = md(r.report); }
+      catch (e) { $("runReport").innerHTML = `<p class="failv">${esc(e.message)}</p>`; }
+    };
+  }
+
+  // ----- boot -----
+  (async () => {
+    try {
+      state.meta = await api("/api/meta");
+      const m = state.meta;
+      $("keys").innerHTML = Object.entries(m.keys).map(([k, v]) => `<span class="chip ${v ? "on" : "off"}">${k} key ${v ? "set" : "missing"}</span>`).join("");
+      $("preset").innerHTML = m.presets.map((p) => `<option value="${p.name}" ${p.name === m.default_preset ? "selected" : ""}>${p.name}: ${p.reader} + ${p.reasoner}</option>`).join("") + `<option value="fake">fake: no models, exercises the pipeline for free</option>`;
+      $("presetTicks").innerHTML = m.presets.map((p) => `<label style="display:inline-block;margin:0 10px 0 0"><input type="checkbox" value="${p.name}" ${p.name === "balanced" ? "checked" : ""}> ${p.name}</label>`).join("");
+      $("tenant").innerHTML = m.tenants.map((t) => `<option ${t === "buyscrap_ng" ? "selected" : ""}>${t}</option>`).join("");
+      state.runs = await api("/api/runs");
+      $("runSel").innerHTML = state.runs.map((r) => `<option value="${esc(r.name)}">${esc(r.name)}${r.summary ? "" : " (unfinished)"}</option>`).join("");
+      if (state.runs.length) { $("runSel").value = state.runs[state.runs.length - 1].name; drawRun(); }
+    } catch (e) { setStatus("Could not load: " + e.message, true); }
+  })();
+})();
+</script>
+</body>
+</html>
