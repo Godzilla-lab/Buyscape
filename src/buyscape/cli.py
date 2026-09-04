@@ -23,8 +23,23 @@ app = typer.Typer(add_completion=False, help="Remote valuation engine for second
 console = Console()
 
 ROOT = Path.cwd()
+
+# Named pairs, so a run is one flag. Reading and deciding are different jobs:
+# open Qwen beats Gemini 3 Pro on OCRBench v2 at a fraction of the price, while
+# frontier models earn their cost on identification and on refusing to answer.
+PRESETS: dict[str, tuple[str, str]] = {
+    # Everything frontier. The ceiling, and the answer key for the others.
+    "best": ("anthropic/claude-opus-5", "anthropic/claude-fable-5.1"),
+    # What production should probably ship: cheap reader, frontier decider.
+    "balanced": ("qwen/qwen3-vl-32b-instruct", "anthropic/claude-sonnet-5"),
+    # Same shape, Google end to end. Runs on the free tier.
+    "google": ("gemini-3.8-flash", "gemini-3.8-flash"),
+    # Zero cost, for exercising the pipeline when no budget is available.
+    "free": ("minimax/minimax-m3:free", "minimax/minimax-m3:free"),
+    "cheap": ("qwen/qwen3-vl-32b-instruct", "google/gemini-3.8-flash"),
+}
 DEFAULT_READER = "qwen/qwen3-vl-32b-instruct"
-DEFAULT_REASONER = "google/gemini-3.8-flash"
+DEFAULT_REASONER = "anthropic/claude-sonnet-5"
 
 
 def _provider(model: str, fixtures: Path, mode: str) -> VisionProvider:
@@ -117,6 +132,9 @@ def run(
     raw: Path = typer.Option(Path("eval/raw"), help="Cached test set."),
     prices: Path = typer.Option(Path("eval/prices"), help="Cached comparable prices."),
     out: Path = typer.Option(Path("docs/proof"), help="Where reports are written."),
+    preset: str = typer.Option(
+        "", help=f"Named model pair: {', '.join(PRESETS)}. Overrides reader and reasoner."
+    ),
     reader: str = typer.Option(DEFAULT_READER, help="Tier 1 model, or 'fake'."),
     reasoner: str = typer.Option(DEFAULT_REASONER, help="Tier 2 model, or 'fake'."),
     mode: str = typer.Option("auto", help="record | replay | auto"),
@@ -126,6 +144,12 @@ def run(
     fixtures: Path = typer.Option(Path("eval/fixtures")),
 ) -> None:
     """Run the engine over the test set and write the reports and the gate."""
+    if preset:
+        if preset not in PRESETS:
+            console.print(f"[red]Unknown preset {preset!r}. Choose from: {', '.join(PRESETS)}[/red]")
+            raise typer.Exit(1)
+        reader, reasoner = PRESETS[preset]
+
     protocols = load_protocols(ROOT / "protocols")
     catalogue = load_catalogue(ROOT / "catalogue")
     cases = _load_cases(raw, limit or None, list(category) if category else None)
