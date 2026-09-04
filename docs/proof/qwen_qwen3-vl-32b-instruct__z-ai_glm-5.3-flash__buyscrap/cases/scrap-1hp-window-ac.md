@@ -1,17 +1,17 @@
 # Case scrap-1hp-window-ac
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  76261 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  19692 ms
 
 ## What the engine saw
 - Presentation: single_unit
-- Category: split air conditioner (confidence 0.9)
-- Made of: steel 40%, copper 20%, plastic 20%, circuit_board 10%, rubber 10%
-- Estimated weight: 35.0 kg (confidence 0.7)
+- Category: split air conditioner (confidence 0.95)
+- Made of: steel 60%, copper_bare 20%, plastic 15%, circuit_board 5%
+- Estimated weight: 25.0 kg (confidence 0.8)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: damaged casing with missing front panel, exposed internal components including wiring and coils, dust and grime on condenser coils, loose wires and damaged insulation visible
+- Damage noted: unit is disassembled, exposed internal components, dusty and dirty coils, missing front panel, wires exposed, some corrosion on metal parts
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 
@@ -75,11 +75,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Open the front grille of the indoor unit and photograph the filters and coil.
 
 ## Price
-**36,416 to 104,510 NGN** (priced as material, width 0.9664, method material_floor, 0 comparable prices)
+**26,576 to 75,925 NGN** (priced as material, width 0.9629, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 35 kg of steel 40%, copper 20%, plastic 20%, circuit_board 10%, rubber 10% (rates for plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 25 kg of steel 60%, copper_bare 20%, plastic 15%, circuit_board 5% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 80,675 NGN
+Scrap floor: 58,875 NGN
 
 Conditions attached to this price:
 - Not identified: No label, plate or branding is legible; any brand/model assignment would be a guess. Only a generic window AC chassis is visible.

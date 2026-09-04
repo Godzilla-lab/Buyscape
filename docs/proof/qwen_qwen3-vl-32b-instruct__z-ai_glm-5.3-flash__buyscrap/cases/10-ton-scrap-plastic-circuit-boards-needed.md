@@ -1,22 +1,22 @@
 # Case 10-ton-scrap-plastic-circuit-boards-needed
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0013  |  75530 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  10540 ms
 
 ## What the engine saw
 - Presentation: mixed_lot
 - Category: electronic waste (confidence 1.0)
-- Made of: circuit_board 80%, plastic 15%, copper 5%
+- Made of: circuit_board 60%, plastic 30%, copper_bare 10%
 - Estimated weight: 50.0 kg (confidence 0.7)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: none
+- Damage noted: broken circuit boards, various components detached or damaged
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 
 ## Chain
-- **corroborate** -> agree. nothing identifying was read by either
+- **corroborate** -> unavailable. openrouter:mistralai/mistral-small-3.2-24b-instruct failed after retries: 'choices'
 - **read_evidence** -> ok. category=electronic waste brand=None model=None label=False lines=0
 - **gate** -> lot. priced by material, identification skipped
 - **weight** -> stated. 10000 kg from the seller's words
@@ -33,7 +33,7 @@ No catalogue candidates matched.
 - Price confidence: 14%
 - This is a mixed lot, so it is priced by material and weight rather than identified.
 - no label, plate or settings screen was legible
-- the two readers agreed on nothing legible
+- only one reader saw these photos, the second was unavailable
 - 13 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -41,19 +41,19 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 ## What the seller is asked for next (shown in the app)
 1. [PHOTO] Photograph one item on its own, with nothing else in the picture.
    _why: the photos show more than one item_
-2. [PHOTO] Close-up of any label, sticker or metal plate showing the brand and model.
-   _why: nothing on the item says which model this is_
+2. [PHOTO] Move closer and photograph any label, sticker or plate so the writing is sharp.
+   _why: no label was legible in the photos sent so far_
 
 ## What the seller is asked (only they know these)
-- How much of it is there? Give the weight in kilogrammes or tons if you know it.
-- Does it still work?
-- Roughly how old is it, in years?
+- How much is there? Give kilogrammes or tons.
+- Is the metal bare, or still covered in plastic, paint or rubber?
+- Is it all one material, or mixed with other things?
+- Does a magnet stick to it?
 
 ## Claims
 - [unverifiable_remote] The company is seeking to purchase 10 ton (10,000 kg) of scrap plastic circuit boards (PCBs).
     priced as: 70 percent of the stated weight. Weigh on the scale and photograph the display
 - [unverifiable_remote] The material required is plastic circuit boards (PCBs).
-    priced as: 70 percent of the stated weight. Weigh on the scale and photograph the display
 - [unverifiable_remote] The PCBs must be extracted from condemned or non-functional electronic devices.
 - [unverifiable_remote] Acceptable sources include laptops, desktop computers, mobile phones, televisions, and other electronic devices containing PCBs.
 - [unverifiable_remote] Scrap, non-functional, or damaged PCBs are acceptable.
@@ -62,27 +62,27 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 - [unverifiable_remote] Photographs of the PCBs are requested if available.
 - [unverifiable_remote] Pricing will be negotiated based on quality and quantity.
 - [unverified] Required evidence 'code_shot' was not supplied
-    priced as: priced as if the worst case is true. Write the code {code} on a piece of paper and take one photo with the paper next to the item.
-- [unverified] Required evidence 'overview' was not supplied
-    priced as: priced as if the worst case is true. One photo showing the whole item.
-- [unverified] Required evidence 'label_or_plate' was not supplied
-    priced as: priced as if the worst case is true. Close-up of any label, sticker or metal plate showing the brand and model.
-- [unverified] Required evidence 'description' was not supplied
-    priced as: priced as if the worst case is true. Tell us what it is, whether it works, and roughly how heavy it is.
+    priced as: priced as if the worst case is true. Write the code {code} on paper and take one photo with the paper next to the pile.
+- [unverified] Required evidence 'whole_pile' was not supplied
+    priced as: priced as if the worst case is true. One photo of the whole quantity, with a person or a car in shot so its size is clear.
+- [unverified] Required evidence 'material_closeup' was not supplied
+    priced as: priced as if the worst case is true. Close-up of the material itself, close enough to see whether it is bare metal, coated, painted or still in its covering.
+- [unverified] Required evidence 'magnet_test' was not supplied
+    priced as: priced as if the worst case is true. Hold a fridge magnet against it and photograph it. Say whether the magnet sticks.
 
 ## Price
-**3,465,000 to 14,770,000 NGN** (priced as material, width 1.2399, method material_floor, 0 comparable prices)
+**5,712,330 to 19,540,000 NGN** (priced as material, width 1.0952, method material_floor, 0 comparable prices)
 
 The weight is estimated from the photos, so this price is settled on the scale at pickup.
 
-This item was not identified, so it is priced as material rather than as a working item: 10000 kg of circuit_board 80%, plastic 15%, copper 5% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 10000 kg of circuit_board 60%, plastic 30%, copper_bare 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 11,550,000 NGN
+Scrap floor: 15,100,000 NGN
 
 Conditions attached to this price:
 - Not identified: This is a mixed lot, so it is priced by material and weight rather than identified.
 - The company is seeking to purchase 10 ton (10,000 kg) of scrap plastic circuit boards (PCBs). -> not proven remotely. Weigh on the scale and photograph the display.
-- The material required is plastic circuit boards (PCBs). -> not proven remotely. Weigh on the scale and photograph the display.
+- The material required is plastic circuit boards (PCBs). -> not proven remotely. Agent will confirm at pickup.
 - The PCBs must be extracted from condemned or non-functional electronic devices. -> not proven remotely. Agent will confirm at pickup.
 - Acceptable sources include laptops, desktop computers, mobile phones, televisions, and other electronic devices containing PCBs. -> not proven remotely. Agent will confirm at pickup.
 - Scrap, non-functional, or damaged PCBs are acceptable. -> not proven remotely. Agent will confirm at pickup.
@@ -90,10 +90,10 @@ Conditions attached to this price:
 - Suppliers from other locations within Nigeria are also considered. -> not proven remotely. Agent will confirm at pickup.
 - Photographs of the PCBs are requested if available. -> not proven remotely. Agent will confirm at pickup.
 - Pricing will be negotiated based on quality and quantity. -> not proven remotely. Agent will confirm at pickup.
-- Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on a piece of paper and take one photo with the paper next to the item..
-- Required evidence 'overview' was not supplied -> not proven remotely. One photo showing the whole item..
-- Required evidence 'label_or_plate' was not supplied -> not proven remotely. Close-up of any label, sticker or metal plate showing the brand and model..
-- Required evidence 'description' was not supplied -> not proven remotely. Tell us what it is, whether it works, and roughly how heavy it is..
+- Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on paper and take one photo with the paper next to the pile..
+- Required evidence 'whole_pile' was not supplied -> not proven remotely. One photo of the whole quantity, with a person or a car in shot so its size is clear..
+- Required evidence 'material_closeup' was not supplied -> not proven remotely. Close-up of the material itself, close enough to see whether it is bare metal, coated, painted or still in its covering..
+- Required evidence 'magnet_test' was not supplied -> not proven remotely. Hold a fridge magnet against it and photograph it. Say whether the magnet sticks..
 
 ## Answer key (not shown to the engine)
 `{'title': '10 Ton Scrap Plastic Circuit Boards Needed', 'category': None, 'site_category': 'E-waste', 'price_ngn': 10000000, 'is_used': True, 'url': 'https://www.buyscrap.com.ng/10-ton-scrap-plastic-circuit-boards-needed/'}`

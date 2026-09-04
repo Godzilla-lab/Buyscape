@@ -1,24 +1,29 @@
 # Case plastic-paint-rubbers-5l-21-pieces
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  13594 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  22856 ms
 
 ## What the engine saw
 - Presentation: mixed_lot
 - Category: paint_buckets (confidence 0.95)
 - Made of: plastic 90%, paint 10%
 - Estimated weight: 50.0 kg (confidence 0.7)
-- Brand read off the item: FINECOAT
-- Model read off the item: P.O.P
+- Brand read off the item: nothing legible
+- Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: paint splatters on buckets, dust and grime on surfaces, some lids are missing or damaged
+- Damage noted: paint splatters on buckets, dusty and dirty surfaces, some lids missing or damaged
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: FINECOAT P.O.P EMULSION PAINT | EAGLE PAINTS SUPERCOTE | EAGLE PAINTS
+- Text read: FINECOAT P.O.P EMULSION PAINT
+
+## Two readers
+- brand_text was seen by only one reader, so it is treated as unread
+- model_text was seen by only one reader, so it is treated as unread
+- 2 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## Chain
-- **corroborate** -> unavailable. no fixture for task=read_evidence key=c7e0a2a7735b284ee337e2ab53539173 (model=mistralai/mistral-small-3.2-24b-instruct);
-- **read_evidence** -> ok. category=paint_buckets brand=FINECOAT model=P.O.P label=True lines=3
+- **corroborate** -> dispute. brand_text was seen by only one reader, so it is treated as unread; model_text was seen by only one reader, so it is treated as unread; 2 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=paint_buckets brand=None model=None label=True lines=1
 - **gate** -> lot. priced by material, identification skipped
 
 ## Identification
@@ -33,7 +38,7 @@ No catalogue candidates matched.
 - Price confidence: 14%
 - This is a mixed lot, so it is priced by material and weight rather than identified.
 - read off the item's own label
-- only one reader saw these photos, the second was unavailable
+- 1 lines seen by both readers
 - 11 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -41,7 +46,9 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 ## What the seller is asked for next (shown in the app)
 1. [PHOTO] Photograph one item on its own, with nothing else in the picture.
    _why: the photos show more than one item_
-2. [PHOTO] Close-up of any label, sticker or metal plate showing the brand and model.
+2. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: Close-up of any label, sticker or metal plate showing the brand and model. Then, without stopping the video: If it opens without tools, open it and photograph the inside. Keep filming the whole time. Do not cut between clips.
+   _why: two readings of these photos disagreed about what is written on the item_
+3. [PHOTO] Close-up of any label, sticker or metal plate showing the brand and model.
    _why: nothing on the item says which model this is_
 
 ## What the seller is asked (only they know these)

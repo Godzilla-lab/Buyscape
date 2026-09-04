@@ -1,0 +1,115 @@
+# BuyScrap Nigeria, tenant one. This file is the whole of what makes the
+# engine theirs: their categories, the protocol each one collects evidence
+# under, and the material each defaults to when nothing is identified.
+# Onboarding a second business is another file like this one and nothing else.
+tenant: buyscrap_ng
+display_name: BuyScrap Nigeria
+currency: NGN
+scrap_index: scrap_index_lagos.yaml
+
+# The categories as they appear on the tenant's own site, in their words.
+# `material` is what a lot of it is made of when nobody can identify the item,
+# which is how most of what they buy is priced.
+categories:
+  - name: Aluminium
+    protocol: material_lot
+    material: aluminium
+  - name: Brass
+    protocol: material_lot
+    material: brass
+  - name: Carton
+    protocol: material_lot
+    material: carton
+  - name: Copper
+    protocol: material_lot
+    # Deliberately the covered grade. Bare copper is four times the price and
+    # is never assumed: the agent cuts a sample before that rate is paid.
+    material: copper_insulated
+  - name: E-waste
+    protocol: material_lot
+    material: mixed_electronic
+  - name: Fabrics and Textiles
+    protocol: material_lot
+    material: textile
+  - name: Food Waste
+    protocol: material_lot
+    material: food_waste
+  - name: Glass
+    protocol: material_lot
+    material: glass
+  - name: Glass Bottles
+    protocol: material_lot
+    material: glass
+  - name: Industrial Machines
+    protocol: generic
+    material: steel
+  - name: Iron
+    protocol: material_lot
+    material: iron
+  - name: Office Chair
+    protocol: generic
+    material: steel
+  - name: Old Newspapers
+    protocol: material_lot
+    material: paper
+  - name: Papers
+    protocol: material_lot
+    material: paper
+  - name: Plastic and Rubbers
+    protocol: material_lot
+    material: plastic
+  - name: Premium
+    protocol: generic
+    material: unknown
+  - name: Scrap Car
+    protocol: vehicle
+    material: steel
+  - name: Scrap Vehicles
+    protocol: vehicle
+    material: steel
+  - name: Used Books
+    protocol: material_lot
+    material: paper
+  - name: Wood and Furnitures
+    protocol: generic
+    material: wood
+
+# Prices the tenant has published on their own blog. Sourced and dated like
+# any other observation, and applied as a floor: the engine may quote more
+# than this, never less, because the business has said in public it pays it.
+minimums:
+  source: buyscrap_blog
+  observed_on: 2025-01-01
+  url: https://www.buyscrap.com.ng/blog/where-to-sell-old-and-scrap-laptops-in-nigeria-for-cash/
+  # "We buy scrap laptops starting from 5,000 naira per piece with options of
+  # selling per kg for users that want to sell in bulk."
+  per_item:
+    laptop: 5000
+
+# Things this tenant will not buy at any price. A refusal is an outcome, not a
+# low number, so the quote says so and no agent is sent.
+refuses:
+  - match: brass shell
+    because: "BuyScrap does not purchase brass shells."
+    url: https://www.buyscrap.com.ng/blog/understanding-the-different-types-of-brass-scrap-in-nigeria/
+  - match: ammunition
+    because: "Spent ammunition casings are not purchased."
+  - match: shell casing
+    because: "Spent ammunition casings are not purchased."
+
+# The tenant's own grade names, from their brass guide. Copper content drives
+# the price, so the agent grades against these words and not against ours.
+grades:
+  brass:
+    - name: red brass
+      also: ebony
+      copper_pct: 85
+    - name: hard brass
+      also: engel
+      copper_pct: 75
+    - name: yellow brass
+      also: honey
+      copper_pct: 70
+    - name: brass turnings
+      also: enerv
+      copper_pct: 65

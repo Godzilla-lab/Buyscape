@@ -1,23 +1,23 @@
 # Case scrap-shower-cubicle-with-glass-for-bathroom
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  14860 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  12163 ms
 
 ## What the engine saw
 - Presentation: mixed_lot
-- Category: septic_tank_components (confidence 0.8)
+- Category: septic_tank_or_concrete_structure (confidence 0.8)
 - Made of: concrete 70%, steel 20%, plastic 10%
 - Estimated weight: 50.0 kg (confidence 0.6)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: dusty surface, minor dirt and grime, one unit shows slight chipping on edge
+- Damage noted: dust and grime on surface, cracks visible in concrete wall
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 
 ## Chain
 - **corroborate** -> agree. nothing identifying was read by either
-- **read_evidence** -> ok. category=septic_tank_components brand=None model=None label=False lines=0
+- **read_evidence** -> ok. category=septic_tank_or_concrete_structure brand=None model=None label=False lines=0
 - **gate** -> lot. priced by material, identification skipped
 
 ## Identification

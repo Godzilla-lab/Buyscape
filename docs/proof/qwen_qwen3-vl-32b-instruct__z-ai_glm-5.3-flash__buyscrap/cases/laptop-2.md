@@ -1,6 +1,6 @@
 # Case laptop-2
 
-Photos: 2  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  19940 ms
+Photos: 2  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  25408 ms
 
 ## What the engine saw
 - Presentation: single_unit
@@ -11,7 +11,7 @@ Photos: 2  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: screen reflection obscures details, no visible cracks or dents, keyboard and touchpad appear intact
+- Damage noted: screen reflection obscures details, keyboard and palm rest show minor wear
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
 - Text read: Windows 7 | Intel Inside
@@ -77,7 +77,7 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Screenshot of System Information (Windows) or About This Mac, showing the model, processor, RAM and storage.
 
 ## Price
-**680 to 1,570 NGN** (priced as material, width 0.79, method material_floor, 0 comparable prices)
+**5,000 to 5,000 NGN** (priced as material, width 0.0, method material_floor, 0 comparable prices)
 
 This item was not identified, so it is priced as material rather than as a working item: 2.5 kg of plastic 60%, steel 20%, circuit_board 10%, aluminium 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
@@ -86,6 +86,7 @@ Scrap floor: 1,100 NGN
 Conditions attached to this price:
 - Not identified: Item is an ASUS laptop (logo visible) but no model name/number is legible; the only shortlist entry, a phone, does not match.
 - Evidence flag: looks like a catalogue or stock image
+- Raised to the 5,000 NGN minimum this business publishes for this kind of item.
 - Battery is bad -> not proven remotely. Agent unplugs the charger and watches the battery for two minutes.
 - Every other part is Ohk -> not proven remotely. Agent will confirm at pickup.
 - Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on paper and take one photo with the paper next to the laptop..

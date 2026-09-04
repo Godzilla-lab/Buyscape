@@ -1,6 +1,6 @@
 # Case old-rectangular-black-tempered-glass-center-table
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  21770 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  22089 ms
 
 ## What the engine saw
 - Presentation: single_unit
@@ -42,36 +42,33 @@ Shortlist from the catalogue:
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
 
 ## What the seller is asked for next (shown in the app)
-1. [PHOTO] Close-up of any label, sticker or metal plate showing the brand and model.
-   _why: nothing on the item says which model this is_
+1. [PHOTO] Move closer and photograph any label, sticker or plate so the writing is sharp.
+   _why: no label was legible in the photos sent so far_
 
 ## What the seller is asked (only they know these)
-- How much of it is there? Give the weight in kilogrammes or tons if you know it.
-- Does it still work?
-- Roughly how old is it, in years?
+- How much is there? Give kilogrammes or tons.
+- Is the metal bare, or still covered in plastic, paint or rubber?
+- Is it all one material, or mixed with other things?
+- Does a magnet stick to it?
 
 ## Claims
 - [unverifiable_remote] Old rectangular black tempered glass center table
-    priced as: 70 percent of the stated weight. Weigh on the scale and photograph the display
-- [unverifiable_remote] Old rectangular black tempered glass center table
-    priced as: 70 percent of the stated weight. Weigh on the scale and photograph the display
-- [unverifiable_remote] Old rectangular black tempered glass center table
-    priced as: 70 percent of the stated weight. Weigh on the scale and photograph the display
 - [unverifiable_remote] Old rectangular black tempered glass center table
 - [unverifiable_remote] Old rectangular black tempered glass center table
-    priced as: 70 percent of the stated weight. Weigh on the scale and photograph the display
+- [unverifiable_remote] Old rectangular black tempered glass center table
+- [unverifiable_remote] Old rectangular black tempered glass center table
 - [unverifiable_remote] Legs for standing the tape are not included
 - [unverified] Required evidence 'code_shot' was not supplied
-    priced as: priced as if the worst case is true. Write the code {code} on a piece of paper and take one photo with the paper next to the item.
-- [unverified] Required evidence 'overview' was not supplied
-    priced as: priced as if the worst case is true. One photo showing the whole item.
-- [unverified] Required evidence 'label_or_plate' was not supplied
-    priced as: priced as if the worst case is true. Close-up of any label, sticker or metal plate showing the brand and model.
-- [unverified] Required evidence 'description' was not supplied
-    priced as: priced as if the worst case is true. Tell us what it is, whether it works, and roughly how heavy it is.
+    priced as: priced as if the worst case is true. Write the code {code} on paper and take one photo with the paper next to the pile.
+- [unverified] Required evidence 'whole_pile' was not supplied
+    priced as: priced as if the worst case is true. One photo of the whole quantity, with a person or a car in shot so its size is clear.
+- [unverified] Required evidence 'material_closeup' was not supplied
+    priced as: priced as if the worst case is true. Close-up of the material itself, close enough to see whether it is bare metal, coated, painted or still in its covering.
+- [unverified] Required evidence 'magnet_test' was not supplied
+    priced as: priced as if the worst case is true. Hold a fridge magnet against it and photograph it. Say whether the magnet sticks.
 
 ## Price
-**102 to 525 NGN** (priced as material, width 1.3493, method material_floor, 0 comparable prices)
+**203 to 525 NGN** (priced as material, width 0.8824, method material_floor, 0 comparable prices)
 
 This item was not identified, so it is priced as material rather than as a working item: 5 kg of glass 90%, steel 10% (rates for glass are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
@@ -79,16 +76,16 @@ Scrap floor: 340 NGN
 
 Conditions attached to this price:
 - Not identified: No label, plate or settings screen was legible, and the visual match alone scored only 0.8.
-- Old rectangular black tempered glass center table -> not proven remotely. Weigh on the scale and photograph the display.
-- Old rectangular black tempered glass center table -> not proven remotely. Weigh on the scale and photograph the display.
-- Old rectangular black tempered glass center table -> not proven remotely. Weigh on the scale and photograph the display.
 - Old rectangular black tempered glass center table -> not proven remotely. Agent will confirm at pickup.
-- Old rectangular black tempered glass center table -> not proven remotely. Weigh on the scale and photograph the display.
+- Old rectangular black tempered glass center table -> not proven remotely. Agent will confirm at pickup.
+- Old rectangular black tempered glass center table -> not proven remotely. Agent will confirm at pickup.
+- Old rectangular black tempered glass center table -> not proven remotely. Agent will confirm at pickup.
+- Old rectangular black tempered glass center table -> not proven remotely. Agent will confirm at pickup.
 - Legs for standing the tape are not included -> not proven remotely. Agent will confirm at pickup.
-- Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on a piece of paper and take one photo with the paper next to the item..
-- Required evidence 'overview' was not supplied -> not proven remotely. One photo showing the whole item..
-- Required evidence 'label_or_plate' was not supplied -> not proven remotely. Close-up of any label, sticker or metal plate showing the brand and model..
-- Required evidence 'description' was not supplied -> not proven remotely. Tell us what it is, whether it works, and roughly how heavy it is..
+- Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on paper and take one photo with the paper next to the pile..
+- Required evidence 'whole_pile' was not supplied -> not proven remotely. One photo of the whole quantity, with a person or a car in shot so its size is clear..
+- Required evidence 'material_closeup' was not supplied -> not proven remotely. Close-up of the material itself, close enough to see whether it is bare metal, coated, painted or still in its covering..
+- Required evidence 'magnet_test' was not supplied -> not proven remotely. Hold a fridge magnet against it and photograph it. Say whether the magnet sticks..
 
 ## Answer key (not shown to the engine)
 `{'title': 'Old rectangular black tempered glass center table', 'category': None, 'site_category': 'Glass', 'price_ngn': 10000, 'is_used': True, 'url': 'https://www.buyscrap.com.ng/old-rectangular-black-tempered-glass-center-table/'}`

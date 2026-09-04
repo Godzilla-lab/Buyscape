@@ -1,22 +1,22 @@
 # Case scrap-split-ac-condenser-unit
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0007  |  13993 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  22496 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: split air conditioner (confidence 0.9)
-- Made of: steel 60%, plastic 30%, copper 10%
+- Made of: steel 60%, plastic 30%, copper_bare 10%
 - Estimated weight: 25.0 kg (confidence 0.7)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: dusty surface, grime on casing, coils appear dirty
+- Damage noted: dusty surface, grime on top and sides, dark interior grilles appear dirty
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 
 ## Chain
-- **corroborate** -> unavailable. no fixture for task=read_evidence key=b4f66aff355429e73af273f4b6bfd18c (model=mistralai/mistral-small-3.2-24b-instruct);
+- **corroborate** -> agree. nothing identifying was read by either
 - **read_evidence** -> ok. category=split air conditioner brand=None model=None label=False lines=0
 - **retrieval** -> ok. query='A scrap split AC condenser unit is available for sale. Location: Agege, Lagos State Price:' hits=['Infinix Note 50', 'Tecno Camon 50', 'Infinix Hot 50', 'Infinix Note 30', 'Infinix Note 40']
 - **identify** -> refused. chosen=None None margin=None
@@ -39,7 +39,7 @@ Shortlist from the catalogue:
 - Price confidence: 18%
 - Item is a split AC condenser unit; the shortlist contains only phones, none of which fit, and no legible label identifies any brand or model.
 - no label, plate or settings screen was legible
-- only one reader saw these photos, the second was unavailable
+- the two readers agreed on nothing legible
 - 8 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -73,7 +73,7 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 ## Price
 **17,659 to 42,850 NGN** (priced as material, width 0.8326, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 25 kg of steel 60%, plastic 30%, copper 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 25 kg of steel 60%, plastic 30%, copper_bare 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
 Scrap floor: 33,250 NGN
 

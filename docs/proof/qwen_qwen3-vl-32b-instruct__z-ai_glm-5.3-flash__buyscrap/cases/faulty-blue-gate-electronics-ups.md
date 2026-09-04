@@ -1,17 +1,17 @@
 # Case faulty-blue-gate-electronics-ups
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  36853 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  25217 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: power_supply_or_adapter (confidence 0.7)
-- Made of: plastic 70%, circuit_board 20%, steel 10%
+- Made of: plastic 70%, circuit_board 20%, copper_insulated 10%
 - Estimated weight: 0.8 kg (confidence 0.6)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: dust and debris on surface, cables tangled around unit
+- Damage noted: surface has white specks or dust, wires are tangled and appear worn
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 - Text read: BLUE G T
@@ -68,11 +68,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Tell us what it is, whether it works, and roughly how heavy it is.
 
 ## Price
-**81 to 308 NGN** (priced as material, width 1.1628, method material_floor, 0 comparable prices)
+**140 to 500 NGN** (priced as material, width 1.1255, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 0.8 kg of plastic 70%, circuit_board 20%, steel 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 0.8 kg of plastic 70%, circuit_board 20%, copper_insulated 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 224 NGN
+Scrap floor: 384 NGN
 
 Conditions attached to this price:
 - Not identified: Item appears to be a Blue Gate UPS, but no model or rating text is legible and the shortlist contains only phones, so no catalogue entry fits.

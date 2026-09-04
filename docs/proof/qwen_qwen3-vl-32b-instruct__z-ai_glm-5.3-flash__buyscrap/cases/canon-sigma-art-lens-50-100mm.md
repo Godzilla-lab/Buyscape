@@ -1,6 +1,6 @@
 # Case canon-sigma-art-lens-50-100mm
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  16924 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  17996 ms
 
 ## What the engine saw
 - Presentation: single_unit
@@ -10,8 +10,8 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
-- Label, plate or settings screen legible: yes
-- Damage noted: minor scuffs and wear on the barrel, some dust or smudges on the surface
+- Label, plate or settings screen legible: no
+- Damage noted: minor scuffs on barrel, some dust on surface
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 
@@ -23,7 +23,7 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **corroborate** -> dispute. brand_text was seen by only one reader, so it is treated as unread; model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; 2 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=camera lens brand=None model=None label=True lines=0
+- **read_evidence** -> ok. category=camera lens brand=None model=None label=False lines=0
 - **retrieval** -> empty. query='It Has flex problem but I want to do away with it as scrap. Interested buyer please contac' hits=[]
 - **gate** -> abstain. no candidates and no model text
 
@@ -38,7 +38,7 @@ No catalogue candidates matched.
 - Identification confidence: 0% (unknown)
 - Price confidence: 22%
 - No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.
-- read off the item's own label
+- no label, plate or settings screen was legible
 - the two readers agreed on nothing legible
 - 6 claims are still unproven, 0 are supported
 

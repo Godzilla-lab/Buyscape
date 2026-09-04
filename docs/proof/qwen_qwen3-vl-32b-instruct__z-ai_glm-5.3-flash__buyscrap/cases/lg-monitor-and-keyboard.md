@@ -1,6 +1,6 @@
 # Case lg-monitor-and-keyboard
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  69002 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  13051 ms
 
 ## What the engine saw
 - Presentation: single_unit
@@ -11,7 +11,7 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: screen is dusty and smudged, keyboard has worn keys and some missing keycaps, monitor stand shows dust and minor wear
+- Damage noted: screen is dusty and smudged, keyboard has worn keys and visible dirt, monitor stand shows dust and minor scuffs
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 - Text read: LG

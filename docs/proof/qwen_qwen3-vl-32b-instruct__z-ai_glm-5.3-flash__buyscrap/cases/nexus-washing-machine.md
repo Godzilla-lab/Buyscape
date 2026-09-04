@@ -1,6 +1,6 @@
 # Case nexus-washing-machine
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  21641 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  19246 ms
 
 ## What the engine saw
 - Presentation: single_unit

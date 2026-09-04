@@ -1,32 +1,32 @@
 # Case plastic-paint-rubbers-20l-51-pieces
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0016  |  110091 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0013  |  43238 ms
 
 ## What the engine saw
 - Presentation: mixed_lot
-- Category: paint_buckets (confidence 0.95)
+- Category: paint (confidence 0.95)
 - Made of: plastic 70%, steel 20%, paper 10%
 - Estimated weight: 45.0 kg (confidence 0.8)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: Paint splatters on bucket surfaces and handles, Some labels are partially torn or obscured, Buckets stacked, some showing signs of use or handling damage, Cardboard sheets on floor show paint stains
+- Damage noted: paint splatters on cans and lids, some labels are torn or partially obscured, cans stacked, some show dents and wear
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: Dulux TRADE | WEATHERSHIELD SMOOTH MASONRY PAINT | 5 L | Recyclable
+- Text read: Dulux TRADE | WEATHERSHIELD SMOOTH MASONRY PAINT | 5 L | 5L | Dulux | 5 L | 5 L | Dulux TRADE
 
 ## Two readers
 - brand_text agreed by both readers
-- rating_text differed between the two readers, so it is treated as unread
+- rating_text agreed by both readers
 - model_text was seen by only one reader, so it is treated as unread
-- 49 transcribed lines was seen by only one reader, so it is treated as unread
+- 9 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## Chain
-- **corroborate** -> dispute. brand_text agreed by both readers; rating_text differed between the two readers, so it is treated as unread; model_text was seen by only one reader, so it is treated as unread; 49 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=paint_buckets brand=Dulux Trade model=None label=True lines=4
-- **grounding** -> dropped. brand
-- **forensics** -> flag. the reader stated brand it could not point to in the photos
+- **corroborate** -> dispute. brand_text agreed by both readers; rating_text agreed by both readers; model_text was seen by only one reader, so it is treated as unread; 9 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=paint brand=Dulux Trade model=None label=True lines=10
+- **grounding** -> dropped. brand, rating
+- **forensics** -> flag. the reader stated brand, rating it could not point to in the photos
 - **gate** -> lot. priced by material, identification skipped
 
 ## Identification
@@ -34,7 +34,7 @@ No catalogue candidates matched.
 
 **Not identified: CANNOT_IDENTIFY.** This is a mixed lot, so it is priced by material and weight rather than identified.
 
-Evidence flags: the reader stated brand it could not point to in the photos
+Evidence flags: the reader stated brand, rating it could not point to in the photos
 
 ## How sure the engine is (back office)
 **0%: the photos do not say what this is.**
@@ -43,8 +43,8 @@ Evidence flags: the reader stated brand it could not point to in the photos
 - Price confidence: 14%
 - This is a mixed lot, so it is priced by material and weight rather than identified.
 - read off the item's own label
-- 4 lines seen by both readers
-- the reader stated brand it could not point to in the photos
+- 10 lines seen by both readers
+- the reader stated brand, rating it could not point to in the photos
 - 11 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -90,7 +90,7 @@ Scrap floor: 7,920 NGN
 
 Conditions attached to this price:
 - Not identified: This is a mixed lot, so it is priced by material and weight rather than identified.
-- Evidence flag: the reader stated brand it could not point to in the photos
+- Evidence flag: the reader stated brand, rating it could not point to in the photos
 - Quantity: 51 pieces -> not proven remotely. Weigh on the scale and photograph the display.
 - Paint rubber size: 20 Litres (L) -> not proven remotely. Weigh on the scale and photograph the display.
 - Condition: Slightly Used -> not proven remotely. Agent will confirm at pickup.

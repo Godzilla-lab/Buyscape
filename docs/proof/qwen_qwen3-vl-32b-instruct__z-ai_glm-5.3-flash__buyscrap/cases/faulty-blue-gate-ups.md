@@ -1,6 +1,6 @@
 # Case faulty-blue-gate-ups
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0013  |  59333 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0013  |  26134 ms
 
 ## What the engine saw
 - Presentation: single_unit
@@ -11,7 +11,7 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: dusty surface, minor scuffs on casing
+- Damage noted: dusty surface, no visible damage
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 - Text read: BLUE GATE

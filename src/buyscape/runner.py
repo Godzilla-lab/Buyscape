@@ -26,6 +26,7 @@ from .pricing.sources import (
     parse_stated_weight_kg,
 )
 from .protocols.schema import Protocol, resolve
+from .tenant import Tenant
 from .providers.base import CostMeter, ImageRef, MissingFixture, ProviderError, VisionProvider
 from .providers.tasks import extract_claims
 
@@ -86,6 +87,7 @@ def run_case(
     reasoner: VisionProvider,
     materials: MaterialsFloor | None = None,
     corroborator: VisionProvider | None = None,
+    tenant: Tenant | None = None,
 ) -> CaseResult:
     meter = CostMeter()
     images = tuple(ImageRef(p) for p in case.images)
@@ -122,9 +124,12 @@ def run_case(
     # to send every 'portable generator' to the generic protocol, and with it
     # went the rating plate and winding photos that price the thing.
     category = result.category or case.category_hint or "generic"
-    protocol = resolve(protocols, category) if result.category else (
-        protocols.get(category) or protocols["generic"]
-    )
+    if tenant is not None and result.category:
+        protocol = tenant.protocol_for(protocols, category)
+    elif result.category:
+        protocol = resolve(protocols, category)
+    else:
+        protocol = protocols.get(category) or protocols["generic"]
     category = protocol.category
 
     # The item's own testimony, checked against itself, against the identity
@@ -281,6 +286,36 @@ def run_case(
             identified=identified,
             weight_confident=weight_confident,
         )
+    # What this business will not buy at any price, in their own published
+    # words. A refusal is an outcome: quoting a small number for something
+    # nobody will collect wastes the agent's day and the seller's.
+    if tenant is not None:
+        spoken = " ".join(
+            filter(None, [result.category, case.seller_text, *(reading.visible_text if reading else [])])
+        )
+        refusal = tenant.refusal(spoken)
+        if refusal is not None:
+            quote = Quote(
+                failure_code="NOT_PURCHASED",
+                reason=refusal.because,
+                conditions=[f"{refusal.because} Source: {refusal.url or 'tenant policy'}"],
+            )
+        else:
+            floor_price = tenant.minimum_for(category)
+            if (
+                floor_price
+                and not quote.is_failure
+                and result.presentation == "single_unit"
+                and (quote.high or 0) < floor_price
+            ):
+                quote.low = round(max(quote.low or 0.0, floor_price), 2)
+                quote.high = round(floor_price, 2)
+                quote.conditions.insert(
+                    0,
+                    f"Raised to the {floor_price:,.0f} {quote.currency} minimum this "
+                    "business publishes for this kind of item.",
+                )
+
     quote = cap_at_asking(quote, case.asking_price)
     if soft_flags:
         quote.conditions = [f"Evidence flag: {f}" for f in soft_flags] + quote.conditions

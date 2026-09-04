@@ -1,37 +1,40 @@
 # Case 10-tons-of-scrap-titanium-boards-required-in-nigeria-and-china
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  57179 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  23060 ms
 
 ## What the engine saw
-- Presentation: mixed_lot
+- Presentation: single_unit
 - Category: metal plate (confidence 0.9)
-- Made of: steel 90%, unknown 10%
-- Estimated weight: 25.0 kg (confidence 0.7)
+- Made of: steel 90%, plastic 10%
+- Estimated weight: 15.0 kg (confidence 0.7)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: rust and corrosion on edges, dents and damage on corners, surface stains and grime
+- Damage noted: rust on top edge, dents and scratches on surface, chipped corner
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 
 ## Chain
 - **corroborate** -> agree. nothing identifying was read by either
 - **read_evidence** -> ok. category=metal plate brand=None model=None label=False lines=0
-- **gate** -> lot. priced by material, identification skipped
+- **retrieval** -> ok. query='A collaborative venture between a leading Chinese industrial manufacturer and a Nigerian r' hits=['Tecno Spark 10']
+- **identify** -> refused. chosen=None None margin=None
+- **abstain** -> abstain. model refused
 - **weight** -> stated. 10000 kg from the seller's words
 
 ## Identification
-No catalogue candidates matched.
+Shortlist from the catalogue:
+  - Tecno Spark 10 (0.2)
 
-**Not identified: CANNOT_IDENTIFY.** This is a mixed lot, so it is priced by material and weight rather than identified.
+**Not identified: CANNOT_IDENTIFY.** Photo shows unidentified dark flat panels, not a Tecno Spark 10; no legible label and titanium content cannot be visually verified.
 
 ## How sure the engine is (back office)
 **0%: the photos do not say what this is.**
 
 - Identification confidence: 0% (unknown)
 - Price confidence: 14%
-- This is a mixed lot, so it is priced by material and weight rather than identified.
+- Photo shows unidentified dark flat panels, not a Tecno Spark 10; no legible label and titanium content cannot be visually verified.
 - no label, plate or settings screen was legible
 - the two readers agreed on nothing legible
 - 13 claims are still unproven, 0 are supported
@@ -39,9 +42,7 @@ No catalogue candidates matched.
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
 
 ## What the seller is asked for next (shown in the app)
-1. [PHOTO] Photograph one item on its own, with nothing else in the picture.
-   _why: the photos show more than one item_
-2. [PHOTO] Close-up of any label, sticker or metal plate showing the brand and model.
+1. [PHOTO] Close-up of any label, sticker or metal plate showing the brand and model.
    _why: nothing on the item says which model this is_
 
 ## What the seller is asked (only they know these)
@@ -75,16 +76,16 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Tell us what it is, whether it works, and roughly how heavy it is.
 
 ## Price
-**1,395,000 to 5,800,000 NGN** (priced as material, width 1.2245, method material_floor, 0 comparable prices)
+**1,380,000 to 5,580,000 NGN** (priced as material, width 1.2069, method material_floor, 0 comparable prices)
 
 The weight is estimated from the photos, so this price is settled on the scale at pickup.
 
-This item was not identified, so it is priced as material rather than as a working item: 10000 kg of steel 90%, unknown 10% (rates for unknown are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 10000 kg of steel 90%, plastic 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 4,650,000 NGN
+Scrap floor: 4,600,000 NGN
 
 Conditions attached to this price:
-- Not identified: This is a mixed lot, so it is priced by material and weight rather than identified.
+- Not identified: Photo shows unidentified dark flat panels, not a Tecno Spark 10; no legible label and titanium content cannot be visually verified.
 - The buyer is seeking approximately 10 tons (10,000 kg) of scrap titanium boards. -> not proven remotely. Weigh on the scale and photograph the display.
 - The buyer is interested in industrial titanium plates/sheets discarded or surplus from manufacturing, aerospace, or chemical processing. -> not proven remotely. Weigh on the scale and photograph the display.
 - The buyer accepts damaged or offcut titanium boards of any size or shape, provided they are primarily titanium. -> not proven remotely. Weigh on the scale and photograph the display.

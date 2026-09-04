@@ -17,6 +17,7 @@ from .evalset import buyscrap, jiji, score
 from .identify.catalogue import load_catalogue
 from .pricing.sources import JijiComps, MaterialsFloor, ScrapIndex
 from .protocols.schema import load_protocols
+from .tenant import load_tenant
 from .providers.base import VisionProvider
 from .providers.fake import FakeProvider
 from .providers.recording import RecordingProvider
@@ -219,6 +220,7 @@ def run(
         help="Stop starting new cases once recorded spend reaches this. 0 means no cap.",
     ),
     fixtures: Path = typer.Option(Path("eval/fixtures")),
+    tenant: str = typer.Option("buyscrap_ng", help="Tenant config in tenants/, without .yaml."),
     testset: str = typer.Option(
         "jiji", "--set", help="jiji (answer keys are model names) or buyscrap (the tenant's own adverts)."
     ),
@@ -233,6 +235,11 @@ def run(
 
     protocols = load_protocols(ROOT / "protocols")
     catalogue = load_catalogue(ROOT / "catalogue")
+    tenant_file = ROOT / "tenants" / f"{tenant}.yaml"
+    if not tenant_file.exists():
+        console.print(f"[red]No tenant file at {tenant_file}[/red]")
+        raise typer.Exit(1)
+    tenant_config = load_tenant(tenant_file)
     if testset == "buyscrap":
         cases = _load_buyscrap_cases(ROOT / "eval" / "raw" / "buyscrap", limit or None)
     else:
@@ -269,7 +276,7 @@ def run(
                 return case, None
         result = run_case(
             case, protocols, catalogue, comps, scrap, reader_p, reasoner_p, materials,
-            corroborator_p,
+            corroborator_p, tenant_config,
         )
         with lock:
             spend["usd"] += result.spent_usd

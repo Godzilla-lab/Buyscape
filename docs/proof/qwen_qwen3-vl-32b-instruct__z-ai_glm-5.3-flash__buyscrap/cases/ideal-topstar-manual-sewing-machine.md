@@ -1,17 +1,17 @@
 # Case ideal-topstar-manual-sewing-machine
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  21048 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  22925 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: sewing machine (confidence 0.95)
-- Made of: plastic 60%, steel 30%, rubber 10%
+- Made of: steel 60%, plastic 30%, rubber 10%
 - Estimated weight: 8.5 kg (confidence 0.7)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: dusty surface, stains on plastic casing, some wear on control panel, foot pedal appears intact but dirty
+- Damage noted: dusty surface, stains on body, worn plastic cover, foot pedal appears intact but aged
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 - Text read: IDEAL TOPSTAR | Super Automatic
@@ -79,11 +79,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Tell us what it is, whether it works, and roughly how heavy it is.
 
 ## Price
-**625 to 2,533 NGN** (priced as material, width 1.208, method scrap_band_only, 0 comparable prices)
+**974 to 3,604 NGN** (priced as material, width 1.1487, method scrap_band_only, 0 comparable prices)
 
 No usable comparable sales (0 found, 2 needed), so the range comes from the published Lagos buy band for this category, reduced by 0.3422 for unproven claims.
 
-Scrap floor: 1,827 NGN
+Scrap floor: 2,847 NGN
 
 Conditions attached to this price:
 - Evidence flag: the reader stated brand it could not point to in the photos

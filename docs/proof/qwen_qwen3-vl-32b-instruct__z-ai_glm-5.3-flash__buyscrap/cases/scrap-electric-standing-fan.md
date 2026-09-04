@@ -1,17 +1,17 @@
 # Case scrap-electric-standing-fan
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  31267 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  18728 ms
 
 ## What the engine saw
 - Presentation: single_unit
-- Category: table fan (confidence 0.95)
+- Category: table fan (confidence 0.9)
 - Made of: steel 60%, plastic 30%, copper 10%
 - Estimated weight: 4.5 kg (confidence 0.7)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: dusty surface, rust on central hub, grime on blades and cage
+- Damage noted: dusty, grime on central hub, slight rust on metal parts
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 

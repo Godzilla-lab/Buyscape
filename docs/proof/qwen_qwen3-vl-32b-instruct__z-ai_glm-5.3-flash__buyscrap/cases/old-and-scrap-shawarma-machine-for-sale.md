@@ -1,23 +1,23 @@
 # Case old-and-scrap-shawarma-machine-for-sale
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  19300 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  20525 ms
 
 ## What the engine saw
 - Presentation: single_unit
-- Category: industrial heater or oven (confidence 0.7)
-- Made of: steel 70%, copper 20%, rubber 10%
-- Estimated weight: 15.0 kg (confidence 0.8)
+- Category: industrial_heater_or_dryer (confidence 0.6)
+- Made of: steel 80%, copper_insulated 15%, plastic 5%
+- Estimated weight: 15.0 kg (confidence 0.7)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: rust and discoloration on metal surfaces, dirt and grime buildup, worn and aged appearance
+- Damage noted: extensive surface rust and grime on metal casing, dented and warped panels, grill covers appear damaged or missing, cable is frayed and discolored
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 
 ## Chain
 - **corroborate** -> agree. nothing identifying was read by either
-- **read_evidence** -> ok. category=industrial heater or oven brand=None model=None label=False lines=0
+- **read_evidence** -> ok. category=industrial_heater_or_dryer brand=None model=None label=False lines=0
 - **retrieval** -> empty. query='A client has a used and locally made shawarma machine that uses gas. The last known condit' hits=[]
 - **gate** -> abstain. no candidates and no model text
 
@@ -66,11 +66,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Tell us what it is, whether it works, and roughly how heavy it is.
 
 ## Price
-**10,597 to 45,450 NGN** (priced as material, width 1.2437, method material_floor, 0 comparable prices)
+**3,510 to 14,085 NGN** (priced as material, width 1.202, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 15 kg of steel 70%, copper 20%, rubber 10% (rates for rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 15 kg of steel 80%, copper_insulated 15%, plastic 5% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 35,325 NGN
+Scrap floor: 11,700 NGN
 
 Conditions attached to this price:
 - Not identified: No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.

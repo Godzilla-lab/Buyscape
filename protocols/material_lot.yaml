@@ -1,0 +1,105 @@
+category: material_lot
+version: 1
+display_name: A quantity of material
+aliases:
+  - scrap
+  - scrap lot
+  - mixed lot
+  - aluminium
+  - brass
+  - copper
+  - copper wire
+  - iron
+  - steel
+  - metal scrap
+  - e-waste
+  - electronic waste
+  - carton
+  - cardboard
+  - paper
+  - papers
+  - old newspapers
+  - used books
+  - glass
+  - glass bottles
+  - plastic
+  - plastic and rubbers
+  - fabrics and textiles
+  - textiles
+  - wood
+  - wood and furnitures
+always_novel: true
+shots:
+  - id: code_shot
+    ask: "Write the code {code} on paper and take one photo with the paper next to the pile."
+    checks: [code_matches, item_in_frame]
+  - id: whole_pile
+    ask: "One photo of the whole quantity, with a person or a car in shot so its size is clear."
+    checks: [whole_item_visible]
+  - id: material_closeup
+    ask: "Close-up of the material itself, close enough to see whether it is bare metal, coated, painted or still in its covering."
+    checks: [not_blurry]
+    extract: [material, grade]
+  - id: cut_or_open
+    ask: "If it is wire or cable, cut one end and photograph the exposed core."
+    opens_item: true
+    required: false
+    extract: [core_material]
+  - id: scale_photo
+    ask: "If you have weighed it, photograph the scale or the weighbridge ticket."
+    required: false
+    extract: [weight_kg]
+  - id: magnet_test
+    ask: "Hold a fridge magnet against it and photograph it. Say whether the magnet sticks."
+    checks: [not_blurry]
+    extract: [magnetic]
+  - id: contamination
+    ask: "Photo of anything mixed in that is not the material itself: dirt, concrete, other metals, water."
+    required: false
+questions:
+  - id: quantity
+    ask: "How much is there? Give kilogrammes or tons."
+    kind: text
+    claim: weight_kg
+  - id: grade
+    ask: "Is the metal bare, or still covered in plastic, paint or rubber?"
+    kind: choice
+    options: [bare, covered, mixed, not metal]
+    claim: grade
+  - id: single_material
+    ask: "Is it all one material, or mixed with other things?"
+    kind: choice
+    options: [all one material, mostly one material, mixed]
+    claim: purity
+  - id: magnet
+    ask: "Does a magnet stick to it?"
+    kind: choice
+    options: [sticks, does not stick, some of it sticks, no magnet to hand]
+    claim: purity
+claims:
+  - id: weight_kg
+    kinds: [spec]
+    evidence_slots: [scale_photo]
+    worst_case: "70 percent of the stated weight"
+    pickup_check: "Weigh on the scale and photograph the display"
+    penalty: 0.7
+  - id: grade
+    kinds: [spec, condition]
+    evidence_slots: [material_closeup, cut_or_open]
+    worst_case: "assumed the lower grade, covered rather than bare"
+    pickup_check: "Agent cuts a sample and inspects the core before agreeing a rate"
+    penalty: 0.4
+  - id: purity
+    kinds: [spec, condition]
+    evidence_slots: [material_closeup, contamination]
+    worst_case: "assumed mixed, and priced at the cheapest material present"
+    pickup_check: "Agent sorts a sample and weighs the contamination"
+    penalty: 0.7
+pickup_protocol:
+  - "Weigh everything on the scale, photograph the display, print the lot tag."
+  - "Cut a sample of any wire or cable and confirm the core before agreeing a rate."
+  - "Bare copper and insulated copper are different prices. Never accept the seller's word for which it is."
+  - "Run a magnet over the load. Steel sticks, stainless, aluminium, copper and brass do not, and steel sold as anything dearer is repriced on the spot."
+  - "Grade brass by colour against the tenant's own names: red is about 85 percent copper, yellow about 70, turnings about 65."
+  - "Check for water, sand or concrete added to the load, and deduct it by weight."
+  - "Refuse sealed drums, tanks and any container the seller will not open."

@@ -1,22 +1,25 @@
 # Case used-freezer-being-sold-for-scrap-in-ajah
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  23399 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  19757 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: freezer (confidence 0.9)
-- Made of: plastic 70%, steel 20%, mixed_electronic 10%
-- Estimated weight: 15.0 kg (confidence 0.8)
+- Made of: plastic 80%, steel 20%
+- Estimated weight: 15.0 kg (confidence 0.7)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: dusty surface, scratches on body, faded label on top
+- Damage noted: dusty surface, scratches on body, stains on lid
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 
+## Two readers
+- 1 transcribed lines was seen by only one reader, so it is treated as unread
+
 ## Chain
-- **corroborate** -> agree. nothing identifying was read by either
+- **corroborate** -> dispute. 1 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=freezer brand=None model=None label=False lines=0
 - **retrieval** -> ok. query='Description: This is a used freezer being sold for scrap. The compressor is still availabl' hits=['Tecno Camon 50', 'Infinix Hot 50', 'Infinix Note 50']
 - **identify** -> refused. chosen=None None margin=None
@@ -43,7 +46,9 @@ Shortlist from the catalogue:
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
 
 ## What the seller is asked for next (shown in the app)
-1. [PHOTO] Close-up of any label, sticker or metal plate showing the brand and model.
+1. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: Close-up of any label, sticker or metal plate showing the brand and model. Then, without stopping the video: If it opens without tools, open it and photograph the inside. Keep filming the whole time. Do not cut between clips.
+   _why: two readings of these photos disagreed about what is written on the item_
+2. [PHOTO] Close-up of any label, sticker or metal plate showing the brand and model.
    _why: nothing on the item says which model this is_
 
 ## What the seller is asked (only they know these)
@@ -67,11 +72,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Tell us what it is, whether it works, and roughly how heavy it is.
 
 ## Price
-**2,268 to 5,940 NGN** (priced as material, width 0.8945, method material_floor, 0 comparable prices)
+**1,701 to 3,960 NGN** (priced as material, width 0.7978, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 15 kg of plastic 70%, steel 20%, mixed_electronic 10% (rates for mixed_electronic, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 15 kg of plastic 80%, steel 20% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 3,600 NGN
+Scrap floor: 2,700 NGN
 
 Conditions attached to this price:
 - Not identified: Item is a chest freezer, not any phone model; shortlist is irrelevant and no legible label identifies the freezer brand or model.

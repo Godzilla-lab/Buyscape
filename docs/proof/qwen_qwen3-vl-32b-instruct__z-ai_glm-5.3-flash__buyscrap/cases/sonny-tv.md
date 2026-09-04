@@ -1,34 +1,34 @@
 # Case sonny-tv
 
-Photos: 2  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  56471 ms
+Photos: 2  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  17580 ms
 
 ## What the engine saw
 - Presentation: single_unit
-- Category: television (confidence 1.0)
-- Made of: plastic 60%, steel 25%, glass 10%, circuit_board 5%
-- Estimated weight: 8.5 kg (confidence 0.8)
+- Category: television (confidence 0.95)
+- Made of: plastic 60%, steel 30%, glass 10%
+- Estimated weight: 8.5 kg (confidence 0.7)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: No visible damage or wear on the back panel., Front screen has minor reflections but no cracks or stains., Remote control appears intact.
+- Damage noted: Minor scuffs on plastic casing, No visible damage to screen or stand
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: SONY | CE | Input: HDMI, USB, AV, Component, RGB
+- Text read: SONY | CE
 
 ## Two readers
 - brand_text agreed by both readers
 - model_text was seen by only one reader, so it is treated as unread
 - rating_text was seen by only one reader, so it is treated as unread
 - serial_text was seen by only one reader, so it is treated as unread
-- 11 transcribed lines was seen by only one reader, so it is treated as unread
+- 6 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## Chain
-- **corroborate** -> dispute. brand_text agreed by both readers; model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 11 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=television brand=SONY model=None label=True lines=3
+- **corroborate** -> dispute. brand_text agreed by both readers; model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 6 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=television brand=SONY model=None label=True lines=2
 - **grounding** -> dropped. brand
 - **forensics** -> flag. the reader stated brand it could not point to in the photos
-- **retrieval** -> empty. query='SONY CE Input: HDMI, USB, AV, Component, RGB 55 Inch Sonny Bravia frameless' hits=[]
+- **retrieval** -> empty. query='SONY CE 55 Inch Sonny Bravia frameless' hits=[]
 - **gate** -> abstain. no candidates and no model text
 
 ## Identification
@@ -45,7 +45,7 @@ Evidence flags: the reader stated brand it could not point to in the photos
 - Price confidence: 18%
 - No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.
 - read off the item's own label
-- 3 lines seen by both readers
+- 2 lines seen by both readers
 - the reader stated brand it could not point to in the photos
 - 8 claims are still unproven, 0 are supported
 
@@ -81,11 +81,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Tell us what it is, whether it works, and roughly how heavy it is.
 
 ## Price
-**578 to 2,660 NGN** (priced as material, width 1.2852, method material_floor, 0 comparable prices)
+**540 to 2,490 NGN** (priced as material, width 1.2866, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 8.5 kg of plastic 60%, steel 25%, glass 10%, circuit_board 5% (rates for glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 8.5 kg of plastic 60%, steel 30%, glass 10% (rates for glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 1,929 NGN
+Scrap floor: 1,802 NGN
 
 Conditions attached to this price:
 - Not identified: No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.

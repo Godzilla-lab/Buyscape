@@ -1,6 +1,6 @@
 # Case linksys-hydra-pro-6-dual-band-mesh-router
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  24918 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  26216 ms
 
 ## What the engine saw
 - Presentation: sealed_new
@@ -19,11 +19,11 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 ## Two readers
 - brand_text agreed by both readers
 - model_text agreed by both readers
-- rating_text differed between the two readers, so it is treated as unread
+- rating_text was seen by only one reader, so it is treated as unread
 - 1 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## Chain
-- **corroborate** -> dispute. brand_text agreed by both readers; model_text agreed by both readers; rating_text differed between the two readers, so it is treated as unread; 1 transcribed lines was seen by only one reader, so it is treated as unread
+- **corroborate** -> dispute. brand_text agreed by both readers; model_text agreed by both readers; rating_text was seen by only one reader, so it is treated as unread; 1 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=router brand=Linksys model=Hydra Pro 6 label=False lines=7
 - **grounding** -> dropped. brand, model
 - **forensics** -> flag. the reader stated brand, model it could not point to in the photos; looks like a catalogue or stock image

@@ -1,17 +1,17 @@
 # Case blue-gate-ups
 
-Photos: 2  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  16756 ms
+Photos: 2  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  14794 ms
 
 ## What the engine saw
 - Presentation: single_unit
-- Category: uninterruptible power supply (confidence 0.9)
+- Category: uninterruptible power supply (confidence 0.95)
 - Made of: plastic 70%, circuit_board 20%, steel 10%
 - Estimated weight: 3.5 kg (confidence 0.8)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: dust and minor scuffs on plastic casing, no visible cracks or dents
+- Damage noted: dust and minor smudges on plastic casing, no visible cracks or dents
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 - Text read: BLUE GATE

@@ -1,25 +1,28 @@
 # Case manual-vintage-sewing-machine-stand
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  13940 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0013  |  22094 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: sewing machine (confidence 0.9)
-- Made of: steel 70%, wood 25%, rubber 5%
-- Estimated weight: 18.0 kg (confidence 0.8)
-- Brand read off the item: YAMATO
+- Made of: steel 70%, wood 30%
+- Estimated weight: 15.0 kg (confidence 0.8)
+- Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: paint chipped and worn on metal frame, rust visible on some metal parts, dust and grime accumulated, foot pedal appears loose or detached
+- Damage noted: paint chipped and worn on metal frame, dust and grime on surface, wheels and pedal show signs of rust and wear
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: YAMATO
+
+## Two readers
+- brand_text was seen by only one reader, so it is treated as unread
+- 1 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## Chain
-- **corroborate** -> unavailable. no fixture for task=read_evidence key=f2abde34e838d8c582463aed64e717c6 (model=mistralai/mistral-small-3.2-24b-instruct);
-- **read_evidence** -> ok. category=sewing machine brand=YAMATO model=None label=False lines=1
-- **retrieval** -> ok. query='YAMATO YAMATO A scrap manual vintage sewing machine stand with cast iron legs and treadle ' hits=['Infinix Note 30', 'Tecno Camon 30', 'Tecno Spark 30', 'Infinix Hot 30', 'Infinix Note 40']
+- **corroborate** -> dispute. brand_text was seen by only one reader, so it is treated as unread; 1 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=sewing machine brand=None model=None label=False lines=0
+- **retrieval** -> ok. query='A scrap manual vintage sewing machine stand with cast iron legs and treadle mechanism avai' hits=['Infinix Note 30', 'Tecno Camon 30', 'Tecno Spark 30', 'Infinix Hot 30', 'Infinix Note 40']
 - **identify** -> refused. chosen=None None margin=None
 - **abstain** -> abstain. model refused
 
@@ -31,22 +34,24 @@ Shortlist from the catalogue:
   - Infinix Hot 30 (0.2)
   - Infinix Note 40 (0.2)
 
-**Not identified: CANNOT_IDENTIFY.** Item is a vintage YAMATO treadle sewing machine stand, not any shortlisted phone; no model marking is legible.
+**Not identified: CANNOT_IDENTIFY.** Item is a vintage treadle sewing machine stand; every shortlist entry is a smartphone, so nothing fits.
 
 ## How sure the engine is (back office)
 **0%: the photos do not say what this is.**
 
 - Identification confidence: 0% (unknown)
 - Price confidence: 18%
-- Item is a vintage YAMATO treadle sewing machine stand, not any shortlisted phone; no model marking is legible.
+- Item is a vintage treadle sewing machine stand; every shortlist entry is a smartphone, so nothing fits.
 - no label, plate or settings screen was legible
-- only one reader saw these photos, the second was unavailable
+- the two readers agreed on nothing legible
 - 8 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
 
 ## What the seller is asked for next (shown in the app)
-1. [PHOTO] Close-up of any label, sticker or metal plate showing the brand and model.
+1. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: Close-up of any label, sticker or metal plate showing the brand and model. Then, without stopping the video: If it opens without tools, open it and photograph the inside. Keep filming the whole time. Do not cut between clips.
+   _why: two readings of these photos disagreed about what is written on the item_
+2. [PHOTO] Close-up of any label, sticker or metal plate showing the brand and model.
    _why: nothing on the item says which model this is_
 
 ## What the seller is asked (only they know these)
@@ -71,14 +76,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Tell us what it is, whether it works, and roughly how heavy it is.
 
 ## Price
-**2,317 to 7,920 NGN** (priced as material, width 1.0944, method material_floor, 0 comparable prices)
+**1,923 to 6,570 NGN** (priced as material, width 1.0941, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 18 kg of steel 70%, wood 25%, rubber 5% (rates for rubber, wood are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 15 kg of steel 70%, wood 30% (rates for wood are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 6,435 NGN
+Scrap floor: 5,340 NGN
 
 Conditions attached to this price:
-- Not identified: Item is a vintage YAMATO treadle sewing machine stand, not any shortlisted phone; no model marking is legible.
+- Not identified: Item is a vintage treadle sewing machine stand; every shortlist entry is a smartphone, so nothing fits.
 - A scrap manual vintage sewing machine stand with cast iron legs and treadle mechanism is available for sale. -> not proven remotely. Weigh on the scale and photograph the display.
 - Quantity: Two (2) -> not proven remotely. Weigh on the scale and photograph the display.
 - The item is being sold as is, for parts, repair or recycling. -> not proven remotely. Agent will confirm at pickup.

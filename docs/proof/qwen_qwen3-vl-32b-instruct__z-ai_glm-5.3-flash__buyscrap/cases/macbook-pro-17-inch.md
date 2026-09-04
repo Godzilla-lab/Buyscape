@@ -1,27 +1,26 @@
 # Case macbook-pro-17-inch
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  25613 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  28428 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: laptop (confidence 0.95)
-- Made of: aluminium 60%, plastic 30%, circuit_board 5%, glass 5%
+- Made of: aluminium 60%, plastic 30%, circuit_board 5%, steel 5%
 - Estimated weight: 2.1 kg (confidence 0.8)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: screen has reflections and smudges, keyboard keys appear worn, trackpad shows minor scuffing
+- Damage noted: Screen has smudges and reflections, Trackpad shows minor wear or scuffing, Bottom edge of keyboard appears slightly discolored or dirty
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 
 ## Two readers
 - brand_text agreed by both readers
-- model_text was seen by only one reader, so it is treated as unread
 - 1 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## Chain
-- **corroborate** -> dispute. brand_text agreed by both readers; model_text was seen by only one reader, so it is treated as unread; 1 transcribed lines was seen by only one reader, so it is treated as unread
+- **corroborate** -> dispute. brand_text agreed by both readers; 1 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=laptop brand=Apple model=None label=False lines=0
 - **grounding** -> dropped. brand
 - **forensics** -> flag. the reader stated brand it could not point to in the photos
@@ -88,15 +87,16 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Screenshot of System Information (Windows) or About This Mac, showing the model, processor, RAM and storage.
 
 ## Price
-**991 to 4,003 NGN** (priced as material, width 1.206, method material_floor, 0 comparable prices)
+**5,000 to 5,000 NGN** (priced as material, width 0.0, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 2.1 kg of aluminium 60%, plastic 30%, circuit_board 5%, glass 5% (rates for glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 2.1 kg of aluminium 60%, plastic 30%, circuit_board 5%, steel 5% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 2,669 NGN
+Scrap floor: 2,719 NGN
 
 Conditions attached to this price:
 - Not identified: No label, plate or settings screen was legible, and the visual match alone scored only 0.75.
 - Evidence flag: the reader stated brand it could not point to in the photos
+- Raised to the 5,000 NGN minimum this business publishes for this kind of item.
 - MacBook Pro (17-inch, Late 2011) -> not proven remotely. Agent will confirm at pickup.
 - Laptops health 50% -> not proven remotely. Agent unplugs the charger and watches the battery for two minutes.
 - Physical damage 5% -> not proven remotely. Agent will confirm at pickup.

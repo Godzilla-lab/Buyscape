@@ -1,17 +1,17 @@
 # Case powerbank
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0007  |  11720 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0007  |  18083 ms
 
 ## What the engine saw
 - Presentation: single_unit
-- Category: electric motor or pump housing (confidence 0.7)
-- Made of: plastic 70%, copper 20%, rubber 10%
-- Estimated weight: 1.2 kg (confidence 0.6)
+- Category: electric_motor_or_pump (confidence 0.7)
+- Made of: plastic 70%, copper_insulated 20%, steel 10%
+- Estimated weight: 1.5 kg (confidence 0.6)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: yellow tape covering part of the casing, scratches and wear on black plastic housing, blue and green braided cables attached
+- Damage noted: cracks and scuffs on black plastic casing, yellow tape covering part of top unit, possibly for repair or insulation, wires show wear and slight fraying
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 
@@ -20,7 +20,7 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **corroborate** -> dispute. 1 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=electric motor or pump housing brand=None model=None label=False lines=0
+- **read_evidence** -> ok. category=electric_motor_or_pump brand=None model=None label=False lines=0
 - **retrieval** -> empty. query='Scrap power banks for sale in Ibadan.' hits=[]
 - **gate** -> abstain. no candidates and no model text
 
@@ -65,11 +65,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Tell us what it is, whether it works, and roughly how heavy it is.
 
 ## Price
-**1,830 to 3,283 NGN** (priced as material, width 0.5682, method material_floor, 0 comparable prices)
+**683 to 1,179 NGN** (priced as material, width 0.5319, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 1.2 kg of plastic 70%, copper 20%, rubber 10% (rates for plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 1.5 kg of plastic 70%, copper_insulated 20%, steel 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 2,490 NGN
+Scrap floor: 930 NGN
 
 Conditions attached to this price:
 - Not identified: No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.

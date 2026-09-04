@@ -31,9 +31,14 @@ class MaterialShare(BaseModel):
 
     material: str = Field(
         description=(
-            "One of: steel, iron, aluminium, copper, brass, stainless, lead, "
-            "circuit_board, plastic, pet_bottle, paper, glass, rubber, wood, "
-            "textile, mixed_electronic, unknown."
+            "One of: steel, iron, aluminium, copper_bare, copper_insulated, "
+            "copper, brass, stainless, lead, circuit_board, plastic, "
+            "pet_bottle, paper, carton, glass, rubber, wood, textile, "
+            "mixed_electronic, food_waste, unknown.\n"
+            "Copper is worth four times more bare than insulated, so say which: "
+            "copper_bare is bright or dull red metal with no covering, "
+            "copper_insulated is wire still inside coloured plastic. Use plain "
+            "copper only when the photo cannot show which it is."
         )
     )
     fraction: float = Field(ge=0.0, le=1.0, description="Rough share of total mass.")
@@ -175,7 +180,7 @@ def read_evidence(
     """Tier 1: read the item. Cheap model, high resolution, no identity guessing."""
     request = ModelRequest(
         task="read_evidence",
-        prompt_version="read_evidence.v4",
+        prompt_version="read_evidence.v5",
         system=(
             f"{HONESTY}\n\n"
             "Your job is to READ and DESCRIBE, not to work out which exact model "

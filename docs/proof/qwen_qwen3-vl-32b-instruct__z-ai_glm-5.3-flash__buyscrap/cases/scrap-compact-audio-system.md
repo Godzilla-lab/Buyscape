@@ -1,6 +1,6 @@
 # Case scrap-compact-audio-system
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  39215 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0013  |  26973 ms
 
 ## What the engine saw
 - Presentation: single_unit
@@ -11,10 +11,10 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: dusty surface, scratches on front panel, small white sticker or paper stuck to lower front section
+- Damage noted: dusty surface, scratches on front panel, cracked plastic on lower section, white sticker residue on disc tray
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: 3 DISC | MINISTAR | A
+- Text read: 3 DISC | MINISTAR
 
 ## Two readers
 - brand_text agreed by both readers
@@ -22,10 +22,10 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **corroborate** -> dispute. brand_text agreed by both readers; 1 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=audio system brand=MINISTAR model=None label=False lines=3
+- **read_evidence** -> ok. category=audio system brand=MINISTAR model=None label=False lines=2
 - **grounding** -> dropped. brand
 - **forensics** -> flag. the reader stated brand it could not point to in the photos
-- **retrieval** -> ok. query='3 DISC MINISTAR A Description: This is a scrap compact audio system that is currently not ' hits=['Lenovo IdeaPad 3', 'Acer Aspire 5', 'Tecno Pova 5', 'Kemage KM6500 5.5kVA', 'Lutian LT3900 3.5kVA']
+- **retrieval** -> ok. query='3 DISC MINISTAR Description: This is a scrap compact audio system that is currently not fu' hits=['Lenovo IdeaPad 3', 'Acer Aspire 5', 'Tecno Pova 5', 'Kemage KM6500 5.5kVA', 'Lutian LT3900 3.5kVA']
 - **identify** -> refused. chosen=None None margin=None
 - **abstain** -> abstain. model refused
 
@@ -37,7 +37,7 @@ Shortlist from the catalogue:
   - Kemage KM6500 5.5kVA (0.15)
   - Lutian LT3900 3.5kVA (0.15)
 
-**Not identified: CANNOT_IDENTIFY.** Item is a Ministar 3-disc mini hi-fi with twin cassette decks; no model number legible and no shortlist entry matches.
+**Not identified: CANNOT_IDENTIFY.** Item is a Ministar 3-disc mini hi-fi system, not any shortlist entry; no model designation is legible.
 
 Evidence flags: the reader stated brand it could not point to in the photos
 
@@ -46,9 +46,9 @@ Evidence flags: the reader stated brand it could not point to in the photos
 
 - Identification confidence: 0% (unknown)
 - Price confidence: 14%
-- Item is a Ministar 3-disc mini hi-fi with twin cassette decks; no model number legible and no shortlist entry matches.
+- Item is a Ministar 3-disc mini hi-fi system, not any shortlist entry; no model designation is legible.
 - no label, plate or settings screen was legible
-- 3 lines seen by both readers
+- 2 lines seen by both readers
 - the reader stated brand it could not point to in the photos
 - 10 claims are still unproven, 0 are supported
 
@@ -91,7 +91,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 2,000 NGN
 
 Conditions attached to this price:
-- Not identified: Item is a Ministar 3-disc mini hi-fi with twin cassette decks; no model number legible and no shortlist entry matches.
+- Not identified: Item is a Ministar 3-disc mini hi-fi system, not any shortlist entry; no model designation is legible.
 - Evidence flag: the reader stated brand it could not point to in the photos
 - This is a scrap compact audio system -> not proven remotely. Weigh on the scale and photograph the display.
 - It is currently not functioning -> not proven remotely. Agent powers the item on before payment.

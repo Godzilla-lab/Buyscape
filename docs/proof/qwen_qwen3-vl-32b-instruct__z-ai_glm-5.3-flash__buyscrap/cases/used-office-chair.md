@@ -1,39 +1,36 @@
 # Case used-office-chair
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  22596 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  18296 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: office chair (confidence 0.95)
 - Made of: plastic 40%, steel 30%, textile 20%, rubber 10%
-- Estimated weight: 10.0 kg (confidence 0.8)
+- Estimated weight: 10.0 kg (confidence 0.7)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: armrests show wear and scuffing, seat fabric appears slightly stained or discolored, base shows minor dust and grime
+- Damage noted: armrests show signs of wear and slight discoloration, mesh back has minor dust and some loose threads, base and casters appear functional but slightly dusty
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 
 ## Chain
 - **corroborate** -> agree. nothing identifying was read by either
 - **read_evidence** -> ok. category=office chair brand=None model=None label=False lines=0
-- **retrieval** -> ok. query='A used office chair is available for sale. Location: Opebi, Lagos. Price: 10,000 naira' hits=['Tecno Spark 10']
-- **identify** -> refused. chosen=None None margin=None
-- **abstain** -> abstain. model refused
+- **gate** -> abstain. multiple items in frame
 
 ## Identification
-Shortlist from the catalogue:
-  - Tecno Spark 10 (0.2)
+No catalogue candidates matched.
 
-**Not identified: CANNOT_IDENTIFY.** Item is a generic unbranded mesh office chair; no label text visible and the only shortlist entry (Tecno Spark 10 phone) is unrelated.
+**Not identified: EVIDENCE_INCOMPLETE.** The photos show more than one item, so no single item can be identified.
 
 ## How sure the engine is (back office)
 **0%: the photos do not say what this is.**
 
 - Identification confidence: 0% (unknown)
 - Price confidence: 27%
-- Item is a generic unbranded mesh office chair; no label text visible and the only shortlist entry (Tecno Spark 10 phone) is unrelated.
+- The photos show more than one item, so no single item can be identified.
 - no label, plate or settings screen was legible
 - the two readers agreed on nothing legible
 - 4 claims are still unproven, 0 are supported
@@ -41,7 +38,9 @@ Shortlist from the catalogue:
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
 
 ## What the seller is asked for next (shown in the app)
-1. [PHOTO] Close-up of any label, sticker or metal plate showing the brand and model.
+1. [PHOTO] Photograph one item on its own, with nothing else in the picture.
+   _why: the photos show more than one item_
+2. [PHOTO] Close-up of any label, sticker or metal plate showing the brand and model.
    _why: nothing on the item says which model this is_
 
 ## What the seller is asked (only they know these)
@@ -67,7 +66,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 2,010 NGN
 
 Conditions attached to this price:
-- Not identified: Item is a generic unbranded mesh office chair; no label text visible and the only shortlist entry (Tecno Spark 10 phone) is unrelated.
+- Not identified: The photos show more than one item, so no single item can be identified.
 - Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on a piece of paper and take one photo with the paper next to the item..
 - Required evidence 'overview' was not supplied -> not proven remotely. One photo showing the whole item..
 - Required evidence 'label_or_plate' was not supplied -> not proven remotely. Close-up of any label, sticker or metal plate showing the brand and model..

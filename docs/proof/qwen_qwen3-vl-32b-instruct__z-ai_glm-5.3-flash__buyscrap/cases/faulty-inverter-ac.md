@@ -1,30 +1,28 @@
 # Case faulty-inverter-ac
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  18700 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  22253 ms
 
 ## What the engine saw
 - Presentation: single_unit
-- Category: split air conditioner (confidence 0.95)
+- Category: split air conditioner (confidence 0.9)
 - Made of: plastic 40%, steel 30%, copper 20%, mixed_electronic 10%
-- Estimated weight: 35.0 kg (confidence 0.8)
+- Estimated weight: 35.0 kg (confidence 0.7)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: Dust and grime on exterior casing, Minor scratches on plastic housing, Red handwritten markings on side panel, Some discoloration on front grille
+- Damage noted: Dusty exterior, Yellowing plastic casing, Minor scratches on front panel, Handwritten red numbers '14,570' on side
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 - Text read: Inverter
 
 ## Two readers
-- brand_text was seen by only one reader, so it is treated as unread
-- model_text was seen by only one reader, so it is treated as unread
+- brand_text differed between the two readers, so it is treated as unread
 - rating_text was seen by only one reader, so it is treated as unread
-- serial_text was seen by only one reader, so it is treated as unread
-- 11 transcribed lines was seen by only one reader, so it is treated as unread
+- 10 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## Chain
-- **corroborate** -> dispute. brand_text was seen by only one reader, so it is treated as unread; model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 11 transcribed lines was seen by only one reader, so it is treated as unread
+- **corroborate** -> dispute. brand_text differed between the two readers, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; 10 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=split air conditioner brand=None model=None label=True lines=1
 - **retrieval** -> empty. query='Inverter Faulty inverter AC available for sale. Location: Oshodi, Lagos State Price: 60,00' hits=[]
 - **gate** -> abstain. no candidates and no model text

@@ -1,0 +1,83 @@
+category: vehicle
+version: 1
+display_name: Vehicle or vehicle parts
+aliases:
+  - car
+  - scrap car
+  - scrap vehicle
+  - scrap vehicles
+  - vehicle
+  - bus
+  - truck
+  - lorry
+  - van
+  - motorcycle
+  - vehicle parts
+  - car parts
+shots:
+  - id: code_shot
+    ask: "Write the code {code} on paper and photograph it against the windscreen."
+    checks: [code_matches, item_in_frame]
+  - id: four_corners
+    ask: "Four photos, one from each corner, showing the whole vehicle."
+    checks: [whole_item_visible]
+  - id: vin_plate
+    ask: "Close-up of the VIN plate, usually on the dashboard by the windscreen or inside the driver's door."
+    checks: [text_readable]
+    extract: [vin, model_name, year]
+  - id: engine_bay
+    ask: "Open the bonnet and photograph the engine."
+    opens_item: true
+    checks: [interior_visible]
+    extract: [engine_present]
+  - id: boot_and_cabin
+    ask: "Open the boot and photograph inside, then the cabin with the seats folded."
+    opens_item: true
+    checks: [interior_visible]
+  - id: odometer
+    ask: "Photo of the dashboard with the ignition on, showing the mileage."
+    required: false
+    extract: [mileage]
+  - id: papers
+    ask: "Photo of the vehicle papers showing who owns it."
+    required: false
+    extract: [owner]
+questions:
+  - id: runs
+    ask: "Does it start and drive?"
+    kind: choice
+    options: [drives, starts but does not drive, does not start]
+    claim: runs
+  - id: complete
+    ask: "Is the engine, gearbox and all four wheels still on it?"
+    kind: yesno
+    claim: complete
+  - id: papers_available
+    ask: "Do you have the papers proving you own it?"
+    kind: yesno
+    claim: ownership
+claims:
+  - id: runs
+    kinds: [works]
+    evidence_slots: [odometer]
+    worst_case: "assumed it does not start"
+    pickup_check: "Agent starts it, or confirms it must be towed"
+    penalty: 0.5
+  - id: complete
+    kinds: [spec, condition]
+    evidence_slots: [engine_bay, four_corners]
+    worst_case: "assumed the engine and gearbox have already been removed"
+    pickup_check: "Agent checks the engine, gearbox and wheels are present"
+    penalty: 0.5
+  - id: ownership
+    kinds: [provenance]
+    evidence_slots: [papers, vin_plate]
+    worst_case: "assumed no papers, so it cannot be bought"
+    pickup_check: "Agent matches the VIN to the papers and the seller's identity before any money moves"
+    penalty: 0.3
+pickup_protocol:
+  - "Match the VIN on the dashboard to the VIN on the papers and to the plate. No match, no purchase."
+  - "Open the boot, the bonnet, the cabin and the spare wheel well with a torch before agreeing a price."
+  - "Confirm the engine and gearbox are present. A shell is priced as steel by weight."
+  - "Never buy a vehicle without papers, whatever the price."
+  - "Weigh it at the yard. The quote is settled on the weighbridge."

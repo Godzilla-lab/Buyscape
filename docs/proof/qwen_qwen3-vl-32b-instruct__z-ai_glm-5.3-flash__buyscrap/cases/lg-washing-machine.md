@@ -1,17 +1,17 @@
 # Case lg-washing-machine
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0013  |  28565 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0017  |  39445 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: washer dryer (confidence 0.95)
-- Made of: steel 40%, plastic 40%, glass 10%, copper 10%
-- Estimated weight: 75.0 kg (confidence 0.8)
+- Made of: steel 60%, plastic 30%, glass 10%
+- Estimated weight: 70.0 kg (confidence 0.8)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: scratches on front panel, dented lower right corner, stains on door frame, peeling sticker on left side
+- Damage noted: Scratches and scuffs on front panel, Torn red sticker on left side, Dirt and grime around door seal, Minor rust near bottom right corner
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 - Text read: LG | INVERTER DirectDrive 6 / 3kg | Washer+Dryer 2 in 1 | Cotton | Cotton Eco | Mix | Easy Care | Duvet
@@ -20,15 +20,15 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - brand_text agreed by both readers
 - model_text agreed by both readers
 - rating_text was seen by only one reader, so it is treated as unread
-- 10 transcribed lines was seen by only one reader, so it is treated as unread
+- 5 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## Chain
-- **corroborate** -> dispute. brand_text agreed by both readers; model_text agreed by both readers; rating_text was seen by only one reader, so it is treated as unread; 10 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=washer dryer brand=LG model=Inverter Direct Drive 6 / 3kg label=True lines=30
+- **corroborate** -> dispute. brand_text agreed by both readers; model_text agreed by both readers; rating_text was seen by only one reader, so it is treated as unread; 5 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=washer dryer brand=LG model=Inverter Direct Drive 6 / 3kg label=True lines=34
 - **grounding** -> dropped. brand, model
 - **forensics** -> flag. the reader stated brand, model it could not point to in the photos
 - **retrieval** -> ok. query='LG INVERTER DirectDrive 6 / 3kg Washer+Dryer 2 in 1 Cotton Cotton Eco Mix Easy Care Duvet ' hits=['LG S4-Q12 1.5HP', 'LG T2108 8kg top loader', 'LG T2312 12kg top loader', 'LG S4-Q09 1HP', 'LG S4-Q18 2HP']
-- **identify** -> refused. chosen=None None margin=None
+- **identify** -> refused. chosen=LG None margin=0.0
 - **abstain** -> abstain. model refused
 
 ## Identification
@@ -39,18 +39,20 @@ Shortlist from the catalogue:
   - LG S4-Q09 1HP (0.4)
   - LG S4-Q18 2HP (0.4)
 
-**Not identified: CANNOT_IDENTIFY.** Item is an LG 6/3kg front-load washer-dryer combo, but no model number is legible and none of the shortlist entries (air conditioners or top loaders) match.
+**Not identified: CANNOT_IDENTIFY.** Item is an LG 6/3kg front-load washer-dryer per its own panel, but no specific model number is legible and no shortlist entry is a front-load washer-dryer.
 
 Evidence flags: the reader stated brand, model it could not point to in the photos
 
 ## How sure the engine is (back office)
-**0%: the photos do not say what this is.**
+**Not sure enough to price: 1% on the best answer. It is probably a LG T2108 8kg top loader or a LG T2312 12kg top loader, and the photos cannot separate them.**
 
-- Identification confidence: 0% (unknown)
+- Identification confidence: 1% (unknown)
 - Price confidence: 18%
-- Item is an LG 6/3kg front-load washer-dryer combo, but no model number is legible and none of the shortlist entries (air conditioners or top loaders) match.
+- It is weighing: LG T2108 8kg top loader (0.05), LG T2312 12kg top loader (0.05)
+- Item is an LG 6/3kg front-load washer-dryer per its own panel, but no specific model number is legible and no shortlist entry is a front-load washer-dryer.
 - read off the item's own label
-- 30 lines seen by both readers
+- 34 lines seen by both readers
+- the next candidate was only 0.0 behind
 - the reader stated brand, model it could not point to in the photos
 - 8 claims are still unproven, 0 are supported
 
@@ -85,14 +87,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Open the door and photograph the inside of the drum.
 
 ## Price
-**39,607 to 121,275 NGN** (priced as material, width 1.0152, method material_floor, 0 comparable prices)
+**9,881 to 29,330 NGN** (priced as material, width 0.992, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 75 kg of steel 40%, plastic 40%, glass 10%, copper 10% (rates for glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 70 kg of steel 60%, plastic 30%, glass 10% (rates for glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 93,150 NGN
+Scrap floor: 23,240 NGN
 
 Conditions attached to this price:
-- Not identified: Item is an LG 6/3kg front-load washer-dryer combo, but no model number is legible and none of the shortlist entries (air conditioners or top loaders) match.
+- Not identified: Item is an LG 6/3kg front-load washer-dryer per its own panel, but no specific model number is legible and no shortlist entry is a front-load washer-dryer.
 - Evidence flag: the reader stated brand, model it could not point to in the photos
 - LG Washing machine -> not proven remotely. Agent reads the rating plate.
 - Washing machine -> not proven remotely. Agent reads the rating plate.

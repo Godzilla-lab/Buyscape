@@ -1,6 +1,6 @@
 # Case bent-office-chair
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  24632 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  28164 ms
 
 ## What the engine saw
 - Presentation: single_unit
@@ -11,7 +11,7 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: wear on the mesh backrest, some discoloration on the lumbar support pad
+- Damage noted: mesh backrest shows some discoloration and wear, armrests have minor scuff marks, base and casters appear intact
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 

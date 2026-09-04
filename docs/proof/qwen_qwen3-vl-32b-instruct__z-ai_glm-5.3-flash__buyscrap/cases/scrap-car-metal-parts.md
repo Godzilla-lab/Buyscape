@@ -1,25 +1,25 @@
 # Case scrap-car-metal-parts
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  25922 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  15670 ms
 
 ## What the engine saw
 - Presentation: mixed_lot
 - Category: automotive parts (confidence 0.9)
-- Made of: steel 60%, rubber 20%, copper 10%, plastic 10%
+- Made of: steel 60%, rubber 20%, copper_bare 10%, plastic 10%
 - Estimated weight: 15.0 kg (confidence 0.7)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: rust on metal components, dirt and grime accumulation, cracked rubber boots, corroded surfaces
+- Damage noted: rust on metal components, dirt and grime covering surfaces, some parts appear damaged or worn
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 
 ## Two readers
-- serial_text was seen by only one reader, so it is treated as unread
+- rating_text was seen by only one reader, so it is treated as unread
 
 ## Chain
-- **corroborate** -> dispute. serial_text was seen by only one reader, so it is treated as unread
+- **corroborate** -> dispute. rating_text was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=automotive parts brand=None model=None label=False lines=0
 - **gate** -> lot. priced by material, identification skipped
 
@@ -72,7 +72,7 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 ## Price
 **11,854 to 25,470 NGN** (priced as material, width 0.7296, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 15 kg of steel 60%, rubber 20%, copper 10%, plastic 10% (rates for plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 15 kg of steel 60%, rubber 20%, copper_bare 10%, plastic 10% (rates for plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
 Scrap floor: 19,800 NGN
 

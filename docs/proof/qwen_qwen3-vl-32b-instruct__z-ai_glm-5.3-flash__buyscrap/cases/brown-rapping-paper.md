@@ -1,6 +1,6 @@
 # Case brown-rapping-paper
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0007  |  9827 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0007  |  10741 ms
 
 ## What the engine saw
 - Presentation: mixed_lot
