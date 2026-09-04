@@ -49,16 +49,35 @@ class Protocol(BaseModel):
     claims: list[ClaimSpec] = Field(default_factory=list)
     pickup_protocol: list[str] = Field(default_factory=list)
 
-    def claim_for(self, attribute: str | None, kind: str) -> ClaimSpec | None:
-        """Find the spec for an extracted claim by attribute name, then by kind."""
+    def claim_for(
+        self, attribute: str | None, kind: str, text: str = ""
+    ) -> ClaimSpec | None:
+        """Find the spec for an extracted claim.
+
+        Exact attribute match first, then a word-level match against the spec id
+        using the claim's attribute and text. Falling back on `kind` alone is
+        deliberately last and only when exactly one spec claims that kind:
+        matching "256gb" to the battery spec because both are of kind "spec"
+        would price a storage claim as a battery claim.
+        """
         if attribute:
             for spec in self.claims:
                 if spec.id == attribute:
                     return spec
+
+        haystack = f"{attribute or ''} {text}".lower()
+        best: ClaimSpec | None = None
+        best_hits = 0
         for spec in self.claims:
-            if kind in spec.kinds:
-                return spec
-        return None
+            words = [w for w in spec.id.split("_") if len(w) >= 2]
+            hits = sum(1 for w in words if w in haystack)
+            if hits > best_hits:
+                best, best_hits = spec, hits
+        if best is not None and best_hits > 0:
+            return best
+
+        of_kind = [spec for spec in self.claims if kind in spec.kinds]
+        return of_kind[0] if len(of_kind) == 1 else None
 
     @property
     def required_shots(self) -> list[Shot]:

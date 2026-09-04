@@ -58,7 +58,7 @@ def build_ledger(
     ledger: list[Claim] = []
 
     for draft in drafts:
-        spec = protocol.claim_for(draft.attribute, draft.kind)
+        spec = protocol.claim_for(draft.attribute, draft.kind, draft.text)
         required = list(spec.evidence_slots) if spec else []
         seen = [s for s in required if s in slots_present]
 
@@ -82,7 +82,7 @@ def build_ledger(
                 evidence_seen=seen,
                 worst_case=spec.worst_case if spec else None,
                 pickup_check=spec.pickup_check if spec else None,
-                penalty=(spec.penalty if spec else 0.9) if status != ClaimStatus.SUPPORTED else 1.0,
+                penalty=(spec.penalty if spec else 0.95) if status != ClaimStatus.SUPPORTED else 1.0,
             )
         )
     return ledger

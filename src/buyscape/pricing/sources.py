@@ -164,3 +164,81 @@ def parse_rating(text: str) -> float | None:
     """Pull a kVA, HP or kg number out of free text."""
     m = _RATING.search(text or "")
     return float(m.group(1)) if m else None
+
+
+class MaterialsFloor:
+    """What an item is worth as raw material, whatever it turns out to be.
+
+    This is what makes the engine open world. Identification lifts a price above
+    this floor when it succeeds, but nothing ever falls through to no answer at
+    all: a sewing machine nobody has a catalogue entry for is still fifteen
+    kilos of cast iron. Weight cannot be seen from a photo, so the floor is
+    always conditional on the scale reading at pickup, and it says so.
+    """
+
+    source_id = "materials_floor"
+
+    def __init__(self, path: Path) -> None:
+        data = yaml.safe_load(path.read_text())
+        self._published: dict[str, list] = data.get("per_kg") or {}
+        self._derived: dict[str, list] = data.get("per_kg_derived") or {}
+        self._observed_on = str(data["observed_on"])
+        self._url = data.get("url")
+
+    def rate(self, material: str) -> tuple[float, float, bool]:
+        """Return low, high and whether the rate is published or derived."""
+        key = (material or "unknown").strip().lower()
+        if key in self._published:
+            low, high = self._published[key]
+            return float(low), float(high), True
+        if key in self._derived:
+            low, high = self._derived[key]
+            return float(low), float(high), False
+        low, high = self._derived.get("unknown", [150, 400])
+        return float(low), float(high), False
+
+    def fetch(
+        self, materials: list[tuple[str, float]], weight_kg: float | None
+    ) -> list[Observation]:
+        """Blend the per-kg rates by mass share and multiply by the weight."""
+        if not weight_kg or weight_kg <= 0:
+            raise SourceUnavailable("no weight estimate, so no material floor")
+        shares = [(m, f) for m, f in materials if f > 0]
+        if not shares:
+            shares = [("unknown", 1.0)]
+        total = sum(f for _, f in shares)
+        shares = [(m, f / total) for m, f in shares]
+
+        low = high = 0.0
+        derived_used: list[str] = []
+        for material, fraction in shares:
+            r_low, r_high, published = self.rate(material)
+            low += r_low * fraction * weight_kg
+            high += r_high * fraction * weight_kg
+            if not published:
+                derived_used.append(material)
+
+        breakdown = ", ".join(f"{m} {int(f * 100)}%" for m, f in shares)
+        note = f"{weight_kg:g} kg of {breakdown}"
+        if derived_used:
+            note += f" (rates for {', '.join(sorted(set(derived_used)))} are estimates, not published)"
+        return [
+            Observation(
+                source=self.source_id,
+                kind="scrap_floor",
+                amount=round(low, 2),
+                currency="NGN",
+                observed_on=self._observed_on,
+                url=self._url,
+                note=f"{note}, low",
+            ),
+            Observation(
+                source=self.source_id,
+                kind="scrap_floor",
+                amount=round(high, 2),
+                currency="NGN",
+                observed_on=self._observed_on,
+                url=self._url,
+                note=f"{note}, high",
+            ),
+        ]

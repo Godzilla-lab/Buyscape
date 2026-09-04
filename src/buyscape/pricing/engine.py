@@ -21,6 +21,7 @@ MIN_OBSERVATIONS = 2
 
 @dataclass
 class Quote:
+    basis: str = "resale"  # resale | material_floor | retail_new
     low: float | None = None
     high: float | None = None
     currency: str = "NGN"
@@ -29,6 +30,7 @@ class Quote:
     failure_code: str | None = None
     reason: str | None = None
     conditions: list[str] = field(default_factory=list)
+    weight_conditional: bool = False
     worst_case_multiplier: float = 1.0
     observation_count: int = 0
     sources: list[str] = field(default_factory=list)
@@ -59,28 +61,71 @@ def price(
     scrap: list[Observation],
     ledger: list[Claim],
     currency: str = "NGN",
+    materials: list[Observation] | None = None,
+    identified: bool = True,
+    weight_confident: bool = False,
 ) -> Quote:
-    """Build the range. Refuses when the evidence for a number is not there."""
+    """Build the range.
+
+    Anything at all can be bought for its material, so an unidentified item
+    falls through to the material floor rather than to no answer. Identification
+    is what lifts a price above that floor, never what decides whether a price
+    exists at all.
+    """
     quote = Quote(currency=currency)
     quote.conditions = conditions(ledger)
     quote.worst_case_multiplier = worst_case_multiplier(ledger)
+    materials = materials or []
+
+    material_values = [o.amount for o in materials]
+    if material_values:
+        quote.floor = min(material_values)
+        quote.sources.append(materials[0].source)
 
     scrap_values = [o.amount for o in scrap]
     if scrap_values:
-        quote.floor = min(scrap_values)
+        floor = min(scrap_values)
+        quote.floor = floor if quote.floor is None else max(quote.floor, floor)
         quote.sources.append(scrap[0].source)
 
-    comp_values = [o.amount for o in comps]
+    comp_values = [o.amount for o in comps] if identified else []
     quote.observation_count = len(comp_values)
 
+    # Not identified, but made of something. Price the material and say so.
+    if not identified:
+        if not material_values:
+            quote.failure_code = "CANNOT_IDENTIFY"
+            quote.reason = (
+                "The item could not be identified and the photos give no sense "
+                "of its size or material, so not even a scrap value can be "
+                "estimated. A photo showing the whole item next to something "
+                "of known size would fix this."
+            )
+            return quote
+        quote.basis = "material_floor"
+        quote.method = "material_floor"
+        quote.weight_conditional = not weight_confident
+        quote.low = round(min(material_values) * quote.worst_case_multiplier, 2)
+        quote.high = round(max(material_values), 2)
+        quote.explanation = (
+            "This item was not identified, so it is priced as material rather "
+            f"than as a working item: {materials[0].note.rsplit(',', 1)[0]}. "
+            "Anything it is worth above scrap needs a clearer photo of its "
+            "label or plate. The weight is an estimate from the photos and the "
+            "price is settled on the scale at pickup."
+        )
+        return quote
+
     if len(comp_values) < MIN_OBSERVATIONS:
-        if len(scrap_values) >= 2:
+        if len(scrap_values) >= 2 or len(material_values) >= 2:
+            band = scrap_values if len(scrap_values) >= 2 else material_values
             # Fall back to the published whole-unit band. Wide and honest.
-            low = min(scrap_values) * quote.worst_case_multiplier
-            high = max(scrap_values)
+            low = min(band) * quote.worst_case_multiplier
+            high = max(band)
             quote.low, quote.high = round(low, 2), round(high, 2)
             quote.ceiling = high
             quote.method = "scrap_band_only"
+            quote.basis = "material_floor"
             quote.explanation = (
                 f"No usable comparable sales ({len(comp_values)} found, "
                 f"{MIN_OBSERVATIONS} needed), so the range comes from the "

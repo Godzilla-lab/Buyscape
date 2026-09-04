@@ -14,7 +14,13 @@ from .claims.ledger import Claim, ClaimStatus, build_ledger
 from .identify import chain
 from .identify.catalogue import Entry
 from .pricing.engine import Quote, price
-from .pricing.sources import JijiComps, ScrapIndex, SourceUnavailable, parse_rating
+from .pricing.sources import (
+    JijiComps,
+    MaterialsFloor,
+    ScrapIndex,
+    SourceUnavailable,
+    parse_rating,
+)
 from .protocols.schema import Protocol
 from .providers.base import CostMeter, ImageRef, ProviderError, VisionProvider
 from .providers.tasks import extract_claims
@@ -58,6 +64,7 @@ def run_case(
     scrap: ScrapIndex,
     reader: VisionProvider,
     reasoner: VisionProvider,
+    materials: MaterialsFloor | None = None,
 ) -> CaseResult:
     meter = CostMeter()
     images = tuple(ImageRef(p) for p in case.images)
@@ -116,40 +123,57 @@ def run_case(
             )
         )
 
-    if result.failure_code:
-        quote = Quote(
-            failure_code=result.failure_code,
-            reason=result.reason,
-            conditions=[c.text for c in ledger if c.is_priced_at_worst_case][:6],
-        )
-        return CaseResult(
-            case_id=case.id,
-            chain=result,
-            ledger=ledger,
-            quote=quote,
-            cost_usd=meter.total_usd,
-            latency_ms=meter.total_ms,
-            cost_by_task=meter.by_task(),
-            reader_model=reader.model,
-            reasoner_model=reasoner.model,
-        )
+    reading = result.reading
+    material_obs: list = []
+    weight_confident = False
+    if materials is not None and reading is not None:
+        shares = [(m.material, m.fraction) for m in reading.materials]
+        weight = reading.estimated_weight_kg
+        weight_confident = (reading.weight_confidence or 0.0) >= 0.6
+        try:
+            material_obs = materials.fetch(shares, weight)
+        except SourceUnavailable:
+            material_obs = []
 
-    model_key = result.model_key or ""
-    try:
-        comp_obs = comps.fetch(category, model_key)
-    except SourceUnavailable:
-        comp_obs = []
-    rating = parse_rating(
-        " ".join(
-            filter(None, [result.reading.rating_text if result.reading else None, model_key, case.seller_text])
+    identified = bool(result.model_key) and not result.abstained
+
+    comp_obs: list = []
+    scrap_obs: list = []
+    if identified:
+        try:
+            comp_obs = comps.fetch(category, result.model_key or "")
+        except SourceUnavailable:
+            comp_obs = []
+        rating = parse_rating(
+            " ".join(
+                filter(
+                    None,
+                    [
+                        reading.rating_text if reading else None,
+                        result.model_key,
+                        case.seller_text,
+                    ],
+                )
+            )
         )
+        try:
+            scrap_obs = scrap.fetch(category, rating)
+        except SourceUnavailable:
+            scrap_obs = []
+
+    quote = price(
+        comp_obs,
+        scrap_obs,
+        ledger,
+        materials=material_obs,
+        identified=identified,
+        weight_confident=weight_confident,
     )
-    try:
-        scrap_obs = scrap.fetch(category, rating)
-    except SourceUnavailable:
-        scrap_obs = []
+    if result.fraud_flags:
+        quote.conditions = [f"Evidence flag: {f}" for f in result.fraud_flags] + quote.conditions
+    if not identified and not quote.is_failure and result.reason:
+        quote.conditions.insert(0, f"Not identified: {result.reason}")
 
-    quote = price(comp_obs, scrap_obs, ledger)
     return CaseResult(
         case_id=case.id,
         chain=result,
@@ -177,14 +201,20 @@ def report_markdown(case: Case, result: CaseResult) -> str:
     ]
     if c.reading:
         r = c.reading
+        materials = ", ".join(f"{m.material} {int(m.fraction * 100)}%" for m in r.materials)
         lines += [
+            f"- Presentation: {r.presentation}",
             f"- Category: {r.category} (confidence {r.category_confidence})",
+            f"- Made of: {materials or 'not stated'}",
+            f"- Estimated weight: {r.estimated_weight_kg or 'unknown'} kg "
+            f"(confidence {r.weight_confidence})",
             f"- Brand read off the item: {r.brand_text or 'nothing legible'}",
             f"- Model read off the item: {r.model_text or 'nothing legible'}",
             f"- Rating read: {r.rating_text or 'none'}",
             f"- Label, plate or settings screen legible: {'yes' if r.has_label_or_plate else 'no'}",
             f"- Damage noted: {', '.join(r.condition_notes) or 'none'}",
             f"- Looks like a catalogue image: {'yes' if r.stock_photo_suspected else 'no'}",
+            f"- Screenshot of a gallery: {'yes' if r.screenshot_of_gallery else 'no'}",
         ]
         if r.visible_text:
             lines.append(f"- Text read: {' | '.join(r.visible_text[:8])}")
@@ -201,7 +231,9 @@ def report_markdown(case: Case, result: CaseResult) -> str:
     if result.identified:
         lines.append(f"\n**Answer: {c.model_key}** (margin {c.margin})")
     else:
-        lines.append(f"\n**Refused: {c.failure_code}.** {c.reason}")
+        lines.append(f"\n**Not identified: {c.failure_code}.** {c.reason}")
+    if c.fraud_flags:
+        lines.append("\nEvidence flags: " + "; ".join(c.fraud_flags))
 
     lines += ["", "## Claims"]
     if result.ledger:
@@ -218,11 +250,21 @@ def report_markdown(case: Case, result: CaseResult) -> str:
     if q.is_failure:
         lines.append(f"**{q.failure_code}.** {q.reason}")
     else:
+        basis = {
+            "resale": "priced as a working item",
+            "material_floor": "priced as material",
+            "retail_new": "priced against new retail",
+        }.get(q.basis, q.basis)
         lines.append(
-            f"**{int(q.low):,} to {int(q.high):,} {q.currency}** "
-            f"(width {q.width_ratio}, method {q.method}, "
+            f"**{int(q.low):,} to {int(q.high):,} {q.currency}** ({basis}, "
+            f"width {q.width_ratio}, method {q.method}, "
             f"{q.observation_count} comparable prices)"
         )
+        if q.weight_conditional:
+            lines.append(
+                "\nThe weight is estimated from the photos, so this price is "
+                "settled on the scale at pickup."
+            )
         lines.append(f"\n{q.explanation}")
         if q.floor:
             lines.append(f"\nScrap floor: {int(q.floor):,} {q.currency}")

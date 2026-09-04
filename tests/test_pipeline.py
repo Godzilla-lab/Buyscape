@@ -128,3 +128,47 @@ def test_a_lie_cannot_raise_the_remote_price(protocols):
     )
     assert boastful.low <= honest.low
     assert boastful.high <= honest.high
+
+
+def test_an_unidentified_item_is_still_priced_as_material():
+    """The open world rule: not knowing what it is never means no price."""
+    from buyscape.pricing.sources import MaterialsFloor
+
+    floor = MaterialsFloor(ROOT / "tenants" / "scrap_index_lagos.yaml")
+    obs = floor.fetch([("iron", 0.8), ("steel", 0.15), ("copper", 0.05)], 15.0)
+    quote = price([], [], [], materials=obs, identified=False)
+    assert not quote.is_failure
+    assert quote.basis == "material_floor"
+    assert quote.low and quote.low > 0
+    assert quote.weight_conditional, "an estimated weight must be settled at the scale"
+
+
+def test_no_weight_and_no_identity_is_a_loud_failure():
+    quote = price([], [], [], materials=[], identified=False)
+    assert quote.is_failure and quote.failure_code == "CANNOT_IDENTIFY"
+
+
+def test_derived_material_rates_are_labelled_as_estimates():
+    from buyscape.pricing.sources import MaterialsFloor
+
+    floor = MaterialsFloor(ROOT / "tenants" / "scrap_index_lagos.yaml")
+    published = floor.fetch([("copper", 1.0)], 10.0)
+    assert "estimates" not in published[0].note
+    derived = floor.fetch([("pet_bottle", 1.0)], 10.0)
+    assert "estimates" in derived[0].note
+
+
+def test_identification_lifts_the_price_above_the_material_floor():
+    """Knowing what it is should be worth more than knowing what it is made of."""
+    from buyscape.pricing.sources import MaterialsFloor, Observation
+
+    floor = MaterialsFloor(ROOT / "tenants" / "scrap_index_lagos.yaml")
+    materials = floor.fetch([("steel", 0.6), ("plastic", 0.3), ("copper", 0.1)], 5.0)
+    comps = [
+        Observation("jiji_asking", "asking", amount, "NGN", "2026-09-04")
+        for amount in (300000, 320000, 350000, 380000)
+    ]
+    as_material = price([], [], [], materials=materials, identified=False)
+    as_item = price(comps, [], [], materials=materials, identified=True)
+    assert as_item.high > as_material.high
+    assert as_item.basis == "resale"

@@ -19,9 +19,45 @@ HONESTY = (
 )
 
 
+class MaterialShare(BaseModel):
+    """One material and roughly how much of the item it makes up."""
+
+    material: str = Field(
+        description=(
+            "One of: steel, iron, aluminium, copper, brass, stainless, lead, "
+            "circuit_board, plastic, pet_bottle, paper, glass, rubber, wood, "
+            "textile, mixed_electronic, unknown."
+        )
+    )
+    fraction: float = Field(ge=0.0, le=1.0, description="Rough share of total mass.")
+
+
 class Reading(BaseModel):
     """What tier 1 could actually read and see. No opinions about identity."""
 
+    presentation: str = Field(
+        "single_unit",
+        description=(
+            "single_unit for one manufactured item; mixed_lot for a heap, sack "
+            "or pile sold by weight; sealed_new for something still boxed."
+        ),
+    )
+    materials: list[MaterialShare] = Field(
+        default_factory=list,
+        description=(
+            "What the item is physically made of, by rough mass share, adding "
+            "up to about 1. Judge from what is visible: a fan is mostly steel "
+            "with a copper motor, a sack of bottles is pet_bottle."
+        ),
+    )
+    estimated_weight_kg: float | None = Field(
+        None,
+        description=(
+            "Rough total weight in kilograms, judged from size and material. "
+            "Null if the photos give no sense of scale."
+        ),
+    )
+    weight_confidence: float = Field(0.0, ge=0.0, le=1.0)
     category: str | None = Field(
         None,
         description=(
@@ -59,6 +95,13 @@ class Reading(BaseModel):
     stock_photo_suspected: bool = Field(
         False,
         description="True if this looks like a manufacturer or catalogue image rather than a photo of a real unit.",
+    )
+    screenshot_of_gallery: bool = Field(
+        False,
+        description=(
+            "True if this is a screenshot of a phone showing another photo, "
+            "rather than a photo taken of the item."
+        ),
     )
 
 
@@ -109,19 +152,27 @@ def read_evidence(
     """Tier 1: read the item. Cheap model, high resolution, no identity guessing."""
     request = ModelRequest(
         task="read_evidence",
-        prompt_version="read_evidence.v1",
+        prompt_version="read_evidence.v2",
         system=(
             f"{HONESTY}\n\n"
             "Your job is to READ and DESCRIBE, not to identify. Transcribe text "
             "exactly as printed, including model numbers that look like noise. "
             "Do not infer a brand from a logo shape or a housing colour: if the "
-            "brand name is not legible somewhere, brand_text is null."
+            "brand name is not legible somewhere, brand_text is null.\n\n"
+            "Two things matter as much as the text. First, whether this is one "
+            "manufactured item, a heap or sack sold by weight, or something "
+            "still sealed in its box. Second, what it is physically made of and "
+            "roughly what it weighs, because anything at all can be bought for "
+            "its material even when nobody can tell what it is."
         ),
         user_text=(
-            "Read this item. List every legible line of text, then fill in the "
-            "brand, model, serial and rating fields only from text you can "
-            "actually read. Note visible damage. Say if these look like "
-            "catalogue images rather than photos of a real unit."
+            "Read this item. Say whether it is a single unit, a mixed lot sold "
+            "by weight, or sealed new stock. Estimate what it is made of by "
+            "mass share and roughly what it weighs. List every legible line of "
+            "text, then fill in the brand, model, serial and rating fields only "
+            "from text you can actually read. Note visible damage. Say if these "
+            "are catalogue images rather than photos of a real unit, or a "
+            "screenshot of a phone gallery rather than a photo of the item."
         ),
         output_schema=Reading,
         images=images,

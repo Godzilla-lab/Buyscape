@@ -230,7 +230,7 @@ def download_media(listings: list[Listing], root: Path, client: httpx.Client | N
 
 
 def build(out_dir: Path, per_category: int = 40, region: str = "lagos") -> dict[str, int]:
-    """Fetch and cache the whole test set. Returns counts per category."""
+    """Fetch and cache the whole test set with photos. Returns counts per category."""
     out_dir.mkdir(parents=True, exist_ok=True)
     media_root = out_dir / "media"
     counts: dict[str, int] = {}
@@ -242,6 +242,70 @@ def build(out_dir: Path, per_category: int = 40, region: str = "lagos") -> dict[
             path = out_dir / f"{q.category}.json"
             path.write_text(json.dumps([l.to_json() for l in listings], indent=2))
             counts[q.category] = len(listings)
+    return counts
+
+
+def build_price_pool(
+    out_dir: Path,
+    per_category: int = 400,
+    region: str = "lagos",
+    max_pages: int = 60,
+) -> dict[str, int]:
+    """Cache a large pool of used listings for use as comparable prices only.
+
+    This is the price database a real deployment maintains, and it is separate
+    from the test set: no photos are downloaded, and only second-hand listings
+    are kept, because a dealer's new-stock price is not a used-price comp.
+    """
+    out_dir.mkdir(parents=True, exist_ok=True)
+    counts: dict[str, int] = {}
+    with httpx.Client(headers={"User-Agent": UA}, timeout=30.0) as client:
+        for q in QUERIES:
+            kept: list[Listing] = []
+            seen: set[str] = set()
+            for page in range(1, max_pages + 1):
+                if len(kept) >= per_category:
+                    break
+                r = client.get(BASE, params=q.params(page, region))
+                if r.status_code != 200:
+                    break
+                adverts = (r.json().get("adverts_list") or {}).get("adverts") or []
+                if not adverts:
+                    break
+                for advert in adverts:
+                    attrs = _attrs(advert)
+                    if not _is_used(attrs):
+                        continue
+                    title = str(advert.get("title") or "")
+                    if not _matches(title, q):
+                        continue
+                    price = (advert.get("price_obj") or {}).get("value")
+                    if not isinstance(price, (int, float)) or price <= 0:
+                        continue
+                    advert_id = str(advert.get("guid") or advert.get("id"))
+                    if advert_id in seen:
+                        continue
+                    seen.add(advert_id)
+                    kept.append(
+                        Listing(
+                            id=advert_id,
+                            category=q.category,
+                            title=title,
+                            price_ngn=int(price),
+                            description="",
+                            condition=attrs.get("Condition", ""),
+                            is_used=True,
+                            attrs=attrs,
+                            image_urls=[],
+                            url=str(advert.get("url") or ""),
+                            fetched_at=time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+                        )
+                    )
+                time.sleep(0.6)
+            (out_dir / f"{q.category}.json").write_text(
+                json.dumps([l.to_json() for l in kept], indent=2)
+            )
+            counts[q.category] = len(kept)
     return counts
 
 

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 import typer
@@ -11,7 +12,7 @@ from rich.table import Table
 
 from .evalset import jiji, score
 from .identify.catalogue import load_catalogue
-from .pricing.sources import JijiComps, ScrapIndex
+from .pricing.sources import JijiComps, MaterialsFloor, ScrapIndex
 from .protocols.schema import load_protocols
 from .providers.base import VisionProvider
 from .providers.fake import FakeProvider
@@ -27,18 +28,30 @@ DEFAULT_REASONER = "google/gemini-3.8-flash"
 
 
 def _provider(model: str, fixtures: Path, mode: str) -> VisionProvider:
-    """Build a provider, falling back to replay-only when no key is present."""
+    """Build a provider from the model name.
+
+    A name with no slash is a Google AI Studio model, anything else goes to
+    OpenRouter. Callers never see the difference.
+    """
     if model == "fake":
         return RecordingProvider(FakeProvider(), fixtures / "fake", mode="record")
-    inner = None
-    if os.environ.get("OPENROUTER_API_KEY"):
-        from .providers.openrouter import OpenRouterProvider
 
-        inner = OpenRouterProvider(model)
+    inner = None
+    is_google = "/" not in model
+    key = "GOOGLE_API_KEY" if is_google else "OPENROUTER_API_KEY"
+    if os.environ.get(key):
+        if is_google:
+            from .providers.google import GoogleProvider
+
+            inner = GoogleProvider(model)
+        else:
+            from .providers.openrouter import OpenRouterProvider
+
+            inner = OpenRouterProvider(model)
     elif mode != "replay":
         console.print(
-            "[yellow]OPENROUTER_API_KEY is not set, so only recorded calls can be "
-            "replayed. Set the key to run against real models.[/yellow]"
+            f"[yellow]{key} is not set, so only recorded calls can be replayed "
+            f"for {model}.[/yellow]"
         )
     return RecordingProvider(inner, fixtures / model.replace("/", "_"), mode=mode)
 
@@ -88,15 +101,28 @@ def _load_cases(raw: Path, limit: int | None, categories: list[str] | None) -> l
     return cases
 
 
+@app.command("fetch-prices")
+def fetch_prices(
+    out: Path = typer.Option(Path("eval/prices"), help="Where to cache the price pool."),
+    per_category: int = typer.Option(400, help="Used listings to keep per category."),
+) -> None:
+    """Cache a large pool of used asking prices. No photos, comps only."""
+    counts = jiji.build_price_pool(out, per_category=per_category)
+    for category, n in counts.items():
+        console.print(f"{category:18s} {n}")
+
+
 @app.command("run")
 def run(
     raw: Path = typer.Option(Path("eval/raw"), help="Cached test set."),
+    prices: Path = typer.Option(Path("eval/prices"), help="Cached comparable prices."),
     out: Path = typer.Option(Path("docs/proof"), help="Where reports are written."),
     reader: str = typer.Option(DEFAULT_READER, help="Tier 1 model, or 'fake'."),
     reasoner: str = typer.Option(DEFAULT_REASONER, help="Tier 2 model, or 'fake'."),
     mode: str = typer.Option("auto", help="record | replay | auto"),
     limit: int = typer.Option(0, help="Cap the number of cases. 0 means all."),
     category: list[str] = typer.Option(None, help="Restrict to these categories."),
+    workers: int = typer.Option(6, help="Cases to run at once. Cases are independent."),
     fixtures: Path = typer.Option(Path("eval/fixtures")),
 ) -> None:
     """Run the engine over the test set and write the reports and the gate."""
@@ -107,22 +133,33 @@ def run(
         console.print("[red]No cases found. Run fetch-testset first.[/red]")
         raise typer.Exit(1)
 
-    # A listing must never be its own comparable price.
-    comps = JijiComps(raw, exclude_ids=frozenset(c.id for c in cases))
+    # A listing must never be its own comparable price. The price pool is a
+    # separate, larger cache; the test set is only a fallback when it is absent.
+    pool = prices if prices.exists() else raw
+    comps = JijiComps(pool, exclude_ids=frozenset(c.id for c in cases))
     scrap = ScrapIndex(ROOT / "tenants" / "scrap_index_lagos.yaml")
+    materials = MaterialsFloor(ROOT / "tenants" / "scrap_index_lagos.yaml")
     reader_p = _provider(reader, fixtures, mode)
     reasoner_p = _provider(reasoner, fixtures, mode)
 
     run_dir = out / f"{reader.replace('/', '_')}__{reasoner.replace('/', '_')}"
     (run_dir / "cases").mkdir(parents=True, exist_ok=True)
 
+    def one(case: Case):
+        result = run_case(
+            case, protocols, catalogue, comps, scrap, reader_p, reasoner_p, materials
+        )
+        (run_dir / "cases" / f"{case.id}.md").write_text(report_markdown(case, result))
+        return case, result
+
     pairs = []
+    done = 0
     with console.status(f"Running {len(cases)} cases") as status:
-        for i, case in enumerate(cases, 1):
-            status.update(f"[{i}/{len(cases)}] {case.id}")
-            result = run_case(case, protocols, catalogue, comps, scrap, reader_p, reasoner_p)
-            (run_dir / "cases" / f"{case.id}.md").write_text(report_markdown(case, result))
-            pairs.append((case, result))
+        with ThreadPoolExecutor(max_workers=max(1, workers)) as pool:
+            for case, result in pool.map(one, cases):
+                done += 1
+                status.update(f"[{done}/{len(cases)}] {case.id}")
+                pairs.append((case, result))
 
     metrics = score.score(pairs)
     summary = metrics.summary()

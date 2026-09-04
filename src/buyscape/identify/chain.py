@@ -37,6 +37,7 @@ class LinkLog:
 
 @dataclass
 class ChainResult:
+    presentation: str = "single_unit"
     category: str | None = None
     brand: str | None = None
     model: str | None = None
@@ -50,6 +51,7 @@ class ChainResult:
     identification: Identification | None = None
     links: list[LinkLog] = field(default_factory=list)
     used_label: bool = False
+    fraud_flags: list[str] = field(default_factory=list)
 
     @property
     def model_key(self) -> str | None:
@@ -111,9 +113,28 @@ def run(
     )
 
     result.category = reading.category
+    result.presentation = reading.presentation or "single_unit"
+    if reading.stock_photo_suspected:
+        result.fraud_flags.append("looks like a catalogue or stock image")
+    if reading.screenshot_of_gallery:
+        result.fraud_flags.append("screenshot of a gallery rather than a photo of the item")
+    if result.fraud_flags:
+        result.links.append(LinkLog("forensics", "flag", "; ".join(result.fraud_flags)))
+
+    # A heap of bottles or a pile of boards has no model to find. Asking which
+    # one it is would produce either a guess or a refusal, and both are wrong:
+    # it is priced by material and weight.
+    if result.presentation == "mixed_lot":
+        result.abstained = True
+        result.failure_code = "CANNOT_IDENTIFY"
+        result.reason = "This is a mixed lot, so it is priced by material and weight rather than identified."
+        result.links.append(LinkLog("gate", "lot", "priced by material, identification skipped"))
+        return result
+
     if reading.multiple_items:
+        result.abstained = True
         result.failure_code = "EVIDENCE_INCOMPLETE"
-        result.reason = "The photos show more than one item, so nothing can be priced."
+        result.reason = "The photos show more than one item, so no single item can be identified."
         result.links.append(LinkLog("gate", "abstain", "multiple items in frame"))
         return result
     if not reading.category or reading.category_confidence < MIN_CATEGORY_CONFIDENCE:

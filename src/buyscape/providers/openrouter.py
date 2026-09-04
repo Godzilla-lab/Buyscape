@@ -21,15 +21,21 @@ API_URL = "https://openrouter.ai/api/v1/chat/completions"
 # USD per million tokens, list prices fetched 2026-09-03. Used only to report
 # cost per job; billing is whatever the provider actually charges.
 PRICES: dict[str, tuple[float, float]] = {
-    "qwen/qwen3-vl-32b-instruct": (0.104, 0.416),
     "qwen/qwen3-vl-8b-instruct": (0.117, 0.455),
-    "qwen/qwen3-vl-235b-a22b-instruct": (0.20, 0.88),
-    "google/gemini-3.5-flash": (1.50, 9.00),
-    "google/gemini-3.8-flash": (0.75, 3.75),
-    "google/gemini-3.5-flash-lite": (0.30, 2.50),
-    "anthropic/claude-sonnet-5": (2.00, 10.00),
-    "anthropic/claude-opus-5": (5.00, 25.00),
-    "anthropic/claude-haiku-4.5": (1.00, 5.00),
+    "qwen/qwen3-vl-32b-instruct": (0.104, 0.416),
+    "qwen/qwen3-vl-30b-a3b-instruct": (0.150, 0.600),
+    "qwen/qwen3-vl-235b-a22b-instruct": (0.210, 1.900),
+    "qwen/qwen2.5-vl-72b-instruct": (0.800, 1.000),
+    "google/gemini-2.5-flash-lite": (0.100, 0.400),
+    "google/gemini-3.1-flash-lite": (0.250, 1.500),
+    "google/gemini-3.5-flash-lite": (0.300, 2.500),
+    "google/gemini-3.5-flash": (1.500, 9.000),
+    "google/gemini-3.8-flash": (0.750, 3.750),
+    "google/gemini-3.1-pro-preview": (2.000, 12.000),
+    "anthropic/claude-haiku-4.5": (1.000, 5.000),
+    "anthropic/claude-sonnet-5": (2.000, 10.000),
+    "anthropic/claude-opus-5": (5.000, 25.000),
+    "anthropic/claude-fable-5.1": (10.000, 50.000),
 }
 
 _FENCE = re.compile(r"```(?:json)?\s*(.*?)```", re.DOTALL)
