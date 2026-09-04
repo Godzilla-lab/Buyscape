@@ -31,6 +31,15 @@ from ..providers.tasks import Reading
 # different words, and being wrong about them costs far less.
 CORROBORATED = ("brand_text", "model_text", "rating_text", "serial_text")
 
+# Where fabrication actually lives. A model composes an alphanumeric code
+# character by character, so a code only one reader produced is dropped.
+# A brand is different: it is a word from a small set, read off a logo, and
+# two readers rarely invent the same wrong one. So a brand that one reader
+# read and the other simply left blank survives, marked as uncorroborated.
+# A blank is absence of evidence. Two readers naming different brands is a
+# contradiction, and that is still dropped.
+INVENTABLE_CODES = ("model_text", "rating_text", "serial_text")
+
 
 @dataclass
 class Corroboration:
@@ -38,12 +47,17 @@ class Corroboration:
     agreed: list[str] = field(default_factory=list)
     disputed: list[str] = field(default_factory=list)
     only_one_saw: list[str] = field(default_factory=list)
+    uncorroborated: list[str] = field(default_factory=list)
 
     @property
     def notes(self) -> list[str]:
         out = [f"{f} agreed by both readers" for f in self.agreed]
         out += [f"{f} differed between the two readers, so it is treated as unread" for f in self.disputed]
         out += [f"{f} was seen by only one reader, so it is treated as unread" for f in self.only_one_saw]
+        out += [
+            f"{f} was read by only one reader, so it is kept but not confirmed"
+            for f in self.uncorroborated
+        ]
         return out
 
 
@@ -85,11 +99,16 @@ def corroborate(first: Reading, second: Reading | None) -> Corroboration:
             setattr(merged, field_name, max([mine, theirs], key=lambda v: len(v or "")))
             out.agreed.append(field_name)
         elif mine and theirs:
+            # They read different things off the same photograph. One of them
+            # is wrong and nothing here says which, so neither survives.
             setattr(merged, field_name, None)
             out.disputed.append(field_name)
-        else:
+        elif field_name in INVENTABLE_CODES:
             setattr(merged, field_name, None)
             out.only_one_saw.append(field_name)
+        else:
+            setattr(merged, field_name, mine or theirs)
+            out.uncorroborated.append(field_name)
 
     # A label is only legible if both readers could read something off it.
     merged.has_label_or_plate = first.has_label_or_plate and second.has_label_or_plate

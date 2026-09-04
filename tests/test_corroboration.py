@@ -149,3 +149,61 @@ def test_an_answer_code_that_appears_nowhere_in_the_evidence_is_refused():
 
     read = Reading(visible_text=["Model: AC12BQ", "LG"], model_text="AC12BQ")
     assert invented_code(read, "", "LG AC12BQ 1.5 Ton Inverter Split") is None
+
+
+def test_a_brand_one_reader_saw_survives_but_says_it_is_uncorroborated():
+    """A blank is not a contradiction, and a brand is not a plate code.
+
+    Measured on the Jiji set: 45 of 178 cases lost the brand because one
+    reader named it and the other named nothing, which is absence of
+    evidence rather than conflict. Fabrication lives in alphanumeric codes,
+    which a model composes character by character. A brand is a logo from a
+    small set, so a single read is weak evidence, not no evidence. It
+    survives, marked, and the decider weighs it lower.
+    """
+    a = Reading(brand_text="Hisense", has_label_or_plate=True, visible_text=["Hisense"])
+    b = Reading(brand_text=None, has_label_or_plate=True, visible_text=["8kg"])
+    out = corroborate(a, b)
+    assert out.reading.brand_text == "Hisense"
+    assert "brand_text" in out.uncorroborated
+    assert "brand_text" not in out.only_one_saw
+    assert any("only one reader" in n for n in out.notes)
+
+
+def test_two_readers_naming_different_brands_still_read_nothing():
+    a = Reading(brand_text="Hisense", has_label_or_plate=True, visible_text=["Hisense"])
+    b = Reading(brand_text="Haier", has_label_or_plate=True, visible_text=["Haier"])
+    out = corroborate(a, b)
+    assert out.reading.brand_text is None
+    assert "brand_text" in out.disputed
+
+
+def test_a_model_code_one_reader_saw_is_still_dropped():
+    """The strict rule stays exactly where fabrication actually happens."""
+    a = Reading(model_text="SY6500", has_label_or_plate=True, visible_text=["SY6500"])
+    b = Reading(model_text=None, has_label_or_plate=True, visible_text=["ELEPAQ"])
+    out = corroborate(a, b)
+    assert out.reading.model_text is None
+    assert "model_text" in out.only_one_saw
+
+
+def test_an_answer_leaning_on_one_readers_brand_is_less_sure():
+    """Keeping the brand is not the same as confirming it.
+
+    A brand one reader saw is weaker evidence than one both produced, so the
+    number the back office reads has to say so. Otherwise the softer rule
+    would quietly buy confidence it did not earn.
+    """
+    from buyscape.identify.chain import ChainResult, identification_strength
+    from buyscape.providers.tasks import Candidate, Identification
+
+    ident = Identification(candidates=[Candidate(brand="Hisense", model="8kg", score=0.95)],
+                           chosen_brand="Hisense", chosen_model="8kg")
+    seen = Reading(brand_text="Hisense", corroborated_lines=4)
+    both = ChainResult(used_label=True, identification=ident, margin=0.8,
+                       corroborated=True, reading=seen)
+    one = ChainResult(used_label=True, identification=ident, margin=0.8,
+                      corroborated=True, reading=seen,
+                      uncorroborated_fields=["brand_text"])
+    assert identification_strength(one)[0] < identification_strength(both)[0]
+    assert any("only one reader" in w for w in identification_strength(one)[1])

@@ -58,6 +58,13 @@ def identification_strength(result: ChainResult) -> tuple[float, list[str]]:
         else:
             score *= 0.8
             why.append("the two readers agreed on nothing legible")
+    uncorroborated = list(result.uncorroborated_fields)
+    if uncorroborated:
+        # Kept, because a blank from the other reader is not a contradiction,
+        # but never worth as much as text both readers produced.
+        score *= 0.8
+        named = ", ".join(f.replace("_text", "") for f in uncorroborated)
+        why.append(f"the {named} was read by only one reader and is not confirmed")
     if result.margin is not None and result.margin < 0.30:
         score *= 0.9
         why.append(f"the next candidate was only {result.margin} behind")
@@ -97,6 +104,9 @@ class ChainResult:
     links: list[LinkLog] = field(default_factory=list)
     used_label: bool = False
     corroborated: bool = False
+    # Identifying fields that survived on one reader's word alone: weaker
+    # evidence than a corroborated read, and everything downstream is told so.
+    uncorroborated_fields: list[str] = field(default_factory=list)
     corroboration_failed: bool = False
     corroboration_notes: list[str] = field(default_factory=list)
     fraud_flags: list[str] = field(default_factory=list)
@@ -386,6 +396,7 @@ def run(
             )
         )
         result.corroboration_notes = check.notes
+        result.uncorroborated_fields = list(check.uncorroborated)
     result.reading = reading
     result.used_label = reading.has_label_or_plate
     result.links.append(
