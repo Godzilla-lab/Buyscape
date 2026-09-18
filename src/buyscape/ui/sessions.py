@@ -298,6 +298,7 @@ class Store:
         }
         if kind == "photo":
             record.update(self._quality(path, slot, session))
+        self._backup(session)
         session["photos"].append(record)
         if kind == "clip":
             # The readers look at stills, so the clip becomes its sharpest
@@ -380,6 +381,7 @@ class Store:
         session["stage"] = "reading"
         session["error"] = None
         self._save(session)
+        self._backup(session)
 
         def progress(stage: str) -> None:
             session["stage"] = stage
@@ -482,6 +484,25 @@ class Store:
         self._save(session)
         self._backup(session, with_settlements=True)
         return self.office_view(session)
+
+    INTERRUPTED = "The server restarted while looking at your photos. Nothing was lost. Press Get my offer again."
+
+    def recover_interrupted(self) -> int:
+        """Sessions that were valuing when the process died. The photos are
+        here, the valuation is not, and the seller should be told rather than
+        shown a spinner for hours."""
+        count = 0
+        for path in self.dir.glob("*/session.json"):
+            try:
+                session = json.loads(path.read_text())
+            except (OSError, json.JSONDecodeError):
+                continue
+            if session.get("status") == "valuing":
+                session["status"] = "failed"
+                session["error"] = self.INTERRUPTED
+                self._save(session)
+                count += 1
+        return count
 
     def _backup(self, session: dict, with_settlements: bool = False) -> None:
         if self.archive is None:

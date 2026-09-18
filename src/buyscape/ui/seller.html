@@ -141,7 +141,7 @@
     drawShots(); drawQuestions();
     if (s.outcome) drawOffer(s.outcome); else $("stepOffer").hidden = true;
     if (s.valuing) waitForOffer(s.id);
-    else if (s.error) status("submitStatus", "Something went wrong on our side. Press Get my offer to try again.", true);
+    else if (s.error) status("submitStatus", /restarted/.test(s.error) ? s.error : "Something went wrong on our side. Press Get my offer to try again.", true);
   }
   // The valuation takes a minute or two and a phone browser gives up on a
   // request long before that, so the page asks every few seconds instead.
@@ -159,7 +159,14 @@
         $("submitBtn").disabled = false;
         setSession(s);
         if (!s.error) { status("submitStatus", ""); $("stepOffer").scrollIntoView({ behavior: "smooth" }); }
-      } catch (e) { /* a dropped poll is not a failure; the next one runs */ }
+      } catch (e) {
+        // A dropped poll is not a failure; the next one runs. A session the
+        // server no longer knows is: it restarted and lost the folder.
+        if (/no such session/i.test(e.message)) {
+          clearInterval(waiting); waiting = null; $("submitBtn").disabled = false;
+          status("submitStatus", "Our server restarted and lost this session. Please start again from the top. Sorry.", true);
+        }
+      }
     }, 3000);
   }
   function shotHtml(x) {

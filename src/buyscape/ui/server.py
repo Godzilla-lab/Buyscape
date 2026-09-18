@@ -87,6 +87,9 @@ class Engine:
                     print(f"restored {restored} sessions from {self.archive.repo_id}")
             except Exception as exc:  # the page must come up even if the Hub is down
                 print(f"archive unavailable: {exc}")
+        interrupted = self.store.recover_interrupted()
+        if interrupted:
+            print(f"{interrupted} sessions were mid-valuation at the last restart and are marked to retry")
 
     # ----- the one way the engine is run -----
 
