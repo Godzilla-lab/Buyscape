@@ -1,34 +1,37 @@
 # Case used-dry-pressing-iron-for-sale-in-lagos
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  21337 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  28005 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: iron (confidence 0.95)
-- Made of: plastic 60%, steel 20%, copper_insulated 10%, rubber 10%
+- Made of: plastic 60%, steel 30%, copper_insulated 10%
 - Estimated weight: 1.2 kg (confidence 0.8)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: body shows signs of discoloration and minor stains, power cord is frayed and damaged in multiple places, plug appears worn and possibly loose
+- Damage noted: visible stains and discoloration on plastic body, worn and frayed power cord with exposed wires, damaged plug housing
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 
+## Two readers
+- item_type agreed by both readers
+
 ## Chain
 - **ocr** -> ok. 0 lines: 
-- **corroborate** -> agree. nothing identifying was read by either
+- **corroborate** -> agree. item_type agreed by both readers
 - **read_evidence** -> ok. category=iron brand=None model=None label=False lines=0
 - **retrieval** -> ok. query='A used dry pressing iron that is still working is available for sale. Location: Agege, Lag' hits=['Acer Aspire 5', 'Tecno Pova 5', 'Kemage KM6500 5.5kVA']
 - **identify** -> refused. chosen=None None margin=None
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 4982 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 7597 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 6893 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 1865 ms (replayed)
-- total across calls: 21337 ms; wall clock: 164 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 6467 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 11876 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 7428 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2234 ms (replayed)
+- total across calls: 28005 ms; wall clock: 1261 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -36,15 +39,14 @@ Shortlist from the catalogue:
   - Tecno Pova 5 (0.2)
   - Kemage KM6500 5.5kVA (0.15)
 
-**Not identified: CANNOT_IDENTIFY.** Item is a dry pressing iron but no brand or model is legible; shortlist (laptop, phone, generator) does not match at all.
+**Not identified: CANNOT_IDENTIFY.** Item is a dry pressing iron, but no brand or model text is legible; shortlist entries (laptop, phone, generator) do not match.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 8% on the best answer. It is probably a Unknown Dry pressing iron, and the photos cannot separate them.**
+**0%: the photos do not say what this is.**
 
-- Identification confidence: 8% (unknown)
+- Identification confidence: 0% (unknown)
 - Price confidence: 22%
-- It is weighing: Unknown Dry pressing iron (0.2)
-- Item is a dry pressing iron but no brand or model is legible; shortlist (laptop, phone, generator) does not match at all.
+- Item is a dry pressing iron, but no brand or model text is legible; shortlist entries (laptop, phone, generator) do not match.
 - no label, plate or settings screen was legible
 - the two readers agreed on nothing legible
 - 6 claims are still unproven, 0 are supported
@@ -74,14 +76,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Hold a fridge magnet against it and photograph it. Say whether the magnet sticks.
 
 ## Price
-**366 to 645 NGN** (priced as material, width 0.5526, method material_floor, 0 comparable prices)
+**405 to 705 NGN** (priced as material, width 0.5395, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 1.2 kg of plastic 60%, steel 20%, copper_insulated 10%, rubber 10% (rates for plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 1.2 kg of plastic 60%, steel 30%, copper_insulated 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 498 NGN
+Scrap floor: 552 NGN
 
 Conditions attached to this price:
-- Not identified: Item is a dry pressing iron but no brand or model is legible; shortlist (laptop, phone, generator) does not match at all.
+- Not identified: Item is a dry pressing iron, but no brand or model text is legible; shortlist entries (laptop, phone, generator) do not match.
 - A used dry pressing iron is available for sale. -> not proven remotely. Agent will confirm at pickup.
 - The dry pressing iron is still working. -> not proven remotely. Agent will confirm at pickup.
 - Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on paper and take one photo with the paper next to the pile..

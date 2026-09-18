@@ -1,6 +1,6 @@
 # Case rtdWIW4M4B2ZJ9U3XsjsPrmI
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  22201 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  36624 ms
 
 ## What the engine saw
 - Presentation: sealed_new
@@ -17,6 +17,7 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Text read: iPhone
 
 ## Two readers
+- item_type agreed by both readers
 - 1 transcribed lines was seen by only one reader, so it is treated as unread
 - brand_text was read by only one reader, so it is kept but not confirmed
 
@@ -25,7 +26,7 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 1 lines: 日
-- **corroborate** -> dispute. 1 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed
+- **corroborate** -> dispute. item_type agreed by both readers; 1 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed
 - **read_evidence** -> ok. category=phone brand=iPhone model=None label=False lines=1
 - **forensics** -> flag. looks like a catalogue or stock image
 - **retrieval** -> ok. query='iPhone iPhone New iphone 14__256gb' hits=['Apple iPhone 14', 'Apple iPhone 14 Pro', 'Apple iPhone 14 Pro Max', 'Apple iPhone XR', 'Apple iPhone XS']
@@ -33,11 +34,11 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **abstain** -> abstain. no label, top score 0.7
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 4703 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 5633 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 9780 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 2085 ms (replayed)
-- total across calls: 22201 ms; wall clock: 427 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5251 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 17412 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 11753 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2208 ms (replayed)
+- total across calls: 36624 ms; wall clock: 2028 ms
 
 ## Identification
 Shortlist from the catalogue:

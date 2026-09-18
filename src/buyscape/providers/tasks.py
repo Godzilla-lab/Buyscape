@@ -18,7 +18,7 @@ HONESTY = (
     "READ fields (brand, model, serial, rating, visible text): copy only what is "
     "literally legible in the image. Never infer these from a shape, a logo or a "
     "colour. If it is not printed and readable, the value is null.\n"
-    "JUDGE fields (category, presentation, materials, weight, condition): give "
+    "JUDGE fields (category, item type, presentation, materials, weight, condition): give "
     "your best assessment from what the picture shows, and use the confidence "
     "field to say how sure you are. These are ordinary visual judgements and "
     "leaving them empty is unhelpful, not cautious. Anyone can see that a "
@@ -79,6 +79,19 @@ class Reading(BaseModel):
         ),
     )
     category_confidence: float = Field(0.0, ge=0.0, le=1.0)
+    item_type: str | None = Field(
+        None,
+        description=(
+            "What it is, in the three to five plain words a buyer would type "
+            "into a marketplace search: 'single seater sofa', 'phone holder "
+            "stand', 'wooden wardrobe', 'office chair', 'standing fan'. Say "
+            "the size or seat count in digits when it changes the price, "
+            "'1 seater sofa', '43 inch television', and count seats by the "
+            "people who can sit, not the cushions. A judgement "
+            "from shape and use, so give it even when nothing is written on "
+            "the item. Null only if the photos do not show a single clear item."
+        ),
+    )
     visible_text: list[str] = Field(
         default_factory=list,
         description="Every legible line of text on the item, labels, plates and screens. Verbatim.",
@@ -180,7 +193,7 @@ def read_evidence(
     """Tier 1: read the item. Cheap model, high resolution, no identity guessing."""
     request = ModelRequest(
         task="read_evidence",
-        prompt_version="read_evidence.v5",
+        prompt_version="read_evidence.v6",
         system=(
             f"{HONESTY}\n\n"
             "Your job is to READ and DESCRIBE, not to work out which exact model "
@@ -199,7 +212,10 @@ def read_evidence(
             "Always fill in category, presentation, materials and an approximate "
             "weight. These are judgements, so give them even when no text is "
             "legible at all: an item with no readable label still has a shape, a "
-            "size and a material, and it can still be bought for scrap.\n\n"
+            "size and a material, and it can still be bought for scrap. Many "
+            "things worth buying carry no brand or model at all, a sofa, a "
+            "wardrobe, a phone stand, and for those the item type is the "
+            "whole identity, so name it the way a buyer would search for it.\n\n"
             "Two things matter as much as the text. First, whether this is one "
             "manufactured item, a heap or sack sold by weight, or something "
             "still sealed in its box. Second, what it is physically made of and "
@@ -208,7 +224,8 @@ def read_evidence(
         ),
         user_text=(
             "Describe this item.\n\n"
-            "Judge, always: what kind of thing it is and how confident you are; "
+            "Judge, always: what kind of thing it is and how confident you are, "
+            "and its type in the words a buyer would search for; "
             "whether it is a single unit, a mixed lot sold by weight, or sealed "
             "new stock; what it is made of by rough mass share; and about what "
             "it weighs in kilograms.\n\n"

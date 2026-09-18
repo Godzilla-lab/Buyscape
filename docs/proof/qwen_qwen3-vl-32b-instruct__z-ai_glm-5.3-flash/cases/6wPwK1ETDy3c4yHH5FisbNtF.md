@@ -1,6 +1,6 @@
 # Case 6wPwK1ETDy3c4yHH5FisbNtF
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  32695 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0013  |  22474 ms
 
 ## What the engine saw
 - Presentation: single_unit
@@ -11,35 +11,35 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: screen is on, displaying colorful bokeh wallpaper, no visible cracks or dents on body, keyboard appears clean and intact, touchpad shows minor signs of use
-- Looks like a catalogue image: yes
+- Damage noted: screen is on, displaying colorful bokeh wallpaper, no visible cracks or dents on body, keyboard appears clean and intact
+- Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: hp
+- Text read: hp | Windows
 
 ## Two readers
 - brand_text agreed by both readers
-- 2 transcribed lines was seen by only one reader, so it is treated as unread
+- item_type agreed by both readers
+- 1 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## Chain
 - **ocr** -> ok. 0 lines: 
-- **corroborate** -> dispute. brand_text agreed by both readers; 2 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=laptop brand=hp model=None label=False lines=1
-- **forensics** -> flag. looks like a catalogue or stock image
-- **retrieval** -> ok. query='hp hp HP Probook 440 G7
+- **corroborate** -> dispute. brand_text agreed by both readers; item_type agreed by both readers; 1 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=laptop brand=hp model=None label=False lines=2
+- **retrieval** -> ok. query='hp hp Windows HP Probook 440 G7
 Intel Core i5
 10th Generation 
 8GB RAM 
 256GB SSD
-Excellent batter' hits=['HP ProBook 450 G7', 'HP 250 G7', 'HP 2000', 'HP Pavilion 15', 'HP EliteBook 840 G5']
-- **identify** -> refused. chosen=None None margin=0.2
+Excellen' hits=['HP ProBook 450 G7', 'HP 250 G7', 'HP 2000', 'HP Pavilion 15', 'HP EliteBook 840 G5']
+- **identify** -> refused. chosen=None None margin=0.1
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 6249 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 7153 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 15175 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 4118 ms (replayed)
-- total across calls: 32695 ms; wall clock: 125 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5128 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 6310 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 7267 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3769 ms (replayed)
+- total across calls: 22474 ms; wall clock: 1198 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -49,31 +49,28 @@ Shortlist from the catalogue:
   - HP Pavilion 15 (0.4333)
   - HP EliteBook 840 G5 (0.3)
 
-**Not identified: CANNOT_IDENTIFY.** Only 'hp' is legible; seller names ProBook 440 G7, which is absent from the shortlist, and no model plate is visible to confirm any candidate.
-
-Evidence flags: looks like a catalogue or stock image
+**Not identified: CANNOT_IDENTIFY.** Seller claims ProBook 440 G7 but no label is legible; 440 G7 is not on the shortlist and 440 vs 450 cannot be distinguished visually without a size reference or model text.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 8% on the best answer. It is probably a HP ProBook 450 G7 or a HP EliteBook 840 G5, and the photos cannot separate them.**
+**Not sure enough to price: 23% on the best answer. It is probably a HP ProBook 450 G7 or a HP ProBook 440 G7, and the photos cannot separate them.**
 
-- Identification confidence: 8% (unknown)
+- Identification confidence: 23% (unknown)
 - Price confidence: 14%
-- It is weighing: HP ProBook 450 G7 (0.35), HP EliteBook 840 G5 (0.15)
-- Only 'hp' is legible; seller names ProBook 440 G7, which is absent from the shortlist, and no model plate is visible to confirm any candidate.
+- It is weighing: HP ProBook 450 G7 (0.5), HP ProBook 440 G7 (0.4)
+- Seller claims ProBook 440 G7 but no label is legible; 440 G7 is not on the shortlist and 440 vs 450 cannot be distinguished visually without a size reference or model text.
 - no label, plate or settings screen was legible
-- 1 lines seen by both readers
-- the next candidate was only 0.2 behind
-- looks like a catalogue or stock image
+- 2 lines seen by both readers
+- the next candidate was only 0.1 behind
 - 10 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
 
 ## What the seller is asked for next (shown in the app)
-1. [PHOTO] Take your own photo of the actual item you are selling.
-   _why: this looks like a catalogue picture, not the real unit_
-2. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: Photo of the sticker on the underside showing the model, serial or service tag. Then, still filming, do this on the item's own screen and hold it steady so the writing can be read: open system Information (Windows) or About This Mac, showing the model, processor, RAM and storage. Then, without stopping the video: If the bottom panel comes off with a screwdriver, remove it and photograph the inside: RAM slots, drive and battery. Finish with: A short clip typing a few keys, moving the trackpad, and plugging the charger in so the charge light shows. Keep filming the whole time. Do not cut between clips.
+1. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: Photo of the sticker on the underside showing the model, serial or service tag. Then, still filming, do this on the item's own screen and hold it steady so the writing can be read: open system Information (Windows) or About This Mac, showing the model, processor, RAM and storage. Then, without stopping the video: If the bottom panel comes off with a screwdriver, remove it and photograph the inside: RAM slots, drive and battery. Finish with: A short clip typing a few keys, moving the trackpad, and plugging the charger in so the charge light shows. Keep filming the whole time. Do not cut between clips.
    _why: two readings of these photos disagreed about what is written on the item_
-3. [PHOTO] Photo of the sticker on the underside showing the model, serial or service tag.
+2. [PHOTO] Photo of the sticker on the underside showing the model, serial or service tag.
+   _why: nothing on the item says which model this is_
+3. [PHOTO] Screenshot of System Information (Windows) or About This Mac, showing the model, processor, RAM and storage.
    _why: nothing on the item says which model this is_
 
 ## What the seller is asked (only they know these)
@@ -109,8 +106,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 454 NGN
 
 Conditions attached to this price:
-- Not identified: Only 'hp' is legible; seller names ProBook 440 G7, which is absent from the shortlist, and no model plate is visible to confirm any candidate.
-- Evidence flag: looks like a catalogue or stock image
+- Not identified: Seller claims ProBook 440 G7 but no label is legible; 440 G7 is not on the shortlist and 440 vs 450 cannot be distinguished visually without a size reference or model text.
 - Raised to the 5,000 NGN minimum this business publishes for this kind of item.
 - HP Probook 440 G7 -> not proven remotely. Agent will confirm at pickup.
 - Intel Core i5 -> not proven remotely. Agent will confirm at pickup.

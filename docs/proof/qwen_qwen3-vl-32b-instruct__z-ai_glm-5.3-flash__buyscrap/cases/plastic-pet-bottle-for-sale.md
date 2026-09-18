@@ -1,10 +1,10 @@
 # Case plastic-pet-bottle-for-sale
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  12576 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  21348 ms
 
 ## What the engine saw
 - Presentation: mixed_lot
-- Category: recyclable plastic waste (confidence 0.9)
+- Category: recyclable waste (confidence 0.9)
 - Made of: pet_bottle 90%, plastic 10%
 - Estimated weight: 25.0 kg (confidence 0.6)
 - Brand read off the item: nothing legible
@@ -15,17 +15,20 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 
+## Two readers
+- item_type agreed by both readers
+
 ## Chain
 - **ocr** -> ok. 0 lines: 
-- **corroborate** -> agree. nothing identifying was read by either
-- **read_evidence** -> ok. category=recyclable plastic waste brand=None model=None label=False lines=0
+- **corroborate** -> agree. item_type agreed by both readers
+- **read_evidence** -> ok. category=recyclable waste brand=None model=None label=False lines=0
 - **gate** -> lot. priced by material, identification skipped
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 4429 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 6091 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 2056 ms (replayed)
-- total across calls: 12576 ms; wall clock: 689 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 6470 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 10543 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 4335 ms (replayed)
+- total across calls: 21348 ms; wall clock: 1985 ms
 
 ## Identification
 No catalogue candidates matched.
@@ -36,11 +39,11 @@ No catalogue candidates matched.
 **0%: the photos do not say what this is.**
 
 - Identification confidence: 0% (unknown)
-- Price confidence: 22%
+- Price confidence: 18%
 - This is a mixed lot, so it is priced by material and weight rather than identified.
 - no label, plate or settings screen was legible
 - the two readers agreed on nothing legible
-- 6 claims are still unproven, 0 are supported
+- 8 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
 
@@ -57,8 +60,10 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 - Does a magnet stick to it?
 
 ## Claims
-- [unverifiable_remote] The items are clean and sorted PET bottles ready for weighing and pickup.
-- [unverifiable_remote] Plastic PET bottle for sale in Ikosi, Ketu, Lagos State, Nigeria.
+- [unverifiable_remote] The items are clean PET bottles.
+- [unverifiable_remote] The items are sorted PET bottles.
+- [unverifiable_remote] The items are ready for weighing and pickup.
+- [unverifiable_remote] The items are plastic PET bottles.
 - [unverified] Required evidence 'code_shot' was not supplied
     priced as: priced as if the worst case is true. Write the code {code} on paper and take one photo with the paper next to the pile.
 - [unverified] Required evidence 'whole_pile' was not supplied
@@ -69,7 +74,7 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Hold a fridge magnet against it and photograph it. Say whether the magnet sticks.
 
 ## Price
-**2,168 to 4,950 NGN** (priced as material, width 0.7815, method material_floor, 0 comparable prices)
+**1,957 to 4,950 NGN** (priced as material, width 0.8666, method material_floor, 0 comparable prices)
 
 This item was not identified, so it is priced as material rather than as a working item: 25 kg of pet_bottle 90%, plastic 10% (rates for pet_bottle, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
@@ -77,8 +82,10 @@ Scrap floor: 2,950 NGN
 
 Conditions attached to this price:
 - Not identified: This is a mixed lot, so it is priced by material and weight rather than identified.
-- The items are clean and sorted PET bottles ready for weighing and pickup. -> not proven remotely. Agent will confirm at pickup.
-- Plastic PET bottle for sale in Ikosi, Ketu, Lagos State, Nigeria. -> not proven remotely. Agent will confirm at pickup.
+- The items are clean PET bottles. -> not proven remotely. Agent will confirm at pickup.
+- The items are sorted PET bottles. -> not proven remotely. Agent will confirm at pickup.
+- The items are ready for weighing and pickup. -> not proven remotely. Agent will confirm at pickup.
+- The items are plastic PET bottles. -> not proven remotely. Agent will confirm at pickup.
 - Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on paper and take one photo with the paper next to the pile..
 - Required evidence 'whole_pile' was not supplied -> not proven remotely. One photo of the whole quantity, with a person or a car in shot so its size is clear..
 - Required evidence 'material_closeup' was not supplied -> not proven remotely. Close-up of the material itself, close enough to see whether it is bare metal, coated, painted or still in its covering..

@@ -1,46 +1,47 @@
 # Case shi1vsagOhS73PcK4meKRlee
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0013  |  45838 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  36798 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: laptop (confidence 0.95)
-- Made of: plastic 40%, steel 30%, circuit_board 15%, copper_insulated 10%, glass 5%
+- Made of: plastic 40%, steel 30%, circuit_board 15%, glass 10%, aluminium 5%
 - Estimated weight: 1.8 kg (confidence 0.7)
-- Brand read off the item: Dell
+- Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: screen is on, displaying a landscape image, keyboard and casing appear clean with no visible damage
-- Looks like a catalogue image: yes
+- Damage noted: Screen shows vibrant wallpaper, no visible cracks, Keyboard appears clean, no liquid damage, Lid and base show minor scuffs and fingerprints
+- Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: Windows 10 Pro | Dell
 
 ## Two readers
+- item_type agreed by both readers
+- brand_text differed between the two readers, so it is treated as unread
 - model_text was seen by only one reader, so it is treated as unread
-- 3 transcribed lines was seen by only one reader, so it is treated as unread
-- brand_text was read by only one reader, so it is kept but not confirmed
+- rating_text was seen by only one reader, so it is treated as unread
+- 6 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## Chain
 - **ocr** -> ok. 0 lines: 
-- **corroborate** -> dispute. model_text was seen by only one reader, so it is treated as unread; 3 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed
-- **read_evidence** -> ok. category=laptop brand=Dell model=None label=False lines=2
-- **forensics** -> flag. looks like a catalogue or stock image
-- **retrieval** -> ok. query='Dell Windows 10 Pro Dell Dell Precision 5520
+- **corroborate** -> dispute. item_type agreed by both readers; brand_text differed between the two readers, so it is treated as unread; model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; 6 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=laptop brand=None model=None label=False lines=0
+- **retrieval** -> ok. query='Dell Precision 5520
 Intel Core i5-7350HQ
 7th Gen
 8gb
 128gb ssd
-15' hits=['Dell Inspiron 15 3000', 'Dell Latitude 7490', 'Dell Latitude 5490', 'Dell Latitude E7470', 'Dell XPS 13 9370']
-- **identify** -> refused. chosen=None None margin=0.05
+15.6inches QhD IPS display
+' hits=['Dell Inspiron 15 3000', 'Dell Latitude 7490', 'Dell Latitude 5490', 'Dell Latitude E7470', 'Dell XPS 13 9370']
+- **identify** -> refused. chosen=None None margin=None
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 8506 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 11947 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 19291 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 6094 ms (replayed)
-- total across calls: 45838 ms; wall clock: 127 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 9112 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 10010 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 9510 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 8166 ms (replayed)
+- total across calls: 36798 ms; wall clock: 1790 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -50,32 +51,26 @@ Shortlist from the catalogue:
   - Dell Latitude E7470 (0.3)
   - Dell XPS 13 9370 (0.3)
 
-**Not identified: CANNOT_IDENTIFY.** Seller claims a Precision 5520, but no legible label confirms it and that model is not on the shortlist; visible text only shows 'Dell' and 'Windows 10 Pro', so no shortlist entry fits the claimed 15.6-inch workstation.
-
-Evidence flags: looks like a catalogue or stock image
+**Not identified: CANNOT_IDENTIFY.** No legible label or text in photos; seller's claimed model (Precision 5520) is not on the shortlist and cannot be visually confirmed, and the stated i5-7350HQ CPU is atypical for that model.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 2% on the best answer. It is probably a Dell XPS 13 9370 or a Dell Latitude 7490, and the photos cannot separate them.**
+**0%: the photos do not say what this is.**
 
-- Identification confidence: 2% (unknown)
+- Identification confidence: 0% (unknown)
 - Price confidence: 14%
-- It is weighing: Dell XPS 13 9370 (0.1), Dell Latitude 7490 (0.05)
-- Seller claims a Precision 5520, but no legible label confirms it and that model is not on the shortlist; visible text only shows 'Dell' and 'Windows 10 Pro', so no shortlist entry fits the claimed 15.6-inch workstation.
+- No legible label or text in photos; seller's claimed model (Precision 5520) is not on the shortlist and cannot be visually confirmed, and the stated i5-7350HQ CPU is atypical for that model.
 - no label, plate or settings screen was legible
-- 1 lines seen by both readers
-- the brand was read by only one reader and is not confirmed
-- the next candidate was only 0.05 behind
-- looks like a catalogue or stock image
+- the two readers agreed on nothing legible
 - 13 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
 
 ## What the seller is asked for next (shown in the app)
-1. [PHOTO] Take your own photo of the actual item you are selling.
-   _why: this looks like a catalogue picture, not the real unit_
-2. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: Photo of the sticker on the underside showing the model, serial or service tag. Then, still filming, do this on the item's own screen and hold it steady so the writing can be read: open system Information (Windows) or About This Mac, showing the model, processor, RAM and storage. Then, without stopping the video: If the bottom panel comes off with a screwdriver, remove it and photograph the inside: RAM slots, drive and battery. Finish with: A short clip typing a few keys, moving the trackpad, and plugging the charger in so the charge light shows. Keep filming the whole time. Do not cut between clips.
+1. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: Photo of the sticker on the underside showing the model, serial or service tag. Then, still filming, do this on the item's own screen and hold it steady so the writing can be read: open system Information (Windows) or About This Mac, showing the model, processor, RAM and storage. Then, without stopping the video: If the bottom panel comes off with a screwdriver, remove it and photograph the inside: RAM slots, drive and battery. Finish with: A short clip typing a few keys, moving the trackpad, and plugging the charger in so the charge light shows. Keep filming the whole time. Do not cut between clips.
    _why: two readings of these photos disagreed about what is written on the item_
-3. [PHOTO] Photo of the sticker on the underside showing the model, serial or service tag.
+2. [PHOTO] Photo of the sticker on the underside showing the model, serial or service tag.
+   _why: nothing on the item says which model this is_
+3. [PHOTO] Screenshot of System Information (Windows) or About This Mac, showing the model, processor, RAM and storage.
    _why: nothing on the item says which model this is_
 
 ## What the seller is asked (only they know these)
@@ -91,7 +86,7 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 - [unverified] 8gb
     priced as: the smallest configuration this model shipped with. Agent opens System Information and reads the RAM
 - [unverified] 128gb ssd
-    priced as: the smallest drive this model shipped with. Agent reads the drive size from System Information
+    priced as: the smallest configuration this model shipped with. Agent opens System Information and reads the RAM
 - [unverifiable_remote] 15.6inches QhD IPS display
 - [unverifiable_remote] 15.6inches QhD IPS display
 - [unverifiable_remote] 15.6inches QhD IPS display
@@ -108,19 +103,18 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 ## Price
 **5,000 to 5,000 NGN** (priced as material, width 0.0, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 1.8 kg of plastic 40%, steel 30%, circuit_board 15%, copper_insulated 10%, glass 5% (rates for glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 1.8 kg of plastic 40%, steel 30%, circuit_board 15%, glass 10%, aluminium 5% (rates for glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 1,009 NGN
+Scrap floor: 741 NGN
 
 Conditions attached to this price:
-- Not identified: Seller claims a Precision 5520, but no legible label confirms it and that model is not on the shortlist; visible text only shows 'Dell' and 'Windows 10 Pro', so no shortlist entry fits the claimed 15.6-inch workstation.
-- Evidence flag: looks like a catalogue or stock image
+- Not identified: No legible label or text in photos; seller's claimed model (Precision 5520) is not on the shortlist and cannot be visually confirmed, and the stated i5-7350HQ CPU is atypical for that model.
 - Raised to the 5,000 NGN minimum this business publishes for this kind of item.
 - Dell Precision 5520 -> not proven remotely. Agent will confirm at pickup.
 - Intel Core i5-7350HQ -> not proven remotely. Agent will confirm at pickup.
 - 7th Gen -> not proven remotely. Agent will confirm at pickup.
 - 8gb -> not proven remotely. Agent opens System Information and reads the RAM.
-- 128gb ssd -> not proven remotely. Agent reads the drive size from System Information.
+- 128gb ssd -> not proven remotely. Agent opens System Information and reads the RAM.
 - 15.6inches QhD IPS display -> not proven remotely. Agent will confirm at pickup.
 - 15.6inches QhD IPS display -> not proven remotely. Agent will confirm at pickup.
 - 15.6inches QhD IPS display -> not proven remotely. Agent will confirm at pickup.

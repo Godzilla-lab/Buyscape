@@ -1,26 +1,27 @@
 # Case iRO7OgSsGu1ZYBzIfkJoyKOP
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  60689 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  24966 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: generator (confidence 0.95)
-- Made of: steel 60%, plastic 30%, copper 10%
+- Made of: steel 60%, plastic 30%, circuit_board 10%
 - Estimated weight: 25.0 kg (confidence 0.8)
 - Brand read off the item: nothing legible
 - Model read off the item: FPG8800E2
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: dusty surface, scratches on casing, some rust near fuel cap, worn label edges
+- Damage noted: dust and grime on surface, scratches on casing, worn label edges
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: FPG8800E2 | 6.6 Gallon Fuel Tank | Electric Starting | OHV Engine | AVR Alternator | POWERFUL 8800 WATT | HONDA ENGINE
+- Text read: FPG8800E2 | 6.6 Gallon Fuel Tank | Electric Starting | OHV Engine AVR Alternator
 
 ## Two readers
 - model_text agreed by both readers
+- item_type agreed by both readers
 - brand_text differed between the two readers, so it is treated as unread
 - rating_text was seen by only one reader, so it is treated as unread
-- 2 transcribed lines was seen by only one reader, so it is treated as unread
+- 4 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
 - AN
@@ -33,35 +34,33 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 7 lines: AN | FPG8800E2 | 6.6 Gallon Fuel Tank | OHV | Electric Starting | Engine | AVR Alterpate
-- **corroborate** -> dispute. model_text agreed by both readers; brand_text differed between the two readers, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; 2 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=generator brand=None model=FPG8800E2 label=True lines=7
-- **retrieval** -> ok. query='FPG8800E2 FPG8800E2 6.6 Gallon Fuel Tank Electric Starting OHV Engine AVR Alternator POWER' hits=['Honda EP2500 2.2kVA', 'Honda EU30i 3kVA']
-- **identify** -> ok. chosen=Firman FPG8800E2 margin=0.7
+- **corroborate** -> dispute. model_text agreed by both readers; item_type agreed by both readers; brand_text differed between the two readers, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; 4 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=generator brand=None model=FPG8800E2 label=True lines=4
+- **retrieval** -> empty. query='FPG8800E2 FPG8800E2 6.6 Gallon Fuel Tank Electric Starting OHV Engine AVR Alternator Healt' hits=[]
+- **identify** -> ok. chosen=Firman FPG8800E2 margin=None
 - **abstain** -> abstain. seller names another generation
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 5862 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 34857 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 18735 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 1235 ms (replayed)
-- total across calls: 60689 ms; wall clock: 923 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5471 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 9859 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 8187 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 1449 ms (replayed)
+- total across calls: 24966 ms; wall clock: 2195 ms
 
 ## Identification
-Shortlist from the catalogue:
-  - Honda EP2500 2.2kVA (0.5)
-  - Honda EU30i 3kVA (0.4333)
+No catalogue candidates matched.
 
 **Not identified: EVIDENCE_INCOMPLETE.** The two readers disagreed about the brand and the answer's 'Firman' is not what the OCR read off the item or what the seller said. This needs a clear photo of the brand on the item.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 45% on the best answer. It is probably a Firman FPG8800E2 or a Honda EP2500, and the photos cannot separate them.**
+**Not sure enough to price: 51% on the best answer. It is probably a Firman FPG8800E2, and the photos cannot separate them.**
 
-- Identification confidence: 45% (unsure)
+- Identification confidence: 51% (unsure)
 - Price confidence: 22%
-- It is weighing: Firman FPG8800E2 (0.75), Honda EP2500 (0.05)
+- It is weighing: Firman FPG8800E2 (0.85)
 - The two readers disagreed about the brand and the answer's 'Firman' is not what the OCR read off the item or what the seller said. This needs a clear photo of the brand on the item.
 - read off the item's own label
-- 7 lines seen by both readers
+- 4 lines seen by both readers
 - 6 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -93,11 +92,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Photo of the engine, showing the recoil starter and carburettor.
 
 ## Price
-**24,442 to 42,850 NGN** (priced as material, width 0.5471, method material_floor, 0 comparable prices)
+**7,534 to 12,850 NGN** (priced as material, width 0.5215, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 25 kg of steel 60%, plastic 30%, copper 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 25 kg of steel 60%, plastic 30%, circuit_board 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 33,250 NGN
+Scrap floor: 10,250 NGN
 
 Conditions attached to this price:
 - Not identified: The two readers disagreed about the brand and the answer's 'Firman' is not what the OCR read off the item or what the seller said. This needs a clear photo of the brand on the item.

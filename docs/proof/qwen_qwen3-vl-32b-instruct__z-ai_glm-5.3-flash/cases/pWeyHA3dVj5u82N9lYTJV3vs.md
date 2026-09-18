@@ -1,6 +1,6 @@
 # Case pWeyHA3dVj5u82N9lYTJV3vs
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  33730 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  23398 ms
 
 ## What the engine saw
 - Presentation: sealed_new
@@ -10,14 +10,15 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Brand read off the item: DAIKIN
 - Model read off the item: nothing legible
 - Rating read: none
-- Label, plate or settings screen legible: no
+- Label, plate or settings screen legible: yes
 - Damage noted: none
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: DAIKIN | SPLIT AIR CONDITIONER | INVERTER | R32 | DAIKIN | INVERTER | SPLIT AIR CONDITIONER | R32
+- Text read: DAIKIN | SPLIT AIR CONDITIONER | INVERTER | R32
 
 ## Two readers
 - brand_text agreed by both readers
+- item_type agreed by both readers
 - model_text was seen by only one reader, so it is treated as unread
 - 8 transcribed lines was seen by only one reader, so it is treated as unread
 
@@ -29,18 +30,18 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 4 lines: R32国 | INVERTER | DAIKIN | sine
-- **corroborate** -> dispute. brand_text agreed by both readers; model_text was seen by only one reader, so it is treated as unread; 8 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=split air conditioner brand=DAIKIN model=None label=False lines=8
-- **retrieval** -> ok. query='DAIKIN DAIKIN SPLIT AIR CONDITIONER INVERTER R32 DAIKIN INVERTER SPLIT AIR CONDITIONER R32' hits=['Samsung AR12 1.5HP', 'Scanfrost SFAC12 1.5HP', 'Royal RAC12 1.5HP', 'Hisense AS-12 1.5HP', 'LG S4-Q12 1.5HP']
-- **identify** -> refused. chosen=Daikin None margin=None
+- **corroborate** -> dispute. brand_text agreed by both readers; item_type agreed by both readers; model_text was seen by only one reader, so it is treated as unread; 8 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=split air conditioner brand=DAIKIN model=None label=True lines=4
+- **retrieval** -> ok. query='DAIKIN DAIKIN SPLIT AIR CONDITIONER INVERTER R32 Experience premium cooling with the Daiki' hits=['Samsung AR12 1.5HP', 'Scanfrost SFAC12 1.5HP', 'Royal RAC12 1.5HP', 'Hisense AS-12 1.5HP', 'LG S4-Q12 1.5HP']
+- **identify** -> refused. chosen=DAIKIN None margin=None
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 4898 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 13700 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 12754 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 2378 ms (replayed)
-- total across calls: 33730 ms; wall clock: 605 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4797 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 9001 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 7498 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2102 ms (replayed)
+- total across calls: 23398 ms; wall clock: 1726 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -50,16 +51,16 @@ Shortlist from the catalogue:
   - Hisense AS-12 1.5HP (0.26)
   - LG S4-Q12 1.5HP (0.26)
 
-**Not identified: CANNOT_IDENTIFY.** Boxes clearly read DAIKIN split inverter R32, but no model number is legible and no Daikin entry exists in the shortlist.
+**Not identified: CANNOT_IDENTIFY.** Packaging clearly shows DAIKIN split inverter R32 branding, but no model number is legible, and no Daikin entry exists in the shortlist.
 
 ## How sure the engine is (back office)
 **0%: the photos do not say what this is.**
 
 - Identification confidence: 0% (unknown)
 - Price confidence: 20%
-- Boxes clearly read DAIKIN split inverter R32, but no model number is legible and no Daikin entry exists in the shortlist.
-- no label, plate or settings screen was legible
-- 8 lines seen by both readers
+- Packaging clearly shows DAIKIN split inverter R32 branding, but no model number is legible, and no Daikin entry exists in the shortlist.
+- read off the item's own label
+- 4 lines seen by both readers
 - 7 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -99,7 +100,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 2,100 NGN
 
 Conditions attached to this price:
-- Not identified: Boxes clearly read DAIKIN split inverter R32, but no model number is legible and no Daikin entry exists in the shortlist.
+- Not identified: Packaging clearly shows DAIKIN split inverter R32 branding, but no model number is legible, and no Daikin entry exists in the shortlist.
 - The AC is a Daikin 1.5HP Inverter model. -> not proven remotely. Agent reads the outdoor rating plate.
 - The AC is designed for energy efficiency. -> not proven remotely. Agent reads the outdoor rating plate.
 - Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on paper and photograph it next to the unit..

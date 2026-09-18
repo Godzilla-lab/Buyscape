@@ -1,41 +1,42 @@
 # Case 3Ui1ib6DdnFKeJRdVUZxIEtC
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  152638 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0021  |  23160 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: laptop (confidence 0.95)
-- Made of: plastic 60%, steel 20%, circuit_board 10%, aluminium 10%
-- Estimated weight: 1.5 kg (confidence 0.8)
+- Made of: plastic 60%, steel 30%, circuit_board 5%, rubber 5%
+- Estimated weight: 1.4 kg (confidence 0.8)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: Screen is on, displaying a leaf wallpaper., No visible cracks or dents on the body., Keyboard appears intact.
+- Damage noted: screen shows a yellow leaf wallpaper, no visible cracks or damage to screen or body from this angle
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
 
 ## Two readers
-- 6 transcribed lines was seen by only one reader, so it is treated as unread
+- item_type agreed by both readers
+- 1 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## Chain
 - **ocr** -> ok. 0 lines: 
-- **corroborate** -> dispute. 6 transcribed lines was seen by only one reader, so it is treated as unread
+- **corroborate** -> dispute. item_type agreed by both readers; 1 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=laptop brand=None model=None label=False lines=0
 - **forensics** -> flag. looks like a catalogue or stock image
 - **retrieval** -> ok. query='Brand 	dell
 model 	latitude 7410 10th generation 
 form factor 	notebook
 processor 	intel c' hits=['Dell Latitude E7470', 'Dell Latitude 7490', 'Dell Latitude 5490', 'Dell Inspiron 15 3000', 'Dell XPS 13 9370']
-- **identify** -> refused. chosen=None None margin=0.1
+- **identify** -> refused. chosen=None None margin=0.2
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 7768 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 7721 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 133260 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 3889 ms (replayed)
-- total across calls: 152638 ms; wall clock: 108 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4863 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 6985 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 8406 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2906 ms (replayed)
+- total across calls: 23160 ms; wall clock: 1254 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -45,20 +46,20 @@ Shortlist from the catalogue:
   - Dell Inspiron 15 3000 (0.3)
   - Dell XPS 13 9370 (0.3)
 
-**Not identified: CANNOT_IDENTIFY.** No legible label confirms model; seller claims Latitude 7410, which is not on the shortlist and cannot be picked without printed proof. Visible slim-bezel 7000-series styling fits 7410 but also similar models.
+**Not identified: CANNOT_IDENTIFY.** No legible label; seller claims Latitude 7410, which is not on the shortlist and cannot be verified from the photo. The 14-inch black Latitude-style chassis fits several shortlist models about equally.
 
 Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 5% on the best answer. It is probably a Dell Latitude 7490 or a Dell Latitude E7470, and the photos cannot separate them.**
+**Not sure enough to price: 7% on the best answer. It is probably a Dell Latitude 7490 or a Dell Latitude E7470, and the photos cannot separate them.**
 
-- Identification confidence: 5% (unknown)
+- Identification confidence: 7% (unknown)
 - Price confidence: 18%
-- It is weighing: Dell Latitude 7490 (0.3), Dell Latitude E7470 (0.2)
-- No legible label confirms model; seller claims Latitude 7410, which is not on the shortlist and cannot be picked without printed proof. Visible slim-bezel 7000-series styling fits 7410 but also similar models.
+- It is weighing: Dell Latitude 7490 (0.4), Dell Latitude E7470 (0.2)
+- No legible label; seller claims Latitude 7410, which is not on the shortlist and cannot be verified from the photo. The 14-inch black Latitude-style chassis fits several shortlist models about equally.
 - no label, plate or settings screen was legible
 - the two readers agreed on nothing legible
-- the next candidate was only 0.1 behind
+- the next candidate was only 0.2 behind
 - looks like a catalogue or stock image
 - 8 claims are still unproven, 0 are supported
 
@@ -95,12 +96,12 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 ## Price
 **5,000 to 5,000 NGN** (priced as material, width 0.0, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 1.5 kg of plastic 60%, steel 20%, circuit_board 10%, aluminium 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 1.4 kg of plastic 60%, steel 30%, circuit_board 5%, rubber 5% (rates for plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 660 NGN
+Scrap floor: 353 NGN
 
 Conditions attached to this price:
-- Not identified: No legible label confirms model; seller claims Latitude 7410, which is not on the shortlist and cannot be picked without printed proof. Visible slim-bezel 7000-series styling fits 7410 but also similar models.
+- Not identified: No legible label; seller claims Latitude 7410, which is not on the shortlist and cannot be verified from the photo. The 14-inch black Latitude-style chassis fits several shortlist models about equally.
 - Evidence flag: looks like a catalogue or stock image
 - Raised to the 5,000 NGN minimum this business publishes for this kind of item.
 - Brand is Dell -> not proven remotely. Agent will confirm at pickup.

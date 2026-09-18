@@ -1,6 +1,6 @@
 # Case 5jWyLEa2FcrbZ7Im0OoLL841
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  30143 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0013  |  40971 ms
 
 ## What the engine saw
 - Presentation: single_unit
@@ -11,12 +11,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: handwritten text on lid, no visible damage to casing
+- Damage noted: none
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: AMG-MAX LTD | m2 max | 6+ | Apple
+- Text read: m2 max | 6+ | AMG-MAX LTD | Apple
 
 ## Two readers
+- item_type agreed by both readers
 - model_text was seen by only one reader, so it is treated as unread
 - rating_text was seen by only one reader, so it is treated as unread
 - 1 transcribed lines was seen by only one reader, so it is treated as unread
@@ -30,22 +31,22 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 4 lines: m2 nax | 64 | POSTEDONJIJI | AMG-MAX LTD
-- **corroborate** -> dispute. model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; 1 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed
+- **corroborate** -> dispute. item_type agreed by both readers; model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; 1 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed
 - **read_evidence** -> ok. category=laptop brand=Apple model=None label=False lines=4
-- **retrieval** -> ok. query='Apple AMG-MAX LTD m2 max 6+ Apple UK Used MacBook Pro
+- **retrieval** -> ok. query='Apple m2 max 6+ AMG-MAX LTD Apple UK Used MacBook Pro
 M2 MAX CHIP 
 64GB/1TB
 16inch
 Super n' hits=['Apple MacBook Pro 13-inch M2 2022', 'Apple MacBook Air M2 2022', 'Apple MacBook Pro 13-inch 2017', 'Apple MacBook Pro 17-inch 2011', 'Apple MacBook Pro 14-inch M1 Pro 2021']
-- **identify** -> refused. chosen=None None margin=0.2
+- **identify** -> refused. chosen=None None margin=0.15
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 6055 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 5610 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 14919 ms
-- extract_claims on qwen/qwen3-vl-32b-instruct: 3559 ms (replayed)
-- total across calls: 30143 ms; wall clock: 15112 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 6042 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 10496 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 19600 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 4833 ms (replayed)
+- total across calls: 40971 ms; wall clock: 1719 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -55,19 +56,19 @@ Shortlist from the catalogue:
   - Apple MacBook Pro 17-inch 2011 (0.4333)
   - Apple MacBook Pro 14-inch M1 Pro 2021 (0.4143)
 
-**Not identified: CANNOT_IDENTIFY.** Seller claims a 16-inch M2 Max, which is absent from the shortlist; the 'm2 max' text is handwritten, not a printed label, and no legible plate confirms chip, size or model. Photo alone cannot distinguish a 14-inch M1 Pro from a 16-inch chassis.
+**Not identified: CANNOT_IDENTIFY.** Seller and handwritten lid note suggest a 16-inch MacBook Pro M2 Max, but no shortlist entry matches and the handwritten marker text is not a printed label; no legible model identifier in the photos.
 
 ## How sure the engine is (back office)
 **Not sure enough to price: 11% on the best answer. It is probably a Apple MacBook Pro 14-inch M1 Pro 2021 or a Apple MacBook Pro 13-inch M2 2022, and the photos cannot separate them.**
 
 - Identification confidence: 11% (unknown)
 - Price confidence: 14%
-- It is weighing: Apple MacBook Pro 14-inch M1 Pro 2021 (0.3), Apple MacBook Pro 13-inch M2 2022 (0.1)
-- Seller claims a 16-inch M2 Max, which is absent from the shortlist; the 'm2 max' text is handwritten, not a printed label, and no legible plate confirms chip, size or model. Photo alone cannot distinguish a 14-inch M1 Pro from a 16-inch chassis.
+- It is weighing: Apple MacBook Pro 14-inch M1 Pro 2021 (0.3), Apple MacBook Pro 13-inch M2 2022 (0.15)
+- Seller and handwritten lid note suggest a 16-inch MacBook Pro M2 Max, but no shortlist entry matches and the handwritten marker text is not a printed label; no legible model identifier in the photos.
 - no label, plate or settings screen was legible
 - 3 lines seen by both readers
 - the brand was read by only one reader and is not confirmed
-- the next candidate was only 0.2 behind
+- the next candidate was only 0.15 behind
 - 10 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -113,7 +114,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 2,250 NGN
 
 Conditions attached to this price:
-- Not identified: Seller claims a 16-inch M2 Max, which is absent from the shortlist; the 'm2 max' text is handwritten, not a printed label, and no legible plate confirms chip, size or model. Photo alone cannot distinguish a 14-inch M1 Pro from a 16-inch chassis.
+- Not identified: Seller and handwritten lid note suggest a 16-inch MacBook Pro M2 Max, but no shortlist entry matches and the handwritten marker text is not a printed label; no legible model identifier in the photos.
 - Raised to the 5,000 NGN minimum this business publishes for this kind of item.
 - UK Used MacBook Pro -> not proven remotely. Agent matches the serial on the sticker to the serial in System Information or the BIOS.
 - M2 MAX CHIP -> not proven remotely. Agent will confirm at pickup.

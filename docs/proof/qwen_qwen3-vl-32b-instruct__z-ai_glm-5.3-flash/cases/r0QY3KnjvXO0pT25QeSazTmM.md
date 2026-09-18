@@ -1,23 +1,24 @@
 # Case r0QY3KnjvXO0pT25QeSazTmM
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  27239 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  25183 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: split air conditioner (confidence 0.95)
-- Made of: steel 60%, plastic 30%, copper 10%
-- Estimated weight: 45.0 kg (confidence 0.8)
+- Made of: steel 60%, plastic 30%, copper_bare 10%
+- Estimated weight: 35.0 kg (confidence 0.8)
 - Brand read off the item: Hisense
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: unit wrapped in plastic film, no visible damage to casing, fan grille intact
+- Damage noted: unit wrapped in plastic film, some dust on surface, minor scuff marks on casing
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
-- Text read: Hisense | AIR CONDITIONER | Outdoor Unit | Hisense | ANAYO BELTUS | Enterprise
+- Text read: Hisense | AIR CONDITIONER | Outdoor Unit | Hisense
 
 ## Two readers
 - brand_text agreed by both readers
+- item_type agreed by both readers
 - 1 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
@@ -31,20 +32,21 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 7 lines: 7B巴网 | AIR COND TIONER | Outdoor Unit) | Hisense | Cevni aaped) | ERPRISE | ANAYO BELTUS
-- **corroborate** -> dispute. brand_text agreed by both readers; 1 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=split air conditioner brand=Hisense model=None label=True lines=6
+- **corroborate** -> dispute. brand_text agreed by both readers; item_type agreed by both readers; 1 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=split air conditioner brand=Hisense model=None label=True lines=4
 - **forensics** -> flag. looks like a catalogue or stock image
-- **retrieval** -> ok. query='Hisense Hisense AIR CONDITIONER Outdoor Unit Hisense ANAYO BELTUS Enterprise Features:
-Cop' hits=['Hisense AS-09 1HP', 'Hisense AS-12 1.5HP', 'Hisense AS-18 2HP']
+- **retrieval** -> ok. query='Hisense Hisense AIR CONDITIONER Outdoor Unit Hisense Features:
+Copper Coil
+Turbo Operation' hits=['Hisense AS-09 1HP', 'Hisense AS-12 1.5HP', 'Hisense AS-18 2HP']
 - **identify** -> refused. chosen=Hisense None margin=0.0
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 5041 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 8291 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 10698 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 3209 ms (replayed)
-- total across calls: 27239 ms; wall clock: 735 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 6213 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 7149 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 8726 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3095 ms (replayed)
+- total across calls: 25183 ms; wall clock: 2730 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -52,19 +54,19 @@ Shortlist from the catalogue:
   - Hisense AS-12 1.5HP (0.38)
   - Hisense AS-18 2HP (0.38)
 
-**Not identified: CANNOT_IDENTIFY.** No model number or HP/capacity rating is legible on box, units or label; all three shortlist entries fit equally.
+**Not identified: CANNOT_IDENTIFY.** Only 'Hisense AIR CONDITIONER Outdoor Unit' is legible; no model number or HP rating is visible to distinguish AS-09, AS-12 or AS-18.
 
 Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 8% on the best answer. It is probably a Hisense AS-09 1HP or a Hisense AS-12 1.5HP, and the photos cannot separate them.**
+**Not sure enough to price: 5% on the best answer. It is probably a Hisense AS-09 or a Hisense AS-12, and the photos cannot separate them.**
 
-- Identification confidence: 8% (unknown)
+- Identification confidence: 5% (unknown)
 - Price confidence: 14%
-- It is weighing: Hisense AS-09 1HP (0.3), Hisense AS-12 1.5HP (0.3)
-- No model number or HP/capacity rating is legible on box, units or label; all three shortlist entries fit equally.
+- It is weighing: Hisense AS-09 (0.2), Hisense AS-12 (0.2)
+- Only 'Hisense AIR CONDITIONER Outdoor Unit' is legible; no model number or HP rating is visible to distinguish AS-09, AS-12 or AS-18.
 - read off the item's own label
-- 6 lines seen by both readers
+- 4 lines seen by both readers
 - the next candidate was only 0.0 behind
 - looks like a catalogue or stock image
 - 10 claims are still unproven, 0 are supported
@@ -106,14 +108,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Open the front grille of the indoor unit and photograph the filters and coil.
 
 ## Price
-**22,964 to 77,130 NGN** (priced as material, width 1.0823, method material_floor, 0 comparable prices)
+**17,861 to 59,990 NGN** (priced as material, width 1.0823, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 45 kg of steel 60%, plastic 30%, copper 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 35 kg of steel 60%, plastic 30%, copper_bare 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 59,850 NGN
+Scrap floor: 46,550 NGN
 
 Conditions attached to this price:
-- Not identified: No model number or HP/capacity rating is legible on box, units or label; all three shortlist entries fit equally.
+- Not identified: Only 'Hisense AIR CONDITIONER Outdoor Unit' is legible; no model number or HP rating is visible to distinguish AS-09, AS-12 or AS-18.
 - Evidence flag: looks like a catalogue or stock image
 - Copper Coil -> not proven remotely. Agent reads the outdoor rating plate.
 - Turbo Operation -> not proven remotely. Agent reads the outdoor rating plate.

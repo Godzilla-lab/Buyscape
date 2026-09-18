@@ -1,6 +1,6 @@
 # Case kn73bLUE7qEyoly92i3dTFvI
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  23746 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0013  |  47165 ms
 
 ## What the engine saw
 - Presentation: single_unit
@@ -10,29 +10,30 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
-- Label, plate or settings screen legible: yes
-- Damage noted: some surface grime and oil residue, no visible cracks or major damage
+- Label, plate or settings screen legible: no
+- Damage noted: some surface grime and oil residue, minor wear on metal surfaces
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 
 ## Two readers
+- item_type agreed by both readers
 - 1 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## Chain
 - **ocr** -> ok. 0 lines: 
-- **corroborate** -> dispute. 1 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=engine_component brand=None model=None label=True lines=0
+- **corroborate** -> dispute. item_type agreed by both readers; 1 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=engine_component brand=None model=None label=False lines=0
 - **retrieval** -> ok. query='30kva perkins John holt generator, almost new of 950hrs run. 
 With 100% warranty' hits=['Perkins P150 150kVA', 'Perkins P100 100kVA', 'Mikano MK30 30kVA']
-- **identify** -> refused. chosen=None None margin=0.1
-- **abstain** -> abstain. model refused
+- **identify** -> ok. chosen=Mikano MK30 margin=0.45
+- **abstain** -> abstain. top score 0.55
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 4928 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 5208 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 9899 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 3711 ms (replayed)
-- total across calls: 23746 ms; wall clock: 290 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5051 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 7760 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 29508 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 4846 ms (replayed)
+- total across calls: 47165 ms; wall clock: 1525 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -40,18 +41,17 @@ Shortlist from the catalogue:
   - Perkins P100 100kVA (0.4333)
   - Mikano MK30 30kVA (0.2333)
 
-**Not identified: CANNOT_IDENTIFY.** No legible brand, model or rating text on engine or plate; seller's 30kVA Perkins claim unverifiable and no 30kVA Perkins in shortlist.
+**Not identified: CANNOT_IDENTIFY.** The best candidate scored only 0.55, which is not sure enough to price.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 7% on the best answer. It is probably a Mikano MK30 or a Perkins P100, and the photos cannot separate them.**
+**Not sure enough to price: 22% on the best answer. It is probably a Mikano MK30 or a Perkins P100, and the photos cannot separate them.**
 
-- Identification confidence: 7% (unknown)
+- Identification confidence: 22% (unknown)
 - Price confidence: 16%
-- It is weighing: Mikano MK30 (0.15), Perkins P100 (0.05)
-- No legible brand, model or rating text on engine or plate; seller's 30kVA Perkins claim unverifiable and no 30kVA Perkins in shortlist.
-- read off the item's own label
+- It is weighing: Mikano MK30 (0.55), Perkins P100 (0.1)
+- The best candidate scored only 0.55, which is not sure enough to price.
+- no label, plate or settings screen was legible
 - the two readers agreed on nothing legible
-- the next candidate was only 0.1 behind
 - 9 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -91,7 +91,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 8,625 NGN
 
 Conditions attached to this price:
-- Not identified: No legible brand, model or rating text on engine or plate; seller's 30kVA Perkins claim unverifiable and no 30kVA Perkins in shortlist.
+- Not identified: The best candidate scored only 0.55, which is not sure enough to price.
 - 30kva perkins John holt generator -> not proven remotely. Weigh on the scale and photograph the display.
 - perkins John holt generator -> not proven remotely. Agent will confirm at pickup.
 - almost new of 950hrs run -> not proven remotely. Agent will confirm at pickup.

@@ -1,22 +1,23 @@
 # Case f6jKwNHnjOy4PHigywA06omf
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  30263 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  59989 ms
 
 ## What the engine saw
 - Presentation: single_unit
-- Category: phone (confidence 0.95)
-- Made of: aluminium 40%, plastic 50%, circuit_board 10%
+- Category: phone (confidence 1.0)
+- Made of: aluminium 40%, plastic 50%, glass 10%
 - Estimated weight: 0.18 kg (confidence 0.9)
 - Brand read off the item: Apple
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: minor scuffs on back casing, small red sticker on rear
+- Damage noted: small red sticker on back, minor wear on edges
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 - Text read: POSTED ON JIJI | V-TEK GADGETS | Apple
 
 ## Two readers
+- item_type agreed by both readers
 - brand_text was read by only one reader, so it is kept but not confirmed
 
 ## OCR read off the photos
@@ -24,18 +25,18 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 1 lines: V-TEK GADGETS
-- **corroborate** -> agree. brand_text was read by only one reader, so it is kept but not confirmed
+- **corroborate** -> agree. item_type agreed by both readers; brand_text was read by only one reader, so it is kept but not confirmed
 - **read_evidence** -> ok. category=phone brand=Apple model=None label=False lines=3
 - **retrieval** -> ok. query='Apple POSTED ON JIJI V-TEK GADGETS Apple Uk used iPhone Air now selling' hits=['Apple iPhone XR', 'Apple iPhone XS', 'Apple iPhone SE', 'Apple iPhone 11', 'Apple iPhone 11 Pro']
-- **identify** -> refused. chosen=None None margin=None
+- **identify** -> refused. chosen=None None margin=0.05
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 4249 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 13409 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 9963 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 2642 ms (replayed)
-- total across calls: 30263 ms; wall clock: 483 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 10070 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 35039 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 12636 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2244 ms (replayed)
+- total across calls: 59989 ms; wall clock: 1734 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -45,17 +46,19 @@ Shortlist from the catalogue:
   - Apple iPhone 11 (0.4333)
   - Apple iPhone 11 Pro (0.4333)
 
-**Not identified: CANNOT_IDENTIFY.** Single-camera pill plateau matches an iPhone Air, which is absent from the shortlist; no legible label permits going outside it, and no shortlisted model shows this design.
+**Not identified: CANNOT_IDENTIFY.** Horizontal full-width single-camera bar matches iPhone Air design, not any shortlisted model; no label legible and seller's word alone is not proof. Recommend adding Apple iPhone Air to the catalogue.
 
 ## How sure the engine is (back office)
-**0%: the photos do not say what this is.**
+**Not sure enough to price: 4% on the best answer. It is probably a Apple iPhone XR or a Apple iPhone SE, and the photos cannot separate them.**
 
-- Identification confidence: 0% (unknown)
+- Identification confidence: 4% (unknown)
 - Price confidence: 18%
-- Single-camera pill plateau matches an iPhone Air, which is absent from the shortlist; no legible label permits going outside it, and no shortlisted model shows this design.
+- It is weighing: Apple iPhone XR (0.1), Apple iPhone SE (0.05)
+- Horizontal full-width single-camera bar matches iPhone Air design, not any shortlisted model; no label legible and seller's word alone is not proof. Recommend adding Apple iPhone Air to the catalogue.
 - no label, plate or settings screen was legible
 - 2 lines seen by both readers
 - the brand was read by only one reader and is not confirmed
+- the next candidate was only 0.05 behind
 - 8 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -89,14 +92,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
-**111 to 250 NGN** (priced as material, width 0.7704, method material_floor, 0 comparable prices)
+**101 to 233 NGN** (priced as material, width 0.7846, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 0.18 kg of aluminium 40%, plastic 50%, circuit_board 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 0.18 kg of aluminium 40%, plastic 50%, glass 10% (rates for glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 167 NGN
+Scrap floor: 153 NGN
 
 Conditions attached to this price:
-- Not identified: Single-camera pill plateau matches an iPhone Air, which is absent from the shortlist; no legible label permits going outside it, and no shortlisted model shows this design.
+- Not identified: Horizontal full-width single-camera bar matches iPhone Air design, not any shortlisted model; no label legible and seller's word alone is not proof. Recommend adding Apple iPhone Air to the catalogue.
 - Uk used iPhone Air -> not proven remotely. Agent will confirm at pickup.
 - iPhone Air -> not proven remotely. Agent will confirm at pickup.
 - used -> not proven remotely. Agent will confirm at pickup.

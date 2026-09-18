@@ -1,34 +1,37 @@
 # Case samsung-smart-tv
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  25832 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0014  |  122851 ms
 
 ## What the engine saw
 - Presentation: single_unit
-- Category: tv (confidence 0.95)
-- Made of: glass 60%, plastic 30%, circuit_board 10%
-- Estimated weight: 12.0 kg (confidence 0.7)
+- Category: television (confidence 0.95)
+- Made of: glass 60%, plastic 30%, steel 10%
+- Estimated weight: 12.0 kg (confidence 0.8)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: screen is off, no visible cracks or damage from this angle, light reflections on screen surface
+- Damage noted: screen surface has minor smudges and fingerprints, no visible cracks or dents
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 
+## Two readers
+- item_type agreed by both readers
+
 ## Chain
 - **ocr** -> ok. 0 lines: 
-- **corroborate** -> agree. nothing identifying was read by either
-- **read_evidence** -> ok. category=tv brand=None model=None label=False lines=0
+- **corroborate** -> agree. item_type agreed by both readers
+- **read_evidence** -> ok. category=television brand=None model=None label=False lines=0
 - **retrieval** -> ok. query='55′ samsung smart tv' hits=['Samsung AR09 1HP', 'Samsung WA80 8kg top loader', 'Samsung AR12 1.5HP', 'Samsung WW70 7kg front loader', 'Samsung Galaxy S21']
 - **identify** -> refused. chosen=None None margin=None
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 5227 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 10930 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 6676 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 2999 ms (replayed)
-- total across calls: 25832 ms; wall clock: 3281 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 18012 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 20845 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 80054 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3940 ms (replayed)
+- total across calls: 122851 ms; wall clock: 812 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -38,14 +41,14 @@ Shortlist from the catalogue:
   - Samsung WW70 7kg front loader (0.4)
   - Samsung Galaxy S21 (0.3)
 
-**Not identified: CANNOT_IDENTIFY.** Item is a large flat-screen TV; no shortlist entry is a TV, and no label or model text is visible anywhere on the panel or bezel to confirm brand or model beyond the seller's claim.
+**Not identified: CANNOT_IDENTIFY.** Item is plainly a large flat-screen TV, but no shortlist entry is a TV and no brand, model or label is legible in the photos; seller's claim of a 55" Samsung smart TV cannot be visually confirmed.
 
 ## How sure the engine is (back office)
 **0%: the photos do not say what this is.**
 
 - Identification confidence: 0% (unknown)
 - Price confidence: 20%
-- Item is a large flat-screen TV; no shortlist entry is a TV, and no label or model text is visible anywhere on the panel or bezel to confirm brand or model beyond the seller's claim.
+- Item is plainly a large flat-screen TV, but no shortlist entry is a TV and no brand, model or label is legible in the photos; seller's claim of a 55" Samsung smart TV cannot be visually confirmed.
 - no label, plate or settings screen was legible
 - the two readers agreed on nothing legible
 - 7 claims are still unproven, 0 are supported
@@ -78,14 +81,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Tell us what it is, whether it works, and roughly how heavy it is.
 
 ## Price
-**439 to 2,208 NGN** (priced as material, width 1.3364, method material_floor, 0 comparable prices)
+**331 to 1,728 NGN** (priced as material, width 1.3566, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 12 kg of glass 60%, plastic 30%, circuit_board 10% (rates for glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 12 kg of glass 60%, plastic 30%, steel 10% (rates for glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 1,464 NGN
+Scrap floor: 1,104 NGN
 
 Conditions attached to this price:
-- Not identified: Item is a large flat-screen TV; no shortlist entry is a TV, and no label or model text is visible anywhere on the panel or bezel to confirm brand or model beyond the seller's claim.
+- Not identified: Item is plainly a large flat-screen TV, but no shortlist entry is a TV and no brand, model or label is legible in the photos; seller's claim of a 55" Samsung smart TV cannot be visually confirmed.
 - 55′ samsung smart tv -> not proven remotely. Weigh on the scale and photograph the display.
 - 55′ samsung smart tv -> not proven remotely. Weigh on the scale and photograph the display.
 - 55′ samsung smart tv -> not proven remotely. Weigh on the scale and photograph the display.

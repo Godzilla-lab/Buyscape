@@ -1,6 +1,6 @@
 # Case x06Q4blb1NXGrSsOQPeAJzgl
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  16794 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  33769 ms
 
 ## What the engine saw
 - Presentation: single_unit
@@ -11,55 +11,62 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: Minor scuffs on plastic casing, Dust and grime on surface, No visible damage to frame or wheels
+- Damage noted: some visible wear on plastic casing, wires exposed near engine area, minor dirt and grime on surface
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: ELEPAQ
+- Text read: ELEPAQ | ELEPAQ POWER GENERATOR
 
 ## Two readers
 - brand_text agreed by both readers
+- item_type agreed by both readers
 - rating_text differed between the two readers, so it is treated as unread
-- model_text was seen by only one reader, so it is treated as unread
-- 14 transcribed lines was seen by only one reader, so it is treated as unread
+- 4 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
 - LOBESTD KING POWER
 
 ## Chain
 - **ocr** -> ok. 1 lines: LOBESTD KING POWER
-- **corroborate** -> dispute. brand_text agreed by both readers; rating_text differed between the two readers, so it is treated as unread; model_text was seen by only one reader, so it is treated as unread; 14 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=generator brand=ELEPAQ model=None label=True lines=1
-- **gate** -> abstain. multiple items in frame
+- **corroborate** -> dispute. brand_text agreed by both readers; item_type agreed by both readers; rating_text differed between the two readers, so it is treated as unread; 4 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=generator brand=ELEPAQ model=None label=True lines=2
+- **retrieval** -> ok. query='ELEPAQ ELEPAQ ELEPAQ POWER GENERATOR Elepaq Constant is the original Elepaq generator with' hits=['Elepaq SV2200 2.5kVA', 'Elepaq SV6800 6.5kVA']
+- **identify** -> refused. chosen=Elepaq None margin=0.1
+- **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 7006 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 7432 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 2356 ms (replayed)
-- total across calls: 16794 ms; wall clock: 298 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5764 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 16520 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 8343 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3142 ms (replayed)
+- total across calls: 33769 ms; wall clock: 1386 ms
 
 ## Identification
-No catalogue candidates matched.
+Shortlist from the catalogue:
+  - Elepaq SV2200 2.5kVA (0.5)
+  - Elepaq SV6800 6.5kVA (0.5)
 
-**Not identified: EVIDENCE_INCOMPLETE.** The photos show more than one item, so no single item can be identified.
+**Not identified: CANNOT_IDENTIFY.** Model plate shows 'ELEPAQ SV' but no legible model number or kVA rating; frame size alone cannot separate SV2200 from SV6800.
 
 ## How sure the engine is (back office)
-**0%: the photos do not say what this is.**
+**Not sure enough to price: 22% on the best answer. It is probably a Elepaq SV2200 or a Elepaq SV6800, and the photos cannot separate them.**
 
-- Identification confidence: 0% (unknown)
+- Identification confidence: 22% (unknown)
 - Price confidence: 18%
-- The photos show more than one item, so no single item can be identified.
+- It is weighing: Elepaq SV2200 (0.4), Elepaq SV6800 (0.3)
+- Model plate shows 'ELEPAQ SV' but no legible model number or kVA rating; frame size alone cannot separate SV2200 from SV6800.
 - read off the item's own label
-- 1 lines seen by both readers
+- 2 lines seen by both readers
+- the next candidate was only 0.1 behind
 - 8 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
 
 ## What the seller is asked for next (shown in the app)
-1. [PHOTO] Photograph one item on its own, with nothing else in the picture.
-   _why: the photos show more than one item_
-2. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: Close-up of the rating plate showing the kVA and model number. Then, without stopping the video: Open the side cover and photograph the alternator windings. Finish with: A short clip of the generator starting and running. Keep filming the whole time. Do not cut between clips.
+1. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: Close-up of the rating plate showing the kVA and model number. Then, without stopping the video: Open the side cover and photograph the alternator windings. Finish with: A short clip of the generator starting and running. Keep filming the whole time. Do not cut between clips.
    _why: two readings of these photos disagreed about what is written on the item_
-3. [PHOTO] Close-up of the rating plate showing the kVA and model number.
+2. [PHOTO] Close-up of the rating plate showing the kVA and model number.
+   _why: nothing on the item says which model this is_
+3. [PHOTO] Close-up of the plate on the engine block showing the engine model and serial.
    _why: nothing on the item says which model this is_
 
 ## What the seller is asked (only they know these)
@@ -90,7 +97,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 59,850 NGN
 
 Conditions attached to this price:
-- Not identified: The photos show more than one item, so no single item can be identified.
+- Not identified: Model plate shows 'ELEPAQ SV' but no legible model number or kVA rating; frame size alone cannot separate SV2200 from SV6800.
 - Elepaq Constant is the original Elepaq generator -> not proven remotely. Agent will confirm at pickup.
 - has unique sound very low noise -> not proven remotely. Agent will confirm at pickup.
 - 25ltr petrol -> not proven remotely. Agent will confirm at pickup.

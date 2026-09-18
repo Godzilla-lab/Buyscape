@@ -214,7 +214,9 @@ def capture_requests(
 
     # Anything the reader could not point at, or an answer nobody can trust,
     # is an argument about identity, and identity lives on the label.
-    identity_unclear = result.abstained or not result.used_label or bool(result.fraud_flags)
+    # An item named by its type has no label to be unclear about: asking a
+    # seller to photograph the plate on a sofa teaches them to ignore us.
+    identity_unclear = result.abstained or (not result.used_label and not result.named_type) or bool(result.fraud_flags)
 
     # When two readers looked at the same photographs and could not agree on
     # what is written on the item, a sharper still of the same angle is not

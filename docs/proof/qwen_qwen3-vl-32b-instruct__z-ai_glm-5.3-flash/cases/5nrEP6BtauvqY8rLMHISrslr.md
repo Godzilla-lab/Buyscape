@@ -1,38 +1,40 @@
 # Case 5nrEP6BtauvqY8rLMHISrslr
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  28832 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  30340 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: laptop (confidence 0.95)
-- Made of: plastic 40%, steel 30%, circuit_board 15%, aluminium 10%, glass 5%
+- Made of: plastic 40%, steel 30%, circuit_board 15%, aluminium 10%, rubber 5%
 - Estimated weight: 1.5 kg (confidence 0.8)
-- Brand read off the item: nothing legible
+- Brand read off the item: ThinkPad
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: none
+- Damage noted: screen shows no visible damage, keyboard appears clean, no visible dents or scratches on chassis
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
+- Text read: ThinkPad
 
 ## Two readers
-- brand_text differed between the two readers, so it is treated as unread
-- 1 transcribed lines was seen by only one reader, so it is treated as unread
+- item_type agreed by both readers
+- 4 transcribed lines was seen by only one reader, so it is treated as unread
+- brand_text was read by only one reader, so it is kept but not confirmed
 
 ## Chain
 - **ocr** -> ok. 0 lines: 
-- **corroborate** -> dispute. brand_text differed between the two readers, so it is treated as unread; 1 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=laptop brand=None model=None label=False lines=0
-- **retrieval** -> ok. query='The hp elitebook 840 g7 is a premium, lightweight business laptop designed primarily for..' hits=['HP EliteBook 840 G5', 'HP EliteBook 840 G6', 'HP 250 G7', 'HP 2000', 'HP EliteBook 830 G5']
+- **corroborate** -> dispute. item_type agreed by both readers; 4 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed
+- **read_evidence** -> ok. category=laptop brand=ThinkPad model=None label=False lines=1
+- **retrieval** -> ok. query='ThinkPad ThinkPad The hp elitebook 840 g7 is a premium, lightweight business laptop design' hits=['HP EliteBook 840 G5', 'HP EliteBook 840 G6', 'HP 250 G7', 'HP 2000', 'HP EliteBook 830 G5']
 - **identify** -> refused. chosen=None None margin=0.1
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 6321 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 4340 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 15355 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 2816 ms (replayed)
-- total across calls: 28832 ms; wall clock: 143 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4811 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 10406 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 12666 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2457 ms (replayed)
+- total across calls: 30340 ms; wall clock: 1154 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -42,17 +44,18 @@ Shortlist from the catalogue:
   - HP 2000 (0.5)
   - HP EliteBook 830 G5 (0.4333)
 
-**Not identified: CANNOT_IDENTIFY.** No label or plate is legible in the photo, so the exact generation (G5/G6/G7) cannot be verified; the seller's G7 claim is not on the shortlist and is unsupported by visible text.
+**Not identified: CANNOT_IDENTIFY.** Item text reads 'ThinkPad' while seller claims HP EliteBook 840 G7; no model plate legible, and G7 is absent from shortlist. Conflicting evidence prevents a confident pick.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 17% on the best answer. It is probably a HP EliteBook 840 G6 or a HP EliteBook 840 G5, and the photos cannot separate them.**
+**Not sure enough to price: 9% on the best answer. It is probably a HP EliteBook 840 G6 or a HP EliteBook 840 G5, and the photos cannot separate them.**
 
-- Identification confidence: 17% (unknown)
+- Identification confidence: 9% (unknown)
 - Price confidence: 20%
-- It is weighing: HP EliteBook 840 G6 (0.45), HP EliteBook 840 G5 (0.35)
-- No label or plate is legible in the photo, so the exact generation (G5/G6/G7) cannot be verified; the seller's G7 claim is not on the shortlist and is unsupported by visible text.
+- It is weighing: HP EliteBook 840 G6 (0.3), HP EliteBook 840 G5 (0.2)
+- Item text reads 'ThinkPad' while seller claims HP EliteBook 840 G7; no model plate legible, and G7 is absent from shortlist. Conflicting evidence prevents a confident pick.
 - no label, plate or settings screen was legible
 - the two readers agreed on nothing legible
+- the brand was read by only one reader and is not confirmed
 - the next candidate was only 0.1 behind
 - 7 claims are still unproven, 0 are supported
 
@@ -88,12 +91,12 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 ## Price
 **5,000 to 5,000 NGN** (priced as material, width 0.0, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 1.5 kg of plastic 40%, steel 30%, circuit_board 15%, aluminium 10%, glass 5% (rates for glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 1.5 kg of plastic 40%, steel 30%, circuit_board 15%, aluminium 10%, rubber 5% (rates for plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 766 NGN
+Scrap floor: 768 NGN
 
 Conditions attached to this price:
-- Not identified: No label or plate is legible in the photo, so the exact generation (G5/G6/G7) cannot be verified; the seller's G7 claim is not on the shortlist and is unsupported by visible text.
+- Not identified: Item text reads 'ThinkPad' while seller claims HP EliteBook 840 G7; no model plate legible, and G7 is absent from shortlist. Conflicting evidence prevents a confident pick.
 - Raised to the 5,000 NGN minimum this business publishes for this kind of item.
 - The laptop is an HP EliteBook 840 G7. -> not proven remotely. Agent will confirm at pickup.
 - The laptop is a premium, lightweight business laptop. -> not proven remotely. Agent will confirm at pickup.

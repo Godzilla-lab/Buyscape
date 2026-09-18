@@ -1,6 +1,6 @@
 # Case scrap-car-metal-parts
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  15670 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  63454 ms
 
 ## What the engine saw
 - Presentation: mixed_lot
@@ -11,25 +11,25 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: rust on metal components, dirt and grime covering surfaces, some parts appear damaged or worn
+- Damage noted: rust on metal surfaces, dirt and grime accumulation, some components appear worn or damaged
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 
 ## Two readers
-- rating_text was seen by only one reader, so it is treated as unread
+- item_type agreed by both readers
 
 ## Chain
 - **ocr** -> ok. 0 lines: 
-- **corroborate** -> dispute. rating_text was seen by only one reader, so it is treated as unread
+- **corroborate** -> agree. item_type agreed by both readers
 - **read_evidence** -> ok. category=automotive parts brand=None model=None label=False lines=0
 - **gate** -> lot. priced by material, identification skipped
 - **condition** -> not working. by the seller's own account
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 5450 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 6264 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 3956 ms (replayed)
-- total across calls: 15670 ms; wall clock: 203 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 18486 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 39460 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 5508 ms (replayed)
+- total across calls: 63454 ms; wall clock: 1379 ms
 
 ## Identification
 No catalogue candidates matched.
@@ -51,9 +51,7 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 ## What the seller is asked for next (shown in the app)
 1. [PHOTO] Photograph one item on its own, with nothing else in the picture.
    _why: the photos show more than one item_
-2. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: Close-up of any label, sticker or metal plate showing the brand and model. Then, without stopping the video: If it opens without tools, open it and photograph the inside. Keep filming the whole time. Do not cut between clips.
-   _why: two readings of these photos disagreed about what is written on the item_
-3. [PHOTO] Close-up of any label, sticker or metal plate showing the brand and model.
+2. [PHOTO] Close-up of any label, sticker or metal plate showing the brand and model.
    _why: nothing on the item says which model this is_
 
 ## What the seller is asked (only they know these)

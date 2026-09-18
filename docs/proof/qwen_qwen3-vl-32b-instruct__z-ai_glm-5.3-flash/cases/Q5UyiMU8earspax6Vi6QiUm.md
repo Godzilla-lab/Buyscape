@@ -1,11 +1,11 @@
 # Case Q5UyiMU8earspax6Vi6QiUm
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0017  |  32276 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0013  |  33595 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: laptop (confidence 0.95)
-- Made of: aluminium 60%, plastic 30%, circuit_board 5%, steel 5%
+- Made of: aluminium 60%, plastic 30%, circuit_board 5%, glass 5%
 - Estimated weight: 1.5 kg (confidence 0.8)
 - Brand read off the item: Apple
 - Model read off the item: nothing legible
@@ -14,29 +14,33 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Damage noted: none
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
-- Text read: File | Edit | Apple logo on screen
+- Text read: File | Apple
 
 ## Two readers
-- brand_text agreed by both readers
+- item_type agreed by both readers
+- 1 transcribed lines was seen by only one reader, so it is treated as unread
+- brand_text was read by only one reader, so it is kept but not confirmed
 
 ## OCR read off the photos
 - File
 
 ## Chain
 - **ocr** -> ok. 1 lines: File
-- **corroborate** -> agree. brand_text agreed by both readers
-- **read_evidence** -> ok. category=laptop brand=Apple model=None label=False lines=3
+- **corroborate** -> dispute. item_type agreed by both readers; 1 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed
+- **read_evidence** -> ok. category=laptop brand=Apple model=None label=False lines=2
 - **forensics** -> flag. looks like a catalogue or stock image
-- **retrieval** -> ok. query='Apple File Edit Apple logo on screen MacBook Pro 16 Touchbar (2019) i9-9880H 32GB-1TB SSD ' hits=['Apple MacBook Pro 13-inch 2017', 'Apple MacBook Pro 17-inch 2011', 'Apple MacBook Pro 13-inch M2 2022', 'Apple MacBook Pro 14-inch M1 Pro 2021', 'Apple MacBook Pro 14-inch M3 2023']
-- **identify** -> refused. chosen=None None margin=0.2
+- **retrieval** -> ok. query='Apple File Apple MacBook Pro 16 Touchbar (2019) i9-9880H 32GB-1TB SSD Space Gray
+CC: 463
+L' hits=['Apple MacBook Pro 13-inch 2017', 'Apple MacBook Pro 17-inch 2011', 'Apple MacBook Pro 13-inch M2 2022', 'Apple MacBook Pro 14-inch M1 Pro 2021', 'Apple MacBook Pro 14-inch M3 2023']
+- **identify** -> refused. chosen=None None margin=0.15
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 7257 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 6794 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 13981 ms
-- extract_claims on qwen/qwen3-vl-32b-instruct: 4244 ms (replayed)
-- total across calls: 32276 ms; wall clock: 14091 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4454 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 8087 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 16615 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 4439 ms (replayed)
+- total across calls: 33595 ms; wall clock: 1571 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -46,20 +50,21 @@ Shortlist from the catalogue:
   - Apple MacBook Pro 14-inch M1 Pro 2021 (0.4143)
   - Apple MacBook Pro 14-inch M3 2023 (0.4143)
 
-**Not identified: CANNOT_IDENTIFY.** Seller claims 16-inch 2019 Touch Bar model, but that entry is absent from the shortlist and no label or legible text on the item confirms any model. Visual appearance (large chassis, Touch Bar) is consistent with the seller's claim, but the rules forbid selecting an off-list model without a plainly legible label.
+**Not identified: CANNOT_IDENTIFY.** Seller claims a 2019 16-inch Touch Bar model, which is absent from the shortlist; no legible label confirms any model, and the shortlist's 14-inch 2021/2023 entries conflict with the Touch Bar claim.
 
 Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 7% on the best answer. It is probably a Apple MacBook Pro 14-inch M1 Pro 2021 or a Apple MacBook Pro 13-inch M2 2022, and the photos cannot separate them.**
+**Not sure enough to price: 7% on the best answer. It is probably a Apple MacBook Pro 14-inch M1 Pro 2021 or a Apple MacBook Pro 14-inch M3 2023, and the photos cannot separate them.**
 
 - Identification confidence: 7% (unknown)
 - Price confidence: 14%
-- It is weighing: Apple MacBook Pro 14-inch M1 Pro 2021 (0.3), Apple MacBook Pro 13-inch M2 2022 (0.1)
-- Seller claims 16-inch 2019 Touch Bar model, but that entry is absent from the shortlist and no label or legible text on the item confirms any model. Visual appearance (large chassis, Touch Bar) is consistent with the seller's claim, but the rules forbid selecting an off-list model without a plainly legible label.
+- It is weighing: Apple MacBook Pro 14-inch M1 Pro 2021 (0.35), Apple MacBook Pro 14-inch M3 2023 (0.2)
+- Seller claims a 2019 16-inch Touch Bar model, which is absent from the shortlist; no legible label confirms any model, and the shortlist's 14-inch 2021/2023 entries conflict with the Touch Bar claim.
 - no label, plate or settings screen was legible
-- 3 lines seen by both readers
-- the next candidate was only 0.2 behind
+- 1 lines seen by both readers
+- the brand was read by only one reader and is not confirmed
+- the next candidate was only 0.15 behind
 - looks like a catalogue or stock image
 - 10 claims are still unproven, 0 are supported
 
@@ -68,9 +73,9 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 ## What the seller is asked for next (shown in the app)
 1. [PHOTO] Take your own photo of the actual item you are selling.
    _why: this looks like a catalogue picture, not the real unit_
-2. [PHOTO] Photo of the sticker on the underside showing the model, serial or service tag.
-   _why: nothing on the item says which model this is_
-3. [PHOTO] Screenshot of System Information (Windows) or About This Mac, showing the model, processor, RAM and storage.
+2. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: Photo of the sticker on the underside showing the model, serial or service tag. Then, still filming, do this on the item's own screen and hold it steady so the writing can be read: open system Information (Windows) or About This Mac, showing the model, processor, RAM and storage. Then, without stopping the video: If the bottom panel comes off with a screwdriver, remove it and photograph the inside: RAM slots, drive and battery. Finish with: A short clip typing a few keys, moving the trackpad, and plugging the charger in so the charge light shows. Keep filming the whole time. Do not cut between clips.
+   _why: two readings of these photos disagreed about what is written on the item_
+3. [PHOTO] Photo of the sticker on the underside showing the model, serial or service tag.
    _why: nothing on the item says which model this is_
 
 ## What the seller is asked (only they know these)
@@ -99,12 +104,12 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 ## Price
 **5,000 to 5,000 NGN** (priced as material, width 0.0, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 1.5 kg of aluminium 60%, plastic 30%, circuit_board 5%, steel 5% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 1.5 kg of aluminium 60%, plastic 30%, circuit_board 5%, glass 5% (rates for glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 1,942 NGN
+Scrap floor: 1,906 NGN
 
 Conditions attached to this price:
-- Not identified: Seller claims 16-inch 2019 Touch Bar model, but that entry is absent from the shortlist and no label or legible text on the item confirms any model. Visual appearance (large chassis, Touch Bar) is consistent with the seller's claim, but the rules forbid selecting an off-list model without a plainly legible label.
+- Not identified: Seller claims a 2019 16-inch Touch Bar model, which is absent from the shortlist; no legible label confirms any model, and the shortlist's 14-inch 2021/2023 entries conflict with the Touch Bar claim.
 - Evidence flag: looks like a catalogue or stock image
 - Raised to the 5,000 NGN minimum this business publishes for this kind of item.
 - MacBook Pro 16 Touchbar (2019) -> not proven remotely. Agent will confirm at pickup.

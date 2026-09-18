@@ -1,10 +1,10 @@
 # Case 2VQbFRLrPvw1JvNxY8ZVPSwB
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  27924 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  21622 ms
 
 ## What the engine saw
 - Presentation: sealed_new
-- Category: computer_system (confidence 0.9)
+- Category: computer (confidence 0.9)
 - Made of: paper 90%, plastic 10%
 - Estimated weight: 12.0 kg (confidence 0.7)
 - Brand read off the item: nothing legible
@@ -14,11 +14,12 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Damage noted: none
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
-- Text read: UN 3481 | CE | Intel Inside
+- Text read: UN 3481 | DASHLINK INTEGRATED SYSTEM | Intel Inside
 
 ## Two readers
+- item_type agreed by both readers
 - brand_text differed between the two readers, so it is treated as unread
-- 3 transcribed lines was seen by only one reader, so it is treated as unread
+- 4 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
 - Q
@@ -27,19 +28,19 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 3 lines: Q | UN 3481 | 112-
-- **corroborate** -> dispute. brand_text differed between the two readers, so it is treated as unread; 3 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=computer_system brand=None model=None label=True lines=3
+- **corroborate** -> dispute. item_type agreed by both readers; brand_text differed between the two readers, so it is treated as unread; 4 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=computer brand=None model=None label=True lines=3
 - **forensics** -> flag. looks like a catalogue or stock image
-- **retrieval** -> ok. query='UN 3481 CE Intel Inside Hp probook 440 g10 intel core i7 13th gen (up to 5.0 ghz),8gb ddr4' hits=['HP 2000', 'HP ProBook 450 G7', 'HP 250 G7', 'HP Pavilion 15', 'HP EliteBook 840 G5']
-- **identify** -> refused. chosen=HP None margin=None
+- **retrieval** -> ok. query='UN 3481 DASHLINK INTEGRATED SYSTEM Intel Inside Hp probook 440 g10 intel core i7 13th gen ' hits=['HP 2000', 'HP ProBook 450 G7', 'HP 250 G7', 'HP Pavilion 15', 'HP EliteBook 840 G5']
+- **identify** -> refused. chosen=None None margin=None
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 6037 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 7306 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 9004 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 5577 ms (replayed)
-- total across calls: 27924 ms; wall clock: 247 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5007 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 6610 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 5804 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 4201 ms (replayed)
+- total across calls: 21622 ms; wall clock: 1267 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -49,7 +50,7 @@ Shortlist from the catalogue:
   - HP Pavilion 15 (0.4333)
   - HP EliteBook 840 G5 (0.3)
 
-**Not identified: CANNOT_IDENTIFY.** Sealed HP retail box; no model name or number legible anywhere, only HP logo, UN 3481, CE and Intel Inside. Seller's claim of ProBook 440 G10 is unverified and outside the shortlist.
+**Not identified: CANNOT_IDENTIFY.** Sealed HP box shows only HP and Intel logos; no model marking legible, and the seller's claimed ProBook 440 G10 is not in the shortlist and cannot be verified from the packaging.
 
 Evidence flags: looks like a catalogue or stock image
 
@@ -58,11 +59,11 @@ Evidence flags: looks like a catalogue or stock image
 
 - Identification confidence: 0% (unknown)
 - Price confidence: 14%
-- Sealed HP retail box; no model name or number legible anywhere, only HP logo, UN 3481, CE and Intel Inside. Seller's claim of ProBook 440 G10 is unverified and outside the shortlist.
+- Sealed HP box shows only HP and Intel logos; no model marking legible, and the seller's claimed ProBook 440 G10 is not in the shortlist and cannot be verified from the packaging.
 - read off the item's own label
 - 3 lines seen by both readers
 - looks like a catalogue or stock image
-- 12 claims are still unproven, 0 are supported
+- 10 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
 
@@ -85,10 +86,6 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 - [unverifiable_remote] intel core i7 13th gen (up to 5.0 ghz)
     priced as: 70 percent of the stated weight. Weigh on the scale and photograph the display
 - [unverifiable_remote] 8gb ddr4 ram
-    priced as: 70 percent of the stated weight. Weigh on the scale and photograph the display
-- [unverifiable_remote] 8gb ddr4 ram
-    priced as: 70 percent of the stated weight. Weigh on the scale and photograph the display
-- [unverifiable_remote] 512gb ssd
     priced as: 70 percent of the stated weight. Weigh on the scale and photograph the display
 - [unverifiable_remote] 512gb ssd
     priced as: 70 percent of the stated weight. Weigh on the scale and photograph the display
@@ -113,13 +110,11 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 768 NGN
 
 Conditions attached to this price:
-- Not identified: Sealed HP retail box; no model name or number legible anywhere, only HP logo, UN 3481, CE and Intel Inside. Seller's claim of ProBook 440 G10 is unverified and outside the shortlist.
+- Not identified: Sealed HP box shows only HP and Intel logos; no model marking legible, and the seller's claimed ProBook 440 G10 is not in the shortlist and cannot be verified from the packaging.
 - Evidence flag: looks like a catalogue or stock image
 - Hp probook 440 g10 -> not proven remotely. Weigh on the scale and photograph the display.
 - intel core i7 13th gen (up to 5.0 ghz) -> not proven remotely. Weigh on the scale and photograph the display.
 - 8gb ddr4 ram -> not proven remotely. Weigh on the scale and photograph the display.
-- 8gb ddr4 ram -> not proven remotely. Weigh on the scale and photograph the display.
-- 512gb ssd -> not proven remotely. Weigh on the scale and photograph the display.
 - 512gb ssd -> not proven remotely. Weigh on the scale and photograph the display.
 - 14.0’’ -> not proven remotely. Weigh on the scale and photograph the display.
 - backlit -> not proven remotely. Weigh on the scale and photograph the display.

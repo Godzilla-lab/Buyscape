@@ -1,6 +1,6 @@
 # Case 3vmd5oDapHaiw1Hi64AJtnEo
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  19341 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  17143 ms
 
 ## What the engine saw
 - Presentation: single_unit
@@ -11,16 +11,18 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Model read off the item: SPG2500
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: No visible damage or wear.
+- Damage noted: minor scuffs on plastic casing, no visible damage to frame or engine
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
-- Text read: SUMEC FIRMAN SHQ2800 | SPG2500
+- Text read: SUMEC FIRMAN SHO2800 | POWER GENERATOR | SPG2500
 
 ## Two readers
 - brand_text agreed by both readers
+- item_type agreed by both readers
 - model_text was read by one reader and confirmed by OCR
-- rating_text differed between the two readers, so it is treated as unread
-- 12 transcribed lines was seen by only one reader, so it is treated as unread
+- rating_text was seen by only one reader, so it is treated as unread
+- serial_text was seen by only one reader, so it is treated as unread
+- 19 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
 - SPG2500
@@ -29,18 +31,18 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 3 lines: SPG2500 | FIRMAN | SUMEC
-- **corroborate** -> dispute. brand_text agreed by both readers; model_text was read by one reader and confirmed by OCR; rating_text differed between the two readers, so it is treated as unread; 12 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=generator brand=SUMEC FIRMAN model=SPG2500 label=True lines=2
+- **corroborate** -> dispute. brand_text agreed by both readers; item_type agreed by both readers; model_text was read by one reader and confirmed by OCR; rating_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 19 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=generator brand=SUMEC FIRMAN model=SPG2500 label=True lines=3
 - **forensics** -> flag. looks like a catalogue or stock image
-- **retrieval** -> ok. query='SUMEC FIRMAN SPG2500 SUMEC FIRMAN SHQ2800 SPG2500 Very clean like brand new and working  w' hits=['Sumec Firman SPG2900 2.8kVA', 'Sumec Firman SPG3000 3.1kVA', 'Sumec Firman ECO8990ES 6.5kVA', 'Sumec Firman SPG8800 8.1kVA']
+- **retrieval** -> ok. query='SUMEC FIRMAN SPG2500 SUMEC FIRMAN SHO2800 POWER GENERATOR SPG2500 Very clean like brand ne' hits=['Sumec Firman SPG2900 2.8kVA', 'Sumec Firman SPG3000 3.1kVA', 'Sumec Firman ECO8990ES 6.5kVA', 'Sumec Firman SPG8800 8.1kVA']
 - **identify** -> label. named from the label: SUMEC FIRMAN SPG2500, not in the catalogue
 - **abstain** -> pass. confidence=0.45 from the label
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 9304 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 7816 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 2221 ms (replayed)
-- total across calls: 19341 ms; wall clock: 519 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 7526 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 7276 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2341 ms (replayed)
+- total across calls: 17143 ms; wall clock: 1707 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -60,7 +62,7 @@ Evidence flags: looks like a catalogue or stock image
 - Price confidence: 0%
 - named from the item's own label, which the catalogue does not list
 - read off the item's own label
-- 1 lines seen by both readers
+- 2 lines seen by both readers
 - looks like a catalogue or stock image
 - 8 claims are still unproven, 0 are supported
 

@@ -1,6 +1,6 @@
 # Case uLHdsjahdvoxObyzqSNaUg5k
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  40565 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  27217 ms
 
 ## What the engine saw
 - Presentation: single_unit
@@ -14,32 +14,34 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Damage noted: none
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
+- Text read: 5 STAR
 
 ## Two readers
+- item_type agreed by both readers
 - brand_text differed between the two readers, so it is treated as unread
 - rating_text was seen by only one reader, so it is treated as unread
-- 6 transcribed lines was seen by only one reader, so it is treated as unread
+- 4 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## Chain
 - **ocr** -> ok. 0 lines: 
-- **corroborate** -> dispute. brand_text differed between the two readers, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; 6 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=split air conditioner brand=None model=None label=True lines=0
+- **corroborate** -> dispute. item_type agreed by both readers; brand_text differed between the two readers, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; 4 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=split air conditioner brand=None model=None label=True lines=1
 - **forensics** -> flag. looks like a catalogue or stock image
-- **retrieval** -> ok. query='2hp
+- **retrieval** -> ok. query='5 STAR 2hp
 anti rust
 dehumidification
 self diagnosis
 auto protection
 cold catalyst' hits=['LG S4-Q18 2HP', 'Midea MSAF-18 2HP', 'Hisense AS-18 2HP']
-- **identify** -> refused. chosen=None None margin=0.25
+- **identify** -> refused. chosen=None None margin=None
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 4281 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 14913 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 17360 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 4011 ms (replayed)
-- total across calls: 40565 ms; wall clock: 652 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4544 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 13696 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 5342 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3635 ms (replayed)
+- total across calls: 27217 ms; wall clock: 2739 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -47,20 +49,18 @@ Shortlist from the catalogue:
   - Midea MSAF-18 2HP (0.2)
   - Hisense AS-18 2HP (0.18)
 
-**Not identified: CANNOT_IDENTIFY.** Red brand logo present but not readable; label text supplied is empty, so brand/model cannot be confirmed.
+**Not identified: CANNOT_IDENTIFY.** The only legible text is '5 STAR', which matches none of the shortlisted brands, and no model number is readable; seller features (2hp, cold catalyst, etc.) are generic and fit any of the three.
 
 Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 10% on the best answer. It is probably a Midea MSAF-18 or a LG S4-Q18, and the photos cannot separate them.**
+**0%: the photos do not say what this is.**
 
-- Identification confidence: 10% (unknown)
+- Identification confidence: 0% (unknown)
 - Price confidence: 14%
-- It is weighing: Midea MSAF-18 (0.45), LG S4-Q18 (0.2)
-- Red brand logo present but not readable; label text supplied is empty, so brand/model cannot be confirmed.
+- The only legible text is '5 STAR', which matches none of the shortlisted brands, and no model number is readable; seller features (2hp, cold catalyst, etc.) are generic and fit any of the three.
 - read off the item's own label
-- the two readers agreed on nothing legible
-- the next candidate was only 0.25 behind
+- 1 lines seen by both readers
 - looks like a catalogue or stock image
 - 11 claims are still unproven, 0 are supported
 
@@ -85,11 +85,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 - [unverifiable_remote] anti rust
     priced as: assumed needs a regas. Agent checks pressures with manifold gauges
 - [unverified] dehumidification
-    priced as: the smallest rating this brand sells. Agent reads the outdoor rating plate
+    priced as: assumed not cooling, compressor unproven. Agent runs the unit and measures amps with a clamp meter
 - [unverified] self diagnosis
-    priced as: the smallest rating this brand sells. Agent reads the outdoor rating plate
+    priced as: assumed not cooling, compressor unproven. Agent runs the unit and measures amps with a clamp meter
 - [unverified] auto protection
-    priced as: the smallest rating this brand sells. Agent reads the outdoor rating plate
+    priced as: assumed not cooling, compressor unproven. Agent runs the unit and measures amps with a clamp meter
 - [unverified] cold catalyst
     priced as: the smallest rating this brand sells. Agent reads the outdoor rating plate
 - [unverified] Required evidence 'code_shot' was not supplied
@@ -111,13 +111,13 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 3,750 NGN
 
 Conditions attached to this price:
-- Not identified: Red brand logo present but not readable; label text supplied is empty, so brand/model cannot be confirmed.
+- Not identified: The only legible text is '5 STAR', which matches none of the shortlisted brands, and no model number is readable; seller features (2hp, cold catalyst, etc.) are generic and fit any of the three.
 - Evidence flag: looks like a catalogue or stock image
 - 2hp -> not proven remotely. Agent reads the outdoor rating plate.
 - anti rust -> not proven remotely. Agent checks pressures with manifold gauges.
-- dehumidification -> not proven remotely. Agent reads the outdoor rating plate.
-- self diagnosis -> not proven remotely. Agent reads the outdoor rating plate.
-- auto protection -> not proven remotely. Agent reads the outdoor rating plate.
+- dehumidification -> not proven remotely. Agent runs the unit and measures amps with a clamp meter.
+- self diagnosis -> not proven remotely. Agent runs the unit and measures amps with a clamp meter.
+- auto protection -> not proven remotely. Agent runs the unit and measures amps with a clamp meter.
 - cold catalyst -> not proven remotely. Agent reads the outdoor rating plate.
 - Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on paper and photograph it next to the unit..
 - Required evidence 'indoor_unit' was not supplied -> not proven remotely. One photo of the whole indoor unit..

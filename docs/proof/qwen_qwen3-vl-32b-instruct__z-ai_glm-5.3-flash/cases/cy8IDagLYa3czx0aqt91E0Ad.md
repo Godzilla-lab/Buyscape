@@ -1,12 +1,12 @@
 # Case cy8IDagLYa3czx0aqt91E0Ad
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  28110 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  27097 ms
 
 ## What the engine saw
 - Presentation: single_unit
-- Category: generator (confidence 0.95)
-- Made of: plastic 40%, steel 30%, copper_insulated 20%, rubber 10%
-- Estimated weight: 25.0 kg (confidence 0.7)
+- Category: generator (confidence 1.0)
+- Made of: steel 40%, plastic 50%, circuit_board 10%
+- Estimated weight: 25.0 kg (confidence 0.8)
 - Brand read off the item: STAR ARC WELDING
 - Model read off the item: GENERATOR-350
 - Rating read: none
@@ -14,13 +14,14 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Damage noted: none
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
-- Text read: STAR ARC WELDING | GENERATOR-350 | STAR ARC | SPECIFICATION | STAR ARC WELDING GENERATOR 350 | Data/Model | AC Rated Output: 3 KVA/2.6 KW | Frequency: 50 Hz
+- Text read: STAR ARC WELDING GENERATOR-350 | STAR ARC | STAR ARC WELDING GENERATOR 350 | Data/Model | AC Rated Output: 3 kVA / 2.5 kW | Frequency: 50 Hz | Engine Model: 170 F/P | Max. Output: 3 kVA
 
 ## Two readers
 - brand_text agreed by both readers
 - model_text agreed by both readers
+- item_type agreed by both readers
 - rating_text differed between the two readers, so it is treated as unread
-- 6 transcribed lines was seen by only one reader, so it is treated as unread
+- 5 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
 - STAR ARC WELDING
@@ -38,26 +39,26 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 25 lines: STAR ARC WELDING | GENERATOR-350 | SPECIFICATION | MCKENNYTOOLS &HARDWARE | AC Rated Output | Engine Model. | Max Output
-- **corroborate** -> dispute. brand_text agreed by both readers; model_text agreed by both readers; rating_text differed between the two readers, so it is treated as unread; 6 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=generator brand=STAR ARC WELDING model=GENERATOR-350 label=True lines=12
+- **corroborate** -> dispute. brand_text agreed by both readers; model_text agreed by both readers; item_type agreed by both readers; rating_text differed between the two readers, so it is treated as unread; 5 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=generator brand=STAR ARC WELDING model=GENERATOR-350 label=True lines=11
 - **forensics** -> flag. looks like a catalogue or stock image
-- **retrieval** -> ok. query='STAR ARC WELDING GENERATOR-350 STAR ARC WELDING GENERATOR-350 STAR ARC SPECIFICATION STAR ' hits=['Tiger TG950 0.95kVA', 'Thermocool TC2700 2.5kVA', 'Haier Thermocool HTG2700 2.5kVA', 'Lutian LT3900 3.5kVA', 'Senwei SW3500 3.5kVA']
+- **retrieval** -> ok. query='STAR ARC WELDING GENERATOR-350 STAR ARC WELDING GENERATOR-350 STAR ARC STAR ARC WELDING GE' hits=['Tiger TG950 0.95kVA', 'Thermocool TC2700 2.5kVA', 'Haier Thermocool HTG2700 2.5kVA', 'Kemage KM6500 5.5kVA', 'Lutian LT3900 3.5kVA']
 - **identify** -> label. named from the label: STAR ARC WELDING GENERATOR-350, not in the catalogue
 - **abstain** -> pass. confidence=0.45 from the label
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 6768 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 18054 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 3288 ms (replayed)
-- total across calls: 28110 ms; wall clock: 946 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 6924 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 17128 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3045 ms (replayed)
+- total across calls: 27097 ms; wall clock: 2063 ms
 
 ## Identification
 Shortlist from the catalogue:
   - Tiger TG950 0.95kVA (0.1833)
   - Thermocool TC2700 2.5kVA (0.1833)
   - Haier Thermocool HTG2700 2.5kVA (0.1833)
+  - Kemage KM6500 5.5kVA (0.15)
   - Lutian LT3900 3.5kVA (0.15)
-  - Senwei SW3500 3.5kVA (0.15)
 
 **Answer: STAR ARC WELDING GENERATOR-350** (named from the item's own label; not in the catalogue)
 
@@ -70,7 +71,7 @@ Evidence flags: looks like a catalogue or stock image
 - Price confidence: 0%
 - named from the item's own label, which the catalogue does not list
 - read off the item's own label
-- 12 lines seen by both readers
+- 11 lines seen by both readers
 - looks like a catalogue or stock image
 - 8 claims are still unproven, 0 are supported
 

@@ -1,6 +1,6 @@
 # Case v697O9twAlGHY4oF2K1zum09
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  55826 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  29181 ms
 
 ## What the engine saw
 - Presentation: single_unit
@@ -11,16 +11,17 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: none
+- Damage noted: box is slightly damaged and dusty, machine appears clean but not inspected closely
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 - Text read: Hisense | Washing Machine
 
 ## Two readers
 - brand_text agreed by both readers
+- item_type agreed by both readers
 - rating_text differed between the two readers, so it is treated as unread
 - model_text was seen by only one reader, so it is treated as unread
-- 5 transcribed lines was seen by only one reader, so it is treated as unread
+- 6 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
 - sense
@@ -28,18 +29,18 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 2 lines: sense | Washing Machine
-- **corroborate** -> dispute. brand_text agreed by both readers; rating_text differed between the two readers, so it is treated as unread; model_text was seen by only one reader, so it is treated as unread; 5 transcribed lines was seen by only one reader, so it is treated as unread
+- **corroborate** -> dispute. brand_text agreed by both readers; item_type agreed by both readers; rating_text differed between the two readers, so it is treated as unread; model_text was seen by only one reader, so it is treated as unread; 6 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=washing machine brand=Hisense model=None label=True lines=2
 - **retrieval** -> ok. query='Hisense Hisense Washing Machine Make laundry easier and more convenient with the Hisense 7' hits=['Hisense WTJA801 8kg top loader', 'Hisense WT3K9022U 9kg top loader', 'Hisense WM5S1045 10kg front loader']
-- **identify** -> refused. chosen=None None margin=0.15
+- **identify** -> refused. chosen=Hisense None margin=0.2
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 7129 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 15236 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 31734 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 1727 ms (replayed)
-- total across calls: 55826 ms; wall clock: 393 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5444 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 10281 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 11106 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2350 ms (replayed)
+- total across calls: 29181 ms; wall clock: 1677 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -47,18 +48,18 @@ Shortlist from the catalogue:
   - Hisense WT3K9022U 9kg top loader (0.4333)
   - Hisense WM5S1045 10kg front loader (0.4333)
 
-**Not identified: CANNOT_IDENTIFY.** Seller states 7.5kg top loader but no shortlist entry matches; box model text not legible.
+**Not identified: CANNOT_IDENTIFY.** Box shows no legible model number; seller states 7.5kg, matching no shortlist entry (8/9/10kg). Box features suggest a top loader, but exact model cannot be confirmed.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 16% on the best answer. It is probably a Hisense WTJA801 or a Hisense WT3K9022U, and the photos cannot separate them.**
+**Not sure enough to price: 19% on the best answer. It is probably a Hisense WTJA801 or a Hisense WT3K9022U, and the photos cannot separate them.**
 
-- Identification confidence: 16% (unknown)
+- Identification confidence: 19% (unknown)
 - Price confidence: 22%
-- It is weighing: Hisense WTJA801 (0.3), Hisense WT3K9022U (0.15)
-- Seller states 7.5kg top loader but no shortlist entry matches; box model text not legible.
+- It is weighing: Hisense WTJA801 (0.35), Hisense WT3K9022U (0.15)
+- Box shows no legible model number; seller states 7.5kg, matching no shortlist entry (8/9/10kg). Box features suggest a top loader, but exact model cannot be confirmed.
 - read off the item's own label
 - 2 lines seen by both readers
-- the next candidate was only 0.15 behind
+- the next candidate was only 0.2 behind
 - 6 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -95,7 +96,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 5,400 NGN
 
 Conditions attached to this price:
-- Not identified: Seller states 7.5kg top loader but no shortlist entry matches; box model text not legible.
+- Not identified: Box shows no legible model number; seller states 7.5kg, matching no shortlist entry (8/9/10kg). Box features suggest a top loader, but exact model cannot be confirmed.
 - The washing machine is a Hisense model. -> not proven remotely. Agent reads the rating plate.
 - The washing machine has a 7.5kg capacity. -> not proven remotely. Agent reads the rating plate.
 - Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on paper and photograph it next to the machine..

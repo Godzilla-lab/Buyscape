@@ -1,25 +1,25 @@
 # Case 7CBkGlhe7sHlzGTd4iCYyW74
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  49280 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  40864 ms
 
 ## What the engine saw
 - Presentation: single_unit
-- Category: phone (confidence 0.95)
-- Made of: aluminium 40%, plastic 40%, circuit_board 10%, glass 10%
-- Estimated weight: 0.2 kg (confidence 0.9)
+- Category: phone (confidence 1.0)
+- Made of: aluminium 40%, plastic 50%, glass 10%
+- Estimated weight: 0.18 kg (confidence 0.9)
 - Brand read off the item: Apple
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: Scratch on back glass near camera module, Minor wear on edges
-- Looks like a catalogue image: yes
+- Damage noted: Minor smudges and fingerprints on the back surface., No visible cracks or dents.
+- Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: BN: 3753 | Apple
+- Text read: BN: 375 | Apple
 
 ## Two readers
+- item_type agreed by both readers
 - model_text was seen by only one reader, so it is treated as unread
-- serial_text was seen by only one reader, so it is treated as unread
-- 6 transcribed lines was seen by only one reader, so it is treated as unread
+- 2 transcribed lines was seen by only one reader, so it is treated as unread
 - brand_text was read by only one reader, so it is kept but not confirmed
 
 ## OCR read off the photos
@@ -30,23 +30,22 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 4 lines: CEEJA | BN:3753 | GADGE | CEEJAY GADGETS NG
-- **corroborate** -> dispute. model_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 6 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed
+- **corroborate** -> dispute. item_type agreed by both readers; model_text was seen by only one reader, so it is treated as unread; 2 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed
 - **read_evidence** -> ok. category=phone brand=Apple model=None label=False lines=2
-- **forensics** -> flag. looks like a catalogue or stock image
-- **retrieval** -> ok. query='Apple BN: 3753 Apple Foreign Used
+- **retrieval** -> ok. query='Apple BN: 375 Apple Foreign Used
 iPhone 11 128gb 
 Color: Red & More 
 Neatness: 10/10
-BH 9' hits=['Apple iPhone 11', 'Apple iPhone 11 Pro', 'Apple iPhone 11 Pro Max', 'Apple iPhone XR', 'Apple iPhone XS']
-- **identify** -> ok. chosen=Apple iPhone 11 margin=0.3
-- **abstain** -> abstain. top score 0.6
+BH 90' hits=['Apple iPhone 11', 'Apple iPhone 11 Pro', 'Apple iPhone 11 Pro Max', 'Apple iPhone XR', 'Apple iPhone XS']
+- **identify** -> ok. chosen=Apple iPhone 11 margin=0.55
+- **abstain** -> abstain. no label, top score 0.75
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 7751 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 19843 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 17473 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 4213 ms (replayed)
-- total across calls: 49280 ms; wall clock: 445 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 8389 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 15391 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 9720 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 7364 ms (replayed)
+- total across calls: 40864 ms; wall clock: 2050 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -56,31 +55,28 @@ Shortlist from the catalogue:
   - Apple iPhone XR (0.5)
   - Apple iPhone XS (0.5)
 
-**Not identified: CANNOT_IDENTIFY.** The best candidate scored only 0.6, which is not sure enough to price.
-
-Evidence flags: looks like a catalogue or stock image
+**Not identified: CANNOT_IDENTIFY.** No label, plate or settings screen was legible, and the visual match alone scored only 0.75.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 12% on the best answer. It is probably a Apple iPhone 11 or a Apple iPhone XR, and the photos cannot separate them.**
+**Not sure enough to price: 31% on the best answer. It is probably a Apple iPhone 11 or a Apple iPhone XR, and the photos cannot separate them.**
 
-- Identification confidence: 12% (unknown)
+- Identification confidence: 31% (unknown)
 - Price confidence: 14%
-- It is weighing: Apple iPhone 11 (0.6), Apple iPhone XR (0.3)
-- The best candidate scored only 0.6, which is not sure enough to price.
+- It is weighing: Apple iPhone 11 (0.75), Apple iPhone XR (0.2)
+- No label, plate or settings screen was legible, and the visual match alone scored only 0.75.
 - no label, plate or settings screen was legible
 - 1 lines seen by both readers
 - the brand was read by only one reader and is not confirmed
-- looks like a catalogue or stock image
 - 11 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
 
 ## What the seller is asked for next (shown in the app)
-1. [PHOTO] Take your own photo of the actual item you are selling.
-   _why: this looks like a catalogue picture, not the real unit_
-2. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: If you have the box, photograph the label showing the model, storage and IMEI. Then, still filming, do this on the item's own screen and hold it steady so the writing can be read: open settings then About, showing the model name and storage. Then, without stopping the video: Pull out the SIM tray and photograph the open slot. Finish with: A short clip: press power, unlock, then open the camera app. Keep filming the whole time. Do not cut between clips.
+1. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: If you have the box, photograph the label showing the model, storage and IMEI. Then, still filming, do this on the item's own screen and hold it steady so the writing can be read: open settings then About, showing the model name and storage. Then, without stopping the video: Pull out the SIM tray and photograph the open slot. Finish with: A short clip: press power, unlock, then open the camera app. Keep filming the whole time. Do not cut between clips.
    _why: two readings of these photos disagreed about what is written on the item_
-3. [PHOTO] Screenshot of Settings then About, showing the model name and storage.
+2. [PHOTO] Screenshot of Settings then About, showing the model name and storage.
+   _why: nothing on the item says which model this is_
+3. [PHOTO] Dial *#06# and screenshot the IMEI that appears.
    _why: nothing on the item says which model this is_
 
 ## What the seller is asked (only they know these)
@@ -110,15 +106,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
-**79 to 275 NGN** (priced as material, width 1.1035, method material_floor, 0 comparable prices)
+**66 to 233 NGN** (priced as material, width 1.1157, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 0.2 kg of aluminium 40%, plastic 40%, circuit_board 10%, glass 10% (rates for glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 0.18 kg of aluminium 40%, plastic 50%, glass 10% (rates for glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 184 NGN
+Scrap floor: 153 NGN
 
 Conditions attached to this price:
-- Not identified: The best candidate scored only 0.6, which is not sure enough to price.
-- Evidence flag: looks like a catalogue or stock image
+- Not identified: No label, plate or settings screen was legible, and the visual match alone scored only 0.75.
 - Foreign Used -> not proven remotely. Agent will confirm at pickup.
 - iPhone 11 128gb -> not proven remotely. Agent reads storage from Settings.
 - iPhone 11 128gb -> not proven remotely. Agent reads storage from Settings.

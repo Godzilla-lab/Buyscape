@@ -1,6 +1,6 @@
 # Case scrap-compact-audio-system
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0014  |  22704 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0014  |  82004 ms
 
 ## What the engine saw
 - Presentation: single_unit
@@ -11,35 +11,37 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: dusty surface, scratches on front panel, cracked plastic on lower section, white sticker residue on disc tray
+- Damage noted: dusty surface, scratches on front panel, small white sticker or paper piece stuck on lower front, some wear on buttons and knobs
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: 3 DISC | MINISTAR
+- Text read: 3 DISC | MINISTAR | A
 
 ## Two readers
 - brand_text agreed by both readers
+- item_type agreed by both readers
 - 1 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
-- 85
-- 3Dsc
+- 3DSc
+- MINISTAR
 - "A
+- B
 
 ## Chain
-- **ocr** -> ok. 3 lines: 85 | 3Dsc | "A
-- **corroborate** -> dispute. brand_text agreed by both readers; 1 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=audio system brand=MINISTAR model=None label=False lines=2
-- **retrieval** -> ok. query='MINISTAR 3 DISC MINISTAR Description: This is a scrap compact audio system that is current' hits=['Lenovo IdeaPad 3', 'Acer Aspire 5', 'Tecno Pova 5', 'Kemage KM6500 5.5kVA', 'Lutian LT3900 3.5kVA']
+- **ocr** -> ok. 4 lines: 3DSc | MINISTAR | "A | B
+- **corroborate** -> dispute. brand_text agreed by both readers; item_type agreed by both readers; 1 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=audio system brand=MINISTAR model=None label=False lines=3
+- **retrieval** -> ok. query='MINISTAR 3 DISC MINISTAR A Description: This is a scrap compact audio system that is curre' hits=['Lenovo IdeaPad 3', 'Acer Aspire 5', 'Tecno Pova 5', 'Kemage KM6500 5.5kVA', 'Lutian LT3900 3.5kVA']
 - **identify** -> refused. chosen=MINISTAR None margin=None
 - **abstain** -> abstain. model refused
 - **condition** -> not working. by the seller's own account
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 5580 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 6062 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 5730 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 5332 ms (replayed)
-- total across calls: 22704 ms; wall clock: 2312 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 23585 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 30511 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 11627 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 16281 ms (replayed)
+- total across calls: 82004 ms; wall clock: 3203 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -49,18 +51,17 @@ Shortlist from the catalogue:
   - Kemage KM6500 5.5kVA (0.15)
   - Lutian LT3900 3.5kVA (0.15)
 
-**Not identified: CANNOT_IDENTIFY.** Brand MINISTAR is legible on the fascia, but no model number is printed or readable anywhere on the unit, and the shortlist (laptops, phone, generators) contains no audio equipment, so no catalogue entry can be matched.
+**Not identified: CANNOT_IDENTIFY.** Item is a Ministar 3-disc compact audio system; no shortlist entry matches and no model number is legible.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 31% on the best answer. It is probably a MINISTAR 3-disc compact audio system, and the photos cannot separate them.**
+**0%: the photos do not say what this is.**
 
-- Identification confidence: 31% (unknown)
-- Price confidence: 14%
-- It is weighing: MINISTAR 3-disc compact audio system (0.6)
-- Brand MINISTAR is legible on the fascia, but no model number is printed or readable anywhere on the unit, and the shortlist (laptops, phone, generators) contains no audio equipment, so no catalogue entry can be matched.
+- Identification confidence: 0% (unknown)
+- Price confidence: 16%
+- Item is a Ministar 3-disc compact audio system; no shortlist entry matches and no model number is legible.
 - no label, plate or settings screen was legible
-- 2 lines seen by both readers
-- 10 claims are still unproven, 0 are supported
+- 3 lines seen by both readers
+- 9 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
 
@@ -83,7 +84,6 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 - [unverifiable_remote] It is being sold as is for parts or recycling
 - [unverifiable_remote] Buyer is responsible for pickup
 - [unverifiable_remote] Location: Oshodi, Lagos State
-- [unverifiable_remote] Price: ₦5,000
 - [unverified] Required evidence 'code_shot' was not supplied
     priced as: priced as if the worst case is true. Write the code {code} on a piece of paper and take one photo with the paper next to the item.
 - [unverified] Required evidence 'overview' was not supplied
@@ -101,13 +101,12 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 2,000 NGN
 
 Conditions attached to this price:
-- Not identified: Brand MINISTAR is legible on the fascia, but no model number is printed or readable anywhere on the unit, and the shortlist (laptops, phone, generators) contains no audio equipment, so no catalogue entry can be matched.
+- Not identified: Item is a Ministar 3-disc compact audio system; no shortlist entry matches and no model number is legible.
 - This is a scrap compact audio system -> not proven remotely. Weigh on the scale and photograph the display.
 - It is currently not functioning -> not proven remotely. Agent powers the item on before payment.
 - It is being sold as is for parts or recycling -> not proven remotely. Agent will confirm at pickup.
 - Buyer is responsible for pickup -> not proven remotely. Agent will confirm at pickup.
 - Location: Oshodi, Lagos State -> not proven remotely. Agent will confirm at pickup.
-- Price: ₦5,000 -> not proven remotely. Agent will confirm at pickup.
 - Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on a piece of paper and take one photo with the paper next to the item..
 - Required evidence 'overview' was not supplied -> not proven remotely. One photo showing the whole item..
 - Required evidence 'label_or_plate' was not supplied -> not proven remotely. Close-up of any label, sticker or metal plate showing the brand and model..

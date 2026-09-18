@@ -1,26 +1,27 @@
 # Case kFQEjTt7JNDTdhy75skQPyjJ
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  33031 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  27221 ms
 
 ## What the engine saw
 - Presentation: single_unit
-- Category: generator (confidence 0.95)
+- Category: generator (confidence 1.0)
 - Made of: steel 60%, plastic 30%, copper 10%
 - Estimated weight: 25.0 kg (confidence 0.8)
 - Brand read off the item: ELEPAQ
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: minor scuffs on yellow casing, dirt and grime on lower frame and engine area
+- Damage noted: minor surface scratches on yellow casing, dust and grime on control panel and frame
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
-- Text read: ELEPAQ GASOLINE GENERATOR | MANUFACTURED BY CONSTANT | OUTPUT | VOLTAGE | FREQUENCY | AC | ON/OFF | SPEED CONTROL
+- Text read: ELEPAQ | GASOLINE GENERATOR | MANUFACTURED BY CONSTANT | DC OUTLET: 12V/8A | DIMENSIONS: 650x450x450mm
 
 ## Two readers
 - brand_text agreed by both readers
-- model_text was seen by only one reader, so it is treated as unread
-- rating_text was seen by only one reader, so it is treated as unread
-- 13 transcribed lines was seen by only one reader, so it is treated as unread
+- item_type agreed by both readers
+- model_text differed between the two readers, so it is treated as unread
+- rating_text differed between the two readers, so it is treated as unread
+- 15 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
 - ELEPAQ
@@ -32,19 +33,19 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 6 lines: ELEPAQ | GASOLINE GENERATOR | CST | MNCONSTANT | VADPENG—CE | $V6000
-- **corroborate** -> dispute. brand_text agreed by both readers; model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; 13 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=generator brand=ELEPAQ model=None label=True lines=9
+- **corroborate** -> dispute. brand_text agreed by both readers; item_type agreed by both readers; model_text differed between the two readers, so it is treated as unread; rating_text differed between the two readers, so it is treated as unread; 15 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=generator brand=ELEPAQ model=None label=True lines=5
 - **forensics** -> flag. looks like a catalogue or stock image
-- **retrieval** -> ok. query='ELEPAQ ELEPAQ GASOLINE GENERATOR MANUFACTURED BY CONSTANT OUTPUT VOLTAGE FREQUENCY AC ON/O' hits=['Elepaq SV2200 2.5kVA', 'Elepaq SV6800 6.5kVA']
+- **retrieval** -> ok. query='ELEPAQ ELEPAQ GASOLINE GENERATOR MANUFACTURED BY CONSTANT DC OUTLET: 12V/8A DIMENSIONS: 65' hits=['Elepaq SV2200 2.5kVA', 'Elepaq SV6800 6.5kVA']
 - **identify** -> ok. chosen=Elepaq SV6800 margin=0.8
 - **abstain** -> abstain. seller names another generation
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 7727 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 8934 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 14953 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 1417 ms (replayed)
-- total across calls: 33031 ms; wall clock: 384 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 7808 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 12776 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 5837 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 800 ms (replayed)
+- total across calls: 27221 ms; wall clock: 1611 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -63,7 +64,7 @@ Evidence flags: looks like a catalogue or stock image
 - It is weighing: Elepaq SV6800 (0.9), Elepaq SV2200 (0.1)
 - The answer names sv6800, which appears nowhere on the item or in the seller's words. A photo of the plate would confirm or correct it.
 - read off the item's own label
-- 9 lines seen by both readers
+- 5 lines seen by both readers
 - looks like a catalogue or stock image
 - 5 claims are still unproven, 0 are supported
 

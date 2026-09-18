@@ -1,10 +1,10 @@
 # Case u8FVsNOX5YQFArsMMUtYnncJ
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0007  |  14554 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  20863 ms
 
 ## What the engine saw
 - Presentation: sealed_new
-- Category: smartphone (confidence 0.95)
+- Category: phone (confidence 1.0)
 - Made of: paper 80%, plastic 20%
 - Estimated weight: 0.5 kg (confidence 0.8)
 - Brand read off the item: Galaxy
@@ -14,10 +14,11 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Damage noted: none
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
-- Text read: Galaxy A57 5G
+- Text read: Galaxy | A57 5G
 
 ## Two readers
 - model_text agreed by both readers
+- item_type agreed by both readers
 - brand_text was read by one reader and confirmed by OCR
 
 ## OCR read off the photos
@@ -27,21 +28,21 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 3 lines: Galaxy | A57 5G | INEDUC
-- **corroborate** -> agree. model_text agreed by both readers; brand_text was read by one reader and confirmed by OCR
-- **read_evidence** -> ok. category=smartphone brand=Galaxy model=A57 5G label=False lines=1
+- **corroborate** -> agree. model_text agreed by both readers; item_type agreed by both readers; brand_text was read by one reader and confirmed by OCR
+- **read_evidence** -> ok. category=phone brand=Galaxy model=A57 5G label=False lines=2
 - **forensics** -> flag. looks like a catalogue or stock image
 - **retrieval** -> ok. query='Galaxy A57 5G Galaxy A57 5G SAMSUNG GALAXY A57
 256GB OF STORAGE
 12GB RAM
 BRAND-NEW' hits=['Samsung Galaxy S21', 'Samsung Galaxy S22', 'Samsung Galaxy S23', 'Samsung Galaxy S24', 'Samsung Galaxy S25']
 - **identify** -> label. named from the label: Galaxy A57 5G, not in the catalogue
-- **abstain** -> abstain. confidence 0.38: named from the item's own label, which the catalogue does not list; no label, plate or settings screen was legible; 1 lines seen by both readers; looks like a catalogue or stock image
+- **abstain** -> abstain. confidence 0.38: named from the item's own label, which the catalogue does not list; no label, plate or settings screen was legible; 2 lines seen by both readers; looks like a catalogue or stock image
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 4010 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 7413 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 3131 ms (replayed)
-- total across calls: 14554 ms; wall clock: 492 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4421 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 12953 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3489 ms (replayed)
+- total across calls: 20863 ms; wall clock: 1220 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -62,7 +63,7 @@ Evidence flags: looks like a catalogue or stock image
 - Price confidence: 16%
 - The label names it, but the evidence only supports that at 38 percent. One clear photo of the label would settle it.
 - no label, plate or settings screen was legible
-- 1 lines seen by both readers
+- 2 lines seen by both readers
 - looks like a catalogue or stock image
 - 9 claims are still unproven, 0 are supported
 
@@ -83,9 +84,9 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 
 ## Claims
 - [unverifiable_remote] SAMSUNG GALAXY A57
-- [unverifiable_remote] 256GB OF STORAGE
+- [unverified] 256GB OF STORAGE
     priced as: smallest variant of this model. Agent reads storage from Settings
-- [unverifiable_remote] 12GB RAM
+- [unverified] 12GB RAM
     priced as: smallest variant of this model. Agent reads storage from Settings
 - [unverifiable_remote] BRAND-NEW
 - [unverified] Required evidence 'code_shot' was not supplied

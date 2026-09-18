@@ -1,26 +1,25 @@
 # Case ze2Pvfz8ZTBkOHPvNYoAKALe
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0013  |  44428 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  36361 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: washing machine (confidence 0.95)
-- Made of: plastic 60%, steel 30%, circuit_board 5%, rubber 5%
+- Made of: plastic 70%, steel 25%, circuit_board 5%
 - Estimated weight: 25.0 kg (confidence 0.8)
-- Brand read off the item: LG
+- Brand read off the item: SAMSUNG
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: minor scuffs on front panel, dust on top lid
+- Damage noted: no visible damage or wear
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: BUBBLE CLEAN | LG
+- Text read: BUBBLE CLEAN | SAMSUNG
 
 ## Two readers
-- model_text was seen by only one reader, so it is treated as unread
+- item_type agreed by both readers
 - rating_text was seen by only one reader, so it is treated as unread
-- serial_text was seen by only one reader, so it is treated as unread
-- 11 transcribed lines was seen by only one reader, so it is treated as unread
+- 12 transcribed lines was seen by only one reader, so it is treated as unread
 - brand_text was read by only one reader, so it is kept but not confirmed
 
 ## OCR read off the photos
@@ -32,40 +31,39 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 5 lines: BOOS | LG XBOOM | POSTED | Buble | Clean
-- **corroborate** -> dispute. model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 11 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed
-- **read_evidence** -> ok. category=washing machine brand=LG model=None label=False lines=2
-- **retrieval** -> ok. query='LG BUBBLE CLEAN LG Hisense 9kg top load Automatic wash and spin washing machine' hits=['Hisense WT3K9022U 9kg top loader', 'LG T2108 8kg top loader', 'LG T2312 12kg top loader', 'Hisense WTJA801 8kg top loader', 'Hisense WM5S1045 10kg front loader']
-- **identify** -> refused. chosen=LG None margin=0.05
-- **abstain** -> abstain. model refused
+- **corroborate** -> dispute. item_type agreed by both readers; rating_text was seen by only one reader, so it is treated as unread; 12 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed
+- **read_evidence** -> ok. category=washing machine brand=SAMSUNG model=None label=False lines=2
+- **retrieval** -> ok. query='SAMSUNG BUBBLE CLEAN SAMSUNG Hisense 9kg top load Automatic wash and spin washing machine' hits=['Hisense WT3K9022U 9kg top loader', 'Hisense WTJA801 8kg top loader', 'Samsung WA80 8kg top loader', 'Hisense WM5S1045 10kg front loader', 'Samsung WW70 7kg front loader']
+- **identify** -> ok. chosen=Samsung WA80 margin=0.35
+- **abstain** -> abstain. top score 0.6
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 6407 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 14013 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 18908 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 5100 ms (replayed)
-- total across calls: 44428 ms; wall clock: 505 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 6421 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 11423 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 13453 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 5064 ms (replayed)
+- total across calls: 36361 ms; wall clock: 1828 ms
 
 ## Identification
 Shortlist from the catalogue:
   - Hisense WT3K9022U 9kg top loader (0.8333)
-  - LG T2108 8kg top loader (0.4667)
-  - LG T2312 12kg top loader (0.4667)
   - Hisense WTJA801 8kg top loader (0.4667)
+  - Samsung WA80 8kg top loader (0.4667)
   - Hisense WM5S1045 10kg front loader (0.4333)
+  - Samsung WW70 7kg front loader (0.4)
 
-**Not identified: CANNOT_IDENTIFY.** Item is clearly an LG top loader (LG logo, Bubble Clean sticker, Inverter Direct Drive), contradicting the seller's Hisense claim, but no model number or capacity is legible, so T2108 (8kg) vs T2312 (12kg) cannot be decided.
+**Not identified: CANNOT_IDENTIFY.** The best candidate scored only 0.6, which is not sure enough to price.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 14% on the best answer. It is probably a LG T2108 or a LG T2312, and the photos cannot separate them.**
+**Not sure enough to price: 25% on the best answer. It is probably a Samsung WA80 or a Hisense WT3K9022U, and the photos cannot separate them.**
 
-- Identification confidence: 14% (unknown)
+- Identification confidence: 25% (unknown)
 - Price confidence: 16%
-- It is weighing: LG T2108 (0.4), LG T2312 (0.35)
-- Item is clearly an LG top loader (LG logo, Bubble Clean sticker, Inverter Direct Drive), contradicting the seller's Hisense claim, but no model number or capacity is legible, so T2108 (8kg) vs T2312 (12kg) cannot be decided.
+- It is weighing: Samsung WA80 (0.6), Hisense WT3K9022U (0.25)
+- The best candidate scored only 0.6, which is not sure enough to price.
 - no label, plate or settings screen was legible
 - 1 lines seen by both readers
 - the brand was read by only one reader and is not confirmed
-- the next candidate was only 0.05 behind
 - 9 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -101,14 +99,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Open the door and photograph the inside of the drum.
 
 ## Price
-**2,281 to 8,575 NGN** (priced as material, width 1.1594, method material_floor, 0 comparable prices)
+**2,123 to 8,150 NGN** (priced as material, width 1.1733, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 25 kg of plastic 60%, steel 30%, circuit_board 5%, rubber 5% (rates for plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 25 kg of plastic 70%, steel 25%, circuit_board 5% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 6,312 NGN
+Scrap floor: 5,875 NGN
 
 Conditions attached to this price:
-- Not identified: Item is clearly an LG top loader (LG logo, Bubble Clean sticker, Inverter Direct Drive), contradicting the seller's Hisense claim, but no model number or capacity is legible, so T2108 (8kg) vs T2312 (12kg) cannot be decided.
+- Not identified: The best candidate scored only 0.6, which is not sure enough to price.
 - Hisense 9kg top load Automatic wash and spin washing machine -> not proven remotely. Agent reads the rating plate.
 - Hisense 9kg top load Automatic wash and spin washing machine -> not proven remotely. Agent reads the rating plate.
 - Hisense 9kg top load Automatic wash and spin washing machine -> not proven remotely. Agent reads the rating plate.

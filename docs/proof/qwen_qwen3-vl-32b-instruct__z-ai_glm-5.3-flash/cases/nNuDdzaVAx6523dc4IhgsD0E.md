@@ -1,6 +1,6 @@
 # Case nNuDdzaVAx6523dc4IhgsD0E
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  18651 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  37794 ms
 
 ## What the engine saw
 - Presentation: sealed_new
@@ -8,7 +8,7 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Made of: paper 80%, plastic 20%
 - Estimated weight: 0.5 kg (confidence 0.8)
 - Brand read off the item: Samsung
-- Model read off the item: nothing legible
+- Model read off the item: Galaxy S20 Ultra
 - Rating read: none
 - Label, plate or settings screen legible: no
 - Damage noted: none
@@ -17,28 +17,29 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Text read: Galaxy S20 Ultra | Samsung
 
 ## Two readers
-- model_text was seen by only one reader, so it is treated as unread
+- brand_text agreed by both readers
+- model_text agreed by both readers
+- item_type agreed by both readers
 - 1 transcribed lines was seen by only one reader, so it is treated as unread
-- brand_text was read by only one reader, so it is kept but not confirmed
 
 ## OCR read off the photos
 - Galaxy S26 Ultra
 
 ## Chain
 - **ocr** -> ok. 1 lines: Galaxy S26 Ultra
-- **corroborate** -> dispute. model_text was seen by only one reader, so it is treated as unread; 1 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed
-- **read_evidence** -> ok. category=phone brand=Samsung model=None label=False lines=2
+- **corroborate** -> dispute. brand_text agreed by both readers; model_text agreed by both readers; item_type agreed by both readers; 1 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=phone brand=Samsung model=Galaxy S20 Ultra label=False lines=2
 - **forensics** -> flag. looks like a catalogue or stock image
-- **retrieval** -> ok. query='Samsung Galaxy S20 Ultra Samsung Latest SAMSUNG galaxy S26 Ultra (512gb) Available for pic' hits=['Samsung Galaxy S21', 'Samsung Galaxy S22', 'Samsung Galaxy S23', 'Samsung Galaxy S24', 'Samsung Galaxy S25']
-- **identify** -> ok. chosen=Samsung Galaxy S26 Ultra margin=0.8
-- **abstain** -> abstain. confidence 0.31: no label, plate or settings screen was legible; 1 lines seen by both readers; the brand was read by only one reader and is not confirmed; looks like a catalogue or stock image
+- **retrieval** -> ok. query='Samsung Galaxy S20 Ultra Galaxy S20 Ultra Samsung Latest SAMSUNG galaxy S26 Ultra (512gb) ' hits=['Samsung Galaxy S21', 'Samsung Galaxy S22', 'Samsung Galaxy S23', 'Samsung Galaxy S24', 'Samsung Galaxy S25']
+- **identify** -> ok. chosen=Samsung Galaxy S26 Ultra margin=0.5
+- **abstain** -> abstain. no label, top score 0.7
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 4694 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 6920 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 4066 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 2971 ms (replayed)
-- total across calls: 18651 ms; wall clock: 426 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 6680 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 14197 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 14012 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2905 ms (replayed)
+- total across calls: 37794 ms; wall clock: 1941 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -48,20 +49,19 @@ Shortlist from the catalogue:
   - Samsung Galaxy S24 (0.5)
   - Samsung Galaxy S25 (0.5)
 
-**Not identified: EVIDENCE_INCOMPLETE.** The evidence only supports this answer at 31 percent, which is a guess. One clear photo of the label would settle it.
+**Not identified: CANNOT_IDENTIFY.** No label, plate or settings screen was legible, and the visual match alone scored only 0.7.
 
 Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 19% on the best answer. It is probably a Samsung Galaxy S26 Ultra or a Samsung Galaxy S25, and the photos cannot separate them.**
+**Not sure enough to price: 18% on the best answer. It is probably a Samsung Galaxy S26 Ultra or a Samsung Galaxy S20 Ultra, and the photos cannot separate them.**
 
-- Identification confidence: 19% (unknown)
+- Identification confidence: 18% (unknown)
 - Price confidence: 18%
-- It is weighing: Samsung Galaxy S26 Ultra (0.9), Samsung Galaxy S25 (0.1)
-- The evidence only supports this answer at 31 percent, which is a guess. One clear photo of the label would settle it.
+- It is weighing: Samsung Galaxy S26 Ultra (0.7), Samsung Galaxy S20 Ultra (0.2)
+- No label, plate or settings screen was legible, and the visual match alone scored only 0.7.
 - no label, plate or settings screen was legible
 - 1 lines seen by both readers
-- the brand was read by only one reader and is not confirmed
 - looks like a catalogue or stock image
 - 8 claims are still unproven, 0 are supported
 
@@ -104,7 +104,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 34 NGN
 
 Conditions attached to this price:
-- Not identified: The evidence only supports this answer at 31 percent, which is a guess. One clear photo of the label would settle it.
+- Not identified: No label, plate or settings screen was legible, and the visual match alone scored only 0.7.
 - Evidence flag: looks like a catalogue or stock image
 - Latest SAMSUNG galaxy S26 Ultra -> not proven remotely. Agent will confirm at pickup.
 - 512gb -> not proven remotely. Agent reads storage from Settings.

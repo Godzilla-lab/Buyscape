@@ -1,6 +1,6 @@
 # Case f6vXO8Eqna7cEJ0IJgmzOz1n
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  22005 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  48711 ms
 
 ## What the engine saw
 - Presentation: sealed_new
@@ -19,6 +19,7 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 ## Two readers
 - model_text was seen by only one reader, so it is treated as unread
 - 1 transcribed lines was seen by only one reader, so it is treated as unread
+- item_type was read by only one reader, so it is kept but not confirmed
 
 ## OCR read off the photos
 - STQ
@@ -26,19 +27,19 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 2 lines: STQ | ONYITEX GADGET
-- **corroborate** -> dispute. model_text was seen by only one reader, so it is treated as unread; 1 transcribed lines was seen by only one reader, so it is treated as unread
+- **corroborate** -> dispute. model_text was seen by only one reader, so it is treated as unread; 1 transcribed lines was seen by only one reader, so it is treated as unread; item_type was read by only one reader, so it is kept but not confirmed
 - **read_evidence** -> ok. category=phone brand=None model=None label=False lines=1
 - **forensics** -> flag. looks like a catalogue or stock image
 - **retrieval** -> ok. query='ONYTEX GADGETZ Brand new Samsung galaxy S10+ now available at low cost dm for your order n' hits=['Samsung Galaxy S21', 'Samsung Galaxy S22', 'Samsung Galaxy S23', 'Samsung Galaxy S24', 'Samsung Galaxy S25']
 - **identify** -> ok. chosen=Samsung Galaxy S10+ margin=None
-- **abstain** -> abstain. confidence 0.38: no label, plate or settings screen was legible; 1 lines seen by both readers; looks like a catalogue or stock image
+- **abstain** -> abstain. confidence 0.31: no label, plate or settings screen was legible; 1 lines seen by both readers; the item_type was read by only one reader and is not confirmed; looks like a catalogue or stock image
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 4394 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 8281 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 7057 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 2273 ms (replayed)
-- total across calls: 22005 ms; wall clock: 1699 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 13441 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 23798 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 4992 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 6480 ms (replayed)
+- total across calls: 48711 ms; wall clock: 4111 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -48,19 +49,20 @@ Shortlist from the catalogue:
   - Samsung Galaxy S24 (0.5)
   - Samsung Galaxy S25 (0.5)
 
-**Not identified: EVIDENCE_INCOMPLETE.** The evidence only supports this answer at 38 percent, which is a guess. One clear photo of the label would settle it.
+**Not identified: EVIDENCE_INCOMPLETE.** The evidence only supports this answer at 31 percent, which is a guess. One clear photo of the label would settle it.
 
 Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 23% on the best answer. It is probably a Samsung Galaxy S10+, and the photos cannot separate them.**
+**Not sure enough to price: 19% on the best answer. It is probably a Samsung Galaxy S10+, and the photos cannot separate them.**
 
-- Identification confidence: 23% (unknown)
+- Identification confidence: 19% (unknown)
 - Price confidence: 18%
 - It is weighing: Samsung Galaxy S10+ (0.9)
-- The evidence only supports this answer at 38 percent, which is a guess. One clear photo of the label would settle it.
+- The evidence only supports this answer at 31 percent, which is a guess. One clear photo of the label would settle it.
 - no label, plate or settings screen was legible
 - 1 lines seen by both readers
+- the item_type was read by only one reader and is not confirmed
 - looks like a catalogue or stock image
 - 8 claims are still unproven, 0 are supported
 
@@ -102,7 +104,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 44 NGN
 
 Conditions attached to this price:
-- Not identified: The evidence only supports this answer at 38 percent, which is a guess. One clear photo of the label would settle it.
+- Not identified: The evidence only supports this answer at 31 percent, which is a guess. One clear photo of the label would settle it.
 - Evidence flag: looks like a catalogue or stock image
 - Brand new Samsung galaxy S10+ -> not proven remotely. Agent will confirm at pickup.
 - Samsung galaxy S10+ -> not proven remotely. Agent will confirm at pickup.

@@ -1,6 +1,6 @@
 # Case gsbW9Vdx7tp7RvFb4wDvrF4r
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  21884 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  20612 ms
 
 ## What the engine saw
 - Presentation: single_unit
@@ -8,56 +8,57 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Made of: plastic 70%, steel 20%, circuit_board 10%
 - Estimated weight: 8.5 kg (confidence 0.8)
 - Brand read off the item: nothing legible
-- Model read off the item: KM5000I
+- Model read off the item: KM5000i
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: minor scuffs on plastic casing, no visible damage to engine or controls
+- Damage noted: minor scuffs on plastic casing, no visible damage to handle or vents
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
-- Text read: KM5000I | INVERTER GENERATOR | ENGINE: OHV 4-STROKE 79CC
+- Text read: KM5000i | INVERTER GENERATOR
 
 ## Two readers
 - model_text agreed by both readers
+- item_type agreed by both readers
 - brand_text differed between the two readers, so it is treated as unread
 - rating_text differed between the two readers, so it is treated as unread
-- 8 transcribed lines was seen by only one reader, so it is treated as unread
+- 6 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
 - KM5000i
 
 ## Chain
 - **ocr** -> ok. 1 lines: KM5000i
-- **corroborate** -> dispute. model_text agreed by both readers; brand_text differed between the two readers, so it is treated as unread; rating_text differed between the two readers, so it is treated as unread; 8 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=generator brand=None model=KM5000I label=True lines=3
+- **corroborate** -> dispute. model_text agreed by both readers; item_type agreed by both readers; brand_text differed between the two readers, so it is treated as unread; rating_text differed between the two readers, so it is treated as unread; 6 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=generator brand=None model=KM5000i label=True lines=2
 - **forensics** -> flag. looks like a catalogue or stock image
-- **retrieval** -> ok. query='KM5000I KM5000I INVERTER GENERATOR ENGINE: OHV 4-STROKE 79CC Kemage equipped with overload' hits=['Kemage KM10000 10kVA', 'Kemage KM6500 5.5kVA']
-- **identify** -> ok. chosen=Kemage KM5000I margin=None
-- **abstain** -> pass. confidence=0.47 margin=None
+- **retrieval** -> ok. query='KM5000i KM5000i INVERTER GENERATOR Kemage equipped with overload protection and low-oil sh' hits=['Kemage KM10000 10kVA', 'Kemage KM6500 5.5kVA']
+- **identify** -> ok. chosen=Kemage KM5000i margin=0.85
+- **abstain** -> pass. confidence=0.47 margin=0.85
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 5572 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 9018 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 3910 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 3384 ms (replayed)
-- total across calls: 21884 ms; wall clock: 434 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4896 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 7497 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 5734 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2485 ms (replayed)
+- total across calls: 20612 ms; wall clock: 1551 ms
 
 ## Identification
 Shortlist from the catalogue:
   - Kemage KM10000 10kVA (0.4333)
   - Kemage KM6500 5.5kVA (0.4)
 
-**Answer: Kemage KM5000I Inverter generator, OHV 4-stroke 79cc** (margin None)
+**Answer: Kemage KM5000i Inverter generator** (margin 0.85)
 
 Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 47% on the best answer. It is probably a Kemage KM5000I, and the photos cannot separate them.**
+**Not sure enough to price: 47% on the best answer. It is probably a Kemage KM5000i or a Kemage KM6500, and the photos cannot separate them.**
 
 - Identification confidence: 47% (unsure)
 - Price confidence: 0%
-- It is weighing: Kemage KM5000I (0.95)
+- It is weighing: Kemage KM5000i (0.95), Kemage KM6500 (0.1), Kemage KM10000 (0.05)
 - read off the item's own label
-- 3 lines seen by both readers
+- 2 lines seen by both readers
 - looks like a catalogue or stock image
 - 8 claims are still unproven, 0 are supported
 

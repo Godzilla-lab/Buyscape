@@ -1,24 +1,25 @@
 # Case 8mX7oiByQuax0x6ADXYvZxLN
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0006  |  18726 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0007  |  17209 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: ultrasonic cleaner (confidence 0.9)
 - Made of: plastic 70%, steel 20%, rubber 10%
 - Estimated weight: 8.0 kg (confidence 0.7)
-- Brand read off the item: nothing legible
+- Brand read off the item: Housen
 - Model read off the item: nothing legible
 - Rating read: none
-- Label, plate or settings screen legible: yes
-- Damage noted: Dust and minor scuffs on surface, Plastic cover partially peeled back
+- Label, plate or settings screen legible: no
+- Damage noted: dust on surface, white plastic base has minor scuffs
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: Bubble Clean | BRIGHT ENTERPRISE
+- Text read: Bubble Clean | BRIGHT ENTERPRISE | Housen
 
 ## Two readers
-- brand_text differed between the two readers, so it is treated as unread
-- 6 transcribed lines was seen by only one reader, so it is treated as unread
+- 3 transcribed lines was seen by only one reader, so it is treated as unread
+- brand_text was read by only one reader, so it is kept but not confirmed
+- item_type was read by only one reader, so it is kept but not confirmed
 
 ## OCR read off the photos
 - HEFRIGEI
@@ -32,9 +33,9 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 8 lines: HEFRIGEI | OR | Ffrigerador | Wchrank/ | ifero | Bubble | Clean | BRIGHT ENTERPRISE
-- **corroborate** -> dispute. brand_text differed between the two readers, so it is treated as unread; 6 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=ultrasonic cleaner brand=None model=None label=True lines=2
-- **retrieval** -> empty. query='Bubble Clean BRIGHT ENTERPRISE ￼
+- **corroborate** -> dispute. 3 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed; item_type was read by only one reader, so it is kept but not confirmed
+- **read_evidence** -> ok. category=ultrasonic cleaner brand=Housen model=None label=False lines=3
+- **retrieval** -> empty. query='Housen Bubble Clean BRIGHT ENTERPRISE Housen ￼
 
 ₦0
 
@@ -50,16 +51,15 @@ Fashion
 
 |
 
-Furniture
-
-Home &' hits=[]
+Fur' hits=[]
 - **gate** -> abstain. no candidates and no model text
+- **identify** -> abstain. type 'bubble clean ultrasonic cleaner' was one reader's word alone and the seller did not say it
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 4307 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 13519 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 900 ms (replayed)
-- total across calls: 18726 ms; wall clock: 384 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5567 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 10936 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 706 ms (replayed)
+- total across calls: 17209 ms; wall clock: 1393 ms
 
 ## Identification
 No catalogue candidates matched.
@@ -72,8 +72,9 @@ No catalogue candidates matched.
 - Identification confidence: 0% (unknown)
 - Price confidence: 27%
 - No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.
-- read off the item's own label
+- no label, plate or settings screen was legible
 - 2 lines seen by both readers
+- the brand, item_type was read by only one reader and is not confirmed
 - 4 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.

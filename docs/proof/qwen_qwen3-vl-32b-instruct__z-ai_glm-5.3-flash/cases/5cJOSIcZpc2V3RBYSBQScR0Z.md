@@ -1,22 +1,23 @@
 # Case 5cJOSIcZpc2V3RBYSBQScR0Z
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0007  |  11884 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  17090 ms
 
 ## What the engine saw
 - Presentation: single_unit
-- Category: electric motor or pump (confidence 0.8)
+- Category: electric motor (confidence 0.9)
 - Made of: steel 70%, plastic 20%, copper 10%
 - Estimated weight: 35.0 kg (confidence 0.7)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: minor scratches on blue paint, some dust and dirt on surface, white plastic bag partially covering top
+- Damage noted: minor dust and dirt on surface, no visible cracks or dents
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 - Text read: EMMY ELECTRONICS
 
 ## Two readers
+- item_type agreed by both readers
 - 1 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
@@ -24,39 +25,40 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 1 lines: EMMY ELECTRONI
-- **corroborate** -> dispute. 1 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=electric motor or pump brand=None model=None label=False lines=1
+- **corroborate** -> dispute. item_type agreed by both readers; 1 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=electric motor brand=None model=None label=False lines=1
 - **retrieval** -> empty. query='EMMY ELECTRONICS Alternator coil 15kva 100% copper coil with warranty one year payment on ' hits=[]
 - **gate** -> abstain. no candidates and no model text
+- **identify** -> type. named by type: industrial electric motor, no brand or model on the item, confidence=0.8
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 3859 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 4904 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 3121 ms (replayed)
-- total across calls: 11884 ms; wall clock: 436 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4797 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 8532 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3761 ms (replayed)
+- total across calls: 17090 ms; wall clock: 1541 ms
 
 ## Identification
 No catalogue candidates matched.
 
-**Not identified: CANNOT_IDENTIFY.** No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.
+**Answer: industrial electric motor** (named by type; nothing on the item gives a brand or model, and none is expected)
 
 ## How sure the engine is (back office)
-**0%: the photos do not say what this is.**
+**80% sure this is a industrial electric motor.**
 
-- Identification confidence: 0% (unknown)
-- Price confidence: 16%
-- No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.
-- no label, plate or settings screen was legible
-- 1 lines seen by both readers
+- Identification confidence: 80% (likely)
+- Price confidence: 0%
+- named by type from its shape and use, no brand or model on the item (90% sure of the kind)
 - 9 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
 
 ## What the seller is asked for next (shown in the app)
-1. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: Close-up of any label, sticker or metal plate showing the brand and model. Then, without stopping the video: If it opens without tools, open it and photograph the inside. Keep filming the whole time. Do not cut between clips.
-   _why: two readings of these photos disagreed about what is written on the item_
-2. [PHOTO] Close-up of any label, sticker or metal plate showing the brand and model.
-   _why: nothing on the item says which model this is_
+1. [PHOTO] Write the code {code} on a piece of paper and take one photo with the paper next to the item.
+   _why: this is needed before the price can be confirmed_
+2. [PHOTO] One photo showing the whole item.
+   _why: this is needed before the price can be confirmed_
+3. [PHOTO] Close-up of any label, sticker or metal plate showing the brand and model.
+   _why: this is needed before the price can be confirmed_
 
 ## What the seller is asked (only they know these)
 - How much of it is there? Give the weight in kilogrammes or tons if you know it.
@@ -67,6 +69,7 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 - [unverifiable_remote] Alternator coil 15kva
     priced as: 70 percent of the stated weight. Weigh on the scale and photograph the display
 - [unverifiable_remote] 100% copper coil
+    priced as: 70 percent of the stated weight. Weigh on the scale and photograph the display
 - [unverifiable_remote] with warranty one year
 - [unverifiable_remote] payment on delivery
 - [unverifiable_remote] we also delivery
@@ -80,16 +83,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Tell us what it is, whether it works, and roughly how heavy it is.
 
 ## Price
-**22,267 to 61,460 NGN** (priced as material, width 0.9362, method material_floor, 0 comparable prices)
-
-This item was not identified, so it is priced as material rather than as a working item: 35 kg of steel 70%, plastic 20%, copper 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
-
-Scrap floor: 47,950 NGN
+**NO_PRICE_DATA.** Only 0 comparable asking prices were found and there is no published band for this category, so no honest range can be produced. Nothing below the 47,950 NGN floor.
 
 Conditions attached to this price:
-- Not identified: No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.
 - Alternator coil 15kva -> not proven remotely. Weigh on the scale and photograph the display.
-- 100% copper coil -> not proven remotely. Agent will confirm at pickup.
+- 100% copper coil -> not proven remotely. Weigh on the scale and photograph the display.
 - with warranty one year -> not proven remotely. Agent will confirm at pickup.
 - payment on delivery -> not proven remotely. Agent will confirm at pickup.
 - we also delivery -> not proven remotely. Agent will confirm at pickup.

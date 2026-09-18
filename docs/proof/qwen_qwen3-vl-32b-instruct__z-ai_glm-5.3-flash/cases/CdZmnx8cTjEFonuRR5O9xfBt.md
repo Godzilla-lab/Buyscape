@@ -1,6 +1,6 @@
 # Case CdZmnx8cTjEFonuRR5O9xfBt
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  33692 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  25859 ms
 
 ## What the engine saw
 - Presentation: single_unit
@@ -17,6 +17,7 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Text read: hp
 
 ## Two readers
+- item_type agreed by both readers
 - brand_text was read by only one reader, so it is kept but not confirmed
 
 ## OCR read off the photos
@@ -24,20 +25,20 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 1 lines: POSTED
-- **corroborate** -> agree. brand_text was read by only one reader, so it is kept but not confirmed
+- **corroborate** -> agree. item_type agreed by both readers; brand_text was read by only one reader, so it is kept but not confirmed
 - **read_evidence** -> ok. category=laptop brand=hp model=None label=False lines=1
 - **forensics** -> flag. looks like a catalogue or stock image
 - **retrieval** -> ok. query='hp hp HP Elitebook x360 1030 G4 UltraSlim Convertible 
 Intel Core i7-8565U 1.8 GHz base fr' hits=['HP 2000', 'HP EliteBook 840 G5', 'HP EliteBook 840 G6', 'HP EliteBook 830 G5', 'HP 250 G7']
-- **identify** -> refused. chosen=None None margin=0.0
+- **identify** -> refused. chosen=None None margin=0.05
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 4598 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 9417 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 16564 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 3113 ms (replayed)
-- total across calls: 33692 ms; wall clock: 135 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4679 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 8191 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 10075 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2914 ms (replayed)
+- total across calls: 25859 ms; wall clock: 1194 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -47,21 +48,21 @@ Shortlist from the catalogue:
   - HP EliteBook 830 G5 (0.4333)
   - HP 250 G7 (0.4333)
 
-**Not identified: CANNOT_IDENTIFY.** Lid shows only an HP logo; seller claims EliteBook x360 1030 G4, a convertible absent from the shortlist, and no label text or model marking is legible to verify any model. The visible 360-degree hinge supports a convertible, but the shortlist contains only clamshell EliteBooks.
+**Not identified: CANNOT_IDENTIFY.** Photo shows a silver HP convertible hinge, but no label or model text is legible; the seller's claimed EliteBook x360 1030 G4 is not on the shortlist and cannot be verified visually, while every shortlist entry is a clamshell, not a convertible.
 
 Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 5% on the best answer. It is probably a HP EliteBook 840 G5 or a HP EliteBook 840 G6, and the photos cannot separate them.**
+**Not sure enough to price: 4% on the best answer. It is probably a HP EliteBook 830 G5 or a HP EliteBook 840 G5, and the photos cannot separate them.**
 
-- Identification confidence: 5% (unknown)
+- Identification confidence: 4% (unknown)
 - Price confidence: 20%
-- It is weighing: HP EliteBook 840 G5 (0.25), HP EliteBook 840 G6 (0.25)
-- Lid shows only an HP logo; seller claims EliteBook x360 1030 G4, a convertible absent from the shortlist, and no label text or model marking is legible to verify any model. The visible 360-degree hinge supports a convertible, but the shortlist contains only clamshell EliteBooks.
+- It is weighing: HP EliteBook 830 G5 (0.2), HP EliteBook 840 G5 (0.15)
+- Photo shows a silver HP convertible hinge, but no label or model text is legible; the seller's claimed EliteBook x360 1030 G4 is not on the shortlist and cannot be verified visually, while every shortlist entry is a clamshell, not a convertible.
 - no label, plate or settings screen was legible
 - 1 lines seen by both readers
 - the brand was read by only one reader and is not confirmed
-- the next candidate was only 0.0 behind
+- the next candidate was only 0.05 behind
 - looks like a catalogue or stock image
 - 7 claims are still unproven, 0 are supported
 
@@ -102,7 +103,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 375 NGN
 
 Conditions attached to this price:
-- Not identified: Lid shows only an HP logo; seller claims EliteBook x360 1030 G4, a convertible absent from the shortlist, and no label text or model marking is legible to verify any model. The visible 360-degree hinge supports a convertible, but the shortlist contains only clamshell EliteBooks.
+- Not identified: Photo shows a silver HP convertible hinge, but no label or model text is legible; the seller's claimed EliteBook x360 1030 G4 is not on the shortlist and cannot be verified visually, while every shortlist entry is a clamshell, not a convertible.
 - Evidence flag: looks like a catalogue or stock image
 - Raised to the 5,000 NGN minimum this business publishes for this kind of item.
 - HP Elitebook x360 1030 G4 UltraSlim Convertible -> not proven remotely. Agent will confirm at pickup.

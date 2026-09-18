@@ -1,24 +1,24 @@
 # Case dY2e1GBcKIlO4ovgnMGs2SZV
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  30562 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0024  |  33181 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: phone (confidence 1.0)
 - Made of: aluminium 30%, glass 20%, plastic 40%, circuit_board 10%
 - Estimated weight: 0.2 kg (confidence 0.9)
-- Brand read off the item: iPhone
+- Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
 - Damage noted: none
 - Looks like a catalogue image: no
 - Screenshot of a gallery: yes
-- Text read: Thursday 31 | CHIMA MARTINS | iPhone
+- Text read: Monday 31 | Tuesday 31 | Camera | Photos | Camera
 
 ## Two readers
-- 17 transcribed lines was seen by only one reader, so it is treated as unread
-- brand_text was read by only one reader, so it is kept but not confirmed
+- item_type agreed by both readers
+- 27 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
 - 31
@@ -28,21 +28,21 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 4 lines: 31 | #tv | A | IMAMA
-- **corroborate** -> dispute. 17 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed
-- **read_evidence** -> ok. category=phone brand=iPhone model=None label=False lines=3
+- **corroborate** -> dispute. item_type agreed by both readers; 27 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=phone brand=None model=None label=False lines=5
 - **forensics** -> flag. screenshot of a gallery rather than a photo of the item
-- **retrieval** -> ok. query='iPhone Thursday 31 CHIMA MARTINS iPhone 🔥 IPHONE AIR — NOW AVAILABLE! 🔥
+- **retrieval** -> ok. query='Monday 31 Tuesday 31 Camera Photos Camera 🔥 IPHONE AIR — NOW AVAILABLE! 🔥
 
-Ultra-thin. Super' hits=['Apple iPhone XR', 'Apple iPhone XS', 'Apple iPhone SE', 'Tecno Pova 5', 'Tecno Pova 6']
+Ultra-thin. Sup' hits=['Apple iPhone XR', 'Apple iPhone XS', 'Apple iPhone SE', 'Tecno Pova 5', 'Tecno Pova 6']
 - **identify** -> refused. chosen=None None margin=0.0
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 5609 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 8269 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 12528 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 4156 ms (replayed)
-- total across calls: 30562 ms; wall clock: 571 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 6839 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 12727 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 10312 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3303 ms (replayed)
+- total across calls: 33181 ms; wall clock: 1548 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -52,7 +52,7 @@ Shortlist from the catalogue:
   - Tecno Pova 5 (0.2)
   - Tecno Pova 6 (0.2)
 
-**Not identified: CANNOT_IDENTIFY.** Visible Dynamic Island means iPhone 14 Pro or newer (possibly seller's 'iPhone Air'), none of which are on the shortlist, and no model label is legible.
+**Not identified: CANNOT_IDENTIFY.** Visible Dynamic Island and iOS indicate a newer Pro-style iPhone, but no shortlist entry matches and no label or model text is legible; seller's 'iPhone Air' claim is unverifiable hype.
 
 Evidence flags: screenshot of a gallery rather than a photo of the item
 
@@ -62,10 +62,9 @@ Evidence flags: screenshot of a gallery rather than a photo of the item
 - Identification confidence: 2% (unknown)
 - Price confidence: 18%
 - It is weighing: Apple iPhone XR (0.1), Apple iPhone XS (0.1)
-- Visible Dynamic Island means iPhone 14 Pro or newer (possibly seller's 'iPhone Air'), none of which are on the shortlist, and no model label is legible.
+- Visible Dynamic Island and iOS indicate a newer Pro-style iPhone, but no shortlist entry matches and no label or model text is legible; seller's 'iPhone Air' claim is unverifiable hype.
 - no label, plate or settings screen was legible
-- 2 lines seen by both readers
-- the brand was read by only one reader and is not confirmed
+- 5 lines seen by both readers
 - the next candidate was only 0.0 behind
 - screenshot of a gallery rather than a photo of the item
 - 8 claims are still unproven, 0 are supported
@@ -109,7 +108,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 144 NGN
 
 Conditions attached to this price:
-- Not identified: Visible Dynamic Island means iPhone 14 Pro or newer (possibly seller's 'iPhone Air'), none of which are on the shortlist, and no model label is legible.
+- Not identified: Visible Dynamic Island and iOS indicate a newer Pro-style iPhone, but no shortlist entry matches and no label or model text is legible; seller's 'iPhone Air' claim is unverifiable hype.
 - Evidence flag: screenshot of a gallery rather than a photo of the item
 - IPHONE AIR — NOW AVAILABLE! -> not proven remotely. Agent will confirm at pickup.
 - Ultra-thin. Super light. Seriously powerful. -> not proven remotely. Agent will confirm at pickup.

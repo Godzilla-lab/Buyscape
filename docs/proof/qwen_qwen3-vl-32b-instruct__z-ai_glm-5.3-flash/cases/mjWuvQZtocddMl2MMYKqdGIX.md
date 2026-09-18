@@ -1,11 +1,11 @@
 # Case mjWuvQZtocddMl2MMYKqdGIX
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  20643 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  31168 ms
 
 ## What the engine saw
 - Presentation: sealed_new
-- Category: satellite phone (confidence 0.9)
-- Made of: paper 80%, plastic 20%
+- Category: satellite phone (confidence 0.95)
+- Made of: plastic 80%, paper 20%
 - Estimated weight: 0.5 kg (confidence 0.8)
 - Brand read off the item: Thuraya
 - Model read off the item: XT-LITE
@@ -19,6 +19,7 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 ## Two readers
 - brand_text agreed by both readers
 - model_text agreed by both readers
+- item_type agreed by both readers
 
 ## OCR read off the photos
 - Thuraya XT-LITE
@@ -32,7 +33,7 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 8 lines: Thuraya XT-LITE | Satelite phone | ZOYE RICHIOM | ERPRISE | se | 10 | 2- | THURAYA
-- **corroborate** -> agree. brand_text agreed by both readers; model_text agreed by both readers
+- **corroborate** -> agree. brand_text agreed by both readers; model_text agreed by both readers; item_type agreed by both readers
 - **read_evidence** -> ok. category=satellite phone brand=Thuraya model=XT-LITE label=False lines=3
 - **forensics** -> flag. looks like a catalogue or stock image
 - **retrieval** -> empty. query='Thuraya XT-LITE Thuraya XT-LITE Satellite phone THURAYA Original thuraya phone network ava' hits=[]
@@ -40,11 +41,11 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **abstain** -> abstain. confidence 0.4: no label, plate or settings screen was legible; 3 lines seen by both readers; looks like a catalogue or stock image
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 4347 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 6275 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 7708 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 2313 ms (replayed)
-- total across calls: 20643 ms; wall clock: 516 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5435 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 14575 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 4931 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 6227 ms (replayed)
+- total across calls: 31168 ms; wall clock: 1555 ms
 
 ## Identification
 No catalogue candidates matched.
@@ -96,11 +97,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
-**15 to 66 NGN** (priced as material, width 1.2593, method material_floor, 0 comparable prices)
+**20 to 84 NGN** (priced as material, width 1.2218, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 0.5 kg of paper 80%, plastic 20% (rates for paper, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 0.5 kg of plastic 80%, paper 20% (rates for paper, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 34 NGN
+Scrap floor: 46 NGN
 
 Conditions attached to this price:
 - Not identified: The evidence only supports this answer at 40 percent, which is a guess. One clear photo of the label would settle it.

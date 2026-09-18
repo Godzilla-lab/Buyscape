@@ -1,24 +1,25 @@
 # Case uipYKqhD5XzQJ7MCu3T0ckCL
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  40178 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  31092 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: generator (confidence 0.95)
-- Made of: steel 60%, plastic 30%, copper 10%
-- Estimated weight: 45.0 kg (confidence 0.8)
+- Made of: steel 60%, plastic 30%, circuit_board 5%, rubber 5%
+- Estimated weight: 25.0 kg (confidence 0.8)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: No visible damage or wear.
+- Damage noted: no visible damage or wear
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 
 ## Two readers
+- item_type agreed by both readers
 - brand_text differed between the two readers, so it is treated as unread
 - model_text differed between the two readers, so it is treated as unread
-- 3 transcribed lines was seen by only one reader, so it is treated as unread
+- 5 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
 - GIRMAN
@@ -26,21 +27,21 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 2 lines: GIRMAN | LUITIAN
-- **corroborate** -> dispute. brand_text differed between the two readers, so it is treated as unread; model_text differed between the two readers, so it is treated as unread; 3 transcribed lines was seen by only one reader, so it is treated as unread
+- **corroborate** -> dispute. item_type agreed by both readers; brand_text differed between the two readers, so it is treated as unread; model_text differed between the two readers, so it is treated as unread; 5 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=generator brand=None model=None label=True lines=0
 - **retrieval** -> ok. query='4.5kva LUTIAN generator
 100%copper coil
 With 2 years warranty
 We can deliver Anywhere in N' hits=['Lutian LT3900 3.5kVA', 'Thermocool TC2700 2.5kVA', 'Haier Thermocool HTG2700 2.5kVA', 'Kemage KM6500 5.5kVA', 'Senwei SW3500 3.5kVA']
-- **identify** -> ok. chosen=Lutian LT3990E margin=0.55
+- **identify** -> ok. chosen=Lutian LT3990E margin=0.6
 - **abstain** -> abstain. seller names another generation
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 4987 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 5715 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 25746 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 3730 ms (replayed)
-- total across calls: 40178 ms; wall clock: 437 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 6728 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 9779 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 10443 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 4142 ms (replayed)
+- total across calls: 31092 ms; wall clock: 1520 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -53,11 +54,11 @@ Shortlist from the catalogue:
 **Not identified: EVIDENCE_INCOMPLETE.** The answer names lt3990e, which appears nowhere on the item or in the seller's words. A photo of the plate would confirm or correct it.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 43% on the best answer. It is probably a Lutian LT3990E or a Lutian LT3900, and the photos cannot separate them.**
+**Not sure enough to price: 46% on the best answer. It is probably a Lutian LT3990E or a Lutian LT3900, and the photos cannot separate them.**
 
-- Identification confidence: 43% (unsure)
+- Identification confidence: 46% (unsure)
 - Price confidence: 16%
-- It is weighing: Lutian LT3990E (0.9), Lutian LT3900 (0.35)
+- It is weighing: Lutian LT3990E (0.95), Lutian LT3900 (0.35)
 - The answer names lt3990e, which appears nowhere on the item or in the seller's words. A photo of the plate would confirm or correct it.
 - read off the item's own label
 - the two readers agreed on nothing legible
@@ -97,11 +98,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Photo of the engine, showing the recoil starter and carburettor.
 
 ## Price
-**26,645 to 77,130 NGN** (priced as material, width 0.973, method material_floor, 0 comparable prices)
+**4,145 to 11,725 NGN** (priced as material, width 0.9551, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 45 kg of steel 60%, plastic 30%, copper 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 25 kg of steel 60%, plastic 30%, circuit_board 5%, rubber 5% (rates for plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 59,850 NGN
+Scrap floor: 9,312 NGN
 
 Conditions attached to this price:
 - Not identified: The answer names lt3990e, which appears nowhere on the item or in the seller's words. A photo of the plate would confirm or correct it.

@@ -1,23 +1,24 @@
 # Case v21ntemQLpfSFeK6XpqXPIBc
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  78208 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  23552 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: generator (confidence 0.95)
 - Made of: steel 60%, plastic 30%, copper 10%
-- Estimated weight: 25.0 kg (confidence 0.8)
+- Estimated weight: 45.0 kg (confidence 0.8)
 - Brand read off the item: ELEPAQ
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: minor scuffs on yellow casing, dust and grime on surface, wheels appear worn
+- Damage noted: some dust and minor wear on casing, yellow paint slightly faded
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 - Text read: ELEPAQ | CONSTANT | CE
 
 ## Two readers
 - brand_text agreed by both readers
+- item_type agreed by both readers
 - 3 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
@@ -27,18 +28,18 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 3 lines: ELEPAQ | —VADFENG—CE | CONSTANT
-- **corroborate** -> dispute. brand_text agreed by both readers; 3 transcribed lines was seen by only one reader, so it is treated as unread
+- **corroborate** -> dispute. brand_text agreed by both readers; item_type agreed by both readers; 3 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=generator brand=ELEPAQ model=None label=True lines=3
 - **retrieval** -> ok. query='ELEPAQ ELEPAQ CONSTANT CE 4.5kva Elepaq constant sv 6800e2 100% copper coil generator' hits=['Elepaq SV2200 2.5kVA', 'Elepaq SV6800 6.5kVA', 'Thermocool TC2700 2.5kVA', 'Haier Thermocool HTG2700 2.5kVA', 'Kemage KM6500 5.5kVA']
-- **identify** -> ok. chosen=Elepaq SV6800 margin=0.6
+- **identify** -> ok. chosen=Elepaq SV6800 margin=0.65
 - **abstain** -> abstain. seller names another generation
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 4908 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 6385 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 64242 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 2673 ms (replayed)
-- total across calls: 78208 ms; wall clock: 379 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5088 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 9799 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 5744 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2921 ms (replayed)
+- total across calls: 23552 ms; wall clock: 1376 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -55,7 +56,7 @@ Shortlist from the catalogue:
 
 - Identification confidence: 42% (unsure)
 - Price confidence: 18%
-- It is weighing: Elepaq SV6800 (0.7), Elepaq SV2200 (0.1)
+- It is weighing: Elepaq SV6800 (0.7), Elepaq SV2200 (0.05)
 - The answer names sv6800, which appears nowhere on the item or in the seller's words. A photo of the plate would confirm or correct it.
 - read off the item's own label
 - 3 lines seen by both readers
@@ -81,7 +82,7 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: the smallest rating in this brand's range. Agent reads the rating plate
 - [unverified] 4.5kva Elepaq constant sv 6800e2 generator
     priced as: the smallest rating in this brand's range. Agent reads the rating plate
-- [unverifiable_remote] 100% copper coil
+- [unverifiable_remote] 100% copper coil generator
     priced as: assumed aluminium windings. Agent opens the side cover and inspects the windings
 - [unverified] Required evidence 'code_shot' was not supplied
     priced as: priced as if the worst case is true. Write the code {code} on paper and photograph it next to the generator.
@@ -95,17 +96,17 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Photo of the engine, showing the recoil starter and carburettor.
 
 ## Price
-**13,941 to 42,850 NGN** (priced as material, width 1.018, method material_floor, 0 comparable prices)
+**25,095 to 77,130 NGN** (priced as material, width 1.018, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 25 kg of steel 60%, plastic 30%, copper 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 45 kg of steel 60%, plastic 30%, copper 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 33,250 NGN
+Scrap floor: 59,850 NGN
 
 Conditions attached to this price:
 - Not identified: The answer names sv6800, which appears nowhere on the item or in the seller's words. A photo of the plate would confirm or correct it.
 - 4.5kva Elepaq constant sv 6800e2 generator -> not proven remotely. Agent reads the rating plate.
 - 4.5kva Elepaq constant sv 6800e2 generator -> not proven remotely. Agent reads the rating plate.
-- 100% copper coil -> not proven remotely. Agent opens the side cover and inspects the windings.
+- 100% copper coil generator -> not proven remotely. Agent opens the side cover and inspects the windings.
 - Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on paper and photograph it next to the generator..
 - Required evidence 'overview' was not supplied -> not proven remotely. One photo of the whole generator from the front..
 - Required evidence 'plate_kva' was not supplied -> not proven remotely. Close-up of the rating plate showing the kVA and model number..

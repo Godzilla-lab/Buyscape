@@ -1,6 +1,6 @@
 # Case dpjYZ6qtWPw3L6GraMBHlMyD
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  25285 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  61966 ms
 
 ## What the engine saw
 - Presentation: single_unit
@@ -11,11 +11,12 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: screen appears clean, no visible dents or cracks on body, keyboard and trackpad appear intact
+- Damage noted: none
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 
 ## Two readers
+- item_type agreed by both readers
 - 2 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
@@ -23,22 +24,22 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 1 lines: 2
-- **corroborate** -> dispute. 2 transcribed lines was seen by only one reader, so it is treated as unread
+- **corroborate** -> dispute. item_type agreed by both readers; 2 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=laptop brand=None model=None label=False lines=0
 - **retrieval** -> ok. query='Dell Latitude 5540 Laptop
 Intel i7 Processor
 13th Gen
 16GB | 256GB SSD
 Laptop and charger' hits=['Dell Latitude E7470', 'Dell Latitude 7490', 'Dell Latitude 5490', 'Dell Inspiron 15 3000', 'Dell XPS 13 9370']
-- **identify** -> refused. chosen=None None margin=0.2
+- **identify** -> refused. chosen=None None margin=0.0
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 8232 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 5566 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 7527 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 3960 ms (replayed)
-- total across calls: 25285 ms; wall clock: 104 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 6978 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 15034 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 35811 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 4143 ms (replayed)
+- total across calls: 61966 ms; wall clock: 1397 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -48,18 +49,18 @@ Shortlist from the catalogue:
   - Dell Inspiron 15 3000 (0.3)
   - Dell XPS 13 9370 (0.3)
 
-**Not identified: CANNOT_IDENTIFY.** No legible label; seller claims Latitude 5540, which is not on the shortlist, and the silver 15-inch numpad chassis cannot be confirmed as any listed model.
+**Not identified: CANNOT_IDENTIFY.** No legible label or branding; seller claims Latitude 5540, which is not on the shortlist and cannot be visually confirmed.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 11% on the best answer. It is probably a Dell Inspiron 15 3000 or a Dell Latitude 5490, and the photos cannot separate them.**
+**Not sure enough to price: 7% on the best answer. It is probably a Dell Latitude 5490 or a Dell Inspiron 15 3000, and the photos cannot separate them.**
 
-- Identification confidence: 11% (unknown)
+- Identification confidence: 7% (unknown)
 - Price confidence: 14%
-- It is weighing: Dell Inspiron 15 3000 (0.3), Dell Latitude 5490 (0.1)
-- No legible label; seller claims Latitude 5540, which is not on the shortlist, and the silver 15-inch numpad chassis cannot be confirmed as any listed model.
+- It is weighing: Dell Latitude 5490 (0.2), Dell Inspiron 15 3000 (0.2)
+- No legible label or branding; seller claims Latitude 5540, which is not on the shortlist and cannot be visually confirmed.
 - no label, plate or settings screen was legible
 - the two readers agreed on nothing legible
-- the next candidate was only 0.2 behind
+- the next candidate was only 0.0 behind
 - 10 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -104,7 +105,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 660 NGN
 
 Conditions attached to this price:
-- Not identified: No legible label; seller claims Latitude 5540, which is not on the shortlist, and the silver 15-inch numpad chassis cannot be confirmed as any listed model.
+- Not identified: No legible label or branding; seller claims Latitude 5540, which is not on the shortlist and cannot be visually confirmed.
 - Raised to the 5,000 NGN minimum this business publishes for this kind of item.
 - Dell Latitude 5540 Laptop -> not proven remotely. Agent will confirm at pickup.
 - Intel i7 Processor -> not proven remotely. Agent will confirm at pickup.

@@ -1,26 +1,27 @@
 # Case ggcpk3xakCnKxFmGcN50Iuee
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0007  |  13403 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  18821 ms
 
 ## What the engine saw
 - Presentation: single_unit
-- Category: inverter_system (confidence 0.9)
+- Category: inverter system (confidence 0.9)
 - Made of: steel 60%, plastic 30%, circuit_board 10%
 - Estimated weight: 25.0 kg (confidence 0.7)
-- Brand read off the item: SAGE TECH ELECTRICAL
+- Brand read off the item: Sage Tech Electrical
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: Minor scuff marks on lower unit casing, No visible damage to display or control panel
+- Damage noted: minor dust on surface, no visible damage or corrosion
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 - Text read: SAGE TECH ELECTRICAL
 
 ## Two readers
+- item_type agreed by both readers
 - model_text was seen by only one reader, so it is treated as unread
 - rating_text was seen by only one reader, so it is treated as unread
 - serial_text was seen by only one reader, so it is treated as unread
-- 10 transcribed lines was seen by only one reader, so it is treated as unread
+- 9 transcribed lines was seen by only one reader, so it is treated as unread
 - brand_text was read by only one reader, so it is kept but not confirmed
 
 ## OCR read off the photos
@@ -29,15 +30,15 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 2 lines: SAGI | ECTRICAL
-- **corroborate** -> dispute. model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 10 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed
-- **read_evidence** -> ok. category=inverter_system brand=SAGE TECH ELECTRICAL model=None label=False lines=1
+- **corroborate** -> dispute. item_type agreed by both readers; model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 9 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed
+- **read_evidence** -> ok. category=inverter system brand=Sage Tech Electrical model=None label=False lines=1
 - **gate** -> abstain. multiple items in frame
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 7411 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 4252 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 1740 ms (replayed)
-- total across calls: 13403 ms; wall clock: 419 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 6241 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 9340 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3240 ms (replayed)
+- total across calls: 18821 ms; wall clock: 1523 ms
 
 ## Identification
 No catalogue candidates matched.

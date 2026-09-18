@@ -1,25 +1,26 @@
 # Case 34JYCjUpaovtWefuHPhuHU1I
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  53271 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  31808 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: washing machine (confidence 0.95)
-- Made of: plastic 70%, steel 20%, rubber 10%
-- Estimated weight: 25.0 kg (confidence 0.8)
+- Made of: plastic 70%, steel 25%, rubber 5%
+- Estimated weight: 18.0 kg (confidence 0.8)
 - Brand read off the item: TOP VOLT
 - Model read off the item: nothing legible
 - Rating read: none
-- Label, plate or settings screen legible: yes
-- Damage noted: Plastic wrap still on top lid, Minor scuffs on front panel
+- Label, plate or settings screen legible: no
+- Damage noted: plastic wrap still on top lid, some dust and minor scuffs on body
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 - Text read: TOP VOLT
 
 ## Two readers
-- brand_text agreed by both readers
-- rating_text differed between the two readers, so it is treated as unread
-- 5 transcribed lines was seen by only one reader, so it is treated as unread
+- item_type agreed by both readers
+- brand_text was read by one reader and confirmed by OCR
+- rating_text was seen by only one reader, so it is treated as unread
+- 3 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
 - POST
@@ -27,18 +28,18 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 2 lines: POST | TOPVOLT
-- **corroborate** -> dispute. brand_text agreed by both readers; rating_text differed between the two readers, so it is treated as unread; 5 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=washing machine brand=TOP VOLT model=None label=True lines=1
+- **corroborate** -> dispute. item_type agreed by both readers; brand_text was read by one reader and confirmed by OCR; rating_text was seen by only one reader, so it is treated as unread; 3 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=washing machine brand=TOP VOLT model=None label=False lines=1
 - **retrieval** -> ok. query='TOP VOLT TOP VOLT Skyrun 11kg Twin tub Washing machine' hits=['LG WM8 8kg twin tub', 'Haier Thermocool TT8 8kg twin tub', 'TCL TWA110 11kg top loader']
-- **identify** -> refused. chosen=None None margin=None
+- **identify** -> refused. chosen=None None margin=0.25
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 19491 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 16392 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 14232 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 3156 ms (replayed)
-- total across calls: 53271 ms; wall clock: 335 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 6650 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 11035 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 8873 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 5250 ms (replayed)
+- total across calls: 31808 ms; wall clock: 1800 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -46,17 +47,19 @@ Shortlist from the catalogue:
   - Haier Thermocool TT8 8kg twin tub (0.2667)
   - TCL TWA110 11kg top loader (0.2)
 
-**Not identified: CANNOT_IDENTIFY.** 'TOP VOLT' is a Jiji watermark, not an item label; no legible brand plate visible, and seller's Skyrun 11kg twin tub is not on the shortlist, so none of the shortlist entries is supported.
+**Not identified: CANNOT_IDENTIFY.** 'TOP VOLT' is a watermark, not an item label; no brand or model text is legible, so only the unverified seller claim supports Skyrun.
 
 ## How sure the engine is (back office)
-**0%: the photos do not say what this is.**
+**Not sure enough to price: 16% on the best answer. It is probably a Skyrun 11kg twin tub or a Haier Thermocool TT8 8kg twin tub, and the photos cannot separate them.**
 
-- Identification confidence: 0% (unknown)
-- Price confidence: 18%
-- 'TOP VOLT' is a Jiji watermark, not an item label; no legible brand plate visible, and seller's Skyrun 11kg twin tub is not on the shortlist, so none of the shortlist entries is supported.
-- read off the item's own label
+- Identification confidence: 16% (unknown)
+- Price confidence: 20%
+- It is weighing: Skyrun 11kg twin tub (0.35), Haier Thermocool TT8 8kg twin tub (0.1)
+- 'TOP VOLT' is a watermark, not an item label; no brand or model text is legible, so only the unverified seller claim supports Skyrun.
+- no label, plate or settings screen was legible
 - 1 lines seen by both readers
-- 8 claims are still unproven, 0 are supported
+- the next candidate was only 0.25 behind
+- 7 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
 
@@ -77,8 +80,6 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: the smallest capacity this brand sells. Agent reads the rating plate
 - [unverified] Skyrun 11kg Twin tub Washing machine
     priced as: the smallest capacity this brand sells. Agent reads the rating plate
-- [unverified] Skyrun 11kg Twin tub Washing machine
-    priced as: the smallest capacity this brand sells. Agent reads the rating plate
 - [unverified] Required evidence 'code_shot' was not supplied
     priced as: priced as if the worst case is true. Write the code {code} on paper and photograph it next to the machine.
 - [unverified] Required evidence 'overall_front' was not supplied
@@ -89,15 +90,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Open the door and photograph the inside of the drum.
 
 ## Price
-**1,860 to 6,400 NGN** (priced as material, width 1.0992, method material_floor, 0 comparable prices)
+**1,778 to 5,058 NGN** (priced as material, width 0.9595, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 25 kg of plastic 70%, steel 20%, rubber 10% (rates for plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 18 kg of plastic 70%, steel 25%, rubber 5% (rates for plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 4,375 NGN
+Scrap floor: 3,555 NGN
 
 Conditions attached to this price:
-- Not identified: 'TOP VOLT' is a Jiji watermark, not an item label; no legible brand plate visible, and seller's Skyrun 11kg twin tub is not on the shortlist, so none of the shortlist entries is supported.
-- Skyrun 11kg Twin tub Washing machine -> not proven remotely. Agent reads the rating plate.
+- Not identified: 'TOP VOLT' is a watermark, not an item label; no brand or model text is legible, so only the unverified seller claim supports Skyrun.
 - Skyrun 11kg Twin tub Washing machine -> not proven remotely. Agent reads the rating plate.
 - Skyrun 11kg Twin tub Washing machine -> not proven remotely. Agent reads the rating plate.
 - Skyrun 11kg Twin tub Washing machine -> not proven remotely. Agent reads the rating plate.

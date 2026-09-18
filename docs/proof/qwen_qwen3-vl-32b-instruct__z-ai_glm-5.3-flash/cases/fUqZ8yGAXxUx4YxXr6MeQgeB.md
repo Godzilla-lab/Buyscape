@@ -1,12 +1,12 @@
 # Case fUqZ8yGAXxUx4YxXr6MeQgeB
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  30304 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  31890 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: phone (confidence 0.95)
-- Made of: plastic 60%, steel 20%, glass 10%, circuit_board 10%
-- Estimated weight: 0.2 kg (confidence 0.8)
+- Made of: plastic 70%, steel 20%, glass 10%
+- Estimated weight: 0.3 kg (confidence 0.8)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
@@ -18,6 +18,7 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Two readers
 - 1 transcribed lines was seen by only one reader, so it is treated as unread
+- item_type was read by only one reader, so it is kept but not confirmed
 
 ## OCR read off the photos
 - POSTEDONJUI
@@ -25,7 +26,7 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 2 lines: POSTEDONJUI | SLIM GADGETS
-- **corroborate** -> dispute. 1 transcribed lines was seen by only one reader, so it is treated as unread
+- **corroborate** -> dispute. 1 transcribed lines was seen by only one reader, so it is treated as unread; item_type was read by only one reader, so it is kept but not confirmed
 - **read_evidence** -> ok. category=phone brand=None model=None label=False lines=1
 - **forensics** -> flag. looks like a catalogue or stock image
 - **retrieval** -> ok. query='SLIM GADGETS IPhone 16e
@@ -34,15 +35,15 @@ eSIM
 Factory unlocked 
 Cc- 3
 Open box' hits=['Apple iPhone 16', 'Apple iPhone XR', 'Apple iPhone XS', 'Apple iPhone SE']
-- **identify** -> refused. chosen=None None margin=0.05
+- **identify** -> refused. chosen=None None margin=0.1
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 3958 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 14318 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 7821 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 4207 ms (replayed)
-- total across calls: 30304 ms; wall clock: 583 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5098 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 9495 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 12151 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 5146 ms (replayed)
+- total across calls: 31890 ms; wall clock: 1569 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -51,20 +52,21 @@ Shortlist from the catalogue:
   - Apple iPhone XS (0.2)
   - Apple iPhone SE (0.2)
 
-**Not identified: CANNOT_IDENTIFY.** No legible label or screen distinguishes the model; seller claims iPhone 16e, which is absent from the shortlist and unverifiable in the photos.
+**Not identified: CANNOT_IDENTIFY.** Seller claims iPhone 16e but photos show no legible label or plate; single-camera black phone is consistent with several models. iPhone 16e is not in the shortlist and is not stated plainly on the item, so cannot confirm.
 
 Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 6% on the best answer. It is probably a Apple iPhone SE or a Apple iPhone XR, and the photos cannot separate them.**
+**Not sure enough to price: 5% on the best answer. It is probably a Apple iPhone SE or a Apple iPhone XR, and the photos cannot separate them.**
 
-- Identification confidence: 6% (unknown)
+- Identification confidence: 5% (unknown)
 - Price confidence: 14%
-- It is weighing: Apple iPhone SE (0.25), Apple iPhone XR (0.2)
-- No legible label or screen distinguishes the model; seller claims iPhone 16e, which is absent from the shortlist and unverifiable in the photos.
+- It is weighing: Apple iPhone SE (0.3), Apple iPhone XR (0.2)
+- Seller claims iPhone 16e but photos show no legible label or plate; single-camera black phone is consistent with several models. iPhone 16e is not in the shortlist and is not stated plainly on the item, so cannot confirm.
 - no label, plate or settings screen was legible
 - 1 lines seen by both readers
-- the next candidate was only 0.05 behind
+- the item_type was read by only one reader and is not confirmed
+- the next candidate was only 0.1 behind
 - looks like a catalogue or stock image
 - 11 claims are still unproven, 0 are supported
 
@@ -104,14 +106,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
-**14 to 66 NGN** (priced as material, width 1.284, method material_floor, 0 comparable prices)
+**15 to 75 NGN** (priced as material, width 1.3179, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 0.2 kg of plastic 60%, steel 20%, glass 10%, circuit_board 10% (rates for glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 0.3 kg of plastic 70%, steel 20%, glass 10% (rates for glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 48 NGN
+Scrap floor: 51 NGN
 
 Conditions attached to this price:
-- Not identified: No legible label or screen distinguishes the model; seller claims iPhone 16e, which is absent from the shortlist and unverifiable in the photos.
+- Not identified: Seller claims iPhone 16e but photos show no legible label or plate; single-camera black phone is consistent with several models. iPhone 16e is not in the shortlist and is not stated plainly on the item, so cannot confirm.
 - Evidence flag: looks like a catalogue or stock image
 - iPhone 16e -> not proven remotely. Agent will confirm at pickup.
 - 128gb -> not proven remotely. Agent reads storage from Settings.

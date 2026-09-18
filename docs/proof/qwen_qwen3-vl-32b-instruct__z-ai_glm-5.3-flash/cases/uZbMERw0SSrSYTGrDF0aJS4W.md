@@ -1,11 +1,11 @@
 # Case uZbMERw0SSrSYTGrDF0aJS4W
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  22638 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  25552 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: laptop (confidence 0.95)
-- Made of: plastic 70%, steel 20%, circuit_board 10%
+- Made of: plastic 70%, circuit_board 15%, steel 10%, copper 5%
 - Estimated weight: 1.2 kg (confidence 0.8)
 - Brand read off the item: DELL
 - Model read off the item: nothing legible
@@ -18,6 +18,7 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Two readers
 - brand_text agreed by both readers
+- item_type agreed by both readers
 
 ## OCR read off the photos
 - DELL
@@ -25,18 +26,18 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 2 lines: DELL | Ca
-- **corroborate** -> agree. brand_text agreed by both readers
+- **corroborate** -> agree. brand_text agreed by both readers; item_type agreed by both readers
 - **read_evidence** -> ok. category=laptop brand=DELL model=None label=False lines=2
 - **retrieval** -> ok. query='DELL DELL DELL Dell latitude 3190, is 11 inches potable system for all kinds of work, for ' hits=['Dell Latitude E7470', 'Dell Latitude 7490', 'Dell Latitude 5490', 'Dell Inspiron 15 3000', 'Dell XPS 13 9370']
-- **identify** -> refused. chosen=None None margin=None
+- **identify** -> refused. chosen=None None margin=0.45
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 5316 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 7622 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 7101 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 2599 ms (replayed)
-- total across calls: 22638 ms; wall clock: 133 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4730 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 5744 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 12721 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2357 ms (replayed)
+- total across calls: 25552 ms; wall clock: 1161 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -46,14 +47,15 @@ Shortlist from the catalogue:
   - Dell Inspiron 15 3000 (0.3)
   - Dell XPS 13 9370 (0.3)
 
-**Not identified: CANNOT_IDENTIFY.** Visible chassis is an ~11-inch netbook; no shortlisted model matches, and 'Latitude 3190' is only the seller's claim, not legible on the item.
+**Not identified: CANNOT_IDENTIFY.** Only 'DELL' is legible on screen bezel; no model label visible, so the seller's Latitude 3190 claim cannot be visually confirmed and no shortlist entry fits the 11-inch size.
 
 ## How sure the engine is (back office)
-**0%: the photos do not say what this is.**
+**Not sure enough to price: 28% on the best answer. It is probably a Dell Latitude 3190 or a Dell Inspiron 15 3000, and the photos cannot separate them.**
 
-- Identification confidence: 0% (unknown)
+- Identification confidence: 28% (unknown)
 - Price confidence: 20%
-- Visible chassis is an ~11-inch netbook; no shortlisted model matches, and 'Latitude 3190' is only the seller's claim, not legible on the item.
+- It is weighing: Dell Latitude 3190 (0.55), Dell Inspiron 15 3000 (0.1)
+- Only 'DELL' is legible on screen bezel; no model label visible, so the seller's Latitude 3190 claim cannot be visually confirmed and no shortlist entry fits the 11-inch size.
 - no label, plate or settings screen was legible
 - 2 lines seen by both readers
 - 7 claims are still unproven, 0 are supported
@@ -89,12 +91,12 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 ## Price
 **5,000 to 5,000 NGN** (priced as material, width 0.0, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 1.2 kg of plastic 70%, steel 20%, circuit_board 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 1.2 kg of plastic 70%, circuit_board 15%, steel 10%, copper 5% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 300 NGN
+Scrap floor: 888 NGN
 
 Conditions attached to this price:
-- Not identified: Visible chassis is an ~11-inch netbook; no shortlisted model matches, and 'Latitude 3190' is only the seller's claim, not legible on the item.
+- Not identified: Only 'DELL' is legible on screen bezel; no model label visible, so the seller's Latitude 3190 claim cannot be visually confirmed and no shortlist entry fits the 11-inch size.
 - Raised to the 5,000 NGN minimum this business publishes for this kind of item.
 - Dell latitude 3190 -> not proven remotely. Agent will confirm at pickup.
 - is 11 inches portable system -> not proven remotely. Agent inspects the panel edges and looks for lines and dead pixels.

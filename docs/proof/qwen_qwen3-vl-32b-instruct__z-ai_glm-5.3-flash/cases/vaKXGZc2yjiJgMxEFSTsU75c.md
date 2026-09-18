@@ -1,12 +1,12 @@
 # Case vaKXGZc2yjiJgMxEFSTsU75c
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  24635 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  21341 ms
 
 ## What the engine saw
 - Presentation: sealed_new
-- Category: split air conditioner (confidence 0.95)
+- Category: air conditioner (confidence 0.95)
 - Made of: carton 95%, plastic 5%
-- Estimated weight: 15.0 kg (confidence 0.7)
+- Estimated weight: 25.0 kg (confidence 0.7)
 - Brand read off the item: HITACHI
 - Model read off the item: nothing legible
 - Rating read: none
@@ -18,10 +18,11 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Two readers
 - brand_text agreed by both readers
+- item_type agreed by both readers
 - model_text was seen by only one reader, so it is treated as unread
 - rating_text was seen by only one reader, so it is treated as unread
 - serial_text was seen by only one reader, so it is treated as unread
-- 17 transcribed lines was seen by only one reader, so it is treated as unread
+- 14 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
 - 1
@@ -35,15 +36,15 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 8 lines: 1 | AR CENOITOUNER | IR CONDITIONER | 2 | ndour Unit> | ONDIT | AIR CONDITIONER | Outdoor Units
-- **corroborate** -> dispute. brand_text agreed by both readers; model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 17 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=split air conditioner brand=HITACHI model=None label=True lines=3
+- **corroborate** -> dispute. brand_text agreed by both readers; item_type agreed by both readers; model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 14 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=air conditioner brand=HITACHI model=None label=True lines=3
 - **gate** -> abstain. multiple items in frame
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 6802 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 15034 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 2799 ms (replayed)
-- total across calls: 24635 ms; wall clock: 713 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 6746 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 6438 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 8157 ms (replayed)
+- total across calls: 21341 ms; wall clock: 2466 ms
 
 ## Identification
 No catalogue candidates matched.
@@ -96,11 +97,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Open the front grille of the indoor unit and photograph the filters and coil.
 
 ## Price
-**375 to 1,845 NGN** (priced as material, width 1.3234, method material_floor, 0 comparable prices)
+**626 to 3,075 NGN** (priced as material, width 1.3234, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 15 kg of carton 95%, plastic 5% (rates for carton, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 25 kg of carton 95%, plastic 5% (rates for carton, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 930 NGN
+Scrap floor: 1,550 NGN
 
 Conditions attached to this price:
 - Not identified: The photos show more than one item, so no single item can be identified.

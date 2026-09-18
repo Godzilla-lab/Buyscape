@@ -1,6 +1,6 @@
 # Case macbook-pro-17-inch
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  37769 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0016  |  92105 ms
 
 ## What the engine saw
 - Presentation: single_unit
@@ -11,7 +11,7 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: Screen has smudges and reflections, Trackpad shows minor wear or scuffing, Bottom edge of keyboard appears slightly discolored or dirty
+- Damage noted: screen has reflections and smudges, trackpad shows minor wear, keyboard keys appear intact, chassis shows light scuffs
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 - Text read: Apple
@@ -19,21 +19,22 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 ## Two readers
 - brand_text agreed by both readers
 - 1 transcribed lines was seen by only one reader, so it is treated as unread
+- item_type was read by only one reader, so it is kept but not confirmed
 
 ## Chain
 - **ocr** -> ok. 0 lines: 
-- **corroborate** -> dispute. brand_text agreed by both readers; 1 transcribed lines was seen by only one reader, so it is treated as unread
+- **corroborate** -> dispute. brand_text agreed by both readers; 1 transcribed lines was seen by only one reader, so it is treated as unread; item_type was read by only one reader, so it is kept but not confirmed
 - **read_evidence** -> ok. category=laptop brand=Apple model=None label=False lines=1
 - **retrieval** -> ok. query='Apple Apple MacBook Pro (17-inch, Late 2011) Laptops health 50% Physical damage 5% No char' hits=['Apple MacBook Pro 17-inch 2011', 'Apple MacBook Pro 13-inch 2017', 'Apple MacBook Pro 13-inch M2 2022', 'Apple MacBook Pro 14-inch M1 Pro 2021', 'Apple MacBook Pro 14-inch M3 2023']
 - **identify** -> ok. chosen=Apple MacBook Pro 17-inch 2011 margin=0.8
-- **abstain** -> pass. confidence=0.58 margin=0.8
+- **abstain** -> pass. confidence=0.46 margin=0.8
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 6085 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 9500 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 16913 ms
-- extract_claims on qwen/qwen3-vl-32b-instruct: 5271 ms (replayed)
-- total across calls: 37769 ms; wall clock: 17634 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 15657 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 25108 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 45183 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 6157 ms (replayed)
+- total across calls: 92105 ms; wall clock: 613 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -46,13 +47,14 @@ Shortlist from the catalogue:
 **Answer: Apple MacBook Pro 17-inch 2011** (margin 0.8)
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 58% on the best answer. It is probably a Apple MacBook Pro 17-inch 2011 or a Apple MacBook Pro 13-inch 2017, and the photos cannot separate them.**
+**Not sure enough to price: 46% on the best answer. It is probably a Apple MacBook Pro 17-inch 2011 or a Apple MacBook Pro 13-inch 2017, and the photos cannot separate them.**
 
-- Identification confidence: 58% (unsure)
+- Identification confidence: 46% (unsure)
 - Price confidence: 0%
-- It is weighing: Apple MacBook Pro 17-inch 2011 (0.85), Apple MacBook Pro 13-inch 2017 (0.05), Apple MacBook Pro 13-inch M2 2022 (0.02)
+- It is weighing: Apple MacBook Pro 17-inch 2011 (0.85), Apple MacBook Pro 13-inch 2017 (0.05), Apple MacBook Pro 14-inch M1 Pro 2021 (0.05)
 - no label, plate or settings screen was legible
 - the two readers agreed on nothing legible
+- the item_type was read by only one reader and is not confirmed
 - 10 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.

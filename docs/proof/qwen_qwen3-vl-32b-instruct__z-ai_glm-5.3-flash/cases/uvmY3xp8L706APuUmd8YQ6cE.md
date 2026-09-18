@@ -1,26 +1,26 @@
 # Case uvmY3xp8L706APuUmd8YQ6cE
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  51859 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  24233 ms
 
 ## What the engine saw
 - Presentation: single_unit
-- Category: portable generator (confidence 0.95)
+- Category: generator (confidence 1.0)
 - Made of: steel 60%, plastic 30%, circuit_board 10%
 - Estimated weight: 25.0 kg (confidence 0.8)
 - Brand read off the item: SENWEI
 - Model read off the item: SV6200
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: minor scuffing on yellow casing, box shows creasing and slight tear at bottom left corner
+- Damage noted: box shows creases and minor wear, unit appears clean with no visible damage
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
-- Text read: SENWEI | RUN ON GASOLINE | PORTABLE GENERATOR | SV6200 | USA STANDARD | SENWEI | GASOLINE GENERATOR | SV6200
+- Text read: SENWEI | RUN ON GASOLINE | PORTABLE GENERATOR | SV6200 | USA STANDARD | SENWEI | SV6200 | CE
 
 ## Two readers
 - brand_text agreed by both readers
 - model_text agreed by both readers
-- rating_text differed between the two readers, so it is treated as unread
-- 16 transcribed lines was seen by only one reader, so it is treated as unread
+- item_type agreed by both readers
+- 4 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
 - !2MU2S
@@ -33,18 +33,18 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 7 lines: !2MU2S | SV6200 | SENWEI | USASTANDARD | RUNONOASOINE | PORTABLEGENERATOR | SASOLNE DNERATON CE
-- **corroborate** -> dispute. brand_text agreed by both readers; model_text agreed by both readers; rating_text differed between the two readers, so it is treated as unread; 16 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=portable generator brand=SENWEI model=SV6200 label=True lines=8
+- **corroborate** -> dispute. brand_text agreed by both readers; model_text agreed by both readers; item_type agreed by both readers; 4 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=generator brand=SENWEI model=SV6200 label=True lines=8
 - **forensics** -> flag. looks like a catalogue or stock image
-- **retrieval** -> ok. query='SENWEI SV6200 SENWEI RUN ON GASOLINE PORTABLE GENERATOR SV6200 USA STANDARD SENWEI GASOLIN' hits=['Senwei SW3500 3.5kVA', 'Thermocool TC2700 2.5kVA', 'Haier Thermocool HTG2700 2.5kVA', 'Kemage KM6500 5.5kVA', 'Lutian LT3900 3.5kVA']
+- **retrieval** -> ok. query='SENWEI SV6200 SENWEI RUN ON GASOLINE PORTABLE GENERATOR SV6200 USA STANDARD SENWEI SV6200 ' hits=['Senwei SW3500 3.5kVA', 'Thermocool TC2700 2.5kVA', 'Haier Thermocool HTG2700 2.5kVA', 'Kemage KM6500 5.5kVA', 'Lutian LT3900 3.5kVA']
 - **identify** -> label. named from the label: SENWEI SV6200, not in the catalogue
 - **abstain** -> pass. confidence=0.45 from the label
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 8069 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 39966 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 3824 ms (replayed)
-- total across calls: 51859 ms; wall clock: 551 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 11697 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 8381 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 4155 ms (replayed)
+- total across calls: 24233 ms; wall clock: 1726 ms
 
 ## Identification
 Shortlist from the catalogue:

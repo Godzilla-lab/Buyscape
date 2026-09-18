@@ -1,6 +1,6 @@
 # Case mlxplz68xfW3m9Ifm5tgpT65
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  32703 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  45837 ms
 
 ## What the engine saw
 - Presentation: sealed_new
@@ -18,8 +18,9 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Two readers
 - brand_text agreed by both readers
-- model_text was read by one reader and confirmed by OCR
+- model_text agreed by both readers
 - 1 transcribed lines was seen by only one reader, so it is treated as unread
+- item_type was read by only one reader, so it is kept but not confirmed
 
 ## OCR read off the photos
 - 512g4
@@ -29,20 +30,20 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 4 lines: 512g4 | Pixel Fold | POSTEONJ | ONYITEXGADGET
-- **corroborate** -> dispute. brand_text agreed by both readers; model_text was read by one reader and confirmed by OCR; 1 transcribed lines was seen by only one reader, so it is treated as unread
+- **corroborate** -> dispute. brand_text agreed by both readers; model_text agreed by both readers; 1 transcribed lines was seen by only one reader, so it is treated as unread; item_type was read by only one reader, so it is kept but not confirmed
 - **read_evidence** -> ok. category=phone brand=Google model=Pixel Fold label=False lines=3
 - **forensics** -> flag. looks like a catalogue or stock image
 - **retrieval** -> ok. query='Google Pixel Fold Pixel Fold ONYITEX GADGET Google Google Pixel Fold:
 - 7.6-inch OLED main' hits=['Google Pixel 7', 'Google Pixel 8', 'Google Pixel 9', 'Tecno Pova 5', 'Tecno Pova 6']
 - **identify** -> ok. chosen=Google Pixel Fold margin=None
-- **abstain** -> abstain. confidence 0.4: no label, plate or settings screen was legible; 2 lines seen by both readers; looks like a catalogue or stock image
+- **abstain** -> abstain. confidence 0.32: no label, plate or settings screen was legible; 2 lines seen by both readers; the item_type was read by only one reader and is not confirmed; looks like a catalogue or stock image
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 5377 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 11709 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 12327 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 3290 ms (replayed)
-- total across calls: 32703 ms; wall clock: 828 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 13110 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 17068 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 4887 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 10772 ms (replayed)
+- total across calls: 45837 ms; wall clock: 4361 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -52,19 +53,20 @@ Shortlist from the catalogue:
   - Tecno Pova 5 (0.2)
   - Tecno Pova 6 (0.2)
 
-**Not identified: EVIDENCE_INCOMPLETE.** The evidence only supports this answer at 40 percent, which is a guess. One clear photo of the label would settle it.
+**Not identified: EVIDENCE_INCOMPLETE.** The evidence only supports this answer at 32 percent, which is a guess. One clear photo of the label would settle it.
 
 Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 24% on the best answer. It is probably a Google Pixel Fold, and the photos cannot separate them.**
+**Not sure enough to price: 19% on the best answer. It is probably a Google Pixel Fold, and the photos cannot separate them.**
 
-- Identification confidence: 24% (unknown)
+- Identification confidence: 19% (unknown)
 - Price confidence: 14%
 - It is weighing: Google Pixel Fold (0.95)
-- The evidence only supports this answer at 40 percent, which is a guess. One clear photo of the label would settle it.
+- The evidence only supports this answer at 32 percent, which is a guess. One clear photo of the label would settle it.
 - no label, plate or settings screen was legible
 - 2 lines seen by both readers
+- the item_type was read by only one reader and is not confirmed
 - looks like a catalogue or stock image
 - 10 claims are still unproven, 0 are supported
 
@@ -110,7 +112,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 34 NGN
 
 Conditions attached to this price:
-- Not identified: The evidence only supports this answer at 40 percent, which is a guess. One clear photo of the label would settle it.
+- Not identified: The evidence only supports this answer at 32 percent, which is a guess. One clear photo of the label would settle it.
 - Evidence flag: looks like a catalogue or stock image
 - Google Pixel Fold -> not proven remotely. Agent will confirm at pickup.
 - 7.6-inch OLED main display -> not proven remotely. Agent will confirm at pickup.

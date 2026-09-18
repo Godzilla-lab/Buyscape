@@ -1,6 +1,6 @@
 # Case 8FfH1wMcRh8TGcM6OYk4ikOk
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  26360 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  22474 ms
 
 ## What the engine saw
 - Presentation: single_unit
@@ -11,16 +11,16 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Model read off the item: SDG12000SE
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: minor scratches on yellow casing, dust and grime on surface, some wear on control panel bezel
+- Damage noted: minor scuff marks on casing, dust and grime on surface, some wear on handle
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: FIRMAN | SDG12000SE | FIRMAN | SDG12000SE | Silent | CE | AVR
+- Text read: FIRMAN | SDG12000SE | FIRMAN | SDG12000SE | Silent | CE | SILENT
 
 ## Two readers
 - brand_text agreed by both readers
 - model_text agreed by both readers
-- rating_text was seen by only one reader, so it is treated as unread
-- 8 transcribed lines was seen by only one reader, so it is treated as unread
+- item_type agreed by both readers
+- 78 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
 - AVR CE
@@ -32,17 +32,17 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 6 lines: AVR CE | Silent | FIRMAN | SDG12000SE | Dieselbene | S0012000SE
-- **corroborate** -> dispute. brand_text agreed by both readers; model_text agreed by both readers; rating_text was seen by only one reader, so it is treated as unread; 8 transcribed lines was seen by only one reader, so it is treated as unread
+- **corroborate** -> dispute. brand_text agreed by both readers; model_text agreed by both readers; item_type agreed by both readers; 78 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=generator brand=FIRMAN model=SDG12000SE label=True lines=7
-- **retrieval** -> ok. query='FIRMAN SDG12000SE FIRMAN SDG12000SE FIRMAN SDG12000SE Silent CE AVR Firman diesel generato' hits=['Sumec Firman SPG2900 2.8kVA', 'Sumec Firman SPG3000 3.1kVA', 'Maxmech MX10000 10kVA', 'Kemage KM10000 10kVA', 'Sumec Firman ECO8990ES 6.5kVA']
+- **retrieval** -> ok. query='FIRMAN SDG12000SE FIRMAN SDG12000SE FIRMAN SDG12000SE Silent CE SILENT Firman diesel gener' hits=['Sumec Firman SPG2900 2.8kVA', 'Sumec Firman SPG3000 3.1kVA', 'Maxmech MX10000 10kVA', 'Kemage KM10000 10kVA', 'Sumec Firman ECO8990ES 6.5kVA']
 - **identify** -> label. named from the label: FIRMAN SDG12000SE, not in the catalogue
 - **abstain** -> pass. confidence=0.9 from the label
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 7728 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 16493 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 2139 ms (replayed)
-- total across calls: 26360 ms; wall clock: 384 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 11456 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 8902 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2116 ms (replayed)
+- total across calls: 22474 ms; wall clock: 1550 ms
 
 ## Identification
 Shortlist from the catalogue:

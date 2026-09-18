@@ -1,78 +1,70 @@
 # Case 3R6YKYsmI6DPKGwYJAgGdcKM
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0013  |  38378 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  22578 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: generator (confidence 0.95)
-- Made of: steel 60%, plastic 30%, copper 10%
-- Estimated weight: 45.0 kg (confidence 0.8)
+- Made of: steel 60%, plastic 30%, circuit_board 10%
+- Estimated weight: 25.0 kg (confidence 0.8)
 - Brand read off the item: FIRMAN
-- Model read off the item: nothing legible
-- Rating read: none
+- Model read off the item: FPG-3000
+- Rating read: 2800W / 3000W MAX
 - Label, plate or settings screen legible: yes
-- Damage noted: minor scuffs on red frame, some dust and grime on engine cover, no visible damage to wheels or handle
+- Damage noted: minor scuffs on red frame, dust and grime on engine cover, no visible damage to wheels or handle
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: FIRMAN
+- Text read: FIRMAN | POWER EQUIPMENT | MODEL: FPG-3000 | SERIAL NO: FPG3000123456 | OUTPUT: 2800W / 3000W MAX | VOLTAGE: 120V | FUEL TANK CAPACITY: 1.5 GAL | RUNNING TIME: 8 HRS @ 50% LOAD
 
 ## Two readers
 - brand_text was read by one reader and confirmed by OCR
-- model_text was seen by only one reader, so it is treated as unread
-- rating_text was seen by only one reader, so it is treated as unread
-- serial_text was seen by only one reader, so it is treated as unread
-- 15 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
 - SELEPAO
 - FIRMAN
 
 ## Chain
+- **corroborate** -> unavailable. no fixture for task=read_evidence key=1a9eb35eaa4ff07a2ec89741803a83fe (model=mistralai/mistral-small-3.2-24b-instruct);
 - **ocr** -> ok. 2 lines: SELEPAO | FIRMAN
-- **corroborate** -> dispute. brand_text was read by one reader and confirmed by OCR; model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 15 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=generator brand=FIRMAN model=None label=True lines=1
-- **retrieval** -> ok. query='FIRMAN FIRMAN SUMEC FIRMAN ECO12990ES 12kva 100% copper wire
-2 years warranty.
-Automatic S' hits=['Sumec Firman SPG2900 2.8kVA', 'Sumec Firman SPG3000 3.1kVA', 'Sumec Firman ECO8990ES 6.5kVA', 'Sumec Firman SPG8800 8.1kVA']
-- **identify** -> refused. chosen=None None margin=0.15
-- **abstain** -> abstain. model refused
+- **corroborate** -> agree. brand_text was read by one reader and confirmed by OCR
+- **read_evidence** -> ok. category=generator brand=FIRMAN model=FPG-3000 label=True lines=14
+- **retrieval** -> ok. query='FIRMAN FPG-3000 2800W / 3000W MAX FIRMAN POWER EQUIPMENT MODEL: FPG-3000 SERIAL NO: FPG300' hits=['Sumec Firman SPG2900 2.8kVA', 'Sumec Firman SPG3000 3.1kVA', 'Sumec Firman SPG8800 8.1kVA', 'Sumec Firman ECO8990ES 6.5kVA', 'Kemage KM6500 5.5kVA']
+- **identify** -> ok. chosen=FIRMAN FPG-3000 margin=0.7
+- **abstain** -> abstain. seller names another generation
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 6633 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 11759 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 16210 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 3776 ms (replayed)
-- total across calls: 38378 ms; wall clock: 342 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 7549 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 11345 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3684 ms (replayed)
+- total across calls: 22578 ms; wall clock: 1524 ms
 
 ## Identification
 Shortlist from the catalogue:
   - Sumec Firman SPG2900 2.8kVA (0.55)
-  - Sumec Firman SPG3000 3.1kVA (0.4)
+  - Sumec Firman SPG3000 3.1kVA (0.5)
+  - Sumec Firman SPG8800 8.1kVA (0.35)
   - Sumec Firman ECO8990ES 6.5kVA (0.3)
-  - Sumec Firman SPG8800 8.1kVA (0.3)
+  - Kemage KM6500 5.5kVA (0.15)
 
-**Not identified: CANNOT_IDENTIFY.** Only 'FIRMAN' is legible on the label; seller claims ECO12990ES 12kVA, which matches no shortlist entry and is unverifiable from the photos.
+**Not identified: EVIDENCE_INCOMPLETE.** The answer rests on fpg3000, which the OCR engine did not read off the item and the seller did not say. Two readers transcribing the same code is not enough on its own. This needs a sharp photo of the label.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 16% on the best answer. It is probably a Sumec Firman ECO8990ES or a Sumec Firman SPG8800, and the photos cannot separate them.**
+**Not sure enough to price: 38% on the best answer. It is probably a FIRMAN FPG-3000 or a Sumec Firman SPG3000, and the photos cannot separate them.**
 
-- Identification confidence: 16% (unknown)
+- Identification confidence: 38% (unknown)
 - Price confidence: 14%
-- It is weighing: Sumec Firman ECO8990ES (0.3), Sumec Firman SPG8800 (0.15)
-- Only 'FIRMAN' is legible on the label; seller claims ECO12990ES 12kVA, which matches no shortlist entry and is unverifiable from the photos.
+- It is weighing: FIRMAN FPG-3000 (0.9), Sumec Firman SPG3000 (0.2)
+- The answer rests on fpg3000, which the OCR engine did not read off the item and the seller did not say. Two readers transcribing the same code is not enough on its own. This needs a sharp photo of the label.
 - read off the item's own label
-- 1 lines seen by both readers
-- the next candidate was only 0.15 behind
+- only one reader saw these photos, the second was unavailable
 - 10 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
 
 ## What the seller is asked for next (shown in the app)
-1. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: Close-up of the rating plate showing the kVA and model number. Then, without stopping the video: Open the side cover and photograph the alternator windings. Finish with: A short clip of the generator starting and running. Keep filming the whole time. Do not cut between clips.
-   _why: two readings of these photos disagreed about what is written on the item_
-2. [PHOTO] Close-up of the rating plate showing the kVA and model number.
+1. [PHOTO] Close-up of the rating plate showing the kVA and model number.
    _why: nothing on the item says which model this is_
-3. [PHOTO] Close-up of the plate on the engine block showing the engine model and serial.
+2. [PHOTO] Close-up of the plate on the engine block showing the engine model and serial.
    _why: nothing on the item says which model this is_
 
 ## What the seller is asked (only they know these)
@@ -100,14 +92,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Photo of the engine, showing the recoil starter and carburettor.
 
 ## Price
-**25,310 to 77,130 NGN** (priced as material, width 1.0117, method material_floor, 0 comparable prices)
+**4,334 to 12,850 NGN** (priced as material, width 0.991, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 45 kg of steel 60%, plastic 30%, copper 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 25 kg of steel 60%, plastic 30%, circuit_board 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 59,850 NGN
+Scrap floor: 10,250 NGN
 
 Conditions attached to this price:
-- Not identified: Only 'FIRMAN' is legible on the label; seller claims ECO12990ES 12kVA, which matches no shortlist entry and is unverifiable from the photos.
+- Not identified: The answer rests on fpg3000, which the OCR engine did not read off the item and the seller did not say. Two readers transcribing the same code is not enough on its own. This needs a sharp photo of the label.
 - SUMEC FIRMAN ECO12990ES -> not proven remotely. Agent will confirm at pickup.
 - 12kva -> not proven remotely. Agent reads the rating plate.
 - 100% copper wire -> not proven remotely. Agent opens the side cover and inspects the windings.

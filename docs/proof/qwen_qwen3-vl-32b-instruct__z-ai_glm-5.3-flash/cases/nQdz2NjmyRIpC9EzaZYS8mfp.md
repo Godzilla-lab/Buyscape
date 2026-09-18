@@ -1,24 +1,26 @@
 # Case nQdz2NjmyRIpC9EzaZYS8mfp
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  30412 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  60318 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: washing machine (confidence 0.95)
-- Made of: plastic 60%, steel 30%, carton 10%
-- Estimated weight: 18.0 kg (confidence 0.7)
+- Made of: plastic 70%, steel 20%, carton 10%
+- Estimated weight: 18.0 kg (confidence 0.8)
 - Brand read off the item: Hisense
 - Model read off the item: nothing legible
 - Rating read: none
-- Label, plate or settings screen legible: no
-- Damage noted: box is slightly worn, unit appears clean and undamaged
+- Label, plate or settings screen legible: yes
+- Damage noted: box is slightly damaged and creased, machine appears clean with no visible dents or rust
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
-- Text read: Hisense | Washing Machine | Bubble Clean | SAFARI GLOBAL GADGETS
+- Text read: Bubble Clean | Washing Machine | Hisense
 
 ## Two readers
 - brand_text agreed by both readers
-- 3 transcribed lines was seen by only one reader, so it is treated as unread
+- item_type agreed by both readers
+- rating_text was seen by only one reader, so it is treated as unread
+- 2 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
 - Hisense
@@ -30,19 +32,21 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 6 lines: Hisense | Max tookgt | Bubble | Clean | Washing Machine | SAFARI GLOBA
-- **corroborate** -> dispute. brand_text agreed by both readers; 3 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=washing machine brand=Hisense model=None label=False lines=4
+- **corroborate** -> dispute. brand_text agreed by both readers; item_type agreed by both readers; rating_text was seen by only one reader, so it is treated as unread; 2 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=washing machine brand=Hisense model=None label=True lines=3
 - **forensics** -> flag. looks like a catalogue or stock image
-- **retrieval** -> ok. query='Hisense Hisense Washing Machine Bubble Clean SAFARI GLOBAL GADGETS Hisense 9kg Automatic W' hits=['Hisense WT3K9022U 9kg top loader', 'Hisense WTJA801 8kg top loader', 'Hisense WM5S1045 10kg front loader']
-- **identify** -> ok. chosen=Hisense WT3K9022U margin=0.4
+- **retrieval** -> ok. query='Hisense Bubble Clean Washing Machine Hisense Hisense 9kg Automatic Washing Machine
+
+Make l' hits=['Hisense WT3K9022U 9kg top loader', 'Hisense WTJA801 8kg top loader', 'Hisense WM5S1045 10kg front loader']
+- **identify** -> ok. chosen=Hisense WT3K9022U margin=0.35
 - **abstain** -> abstain. top score 0.6
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 4530 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 8604 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 14738 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 2540 ms (replayed)
-- total across calls: 30412 ms; wall clock: 370 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 13582 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 19311 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 24959 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2466 ms (replayed)
+- total across calls: 60318 ms; wall clock: 1932 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -55,14 +59,14 @@ Shortlist from the catalogue:
 Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 16% on the best answer. It is probably a Hisense WT3K9022U or a Hisense WTJA801, and the photos cannot separate them.**
+**Not sure enough to price: 18% on the best answer. It is probably a Hisense WT3K9022U or a Hisense WTJA801, and the photos cannot separate them.**
 
-- Identification confidence: 16% (unknown)
+- Identification confidence: 18% (unknown)
 - Price confidence: 20%
-- It is weighing: Hisense WT3K9022U (0.6), Hisense WTJA801 (0.2)
+- It is weighing: Hisense WT3K9022U (0.6), Hisense WTJA801 (0.25)
 - The best candidate scored only 0.6, which is not sure enough to price.
-- no label, plate or settings screen was legible
-- 4 lines seen by both readers
+- read off the item's own label
+- 3 lines seen by both readers
 - looks like a catalogue or stock image
 - 7 claims are still unproven, 0 are supported
 
@@ -97,11 +101,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Open the door and photograph the inside of the drum.
 
 ## Price
-**1,944 to 5,400 NGN** (priced as material, width 0.9409, method material_floor, 0 comparable prices)
+**1,584 to 4,644 NGN** (priced as material, width 0.9824, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 18 kg of plastic 60%, steel 30%, carton 10% (rates for carton, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 18 kg of plastic 70%, steel 20%, carton 10% (rates for carton, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 3,888 NGN
+Scrap floor: 3,168 NGN
 
 Conditions attached to this price:
 - Not identified: The best candidate scored only 0.6, which is not sure enough to price.

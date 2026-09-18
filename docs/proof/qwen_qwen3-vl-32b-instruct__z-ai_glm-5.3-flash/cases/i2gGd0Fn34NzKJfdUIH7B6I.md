@@ -1,26 +1,24 @@
 # Case i2gGd0Fn34NzKJfdUIH7B6I
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  34238 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  28753 ms
 
 ## What the engine saw
 - Presentation: single_unit
-- Category: electric motor with engine assembly (confidence 0.9)
-- Made of: steel 60%, copper_bare 15%, plastic 15%, rubber 10%
-- Estimated weight: 35.0 kg (confidence 0.7)
-- Brand read off the item: EMINEN ELECTRONICS
+- Category: generator (confidence 0.9)
+- Made of: steel 60%, plastic 20%, copper_bare 10%, rubber 10%
+- Estimated weight: 45.0 kg (confidence 0.7)
+- Brand read off the item: EMINENCELECTRONICS
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: some surface rust on metal parts, blue casing has minor scuffs, engine housing appears dirty and greasy, ground area shows oil stains
+- Damage noted: rust on metal parts, dirt and grime on surface, some components appear loose or disconnected
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: EMINEN ELECTRONICS
+- Text read: EMINENCELECTRONICS
 
 ## Two readers
-- model_text was seen by only one reader, so it is treated as unread
-- rating_text was seen by only one reader, so it is treated as unread
-- serial_text was seen by only one reader, so it is treated as unread
-- 7 transcribed lines was seen by only one reader, so it is treated as unread
+- item_type agreed by both readers
+- 3 transcribed lines was seen by only one reader, so it is treated as unread
 - brand_text was read by only one reader, so it is kept but not confirmed
 
 ## OCR read off the photos
@@ -30,86 +28,90 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 3 lines: D3 | EMMYELE | GTRONICS
-- **corroborate** -> dispute. model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 7 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed
-- **read_evidence** -> ok. category=electric motor with engine assembly brand=EMINEN ELECTRONICS model=None label=False lines=1
-- **retrieval** -> ok. query='EMINEN ELECTRONICS EMINEN ELECTRONICS Basic diesel generator model 1125 engine with 30kva ' hits=['Mikano MK30 30kVA']
+- **corroborate** -> dispute. item_type agreed by both readers; 3 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed
+- **read_evidence** -> ok. category=generator brand=EMINENCELECTRONICS model=None label=False lines=1
+- **retrieval** -> ok. query='EMINENCELECTRONICS EMINENCELECTRONICS Basic diesel generator model 1125 engine with 30kva ' hits=['Mikano MK30 30kVA']
 - **identify** -> refused. chosen=None None margin=None
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 6149 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 5455 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 19447 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 3187 ms (replayed)
-- total across calls: 34238 ms; wall clock: 376 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4593 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 11303 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 9567 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3290 ms (replayed)
+- total across calls: 28753 ms; wall clock: 1614 ms
 
 ## Identification
 Shortlist from the catalogue:
   - Mikano MK30 30kVA (0.2333)
 
-**Not identified: CANNOT_IDENTIFY.** No brand or model plate legible; 'EMINEN ELECTRONICS' is a photo watermark, not an item label. Red engine with blue alternator matches generic Chinese-built 30kVA gensets sold under many Nigerian brands, so Mikano MK30 is plausible but unverified.
+**Not identified: CANNOT_IDENTIFY.** No brand or model plate is legible; 'EMINENCELECTRONICS' is only a photo watermark, and the seller's 30kVA diesel description does not uniquely identify a manufacturer.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 10% on the best answer. It is probably a Mikano MK30, and the photos cannot separate them.**
+**Not sure enough to price: 13% on the best answer. It is probably a Mikano MK30, and the photos cannot separate them.**
 
-- Identification confidence: 10% (unknown)
-- Price confidence: 16%
-- It is weighing: Mikano MK30 (0.3)
-- No brand or model plate legible; 'EMINEN ELECTRONICS' is a photo watermark, not an item label. Red engine with blue alternator matches generic Chinese-built 30kVA gensets sold under many Nigerian brands, so Mikano MK30 is plausible but unverified.
+- Identification confidence: 13% (unknown)
+- Price confidence: 14%
+- It is weighing: Mikano MK30 (0.4)
+- No brand or model plate is legible; 'EMINENCELECTRONICS' is only a photo watermark, and the seller's 30kVA diesel description does not uniquely identify a manufacturer.
 - no label, plate or settings screen was legible
 - the two readers agreed on nothing legible
 - the brand was read by only one reader and is not confirmed
-- 9 claims are still unproven, 0 are supported
+- 10 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
 
 ## What the seller is asked for next (shown in the app)
-1. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: Close-up of any label, sticker or metal plate showing the brand and model. Then, without stopping the video: If it opens without tools, open it and photograph the inside. Keep filming the whole time. Do not cut between clips.
+1. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: Close-up of the rating plate showing the kVA and model number. Then, without stopping the video: Open the side cover and photograph the alternator windings. Finish with: A short clip of the generator starting and running. Keep filming the whole time. Do not cut between clips.
    _why: two readings of these photos disagreed about what is written on the item_
-2. [PHOTO] Close-up of any label, sticker or metal plate showing the brand and model.
+2. [PHOTO] Close-up of the rating plate showing the kVA and model number.
+   _why: nothing on the item says which model this is_
+3. [PHOTO] Close-up of the plate on the engine block showing the engine model and serial.
    _why: nothing on the item says which model this is_
 
 ## What the seller is asked (only they know these)
-- How much of it is there? Give the weight in kilogrammes or tons if you know it.
-- Does it still work?
 - Roughly how old is it, in years?
+- Does it start and run right now?
+- When was it last serviced, and what was done?
 
 ## Claims
-- [unverifiable_remote] Basic diesel generator model 1125 engine
-    priced as: 70 percent of the stated weight. Weigh on the scale and photograph the display
-- [unverifiable_remote] 30kva coil
-    priced as: 70 percent of the stated weight. Weigh on the scale and photograph the display
+- [unverifiable_remote] Basic diesel generator model 1125
+- [unverified] Engine with 30kva coil
+    priced as: the smallest rating in this brand's range. Agent reads the rating plate
 - [unverifiable_remote] 100% copper coil
-    priced as: 70 percent of the stated weight. Weigh on the scale and photograph the display
-- [unverifiable_remote] warranty one year
-- [unverifiable_remote] key
+    priced as: assumed aluminium windings. Agent opens the side cover and inspects the windings
+- [unverifiable_remote] Warranty one year
+- [unverifiable_remote] Key included
 - [unverified] Required evidence 'code_shot' was not supplied
-    priced as: priced as if the worst case is true. Write the code {code} on a piece of paper and take one photo with the paper next to the item.
+    priced as: priced as if the worst case is true. Write the code {code} on paper and photograph it next to the generator.
 - [unverified] Required evidence 'overview' was not supplied
-    priced as: priced as if the worst case is true. One photo showing the whole item.
-- [unverified] Required evidence 'label_or_plate' was not supplied
-    priced as: priced as if the worst case is true. Close-up of any label, sticker or metal plate showing the brand and model.
-- [unverified] Required evidence 'description' was not supplied
-    priced as: priced as if the worst case is true. Tell us what it is, whether it works, and roughly how heavy it is.
+    priced as: priced as if the worst case is true. One photo of the whole generator from the front.
+- [unverified] Required evidence 'plate_kva' was not supplied
+    priced as: priced as if the worst case is true. Close-up of the rating plate showing the kVA and model number.
+- [unverified] Required evidence 'side_cover_off' was not supplied
+    priced as: priced as if the worst case is true. Open the side cover and photograph the alternator windings.
+- [unverified] Required evidence 'engine_bay' was not supplied
+    priced as: priced as if the worst case is true. Photo of the engine, showing the recoil starter and carburettor.
 
 ## Price
-**19,110 to 82,145 NGN** (priced as material, width 1.2451, method material_floor, 0 comparable prices)
+**25,215 to 76,770 NGN** (priced as material, width 1.011, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 35 kg of steel 60%, copper_bare 15%, plastic 15%, rubber 10% (rates for plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 45 kg of steel 60%, plastic 20%, copper_bare 10%, rubber 10% (rates for plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 63,700 NGN
+Scrap floor: 59,625 NGN
 
 Conditions attached to this price:
-- Not identified: No brand or model plate legible; 'EMINEN ELECTRONICS' is a photo watermark, not an item label. Red engine with blue alternator matches generic Chinese-built 30kVA gensets sold under many Nigerian brands, so Mikano MK30 is plausible but unverified.
-- Basic diesel generator model 1125 engine -> not proven remotely. Weigh on the scale and photograph the display.
-- 30kva coil -> not proven remotely. Weigh on the scale and photograph the display.
-- 100% copper coil -> not proven remotely. Weigh on the scale and photograph the display.
-- warranty one year -> not proven remotely. Agent will confirm at pickup.
-- key -> not proven remotely. Agent will confirm at pickup.
-- Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on a piece of paper and take one photo with the paper next to the item..
-- Required evidence 'overview' was not supplied -> not proven remotely. One photo showing the whole item..
-- Required evidence 'label_or_plate' was not supplied -> not proven remotely. Close-up of any label, sticker or metal plate showing the brand and model..
-- Required evidence 'description' was not supplied -> not proven remotely. Tell us what it is, whether it works, and roughly how heavy it is..
+- Not identified: No brand or model plate is legible; 'EMINENCELECTRONICS' is only a photo watermark, and the seller's 30kVA diesel description does not uniquely identify a manufacturer.
+- Basic diesel generator model 1125 -> not proven remotely. Agent will confirm at pickup.
+- Engine with 30kva coil -> not proven remotely. Agent reads the rating plate.
+- 100% copper coil -> not proven remotely. Agent opens the side cover and inspects the windings.
+- Warranty one year -> not proven remotely. Agent will confirm at pickup.
+- Key included -> not proven remotely. Agent will confirm at pickup.
+- Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on paper and photograph it next to the generator..
+- Required evidence 'overview' was not supplied -> not proven remotely. One photo of the whole generator from the front..
+- Required evidence 'plate_kva' was not supplied -> not proven remotely. Close-up of the rating plate showing the kVA and model number..
+- Required evidence 'side_cover_off' was not supplied -> not proven remotely. Open the side cover and photograph the alternator windings..
+- Required evidence 'engine_bay' was not supplied -> not proven remotely. Photo of the engine, showing the recoil starter and carburettor..
 
 ## Answer key (not shown to the engine)
 `{'title': 'Basic Diesel Generator Model 1125 Engine With 30kva Coil', 'category': 'generator', 'price_ngn': 2450000, 'is_used': False, 'url': '/ojo/power-equipments/basic-diesel-generator-model-1125-engine-with-30kva-coil-i2gGd0Fn34NzKJfdUIH7B6I.html?page=1&pos=24&cur_pos=24&ads_per_page=24&ads_count=15133&lid=Nxw8kf11TvNy7x_R'}`

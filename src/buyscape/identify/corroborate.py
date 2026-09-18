@@ -24,6 +24,7 @@ import re
 from dataclasses import dataclass, field
 
 from ..providers.tasks import Reading
+from .catalogue import tokens
 
 # Fields that name the item and therefore set its price. These are the ones
 # worth paying a second read for. Judgements like category or material are not
@@ -199,6 +200,20 @@ def corroborate(
     # had agreed.
     for name in ("brand", "model", "rating"):
         _cite(merged, name)
+
+    # The item type is a judgement, not a transcription, and it becomes the
+    # identity of anything that carries no brand or model. Two readers who
+    # share a word for it ('single seater sofa', 'one seater sofa chair')
+    # agree. Two who share none may both be right in different words, so
+    # the first reading is kept and marked unconfirmed rather than dropped.
+    if first.item_type and second.item_type:
+        if set(tokens(first.item_type)) & set(tokens(second.item_type)):
+            out.agreed.append("item_type")
+        else:
+            out.uncorroborated.append("item_type")
+    elif first.item_type or second.item_type:
+        merged.item_type = first.item_type or second.item_type
+        out.uncorroborated.append("item_type")
 
     # Either reader spotting a fraud signal or a second item is enough.
     merged.multiple_items = first.multiple_items or second.multiple_items

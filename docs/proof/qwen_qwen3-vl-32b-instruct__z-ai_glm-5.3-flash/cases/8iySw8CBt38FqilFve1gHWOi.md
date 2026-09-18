@@ -1,24 +1,25 @@
 # Case 8iySw8CBt38FqilFve1gHWOi
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  44397 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  24463 ms
 
 ## What the engine saw
 - Presentation: sealed_new
-- Category: washing machine (confidence 0.9)
+- Category: washing machine (confidence 0.95)
 - Made of: carton 100%
 - Estimated weight: 15.0 kg (confidence 0.7)
 - Brand read off the item: nothing legible
-- Model read off the item: nothing legible
+- Model read off the item: B-WS-WM70S
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: box is taped shut, minor creases and wear on corners
+- Damage noted: none
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
-- Text read: WASHING MACHINE
+- Text read: WASHING MACHINE | B-WS-WM70S
 
 ## Two readers
+- model_text agreed by both readers
+- item_type agreed by both readers
 - brand_text differed between the two readers, so it is treated as unread
-- model_text differed between the two readers, so it is treated as unread
 - 4 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
@@ -33,35 +34,35 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 8 lines: WASHING MACHINE | Boscon | JAPAN | MODELNO.:ES-WM70S | JAPAN" | 158 | KITCHENPLUGT | Makes yours ashing simply easy
-- **corroborate** -> dispute. brand_text differed between the two readers, so it is treated as unread; model_text differed between the two readers, so it is treated as unread; 4 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=washing machine brand=None model=None label=False lines=1
+- **corroborate** -> dispute. model_text agreed by both readers; item_type agreed by both readers; brand_text differed between the two readers, so it is treated as unread; 4 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=washing machine brand=None model=B-WS-WM70S label=False lines=2
 - **forensics** -> flag. looks like a catalogue or stock image
-- **retrieval** -> ok. query='WASHING MACHINE The image shows a Boscon single-tub washing machine, model BOS-WM70S, with' hits=['Haier Thermocool TLA70 7kg top loader']
-- **identify** -> ok. chosen=Boscon BOS-WM705 margin=0.8
+- **retrieval** -> ok. query='B-WS-WM70S WASHING MACHINE B-WS-WM70S The image shows a Boscon single-tub washing machine,' hits=['Haier Thermocool TLA70 7kg top loader']
+- **identify** -> ok. chosen=Boscon BOS-WM70S margin=0.85
 - **abstain** -> abstain. seller names another generation
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 24319 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 10572 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 6877 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 2629 ms (replayed)
-- total across calls: 44397 ms; wall clock: 522 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5525 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 8839 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 7038 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3061 ms (replayed)
+- total across calls: 24463 ms; wall clock: 1748 ms
 
 ## Identification
 Shortlist from the catalogue:
   - Haier Thermocool TLA70 7kg top loader (0.1667)
 
-**Not identified: EVIDENCE_INCOMPLETE.** The answer names boswm705, which appears nowhere on the item or in the seller's words. A photo of the plate would confirm or correct it.
+**Not identified: EVIDENCE_INCOMPLETE.** The item's own label reads 'B-WS-WM70S', but the answer is 'Boscon BOS-WM70S'. The label decides, so this needs a clearer photo of it.
 
 Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 22% on the best answer. It is probably a Boscon BOS-WM705 or a Haier Thermocool TLA70, and the photos cannot separate them.**
+**Not sure enough to price: 23% on the best answer. It is probably a Boscon BOS-WM70S or a Haier Thermocool TLA70, and the photos cannot separate them.**
 
-- Identification confidence: 22% (unknown)
+- Identification confidence: 23% (unknown)
 - Price confidence: 20%
-- It is weighing: Boscon BOS-WM705 (0.85), Haier Thermocool TLA70 (0.05)
-- The answer names boswm705, which appears nowhere on the item or in the seller's words. A photo of the plate would confirm or correct it.
+- It is weighing: Boscon BOS-WM70S (0.9), Haier Thermocool TLA70 (0.05)
+- The item's own label reads 'B-WS-WM70S', but the answer is 'Boscon BOS-WM70S'. The label decides, so this needs a clearer photo of it.
 - no label, plate or settings screen was legible
 - 1 lines seen by both readers
 - looks like a catalogue or stock image
@@ -86,7 +87,7 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: the smallest capacity this brand sells. Agent reads the rating plate
 - [unverified] The model of the washing machine is BOS-WM70S.
     priced as: the smallest capacity this brand sells. Agent reads the rating plate
-- [unverified] The washing machine has a 7kg washing capacity.
+- [unverifiable_remote] The washing machine has a 7kg washing capacity.
     priced as: the smallest capacity this brand sells. Agent reads the rating plate
 - [unverified] Required evidence 'code_shot' was not supplied
     priced as: priced as if the worst case is true. Write the code {code} on paper and photograph it next to the machine.
@@ -105,7 +106,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 900 NGN
 
 Conditions attached to this price:
-- Not identified: The answer names boswm705, which appears nowhere on the item or in the seller's words. A photo of the plate would confirm or correct it.
+- Not identified: The item's own label reads 'B-WS-WM70S', but the answer is 'Boscon BOS-WM70S'. The label decides, so this needs a clearer photo of it.
 - Evidence flag: looks like a catalogue or stock image
 - The washing machine is a Boscon single-tub model. -> not proven remotely. Agent reads the rating plate.
 - The model of the washing machine is BOS-WM70S. -> not proven remotely. Agent reads the rating plate.

@@ -86,6 +86,15 @@ class Protocol(BaseModel):
         ),
     )
     always_novel: bool = False
+    identity_by_type: bool = Field(
+        False,
+        description=(
+            "The kind of item carries no brand or model, so what it is, in a "
+            "buyer's words, is its identity and its comparables are listings "
+            "of that type. A sofa, a wardrobe, a phone stand. Never true for "
+            "a kind of item where the model number sets the price."
+        ),
+    )
     shots: list[Shot] = Field(default_factory=list)
     questions: list[Question] = Field(default_factory=list)
     claims: list[ClaimSpec] = Field(default_factory=list)
@@ -134,18 +143,33 @@ def _words(text: str) -> set[str]:
     return {w for w in re.split(r"[^a-z0-9]+", (text or "").lower()) if w}
 
 
+def _last_word(text: str | None) -> str:
+    """The head of the phrase: what the thing is, before any qualifier.
+
+    Bracketed and trailing qualifiers are skipped, so 'sofa (single seater)'
+    and 'generator, petrol' still head on the noun.
+    """
+    bare = re.sub(r"\(.*?\)", " ", (text or "").lower()).split(",")[0]
+    words = [w for w in re.split(r"[^a-z0-9]+", bare) if w]
+    return words[-1] if words else ""
+
+
 def resolve(protocols: dict[str, Protocol], spoken: str | None) -> Protocol:
     """Find the protocol for whatever the model called this item.
 
     Exact name first, then an alias, then the most specific name whose every
     word appears in what was said: 'portable generator' reaches the generator
     protocol, 'twin tub washing machine' reaches the washing machine one.
+    The name must also cover the last word said, because that word is the
+    thing itself: a 'phone holder stand' is a stand and not a phone, and it
+    used to be sent to the phone protocol and asked for its IMEI.
     Anything genuinely new falls to the generic protocol, which is the point:
     an unknown item is still weighed, opened and bought, never refused.
     """
     said = _words(spoken)
     if not said:
         return protocols["generic"]
+    head = _last_word(spoken)
 
     best: Protocol | None = None
     best_words = 0
@@ -154,7 +178,7 @@ def resolve(protocols: dict[str, Protocol], spoken: str | None) -> Protocol:
             continue
         for name in [protocol.category, protocol.display_name, *protocol.aliases]:
             words = _words(name)
-            if words and words.issubset(said) and len(words) > best_words:
+            if words and words.issubset(said) and head in words and len(words) > best_words:
                 best, best_words = protocol, len(words)
     return best or protocols["generic"]
 

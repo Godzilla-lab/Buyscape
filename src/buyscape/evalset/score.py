@@ -31,6 +31,10 @@ class Verdicts:
     """
 
     adjudicated: dict[str, str] = field(default_factory=dict)  # case id -> correct | wrong
+    # What the plate actually reads, where the adjudicator could say. An
+    # answer is then judged against this rather than by a fixed verdict, so
+    # a case once answered wrongly and later answered rightly scores rightly.
+    truths: dict[str, str] = field(default_factory=dict)
     must_abstain: set[str] = field(default_factory=set)
 
 
@@ -44,6 +48,8 @@ def load_verdicts(eval_dir: Path) -> Verdicts:
             if verdict not in ("correct", "wrong"):
                 raise ValueError(f"adjudication for {row['id']} must be correct or wrong, not {verdict!r}")
             verdicts.adjudicated[str(row["id"])] = verdict
+            if row.get("truth"):
+                verdicts.truths[str(row["id"])] = str(row["truth"])
     must_abstain = eval_dir / "must_abstain.yaml"
     if must_abstain.exists():
         for row in yaml.safe_load(must_abstain.read_text()) or []:
@@ -268,9 +274,19 @@ def score(pairs: list[tuple[Case, CaseResult]], verdicts: Verdicts | None = None
             # The variant is part of the answer: 'Galaxy S23' with variant
             # 'Ultra' is an S23 Ultra, and is priced as one.
             answered = " ".join(filter(None, [result.chain.model, result.chain.variant]))
+            if result.chain.named_type:
+                # The answer is a kind of thing, '2 seater sofa', and the
+                # title is held to the same rule: a shared word, and where
+                # both carry a number the numbers must agree.
+                answered = result.chain.type_name or ""
             correct = model_matches(result.chain.brand, answered, title)
             verdict = verdicts.adjudicated.get(case.id)
-            if verdict:
+            if case.id in verdicts.truths:
+                # A person read the plate and wrote down what it says. The
+                # answer is held to that, by the same rule as a title.
+                correct = model_matches(result.chain.brand, answered, verdicts.truths[case.id])
+                m.adjudicated += 1
+            elif verdict:
                 # A person looked at the plate. Their word beats the title.
                 correct = verdict == "correct"
                 m.adjudicated += 1

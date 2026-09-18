@@ -1,26 +1,25 @@
 # Case mHdf4GzJMu9bgwTUNei7fhOi
 
-Photos: 5  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0042  |  392781 ms
+Photos: 5  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0040  |  195140 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: phone (confidence 1.0)
-- Made of: plastic 60%, steel 30%, circuit_board 10%
+- Made of: plastic 60%, steel 20%, circuit_board 10%, glass 10%
 - Estimated weight: 0.2 kg (confidence 0.9)
 - Brand read off the item: SAMSUNG
 - Model read off the item: nothing legible
 - Rating read: none
-- Label, plate or settings screen legible: yes
-- Damage noted: minor scuffs on back panel, battery shows signs of use, no visible damage on back panel, screen not visible in photo, minor smudges on back panel, no visible cracks or dents, screen appears cracked or damaged at edge, side panel shows wear and possible scratches
-- Looks like a catalogue image: yes
+- Label, plate or settings screen legible: no
+- Damage noted: screen visible on back cover, no visible damage to body, minor scuff marks on back panel, screen appears intact, minor scratches on back panel, camera module appears intact, no visible damage to casing
+- Looks like a catalogue image: no
 - Screenshot of a gallery: yes
-- Text read: POSTED ON | SAMSUNG | MAPSCHOOL GLOBAL TECHNOLOGY | Google | Camera | Chrome | Messages | Phone
+- Text read: POSTED ON JD | SAMSUNG | MAPSCHOOL MOBILE TECHNICS | Google | Play Store | Camera | Photos | YouTube
 
 ## Two readers
 - brand_text agreed by both readers
-- model_text was seen by only one reader, so it is treated as unread
-- rating_text was seen by only one reader, so it is treated as unread
-- 21 transcribed lines was seen by only one reader, so it is treated as unread
+- item_type agreed by both readers
+- 25 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
 - APHTZ GLOBAL TE
@@ -29,27 +28,27 @@ Photos: 5  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 3 lines: APHTZ GLOBAL TE | 2X | 30
-- **corroborate** -> dispute. brand_text agreed by both readers; model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; 21 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=phone brand=SAMSUNG model=None label=True lines=19
-- **forensics** -> flag. looks like a catalogue or stock image; screenshot of a gallery rather than a photo of the item
-- **retrieval** -> ok. query='SAMSUNG POSTED ON SAMSUNG MAPSCHOOL GLOBAL TECHNOLOGY Google Camera Chrome Messages Phone ' hits=['Samsung Galaxy S23', 'Samsung Galaxy S21', 'Samsung Galaxy S22', 'Samsung Galaxy S24', 'Samsung Galaxy S25']
-- **identify** -> refused. chosen=None None margin=0.2
+- **corroborate** -> dispute. brand_text agreed by both readers; item_type agreed by both readers; 25 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=phone brand=SAMSUNG model=None label=False lines=19
+- **forensics** -> flag. screenshot of a gallery rather than a photo of the item
+- **retrieval** -> ok. query='SAMSUNG POSTED ON JD SAMSUNG MAPSCHOOL MOBILE TECHNICS Google Play Store Camera Photos You' hits=['Samsung Galaxy S23', 'Samsung Galaxy S21', 'Samsung Galaxy S22', 'Samsung Galaxy S24', 'Samsung Galaxy S25']
+- **identify** -> refused. chosen=None None margin=0.15
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 42001 ms
-- read_evidence on qwen/qwen3-vl-32b-instruct: 33513 ms
-- read_evidence on qwen/qwen3-vl-32b-instruct: 34234 ms
-- read_evidence on qwen/qwen3-vl-32b-instruct: 32732 ms
-- read_evidence on qwen/qwen3-vl-32b-instruct: 48733 ms
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 19871 ms
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 20207 ms
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 29100 ms
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 20437 ms
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 76179 ms
-- identify on z-ai/glm-5.3-flash: 32267 ms
-- extract_claims on qwen/qwen3-vl-32b-instruct: 3507 ms (replayed)
-- total across calls: 392781 ms; wall clock: 108519 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 14128 ms (replayed)
+- read_evidence on qwen/qwen3-vl-32b-instruct: 14327 ms (replayed)
+- read_evidence on qwen/qwen3-vl-32b-instruct: 14030 ms (replayed)
+- read_evidence on qwen/qwen3-vl-32b-instruct: 13999 ms (replayed)
+- read_evidence on qwen/qwen3-vl-32b-instruct: 16052 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 16549 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 23967 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 24687 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 16101 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 19440 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 13341 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 8519 ms (replayed)
+- total across calls: 195140 ms; wall clock: 3830 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -59,21 +58,20 @@ Shortlist from the catalogue:
   - Samsung Galaxy S24 (0.3)
   - Samsung Galaxy S25 (0.3)
 
-**Not identified: CANNOT_IDENTIFY.** Photos show an Ultra-style body (individual ringed lenses, boxy slab) suggesting S23 Ultra, but no model label is legible and 'Galaxy S23 Ultra' is not on the shortlist; the plain-S23 entry contradicts the visible camera design.
+**Not identified: CANNOT_IDENTIFY.** Seller claims S23 Ultra 512GB, but 'S23 Ultra' is absent from the shortlist and no legible label confirms any model. The photos show a boxy flat-edge handset with four separate large lenses consistent with an Ultra variant, which does not match the standard S23/S22/S24/S25 designs listed. Cannot distinguish S22/S23/S24 Ultra generations visually.
 
-Evidence flags: looks like a catalogue or stock image; screenshot of a gallery rather than a photo of the item
+Evidence flags: screenshot of a gallery rather than a photo of the item
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 11% on the best answer. It is probably a Samsung Galaxy S23 or a Samsung Galaxy S22, and the photos cannot separate them.**
+**Not sure enough to price: 7% on the best answer. It is probably a Samsung Galaxy S23 or a Samsung Galaxy S22, and the photos cannot separate them.**
 
-- Identification confidence: 11% (unknown)
+- Identification confidence: 7% (unknown)
 - Price confidence: 14%
-- It is weighing: Samsung Galaxy S23 (0.4), Samsung Galaxy S22 (0.2)
-- Photos show an Ultra-style body (individual ringed lenses, boxy slab) suggesting S23 Ultra, but no model label is legible and 'Galaxy S23 Ultra' is not on the shortlist; the plain-S23 entry contradicts the visible camera design.
-- read off the item's own label
+- It is weighing: Samsung Galaxy S23 (0.3), Samsung Galaxy S22 (0.15)
+- Seller claims S23 Ultra 512GB, but 'S23 Ultra' is absent from the shortlist and no legible label confirms any model. The photos show a boxy flat-edge handset with four separate large lenses consistent with an Ultra variant, which does not match the standard S23/S22/S24/S25 designs listed. Cannot distinguish S22/S23/S24 Ultra generations visually.
+- no label, plate or settings screen was legible
 - 19 lines seen by both readers
-- the next candidate was only 0.2 behind
-- looks like a catalogue or stock image
+- the next candidate was only 0.15 behind
 - screenshot of a gallery rather than a photo of the item
 - 10 claims are still unproven, 0 are supported
 
@@ -113,15 +111,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
-**26 to 77 NGN** (priced as material, width 0.9863, method material_floor, 0 comparable prices)
+**21 to 66 NGN** (priced as material, width 1.0075, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 0.2 kg of plastic 60%, steel 30%, circuit_board 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 0.2 kg of plastic 60%, steel 20%, circuit_board 10%, glass 10% (rates for glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 58 NGN
+Scrap floor: 48 NGN
 
 Conditions attached to this price:
-- Not identified: Photos show an Ultra-style body (individual ringed lenses, boxy slab) suggesting S23 Ultra, but no model label is legible and 'Galaxy S23 Ultra' is not on the shortlist; the plain-S23 entry contradicts the visible camera design.
-- Evidence flag: looks like a catalogue or stock image
+- Not identified: Seller claims S23 Ultra 512GB, but 'S23 Ultra' is absent from the shortlist and no legible label confirms any model. The photos show a boxy flat-edge handset with four separate large lenses consistent with an Ultra variant, which does not match the standard S23/S22/S24/S25 designs listed. Cannot distinguish S22/S23/S24 Ultra generations visually.
 - Evidence flag: screenshot of a gallery rather than a photo of the item
 - S23 ultra 512 GB -> not proven remotely. Agent reads storage from Settings.
 - S23 ultra 512 GB -> not proven remotely. Agent reads storage from Settings.

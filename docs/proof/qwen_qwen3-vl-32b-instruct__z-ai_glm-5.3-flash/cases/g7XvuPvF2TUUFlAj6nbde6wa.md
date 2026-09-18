@@ -1,11 +1,11 @@
 # Case g7XvuPvF2TUUFlAj6nbde6wa
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  33129 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  28831 ms
 
 ## What the engine saw
 - Presentation: sealed_new
 - Category: split air conditioner (confidence 0.9)
-- Made of: plastic 60%, steel 30%, circuit_board 5%, copper 5%
+- Made of: plastic 60%, steel 30%, circuit_board 10%
 - Estimated weight: 25.0 kg (confidence 0.7)
 - Brand read off the item: SAMSUNG
 - Model read off the item: nothing legible
@@ -18,6 +18,7 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Two readers
 - brand_text agreed by both readers
+- item_type agreed by both readers
 
 ## OCR read off the photos
 - SAMSUNG
@@ -26,18 +27,18 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 3 lines: SAMSUNG | POSTED.ONJIJI | HOME AFFAIRS
-- **corroborate** -> agree. brand_text agreed by both readers
+- **corroborate** -> agree. brand_text agreed by both readers; item_type agreed by both readers
 - **read_evidence** -> ok. category=split air conditioner brand=SAMSUNG model=None label=False lines=2
 - **retrieval** -> ok. query='SAMSUNG SAMSUNG HOME AFFAIRS Top of the range Foreign used Samsung Air conditioners are av' hits=['Samsung AR12 1.5HP', 'Samsung AR09 1HP', 'Scanfrost SFAC12 1.5HP', 'Royal RAC12 1.5HP', 'Hisense AS-12 1.5HP']
-- **identify** -> refused. chosen=Samsung None margin=0.1
+- **identify** -> refused. chosen=Samsung None margin=0.05
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 5013 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 5601 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 20508 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 2007 ms (replayed)
-- total across calls: 33129 ms; wall clock: 329 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4331 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 9289 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 13113 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2098 ms (replayed)
+- total across calls: 28831 ms; wall clock: 1488 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -47,18 +48,18 @@ Shortlist from the catalogue:
   - Royal RAC12 1.5HP (0.3)
   - Hisense AS-12 1.5HP (0.26)
 
-**Not identified: CANNOT_IDENTIFY.** Samsung branding is visible but no model number or HP rating is legible; seller offers both 1HP and 1.5HP, so AR12 vs AR09 cannot be distinguished.
+**Not identified: CANNOT_IDENTIFY.** Samsung split AC confirmed by logo, but no model number or HP rating is legible; seller offers both 1HP and 1.5HP, so AR09 vs AR12 cannot be distinguished.
 
 ## How sure the engine is (back office)
 **Not sure enough to price: 19% on the best answer. It is probably a Samsung AR12 1.5HP or a Samsung AR09 1HP, and the photos cannot separate them.**
 
 - Identification confidence: 19% (unknown)
 - Price confidence: 20%
-- It is weighing: Samsung AR12 1.5HP (0.4), Samsung AR09 1HP (0.3)
-- Samsung branding is visible but no model number or HP rating is legible; seller offers both 1HP and 1.5HP, so AR12 vs AR09 cannot be distinguished.
+- It is weighing: Samsung AR12 1.5HP (0.4), Samsung AR09 1HP (0.35)
+- Samsung split AC confirmed by logo, but no model number or HP rating is legible; seller offers both 1HP and 1.5HP, so AR09 vs AR12 cannot be distinguished.
 - no label, plate or settings screen was legible
 - 2 lines seen by both readers
-- the next candidate was only 0.1 behind
+- the next candidate was only 0.05 behind
 - 7 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -88,14 +89,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Open the front grille of the indoor unit and photograph the filters and coil.
 
 ## Price
-**11,715 to 24,700 NGN** (priced as material, width 0.7132, method material_floor, 0 comparable prices)
+**4,529 to 9,700 NGN** (priced as material, width 0.7267, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 25 kg of plastic 60%, steel 30%, circuit_board 5%, copper 5% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 25 kg of plastic 60%, steel 30%, circuit_board 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 18,750 NGN
+Scrap floor: 7,250 NGN
 
 Conditions attached to this price:
-- Not identified: Samsung branding is visible but no model number or HP rating is legible; seller offers both 1HP and 1.5HP, so AR12 vs AR09 cannot be distinguished.
+- Not identified: Samsung split AC confirmed by logo, but no model number or HP rating is legible; seller offers both 1HP and 1.5HP, so AR09 vs AR12 cannot be distinguished.
 - Top of the range Foreign used Samsung Air conditioners are available. -> not proven remotely. Agent will confirm at pickup.
 - We have them in 1hp and 1.5hp. -> not proven remotely. Agent reads the outdoor rating plate.
 - Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on paper and photograph it next to the unit..

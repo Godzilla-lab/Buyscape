@@ -1,6 +1,6 @@
 # Case nnq4crZ8USO1UbyRCyAqBsLJ
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  33762 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0013  |  35926 ms
 
 ## What the engine saw
 - Presentation: single_unit
@@ -11,16 +11,18 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: No visible damage or wear., Clean surface, no rust or dents.
+- Damage noted: minor scuffs on plastic casing, no visible damage to frame or engine cover
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: ELEPAQ | ELEPAQ | ON
+- Text read: ELEPAQ | VOLTAGE: 120V | FREQUENCY: 60Hz | STARTER: RECOIL START
 
 ## Two readers
 - brand_text agreed by both readers
+- item_type agreed by both readers
+- model_text differed between the two readers, so it is treated as unread
 - rating_text differed between the two readers, so it is treated as unread
-- model_text was seen by only one reader, so it is treated as unread
-- 15 transcribed lines was seen by only one reader, so it is treated as unread
+- serial_text was seen by only one reader, so it is treated as unread
+- 13 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
 - ELEPAQ
@@ -29,38 +31,36 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 3 lines: ELEPAQ | CONSTANT | SASCLINN SENERATEN
-- **corroborate** -> dispute. brand_text agreed by both readers; rating_text differed between the two readers, so it is treated as unread; model_text was seen by only one reader, so it is treated as unread; 15 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=generator brand=ELEPAQ model=None label=True lines=3
-- **retrieval** -> ok. query='ELEPAQ ELEPAQ ELEPAQ ON 100% copper
-Electric and recoil starter
-Circuit Breaker (Protects ' hits=['Elepaq SV2200 2.5kVA', 'Elepaq SV6800 6.5kVA']
-- **identify** -> refused. chosen=Elepaq None margin=0.25
-- **abstain** -> abstain. model refused
+- **corroborate** -> dispute. brand_text agreed by both readers; item_type agreed by both readers; model_text differed between the two readers, so it is treated as unread; rating_text differed between the two readers, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 13 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=generator brand=ELEPAQ model=None label=True lines=4
+- **retrieval** -> ok. query='ELEPAQ ELEPAQ VOLTAGE: 120V FREQUENCY: 60Hz STARTER: RECOIL START 100% copper
+Electric and' hits=['Elepaq SV2200 2.5kVA', 'Elepaq SV6800 6.5kVA']
+- **identify** -> ok. chosen=Elepaq SV2200 margin=0.45
+- **abstain** -> abstain. top score 0.6
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 8755 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 6382 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 16488 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 2137 ms (replayed)
-- total across calls: 33762 ms; wall clock: 294 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 7215 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 9663 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 16495 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2553 ms (replayed)
+- total across calls: 35926 ms; wall clock: 1572 ms
 
 ## Identification
 Shortlist from the catalogue:
   - Elepaq SV2200 2.5kVA (0.5)
   - Elepaq SV6800 6.5kVA (0.5)
 
-**Not identified: CANNOT_IDENTIFY.** Brand is legible but no model designation is readable; both shortlist Elepaq models share this yellow frame and control panel, and photo perspective alone cannot reliably separate a 2.5kVA from a 6.5kVA unit.
+**Not identified: CANNOT_IDENTIFY.** The best candidate scored only 0.6, which is not sure enough to price.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 30% on the best answer. It is probably a Elepaq SV2200 or a Elepaq SV6800, and the photos cannot separate them.**
+**Not sure enough to price: 36% on the best answer. It is probably a Elepaq SV2200 or a Elepaq SV6800, and the photos cannot separate them.**
 
-- Identification confidence: 30% (unknown)
+- Identification confidence: 36% (unknown)
 - Price confidence: 18%
-- It is weighing: Elepaq SV2200 (0.55), Elepaq SV6800 (0.3)
-- Brand is legible but no model designation is readable; both shortlist Elepaq models share this yellow frame and control panel, and photo perspective alone cannot reliably separate a 2.5kVA from a 6.5kVA unit.
+- It is weighing: Elepaq SV2200 (0.6), Elepaq SV6800 (0.15)
+- The best candidate scored only 0.6, which is not sure enough to price.
 - read off the item's own label
-- 3 lines seen by both readers
-- the next candidate was only 0.25 behind
+- 4 lines seen by both readers
 - 8 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -102,7 +102,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 33,250 NGN
 
 Conditions attached to this price:
-- Not identified: Brand is legible but no model designation is readable; both shortlist Elepaq models share this yellow frame and control panel, and photo perspective alone cannot reliably separate a 2.5kVA from a 6.5kVA unit.
+- Not identified: The best candidate scored only 0.6, which is not sure enough to price.
 - 100% copper -> not proven remotely. Agent opens the side cover and inspects the windings.
 - Electric and recoil starter -> not proven remotely. Agent will confirm at pickup.
 - Circuit Breaker (Protects the generator and your appliances) -> not proven remotely. Agent will confirm at pickup.

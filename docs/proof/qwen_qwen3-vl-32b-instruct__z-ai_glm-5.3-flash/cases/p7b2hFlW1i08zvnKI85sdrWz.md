@@ -1,17 +1,17 @@
 # Case p7b2hFlW1i08zvnKI85sdrWz
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0007  |  30773 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  23473 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: phone (confidence 1.0)
 - Made of: plastic 60%, circuit_board 20%, steel 10%, glass 10%
-- Estimated weight: 0.15 kg (confidence 0.9)
+- Estimated weight: 0.18 kg (confidence 0.9)
 - Brand read off the item: vivo
 - Model read off the item: V15
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: cracks on screen, screen has scratches
+- Damage noted: cracks on screen, screen has visible damage
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 - Text read: vivo | V15 | POSTED ON SHAEL TECH GLOBAL
@@ -19,6 +19,7 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 ## Two readers
 - brand_text agreed by both readers
 - model_text agreed by both readers
+- item_type agreed by both readers
 
 ## OCR read off the photos
 - vivo
@@ -27,17 +28,17 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 3 lines: vivo | V15 | SHAEL TECH GLOBAL
-- **corroborate** -> agree. brand_text agreed by both readers; model_text agreed by both readers
+- **corroborate** -> agree. brand_text agreed by both readers; model_text agreed by both readers; item_type agreed by both readers
 - **read_evidence** -> ok. category=phone brand=vivo model=V15 label=False lines=3
 - **retrieval** -> ok. query='vivo V15 vivo V15 POSTED ON SHAEL TECH GLOBAL Display: 6.53-inch IPS LCD, 1080 x 2340 pixe' hits=['Vivo Y27', 'Tecno Pova 6']
 - **identify** -> label. named from the label: vivo V15, not in the catalogue
 - **abstain** -> pass. confidence=0.77 from the label
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 4249 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 22175 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 4349 ms (replayed)
-- total across calls: 30773 ms; wall clock: 556 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 6057 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 14463 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2953 ms (replayed)
+- total across calls: 23473 ms; wall clock: 1857 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -88,7 +89,7 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
-**NO_PRICE_DATA.** Only 0 comparable asking prices were found and there is no published band for this category, so no honest range can be produced. Nothing below the 40 NGN floor.
+**NO_PRICE_DATA.** Only 0 comparable asking prices were found and there is no published band for this category, so no honest range can be produced. Nothing below the 48 NGN floor.
 
 Conditions attached to this price:
 - Display: 6.53-inch IPS LCD, 1080 x 2340 pixels -> not proven remotely. Agent will confirm at pickup.

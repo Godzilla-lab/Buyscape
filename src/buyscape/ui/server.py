@@ -47,11 +47,11 @@ SAFE_NAME = re.compile(r"[^A-Za-z0-9._-]+")
 STAFF_GETS = {"meta", "runs", "testset"}
 
 
-def _live_comps(model_key: str, category: str) -> list[dict]:
-    """Used listings for this model, fetched from Jiji right now."""
+def _live_comps(query: str, category: str, pages: int = 2, used: bool = True) -> list[dict]:
+    """Listings for this model or kind of thing, fetched from Jiji right now."""
     from ..evalset import jiji
 
-    return [l.to_json() for l in jiji.search_used(model_key, category)]
+    return [l.to_json() for l in jiji.search_used(query, category, max_pages=pages, limit=20 * pages, used=used)]
 
 
 class Engine:

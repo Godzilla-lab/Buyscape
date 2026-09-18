@@ -1,26 +1,27 @@
 # Case oQBJS6OOE3PiyhnNlndH0gFN
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  28039 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0013  |  41054 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: generator (confidence 0.95)
-- Made of: steel 60%, plastic 25%, copper_insulated 10%, rubber 5%
-- Estimated weight: 35.0 kg (confidence 0.8)
+- Made of: steel 60%, plastic 30%, circuit_board 5%, rubber 5%
+- Estimated weight: 25.0 kg (confidence 0.8)
 - Brand read off the item: FIRMAN
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: some dust and grime on surface, minor scuffs on casing, no visible damage to engine or frame
+- Damage noted: minor surface dirt, some scratches on casing, exposed engine components show signs of use
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 - Text read: FIRMAN
 
 ## Two readers
 - brand_text agreed by both readers
+- item_type agreed by both readers
 - model_text differed between the two readers, so it is treated as unread
 - rating_text differed between the two readers, so it is treated as unread
-- 5 transcribed lines was seen by only one reader, so it is treated as unread
+- 4 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
 - MAAN
@@ -31,18 +32,18 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 5 lines: MAAN | KIRMAN | FPG15000SE | 14.5A RED | 15.0
-- **corroborate** -> dispute. brand_text agreed by both readers; model_text differed between the two readers, so it is treated as unread; rating_text differed between the two readers, so it is treated as unread; 5 transcribed lines was seen by only one reader, so it is treated as unread
+- **corroborate** -> dispute. brand_text agreed by both readers; item_type agreed by both readers; model_text differed between the two readers, so it is treated as unread; rating_text differed between the two readers, so it is treated as unread; 4 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=generator brand=FIRMAN model=None label=True lines=1
 - **retrieval** -> ok. query='FIRMAN FIRMAN Brand New complete 15kva Firman petrol generator 2 cylinder engine with warr' hits=['Sumec Firman SPG2900 2.8kVA', 'Sumec Firman SPG3000 3.1kVA', 'Thermocool TC2700 2.5kVA', 'Haier Thermocool HTG2700 2.5kVA', 'Sumec Firman ECO8990ES 6.5kVA']
-- **identify** -> ok. chosen=FIRMAN FPG15000DSE margin=0.85
+- **identify** -> ok. chosen=Firman FPG15000DSE margin=0.7
 - **abstain** -> abstain. seller names another generation
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 5649 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 9415 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 9140 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 3835 ms (replayed)
-- total across calls: 28039 ms; wall clock: 335 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5549 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 19769 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 10936 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 4800 ms (replayed)
+- total across calls: 41054 ms; wall clock: 1396 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -55,15 +56,15 @@ Shortlist from the catalogue:
 **Not identified: EVIDENCE_INCOMPLETE.** The answer names fpg15000dse, which appears nowhere on the item or in the seller's words. A photo of the plate would confirm or correct it.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 57% on the best answer. It is probably a FIRMAN FPG15000DSE or a Sumec Firman ECO8990ES, and the photos cannot separate them.**
+**Not sure enough to price: 48% on the best answer. It is probably a Firman FPG15000DSE or a Sumec Firman ECO8990ES, and the photos cannot separate them.**
 
-- Identification confidence: 57% (unsure)
+- Identification confidence: 48% (unsure)
 - Price confidence: 14%
-- It is weighing: FIRMAN FPG15000DSE (0.95), Sumec Firman ECO8990ES (0.1)
+- It is weighing: Firman FPG15000DSE (0.8), Sumec Firman ECO8990ES (0.1)
 - The answer names fpg15000dse, which appears nowhere on the item or in the seller's words. A photo of the plate would confirm or correct it.
 - read off the item's own label
 - 1 lines seen by both readers
-- 11 claims are still unproven, 0 are supported
+- 12 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
 
@@ -81,12 +82,12 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 - When was it last serviced, and what was done?
 
 ## Claims
-- [unverified] Brand New complete 15kva Firman petrol generator
+- [unverifiable_remote] Brand New
+- [unverified] complete 15kva Firman petrol generator
     priced as: the smallest rating in this brand's range. Agent reads the rating plate
-- [unverifiable_remote] 2 cylinder engine
+- [unverifiable_remote] Firman petrol generator
 - [unverifiable_remote] petrol generator
-- [unverified] 15kva
-    priced as: the smallest rating in this brand's range. Agent reads the rating plate
+- [unverifiable_remote] 2 cylinder engine
 - [unverifiable_remote] with warranty two years
 - [unverifiable_remote] key start
 - [unverified] Required evidence 'code_shot' was not supplied
@@ -101,18 +102,19 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Photo of the engine, showing the recoil starter and carburettor.
 
 ## Price
-**9,204 to 24,850 NGN** (priced as material, width 0.9188, method material_floor, 0 comparable prices)
+**4,502 to 11,725 NGN** (priced as material, width 0.8901, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 35 kg of steel 60%, plastic 25%, copper_insulated 10%, rubber 5% (rates for plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 25 kg of steel 60%, plastic 30%, circuit_board 5%, rubber 5% (rates for plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 20,212 NGN
+Scrap floor: 9,312 NGN
 
 Conditions attached to this price:
 - Not identified: The answer names fpg15000dse, which appears nowhere on the item or in the seller's words. A photo of the plate would confirm or correct it.
-- Brand New complete 15kva Firman petrol generator -> not proven remotely. Agent reads the rating plate.
-- 2 cylinder engine -> not proven remotely. Agent will confirm at pickup.
+- Brand New -> not proven remotely. Agent will confirm at pickup.
+- complete 15kva Firman petrol generator -> not proven remotely. Agent reads the rating plate.
+- Firman petrol generator -> not proven remotely. Agent will confirm at pickup.
 - petrol generator -> not proven remotely. Agent will confirm at pickup.
-- 15kva -> not proven remotely. Agent reads the rating plate.
+- 2 cylinder engine -> not proven remotely. Agent will confirm at pickup.
 - with warranty two years -> not proven remotely. Agent will confirm at pickup.
 - key start -> not proven remotely. Agent will confirm at pickup.
 - Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on paper and photograph it next to the generator..

@@ -1,10 +1,10 @@
 # Case 1Capt0NBJ5xEX7E5lW9wLil3
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  31468 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0014  |  44328 ms
 
 ## What the engine saw
 - Presentation: sealed_new
-- Category: smartphone (confidence 0.95)
+- Category: phone (confidence 0.95)
 - Made of: paper 80%, plastic 20%
 - Estimated weight: 0.5 kg (confidence 0.8)
 - Brand read off the item: Samsung
@@ -14,11 +14,12 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Damage noted: none
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
-- Text read: 24 MONTH WARRANTY | Galaxy S21+ 5G | Samsung
+- Text read: 24 MONTH WARRANTY | S21+ | Galaxy S21+ 5G | Samsung
 
 ## Two readers
 - brand_text agreed by both readers
 - model_text agreed by both readers
+- item_type agreed by both readers
 
 ## OCR read off the photos
 - 24
@@ -28,19 +29,19 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 4 lines: 24 | WARRANTY | MONTH | Galaxy S21+5G
-- **corroborate** -> agree. brand_text agreed by both readers; model_text agreed by both readers
-- **read_evidence** -> ok. category=smartphone brand=Samsung model=Galaxy S21+ 5G label=False lines=3
+- **corroborate** -> agree. brand_text agreed by both readers; model_text agreed by both readers; item_type agreed by both readers
+- **read_evidence** -> ok. category=phone brand=Samsung model=Galaxy S21+ 5G label=False lines=4
 - **forensics** -> flag. looks like a catalogue or stock image
-- **retrieval** -> ok. query='Samsung Galaxy S21+ 5G 24 MONTH WARRANTY Galaxy S21+ 5G Samsung Brand new samsung galaxy S' hits=['Samsung Galaxy S21', 'Samsung Galaxy S22', 'Samsung Galaxy S23', 'Samsung Galaxy S24', 'Samsung Galaxy S25']
-- **identify** -> ok. chosen=Samsung Galaxy S21+ 5G margin=0.75
-- **abstain** -> abstain. confidence 0.4: no label, plate or settings screen was legible; 2 lines seen by both readers; looks like a catalogue or stock image
+- **retrieval** -> ok. query='Samsung Galaxy S21+ 5G 24 MONTH WARRANTY S21+ Galaxy S21+ 5G Samsung Brand new samsung gal' hits=['Samsung Galaxy S21', 'Samsung Galaxy S22', 'Samsung Galaxy S23', 'Samsung Galaxy S24', 'Samsung Galaxy S25']
+- **identify** -> ok. chosen=Samsung Galaxy S21+ 5G margin=0.7
+- **abstain** -> abstain. confidence 0.4: no label, plate or settings screen was legible; 3 lines seen by both readers; looks like a catalogue or stock image
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 3994 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 17568 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 6896 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 3010 ms (replayed)
-- total across calls: 31468 ms; wall clock: 801 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5853 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 16330 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 14631 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 7514 ms (replayed)
+- total across calls: 44328 ms; wall clock: 2174 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -59,10 +60,10 @@ Evidence flags: looks like a catalogue or stock image
 
 - Identification confidence: 24% (unknown)
 - Price confidence: 16%
-- It is weighing: Samsung Galaxy S21+ 5G (0.95), Samsung Galaxy S21 (0.2)
+- It is weighing: Samsung Galaxy S21+ 5G (0.95), Samsung Galaxy S21 (0.25)
 - The evidence only supports this answer at 40 percent, which is a guess. One clear photo of the label would settle it.
 - no label, plate or settings screen was legible
-- 2 lines seen by both readers
+- 3 lines seen by both readers
 - looks like a catalogue or stock image
 - 9 claims are still unproven, 0 are supported
 

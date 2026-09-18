@@ -1,22 +1,24 @@
 # Case l34llt0PzNt3Oidv72IM1gr7
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  70276 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  69020 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: laptop (confidence 0.95)
-- Made of: plastic 60%, steel 20%, circuit_board 10%, aluminium 10%
+- Made of: plastic 70%, steel 20%, circuit_board 10%
 - Estimated weight: 2.5 kg (confidence 0.8)
-- Brand read off the item: nothing legible
+- Brand read off the item: COMPAQ
 - Model read off the item: nothing legible
 - Rating read: none
-- Label, plate or settings screen legible: yes
-- Damage noted: screen is reflective and shows room reflections, keyboard appears clean, no visible dents or cracks on casing
+- Label, plate or settings screen legible: no
+- Damage noted: screen reflects surroundings, no visible cracks, keyboard appears clean, no missing keys, silver palm rest shows minor scuffs, no obvious damage to casing
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
+- Text read: COMPAQ
 
 ## Two readers
-- brand_text differed between the two readers, so it is treated as unread
+- brand_text agreed by both readers
+- item_type agreed by both readers
 - 6 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
@@ -24,22 +26,22 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 1 lines: HOMH
-- **corroborate** -> dispute. brand_text differed between the two readers, so it is treated as unread; 6 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=laptop brand=None model=None label=True lines=0
-- **retrieval** -> ok. query='Hp Compaq Cq60
+- **corroborate** -> dispute. brand_text agreed by both readers; item_type agreed by both readers; 6 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=laptop brand=COMPAQ model=None label=False lines=1
+- **retrieval** -> ok. query='COMPAQ COMPAQ Hp Compaq Cq60
 Dual core 
 4GB RAM 
 320GB HDD
 Windows 8' hits=['HP 2000', 'HP 250 G7', 'HP Pavilion 15', 'HP EliteBook 840 G5', 'HP EliteBook 840 G6']
-- **identify** -> ok. chosen=Compaq Presario CQ60 margin=0.5
-- **abstain** -> abstain. top score 0.65
+- **identify** -> refused. chosen=COMPAQ None margin=None
+- **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 7541 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 14094 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 45027 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 3614 ms (replayed)
-- total across calls: 70276 ms; wall clock: 190 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 17663 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 29663 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 13526 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 8168 ms (replayed)
+- total across calls: 69020 ms; wall clock: 3299 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -49,17 +51,16 @@ Shortlist from the catalogue:
   - HP EliteBook 840 G5 (0.3)
   - HP EliteBook 840 G6 (0.3)
 
-**Not identified: CANNOT_IDENTIFY.** The best candidate scored only 0.65, which is not sure enough to price.
+**Not identified: CANNOT_IDENTIFY.** Bezel reads COMPAQ only; no model marking legible and shortlist contains no Compaq entry. Seller's 'CQ60' claim is unverified by any visible label.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 31% on the best answer. It is probably a Compaq Presario CQ60 or a HP 2000, and the photos cannot separate them.**
+**0%: the photos do not say what this is.**
 
-- Identification confidence: 31% (unknown)
+- Identification confidence: 0% (unknown)
 - Price confidence: 16%
-- It is weighing: Compaq Presario CQ60 (0.65), HP 2000 (0.15)
-- The best candidate scored only 0.65, which is not sure enough to price.
-- read off the item's own label
-- the two readers agreed on nothing legible
+- Bezel reads COMPAQ only; no model marking legible and shortlist contains no Compaq entry. Seller's 'CQ60' claim is unverified by any visible label.
+- no label, plate or settings screen was legible
+- 1 lines seen by both readers
 - 9 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -98,12 +99,12 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 ## Price
 **5,000 to 5,000 NGN** (priced as material, width 0.0, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 2.5 kg of plastic 60%, steel 20%, circuit_board 10%, aluminium 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 2.5 kg of plastic 70%, steel 20%, circuit_board 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 1,100 NGN
+Scrap floor: 625 NGN
 
 Conditions attached to this price:
-- Not identified: The best candidate scored only 0.65, which is not sure enough to price.
+- Not identified: Bezel reads COMPAQ only; no model marking legible and shortlist contains no Compaq entry. Seller's 'CQ60' claim is unverified by any visible label.
 - Raised to the 5,000 NGN minimum this business publishes for this kind of item.
 - Hp Compaq Cq60 -> not proven remotely. Agent will confirm at pickup.
 - Dual core -> not proven remotely. Agent will confirm at pickup.

@@ -1,27 +1,28 @@
 # Case u3zIvWmvk6hYeB72X2VJugas
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0013  |  41067 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0013  |  43607 ms
 
 ## What the engine saw
 - Presentation: single_unit
-- Category: generator (confidence 0.95)
-- Made of: plastic 60%, steel 30%, copper 10%
-- Estimated weight: 12.0 kg (confidence 0.8)
+- Category: generator (confidence 0.9)
+- Made of: plastic 60%, steel 30%, circuit_board 10%
+- Estimated weight: 15.0 kg (confidence 0.7)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
-- Rating read: 3000W MAX / 2000W CONTINUOUS
+- Rating read: 2000W
 - Label, plate or settings screen legible: yes
-- Damage noted: minor scuffs on plastic casing, no visible dents or cracks, handles appear intact
+- Damage noted: minor scuff marks on plastic casing, no visible damage to engine or control panel
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: 2000W | OUTPUT: 3000W MAX / 2000W CONTINUOUS | FUEL TYPE: GASOLINE OR PROPANE | ENGINE: 4-STROKE, AIR-COOLED
+- Text read: 2000W | OUTPUT: 120V AC 60Hz 2000W
 
 ## Two readers
 - rating_text agreed by both readers
+- item_type agreed by both readers
 - brand_text differed between the two readers, so it is treated as unread
 - model_text was seen by only one reader, so it is treated as unread
 - serial_text was seen by only one reader, so it is treated as unread
-- 15 transcribed lines was seen by only one reader, so it is treated as unread
+- 14 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
 - VULTIPLE
@@ -29,18 +30,18 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 2 lines: VULTIPLE | 1
-- **corroborate** -> dispute. rating_text agreed by both readers; brand_text differed between the two readers, so it is treated as unread; model_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 15 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=generator brand=None model=None label=True lines=4
-- **retrieval** -> ok. query='3000W MAX / 2000W CONTINUOUS 2000W OUTPUT: 3000W MAX / 2000W CONTINUOUS FUEL TYPE: GASOLIN' hits=['Lutian LT3900 3.5kVA', 'Senwei SW3500 3.5kVA', 'Thermocool TC2700 2.5kVA', 'Haier Thermocool HTG2700 2.5kVA', 'Kemage KM6500 5.5kVA']
-- **identify** -> refused. chosen=Bison None margin=0.0
+- **corroborate** -> dispute. rating_text agreed by both readers; item_type agreed by both readers; brand_text differed between the two readers, so it is treated as unread; model_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 14 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=generator brand=None model=None label=True lines=2
+- **retrieval** -> ok. query='2000W 2000W OUTPUT: 120V AC 60Hz 2000W Enjoy quiet and stable power with this bison 3.5KVA' hits=['Lutian LT3900 3.5kVA', 'Senwei SW3500 3.5kVA', 'Thermocool TC2700 2.5kVA', 'Haier Thermocool HTG2700 2.5kVA', 'Kemage KM6500 5.5kVA']
+- **identify** -> refused. chosen=None None margin=0.05
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 9028 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 11539 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 18697 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 1803 ms (replayed)
-- total across calls: 41067 ms; wall clock: 455 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 7883 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 11090 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 22448 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2186 ms (replayed)
+- total across calls: 43607 ms; wall clock: 1579 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -50,18 +51,18 @@ Shortlist from the catalogue:
   - Haier Thermocool HTG2700 2.5kVA (0.1833)
   - Kemage KM6500 5.5kVA (0.15)
 
-**Not identified: CANNOT_IDENTIFY.** Body shows BISON branding, but no model number is legible; all shortlist entries are different brands and their power ratings contradict the 3000W max / 2000W continuous label. Seller's 3.5kVA claim conflicts with the plate.
+**Not identified: CANNOT_IDENTIFY.** Plate clearly reads 2000W 120V inverter; no brand text legible and no shortlist entry is a 2000W inverter. Seller's 'bison 3.5KVA' contradicts the printed rating.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 3% on the best answer. It is probably a Lutian LT3900 3.5kVA or a Senwei SW3500 3.5kVA, and the photos cannot separate them.**
+**Not sure enough to price: 8% on the best answer. It is probably a Thermocool TC2700 2.5kVA or a Haier Thermocool HTG2700 2.5kVA, and the photos cannot separate them.**
 
-- Identification confidence: 3% (unknown)
+- Identification confidence: 8% (unknown)
 - Price confidence: 20%
-- It is weighing: Lutian LT3900 3.5kVA (0.05), Senwei SW3500 3.5kVA (0.05)
-- Body shows BISON branding, but no model number is legible; all shortlist entries are different brands and their power ratings contradict the 3000W max / 2000W continuous label. Seller's 3.5kVA claim conflicts with the plate.
+- It is weighing: Thermocool TC2700 2.5kVA (0.15), Haier Thermocool HTG2700 2.5kVA (0.1)
+- Plate clearly reads 2000W 120V inverter; no brand text legible and no shortlist entry is a 2000W inverter. Seller's 'bison 3.5KVA' contradicts the printed rating.
 - read off the item's own label
-- 4 lines seen by both readers
-- the next candidate was only 0.0 behind
+- 2 lines seen by both readers
+- the next candidate was only 0.05 behind
 - 7 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -95,14 +96,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Photo of the engine, showing the recoil starter and carburettor.
 
 ## Price
-**9,072 to 19,056 NGN** (priced as material, width 0.7099, method material_floor, 0 comparable prices)
+**2,717 to 5,820 NGN** (priced as material, width 0.7267, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 12 kg of plastic 60%, steel 30%, copper 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 15 kg of plastic 60%, steel 30%, circuit_board 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 14,520 NGN
+Scrap floor: 4,350 NGN
 
 Conditions attached to this price:
-- Not identified: Body shows BISON branding, but no model number is legible; all shortlist entries are different brands and their power ratings contradict the 3000W max / 2000W continuous label. Seller's 3.5kVA claim conflicts with the plate.
+- Not identified: Plate clearly reads 2000W 120V inverter; no brand text legible and no shortlist entry is a 2000W inverter. Seller's 'bison 3.5KVA' contradicts the printed rating.
 - This is a bison 3.5KVA inverter generator. -> not proven remotely. Agent reads the rating plate.
 - The generator is suitable for home use. -> not proven remotely. Agent will confirm at pickup.
 - Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on paper and photograph it next to the generator..

@@ -1,10 +1,10 @@
 # Case 44TRC9nS6lBqb7fDQC2peZ03
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  19009 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  35596 ms
 
 ## What the engine saw
 - Presentation: sealed_new
-- Category: washing machine (confidence 0.9)
+- Category: washing machine (confidence 0.95)
 - Made of: carton 80%, plastic 20%
 - Estimated weight: 35.0 kg (confidence 0.7)
 - Brand read off the item: Hisense
@@ -18,6 +18,7 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Two readers
 - brand_text agreed by both readers
+- item_type agreed by both readers
 - rating_text differed between the two readers, so it is treated as unread
 - 6 transcribed lines was seen by only one reader, so it is treated as unread
 
@@ -33,7 +34,7 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 8 lines: Hisense | Max 800 | 2 | Washing Machine | RMAMARA | ICLOBALHUBS | Clean | Bubble
-- **corroborate** -> dispute. brand_text agreed by both readers; rating_text differed between the two readers, so it is treated as unread; 6 transcribed lines was seen by only one reader, so it is treated as unread
+- **corroborate** -> dispute. brand_text agreed by both readers; item_type agreed by both readers; rating_text differed between the two readers, so it is treated as unread; 6 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=washing machine brand=Hisense model=None label=True lines=3
 - **retrieval** -> ok. query='Hisense Hisense Washing Machine Bubble Clean Hisense 9kg Automatic Washing Machine
 
@@ -42,11 +43,11 @@ Make l' hits=['Hisense WT3K9022U 9kg top loader', 'Hisense WTJA801 8kg top loade
 - **abstain** -> abstain. top score 0.6
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 4790 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 6079 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 5600 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 2540 ms (replayed)
-- total across calls: 19009 ms; wall clock: 579 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5819 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 10170 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 17141 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2466 ms (replayed)
+- total across calls: 35596 ms; wall clock: 1753 ms
 
 ## Identification
 Shortlist from the catalogue:

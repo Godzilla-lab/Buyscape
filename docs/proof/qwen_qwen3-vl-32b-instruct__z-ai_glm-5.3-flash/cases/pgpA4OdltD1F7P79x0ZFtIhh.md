@@ -1,12 +1,12 @@
 # Case pgpA4OdltD1F7P79x0ZFtIhh
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  35305 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  30797 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: laptop (confidence 0.95)
-- Made of: plastic 40%, steel 30%, circuit_board 15%, aluminium 10%, glass 5%
-- Estimated weight: 1.2 kg (confidence 0.8)
+- Made of: plastic 40%, steel 30%, circuit_board 15%, aluminium 10%, rubber 5%
+- Estimated weight: 1.5 kg (confidence 0.8)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
@@ -15,24 +15,27 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
 
+## Two readers
+- item_type agreed by both readers
+
 ## Chain
 - **ocr** -> ok. 0 lines: 
-- **corroborate** -> agree. nothing identifying was read by either
+- **corroborate** -> agree. item_type agreed by both readers
 - **read_evidence** -> ok. category=laptop brand=None model=None label=False lines=0
 - **forensics** -> flag. looks like a catalogue or stock image
 - **retrieval** -> ok. query='Hp Zbook firefly 14 G8 mobile workstation
 14 inches display 
 Core i7-1185G7
 11th Generatio' hits=['HP 2000', 'HP 250 G7', 'HP Pavilion 15', 'HP EliteBook 840 G5', 'HP EliteBook 840 G6']
-- **identify** -> refused. chosen=None None margin=0.05
+- **identify** -> refused. chosen=None None margin=0.15
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 5038 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 7474 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 18915 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 3878 ms (replayed)
-- total across calls: 35305 ms; wall clock: 141 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 6162 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 8161 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 12385 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 4089 ms (replayed)
+- total across calls: 30797 ms; wall clock: 1183 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -42,20 +45,20 @@ Shortlist from the catalogue:
   - HP EliteBook 840 G5 (0.3)
   - HP EliteBook 840 G6 (0.3)
 
-**Not identified: CANNOT_IDENTIFY.** No label or text is legible, so the seller's claim of a ZBook Firefly 14 G8 cannot be verified; that model is also absent from the shortlist, and the shortlist options do not match it. Model lines like EliteBook G5/G6 vs ZBook Firefly look alike without readable markings.
+**Not identified: CANNOT_IDENTIFY.** No label or plate is legible; seller's stated ZBook Firefly 14 G8 is not on the shortlist and cannot be visually confirmed against lookalike EliteBooks.
 
 Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 5% on the best answer. It is probably a HP EliteBook 840 G6 or a HP EliteBook 840 G5, and the photos cannot separate them.**
+**Not sure enough to price: 5% on the best answer. It is probably a HP ZBook Firefly 14 G8 or a HP EliteBook 840 G6, and the photos cannot separate them.**
 
 - Identification confidence: 5% (unknown)
 - Price confidence: 16%
-- It is weighing: HP EliteBook 840 G6 (0.3), HP EliteBook 840 G5 (0.25)
-- No label or text is legible, so the seller's claim of a ZBook Firefly 14 G8 cannot be verified; that model is also absent from the shortlist, and the shortlist options do not match it. Model lines like EliteBook G5/G6 vs ZBook Firefly look alike without readable markings.
+- It is weighing: HP ZBook Firefly 14 G8 (0.3), HP EliteBook 840 G6 (0.15)
+- No label or plate is legible; seller's stated ZBook Firefly 14 G8 is not on the shortlist and cannot be visually confirmed against lookalike EliteBooks.
 - no label, plate or settings screen was legible
 - the two readers agreed on nothing legible
-- the next candidate was only 0.05 behind
+- the next candidate was only 0.15 behind
 - looks like a catalogue or stock image
 - 9 claims are still unproven, 0 are supported
 
@@ -95,12 +98,12 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 ## Price
 **5,000 to 5,000 NGN** (priced as material, width 0.0, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 1.2 kg of plastic 40%, steel 30%, circuit_board 15%, aluminium 10%, glass 5% (rates for glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 1.5 kg of plastic 40%, steel 30%, circuit_board 15%, aluminium 10%, rubber 5% (rates for plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 613 NGN
+Scrap floor: 768 NGN
 
 Conditions attached to this price:
-- Not identified: No label or text is legible, so the seller's claim of a ZBook Firefly 14 G8 cannot be verified; that model is also absent from the shortlist, and the shortlist options do not match it. Model lines like EliteBook G5/G6 vs ZBook Firefly look alike without readable markings.
+- Not identified: No label or plate is legible; seller's stated ZBook Firefly 14 G8 is not on the shortlist and cannot be visually confirmed against lookalike EliteBooks.
 - Evidence flag: looks like a catalogue or stock image
 - Raised to the 5,000 NGN minimum this business publishes for this kind of item.
 - Hp Zbook firefly 14 G8 mobile workstation -> not proven remotely. Agent boots it, types on every row of keys and tests the charger port.

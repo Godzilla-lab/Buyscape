@@ -23,7 +23,7 @@ def _row(i: int, title: str, price_ngn: int, category: str = "laptop") -> dict:
 def test_a_model_the_cache_lacks_is_fetched_live_once_and_remembered(tmp_path):
     calls: list[tuple[str, str]] = []
 
-    def live(key, category):
+    def live(key, category, pages=2, used=True):
         calls.append((key, category))
         return [_row(1, "Apple MacBook Air M2 2022 16GB 256GB", 720000),
                 _row(2, "MacBook Air M2 13 inch 2022 used", 650000),
@@ -44,7 +44,7 @@ def test_a_model_the_cache_lacks_is_fetched_live_once_and_remembered(tmp_path):
 def test_a_market_outage_is_one_failed_call_not_one_per_case(tmp_path):
     calls = []
 
-    def down(key, category):
+    def down(key, category, pages=2, used=True):
         calls.append(key)
         raise ConnectionError("jiji unreachable")
 
@@ -107,7 +107,7 @@ def test_a_thin_cache_is_topped_up_from_the_live_market_and_dedupes(tmp_path):
     (tmp_path / "laptop.json").write_text(json.dumps([_row(1, "Apple MacBook Air M2 2022 8GB", 800000)]))
     calls = []
 
-    def live(key, category):
+    def live(key, category, pages=2, used=True):
         calls.append(key)
         return [_row(1, "Apple MacBook Air M2 2022 8GB", 800000), _row(9, "MacBook Air M2 2022 16GB", 950000)]
 

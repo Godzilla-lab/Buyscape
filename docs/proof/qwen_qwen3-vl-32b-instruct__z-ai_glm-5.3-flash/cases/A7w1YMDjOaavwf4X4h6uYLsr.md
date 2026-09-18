@@ -1,45 +1,45 @@
 # Case A7w1YMDjOaavwf4X4h6uYLsr
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0014  |  58057 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0026  |  38420 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: generator (confidence 0.95)
-- Made of: steel 40%, plastic 30%, copper 15%, rubber 10%, mixed_electronic 5%
+- Made of: steel 40%, plastic 30%, copper_bare 10%, rubber 10%, mixed_electronic 10%
 - Estimated weight: 25.0 kg (confidence 0.7)
 - Brand read off the item: FIRMAN
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: Minor dirt and grime on surface, Red frame shows slight scratches, Tires appear worn but intact, Control panel is clean and undamaged
+- Damage noted: some dust and grime on surface, minor scuffs on plastic casing, wheels appear intact but slightly dirty
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: FIRMAN | VOLTAGE: 120V / 240V | CARBURETOR: FLOAT TYPE | WARNING: READ INSTRUCTIONS BEFORE USE
+- Text read: FIRMAN | VOLTAGE: 120V / 240V
 
 ## Two readers
 - brand_text agreed by both readers
+- item_type agreed by both readers
 - model_text differed between the two readers, so it is treated as unread
 - rating_text differed between the two readers, so it is treated as unread
-- serial_text was seen by only one reader, so it is treated as unread
-- 19 transcribed lines was seen by only one reader, so it is treated as unread
+- 16 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
 - FIRMAN
 
 ## Chain
 - **ocr** -> ok. 1 lines: FIRMAN
-- **corroborate** -> dispute. brand_text agreed by both readers; model_text differed between the two readers, so it is treated as unread; rating_text differed between the two readers, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 19 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=generator brand=FIRMAN model=None label=True lines=4
-- **retrieval** -> ok. query='FIRMAN FIRMAN VOLTAGE: 120V / 240V CARBURETOR: FLOAT TYPE WARNING: READ INSTRUCTIONS BEFOR' hits=['Sumec Firman SPG2900 2.8kVA', 'Sumec Firman SPG3000 3.1kVA', 'Sumec Firman ECO8990ES 6.5kVA', 'Sumec Firman SPG8800 8.1kVA', 'Maxmech MX10000 10kVA']
-- **identify** -> refused. chosen=None None margin=0.1
+- **corroborate** -> dispute. brand_text agreed by both readers; item_type agreed by both readers; model_text differed between the two readers, so it is treated as unread; rating_text differed between the two readers, so it is treated as unread; 16 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=generator brand=FIRMAN model=None label=True lines=2
+- **retrieval** -> ok. query='FIRMAN FIRMAN VOLTAGE: 120V / 240V Original SUMEC FIRMAN Petrol Generator Eco12990es 10kva' hits=['Sumec Firman SPG2900 2.8kVA', 'Sumec Firman SPG3000 3.1kVA', 'Sumec Firman ECO8990ES 6.5kVA', 'Sumec Firman SPG8800 8.1kVA', 'Maxmech MX10000 10kVA']
+- **identify** -> refused. chosen=None None margin=0.15
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 10228 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 5057 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 39206 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 3566 ms (replayed)
-- total across calls: 58057 ms; wall clock: 296 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 8738 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 10304 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 14597 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 4781 ms (replayed)
+- total across calls: 38420 ms; wall clock: 1522 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -49,19 +49,19 @@ Shortlist from the catalogue:
   - Sumec Firman SPG8800 8.1kVA (0.3)
   - Maxmech MX10000 10kVA (0.2333)
 
-**Not identified: CANNOT_IDENTIFY.** Label shows only FIRMAN and voltage; no model marking legible. Seller claims ECO12990ES 10kVA, which is not on the shortlist and is not printed on the item, so it cannot be confirmed. Shortlist ECO8990ES is 6.5kVA, conflicting with the seller's stated 10kVA.
+**Not identified: CANNOT_IDENTIFY.** Label legibly shows only FIRMAN and voltage; seller claims ECO12990ES 10kVA which is absent from shortlist and not readable on the item itself.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 22% on the best answer. It is probably a Sumec Firman ECO8990ES or a Sumec Firman SPG8800, and the photos cannot separate them.**
+**Not sure enough to price: 19% on the best answer. It is probably a Sumec Firman ECO8990ES or a Sumec Firman SPG8800, and the photos cannot separate them.**
 
-- Identification confidence: 22% (unknown)
+- Identification confidence: 19% (unknown)
 - Price confidence: 14%
-- It is weighing: Sumec Firman ECO8990ES (0.4), Sumec Firman SPG8800 (0.3)
-- Label shows only FIRMAN and voltage; no model marking legible. Seller claims ECO12990ES 10kVA, which is not on the shortlist and is not printed on the item, so it cannot be confirmed. Shortlist ECO8990ES is 6.5kVA, conflicting with the seller's stated 10kVA.
+- It is weighing: Sumec Firman ECO8990ES (0.35), Sumec Firman SPG8800 (0.2)
+- Label legibly shows only FIRMAN and voltage; seller claims ECO12990ES 10kVA which is absent from shortlist and not readable on the item itself.
 - read off the item's own label
-- 4 lines seen by both readers
-- the next candidate was only 0.1 behind
-- 10 claims are still unproven, 0 are supported
+- 2 lines seen by both readers
+- the next candidate was only 0.15 behind
+- 11 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
 
@@ -81,7 +81,9 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 ## Claims
 - [unverified] Original SUMEC FIRMAN Petrol Generator Eco12990es 10kva
     priced as: the smallest rating in this brand's range. Agent reads the rating plate
-- [unverified] 10kva
+- [unverified] Original SUMEC FIRMAN Petrol Generator Eco12990es 10kva
+    priced as: the smallest rating in this brand's range. Agent reads the rating plate
+- [unverified] Original SUMEC FIRMAN Petrol Generator Eco12990es 10kva
     priced as: the smallest rating in this brand's range. Agent reads the rating plate
 - [unverifiable_remote] 100% copper
     priced as: assumed aluminium windings. Agent opens the side cover and inspects the windings
@@ -99,16 +101,17 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Photo of the engine, showing the recoil starter and carburettor.
 
 ## Price
-**16,744 to 58,225 NGN** (priced as material, width 1.1066, method material_floor, 0 comparable prices)
+**10,492 to 43,850 NGN** (priced as material, width 1.2277, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 25 kg of steel 40%, plastic 30%, copper 15%, rubber 10%, mixed_electronic 5% (rates for mixed_electronic, plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 25 kg of steel 40%, plastic 30%, copper_bare 10%, rubber 10%, mixed_electronic 10% (rates for mixed_electronic, plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 44,250 NGN
+Scrap floor: 32,625 NGN
 
 Conditions attached to this price:
-- Not identified: Label shows only FIRMAN and voltage; no model marking legible. Seller claims ECO12990ES 10kVA, which is not on the shortlist and is not printed on the item, so it cannot be confirmed. Shortlist ECO8990ES is 6.5kVA, conflicting with the seller's stated 10kVA.
+- Not identified: Label legibly shows only FIRMAN and voltage; seller claims ECO12990ES 10kVA which is absent from shortlist and not readable on the item itself.
 - Original SUMEC FIRMAN Petrol Generator Eco12990es 10kva -> not proven remotely. Agent reads the rating plate.
-- 10kva -> not proven remotely. Agent reads the rating plate.
+- Original SUMEC FIRMAN Petrol Generator Eco12990es 10kva -> not proven remotely. Agent reads the rating plate.
+- Original SUMEC FIRMAN Petrol Generator Eco12990es 10kva -> not proven remotely. Agent reads the rating plate.
 - 100% copper -> not proven remotely. Agent opens the side cover and inspects the windings.
 - Key starter -> not proven remotely. Agent will confirm at pickup.
 - With complete... -> not proven remotely. Agent will confirm at pickup.

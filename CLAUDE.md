@@ -15,13 +15,19 @@ per case. Infrastructure starts only after the Phase 0 gate passes.
 
 1. **No per-category classifier.** Identification is a chain: read the item,
    retrieve candidates, rank them with the photos present, abstain by rule.
+   Identity is a brand and model where the item carries one, and its type in
+   a buyer's words ("2 seater sofa") where the protocol says
+   `identity_by_type`: furniture, and anything with no protocol of its own.
+   A sofa is never CANNOT_IDENTIFY for want of a model number.
 2. **Protocols are data.** A new category is a YAML file in `protocols/`,
    never a code change.
 3. **Claims ledger.** Every seller statement is tied to the evidence that would
    prove it. Unproven claims are priced at the worst case and listed as
    conditions on the quote. A lie can never raise the remote price.
 4. **Price by retrieval, never by generation.** Numbers come from observations
-   with a source and a date. The model explains, it never invents.
+   with a source and a date. The model explains, it never invents. When the
+   used market is thin, dealers' new asking prices times the tenant's own
+   `resale_fraction` is still retrieval; a model's "roughly 50,000" is not.
 5. **Calibrated intervals.** Conformal calibration on settled prices once they
    exist. Until then the range is wide and says so.
 6. **The human final price feeds back.** Every settlement is a calibration row.
@@ -98,3 +104,8 @@ replay, and the run says so rather than failing silently.
   the engine. Check this before trusting any accuracy number.
 - Every price must carry a source and a date. If neither exists, return
   `NO_PRICE_DATA`.
+- Jiji's search is literal and returns about twenty adverts per phrasing
+  whatever the page number, so a type is asked for in every spelling the
+  market uses (`MARKET_WORDS` in `pricing/sources.py`): "2 seater sofa",
+  "2 seater couch", "2 seater sofa chair". Sets and titles carrying a number
+  the type does not are not comparables for one piece.

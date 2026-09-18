@@ -1,6 +1,6 @@
 # Case 1-ton-scrap-titanium-nets-required-in-nigeria-and-china
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  21320 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0014  |  43167 ms
 
 ## What the engine saw
 - Presentation: mixed_lot
@@ -11,22 +11,25 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: rusty in places, torn and tangled
+- Damage noted: tangled and crumpled, some rust visible on metal mesh
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 
+## Two readers
+- item_type was read by only one reader, so it is kept but not confirmed
+
 ## Chain
 - **ocr** -> ok. 0 lines: 
-- **corroborate** -> agree. nothing identifying was read by either
+- **corroborate** -> agree. item_type was read by only one reader, so it is kept but not confirmed
 - **read_evidence** -> ok. category=metal mesh scrap brand=None model=None label=False lines=0
 - **gate** -> lot. priced by material, identification skipped
 - **weight** -> stated. 1000 kg from the seller's words
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 3494 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 12155 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 5671 ms (replayed)
-- total across calls: 21320 ms; wall clock: 169 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 14080 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 20172 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 8915 ms (replayed)
+- total across calls: 43167 ms; wall clock: 1516 ms
 
 ## Identification
 No catalogue candidates matched.
@@ -41,7 +44,8 @@ No catalogue candidates matched.
 - This is a mixed lot, so it is priced by material and weight rather than identified.
 - no label, plate or settings screen was legible
 - the two readers agreed on nothing legible
-- 11 claims are still unproven, 0 are supported
+- the item_type was read by only one reader and is not confirmed
+- 13 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
 
@@ -60,13 +64,15 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 ## Claims
 - [unverifiable_remote] The buyer is seeking approximately 1 ton (1000 kg) of scrap titanium nets.
     priced as: 70 percent of the stated weight. Weigh on the scale and photograph the display
-- [unverifiable_remote] The buyer is interested in various forms of scrap titanium netting, including industrial titanium mesh/screening, damaged or offcut titanium nets, and titanium alloy nets.
-- [unverifiable_remote] The condition of the scrap titanium nets can be scrap, damaged, or offcut material.
-- [unverifiable_remote] The buyer is seeking suppliers located in Nigeria and China.
+- [unverifiable_remote] The buyer is interested in various forms of scrap titanium netting, including industrial titanium mesh/screening used in filtration, chemical processing, or aerospace applications.
+- [unverifiable_remote] Damaged or offcut titanium nets are acceptable, regardless of size or shape, as long as they are primarily titanium.
+- [unverifiable_remote] Titanium alloy nets are also acceptable.
 - [unverifiable_remote] Suppliers must be able to provide documentation regarding the material’s origin and composition, if possible.
+- [unverifiable_remote] The buyer is seeking suppliers located in Nigeria and China.
+- [unverifiable_remote] Shipping arrangements from other locations are open for discussion.
 - [unverifiable_remote] Pricing will be negotiated based on the material’s purity, quantity, and condition.
     priced as: assumed mixed, and priced at the cheapest material present. Agent sorts a sample and weighs the contamination
-- [unverifiable_remote] Interested suppliers are requested to provide detailed information about their available scrap titanium nets, including quantity, material composition, condition, location, photographs (if available), and quoted price.
+- [unverifiable_remote] Interested suppliers should provide detailed information about available scrap titanium nets, including quantity, material composition, condition, location, photographs (if available), and quoted price.
 - [unverified] Required evidence 'code_shot' was not supplied
     priced as: priced as if the worst case is true. Write the code {code} on paper and take one photo with the paper next to the pile.
 - [unverified] Required evidence 'whole_pile' was not supplied
@@ -77,7 +83,7 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Hold a fridge magnet against it and photograph it. Say whether the magnet sticks.
 
 ## Price
-**129,696 to 516,000 NGN** (priced as material, width 1.1966, method material_floor, 0 comparable prices)
+**126,000 to 516,000 NGN** (priced as material, width 1.215, method material_floor, 0 comparable prices)
 
 The weight is estimated from the photos, so this price is settled on the scale at pickup.
 
@@ -88,12 +94,14 @@ Scrap floor: 420,000 NGN
 Conditions attached to this price:
 - Not identified: This is a mixed lot, so it is priced by material and weight rather than identified.
 - The buyer is seeking approximately 1 ton (1000 kg) of scrap titanium nets. -> not proven remotely. Weigh on the scale and photograph the display.
-- The buyer is interested in various forms of scrap titanium netting, including industrial titanium mesh/screening, damaged or offcut titanium nets, and titanium alloy nets. -> not proven remotely. Agent will confirm at pickup.
-- The condition of the scrap titanium nets can be scrap, damaged, or offcut material. -> not proven remotely. Agent will confirm at pickup.
-- The buyer is seeking suppliers located in Nigeria and China. -> not proven remotely. Agent will confirm at pickup.
+- The buyer is interested in various forms of scrap titanium netting, including industrial titanium mesh/screening used in filtration, chemical processing, or aerospace applications. -> not proven remotely. Agent will confirm at pickup.
+- Damaged or offcut titanium nets are acceptable, regardless of size or shape, as long as they are primarily titanium. -> not proven remotely. Agent will confirm at pickup.
+- Titanium alloy nets are also acceptable. -> not proven remotely. Agent will confirm at pickup.
 - Suppliers must be able to provide documentation regarding the material’s origin and composition, if possible. -> not proven remotely. Agent will confirm at pickup.
+- The buyer is seeking suppliers located in Nigeria and China. -> not proven remotely. Agent will confirm at pickup.
+- Shipping arrangements from other locations are open for discussion. -> not proven remotely. Agent will confirm at pickup.
 - Pricing will be negotiated based on the material’s purity, quantity, and condition. -> not proven remotely. Agent sorts a sample and weighs the contamination.
-- Interested suppliers are requested to provide detailed information about their available scrap titanium nets, including quantity, material composition, condition, location, photographs (if available), and quoted price. -> not proven remotely. Agent will confirm at pickup.
+- Interested suppliers should provide detailed information about available scrap titanium nets, including quantity, material composition, condition, location, photographs (if available), and quoted price. -> not proven remotely. Agent will confirm at pickup.
 - Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on paper and take one photo with the paper next to the pile..
 - Required evidence 'whole_pile' was not supplied -> not proven remotely. One photo of the whole quantity, with a person or a car in shot so its size is clear..
 - Required evidence 'material_closeup' was not supplied -> not proven remotely. Close-up of the material itself, close enough to see whether it is bare metal, coated, painted or still in its covering..

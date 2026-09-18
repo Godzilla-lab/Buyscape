@@ -1,6 +1,6 @@
 # Case xni20V5boOkoC3uXGrOYp6Ma
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0007  |  16170 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0013  |  29457 ms
 
 ## What the engine saw
 - Presentation: sealed_new
@@ -12,12 +12,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Rating read: none
 - Label, plate or settings screen legible: no
 - Damage noted: none
-- Looks like a catalogue image: no
+- Looks like a catalogue image: yes
 - Screenshot of a gallery: no
-- Text read: DO NOT CRUSH | TRADEZONE PLUS
+- Text read: DO NOT CRUSH
 
 ## Two readers
-- 4 transcribed lines was seen by only one reader, so it is treated as unread
+- 107 transcribed lines was seen by only one reader, so it is treated as unread
+- item_type was read by only one reader, so it is kept but not confirmed
 
 ## OCR read off the photos
 - REFRSGERATOR
@@ -27,40 +28,45 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 4 lines: REFRSGERATOR | DO NOT CRUSH | PRIGHT | TRADEZONEPLUS
-- **corroborate** -> dispute. 4 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=refrigerator brand=None model=None label=False lines=2
+- **corroborate** -> dispute. 107 transcribed lines was seen by only one reader, so it is treated as unread; item_type was read by only one reader, so it is kept but not confirmed
+- **read_evidence** -> ok. category=refrigerator brand=None model=None label=False lines=1
+- **forensics** -> flag. looks like a catalogue or stock image
 - **gate** -> abstain. multiple items in frame
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 4190 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 7922 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 4058 ms (replayed)
-- total across calls: 16170 ms; wall clock: 450 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 18572 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 6379 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 4506 ms (replayed)
+- total across calls: 29457 ms; wall clock: 2355 ms
 
 ## Identification
 No catalogue candidates matched.
 
 **Not identified: EVIDENCE_INCOMPLETE.** The photos show more than one item, so no single item can be identified.
 
+Evidence flags: looks like a catalogue or stock image
+
 ## How sure the engine is (back office)
 **0%: the photos do not say what this is.**
 
 - Identification confidence: 0% (unknown)
-- Price confidence: 20%
+- Price confidence: 18%
 - The photos show more than one item, so no single item can be identified.
 - no label, plate or settings screen was legible
-- 2 lines seen by both readers
-- 7 claims are still unproven, 0 are supported
+- 1 lines seen by both readers
+- the item_type was read by only one reader and is not confirmed
+- looks like a catalogue or stock image
+- 8 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
 
 ## What the seller is asked for next (shown in the app)
 1. [PHOTO] Photograph one item on its own, with nothing else in the picture.
    _why: the photos show more than one item_
-2. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: Close-up of any label, sticker or metal plate showing the brand and model. Then, without stopping the video: If it opens without tools, open it and photograph the inside. Keep filming the whole time. Do not cut between clips.
+2. [PHOTO] Take your own photo of the actual item you are selling.
+   _why: this looks like a catalogue picture, not the real unit_
+3. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: Close-up of any label, sticker or metal plate showing the brand and model. Then, without stopping the video: If it opens without tools, open it and photograph the inside. Keep filming the whole time. Do not cut between clips.
    _why: two readings of these photos disagreed about what is written on the item_
-3. [PHOTO] Close-up of any label, sticker or metal plate showing the brand and model.
-   _why: nothing on the item says which model this is_
 
 ## What the seller is asked (only they know these)
 - How much of it is there? Give the weight in kilogrammes or tons if you know it.
@@ -68,11 +74,13 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 - Roughly how old is it, in years?
 
 ## Claims
-- [unverifiable_remote] The air conditioner is a Hisense AS12HB model.
+- [unverifiable_remote] The item is a Hisense AS12HB Air Conditioner.
     priced as: 70 percent of the stated weight. Weigh on the scale and photograph the display
-- [unverifiable_remote] The air conditioner is designed to provide efficient cooling.
+- [unverifiable_remote] The brand of the air conditioner is Hisense.
+    priced as: 70 percent of the stated weight. Weigh on the scale and photograph the display
+- [unverifiable_remote] The item is designed to provide efficient cooling.
     priced as: assumed not working. Agent powers the item on before payment
-- [unverifiable_remote] The air conditioner helps users stay cool and comfortable.
+- [unverifiable_remote] The item is intended to keep users cool and comfortable.
     priced as: assumed not working. Agent powers the item on before payment
 - [unverified] Required evidence 'code_shot' was not supplied
     priced as: priced as if the worst case is true. Write the code {code} on a piece of paper and take one photo with the paper next to the item.
@@ -92,9 +100,11 @@ Scrap floor: 900 NGN
 
 Conditions attached to this price:
 - Not identified: The photos show more than one item, so no single item can be identified.
-- The air conditioner is a Hisense AS12HB model. -> not proven remotely. Weigh on the scale and photograph the display.
-- The air conditioner is designed to provide efficient cooling. -> not proven remotely. Agent powers the item on before payment.
-- The air conditioner helps users stay cool and comfortable. -> not proven remotely. Agent powers the item on before payment.
+- Evidence flag: looks like a catalogue or stock image
+- The item is a Hisense AS12HB Air Conditioner. -> not proven remotely. Weigh on the scale and photograph the display.
+- The brand of the air conditioner is Hisense. -> not proven remotely. Weigh on the scale and photograph the display.
+- The item is designed to provide efficient cooling. -> not proven remotely. Agent powers the item on before payment.
+- The item is intended to keep users cool and comfortable. -> not proven remotely. Agent powers the item on before payment.
 - Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on a piece of paper and take one photo with the paper next to the item..
 - Required evidence 'overview' was not supplied -> not proven remotely. One photo showing the whole item..
 - Required evidence 'label_or_plate' was not supplied -> not proven remotely. Close-up of any label, sticker or metal plate showing the brand and model..

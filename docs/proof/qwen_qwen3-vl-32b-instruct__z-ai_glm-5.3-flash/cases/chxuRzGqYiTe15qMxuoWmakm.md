@@ -1,6 +1,6 @@
 # Case chxuRzGqYiTe15qMxuoWmakm
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  24968 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  28901 ms
 
 ## What the engine saw
 - Presentation: sealed_new
@@ -14,11 +14,12 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Damage noted: none
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
-- Text read: Nokia 106 4G | NOKIA | Nokia 1064G
+- Text read: Nokia 106 4G | Nokia 1064G
 
 ## Two readers
 - brand_text agreed by both readers
 - model_text agreed by both readers
+- item_type agreed by both readers
 
 ## OCR read off the photos
 - Nokia 106 4G
@@ -28,19 +29,20 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 4 lines: Nokia 106 4G | NOKIA | MPUTERS | 5H
-- **corroborate** -> agree. brand_text agreed by both readers; model_text agreed by both readers
-- **read_evidence** -> ok. category=phone brand=Nokia model=Nokia 1064G label=False lines=3
+- **corroborate** -> agree. brand_text agreed by both readers; model_text agreed by both readers; item_type agreed by both readers
+- **read_evidence** -> ok. category=phone brand=Nokia model=Nokia 1064G label=False lines=2
 - **forensics** -> flag. looks like a catalogue or stock image
-- **retrieval** -> ok. query='Nokia Nokia 1064G Nokia 106 4G NOKIA Nokia 1064G Up to 15.7 hrs/21.9 days talk/standby tim' hits=['Nokia C32', 'Infinix Smart 8', 'Infinix Smart 9', 'Google Pixel 7', 'Google Pixel 8']
-- **identify** -> ok. chosen=Nokia 106 4G margin=None
-- **abstain** -> abstain. confidence 0.4: no label, plate or settings screen was legible; 2 lines seen by both readers; looks like a catalogue or stock image
+- **retrieval** -> ok. query='Nokia Nokia 1064G Nokia 106 4G Nokia 1064G Up to 15.7 hrs/21.9 days talk/standby time
+LED ' hits=['Nokia C32', 'Infinix Smart 8', 'Infinix Smart 9', 'Google Pixel 7', 'Google Pixel 8']
+- **identify** -> ok. chosen=Nokia 106 4G margin=0.9
+- **abstain** -> abstain. confidence 0.4: no label, plate or settings screen was legible; 1 lines seen by both readers; looks like a catalogue or stock image
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 4502 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 11066 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 5914 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 3486 ms (replayed)
-- total across calls: 24968 ms; wall clock: 709 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5042 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 12821 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 5373 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 5665 ms (replayed)
+- total across calls: 28901 ms; wall clock: 1770 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -55,14 +57,14 @@ Shortlist from the catalogue:
 Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 24% on the best answer. It is probably a Nokia 106 4G, and the photos cannot separate them.**
+**Not sure enough to price: 24% on the best answer. It is probably a Nokia 106 4G or a Nokia C32, and the photos cannot separate them.**
 
 - Identification confidence: 24% (unknown)
 - Price confidence: 14%
-- It is weighing: Nokia 106 4G (0.95)
+- It is weighing: Nokia 106 4G (0.95), Nokia C32 (0.05)
 - The evidence only supports this answer at 40 percent, which is a guess. One clear photo of the label would settle it.
 - no label, plate or settings screen was legible
-- 2 lines seen by both readers
+- 1 lines seen by both readers
 - looks like a catalogue or stock image
 - 10 claims are still unproven, 0 are supported
 

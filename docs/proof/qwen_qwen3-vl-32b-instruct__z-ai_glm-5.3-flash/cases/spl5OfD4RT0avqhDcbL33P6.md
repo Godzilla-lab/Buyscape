@@ -1,6 +1,6 @@
 # Case spl5OfD4RT0avqhDcbL33P6
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0006  |  19090 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0007  |  13322 ms
 
 ## What the engine saw
 - Presentation: single_unit
@@ -14,11 +14,12 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Damage noted: none
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
-- Text read: 1000W | SOLAR GENERATOR | SAGE TECH ELECTRICAL | 1000W | kWh
+- Text read: 1000W | SOLAR GENERATOR | SAGE TECH ELECTRICAL | 1000W | kWh | SAGE TECH ELECTRICAL
 
 ## Two readers
+- brand_text agreed by both readers
 - rating_text agreed by both readers
-- brand_text was read by one reader and confirmed by OCR
+- item_type agreed by both readers
 
 ## OCR read off the photos
 - 1000W
@@ -29,17 +30,17 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 5 lines: 1000W | SOLAR GENERATOR | SAGETECHELECTRICAL | POST | MODOW
-- **corroborate** -> agree. rating_text agreed by both readers; brand_text was read by one reader and confirmed by OCR
-- **read_evidence** -> ok. category=solar generator brand=SAGE TECH ELECTRICAL model=None label=False lines=5
+- **corroborate** -> agree. brand_text agreed by both readers; rating_text agreed by both readers; item_type agreed by both readers
+- **read_evidence** -> ok. category=solar generator brand=SAGE TECH ELECTRICAL model=None label=False lines=6
 - **forensics** -> flag. looks like a catalogue or stock image
-- **retrieval** -> empty. query='SAGE TECH ELECTRICAL 1000W 1000W SOLAR GENERATOR SAGE TECH ELECTRICAL 1000W kWh We provide' hits=[]
+- **retrieval** -> empty. query='SAGE TECH ELECTRICAL 1000W 1000W SOLAR GENERATOR SAGE TECH ELECTRICAL 1000W kWh SAGE TECH ' hits=[]
 - **gate** -> abstain. no candidates and no model text
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 4132 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 14262 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 696 ms (replayed)
-- total across calls: 19090 ms; wall clock: 394 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4865 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 7712 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 745 ms (replayed)
+- total across calls: 13322 ms; wall clock: 1530 ms
 
 ## Identification
 No catalogue candidates matched.
@@ -55,7 +56,7 @@ Evidence flags: looks like a catalogue or stock image
 - Price confidence: 24%
 - No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.
 - no label, plate or settings screen was legible
-- 5 lines seen by both readers
+- 6 lines seen by both readers
 - looks like a catalogue or stock image
 - 5 claims are still unproven, 0 are supported
 

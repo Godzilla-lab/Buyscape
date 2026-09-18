@@ -1,70 +1,80 @@
 # Case mt1N6JWmqR0JfOYlRa1aJ1iA
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  33558 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0016  |  23167 ms
 
 ## What the engine saw
 - Presentation: sealed_new
-- Category: phone (confidence 0.9)
+- Category: phone (confidence 0.95)
 - Made of: plastic 80%, paper 20%
 - Estimated weight: 0.3 kg (confidence 0.8)
-- Brand read off the item: Galaxy
-- Model read off the item: S23 Ultra
+- Brand read off the item: nothing legible
+- Model read off the item: nothing legible
 - Rating read: none
-- Label, plate or settings screen legible: no
+- Label, plate or settings screen legible: yes
 - Damage noted: none
-- Looks like a catalogue image: no
+- Looks like a catalogue image: yes
 - Screenshot of a gallery: no
-- Text read: Galaxy | S23 Ultra | DYNASTY GADGETS
+
+## Two readers
+- brand_text differed between the two readers, so it is treated as unread
+- model_text was seen by only one reader, so it is treated as unread
+- 2 transcribed lines was seen by only one reader, so it is treated as unread
+- item_type was read by only one reader, so it is kept but not confirmed
 
 ## OCR read off the photos
 - DYNASTYGADGETS
 
 ## Chain
-- **corroborate** -> unavailable. openrouter:mistralai/mistral-small-3.2-24b-instruct failed after retries: no JSON object in response: {
-  "presentation"
 - **ocr** -> ok. 1 lines: DYNASTYGADGETS
-- **corroborate** -> agree. nothing identifying was read by either
-- **read_evidence** -> ok. category=phone brand=Galaxy model=S23 Ultra label=False lines=3
-- **retrieval** -> ok. query='Galaxy S23 Ultra Galaxy S23 Ultra DYNASTY GADGETS Brand New Google Pixel 10 Pro XL
-Availab' hits=['Samsung Galaxy S23', 'Google Pixel 7', 'Google Pixel 8', 'Google Pixel 9', 'Samsung Galaxy S21']
-- **identify** -> refused. chosen=None None margin=0.3
+- **corroborate** -> dispute. brand_text differed between the two readers, so it is treated as unread; model_text was seen by only one reader, so it is treated as unread; 2 transcribed lines was seen by only one reader, so it is treated as unread; item_type was read by only one reader, so it is kept but not confirmed
+- **read_evidence** -> ok. category=phone brand=None model=None label=True lines=0
+- **forensics** -> flag. looks like a catalogue or stock image
+- **retrieval** -> ok. query='Brand New Google Pixel 10 Pro XL
+Available for confirmation b4 payment 
+Call or WhatsApp t' hits=['Google Pixel 7', 'Google Pixel 8', 'Google Pixel 9', 'Tecno Spark 10']
+- **identify** -> refused. chosen=None None margin=0.2
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 4773 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 26313 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 2472 ms (replayed)
-- total across calls: 33558 ms; wall clock: 178963 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4613 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 7118 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 9029 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2407 ms (replayed)
+- total across calls: 23167 ms; wall clock: 1220 ms
 
 ## Identification
 Shortlist from the catalogue:
-  - Samsung Galaxy S23 (0.6)
   - Google Pixel 7 (0.5)
   - Google Pixel 8 (0.5)
   - Google Pixel 9 (0.5)
-  - Samsung Galaxy S21 (0.2)
+  - Tecno Spark 10 (0.2)
 
-**Not identified: CANNOT_IDENTIFY.** Box model text is not legible; seller claims Pixel 10 Pro XL, which is outside the shortlist and not printed legibly on the box. Box art fits Pixel 9/10 series but exact model cannot be confirmed.
+**Not identified: CANNOT_IDENTIFY.** No model text is legible on the sealed box; the specific Pixel model cannot be confirmed visually, and the claimed 'Pixel 10 Pro XL' is not stated on any readable label.
+
+Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 16% on the best answer. It is probably a Google Pixel 9 or a Google Pixel 8, and the photos cannot separate them.**
+**Not sure enough to price: 7% on the best answer. It is probably a Google Pixel 9 or a Google Pixel 10 Pro XL, and the photos cannot separate them.**
 
-- Identification confidence: 16% (unknown)
+- Identification confidence: 7% (unknown)
 - Price confidence: 18%
-- It is weighing: Google Pixel 9 (0.45), Google Pixel 8 (0.15)
-- Box model text is not legible; seller claims Pixel 10 Pro XL, which is outside the shortlist and not printed legibly on the box. Box art fits Pixel 9/10 series but exact model cannot be confirmed.
-- no label, plate or settings screen was legible
-- only one reader saw these photos, the second was unavailable
+- It is weighing: Google Pixel 9 (0.4), Google Pixel 10 Pro XL (0.2)
+- No model text is legible on the sealed box; the specific Pixel model cannot be confirmed visually, and the claimed 'Pixel 10 Pro XL' is not stated on any readable label.
+- read off the item's own label
+- the two readers agreed on nothing legible
+- the item_type was read by only one reader and is not confirmed
+- the next candidate was only 0.2 behind
+- looks like a catalogue or stock image
 - 8 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
 
 ## What the seller is asked for next (shown in the app)
-1. [PHOTO] Screenshot of Settings then About, showing the model name and storage.
-   _why: nothing on the item says which model this is_
-2. [PHOTO] Dial *#06# and screenshot the IMEI that appears.
-   _why: nothing on the item says which model this is_
-3. [PHOTO] If you have the box, photograph the label showing the model, storage and IMEI.
+1. [PHOTO] Take your own photo of the actual item you are selling.
+   _why: this looks like a catalogue picture, not the real unit_
+2. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: If you have the box, photograph the label showing the model, storage and IMEI. Then, still filming, do this on the item's own screen and hold it steady so the writing can be read: open settings then About, showing the model name and storage. Then, without stopping the video: Pull out the SIM tray and photograph the open slot. Finish with: A short clip: press power, unlock, then open the camera app. Keep filming the whole time. Do not cut between clips.
+   _why: two readings of these photos disagreed about what is written on the item_
+3. [PHOTO] Screenshot of Settings then About, showing the model name and storage.
    _why: nothing on the item says which model this is_
 
 ## What the seller is asked (only they know these)
@@ -95,7 +105,8 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 27 NGN
 
 Conditions attached to this price:
-- Not identified: Box model text is not legible; seller claims Pixel 10 Pro XL, which is outside the shortlist and not printed legibly on the box. Box art fits Pixel 9/10 series but exact model cannot be confirmed.
+- Not identified: No model text is legible on the sealed box; the specific Pixel model cannot be confirmed visually, and the claimed 'Pixel 10 Pro XL' is not stated on any readable label.
+- Evidence flag: looks like a catalogue or stock image
 - Brand New Google Pixel 10 Pro XL -> not proven remotely. Agent will confirm at pickup.
 - Google Pixel 10 Pro XL -> not proven remotely. Agent will confirm at pickup.
 - Available for confirmation b4 payment -> not proven remotely. Agent will confirm at pickup.

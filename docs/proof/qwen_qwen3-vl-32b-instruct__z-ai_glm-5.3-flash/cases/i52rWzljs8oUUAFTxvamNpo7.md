@@ -1,26 +1,27 @@
 # Case i52rWzljs8oUUAFTxvamNpo7
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0007  |  22447 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  18302 ms
 
 ## What the engine saw
 - Presentation: sealed_new
-- Category: air_conditioner (confidence 0.9)
+- Category: air conditioner (confidence 0.9)
 - Made of: carton 100%
 - Estimated weight: 15.0 kg (confidence 0.7)
 - Brand read off the item: Kenstar
 - Model read off the item: nothing legible
-- Rating read: none
+- Rating read: 1 Star
 - Label, plate or settings screen legible: yes
 - Damage noted: none
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
-- Text read: Kenstar | Inverter | NEXUS
+- Text read: Kenstar | NEXUS | 1 Star
 
 ## Two readers
 - brand_text agreed by both readers
+- rating_text was read by one reader and confirmed by OCR
 - model_text differed between the two readers, so it is treated as unread
-- rating_text differed between the two readers, so it is treated as unread
-- 11 transcribed lines was seen by only one reader, so it is treated as unread
+- 10 transcribed lines was seen by only one reader, so it is treated as unread
+- item_type was read by only one reader, so it is kept but not confirmed
 
 ## OCR read off the photos
 - NEXUS
@@ -35,16 +36,16 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 9 lines: NEXUS | NEKUS | E | 159 | 8-12TF5 | Ken | tar | AS-12TFS | star
-- **corroborate** -> dispute. brand_text agreed by both readers; model_text differed between the two readers, so it is treated as unread; rating_text differed between the two readers, so it is treated as unread; 11 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=air_conditioner brand=Kenstar model=None label=True lines=3
+- **corroborate** -> dispute. brand_text agreed by both readers; rating_text was read by one reader and confirmed by OCR; model_text differed between the two readers, so it is treated as unread; 10 transcribed lines was seen by only one reader, so it is treated as unread; item_type was read by only one reader, so it is kept but not confirmed
+- **read_evidence** -> ok. category=air conditioner brand=Kenstar model=None label=True lines=3
 - **forensics** -> flag. looks like a catalogue or stock image
 - **gate** -> abstain. multiple items in frame
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 4326 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 14880 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 3241 ms (replayed)
-- total across calls: 22447 ms; wall clock: 607 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4406 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 10325 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3571 ms (replayed)
+- total across calls: 18302 ms; wall clock: 1907 ms
 
 ## Identification
 No catalogue candidates matched.
@@ -60,7 +61,8 @@ Evidence flags: looks like a catalogue or stock image
 - Price confidence: 14%
 - The photos show more than one item, so no single item can be identified.
 - read off the item's own label
-- 3 lines seen by both readers
+- 2 lines seen by both readers
+- the item_type was read by only one reader and is not confirmed
 - looks like a catalogue or stock image
 - 10 claims are still unproven, 0 are supported
 
@@ -88,8 +90,7 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: assumed needs a regas. Agent checks pressures with manifold gauges
 - [unverifiable_remote] Independent Dehumidification
     priced as: the smallest rating this brand sells. Agent reads the outdoor rating plate
-- [unverified] Louver
-    priced as: the smallest rating this brand sells. Agent reads the outdoor rating plate
+- [unverifiable_remote] Louver
 - [unverified] Required evidence 'code_shot' was not supplied
     priced as: priced as if the worst case is true. Write the code {code} on paper and photograph it next to the unit.
 - [unverified] Required evidence 'indoor_unit' was not supplied
@@ -102,7 +103,7 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Open the front grille of the indoor unit and photograph the filters and coil.
 
 ## Price
-**308 to 1,800 NGN** (priced as material, width 1.414, method material_floor, 0 comparable prices)
+**345 to 1,800 NGN** (priced as material, width 1.3561, method material_floor, 0 comparable prices)
 
 This item was not identified, so it is priced as material rather than as a working item: 15 kg of carton 100% (rates for carton are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
@@ -115,7 +116,7 @@ Conditions attached to this price:
 - R410 GAS -> not proven remotely. Agent checks pressures with manifold gauges.
 - Anti-Rust Cabinet -> not proven remotely. Agent checks pressures with manifold gauges.
 - Independent Dehumidification -> not proven remotely. Agent reads the outdoor rating plate.
-- Louver -> not proven remotely. Agent reads the outdoor rating plate.
+- Louver -> not proven remotely. Agent will confirm at pickup.
 - Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on paper and photograph it next to the unit..
 - Required evidence 'indoor_unit' was not supplied -> not proven remotely. One photo of the whole indoor unit..
 - Required evidence 'outdoor_unit' was not supplied -> not proven remotely. One photo of the outdoor compressor unit..

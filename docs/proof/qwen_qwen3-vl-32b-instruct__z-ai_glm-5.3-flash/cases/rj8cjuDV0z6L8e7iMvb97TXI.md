@@ -1,6 +1,6 @@
 # Case rj8cjuDV0z6L8e7iMvb97TXI
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  26655 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  30463 ms
 
 ## What the engine saw
 - Presentation: sealed_new
@@ -14,10 +14,11 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Damage noted: none
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
-- Text read: Galaxy S24 Ultra | 24 MONTHS WARRANTY | Samsung
+- Text read: 24 MONTHS WARRANTY | Galaxy S24 Ultra | Samsung
 
 ## Two readers
-- model_text was seen by only one reader, so it is treated as unread
+- item_type agreed by both readers
+- model_text differed between the two readers, so it is treated as unread
 - brand_text was read by only one reader, so it is kept but not confirmed
 
 ## OCR read off the photos
@@ -26,19 +27,19 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 2 lines: DYNASTYGADGETS | GalaxyS23 Ultra
-- **corroborate** -> dispute. model_text was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed
+- **corroborate** -> dispute. item_type agreed by both readers; model_text differed between the two readers, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed
 - **read_evidence** -> ok. category=phone brand=Samsung model=None label=False lines=3
 - **forensics** -> flag. looks like a catalogue or stock image
-- **retrieval** -> ok. query='Samsung Galaxy S24 Ultra 24 MONTHS WARRANTY Samsung Brand New Samsung Galaxy S23 Ultra 256' hits=['Samsung Galaxy S23', 'Samsung Galaxy S24', 'Samsung Galaxy S21', 'Samsung Galaxy S22', 'Samsung Galaxy S25']
-- **identify** -> ok. chosen=Samsung Galaxy S23 Ultra margin=0.7
-- **abstain** -> abstain. confidence 0.31: no label, plate or settings screen was legible; 2 lines seen by both readers; the brand was read by only one reader and is not confirmed; looks like a catalogue or stock image
+- **retrieval** -> ok. query='Samsung 24 MONTHS WARRANTY Galaxy S24 Ultra Samsung Brand New Samsung Galaxy S23 Ultra 256' hits=['Samsung Galaxy S23', 'Samsung Galaxy S24', 'Samsung Galaxy S21', 'Samsung Galaxy S22', 'Samsung Galaxy S25']
+- **identify** -> ok. chosen=Samsung Galaxy S23 Ultra margin=0.55
+- **abstain** -> abstain. confidence 0.29: no label, plate or settings screen was legible; 2 lines seen by both readers; the brand was read by only one reader and is not confirmed; looks like a catalogue or stock image
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 4167 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 7481 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 11182 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 3825 ms (replayed)
-- total across calls: 26655 ms; wall clock: 400 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4615 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 15958 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 6305 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3585 ms (replayed)
+- total across calls: 30463 ms; wall clock: 1303 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -48,17 +49,17 @@ Shortlist from the catalogue:
   - Samsung Galaxy S22 (0.5)
   - Samsung Galaxy S25 (0.5)
 
-**Not identified: EVIDENCE_INCOMPLETE.** The evidence only supports this answer at 31 percent, which is a guess. One clear photo of the label would settle it.
+**Not identified: EVIDENCE_INCOMPLETE.** The evidence only supports this answer at 28 percent, which is a guess. One clear photo of the label would settle it.
 
 Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 19% on the best answer. It is probably a Samsung Galaxy S23 Ultra or a Samsung Galaxy S24 Ultra, and the photos cannot separate them.**
+**Not sure enough to price: 17% on the best answer. It is probably a Samsung Galaxy S23 Ultra or a Samsung Galaxy S24 Ultra, and the photos cannot separate them.**
 
-- Identification confidence: 19% (unknown)
+- Identification confidence: 17% (unknown)
 - Price confidence: 16%
-- It is weighing: Samsung Galaxy S23 Ultra (0.9), Samsung Galaxy S24 Ultra (0.2)
-- The evidence only supports this answer at 31 percent, which is a guess. One clear photo of the label would settle it.
+- It is weighing: Samsung Galaxy S23 Ultra (0.85), Samsung Galaxy S24 Ultra (0.3)
+- The evidence only supports this answer at 28 percent, which is a guess. One clear photo of the label would settle it.
 - no label, plate or settings screen was legible
 - 2 lines seen by both readers
 - the brand was read by only one reader and is not confirmed
@@ -81,7 +82,7 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 - Is it signed out of iCloud or Google, so a new owner can set it up?
 
 ## Claims
-- [unverified] Brand New Samsung Galaxy S23 Ultra 256GB
+- [unverifiable_remote] Brand New Samsung Galaxy S23 Ultra 256GB
     priced as: smallest variant of this model. Agent reads storage from Settings
 - [unverifiable_remote] Samsung Galaxy S23 Ultra
 - [unverified] 256GB
@@ -106,7 +107,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 34 NGN
 
 Conditions attached to this price:
-- Not identified: The evidence only supports this answer at 31 percent, which is a guess. One clear photo of the label would settle it.
+- Not identified: The evidence only supports this answer at 28 percent, which is a guess. One clear photo of the label would settle it.
 - Evidence flag: looks like a catalogue or stock image
 - Brand New Samsung Galaxy S23 Ultra 256GB -> not proven remotely. Agent reads storage from Settings.
 - Samsung Galaxy S23 Ultra -> not proven remotely. Agent will confirm at pickup.

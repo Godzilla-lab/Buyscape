@@ -1,6 +1,6 @@
 # Case mWGfab4lP9p2kOY1BxG88R0D
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  48869 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  26137 ms
 
 ## What the engine saw
 - Presentation: single_unit
@@ -16,11 +16,12 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Screenshot of a gallery: no
 
 ## Two readers
+- item_type agreed by both readers
 - 1 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## Chain
 - **ocr** -> ok. 0 lines: 
-- **corroborate** -> dispute. 1 transcribed lines was seen by only one reader, so it is treated as unread
+- **corroborate** -> dispute. item_type agreed by both readers; 1 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=laptop brand=None model=None label=False lines=0
 - **forensics** -> flag. looks like a catalogue or stock image
 - **retrieval** -> ok. query='Lenovo v15 g5 irl intel core i3-1315u, 4.5ghz, 8gb , 256ssd, 15.6 fhd,bt, 100/1000 rj 45 l' hits=['Lenovo 14w', 'Lenovo ThinkPad X1 Carbon Gen 6', 'Lenovo ThinkPad T480', 'Lenovo ThinkPad T470', 'Lenovo IdeaPad 3']
@@ -28,11 +29,11 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 5892 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 7474 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 29074 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 6429 ms (replayed)
-- total across calls: 48869 ms; wall clock: 172 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4750 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 5243 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 9255 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 6889 ms (replayed)
+- total across calls: 26137 ms; wall clock: 1188 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -42,7 +43,7 @@ Shortlist from the catalogue:
   - Lenovo ThinkPad T470 (0.3)
   - Lenovo IdeaPad 3 (0.3)
 
-**Not identified: CANNOT_IDENTIFY.** No text is legible on the item and the photo shows a generic black laptop consistent with many Lenovo 15.6-inch models. The seller's claimed model (V15 G5 IRL) is not on the shortlist and cannot be confirmed from the image, so no candidate is supported by visible evidence.
+**Not identified: CANNOT_IDENTIFY.** No label or branding legible in the photo; seller claims Lenovo V15 G5 IRL, which is not on the shortlist and cannot be confirmed visually. A V15, IdeaPad, and ThinkPad all look alike in a stock photo.
 
 Evidence flags: looks like a catalogue or stock image
 
@@ -52,7 +53,7 @@ Evidence flags: looks like a catalogue or stock image
 - Identification confidence: 6% (unknown)
 - Price confidence: 14%
 - It is weighing: Lenovo IdeaPad 3 (0.3)
-- No text is legible on the item and the photo shows a generic black laptop consistent with many Lenovo 15.6-inch models. The seller's claimed model (V15 G5 IRL) is not on the shortlist and cannot be confirmed from the image, so no candidate is supported by visible evidence.
+- No label or branding legible in the photo; seller claims Lenovo V15 G5 IRL, which is not on the shortlist and cannot be confirmed visually. A V15, IdeaPad, and ThinkPad all look alike in a stock photo.
 - no label, plate or settings screen was legible
 - the two readers agreed on nothing legible
 - looks like a catalogue or stock image
@@ -106,7 +107,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 660 NGN
 
 Conditions attached to this price:
-- Not identified: No text is legible on the item and the photo shows a generic black laptop consistent with many Lenovo 15.6-inch models. The seller's claimed model (V15 G5 IRL) is not on the shortlist and cannot be confirmed from the image, so no candidate is supported by visible evidence.
+- Not identified: No label or branding legible in the photo; seller claims Lenovo V15 G5 IRL, which is not on the shortlist and cannot be confirmed visually. A V15, IdeaPad, and ThinkPad all look alike in a stock photo.
 - Evidence flag: looks like a catalogue or stock image
 - Raised to the 5,000 NGN minimum this business publishes for this kind of item.
 - Lenovo v15 g5 -> not proven remotely. Agent will confirm at pickup.

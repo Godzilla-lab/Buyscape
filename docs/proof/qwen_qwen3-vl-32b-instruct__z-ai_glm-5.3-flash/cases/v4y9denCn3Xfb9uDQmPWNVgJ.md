@@ -1,6 +1,6 @@
 # Case v4y9denCn3Xfb9uDQmPWNVgJ
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  16510 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  22718 ms
 
 ## What the engine saw
 - Presentation: single_unit
@@ -11,16 +11,17 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: some surface dirt and minor scratches on casing, wheels appear intact but slightly worn
+- Damage noted: minor scratches on plastic casing, some dust and grime on surface, no visible damage to engine or frame
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 - Text read: COROLLA
 
 ## Two readers
 - brand_text agreed by both readers
+- model_text differed between the two readers, so it is treated as unread
 - rating_text differed between the two readers, so it is treated as unread
-- model_text was seen by only one reader, so it is treated as unread
-- 11 transcribed lines was seen by only one reader, so it is treated as unread
+- 13 transcribed lines was seen by only one reader, so it is treated as unread
+- item_type was read by only one reader, so it is kept but not confirmed
 
 ## OCR read off the photos
 - COROLLA
@@ -29,16 +30,16 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 3 lines: COROLLA | CL7800E2R | Y-12-070-7
-- **corroborate** -> dispute. brand_text agreed by both readers; rating_text differed between the two readers, so it is treated as unread; model_text was seen by only one reader, so it is treated as unread; 11 transcribed lines was seen by only one reader, so it is treated as unread
+- **corroborate** -> dispute. brand_text agreed by both readers; model_text differed between the two readers, so it is treated as unread; rating_text differed between the two readers, so it is treated as unread; 13 transcribed lines was seen by only one reader, so it is treated as unread; item_type was read by only one reader, so it is kept but not confirmed
 - **read_evidence** -> ok. category=generator brand=COROLLA model=None label=True lines=1
 - **retrieval** -> empty. query='COROLLA COROLLA Corolla remote control petrol generator model cl7800E2r 100% copper coil w' hits=[]
 - **gate** -> abstain. no candidates and no model text
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 7062 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 6610 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 2838 ms (replayed)
-- total across calls: 16510 ms; wall clock: 290 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 7018 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 12233 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3467 ms (replayed)
+- total across calls: 22718 ms; wall clock: 1454 ms
 
 ## Identification
 No catalogue candidates matched.
@@ -53,6 +54,7 @@ No catalogue candidates matched.
 - No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.
 - read off the item's own label
 - 1 lines seen by both readers
+- the item_type was read by only one reader and is not confirmed
 - 9 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.

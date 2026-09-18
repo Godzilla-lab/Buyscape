@@ -1,6 +1,6 @@
 # Case qbVwy2RpugkUTvOKqaL4UZ7P
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  19769 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  39848 ms
 
 ## What the engine saw
 - Presentation: single_unit
@@ -11,10 +11,14 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: none
+- Damage noted: minor scuff marks on surface, no visible cracks or dents
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: OLABOI TECH ENT
+- Text read: OLABOI TECH ENTERPRISE
+
+## Two readers
+- item_type agreed by both readers
+- 1 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
 - ECH
@@ -24,21 +28,21 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 4 lines: ECH | ES | OLAB | CHENTI
-- **corroborate** -> agree. nothing identifying was read by either
+- **corroborate** -> dispute. item_type agreed by both readers; 1 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=laptop brand=None model=None label=False lines=1
-- **retrieval** -> ok. query='OLABOI TECH ENT Dell latitude 3550
+- **retrieval** -> ok. query='OLABOI TECH ENTERPRISE Dell latitude 3550
 Intel core i5(5th Gen )
 8gb memory & 500gb hdd 
-Screen ' hits=['Dell Latitude E7470', 'Dell Latitude 7490', 'Dell Latitude 5490', 'Dell Inspiron 15 3000', 'Dell XPS 13 9370']
-- **identify** -> refused. chosen=None None margin=None
+' hits=['Dell Latitude E7470', 'Dell Latitude 7490', 'Dell Latitude 5490', 'Dell Inspiron 15 3000', 'Dell XPS 13 9370']
+- **identify** -> refused. chosen=Dell None margin=0.15
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 5235 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 6683 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 4049 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 3802 ms (replayed)
-- total across calls: 19769 ms; wall clock: 198 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5237 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 14714 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 15293 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 4604 ms (replayed)
+- total across calls: 39848 ms; wall clock: 1635 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -48,24 +52,28 @@ Shortlist from the catalogue:
   - Dell Inspiron 15 3000 (0.4333)
   - Dell XPS 13 9370 (0.3)
 
-**Not identified: CANNOT_IDENTIFY.** Lid is closed; only the Dell logo is visible, no model text is legible. Seller claims Latitude 3550, which is not on the shortlist and cannot be verified from the photo.
+**Not identified: CANNOT_IDENTIFY.** Laptop is closed; only the Dell logo is visible and no model label is legible. Seller's claimed Latitude 3550 is not on the shortlist and cannot be confirmed from the image.
 
 ## How sure the engine is (back office)
-**0%: the photos do not say what this is.**
+**Not sure enough to price: 14% on the best answer. It is probably a Dell Latitude 3550 or a Dell Inspiron 15 3000, and the photos cannot separate them.**
 
-- Identification confidence: 0% (unknown)
+- Identification confidence: 14% (unknown)
 - Price confidence: 14%
-- Lid is closed; only the Dell logo is visible, no model text is legible. Seller claims Latitude 3550, which is not on the shortlist and cannot be verified from the photo.
+- It is weighing: Dell Latitude 3550 (0.3), Dell Inspiron 15 3000 (0.15)
+- Laptop is closed; only the Dell logo is visible and no model label is legible. Seller's claimed Latitude 3550 is not on the shortlist and cannot be confirmed from the image.
 - no label, plate or settings screen was legible
 - 1 lines seen by both readers
+- the next candidate was only 0.15 behind
 - 10 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
 
 ## What the seller is asked for next (shown in the app)
-1. [PHOTO] Photo of the sticker on the underside showing the model, serial or service tag.
+1. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: Photo of the sticker on the underside showing the model, serial or service tag. Then, still filming, do this on the item's own screen and hold it steady so the writing can be read: open system Information (Windows) or About This Mac, showing the model, processor, RAM and storage. Then, without stopping the video: If the bottom panel comes off with a screwdriver, remove it and photograph the inside: RAM slots, drive and battery. Finish with: A short clip typing a few keys, moving the trackpad, and plugging the charger in so the charge light shows. Keep filming the whole time. Do not cut between clips.
+   _why: two readings of these photos disagreed about what is written on the item_
+2. [PHOTO] Photo of the sticker on the underside showing the model, serial or service tag.
    _why: nothing on the item says which model this is_
-2. [PHOTO] Screenshot of System Information (Windows) or About This Mac, showing the model, processor, RAM and storage.
+3. [PHOTO] Screenshot of System Information (Windows) or About This Mac, showing the model, processor, RAM and storage.
    _why: nothing on the item says which model this is_
 
 ## What the seller is asked (only they know these)
@@ -101,7 +109,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 300 NGN
 
 Conditions attached to this price:
-- Not identified: Lid is closed; only the Dell logo is visible, no model text is legible. Seller claims Latitude 3550, which is not on the shortlist and cannot be verified from the photo.
+- Not identified: Laptop is closed; only the Dell logo is visible and no model label is legible. Seller's claimed Latitude 3550 is not on the shortlist and cannot be confirmed from the image.
 - Raised to the 5,000 NGN minimum this business publishes for this kind of item.
 - Dell latitude 3550 -> not proven remotely. Agent will confirm at pickup.
 - Intel core i5(5th Gen ) -> not proven remotely. Agent will confirm at pickup.

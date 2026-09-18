@@ -1,24 +1,27 @@
 # Case A4YxyJsurn1Pfg47Z51fxWnK
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  22759 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  27959 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: split air conditioner (confidence 0.95)
-- Made of: steel 60%, plastic 30%, copper 10%
-- Estimated weight: 45.0 kg (confidence 0.8)
+- Made of: steel 60%, plastic 30%, copper_bare 10%
+- Estimated weight: 35.0 kg (confidence 0.8)
 - Brand read off the item: Panasonic
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: unit appears clean and undamaged, outer packaging is intact with blue tape
-- Looks like a catalogue image: yes
+- Damage noted: minor dust on exterior, packaging tape still on top unit
+- Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: Panasonic | INVERTER | DC INVERTER COMPRESSOR
+- Text read: Panasonic | INVERTER
 
 ## Two readers
 - brand_text agreed by both readers
-- model_text was seen by only one reader, so it is treated as unread
+- item_type agreed by both readers
+- model_text differed between the two readers, so it is treated as unread
+- rating_text was seen by only one reader, so it is treated as unread
+- serial_text was seen by only one reader, so it is treated as unread
 - 10 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
@@ -26,48 +29,42 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 1 lines: Panasonic
-- **corroborate** -> dispute. brand_text agreed by both readers; model_text was seen by only one reader, so it is treated as unread; 10 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=split air conditioner brand=Panasonic model=None label=True lines=3
-- **forensics** -> flag. looks like a catalogue or stock image
-- **retrieval** -> ok. query='Panasonic Panasonic INVERTER DC INVERTER COMPRESSOR Tired of paying high electricity bills' hits=['Panasonic CS-YN12 1.5HP']
-- **identify** -> ok. chosen=Panasonic CS-YN12 margin=None
-- **abstain** -> abstain. top score 0.55
+- **corroborate** -> dispute. brand_text agreed by both readers; item_type agreed by both readers; model_text differed between the two readers, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 10 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=split air conditioner brand=Panasonic model=None label=True lines=2
+- **retrieval** -> ok. query='Panasonic Panasonic INVERTER Tired of paying high electricity bills for your air condition' hits=['Panasonic CS-YN12 1.5HP']
+- **identify** -> refused. chosen=Panasonic None margin=None
+- **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 5169 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 6638 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 10206 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 746 ms (replayed)
-- total across calls: 22759 ms; wall clock: 334 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 6189 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 11581 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 9331 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 858 ms (replayed)
+- total across calls: 27959 ms; wall clock: 1698 ms
 
 ## Identification
 Shortlist from the catalogue:
   - Panasonic CS-YN12 1.5HP (0.38)
 
-**Not identified: CANNOT_IDENTIFY.** The best candidate scored only 0.55, which is not sure enough to price.
-
-Evidence flags: looks like a catalogue or stock image
+**Not identified: CANNOT_IDENTIFY.** Photos confirm a Panasonic inverter split AC, but no model number is legible; CS-YN12 is only a shortlist guess.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 17% on the best answer. It is probably a Panasonic CS-YN12, and the photos cannot separate them.**
+**Not sure enough to price: 24% on the best answer. It is probably a Panasonic CS-YN12, and the photos cannot separate them.**
 
-- Identification confidence: 17% (unknown)
+- Identification confidence: 24% (unknown)
 - Price confidence: 24%
-- It is weighing: Panasonic CS-YN12 (0.55)
-- The best candidate scored only 0.55, which is not sure enough to price.
+- It is weighing: Panasonic CS-YN12 (0.4)
+- Photos confirm a Panasonic inverter split AC, but no model number is legible; CS-YN12 is only a shortlist guess.
 - read off the item's own label
-- 3 lines seen by both readers
-- looks like a catalogue or stock image
+- 2 lines seen by both readers
 - 5 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
 
 ## What the seller is asked for next (shown in the app)
-1. [PHOTO] Take your own photo of the actual item you are selling.
-   _why: this looks like a catalogue picture, not the real unit_
-2. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: Close-up of the rating plate on the outdoor unit showing the model and HP. Then, without stopping the video: Open the front grille of the indoor unit and photograph the filters and coil. Finish with: A short clip with the unit running and the display lit. Keep filming the whole time. Do not cut between clips.
+1. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: Close-up of the rating plate on the outdoor unit showing the model and HP. Then, without stopping the video: Open the front grille of the indoor unit and photograph the filters and coil. Finish with: A short clip with the unit running and the display lit. Keep filming the whole time. Do not cut between clips.
    _why: two readings of these photos disagreed about what is written on the item_
-3. [PHOTO] Close-up of the rating plate on the outdoor unit showing the model and HP.
+2. [PHOTO] Close-up of the rating plate on the outdoor unit showing the model and HP.
    _why: nothing on the item says which model this is_
 
 ## What the seller is asked (only they know these)
@@ -88,15 +85,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Open the front grille of the indoor unit and photograph the filters and coil.
 
 ## Price
-**46,311 to 77,130 NGN** (priced as material, width 0.4993, method material_floor, 0 comparable prices)
+**36,020 to 59,990 NGN** (priced as material, width 0.4993, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 45 kg of steel 60%, plastic 30%, copper 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 35 kg of steel 60%, plastic 30%, copper_bare 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 59,850 NGN
+Scrap floor: 46,550 NGN
 
 Conditions attached to this price:
-- Not identified: The best candidate scored only 0.55, which is not sure enough to price.
-- Evidence flag: looks like a catalogue or stock image
+- Not identified: Photos confirm a Panasonic inverter split AC, but no model number is legible; CS-YN12 is only a shortlist guess.
 - Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on paper and photograph it next to the unit..
 - Required evidence 'indoor_unit' was not supplied -> not proven remotely. One photo of the whole indoor unit..
 - Required evidence 'outdoor_unit' was not supplied -> not proven remotely. One photo of the outdoor compressor unit..

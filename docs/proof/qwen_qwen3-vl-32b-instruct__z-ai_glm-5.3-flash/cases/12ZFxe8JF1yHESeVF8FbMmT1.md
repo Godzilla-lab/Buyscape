@@ -1,23 +1,24 @@
 # Case 12ZFxe8JF1yHESeVF8FbMmT1
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0013  |  34674 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0013  |  31879 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: laptop (confidence 0.95)
-- Made of: plastic 40%, steel 30%, circuit_board 15%, aluminium 10%, glass 5%
+- Made of: plastic 40%, steel 30%, aluminium 20%, circuit_board 10%
 - Estimated weight: 1.5 kg (confidence 0.8)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: Screen shows Windows 11 desktop with no visible damage, Keyboard appears clean, no visible keys missing or damaged, Touchpad intact, no visible cracks or dents, Chassis appears to be in good condition, minor wear possible on edges
+- Damage noted: screen is on and displaying Windows 11 desktop, keyboard appears clean, no visible dents or cracks on body, hand holding left side, possibly indicating slight wear
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: Start
+- Text read: Start | Microsoft Edge | File Explorer | Settings | Camera | Microsoft Store | OneDrive | Paint 3D
 
 ## Two readers
-- 38 transcribed lines was seen by only one reader, so it is treated as unread
+- item_type agreed by both readers
+- 27 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
 - a
@@ -25,23 +26,18 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 2 lines: a | W.
-- **corroborate** -> dispute. 38 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=laptop brand=None model=None label=False lines=1
-- **retrieval** -> ok. query='Start Dell latitude 7400 2in1 
-Intel core i5 
-8th generation 
-8gb ram
-256gb ssd
-Touchscree' hits=['Dell Latitude E7470', 'Dell Latitude 7490', 'Dell Latitude 5490', 'Dell Inspiron 15 3000', 'Dell XPS 13 9370']
-- **identify** -> refused. chosen=None None margin=0.15
+- **corroborate** -> dispute. item_type agreed by both readers; 27 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=laptop brand=None model=None label=False lines=11
+- **retrieval** -> ok. query='Start Microsoft Edge File Explorer Settings Camera Microsoft Store OneDrive Paint 3D This ' hits=['Dell Latitude E7470', 'Dell Latitude 7490', 'Dell Latitude 5490', 'Dell Inspiron 15 3000', 'Dell XPS 13 9370']
+- **identify** -> refused. chosen=None None margin=0.1
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 9004 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 6187 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 14741 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 4742 ms (replayed)
-- total across calls: 34674 ms; wall clock: 153 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 8078 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 7505 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 11231 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 5065 ms (replayed)
+- total across calls: 31879 ms; wall clock: 1264 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -51,18 +47,18 @@ Shortlist from the catalogue:
   - Dell Inspiron 15 3000 (0.3)
   - Dell XPS 13 9370 (0.3)
 
-**Not identified: CANNOT_IDENTIFY.** No legible Dell branding, model text, or service tag; seller's claimed 7400 2-in-1 is not verifiable and not on the shortlist. Photo alone cannot separate Latitude 7490/7400 variants.
+**Not identified: CANNOT_IDENTIFY.** No legible brand/model marking; seller's claimed Latitude 7400 2-in-1 is not on the shortlist and the photo alone cannot confirm any specific model.
 
 ## How sure the engine is (back office)
 **Not sure enough to price: 14% on the best answer. It is probably a Dell Latitude 7490 or a Dell Latitude E7470, and the photos cannot separate them.**
 
 - Identification confidence: 14% (unknown)
 - Price confidence: 14%
-- It is weighing: Dell Latitude 7490 (0.3), Dell Latitude E7470 (0.15)
-- No legible Dell branding, model text, or service tag; seller's claimed 7400 2-in-1 is not verifiable and not on the shortlist. Photo alone cannot separate Latitude 7490/7400 variants.
+- It is weighing: Dell Latitude 7490 (0.3), Dell Latitude E7470 (0.2)
+- No legible brand/model marking; seller's claimed Latitude 7400 2-in-1 is not on the shortlist and the photo alone cannot confirm any specific model.
 - no label, plate or settings screen was legible
-- 1 lines seen by both readers
-- the next candidate was only 0.15 behind
+- 11 lines seen by both readers
+- the next candidate was only 0.1 behind
 - 11 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -104,12 +100,12 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 ## Price
 **5,000 to 5,000 NGN** (priced as material, width 0.0, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 1.5 kg of plastic 40%, steel 30%, circuit_board 15%, aluminium 10%, glass 5% (rates for glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 1.5 kg of plastic 40%, steel 30%, aluminium 20%, circuit_board 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 766 NGN
+Scrap floor: 1,005 NGN
 
 Conditions attached to this price:
-- Not identified: No legible Dell branding, model text, or service tag; seller's claimed 7400 2-in-1 is not verifiable and not on the shortlist. Photo alone cannot separate Latitude 7490/7400 variants.
+- Not identified: No legible brand/model marking; seller's claimed Latitude 7400 2-in-1 is not on the shortlist and the photo alone cannot confirm any specific model.
 - Raised to the 5,000 NGN minimum this business publishes for this kind of item.
 - Dell latitude 7400 2in1 -> not proven remotely. Agent will confirm at pickup.
 - Intel core i5 -> not proven remotely. Agent will confirm at pickup.

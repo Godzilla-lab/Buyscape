@@ -1,23 +1,24 @@
 # Case nNs7Yhj9wdUebwOQJN3DBdxQ
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0013  |  52514 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  64647 ms
 
 ## What the engine saw
 - Presentation: single_unit
-- Category: phone (confidence 1.0)
-- Made of: plastic 80%, circuit_board 15%, steel 5%
-- Estimated weight: 0.2 kg (confidence 0.9)
-- Brand read off the item: nothing legible
+- Category: phone (confidence 0.95)
+- Made of: plastic 70%, steel 20%, circuit_board 10%
+- Estimated weight: 0.2 kg (confidence 0.8)
+- Brand read off the item: LISANA
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
 - Damage noted: none
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
-- Text read: POSTED ON LISANA
+- Text read: G | POSTED ON LISANA
 
 ## Two readers
-- 1 transcribed lines was seen by only one reader, so it is treated as unread
+- item_type agreed by both readers
+- brand_text was read by one reader and confirmed by OCR
 
 ## OCR read off the photos
 - POSTED ON ]
@@ -25,21 +26,20 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 2 lines: POSTED ON ] | LISANA
-- **corroborate** -> dispute. 1 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=phone brand=None model=None label=False lines=1
+- **corroborate** -> agree. item_type agreed by both readers; brand_text was read by one reader and confirmed by OCR
+- **read_evidence** -> ok. category=phone brand=LISANA model=None label=False lines=2
 - **forensics** -> flag. looks like a catalogue or stock image
-- **retrieval** -> ok. query='POSTED ON LISANA Google Pixel 7a
-Sleek 6.1′′ FHD+ OLED display with 90 Hz smooth visuals 
-' hits=['Google Pixel 7', 'Google Pixel 8', 'Google Pixel 9', 'Tecno Pova 6']
-- **identify** -> refused. chosen=None None margin=0.45
+- **retrieval** -> ok. query='LISANA G POSTED ON LISANA Google Pixel 7a
+Sleek 6.1′′ FHD+ OLED display with 90 Hz smooth ' hits=['Google Pixel 7', 'Google Pixel 8', 'Google Pixel 9', 'Tecno Pova 6']
+- **identify** -> refused. chosen=None None margin=0.3
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 4523 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 8800 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 33082 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 6109 ms (replayed)
-- total across calls: 52514 ms; wall clock: 488 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5505 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 33897 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 19526 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 5719 ms (replayed)
+- total across calls: 64647 ms; wall clock: 1602 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -48,19 +48,19 @@ Shortlist from the catalogue:
   - Google Pixel 9 (0.5)
   - Tecno Pova 6 (0.2)
 
-**Not identified: CANNOT_IDENTIFY.** Pixel 7 and Pixel 7a are visually near-identical at this angle; no label is legible, and the seller's claimed 7a is not photo-verifiable, so picking Pixel 7 risks a costly mismatch.
+**Not identified: CANNOT_IDENTIFY.** Pixel 7 and Pixel 7a are visually near-identical here; seller text is not a label, and no legible model marking exists to separate them.
 
 Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 14% on the best answer. It is probably a Google Pixel 7 or a Google Pixel 8, and the photos cannot separate them.**
+**Not sure enough to price: 10% on the best answer. It is probably a Google Pixel 7 or a Google Pixel 8, and the photos cannot separate them.**
 
-- Identification confidence: 14% (unknown)
+- Identification confidence: 10% (unknown)
 - Price confidence: 14%
-- It is weighing: Google Pixel 7 (0.55), Google Pixel 8 (0.1)
-- Pixel 7 and Pixel 7a are visually near-identical at this angle; no label is legible, and the seller's claimed 7a is not photo-verifiable, so picking Pixel 7 risks a costly mismatch.
+- It is weighing: Google Pixel 7 (0.4), Google Pixel 8 (0.1)
+- Pixel 7 and Pixel 7a are visually near-identical here; seller text is not a label, and no legible model marking exists to separate them.
 - no label, plate or settings screen was legible
-- 1 lines seen by both readers
+- 2 lines seen by both readers
 - looks like a catalogue or stock image
 - 11 claims are still unproven, 0 are supported
 
@@ -69,9 +69,9 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 ## What the seller is asked for next (shown in the app)
 1. [PHOTO] Take your own photo of the actual item you are selling.
    _why: this looks like a catalogue picture, not the real unit_
-2. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: If you have the box, photograph the label showing the model, storage and IMEI. Then, still filming, do this on the item's own screen and hold it steady so the writing can be read: open settings then About, showing the model name and storage. Then, without stopping the video: Pull out the SIM tray and photograph the open slot. Finish with: A short clip: press power, unlock, then open the camera app. Keep filming the whole time. Do not cut between clips.
-   _why: two readings of these photos disagreed about what is written on the item_
-3. [PHOTO] Screenshot of Settings then About, showing the model name and storage.
+2. [PHOTO] Screenshot of Settings then About, showing the model name and storage.
+   _why: nothing on the item says which model this is_
+3. [PHOTO] Dial *#06# and screenshot the IMEI that appears.
    _why: nothing on the item says which model this is_
 
 ## What the seller is asked (only they know these)
@@ -98,14 +98,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
-**25 to 64 NGN** (priced as material, width 0.8673, method material_floor, 0 comparable prices)
+**28 to 69 NGN** (priced as material, width 0.8349, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 0.2 kg of plastic 80%, circuit_board 15%, steel 5% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 0.2 kg of plastic 70%, steel 20%, circuit_board 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 45 NGN
+Scrap floor: 50 NGN
 
 Conditions attached to this price:
-- Not identified: Pixel 7 and Pixel 7a are visually near-identical at this angle; no label is legible, and the seller's claimed 7a is not photo-verifiable, so picking Pixel 7 risks a costly mismatch.
+- Not identified: Pixel 7 and Pixel 7a are visually near-identical here; seller text is not a label, and no legible model marking exists to separate them.
 - Evidence flag: looks like a catalogue or stock image
 - Google Pixel 7a -> not proven remotely. Agent will confirm at pickup.
 - Sleek 6.1′′ FHD+ OLED display with 90 Hz smooth visuals -> not proven remotely. Agent will confirm at pickup.

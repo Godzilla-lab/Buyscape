@@ -1,39 +1,37 @@
 # Case n0rsEJ2LZ5760lnT3ag9iNGf
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0007  |  13960 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  18689 ms
 
 ## What the engine saw
 - Presentation: single_unit
-- Category: generator (confidence 0.8)
+- Category: generator (confidence 0.9)
 - Made of: steel 80%, plastic 15%, rubber 5%
 - Estimated weight: 500.0 kg (confidence 0.7)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: rust on lower right panel, dents on side door, paint chipped in multiple areas
+- Damage noted: rust on lower right panel and base, dents and scratches on side panels, grime and dirt accumulation
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 
 ## Two readers
-- model_text was seen by only one reader, so it is treated as unread
-- rating_text was seen by only one reader, so it is treated as unread
-- serial_text was seen by only one reader, so it is treated as unread
-- 6 transcribed lines was seen by only one reader, so it is treated as unread
+- item_type agreed by both readers
+- 1 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## Chain
 - **ocr** -> ok. 0 lines: 
-- **corroborate** -> dispute. model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 6 transcribed lines was seen by only one reader, so it is treated as unread
+- **corroborate** -> dispute. item_type agreed by both readers; 1 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=generator brand=None model=None label=False lines=0
 - **retrieval** -> empty. query='FOR SALE — 200KVA CUMMINS DIESEL GENERATOR 
 Looking for a powerful, reliable and heavy-dut' hits=[]
 - **gate** -> abstain. no candidates and no model text
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 5832 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 5524 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 2604 ms (replayed)
-- total across calls: 13960 ms; wall clock: 345 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4591 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 11342 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2756 ms (replayed)
+- total across calls: 18689 ms; wall clock: 1506 ms
 
 ## Identification
 No catalogue candidates matched.

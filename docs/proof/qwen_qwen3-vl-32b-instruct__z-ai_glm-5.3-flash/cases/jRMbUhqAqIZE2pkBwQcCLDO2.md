@@ -1,25 +1,26 @@
 # Case jRMbUhqAqIZE2pkBwQcCLDO2
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  36583 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  29753 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: generator (confidence 0.95)
-- Made of: plastic 40%, steel 30%, circuit_board 10%, rubber 10%, mixed_electronic 10%
-- Estimated weight: 12.0 kg (confidence 0.8)
+- Made of: steel 40%, plastic 30%, circuit_board 10%, rubber 10%, unknown 10%
+- Estimated weight: 15.0 kg (confidence 0.7)
 - Brand read off the item: MAXMECH
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: item wrapped in plastic film, no visible damage or wear
+- Damage noted: wrapped in plastic film, no visible damage or wear
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: MAXMECH | MAXMECH
+- Text read: MAXMECH | MAXMECH 8500E 2100W
 
 ## Two readers
 - brand_text agreed by both readers
+- item_type agreed by both readers
 - model_text differed between the two readers, so it is treated as unread
-- rating_text differed between the two readers, so it is treated as unread
+- rating_text was seen by only one reader, so it is treated as unread
 - 8 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
@@ -28,33 +29,33 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 2 lines: MAXMECH | BAROLIDE SEMERATOR
-- **corroborate** -> dispute. brand_text agreed by both readers; model_text differed between the two readers, so it is treated as unread; rating_text differed between the two readers, so it is treated as unread; 8 transcribed lines was seen by only one reader, so it is treated as unread
+- **corroborate** -> dispute. brand_text agreed by both readers; item_type agreed by both readers; model_text differed between the two readers, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; 8 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=generator brand=MAXMECH model=None label=True lines=2
-- **retrieval** -> ok. query='MAXMECH MAXMECH MAXMECH Maxmech 12kva petrol generator. 100% pure copper coil. High perfor' hits=['Maxmech MX3500 3.5kVA', 'Maxmech MX10000 10kVA']
-- **identify** -> ok. chosen=Maxmech EPS 8000 margin=0.55
+- **retrieval** -> ok. query='MAXMECH MAXMECH MAXMECH 8500E 2100W Maxmech 12kva petrol generator. 100% pure copper coil.' hits=['Maxmech MX3500 3.5kVA', 'Maxmech MX10000 10kVA']
+- **identify** -> ok. chosen=MAXMECH EPS 8500E margin=0.6
 - **abstain** -> abstain. seller names another generation
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 6147 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 6008 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 21854 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 2574 ms (replayed)
-- total across calls: 36583 ms; wall clock: 333 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5984 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 10765 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 10553 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2451 ms (replayed)
+- total across calls: 29753 ms; wall clock: 1634 ms
 
 ## Identification
 Shortlist from the catalogue:
   - Maxmech MX3500 3.5kVA (0.5)
   - Maxmech MX10000 10kVA (0.4333)
 
-**Not identified: EVIDENCE_INCOMPLETE.** The answer states 8kva but the evidence shows 12kva.
+**Not identified: EVIDENCE_INCOMPLETE.** The answer rests on 8500e, which the OCR engine did not read off the item and the seller did not say. Two readers transcribing the same code is not enough on its own. This needs a sharp photo of the label.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 51% on the best answer. It is probably a Maxmech EPS 8000 or a Maxmech MX10000, and the photos cannot separate them.**
+**Not sure enough to price: 51% on the best answer. It is probably a MAXMECH EPS 8500E or a Maxmech MX10000 10kVA, and the photos cannot separate them.**
 
 - Identification confidence: 51% (unsure)
 - Price confidence: 18%
-- It is weighing: Maxmech EPS 8000 (0.85), Maxmech MX10000 (0.3)
-- The answer states 8kva but the evidence shows 12kva.
+- It is weighing: MAXMECH EPS 8500E (0.85), Maxmech MX10000 10kVA (0.25)
+- The answer rests on 8500e, which the OCR engine did not read off the item and the seller did not say. Two readers transcribing the same code is not enough on its own. This needs a sharp photo of the label.
 - read off the item's own label
 - 2 lines seen by both readers
 - 8 claims are still unproven, 0 are supported
@@ -92,14 +93,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Photo of the engine, showing the recoil starter and carburettor.
 
 ## Price
-**1,940 to 6,144 NGN** (priced as material, width 1.0401, method material_floor, 0 comparable prices)
+**2,319 to 6,660 NGN** (priced as material, width 0.9667, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 12 kg of plastic 40%, steel 30%, circuit_board 10%, rubber 10%, mixed_electronic 10% (rates for mixed_electronic, plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 15 kg of steel 40%, plastic 30%, circuit_board 10%, rubber 10%, unknown 10% (rates for plastic, rubber, unknown are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 4,140 NGN
+Scrap floor: 4,950 NGN
 
 Conditions attached to this price:
-- Not identified: The answer states 8kva but the evidence shows 12kva.
+- Not identified: The answer rests on 8500e, which the OCR engine did not read off the item and the seller did not say. Two readers transcribing the same code is not enough on its own. This needs a sharp photo of the label.
 - Maxmech 12kva petrol generator -> not proven remotely. Agent reads the rating plate.
 - 100% pure copper coil -> not proven remotely. Agent opens the side cover and inspects the windings.
 - High performance Generator -> not proven remotely. Agent will confirm at pickup.

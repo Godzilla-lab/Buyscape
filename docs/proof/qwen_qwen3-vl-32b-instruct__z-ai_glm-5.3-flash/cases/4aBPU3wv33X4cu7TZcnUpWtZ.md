@@ -1,22 +1,23 @@
 # Case 4aBPU3wv33X4cu7TZcnUpWtZ
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  33706 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  31564 ms
 
 ## What the engine saw
 - Presentation: single_unit
-- Category: phone (confidence 0.95)
-- Made of: aluminium 40%, plastic 50%, glass 10%
+- Category: phone (confidence 1.0)
+- Made of: aluminium 40%, plastic 60%
 - Estimated weight: 0.2 kg (confidence 0.9)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: red sticker with '2800' on back, no visible cracks or dents
+- Damage noted: none
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 - Text read: Galaxy A17 | CITY 200 | A100
 
 ## Two readers
+- item_type agreed by both readers
 - 1 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
@@ -35,7 +36,7 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 12 lines: alaxy | Galoxy | ZENTAL | 07 | A17 | alaky | ALI | POSTED ON JIJI | SHAEL TECH GLOBA | 200 | CITY | A100
-- **corroborate** -> dispute. 1 transcribed lines was seen by only one reader, so it is treated as unread
+- **corroborate** -> dispute. item_type agreed by both readers; 1 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=phone brand=None model=None label=False lines=3
 - **retrieval** -> ok. query='Galaxy A17 CITY 200 A100 Good deal 
 iPhone 12pro max
@@ -43,15 +44,15 @@ iPhone 12pro max
 84% Battery Health
 Face ID 
 Tru' hits=['Apple iPhone 12', 'Apple iPhone XS Max', 'Apple iPhone 11 Pro Max', 'Apple iPhone 12 Pro Max', 'Apple iPhone 13 Pro Max']
-- **identify** -> ok. chosen=Apple iPhone 12 Pro Max margin=0.15
-- **abstain** -> abstain. top score 0.6
+- **identify** -> ok. chosen=Apple iPhone 12 Pro Max margin=0.3
+- **abstain** -> abstain. no label, top score 0.75
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 4674 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 17477 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 7270 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 4285 ms (replayed)
-- total across calls: 33706 ms; wall clock: 708 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4596 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 13589 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 8624 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 4755 ms (replayed)
+- total across calls: 31564 ms; wall clock: 2225 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -61,18 +62,17 @@ Shortlist from the catalogue:
   - Apple iPhone 12 Pro Max (0.2)
   - Apple iPhone 13 Pro Max (0.2)
 
-**Not identified: CANNOT_IDENTIFY.** The best candidate scored only 0.6, which is not sure enough to price.
+**Not identified: CANNOT_IDENTIFY.** No label, plate or settings screen was legible, and the visual match alone scored only 0.75.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 28% on the best answer. It is probably a Apple iPhone 12 Pro Max or a Apple iPhone 13 Pro Max, and the photos cannot separate them.**
+**Not sure enough to price: 38% on the best answer. It is probably a Apple iPhone 12 Pro Max or a Apple iPhone 12 Pro, and the photos cannot separate them.**
 
-- Identification confidence: 28% (unknown)
+- Identification confidence: 38% (unknown)
 - Price confidence: 14%
-- It is weighing: Apple iPhone 12 Pro Max (0.6), Apple iPhone 13 Pro Max (0.45)
-- The best candidate scored only 0.6, which is not sure enough to price.
+- It is weighing: Apple iPhone 12 Pro Max (0.75), Apple iPhone 12 Pro (0.45)
+- No label, plate or settings screen was legible, and the visual match alone scored only 0.75.
 - no label, plate or settings screen was legible
 - 3 lines seen by both readers
-- the next candidate was only 0.15 behind
 - 11 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -112,14 +112,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
-**51 to 259 NGN** (priced as material, width 1.3406, method material_floor, 0 comparable prices)
+**51 to 261 NGN** (priced as material, width 1.341, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 0.2 kg of aluminium 40%, plastic 50%, glass 10% (rates for glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 0.2 kg of aluminium 40%, plastic 60% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 170 NGN
+Scrap floor: 172 NGN
 
 Conditions attached to this price:
-- Not identified: The best candidate scored only 0.6, which is not sure enough to price.
+- Not identified: No label, plate or settings screen was legible, and the visual match alone scored only 0.75.
 - iPhone 12pro max -> not proven remotely. Agent will confirm at pickup.
 - 256gb -> not proven remotely. Agent reads storage from Settings.
 - 84% Battery Health -> not proven remotely. Agent opens the battery health screen.

@@ -1,6 +1,6 @@
 # Case A3saYFjCdkpwjJZkW3km88Ud
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  40113 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0013  |  44465 ms
 
 ## What the engine saw
 - Presentation: single_unit
@@ -11,12 +11,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: minor scuffs on lid, dust and smudges on control panel
+- Damage noted: minor scratches on lid, dust and debris inside drum
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 - Text read: TOP VOLT | SAMSUNG
 
 ## Two readers
+- item_type agreed by both readers
 - 1 transcribed lines was seen by only one reader, so it is treated as unread
 - brand_text was read by only one reader, so it is kept but not confirmed
 
@@ -28,18 +29,18 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 4 lines: C000 | SKVAUN | POSTED ONJIJI | TOPVOLT
-- **corroborate** -> dispute. 1 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed
+- **corroborate** -> dispute. item_type agreed by both readers; 1 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed
 - **read_evidence** -> ok. category=washing machine brand=SAMSUNG model=None label=False lines=2
 - **retrieval** -> ok. query='SAMSUNG TOP VOLT SAMSUNG Skyrun 11kg Twin tub Washing machine' hits=['Samsung WA80 8kg top loader', 'Samsung WW70 7kg front loader', 'LG WM8 8kg twin tub', 'Haier Thermocool TT8 8kg twin tub', 'TCL TWA110 11kg top loader']
-- **identify** -> refused. chosen=None None margin=0.2
+- **identify** -> refused. chosen=Skyrun None margin=0.0
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 4131 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 17117 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 15709 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 3156 ms (replayed)
-- total across calls: 40113 ms; wall clock: 390 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 7137 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 13064 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 19014 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 5250 ms (replayed)
+- total across calls: 44465 ms; wall clock: 1827 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -49,20 +50,20 @@ Shortlist from the catalogue:
   - Haier Thermocool TT8 8kg twin tub (0.2667)
   - TCL TWA110 11kg top loader (0.2)
 
-**Not identified: CANNOT_IDENTIFY.** Twin tub machine, but no legible brand/model plate; seller says Skyrun while panel shows Samsung text, and no shortlist entry is a Samsung or Skyrun twin tub. Capacity claim of 11kg is unverifiable.
+**Not identified: CANNOT_IDENTIFY.** Control panel appears to read 'Skyrun', matching the seller, but no model or capacity plate is legible; the 'SAMSUNG' OCR read conflicts with it and 'TOP VOLT' is a listing watermark. No shortlist entry is Skyrun, and no candidate's model can be confirmed.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 11% on the best answer. It is probably a Skyrun Unknown 11kg twin tub or a Samsung WA80, and the photos cannot separate them.**
+**Not sure enough to price: 4% on the best answer. It is probably a Samsung WA80 or a LG WM8, and the photos cannot separate them.**
 
-- Identification confidence: 11% (unknown)
-- Price confidence: 18%
-- It is weighing: Skyrun Unknown 11kg twin tub (0.3), Samsung WA80 (0.1)
-- Twin tub machine, but no legible brand/model plate; seller says Skyrun while panel shows Samsung text, and no shortlist entry is a Samsung or Skyrun twin tub. Capacity claim of 11kg is unverifiable.
+- Identification confidence: 4% (unknown)
+- Price confidence: 20%
+- It is weighing: Samsung WA80 (0.1), LG WM8 (0.1)
+- Control panel appears to read 'Skyrun', matching the seller, but no model or capacity plate is legible; the 'SAMSUNG' OCR read conflicts with it and 'TOP VOLT' is a listing watermark. No shortlist entry is Skyrun, and no candidate's model can be confirmed.
 - no label, plate or settings screen was legible
 - 1 lines seen by both readers
 - the brand was read by only one reader and is not confirmed
-- the next candidate was only 0.2 behind
-- 8 claims are still unproven, 0 are supported
+- the next candidate was only 0.0 behind
+- 7 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
 
@@ -83,8 +84,6 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: the smallest capacity this brand sells. Agent reads the rating plate
 - [unverified] Skyrun 11kg Twin tub Washing machine
     priced as: the smallest capacity this brand sells. Agent reads the rating plate
-- [unverified] Skyrun 11kg Twin tub Washing machine
-    priced as: the smallest capacity this brand sells. Agent reads the rating plate
 - [unverified] Required evidence 'code_shot' was not supplied
     priced as: priced as if the worst case is true. Write the code {code} on paper and photograph it next to the machine.
 - [unverified] Required evidence 'overall_front' was not supplied
@@ -95,15 +94,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Open the door and photograph the inside of the drum.
 
 ## Price
-**1,860 to 6,400 NGN** (priced as material, width 1.0992, method material_floor, 0 comparable prices)
+**2,188 to 6,400 NGN** (priced as material, width 0.9808, method material_floor, 0 comparable prices)
 
 This item was not identified, so it is priced as material rather than as a working item: 25 kg of plastic 70%, steel 20%, rubber 10% (rates for plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
 Scrap floor: 4,375 NGN
 
 Conditions attached to this price:
-- Not identified: Twin tub machine, but no legible brand/model plate; seller says Skyrun while panel shows Samsung text, and no shortlist entry is a Samsung or Skyrun twin tub. Capacity claim of 11kg is unverifiable.
-- Skyrun 11kg Twin tub Washing machine -> not proven remotely. Agent reads the rating plate.
+- Not identified: Control panel appears to read 'Skyrun', matching the seller, but no model or capacity plate is legible; the 'SAMSUNG' OCR read conflicts with it and 'TOP VOLT' is a listing watermark. No shortlist entry is Skyrun, and no candidate's model can be confirmed.
 - Skyrun 11kg Twin tub Washing machine -> not proven remotely. Agent reads the rating plate.
 - Skyrun 11kg Twin tub Washing machine -> not proven remotely. Agent reads the rating plate.
 - Skyrun 11kg Twin tub Washing machine -> not proven remotely. Agent reads the rating plate.

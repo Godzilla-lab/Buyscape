@@ -1,55 +1,47 @@
 # Case samsung-eco-bubble-9kg-washing-machine
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0016  |  42477 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0015  |  71379 ms
 
 ## What the engine saw
 - Presentation: single_unit
-- Category: washing machine (confidence 0.95)
-- Made of: steel 40%, plastic 50%, copper 10%
+- Category: washing machine (confidence 1.0)
+- Made of: steel 40%, plastic 50%, glass 10%
 - Estimated weight: 65.0 kg (confidence 0.8)
 - Brand read off the item: SAMSUNG
 - Model read off the item: nothing legible
 - Rating read: 9.0kg
 - Label, plate or settings screen legible: yes
-- Damage noted: dust and grime on surface, minor stains around door seal, small water spots on front panel, door handle slightly discolored
+- Damage noted: dusty surface, water stains on front panel, small scratches around door frame, door seal appears slightly discolored
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: SAMSUNG | Super Eco Wash | Outdoor Care | Baby Care | Wool@ | Bedding | Spin | Rinse+Spin
+- Text read: SAMSUNG | Super Eco Wash | Outdoor Care | Baby Care | Wool 3D | Bedding | Spin | Rinse+Spin
 
 ## Two readers
 - brand_text agreed by both readers
 - rating_text agreed by both readers
+- item_type agreed by both readers
 - 2 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
-- SAMSUNG
-- Super Eco Wash
-- Outdoor Care
-- Baby Care
-- Wool
-- Bedding
-- -Stain Awny
-- Rinse+Spin
-- Spin
-- -Dark Garment
-- Daly Wieh
-- -Eco Drum Cran
+- SAMMMUNG
+- WARRANTY
+- 12
 
 ## Chain
-- **ocr** -> ok. 16 lines: SAMSUNG | Super Eco Wash | Outdoor Care | Baby Care | Wool | Bedding | -Stain Awny | Rinse+Spin | Spin | -Dark Garment |
-- **corroborate** -> dispute. brand_text agreed by both readers; rating_text agreed by both readers; 2 transcribed lines was seen by only one reader, so it is treated as unread
+- **ocr** -> ok. 3 lines: SAMMMUNG | WARRANTY | 12
+- **corroborate** -> dispute. brand_text agreed by both readers; rating_text agreed by both readers; item_type agreed by both readers; 2 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=washing machine brand=SAMSUNG model=None label=True lines=17
-- **retrieval** -> ok. query='SAMSUNG 9.0kg SAMSUNG Super Eco Wash Outdoor Care Baby Care Wool@ Bedding Spin Rinse+Spin ' hits=['Samsung Galaxy Note 20', 'Samsung AR09 1HP', 'Samsung WA80 8kg top loader', 'Samsung AR12 1.5HP', 'Samsung WW70 7kg front loader']
-- **identify** -> refused. chosen=None None margin=None
+- **retrieval** -> ok. query='SAMSUNG 9.0kg SAMSUNG Super Eco Wash Outdoor Care Baby Care Wool 3D Bedding Spin Rinse+Spi' hits=['Samsung Galaxy Note 20', 'Samsung AR09 1HP', 'Samsung WA80 8kg top loader', 'Samsung AR12 1.5HP', 'Samsung WW70 7kg front loader']
+- **identify** -> refused. chosen=Samsung None margin=None
 - **abstain** -> abstain. model refused
 - **condition** -> not working. by the seller's own account
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 7782 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 12011 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 18705 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 3979 ms (replayed)
-- total across calls: 42477 ms; wall clock: 462 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 20770 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 31206 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 11988 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 7415 ms (replayed)
+- total across calls: 71379 ms; wall clock: 1314 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -59,15 +51,15 @@ Shortlist from the catalogue:
   - Samsung AR12 1.5HP (0.4)
   - Samsung WW70 7kg front loader (0.4)
 
-**Not identified: CANNOT_IDENTIFY.** Panel reads 'ecobubble 9.0kg' front loader, but no shortlist entry is a 9kg front loader and no full model number (e.g. WW90xxxx) is legible to confirm the exact model.
+**Not identified: CANNOT_IDENTIFY.** Label reads 'eco bubble 9.0kg' front loader, but no 9kg model is on the shortlist and the exact model number is not legible; WW70 is 7kg and does not fit.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 21% on the best answer. It is probably a Samsung WW70, and the photos cannot separate them.**
+**Not sure enough to price: 12% on the best answer. It is probably a Samsung WW70, and the photos cannot separate them.**
 
-- Identification confidence: 21% (unknown)
+- Identification confidence: 12% (unknown)
 - Price confidence: 14%
-- It is weighing: Samsung WW70 (0.35)
-- Panel reads 'ecobubble 9.0kg' front loader, but no shortlist entry is a 9kg front loader and no full model number (e.g. WW90xxxx) is legible to confirm the exact model.
+- It is weighing: Samsung WW70 (0.2)
+- Label reads 'eco bubble 9.0kg' front loader, but no 9kg model is on the shortlist and the exact model number is not legible; WW70 is 7kg and does not fit.
 - read off the item's own label
 - 17 lines seen by both readers
 - 10 claims are still unproven, 0 are supported
@@ -105,14 +97,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Open the door and photograph the inside of the drum.
 
 ## Price
-**31,175 to 105,950 NGN** (priced as material, width 1.0906, method material_floor, 0 comparable prices)
+**6,285 to 21,775 NGN** (priced as material, width 1.1041, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 65 kg of steel 40%, plastic 50%, copper 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 65 kg of steel 40%, plastic 50%, glass 10% (rates for glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 81,250 NGN
+Scrap floor: 16,380 NGN
 
 Conditions attached to this price:
-- Not identified: Panel reads 'ecobubble 9.0kg' front loader, but no shortlist entry is a 9kg front loader and no full model number (e.g. WW90xxxx) is legible to confirm the exact model.
+- Not identified: Label reads 'eco bubble 9.0kg' front loader, but no 9kg model is on the shortlist and the exact model number is not legible; WW70 is 7kg and does not fit.
 - Model: Samsung Eco Bubble -> not proven remotely. Agent reads the rating plate.
 - Condition: Scrap/for repair (The power comes on) -> not proven remotely. Agent checks drum play and listens on spin.
 - Capacity: 9kg -> not proven remotely. Agent reads the rating plate.

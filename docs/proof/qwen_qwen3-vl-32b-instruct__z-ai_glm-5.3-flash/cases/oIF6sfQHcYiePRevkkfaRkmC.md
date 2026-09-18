@@ -1,10 +1,10 @@
 # Case oIF6sfQHcYiePRevkkfaRkmC
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  29424 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  36749 ms
 
 ## What the engine saw
 - Presentation: sealed_new
-- Category: phone (confidence 0.9)
+- Category: phone (confidence 0.95)
 - Made of: paper 80%, plastic 20%
 - Estimated weight: 0.5 kg (confidence 0.7)
 - Brand read off the item: nothing legible
@@ -14,26 +14,30 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Damage noted: none
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
-- Text read: POSTED ON Jiji | EMANTECH HUB
+- Text read: EMANTECH HUB
+
+## Two readers
+- 1 transcribed lines was seen by only one reader, so it is treated as unread
+- item_type was read by only one reader, so it is kept but not confirmed
 
 ## OCR read off the photos
 - EMANTECH HUB
 
 ## Chain
 - **ocr** -> ok. 1 lines: EMANTECH HUB
-- **corroborate** -> agree. nothing identifying was read by either
-- **read_evidence** -> ok. category=phone brand=None model=None label=False lines=2
+- **corroborate** -> dispute. 1 transcribed lines was seen by only one reader, so it is treated as unread; item_type was read by only one reader, so it is kept but not confirmed
+- **read_evidence** -> ok. category=phone brand=None model=None label=False lines=1
 - **forensics** -> flag. looks like a catalogue or stock image
-- **retrieval** -> ok. query='POSTED ON Jiji EMANTECH HUB Apple iPhone 17 Pro Max is Apple’s premium flagship smartphone' hits=['Apple iPhone 11 Pro Max', 'Apple iPhone 12 Pro Max', 'Apple iPhone 13 Pro Max', 'Apple iPhone 14 Pro Max', 'Apple iPhone 15 Pro Max']
-- **identify** -> refused. chosen=None None margin=0.25
+- **retrieval** -> ok. query='EMANTECH HUB Apple iPhone 17 Pro Max is Apple’s premium flagship smartphone with a large 6' hits=['Apple iPhone 11 Pro Max', 'Apple iPhone 12 Pro Max', 'Apple iPhone 13 Pro Max', 'Apple iPhone 14 Pro Max', 'Apple iPhone 15 Pro Max']
+- **identify** -> refused. chosen=None None margin=0.05
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 3507 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 9730 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 14046 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 2141 ms (replayed)
-- total across calls: 29424 ms; wall clock: 1060 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5586 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 17867 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 10257 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3039 ms (replayed)
+- total across calls: 36749 ms; wall clock: 2014 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -43,20 +47,21 @@ Shortlist from the catalogue:
   - Apple iPhone 14 Pro Max (0.6)
   - Apple iPhone 15 Pro Max (0.6)
 
-**Not identified: CANNOT_IDENTIFY.** Only unboxing imagery visible: no label, no model text, and seller's claimed model is unverified and outside shortlist.
+**Not identified: CANNOT_IDENTIFY.** Box art shows a full-width camera plateau design (consistent with iPhone 17 Pro styling) not present on any shortlisted model; no legible label text confirms brand or model, so the seller's claimed 'iPhone 17 Pro Max' cannot be verified from evidence.
 
 Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 7% on the best answer. It is probably a Apple iPhone 17 Pro Max or a Apple iPhone 15 Pro Max, and the photos cannot separate them.**
+**Not sure enough to price: 3% on the best answer. It is probably a Apple iPhone 15 Pro Max or a Apple iPhone 14 Pro Max, and the photos cannot separate them.**
 
-- Identification confidence: 7% (unknown)
+- Identification confidence: 3% (unknown)
 - Price confidence: 20%
-- It is weighing: Apple iPhone 17 Pro Max (0.3), Apple iPhone 15 Pro Max (0.05)
-- Only unboxing imagery visible: no label, no model text, and seller's claimed model is unverified and outside shortlist.
+- It is weighing: Apple iPhone 15 Pro Max (0.15), Apple iPhone 14 Pro Max (0.1)
+- Box art shows a full-width camera plateau design (consistent with iPhone 17 Pro styling) not present on any shortlisted model; no legible label text confirms brand or model, so the seller's claimed 'iPhone 17 Pro Max' cannot be verified from evidence.
 - no label, plate or settings screen was legible
-- 2 lines seen by both readers
-- the next candidate was only 0.25 behind
+- 1 lines seen by both readers
+- the item_type was read by only one reader and is not confirmed
+- the next candidate was only 0.05 behind
 - looks like a catalogue or stock image
 - 7 claims are still unproven, 0 are supported
 
@@ -65,9 +70,9 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 ## What the seller is asked for next (shown in the app)
 1. [PHOTO] Take your own photo of the actual item you are selling.
    _why: this looks like a catalogue picture, not the real unit_
-2. [PHOTO] Screenshot of Settings then About, showing the model name and storage.
-   _why: nothing on the item says which model this is_
-3. [PHOTO] Dial *#06# and screenshot the IMEI that appears.
+2. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: If you have the box, photograph the label showing the model, storage and IMEI. Then, still filming, do this on the item's own screen and hold it steady so the writing can be read: open settings then About, showing the model name and storage. Then, without stopping the video: Pull out the SIM tray and photograph the open slot. Finish with: A short clip: press power, unlock, then open the camera app. Keep filming the whole time. Do not cut between clips.
+   _why: two readings of these photos disagreed about what is written on the item_
+3. [PHOTO] Screenshot of Settings then About, showing the model name and storage.
    _why: nothing on the item says which model this is_
 
 ## What the seller is asked (only they know these)
@@ -97,7 +102,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 34 NGN
 
 Conditions attached to this price:
-- Not identified: Only unboxing imagery visible: no label, no model text, and seller's claimed model is unverified and outside shortlist.
+- Not identified: Box art shows a full-width camera plateau design (consistent with iPhone 17 Pro styling) not present on any shortlisted model; no legible label text confirms brand or model, so the seller's claimed 'iPhone 17 Pro Max' cannot be verified from evidence.
 - Evidence flag: looks like a catalogue or stock image
 - Apple iPhone 17 Pro Max is Apple’s premium flagship smartphone -> not proven remotely. Agent will confirm at pickup.
 - has a large 6.9-inch display -> not proven remotely. Agent will confirm at pickup.

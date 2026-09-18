@@ -1,27 +1,27 @@
 # Case 1hFJf5ukeSh84ctAhZI8U9Id
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0013  |  49406 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  24203 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: washing machine (confidence 0.95)
-- Made of: steel 40%, plastic 35%, copper_insulated 15%, glass 10%
+- Made of: steel 60%, plastic 30%, glass 10%
 - Estimated weight: 75.0 kg (confidence 0.8)
-- Brand read off the item: nothing legible
+- Brand read off the item: Hisense
 - Model read off the item: nothing legible
 - Rating read: 8kg
 - Label, plate or settings screen legible: yes
-- Damage noted: Front door is open and slightly ajar, Some minor scratches on the front panel, Interior drum appears clean, No visible rust or major damage
+- Damage noted: door open, no visible damage to drum or exterior, some dust on surface
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: Smart Washer 8kg | 8kg | Wash | WASHING MACHINE | Capacity: 8kg
+- Text read: Hisense | 8kg | Inverter
 
 ## Two readers
+- brand_text agreed by both readers
 - rating_text agreed by both readers
-- brand_text differed between the two readers, so it is treated as unread
+- item_type agreed by both readers
 - model_text was seen by only one reader, so it is treated as unread
-- serial_text was seen by only one reader, so it is treated as unread
-- 11 transcribed lines was seen by only one reader, so it is treated as unread
+- 4 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
 - Jam Wash
@@ -29,41 +29,42 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 2 lines: Jam Wash | 99.9%
-- **corroborate** -> dispute. rating_text agreed by both readers; brand_text differed between the two readers, so it is treated as unread; model_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 11 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=washing machine brand=None model=None label=True lines=5
-- **retrieval** -> ok. query='8kg Smart Washer 8kg 8kg Wash WASHING MACHINE Capacity: 8kg Brand new washing machine
-Wash' hits=['Polystar PV-WD8K 8kg', 'Panasonic NA-W80 8kg', 'LG T2108 8kg top loader', 'Hisense WTJA801 8kg top loader', 'Samsung WA80 8kg top loader']
-- **identify** -> refused. chosen=Hisense None margin=0.25
+- **corroborate** -> dispute. brand_text agreed by both readers; rating_text agreed by both readers; item_type agreed by both readers; model_text was seen by only one reader, so it is treated as unread; 4 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=washing machine brand=Hisense model=None label=True lines=3
+- **retrieval** -> ok. query='Hisense 8kg Hisense 8kg Inverter Brand new washing machine
+Wash and spin machine
+Very stro' hits=['Hisense WTJA801 8kg top loader', 'Hisense WT3K9022U 9kg top loader', 'Hisense WM5S1045 10kg front loader', 'Polystar PV-WD8K 8kg', 'Panasonic NA-W80 8kg']
+- **identify** -> refused. chosen=Hisense None margin=0.05
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 9987 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 14898 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 22332 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 2189 ms (replayed)
-- total across calls: 49406 ms; wall clock: 364 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4879 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 7481 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 8864 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2979 ms (replayed)
+- total across calls: 24203 ms; wall clock: 1510 ms
 
 ## Identification
 Shortlist from the catalogue:
+  - Hisense WTJA801 8kg top loader (0.8)
+  - Hisense WT3K9022U 9kg top loader (0.4333)
+  - Hisense WM5S1045 10kg front loader (0.4333)
   - Polystar PV-WD8K 8kg (0.2)
   - Panasonic NA-W80 8kg (0.2)
-  - LG T2108 8kg top loader (0.1667)
-  - Hisense WTJA801 8kg top loader (0.1667)
-  - Samsung WA80 8kg top loader (0.1667)
 
-**Not identified: CANNOT_IDENTIFY.** Hisense brand is legible on the control panel and it is an 8kg front loader, but no model number is readable and the only Hisense shortlist entry (WTJA801) is a top loader, contradicting the visible front-load drum and door.
+**Not identified: CANNOT_IDENTIFY.** Photo shows a Hisense 8kg front loader, but no model number is legible and no shortlist entry is an 8kg Hisense front loader.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 16% on the best answer. It is probably a Hisense WTJA801 or a Polystar PV-WD8K, and the photos cannot separate them.**
+**Not sure enough to price: 14% on the best answer. It is probably a Hisense WM5S1045 or a Hisense WTJA801, and the photos cannot separate them.**
 
-- Identification confidence: 16% (unknown)
-- Price confidence: 20%
-- It is weighing: Hisense WTJA801 (0.3), Polystar PV-WD8K (0.05)
-- Hisense brand is legible on the control panel and it is an 8kg front loader, but no model number is readable and the only Hisense shortlist entry (WTJA801) is a top loader, contradicting the visible front-load drum and door.
+- Identification confidence: 14% (unknown)
+- Price confidence: 18%
+- It is weighing: Hisense WM5S1045 (0.25), Hisense WTJA801 (0.2)
+- Photo shows a Hisense 8kg front loader, but no model number is legible and no shortlist entry is an 8kg Hisense front loader.
 - read off the item's own label
-- 5 lines seen by both readers
-- the next candidate was only 0.25 behind
-- 7 claims are still unproven, 0 are supported
+- 3 lines seen by both readers
+- the next candidate was only 0.05 behind
+- 8 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
 
@@ -82,7 +83,8 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: assumed worn drum bearing. Agent checks drum play and listens on spin
 - [unverified] Wash and spin machine
     priced as: the smallest capacity this brand sells. Agent reads the rating plate
-- [unverifiable_remote] With 8kg capacity
+- [unverifiable_remote] Very strong and quality machine
+- [unverified] With 8kg capacity
     priced as: the smallest capacity this brand sells. Agent reads the rating plate
 - [unverified] Required evidence 'code_shot' was not supplied
     priced as: priced as if the worst case is true. Write the code {code} on paper and photograph it next to the machine.
@@ -94,16 +96,17 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Open the door and photograph the inside of the drum.
 
 ## Price
-**22,959 to 56,850 NGN** (priced as material, width 0.8493, method material_floor, 0 comparable prices)
+**11,832 to 31,425 NGN** (priced as material, width 0.9059, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 75 kg of steel 40%, plastic 35%, copper_insulated 15%, glass 10% (rates for glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 75 kg of steel 60%, plastic 30%, glass 10% (rates for glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 45,900 NGN
+Scrap floor: 24,900 NGN
 
 Conditions attached to this price:
-- Not identified: Hisense brand is legible on the control panel and it is an 8kg front loader, but no model number is readable and the only Hisense shortlist entry (WTJA801) is a top loader, contradicting the visible front-load drum and door.
+- Not identified: Photo shows a Hisense 8kg front loader, but no model number is legible and no shortlist entry is an 8kg Hisense front loader.
 - Brand new washing machine -> not proven remotely. Agent checks drum play and listens on spin.
 - Wash and spin machine -> not proven remotely. Agent reads the rating plate.
+- Very strong and quality machine -> not proven remotely. Agent will confirm at pickup.
 - With 8kg capacity -> not proven remotely. Agent reads the rating plate.
 - Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on paper and photograph it next to the machine..
 - Required evidence 'overall_front' was not supplied -> not proven remotely. One photo of the whole machine from the front with the door closed..

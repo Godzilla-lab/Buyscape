@@ -1,27 +1,27 @@
 # Case zxvzOZTzMKWuDoDGxtMTBftm
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  29433 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0013  |  60054 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: phone (confidence 0.95)
 - Made of: plastic 60%, circuit_board 20%, steel 10%, glass 10%
-- Estimated weight: 0.2 kg (confidence 0.9)
-- Brand read off the item: nothing legible
+- Estimated weight: 0.2 kg (confidence 0.8)
+- Brand read off the item: SAMSUNG
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
 - Damage noted: none
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: INVOICE
+- Text read: INVOICE | Item: Samsung Galaxy A54 | SAMSUNG
 
 ## Two readers
-- brand_text differed between the two readers, so it is treated as unread
+- brand_text agreed by both readers
+- item_type agreed by both readers
 - model_text differed between the two readers, so it is treated as unread
 - rating_text was seen by only one reader, so it is treated as unread
-- serial_text was seen by only one reader, so it is treated as unread
-- 12 transcribed lines was seen by only one reader, so it is treated as unread
+- 10 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
 - If
@@ -32,40 +32,39 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 5 lines: If | INVOICE | ex | D90071 | DESCRPTION
-- **corroborate** -> dispute. brand_text differed between the two readers, so it is treated as unread; model_text differed between the two readers, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 12 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=phone brand=None model=None label=True lines=1
-- **retrieval** -> ok. query='INVOICE Direct grade A uk used S21 5gb 256gb 
-In excellent condition 
-Samsung Galaxy S21 5' hits=['Samsung Galaxy S21', 'Samsung Galaxy S22', 'Samsung Galaxy S23', 'Samsung Galaxy S24', 'Samsung Galaxy S25']
-- **identify** -> ok. chosen=Samsung Galaxy S21 margin=0.4
-- **abstain** -> abstain. top score 0.6
+- **corroborate** -> dispute. brand_text agreed by both readers; item_type agreed by both readers; model_text differed between the two readers, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; 10 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=phone brand=SAMSUNG model=None label=True lines=3
+- **retrieval** -> ok. query='SAMSUNG INVOICE Item: Samsung Galaxy A54 SAMSUNG Direct grade A uk used S21 5gb 256gb 
+In ' hits=['Samsung Galaxy S21', 'Samsung Galaxy A54', 'Samsung Galaxy S22', 'Samsung Galaxy S23', 'Samsung Galaxy S24']
+- **identify** -> ok. chosen=Samsung Galaxy A54 margin=0.55
+- **abstain** -> abstain. seller names another generation
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 5671 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 8702 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 8835 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 6225 ms (replayed)
-- total across calls: 29433 ms; wall clock: 474 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5958 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 39063 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 10104 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 4929 ms (replayed)
+- total across calls: 60054 ms; wall clock: 1297 ms
 
 ## Identification
 Shortlist from the catalogue:
   - Samsung Galaxy S21 (0.9)
+  - Samsung Galaxy A54 (0.9)
   - Samsung Galaxy S22 (0.5)
   - Samsung Galaxy S23 (0.5)
   - Samsung Galaxy S24 (0.5)
-  - Samsung Galaxy S25 (0.5)
 
-**Not identified: CANNOT_IDENTIFY.** The best candidate scored only 0.6, which is not sure enough to price.
+**Not identified: EVIDENCE_INCOMPLETE.** The answer rests on a54, which the OCR engine did not read off the item and the seller did not say. Two readers transcribing the same code is not enough on its own. This needs a sharp photo of the label.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 36% on the best answer. It is probably a Samsung Galaxy S21 or a Samsung Galaxy S22, and the photos cannot separate them.**
+**Not sure enough to price: 45% on the best answer. It is probably a Samsung Galaxy A54 or a Samsung Galaxy S21, and the photos cannot separate them.**
 
-- Identification confidence: 36% (unknown)
+- Identification confidence: 45% (unsure)
 - Price confidence: 14%
-- It is weighing: Samsung Galaxy S21 (0.6), Samsung Galaxy S22 (0.2)
-- The best candidate scored only 0.6, which is not sure enough to price.
+- It is weighing: Samsung Galaxy A54 (0.75), Samsung Galaxy S21 (0.2)
+- The answer rests on a54, which the OCR engine did not read off the item and the seller did not say. Two readers transcribing the same code is not enough on its own. This needs a sharp photo of the label.
 - read off the item's own label
-- 1 lines seen by both readers
+- 3 lines seen by both readers
 - 11 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -113,7 +112,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 54 NGN
 
 Conditions attached to this price:
-- Not identified: The best candidate scored only 0.6, which is not sure enough to price.
+- Not identified: The answer rests on a54, which the OCR engine did not read off the item and the seller did not say. Two readers transcribing the same code is not enough on its own. This needs a sharp photo of the label.
 - Direct grade A uk used S21 5gb 256gb -> not proven remotely. Agent reads storage from Settings.
 - Direct grade A uk used S21 5gb 256gb -> not proven remotely. Agent reads storage from Settings.
 - Direct grade A uk used S21 5gb 256gb -> not proven remotely. Agent reads storage from Settings.

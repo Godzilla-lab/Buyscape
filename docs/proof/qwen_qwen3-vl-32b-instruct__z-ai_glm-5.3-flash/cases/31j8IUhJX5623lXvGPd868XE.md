@@ -1,26 +1,26 @@
 # Case 31j8IUhJX5623lXvGPd868XE
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  17058 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  18508 ms
 
 ## What the engine saw
 - Presentation: sealed_new
-- Category: computer_system (confidence 0.9)
+- Category: computer_server (confidence 0.9)
 - Made of: carton 90%, plastic 10%
-- Estimated weight: 5.0 kg (confidence 0.7)
-- Brand read off the item: CLOVER
+- Estimated weight: 12.0 kg (confidence 0.7)
+- Brand read off the item: ICT
 - Model read off the item: nothing legible
 - Rating read: none
-- Label, plate or settings screen legible: yes
-- Damage noted: box appears intact, minor scuffing on edges
+- Label, plate or settings screen legible: no
+- Damage noted: none
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: INTEGRATED ICT SOLUTIONS | ICT | INTEGRATED ICT-SOLUTION | CLOVER
+- Text read: INTEGRATED ICT SOLUTIONS | ICT | INTEGRATED ICT SOLUTIONS SYSTEM
 
 ## Two readers
-- model_text differed between the two readers, so it is treated as unread
-- rating_text was seen by only one reader, so it is treated as unread
+- item_type agreed by both readers
+- model_text was seen by only one reader, so it is treated as unread
 - serial_text was seen by only one reader, so it is treated as unread
-- 8 transcribed lines was seen by only one reader, so it is treated as unread
+- 3 transcribed lines was seen by only one reader, so it is treated as unread
 - brand_text was read by only one reader, so it is kept but not confirmed
 
 ## OCR read off the photos
@@ -29,16 +29,16 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 2 lines: CT | INT
-- **corroborate** -> dispute. model_text differed between the two readers, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 8 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed
-- **read_evidence** -> ok. category=computer_system brand=CLOVER model=None label=True lines=4
-- **retrieval** -> empty. query='CLOVER INTEGRATED ICT SOLUTIONS ICT INTEGRATED ICT-SOLUTION CLOVER Rog zephyrus g16 gaming' hits=[]
+- **corroborate** -> dispute. item_type agreed by both readers; model_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 3 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed
+- **read_evidence** -> ok. category=computer_server brand=ICT model=None label=False lines=3
+- **retrieval** -> empty. query='ICT INTEGRATED ICT SOLUTIONS ICT INTEGRATED ICT SOLUTIONS SYSTEM Rog zephyrus g16 gaming l' hits=[]
 - **gate** -> abstain. no candidates and no model text
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 5495 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 6417 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 5146 ms (replayed)
-- total across calls: 17058 ms; wall clock: 148 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4354 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 8324 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 5830 ms (replayed)
+- total across calls: 18508 ms; wall clock: 1252 ms
 
 ## Identification
 No catalogue candidates matched.
@@ -51,7 +51,7 @@ No catalogue candidates matched.
 - Identification confidence: 0% (unknown)
 - Price confidence: 14%
 - No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.
-- read off the item's own label
+- no label, plate or settings screen was legible
 - 3 lines seen by both readers
 - the brand was read by only one reader and is not confirmed
 - 10 claims are still unproven, 0 are supported
@@ -92,11 +92,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Tell us what it is, whether it works, and roughly how heavy it is.
 
 ## Price
-**96 to 630 NGN** (priced as material, width 1.4711, method material_floor, 0 comparable prices)
+**230 to 1,512 NGN** (priced as material, width 1.4711, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 5 kg of carton 90%, plastic 10% (rates for carton, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 12 kg of carton 90%, plastic 10% (rates for carton, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 320 NGN
+Scrap floor: 768 NGN
 
 Conditions attached to this price:
 - Not identified: No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.

@@ -1,38 +1,40 @@
 # Case brand-new-sneakers
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  19465 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  60232 ms
 
 ## What the engine saw
 - Presentation: single_unit
-- Category: sneakers (confidence 0.95)
-- Made of: plastic 40%, textile 30%, rubber 20%, steel 10%
+- Category: shoes (confidence 1.0)
+- Made of: textile 40%, plastic 30%, rubber 20%, steel 10%
 - Estimated weight: 1.2 kg (confidence 0.8)
-- Brand read off the item: nothing legible
+- Brand read off the item: PRIMA
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: no visible damage, shoes appear clean and unused
+- Damage noted: none
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
+- Text read: PRIMA
 
 ## Two readers
-- brand_text differed between the two readers, so it is treated as unread
-- 2 transcribed lines was seen by only one reader, so it is treated as unread
+- brand_text agreed by both readers
+- 1 transcribed lines was seen by only one reader, so it is treated as unread
+- item_type was read by only one reader, so it is kept but not confirmed
 
 ## Chain
 - **ocr** -> ok. 0 lines: 
-- **corroborate** -> dispute. brand_text differed between the two readers, so it is treated as unread; 2 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=sneakers brand=None model=None label=True lines=0
-- **retrieval** -> ok. query='Brand new sneakers are available for sale. Location: Agege, Lagos State. Price: 40,000 nai' hits=['Tecno Camon 40', 'Tecno Spark 40', 'Infinix Hot 40', 'Infinix Note 40']
+- **corroborate** -> dispute. brand_text agreed by both readers; 1 transcribed lines was seen by only one reader, so it is treated as unread; item_type was read by only one reader, so it is kept but not confirmed
+- **read_evidence** -> ok. category=shoes brand=PRIMA model=None label=True lines=1
+- **retrieval** -> ok. query='PRIMA PRIMA Brand new sneakers are available for sale. Location: Agege, Lagos State. Price' hits=['Tecno Camon 40', 'Tecno Spark 40', 'Infinix Hot 40', 'Infinix Note 40']
 - **identify** -> refused. chosen=None None margin=None
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 5024 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 8130 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 5583 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 728 ms (replayed)
-- total across calls: 19465 ms; wall clock: 160 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 21358 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 25403 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 8413 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 5058 ms (replayed)
+- total across calls: 60232 ms; wall clock: 1262 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -41,16 +43,17 @@ Shortlist from the catalogue:
   - Infinix Hot 40 (0.2)
   - Infinix Note 40 (0.2)
 
-**Not identified: CANNOT_IDENTIFY.** The photos show a pair of sneakers, not any mobile phone; no shortlist entry can apply.
+**Not identified: CANNOT_IDENTIFY.** Item is a pair of PRIMA sneakers, not a phone; no catalogue entry matches.
 
 ## How sure the engine is (back office)
 **0%: the photos do not say what this is.**
 
 - Identification confidence: 0% (unknown)
 - Price confidence: 27%
-- The photos show a pair of sneakers, not any mobile phone; no shortlist entry can apply.
+- Item is a pair of PRIMA sneakers, not a phone; no catalogue entry matches.
 - read off the item's own label
-- the two readers agreed on nothing legible
+- 1 lines seen by both readers
+- the item_type was read by only one reader and is not confirmed
 - 4 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -77,14 +80,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Tell us what it is, whether it works, and roughly how heavy it is.
 
 ## Price
-**106 to 211 NGN** (priced as material, width 0.6588, method material_floor, 0 comparable prices)
+**99 to 199 NGN** (priced as material, width 0.6659, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 1.2 kg of plastic 40%, textile 30%, rubber 20%, steel 10% (rates for plastic, rubber, textile are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 1.2 kg of textile 40%, plastic 30%, rubber 20%, steel 10% (rates for plastic, rubber, textile are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 130 NGN
+Scrap floor: 122 NGN
 
 Conditions attached to this price:
-- Not identified: The photos show a pair of sneakers, not any mobile phone; no shortlist entry can apply.
+- Not identified: Item is a pair of PRIMA sneakers, not a phone; no catalogue entry matches.
 - Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on a piece of paper and take one photo with the paper next to the item..
 - Required evidence 'overview' was not supplied -> not proven remotely. One photo showing the whole item..
 - Required evidence 'label_or_plate' was not supplied -> not proven remotely. Close-up of any label, sticker or metal plate showing the brand and model..

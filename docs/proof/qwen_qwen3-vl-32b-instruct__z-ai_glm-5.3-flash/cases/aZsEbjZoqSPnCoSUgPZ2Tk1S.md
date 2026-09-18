@@ -1,6 +1,6 @@
 # Case aZsEbjZoqSPnCoSUgPZ2Tk1S
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  28489 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  49379 ms
 
 ## What the engine saw
 - Presentation: single_unit
@@ -11,35 +11,36 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: minor scratches on back glass, faint smudges and fingerprints
+- Damage noted: minor scratches on back glass, small scuff near bottom edge
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 - Text read: MANNY STORES | Apple
 
 ## Two readers
 - model_text was seen by only one reader, so it is treated as unread
-- 1 transcribed lines was seen by only one reader, so it is treated as unread
+- 2 transcribed lines was seen by only one reader, so it is treated as unread
 - brand_text was read by only one reader, so it is kept but not confirmed
+- item_type was read by only one reader, so it is kept but not confirmed
 
 ## OCR read off the photos
 - MANNY STORES
 
 ## Chain
 - **ocr** -> ok. 1 lines: MANNY STORES
-- **corroborate** -> dispute. model_text was seen by only one reader, so it is treated as unread; 1 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed
+- **corroborate** -> dispute. model_text was seen by only one reader, so it is treated as unread; 2 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed; item_type was read by only one reader, so it is kept but not confirmed
 - **read_evidence** -> ok. category=phone brand=Apple model=None label=False lines=2
 - **retrieval** -> ok. query='Apple MANNY STORES Apple Clean Direct UK used iPhone 11 64gb
 Factory unlocked 
 Battery hea' hits=['Apple iPhone 11', 'Apple iPhone 11 Pro', 'Apple iPhone 11 Pro Max', 'Apple iPhone XR', 'Apple iPhone XS']
-- **identify** -> ok. chosen=Apple iPhone 11 margin=0.7
-- **abstain** -> pass. confidence=0.61 margin=0.7
+- **identify** -> ok. chosen=Apple iPhone 11 margin=0.4
+- **abstain** -> abstain. no label, top score 0.75
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 4963 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 13054 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 7044 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 3428 ms (replayed)
-- total across calls: 28489 ms; wall clock: 359 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 11354 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 23460 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 9669 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 4896 ms (replayed)
+- total across calls: 49379 ms; wall clock: 1296 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -49,17 +50,18 @@ Shortlist from the catalogue:
   - Apple iPhone XR (0.5)
   - Apple iPhone XS (0.5)
 
-**Answer: Apple iPhone 11 PRODUCT RED, 64GB (seller stated)** (margin 0.7)
+**Not identified: CANNOT_IDENTIFY.** No label, plate or settings screen was legible, and the visual match alone scored only 0.75.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 61% on the best answer. It is probably a Apple iPhone 11 or a Apple iPhone XR, and the photos cannot separate them.**
+**Not sure enough to price: 31% on the best answer. It is probably a Apple iPhone 11 or a Apple iPhone XR, and the photos cannot separate them.**
 
-- Identification confidence: 61% (unsure)
-- Price confidence: 40%
-- It is weighing: Apple iPhone 11 (0.9), Apple iPhone XR (0.2), Apple iPhone 11 Pro (0.05)
+- Identification confidence: 31% (unknown)
+- Price confidence: 14%
+- It is weighing: Apple iPhone 11 (0.75), Apple iPhone XR (0.35)
+- No label, plate or settings screen was legible, and the visual match alone scored only 0.75.
 - no label, plate or settings screen was legible
 - 1 lines seen by both readers
-- the brand was read by only one reader and is not confirmed
+- the brand, item_type was read by only one reader and is not confirmed
 - 10 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -99,13 +101,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
-**32,940 to 210,000 NGN** (priced as a working item, width 1.4576, method uncalibrated_wide, 12 comparable prices)
+**48 to 243 NGN** (priced as material, width 1.3301, method material_floor, 0 comparable prices)
 
-12 used asking prices, 20th to 80th percentile 244,000 to 300,000 NGN, converted to a buy range with the 0.45 to 0.7 ask-to-buy spread, then reduced by 0.3 for unproven claims, floored at the scrap value 163.
+This item was not identified, so it is priced as material rather than as a working item: 0.18 kg of aluminium 40%, glass 30%, plastic 20%, circuit_board 10% (rates for glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
 Scrap floor: 163 NGN
 
 Conditions attached to this price:
+- Not identified: No label, plate or settings screen was legible, and the visual match alone scored only 0.75.
 - Clean Direct UK used iPhone 11 64gb -> not proven remotely. Agent reads storage from Settings.
 - Clean Direct UK used iPhone 11 64gb -> not proven remotely. Agent reads storage from Settings.
 - Factory unlocked -> not proven remotely. Seller signs out of iCloud or Google before payment.

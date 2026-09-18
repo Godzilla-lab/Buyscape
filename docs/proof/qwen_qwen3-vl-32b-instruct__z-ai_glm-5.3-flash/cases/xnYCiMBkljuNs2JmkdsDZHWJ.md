@@ -1,25 +1,26 @@
 # Case xnYCiMBkljuNs2JmkdsDZHWJ
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  35739 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  30202 ms
 
 ## What the engine saw
 - Presentation: single_unit
-- Category: inverter generator (confidence 0.95)
-- Made of: steel 40%, plastic 35%, circuit_board 15%, rubber 10%
+- Category: generator (confidence 1.0)
+- Made of: steel 60%, plastic 30%, circuit_board 10%
 - Estimated weight: 25.0 kg (confidence 0.8)
 - Brand read off the item: BECTRODES
 - Model read off the item: nothing legible
 - Rating read: 5.6kVA, 5.0kW
 - Label, plate or settings screen legible: yes
-- Damage noted: box is slightly creased and scuffed, generator casing has minor scratches
+- Damage noted: box is slightly creased and worn, unit appears clean with no visible damage
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
-- Text read: 5.6kVA | Max power | Rated power | DIGITAL INVERTER TECHNOLOGY | ULTRA COMPACT SIZE | INVERTER GENERATOR | TWO WIRE AUTO START | PREMIUM QUALITY
+- Text read: 5.6kVA | Max power | Rated power | DIGITAL INVERTER TECHNOLOGY | ULTRA COMPACT SIZE | INVERTER GENERATOR | TWO WIRE AUTO START | 5.6kVA
 
 ## Two readers
 - rating_text agreed by both readers
+- item_type agreed by both readers
 - model_text was seen by only one reader, so it is treated as unread
-- 6 transcribed lines was seen by only one reader, so it is treated as unread
+- 7 transcribed lines was seen by only one reader, so it is treated as unread
 - brand_text was read by only one reader, so it is kept but not confirmed
 
 ## OCR read off the photos
@@ -38,19 +39,19 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 18 lines: 5.6kVA | INVERTER GENERATOR | 5.0kVA | Max power | AUTO START | TWO WIRS | PREMUM | OUALITY | Rated power | - DIGITAL IN
-- **corroborate** -> dispute. rating_text agreed by both readers; model_text was seen by only one reader, so it is treated as unread; 6 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed
-- **read_evidence** -> ok. category=inverter generator brand=BECTRODES model=None label=True lines=11
+- **corroborate** -> dispute. rating_text agreed by both readers; item_type agreed by both readers; model_text was seen by only one reader, so it is treated as unread; 7 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed
+- **read_evidence** -> ok. category=generator brand=BECTRODES model=None label=True lines=11
 - **forensics** -> flag. looks like a catalogue or stock image
 - **retrieval** -> ok. query='BECTRODES 5.6kVA, 5.0kW 5.6kVA Max power Rated power DIGITAL INVERTER TECHNOLOGY ULTRA COM' hits=['Kemage KM6500 5.5kVA']
 - **identify** -> ok. chosen=Senci SC7800IES margin=0.85
 - **abstain** -> abstain. confidence 0.36: read off the item's own label; 9 lines seen by both readers; the brand was read by only one reader and is not confirmed; looks like a catalogue or stock image
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 16326 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 11348 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 4988 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 3077 ms (replayed)
-- total across calls: 35739 ms; wall clock: 549 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 6509 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 12326 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 8488 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2879 ms (replayed)
+- total across calls: 30202 ms; wall clock: 1720 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -106,11 +107,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Photo of the engine, showing the recoil starter and carburettor.
 
 ## Price
-**5,075 to 11,575 NGN** (priced as material, width 0.7808, method material_floor, 0 comparable prices)
+**5,779 to 12,850 NGN** (priced as material, width 0.759, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 25 kg of steel 40%, plastic 35%, circuit_board 15%, rubber 10% (rates for plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 25 kg of steel 60%, plastic 30%, circuit_board 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 9,000 NGN
+Scrap floor: 10,250 NGN
 
 Conditions attached to this price:
 - Not identified: The evidence only supports this answer at 36 percent, which is a guess. One clear photo of the label would settle it.

@@ -1,6 +1,6 @@
 # Case jPks3Z0tX3eLbv4bCm4KsKuX
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  41483 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  28522 ms
 
 ## What the engine saw
 - Presentation: single_unit
@@ -11,35 +11,36 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: unit appears new, still in protective plastic wrap, no visible damage or wear
+- Damage noted: unit wrapped in plastic film, coils and fan visible, no obvious damage
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 - Text read: Hisense
 
 ## Two readers
 - brand_text agreed by both readers
+- item_type agreed by both readers
 - model_text was seen by only one reader, so it is treated as unread
 - rating_text was seen by only one reader, so it is treated as unread
 - serial_text was seen by only one reader, so it is treated as unread
-- 9 transcribed lines was seen by only one reader, so it is treated as unread
+- 4 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
 - ANO GROVE LTD
 
 ## Chain
 - **ocr** -> ok. 1 lines: ANO GROVE LTD
-- **corroborate** -> dispute. brand_text agreed by both readers; model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 9 transcribed lines was seen by only one reader, so it is treated as unread
+- **corroborate** -> dispute. brand_text agreed by both readers; item_type agreed by both readers; model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 4 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=split air conditioner brand=Hisense model=None label=True lines=1
 - **retrieval** -> ok. query='Hisense Hisense Lg air conditioner 1hp regular' hits=['Hisense AS-09 1HP', 'LG S4-Q09 1HP', 'LG S4-Q18 2HP', 'Hisense AS-12 1.5HP', 'Hisense AS-18 2HP']
-- **identify** -> refused. chosen=None None margin=0.25
+- **identify** -> refused. chosen=None None margin=0.15
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 6534 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 12789 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 19531 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 2629 ms (replayed)
-- total across calls: 41483 ms; wall clock: 338 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5371 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 9647 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 11203 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2301 ms (replayed)
+- total across calls: 28522 ms; wall clock: 1743 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -49,18 +50,18 @@ Shortlist from the catalogue:
   - Hisense AS-12 1.5HP (0.38)
   - Hisense AS-18 2HP (0.38)
 
-**Not identified: CANNOT_IDENTIFY.** Hisense brand is legible but the model/HP rating is not readable, and the seller's 'LG' claim contradicts the visible Hisense label, so no single model is supported.
+**Not identified: CANNOT_IDENTIFY.** Hisense branding is legible but no model/capacity marking is readable; seller's 'LG 1HP' claim conflicts with the visible Hisense badge, so AS-09 vs AS-12 cannot be distinguished.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 27% on the best answer. It is probably a Hisense AS-09 1HP or a Hisense AS-12 1.5HP, and the photos cannot separate them.**
+**Not sure enough to price: 25% on the best answer. It is probably a Hisense AS-09 1HP or a Hisense AS-12 1.5HP, and the photos cannot separate them.**
 
-- Identification confidence: 27% (unknown)
+- Identification confidence: 25% (unknown)
 - Price confidence: 18%
-- It is weighing: Hisense AS-09 1HP (0.5), Hisense AS-12 1.5HP (0.25)
-- Hisense brand is legible but the model/HP rating is not readable, and the seller's 'LG' claim contradicts the visible Hisense label, so no single model is supported.
+- It is weighing: Hisense AS-09 1HP (0.45), Hisense AS-12 1.5HP (0.3)
+- Hisense branding is legible but no model/capacity marking is readable; seller's 'LG 1HP' claim conflicts with the visible Hisense badge, so AS-09 vs AS-12 cannot be distinguished.
 - read off the item's own label
 - 1 lines seen by both readers
-- the next candidate was only 0.25 behind
+- the next candidate was only 0.15 behind
 - 8 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -81,7 +82,7 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: the smallest rating this brand sells. Agent reads the outdoor rating plate
 - [unverified] 1hp
     priced as: the smallest rating this brand sells. Agent reads the outdoor rating plate
-- [unverified] regular
+- [unverifiable_remote] regular
     priced as: the smallest rating this brand sells. Agent reads the outdoor rating plate
 - [unverified] Required evidence 'code_shot' was not supplied
     priced as: priced as if the worst case is true. Write the code {code} on paper and photograph it next to the unit.
@@ -102,7 +103,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 30,250 NGN
 
 Conditions attached to this price:
-- Not identified: Hisense brand is legible but the model/HP rating is not readable, and the seller's 'LG' claim contradicts the visible Hisense label, so no single model is supported.
+- Not identified: Hisense branding is legible but no model/capacity marking is readable; seller's 'LG 1HP' claim conflicts with the visible Hisense badge, so AS-09 vs AS-12 cannot be distinguished.
 - Lg air conditioner -> not proven remotely. Agent reads the outdoor rating plate.
 - 1hp -> not proven remotely. Agent reads the outdoor rating plate.
 - regular -> not proven remotely. Agent reads the outdoor rating plate.

@@ -1,6 +1,6 @@
 # Case pC9BWTQbM94o1FM7HH3I08Jv
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0007  |  18224 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  25036 ms
 
 ## What the engine saw
 - Presentation: sealed_new
@@ -11,14 +11,15 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Model read off the item: S20+ 5G
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: none
+- Damage noted: box appears slightly worn, minor creases on edges
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
 - Text read: SAMSUNG | Galaxy S20 | S20+ 5G
 
 ## Two readers
 - brand_text agreed by both readers
-- model_text was read by one reader and confirmed by OCR
+- model_text agreed by both readers
+- item_type agreed by both readers
 
 ## OCR read off the photos
 - 520
@@ -27,7 +28,7 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 3 lines: 520 | ONYITEXGADGET | S20+5G
-- **corroborate** -> agree. brand_text agreed by both readers; model_text was read by one reader and confirmed by OCR
+- **corroborate** -> agree. brand_text agreed by both readers; model_text agreed by both readers; item_type agreed by both readers
 - **read_evidence** -> ok. category=smartphone brand=SAMSUNG model=S20+ 5G label=True lines=3
 - **forensics** -> flag. looks like a catalogue or stock image
 - **retrieval** -> ok. query='SAMSUNG S20+ 5G SAMSUNG Galaxy S20 S20+ 5G Samsung galaxy S20 plus 5G 256GB available for ' hits=['Samsung Galaxy S21', 'Samsung Galaxy S22', 'Samsung Galaxy S23', 'Samsung Galaxy S24', 'Samsung Galaxy S25']
@@ -35,10 +36,10 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **abstain** -> pass. confidence=0.45 from the label
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 4907 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 10979 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 2338 ms (replayed)
-- total across calls: 18224 ms; wall clock: 2635 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 6462 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 16063 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2511 ms (replayed)
+- total across calls: 25036 ms; wall clock: 3388 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -56,12 +57,12 @@ Evidence flags: looks like a catalogue or stock image
 **45%: the photos do not say what this is.**
 
 - Identification confidence: 45% (unsure)
-- Price confidence: 13%
+- Price confidence: 15%
 - named from the item's own label, which the catalogue does not list
 - read off the item's own label
 - 3 lines seen by both readers
 - looks like a catalogue or stock image
-- 8 claims are still unproven, 0 are supported
+- 7 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
 
@@ -82,7 +83,6 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 - [unverifiable_remote] Samsung galaxy S20 plus 5G
 - [unverified] 256GB
     priced as: smallest variant of this model. Agent reads storage from Settings
-- [unverifiable_remote] available for sell
 - [unverified] Required evidence 'code_shot' was not supplied
     priced as: priced as if the worst case is true. Write the code {code} on paper and take one photo with the paper next to the phone.
 - [unverified] Required evidence 'front_screen_on' was not supplied
@@ -95,9 +95,9 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
-**51,287 to 191,100 NGN** (priced as a working item, width 1.1536, method uncalibrated_wide, 2 comparable prices)
+**53,982 to 191,100 NGN** (priced as a working item, width 1.1189, method uncalibrated_wide, 2 comparable prices)
 
-2 used asking prices, 20th to 80th percentile 192,000 to 273,000 NGN, converted to a buy range with the 0.45 to 0.7 ask-to-buy spread, then reduced by 0.5936 for unproven claims, floored at the scrap value 34.
+2 used asking prices, 20th to 80th percentile 192,000 to 273,000 NGN, converted to a buy range with the 0.45 to 0.7 ask-to-buy spread, then reduced by 0.6248 for unproven claims, floored at the scrap value 34.
 
 Scrap floor: 34 NGN
 
@@ -105,7 +105,6 @@ Conditions attached to this price:
 - Evidence flag: looks like a catalogue or stock image
 - Samsung galaxy S20 plus 5G -> not proven remotely. Agent will confirm at pickup.
 - 256GB -> not proven remotely. Agent reads storage from Settings.
-- available for sell -> not proven remotely. Agent will confirm at pickup.
 - Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on paper and take one photo with the paper next to the phone..
 - Required evidence 'front_screen_on' was not supplied -> not proven remotely. Photo of the front with the screen switched on, showing the home screen..
 - Required evidence 'back' was not supplied -> not proven remotely. Photo of the back of the phone..

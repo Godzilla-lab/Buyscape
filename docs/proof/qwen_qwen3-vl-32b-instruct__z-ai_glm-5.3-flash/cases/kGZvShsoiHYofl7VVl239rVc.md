@@ -1,27 +1,28 @@
 # Case kGZvShsoiHYofl7VVl239rVc
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  30580 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  30433 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: electric motor (confidence 0.95)
-- Made of: steel 70%, copper 20%, plastic 10%
-- Estimated weight: 50.0 kg (confidence 0.8)
-- Brand read off the item: MAX ELECTRON
+- Made of: steel 70%, plastic 20%, copper 10%
+- Estimated weight: 45.0 kg (confidence 0.8)
+- Brand read off the item: JAS ELECTRON
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: minor scratches on casing, some dust and dirt accumulation, no visible cracks or dents
+- Damage noted: minor surface scratches on blue casing, some dust and dirt accumulation, no visible cracks or dents
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: MAX ELECTRON
+- Text read: JAS ELECTRON
 
 ## Two readers
 - brand_text was read by one reader and confirmed by OCR
-- model_text differed between the two readers, so it is treated as unread
 - rating_text differed between the two readers, so it is treated as unread
-- serial_text differed between the two readers, so it is treated as unread
+- model_text was seen by only one reader, so it is treated as unread
+- serial_text was seen by only one reader, so it is treated as unread
 - 16 transcribed lines was seen by only one reader, so it is treated as unread
+- item_type was read by only one reader, so it is kept but not confirmed
 
 ## OCR read off the photos
 - 23
@@ -30,34 +31,35 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 3 lines: 23 | MAO | LECTRON
-- **corroborate** -> dispute. brand_text was read by one reader and confirmed by OCR; model_text differed between the two readers, so it is treated as unread; rating_text differed between the two readers, so it is treated as unread; serial_text differed between the two readers, so it is treated as unread; 16 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=electric motor brand=MAX ELECTRON model=None label=True lines=1
-- **retrieval** -> ok. query='MAX ELECTRON MAX ELECTRON 30kva Alternator coil with warranty one year three phase and sin' hits=['Mikano MK30 30kVA']
-- **identify** -> refused. chosen=None None margin=0.4
+- **corroborate** -> dispute. brand_text was read by one reader and confirmed by OCR; rating_text differed between the two readers, so it is treated as unread; model_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 16 transcribed lines was seen by only one reader, so it is treated as unread; item_type was read by only one reader, so it is kept but not confirmed
+- **read_evidence** -> ok. category=electric motor brand=JAS ELECTRON model=None label=True lines=1
+- **retrieval** -> ok. query='JAS ELECTRON JAS ELECTRON 30kva Alternator coil with warranty one year three phase and sin' hits=['Mikano MK30 30kVA']
+- **identify** -> refused. chosen=None None margin=None
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 6882 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 4756 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 16155 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 2787 ms (replayed)
-- total across calls: 30580 ms; wall clock: 339 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 8225 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 11591 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 6883 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3734 ms (replayed)
+- total across calls: 30433 ms; wall clock: 1363 ms
 
 ## Identification
 Shortlist from the catalogue:
   - Mikano MK30 30kVA (0.2333)
 
-**Not identified: CANNOT_IDENTIFY.** Label states MAX ELECTRON, conflicting with shortlisted Mikano; no legible model number, so no single model is supported.
+**Not identified: CANNOT_IDENTIFY.** Label appears to read a non-Mikano name (text read 'JAS ELECTRON'); no Mikano branding, model or rating plate legible to confirm MK30.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 24% on the best answer. It is probably a MAX ELECTRON unknown 30kVA alternator or a Mikano MK30 30kVA, and the photos cannot separate them.**
+**Not sure enough to price: 8% on the best answer. It is probably a Mikano MK30 30kVA, and the photos cannot separate them.**
 
-- Identification confidence: 24% (unknown)
+- Identification confidence: 8% (unknown)
 - Price confidence: 20%
-- It is weighing: MAX ELECTRON unknown 30kVA alternator (0.5), Mikano MK30 30kVA (0.1)
-- Label states MAX ELECTRON, conflicting with shortlisted Mikano; no legible model number, so no single model is supported.
+- It is weighing: Mikano MK30 30kVA (0.2)
+- Label appears to read a non-Mikano name (text read 'JAS ELECTRON'); no Mikano branding, model or rating plate legible to confirm MK30.
 - read off the item's own label
 - the two readers agreed on nothing legible
+- the item_type was read by only one reader and is not confirmed
 - 7 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -89,14 +91,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Tell us what it is, whether it works, and roughly how heavy it is.
 
 ## Price
-**44,745 to 151,900 NGN** (priced as material, width 1.0898, method material_floor, 0 comparable prices)
+**23,377 to 79,020 NGN** (priced as material, width 1.0868, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 50 kg of steel 70%, copper 20%, plastic 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 45 kg of steel 70%, plastic 20%, copper 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 118,000 NGN
+Scrap floor: 61,650 NGN
 
 Conditions attached to this price:
-- Not identified: Label states MAX ELECTRON, conflicting with shortlisted Mikano; no legible model number, so no single model is supported.
+- Not identified: Label appears to read a non-Mikano name (text read 'JAS ELECTRON'); no Mikano branding, model or rating plate legible to confirm MK30.
 - 30kva Alternator coil -> not proven remotely. Weigh on the scale and photograph the display.
 - warranty one year -> not proven remotely. Agent will confirm at pickup.
 - three phase and single phase available -> not proven remotely. Weigh on the scale and photograph the display.

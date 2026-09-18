@@ -1,6 +1,6 @@
 # Case z0FN8xziMIZ1noJNdOrsGlPH
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0007  |  18559 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  15676 ms
 
 ## What the engine saw
 - Presentation: single_unit
@@ -12,35 +12,33 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Rating read: none
 - Label, plate or settings screen legible: no
 - Damage noted: none
-- Looks like a catalogue image: yes
+- Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: Panasonic | HOME APPLIANCES
+- Text read: Panasonic
 
 ## Two readers
 - brand_text agreed by both readers
+- item_type was read by only one reader, so it is kept but not confirmed
 
 ## OCR read off the photos
 - HOME APPLIANCES
 
 ## Chain
 - **ocr** -> ok. 1 lines: HOME APPLIANCES
-- **corroborate** -> agree. brand_text agreed by both readers
-- **read_evidence** -> ok. category=split air conditioner brand=Panasonic model=None label=False lines=2
-- **forensics** -> flag. looks like a catalogue or stock image
+- **corroborate** -> agree. brand_text agreed by both readers; item_type was read by only one reader, so it is kept but not confirmed
+- **read_evidence** -> ok. category=split air conditioner brand=Panasonic model=None label=False lines=1
 - **gate** -> abstain. multiple items in frame
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 4602 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 10075 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 3882 ms (replayed)
-- total across calls: 18559 ms; wall clock: 541 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4103 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 6464 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 5109 ms (replayed)
+- total across calls: 15676 ms; wall clock: 1246 ms
 
 ## Identification
 No catalogue candidates matched.
 
 **Not identified: EVIDENCE_INCOMPLETE.** The photos show more than one item, so no single item can be identified.
-
-Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
 **0%: the photos do not say what this is.**
@@ -49,8 +47,8 @@ Evidence flags: looks like a catalogue or stock image
 - Price confidence: 14%
 - The photos show more than one item, so no single item can be identified.
 - no label, plate or settings screen was legible
-- 2 lines seen by both readers
-- looks like a catalogue or stock image
+- 1 lines seen by both readers
+- the item_type was read by only one reader and is not confirmed
 - 11 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -58,9 +56,7 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 ## What the seller is asked for next (shown in the app)
 1. [PHOTO] Photograph one item on its own, with nothing else in the picture.
    _why: the photos show more than one item_
-2. [PHOTO] Take your own photo of the actual item you are selling.
-   _why: this looks like a catalogue picture, not the real unit_
-3. [PHOTO] Close-up of the rating plate on the outdoor unit showing the model and HP.
+2. [PHOTO] Close-up of the rating plate on the outdoor unit showing the model and HP.
    _why: nothing on the item says which model this is_
 
 ## What the seller is asked (only they know these)
@@ -76,8 +72,8 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 - [unverified] Panasonic 2hp air conditioners
     priced as: the smallest rating this brand sells. Agent reads the outdoor rating plate
 - [unverifiable_remote] with the remotes
-- [unverifiable_remote] indoor hangers included
-- [unverifiable_remote] water hoses included
+- [unverifiable_remote] indoor hangers
+- [unverifiable_remote] water hoses
 - [unverified] Required evidence 'code_shot' was not supplied
     priced as: priced as if the worst case is true. Write the code {code} on paper and photograph it next to the unit.
 - [unverified] Required evidence 'indoor_unit' was not supplied
@@ -98,13 +94,12 @@ Scrap floor: 3,750 NGN
 
 Conditions attached to this price:
 - Not identified: The photos show more than one item, so no single item can be identified.
-- Evidence flag: looks like a catalogue or stock image
 - Uk used Panasonic 2hp air conditioners -> not proven remotely. Agent reads the outdoor rating plate.
 - Panasonic 2hp air conditioners -> not proven remotely. Agent reads the outdoor rating plate.
 - Panasonic 2hp air conditioners -> not proven remotely. Agent reads the outdoor rating plate.
 - with the remotes -> not proven remotely. Agent will confirm at pickup.
-- indoor hangers included -> not proven remotely. Agent will confirm at pickup.
-- water hoses included -> not proven remotely. Agent will confirm at pickup.
+- indoor hangers -> not proven remotely. Agent will confirm at pickup.
+- water hoses -> not proven remotely. Agent will confirm at pickup.
 - Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on paper and photograph it next to the unit..
 - Required evidence 'indoor_unit' was not supplied -> not proven remotely. One photo of the whole indoor unit..
 - Required evidence 'outdoor_unit' was not supplied -> not proven remotely. One photo of the outdoor compressor unit..

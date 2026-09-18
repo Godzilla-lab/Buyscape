@@ -1,6 +1,6 @@
 # Case aprsW9ypO5nm22HwaYRamM4r
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  29339 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0013  |  39771 ms
 
 ## What the engine saw
 - Presentation: single_unit
@@ -11,16 +11,17 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: Plastic cover over the unit, slightly dusty., Minor scuffs on the yellow casing.
+- Damage noted: Item wrapped in plastic film, No visible damage or wear
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: ELEPAQ | ENGINE: 4-STROKE | ELOBEST D KING POWER
+- Text read: ELEPAQ | CE
 
 ## Two readers
 - brand_text agreed by both readers
-- rating_text differed between the two readers, so it is treated as unread
-- model_text was seen by only one reader, so it is treated as unread
-- 9 transcribed lines was seen by only one reader, so it is treated as unread
+- item_type agreed by both readers
+- model_text differed between the two readers, so it is treated as unread
+- rating_text was seen by only one reader, so it is treated as unread
+- 14 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
 - ELEPAQ
@@ -29,18 +30,20 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 3 lines: ELEPAQ | -CONESANT | ELOBEST D KING POWER
-- **corroborate** -> dispute. brand_text agreed by both readers; rating_text differed between the two readers, so it is treated as unread; model_text was seen by only one reader, so it is treated as unread; 9 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=generator brand=ELEPAQ model=None label=True lines=3
-- **retrieval** -> ok. query='ELEPAQ ELEPAQ ENGINE: 4-STROKE ELOBEST D KING POWER 1.5kva Elepaq constant generator sV 25' hits=['Elepaq SV2200 2.5kVA', 'Elepaq SV6800 6.5kVA', 'Thermocool TC2700 2.5kVA', 'Haier Thermocool HTG2700 2.5kVA', 'Kemage KM6500 5.5kVA']
-- **identify** -> refused. chosen=Elepaq None margin=0.3
+- **corroborate** -> dispute. brand_text agreed by both readers; item_type agreed by both readers; model_text differed between the two readers, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; 14 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=generator brand=ELEPAQ model=None label=True lines=2
+- **retrieval** -> ok. query='ELEPAQ ELEPAQ CE 1.5kva Elepaq constant generator sV 2500 
+100% copper coil 
+1 year warran' hits=['Elepaq SV2200 2.5kVA', 'Elepaq SV6800 6.5kVA', 'Thermocool TC2700 2.5kVA', 'Haier Thermocool HTG2700 2.5kVA', 'Kemage KM6500 5.5kVA']
+- **identify** -> refused. chosen=ELEPAQ None margin=0.3
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 6351 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 6369 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 13226 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 3393 ms (replayed)
-- total across calls: 29339 ms; wall clock: 390 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 6855 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 14987 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 14322 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3607 ms (replayed)
+- total across calls: 39771 ms; wall clock: 1524 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -50,7 +53,7 @@ Shortlist from the catalogue:
   - Haier Thermocool HTG2700 2.5kVA (0.1833)
   - Kemage KM6500 5.5kVA (0.15)
 
-**Not identified: CANNOT_IDENTIFY.** Seller states SV2500 but model designation is not legible on the label; no SV2500 entry in shortlist and SV2200 differs
+**Not identified: CANNOT_IDENTIFY.** Only 'ELEPAQ' and 'CE' are legible; no model plate text readable, and seller's stated model/rating (1.5kVA SV2500) is self-contradictory and unverified.
 
 ## How sure the engine is (back office)
 **Not sure enough to price: 21% on the best answer. It is probably a Elepaq SV2200 or a Elepaq SV6800, and the photos cannot separate them.**
@@ -58,9 +61,9 @@ Shortlist from the catalogue:
 - Identification confidence: 21% (unknown)
 - Price confidence: 16%
 - It is weighing: Elepaq SV2200 (0.35), Elepaq SV6800 (0.05)
-- Seller states SV2500 but model designation is not legible on the label; no SV2500 entry in shortlist and SV2200 differs
+- Only 'ELEPAQ' and 'CE' are legible; no model plate text readable, and seller's stated model/rating (1.5kVA SV2500) is self-contradictory and unverified.
 - read off the item's own label
-- 3 lines seen by both readers
+- 2 lines seen by both readers
 - 9 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -105,7 +108,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 7,380 NGN
 
 Conditions attached to this price:
-- Not identified: Seller states SV2500 but model designation is not legible on the label; no SV2500 entry in shortlist and SV2200 differs
+- Not identified: Only 'ELEPAQ' and 'CE' are legible; no model plate text readable, and seller's stated model/rating (1.5kVA SV2500) is self-contradictory and unverified.
 - 1.5kva Elepaq constant generator sV 2500 -> not proven remotely. Agent reads the rating plate.
 - 1.5kva Elepaq constant generator sV 2500 -> not proven remotely. Agent reads the rating plate.
 - 100% copper coil -> not proven remotely. Agent opens the side cover and inspects the windings.

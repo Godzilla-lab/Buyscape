@@ -1,6 +1,6 @@
 # Case 83tLDN5qfu5lRks7xfYKK7TM
 
-Photos: 5  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0034  |  291940 ms
+Photos: 5  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0036  |  195465 ms
 
 ## What the engine saw
 - Presentation: single_unit
@@ -11,17 +11,18 @@ Photos: 5  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: minor scuffs on lid, no visible damage to base, screen has visible smudges and scratches, keyboard appears clean, no missing keys, touchpad surface is intact, plastic casing shows minor scuffs, Minor scratches on the palm rest, Screen is off, no visible damage, Screen has visible smudges and scratches, Keyboard appears clean, no visible damage, Chassis shows minor wear around edges, Minor scuff marks on palm rest, Screen has faint smudges
+- Damage noted: minor scuffs on lid, no visible damage to body, screen has visible smudges and scratches, keyboard keys show minor wear, plastic casing has light scuffs, screen is off, no visible cracks or dents, keyboard and touchpad appear intact, light wear on plastic casing around edges, screen has visible smudges and fingerprints, keyboard appears clean, no visible dents or cracks on casing, minor scuff marks on palm rest, screen has faint smudges
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: ASUS | POSTED ON JI | NICK MARK ENTERPRISE | Intel Core i3 | Windows 10 | Model: X555LJ | Intel Core i5
+- Text read: ASUS | NICK MARK ENTERPRISE | Intel Core i3 | 4GB RAM | Windows 10 Home | Intel Inside | CE
 
 ## Two readers
 - brand_text agreed by both readers
-- serial_text agreed by both readers
+- item_type agreed by both readers
 - model_text differed between the two readers, so it is treated as unread
 - rating_text was seen by only one reader, so it is treated as unread
-- 11 transcribed lines was seen by only one reader, so it is treated as unread
+- serial_text was seen by only one reader, so it is treated as unread
+- 16 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
 - ASUS
@@ -33,24 +34,24 @@ Photos: 5  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 6 lines: ASUS | POSTED ON II | NICK MARK ENTERPRISE | ASUS | ASUS | AEUS
-- **corroborate** -> dispute. brand_text agreed by both readers; serial_text agreed by both readers; model_text differed between the two readers, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; 11 transcribed lines was seen by only one reader, so it is treated as unread
+- **corroborate** -> dispute. brand_text agreed by both readers; item_type agreed by both readers; model_text differed between the two readers, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 16 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=laptop brand=ASUS model=None label=True lines=7
-- **retrieval** -> empty. query='ASUS ASUS POSTED ON JI NICK MARK ENTERPRISE Intel Core i3 Windows 10 Model: X555LJ Intel C' hits=[]
+- **retrieval** -> empty. query='ASUS ASUS NICK MARK ENTERPRISE Intel Core i3 4GB RAM Windows 10 Home Intel Inside CE Asus ' hits=[]
 - **gate** -> abstain. no candidates and no model text
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 19188 ms
-- read_evidence on qwen/qwen3-vl-32b-instruct: 29776 ms
-- read_evidence on qwen/qwen3-vl-32b-instruct: 44041 ms
-- read_evidence on qwen/qwen3-vl-32b-instruct: 48287 ms
-- read_evidence on qwen/qwen3-vl-32b-instruct: 44117 ms
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 15697 ms
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 15947 ms
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 23025 ms
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 22042 ms
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 26405 ms
-- extract_claims on qwen/qwen3-vl-32b-instruct: 3415 ms (replayed)
-- total across calls: 291940 ms; wall clock: 48317 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 8580 ms (replayed)
+- read_evidence on qwen/qwen3-vl-32b-instruct: 10205 ms (replayed)
+- read_evidence on qwen/qwen3-vl-32b-instruct: 20881 ms (replayed)
+- read_evidence on qwen/qwen3-vl-32b-instruct: 21444 ms (replayed)
+- read_evidence on qwen/qwen3-vl-32b-instruct: 20194 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 11180 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 23596 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 27650 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 23715 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 24695 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3325 ms (replayed)
+- total across calls: 195465 ms; wall clock: 2889 ms
 
 ## Identification
 No catalogue candidates matched.

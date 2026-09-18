@@ -91,6 +91,8 @@ def price(
     not_working: bool = False,
     dead_fraction: tuple[float, float] | None = None,
     comps_are_faulty: bool = False,
+    new_comps: list[Observation] | None = None,
+    resale_fraction: tuple[float, float] | None = None,
 ) -> Quote:
     """Build the range.
 
@@ -183,6 +185,36 @@ def price(
             "Anything it is worth above scrap needs a clearer photo of its "
             "label or plate. The weight is an estimate from the photos and the "
             "price is settled on the scale at pickup."
+        )
+        return quote
+
+    new_values = [o.amount for o in (new_comps or [])] if identified else []
+    if len(comp_values) < MIN_OBSERVATIONS and len(new_values) >= MIN_OBSERVATIONS and resale_fraction and not not_working:
+        # A thin used market, a full new one. Dealers list new stock of
+        # almost everything, and what this business pays for a used one as
+        # a share of the new asking price is its own number, in its tenant
+        # file, corrected from its settlements. Observations with a source
+        # and a date, times a business rule: still retrieval, never a guess.
+        low_new = _quantile(new_values, 0.20)
+        high_new = _quantile(new_values, 0.80)
+        low = low_new * resale_fraction[0] * ASK_TO_BUY[0] * quote.worst_case_multiplier
+        high = high_new * resale_fraction[1] * ASK_TO_BUY[1]
+        if quote.floor is not None:
+            low, high = max(low, quote.floor), max(high, quote.floor)
+        quote.low, quote.high = round(low, 2), round(high, 2)
+        quote.ceiling = round(high_new * resale_fraction[1], 2)
+        quote.observation_count = len(new_values)
+        quote.basis = "retail_new"
+        quote.method = "share_of_new"
+        quote.sources.append(new_comps[0].source)
+        quote.explanation = (
+            f"Only {len(comp_values)} used asking prices were found, so this is priced as a share of new: "
+            f"{len(new_values)} new asking prices run {int(low_new):,} to {int(high_new):,} {currency}, "
+            f"this business pays {int(resale_fraction[0] * 100)} to {int(resale_fraction[1] * 100)} percent "
+            "of new for a used one, converted to a buy range"
+            + (f", then reduced by {quote.worst_case_multiplier} for unproven claims" if quote.worst_case_multiplier < 1.0 else "")
+            + (f", floored at the scrap value {int(quote.floor):,}" if quote.floor else "")
+            + "."
         )
         return quote
 

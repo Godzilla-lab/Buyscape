@@ -1,26 +1,26 @@
 # Case yXwtbMALuwyVsIwWckTmQIpa
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  27976 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0018  |  35303 ms
 
 ## What the engine saw
 - Presentation: sealed_new
-- Category: phone (confidence 0.9)
-- Made of: carton 90%, plastic 10%
+- Category: mobile_phone (confidence 0.9)
+- Made of: carton 100%
 - Estimated weight: 0.3 kg (confidence 0.7)
 - Brand read off the item: TECNO
-- Model read off the item: nothing legible
+- Model read off the item: Camon 19 Pro
 - Rating read: none
 - Label, plate or settings screen legible: no
 - Damage noted: none
-- Looks like a catalogue image: yes
+- Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: TECNO
+- Text read: TECNO | CAMON | Camon 19 Pro
 
 ## Two readers
 - brand_text agreed by both readers
-- model_text differed between the two readers, so it is treated as unread
+- model_text agreed by both readers
+- item_type agreed by both readers
 - rating_text was seen by only one reader, so it is treated as unread
-- 1 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
 - TECNO
@@ -28,54 +28,48 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 2 lines: TECNO | OGENTERPRISE
-- **corroborate** -> dispute. brand_text agreed by both readers; model_text differed between the two readers, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; 1 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=phone brand=TECNO model=None label=False lines=1
-- **forensics** -> flag. looks like a catalogue or stock image
-- **retrieval** -> ok. query='TECNO TECNO 6.67′′ AMOLED Display with Fingerprint on Display
-1080*2400 Resolution
-32MP Fr' hits=['Tecno Pova 6', 'Tecno Camon 19', 'Tecno Camon 20', 'Tecno Camon 30', 'Tecno Camon 40']
-- **identify** -> ok. chosen=Tecno Camon 20 margin=0.4
-- **abstain** -> abstain. no label, top score 0.7
+- **corroborate** -> dispute. brand_text agreed by both readers; model_text agreed by both readers; item_type agreed by both readers; rating_text was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=mobile_phone brand=TECNO model=Camon 19 Pro label=False lines=3
+- **retrieval** -> ok. query='TECNO Camon 19 Pro TECNO CAMON Camon 19 Pro 6.67′′ AMOLED Display with Fingerprint on Disp' hits=['Tecno Camon 19', 'Tecno Camon 20', 'Tecno Camon 30', 'Tecno Camon 40', 'Tecno Camon 50']
+- **identify** -> ok. chosen=Tecno Camon 19 margin=0.6
+- **abstain** -> abstain. seller names another generation
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 3990 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 11619 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 6303 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 6064 ms (replayed)
-- total across calls: 27976 ms; wall clock: 472 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4815 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 15909 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 9330 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 5249 ms (replayed)
+- total across calls: 35303 ms; wall clock: 1751 ms
 
 ## Identification
 Shortlist from the catalogue:
-  - Tecno Pova 6 (0.5)
-  - Tecno Camon 19 (0.3)
-  - Tecno Camon 20 (0.3)
-  - Tecno Camon 30 (0.3)
-  - Tecno Camon 40 (0.3)
+  - Tecno Camon 19 (0.7667)
+  - Tecno Camon 20 (0.5)
+  - Tecno Camon 30 (0.5)
+  - Tecno Camon 40 (0.5)
+  - Tecno Camon 50 (0.5)
 
-**Not identified: CANNOT_IDENTIFY.** No label, plate or settings screen was legible, and the visual match alone scored only 0.7.
-
-Evidence flags: looks like a catalogue or stock image
+**Not identified: EVIDENCE_INCOMPLETE.** The item reads as Tecno Camon 19 but the seller's text says 6. A Settings or About screen would settle it.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 18% on the best answer. It is probably a Tecno Camon 20 or a Tecno Camon 19, and the photos cannot separate them.**
+**Not sure enough to price: 46% on the best answer. It is probably a Tecno Camon 19 or a Tecno Camon 19, and the photos cannot separate them.**
 
-- Identification confidence: 18% (unknown)
+- Identification confidence: 46% (unsure)
 - Price confidence: 14%
-- It is weighing: Tecno Camon 20 (0.7), Tecno Camon 19 (0.3)
-- No label, plate or settings screen was legible, and the visual match alone scored only 0.7.
+- It is weighing: Tecno Camon 19 (0.9), Tecno Camon 19 (0.3)
+- The item reads as Tecno Camon 19 but the seller's text says 6. A Settings or About screen would settle it.
 - no label, plate or settings screen was legible
-- 1 lines seen by both readers
-- looks like a catalogue or stock image
+- 2 lines seen by both readers
 - 11 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
 
 ## What the seller is asked for next (shown in the app)
-1. [PHOTO] Take your own photo of the actual item you are selling.
-   _why: this looks like a catalogue picture, not the real unit_
-2. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: If you have the box, photograph the label showing the model, storage and IMEI. Then, still filming, do this on the item's own screen and hold it steady so the writing can be read: open settings then About, showing the model name and storage. Then, without stopping the video: Pull out the SIM tray and photograph the open slot. Finish with: A short clip: press power, unlock, then open the camera app. Keep filming the whole time. Do not cut between clips.
+1. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: If you have the box, photograph the label showing the model, storage and IMEI. Then, still filming, do this on the item's own screen and hold it steady so the writing can be read: open settings then About, showing the model name and storage. Then, without stopping the video: Pull out the SIM tray and photograph the open slot. Finish with: A short clip: press power, unlock, then open the camera app. Keep filming the whole time. Do not cut between clips.
    _why: two readings of these photos disagreed about what is written on the item_
-3. [PHOTO] Screenshot of Settings then About, showing the model name and storage.
+2. [PHOTO] Screenshot of Settings then About, showing the model name and storage.
+   _why: nothing on the item says which model this is_
+3. [PHOTO] Dial *#06# and screenshot the IMEI that appears.
    _why: nothing on the item says which model this is_
 
 ## What the seller is asked (only they know these)
@@ -102,15 +96,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
-**10 to 37 NGN** (priced as material, width 1.1034, method material_floor, 0 comparable prices)
+**10 to 36 NGN** (priced as material, width 1.1142, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 0.3 kg of carton 90%, plastic 10% (rates for carton, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 0.3 kg of carton 100% (rates for carton are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 19 NGN
+Scrap floor: 18 NGN
 
 Conditions attached to this price:
-- Not identified: No label, plate or settings screen was legible, and the visual match alone scored only 0.7.
-- Evidence flag: looks like a catalogue or stock image
+- Not identified: The item reads as Tecno Camon 19 but the seller's text says 6. A Settings or About screen would settle it.
 - 6.67′′ AMOLED Display -> not proven remotely. Agent will confirm at pickup.
 - AMOLED Display -> not proven remotely. Agent will confirm at pickup.
 - Fingerprint on Display -> not proven remotely. Agent will confirm at pickup.

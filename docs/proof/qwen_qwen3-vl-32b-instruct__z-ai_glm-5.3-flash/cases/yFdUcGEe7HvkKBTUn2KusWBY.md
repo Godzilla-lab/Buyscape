@@ -1,37 +1,37 @@
 # Case yFdUcGEe7HvkKBTUn2KusWBY
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  23271 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  28908 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: laptop (confidence 0.95)
-- Made of: plastic 60%, steel 20%, circuit_board 10%, copper_insulated 10%
-- Estimated weight: 1.5 kg (confidence 0.8)
+- Made of: plastic 60%, steel 20%, circuit_board 10%, glass 10%
+- Estimated weight: 1.8 kg (confidence 0.7)
 - Brand read off the item: DELL
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: screen appears clean and undamaged, keyboard shows minor wear, no visible dents or cracks on chassis
+- Damage noted: screen is on, displaying Windows 11 desktop, no visible cracks or dents on chassis, keyboard appears intact, touchpad visible and undamaged
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: DELL
+- Text read: DELL | Windows 11 Home | Start | Settings | Power | Search | Task View | File Explorer
 
 ## Two readers
-- model_text was seen by only one reader, so it is treated as unread
-- 3 transcribed lines was seen by only one reader, so it is treated as unread
+- item_type agreed by both readers
+- 8 transcribed lines was seen by only one reader, so it is treated as unread
 - brand_text was read by only one reader, so it is kept but not confirmed
 
 ## Chain
 - **ocr** -> ok. 0 lines: 
-- **corroborate** -> dispute. model_text was seen by only one reader, so it is treated as unread; 3 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed
-- **read_evidence** -> ok. category=laptop brand=DELL model=None label=False lines=1
+- **corroborate** -> dispute. item_type agreed by both readers; 8 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed
+- **read_evidence** -> ok. category=laptop brand=DELL model=None label=False lines=20
 - **gate** -> abstain. multiple items in frame
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 7586 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 11517 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 4168 ms (replayed)
-- total across calls: 23271 ms; wall clock: 126 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 6817 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 17523 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 4568 ms (replayed)
+- total across calls: 28908 ms; wall clock: 1218 ms
 
 ## Identification
 No catalogue candidates matched.
@@ -45,7 +45,7 @@ No catalogue candidates matched.
 - Price confidence: 14%
 - The photos show more than one item, so no single item can be identified.
 - no label, plate or settings screen was legible
-- the two readers agreed on nothing legible
+- 20 lines seen by both readers
 - the brand was read by only one reader and is not confirmed
 - 10 claims are still unproven, 0 are supported
 
@@ -73,7 +73,7 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 - [unverifiable_remote] 16gb memory & 256gb ssd
     priced as: the smallest drive this model shipped with. Agent reads the drive size from System Information
 - [unverifiable_remote] Keyboard light
-- [unverified] Screen size 14...
+- [unverified] Screen size 14
     priced as: assumed cracked or replaced panel. Agent inspects the panel edges and looks for lines and dead pixels
 - [unverified] Required evidence 'code_shot' was not supplied
     priced as: priced as if the worst case is true. Write the code {code} on paper and take one photo with the paper next to the laptop.
@@ -87,9 +87,9 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 ## Price
 **5,000 to 5,000 NGN** (priced as material, width 0.0, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 1.5 kg of plastic 60%, steel 20%, circuit_board 10%, copper_insulated 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 1.8 kg of plastic 60%, steel 20%, circuit_board 10%, glass 10% (rates for glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 735 NGN
+Scrap floor: 435 NGN
 
 Conditions attached to this price:
 - Not identified: The photos show more than one item, so no single item can be identified.
@@ -99,7 +99,7 @@ Conditions attached to this price:
 - 16gb memory & 256gb ssd -> not proven remotely. Agent opens System Information and reads the RAM.
 - 16gb memory & 256gb ssd -> not proven remotely. Agent reads the drive size from System Information.
 - Keyboard light -> not proven remotely. Agent will confirm at pickup.
-- Screen size 14... -> not proven remotely. Agent inspects the panel edges and looks for lines and dead pixels.
+- Screen size 14 -> not proven remotely. Agent inspects the panel edges and looks for lines and dead pixels.
 - Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on paper and take one photo with the paper next to the laptop..
 - Required evidence 'lid_open_screen_on' was not supplied -> not proven remotely. Photo of the laptop open with the screen switched on, showing the desktop..
 - Required evidence 'bottom_sticker' was not supplied -> not proven remotely. Photo of the sticker on the underside showing the model, serial or service tag..

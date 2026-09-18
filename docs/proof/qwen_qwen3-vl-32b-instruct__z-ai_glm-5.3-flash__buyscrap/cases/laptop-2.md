@@ -1,6 +1,6 @@
 # Case laptop-2
 
-Photos: 2  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0015  |  111121 ms
+Photos: 2  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0017  |  134937 ms
 
 ## What the engine saw
 - Presentation: single_unit
@@ -11,15 +11,15 @@ Photos: 2  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: screen has faint reflections and smudges, keyboard appears clean, no visible dents or cracks on casing, keyboard keys appear worn, touchpad has minor smudges, plastic casing shows light scratches
+- Damage noted: screen has reflections and smudges, keyboard appears clean, no visible dents or cracks, minor wear on palm rest, keyboard keys appear intact
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
-- Text read: Windows | Windows 7
+- Text read: Windows 7
 
 ## Two readers
+- item_type agreed by both readers
 - brand_text differed between the two readers, so it is treated as unread
-- model_text was seen by only one reader, so it is treated as unread
-- 5 transcribed lines was seen by only one reader, so it is treated as unread
+- 4 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
 - 8
@@ -37,27 +37,27 @@ Photos: 2  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 33 lines: 8 | 2 | 3 | 5 | 6 | 7 | 9 | 0 | Q | w | E | R | T | Y | U | lock | A | D | F | G | H | K | L | Z | x | C | V | B | N | M
-- **corroborate** -> dispute. brand_text differed between the two readers, so it is treated as unread; model_text was seen by only one reader, so it is treated as unread; 5 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=laptop brand=None model=None label=False lines=2
+- **corroborate** -> dispute. item_type agreed by both readers; brand_text differed between the two readers, so it is treated as unread; 4 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=laptop brand=None model=None label=False lines=1
 - **forensics** -> flag. looks like a catalogue or stock image
-- **retrieval** -> ok. query='Windows Windows 7 Battery is bad, but every other part is Ohk' hits=['Google Pixel 7']
+- **retrieval** -> ok. query='Windows 7 Battery is bad, but every other part is Ohk' hits=['Google Pixel 7']
 - **identify** -> refused. chosen=None None margin=None
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 72576 ms (replayed)
-- read_evidence on qwen/qwen3-vl-32b-instruct: 9961 ms
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 5998 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 10503 ms
-- identify on z-ai/glm-5.3-flash: 9572 ms
-- extract_claims on qwen/qwen3-vl-32b-instruct: 2511 ms (replayed)
-- total across calls: 111121 ms; wall clock: 20121 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 9444 ms (replayed)
+- read_evidence on qwen/qwen3-vl-32b-instruct: 16554 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 14461 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 25869 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 64593 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 4016 ms (replayed)
+- total across calls: 134937 ms; wall clock: 2753 ms
 
 ## Identification
 Shortlist from the catalogue:
   - Google Pixel 7 (0.2)
 
-**Not identified: CANNOT_IDENTIFY.** Item is an ASUS laptop (Windows 7, Core i5 stickers), not the shortlisted Google Pixel 7; no model number is legible.
+**Not identified: CANNOT_IDENTIFY.** Photos show an ASUS laptop (ASUS logo, Intel Core i3, NVIDIA, Windows 7 stickers), but no model name is legible; the only shortlist entry, Google Pixel 7, is plainly contradicted by the images.
 
 Evidence flags: looks like a catalogue or stock image
 
@@ -66,9 +66,9 @@ Evidence flags: looks like a catalogue or stock image
 
 - Identification confidence: 0% (unknown)
 - Price confidence: 22%
-- Item is an ASUS laptop (Windows 7, Core i5 stickers), not the shortlisted Google Pixel 7; no model number is legible.
+- Photos show an ASUS laptop (ASUS logo, Intel Core i3, NVIDIA, Windows 7 stickers), but no model name is legible; the only shortlist entry, Google Pixel 7, is plainly contradicted by the images.
 - no label, plate or settings screen was legible
-- 2 lines seen by both readers
+- 1 lines seen by both readers
 - looks like a catalogue or stock image
 - 6 claims are still unproven, 0 are supported
 
@@ -89,9 +89,10 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 - What does not work on it? Say none if everything works.
 
 ## Claims
-- [unverified] Battery is bad
+- [unverifiable_remote] Battery is bad
     priced as: assumed the battery only works on the charger. Agent unplugs the charger and watches the battery for two minutes
 - [unverifiable_remote] Every other part is Ohk
+    priced as: assumed the battery only works on the charger. Agent unplugs the charger and watches the battery for two minutes
 - [unverified] Required evidence 'code_shot' was not supplied
     priced as: priced as if the worst case is true. Write the code {code} on paper and take one photo with the paper next to the laptop.
 - [unverified] Required evidence 'lid_open_screen_on' was not supplied
@@ -109,11 +110,11 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 1,076 NGN
 
 Conditions attached to this price:
-- Not identified: Item is an ASUS laptop (Windows 7, Core i5 stickers), not the shortlisted Google Pixel 7; no model number is legible.
+- Not identified: Photos show an ASUS laptop (ASUS logo, Intel Core i3, NVIDIA, Windows 7 stickers), but no model name is legible; the only shortlist entry, Google Pixel 7, is plainly contradicted by the images.
 - Evidence flag: looks like a catalogue or stock image
 - Raised to the 5,000 NGN minimum this business publishes for this kind of item.
 - Battery is bad -> not proven remotely. Agent unplugs the charger and watches the battery for two minutes.
-- Every other part is Ohk -> not proven remotely. Agent will confirm at pickup.
+- Every other part is Ohk -> not proven remotely. Agent unplugs the charger and watches the battery for two minutes.
 - Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on paper and take one photo with the paper next to the laptop..
 - Required evidence 'lid_open_screen_on' was not supplied -> not proven remotely. Photo of the laptop open with the screen switched on, showing the desktop..
 - Required evidence 'bottom_sticker' was not supplied -> not proven remotely. Photo of the sticker on the underside showing the model, serial or service tag..

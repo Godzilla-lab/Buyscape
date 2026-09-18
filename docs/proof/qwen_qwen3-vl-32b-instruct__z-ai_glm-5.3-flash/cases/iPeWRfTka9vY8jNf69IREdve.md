@@ -1,6 +1,6 @@
 # Case iPeWRfTka9vY8jNf69IREdve
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  23882 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  37737 ms
 
 ## What the engine saw
 - Presentation: single_unit
@@ -11,13 +11,14 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: screen shows no visible cracks or damage, device appears to be held in hand with slight wear on edges
+- Damage noted: screen shows reflections and glare, hand holding device, no visible damage to screen or body from angle shown
 - Looks like a catalogue image: no
 - Screenshot of a gallery: yes
-- Text read: 9:59 | TIMOTHY SEGUN
+- Text read: 9:59 | Google | Messages | TIMOTHY SEGUN
 
 ## Two readers
-- 1 transcribed lines was seen by only one reader, so it is treated as unread
+- item_type agreed by both readers
+- 6 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
 - 9:59-.
@@ -26,41 +27,43 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 3 lines: 9:59-. | OTH | 1
-- **corroborate** -> dispute. 1 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=phone brand=None model=None label=False lines=2
+- **corroborate** -> dispute. item_type agreed by both readers; 6 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=phone brand=None model=None label=False lines=4
 - **forensics** -> flag. screenshot of a gallery rather than a photo of the item
-- **retrieval** -> ok. query='9:59 TIMOTHY SEGUN Uk used HUAWEI P20 Pro /working / just a little crack screen' hits=['Infinix Smart 9', 'Google Pixel 9']
-- **identify** -> refused. chosen=None None margin=0.25
+- **retrieval** -> ok. query='9:59 Google Messages TIMOTHY SEGUN Uk used HUAWEI P20 Pro /working / just a little crack s' hits=['Google Pixel 9', 'Google Pixel 7', 'Google Pixel 8', 'Infinix Smart 9']
+- **identify** -> refused. chosen=None None margin=0.0
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 5393 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 6105 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 8491 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 3893 ms (replayed)
-- total across calls: 23882 ms; wall clock: 300 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5169 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 18202 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 12064 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2302 ms (replayed)
+- total across calls: 37737 ms; wall clock: 1339 ms
 
 ## Identification
 Shortlist from the catalogue:
+  - Google Pixel 9 (0.5)
+  - Google Pixel 7 (0.3)
+  - Google Pixel 8 (0.3)
   - Infinix Smart 9 (0.2)
-  - Google Pixel 9 (0.2)
 
-**Not identified: CANNOT_IDENTIFY.** No brand or model text is legible on the device; seller's claim of Huawei P20 Pro is unverified and both shortlist entries contradict the phone's notch/EMUI appearance.
+**Not identified: CANNOT_IDENTIFY.** No legible brand/model marking; notch and EMUI-style UI are consistent with seller's Huawei claim but not provable, and no shortlist entry fits.
 
 Evidence flags: screenshot of a gallery rather than a photo of the item
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 7% on the best answer. It is probably a Huawei P20 Pro or a Infinix Smart 9, and the photos cannot separate them.**
+**Not sure enough to price: 1% on the best answer. It is probably a Google Pixel 9 or a Google Pixel 7, and the photos cannot separate them.**
 
-- Identification confidence: 7% (unknown)
-- Price confidence: 16%
-- It is weighing: Huawei P20 Pro (0.3), Infinix Smart 9 (0.05)
-- No brand or model text is legible on the device; seller's claim of Huawei P20 Pro is unverified and both shortlist entries contradict the phone's notch/EMUI appearance.
+- Identification confidence: 1% (unknown)
+- Price confidence: 18%
+- It is weighing: Google Pixel 9 (0.05), Google Pixel 7 (0.05)
+- No legible brand/model marking; notch and EMUI-style UI are consistent with seller's Huawei claim but not provable, and no shortlist entry fits.
 - no label, plate or settings screen was legible
-- 2 lines seen by both readers
-- the next candidate was only 0.25 behind
+- 4 lines seen by both readers
+- the next candidate was only 0.0 behind
 - screenshot of a gallery rather than a photo of the item
-- 9 claims are still unproven, 0 are supported
+- 8 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
 
@@ -78,8 +81,7 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 - Is it signed out of iCloud or Google, so a new owner can set it up?
 
 ## Claims
-- [unverifiable_remote] HUAWEI P20 Pro
-- [unverifiable_remote] UK used
+- [unverifiable_remote] Uk used HUAWEI P20 Pro
 - [unverifiable_remote] working
     priced as: assumed faulty. Agent powers on and tests calls, camera and charging
 - [unverified] just a little crack screen
@@ -103,10 +105,9 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 75 NGN
 
 Conditions attached to this price:
-- Not identified: No brand or model text is legible on the device; seller's claim of Huawei P20 Pro is unverified and both shortlist entries contradict the phone's notch/EMUI appearance.
+- Not identified: No legible brand/model marking; notch and EMUI-style UI are consistent with seller's Huawei claim but not provable, and no shortlist entry fits.
 - Evidence flag: screenshot of a gallery rather than a photo of the item
-- HUAWEI P20 Pro -> not proven remotely. Agent will confirm at pickup.
-- UK used -> not proven remotely. Agent will confirm at pickup.
+- Uk used HUAWEI P20 Pro -> not proven remotely. Agent will confirm at pickup.
 - working -> not proven remotely. Agent powers on and tests calls, camera and charging.
 - just a little crack screen -> not proven remotely. Agent inspects the bezel and display panel.
 - Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on paper and take one photo with the paper next to the phone..

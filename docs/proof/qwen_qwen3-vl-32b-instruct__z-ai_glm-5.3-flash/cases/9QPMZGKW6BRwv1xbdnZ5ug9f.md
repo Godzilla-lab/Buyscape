@@ -1,6 +1,6 @@
 # Case 9QPMZGKW6BRwv1xbdnZ5ug9f
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  12794 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  18324 ms
 
 ## What the engine saw
 - Presentation: single_unit
@@ -8,19 +8,20 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Made of: steel 60%, plastic 30%, circuit_board 10%
 - Estimated weight: 25.0 kg (confidence 0.8)
 - Brand read off the item: SUMEC FIRMAN
-- Model read off the item: SPG-4000
+- Model read off the item: SPG4000
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: Item wrapped in plastic film, appears unused., No visible damage or wear.
+- Damage noted: Item wrapped in plastic, appears unused or lightly used., No visible damage or wear on the unit.
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
-- Text read: SUMEC FIRMAN SPG4000 Petrol Generator | MODEL: SPG-4000
+- Text read: SUMEC FIRMAN SPG4000 Petrol Generator | Model: SPG4000
 
 ## Two readers
 - brand_text agreed by both readers
 - model_text agreed by both readers
+- item_type agreed by both readers
 - rating_text was seen by only one reader, so it is treated as unread
-- 13 transcribed lines was seen by only one reader, so it is treated as unread
+- 11 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
 - hine
@@ -34,27 +35,27 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 8 lines: hine | ra | Cu | SUMEC | FIRMAN | SPO | Petrol Generator | SPG4000
-- **corroborate** -> dispute. brand_text agreed by both readers; model_text agreed by both readers; rating_text was seen by only one reader, so it is treated as unread; 13 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=generator brand=SUMEC FIRMAN model=SPG-4000 label=True lines=2
+- **corroborate** -> dispute. brand_text agreed by both readers; model_text agreed by both readers; item_type agreed by both readers; rating_text was seen by only one reader, so it is treated as unread; 11 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=generator brand=SUMEC FIRMAN model=SPG4000 label=True lines=2
 - **forensics** -> flag. looks like a catalogue or stock image
-- **retrieval** -> ok. query='SUMEC FIRMAN SPG-4000 SUMEC FIRMAN SPG4000 Petrol Generator MODEL: SPG-4000 Firman 4kva ge' hits=['Sumec Firman SPG3000 3.1kVA', 'Sumec Firman SPG2900 2.8kVA', 'Sumec Firman ECO8990ES 6.5kVA', 'Sumec Firman SPG8800 8.1kVA']
-- **identify** -> label. named from the label: SUMEC FIRMAN SPG-4000, not in the catalogue
+- **retrieval** -> ok. query='SUMEC FIRMAN SPG4000 SUMEC FIRMAN SPG4000 Petrol Generator Model: SPG4000 Firman 4kva gene' hits=['Sumec Firman SPG2900 2.8kVA', 'Sumec Firman SPG3000 3.1kVA', 'Sumec Firman ECO8990ES 6.5kVA', 'Sumec Firman SPG8800 8.1kVA']
+- **identify** -> label. named from the label: SUMEC FIRMAN SPG4000, not in the catalogue
 - **abstain** -> pass. confidence=0.45 from the label
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 6506 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 4162 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 2126 ms (replayed)
-- total across calls: 12794 ms; wall clock: 485 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 6854 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 9571 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 1899 ms (replayed)
+- total across calls: 18324 ms; wall clock: 1521 ms
 
 ## Identification
 Shortlist from the catalogue:
-  - Sumec Firman SPG3000 3.1kVA (0.5)
   - Sumec Firman SPG2900 2.8kVA (0.5)
+  - Sumec Firman SPG3000 3.1kVA (0.4)
   - Sumec Firman ECO8990ES 6.5kVA (0.3)
   - Sumec Firman SPG8800 8.1kVA (0.3)
 
-**Answer: SUMEC FIRMAN SPG-4000** (named from the item's own label; not in the catalogue)
+**Answer: SUMEC FIRMAN SPG4000** (named from the item's own label; not in the catalogue)
 
 Evidence flags: looks like a catalogue or stock image
 

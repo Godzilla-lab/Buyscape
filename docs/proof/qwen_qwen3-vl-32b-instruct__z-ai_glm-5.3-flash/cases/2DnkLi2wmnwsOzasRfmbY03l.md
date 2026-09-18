@@ -1,6 +1,6 @@
 # Case 2DnkLi2wmnwsOzasRfmbY03l
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  28868 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  24336 ms
 
 ## What the engine saw
 - Presentation: single_unit
@@ -11,12 +11,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: minor scuffs on surface, hand holding item, possibly obscuring details
+- Damage noted: minor scuff marks on surface, dust and smudges visible
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 - Text read: CIANO GLOBAL CONCEPTS | HP
 
 ## Two readers
+- item_type agreed by both readers
 - 1 transcribed lines was seen by only one reader, so it is treated as unread
 - brand_text was read by only one reader, so it is kept but not confirmed
 
@@ -26,7 +27,7 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 2 lines: POSTED ON JIT | CIANO GLOBAL CONCEPTS
-- **corroborate** -> dispute. 1 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed
+- **corroborate** -> dispute. item_type agreed by both readers; 1 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed
 - **read_evidence** -> ok. category=laptop brand=HP model=None label=False lines=2
 - **retrieval** -> ok. query='HP CIANO GLOBAL CONCEPTS HP Hp elitebook 840 g7 – premium business laptop
 looking for a fa' hits=['HP EliteBook 840 G5', 'HP EliteBook 840 G6', 'HP 250 G7', 'HP 2000', 'HP EliteBook 830 G5']
@@ -34,11 +35,11 @@ looking for a fa' hits=['HP EliteBook 840 G5', 'HP EliteBook 840 G6', 'HP 250 G7
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 4689 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 7366 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 14676 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 2137 ms (replayed)
-- total across calls: 28868 ms; wall clock: 174 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4146 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 7965 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 10376 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 1849 ms (replayed)
+- total across calls: 24336 ms; wall clock: 1228 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -48,15 +49,15 @@ Shortlist from the catalogue:
   - HP 2000 (0.5)
   - HP EliteBook 830 G5 (0.4333)
 
-**Not identified: CANNOT_IDENTIFY.** Closed lid shows only HP logo; no model text or plate, so G5/G6/G7 cannot be distinguished; seller's G7 claim unverifiable and not on label.
+**Not identified: CANNOT_IDENTIFY.** Only a blank silver HP lid is shown; no model text, badge or ports visible. Seller claims EliteBook 840 G7 but that specific generation cannot be confirmed and G7 is absent from the shortlist.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 14% on the best answer. It is probably a HP EliteBook 840 G6 or a HP EliteBook 840 G5, and the photos cannot separate them.**
+**Not sure enough to price: 13% on the best answer. It is probably a HP EliteBook 840 G6 or a HP EliteBook 840 G5, and the photos cannot separate them.**
 
-- Identification confidence: 14% (unknown)
+- Identification confidence: 13% (unknown)
 - Price confidence: 22%
-- It is weighing: HP EliteBook 840 G6 (0.4), HP EliteBook 840 G5 (0.35)
-- Closed lid shows only HP logo; no model text or plate, so G5/G6/G7 cannot be distinguished; seller's G7 claim unverifiable and not on label.
+- It is weighing: HP EliteBook 840 G6 (0.35), HP EliteBook 840 G5 (0.3)
+- Only a blank silver HP lid is shown; no model text, badge or ports visible. Seller claims EliteBook 840 G7 but that specific generation cannot be confirmed and G7 is absent from the shortlist.
 - no label, plate or settings screen was legible
 - 1 lines seen by both readers
 - the brand was read by only one reader and is not confirmed
@@ -99,7 +100,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 270 NGN
 
 Conditions attached to this price:
-- Not identified: Closed lid shows only HP logo; no model text or plate, so G5/G6/G7 cannot be distinguished; seller's G7 claim unverifiable and not on label.
+- Not identified: Only a blank silver HP lid is shown; no model text, badge or ports visible. Seller claims EliteBook 840 G7 but that specific generation cannot be confirmed and G7 is absent from the shortlist.
 - Raised to the 5,000 NGN minimum this business publishes for this kind of item.
 - Hp elitebook 840 g7 -> not proven remotely. Agent will confirm at pickup.
 - premium business laptop -> not proven remotely. Agent will confirm at pickup.

@@ -1,10 +1,10 @@
 # Case isgwZhXv5Jl2qJdsBWrI3cuJ
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0006  |  27969 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  18589 ms
 
 ## What the engine saw
 - Presentation: sealed_new
-- Category: split air conditioner (confidence 0.9)
+- Category: air conditioner (confidence 0.95)
 - Made of: carton 100%
 - Estimated weight: 35.0 kg (confidence 0.7)
 - Brand read off the item: Hisense
@@ -12,12 +12,14 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Rating read: none
 - Label, plate or settings screen legible: no
 - Damage noted: none
-- Looks like a catalogue image: no
+- Looks like a catalogue image: yes
 - Screenshot of a gallery: no
-- Text read: Hisense | AIR CONDITIONER | 2 YEAR WARRANTY | Indoor Unit | Hisense | AIR CONDITIONER | 2 YEAR WARRANTY | Outdoor Unit
+- Text read: Hisense | AIR CONDITIONER | Indoor Unit | 2 YEAR WARRANTY | Hisense | AIR CONDITIONER | Outdoor Unit | 2 YEAR WARRANTY
 
 ## Two readers
 - brand_text agreed by both readers
+- item_type agreed by both readers
+- rating_text was seen by only one reader, so it is treated as unread
 - 2 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
@@ -30,40 +32,44 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 6 lines: 0 | 2 | AIR CONDITIONER | Indoor Unit- | Outdel | Unite
-- **corroborate** -> dispute. brand_text agreed by both readers; 2 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=split air conditioner brand=Hisense model=None label=False lines=8
+- **corroborate** -> dispute. brand_text agreed by both readers; item_type agreed by both readers; rating_text was seen by only one reader, so it is treated as unread; 2 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=air conditioner brand=Hisense model=None label=False lines=8
+- **forensics** -> flag. looks like a catalogue or stock image
 - **gate** -> abstain. multiple items in frame
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 4284 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 22262 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 1423 ms (replayed)
-- total across calls: 27969 ms; wall clock: 555 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4091 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 11498 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3000 ms (replayed)
+- total across calls: 18589 ms; wall clock: 2803 ms
 
 ## Identification
 No catalogue candidates matched.
 
 **Not identified: EVIDENCE_INCOMPLETE.** The photos show more than one item, so no single item can be identified.
 
+Evidence flags: looks like a catalogue or stock image
+
 ## How sure the engine is (back office)
 **0%: the photos do not say what this is.**
 
 - Identification confidence: 0% (unknown)
-- Price confidence: 22%
+- Price confidence: 18%
 - The photos show more than one item, so no single item can be identified.
 - no label, plate or settings screen was legible
 - 8 lines seen by both readers
-- 6 claims are still unproven, 0 are supported
+- looks like a catalogue or stock image
+- 8 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
 
 ## What the seller is asked for next (shown in the app)
 1. [PHOTO] Photograph one item on its own, with nothing else in the picture.
    _why: the photos show more than one item_
-2. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: Close-up of the rating plate on the outdoor unit showing the model and HP. Then, without stopping the video: Open the front grille of the indoor unit and photograph the filters and coil. Finish with: A short clip with the unit running and the display lit. Keep filming the whole time. Do not cut between clips.
+2. [PHOTO] Take your own photo of the actual item you are selling.
+   _why: this looks like a catalogue picture, not the real unit_
+3. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: Close-up of the rating plate on the outdoor unit showing the model and HP. Then, without stopping the video: Open the front grille of the indoor unit and photograph the filters and coil. Finish with: A short clip with the unit running and the display lit. Keep filming the whole time. Do not cut between clips.
    _why: two readings of these photos disagreed about what is written on the item_
-3. [PHOTO] Close-up of the rating plate on the outdoor unit showing the model and HP.
-   _why: nothing on the item says which model this is_
 
 ## What the seller is asked (only they know these)
 - Roughly how old is it, in years?
@@ -71,6 +77,10 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 - Do you have both the indoor unit and the outdoor unit?
 
 ## Claims
+- [unverified] The Hisense 1HP Inverter Split AC is a highly efficient, energy-saving cooling solution
+    priced as: the smallest rating this brand sells. Agent reads the outdoor rating plate
+- [unverified] The Hisense 1HP Inverter Split AC is a highly efficient, energy-saving cooling solution
+    priced as: the smallest rating this brand sells. Agent reads the outdoor rating plate
 - [unverified] The Hisense 1HP Inverter Split AC is a highly efficient, energy-saving cooling solution
     priced as: the smallest rating this brand sells. Agent reads the outdoor rating plate
 - [unverified] Required evidence 'code_shot' was not supplied
@@ -85,7 +95,7 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Open the front grille of the indoor unit and photograph the filters and coil.
 
 ## Price
-**1,381 to 4,200 NGN** (priced as material, width 1.0101, method material_floor, 0 comparable prices)
+**997 to 4,200 NGN** (priced as material, width 1.2321, method material_floor, 0 comparable prices)
 
 This item was not identified, so it is priced as material rather than as a working item: 35 kg of carton 100% (rates for carton are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
@@ -93,6 +103,9 @@ Scrap floor: 2,100 NGN
 
 Conditions attached to this price:
 - Not identified: The photos show more than one item, so no single item can be identified.
+- Evidence flag: looks like a catalogue or stock image
+- The Hisense 1HP Inverter Split AC is a highly efficient, energy-saving cooling solution -> not proven remotely. Agent reads the outdoor rating plate.
+- The Hisense 1HP Inverter Split AC is a highly efficient, energy-saving cooling solution -> not proven remotely. Agent reads the outdoor rating plate.
 - The Hisense 1HP Inverter Split AC is a highly efficient, energy-saving cooling solution -> not proven remotely. Agent reads the outdoor rating plate.
 - Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on paper and photograph it next to the unit..
 - Required evidence 'indoor_unit' was not supplied -> not proven remotely. One photo of the whole indoor unit..

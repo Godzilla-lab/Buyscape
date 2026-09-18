@@ -1,6 +1,6 @@
 # Case bsyqaNBkz7TrtVwLe2hYarmo
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  25435 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  29909 ms
 
 ## What the engine saw
 - Presentation: sealed_new
@@ -20,6 +20,7 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - brand_text agreed by both readers
 - model_text agreed by both readers
 - 1 transcribed lines was seen by only one reader, so it is treated as unread
+- item_type was read by only one reader, so it is kept but not confirmed
 
 ## OCR read off the photos
 - Pixel Fold
@@ -27,21 +28,21 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 2 lines: Pixel Fold | KIZITO COMUNICAIONS
-- **corroborate** -> dispute. brand_text agreed by both readers; model_text agreed by both readers; 1 transcribed lines was seen by only one reader, so it is treated as unread
+- **corroborate** -> dispute. brand_text agreed by both readers; model_text agreed by both readers; 1 transcribed lines was seen by only one reader, so it is treated as unread; item_type was read by only one reader, so it is kept but not confirmed
 - **read_evidence** -> ok. category=phone brand=Google model=Pixel Fold label=False lines=2
 - **forensics** -> flag. looks like a catalogue or stock image
 - **retrieval** -> ok. query='Google Pixel Fold Pixel Fold Google Latest Google pixel fold 256gb 
 Available in store 
 Di' hits=['Google Pixel 7', 'Google Pixel 8', 'Google Pixel 9']
-- **identify** -> ok. chosen=Google Pixel Fold margin=None
-- **abstain** -> abstain. confidence 0.4: no label, plate or settings screen was legible; 1 lines seen by both readers; looks like a catalogue or stock image
+- **identify** -> ok. chosen=Google Pixel Fold margin=0.9
+- **abstain** -> abstain. confidence 0.32: no label, plate or settings screen was legible; 1 lines seen by both readers; the item_type was read by only one reader and is not confirmed; looks like a catalogue or stock image
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 5988 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 8176 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 7891 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 3380 ms (replayed)
-- total across calls: 25435 ms; wall clock: 558 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 6696 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 12658 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 6151 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 4404 ms (replayed)
+- total across calls: 29909 ms; wall clock: 2069 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -49,19 +50,20 @@ Shortlist from the catalogue:
   - Google Pixel 8 (0.5)
   - Google Pixel 9 (0.5)
 
-**Not identified: EVIDENCE_INCOMPLETE.** The evidence only supports this answer at 40 percent, which is a guess. One clear photo of the label would settle it.
+**Not identified: EVIDENCE_INCOMPLETE.** The evidence only supports this answer at 32 percent, which is a guess. One clear photo of the label would settle it.
 
 Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 24% on the best answer. It is probably a Google Pixel Fold, and the photos cannot separate them.**
+**Not sure enough to price: 19% on the best answer. It is probably a Google Pixel Fold or a Google Pixel 7, and the photos cannot separate them.**
 
-- Identification confidence: 24% (unknown)
+- Identification confidence: 19% (unknown)
 - Price confidence: 16%
-- It is weighing: Google Pixel Fold (0.95)
-- The evidence only supports this answer at 40 percent, which is a guess. One clear photo of the label would settle it.
+- It is weighing: Google Pixel Fold (0.95), Google Pixel 7 (0.05)
+- The evidence only supports this answer at 32 percent, which is a guess. One clear photo of the label would settle it.
 - no label, plate or settings screen was legible
 - 1 lines seen by both readers
+- the item_type was read by only one reader and is not confirmed
 - looks like a catalogue or stock image
 - 9 claims are still unproven, 0 are supported
 
@@ -106,7 +108,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 34 NGN
 
 Conditions attached to this price:
-- Not identified: The evidence only supports this answer at 40 percent, which is a guess. One clear photo of the label would settle it.
+- Not identified: The evidence only supports this answer at 32 percent, which is a guess. One clear photo of the label would settle it.
 - Evidence flag: looks like a catalogue or stock image
 - Latest Google Pixel Fold 256GB -> not proven remotely. Agent reads storage from Settings.
 - Latest Google Pixel Fold 256GB -> not proven remotely. Agent reads storage from Settings.

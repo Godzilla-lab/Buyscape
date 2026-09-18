@@ -1,23 +1,24 @@
 # Case 3Oqdb5kmMabhON9PGIFeiTHX
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  35170 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  36474 ms
 
 ## What the engine saw
 - Presentation: single_unit
-- Category: split air conditioner (confidence 0.95)
-- Made of: steel 60%, plastic 30%, copper 10%
-- Estimated weight: 25.0 kg (confidence 0.8)
+- Category: split air conditioner (confidence 0.9)
+- Made of: plastic 60%, steel 30%, copper 10%
+- Estimated weight: 25.0 kg (confidence 0.7)
 - Brand read off the item: Hisense
 - Model read off the item: nothing legible
 - Rating read: none
-- Label, plate or settings screen legible: yes
-- Damage noted: unit appears new, wrapped in plastic film, no visible damage or wear
+- Label, plate or settings screen legible: no
+- Damage noted: plastic wrap partially torn, minor scuff marks on casing
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
 - Text read: Hisense
 
 ## Two readers
 - brand_text agreed by both readers
+- item_type agreed by both readers
 - model_text was seen by only one reader, so it is treated as unread
 - 1 transcribed lines was seen by only one reader, so it is treated as unread
 
@@ -26,19 +27,19 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 1 lines: Hisens
-- **corroborate** -> dispute. brand_text agreed by both readers; model_text was seen by only one reader, so it is treated as unread; 1 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=split air conditioner brand=Hisense model=None label=True lines=1
+- **corroborate** -> dispute. brand_text agreed by both readers; item_type agreed by both readers; model_text was seen by only one reader, so it is treated as unread; 1 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=split air conditioner brand=Hisense model=None label=False lines=1
 - **forensics** -> flag. looks like a catalogue or stock image
 - **retrieval** -> ok. query='Hisense Hisense 1.5hp hisense inverter split air conditioner' hits=['Hisense AS-12 1.5HP', 'Hisense AS-09 1HP', 'Hisense AS-18 2HP', 'Samsung AR12 1.5HP', 'Scanfrost SFAC12 1.5HP']
-- **identify** -> ok. chosen=Hisense AS-12 margin=0.45
-- **abstain** -> abstain. top score 0.65
+- **identify** -> refused. chosen=Hisense None margin=0.25
+- **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 5085 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 14377 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 11684 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 4024 ms (replayed)
-- total across calls: 35170 ms; wall clock: 374 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4969 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 7382 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 19711 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 4412 ms (replayed)
+- total across calls: 36474 ms; wall clock: 1898 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -48,21 +49,22 @@ Shortlist from the catalogue:
   - Samsung AR12 1.5HP (0.3)
   - Scanfrost SFAC12 1.5HP (0.3)
 
-**Not identified: CANNOT_IDENTIFY.** The best candidate scored only 0.65, which is not sure enough to price.
+**Not identified: CANNOT_IDENTIFY.** Only 'Hisense' is legible; no model number or capacity plate visible, so 1HP/1.5HP/2HP variants cannot be distinguished. Seller's 1.5HP claim is unverified by the image.
 
 Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 20% on the best answer. It is probably a Hisense AS-12 or a Hisense AS-18, and the photos cannot separate them.**
+**Not sure enough to price: 10% on the best answer. It is probably a Hisense AS-12 1.5HP or a Hisense AS-09 1HP, and the photos cannot separate them.**
 
-- Identification confidence: 20% (unknown)
-- Price confidence: 18%
-- It is weighing: Hisense AS-12 (0.65), Hisense AS-18 (0.2)
-- The best candidate scored only 0.65, which is not sure enough to price.
-- read off the item's own label
+- Identification confidence: 10% (unknown)
+- Price confidence: 16%
+- It is weighing: Hisense AS-12 1.5HP (0.45), Hisense AS-09 1HP (0.2)
+- Only 'Hisense' is legible; no model number or capacity plate visible, so 1HP/1.5HP/2HP variants cannot be distinguished. Seller's 1.5HP claim is unverified by the image.
+- no label, plate or settings screen was legible
 - 1 lines seen by both readers
+- the next candidate was only 0.25 behind
 - looks like a catalogue or stock image
-- 8 claims are still unproven, 0 are supported
+- 9 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
 
@@ -86,6 +88,8 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: the smallest rating this brand sells. Agent reads the outdoor rating plate
 - [unverified] 1.5hp hisense inverter split air conditioner
     priced as: the smallest rating this brand sells. Agent reads the outdoor rating plate
+- [unverified] 1.5hp hisense inverter split air conditioner
+    priced as: the smallest rating this brand sells. Agent reads the outdoor rating plate
 - [unverified] Required evidence 'code_shot' was not supplied
     priced as: priced as if the worst case is true. Write the code {code} on paper and photograph it next to the unit.
 - [unverified] Required evidence 'indoor_unit' was not supplied
@@ -98,15 +102,16 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Open the front grille of the indoor unit and photograph the filters and coil.
 
 ## Price
-**15,800 to 42,850 NGN** (priced as material, width 0.9224, method material_floor, 0 comparable prices)
+**12,217 to 39,700 NGN** (priced as material, width 1.0587, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 25 kg of steel 60%, plastic 30%, copper 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 25 kg of plastic 60%, steel 30%, copper 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 33,250 NGN
+Scrap floor: 30,250 NGN
 
 Conditions attached to this price:
-- Not identified: The best candidate scored only 0.65, which is not sure enough to price.
+- Not identified: Only 'Hisense' is legible; no model number or capacity plate visible, so 1HP/1.5HP/2HP variants cannot be distinguished. Seller's 1.5HP claim is unverified by the image.
 - Evidence flag: looks like a catalogue or stock image
+- 1.5hp hisense inverter split air conditioner -> not proven remotely. Agent reads the outdoor rating plate.
 - 1.5hp hisense inverter split air conditioner -> not proven remotely. Agent reads the outdoor rating plate.
 - 1.5hp hisense inverter split air conditioner -> not proven remotely. Agent reads the outdoor rating plate.
 - 1.5hp hisense inverter split air conditioner -> not proven remotely. Agent reads the outdoor rating plate.

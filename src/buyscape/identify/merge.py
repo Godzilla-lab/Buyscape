@@ -61,6 +61,9 @@ def merge_readings(readings: list[Reading]) -> Reading:
         weight_confidence=heaviest.weight_confidence,
         category=surest.category,
         category_confidence=surest.category_confidence,
+        # The type is a judgement like the category, so it comes from the
+        # same photo: the one that was surest what it was looking at.
+        item_type=surest.item_type or next((r.item_type for r in readings if r.item_type), None),
         visible_text=lines,
         has_label_or_plate=any(r.has_label_or_plate for r in readings),
         is_screenshot=any(r.is_screenshot for r in readings),

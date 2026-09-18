@@ -308,7 +308,7 @@ def test_an_item_in_no_category_still_gets_the_generic_protocol(protocols):
     """Rule: people sell anything. Nothing is refused for lacking a protocol."""
     from buyscape.protocols.schema import resolve
 
-    for spoken in ["sewing machine", "electric motor", "office chair", "chest freezer", "", None]:
+    for spoken in ["sewing machine", "electric motor", "phone holder stand", "chest freezer", "", None]:
         protocol = resolve(protocols, spoken)
         assert protocol.category == "generic"
         assert protocol.opening_shots, "an unknown item must still be opened before payment"

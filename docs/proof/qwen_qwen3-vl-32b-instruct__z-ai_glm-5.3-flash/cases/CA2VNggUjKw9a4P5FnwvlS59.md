@@ -1,11 +1,11 @@
 # Case CA2VNggUjKw9a4P5FnwvlS59
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0020  |  22267 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0019  |  47723 ms
 
 ## What the engine saw
 - Presentation: single_unit
-- Category: phone (confidence 0.95)
-- Made of: aluminium 30%, plastic 50%, circuit_board 10%, glass 10%
+- Category: phone (confidence 1.0)
+- Made of: aluminium 40%, plastic 50%, glass 10%
 - Estimated weight: 0.2 kg (confidence 0.9)
 - Brand read off the item: Apple
 - Model read off the item: nothing legible
@@ -14,13 +14,15 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Damage noted: none
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: iPhone 13 Pro Max | Apple Inc. | Designed by Apple in California
+- Text read: iPhone | Apple Inc. | www.apple.com | Designed by Apple in California | Assembled in China | iPhone 13 Pro | iOS 15.5
 
 ## Two readers
 - brand_text agreed by both readers
 - model_text differed between the two readers, so it is treated as unread
+- rating_text was seen by only one reader, so it is treated as unread
 - serial_text was seen by only one reader, so it is treated as unread
-- 6 transcribed lines was seen by only one reader, so it is treated as unread
+- 22 transcribed lines was seen by only one reader, so it is treated as unread
+- item_type was read by only one reader, so it is kept but not confirmed
 
 ## OCR read off the photos
 - KID
@@ -29,40 +31,39 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 3 lines: KID | AORLE PIONE | OANNECT
-- **corroborate** -> dispute. brand_text agreed by both readers; model_text differed between the two readers, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 6 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=phone brand=Apple model=None label=True lines=3
-- **retrieval** -> ok. query='Apple iPhone 13 Pro Max Apple Inc. Designed by Apple in California iPhone 14pro
-128gb
-98% ' hits=['Apple iPhone 13 Pro', 'Apple iPhone 13 Pro Max', 'Apple iPhone 13', 'Apple iPhone 14', 'Apple iPhone 11 Pro Max']
-- **identify** -> ok. chosen=Apple iPhone 13 Pro Max margin=0.65
+- **corroborate** -> dispute. brand_text agreed by both readers; model_text differed between the two readers, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 22 transcribed lines was seen by only one reader, so it is treated as unread; item_type was read by only one reader, so it is kept but not confirmed
+- **read_evidence** -> ok. category=phone brand=Apple model=None label=True lines=7
+- **retrieval** -> ok. query='Apple iPhone Apple Inc. www.apple.com Designed by Apple in California Assembled in China i' hits=['Apple iPhone 13 Pro', 'Apple iPhone 13', 'Apple iPhone 15 Pro', 'Apple iPhone 14', 'Apple iPhone 13 Pro Max']
+- **identify** -> ok. chosen=Apple iPhone 13 Pro margin=0.8
 - **abstain** -> abstain. seller names another generation
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 5627 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 5711 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 5474 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 5455 ms (replayed)
-- total across calls: 22267 ms; wall clock: 1976 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 13282 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 23515 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 6530 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 4396 ms (replayed)
+- total across calls: 47723 ms; wall clock: 1623 ms
 
 ## Identification
 Shortlist from the catalogue:
   - Apple iPhone 13 Pro (0.9)
-  - Apple iPhone 13 Pro Max (0.9)
   - Apple iPhone 13 (0.7667)
+  - Apple iPhone 15 Pro (0.7)
   - Apple iPhone 14 (0.6333)
-  - Apple iPhone 11 Pro Max (0.6)
+  - Apple iPhone 13 Pro Max (0.6)
 
-**Not identified: EVIDENCE_INCOMPLETE.** The item reads as Apple iPhone 13 Pro Max but the seller's text says 14. A Settings or About screen would settle it.
+**Not identified: EVIDENCE_INCOMPLETE.** The item reads as Apple iPhone 13 Pro but the seller's text says 14. A Settings or About screen would settle it.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 51% on the best answer. It is probably a Apple iPhone 13 Pro Max or a Apple iPhone 14, and the photos cannot separate them.**
+**Not sure enough to price: 43% on the best answer. It is probably a Apple iPhone 13 Pro or a Apple iPhone 14, and the photos cannot separate them.**
 
-- Identification confidence: 51% (unsure)
+- Identification confidence: 43% (unsure)
 - Price confidence: 14%
-- It is weighing: Apple iPhone 13 Pro Max (0.85), Apple iPhone 14 (0.2)
-- The item reads as Apple iPhone 13 Pro Max but the seller's text says 14. A Settings or About screen would settle it.
+- It is weighing: Apple iPhone 13 Pro (0.9), Apple iPhone 14 (0.1)
+- The item reads as Apple iPhone 13 Pro but the seller's text says 14. A Settings or About screen would settle it.
 - read off the item's own label
-- 3 lines seen by both readers
+- 7 lines seen by both readers
+- the item_type was read by only one reader and is not confirmed
 - 10 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -100,14 +101,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
-**74 to 219 NGN** (priced as material, width 0.9867, method material_floor, 0 comparable prices)
+**86 to 259 NGN** (priced as material, width 0.9987, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 0.2 kg of aluminium 30%, plastic 50%, circuit_board 10%, glass 10% (rates for glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 0.2 kg of aluminium 40%, plastic 50%, glass 10% (rates for glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 146 NGN
+Scrap floor: 170 NGN
 
 Conditions attached to this price:
-- Not identified: The item reads as Apple iPhone 13 Pro Max but the seller's text says 14. A Settings or About screen would settle it.
+- Not identified: The item reads as Apple iPhone 13 Pro but the seller's text says 14. A Settings or About screen would settle it.
 - iPhone 14pro -> not proven remotely. Agent will confirm at pickup.
 - 128gb -> not proven remotely. Agent reads storage from Settings.
 - 98% battery health -> not proven remotely. Agent opens the battery health screen.

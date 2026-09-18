@@ -1,53 +1,53 @@
 # Case crAgkA9h1uhZf4R3zfHVix9m
 
-Photos: 5  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0036  |  251252 ms
+Photos: 5  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0037  |  90969 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: laptop (confidence 0.95)
-- Made of: plastic 70%, steel 20%, circuit_board 10%
-- Estimated weight: 1.8 kg (confidence 0.8)
+- Made of: plastic 60%, steel 20%, circuit_board 10%, rubber 10%
+- Estimated weight: 1.5 kg (confidence 0.8)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: minor scuffs on the base, screen is not visible, no signs of cracks from this angle, screen is cracked or damaged, rear panel has visible wear and scuff marks, minor scuffs on surface, dust visible, minor scuff marks on lid, screen not visible, no signs of damage to exterior
+- Damage noted: minor scuffs on plastic casing, screen not visible, no signs of cracks from this angle, screen is off and reflecting surroundings, visible wear on edges and corners, dust or smudges on screen
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
-- Text read: ThinkPad | Windows 10 Pro | HDMI | USB | DC IN | SOLARSOLARCOMPUTERS
+- Text read: ThinkPad | USB | HDMI | DC IN | LAN | SOLCROSOLARCOMPUTERS
 
 ## Two readers
+- item_type agreed by both readers
 - brand_text differed between the two readers, so it is treated as unread
-- model_text differed between the two readers, so it is treated as unread
-- rating_text was seen by only one reader, so it is treated as unread
-- 11 transcribed lines was seen by only one reader, so it is treated as unread
+- model_text was seen by only one reader, so it is treated as unread
+- 9 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
 - 1
 
 ## Chain
 - **ocr** -> ok. 1 lines: 1
-- **corroborate** -> dispute. brand_text differed between the two readers, so it is treated as unread; model_text differed between the two readers, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; 11 transcribed lines was seen by only one reader, so it is treated as unread
+- **corroborate** -> dispute. item_type agreed by both readers; brand_text differed between the two readers, so it is treated as unread; model_text was seen by only one reader, so it is treated as unread; 9 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=laptop brand=None model=None label=True lines=6
 - **forensics** -> flag. looks like a catalogue or stock image
-- **retrieval** -> ok. query='ThinkPad Windows 10 Pro HDMI USB DC IN SOLARSOLARCOMPUTERS E-14 Gen 2 11th Generation Leno' hits=['Lenovo ThinkPad T480', 'Lenovo ThinkPad T470', 'Lenovo 14w', 'Lenovo ThinkPad X1 Carbon Gen 6', 'Lenovo IdeaPad 3']
-- **identify** -> refused. chosen=None None margin=None
+- **retrieval** -> ok. query='ThinkPad USB HDMI DC IN LAN SOLCROSOLARCOMPUTERS E-14 Gen 2 11th Generation Lenovo Thinkpa' hits=['Lenovo ThinkPad T480', 'Lenovo ThinkPad T470', 'Lenovo 14w', 'Lenovo ThinkPad X1 Carbon Gen 6', 'Lenovo IdeaPad 3']
+- **identify** -> refused. chosen=Lenovo None margin=0.0
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 34711 ms
-- read_evidence on qwen/qwen3-vl-32b-instruct: 25659 ms
-- read_evidence on qwen/qwen3-vl-32b-instruct: 30480 ms
-- read_evidence on qwen/qwen3-vl-32b-instruct: 28533 ms
-- read_evidence on qwen/qwen3-vl-32b-instruct: 30818 ms
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 7895 ms
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 7951 ms
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 14025 ms
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 17046 ms
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 16223 ms
-- identify on z-ai/glm-5.3-flash: 34352 ms
-- extract_claims on qwen/qwen3-vl-32b-instruct: 3559 ms (replayed)
-- total across calls: 251252 ms; wall clock: 69129 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5291 ms (replayed)
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5934 ms (replayed)
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5711 ms (replayed)
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5153 ms (replayed)
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5083 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 7136 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 7364 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 7307 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 7363 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 8630 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 23369 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2628 ms (replayed)
+- total across calls: 90969 ms; wall clock: 2190 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -57,19 +57,20 @@ Shortlist from the catalogue:
   - Lenovo ThinkPad X1 Carbon Gen 6 (0.4333)
   - Lenovo IdeaPad 3 (0.3)
 
-**Not identified: CANNOT_IDENTIFY.** Visible text confirms only 'ThinkPad'; the claimed E14 Gen 2 is not on the shortlist and no legible model label verifies it. Shortlist T480/T470/X1 Carbon/14w/IdeaPad 3 all conflict with the seller's claim or lack supporting visual evidence.
+**Not identified: CANNOT_IDENTIFY.** Only 'ThinkPad' is legible; no model marking readable. Seller's 'E14 Gen 2' claim is not on the label or shortlist, and shortlist models cannot be confirmed or excluded on visible evidence.
 
 Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 17% on the best answer. It is probably a Lenovo ThinkPad E14 Gen 2, and the photos cannot separate them.**
+**Not sure enough to price: 5% on the best answer. It is probably a Lenovo ThinkPad T480 or a Lenovo ThinkPad T470, and the photos cannot separate them.**
 
-- Identification confidence: 17% (unknown)
+- Identification confidence: 5% (unknown)
 - Price confidence: 22%
-- It is weighing: Lenovo ThinkPad E14 Gen 2 (0.55)
-- Visible text confirms only 'ThinkPad'; the claimed E14 Gen 2 is not on the shortlist and no legible model label verifies it. Shortlist T480/T470/X1 Carbon/14w/IdeaPad 3 all conflict with the seller's claim or lack supporting visual evidence.
+- It is weighing: Lenovo ThinkPad T480 (0.2), Lenovo ThinkPad T470 (0.2)
+- Only 'ThinkPad' is legible; no model marking readable. Seller's 'E14 Gen 2' claim is not on the label or shortlist, and shortlist models cannot be confirmed or excluded on visible evidence.
 - read off the item's own label
 - 6 lines seen by both readers
+- the next candidate was only 0.0 behind
 - looks like a catalogue or stock image
 - 6 claims are still unproven, 0 are supported
 
@@ -104,12 +105,12 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 ## Price
 **5,000 to 5,000 NGN** (priced as material, width 0.0, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 1.8 kg of plastic 70%, steel 20%, circuit_board 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 1.5 kg of plastic 60%, steel 20%, circuit_board 10%, rubber 10% (rates for plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 450 NGN
+Scrap floor: 367 NGN
 
 Conditions attached to this price:
-- Not identified: Visible text confirms only 'ThinkPad'; the claimed E14 Gen 2 is not on the shortlist and no legible model label verifies it. Shortlist T480/T470/X1 Carbon/14w/IdeaPad 3 all conflict with the seller's claim or lack supporting visual evidence.
+- Not identified: Only 'ThinkPad' is legible; no model marking readable. Seller's 'E14 Gen 2' claim is not on the label or shortlist, and shortlist models cannot be confirmed or excluded on visible evidence.
 - Evidence flag: looks like a catalogue or stock image
 - Raised to the 5,000 NGN minimum this business publishes for this kind of item.
 - E-14 Gen 2 11th Generation Lenovo Thinkpad -> not proven remotely. Agent will confirm at pickup.

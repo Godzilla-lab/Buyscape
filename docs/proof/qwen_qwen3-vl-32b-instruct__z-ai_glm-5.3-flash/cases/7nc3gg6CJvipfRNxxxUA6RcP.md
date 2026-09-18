@@ -1,24 +1,24 @@
 # Case 7nc3gg6CJvipfRNxxxUA6RcP
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0006  |  13389 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  24335 ms
 
 ## What the engine saw
 - Presentation: single_unit
-- Category: split_air_conditioner (confidence 0.9)
-- Made of: plastic 60%, steel 30%, copper_bare 10%
+- Category: split air conditioner (confidence 0.9)
+- Made of: plastic 60%, steel 30%, circuit_board 10%
 - Estimated weight: 25.0 kg (confidence 0.7)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
-- Label, plate or settings screen legible: no
-- Damage noted: dusty exterior, some surface scratches, grille appears intact
+- Label, plate or settings screen legible: yes
+- Damage noted: dusty surface, some minor scratches on casing
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: 100% SOLUTIONS
 
 ## Two readers
+- item_type agreed by both readers
 - brand_text differed between the two readers, so it is treated as unread
-- 1 transcribed lines was seen by only one reader, so it is treated as unread
+- 2 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
 - Midea
@@ -26,39 +26,47 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 2 lines: Midea | 100% SOLUTIONS
-- **corroborate** -> dispute. brand_text differed between the two readers, so it is treated as unread; 1 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=split_air_conditioner brand=None model=None label=False lines=1
-- **gate** -> abstain. multiple items in frame
+- **corroborate** -> dispute. item_type agreed by both readers; brand_text differed between the two readers, so it is treated as unread; 2 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=split air conditioner brand=None model=None label=True lines=0
+- **retrieval** -> ok. query='1hp Midea Split Air Conditioner for Sale' hits=['Midea MSAF-18 2HP', 'Midea MSAF-12 1.5HP', 'Samsung AR09 1HP', 'Hisense AS-09 1HP', 'LG S4-Q09 1HP']
+- **identify** -> refused. chosen=None None margin=0.1
+- **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 4968 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 5874 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 2547 ms (replayed)
-- total across calls: 13389 ms; wall clock: 324 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4829 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 4690 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 12423 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2393 ms (replayed)
+- total across calls: 24335 ms; wall clock: 1209 ms
 
 ## Identification
-No catalogue candidates matched.
+Shortlist from the catalogue:
+  - Midea MSAF-18 2HP (0.4)
+  - Midea MSAF-12 1.5HP (0.38)
+  - Samsung AR09 1HP (0.2333)
+  - Hisense AS-09 1HP (0.2)
+  - LG S4-Q09 1HP (0.2)
 
-**Not identified: EVIDENCE_INCOMPLETE.** The photos show more than one item, so no single item can be identified.
+**Not identified: CANNOT_IDENTIFY.** Seller states 1HP Midea, but no 1HP Midea entry exists in the shortlist and no model text is legible in the photos. The label is present but its text was not read, so the exact model cannot be confirmed.
 
 ## How sure the engine is (back office)
-**0%: the photos do not say what this is.**
+**Not sure enough to price: 13% on the best answer. It is probably a Midea MSAF-12 or a Midea MSAF-18, and the photos cannot separate them.**
 
-- Identification confidence: 0% (unknown)
+- Identification confidence: 13% (unknown)
 - Price confidence: 18%
-- The photos show more than one item, so no single item can be identified.
-- no label, plate or settings screen was legible
-- 1 lines seen by both readers
+- It is weighing: Midea MSAF-12 (0.3), Midea MSAF-18 (0.2)
+- Seller states 1HP Midea, but no 1HP Midea entry exists in the shortlist and no model text is legible in the photos. The label is present but its text was not read, so the exact model cannot be confirmed.
+- read off the item's own label
+- the two readers agreed on nothing legible
+- the next candidate was only 0.1 behind
 - 8 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
 
 ## What the seller is asked for next (shown in the app)
-1. [PHOTO] Photograph one item on its own, with nothing else in the picture.
-   _why: the photos show more than one item_
-2. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: Close-up of the rating plate on the outdoor unit showing the model and HP. Then, without stopping the video: Open the front grille of the indoor unit and photograph the filters and coil. Finish with: A short clip with the unit running and the display lit. Keep filming the whole time. Do not cut between clips.
+1. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: Close-up of the rating plate on the outdoor unit showing the model and HP. Then, without stopping the video: Open the front grille of the indoor unit and photograph the filters and coil. Finish with: A short clip with the unit running and the display lit. Keep filming the whole time. Do not cut between clips.
    _why: two readings of these photos disagreed about what is written on the item_
-3. [PHOTO] Close-up of the rating plate on the outdoor unit showing the model and HP.
+2. [PHOTO] Close-up of the rating plate on the outdoor unit showing the model and HP.
    _why: nothing on the item says which model this is_
 
 ## What the seller is asked (only they know these)
@@ -85,14 +93,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Open the front grille of the indoor unit and photograph the filters and coil.
 
 ## Price
-**14,374 to 39,700 NGN** (priced as material, width 0.9367, method material_floor, 0 comparable prices)
+**3,445 to 9,700 NGN** (priced as material, width 0.9516, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 25 kg of plastic 60%, steel 30%, copper_bare 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 25 kg of plastic 60%, steel 30%, circuit_board 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 30,250 NGN
+Scrap floor: 7,250 NGN
 
 Conditions attached to this price:
-- Not identified: The photos show more than one item, so no single item can be identified.
+- Not identified: Seller states 1HP Midea, but no 1HP Midea entry exists in the shortlist and no model text is legible in the photos. The label is present but its text was not read, so the exact model cannot be confirmed.
 - 1hp Midea Split Air Conditioner -> not proven remotely. Agent reads the outdoor rating plate.
 - Midea Split Air Conditioner -> not proven remotely. Agent reads the outdoor rating plate.
 - Split Air Conditioner -> not proven remotely. Agent reads the outdoor rating plate.

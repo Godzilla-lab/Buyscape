@@ -1,10 +1,10 @@
 # Case l3ljvXDlxkO7ExPW3k3vQYkE
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  33945 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0013  |  64401 ms
 
 ## What the engine saw
 - Presentation: single_unit
-- Category: phone (confidence 0.95)
+- Category: phone (confidence 1.0)
 - Made of: plastic 60%, circuit_board 20%, steel 10%, glass 10%
 - Estimated weight: 0.18 kg (confidence 0.9)
 - Brand read off the item: nothing legible
@@ -12,9 +12,12 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Rating read: none
 - Label, plate or settings screen legible: no
 - Damage noted: none
-- Looks like a catalogue image: no
+- Looks like a catalogue image: yes
 - Screenshot of a gallery: no
 - Text read: POSTED ON JIJI | SLIM GADGETS
+
+## Two readers
+- item_type agreed by both readers
 
 ## OCR read off the photos
 - POSTED ON JII
@@ -22,21 +25,22 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 2 lines: POSTED ON JII | SLIM GADGETS
-- **corroborate** -> agree. nothing identifying was read by either
+- **corroborate** -> agree. item_type agreed by both readers
 - **read_evidence** -> ok. category=phone brand=None model=None label=False lines=2
+- **forensics** -> flag. looks like a catalogue or stock image
 - **retrieval** -> ok. query='POSTED ON JIJI SLIM GADGETS Usa grade a++
 samsung s25+ 
 256gb storage 
 condition -10/10' hits=['Samsung Galaxy S25', 'Samsung Galaxy S21', 'Samsung Galaxy S22', 'Samsung Galaxy S23', 'Samsung Galaxy S24']
-- **identify** -> ok. chosen=Samsung Galaxy S25+ margin=0.2
-- **abstain** -> abstain. top score 0.55
+- **identify** -> refused. chosen=None None margin=0.1
+- **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 4659 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 10389 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 15625 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 3272 ms (replayed)
-- total across calls: 33945 ms; wall clock: 523 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5725 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 34474 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 20015 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 4187 ms (replayed)
+- total across calls: 64401 ms; wall clock: 1586 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -46,28 +50,31 @@ Shortlist from the catalogue:
   - Samsung Galaxy S23 (0.3)
   - Samsung Galaxy S24 (0.3)
 
-**Not identified: CANNOT_IDENTIFY.** The best candidate scored only 0.55, which is not sure enough to price.
+**Not identified: CANNOT_IDENTIFY.** No legible label; photo cannot distinguish S24/S25/S25+, and seller's claimed S25+ is not on the shortlist or visually verifiable.
+
+Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 25% on the best answer. It is probably a Samsung Galaxy S25+ or a Samsung Galaxy S24, and the photos cannot separate them.**
+**Not sure enough to price: 10% on the best answer. It is probably a Samsung Galaxy S25 or a Samsung Galaxy S24, and the photos cannot separate them.**
 
-- Identification confidence: 25% (unknown)
+- Identification confidence: 10% (unknown)
 - Price confidence: 16%
-- It is weighing: Samsung Galaxy S25+ (0.55), Samsung Galaxy S24 (0.35)
-- The best candidate scored only 0.55, which is not sure enough to price.
+- It is weighing: Samsung Galaxy S25 (0.45), Samsung Galaxy S24 (0.35)
+- No legible label; photo cannot distinguish S24/S25/S25+, and seller's claimed S25+ is not on the shortlist or visually verifiable.
 - no label, plate or settings screen was legible
 - 2 lines seen by both readers
-- the next candidate was only 0.2 behind
+- the next candidate was only 0.1 behind
+- looks like a catalogue or stock image
 - 9 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
 
 ## What the seller is asked for next (shown in the app)
-1. [PHOTO] Screenshot of Settings then About, showing the model name and storage.
+1. [PHOTO] Take your own photo of the actual item you are selling.
+   _why: this looks like a catalogue picture, not the real unit_
+2. [PHOTO] Screenshot of Settings then About, showing the model name and storage.
    _why: nothing on the item says which model this is_
-2. [PHOTO] Dial *#06# and screenshot the IMEI that appears.
-   _why: nothing on the item says which model this is_
-3. [PHOTO] If you have the box, photograph the label showing the model, storage and IMEI.
+3. [PHOTO] Dial *#06# and screenshot the IMEI that appears.
    _why: nothing on the item says which model this is_
 
 ## What the seller is asked (only they know these)
@@ -100,7 +107,8 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 48 NGN
 
 Conditions attached to this price:
-- Not identified: The best candidate scored only 0.55, which is not sure enough to price.
+- Not identified: No legible label; photo cannot distinguish S24/S25/S25+, and seller's claimed S25+ is not on the shortlist or visually verifiable.
+- Evidence flag: looks like a catalogue or stock image
 - Usa grade a++ -> not proven remotely. Agent will confirm at pickup.
 - samsung s25+ -> not proven remotely. Agent will confirm at pickup.
 - 256gb storage -> not proven remotely. Agent reads storage from Settings.

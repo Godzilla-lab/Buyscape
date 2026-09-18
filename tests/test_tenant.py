@@ -43,7 +43,7 @@ def test_every_category_on_the_tenants_site_is_covered(tenant):
 def test_every_category_reaches_a_protocol_that_suits_it(tenant, protocols):
     for name in SITE_CATEGORIES:
         protocol = tenant.protocol_for(protocols, name)
-        assert protocol.category in {"material_lot", "vehicle", "generic"}, name
+        assert protocol.category in {"material_lot", "vehicle", "generic", "furniture"}, name
         assert protocol.pickup_protocol, name
 
 

@@ -1,22 +1,24 @@
 # Case xkOacteaNGphg3AXzqA9PtX9
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  74385 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0013  |  67201 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: phone (confidence 1.0)
 - Made of: plastic 40%, circuit_board 10%, steel 30%, glass 20%
 - Estimated weight: 0.18 kg (confidence 0.9)
-- Brand read off the item: nothing legible
+- Brand read off the item: iPhone
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
 - Damage noted: none
 - Looks like a catalogue image: no
 - Screenshot of a gallery: yes
-- Text read: Wed 10 Jun | 7:47
+- Text read: Wed 10 Jun | 7:47 | iPhone
 
 ## Two readers
+- item_type agreed by both readers
+- brand_text was read by one reader and confirmed by OCR
 - 5 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
@@ -29,20 +31,20 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 6 lines: Airtel Higeria | Wed 10 Jun | CHINEDU CHUKWUOIKE | BIG DIDIS IPHONE | 00% | BODNOL
-- **corroborate** -> dispute. 5 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=phone brand=None model=None label=False lines=2
+- **corroborate** -> dispute. item_type agreed by both readers; brand_text was read by one reader and confirmed by OCR; 5 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=phone brand=iPhone model=None label=False lines=3
 - **forensics** -> flag. screenshot of a gallery rather than a photo of the item
-- **retrieval** -> ok. query='Wed 10 Jun 7:47 IPhone 16 Pro Max 256GB (Physical SIM + eSIM)
-6.9” Super Retina XDR OLED, ' hits=['Apple iPhone 16 Pro', 'Apple iPhone 16 Pro Max', 'Apple iPhone 16', 'Apple iPhone 11 Pro Max', 'Apple iPhone 12 Pro Max']
-- **identify** -> ok. chosen=Apple iPhone 16 Pro Max margin=0.3
+- **retrieval** -> ok. query='iPhone Wed 10 Jun 7:47 iPhone IPhone 16 Pro Max 256GB (Physical SIM + eSIM)
+6.9” Super Ret' hits=['Apple iPhone 16 Pro', 'Apple iPhone 16 Pro Max', 'Apple iPhone 16', 'Apple iPhone 11 Pro Max', 'Apple iPhone 12 Pro Max']
+- **identify** -> ok. chosen=Apple iPhone 16 Pro Max margin=0.15
 - **abstain** -> abstain. top score 0.6
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 5464 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 5103 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 59548 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 4270 ms (replayed)
-- total across calls: 74385 ms; wall clock: 642 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 17660 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 19341 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 19537 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 10663 ms (replayed)
+- total across calls: 67201 ms; wall clock: 4657 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -57,14 +59,15 @@ Shortlist from the catalogue:
 Evidence flags: screenshot of a gallery rather than a photo of the item
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 16% on the best answer. It is probably a Apple iPhone 16 Pro Max or a Apple iPhone 16 Pro, and the photos cannot separate them.**
+**Not sure enough to price: 14% on the best answer. It is probably a Apple iPhone 16 Pro Max or a Apple iPhone 16 Pro, and the photos cannot separate them.**
 
-- Identification confidence: 16% (unknown)
+- Identification confidence: 14% (unknown)
 - Price confidence: 14%
-- It is weighing: Apple iPhone 16 Pro Max (0.6), Apple iPhone 16 Pro (0.3)
+- It is weighing: Apple iPhone 16 Pro Max (0.6), Apple iPhone 16 Pro (0.45)
 - The best candidate scored only 0.6, which is not sure enough to price.
 - no label, plate or settings screen was legible
 - 2 lines seen by both readers
+- the next candidate was only 0.15 behind
 - screenshot of a gallery rather than a photo of the item
 - 11 claims are still unproven, 0 are supported
 

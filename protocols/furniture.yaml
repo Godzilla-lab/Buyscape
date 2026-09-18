@@ -1,0 +1,92 @@
+category: furniture
+version: 1
+display_name: Furniture
+aliases:
+  - sofa
+  - couch
+  - armchair
+  - chair
+  - sofa chair
+  - settee
+  - table
+  - dining table
+  - bed
+  - bed frame
+  - mattress
+  - wardrobe
+  - cupboard
+  - cabinet
+  - shelf
+  - bookshelf
+  - drawer
+  - chest of drawers
+  - desk
+  - stool
+  - bench
+  - dresser
+  - tv stand
+  - dining set
+  - sofa set
+  - table set
+  - chair set
+  - bedroom set
+always_novel: true
+# Furniture carries no plate. What it is, a single seater sofa or a wooden
+# wardrobe, is its identity, and the comparables are used listings of that
+# type. Nothing here asks whether it works or for a label photo.
+identity_by_type: true
+shots:
+  - id: code_shot
+    ask: "Write the code {code} on a piece of paper and take one photo with the paper next to the item."
+    checks: [code_matches, item_in_frame]
+  - id: overview
+    ask: "One photo showing the whole piece from the front, with nothing on it."
+    checks: [whole_item_visible, not_blurry]
+  - id: surface_close
+    ask: "A close photo of the seat, top or door: any tears, stains, scratches or sagging must show."
+    checks: [not_blurry]
+  - id: frame_or_underside
+    ask: "Turn it or lean it and photograph the frame or underside, so the legs and joints show."
+    required: false
+  - id: damage
+    ask: "Photo of any broken part, missing leg, torn fabric or loose joint."
+    required: false
+  - id: walkaround_clip
+    ask: "A short video: walk slowly all the way around it, then press down on the seat or shake the frame so we can see how firm it is."
+    kind: clip
+    required: false
+  - id: description
+    ask: "Tell us what it is, how many pieces you are selling, and anything broken or torn."
+    kind: text
+questions:
+  - id: pieces
+    ask: "How many pieces are you selling? One chair is 1, a three seater plus two singles is 3."
+    kind: number
+    unit: pieces
+    claim: pieces
+  - id: intact
+    ask: "Is everything intact: no broken frame, torn fabric, missing leg or sagging seat?"
+    kind: yesno
+    claim: intact
+  - id: age_years
+    ask: "Roughly how old is it, in years?"
+    kind: number
+    unit: years
+claims:
+  - id: intact
+    kinds: [condition, works]
+    evidence_slots: [surface_close, frame_or_underside, damage]
+    worst_case: "assumed torn, stained or loose in the frame"
+    pickup_check: "Agent sits on it, presses every seat and shakes the frame before payment"
+    penalty: 0.6
+  - id: pieces
+    kinds: [spec, included_parts]
+    evidence_slots: [overview]
+    worst_case: "priced as the one piece that is in the photos"
+    pickup_check: "Agent counts the pieces against the photos"
+    penalty: 1.0
+pickup_protocol:
+  - "Sit on every seat and press every cushion; a sagging seat is a broken frame or dead foam."
+  - "Shake the frame and check every leg and joint; refuse a piece that rocks."
+  - "Look at the back and underside for damp, mould, termites and bed bugs; refuse any that show it."
+  - "Count the pieces against the photos and the seller's answer."

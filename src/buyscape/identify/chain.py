@@ -42,6 +42,11 @@ MIN_CONFIDENCE = 0.45
 # way: at 0.85 a catalogue image halved it to 0.42 and four plates the
 # decider had answered correctly went silent.
 LABEL_NAMED_STRENGTH = 0.90
+# What naming an item by its type is worth: a sofa, a wardrobe, a phone
+# stand. It is a judgement two readers made from shape and use, never a
+# transcription, so it can never be as strong as a plate both read. The
+# category confidence caps it below this.
+TYPE_NAMED_STRENGTH = 0.80
 
 
 def identification_strength(result: ChainResult) -> tuple[float, list[str]]:
@@ -60,6 +65,24 @@ def identification_strength(result: ChainResult) -> tuple[float, list[str]]:
         # catalogue not knowing the item is a gap in the catalogue.
         score = LABEL_NAMED_STRENGTH
         why.append("named from the item's own label, which the catalogue does not list")
+
+    if result.named_type:
+        # There is no label to read on a sofa, so the label discounts below
+        # would punish it for being a sofa. Its identity is what two readers
+        # judged it to be, worth at most the category confidence.
+        sure = result.reading.category_confidence if result.reading is not None else 0.0
+        score = min(TYPE_NAMED_STRENGTH, sure)
+        why.append(f"named by type from its shape and use, no brand or model on the item ({int(sure * 100)}% sure of the kind)")
+        if result.corroboration_failed:
+            score *= 0.7
+            why.append("only one reader saw these photos, the second was unavailable")
+        if "item_type" in result.uncorroborated_fields:
+            score *= 0.8
+            why.append("the two readers described the type in different words")
+        if result.fraud_flags:
+            score *= 0.5
+            why.extend(result.fraud_flags)
+        return round(max(0.0, min(score, 1.0)), 2), why
 
     if result.used_label:
         why.append("read off the item's own label")
@@ -131,16 +154,99 @@ class ChainResult:
     ocr_lines: list[str] = field(default_factory=list)
     # Named from the item's own label with no catalogue row behind it.
     named_from_label: bool = False
+    # What the readers judged the item to be, in a buyer's words. Recorded
+    # for every item; it becomes the identity only for kinds of item whose
+    # protocol says the type is the identity, and only by name_by_type.
+    type_name: str | None = None
+    named_type: bool = False
+    # True only at the gate that abstains for want of a model text, before
+    # any decider runs. A decider that refused or scored low had a real
+    # shortlist in front of it, and a type is not a way around that.
+    type_gate: bool = False
+    # Any reader produced a model or serial off a plate, agreed or not. The
+    # item carries its identity in writing, so its type is not its identity.
+    plate_seen: bool = False
     fraud_flags: list[str] = field(default_factory=list)
 
     @property
     def model_key(self) -> str | None:
-        if not (self.brand and self.model):
-            return None
-        parts = [self.brand, self.model]
-        if self.variant:
-            parts.append(self.variant)
-        return " ".join(parts)
+        if self.brand and self.model:
+            parts = [self.brand, self.model]
+            if self.variant:
+                parts.append(self.variant)
+            return " ".join(parts)
+        if self.named_type:
+            return self.type_name
+        return None
+
+
+def _seller_names_type(seller_text: str, type_name: str) -> bool:
+    """The seller's own words share a word with the type, under the market's
+    names for it: 'earpiece' for 'wired earphones'."""
+    from ..pricing.sources import MARKET_WORDS
+
+    said = set(_words(seller_text))
+    if not said:
+        return False
+    wanted = set(_words(type_name))
+    for w in list(wanted):
+        for other in MARKET_WORDS.get(w, ()):
+            wanted.update(_words(other))
+    return bool(said & wanted)
+
+
+def _words(text: str) -> list[str]:
+    import re
+
+    return [w for w in re.split(r"[^a-z0-9]+", (text or "").lower()) if len(w) > 2]
+
+
+def name_by_type(result: ChainResult, seller_text: str = "") -> bool:
+    """Name an item by what it is when it has nothing written on it.
+
+    A sofa has no plate. Asking which model it is produces CANNOT_IDENTIFY
+    and a scrap price for fifteen kilograms of cloth and wood, which is
+    the price of a sofa being shredded and not the price of a sofa. For a
+    kind of item whose protocol says the type is the identity, the type two
+    readers judged from the photos is the answer, and the price then comes
+    from listings of that type, by retrieval like any other.
+
+    Only an abstention for want of a model text is overturned. A heap, two
+    items in frame or an unsure category still abstain, and the usual
+    strength gate still applies, so a stock photo still abstains.
+    """
+    if not (result.abstained and result.failure_code == "CANNOT_IDENTIFY" and result.type_gate):
+        return False
+    reading = result.reading
+    if reading is None or not result.type_name or result.plate_seen:
+        return False
+    if result.presentation != "single_unit" or reading.multiple_items:
+        return False
+    if (reading.category_confidence or 0.0) < MIN_CATEGORY_CONFIDENCE:
+        return False
+    # A type one reader judged alone is a guess until someone else says the
+    # same: the second reader, or the seller in their own words.
+    alone = "item_type" in result.uncorroborated_fields or result.corroboration_failed
+    if alone and not _seller_names_type(seller_text, result.type_name):
+        result.links.append(LinkLog("identify", "abstain", f"type {result.type_name!r} was one reader's word alone and the seller did not say it"))
+        return False
+    result.named_type = True
+    result.abstained = False
+    result.failure_code = None
+    result.reason = None
+    strength, why = identification_strength(result)
+    if strength < MIN_CONFIDENCE:
+        result.named_type = False
+        result.abstained = True
+        result.failure_code = "EVIDENCE_INCOMPLETE"
+        result.reason = (
+            f"It looks like a {result.type_name}, but the evidence only supports that at "
+            f"{int(strength * 100)} percent. A clear photo of the whole item would settle it."
+        )
+        result.links.append(LinkLog("identify", "abstain", f"type {result.type_name!r} at {strength}: {'; '.join(why)}"))
+        return False
+    result.links.append(LinkLog("identify", "type", f"named by type: {result.type_name}, no brand or model on the item, confidence={strength}"))
+    return True
 
 
 def build_query(reading: Reading, seller_text: str) -> str:
@@ -551,6 +657,7 @@ def run(
                 result.links.append(LinkLog("ocr", "ok", f"{len(ocr_lines)} lines: {' | '.join(ocr_lines)[:120]}"))
             except Exception as exc:
                 result.links.append(LinkLog("ocr", "unavailable", str(exc)[:120]))
+    result.plate_seen = any(bool(r.model_text or r.serial_text) for r in (reading, second) if r is not None)
     check = corroborate(reading, second, ocr_lines)
     reading = check.reading
     if second is not None or ocr_lines:
@@ -590,6 +697,7 @@ def run(
         result.links.append(LinkLog("grounding", "dropped", ", ".join(ungrounded)))
 
     result.category = reading.category
+    result.type_name = (reading.item_type or "").strip() or None
     result.presentation = reading.presentation or "single_unit"
     if reading.stock_photo_suspected:
         result.fraud_flags.append("looks like a catalogue or stock image")
@@ -671,6 +779,7 @@ def run(
             "No catalogue entry matched what was read and no model string was "
             "legible on the item, so there is nothing to rank."
         )
+        result.type_gate = True
         result.links.append(LinkLog("gate", "abstain", "no candidates and no model text"))
         return result
 

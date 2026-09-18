@@ -341,8 +341,10 @@ def search_used(
     max_pages: int = 2,
     limit: int = 40,
     client: httpx.Client | None = None,
+    used: bool = True,
 ) -> list[Listing]:
-    """Used listings for one model, fetched now.
+    """Used listings for one model, fetched now. With `used=False`, the new
+    stock instead, which is what a thin used market is priced as a share of.
 
     The cached pool is what a deployment keeps warm, but a seller can bring
     a model nobody has asked about yet. Pricing by retrieval means going to
@@ -364,7 +366,7 @@ def search_used(
                 break
             for advert in adverts:
                 attrs = _attrs(advert)
-                if not _is_used(attrs):
+                if _is_used(attrs) != used:
                     continue
                 price = (advert.get("price_obj") or {}).get("value")
                 if not isinstance(price, (int, float)) or price <= 0:
@@ -381,7 +383,7 @@ def search_used(
                         price_ngn=int(price),
                         description="",
                         condition=attrs.get("Condition", ""),
-                        is_used=True,
+                        is_used=used,
                         attrs=attrs,
                         image_urls=[],
                         url=str(advert.get("url") or ""),

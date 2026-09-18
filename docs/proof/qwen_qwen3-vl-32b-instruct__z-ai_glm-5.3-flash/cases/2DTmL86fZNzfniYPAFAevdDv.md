@@ -1,6 +1,6 @@
 # Case 2DTmL86fZNzfniYPAFAevdDv
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  24460 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  34566 ms
 
 ## What the engine saw
 - Presentation: single_unit
@@ -11,17 +11,16 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: Front panel damaged with cracks, Plastic parts broken and scattered on ground, Dirt and wear visible on surface
+- Damage noted: front panel damaged, plastic parts broken and scattered on ground, dirt and wear visible
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 - Text read: FAMOSELECTRICALSTORE
 
 ## Two readers
+- item_type agreed by both readers
 - brand_text was read by one reader and confirmed by OCR
-- model_text was seen by only one reader, so it is treated as unread
 - rating_text was seen by only one reader, so it is treated as unread
-- serial_text was seen by only one reader, so it is treated as unread
-- 7 transcribed lines was seen by only one reader, so it is treated as unread
+- 3 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
 - 图
@@ -29,18 +28,18 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 2 lines: 图 | FAMOSELECTRICALSTORE
-- **corroborate** -> dispute. brand_text was read by one reader and confirmed by OCR; model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 7 transcribed lines was seen by only one reader, so it is treated as unread
+- **corroborate** -> dispute. item_type agreed by both readers; brand_text was read by one reader and confirmed by OCR; rating_text was seen by only one reader, so it is treated as unread; 3 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=washing machine brand=FAMOSELECTRICALSTORE model=None label=False lines=1
 - **retrieval** -> ok. query='FAMOSELECTRICALSTORE FAMOSELECTRICALSTORE Brand-new Hisense 11kg twin-tub semi-automatic w' hits=['Hisense WTJA801 8kg top loader', 'Hisense WT3K9022U 9kg top loader', 'Hisense WM5S1045 10kg front loader', 'LG WM8 8kg twin tub', 'Haier Thermocool TT8 8kg twin tub']
 - **identify** -> refused. chosen=None None margin=0.0
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 5538 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 5955 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 9503 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 3464 ms (replayed)
-- total across calls: 24460 ms; wall clock: 518 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 8092 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 10044 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 12080 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 4350 ms (replayed)
+- total across calls: 34566 ms; wall clock: 1271 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -50,15 +49,15 @@ Shortlist from the catalogue:
   - LG WM8 8kg twin tub (0.2667)
   - Haier Thermocool TT8 8kg twin tub (0.2667)
 
-**Not identified: CANNOT_IDENTIFY.** No brand or model text is legible on the machine; the only text is the store watermark. Seller claims Hisense 11kg twin-tub, but no Hisense twin-tub exists on the shortlist and the twin-tub entries (LG, Haier) are 8kg. Cannot confirm any single model.
+**Not identified: CANNOT_IDENTIFY.** Twin tub body confirmed, but no legible brand or model label; seller's Hisense 11kg claim unverifiable and no Hisense twin tub is on the shortlist
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 7% on the best answer. It is probably a LG WM8 or a Haier Thermocool TT8, and the photos cannot separate them.**
+**Not sure enough to price: 9% on the best answer. It is probably a LG WM8 or a Haier Thermocool TT8, and the photos cannot separate them.**
 
-- Identification confidence: 7% (unknown)
+- Identification confidence: 9% (unknown)
 - Price confidence: 18%
-- It is weighing: LG WM8 (0.15), Haier Thermocool TT8 (0.15)
-- No brand or model text is legible on the machine; the only text is the store watermark. Seller claims Hisense 11kg twin-tub, but no Hisense twin-tub exists on the shortlist and the twin-tub entries (LG, Haier) are 8kg. Cannot confirm any single model.
+- It is weighing: LG WM8 (0.2), Haier Thermocool TT8 (0.2)
+- Twin tub body confirmed, but no legible brand or model label; seller's Hisense 11kg claim unverifiable and no Hisense twin tub is on the shortlist
 - no label, plate or settings screen was legible
 - 1 lines seen by both readers
 - the next candidate was only 0.0 behind
@@ -79,11 +78,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 ## Claims
 - [unverified] Brand-new Hisense 11kg twin-tub semi-automatic washing machine
     priced as: the smallest capacity this brand sells. Agent reads the rating plate
-- [unverified] Brand-new Hisense 11kg twin-tub semi-automatic washing machine
+- [unverified] Hisense 11kg twin-tub semi-automatic washing machine
     priced as: the smallest capacity this brand sells. Agent reads the rating plate
-- [unverified] Brand-new Hisense 11kg twin-tub semi-automatic washing machine
+- [unverified] Hisense 11kg twin-tub semi-automatic washing machine
     priced as: the smallest capacity this brand sells. Agent reads the rating plate
-- [unverifiable_remote] Brand-new Hisense 11kg twin-tub semi-automatic washing machine
+- [unverified] Hisense 11kg twin-tub semi-automatic washing machine
     priced as: the smallest capacity this brand sells. Agent reads the rating plate
 - [unverified] Required evidence 'code_shot' was not supplied
     priced as: priced as if the worst case is true. Write the code {code} on paper and photograph it next to the machine.
@@ -102,11 +101,11 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 4,375 NGN
 
 Conditions attached to this price:
-- Not identified: No brand or model text is legible on the machine; the only text is the store watermark. Seller claims Hisense 11kg twin-tub, but no Hisense twin-tub exists on the shortlist and the twin-tub entries (LG, Haier) are 8kg. Cannot confirm any single model.
+- Not identified: Twin tub body confirmed, but no legible brand or model label; seller's Hisense 11kg claim unverifiable and no Hisense twin tub is on the shortlist
 - Brand-new Hisense 11kg twin-tub semi-automatic washing machine -> not proven remotely. Agent reads the rating plate.
-- Brand-new Hisense 11kg twin-tub semi-automatic washing machine -> not proven remotely. Agent reads the rating plate.
-- Brand-new Hisense 11kg twin-tub semi-automatic washing machine -> not proven remotely. Agent reads the rating plate.
-- Brand-new Hisense 11kg twin-tub semi-automatic washing machine -> not proven remotely. Agent reads the rating plate.
+- Hisense 11kg twin-tub semi-automatic washing machine -> not proven remotely. Agent reads the rating plate.
+- Hisense 11kg twin-tub semi-automatic washing machine -> not proven remotely. Agent reads the rating plate.
+- Hisense 11kg twin-tub semi-automatic washing machine -> not proven remotely. Agent reads the rating plate.
 - Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on paper and photograph it next to the machine..
 - Required evidence 'overall_front' was not supplied -> not proven remotely. One photo of the whole machine from the front with the door closed..
 - Required evidence 'rating_plate' was not supplied -> not proven remotely. Close-up of the sticker with the model number, usually inside the door or on the back..

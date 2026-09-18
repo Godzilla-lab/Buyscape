@@ -1,6 +1,6 @@
 # Case a5lJqa0bHBNzPYhMtOALMxhy
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  25428 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  26290 ms
 
 ## What the engine saw
 - Presentation: sealed_new
@@ -14,12 +14,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Damage noted: none
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
-- Text read: Nokia 110 | NOKIA | POSTED ON | AND MORE
+- Text read: Nokia 110 | NOKIA | AND MORE
 
 ## Two readers
 - brand_text agreed by both readers
 - model_text agreed by both readers
-- 3 transcribed lines was seen by only one reader, so it is treated as unread
+- item_type agreed by both readers
+- 4 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
 - Nokia 110
@@ -30,21 +31,21 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 5 lines: Nokia 110 | NOKIA | POSTIED | INA GADGEI | ANDMORE
-- **corroborate** -> dispute. brand_text agreed by both readers; model_text agreed by both readers; 3 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=phone brand=NOKIA model=Nokia 110 label=False lines=4
+- **corroborate** -> dispute. brand_text agreed by both readers; model_text agreed by both readers; item_type agreed by both readers; 4 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=phone brand=NOKIA model=Nokia 110 label=False lines=3
 - **forensics** -> flag. looks like a catalogue or stock image
-- **retrieval** -> ok. query='NOKIA Nokia 110 Nokia 110 NOKIA POSTED ON AND MORE Wireless FM
+- **retrieval** -> ok. query='NOKIA Nokia 110 Nokia 110 NOKIA AND MORE Wireless FM
 Mp3 music player 
-Camera/ v' hits=['Nokia C32']
-- **identify** -> ok. chosen=NOKIA 110 margin=None
-- **abstain** -> abstain. confidence 0.4: no label, plate or settings screen was legible; 4 lines seen by both readers; looks like a catalogue or stock image
+Camera/ video camer' hits=['Nokia C32']
+- **identify** -> ok. chosen=Nokia 110 margin=0.9
+- **abstain** -> abstain. confidence 0.4: no label, plate or settings screen was legible; 3 lines seen by both readers; looks like a catalogue or stock image
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 4934 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 11586 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 5727 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 3181 ms (replayed)
-- total across calls: 25428 ms; wall clock: 2624 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5484 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 11062 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 5385 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 4359 ms (replayed)
+- total across calls: 26290 ms; wall clock: 2503 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -55,14 +56,14 @@ Shortlist from the catalogue:
 Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 24% on the best answer. It is probably a NOKIA 110, and the photos cannot separate them.**
+**Not sure enough to price: 24% on the best answer. It is probably a Nokia 110 or a Nokia C32, and the photos cannot separate them.**
 
 - Identification confidence: 24% (unknown)
 - Price confidence: 16%
-- It is weighing: NOKIA 110 (0.95)
+- It is weighing: Nokia 110 (0.95), Nokia C32 (0.05)
 - The evidence only supports this answer at 40 percent, which is a guess. One clear photo of the label would settle it.
 - no label, plate or settings screen was legible
-- 4 lines seen by both readers
+- 3 lines seen by both readers
 - looks like a catalogue or stock image
 - 9 claims are still unproven, 0 are supported
 

@@ -1,12 +1,12 @@
 # Case 9QjGiftEi4xPrRnrbBtqQFOd
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  44318 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0014  |  34587 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: generator (confidence 0.95)
 - Made of: steel 60%, plastic 30%, copper 10%
-- Estimated weight: 25.0 kg (confidence 0.8)
+- Estimated weight: 25.0 kg (confidence 0.7)
 - Brand read off the item: FIRMAN
 - Model read off the item: nothing legible
 - Rating read: 5000
@@ -18,6 +18,7 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Two readers
 - rating_text agreed by both readers
+- item_type agreed by both readers
 - brand_text was read by one reader and confirmed by OCR
 - model_text differed between the two readers, so it is treated as unread
 - 4 transcribed lines was seen by only one reader, so it is treated as unread
@@ -31,18 +32,18 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 5 lines: FIRMAN | ACMASTER | 5000 | 4200 | AC8000EZ
-- **corroborate** -> dispute. rating_text agreed by both readers; brand_text was read by one reader and confirmed by OCR; model_text differed between the two readers, so it is treated as unread; 4 transcribed lines was seen by only one reader, so it is treated as unread
+- **corroborate** -> dispute. rating_text agreed by both readers; item_type agreed by both readers; brand_text was read by one reader and confirmed by OCR; model_text differed between the two readers, so it is treated as unread; 4 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=generator brand=FIRMAN model=None label=True lines=3
 - **retrieval** -> ok. query='FIRMAN 5000 5000 4200 FIRMAN Original fireman generator 5 kVA 100% copper coin' hits=['Sumec Firman SPG2900 2.8kVA', 'Sumec Firman SPG3000 3.1kVA', 'Sumec Firman ECO8990ES 6.5kVA', 'Sumec Firman SPG8800 8.1kVA', 'Kemage KM6500 5.5kVA']
-- **identify** -> ok. chosen=FIRMAN AC8800E2 margin=0.75
+- **identify** -> ok. chosen=Firman AC8800E2 margin=0.65
 - **abstain** -> abstain. seller names another generation
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 4847 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 13193 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 24031 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 2247 ms (replayed)
-- total across calls: 44318 ms; wall clock: 445 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5263 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 12969 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 13712 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2643 ms (replayed)
+- total across calls: 34587 ms; wall clock: 1694 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -55,11 +56,11 @@ Shortlist from the catalogue:
 **Not identified: EVIDENCE_INCOMPLETE.** The answer names ac8800e2, which appears nowhere on the item or in the seller's words. A photo of the plate would confirm or correct it.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 54% on the best answer. It is probably a FIRMAN AC8800E2 or a Sumec Firman ECO8990ES, and the photos cannot separate them.**
+**Not sure enough to price: 51% on the best answer. It is probably a Firman AC8800E2 or a Sumec Firman ECO8990ES, and the photos cannot separate them.**
 
-- Identification confidence: 54% (unsure)
+- Identification confidence: 51% (unsure)
 - Price confidence: 18%
-- It is weighing: FIRMAN AC8800E2 (0.9), Sumec Firman ECO8990ES (0.15)
+- It is weighing: Firman AC8800E2 (0.85), Sumec Firman ECO8990ES (0.2)
 - The answer names ac8800e2, which appears nowhere on the item or in the seller's words. A photo of the plate would confirm or correct it.
 - read off the item's own label
 - 2 lines seen by both readers

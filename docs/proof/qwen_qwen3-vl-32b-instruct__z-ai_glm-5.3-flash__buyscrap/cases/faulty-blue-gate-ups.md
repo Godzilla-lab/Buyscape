@@ -1,30 +1,31 @@
 # Case faulty-blue-gate-ups
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  28948 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0013  |  52473 ms
 
 ## What the engine saw
 - Presentation: single_unit
-- Category: power_inverter (confidence 0.8)
+- Category: power_inverter (confidence 0.9)
 - Made of: plastic 80%, steel 20%
 - Estimated weight: 5.0 kg (confidence 0.7)
 - Brand read off the item: BLUE GATE
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: dusty surface, no visible damage
+- Damage noted: dust on surface, no visible damage
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 - Text read: BLUE GATE
 
 ## Two readers
 - brand_text agreed by both readers
+- item_type was read by only one reader, so it is kept but not confirmed
 
 ## OCR read off the photos
 - BLUE GATE
 
 ## Chain
 - **ocr** -> ok. 1 lines: BLUE GATE
-- **corroborate** -> agree. brand_text agreed by both readers
+- **corroborate** -> agree. brand_text agreed by both readers; item_type was read by only one reader, so it is kept but not confirmed
 - **read_evidence** -> ok. category=power_inverter brand=BLUE GATE model=None label=False lines=1
 - **retrieval** -> ok. query='BLUE GATE BLUE GATE Faulty blue gate UPS available for sale. Location: Magodo Phase 2, Lag' hits=['Acer Aspire 5', 'Tecno Pova 5', 'Kemage KM6500 5.5kVA']
 - **identify** -> refused. chosen=Blue Gate None margin=None
@@ -32,11 +33,11 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **condition** -> not working. by the seller's own account
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 4277 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 9760 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 12294 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 2617 ms (replayed)
-- total across calls: 28948 ms; wall clock: 220 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 7287 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 8448 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 32006 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 4732 ms (replayed)
+- total across calls: 52473 ms; wall clock: 1327 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -44,17 +45,18 @@ Shortlist from the catalogue:
   - Tecno Pova 5 (0.2)
   - Kemage KM6500 5.5kVA (0.15)
 
-**Not identified: CANNOT_IDENTIFY.** UPS brand 'BLUE GATE' is printed on the case, but no model number or rating is legible anywhere on the unit, and none of the shortlist entries (Acer laptop, Tecno phone, Kemage generator) matches a desktop UPS.
+**Not identified: CANNOT_IDENTIFY.** Item is clearly a Blue Gate UPS, but no model number is legible and no UPS candidate appears on the shortlist.
 
 ## How sure the engine is (back office)
 **0%: the photos do not say what this is.**
 
 - Identification confidence: 0% (unknown)
-- Price confidence: 18%
-- UPS brand 'BLUE GATE' is printed on the case, but no model number or rating is legible anywhere on the unit, and none of the shortlist entries (Acer laptop, Tecno phone, Kemage generator) matches a desktop UPS.
+- Price confidence: 20%
+- Item is clearly a Blue Gate UPS, but no model number is legible and no UPS candidate appears on the shortlist.
 - no label, plate or settings screen was legible
 - 1 lines seen by both readers
-- 8 claims are still unproven, 0 are supported
+- the item_type was read by only one reader and is not confirmed
+- 7 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
 
@@ -68,11 +70,9 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 - Roughly how old is it, in years?
 
 ## Claims
-- [unverifiable_remote] The UPS is faulty.
-- [unverifiable_remote] The UPS is blue.
-    priced as: 70 percent of the stated weight. Weigh on the scale and photograph the display
-- [unverifiable_remote] The UPS is a Gate brand.
-- [unverifiable_remote] The item is located in Magodo Phase 2, Lagos State.
+- [unverifiable_remote] Faulty blue gate UPS available for sale.
+- [unverifiable_remote] Location: Magodo Phase 2, Lagos State
+- [unverifiable_remote] Price: 5,000 naira
 - [unverified] Required evidence 'code_shot' was not supplied
     priced as: priced as if the worst case is true. Write the code {code} on a piece of paper and take one photo with the paper next to the item.
 - [unverified] Required evidence 'overview' was not supplied
@@ -83,18 +83,17 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Tell us what it is, whether it works, and roughly how heavy it is.
 
 ## Price
-**439 to 1,320 NGN** (priced as material, width 1.0001, method material_floor, 0 comparable prices)
+**628 to 1,320 NGN** (priced as material, width 0.7098, method material_floor, 0 comparable prices)
 
 This item was not identified, so it is priced as material rather than as a working item: 5 kg of plastic 80%, steel 20% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
 Scrap floor: 900 NGN
 
 Conditions attached to this price:
-- Not identified: UPS brand 'BLUE GATE' is printed on the case, but no model number or rating is legible anywhere on the unit, and none of the shortlist entries (Acer laptop, Tecno phone, Kemage generator) matches a desktop UPS.
-- The UPS is faulty. -> not proven remotely. Agent will confirm at pickup.
-- The UPS is blue. -> not proven remotely. Weigh on the scale and photograph the display.
-- The UPS is a Gate brand. -> not proven remotely. Agent will confirm at pickup.
-- The item is located in Magodo Phase 2, Lagos State. -> not proven remotely. Agent will confirm at pickup.
+- Not identified: Item is clearly a Blue Gate UPS, but no model number is legible and no UPS candidate appears on the shortlist.
+- Faulty blue gate UPS available for sale. -> not proven remotely. Agent will confirm at pickup.
+- Location: Magodo Phase 2, Lagos State -> not proven remotely. Agent will confirm at pickup.
+- Price: 5,000 naira -> not proven remotely. Agent will confirm at pickup.
 - Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on a piece of paper and take one photo with the paper next to the item..
 - Required evidence 'overview' was not supplied -> not proven remotely. One photo showing the whole item..
 - Required evidence 'label_or_plate' was not supplied -> not proven remotely. Close-up of any label, sticker or metal plate showing the brand and model..

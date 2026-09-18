@@ -1,39 +1,45 @@
 # Case zaxN7fjN3cq0uK9iM2rJYZ9m
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  43071 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0013  |  38781 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: laptop (confidence 0.95)
-- Made of: plastic 60%, steel 25%, circuit_board 10%, aluminium 5%
-- Estimated weight: 1.8 kg (confidence 0.8)
+- Made of: plastic 60%, steel 20%, circuit_board 10%, aluminium 10%
+- Estimated weight: 1.8 kg (confidence 0.7)
 - Brand read off the item: Lenovo
 - Model read off the item: nothing legible
 - Rating read: none
-- Label, plate or settings screen legible: no
-- Damage noted: Screen is on, showing Windows desktop., No visible cracks or dents on casing., Keyboard and trackpad appear intact.
+- Label, plate or settings screen legible: yes
+- Damage noted: none
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: Start | Edge | Microsoft Store | Photos | Mail | Settings | Lenovo
+- Text read: Lenovo | Start
 
 ## Two readers
 - brand_text agreed by both readers
-- 4 transcribed lines was seen by only one reader, so it is treated as unread
+- item_type agreed by both readers
+- model_text differed between the two readers, so it is treated as unread
+- rating_text was seen by only one reader, so it is treated as unread
+- serial_text was seen by only one reader, so it is treated as unread
+- 42 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## Chain
 - **ocr** -> ok. 0 lines: 
-- **corroborate** -> dispute. brand_text agreed by both readers; 4 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=laptop brand=Lenovo model=None label=False lines=7
-- **retrieval** -> ok. query='Lenovo Start Edge Microsoft Store Photos Mail Settings Lenovo Lenovo ThinkPad x1 carbon ge' hits=['Lenovo ThinkPad X1 Carbon Gen 6', 'Lenovo ThinkPad T480', 'Lenovo ThinkPad T470', 'Lenovo 14w', 'Lenovo IdeaPad 3']
-- **identify** -> refused. chosen=None None margin=0.35
+- **corroborate** -> dispute. brand_text agreed by both readers; item_type agreed by both readers; model_text differed between the two readers, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 42 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=laptop brand=Lenovo model=None label=True lines=2
+- **retrieval** -> ok. query='Lenovo Lenovo Start Lenovo ThinkPad x1 carbon gen 7
+Intel core i7 
+8th generation processo' hits=['Lenovo ThinkPad X1 Carbon Gen 6', 'Lenovo ThinkPad T480', 'Lenovo ThinkPad T470', 'Lenovo 14w', 'Lenovo IdeaPad 3']
+- **identify** -> refused. chosen=Lenovo ThinkPad X1 Carbon margin=0.4
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 7112 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 7895 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 23648 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 4416 ms (replayed)
-- total across calls: 43071 ms; wall clock: 109 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 9000 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 7722 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 18031 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 4028 ms (replayed)
+- total across calls: 38781 ms; wall clock: 1256 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -43,17 +49,17 @@ Shortlist from the catalogue:
   - Lenovo 14w (0.4)
   - Lenovo IdeaPad 3 (0.3)
 
-**Not identified: CANNOT_IDENTIFY.** No legible label; photos cannot distinguish X1 Carbon Gen 6 from Gen 7, and seller's Gen 7 claim is unverifiable
+**Not identified: CANNOT_IDENTIFY.** Seller claims Gen 7, shortlist only has Gen 6; no label shows the generation, so exact model cannot be confirmed.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 23% on the best answer. It is probably a Lenovo ThinkPad X1 Carbon or a Lenovo ThinkPad T480, and the photos cannot separate them.**
+**Not sure enough to price: 30% on the best answer. It is probably a Lenovo ThinkPad X1 Carbon Gen 6 or a Lenovo ThinkPad T480, and the photos cannot separate them.**
 
-- Identification confidence: 23% (unknown)
+- Identification confidence: 30% (unknown)
 - Price confidence: 14%
-- It is weighing: Lenovo ThinkPad X1 Carbon (0.45), Lenovo ThinkPad T480 (0.1)
-- No legible label; photos cannot distinguish X1 Carbon Gen 6 from Gen 7, and seller's Gen 7 claim is unverifiable
-- no label, plate or settings screen was legible
-- 7 lines seen by both readers
+- It is weighing: Lenovo ThinkPad X1 Carbon Gen 6 (0.5), Lenovo ThinkPad T480 (0.1)
+- Seller claims Gen 7, shortlist only has Gen 6; no label shows the generation, so exact model cannot be confirmed.
+- read off the item's own label
+- 2 lines seen by both readers
 - 10 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -93,12 +99,12 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 ## Price
 **5,000 to 5,000 NGN** (priced as material, width 0.0, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 1.8 kg of plastic 60%, steel 25%, circuit_board 10%, aluminium 5% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 1.8 kg of plastic 60%, steel 20%, circuit_board 10%, aluminium 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 657 NGN
+Scrap floor: 792 NGN
 
 Conditions attached to this price:
-- Not identified: No legible label; photos cannot distinguish X1 Carbon Gen 6 from Gen 7, and seller's Gen 7 claim is unverifiable
+- Not identified: Seller claims Gen 7, shortlist only has Gen 6; no label shows the generation, so exact model cannot be confirmed.
 - Raised to the 5,000 NGN minimum this business publishes for this kind of item.
 - Lenovo ThinkPad x1 carbon gen 7 -> not proven remotely. Agent will confirm at pickup.
 - Intel core i7 -> not proven remotely. Agent will confirm at pickup.

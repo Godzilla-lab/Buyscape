@@ -1,23 +1,24 @@
 # Case 8ka5vqFgtuCvBQIA3P868gIY
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  34514 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  29229 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: laptop (confidence 1.0)
-- Made of: plastic 60%, steel 30%, circuit_board 5%, copper_insulated 5%
+- Made of: plastic 60%, steel 30%, circuit_board 5%, rubber 5%
 - Estimated weight: 2.0 kg (confidence 0.8)
 - Brand read off the item: DELL
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: none
+- Damage noted: screen shows promotional image, not system interface, no visible damage to casing or keyboard
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: POWER YOUR POTENTIAL | DELL
+- Text read: AGT ACCEPTED GLOBAL TECHNOLOGIES | POWER YOUR POTENTIAL | DELL
 
 ## Two readers
 - brand_text agreed by both readers
+- item_type agreed by both readers
 - 2 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
@@ -29,21 +30,18 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 5 lines: AGT | ACCEPTED GLOBAL | ICRNOLOCIEE | POWER YOUR | POTENTIAL
-- **corroborate** -> dispute. brand_text agreed by both readers; 2 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=laptop brand=DELL model=None label=False lines=2
-- **retrieval** -> ok. query='DELL POWER YOUR POTENTIAL DELL Dell latitude 7389 2-IN-1 
-Intel core i7
-7th generation 
-16' hits=['Dell Latitude E7470', 'Dell Latitude 7490', 'Dell Latitude 5490', 'Dell Inspiron 15 3000', 'Dell XPS 13 9370']
-- **identify** -> refused. chosen=None None margin=0.4
+- **corroborate** -> dispute. brand_text agreed by both readers; item_type agreed by both readers; 2 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=laptop brand=DELL model=None label=False lines=3
+- **retrieval** -> ok. query='DELL AGT ACCEPTED GLOBAL TECHNOLOGIES POWER YOUR POTENTIAL DELL Dell latitude 7389 2-IN-1 ' hits=['Dell Latitude E7470', 'Dell Latitude 7490', 'Dell Latitude 5490', 'Dell Inspiron 15 3000', 'Dell XPS 13 9370']
+- **identify** -> refused. chosen=Dell None margin=0.1
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 5465 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 6497 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 18066 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 4486 ms (replayed)
-- total across calls: 34514 ms; wall clock: 193 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5159 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 7889 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 11571 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 4610 ms (replayed)
+- total across calls: 29229 ms; wall clock: 1586 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -53,17 +51,18 @@ Shortlist from the catalogue:
   - Dell Inspiron 15 3000 (0.3)
   - Dell XPS 13 9370 (0.3)
 
-**Not identified: CANNOT_IDENTIFY.** Only 'DELL' is legible; no model label visible, and the seller's claimed 7389 is not on the shortlist and cannot be verified from the photos. The visible 360-degree convertible hinge does not match any shortlisted model.
+**Not identified: CANNOT_IDENTIFY.** Seller claims Latitude 7389 2-in-1, but no model text is legible on the item and 7389 is not on the shortlist; visible screen size and hinge suggest a 13in convertible but cannot confirm the exact model.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 25% on the best answer. It is probably a Dell Latitude 7389 or a Dell Latitude E7470, and the photos cannot separate them.**
+**Not sure enough to price: 14% on the best answer. It is probably a Dell Latitude E7470 or a Dell Latitude 7490, and the photos cannot separate them.**
 
-- Identification confidence: 25% (unknown)
+- Identification confidence: 14% (unknown)
 - Price confidence: 14%
-- It is weighing: Dell Latitude 7389 (0.5), Dell Latitude E7470 (0.1)
-- Only 'DELL' is legible; no model label visible, and the seller's claimed 7389 is not on the shortlist and cannot be verified from the photos. The visible 360-degree convertible hinge does not match any shortlisted model.
+- It is weighing: Dell Latitude E7470 (0.3), Dell Latitude 7490 (0.2)
+- Seller claims Latitude 7389 2-in-1, but no model text is legible on the item and 7389 is not on the shortlist; visible screen size and hinge suggest a 13in convertible but cannot confirm the exact model.
 - no label, plate or settings screen was legible
-- 1 lines seen by both readers
+- 2 lines seen by both readers
+- the next candidate was only 0.1 behind
 - 11 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -105,12 +104,12 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 ## Price
 **5,000 to 5,000 NGN** (priced as material, width 0.0, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 2 kg of plastic 60%, steel 30%, circuit_board 5%, copper_insulated 5% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 2 kg of plastic 60%, steel 30%, circuit_board 5%, rubber 5% (rates for plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 750 NGN
+Scrap floor: 505 NGN
 
 Conditions attached to this price:
-- Not identified: Only 'DELL' is legible; no model label visible, and the seller's claimed 7389 is not on the shortlist and cannot be verified from the photos. The visible 360-degree convertible hinge does not match any shortlisted model.
+- Not identified: Seller claims Latitude 7389 2-in-1, but no model text is legible on the item and 7389 is not on the shortlist; visible screen size and hinge suggest a 13in convertible but cannot confirm the exact model.
 - Raised to the 5,000 NGN minimum this business publishes for this kind of item.
 - Dell latitude 7389 2-IN-1 -> not proven remotely. Agent will confirm at pickup.
 - Intel core i7 -> not proven remotely. Agent will confirm at pickup.

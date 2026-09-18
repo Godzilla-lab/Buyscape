@@ -10,6 +10,7 @@ from __future__ import annotations
 import datetime as dt
 import json
 import re
+from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Callable
@@ -39,6 +40,11 @@ class SourceUnavailable(RuntimeError):
 
 # Fewer cached comps than this and the live market is asked to add more.
 TOP_UP_BELOW = 6
+# How many pages of Jiji a live search reads. A page is about a third of a
+# second and, for a kind of thing rather than a model, holds three used
+# pieces among the dealers' new stock.
+MODEL_SEARCH_PAGES = 2
+TYPE_SEARCH_PAGES = 3
 
 # Words in a title that mean the seller is offering a dead or damaged unit.
 # Such listings price the dead version of a model and are kept out of the
@@ -51,6 +57,64 @@ def is_faulty_listing(title: str) -> bool:
     return any(w in t for w in FAULTY_WORDS)
 
 
+# Words in a title that mean several pieces are being sold together. For an
+# item priced by type they are a different thing: a "3 seater and 2 singles
+# sofa set" at 250,000 is not a comparable for one chair.
+SET_WORDS = ("set", "sets", "pcs", "pieces", "complete", "and", "+", "pair", "pairs")
+
+
+def is_set_listing(title: str) -> bool:
+    words = set(re.findall(r"[a-z+]+", title.lower()))
+    return bool(words & set(SET_WORDS))
+
+
+# A reader says 'two seater' and a Jiji seller writes '2 seater'. For a type
+# search the count is the identity, so both sides are put in digits first.
+NUMBER_WORDS = {
+    "single": "1", "one": "1", "two": "2", "double": "2", "three": "3", "four": "4",
+    "five": "5", "six": "6", "seven": "7", "eight": "8", "nine": "9", "ten": "10",
+}
+
+
+def type_key(text: str) -> str:
+    """The searchable form of a type name: counts as digits, nothing else changed."""
+    return " ".join(NUMBER_WORDS.get(w, w) for w in re.split(r"[\s\-]+", (text or "").lower()) if w)
+
+
+# What the market calls the same kind of thing. Jiji's search is literal and
+# each phrasing is its own pool of about twenty adverts, so a type is asked
+# for under every name sellers use for it. Market vocabulary, not a taxonomy.
+MARKET_WORDS: dict[str, tuple[str, ...]] = {
+    "sofa": ("couch", "sofa chair"),
+    "couch": ("sofa",),
+    "armchair": ("sofa chair", "1 seater sofa"),
+    "earphones": ("earpiece", "earbuds"),
+    "earphone": ("earpiece", "earbuds"),
+    "earpiece": ("earphones", "earbuds"),
+    "headphones": ("headset",),
+    "television": ("tv",),
+    "tv": ("television",),
+    "fridge": ("refrigerator",),
+    "refrigerator": ("fridge",),
+    "wardrobe": ("closet",),
+    "fan": ("standing fan",),
+    "stand": ("holder",),
+    "holder": ("stand",),
+}
+
+
+def type_queries(spoken: str) -> list[str]:
+    """Every spelling a type is asked for: as said, in digits, and under the
+    market's other names for its head noun."""
+    key = type_key(spoken)
+    out = list(dict.fromkeys([spoken, key]))
+    words = key.split()
+    head = words[-1] if words else ""
+    for other in MARKET_WORDS.get(head, ()):
+        out.append(" ".join(words[:-1] + [other]).strip())
+    return list(dict.fromkeys(q for q in out if q))
+
+
 class JijiComps:
     """Asking prices for used items, from the cached listing set.
 
@@ -60,19 +124,23 @@ class JijiComps:
     """
 
     source_id = "jiji_asking"
+    source_id_new = "jiji_asking_new"
 
     def __init__(
         self,
         cache_dir: Path,
         exclude_ids: frozenset[str] = frozenset(),
-        live: Callable[[str, str], list[dict]] | None = None,
+        live: Callable[[str, str, int, bool], list[dict]] | None = None,
     ) -> None:
-        """`live(model_key, category)` fetches used listings the cache lacks.
+        """`live(query, category, pages, used)` fetches listings the cache lacks.
 
         None keeps the source offline, which is what an eval run wants: a
         recorded run must not depend on what Jiji shows today.
         """
         self._rows: list[dict] = []
+        # A dealer's new stock is never a used-price comp. It is kept apart,
+        # for the thin markets where a used price is a share of the new one.
+        self._new_rows: list[dict] = []
         self._live = live
         self._live_failed = False
         self._asked: set[str] = set()
@@ -82,15 +150,24 @@ class JijiComps:
             for row in json.loads(path.read_text()):
                 if row.get("id") in exclude_ids:
                     continue
-                if not row.get("is_used"):
-                    continue  # a dealer's new stock is not a used-price comp
-                self._rows.append(row)
+                (self._rows if row.get("is_used") else self._new_rows).append(row)
 
     def fetch(
-        self, category: str, model_key: str, limit: int = 12, faulty: bool = False
+        self, category: str, model_key: str, limit: int = 12, faulty: bool = False, by_type: bool = False,
+        new: bool = False,
     ) -> list[Observation]:
         """Used asking prices for this model: working units, or with `faulty`
-        the dead and damaged ones, which are a different market."""
+        the dead and damaged ones, which are a different market. With `new`,
+        dealers' asking prices for new stock of it instead.
+
+        With `by_type` the key is a kind of thing rather than a model, such
+        as 'single seater sofa', and the comparables are single pieces of
+        that kind: a title that names a set, or carries a number the key
+        does not (a 3 seater, a 55 inch), is a different item.
+        """
+        spoken = model_key
+        if by_type:
+            model_key = type_key(model_key)
         want = set(tokens(model_key))
         if not want:
             raise SourceUnavailable("no model key to search on")
@@ -101,37 +178,59 @@ class JijiComps:
         def search(rows: list[dict]) -> list[tuple[float, dict]]:
             found: list[tuple[float, dict]] = []
             for row in rows:
-                if is_faulty_listing(row.get("title", "")) != faulty:
+                title = row.get("title", "")
+                if is_faulty_listing(title) != faulty:
                     continue
-                have = set(tokens(row.get("title", "")))
+                have = set(tokens(type_key(title) if by_type else title))
                 if not have:
                     continue
                 if want_numeric and not want_numeric.issubset(have):
                     continue
+                if by_type:
+                    if is_set_listing(title):
+                        continue
+                    if any(any(ch.isdigit() for ch in t) for t in have - want):
+                        continue
                 overlap = len(want & have) / len(want)
                 if overlap >= 0.6:
                     found.append((overlap, row))
             return found
 
-        scored = search([r for r in self._rows if r.get("category") == category])
+        rows = self._new_rows if new else self._rows
+        scored = search([r for r in rows if r.get("category") == category])
         if not scored:
             # The category the model chose is not where the comps happen to be
             # filed. A model key is specific enough to search the whole pool:
             # every number in it must still appear in the comp's title.
-            scored = search(self._rows)
+            scored = search(rows)
         if len(scored) < TOP_UP_BELOW:
             # Two or three cached prices make a thin percentile. The market
             # usually has more, so it is asked once and the answer kept.
             known = {row.get("id") for _, row in scored}
-            query = f"{model_key} faulty" if faulty else model_key
-            scored += [pair for pair in search(self._fetch_live(query, category)) if pair[1].get("id") not in known]
+            # Jiji's search is literal: 'two seater sofa' finds nothing and
+            # '2 seater sofa' finds the market, and 'single seater' is a
+            # different set again. A type is asked for in every spelling.
+            # A model number pulls its own adverts to the top; a kind of
+            # thing is spread over pages of dealers' new stock, three used
+            # pieces a page, so a type is read deeper, both spellings at once.
+            queries = type_queries(spoken) if by_type else [model_key]
+            if faulty:
+                queries = [f"{q} faulty" for q in queries]
+            pages = TYPE_SEARCH_PAGES if by_type else MODEL_SEARCH_PAGES
+            with ThreadPoolExecutor(max_workers=len(queries)) as pool:
+                batches = list(pool.map(lambda q: self._fetch_live(q, category, pages, used=not new), queries))
+            for batch in batches:
+                for pair in search(batch):
+                    if pair[1].get("id") not in known:
+                        known.add(pair[1].get("id"))
+                        scored.append(pair)
         if not scored:
-            raise SourceUnavailable(f"no used {'faulty ' if faulty else ''}comps for {model_key!r}")
+            raise SourceUnavailable(f"no {'new' if new else 'used'} {'faulty ' if faulty else ''}comps for {model_key!r}")
         scored.sort(key=lambda pair: pair[0], reverse=True)
         return [
             Observation(
-                source=self.source_id,
-                kind="asking",
+                source=self.source_id_new if new else self.source_id,
+                kind="asking_new" if new else "asking",
                 amount=float(row["price_ngn"]),
                 currency="NGN",
                 observed_on=str(row.get("fetched_at", ""))[:10],
@@ -142,16 +241,16 @@ class JijiComps:
         ]
 
 
-    def _fetch_live(self, model_key: str, category: str) -> list[dict]:
+    def _fetch_live(self, model_key: str, category: str, pages: int = MODEL_SEARCH_PAGES, used: bool = True) -> list[dict]:
         """Ask the market now, remember the answer, and stop asking after an outage."""
         if self._live is None or self._live_failed:
             return []
-        asked = " ".join(tokens(model_key))
+        asked = " ".join(tokens(model_key)) + ("" if used else " [new]")
         if asked in self._asked:
             return []  # the market was already asked about this model
         self._asked.add(asked)
         try:
-            fresh = [r for r in self._live(model_key, category) if r.get("is_used")]
+            fresh = [r for r in self._live(model_key, category, pages, used) if bool(r.get("is_used")) == used]
         except Exception:
             # One failed call means the network is out; every later case in
             # this process prices from the cache rather than waiting again.
@@ -160,9 +259,10 @@ class JijiComps:
         fresh = [r for r in fresh if r.get("id") not in self._exclude]
         if not fresh:
             return []
-        known = {r.get("id") for r in self._rows}
+        pool = self._rows if used else self._new_rows
+        known = {r.get("id") for r in pool}
         new_rows = [r for r in fresh if r.get("id") not in known]
-        self._rows.extend(new_rows)
+        pool.extend(new_rows)
         if new_rows:
             try:
                 cached = json.loads(self._live_file.read_text()) if self._live_file.exists() else []

@@ -1,45 +1,45 @@
 # Case dpHX9vb2HULjkp6s3r9EQK5W
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  64338 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0014  |  30130 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: generator (confidence 0.95)
-- Made of: steel 40%, plastic 30%, copper 15%, rubber 10%, glass 5%
+- Made of: steel 60%, plastic 30%, copper 10%
 - Estimated weight: 25.0 kg (confidence 0.8)
 - Brand read off the item: ELEPAQ
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: minor scuff marks on plastic casing, some dust and grime on engine components, tire appears slightly worn but intact
+- Damage noted: minor scuffs on plastic casing, tire appears slightly worn
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: ELEPAQ
+- Text read: ELEPAQ | ELEPAQ POWER GENERATOR
 
 ## Two readers
 - brand_text agreed by both readers
+- item_type agreed by both readers
+- model_text differed between the two readers, so it is treated as unread
 - rating_text differed between the two readers, so it is treated as unread
-- model_text was seen by only one reader, so it is treated as unread
-- serial_text was seen by only one reader, so it is treated as unread
-- 16 transcribed lines was seen by only one reader, so it is treated as unread
+- 14 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
 - ELEPAQ
 
 ## Chain
 - **ocr** -> ok. 1 lines: ELEPAQ
-- **corroborate** -> dispute. brand_text agreed by both readers; rating_text differed between the two readers, so it is treated as unread; model_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 16 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=generator brand=ELEPAQ model=None label=True lines=1
-- **retrieval** -> ok. query='ELEPAQ ELEPAQ 15kva elepaq generator 100% copper generator' hits=['Elepaq SV2200 2.5kVA', 'Elepaq SV6800 6.5kVA']
+- **corroborate** -> dispute. brand_text agreed by both readers; item_type agreed by both readers; model_text differed between the two readers, so it is treated as unread; rating_text differed between the two readers, so it is treated as unread; 14 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=generator brand=ELEPAQ model=None label=True lines=2
+- **retrieval** -> ok. query='ELEPAQ ELEPAQ ELEPAQ POWER GENERATOR 15kva elepaq generator 100% copper generator' hits=['Elepaq SV2200 2.5kVA', 'Elepaq SV6800 6.5kVA']
 - **identify** -> ok. chosen=Elepaq SV22000E margin=0.5
 - **abstain** -> abstain. top score 0.6
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 8033 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 5518 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 48045 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 2742 ms (replayed)
-- total across calls: 64338 ms; wall clock: 400 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 7014 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 10458 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 10157 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2501 ms (replayed)
+- total across calls: 30130 ms; wall clock: 1633 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -56,7 +56,7 @@ Shortlist from the catalogue:
 - It is weighing: Elepaq SV22000E (0.6), Elepaq SV6800 (0.1)
 - The best candidate scored only 0.6, which is not sure enough to price.
 - read off the item's own label
-- 1 lines seen by both readers
+- 2 lines seen by both readers
 - 8 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -92,11 +92,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Photo of the engine, showing the recoil starter and carburettor.
 
 ## Price
-**20,337 to 56,412 NGN** (priced as material, width 0.9401, method material_floor, 0 comparable prices)
+**15,580 to 42,850 NGN** (priced as material, width 0.9334, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 25 kg of steel 40%, plastic 30%, copper 15%, rubber 10%, glass 5% (rates for glass, plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 25 kg of steel 60%, plastic 30%, copper 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 43,400 NGN
+Scrap floor: 33,250 NGN
 
 Conditions attached to this price:
 - Not identified: The best candidate scored only 0.6, which is not sure enough to price.

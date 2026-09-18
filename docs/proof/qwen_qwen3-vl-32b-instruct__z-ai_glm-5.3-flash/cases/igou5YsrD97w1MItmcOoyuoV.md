@@ -1,44 +1,45 @@
 # Case igou5YsrD97w1MItmcOoyuoV
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  36344 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  30650 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: laptop (confidence 0.95)
 - Made of: plastic 60%, steel 20%, circuit_board 10%, aluminium 10%
-- Estimated weight: 2.0 kg (confidence 0.8)
+- Estimated weight: 1.8 kg (confidence 0.7)
 - Brand read off the item: DELL
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: Minor wear on keyboard keys, Screen has faint smudges
+- Damage noted: minor scuffs on keyboard keys, screen has faint smudges
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: DELL | Dell
+- Text read: DELL
 
 ## Two readers
 - brand_text agreed by both readers
+- item_type agreed by both readers
 - 2 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## Chain
 - **ocr** -> ok. 0 lines: 
-- **corroborate** -> dispute. brand_text agreed by both readers; 2 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=laptop brand=DELL model=None label=False lines=2
-- **retrieval** -> ok. query='DELL DELL Dell Dell Precision 5540
+- **corroborate** -> dispute. brand_text agreed by both readers; item_type agreed by both readers; 2 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=laptop brand=DELL model=None label=False lines=1
+- **retrieval** -> ok. query='DELL DELL Dell Precision 5540
 Intel Core i5-9450H
 9th Gen
 16gb Ram
 256gb ssd
-Backlit ' hits=['Dell Inspiron 15 3000', 'Dell Latitude 7490', 'Dell Latitude 5490', 'Dell Latitude E7470', 'Dell XPS 13 9370']
-- **identify** -> refused. chosen=Dell None margin=0.05
+Backlit Keybo' hits=['Dell Inspiron 15 3000', 'Dell Latitude 7490', 'Dell Latitude 5490', 'Dell Latitude E7470', 'Dell XPS 13 9370']
+- **identify** -> refused. chosen=None None margin=None
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 5320 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 10001 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 15372 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 5651 ms (replayed)
-- total across calls: 36344 ms; wall clock: 106 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5262 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 10789 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 8238 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 6361 ms (replayed)
+- total across calls: 30650 ms; wall clock: 1780 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -48,18 +49,16 @@ Shortlist from the catalogue:
   - Dell Latitude E7470 (0.3)
   - Dell XPS 13 9370 (0.3)
 
-**Not identified: CANNOT_IDENTIFY.** Label legibly shows only 'DELL'; no model text visible. Seller claims Precision 5540, but the item label does not state it, and it is not on the shortlist, so it cannot be confirmed from the photos alone.
+**Not identified: CANNOT_IDENTIFY.** Only 'DELL' is legible; no model marking visible, and seller's 'Precision 5540' claim cannot be verified. Shortlist entries (Inspirons, Latitudes, XPS 13) do not match and lack supporting evidence.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 5% on the best answer. It is probably a Dell XPS 13 9370 or a Dell Latitude 7490, and the photos cannot separate them.**
+**0%: the photos do not say what this is.**
 
-- Identification confidence: 5% (unknown)
+- Identification confidence: 0% (unknown)
 - Price confidence: 14%
-- It is weighing: Dell XPS 13 9370 (0.1), Dell Latitude 7490 (0.05)
-- Label legibly shows only 'DELL'; no model text visible. Seller claims Precision 5540, but the item label does not state it, and it is not on the shortlist, so it cannot be confirmed from the photos alone.
+- Only 'DELL' is legible; no model marking visible, and seller's 'Precision 5540' claim cannot be verified. Shortlist entries (Inspirons, Latitudes, XPS 13) do not match and lack supporting evidence.
 - no label, plate or settings screen was legible
-- 2 lines seen by both readers
-- the next candidate was only 0.05 behind
+- 1 lines seen by both readers
 - 12 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -103,12 +102,12 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 ## Price
 **5,000 to 5,000 NGN** (priced as material, width 0.0, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 2 kg of plastic 60%, steel 20%, circuit_board 10%, aluminium 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 1.8 kg of plastic 60%, steel 20%, circuit_board 10%, aluminium 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 880 NGN
+Scrap floor: 792 NGN
 
 Conditions attached to this price:
-- Not identified: Label legibly shows only 'DELL'; no model text visible. Seller claims Precision 5540, but the item label does not state it, and it is not on the shortlist, so it cannot be confirmed from the photos alone.
+- Not identified: Only 'DELL' is legible; no model marking visible, and seller's 'Precision 5540' claim cannot be verified. Shortlist entries (Inspirons, Latitudes, XPS 13) do not match and lack supporting evidence.
 - Raised to the 5,000 NGN minimum this business publishes for this kind of item.
 - Dell Precision 5540 -> not proven remotely. Agent will confirm at pickup.
 - Intel Core i5-9450H -> not proven remotely. Agent will confirm at pickup.

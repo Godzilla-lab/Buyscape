@@ -1,64 +1,67 @@
 # Case sfrfkKxf26Gzr9eCgGRRkAyy
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  102915 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  30860 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: laptop (confidence 0.95)
 - Made of: plastic 40%, steel 30%, circuit_board 15%, aluminium 10%, rubber 5%
 - Estimated weight: 1.8 kg (confidence 0.7)
-- Brand read off the item: nothing legible
+- Brand read off the item: ThinkPad
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: Screen has visible reflections and smudges, Keyboard appears clean, no visible damage, Lid hinge area shows minor wear, Bottom right corner of chassis has slight scuff
+- Damage noted: screen has minor smudges, keyboard appears clean, laptop is open and powered on
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
+- Text read: ThinkPad
 
 ## Two readers
-- brand_text differed between the two readers, so it is treated as unread
-- 3 transcribed lines was seen by only one reader, so it is treated as unread
+- item_type agreed by both readers
+- 2 transcribed lines was seen by only one reader, so it is treated as unread
+- brand_text was read by only one reader, so it is kept but not confirmed
 
 ## OCR read off the photos
 - 品
 
 ## Chain
 - **ocr** -> ok. 1 lines: 品
-- **corroborate** -> dispute. brand_text differed between the two readers, so it is treated as unread; 3 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=laptop brand=None model=None label=False lines=0
-- **retrieval** -> ok. query='Lenovo IdeaPad 320
+- **corroborate** -> dispute. item_type agreed by both readers; 2 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed
+- **read_evidence** -> ok. category=laptop brand=ThinkPad model=None label=False lines=1
+- **retrieval** -> ok. query='ThinkPad ThinkPad Lenovo IdeaPad 320
 AMD A12 7generation 
-Memory 8gb ram and storage capacity 1TB HDD 
-Windo' hits=['Lenovo IdeaPad 3', 'Lenovo 14w', 'Lenovo ThinkPad T480', 'Lenovo ThinkPad T470', 'Lenovo ThinkPad X1 Carbon Gen 6']
-- **identify** -> refused. chosen=None None margin=None
+Memory 8gb ram and storage capac' hits=['Lenovo IdeaPad 3', 'Lenovo ThinkPad T480', 'Lenovo ThinkPad T470', 'Lenovo 14w', 'Lenovo ThinkPad X1 Carbon Gen 6']
+- **identify** -> refused. chosen=None None margin=0.25
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 7107 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 11063 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 80942 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 3803 ms (replayed)
-- total across calls: 102915 ms; wall clock: 176 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4875 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 10049 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 12403 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3533 ms (replayed)
+- total across calls: 30860 ms; wall clock: 1203 ms
 
 ## Identification
 Shortlist from the catalogue:
   - Lenovo IdeaPad 3 (0.7)
+  - Lenovo ThinkPad T480 (0.5)
+  - Lenovo ThinkPad T470 (0.5)
   - Lenovo 14w (0.5)
-  - Lenovo ThinkPad T480 (0.3)
-  - Lenovo ThinkPad T470 (0.3)
-  - Lenovo ThinkPad X1 Carbon Gen 6 (0.3)
+  - Lenovo ThinkPad X1 Carbon Gen 6 (0.3667)
 
-**Not identified: CANNOT_IDENTIFY.** No legible label or printed model text; shortlist lacks IdeaPad 320, and IdeaPad 3 is a different model line, so no entry is safely supported.
+**Not identified: CANNOT_IDENTIFY.** Seller claims IdeaPad 320 but it is not on the shortlist and no model is legible on the device; the 'ThinkPad' text read contradicts the clearly silver consumer chassis, and no label confirms any specific model.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 12% on the best answer. It is probably a Lenovo IdeaPad 3, and the photos cannot separate them.**
+**Not sure enough to price: 13% on the best answer. It is probably a Lenovo IdeaPad 3 or a Lenovo 14w, and the photos cannot separate them.**
 
-- Identification confidence: 12% (unknown)
+- Identification confidence: 13% (unknown)
 - Price confidence: 16%
-- It is weighing: Lenovo IdeaPad 3 (0.3)
-- No legible label or printed model text; shortlist lacks IdeaPad 320, and IdeaPad 3 is a different model line, so no entry is safely supported.
+- It is weighing: Lenovo IdeaPad 3 (0.45), Lenovo 14w (0.2)
+- Seller claims IdeaPad 320 but it is not on the shortlist and no model is legible on the device; the 'ThinkPad' text read contradicts the clearly silver consumer chassis, and no label confirms any specific model.
 - no label, plate or settings screen was legible
 - the two readers agreed on nothing legible
+- the brand was read by only one reader and is not confirmed
+- the next candidate was only 0.25 behind
 - 9 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -102,7 +105,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 922 NGN
 
 Conditions attached to this price:
-- Not identified: No legible label or printed model text; shortlist lacks IdeaPad 320, and IdeaPad 3 is a different model line, so no entry is safely supported.
+- Not identified: Seller claims IdeaPad 320 but it is not on the shortlist and no model is legible on the device; the 'ThinkPad' text read contradicts the clearly silver consumer chassis, and no label confirms any specific model.
 - Raised to the 5,000 NGN minimum this business publishes for this kind of item.
 - Lenovo IdeaPad 320 -> not proven remotely. Agent will confirm at pickup.
 - AMD A12 7generation -> not proven remotely. Agent will confirm at pickup.

@@ -1,39 +1,42 @@
 # Case df6mvnCslxEiGSKwfsLquLp2
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  140671 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  57341 ms
 
 ## What the engine saw
 - Presentation: sealed_new
-- Category: smartphone (confidence 1.0)
+- Category: phone (confidence 1.0)
 - Made of: paper 80%, plastic 20%
 - Estimated weight: 0.5 kg (confidence 0.9)
-- Brand read off the item: nothing legible
+- Brand read off the item: Apple
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
 - Damage noted: none
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
-- Text read: AGASON GLOBAL CONCEPT
+- Text read: Apple
 
 ## Two readers
-- 1 transcribed lines was seen by only one reader, so it is treated as unread
+- model_text was seen by only one reader, so it is treated as unread
+- 2 transcribed lines was seen by only one reader, so it is treated as unread
+- brand_text was read by only one reader, so it is kept but not confirmed
+- item_type was read by only one reader, so it is kept but not confirmed
 
 ## Chain
 - **ocr** -> ok. 0 lines: 
-- **corroborate** -> dispute. 1 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=smartphone brand=None model=None label=False lines=1
+- **corroborate** -> dispute. model_text was seen by only one reader, so it is treated as unread; 2 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed; item_type was read by only one reader, so it is kept but not confirmed
+- **read_evidence** -> ok. category=phone brand=Apple model=None label=False lines=1
 - **forensics** -> flag. looks like a catalogue or stock image
-- **retrieval** -> ok. query='AGASON GLOBAL CONCEPT Apple iPhone14pro 256gb' hits=['Apple iPhone 14', 'Apple iPhone 11', 'Apple iPhone 11 Pro', 'Apple iPhone 11 Pro Max', 'Apple iPhone 12']
-- **identify** -> refused. chosen=None None margin=None
+- **retrieval** -> ok. query='Apple Apple Apple iPhone14pro 256gb' hits=['Apple iPhone 14', 'Apple iPhone 11', 'Apple iPhone 11 Pro', 'Apple iPhone 11 Pro Max', 'Apple iPhone 12']
+- **identify** -> refused. chosen=None None margin=0.25
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 4528 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 113129 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 21344 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 1670 ms (replayed)
-- total across calls: 140671 ms; wall clock: 448 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5846 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 34408 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 14687 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2400 ms (replayed)
+- total across calls: 57341 ms; wall clock: 1500 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -43,19 +46,21 @@ Shortlist from the catalogue:
   - Apple iPhone 11 Pro Max (0.3)
   - Apple iPhone 12 (0.3)
 
-**Not identified: CANNOT_IDENTIFY.** Box artwork (pill cutout, purple finish) resembles an iPhone 14 Pro, which is not on the shortlist; no legible label text confirms any model, and only the seller's unverified claim says 14 Pro.
+**Not identified: CANNOT_IDENTIFY.** Box art shows pill cutout and Deep Purple finish consistent with iPhone 14 Pro, but no legible model text; iPhone 14 Pro is absent from the shortlist and the label is not readable, so I cannot confirm a model from the listed options.
 
 Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 8% on the best answer. It is probably a Apple iPhone 14, and the photos cannot separate them.**
+**Not sure enough to price: 5% on the best answer. It is probably a Apple iPhone 14 or a Apple iPhone 12, and the photos cannot separate them.**
 
-- Identification confidence: 8% (unknown)
+- Identification confidence: 5% (unknown)
 - Price confidence: 20%
-- It is weighing: Apple iPhone 14 (0.3)
-- Box artwork (pill cutout, purple finish) resembles an iPhone 14 Pro, which is not on the shortlist; no legible label text confirms any model, and only the seller's unverified claim says 14 Pro.
+- It is weighing: Apple iPhone 14 (0.35), Apple iPhone 12 (0.1)
+- Box art shows pill cutout and Deep Purple finish consistent with iPhone 14 Pro, but no legible model text; iPhone 14 Pro is absent from the shortlist and the label is not readable, so I cannot confirm a model from the listed options.
 - no label, plate or settings screen was legible
-- 1 lines seen by both readers
+- the two readers agreed on nothing legible
+- the brand, item_type was read by only one reader and is not confirmed
+- the next candidate was only 0.25 behind
 - looks like a catalogue or stock image
 - 7 claims are still unproven, 0 are supported
 
@@ -76,7 +81,7 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 
 ## Claims
 - [unverifiable_remote] Apple iPhone14pro
-- [unverified] 256gb
+- [unverifiable_remote] 256gb
     priced as: smallest variant of this model. Agent reads storage from Settings
 - [unverified] Required evidence 'code_shot' was not supplied
     priced as: priced as if the worst case is true. Write the code {code} on paper and take one photo with the paper next to the phone.
@@ -97,7 +102,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 34 NGN
 
 Conditions attached to this price:
-- Not identified: Box artwork (pill cutout, purple finish) resembles an iPhone 14 Pro, which is not on the shortlist; no legible label text confirms any model, and only the seller's unverified claim says 14 Pro.
+- Not identified: Box art shows pill cutout and Deep Purple finish consistent with iPhone 14 Pro, but no legible model text; iPhone 14 Pro is absent from the shortlist and the label is not readable, so I cannot confirm a model from the listed options.
 - Evidence flag: looks like a catalogue or stock image
 - Apple iPhone14pro -> not proven remotely. Agent will confirm at pickup.
 - 256gb -> not proven remotely. Agent reads storage from Settings.

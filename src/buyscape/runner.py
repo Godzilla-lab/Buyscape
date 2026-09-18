@@ -159,6 +159,12 @@ def run_case(
     if tenant is not None:
         protocol = tenant.with_questions(protocol, case.tenant_category)
 
+    # A sofa has no model number to be identified by. Where the protocol says
+    # the type is the identity, what two readers judged it to be is the
+    # answer, and it is priced from listings of that type below.
+    if protocol.identity_by_type:
+        chain.name_by_type(result, case.seller_text)
+
     # The item's own testimony, checked against itself, against the identity
     # the chain chose and against the catalogue. No model is asked whether the
     # item is genuine; two records that should agree and do not is the answer.
@@ -279,6 +285,7 @@ def run_case(
         result.links.append(chain.LinkLog("condition", "not working", "by the seller's own account"))
 
     comp_obs: list = []
+    new_obs: list = []
     scrap_obs: list = []
     comps_are_faulty = False
     if identified:
@@ -286,21 +293,32 @@ def run_case(
         # storage and colour, is a claim in the ledger, not part of the
         # identity: demanding 16 GB in every title threw away the two
         # MacBook Air M2 listings that were in the pool.
-        comps_key = " ".join(filter(None, [result.brand, result.model]))
+        comps_key = result.type_name if result.named_type else " ".join(filter(None, [result.brand, result.model]))
         if not_working:
             # The dead market first: faulty and for-parts listings of the
             # same model are the honest comparable for a unit that does not
             # work. Working listings are the fallback, scaled by the tenant.
             try:
-                comp_obs = comps.fetch(category, comps_key, faulty=True)
+                comp_obs = comps.fetch(category, comps_key, faulty=True, by_type=result.named_type)
                 comps_are_faulty = len(comp_obs) >= MIN_OBSERVATIONS
             except SourceUnavailable:
                 comp_obs = []
         if not comps_are_faulty:
             try:
-                comp_obs = comps.fetch(category, comps_key)
+                comp_obs = comps.fetch(category, comps_key, by_type=result.named_type)
             except SourceUnavailable:
                 comp_obs = []
+        if len(comp_obs) < MIN_OBSERVATIONS and not not_working:
+            # Too few used listings to price from. Dealers list new stock
+            # of nearly everything, and the business's own share-of-new
+            # rate turns those into a used price. The engine decides below
+            # whether it may be used; here it is only fetched.
+            try:
+                new_obs = comps.fetch(category, comps_key, by_type=result.named_type, new=True)
+            except SourceUnavailable:
+                new_obs = []
+            if new_obs:
+                result.links.append(chain.LinkLog("comps", "new stock", f"{len(new_obs)} new asking prices for {comps_key!r}"))
         rating = parse_rating(
             " ".join(
                 filter(
@@ -340,6 +358,8 @@ def run_case(
             not_working=not_working,
             dead_fraction=tenant.dead_fraction_for(category) if tenant is not None else None,
             comps_are_faulty=comps_are_faulty,
+            new_comps=new_obs,
+            resale_fraction=tenant.resale_fraction_for(category) if tenant is not None else None,
         )
     # What this business will not buy at any price, in their own published
     # words. A refusal is an outcome: quoting a small number for something
@@ -496,6 +516,8 @@ def report_markdown(case: Case, result: CaseResult) -> str:
         lines.append("No catalogue candidates matched.")
     if result.identified and c.named_from_label:
         lines.append(f"\n**Answer: {c.model_key}** (named from the item's own label; not in the catalogue)")
+    elif result.identified and c.named_type:
+        lines.append(f"\n**Answer: {c.model_key}** (named by type; nothing on the item gives a brand or model, and none is expected)")
     elif result.identified:
         lines.append(f"\n**Answer: {c.model_key}** (margin {c.margin})")
     else:

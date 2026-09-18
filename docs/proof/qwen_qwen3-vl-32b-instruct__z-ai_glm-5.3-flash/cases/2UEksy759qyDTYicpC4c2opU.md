@@ -1,21 +1,22 @@
 # Case 2UEksy759qyDTYicpC4c2opU
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  75192 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  30509 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: laptop (confidence 0.95)
-- Made of: plastic 60%, steel 20%, circuit_board 10%, aluminium 10%
-- Estimated weight: 2.0 kg (confidence 0.8)
+- Made of: plastic 60%, steel 20%, circuit_board 10%, glass 10%
+- Estimated weight: 2.5 kg (confidence 0.8)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: Screen shows Windows 11 desktop, no visible cracks or damage on screen., Laptop appears clean with no obvious dents or stains.
+- Damage noted: screen shows Windows desktop, no visible damage to body or screen
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
 
 ## Two readers
+- item_type agreed by both readers
 - 2 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
@@ -23,36 +24,36 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 1 lines: 5
-- **corroborate** -> dispute. 2 transcribed lines was seen by only one reader, so it is treated as unread
+- **corroborate** -> dispute. item_type agreed by both readers; 2 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=laptop brand=None model=None label=False lines=0
 - **forensics** -> flag. looks like a catalogue or stock image
 - **retrieval** -> ok. query='Used Acer Nitro 5
 11th gen, Intel core i5-8300H , 2304 MHz, 4 Core(s), 8 logical processor' hits=['Acer Aspire 5']
-- **identify** -> refused. chosen=None None margin=0.3
+- **identify** -> refused. chosen=None None margin=None
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 6291 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 5061 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 59806 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 4034 ms (replayed)
-- total across calls: 75192 ms; wall clock: 148 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 8770 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 9389 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 8378 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3972 ms (replayed)
+- total across calls: 30509 ms; wall clock: 1220 ms
 
 ## Identification
 Shortlist from the catalogue:
   - Acer Aspire 5 (0.5)
 
-**Not identified: CANNOT_IDENTIFY.** No text is legible on the item, so the seller's 'Nitro 5' claim cannot be verified against the label, and Nitro 5 is not on the shortlist; the sole shortlist entry (Aspire 5) contradicts the seller's description.
+**Not identified: CANNOT_IDENTIFY.** Appearance suggests a Nitro 5 gaming laptop, but no label is legible to confirm it; the only shortlist entry (Aspire 5) contradicts the visible red-accent gaming design and seller's claim.
 
 Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 10% on the best answer. It is probably a Acer Nitro 5 or a Acer Aspire 5, and the photos cannot separate them.**
+**Not sure enough to price: 5% on the best answer. It is probably a Acer Aspire 5, and the photos cannot separate them.**
 
-- Identification confidence: 10% (unknown)
+- Identification confidence: 5% (unknown)
 - Price confidence: 14%
-- It is weighing: Acer Nitro 5 (0.5), Acer Aspire 5 (0.2)
-- No text is legible on the item, so the seller's 'Nitro 5' claim cannot be verified against the label, and Nitro 5 is not on the shortlist; the sole shortlist entry (Aspire 5) contradicts the seller's description.
+- It is weighing: Acer Aspire 5 (0.25)
+- Appearance suggests a Nitro 5 gaming laptop, but no label is legible to confirm it; the only shortlist entry (Aspire 5) contradicts the visible red-accent gaming design and seller's claim.
 - no label, plate or settings screen was legible
 - the two readers agreed on nothing legible
 - looks like a catalogue or stock image
@@ -95,12 +96,12 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 ## Price
 **5,000 to 5,000 NGN** (priced as material, width 0.0, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 2 kg of plastic 60%, steel 20%, circuit_board 10%, aluminium 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 2.5 kg of plastic 60%, steel 20%, circuit_board 10%, glass 10% (rates for glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 880 NGN
+Scrap floor: 605 NGN
 
 Conditions attached to this price:
-- Not identified: No text is legible on the item, so the seller's 'Nitro 5' claim cannot be verified against the label, and Nitro 5 is not on the shortlist; the sole shortlist entry (Aspire 5) contradicts the seller's description.
+- Not identified: Appearance suggests a Nitro 5 gaming laptop, but no label is legible to confirm it; the only shortlist entry (Aspire 5) contradicts the visible red-accent gaming design and seller's claim.
 - Evidence flag: looks like a catalogue or stock image
 - Raised to the 5,000 NGN minimum this business publishes for this kind of item.
 - Used Acer Nitro 5 -> not proven remotely. Agent matches the serial on the sticker to the serial in System Information or the BIOS.

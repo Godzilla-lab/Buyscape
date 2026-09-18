@@ -1,24 +1,25 @@
 # Case BaVmPtzZzgJc9zOky9hFRqwl
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0006  |  11245 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  30110 ms
 
 ## What the engine saw
 - Presentation: sealed_new
 - Category: phone (confidence 0.95)
 - Made of: paper 80%, plastic 20%
 - Estimated weight: 0.5 kg (confidence 0.8)
-- Brand read off the item: Galaxy
-- Model read off the item: A17
+- Brand read off the item: Samsung
+- Model read off the item: Galaxy A17
 - Rating read: none
 - Label, plate or settings screen legible: no
 - Damage noted: none
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
-- Text read: Galaxy | A17
+- Text read: Galaxy | A17 | Samsung | Galaxy A17
 
 ## Two readers
+- brand_text agreed by both readers
 - model_text agreed by both readers
-- brand_text was read by one reader and confirmed by OCR
+- item_type agreed by both readers
 
 ## OCR read off the photos
 - Galaxy
@@ -26,18 +27,18 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 2 lines: Galaxy | A17
-- **corroborate** -> agree. model_text agreed by both readers; brand_text was read by one reader and confirmed by OCR
-- **read_evidence** -> ok. category=phone brand=Galaxy model=A17 label=False lines=2
+- **corroborate** -> agree. brand_text agreed by both readers; model_text agreed by both readers; item_type agreed by both readers
+- **read_evidence** -> ok. category=phone brand=Samsung model=Galaxy A17 label=False lines=4
 - **forensics** -> flag. looks like a catalogue or stock image
-- **retrieval** -> ok. query='Galaxy A17 Galaxy A17 SAMSUNG GALAXY A17 256GB 8GB RAM' hits=['Samsung Galaxy S21', 'Samsung Galaxy S22', 'Samsung Galaxy S23', 'Samsung Galaxy S24', 'Samsung Galaxy S25']
-- **identify** -> label. named from the label: Galaxy A17, not in the catalogue
+- **retrieval** -> ok. query='Samsung Galaxy A17 Galaxy A17 Samsung Galaxy A17 SAMSUNG GALAXY A17 256GB 8GB RAM' hits=['Samsung Galaxy S21', 'Samsung Galaxy S22', 'Samsung Galaxy S23', 'Samsung Galaxy S24', 'Samsung Galaxy S25']
+- **identify** -> label. named from the label: Samsung Galaxy A17, not in the catalogue
 - **abstain** -> abstain. confidence 0.38: named from the item's own label, which the catalogue does not list; no label, plate or settings screen was legible; 2 lines seen by both readers; looks like a catalogue or stock image
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 4565 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 3963 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 2717 ms (replayed)
-- total across calls: 11245 ms; wall clock: 463 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 3918 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 23905 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2287 ms (replayed)
+- total across calls: 30110 ms; wall clock: 1308 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -79,9 +80,9 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 
 ## Claims
 - [unverifiable_remote] SAMSUNG GALAXY A17
-- [unverifiable_remote] 256GB
+- [unverified] 256GB
     priced as: smallest variant of this model. Agent reads storage from Settings
-- [unverifiable_remote] 8GB RAM
+- [unverified] 8GB RAM
     priced as: smallest variant of this model. Agent reads storage from Settings
 - [unverified] Required evidence 'code_shot' was not supplied
     priced as: priced as if the worst case is true. Write the code {code} on paper and take one photo with the paper next to the phone.

@@ -1,26 +1,26 @@
 # Case pIH0HyBnwfwDLvyCaPavJShA
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  20618 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  27342 ms
 
 ## What the engine saw
 - Presentation: single_unit
-- Category: generator (confidence 0.9)
-- Made of: plastic 40%, steel 30%, circuit_board 10%, copper 10%, rubber 10%
-- Estimated weight: 25.0 kg (confidence 0.7)
+- Category: generator (confidence 0.95)
+- Made of: plastic 60%, steel 30%, circuit_board 5%, rubber 5%
+- Estimated weight: 18.0 kg (confidence 0.7)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: minor scuffing on yellow casing, black frame shows slight wear
+- Damage noted: minor scuffs on yellow casing, black frame shows slight wear, unit appears clean and intact
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
-- Text read: SERIES | POWERFUL GENERATOR
+- Text read: POWER GENERATOR | SERIES | START
 
 ## Two readers
+- item_type agreed by both readers
 - brand_text differed between the two readers, so it is treated as unread
 - rating_text differed between the two readers, so it is treated as unread
-- model_text was seen by only one reader, so it is treated as unread
-- 7 transcribed lines was seen by only one reader, so it is treated as unread
+- 9 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
 - SENNEI
@@ -29,19 +29,19 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 3 lines: SENNEI | SIR CHUKS | EQUITOF
-- **corroborate** -> dispute. brand_text differed between the two readers, so it is treated as unread; rating_text differed between the two readers, so it is treated as unread; model_text was seen by only one reader, so it is treated as unread; 7 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=generator brand=None model=None label=True lines=2
+- **corroborate** -> dispute. item_type agreed by both readers; brand_text differed between the two readers, so it is treated as unread; rating_text differed between the two readers, so it is treated as unread; 9 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=generator brand=None model=None label=True lines=3
 - **forensics** -> flag. looks like a catalogue or stock image
-- **retrieval** -> ok. query='SERIES POWERFUL GENERATOR Senwei 3.5kva Petrol Generator, available in Quantity. Wholesale' hits=['Senwei SW3500 3.5kVA', 'Lutian LT3900 3.5kVA', 'Thermocool TC2700 2.5kVA', 'Haier Thermocool HTG2700 2.5kVA', 'Kemage KM6500 5.5kVA']
-- **identify** -> ok. chosen=Senwei SW3500 margin=0.75
-- **abstain** -> abstain. seller names another generation
+- **retrieval** -> ok. query='POWER GENERATOR SERIES START Senwei 3.5kva Petrol Generator, available in Quantity. Wholes' hits=['Senwei SW3500 3.5kVA', 'Lutian LT3900 3.5kVA', 'Thermocool TC2700 2.5kVA', 'Haier Thermocool HTG2700 2.5kVA', 'Kemage KM6500 5.5kVA']
+- **identify** -> ok. chosen=Senwei SW3500 margin=0.5
+- **abstain** -> abstain. top score 0.6
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 5183 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 4895 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 7480 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 3060 ms (replayed)
-- total across calls: 20618 ms; wall clock: 353 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 6555 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 8473 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 9409 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2905 ms (replayed)
+- total across calls: 27342 ms; wall clock: 1401 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -51,19 +51,19 @@ Shortlist from the catalogue:
   - Haier Thermocool HTG2700 2.5kVA (0.1833)
   - Kemage KM6500 5.5kVA (0.15)
 
-**Not identified: EVIDENCE_INCOMPLETE.** The answer names sw3500, which appears nowhere on the item or in the seller's words. A photo of the plate would confirm or correct it.
+**Not identified: CANNOT_IDENTIFY.** The best candidate scored only 0.6, which is not sure enough to price.
 
 Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 25% on the best answer. It is probably a Senwei SW3500 or a Kemage KM6500, and the photos cannot separate them.**
+**Not sure enough to price: 18% on the best answer. It is probably a Senwei SW3500 or a Lutian LT3900, and the photos cannot separate them.**
 
-- Identification confidence: 25% (unknown)
+- Identification confidence: 18% (unknown)
 - Price confidence: 16%
-- It is weighing: Senwei SW3500 (0.85), Kemage KM6500 (0.1)
-- The answer names sw3500, which appears nowhere on the item or in the seller's words. A photo of the plate would confirm or correct it.
+- It is weighing: Senwei SW3500 (0.6), Lutian LT3900 (0.1)
+- The best candidate scored only 0.6, which is not sure enough to price.
 - read off the item's own label
-- 2 lines seen by both readers
+- 3 lines seen by both readers
 - looks like a catalogue or stock image
 - 9 claims are still unproven, 0 are supported
 
@@ -100,14 +100,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Photo of the engine, showing the recoil starter and carburettor.
 
 ## Price
-**17,974 to 41,550 NGN** (priced as material, width 0.7921, method material_floor, 0 comparable prices)
+**2,562 to 6,174 NGN** (priced as material, width 0.8266, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 25 kg of plastic 40%, steel 30%, circuit_board 10%, copper 10%, rubber 10% (rates for plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 18 kg of plastic 60%, steel 30%, circuit_board 5%, rubber 5% (rates for plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 31,875 NGN
+Scrap floor: 4,545 NGN
 
 Conditions attached to this price:
-- Not identified: The answer names sw3500, which appears nowhere on the item or in the seller's words. A photo of the plate would confirm or correct it.
+- Not identified: The best candidate scored only 0.6, which is not sure enough to price.
 - Evidence flag: looks like a catalogue or stock image
 - Senwei 3.5kva Petrol Generator -> not proven remotely. Agent reads the rating plate.
 - available in Quantity -> not proven remotely. Agent will confirm at pickup.

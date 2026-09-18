@@ -1,6 +1,6 @@
 # Case kTUSsVnPCefTdSg5BEQAbj3U
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  27568 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  25101 ms
 
 ## What the engine saw
 - Presentation: single_unit
@@ -11,34 +11,35 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: minor scuffs on the lid, screen is off, no visible damage to display
+- Damage noted: none
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 - Text read: DELL
 
 ## Two readers
 - brand_text agreed by both readers
+- item_type agreed by both readers
 
 ## OCR read off the photos
 - CHNOLOGIES
 
 ## Chain
 - **ocr** -> ok. 1 lines: CHNOLOGIES
-- **corroborate** -> agree. brand_text agreed by both readers
+- **corroborate** -> agree. brand_text agreed by both readers; item_type agreed by both readers
 - **read_evidence** -> ok. category=laptop brand=DELL model=None label=False lines=1
 - **retrieval** -> ok. query='DELL DELL FOR SALE!    
 Brand name : *Dell*
 Model : *latitude E7240*
 Processor: *Intel(R) ' hits=['Dell Latitude E7470', 'Dell Latitude 7490', 'Dell Latitude 5490', 'Dell Inspiron 15 3000', 'Dell XPS 13 9370']
-- **identify** -> refused. chosen=Dell None margin=0.15
+- **identify** -> refused. chosen=None None margin=0.2
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 4423 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 8289 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 12382 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 2474 ms (replayed)
-- total across calls: 27568 ms; wall clock: 126 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4547 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 8670 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 9359 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2525 ms (replayed)
+- total across calls: 25101 ms; wall clock: 1067 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -48,18 +49,18 @@ Shortlist from the catalogue:
   - Dell Inspiron 15 3000 (0.3)
   - Dell XPS 13 9370 (0.3)
 
-**Not identified: CANNOT_IDENTIFY.** Only 'DELL' is legible; seller claims Latitude E7240 but that model is absent from the shortlist and no model number is visible in the photos.
+**Not identified: CANNOT_IDENTIFY.** Only 'DELL' is legible; seller's claimed E7240 is not on the label and is outside the shortlist, so it cannot be confirmed.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 16% on the best answer. It is probably a Dell Latitude E7470 or a Dell Latitude 7490, and the photos cannot separate them.**
+**Not sure enough to price: 19% on the best answer. It is probably a Dell Latitude E7240 or a Dell Latitude E7470, and the photos cannot separate them.**
 
-- Identification confidence: 16% (unknown)
+- Identification confidence: 19% (unknown)
 - Price confidence: 20%
-- It is weighing: Dell Latitude E7470 (0.35), Dell Latitude 7490 (0.2)
-- Only 'DELL' is legible; seller claims Latitude E7240 but that model is absent from the shortlist and no model number is visible in the photos.
+- It is weighing: Dell Latitude E7240 (0.4), Dell Latitude E7470 (0.2)
+- Only 'DELL' is legible; seller's claimed E7240 is not on the label and is outside the shortlist, so it cannot be confirmed.
 - no label, plate or settings screen was legible
 - 1 lines seen by both readers
-- the next candidate was only 0.15 behind
+- the next candidate was only 0.2 behind
 - 7 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -97,7 +98,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 580 NGN
 
 Conditions attached to this price:
-- Not identified: Only 'DELL' is legible; seller claims Latitude E7240 but that model is absent from the shortlist and no model number is visible in the photos.
+- Not identified: Only 'DELL' is legible; seller's claimed E7240 is not on the label and is outside the shortlist, so it cannot be confirmed.
 - Raised to the 5,000 NGN minimum this business publishes for this kind of item.
 - Brand name is Dell -> not proven remotely. Agent will confirm at pickup.
 - Model is latitude E7240 -> not proven remotely. Agent will confirm at pickup.

@@ -683,8 +683,9 @@ class Store:
         if code == "NO_PRICE_DATA" and r.get("model_key"):
             floor = q.get("floor")
             out["headline"] = "We know what it is. A person is pricing it."
+            what = "this kind of item" if r.get("named_type") else "this exact model"
             out["detail"] = (
-                f"It is a {r['model_key']}. We have no market price on file for this exact model "
+                f"It is a {r['model_key']}. We have no market price on file for {what} "
                 f"yet, so {business} will price it by hand and message you on WhatsApp."
                 + (f" It will not be below {int(floor):,} {cur}." if floor else "")
             )
@@ -744,6 +745,7 @@ def _result_record(result: CaseResult, report: str) -> dict:
         "category": c.category,
         "identified": result.identified,
         "model_key": c.model_key,
+        "named_type": c.named_type,
         "failure_code": c.failure_code,
         "reason": c.reason,
         "fraud_flags": list(c.fraud_flags),

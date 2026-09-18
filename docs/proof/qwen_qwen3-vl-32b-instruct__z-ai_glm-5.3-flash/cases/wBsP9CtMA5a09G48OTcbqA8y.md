@@ -1,24 +1,26 @@
 # Case wBsP9CtMA5a09G48OTcbqA8y
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  36332 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  31582 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: washing machine (confidence 0.95)
 - Made of: steel 60%, plastic 30%, carton 10%
-- Estimated weight: 25.0 kg (confidence 0.8)
+- Estimated weight: 25.0 kg (confidence 0.7)
 - Brand read off the item: Hisense
 - Model read off the item: nothing legible
 - Rating read: none
-- Label, plate or settings screen legible: no
-- Damage noted: box is slightly dented and creased, unit appears clean, no visible damage
+- Label, plate or settings screen legible: yes
+- Damage noted: box is slightly damaged and creased, plastic bag on top of unit, unit appears clean with no visible dents or rust
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: Hisense | Washing Machine | Bubble Clean | WASHING MACHINE | BUBBLE CLEAN
+- Text read: Hisense | Washing Machine | Bubble Clean | Safari Global Hubs
 
 ## Two readers
 - brand_text agreed by both readers
-- 1 transcribed lines was seen by only one reader, so it is treated as unread
+- item_type agreed by both readers
+- rating_text differed between the two readers, so it is treated as unread
+- 7 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
 - Hisense
@@ -29,18 +31,18 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 5 lines: Hisense | Washing Machine | Bubble | Clean | FARI GLOBAL HUBS
-- **corroborate** -> dispute. brand_text agreed by both readers; 1 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=washing machine brand=Hisense model=None label=False lines=5
-- **retrieval** -> ok. query='Hisense Hisense Washing Machine Bubble Clean WASHING MACHINE BUBBLE CLEAN Hisense 9kg Auto' hits=['Hisense WT3K9022U 9kg top loader', 'Hisense WTJA801 8kg top loader', 'Hisense WM5S1045 10kg front loader']
+- **corroborate** -> dispute. brand_text agreed by both readers; item_type agreed by both readers; rating_text differed between the two readers, so it is treated as unread; 7 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=washing machine brand=Hisense model=None label=True lines=4
+- **retrieval** -> ok. query='Hisense Hisense Washing Machine Bubble Clean Safari Global Hubs Hisense 9kg Automatic Wash' hits=['Hisense WT3K9022U 9kg top loader', 'Hisense WTJA801 8kg top loader', 'Hisense WM5S1045 10kg front loader']
 - **identify** -> ok. chosen=Hisense WT3K9022U margin=0.4
-- **abstain** -> abstain. top score 0.65
+- **abstain** -> abstain. top score 0.6
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 5640 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 13102 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 15050 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 2540 ms (replayed)
-- total across calls: 36332 ms; wall clock: 410 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5824 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 10942 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 12350 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2466 ms (replayed)
+- total across calls: 31582 ms; wall clock: 1884 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -48,17 +50,17 @@ Shortlist from the catalogue:
   - Hisense WTJA801 8kg top loader (0.4333)
   - Hisense WM5S1045 10kg front loader (0.4333)
 
-**Not identified: CANNOT_IDENTIFY.** The best candidate scored only 0.65, which is not sure enough to price.
+**Not identified: CANNOT_IDENTIFY.** The best candidate scored only 0.6, which is not sure enough to price.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 33% on the best answer. It is probably a Hisense WT3K9022U or a Hisense WTJA801, and the photos cannot separate them.**
+**Not sure enough to price: 36% on the best answer. It is probably a Hisense WT3K9022U or a Hisense WTJA801, and the photos cannot separate them.**
 
-- Identification confidence: 33% (unknown)
+- Identification confidence: 36% (unknown)
 - Price confidence: 20%
-- It is weighing: Hisense WT3K9022U (0.65), Hisense WTJA801 (0.25)
-- The best candidate scored only 0.65, which is not sure enough to price.
-- no label, plate or settings screen was legible
-- 5 lines seen by both readers
+- It is weighing: Hisense WT3K9022U (0.6), Hisense WTJA801 (0.2)
+- The best candidate scored only 0.6, which is not sure enough to price.
+- read off the item's own label
+- 4 lines seen by both readers
 - 7 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -97,7 +99,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 8,400 NGN
 
 Conditions attached to this price:
-- Not identified: The best candidate scored only 0.65, which is not sure enough to price.
+- Not identified: The best candidate scored only 0.6, which is not sure enough to price.
 - Hisense 9kg Automatic Washing Machine -> not proven remotely. Agent reads the rating plate.
 - Hisense 9kg Automatic Washing Machine -> not proven remotely. Agent reads the rating plate.
 - Hisense 9kg Automatic Washing Machine -> not proven remotely. Agent reads the rating plate.

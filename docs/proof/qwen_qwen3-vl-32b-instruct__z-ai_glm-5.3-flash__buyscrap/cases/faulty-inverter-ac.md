@@ -1,39 +1,42 @@
 # Case faulty-inverter-ac
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  22253 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  40145 ms
 
 ## What the engine saw
 - Presentation: single_unit
-- Category: split air conditioner (confidence 0.9)
-- Made of: plastic 40%, steel 30%, copper 20%, mixed_electronic 10%
-- Estimated weight: 35.0 kg (confidence 0.7)
+- Category: split air conditioner (confidence 0.95)
+- Made of: plastic 60%, steel 30%, copper 10%
+- Estimated weight: 25.0 kg (confidence 0.8)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: Dusty exterior, Yellowing plastic casing, Minor scratches on front panel, Handwritten red numbers '14,570' on side
+- Damage noted: dust and grime on surface, some minor scratches on casing, red handwritten number '14070' on front panel
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 - Text read: Inverter
 
 ## Two readers
+- item_type agreed by both readers
 - brand_text differed between the two readers, so it is treated as unread
+- model_text was seen by only one reader, so it is treated as unread
 - rating_text was seen by only one reader, so it is treated as unread
-- 10 transcribed lines was seen by only one reader, so it is treated as unread
+- serial_text was seen by only one reader, so it is treated as unread
+- 9 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## Chain
 - **ocr** -> ok. 0 lines: 
-- **corroborate** -> dispute. brand_text differed between the two readers, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; 10 transcribed lines was seen by only one reader, so it is treated as unread
+- **corroborate** -> dispute. item_type agreed by both readers; brand_text differed between the two readers, so it is treated as unread; model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 9 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=split air conditioner brand=None model=None label=True lines=1
 - **retrieval** -> empty. query='Inverter Faulty inverter AC available for sale. Location: Oshodi, Lagos State Price: 60,00' hits=[]
 - **gate** -> abstain. no candidates and no model text
 - **condition** -> not working. by the seller's own account
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 6778 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 13246 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 2229 ms (replayed)
-- total across calls: 22253 ms; wall clock: 197 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 18349 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 17937 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3859 ms (replayed)
+- total across calls: 40145 ms; wall clock: 1363 ms
 
 ## Identification
 No catalogue candidates matched.
@@ -80,11 +83,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Open the front grille of the indoor unit and photograph the filters and coil.
 
 ## Price
-**46,953 to 105,070 NGN** (priced as material, width 0.7646, method material_floor, 0 comparable prices)
+**17,956 to 39,700 NGN** (priced as material, width 0.7542, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 35 kg of plastic 40%, steel 30%, copper 20%, mixed_electronic 10% (rates for mixed_electronic, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 25 kg of plastic 60%, steel 30%, copper 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 79,100 NGN
+Scrap floor: 30,250 NGN
 
 Conditions attached to this price:
 - Not identified: No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.

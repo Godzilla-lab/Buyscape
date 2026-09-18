@@ -1,6 +1,6 @@
 # Case xdMNB5jwsl5wXNJJQSpz3z8l
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0007  |  16044 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  15701 ms
 
 ## What the engine saw
 - Presentation: sealed_new
@@ -11,17 +11,15 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: unit appears new, still in original packaging, box slightly damaged with creases and tape marks
+- Damage noted: none
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: Bona | AIR CONDITIONER
+- Text read: Bona | AIR CONDITIONER | KC KENRICK
 
 ## Two readers
 - brand_text was read by one reader and confirmed by OCR
-- model_text was seen by only one reader, so it is treated as unread
-- rating_text was seen by only one reader, so it is treated as unread
-- serial_text was seen by only one reader, so it is treated as unread
-- 6 transcribed lines was seen by only one reader, so it is treated as unread
+- 1 transcribed lines was seen by only one reader, so it is treated as unread
+- item_type was read by only one reader, so it is kept but not confirmed
 
 ## OCR read off the photos
 - KCKENRK
@@ -31,16 +29,16 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 4 lines: KCKENRK | Bona | AIR CONDITIONER | INVERTER
-- **corroborate** -> dispute. brand_text was read by one reader and confirmed by OCR; model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 6 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=split air conditioner brand=Bona model=None label=False lines=2
-- **retrieval** -> empty. query='Bona Bona AIR CONDITIONER High quality solar air conditioner, 10 years warranty, very low ' hits=[]
+- **corroborate** -> dispute. brand_text was read by one reader and confirmed by OCR; 1 transcribed lines was seen by only one reader, so it is treated as unread; item_type was read by only one reader, so it is kept but not confirmed
+- **read_evidence** -> ok. category=split air conditioner brand=Bona model=None label=False lines=3
+- **retrieval** -> empty. query='Bona Bona AIR CONDITIONER KC KENRICK High quality solar air conditioner, 10 years warranty' hits=[]
 - **gate** -> abstain. no candidates and no model text
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 5295 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 8173 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 2576 ms (replayed)
-- total across calls: 16044 ms; wall clock: 602 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4536 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 9029 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2136 ms (replayed)
+- total across calls: 15701 ms; wall clock: 2160 ms
 
 ## Identification
 No catalogue candidates matched.
@@ -54,7 +52,8 @@ No catalogue candidates matched.
 - Price confidence: 18%
 - No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.
 - no label, plate or settings screen was legible
-- 2 lines seen by both readers
+- 3 lines seen by both readers
+- the item_type was read by only one reader and is not confirmed
 - 8 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.

@@ -1,17 +1,17 @@
 # Case xi3EK9AeR27pR7Fqk76h00CV
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  17960 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  26282 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: generator (confidence 0.95)
 - Made of: steel 60%, plastic 30%, circuit_board 10%
-- Estimated weight: 45.0 kg (confidence 0.8)
+- Estimated weight: 25.0 kg (confidence 0.8)
 - Brand read off the item: Perkins
 - Model read off the item: nothing legible
 - Rating read: 15kVA
 - Label, plate or settings screen legible: yes
-- Damage noted: minor scuff marks on casing, dirt and grime on surface, open lid with foam lining visible
+- Damage noted: minor dirt and wear on exterior, open lid with visible foam lining
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 - Text read: Perkins | 15kVA
@@ -19,6 +19,7 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 ## Two readers
 - brand_text agreed by both readers
 - rating_text agreed by both readers
+- item_type agreed by both readers
 - model_text was seen by only one reader, so it is treated as unread
 - 3 transcribed lines was seen by only one reader, so it is treated as unread
 
@@ -30,18 +31,18 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 4 lines: 000T3 | Perkins | SOUNDPRDOFNESE GENERITON | 15KVA
-- **corroborate** -> dispute. brand_text agreed by both readers; rating_text agreed by both readers; model_text was seen by only one reader, so it is treated as unread; 3 transcribed lines was seen by only one reader, so it is treated as unread
+- **corroborate** -> dispute. brand_text agreed by both readers; rating_text agreed by both readers; item_type agreed by both readers; model_text was seen by only one reader, so it is treated as unread; 3 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=generator brand=Perkins model=None label=True lines=2
 - **retrieval** -> ok. query='Perkins 15kVA Perkins 15kVA Original Perkins diesel generator 3 phase 100% copper coil 15 ' hits=['Perkins P150 150kVA', 'Perkins P100 100kVA', 'Lutian LT3900 3.5kVA', 'Senwei SW3500 3.5kVA']
-- **identify** -> refused. chosen=None None margin=0.0
+- **identify** -> refused. chosen=Perkins None margin=0.0
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 5189 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 3855 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 5772 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 3144 ms (replayed)
-- total across calls: 17960 ms; wall clock: 413 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4929 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 11127 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 7172 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3054 ms (replayed)
+- total across calls: 26282 ms; wall clock: 1594 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -50,7 +51,7 @@ Shortlist from the catalogue:
   - Lutian LT3900 3.5kVA (0.15)
   - Senwei SW3500 3.5kVA (0.15)
 
-**Not identified: CANNOT_IDENTIFY.** Label clearly reads Perkins 15kVA soundproof diesel generator, but no shortlist entry matches 15kVA and no model number is legible on the plate.
+**Not identified: CANNOT_IDENTIFY.** Label clearly reads Perkins 15kVA soundproof diesel, but no model designation is legible and no shortlist entry matches the 15kVA rating.
 
 ## How sure the engine is (back office)
 **Not sure enough to price: 5% on the best answer. It is probably a Perkins P150 or a Perkins P100, and the photos cannot separate them.**
@@ -58,7 +59,7 @@ Shortlist from the catalogue:
 - Identification confidence: 5% (unknown)
 - Price confidence: 16%
 - It is weighing: Perkins P150 (0.1), Perkins P100 (0.1)
-- Label clearly reads Perkins 15kVA soundproof diesel generator, but no shortlist entry matches 15kVA and no model number is legible on the plate.
+- Label clearly reads Perkins 15kVA soundproof diesel, but no model designation is legible and no shortlist entry matches the 15kVA rating.
 - read off the item's own label
 - 2 lines seen by both readers
 - the next candidate was only 0.0 behind
@@ -98,14 +99,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Photo of the engine, showing the recoil starter and carburettor.
 
 ## Price
-**8,213 to 23,130 NGN** (priced as material, width 0.9518, method material_floor, 0 comparable prices)
+**4,563 to 12,850 NGN** (priced as material, width 0.9518, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 45 kg of steel 60%, plastic 30%, circuit_board 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 25 kg of steel 60%, plastic 30%, circuit_board 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 18,450 NGN
+Scrap floor: 10,250 NGN
 
 Conditions attached to this price:
-- Not identified: Label clearly reads Perkins 15kVA soundproof diesel generator, but no shortlist entry matches 15kVA and no model number is legible on the plate.
+- Not identified: Label clearly reads Perkins 15kVA soundproof diesel, but no model designation is legible and no shortlist entry matches the 15kVA rating.
 - Original Perkins diesel generator -> not proven remotely. Agent will confirm at pickup.
 - 3 phase -> not proven remotely. Agent will confirm at pickup.
 - 100% copper coil -> not proven remotely. Agent opens the side cover and inspects the windings.

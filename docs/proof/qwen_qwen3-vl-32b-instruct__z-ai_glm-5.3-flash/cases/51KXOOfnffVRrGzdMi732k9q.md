@@ -1,42 +1,46 @@
 # Case 51KXOOfnffVRrGzdMi732k9q
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  24164 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  55076 ms
 
 ## What the engine saw
-- Presentation: sealed_new
-- Category: split air conditioner (confidence 0.9)
-- Made of: plastic 60%, steel 30%, copper 10%
-- Estimated weight: 25.0 kg (confidence 0.7)
+- Presentation: single_unit
+- Category: split air conditioner (confidence 0.95)
+- Made of: plastic 60%, steel 30%, copper_bare 10%
+- Estimated weight: 35.0 kg (confidence 0.8)
 - Brand read off the item: LG
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: item wrapped in plastic film, no visible damage to unit or packaging
+- Damage noted: unit wrapped in plastic film, no visible damage or wear
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: LG | LGY
+- Text read: LG | LGE
 
 ## Two readers
 - brand_text agreed by both readers
+- item_type agreed by both readers
 - model_text was seen by only one reader, so it is treated as unread
+- rating_text was seen by only one reader, so it is treated as unread
+- serial_text was seen by only one reader, so it is treated as unread
+- 5 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
 - G
 
 ## Chain
 - **ocr** -> ok. 1 lines: G
-- **corroborate** -> dispute. brand_text agreed by both readers; model_text was seen by only one reader, so it is treated as unread
+- **corroborate** -> dispute. brand_text agreed by both readers; item_type agreed by both readers; model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 5 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=split air conditioner brand=LG model=None label=False lines=2
-- **retrieval** -> ok. query='LG LG LGY Few Months FOREIGN USED Super clean, tested Okay, Air conditioner Working perfec' hits=['LG S4-Q09 1HP', 'LG S4-Q18 2HP', 'LG S4-Q12 1.5HP']
+- **retrieval** -> ok. query='LG LG LGE Few Months FOREIGN USED Super clean, tested Okay, Air conditioner Working perfec' hits=['LG S4-Q09 1HP', 'LG S4-Q18 2HP', 'LG S4-Q12 1.5HP']
 - **identify** -> refused. chosen=LG None margin=0.0
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 4129 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 8279 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 7490 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 4266 ms (replayed)
-- total across calls: 24164 ms; wall clock: 514 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5630 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 6734 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 38927 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3785 ms (replayed)
+- total across calls: 55076 ms; wall clock: 1876 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -44,15 +48,15 @@ Shortlist from the catalogue:
   - LG S4-Q18 2HP (0.4)
   - LG S4-Q12 1.5HP (0.38)
 
-**Not identified: CANNOT_IDENTIFY.** LG split AC confirmed by logo, but no model or capacity marking is legible to distinguish 1HP/1.5HP/2HP.
+**Not identified: CANNOT_IDENTIFY.** LG split AC confirmed by logo, but no printed model or capacity text is legible; all three S4-Q variants fit equally.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 14% on the best answer. It is probably a LG S4-Q09 or a LG S4-Q12, and the photos cannot separate them.**
+**Not sure enough to price: 23% on the best answer. It is probably a LG S4-Q09 1HP or a LG S4-Q12 1.5HP, and the photos cannot separate them.**
 
-- Identification confidence: 14% (unknown)
+- Identification confidence: 23% (unknown)
 - Price confidence: 14%
-- It is weighing: LG S4-Q09 (0.3), LG S4-Q12 (0.3)
-- LG split AC confirmed by logo, but no model or capacity marking is legible to distinguish 1HP/1.5HP/2HP.
+- It is weighing: LG S4-Q09 1HP (0.5), LG S4-Q12 1.5HP (0.5)
+- LG split AC confirmed by logo, but no printed model or capacity text is legible; all three S4-Q variants fit equally.
 - no label, plate or settings screen was legible
 - 2 lines seen by both readers
 - the next candidate was only 0.0 behind
@@ -92,14 +96,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Open the front grille of the indoor unit and photograph the filters and coil.
 
 ## Price
-**9,075 to 39,700 NGN** (priced as material, width 1.2558, method material_floor, 0 comparable prices)
+**12,705 to 55,580 NGN** (priced as material, width 1.2558, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 25 kg of plastic 60%, steel 30%, copper 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 35 kg of plastic 60%, steel 30%, copper_bare 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 30,250 NGN
+Scrap floor: 42,350 NGN
 
 Conditions attached to this price:
-- Not identified: LG split AC confirmed by logo, but no model or capacity marking is legible to distinguish 1HP/1.5HP/2HP.
+- Not identified: LG split AC confirmed by logo, but no printed model or capacity text is legible; all three S4-Q variants fit equally.
 - Few Months FOREIGN USED -> not proven remotely. Agent will confirm at pickup.
 - Super clean -> not proven remotely. Agent checks pressures with manifold gauges.
 - tested Okay -> not proven remotely. Agent runs the unit and measures amps with a clamp meter.

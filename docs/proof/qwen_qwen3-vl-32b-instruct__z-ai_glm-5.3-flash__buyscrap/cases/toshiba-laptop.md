@@ -1,41 +1,42 @@
 # Case toshiba-laptop
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  27431 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0013  |  80974 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: laptop (confidence 0.95)
-- Made of: plastic 60%, steel 20%, circuit_board 10%, copper_insulated 10%
+- Made of: plastic 60%, steel 20%, circuit_board 10%, copper 10%
 - Estimated weight: 2.5 kg (confidence 0.7)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: screen is smudged and dusty, keyboard has missing or damaged keys, case shows wear and scuffs
+- Damage noted: screen is smudged and dirty, keyboard has some worn keys, case shows minor scuffs and wear
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 
 ## Two readers
+- item_type agreed by both readers
 - brand_text differed between the two readers, so it is treated as unread
-- 4 transcribed lines was seen by only one reader, so it is treated as unread
+- 3 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
 - 7
 
 ## Chain
 - **ocr** -> ok. 1 lines: 7
-- **corroborate** -> dispute. brand_text differed between the two readers, so it is treated as unread; 4 transcribed lines was seen by only one reader, so it is treated as unread
+- **corroborate** -> dispute. item_type agreed by both readers; brand_text differed between the two readers, so it is treated as unread; 3 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=laptop brand=None model=None label=False lines=0
 - **retrieval** -> ok. query='A fairly used Toshiba laptop with switch issue for sale at #30,000 For more information ca' hits=['Toshiba Satellite C55', 'Tecno Camon 30', 'Tecno Spark 30', 'Infinix Hot 30', 'Infinix Note 30']
 - **identify** -> refused. chosen=None None margin=None
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 5434 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 7339 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 11601 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 3057 ms (replayed)
-- total across calls: 27431 ms; wall clock: 230 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 24709 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 29594 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 14424 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 12247 ms (replayed)
+- total across calls: 80974 ms; wall clock: 1316 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -45,15 +46,15 @@ Shortlist from the catalogue:
   - Infinix Hot 30 (0.2)
   - Infinix Note 30 (0.2)
 
-**Not identified: CANNOT_IDENTIFY.** No legible label or model text; blurry design looks like an older Satellite series, so the exact model (e.g. C55) cannot be confirmed.
+**Not identified: CANNOT_IDENTIFY.** No legible label or model text; the pictured laptop looks like an older Toshiba Satellite, so the C55 shortlist entry cannot be confirmed.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 12% on the best answer. It is probably a Toshiba Satellite C55, and the photos cannot separate them.**
+**Not sure enough to price: 14% on the best answer. It is probably a Toshiba Satellite C55, and the photos cannot separate them.**
 
-- Identification confidence: 12% (unknown)
+- Identification confidence: 14% (unknown)
 - Price confidence: 18%
-- It is weighing: Toshiba Satellite C55 (0.3)
-- No legible label or model text; blurry design looks like an older Satellite series, so the exact model (e.g. C55) cannot be confirmed.
+- It is weighing: Toshiba Satellite C55 (0.35)
+- No legible label or model text; the pictured laptop looks like an older Toshiba Satellite, so the C55 shortlist entry cannot be confirmed.
 - no label, plate or settings screen was legible
 - the two readers agreed on nothing legible
 - 8 claims are still unproven, 0 are supported
@@ -92,12 +93,12 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 ## Price
 **5,000 to 5,000 NGN** (priced as material, width 0.0, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 2.5 kg of plastic 60%, steel 20%, circuit_board 10%, copper_insulated 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 2.5 kg of plastic 60%, steel 20%, circuit_board 10%, copper 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 1,225 NGN
+Scrap floor: 3,100 NGN
 
 Conditions attached to this price:
-- Not identified: No legible label or model text; blurry design looks like an older Satellite series, so the exact model (e.g. C55) cannot be confirmed.
+- Not identified: No legible label or model text; the pictured laptop looks like an older Toshiba Satellite, so the C55 shortlist entry cannot be confirmed.
 - Raised to the 5,000 NGN minimum this business publishes for this kind of item.
 - A fairly used Toshiba laptop -> not proven remotely. Agent will confirm at pickup.
 - with switch issue -> not proven remotely. Agent boots it, types on every row of keys and tests the charger port.

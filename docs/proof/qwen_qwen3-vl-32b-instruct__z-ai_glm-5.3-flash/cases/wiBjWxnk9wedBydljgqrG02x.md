@@ -1,39 +1,40 @@
 # Case wiBjWxnk9wedBydljgqrG02x
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  31107 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  29959 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: split air conditioner (confidence 0.95)
-- Made of: steel 60%, plastic 30%, copper 10%
-- Estimated weight: 45.0 kg (confidence 0.8)
+- Made of: plastic 60%, steel 30%, copper_bare 10%
+- Estimated weight: 35.0 kg (confidence 0.8)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: some surface dirt and minor scratches on casing, fan grille appears intact
+- Damage noted: minor dust and grime on surface, some scratches on plastic casing
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 
 ## Two readers
+- item_type agreed by both readers
 - brand_text differed between the two readers, so it is treated as unread
 - rating_text was seen by only one reader, so it is treated as unread
-- 6 transcribed lines was seen by only one reader, so it is treated as unread
+- 5 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## Chain
 - **ocr** -> ok. 0 lines: 
-- **corroborate** -> dispute. brand_text differed between the two readers, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; 6 transcribed lines was seen by only one reader, so it is treated as unread
+- **corroborate** -> dispute. item_type agreed by both readers; brand_text differed between the two readers, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; 5 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=split air conditioner brand=None model=None label=True lines=0
 - **retrieval** -> ok. query='The Haier Thermocool Supercool Premium Split Air Conditioner is everything one could want ' hits=['Haier Thermocool HSU-12 1.5HP']
-- **identify** -> ok. chosen=Haier Thermocool HSU-12 margin=None
+- **identify** -> ok. chosen=Haier Thermocool HSU-12 1.5HP margin=None
 - **abstain** -> abstain. top score 0.55
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 5319 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 6504 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 18142 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 1142 ms (replayed)
-- total across calls: 31107 ms; wall clock: 307 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 6635 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 8658 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 13229 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 1437 ms (replayed)
+- total across calls: 29959 ms; wall clock: 1265 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -42,11 +43,11 @@ Shortlist from the catalogue:
 **Not identified: CANNOT_IDENTIFY.** The best candidate scored only 0.55, which is not sure enough to price.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 26% on the best answer. It is probably a Haier Thermocool HSU-12, and the photos cannot separate them.**
+**Not sure enough to price: 26% on the best answer. It is probably a Haier Thermocool HSU-12 1.5HP, and the photos cannot separate them.**
 
 - Identification confidence: 26% (unknown)
 - Price confidence: 24%
-- It is weighing: Haier Thermocool HSU-12 (0.55)
+- It is weighing: Haier Thermocool HSU-12 1.5HP (0.55)
 - The best candidate scored only 0.55, which is not sure enough to price.
 - read off the item's own label
 - the two readers agreed on nothing legible
@@ -78,11 +79,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Open the front grille of the indoor unit and photograph the filters and coil.
 
 ## Price
-**46,311 to 77,130 NGN** (priced as material, width 0.4993, method material_floor, 0 comparable prices)
+**32,770 to 55,580 NGN** (priced as material, width 0.5163, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 45 kg of steel 60%, plastic 30%, copper 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 35 kg of plastic 60%, steel 30%, copper_bare 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 59,850 NGN
+Scrap floor: 42,350 NGN
 
 Conditions attached to this price:
 - Not identified: The best candidate scored only 0.55, which is not sure enough to price.

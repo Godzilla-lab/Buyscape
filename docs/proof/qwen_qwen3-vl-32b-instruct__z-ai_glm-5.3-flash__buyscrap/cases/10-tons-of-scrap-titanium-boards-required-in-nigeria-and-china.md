@@ -1,48 +1,51 @@
 # Case 10-tons-of-scrap-titanium-boards-required-in-nigeria-and-china
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  23060 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0017  |  55590 ms
 
 ## What the engine saw
 - Presentation: single_unit
-- Category: metal plate (confidence 0.9)
+- Category: industrial plate (confidence 0.9)
 - Made of: steel 90%, plastic 10%
 - Estimated weight: 15.0 kg (confidence 0.7)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: rust on top edge, dents and scratches on surface, chipped corner
+- Damage noted: rust stains on surface, chipped corner, dirt and grime
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 
+## Two readers
+- item_type agreed by both readers
+
 ## Chain
 - **ocr** -> ok. 0 lines: 
-- **corroborate** -> agree. nothing identifying was read by either
-- **read_evidence** -> ok. category=metal plate brand=None model=None label=False lines=0
+- **corroborate** -> agree. item_type agreed by both readers
+- **read_evidence** -> ok. category=industrial plate brand=None model=None label=False lines=0
 - **retrieval** -> ok. query='A collaborative venture between a leading Chinese industrial manufacturer and a Nigerian r' hits=['Tecno Spark 10']
 - **identify** -> refused. chosen=None None margin=None
 - **abstain** -> abstain. model refused
 - **weight** -> stated. 10000 kg from the seller's words
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 3655 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 7046 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 5824 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 6535 ms (replayed)
-- total across calls: 23060 ms; wall clock: 207 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 20483 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 11567 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 14091 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 9449 ms (replayed)
+- total across calls: 55590 ms; wall clock: 1718 ms
 
 ## Identification
 Shortlist from the catalogue:
   - Tecno Spark 10 (0.2)
 
-**Not identified: CANNOT_IDENTIFY.** Photo shows unidentified dark flat panels, not a Tecno Spark 10; no legible label and titanium content cannot be visually verified.
+**Not identified: CANNOT_IDENTIFY.** Photos show dark metal sheets/boards, not a phone; no legible label, and the only shortlist entry (Tecno Spark 10) is a handset with no supporting evidence. Material composition (titanium vs other metal) cannot be verified visually.
 
 ## How sure the engine is (back office)
 **0%: the photos do not say what this is.**
 
 - Identification confidence: 0% (unknown)
 - Price confidence: 14%
-- Photo shows unidentified dark flat panels, not a Tecno Spark 10; no legible label and titanium content cannot be visually verified.
+- Photos show dark metal sheets/boards, not a phone; no legible label, and the only shortlist entry (Tecno Spark 10) is a handset with no supporting evidence. Material composition (titanium vs other metal) cannot be verified visually.
 - no label, plate or settings screen was legible
 - the two readers agreed on nothing legible
 - 13 claims are still unproven, 0 are supported
@@ -93,7 +96,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 4,600,000 NGN
 
 Conditions attached to this price:
-- Not identified: Photo shows unidentified dark flat panels, not a Tecno Spark 10; no legible label and titanium content cannot be visually verified.
+- Not identified: Photos show dark metal sheets/boards, not a phone; no legible label, and the only shortlist entry (Tecno Spark 10) is a handset with no supporting evidence. Material composition (titanium vs other metal) cannot be verified visually.
 - The buyer is seeking approximately 10 tons (10,000 kg) of scrap titanium boards. -> not proven remotely. Weigh on the scale and photograph the display.
 - The buyer is interested in industrial titanium plates/sheets discarded or surplus from manufacturing, aerospace, or chemical processing. -> not proven remotely. Weigh on the scale and photograph the display.
 - The buyer accepts damaged or offcut titanium boards of any size or shape, provided they are primarily titanium. -> not proven remotely. Weigh on the scale and photograph the display.

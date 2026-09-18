@@ -1,43 +1,44 @@
 # Case 2wJtSRbSsufezYBcmO5dlKEU
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  27943 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  34172 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: laptop (confidence 0.95)
 - Made of: plastic 60%, steel 20%, circuit_board 10%, aluminium 10%
-- Estimated weight: 1.5 kg (confidence 0.8)
+- Estimated weight: 1.5 kg (confidence 0.7)
 - Brand read off the item: HP
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: screen has faint smudges, keyboard appears clean, no visible dents or cracks on casing
+- Damage noted: screen has reflections and glare, keyboard appears clean, no visible dents or cracks on body
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 - Text read: HP
 
 ## Two readers
 - brand_text agreed by both readers
+- item_type agreed by both readers
 - model_text was seen by only one reader, so it is treated as unread
 - 3 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## Chain
 - **ocr** -> ok. 0 lines: 
-- **corroborate** -> dispute. brand_text agreed by both readers; model_text was seen by only one reader, so it is treated as unread; 3 transcribed lines was seen by only one reader, so it is treated as unread
+- **corroborate** -> dispute. brand_text agreed by both readers; item_type agreed by both readers; model_text was seen by only one reader, so it is treated as unread; 3 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=laptop brand=HP model=None label=True lines=1
 - **retrieval** -> ok. query='HP HP Dell precision 3571
 intel core i7-12700h @ 2.3ghz
 12th gen
 16gb ram ddr5 (upgradable' hits=['HP 2000', 'HP 250 G7', 'HP Pavilion 15', 'HP EliteBook 840 G5', 'HP EliteBook 840 G6']
-- **identify** -> refused. chosen=None None margin=None
+- **identify** -> refused. chosen=None None margin=0.1
 - **abstain** -> abstain. model refused
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 6538 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 13299 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 3765 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 4341 ms (replayed)
-- total across calls: 27943 ms; wall clock: 129 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4782 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 13126 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 11068 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 5196 ms (replayed)
+- total across calls: 34172 ms; wall clock: 1144 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -47,17 +48,19 @@ Shortlist from the catalogue:
   - HP EliteBook 840 G5 (0.3)
   - HP EliteBook 840 G6 (0.3)
 
-**Not identified: CANNOT_IDENTIFY.** Conflicting evidence: seller claims a Dell Precision 3571, but the only legible text reads 'HP' and no model name is visible. No HP shortlist entry is supported by any printed model text, and the Dell claim is not stated on the item itself.
+**Not identified: CANNOT_IDENTIFY.** Only 'HP' is legible; seller claims a Dell Precision 3571, directly contradicting the visible HP branding. No HP model text readable, and a Dell model cannot be reconciled with the shortlist.
 
 ## How sure the engine is (back office)
-**0%: the photos do not say what this is.**
+**Not sure enough to price: 16% on the best answer. It is probably a HP Pavilion 15 or a HP 250 G7, and the photos cannot separate them.**
 
-- Identification confidence: 0% (unknown)
+- Identification confidence: 16% (unknown)
 - Price confidence: 14%
-- Conflicting evidence: seller claims a Dell Precision 3571, but the only legible text reads 'HP' and no model name is visible. No HP shortlist entry is supported by any printed model text, and the Dell claim is not stated on the item itself.
+- It is weighing: HP Pavilion 15 (0.3), HP 250 G7 (0.2)
+- Only 'HP' is legible; seller claims a Dell Precision 3571, directly contradicting the visible HP branding. No HP model text readable, and a Dell model cannot be reconciled with the shortlist.
 - read off the item's own label
 - 1 lines seen by both readers
-- 10 claims are still unproven, 0 are supported
+- the next candidate was only 0.1 behind
+- 11 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
 
@@ -81,7 +84,9 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 - [unverifiable_remote] 12th gen
 - [unverified] 16gb ram ddr5
     priced as: the smallest configuration this model shipped with. Agent opens System Information and reads the RAM
-- [unverifiable_remote] 16gb ram ddr5 (upgradable to 64gb)
+- [unverified] 16gb ram ddr5
+    priced as: the smallest configuration this model shipped with. Agent opens System Information and reads the RAM
+- [unverifiable_remote] upgradable to 64gb
     priced as: the smallest configuration this model shipped with. Agent opens System Information and reads the RAM
 - [unverified] 512gb
     priced as: the smallest drive this model shipped with. Agent reads the drive size from System Information
@@ -102,13 +107,14 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 660 NGN
 
 Conditions attached to this price:
-- Not identified: Conflicting evidence: seller claims a Dell Precision 3571, but the only legible text reads 'HP' and no model name is visible. No HP shortlist entry is supported by any printed model text, and the Dell claim is not stated on the item itself.
+- Not identified: Only 'HP' is legible; seller claims a Dell Precision 3571, directly contradicting the visible HP branding. No HP model text readable, and a Dell model cannot be reconciled with the shortlist.
 - Raised to the 5,000 NGN minimum this business publishes for this kind of item.
 - Dell precision 3571 -> not proven remotely. Agent will confirm at pickup.
 - intel core i7-12700h @ 2.3ghz -> not proven remotely. Agent will confirm at pickup.
 - 12th gen -> not proven remotely. Agent will confirm at pickup.
 - 16gb ram ddr5 -> not proven remotely. Agent opens System Information and reads the RAM.
-- 16gb ram ddr5 (upgradable to 64gb) -> not proven remotely. Agent opens System Information and reads the RAM.
+- 16gb ram ddr5 -> not proven remotely. Agent opens System Information and reads the RAM.
+- upgradable to 64gb -> not proven remotely. Agent opens System Information and reads the RAM.
 - 512gb -> not proven remotely. Agent reads the drive size from System Information.
 - Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on paper and take one photo with the paper next to the laptop..
 - Required evidence 'lid_open_screen_on' was not supplied -> not proven remotely. Photo of the laptop open with the screen switched on, showing the desktop..

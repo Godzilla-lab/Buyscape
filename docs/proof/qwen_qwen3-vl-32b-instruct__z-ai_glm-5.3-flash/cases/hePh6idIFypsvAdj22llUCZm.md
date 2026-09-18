@@ -1,26 +1,28 @@
 # Case hePh6idIFypsvAdj22llUCZm
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  33184 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  32999 ms
 
 ## What the engine saw
 - Presentation: single_unit
-- Category: phone (confidence 0.95)
-- Made of: aluminium 40%, glass 30%, plastic 20%, circuit_board 10%
+- Category: phone (confidence 1.0)
+- Made of: plastic 70%, steel 20%, circuit_board 10%
 - Estimated weight: 0.2 kg (confidence 0.9)
-- Brand read off the item: Apple Inc.
+- Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: No visible damage to back panel or camera module.
+- Damage noted: none
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: iPhone 12 | Apple Inc.
+- Text read: iPhone 12 mini
 
 ## Two readers
+- item_type agreed by both readers
+- brand_text differed between the two readers, so it is treated as unread
 - model_text differed between the two readers, so it is treated as unread
 - serial_text differed between the two readers, so it is treated as unread
-- 7 transcribed lines was seen by only one reader, so it is treated as unread
-- brand_text was read by only one reader, so it is kept but not confirmed
+- rating_text was seen by only one reader, so it is treated as unread
+- 11 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
 - HERA
@@ -28,51 +30,52 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 2 lines: HERA | btn
-- **corroborate** -> dispute. model_text differed between the two readers, so it is treated as unread; serial_text differed between the two readers, so it is treated as unread; 7 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed
-- **read_evidence** -> ok. category=phone brand=Apple Inc. model=None label=True lines=2
-- **retrieval** -> ok. query='Apple Inc. iPhone 12 Apple Inc. * Foreign Used Grade A++*
+- **corroborate** -> dispute. item_type agreed by both readers; brand_text differed between the two readers, so it is treated as unread; model_text differed between the two readers, so it is treated as unread; serial_text differed between the two readers, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; 11 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=phone brand=None model=None label=True lines=1
+- **retrieval** -> ok. query='iPhone 12 mini * Foreign Used Grade A++*
 *iPhone 12 FU 64GB & 128GB*
-Neat' hits=['Apple iPhone 12', 'Apple iPhone 12 Pro', 'Apple iPhone 12 Pro Max', 'Apple iPhone XR', 'Apple iPhone XS']
-- **identify** -> ok. chosen=Apple iPhone 12 margin=0.7
-- **abstain** -> pass. confidence=0.72 margin=0.7
+Neatness: 10/10
+Scree' hits=['Apple iPhone 12', 'Apple iPhone 12 Pro', 'Apple iPhone 12 Pro Max', 'Apple iPhone XR', 'Apple iPhone XS']
+- **identify** -> ok. chosen=Apple iPhone 12 mini margin=0.55
+- **abstain** -> abstain. seller names another generation
 
 ## Timing
-- read_evidence on qwen/qwen3-vl-32b-instruct: 5115 ms (replayed)
-- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 13115 ms (replayed)
-- identify on z-ai/glm-5.3-flash: 9892 ms (replayed)
-- extract_claims on qwen/qwen3-vl-32b-instruct: 5062 ms (replayed)
-- total across calls: 33184 ms; wall clock: 558 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 7620 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 9491 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 9977 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 5911 ms (replayed)
+- total across calls: 32999 ms; wall clock: 1550 ms
 
 ## Identification
 Shortlist from the catalogue:
-  - Apple iPhone 12 (0.7667)
-  - Apple iPhone 12 Pro (0.5667)
-  - Apple iPhone 12 Pro Max (0.5)
-  - Apple iPhone XR (0.5)
-  - Apple iPhone XS (0.5)
+  - Apple iPhone 12 (0.4667)
+  - Apple iPhone 12 Pro (0.2667)
+  - Apple iPhone 12 Pro Max (0.2)
+  - Apple iPhone XR (0.2)
+  - Apple iPhone XS (0.2)
 
-**Answer: Apple iPhone 12** (margin 0.7)
+**Not identified: EVIDENCE_INCOMPLETE.** The two readers disagreed about the brand and the answer's 'Apple' is not what the OCR read off the item or what the seller said. This needs a clear photo of the brand on the item.
 
 ## How sure the engine is (back office)
-**72% sure this is a Apple iPhone 12.**
+**Not sure enough to price: 51% on the best answer. It is probably a Apple iPhone 12 mini or a Apple iPhone 12, and the photos cannot separate them.**
 
-- Identification confidence: 72% (likely)
-- Price confidence: 40%
-- It is weighing: Apple iPhone 12 (0.9), Apple iPhone 12 Pro (0.2), Apple iPhone 12 Pro Max (0.1)
+- Identification confidence: 51% (unsure)
+- Price confidence: 14%
+- It is weighing: Apple iPhone 12 mini (0.85), Apple iPhone 12 (0.3)
+- The two readers disagreed about the brand and the answer's 'Apple' is not what the OCR read off the item or what the seller said. This needs a clear photo of the brand on the item.
 - read off the item's own label
 - 1 lines seen by both readers
-- the brand was read by only one reader and is not confirmed
 - 12 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
 
 ## What the seller is asked for next (shown in the app)
-1. [PHOTO] Write the code {code} on paper and take one photo with the paper next to the phone.
-   _why: this is needed before the price can be confirmed_
-2. [PHOTO] Photo of the front with the screen switched on, showing the home screen.
-   _why: this is needed before the price can be confirmed_
-3. [PHOTO] Photo of the back of the phone.
-   _why: this is needed before the price can be confirmed_
+1. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: If you have the box, photograph the label showing the model, storage and IMEI. Then, still filming, do this on the item's own screen and hold it steady so the writing can be read: open settings then About, showing the model name and storage. Then, without stopping the video: Pull out the SIM tray and photograph the open slot. Finish with: A short clip: press power, unlock, then open the camera app. Keep filming the whole time. Do not cut between clips.
+   _why: two readings of these photos disagreed about what is written on the item_
+2. [PHOTO] Screenshot of Settings then About, showing the model name and storage.
+   _why: nothing on the item says which model this is_
+3. [PHOTO] Dial *#06# and screenshot the IMEI that appears.
+   _why: nothing on the item says which model this is_
 
 ## What the seller is asked (only they know these)
 - Roughly how old is it, in years?
@@ -102,13 +105,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
-**44,426 to 312,200 NGN** (priced as a working item, width 1.5017, method uncalibrated_wide, 12 comparable prices)
+**18 to 69 NGN** (priced as material, width 1.1667, method material_floor, 0 comparable prices)
 
-12 used asking prices, 20th to 80th percentile 271,000 to 446,000 NGN, converted to a buy range with the 0.45 to 0.7 ask-to-buy spread, then reduced by 0.3643 for unproven claims, floored at the scrap value 181.
+This item was not identified, so it is priced as material rather than as a working item: 0.2 kg of plastic 70%, steel 20%, circuit_board 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 181 NGN
+Scrap floor: 50 NGN
 
 Conditions attached to this price:
+- Not identified: The two readers disagreed about the brand and the answer's 'Apple' is not what the OCR read off the item or what the seller said. This needs a clear photo of the brand on the item.
 - Foreign Used Grade A++ -> not proven remotely. Agent will confirm at pickup.
 - iPhone 12 FU 64GB & 128GB -> not proven remotely. Agent reads storage from Settings.
 - iPhone 12 FU 64GB & 128GB -> not proven remotely. Agent reads storage from Settings.
