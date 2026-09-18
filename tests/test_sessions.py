@@ -131,3 +131,43 @@ def test_remove_photo_and_unknown_session(engine):
         store.load("../nope")
     with pytest.raises(ValueError, match="no photos"):
         store.submit(s["id"], {})
+
+
+def _mp4(seconds: int = 3, fps: int = 10) -> str:
+    """A tiny clip, one sharp lettered frame per second, as a data URL."""
+    import tempfile
+
+    import cv2
+    import numpy as np
+
+    path = Path(tempfile.mkdtemp()) / "clip.mp4"
+    writer = cv2.VideoWriter(str(path), cv2.VideoWriter_fourcc(*"mp4v"), float(fps), (96, 64))
+    for i in range(seconds * fps):
+        frame = np.full((64, 96, 3), 90, np.uint8)
+        if i % fps == fps // 2:
+            cv2.putText(frame, f"S{i // fps}", (8, 44), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255), 2)
+        writer.write(frame)
+    writer.release()
+    return "data:video/mp4;base64," + base64.b64encode(path.read_bytes()).decode()
+
+
+def test_a_clip_becomes_stills_the_engine_reads_and_the_seller_does_not_see(engine):
+    store = engine.store
+    s = store.create({"category": "E-waste", "text": "old laptop"})
+    sid = s["id"]
+    s = store.add_photo(sid, {"slot": "extra", "name": "clip.mp4", "data": _mp4()})
+    saved = store.load(sid)
+    kinds = [p["kind"] for p in saved["photos"]]
+    assert kinds.count("clip") == 1 and kinds.count("frame") >= 2
+    frames = [p for p in saved["photos"] if p["kind"] == "frame"]
+    assert all(p["from"] == "extra__01.mp4" and p["phash"] for p in frames)
+    assert all((store.dir / sid / p["file"]).exists() for p in frames)
+    # The engine sees the stills, the seller sees only the clip they recorded.
+    assert [p.name for p in store._images(saved)] == [p["file"] for p in frames]
+    shown = s["extra"]
+    assert [f["kind"] for f in shown] == ["clip"]
+    assert all(p["kind"] in ("clip", "frame") for p in store.office_view(saved)["photos"])
+    # Removing the clip takes its stills with it.
+    s = store.remove_photo(sid, "extra__01.mp4")
+    assert store.load(sid)["photos"] == []
+    assert sorted(p.name for p in (store.dir / sid).iterdir()) == ["session.json"]

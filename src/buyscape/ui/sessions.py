@@ -227,17 +227,33 @@ class Store:
             "at": _now(),
         }
         session["photos"].append(record)
+        if kind == "clip":
+            # The readers look at stills, so the clip becomes its sharpest
+            # frames, one per stretch of the walk. They belong to the clip:
+            # the seller never sees them and they go when it goes.
+            for frame in sample_frames(path, folder, path.stem):
+                session["photos"].append(
+                    {
+                        "slot": slot,
+                        "file": frame.name,
+                        "kind": "frame",
+                        "from": path.name,
+                        "phash": _phash(frame),
+                        "at": record["at"],
+                    }
+                )
         self._save(session)
         return self.seller_view(session)
 
     def remove_photo(self, sid: str, file: str) -> dict:
         session = self.load(sid)
-        keep = [p for p in session["photos"] if p["file"] != file]
-        if len(keep) != len(session["photos"]):
-            target = self.dir / session["id"] / SAFE.sub("", file)
-            if target.exists():
-                target.unlink()
-            session["photos"] = keep
+        gone = [p for p in session["photos"] if p["file"] == file or p.get("from") == file]
+        if gone:
+            for p in gone:
+                target = self.dir / session["id"] / SAFE.sub("", p["file"])
+                if target.exists():
+                    target.unlink()
+            session["photos"] = [p for p in session["photos"] if p not in gone]
             self._save(session)
         return self.seller_view(session)
 
@@ -320,8 +336,9 @@ class Store:
 
     def _images(self, session: dict) -> list[Path]:
         order = {s.id: i for i, s in enumerate(self.protocol_for(session.get("category")).shots)}
-        photos = [p for p in session["photos"] if p["kind"] == "photo"]
-        photos.sort(key=lambda p: (order.get(p["slot"], 99), p["file"]))
+        photos = [p for p in session["photos"] if p["kind"] in ("photo", "frame")]
+        # Photos first in protocol order, then the stills cut from clips.
+        photos.sort(key=lambda p: (p["kind"] == "frame", order.get(p["slot"], 99), p["file"]))
         folder = self.dir / session["id"]
         return [folder / p["file"] for p in photos if (folder / p["file"]).exists()][:8]
 
@@ -377,6 +394,8 @@ class Store:
         shape = Shape(self.protocol_for(session.get("category")), session["code"])
         by_slot: dict[str, list[dict]] = {}
         for p in session["photos"]:
+            if p["kind"] == "frame":
+                continue
             by_slot.setdefault(p["slot"], []).append(
                 {"file": p["file"], "kind": p["kind"], "url": self._url(session, p["file"])}
             )
