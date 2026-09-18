@@ -266,3 +266,51 @@ def test_sessions_can_live_on_a_mounted_disk(tmp_path, monkeypatch):
     assert eng.store.dir == tmp_path / "disk"
     s = eng.store.create({"category": "Iron"})
     assert (tmp_path / "disk" / s["id"] / "session.json").exists()
+
+
+def test_the_service_keeps_itself_awake_through_its_public_address(monkeypatch):
+    """A free host sleeps after fifteen quiet minutes; the service asks after
+    its own health through the public address so it is never quiet."""
+    import threading
+    import urllib.request
+
+    from buyscape.ui import server
+
+    hits = []
+    done = threading.Event()
+
+    class Resp:
+        def __enter__(self): return self
+        def __exit__(self, *a): pass
+        def read(self, n=-1): return b"ok"
+
+    def fake_open(url, timeout=0):
+        hits.append(url)
+        done.set()
+        return Resp()
+
+    monkeypatch.setattr(urllib.request, "urlopen", fake_open)
+    stop = threading.Event()
+    server.keep_awake("http://127.0.0.1:9/", every_s=0.01, stop=stop)
+    assert done.wait(2)
+    stop.set()
+    assert hits[0] == "http://127.0.0.1:9/health"
+
+
+def test_health_answers_without_touching_anything(tmp_path, monkeypatch):
+    import json
+    import threading
+    import urllib.request
+
+    from buyscape.ui.server import make_server
+
+    monkeypatch.setenv("BUYSCAPE_PRESET", "fake")
+    server = make_server(ROOT, port=0)
+    server.engine.store.dir = tmp_path
+    threading.Thread(target=server.serve_forever, daemon=True).start()
+    try:
+        with urllib.request.urlopen(f"http://127.0.0.1:{server.server_address[1]}/health", timeout=5) as r:
+            body = json.loads(r.read())
+        assert r.status == 200 and body["ok"] is True and body["valuing"] is False
+    finally:
+        server.shutdown()

@@ -21,6 +21,7 @@ import json
 import os
 import re
 import threading
+import time
 import webbrowser
 from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -420,6 +421,10 @@ class Handler(BaseHTTPRequestHandler):
         try:
             if not parts or (parts[0] == "s" and len(parts) == 2):
                 self._page("seller")
+            elif parts == ["health"]:
+                # Cheap on purpose: a watcher calls this every few minutes
+                # and it must never touch a model, the market or the disk.
+                self._json(200, {"ok": True, "tenant": eng.tenant.tenant, "valuing": not eng.store.valuing._value})
             elif parts in (["office"], ["bench"], ["office", "questions"]):
                 if self._staff(url):
                     self._page(parts[-1])
@@ -528,6 +533,34 @@ def make_server(root: Path, host: str = "127.0.0.1", port: int = 8765, tenant: s
     return UiServer((host, port), Engine(root, tenant))
 
 
+# A free host puts a service to sleep after a quarter of an hour with no
+# request, and the next seller waits a minute while it wakes. So the
+# service asks after its own health every ten minutes through its public
+# address, which is a request like any other. Render sets the address in
+# RENDER_EXTERNAL_URL; BUYSCAPE_PUBLIC_URL works anywhere else. Nothing
+# happens without one, so a laptop run never pings anything.
+KEEP_AWAKE_EVERY_S = 600
+
+
+def keep_awake(public_url: str, every_s: float = KEEP_AWAKE_EVERY_S, stop: threading.Event | None = None) -> threading.Thread:
+    import urllib.request
+
+    target = public_url.rstrip("/") + "/health"
+    stop = stop or threading.Event()
+
+    def loop() -> None:
+        while not stop.wait(every_s):
+            try:
+                with urllib.request.urlopen(target, timeout=30) as r:
+                    r.read(64)
+            except Exception as exc:  # the host is asleep or the network is out: try again next time
+                print(f"keep-awake: {type(exc).__name__}: {exc}", flush=True)
+
+    t = threading.Thread(target=loop, name="keep-awake", daemon=True)
+    t.start()
+    return t
+
+
 def serve(
     root: Path, host: str = "127.0.0.1", port: int = 8765, open_browser: bool = True, tenant: str = "buyscrap_ng"
 ) -> None:
@@ -535,6 +568,10 @@ def serve(
     url = f"http://{host}:{server.server_address[1]}/"
     print(f"{server.engine.tenant.display_name}: seller page {url}  office {url}office  bench {url}bench")
     print(f"models: preset {server.engine.preset}, mode {server.engine.mode}. Ctrl+C stops it.")
+    public = os.environ.get("BUYSCAPE_PUBLIC_URL") or os.environ.get("RENDER_EXTERNAL_URL")
+    if public:
+        keep_awake(public)
+        print(f"keeping {public} awake every {KEEP_AWAKE_EVERY_S // 60} minutes", flush=True)
     if open_browser:
         threading.Timer(0.5, webbrowser.open, args=(url,)).start()
     try:
