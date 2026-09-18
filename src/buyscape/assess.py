@@ -195,7 +195,7 @@ def capture_requests(
                     "the photos show more than one item",
                 )
             )
-        if reading.screenshot_of_gallery:
+        if reading.screenshot_of_gallery and not reading.serial_text:
             asks.append(
                 CaptureRequest(
                     "own_photo",
