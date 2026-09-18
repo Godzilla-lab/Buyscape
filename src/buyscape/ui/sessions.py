@@ -61,6 +61,23 @@ Valuer = Callable[[Case, str], tuple[CaseResult, str]]
 """(case, tenant name) -> (result, report markdown). The server supplies it."""
 
 
+def _trim_memory() -> None:
+    """Hand freed memory back to the host after a valuation.
+
+    The OCR engine and the image buffers are released, but on Linux the
+    allocator keeps the pages unless asked, and a 512 MB host counts what is
+    held, not what is used.
+    """
+    import ctypes
+    import gc
+
+    gc.collect()
+    try:
+        ctypes.CDLL("libc.so.6").malloc_trim(0)
+    except (OSError, AttributeError):
+        pass  # not glibc: nothing to trim, nothing to do
+
+
 def _shrink(path: Path) -> Path:
     """Downscale a photo to MAX_PHOTO_SIDE, keeping the way up it was taken.
 
@@ -150,6 +167,10 @@ class Store:
         self.catalogue_categories = catalogue_categories
         self.valuer = valuer
         self.lock = threading.Lock()
+        # One valuation at a time. The readers are network bound but the OCR
+        # and the image buffers are not, and on a 512 MB host two at once is
+        # what gets the process killed. A second seller waits half a minute.
+        self.valuing = threading.Semaphore(1)
 
     # ----- tenant facing -----
 
@@ -365,13 +386,15 @@ class Store:
             self._save(session)
 
         def work() -> None:
-            try:
-                self._value(session, progress)
-            except Exception as exc:  # the seller must never wait for nothing
-                session["status"] = "failed"
-                session["error"] = f"{type(exc).__name__}: {exc}"
-                self._save(session)
-            self._backup(session)
+            with self.valuing:
+                try:
+                    self._value(session, progress)
+                except Exception as exc:  # the seller must never wait for nothing
+                    session["status"] = "failed"
+                    session["error"] = f"{type(exc).__name__}: {exc}"
+                    self._save(session)
+                self._backup(session)
+                _trim_memory()
 
         threading.Thread(target=work, daemon=True).start()
         return self.seller_view(session)

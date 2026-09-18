@@ -22,6 +22,12 @@ from ..providers.base import ImageRef
 
 # Below this the detector is guessing at noise, a bolt head or a reflection.
 MIN_SCORE = 0.6
+# The engine sees a copy no larger than this. The detector's memory grows
+# with the square of the side: four 1600 pixel frames peaked at 760 MB above
+# the loaded model, four 960 pixel frames at 270, and a plate photographed
+# up close is still legible at 960. On a 512 MB host this is the difference
+# between working and being killed.
+OCR_MAX_SIDE = 960
 
 OcrReader = Callable[[tuple[ImageRef, ...]], list[str]]
 """Photos in, legible lines out. Injected so tests never load the model."""
@@ -46,11 +52,25 @@ class _RapidReader:
                 # It announces every model file it loads at INFO, and resets
                 # its own logger level from this setting on construction.
                 logging.getLogger("RapidOCR").setLevel(logging.WARNING)
-                self._engine = RapidOCR(params={"Global.log_level": "warning"})
+                self._engine = RapidOCR(
+                    params={
+                        "Global.log_level": "warning",
+                        "Global.max_side_len": OCR_MAX_SIDE,
+                        # Two threads read a plate in well under a second; more
+                        # only adds per-thread buffers on a small host.
+                        "EngineConfig.onnxruntime.intra_op_num_threads": 2,
+                    }
+                )
             return [line for image in images for line in self._read(image)]
 
     def _read(self, image: ImageRef) -> list[str]:
-        result = self._engine(str(image.path))
+        import numpy as np
+        from PIL import Image
+
+        with Image.open(image.path) as im:
+            im.thumbnail((OCR_MAX_SIDE, OCR_MAX_SIDE))
+            frame = np.asarray(im.convert("RGB"))[:, :, ::-1].copy()  # the engine wants BGR
+        result = self._engine(frame)
         lines: list[str] = []
         for text, score in zip(result.txts or (), result.scores or ()):
             text = str(text).strip()
