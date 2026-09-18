@@ -36,6 +36,12 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **read_evidence** -> ok. category=split air conditioner brand=BLUE STAR model=BS-9FS label=True lines=4
 - **gate** -> abstain. multiple items in frame
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4357 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 21834 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2135 ms (replayed)
+- total across calls: 28326 ms; wall clock: 524 ms
+
 ## Identification
 No catalogue candidates matched.
 

@@ -32,6 +32,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> refused. chosen=Samsung None margin=0.1
 - **abstain** -> abstain. model refused
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5013 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 5601 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 20508 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2007 ms (replayed)
+- total across calls: 33129 ms; wall clock: 329 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Samsung AR12 1.5HP (0.7)

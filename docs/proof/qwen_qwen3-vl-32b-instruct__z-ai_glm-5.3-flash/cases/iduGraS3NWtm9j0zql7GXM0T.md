@@ -35,6 +35,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> ok. chosen=TCL TWF120 margin=0.6
 - **abstain** -> abstain. seller names another generation
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4303 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 6896 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 9013 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2852 ms (replayed)
+- total across calls: 23064 ms; wall clock: 684 ms
+
 ## Identification
 Shortlist from the catalogue:
   - TCL TWF120 12kg front loader (0.8667)

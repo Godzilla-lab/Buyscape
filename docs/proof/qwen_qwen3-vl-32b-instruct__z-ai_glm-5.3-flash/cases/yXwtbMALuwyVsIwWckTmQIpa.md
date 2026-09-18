@@ -37,6 +37,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> ok. chosen=Tecno Camon 20 margin=0.4
 - **abstain** -> abstain. no label, top score 0.7
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 3990 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 11619 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 6303 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 6064 ms (replayed)
+- total across calls: 27976 ms; wall clock: 472 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Tecno Pova 6 (0.5)

@@ -36,6 +36,13 @@ Wash' hits=['Polystar PV-WD8K 8kg', 'Panasonic NA-W80 8kg', 'LG T2108 8kg top lo
 - **identify** -> refused. chosen=Hisense None margin=0.25
 - **abstain** -> abstain. model refused
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 9987 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 14898 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 22332 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2189 ms (replayed)
+- total across calls: 49406 ms; wall clock: 364 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Polystar PV-WD8K 8kg (0.2)

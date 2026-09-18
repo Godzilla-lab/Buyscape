@@ -35,6 +35,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> refused. chosen=Hisense None margin=0.1
 - **abstain** -> abstain. model refused
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 7008 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 16559 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 21337 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 1727 ms (replayed)
+- total across calls: 46631 ms; wall clock: 682 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Hisense WTJA801 8kg top loader (0.4333)

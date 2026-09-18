@@ -34,6 +34,12 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> label. named from the label: SAMSUNG S20+ 5G, not in the catalogue
 - **abstain** -> pass. confidence=0.45 from the label
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4907 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 10979 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2338 ms (replayed)
+- total across calls: 18224 ms; wall clock: 2635 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Samsung Galaxy S21 (0.5)

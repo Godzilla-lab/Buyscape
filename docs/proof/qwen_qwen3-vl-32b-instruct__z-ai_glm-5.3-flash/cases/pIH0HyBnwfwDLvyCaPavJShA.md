@@ -36,6 +36,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> ok. chosen=Senwei SW3500 margin=0.75
 - **abstain** -> abstain. seller names another generation
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5183 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 4895 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 7480 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3060 ms (replayed)
+- total across calls: 20618 ms; wall clock: 353 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Senwei SW3500 3.5kVA (0.7)

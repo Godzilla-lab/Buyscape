@@ -22,6 +22,12 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **gate** -> lot. priced by material, identification skipped
 - **weight** -> stated. 10000 kg from the seller's words
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4326 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 14379 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 6214 ms (replayed)
+- total across calls: 24919 ms; wall clock: 522 ms
+
 ## Identification
 No catalogue candidates matched.
 

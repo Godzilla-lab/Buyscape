@@ -31,6 +31,13 @@ Intel corei' hits=['Dell Latitude 7490', 'Dell Latitude 5490', 'Dell Latitude E7
 - **identify** -> refused. chosen=None None margin=0.1
 - **abstain** -> abstain. model refused
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 6758 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 10218 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 5244 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3828 ms (replayed)
+- total across calls: 26048 ms; wall clock: 126 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Dell Latitude 7490 (0.3)

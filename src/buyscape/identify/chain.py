@@ -11,6 +11,9 @@ The listing title is never an input. It is the answer key.
 
 from __future__ import annotations
 
+from concurrent.futures import ThreadPoolExecutor
+from typing import Callable
+
 import re
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -19,6 +22,7 @@ from ..providers.base import CallMeta, CostMeter, ImageRef, VisionProvider
 from ..providers.tasks import Identification, Reading, identify, read_evidence
 from .catalogue import Entry, search, tokens
 from .corroborate import corroborate
+from .merge import merge_readings
 from .ocr import OcrReader
 
 # Two candidates within this score of each other is a coin toss, so refuse.
@@ -489,6 +493,7 @@ def run(
     category_hint: str | None = None,
     corroborator: VisionProvider | None = None,
     ocr: OcrReader | None = None,
+    progress: Callable[[str], None] | None = None,
 ) -> ChainResult:
     """Run the whole chain. Never raises for a bad item, it returns a failure."""
     result = ChainResult()
@@ -502,31 +507,50 @@ def run(
     # Link 1: read the item, twice where a second reader is configured. Only
     # what both readers independently produced is treated as read, because a
     # single model will invent a plate code and cite its own invention.
-    reading, meta = read_evidence(reader, images)
-    meter.record(meta)
-    second: Reading | None = None
-    if corroborator is not None:
-        try:
-            second, meta_b = read_evidence(corroborator, images)
-            meter.record(meta_b)
-        except Exception as exc:
-            # A safety net that disappears when it is busy is not a safety net.
-            # Five of six air conditioner errors on 4 Sep were single reader
-            # answers at 90 percent confidence, taken while the second reader
-            # was rate limited. An outage still produces a quote, but never a
-            # confident identification.
-            result.corroboration_failed = True
-            result.links.append(LinkLog("corroborate", "unavailable", str(exc)[:120]))
-    # A third witness of a different kind: OCR reads glyphs and cannot compose
-    # a plate, so it can confirm what one model read but never add to it.
-    ocr_lines: list[str] = []
-    if ocr is not None:
-        try:
-            ocr_lines = ocr(images)
-            result.ocr_lines = ocr_lines
-            result.links.append(LinkLog("ocr", "ok", f"{len(ocr_lines)} lines: {' | '.join(ocr_lines)[:120]}"))
-        except Exception as exc:
-            result.links.append(LinkLog("ocr", "unavailable", str(exc)[:120]))
+    # The three witnesses do not depend on each other, so they look at the
+    # photos at the same time: a seller waits for the slowest one, not the sum.
+    if progress:
+        progress("reading")
+    # Each photo is its own call, so the wait is one photo's worth, not the
+    # sum, and a reading is the merge of what every photo yielded.
+    with ThreadPoolExecutor(max_workers=2 * len(images) + 1) as pool:
+        first_jobs = [pool.submit(read_evidence, reader, (img,)) for img in images]
+        second_jobs = [pool.submit(read_evidence, corroborator, (img,)) for img in images] if corroborator is not None else []
+        ocr_job = pool.submit(ocr, images) if ocr is not None else None
+        firsts = []
+        for job in first_jobs:
+            r, m = job.result()
+            meter.record(m)
+            firsts.append(r)
+        reading = merge_readings(firsts)
+        meta = m
+        second: Reading | None = None
+        if second_jobs:
+            try:
+                seconds = []
+                for job in second_jobs:
+                    r, m_b = job.result()
+                    meter.record(m_b)
+                    seconds.append(r)
+                second = merge_readings(seconds)
+            except Exception as exc:
+                # A safety net that disappears when it is busy is not a safety
+                # net. Five of six air conditioner errors on 4 Sep were single
+                # reader answers at 90 percent confidence, taken while the
+                # second reader was rate limited. An outage still produces a
+                # quote, but never a confident identification.
+                result.corroboration_failed = True
+                result.links.append(LinkLog("corroborate", "unavailable", str(exc)[:120]))
+        # A third witness of a different kind: OCR reads glyphs and cannot
+        # compose a plate, so it can confirm what one model read, never add.
+        ocr_lines: list[str] = []
+        if ocr_job is not None:
+            try:
+                ocr_lines = ocr_job.result()
+                result.ocr_lines = ocr_lines
+                result.links.append(LinkLog("ocr", "ok", f"{len(ocr_lines)} lines: {' | '.join(ocr_lines)[:120]}"))
+            except Exception as exc:
+                result.links.append(LinkLog("ocr", "unavailable", str(exc)[:120]))
     check = corroborate(reading, second, ocr_lines)
     reading = check.reading
     if second is not None or ocr_lines:
@@ -569,7 +593,11 @@ def run(
     result.presentation = reading.presentation or "single_unit"
     if reading.stock_photo_suspected:
         result.fraud_flags.append("looks like a catalogue or stock image")
-    if reading.screenshot_of_gallery:
+    # A phone photographed showing someone else's advert is a fraud signal.
+    # A laptop photographed showing its own About screen is the protocol
+    # being followed, and it carries a serial number, which a gallery never
+    # does. The serial is what tells the two apart.
+    if reading.screenshot_of_gallery and not reading.serial_text:
         result.fraud_flags.append("screenshot of a gallery rather than a photo of the item")
     if result.fraud_flags:
         result.links.append(LinkLog("forensics", "flag", "; ".join(result.fraud_flags)))
@@ -647,6 +675,8 @@ def run(
         return result
 
     # Link 3: the reasoner ranks the shortlist with the photos present.
+    if progress:
+        progress("deciding")
     ident, meta2 = identify(
         reasoner, images, reading, [e.key for e, _ in hits], seller_text
     )

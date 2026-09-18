@@ -34,6 +34,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> ok. chosen=Kemage KM5000I margin=None
 - **abstain** -> pass. confidence=0.47 margin=None
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5572 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 9018 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 3910 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3384 ms (replayed)
+- total across calls: 21884 ms; wall clock: 434 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Kemage KM10000 10kVA (0.4333)
@@ -85,11 +92,7 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Photo of the engine, showing the recoil starter and carburettor.
 
 ## Price
-**1,409 to 2,941 NGN** (priced as material, width 0.7039, method scrap_band_only, 0 comparable prices)
-
-No usable comparable sales (0 found, 2 needed), so the range comes from the published Lagos buy band for this category, reduced by 0.6634 for unproven claims.
-
-Scrap floor: 2,125 NGN
+**NO_PRICE_DATA.** Only 0 comparable asking prices were found and there is no published band for this category, so no honest range can be produced. Nothing below the 2,125 NGN floor.
 
 Conditions attached to this price:
 - Evidence flag: looks like a catalogue or stock image

@@ -36,6 +36,12 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **read_evidence** -> ok. category=paint brand=Dulux Trade model=None label=True lines=10
 - **gate** -> lot. priced by material, identification skipped
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 8427 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 30336 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 4475 ms (replayed)
+- total across calls: 43238 ms; wall clock: 916 ms
+
 ## Identification
 No catalogue candidates matched.
 

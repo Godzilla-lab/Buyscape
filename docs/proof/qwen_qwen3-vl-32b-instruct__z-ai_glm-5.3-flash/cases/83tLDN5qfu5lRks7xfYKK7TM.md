@@ -1,24 +1,27 @@
 # Case 83tLDN5qfu5lRks7xfYKK7TM
 
-Photos: 5  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  23537 ms
+Photos: 5  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0034  |  291940 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: laptop (confidence 0.95)
-- Made of: plastic 60%, steel 25%, circuit_board 10%, aluminium 5%
-- Estimated weight: 2.1 kg (confidence 0.8)
+- Made of: plastic 60%, steel 30%, circuit_board 10%
+- Estimated weight: 1.8 kg (confidence 0.8)
 - Brand read off the item: ASUS
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: screen has visible scratches and smudges, keyboard keys show slight wear, left edge of palm rest has minor scuffing
+- Damage noted: minor scuffs on lid, no visible damage to base, screen has visible smudges and scratches, keyboard appears clean, no missing keys, touchpad surface is intact, plastic casing shows minor scuffs, Minor scratches on the palm rest, Screen is off, no visible damage, Screen has visible smudges and scratches, Keyboard appears clean, no visible damage, Chassis shows minor wear around edges, Minor scuff marks on palm rest, Screen has faint smudges
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: ASUS | ASUS | ASUS | ASUS
+- Text read: ASUS | POSTED ON JI | NICK MARK ENTERPRISE | Intel Core i3 | Windows 10 | Model: X555LJ | Intel Core i5
 
 ## Two readers
 - brand_text agreed by both readers
-- 8 transcribed lines was seen by only one reader, so it is treated as unread
+- serial_text agreed by both readers
+- model_text differed between the two readers, so it is treated as unread
+- rating_text was seen by only one reader, so it is treated as unread
+- 11 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
 - ASUS
@@ -30,13 +33,24 @@ Photos: 5  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 6 lines: ASUS | POSTED ON II | NICK MARK ENTERPRISE | ASUS | ASUS | AEUS
-- **corroborate** -> dispute. brand_text agreed by both readers; 8 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=laptop brand=ASUS model=None label=True lines=4
-- **retrieval** -> empty. query='ASUS ASUS ASUS ASUS ASUS Asus X555LA
-Core i5 
-8GB RAM 1TB HDD
-Windows 10' hits=[]
+- **corroborate** -> dispute. brand_text agreed by both readers; serial_text agreed by both readers; model_text differed between the two readers, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; 11 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=laptop brand=ASUS model=None label=True lines=7
+- **retrieval** -> empty. query='ASUS ASUS POSTED ON JI NICK MARK ENTERPRISE Intel Core i3 Windows 10 Model: X555LJ Intel C' hits=[]
 - **gate** -> abstain. no candidates and no model text
+
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 19188 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 29776 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 44041 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 48287 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 44117 ms
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 15697 ms
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 15947 ms
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 23025 ms
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 22042 ms
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 26405 ms
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3415 ms (replayed)
+- total across calls: 291940 ms; wall clock: 48317 ms
 
 ## Identification
 No catalogue candidates matched.
@@ -50,7 +64,7 @@ No catalogue candidates matched.
 - Price confidence: 16%
 - No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.
 - read off the item's own label
-- 4 lines seen by both readers
+- 7 lines seen by both readers
 - 9 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -89,9 +103,9 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 ## Price
 **5,000 to 5,000 NGN** (priced as material, width 0.0, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 2.1 kg of plastic 60%, steel 25%, circuit_board 10%, aluminium 5% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 1.8 kg of plastic 60%, steel 30%, circuit_board 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 766 NGN
+Scrap floor: 522 NGN
 
 Conditions attached to this price:
 - Not identified: No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.

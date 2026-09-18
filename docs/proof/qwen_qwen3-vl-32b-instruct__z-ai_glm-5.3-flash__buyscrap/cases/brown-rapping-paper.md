@@ -21,6 +21,12 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **read_evidence** -> ok. category=packaging_waste brand=None model=None label=False lines=0
 - **gate** -> lot. priced by material, identification skipped
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4413 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 5714 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 614 ms (replayed)
+- total across calls: 10741 ms; wall clock: 645 ms
+
 ## Identification
 No catalogue candidates matched.
 

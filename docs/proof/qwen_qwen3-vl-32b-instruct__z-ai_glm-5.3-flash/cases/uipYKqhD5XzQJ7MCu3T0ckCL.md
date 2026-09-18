@@ -35,6 +35,13 @@ We can deliver Anywhere in N' hits=['Lutian LT3900 3.5kVA', 'Thermocool TC2700 2
 - **identify** -> ok. chosen=Lutian LT3990E margin=0.55
 - **abstain** -> abstain. seller names another generation
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4987 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 5715 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 25746 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3730 ms (replayed)
+- total across calls: 40178 ms; wall clock: 437 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Lutian LT3900 3.5kVA (0.55)

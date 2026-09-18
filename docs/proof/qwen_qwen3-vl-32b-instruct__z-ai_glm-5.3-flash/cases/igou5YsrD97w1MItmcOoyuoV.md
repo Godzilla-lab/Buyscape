@@ -33,6 +33,13 @@ Backlit ' hits=['Dell Inspiron 15 3000', 'Dell Latitude 7490', 'Dell Latitude 54
 - **identify** -> refused. chosen=Dell None margin=0.05
 - **abstain** -> abstain. model refused
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5320 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 10001 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 15372 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 5651 ms (replayed)
+- total across calls: 36344 ms; wall clock: 106 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Dell Inspiron 15 3000 (0.4333)

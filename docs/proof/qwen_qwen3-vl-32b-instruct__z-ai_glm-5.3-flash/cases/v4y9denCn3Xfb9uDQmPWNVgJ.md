@@ -34,6 +34,12 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **retrieval** -> empty. query='COROLLA COROLLA Corolla remote control petrol generator model cl7800E2r 100% copper coil w' hits=[]
 - **gate** -> abstain. no candidates and no model text
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 7062 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 6610 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2838 ms (replayed)
+- total across calls: 16510 ms; wall clock: 290 ms
+
 ## Identification
 No catalogue candidates matched.
 

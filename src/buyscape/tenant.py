@@ -97,6 +97,10 @@ class Tenant(BaseModel):
     minimums: dict = Field(default_factory=dict)
     refuses: list[Refusal] = Field(default_factory=list)
     grades: dict = Field(default_factory=dict)
+    # What a unit that does not work fetches against a working one, as a
+    # share of the working price, per category. Set by the business, applied
+    # only when the seller says it does not work or the photos show it.
+    dead_fraction: dict[str, list[float]] = Field(default_factory=dict)
     # Written by staff in the back office, kept in <tenant>.questions.yaml.
     questions: list[TenantQuestion] = Field(default_factory=list)
 
@@ -149,6 +153,13 @@ class Tenant(BaseModel):
         if entry and entry.protocol in protocols:
             return protocols[entry.protocol]
         return resolve(protocols, spoken)
+
+    def dead_fraction_for(self, category: str | None) -> tuple[float, float] | None:
+        band = self.dead_fraction.get((category or "").strip().lower()) or self.dead_fraction.get("default")
+        if not band or len(band) != 2:
+            return None
+        low, high = float(band[0]), float(band[1])
+        return (min(low, high), max(low, high))
 
     def questions_for(self, tenant_category: str | None) -> list[TenantQuestion]:
         want = (tenant_category or "").strip().lower()

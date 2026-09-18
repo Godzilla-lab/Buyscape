@@ -35,6 +35,12 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **retrieval** -> empty. query='SAGE TECH ELECTRICAL 1000W 1000W SOLAR GENERATOR SAGE TECH ELECTRICAL 1000W kWh We provide' hits=[]
 - **gate** -> abstain. no candidates and no model text
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4132 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 14262 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 696 ms (replayed)
+- total across calls: 19090 ms; wall clock: 394 ms
+
 ## Identification
 No catalogue candidates matched.
 

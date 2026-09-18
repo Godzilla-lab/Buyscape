@@ -29,6 +29,14 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **retrieval** -> ok. query='BLUE GATE BLUE GATE Faulty blue gate UPS available for sale. Location: Magodo Phase 2, Lag' hits=['Acer Aspire 5', 'Tecno Pova 5', 'Kemage KM6500 5.5kVA']
 - **identify** -> refused. chosen=Blue Gate None margin=None
 - **abstain** -> abstain. model refused
+- **condition** -> not working. by the seller's own account
+
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4277 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 9760 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 12294 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2617 ms (replayed)
+- total across calls: 28948 ms; wall clock: 220 ms
 
 ## Identification
 Shortlist from the catalogue:

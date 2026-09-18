@@ -38,6 +38,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> ok. chosen=Hisense WT3K9022U margin=0.4
 - **abstain** -> abstain. top score 0.55
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4826 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 11307 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 11672 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2540 ms (replayed)
+- total across calls: 30345 ms; wall clock: 491 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Hisense WT3K9022U 9kg top loader (0.8)

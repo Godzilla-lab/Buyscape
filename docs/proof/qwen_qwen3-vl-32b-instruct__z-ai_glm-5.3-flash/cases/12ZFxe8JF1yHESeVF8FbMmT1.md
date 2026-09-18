@@ -36,6 +36,13 @@ Touchscree' hits=['Dell Latitude E7470', 'Dell Latitude 7490', 'Dell Latitude 54
 - **identify** -> refused. chosen=None None margin=0.15
 - **abstain** -> abstain. model refused
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 9004 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 6187 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 14741 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 4742 ms (replayed)
+- total across calls: 34674 ms; wall clock: 153 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Dell Latitude E7470 (0.5)

@@ -39,6 +39,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> refused. chosen=SAYVUIT None margin=0.25
 - **abstain** -> abstain. model refused
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 7027 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 15193 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 13791 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3156 ms (replayed)
+- total across calls: 39167 ms; wall clock: 369 ms
+
 ## Identification
 Shortlist from the catalogue:
   - LG WM8 8kg twin tub (0.2667)

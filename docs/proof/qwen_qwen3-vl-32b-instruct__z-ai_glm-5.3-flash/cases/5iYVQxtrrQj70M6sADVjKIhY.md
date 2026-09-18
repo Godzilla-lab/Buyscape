@@ -33,6 +33,12 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **retrieval** -> empty. query='REDMI 13C IMEX diesel generator set, which consists of a diesel engine coupled to an elect' hits=[]
 - **gate** -> abstain. no candidates and no model text
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 11064 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 28346 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 1849 ms (replayed)
+- total across calls: 41259 ms; wall clock: 405 ms
+
 ## Identification
 No catalogue candidates matched.
 

@@ -46,6 +46,13 @@ Tru' hits=['Apple iPhone 12', 'Apple iPhone XS Max', 'Apple iPhone 11 Pro Max', 
 - **identify** -> ok. chosen=Apple iPhone 12 Pro Max margin=0.15
 - **abstain** -> abstain. top score 0.6
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4674 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 17477 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 7270 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 4285 ms (replayed)
+- total across calls: 33706 ms; wall clock: 708 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Apple iPhone 12 (0.3333)

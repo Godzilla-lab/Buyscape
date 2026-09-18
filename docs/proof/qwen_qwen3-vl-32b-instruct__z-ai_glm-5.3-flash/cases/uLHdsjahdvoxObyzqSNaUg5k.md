@@ -34,6 +34,13 @@ cold catalyst' hits=['LG S4-Q18 2HP', 'Midea MSAF-18 2HP', 'Hisense AS-18 2HP']
 - **identify** -> refused. chosen=None None margin=0.25
 - **abstain** -> abstain. model refused
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4281 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 14913 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 17360 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 4011 ms (replayed)
+- total across calls: 40565 ms; wall clock: 652 ms
+
 ## Identification
 Shortlist from the catalogue:
   - LG S4-Q18 2HP (0.2)

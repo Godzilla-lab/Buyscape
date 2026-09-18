@@ -38,6 +38,12 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> label. named from the label: FIRMAN SDG12000SE, not in the catalogue
 - **abstain** -> pass. confidence=0.9 from the label
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 7728 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 16493 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2139 ms (replayed)
+- total across calls: 26360 ms; wall clock: 384 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Sumec Firman SPG2900 2.8kVA (0.35)

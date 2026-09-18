@@ -35,6 +35,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> ok. chosen=Nokia 106 4G margin=None
 - **abstain** -> abstain. confidence 0.4: no label, plate or settings screen was legible; 2 lines seen by both readers; looks like a catalogue or stock image
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4502 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 11066 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 5914 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3486 ms (replayed)
+- total across calls: 24968 ms; wall clock: 709 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Nokia C32 (0.5)

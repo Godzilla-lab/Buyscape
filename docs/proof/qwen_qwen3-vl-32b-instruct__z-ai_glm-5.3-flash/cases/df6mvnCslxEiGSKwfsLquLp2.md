@@ -28,6 +28,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> refused. chosen=None None margin=None
 - **abstain** -> abstain. model refused
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4528 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 113129 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 21344 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 1670 ms (replayed)
+- total across calls: 140671 ms; wall clock: 448 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Apple iPhone 14 (0.5)

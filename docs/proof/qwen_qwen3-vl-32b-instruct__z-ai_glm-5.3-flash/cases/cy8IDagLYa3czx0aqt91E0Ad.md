@@ -45,6 +45,12 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> label. named from the label: STAR ARC WELDING GENERATOR-350, not in the catalogue
 - **abstain** -> pass. confidence=0.45 from the label
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 6768 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 18054 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3288 ms (replayed)
+- total across calls: 28110 ms; wall clock: 946 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Tiger TG950 0.95kVA (0.1833)

@@ -33,6 +33,13 @@ Screen ' hits=['Dell Latitude E7470', 'Dell Latitude 7490', 'Dell Latitude 5490'
 - **identify** -> refused. chosen=None None margin=None
 - **abstain** -> abstain. model refused
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5235 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 6683 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 4049 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3802 ms (replayed)
+- total across calls: 19769 ms; wall clock: 198 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Dell Latitude E7470 (0.5)

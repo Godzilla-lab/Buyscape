@@ -32,6 +32,13 @@ class AnswerReview:
     drafts: list[ClaimDraft] = field(default_factory=list)
     contradictions: list[str] = field(default_factory=list)
     notes: list[str] = field(default_factory=list)
+    # The seller said it does not work. That changes the basis of the price,
+    # not just a multiplier on it.
+    not_working: bool = False
+
+
+# Answers to "what does not work" that mean nothing is wrong.
+NOTHING_WRONG = {"none", "nothing", "no", "nil", "n/a", "na", "all good", "everything works", "works"}
 
 
 def unanswered(protocol: Protocol, answers: dict[str, str]) -> list[Question]:
@@ -82,6 +89,9 @@ def review_answers(
         )
         if said_no:
             out.notes.append(f"the seller says no to: {question.ask}")
+        if question.claim == "works" or question.id.startswith("works"):
+            if said_no or (question.kind == "text" and lowered.strip(" .!") not in NOTHING_WRONG):
+                out.not_working = True
 
         if not (question.checks_attr and entry):
             continue

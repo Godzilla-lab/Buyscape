@@ -1,23 +1,25 @@
 # Case laptop-2
 
-Photos: 2  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  25408 ms
+Photos: 2  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0015  |  111121 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: laptop (confidence 0.95)
-- Made of: plastic 60%, steel 20%, circuit_board 10%, aluminium 10%
-- Estimated weight: 2.5 kg (confidence 0.8)
+- Made of: plastic 40%, steel 30%, circuit_board 15%, aluminium 10%, rubber 5%
+- Estimated weight: 2.1 kg (confidence 0.8)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: screen reflection obscures details, keyboard and palm rest show minor wear
+- Damage noted: screen has faint reflections and smudges, keyboard appears clean, no visible dents or cracks on casing, keyboard keys appear worn, touchpad has minor smudges, plastic casing shows light scratches
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
-- Text read: Windows 7 | Intel Inside
+- Text read: Windows | Windows 7
 
 ## Two readers
-- 1 transcribed lines was seen by only one reader, so it is treated as unread
+- brand_text differed between the two readers, so it is treated as unread
+- model_text was seen by only one reader, so it is treated as unread
+- 5 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
 - 8
@@ -35,28 +37,36 @@ Photos: 2  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 33 lines: 8 | 2 | 3 | 5 | 6 | 7 | 9 | 0 | Q | w | E | R | T | Y | U | lock | A | D | F | G | H | K | L | Z | x | C | V | B | N | M
-- **corroborate** -> dispute. 1 transcribed lines was seen by only one reader, so it is treated as unread
+- **corroborate** -> dispute. brand_text differed between the two readers, so it is treated as unread; model_text was seen by only one reader, so it is treated as unread; 5 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=laptop brand=None model=None label=False lines=2
 - **forensics** -> flag. looks like a catalogue or stock image
-- **retrieval** -> ok. query='Windows 7 Intel Inside Battery is bad, but every other part is Ohk' hits=['Google Pixel 7']
+- **retrieval** -> ok. query='Windows Windows 7 Battery is bad, but every other part is Ohk' hits=['Google Pixel 7']
 - **identify** -> refused. chosen=None None margin=None
 - **abstain** -> abstain. model refused
+
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 72576 ms (replayed)
+- read_evidence on qwen/qwen3-vl-32b-instruct: 9961 ms
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 5998 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 10503 ms
+- identify on z-ai/glm-5.3-flash: 9572 ms
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2511 ms (replayed)
+- total across calls: 111121 ms; wall clock: 20121 ms
 
 ## Identification
 Shortlist from the catalogue:
   - Google Pixel 7 (0.2)
 
-**Not identified: CANNOT_IDENTIFY.** Item is an ASUS laptop (logo visible) but no model name/number is legible; the only shortlist entry, a phone, does not match.
+**Not identified: CANNOT_IDENTIFY.** Item is an ASUS laptop (Windows 7, Core i5 stickers), not the shortlisted Google Pixel 7; no model number is legible.
 
 Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 0% on the best answer. It is probably a Google Pixel 7, and the photos cannot separate them.**
+**0%: the photos do not say what this is.**
 
 - Identification confidence: 0% (unknown)
 - Price confidence: 22%
-- It is weighing: Google Pixel 7 (0.0)
-- Item is an ASUS laptop (logo visible) but no model name/number is legible; the only shortlist entry, a phone, does not match.
+- Item is an ASUS laptop (Windows 7, Core i5 stickers), not the shortlisted Google Pixel 7; no model number is legible.
 - no label, plate or settings screen was legible
 - 2 lines seen by both readers
 - looks like a catalogue or stock image
@@ -94,12 +104,12 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 ## Price
 **5,000 to 5,000 NGN** (priced as material, width 0.0, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 2.5 kg of plastic 60%, steel 20%, circuit_board 10%, aluminium 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 2.1 kg of plastic 40%, steel 30%, circuit_board 15%, aluminium 10%, rubber 5% (rates for plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 1,100 NGN
+Scrap floor: 1,076 NGN
 
 Conditions attached to this price:
-- Not identified: Item is an ASUS laptop (logo visible) but no model name/number is legible; the only shortlist entry, a phone, does not match.
+- Not identified: Item is an ASUS laptop (Windows 7, Core i5 stickers), not the shortlisted Google Pixel 7; no model number is legible.
 - Evidence flag: looks like a catalogue or stock image
 - Raised to the 5,000 NGN minimum this business publishes for this kind of item.
 - Battery is bad -> not proven remotely. Agent unplugs the charger and watches the battery for two minutes.

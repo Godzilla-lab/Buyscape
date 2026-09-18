@@ -32,6 +32,12 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **retrieval** -> empty. query='Nike Nike Imported shoe available at a discount price.' hits=[]
 - **gate** -> abstain. no candidates and no model text
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5919 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 11311 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 1537 ms (replayed)
+- total across calls: 18767 ms; wall clock: 789 ms
+
 ## Identification
 No catalogue candidates matched.
 

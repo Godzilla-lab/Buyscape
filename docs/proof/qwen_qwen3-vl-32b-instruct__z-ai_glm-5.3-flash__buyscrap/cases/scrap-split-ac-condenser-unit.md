@@ -22,6 +22,14 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **retrieval** -> ok. query='A scrap split AC condenser unit is available for sale. Location: Agege, Lagos State Price:' hits=['Infinix Note 50', 'Tecno Camon 50', 'Infinix Hot 50', 'Infinix Note 30', 'Infinix Note 40']
 - **identify** -> refused. chosen=None None margin=None
 - **abstain** -> abstain. model refused
+- **condition** -> not working. by the seller's own account
+
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4569 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 8363 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 6542 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3022 ms (replayed)
+- total across calls: 22496 ms; wall clock: 227 ms
 
 ## Identification
 Shortlist from the catalogue:

@@ -25,10 +25,10 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Callable
 
-from PIL import Image
+from PIL import Image, ImageOps
 from pydantic import ValidationError
 
-from ..media.frames import sample_frames
+from ..media.frames import sample_frames, sharpness
 from ..protocols.schema import Protocol
 from ..runner import Case, CaseResult
 from ..tenant import Tenant, TenantQuestion, load_questions, questions_path, save_questions
@@ -39,11 +39,44 @@ SAFE = re.compile(r"[^A-Za-z0-9._-]+")
 IMAGE_SUFFIXES = {".jpg", ".jpeg", ".png", ".webp"}
 HEIC_SUFFIXES = {".heic", ".heif"}
 VIDEO_SUFFIXES = {".mp4", ".mov", ".webm", ".3gp"}
+# A phone photo is 4000 pixels and two to three megabytes. A plate is still
+# legible at this size, and every reader call carries every photo: on the
+# first phone sessions four full frames were ten thousand image tokens and
+# the readers took thirty to a hundred seconds each. Halving the side cuts
+# the tokens by about four.
+MAX_PHOTO_SIDE = 1600
+# Variance of the Laplacian below which a photo is too blurred to read. A
+# sharp phone photo scores in the hundreds; motion blur and a smeared lens
+# score in the tens. Checked at upload so the seller hears it in a second,
+# not after a minute of model calls.
+BLUR_BELOW = 25.0
+# A label, plate or screen slot whose photo yields no OCR line at all, and is
+# not crisp, is a photo nobody can read.
+UNREADABLE_BELOW = 60.0
 # Two photos closer than this in perceptual hash are the same picture.
 DUPLICATE_DISTANCE = 6
 
 Valuer = Callable[[Case, str], tuple[CaseResult, str]]
 """(case, tenant name) -> (result, report markdown). The server supplies it."""
+
+
+def _shrink(path: Path) -> Path:
+    """Downscale a photo to MAX_PHOTO_SIDE, keeping the way up it was taken.
+
+    Phones record rotation in EXIF and re-encoding drops EXIF, so the pixels
+    are turned first; otherwise every plate would reach the readers sideways.
+    """
+    with Image.open(path) as im:
+        upright = im.getexif().get(0x0112, 1) in (None, 1)
+        if upright and max(im.size) <= MAX_PHOTO_SIDE:
+            return path
+        im = ImageOps.exif_transpose(im)
+        im.thumbnail((MAX_PHOTO_SIDE, MAX_PHOTO_SIDE))
+        out = path.with_suffix(".jpg")
+        im.convert("RGB").save(out, format="JPEG", quality=88)
+    if out != path:
+        path.unlink()
+    return out
 
 
 def _now() -> str:
@@ -223,6 +256,8 @@ class Store:
             path.unlink()
             path = jpeg
         kind = "clip" if suffix in VIDEO_SUFFIXES else "photo"
+        if kind == "photo":
+            path = _shrink(path)
         record = {
             "slot": slot,
             "file": path.name,
@@ -230,12 +265,15 @@ class Store:
             "phash": _phash(path) if kind == "photo" else None,
             "at": _now(),
         }
+        if kind == "photo":
+            record.update(self._quality(path, slot, session))
         session["photos"].append(record)
         if kind == "clip":
             # The readers look at stills, so the clip becomes its sharpest
             # frames, one per stretch of the walk. They belong to the clip:
             # the seller never sees them and they go when it goes.
             for frame in sample_frames(path, folder, path.stem):
+                frame = _shrink(frame)
                 session["photos"].append(
                     {
                         "slot": slot,
@@ -248,6 +286,38 @@ class Store:
                 )
         self._save(session)
         return self.seller_view(session)
+
+    def _quality(self, path: Path, slot: str, session: dict) -> dict:
+        """Blur and legibility, judged in a second, before any model call.
+
+        The warning never blocks: a seller with a poor camera still gets a
+        valuation, only a worse one. It tells them why while retaking is
+        still one tap away.
+        """
+        import cv2
+
+        frame = cv2.imread(str(path))
+        if frame is None:
+            return {}
+        score = round(sharpness(frame), 1)
+        out: dict = {"sharpness": score}
+        wants_text = False
+        try:
+            protocol = self.protocol_for(session.get("category"))
+            wants_text = any(s.id == slot and s.extract for s in protocol.shots)
+        except ValueError:
+            pass
+        if score < BLUR_BELOW:
+            out["warning"] = "This looks blurred. Hold still, get closer, and take it again."
+        elif wants_text and self.ocr is not None and score < UNREADABLE_BELOW:
+            try:
+                from ..providers.base import ImageRef
+
+                if not self.ocr((ImageRef(path),)):
+                    out["warning"] = "We could not read any writing in this one. Move closer to the label and try again."
+            except Exception:
+                pass
+        return out
 
     def remove_photo(self, sid: str, file: str) -> dict:
         session = self.load(sid)
@@ -277,9 +347,8 @@ class Store:
         if body.get("refused") is not None:
             session["refused"] = [SAFE.sub("", r) for r in body["refused"] if r]
 
+    def _value(self, session: dict, progress=None) -> None:
         images = self._images(session)
-        if not images:
-            raise ValueError("no photos yet: take at least one photo first")
         session["duplicates"] = self._duplicates(session)
 
         protocol = self.protocol_for(session.get("category"))
@@ -294,14 +363,15 @@ class Store:
             answers=dict(session["answers"]),
             refused_slots=set(session["refused"]),
             tenant_category=session.get("category"),
+            progress=progress,
         )
         result, report = self.valuer(case, self.tenant.tenant)
         (self.dir / session["id"] / "report.md").write_text(report)
         session["result"] = _result_record(result, report)
         session["result"]["pickup_protocol"] = list(protocol.pickup_protocol)
         session["status"] = self._status(session)
+        session["error"] = None
         self._save(session)
-        return self.seller_view(session)
 
     def settle(self, sid: str, body: dict) -> dict:
         """The human final price. Every one is a calibration row."""
@@ -451,7 +521,7 @@ class Store:
             if p["kind"] == "frame":
                 continue
             by_slot.setdefault(p["slot"], []).append(
-                {"file": p["file"], "kind": p["kind"], "url": self._url(session, p["file"])}
+                {"file": p["file"], "kind": p["kind"], "url": self._url(session, p["file"]), "warning": p.get("warning")}
             )
         shots = []
         for s in shape.shots():
@@ -474,6 +544,9 @@ class Store:
             "shots": shots,
             "extra": by_slot.get("extra", []),
             "questions": questions,
+            "valuing": session["status"] == "valuing",
+            "stage": session.get("stage") if session["status"] == "valuing" else None,
+            "error": session.get("error"),
             "outcome": self._outcome(session),
         }
 
@@ -504,6 +577,17 @@ class Store:
             out["headline"] = "Something went wrong on our side."
             out["detail"] = "Nothing was lost. Please press the button again in a minute."
             return out
+        if code == "NO_PRICE_DATA" and r.get("model_key"):
+            floor = q.get("floor")
+            out["headline"] = "We know what it is. A person is pricing it."
+            out["detail"] = (
+                f"It is a {r['model_key']}. We have no market price on file for this exact model "
+                f"yet, so {business} will price it by hand and message you on WhatsApp."
+                + (f" It will not be below {int(floor):,} {cur}." if floor else "")
+            )
+            out["conditions"] = _seller_conditions(r)
+            out["pickup"] = list(r.get("pickup_protocol") or [])
+            return out
         if code:
             out["headline"] = "We cannot price this from photos yet."
             out["detail"] = "An agent will look at it and call you."
@@ -512,7 +596,8 @@ class Store:
         low, high = int(q["low"]), int(q["high"])
         out["headline"] = f"{low:,} {cur}" if low == high else f"{low:,} to {high:,} {cur}"
         out["detail"] = (
-            "This is the offer before we see it. The final price is agreed at pickup and can only "
+            ("Priced as not working, as you told us. " if q.get("basis") == "not_working" else "")
+            + "This is the offer before we see it. The final price is agreed at pickup and can only "
             "hold or go up from the low end if what we find matches what you sent."
         )
         if q["weight_conditional"]:

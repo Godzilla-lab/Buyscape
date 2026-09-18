@@ -35,6 +35,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> refused. chosen=Bison None margin=0.0
 - **abstain** -> abstain. model refused
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 9028 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 11539 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 18697 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 1803 ms (replayed)
+- total across calls: 41067 ms; wall clock: 455 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Lutian LT3900 3.5kVA (0.3)

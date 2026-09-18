@@ -40,6 +40,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> ok. chosen=Hisense HSC-12000I margin=0.6
 - **abstain** -> abstain. seller names another generation
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 6501 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 21582 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 9560 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3338 ms (replayed)
+- total across calls: 40981 ms; wall clock: 730 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Hisense AS-12 1.5HP (0.51)

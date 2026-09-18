@@ -36,6 +36,12 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> label. named from the label: SUMEC FIRMAN SPG2500, not in the catalogue
 - **abstain** -> pass. confidence=0.45 from the label
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 9304 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 7816 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2221 ms (replayed)
+- total across calls: 19341 ms; wall clock: 519 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Sumec Firman SPG2900 2.8kVA (0.5)
@@ -90,11 +96,7 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Photo of the engine, showing the recoil starter and carburettor.
 
 ## Price
-**11,610 to 42,850 NGN** (priced as material, width 1.1472, method scrap_band_only, 0 comparable prices)
-
-No usable comparable sales (0 found, 2 needed), so the range comes from the published Lagos buy band for this category, reduced by 0.3492 for unproven claims.
-
-Scrap floor: 33,250 NGN
+**NO_PRICE_DATA.** Only 0 comparable asking prices were found and there is no published band for this category, so no honest range can be produced. Nothing below the 33,250 NGN floor.
 
 Conditions attached to this price:
 - Evidence flag: looks like a catalogue or stock image

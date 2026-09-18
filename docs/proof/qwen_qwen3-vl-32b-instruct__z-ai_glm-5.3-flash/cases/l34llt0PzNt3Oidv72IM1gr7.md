@@ -34,6 +34,13 @@ Windows 8' hits=['HP 2000', 'HP 250 G7', 'HP Pavilion 15', 'HP EliteBook 840 G5'
 - **identify** -> ok. chosen=Compaq Presario CQ60 margin=0.5
 - **abstain** -> abstain. top score 0.65
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 7541 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 14094 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 45027 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3614 ms (replayed)
+- total across calls: 70276 ms; wall clock: 190 ms
+
 ## Identification
 Shortlist from the catalogue:
   - HP 2000 (0.5)

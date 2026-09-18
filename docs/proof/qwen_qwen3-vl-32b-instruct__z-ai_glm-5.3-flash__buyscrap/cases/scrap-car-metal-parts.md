@@ -23,6 +23,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **corroborate** -> dispute. rating_text was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=automotive parts brand=None model=None label=False lines=0
 - **gate** -> lot. priced by material, identification skipped
+- **condition** -> not working. by the seller's own account
+
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5450 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 6264 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3956 ms (replayed)
+- total across calls: 15670 ms; wall clock: 203 ms
 
 ## Identification
 No catalogue candidates matched.

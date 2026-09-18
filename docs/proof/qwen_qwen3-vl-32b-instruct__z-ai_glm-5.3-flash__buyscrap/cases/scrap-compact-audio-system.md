@@ -32,6 +32,14 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **retrieval** -> ok. query='MINISTAR 3 DISC MINISTAR Description: This is a scrap compact audio system that is current' hits=['Lenovo IdeaPad 3', 'Acer Aspire 5', 'Tecno Pova 5', 'Kemage KM6500 5.5kVA', 'Lutian LT3900 3.5kVA']
 - **identify** -> refused. chosen=MINISTAR None margin=None
 - **abstain** -> abstain. model refused
+- **condition** -> not working. by the seller's own account
+
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5580 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 6062 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 5730 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 5332 ms (replayed)
+- total across calls: 22704 ms; wall clock: 2312 ms
 
 ## Identification
 Shortlist from the catalogue:

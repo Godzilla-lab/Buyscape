@@ -35,6 +35,13 @@ Intel Core i5-7350HQ
 - **identify** -> refused. chosen=None None margin=0.05
 - **abstain** -> abstain. model refused
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 8506 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 11947 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 19291 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 6094 ms (replayed)
+- total across calls: 45838 ms; wall clock: 127 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Dell Inspiron 15 3000 (0.4333)

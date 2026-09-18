@@ -39,6 +39,13 @@ Camera/ v' hits=['Nokia C32']
 - **identify** -> ok. chosen=NOKIA 110 margin=None
 - **abstain** -> abstain. confidence 0.4: no label, plate or settings screen was legible; 4 lines seen by both readers; looks like a catalogue or stock image
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4934 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 11586 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 5727 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3181 ms (replayed)
+- total across calls: 25428 ms; wall clock: 2624 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Nokia C32 (0.5)

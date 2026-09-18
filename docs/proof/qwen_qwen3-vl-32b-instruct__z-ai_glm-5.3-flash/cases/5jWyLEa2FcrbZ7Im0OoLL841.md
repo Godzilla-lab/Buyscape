@@ -1,6 +1,6 @@
 # Case 5jWyLEa2FcrbZ7Im0OoLL841
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  23897 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  30143 ms
 
 ## What the engine saw
 - Presentation: single_unit
@@ -36,28 +36,38 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 M2 MAX CHIP 
 64GB/1TB
 16inch
-Super n' hits=['Apple MacBook Pro 13-inch 2017', 'Apple MacBook Pro 17-inch 2011', 'Apple MacBook Air M1 2020', 'Apple MacBook Air 13-inch 2017']
-- **identify** -> refused. chosen=None None margin=None
+Super n' hits=['Apple MacBook Pro 13-inch M2 2022', 'Apple MacBook Air M2 2022', 'Apple MacBook Pro 13-inch 2017', 'Apple MacBook Pro 17-inch 2011', 'Apple MacBook Pro 14-inch M1 Pro 2021']
+- **identify** -> refused. chosen=None None margin=0.2
 - **abstain** -> abstain. model refused
+
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 6055 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 5610 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 14919 ms
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3559 ms (replayed)
+- total across calls: 30143 ms; wall clock: 15112 ms
 
 ## Identification
 Shortlist from the catalogue:
+  - Apple MacBook Pro 13-inch M2 2022 (0.4714)
+  - Apple MacBook Air M2 2022 (0.46)
   - Apple MacBook Pro 13-inch 2017 (0.4333)
   - Apple MacBook Pro 17-inch 2011 (0.4333)
-  - Apple MacBook Air M1 2020 (0.38)
-  - Apple MacBook Air 13-inch 2017 (0.3667)
+  - Apple MacBook Pro 14-inch M1 Pro 2021 (0.4143)
 
-**Not identified: CANNOT_IDENTIFY.** Laptop is a modern large MacBook Pro, but no shortlist entry matches; 'M2 Max' is only handwritten seller annotation, not a legible printed label, so the exact model cannot be confirmed.
+**Not identified: CANNOT_IDENTIFY.** Seller claims a 16-inch M2 Max, which is absent from the shortlist; the 'm2 max' text is handwritten, not a printed label, and no legible plate confirms chip, size or model. Photo alone cannot distinguish a 14-inch M1 Pro from a 16-inch chassis.
 
 ## How sure the engine is (back office)
-**0%: the photos do not say what this is.**
+**Not sure enough to price: 11% on the best answer. It is probably a Apple MacBook Pro 14-inch M1 Pro 2021 or a Apple MacBook Pro 13-inch M2 2022, and the photos cannot separate them.**
 
-- Identification confidence: 0% (unknown)
+- Identification confidence: 11% (unknown)
 - Price confidence: 14%
-- Laptop is a modern large MacBook Pro, but no shortlist entry matches; 'M2 Max' is only handwritten seller annotation, not a legible printed label, so the exact model cannot be confirmed.
+- It is weighing: Apple MacBook Pro 14-inch M1 Pro 2021 (0.3), Apple MacBook Pro 13-inch M2 2022 (0.1)
+- Seller claims a 16-inch M2 Max, which is absent from the shortlist; the 'm2 max' text is handwritten, not a printed label, and no legible plate confirms chip, size or model. Photo alone cannot distinguish a 14-inch M1 Pro from a 16-inch chassis.
 - no label, plate or settings screen was legible
 - 3 lines seen by both readers
 - the brand was read by only one reader and is not confirmed
+- the next candidate was only 0.2 behind
 - 10 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -103,7 +113,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 2,250 NGN
 
 Conditions attached to this price:
-- Not identified: Laptop is a modern large MacBook Pro, but no shortlist entry matches; 'M2 Max' is only handwritten seller annotation, not a legible printed label, so the exact model cannot be confirmed.
+- Not identified: Seller claims a 16-inch M2 Max, which is absent from the shortlist; the 'm2 max' text is handwritten, not a printed label, and no legible plate confirms chip, size or model. Photo alone cannot distinguish a 14-inch M1 Pro from a 16-inch chassis.
 - Raised to the 5,000 NGN minimum this business publishes for this kind of item.
 - UK Used MacBook Pro -> not proven remotely. Agent matches the serial on the sticker to the serial in System Information or the BIOS.
 - M2 MAX CHIP -> not proven remotely. Agent will confirm at pickup.

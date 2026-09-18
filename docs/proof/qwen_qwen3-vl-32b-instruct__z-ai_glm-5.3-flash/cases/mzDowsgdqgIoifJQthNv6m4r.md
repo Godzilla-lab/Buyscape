@@ -28,6 +28,12 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **retrieval** -> empty. query='Windows Uk used asus zephyrus g14 ga403rj, amd ryzen 9 6900hs /12th gen, 1tb ssd/16gb ram ' hits=[]
 - **gate** -> abstain. no candidates and no model text
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5185 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 7428 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 4793 ms (replayed)
+- total across calls: 17406 ms; wall clock: 127 ms
+
 ## Identification
 No catalogue candidates matched.
 

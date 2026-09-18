@@ -34,6 +34,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> refused. chosen=None None margin=0.25
 - **abstain** -> abstain. model refused
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 6534 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 12789 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 19531 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2629 ms (replayed)
+- total across calls: 41483 ms; wall clock: 338 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Hisense AS-09 1HP (0.6)

@@ -12,6 +12,7 @@ import json
 import re
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Callable
 
 import yaml
 
@@ -36,6 +37,20 @@ class SourceUnavailable(RuntimeError):
     """The source has nothing for this item. Callers must not substitute."""
 
 
+# Fewer cached comps than this and the live market is asked to add more.
+TOP_UP_BELOW = 6
+
+# Words in a title that mean the seller is offering a dead or damaged unit.
+# Such listings price the dead version of a model and are kept out of the
+# working band, where a 40,000 naira "faulty" laptop would drag the low end.
+FAULTY_WORDS = ("faulty", "for parts", "for part", "not working", "spoilt", "spoiled", "dead", "damaged", "cracked")
+
+
+def is_faulty_listing(title: str) -> bool:
+    t = f" {title.lower()} "
+    return any(w in t for w in FAULTY_WORDS)
+
+
 class JijiComps:
     """Asking prices for used items, from the cached listing set.
 
@@ -46,8 +61,23 @@ class JijiComps:
 
     source_id = "jiji_asking"
 
-    def __init__(self, cache_dir: Path, exclude_ids: frozenset[str] = frozenset()) -> None:
+    def __init__(
+        self,
+        cache_dir: Path,
+        exclude_ids: frozenset[str] = frozenset(),
+        live: Callable[[str, str], list[dict]] | None = None,
+    ) -> None:
+        """`live(model_key, category)` fetches used listings the cache lacks.
+
+        None keeps the source offline, which is what an eval run wants: a
+        recorded run must not depend on what Jiji shows today.
+        """
         self._rows: list[dict] = []
+        self._live = live
+        self._live_failed = False
+        self._asked: set[str] = set()
+        self._live_file = cache_dir / "live.json"
+        self._exclude = exclude_ids
         for path in sorted(cache_dir.glob("*.json")):
             for row in json.loads(path.read_text()):
                 if row.get("id") in exclude_ids:
@@ -56,7 +86,11 @@ class JijiComps:
                     continue  # a dealer's new stock is not a used-price comp
                 self._rows.append(row)
 
-    def fetch(self, category: str, model_key: str, limit: int = 12) -> list[Observation]:
+    def fetch(
+        self, category: str, model_key: str, limit: int = 12, faulty: bool = False
+    ) -> list[Observation]:
+        """Used asking prices for this model: working units, or with `faulty`
+        the dead and damaged ones, which are a different market."""
         want = set(tokens(model_key))
         if not want:
             raise SourceUnavailable("no model key to search on")
@@ -67,6 +101,8 @@ class JijiComps:
         def search(rows: list[dict]) -> list[tuple[float, dict]]:
             found: list[tuple[float, dict]] = []
             for row in rows:
+                if is_faulty_listing(row.get("title", "")) != faulty:
+                    continue
                 have = set(tokens(row.get("title", "")))
                 if not have:
                     continue
@@ -83,8 +119,14 @@ class JijiComps:
             # filed. A model key is specific enough to search the whole pool:
             # every number in it must still appear in the comp's title.
             scored = search(self._rows)
+        if len(scored) < TOP_UP_BELOW:
+            # Two or three cached prices make a thin percentile. The market
+            # usually has more, so it is asked once and the answer kept.
+            known = {row.get("id") for _, row in scored}
+            query = f"{model_key} faulty" if faulty else model_key
+            scored += [pair for pair in search(self._fetch_live(query, category)) if pair[1].get("id") not in known]
         if not scored:
-            raise SourceUnavailable(f"no used comps for {model_key!r}")
+            raise SourceUnavailable(f"no used {'faulty ' if faulty else ''}comps for {model_key!r}")
         scored.sort(key=lambda pair: pair[0], reverse=True)
         return [
             Observation(
@@ -98,6 +140,37 @@ class JijiComps:
             )
             for _, row in scored[:limit]
         ]
+
+
+    def _fetch_live(self, model_key: str, category: str) -> list[dict]:
+        """Ask the market now, remember the answer, and stop asking after an outage."""
+        if self._live is None or self._live_failed:
+            return []
+        asked = " ".join(tokens(model_key))
+        if asked in self._asked:
+            return []  # the market was already asked about this model
+        self._asked.add(asked)
+        try:
+            fresh = [r for r in self._live(model_key, category) if r.get("is_used")]
+        except Exception:
+            # One failed call means the network is out; every later case in
+            # this process prices from the cache rather than waiting again.
+            self._live_failed = True
+            return []
+        fresh = [r for r in fresh if r.get("id") not in self._exclude]
+        if not fresh:
+            return []
+        known = {r.get("id") for r in self._rows}
+        new_rows = [r for r in fresh if r.get("id") not in known]
+        self._rows.extend(new_rows)
+        if new_rows:
+            try:
+                cached = json.loads(self._live_file.read_text()) if self._live_file.exists() else []
+            except (OSError, json.JSONDecodeError):
+                cached = []
+            self._live_file.parent.mkdir(parents=True, exist_ok=True)
+            self._live_file.write_text(json.dumps(cached + new_rows, indent=1))
+        return fresh
 
 
 class ScrapIndex:

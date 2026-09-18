@@ -45,6 +45,7 @@
   .offer { font-size: 34px; font-weight: bold; line-height: 1.15; margin: 8px 0; }
   .status { min-height: 22px; margin-top: 8px; font-size: 15px; }
   .status.err { color: #b00; }
+  .warn { color: #b00; font-size: 14px; margin: 4px 0; }
   ul { padding-left: 22px; margin: 6px 0; } li { margin: 4px 0; }
   .link { font: 15px "Courier New", Courier, monospace; word-break: break-all; }
   footer { margin-top: 40px; font-size: 14px; color: #444; }
@@ -139,6 +140,27 @@
     $("resume").hidden = false; $("resumeLink").textContent = `${location.origin}/s/${s.id}`;
     drawShots(); drawQuestions();
     if (s.outcome) drawOffer(s.outcome); else $("stepOffer").hidden = true;
+    if (s.valuing) waitForOffer(s.id);
+    else if (s.error) status("submitStatus", "Something went wrong on our side. Press Get my offer to try again.", true);
+  }
+  // The valuation takes a minute or two and a phone browser gives up on a
+  // request long before that, so the page asks every few seconds instead.
+  let waiting = null;
+  function waitForOffer(id) {
+    if (waiting) return;
+    $("submitBtn").disabled = true;
+    status("submitStatus", "Looking at your photos. Usually under a minute. You can keep this page open or come back to the link below.");
+    const stages = { reading: "Reading your photos.", deciding: "Working out exactly what it is.", pricing: "Finding prices for it." };
+    waiting = setInterval(async () => {
+      try {
+        const s = await api(`/api/sessions/${id}`);
+        if (s.valuing) { if (stages[s.stage]) status("submitStatus", `${stages[s.stage]} Usually under a minute. You can keep this page open or come back to the link below.`); return; }
+        clearInterval(waiting); waiting = null;
+        $("submitBtn").disabled = false;
+        setSession(s);
+        if (!s.error) { status("submitStatus", ""); $("stepOffer").scrollIntoView({ behavior: "smooth" }); }
+      } catch (e) { /* a dropped poll is not a failure; the next one runs */ }
+    }, 3000);
   }
   function shotHtml(x) {
     const done = x.files.length > 0;
@@ -152,6 +174,7 @@
         <input type="file" id="f_${esc(x.slot)}" accept="${accept}" ${capture} multiple>
         <div class="thumbs">${x.files.map((f) => `<span class="x">${f.kind === "clip" ? `<video src="${f.url}" muted></video>` : `<img src="${f.url}" alt="">`}<a href="#" data-file="${esc(f.file)}" title="remove">x</a></span>`).join("")}</div>
       </div>
+      ${x.files.filter((f) => f.warning).map((f) => `<div class="warn">${esc(f.warning)}</div>`).join("")}
       ${x.opens_item ? `<label class="decline"><input type="checkbox" data-refuse="${esc(x.slot)}" ${state.refused.has(x.slot) ? "checked" : ""}>I would rather not open it. (We then assume the worst about what is inside.)</label>` : ""}
     </div>`;
   }
@@ -191,13 +214,11 @@
     const answers = {};
     for (const el of document.querySelectorAll("[data-q]")) answers[el.dataset.q] = el.value;
     $("submitBtn").disabled = true;
-    status("submitStatus", "Looking at your photos. This takes about half a minute.");
+    status("submitStatus", "Sending your answers.");
     try {
       const next = await api(`/api/sessions/${s.id}/submit`, { answers, refused: [...state.refused], text: s.text, asking: s.asking, contact: s.contact });
-      setSession(next); status("submitStatus", "");
-      $("stepOffer").scrollIntoView({ behavior: "smooth" });
-    } catch (e) { status("submitStatus", e.message, true); }
-    $("submitBtn").disabled = false;
+      setSession(next);
+    } catch (e) { status("submitStatus", e.message, true); $("submitBtn").disabled = false; }
   };
 
   // ----- step 3 -----

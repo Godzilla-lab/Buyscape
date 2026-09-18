@@ -41,6 +41,12 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> label. named from the label: SUMEC FIRMAN SPG-4000, not in the catalogue
 - **abstain** -> pass. confidence=0.45 from the label
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 6506 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 4162 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2126 ms (replayed)
+- total across calls: 12794 ms; wall clock: 485 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Sumec Firman SPG3000 3.1kVA (0.5)

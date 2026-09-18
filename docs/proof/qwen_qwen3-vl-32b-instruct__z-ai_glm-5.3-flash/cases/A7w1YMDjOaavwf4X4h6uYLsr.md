@@ -34,6 +34,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> refused. chosen=None None margin=0.1
 - **abstain** -> abstain. model refused
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 10228 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 5057 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 39206 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3566 ms (replayed)
+- total across calls: 58057 ms; wall clock: 296 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Sumec Firman SPG2900 2.8kVA (0.5)

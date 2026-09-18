@@ -7,6 +7,10 @@ loudly. No server, no database. State is the report.
 
 from __future__ import annotations
 
+import time
+from concurrent.futures import ThreadPoolExecutor
+from typing import Callable
+
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
 
@@ -17,7 +21,7 @@ from .claims.ledger import Claim, ClaimStatus, build_ledger
 from .identify import chain
 from .identify.ocr import OcrReader
 from .identify.catalogue import Entry, tokens
-from .pricing.engine import Quote, cap_at_asking, price
+from .pricing.engine import MIN_OBSERVATIONS, Quote, cap_at_asking, price
 from .pricing.sources import (
     JijiComps,
     MaterialsFloor,
@@ -53,6 +57,8 @@ class Case:
     # What the seller picked on the tenant's page, so staff questions for
     # that category are still honoured after the reader renames the item.
     tenant_category: str | None = None
+    # Told 'reading', 'deciding', 'pricing' as the work moves, for the page.
+    progress: Callable[[str], None] | None = field(default=None, compare=False, repr=False)
     refused_slots: set[str] = field(default_factory=set)
     truth: dict = field(default_factory=dict)
 
@@ -75,6 +81,9 @@ class CaseResult:
     questions: list = field(default_factory=list)
     answer_notes: list[str] = field(default_factory=list)
     spent_usd: float = 0.0  # cost_usd counts replayed calls at their recorded price; this does not
+    timing: list[dict] = field(default_factory=list)
+    # Calls overlap when they run in parallel, so this is what a seller waited.
+    wall_ms: int = 0
 
     @property
     def identified(self) -> bool:
@@ -95,7 +104,16 @@ def run_case(
     ocr: OcrReader | None = None,
 ) -> CaseResult:
     meter = CostMeter()
+    started = time.perf_counter()
     images = tuple(ImageRef(p) for p in case.images)
+
+    # Claims come from the seller's words alone, so they are extracted while
+    # the readers are still looking at the photos.
+    claims_job = None
+    if case.seller_text.strip():
+        claims_pool = ThreadPoolExecutor(max_workers=1)
+        claims_job = claims_pool.submit(extract_claims, reader, case.seller_text)
+        claims_pool.shutdown(wait=False)
 
     try:
         result = chain.run(
@@ -108,6 +126,7 @@ def run_case(
             case.category_hint,
             corroborator,
             ocr,
+            case.progress,
         )
     except (ProviderError, MissingFixture) as exc:
         code = "NO_FIXTURE" if isinstance(exc, MissingFixture) else "PROVIDER_ERROR"
@@ -159,12 +178,14 @@ def run_case(
     if review.notes:
         result.links.append(chain.LinkLog("answers", "checked", "; ".join(review.notes)))
 
+    if case.progress:
+        case.progress("pricing")
     ledger: list[Claim] = []
-    if case.seller_text.strip():
+    if claims_job is not None:
         try:
             # Text in, claims out: the reader model does this at a fiftieth of
             # the reasoner's price and the ledger rules do the judging anyway.
-            drafts, meta = extract_claims(reader, case.seller_text)
+            drafts, meta = claims_job.result()
             meter.record(meta)
             ledger = build_ledger(
                 drafts.claims,
@@ -250,13 +271,36 @@ def run_case(
 
     identified = bool(result.model_key) and not result.abstained
 
+    # Not working, by the seller's answer or the seller's words. The photos
+    # cannot prove a dead board, so the seller's own statement decides, and
+    # it can only lower the price.
+    not_working = review.not_working or says_not_working(case.seller_text)
+    if not_working:
+        result.links.append(chain.LinkLog("condition", "not working", "by the seller's own account"))
+
     comp_obs: list = []
     scrap_obs: list = []
+    comps_are_faulty = False
     if identified:
-        try:
-            comp_obs = comps.fetch(category, result.model_key or "")
-        except SourceUnavailable:
-            comp_obs = []
+        # Comparable prices are found by brand and model. The variant, RAM,
+        # storage and colour, is a claim in the ledger, not part of the
+        # identity: demanding 16 GB in every title threw away the two
+        # MacBook Air M2 listings that were in the pool.
+        comps_key = " ".join(filter(None, [result.brand, result.model]))
+        if not_working:
+            # The dead market first: faulty and for-parts listings of the
+            # same model are the honest comparable for a unit that does not
+            # work. Working listings are the fallback, scaled by the tenant.
+            try:
+                comp_obs = comps.fetch(category, comps_key, faulty=True)
+                comps_are_faulty = len(comp_obs) >= MIN_OBSERVATIONS
+            except SourceUnavailable:
+                comp_obs = []
+        if not comps_are_faulty:
+            try:
+                comp_obs = comps.fetch(category, comps_key)
+            except SourceUnavailable:
+                comp_obs = []
         rating = parse_rating(
             " ".join(
                 filter(
@@ -293,6 +337,9 @@ def run_case(
             materials=material_obs,
             identified=identified,
             weight_confident=weight_confident,
+            not_working=not_working,
+            dead_fraction=tenant.dead_fraction_for(category) if tenant is not None else None,
+            comps_are_faulty=comps_are_faulty,
         )
     # What this business will not buy at any price, in their own published
     # words. A refusal is an outcome: quoting a small number for something
@@ -346,7 +393,22 @@ def run_case(
         reasoner_model=reasoner.model,
         crosscheck=check,
         spent_usd=meter.spent_usd,
+        timing=[{"task": m.task, "model": m.model, "ms": m.latency_ms, "replayed": bool(m.replayed)} for m in meter.calls],
+        wall_ms=int((time.perf_counter() - started) * 1000),
     )
+
+
+# Ways a Lagos seller says a thing is dead. Their words, and only a lowering.
+NOT_WORKING_PHRASES = (
+    "not working", "doesn't work", "does not work", "dont work", "don't work", "faulty",
+    "not powering", "no power", "not coming on", "won't come on", "wont come on", "dead",
+    "spoilt", "spoiled", "not turning on", "won't turn on", "wont turn on", "for parts",
+)
+
+
+def says_not_working(text: str) -> bool:
+    t = f" {(text or '').lower()} "
+    return any(p in t for p in NOT_WORKING_PHRASES)
 
 
 def _entry_for(catalogue: dict[str, list[Entry]], category: str, key: str | None) -> Entry | None:
@@ -406,6 +468,14 @@ def report_markdown(case: Case, result: CaseResult) -> str:
     lines += ["", "## Chain"]
     for link in c.links:
         lines.append(f"- **{link.name}** -> {link.outcome}. {link.detail}")
+
+    # Where the seconds went, call by call, so a slow valuation can be read
+    # like a bill rather than guessed at.
+    if result.timing:
+        lines += ["", "## Timing"] + [
+            f"- {t['task']} on {t['model']}: {t['ms']} ms{' (replayed)' if t['replayed'] else ''}"
+            for t in result.timing
+        ] + [f"- total across calls: {result.latency_ms} ms; wall clock: {result.wall_ms} ms"]
 
     if case.testimony or case.refused_slots or (result.crosscheck and result.crosscheck.fraud_flags):
         lines += ["", "## Testimony"]

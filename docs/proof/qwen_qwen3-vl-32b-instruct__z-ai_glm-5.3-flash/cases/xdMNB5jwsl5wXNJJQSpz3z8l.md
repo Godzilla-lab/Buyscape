@@ -36,6 +36,12 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **retrieval** -> empty. query='Bona Bona AIR CONDITIONER High quality solar air conditioner, 10 years warranty, very low ' hits=[]
 - **gate** -> abstain. no candidates and no model text
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5295 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 8173 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2576 ms (replayed)
+- total across calls: 16044 ms; wall clock: 602 ms
+
 ## Identification
 No catalogue candidates matched.
 

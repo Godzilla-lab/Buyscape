@@ -27,6 +27,14 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **retrieval** -> ok. query='YANSONG YANSONG A scrap manual vintage sewing machine stand with cast iron legs and treadl' hits=['Infinix Note 30', 'Tecno Camon 30', 'Tecno Spark 30', 'Infinix Hot 30', 'Infinix Note 40']
 - **identify** -> refused. chosen=None None margin=None
 - **abstain** -> abstain. model refused
+- **condition** -> not working. by the seller's own account
+
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4343 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 7607 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 9921 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3150 ms (replayed)
+- total across calls: 25021 ms; wall clock: 238 ms
 
 ## Identification
 Shortlist from the catalogue:

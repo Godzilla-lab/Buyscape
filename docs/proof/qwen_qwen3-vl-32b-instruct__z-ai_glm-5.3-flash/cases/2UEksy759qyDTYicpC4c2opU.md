@@ -31,6 +31,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> refused. chosen=None None margin=0.3
 - **abstain** -> abstain. model refused
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 6291 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 5061 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 59806 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 4034 ms (replayed)
+- total across calls: 75192 ms; wall clock: 148 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Acer Aspire 5 (0.5)

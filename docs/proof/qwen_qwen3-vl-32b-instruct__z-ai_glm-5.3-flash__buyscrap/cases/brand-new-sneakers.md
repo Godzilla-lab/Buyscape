@@ -27,6 +27,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> refused. chosen=None None margin=None
 - **abstain** -> abstain. model refused
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5024 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 8130 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 5583 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 728 ms (replayed)
+- total across calls: 19465 ms; wall clock: 160 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Tecno Camon 40 (0.2)

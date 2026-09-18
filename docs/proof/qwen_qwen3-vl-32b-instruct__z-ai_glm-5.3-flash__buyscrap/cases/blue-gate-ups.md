@@ -1,17 +1,17 @@
 # Case blue-gate-ups
 
-Photos: 2  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  14794 ms
+Photos: 2  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0015  |  84431 ms
 
 ## What the engine saw
 - Presentation: single_unit
-- Category: uninterruptible power supply (confidence 0.95)
-- Made of: plastic 70%, circuit_board 20%, steel 10%
-- Estimated weight: 3.5 kg (confidence 0.8)
+- Category: uninterruptible power supply (confidence 0.9)
+- Made of: plastic 90%, circuit_board 10%
+- Estimated weight: 2.5 kg (confidence 0.7)
 - Brand read off the item: BLUE GATE
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: dust and minor smudges on plastic casing, no visible cracks or dents
+- Damage noted: dust and minor scuffs on plastic casing, dust on surface, slight scuffing on plastic casing
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 - Text read: BLUE GATE
@@ -28,6 +28,14 @@ Photos: 2  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **read_evidence** -> ok. category=uninterruptible power supply brand=BLUE GATE model=None label=False lines=1
 - **retrieval** -> empty. query='BLUE GATE BLUE GATE UPS available' hits=[]
 - **gate** -> abstain. no candidates and no model text
+
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 9352 ms (replayed)
+- read_evidence on qwen/qwen3-vl-32b-instruct: 6580 ms
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 58570 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 9278 ms
+- extract_claims on qwen/qwen3-vl-32b-instruct: 651 ms (replayed)
+- total across calls: 84431 ms; wall clock: 9291 ms
 
 ## Identification
 No catalogue candidates matched.
@@ -66,11 +74,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Tell us what it is, whether it works, and roughly how heavy it is.
 
 ## Price
-**798 to 1,351 NGN** (priced as material, width 0.5144, method material_floor, 0 comparable prices)
+**346 to 655 NGN** (priced as material, width 0.617, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 3.5 kg of plastic 70%, circuit_board 20%, steel 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 2.5 kg of plastic 90%, circuit_board 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 980 NGN
+Scrap floor: 425 NGN
 
 Conditions attached to this price:
 - Not identified: No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.

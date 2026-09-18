@@ -27,6 +27,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> refused. chosen=None None margin=None
 - **abstain** -> abstain. model refused
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5892 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 7474 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 29074 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 6429 ms (replayed)
+- total across calls: 48869 ms; wall clock: 172 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Lenovo 14w (0.4)

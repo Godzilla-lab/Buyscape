@@ -1,6 +1,6 @@
 # Case macbook-pro-17-inch
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0013  |  34092 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  37769 ms
 
 ## What the engine saw
 - Presentation: single_unit
@@ -24,26 +24,33 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **ocr** -> ok. 0 lines: 
 - **corroborate** -> dispute. brand_text agreed by both readers; 1 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=laptop brand=Apple model=None label=False lines=1
-- **retrieval** -> ok. query='Apple Apple MacBook Pro (17-inch, Late 2011) Laptops health 50% Physical damage 5% No char' hits=['Apple MacBook Pro 17-inch 2011', 'Apple MacBook Pro 13-inch 2017', 'Apple MacBook Air 13-inch 2017', 'Apple iPhone 11 Pro', 'Apple iPhone 12 Pro']
-- **identify** -> ok. chosen=Apple MacBook Pro 17-inch 2011 margin=0.75
-- **abstain** -> pass. confidence=0.58 margin=0.75
+- **retrieval** -> ok. query='Apple Apple MacBook Pro (17-inch, Late 2011) Laptops health 50% Physical damage 5% No char' hits=['Apple MacBook Pro 17-inch 2011', 'Apple MacBook Pro 13-inch 2017', 'Apple MacBook Pro 13-inch M2 2022', 'Apple MacBook Pro 14-inch M1 Pro 2021', 'Apple MacBook Pro 14-inch M3 2023']
+- **identify** -> ok. chosen=Apple MacBook Pro 17-inch 2011 margin=0.8
+- **abstain** -> pass. confidence=0.58 margin=0.8
+
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 6085 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 9500 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 16913 ms
+- extract_claims on qwen/qwen3-vl-32b-instruct: 5271 ms (replayed)
+- total across calls: 37769 ms; wall clock: 17634 ms
 
 ## Identification
 Shortlist from the catalogue:
   - Apple MacBook Pro 17-inch 2011 (0.6333)
   - Apple MacBook Pro 13-inch 2017 (0.5)
-  - Apple MacBook Air 13-inch 2017 (0.4333)
-  - Apple iPhone 11 Pro (0.4333)
-  - Apple iPhone 12 Pro (0.4333)
+  - Apple MacBook Pro 13-inch M2 2022 (0.4714)
+  - Apple MacBook Pro 14-inch M1 Pro 2021 (0.4714)
+  - Apple MacBook Pro 14-inch M3 2023 (0.4714)
 
-**Answer: Apple MacBook Pro 17-inch 2011** (margin 0.75)
+**Answer: Apple MacBook Pro 17-inch 2011** (margin 0.8)
 
 ## How sure the engine is (back office)
 **Not sure enough to price: 58% on the best answer. It is probably a Apple MacBook Pro 17-inch 2011 or a Apple MacBook Pro 13-inch 2017, and the photos cannot separate them.**
 
 - Identification confidence: 58% (unsure)
 - Price confidence: 0%
-- It is weighing: Apple MacBook Pro 17-inch 2011 (0.85), Apple MacBook Pro 13-inch 2017 (0.1), Apple MacBook Air 13-inch 2017 (0.05)
+- It is weighing: Apple MacBook Pro 17-inch 2011 (0.85), Apple MacBook Pro 13-inch 2017 (0.05), Apple MacBook Pro 13-inch M2 2022 (0.02)
 - no label, plate or settings screen was legible
 - the two readers agreed on nothing legible
 - 10 claims are still unproven, 0 are supported
@@ -83,14 +90,9 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Screenshot of System Information (Windows) or About This Mac, showing the model, processor, RAM and storage.
 
 ## Price
-**5,000 to 5,000 NGN** (priced as material, width 0.0, method scrap_band_only, 0 comparable prices)
-
-No usable comparable sales (0 found, 2 needed), so the range comes from the published Lagos buy band for this category, reduced by 0.3715 for unproven claims.
-
-Scrap floor: 2,719 NGN
+**NO_PRICE_DATA.** Only 0 comparable asking prices were found and there is no published band for this category, so no honest range can be produced. Nothing below the 2,719 NGN floor.
 
 Conditions attached to this price:
-- Raised to the 5,000 NGN minimum this business publishes for this kind of item.
 - MacBook Pro (17-inch, Late 2011) -> not proven remotely. Agent will confirm at pickup.
 - Laptops health 50% -> not proven remotely. Agent unplugs the charger and watches the battery for two minutes.
 - Physical damage 5% -> not proven remotely. Agent will confirm at pickup.

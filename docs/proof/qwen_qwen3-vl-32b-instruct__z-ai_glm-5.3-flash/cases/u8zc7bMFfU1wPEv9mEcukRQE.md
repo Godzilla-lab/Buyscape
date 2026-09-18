@@ -34,6 +34,12 @@ product description-
 produc' hits=[]
 - **gate** -> abstain. no candidates and no model text
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 8542 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 11971 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 1692 ms (replayed)
+- total across calls: 22205 ms; wall clock: 127 ms
+
 ## Identification
 No catalogue candidates matched.
 

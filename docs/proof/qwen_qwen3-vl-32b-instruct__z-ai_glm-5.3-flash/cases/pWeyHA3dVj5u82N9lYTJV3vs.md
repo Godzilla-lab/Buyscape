@@ -35,6 +35,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> refused. chosen=Daikin None margin=None
 - **abstain** -> abstain. model refused
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4898 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 13700 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 12754 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2378 ms (replayed)
+- total across calls: 33730 ms; wall clock: 605 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Samsung AR12 1.5HP (0.3)

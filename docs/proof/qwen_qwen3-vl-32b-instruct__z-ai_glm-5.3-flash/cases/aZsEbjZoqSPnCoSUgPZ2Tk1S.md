@@ -34,6 +34,13 @@ Battery hea' hits=['Apple iPhone 11', 'Apple iPhone 11 Pro', 'Apple iPhone 11 Pr
 - **identify** -> ok. chosen=Apple iPhone 11 margin=0.7
 - **abstain** -> pass. confidence=0.61 margin=0.7
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4963 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 13054 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 7044 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3428 ms (replayed)
+- total across calls: 28489 ms; wall clock: 359 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Apple iPhone 11 (0.7667)
@@ -48,7 +55,7 @@ Shortlist from the catalogue:
 **Not sure enough to price: 61% on the best answer. It is probably a Apple iPhone 11 or a Apple iPhone XR, and the photos cannot separate them.**
 
 - Identification confidence: 61% (unsure)
-- Price confidence: 0%
+- Price confidence: 40%
 - It is weighing: Apple iPhone 11 (0.9), Apple iPhone XR (0.2), Apple iPhone 11 Pro (0.05)
 - no label, plate or settings screen was legible
 - 1 lines seen by both readers
@@ -92,9 +99,9 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
-**48 to 243 NGN** (priced as material, width 1.3301, method scrap_band_only, 0 comparable prices)
+**32,940 to 210,000 NGN** (priced as a working item, width 1.4576, method uncalibrated_wide, 12 comparable prices)
 
-No usable comparable sales (0 found, 2 needed), so the range comes from the published Lagos buy band for this category, reduced by 0.3 for unproven claims.
+12 used asking prices, 20th to 80th percentile 244,000 to 300,000 NGN, converted to a buy range with the 0.45 to 0.7 ask-to-buy spread, then reduced by 0.3 for unproven claims, floored at the scrap value 163.
 
 Scrap floor: 163 NGN
 

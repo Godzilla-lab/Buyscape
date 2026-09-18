@@ -34,6 +34,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> ok. chosen=Senci SC30000 margin=None
 - **abstain** -> pass. confidence=0.85 margin=None
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5186 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 3311 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 14323 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 4328 ms (replayed)
+- total across calls: 27148 ms; wall clock: 319 ms
+
 ## Identification
 No catalogue candidates matched.
 
@@ -83,11 +90,7 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Photo of the engine, showing the recoil starter and carburettor.
 
 ## Price
-**28,291 to 77,130 NGN** (priced as material, width 0.9265, method scrap_band_only, 0 comparable prices)
-
-No usable comparable sales (0 found, 2 needed), so the range comes from the published Lagos buy band for this category, reduced by 0.4727 for unproven claims.
-
-Scrap floor: 59,850 NGN
+**NO_PRICE_DATA.** Only 0 comparable asking prices were found and there is no published band for this category, so no honest range can be produced. Nothing below the 59,850 NGN floor.
 
 Conditions attached to this price:
 - Senci petrol generator model sc30000 -> not proven remotely. Agent will confirm at pickup.

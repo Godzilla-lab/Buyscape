@@ -23,6 +23,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> ok. chosen=Unbranded Tempered glass coffee table top margin=None
 - **abstain** -> abstain. no label, top score 0.8
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4866 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 6150 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 7133 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3940 ms (replayed)
+- total across calls: 22089 ms; wall clock: 122 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Tecno Spark 10 (0.2)

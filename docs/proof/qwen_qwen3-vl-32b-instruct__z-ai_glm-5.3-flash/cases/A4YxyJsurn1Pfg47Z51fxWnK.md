@@ -33,6 +33,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> ok. chosen=Panasonic CS-YN12 margin=None
 - **abstain** -> abstain. top score 0.55
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5169 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 6638 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 10206 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 746 ms (replayed)
+- total across calls: 22759 ms; wall clock: 334 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Panasonic CS-YN12 1.5HP (0.38)

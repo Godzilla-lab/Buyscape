@@ -33,6 +33,12 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **forensics** -> flag. screenshot of a gallery rather than a photo of the item
 - **gate** -> abstain. multiple items in frame
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 6042 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 20479 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2787 ms (replayed)
+- total across calls: 29308 ms; wall clock: 751 ms
+
 ## Identification
 No catalogue candidates matched.
 

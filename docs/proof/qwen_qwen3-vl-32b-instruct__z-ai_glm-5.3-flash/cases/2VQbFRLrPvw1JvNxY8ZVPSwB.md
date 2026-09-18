@@ -34,6 +34,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> refused. chosen=HP None margin=None
 - **abstain** -> abstain. model refused
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 6037 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 7306 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 9004 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 5577 ms (replayed)
+- total across calls: 27924 ms; wall clock: 247 ms
+
 ## Identification
 Shortlist from the catalogue:
   - HP 2000 (0.5)

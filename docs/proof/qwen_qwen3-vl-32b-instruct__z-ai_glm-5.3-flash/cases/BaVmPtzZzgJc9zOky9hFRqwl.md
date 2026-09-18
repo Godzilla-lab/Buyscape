@@ -33,6 +33,12 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> label. named from the label: Galaxy A17, not in the catalogue
 - **abstain** -> abstain. confidence 0.38: named from the item's own label, which the catalogue does not list; no label, plate or settings screen was legible; 2 lines seen by both readers; looks like a catalogue or stock image
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4565 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 3963 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2717 ms (replayed)
+- total across calls: 11245 ms; wall clock: 463 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Samsung Galaxy S21 (0.5)

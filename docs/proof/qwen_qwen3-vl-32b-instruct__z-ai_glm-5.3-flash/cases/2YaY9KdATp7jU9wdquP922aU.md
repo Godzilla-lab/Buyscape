@@ -35,6 +35,12 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 Excellent batt' hits=[]
 - **gate** -> abstain. no candidates and no model text
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5778 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 6541 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 5082 ms (replayed)
+- total across calls: 17401 ms; wall clock: 147 ms
+
 ## Identification
 No catalogue candidates matched.
 

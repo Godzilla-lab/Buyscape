@@ -26,6 +26,14 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **retrieval** -> ok. query='BLUE G T Description: This is a used Blue Gate Electronics UPS that is currently not funct' hits=['Infinix Smart 8', 'Google Pixel 8']
 - **identify** -> refused. chosen=None None margin=None
 - **abstain** -> abstain. model refused
+- **condition** -> not working. by the seller's own account
+
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4212 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 12327 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 5292 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3386 ms (replayed)
+- total across calls: 25217 ms; wall clock: 331 ms
 
 ## Identification
 Shortlist from the catalogue:

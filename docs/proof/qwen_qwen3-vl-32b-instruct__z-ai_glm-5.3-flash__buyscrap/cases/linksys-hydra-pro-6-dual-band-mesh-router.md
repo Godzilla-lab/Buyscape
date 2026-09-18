@@ -45,6 +45,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> ok. chosen=Linksys Hydra Pro 6 margin=None
 - **abstain** -> abstain. confidence 0.42: no label, plate or settings screen was legible; 7 lines seen by both readers; looks like a catalogue or stock image
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 6108 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 9278 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 9608 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3596 ms (replayed)
+- total across calls: 28590 ms; wall clock: 315 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Acer Aspire 5 (0.2)

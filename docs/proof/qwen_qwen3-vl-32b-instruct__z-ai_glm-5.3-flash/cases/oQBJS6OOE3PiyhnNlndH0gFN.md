@@ -37,6 +37,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> ok. chosen=FIRMAN FPG15000DSE margin=0.85
 - **abstain** -> abstain. seller names another generation
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5649 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 9415 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 9140 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3835 ms (replayed)
+- total across calls: 28039 ms; wall clock: 335 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Sumec Firman SPG2900 2.8kVA (0.4)

@@ -1,27 +1,24 @@
 # Case 43v7q9qPhTb0hd6O0SaLacl0
 
-Photos: 3  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0014  |  29944 ms
+Photos: 3  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0042  |  207666 ms
 
 ## What the engine saw
 - Presentation: single_unit
-- Category: phone (confidence 0.95)
+- Category: phone (confidence 1.0)
 - Made of: aluminium 40%, plastic 30%, circuit_board 20%, glass 10%
 - Estimated weight: 0.2 kg (confidence 0.9)
 - Brand read off the item: Apple
-- Model read off the item: nothing legible
-- Rating read: none
+- Model read off the item: iPhone 12 Pro Max
+- Rating read: 128 GB
 - Label, plate or settings screen legible: yes
-- Damage noted: No visible damage or wear.
+- Damage noted: No visible damage to back casing or camera module, Sticker with warranty information attached to back, white sticker covering back camera and part of rear panel, sticker has text and barcode, partially obscures surface, No visible damage to the back panel or camera module., Sticker on the back is slightly wrinkled.
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: APPLE WARRANTY | 12P 128G | Apple
+- Text read: 12P 128 | APPLE WARRANTY | NOT TO BE USED FOR ANY OTHER PURPOSE | NO LCD WARRANTY | Model: iPhone 12 Pro Max | Serial Number: FVJH46789012 | Manufactured in China | Apple Inc.
 
 ## Two readers
 - brand_text was read by one reader and confirmed by OCR
-- model_text was seen by only one reader, so it is treated as unread
-- rating_text was seen by only one reader, so it is treated as unread
-- serial_text was seen by only one reader, so it is treated as unread
-- 13 transcribed lines was seen by only one reader, so it is treated as unread
+- rating_text was read by one reader and confirmed by OCR
 
 ## OCR read off the photos
 - 128
@@ -38,44 +35,54 @@ Photos: 3  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - SMUNLCOK
 
 ## Chain
+- **corroborate** -> unavailable. openrouter:mistralai/mistral-small-3.2-24b-instruct failed after retries: no JSON object in response: {
+  "presentation"
 - **ocr** -> ok. 29 lines: 128 | NO LCD WARRANTY | BATTERY PASS VÉRSION TED | FACEID WORN CONENTION | SIMUNLOOKGRADEA | APPLE WARRANTY | MITE | 12P
-- **corroborate** -> dispute. brand_text was read by one reader and confirmed by OCR; model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 13 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=phone brand=Apple model=None label=True lines=3
-- **retrieval** -> ok. query='Apple APPLE WARRANTY 12P 128G Apple 13 pro 128gb
-Nml 13 128gb' hits=['Apple iPhone 13 Pro', 'Apple iPhone 13 Pro Max', 'Apple iPhone 11 Pro', 'Apple iPhone 12 Pro', 'Apple iPhone 13']
-- **identify** -> ok. chosen=Apple iPhone 12 Pro margin=0.1
-- **abstain** -> abstain. top score 0.6
+- **corroborate** -> agree. brand_text was read by one reader and confirmed by OCR; rating_text was read by one reader and confirmed by OCR
+- **read_evidence** -> ok. category=phone brand=Apple model=iPhone 12 Pro Max label=True lines=32
+- **retrieval** -> ok. query='Apple iPhone 12 Pro Max 128 GB 12P 128 APPLE WARRANTY NOT TO BE USED FOR ANY OTHER PURPOSE' hits=['Apple iPhone 12 Pro', 'Apple iPhone 12 Pro Max', 'Apple iPhone 12', 'Apple iPhone 13 Pro', 'Apple iPhone 13 Pro Max']
+- **identify** -> ok. chosen=Apple iPhone 12 Pro Max margin=0.65
+- **abstain** -> abstain. seller names another generation
+
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 35532 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 35528 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 71294 ms
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 24710 ms
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 25070 ms
+- identify on z-ai/glm-5.3-flash: 12051 ms
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3481 ms (replayed)
+- total across calls: 207666 ms; wall clock: 291158 ms
 
 ## Identification
 Shortlist from the catalogue:
-  - Apple iPhone 13 Pro (0.5667)
-  - Apple iPhone 13 Pro Max (0.5)
-  - Apple iPhone 11 Pro (0.4333)
-  - Apple iPhone 12 Pro (0.4333)
-  - Apple iPhone 13 (0.4333)
+  - Apple iPhone 12 Pro (0.9)
+  - Apple iPhone 12 Pro Max (0.9)
+  - Apple iPhone 12 (0.7667)
+  - Apple iPhone 13 Pro (0.7)
+  - Apple iPhone 13 Pro Max (0.7)
 
-**Not identified: CANNOT_IDENTIFY.** The best candidate scored only 0.6, which is not sure enough to price.
+**Not identified: EVIDENCE_INCOMPLETE.** The item reads as Apple iPhone 12 Pro Max but the seller's text says 13. A Settings or About screen would settle it.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 32% on the best answer. It is probably a Apple iPhone 12 Pro or a Apple iPhone 13 Pro, and the photos cannot separate them.**
+**Not sure enough to price: 38% on the best answer. It is probably a Apple iPhone 12 Pro Max or a Apple iPhone 12 Pro, and the photos cannot separate them.**
 
-- Identification confidence: 32% (unknown)
+- Identification confidence: 38% (unknown)
 - Price confidence: 14%
-- It is weighing: Apple iPhone 12 Pro (0.6), Apple iPhone 13 Pro (0.5)
-- The best candidate scored only 0.6, which is not sure enough to price.
+- It is weighing: Apple iPhone 12 Pro Max (0.9), Apple iPhone 12 Pro (0.25)
+- The item reads as Apple iPhone 12 Pro Max but the seller's text says 13. A Settings or About screen would settle it.
 - read off the item's own label
-- 3 lines seen by both readers
-- the next candidate was only 0.1 behind
+- only one reader saw these photos, the second was unavailable
 - 10 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
 
 ## What the seller is asked for next (shown in the app)
-1. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: If you have the box, photograph the label showing the model, storage and IMEI. Then, still filming, do this on the item's own screen and hold it steady so the writing can be read: open settings then About, showing the model name and storage. Then, without stopping the video: Pull out the SIM tray and photograph the open slot. Finish with: A short clip: press power, unlock, then open the camera app. Keep filming the whole time. Do not cut between clips.
-   _why: two readings of these photos disagreed about what is written on the item_
-2. [PHOTO] Screenshot of Settings then About, showing the model name and storage.
+1. [PHOTO] Screenshot of Settings then About, showing the model name and storage.
    _why: nothing on the item says which model this is_
-3. [PHOTO] Dial *#06# and screenshot the IMEI that appears.
+2. [PHOTO] Dial *#06# and screenshot the IMEI that appears.
+   _why: nothing on the item says which model this is_
+3. [PHOTO] If you have the box, photograph the label showing the model, storage and IMEI.
    _why: nothing on the item says which model this is_
 
 ## What the seller is asked (only they know these)
@@ -113,7 +120,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 198 NGN
 
 Conditions attached to this price:
-- Not identified: The best candidate scored only 0.6, which is not sure enough to price.
+- Not identified: The item reads as Apple iPhone 12 Pro Max but the seller's text says 13. A Settings or About screen would settle it.
 - 13 pro 128gb -> not proven remotely. Agent reads storage from Settings.
 - 13 pro 128gb -> not proven remotely. Agent reads storage from Settings.
 - Nml 13 128gb -> not proven remotely. Agent reads storage from Settings.

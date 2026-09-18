@@ -35,6 +35,12 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **read_evidence** -> ok. category=paint_buckets brand=FINECOAT model=None label=True lines=2
 - **gate** -> lot. priced by material, identification skipped
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 6607 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 11678 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 4571 ms (replayed)
+- total across calls: 22856 ms; wall clock: 597 ms
+
 ## Identification
 No catalogue candidates matched.
 

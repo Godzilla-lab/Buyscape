@@ -37,6 +37,13 @@ Automatic S' hits=['Sumec Firman SPG2900 2.8kVA', 'Sumec Firman SPG3000 3.1kVA',
 - **identify** -> refused. chosen=None None margin=0.15
 - **abstain** -> abstain. model refused
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 6633 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 11759 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 16210 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3776 ms (replayed)
+- total across calls: 38378 ms; wall clock: 342 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Sumec Firman SPG2900 2.8kVA (0.55)

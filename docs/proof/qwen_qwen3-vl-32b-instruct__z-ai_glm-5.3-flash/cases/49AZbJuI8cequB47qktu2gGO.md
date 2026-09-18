@@ -45,6 +45,12 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> label. named from the label: REDMI 15C, not in the catalogue
 - **abstain** -> pass. confidence=0.45 from the label
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 6494 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 13951 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3372 ms (replayed)
+- total across calls: 23817 ms; wall clock: 569 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Tecno Pova 6 (0.2)
@@ -103,11 +109,7 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
-**23 to 67 NGN** (priced as material, width 0.9847, method scrap_band_only, 0 comparable prices)
-
-No usable comparable sales (0 found, 2 needed), so the range comes from the published Lagos buy band for this category, reduced by 0.4777 for unproven claims.
-
-Scrap floor: 48 NGN
+**NO_PRICE_DATA.** Only 0 comparable asking prices were found and there is no published band for this category, so no honest range can be produced. Nothing below the 48 NGN floor.
 
 Conditions attached to this price:
 - Evidence flag: looks like a catalogue or stock image

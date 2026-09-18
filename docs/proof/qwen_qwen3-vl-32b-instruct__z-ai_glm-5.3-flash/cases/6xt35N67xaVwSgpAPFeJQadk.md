@@ -34,6 +34,12 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **read_evidence** -> ok. category=split air conditioner brand=Hisense model=None label=True lines=6
 - **gate** -> abstain. multiple items in frame
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 6226 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 17464 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 53438 ms (replayed)
+- total across calls: 77128 ms; wall clock: 396 ms
+
 ## Identification
 No catalogue candidates matched.
 

@@ -37,6 +37,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> ok. chosen=HP EliteBook 820 G6 margin=0.65
 - **abstain** -> abstain. seller names another generation
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 6024 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 9594 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 15333 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 1873 ms (replayed)
+- total across calls: 32824 ms; wall clock: 340 ms
+
 ## Identification
 Shortlist from the catalogue:
   - HP EliteBook 840 G6 (0.5667)

@@ -34,6 +34,13 @@ Available for confirmation bef' hits=['Samsung Galaxy S23', 'Samsung Galaxy S21'
 - **identify** -> ok. chosen=Samsung Galaxy S23 Ultra margin=0.6
 - **abstain** -> abstain. confidence 0.38: no label, plate or settings screen was legible; 1 lines seen by both readers; looks like a catalogue or stock image
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5694 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 10488 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 9261 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3139 ms (replayed)
+- total across calls: 28582 ms; wall clock: 445 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Samsung Galaxy S23 (0.9)

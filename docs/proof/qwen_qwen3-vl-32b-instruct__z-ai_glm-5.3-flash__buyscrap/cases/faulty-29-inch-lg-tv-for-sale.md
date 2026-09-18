@@ -23,6 +23,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> refused. chosen=None None margin=0.0
 - **abstain** -> abstain. model refused
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 6953 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 9111 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 24390 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3035 ms (replayed)
+- total across calls: 43489 ms; wall clock: 184 ms
+
 ## Identification
 Shortlist from the catalogue:
   - LG T2108 8kg top loader (0.4333)

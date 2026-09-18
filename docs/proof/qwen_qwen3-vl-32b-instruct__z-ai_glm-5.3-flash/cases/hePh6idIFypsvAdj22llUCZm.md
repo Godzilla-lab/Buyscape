@@ -36,6 +36,13 @@ Neat' hits=['Apple iPhone 12', 'Apple iPhone 12 Pro', 'Apple iPhone 12 Pro Max',
 - **identify** -> ok. chosen=Apple iPhone 12 margin=0.7
 - **abstain** -> pass. confidence=0.72 margin=0.7
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5115 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 13115 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 9892 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 5062 ms (replayed)
+- total across calls: 33184 ms; wall clock: 558 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Apple iPhone 12 (0.7667)

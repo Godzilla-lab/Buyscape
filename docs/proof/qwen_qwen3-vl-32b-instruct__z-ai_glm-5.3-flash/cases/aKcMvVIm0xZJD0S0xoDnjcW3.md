@@ -41,6 +41,12 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **read_evidence** -> ok. category=phone brand=Tecno model=CAMON 50 label=False lines=5
 - **gate** -> abstain. multiple items in frame
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 6415 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 17250 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2173 ms (replayed)
+- total across calls: 25838 ms; wall clock: 609 ms
+
 ## Identification
 No catalogue candidates matched.
 

@@ -27,6 +27,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **read_evidence** -> ok. category=split air conditioner brand=None model=None label=True lines=1
 - **retrieval** -> empty. query='Inverter Faulty inverter AC available for sale. Location: Oshodi, Lagos State Price: 60,00' hits=[]
 - **gate** -> abstain. no candidates and no model text
+- **condition** -> not working. by the seller's own account
+
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 6778 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 13246 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2229 ms (replayed)
+- total across calls: 22253 ms; wall clock: 197 ms
 
 ## Identification
 No catalogue candidates matched.

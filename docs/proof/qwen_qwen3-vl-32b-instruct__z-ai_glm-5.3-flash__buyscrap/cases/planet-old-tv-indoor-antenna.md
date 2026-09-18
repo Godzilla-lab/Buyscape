@@ -30,6 +30,12 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **retrieval** -> empty. query='PLANET PLANET The old TV indoor Antenna might still be working.' hits=[]
 - **gate** -> abstain. no candidates and no model text
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5904 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 11321 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 1288 ms (replayed)
+- total across calls: 18513 ms; wall clock: 152 ms
+
 ## Identification
 No catalogue candidates matched.
 

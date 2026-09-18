@@ -35,6 +35,13 @@ Intel Core i7-6820HQ (Quad Core 2.70GHz, 3.60GHz Turbo
 - **identify** -> refused. chosen=None None margin=0.15
 - **abstain** -> abstain. model refused
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 6813 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 7533 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 22958 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3958 ms (replayed)
+- total across calls: 41262 ms; wall clock: 150 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Dell Inspiron 15 3000 (0.4333)

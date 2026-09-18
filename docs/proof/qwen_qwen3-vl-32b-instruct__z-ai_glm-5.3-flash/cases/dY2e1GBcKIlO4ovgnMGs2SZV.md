@@ -37,6 +37,13 @@ Ultra-thin. Super' hits=['Apple iPhone XR', 'Apple iPhone XS', 'Apple iPhone SE'
 - **identify** -> refused. chosen=None None margin=0.0
 - **abstain** -> abstain. model refused
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5609 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 8269 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 12528 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 4156 ms (replayed)
+- total across calls: 30562 ms; wall clock: 571 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Apple iPhone XR (0.2)

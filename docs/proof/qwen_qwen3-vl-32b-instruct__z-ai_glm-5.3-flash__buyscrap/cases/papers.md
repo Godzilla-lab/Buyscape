@@ -1,6 +1,6 @@
 # Case papers
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  18636 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0014  |  51150 ms
 
 ## What the engine saw
 - Presentation: mixed_lot
@@ -14,7 +14,10 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Damage noted: pages appear slightly worn and creased, some text faded or smudged
 - Looks like a catalogue image: no
 - Screenshot of a gallery: yes
-- Text read: VICTORY BAPTIST NURSERY & PRIMARY SCHOOL | Name:  | Class:  | Subject:  | Date:  | SCHOOL ANTHEM | Our dear Victory Baptist we thank you that your guidance might be | tender care, every the beautiful guide ... though our school is small, our
+- Text read: VICTORY BAPTIST NURSERY & PRIMARY SCHOOL | Class:  | Subject:  | Date:  | SCHOOL ANTHEM | METRIC TABLE | CAPACITY MEASURE (LIQUID VOLUME) | 10 millilitres = 1 centilitre
+
+## Two readers
+- 24 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
 - 4. Sanni, Saheed Adewale
@@ -31,12 +34,17 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Date:
 
 ## Chain
-- **corroborate** -> unavailable. no fixture for task=read_evidence key=f8c1c63e43b9288f889e134d3b0477c9 (model=mistralai/mistral-small-3.2-24b-instruct);
 - **ocr** -> ok. 32 lines: 4. Sanni, Saheed Adewale | 2. Nelson, Raphael Ugochuky | Department of Science | Ayanlére, Joy Adunola | Supervisor: Mr 
-- **corroborate** -> agree. nothing identifying was read by either
-- **read_evidence** -> ok. category=school supplies brand=None model=None label=False lines=66
+- **corroborate** -> dispute. 24 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=school supplies brand=None model=None label=False lines=42
 - **forensics** -> flag. screenshot of a gallery rather than a photo of the item
 - **gate** -> lot. priced by material, identification skipped
+
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 17926 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 32514 ms
+- extract_claims on qwen/qwen3-vl-32b-instruct: 710 ms (replayed)
+- total across calls: 51150 ms; wall clock: 32563 ms
 
 ## Identification
 No catalogue candidates matched.
@@ -52,7 +60,7 @@ Evidence flags: screenshot of a gallery rather than a photo of the item
 - Price confidence: 27%
 - This is a mixed lot, so it is priced by material and weight rather than identified.
 - no label, plate or settings screen was legible
-- only one reader saw these photos, the second was unavailable
+- 42 lines seen by both readers
 - screenshot of a gallery rather than a photo of the item
 - 4 claims are still unproven, 0 are supported
 
@@ -63,8 +71,8 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: the photos show more than one item_
 2. [PHOTO] Take a new photo of the item itself, not a picture of another screen.
    _why: this is a screenshot rather than a photo of the item_
-3. [PHOTO] Close-up of any label, sticker or metal plate showing the brand and model.
-   _why: nothing on the item says which model this is_
+3. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: Close-up of any label, sticker or metal plate showing the brand and model. Then, without stopping the video: If it opens without tools, open it and photograph the inside. Keep filming the whole time. Do not cut between clips.
+   _why: two readings of these photos disagreed about what is written on the item_
 
 ## What the seller is asked (only they know these)
 - How much of it is there? Give the weight in kilogrammes or tons if you know it.

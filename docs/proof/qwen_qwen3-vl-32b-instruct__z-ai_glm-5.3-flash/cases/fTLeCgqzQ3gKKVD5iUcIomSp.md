@@ -28,6 +28,12 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **retrieval** -> empty. query='Core i5 7th Generation system with GHz 2.7... portable devices woth keyboard light... ligh' hits=[]
 - **gate** -> abstain. no candidates and no model text
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4475 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 8340 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2891 ms (replayed)
+- total across calls: 15706 ms; wall clock: 145 ms
+
 ## Identification
 No catalogue candidates matched.
 

@@ -34,6 +34,12 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **retrieval** -> empty. query='CLOVER INTEGRATED ICT SOLUTIONS ICT INTEGRATED ICT-SOLUTION CLOVER Rog zephyrus g16 gaming' hits=[]
 - **gate** -> abstain. no candidates and no model text
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5495 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 6417 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 5146 ms (replayed)
+- total across calls: 17058 ms; wall clock: 148 ms
+
 ## Identification
 No catalogue candidates matched.
 

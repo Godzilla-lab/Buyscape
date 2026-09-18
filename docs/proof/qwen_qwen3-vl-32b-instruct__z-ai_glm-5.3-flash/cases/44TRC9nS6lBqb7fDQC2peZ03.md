@@ -41,6 +41,13 @@ Make l' hits=['Hisense WT3K9022U 9kg top loader', 'Hisense WTJA801 8kg top loade
 - **identify** -> ok. chosen=Hisense WT3K9022U margin=0.4
 - **abstain** -> abstain. top score 0.6
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4790 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 6079 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 5600 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2540 ms (replayed)
+- total across calls: 19009 ms; wall clock: 579 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Hisense WT3K9022U 9kg top loader (0.8)

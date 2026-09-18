@@ -395,3 +395,36 @@ def test_a_unit_is_not_an_identity():
     assert not model_matches("LG", "T2108 8kg top loader", "Hisense 8kg Top Load Washing Machine")
     # The right brand still matches on the same evidence.
     assert model_matches("Hisense", "AS-12 1.5HP", "Hisense 1.5HP Split Air Conditioner")
+
+
+def test_the_witnesses_look_at_the_photos_at_the_same_time_and_the_page_hears_each_stage(catalogue):
+    """Two readers, the OCR and the claims extraction are independent, so they
+    overlap; the seller waits for the slowest, not the sum."""
+    import threading
+    import time
+
+    from buyscape.identify import chain
+    from buyscape.providers.base import CostMeter, ImageRef
+    from buyscape.providers.fake import FakeProvider
+
+    class Slow(FakeProvider):
+        def structured_call(self, request):
+            time.sleep(0.4)
+            return super().structured_call(request)
+
+    def slow_ocr(images):
+        time.sleep(0.4)
+        return ["FIRMAN", "SPG3000"]
+
+    seen = {"category": "generator", "category_confidence": 0.9, "model_text": "SPG3000",
+            "brand_text": "FIRMAN", "brand_source": "FIRMAN", "model_source": "SPG3000",
+            "has_label_or_plate": True, "visible_text": ["FIRMAN", "SPG3000"]}
+    image = next(p for p in (ROOT / "eval" / "raw" / "media").rglob("*") if p.is_file())
+    stages: list[str] = []
+    started = time.perf_counter()
+    result = chain.run((ImageRef(image),), "firman gen", catalogue, Slow(seen), FakeProvider(), CostMeter(),
+                       corroborator=Slow(seen), ocr=slow_ocr, progress=stages.append)
+    elapsed = time.perf_counter() - started
+    assert elapsed < 1.0, f"three 0.4 s witnesses took {elapsed:.2f} s: they ran one after another"
+    assert result.reading.model_text == "SPG3000" and result.ocr_lines == ["FIRMAN", "SPG3000"]
+    assert stages[0] == "reading"

@@ -27,6 +27,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> refused. chosen=None None margin=0.1
 - **abstain** -> abstain. model refused
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 6321 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 4340 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 15355 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2816 ms (replayed)
+- total across calls: 28832 ms; wall clock: 143 ms
+
 ## Identification
 Shortlist from the catalogue:
   - HP EliteBook 840 G5 (0.5667)

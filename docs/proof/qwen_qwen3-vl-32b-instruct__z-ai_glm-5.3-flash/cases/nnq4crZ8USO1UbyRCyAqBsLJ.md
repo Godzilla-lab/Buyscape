@@ -37,6 +37,13 @@ Circuit Breaker (Protects ' hits=['Elepaq SV2200 2.5kVA', 'Elepaq SV6800 6.5kVA'
 - **identify** -> refused. chosen=Elepaq None margin=0.25
 - **abstain** -> abstain. model refused
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 8755 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 6382 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 16488 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2137 ms (replayed)
+- total across calls: 33762 ms; wall clock: 294 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Elepaq SV2200 2.5kVA (0.5)

@@ -35,6 +35,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> ok. chosen=Samsung Galaxy S21+ 5G margin=0.75
 - **abstain** -> abstain. confidence 0.4: no label, plate or settings screen was legible; 2 lines seen by both readers; looks like a catalogue or stock image
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 3994 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 17568 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 6896 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3010 ms (replayed)
+- total across calls: 31468 ms; wall clock: 801 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Samsung Galaxy S21 (0.9)

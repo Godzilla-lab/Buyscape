@@ -23,6 +23,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> refused. chosen=None None margin=None
 - **abstain** -> abstain. model refused
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4884 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 15173 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 5252 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2855 ms (replayed)
+- total across calls: 28164 ms; wall clock: 308 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Tecno Spark 10 (0.2)

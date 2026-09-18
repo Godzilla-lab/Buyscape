@@ -40,6 +40,12 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> label. named from the label: SENWEI SV6200, not in the catalogue
 - **abstain** -> pass. confidence=0.45 from the label
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 8069 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 39966 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3824 ms (replayed)
+- total across calls: 51859 ms; wall clock: 551 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Senwei SW3500 3.5kVA (0.55)

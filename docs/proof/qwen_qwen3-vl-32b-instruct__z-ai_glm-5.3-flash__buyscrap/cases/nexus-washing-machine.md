@@ -30,6 +30,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> refused. chosen=None None margin=None
 - **abstain** -> abstain. model refused
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4033 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 9895 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 15587 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 1488 ms (replayed)
+- total across calls: 31003 ms; wall clock: 119 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Nexus NX-WM8 8kg twin tub (0.4)

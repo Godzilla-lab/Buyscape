@@ -28,6 +28,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> ok. chosen=Apple iPhone SE margin=0.55
 - **abstain** -> abstain. seller names another generation
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4670 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 11747 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 11835 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2575 ms (replayed)
+- total across calls: 30827 ms; wall clock: 437 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Apple iPhone SE (0.6)

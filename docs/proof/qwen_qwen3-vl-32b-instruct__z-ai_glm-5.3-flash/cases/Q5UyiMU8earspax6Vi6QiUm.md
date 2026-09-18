@@ -1,6 +1,6 @@
 # Case Q5UyiMU8earspax6Vi6QiUm
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0019  |  40416 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0017  |  32276 ms
 
 ## What the engine saw
 - Presentation: single_unit
@@ -27,31 +27,39 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **corroborate** -> agree. brand_text agreed by both readers
 - **read_evidence** -> ok. category=laptop brand=Apple model=None label=False lines=3
 - **forensics** -> flag. looks like a catalogue or stock image
-- **retrieval** -> ok. query='Apple File Edit Apple logo on screen MacBook Pro 16 Touchbar (2019) i9-9880H 32GB-1TB SSD ' hits=['Apple MacBook Pro 13-inch 2017', 'Apple MacBook Pro 17-inch 2011', 'Apple MacBook Air M1 2020', 'Apple MacBook Air 13-inch 2017']
-- **identify** -> refused. chosen=None None margin=0.15
+- **retrieval** -> ok. query='Apple File Edit Apple logo on screen MacBook Pro 16 Touchbar (2019) i9-9880H 32GB-1TB SSD ' hits=['Apple MacBook Pro 13-inch 2017', 'Apple MacBook Pro 17-inch 2011', 'Apple MacBook Pro 13-inch M2 2022', 'Apple MacBook Pro 14-inch M1 Pro 2021', 'Apple MacBook Pro 14-inch M3 2023']
+- **identify** -> refused. chosen=None None margin=0.2
 - **abstain** -> abstain. model refused
+
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 7257 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 6794 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 13981 ms
+- extract_claims on qwen/qwen3-vl-32b-instruct: 4244 ms (replayed)
+- total across calls: 32276 ms; wall clock: 14091 ms
 
 ## Identification
 Shortlist from the catalogue:
   - Apple MacBook Pro 13-inch 2017 (0.4333)
   - Apple MacBook Pro 17-inch 2011 (0.4333)
-  - Apple MacBook Air M1 2020 (0.38)
-  - Apple MacBook Air 13-inch 2017 (0.3667)
+  - Apple MacBook Pro 13-inch M2 2022 (0.4143)
+  - Apple MacBook Pro 14-inch M1 Pro 2021 (0.4143)
+  - Apple MacBook Pro 14-inch M3 2023 (0.4143)
 
-**Not identified: CANNOT_IDENTIFY.** No label or legible model text; screen appears to have large bezels unlike the claimed 2019 16-inch Touch Bar, and no Touch Bar is visible. Photo alone cannot confirm size or year; no shortlist entry matches reliably.
+**Not identified: CANNOT_IDENTIFY.** Seller claims 16-inch 2019 Touch Bar model, but that entry is absent from the shortlist and no label or legible text on the item confirms any model. Visual appearance (large chassis, Touch Bar) is consistent with the seller's claim, but the rules forbid selecting an off-list model without a plainly legible label.
 
 Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 7% on the best answer. It is probably a Apple MacBook Pro 17-inch 2011 or a Apple MacBook Pro 13-inch 2017, and the photos cannot separate them.**
+**Not sure enough to price: 7% on the best answer. It is probably a Apple MacBook Pro 14-inch M1 Pro 2021 or a Apple MacBook Pro 13-inch M2 2022, and the photos cannot separate them.**
 
 - Identification confidence: 7% (unknown)
 - Price confidence: 14%
-- It is weighing: Apple MacBook Pro 17-inch 2011 (0.3), Apple MacBook Pro 13-inch 2017 (0.15)
-- No label or legible model text; screen appears to have large bezels unlike the claimed 2019 16-inch Touch Bar, and no Touch Bar is visible. Photo alone cannot confirm size or year; no shortlist entry matches reliably.
+- It is weighing: Apple MacBook Pro 14-inch M1 Pro 2021 (0.3), Apple MacBook Pro 13-inch M2 2022 (0.1)
+- Seller claims 16-inch 2019 Touch Bar model, but that entry is absent from the shortlist and no label or legible text on the item confirms any model. Visual appearance (large chassis, Touch Bar) is consistent with the seller's claim, but the rules forbid selecting an off-list model without a plainly legible label.
 - no label, plate or settings screen was legible
 - 3 lines seen by both readers
-- the next candidate was only 0.15 behind
+- the next candidate was only 0.2 behind
 - looks like a catalogue or stock image
 - 10 claims are still unproven, 0 are supported
 
@@ -96,7 +104,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 1,942 NGN
 
 Conditions attached to this price:
-- Not identified: No label or legible model text; screen appears to have large bezels unlike the claimed 2019 16-inch Touch Bar, and no Touch Bar is visible. Photo alone cannot confirm size or year; no shortlist entry matches reliably.
+- Not identified: Seller claims 16-inch 2019 Touch Bar model, but that entry is absent from the shortlist and no label or legible text on the item confirms any model. Visual appearance (large chassis, Touch Bar) is consistent with the seller's claim, but the rules forbid selecting an off-list model without a plainly legible label.
 - Evidence flag: looks like a catalogue or stock image
 - Raised to the 5,000 NGN minimum this business publishes for this kind of item.
 - MacBook Pro 16 Touchbar (2019) -> not proven remotely. Agent will confirm at pickup.

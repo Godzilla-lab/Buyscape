@@ -33,6 +33,13 @@ It' hits=['HP EliteBook 840 G5', 'HP EliteBook 840 G6', 'HP EliteBook 830 G5', '
 - **identify** -> ok. chosen=HP EliteBook 840 G5 margin=0.1
 - **abstain** -> abstain. top score 0.6
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4769 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 7819 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 8120 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3439 ms (replayed)
+- total across calls: 24147 ms; wall clock: 136 ms
+
 ## Identification
 Shortlist from the catalogue:
   - HP EliteBook 840 G5 (0.9)

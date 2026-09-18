@@ -45,6 +45,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> ok. chosen=Senci SC7800IES margin=0.85
 - **abstain** -> abstain. confidence 0.36: read off the item's own label; 9 lines seen by both readers; the brand was read by only one reader and is not confirmed; looks like a catalogue or stock image
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 16326 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 11348 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 4988 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3077 ms (replayed)
+- total across calls: 35739 ms; wall clock: 549 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Kemage KM6500 5.5kVA (0.15)

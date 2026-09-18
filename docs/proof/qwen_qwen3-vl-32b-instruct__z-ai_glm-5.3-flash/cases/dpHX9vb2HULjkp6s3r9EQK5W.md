@@ -34,6 +34,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> ok. chosen=Elepaq SV22000E margin=0.5
 - **abstain** -> abstain. top score 0.6
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 8033 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 5518 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 48045 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2742 ms (replayed)
+- total across calls: 64338 ms; wall clock: 400 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Elepaq SV2200 2.5kVA (0.5)

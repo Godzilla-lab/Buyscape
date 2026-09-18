@@ -1,24 +1,26 @@
 # Case mHdf4GzJMu9bgwTUNei7fhOi
 
-Photos: 5  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0014  |  37830 ms
+Photos: 5  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0042  |  392781 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: phone (confidence 1.0)
-- Made of: plastic 60%, steel 20%, circuit_board 10%, glass 10%
+- Made of: plastic 60%, steel 30%, circuit_board 10%
 - Estimated weight: 0.2 kg (confidence 0.9)
 - Brand read off the item: SAMSUNG
 - Model read off the item: nothing legible
 - Rating read: none
-- Label, plate or settings screen legible: no
-- Damage noted: minor scratches on back panel, screen appears intact
-- Looks like a catalogue image: no
-- Screenshot of a gallery: no
-- Text read: SAMSUNG
+- Label, plate or settings screen legible: yes
+- Damage noted: minor scuffs on back panel, battery shows signs of use, no visible damage on back panel, screen not visible in photo, minor smudges on back panel, no visible cracks or dents, screen appears cracked or damaged at edge, side panel shows wear and possible scratches
+- Looks like a catalogue image: yes
+- Screenshot of a gallery: yes
+- Text read: POSTED ON | SAMSUNG | MAPSCHOOL GLOBAL TECHNOLOGY | Google | Camera | Chrome | Messages | Phone
 
 ## Two readers
 - brand_text agreed by both readers
-- 1 transcribed lines was seen by only one reader, so it is treated as unread
+- model_text was seen by only one reader, so it is treated as unread
+- rating_text was seen by only one reader, so it is treated as unread
+- 21 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## OCR read off the photos
 - APHTZ GLOBAL TE
@@ -27,14 +29,27 @@ Photos: 5  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Chain
 - **ocr** -> ok. 3 lines: APHTZ GLOBAL TE | 2X | 30
-- **corroborate** -> dispute. brand_text agreed by both readers; 1 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=phone brand=SAMSUNG model=None label=False lines=1
-- **retrieval** -> ok. query='SAMSUNG SAMSUNG S23 ultra 512 GB
-2 physical sims 
-Good battery health 
-Direct UK  used' hits=['Samsung Galaxy S23', 'Samsung Galaxy S21', 'Samsung Galaxy S22', 'Samsung Galaxy S24', 'Samsung Galaxy S25']
-- **identify** -> ok. chosen=Samsung Galaxy S23 margin=0.55
-- **abstain** -> pass. confidence=0.72 margin=0.55
+- **corroborate** -> dispute. brand_text agreed by both readers; model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; 21 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=phone brand=SAMSUNG model=None label=True lines=19
+- **forensics** -> flag. looks like a catalogue or stock image; screenshot of a gallery rather than a photo of the item
+- **retrieval** -> ok. query='SAMSUNG POSTED ON SAMSUNG MAPSCHOOL GLOBAL TECHNOLOGY Google Camera Chrome Messages Phone ' hits=['Samsung Galaxy S23', 'Samsung Galaxy S21', 'Samsung Galaxy S22', 'Samsung Galaxy S24', 'Samsung Galaxy S25']
+- **identify** -> refused. chosen=None None margin=0.2
+- **abstain** -> abstain. model refused
+
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 42001 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 33513 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 34234 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 32732 ms
+- read_evidence on qwen/qwen3-vl-32b-instruct: 48733 ms
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 19871 ms
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 20207 ms
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 29100 ms
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 20437 ms
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 76179 ms
+- identify on z-ai/glm-5.3-flash: 32267 ms
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3507 ms (replayed)
+- total across calls: 392781 ms; wall clock: 108519 ms
 
 ## Identification
 Shortlist from the catalogue:
@@ -44,26 +59,32 @@ Shortlist from the catalogue:
   - Samsung Galaxy S24 (0.3)
   - Samsung Galaxy S25 (0.3)
 
-**Answer: Samsung Galaxy S23 Ultra (512GB per seller)** (margin 0.55)
+**Not identified: CANNOT_IDENTIFY.** Photos show an Ultra-style body (individual ringed lenses, boxy slab) suggesting S23 Ultra, but no model label is legible and 'Galaxy S23 Ultra' is not on the shortlist; the plain-S23 entry contradicts the visible camera design.
+
+Evidence flags: looks like a catalogue or stock image; screenshot of a gallery rather than a photo of the item
 
 ## How sure the engine is (back office)
-**72% sure this is a Samsung Galaxy S23 Ultra (512GB per seller).**
+**Not sure enough to price: 11% on the best answer. It is probably a Samsung Galaxy S23 or a Samsung Galaxy S22, and the photos cannot separate them.**
 
-- Identification confidence: 72% (likely)
-- Price confidence: 0%
-- It is weighing: Samsung Galaxy S23 (0.85), Samsung Galaxy S24 (0.3), Samsung Galaxy S22 (0.2)
-- no label, plate or settings screen was legible
-- 1 lines seen by both readers
+- Identification confidence: 11% (unknown)
+- Price confidence: 14%
+- It is weighing: Samsung Galaxy S23 (0.4), Samsung Galaxy S22 (0.2)
+- Photos show an Ultra-style body (individual ringed lenses, boxy slab) suggesting S23 Ultra, but no model label is legible and 'Galaxy S23 Ultra' is not on the shortlist; the plain-S23 entry contradicts the visible camera design.
+- read off the item's own label
+- 19 lines seen by both readers
+- the next candidate was only 0.2 behind
+- looks like a catalogue or stock image
+- screenshot of a gallery rather than a photo of the item
 - 10 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
 
 ## What the seller is asked for next (shown in the app)
-1. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: If you have the box, photograph the label showing the model, storage and IMEI. Then, still filming, do this on the item's own screen and hold it steady so the writing can be read: open settings then About, showing the model name and storage. Then, without stopping the video: Pull out the SIM tray and photograph the open slot. Finish with: A short clip: press power, unlock, then open the camera app. Keep filming the whole time. Do not cut between clips.
+1. [PHOTO] Take a new photo of the item itself, not a picture of another screen.
+   _why: this is a screenshot rather than a photo of the item_
+2. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: If you have the box, photograph the label showing the model, storage and IMEI. Then, still filming, do this on the item's own screen and hold it steady so the writing can be read: open settings then About, showing the model name and storage. Then, without stopping the video: Pull out the SIM tray and photograph the open slot. Finish with: A short clip: press power, unlock, then open the camera app. Keep filming the whole time. Do not cut between clips.
    _why: two readings of these photos disagreed about what is written on the item_
-2. [PHOTO] Screenshot of Settings then About, showing the model name and storage.
-   _why: nothing on the item says which model this is_
-3. [PHOTO] Dial *#06# and screenshot the IMEI that appears.
+3. [PHOTO] Screenshot of Settings then About, showing the model name and storage.
    _why: nothing on the item says which model this is_
 
 ## What the seller is asked (only they know these)
@@ -92,13 +113,16 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
-**21 to 66 NGN** (priced as material, width 1.0075, method scrap_band_only, 0 comparable prices)
+**26 to 77 NGN** (priced as material, width 0.9863, method material_floor, 0 comparable prices)
 
-No usable comparable sales (0 found, 2 needed), so the range comes from the published Lagos buy band for this category, reduced by 0.4541 for unproven claims.
+This item was not identified, so it is priced as material rather than as a working item: 0.2 kg of plastic 60%, steel 30%, circuit_board 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 48 NGN
+Scrap floor: 58 NGN
 
 Conditions attached to this price:
+- Not identified: Photos show an Ultra-style body (individual ringed lenses, boxy slab) suggesting S23 Ultra, but no model label is legible and 'Galaxy S23 Ultra' is not on the shortlist; the plain-S23 entry contradicts the visible camera design.
+- Evidence flag: looks like a catalogue or stock image
+- Evidence flag: screenshot of a gallery rather than a photo of the item
 - S23 ultra 512 GB -> not proven remotely. Agent reads storage from Settings.
 - S23 ultra 512 GB -> not proven remotely. Agent reads storage from Settings.
 - 2 physical sims -> not proven remotely. Agent will confirm at pickup.

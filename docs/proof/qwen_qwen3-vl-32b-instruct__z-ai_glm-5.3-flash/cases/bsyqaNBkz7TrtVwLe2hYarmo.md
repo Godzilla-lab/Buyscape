@@ -36,6 +36,13 @@ Di' hits=['Google Pixel 7', 'Google Pixel 8', 'Google Pixel 9']
 - **identify** -> ok. chosen=Google Pixel Fold margin=None
 - **abstain** -> abstain. confidence 0.4: no label, plate or settings screen was legible; 1 lines seen by both readers; looks like a catalogue or stock image
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5988 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 8176 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 7891 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3380 ms (replayed)
+- total across calls: 25435 ms; wall clock: 558 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Google Pixel 7 (0.5)

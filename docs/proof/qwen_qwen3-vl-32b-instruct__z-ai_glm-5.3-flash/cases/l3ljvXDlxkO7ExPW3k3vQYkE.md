@@ -31,6 +31,13 @@ condition -10/10' hits=['Samsung Galaxy S25', 'Samsung Galaxy S21', 'Samsung Gal
 - **identify** -> ok. chosen=Samsung Galaxy S25+ margin=0.2
 - **abstain** -> abstain. top score 0.55
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4659 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 10389 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 15625 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3272 ms (replayed)
+- total across calls: 33945 ms; wall clock: 523 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Samsung Galaxy S25 (0.7)

@@ -34,6 +34,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> refused. chosen=None None margin=0.2
 - **abstain** -> abstain. model refused
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4131 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 17117 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 15709 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3156 ms (replayed)
+- total across calls: 40113 ms; wall clock: 390 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Samsung WA80 8kg top loader (0.4667)

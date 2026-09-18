@@ -34,6 +34,14 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **retrieval** -> ok. query='SAMSUNG 6.0kg SAMSUNG Super Eco Wash Outdoor Care Baby Care Wool Hand Wash Eco+Spin Cotton' hits=['Samsung AR12 1.5HP', 'Samsung AR09 1HP', 'Samsung WA80 8kg top loader', 'Samsung WW70 7kg front loader', 'Samsung Galaxy S21']
 - **identify** -> refused. chosen=None None margin=None
 - **abstain** -> abstain. model refused
+- **condition** -> not working. by the seller's own account
+
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 7852 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 17515 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 6827 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3496 ms (replayed)
+- total across calls: 35690 ms; wall clock: 217 ms
 
 ## Identification
 Shortlist from the catalogue:

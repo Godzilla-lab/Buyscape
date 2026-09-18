@@ -35,6 +35,13 @@ Intel core i5(6th gen )
 - **identify** -> refused. chosen=None None margin=0.0
 - **abstain** -> abstain. model refused
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 7325 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 6189 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 11946 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 4332 ms (replayed)
+- total across calls: 29792 ms; wall clock: 188 ms
+
 ## Identification
 Shortlist from the catalogue:
   - HP EliteBook 840 G5 (0.5667)

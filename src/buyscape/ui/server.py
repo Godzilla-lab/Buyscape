@@ -46,6 +46,13 @@ SAFE_NAME = re.compile(r"[^A-Za-z0-9._-]+")
 STAFF_GETS = {"meta", "runs", "testset"}
 
 
+def _live_comps(model_key: str, category: str) -> list[dict]:
+    """Used listings for this model, fetched from Jiji right now."""
+    from ..evalset import jiji
+
+    return [l.to_json() for l in jiji.search_used(model_key, category)]
+
+
 class Engine:
     """Everything a valuation needs, loaded once and shared between requests."""
 
@@ -105,7 +112,7 @@ class Engine:
                 raise ValueError(f"no tenant file at {tenant_file}")
             tenant = load_tenant(tenant_file)
 
-        comps = JijiComps(self.pool, exclude_ids=exclude)
+        comps = JijiComps(self.pool, exclude_ids=exclude, live=_live_comps)
         reader_p = _cli._provider(reader, self.fixtures, mode)
         reasoner_p = _cli._provider(reasoner, self.fixtures, mode)
         corroborator_p = None if corroborator in ("", "none") else _cli._provider(corroborator, self.fixtures, mode)
@@ -464,7 +471,7 @@ class Handler(BaseHTTPRequestHandler):
                 elif action == "remove":
                     self._json(200, store.remove_photo(sid, body.get("file") or ""))
                 elif action == "submit":
-                    self._json(200, store.submit(sid, body))
+                    self._json(200, store.start_submit(sid, body))
                 else:
                     self._json(404, {"error": "not found"})
             elif parts[:3] == ["api", "office", "sessions"] and len(parts) == 5 and parts[4] == "settle":

@@ -22,6 +22,14 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **retrieval** -> ok. query='Description: This is a scrap electric standing fan that is currently not functioning prope' hits=['Google Pixel 7']
 - **identify** -> refused. chosen=None None margin=None
 - **abstain** -> abstain. model refused
+- **condition** -> not working. by the seller's own account
+
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4237 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 5608 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 6437 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2446 ms (replayed)
+- total across calls: 18728 ms; wall clock: 1467 ms
 
 ## Identification
 Shortlist from the catalogue:

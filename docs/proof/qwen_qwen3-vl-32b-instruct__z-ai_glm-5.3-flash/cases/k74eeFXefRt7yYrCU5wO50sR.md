@@ -35,6 +35,13 @@ Cor' hits=['HP 2000', 'HP EliteBook 840 G5', 'HP EliteBook 840 G6', 'HP EliteBoo
 - **identify** -> refused. chosen=HP None margin=0.4
 - **abstain** -> abstain. model refused
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 6134 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 13213 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 33804 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3862 ms (replayed)
+- total across calls: 57013 ms; wall clock: 104 ms
+
 ## Identification
 Shortlist from the catalogue:
   - HP 2000 (0.5)

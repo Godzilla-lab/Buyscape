@@ -36,6 +36,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> refused. chosen=None None margin=None
 - **abstain** -> abstain. model refused
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 6149 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 5455 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 19447 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3187 ms (replayed)
+- total across calls: 34238 ms; wall clock: 376 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Mikano MK30 30kVA (0.2333)

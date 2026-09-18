@@ -27,6 +27,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> refused. chosen=None None margin=None
 - **abstain** -> abstain. model refused
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5546 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 10263 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 5716 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2274 ms (replayed)
+- total across calls: 23799 ms; wall clock: 2182 ms
+
 ## Identification
 Shortlist from the catalogue:
   - itel A70 (0.4)

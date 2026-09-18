@@ -38,6 +38,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> refused. chosen=LG None margin=0.05
 - **abstain** -> abstain. model refused
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 6407 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 14013 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 18908 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 5100 ms (replayed)
+- total across calls: 44428 ms; wall clock: 505 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Hisense WT3K9022U 9kg top loader (0.8333)

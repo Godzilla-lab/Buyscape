@@ -42,6 +42,13 @@ Key star' hits=['Lutian LT3900 3.5kVA', 'Thermocool TC2700 2.5kVA', 'Haier Therm
 - **identify** -> ok. chosen=Lutian E33KWH margin=0.5
 - **abstain** -> abstain. seller names another generation
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 6187 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 24788 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 27816 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3617 ms (replayed)
+- total across calls: 62408 ms; wall clock: 758 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Lutian LT3900 3.5kVA (0.55)

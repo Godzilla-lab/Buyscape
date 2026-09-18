@@ -40,6 +40,13 @@ Samsung Galaxy S21 5' hits=['Samsung Galaxy S21', 'Samsung Galaxy S22', 'Samsung
 - **identify** -> ok. chosen=Samsung Galaxy S21 margin=0.4
 - **abstain** -> abstain. top score 0.6
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5671 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 8702 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 8835 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 6225 ms (replayed)
+- total across calls: 29433 ms; wall clock: 474 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Samsung Galaxy S21 (0.9)

@@ -37,6 +37,13 @@ Open box' hits=['Apple iPhone 16', 'Apple iPhone XR', 'Apple iPhone XS', 'Apple 
 - **identify** -> refused. chosen=None None margin=0.05
 - **abstain** -> abstain. model refused
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 3958 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 14318 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 7821 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 4207 ms (replayed)
+- total across calls: 30304 ms; wall clock: 583 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Apple iPhone 16 (0.3333)

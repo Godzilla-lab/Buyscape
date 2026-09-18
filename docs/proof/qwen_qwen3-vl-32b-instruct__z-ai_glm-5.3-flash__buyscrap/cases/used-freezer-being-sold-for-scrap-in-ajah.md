@@ -28,6 +28,14 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **retrieval** -> ok. query='Description: This is a used freezer being sold for scrap. The compressor is still availabl' hits=['Tecno Camon 50', 'Infinix Hot 50', 'Infinix Note 50']
 - **identify** -> refused. chosen=None None margin=None
 - **abstain** -> abstain. model refused
+- **condition** -> not working. by the seller's own account
+
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4216 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 6961 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 5287 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3293 ms (replayed)
+- total across calls: 19757 ms; wall clock: 193 ms
 
 ## Identification
 Shortlist from the catalogue:

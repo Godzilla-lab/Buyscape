@@ -37,6 +37,13 @@ The MAXMECH WGC-380Ei Welding Generator is a heavy-duty ' hits=['Maxmech MX3500 
 - **identify** -> ok. chosen=Maxmech WGC-380Ei margin=0.75
 - **abstain** -> pass. confidence=0.85 margin=0.75
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 11054 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 6516 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 4353 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3461 ms (replayed)
+- total across calls: 25384 ms; wall clock: 418 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Maxmech MX3500 3.5kVA (0.5)
@@ -88,11 +95,7 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Photo of the engine, showing the recoil starter and carburettor.
 
 ## Price
-**20,954 to 42,850 NGN** (priced as material, width 0.6863, method scrap_band_only, 0 comparable prices)
-
-No usable comparable sales (0 found, 2 needed), so the range comes from the published Lagos buy band for this category, reduced by 0.6302 for unproven claims.
-
-Scrap floor: 33,250 NGN
+**NO_PRICE_DATA.** Only 0 comparable asking prices were found and there is no published band for this category, so no honest range can be produced. Nothing below the 33,250 NGN floor.
 
 Conditions attached to this price:
 - The MAXMECH WGC-380Ei Welding Generator is a heavy-duty 2-in-1 machine -> not proven remotely. Agent will confirm at pickup.

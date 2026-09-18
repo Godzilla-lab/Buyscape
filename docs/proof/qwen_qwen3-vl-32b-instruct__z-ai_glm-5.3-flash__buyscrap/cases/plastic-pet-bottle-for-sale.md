@@ -21,6 +21,12 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **read_evidence** -> ok. category=recyclable plastic waste brand=None model=None label=False lines=0
 - **gate** -> lot. priced by material, identification skipped
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4429 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 6091 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2056 ms (replayed)
+- total across calls: 12576 ms; wall clock: 689 ms
+
 ## Identification
 No catalogue candidates matched.
 

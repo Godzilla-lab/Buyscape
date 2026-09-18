@@ -39,6 +39,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> ok. chosen=Thuraya XT-LITE margin=None
 - **abstain** -> abstain. confidence 0.4: no label, plate or settings screen was legible; 3 lines seen by both readers; looks like a catalogue or stock image
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4347 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 6275 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 7708 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2313 ms (replayed)
+- total across calls: 20643 ms; wall clock: 516 ms
+
 ## Identification
 No catalogue candidates matched.
 

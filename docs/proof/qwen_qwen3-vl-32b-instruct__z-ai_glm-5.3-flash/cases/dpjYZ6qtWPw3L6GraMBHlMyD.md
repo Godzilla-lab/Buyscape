@@ -33,6 +33,13 @@ Laptop and charger' hits=['Dell Latitude E7470', 'Dell Latitude 7490', 'Dell Lat
 - **identify** -> refused. chosen=None None margin=0.2
 - **abstain** -> abstain. model refused
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 8232 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 5566 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 7527 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3960 ms (replayed)
+- total across calls: 25285 ms; wall clock: 104 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Dell Latitude E7470 (0.5)

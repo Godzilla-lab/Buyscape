@@ -33,6 +33,13 @@ Windo' hits=['Lenovo IdeaPad 3', 'Lenovo 14w', 'Lenovo ThinkPad T480', 'Lenovo T
 - **identify** -> refused. chosen=None None margin=None
 - **abstain** -> abstain. model refused
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 7107 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 11063 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 80942 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3803 ms (replayed)
+- total across calls: 102915 ms; wall clock: 176 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Lenovo IdeaPad 3 (0.7)

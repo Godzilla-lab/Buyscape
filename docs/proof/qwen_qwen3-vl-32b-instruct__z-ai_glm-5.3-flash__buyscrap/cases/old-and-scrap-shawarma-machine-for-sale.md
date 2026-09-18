@@ -22,6 +22,12 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **retrieval** -> empty. query='A client has a used and locally made shawarma machine that uses gas. The last known condit' hits=[]
 - **gate** -> abstain. no candidates and no model text
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5988 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 10954 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3583 ms (replayed)
+- total across calls: 20525 ms; wall clock: 159 ms
+
 ## Identification
 No catalogue candidates matched.
 

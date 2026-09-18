@@ -44,6 +44,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> ok. chosen=LG F1486COP2 margin=0.6
 - **abstain** -> abstain. seller names another generation
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 7294 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 11772 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 14636 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3675 ms (replayed)
+- total across calls: 37377 ms; wall clock: 463 ms
+
 ## Identification
 Shortlist from the catalogue:
   - LG T2108 8kg top loader (0.4333)

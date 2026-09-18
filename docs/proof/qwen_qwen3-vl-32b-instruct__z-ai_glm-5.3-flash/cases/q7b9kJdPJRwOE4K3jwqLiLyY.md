@@ -1,6 +1,6 @@
 # Case q7b9kJdPJRwOE4K3jwqLiLyY
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0013  |  26128 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  26136 ms
 
 ## What the engine saw
 - Presentation: single_unit
@@ -30,32 +30,38 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 Core i7 - 2.5GHz Quad-Core
 8GB RAM
 128GB SSD
-Graphics: Intel ' hits=['Apple MacBook Pro 13-inch 2017', 'Apple MacBook Pro 17-inch 2011', 'Apple MacBook Air M1 2020', 'Apple MacBook Air 13-inch 2017']
-- **identify** -> refused. chosen=None None margin=0.1
+Graphics: Intel ' hits=['Apple MacBook Pro 13-inch 2017', 'Apple MacBook Pro 17-inch 2011', 'Apple MacBook Pro 13-inch M2 2022', 'Apple MacBook Pro 14-inch M1 Pro 2021', 'Apple MacBook Pro 14-inch M3 2023']
+- **identify** -> refused. chosen=None None margin=None
 - **abstain** -> abstain. model refused
+
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5241 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 6008 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 10652 ms
+- extract_claims on qwen/qwen3-vl-32b-instruct: 4235 ms (replayed)
+- total across calls: 26136 ms; wall clock: 10743 ms
 
 ## Identification
 Shortlist from the catalogue:
   - Apple MacBook Pro 13-inch 2017 (0.4333)
   - Apple MacBook Pro 17-inch 2011 (0.4333)
-  - Apple MacBook Air M1 2020 (0.38)
-  - Apple MacBook Air 13-inch 2017 (0.3667)
+  - Apple MacBook Pro 13-inch M2 2022 (0.4143)
+  - Apple MacBook Pro 14-inch M1 Pro 2021 (0.4143)
+  - Apple MacBook Pro 14-inch M3 2023 (0.4143)
 
-**Not identified: CANNOT_IDENTIFY.** Photo shows a 15-inch Retina-style MacBook Pro, but no 15-inch entry is on the shortlist and no model text is legible; seller's specs (quad-core i7, HD 4000) fit a 2012-2013 15-inch Retina Pro, which I cannot confirm from the image alone.
+**Not identified: CANNOT_IDENTIFY.** Photo shows a 15-inch unibody MacBook Pro consistent with seller's 2013 claim, but no shortlist entry is a 15-inch 2013 model and no label text confirms a model.
 
 Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 3% on the best answer. It is probably a Apple MacBook Pro 17-inch 2011 or a Apple MacBook Pro 13-inch 2017, and the photos cannot separate them.**
+**0%: the photos do not say what this is.**
 
-- Identification confidence: 3% (unknown)
+- Identification confidence: 0% (unknown)
 - Price confidence: 14%
-- It is weighing: Apple MacBook Pro 17-inch 2011 (0.2), Apple MacBook Pro 13-inch 2017 (0.1)
-- Photo shows a 15-inch Retina-style MacBook Pro, but no 15-inch entry is on the shortlist and no model text is legible; seller's specs (quad-core i7, HD 4000) fit a 2012-2013 15-inch Retina Pro, which I cannot confirm from the image alone.
+- Photo shows a 15-inch unibody MacBook Pro consistent with seller's 2013 claim, but no shortlist entry is a 15-inch 2013 model and no label text confirms a model.
 - no label, plate or settings screen was legible
 - the two readers agreed on nothing legible
 - the brand was read by only one reader and is not confirmed
-- the next candidate was only 0.1 behind
 - looks like a catalogue or stock image
 - 10 claims are still unproven, 0 are supported
 
@@ -102,7 +108,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 2,331 NGN
 
 Conditions attached to this price:
-- Not identified: Photo shows a 15-inch Retina-style MacBook Pro, but no 15-inch entry is on the shortlist and no model text is legible; seller's specs (quad-core i7, HD 4000) fit a 2012-2013 15-inch Retina Pro, which I cannot confirm from the image alone.
+- Not identified: Photo shows a 15-inch unibody MacBook Pro consistent with seller's 2013 claim, but no shortlist entry is a 15-inch 2013 model and no label text confirms a model.
 - Evidence flag: looks like a catalogue or stock image
 - Raised to the 5,000 NGN minimum this business publishes for this kind of item.
 - MacBook Pro 2013 -> not proven remotely. Agent will confirm at pickup.

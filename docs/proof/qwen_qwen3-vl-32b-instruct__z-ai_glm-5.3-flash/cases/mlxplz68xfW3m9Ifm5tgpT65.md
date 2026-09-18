@@ -37,6 +37,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> ok. chosen=Google Pixel Fold margin=None
 - **abstain** -> abstain. confidence 0.4: no label, plate or settings screen was legible; 2 lines seen by both readers; looks like a catalogue or stock image
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5377 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 11709 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 12327 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3290 ms (replayed)
+- total across calls: 32703 ms; wall clock: 828 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Google Pixel 7 (0.7)

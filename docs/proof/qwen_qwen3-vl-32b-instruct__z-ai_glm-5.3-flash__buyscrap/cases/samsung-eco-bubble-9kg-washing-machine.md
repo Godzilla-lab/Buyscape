@@ -42,6 +42,14 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **retrieval** -> ok. query='SAMSUNG 9.0kg SAMSUNG Super Eco Wash Outdoor Care Baby Care Wool@ Bedding Spin Rinse+Spin ' hits=['Samsung Galaxy Note 20', 'Samsung AR09 1HP', 'Samsung WA80 8kg top loader', 'Samsung AR12 1.5HP', 'Samsung WW70 7kg front loader']
 - **identify** -> refused. chosen=None None margin=None
 - **abstain** -> abstain. model refused
+- **condition** -> not working. by the seller's own account
+
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 7782 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 12011 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 18705 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3979 ms (replayed)
+- total across calls: 42477 ms; wall clock: 462 ms
 
 ## Identification
 Shortlist from the catalogue:

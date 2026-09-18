@@ -334,6 +334,68 @@ def build_price_pool(
     return counts
 
 
+def search_used(
+    query: str,
+    category: str,
+    region: str = "lagos",
+    max_pages: int = 2,
+    limit: int = 40,
+    client: httpx.Client | None = None,
+) -> list[Listing]:
+    """Used listings for one model, fetched now.
+
+    The cached pool is what a deployment keeps warm, but a seller can bring
+    a model nobody has asked about yet. Pricing by retrieval means going to
+    get the observations at that moment rather than falling to the scrap
+    floor. Titles only, no photos, dated on fetch.
+    """
+    q = Query(category, query=query)
+    own = client is None
+    client = client or httpx.Client(headers={"User-Agent": UA}, timeout=15.0)
+    kept: list[Listing] = []
+    seen: set[str] = set()
+    try:
+        for page in range(1, max_pages + 1):
+            r = client.get(BASE, params=q.params(page, region))
+            if r.status_code != 200:
+                break
+            adverts = (r.json().get("adverts_list") or {}).get("adverts") or []
+            if not adverts:
+                break
+            for advert in adverts:
+                attrs = _attrs(advert)
+                if not _is_used(attrs):
+                    continue
+                price = (advert.get("price_obj") or {}).get("value")
+                if not isinstance(price, (int, float)) or price <= 0:
+                    continue
+                advert_id = str(advert.get("guid") or advert.get("id"))
+                if advert_id in seen:
+                    continue
+                seen.add(advert_id)
+                kept.append(
+                    Listing(
+                        id=advert_id,
+                        category=category,
+                        title=str(advert.get("title") or ""),
+                        price_ngn=int(price),
+                        description="",
+                        condition=attrs.get("Condition", ""),
+                        is_used=True,
+                        attrs=attrs,
+                        image_urls=[],
+                        url=str(advert.get("url") or ""),
+                        fetched_at=time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+                    )
+                )
+                if len(kept) >= limit:
+                    return kept
+    finally:
+        if own:
+            client.close()
+    return kept
+
+
 def load(out_dir: Path) -> list[Listing]:
     """Read the cached test set back."""
     listings: list[Listing] = []

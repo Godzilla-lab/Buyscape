@@ -486,7 +486,7 @@ def assess(
     catalogue = load_catalogue(ROOT / "catalogue")
     tenant_config = load_tenant(tenant_file)
     pool = prices if prices.exists() else ROOT / "eval" / "raw"
-    comps = JijiComps(pool)
+    comps = JijiComps(pool, live=lambda key, cat: [l.to_json() for l in jiji.search_used(key, cat)])
     scrap = ScrapIndex(ROOT / "tenants" / "scrap_index_lagos.yaml")
     materials = MaterialsFloor(ROOT / "tenants" / "scrap_index_lagos.yaml")
     reader_p = _provider(reader, fixtures, mode)

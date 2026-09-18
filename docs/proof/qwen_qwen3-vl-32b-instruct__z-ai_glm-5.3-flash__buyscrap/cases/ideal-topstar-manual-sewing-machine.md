@@ -32,6 +32,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> ok. chosen=Ideal Topstar Super Automatic margin=None
 - **abstain** -> pass. confidence=0.9 margin=None
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5233 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 10292 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 6845 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3542 ms (replayed)
+- total across calls: 25912 ms; wall clock: 438 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Tecno Spark 10 (0.2)
@@ -81,11 +88,7 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Tell us what it is, whether it works, and roughly how heavy it is.
 
 ## Price
-**974 to 3,604 NGN** (priced as material, width 1.1487, method scrap_band_only, 0 comparable prices)
-
-No usable comparable sales (0 found, 2 needed), so the range comes from the published Lagos buy band for this category, reduced by 0.3422 for unproven claims.
-
-Scrap floor: 2,847 NGN
+**NO_PRICE_DATA.** Only 0 comparable asking prices were found and there is no published band for this category, so no honest range can be produced. Nothing below the 2,847 NGN floor.
 
 Conditions attached to this price:
 - Ideal Topstar manual sewing machine -> not proven remotely. Weigh on the scale and photograph the display.

@@ -31,6 +31,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> refused. chosen=LG None margin=0.0
 - **abstain** -> abstain. model refused
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4129 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 8279 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 7490 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 4266 ms (replayed)
+- total across calls: 24164 ms; wall clock: 514 ms
+
 ## Identification
 Shortlist from the catalogue:
   - LG S4-Q09 1HP (0.4)

@@ -20,7 +20,8 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - DYNASTYGADGETS
 
 ## Chain
-- **corroborate** -> unavailable. no fixture for task=read_evidence key=a94ad2da50191b9c740ef83775806285 (model=mistralai/mistral-small-3.2-24b-instruct);
+- **corroborate** -> unavailable. openrouter:mistralai/mistral-small-3.2-24b-instruct failed after retries: no JSON object in response: {
+  "presentation"
 - **ocr** -> ok. 1 lines: DYNASTYGADGETS
 - **corroborate** -> agree. nothing identifying was read by either
 - **read_evidence** -> ok. category=phone brand=Galaxy model=S23 Ultra label=False lines=3
@@ -28,6 +29,12 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 Availab' hits=['Samsung Galaxy S23', 'Google Pixel 7', 'Google Pixel 8', 'Google Pixel 9', 'Samsung Galaxy S21']
 - **identify** -> refused. chosen=None None margin=0.3
 - **abstain** -> abstain. model refused
+
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4773 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 26313 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2472 ms (replayed)
+- total across calls: 33558 ms; wall clock: 178963 ms
 
 ## Identification
 Shortlist from the catalogue:

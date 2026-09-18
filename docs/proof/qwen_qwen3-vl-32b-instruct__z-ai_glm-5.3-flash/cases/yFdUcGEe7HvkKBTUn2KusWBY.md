@@ -27,6 +27,12 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **read_evidence** -> ok. category=laptop brand=DELL model=None label=False lines=1
 - **gate** -> abstain. multiple items in frame
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 7586 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 11517 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 4168 ms (replayed)
+- total across calls: 23271 ms; wall clock: 126 ms
+
 ## Identification
 No catalogue candidates matched.
 

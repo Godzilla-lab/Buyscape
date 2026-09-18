@@ -30,6 +30,13 @@ processor 	intel c' hits=['Dell Latitude E7470', 'Dell Latitude 7490', 'Dell Lat
 - **identify** -> refused. chosen=None None margin=0.1
 - **abstain** -> abstain. model refused
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 7768 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 7721 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 133260 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3889 ms (replayed)
+- total across calls: 152638 ms; wall clock: 108 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Dell Latitude E7470 (0.5)

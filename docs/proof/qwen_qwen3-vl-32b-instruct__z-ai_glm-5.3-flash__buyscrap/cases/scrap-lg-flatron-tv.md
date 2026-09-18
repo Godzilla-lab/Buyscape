@@ -35,6 +35,14 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **retrieval** -> ok. query='LG LG Description: This is a scrap LG Flatron TV that is currently not functioning properl' hits=['LG T2108 8kg top loader', 'LG T2312 12kg top loader', 'LG S4-Q09 1HP', 'LG S4-Q18 2HP', 'LG F2J5 7kg front loader']
 - **identify** -> refused. chosen=LG None margin=None
 - **abstain** -> abstain. model refused
+- **condition** -> not working. by the seller's own account
+
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4539 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 7524 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 4717 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 4320 ms (replayed)
+- total across calls: 21100 ms; wall clock: 714 ms
 
 ## Identification
 Shortlist from the catalogue:

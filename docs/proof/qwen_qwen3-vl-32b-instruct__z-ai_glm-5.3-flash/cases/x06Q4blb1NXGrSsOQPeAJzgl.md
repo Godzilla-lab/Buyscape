@@ -31,6 +31,12 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **read_evidence** -> ok. category=generator brand=ELEPAQ model=None label=True lines=1
 - **gate** -> abstain. multiple items in frame
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 7006 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 7432 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2356 ms (replayed)
+- total across calls: 16794 ms; wall clock: 298 ms
+
 ## Identification
 No catalogue candidates matched.
 

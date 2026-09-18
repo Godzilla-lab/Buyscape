@@ -33,6 +33,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> ok. chosen=Samsung Galaxy S26 Ultra margin=0.8
 - **abstain** -> abstain. confidence 0.31: no label, plate or settings screen was legible; 1 lines seen by both readers; the brand was read by only one reader and is not confirmed; looks like a catalogue or stock image
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4694 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 6920 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 4066 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2971 ms (replayed)
+- total across calls: 18651 ms; wall clock: 426 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Samsung Galaxy S21 (0.5)

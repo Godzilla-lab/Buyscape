@@ -30,6 +30,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> refused. chosen=None None margin=None
 - **abstain** -> abstain. model refused
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5434 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 7339 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 11601 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3057 ms (replayed)
+- total across calls: 27431 ms; wall clock: 230 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Toshiba Satellite C55 (0.3)

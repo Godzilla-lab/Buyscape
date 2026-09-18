@@ -30,6 +30,12 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **read_evidence** -> ok. category=laptop brand=Lenovo model=None label=False lines=2
 - **gate** -> abstain. multiple items in frame
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5808 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 4075 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3738 ms (replayed)
+- total across calls: 13621 ms; wall clock: 226 ms
+
 ## Identification
 No catalogue candidates matched.
 

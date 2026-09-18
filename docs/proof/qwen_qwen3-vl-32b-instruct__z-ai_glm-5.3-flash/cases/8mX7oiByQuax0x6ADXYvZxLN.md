@@ -55,6 +55,12 @@ Furniture
 Home &' hits=[]
 - **gate** -> abstain. no candidates and no model text
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4307 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 13519 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 900 ms (replayed)
+- total across calls: 18726 ms; wall clock: 384 ms
+
 ## Identification
 No catalogue candidates matched.
 

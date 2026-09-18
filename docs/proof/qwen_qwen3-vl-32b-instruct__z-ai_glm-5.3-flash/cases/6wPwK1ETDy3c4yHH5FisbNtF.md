@@ -34,6 +34,13 @@ Excellent batter' hits=['HP ProBook 450 G7', 'HP 250 G7', 'HP 2000', 'HP Pavilio
 - **identify** -> refused. chosen=None None margin=0.2
 - **abstain** -> abstain. model refused
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 6249 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 7153 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 15175 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 4118 ms (replayed)
+- total across calls: 32695 ms; wall clock: 125 ms
+
 ## Identification
 Shortlist from the catalogue:
   - HP ProBook 450 G7 (0.5667)

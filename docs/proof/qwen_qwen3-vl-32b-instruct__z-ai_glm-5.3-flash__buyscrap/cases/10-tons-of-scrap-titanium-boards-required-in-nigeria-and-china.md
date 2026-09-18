@@ -24,6 +24,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **abstain** -> abstain. model refused
 - **weight** -> stated. 10000 kg from the seller's words
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 3655 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 7046 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 5824 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 6535 ms (replayed)
+- total across calls: 23060 ms; wall clock: 207 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Tecno Spark 10 (0.2)

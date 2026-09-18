@@ -88,6 +88,9 @@ def price(
     materials: list[Observation] | None = None,
     identified: bool = True,
     weight_confident: bool = False,
+    not_working: bool = False,
+    dead_fraction: tuple[float, float] | None = None,
+    comps_are_faulty: bool = False,
 ) -> Quote:
     """Build the range.
 
@@ -115,6 +118,49 @@ def price(
     comp_values = [o.amount for o in comps] if identified else []
     quote.observation_count = len(comp_values)
 
+    # The seller says it does not work, or the photos show it. Working-unit
+    # prices no longer apply. In order: faulty listings of the same model,
+    # then the business's own dead-unit share of the working price, then
+    # the material it is made of. Never a number the model made up.
+    if identified and not_working:
+        if comps_are_faulty and len(comp_values) >= MIN_OBSERVATIONS:
+            pass  # the comps handed in are the dead market; price from them below
+        elif len(comp_values) >= MIN_OBSERVATIONS and dead_fraction:
+            low_ask = _quantile(comp_values, 0.20)
+            high_ask = _quantile(comp_values, 0.80)
+            low = low_ask * dead_fraction[0] * ASK_TO_BUY[0] * quote.worst_case_multiplier
+            high = high_ask * dead_fraction[1] * ASK_TO_BUY[1]
+            if quote.floor is not None:
+                low, high = max(low, quote.floor), max(high, quote.floor)
+            quote.low, quote.high = round(low, 2), round(high, 2)
+            quote.ceiling = round(high_ask * dead_fraction[1], 2)
+            quote.basis = "not_working"
+            quote.method = "dead_fraction"
+            if comps:
+                quote.sources.append(comps[0].source)
+            quote.explanation = (
+                f"Priced as not working. {len(comp_values)} used asking prices for a working "
+                f"unit run {int(low_ask):,} to {int(high_ask):,} {currency}; this business "
+                f"pays {int(dead_fraction[0] * 100)} to {int(dead_fraction[1] * 100)} percent of "
+                "that for one that does not work, converted to a buy range"
+                + (f", floored at the scrap value {int(quote.floor):,}" if quote.floor else "")
+                + "."
+            )
+            return quote
+        elif material_values:
+            quote.basis = "not_working"
+            quote.method = "material_floor"
+            quote.weight_conditional = not weight_confident
+            quote.low = round(min(material_values) * quote.worst_case_multiplier, 2)
+            quote.high = round(max(material_values), 2)
+            quote.explanation = (
+                "Priced as not working. No prices for faulty units of this model are on "
+                "file and this business has no dead-unit rate for the category, so it is "
+                f"priced as material: {materials[0].note.rsplit(',', 1)[0]}. Settled on the "
+                "scale at pickup."
+            )
+            return quote
+
     # Not identified, but made of something. Price the material and say so.
     if not identified:
         if not material_values:
@@ -141,8 +187,13 @@ def price(
         return quote
 
     if len(comp_values) < MIN_OBSERVATIONS:
-        if len(scrap_values) >= 2 or len(material_values) >= 2:
-            band = scrap_values if len(scrap_values) >= 2 else material_values
+        # Only a published whole-unit band can stand in for market prices.
+        # The material estimate is what a dead one fetches by the kilogram,
+        # and quoting it as the offer for a working, identified item is how
+        # a MacBook Air came out at five thousand naira. That item goes to a
+        # person, whose settled price becomes the first observation.
+        if len(scrap_values) >= 2 and max(scrap_values) > min(scrap_values):
+            band = scrap_values
             # Fall back to the published whole-unit band. Wide and honest.
             low = min(band) * quote.worst_case_multiplier
             high = max(band)
@@ -162,6 +213,7 @@ def price(
             f"Only {len(comp_values)} comparable asking prices were found and "
             "there is no published band for this category, so no honest range "
             "can be produced."
+            + (f" Nothing below the {int(quote.floor):,} {currency} floor." if quote.floor else "")
         )
         return quote
 
@@ -177,8 +229,12 @@ def price(
 
     quote.low, quote.high = round(low, 2), round(high, 2)
     quote.ceiling = round(high_ask, 2)
+    if comps_are_faulty:
+        quote.basis = "not_working"
+        quote.method = "faulty_comps"
     quote.explanation = (
-        f"{len(comp_values)} used asking prices, 20th to 80th percentile "
+        ("Priced as not working. " if comps_are_faulty else "")
+        + f"{len(comp_values)} used asking prices{' for faulty units of this model' if comps_are_faulty else ''}, 20th to 80th percentile "
         f"{int(low_ask):,} to {int(high_ask):,} {currency}, converted to a buy "
         f"range with the {ASK_TO_BUY[0]} to {ASK_TO_BUY[1]} ask-to-buy spread"
         + (

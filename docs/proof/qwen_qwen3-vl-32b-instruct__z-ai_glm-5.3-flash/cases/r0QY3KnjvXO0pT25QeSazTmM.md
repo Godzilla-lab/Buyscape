@@ -39,6 +39,13 @@ Cop' hits=['Hisense AS-09 1HP', 'Hisense AS-12 1.5HP', 'Hisense AS-18 2HP']
 - **identify** -> refused. chosen=Hisense None margin=0.0
 - **abstain** -> abstain. model refused
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5041 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 8291 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 10698 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3209 ms (replayed)
+- total across calls: 27239 ms; wall clock: 735 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Hisense AS-09 1HP (0.4)

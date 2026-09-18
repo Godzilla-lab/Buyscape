@@ -21,6 +21,12 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **read_evidence** -> ok. category=office chair brand=None model=None label=False lines=0
 - **gate** -> abstain. multiple items in frame
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 7150 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 9575 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 1571 ms (replayed)
+- total across calls: 18296 ms; wall clock: 260 ms
+
 ## Identification
 No catalogue candidates matched.
 

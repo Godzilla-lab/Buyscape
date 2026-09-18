@@ -33,6 +33,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> refused. chosen=Kemage None margin=0.15
 - **abstain** -> abstain. model refused
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 15730 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 6420 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 11481 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3662 ms (replayed)
+- total across calls: 37293 ms; wall clock: 334 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Kemage KM6500 5.5kVA (0.55)

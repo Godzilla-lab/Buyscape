@@ -35,6 +35,13 @@ U.S used Laptops and Phones' hits=['Lenovo 14w', 'Lenovo ThinkPad T480', 'Lenovo
 - **identify** -> refused. chosen=LENOVO None margin=None
 - **abstain** -> abstain. model refused
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 7728 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 12277 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 7492 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 1689 ms (replayed)
+- total across calls: 29186 ms; wall clock: 158 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Lenovo 14w (0.4)

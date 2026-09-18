@@ -29,6 +29,12 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **retrieval** -> empty. query='EMMY ELECTRONICS Alternator coil 15kva 100% copper coil with warranty one year payment on ' hits=[]
 - **gate** -> abstain. no candidates and no model text
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 3859 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 4904 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3121 ms (replayed)
+- total across calls: 11884 ms; wall clock: 436 ms
+
 ## Identification
 No catalogue candidates matched.
 

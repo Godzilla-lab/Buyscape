@@ -38,6 +38,13 @@ Intel core i7
 - **identify** -> refused. chosen=None None margin=0.4
 - **abstain** -> abstain. model refused
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5465 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 6497 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 18066 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 4486 ms (replayed)
+- total across calls: 34514 ms; wall clock: 193 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Dell Latitude E7470 (0.5)

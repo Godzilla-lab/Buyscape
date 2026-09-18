@@ -37,6 +37,12 @@ BRAND-NEW' hits=['Samsung Galaxy S21', 'Samsung Galaxy S22', 'Samsung Galaxy S23
 - **identify** -> label. named from the label: Galaxy A57 5G, not in the catalogue
 - **abstain** -> abstain. confidence 0.38: named from the item's own label, which the catalogue does not list; no label, plate or settings screen was legible; 1 lines seen by both readers; looks like a catalogue or stock image
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4010 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 7413 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3131 ms (replayed)
+- total across calls: 14554 ms; wall clock: 492 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Samsung Galaxy S21 (0.5)

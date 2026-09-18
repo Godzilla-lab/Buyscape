@@ -34,6 +34,13 @@ Sleek 6.1′′ FHD+ OLED display with 90 Hz smooth visuals
 - **identify** -> refused. chosen=None None margin=0.45
 - **abstain** -> abstain. model refused
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4523 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 8800 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 33082 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 6109 ms (replayed)
+- total across calls: 52514 ms; wall clock: 488 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Google Pixel 7 (0.7)

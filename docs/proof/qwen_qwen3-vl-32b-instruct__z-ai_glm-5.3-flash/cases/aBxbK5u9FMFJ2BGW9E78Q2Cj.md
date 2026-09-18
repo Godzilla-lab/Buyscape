@@ -37,6 +37,13 @@ Make' hits=['Hisense WTJA801 8kg top loader', 'Hisense WT3K9022U 9kg top loader'
 - **identify** -> refused. chosen=Hisense None margin=None
 - **abstain** -> abstain. model refused
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 9150 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 12776 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 14426 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 2681 ms (replayed)
+- total across calls: 39033 ms; wall clock: 620 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Hisense WTJA801 8kg top loader (0.4333)

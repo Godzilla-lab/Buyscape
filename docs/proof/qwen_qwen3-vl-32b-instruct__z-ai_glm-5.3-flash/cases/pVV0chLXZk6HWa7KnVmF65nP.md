@@ -34,6 +34,13 @@ W' hits=['Maxmech MX3500 3.5kVA', 'Maxmech MX10000 10kVA']
 - **identify** -> refused. chosen=Maxmech None margin=0.25
 - **abstain** -> abstain. model refused
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 6693 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 84477 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 23838 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3465 ms (replayed)
+- total across calls: 118473 ms; wall clock: 335 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Maxmech MX3500 3.5kVA (0.5)

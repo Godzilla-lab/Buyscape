@@ -33,6 +33,12 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **identify** -> label. named from the label: vivo V15, not in the catalogue
 - **abstain** -> pass. confidence=0.77 from the label
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4249 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 22175 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 4349 ms (replayed)
+- total across calls: 30773 ms; wall clock: 556 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Vivo Y27 (0.5)
@@ -82,11 +88,7 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
-**24 to 55 NGN** (priced as material, width 0.7916, method scrap_band_only, 0 comparable prices)
-
-No usable comparable sales (0 found, 2 needed), so the range comes from the published Lagos buy band for this category, reduced by 0.5936 for unproven claims.
-
-Scrap floor: 40 NGN
+**NO_PRICE_DATA.** Only 0 comparable asking prices were found and there is no published band for this category, so no honest range can be produced. Nothing below the 40 NGN floor.
 
 Conditions attached to this price:
 - Display: 6.53-inch IPS LCD, 1080 x 2340 pixels -> not proven remotely. Agent will confirm at pickup.

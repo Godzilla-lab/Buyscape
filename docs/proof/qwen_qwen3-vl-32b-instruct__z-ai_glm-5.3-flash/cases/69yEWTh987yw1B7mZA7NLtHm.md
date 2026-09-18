@@ -36,6 +36,12 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **forensics** -> flag. looks like a catalogue or stock image
 - **gate** -> abstain. multiple items in frame
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 5100 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 13077 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 1558 ms (replayed)
+- total across calls: 19735 ms; wall clock: 619 ms
+
 ## Identification
 No catalogue candidates matched.
 

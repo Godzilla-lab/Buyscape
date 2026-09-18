@@ -41,6 +41,13 @@ BH 9' hits=['Apple iPhone 11', 'Apple iPhone 11 Pro', 'Apple iPhone 11 Pro Max',
 - **identify** -> ok. chosen=Apple iPhone 11 margin=0.3
 - **abstain** -> abstain. top score 0.6
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 7751 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 19843 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 17473 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 4213 ms (replayed)
+- total across calls: 49280 ms; wall clock: 445 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Apple iPhone 11 (0.7667)

@@ -37,6 +37,13 @@ Sleek flagship vibes with a 6.1′′ Dynamic AMOLED 2X dis' hits=['Samsung Gala
 - **identify** -> refused. chosen=Samsung None margin=0.1
 - **abstain** -> abstain. model refused
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 6324 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 25430 ms (replayed)
+- identify on z-ai/glm-5.3-flash: 31702 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 3584 ms (replayed)
+- total across calls: 67040 ms; wall clock: 638 ms
+
 ## Identification
 Shortlist from the catalogue:
   - Samsung Galaxy S22 (0.9)

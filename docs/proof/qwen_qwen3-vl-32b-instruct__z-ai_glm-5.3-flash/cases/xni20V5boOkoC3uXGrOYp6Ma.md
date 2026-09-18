@@ -31,6 +31,12 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **read_evidence** -> ok. category=refrigerator brand=None model=None label=False lines=2
 - **gate** -> abstain. multiple items in frame
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 4190 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 7922 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 4058 ms (replayed)
+- total across calls: 16170 ms; wall clock: 450 ms
+
 ## Identification
 No catalogue candidates matched.
 

@@ -33,6 +33,12 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - **read_evidence** -> ok. category=inverter_system brand=SAGE TECH ELECTRICAL model=None label=False lines=1
 - **gate** -> abstain. multiple items in frame
 
+## Timing
+- read_evidence on qwen/qwen3-vl-32b-instruct: 7411 ms (replayed)
+- read_evidence on mistralai/mistral-small-3.2-24b-instruct: 4252 ms (replayed)
+- extract_claims on qwen/qwen3-vl-32b-instruct: 1740 ms (replayed)
+- total across calls: 13403 ms; wall clock: 419 ms
+
 ## Identification
 No catalogue candidates matched.
 
