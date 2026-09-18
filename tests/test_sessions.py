@@ -171,3 +171,98 @@ def test_a_clip_becomes_stills_the_engine_reads_and_the_seller_does_not_see(engi
     s = store.remove_photo(sid, "extra__01.mp4")
     assert store.load(sid)["photos"] == []
     assert sorted(p.name for p in (store.dir / sid).iterdir()) == ["session.json"]
+
+
+def test_submit_returns_at_once_and_the_page_polls_for_the_offer(engine):
+    import time
+
+    store = engine.store
+    s = store.create({"category": "Iron", "text": "about 50 kg of iron rods"})
+    store.add_photo(s["id"], {"slot": "code_shot", "name": "a.jpg", "data": _jpeg()})
+    s = store.start_submit(s["id"], {"answers": {"weight_kg": "50"}})
+    assert s["status"] == "valuing" and s["valuing"] and s["outcome"] is None
+    # Asking again while it runs does not start a second valuation.
+    assert store.start_submit(s["id"], {})["valuing"]
+    for _ in range(200):
+        s = store.seller_view(store.load(s["id"]))
+        if not s["valuing"]:
+            break
+        time.sleep(0.05)
+    assert not s["valuing"] and s["error"] is None
+    assert s["status"] in ("quoted", "needs_more", "no_price") and s["outcome"]["headline"]
+
+
+def test_a_valuation_that_breaks_is_a_failed_session_not_a_hung_page(engine):
+    import time
+
+    store = engine.store
+
+    def broken(case, tenant):
+        raise RuntimeError("provider down")
+
+    store.valuer = broken
+    s = store.create({"category": "Iron", "text": "rods"})
+    store.add_photo(s["id"], {"slot": "code_shot", "name": "a.jpg", "data": _jpeg()})
+    store.start_submit(s["id"], {})
+    for _ in range(200):
+        s = store.seller_view(store.load(s["id"]))
+        if not s["valuing"]:
+            break
+        time.sleep(0.05)
+    assert s["status"] == "failed" and "provider down" in s["error"]
+
+
+def test_a_phone_photo_is_shrunk_and_kept_the_right_way_up(engine):
+    from PIL import Image
+
+    store = engine.store
+    s = store.create({"category": "Iron"})
+    # A tall photo stored sideways with EXIF orientation 6, the way phones do it.
+    im = Image.new("RGB", (4000, 3000), (200, 30, 30))
+    im.paste((30, 30, 200), (0, 0, 4000, 300))
+    exif = Image.Exif()
+    exif[0x0112] = 6
+    buf = io.BytesIO()
+    im.save(buf, format="JPEG", exif=exif)
+    data = "data:image/jpeg;base64," + base64.b64encode(buf.getvalue()).decode()
+    s = store.add_photo(s["id"], {"slot": "code_shot", "name": "IMG.jpg", "data": data})
+    path = store.dir / s["id"] / "code_shot__01.jpg"
+    with Image.open(path) as saved:
+        from buyscape.ui.sessions import MAX_PHOTO_SIDE
+
+        assert max(saved.size) == MAX_PHOTO_SIDE
+        assert saved.size[1] > saved.size[0], "orientation 6 means the photo was taken upright"
+        assert saved.getexif().get(0x0112) in (None, 1)
+
+
+def test_a_blurred_photo_is_flagged_at_upload_and_a_sharp_one_is_not(engine):
+    import numpy as np
+    from PIL import Image as PILImage
+
+    store = engine.store
+    s = store.create({"category": "Iron"})
+    # Flat grey: nothing to focus on, scores near zero.
+    s = store.add_photo(s["id"], {"slot": "code_shot", "name": "blur.jpg", "data": _jpeg((120, 120, 120), (640, 480))})
+    warned = [f for f in s["shots"][0]["files"] if f["warning"]]
+    assert warned and "blurred" in warned[0]["warning"]
+    # High-contrast text and noise: sharp.
+    rng = np.random.default_rng(1)
+    noisy = PILImage.fromarray(rng.integers(0, 255, (480, 640, 3), dtype=np.uint8))
+    buf = io.BytesIO()
+    noisy.save(buf, format="JPEG", quality=90)
+    data = "data:image/jpeg;base64," + base64.b64encode(buf.getvalue()).decode()
+    s = store.add_photo(s["id"], {"slot": "code_shot", "name": "sharp.jpg", "data": data})
+    sharp = [f for f in s["shots"][0]["files"] if f["file"] == "code_shot__02.jpg"][0]
+    assert sharp["warning"] is None
+    assert store.load(s["id"])["photos"][1]["sharpness"] > 25
+
+
+def test_sessions_can_live_on_a_mounted_disk(tmp_path, monkeypatch):
+    from buyscape.ui.server import Engine
+
+    monkeypatch.setenv("BUYSCAPE_PRESET", "fake")
+    monkeypatch.setenv("BUYSCAPE_SESSIONS_DIR", str(tmp_path / "disk"))
+    eng = Engine(ROOT)
+    assert eng.store.dir == tmp_path / "disk"
+    s = eng.store.create({"category": "Iron"})
+    assert (tmp_path / "disk" / s["id"] / "session.json").exists()

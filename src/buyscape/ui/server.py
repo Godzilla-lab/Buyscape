@@ -37,6 +37,7 @@ from ..protocols.schema import load_protocols
 from ..runner import Case, CaseResult, report_markdown, run_case
 from ..identify.ocr import default_reader
 from ..tenant import load_tenant
+from .archive import from_env as archive_from_env
 from .sessions import Store
 
 HERE = Path(__file__).parent
@@ -74,7 +75,18 @@ class Engine:
         # The pair the product runs on. Overridable for a cheaper or a free run.
         self.preset = os.environ.get("BUYSCAPE_PRESET", "balanced")
         self.mode = os.environ.get("BUYSCAPE_MODE", "auto")
-        self.store = Store(root, self.tenant, self.protocols, set(self.catalogue), self.value_case)
+        self.archive = archive_from_env(os.environ)
+        self.store = Store(
+            root, self.tenant, self.protocols, set(self.catalogue), self.value_case, ocr=self.ocr, archive=self.archive
+        )
+        if self.archive is not None:
+            try:
+                self.archive.ensure()
+                restored = self.archive.restore(self.store.dir)
+                if restored:
+                    print(f"restored {restored} sessions from {self.archive.repo_id}")
+            except Exception as exc:  # the page must come up even if the Hub is down
+                print(f"archive unavailable: {exc}")
 
     # ----- the one way the engine is run -----
 

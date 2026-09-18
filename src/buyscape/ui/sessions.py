@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import base64
 import json
+import os
 import re
 import secrets
 import threading
@@ -131,9 +132,18 @@ class Store:
         protocols: dict[str, Protocol],
         catalogue_categories: set[str],
         valuer: Valuer,
+        ocr: Callable | None = None,
+        archive=None,
     ) -> None:
         self.root = root
-        self.dir = root / "sessions"
+        # Where finished sessions are copied so a restart loses nothing.
+        self.archive = archive
+        # The local OCR engine, used at upload to tell a seller their label
+        # photo cannot be read. None means only the blur check runs.
+        self.ocr = ocr
+        # On a server the sessions live on a mounted disk that survives a
+        # redeploy; locally they sit beside the code, gitignored.
+        self.dir = Path(os.environ["BUYSCAPE_SESSIONS_DIR"]) if os.environ.get("BUYSCAPE_SESSIONS_DIR") else root / "sessions"
         self.tenant = tenant
         self.questions_path = questions_path(root / "tenants" / f"{tenant.tenant}.yaml")
         self.protocols = protocols
@@ -331,9 +341,51 @@ class Store:
             self._save(session)
         return self.seller_view(session)
 
-    def submit(self, sid: str, body: dict) -> dict:
-        """Run the engine on everything the seller has sent so far."""
+    def start_submit(self, sid: str, body: dict) -> dict:
+        """Begin a valuation and return at once; the page polls for the result.
+
+        A valuation takes a minute or two and a phone browser gives up on a
+        request long before that. The work runs on its own thread, the
+        session says it is valuing, and the seller view carries the outcome
+        when it is done.
+        """
         session = self.load(sid)
+        if session["status"] == "valuing":
+            return self.seller_view(session)
+        self._take_inputs(session, body)
+        if not self._images(session):
+            raise ValueError("no photos yet: take at least one photo first")
+        session["status"] = "valuing"
+        session["stage"] = "reading"
+        session["error"] = None
+        self._save(session)
+
+        def progress(stage: str) -> None:
+            session["stage"] = stage
+            self._save(session)
+
+        def work() -> None:
+            try:
+                self._value(session, progress)
+            except Exception as exc:  # the seller must never wait for nothing
+                session["status"] = "failed"
+                session["error"] = f"{type(exc).__name__}: {exc}"
+                self._save(session)
+            self._backup(session)
+
+        threading.Thread(target=work, daemon=True).start()
+        return self.seller_view(session)
+
+    def submit(self, sid: str, body: dict) -> dict:
+        """Run the engine on everything the seller has sent so far, and wait."""
+        session = self.load(sid)
+        self._take_inputs(session, body)
+        if not self._images(session):
+            raise ValueError("no photos yet: take at least one photo first")
+        self._value(session)
+        return self.seller_view(session)
+
+    def _take_inputs(self, session: dict, body: dict) -> None:
         if body.get("text") is not None:
             session["text"] = str(body["text"]).strip()
         if body.get("asking") is not None:
@@ -405,7 +457,14 @@ class Store:
         session["settlement"] = {"price": price, "note": row["note"], "at": row["settled_at"]}
         session["status"] = "settled"
         self._save(session)
+        self._backup(session, with_settlements=True)
         return self.office_view(session)
+
+    def _backup(self, session: dict, with_settlements: bool = False) -> None:
+        if self.archive is None:
+            return
+        extra = self.dir / "settlements.jsonl" if with_settlements else None
+        self.archive.upload_later(self.dir / session["id"], extra)
 
     # ----- helpers -----
 
