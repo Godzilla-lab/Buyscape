@@ -1,31 +1,36 @@
 # Case 5iYVQxtrrQj70M6sADVjKIhY
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0007  |  25699 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0007  |  41259 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: generator (confidence 0.9)
-- Made of: steel 60%, plastic 20%, copper 10%, rubber 10%
-- Estimated weight: 45.0 kg (confidence 0.7)
+- Made of: steel 60%, copper_insulated 20%, plastic 10%, rubber 10%
+- Estimated weight: 80.0 kg (confidence 0.7)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: some surface rust on metal parts, minor dirt and grime on housing, no visible cracks or dents
+- Damage noted: minor surface rust on metal parts, dust and dirt accumulation, some wear on paint finish
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
+- Text read: REDMI 13C
 
 ## Two readers
-- brand_text was seen by only one reader, so it is treated as unread
 - model_text was seen by only one reader, so it is treated as unread
 - rating_text was seen by only one reader, so it is treated as unread
-- serial_text was seen by only one reader, so it is treated as unread
-- 8 transcribed lines was seen by only one reader, so it is treated as unread
+- 6 transcribed lines was seen by only one reader, so it is treated as unread
+
+## OCR read off the photos
+- RIXUAT
+- CHINA
+- REDMI 13C
 
 ## Chain
-- **corroborate** -> dispute. brand_text was seen by only one reader, so it is treated as unread; model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 8 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=generator brand=None model=None label=False lines=0
-- **retrieval** -> empty. query='IMEX diesel generator set, which consists of a diesel engine coupled to an electrical alte' hits=[]
+- **ocr** -> ok. 3 lines: RIXUAT | CHINA | REDMI 13C
+- **corroborate** -> dispute. model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; 6 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=generator brand=None model=None label=False lines=1
+- **retrieval** -> empty. query='REDMI 13C IMEX diesel generator set, which consists of a diesel engine coupled to an elect' hits=[]
 - **gate** -> abstain. no candidates and no model text
 
 ## Identification
@@ -40,7 +45,7 @@ No catalogue candidates matched.
 - Price confidence: 20%
 - No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.
 - no label, plate or settings screen was legible
-- the two readers agreed on nothing legible
+- 1 lines seen by both readers
 - 7 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -52,6 +57,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: nothing on the item says which model this is_
 3. [PHOTO] Close-up of the plate on the engine block showing the engine model and serial.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it start and run right now?
+- When was it last serviced, and what was done?
 
 ## Claims
 - [unverifiable_remote] The item is an IMEX diesel generator set.
@@ -68,11 +78,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Photo of the engine, showing the recoil starter and carburettor.
 
 ## Price
-**41,636 to 76,770 NGN** (priced as material, width 0.5934, method material_floor, 0 comparable prices)
+**45,529 to 79,040 NGN** (priced as material, width 0.538, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 45 kg of steel 60%, plastic 20%, copper 10%, rubber 10% (rates for plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 80 kg of steel 60%, copper_insulated 20%, plastic 10%, rubber 10% (rates for plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 59,625 NGN
+Scrap floor: 65,200 NGN
 
 Conditions attached to this price:
 - Not identified: No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.

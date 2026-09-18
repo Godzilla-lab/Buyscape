@@ -1,50 +1,63 @@
 # Case 5jWyLEa2FcrbZ7Im0OoLL841
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0007  |  13087 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  23897 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: laptop (confidence 0.95)
 - Made of: aluminium 70%, plastic 20%, circuit_board 10%
 - Estimated weight: 1.5 kg (confidence 0.8)
-- Brand read off the item: nothing legible
+- Brand read off the item: Apple
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: handwritten text on lid, minor scuff near Apple logo
+- Damage noted: handwritten text on lid, no visible damage to casing
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: AMG-MAX LTD | m2 max | 6+
+- Text read: AMG-MAX LTD | m2 max | 6+ | Apple
 
 ## Two readers
-- brand_text was seen by only one reader, so it is treated as unread
 - model_text was seen by only one reader, so it is treated as unread
 - rating_text was seen by only one reader, so it is treated as unread
 - 1 transcribed lines was seen by only one reader, so it is treated as unread
+- brand_text was read by only one reader, so it is kept but not confirmed
+
+## OCR read off the photos
+- m2 nax
+- 64
+- POSTEDONJIJI
+- AMG-MAX LTD
 
 ## Chain
-- **corroborate** -> dispute. brand_text was seen by only one reader, so it is treated as unread; model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; 1 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=laptop brand=None model=None label=False lines=3
-- **retrieval** -> empty. query='AMG-MAX LTD m2 max 6+ UK Used MacBook Pro
+- **ocr** -> ok. 4 lines: m2 nax | 64 | POSTEDONJIJI | AMG-MAX LTD
+- **corroborate** -> dispute. model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; 1 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed
+- **read_evidence** -> ok. category=laptop brand=Apple model=None label=False lines=4
+- **retrieval** -> ok. query='Apple AMG-MAX LTD m2 max 6+ Apple UK Used MacBook Pro
 M2 MAX CHIP 
 64GB/1TB
 16inch
-Super neat with Cha' hits=[]
-- **gate** -> abstain. no candidates and no model text
+Super n' hits=['Apple MacBook Pro 13-inch 2017', 'Apple MacBook Pro 17-inch 2011', 'Apple MacBook Air M1 2020', 'Apple MacBook Air 13-inch 2017']
+- **identify** -> refused. chosen=None None margin=None
+- **abstain** -> abstain. model refused
 
 ## Identification
-No catalogue candidates matched.
+Shortlist from the catalogue:
+  - Apple MacBook Pro 13-inch 2017 (0.4333)
+  - Apple MacBook Pro 17-inch 2011 (0.4333)
+  - Apple MacBook Air M1 2020 (0.38)
+  - Apple MacBook Air 13-inch 2017 (0.3667)
 
-**Not identified: CANNOT_IDENTIFY.** No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.
+**Not identified: CANNOT_IDENTIFY.** Laptop is a modern large MacBook Pro, but no shortlist entry matches; 'M2 Max' is only handwritten seller annotation, not a legible printed label, so the exact model cannot be confirmed.
 
 ## How sure the engine is (back office)
 **0%: the photos do not say what this is.**
 
 - Identification confidence: 0% (unknown)
 - Price confidence: 14%
-- No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.
+- Laptop is a modern large MacBook Pro, but no shortlist entry matches; 'M2 Max' is only handwritten seller annotation, not a legible printed label, so the exact model cannot be confirmed.
 - no label, plate or settings screen was legible
 - 3 lines seen by both readers
+- the brand was read by only one reader and is not confirmed
 - 10 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -56,6 +69,12 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: nothing on the item says which model this is_
 3. [PHOTO] Screenshot of System Information (Windows) or About This Mac, showing the model, processor, RAM and storage.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it stay on for more than ten minutes with the charger unplugged?
+- Has it ever been dropped, or had liquid spilled on it?
+- What does not work on it? Say none if everything works.
 
 ## Claims
 - [unverifiable_remote] UK Used MacBook Pro
@@ -77,14 +96,15 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Screenshot of System Information (Windows) or About This Mac, showing the model, processor, RAM and storage.
 
 ## Price
-**782 to 3,804 NGN** (priced as material, width 1.3173, method material_floor, 0 comparable prices)
+**5,000 to 5,000 NGN** (priced as material, width 0.0, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 1.5 kg of aluminium 70%, plastic 20%, circuit_board 10% (rates for circuit_board, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 1.5 kg of aluminium 70%, plastic 20%, circuit_board 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 2,355 NGN
+Scrap floor: 2,250 NGN
 
 Conditions attached to this price:
-- Not identified: No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.
+- Not identified: Laptop is a modern large MacBook Pro, but no shortlist entry matches; 'M2 Max' is only handwritten seller annotation, not a legible printed label, so the exact model cannot be confirmed.
+- Raised to the 5,000 NGN minimum this business publishes for this kind of item.
 - UK Used MacBook Pro -> not proven remotely. Agent matches the serial on the sticker to the serial in System Information or the BIOS.
 - M2 MAX CHIP -> not proven remotely. Agent will confirm at pickup.
 - 64GB/1TB -> not proven remotely. Agent reads the drive size from System Information.

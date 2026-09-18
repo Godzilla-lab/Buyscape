@@ -1,35 +1,36 @@
 # Case rREXiw3jnu8JE2phT7cuNXze
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  38913 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  37293 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: generator (confidence 0.95)
-- Made of: plastic 40%, steel 30%, circuit_board 10%, rubber 10%, mixed_electronic 10%
-- Estimated weight: 12.0 kg (confidence 0.8)
-- Brand read off the item: nothing legible
+- Made of: plastic 40%, steel 30%, circuit_board 10%, rubber 10%, copper_insulated 10%
+- Estimated weight: 12.0 kg (confidence 0.7)
+- Brand read off the item: KEMAGE
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: minor scuff marks on plastic casing, dust and dirt on surface, fuel cap appears slightly loose
+- Damage noted: dirt on surface, some wear on plastic casing, white cable connected to DC outlet
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 - Text read: KEMAGE
 
 ## Two readers
 - brand_text agreed by both readers
-- rating_text agreed by both readers
 - model_text was seen by only one reader, so it is treated as unread
-- serial_text was seen by only one reader, so it is treated as unread
-- 11 transcribed lines was seen by only one reader, so it is treated as unread
+- rating_text was seen by only one reader, so it is treated as unread
+- 14 transcribed lines was seen by only one reader, so it is treated as unread
+
+## OCR read off the photos
+- KEMAGE
 
 ## Chain
-- **corroborate** -> dispute. brand_text agreed by both readers; rating_text agreed by both readers; model_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 11 transcribed lines was seen by only one reader, so it is treated as unread
+- **ocr** -> ok. 1 lines: KEMAGE
+- **corroborate** -> dispute. brand_text agreed by both readers; model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; 14 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=generator brand=KEMAGE model=None label=True lines=1
-- **grounding** -> dropped. brand, rating
-- **forensics** -> flag. the reader stated brand, rating it could not point to in the photos
-- **retrieval** -> ok. query='KEMAGE Key Feature Brand: Kemage Model: KM11000E2 AC Frequency: 50 Hz Starting Capacity: 8' hits=['Kemage KM6500 5.5kVA', 'Kemage KM10000 10kVA', 'Lutian LT3900 3.5kVA', 'Senwei SW3500 3.5kVA']
-- **identify** -> refused. chosen=Kemage None margin=0.2
+- **retrieval** -> ok. query='KEMAGE KEMAGE Key Feature Brand: Kemage Model: KM11000E2 AC Frequency: 50 Hz Starting Capa' hits=['Kemage KM6500 5.5kVA', 'Kemage KM10000 10kVA', 'Lutian LT3900 3.5kVA', 'Senwei SW3500 3.5kVA']
+- **identify** -> refused. chosen=Kemage None margin=0.15
 - **abstain** -> abstain. model refused
 
 ## Identification
@@ -39,21 +40,18 @@ Shortlist from the catalogue:
   - Lutian LT3900 3.5kVA (0.15)
   - Senwei SW3500 3.5kVA (0.15)
 
-**Not identified: CANNOT_IDENTIFY.** Only 'KEMAGE' is legible on the label; no model number visible, and seller's claimed KM11000E2 is not on the shortlist nor printed legibly on the item.
-
-Evidence flags: the reader stated brand, rating it could not point to in the photos
+**Not identified: CANNOT_IDENTIFY.** Only 'KEMAGE' is legible; seller's KM11000E2 is not in the shortlist and no model plate is readable, so KM10000 vs KM11000E2 cannot be distinguished.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 8% on the best answer. It is probably a Kemage KM10000 or a Kemage KM6500, and the photos cannot separate them.**
+**Not sure enough to price: 16% on the best answer. It is probably a Kemage KM10000 or a Kemage KM6500, and the photos cannot separate them.**
 
-- Identification confidence: 8% (unknown)
+- Identification confidence: 16% (unknown)
 - Price confidence: 14%
-- It is weighing: Kemage KM10000 (0.3), Kemage KM6500 (0.1)
-- Only 'KEMAGE' is legible on the label; no model number visible, and seller's claimed KM11000E2 is not on the shortlist nor printed legibly on the item.
+- It is weighing: Kemage KM10000 (0.3), Kemage KM6500 (0.15)
+- Only 'KEMAGE' is legible; seller's KM11000E2 is not in the shortlist and no model plate is readable, so KM10000 vs KM11000E2 cannot be distinguished.
 - read off the item's own label
 - 1 lines seen by both readers
-- the next candidate was only 0.2 behind
-- the reader stated brand, rating it could not point to in the photos
+- the next candidate was only 0.15 behind
 - 10 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -65,6 +63,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: nothing on the item says which model this is_
 3. [PHOTO] Close-up of the plate on the engine block showing the engine model and serial.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it start and run right now?
+- When was it last serviced, and what was done?
 
 ## Claims
 - [unverifiable_remote] Brand: Kemage
@@ -85,15 +88,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Photo of the engine, showing the recoil starter and carburettor.
 
 ## Price
-**2,667 to 9,744 NGN** (priced as material, width 1.1402, method material_floor, 0 comparable prices)
+**3,374 to 7,944 NGN** (priced as material, width 0.8073, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 12 kg of plastic 40%, steel 30%, circuit_board 10%, rubber 10%, mixed_electronic 10% (rates for circuit_board, mixed_electronic, plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 12 kg of plastic 40%, steel 30%, circuit_board 10%, rubber 10%, copper_insulated 10% (rates for plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 4,980 NGN
+Scrap floor: 6,300 NGN
 
 Conditions attached to this price:
-- Not identified: Only 'KEMAGE' is legible on the label; no model number visible, and seller's claimed KM11000E2 is not on the shortlist nor printed legibly on the item.
-- Evidence flag: the reader stated brand, rating it could not point to in the photos
+- Not identified: Only 'KEMAGE' is legible; seller's KM11000E2 is not in the shortlist and no model plate is readable, so KM10000 vs KM11000E2 cannot be distinguished.
 - Brand: Kemage -> not proven remotely. Agent will confirm at pickup.
 - Model: KM11000E2 -> not proven remotely. Agent will confirm at pickup.
 - AC Frequency: 50 Hz -> not proven remotely. Agent will confirm at pickup.

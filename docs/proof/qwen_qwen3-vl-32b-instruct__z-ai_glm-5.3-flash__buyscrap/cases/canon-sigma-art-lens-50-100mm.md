@@ -7,24 +7,26 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Category: camera lens (confidence 0.95)
 - Made of: plastic 60%, steel 30%, glass 10%
 - Estimated weight: 0.8 kg (confidence 0.7)
-- Brand read off the item: nothing legible
+- Brand read off the item: NIKON
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
 - Damage noted: minor scuffs on barrel, some dust on surface
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
+- Text read: NIKON
 
 ## Two readers
-- brand_text was seen by only one reader, so it is treated as unread
 - model_text was seen by only one reader, so it is treated as unread
 - rating_text was seen by only one reader, so it is treated as unread
 - 2 transcribed lines was seen by only one reader, so it is treated as unread
+- brand_text was read by only one reader, so it is kept but not confirmed
 
 ## Chain
-- **corroborate** -> dispute. brand_text was seen by only one reader, so it is treated as unread; model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; 2 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=camera lens brand=None model=None label=False lines=0
-- **retrieval** -> empty. query='It Has flex problem but I want to do away with it as scrap. Interested buyer please contac' hits=[]
+- **ocr** -> ok. 0 lines: 
+- **corroborate** -> dispute. model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; 2 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed
+- **read_evidence** -> ok. category=camera lens brand=NIKON model=None label=False lines=1
+- **retrieval** -> empty. query='NIKON NIKON It Has flex problem but I want to do away with it as scrap. Interested buyer p' hits=[]
 - **gate** -> abstain. no candidates and no model text
 
 ## Identification
@@ -40,6 +42,7 @@ No catalogue candidates matched.
 - No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.
 - no label, plate or settings screen was legible
 - the two readers agreed on nothing legible
+- the brand was read by only one reader and is not confirmed
 - 6 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.

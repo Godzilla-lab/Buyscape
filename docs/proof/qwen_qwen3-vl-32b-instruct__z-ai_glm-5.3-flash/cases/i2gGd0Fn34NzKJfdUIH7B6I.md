@@ -1,53 +1,71 @@
 # Case i2gGd0Fn34NzKJfdUIH7B6I
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0007  |  23815 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  34238 ms
 
 ## What the engine saw
 - Presentation: single_unit
-- Category: water pump (confidence 0.9)
-- Made of: steel 60%, plastic 20%, copper 10%, rubber 10%
+- Category: electric motor with engine assembly (confidence 0.9)
+- Made of: steel 60%, copper_bare 15%, plastic 15%, rubber 10%
 - Estimated weight: 35.0 kg (confidence 0.7)
-- Brand read off the item: nothing legible
+- Brand read off the item: EMINEN ELECTRONICS
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: dirt and grime on surface, some rust visible on metal parts, blue housing appears intact but dirty
+- Damage noted: some surface rust on metal parts, blue casing has minor scuffs, engine housing appears dirty and greasy, ground area shows oil stains
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
+- Text read: EMINEN ELECTRONICS
 
 ## Two readers
-- brand_text was seen by only one reader, so it is treated as unread
-- 2 transcribed lines was seen by only one reader, so it is treated as unread
+- model_text was seen by only one reader, so it is treated as unread
+- rating_text was seen by only one reader, so it is treated as unread
+- serial_text was seen by only one reader, so it is treated as unread
+- 7 transcribed lines was seen by only one reader, so it is treated as unread
+- brand_text was read by only one reader, so it is kept but not confirmed
+
+## OCR read off the photos
+- D3
+- EMMYELE
+- GTRONICS
 
 ## Chain
-- **corroborate** -> dispute. brand_text was seen by only one reader, so it is treated as unread; 2 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=water pump brand=None model=None label=False lines=0
-- **gate** -> abstain. multiple items in frame
+- **ocr** -> ok. 3 lines: D3 | EMMYELE | GTRONICS
+- **corroborate** -> dispute. model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 7 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed
+- **read_evidence** -> ok. category=electric motor with engine assembly brand=EMINEN ELECTRONICS model=None label=False lines=1
+- **retrieval** -> ok. query='EMINEN ELECTRONICS EMINEN ELECTRONICS Basic diesel generator model 1125 engine with 30kva ' hits=['Mikano MK30 30kVA']
+- **identify** -> refused. chosen=None None margin=None
+- **abstain** -> abstain. model refused
 
 ## Identification
-No catalogue candidates matched.
+Shortlist from the catalogue:
+  - Mikano MK30 30kVA (0.2333)
 
-**Not identified: EVIDENCE_INCOMPLETE.** The photos show more than one item, so no single item can be identified.
+**Not identified: CANNOT_IDENTIFY.** No brand or model plate legible; 'EMINEN ELECTRONICS' is a photo watermark, not an item label. Red engine with blue alternator matches generic Chinese-built 30kVA gensets sold under many Nigerian brands, so Mikano MK30 is plausible but unverified.
 
 ## How sure the engine is (back office)
-**0%: the photos do not say what this is.**
+**Not sure enough to price: 10% on the best answer. It is probably a Mikano MK30, and the photos cannot separate them.**
 
-- Identification confidence: 0% (unknown)
+- Identification confidence: 10% (unknown)
 - Price confidence: 16%
-- The photos show more than one item, so no single item can be identified.
+- It is weighing: Mikano MK30 (0.3)
+- No brand or model plate legible; 'EMINEN ELECTRONICS' is a photo watermark, not an item label. Red engine with blue alternator matches generic Chinese-built 30kVA gensets sold under many Nigerian brands, so Mikano MK30 is plausible but unverified.
 - no label, plate or settings screen was legible
 - the two readers agreed on nothing legible
+- the brand was read by only one reader and is not confirmed
 - 9 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
 
 ## What the seller is asked for next (shown in the app)
-1. [PHOTO] Photograph one item on its own, with nothing else in the picture.
-   _why: the photos show more than one item_
-2. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: Close-up of any label, sticker or metal plate showing the brand and model. Then, without stopping the video: If it opens without tools, open it and photograph the inside. Keep filming the whole time. Do not cut between clips.
+1. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: Close-up of any label, sticker or metal plate showing the brand and model. Then, without stopping the video: If it opens without tools, open it and photograph the inside. Keep filming the whole time. Do not cut between clips.
    _why: two readings of these photos disagreed about what is written on the item_
-3. [PHOTO] Close-up of any label, sticker or metal plate showing the brand and model.
+2. [PHOTO] Close-up of any label, sticker or metal plate showing the brand and model.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- How much of it is there? Give the weight in kilogrammes or tons if you know it.
+- Does it still work?
+- Roughly how old is it, in years?
 
 ## Claims
 - [unverifiable_remote] Basic diesel generator model 1125 engine
@@ -68,14 +86,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Tell us what it is, whether it works, and roughly how heavy it is.
 
 ## Price
-**13,912 to 59,710 NGN** (priced as material, width 1.2441, method material_floor, 0 comparable prices)
+**19,110 to 82,145 NGN** (priced as material, width 1.2451, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 35 kg of steel 60%, plastic 20%, copper 10%, rubber 10% (rates for plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 35 kg of steel 60%, copper_bare 15%, plastic 15%, rubber 10% (rates for plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 46,375 NGN
+Scrap floor: 63,700 NGN
 
 Conditions attached to this price:
-- Not identified: The photos show more than one item, so no single item can be identified.
+- Not identified: No brand or model plate legible; 'EMINEN ELECTRONICS' is a photo watermark, not an item label. Red engine with blue alternator matches generic Chinese-built 30kVA gensets sold under many Nigerian brands, so Mikano MK30 is plausible but unverified.
 - Basic diesel generator model 1125 engine -> not proven remotely. Weigh on the scale and photograph the display.
 - 30kva coil -> not proven remotely. Weigh on the scale and photograph the display.
 - 100% copper coil -> not proven remotely. Weigh on the scale and photograph the display.

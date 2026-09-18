@@ -7,7 +7,7 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Category: computer_monitor (confidence 0.9)
 - Made of: plastic 60%, steel 30%, circuit_board 10%
 - Estimated weight: 5.0 kg (confidence 0.7)
-- Brand read off the item: nothing legible
+- Brand read off the item: LG
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
@@ -22,18 +22,15 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - 1 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## Chain
+- **ocr** -> ok. 0 lines: 
 - **corroborate** -> dispute. brand_text agreed by both readers; model_text was seen by only one reader, so it is treated as unread; 1 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=computer_monitor brand=LG model=None label=False lines=1
-- **grounding** -> dropped. brand
-- **forensics** -> flag. the reader stated brand it could not point to in the photos
 - **gate** -> abstain. multiple items in frame
 
 ## Identification
 No catalogue candidates matched.
 
 **Not identified: EVIDENCE_INCOMPLETE.** The photos show more than one item, so no single item can be identified.
-
-Evidence flags: the reader stated brand it could not point to in the photos
 
 ## How sure the engine is (back office)
 **0%: the photos do not say what this is.**
@@ -43,7 +40,6 @@ Evidence flags: the reader stated brand it could not point to in the photos
 - The photos show more than one item, so no single item can be identified.
 - no label, plate or settings screen was legible
 - 1 lines seen by both readers
-- the reader stated brand it could not point to in the photos
 - 8 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -84,7 +80,6 @@ Scrap floor: 1,450 NGN
 
 Conditions attached to this price:
 - Not identified: The photos show more than one item, so no single item can be identified.
-- Evidence flag: the reader stated brand it could not point to in the photos
 - LG monitor is available for sale -> not proven remotely. Agent will confirm at pickup.
 - Monitor is in scrap condition -> not proven remotely. Agent will confirm at pickup.
 - Keyboard is available for sale -> not proven remotely. Agent will confirm at pickup.

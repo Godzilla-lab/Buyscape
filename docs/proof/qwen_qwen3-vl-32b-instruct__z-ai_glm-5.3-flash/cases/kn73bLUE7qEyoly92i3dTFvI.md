@@ -1,17 +1,17 @@
 # Case kn73bLUE7qEyoly92i3dTFvI
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  31801 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  23746 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: engine_component (confidence 0.9)
-- Made of: steel 60%, plastic 20%, rubber 10%, copper 10%
+- Made of: steel 60%, plastic 20%, rubber 10%, copper_insulated 10%
 - Estimated weight: 15.0 kg (confidence 0.7)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: some surface dirt and grime, minor oil residue on components
+- Damage noted: some surface grime and oil residue, no visible cracks or major damage
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 
@@ -19,6 +19,7 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - 1 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## Chain
+- **ocr** -> ok. 0 lines: 
 - **corroborate** -> dispute. 1 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=engine_component brand=None model=None label=True lines=0
 - **retrieval** -> ok. query='30kva perkins John holt generator, almost new of 950hrs run. 
@@ -54,6 +55,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 2. [PHOTO] Close-up of any label, sticker or metal plate showing the brand and model.
    _why: nothing on the item says which model this is_
 
+## What the seller is asked (only they know these)
+- How much of it is there? Give the weight in kilogrammes or tons if you know it.
+- Does it still work?
+- Roughly how old is it, in years?
+
 ## Claims
 - [unverifiable_remote] 30kva perkins John holt generator
     priced as: 70 percent of the stated weight. Weigh on the scale and photograph the display
@@ -71,11 +77,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Tell us what it is, whether it works, and roughly how heavy it is.
 
 ## Price
-**9,229 to 25,590 NGN** (priced as material, width 0.9397, method material_floor, 0 comparable prices)
+**4,005 to 10,590 NGN** (priced as material, width 0.9023, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 15 kg of steel 60%, plastic 20%, rubber 10%, copper 10% (rates for plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 15 kg of steel 60%, plastic 20%, rubber 10%, copper_insulated 10% (rates for plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 19,875 NGN
+Scrap floor: 8,625 NGN
 
 Conditions attached to this price:
 - Not identified: No legible brand, model or rating text on engine or plate; seller's 30kVA Perkins claim unverifiable and no 30kVA Perkins in shortlist.

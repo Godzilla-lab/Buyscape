@@ -1,29 +1,29 @@
 # Case n0rsEJ2LZ5760lnT3ag9iNGf
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  28804 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0007  |  13960 ms
 
 ## What the engine saw
 - Presentation: single_unit
-- Category: generator (confidence 0.9)
-- Made of: steel 70%, plastic 20%, rubber 10%
-- Estimated weight: 500.0 kg (confidence 0.8)
+- Category: generator (confidence 0.8)
+- Made of: steel 80%, plastic 15%, rubber 5%
+- Estimated weight: 500.0 kg (confidence 0.7)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: rust on lower right panel, dents on side door, grime and dirt on exterior, some paint chipping
+- Damage noted: rust on lower right panel, dents on side door, paint chipped in multiple areas
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 
 ## Two readers
-- brand_text was seen by only one reader, so it is treated as unread
 - model_text was seen by only one reader, so it is treated as unread
 - rating_text was seen by only one reader, so it is treated as unread
 - serial_text was seen by only one reader, so it is treated as unread
-- 7 transcribed lines was seen by only one reader, so it is treated as unread
+- 6 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## Chain
-- **corroborate** -> dispute. brand_text was seen by only one reader, so it is treated as unread; model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 7 transcribed lines was seen by only one reader, so it is treated as unread
+- **ocr** -> ok. 0 lines: 
+- **corroborate** -> dispute. model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 6 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=generator brand=None model=None label=False lines=0
 - **retrieval** -> empty. query='FOR SALE — 200KVA CUMMINS DIESEL GENERATOR 
 Looking for a powerful, reliable and heavy-dut' hits=[]
@@ -54,6 +54,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 3. [PHOTO] Close-up of the plate on the engine block showing the engine model and serial.
    _why: nothing on the item says which model this is_
 
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it start and run right now?
+- When was it last serviced, and what was done?
+
 ## Claims
 - [unverified] 200KVA CUMMINS DIESEL GENERATOR
     priced as: the smallest rating in this brand's range. Agent reads the rating plate
@@ -73,11 +78,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Photo of the engine, showing the recoil starter and carburettor.
 
 ## Price
-**89,100 to 233,000 NGN** (priced as material, width 0.8935, method material_floor, 0 comparable prices)
+**99,198 to 256,000 NGN** (priced as material, width 0.8829, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 500 kg of steel 70%, plastic 20%, rubber 10% (rates for plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 500 kg of steel 80%, plastic 15%, rubber 5% (rates for plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 187,500 NGN
+Scrap floor: 208,750 NGN
 
 Conditions attached to this price:
 - Not identified: No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.

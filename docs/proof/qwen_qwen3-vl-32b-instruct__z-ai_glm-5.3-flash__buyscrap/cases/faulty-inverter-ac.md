@@ -22,6 +22,7 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - 10 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## Chain
+- **ocr** -> ok. 0 lines: 
 - **corroborate** -> dispute. brand_text differed between the two readers, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; 10 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=split air conditioner brand=None model=None label=True lines=1
 - **retrieval** -> empty. query='Inverter Faulty inverter AC available for sale. Location: Oshodi, Lagos State Price: 60,00' hits=[]

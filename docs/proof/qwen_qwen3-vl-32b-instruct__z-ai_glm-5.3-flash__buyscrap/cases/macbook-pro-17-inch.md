@@ -1,55 +1,51 @@
 # Case macbook-pro-17-inch
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  28428 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0013  |  34092 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: laptop (confidence 0.95)
 - Made of: aluminium 60%, plastic 30%, circuit_board 5%, steel 5%
 - Estimated weight: 2.1 kg (confidence 0.8)
-- Brand read off the item: nothing legible
+- Brand read off the item: Apple
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
 - Damage noted: Screen has smudges and reflections, Trackpad shows minor wear or scuffing, Bottom edge of keyboard appears slightly discolored or dirty
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
+- Text read: Apple
 
 ## Two readers
 - brand_text agreed by both readers
 - 1 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## Chain
+- **ocr** -> ok. 0 lines: 
 - **corroborate** -> dispute. brand_text agreed by both readers; 1 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=laptop brand=Apple model=None label=False lines=0
-- **grounding** -> dropped. brand
-- **forensics** -> flag. the reader stated brand it could not point to in the photos
-- **retrieval** -> ok. query='MacBook Pro (17-inch, Late 2011) Laptops health 50% Physical damage 5% No charger Color Gr' hits=['Apple MacBook Pro 17-inch 2011', 'Apple MacBook Pro 13-inch 2017', 'Acer Aspire 5', 'Tecno Camon 50', 'Tecno Pova 5']
-- **identify** -> ok. chosen=Apple MacBook Pro 17-inch 2011 margin=0.55
-- **abstain** -> abstain. no label, top score 0.75
+- **read_evidence** -> ok. category=laptop brand=Apple model=None label=False lines=1
+- **retrieval** -> ok. query='Apple Apple MacBook Pro (17-inch, Late 2011) Laptops health 50% Physical damage 5% No char' hits=['Apple MacBook Pro 17-inch 2011', 'Apple MacBook Pro 13-inch 2017', 'Apple MacBook Air 13-inch 2017', 'Apple iPhone 11 Pro', 'Apple iPhone 12 Pro']
+- **identify** -> ok. chosen=Apple MacBook Pro 17-inch 2011 margin=0.75
+- **abstain** -> pass. confidence=0.58 margin=0.75
 
 ## Identification
 Shortlist from the catalogue:
-  - Apple MacBook Pro 17-inch 2011 (0.3333)
-  - Apple MacBook Pro 13-inch 2017 (0.2)
-  - Acer Aspire 5 (0.2)
-  - Tecno Camon 50 (0.2)
-  - Tecno Pova 5 (0.2)
+  - Apple MacBook Pro 17-inch 2011 (0.6333)
+  - Apple MacBook Pro 13-inch 2017 (0.5)
+  - Apple MacBook Air 13-inch 2017 (0.4333)
+  - Apple iPhone 11 Pro (0.4333)
+  - Apple iPhone 12 Pro (0.4333)
 
-**Not identified: CANNOT_IDENTIFY.** No label, plate or settings screen was legible, and the visual match alone scored only 0.75.
-
-Evidence flags: the reader stated brand it could not point to in the photos
+**Answer: Apple MacBook Pro 17-inch 2011** (margin 0.75)
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 16% on the best answer. It is probably a Apple MacBook Pro 17-inch 2011 or a Apple MacBook Pro 13-inch 2017, and the photos cannot separate them.**
+**Not sure enough to price: 58% on the best answer. It is probably a Apple MacBook Pro 17-inch 2011 or a Apple MacBook Pro 13-inch 2017, and the photos cannot separate them.**
 
-- Identification confidence: 16% (unknown)
-- Price confidence: 14%
-- It is weighing: Apple MacBook Pro 17-inch 2011 (0.75), Apple MacBook Pro 13-inch 2017 (0.2)
-- No label, plate or settings screen was legible, and the visual match alone scored only 0.75.
+- Identification confidence: 58% (unsure)
+- Price confidence: 0%
+- It is weighing: Apple MacBook Pro 17-inch 2011 (0.85), Apple MacBook Pro 13-inch 2017 (0.1), Apple MacBook Air 13-inch 2017 (0.05)
 - no label, plate or settings screen was legible
 - the two readers agreed on nothing legible
-- the reader stated brand it could not point to in the photos
 - 10 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -87,15 +83,13 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Screenshot of System Information (Windows) or About This Mac, showing the model, processor, RAM and storage.
 
 ## Price
-**5,000 to 5,000 NGN** (priced as material, width 0.0, method material_floor, 0 comparable prices)
+**5,000 to 5,000 NGN** (priced as material, width 0.0, method scrap_band_only, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 2.1 kg of aluminium 60%, plastic 30%, circuit_board 5%, steel 5% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+No usable comparable sales (0 found, 2 needed), so the range comes from the published Lagos buy band for this category, reduced by 0.3715 for unproven claims.
 
 Scrap floor: 2,719 NGN
 
 Conditions attached to this price:
-- Not identified: No label, plate or settings screen was legible, and the visual match alone scored only 0.75.
-- Evidence flag: the reader stated brand it could not point to in the photos
 - Raised to the 5,000 NGN minimum this business publishes for this kind of item.
 - MacBook Pro (17-inch, Late 2011) -> not proven remotely. Agent will confirm at pickup.
 - Laptops health 50% -> not proven remotely. Agent unplugs the charger and watches the battery for two minutes.

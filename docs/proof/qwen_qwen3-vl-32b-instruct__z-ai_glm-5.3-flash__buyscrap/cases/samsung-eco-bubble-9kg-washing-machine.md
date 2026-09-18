@@ -1,32 +1,45 @@
 # Case samsung-eco-bubble-9kg-washing-machine
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0013  |  37850 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0016  |  42477 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: washing machine (confidence 0.95)
 - Made of: steel 40%, plastic 50%, copper 10%
 - Estimated weight: 65.0 kg (confidence 0.8)
-- Brand read off the item: nothing legible
+- Brand read off the item: SAMSUNG
 - Model read off the item: nothing legible
-- Rating read: none
+- Rating read: 9.0kg
 - Label, plate or settings screen legible: yes
 - Damage noted: dust and grime on surface, minor stains around door seal, small water spots on front panel, door handle slightly discolored
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: SAMSUNG | Super Eco Wash | Outdoor Care | Baby Care | Bedding | Spin | Rinse+Spin | Cotton
+- Text read: SAMSUNG | Super Eco Wash | Outdoor Care | Baby Care | Wool@ | Bedding | Spin | Rinse+Spin
 
 ## Two readers
 - brand_text agreed by both readers
 - rating_text agreed by both readers
-- 3 transcribed lines was seen by only one reader, so it is treated as unread
+- 2 transcribed lines was seen by only one reader, so it is treated as unread
+
+## OCR read off the photos
+- SAMSUNG
+- Super Eco Wash
+- Outdoor Care
+- Baby Care
+- Wool
+- Bedding
+- -Stain Awny
+- Rinse+Spin
+- Spin
+- -Dark Garment
+- Daly Wieh
+- -Eco Drum Cran
 
 ## Chain
-- **corroborate** -> dispute. brand_text agreed by both readers; rating_text agreed by both readers; 3 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=washing machine brand=SAMSUNG model=None label=True lines=16
-- **grounding** -> dropped. brand, rating
-- **forensics** -> flag. the reader stated brand, rating it could not point to in the photos
-- **retrieval** -> ok. query='SAMSUNG Super Eco Wash Outdoor Care Baby Care Bedding Spin Rinse+Spin Cotton Synthetics St' hits=['Samsung Galaxy Note 20', 'Samsung AR09 1HP', 'Samsung WA80 8kg top loader', 'Samsung AR12 1.5HP', 'Samsung WW70 7kg front loader']
+- **ocr** -> ok. 16 lines: SAMSUNG | Super Eco Wash | Outdoor Care | Baby Care | Wool | Bedding | -Stain Awny | Rinse+Spin | Spin | -Dark Garment |
+- **corroborate** -> dispute. brand_text agreed by both readers; rating_text agreed by both readers; 2 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=washing machine brand=SAMSUNG model=None label=True lines=17
+- **retrieval** -> ok. query='SAMSUNG 9.0kg SAMSUNG Super Eco Wash Outdoor Care Baby Care Wool@ Bedding Spin Rinse+Spin ' hits=['Samsung Galaxy Note 20', 'Samsung AR09 1HP', 'Samsung WA80 8kg top loader', 'Samsung AR12 1.5HP', 'Samsung WW70 7kg front loader']
 - **identify** -> refused. chosen=None None margin=None
 - **abstain** -> abstain. model refused
 
@@ -38,20 +51,17 @@ Shortlist from the catalogue:
   - Samsung AR12 1.5HP (0.4)
   - Samsung WW70 7kg front loader (0.4)
 
-**Not identified: CANNOT_IDENTIFY.** Panel shows Samsung ecobubble 9.0kg front loader, but no exact model number is legible; only shortlist washer is 7kg WW70, a capacity mismatch. Needs model plate (WW90/WW9xxx series) to confirm.
-
-Evidence flags: the reader stated brand, rating it could not point to in the photos
+**Not identified: CANNOT_IDENTIFY.** Panel reads 'ecobubble 9.0kg' front loader, but no shortlist entry is a 9kg front loader and no full model number (e.g. WW90xxxx) is legible to confirm the exact model.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 7% on the best answer. It is probably a Samsung WW70, and the photos cannot separate them.**
+**Not sure enough to price: 21% on the best answer. It is probably a Samsung WW70, and the photos cannot separate them.**
 
-- Identification confidence: 7% (unknown)
+- Identification confidence: 21% (unknown)
 - Price confidence: 14%
-- It is weighing: Samsung WW70 (0.25)
-- Panel shows Samsung ecobubble 9.0kg front loader, but no exact model number is legible; only shortlist washer is 7kg WW70, a capacity mismatch. Needs model plate (WW90/WW9xxx series) to confirm.
+- It is weighing: Samsung WW70 (0.35)
+- Panel reads 'ecobubble 9.0kg' front loader, but no shortlist entry is a 9kg front loader and no full model number (e.g. WW90xxxx) is legible to confirm the exact model.
 - read off the item's own label
-- 16 lines seen by both readers
-- the reader stated brand, rating it could not point to in the photos
+- 17 lines seen by both readers
 - 10 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -94,8 +104,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 81,250 NGN
 
 Conditions attached to this price:
-- Not identified: Panel shows Samsung ecobubble 9.0kg front loader, but no exact model number is legible; only shortlist washer is 7kg WW70, a capacity mismatch. Needs model plate (WW90/WW9xxx series) to confirm.
-- Evidence flag: the reader stated brand, rating it could not point to in the photos
+- Not identified: Panel reads 'ecobubble 9.0kg' front loader, but no shortlist entry is a 9kg front loader and no full model number (e.g. WW90xxxx) is legible to confirm the exact model.
 - Model: Samsung Eco Bubble -> not proven remotely. Agent reads the rating plate.
 - Condition: Scrap/for repair (The power comes on) -> not proven remotely. Agent checks drum play and listens on spin.
 - Capacity: 9kg -> not proven remotely. Agent reads the rating plate.

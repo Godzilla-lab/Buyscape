@@ -1,17 +1,17 @@
 # Case 8iySw8CBt38FqilFve1gHWOi
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  23627 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  44397 ms
 
 ## What the engine saw
 - Presentation: sealed_new
-- Category: washing machine (confidence 0.95)
-- Made of: paper 90%, plastic 10%
+- Category: washing machine (confidence 0.9)
+- Made of: carton 100%
 - Estimated weight: 15.0 kg (confidence 0.7)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: none
+- Damage noted: box is taped shut, minor creases and wear on corners
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
 - Text read: WASHING MACHINE
@@ -21,7 +21,18 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - model_text differed between the two readers, so it is treated as unread
 - 4 transcribed lines was seen by only one reader, so it is treated as unread
 
+## OCR read off the photos
+- WASHING MACHINE
+- Boscon
+- JAPAN
+- MODELNO.:ES-WM70S
+- JAPAN"
+- 158
+- KITCHENPLUGT
+- Makes yours ashing simply easy
+
 ## Chain
+- **ocr** -> ok. 8 lines: WASHING MACHINE | Boscon | JAPAN | MODELNO.:ES-WM70S | JAPAN" | 158 | KITCHENPLUGT | Makes yours ashing simply easy
 - **corroborate** -> dispute. brand_text differed between the two readers, so it is treated as unread; model_text differed between the two readers, so it is treated as unread; 4 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=washing machine brand=None model=None label=False lines=1
 - **forensics** -> flag. looks like a catalogue or stock image
@@ -59,6 +70,10 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 3. [PHOTO] Close-up of the sticker with the model number, usually inside the door or on the back.
    _why: nothing on the item says which model this is_
 
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it finish a full wash and spin cycle?
+
 ## Claims
 - [unverified] The washing machine is a Boscon single-tub model.
     priced as: the smallest capacity this brand sells. Agent reads the rating plate
@@ -76,11 +91,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Open the door and photograph the inside of the drum.
 
 ## Price
-**480 to 1,890 NGN** (priced as material, width 1.1896, method material_floor, 0 comparable prices)
+**450 to 1,800 NGN** (priced as material, width 1.1997, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 15 kg of paper 90%, plastic 10% (rates for paper, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 15 kg of carton 100% (rates for carton are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 960 NGN
+Scrap floor: 900 NGN
 
 Conditions attached to this price:
 - Not identified: The answer names boswm705, which appears nowhere on the item or in the seller's words. A photo of the plate would confirm or correct it.

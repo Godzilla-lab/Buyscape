@@ -1,55 +1,60 @@
 # Case hePh6idIFypsvAdj22llUCZm
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  31208 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  33184 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: phone (confidence 0.95)
 - Made of: aluminium 40%, glass 30%, plastic 20%, circuit_board 10%
-- Estimated weight: 0.18 kg (confidence 0.9)
-- Brand read off the item: nothing legible
+- Estimated weight: 0.2 kg (confidence 0.9)
+- Brand read off the item: Apple Inc.
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: none
+- Damage noted: No visible damage to back panel or camera module.
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: iPhone 12
+- Text read: iPhone 12 | Apple Inc.
 
 ## Two readers
 - model_text differed between the two readers, so it is treated as unread
 - serial_text differed between the two readers, so it is treated as unread
-- brand_text was seen by only one reader, so it is treated as unread
-- 8 transcribed lines was seen by only one reader, so it is treated as unread
+- 7 transcribed lines was seen by only one reader, so it is treated as unread
+- brand_text was read by only one reader, so it is kept but not confirmed
+
+## OCR read off the photos
+- HERA
+- btn
 
 ## Chain
-- **corroborate** -> dispute. model_text differed between the two readers, so it is treated as unread; serial_text differed between the two readers, so it is treated as unread; brand_text was seen by only one reader, so it is treated as unread; 8 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=phone brand=None model=None label=True lines=1
-- **retrieval** -> ok. query='iPhone 12 * Foreign Used Grade A++*
+- **ocr** -> ok. 2 lines: HERA | btn
+- **corroborate** -> dispute. model_text differed between the two readers, so it is treated as unread; serial_text differed between the two readers, so it is treated as unread; 7 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed
+- **read_evidence** -> ok. category=phone brand=Apple Inc. model=None label=True lines=2
+- **retrieval** -> ok. query='Apple Inc. iPhone 12 Apple Inc. * Foreign Used Grade A++*
 *iPhone 12 FU 64GB & 128GB*
-Neatness: 10/10
-Screen: 10' hits=['Apple iPhone 12', 'Apple iPhone 12 Pro', 'Apple iPhone 12 Pro Max', 'Apple iPhone XR', 'Apple iPhone XS']
+Neat' hits=['Apple iPhone 12', 'Apple iPhone 12 Pro', 'Apple iPhone 12 Pro Max', 'Apple iPhone XR', 'Apple iPhone XS']
 - **identify** -> ok. chosen=Apple iPhone 12 margin=0.7
-- **abstain** -> pass. confidence=0.9 margin=0.7
+- **abstain** -> pass. confidence=0.72 margin=0.7
 
 ## Identification
 Shortlist from the catalogue:
-  - Apple iPhone 12 (0.4667)
-  - Apple iPhone 12 Pro (0.2667)
-  - Apple iPhone 12 Pro Max (0.2)
-  - Apple iPhone XR (0.2)
-  - Apple iPhone XS (0.2)
+  - Apple iPhone 12 (0.7667)
+  - Apple iPhone 12 Pro (0.5667)
+  - Apple iPhone 12 Pro Max (0.5)
+  - Apple iPhone XR (0.5)
+  - Apple iPhone XS (0.5)
 
 **Answer: Apple iPhone 12** (margin 0.7)
 
 ## How sure the engine is (back office)
-**90% sure this is a Apple iPhone 12.**
+**72% sure this is a Apple iPhone 12.**
 
-- Identification confidence: 90% (certain)
+- Identification confidence: 72% (likely)
 - Price confidence: 40%
 - It is weighing: Apple iPhone 12 (0.9), Apple iPhone 12 Pro (0.2), Apple iPhone 12 Pro Max (0.1)
 - read off the item's own label
 - 1 lines seen by both readers
+- the brand was read by only one reader and is not confirmed
 - 12 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -61,6 +66,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: this is needed before the price can be confirmed_
 3. [PHOTO] Photo of the back of the phone.
    _why: this is needed before the price can be confirmed_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Has the screen or battery ever been changed?
+- Is it signed out of iCloud or Google, so a new owner can set it up?
 
 ## Claims
 - [unverifiable_remote] Foreign Used Grade A++
@@ -87,9 +97,9 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 ## Price
 **44,426 to 312,200 NGN** (priced as a working item, width 1.5017, method uncalibrated_wide, 12 comparable prices)
 
-12 used asking prices, 20th to 80th percentile 271,000 to 446,000 NGN, converted to a buy range with the 0.45 to 0.7 ask-to-buy spread, then reduced by 0.3643 for unproven claims, floored at the scrap value 175.
+12 used asking prices, 20th to 80th percentile 271,000 to 446,000 NGN, converted to a buy range with the 0.45 to 0.7 ask-to-buy spread, then reduced by 0.3643 for unproven claims, floored at the scrap value 181.
 
-Scrap floor: 175 NGN
+Scrap floor: 181 NGN
 
 Conditions attached to this price:
 - Foreign Used Grade A++ -> not proven remotely. Agent will confirm at pickup.

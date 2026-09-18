@@ -1,11 +1,11 @@
 # Case xkOacteaNGphg3AXzqA9PtX9
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  75840 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  74385 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: phone (confidence 1.0)
-- Made of: plastic 40%, glass 30%, circuit_board 20%, steel 10%
+- Made of: plastic 40%, circuit_board 10%, steel 30%, glass 20%
 - Estimated weight: 0.18 kg (confidence 0.9)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
@@ -17,11 +17,19 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Text read: Wed 10 Jun | 7:47
 
 ## Two readers
-- brand_text was seen by only one reader, so it is treated as unread
 - 5 transcribed lines was seen by only one reader, so it is treated as unread
 
+## OCR read off the photos
+- Airtel Higeria
+- Wed 10 Jun
+- CHINEDU CHUKWUOIKE
+- BIG DIDIS IPHONE
+- 00%
+- BODNOL
+
 ## Chain
-- **corroborate** -> dispute. brand_text was seen by only one reader, so it is treated as unread; 5 transcribed lines was seen by only one reader, so it is treated as unread
+- **ocr** -> ok. 6 lines: Airtel Higeria | Wed 10 Jun | CHINEDU CHUKWUOIKE | BIG DIDIS IPHONE | 00% | BODNOL
+- **corroborate** -> dispute. 5 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=phone brand=None model=None label=False lines=2
 - **forensics** -> flag. screenshot of a gallery rather than a photo of the item
 - **retrieval** -> ok. query='Wed 10 Jun 7:47 IPhone 16 Pro Max 256GB (Physical SIM + eSIM)
@@ -63,6 +71,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 3. [PHOTO] Screenshot of Settings then About, showing the model name and storage.
    _why: nothing on the item says which model this is_
 
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Has the screen or battery ever been changed?
+- Is it signed out of iCloud or Google, so a new owner can set it up?
+
 ## Claims
 - [unverified] iPhone 16 Pro Max 256GB
     priced as: smallest variant of this model. Agent reads storage from Settings
@@ -84,11 +97,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
-**32 to 170 NGN** (priced as material, width 1.3601, method material_floor, 0 comparable prices)
+**22 to 65 NGN** (priced as material, width 0.9747, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 0.18 kg of plastic 40%, glass 30%, circuit_board 20%, steel 10% (rates for circuit_board, glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 0.18 kg of plastic 40%, circuit_board 10%, steel 30%, glass 20% (rates for glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 71 NGN
+Scrap floor: 49 NGN
 
 Conditions attached to this price:
 - Not identified: The best candidate scored only 0.6, which is not sure enough to price.

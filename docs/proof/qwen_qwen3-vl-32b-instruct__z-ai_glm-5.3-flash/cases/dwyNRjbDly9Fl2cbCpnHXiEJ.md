@@ -1,35 +1,45 @@
 # Case dwyNRjbDly9Fl2cbCpnHXiEJ
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0015  |  39550 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0015  |  62408 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: generator (confidence 0.95)
 - Made of: steel 40%, plastic 30%, copper 15%, rubber 10%, mixed_electronic 5%
-- Estimated weight: 25.0 kg (confidence 0.8)
+- Estimated weight: 25.0 kg (confidence 0.7)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
-- Rating read: none
+- Rating read: E33KWH
 - Label, plate or settings screen legible: yes
-- Damage noted: some surface dirt and minor wear on casing, no visible cracks or dents
+- Damage noted: minor dust and grime on surface, no visible cracks or dents
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: LUTIAN
+- Text read: LUTIAN | SUMEC | E33KWH
 
 ## Two readers
+- rating_text was read by one reader and confirmed by OCR
 - brand_text differed between the two readers, so it is treated as unread
 - model_text differed between the two readers, so it is treated as unread
-- rating_text was seen by only one reader, so it is treated as unread
-- 1 transcribed lines was seen by only one reader, so it is treated as unread
+- 2 transcribed lines was seen by only one reader, so it is treated as unread
+
+## OCR read off the photos
+- SUMEC
+- MAXI>
+- POUTADLE GENERATON
+- E33KWH
+- WERLH
+- OR
+- oro
+- S10ET
 
 ## Chain
-- **corroborate** -> dispute. brand_text differed between the two readers, so it is treated as unread; model_text differed between the two readers, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; 1 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=generator brand=None model=None label=True lines=1
-- **retrieval** -> ok. query='LUTIAN 5kva maxi petrol generator set 
+- **ocr** -> ok. 8 lines: SUMEC | MAXI> | POUTADLE GENERATON | E33KWH | WERLH | OR | oro | S10ET
+- **corroborate** -> dispute. rating_text was read by one reader and confirmed by OCR; brand_text differed between the two readers, so it is treated as unread; model_text differed between the two readers, so it is treated as unread; 2 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=generator brand=None model=None label=True lines=3
+- **retrieval** -> ok. query='E33KWH LUTIAN SUMEC E33KWH 5kva maxi petrol generator set 
 100% pure copper coil 
-Key start 
-15ltrs petrol tan' hits=['Lutian LT3900 3.5kVA', 'Thermocool TC2700 2.5kVA', 'Haier Thermocool HTG2700 2.5kVA', 'Kemage KM6500 5.5kVA', 'Senwei SW3500 3.5kVA']
-- **identify** -> ok. chosen=Maxi 2.5KVA margin=0.65
+Key star' hits=['Lutian LT3900 3.5kVA', 'Thermocool TC2700 2.5kVA', 'Haier Thermocool HTG2700 2.5kVA', 'Sumec Firman SPG2900 2.8kVA', 'Sumec Firman ECO8990ES 6.5kVA']
+- **identify** -> ok. chosen=Lutian E33KWH margin=0.5
 - **abstain** -> abstain. seller names another generation
 
 ## Identification
@@ -37,20 +47,20 @@ Shortlist from the catalogue:
   - Lutian LT3900 3.5kVA (0.55)
   - Thermocool TC2700 2.5kVA (0.2333)
   - Haier Thermocool HTG2700 2.5kVA (0.2333)
-  - Kemage KM6500 5.5kVA (0.15)
-  - Senwei SW3500 3.5kVA (0.15)
+  - Sumec Firman SPG2900 2.8kVA (0.2)
+  - Sumec Firman ECO8990ES 6.5kVA (0.2)
 
-**Not identified: EVIDENCE_INCOMPLETE.** The answer states 2.5kva but the evidence shows 5kva.
+**Not identified: EVIDENCE_INCOMPLETE.** The two readers disagreed about the brand and the answer's 'Lutian' is not what the OCR read off the item or what the seller said. This needs a clear photo of the brand on the item.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 48% on the best answer. It is probably a Maxi 2.5KVA or a Lutian LT3900, and the photos cannot separate them.**
+**Not sure enough to price: 54% on the best answer. It is probably a Lutian E33KWH or a Lutian LT3900, and the photos cannot separate them.**
 
-- Identification confidence: 48% (unsure)
+- Identification confidence: 54% (unsure)
 - Price confidence: 14%
-- It is weighing: Maxi 2.5KVA (0.8), Lutian LT3900 (0.15)
-- The answer states 2.5kva but the evidence shows 5kva.
+- It is weighing: Lutian E33KWH (0.9), Lutian LT3900 (0.4)
+- The two readers disagreed about the brand and the answer's 'Lutian' is not what the OCR read off the item or what the seller said. This needs a clear photo of the brand on the item.
 - read off the item's own label
-- 1 lines seen by both readers
+- 2 lines seen by both readers
 - 10 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -62,6 +72,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: nothing on the item says which model this is_
 3. [PHOTO] Close-up of the plate on the engine block showing the engine model and serial.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it start and run right now?
+- When was it last serviced, and what was done?
 
 ## Claims
 - [unverified] 5kva maxi petrol generator set
@@ -91,7 +106,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 44,250 NGN
 
 Conditions attached to this price:
-- Not identified: The answer states 2.5kva but the evidence shows 5kva.
+- Not identified: The two readers disagreed about the brand and the answer's 'Lutian' is not what the OCR read off the item or what the seller said. This needs a clear photo of the brand on the item.
 - 5kva maxi petrol generator set -> not proven remotely. Agent reads the rating plate.
 - 100% pure copper coil -> not proven remotely. Agent opens the side cover and inspects the windings.
 - Key start -> not proven remotely. Agent will confirm at pickup.

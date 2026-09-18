@@ -1,31 +1,37 @@
 # Case 31j8IUhJX5623lXvGPd868XE
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  14845 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  17058 ms
 
 ## What the engine saw
 - Presentation: sealed_new
 - Category: computer_system (confidence 0.9)
-- Made of: paper 80%, plastic 20%
-- Estimated weight: 15.0 kg (confidence 0.7)
-- Brand read off the item: nothing legible
+- Made of: carton 90%, plastic 10%
+- Estimated weight: 5.0 kg (confidence 0.7)
+- Brand read off the item: CLOVER
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: box shows minor scuffing and creasing on edges, tape seal intact
+- Damage noted: box appears intact, minor scuffing on edges
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: INTEGRATED ICT SOLUTIONS | ICT | INTEGRATED ICT SOLUTION
+- Text read: INTEGRATED ICT SOLUTIONS | ICT | INTEGRATED ICT-SOLUTION | CLOVER
 
 ## Two readers
-- brand_text was seen by only one reader, so it is treated as unread
-- model_text was seen by only one reader, so it is treated as unread
+- model_text differed between the two readers, so it is treated as unread
+- rating_text was seen by only one reader, so it is treated as unread
 - serial_text was seen by only one reader, so it is treated as unread
 - 8 transcribed lines was seen by only one reader, so it is treated as unread
+- brand_text was read by only one reader, so it is kept but not confirmed
+
+## OCR read off the photos
+- CT
+- INT
 
 ## Chain
-- **corroborate** -> dispute. brand_text was seen by only one reader, so it is treated as unread; model_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 8 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=computer_system brand=None model=None label=True lines=3
-- **retrieval** -> empty. query='INTEGRATED ICT SOLUTIONS ICT INTEGRATED ICT SOLUTION Rog zephyrus g16 gaming laptop, 16” r' hits=[]
+- **ocr** -> ok. 2 lines: CT | INT
+- **corroborate** -> dispute. model_text differed between the two readers, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 8 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed
+- **read_evidence** -> ok. category=computer_system brand=CLOVER model=None label=True lines=4
+- **retrieval** -> empty. query='CLOVER INTEGRATED ICT SOLUTIONS ICT INTEGRATED ICT-SOLUTION CLOVER Rog zephyrus g16 gaming' hits=[]
 - **gate** -> abstain. no candidates and no model text
 
 ## Identification
@@ -41,6 +47,7 @@ No catalogue candidates matched.
 - No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.
 - read off the item's own label
 - 3 lines seen by both readers
+- the brand was read by only one reader and is not confirmed
 - 10 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -50,6 +57,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: two readings of these photos disagreed about what is written on the item_
 2. [PHOTO] Close-up of any label, sticker or metal plate showing the brand and model.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- How much of it is there? Give the weight in kilogrammes or tons if you know it.
+- Does it still work?
+- Roughly how old is it, in years?
 
 ## Claims
 - [unverifiable_remote] Rog zephyrus g16 gaming laptop
@@ -74,11 +86,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Tell us what it is, whether it works, and roughly how heavy it is.
 
 ## Price
-**306 to 1,980 NGN** (priced as material, width 1.4646, method material_floor, 0 comparable prices)
+**96 to 630 NGN** (priced as material, width 1.4711, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 15 kg of paper 80%, plastic 20% (rates for paper, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 5 kg of carton 90%, plastic 10% (rates for carton, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 1,020 NGN
+Scrap floor: 320 NGN
 
 Conditions attached to this price:
 - Not identified: No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.

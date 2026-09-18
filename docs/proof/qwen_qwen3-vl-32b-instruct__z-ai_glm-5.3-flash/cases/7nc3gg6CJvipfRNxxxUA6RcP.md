@@ -1,28 +1,33 @@
 # Case 7nc3gg6CJvipfRNxxxUA6RcP
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0007  |  19097 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0006  |  13389 ms
 
 ## What the engine saw
 - Presentation: single_unit
-- Category: split air conditioner (confidence 0.9)
-- Made of: plastic 60%, steel 30%, copper 10%
+- Category: split_air_conditioner (confidence 0.9)
+- Made of: plastic 60%, steel 30%, copper_bare 10%
 - Estimated weight: 25.0 kg (confidence 0.7)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: dusty exterior, some minor surface scratches
+- Damage noted: dusty exterior, some surface scratches, grille appears intact
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 - Text read: 100% SOLUTIONS
 
 ## Two readers
-- brand_text was seen by only one reader, so it is treated as unread
+- brand_text differed between the two readers, so it is treated as unread
 - 1 transcribed lines was seen by only one reader, so it is treated as unread
 
+## OCR read off the photos
+- Midea
+- 100% SOLUTIONS
+
 ## Chain
-- **corroborate** -> dispute. brand_text was seen by only one reader, so it is treated as unread; 1 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=split air conditioner brand=None model=None label=False lines=1
+- **ocr** -> ok. 2 lines: Midea | 100% SOLUTIONS
+- **corroborate** -> dispute. brand_text differed between the two readers, so it is treated as unread; 1 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=split_air_conditioner brand=None model=None label=False lines=1
 - **gate** -> abstain. multiple items in frame
 
 ## Identification
@@ -50,6 +55,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 3. [PHOTO] Close-up of the rating plate on the outdoor unit showing the model and HP.
    _why: nothing on the item says which model this is_
 
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it still blow cold air?
+- Do you have both the indoor unit and the outdoor unit?
+
 ## Claims
 - [unverified] 1hp Midea Split Air Conditioner
     priced as: the smallest rating this brand sells. Agent reads the outdoor rating plate
@@ -71,7 +81,7 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 ## Price
 **14,374 to 39,700 NGN** (priced as material, width 0.9367, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 25 kg of plastic 60%, steel 30%, copper 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 25 kg of plastic 60%, steel 30%, copper_bare 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
 Scrap floor: 30,250 NGN
 

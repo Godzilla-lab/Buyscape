@@ -1,6 +1,6 @@
 # Case g8BeRYOtKj5PzXk1ZiEWKa31
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0013  |  72157 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0013  |  46701 ms
 
 ## What the engine saw
 - Presentation: sealed_new
@@ -13,15 +13,19 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Label, plate or settings screen legible: no
 - Damage noted: none
 - Looks like a catalogue image: yes
-- Screenshot of a gallery: no
+- Screenshot of a gallery: yes
 
 ## Two readers
 - 2 transcribed lines was seen by only one reader, so it is treated as unread
 
+## OCR read off the photos
+- 日
+
 ## Chain
+- **ocr** -> ok. 1 lines: 日
 - **corroborate** -> dispute. 2 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=phone brand=None model=None label=False lines=0
-- **forensics** -> flag. looks like a catalogue or stock image
+- **forensics** -> flag. looks like a catalogue or stock image; screenshot of a gallery rather than a photo of the item
 - **retrieval** -> ok. query='Brand new Apple iphone 15 pro max 256gb white available at affordable price.' hits=['Apple iPhone 15 Pro', 'Apple iPhone 15 Pro Max', 'Apple iPhone 15', 'Apple iPhone 11 Pro Max', 'Apple iPhone 12 Pro Max']
 - **identify** -> refused. chosen=None None margin=0.05
 - **abstain** -> abstain. model refused
@@ -36,7 +40,7 @@ Shortlist from the catalogue:
 
 **Not identified: CANNOT_IDENTIFY.** Only a sealed box is shown; no label text is legible, and the box art cannot distinguish iPhone 15 Pro from 15 Pro Max. Seller's claim is unverified.
 
-Evidence flags: looks like a catalogue or stock image
+Evidence flags: looks like a catalogue or stock image; screenshot of a gallery rather than a photo of the item
 
 ## How sure the engine is (back office)
 **Not sure enough to price: 8% on the best answer. It is probably a Apple iPhone 15 Pro Max or a Apple iPhone 15 Pro, and the photos cannot separate them.**
@@ -49,17 +53,23 @@ Evidence flags: looks like a catalogue or stock image
 - the two readers agreed on nothing legible
 - the next candidate was only 0.05 behind
 - looks like a catalogue or stock image
+- screenshot of a gallery rather than a photo of the item
 - 10 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
 
 ## What the seller is asked for next (shown in the app)
-1. [PHOTO] Take your own photo of the actual item you are selling.
-   _why: this looks like a catalogue picture, not the real unit_
+1. [PHOTO] Take a new photo of the item itself, not a picture of another screen.
+   _why: this is a screenshot rather than a photo of the item_
 2. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: If you have the box, photograph the label showing the model, storage and IMEI. Then, still filming, do this on the item's own screen and hold it steady so the writing can be read: open settings then About, showing the model name and storage. Then, without stopping the video: Pull out the SIM tray and photograph the open slot. Finish with: A short clip: press power, unlock, then open the camera app. Keep filming the whole time. Do not cut between clips.
    _why: two readings of these photos disagreed about what is written on the item_
 3. [PHOTO] Screenshot of Settings then About, showing the model name and storage.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Has the screen or battery ever been changed?
+- Is it signed out of iCloud or Google, so a new owner can set it up?
 
 ## Claims
 - [unverified] Brand new Apple iPhone 15 Pro Max 256GB white
@@ -92,6 +102,7 @@ Scrap floor: 17 NGN
 Conditions attached to this price:
 - Not identified: Only a sealed box is shown; no label text is legible, and the box art cannot distinguish iPhone 15 Pro from 15 Pro Max. Seller's claim is unverified.
 - Evidence flag: looks like a catalogue or stock image
+- Evidence flag: screenshot of a gallery rather than a photo of the item
 - Brand new Apple iPhone 15 Pro Max 256GB white -> not proven remotely. Agent reads storage from Settings.
 - Brand new Apple iPhone 15 Pro Max 256GB white -> not proven remotely. Agent reads storage from Settings.
 - Brand new Apple iPhone 15 Pro Max 256GB white -> not proven remotely. Agent reads storage from Settings.

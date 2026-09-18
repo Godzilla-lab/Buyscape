@@ -1,53 +1,68 @@
 # Case xnYCiMBkljuNs2JmkdsDZHWJ
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  31855 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  35739 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: inverter generator (confidence 0.95)
 - Made of: steel 40%, plastic 35%, circuit_board 15%, rubber 10%
 - Estimated weight: 25.0 kg (confidence 0.8)
-- Brand read off the item: nothing legible
+- Brand read off the item: BECTRODES
 - Model read off the item: nothing legible
-- Rating read: none
+- Rating read: 5.6kVA, 5.0kW
 - Label, plate or settings screen legible: yes
-- Damage noted: box shows minor creasing and scuffing, unit appears clean with no visible damage
+- Damage noted: box is slightly creased and scuffed, generator casing has minor scratches
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
-- Text read: 5.6kVA | Max power | Rated power | DIGITAL INVERTER TECHNOLOGY | ULTRA COMPACT SIZE | INVERTER GENERATOR | PREMIUM QUALITY | 5.6kVA
+- Text read: 5.6kVA | Max power | Rated power | DIGITAL INVERTER TECHNOLOGY | ULTRA COMPACT SIZE | INVERTER GENERATOR | TWO WIRE AUTO START | PREMIUM QUALITY
 
 ## Two readers
 - rating_text agreed by both readers
-- brand_text was seen by only one reader, so it is treated as unread
 - model_text was seen by only one reader, so it is treated as unread
-- 7 transcribed lines was seen by only one reader, so it is treated as unread
+- 6 transcribed lines was seen by only one reader, so it is treated as unread
+- brand_text was read by only one reader, so it is kept but not confirmed
+
+## OCR read off the photos
+- 5.6kVA
+- INVERTER GENERATOR
+- 5.0kVA
+- Max power
+- AUTO START
+- TWO WIRS
+- PREMUM
+- OUALITY
+- Rated power
+- - DIGITAL INVERTER TECHNOLOSY
+- D15
+- BC7800IES
 
 ## Chain
-- **corroborate** -> dispute. rating_text agreed by both readers; brand_text was seen by only one reader, so it is treated as unread; model_text was seen by only one reader, so it is treated as unread; 7 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=inverter generator brand=None model=None label=True lines=10
-- **grounding** -> dropped. rating
-- **forensics** -> flag. the reader stated rating it could not point to in the photos; looks like a catalogue or stock image
-- **retrieval** -> ok. query='5.6kVA Max power Rated power DIGITAL INVERTER TECHNOLOGY ULTRA COMPACT SIZE INVERTER GENER' hits=['Kemage KM6500 5.5kVA']
-- **identify** -> ok. chosen=Senci SC7800IES margin=0.9
-- **abstain** -> pass. confidence=0.45 margin=0.9
+- **ocr** -> ok. 18 lines: 5.6kVA | INVERTER GENERATOR | 5.0kVA | Max power | AUTO START | TWO WIRS | PREMUM | OUALITY | Rated power | - DIGITAL IN
+- **corroborate** -> dispute. rating_text agreed by both readers; model_text was seen by only one reader, so it is treated as unread; 6 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed
+- **read_evidence** -> ok. category=inverter generator brand=BECTRODES model=None label=True lines=11
+- **forensics** -> flag. looks like a catalogue or stock image
+- **retrieval** -> ok. query='BECTRODES 5.6kVA, 5.0kW 5.6kVA Max power Rated power DIGITAL INVERTER TECHNOLOGY ULTRA COM' hits=['Kemage KM6500 5.5kVA']
+- **identify** -> ok. chosen=Senci SC7800IES margin=0.85
+- **abstain** -> abstain. confidence 0.36: read off the item's own label; 9 lines seen by both readers; the brand was read by only one reader and is not confirmed; looks like a catalogue or stock image
 
 ## Identification
 Shortlist from the catalogue:
   - Kemage KM6500 5.5kVA (0.15)
 
-**Answer: Senci SC7800IES 5.6kVA inverter generator** (margin 0.9)
+**Not identified: EVIDENCE_INCOMPLETE.** The evidence only supports this answer at 36 percent, which is a guess. One clear photo of the label would settle it.
 
-Evidence flags: the reader stated rating it could not point to in the photos; looks like a catalogue or stock image
+Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 45% on the best answer. It is probably a Senci SC7800IES or a Kemage KM6500, and the photos cannot separate them.**
+**Not sure enough to price: 22% on the best answer. It is probably a Senci SC7800IES or a Kemage KM6500, and the photos cannot separate them.**
 
-- Identification confidence: 45% (unsure)
-- Price confidence: 0%
-- It is weighing: Senci SC7800IES (0.9), Kemage KM6500 (0.0)
+- Identification confidence: 22% (unknown)
+- Price confidence: 16%
+- It is weighing: Senci SC7800IES (0.9), Kemage KM6500 (0.05)
+- The evidence only supports this answer at 36 percent, which is a guess. One clear photo of the label would settle it.
 - read off the item's own label
-- 10 lines seen by both readers
-- the reader stated rating it could not point to in the photos
+- 9 lines seen by both readers
+- the brand was read by only one reader and is not confirmed
 - looks like a catalogue or stock image
 - 9 claims are still unproven, 0 are supported
 
@@ -60,6 +75,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: two readings of these photos disagreed about what is written on the item_
 3. [PHOTO] Close-up of the rating plate showing the kVA and model number.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it start and run right now?
+- When was it last serviced, and what was done?
 
 ## Claims
 - [unverifiable_remote] Brand new Senci petrol inverter generator
@@ -79,14 +99,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Photo of the engine, showing the recoil starter and carburettor.
 
 ## Price
-**45,112 to 650,000 NGN** (priced as material, width 1.7404, method scrap_band_only, 0 comparable prices)
+**5,075 to 11,575 NGN** (priced as material, width 0.7808, method material_floor, 0 comparable prices)
 
-No usable comparable sales (0 found, 2 needed), so the range comes from the published Lagos buy band for this category, reduced by 0.5639 for unproven claims.
+This item was not identified, so it is priced as material rather than as a working item: 25 kg of steel 40%, plastic 35%, circuit_board 15%, rubber 10% (rates for plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 80,000 NGN
+Scrap floor: 9,000 NGN
 
 Conditions attached to this price:
-- Evidence flag: the reader stated rating it could not point to in the photos
+- Not identified: The evidence only supports this answer at 36 percent, which is a guess. One clear photo of the label would settle it.
 - Evidence flag: looks like a catalogue or stock image
 - Brand new Senci petrol inverter generator -> not proven remotely. Agent will confirm at pickup.
 - Model SC7800IES -> not proven remotely. Agent will confirm at pickup.

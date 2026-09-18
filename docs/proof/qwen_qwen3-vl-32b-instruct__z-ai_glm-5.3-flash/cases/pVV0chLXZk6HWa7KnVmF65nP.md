@@ -1,37 +1,37 @@
 # Case pVV0chLXZk6HWa7KnVmF65nP
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0017  |  53260 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  118473 ms
 
 ## What the engine saw
 - Presentation: single_unit
-- Category: portable_generator (confidence 0.9)
-- Made of: steel 40%, plastic 30%, circuit_board 15%, rubber 10%, mixed_electronic 5%
-- Estimated weight: 18.0 kg (confidence 0.7)
+- Category: generator (confidence 0.9)
+- Made of: steel 40%, plastic 30%, copper 15%, rubber 10%, aluminium 5%
+- Estimated weight: 25.0 kg (confidence 0.7)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: minor scuff marks on plastic casing, no visible damage to frame or wheels, fuel cap appears slightly loose
+- Damage noted: minor scuffs on plastic casing, dirt on wheels and frame, no visible damage to engine or electrical outlets
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: POWERED BY GASOLINE | 2000 WATT
+- Text read: ENGINE: OHV 4-STROKE
 
 ## Two readers
-- rating_text agreed by both readers
 - brand_text differed between the two readers, so it is treated as unread
-- model_text was seen by only one reader, so it is treated as unread
+- model_text differed between the two readers, so it is treated as unread
+- rating_text differed between the two readers, so it is treated as unread
 - serial_text was seen by only one reader, so it is treated as unread
 - 12 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## Chain
-- **corroborate** -> dispute. rating_text agreed by both readers; brand_text differed between the two readers, so it is treated as unread; model_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 12 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=portable_generator brand=None model=None label=True lines=2
-- **grounding** -> dropped. rating
-- **forensics** -> flag. the reader stated rating it could not point to in the photos
-- **retrieval** -> ok. query='POWERED BY GASOLINE 2000 WATT Brand new 6.9kva Maxmech generator 
+- **ocr** -> ok. 0 lines: 
+- **corroborate** -> dispute. brand_text differed between the two readers, so it is treated as unread; model_text differed between the two readers, so it is treated as unread; rating_text differed between the two readers, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 12 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=generator brand=None model=None label=True lines=1
+- **retrieval** -> ok. query='ENGINE: OHV 4-STROKE Brand new 6.9kva Maxmech generator 
 With warranty 
-100% copp' hits=['Maxmech MX3500 3.5kVA', 'Maxmech MX10000 10kVA']
-- **identify** -> refused. chosen=None None margin=0.1
+100% copper coil
+W' hits=['Maxmech MX3500 3.5kVA', 'Maxmech MX10000 10kVA']
+- **identify** -> refused. chosen=Maxmech None margin=0.25
 - **abstain** -> abstain. model refused
 
 ## Identification
@@ -39,21 +39,18 @@ Shortlist from the catalogue:
   - Maxmech MX3500 3.5kVA (0.5)
   - Maxmech MX10000 10kVA (0.4333)
 
-**Not identified: CANNOT_IDENTIFY.** Label plainly reads 2000 WATT, matching neither 3.5kVA nor 10kVA shortlist entries; seller's 6.9kVA claim also conflicts. No legible brand or model text on the item.
-
-Evidence flags: the reader stated rating it could not point to in the photos
+**Not identified: CANNOT_IDENTIFY.** Seller states 6.9kVA Maxmech; neither shortlist entry (3.5kVA or 10kVA) matches, and no legible model number on the label confirms a model.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 5% on the best answer. It is probably a Maxmech MX3500 or a Maxmech MX10000, and the photos cannot separate them.**
+**Not sure enough to price: 19% on the best answer. It is probably a Maxmech MX10000 or a Maxmech MX3500, and the photos cannot separate them.**
 
-- Identification confidence: 5% (unknown)
+- Identification confidence: 19% (unknown)
 - Price confidence: 14%
-- It is weighing: Maxmech MX3500 (0.2), Maxmech MX10000 (0.1)
-- Label plainly reads 2000 WATT, matching neither 3.5kVA nor 10kVA shortlist entries; seller's 6.9kVA claim also conflicts. No legible brand or model text on the item.
+- It is weighing: Maxmech MX10000 (0.35), Maxmech MX3500 (0.1)
+- Seller states 6.9kVA Maxmech; neither shortlist entry (3.5kVA or 10kVA) matches, and no legible model number on the label confirms a model.
 - read off the item's own label
-- 2 lines seen by both readers
-- the next candidate was only 0.1 behind
-- the reader stated rating it could not point to in the photos
+- 1 lines seen by both readers
+- the next candidate was only 0.25 behind
 - 10 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -65,6 +62,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: nothing on the item says which model this is_
 3. [PHOTO] Close-up of the plate on the engine block showing the engine model and serial.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it start and run right now?
+- When was it last serviced, and what was done?
 
 ## Claims
 - [unverified] Brand new 6.9kva Maxmech generator
@@ -87,15 +89,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Photo of the engine, showing the recoil starter and carburettor.
 
 ## Price
-**3,371 to 17,622 NGN** (priced as material, width 1.3576, method material_floor, 0 comparable prices)
+**17,359 to 60,100 NGN** (priced as material, width 1.1036, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 18 kg of steel 40%, plastic 30%, circuit_board 15%, rubber 10%, mixed_electronic 5% (rates for circuit_board, mixed_electronic, plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 25 kg of steel 40%, plastic 30%, copper 15%, rubber 10%, aluminium 5% (rates for plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 8,910 NGN
+Scrap floor: 45,875 NGN
 
 Conditions attached to this price:
-- Not identified: Label plainly reads 2000 WATT, matching neither 3.5kVA nor 10kVA shortlist entries; seller's 6.9kVA claim also conflicts. No legible brand or model text on the item.
-- Evidence flag: the reader stated rating it could not point to in the photos
+- Not identified: Seller states 6.9kVA Maxmech; neither shortlist entry (3.5kVA or 10kVA) matches, and no legible model number on the label confirms a model.
 - Brand new 6.9kva Maxmech generator -> not proven remotely. Agent reads the rating plate.
 - 6.9kva Maxmech generator -> not proven remotely. Agent reads the rating plate.
 - Maxmech generator -> not proven remotely. Agent will confirm at pickup.

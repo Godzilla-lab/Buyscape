@@ -1,25 +1,29 @@
 # Case l3ljvXDlxkO7ExPW3k3vQYkE
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  50451 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  33945 ms
 
 ## What the engine saw
 - Presentation: single_unit
-- Category: phone (confidence 1.0)
-- Made of: plastic 40%, steel 30%, circuit_board 20%, glass 10%
+- Category: phone (confidence 0.95)
+- Made of: plastic 60%, circuit_board 20%, steel 10%, glass 10%
 - Estimated weight: 0.18 kg (confidence 0.9)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
 - Damage noted: none
-- Looks like a catalogue image: yes
+- Looks like a catalogue image: no
 - Screenshot of a gallery: no
 - Text read: POSTED ON JIJI | SLIM GADGETS
 
+## OCR read off the photos
+- POSTED ON JII
+- SLIM GADGETS
+
 ## Chain
+- **ocr** -> ok. 2 lines: POSTED ON JII | SLIM GADGETS
 - **corroborate** -> agree. nothing identifying was read by either
 - **read_evidence** -> ok. category=phone brand=None model=None label=False lines=2
-- **forensics** -> flag. looks like a catalogue or stock image
 - **retrieval** -> ok. query='POSTED ON JIJI SLIM GADGETS Usa grade a++
 samsung s25+ 
 256gb storage 
@@ -37,30 +41,32 @@ Shortlist from the catalogue:
 
 **Not identified: CANNOT_IDENTIFY.** The best candidate scored only 0.55, which is not sure enough to price.
 
-Evidence flags: looks like a catalogue or stock image
-
 ## How sure the engine is (back office)
-**Not sure enough to price: 13% on the best answer. It is probably a Samsung Galaxy S25+ or a Samsung Galaxy S24, and the photos cannot separate them.**
+**Not sure enough to price: 25% on the best answer. It is probably a Samsung Galaxy S25+ or a Samsung Galaxy S24, and the photos cannot separate them.**
 
-- Identification confidence: 13% (unknown)
+- Identification confidence: 25% (unknown)
 - Price confidence: 16%
 - It is weighing: Samsung Galaxy S25+ (0.55), Samsung Galaxy S24 (0.35)
 - The best candidate scored only 0.55, which is not sure enough to price.
 - no label, plate or settings screen was legible
 - 2 lines seen by both readers
 - the next candidate was only 0.2 behind
-- looks like a catalogue or stock image
 - 9 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
 
 ## What the seller is asked for next (shown in the app)
-1. [PHOTO] Take your own photo of the actual item you are selling.
-   _why: this looks like a catalogue picture, not the real unit_
-2. [PHOTO] Screenshot of Settings then About, showing the model name and storage.
+1. [PHOTO] Screenshot of Settings then About, showing the model name and storage.
    _why: nothing on the item says which model this is_
-3. [PHOTO] Dial *#06# and screenshot the IMEI that appears.
+2. [PHOTO] Dial *#06# and screenshot the IMEI that appears.
    _why: nothing on the item says which model this is_
+3. [PHOTO] If you have the box, photograph the label showing the model, storage and IMEI.
+   _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Has the screen or battery ever been changed?
+- Is it signed out of iCloud or Google, so a new owner can set it up?
 
 ## Claims
 - [unverifiable_remote] Usa grade a++
@@ -80,15 +86,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
-**49 to 190 NGN** (priced as material, width 1.1684, method material_floor, 0 comparable prices)
+**27 to 67 NGN** (priced as material, width 0.8344, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 0.18 kg of plastic 40%, steel 30%, circuit_board 20%, glass 10% (rates for circuit_board, glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 0.18 kg of plastic 60%, circuit_board 20%, steel 10%, glass 10% (rates for glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 88 NGN
+Scrap floor: 48 NGN
 
 Conditions attached to this price:
 - Not identified: The best candidate scored only 0.55, which is not sure enough to price.
-- Evidence flag: looks like a catalogue or stock image
 - Usa grade a++ -> not proven remotely. Agent will confirm at pickup.
 - samsung s25+ -> not proven remotely. Agent will confirm at pickup.
 - 256gb storage -> not proven remotely. Agent reads storage from Settings.

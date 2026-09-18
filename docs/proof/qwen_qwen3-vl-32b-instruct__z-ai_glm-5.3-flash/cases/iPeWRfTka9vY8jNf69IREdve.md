@@ -1,17 +1,17 @@
 # Case iPeWRfTka9vY8jNf69IREdve
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  27786 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  23882 ms
 
 ## What the engine saw
 - Presentation: single_unit
-- Category: phone (confidence 1.0)
-- Made of: plastic 40%, circuit_board 20%, glass 20%, steel 10%, rubber 10%
-- Estimated weight: 0.15 kg (confidence 0.9)
+- Category: phone (confidence 0.95)
+- Made of: plastic 40%, circuit_board 20%, steel 20%, glass 10%, aluminium 10%
+- Estimated weight: 0.15 kg (confidence 0.8)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: screen shows a watermark or overlay text: 'TIMOTHY SEGUN', no visible physical damage to the device from the image
+- Damage noted: screen shows no visible cracks or damage, device appears to be held in hand with slight wear on edges
 - Looks like a catalogue image: no
 - Screenshot of a gallery: yes
 - Text read: 9:59 | TIMOTHY SEGUN
@@ -19,7 +19,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 ## Two readers
 - 1 transcribed lines was seen by only one reader, so it is treated as unread
 
+## OCR read off the photos
+- 9:59-.
+- OTH
+- 1
+
 ## Chain
+- **ocr** -> ok. 3 lines: 9:59-. | OTH | 1
 - **corroborate** -> dispute. 1 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=phone brand=None model=None label=False lines=2
 - **forensics** -> flag. screenshot of a gallery rather than a photo of the item
@@ -59,6 +65,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 3. [PHOTO] Screenshot of Settings then About, showing the model name and storage.
    _why: nothing on the item says which model this is_
 
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Has the screen or battery ever been changed?
+- Is it signed out of iCloud or Google, so a new owner can set it up?
+
 ## Claims
 - [unverifiable_remote] HUAWEI P20 Pro
 - [unverifiable_remote] UK used
@@ -78,11 +89,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
-**17 to 142 NGN** (priced as material, width 1.5533, method material_floor, 0 comparable prices)
+**22 to 104 NGN** (priced as material, width 1.2893, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 0.15 kg of plastic 40%, circuit_board 20%, glass 20%, steel 10%, rubber 10% (rates for circuit_board, glass, plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 0.15 kg of plastic 40%, circuit_board 20%, steel 20%, glass 10%, aluminium 10% (rates for glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 59 NGN
+Scrap floor: 75 NGN
 
 Conditions attached to this price:
 - Not identified: No brand or model text is legible on the device; seller's claim of Huawei P20 Pro is unverified and both shortlist entries contradict the phone's notch/EMUI appearance.

@@ -1,30 +1,32 @@
 # Case cxHaoaVPt2Nwg0x0qDb68lwQ
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  28744 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  30827 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: phone (confidence 0.95)
-- Made of: aluminium 30%, plastic 40%, glass 20%, circuit_board 10%
+- Made of: aluminium 30%, plastic 40%, circuit_board 10%, glass 10%, steel 10%
 - Estimated weight: 0.15 kg (confidence 0.9)
-- Brand read off the item: nothing legible
+- Brand read off the item: iPhone
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: screen reflects surroundings, no visible cracks or damage from this angle
+- Damage noted: screen is off and reflective, no visible cracks or dents on front
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
+- Text read: iPhone
 
 ## Two readers
-- brand_text was seen by only one reader, so it is treated as unread
 - 1 transcribed lines was seen by only one reader, so it is treated as unread
+- brand_text was read by only one reader, so it is kept but not confirmed
 
 ## Chain
-- **corroborate** -> dispute. brand_text was seen by only one reader, so it is treated as unread; 1 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=phone brand=None model=None label=False lines=0
-- **retrieval** -> ok. query='IPhone se 16 gig first gen best of his kind working perfectly okay and very clean do more ' hits=['Apple iPhone SE', 'Apple iPhone 16', 'Apple iPhone 16 Pro', 'Apple iPhone 16 Pro Max', 'Apple iPhone XR']
-- **identify** -> ok. chosen=Apple iPhone SE margin=0.7
-- **abstain** -> abstain. no label, top score 0.75
+- **ocr** -> ok. 0 lines: 
+- **corroborate** -> dispute. 1 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed
+- **read_evidence** -> ok. category=phone brand=iPhone model=None label=False lines=1
+- **retrieval** -> ok. query='iPhone iPhone IPhone se 16 gig first gen best of his kind working perfectly okay and very ' hits=['Apple iPhone SE', 'Apple iPhone 16', 'Apple iPhone 16 Pro', 'Apple iPhone 16 Pro Max', 'Apple iPhone XR']
+- **identify** -> ok. chosen=Apple iPhone SE margin=0.55
+- **abstain** -> abstain. seller names another generation
 
 ## Identification
 Shortlist from the catalogue:
@@ -34,17 +36,18 @@ Shortlist from the catalogue:
   - Apple iPhone 16 Pro Max (0.2)
   - Apple iPhone XR (0.2)
 
-**Not identified: CANNOT_IDENTIFY.** No label, plate or settings screen was legible, and the visual match alone scored only 0.75.
+**Not identified: EVIDENCE_INCOMPLETE.** The answer names 1st, which appears nowhere on the item or in the seller's words. A photo of the plate would confirm or correct it.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 31% on the best answer. It is probably a Apple iPhone SE or a Apple iPhone XR, and the photos cannot separate them.**
+**Not sure enough to price: 28% on the best answer. It is probably a Apple iPhone SE or a Apple iPhone 5s, and the photos cannot separate them.**
 
-- Identification confidence: 31% (unknown)
+- Identification confidence: 28% (unknown)
 - Price confidence: 16%
-- It is weighing: Apple iPhone SE (0.75), Apple iPhone XR (0.05)
-- No label, plate or settings screen was legible, and the visual match alone scored only 0.75.
+- It is weighing: Apple iPhone SE (0.85), Apple iPhone 5s (0.3)
+- The answer names 1st, which appears nowhere on the item or in the seller's words. A photo of the plate would confirm or correct it.
 - no label, plate or settings screen was legible
 - the two readers agreed on nothing legible
+- the brand was read by only one reader and is not confirmed
 - 9 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -56,6 +59,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: nothing on the item says which model this is_
 3. [PHOTO] Dial *#06# and screenshot the IMEI that appears.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Has the screen or battery ever been changed?
+- Is it signed out of iCloud or Google, so a new owner can set it up?
 
 ## Claims
 - [unverifiable_remote] iPhone SE 16 gig first gen
@@ -76,14 +84,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
-**35 to 207 NGN** (priced as material, width 1.4119, method material_floor, 0 comparable prices)
+**34 to 170 NGN** (priced as material, width 1.3231, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 0.15 kg of aluminium 30%, plastic 40%, glass 20%, circuit_board 10% (rates for circuit_board, glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 0.15 kg of aluminium 30%, plastic 40%, circuit_board 10%, glass 10%, steel 10% (rates for glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 119 NGN
+Scrap floor: 115 NGN
 
 Conditions attached to this price:
-- Not identified: No label, plate or settings screen was legible, and the visual match alone scored only 0.75.
+- Not identified: The answer names 1st, which appears nowhere on the item or in the seller's words. A photo of the plate would confirm or correct it.
 - iPhone SE 16 gig first gen -> not proven remotely. Agent will confirm at pickup.
 - 16 gig -> not proven remotely. Agent reads storage from Settings.
 - working perfectly okay -> not proven remotely. Agent powers on and tests calls, camera and charging.

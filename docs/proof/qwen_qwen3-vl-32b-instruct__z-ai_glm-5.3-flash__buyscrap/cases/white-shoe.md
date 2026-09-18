@@ -7,32 +7,35 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Category: sneakers (confidence 0.95)
 - Made of: textile 40%, plastic 30%, rubber 20%, steel 10%
 - Estimated weight: 1.0 kg (confidence 0.8)
-- Brand read off the item: nothing legible
+- Brand read off the item: Nike
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
 - Damage noted: none
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
+- Text read: Nike
 
 ## Two readers
 - brand_text agreed by both readers
 - 3 transcribed lines was seen by only one reader, so it is treated as unread
 
+## OCR read off the photos
+- 试穿请保留，折毁不退换
+- 日常穿着时请移除此标签
+- 试穿请保留，拆毁不退换
+
 ## Chain
+- **ocr** -> ok. 3 lines: 试穿请保留，折毁不退换 | 日常穿着时请移除此标签 | 试穿请保留，拆毁不退换
 - **corroborate** -> dispute. brand_text agreed by both readers; 3 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=sneakers brand=Nike model=None label=True lines=0
-- **grounding** -> dropped. brand
-- **forensics** -> flag. the reader stated brand it could not point to in the photos
-- **retrieval** -> empty. query='Imported shoe available at a discount price.' hits=[]
+- **read_evidence** -> ok. category=sneakers brand=Nike model=None label=True lines=1
+- **retrieval** -> empty. query='Nike Nike Imported shoe available at a discount price.' hits=[]
 - **gate** -> abstain. no candidates and no model text
 
 ## Identification
 No catalogue candidates matched.
 
 **Not identified: CANNOT_IDENTIFY.** No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.
-
-Evidence flags: the reader stated brand it could not point to in the photos
 
 ## How sure the engine is (back office)
 **0%: the photos do not say what this is.**
@@ -42,7 +45,6 @@ Evidence flags: the reader stated brand it could not point to in the photos
 - No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.
 - read off the item's own label
 - the two readers agreed on nothing legible
-- the reader stated brand it could not point to in the photos
 - 5 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -78,7 +80,6 @@ Scrap floor: 102 NGN
 
 Conditions attached to this price:
 - Not identified: No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.
-- Evidence flag: the reader stated brand it could not point to in the photos
 - Imported shoe available at a discount price. -> not proven remotely. Agent will confirm at pickup.
 - Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on a piece of paper and take one photo with the paper next to the item..
 - Required evidence 'overview' was not supplied -> not proven remotely. One photo showing the whole item..

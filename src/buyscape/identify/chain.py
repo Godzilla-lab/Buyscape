@@ -19,6 +19,7 @@ from ..providers.base import CallMeta, CostMeter, ImageRef, VisionProvider
 from ..providers.tasks import Identification, Reading, identify, read_evidence
 from .catalogue import Entry, search, tokens
 from .corroborate import corroborate
+from .ocr import OcrReader
 
 # Two candidates within this score of each other is a coin toss, so refuse.
 MIN_MARGIN = 0.15
@@ -31,6 +32,12 @@ MIN_SCORE = 0.70
 # percent of the time, at 0.45 it answered less and was right every time with
 # no silent wrong answers at all. Raising it further only silences it.
 MIN_CONFIDENCE = 0.45
+# What a brand and model read off the label by two readers and the OCR are
+# worth before the usual discounts for missing corroboration or fraud flags.
+# The same as a sure decider, because it is the same evidence read one more
+# way: at 0.85 a catalogue image halved it to 0.42 and four plates the
+# decider had answered correctly went silent.
+LABEL_NAMED_STRENGTH = 0.90
 
 
 def identification_strength(result: ChainResult) -> tuple[float, list[str]]:
@@ -43,6 +50,12 @@ def identification_strength(result: ChainResult) -> tuple[float, list[str]]:
     ranked = sorted(ident.candidates, key=lambda c: c.score, reverse=True) if ident else []
     score = ranked[0].score if ranked else 0.0
     why: list[str] = []
+    if result.named_from_label:
+        # Brand and model both survived two readers and a witness that cannot
+        # invent. That is the strongest read the system makes, and the
+        # catalogue not knowing the item is a gap in the catalogue.
+        score = LABEL_NAMED_STRENGTH
+        why.append("named from the item's own label, which the catalogue does not list")
 
     if result.used_label:
         why.append("read off the item's own label")
@@ -109,6 +122,11 @@ class ChainResult:
     uncorroborated_fields: list[str] = field(default_factory=list)
     corroboration_failed: bool = False
     corroboration_notes: list[str] = field(default_factory=list)
+    # What the character level OCR engine read, kept for the report. It
+    # confirms a reader's text and never adds facts of its own.
+    ocr_lines: list[str] = field(default_factory=list)
+    # Named from the item's own label with no catalogue row behind it.
+    named_from_label: bool = False
     fraud_flags: list[str] = field(default_factory=list)
 
     @property
@@ -263,17 +281,22 @@ def code_rating_contradiction(reading: Reading) -> str | None:
     return None
 
 
-def invented_code(reading: Reading, seller_text: str, chosen: str) -> str | None:
+def invented_code(
+    reading: Reading, seller_text: str, chosen: str, ocr_lines: list[str] = ()
+) -> str | None:
     """The answer carries a part number that nothing in evidence contains.
 
     'SAMSUNG AR12TYFQDBG' was answered off photographs whose whole transcript
     was SAMSUNG, DIGITAL INVERTER, AIR CONDITIONER, R410A. The code is real,
     it belongs to a real product, and it came from the model's memory rather
-    than from this machine. A shortlist entry is exempt: choosing one of those
-    is retrieval doing its job, and the shortlist is already evidence.
+    than from this machine. A shortlist entry is not exempt: a box reading
+    'EliteBook 630 G9' was answered as the shortlist's 820 G6, because the
+    shortlist is persuasive and the catalogue had no 630. The item beats the
+    shortlist, and an item the catalogue does not know is CANNOT_IDENTIFY,
+    not the nearest thing the catalogue does know.
     """
     evidence = " ".join([*reading.visible_text, reading.model_text or "",
-                         reading.rating_text or "", reading.brand_text or "", seller_text])
+                         reading.rating_text or "", reading.brand_text or "", seller_text, *ocr_lines])
     seen = set(_joined(evidence))
     for code in _codes(chosen):
         if code not in seen:
@@ -282,6 +305,65 @@ def invented_code(reading: Reading, seller_text: str, chosen: str) -> str | None
                 "the seller's words. A photo of the plate would confirm or correct it."
             )
     return None
+
+
+def label_identity(
+    reading: Reading,
+    ocr_lines: list[str],
+    seller_text: str,
+    hits: list[tuple[Entry, float]],
+    pool: list[Entry],
+) -> tuple[str, str] | None:
+    """Brand and model read off the item that the catalogue does not know.
+
+    Rule 1 says identification is a chain that ends in the catalogue, but a
+    plate that two readers and the OCR engine agree on is better evidence than
+    any shortlist. When no candidate carries the code that was read, the item
+    is named from its label and the decider is not asked to pick the nearest
+    thing the catalogue happens to know. It is then priced from the published
+    band for its category or its material, since nothing else has data.
+    """
+    brand, model = reading.brand_text, reading.model_text
+    if not brand or not model:
+        return None
+    codes = _codes(model)
+    if not codes:
+        return None
+    if unwitnessed_code(model, ocr_lines, seller_text):
+        return None
+    # The brand too must come from a witness that cannot invent, not from a
+    # reader's own word: a Lutian carton behind a Maxi is in the transcript.
+    witnessed = " ".join([*ocr_lines, seller_text]).lower()
+    if not any(w in witnessed for w in _joined(brand) if len(w) >= 3):
+        return None
+    for entry, _ in hits:
+        if _codes(" ".join([entry.model, entry.variant or ""])) & codes:
+            return None
+    return brand.strip(), model.strip()
+
+
+def unwitnessed_code(chosen: str, ocr_lines: list[str], seller_text: str) -> str | None:
+    """No witness that cannot invent saw the code the answer rests on.
+
+    Two language models can agree on a fabrication: both transcribed
+    'Model: HSC-12000I' off a Hisense box that carries no model code, and
+    both read 'EliteBook 820 G6' off a label that says 630 G9. Agreement
+    between two readers is the first defence and it is not enough on its own.
+    A part number in the answer must also have been read by the OCR engine
+    or said by the seller. Measured on the recorded Jiji set: this keeps all
+    fourteen correct answers and drops both wrong ones.
+    """
+    codes = _codes(chosen)
+    if not codes:
+        return None
+    seen = set(_joined(" ".join([*ocr_lines, seller_text])))
+    if codes & seen:
+        return None
+    return (
+        f"The answer rests on {sorted(codes)[0]}, which the OCR engine did not read off "
+        "the item and the seller did not say. Two readers transcribing the same code is "
+        "not enough on its own. This needs a sharp photo of the label."
+    )
 
 
 def label_contradiction(reading: Reading, chosen: str) -> str | None:
@@ -300,6 +382,56 @@ def label_contradiction(reading: Reading, chosen: str) -> str | None:
     return (
         f"The item's own label reads {reading.model_text!r}, but the answer is "
         f"{chosen!r}. The label decides, so this needs a clearer photo of it."
+    )
+
+
+def unsupported_brand(
+    reading: Reading,
+    ocr_lines: list[str],
+    seller_text: str,
+    chosen_brand: str,
+    chosen_model: str | None,
+    pool: list[Entry],
+    brand_disputed: bool = False,
+) -> str | None:
+    """The answer names a brand that no witness produced.
+
+    A Sumec Maxi plate whose brand the two readers disagreed on, so it was
+    dropped, came back as a Lutian: the code E33KWH survived by OCR, the
+    shortlist offered a Lutian, and the decider stitched the two together. A
+    brand has to be read off the item, said by the seller, or be the brand the
+    catalogue gives the model code that was read. Otherwise it is a guess.
+    """
+    words = [w for w in _joined(chosen_brand) if len(w) >= 3]
+    if not words:
+        return None
+    if brand_disputed:
+        # The two readers read different brands, so the transcript is where
+        # the wrong one lives: a Maxi photographed in front of a Lutian box
+        # carries both words. Only the OCR engine or the seller can settle it.
+        evidence = " ".join([*ocr_lines, seller_text]).lower()
+        if any(w in evidence for w in words):
+            return None
+        return (
+            f"The two readers disagreed about the brand and the answer's {chosen_brand!r} "
+            "is not what the OCR read off the item or what the seller said. This needs "
+            "a clear photo of the brand on the item."
+        )
+    evidence = " ".join(
+        [*reading.visible_text, reading.brand_text or "", reading.model_text or "", *ocr_lines, seller_text]
+    ).lower()
+    if any(w in evidence for w in words):
+        return None
+    # 'iPhone 13' in the seller's words supports Apple, because the catalogue
+    # says whose model that is. A brand no entry ties to the read text is not.
+    read = set(_joined(evidence))
+    for entry in pool:
+        if _joined(entry.brand) == _joined(chosen_brand) and set(_joined(entry.model)) <= read:
+            return None
+    return (
+        f"The answer names {chosen_brand!r}, which appears nowhere on the item, in the "
+        "seller's words, or in the catalogue for the code that was read. This needs a "
+        "clear photo of the brand on the item."
     )
 
 
@@ -356,6 +488,7 @@ def run(
     meter: CostMeter,
     category_hint: str | None = None,
     corroborator: VisionProvider | None = None,
+    ocr: OcrReader | None = None,
 ) -> ChainResult:
     """Run the whole chain. Never raises for a bad item, it returns a failure."""
     result = ChainResult()
@@ -384,10 +517,20 @@ def run(
             # confident identification.
             result.corroboration_failed = True
             result.links.append(LinkLog("corroborate", "unavailable", str(exc)[:120]))
-    check = corroborate(reading, second)
+    # A third witness of a different kind: OCR reads glyphs and cannot compose
+    # a plate, so it can confirm what one model read but never add to it.
+    ocr_lines: list[str] = []
+    if ocr is not None:
+        try:
+            ocr_lines = ocr(images)
+            result.ocr_lines = ocr_lines
+            result.links.append(LinkLog("ocr", "ok", f"{len(ocr_lines)} lines: {' | '.join(ocr_lines)[:120]}"))
+        except Exception as exc:
+            result.links.append(LinkLog("ocr", "unavailable", str(exc)[:120]))
+    check = corroborate(reading, second, ocr_lines)
     reading = check.reading
-    if second is not None:
-        result.corroborated = True
+    if second is not None or ocr_lines:
+        result.corroborated = second is not None
         result.links.append(
             LinkLog(
                 "corroborate",
@@ -468,6 +611,28 @@ def run(
         )
     )
 
+    # An item the catalogue does not know, with its own name on its own label.
+    pool = catalogue.get(category_hint or "") or [e for rows in catalogue.values() for e in rows]
+    named = label_identity(reading, ocr_lines, seller_text, hits, pool) if ocr is not None else None
+    if named is not None:
+        result.brand, result.model = named
+        result.named_from_label = True
+        result.links.append(LinkLog("identify", "label", f"named from the label: {result.model_key}, not in the catalogue"))
+        strength, why = identification_strength(result)
+        if strength < MIN_CONFIDENCE:
+            result.brand = result.model = None
+            result.named_from_label = False
+            result.abstained = True
+            result.failure_code = "EVIDENCE_INCOMPLETE"
+            result.reason = (
+                f"The label names it, but the evidence only supports that at {int(strength * 100)} "
+                "percent. One clear photo of the label would settle it."
+            )
+            result.links.append(LinkLog("abstain", "abstain", f"confidence {strength}: {'; '.join(why)}"))
+            return result
+        result.links.append(LinkLog("abstain", "pass", f"confidence={strength} from the label"))
+        return result
+
     # No shortlist and no model string on the item means the reasoner would
     # have nothing to rank and nothing to read. Abstain here instead of paying
     # for a call whose only honest answer is a refusal.
@@ -538,12 +703,16 @@ def run(
         filter(None, [reading.rating_text, reading.model_text, chosen_key, ident.chosen_variant])
     )
     full_answer = " ".join(filter(None, [chosen_key, ident.chosen_variant]))
-    from_shortlist = any(_norm_key(full_answer) == _norm_key(k) for k, _ in result.candidates)
     clash = (
         code_rating_contradiction(reading)
         or label_contradiction(reading, full_answer)
-        or (None if from_shortlist else invented_code(reading, seller_text, full_answer))
+        or invented_code(reading, seller_text, full_answer, ocr_lines)
+        or (unwitnessed_code(full_answer, ocr_lines, seller_text) if ocr is not None else None)
         or invented_rating(reading, seller_text, full_answer)
+        or unsupported_brand(
+            reading, ocr_lines, seller_text, ident.chosen_brand, ident.chosen_model, pool,
+            brand_disputed="brand_text" in check.disputed,
+        )
         or seller_contradiction(seller_text, chosen_key, pool)
         or rating_contradiction(seller_text, item_text)
     )

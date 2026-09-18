@@ -1,31 +1,36 @@
 # Case ggcpk3xakCnKxFmGcN50Iuee
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0007  |  24828 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0007  |  13403 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: inverter_system (confidence 0.9)
 - Made of: steel 60%, plastic 30%, circuit_board 10%
-- Estimated weight: 45.0 kg (confidence 0.7)
-- Brand read off the item: nothing legible
+- Estimated weight: 25.0 kg (confidence 0.7)
+- Brand read off the item: SAGE TECH ELECTRICAL
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: Minor dust on surface, No visible damage or corrosion
+- Damage noted: Minor scuff marks on lower unit casing, No visible damage to display or control panel
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 - Text read: SAGE TECH ELECTRICAL
 
 ## Two readers
-- brand_text was seen by only one reader, so it is treated as unread
 - model_text was seen by only one reader, so it is treated as unread
 - rating_text was seen by only one reader, so it is treated as unread
 - serial_text was seen by only one reader, so it is treated as unread
 - 10 transcribed lines was seen by only one reader, so it is treated as unread
+- brand_text was read by only one reader, so it is kept but not confirmed
+
+## OCR read off the photos
+- SAGI
+- ECTRICAL
 
 ## Chain
-- **corroborate** -> dispute. brand_text was seen by only one reader, so it is treated as unread; model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 10 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=inverter_system brand=None model=None label=False lines=1
+- **ocr** -> ok. 2 lines: SAGI | ECTRICAL
+- **corroborate** -> dispute. model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 10 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed
+- **read_evidence** -> ok. category=inverter_system brand=SAGE TECH ELECTRICAL model=None label=False lines=1
 - **gate** -> abstain. multiple items in frame
 
 ## Identification
@@ -41,6 +46,7 @@ No catalogue candidates matched.
 - The photos show more than one item, so no single item can be identified.
 - no label, plate or settings screen was legible
 - 1 lines seen by both readers
+- the brand was read by only one reader and is not confirmed
 - 6 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -52,6 +58,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: two readings of these photos disagreed about what is written on the item_
 3. [PHOTO] Close-up of any label, sticker or metal plate showing the brand and model.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- How much of it is there? Give the weight in kilogrammes or tons if you know it.
+- Does it still work?
+- Roughly how old is it, in years?
 
 ## Claims
 - [unverifiable_remote] We provide you with best quality in solar generator and inverter
@@ -66,11 +77,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Tell us what it is, whether it works, and roughly how heavy it is.
 
 ## Price
-**15,878 to 36,630 NGN** (priced as material, width 0.7904, method material_floor, 0 comparable prices)
+**7,534 to 12,850 NGN** (priced as material, width 0.5215, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 45 kg of steel 60%, plastic 30%, circuit_board 10% (rates for circuit_board, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 25 kg of steel 60%, plastic 30%, circuit_board 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 21,600 NGN
+Scrap floor: 10,250 NGN
 
 Conditions attached to this price:
 - Not identified: The photos show more than one item, so no single item can be identified.

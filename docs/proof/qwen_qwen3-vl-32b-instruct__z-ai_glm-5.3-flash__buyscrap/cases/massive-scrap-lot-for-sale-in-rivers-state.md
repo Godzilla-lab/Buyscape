@@ -16,7 +16,11 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Screenshot of a gallery: no
 - Text read: CALL
 
+## OCR read off the photos
+- 非
+
 ## Chain
+- **ocr** -> ok. 1 lines: 非
 - **corroborate** -> agree. nothing identifying was read by either
 - **read_evidence** -> ok. category=vacuum truck brand=None model=None label=False lines=1
 - **retrieval** -> ok. query='CALL Massive scrap lot for sale—225 tons total in Port Harcourt, Rivers State, going for ₦' hits=['Acer Aspire 5', 'Tecno Camon 40', 'Tecno Camon 50', 'Tecno Spark 10', 'Tecno Spark 40']

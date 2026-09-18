@@ -1,12 +1,12 @@
 # Case uLHdsjahdvoxObyzqSNaUg5k
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  30751 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  40565 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: split air conditioner (confidence 0.95)
-- Made of: plastic 60%, steel 30%, circuit_board 5%, rubber 5%
-- Estimated weight: 12.0 kg (confidence 0.8)
+- Made of: plastic 70%, steel 20%, circuit_board 10%
+- Estimated weight: 15.0 kg (confidence 0.8)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
@@ -14,25 +14,25 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Damage noted: none
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
-- Text read: INVERTER | 5 STAR
 
 ## Two readers
 - brand_text differed between the two readers, so it is treated as unread
 - rating_text was seen by only one reader, so it is treated as unread
-- 3 transcribed lines was seen by only one reader, so it is treated as unread
+- 6 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## Chain
-- **corroborate** -> dispute. brand_text differed between the two readers, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; 3 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=split air conditioner brand=None model=None label=True lines=2
+- **ocr** -> ok. 0 lines: 
+- **corroborate** -> dispute. brand_text differed between the two readers, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; 6 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=split air conditioner brand=None model=None label=True lines=0
 - **forensics** -> flag. looks like a catalogue or stock image
-- **retrieval** -> ok. query='INVERTER 5 STAR 2hp
+- **retrieval** -> ok. query='2hp
 anti rust
 dehumidification
 self diagnosis
 auto protection
-cold catalys' hits=['LG S4-Q18 2HP', 'Midea MSAF-18 2HP', 'Hisense AS-18 2HP']
-- **identify** -> ok. chosen=Hisense AS-18 margin=0.35
-- **abstain** -> abstain. top score 0.55
+cold catalyst' hits=['LG S4-Q18 2HP', 'Midea MSAF-18 2HP', 'Hisense AS-18 2HP']
+- **identify** -> refused. chosen=None None margin=0.25
+- **abstain** -> abstain. model refused
 
 ## Identification
 Shortlist from the catalogue:
@@ -40,19 +40,20 @@ Shortlist from the catalogue:
   - Midea MSAF-18 2HP (0.2)
   - Hisense AS-18 2HP (0.18)
 
-**Not identified: CANNOT_IDENTIFY.** The best candidate scored only 0.55, which is not sure enough to price.
+**Not identified: CANNOT_IDENTIFY.** Red brand logo present but not readable; label text supplied is empty, so brand/model cannot be confirmed.
 
 Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 17% on the best answer. It is probably a Hisense AS-18 or a Midea MSAF-18, and the photos cannot separate them.**
+**Not sure enough to price: 10% on the best answer. It is probably a Midea MSAF-18 or a LG S4-Q18, and the photos cannot separate them.**
 
-- Identification confidence: 17% (unknown)
+- Identification confidence: 10% (unknown)
 - Price confidence: 14%
-- It is weighing: Hisense AS-18 (0.55), Midea MSAF-18 (0.2)
-- The best candidate scored only 0.55, which is not sure enough to price.
+- It is weighing: Midea MSAF-18 (0.45), LG S4-Q18 (0.2)
+- Red brand logo present but not readable; label text supplied is empty, so brand/model cannot be confirmed.
 - read off the item's own label
-- 2 lines seen by both readers
+- the two readers agreed on nothing legible
+- the next candidate was only 0.25 behind
 - looks like a catalogue or stock image
 - 11 claims are still unproven, 0 are supported
 
@@ -65,6 +66,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: two readings of these photos disagreed about what is written on the item_
 3. [PHOTO] Close-up of the rating plate on the outdoor unit showing the model and HP.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it still blow cold air?
+- Do you have both the indoor unit and the outdoor unit?
 
 ## Claims
 - [unverified] 2hp
@@ -91,14 +97,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Open the front grille of the indoor unit and photograph the filters and coil.
 
 ## Price
-**1,035 to 5,916 NGN** (priced as material, width 1.4044, method material_floor, 0 comparable prices)
+**1,125 to 5,190 NGN** (priced as material, width 1.2874, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 12 kg of plastic 60%, steel 30%, circuit_board 5%, rubber 5% (rates for circuit_board, plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 15 kg of plastic 70%, steel 20%, circuit_board 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 3,450 NGN
+Scrap floor: 3,750 NGN
 
 Conditions attached to this price:
-- Not identified: The best candidate scored only 0.55, which is not sure enough to price.
+- Not identified: Red brand logo present but not readable; label text supplied is empty, so brand/model cannot be confirmed.
 - Evidence flag: looks like a catalogue or stock image
 - 2hp -> not proven remotely. Agent reads the outdoor rating plate.
 - anti rust -> not proven remotely. Agent checks pressures with manifold gauges.

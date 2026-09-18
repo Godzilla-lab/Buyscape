@@ -16,6 +16,7 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Screenshot of a gallery: no
 
 ## Chain
+- **ocr** -> ok. 0 lines: 
 - **corroborate** -> agree. nothing identifying was read by either
 - **read_evidence** -> ok. category=split air conditioner brand=None model=None label=False lines=0
 - **retrieval** -> ok. query='A scrap 1 horsepower (1HP) window AC is available for sale. Location: Agege, Lagos State P' hits=['Samsung AR09 1HP', 'Hisense AS-09 1HP', 'LG S4-Q09 1HP', 'Samsung AR12 1.5HP', 'Scanfrost SFAC12 1.5HP']

@@ -1,34 +1,38 @@
 # Case l34llt0PzNt3Oidv72IM1gr7
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  28054 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  70276 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: laptop (confidence 0.95)
-- Made of: plastic 60%, steel 20%, circuit_board 10%, rubber 10%
+- Made of: plastic 60%, steel 20%, circuit_board 10%, aluminium 10%
 - Estimated weight: 2.5 kg (confidence 0.8)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
-- Label, plate or settings screen legible: no
-- Damage noted: screen reflects surroundings, no visible cracks, keyboard appears intact, touchpad and casing show minor wear
+- Label, plate or settings screen legible: yes
+- Damage noted: screen is reflective and shows room reflections, keyboard appears clean, no visible dents or cracks on casing
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 
 ## Two readers
 - brand_text differed between the two readers, so it is treated as unread
-- 7 transcribed lines was seen by only one reader, so it is treated as unread
+- 6 transcribed lines was seen by only one reader, so it is treated as unread
+
+## OCR read off the photos
+- HOMH
 
 ## Chain
-- **corroborate** -> dispute. brand_text differed between the two readers, so it is treated as unread; 7 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=laptop brand=None model=None label=False lines=0
+- **ocr** -> ok. 1 lines: HOMH
+- **corroborate** -> dispute. brand_text differed between the two readers, so it is treated as unread; 6 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=laptop brand=None model=None label=True lines=0
 - **retrieval** -> ok. query='Hp Compaq Cq60
 Dual core 
 4GB RAM 
 320GB HDD
 Windows 8' hits=['HP 2000', 'HP 250 G7', 'HP Pavilion 15', 'HP EliteBook 840 G5', 'HP EliteBook 840 G6']
-- **identify** -> refused. chosen=Compaq None margin=0.05
-- **abstain** -> abstain. model refused
+- **identify** -> ok. chosen=Compaq Presario CQ60 margin=0.5
+- **abstain** -> abstain. top score 0.65
 
 ## Identification
 Shortlist from the catalogue:
@@ -38,18 +42,17 @@ Shortlist from the catalogue:
   - HP EliteBook 840 G5 (0.3)
   - HP EliteBook 840 G6 (0.3)
 
-**Not identified: CANNOT_IDENTIFY.** Bezel clearly reads COMPAQ, matching the seller's Compaq Presario CQ60 claim, but no model marking is legible and CQ60 is absent from the shortlist; the specific model cannot be confirmed from the photos alone.
+**Not identified: CANNOT_IDENTIFY.** The best candidate scored only 0.65, which is not sure enough to price.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 4% on the best answer. It is probably a HP 2000 or a HP 250 G7, and the photos cannot separate them.**
+**Not sure enough to price: 31% on the best answer. It is probably a Compaq Presario CQ60 or a HP 2000, and the photos cannot separate them.**
 
-- Identification confidence: 4% (unknown)
+- Identification confidence: 31% (unknown)
 - Price confidence: 16%
-- It is weighing: HP 2000 (0.1), HP 250 G7 (0.05)
-- Bezel clearly reads COMPAQ, matching the seller's Compaq Presario CQ60 claim, but no model marking is legible and CQ60 is absent from the shortlist; the specific model cannot be confirmed from the photos alone.
-- no label, plate or settings screen was legible
+- It is weighing: Compaq Presario CQ60 (0.65), HP 2000 (0.15)
+- The best candidate scored only 0.65, which is not sure enough to price.
+- read off the item's own label
 - the two readers agreed on nothing legible
-- the next candidate was only 0.05 behind
 - 9 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -61,6 +64,12 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: nothing on the item says which model this is_
 3. [PHOTO] Screenshot of System Information (Windows) or About This Mac, showing the model, processor, RAM and storage.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it stay on for more than ten minutes with the charger unplugged?
+- Has it ever been dropped, or had liquid spilled on it?
+- What does not work on it? Say none if everything works.
 
 ## Claims
 - [unverifiable_remote] Hp Compaq Cq60
@@ -80,14 +89,15 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Screenshot of System Information (Windows) or About This Mac, showing the model, processor, RAM and storage.
 
 ## Price
-**397 to 1,595 NGN** (priced as material, width 1.2023, method material_floor, 0 comparable prices)
+**5,000 to 5,000 NGN** (priced as material, width 0.0, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 2.5 kg of plastic 60%, steel 20%, circuit_board 10%, rubber 10% (rates for circuit_board, plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 2.5 kg of plastic 60%, steel 20%, circuit_board 10%, aluminium 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 787 NGN
+Scrap floor: 1,100 NGN
 
 Conditions attached to this price:
-- Not identified: Bezel clearly reads COMPAQ, matching the seller's Compaq Presario CQ60 claim, but no model marking is legible and CQ60 is absent from the shortlist; the specific model cannot be confirmed from the photos alone.
+- Not identified: The best candidate scored only 0.65, which is not sure enough to price.
+- Raised to the 5,000 NGN minimum this business publishes for this kind of item.
 - Hp Compaq Cq60 -> not proven remotely. Agent will confirm at pickup.
 - Dual core -> not proven remotely. Agent will confirm at pickup.
 - 4GB RAM -> not proven remotely. Agent opens System Information and reads the RAM.

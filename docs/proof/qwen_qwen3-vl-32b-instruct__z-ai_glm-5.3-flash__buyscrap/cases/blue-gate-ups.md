@@ -7,7 +7,7 @@ Photos: 2  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Category: uninterruptible power supply (confidence 0.95)
 - Made of: plastic 70%, circuit_board 20%, steel 10%
 - Estimated weight: 3.5 kg (confidence 0.8)
-- Brand read off the item: nothing legible
+- Brand read off the item: BLUE GATE
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
@@ -19,20 +19,20 @@ Photos: 2  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 ## Two readers
 - brand_text agreed by both readers
 
+## OCR read off the photos
+- BLUE GATE
+
 ## Chain
+- **ocr** -> ok. 1 lines: BLUE GATE
 - **corroborate** -> agree. brand_text agreed by both readers
 - **read_evidence** -> ok. category=uninterruptible power supply brand=BLUE GATE model=None label=False lines=1
-- **grounding** -> dropped. brand
-- **forensics** -> flag. the reader stated brand it could not point to in the photos
-- **retrieval** -> empty. query='BLUE GATE UPS available' hits=[]
+- **retrieval** -> empty. query='BLUE GATE BLUE GATE UPS available' hits=[]
 - **gate** -> abstain. no candidates and no model text
 
 ## Identification
 No catalogue candidates matched.
 
 **Not identified: CANNOT_IDENTIFY.** No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.
-
-Evidence flags: the reader stated brand it could not point to in the photos
 
 ## How sure the engine is (back office)
 **0%: the photos do not say what this is.**
@@ -42,7 +42,6 @@ Evidence flags: the reader stated brand it could not point to in the photos
 - No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.
 - no label, plate or settings screen was legible
 - 1 lines seen by both readers
-- the reader stated brand it could not point to in the photos
 - 4 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -75,7 +74,6 @@ Scrap floor: 980 NGN
 
 Conditions attached to this price:
 - Not identified: No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.
-- Evidence flag: the reader stated brand it could not point to in the photos
 - Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on a piece of paper and take one photo with the paper next to the item..
 - Required evidence 'overview' was not supplied -> not proven remotely. One photo showing the whole item..
 - Required evidence 'label_or_plate' was not supplied -> not proven remotely. Close-up of any label, sticker or metal plate showing the brand and model..

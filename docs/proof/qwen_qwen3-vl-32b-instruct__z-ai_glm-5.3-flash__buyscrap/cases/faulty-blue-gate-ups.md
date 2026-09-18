@@ -1,13 +1,13 @@
 # Case faulty-blue-gate-ups
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0013  |  26134 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  28948 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: power_inverter (confidence 0.8)
 - Made of: plastic 80%, steel 20%
 - Estimated weight: 5.0 kg (confidence 0.7)
-- Brand read off the item: nothing legible
+- Brand read off the item: BLUE GATE
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
@@ -19,13 +19,15 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 ## Two readers
 - brand_text agreed by both readers
 
+## OCR read off the photos
+- BLUE GATE
+
 ## Chain
+- **ocr** -> ok. 1 lines: BLUE GATE
 - **corroborate** -> agree. brand_text agreed by both readers
 - **read_evidence** -> ok. category=power_inverter brand=BLUE GATE model=None label=False lines=1
-- **grounding** -> dropped. brand
-- **forensics** -> flag. the reader stated brand it could not point to in the photos
-- **retrieval** -> ok. query='BLUE GATE Faulty blue gate UPS available for sale. Location: Magodo Phase 2, Lagos State P' hits=['Acer Aspire 5', 'Tecno Pova 5', 'Kemage KM6500 5.5kVA']
-- **identify** -> refused. chosen=Blue Gate None margin=0.45
+- **retrieval** -> ok. query='BLUE GATE BLUE GATE Faulty blue gate UPS available for sale. Location: Magodo Phase 2, Lag' hits=['Acer Aspire 5', 'Tecno Pova 5', 'Kemage KM6500 5.5kVA']
+- **identify** -> refused. chosen=Blue Gate None margin=None
 - **abstain** -> abstain. model refused
 
 ## Identification
@@ -34,20 +36,16 @@ Shortlist from the catalogue:
   - Tecno Pova 5 (0.2)
   - Kemage KM6500 5.5kVA (0.15)
 
-**Not identified: CANNOT_IDENTIFY.** Blue Gate branding is legible but no model number or rating plate is visible in any photo; the shortlist contains no Blue Gate UPS entries, and Kemage KM6500 is a generator, not this UPS.
-
-Evidence flags: the reader stated brand it could not point to in the photos
+**Not identified: CANNOT_IDENTIFY.** UPS brand 'BLUE GATE' is printed on the case, but no model number or rating is legible anywhere on the unit, and none of the shortlist entries (Acer laptop, Tecno phone, Kemage generator) matches a desktop UPS.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 13% on the best answer. It is probably a Blue Gate Unknown UPS model or a Kemage KM6500 5.5kVA, and the photos cannot separate them.**
+**0%: the photos do not say what this is.**
 
-- Identification confidence: 13% (unknown)
+- Identification confidence: 0% (unknown)
 - Price confidence: 18%
-- It is weighing: Blue Gate Unknown UPS model (0.5), Kemage KM6500 5.5kVA (0.05)
-- Blue Gate branding is legible but no model number or rating plate is visible in any photo; the shortlist contains no Blue Gate UPS entries, and Kemage KM6500 is a generator, not this UPS.
+- UPS brand 'BLUE GATE' is printed on the case, but no model number or rating is legible anywhere on the unit, and none of the shortlist entries (Acer laptop, Tecno phone, Kemage generator) matches a desktop UPS.
 - no label, plate or settings screen was legible
 - 1 lines seen by both readers
-- the reader stated brand it could not point to in the photos
 - 8 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -84,8 +82,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 900 NGN
 
 Conditions attached to this price:
-- Not identified: Blue Gate branding is legible but no model number or rating plate is visible in any photo; the shortlist contains no Blue Gate UPS entries, and Kemage KM6500 is a generator, not this UPS.
-- Evidence flag: the reader stated brand it could not point to in the photos
+- Not identified: UPS brand 'BLUE GATE' is printed on the case, but no model number or rating is legible anywhere on the unit, and none of the shortlist entries (Acer laptop, Tecno phone, Kemage generator) matches a desktop UPS.
 - The UPS is faulty. -> not proven remotely. Agent will confirm at pickup.
 - The UPS is blue. -> not proven remotely. Weigh on the scale and photograph the display.
 - The UPS is a Gate brand. -> not proven remotely. Agent will confirm at pickup.

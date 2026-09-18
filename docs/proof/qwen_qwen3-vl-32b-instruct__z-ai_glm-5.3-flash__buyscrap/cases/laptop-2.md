@@ -19,7 +19,22 @@ Photos: 2  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 ## Two readers
 - 1 transcribed lines was seen by only one reader, so it is treated as unread
 
+## OCR read off the photos
+- 8
+- 2
+- 3
+- 5
+- 6
+- 7
+- 9
+- 0
+- Q
+- w
+- E
+- R
+
 ## Chain
+- **ocr** -> ok. 33 lines: 8 | 2 | 3 | 5 | 6 | 7 | 9 | 0 | Q | w | E | R | T | Y | U | lock | A | D | F | G | H | K | L | Z | x | C | V | B | N | M
 - **corroborate** -> dispute. 1 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=laptop brand=None model=None label=False lines=2
 - **forensics** -> flag. looks like a catalogue or stock image

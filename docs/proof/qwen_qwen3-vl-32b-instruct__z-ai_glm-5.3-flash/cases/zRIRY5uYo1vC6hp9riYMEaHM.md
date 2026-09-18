@@ -1,33 +1,38 @@
 # Case zRIRY5uYo1vC6hp9riYMEaHM
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0019  |  56683 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  46631 ms
 
 ## What the engine saw
 - Presentation: sealed_new
 - Category: washing machine (confidence 0.9)
-- Made of: paper 90%, plastic 10%
-- Estimated weight: 15.0 kg (confidence 0.7)
-- Brand read off the item: nothing legible
+- Made of: carton 90%, plastic 10%
+- Estimated weight: 25.0 kg (confidence 0.7)
+- Brand read off the item: Hisense
 - Model read off the item: nothing legible
 - Rating read: none
-- Label, plate or settings screen legible: no
-- Damage noted: box shows minor creasing and scuffing, no major tears
+- Label, plate or settings screen legible: yes
+- Damage noted: box is slightly dented and torn at edges, some dirt and scuff marks on box surface
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: Hisense | Washing Machine | www.hisense.com | SA GLOBAL HUBS | For more information visit www.hisense.com/recycle
+- Text read: Hisense | Washing Machine | SARV GLOBAL HUBS | www.hisense.com | For more information, please visit www.hisense.com
 
 ## Two readers
 - brand_text agreed by both readers
 - rating_text was seen by only one reader, so it is treated as unread
-- 5 transcribed lines was seen by only one reader, so it is treated as unread
+- 1 transcribed lines was seen by only one reader, so it is treated as unread
+
+## OCR read off the photos
+- Hisense
+- BACK
+- Washing Machine
+- BALHUBS
 
 ## Chain
-- **corroborate** -> dispute. brand_text agreed by both readers; rating_text was seen by only one reader, so it is treated as unread; 5 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=washing machine brand=Hisense model=None label=False lines=5
-- **grounding** -> dropped. brand
-- **forensics** -> flag. the reader stated brand it could not point to in the photos
-- **retrieval** -> ok. query='Hisense Washing Machine www.hisense.com SA GLOBAL HUBS For more information visit www.hise' hits=['Hisense WTJA801 8kg top loader', 'Hisense WT3K9022U 9kg top loader', 'Hisense WM5S1045 10kg front loader']
-- **identify** -> refused. chosen=None None margin=0.1
+- **ocr** -> ok. 4 lines: Hisense | BACK | Washing Machine | BALHUBS
+- **corroborate** -> dispute. brand_text agreed by both readers; rating_text was seen by only one reader, so it is treated as unread; 1 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=washing machine brand=Hisense model=None label=True lines=5
+- **retrieval** -> ok. query='Hisense Hisense Washing Machine SARV GLOBAL HUBS www.hisense.com For more information, ple' hits=['Hisense WTJA801 8kg top loader', 'Hisense WT3K9022U 9kg top loader', 'Hisense WM5S1045 10kg front loader']
+- **identify** -> refused. chosen=Hisense None margin=0.1
 - **abstain** -> abstain. model refused
 
 ## Identification
@@ -36,21 +41,18 @@ Shortlist from the catalogue:
   - Hisense WT3K9022U 9kg top loader (0.4333)
   - Hisense WM5S1045 10kg front loader (0.4333)
 
-**Not identified: CANNOT_IDENTIFY.** No model number or capacity legible on box; seller states 7.5kg, matching no shortlist entry.
-
-Evidence flags: the reader stated brand it could not point to in the photos
+**Not identified: CANNOT_IDENTIFY.** Box confirms Hisense washing machine only; no model number or capacity legible, and seller's 7.5kg conflicts with shortlist sizes.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 5% on the best answer. It is probably a Hisense WTJA801 or a Hisense WT3K9022U, and the photos cannot separate them.**
+**Not sure enough to price: 11% on the best answer. It is probably a Hisense WTJA801 or a Hisense WT3K9022U, and the photos cannot separate them.**
 
-- Identification confidence: 5% (unknown)
+- Identification confidence: 11% (unknown)
 - Price confidence: 22%
 - It is weighing: Hisense WTJA801 (0.2), Hisense WT3K9022U (0.1)
-- No model number or capacity legible on box; seller states 7.5kg, matching no shortlist entry.
-- no label, plate or settings screen was legible
+- Box confirms Hisense washing machine only; no model number or capacity legible, and seller's 7.5kg conflicts with shortlist sizes.
+- read off the item's own label
 - 5 lines seen by both readers
 - the next candidate was only 0.1 behind
-- the reader stated brand it could not point to in the photos
 - 6 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -60,6 +62,10 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: two readings of these photos disagreed about what is written on the item_
 2. [PHOTO] Close-up of the sticker with the model number, usually inside the door or on the back.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it finish a full wash and spin cycle?
 
 ## Claims
 - [unverified] The washing machine is a Hisense model.
@@ -76,15 +82,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Open the door and photograph the inside of the drum.
 
 ## Price
-**564 to 1,890 NGN** (priced as material, width 1.0795, method material_floor, 0 comparable prices)
+**941 to 3,150 NGN** (priced as material, width 1.0795, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 15 kg of paper 90%, plastic 10% (rates for paper, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 25 kg of carton 90%, plastic 10% (rates for carton, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 960 NGN
+Scrap floor: 1,600 NGN
 
 Conditions attached to this price:
-- Not identified: No model number or capacity legible on box; seller states 7.5kg, matching no shortlist entry.
-- Evidence flag: the reader stated brand it could not point to in the photos
+- Not identified: Box confirms Hisense washing machine only; no model number or capacity legible, and seller's 7.5kg conflicts with shortlist sizes.
 - The washing machine is a Hisense model. -> not proven remotely. Agent reads the rating plate.
 - The washing machine has a 7.5kg capacity. -> not proven remotely. Agent reads the rating plate.
 - Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on paper and photograph it next to the machine..

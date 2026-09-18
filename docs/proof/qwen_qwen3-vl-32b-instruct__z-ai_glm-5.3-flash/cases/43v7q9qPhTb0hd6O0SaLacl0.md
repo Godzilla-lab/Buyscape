@@ -1,37 +1,50 @@
 # Case 43v7q9qPhTb0hd6O0SaLacl0
 
-Photos: 3  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0016  |  66293 ms
+Photos: 3  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0014  |  29944 ms
 
 ## What the engine saw
 - Presentation: single_unit
-- Category: phone (confidence 1.0)
+- Category: phone (confidence 0.95)
 - Made of: aluminium 40%, plastic 30%, circuit_board 20%, glass 10%
 - Estimated weight: 0.2 kg (confidence 0.9)
-- Brand read off the item: nothing legible
+- Brand read off the item: Apple
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: minor scratches on back glass, white sticker covering part of the back
+- Damage noted: No visible damage or wear.
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: APPLE WARRANTY
+- Text read: APPLE WARRANTY | 12P 128G | Apple
 
 ## Two readers
-- brand_text agreed by both readers
-- model_text differed between the two readers, so it is treated as unread
-- serial_text differed between the two readers, so it is treated as unread
+- brand_text was read by one reader and confirmed by OCR
+- model_text was seen by only one reader, so it is treated as unread
 - rating_text was seen by only one reader, so it is treated as unread
-- 15 transcribed lines was seen by only one reader, so it is treated as unread
+- serial_text was seen by only one reader, so it is treated as unread
+- 13 transcribed lines was seen by only one reader, so it is treated as unread
+
+## OCR read off the photos
+- 128
+- NO LCD WARRANTY
+- BATTERY PASS VÉRSION TED
+- FACEID WORN CONENTION
+- SIMUNLOOKGRADEA
+- APPLE WARRANTY
+- MITE
+- 12P
+- NO LCD WARRANTY
+- BATTERY PASS
+- FACE ID WORK
+- SMUNLCOK
 
 ## Chain
-- **corroborate** -> dispute. brand_text agreed by both readers; model_text differed between the two readers, so it is treated as unread; serial_text differed between the two readers, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; 15 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=phone brand=APPLE WARRANTY model=None label=True lines=1
-- **grounding** -> dropped. brand
-- **forensics** -> flag. the reader stated brand it could not point to in the photos
-- **retrieval** -> ok. query='APPLE WARRANTY 13 pro 128gb
+- **ocr** -> ok. 29 lines: 128 | NO LCD WARRANTY | BATTERY PASS VÉRSION TED | FACEID WORN CONENTION | SIMUNLOOKGRADEA | APPLE WARRANTY | MITE | 12P
+- **corroborate** -> dispute. brand_text was read by one reader and confirmed by OCR; model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 13 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=phone brand=Apple model=None label=True lines=3
+- **retrieval** -> ok. query='Apple APPLE WARRANTY 12P 128G Apple 13 pro 128gb
 Nml 13 128gb' hits=['Apple iPhone 13 Pro', 'Apple iPhone 13 Pro Max', 'Apple iPhone 11 Pro', 'Apple iPhone 12 Pro', 'Apple iPhone 13']
-- **identify** -> ok. chosen=Apple iPhone 13 Pro margin=0.55
-- **abstain** -> abstain. confidence 0.42: read off the item's own label; 1 lines seen by both readers; the reader stated brand it could not point to in the photos
+- **identify** -> ok. chosen=Apple iPhone 12 Pro margin=0.1
+- **abstain** -> abstain. top score 0.6
 
 ## Identification
 Shortlist from the catalogue:
@@ -41,20 +54,18 @@ Shortlist from the catalogue:
   - Apple iPhone 12 Pro (0.4333)
   - Apple iPhone 13 (0.4333)
 
-**Not identified: EVIDENCE_INCOMPLETE.** The evidence only supports this answer at 42 percent, which is a guess. One clear photo of the label would settle it.
-
-Evidence flags: the reader stated brand it could not point to in the photos
+**Not identified: CANNOT_IDENTIFY.** The best candidate scored only 0.6, which is not sure enough to price.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 25% on the best answer. It is probably a Apple iPhone 13 Pro or a Apple iPhone 13 Pro Max, and the photos cannot separate them.**
+**Not sure enough to price: 32% on the best answer. It is probably a Apple iPhone 12 Pro or a Apple iPhone 13 Pro, and the photos cannot separate them.**
 
-- Identification confidence: 25% (unknown)
+- Identification confidence: 32% (unknown)
 - Price confidence: 14%
-- It is weighing: Apple iPhone 13 Pro (0.85), Apple iPhone 13 Pro Max (0.3)
-- The evidence only supports this answer at 42 percent, which is a guess. One clear photo of the label would settle it.
+- It is weighing: Apple iPhone 12 Pro (0.6), Apple iPhone 13 Pro (0.5)
+- The best candidate scored only 0.6, which is not sure enough to price.
 - read off the item's own label
-- 1 lines seen by both readers
-- the reader stated brand it could not point to in the photos
+- 3 lines seen by both readers
+- the next candidate was only 0.1 behind
 - 10 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -66,6 +77,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: nothing on the item says which model this is_
 3. [PHOTO] Dial *#06# and screenshot the IMEI that appears.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Has the screen or battery ever been changed?
+- Is it signed out of iCloud or Google, so a new owner can set it up?
 
 ## Claims
 - [unverified] 13 pro 128gb
@@ -90,15 +106,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
-**77 to 411 NGN** (priced as material, width 1.3649, method material_floor, 0 comparable prices)
+**68 to 291 NGN** (priced as material, width 1.243, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 0.2 kg of aluminium 40%, plastic 30%, circuit_board 20%, glass 10% (rates for circuit_board, glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 0.2 kg of aluminium 40%, plastic 30%, circuit_board 20%, glass 10% (rates for glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 226 NGN
+Scrap floor: 198 NGN
 
 Conditions attached to this price:
-- Not identified: The evidence only supports this answer at 42 percent, which is a guess. One clear photo of the label would settle it.
-- Evidence flag: the reader stated brand it could not point to in the photos
+- Not identified: The best candidate scored only 0.6, which is not sure enough to price.
 - 13 pro 128gb -> not proven remotely. Agent reads storage from Settings.
 - 13 pro 128gb -> not proven remotely. Agent reads storage from Settings.
 - Nml 13 128gb -> not proven remotely. Agent reads storage from Settings.

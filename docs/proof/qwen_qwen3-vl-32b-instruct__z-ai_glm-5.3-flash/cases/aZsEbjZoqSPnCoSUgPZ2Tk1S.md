@@ -1,54 +1,58 @@
 # Case aZsEbjZoqSPnCoSUgPZ2Tk1S
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  43284 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  28489 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: phone (confidence 1.0)
 - Made of: aluminium 40%, glass 30%, plastic 20%, circuit_board 10%
 - Estimated weight: 0.18 kg (confidence 0.9)
-- Brand read off the item: nothing legible
+- Brand read off the item: Apple
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
 - Damage noted: minor scratches on back glass, faint smudges and fingerprints
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: MANNY STORES
+- Text read: MANNY STORES | Apple
 
 ## Two readers
-- brand_text was seen by only one reader, so it is treated as unread
 - model_text was seen by only one reader, so it is treated as unread
 - 1 transcribed lines was seen by only one reader, so it is treated as unread
+- brand_text was read by only one reader, so it is kept but not confirmed
+
+## OCR read off the photos
+- MANNY STORES
 
 ## Chain
-- **corroborate** -> dispute. brand_text was seen by only one reader, so it is treated as unread; model_text was seen by only one reader, so it is treated as unread; 1 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=phone brand=None model=None label=False lines=1
-- **retrieval** -> ok. query='MANNY STORES Clean Direct UK used iPhone 11 64gb
+- **ocr** -> ok. 1 lines: MANNY STORES
+- **corroborate** -> dispute. model_text was seen by only one reader, so it is treated as unread; 1 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed
+- **read_evidence** -> ok. category=phone brand=Apple model=None label=False lines=2
+- **retrieval** -> ok. query='Apple MANNY STORES Apple Clean Direct UK used iPhone 11 64gb
 Factory unlocked 
-Battery health 100% (No' hits=['Apple iPhone 11', 'Apple iPhone 11 Pro', 'Apple iPhone 11 Pro Max', 'Apple iPhone XR', 'Apple iPhone XS']
-- **identify** -> ok. chosen=Apple iPhone 11 margin=0.35
-- **abstain** -> abstain. top score 0.65
+Battery hea' hits=['Apple iPhone 11', 'Apple iPhone 11 Pro', 'Apple iPhone 11 Pro Max', 'Apple iPhone XR', 'Apple iPhone XS']
+- **identify** -> ok. chosen=Apple iPhone 11 margin=0.7
+- **abstain** -> pass. confidence=0.61 margin=0.7
 
 ## Identification
 Shortlist from the catalogue:
-  - Apple iPhone 11 (0.4667)
-  - Apple iPhone 11 Pro (0.2667)
-  - Apple iPhone 11 Pro Max (0.2)
-  - Apple iPhone XR (0.2)
-  - Apple iPhone XS (0.2)
+  - Apple iPhone 11 (0.7667)
+  - Apple iPhone 11 Pro (0.5667)
+  - Apple iPhone 11 Pro Max (0.5)
+  - Apple iPhone XR (0.5)
+  - Apple iPhone XS (0.5)
 
-**Not identified: CANNOT_IDENTIFY.** The best candidate scored only 0.65, which is not sure enough to price.
+**Answer: Apple iPhone 11 PRODUCT RED, 64GB (seller stated)** (margin 0.7)
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 33% on the best answer. It is probably a Apple iPhone 11 or a Apple iPhone XR, and the photos cannot separate them.**
+**Not sure enough to price: 61% on the best answer. It is probably a Apple iPhone 11 or a Apple iPhone XR, and the photos cannot separate them.**
 
-- Identification confidence: 33% (unknown)
-- Price confidence: 14%
-- It is weighing: Apple iPhone 11 (0.65), Apple iPhone XR (0.3)
-- The best candidate scored only 0.65, which is not sure enough to price.
+- Identification confidence: 61% (unsure)
+- Price confidence: 0%
+- It is weighing: Apple iPhone 11 (0.9), Apple iPhone XR (0.2), Apple iPhone 11 Pro (0.05)
 - no label, plate or settings screen was legible
 - 1 lines seen by both readers
+- the brand was read by only one reader and is not confirmed
 - 10 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -60,6 +64,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: nothing on the item says which model this is_
 3. [PHOTO] Dial *#06# and screenshot the IMEI that appears.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Has the screen or battery ever been changed?
+- Is it signed out of iCloud or Google, so a new owner can set it up?
 
 ## Claims
 - [unverified] Clean Direct UK used iPhone 11 64gb
@@ -83,14 +92,13 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
-**52 to 297 NGN** (priced as material, width 1.3975, method material_floor, 0 comparable prices)
+**48 to 243 NGN** (priced as material, width 1.3301, method scrap_band_only, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 0.18 kg of aluminium 40%, glass 30%, plastic 20%, circuit_board 10% (rates for circuit_board, glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+No usable comparable sales (0 found, 2 needed), so the range comes from the published Lagos buy band for this category, reduced by 0.3 for unproven claims.
 
-Scrap floor: 175 NGN
+Scrap floor: 163 NGN
 
 Conditions attached to this price:
-- Not identified: The best candidate scored only 0.65, which is not sure enough to price.
 - Clean Direct UK used iPhone 11 64gb -> not proven remotely. Agent reads storage from Settings.
 - Clean Direct UK used iPhone 11 64gb -> not proven remotely. Agent reads storage from Settings.
 - Factory unlocked -> not proven remotely. Seller signs out of iCloud or Google before payment.

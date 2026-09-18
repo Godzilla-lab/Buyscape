@@ -1,35 +1,38 @@
 # Case u3zIvWmvk6hYeB72X2VJugas
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  54721 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0013  |  41067 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: generator (confidence 0.95)
-- Made of: plastic 60%, steel 30%, circuit_board 10%
-- Estimated weight: 15.0 kg (confidence 0.8)
+- Made of: plastic 60%, steel 30%, copper 10%
+- Estimated weight: 12.0 kg (confidence 0.8)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
-- Rating read: none
+- Rating read: 3000W MAX / 2000W CONTINUOUS
 - Label, plate or settings screen legible: yes
-- Damage noted: minor scuffs on plastic casing, no visible damage to engine or controls, clean and intact label
+- Damage noted: minor scuffs on plastic casing, no visible dents or cracks, handles appear intact
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: 2000W | ENGINE: 125cc 4-Stroke
+- Text read: 2000W | OUTPUT: 3000W MAX / 2000W CONTINUOUS | FUEL TYPE: GASOLINE OR PROPANE | ENGINE: 4-STROKE, AIR-COOLED
 
 ## Two readers
 - rating_text agreed by both readers
-- brand_text was seen by only one reader, so it is treated as unread
+- brand_text differed between the two readers, so it is treated as unread
 - model_text was seen by only one reader, so it is treated as unread
 - serial_text was seen by only one reader, so it is treated as unread
 - 15 transcribed lines was seen by only one reader, so it is treated as unread
 
+## OCR read off the photos
+- VULTIPLE
+- 1
+
 ## Chain
-- **corroborate** -> dispute. rating_text agreed by both readers; brand_text was seen by only one reader, so it is treated as unread; model_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 15 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=generator brand=None model=None label=True lines=2
-- **grounding** -> dropped. rating
-- **forensics** -> flag. the reader stated rating it could not point to in the photos
-- **retrieval** -> ok. query='2000W ENGINE: 125cc 4-Stroke Enjoy quiet and stable power with this bison 3.5KVA inverter ' hits=['Lutian LT3900 3.5kVA', 'Senwei SW3500 3.5kVA', 'Thermocool TC2700 2.5kVA', 'Haier Thermocool HTG2700 2.5kVA', 'Kemage KM6500 5.5kVA']
-- **identify** -> refused. chosen=None None margin=0.0
+- **ocr** -> ok. 2 lines: VULTIPLE | 1
+- **corroborate** -> dispute. rating_text agreed by both readers; brand_text differed between the two readers, so it is treated as unread; model_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 15 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=generator brand=None model=None label=True lines=4
+- **retrieval** -> ok. query='3000W MAX / 2000W CONTINUOUS 2000W OUTPUT: 3000W MAX / 2000W CONTINUOUS FUEL TYPE: GASOLIN' hits=['Lutian LT3900 3.5kVA', 'Senwei SW3500 3.5kVA', 'Thermocool TC2700 2.5kVA', 'Haier Thermocool HTG2700 2.5kVA', 'Kemage KM6500 5.5kVA']
+- **identify** -> refused. chosen=Bison None margin=0.0
 - **abstain** -> abstain. model refused
 
 ## Identification
@@ -40,21 +43,18 @@ Shortlist from the catalogue:
   - Haier Thermocool HTG2700 2.5kVA (0.1833)
   - Kemage KM6500 5.5kVA (0.15)
 
-**Not identified: CANNOT_IDENTIFY.** Item is a 2000W suitcase-style inverter generator per its own label; seller claims 3.5KVA bison, contradictory. No brand name is legible and no shortlist entry matches an inverter-type unit.
-
-Evidence flags: the reader stated rating it could not point to in the photos
+**Not identified: CANNOT_IDENTIFY.** Body shows BISON branding, but no model number is legible; all shortlist entries are different brands and their power ratings contradict the 3000W max / 2000W continuous label. Seller's 3.5kVA claim conflicts with the plate.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 3% on the best answer. It is probably a Lutian LT3900 or a Senwei SW3500, and the photos cannot separate them.**
+**Not sure enough to price: 3% on the best answer. It is probably a Lutian LT3900 3.5kVA or a Senwei SW3500 3.5kVA, and the photos cannot separate them.**
 
 - Identification confidence: 3% (unknown)
 - Price confidence: 20%
-- It is weighing: Lutian LT3900 (0.1), Senwei SW3500 (0.1)
-- Item is a 2000W suitcase-style inverter generator per its own label; seller claims 3.5KVA bison, contradictory. No brand name is legible and no shortlist entry matches an inverter-type unit.
+- It is weighing: Lutian LT3900 3.5kVA (0.05), Senwei SW3500 3.5kVA (0.05)
+- Body shows BISON branding, but no model number is legible; all shortlist entries are different brands and their power ratings contradict the 3000W max / 2000W continuous label. Seller's 3.5kVA claim conflicts with the plate.
 - read off the item's own label
-- 2 lines seen by both readers
+- 4 lines seen by both readers
 - the next candidate was only 0.0 behind
-- the reader stated rating it could not point to in the photos
 - 7 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -66,6 +66,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: nothing on the item says which model this is_
 3. [PHOTO] Close-up of the plate on the engine block showing the engine model and serial.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it start and run right now?
+- When was it last serviced, and what was done?
 
 ## Claims
 - [unverified] This is a bison 3.5KVA inverter generator.
@@ -83,15 +88,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Photo of the engine, showing the recoil starter and carburettor.
 
 ## Price
-**3,373 to 10,320 NGN** (priced as material, width 1.0145, method material_floor, 0 comparable prices)
+**9,072 to 19,056 NGN** (priced as material, width 0.7099, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 15 kg of plastic 60%, steel 30%, circuit_board 10% (rates for circuit_board, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 12 kg of plastic 60%, steel 30%, copper 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 5,400 NGN
+Scrap floor: 14,520 NGN
 
 Conditions attached to this price:
-- Not identified: Item is a 2000W suitcase-style inverter generator per its own label; seller claims 3.5KVA bison, contradictory. No brand name is legible and no shortlist entry matches an inverter-type unit.
-- Evidence flag: the reader stated rating it could not point to in the photos
+- Not identified: Body shows BISON branding, but no model number is legible; all shortlist entries are different brands and their power ratings contradict the 3000W max / 2000W continuous label. Seller's 3.5kVA claim conflicts with the plate.
 - This is a bison 3.5KVA inverter generator. -> not proven remotely. Agent reads the rating plate.
 - The generator is suitable for home use. -> not proven remotely. Agent will confirm at pickup.
 - Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on paper and photograph it next to the generator..

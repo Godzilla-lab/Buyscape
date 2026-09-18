@@ -1,57 +1,68 @@
 # Case 6xt35N67xaVwSgpAPFeJQadk
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0007  |  67750 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  77128 ms
 
 ## What the engine saw
 - Presentation: sealed_new
 - Category: split air conditioner (confidence 0.9)
-- Made of: plastic 40%, steel 30%, copper 10%, paper 20%
+- Made of: carton 70%, plastic 20%, steel 10%
 - Estimated weight: 35.0 kg (confidence 0.7)
 - Brand read off the item: Hisense
-- Model read off the item: AOS-18H620A
-- Rating read: 1.5HP
+- Model read off the item: nothing legible
+- Rating read: none
 - Label, plate or settings screen legible: yes
 - Damage noted: none
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: Hisense | AIR CONDITIONER | Outdoor Units | Hisense | Outdoor Unit | 1.5HP | R32 | Made in China
+- Text read: Hisense | AIR CONDITIONER | Outdoor Units | Hisense | Air Conditioner | Outdoor Unit
+
+## Two readers
+- brand_text agreed by both readers
+- model_text was seen by only one reader, so it is treated as unread
+- rating_text was seen by only one reader, so it is treated as unread
+- serial_text was seen by only one reader, so it is treated as unread
+- 15 transcribed lines was seen by only one reader, so it is treated as unread
+
+## OCR read off the photos
+- AIR CONDITIONER
+- Outdoar Unit+
+- Hisense
 
 ## Chain
-- **corroborate** -> unavailable. openrouter:mistralai/mistral-small-3.2-24b-instruct failed after retries: HTTP 429: {"error":{"message":"Provider return
-- **read_evidence** -> ok. category=split air conditioner brand=Hisense model=AOS-18H620A label=True lines=19
-- **retrieval** -> ok. query='Hisense AOS-18H620A 1.5HP Hisense AIR CONDITIONER Outdoor Units Hisense Outdoor Unit 1.5HP' hits=['Hisense AS-12 1.5HP', 'Hisense AS-09 1HP', 'Hisense AS-18 2HP', 'Samsung AR12 1.5HP', 'Scanfrost SFAC12 1.5HP']
-- **identify** -> ok. chosen=Hisense AOS-18H620A margin=0.8
-- **abstain** -> pass. confidence=0.66 margin=0.8
+- **ocr** -> ok. 3 lines: AIR CONDITIONER | Outdoar Unit+ | Hisense
+- **corroborate** -> dispute. brand_text agreed by both readers; model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 15 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=split air conditioner brand=Hisense model=None label=True lines=6
+- **gate** -> abstain. multiple items in frame
 
 ## Identification
-Shortlist from the catalogue:
-  - Hisense AS-12 1.5HP (0.64)
-  - Hisense AS-09 1HP (0.4)
-  - Hisense AS-18 2HP (0.38)
-  - Samsung AR12 1.5HP (0.3)
-  - Scanfrost SFAC12 1.5HP (0.3)
+No catalogue candidates matched.
 
-**Answer: Hisense AOS-18H620A Outdoor Unit 1.5HP R32** (margin 0.8)
+**Not identified: EVIDENCE_INCOMPLETE.** The photos show more than one item, so no single item can be identified.
 
 ## How sure the engine is (back office)
-**66% sure this is a Hisense AOS-18H620A Outdoor Unit 1.5HP R32.**
+**0%: the photos do not say what this is.**
 
-- Identification confidence: 66% (likely)
-- Price confidence: 0%
-- It is weighing: Hisense AOS-18H620A (0.95), Hisense AS-12 1.5HP (0.15)
+- Identification confidence: 0% (unknown)
+- Price confidence: 18%
+- The photos show more than one item, so no single item can be identified.
 - read off the item's own label
-- only one reader saw these photos, the second was unavailable
+- 6 lines seen by both readers
 - 8 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
 
 ## What the seller is asked for next (shown in the app)
-1. [PHOTO] Write the code {code} on paper and photograph it next to the unit.
-   _why: this is needed before the price can be confirmed_
-2. [PHOTO] One photo of the whole indoor unit.
-   _why: this is needed before the price can be confirmed_
-3. [PHOTO] One photo of the outdoor compressor unit.
-   _why: this is needed before the price can be confirmed_
+1. [PHOTO] Photograph one item on its own, with nothing else in the picture.
+   _why: the photos show more than one item_
+2. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: Close-up of the rating plate on the outdoor unit showing the model and HP. Then, without stopping the video: Open the front grille of the indoor unit and photograph the filters and coil. Finish with: A short clip with the unit running and the display lit. Keep filming the whole time. Do not cut between clips.
+   _why: two readings of these photos disagreed about what is written on the item_
+3. [PHOTO] Close-up of the rating plate on the outdoor unit showing the model and HP.
+   _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it still blow cold air?
+- Do you have both the indoor unit and the outdoor unit?
 
 ## Claims
 - [unverified] The Hisense AS09DK Air Conditioner is designed to deliver powerful and consistent cooling for small spaces.
@@ -72,13 +83,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Open the front grille of the indoor unit and photograph the filters and coil.
 
 ## Price
-**19,008 to 80,000 NGN** (priced as material, width 1.2321, method scrap_band_only, 0 comparable prices)
+**1,862 to 6,300 NGN** (priced as material, width 1.0872, method material_floor, 0 comparable prices)
 
-No usable comparable sales (0 found, 2 needed), so the range comes from the published Lagos buy band for this category, reduced by 0.4752 for unproven claims.
+This item was not identified, so it is priced as material rather than as a working item: 35 kg of carton 70%, plastic 20%, steel 10% (rates for carton, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 42,070 NGN
+Scrap floor: 3,920 NGN
 
 Conditions attached to this price:
+- Not identified: The photos show more than one item, so no single item can be identified.
 - The Hisense AS09DK Air Conditioner is designed to deliver powerful and consistent cooling for small spaces. -> not proven remotely. Agent reads the outdoor rating plate.
 - The Hisense AS09DK Air Conditioner is designed to deliver powerful and consistent cooling for small spaces. -> not proven remotely. Agent reads the outdoor rating plate.
 - The Hisense AS09DK Air Conditioner is designed to deliver powerful and consistent cooling for small spaces. -> not proven remotely. Agent reads the outdoor rating plate.

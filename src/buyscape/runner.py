@@ -15,6 +15,7 @@ from .assess import Assessment, CaptureRequest, assess, capture_requests
 from .claims.crosscheck import CrossCheck, Testimony, crosscheck
 from .claims.ledger import Claim, ClaimStatus, build_ledger
 from .identify import chain
+from .identify.ocr import OcrReader
 from .identify.catalogue import Entry, tokens
 from .pricing.engine import Quote, cap_at_asking, price
 from .pricing.sources import (
@@ -88,6 +89,7 @@ def run_case(
     materials: MaterialsFloor | None = None,
     corroborator: VisionProvider | None = None,
     tenant: Tenant | None = None,
+    ocr: OcrReader | None = None,
 ) -> CaseResult:
     meter = CostMeter()
     images = tuple(ImageRef(p) for p in case.images)
@@ -102,6 +104,7 @@ def run_case(
             meter,
             case.category_hint,
             corroborator,
+            ocr,
         )
     except (ProviderError, MissingFixture) as exc:
         code = "NO_FIXTURE" if isinstance(exc, MissingFixture) else "PROVIDER_ERROR"
@@ -392,6 +395,8 @@ def report_markdown(case: Case, result: CaseResult) -> str:
             lines.append(f"- Text read: {' | '.join(r.visible_text[:8])}")
     if c.corroboration_notes:
         lines += ["", "## Two readers"] + [f"- {n}" for n in c.corroboration_notes]
+    if c.ocr_lines:
+        lines += ["", "## OCR read off the photos"] + [f"- {t}" for t in c.ocr_lines[:12]]
 
     lines += ["", "## Chain"]
     for link in c.links:
@@ -414,7 +419,9 @@ def report_markdown(case: Case, result: CaseResult) -> str:
         lines += [f"  - {k} ({s})" for k, s in c.candidates]
     else:
         lines.append("No catalogue candidates matched.")
-    if result.identified:
+    if result.identified and c.named_from_label:
+        lines.append(f"\n**Answer: {c.model_key}** (named from the item's own label; not in the catalogue)")
+    elif result.identified:
         lines.append(f"\n**Answer: {c.model_key}** (margin {c.margin})")
     else:
         lines.append(f"\n**Not identified: {c.failure_code}.** {c.reason}")

@@ -1,31 +1,42 @@
 # Case vaKXGZc2yjiJgMxEFSTsU75c
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  92358 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  24635 ms
 
 ## What the engine saw
 - Presentation: sealed_new
-- Category: split air conditioner (confidence 0.9)
-- Made of: paper 90%, plastic 10%
-- Estimated weight: 30.0 kg (confidence 0.7)
-- Brand read off the item: nothing legible
+- Category: split air conditioner (confidence 0.95)
+- Made of: carton 95%, plastic 5%
+- Estimated weight: 15.0 kg (confidence 0.7)
+- Brand read off the item: HITACHI
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
 - Damage noted: none
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: AIR CONDITIONER | Outdoor Unit
+- Text read: HITACHI | AIR CONDITIONER | Outdoor Unit
 
 ## Two readers
-- brand_text differed between the two readers, so it is treated as unread
+- brand_text agreed by both readers
 - model_text was seen by only one reader, so it is treated as unread
 - rating_text was seen by only one reader, so it is treated as unread
 - serial_text was seen by only one reader, so it is treated as unread
-- 15 transcribed lines was seen by only one reader, so it is treated as unread
+- 17 transcribed lines was seen by only one reader, so it is treated as unread
+
+## OCR read off the photos
+- 1
+- AR CENOITOUNER
+- IR CONDITIONER
+- 2
+- ndour Unit>
+- ONDIT
+- AIR CONDITIONER
+- Outdoor Units
 
 ## Chain
-- **corroborate** -> dispute. brand_text differed between the two readers, so it is treated as unread; model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 15 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=split air conditioner brand=None model=None label=True lines=2
+- **ocr** -> ok. 8 lines: 1 | AR CENOITOUNER | IR CONDITIONER | 2 | ndour Unit> | ONDIT | AIR CONDITIONER | Outdoor Units
+- **corroborate** -> dispute. brand_text agreed by both readers; model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 17 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=split air conditioner brand=HITACHI model=None label=True lines=3
 - **gate** -> abstain. multiple items in frame
 
 ## Identification
@@ -40,7 +51,7 @@ No catalogue candidates matched.
 - Price confidence: 16%
 - The photos show more than one item, so no single item can be identified.
 - read off the item's own label
-- 2 lines seen by both readers
+- 3 lines seen by both readers
 - 9 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -52,6 +63,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: two readings of these photos disagreed about what is written on the item_
 3. [PHOTO] Close-up of the rating plate on the outdoor unit showing the model and HP.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it still blow cold air?
+- Do you have both the indoor unit and the outdoor unit?
 
 ## Claims
 - [unverified] Hisense 1.5hp inverter Ac
@@ -74,11 +90,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Open the front grille of the indoor unit and photograph the filters and coil.
 
 ## Price
-**775 to 3,780 NGN** (priced as material, width 1.3191, method material_floor, 0 comparable prices)
+**375 to 1,845 NGN** (priced as material, width 1.3234, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 30 kg of paper 90%, plastic 10% (rates for paper, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 15 kg of carton 95%, plastic 5% (rates for carton, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 1,920 NGN
+Scrap floor: 930 NGN
 
 Conditions attached to this price:
 - Not identified: The photos show more than one item, so no single item can be identified.

@@ -1,6 +1,6 @@
 # Case qbVwy2RpugkUTvOKqaL4UZ7P
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  25594 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  19769 ms
 
 ## What the engine saw
 - Presentation: single_unit
@@ -16,7 +16,14 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Screenshot of a gallery: no
 - Text read: OLABOI TECH ENT
 
+## OCR read off the photos
+- ECH
+- ES
+- OLAB
+- CHENTI
+
 ## Chain
+- **ocr** -> ok. 4 lines: ECH | ES | OLAB | CHENTI
 - **corroborate** -> agree. nothing identifying was read by either
 - **read_evidence** -> ok. category=laptop brand=None model=None label=False lines=1
 - **retrieval** -> ok. query='OLABOI TECH ENT Dell latitude 3550
@@ -54,6 +61,12 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 2. [PHOTO] Screenshot of System Information (Windows) or About This Mac, showing the model, processor, RAM and storage.
    _why: nothing on the item says which model this is_
 
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it stay on for more than ten minutes with the charger unplugged?
+- Has it ever been dropped, or had liquid spilled on it?
+- What does not work on it? Say none if everything works.
+
 ## Claims
 - [unverifiable_remote] Dell latitude 3550
 - [unverifiable_remote] Intel core i5(5th Gen )
@@ -74,14 +87,15 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Screenshot of System Information (Windows) or About This Mac, showing the model, processor, RAM and storage.
 
 ## Price
-**154 to 775 NGN** (priced as material, width 1.3335, method material_floor, 0 comparable prices)
+**5,000 to 5,000 NGN** (priced as material, width 0.0, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 1.2 kg of plastic 70%, steel 20%, circuit_board 10% (rates for circuit_board, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 1.2 kg of plastic 70%, steel 20%, circuit_board 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 384 NGN
+Scrap floor: 300 NGN
 
 Conditions attached to this price:
 - Not identified: Lid is closed; only the Dell logo is visible, no model text is legible. Seller claims Latitude 3550, which is not on the shortlist and cannot be verified from the photo.
+- Raised to the 5,000 NGN minimum this business publishes for this kind of item.
 - Dell latitude 3550 -> not proven remotely. Agent will confirm at pickup.
 - Intel core i5(5th Gen ) -> not proven remotely. Agent will confirm at pickup.
 - 8gb memory -> not proven remotely. Agent opens System Information and reads the RAM.

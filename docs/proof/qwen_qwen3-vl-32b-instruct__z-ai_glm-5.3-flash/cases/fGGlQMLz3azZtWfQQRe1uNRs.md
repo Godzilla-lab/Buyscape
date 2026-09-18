@@ -1,13 +1,13 @@
 # Case fGGlQMLz3azZtWfQQRe1uNRs
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  122793 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  28669 ms
 
 ## What the engine saw
 - Presentation: single_unit
-- Category: phone (confidence 1.0)
-- Made of: plastic 60%, circuit_board 20%, glass 10%, steel 10%
-- Estimated weight: 0.18 kg (confidence 0.9)
-- Brand read off the item: nothing legible
+- Category: phone (confidence 0.95)
+- Made of: plastic 40%, circuit_board 20%, steel 20%, glass 10%, copper 10%
+- Estimated weight: 0.15 kg (confidence 0.8)
+- Brand read off the item: TECNO
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
@@ -17,14 +17,29 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Text read: Search Apps | Notepad | Palm Store | Phoenix | Phone | Phone Manager | Photos | Play Store
 
 ## Two readers
-- brand_text was seen by only one reader, so it is treated as unread
+- brand_text was read by one reader and confirmed by OCR
 - 3 transcribed lines was seen by only one reader, so it is treated as unread
 
+## OCR read off the photos
+- 2:16P
+- Notepad
+- P
+- Palm Store
+- Phoenix
+- Phone
+- Phone Mas..
+- Photos
+- Play Store
+- S
+- 川
+- Settings
+
 ## Chain
-- **corroborate** -> dispute. brand_text was seen by only one reader, so it is treated as unread; 3 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=phone brand=None model=None label=False lines=19
+- **ocr** -> ok. 32 lines: 2:16P | Notepad | P | Palm Store | Phoenix | Phone | Phone Mas.. | Photos | Play Store | S | 川 | Settings | SIM Toolkit 
+- **corroborate** -> dispute. brand_text was read by one reader and confirmed by OCR; 3 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=phone brand=TECNO model=None label=False lines=19
 - **forensics** -> flag. screenshot of a gallery rather than a photo of the item
-- **retrieval** -> ok. query='Search Apps Notepad Palm Store Phoenix Phone Phone Manager Photos Play Store Settenga SIM ' hits=['Tecno Camon 20', 'Tecno Camon 30', 'Tecno Camon 40', 'Tecno Camon 50', 'Tecno Camon 19']
+- **retrieval** -> ok. query='TECNO Search Apps Notepad Palm Store Phoenix Phone Phone Manager Photos Play Store SIM Too' hits=['Tecno Camon 20', 'Tecno Camon 30', 'Tecno Camon 40', 'Tecno Camon 50', 'Tecno Camon 19']
 - **identify** -> refused. chosen=Tecno None margin=0.05
 - **abstain** -> abstain. model refused
 
@@ -36,17 +51,17 @@ Shortlist from the catalogue:
   - Tecno Camon 50 (0.5)
   - Tecno Camon 19 (0.4333)
 
-**Not identified: CANNOT_IDENTIFY.** Screen only shows a generic Tecno HiOS launcher (TECNO SPL, Palm Store); no label or plate is legible and no UI element identifies the model. Seller's claim of Camon 15 Air is unverified and that model is not in the shortlist.
+**Not identified: CANNOT_IDENTIFY.** Seller claims Camon 15 Air, but that model is not on the shortlist and no label or plate in the photo states any model; the home screen only confirms the TECNO brand, so no shortlist entry is supported.
 
 Evidence flags: screenshot of a gallery rather than a photo of the item
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 5% on the best answer. It is probably a Tecno Camon 19 or a Tecno Camon 20, and the photos cannot separate them.**
+**Not sure enough to price: 2% on the best answer. It is probably a Tecno Camon 19 or a Tecno Camon 20, and the photos cannot separate them.**
 
-- Identification confidence: 5% (unknown)
+- Identification confidence: 2% (unknown)
 - Price confidence: 18%
-- It is weighing: Tecno Camon 19 (0.2), Tecno Camon 20 (0.15)
-- Screen only shows a generic Tecno HiOS launcher (TECNO SPL, Palm Store); no label or plate is legible and no UI element identifies the model. Seller's claim of Camon 15 Air is unverified and that model is not in the shortlist.
+- It is weighing: Tecno Camon 19 (0.1), Tecno Camon 20 (0.05)
+- Seller claims Camon 15 Air, but that model is not on the shortlist and no label or plate in the photo states any model; the home screen only confirms the TECNO brand, so no shortlist entry is supported.
 - no label, plate or settings screen was legible
 - 19 lines seen by both readers
 - the next candidate was only 0.05 behind
@@ -62,6 +77,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: two readings of these photos disagreed about what is written on the item_
 3. [PHOTO] Screenshot of Settings then About, showing the model name and storage.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Has the screen or battery ever been changed?
+- Is it signed out of iCloud or Google, so a new owner can set it up?
 
 ## Claims
 - [unverifiable_remote] Nearly used Tecno camon 15 air
@@ -79,14 +99,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
-**49 to 175 NGN** (priced as material, width 1.1228, method material_floor, 0 comparable prices)
+**129 to 254 NGN** (priced as material, width 0.6508, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 0.18 kg of plastic 60%, circuit_board 20%, glass 10%, steel 10% (rates for circuit_board, glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 0.15 kg of plastic 40%, circuit_board 20%, steel 20%, glass 10%, copper 10% (rates for glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 74 NGN
+Scrap floor: 195 NGN
 
 Conditions attached to this price:
-- Not identified: Screen only shows a generic Tecno HiOS launcher (TECNO SPL, Palm Store); no label or plate is legible and no UI element identifies the model. Seller's claim of Camon 15 Air is unverified and that model is not in the shortlist.
+- Not identified: Seller claims Camon 15 Air, but that model is not on the shortlist and no label or plate in the photo states any model; the home screen only confirms the TECNO brand, so no shortlist entry is supported.
 - Evidence flag: screenshot of a gallery rather than a photo of the item
 - Nearly used Tecno camon 15 air -> not proven remotely. Agent will confirm at pickup.
 - Tecno camon 15 air -> not proven remotely. Agent will confirm at pickup.

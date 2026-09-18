@@ -1,58 +1,68 @@
 # Case 3C6VrPuZMQvb0zCJJQIFIvif
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0007  |  23219 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  27148 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: generator (confidence 0.95)
-- Made of: steel 60%, plastic 30%, circuit_board 5%, rubber 5%
+- Made of: steel 60%, plastic 30%, copper 10%
 - Estimated weight: 45.0 kg (confidence 0.8)
-- Brand read off the item: nothing legible
-- Model read off the item: nothing legible
+- Brand read off the item: SE-CI
+- Model read off the item: SC30000
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: some dust and minor surface wear on casing, no visible damage to frame or engine components
+- Damage noted: minor dust and grime on surface, no visible damage or rust
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: SECI | SC30000 | GASOLINE GENERATOR
+- Text read: SECI | SC30000 | GASOLINE GENERATOR | SE-CI
 
 ## Two readers
 - brand_text agreed by both readers
 - model_text agreed by both readers
 
+## OCR read off the photos
+- RJRA
+- SE CI
+- SC30000
+- GASOLNE GENERATOR
+
 ## Chain
+- **ocr** -> ok. 4 lines: RJRA | SE CI | SC30000 | GASOLNE GENERATOR
 - **corroborate** -> agree. brand_text agreed by both readers; model_text agreed by both readers
-- **read_evidence** -> ok. category=generator brand=SECI model=SC30000 label=True lines=3
-- **grounding** -> dropped. brand, model
-- **forensics** -> flag. the reader stated brand, model it could not point to in the photos
-- **retrieval** -> empty. query='SECI SC30000 GASOLINE GENERATOR Senci petrol generator model sc30000 100% copper coil with' hits=[]
-- **gate** -> abstain. no candidates and no model text
+- **read_evidence** -> ok. category=generator brand=SE-CI model=SC30000 label=True lines=4
+- **retrieval** -> empty. query='SE-CI SC30000 SECI SC30000 GASOLINE GENERATOR SE-CI Senci petrol generator model sc30000 1' hits=[]
+- **identify** -> ok. chosen=Senci SC30000 margin=None
+- **abstain** -> pass. confidence=0.85 margin=None
 
 ## Identification
 No catalogue candidates matched.
 
-**Not identified: CANNOT_IDENTIFY.** No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.
-
-Evidence flags: the reader stated brand, model it could not point to in the photos
+**Answer: Senci SC30000 Gasoline generator, key start** (margin None)
 
 ## How sure the engine is (back office)
-**0%: the photos do not say what this is.**
+**85% sure this is a Senci SC30000 Gasoline generator, key start.**
 
-- Identification confidence: 0% (unknown)
-- Price confidence: 14%
-- No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.
+- Identification confidence: 85% (certain)
+- Price confidence: 0%
+- It is weighing: Senci SC30000 (0.85)
 - read off the item's own label
 - 3 lines seen by both readers
-- the reader stated brand, model it could not point to in the photos
 - 10 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
 
 ## What the seller is asked for next (shown in the app)
-1. [PHOTO] Close-up of the rating plate showing the kVA and model number.
-   _why: nothing on the item says which model this is_
-2. [PHOTO] Close-up of the plate on the engine block showing the engine model and serial.
-   _why: nothing on the item says which model this is_
+1. [PHOTO] Write the code {code} on paper and photograph it next to the generator.
+   _why: this is needed before the price can be confirmed_
+2. [PHOTO] One photo of the whole generator from the front.
+   _why: this is needed before the price can be confirmed_
+3. [PHOTO] Close-up of the rating plate showing the kVA and model number.
+   _why: this is needed before the price can be confirmed_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it start and run right now?
+- When was it last serviced, and what was done?
 
 ## Claims
 - [unverifiable_remote] Senci petrol generator model sc30000
@@ -73,15 +83,13 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Photo of the engine, showing the recoil starter and carburettor.
 
 ## Price
-**8,668 to 27,855 NGN** (priced as material, width 1.0507, method material_floor, 0 comparable prices)
+**28,291 to 77,130 NGN** (priced as material, width 0.9265, method scrap_band_only, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 45 kg of steel 60%, plastic 30%, circuit_board 5%, rubber 5% (rates for circuit_board, plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+No usable comparable sales (0 found, 2 needed), so the range comes from the published Lagos buy band for this category, reduced by 0.4727 for unproven claims.
 
-Scrap floor: 18,337 NGN
+Scrap floor: 59,850 NGN
 
 Conditions attached to this price:
-- Not identified: No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.
-- Evidence flag: the reader stated brand, model it could not point to in the photos
 - Senci petrol generator model sc30000 -> not proven remotely. Agent will confirm at pickup.
 - 100% copper coil -> not proven remotely. Agent opens the side cover and inspects the windings.
 - warranty one year -> not proven remotely. Agent will confirm at pickup.

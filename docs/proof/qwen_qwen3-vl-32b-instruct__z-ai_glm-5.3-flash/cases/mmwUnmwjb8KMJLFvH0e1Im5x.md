@@ -1,13 +1,13 @@
 # Case mmwUnmwjb8KMJLFvH0e1Im5x
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  25428 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  29163 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: portable_power_station (confidence 0.9)
-- Made of: plastic 70%, steel 20%, circuit_board 10%
-- Estimated weight: 3.5 kg (confidence 0.8)
-- Brand read off the item: nothing legible
+- Made of: plastic 80%, steel 15%, circuit_board 5%
+- Estimated weight: 4.0 kg (confidence 0.7)
+- Brand read off the item: LUTIAN
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
@@ -18,14 +18,19 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Two readers
 - brand_text agreed by both readers
-- 2 transcribed lines was seen by only one reader, so it is treated as unread
+- model_text was seen by only one reader, so it is treated as unread
+- 1 transcribed lines was seen by only one reader, so it is treated as unread
+
+## OCR read off the photos
+- POSTELONJIJI
+- QLUTIAN
 
 ## Chain
-- **corroborate** -> dispute. brand_text agreed by both readers; 2 transcribed lines was seen by only one reader, so it is treated as unread
+- **ocr** -> ok. 2 lines: POSTELONJIJI | QLUTIAN
+- **corroborate** -> dispute. brand_text agreed by both readers; model_text was seen by only one reader, so it is treated as unread; 1 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=portable_power_station brand=LUTIAN model=None label=False lines=1
-- **grounding** -> dropped. brand
-- **forensics** -> flag. the reader stated brand it could not point to in the photos; looks like a catalogue or stock image
-- **retrieval** -> ok. query='LUTIAN 1000kwh original lutian solar power tank generator' hits=['Lutian LT3900 3.5kVA']
+- **forensics** -> flag. looks like a catalogue or stock image
+- **retrieval** -> ok. query='LUTIAN LUTIAN 1000kwh original lutian solar power tank generator' hits=['Lutian LT3900 3.5kVA']
 - **identify** -> refused. chosen=None None margin=None
 - **abstain** -> abstain. model refused
 
@@ -33,20 +38,19 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 Shortlist from the catalogue:
   - Lutian LT3900 3.5kVA (0.4)
 
-**Not identified: CANNOT_IDENTIFY.** Visible LUTIAN branding on a portable power-storage unit, but no model number is legible; the shortlisted LT3900 is a 3.5kVA generator that does not resemble this item. Seller's '1000kwh' claim conflicts with the small form factor.
+**Not identified: CANNOT_IDENTIFY.** Only 'LUTIAN' is legible; item appears to be a lithium power station, not the shortlisted LT3900 petrol generator. No model plate visible.
 
-Evidence flags: the reader stated brand it could not point to in the photos; looks like a catalogue or stock image
+Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 4% on the best answer. It is probably a Lutian LT3900 3.5kVA, and the photos cannot separate them.**
+**Not sure enough to price: 2% on the best answer. It is probably a Lutian LT3900 3.5kVA, and the photos cannot separate them.**
 
-- Identification confidence: 4% (unknown)
+- Identification confidence: 2% (unknown)
 - Price confidence: 16%
-- It is weighing: Lutian LT3900 3.5kVA (0.15)
-- Visible LUTIAN branding on a portable power-storage unit, but no model number is legible; the shortlisted LT3900 is a 3.5kVA generator that does not resemble this item. Seller's '1000kwh' claim conflicts with the small form factor.
+- It is weighing: Lutian LT3900 3.5kVA (0.1)
+- Only 'LUTIAN' is legible; item appears to be a lithium power station, not the shortlisted LT3900 petrol generator. No model plate visible.
 - no label, plate or settings screen was legible
 - 1 lines seen by both readers
-- the reader stated brand it could not point to in the photos
 - looks like a catalogue or stock image
 - 9 claims are still unproven, 0 are supported
 
@@ -59,6 +63,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: two readings of these photos disagreed about what is written on the item_
 3. [PHOTO] Close-up of the rating plate showing the kVA and model number.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it start and run right now?
+- When was it last serviced, and what was done?
 
 ## Claims
 - [unverifiable_remote] 1000kwh original lutian solar power tank generator
@@ -77,15 +86,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Photo of the engine, showing the recoil starter and carburettor.
 
 ## Price
-**705 to 2,261 NGN** (priced as material, width 1.0484, method material_floor, 0 comparable prices)
+**491 to 1,136 NGN** (priced as material, width 0.7919, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 3.5 kg of plastic 70%, steel 20%, circuit_board 10% (rates for circuit_board, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 4 kg of plastic 80%, steel 15%, circuit_board 5% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 1,120 NGN
+Scrap floor: 780 NGN
 
 Conditions attached to this price:
-- Not identified: Visible LUTIAN branding on a portable power-storage unit, but no model number is legible; the shortlisted LT3900 is a 3.5kVA generator that does not resemble this item. Seller's '1000kwh' claim conflicts with the small form factor.
-- Evidence flag: the reader stated brand it could not point to in the photos
+- Not identified: Only 'LUTIAN' is legible; item appears to be a lithium power station, not the shortlisted LT3900 petrol generator. No model plate visible.
 - Evidence flag: looks like a catalogue or stock image
 - 1000kwh original lutian solar power tank generator -> not proven remotely. Agent will confirm at pickup.
 - original lutian solar power tank generator -> not proven remotely. Agent will confirm at pickup.

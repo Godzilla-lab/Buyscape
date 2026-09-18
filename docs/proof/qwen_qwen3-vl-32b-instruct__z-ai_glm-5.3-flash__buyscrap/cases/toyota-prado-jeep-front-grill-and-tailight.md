@@ -7,20 +7,22 @@ Photos: 2  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Category: car headlight assembly (confidence 0.9)
 - Made of: plastic 60%, steel 30%, glass 10%
 - Estimated weight: 8.0 kg (confidence 0.7)
-- Brand read off the item: nothing legible
+- Brand read off the item: TOYOTA
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
 - Damage noted: minor scratches on plastic housing, some dirt and grime on surface, no visible cracks or breaks
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
+- Text read: TOYOTA
 
 ## Two readers
-- brand_text was seen by only one reader, so it is treated as unread
+- brand_text was read by only one reader, so it is kept but not confirmed
 
 ## Chain
-- **corroborate** -> dispute. brand_text was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=car headlight assembly brand=None model=None label=False lines=0
+- **ocr** -> ok. 0 lines: 
+- **corroborate** -> agree. brand_text was read by only one reader, so it is kept but not confirmed
+- **read_evidence** -> ok. category=car headlight assembly brand=TOYOTA model=None label=False lines=1
 - **gate** -> abstain. multiple items in frame
 
 ## Identification
@@ -36,6 +38,7 @@ No catalogue candidates matched.
 - The photos show more than one item, so no single item can be identified.
 - no label, plate or settings screen was legible
 - the two readers agreed on nothing legible
+- the brand was read by only one reader and is not confirmed
 - 8 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -43,9 +46,7 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 ## What the seller is asked for next (shown in the app)
 1. [PHOTO] Photograph one item on its own, with nothing else in the picture.
    _why: the photos show more than one item_
-2. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: Close-up of the VIN plate, usually on the dashboard by the windscreen or inside the driver's door. Then, without stopping the video: Open the bonnet and photograph the engine. Keep filming the whole time. Do not cut between clips.
-   _why: two readings of these photos disagreed about what is written on the item_
-3. [PHOTO] Close-up of the VIN plate, usually on the dashboard by the windscreen or inside the driver's door.
+2. [PHOTO] Close-up of the VIN plate, usually on the dashboard by the windscreen or inside the driver's door.
    _why: nothing on the item says which model this is_
 
 ## What the seller is asked (only they know these)

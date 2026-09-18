@@ -1,35 +1,49 @@
 # Case linksys-hydra-pro-6-dual-band-mesh-router
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  26216 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  28590 ms
 
 ## What the engine saw
 - Presentation: sealed_new
 - Category: router (confidence 0.95)
 - Made of: paper 90%, plastic 10%
 - Estimated weight: 0.5 kg (confidence 0.8)
-- Brand read off the item: nothing legible
-- Model read off the item: nothing legible
-- Rating read: none
+- Brand read off the item: Linksys
+- Model read off the item: Hydra Pro 6
+- Rating read: AX5400
 - Label, plate or settings screen legible: no
 - Damage noted: none
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
-- Text read: Linksys | Hydra Pro 6 | Dual-Band Mesh Router | Up to 2700 sq ft. | 30+ Devices | 5.4 Gbps | Intelligent Mesh
+- Text read: Linksys | Hydra Pro 6 | Dual-Band Mesh Router | Up to 2700 sq ft. | 30+ Devices | 5.4 Gbps | Intelligent Mesh | AX5400
 
 ## Two readers
 - brand_text agreed by both readers
 - model_text agreed by both readers
-- rating_text was seen by only one reader, so it is treated as unread
+- rating_text was read by one reader and confirmed by OCR
 - 1 transcribed lines was seen by only one reader, so it is treated as unread
 
+## OCR read off the photos
+- Lnksys
+- Hydra
+- Pro6
+- L
+- Dual-Band
+- Mesh Router
+- Lnksy
+- 2700 sq ft.
+- Up to
+- 30+Devices
+- AX5400
+- 5.4 Gbps
+
 ## Chain
-- **corroborate** -> dispute. brand_text agreed by both readers; model_text agreed by both readers; rating_text was seen by only one reader, so it is treated as unread; 1 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=router brand=Linksys model=Hydra Pro 6 label=False lines=7
-- **grounding** -> dropped. brand, model
-- **forensics** -> flag. the reader stated brand, model it could not point to in the photos; looks like a catalogue or stock image
-- **retrieval** -> ok. query='Linksys Hydra Pro 6 Dual-Band Mesh Router Up to 2700 sq ft. 30+ Devices 5.4 Gbps Intellige' hits=['Acer Aspire 5', 'Tecno Camon 30', 'Tecno Spark 30', 'Tecno Pova 5', 'Tecno Pova 6']
+- **ocr** -> ok. 13 lines: Lnksys | Hydra | Pro6 | L | Dual-Band | Mesh Router | Lnksy | 2700 sq ft. | Up to | 30+Devices | AX5400 | 5.4 Gbps | LIn
+- **corroborate** -> dispute. brand_text agreed by both readers; model_text agreed by both readers; rating_text was read by one reader and confirmed by OCR; 1 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=router brand=Linksys model=Hydra Pro 6 label=False lines=8
+- **forensics** -> flag. looks like a catalogue or stock image
+- **retrieval** -> ok. query='Linksys Hydra Pro 6 AX5400 Linksys Hydra Pro 6 Dual-Band Mesh Router Up to 2700 sq ft. 30+' hits=['Acer Aspire 5', 'Tecno Camon 30', 'Tecno Spark 30', 'Tecno Pova 5', 'Tecno Pova 6']
 - **identify** -> ok. chosen=Linksys Hydra Pro 6 margin=None
-- **abstain** -> abstain. seller names another generation
+- **abstain** -> abstain. confidence 0.42: no label, plate or settings screen was legible; 7 lines seen by both readers; looks like a catalogue or stock image
 
 ## Identification
 Shortlist from the catalogue:
@@ -39,9 +53,9 @@ Shortlist from the catalogue:
   - Tecno Pova 5 (0.2)
   - Tecno Pova 6 (0.2)
 
-**Not identified: EVIDENCE_INCOMPLETE.** The answer names ax5400, which appears nowhere on the item or in the seller's words. A photo of the plate would confirm or correct it.
+**Not identified: EVIDENCE_INCOMPLETE.** The evidence only supports this answer at 42 percent, which is a guess. One clear photo of the label would settle it.
 
-Evidence flags: the reader stated brand, model it could not point to in the photos; looks like a catalogue or stock image
+Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
 **Not sure enough to price: 25% on the best answer. It is probably a Linksys Hydra Pro 6, and the photos cannot separate them.**
@@ -49,10 +63,9 @@ Evidence flags: the reader stated brand, model it could not point to in the phot
 - Identification confidence: 25% (unknown)
 - Price confidence: 16%
 - It is weighing: Linksys Hydra Pro 6 (0.98)
-- The answer names ax5400, which appears nowhere on the item or in the seller's words. A photo of the plate would confirm or correct it.
+- The evidence only supports this answer at 42 percent, which is a guess. One clear photo of the label would settle it.
 - no label, plate or settings screen was legible
 - 7 lines seen by both readers
-- the reader stated brand, model it could not point to in the photos
 - looks like a catalogue or stock image
 - 9 claims are still unproven, 0 are supported
 
@@ -97,8 +110,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 32 NGN
 
 Conditions attached to this price:
-- Not identified: The answer names ax5400, which appears nowhere on the item or in the seller's words. A photo of the plate would confirm or correct it.
-- Evidence flag: the reader stated brand, model it could not point to in the photos
+- Not identified: The evidence only supports this answer at 42 percent, which is a guess. One clear photo of the label would settle it.
 - Evidence flag: looks like a catalogue or stock image
 - A new Linksys Hydra Pro 6 dual-band Mesh Router -> not proven remotely. Agent will confirm at pickup.
 - Linksys Hydra Pro 6 dual-band Mesh Router -> not proven remotely. Weigh on the scale and photograph the display.

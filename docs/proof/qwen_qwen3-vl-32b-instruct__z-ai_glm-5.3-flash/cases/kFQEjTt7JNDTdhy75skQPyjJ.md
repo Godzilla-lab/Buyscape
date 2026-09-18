@@ -1,35 +1,42 @@
 # Case kFQEjTt7JNDTdhy75skQPyjJ
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  53712 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  33031 ms
 
 ## What the engine saw
 - Presentation: single_unit
-- Category: gasoline generator (confidence 0.95)
-- Made of: steel 60%, plastic 30%, circuit_board 5%, rubber 5%
+- Category: generator (confidence 0.95)
+- Made of: steel 60%, plastic 30%, copper 10%
 - Estimated weight: 25.0 kg (confidence 0.8)
-- Brand read off the item: nothing legible
+- Brand read off the item: ELEPAQ
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: minor surface scratches on yellow casing, dust and grime on control panel and engine area
+- Damage noted: minor scuffs on yellow casing, dirt and grime on lower frame and engine area
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
-- Text read: ELEPAQ GASOLINE GENERATOR | MANUFACTURED BY CONSTANT | ENG. ON
+- Text read: ELEPAQ GASOLINE GENERATOR | MANUFACTURED BY CONSTANT | OUTPUT | VOLTAGE | FREQUENCY | AC | ON/OFF | SPEED CONTROL
 
 ## Two readers
 - brand_text agreed by both readers
-- model_text differed between the two readers, so it is treated as unread
-- rating_text differed between the two readers, so it is treated as unread
-- serial_text was seen by only one reader, so it is treated as unread
-- 15 transcribed lines was seen by only one reader, so it is treated as unread
+- model_text was seen by only one reader, so it is treated as unread
+- rating_text was seen by only one reader, so it is treated as unread
+- 13 transcribed lines was seen by only one reader, so it is treated as unread
+
+## OCR read off the photos
+- ELEPAQ
+- GASOLINE GENERATOR
+- CST
+- MNCONSTANT
+- VADPENG—CE
+- $V6000
 
 ## Chain
-- **corroborate** -> dispute. brand_text agreed by both readers; model_text differed between the two readers, so it is treated as unread; rating_text differed between the two readers, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 15 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=gasoline generator brand=ELEPAQ model=None label=True lines=3
-- **grounding** -> dropped. brand
-- **forensics** -> flag. the reader stated brand it could not point to in the photos; looks like a catalogue or stock image
-- **retrieval** -> ok. query='ELEPAQ GASOLINE GENERATOR MANUFACTURED BY CONSTANT ENG. ON Very strong generator, and can ' hits=['Elepaq SV2200 2.5kVA', 'Elepaq SV6800 6.5kVA']
-- **identify** -> ok. chosen=Elepaq SV6800 margin=0.9
+- **ocr** -> ok. 6 lines: ELEPAQ | GASOLINE GENERATOR | CST | MNCONSTANT | VADPENG—CE | $V6000
+- **corroborate** -> dispute. brand_text agreed by both readers; model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; 13 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=generator brand=ELEPAQ model=None label=True lines=9
+- **forensics** -> flag. looks like a catalogue or stock image
+- **retrieval** -> ok. query='ELEPAQ ELEPAQ GASOLINE GENERATOR MANUFACTURED BY CONSTANT OUTPUT VOLTAGE FREQUENCY AC ON/O' hits=['Elepaq SV2200 2.5kVA', 'Elepaq SV6800 6.5kVA']
+- **identify** -> ok. chosen=Elepaq SV6800 margin=0.8
 - **abstain** -> abstain. seller names another generation
 
 ## Identification
@@ -37,20 +44,19 @@ Shortlist from the catalogue:
   - Elepaq SV2200 2.5kVA (0.5)
   - Elepaq SV6800 6.5kVA (0.5)
 
-**Not identified: EVIDENCE_INCOMPLETE.** The answer states 6.5kva, but no kva rating is legible on the item and the seller never stated one.
+**Not identified: EVIDENCE_INCOMPLETE.** The answer names sv6800, which appears nowhere on the item or in the seller's words. A photo of the plate would confirm or correct it.
 
-Evidence flags: the reader stated brand it could not point to in the photos; looks like a catalogue or stock image
+Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 28% on the best answer. It is probably a Elepaq SV6800 or a Elepaq SV2200, and the photos cannot separate them.**
+**Not sure enough to price: 27% on the best answer. It is probably a Elepaq SV6800 or a Elepaq SV2200, and the photos cannot separate them.**
 
-- Identification confidence: 28% (unknown)
+- Identification confidence: 27% (unknown)
 - Price confidence: 24%
-- It is weighing: Elepaq SV6800 (0.95), Elepaq SV2200 (0.05)
-- The answer states 6.5kva, but no kva rating is legible on the item and the seller never stated one.
+- It is weighing: Elepaq SV6800 (0.9), Elepaq SV2200 (0.1)
+- The answer names sv6800, which appears nowhere on the item or in the seller's words. A photo of the plate would confirm or correct it.
 - read off the item's own label
-- 3 lines seen by both readers
-- the reader stated brand it could not point to in the photos
+- 9 lines seen by both readers
 - looks like a catalogue or stock image
 - 5 claims are still unproven, 0 are supported
 
@@ -63,6 +69,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: two readings of these photos disagreed about what is written on the item_
 3. [PHOTO] Close-up of the rating plate showing the kVA and model number.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it start and run right now?
+- When was it last serviced, and what was done?
 
 ## Claims
 - [unverified] Required evidence 'code_shot' was not supplied
@@ -77,15 +88,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Photo of the engine, showing the recoil starter and carburettor.
 
 ## Price
-**7,883 to 15,475 NGN** (priced as material, width 0.65, method material_floor, 0 comparable prices)
+**25,728 to 42,850 NGN** (priced as material, width 0.4993, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 25 kg of steel 60%, plastic 30%, circuit_board 5%, rubber 5% (rates for circuit_board, plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 25 kg of steel 60%, plastic 30%, copper 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 10,187 NGN
+Scrap floor: 33,250 NGN
 
 Conditions attached to this price:
-- Not identified: The answer states 6.5kva, but no kva rating is legible on the item and the seller never stated one.
-- Evidence flag: the reader stated brand it could not point to in the photos
+- Not identified: The answer names sv6800, which appears nowhere on the item or in the seller's words. A photo of the plate would confirm or correct it.
 - Evidence flag: looks like a catalogue or stock image
 - Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on paper and photograph it next to the generator..
 - Required evidence 'overview' was not supplied -> not proven remotely. One photo of the whole generator from the front..

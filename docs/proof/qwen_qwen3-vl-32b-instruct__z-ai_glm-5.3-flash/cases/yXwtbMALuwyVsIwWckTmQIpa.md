@@ -1,13 +1,13 @@
 # Case yXwtbMALuwyVsIwWckTmQIpa
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  35738 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  27976 ms
 
 ## What the engine saw
 - Presentation: sealed_new
 - Category: phone (confidence 0.9)
-- Made of: paper 90%, plastic 10%
-- Estimated weight: 0.3 kg (confidence 0.8)
-- Brand read off the item: nothing legible
+- Made of: carton 90%, plastic 10%
+- Estimated weight: 0.3 kg (confidence 0.7)
+- Brand read off the item: TECNO
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
@@ -20,18 +20,22 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - brand_text agreed by both readers
 - model_text differed between the two readers, so it is treated as unread
 - rating_text was seen by only one reader, so it is treated as unread
-- 2 transcribed lines was seen by only one reader, so it is treated as unread
+- 1 transcribed lines was seen by only one reader, so it is treated as unread
+
+## OCR read off the photos
+- TECNO
+- OGENTERPRISE
 
 ## Chain
-- **corroborate** -> dispute. brand_text agreed by both readers; model_text differed between the two readers, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; 2 transcribed lines was seen by only one reader, so it is treated as unread
+- **ocr** -> ok. 2 lines: TECNO | OGENTERPRISE
+- **corroborate** -> dispute. brand_text agreed by both readers; model_text differed between the two readers, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; 1 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=phone brand=TECNO model=None label=False lines=1
-- **grounding** -> dropped. brand
-- **forensics** -> flag. the reader stated brand it could not point to in the photos; looks like a catalogue or stock image
-- **retrieval** -> ok. query='TECNO 6.67′′ AMOLED Display with Fingerprint on Display
+- **forensics** -> flag. looks like a catalogue or stock image
+- **retrieval** -> ok. query='TECNO TECNO 6.67′′ AMOLED Display with Fingerprint on Display
 1080*2400 Resolution
-32MP Front Ca' hits=['Tecno Pova 6', 'Tecno Camon 19', 'Tecno Camon 20', 'Tecno Camon 30', 'Tecno Camon 40']
-- **identify** -> ok. chosen=Tecno Camon 20 margin=0.3
-- **abstain** -> abstain. top score 0.6
+32MP Fr' hits=['Tecno Pova 6', 'Tecno Camon 19', 'Tecno Camon 20', 'Tecno Camon 30', 'Tecno Camon 40']
+- **identify** -> ok. chosen=Tecno Camon 20 margin=0.4
+- **abstain** -> abstain. no label, top score 0.7
 
 ## Identification
 Shortlist from the catalogue:
@@ -41,20 +45,19 @@ Shortlist from the catalogue:
   - Tecno Camon 30 (0.3)
   - Tecno Camon 40 (0.3)
 
-**Not identified: CANNOT_IDENTIFY.** The best candidate scored only 0.6, which is not sure enough to price.
+**Not identified: CANNOT_IDENTIFY.** No label, plate or settings screen was legible, and the visual match alone scored only 0.7.
 
-Evidence flags: the reader stated brand it could not point to in the photos; looks like a catalogue or stock image
+Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 16% on the best answer. It is probably a Tecno Camon 20 or a Tecno Camon 30, and the photos cannot separate them.**
+**Not sure enough to price: 18% on the best answer. It is probably a Tecno Camon 20 or a Tecno Camon 19, and the photos cannot separate them.**
 
-- Identification confidence: 16% (unknown)
+- Identification confidence: 18% (unknown)
 - Price confidence: 14%
-- It is weighing: Tecno Camon 20 (0.6), Tecno Camon 30 (0.3)
-- The best candidate scored only 0.6, which is not sure enough to price.
+- It is weighing: Tecno Camon 20 (0.7), Tecno Camon 19 (0.3)
+- No label, plate or settings screen was legible, and the visual match alone scored only 0.7.
 - no label, plate or settings screen was legible
 - 1 lines seen by both readers
-- the reader stated brand it could not point to in the photos
 - looks like a catalogue or stock image
 - 11 claims are still unproven, 0 are supported
 
@@ -67,6 +70,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: two readings of these photos disagreed about what is written on the item_
 3. [PHOTO] Screenshot of Settings then About, showing the model name and storage.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Has the screen or battery ever been changed?
+- Is it signed out of iCloud or Google, so a new owner can set it up?
 
 ## Claims
 - [unverifiable_remote] 6.67′′ AMOLED Display
@@ -89,13 +97,12 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 ## Price
 **10 to 37 NGN** (priced as material, width 1.1034, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 0.3 kg of paper 90%, plastic 10% (rates for paper, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 0.3 kg of carton 90%, plastic 10% (rates for carton, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
 Scrap floor: 19 NGN
 
 Conditions attached to this price:
-- Not identified: The best candidate scored only 0.6, which is not sure enough to price.
-- Evidence flag: the reader stated brand it could not point to in the photos
+- Not identified: No label, plate or settings screen was legible, and the visual match alone scored only 0.7.
 - Evidence flag: looks like a catalogue or stock image
 - 6.67′′ AMOLED Display -> not proven remotely. Agent will confirm at pickup.
 - AMOLED Display -> not proven remotely. Agent will confirm at pickup.

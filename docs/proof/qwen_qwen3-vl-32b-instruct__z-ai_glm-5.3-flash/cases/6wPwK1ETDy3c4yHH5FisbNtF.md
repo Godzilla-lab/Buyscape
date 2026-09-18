@@ -1,36 +1,37 @@
 # Case 6wPwK1ETDy3c4yHH5FisbNtF
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  40837 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  32695 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: laptop (confidence 0.95)
-- Made of: plastic 60%, steel 20%, circuit_board 10%, rubber 10%
-- Estimated weight: 1.5 kg (confidence 0.8)
-- Brand read off the item: nothing legible
+- Made of: plastic 60%, steel 30%, circuit_board 5%, rubber 5%
+- Estimated weight: 1.8 kg (confidence 0.8)
+- Brand read off the item: hp
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: none
+- Damage noted: screen is on, displaying colorful bokeh wallpaper, no visible cracks or dents on body, keyboard appears clean and intact, touchpad shows minor signs of use
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
+- Text read: hp
 
 ## Two readers
 - brand_text agreed by both readers
 - 2 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## Chain
+- **ocr** -> ok. 0 lines: 
 - **corroborate** -> dispute. brand_text agreed by both readers; 2 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=laptop brand=hp model=None label=False lines=0
-- **grounding** -> dropped. brand
-- **forensics** -> flag. the reader stated brand it could not point to in the photos; looks like a catalogue or stock image
-- **retrieval** -> ok. query='HP Probook 440 G7
+- **read_evidence** -> ok. category=laptop brand=hp model=None label=False lines=1
+- **forensics** -> flag. looks like a catalogue or stock image
+- **retrieval** -> ok. query='hp hp HP Probook 440 G7
 Intel Core i5
 10th Generation 
 8GB RAM 
 256GB SSD
-Excellent battery' hits=['HP ProBook 450 G7', 'HP 250 G7', 'HP 2000', 'HP Pavilion 15', 'HP EliteBook 840 G5']
-- **identify** -> refused. chosen=None None margin=0.1
+Excellent batter' hits=['HP ProBook 450 G7', 'HP 250 G7', 'HP 2000', 'HP Pavilion 15', 'HP EliteBook 840 G5']
+- **identify** -> refused. chosen=None None margin=0.2
 - **abstain** -> abstain. model refused
 
 ## Identification
@@ -41,21 +42,20 @@ Shortlist from the catalogue:
   - HP Pavilion 15 (0.4333)
   - HP EliteBook 840 G5 (0.3)
 
-**Not identified: CANNOT_IDENTIFY.** Seller claims ProBook 440 G7 but no label is legible to verify; 450 G7 shortlist entry conflicts with the missing numpad visible in the photo.
+**Not identified: CANNOT_IDENTIFY.** Only 'hp' is legible; seller names ProBook 440 G7, which is absent from the shortlist, and no model plate is visible to confirm any candidate.
 
-Evidence flags: the reader stated brand it could not point to in the photos; looks like a catalogue or stock image
+Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 5% on the best answer. It is probably a HP ProBook 450 G7 or a HP EliteBook 840 G5, and the photos cannot separate them.**
+**Not sure enough to price: 8% on the best answer. It is probably a HP ProBook 450 G7 or a HP EliteBook 840 G5, and the photos cannot separate them.**
 
-- Identification confidence: 5% (unknown)
+- Identification confidence: 8% (unknown)
 - Price confidence: 14%
-- It is weighing: HP ProBook 450 G7 (0.3), HP EliteBook 840 G5 (0.2)
-- Seller claims ProBook 440 G7 but no label is legible to verify; 450 G7 shortlist entry conflicts with the missing numpad visible in the photo.
+- It is weighing: HP ProBook 450 G7 (0.35), HP EliteBook 840 G5 (0.15)
+- Only 'hp' is legible; seller names ProBook 440 G7, which is absent from the shortlist, and no model plate is visible to confirm any candidate.
 - no label, plate or settings screen was legible
-- the two readers agreed on nothing legible
-- the next candidate was only 0.1 behind
-- the reader stated brand it could not point to in the photos
+- 1 lines seen by both readers
+- the next candidate was only 0.2 behind
 - looks like a catalogue or stock image
 - 10 claims are still unproven, 0 are supported
 
@@ -68,6 +68,12 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: two readings of these photos disagreed about what is written on the item_
 3. [PHOTO] Photo of the sticker on the underside showing the model, serial or service tag.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it stay on for more than ten minutes with the charger unplugged?
+- Has it ever been dropped, or had liquid spilled on it?
+- What does not work on it? Say none if everything works.
 
 ## Claims
 - [unverifiable_remote] HP Probook 440 G7
@@ -89,16 +95,16 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Screenshot of System Information (Windows) or About This Mac, showing the model, processor, RAM and storage.
 
 ## Price
-**190 to 957 NGN** (priced as material, width 1.3354, method material_floor, 0 comparable prices)
+**5,000 to 5,000 NGN** (priced as material, width 0.0, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 1.5 kg of plastic 60%, steel 20%, circuit_board 10%, rubber 10% (rates for circuit_board, plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 1.8 kg of plastic 60%, steel 30%, circuit_board 5%, rubber 5% (rates for plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 472 NGN
+Scrap floor: 454 NGN
 
 Conditions attached to this price:
-- Not identified: Seller claims ProBook 440 G7 but no label is legible to verify; 450 G7 shortlist entry conflicts with the missing numpad visible in the photo.
-- Evidence flag: the reader stated brand it could not point to in the photos
+- Not identified: Only 'hp' is legible; seller names ProBook 440 G7, which is absent from the shortlist, and no model plate is visible to confirm any candidate.
 - Evidence flag: looks like a catalogue or stock image
+- Raised to the 5,000 NGN minimum this business publishes for this kind of item.
 - HP Probook 440 G7 -> not proven remotely. Agent will confirm at pickup.
 - Intel Core i5 -> not proven remotely. Agent will confirm at pickup.
 - 10th Generation -> not proven remotely. Agent will confirm at pickup.

@@ -19,6 +19,7 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - rating_text was seen by only one reader, so it is treated as unread
 
 ## Chain
+- **ocr** -> ok. 0 lines: 
 - **corroborate** -> dispute. rating_text was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=automotive parts brand=None model=None label=False lines=0
 - **gate** -> lot. priced by material, identification skipped

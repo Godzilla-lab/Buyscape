@@ -1,17 +1,17 @@
 # Case 5cJOSIcZpc2V3RBYSBQScR0Z
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0007  |  42172 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0007  |  11884 ms
 
 ## What the engine saw
 - Presentation: single_unit
-- Category: compressor (confidence 0.9)
+- Category: electric motor or pump (confidence 0.8)
 - Made of: steel 70%, plastic 20%, copper 10%
-- Estimated weight: 35.0 kg (confidence 0.8)
+- Estimated weight: 35.0 kg (confidence 0.7)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: minor scratches on blue casing, dust and dirt on surface
+- Damage noted: minor scratches on blue paint, some dust and dirt on surface, white plastic bag partially covering top
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 - Text read: EMMY ELECTRONICS
@@ -19,9 +19,13 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 ## Two readers
 - 1 transcribed lines was seen by only one reader, so it is treated as unread
 
+## OCR read off the photos
+- EMMY ELECTRONI
+
 ## Chain
+- **ocr** -> ok. 1 lines: EMMY ELECTRONI
 - **corroborate** -> dispute. 1 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=compressor brand=None model=None label=False lines=1
+- **read_evidence** -> ok. category=electric motor or pump brand=None model=None label=False lines=1
 - **retrieval** -> empty. query='EMMY ELECTRONICS Alternator coil 15kva 100% copper coil with warranty one year payment on ' hits=[]
 - **gate** -> abstain. no candidates and no model text
 
@@ -47,6 +51,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: two readings of these photos disagreed about what is written on the item_
 2. [PHOTO] Close-up of any label, sticker or metal plate showing the brand and model.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- How much of it is there? Give the weight in kilogrammes or tons if you know it.
+- Does it still work?
+- Roughly how old is it, in years?
 
 ## Claims
 - [unverifiable_remote] Alternator coil 15kva

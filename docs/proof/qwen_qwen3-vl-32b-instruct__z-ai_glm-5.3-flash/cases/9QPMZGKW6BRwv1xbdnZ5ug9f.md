@@ -1,57 +1,65 @@
 # Case 9QPMZGKW6BRwv1xbdnZ5ug9f
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  34951 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  12794 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: generator (confidence 0.95)
-- Made of: steel 40%, plastic 30%, circuit_board 10%, rubber 10%, unknown 10%
+- Made of: steel 60%, plastic 30%, circuit_board 10%
 - Estimated weight: 25.0 kg (confidence 0.8)
-- Brand read off the item: nothing legible
-- Model read off the item: nothing legible
+- Brand read off the item: SUMEC FIRMAN
+- Model read off the item: SPG-4000
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: Plastic wrap partially torn and dirty, Surface of generator has minor scuffs and dust
+- Damage noted: Item wrapped in plastic film, appears unused., No visible damage or wear.
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
-- Text read: SUMEC FIRMAN SPG4000 Petrol Generator
+- Text read: SUMEC FIRMAN SPG4000 Petrol Generator | MODEL: SPG-4000
 
 ## Two readers
 - brand_text agreed by both readers
 - model_text agreed by both readers
 - rating_text was seen by only one reader, so it is treated as unread
-- serial_text was seen by only one reader, so it is treated as unread
-- 12 transcribed lines was seen by only one reader, so it is treated as unread
+- 13 transcribed lines was seen by only one reader, so it is treated as unread
+
+## OCR read off the photos
+- hine
+- ra
+- Cu
+- SUMEC
+- FIRMAN
+- SPO
+- Petrol Generator
+- SPG4000
 
 ## Chain
-- **corroborate** -> dispute. brand_text agreed by both readers; model_text agreed by both readers; rating_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 12 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=generator brand=SUMEC FIRMAN model=SPG4000 label=True lines=1
-- **grounding** -> dropped. brand, model
-- **forensics** -> flag. the reader stated brand, model it could not point to in the photos; looks like a catalogue or stock image
-- **retrieval** -> ok. query='SUMEC FIRMAN SPG4000 Petrol Generator Firman 4kva generator. Pure copper coil.' hits=['Sumec Firman SPG2900 2.8kVA', 'Sumec Firman SPG3000 3.1kVA', 'Sumec Firman ECO8990ES 6.5kVA', 'Sumec Firman SPG8800 8.1kVA']
-- **identify** -> ok. chosen=Sumec Firman SPG4000 margin=None
-- **abstain** -> pass. confidence=0.47 margin=None
+- **ocr** -> ok. 8 lines: hine | ra | Cu | SUMEC | FIRMAN | SPO | Petrol Generator | SPG4000
+- **corroborate** -> dispute. brand_text agreed by both readers; model_text agreed by both readers; rating_text was seen by only one reader, so it is treated as unread; 13 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=generator brand=SUMEC FIRMAN model=SPG-4000 label=True lines=2
+- **forensics** -> flag. looks like a catalogue or stock image
+- **retrieval** -> ok. query='SUMEC FIRMAN SPG-4000 SUMEC FIRMAN SPG4000 Petrol Generator MODEL: SPG-4000 Firman 4kva ge' hits=['Sumec Firman SPG3000 3.1kVA', 'Sumec Firman SPG2900 2.8kVA', 'Sumec Firman ECO8990ES 6.5kVA', 'Sumec Firman SPG8800 8.1kVA']
+- **identify** -> label. named from the label: SUMEC FIRMAN SPG-4000, not in the catalogue
+- **abstain** -> pass. confidence=0.45 from the label
 
 ## Identification
 Shortlist from the catalogue:
+  - Sumec Firman SPG3000 3.1kVA (0.5)
   - Sumec Firman SPG2900 2.8kVA (0.5)
-  - Sumec Firman SPG3000 3.1kVA (0.4)
   - Sumec Firman ECO8990ES 6.5kVA (0.3)
   - Sumec Firman SPG8800 8.1kVA (0.3)
 
-**Answer: Sumec Firman SPG4000** (margin None)
+**Answer: SUMEC FIRMAN SPG-4000** (named from the item's own label; not in the catalogue)
 
-Evidence flags: the reader stated brand, model it could not point to in the photos; looks like a catalogue or stock image
+Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 47% on the best answer. It is probably a Sumec Firman SPG4000, and the photos cannot separate them.**
+**45%: the photos do not say what this is.**
 
-- Identification confidence: 47% (unsure)
+- Identification confidence: 45% (unsure)
 - Price confidence: 0%
-- It is weighing: Sumec Firman SPG4000 (0.95)
+- named from the item's own label, which the catalogue does not list
 - read off the item's own label
-- 1 lines seen by both readers
-- the reader stated brand, model it could not point to in the photos
+- 2 lines seen by both readers
 - looks like a catalogue or stock image
 - 7 claims are still unproven, 0 are supported
 
@@ -64,6 +72,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: two readings of these photos disagreed about what is written on the item_
 3. [PHOTO] Close-up of the rating plate showing the kVA and model number.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it start and run right now?
+- When was it last serviced, and what was done?
 
 ## Claims
 - [unverified] Firman 4kva generator
@@ -89,7 +102,6 @@ No usable comparable sales (0 found, 2 needed), so the range comes from the publ
 Scrap floor: 30,000 NGN
 
 Conditions attached to this price:
-- Evidence flag: the reader stated brand, model it could not point to in the photos
 - Evidence flag: looks like a catalogue or stock image
 - Firman 4kva generator -> not proven remotely. Agent reads the rating plate.
 - Pure copper coil -> not proven remotely. Agent opens the side cover and inspects the windings.

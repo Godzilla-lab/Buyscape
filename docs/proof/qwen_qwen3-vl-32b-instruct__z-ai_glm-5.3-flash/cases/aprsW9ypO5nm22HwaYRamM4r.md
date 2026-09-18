@@ -1,36 +1,38 @@
 # Case aprsW9ypO5nm22HwaYRamM4r
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0013  |  25150 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  29339 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: generator (confidence 0.95)
 - Made of: steel 60%, plastic 30%, circuit_board 10%
-- Estimated weight: 25.0 kg (confidence 0.8)
-- Brand read off the item: nothing legible
+- Estimated weight: 18.0 kg (confidence 0.7)
+- Brand read off the item: ELEPAQ
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: item wrapped in plastic, no visible damage to casing, control panel appears intact
+- Damage noted: Plastic cover over the unit, slightly dusty., Minor scuffs on the yellow casing.
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: ELEPAQ | ELEPAQ | CE
+- Text read: ELEPAQ | ENGINE: 4-STROKE | ELOBEST D KING POWER
 
 ## Two readers
 - brand_text agreed by both readers
+- rating_text differed between the two readers, so it is treated as unread
 - model_text was seen by only one reader, so it is treated as unread
-- rating_text was seen by only one reader, so it is treated as unread
-- 6 transcribed lines was seen by only one reader, so it is treated as unread
+- 9 transcribed lines was seen by only one reader, so it is treated as unread
+
+## OCR read off the photos
+- ELEPAQ
+- -CONESANT
+- ELOBEST D KING POWER
 
 ## Chain
-- **corroborate** -> dispute. brand_text agreed by both readers; model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; 6 transcribed lines was seen by only one reader, so it is treated as unread
+- **ocr** -> ok. 3 lines: ELEPAQ | -CONESANT | ELOBEST D KING POWER
+- **corroborate** -> dispute. brand_text agreed by both readers; rating_text differed between the two readers, so it is treated as unread; model_text was seen by only one reader, so it is treated as unread; 9 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=generator brand=ELEPAQ model=None label=True lines=3
-- **grounding** -> dropped. brand
-- **forensics** -> flag. the reader stated brand it could not point to in the photos
-- **retrieval** -> ok. query='ELEPAQ ELEPAQ CE 1.5kva Elepaq constant generator sV 2500 
-100% copper coil 
-1 year warran' hits=['Elepaq SV2200 2.5kVA', 'Elepaq SV6800 6.5kVA', 'Thermocool TC2700 2.5kVA', 'Haier Thermocool HTG2700 2.5kVA', 'Kemage KM6500 5.5kVA']
-- **identify** -> refused. chosen=Elepaq None margin=0.4
+- **retrieval** -> ok. query='ELEPAQ ELEPAQ ENGINE: 4-STROKE ELOBEST D KING POWER 1.5kva Elepaq constant generator sV 25' hits=['Elepaq SV2200 2.5kVA', 'Elepaq SV6800 6.5kVA', 'Thermocool TC2700 2.5kVA', 'Haier Thermocool HTG2700 2.5kVA', 'Kemage KM6500 5.5kVA']
+- **identify** -> refused. chosen=Elepaq None margin=0.3
 - **abstain** -> abstain. model refused
 
 ## Identification
@@ -41,20 +43,17 @@ Shortlist from the catalogue:
   - Haier Thermocool HTG2700 2.5kVA (0.1833)
   - Kemage KM6500 5.5kVA (0.15)
 
-**Not identified: CANNOT_IDENTIFY.** Brand ELEPAQ is legible but the model number on the label is not readable; seller claims SV2500, which is not on the shortlist and is not confirmed by the photo. SV2200 is the closest shortlist match but unverified.
-
-Evidence flags: the reader stated brand it could not point to in the photos
+**Not identified: CANNOT_IDENTIFY.** Seller states SV2500 but model designation is not legible on the label; no SV2500 entry in shortlist and SV2200 differs
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 15% on the best answer. It is probably a Elepaq SV2200 or a Elepaq SV6800, and the photos cannot separate them.**
+**Not sure enough to price: 21% on the best answer. It is probably a Elepaq SV2200 or a Elepaq SV6800, and the photos cannot separate them.**
 
-- Identification confidence: 15% (unknown)
+- Identification confidence: 21% (unknown)
 - Price confidence: 16%
-- It is weighing: Elepaq SV2200 (0.5), Elepaq SV6800 (0.1)
-- Brand ELEPAQ is legible but the model number on the label is not readable; seller claims SV2500, which is not on the shortlist and is not confirmed by the photo. SV2200 is the closest shortlist match but unverified.
+- It is weighing: Elepaq SV2200 (0.35), Elepaq SV6800 (0.05)
+- Seller states SV2500 but model designation is not legible on the label; no SV2500 entry in shortlist and SV2200 differs
 - read off the item's own label
 - 3 lines seen by both readers
-- the reader stated brand it could not point to in the photos
 - 9 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -66,6 +65,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: nothing on the item says which model this is_
 3. [PHOTO] Close-up of the plate on the engine block showing the engine model and serial.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it start and run right now?
+- When was it last serviced, and what was done?
 
 ## Claims
 - [unverified] 1.5kva Elepaq constant generator sV 2500
@@ -87,15 +91,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Photo of the engine, showing the recoil starter and carburettor.
 
 ## Price
-**4,779 to 20,350 NGN** (priced as material, width 1.2392, method material_floor, 0 comparable prices)
+**2,939 to 9,252 NGN** (priced as material, width 1.0356, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 25 kg of steel 60%, plastic 30%, circuit_board 10% (rates for circuit_board, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 18 kg of steel 60%, plastic 30%, circuit_board 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 12,000 NGN
+Scrap floor: 7,380 NGN
 
 Conditions attached to this price:
-- Not identified: Brand ELEPAQ is legible but the model number on the label is not readable; seller claims SV2500, which is not on the shortlist and is not confirmed by the photo. SV2200 is the closest shortlist match but unverified.
-- Evidence flag: the reader stated brand it could not point to in the photos
+- Not identified: Seller states SV2500 but model designation is not legible on the label; no SV2500 entry in shortlist and SV2200 differs
 - 1.5kva Elepaq constant generator sV 2500 -> not proven remotely. Agent reads the rating plate.
 - 1.5kva Elepaq constant generator sV 2500 -> not proven remotely. Agent reads the rating plate.
 - 100% copper coil -> not proven remotely. Agent opens the side cover and inspects the windings.

@@ -1,38 +1,50 @@
 # Case aKcMvVIm0xZJD0S0xoDnjcW3
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0007  |  18277 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0007  |  25838 ms
 
 ## What the engine saw
 - Presentation: sealed_new
 - Category: phone (confidence 0.95)
 - Made of: paper 80%, plastic 20%
 - Estimated weight: 0.5 kg (confidence 0.8)
-- Brand read off the item: nothing legible
-- Model read off the item: nothing legible
+- Brand read off the item: Tecno
+- Model read off the item: CAMON 50
 - Rating read: none
 - Label, plate or settings screen legible: no
 - Damage noted: none
-- Looks like a catalogue image: yes
+- Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: CAMON 50 | Tecno AI | Sony's | vivo Y21d
+- Text read: CAMON 50 | Tecno AI | Super-Zoom FlexiSnap | Sony's | vivo Y21d
 
 ## Two readers
-- brand_text was seen by only one reader, so it is treated as unread
-- model_text was seen by only one reader, so it is treated as unread
-- 5 transcribed lines was seen by only one reader, so it is treated as unread
+- brand_text agreed by both readers
+- model_text agreed by both readers
+- 3 transcribed lines was seen by only one reader, so it is treated as unread
+
+## OCR read off the photos
+- vivo
+- Y21d
+- Ploanop
+- Super-Zoom
+- CAMON
+- Sony's
+- 1P69/1P66
+- IP69K
+- SHAE
+- G
+- W8-
+- Pro
 
 ## Chain
-- **corroborate** -> dispute. brand_text was seen by only one reader, so it is treated as unread; model_text was seen by only one reader, so it is treated as unread; 5 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=phone brand=None model=None label=False lines=4
-- **forensics** -> flag. looks like a catalogue or stock image
+- **ocr** -> ok. 16 lines: vivo | Y21d | Ploanop | Super-Zoom | CAMON | Sony's | 1P69/1P66 | IP69K | SHAE | G | W8- | Pro | 5 | 0 | TECNO AI | 13
+- **corroborate** -> dispute. brand_text agreed by both readers; model_text agreed by both readers; 3 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=phone brand=Tecno model=CAMON 50 label=False lines=5
 - **gate** -> abstain. multiple items in frame
 
 ## Identification
 No catalogue candidates matched.
 
 **Not identified: EVIDENCE_INCOMPLETE.** The photos show more than one item, so no single item can be identified.
-
-Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
 **0%: the photos do not say what this is.**
@@ -41,8 +53,7 @@ Evidence flags: looks like a catalogue or stock image
 - Price confidence: 20%
 - The photos show more than one item, so no single item can be identified.
 - no label, plate or settings screen was legible
-- 4 lines seen by both readers
-- looks like a catalogue or stock image
+- 5 lines seen by both readers
 - 7 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -50,10 +61,15 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 ## What the seller is asked for next (shown in the app)
 1. [PHOTO] Photograph one item on its own, with nothing else in the picture.
    _why: the photos show more than one item_
-2. [PHOTO] Take your own photo of the actual item you are selling.
-   _why: this looks like a catalogue picture, not the real unit_
-3. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: If you have the box, photograph the label showing the model, storage and IMEI. Then, still filming, do this on the item's own screen and hold it steady so the writing can be read: open settings then About, showing the model name and storage. Then, without stopping the video: Pull out the SIM tray and photograph the open slot. Finish with: A short clip: press power, unlock, then open the camera app. Keep filming the whole time. Do not cut between clips.
+2. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: If you have the box, photograph the label showing the model, storage and IMEI. Then, still filming, do this on the item's own screen and hold it steady so the writing can be read: open settings then About, showing the model name and storage. Then, without stopping the video: Pull out the SIM tray and photograph the open slot. Finish with: A short clip: press power, unlock, then open the camera app. Keep filming the whole time. Do not cut between clips.
    _why: two readings of these photos disagreed about what is written on the item_
+3. [PHOTO] Screenshot of Settings then About, showing the model name and storage.
+   _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Has the screen or battery ever been changed?
+- Is it signed out of iCloud or Google, so a new owner can set it up?
 
 ## Claims
 - [unverifiable_remote] Performance: MediaTek Helio G200 Ultimate processor
@@ -78,7 +94,6 @@ Scrap floor: 34 NGN
 
 Conditions attached to this price:
 - Not identified: The photos show more than one item, so no single item can be identified.
-- Evidence flag: looks like a catalogue or stock image
 - Performance: MediaTek Helio G200 Ultimate processor -> not proven remotely. Agent will confirm at pickup.
 - Display: 6.78-inch AMOLED, 1.5K resolution -> not proven remotely. Agent will confirm at pickup.
 - Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on paper and take one photo with the paper next to the phone..

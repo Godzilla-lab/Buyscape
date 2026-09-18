@@ -1,35 +1,38 @@
 # Case tLi99jwVrXb2zwrj9vOFkfqr
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  24832 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  29186 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: laptop (confidence 0.95)
-- Made of: plastic 40%, steel 30%, circuit_board 20%, rubber 10%
+- Made of: plastic 60%, steel 20%, circuit_board 10%, copper 10%
 - Estimated weight: 2.5 kg (confidence 0.8)
-- Brand read off the item: nothing legible
+- Brand read off the item: LENOVO
 - Model read off the item: nothing legible
 - Rating read: none
-- Label, plate or settings screen legible: no
+- Label, plate or settings screen legible: yes
 - Damage noted: none
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
-- Text read: LENOVO | RTX
+- Text read: GAPTECH | LENOVO | NVIDIA GeForce RTX
 
 ## Two readers
 - brand_text agreed by both readers
-- 3 transcribed lines was seen by only one reader, so it is treated as unread
+- 2 transcribed lines was seen by only one reader, so it is treated as unread
+
+## OCR read off the photos
+- RTX
+- GAPTECH
+- Lenovo
 
 ## Chain
-- **corroborate** -> dispute. brand_text agreed by both readers; 3 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=laptop brand=LENOVO model=None label=False lines=2
-- **grounding** -> dropped. brand
-- **forensics** -> flag. the reader stated brand it could not point to in the photos; looks like a catalogue or stock image
-- **retrieval** -> ok. query='LENOVO RTX GAPTECH online store 
-U.S used Laptops and Phones 
-Product description 
-Product' hits=['Lenovo 14w', 'Lenovo ThinkPad T480', 'Lenovo ThinkPad T470', 'Lenovo ThinkPad X1 Carbon Gen 6', 'Lenovo IdeaPad 3']
-- **identify** -> refused. chosen=Lenovo None margin=None
+- **ocr** -> ok. 3 lines: RTX | GAPTECH | Lenovo
+- **corroborate** -> dispute. brand_text agreed by both readers; 2 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=laptop brand=LENOVO model=None label=True lines=3
+- **forensics** -> flag. looks like a catalogue or stock image
+- **retrieval** -> ok. query='LENOVO GAPTECH LENOVO NVIDIA GeForce RTX GAPTECH online store 
+U.S used Laptops and Phones' hits=['Lenovo 14w', 'Lenovo ThinkPad T480', 'Lenovo ThinkPad T470', 'Lenovo ThinkPad X1 Carbon Gen 6', 'Lenovo IdeaPad 3']
+- **identify** -> refused. chosen=LENOVO None margin=None
 - **abstain** -> abstain. model refused
 
 ## Identification
@@ -40,19 +43,18 @@ Shortlist from the catalogue:
   - Lenovo ThinkPad X1 Carbon Gen 6 (0.3)
   - Lenovo IdeaPad 3 (0.3)
 
-**Not identified: CANNOT_IDENTIFY.** Visible RGB keyboard, RTX and AMD stickers indicate a Legion/LOQ-class gaming laptop, but no model name is legible and every shortlisted entry is a thin-and-light office notebook that this device clearly is not.
+**Not identified: CANNOT_IDENTIFY.** Photos show an RTX gaming laptop with RGB keyboard and AMD Ryzen sticker; no shortlist entry is a gaming model and no model name is legible.
 
-Evidence flags: the reader stated brand it could not point to in the photos; looks like a catalogue or stock image
+Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
 **0%: the photos do not say what this is.**
 
 - Identification confidence: 0% (unknown)
 - Price confidence: 22%
-- Visible RGB keyboard, RTX and AMD stickers indicate a Legion/LOQ-class gaming laptop, but no model name is legible and every shortlisted entry is a thin-and-light office notebook that this device clearly is not.
-- no label, plate or settings screen was legible
-- 2 lines seen by both readers
-- the reader stated brand it could not point to in the photos
+- Photos show an RTX gaming laptop with RGB keyboard and AMD Ryzen sticker; no shortlist entry is a gaming model and no model name is legible.
+- read off the item's own label
+- 3 lines seen by both readers
 - looks like a catalogue or stock image
 - 6 claims are still unproven, 0 are supported
 
@@ -65,6 +67,12 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: two readings of these photos disagreed about what is written on the item_
 3. [PHOTO] Photo of the sticker on the underside showing the model, serial or service tag.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it stay on for more than ten minutes with the charger unplugged?
+- Has it ever been dropped, or had liquid spilled on it?
+- What does not work on it? Say none if everything works.
 
 ## Claims
 - [unverifiable_remote] Product- Lenovo
@@ -79,16 +87,16 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Screenshot of System Information (Windows) or About This Mac, showing the model, processor, RAM and storage.
 
 ## Price
-**909 to 2,655 NGN** (priced as material, width 0.9792, method material_floor, 0 comparable prices)
+**5,000 to 5,000 NGN** (priced as material, width 0.0, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 2.5 kg of plastic 40%, steel 30%, circuit_board 20%, rubber 10% (rates for circuit_board, plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 2.5 kg of plastic 60%, steel 20%, circuit_board 10%, copper 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 1,237 NGN
+Scrap floor: 3,100 NGN
 
 Conditions attached to this price:
-- Not identified: Visible RGB keyboard, RTX and AMD stickers indicate a Legion/LOQ-class gaming laptop, but no model name is legible and every shortlisted entry is a thin-and-light office notebook that this device clearly is not.
-- Evidence flag: the reader stated brand it could not point to in the photos
+- Not identified: Photos show an RTX gaming laptop with RGB keyboard and AMD Ryzen sticker; no shortlist entry is a gaming model and no model name is legible.
 - Evidence flag: looks like a catalogue or stock image
+- Raised to the 5,000 NGN minimum this business publishes for this kind of item.
 - Product- Lenovo -> not proven remotely. Agent will confirm at pickup.
 - Model -... -> not proven remotely. Agent will confirm at pickup.
 - Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on paper and take one photo with the paper next to the laptop..

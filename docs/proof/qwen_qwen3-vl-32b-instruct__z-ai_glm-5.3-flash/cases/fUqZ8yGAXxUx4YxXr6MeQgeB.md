@@ -1,6 +1,6 @@
 # Case fUqZ8yGAXxUx4YxXr6MeQgeB
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  23146 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  30304 ms
 
 ## What the engine saw
 - Presentation: single_unit
@@ -19,7 +19,12 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 ## Two readers
 - 1 transcribed lines was seen by only one reader, so it is treated as unread
 
+## OCR read off the photos
+- POSTEDONJUI
+- SLIM GADGETS
+
 ## Chain
+- **ocr** -> ok. 2 lines: POSTEDONJUI | SLIM GADGETS
 - **corroborate** -> dispute. 1 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=phone brand=None model=None label=False lines=1
 - **forensics** -> flag. looks like a catalogue or stock image
@@ -66,6 +71,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 3. [PHOTO] Screenshot of Settings then About, showing the model name and storage.
    _why: nothing on the item says which model this is_
 
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Has the screen or battery ever been changed?
+- Is it signed out of iCloud or Google, so a new owner can set it up?
+
 ## Claims
 - [unverifiable_remote] iPhone 16e
 - [unverified] 128gb
@@ -87,11 +97,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
-**18 to 126 NGN** (priced as material, width 1.4847, method material_floor, 0 comparable prices)
+**14 to 66 NGN** (priced as material, width 1.284, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 0.2 kg of plastic 60%, steel 20%, glass 10%, circuit_board 10% (rates for circuit_board, glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 0.2 kg of plastic 60%, steel 20%, glass 10%, circuit_board 10% (rates for glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 62 NGN
+Scrap floor: 48 NGN
 
 Conditions attached to this price:
 - Not identified: No legible label or screen distinguishes the model; seller claims iPhone 16e, which is absent from the shortlist and unverifiable in the photos.

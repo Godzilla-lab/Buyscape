@@ -1,6 +1,6 @@
 # Case mt1N6JWmqR0JfOYlRa1aJ1iA
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  40133 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  33558 ms
 
 ## What the engine saw
 - Presentation: sealed_new
@@ -10,20 +10,24 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Brand read off the item: Galaxy
 - Model read off the item: S23 Ultra
 - Rating read: none
-- Label, plate or settings screen legible: yes
+- Label, plate or settings screen legible: no
 - Damage noted: none
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: Galaxy | S23 Ultra
+- Text read: Galaxy | S23 Ultra | DYNASTY GADGETS
+
+## OCR read off the photos
+- DYNASTYGADGETS
 
 ## Chain
-- **corroborate** -> unavailable. openrouter:mistralai/mistral-small-3.2-24b-instruct failed after retries: no JSON object in response: {
-  "presentation"
-- **read_evidence** -> ok. category=phone brand=Galaxy model=S23 Ultra label=True lines=2
-- **retrieval** -> ok. query='Galaxy S23 Ultra Galaxy S23 Ultra Brand New Google Pixel 10 Pro XL
-Available for confirmat' hits=['Samsung Galaxy S23', 'Google Pixel 7', 'Google Pixel 8', 'Google Pixel 9', 'Samsung Galaxy S21']
-- **identify** -> ok. chosen=Google Pixel 9 margin=0.2
-- **abstain** -> abstain. top score 0.55
+- **corroborate** -> unavailable. no fixture for task=read_evidence key=a94ad2da50191b9c740ef83775806285 (model=mistralai/mistral-small-3.2-24b-instruct);
+- **ocr** -> ok. 1 lines: DYNASTYGADGETS
+- **corroborate** -> agree. nothing identifying was read by either
+- **read_evidence** -> ok. category=phone brand=Galaxy model=S23 Ultra label=False lines=3
+- **retrieval** -> ok. query='Galaxy S23 Ultra Galaxy S23 Ultra DYNASTY GADGETS Brand New Google Pixel 10 Pro XL
+Availab' hits=['Samsung Galaxy S23', 'Google Pixel 7', 'Google Pixel 8', 'Google Pixel 9', 'Samsung Galaxy S21']
+- **identify** -> refused. chosen=None None margin=0.3
+- **abstain** -> abstain. model refused
 
 ## Identification
 Shortlist from the catalogue:
@@ -33,18 +37,17 @@ Shortlist from the catalogue:
   - Google Pixel 9 (0.5)
   - Samsung Galaxy S21 (0.2)
 
-**Not identified: CANNOT_IDENTIFY.** The best candidate scored only 0.55, which is not sure enough to price.
+**Not identified: CANNOT_IDENTIFY.** Box model text is not legible; seller claims Pixel 10 Pro XL, which is outside the shortlist and not printed legibly on the box. Box art fits Pixel 9/10 series but exact model cannot be confirmed.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 21% on the best answer. It is probably a Google Pixel 9 or a Google Pixel 9, and the photos cannot separate them.**
+**Not sure enough to price: 16% on the best answer. It is probably a Google Pixel 9 or a Google Pixel 8, and the photos cannot separate them.**
 
-- Identification confidence: 21% (unknown)
+- Identification confidence: 16% (unknown)
 - Price confidence: 18%
-- It is weighing: Google Pixel 9 (0.55), Google Pixel 9 (0.35)
-- The best candidate scored only 0.55, which is not sure enough to price.
-- read off the item's own label
+- It is weighing: Google Pixel 9 (0.45), Google Pixel 8 (0.15)
+- Box model text is not legible; seller claims Pixel 10 Pro XL, which is outside the shortlist and not printed legibly on the box. Box art fits Pixel 9/10 series but exact model cannot be confirmed.
+- no label, plate or settings screen was legible
 - only one reader saw these photos, the second was unavailable
-- the next candidate was only 0.2 behind
 - 8 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -56,6 +59,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: nothing on the item says which model this is_
 3. [PHOTO] If you have the box, photograph the label showing the model, storage and IMEI.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Has the screen or battery ever been changed?
+- Is it signed out of iCloud or Google, so a new owner can set it up?
 
 ## Claims
 - [unverifiable_remote] Brand New Google Pixel 10 Pro XL
@@ -80,7 +88,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 27 NGN
 
 Conditions attached to this price:
-- Not identified: The best candidate scored only 0.55, which is not sure enough to price.
+- Not identified: Box model text is not legible; seller claims Pixel 10 Pro XL, which is outside the shortlist and not printed legibly on the box. Box art fits Pixel 9/10 series but exact model cannot be confirmed.
 - Brand New Google Pixel 10 Pro XL -> not proven remotely. Agent will confirm at pickup.
 - Google Pixel 10 Pro XL -> not proven remotely. Agent will confirm at pickup.
 - Available for confirmation b4 payment -> not proven remotely. Agent will confirm at pickup.

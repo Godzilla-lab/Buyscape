@@ -1,30 +1,37 @@
 # Case 2VQbFRLrPvw1JvNxY8ZVPSwB
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  24106 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  27924 ms
 
 ## What the engine saw
 - Presentation: sealed_new
 - Category: computer_system (confidence 0.9)
-- Made of: paper 100%
-- Estimated weight: 15.0 kg (confidence 0.6)
+- Made of: paper 90%, plastic 10%
+- Estimated weight: 12.0 kg (confidence 0.7)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
 - Damage noted: none
-- Looks like a catalogue image: no
+- Looks like a catalogue image: yes
 - Screenshot of a gallery: no
-- Text read: UN 3481 | DASHLINK INTEGRATED SYSTEM | Intel Inside
+- Text read: UN 3481 | CE | Intel Inside
 
 ## Two readers
-- brand_text was seen by only one reader, so it is treated as unread
-- 5 transcribed lines was seen by only one reader, so it is treated as unread
+- brand_text differed between the two readers, so it is treated as unread
+- 3 transcribed lines was seen by only one reader, so it is treated as unread
+
+## OCR read off the photos
+- Q
+- UN 3481
+- 112-
 
 ## Chain
-- **corroborate** -> dispute. brand_text was seen by only one reader, so it is treated as unread; 5 transcribed lines was seen by only one reader, so it is treated as unread
+- **ocr** -> ok. 3 lines: Q | UN 3481 | 112-
+- **corroborate** -> dispute. brand_text differed between the two readers, so it is treated as unread; 3 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=computer_system brand=None model=None label=True lines=3
-- **retrieval** -> ok. query='UN 3481 DASHLINK INTEGRATED SYSTEM Intel Inside Hp probook 440 g10 intel core i7 13th gen ' hits=['HP 2000', 'HP ProBook 450 G7', 'HP 250 G7', 'HP Pavilion 15', 'HP EliteBook 840 G5']
-- **identify** -> refused. chosen=None None margin=0.05
+- **forensics** -> flag. looks like a catalogue or stock image
+- **retrieval** -> ok. query='UN 3481 CE Intel Inside Hp probook 440 g10 intel core i7 13th gen (up to 5.0 ghz),8gb ddr4' hits=['HP 2000', 'HP ProBook 450 G7', 'HP 250 G7', 'HP Pavilion 15', 'HP EliteBook 840 G5']
+- **identify** -> refused. chosen=HP None margin=None
 - **abstain** -> abstain. model refused
 
 ## Identification
@@ -35,27 +42,35 @@ Shortlist from the catalogue:
   - HP Pavilion 15 (0.4333)
   - HP EliteBook 840 G5 (0.3)
 
-**Not identified: CANNOT_IDENTIFY.** Box shows HP logo, UN 3481 and Intel Inside but no legible model name; seller claims ProBook 440 G10, which is not on the shortlist and is not printed legibly on the box, so no candidate is supported.
+**Not identified: CANNOT_IDENTIFY.** Sealed HP retail box; no model name or number legible anywhere, only HP logo, UN 3481, CE and Intel Inside. Seller's claim of ProBook 440 G10 is unverified and outside the shortlist.
+
+Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 5% on the best answer. It is probably a HP ProBook 450 G7 or a HP EliteBook 840 G5, and the photos cannot separate them.**
+**0%: the photos do not say what this is.**
 
-- Identification confidence: 5% (unknown)
+- Identification confidence: 0% (unknown)
 - Price confidence: 14%
-- It is weighing: HP ProBook 450 G7 (0.1), HP EliteBook 840 G5 (0.05)
-- Box shows HP logo, UN 3481 and Intel Inside but no legible model name; seller claims ProBook 440 G10, which is not on the shortlist and is not printed legibly on the box, so no candidate is supported.
+- Sealed HP retail box; no model name or number legible anywhere, only HP logo, UN 3481, CE and Intel Inside. Seller's claim of ProBook 440 G10 is unverified and outside the shortlist.
 - read off the item's own label
 - 3 lines seen by both readers
-- the next candidate was only 0.05 behind
+- looks like a catalogue or stock image
 - 12 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
 
 ## What the seller is asked for next (shown in the app)
-1. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: Close-up of any label, sticker or metal plate showing the brand and model. Then, without stopping the video: If it opens without tools, open it and photograph the inside. Keep filming the whole time. Do not cut between clips.
+1. [PHOTO] Take your own photo of the actual item you are selling.
+   _why: this looks like a catalogue picture, not the real unit_
+2. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: Close-up of any label, sticker or metal plate showing the brand and model. Then, without stopping the video: If it opens without tools, open it and photograph the inside. Keep filming the whole time. Do not cut between clips.
    _why: two readings of these photos disagreed about what is written on the item_
-2. [PHOTO] Close-up of any label, sticker or metal plate showing the brand and model.
+3. [PHOTO] Close-up of any label, sticker or metal plate showing the brand and model.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- How much of it is there? Give the weight in kilogrammes or tons if you know it.
+- Does it still work?
+- Roughly how old is it, in years?
 
 ## Claims
 - [unverifiable_remote] Hp probook 440 g10
@@ -84,14 +99,15 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Tell us what it is, whether it works, and roughly how heavy it is.
 
 ## Price
-**270 to 1,800 NGN** (priced as material, width 1.4783, method material_floor, 0 comparable prices)
+**230 to 1,512 NGN** (priced as material, width 1.4711, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 15 kg of paper 100% (rates for paper are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 12 kg of paper 90%, plastic 10% (rates for paper, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 900 NGN
+Scrap floor: 768 NGN
 
 Conditions attached to this price:
-- Not identified: Box shows HP logo, UN 3481 and Intel Inside but no legible model name; seller claims ProBook 440 G10, which is not on the shortlist and is not printed legibly on the box, so no candidate is supported.
+- Not identified: Sealed HP retail box; no model name or number legible anywhere, only HP logo, UN 3481, CE and Intel Inside. Seller's claim of ProBook 440 G10 is unverified and outside the shortlist.
+- Evidence flag: looks like a catalogue or stock image
 - Hp probook 440 g10 -> not proven remotely. Weigh on the scale and photograph the display.
 - intel core i7 13th gen (up to 5.0 ghz) -> not proven remotely. Weigh on the scale and photograph the display.
 - 8gb ddr4 ram -> not proven remotely. Weigh on the scale and photograph the display.

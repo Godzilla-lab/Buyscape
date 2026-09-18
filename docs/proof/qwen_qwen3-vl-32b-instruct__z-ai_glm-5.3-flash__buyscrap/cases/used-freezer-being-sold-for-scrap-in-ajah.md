@@ -18,7 +18,11 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 ## Two readers
 - 1 transcribed lines was seen by only one reader, so it is treated as unread
 
+## OCR read off the photos
+- 3
+
 ## Chain
+- **ocr** -> ok. 1 lines: 3
 - **corroborate** -> dispute. 1 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=freezer brand=None model=None label=False lines=0
 - **retrieval** -> ok. query='Description: This is a used freezer being sold for scrap. The compressor is still availabl' hits=['Tecno Camon 50', 'Infinix Hot 50', 'Infinix Note 50']

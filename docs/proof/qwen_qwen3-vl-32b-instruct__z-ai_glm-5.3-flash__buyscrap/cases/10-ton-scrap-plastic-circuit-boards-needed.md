@@ -1,6 +1,6 @@
 # Case 10-ton-scrap-plastic-circuit-boards-needed
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  10540 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0013  |  24919 ms
 
 ## What the engine saw
 - Presentation: mixed_lot
@@ -16,7 +16,8 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Screenshot of a gallery: no
 
 ## Chain
-- **corroborate** -> unavailable. openrouter:mistralai/mistral-small-3.2-24b-instruct failed after retries: 'choices'
+- **ocr** -> ok. 0 lines: 
+- **corroborate** -> agree. nothing identifying was read by either
 - **read_evidence** -> ok. category=electronic waste brand=None model=None label=False lines=0
 - **gate** -> lot. priced by material, identification skipped
 - **weight** -> stated. 10000 kg from the seller's words
@@ -33,7 +34,7 @@ No catalogue candidates matched.
 - Price confidence: 14%
 - This is a mixed lot, so it is priced by material and weight rather than identified.
 - no label, plate or settings screen was legible
-- only one reader saw these photos, the second was unavailable
+- the two readers agreed on nothing legible
 - 13 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.

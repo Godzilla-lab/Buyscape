@@ -1,33 +1,41 @@
 # Case r0QY3KnjvXO0pT25QeSazTmM
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  26699 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  27239 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: split air conditioner (confidence 0.95)
 - Made of: steel 60%, plastic 30%, copper 10%
 - Estimated weight: 45.0 kg (confidence 0.8)
-- Brand read off the item: nothing legible
+- Brand read off the item: Hisense
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
 - Damage noted: unit wrapped in plastic film, no visible damage to casing, fan grille intact
-- Looks like a catalogue image: no
+- Looks like a catalogue image: yes
 - Screenshot of a gallery: no
-- Text read: Hisense | AIR CONDITIONER | Outdoor Unit | Split Air Conditioner | Hisense
+- Text read: Hisense | AIR CONDITIONER | Outdoor Unit | Hisense | ANAYO BELTUS | Enterprise
 
 ## Two readers
 - brand_text agreed by both readers
 - 1 transcribed lines was seen by only one reader, so it is treated as unread
 
+## OCR read off the photos
+- 7B巴网
+- AIR COND TIONER
+- Outdoor Unit)
+- Hisense
+- Cevni aaped)
+- ERPRISE
+- ANAYO BELTUS
+
 ## Chain
+- **ocr** -> ok. 7 lines: 7B巴网 | AIR COND TIONER | Outdoor Unit) | Hisense | Cevni aaped) | ERPRISE | ANAYO BELTUS
 - **corroborate** -> dispute. brand_text agreed by both readers; 1 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=split air conditioner brand=Hisense model=None label=True lines=5
-- **grounding** -> dropped. brand
-- **forensics** -> flag. the reader stated brand it could not point to in the photos
-- **retrieval** -> ok. query='Hisense AIR CONDITIONER Outdoor Unit Split Air Conditioner Hisense Features:
-Copper Coil
-T' hits=['Hisense AS-09 1HP', 'Hisense AS-12 1.5HP', 'Hisense AS-18 2HP']
+- **read_evidence** -> ok. category=split air conditioner brand=Hisense model=None label=True lines=6
+- **forensics** -> flag. looks like a catalogue or stock image
+- **retrieval** -> ok. query='Hisense Hisense AIR CONDITIONER Outdoor Unit Hisense ANAYO BELTUS Enterprise Features:
+Cop' hits=['Hisense AS-09 1HP', 'Hisense AS-12 1.5HP', 'Hisense AS-18 2HP']
 - **identify** -> refused. chosen=Hisense None margin=0.0
 - **abstain** -> abstain. model refused
 
@@ -37,30 +45,37 @@ Shortlist from the catalogue:
   - Hisense AS-12 1.5HP (0.38)
   - Hisense AS-18 2HP (0.38)
 
-**Not identified: CANNOT_IDENTIFY.** Only 'Hisense' and 'Air Conditioner Outdoor Unit' are legible; no capacity, AS-series number, or rating plate figures are readable, so the 1HP/1.5HP/2HP variant cannot be determined.
+**Not identified: CANNOT_IDENTIFY.** No model number or HP/capacity rating is legible on box, units or label; all three shortlist entries fit equally.
 
-Evidence flags: the reader stated brand it could not point to in the photos
+Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 8% on the best answer. It is probably a Hisense AS-09 or a Hisense AS-12, and the photos cannot separate them.**
+**Not sure enough to price: 8% on the best answer. It is probably a Hisense AS-09 1HP or a Hisense AS-12 1.5HP, and the photos cannot separate them.**
 
 - Identification confidence: 8% (unknown)
 - Price confidence: 14%
-- It is weighing: Hisense AS-09 (0.3), Hisense AS-12 (0.3)
-- Only 'Hisense' and 'Air Conditioner Outdoor Unit' are legible; no capacity, AS-series number, or rating plate figures are readable, so the 1HP/1.5HP/2HP variant cannot be determined.
+- It is weighing: Hisense AS-09 1HP (0.3), Hisense AS-12 1.5HP (0.3)
+- No model number or HP/capacity rating is legible on box, units or label; all three shortlist entries fit equally.
 - read off the item's own label
-- 5 lines seen by both readers
+- 6 lines seen by both readers
 - the next candidate was only 0.0 behind
-- the reader stated brand it could not point to in the photos
+- looks like a catalogue or stock image
 - 10 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
 
 ## What the seller is asked for next (shown in the app)
-1. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: Close-up of the rating plate on the outdoor unit showing the model and HP. Then, without stopping the video: Open the front grille of the indoor unit and photograph the filters and coil. Finish with: A short clip with the unit running and the display lit. Keep filming the whole time. Do not cut between clips.
+1. [PHOTO] Take your own photo of the actual item you are selling.
+   _why: this looks like a catalogue picture, not the real unit_
+2. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: Close-up of the rating plate on the outdoor unit showing the model and HP. Then, without stopping the video: Open the front grille of the indoor unit and photograph the filters and coil. Finish with: A short clip with the unit running and the display lit. Keep filming the whole time. Do not cut between clips.
    _why: two readings of these photos disagreed about what is written on the item_
-2. [PHOTO] Close-up of the rating plate on the outdoor unit showing the model and HP.
+3. [PHOTO] Close-up of the rating plate on the outdoor unit showing the model and HP.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it still blow cold air?
+- Do you have both the indoor unit and the outdoor unit?
 
 ## Claims
 - [unverified] Copper Coil
@@ -91,8 +106,8 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 59,850 NGN
 
 Conditions attached to this price:
-- Not identified: Only 'Hisense' and 'Air Conditioner Outdoor Unit' are legible; no capacity, AS-series number, or rating plate figures are readable, so the 1HP/1.5HP/2HP variant cannot be determined.
-- Evidence flag: the reader stated brand it could not point to in the photos
+- Not identified: No model number or HP/capacity rating is legible on box, units or label; all three shortlist entries fit equally.
+- Evidence flag: looks like a catalogue or stock image
 - Copper Coil -> not proven remotely. Agent reads the outdoor rating plate.
 - Turbo Operation -> not proven remotely. Agent reads the outdoor rating plate.
 - LED display on the front panel -> not proven remotely. Agent reads the outdoor rating plate.

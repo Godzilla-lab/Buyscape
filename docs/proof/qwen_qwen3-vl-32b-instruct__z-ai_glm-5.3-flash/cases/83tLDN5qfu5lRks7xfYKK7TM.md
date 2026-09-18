@@ -1,32 +1,38 @@
 # Case 83tLDN5qfu5lRks7xfYKK7TM
 
-Photos: 5  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  78418 ms
+Photos: 5  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  23537 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: laptop (confidence 0.95)
-- Made of: plastic 60%, steel 20%, circuit_board 10%, aluminium 10%
-- Estimated weight: 2.0 kg (confidence 0.8)
-- Brand read off the item: nothing legible
+- Made of: plastic 60%, steel 25%, circuit_board 10%, aluminium 5%
+- Estimated weight: 2.1 kg (confidence 0.8)
+- Brand read off the item: ASUS
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: screen has visible scratches and smudges, keyboard keys appear worn, laptop lid shows minor scuffs
+- Damage noted: screen has visible scratches and smudges, keyboard keys show slight wear, left edge of palm rest has minor scuffing
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: ASUS | ASUS | ASUS | ASUS | ASUS | ASUS | ASUS
+- Text read: ASUS | ASUS | ASUS | ASUS
 
 ## Two readers
 - brand_text agreed by both readers
-- model_text was seen by only one reader, so it is treated as unread
-- 4 transcribed lines was seen by only one reader, so it is treated as unread
+- 8 transcribed lines was seen by only one reader, so it is treated as unread
+
+## OCR read off the photos
+- ASUS
+- POSTED ON II
+- NICK MARK ENTERPRISE
+- ASUS
+- ASUS
+- AEUS
 
 ## Chain
-- **corroborate** -> dispute. brand_text agreed by both readers; model_text was seen by only one reader, so it is treated as unread; 4 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=laptop brand=ASUS model=None label=True lines=7
-- **grounding** -> dropped. brand
-- **forensics** -> flag. the reader stated brand it could not point to in the photos
-- **retrieval** -> empty. query='ASUS ASUS ASUS ASUS ASUS ASUS ASUS Asus X555LA
+- **ocr** -> ok. 6 lines: ASUS | POSTED ON II | NICK MARK ENTERPRISE | ASUS | ASUS | AEUS
+- **corroborate** -> dispute. brand_text agreed by both readers; 8 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=laptop brand=ASUS model=None label=True lines=4
+- **retrieval** -> empty. query='ASUS ASUS ASUS ASUS ASUS Asus X555LA
 Core i5 
 8GB RAM 1TB HDD
 Windows 10' hits=[]
@@ -37,8 +43,6 @@ No catalogue candidates matched.
 
 **Not identified: CANNOT_IDENTIFY.** No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.
 
-Evidence flags: the reader stated brand it could not point to in the photos
-
 ## How sure the engine is (back office)
 **0%: the photos do not say what this is.**
 
@@ -46,8 +50,7 @@ Evidence flags: the reader stated brand it could not point to in the photos
 - Price confidence: 16%
 - No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.
 - read off the item's own label
-- 7 lines seen by both readers
-- the reader stated brand it could not point to in the photos
+- 4 lines seen by both readers
 - 9 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -59,6 +62,12 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: nothing on the item says which model this is_
 3. [PHOTO] Screenshot of System Information (Windows) or About This Mac, showing the model, processor, RAM and storage.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it stay on for more than ten minutes with the charger unplugged?
+- Has it ever been dropped, or had liquid spilled on it?
+- What does not work on it? Say none if everything works.
 
 ## Claims
 - [unverifiable_remote] Asus X555LA
@@ -78,15 +87,15 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Screenshot of System Information (Windows) or About This Mac, showing the model, processor, RAM and storage.
 
 ## Price
-**514 to 1,856 NGN** (priced as material, width 1.1317, method material_floor, 0 comparable prices)
+**5,000 to 5,000 NGN** (priced as material, width 0.0, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 2 kg of plastic 60%, steel 20%, circuit_board 10%, aluminium 10% (rates for circuit_board, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 2.1 kg of plastic 60%, steel 25%, circuit_board 10%, aluminium 5% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 1,020 NGN
+Scrap floor: 766 NGN
 
 Conditions attached to this price:
 - Not identified: No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.
-- Evidence flag: the reader stated brand it could not point to in the photos
+- Raised to the 5,000 NGN minimum this business publishes for this kind of item.
 - Asus X555LA -> not proven remotely. Agent will confirm at pickup.
 - Core i5 -> not proven remotely. Agent will confirm at pickup.
 - 8GB RAM -> not proven remotely. Agent opens System Information and reads the RAM.

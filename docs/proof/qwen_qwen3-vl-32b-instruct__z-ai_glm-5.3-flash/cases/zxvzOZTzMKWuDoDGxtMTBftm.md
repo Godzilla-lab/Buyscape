@@ -1,6 +1,6 @@
 # Case zxvzOZTzMKWuDoDGxtMTBftm
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  36472 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  29433 ms
 
 ## What the engine saw
 - Presentation: single_unit
@@ -14,21 +14,31 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Damage noted: none
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
+- Text read: INVOICE
 
 ## Two readers
 - brand_text differed between the two readers, so it is treated as unread
 - model_text differed between the two readers, so it is treated as unread
 - rating_text was seen by only one reader, so it is treated as unread
-- 13 transcribed lines was seen by only one reader, so it is treated as unread
+- serial_text was seen by only one reader, so it is treated as unread
+- 12 transcribed lines was seen by only one reader, so it is treated as unread
+
+## OCR read off the photos
+- If
+- INVOICE
+- ex
+- D90071
+- DESCRPTION
 
 ## Chain
-- **corroborate** -> dispute. brand_text differed between the two readers, so it is treated as unread; model_text differed between the two readers, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; 13 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=phone brand=None model=None label=True lines=0
-- **retrieval** -> ok. query='Direct grade A uk used S21 5gb 256gb 
+- **ocr** -> ok. 5 lines: If | INVOICE | ex | D90071 | DESCRPTION
+- **corroborate** -> dispute. brand_text differed between the two readers, so it is treated as unread; model_text differed between the two readers, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 12 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=phone brand=None model=None label=True lines=1
+- **retrieval** -> ok. query='INVOICE Direct grade A uk used S21 5gb 256gb 
 In excellent condition 
-Samsung Galaxy S21 5G – 6.2"' hits=['Samsung Galaxy S21', 'Samsung Galaxy S22', 'Samsung Galaxy S23', 'Samsung Galaxy S24', 'Samsung Galaxy S25']
-- **identify** -> refused. chosen=None None margin=0.1
-- **abstain** -> abstain. model refused
+Samsung Galaxy S21 5' hits=['Samsung Galaxy S21', 'Samsung Galaxy S22', 'Samsung Galaxy S23', 'Samsung Galaxy S24', 'Samsung Galaxy S25']
+- **identify** -> ok. chosen=Samsung Galaxy S21 margin=0.4
+- **abstain** -> abstain. top score 0.6
 
 ## Identification
 Shortlist from the catalogue:
@@ -38,18 +48,17 @@ Shortlist from the catalogue:
   - Samsung Galaxy S24 (0.5)
   - Samsung Galaxy S25 (0.5)
 
-**Not identified: CANNOT_IDENTIFY.** No legible model label; S21 and S22 rears look alike at this resolution, only the seller's word separates them.
+**Not identified: CANNOT_IDENTIFY.** The best candidate scored only 0.6, which is not sure enough to price.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 17% on the best answer. It is probably a Samsung Galaxy S21 or a Samsung Galaxy S22, and the photos cannot separate them.**
+**Not sure enough to price: 36% on the best answer. It is probably a Samsung Galaxy S21 or a Samsung Galaxy S22, and the photos cannot separate them.**
 
-- Identification confidence: 17% (unknown)
+- Identification confidence: 36% (unknown)
 - Price confidence: 14%
-- It is weighing: Samsung Galaxy S21 (0.4), Samsung Galaxy S22 (0.3)
-- No legible model label; S21 and S22 rears look alike at this resolution, only the seller's word separates them.
+- It is weighing: Samsung Galaxy S21 (0.6), Samsung Galaxy S22 (0.2)
+- The best candidate scored only 0.6, which is not sure enough to price.
 - read off the item's own label
-- the two readers agreed on nothing legible
-- the next candidate was only 0.1 behind
+- 1 lines seen by both readers
 - 11 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -61,6 +70,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: nothing on the item says which model this is_
 3. [PHOTO] Dial *#06# and screenshot the IMEI that appears.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Has the screen or battery ever been changed?
+- Is it signed out of iCloud or Google, so a new owner can set it up?
 
 ## Claims
 - [unverified] Direct grade A uk used S21 5gb 256gb
@@ -85,14 +99,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
-**28 to 194 NGN** (priced as material, width 1.4926, method material_floor, 0 comparable prices)
+**18 to 74 NGN** (priced as material, width 1.1997, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 0.2 kg of plastic 60%, circuit_board 20%, steel 10%, glass 10% (rates for circuit_board, glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 0.2 kg of plastic 60%, circuit_board 20%, steel 10%, glass 10% (rates for glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 82 NGN
+Scrap floor: 54 NGN
 
 Conditions attached to this price:
-- Not identified: No legible model label; S21 and S22 rears look alike at this resolution, only the seller's word separates them.
+- Not identified: The best candidate scored only 0.6, which is not sure enough to price.
 - Direct grade A uk used S21 5gb 256gb -> not proven remotely. Agent reads storage from Settings.
 - Direct grade A uk used S21 5gb 256gb -> not proven remotely. Agent reads storage from Settings.
 - Direct grade A uk used S21 5gb 256gb -> not proven remotely. Agent reads storage from Settings.

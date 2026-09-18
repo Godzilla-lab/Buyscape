@@ -7,23 +7,32 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Category: paint_buckets (confidence 0.95)
 - Made of: plastic 90%, paint 10%
 - Estimated weight: 50.0 kg (confidence 0.7)
-- Brand read off the item: nothing legible
+- Brand read off the item: FINECOAT
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
 - Damage noted: paint splatters on buckets, dusty and dirty surfaces, some lids missing or damaged
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: FINECOAT P.O.P EMULSION PAINT
+- Text read: FINECOAT P.O.P EMULSION PAINT | EAGLE PAINTS
 
 ## Two readers
-- brand_text was seen by only one reader, so it is treated as unread
+- brand_text was read by one reader and confirmed by OCR
 - model_text was seen by only one reader, so it is treated as unread
-- 2 transcribed lines was seen by only one reader, so it is treated as unread
+- 1 transcribed lines was seen by only one reader, so it is treated as unread
+
+## OCR read off the photos
+- FINECOAT
+- P.O.P
+- EMULSION PAINT
+- PAINTS
+- GLE
+- INTS
 
 ## Chain
-- **corroborate** -> dispute. brand_text was seen by only one reader, so it is treated as unread; model_text was seen by only one reader, so it is treated as unread; 2 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=paint_buckets brand=None model=None label=True lines=1
+- **ocr** -> ok. 6 lines: FINECOAT | P.O.P | EMULSION PAINT | PAINTS | GLE | INTS
+- **corroborate** -> dispute. brand_text was read by one reader and confirmed by OCR; model_text was seen by only one reader, so it is treated as unread; 1 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=paint_buckets brand=FINECOAT model=None label=True lines=2
 - **gate** -> lot. priced by material, identification skipped
 
 ## Identification
@@ -38,7 +47,7 @@ No catalogue candidates matched.
 - Price confidence: 14%
 - This is a mixed lot, so it is priced by material and weight rather than identified.
 - read off the item's own label
-- 1 lines seen by both readers
+- 2 lines seen by both readers
 - 11 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.

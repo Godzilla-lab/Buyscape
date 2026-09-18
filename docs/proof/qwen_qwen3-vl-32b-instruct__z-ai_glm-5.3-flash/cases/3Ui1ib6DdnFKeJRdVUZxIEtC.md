@@ -1,25 +1,26 @@
 # Case 3Ui1ib6DdnFKeJRdVUZxIEtC
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  150754 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  152638 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: laptop (confidence 0.95)
-- Made of: plastic 60%, steel 20%, circuit_board 10%, rubber 10%
+- Made of: plastic 60%, steel 20%, circuit_board 10%, aluminium 10%
 - Estimated weight: 1.5 kg (confidence 0.8)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: none
+- Damage noted: Screen is on, displaying a leaf wallpaper., No visible cracks or dents on the body., Keyboard appears intact.
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
 
 ## Two readers
-- 1 transcribed lines was seen by only one reader, so it is treated as unread
+- 6 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## Chain
-- **corroborate** -> dispute. 1 transcribed lines was seen by only one reader, so it is treated as unread
+- **ocr** -> ok. 0 lines: 
+- **corroborate** -> dispute. 6 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=laptop brand=None model=None label=False lines=0
 - **forensics** -> flag. looks like a catalogue or stock image
 - **retrieval** -> ok. query='Brand 	dell
@@ -64,6 +65,12 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 3. [PHOTO] Photo of the sticker on the underside showing the model, serial or service tag.
    _why: nothing on the item says which model this is_
 
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it stay on for more than ten minutes with the charger unplugged?
+- Has it ever been dropped, or had liquid spilled on it?
+- What does not work on it? Say none if everything works.
+
 ## Claims
 - [unverifiable_remote] Brand is Dell
 - [unverifiable_remote] Model is Latitude 7410 10th generation
@@ -79,15 +86,16 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Screenshot of System Information (Windows) or About This Mac, showing the model, processor, RAM and storage.
 
 ## Price
-**313 to 957 NGN** (priced as material, width 1.0131, method material_floor, 0 comparable prices)
+**5,000 to 5,000 NGN** (priced as material, width 0.0, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 1.5 kg of plastic 60%, steel 20%, circuit_board 10%, rubber 10% (rates for circuit_board, plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 1.5 kg of plastic 60%, steel 20%, circuit_board 10%, aluminium 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 472 NGN
+Scrap floor: 660 NGN
 
 Conditions attached to this price:
 - Not identified: No legible label confirms model; seller claims Latitude 7410, which is not on the shortlist and cannot be picked without printed proof. Visible slim-bezel 7000-series styling fits 7410 but also similar models.
 - Evidence flag: looks like a catalogue or stock image
+- Raised to the 5,000 NGN minimum this business publishes for this kind of item.
 - Brand is Dell -> not proven remotely. Agent will confirm at pickup.
 - Model is Latitude 7410 10th generation -> not proven remotely. Agent will confirm at pickup.
 - Form factor is notebook -> not proven remotely. Agent will confirm at pickup.

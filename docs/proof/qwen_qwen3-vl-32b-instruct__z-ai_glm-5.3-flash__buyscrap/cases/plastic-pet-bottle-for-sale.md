@@ -1,6 +1,6 @@
 # Case plastic-pet-bottle-for-sale
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0005  |  6485 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  12576 ms
 
 ## What the engine saw
 - Presentation: mixed_lot
@@ -16,7 +16,8 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Screenshot of a gallery: no
 
 ## Chain
-- **corroborate** -> unavailable. openrouter:mistralai/mistral-small-3.2-24b-instruct failed after retries: HTTP 429: {"error":{"message":"Provider return
+- **ocr** -> ok. 0 lines: 
+- **corroborate** -> agree. nothing identifying was read by either
 - **read_evidence** -> ok. category=recyclable plastic waste brand=None model=None label=False lines=0
 - **gate** -> lot. priced by material, identification skipped
 
@@ -32,13 +33,15 @@ No catalogue candidates matched.
 - Price confidence: 22%
 - This is a mixed lot, so it is priced by material and weight rather than identified.
 - no label, plate or settings screen was legible
-- only one reader saw these photos, the second was unavailable
+- the two readers agreed on nothing legible
 - 6 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
 
 ## What the seller is asked for next (shown in the app)
-1. [PHOTO] Move closer and photograph any label, sticker or plate so the writing is sharp.
+1. [PHOTO] Photograph one item on its own, with nothing else in the picture.
+   _why: the photos show more than one item_
+2. [PHOTO] Move closer and photograph any label, sticker or plate so the writing is sharp.
    _why: no label was legible in the photos sent so far_
 
 ## What the seller is asked (only they know these)

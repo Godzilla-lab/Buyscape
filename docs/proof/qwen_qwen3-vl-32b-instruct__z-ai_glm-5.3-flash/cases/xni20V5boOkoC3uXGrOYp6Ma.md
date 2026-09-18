@@ -1,64 +1,65 @@
 # Case xni20V5boOkoC3uXGrOYp6Ma
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  28830 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0007  |  16170 ms
 
 ## What the engine saw
 - Presentation: sealed_new
-- Category: refrigerator (confidence 0.8)
-- Made of: paper 100%
+- Category: refrigerator (confidence 0.9)
+- Made of: carton 100%
 - Estimated weight: 15.0 kg (confidence 0.6)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
 - Damage noted: none
-- Looks like a catalogue image: yes
+- Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: DO NOT CRUSH | Do not crush | TRADEZONE PLUS
+- Text read: DO NOT CRUSH | TRADEZONE PLUS
 
 ## Two readers
-- 7 transcribed lines was seen by only one reader, so it is treated as unread
+- 4 transcribed lines was seen by only one reader, so it is treated as unread
+
+## OCR read off the photos
+- REFRSGERATOR
+- DO NOT CRUSH
+- PRIGHT
+- TRADEZONEPLUS
 
 ## Chain
-- **corroborate** -> dispute. 7 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=refrigerator brand=None model=None label=False lines=3
-- **forensics** -> flag. looks like a catalogue or stock image
-- **retrieval** -> ok. query='DO NOT CRUSH Do not crush TRADEZONE PLUS Stay cool and comfortable with the Hisense AS12HB' hits=['Hisense AS-09 1HP', 'Hisense AS-12 1.5HP', 'Hisense AS-18 2HP']
-- **identify** -> refused. chosen=None None margin=0.2
-- **abstain** -> abstain. model refused
+- **ocr** -> ok. 4 lines: REFRSGERATOR | DO NOT CRUSH | PRIGHT | TRADEZONEPLUS
+- **corroborate** -> dispute. 4 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=refrigerator brand=None model=None label=False lines=2
+- **gate** -> abstain. multiple items in frame
 
 ## Identification
-Shortlist from the catalogue:
-  - Hisense AS-09 1HP (0.4)
-  - Hisense AS-12 1.5HP (0.38)
-  - Hisense AS-18 2HP (0.38)
+No catalogue candidates matched.
 
-**Not identified: CANNOT_IDENTIFY.** Item is a sealed carton; no brand or model text is legible, only 'DO NOT CRUSH' and a watermark. The AS-12 claim rests solely on the seller's unverified description.
-
-Evidence flags: looks like a catalogue or stock image
+**Not identified: EVIDENCE_INCOMPLETE.** The photos show more than one item, so no single item can be identified.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 7% on the best answer. It is probably a Hisense AS-12 1.5HP or a Hisense AS-09 1HP, and the photos cannot separate them.**
+**0%: the photos do not say what this is.**
 
-- Identification confidence: 7% (unknown)
+- Identification confidence: 0% (unknown)
 - Price confidence: 20%
-- It is weighing: Hisense AS-12 1.5HP (0.3), Hisense AS-09 1HP (0.1)
-- Item is a sealed carton; no brand or model text is legible, only 'DO NOT CRUSH' and a watermark. The AS-12 claim rests solely on the seller's unverified description.
+- The photos show more than one item, so no single item can be identified.
 - no label, plate or settings screen was legible
-- 3 lines seen by both readers
-- the next candidate was only 0.2 behind
-- looks like a catalogue or stock image
+- 2 lines seen by both readers
 - 7 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
 
 ## What the seller is asked for next (shown in the app)
-1. [PHOTO] Take your own photo of the actual item you are selling.
-   _why: this looks like a catalogue picture, not the real unit_
+1. [PHOTO] Photograph one item on its own, with nothing else in the picture.
+   _why: the photos show more than one item_
 2. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: Close-up of any label, sticker or metal plate showing the brand and model. Then, without stopping the video: If it opens without tools, open it and photograph the inside. Keep filming the whole time. Do not cut between clips.
    _why: two readings of these photos disagreed about what is written on the item_
 3. [PHOTO] Close-up of any label, sticker or metal plate showing the brand and model.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- How much of it is there? Give the weight in kilogrammes or tons if you know it.
+- Does it still work?
+- Roughly how old is it, in years?
 
 ## Claims
 - [unverifiable_remote] The air conditioner is a Hisense AS12HB model.
@@ -79,13 +80,12 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 ## Price
 **270 to 1,800 NGN** (priced as material, width 1.4783, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 15 kg of paper 100% (rates for paper are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 15 kg of carton 100% (rates for carton are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
 Scrap floor: 900 NGN
 
 Conditions attached to this price:
-- Not identified: Item is a sealed carton; no brand or model text is legible, only 'DO NOT CRUSH' and a watermark. The AS-12 claim rests solely on the seller's unverified description.
-- Evidence flag: looks like a catalogue or stock image
+- Not identified: The photos show more than one item, so no single item can be identified.
 - The air conditioner is a Hisense AS12HB model. -> not proven remotely. Weigh on the scale and photograph the display.
 - The air conditioner is designed to provide efficient cooling. -> not proven remotely. Agent powers the item on before payment.
 - The air conditioner helps users stay cool and comfortable. -> not proven remotely. Agent powers the item on before payment.

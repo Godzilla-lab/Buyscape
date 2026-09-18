@@ -1,57 +1,61 @@
 # Case CA2VNggUjKw9a4P5FnwvlS59
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0022  |  79002 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0020  |  22267 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: phone (confidence 0.95)
-- Made of: aluminium 40%, plastic 40%, glass 10%, circuit_board 10%
+- Made of: aluminium 30%, plastic 50%, circuit_board 10%, glass 10%
 - Estimated weight: 0.2 kg (confidence 0.9)
-- Brand read off the item: nothing legible
+- Brand read off the item: Apple
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
 - Damage noted: none
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: Apple Inc. | Designed by Apple in California
+- Text read: iPhone 13 Pro Max | Apple Inc. | Designed by Apple in California
 
 ## Two readers
-- brand_text differed between the two readers, so it is treated as unread
+- brand_text agreed by both readers
 - model_text differed between the two readers, so it is treated as unread
 - serial_text was seen by only one reader, so it is treated as unread
-- 7 transcribed lines was seen by only one reader, so it is treated as unread
+- 6 transcribed lines was seen by only one reader, so it is treated as unread
+
+## OCR read off the photos
+- KID
+- AORLE PIONE
+- OANNECT
 
 ## Chain
-- **corroborate** -> dispute. brand_text differed between the two readers, so it is treated as unread; model_text differed between the two readers, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 7 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=phone brand=None model=None label=True lines=2
-- **retrieval** -> ok. query='Apple Inc. Designed by Apple in California iPhone 14pro
+- **ocr** -> ok. 3 lines: KID | AORLE PIONE | OANNECT
+- **corroborate** -> dispute. brand_text agreed by both readers; model_text differed between the two readers, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 6 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=phone brand=Apple model=None label=True lines=3
+- **retrieval** -> ok. query='Apple iPhone 13 Pro Max Apple Inc. Designed by Apple in California iPhone 14pro
 128gb
-98% battery health
-Dual sim ' hits=['Apple iPhone 14', 'Apple iPhone XR', 'Apple iPhone XS', 'Apple iPhone SE', 'Apple iPhone 11']
-- **identify** -> refused. chosen=None None margin=0.1
-- **abstain** -> abstain. model refused
+98% ' hits=['Apple iPhone 13 Pro', 'Apple iPhone 13 Pro Max', 'Apple iPhone 13', 'Apple iPhone 14', 'Apple iPhone 11 Pro Max']
+- **identify** -> ok. chosen=Apple iPhone 13 Pro Max margin=0.65
+- **abstain** -> abstain. seller names another generation
 
 ## Identification
 Shortlist from the catalogue:
+  - Apple iPhone 13 Pro (0.9)
+  - Apple iPhone 13 Pro Max (0.9)
+  - Apple iPhone 13 (0.7667)
   - Apple iPhone 14 (0.6333)
-  - Apple iPhone XR (0.5)
-  - Apple iPhone XS (0.5)
-  - Apple iPhone SE (0.5)
-  - Apple iPhone 11 (0.4333)
+  - Apple iPhone 11 Pro Max (0.6)
 
-**Not identified: CANNOT_IDENTIFY.** Visible triple-camera Pro-style module matches iPhone 14 Pro, but that model is absent from the shortlist and no model text is legible on the label; only 'Apple Inc.' is readable.
+**Not identified: EVIDENCE_INCOMPLETE.** The item reads as Apple iPhone 13 Pro Max but the seller's text says 14. A Settings or About screen would settle it.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 11% on the best answer. It is probably a Apple iPhone 14 or a Apple iPhone 11, and the photos cannot separate them.**
+**Not sure enough to price: 51% on the best answer. It is probably a Apple iPhone 13 Pro Max or a Apple iPhone 14, and the photos cannot separate them.**
 
-- Identification confidence: 11% (unknown)
+- Identification confidence: 51% (unsure)
 - Price confidence: 14%
-- It is weighing: Apple iPhone 14 (0.2), Apple iPhone 11 (0.1)
-- Visible triple-camera Pro-style module matches iPhone 14 Pro, but that model is absent from the shortlist and no model text is legible on the label; only 'Apple Inc.' is readable.
+- It is weighing: Apple iPhone 13 Pro Max (0.85), Apple iPhone 14 (0.2)
+- The item reads as Apple iPhone 13 Pro Max but the seller's text says 14. A Settings or About screen would settle it.
 - read off the item's own label
-- 2 lines seen by both readers
-- the next candidate was only 0.1 behind
+- 3 lines seen by both readers
 - 10 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -63,6 +67,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: nothing on the item says which model this is_
 3. [PHOTO] Dial *#06# and screenshot the IMEI that appears.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Has the screen or battery ever been changed?
+- Is it signed out of iCloud or Google, so a new owner can set it up?
 
 ## Claims
 - [unverifiable_remote] iPhone 14pro
@@ -84,14 +93,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
-**100 to 335 NGN** (priced as material, width 1.0764, method material_floor, 0 comparable prices)
+**74 to 219 NGN** (priced as material, width 0.9867, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 0.2 kg of aluminium 40%, plastic 40%, glass 10%, circuit_board 10% (rates for circuit_board, glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 0.2 kg of aluminium 30%, plastic 50%, circuit_board 10%, glass 10% (rates for glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 198 NGN
+Scrap floor: 146 NGN
 
 Conditions attached to this price:
-- Not identified: Visible triple-camera Pro-style module matches iPhone 14 Pro, but that model is absent from the shortlist and no model text is legible on the label; only 'Apple Inc.' is readable.
+- Not identified: The item reads as Apple iPhone 13 Pro Max but the seller's text says 14. A Settings or About screen would settle it.
 - iPhone 14pro -> not proven remotely. Agent will confirm at pickup.
 - 128gb -> not proven remotely. Agent reads storage from Settings.
 - 98% battery health -> not proven remotely. Agent opens the battery health screen.

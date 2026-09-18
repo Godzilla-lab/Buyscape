@@ -1,30 +1,35 @@
 # Case 34JYCjUpaovtWefuHPhuHU1I
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  72565 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  53271 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: washing machine (confidence 0.95)
 - Made of: plastic 70%, steel 20%, rubber 10%
 - Estimated weight: 25.0 kg (confidence 0.8)
-- Brand read off the item: nothing legible
+- Brand read off the item: TOP VOLT
 - Model read off the item: nothing legible
 - Rating read: none
-- Label, plate or settings screen legible: no
-- Damage noted: plastic wrap still on top lid, some minor scuffs on white casing, dust and smudges on control panel
+- Label, plate or settings screen legible: yes
+- Damage noted: Plastic wrap still on top lid, Minor scuffs on front panel
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 - Text read: TOP VOLT
 
 ## Two readers
-- brand_text was seen by only one reader, so it is treated as unread
-- rating_text was seen by only one reader, so it is treated as unread
+- brand_text agreed by both readers
+- rating_text differed between the two readers, so it is treated as unread
 - 5 transcribed lines was seen by only one reader, so it is treated as unread
 
+## OCR read off the photos
+- POST
+- TOPVOLT
+
 ## Chain
-- **corroborate** -> dispute. brand_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; 5 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=washing machine brand=None model=None label=False lines=1
-- **retrieval** -> ok. query='TOP VOLT Skyrun 11kg Twin tub Washing machine' hits=['LG WM8 8kg twin tub', 'Haier Thermocool TT8 8kg twin tub', 'TCL TWA110 11kg top loader']
+- **ocr** -> ok. 2 lines: POST | TOPVOLT
+- **corroborate** -> dispute. brand_text agreed by both readers; rating_text differed between the two readers, so it is treated as unread; 5 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=washing machine brand=TOP VOLT model=None label=True lines=1
+- **retrieval** -> ok. query='TOP VOLT TOP VOLT Skyrun 11kg Twin tub Washing machine' hits=['LG WM8 8kg twin tub', 'Haier Thermocool TT8 8kg twin tub', 'TCL TWA110 11kg top loader']
 - **identify** -> refused. chosen=None None margin=None
 - **abstain** -> abstain. model refused
 
@@ -34,15 +39,15 @@ Shortlist from the catalogue:
   - Haier Thermocool TT8 8kg twin tub (0.2667)
   - TCL TWA110 11kg top loader (0.2)
 
-**Not identified: CANNOT_IDENTIFY.** Twin tub washer is visible but no brand or model text is legible; 'TOP VOLT' is a listing watermark, not a label. Seller claims Skyrun, which is not on the shortlist and cannot be verified from the photo.
+**Not identified: CANNOT_IDENTIFY.** 'TOP VOLT' is a Jiji watermark, not an item label; no legible brand plate visible, and seller's Skyrun 11kg twin tub is not on the shortlist, so none of the shortlist entries is supported.
 
 ## How sure the engine is (back office)
 **0%: the photos do not say what this is.**
 
 - Identification confidence: 0% (unknown)
 - Price confidence: 18%
-- Twin tub washer is visible but no brand or model text is legible; 'TOP VOLT' is a listing watermark, not a label. Seller claims Skyrun, which is not on the shortlist and cannot be verified from the photo.
-- no label, plate or settings screen was legible
+- 'TOP VOLT' is a Jiji watermark, not an item label; no legible brand plate visible, and seller's Skyrun 11kg twin tub is not on the shortlist, so none of the shortlist entries is supported.
+- read off the item's own label
 - 1 lines seen by both readers
 - 8 claims are still unproven, 0 are supported
 
@@ -53,6 +58,10 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: two readings of these photos disagreed about what is written on the item_
 2. [PHOTO] Close-up of the sticker with the model number, usually inside the door or on the back.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it finish a full wash and spin cycle?
 
 ## Claims
 - [unverified] Skyrun 11kg Twin tub Washing machine
@@ -80,7 +89,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 4,375 NGN
 
 Conditions attached to this price:
-- Not identified: Twin tub washer is visible but no brand or model text is legible; 'TOP VOLT' is a listing watermark, not a label. Seller claims Skyrun, which is not on the shortlist and cannot be verified from the photo.
+- Not identified: 'TOP VOLT' is a Jiji watermark, not an item label; no legible brand plate visible, and seller's Skyrun 11kg twin tub is not on the shortlist, so none of the shortlist entries is supported.
 - Skyrun 11kg Twin tub Washing machine -> not proven remotely. Agent reads the rating plate.
 - Skyrun 11kg Twin tub Washing machine -> not proven remotely. Agent reads the rating plate.
 - Skyrun 11kg Twin tub Washing machine -> not proven remotely. Agent reads the rating plate.

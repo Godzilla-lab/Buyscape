@@ -16,6 +16,7 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Screenshot of a gallery: no
 
 ## Chain
+- **ocr** -> ok. 0 lines: 
 - **corroborate** -> agree. nothing identifying was read by either
 - **read_evidence** -> ok. category=tv brand=None model=None label=False lines=0
 - **retrieval** -> ok. query='55′ samsung smart tv' hits=['Samsung AR09 1HP', 'Samsung WA80 8kg top loader', 'Samsung AR12 1.5HP', 'Samsung WW70 7kg front loader', 'Samsung Galaxy S21']

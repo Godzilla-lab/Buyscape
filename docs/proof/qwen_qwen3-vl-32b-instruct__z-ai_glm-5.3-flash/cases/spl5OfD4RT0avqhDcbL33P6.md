@@ -1,32 +1,38 @@
 # Case spl5OfD4RT0avqhDcbL33P6
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0006  |  23990 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0006  |  19090 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: solar generator (confidence 0.9)
 - Made of: plastic 60%, steel 30%, circuit_board 10%
 - Estimated weight: 15.0 kg (confidence 0.7)
-- Brand read off the item: nothing legible
+- Brand read off the item: SAGE TECH ELECTRICAL
 - Model read off the item: nothing legible
-- Rating read: none
+- Rating read: 1000W
 - Label, plate or settings screen legible: no
 - Damage noted: none
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
-- Text read: 1000W | SOLAR GENERATOR | SAGE TECH ELECTRICAL | 1000W
+- Text read: 1000W | SOLAR GENERATOR | SAGE TECH ELECTRICAL | 1000W | kWh
 
 ## Two readers
 - rating_text agreed by both readers
-- brand_text was seen by only one reader, so it is treated as unread
-- 1 transcribed lines was seen by only one reader, so it is treated as unread
+- brand_text was read by one reader and confirmed by OCR
+
+## OCR read off the photos
+- 1000W
+- SOLAR GENERATOR
+- SAGETECHELECTRICAL
+- POST
+- MODOW
 
 ## Chain
-- **corroborate** -> dispute. rating_text agreed by both readers; brand_text was seen by only one reader, so it is treated as unread; 1 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=solar generator brand=None model=None label=False lines=4
-- **grounding** -> dropped. rating
-- **forensics** -> flag. the reader stated rating it could not point to in the photos; looks like a catalogue or stock image
-- **retrieval** -> empty. query='1000W SOLAR GENERATOR SAGE TECH ELECTRICAL 1000W We provide you best quality in solar gene' hits=[]
+- **ocr** -> ok. 5 lines: 1000W | SOLAR GENERATOR | SAGETECHELECTRICAL | POST | MODOW
+- **corroborate** -> agree. rating_text agreed by both readers; brand_text was read by one reader and confirmed by OCR
+- **read_evidence** -> ok. category=solar generator brand=SAGE TECH ELECTRICAL model=None label=False lines=5
+- **forensics** -> flag. looks like a catalogue or stock image
+- **retrieval** -> empty. query='SAGE TECH ELECTRICAL 1000W 1000W SOLAR GENERATOR SAGE TECH ELECTRICAL 1000W kWh We provide' hits=[]
 - **gate** -> abstain. no candidates and no model text
 
 ## Identification
@@ -34,7 +40,7 @@ No catalogue candidates matched.
 
 **Not identified: CANNOT_IDENTIFY.** No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.
 
-Evidence flags: the reader stated rating it could not point to in the photos; looks like a catalogue or stock image
+Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
 **0%: the photos do not say what this is.**
@@ -43,8 +49,7 @@ Evidence flags: the reader stated rating it could not point to in the photos; lo
 - Price confidence: 24%
 - No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.
 - no label, plate or settings screen was legible
-- 4 lines seen by both readers
-- the reader stated rating it could not point to in the photos
+- 5 lines seen by both readers
 - looks like a catalogue or stock image
 - 5 claims are still unproven, 0 are supported
 
@@ -53,10 +58,15 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 ## What the seller is asked for next (shown in the app)
 1. [PHOTO] Take your own photo of the actual item you are selling.
    _why: this looks like a catalogue picture, not the real unit_
-2. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: Close-up of the rating plate showing the kVA and model number. Then, without stopping the video: Open the side cover and photograph the alternator windings. Finish with: A short clip of the generator starting and running. Keep filming the whole time. Do not cut between clips.
-   _why: two readings of these photos disagreed about what is written on the item_
-3. [PHOTO] Close-up of the rating plate showing the kVA and model number.
+2. [PHOTO] Close-up of the rating plate showing the kVA and model number.
    _why: nothing on the item says which model this is_
+3. [PHOTO] Close-up of the plate on the engine block showing the engine model and serial.
+   _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it start and run right now?
+- When was it last serviced, and what was done?
 
 ## Claims
 - [unverified] Required evidence 'code_shot' was not supplied
@@ -71,15 +81,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Photo of the engine, showing the recoil starter and carburettor.
 
 ## Price
-**4,178 to 10,320 NGN** (priced as material, width 0.8472, method material_floor, 0 comparable prices)
+**3,366 to 5,820 NGN** (priced as material, width 0.5343, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 15 kg of plastic 60%, steel 30%, circuit_board 10% (rates for circuit_board, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 15 kg of plastic 60%, steel 30%, circuit_board 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 5,400 NGN
+Scrap floor: 4,350 NGN
 
 Conditions attached to this price:
 - Not identified: No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.
-- Evidence flag: the reader stated rating it could not point to in the photos
 - Evidence flag: looks like a catalogue or stock image
 - Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on paper and photograph it next to the generator..
 - Required evidence 'overview' was not supplied -> not proven remotely. One photo of the whole generator from the front..

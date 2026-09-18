@@ -1,53 +1,61 @@
 # Case q7b9kJdPJRwOE4K3jwqLiLyY
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  18750 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0013  |  26128 ms
 
 ## What the engine saw
 - Presentation: single_unit
-- Category: laptop (confidence 1.0)
-- Made of: aluminium 60%, plastic 30%, circuit_board 5%, glass 5%
-- Estimated weight: 1.8 kg (confidence 0.9)
-- Brand read off the item: nothing legible
+- Category: laptop (confidence 0.95)
+- Made of: aluminium 60%, plastic 30%, circuit_board 5%, steel 5%
+- Estimated weight: 1.8 kg (confidence 0.8)
+- Brand read off the item: Apple
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: Screen shows a desktop background with no visible cracks or damage., Keyboard and trackpad appear clean and undamaged., Aluminum casing has minor scuffs on the edges.
+- Damage noted: screen is on, displaying default wallpaper, no visible cracks or dents on body, keyboard appears clean and intact
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
+- Text read: Apple
 
 ## Two readers
-- brand_text was seen by only one reader, so it is treated as unread
 - model_text was seen by only one reader, so it is treated as unread
-- rating_text was seen by only one reader, so it is treated as unread
-- serial_text was seen by only one reader, so it is treated as unread
-- 6 transcribed lines was seen by only one reader, so it is treated as unread
+- 1 transcribed lines was seen by only one reader, so it is treated as unread
+- brand_text was read by only one reader, so it is kept but not confirmed
 
 ## Chain
-- **corroborate** -> dispute. brand_text was seen by only one reader, so it is treated as unread; model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 6 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=laptop brand=None model=None label=False lines=0
+- **ocr** -> ok. 0 lines: 
+- **corroborate** -> dispute. model_text was seen by only one reader, so it is treated as unread; 1 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed
+- **read_evidence** -> ok. category=laptop brand=Apple model=None label=False lines=1
 - **forensics** -> flag. looks like a catalogue or stock image
-- **retrieval** -> empty. query='MacBook Pro 2013
+- **retrieval** -> ok. query='Apple Apple MacBook Pro 2013
 Core i7 - 2.5GHz Quad-Core
 8GB RAM
 128GB SSD
-Graphics: Intel HD Graphics ' hits=[]
-- **gate** -> abstain. no candidates and no model text
+Graphics: Intel ' hits=['Apple MacBook Pro 13-inch 2017', 'Apple MacBook Pro 17-inch 2011', 'Apple MacBook Air M1 2020', 'Apple MacBook Air 13-inch 2017']
+- **identify** -> refused. chosen=None None margin=0.1
+- **abstain** -> abstain. model refused
 
 ## Identification
-No catalogue candidates matched.
+Shortlist from the catalogue:
+  - Apple MacBook Pro 13-inch 2017 (0.4333)
+  - Apple MacBook Pro 17-inch 2011 (0.4333)
+  - Apple MacBook Air M1 2020 (0.38)
+  - Apple MacBook Air 13-inch 2017 (0.3667)
 
-**Not identified: CANNOT_IDENTIFY.** No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.
+**Not identified: CANNOT_IDENTIFY.** Photo shows a 15-inch Retina-style MacBook Pro, but no 15-inch entry is on the shortlist and no model text is legible; seller's specs (quad-core i7, HD 4000) fit a 2012-2013 15-inch Retina Pro, which I cannot confirm from the image alone.
 
 Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
-**0%: the photos do not say what this is.**
+**Not sure enough to price: 3% on the best answer. It is probably a Apple MacBook Pro 17-inch 2011 or a Apple MacBook Pro 13-inch 2017, and the photos cannot separate them.**
 
-- Identification confidence: 0% (unknown)
+- Identification confidence: 3% (unknown)
 - Price confidence: 14%
-- No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.
+- It is weighing: Apple MacBook Pro 17-inch 2011 (0.2), Apple MacBook Pro 13-inch 2017 (0.1)
+- Photo shows a 15-inch Retina-style MacBook Pro, but no 15-inch entry is on the shortlist and no model text is legible; seller's specs (quad-core i7, HD 4000) fit a 2012-2013 15-inch Retina Pro, which I cannot confirm from the image alone.
 - no label, plate or settings screen was legible
 - the two readers agreed on nothing legible
+- the brand was read by only one reader and is not confirmed
+- the next candidate was only 0.1 behind
 - looks like a catalogue or stock image
 - 10 claims are still unproven, 0 are supported
 
@@ -60,6 +68,12 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: two readings of these photos disagreed about what is written on the item_
 3. [PHOTO] Photo of the sticker on the underside showing the model, serial or service tag.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it stay on for more than ten minutes with the charger unplugged?
+- Has it ever been dropped, or had liquid spilled on it?
+- What does not work on it? Say none if everything works.
 
 ## Claims
 - [unverifiable_remote] MacBook Pro 2013
@@ -81,15 +95,16 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Screenshot of System Information (Windows) or About This Mac, showing the model, processor, RAM and storage.
 
 ## Price
-**948 to 3,701 NGN** (priced as material, width 1.1839, method material_floor, 0 comparable prices)
+**5,000 to 5,000 NGN** (priced as material, width 0.0, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 1.8 kg of aluminium 60%, plastic 30%, circuit_board 5%, glass 5% (rates for circuit_board, glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 1.8 kg of aluminium 60%, plastic 30%, circuit_board 5%, steel 5% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 2,350 NGN
+Scrap floor: 2,331 NGN
 
 Conditions attached to this price:
-- Not identified: No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.
+- Not identified: Photo shows a 15-inch Retina-style MacBook Pro, but no 15-inch entry is on the shortlist and no model text is legible; seller's specs (quad-core i7, HD 4000) fit a 2012-2013 15-inch Retina Pro, which I cannot confirm from the image alone.
 - Evidence flag: looks like a catalogue or stock image
+- Raised to the 5,000 NGN minimum this business publishes for this kind of item.
 - MacBook Pro 2013 -> not proven remotely. Agent will confirm at pickup.
 - Core i7 - 2.5GHz Quad-Core -> not proven remotely. Agent will confirm at pickup.
 - 8GB RAM -> not proven remotely. Agent opens System Information and reads the RAM.

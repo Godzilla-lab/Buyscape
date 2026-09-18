@@ -1,32 +1,37 @@
 # Case nNuDdzaVAx6523dc4IhgsD0E
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0015  |  282959 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  18651 ms
 
 ## What the engine saw
 - Presentation: sealed_new
 - Category: phone (confidence 0.95)
 - Made of: paper 80%, plastic 20%
 - Estimated weight: 0.5 kg (confidence 0.8)
-- Brand read off the item: nothing legible
+- Brand read off the item: Samsung
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
 - Damage noted: none
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
-- Text read: Galaxy S20 Ultra | 5G
+- Text read: Galaxy S20 Ultra | Samsung
 
 ## Two readers
-- brand_text was seen by only one reader, so it is treated as unread
 - model_text was seen by only one reader, so it is treated as unread
+- 1 transcribed lines was seen by only one reader, so it is treated as unread
+- brand_text was read by only one reader, so it is kept but not confirmed
+
+## OCR read off the photos
+- Galaxy S26 Ultra
 
 ## Chain
-- **corroborate** -> dispute. brand_text was seen by only one reader, so it is treated as unread; model_text was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=phone brand=None model=None label=False lines=2
+- **ocr** -> ok. 1 lines: Galaxy S26 Ultra
+- **corroborate** -> dispute. model_text was seen by only one reader, so it is treated as unread; 1 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed
+- **read_evidence** -> ok. category=phone brand=Samsung model=None label=False lines=2
 - **forensics** -> flag. looks like a catalogue or stock image
-- **retrieval** -> ok. query='Galaxy S20 Ultra 5G Latest SAMSUNG galaxy S26 Ultra (512gb) Available for pickup' hits=['Samsung Galaxy S21', 'Samsung Galaxy S22', 'Samsung Galaxy S23', 'Samsung Galaxy S24', 'Samsung Galaxy S25']
-- **identify** -> refused. chosen=None None margin=None
-- **abstain** -> abstain. model refused
+- **retrieval** -> ok. query='Samsung Galaxy S20 Ultra Samsung Latest SAMSUNG galaxy S26 Ultra (512gb) Available for pic' hits=['Samsung Galaxy S21', 'Samsung Galaxy S22', 'Samsung Galaxy S23', 'Samsung Galaxy S24', 'Samsung Galaxy S25']
+- **identify** -> ok. chosen=Samsung Galaxy S26 Ultra margin=0.8
+- **abstain** -> abstain. confidence 0.31: no label, plate or settings screen was legible; 1 lines seen by both readers; the brand was read by only one reader and is not confirmed; looks like a catalogue or stock image
 
 ## Identification
 Shortlist from the catalogue:
@@ -36,19 +41,20 @@ Shortlist from the catalogue:
   - Samsung Galaxy S24 (0.5)
   - Samsung Galaxy S25 (0.5)
 
-**Not identified: CANNOT_IDENTIFY.** Sealed box is printed 'Galaxy S26 Ultra', a model absent from the catalogue and not verifiable as a real Samsung release; the generic outline artwork is inconsistent with official Samsung retail packaging, suggesting counterfeit or custom boxing. Contents cannot be inspected, no IMEI/serial is visible, and no shortlist entry matches, so naming any model risks paying for a fake.
+**Not identified: EVIDENCE_INCOMPLETE.** The evidence only supports this answer at 31 percent, which is a guess. One clear photo of the label would settle it.
 
 Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 2% on the best answer. It is probably a Samsung Galaxy S25, and the photos cannot separate them.**
+**Not sure enough to price: 19% on the best answer. It is probably a Samsung Galaxy S26 Ultra or a Samsung Galaxy S25, and the photos cannot separate them.**
 
-- Identification confidence: 2% (unknown)
+- Identification confidence: 19% (unknown)
 - Price confidence: 18%
-- It is weighing: Samsung Galaxy S25 (0.1)
-- Sealed box is printed 'Galaxy S26 Ultra', a model absent from the catalogue and not verifiable as a real Samsung release; the generic outline artwork is inconsistent with official Samsung retail packaging, suggesting counterfeit or custom boxing. Contents cannot be inspected, no IMEI/serial is visible, and no shortlist entry matches, so naming any model risks paying for a fake.
+- It is weighing: Samsung Galaxy S26 Ultra (0.9), Samsung Galaxy S25 (0.1)
+- The evidence only supports this answer at 31 percent, which is a guess. One clear photo of the label would settle it.
 - no label, plate or settings screen was legible
-- 2 lines seen by both readers
+- 1 lines seen by both readers
+- the brand was read by only one reader and is not confirmed
 - looks like a catalogue or stock image
 - 8 claims are still unproven, 0 are supported
 
@@ -61,6 +67,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: two readings of these photos disagreed about what is written on the item_
 3. [PHOTO] Screenshot of Settings then About, showing the model name and storage.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Has the screen or battery ever been changed?
+- Is it signed out of iCloud or Google, so a new owner can set it up?
 
 ## Claims
 - [unverifiable_remote] Latest SAMSUNG galaxy S26 Ultra
@@ -86,7 +97,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 34 NGN
 
 Conditions attached to this price:
-- Not identified: Sealed box is printed 'Galaxy S26 Ultra', a model absent from the catalogue and not verifiable as a real Samsung release; the generic outline artwork is inconsistent with official Samsung retail packaging, suggesting counterfeit or custom boxing. Contents cannot be inspected, no IMEI/serial is visible, and no shortlist entry matches, so naming any model risks paying for a fake.
+- Not identified: The evidence only supports this answer at 31 percent, which is a guess. One clear photo of the label would settle it.
 - Evidence flag: looks like a catalogue or stock image
 - Latest SAMSUNG galaxy S26 Ultra -> not proven remotely. Agent will confirm at pickup.
 - 512gb -> not proven remotely. Agent reads storage from Settings.

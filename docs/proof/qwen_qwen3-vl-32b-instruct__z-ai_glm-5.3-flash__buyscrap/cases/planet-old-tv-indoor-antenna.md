@@ -7,7 +7,7 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Category: tv_antenna (confidence 0.95)
 - Made of: plastic 70%, steel 20%, copper_insulated 10%
 - Estimated weight: 0.5 kg (confidence 0.8)
-- Brand read off the item: nothing legible
+- Brand read off the item: PLANET
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
@@ -20,20 +20,20 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - brand_text agreed by both readers
 - 2 transcribed lines was seen by only one reader, so it is treated as unread
 
+## OCR read off the photos
+- PLANET
+
 ## Chain
+- **ocr** -> ok. 1 lines: PLANET
 - **corroborate** -> dispute. brand_text agreed by both readers; 2 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=tv_antenna brand=PLANET model=None label=False lines=1
-- **grounding** -> dropped. brand
-- **forensics** -> flag. the reader stated brand it could not point to in the photos
-- **retrieval** -> empty. query='PLANET The old TV indoor Antenna might still be working.' hits=[]
+- **retrieval** -> empty. query='PLANET PLANET The old TV indoor Antenna might still be working.' hits=[]
 - **gate** -> abstain. no candidates and no model text
 
 ## Identification
 No catalogue candidates matched.
 
 **Not identified: CANNOT_IDENTIFY.** No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.
-
-Evidence flags: the reader stated brand it could not point to in the photos
 
 ## How sure the engine is (back office)
 **0%: the photos do not say what this is.**
@@ -43,7 +43,6 @@ Evidence flags: the reader stated brand it could not point to in the photos
 - No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.
 - no label, plate or settings screen was legible
 - 1 lines seen by both readers
-- the reader stated brand it could not point to in the photos
 - 5 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -80,7 +79,6 @@ Scrap floor: 210 NGN
 
 Conditions attached to this price:
 - Not identified: No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.
-- Evidence flag: the reader stated brand it could not point to in the photos
 - The old TV indoor Antenna might still be working. -> not proven remotely. Agent powers the item on before payment.
 - Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on a piece of paper and take one photo with the paper next to the item..
 - Required evidence 'overview' was not supplied -> not proven remotely. One photo showing the whole item..

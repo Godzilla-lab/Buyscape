@@ -1,15 +1,15 @@
 # Case samsung-faulty-ecobubble-6kg-washing-machine-for-sale
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0013  |  45114 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0014  |  35690 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: washing machine (confidence 1.0)
 - Made of: steel 60%, plastic 30%, glass 10%
 - Estimated weight: 55.0 kg (confidence 0.8)
-- Brand read off the item: nothing legible
+- Brand read off the item: SAMSUNG
 - Model read off the item: nothing legible
-- Rating read: none
+- Rating read: 6.0kg
 - Label, plate or settings screen legible: yes
 - Damage noted: dust and grime on front panel, minor scratches on door frame, some discoloration on top surface
 - Looks like a catalogue image: no
@@ -21,13 +21,18 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - rating_text agreed by both readers
 - 16 transcribed lines was seen by only one reader, so it is treated as unread
 
+## OCR read off the photos
+- SAMSUNG
+- 10款日
+- 4010
+- ecobubble 6.0kg
+
 ## Chain
+- **ocr** -> ok. 4 lines: SAMSUNG | 10款日 | 4010 | ecobubble 6.0kg
 - **corroborate** -> dispute. brand_text agreed by both readers; rating_text agreed by both readers; 16 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=washing machine brand=SAMSUNG model=None label=True lines=17
-- **grounding** -> dropped. brand, rating
-- **forensics** -> flag. the reader stated brand, rating it could not point to in the photos
-- **retrieval** -> ok. query='SAMSUNG Super Eco Wash Outdoor Care Baby Care Wool Hand Wash Eco+Spin Cotton Daily Wash Pr' hits=['Samsung AR12 1.5HP', 'Samsung AR09 1HP', 'Samsung WA80 8kg top loader', 'Samsung WW70 7kg front loader', 'Samsung Galaxy S21']
-- **identify** -> refused. chosen=None None margin=0.35
+- **retrieval** -> ok. query='SAMSUNG 6.0kg SAMSUNG Super Eco Wash Outdoor Care Baby Care Wool Hand Wash Eco+Spin Cotton' hits=['Samsung AR12 1.5HP', 'Samsung AR09 1HP', 'Samsung WA80 8kg top loader', 'Samsung WW70 7kg front loader', 'Samsung Galaxy S21']
+- **identify** -> refused. chosen=None None margin=None
 - **abstain** -> abstain. model refused
 
 ## Identification
@@ -38,20 +43,17 @@ Shortlist from the catalogue:
   - Samsung WW70 7kg front loader (0.4)
   - Samsung Galaxy S21 (0.3)
 
-**Not identified: CANNOT_IDENTIFY.** Label reads 'ecobubble 6.0kg' front loader, but no model number is legible and the only front-loader shortlist entry (WW70) is a 7kg machine; the exact 6kg model cannot be confirmed.
-
-Evidence flags: the reader stated brand, rating it could not point to in the photos
+**Not identified: CANNOT_IDENTIFY.** Label clearly reads ecobubble 6.0kg front loader, but no shortlist entry matches 6kg capacity; exact model number (e.g. WW60) is not legible anywhere in the photo.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 12% on the best answer. It is probably a Samsung WW70 or a Samsung WA80, and the photos cannot separate them.**
+**Not sure enough to price: 21% on the best answer. It is probably a Samsung WW70, and the photos cannot separate them.**
 
-- Identification confidence: 12% (unknown)
+- Identification confidence: 21% (unknown)
 - Price confidence: 16%
-- It is weighing: Samsung WW70 (0.4), Samsung WA80 (0.05)
-- Label reads 'ecobubble 6.0kg' front loader, but no model number is legible and the only front-loader shortlist entry (WW70) is a 7kg machine; the exact 6kg model cannot be confirmed.
+- It is weighing: Samsung WW70 (0.35)
+- Label clearly reads ecobubble 6.0kg front loader, but no shortlist entry matches 6kg capacity; exact model number (e.g. WW60) is not legible anywhere in the photo.
 - read off the item's own label
 - 17 lines seen by both readers
-- the reader stated brand, rating it could not point to in the photos
 - 9 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -93,8 +95,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 18,260 NGN
 
 Conditions attached to this price:
-- Not identified: Label reads 'ecobubble 6.0kg' front loader, but no model number is legible and the only front-loader shortlist entry (WW70) is a 7kg machine; the exact 6kg model cannot be confirmed.
-- Evidence flag: the reader stated brand, rating it could not point to in the photos
+- Not identified: Label clearly reads ecobubble 6.0kg front loader, but no shortlist entry matches 6kg capacity; exact model number (e.g. WW60) is not legible anywhere in the photo.
 - Samsung faulty ecobubble 6kg washing machine -> not proven remotely. Agent reads the rating plate.
 - Samsung faulty ecobubble 6kg washing machine -> not proven remotely. Agent reads the rating plate.
 - Samsung faulty ecobubble 6kg washing machine -> not proven remotely. Agent reads the rating plate.

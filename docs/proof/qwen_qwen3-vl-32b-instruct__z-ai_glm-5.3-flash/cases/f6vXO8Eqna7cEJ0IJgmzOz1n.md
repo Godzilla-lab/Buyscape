@@ -1,11 +1,11 @@
 # Case f6vXO8Eqna7cEJ0IJgmzOz1n
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0006  |  13773 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  22005 ms
 
 ## What the engine saw
 - Presentation: sealed_new
 - Category: phone (confidence 0.9)
-- Made of: paper 80%, plastic 20%
+- Made of: plastic 70%, paper 30%
 - Estimated weight: 0.5 kg (confidence 0.8)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
@@ -18,27 +18,40 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 
 ## Two readers
 - model_text was seen by only one reader, so it is treated as unread
-- 2 transcribed lines was seen by only one reader, so it is treated as unread
+- 1 transcribed lines was seen by only one reader, so it is treated as unread
+
+## OCR read off the photos
+- STQ
+- ONYITEX GADGET
 
 ## Chain
-- **corroborate** -> dispute. model_text was seen by only one reader, so it is treated as unread; 2 transcribed lines was seen by only one reader, so it is treated as unread
+- **ocr** -> ok. 2 lines: STQ | ONYITEX GADGET
+- **corroborate** -> dispute. model_text was seen by only one reader, so it is treated as unread; 1 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=phone brand=None model=None label=False lines=1
 - **forensics** -> flag. looks like a catalogue or stock image
-- **gate** -> abstain. multiple items in frame
+- **retrieval** -> ok. query='ONYTEX GADGETZ Brand new Samsung galaxy S10+ now available at low cost dm for your order n' hits=['Samsung Galaxy S21', 'Samsung Galaxy S22', 'Samsung Galaxy S23', 'Samsung Galaxy S24', 'Samsung Galaxy S25']
+- **identify** -> ok. chosen=Samsung Galaxy S10+ margin=None
+- **abstain** -> abstain. confidence 0.38: no label, plate or settings screen was legible; 1 lines seen by both readers; looks like a catalogue or stock image
 
 ## Identification
-No catalogue candidates matched.
+Shortlist from the catalogue:
+  - Samsung Galaxy S21 (0.5)
+  - Samsung Galaxy S22 (0.5)
+  - Samsung Galaxy S23 (0.5)
+  - Samsung Galaxy S24 (0.5)
+  - Samsung Galaxy S25 (0.5)
 
-**Not identified: EVIDENCE_INCOMPLETE.** The photos show more than one item, so no single item can be identified.
+**Not identified: EVIDENCE_INCOMPLETE.** The evidence only supports this answer at 38 percent, which is a guess. One clear photo of the label would settle it.
 
 Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
-**0%: the photos do not say what this is.**
+**Not sure enough to price: 23% on the best answer. It is probably a Samsung Galaxy S10+, and the photos cannot separate them.**
 
-- Identification confidence: 0% (unknown)
+- Identification confidence: 23% (unknown)
 - Price confidence: 18%
-- The photos show more than one item, so no single item can be identified.
+- It is weighing: Samsung Galaxy S10+ (0.9)
+- The evidence only supports this answer at 38 percent, which is a guess. One clear photo of the label would settle it.
 - no label, plate or settings screen was legible
 - 1 lines seen by both readers
 - looks like a catalogue or stock image
@@ -47,12 +60,17 @@ Evidence flags: looks like a catalogue or stock image
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
 
 ## What the seller is asked for next (shown in the app)
-1. [PHOTO] Photograph one item on its own, with nothing else in the picture.
-   _why: the photos show more than one item_
-2. [PHOTO] Take your own photo of the actual item you are selling.
+1. [PHOTO] Take your own photo of the actual item you are selling.
    _why: this looks like a catalogue picture, not the real unit_
-3. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: If you have the box, photograph the label showing the model, storage and IMEI. Then, still filming, do this on the item's own screen and hold it steady so the writing can be read: open settings then About, showing the model name and storage. Then, without stopping the video: Pull out the SIM tray and photograph the open slot. Finish with: A short clip: press power, unlock, then open the camera app. Keep filming the whole time. Do not cut between clips.
+2. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: If you have the box, photograph the label showing the model, storage and IMEI. Then, still filming, do this on the item's own screen and hold it steady so the writing can be read: open settings then About, showing the model name and storage. Then, without stopping the video: Pull out the SIM tray and photograph the open slot. Finish with: A short clip: press power, unlock, then open the camera app. Keep filming the whole time. Do not cut between clips.
    _why: two readings of these photos disagreed about what is written on the item_
+3. [PHOTO] Screenshot of Settings then About, showing the model name and storage.
+   _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Has the screen or battery ever been changed?
+- Is it signed out of iCloud or Google, so a new owner can set it up?
 
 ## Claims
 - [unverifiable_remote] Brand new Samsung galaxy S10+
@@ -70,14 +88,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
-**22 to 66 NGN** (priced as material, width 0.981, method material_floor, 0 comparable prices)
+**29 to 81 NGN** (priced as material, width 0.9404, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 0.5 kg of paper 80%, plastic 20% (rates for paper, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 0.5 kg of plastic 70%, paper 30% (rates for paper, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 34 NGN
+Scrap floor: 44 NGN
 
 Conditions attached to this price:
-- Not identified: The photos show more than one item, so no single item can be identified.
+- Not identified: The evidence only supports this answer at 38 percent, which is a guess. One clear photo of the label would settle it.
 - Evidence flag: looks like a catalogue or stock image
 - Brand new Samsung galaxy S10+ -> not proven remotely. Agent will confirm at pickup.
 - Samsung galaxy S10+ -> not proven remotely. Agent will confirm at pickup.

@@ -1,29 +1,35 @@
 # Case 2DnkLi2wmnwsOzasRfmbY03l
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  80758 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  28868 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: laptop (confidence 0.9)
-- Made of: plastic 70%, steel 20%, circuit_board 10%
-- Estimated weight: 1.5 kg (confidence 0.8)
-- Brand read off the item: nothing legible
+- Made of: plastic 80%, steel 20%
+- Estimated weight: 1.5 kg (confidence 0.7)
+- Brand read off the item: HP
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: minor scuffs on surface, dust and smudges visible
+- Damage noted: minor scuffs on surface, hand holding item, possibly obscuring details
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: CIANO GLOBAL CONCEPTS
+- Text read: CIANO GLOBAL CONCEPTS | HP
 
 ## Two readers
 - 1 transcribed lines was seen by only one reader, so it is treated as unread
+- brand_text was read by only one reader, so it is kept but not confirmed
+
+## OCR read off the photos
+- POSTED ON JIT
+- CIANO GLOBAL CONCEPTS
 
 ## Chain
-- **corroborate** -> dispute. 1 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=laptop brand=None model=None label=False lines=1
-- **retrieval** -> ok. query='CIANO GLOBAL CONCEPTS Hp elitebook 840 g7 – premium business laptop
-looking for a fast, re' hits=['HP EliteBook 840 G5', 'HP EliteBook 840 G6', 'HP 250 G7', 'HP 2000', 'HP EliteBook 830 G5']
+- **ocr** -> ok. 2 lines: POSTED ON JIT | CIANO GLOBAL CONCEPTS
+- **corroborate** -> dispute. 1 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed
+- **read_evidence** -> ok. category=laptop brand=HP model=None label=False lines=2
+- **retrieval** -> ok. query='HP CIANO GLOBAL CONCEPTS HP Hp elitebook 840 g7 – premium business laptop
+looking for a fa' hits=['HP EliteBook 840 G5', 'HP EliteBook 840 G6', 'HP 250 G7', 'HP 2000', 'HP EliteBook 830 G5']
 - **identify** -> refused. chosen=None None margin=0.05
 - **abstain** -> abstain. model refused
 
@@ -35,17 +41,18 @@ Shortlist from the catalogue:
   - HP 2000 (0.5)
   - HP EliteBook 830 G5 (0.4333)
 
-**Not identified: CANNOT_IDENTIFY.** Only a plain HP logo is visible; no model text, and seller's claimed G7 is not in the shortlist, so the exact generation cannot be confirmed.
+**Not identified: CANNOT_IDENTIFY.** Closed lid shows only HP logo; no model text or plate, so G5/G6/G7 cannot be distinguished; seller's G7 claim unverifiable and not on label.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 19% on the best answer. It is probably a HP EliteBook 840 G6 or a HP EliteBook 840 G5, and the photos cannot separate them.**
+**Not sure enough to price: 14% on the best answer. It is probably a HP EliteBook 840 G6 or a HP EliteBook 840 G5, and the photos cannot separate them.**
 
-- Identification confidence: 19% (unknown)
+- Identification confidence: 14% (unknown)
 - Price confidence: 22%
 - It is weighing: HP EliteBook 840 G6 (0.4), HP EliteBook 840 G5 (0.35)
-- Only a plain HP logo is visible; no model text, and seller's claimed G7 is not in the shortlist, so the exact generation cannot be confirmed.
+- Closed lid shows only HP logo; no model text or plate, so G5/G6/G7 cannot be distinguished; seller's G7 claim unverifiable and not on label.
 - no label, plate or settings screen was legible
 - 1 lines seen by both readers
+- the brand was read by only one reader and is not confirmed
 - the next candidate was only 0.05 behind
 - 6 claims are still unproven, 0 are supported
 
@@ -58,6 +65,12 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: nothing on the item says which model this is_
 3. [PHOTO] Screenshot of System Information (Windows) or About This Mac, showing the model, processor, RAM and storage.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it stay on for more than ten minutes with the charger unplugged?
+- Has it ever been dropped, or had liquid spilled on it?
+- What does not work on it? Say none if everything works.
 
 ## Claims
 - [unverifiable_remote] Hp elitebook 840 g7
@@ -72,14 +85,15 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Screenshot of System Information (Windows) or About This Mac, showing the model, processor, RAM and storage.
 
 ## Price
-**352 to 969 NGN** (priced as material, width 0.9323, method material_floor, 0 comparable prices)
+**5,000 to 5,000 NGN** (priced as material, width 0.0, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 1.5 kg of plastic 70%, steel 20%, circuit_board 10% (rates for circuit_board, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 1.5 kg of plastic 80%, steel 20% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 480 NGN
+Scrap floor: 270 NGN
 
 Conditions attached to this price:
-- Not identified: Only a plain HP logo is visible; no model text, and seller's claimed G7 is not in the shortlist, so the exact generation cannot be confirmed.
+- Not identified: Closed lid shows only HP logo; no model text or plate, so G5/G6/G7 cannot be distinguished; seller's G7 claim unverifiable and not on label.
+- Raised to the 5,000 NGN minimum this business publishes for this kind of item.
 - Hp elitebook 840 g7 -> not proven remotely. Agent will confirm at pickup.
 - premium business laptop -> not proven remotely. Agent will confirm at pickup.
 - Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on paper and take one photo with the paper next to the laptop..

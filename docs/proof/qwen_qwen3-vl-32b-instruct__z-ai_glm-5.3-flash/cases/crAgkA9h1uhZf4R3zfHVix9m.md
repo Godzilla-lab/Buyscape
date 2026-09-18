@@ -1,27 +1,31 @@
 # Case crAgkA9h1uhZf4R3zfHVix9m
 
-Photos: 5  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  32171 ms
+Photos: 5  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  39809 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: laptop (confidence 0.95)
-- Made of: plastic 60%, steel 30%, circuit_board 10%
+- Made of: plastic 60%, steel 30%, circuit_board 5%, copper_insulated 5%
 - Estimated weight: 1.8 kg (confidence 0.8)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: No visible damage or wear.
+- Damage noted: minor scuffs on bottom casing, screen shows faint smudges
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 - Text read: ThinkPad
 
 ## Two readers
 - brand_text differed between the two readers, so it is treated as unread
-- 4 transcribed lines was seen by only one reader, so it is treated as unread
+- 3 transcribed lines was seen by only one reader, so it is treated as unread
+
+## OCR read off the photos
+- 1
 
 ## Chain
-- **corroborate** -> dispute. brand_text differed between the two readers, so it is treated as unread; 4 transcribed lines was seen by only one reader, so it is treated as unread
+- **ocr** -> ok. 1 lines: 1
+- **corroborate** -> dispute. brand_text differed between the two readers, so it is treated as unread; 3 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=laptop brand=None model=None label=False lines=1
 - **retrieval** -> ok. query='ThinkPad E-14 Gen 2 11th Generation Lenovo Thinkpad... excellent machine fir office amd pe' hits=['Lenovo ThinkPad T480', 'Lenovo ThinkPad T470', 'Lenovo 14w', 'Lenovo ThinkPad X1 Carbon Gen 6', 'Lenovo IdeaPad 3']
 - **identify** -> refused. chosen=None None margin=0.05
@@ -59,6 +63,12 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 3. [PHOTO] Screenshot of System Information (Windows) or About This Mac, showing the model, processor, RAM and storage.
    _why: nothing on the item says which model this is_
 
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it stay on for more than ten minutes with the charger unplugged?
+- Has it ever been dropped, or had liquid spilled on it?
+- What does not work on it? Say none if everything works.
+
 ## Claims
 - [unverifiable_remote] E-14 Gen 2 11th Generation Lenovo Thinkpad
 - [unverifiable_remote] excellent machine for office and personal pc
@@ -72,14 +82,15 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Screenshot of System Information (Windows) or About This Mac, showing the model, processor, RAM and storage.
 
 ## Price
-**476 to 1,238 NGN** (priced as material, width 0.8888, method material_floor, 0 comparable prices)
+**5,000 to 5,000 NGN** (priced as material, width 0.0, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 1.8 kg of plastic 60%, steel 30%, circuit_board 10% (rates for circuit_board, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 1.8 kg of plastic 60%, steel 30%, circuit_board 5%, copper_insulated 5% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 648 NGN
+Scrap floor: 675 NGN
 
 Conditions attached to this price:
 - Not identified: Seller claims ThinkPad E14 Gen 2, but that model is not on the shortlist and no label or model text is legible in the photos; only 'ThinkPad' is readable, which fits several entries without distinguishing them.
+- Raised to the 5,000 NGN minimum this business publishes for this kind of item.
 - E-14 Gen 2 11th Generation Lenovo Thinkpad -> not proven remotely. Agent will confirm at pickup.
 - excellent machine for office and personal pc -> not proven remotely. Agent will confirm at pickup.
 - Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on paper and take one photo with the paper next to the laptop..

@@ -1,13 +1,13 @@
 # Case scrap-compact-audio-system
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0013  |  26973 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0014  |  22704 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: audio system (confidence 0.9)
 - Made of: plastic 70%, steel 20%, circuit_board 10%
 - Estimated weight: 8.0 kg (confidence 0.7)
-- Brand read off the item: nothing legible
+- Brand read off the item: MINISTAR
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
@@ -20,13 +20,17 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - brand_text agreed by both readers
 - 1 transcribed lines was seen by only one reader, so it is treated as unread
 
+## OCR read off the photos
+- 85
+- 3Dsc
+- "A
+
 ## Chain
+- **ocr** -> ok. 3 lines: 85 | 3Dsc | "A
 - **corroborate** -> dispute. brand_text agreed by both readers; 1 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=audio system brand=MINISTAR model=None label=False lines=2
-- **grounding** -> dropped. brand
-- **forensics** -> flag. the reader stated brand it could not point to in the photos
-- **retrieval** -> ok. query='3 DISC MINISTAR Description: This is a scrap compact audio system that is currently not fu' hits=['Lenovo IdeaPad 3', 'Acer Aspire 5', 'Tecno Pova 5', 'Kemage KM6500 5.5kVA', 'Lutian LT3900 3.5kVA']
-- **identify** -> refused. chosen=None None margin=None
+- **retrieval** -> ok. query='MINISTAR 3 DISC MINISTAR Description: This is a scrap compact audio system that is current' hits=['Lenovo IdeaPad 3', 'Acer Aspire 5', 'Tecno Pova 5', 'Kemage KM6500 5.5kVA', 'Lutian LT3900 3.5kVA']
+- **identify** -> refused. chosen=MINISTAR None margin=None
 - **abstain** -> abstain. model refused
 
 ## Identification
@@ -37,19 +41,17 @@ Shortlist from the catalogue:
   - Kemage KM6500 5.5kVA (0.15)
   - Lutian LT3900 3.5kVA (0.15)
 
-**Not identified: CANNOT_IDENTIFY.** Item is a Ministar 3-disc mini hi-fi system, not any shortlist entry; no model designation is legible.
-
-Evidence flags: the reader stated brand it could not point to in the photos
+**Not identified: CANNOT_IDENTIFY.** Brand MINISTAR is legible on the fascia, but no model number is printed or readable anywhere on the unit, and the shortlist (laptops, phone, generators) contains no audio equipment, so no catalogue entry can be matched.
 
 ## How sure the engine is (back office)
-**0%: the photos do not say what this is.**
+**Not sure enough to price: 31% on the best answer. It is probably a MINISTAR 3-disc compact audio system, and the photos cannot separate them.**
 
-- Identification confidence: 0% (unknown)
+- Identification confidence: 31% (unknown)
 - Price confidence: 14%
-- Item is a Ministar 3-disc mini hi-fi system, not any shortlist entry; no model designation is legible.
+- It is weighing: MINISTAR 3-disc compact audio system (0.6)
+- Brand MINISTAR is legible on the fascia, but no model number is printed or readable anywhere on the unit, and the shortlist (laptops, phone, generators) contains no audio equipment, so no catalogue entry can be matched.
 - no label, plate or settings screen was legible
 - 2 lines seen by both readers
-- the reader stated brand it could not point to in the photos
 - 10 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -91,8 +93,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 2,000 NGN
 
 Conditions attached to this price:
-- Not identified: Item is a Ministar 3-disc mini hi-fi system, not any shortlist entry; no model designation is legible.
-- Evidence flag: the reader stated brand it could not point to in the photos
+- Not identified: Brand MINISTAR is legible on the fascia, but no model number is printed or readable anywhere on the unit, and the shortlist (laptops, phone, generators) contains no audio equipment, so no catalogue entry can be matched.
 - This is a scrap compact audio system -> not proven remotely. Weigh on the scale and photograph the display.
 - It is currently not functioning -> not proven remotely. Agent powers the item on before payment.
 - It is being sold as is for parts or recycling -> not proven remotely. Agent will confirm at pickup.

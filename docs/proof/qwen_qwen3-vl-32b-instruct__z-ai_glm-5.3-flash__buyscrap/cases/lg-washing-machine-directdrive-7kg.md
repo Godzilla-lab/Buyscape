@@ -1,6 +1,6 @@
 # Case lg-washing-machine-directdrive-7kg
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  14818 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0015  |  37377 ms
 
 ## What the engine saw
 - Presentation: single_unit
@@ -8,20 +8,41 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Made of: steel 40%, plastic 50%, copper 10%
 - Estimated weight: 65.0 kg (confidence 0.8)
 - Brand read off the item: LG
-- Model read off the item: DirectDrive 7kg F1486COP2
-- Rating read: 7kg
+- Model read off the item: nothing legible
+- Rating read: 7 kg
 - Label, plate or settings screen legible: yes
 - Damage noted: rust stains on lower front panel and around door seal, dirt and grime on exterior surface, scratches on control dial
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 - Text read: LG | INVERTER DirectDrive 7kg F1486COP2 | Cotton Quick | Cotton | Hand Wash (Wool) | Synthetic | Blanket | PreWash
 
+## Two readers
+- brand_text agreed by both readers
+- rating_text agreed by both readers
+- model_text differed between the two readers, so it is treated as unread
+- 2 transcribed lines was seen by only one reader, so it is treated as unread
+
+## OCR read off the photos
+- LG
+- Cetton Quick
+- Cotton
+- Hand Wiash
+- /Wool
+- DirectDrive 7kg,
+- INVERTER
+- Quiok 30
+- Baty Care
+- Hinse-Spin
+- Temp
+- DO MOTOR
+
 ## Chain
-- **corroborate** -> unavailable. openrouter:mistralai/mistral-small-3.2-24b-instruct failed after retries: HTTP 429: {"error":{"message":"Provider return
-- **read_evidence** -> ok. category=washing machine brand=LG model=DirectDrive 7kg F1486COP2 label=True lines=22
-- **retrieval** -> ok. query='LG DirectDrive 7kg F1486COP2 7kg LG INVERTER DirectDrive 7kg F1486COP2 Cotton Quick Cotton' hits=['LG T2108 8kg top loader', 'LG T2312 12kg top loader', 'LG F2J5 7kg front loader', 'LG S4-Q09 1HP', 'LG S4-Q18 2HP']
-- **identify** -> ok. chosen=LG F1486COP2 margin=0.75
-- **abstain** -> pass. confidence=0.66 margin=0.75
+- **ocr** -> ok. 15 lines: LG | Cetton Quick | Cotton | Hand Wiash | /Wool | DirectDrive 7kg, | INVERTER | Quiok 30 | Baty Care | Hinse-Spin | Temp
+- **corroborate** -> dispute. brand_text agreed by both readers; rating_text agreed by both readers; model_text differed between the two readers, so it is treated as unread; 2 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=washing machine brand=LG model=None label=True lines=21
+- **retrieval** -> ok. query='LG 7 kg LG INVERTER DirectDrive 7kg F1486COP2 Cotton Quick Cotton Hand Wash (Wool) Synthet' hits=['LG T2108 8kg top loader', 'LG T2312 12kg top loader', 'LG F2J5 7kg front loader', 'LG S4-Q09 1HP', 'LG S4-Q18 2HP']
+- **identify** -> ok. chosen=LG F1486COP2 margin=0.6
+- **abstain** -> abstain. seller names another generation
 
 ## Identification
 Shortlist from the catalogue:
@@ -31,27 +52,26 @@ Shortlist from the catalogue:
   - LG S4-Q09 1HP (0.4)
   - LG S4-Q18 2HP (0.4)
 
-**Answer: LG F1486COP2 DirectDrive 7kg** (margin 0.75)
+**Not identified: EVIDENCE_INCOMPLETE.** The answer rests on f1486cop2, which the OCR engine did not read off the item and the seller did not say. Two readers transcribing the same code is not enough on its own. This needs a sharp photo of the label.
 
 ## How sure the engine is (back office)
-**66% sure this is a LG F1486COP2 DirectDrive 7kg.**
+**Not sure enough to price: 54% on the best answer. It is probably a LG F1486COP2 or a LG F2J5, and the photos cannot separate them.**
 
-- Identification confidence: 66% (likely)
-- Price confidence: 0%
-- It is weighing: LG F1486COP2 (0.95), LG F2J5 (0.2)
+- Identification confidence: 54% (unsure)
+- Price confidence: 16%
+- It is weighing: LG F1486COP2 (0.9), LG F2J5 (0.3)
+- The answer rests on f1486cop2, which the OCR engine did not read off the item and the seller did not say. Two readers transcribing the same code is not enough on its own. This needs a sharp photo of the label.
 - read off the item's own label
-- only one reader saw these photos, the second was unavailable
+- 20 lines seen by both readers
 - 9 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
 
 ## What the seller is asked for next (shown in the app)
-1. [PHOTO] Write the code {code} on paper and photograph it next to the machine.
-   _why: this is needed before the price can be confirmed_
-2. [PHOTO] One photo of the whole machine from the front with the door closed.
-   _why: this is needed before the price can be confirmed_
-3. [PHOTO] Close-up of the sticker with the model number, usually inside the door or on the back.
-   _why: this is needed before the price can be confirmed_
+1. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: Close-up of the sticker with the model number, usually inside the door or on the back. Then, without stopping the video: Open the door and photograph the inside of the drum. Finish with: A short clip of the machine switched on with the panel lit. Keep filming the whole time. Do not cut between clips.
+   _why: two readings of these photos disagreed about what is written on the item_
+2. [PHOTO] Close-up of the sticker with the model number, usually inside the door or on the back.
+   _why: nothing on the item says which model this is_
 
 ## What the seller is asked (only they know these)
 - Roughly how old is it, in years?
@@ -76,13 +96,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Open the door and photograph the inside of the drum.
 
 ## Price
-**5,416 to 30,000 NGN** (priced as material, width 1.3882, method scrap_band_only, 0 comparable prices)
+**36,676 to 105,950 NGN** (priced as material, width 0.9714, method material_floor, 0 comparable prices)
 
-No usable comparable sales (0 found, 2 needed), so the range comes from the published Lagos buy band for this category, reduced by 0.4514 for unproven claims.
+This item was not identified, so it is priced as material rather than as a working item: 65 kg of steel 40%, plastic 50%, copper 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
 Scrap floor: 81,250 NGN
 
 Conditions attached to this price:
+- Not identified: The answer rests on f1486cop2, which the OCR engine did not read off the item and the seller did not say. Two readers transcribing the same code is not enough on its own. This needs a sharp photo of the label.
 - LG DirectDrive 7kg washing machine -> not proven remotely. Agent reads the rating plate.
 - LG DirectDrive 7kg washing machine -> not proven remotely. Agent reads the rating plate.
 - LG DirectDrive 7kg washing machine -> not proven remotely. Agent reads the rating plate.

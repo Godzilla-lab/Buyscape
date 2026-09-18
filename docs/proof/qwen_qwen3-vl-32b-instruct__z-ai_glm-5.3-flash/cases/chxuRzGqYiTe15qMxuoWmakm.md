@@ -1,36 +1,39 @@
 # Case chxuRzGqYiTe15qMxuoWmakm
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  19800 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  24968 ms
 
 ## What the engine saw
 - Presentation: sealed_new
 - Category: phone (confidence 0.95)
 - Made of: plastic 80%, steel 15%, circuit_board 5%
 - Estimated weight: 0.3 kg (confidence 0.8)
-- Brand read off the item: nothing legible
-- Model read off the item: nothing legible
+- Brand read off the item: Nokia
+- Model read off the item: Nokia 1064G
 - Rating read: none
 - Label, plate or settings screen legible: no
 - Damage noted: none
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
-- Text read: Nokia 106 4G | NOKIA
+- Text read: Nokia 106 4G | NOKIA | Nokia 1064G
 
 ## Two readers
 - brand_text agreed by both readers
 - model_text agreed by both readers
 
+## OCR read off the photos
+- Nokia 106 4G
+- NOKIA
+- MPUTERS
+- 5H
+
 ## Chain
+- **ocr** -> ok. 4 lines: Nokia 106 4G | NOKIA | MPUTERS | 5H
 - **corroborate** -> agree. brand_text agreed by both readers; model_text agreed by both readers
-- **read_evidence** -> ok. category=phone brand=Nokia model=Nokia 106 4G label=False lines=2
-- **grounding** -> dropped. brand, model
-- **forensics** -> flag. the reader stated brand, model it could not point to in the photos; looks like a catalogue or stock image
-- **retrieval** -> ok. query='Nokia 106 4G NOKIA Up to 15.7 hrs/21.9 days talk/standby time
-LED torch
-1.8 display 
-HD ca' hits=['Nokia C32', 'Infinix Smart 8', 'Infinix Smart 9', 'Google Pixel 7', 'Google Pixel 8']
+- **read_evidence** -> ok. category=phone brand=Nokia model=Nokia 1064G label=False lines=3
+- **forensics** -> flag. looks like a catalogue or stock image
+- **retrieval** -> ok. query='Nokia Nokia 1064G Nokia 106 4G NOKIA Nokia 1064G Up to 15.7 hrs/21.9 days talk/standby tim' hits=['Nokia C32', 'Infinix Smart 8', 'Infinix Smart 9', 'Google Pixel 7', 'Google Pixel 8']
 - **identify** -> ok. chosen=Nokia 106 4G margin=None
-- **abstain** -> abstain. confidence 0.4: no label, plate or settings screen was legible; 2 lines seen by both readers; the reader stated brand, model it could not point to in the photos; looks like a catalogue or stock image
+- **abstain** -> abstain. confidence 0.4: no label, plate or settings screen was legible; 2 lines seen by both readers; looks like a catalogue or stock image
 
 ## Identification
 Shortlist from the catalogue:
@@ -42,7 +45,7 @@ Shortlist from the catalogue:
 
 **Not identified: EVIDENCE_INCOMPLETE.** The evidence only supports this answer at 40 percent, which is a guess. One clear photo of the label would settle it.
 
-Evidence flags: the reader stated brand, model it could not point to in the photos; looks like a catalogue or stock image
+Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
 **Not sure enough to price: 24% on the best answer. It is probably a Nokia 106 4G, and the photos cannot separate them.**
@@ -53,7 +56,6 @@ Evidence flags: the reader stated brand, model it could not point to in the phot
 - The evidence only supports this answer at 40 percent, which is a guess. One clear photo of the label would settle it.
 - no label, plate or settings screen was legible
 - 2 lines seen by both readers
-- the reader stated brand, model it could not point to in the photos
 - looks like a catalogue or stock image
 - 10 claims are still unproven, 0 are supported
 
@@ -66,6 +68,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: nothing on the item says which model this is_
 3. [PHOTO] Dial *#06# and screenshot the IMEI that appears.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Has the screen or battery ever been changed?
+- Is it signed out of iCloud or Google, so a new owner can set it up?
 
 ## Claims
 - [unverifiable_remote] Up to 15.7 hrs talk time
@@ -85,15 +92,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
-**41 to 130 NGN** (priced as material, width 1.0366, method material_floor, 0 comparable prices)
+**35 to 85 NGN** (priced as material, width 0.8348, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 0.3 kg of plastic 80%, steel 15%, circuit_board 5% (rates for circuit_board, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 0.3 kg of plastic 80%, steel 15%, circuit_board 5% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 69 NGN
+Scrap floor: 58 NGN
 
 Conditions attached to this price:
 - Not identified: The evidence only supports this answer at 40 percent, which is a guess. One clear photo of the label would settle it.
-- Evidence flag: the reader stated brand, model it could not point to in the photos
 - Evidence flag: looks like a catalogue or stock image
 - Up to 15.7 hrs talk time -> not proven remotely. Agent will confirm at pickup.
 - Up to 21.9 days standby time -> not proven remotely. Agent will confirm at pickup.

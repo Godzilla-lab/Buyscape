@@ -1,14 +1,14 @@
 # Case mjWuvQZtocddMl2MMYKqdGIX
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0006  |  31705 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  20643 ms
 
 ## What the engine saw
 - Presentation: sealed_new
 - Category: satellite phone (confidence 0.9)
 - Made of: paper 80%, plastic 20%
 - Estimated weight: 0.5 kg (confidence 0.8)
-- Brand read off the item: nothing legible
-- Model read off the item: nothing legible
+- Brand read off the item: Thuraya
+- Model read off the item: XT-LITE
 - Rating read: none
 - Label, plate or settings screen legible: no
 - Damage noted: none
@@ -20,30 +20,41 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - brand_text agreed by both readers
 - model_text agreed by both readers
 
+## OCR read off the photos
+- Thuraya XT-LITE
+- Satelite phone
+- ZOYE RICHIOM
+- ERPRISE
+- se
+- 10
+- 2-
+- THURAYA
+
 ## Chain
+- **ocr** -> ok. 8 lines: Thuraya XT-LITE | Satelite phone | ZOYE RICHIOM | ERPRISE | se | 10 | 2- | THURAYA
 - **corroborate** -> agree. brand_text agreed by both readers; model_text agreed by both readers
 - **read_evidence** -> ok. category=satellite phone brand=Thuraya model=XT-LITE label=False lines=3
-- **grounding** -> dropped. brand, model
-- **forensics** -> flag. the reader stated brand, model it could not point to in the photos; looks like a catalogue or stock image
-- **retrieval** -> empty. query='Thuraya XT-LITE Satellite phone THURAYA Original thuraya phone network available everywher' hits=[]
-- **gate** -> abstain. no candidates and no model text
+- **forensics** -> flag. looks like a catalogue or stock image
+- **retrieval** -> empty. query='Thuraya XT-LITE Thuraya XT-LITE Satellite phone THURAYA Original thuraya phone network ava' hits=[]
+- **identify** -> ok. chosen=Thuraya XT-LITE margin=None
+- **abstain** -> abstain. confidence 0.4: no label, plate or settings screen was legible; 3 lines seen by both readers; looks like a catalogue or stock image
 
 ## Identification
 No catalogue candidates matched.
 
-**Not identified: CANNOT_IDENTIFY.** No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.
+**Not identified: EVIDENCE_INCOMPLETE.** The evidence only supports this answer at 40 percent, which is a guess. One clear photo of the label would settle it.
 
-Evidence flags: the reader stated brand, model it could not point to in the photos; looks like a catalogue or stock image
+Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
-**0%: the photos do not say what this is.**
+**Not sure enough to price: 24% on the best answer. It is probably a Thuraya XT-LITE, and the photos cannot separate them.**
 
-- Identification confidence: 0% (unknown)
+- Identification confidence: 24% (unknown)
 - Price confidence: 20%
-- No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.
+- It is weighing: Thuraya XT-LITE (0.95)
+- The evidence only supports this answer at 40 percent, which is a guess. One clear photo of the label would settle it.
 - no label, plate or settings screen was legible
 - 3 lines seen by both readers
-- the reader stated brand, model it could not point to in the photos
 - looks like a catalogue or stock image
 - 7 claims are still unproven, 0 are supported
 
@@ -56,6 +67,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: nothing on the item says which model this is_
 3. [PHOTO] Dial *#06# and screenshot the IMEI that appears.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Has the screen or battery ever been changed?
+- Is it signed out of iCloud or Google, so a new owner can set it up?
 
 ## Claims
 - [unverified] Original Thuraya phone
@@ -80,8 +96,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 34 NGN
 
 Conditions attached to this price:
-- Not identified: No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.
-- Evidence flag: the reader stated brand, model it could not point to in the photos
+- Not identified: The evidence only supports this answer at 40 percent, which is a guess. One clear photo of the label would settle it.
 - Evidence flag: looks like a catalogue or stock image
 - Original Thuraya phone -> not proven remotely. Agent dials *#06#, matches the IMEI to the tray and box, then weighs the phone.
 - Network available everywhere you go -> not proven remotely. Agent will confirm at pickup.

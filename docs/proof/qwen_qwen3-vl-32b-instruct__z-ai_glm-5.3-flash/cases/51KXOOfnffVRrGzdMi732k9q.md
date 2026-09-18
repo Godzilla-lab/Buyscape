@@ -1,34 +1,34 @@
 # Case 51KXOOfnffVRrGzdMi732k9q
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  33630 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  24164 ms
 
 ## What the engine saw
-- Presentation: single_unit
-- Category: split air conditioner (confidence 0.95)
-- Made of: steel 40%, plastic 50%, copper 10%
-- Estimated weight: 35.0 kg (confidence 0.8)
-- Brand read off the item: nothing legible
+- Presentation: sealed_new
+- Category: split air conditioner (confidence 0.9)
+- Made of: plastic 60%, steel 30%, copper 10%
+- Estimated weight: 25.0 kg (confidence 0.7)
+- Brand read off the item: LG
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: Item wrapped in plastic film, no visible damage to casing.
+- Damage noted: item wrapped in plastic film, no visible damage to unit or packaging
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: LG
+- Text read: LG | LGY
 
 ## Two readers
 - brand_text agreed by both readers
 - model_text was seen by only one reader, so it is treated as unread
-- rating_text was seen by only one reader, so it is treated as unread
-- 4 transcribed lines was seen by only one reader, so it is treated as unread
+
+## OCR read off the photos
+- G
 
 ## Chain
-- **corroborate** -> dispute. brand_text agreed by both readers; model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; 4 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=split air conditioner brand=LG model=None label=False lines=1
-- **grounding** -> dropped. brand
-- **forensics** -> flag. the reader stated brand it could not point to in the photos
-- **retrieval** -> ok. query='LG Few Months FOREIGN USED Super clean, tested Okay, Air conditioner Working perfectly acc' hits=['LG S4-Q09 1HP', 'LG S4-Q18 2HP', 'LG S4-Q12 1.5HP']
-- **identify** -> refused. chosen=None None margin=0.0
+- **ocr** -> ok. 1 lines: G
+- **corroborate** -> dispute. brand_text agreed by both readers; model_text was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=split air conditioner brand=LG model=None label=False lines=2
+- **retrieval** -> ok. query='LG LG LGY Few Months FOREIGN USED Super clean, tested Okay, Air conditioner Working perfec' hits=['LG S4-Q09 1HP', 'LG S4-Q18 2HP', 'LG S4-Q12 1.5HP']
+- **identify** -> refused. chosen=LG None margin=0.0
 - **abstain** -> abstain. model refused
 
 ## Identification
@@ -37,21 +37,18 @@ Shortlist from the catalogue:
   - LG S4-Q18 2HP (0.4)
   - LG S4-Q12 1.5HP (0.38)
 
-**Not identified: CANNOT_IDENTIFY.** LG split AC confirmed by logo, but no legible plate or text distinguishes 1HP, 1.5HP or 2HP variants.
-
-Evidence flags: the reader stated brand it could not point to in the photos
+**Not identified: CANNOT_IDENTIFY.** LG split AC confirmed by logo, but no model or capacity marking is legible to distinguish 1HP/1.5HP/2HP.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 7% on the best answer. It is probably a LG S4-Q09 1HP or a LG S4-Q12 1.5HP, and the photos cannot separate them.**
+**Not sure enough to price: 14% on the best answer. It is probably a LG S4-Q09 or a LG S4-Q12, and the photos cannot separate them.**
 
-- Identification confidence: 7% (unknown)
+- Identification confidence: 14% (unknown)
 - Price confidence: 14%
-- It is weighing: LG S4-Q09 1HP (0.3), LG S4-Q12 1.5HP (0.3)
-- LG split AC confirmed by logo, but no legible plate or text distinguishes 1HP, 1.5HP or 2HP variants.
+- It is weighing: LG S4-Q09 (0.3), LG S4-Q12 (0.3)
+- LG split AC confirmed by logo, but no model or capacity marking is legible to distinguish 1HP/1.5HP/2HP.
 - no label, plate or settings screen was legible
-- 1 lines seen by both readers
+- 2 lines seen by both readers
 - the next candidate was only 0.0 behind
-- the reader stated brand it could not point to in the photos
 - 10 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -61,6 +58,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: two readings of these photos disagreed about what is written on the item_
 2. [PHOTO] Close-up of the rating plate on the outdoor unit showing the model and HP.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it still blow cold air?
+- Do you have both the indoor unit and the outdoor unit?
 
 ## Claims
 - [unverifiable_remote] Few Months FOREIGN USED
@@ -83,15 +85,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Open the front grille of the indoor unit and photograph the filters and coil.
 
 ## Price
-**13,125 to 57,050 NGN** (priced as material, width 1.2519, method material_floor, 0 comparable prices)
+**9,075 to 39,700 NGN** (priced as material, width 1.2558, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 35 kg of steel 40%, plastic 50%, copper 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 25 kg of plastic 60%, steel 30%, copper 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 43,750 NGN
+Scrap floor: 30,250 NGN
 
 Conditions attached to this price:
-- Not identified: LG split AC confirmed by logo, but no legible plate or text distinguishes 1HP, 1.5HP or 2HP variants.
-- Evidence flag: the reader stated brand it could not point to in the photos
+- Not identified: LG split AC confirmed by logo, but no model or capacity marking is legible to distinguish 1HP/1.5HP/2HP.
 - Few Months FOREIGN USED -> not proven remotely. Agent will confirm at pickup.
 - Super clean -> not proven remotely. Agent checks pressures with manifold gauges.
 - tested Okay -> not proven remotely. Agent runs the unit and measures amps with a clamp meter.

@@ -1,33 +1,43 @@
 # Case mMDdqtdYBaaabdV52LUv2qtX
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  32575 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  39167 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: washing machine (confidence 0.95)
 - Made of: plastic 70%, steel 20%, rubber 10%
 - Estimated weight: 25.0 kg (confidence 0.8)
-- Brand read off the item: nothing legible
+- Brand read off the item: SAYVUIT
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: Plastic wrap still on top lid and agitator area, Minor scuff marks on front panel, Some dust and smudges on control knobs
+- Damage noted: Plastic wrap still on top lid and agitator area, Minor scuffs on front panel, Dust and fingerprints visible on control knobs
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
+- Text read: SAYVUIT
 
 ## Two readers
-- brand_text was seen by only one reader, so it is treated as unread
 - model_text was seen by only one reader, so it is treated as unread
 - rating_text was seen by only one reader, so it is treated as unread
 - serial_text was seen by only one reader, so it is treated as unread
 - 8 transcribed lines was seen by only one reader, so it is treated as unread
+- brand_text was read by only one reader, so it is kept but not confirmed
+
+## OCR read off the photos
+- LG
+- 28
+- 0.0.0.
+- SKVRUIT
+- POSTED ONJIJ
+- TOPVOLT
 
 ## Chain
-- **corroborate** -> dispute. brand_text was seen by only one reader, so it is treated as unread; model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 8 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=washing machine brand=None model=None label=False lines=0
-- **retrieval** -> ok. query='Skyrun 11kg Twin tub Washing machine' hits=['LG WM8 8kg twin tub', 'Haier Thermocool TT8 8kg twin tub', 'TCL TWA110 11kg top loader']
-- **identify** -> ok. chosen=Skyrun 11kg Twin Tub Washing Machine margin=0.65
-- **abstain** -> abstain. no label, top score 0.7
+- **ocr** -> ok. 6 lines: LG | 28 | 0.0.0. | SKVRUIT | POSTED ONJIJ | TOPVOLT
+- **corroborate** -> dispute. model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 8 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed
+- **read_evidence** -> ok. category=washing machine brand=SAYVUIT model=None label=False lines=1
+- **retrieval** -> ok. query='SAYVUIT SAYVUIT Skyrun 11kg Twin tub Washing machine' hits=['LG WM8 8kg twin tub', 'Haier Thermocool TT8 8kg twin tub', 'TCL TWA110 11kg top loader']
+- **identify** -> refused. chosen=SAYVUIT None margin=0.25
+- **abstain** -> abstain. model refused
 
 ## Identification
 Shortlist from the catalogue:
@@ -35,17 +45,19 @@ Shortlist from the catalogue:
   - Haier Thermocool TT8 8kg twin tub (0.2667)
   - TCL TWA110 11kg top loader (0.1667)
 
-**Not identified: CANNOT_IDENTIFY.** No label, plate or settings screen was legible, and the visual match alone scored only 0.7.
+**Not identified: CANNOT_IDENTIFY.** Panel clearly reads SAYVUIT, not Skyrun; no model number legible and no shortlist entry matches the visible brand.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 29% on the best answer. It is probably a Skyrun 11kg Twin Tub Washing Machine or a LG WM8 8kg twin tub, and the photos cannot separate them.**
+**Not sure enough to price: 9% on the best answer. It is probably a Skyrun 11kg twin tub or a LG WM8, and the photos cannot separate them.**
 
-- Identification confidence: 29% (unknown)
+- Identification confidence: 9% (unknown)
 - Price confidence: 18%
-- It is weighing: Skyrun 11kg Twin Tub Washing Machine (0.7), LG WM8 8kg twin tub (0.05)
-- No label, plate or settings screen was legible, and the visual match alone scored only 0.7.
+- It is weighing: Skyrun 11kg twin tub (0.3), LG WM8 (0.05)
+- Panel clearly reads SAYVUIT, not Skyrun; no model number legible and no shortlist entry matches the visible brand.
 - no label, plate or settings screen was legible
 - the two readers agreed on nothing legible
+- the brand was read by only one reader and is not confirmed
+- the next candidate was only 0.25 behind
 - 8 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -55,6 +67,10 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: two readings of these photos disagreed about what is written on the item_
 2. [PHOTO] Close-up of the sticker with the model number, usually inside the door or on the back.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it finish a full wash and spin cycle?
 
 ## Claims
 - [unverified] Skyrun 11kg Twin tub Washing machine
@@ -82,7 +98,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 4,375 NGN
 
 Conditions attached to this price:
-- Not identified: No label, plate or settings screen was legible, and the visual match alone scored only 0.7.
+- Not identified: Panel clearly reads SAYVUIT, not Skyrun; no model number legible and no shortlist entry matches the visible brand.
 - Skyrun 11kg Twin tub Washing machine -> not proven remotely. Agent reads the rating plate.
 - Skyrun 11kg Twin tub Washing machine -> not proven remotely. Agent reads the rating plate.
 - Skyrun 11kg Twin tub Washing machine -> not proven remotely. Agent reads the rating plate.

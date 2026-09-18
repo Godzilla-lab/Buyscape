@@ -167,6 +167,8 @@ class Metrics:
     with_label_correct: int = 0
     with_label_attempted: int = 0
     silent_wrong: int = 0
+    # Which cases, so a change can be judged case by case, not by the rate.
+    silent_wrong_ids: list[str] = field(default_factory=list)
     adjudicated: int = 0
     must_abstain_listed: int = 0
     must_abstain_held: int = 0
@@ -195,6 +197,7 @@ class Metrics:
             "brand_accuracy_when_answered": self.rate(self.brand_correct, self.id_attempted),
             "abstention_rate": self.rate(self.abstained, self.total),
             "silent_wrong_rate": self.rate(self.silent_wrong, self.total),
+            "silent_wrong_cases": list(self.silent_wrong_ids),
             "adjudicated": self.adjudicated,
             "must_abstain_held": self.rate(self.must_abstain_held, self.must_abstain_listed),
             "priced": self.priced,
@@ -262,7 +265,10 @@ def score(pairs: list[tuple[Case, CaseResult]], verdicts: Verdicts | None = None
             m.id_attempted += 1
             if brand_matches(result.chain.brand, title):
                 m.brand_correct += 1
-            correct = model_matches(result.chain.brand, result.chain.model, title)
+            # The variant is part of the answer: 'Galaxy S23' with variant
+            # 'Ultra' is an S23 Ultra, and is priced as one.
+            answered = " ".join(filter(None, [result.chain.model, result.chain.variant]))
+            correct = model_matches(result.chain.brand, answered, title)
             verdict = verdicts.adjudicated.get(case.id)
             if verdict:
                 # A person looked at the plate. Their word beats the title.
@@ -273,6 +279,7 @@ def score(pairs: list[tuple[Case, CaseResult]], verdicts: Verdicts | None = None
             else:
                 m.id_wrong += 1
                 m.silent_wrong += 1  # confident, wrong, unflagged
+                m.silent_wrong_ids.append(case.id)
             if used_label:
                 m.with_label_attempted += 1
                 if correct:

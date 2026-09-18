@@ -16,6 +16,7 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Screenshot of a gallery: no
 
 ## Chain
+- **ocr** -> ok. 0 lines: 
 - **corroborate** -> agree. nothing identifying was read by either
 - **read_evidence** -> ok. category=iron brand=None model=None label=False lines=0
 - **retrieval** -> ok. query='A used dry pressing iron that is still working is available for sale. Location: Agege, Lag' hits=['Acer Aspire 5', 'Tecno Pova 5', 'Kemage KM6500 5.5kVA']

@@ -1,12 +1,12 @@
 # Case oIF6sfQHcYiePRevkkfaRkmC
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  94615 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  29424 ms
 
 ## What the engine saw
 - Presentation: sealed_new
-- Category: phone (confidence 0.95)
+- Category: phone (confidence 0.9)
 - Made of: paper 80%, plastic 20%
-- Estimated weight: 0.5 kg (confidence 0.8)
+- Estimated weight: 0.5 kg (confidence 0.7)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
@@ -16,7 +16,11 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Screenshot of a gallery: no
 - Text read: POSTED ON Jiji | EMANTECH HUB
 
+## OCR read off the photos
+- EMANTECH HUB
+
 ## Chain
+- **ocr** -> ok. 1 lines: EMANTECH HUB
 - **corroborate** -> agree. nothing identifying was read by either
 - **read_evidence** -> ok. category=phone brand=None model=None label=False lines=2
 - **forensics** -> flag. looks like a catalogue or stock image
@@ -58,6 +62,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: nothing on the item says which model this is_
 3. [PHOTO] Dial *#06# and screenshot the IMEI that appears.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Has the screen or battery ever been changed?
+- Is it signed out of iCloud or Google, so a new owner can set it up?
 
 ## Claims
 - [unverifiable_remote] Apple iPhone 17 Pro Max is Apple’s premium flagship smartphone

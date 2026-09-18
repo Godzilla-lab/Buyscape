@@ -16,9 +16,24 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Screenshot of a gallery: yes
 - Text read: VICTORY BAPTIST NURSERY & PRIMARY SCHOOL | Name:  | Class:  | Subject:  | Date:  | SCHOOL ANTHEM | Our dear Victory Baptist we thank you that your guidance might be | tender care, every the beautiful guide ... though our school is small, our
 
+## OCR read off the photos
+- 4. Sanni, Saheed Adewale
+- 2. Nelson, Raphael Ugochuky
+- Department of Science
+- Ayanlére, Joy Adunola
+- Supervisor: Mr
+- Faculty
+- VICTORY BAPTIST NURSERY & PRIM
+- Oyo State College of Agricul
+- Raheem, Rofiat Omolara
+- 3. Adeoye, Kaosarat Olayem
+- the
+- Date:
+
 ## Chain
-- **corroborate** -> unavailable. openrouter:mistralai/mistral-small-3.2-24b-instruct failed after retries: no JSON object in response: {
-  "presentation"
+- **corroborate** -> unavailable. no fixture for task=read_evidence key=f8c1c63e43b9288f889e134d3b0477c9 (model=mistralai/mistral-small-3.2-24b-instruct);
+- **ocr** -> ok. 32 lines: 4. Sanni, Saheed Adewale | 2. Nelson, Raphael Ugochuky | Department of Science | Ayanlére, Joy Adunola | Supervisor: Mr 
+- **corroborate** -> agree. nothing identifying was read by either
 - **read_evidence** -> ok. category=school supplies brand=None model=None label=False lines=66
 - **forensics** -> flag. screenshot of a gallery rather than a photo of the item
 - **gate** -> lot. priced by material, identification skipped

@@ -78,6 +78,9 @@ Keys live in `.env` and the run command loads it. Every run appends to
   cases a prompt change actually invalidates.
 - The default cap is 50 cents a run. Anything above that is asked for, with
   the estimated cost stated first.
+- A local OCR engine (RapidOCR, `identify/ocr.py`) is a third witness for
+  plate text: it confirms what one reader transcribed and never adds a fact
+  of its own. It runs on the CPU, costs nothing and is never recorded.
 - The reasoner is only called when there is something to rank. Three quarters
   of cases abstain and must cost nothing beyond the read.
 

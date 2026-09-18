@@ -1,13 +1,13 @@
 # Case z0FN8xziMIZ1noJNdOrsGlPH
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0007  |  26314 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0007  |  18559 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: split air conditioner (confidence 0.9)
 - Made of: plastic 70%, steel 20%, circuit_board 10%
 - Estimated weight: 15.0 kg (confidence 0.8)
-- Brand read off the item: nothing legible
+- Brand read off the item: Panasonic
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
@@ -19,11 +19,14 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 ## Two readers
 - brand_text agreed by both readers
 
+## OCR read off the photos
+- HOME APPLIANCES
+
 ## Chain
+- **ocr** -> ok. 1 lines: HOME APPLIANCES
 - **corroborate** -> agree. brand_text agreed by both readers
 - **read_evidence** -> ok. category=split air conditioner brand=Panasonic model=None label=False lines=2
-- **grounding** -> dropped. brand
-- **forensics** -> flag. the reader stated brand it could not point to in the photos; looks like a catalogue or stock image
+- **forensics** -> flag. looks like a catalogue or stock image
 - **gate** -> abstain. multiple items in frame
 
 ## Identification
@@ -31,7 +34,7 @@ No catalogue candidates matched.
 
 **Not identified: EVIDENCE_INCOMPLETE.** The photos show more than one item, so no single item can be identified.
 
-Evidence flags: the reader stated brand it could not point to in the photos; looks like a catalogue or stock image
+Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
 **0%: the photos do not say what this is.**
@@ -41,7 +44,6 @@ Evidence flags: the reader stated brand it could not point to in the photos; loo
 - The photos show more than one item, so no single item can be identified.
 - no label, plate or settings screen was legible
 - 2 lines seen by both readers
-- the reader stated brand it could not point to in the photos
 - looks like a catalogue or stock image
 - 11 claims are still unproven, 0 are supported
 
@@ -54,6 +56,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: this looks like a catalogue picture, not the real unit_
 3. [PHOTO] Close-up of the rating plate on the outdoor unit showing the model and HP.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it still blow cold air?
+- Do you have both the indoor unit and the outdoor unit?
 
 ## Claims
 - [unverified] Uk used Panasonic 2hp air conditioners
@@ -77,15 +84,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Open the front grille of the indoor unit and photograph the filters and coil.
 
 ## Price
-**1,955 to 9,690 NGN** (priced as material, width 1.3283, method material_floor, 0 comparable prices)
+**1,527 to 5,190 NGN** (priced as material, width 1.0903, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 15 kg of plastic 70%, steel 20%, circuit_board 10% (rates for circuit_board, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 15 kg of plastic 70%, steel 20%, circuit_board 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 4,800 NGN
+Scrap floor: 3,750 NGN
 
 Conditions attached to this price:
 - Not identified: The photos show more than one item, so no single item can be identified.
-- Evidence flag: the reader stated brand it could not point to in the photos
 - Evidence flag: looks like a catalogue or stock image
 - Uk used Panasonic 2hp air conditioners -> not proven remotely. Agent reads the outdoor rating plate.
 - Panasonic 2hp air conditioners -> not proven remotely. Agent reads the outdoor rating plate.

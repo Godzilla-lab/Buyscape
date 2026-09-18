@@ -1,29 +1,30 @@
 # Case yFdUcGEe7HvkKBTUn2KusWBY
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  23129 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  23271 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: laptop (confidence 0.95)
-- Made of: plastic 60%, steel 20%, circuit_board 10%, glass 10%
+- Made of: plastic 60%, steel 20%, circuit_board 10%, copper_insulated 10%
 - Estimated weight: 1.5 kg (confidence 0.8)
-- Brand read off the item: nothing legible
+- Brand read off the item: DELL
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: none
+- Damage noted: screen appears clean and undamaged, keyboard shows minor wear, no visible dents or cracks on chassis
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: Start | Settings | Photos | Get Started | Network and Internet
+- Text read: DELL
 
 ## Two readers
-- brand_text was seen by only one reader, so it is treated as unread
 - model_text was seen by only one reader, so it is treated as unread
-- 29 transcribed lines was seen by only one reader, so it is treated as unread
+- 3 transcribed lines was seen by only one reader, so it is treated as unread
+- brand_text was read by only one reader, so it is kept but not confirmed
 
 ## Chain
-- **corroborate** -> dispute. brand_text was seen by only one reader, so it is treated as unread; model_text was seen by only one reader, so it is treated as unread; 29 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=laptop brand=None model=None label=False lines=5
+- **ocr** -> ok. 0 lines: 
+- **corroborate** -> dispute. model_text was seen by only one reader, so it is treated as unread; 3 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed
+- **read_evidence** -> ok. category=laptop brand=DELL model=None label=False lines=1
 - **gate** -> abstain. multiple items in frame
 
 ## Identification
@@ -38,7 +39,8 @@ No catalogue candidates matched.
 - Price confidence: 14%
 - The photos show more than one item, so no single item can be identified.
 - no label, plate or settings screen was legible
-- 5 lines seen by both readers
+- the two readers agreed on nothing legible
+- the brand was read by only one reader and is not confirmed
 - 10 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -50,6 +52,12 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: two readings of these photos disagreed about what is written on the item_
 3. [PHOTO] Photo of the sticker on the underside showing the model, serial or service tag.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it stay on for more than ten minutes with the charger unplugged?
+- Has it ever been dropped, or had liquid spilled on it?
+- What does not work on it? Say none if everything works.
 
 ## Claims
 - [unverifiable_remote] Dell latitude 7480
@@ -71,14 +79,15 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Screenshot of System Information (Windows) or About This Mac, showing the model, processor, RAM and storage.
 
 ## Price
-**188 to 949 NGN** (priced as material, width 1.3363, method material_floor, 0 comparable prices)
+**5,000 to 5,000 NGN** (priced as material, width 0.0, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 1.5 kg of plastic 60%, steel 20%, circuit_board 10%, glass 10% (rates for circuit_board, glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 1.5 kg of plastic 60%, steel 20%, circuit_board 10%, copper_insulated 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 468 NGN
+Scrap floor: 735 NGN
 
 Conditions attached to this price:
 - Not identified: The photos show more than one item, so no single item can be identified.
+- Raised to the 5,000 NGN minimum this business publishes for this kind of item.
 - Dell latitude 7480 -> not proven remotely. Agent will confirm at pickup.
 - Intel core i7(7th Gen ) -> not proven remotely. Agent will confirm at pickup.
 - 16gb memory & 256gb ssd -> not proven remotely. Agent opens System Information and reads the RAM.

@@ -1,67 +1,69 @@
 # Case p7b2hFlW1i08zvnKI85sdrWz
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  41225 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0007  |  30773 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: phone (confidence 1.0)
-- Made of: plastic 60%, circuit_board 20%, glass 10%, steel 10%
-- Estimated weight: 0.18 kg (confidence 0.9)
-- Brand read off the item: nothing legible
-- Model read off the item: nothing legible
+- Made of: plastic 60%, circuit_board 20%, steel 10%, glass 10%
+- Estimated weight: 0.15 kg (confidence 0.9)
+- Brand read off the item: vivo
+- Model read off the item: V15
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: cracks on screen, screen has smudges and scratches
+- Damage noted: cracks on screen, screen has scratches
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: vivo | V15
+- Text read: vivo | V15 | POSTED ON SHAEL TECH GLOBAL
 
 ## Two readers
 - brand_text agreed by both readers
 - model_text agreed by both readers
-- 1 transcribed lines was seen by only one reader, so it is treated as unread
+
+## OCR read off the photos
+- vivo
+- V15
+- SHAEL TECH GLOBAL
 
 ## Chain
-- **corroborate** -> dispute. brand_text agreed by both readers; model_text agreed by both readers; 1 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=phone brand=vivo model=V15 label=False lines=2
-- **grounding** -> dropped. brand, model
-- **forensics** -> flag. the reader stated brand, model it could not point to in the photos
-- **retrieval** -> ok. query='vivo V15 Display: 6.53-inch IPS LCD, 1080 x 2340 pixels
-Processor: MediaTek Helio 
-Storage' hits=['Vivo Y27', 'Tecno Pova 6']
-- **identify** -> ok. chosen=Vivo V15 margin=0.9
-- **abstain** -> abstain. confidence 0.4: no label, plate or settings screen was legible; 2 lines seen by both readers; the reader stated brand, model it could not point to in the photos
+- **ocr** -> ok. 3 lines: vivo | V15 | SHAEL TECH GLOBAL
+- **corroborate** -> agree. brand_text agreed by both readers; model_text agreed by both readers
+- **read_evidence** -> ok. category=phone brand=vivo model=V15 label=False lines=3
+- **retrieval** -> ok. query='vivo V15 vivo V15 POSTED ON SHAEL TECH GLOBAL Display: 6.53-inch IPS LCD, 1080 x 2340 pixe' hits=['Vivo Y27', 'Tecno Pova 6']
+- **identify** -> label. named from the label: vivo V15, not in the catalogue
+- **abstain** -> pass. confidence=0.77 from the label
 
 ## Identification
 Shortlist from the catalogue:
   - Vivo Y27 (0.5)
   - Tecno Pova 6 (0.2)
 
-**Not identified: EVIDENCE_INCOMPLETE.** The evidence only supports this answer at 40 percent, which is a guess. One clear photo of the label would settle it.
-
-Evidence flags: the reader stated brand, model it could not point to in the photos
+**Answer: vivo V15** (named from the item's own label; not in the catalogue)
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 24% on the best answer. It is probably a Vivo V15 or a Vivo Y27, and the photos cannot separate them.**
+**77% sure this is a vivo V15.**
 
-- Identification confidence: 24% (unknown)
-- Price confidence: 18%
-- It is weighing: Vivo V15 (0.95), Vivo Y27 (0.05)
-- The evidence only supports this answer at 40 percent, which is a guess. One clear photo of the label would settle it.
+- Identification confidence: 77% (likely)
+- Price confidence: 0%
+- named from the item's own label, which the catalogue does not list
 - no label, plate or settings screen was legible
-- 2 lines seen by both readers
-- the reader stated brand, model it could not point to in the photos
+- 3 lines seen by both readers
 - 8 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
 
 ## What the seller is asked for next (shown in the app)
-1. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: If you have the box, photograph the label showing the model, storage and IMEI. Then, still filming, do this on the item's own screen and hold it steady so the writing can be read: open settings then About, showing the model name and storage. Then, without stopping the video: Pull out the SIM tray and photograph the open slot. Finish with: A short clip: press power, unlock, then open the camera app. Keep filming the whole time. Do not cut between clips.
-   _why: two readings of these photos disagreed about what is written on the item_
-2. [PHOTO] Screenshot of Settings then About, showing the model name and storage.
+1. [PHOTO] Screenshot of Settings then About, showing the model name and storage.
    _why: nothing on the item says which model this is_
-3. [PHOTO] Dial *#06# and screenshot the IMEI that appears.
+2. [PHOTO] Dial *#06# and screenshot the IMEI that appears.
    _why: nothing on the item says which model this is_
+3. [PHOTO] If you have the box, photograph the label showing the model, storage and IMEI.
+   _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Has the screen or battery ever been changed?
+- Is it signed out of iCloud or Google, so a new owner can set it up?
 
 ## Claims
 - [unverifiable_remote] Display: 6.53-inch IPS LCD, 1080 x 2340 pixels
@@ -80,15 +82,13 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
-**44 to 175 NGN** (priced as material, width 1.1966, method material_floor, 0 comparable prices)
+**24 to 55 NGN** (priced as material, width 0.7916, method scrap_band_only, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 0.18 kg of plastic 60%, circuit_board 20%, glass 10%, steel 10% (rates for circuit_board, glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+No usable comparable sales (0 found, 2 needed), so the range comes from the published Lagos buy band for this category, reduced by 0.5936 for unproven claims.
 
-Scrap floor: 74 NGN
+Scrap floor: 40 NGN
 
 Conditions attached to this price:
-- Not identified: The evidence only supports this answer at 40 percent, which is a guess. One clear photo of the label would settle it.
-- Evidence flag: the reader stated brand, model it could not point to in the photos
 - Display: 6.53-inch IPS LCD, 1080 x 2340 pixels -> not proven remotely. Agent will confirm at pickup.
 - Processor: MediaTek Helio -> not proven remotely. Agent will confirm at pickup.
 - Storage: 8GB RAM, 256GB of... -> not proven remotely. Agent reads storage from Settings.

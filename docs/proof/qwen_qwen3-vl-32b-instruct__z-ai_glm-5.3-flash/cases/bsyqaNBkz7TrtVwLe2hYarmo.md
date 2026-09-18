@@ -1,37 +1,40 @@
 # Case bsyqaNBkz7TrtVwLe2hYarmo
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  30595 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  25435 ms
 
 ## What the engine saw
 - Presentation: sealed_new
 - Category: phone (confidence 0.95)
 - Made of: paper 80%, plastic 20%
 - Estimated weight: 0.5 kg (confidence 0.8)
-- Brand read off the item: nothing legible
-- Model read off the item: nothing legible
+- Brand read off the item: Google
+- Model read off the item: Pixel Fold
 - Rating read: none
 - Label, plate or settings screen legible: no
 - Damage noted: none
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
-- Text read: Pixel Fold
+- Text read: Pixel Fold | Google
 
 ## Two readers
 - brand_text agreed by both readers
-- model_text was seen by only one reader, so it is treated as unread
+- model_text agreed by both readers
 - 1 transcribed lines was seen by only one reader, so it is treated as unread
 
+## OCR read off the photos
+- Pixel Fold
+- KIZITO COMUNICAIONS
+
 ## Chain
-- **corroborate** -> dispute. brand_text agreed by both readers; model_text was seen by only one reader, so it is treated as unread; 1 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=phone brand=Google model=None label=False lines=1
-- **grounding** -> dropped. brand
-- **forensics** -> flag. the reader stated brand it could not point to in the photos; looks like a catalogue or stock image
-- **retrieval** -> ok. query='Pixel Fold Latest Google pixel fold 256gb 
+- **ocr** -> ok. 2 lines: Pixel Fold | KIZITO COMUNICAIONS
+- **corroborate** -> dispute. brand_text agreed by both readers; model_text agreed by both readers; 1 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=phone brand=Google model=Pixel Fold label=False lines=2
+- **forensics** -> flag. looks like a catalogue or stock image
+- **retrieval** -> ok. query='Google Pixel Fold Pixel Fold Google Latest Google pixel fold 256gb 
 Available in store 
-Different colors 
-Call or t' hits=['Google Pixel 7', 'Google Pixel 8', 'Google Pixel 9']
+Di' hits=['Google Pixel 7', 'Google Pixel 8', 'Google Pixel 9']
 - **identify** -> ok. chosen=Google Pixel Fold margin=None
-- **abstain** -> abstain. confidence 0.4: no label, plate or settings screen was legible; 1 lines seen by both readers; the reader stated brand it could not point to in the photos; looks like a catalogue or stock image
+- **abstain** -> abstain. confidence 0.4: no label, plate or settings screen was legible; 1 lines seen by both readers; looks like a catalogue or stock image
 
 ## Identification
 Shortlist from the catalogue:
@@ -41,7 +44,7 @@ Shortlist from the catalogue:
 
 **Not identified: EVIDENCE_INCOMPLETE.** The evidence only supports this answer at 40 percent, which is a guess. One clear photo of the label would settle it.
 
-Evidence flags: the reader stated brand it could not point to in the photos; looks like a catalogue or stock image
+Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
 **Not sure enough to price: 24% on the best answer. It is probably a Google Pixel Fold, and the photos cannot separate them.**
@@ -52,7 +55,6 @@ Evidence flags: the reader stated brand it could not point to in the photos; loo
 - The evidence only supports this answer at 40 percent, which is a guess. One clear photo of the label would settle it.
 - no label, plate or settings screen was legible
 - 1 lines seen by both readers
-- the reader stated brand it could not point to in the photos
 - looks like a catalogue or stock image
 - 9 claims are still unproven, 0 are supported
 
@@ -65,6 +67,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: two readings of these photos disagreed about what is written on the item_
 3. [PHOTO] Screenshot of Settings then About, showing the model name and storage.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Has the screen or battery ever been changed?
+- Is it signed out of iCloud or Google, so a new owner can set it up?
 
 ## Claims
 - [unverified] Latest Google Pixel Fold 256GB
@@ -93,7 +100,6 @@ Scrap floor: 34 NGN
 
 Conditions attached to this price:
 - Not identified: The evidence only supports this answer at 40 percent, which is a guess. One clear photo of the label would settle it.
-- Evidence flag: the reader stated brand it could not point to in the photos
 - Evidence flag: looks like a catalogue or stock image
 - Latest Google Pixel Fold 256GB -> not proven remotely. Agent reads storage from Settings.
 - Latest Google Pixel Fold 256GB -> not proven remotely. Agent reads storage from Settings.

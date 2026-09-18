@@ -20,6 +20,7 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - 2 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## Chain
+- **ocr** -> ok. 0 lines: 
 - **corroborate** -> dispute. brand_text differed between the two readers, so it is treated as unread; 2 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=sneakers brand=None model=None label=True lines=0
 - **retrieval** -> ok. query='Brand new sneakers are available for sale. Location: Agege, Lagos State. Price: 40,000 nai' hits=['Tecno Camon 40', 'Tecno Spark 40', 'Infinix Hot 40', 'Infinix Note 40']

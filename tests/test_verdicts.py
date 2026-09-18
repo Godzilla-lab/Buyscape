@@ -69,3 +69,41 @@ def test_verdict_files_load_from_the_eval_directory(tmp_path: Path):
     assert v.must_abstain == {"a1"}
     empty = load_verdicts(tmp_path / "nowhere")
     assert empty.adjudicated == {} and empty.must_abstain == set()
+
+
+def test_a_brand_no_witness_produced_is_not_an_answer():
+    """Plate reads SUMEC and MAXI, readers disputed the brand, the code E33KWH
+    survived by OCR, and the shortlist offered a Lutian. The decider stitched
+    them together. A brand nobody read is a guess."""
+    from buyscape.identify.catalogue import Entry
+    from buyscape.identify.chain import unsupported_brand
+    from buyscape.providers.tasks import Reading
+
+    pool = [Entry("generator", "Lutian", "LT3900", None, ()), Entry("phone", "Apple", "iPhone 14 Pro", None, ())]
+    reading = Reading(model_text="E33KWH", visible_text=["E33KWH", "PORTABLE GENERATOR"])
+    ocr = ["SUMEC", "MAXI>", "E33KWH"]
+    assert unsupported_brand(reading, ocr, "5kva maxi generator", "Lutian", "E33KWH", pool)
+    # The brand on the plate, the brand the seller says, and the brand the
+    # catalogue gives the code that was read are each enough.
+    assert unsupported_brand(reading, ocr, "", "Sumec", "E33KWH", pool) is None
+    assert unsupported_brand(reading, [], "my maxi gen", "Maxi", "E33KWH", pool) is None
+    phone = Reading(model_text="iPhone 14 Pro", visible_text=["iPhone 14 Pro"])
+    assert unsupported_brand(phone, [], "", "Apple", "iPhone 14 Pro", pool) is None
+
+
+def test_a_disputed_brand_needs_the_ocr_or_the_seller_to_name_it():
+    from buyscape.identify.chain import unsupported_brand
+    from buyscape.providers.tasks import Reading
+
+    read = Reading(visible_text=["MA-13", "SUMEC", "LUTIAN", "E33KWH"])
+    assert unsupported_brand(read, ["SUMEC", "MAXI>", "E33KWH"], "5kva maxi", "Lutian", "E33KWH", [], brand_disputed=True)
+    assert unsupported_brand(read, ["SUMEC", "MAXI>", "E33KWH"], "5kva maxi", "Sumec", "E33KWH", [], brand_disputed=True) is None
+    # Not disputed: the transcript itself is enough.
+    assert unsupported_brand(read, [], "", "Lutian", "E33KWH", [], brand_disputed=False) is None
+
+
+def test_the_scorer_counts_the_variant_as_part_of_the_answer():
+    from buyscape.evalset.score import model_matches
+
+    assert model_matches("Samsung", "Galaxy S23 Ultra (512GB per seller)", "Samsung Galaxy S23 Ultra 512 GB Black")
+    assert not model_matches("Samsung", "Galaxy S23", "Samsung Galaxy S23 Ultra 512 GB Black")

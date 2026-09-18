@@ -1,17 +1,17 @@
 # Case kTUSsVnPCefTdSg5BEQAbj3U
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  24042 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  27568 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: laptop (confidence 0.95)
 - Made of: plastic 60%, steel 30%, circuit_board 10%
 - Estimated weight: 2.0 kg (confidence 0.8)
-- Brand read off the item: nothing legible
+- Brand read off the item: DELL
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: minor scuffs on the lid, screen is off, no visible damage to screen surface
+- Damage noted: minor scuffs on the lid, screen is off, no visible damage to display
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 - Text read: DELL
@@ -19,16 +19,18 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 ## Two readers
 - brand_text agreed by both readers
 
+## OCR read off the photos
+- CHNOLOGIES
+
 ## Chain
+- **ocr** -> ok. 1 lines: CHNOLOGIES
 - **corroborate** -> agree. brand_text agreed by both readers
 - **read_evidence** -> ok. category=laptop brand=DELL model=None label=False lines=1
-- **grounding** -> dropped. brand
-- **forensics** -> flag. the reader stated brand it could not point to in the photos
-- **retrieval** -> ok. query='DELL FOR SALE!    
+- **retrieval** -> ok. query='DELL DELL FOR SALE!    
 Brand name : *Dell*
 Model : *latitude E7240*
-Processor: *Intel(R) Core(' hits=['Dell Latitude E7470', 'Dell Latitude 7490', 'Dell Latitude 5490', 'Dell Inspiron 15 3000', 'Dell XPS 13 9370']
-- **identify** -> refused. chosen=None None margin=0.1
+Processor: *Intel(R) ' hits=['Dell Latitude E7470', 'Dell Latitude 7490', 'Dell Latitude 5490', 'Dell Inspiron 15 3000', 'Dell XPS 13 9370']
+- **identify** -> refused. chosen=Dell None margin=0.15
 - **abstain** -> abstain. model refused
 
 ## Identification
@@ -39,21 +41,18 @@ Shortlist from the catalogue:
   - Dell Inspiron 15 3000 (0.3)
   - Dell XPS 13 9370 (0.3)
 
-**Not identified: CANNOT_IDENTIFY.** Only 'DELL' is legible; seller claims Latitude E7240 but no model plate is visible and E7240 is not on the shortlist, so no candidate is supported by image evidence.
-
-Evidence flags: the reader stated brand it could not point to in the photos
+**Not identified: CANNOT_IDENTIFY.** Only 'DELL' is legible; seller claims Latitude E7240 but that model is absent from the shortlist and no model number is visible in the photos.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 7% on the best answer. It is probably a Dell Latitude E7470 or a Dell Latitude 7490, and the photos cannot separate them.**
+**Not sure enough to price: 16% on the best answer. It is probably a Dell Latitude E7470 or a Dell Latitude 7490, and the photos cannot separate them.**
 
-- Identification confidence: 7% (unknown)
+- Identification confidence: 16% (unknown)
 - Price confidence: 20%
-- It is weighing: Dell Latitude E7470 (0.3), Dell Latitude 7490 (0.2)
-- Only 'DELL' is legible; seller claims Latitude E7240 but no model plate is visible and E7240 is not on the shortlist, so no candidate is supported by image evidence.
+- It is weighing: Dell Latitude E7470 (0.35), Dell Latitude 7490 (0.2)
+- Only 'DELL' is legible; seller claims Latitude E7240 but that model is absent from the shortlist and no model number is visible in the photos.
 - no label, plate or settings screen was legible
 - 1 lines seen by both readers
-- the next candidate was only 0.1 behind
-- the reader stated brand it could not point to in the photos
+- the next candidate was only 0.15 behind
 - 7 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -63,6 +62,12 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: nothing on the item says which model this is_
 2. [PHOTO] Screenshot of System Information (Windows) or About This Mac, showing the model, processor, RAM and storage.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it stay on for more than ten minutes with the charger unplugged?
+- Has it ever been dropped, or had liquid spilled on it?
+- What does not work on it? Say none if everything works.
 
 ## Claims
 - [unverifiable_remote] Brand name is Dell
@@ -78,15 +83,15 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Screenshot of System Information (Windows) or About This Mac, showing the model, processor, RAM and storage.
 
 ## Price
-**502 to 1,376 NGN** (priced as material, width 0.9296, method material_floor, 0 comparable prices)
+**5,000 to 5,000 NGN** (priced as material, width 0.0, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 2 kg of plastic 60%, steel 30%, circuit_board 10% (rates for circuit_board, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 2 kg of plastic 60%, steel 30%, circuit_board 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 720 NGN
+Scrap floor: 580 NGN
 
 Conditions attached to this price:
-- Not identified: Only 'DELL' is legible; seller claims Latitude E7240 but no model plate is visible and E7240 is not on the shortlist, so no candidate is supported by image evidence.
-- Evidence flag: the reader stated brand it could not point to in the photos
+- Not identified: Only 'DELL' is legible; seller claims Latitude E7240 but that model is absent from the shortlist and no model number is visible in the photos.
+- Raised to the 5,000 NGN minimum this business publishes for this kind of item.
 - Brand name is Dell -> not proven remotely. Agent will confirm at pickup.
 - Model is latitude E7240 -> not proven remotely. Agent will confirm at pickup.
 - Processor is Intel(R) Core(TM) i5-4300U -> not proven remotely. Agent will confirm at pickup.

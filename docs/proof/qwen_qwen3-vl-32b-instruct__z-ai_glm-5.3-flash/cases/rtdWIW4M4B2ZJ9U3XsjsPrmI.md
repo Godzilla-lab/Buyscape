@@ -1,30 +1,36 @@
 # Case rtdWIW4M4B2ZJ9U3XsjsPrmI
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  25978 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  22201 ms
 
 ## What the engine saw
 - Presentation: sealed_new
 - Category: phone (confidence 0.95)
 - Made of: paper 80%, plastic 20%
 - Estimated weight: 0.5 kg (confidence 0.8)
-- Brand read off the item: nothing legible
+- Brand read off the item: iPhone
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
 - Damage noted: none
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
+- Text read: iPhone
 
 ## Two readers
 - 1 transcribed lines was seen by only one reader, so it is treated as unread
+- brand_text was read by only one reader, so it is kept but not confirmed
+
+## OCR read off the photos
+- 日
 
 ## Chain
-- **corroborate** -> dispute. 1 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=phone brand=None model=None label=False lines=0
+- **ocr** -> ok. 1 lines: 日
+- **corroborate** -> dispute. 1 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed
+- **read_evidence** -> ok. category=phone brand=iPhone model=None label=False lines=1
 - **forensics** -> flag. looks like a catalogue or stock image
-- **retrieval** -> ok. query='New iphone 14__256gb' hits=['Apple iPhone 14', 'Apple iPhone 14 Pro', 'Apple iPhone 14 Pro Max', 'Apple iPhone XR', 'Apple iPhone XS']
-- **identify** -> ok. chosen=Apple iPhone 14 margin=0.45
-- **abstain** -> abstain. top score 0.6
+- **retrieval** -> ok. query='iPhone iPhone New iphone 14__256gb' hits=['Apple iPhone 14', 'Apple iPhone 14 Pro', 'Apple iPhone 14 Pro Max', 'Apple iPhone XR', 'Apple iPhone XS']
+- **identify** -> ok. chosen=Apple iPhone 14 margin=0.5
+- **abstain** -> abstain. no label, top score 0.7
 
 ## Identification
 Shortlist from the catalogue:
@@ -34,19 +40,20 @@ Shortlist from the catalogue:
   - Apple iPhone XR (0.2)
   - Apple iPhone XS (0.2)
 
-**Not identified: CANNOT_IDENTIFY.** The best candidate scored only 0.6, which is not sure enough to price.
+**Not identified: CANNOT_IDENTIFY.** No label, plate or settings screen was legible, and the visual match alone scored only 0.7.
 
 Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 12% on the best answer. It is probably a Apple iPhone 14 or a Apple iPhone 14 Pro, and the photos cannot separate them.**
+**Not sure enough to price: 11% on the best answer. It is probably a Apple iPhone 14 or a Apple iPhone 14 Pro, and the photos cannot separate them.**
 
-- Identification confidence: 12% (unknown)
+- Identification confidence: 11% (unknown)
 - Price confidence: 20%
-- It is weighing: Apple iPhone 14 (0.6), Apple iPhone 14 Pro (0.15)
-- The best candidate scored only 0.6, which is not sure enough to price.
+- It is weighing: Apple iPhone 14 (0.7), Apple iPhone 14 Pro (0.2)
+- No label, plate or settings screen was legible, and the visual match alone scored only 0.7.
 - no label, plate or settings screen was legible
 - the two readers agreed on nothing legible
+- the brand was read by only one reader and is not confirmed
 - looks like a catalogue or stock image
 - 7 claims are still unproven, 0 are supported
 
@@ -59,6 +66,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: two readings of these photos disagreed about what is written on the item_
 3. [PHOTO] Screenshot of Settings then About, showing the model name and storage.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Has the screen or battery ever been changed?
+- Is it signed out of iCloud or Google, so a new owner can set it up?
 
 ## Claims
 - [unverifiable_remote] New iPhone 14
@@ -83,7 +95,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 34 NGN
 
 Conditions attached to this price:
-- Not identified: The best candidate scored only 0.6, which is not sure enough to price.
+- Not identified: No label, plate or settings screen was legible, and the visual match alone scored only 0.7.
 - Evidence flag: looks like a catalogue or stock image
 - New iPhone 14 -> not proven remotely. Agent will confirm at pickup.
 - 256GB -> not proven remotely. Agent reads storage from Settings.

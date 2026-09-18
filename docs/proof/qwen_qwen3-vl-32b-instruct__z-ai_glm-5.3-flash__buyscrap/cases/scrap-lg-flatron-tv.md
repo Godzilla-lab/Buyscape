@@ -1,30 +1,39 @@
 # Case scrap-lg-flatron-tv
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  21335 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  21100 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: monitor (confidence 0.9)
 - Made of: plastic 60%, steel 30%, glass 10%
 - Estimated weight: 8.0 kg (confidence 0.7)
-- Brand read off the item: nothing legible
+- Brand read off the item: LG
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
 - Damage noted: dusty surface, scratched casing, cracked screen bezel
 - Looks like a catalogue image: no
 - Screenshot of a gallery: yes
+- Text read: LG
 
 ## Two readers
-- brand_text was seen by only one reader, so it is treated as unread
 - 1 transcribed lines was seen by only one reader, so it is treated as unread
+- brand_text was read by only one reader, so it is kept but not confirmed
+
+## OCR read off the photos
+- 12:36PM∞PPP·
+- Share
+- Eedit
+- Info
+- Trash
 
 ## Chain
-- **corroborate** -> dispute. brand_text was seen by only one reader, so it is treated as unread; 1 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=monitor brand=None model=None label=False lines=0
+- **ocr** -> ok. 5 lines: 12:36PM∞PPP· | Share | Eedit | Info | Trash
+- **corroborate** -> dispute. 1 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed
+- **read_evidence** -> ok. category=monitor brand=LG model=None label=False lines=1
 - **forensics** -> flag. screenshot of a gallery rather than a photo of the item
-- **retrieval** -> ok. query='Description: This is a scrap LG Flatron TV that is currently not functioning properly. It ' hits=['LG T2108 8kg top loader', 'LG T2312 12kg top loader', 'LG S4-Q09 1HP', 'LG S4-Q18 2HP', 'LG F2J5 7kg front loader']
-- **identify** -> refused. chosen=None None margin=None
+- **retrieval** -> ok. query='LG LG Description: This is a scrap LG Flatron TV that is currently not functioning properl' hits=['LG T2108 8kg top loader', 'LG T2312 12kg top loader', 'LG S4-Q09 1HP', 'LG S4-Q18 2HP', 'LG F2J5 7kg front loader']
+- **identify** -> refused. chosen=LG None margin=None
 - **abstain** -> abstain. model refused
 
 ## Identification
@@ -35,7 +44,7 @@ Shortlist from the catalogue:
   - LG S4-Q18 2HP (0.4)
   - LG F2J5 7kg front loader (0.4)
 
-**Not identified: CANNOT_IDENTIFY.** Item is an LG Flatron CRT TV per seller, but no shortlist entry is a TV and no label is legible to confirm a model.
+**Not identified: CANNOT_IDENTIFY.** Item is an LG Flatron CRT television, but the shortlist contains only washing machines and air conditioners; no TV models fit.
 
 Evidence flags: screenshot of a gallery rather than a photo of the item
 
@@ -44,9 +53,10 @@ Evidence flags: screenshot of a gallery rather than a photo of the item
 
 - Identification confidence: 0% (unknown)
 - Price confidence: 14%
-- Item is an LG Flatron CRT TV per seller, but no shortlist entry is a TV and no label is legible to confirm a model.
+- Item is an LG Flatron CRT television, but the shortlist contains only washing machines and air conditioners; no TV models fit.
 - no label, plate or settings screen was legible
 - the two readers agreed on nothing legible
+- the brand was read by only one reader and is not confirmed
 - screenshot of a gallery rather than a photo of the item
 - 10 claims are still unproven, 0 are supported
 
@@ -90,7 +100,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 1,696 NGN
 
 Conditions attached to this price:
-- Not identified: Item is an LG Flatron CRT TV per seller, but no shortlist entry is a TV and no label is legible to confirm a model.
+- Not identified: Item is an LG Flatron CRT television, but the shortlist contains only washing machines and air conditioners; no TV models fit.
 - Evidence flag: screenshot of a gallery rather than a photo of the item
 - This is a scrap LG Flatron TV -> not proven remotely. Agent will confirm at pickup.
 - It is currently not functioning properly -> not proven remotely. Agent powers the item on before payment.

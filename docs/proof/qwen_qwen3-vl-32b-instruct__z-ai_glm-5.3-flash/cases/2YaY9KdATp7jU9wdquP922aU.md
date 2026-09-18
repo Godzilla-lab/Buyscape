@@ -1,6 +1,6 @@
 # Case 2YaY9KdATp7jU9wdquP922aU
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  18726 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  17401 ms
 
 ## What the engine saw
 - Presentation: single_unit
@@ -19,7 +19,11 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 ## Two readers
 - 2 transcribed lines was seen by only one reader, so it is treated as unread
 
+## OCR read off the photos
+- 4:12
+
 ## Chain
+- **ocr** -> ok. 1 lines: 4:12
 - **corroborate** -> dispute. 2 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=laptop brand=None model=None label=False lines=1
 - **forensics** -> flag. looks like a catalogue or stock image
@@ -59,6 +63,12 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 3. [PHOTO] Photo of the sticker on the underside showing the model, serial or service tag.
    _why: nothing on the item says which model this is_
 
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it stay on for more than ten minutes with the charger unplugged?
+- Has it ever been dropped, or had liquid spilled on it?
+- What does not work on it? Say none if everything works.
+
 ## Claims
 - [unverifiable_remote] Intel Core i7
 - [unverifiable_remote] 11th Gen
@@ -85,15 +95,16 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Screenshot of System Information (Windows) or About This Mac, showing the model, processor, RAM and storage.
 
 ## Price
-**222 to 1,388 NGN** (priced as material, width 1.4479, method material_floor, 0 comparable prices)
+**5,000 to 5,000 NGN** (priced as material, width 0.0, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 1.2 kg of plastic 40%, steel 30%, circuit_board 15%, aluminium 10%, rubber 5% (rates for circuit_board, plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 1.2 kg of plastic 40%, steel 30%, circuit_board 15%, aluminium 10%, rubber 5% (rates for plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 741 NGN
+Scrap floor: 615 NGN
 
 Conditions attached to this price:
 - Not identified: No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.
 - Evidence flag: looks like a catalogue or stock image
+- Raised to the 5,000 NGN minimum this business publishes for this kind of item.
 - Intel Core i7 -> not proven remotely. Agent will confirm at pickup.
 - 11th Gen -> not proven remotely. Agent will confirm at pickup.
 - 16GB RAM -> not proven remotely. Agent opens System Information and reads the RAM.

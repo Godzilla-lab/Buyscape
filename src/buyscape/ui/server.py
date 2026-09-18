@@ -57,6 +57,8 @@ class Engine:
         self.scrap = ScrapIndex(index)
         self.materials = MaterialsFloor(index)
         self.fixtures = root / "eval" / "fixtures"
+        # Local OCR, a third witness for plate text. None when not installed.
+        self.ocr = default_reader()
         self.inbox = root / "eval" / "inbox"
         self.tenant_name = tenant
         self.tenant = load_tenant(root / "tenants" / f"{tenant}.yaml")
@@ -107,7 +109,7 @@ class Engine:
         corroborator_p = None if corroborator in ("", "none") else _cli._provider(corroborator, self.fixtures, mode)
         result = run_case(
             case, self.protocols, self.catalogue, comps, self.scrap, reader_p, reasoner_p,
-            self.materials, corroborator_p, tenant,
+            self.materials, corroborator_p, tenant, ocr=self.ocr,
         )
         return result, report_markdown(case, result)
 

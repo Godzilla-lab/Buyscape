@@ -1,33 +1,37 @@
 # Case u8zc7bMFfU1wPEv9mEcukRQE
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0007  |  11940 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0007  |  22205 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: laptop (confidence 0.95)
-- Made of: plastic 40%, steel 30%, circuit_board 20%, rubber 10%
-- Estimated weight: 1.8 kg (confidence 0.7)
-- Brand read off the item: nothing legible
+- Made of: plastic 40%, steel 30%, circuit_board 15%, copper_insulated 10%, glass 5%
+- Estimated weight: 2.0 kg (confidence 0.8)
+- Brand read off the item: GAPTECH
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: none
+- Damage noted: Screen is on, showing a colorful desktop wallpaper., No visible damage to casing or keyboard., Laptop is placed on a stand, possibly for display.
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
 - Text read: GAPTECH
 
 ## Two readers
-- brand_text was seen by only one reader, so it is treated as unread
-- 6 transcribed lines was seen by only one reader, so it is treated as unread
+- brand_text agreed by both readers
+- 5 transcribed lines was seen by only one reader, so it is treated as unread
+
+## OCR read off the photos
+- GAPTECH
 
 ## Chain
-- **corroborate** -> dispute. brand_text was seen by only one reader, so it is treated as unread; 6 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=laptop brand=None model=None label=False lines=1
+- **ocr** -> ok. 1 lines: GAPTECH
+- **corroborate** -> dispute. brand_text agreed by both readers; 5 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=laptop brand=GAPTECH model=None label=False lines=1
 - **forensics** -> flag. looks like a catalogue or stock image
-- **retrieval** -> empty. query='GAPTECH Gaptech online store 
+- **retrieval** -> empty. query='GAPTECH GAPTECH Gaptech online store 
 used laptops and phones 
 product description-
-product-alienw' hits=[]
+produc' hits=[]
 - **gate** -> abstain. no candidates and no model text
 
 ## Identification
@@ -58,6 +62,12 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 3. [PHOTO] Photo of the sticker on the underside showing the model, serial or service tag.
    _why: nothing on the item says which model this is_
 
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it stay on for more than ten minutes with the charger unplugged?
+- Has it ever been dropped, or had liquid spilled on it?
+- What does not work on it? Say none if everything works.
+
 ## Claims
 - [unverifiable_remote] product-alienware
 - [unverifiable_remote] model...
@@ -71,15 +81,16 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Screenshot of System Information (Windows) or About This Mac, showing the model, processor, RAM and storage.
 
 ## Price
-**654 to 1,911 NGN** (priced as material, width 0.9792, method material_floor, 0 comparable prices)
+**5,000 to 5,000 NGN** (priced as material, width 0.0, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 1.8 kg of plastic 40%, steel 30%, circuit_board 20%, rubber 10% (rates for circuit_board, plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 2 kg of plastic 40%, steel 30%, circuit_board 15%, copper_insulated 10%, glass 5% (rates for glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 891 NGN
+Scrap floor: 1,122 NGN
 
 Conditions attached to this price:
 - Not identified: No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.
 - Evidence flag: looks like a catalogue or stock image
+- Raised to the 5,000 NGN minimum this business publishes for this kind of item.
 - product-alienware -> not proven remotely. Agent will confirm at pickup.
 - model... -> not proven remotely. Agent will confirm at pickup.
 - Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on paper and take one photo with the paper next to the laptop..

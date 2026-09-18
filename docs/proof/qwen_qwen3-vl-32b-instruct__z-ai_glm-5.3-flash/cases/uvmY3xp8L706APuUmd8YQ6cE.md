@@ -1,20 +1,20 @@
 # Case uvmY3xp8L706APuUmd8YQ6cE
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  48182 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  51859 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: portable generator (confidence 0.95)
 - Made of: steel 60%, plastic 30%, circuit_board 10%
 - Estimated weight: 25.0 kg (confidence 0.8)
-- Brand read off the item: nothing legible
-- Model read off the item: nothing legible
+- Brand read off the item: SENWEI
+- Model read off the item: SV6200
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: Minor scuffing on yellow casing, Box is slightly creased and worn
+- Damage noted: minor scuffing on yellow casing, box shows creasing and slight tear at bottom left corner
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
-- Text read: SENWEI | RUN ON GASOLINE | PORTABLE GENERATOR | SV6200 | USA STANDARD | SENWEI | MODEL: SV6200 | OUTPUT: 6200W
+- Text read: SENWEI | RUN ON GASOLINE | PORTABLE GENERATOR | SV6200 | USA STANDARD | SENWEI | GASOLINE GENERATOR | SV6200
 
 ## Two readers
 - brand_text agreed by both readers
@@ -22,14 +22,23 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - rating_text differed between the two readers, so it is treated as unread
 - 16 transcribed lines was seen by only one reader, so it is treated as unread
 
+## OCR read off the photos
+- !2MU2S
+- SV6200
+- SENWEI
+- USASTANDARD
+- RUNONOASOINE
+- PORTABLEGENERATOR
+- SASOLNE DNERATON CE
+
 ## Chain
+- **ocr** -> ok. 7 lines: !2MU2S | SV6200 | SENWEI | USASTANDARD | RUNONOASOINE | PORTABLEGENERATOR | SASOLNE DNERATON CE
 - **corroborate** -> dispute. brand_text agreed by both readers; model_text agreed by both readers; rating_text differed between the two readers, so it is treated as unread; 16 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=portable generator brand=SENWEI model=SV6200 label=True lines=8
-- **grounding** -> dropped. brand, model
-- **forensics** -> flag. the reader stated brand, model it could not point to in the photos; looks like a catalogue or stock image
-- **retrieval** -> ok. query='SENWEI RUN ON GASOLINE PORTABLE GENERATOR SV6200 USA STANDARD SENWEI MODEL: SV6200 OUTPUT:' hits=['Senwei SW3500 3.5kVA', 'Thermocool TC2700 2.5kVA', 'Haier Thermocool HTG2700 2.5kVA', 'Kemage KM6500 5.5kVA', 'Lutian LT3900 3.5kVA']
-- **identify** -> ok. chosen=Senwei SV6200 margin=0.75
-- **abstain** -> pass. confidence=0.47 margin=0.75
+- **forensics** -> flag. looks like a catalogue or stock image
+- **retrieval** -> ok. query='SENWEI SV6200 SENWEI RUN ON GASOLINE PORTABLE GENERATOR SV6200 USA STANDARD SENWEI GASOLIN' hits=['Senwei SW3500 3.5kVA', 'Thermocool TC2700 2.5kVA', 'Haier Thermocool HTG2700 2.5kVA', 'Kemage KM6500 5.5kVA', 'Lutian LT3900 3.5kVA']
+- **identify** -> label. named from the label: SENWEI SV6200, not in the catalogue
+- **abstain** -> pass. confidence=0.45 from the label
 
 ## Identification
 Shortlist from the catalogue:
@@ -39,19 +48,18 @@ Shortlist from the catalogue:
   - Kemage KM6500 5.5kVA (0.15)
   - Lutian LT3900 3.5kVA (0.15)
 
-**Answer: Senwei SV6200 Portable gasoline generator, 6200W** (margin 0.75)
+**Answer: SENWEI SV6200** (named from the item's own label; not in the catalogue)
 
-Evidence flags: the reader stated brand, model it could not point to in the photos; looks like a catalogue or stock image
+Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 47% on the best answer. It is probably a Senwei SV6200 or a Senwei SW3500, and the photos cannot separate them.**
+**45%: the photos do not say what this is.**
 
-- Identification confidence: 47% (unsure)
+- Identification confidence: 45% (unsure)
 - Price confidence: 0%
-- It is weighing: Senwei SV6200 (0.95), Senwei SW3500 (0.2)
+- named from the item's own label, which the catalogue does not list
 - read off the item's own label
 - 8 lines seen by both readers
-- the reader stated brand, model it could not point to in the photos
 - looks like a catalogue or stock image
 - 11 claims are still unproven, 0 are supported
 
@@ -64,6 +72,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: two readings of these photos disagreed about what is written on the item_
 3. [PHOTO] Close-up of the rating plate showing the kVA and model number.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it start and run right now?
+- When was it last serviced, and what was done?
 
 ## Claims
 - [unverified] Original 4.5kva Senwei Generator
@@ -94,7 +107,6 @@ No usable comparable sales (0 found, 2 needed), so the range comes from the publ
 Scrap floor: 30,000 NGN
 
 Conditions attached to this price:
-- Evidence flag: the reader stated brand, model it could not point to in the photos
 - Evidence flag: looks like a catalogue or stock image
 - Original 4.5kva Senwei Generator -> not proven remotely. Agent reads the rating plate.
 - Original 4.5kva Senwei Generator -> not proven remotely. Agent reads the rating plate.

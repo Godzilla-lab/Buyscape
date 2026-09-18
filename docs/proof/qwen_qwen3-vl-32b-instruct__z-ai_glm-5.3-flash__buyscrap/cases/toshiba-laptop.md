@@ -19,7 +19,11 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - brand_text differed between the two readers, so it is treated as unread
 - 4 transcribed lines was seen by only one reader, so it is treated as unread
 
+## OCR read off the photos
+- 7
+
 ## Chain
+- **ocr** -> ok. 1 lines: 7
 - **corroborate** -> dispute. brand_text differed between the two readers, so it is treated as unread; 4 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=laptop brand=None model=None label=False lines=0
 - **retrieval** -> ok. query='A fairly used Toshiba laptop with switch issue for sale at #30,000 For more information ca' hits=['Toshiba Satellite C55', 'Tecno Camon 30', 'Tecno Spark 30', 'Infinix Hot 30', 'Infinix Note 30']

@@ -1,53 +1,77 @@
 # Case ze2Pvfz8ZTBkOHPvNYoAKALe
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  25317 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0013  |  44428 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: washing machine (confidence 0.95)
-- Made of: plastic 60%, steel 30%, rubber 10%
+- Made of: plastic 60%, steel 30%, circuit_board 5%, rubber 5%
 - Estimated weight: 25.0 kg (confidence 0.8)
-- Brand read off the item: Power Volt
+- Brand read off the item: LG
 - Model read off the item: nothing legible
 - Rating read: none
-- Label, plate or settings screen legible: yes
-- Damage noted: minor scuffs on front panel, dust on top surface, door slightly ajar
+- Label, plate or settings screen legible: no
+- Damage noted: minor scuffs on front panel, dust on top lid
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: BUBBLE CLEAN | POWERFUL CLEANING TECHNOLOGY | DUAL WASH SYSTEM | ECONOMY MODE | AUTO DOOR LOCK | CHILD SAFETY LOCK | WATER LEVEL CONTROL | TIME SETTING
+- Text read: BUBBLE CLEAN | LG
+
+## Two readers
+- model_text was seen by only one reader, so it is treated as unread
+- rating_text was seen by only one reader, so it is treated as unread
+- serial_text was seen by only one reader, so it is treated as unread
+- 11 transcribed lines was seen by only one reader, so it is treated as unread
+- brand_text was read by only one reader, so it is kept but not confirmed
+
+## OCR read off the photos
+- BOOS
+- LG XBOOM
+- POSTED
+- Buble
+- Clean
 
 ## Chain
-- **corroborate** -> unavailable. openrouter:mistralai/mistral-small-3.2-24b-instruct failed after retries: HTTP 429: {"error":{"message":"Provider return
-- **read_evidence** -> ok. category=washing machine brand=Power Volt model=None label=True lines=25
-- **retrieval** -> ok. query='Power Volt BUBBLE CLEAN POWERFUL CLEANING TECHNOLOGY DUAL WASH SYSTEM ECONOMY MODE AUTO DO' hits=['Hisense WT3K9022U 9kg top loader', 'Hisense WTJA801 8kg top loader', 'Hisense WM5S1045 10kg front loader']
-- **identify** -> refused. chosen=None None margin=0.2
+- **ocr** -> ok. 5 lines: BOOS | LG XBOOM | POSTED | Buble | Clean
+- **corroborate** -> dispute. model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 11 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed
+- **read_evidence** -> ok. category=washing machine brand=LG model=None label=False lines=2
+- **retrieval** -> ok. query='LG BUBBLE CLEAN LG Hisense 9kg top load Automatic wash and spin washing machine' hits=['Hisense WT3K9022U 9kg top loader', 'LG T2108 8kg top loader', 'LG T2312 12kg top loader', 'Hisense WTJA801 8kg top loader', 'Hisense WM5S1045 10kg front loader']
+- **identify** -> refused. chosen=LG None margin=0.05
 - **abstain** -> abstain. model refused
 
 ## Identification
 Shortlist from the catalogue:
   - Hisense WT3K9022U 9kg top loader (0.8333)
+  - LG T2108 8kg top loader (0.4667)
+  - LG T2312 12kg top loader (0.4667)
   - Hisense WTJA801 8kg top loader (0.4667)
   - Hisense WM5S1045 10kg front loader (0.4333)
 
-**Not identified: CANNOT_IDENTIFY.** Brand plate and model markings are not legible; 'Power Volt' text appears to be a watermark, not the item brand. Machine is visibly a Hisense-style top loader but no model or capacity label is readable, so no specific catalogue model is supported.
+**Not identified: CANNOT_IDENTIFY.** Item is clearly an LG top loader (LG logo, Bubble Clean sticker, Inverter Direct Drive), contradicting the seller's Hisense claim, but no model number or capacity is legible, so T2108 (8kg) vs T2312 (12kg) cannot be decided.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 15% on the best answer. It is probably a Hisense WT3K9022U or a Hisense WTJA801, and the photos cannot separate them.**
+**Not sure enough to price: 14% on the best answer. It is probably a LG T2108 or a LG T2312, and the photos cannot separate them.**
 
-- Identification confidence: 15% (unknown)
+- Identification confidence: 14% (unknown)
 - Price confidence: 16%
-- It is weighing: Hisense WT3K9022U (0.4), Hisense WTJA801 (0.2)
-- Brand plate and model markings are not legible; 'Power Volt' text appears to be a watermark, not the item brand. Machine is visibly a Hisense-style top loader but no model or capacity label is readable, so no specific catalogue model is supported.
-- read off the item's own label
-- only one reader saw these photos, the second was unavailable
-- the next candidate was only 0.2 behind
+- It is weighing: LG T2108 (0.4), LG T2312 (0.35)
+- Item is clearly an LG top loader (LG logo, Bubble Clean sticker, Inverter Direct Drive), contradicting the seller's Hisense claim, but no model number or capacity is legible, so T2108 (8kg) vs T2312 (12kg) cannot be decided.
+- no label, plate or settings screen was legible
+- 1 lines seen by both readers
+- the brand was read by only one reader and is not confirmed
+- the next candidate was only 0.05 behind
 - 9 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
 
 ## What the seller is asked for next (shown in the app)
-1. [PHOTO] Close-up of the sticker with the model number, usually inside the door or on the back.
+1. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: Close-up of the sticker with the model number, usually inside the door or on the back. Then, without stopping the video: Open the door and photograph the inside of the drum. Finish with: A short clip of the machine switched on with the panel lit. Keep filming the whole time. Do not cut between clips.
+   _why: two readings of these photos disagreed about what is written on the item_
+2. [PHOTO] Close-up of the sticker with the model number, usually inside the door or on the back.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it finish a full wash and spin cycle?
 
 ## Claims
 - [unverified] Hisense 9kg top load Automatic wash and spin washing machine
@@ -70,14 +94,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Open the door and photograph the inside of the drum.
 
 ## Price
-**1,942 to 7,450 NGN** (priced as material, width 1.1727, method material_floor, 0 comparable prices)
+**2,281 to 8,575 NGN** (priced as material, width 1.1594, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 25 kg of plastic 60%, steel 30%, rubber 10% (rates for plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 25 kg of plastic 60%, steel 30%, circuit_board 5%, rubber 5% (rates for plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 5,375 NGN
+Scrap floor: 6,312 NGN
 
 Conditions attached to this price:
-- Not identified: Brand plate and model markings are not legible; 'Power Volt' text appears to be a watermark, not the item brand. Machine is visibly a Hisense-style top loader but no model or capacity label is readable, so no specific catalogue model is supported.
+- Not identified: Item is clearly an LG top loader (LG logo, Bubble Clean sticker, Inverter Direct Drive), contradicting the seller's Hisense claim, but no model number or capacity is legible, so T2108 (8kg) vs T2312 (12kg) cannot be decided.
 - Hisense 9kg top load Automatic wash and spin washing machine -> not proven remotely. Agent reads the rating plate.
 - Hisense 9kg top load Automatic wash and spin washing machine -> not proven remotely. Agent reads the rating plate.
 - Hisense 9kg top load Automatic wash and spin washing machine -> not proven remotely. Agent reads the rating plate.

@@ -16,7 +16,11 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Screenshot of a gallery: no
 - Text read: BLUE G T
 
+## OCR read off the photos
+- BLUEG T
+
 ## Chain
+- **ocr** -> ok. 1 lines: BLUEG T
 - **corroborate** -> agree. nothing identifying was read by either
 - **read_evidence** -> ok. category=power_supply_or_adapter brand=None model=None label=False lines=1
 - **retrieval** -> ok. query='BLUE G T Description: This is a used Blue Gate Electronics UPS that is currently not funct' hits=['Infinix Smart 8', 'Google Pixel 8']

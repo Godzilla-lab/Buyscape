@@ -1,13 +1,13 @@
 # Case ideal-topstar-manual-sewing-machine
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  22925 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  25912 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: sewing machine (confidence 0.95)
 - Made of: steel 60%, plastic 30%, rubber 10%
 - Estimated weight: 8.5 kg (confidence 0.7)
-- Brand read off the item: nothing legible
+- Brand read off the item: IDEAL TOPSTAR
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
@@ -20,41 +20,43 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - brand_text agreed by both readers
 - 2 transcribed lines was seen by only one reader, so it is treated as unread
 
+## OCR read off the photos
+- IDEAL TOPSTAR
+- DEN
+
 ## Chain
+- **ocr** -> ok. 2 lines: IDEAL TOPSTAR | DEN
 - **corroborate** -> dispute. brand_text agreed by both readers; 2 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=sewing machine brand=IDEAL TOPSTAR model=None label=True lines=2
-- **grounding** -> dropped. brand
-- **forensics** -> flag. the reader stated brand it could not point to in the photos
-- **retrieval** -> ok. query='IDEAL TOPSTAR Super Automatic Ideal Topstar manual sewing machine available for sale. Loca' hits=['Tecno Spark 10']
-- **identify** -> ok. chosen=IDEAL TOPSTAR Super Automatic margin=None
-- **abstain** -> pass. confidence=0.45 margin=None
+- **retrieval** -> ok. query='IDEAL TOPSTAR IDEAL TOPSTAR Super Automatic Ideal Topstar manual sewing machine available ' hits=['Tecno Spark 10']
+- **identify** -> ok. chosen=Ideal Topstar Super Automatic margin=None
+- **abstain** -> pass. confidence=0.9 margin=None
 
 ## Identification
 Shortlist from the catalogue:
   - Tecno Spark 10 (0.2)
 
-**Answer: IDEAL TOPSTAR Super Automatic** (margin None)
-
-Evidence flags: the reader stated brand it could not point to in the photos
+**Answer: Ideal Topstar Super Automatic** (margin None)
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 45% on the best answer. It is probably a IDEAL TOPSTAR Super Automatic, and the photos cannot separate them.**
+**90% sure this is a Ideal Topstar Super Automatic.**
 
-- Identification confidence: 45% (unsure)
+- Identification confidence: 90% (certain)
 - Price confidence: 0%
-- It is weighing: IDEAL TOPSTAR Super Automatic (0.9)
+- It is weighing: Ideal Topstar Super Automatic (0.9)
 - read off the item's own label
 - 2 lines seen by both readers
-- the reader stated brand it could not point to in the photos
 - 9 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
 
 ## What the seller is asked for next (shown in the app)
-1. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: Close-up of any label, sticker or metal plate showing the brand and model. Then, without stopping the video: If it opens without tools, open it and photograph the inside. Keep filming the whole time. Do not cut between clips.
-   _why: two readings of these photos disagreed about what is written on the item_
-2. [PHOTO] Close-up of any label, sticker or metal plate showing the brand and model.
-   _why: nothing on the item says which model this is_
+1. [PHOTO] Write the code {code} on a piece of paper and take one photo with the paper next to the item.
+   _why: this is needed before the price can be confirmed_
+2. [PHOTO] One photo showing the whole item.
+   _why: this is needed before the price can be confirmed_
+3. [PHOTO] Close-up of any label, sticker or metal plate showing the brand and model.
+   _why: this is needed before the price can be confirmed_
 
 ## What the seller is asked (only they know these)
 - How much of it is there? Give the weight in kilogrammes or tons if you know it.
@@ -86,7 +88,6 @@ No usable comparable sales (0 found, 2 needed), so the range comes from the publ
 Scrap floor: 2,847 NGN
 
 Conditions attached to this price:
-- Evidence flag: the reader stated brand it could not point to in the photos
 - Ideal Topstar manual sewing machine -> not proven remotely. Weigh on the scale and photograph the display.
 - manual sewing machine -> not proven remotely. Weigh on the scale and photograph the display.
 - available for sale -> not proven remotely. Agent will confirm at pickup.

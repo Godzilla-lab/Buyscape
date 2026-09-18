@@ -16,6 +16,7 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Screenshot of a gallery: no
 
 ## Chain
+- **ocr** -> ok. 0 lines: 
 - **corroborate** -> agree. nothing identifying was read by either
 - **read_evidence** -> ok. category=vacuum cleaner brand=None model=None label=False lines=0
 - **retrieval** -> ok. query='A 29-inch LG TV is for sale. It’s the transformer that got blown up. Location: Onike, near' hits=['LG T2108 8kg top loader', 'LG T2312 12kg top loader', 'LG S4-Q09 1HP', 'LG S4-Q18 2HP', 'LG F2J5 7kg front loader']

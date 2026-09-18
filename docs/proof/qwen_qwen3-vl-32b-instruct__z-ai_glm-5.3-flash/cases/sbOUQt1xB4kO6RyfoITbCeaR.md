@@ -1,33 +1,38 @@
 # Case sbOUQt1xB4kO6RyfoITbCeaR
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0013  |  90225 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  29792 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: laptop (confidence 0.95)
-- Made of: plastic 40%, steel 30%, circuit_board 15%, aluminium 10%, rubber 5%
-- Estimated weight: 2.0 kg (confidence 0.8)
-- Brand read off the item: nothing legible
+- Made of: plastic 40%, steel 30%, circuit_board 15%, copper_insulated 10%, glass 5%
+- Estimated weight: 1.8 kg (confidence 0.8)
+- Brand read off the item: hp
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: Screen is on and displaying desktop., No visible cracks or dents on the chassis., Keyboard appears intact., Touchpad present and undamaged.
+- Damage noted: screen is on and displaying desktop, no visible damage to body or keyboard, laptop appears clean and functional
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
-- Text read: OLABOLTECH ENTERPRISES
+- Text read: OLABOLTECH ENTERPRISES | hp
 
 ## Two readers
-- brand_text was seen by only one reader, so it is treated as unread
-- 54 transcribed lines was seen by only one reader, so it is treated as unread
+- 14 transcribed lines was seen by only one reader, so it is treated as unread
+- brand_text was read by only one reader, so it is kept but not confirmed
+
+## OCR read off the photos
+- OLABOI-TECH
+- ENTERPRISES
 
 ## Chain
-- **corroborate** -> dispute. brand_text was seen by only one reader, so it is treated as unread; 54 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=laptop brand=None model=None label=False lines=1
+- **ocr** -> ok. 2 lines: OLABOI-TECH | ENTERPRISES
+- **corroborate** -> dispute. 14 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed
+- **read_evidence** -> ok. category=laptop brand=hp model=None label=False lines=2
 - **forensics** -> flag. looks like a catalogue or stock image
-- **retrieval** -> ok. query='OLABOLTECH ENTERPRISES Hp elitebook 840 g3
+- **retrieval** -> ok. query='hp OLABOLTECH ENTERPRISES hp Hp elitebook 840 g3
 Intel core i5(6th gen )
-8gb memory & 256gb ssd ' hits=['HP EliteBook 840 G5', 'HP EliteBook 840 G6', 'HP 2000', 'HP EliteBook 830 G5', 'HP 250 G7']
-- **identify** -> refused. chosen=None None margin=0.05
+8gb memory & 256g' hits=['HP EliteBook 840 G5', 'HP EliteBook 840 G6', 'HP 2000', 'HP EliteBook 830 G5', 'HP 250 G7']
+- **identify** -> refused. chosen=None None margin=0.0
 - **abstain** -> abstain. model refused
 
 ## Identification
@@ -38,20 +43,21 @@ Shortlist from the catalogue:
   - HP EliteBook 830 G5 (0.4333)
   - HP 250 G7 (0.4333)
 
-**Not identified: CANNOT_IDENTIFY.** Seller claims EliteBook 840 G3, which is not on the shortlist; no legible label or photo detail confirms any exact model or generation.
+**Not identified: CANNOT_IDENTIFY.** Seller claims EliteBook 840 G3, which is not on the shortlist; no model label is legible in the photo to confirm G3, G5 or G6. Screen size and generation cannot be judged from the image.
 
 Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 7% on the best answer. It is probably a HP EliteBook 840 G5 or a HP EliteBook 840 G6, and the photos cannot separate them.**
+**Not sure enough to price: 5% on the best answer. It is probably a HP EliteBook 840 G5 or a HP EliteBook 840 G6, and the photos cannot separate them.**
 
-- Identification confidence: 7% (unknown)
+- Identification confidence: 5% (unknown)
 - Price confidence: 14%
-- It is weighing: HP EliteBook 840 G5 (0.3), HP EliteBook 840 G6 (0.25)
-- Seller claims EliteBook 840 G3, which is not on the shortlist; no legible label or photo detail confirms any exact model or generation.
+- It is weighing: HP EliteBook 840 G5 (0.3), HP EliteBook 840 G6 (0.3)
+- Seller claims EliteBook 840 G3, which is not on the shortlist; no model label is legible in the photo to confirm G3, G5 or G6. Screen size and generation cannot be judged from the image.
 - no label, plate or settings screen was legible
 - 1 lines seen by both readers
-- the next candidate was only 0.05 behind
+- the brand was read by only one reader and is not confirmed
+- the next candidate was only 0.0 behind
 - looks like a catalogue or stock image
 - 10 claims are still unproven, 0 are supported
 
@@ -64,6 +70,12 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: two readings of these photos disagreed about what is written on the item_
 3. [PHOTO] Photo of the sticker on the underside showing the model, serial or service tag.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it stay on for more than ten minutes with the charger unplugged?
+- Has it ever been dropped, or had liquid spilled on it?
+- What does not work on it? Say none if everything works.
 
 ## Claims
 - [unverifiable_remote] Hp elitebook 840 g3
@@ -85,15 +97,16 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Screenshot of System Information (Windows) or About This Mac, showing the model, processor, RAM and storage.
 
 ## Price
-**498 to 2,314 NGN** (priced as material, width 1.2911, method material_floor, 0 comparable prices)
+**5,000 to 5,000 NGN** (priced as material, width 0.0, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 2 kg of plastic 40%, steel 30%, circuit_board 15%, aluminium 10%, rubber 5% (rates for circuit_board, plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 1.8 kg of plastic 40%, steel 30%, circuit_board 15%, copper_insulated 10%, glass 5% (rates for glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 1,235 NGN
+Scrap floor: 1,009 NGN
 
 Conditions attached to this price:
-- Not identified: Seller claims EliteBook 840 G3, which is not on the shortlist; no legible label or photo detail confirms any exact model or generation.
+- Not identified: Seller claims EliteBook 840 G3, which is not on the shortlist; no model label is legible in the photo to confirm G3, G5 or G6. Screen size and generation cannot be judged from the image.
 - Evidence flag: looks like a catalogue or stock image
+- Raised to the 5,000 NGN minimum this business publishes for this kind of item.
 - Hp elitebook 840 g3 -> not proven remotely. Agent will confirm at pickup.
 - Intel core i5(6th gen ) -> not proven remotely. Agent will confirm at pickup.
 - 8gb memory -> not proven remotely. Agent opens System Information and reads the RAM.

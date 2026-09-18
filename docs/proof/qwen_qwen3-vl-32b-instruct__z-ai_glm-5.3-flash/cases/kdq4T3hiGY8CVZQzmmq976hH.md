@@ -1,31 +1,36 @@
 # Case kdq4T3hiGY8CVZQzmmq976hH
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  45783 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  17331 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: split air conditioner (confidence 0.95)
-- Made of: plastic 70%, steel 20%, circuit_board 10%
+- Made of: plastic 70%, steel 25%, circuit_board 5%
 - Estimated weight: 10.0 kg (confidence 0.8)
-- Brand read off the item: nothing legible
+- Brand read off the item: Haier
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
 - Damage noted: none
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
-- Text read: 26
+- Text read: 26 | Haier
 
 ## Two readers
-- brand_text was seen by only one reader, so it is treated as unread
 - 1 transcribed lines was seen by only one reader, so it is treated as unread
+- brand_text was read by only one reader, so it is kept but not confirmed
+
+## OCR read off the photos
+- 28
+- Hoonse
 
 ## Chain
-- **corroborate** -> dispute. brand_text was seen by only one reader, so it is treated as unread; 1 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=split air conditioner brand=None model=None label=False lines=1
+- **ocr** -> ok. 2 lines: 28 | Hoonse
+- **corroborate** -> dispute. 1 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed
+- **read_evidence** -> ok. category=split air conditioner brand=Haier model=None label=False lines=2
 - **forensics** -> flag. looks like a catalogue or stock image
-- **retrieval** -> ok. query='26 Every hisense air conditioner is built to the highest standards, ensuring that any deci' hits=['Hisense AS-09 1HP', 'Hisense AS-12 1.5HP', 'Hisense AS-18 2HP']
-- **identify** -> refused. chosen=Hisense None margin=0.01
+- **retrieval** -> ok. query='Haier 26 Haier Every hisense air conditioner is built to the highest standards, ensuring t' hits=['Hisense AS-09 1HP', 'Hisense AS-12 1.5HP', 'Hisense AS-18 2HP', 'Haier Thermocool HSU-12 1.5HP']
+- **identify** -> refused. chosen=Hisense None margin=0.05
 - **abstain** -> abstain. model refused
 
 ## Identification
@@ -33,21 +38,23 @@ Shortlist from the catalogue:
   - Hisense AS-09 1HP (0.4)
   - Hisense AS-12 1.5HP (0.38)
   - Hisense AS-18 2HP (0.38)
+  - Haier Thermocool HSU-12 1.5HP (0.15)
 
-**Not identified: CANNOT_IDENTIFY.** Display shows '26' (likely set temperature), not a model number; no legible plate or capacity marking distinguishes 1HP, 1.5HP or 2HP variants.
+**Not identified: CANNOT_IDENTIFY.** Unit shows Hisense branding and 26 display, but no model or capacity marking is legible, so no single shortlist model is supported.
 
 Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 8% on the best answer. It is probably a Hisense AS-12 or a Hisense AS-09, and the photos cannot separate them.**
+**Not sure enough to price: 7% on the best answer. It is probably a Hisense AS-12 1.5HP or a Hisense AS-09 1HP, and the photos cannot separate them.**
 
-- Identification confidence: 8% (unknown)
+- Identification confidence: 7% (unknown)
 - Price confidence: 24%
-- It is weighing: Hisense AS-12 (0.34), Hisense AS-09 (0.33)
-- Display shows '26' (likely set temperature), not a model number; no legible plate or capacity marking distinguishes 1HP, 1.5HP or 2HP variants.
+- It is weighing: Hisense AS-12 1.5HP (0.35), Hisense AS-09 1HP (0.3)
+- Unit shows Hisense branding and 26 display, but no model or capacity marking is legible, so no single shortlist model is supported.
 - no label, plate or settings screen was legible
 - 1 lines seen by both readers
-- the next candidate was only 0.01 behind
+- the brand was read by only one reader and is not confirmed
+- the next candidate was only 0.05 behind
 - looks like a catalogue or stock image
 - 5 claims are still unproven, 0 are supported
 
@@ -60,6 +67,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: two readings of these photos disagreed about what is written on the item_
 3. [PHOTO] Close-up of the rating plate on the outdoor unit showing the model and HP.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it still blow cold air?
+- Do you have both the indoor unit and the outdoor unit?
 
 ## Claims
 - [unverified] Required evidence 'code_shot' was not supplied
@@ -74,14 +86,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Open the front grille of the indoor unit and photograph the filters and coil.
 
 ## Price
-**2,476 to 6,460 NGN** (priced as material, width 0.8916, method material_floor, 0 comparable prices)
+**1,818 to 3,260 NGN** (priced as material, width 0.5677, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 10 kg of plastic 70%, steel 20%, circuit_board 10% (rates for circuit_board, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 10 kg of plastic 70%, steel 25%, circuit_board 5% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 3,200 NGN
+Scrap floor: 2,350 NGN
 
 Conditions attached to this price:
-- Not identified: Display shows '26' (likely set temperature), not a model number; no legible plate or capacity marking distinguishes 1HP, 1.5HP or 2HP variants.
+- Not identified: Unit shows Hisense branding and 26 display, but no model or capacity marking is legible, so no single shortlist model is supported.
 - Evidence flag: looks like a catalogue or stock image
 - Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on paper and photograph it next to the unit..
 - Required evidence 'indoor_unit' was not supplied -> not proven remotely. One photo of the whole indoor unit..

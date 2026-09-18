@@ -1,6 +1,6 @@
 # Case iFSqZMVU3pAb169ZboxiEfV9
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  50858 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  29201 ms
 
 ## What the engine saw
 - Presentation: sealed_new
@@ -16,12 +16,16 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Screenshot of a gallery: no
 
 ## Two readers
+- brand_text differed between the two readers, so it is treated as unread
 - model_text differed between the two readers, so it is treated as unread
-- brand_text was seen by only one reader, so it is treated as unread
 - 4 transcribed lines was seen by only one reader, so it is treated as unread
 
+## OCR read off the photos
+- 8
+
 ## Chain
-- **corroborate** -> dispute. model_text differed between the two readers, so it is treated as unread; brand_text was seen by only one reader, so it is treated as unread; 4 transcribed lines was seen by only one reader, so it is treated as unread
+- **ocr** -> ok. 1 lines: 8
+- **corroborate** -> dispute. brand_text differed between the two readers, so it is treated as unread; model_text differed between the two readers, so it is treated as unread; 4 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=phone brand=None model=None label=True lines=0
 - **forensics** -> flag. looks like a catalogue or stock image
 - **retrieval** -> ok. query='Brand new iphone 16 plus 512gb blue colour available at affordable price' hits=['Apple iPhone 16', 'Apple iPhone 16 Pro', 'Apple iPhone 16 Pro Max', 'Apple iPhone XR', 'Apple iPhone XS']
@@ -62,6 +66,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: two readings of these photos disagreed about what is written on the item_
 3. [PHOTO] Screenshot of Settings then About, showing the model name and storage.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Has the screen or battery ever been changed?
+- Is it signed out of iCloud or Google, so a new owner can set it up?
 
 ## Claims
 - [unverified] Brand new iPhone 16 Plus 512GB blue colour

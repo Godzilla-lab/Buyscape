@@ -1,55 +1,55 @@
 # Case A4YxyJsurn1Pfg47Z51fxWnK
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  66315 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  22759 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: split air conditioner (confidence 0.95)
-- Made of: steel 40%, plastic 30%, copper 20%, mixed_electronic 10%
+- Made of: steel 60%, plastic 30%, copper 10%
 - Estimated weight: 45.0 kg (confidence 0.8)
-- Brand read off the item: nothing legible
+- Brand read off the item: Panasonic
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: unit appears clean and undamaged, packaging intact with tape securing top unit
+- Damage noted: unit appears clean and undamaged, outer packaging is intact with blue tape
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
-- Text read: Panasonic | INVERTER
+- Text read: Panasonic | INVERTER | DC INVERTER COMPRESSOR
 
 ## Two readers
 - brand_text agreed by both readers
-- model_text differed between the two readers, so it is treated as unread
-- rating_text was seen by only one reader, so it is treated as unread
-- serial_text was seen by only one reader, so it is treated as unread
-- 16 transcribed lines was seen by only one reader, so it is treated as unread
+- model_text was seen by only one reader, so it is treated as unread
+- 10 transcribed lines was seen by only one reader, so it is treated as unread
+
+## OCR read off the photos
+- Panasonic
 
 ## Chain
-- **corroborate** -> dispute. brand_text agreed by both readers; model_text differed between the two readers, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 16 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=split air conditioner brand=Panasonic model=None label=True lines=2
-- **grounding** -> dropped. brand
-- **forensics** -> flag. the reader stated brand it could not point to in the photos; looks like a catalogue or stock image
-- **retrieval** -> ok. query='Panasonic INVERTER Tired of paying high electricity bills for your air conditioner? Then y' hits=['Panasonic CS-YN12 1.5HP']
-- **identify** -> refused. chosen=Panasonic None margin=None
-- **abstain** -> abstain. model refused
+- **ocr** -> ok. 1 lines: Panasonic
+- **corroborate** -> dispute. brand_text agreed by both readers; model_text was seen by only one reader, so it is treated as unread; 10 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=split air conditioner brand=Panasonic model=None label=True lines=3
+- **forensics** -> flag. looks like a catalogue or stock image
+- **retrieval** -> ok. query='Panasonic Panasonic INVERTER DC INVERTER COMPRESSOR Tired of paying high electricity bills' hits=['Panasonic CS-YN12 1.5HP']
+- **identify** -> ok. chosen=Panasonic CS-YN12 margin=None
+- **abstain** -> abstain. top score 0.55
 
 ## Identification
 Shortlist from the catalogue:
   - Panasonic CS-YN12 1.5HP (0.38)
 
-**Not identified: CANNOT_IDENTIFY.** Brand and inverter type legible on outdoor unit, but no model number visible; many Panasonic inverter split models match, so CS-YN12 is only a plausible guess.
+**Not identified: CANNOT_IDENTIFY.** The best candidate scored only 0.55, which is not sure enough to price.
 
-Evidence flags: the reader stated brand it could not point to in the photos; looks like a catalogue or stock image
+Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 14% on the best answer. It is probably a Panasonic CS-YN12, and the photos cannot separate them.**
+**Not sure enough to price: 17% on the best answer. It is probably a Panasonic CS-YN12, and the photos cannot separate them.**
 
-- Identification confidence: 14% (unknown)
+- Identification confidence: 17% (unknown)
 - Price confidence: 24%
-- It is weighing: Panasonic CS-YN12 (0.45)
-- Brand and inverter type legible on outdoor unit, but no model number visible; many Panasonic inverter split models match, so CS-YN12 is only a plausible guess.
+- It is weighing: Panasonic CS-YN12 (0.55)
+- The best candidate scored only 0.55, which is not sure enough to price.
 - read off the item's own label
-- 2 lines seen by both readers
-- the reader stated brand it could not point to in the photos
+- 3 lines seen by both readers
 - looks like a catalogue or stock image
 - 5 claims are still unproven, 0 are supported
 
@@ -62,6 +62,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: two readings of these photos disagreed about what is written on the item_
 3. [PHOTO] Close-up of the rating plate on the outdoor unit showing the model and HP.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it still blow cold air?
+- Do you have both the indoor unit and the outdoor unit?
 
 ## Claims
 - [unverified] Required evidence 'code_shot' was not supplied
@@ -76,15 +81,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Open the front grille of the indoor unit and photograph the filters and coil.
 
 ## Price
-**80,088 to 136,980 NGN** (priced as material, width 0.5242, method material_floor, 0 comparable prices)
+**46,311 to 77,130 NGN** (priced as material, width 0.4993, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 45 kg of steel 40%, plastic 30%, copper 20%, mixed_electronic 10% (rates for mixed_electronic, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 45 kg of steel 60%, plastic 30%, copper 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 103,500 NGN
+Scrap floor: 59,850 NGN
 
 Conditions attached to this price:
-- Not identified: Brand and inverter type legible on outdoor unit, but no model number visible; many Panasonic inverter split models match, so CS-YN12 is only a plausible guess.
-- Evidence flag: the reader stated brand it could not point to in the photos
+- Not identified: The best candidate scored only 0.55, which is not sure enough to price.
 - Evidence flag: looks like a catalogue or stock image
 - Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on paper and photograph it next to the unit..
 - Required evidence 'indoor_unit' was not supplied -> not proven remotely. One photo of the whole indoor unit..

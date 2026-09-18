@@ -16,6 +16,7 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Screenshot of a gallery: no
 
 ## Chain
+- **ocr** -> ok. 0 lines: 
 - **corroborate** -> agree. nothing identifying was read by either
 - **read_evidence** -> ok. category=split air conditioner brand=None model=None label=False lines=0
 - **retrieval** -> ok. query='A scrap split AC condenser unit is available for sale. Location: Agege, Lagos State Price:' hits=['Infinix Note 50', 'Tecno Camon 50', 'Infinix Hot 50', 'Infinix Note 30', 'Infinix Note 40']

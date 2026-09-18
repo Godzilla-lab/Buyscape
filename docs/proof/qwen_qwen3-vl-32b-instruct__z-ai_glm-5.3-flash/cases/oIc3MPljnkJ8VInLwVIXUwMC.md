@@ -1,33 +1,41 @@
 # Case oIc3MPljnkJ8VInLwVIXUwMC
 
-Photos: 3  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  29042 ms
+Photos: 3  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0013  |  48790 ms
 
 ## What the engine saw
 - Presentation: single_unit
-- Category: laptop (confidence 0.95)
-- Made of: plastic 60%, steel 20%, circuit_board 10%, aluminium 10%
-- Estimated weight: 2.3 kg (confidence 0.8)
-- Brand read off the item: nothing legible
+- Category: laptop (confidence 1.0)
+- Made of: plastic 60%, steel 20%, circuit_board 10%, copper 5%, glass 5%
+- Estimated weight: 2.1 kg (confidence 0.8)
+- Brand read off the item: LEGION
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: Minor scuffs on the lid and base, Screen appears clear with no visible cracks or dead pixels
+- Damage noted: No visible damage or wear on exterior.
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 - Text read: LEGION | GAPTECH POSTED ON JIJI
 
 ## Two readers
-- brand_text differed between the two readers, so it is treated as unread
-- 3 transcribed lines was seen by only one reader, so it is treated as unread
+- brand_text was read by one reader and confirmed by OCR
+- 4 transcribed lines was seen by only one reader, so it is treated as unread
+
+## OCR read off the photos
+- GAPTECH
+- POSTED ON JIJI
+- LEGION
+- GAPTECH
+- POSTED ON JIJI
 
 ## Chain
-- **corroborate** -> dispute. brand_text differed between the two readers, so it is treated as unread; 3 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=laptop brand=None model=None label=False lines=2
-- **retrieval** -> ok. query='LEGION GAPTECH POSTED ON JIJI GAPTECH online store 
+- **ocr** -> ok. 5 lines: GAPTECH | POSTED ON JIJI | LEGION | GAPTECH | POSTED ON JIJI
+- **corroborate** -> dispute. brand_text was read by one reader and confirmed by OCR; 4 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=laptop brand=LEGION model=None label=False lines=2
+- **retrieval** -> ok. query='LEGION LEGION GAPTECH POSTED ON JIJI GAPTECH online store 
 U.S used Laptops and Phones 
-Product d' hits=['Lenovo 14w', 'Lenovo ThinkPad T480', 'Lenovo ThinkPad T470', 'Lenovo ThinkPad X1 Carbon Gen 6', 'Lenovo IdeaPad 3']
-- **identify** -> refused. chosen=Lenovo None margin=None
-- **abstain** -> abstain. model refused
+Pr' hits=['Lenovo 14w', 'Lenovo ThinkPad T480', 'Lenovo ThinkPad T470', 'Lenovo ThinkPad X1 Carbon Gen 6', 'Lenovo IdeaPad 3']
+- **identify** -> ok. chosen=Lenovo Legion margin=0.75
+- **abstain** -> abstain. no label, top score 0.8
 
 ## Identification
 Shortlist from the catalogue:
@@ -37,15 +45,15 @@ Shortlist from the catalogue:
   - Lenovo ThinkPad X1 Carbon Gen 6 (0.3)
   - Lenovo IdeaPad 3 (0.3)
 
-**Not identified: CANNOT_IDENTIFY.** Lid clearly reads LEGION, so all shortlist entries (ThinkPad/IdeaPad/14w) are wrong; exact Legion model number is not legible, only Ryzen and RTX badges visible.
+**Not identified: CANNOT_IDENTIFY.** No label, plate or settings screen was legible, and the visual match alone scored only 0.8.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 25% on the best answer. It is probably a Lenovo Legion 5, and the photos cannot separate them.**
+**Not sure enough to price: 41% on the best answer. It is probably a Lenovo Legion or a Lenovo IdeaPad 3, and the photos cannot separate them.**
 
-- Identification confidence: 25% (unknown)
+- Identification confidence: 41% (unsure)
 - Price confidence: 22%
-- It is weighing: Lenovo Legion 5 (0.5)
-- Lid clearly reads LEGION, so all shortlist entries (ThinkPad/IdeaPad/14w) are wrong; exact Legion model number is not legible, only Ryzen and RTX badges visible.
+- It is weighing: Lenovo Legion (0.8), Lenovo IdeaPad 3 (0.05)
+- No label, plate or settings screen was legible, and the visual match alone scored only 0.8.
 - no label, plate or settings screen was legible
 - 2 lines seen by both readers
 - 6 claims are still unproven, 0 are supported
@@ -60,6 +68,12 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 3. [PHOTO] Screenshot of System Information (Windows) or About This Mac, showing the model, processor, RAM and storage.
    _why: nothing on the item says which model this is_
 
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it stay on for more than ten minutes with the charger unplugged?
+- Has it ever been dropped, or had liquid spilled on it?
+- What does not work on it? Say none if everything works.
+
 ## Claims
 - [unverifiable_remote] Product- Lenovo
 - [unverifiable_remote] Model -...
@@ -73,14 +87,15 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Screenshot of System Information (Windows) or About This Mac, showing the model, processor, RAM and storage.
 
 ## Price
-**862 to 2,134 NGN** (priced as material, width 0.849, method material_floor, 0 comparable prices)
+**5,000 to 5,000 NGN** (priced as material, width 0.0, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 2.3 kg of plastic 60%, steel 20%, circuit_board 10%, aluminium 10% (rates for circuit_board, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 2.1 kg of plastic 60%, steel 20%, circuit_board 10%, copper 5%, glass 5% (rates for glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 1,173 NGN
+Scrap floor: 1,556 NGN
 
 Conditions attached to this price:
-- Not identified: Lid clearly reads LEGION, so all shortlist entries (ThinkPad/IdeaPad/14w) are wrong; exact Legion model number is not legible, only Ryzen and RTX badges visible.
+- Not identified: No label, plate or settings screen was legible, and the visual match alone scored only 0.8.
+- Raised to the 5,000 NGN minimum this business publishes for this kind of item.
 - Product- Lenovo -> not proven remotely. Agent will confirm at pickup.
 - Model -... -> not proven remotely. Agent will confirm at pickup.
 - Required evidence 'code_shot' was not supplied -> not proven remotely. Write the code {code} on paper and take one photo with the paper next to the laptop..

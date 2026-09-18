@@ -1,35 +1,41 @@
 # Case mlxplz68xfW3m9Ifm5tgpT65
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  19742 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  32703 ms
 
 ## What the engine saw
 - Presentation: sealed_new
 - Category: phone (confidence 0.95)
 - Made of: paper 80%, plastic 20%
 - Estimated weight: 0.5 kg (confidence 0.8)
-- Brand read off the item: nothing legible
-- Model read off the item: nothing legible
+- Brand read off the item: Google
+- Model read off the item: Pixel Fold
 - Rating read: none
 - Label, plate or settings screen legible: no
 - Damage noted: none
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
-- Text read: Pixel Fold | ONYITEX GADGET
+- Text read: Pixel Fold | ONYITEX GADGET | Google
 
 ## Two readers
 - brand_text agreed by both readers
-- model_text was seen by only one reader, so it is treated as unread
+- model_text was read by one reader and confirmed by OCR
 - 1 transcribed lines was seen by only one reader, so it is treated as unread
 
+## OCR read off the photos
+- 512g4
+- Pixel Fold
+- POSTEONJ
+- ONYITEXGADGET
+
 ## Chain
-- **corroborate** -> dispute. brand_text agreed by both readers; model_text was seen by only one reader, so it is treated as unread; 1 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=phone brand=Google model=None label=False lines=2
-- **grounding** -> dropped. brand
-- **forensics** -> flag. the reader stated brand it could not point to in the photos; looks like a catalogue or stock image
-- **retrieval** -> ok. query='Pixel Fold ONYITEX GADGET Google Pixel Fold:
-- 7.6-inch OLED main display, 5.8-inch cover ' hits=['Google Pixel 7', 'Google Pixel 8', 'Google Pixel 9', 'Tecno Pova 5', 'Tecno Pova 6']
-- **identify** -> ok. chosen=Google Pixel Fold margin=0.9
-- **abstain** -> abstain. confidence 0.4: no label, plate or settings screen was legible; 2 lines seen by both readers; the reader stated brand it could not point to in the photos; looks like a catalogue or stock image
+- **ocr** -> ok. 4 lines: 512g4 | Pixel Fold | POSTEONJ | ONYITEXGADGET
+- **corroborate** -> dispute. brand_text agreed by both readers; model_text was read by one reader and confirmed by OCR; 1 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=phone brand=Google model=Pixel Fold label=False lines=3
+- **forensics** -> flag. looks like a catalogue or stock image
+- **retrieval** -> ok. query='Google Pixel Fold Pixel Fold ONYITEX GADGET Google Google Pixel Fold:
+- 7.6-inch OLED main' hits=['Google Pixel 7', 'Google Pixel 8', 'Google Pixel 9', 'Tecno Pova 5', 'Tecno Pova 6']
+- **identify** -> ok. chosen=Google Pixel Fold margin=None
+- **abstain** -> abstain. confidence 0.4: no label, plate or settings screen was legible; 2 lines seen by both readers; looks like a catalogue or stock image
 
 ## Identification
 Shortlist from the catalogue:
@@ -41,18 +47,17 @@ Shortlist from the catalogue:
 
 **Not identified: EVIDENCE_INCOMPLETE.** The evidence only supports this answer at 40 percent, which is a guess. One clear photo of the label would settle it.
 
-Evidence flags: the reader stated brand it could not point to in the photos; looks like a catalogue or stock image
+Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 24% on the best answer. It is probably a Google Pixel Fold or a Google Pixel 7, and the photos cannot separate them.**
+**Not sure enough to price: 24% on the best answer. It is probably a Google Pixel Fold, and the photos cannot separate them.**
 
 - Identification confidence: 24% (unknown)
 - Price confidence: 14%
-- It is weighing: Google Pixel Fold (0.95), Google Pixel 7 (0.05)
+- It is weighing: Google Pixel Fold (0.95)
 - The evidence only supports this answer at 40 percent, which is a guess. One clear photo of the label would settle it.
 - no label, plate or settings screen was legible
 - 2 lines seen by both readers
-- the reader stated brand it could not point to in the photos
 - looks like a catalogue or stock image
 - 10 claims are still unproven, 0 are supported
 
@@ -65,6 +70,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: two readings of these photos disagreed about what is written on the item_
 3. [PHOTO] Screenshot of Settings then About, showing the model name and storage.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Has the screen or battery ever been changed?
+- Is it signed out of iCloud or Google, so a new owner can set it up?
 
 ## Claims
 - [unverifiable_remote] Google Pixel Fold
@@ -94,7 +104,6 @@ Scrap floor: 34 NGN
 
 Conditions attached to this price:
 - Not identified: The evidence only supports this answer at 40 percent, which is a guess. One clear photo of the label would settle it.
-- Evidence flag: the reader stated brand it could not point to in the photos
 - Evidence flag: looks like a catalogue or stock image
 - Google Pixel Fold -> not proven remotely. Agent will confirm at pickup.
 - 7.6-inch OLED main display -> not proven remotely. Agent will confirm at pickup.

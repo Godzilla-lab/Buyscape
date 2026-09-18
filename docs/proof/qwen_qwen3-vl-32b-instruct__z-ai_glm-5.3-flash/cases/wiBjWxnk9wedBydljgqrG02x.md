@@ -1,28 +1,28 @@
 # Case wiBjWxnk9wedBydljgqrG02x
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  30313 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  31107 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: split air conditioner (confidence 0.95)
-- Made of: plastic 60%, steel 30%, copper 10%
-- Estimated weight: 35.0 kg (confidence 0.8)
+- Made of: steel 60%, plastic 30%, copper 10%
+- Estimated weight: 45.0 kg (confidence 0.8)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: minor dust and grime on surface, some scuff marks on casing
+- Damage noted: some surface dirt and minor scratches on casing, fan grille appears intact
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 
 ## Two readers
 - brand_text differed between the two readers, so it is treated as unread
-- model_text was seen by only one reader, so it is treated as unread
 - rating_text was seen by only one reader, so it is treated as unread
-- 7 transcribed lines was seen by only one reader, so it is treated as unread
+- 6 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## Chain
-- **corroborate** -> dispute. brand_text differed between the two readers, so it is treated as unread; model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; 7 transcribed lines was seen by only one reader, so it is treated as unread
+- **ocr** -> ok. 0 lines: 
+- **corroborate** -> dispute. brand_text differed between the two readers, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; 6 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=split air conditioner brand=None model=None label=True lines=0
 - **retrieval** -> ok. query='The Haier Thermocool Supercool Premium Split Air Conditioner is everything one could want ' hits=['Haier Thermocool HSU-12 1.5HP']
 - **identify** -> ok. chosen=Haier Thermocool HSU-12 margin=None
@@ -53,6 +53,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 2. [PHOTO] Close-up of the rating plate on the outdoor unit showing the model and HP.
    _why: nothing on the item says which model this is_
 
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it still blow cold air?
+- Do you have both the indoor unit and the outdoor unit?
+
 ## Claims
 - [unverified] Required evidence 'code_shot' was not supplied
     priced as: priced as if the worst case is true. Write the code {code} on paper and photograph it next to the unit.
@@ -66,11 +71,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Open the front grille of the indoor unit and photograph the filters and coil.
 
 ## Price
-**32,770 to 55,580 NGN** (priced as material, width 0.5163, method material_floor, 0 comparable prices)
+**46,311 to 77,130 NGN** (priced as material, width 0.4993, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 35 kg of plastic 60%, steel 30%, copper 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 45 kg of steel 60%, plastic 30%, copper 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 42,350 NGN
+Scrap floor: 59,850 NGN
 
 Conditions attached to this price:
 - Not identified: The best candidate scored only 0.55, which is not sure enough to price.

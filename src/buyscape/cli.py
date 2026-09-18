@@ -23,6 +23,7 @@ from .providers.base import VisionProvider
 from .providers.fake import FakeProvider
 from .providers.recording import RecordingProvider
 from .runner import Case, report_markdown, run_case
+from .identify.ocr import default_reader
 
 app = typer.Typer(add_completion=False, help="Remote valuation engine for second-hand goods.")
 console = Console()
@@ -335,6 +336,8 @@ def run(
     outage = {"streak": 0, "why": None}
     HALT_AFTER = 5
 
+    ocr = default_reader()
+
     def one(case: Case):
         with lock:
             if budget_usd and spend["usd"] >= budget_usd:
@@ -343,7 +346,7 @@ def run(
                 return case, None
         result = run_case(
             case, protocols, catalogue, comps, scrap, reader_p, reasoner_p, materials,
-            corroborator_p, tenant_config,
+            corroborator_p, tenant_config, ocr=ocr,
         )
         with lock:
             spend["usd"] += result.spent_usd
@@ -395,7 +398,7 @@ def run(
     table.add_column("metric")
     table.add_column("value", justify="right")
     for key, value in summary.items():
-        if key in ("failure_codes", "reader", "reasoner", "corroborator"):
+        if key in ("failure_codes", "reader", "reasoner", "corroborator", "silent_wrong_cases"):
             continue
         table.add_row(key, str(value))
     console.print(table)
@@ -493,7 +496,7 @@ def assess(
     with console.status(f"Reading {len(case.images)} photos"):
         result = run_case(
             case, protocols, catalogue, comps, scrap, reader_p, reasoner_p, materials,
-            corroborator_p, tenant_config,
+            corroborator_p, tenant_config, ocr=default_reader(),
         )
     report = folder / "report.md"
     report.write_text(report_markdown(case, result))

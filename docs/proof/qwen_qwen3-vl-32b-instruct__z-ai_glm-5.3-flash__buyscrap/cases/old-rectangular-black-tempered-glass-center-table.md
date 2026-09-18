@@ -16,6 +16,7 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Screenshot of a gallery: no
 
 ## Chain
+- **ocr** -> ok. 0 lines: 
 - **corroborate** -> agree. nothing identifying was read by either
 - **read_evidence** -> ok. category=decorative glass panel brand=None model=None label=False lines=0
 - **retrieval** -> ok. query='Old Rectangular black tempered glass center table available for sale. Legs for standing th' hits=['Tecno Spark 10']

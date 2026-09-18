@@ -1,32 +1,39 @@
 # Case xdMNB5jwsl5wXNJJQSpz3z8l
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0007  |  22849 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0007  |  16044 ms
 
 ## What the engine saw
 - Presentation: sealed_new
 - Category: split air conditioner (confidence 0.9)
-- Made of: plastic 60%, steel 30%, circuit_board 10%
-- Estimated weight: 15.0 kg (confidence 0.7)
-- Brand read off the item: nothing legible
+- Made of: plastic 60%, steel 30%, carton 10%
+- Estimated weight: 12.0 kg (confidence 0.7)
+- Brand read off the item: Bona
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: none
+- Damage noted: unit appears new, still in original packaging, box slightly damaged with creases and tape marks
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 - Text read: Bona | AIR CONDITIONER
 
 ## Two readers
-- brand_text was seen by only one reader, so it is treated as unread
+- brand_text was read by one reader and confirmed by OCR
 - model_text was seen by only one reader, so it is treated as unread
 - rating_text was seen by only one reader, so it is treated as unread
 - serial_text was seen by only one reader, so it is treated as unread
-- 8 transcribed lines was seen by only one reader, so it is treated as unread
+- 6 transcribed lines was seen by only one reader, so it is treated as unread
+
+## OCR read off the photos
+- KCKENRK
+- Bona
+- AIR CONDITIONER
+- INVERTER
 
 ## Chain
-- **corroborate** -> dispute. brand_text was seen by only one reader, so it is treated as unread; model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 8 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=split air conditioner brand=None model=None label=False lines=2
-- **retrieval** -> empty. query='Bona AIR CONDITIONER High quality solar air conditioner, 10 years warranty, very low energ' hits=[]
+- **ocr** -> ok. 4 lines: KCKENRK | Bona | AIR CONDITIONER | INVERTER
+- **corroborate** -> dispute. brand_text was read by one reader and confirmed by OCR; model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 6 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=split air conditioner brand=Bona model=None label=False lines=2
+- **retrieval** -> empty. query='Bona Bona AIR CONDITIONER High quality solar air conditioner, 10 years warranty, very low ' hits=[]
 - **gate** -> abstain. no candidates and no model text
 
 ## Identification
@@ -52,6 +59,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 2. [PHOTO] Close-up of the rating plate on the outdoor unit showing the model and HP.
    _why: nothing on the item says which model this is_
 
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it still blow cold air?
+- Do you have both the indoor unit and the outdoor unit?
+
 ## Claims
 - [unverified] High quality solar air conditioner
     priced as: the smallest rating this brand sells. Agent reads the outdoor rating plate
@@ -70,11 +82,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Open the front grille of the indoor unit and photograph the filters and coil.
 
 ## Price
-**2,867 to 10,320 NGN** (priced as material, width 1.1301, method material_floor, 0 comparable prices)
+**1,376 to 3,600 NGN** (priced as material, width 0.8935, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 15 kg of plastic 60%, steel 30%, circuit_board 10% (rates for circuit_board, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 12 kg of plastic 60%, steel 30%, carton 10% (rates for carton, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 5,400 NGN
+Scrap floor: 2,592 NGN
 
 Conditions attached to this price:
 - Not identified: No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.

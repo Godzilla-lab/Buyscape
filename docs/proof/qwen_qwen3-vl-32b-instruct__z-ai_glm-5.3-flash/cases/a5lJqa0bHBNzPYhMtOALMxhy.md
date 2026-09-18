@@ -1,37 +1,43 @@
 # Case a5lJqa0bHBNzPYhMtOALMxhy
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  32270 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  25428 ms
 
 ## What the engine saw
 - Presentation: sealed_new
 - Category: phone (confidence 0.95)
 - Made of: paper 80%, plastic 20%
 - Estimated weight: 0.5 kg (confidence 0.8)
-- Brand read off the item: nothing legible
-- Model read off the item: nothing legible
+- Brand read off the item: NOKIA
+- Model read off the item: Nokia 110
 - Rating read: none
 - Label, plate or settings screen legible: no
 - Damage noted: none
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
-- Text read: Nokia 110 | NOKIA
+- Text read: Nokia 110 | NOKIA | POSTED ON | AND MORE
 
 ## Two readers
 - brand_text agreed by both readers
 - model_text agreed by both readers
-- 6 transcribed lines was seen by only one reader, so it is treated as unread
+- 3 transcribed lines was seen by only one reader, so it is treated as unread
+
+## OCR read off the photos
+- Nokia 110
+- NOKIA
+- POSTIED
+- INA GADGEI
+- ANDMORE
 
 ## Chain
-- **corroborate** -> dispute. brand_text agreed by both readers; model_text agreed by both readers; 6 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=phone brand=NOKIA model=Nokia 110 label=False lines=2
-- **grounding** -> dropped. brand, model
-- **forensics** -> flag. the reader stated brand, model it could not point to in the photos; looks like a catalogue or stock image
-- **retrieval** -> ok. query='Nokia 110 NOKIA Wireless FM
+- **ocr** -> ok. 5 lines: Nokia 110 | NOKIA | POSTIED | INA GADGEI | ANDMORE
+- **corroborate** -> dispute. brand_text agreed by both readers; model_text agreed by both readers; 3 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=phone brand=NOKIA model=Nokia 110 label=False lines=4
+- **forensics** -> flag. looks like a catalogue or stock image
+- **retrieval** -> ok. query='NOKIA Nokia 110 Nokia 110 NOKIA POSTED ON AND MORE Wireless FM
 Mp3 music player 
-Camera/ video camera 
-Support up to 32gb SD ' hits=['Nokia C32']
-- **identify** -> ok. chosen=Nokia 110 margin=0.9
-- **abstain** -> abstain. confidence 0.4: no label, plate or settings screen was legible; 2 lines seen by both readers; the reader stated brand, model it could not point to in the photos; looks like a catalogue or stock image
+Camera/ v' hits=['Nokia C32']
+- **identify** -> ok. chosen=NOKIA 110 margin=None
+- **abstain** -> abstain. confidence 0.4: no label, plate or settings screen was legible; 4 lines seen by both readers; looks like a catalogue or stock image
 
 ## Identification
 Shortlist from the catalogue:
@@ -39,18 +45,17 @@ Shortlist from the catalogue:
 
 **Not identified: EVIDENCE_INCOMPLETE.** The evidence only supports this answer at 40 percent, which is a guess. One clear photo of the label would settle it.
 
-Evidence flags: the reader stated brand, model it could not point to in the photos; looks like a catalogue or stock image
+Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 24% on the best answer. It is probably a Nokia 110 or a Nokia C32, and the photos cannot separate them.**
+**Not sure enough to price: 24% on the best answer. It is probably a NOKIA 110, and the photos cannot separate them.**
 
 - Identification confidence: 24% (unknown)
 - Price confidence: 16%
-- It is weighing: Nokia 110 (0.95), Nokia C32 (0.05)
+- It is weighing: NOKIA 110 (0.95)
 - The evidence only supports this answer at 40 percent, which is a guess. One clear photo of the label would settle it.
 - no label, plate or settings screen was legible
-- 2 lines seen by both readers
-- the reader stated brand, model it could not point to in the photos
+- 4 lines seen by both readers
 - looks like a catalogue or stock image
 - 9 claims are still unproven, 0 are supported
 
@@ -63,6 +68,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: two readings of these photos disagreed about what is written on the item_
 3. [PHOTO] Screenshot of Settings then About, showing the model name and storage.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Has the screen or battery ever been changed?
+- Is it signed out of iCloud or Google, so a new owner can set it up?
 
 ## Claims
 - [unverifiable_remote] Wireless FM
@@ -90,7 +100,6 @@ Scrap floor: 34 NGN
 
 Conditions attached to this price:
 - Not identified: The evidence only supports this answer at 40 percent, which is a guess. One clear photo of the label would settle it.
-- Evidence flag: the reader stated brand, model it could not point to in the photos
 - Evidence flag: looks like a catalogue or stock image
 - Wireless FM -> not proven remotely. Agent will confirm at pickup.
 - Mp3 music player -> not proven remotely. Agent will confirm at pickup.

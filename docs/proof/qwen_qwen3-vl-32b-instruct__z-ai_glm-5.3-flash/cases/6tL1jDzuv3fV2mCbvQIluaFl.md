@@ -1,36 +1,44 @@
 # Case 6tL1jDzuv3fV2mCbvQIluaFl
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  81996 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0013  |  49078 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: washing machine (confidence 0.95)
-- Made of: steel 40%, plastic 50%, circuit_board 10%
+- Made of: steel 40%, plastic 30%, circuit_board 10%, rubber 10%, carton 10%
 - Estimated weight: 25.0 kg (confidence 0.8)
-- Brand read off the item: nothing legible
+- Brand read off the item: Hisense
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: Minor scuffs on the box, Plastic cover on top of machine is slightly torn
+- Damage noted: box is slightly worn and creased, machine appears clean, no visible damage
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: Hisense | Washing Machine | Hisense Corporation
+- Text read: Hisense | Washing Machine | Semi-Automatic Washing Machine | Laundry with the power of Bubble Clean | Hisense Corporation | Bubble Clean | WASHING MACHINE
 
 ## Two readers
 - brand_text agreed by both readers
 - rating_text differed between the two readers, so it is treated as unread
-- 8 transcribed lines was seen by only one reader, so it is treated as unread
+- 4 transcribed lines was seen by only one reader, so it is treated as unread
+
+## OCR read off the photos
+- Hisense
+- Max B00kgf
+- 2
+- Clean
+- Bubble
+- Washing Machine
+- OBAL HUBS
+- HMGMPOA
+- Hisense Curporstion
 
 ## Chain
-- **corroborate** -> dispute. brand_text agreed by both readers; rating_text differed between the two readers, so it is treated as unread; 8 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=washing machine brand=Hisense model=None label=True lines=3
-- **grounding** -> dropped. brand
-- **forensics** -> flag. the reader stated brand it could not point to in the photos
-- **retrieval** -> ok. query='Hisense Washing Machine Hisense Corporation Hisense 9kg Automatic Washing Machine
-
-Make la' hits=['Hisense WT3K9022U 9kg top loader', 'Hisense WTJA801 8kg top loader', 'Hisense WM5S1045 10kg front loader']
-- **identify** -> ok. chosen=Hisense WT3K9022U margin=0.45
-- **abstain** -> abstain. top score 0.55
+- **ocr** -> ok. 9 lines: Hisense | Max B00kgf | 2 | Clean | Bubble | Washing Machine | OBAL HUBS | HMGMPOA | Hisense Curporstion
+- **corroborate** -> dispute. brand_text agreed by both readers; rating_text differed between the two readers, so it is treated as unread; 4 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=washing machine brand=Hisense model=None label=True lines=7
+- **retrieval** -> ok. query='Hisense Hisense Washing Machine Semi-Automatic Washing Machine Laundry with the power of B' hits=['Hisense WT3K9022U 9kg top loader', 'Hisense WTJA801 8kg top loader', 'Hisense WM5S1045 10kg front loader']
+- **identify** -> refused. chosen=None None margin=0.3
+- **abstain** -> abstain. model refused
 
 ## Identification
 Shortlist from the catalogue:
@@ -38,20 +46,17 @@ Shortlist from the catalogue:
   - Hisense WTJA801 8kg top loader (0.4333)
   - Hisense WM5S1045 10kg front loader (0.4333)
 
-**Not identified: CANNOT_IDENTIFY.** The best candidate scored only 0.55, which is not sure enough to price.
-
-Evidence flags: the reader stated brand it could not point to in the photos
+**Not identified: CANNOT_IDENTIFY.** Box and unit show 'Semi-Automatic' Bubble Clean top loader; no model number legible, and the 9kg claim conflicts with the only 9kg candidate if it is fully automatic. Need legible model plate or rating label.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 17% on the best answer. It is probably a Hisense WT3K9022U or a Hisense WTJA801, and the photos cannot separate them.**
+**Not sure enough to price: 30% on the best answer. It is probably a Hisense WT3K9022U or a Hisense WTJA801, and the photos cannot separate them.**
 
-- Identification confidence: 17% (unknown)
+- Identification confidence: 30% (unknown)
 - Price confidence: 20%
-- It is weighing: Hisense WT3K9022U (0.55), Hisense WTJA801 (0.1)
-- The best candidate scored only 0.55, which is not sure enough to price.
+- It is weighing: Hisense WT3K9022U (0.5), Hisense WTJA801 (0.2)
+- Box and unit show 'Semi-Automatic' Bubble Clean top loader; no model number legible, and the 9kg claim conflicts with the only 9kg candidate if it is fully automatic. Need legible model plate or rating label.
 - read off the item's own label
-- 3 lines seen by both readers
-- the reader stated brand it could not point to in the photos
+- 7 lines seen by both readers
 - 7 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -61,6 +66,10 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: two readings of these photos disagreed about what is written on the item_
 2. [PHOTO] Close-up of the sticker with the model number, usually inside the door or on the back.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it finish a full wash and spin cycle?
 
 ## Claims
 - [unverified] Hisense 9kg Automatic Washing Machine
@@ -79,15 +88,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Open the door and photograph the inside of the drum.
 
 ## Price
-**5,002 to 18,250 NGN** (priced as material, width 1.1395, method material_floor, 0 comparable prices)
+**4,014 to 10,400 NGN** (priced as material, width 0.8861, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 25 kg of steel 40%, plastic 50%, circuit_board 10% (rates for circuit_board, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 25 kg of steel 40%, plastic 30%, circuit_board 10%, rubber 10%, carton 10% (rates for carton, plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 10,000 NGN
+Scrap floor: 8,025 NGN
 
 Conditions attached to this price:
-- Not identified: The best candidate scored only 0.55, which is not sure enough to price.
-- Evidence flag: the reader stated brand it could not point to in the photos
+- Not identified: Box and unit show 'Semi-Automatic' Bubble Clean top loader; no model number legible, and the 9kg claim conflicts with the only 9kg candidate if it is fully automatic. Need legible model plate or rating label.
 - Hisense 9kg Automatic Washing Machine -> not proven remotely. Agent reads the rating plate.
 - Hisense 9kg Automatic Washing Machine -> not proven remotely. Agent reads the rating plate.
 - Hisense 9kg Automatic Washing Machine -> not proven remotely. Agent reads the rating plate.

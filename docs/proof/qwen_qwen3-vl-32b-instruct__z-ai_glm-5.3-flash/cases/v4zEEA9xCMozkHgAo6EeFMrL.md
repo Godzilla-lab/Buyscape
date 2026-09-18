@@ -1,12 +1,12 @@
 # Case v4zEEA9xCMozkHgAo6EeFMrL
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  46991 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0013  |  26048 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: laptop (confidence 0.95)
-- Made of: plastic 60%, steel 20%, circuit_board 10%, rubber 10%
-- Estimated weight: 1.8 kg (confidence 0.8)
+- Made of: plastic 60%, steel 30%, circuit_board 5%, copper_insulated 5%
+- Estimated weight: 1.8 kg (confidence 0.7)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
@@ -16,11 +16,12 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Screenshot of a gallery: no
 - Text read: GETMORE.TECH
 
-## Two readers
-- 1 transcribed lines was seen by only one reader, so it is treated as unread
+## OCR read off the photos
+- IMORE TECH
 
 ## Chain
-- **corroborate** -> dispute. 1 transcribed lines was seen by only one reader, so it is treated as unread
+- **ocr** -> ok. 1 lines: IMORE TECH
+- **corroborate** -> agree. nothing identifying was read by either
 - **read_evidence** -> ok. category=laptop brand=None model=None label=False lines=1
 - **forensics** -> flag. looks like a catalogue or stock image
 - **retrieval** -> ok. query='GETMORE.TECH USA used Dell precision 5680//
@@ -60,10 +61,16 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 ## What the seller is asked for next (shown in the app)
 1. [PHOTO] Take your own photo of the actual item you are selling.
    _why: this looks like a catalogue picture, not the real unit_
-2. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: Photo of the sticker on the underside showing the model, serial or service tag. Then, still filming, do this on the item's own screen and hold it steady so the writing can be read: open system Information (Windows) or About This Mac, showing the model, processor, RAM and storage. Then, without stopping the video: If the bottom panel comes off with a screwdriver, remove it and photograph the inside: RAM slots, drive and battery. Finish with: A short clip typing a few keys, moving the trackpad, and plugging the charger in so the charge light shows. Keep filming the whole time. Do not cut between clips.
-   _why: two readings of these photos disagreed about what is written on the item_
-3. [PHOTO] Photo of the sticker on the underside showing the model, serial or service tag.
+2. [PHOTO] Photo of the sticker on the underside showing the model, serial or service tag.
    _why: nothing on the item says which model this is_
+3. [PHOTO] Screenshot of System Information (Windows) or About This Mac, showing the model, processor, RAM and storage.
+   _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it stay on for more than ten minutes with the charger unplugged?
+- Has it ever been dropped, or had liquid spilled on it?
+- What does not work on it? Say none if everything works.
 
 ## Claims
 - [unverifiable_remote] USA used Dell precision 5680
@@ -85,15 +92,16 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Screenshot of System Information (Windows) or About This Mac, showing the model, processor, RAM and storage.
 
 ## Price
-**200 to 1,148 NGN** (priced as material, width 1.406, method material_floor, 0 comparable prices)
+**5,000 to 5,000 NGN** (priced as material, width 0.0, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 1.8 kg of plastic 60%, steel 20%, circuit_board 10%, rubber 10% (rates for circuit_board, plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 1.8 kg of plastic 60%, steel 30%, circuit_board 5%, copper_insulated 5% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 567 NGN
+Scrap floor: 675 NGN
 
 Conditions attached to this price:
 - Not identified: Seller claims Precision 5680 but no label text confirms any model; shortlist contains no Precision or matching large XPS-class entry, and the photo alone cannot distinguish XPS 15/16 from Precision 5000-series.
 - Evidence flag: looks like a catalogue or stock image
+- Raised to the 5,000 NGN minimum this business publishes for this kind of item.
 - USA used Dell precision 5680 -> not proven remotely. Agent matches the serial on the sticker to the serial in System Information or the BIOS.
 - 13th generation -> not proven remotely. Agent will confirm at pickup.
 - Gaming laptop -> not proven remotely. Agent will confirm at pickup.

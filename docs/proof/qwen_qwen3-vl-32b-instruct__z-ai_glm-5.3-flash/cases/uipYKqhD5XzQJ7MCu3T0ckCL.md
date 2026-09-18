@@ -1,27 +1,32 @@
 # Case uipYKqhD5XzQJ7MCu3T0ckCL
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  47893 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0010  |  40178 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: generator (confidence 0.95)
-- Made of: steel 60%, plastic 30%, circuit_board 5%, rubber 5%
-- Estimated weight: 35.0 kg (confidence 0.8)
+- Made of: steel 60%, plastic 30%, copper 10%
+- Estimated weight: 45.0 kg (confidence 0.8)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: some dust and minor wear on frame, red frame shows slight scuffing, unit appears reconditioned as labeled
+- Damage noted: No visible damage or wear.
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 
 ## Two readers
 - brand_text differed between the two readers, so it is treated as unread
 - model_text differed between the two readers, so it is treated as unread
-- 5 transcribed lines was seen by only one reader, so it is treated as unread
+- 3 transcribed lines was seen by only one reader, so it is treated as unread
+
+## OCR read off the photos
+- GIRMAN
+- LUITIAN
 
 ## Chain
-- **corroborate** -> dispute. brand_text differed between the two readers, so it is treated as unread; model_text differed between the two readers, so it is treated as unread; 5 transcribed lines was seen by only one reader, so it is treated as unread
+- **ocr** -> ok. 2 lines: GIRMAN | LUITIAN
+- **corroborate** -> dispute. brand_text differed between the two readers, so it is treated as unread; model_text differed between the two readers, so it is treated as unread; 3 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=generator brand=None model=None label=True lines=0
 - **retrieval** -> ok. query='4.5kva LUTIAN generator
 100%copper coil
@@ -61,6 +66,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 3. [PHOTO] Close-up of the plate on the engine block showing the engine model and serial.
    _why: nothing on the item says which model this is_
 
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it start and run right now?
+- When was it last serviced, and what was done?
+
 ## Claims
 - [unverified] 4.5kva LUTIAN generator
     priced as: the smallest rating in this brand's range. Agent reads the rating plate
@@ -80,11 +90,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Photo of the engine, showing the recoil starter and carburettor.
 
 ## Price
-**6,349 to 21,665 NGN** (priced as material, width 1.0934, method material_floor, 0 comparable prices)
+**26,645 to 77,130 NGN** (priced as material, width 0.973, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 35 kg of steel 60%, plastic 30%, circuit_board 5%, rubber 5% (rates for circuit_board, plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 45 kg of steel 60%, plastic 30%, copper 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 14,262 NGN
+Scrap floor: 59,850 NGN
 
 Conditions attached to this price:
 - Not identified: The answer names lt3990e, which appears nowhere on the item or in the seller's words. A photo of the plate would confirm or correct it.

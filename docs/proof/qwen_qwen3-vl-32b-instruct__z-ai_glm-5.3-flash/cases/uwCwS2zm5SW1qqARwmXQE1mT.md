@@ -1,13 +1,13 @@
 # Case uwCwS2zm5SW1qqARwmXQE1mT
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  30283 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  37910 ms
 
 ## What the engine saw
 - Presentation: sealed_new
-- Category: smartphone (confidence 0.9)
+- Category: phone (confidence 0.95)
 - Made of: paper 80%, plastic 20%
 - Estimated weight: 0.5 kg (confidence 0.8)
-- Brand read off the item: nothing legible
+- Brand read off the item: Google
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
@@ -19,13 +19,17 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 ## Two readers
 - brand_text agreed by both readers
 
+## OCR read off the photos
+- Google.
+- D
+
 ## Chain
+- **ocr** -> ok. 2 lines: Google. | D
 - **corroborate** -> agree. brand_text agreed by both readers
-- **read_evidence** -> ok. category=smartphone brand=Google model=None label=False lines=1
-- **grounding** -> dropped. brand
-- **forensics** -> flag. the reader stated brand it could not point to in the photos; looks like a catalogue or stock image
-- **retrieval** -> ok. query='Google Google pixel 10pro 256gb available' hits=['Google Pixel 7', 'Google Pixel 8', 'Google Pixel 9']
-- **identify** -> refused. chosen=Google None margin=0.1
+- **read_evidence** -> ok. category=phone brand=Google model=None label=False lines=1
+- **forensics** -> flag. looks like a catalogue or stock image
+- **retrieval** -> ok. query='Google Google Google pixel 10pro 256gb available' hits=['Google Pixel 7', 'Google Pixel 8', 'Google Pixel 9']
+- **identify** -> refused. chosen=None None margin=0.2
 - **abstain** -> abstain. model refused
 
 ## Identification
@@ -34,21 +38,20 @@ Shortlist from the catalogue:
   - Google Pixel 8 (0.5)
   - Google Pixel 9 (0.5)
 
-**Not identified: CANNOT_IDENTIFY.** Box shows only 'Google'; model name is not printed legibly anywhere. Seller's claim of 'Pixel 10 Pro 256GB' is unverifiable and Pixel 10 Pro is not in the shortlist. The three-lens camera bar suggests a Pro-tier Pixel, but no label confirms the exact model.
+**Not identified: CANNOT_IDENTIFY.** Box art shows a pill-shaped bar with three rear lenses, indicating a Pro model (e.g. Pixel 9 Pro or the seller-claimed 10 Pro), none of which is on the shortlist; no model text is legible on the sealed box, so the exact model cannot be confirmed.
 
-Evidence flags: the reader stated brand it could not point to in the photos; looks like a catalogue or stock image
+Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 5% on the best answer. It is probably a Google Pixel 9 or a Google Pixel 8, and the photos cannot separate them.**
+**Not sure enough to price: 7% on the best answer. It is probably a Google Pixel 9 or a Google Pixel 8, and the photos cannot separate them.**
 
-- Identification confidence: 5% (unknown)
+- Identification confidence: 7% (unknown)
 - Price confidence: 20%
-- It is weighing: Google Pixel 9 (0.2), Google Pixel 8 (0.1)
-- Box shows only 'Google'; model name is not printed legibly anywhere. Seller's claim of 'Pixel 10 Pro 256GB' is unverifiable and Pixel 10 Pro is not in the shortlist. The three-lens camera bar suggests a Pro-tier Pixel, but no label confirms the exact model.
+- It is weighing: Google Pixel 9 (0.3), Google Pixel 8 (0.1)
+- Box art shows a pill-shaped bar with three rear lenses, indicating a Pro model (e.g. Pixel 9 Pro or the seller-claimed 10 Pro), none of which is on the shortlist; no model text is legible on the sealed box, so the exact model cannot be confirmed.
 - no label, plate or settings screen was legible
 - 1 lines seen by both readers
-- the next candidate was only 0.1 behind
-- the reader stated brand it could not point to in the photos
+- the next candidate was only 0.2 behind
 - looks like a catalogue or stock image
 - 7 claims are still unproven, 0 are supported
 
@@ -61,6 +64,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: nothing on the item says which model this is_
 3. [PHOTO] Dial *#06# and screenshot the IMEI that appears.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Has the screen or battery ever been changed?
+- Is it signed out of iCloud or Google, so a new owner can set it up?
 
 ## Claims
 - [unverifiable_remote] Google pixel 10pro
@@ -85,8 +93,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 34 NGN
 
 Conditions attached to this price:
-- Not identified: Box shows only 'Google'; model name is not printed legibly anywhere. Seller's claim of 'Pixel 10 Pro 256GB' is unverifiable and Pixel 10 Pro is not in the shortlist. The three-lens camera bar suggests a Pro-tier Pixel, but no label confirms the exact model.
-- Evidence flag: the reader stated brand it could not point to in the photos
+- Not identified: Box art shows a pill-shaped bar with three rear lenses, indicating a Pro model (e.g. Pixel 9 Pro or the seller-claimed 10 Pro), none of which is on the shortlist; no model text is legible on the sealed box, so the exact model cannot be confirmed.
 - Evidence flag: looks like a catalogue or stock image
 - Google pixel 10pro -> not proven remotely. Agent will confirm at pickup.
 - 256gb -> not proven remotely. Agent reads storage from Settings.

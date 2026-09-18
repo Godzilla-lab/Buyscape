@@ -1,17 +1,17 @@
 # Case 2wJtSRbSsufezYBcmO5dlKEU
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  26290 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  27943 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: laptop (confidence 0.95)
-- Made of: plastic 40%, steel 30%, circuit_board 20%, glass 10%
-- Estimated weight: 1.8 kg (confidence 0.8)
-- Brand read off the item: nothing legible
+- Made of: plastic 60%, steel 20%, circuit_board 10%, aluminium 10%
+- Estimated weight: 1.5 kg (confidence 0.8)
+- Brand read off the item: HP
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: screen has faint smudges, keyboard shows minor wear, laptop is open and appears functional
+- Damage noted: screen has faint smudges, keyboard appears clean, no visible dents or cracks on casing
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 - Text read: HP
@@ -19,17 +19,16 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 ## Two readers
 - brand_text agreed by both readers
 - model_text was seen by only one reader, so it is treated as unread
-- 4 transcribed lines was seen by only one reader, so it is treated as unread
+- 3 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## Chain
-- **corroborate** -> dispute. brand_text agreed by both readers; model_text was seen by only one reader, so it is treated as unread; 4 transcribed lines was seen by only one reader, so it is treated as unread
+- **ocr** -> ok. 0 lines: 
+- **corroborate** -> dispute. brand_text agreed by both readers; model_text was seen by only one reader, so it is treated as unread; 3 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=laptop brand=HP model=None label=True lines=1
-- **grounding** -> dropped. brand
-- **forensics** -> flag. the reader stated brand it could not point to in the photos
-- **retrieval** -> ok. query='HP Dell precision 3571
+- **retrieval** -> ok. query='HP HP Dell precision 3571
 intel core i7-12700h @ 2.3ghz
 12th gen
-16gb ram ddr5 (upgradable to' hits=['HP 2000', 'HP 250 G7', 'HP Pavilion 15', 'HP EliteBook 840 G5', 'HP EliteBook 840 G6']
+16gb ram ddr5 (upgradable' hits=['HP 2000', 'HP 250 G7', 'HP Pavilion 15', 'HP EliteBook 840 G5', 'HP EliteBook 840 G6']
 - **identify** -> refused. chosen=None None margin=None
 - **abstain** -> abstain. model refused
 
@@ -41,19 +40,16 @@ Shortlist from the catalogue:
   - HP EliteBook 840 G5 (0.3)
   - HP EliteBook 840 G6 (0.3)
 
-**Not identified: CANNOT_IDENTIFY.** Seller claims Dell Precision 3571 but item text reads HP; shortlist is all HP models and no legible HP model label is visible to pick one.
-
-Evidence flags: the reader stated brand it could not point to in the photos
+**Not identified: CANNOT_IDENTIFY.** Conflicting evidence: seller claims a Dell Precision 3571, but the only legible text reads 'HP' and no model name is visible. No HP shortlist entry is supported by any printed model text, and the Dell claim is not stated on the item itself.
 
 ## How sure the engine is (back office)
 **0%: the photos do not say what this is.**
 
 - Identification confidence: 0% (unknown)
 - Price confidence: 14%
-- Seller claims Dell Precision 3571 but item text reads HP; shortlist is all HP models and no legible HP model label is visible to pick one.
+- Conflicting evidence: seller claims a Dell Precision 3571, but the only legible text reads 'HP' and no model name is visible. No HP shortlist entry is supported by any printed model text, and the Dell claim is not stated on the item itself.
 - read off the item's own label
 - 1 lines seen by both readers
-- the reader stated brand it could not point to in the photos
 - 10 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -65,6 +61,12 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: nothing on the item says which model this is_
 3. [PHOTO] Screenshot of System Information (Windows) or About This Mac, showing the model, processor, RAM and storage.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it stay on for more than ten minutes with the charger unplugged?
+- Has it ever been dropped, or had liquid spilled on it?
+- What does not work on it? Say none if everything works.
 
 ## Claims
 - [unverifiable_remote] Dell precision 3571
@@ -86,15 +88,15 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Screenshot of System Information (Windows) or About This Mac, showing the model, processor, RAM and storage.
 
 ## Price
-**379 to 1,902 NGN** (priced as material, width 1.3343, method material_floor, 0 comparable prices)
+**5,000 to 5,000 NGN** (priced as material, width 0.0, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 1.8 kg of plastic 40%, steel 30%, circuit_board 20%, glass 10% (rates for circuit_board, glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 1.5 kg of plastic 60%, steel 20%, circuit_board 10%, aluminium 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 885 NGN
+Scrap floor: 660 NGN
 
 Conditions attached to this price:
-- Not identified: Seller claims Dell Precision 3571 but item text reads HP; shortlist is all HP models and no legible HP model label is visible to pick one.
-- Evidence flag: the reader stated brand it could not point to in the photos
+- Not identified: Conflicting evidence: seller claims a Dell Precision 3571, but the only legible text reads 'HP' and no model name is visible. No HP shortlist entry is supported by any printed model text, and the Dell claim is not stated on the item itself.
+- Raised to the 5,000 NGN minimum this business publishes for this kind of item.
 - Dell precision 3571 -> not proven remotely. Agent will confirm at pickup.
 - intel core i7-12700h @ 2.3ghz -> not proven remotely. Agent will confirm at pickup.
 - 12th gen -> not proven remotely. Agent will confirm at pickup.

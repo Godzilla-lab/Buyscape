@@ -1,59 +1,68 @@
 # Case 7CBkGlhe7sHlzGTd4iCYyW74
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  42535 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  49280 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: phone (confidence 0.95)
-- Made of: aluminium 40%, plastic 40%, glass 10%, circuit_board 10%
+- Made of: aluminium 40%, plastic 40%, circuit_board 10%, glass 10%
 - Estimated weight: 0.2 kg (confidence 0.9)
-- Brand read off the item: nothing legible
+- Brand read off the item: Apple
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: no
-- Damage noted: Red back cover with minor smudges and fingerprints, Camera module appears intact, no visible cracks
+- Damage noted: Scratch on back glass near camera module, Minor wear on edges
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
-- Text read: BN: 3753
+- Text read: BN: 3753 | Apple
 
 ## Two readers
-- brand_text was seen by only one reader, so it is treated as unread
 - model_text was seen by only one reader, so it is treated as unread
-- 2 transcribed lines was seen by only one reader, so it is treated as unread
+- serial_text was seen by only one reader, so it is treated as unread
+- 6 transcribed lines was seen by only one reader, so it is treated as unread
+- brand_text was read by only one reader, so it is kept but not confirmed
+
+## OCR read off the photos
+- CEEJA
+- BN:3753
+- GADGE
+- CEEJAY GADGETS NG
 
 ## Chain
-- **corroborate** -> dispute. brand_text was seen by only one reader, so it is treated as unread; model_text was seen by only one reader, so it is treated as unread; 2 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=phone brand=None model=None label=False lines=1
+- **ocr** -> ok. 4 lines: CEEJA | BN:3753 | GADGE | CEEJAY GADGETS NG
+- **corroborate** -> dispute. model_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 6 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed
+- **read_evidence** -> ok. category=phone brand=Apple model=None label=False lines=2
 - **forensics** -> flag. looks like a catalogue or stock image
-- **retrieval** -> ok. query='BN: 3753 Foreign Used
+- **retrieval** -> ok. query='Apple BN: 3753 Apple Foreign Used
 iPhone 11 128gb 
 Color: Red & More 
 Neatness: 10/10
-BH 90%+' hits=['Apple iPhone 11', 'Apple iPhone 11 Pro', 'Apple iPhone 11 Pro Max', 'Apple iPhone XR', 'Apple iPhone XS']
-- **identify** -> ok. chosen=Apple iPhone 11 margin=0.65
-- **abstain** -> abstain. confidence 0.36: no label, plate or settings screen was legible; 1 lines seen by both readers; looks like a catalogue or stock image
+BH 9' hits=['Apple iPhone 11', 'Apple iPhone 11 Pro', 'Apple iPhone 11 Pro Max', 'Apple iPhone XR', 'Apple iPhone XS']
+- **identify** -> ok. chosen=Apple iPhone 11 margin=0.3
+- **abstain** -> abstain. top score 0.6
 
 ## Identification
 Shortlist from the catalogue:
-  - Apple iPhone 11 (0.4667)
-  - Apple iPhone 11 Pro (0.2667)
-  - Apple iPhone 11 Pro Max (0.2)
-  - Apple iPhone XR (0.2)
-  - Apple iPhone XS (0.2)
+  - Apple iPhone 11 (0.7667)
+  - Apple iPhone 11 Pro (0.5667)
+  - Apple iPhone 11 Pro Max (0.5)
+  - Apple iPhone XR (0.5)
+  - Apple iPhone XS (0.5)
 
-**Not identified: EVIDENCE_INCOMPLETE.** The evidence only supports this answer at 36 percent, which is a guess. One clear photo of the label would settle it.
+**Not identified: CANNOT_IDENTIFY.** The best candidate scored only 0.6, which is not sure enough to price.
 
 Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 22% on the best answer. It is probably a Apple iPhone 11 or a Apple iPhone XR, and the photos cannot separate them.**
+**Not sure enough to price: 12% on the best answer. It is probably a Apple iPhone 11 or a Apple iPhone XR, and the photos cannot separate them.**
 
-- Identification confidence: 22% (unknown)
+- Identification confidence: 12% (unknown)
 - Price confidence: 14%
-- It is weighing: Apple iPhone 11 (0.85), Apple iPhone XR (0.2)
-- The evidence only supports this answer at 36 percent, which is a guess. One clear photo of the label would settle it.
+- It is weighing: Apple iPhone 11 (0.6), Apple iPhone XR (0.3)
+- The best candidate scored only 0.6, which is not sure enough to price.
 - no label, plate or settings screen was legible
 - 1 lines seen by both readers
+- the brand was read by only one reader and is not confirmed
 - looks like a catalogue or stock image
 - 11 claims are still unproven, 0 are supported
 
@@ -66,6 +75,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: two readings of these photos disagreed about what is written on the item_
 3. [PHOTO] Screenshot of Settings then About, showing the model name and storage.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Has the screen or battery ever been changed?
+- Is it signed out of iCloud or Google, so a new owner can set it up?
 
 ## Claims
 - [unverifiable_remote] Foreign Used
@@ -89,14 +103,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
-**85 to 335 NGN** (priced as material, width 1.1868, method material_floor, 0 comparable prices)
+**79 to 275 NGN** (priced as material, width 1.1035, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 0.2 kg of aluminium 40%, plastic 40%, glass 10%, circuit_board 10% (rates for circuit_board, glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 0.2 kg of aluminium 40%, plastic 40%, circuit_board 10%, glass 10% (rates for glass, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 198 NGN
+Scrap floor: 184 NGN
 
 Conditions attached to this price:
-- Not identified: The evidence only supports this answer at 36 percent, which is a guess. One clear photo of the label would settle it.
+- Not identified: The best candidate scored only 0.6, which is not sure enough to price.
 - Evidence flag: looks like a catalogue or stock image
 - Foreign Used -> not proven remotely. Agent will confirm at pickup.
 - iPhone 11 128gb -> not proven remotely. Agent reads storage from Settings.

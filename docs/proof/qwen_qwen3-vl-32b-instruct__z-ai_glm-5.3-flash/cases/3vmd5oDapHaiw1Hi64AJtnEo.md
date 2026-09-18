@@ -1,35 +1,40 @@
 # Case 3vmd5oDapHaiw1Hi64AJtnEo
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  42228 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0012  |  19341 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: generator (confidence 0.95)
-- Made of: steel 60%, plastic 30%, circuit_board 5%, rubber 5%
+- Made of: steel 60%, plastic 30%, copper 10%
 - Estimated weight: 25.0 kg (confidence 0.8)
-- Brand read off the item: nothing legible
-- Model read off the item: nothing legible
+- Brand read off the item: SUMEC FIRMAN
+- Model read off the item: SPG2500
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: minor scuff marks on yellow casing, dust on surface, no visible damage to frame or engine cover
+- Damage noted: No visible damage or wear.
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
-- Text read: SUMEC FIRMAN SHQ2800
+- Text read: SUMEC FIRMAN SHQ2800 | SPG2500
 
 ## Two readers
 - brand_text agreed by both readers
-- model_text differed between the two readers, so it is treated as unread
+- model_text was read by one reader and confirmed by OCR
 - rating_text differed between the two readers, so it is treated as unread
-- 14 transcribed lines was seen by only one reader, so it is treated as unread
+- 12 transcribed lines was seen by only one reader, so it is treated as unread
+
+## OCR read off the photos
+- SPG2500
+- FIRMAN
+- SUMEC
 
 ## Chain
-- **corroborate** -> dispute. brand_text agreed by both readers; model_text differed between the two readers, so it is treated as unread; rating_text differed between the two readers, so it is treated as unread; 14 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=generator brand=SUMEC FIRMAN model=None label=True lines=1
-- **grounding** -> dropped. brand
-- **forensics** -> flag. the reader stated brand it could not point to in the photos; looks like a catalogue or stock image
-- **retrieval** -> ok. query='SUMEC FIRMAN SHQ2800 Very clean like brand new and working  with up to 6months warranty.' hits=['Sumec Firman SPG2900 2.8kVA', 'Sumec Firman SPG3000 3.1kVA', 'Sumec Firman ECO8990ES 6.5kVA', 'Sumec Firman SPG8800 8.1kVA']
-- **identify** -> ok. chosen=Sumec Firman SPG2500 margin=0.3
-- **abstain** -> abstain. top score 0.6
+- **ocr** -> ok. 3 lines: SPG2500 | FIRMAN | SUMEC
+- **corroborate** -> dispute. brand_text agreed by both readers; model_text was read by one reader and confirmed by OCR; rating_text differed between the two readers, so it is treated as unread; 12 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=generator brand=SUMEC FIRMAN model=SPG2500 label=True lines=2
+- **forensics** -> flag. looks like a catalogue or stock image
+- **retrieval** -> ok. query='SUMEC FIRMAN SPG2500 SUMEC FIRMAN SHQ2800 SPG2500 Very clean like brand new and working  w' hits=['Sumec Firman SPG2900 2.8kVA', 'Sumec Firman SPG3000 3.1kVA', 'Sumec Firman ECO8990ES 6.5kVA', 'Sumec Firman SPG8800 8.1kVA']
+- **identify** -> label. named from the label: SUMEC FIRMAN SPG2500, not in the catalogue
+- **abstain** -> pass. confidence=0.45 from the label
 
 ## Identification
 Shortlist from the catalogue:
@@ -38,20 +43,18 @@ Shortlist from the catalogue:
   - Sumec Firman ECO8990ES 6.5kVA (0.3)
   - Sumec Firman SPG8800 8.1kVA (0.3)
 
-**Not identified: CANNOT_IDENTIFY.** The best candidate scored only 0.6, which is not sure enough to price.
+**Answer: SUMEC FIRMAN SPG2500** (named from the item's own label; not in the catalogue)
 
-Evidence flags: the reader stated brand it could not point to in the photos; looks like a catalogue or stock image
+Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 18% on the best answer. It is probably a Sumec Firman SPG2500 or a Sumec Firman SPG2900, and the photos cannot separate them.**
+**45%: the photos do not say what this is.**
 
-- Identification confidence: 18% (unknown)
-- Price confidence: 18%
-- It is weighing: Sumec Firman SPG2500 (0.6), Sumec Firman SPG2900 (0.3)
-- The best candidate scored only 0.6, which is not sure enough to price.
+- Identification confidence: 45% (unsure)
+- Price confidence: 0%
+- named from the item's own label, which the catalogue does not list
 - read off the item's own label
 - 1 lines seen by both readers
-- the reader stated brand it could not point to in the photos
 - looks like a catalogue or stock image
 - 8 claims are still unproven, 0 are supported
 
@@ -64,6 +67,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: two readings of these photos disagreed about what is written on the item_
 3. [PHOTO] Close-up of the rating plate showing the kVA and model number.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it start and run right now?
+- When was it last serviced, and what was done?
 
 ## Claims
 - [unverifiable_remote] Very clean like brand new
@@ -82,15 +90,13 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Photo of the engine, showing the recoil starter and carburettor.
 
 ## Price
-**3,557 to 15,475 NGN** (priced as material, width 1.2523, method material_floor, 0 comparable prices)
+**11,610 to 42,850 NGN** (priced as material, width 1.1472, method scrap_band_only, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 25 kg of steel 60%, plastic 30%, circuit_board 5%, rubber 5% (rates for circuit_board, plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+No usable comparable sales (0 found, 2 needed), so the range comes from the published Lagos buy band for this category, reduced by 0.3492 for unproven claims.
 
-Scrap floor: 10,187 NGN
+Scrap floor: 33,250 NGN
 
 Conditions attached to this price:
-- Not identified: The best candidate scored only 0.6, which is not sure enough to price.
-- Evidence flag: the reader stated brand it could not point to in the photos
 - Evidence flag: looks like a catalogue or stock image
 - Very clean like brand new -> not proven remotely. Agent will confirm at pickup.
 - working -> not proven remotely. Agent starts the generator and runs it under load.

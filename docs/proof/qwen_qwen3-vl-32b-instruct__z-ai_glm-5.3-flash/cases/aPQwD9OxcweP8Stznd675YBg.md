@@ -1,11 +1,11 @@
 # Case aPQwD9OxcweP8Stznd675YBg
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0015  |  37056 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0015  |  43237 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: laptop (confidence 0.95)
-- Made of: plastic 60%, steel 20%, circuit_board 10%, rubber 10%
+- Made of: plastic 60%, steel 20%, circuit_board 10%, aluminium 10%
 - Estimated weight: 1.5 kg (confidence 0.8)
 - Brand read off the item: nothing legible
 - Model read off the item: nothing legible
@@ -13,16 +13,19 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Label, plate or settings screen legible: no
 - Damage noted: none
 - Looks like a catalogue image: no
-- Screenshot of a gallery: no
+- Screenshot of a gallery: yes
+- Text read: Start | Microsoft Edge | Settings | File Explorer | Store
 
 ## Two readers
-- 2 transcribed lines was seen by only one reader, so it is treated as unread
+- 20 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## Chain
-- **corroborate** -> dispute. 2 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=laptop brand=None model=None label=False lines=0
-- **retrieval** -> ok. query='Dell 3440 13th Gen Touchscreen 13.3" keyboard light lightweight system.' hits=['Dell XPS 13 9370', 'Dell Latitude 7490', 'Dell Latitude 5490', 'Dell Latitude E7470', 'Dell Inspiron 15 3000']
-- **identify** -> refused. chosen=None None margin=0.1
+- **ocr** -> ok. 0 lines: 
+- **corroborate** -> dispute. 20 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=laptop brand=None model=None label=False lines=5
+- **forensics** -> flag. screenshot of a gallery rather than a photo of the item
+- **retrieval** -> ok. query='Start Microsoft Edge Settings File Explorer Store Dell 3440 13th Gen Touchscreen 13.3" key' hits=['Dell XPS 13 9370', 'Dell Latitude 7490', 'Dell Latitude 5490', 'Dell Latitude E7470', 'Dell Inspiron 15 3000']
+- **identify** -> refused. chosen=None None margin=0.05
 - **abstain** -> abstain. model refused
 
 ## Identification
@@ -33,29 +36,38 @@ Shortlist from the catalogue:
   - Dell Latitude E7470 (0.3)
   - Dell Inspiron 15 3000 (0.3)
 
-**Not identified: CANNOT_IDENTIFY.** Seller names a Latitude 3440, which is not on the shortlist, and no label is legible to confirm it; the pictured modern dark-grey 13.3in chassis with Intel Core sticker matches a newer Latitude 3440 better than any shortlisted model, but I cannot verify from the item itself.
+**Not identified: CANNOT_IDENTIFY.** Seller claims a Dell Latitude 3440, but no label or model marking is legible in the photos, and that model is not on the shortlist. The visible Intel Core i5 badge and 13-14-inch dark-grey chassis do not match any shortlist entry confidently, so no single identification is supported.
+
+Evidence flags: screenshot of a gallery rather than a photo of the item
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 9% on the best answer. It is probably a Dell Latitude 7490 or a Dell XPS 13 9370, and the photos cannot separate them.**
+**Not sure enough to price: 5% on the best answer. It is probably a Dell XPS 13 9370 or a Dell Latitude 7490, and the photos cannot separate them.**
 
-- Identification confidence: 9% (unknown)
+- Identification confidence: 5% (unknown)
 - Price confidence: 14%
-- It is weighing: Dell Latitude 7490 (0.25), Dell XPS 13 9370 (0.15)
-- Seller names a Latitude 3440, which is not on the shortlist, and no label is legible to confirm it; the pictured modern dark-grey 13.3in chassis with Intel Core sticker matches a newer Latitude 3440 better than any shortlisted model, but I cannot verify from the item itself.
+- It is weighing: Dell XPS 13 9370 (0.2), Dell Latitude 7490 (0.15)
+- Seller claims a Dell Latitude 3440, but no label or model marking is legible in the photos, and that model is not on the shortlist. The visible Intel Core i5 badge and 13-14-inch dark-grey chassis do not match any shortlist entry confidently, so no single identification is supported.
 - no label, plate or settings screen was legible
-- the two readers agreed on nothing legible
-- the next candidate was only 0.1 behind
+- 5 lines seen by both readers
+- the next candidate was only 0.05 behind
+- screenshot of a gallery rather than a photo of the item
 - 11 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
 
 ## What the seller is asked for next (shown in the app)
-1. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: Photo of the sticker on the underside showing the model, serial or service tag. Then, still filming, do this on the item's own screen and hold it steady so the writing can be read: open system Information (Windows) or About This Mac, showing the model, processor, RAM and storage. Then, without stopping the video: If the bottom panel comes off with a screwdriver, remove it and photograph the inside: RAM slots, drive and battery. Finish with: A short clip typing a few keys, moving the trackpad, and plugging the charger in so the charge light shows. Keep filming the whole time. Do not cut between clips.
+1. [PHOTO] Take a new photo of the item itself, not a picture of another screen.
+   _why: this is a screenshot rather than a photo of the item_
+2. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: Photo of the sticker on the underside showing the model, serial or service tag. Then, still filming, do this on the item's own screen and hold it steady so the writing can be read: open system Information (Windows) or About This Mac, showing the model, processor, RAM and storage. Then, without stopping the video: If the bottom panel comes off with a screwdriver, remove it and photograph the inside: RAM slots, drive and battery. Finish with: A short clip typing a few keys, moving the trackpad, and plugging the charger in so the charge light shows. Keep filming the whole time. Do not cut between clips.
    _why: two readings of these photos disagreed about what is written on the item_
-2. [PHOTO] Photo of the sticker on the underside showing the model, serial or service tag.
+3. [PHOTO] Photo of the sticker on the underside showing the model, serial or service tag.
    _why: nothing on the item says which model this is_
-3. [PHOTO] Screenshot of System Information (Windows) or About This Mac, showing the model, processor, RAM and storage.
-   _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it stay on for more than ten minutes with the charger unplugged?
+- Has it ever been dropped, or had liquid spilled on it?
+- What does not work on it? Say none if everything works.
 
 ## Claims
 - [unverified] Dell 3440 13th Gen Touchscreen 13.3" keyboard light lightweight system.
@@ -82,14 +94,16 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Screenshot of System Information (Windows) or About This Mac, showing the model, processor, RAM and storage.
 
 ## Price
-**141 to 957 NGN** (priced as material, width 1.484, method material_floor, 0 comparable prices)
+**5,000 to 5,000 NGN** (priced as material, width 0.0, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 1.5 kg of plastic 60%, steel 20%, circuit_board 10%, rubber 10% (rates for circuit_board, plastic, rubber are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 1.5 kg of plastic 60%, steel 20%, circuit_board 10%, aluminium 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 472 NGN
+Scrap floor: 660 NGN
 
 Conditions attached to this price:
-- Not identified: Seller names a Latitude 3440, which is not on the shortlist, and no label is legible to confirm it; the pictured modern dark-grey 13.3in chassis with Intel Core sticker matches a newer Latitude 3440 better than any shortlisted model, but I cannot verify from the item itself.
+- Not identified: Seller claims a Dell Latitude 3440, but no label or model marking is legible in the photos, and that model is not on the shortlist. The visible Intel Core i5 badge and 13-14-inch dark-grey chassis do not match any shortlist entry confidently, so no single identification is supported.
+- Evidence flag: screenshot of a gallery rather than a photo of the item
+- Raised to the 5,000 NGN minimum this business publishes for this kind of item.
 - Dell 3440 13th Gen Touchscreen 13.3" keyboard light lightweight system. -> not proven remotely. Agent inspects the panel edges and looks for lines and dead pixels.
 - Dell 3440 13th Gen Touchscreen 13.3" keyboard light lightweight system. -> not proven remotely. Agent inspects the panel edges and looks for lines and dead pixels.
 - Dell 3440 13th Gen Touchscreen 13.3" keyboard light lightweight system. -> not proven remotely. Agent inspects the panel edges and looks for lines and dead pixels.

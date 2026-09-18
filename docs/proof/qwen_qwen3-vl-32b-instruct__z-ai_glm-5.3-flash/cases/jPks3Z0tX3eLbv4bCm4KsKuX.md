@@ -1,17 +1,17 @@
 # Case jPks3Z0tX3eLbv4bCm4KsKuX
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  20997 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  41483 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: split air conditioner (confidence 0.95)
 - Made of: plastic 60%, steel 30%, copper 10%
-- Estimated weight: 15.0 kg (confidence 0.8)
-- Brand read off the item: nothing legible
+- Estimated weight: 25.0 kg (confidence 0.8)
+- Brand read off the item: Hisense
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
-- Damage noted: unit wrapped in plastic film, coils and fan appear clean, no visible dents or cracks
+- Damage noted: unit appears new, still in protective plastic wrap, no visible damage or wear
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
 - Text read: Hisense
@@ -21,16 +21,18 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - model_text was seen by only one reader, so it is treated as unread
 - rating_text was seen by only one reader, so it is treated as unread
 - serial_text was seen by only one reader, so it is treated as unread
-- 8 transcribed lines was seen by only one reader, so it is treated as unread
+- 9 transcribed lines was seen by only one reader, so it is treated as unread
+
+## OCR read off the photos
+- ANO GROVE LTD
 
 ## Chain
-- **corroborate** -> dispute. brand_text agreed by both readers; model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 8 transcribed lines was seen by only one reader, so it is treated as unread
+- **ocr** -> ok. 1 lines: ANO GROVE LTD
+- **corroborate** -> dispute. brand_text agreed by both readers; model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 9 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=split air conditioner brand=Hisense model=None label=True lines=1
-- **grounding** -> dropped. brand
-- **forensics** -> flag. the reader stated brand it could not point to in the photos
-- **retrieval** -> ok. query='Hisense Lg air conditioner 1hp regular' hits=['Hisense AS-09 1HP', 'LG S4-Q09 1HP', 'LG S4-Q18 2HP', 'Hisense AS-12 1.5HP', 'Hisense AS-18 2HP']
-- **identify** -> ok. chosen=Hisense AS-09 1HP margin=0.4
-- **abstain** -> abstain. confidence 0.35: read off the item's own label; 1 lines seen by both readers; the reader stated brand it could not point to in the photos
+- **retrieval** -> ok. query='Hisense Hisense Lg air conditioner 1hp regular' hits=['Hisense AS-09 1HP', 'LG S4-Q09 1HP', 'LG S4-Q18 2HP', 'Hisense AS-12 1.5HP', 'Hisense AS-18 2HP']
+- **identify** -> refused. chosen=None None margin=0.25
+- **abstain** -> abstain. model refused
 
 ## Identification
 Shortlist from the catalogue:
@@ -40,20 +42,18 @@ Shortlist from the catalogue:
   - Hisense AS-12 1.5HP (0.38)
   - Hisense AS-18 2HP (0.38)
 
-**Not identified: EVIDENCE_INCOMPLETE.** The evidence only supports this answer at 35 percent, which is a guess. One clear photo of the label would settle it.
-
-Evidence flags: the reader stated brand it could not point to in the photos
+**Not identified: CANNOT_IDENTIFY.** Hisense brand is legible but the model/HP rating is not readable, and the seller's 'LG' claim contradicts the visible Hisense label, so no single model is supported.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 21% on the best answer. It is probably a Hisense AS-09 1HP or a Hisense AS-12 1.5HP, and the photos cannot separate them.**
+**Not sure enough to price: 27% on the best answer. It is probably a Hisense AS-09 1HP or a Hisense AS-12 1.5HP, and the photos cannot separate them.**
 
-- Identification confidence: 21% (unknown)
+- Identification confidence: 27% (unknown)
 - Price confidence: 18%
-- It is weighing: Hisense AS-09 1HP (0.7), Hisense AS-12 1.5HP (0.3)
-- The evidence only supports this answer at 35 percent, which is a guess. One clear photo of the label would settle it.
+- It is weighing: Hisense AS-09 1HP (0.5), Hisense AS-12 1.5HP (0.25)
+- Hisense brand is legible but the model/HP rating is not readable, and the seller's 'LG' claim contradicts the visible Hisense label, so no single model is supported.
 - read off the item's own label
 - 1 lines seen by both readers
-- the reader stated brand it could not point to in the photos
+- the next candidate was only 0.25 behind
 - 8 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -63,6 +63,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: two readings of these photos disagreed about what is written on the item_
 2. [PHOTO] Close-up of the rating plate on the outdoor unit showing the model and HP.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it still blow cold air?
+- Do you have both the indoor unit and the outdoor unit?
 
 ## Claims
 - [unverified] Lg air conditioner
@@ -83,15 +88,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Open the front grille of the indoor unit and photograph the filters and coil.
 
 ## Price
-**8,624 to 23,820 NGN** (priced as material, width 0.9367, method material_floor, 0 comparable prices)
+**14,374 to 39,700 NGN** (priced as material, width 0.9367, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 15 kg of plastic 60%, steel 30%, copper 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 25 kg of plastic 60%, steel 30%, copper 10% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 18,150 NGN
+Scrap floor: 30,250 NGN
 
 Conditions attached to this price:
-- Not identified: The evidence only supports this answer at 35 percent, which is a guess. One clear photo of the label would settle it.
-- Evidence flag: the reader stated brand it could not point to in the photos
+- Not identified: Hisense brand is legible but the model/HP rating is not readable, and the seller's 'LG' claim contradicts the visible Hisense label, so no single model is supported.
 - Lg air conditioner -> not proven remotely. Agent reads the outdoor rating plate.
 - 1hp -> not proven remotely. Agent reads the outdoor rating plate.
 - regular -> not proven remotely. Agent reads the outdoor rating plate.

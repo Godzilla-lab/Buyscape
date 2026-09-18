@@ -7,7 +7,7 @@ Photos: 2  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - Category: television (confidence 0.95)
 - Made of: plastic 60%, steel 30%, glass 10%
 - Estimated weight: 8.5 kg (confidence 0.7)
-- Brand read off the item: nothing legible
+- Brand read off the item: SONY
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
@@ -23,20 +23,20 @@ Photos: 2  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - serial_text was seen by only one reader, so it is treated as unread
 - 6 transcribed lines was seen by only one reader, so it is treated as unread
 
+## OCR read off the photos
+- C€①
+
 ## Chain
+- **ocr** -> ok. 1 lines: C€①
 - **corroborate** -> dispute. brand_text agreed by both readers; model_text was seen by only one reader, so it is treated as unread; rating_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 6 transcribed lines was seen by only one reader, so it is treated as unread
 - **read_evidence** -> ok. category=television brand=SONY model=None label=True lines=2
-- **grounding** -> dropped. brand
-- **forensics** -> flag. the reader stated brand it could not point to in the photos
-- **retrieval** -> empty. query='SONY CE 55 Inch Sonny Bravia frameless' hits=[]
+- **retrieval** -> empty. query='SONY SONY CE 55 Inch Sonny Bravia frameless' hits=[]
 - **gate** -> abstain. no candidates and no model text
 
 ## Identification
 No catalogue candidates matched.
 
 **Not identified: CANNOT_IDENTIFY.** No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.
-
-Evidence flags: the reader stated brand it could not point to in the photos
 
 ## How sure the engine is (back office)
 **0%: the photos do not say what this is.**
@@ -46,7 +46,6 @@ Evidence flags: the reader stated brand it could not point to in the photos
 - No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.
 - read off the item's own label
 - 2 lines seen by both readers
-- the reader stated brand it could not point to in the photos
 - 8 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -89,7 +88,6 @@ Scrap floor: 1,802 NGN
 
 Conditions attached to this price:
 - Not identified: No catalogue entry matched what was read and no model string was legible on the item, so there is nothing to rank.
-- Evidence flag: the reader stated brand it could not point to in the photos
 - 55 Inch Sonny Bravia frameless -> not proven remotely. Weigh on the scale and photograph the display.
 - 55 Inch Sonny Bravia frameless -> not proven remotely. Weigh on the scale and photograph the display.
 - 55 Inch Sonny Bravia frameless -> not proven remotely. Weigh on the scale and photograph the display.

@@ -1,27 +1,44 @@
 # Case yVRnXVi3VkjOnDkyfUEPpKUd
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0007  |  18136 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0011  |  40981 ms
 
 ## What the engine saw
 - Presentation: sealed_new
 - Category: split air conditioner (confidence 0.9)
-- Made of: paper 90%, plastic 10%
-- Estimated weight: 30.0 kg (confidence 0.7)
+- Made of: carton 95%, plastic 5%
+- Estimated weight: 25.0 kg (confidence 0.7)
 - Brand read off the item: Hisense
-- Model read off the item: HSC-12H
-- Rating read: 12000 BTU/h
+- Model read off the item: nothing legible
+- Rating read: none
 - Label, plate or settings screen legible: yes
 - Damage noted: none
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
-- Text read: Hisense | AIR CONDITIONER | Inverter 12000 | 2 YEARS WARRANTY | Energy Efficiency Rating: 5 Stars | Split Air Conditioner | Model: HSC-12H | Serial No: 123456789
+- Text read: Hisense | AIR CONDITIONER | Inverter 12000 BTU | 2 YEAR WARRANTY | Split Air Conditioner | 12000 BTU | R32 Refrigerant | Model: HSC-12000I
+
+## Two readers
+- brand_text agreed by both readers
+- rating_text differed between the two readers, so it is treated as unread
+- model_text was seen by only one reader, so it is treated as unread
+- serial_text was seen by only one reader, so it is treated as unread
+- 6 transcribed lines was seen by only one reader, so it is treated as unread
+
+## OCR read off the photos
+- Energy
+- OLG
+- Hieer
+- XE
+- 2
+- AIR CONDITIONER
+- Indonr Waite
 
 ## Chain
-- **corroborate** -> unavailable. openrouter:mistralai/mistral-small-3.2-24b-instruct failed after retries: HTTP 429: {"error":{"message":"Provider return
-- **read_evidence** -> ok. category=split air conditioner brand=Hisense model=HSC-12H label=True lines=15
-- **retrieval** -> ok. query='Hisense HSC-12H 12000 BTU/h Hisense AIR CONDITIONER Inverter 12000 2 YEARS WARRANTY Energy' hits=['Hisense AS-12 1.5HP', 'Hisense AS-09 1HP', 'Hisense AS-18 2HP', 'Samsung AR12 1.5HP', 'Scanfrost SFAC12 1.5HP']
-- **identify** -> ok. chosen=Hisense HSC-12H margin=0.6
-- **abstain** -> pass. confidence=0.63 margin=0.6
+- **ocr** -> ok. 7 lines: Energy | OLG | Hieer | XE | 2 | AIR CONDITIONER | Indonr Waite
+- **corroborate** -> dispute. brand_text agreed by both readers; rating_text differed between the two readers, so it is treated as unread; model_text was seen by only one reader, so it is treated as unread; serial_text was seen by only one reader, so it is treated as unread; 6 transcribed lines was seen by only one reader, so it is treated as unread
+- **read_evidence** -> ok. category=split air conditioner brand=Hisense model=None label=True lines=18
+- **retrieval** -> ok. query='Hisense Hisense AIR CONDITIONER Inverter 12000 BTU 2 YEAR WARRANTY Split Air Conditioner 1' hits=['Hisense AS-12 1.5HP', 'Hisense AS-09 1HP', 'Hisense AS-18 2HP', 'Samsung AR12 1.5HP', 'Scanfrost SFAC12 1.5HP']
+- **identify** -> ok. chosen=Hisense HSC-12000I margin=0.6
+- **abstain** -> abstain. seller names another generation
 
 ## Identification
 Shortlist from the catalogue:
@@ -31,27 +48,31 @@ Shortlist from the catalogue:
   - Samsung AR12 1.5HP (0.15)
   - Scanfrost SFAC12 1.5HP (0.15)
 
-**Answer: Hisense HSC-12H Inverter 12000 BTU/h Split Air Conditioner** (margin 0.6)
+**Not identified: EVIDENCE_INCOMPLETE.** The answer rests on hsc12000i, which the OCR engine did not read off the item and the seller did not say. Two readers transcribing the same code is not enough on its own. This needs a sharp photo of the label.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 63% on the best answer. It is probably a Hisense HSC-12H or a Hisense AS-12, and the photos cannot separate them.**
+**Not sure enough to price: 54% on the best answer. It is probably a Hisense HSC-12000I or a Hisense AS-12 1.5HP, and the photos cannot separate them.**
 
-- Identification confidence: 63% (unsure)
-- Price confidence: 0%
-- It is weighing: Hisense HSC-12H (0.9), Hisense AS-12 (0.3)
+- Identification confidence: 54% (unsure)
+- Price confidence: 16%
+- It is weighing: Hisense HSC-12000I (0.9), Hisense AS-12 1.5HP (0.3)
+- The answer rests on hsc12000i, which the OCR engine did not read off the item and the seller did not say. Two readers transcribing the same code is not enough on its own. This needs a sharp photo of the label.
 - read off the item's own label
-- only one reader saw these photos, the second was unavailable
+- 18 lines seen by both readers
 - 9 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
 
 ## What the seller is asked for next (shown in the app)
-1. [PHOTO] Write the code {code} on paper and photograph it next to the unit.
-   _why: this is needed before the price can be confirmed_
-2. [PHOTO] One photo of the whole indoor unit.
-   _why: this is needed before the price can be confirmed_
-3. [PHOTO] One photo of the outdoor compressor unit.
-   _why: this is needed before the price can be confirmed_
+1. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: Close-up of the rating plate on the outdoor unit showing the model and HP. Then, without stopping the video: Open the front grille of the indoor unit and photograph the filters and coil. Finish with: A short clip with the unit running and the display lit. Keep filming the whole time. Do not cut between clips.
+   _why: two readings of these photos disagreed about what is written on the item_
+2. [PHOTO] Close-up of the rating plate on the outdoor unit showing the model and HP.
+   _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Does it still blow cold air?
+- Do you have both the indoor unit and the outdoor unit?
 
 ## Claims
 - [unverifiable_remote] The Hisense 1.5 HP Inverter AC is an excellent, energy-saving choice
@@ -74,13 +95,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Open the front grille of the indoor unit and photograph the filters and coil.
 
 ## Price
-**16,156 to 80,000 NGN** (priced as material, width 1.3279, method scrap_band_only, 0 comparable prices)
+**626 to 3,075 NGN** (priced as material, width 1.3234, method material_floor, 0 comparable prices)
 
-No usable comparable sales (0 found, 2 needed), so the range comes from the published Lagos buy band for this category, reduced by 0.4039 for unproven claims.
+This item was not identified, so it is priced as material rather than as a working item: 25 kg of carton 95%, plastic 5% (rates for carton, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 40,000 NGN
+Scrap floor: 1,550 NGN
 
 Conditions attached to this price:
+- Not identified: The answer rests on hsc12000i, which the OCR engine did not read off the item and the seller did not say. Two readers transcribing the same code is not enough on its own. This needs a sharp photo of the label.
 - The Hisense 1.5 HP Inverter AC is an excellent, energy-saving choice -> not proven remotely. Agent reads the outdoor rating plate.
 - The Hisense 1.5 HP Inverter AC is an excellent, energy-saving choice -> not proven remotely. Agent reads the outdoor rating plate.
 - The Hisense 1.5 HP Inverter AC is an excellent, energy-saving choice -> not proven remotely. Agent reads the outdoor rating plate.

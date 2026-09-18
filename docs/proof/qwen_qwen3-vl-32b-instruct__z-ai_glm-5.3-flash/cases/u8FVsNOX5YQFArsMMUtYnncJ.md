@@ -1,36 +1,41 @@
 # Case u8FVsNOX5YQFArsMMUtYnncJ
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  22102 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0007  |  14554 ms
 
 ## What the engine saw
 - Presentation: sealed_new
-- Category: phone (confidence 1.0)
+- Category: smartphone (confidence 0.95)
 - Made of: paper 80%, plastic 20%
-- Estimated weight: 0.5 kg (confidence 0.9)
-- Brand read off the item: nothing legible
-- Model read off the item: nothing legible
+- Estimated weight: 0.5 kg (confidence 0.8)
+- Brand read off the item: Galaxy
+- Model read off the item: A57 5G
 - Rating read: none
 - Label, plate or settings screen legible: no
 - Damage noted: none
 - Looks like a catalogue image: yes
 - Screenshot of a gallery: no
-- Text read: Galaxy | A57 5G
+- Text read: Galaxy A57 5G
 
 ## Two readers
 - model_text agreed by both readers
-- brand_text differed between the two readers, so it is treated as unread
+- brand_text was read by one reader and confirmed by OCR
+
+## OCR read off the photos
+- Galaxy
+- A57 5G
+- INEDUC
 
 ## Chain
-- **corroborate** -> dispute. model_text agreed by both readers; brand_text differed between the two readers, so it is treated as unread
-- **read_evidence** -> ok. category=phone brand=None model=A57 5G label=False lines=2
-- **grounding** -> dropped. model
-- **forensics** -> flag. the reader stated model it could not point to in the photos; looks like a catalogue or stock image
-- **retrieval** -> ok. query='Galaxy A57 5G SAMSUNG GALAXY A57
+- **ocr** -> ok. 3 lines: Galaxy | A57 5G | INEDUC
+- **corroborate** -> agree. model_text agreed by both readers; brand_text was read by one reader and confirmed by OCR
+- **read_evidence** -> ok. category=smartphone brand=Galaxy model=A57 5G label=False lines=1
+- **forensics** -> flag. looks like a catalogue or stock image
+- **retrieval** -> ok. query='Galaxy A57 5G Galaxy A57 5G SAMSUNG GALAXY A57
 256GB OF STORAGE
 12GB RAM
 BRAND-NEW' hits=['Samsung Galaxy S21', 'Samsung Galaxy S22', 'Samsung Galaxy S23', 'Samsung Galaxy S24', 'Samsung Galaxy S25']
-- **identify** -> ok. chosen=Samsung Galaxy A57 5G margin=0.85
-- **abstain** -> abstain. seller names another generation
+- **identify** -> label. named from the label: Galaxy A57 5G, not in the catalogue
+- **abstain** -> abstain. confidence 0.38: named from the item's own label, which the catalogue does not list; no label, plate or settings screen was legible; 1 lines seen by both readers; looks like a catalogue or stock image
 
 ## Identification
 Shortlist from the catalogue:
@@ -40,20 +45,18 @@ Shortlist from the catalogue:
   - Samsung Galaxy S24 (0.5)
   - Samsung Galaxy S25 (0.5)
 
-**Not identified: EVIDENCE_INCOMPLETE.** The item reads as Samsung Galaxy A57 5G but the seller's text says 12. A Settings or About screen would settle it.
+**Not identified: EVIDENCE_INCOMPLETE.** The label names it, but the evidence only supports that at 38 percent. One clear photo of the label would settle it.
 
-Evidence flags: the reader stated model it could not point to in the photos; looks like a catalogue or stock image
+Evidence flags: looks like a catalogue or stock image
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 23% on the best answer. It is probably a Samsung Galaxy A57 5G or a Samsung Galaxy S25, and the photos cannot separate them.**
+**0%: the photos do not say what this is.**
 
-- Identification confidence: 23% (unknown)
+- Identification confidence: 0% (unknown)
 - Price confidence: 16%
-- It is weighing: Samsung Galaxy A57 5G (0.9), Samsung Galaxy S25 (0.05)
-- The item reads as Samsung Galaxy A57 5G but the seller's text says 12. A Settings or About screen would settle it.
+- The label names it, but the evidence only supports that at 38 percent. One clear photo of the label would settle it.
 - no label, plate or settings screen was legible
-- 2 lines seen by both readers
-- the reader stated model it could not point to in the photos
+- 1 lines seen by both readers
 - looks like a catalogue or stock image
 - 9 claims are still unproven, 0 are supported
 
@@ -62,10 +65,15 @@ These are stated strengths from the evidence, not calibrated probabilities. They
 ## What the seller is asked for next (shown in the app)
 1. [PHOTO] Take your own photo of the actual item you are selling.
    _why: this looks like a catalogue picture, not the real unit_
-2. [VIDEO] Record one video, up to thirty seconds, in one take. Start by showing the whole item slowly from every side. Then hold the camera still and close for three seconds: If you have the box, photograph the label showing the model, storage and IMEI. Then, still filming, do this on the item's own screen and hold it steady so the writing can be read: open settings then About, showing the model name and storage. Then, without stopping the video: Pull out the SIM tray and photograph the open slot. Finish with: A short clip: press power, unlock, then open the camera app. Keep filming the whole time. Do not cut between clips.
-   _why: two readings of these photos disagreed about what is written on the item_
-3. [PHOTO] Screenshot of Settings then About, showing the model name and storage.
+2. [PHOTO] Screenshot of Settings then About, showing the model name and storage.
    _why: nothing on the item says which model this is_
+3. [PHOTO] Dial *#06# and screenshot the IMEI that appears.
+   _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Has the screen or battery ever been changed?
+- Is it signed out of iCloud or Google, so a new owner can set it up?
 
 ## Claims
 - [unverifiable_remote] SAMSUNG GALAXY A57
@@ -93,8 +101,7 @@ This item was not identified, so it is priced as material rather than as a worki
 Scrap floor: 34 NGN
 
 Conditions attached to this price:
-- Not identified: The item reads as Samsung Galaxy A57 5G but the seller's text says 12. A Settings or About screen would settle it.
-- Evidence flag: the reader stated model it could not point to in the photos
+- Not identified: The label names it, but the evidence only supports that at 38 percent. One clear photo of the label would settle it.
 - Evidence flag: looks like a catalogue or stock image
 - SAMSUNG GALAXY A57 -> not proven remotely. Agent will confirm at pickup.
 - 256GB OF STORAGE -> not proven remotely. Agent reads storage from Settings.

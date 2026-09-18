@@ -1,33 +1,41 @@
 # Case u406Li2vPFhRfKtGkdWuTgha
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0009  |  66688 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0015  |  67040 ms
 
 ## What the engine saw
 - Presentation: single_unit
 - Category: phone (confidence 1.0)
-- Made of: plastic 70%, circuit_board 20%, steel 10%
+- Made of: plastic 70%, circuit_board 15%, steel 10%, copper_insulated 5%
 - Estimated weight: 0.2 kg (confidence 0.9)
-- Brand read off the item: nothing legible
+- Brand read off the item: SAMSUNG
 - Model read off the item: nothing legible
 - Rating read: none
 - Label, plate or settings screen legible: yes
 - Damage noted: none
 - Looks like a catalogue image: no
 - Screenshot of a gallery: no
+- Text read: SAMSUNG
 
 ## Two readers
 - model_text differed between the two readers, so it is treated as unread
 - serial_text differed between the two readers, so it is treated as unread
-- brand_text was seen by only one reader, so it is treated as unread
-- 5 transcribed lines was seen by only one reader, so it is treated as unread
+- 7 transcribed lines was seen by only one reader, so it is treated as unread
+- brand_text was read by only one reader, so it is kept but not confirmed
+
+## OCR read off the photos
+- POSTED ON
+- VSIT
+- W
+- CA
 
 ## Chain
-- **corroborate** -> dispute. model_text differed between the two readers, so it is treated as unread; serial_text differed between the two readers, so it is treated as unread; brand_text was seen by only one reader, so it is treated as unread; 5 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=phone brand=None model=None label=True lines=0
-- **retrieval** -> ok. query='Samsung Galaxy S22
-Sleek flagship vibes with a 6.1′′ Dynamic AMOLED 2X display + 120 Hz re' hits=['Samsung Galaxy S22', 'Samsung Galaxy S21', 'Samsung Galaxy S23', 'Samsung Galaxy S24', 'Samsung Galaxy S25']
-- **identify** -> ok. chosen=Samsung Galaxy S22 margin=0.25
-- **abstain** -> abstain. top score 0.5
+- **ocr** -> ok. 4 lines: POSTED ON | VSIT | W | CA
+- **corroborate** -> dispute. model_text differed between the two readers, so it is treated as unread; serial_text differed between the two readers, so it is treated as unread; 7 transcribed lines was seen by only one reader, so it is treated as unread; brand_text was read by only one reader, so it is kept but not confirmed
+- **read_evidence** -> ok. category=phone brand=SAMSUNG model=None label=True lines=1
+- **retrieval** -> ok. query='SAMSUNG SAMSUNG Samsung Galaxy S22
+Sleek flagship vibes with a 6.1′′ Dynamic AMOLED 2X dis' hits=['Samsung Galaxy S22', 'Samsung Galaxy S21', 'Samsung Galaxy S23', 'Samsung Galaxy S24', 'Samsung Galaxy S25']
+- **identify** -> refused. chosen=Samsung None margin=0.1
+- **abstain** -> abstain. model refused
 
 ## Identification
 Shortlist from the catalogue:
@@ -37,18 +45,19 @@ Shortlist from the catalogue:
   - Samsung Galaxy S24 (0.5)
   - Samsung Galaxy S25 (0.5)
 
-**Not identified: CANNOT_IDENTIFY.** The best candidate scored only 0.5, which is not sure enough to price.
+**Not identified: CANNOT_IDENTIFY.** Label is blurry but seems to conflict with seller's S22 claim; need clearer label photo to confirm exact model.
 
 ## How sure the engine is (back office)
-**Not sure enough to price: 22% on the best answer. It is probably a Samsung Galaxy S22 or a Samsung Galaxy S23, and the photos cannot separate them.**
+**Not sure enough to price: 19% on the best answer. It is probably a Samsung Galaxy S21 or a Samsung Galaxy S22, and the photos cannot separate them.**
 
-- Identification confidence: 22% (unknown)
+- Identification confidence: 19% (unknown)
 - Price confidence: 18%
-- It is weighing: Samsung Galaxy S22 (0.5), Samsung Galaxy S23 (0.25)
-- The best candidate scored only 0.5, which is not sure enough to price.
+- It is weighing: Samsung Galaxy S21 (0.55), Samsung Galaxy S22 (0.45)
+- Label is blurry but seems to conflict with seller's S22 claim; need clearer label photo to confirm exact model.
 - read off the item's own label
 - the two readers agreed on nothing legible
-- the next candidate was only 0.25 behind
+- the brand was read by only one reader and is not confirmed
+- the next candidate was only 0.1 behind
 - 8 claims are still unproven, 0 are supported
 
 These are stated strengths from the evidence, not calibrated probabilities. They become calibrated once settled pickup prices exist.
@@ -60,6 +69,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: nothing on the item says which model this is_
 3. [PHOTO] Dial *#06# and screenshot the IMEI that appears.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Has the screen or battery ever been changed?
+- Is it signed out of iCloud or Google, so a new owner can set it up?
 
 ## Claims
 - [unverifiable_remote] Samsung Galaxy S22
@@ -77,14 +91,14 @@ These are stated strengths from the evidence, not calibrated probabilities. They
     priced as: priced as if the worst case is true. Dial *#06# and screenshot the IMEI that appears.
 
 ## Price
-**55 to 197 NGN** (priced as material, width 1.1186, method material_floor, 0 comparable prices)
+**48 to 97 NGN** (priced as material, width 0.6698, method material_floor, 0 comparable prices)
 
-This item was not identified, so it is priced as material rather than as a working item: 0.2 kg of plastic 70%, circuit_board 20%, steel 10% (rates for circuit_board, plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
+This item was not identified, so it is priced as material rather than as a working item: 0.2 kg of plastic 70%, circuit_board 15%, steel 10%, copper_insulated 5% (rates for plastic are estimates, not published). Anything it is worth above scrap needs a clearer photo of its label or plate. The weight is an estimate from the photos and the price is settled on the scale at pickup.
 
-Scrap floor: 84 NGN
+Scrap floor: 73 NGN
 
 Conditions attached to this price:
-- Not identified: The best candidate scored only 0.5, which is not sure enough to price.
+- Not identified: Label is blurry but seems to conflict with seller's S22 claim; need clearer label photo to confirm exact model.
 - Samsung Galaxy S22 -> not proven remotely. Agent will confirm at pickup.
 - 6.1′′ Dynamic AMOLED 2X display -> not proven remotely. Agent will confirm at pickup.
 - 120 Hz refresh -> not proven remotely. Agent will confirm at pickup.

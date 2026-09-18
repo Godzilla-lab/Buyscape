@@ -1,10 +1,10 @@
 # Case df6mvnCslxEiGSKwfsLquLp2
 
-Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  42091 ms
+Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flash  |  cost: $0.0008  |  140671 ms
 
 ## What the engine saw
 - Presentation: sealed_new
-- Category: phone (confidence 1.0)
+- Category: smartphone (confidence 1.0)
 - Made of: paper 80%, plastic 20%
 - Estimated weight: 0.5 kg (confidence 0.9)
 - Brand read off the item: nothing legible
@@ -20,8 +20,9 @@ Photos: 1  |  reader: qwen/qwen3-vl-32b-instruct  |  reasoner: z-ai/glm-5.3-flas
 - 1 transcribed lines was seen by only one reader, so it is treated as unread
 
 ## Chain
+- **ocr** -> ok. 0 lines: 
 - **corroborate** -> dispute. 1 transcribed lines was seen by only one reader, so it is treated as unread
-- **read_evidence** -> ok. category=phone brand=None model=None label=False lines=1
+- **read_evidence** -> ok. category=smartphone brand=None model=None label=False lines=1
 - **forensics** -> flag. looks like a catalogue or stock image
 - **retrieval** -> ok. query='AGASON GLOBAL CONCEPT Apple iPhone14pro 256gb' hits=['Apple iPhone 14', 'Apple iPhone 11', 'Apple iPhone 11 Pro', 'Apple iPhone 11 Pro Max', 'Apple iPhone 12']
 - **identify** -> refused. chosen=None None margin=None
@@ -60,6 +61,11 @@ These are stated strengths from the evidence, not calibrated probabilities. They
    _why: two readings of these photos disagreed about what is written on the item_
 3. [PHOTO] Screenshot of Settings then About, showing the model name and storage.
    _why: nothing on the item says which model this is_
+
+## What the seller is asked (only they know these)
+- Roughly how old is it, in years?
+- Has the screen or battery ever been changed?
+- Is it signed out of iCloud or Google, so a new owner can set it up?
 
 ## Claims
 - [unverifiable_remote] Apple iPhone14pro
