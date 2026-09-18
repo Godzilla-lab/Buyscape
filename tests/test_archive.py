@@ -49,7 +49,8 @@ def test_a_valued_and_a_settled_session_are_backed_up(tmp_path, monkeypatch):
         if store.load(s["id"])["status"] != "valuing":
             break
         time.sleep(0.05)
-    assert store.archive.uploads == [(s["id"], None)]
+    # Once for the photo, once when valuing starts, once when it finishes.
+    assert store.archive.uploads == [(s["id"], None)] * 3
     store.settle(s["id"], {"price": 12000})
     assert store.archive.uploads[-1] == (s["id"], "settlements.jsonl")
 
