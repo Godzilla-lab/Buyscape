@@ -26,10 +26,12 @@ from pathlib import Path
 from typing import Callable
 
 from PIL import Image
+from pydantic import ValidationError
 
+from ..media.frames import sample_frames
 from ..protocols.schema import Protocol
 from ..runner import Case, CaseResult
-from ..tenant import Tenant
+from ..tenant import Tenant, TenantQuestion, load_questions, questions_path, save_questions
 
 # No 0, O, 1 or I: the code is handwritten and then read off a photo.
 CODE_ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"
@@ -100,6 +102,7 @@ class Store:
         self.root = root
         self.dir = root / "sessions"
         self.tenant = tenant
+        self.questions_path = questions_path(root / "tenants" / f"{tenant.tenant}.yaml")
         self.protocols = protocols
         self.catalogue_categories = catalogue_categories
         self.valuer = valuer
@@ -118,7 +121,8 @@ class Store:
     def protocol_for(self, category: str | None) -> Protocol:
         if not category:
             return self.protocols["generic"]
-        return self.tenant.protocol_for(self.protocols, category)
+        protocol = self.tenant.protocol_for(self.protocols, category)
+        return self.tenant.with_questions(protocol, category)
 
     # ----- lifecycle -----
 
@@ -289,6 +293,7 @@ class Store:
             asking_price=session["asking"],
             answers=dict(session["answers"]),
             refused_slots=set(session["refused"]),
+            tenant_category=session.get("category"),
         )
         result, report = self.valuer(case, self.tenant.tenant)
         (self.dir / session["id"] / "report.md").write_text(report)
@@ -386,6 +391,55 @@ class Store:
         if r["asks"]:
             return "needs_more"
         return "quoted"
+
+    # ----- questions staff write -----
+
+    def questions_view(self) -> dict:
+        """Every question a seller can be asked, the engine's and the staff's."""
+        built_in = {}
+        for c in self.tenant.categories:
+            protocol = self.tenant.protocol_for(self.protocols, c.name)
+            built_in[c.name] = [{"id": q.id, "ask": q.ask, "kind": q.kind} for q in protocol.questions]
+        return {
+            "categories": [c.name for c in self.tenant.categories],
+            "questions": [q.model_dump() for q in self.tenant.questions],
+            "built_in": built_in,
+            "kinds": ["yesno", "number", "choice", "text"],
+        }
+
+    def save_question(self, body: dict) -> dict:
+        """Add or replace one staff question. Validation errors are loud."""
+        raw = dict(body or {})
+        if isinstance(raw.get("options"), str):
+            raw["options"] = [o for o in raw["options"].split(",")]
+        for key in ("penalty", "tolerance"):
+            if raw.get(key) in ("", None):
+                raw.pop(key, None)
+        if raw.get("checks_attr") == "":
+            raw["checks_attr"] = None
+        try:
+            question = TenantQuestion.model_validate(raw)
+        except ValidationError as exc:
+            # The reasons, in the words the validator gave, not the footer.
+            reasons = dict.fromkeys(str(e.get("msg", "")).removeprefix("Value error, ") for e in exc.errors())
+            raise ValueError("; ".join(r for r in reasons if r) or "invalid question") from exc
+        names = {c.name for c in self.tenant.categories} | {"*"}
+        if question.category not in names:
+            raise ValueError(f"{question.category!r} is not one of this business's categories")
+        with self.lock:
+            kept = [q for q in self.tenant.questions if not (q.id == question.id and q.category == question.category)]
+            self.tenant.questions = kept + [question]
+            save_questions(self.questions_path, self.tenant.questions)
+        return self.questions_view()
+
+    def remove_question(self, body: dict) -> dict:
+        qid, category = str(body.get("id") or ""), str(body.get("category") or "*")
+        with self.lock:
+            self.tenant.questions = [
+                q for q in self.tenant.questions if not (q.id == qid and q.category == category)
+            ]
+            save_questions(self.questions_path, self.tenant.questions)
+        return self.questions_view()
 
     # ----- the two views -----
 

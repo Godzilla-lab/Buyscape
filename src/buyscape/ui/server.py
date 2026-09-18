@@ -35,11 +35,13 @@ from ..identify.catalogue import load_catalogue
 from ..pricing.sources import JijiComps, MaterialsFloor, ScrapIndex
 from ..protocols.schema import load_protocols
 from ..runner import Case, CaseResult, report_markdown, run_case
+from ..identify.ocr import default_reader
 from ..tenant import load_tenant
 from .sessions import Store
 
 HERE = Path(__file__).parent
-PAGES = {"bench": HERE / "page.html", "seller": HERE / "seller.html", "office": HERE / "office.html"}
+PAGES = {"bench": HERE / "page.html", "seller": HERE / "seller.html", "office": HERE / "office.html",
+         "questions": HERE / "questions.html"}
 SAFE_NAME = re.compile(r"[^A-Za-z0-9._-]+")
 STAFF_GETS = {"meta", "runs", "testset"}
 
@@ -396,9 +398,9 @@ class Handler(BaseHTTPRequestHandler):
         try:
             if not parts or (parts[0] == "s" and len(parts) == 2):
                 self._page("seller")
-            elif parts in (["office"], ["bench"]):
+            elif parts in (["office"], ["bench"], ["office", "questions"]):
                 if self._staff(url):
-                    self._page(parts[0])
+                    self._page(parts[-1])
                 else:
                     self._send(401, b"<p>Staff only. Add ?token=YOUR_TOKEN to the address.</p>", "text/html")
             elif parts == ["api", "tenant"]:
@@ -410,6 +412,8 @@ class Handler(BaseHTTPRequestHandler):
                     self._json(401, {"error": "staff token required"})
                 elif parts == ["api", "office", "sessions"]:
                     self._json(200, eng.store.list())
+                elif parts == ["api", "office", "questions"]:
+                    self._json(200, eng.store.questions_view())
                 elif len(parts) == 4 and parts[1:3] == ["office", "sessions"]:
                     self._json(200, eng.store.office_view(eng.store.load(parts[3])))
                 elif parts == ["api", "meta"]:
@@ -468,6 +472,13 @@ class Handler(BaseHTTPRequestHandler):
                     self._json(200, store.settle(parts[3], body))
                 else:
                     self._json(401, {"error": "staff token required"})
+            elif parts == ["api", "office", "questions"]:
+                if not self._staff(url):
+                    self._json(401, {"error": "staff token required"})
+                elif body.get("action") == "remove":
+                    self._json(200, store.remove_question(body))
+                else:
+                    self._json(200, store.save_question(body.get("question") or body))
             elif parts == ["api", "value"]:
                 if self._staff(url):
                     self._json(200, eng.value(body))

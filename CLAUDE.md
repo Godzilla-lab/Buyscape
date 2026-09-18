@@ -42,13 +42,14 @@ money moves. The promise is "nothing hidden gets priced", not "we see inside".
 
     protocols/      evidence protocols, one YAML per category
     catalogue/      candidate catalogue, one CSV per category, seeded by hand
-    tenants/        tenant config and price lists
+    tenants/        tenant config, price lists, and <tenant>.questions.yaml written from the office
     eval/raw/       cached Jiji test set, never re-fetched during a run
     eval/fixtures/  recorded model calls, replayed in tests and reruns
     sessions/       one folder per seller session from the web page, gitignored
     src/buyscape/ui the seller page, the back office and the bench, on stdlib http
     docs/proof/     case reports and the gate summary per model pair
     src/buyscape/   the engine
+    src/buyscape/media  stills cut from seller clips, plain OpenCV, no model
 
 ## Commands
 
@@ -61,7 +62,7 @@ money moves. The promise is "nothing hidden gets priced", not "we see inside".
     uv run buyscape fetch-buyscrap            cache the tenant's own adverts with photos
     uv run buyscape run --preset balanced --set buyscrap
     uv run buyscape spend                     every run's cost and the cost per item
-    uv run buyscape ui                        seller page at /, back office at /office, test bench at /bench
+    uv run buyscape ui                        seller page at /, back office at /office, staff questions at /office/questions, test bench at /bench
     uv run --group dev pytest
 
 Keys live in `.env` and the run command loads it. Every run appends to

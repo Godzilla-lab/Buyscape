@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Questions</title>
+<style>
+  html { background: #fff; }
+  body { margin: 0; color: #000; font: 15px/1.5 Verdana, Geneva, Arial, sans-serif; }
+  header { padding: 14px 20px; border-bottom: 1px solid #000; display: flex; gap: 16px; align-items: baseline; }
+  header h1 { font-size: 18px; margin: 0; }
+  header a { margin-left: auto; } header a + a { margin-left: 0; }
+  a { color: #0000ee; } a:visited { color: #551a8b; }
+  main { display: grid; grid-template-columns: minmax(300px, 420px) 1fr; gap: 24px; padding: 20px; }
+  @media (max-width: 900px) { main { grid-template-columns: 1fr; } }
+  h2 { font-size: 15px; font-weight: bold; margin: 0 0 10px; }
+  h3 { font-size: 15px; font-weight: bold; margin: 18px 0 6px; }
+  .muted { color: #444; } .small { font-size: 13px; }
+  label { display: block; margin: 10px 0 2px; font-weight: bold; }
+  input[type=text], input[type=number], select, textarea { width: 100%; box-sizing: border-box; padding: 6px 8px; border: 1px solid #000; border-radius: 0; background: #fff; color: #000; font: inherit; }
+  textarea { min-height: 48px; }
+  button { font: inherit; padding: 6px 14px; border: 1px solid #000; border-radius: 0; background: #fff; color: #000; cursor: pointer; }
+  button.primary { font-weight: bold; }
+  button.small { font-size: 12px; padding: 2px 8px; }
+  .status { min-height: 18px; font-size: 13px; margin-top: 8px; } .status.err { color: #b00; } .status.ok { color: #060; }
+  table { border-collapse: collapse; width: 100%; font-size: 14px; }
+  th, td { text-align: left; vertical-align: top; padding: 6px 8px; border-top: 1px dotted #999; }
+  th { border-top: 0; border-bottom: 1px solid #000; }
+  .tag { font-family: "Courier New", Courier, monospace; font-size: 12px; }
+  .tag::before { content: "["; } .tag::after { content: "]"; }
+  hr { border: 0; border-top: 1px solid #000; margin: 16px 0; }
+  ul { padding-left: 20px; margin: 4px 0; } li { margin: 3px 0; }
+</style>
+</head>
+<body>
+<header><h1>Questions we ask sellers</h1><a href="/office">back office</a><a href="/">seller page</a></header>
+<main>
+  <section>
+    <h2>Write a question</h2>
+    <p class="small muted">Only ask what changes the price. Every question is one more reason for a seller to give up on the form. The answer is never taken on trust: it is priced as the worst case until the agent checks it at pickup, so an answer can lower the price and never raise it.</p>
+    <form id="form">
+      <label for="category">For which category</label>
+      <select id="category"></select>
+      <label for="ask">The question, in plain words</label>
+      <input type="text" id="ask" placeholder="Does it switch on and stay on?">
+      <label for="kind">Kind of answer</label>
+      <select id="kind"></select>
+      <div id="optionsRow" hidden>
+        <label for="options">Choices, separated by commas</label>
+        <input type="text" id="options" placeholder="none, cracked, missing">
+      </div>
+      <label for="unit">Unit, if a number</label>
+      <input type="text" id="unit" placeholder="years, kg, months">
+      <label for="worst_case">If the seller cannot prove it, assume</label>
+      <input type="text" id="worst_case" placeholder="it does not switch on and is priced as e-waste">
+      <label for="pickup_check">How the agent checks it at pickup</label>
+      <input type="text" id="pickup_check" placeholder="Agent plugs it in and waits ten minutes">
+      <label for="penalty">Share of the price kept while unproven (0.3 to 1)</label>
+      <input type="number" id="penalty" step="0.05" min="0.3" max="1" value="0.9">
+      <label for="checks_attr">Catalogue fact to check the answer against, if any</label>
+      <input type="text" id="checks_attr" placeholder="year">
+      <input type="hidden" id="id">
+      <p><button type="submit" class="primary">Save question</button> <button type="button" id="clear">Clear</button></p>
+      <div class="status" id="status"></div>
+    </form>
+  </section>
+  <section>
+    <h2>Questions in use</h2>
+    <div id="list"></div>
+    <hr>
+    <h2>Questions the engine already asks</h2>
+    <p class="small muted">These come with each category's evidence protocol. Write a question with the same id to replace one.</p>
+    <div id="builtin"></div>
+  </section>
+</main>
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  const token = new URLSearchParams(location.search).get("token") || "";
+  const headers = { "Content-Type": "application/json", ...(token ? { Authorization: "Bearer " + token } : {}) };
+  let view = null;
+
+  async function api(path, body) {
+    const res = await fetch(path, body ? { method: "POST", headers, body: JSON.stringify(body) } : { headers });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || res.statusText);
+    return data;
+  }
+
+  function draw() {
+    const cat = $("category");
+    if (!cat.options.length) {
+      cat.innerHTML = `<option value="*">Every category</option>` + view.categories.map((c) => `<option>${esc(c)}</option>`).join("");
+      $("kind").innerHTML = view.kinds.map((k) => `<option>${esc(k)}</option>`).join("");
+    }
+    const rows = view.questions;
+    $("list").innerHTML = rows.length
+      ? `<table><tr><th>Category</th><th>Question</th><th>If unproven</th><th></th></tr>` + rows.map((q) => `<tr>
+          <td>${esc(q.category === "*" ? "every category" : q.category)}</td>
+          <td>${esc(q.ask)} <span class="tag">${esc(q.kind)}</span>${q.options.length ? `<div class="small muted">${esc(q.options.join(", "))}</div>` : ""}<div class="small muted">id ${esc(q.id)}${q.checks_attr ? `, checked against ${esc(q.checks_attr)}` : ""}</div></td>
+          <td class="small">${esc(q.worst_case)}<div class="muted">Pickup: ${esc(q.pickup_check)}</div><div class="muted">Keeps ${Math.round(q.penalty * 100)}% while unproven</div></td>
+          <td><button class="small" data-edit="${esc(q.category)}|${esc(q.id)}">edit</button> <button class="small" data-remove="${esc(q.category)}|${esc(q.id)}">remove</button></td>
+        </tr>`).join("") + `</table>`
+      : `<p class="muted">None yet. Write one on the left.</p>`;
+    $("builtin").innerHTML = Object.entries(view.built_in).map(([c, qs]) => `<h3>${esc(c)}</h3>` + (qs.length
+      ? `<ul>${qs.map((q) => `<li>${esc(q.ask)} <span class="tag">${esc(q.kind)}</span> <span class="small muted">id ${esc(q.id)}</span></li>`).join("")}</ul>`
+      : `<p class="small muted">Nothing is asked for this category yet.</p>`)).join("");
+    document.querySelectorAll("[data-edit]").forEach((b) => b.onclick = () => fill(b.dataset.edit));
+    document.querySelectorAll("[data-remove]").forEach((b) => b.onclick = () => remove(b.dataset.remove));
+  }
+
+  function fill(key) {
+    const [category, id] = key.split("|");
+    const q = view.questions.find((x) => x.category === category && x.id === id);
+    if (!q) return;
+    $("category").value = q.category; $("ask").value = q.ask; $("kind").value = q.kind;
+    $("options").value = q.options.join(", "); $("unit").value = q.unit; $("worst_case").value = q.worst_case;
+    $("pickup_check").value = q.pickup_check; $("penalty").value = q.penalty; $("checks_attr").value = q.checks_attr || "";
+    $("id").value = q.id; $("optionsRow").hidden = q.kind !== "choice";
+    $("status").textContent = "Editing " + q.id + ". Saving replaces it.";
+    $("status").className = "status";
+  }
+
+  async function remove(key) {
+    const [category, id] = key.split("|");
+    if (!confirm("Remove this question?")) return;
+    try { view = await api("/api/office/questions", { action: "remove", category, id }); draw(); }
+    catch (e) { $("status").textContent = e.message; $("status").className = "status err"; }
+  }
+
+  $("kind").onchange = () => { $("optionsRow").hidden = $("kind").value !== "choice"; };
+  $("clear").onclick = () => { $("form").reset(); $("id").value = ""; $("optionsRow").hidden = true; $("status").textContent = ""; };
+  $("form").onsubmit = async (ev) => {
+    ev.preventDefault();
+    const question = {
+      category: $("category").value, id: $("id").value, ask: $("ask").value, kind: $("kind").value,
+      options: $("options").value, unit: $("unit").value, worst_case: $("worst_case").value,
+      pickup_check: $("pickup_check").value, penalty: $("penalty").value, checks_attr: $("checks_attr").value,
+    };
+    try {
+      view = await api("/api/office/questions", { action: "save", question });
+      draw(); $("clear").onclick();
+      $("status").textContent = "Saved. Sellers in that category are asked it from now on."; $("status").className = "status ok";
+    } catch (e) { $("status").textContent = e.message; $("status").className = "status err"; }
+  };
+
+  api("/api/office/questions").then((v) => { view = v; draw(); $("optionsRow").hidden = true; })
+    .catch((e) => { $("list").textContent = e.message; });
+})();
+</script>
+</body>
+</html>

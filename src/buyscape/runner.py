@@ -50,6 +50,9 @@ class Case:
     # What the item said about itself, one record per protocol shot, and the
     # opening shots the seller declined. Both are inputs, never model output.
     testimony: list[Testimony] = field(default_factory=list)
+    # What the seller picked on the tenant's page, so staff questions for
+    # that category are still honoured after the reader renames the item.
+    tenant_category: str | None = None
     refused_slots: set[str] = field(default_factory=set)
     truth: dict = field(default_factory=dict)
 
@@ -134,6 +137,8 @@ def run_case(
     else:
         protocol = protocols.get(category) or protocols["generic"]
     category = protocol.category
+    if tenant is not None:
+        protocol = tenant.with_questions(protocol, case.tenant_category)
 
     # The item's own testimony, checked against itself, against the identity
     # the chain chose and against the catalogue. No model is asked whether the
