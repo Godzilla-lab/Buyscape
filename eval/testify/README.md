@@ -11,6 +11,7 @@ data already on disk:
 |---|---|
 | `items.jsonl` | One item per line: links, seller claims, answer key, hidden-risk seeds, and every recorded model pair's verdict |
 | `labels.yaml` | Hand labels for the BuyScrap adverts: tier, protocol and the item in a buyer's words |
+| `train_pool.jsonl` | Training data, never benchmark: dealers' brand new adverts, for teaching a model to name an item. Split `train` |
 
 ## Rules for this folder
 
@@ -32,9 +33,14 @@ data already on disk:
 |---|---|---|
 | Jiji, 6 branded categories | 178 | Rebuilt from the case reports in `docs/proof` |
 | BuyScrap, the tenant's own site | 56 | `uv run buyscape fetch-buyscrap` |
-| Jiji, small goods and material lots | 0 so far | `uv run buyscape testify-fetch`, run from an ordinary connection |
+| Jiji, small goods and material lots, second-hand only | 207 | `uv run buyscape testify-fetch`, run from an ordinary connection |
+
+`uv run buyscape testify-fetch --new-stock` fills the training pool: the same
+52 kinds, brand new adverts only, one photo each. The two pools never share an
+advert: the benchmark takes second-hand only, the pool takes new only, and
+`testify-convert` drops any pool item whose id is in the benchmark.
 
 Jiji answers cloud machines with a bot check. `testify-fetch` says so rather
 than failing silently. Run it from a home or office connection, the same way
-`fetch-testset` has always been run. It covers 26 kinds of item, from
-torchlights and standing fans to scrap copper and PET bottles.
+`fetch-testset` has always been run. It covers 52 kinds of item, from
+torchlights and tokunbo gearboxes to okrika bales and PET bottles.

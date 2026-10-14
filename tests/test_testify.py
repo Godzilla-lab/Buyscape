@@ -158,3 +158,31 @@ def test_skip_done_fetches_only_kinds_never_fetched(tmp_path, monkeypatch):
     (tmp_path / "rechargeable_torchlight.json").write_text("[]")
     fetch.build(tmp_path, only=("rechargeable torchlight", "tyres"), skip_done=True)
     assert set(asked) == {"tyres"}
+
+
+def test_new_stock_pool_and_benchmark_never_share_an_advert():
+    from buyscape.testify.fetch import keep, phrasings
+
+    new = {"condition": "Brand New", "title": "Standing fan"}
+    used = {"condition": "Used", "title": "Tokunbo standing fan"}
+    assert keep(new, "new") is None and keep(new, "used") == "brand new"
+    assert keep(used, "used") is None and keep(used, "new") == "second-hand"
+    assert keep({"condition": "Brand New", "title": "We buy fans"}, "new") == "buyer, not seller"
+    assert phrasings(("standing fan",), "new") == ["standing fan", "brand new standing fan"]
+
+
+def test_training_items_are_split_train(tmp_path):
+    import json
+
+    from buyscape.testify.convert import wider_items
+
+    raw = tmp_path / "eval" / "raw" / "testify_new"
+    raw.mkdir(parents=True)
+    (tmp_path / "protocols").symlink_to(ROOT / "protocols")
+    row = {"id": "n1", "tier": "small_goods", "kind": "standing fan", "title": "Ox fan",
+           "url": "/lagos/fan-n1.html", "media": ["n1/00.jpg"], "price_ngn": 30000,
+           "is_used": False, "condition": "Brand New", "description": "New"}
+    (raw / "standing_fan.json").write_text(json.dumps([row]))
+    [item] = wider_items(tmp_path, "testify_new")
+    assert item.split == "train"
+    assert item.photos.cache == "eval/raw/testify_new/media/n1/"

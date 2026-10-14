@@ -104,23 +104,36 @@ def _patiently(call, waits: tuple[float, ...] = (15.0, 60.0)):
     return None
 
 
-def phrasings(phrases: tuple[str, ...]) -> list[str]:
-    """Each phrase as written, then with every second-hand word in front."""
+def phrasings(phrases: tuple[str, ...], pool: str = "used") -> list[str]:
+    """Each phrase as written, then with every second-hand word in front.
+
+    The new-stock pool asks plainly and as "brand new", which is how dealers
+    title their adverts.
+    """
+    words = SECOND_HAND if pool == "used" else ("brand new",)
     out: list[str] = []
     for phrase in phrases:
         base = phrase.removeprefix("used ").strip()
-        for candidate in (phrase, *(f"{word} {base}" for word in SECOND_HAND)):
+        for candidate in (phrase, *(f"{word} {base}" for word in words)):
             if candidate not in out:
                 out.append(candidate)
     return out
 
 
-def keep(row: dict) -> str | None:
-    """Why an advert is left out, or None to keep it."""
-    if (row.get("condition") or "").strip().lower() == "brand new":
-        return "brand new"
+def keep(row: dict, pool: str = "used") -> str | None:
+    """Why an advert is left out of a pool, or None to keep it.
+
+    The used pool is the benchmark: second-hand adverts only. The new pool is
+    training data for naming an item, and takes dealers' new stock only, so
+    the two never share an advert.
+    """
     if WANTED.search(row.get("title") or ""):
         return "buyer, not seller"
+    is_new = (row.get("condition") or "").strip().lower() == "brand new"
+    if pool == "used" and is_new:
+        return "brand new"
+    if pool == "new" and not is_new:
+        return "second-hand"
     return None
 
 
@@ -132,6 +145,7 @@ def build(
     max_photos: int = 3,
     progress=None,
     skip_done: bool = False,
+    pool: str = "used",
 ) -> dict[str, dict[str, int]]:
     """Fetch every kind in every phrasing, keeping second-hand adverts only.
 
@@ -144,7 +158,7 @@ def build(
         k for k in KINDS
         if (not only or k[1] in only) and not (skip_done and (out_dir / f"{k[1].replace(' ', '_')}.json").exists())
     ]
-    total = sum(len(phrasings(k[2])) for k in chosen)
+    total = sum(len(phrasings(k[2], pool)) for k in chosen)
     done = 0
     with httpx.Client(headers={"User-Agent": UA}, timeout=30.0) as client:
         for tier, kind, phrases, words in chosen:
@@ -152,10 +166,10 @@ def build(
             seen: dict[str, dict] = {}
             if path.exists():
                 for row in json.loads(path.read_text()):
-                    if keep(row) is None:
+                    if keep(row, pool) is None:
                         seen[row["id"]] = row
-            tally = {"kept": 0, "brand new": 0, "buyer, not seller": 0, "timed out": 0}
-            for phrase in phrasings(phrases):
+            tally = {"kept": 0, "brand new": 0, "second-hand": 0, "buyer, not seller": 0, "timed out": 0}
+            for phrase in phrasings(phrases, pool):
                 q = Query(category=kind, query=phrase, must_include=words)
                 found = _patiently(lambda: fetch_category(q, per_phrase, region=region, max_pages=3, client=client))
                 if found is None:
@@ -165,7 +179,7 @@ def build(
                 for listing in found:
                     if listing.id in seen:
                         continue
-                    reason = keep(listing.to_json())
+                    reason = keep(listing.to_json(), pool)
                     if reason:
                         tally[reason] += 1
                     else:

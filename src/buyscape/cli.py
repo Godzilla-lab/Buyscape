@@ -577,25 +577,48 @@ def testify_convert(out: Path = typer.Option(ROOT / "eval" / "testify" / "items.
     splits = Counter(i.split for i in items)
     console.print(f"  dev {splits['dev']}, test {splits['test']}")
 
+    # Training pool: dealers' new stock, for naming items. An advert in the
+    # benchmark is never also a training example.
+    pool_path = out.parent / "train_pool.jsonl"
+    benchmark = {i.id for i in items}
+    pool = [i for i in convert.train_items(ROOT, previous=pool_path) if i.id not in benchmark]
+    convert.write(pool, pool_path)
+    console.print(f"{len(pool)} training items written to {pool_path}")
+    for kind, n in sorted(Counter(i.answer.kind for i in pool).items(), key=lambda kv: -kv[1])[:10]:
+        console.print(f"  {n:4d}  {kind}")
+
 
 @app.command("testify-fetch")
 def testify_fetch(
-    out: Path = typer.Option(ROOT / "eval" / "raw" / "testify"),
+    out: Path = typer.Option(None, help="Defaults to eval/raw/testify, or eval/raw/testify_new with --new-stock."),
     per_phrase: int = typer.Option(25, help="Adverts to keep per search phrasing."),
     only: list[str] = typer.Option(None, help="Fetch only these kinds, for example 'standing fan'."),
-    max_photos: int = typer.Option(3, help="Photos to download per advert. More is slower on a slow connection."),
+    max_photos: int = typer.Option(None, help="Photos per advert: 3 by default, 1 with --new-stock."),
     skip_done: bool = typer.Option(False, help="Only fetch kinds that have never been fetched."),
+    new_stock: bool = typer.Option(
+        False, help="Fetch dealers' brand new adverts instead, as training data for naming items. Never benchmark items."
+    ),
 ) -> None:
     """Cache Jiji adverts for small goods and material lots. Run from an ordinary connection."""
     from .testify import fetch as wider
 
+    pool = "new" if new_stock else "used"
+    out = out or ROOT / "eval" / "raw" / ("testify_new" if new_stock else "testify")
+    max_photos = max_photos or (1 if new_stock else 3)
     counts = wider.build(
-        out, per_phrase=per_phrase, only=tuple(only or ()), max_photos=max_photos, progress=console.print, skip_done=skip_done
+        out,
+        per_phrase=per_phrase,
+        only=tuple(only or ()),
+        max_photos=max_photos,
+        progress=console.print,
+        skip_done=skip_done,
+        pool=pool,
     )
-    console.print(f"{'kind':26s} {'kept':>5s} {'skipped new':>12s} {'skipped buyers':>15s} {'timed out':>10s}")
+    other = "second-hand" if new_stock else "brand new"
+    console.print(f"{'kind':26s} {'kept':>5s} {'skipped ' + other:>22s} {'skipped buyers':>15s} {'timed out':>10s}")
     for kind, t in counts.items():
         console.print(
-            f"{kind:26s} {t['kept']:5d} {t['brand new']:12d} {t['buyer, not seller']:15d} {t['timed out']:10d}"
+            f"{kind:26s} {t['kept']:5d} {t[other]:22d} {t['buyer, not seller']:15d} {t['timed out']:10d}"
         )
     if any(t["timed out"] for t in counts.values()):
         console.print("Some searches timed out. Run the same command again: it keeps what it has and fills the gaps.")

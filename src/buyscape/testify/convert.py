@@ -261,9 +261,14 @@ def buyscrap_items(root: Path) -> list[Item]:
     return items
 
 
-def wider_items(root: Path) -> list[Item]:
-    """Small goods and material lots fetched by `buyscape testify-fetch`."""
-    raw = root / "eval" / "raw" / "testify"
+def wider_items(root: Path, cache: str = "testify") -> list[Item]:
+    """Small goods and material lots fetched by `buyscape testify-fetch`.
+
+    From the testify_new cache, which holds dealers' new stock, every item is
+    split `train`: training data for naming an item, never a benchmark item.
+    """
+    raw = root / "eval" / "raw" / cache
+    training = cache != "testify"
     protocols = load_protocols(root / "protocols")
     items: list[Item] = []
     for row in wider.load(raw):
@@ -277,11 +282,11 @@ def wider_items(root: Path) -> list[Item]:
                 id=row["id"],
                 source="jiji",
                 url=f"https://jiji.ng{url}" if url.startswith("/") else url,
-                split=split_for(row["id"]),
+                split="train" if training else split_for(row["id"]),
                 tier="not_for_sale" if wanted else row["tier"],
                 photos=Photos(
                     count=len(row.get("media") or []),
-                    cache=f"eval/raw/testify/media/{row['id']}/",
+                    cache=f"eval/raw/{cache}/media/{row['id']}/",
                     note="Jiji photos, not ours to publish.",
                 ),
                 seller_text=row.get("description") or None,
@@ -301,6 +306,14 @@ def wider_items(root: Path) -> list[Item]:
             )
         )
     return items
+
+
+def train_items(root: Path, previous: Path | None = None) -> list[Item]:
+    """The new-stock training pool. Kept from the previous file when the
+    cache is not on this machine, like every other source."""
+    if wider.load(root / "eval" / "raw" / "testify_new"):
+        return sorted(wider_items(root, "testify_new"), key=lambda i: i.id)
+    return load_items(previous) if previous else []
 
 
 def _group(item: Item) -> str:

@@ -99,7 +99,7 @@ class Item(BaseModel):
     id: str
     source: Literal["jiji", "buyscrap", "staged"]
     url: str
-    split: Literal["dev", "test"]
+    split: Literal["dev", "test", "train"]
     tier: Tier
     market: str = "lagos"
     currency: str = "NGN"
