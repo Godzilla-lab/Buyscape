@@ -328,7 +328,7 @@ def all_items(root: Path, previous: Path | None = None) -> list[Item]:
     fresh = {
         "reports": jiji_items(root),
         "buyscrap": buyscrap_items(root) if (raw / "buyscrap" / "listings.json").exists() else None,
-        "wider": wider_items(root) if (raw / "testify").is_dir() and any((raw / "testify").glob("*.json")) else None,
+        "wider": wider_items(root) if wider.load(raw / "testify") else None,
     }
     kept = load_items(previous) if previous else []
     out: dict[str, Item] = {}

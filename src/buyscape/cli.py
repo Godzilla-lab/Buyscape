@@ -588,9 +588,13 @@ def testify_fetch(
     from .testify import fetch as wider
 
     counts = wider.build(out, per_phrase=per_phrase, only=tuple(only or ()))
-    console.print(f"{'kind':26s} {'kept':>5s} {'skipped new':>12s} {'skipped buyers':>15s}")
+    console.print(f"{'kind':26s} {'kept':>5s} {'skipped new':>12s} {'skipped buyers':>15s} {'timed out':>10s}")
     for kind, t in counts.items():
-        console.print(f"{kind:26s} {t['kept']:5d} {t['brand new']:12d} {t['buyer, not seller']:15d}")
+        console.print(
+            f"{kind:26s} {t['kept']:5d} {t['brand new']:12d} {t['buyer, not seller']:15d} {t['timed out']:10d}"
+        )
+    if any(t["timed out"] for t in counts.values()):
+        console.print("Some searches timed out. Run the same command again: it keeps what it has and fills the gaps.")
     if not any(t["kept"] for t in counts.values()):
         console.print("[red]Nothing fetched. Jiji may be answering with a bot check from this network.[/red]")
 

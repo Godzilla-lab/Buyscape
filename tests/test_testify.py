@@ -116,3 +116,35 @@ def test_fetch_asks_in_nigerian_second_hand_words_and_skips_new_and_buyers():
     assert keep({"condition": "Used", "title": "We Buy Scrap Batteries"}) == "buyer, not seller"
     assert keep({"condition": "Used", "title": "Scrap Buyer, Convert Your Scrap To Cash"}) == "buyer, not seller"
     assert keep({"condition": "Used", "title": "Tokunbo standing fan"}) is None
+
+
+def test_a_kaggle_metadata_file_beside_the_adverts_is_not_an_advert(tmp_path):
+    import json
+
+    from buyscape.testify.fetch import load
+
+    (tmp_path / "dataset-metadata.json").write_text(json.dumps({"title": "x", "id": "u/x"}))
+    (tmp_path / "fan.json").write_text(json.dumps([{"id": "a", "tier": "small_goods", "kind": "fan", "title": "Fan"}]))
+    (tmp_path / "broken.json").write_text("{not json")
+    assert [r["id"] for r in load(tmp_path)] == ["a"]
+
+
+def test_a_slow_jiji_is_retried_and_then_skipped_not_fatal():
+    import httpx
+
+    from buyscape.testify.fetch import _patiently
+
+    calls = []
+
+    def flaky():
+        calls.append(1)
+        if len(calls) < 2:
+            raise httpx.ReadTimeout("slow")
+        return ["ok"]
+
+    assert _patiently(flaky, waits=(0, 0)) == ["ok"]
+
+    def dead():
+        raise httpx.ReadTimeout("slow")
+
+    assert _patiently(dead, waits=(0, 0)) is None

@@ -14,6 +14,7 @@ fetched them, and only links and labels go into the benchmark.
 from __future__ import annotations
 
 import json
+import time
 from pathlib import Path
 
 import httpx
@@ -57,6 +58,22 @@ KINDS: tuple[tuple[Tier, str, tuple[str, ...], tuple[str, ...]], ...] = (
 )
 
 
+def _patiently(call, waits: tuple[float, ...] = (15.0, 60.0)):
+    """Run a fetch, waiting and retrying when Jiji is slow. None if it never answers.
+
+    A home connection drops a request now and then, and Jiji slows down a
+    client that asks too fast. Neither is a reason to lose an hour's fetch.
+    """
+    for wait in (*waits, None):
+        try:
+            return call()
+        except httpx.HTTPError:
+            if wait is None:
+                return None
+            time.sleep(wait)
+    return None
+
+
 def phrasings(phrases: tuple[str, ...]) -> list[str]:
     """Each phrase as written, then with every second-hand word in front."""
     out: list[str] = []
@@ -95,11 +112,15 @@ def build(out_dir: Path, per_phrase: int = 25, region: str = "lagos", only: tupl
                 for row in json.loads(path.read_text()):
                     if keep(row) is None:
                         seen[row["id"]] = row
-            tally = {"kept": 0, "brand new": 0, "buyer, not seller": 0}
+            tally = {"kept": 0, "brand new": 0, "buyer, not seller": 0, "timed out": 0}
             for phrase in phrasings(phrases):
                 q = Query(category=kind, query=phrase, must_include=words)
+                found = _patiently(lambda: fetch_category(q, per_phrase, region=region, max_pages=3, client=client))
+                if found is None:
+                    tally["timed out"] += 1
+                    continue
                 fresh = []
-                for listing in fetch_category(q, per_phrase, region=region, max_pages=3, client=client):
+                for listing in found:
                     if listing.id in seen:
                         continue
                     reason = keep(listing.to_json())
@@ -114,6 +135,8 @@ def build(out_dir: Path, per_phrase: int = 25, region: str = "lagos", only: tupl
                         row["tier"] = tier
                         row["kind"] = kind
                         seen[listing.id] = row
+                # Saved after every phrasing, so a stopped run loses one search at most.
+                path.write_text(json.dumps(list(seen.values()), indent=1))
             path.write_text(json.dumps(list(seen.values()), indent=1))
             tally["kept"] = len(seen)
             counts[kind] = tally
@@ -121,7 +144,14 @@ def build(out_dir: Path, per_phrase: int = 25, region: str = "lagos", only: tupl
 
 
 def load(out_dir: Path) -> list[dict]:
+    """Every cached advert. Other files in the folder, such as Kaggle's
+    dataset-metadata.json, are not adverts and are skipped."""
     rows: list[dict] = []
     for path in sorted(out_dir.glob("*.json")):
-        rows.extend(json.loads(path.read_text()))
+        try:
+            data = json.loads(path.read_text())
+        except json.JSONDecodeError:
+            continue
+        if isinstance(data, list):
+            rows.extend(r for r in data if isinstance(r, dict) and "tier" in r and "kind" in r)
     return rows
