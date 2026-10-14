@@ -22,6 +22,7 @@ from ..evalset import buyscrap
 from . import fetch as wider
 from ..protocols.schema import Protocol, load_protocols
 from .schema import (
+    WANTED,
     Answer,
     Baseline,
     Identity,
@@ -52,8 +53,6 @@ def redact(text: str | None) -> str | None:
     return _EMAIL.sub("[email]", _PHONE.sub("[phone]", text))
 
 
-# Adverts that ask to buy rather than offer to sell. They are not valuations.
-_WANTED = re.compile(r"\b(required|needed|wanted|we buy|buying)\b", re.I)
 
 
 def _claims(report: str) -> list[str]:
@@ -226,7 +225,7 @@ def buyscrap_items(root: Path) -> list[Item]:
     items: list[Item] = []
     for listing in buyscrap.load(raw):
         label = labels.get(listing.id, {})
-        wanted = bool(_WANTED.search(listing.title))
+        wanted = bool(WANTED.search(listing.title))
         tier = label.get("tier") or ("not_for_sale" if wanted else "small_goods")
         category = label.get("protocol")
         protocol = _protocol_for(category, protocols)
@@ -269,6 +268,8 @@ def wider_items(root: Path) -> list[Item]:
     items: list[Item] = []
     for row in wider.load(raw):
         category = "material_lot" if row["tier"] == "material_lot" else "generic"
+        # Most scrap adverts on Jiji are dealers asking to buy, not sellers.
+        wanted = bool(WANTED.search(row["title"]))
         protocol = _protocol_for(category, protocols)
         url = str(row.get("url") or "").split("?")[0]
         items.append(
@@ -277,7 +278,7 @@ def wider_items(root: Path) -> list[Item]:
                 source="jiji",
                 url=f"https://jiji.ng{url}" if url.startswith("/") else url,
                 split=split_for(row["id"]),
-                tier=row["tier"],
+                tier="not_for_sale" if wanted else row["tier"],
                 photos=Photos(
                     count=len(row.get("media") or []),
                     cache=f"eval/raw/testify/media/{row['id']}/",
@@ -291,7 +292,7 @@ def wider_items(root: Path) -> list[Item]:
                     identity=Identity(text=row["kind"], source="title"),
                     price=PriceTruth(
                         ngn=row.get("price_ngn"),
-                        kind="asking",
+                        kind="wanted" if wanted else "asking",
                         used=row.get("is_used"),
                         note=row.get("condition") or "",
                     ),

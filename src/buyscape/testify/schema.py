@@ -9,6 +9,7 @@ plate reading.
 from __future__ import annotations
 
 import hashlib
+import re
 from typing import Literal
 
 from pydantic import BaseModel, Field
@@ -16,6 +17,9 @@ from pydantic import BaseModel, Field
 Tier = Literal["branded_electronics", "small_goods", "material_lot", "adversarial", "not_for_sale"]
 Decision = Literal["price", "ask_for_proof", "cannot_identify", "no_price_data", "fraud_suspected"]
 PriceKind = Literal["settled", "sold", "asking", "wanted"]
+
+# Adverts that ask to buy rather than offer to sell. They are not valuations.
+WANTED = re.compile(r"\b(required|needed|wanted|we buy|buying|buyers?)\b", re.I)
 
 # Categories whose items carry a brand and model, against those named by type
 # or sold by weight. A category missing here is small goods: named by type.

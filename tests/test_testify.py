@@ -104,3 +104,15 @@ def test_a_source_missing_here_keeps_its_previous_items(tmp_path):
     ids = {i.id for i in items}
     assert "only-on-another-machine" in ids
     assert sum(i.source == "jiji" for i in items) == 178
+
+
+def test_fetch_asks_in_nigerian_second_hand_words_and_skips_new_and_buyers():
+    from buyscape.testify.fetch import keep, phrasings
+
+    assert phrasings(("used freezer",)) == [
+        "used freezer", "tokunbo freezer", "fairly used freezer", "uk used freezer",
+    ]
+    assert keep({"condition": "Brand New", "title": "Standing fan"}) == "brand new"
+    assert keep({"condition": "Used", "title": "We Buy Scrap Batteries"}) == "buyer, not seller"
+    assert keep({"condition": "Used", "title": "Scrap Buyer, Convert Your Scrap To Cash"}) == "buyer, not seller"
+    assert keep({"condition": "Used", "title": "Tokunbo standing fan"}) is None

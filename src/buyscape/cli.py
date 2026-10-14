@@ -588,9 +588,10 @@ def testify_fetch(
     from .testify import fetch as wider
 
     counts = wider.build(out, per_phrase=per_phrase, only=tuple(only or ()))
-    for kind, n in counts.items():
-        console.print(f"{kind:26s} {n}")
-    if not any(counts.values()):
+    console.print(f"{'kind':26s} {'kept':>5s} {'skipped new':>12s} {'skipped buyers':>15s}")
+    for kind, t in counts.items():
+        console.print(f"{kind:26s} {t['kept']:5d} {t['brand new']:12d} {t['buyer, not seller']:15d}")
+    if not any(t["kept"] for t in counts.values()):
         console.print("[red]Nothing fetched. Jiji may be answering with a bot check from this network.[/red]")
 
 
