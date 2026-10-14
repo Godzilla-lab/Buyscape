@@ -618,6 +618,12 @@ def testify_fetch(
         pool=pool,
         region=region,
     )
+    if not counts:
+        console.print(
+            f"Every kind is already fetched for {region}. Leave out --skip-done to refresh it, "
+            "or pick another city with --region."
+        )
+        return
     other = "second-hand" if new_stock else "brand new"
     console.print(f"{'kind':26s} {'kept':>5s} {'skipped ' + other:>22s} {'skipped buyers':>15s} {'timed out':>10s}")
     for kind, t in counts.items():
