@@ -39,3 +39,13 @@ def test_photos_are_found_inside_the_item_cache_folder(tmp_path):
     for name in ("01.webp", "00.webp"):
         (folder / name).write_bytes(b"x")
     assert [p.name for p in photos_for(item, tmp_path)] == ["00.webp", "01.webp"]
+
+
+def test_the_rule_decides_not_the_reviewers_vote():
+    from buyscape.testify.rules import drop_reason
+
+    assert drop_reason({"looks_actually_used": "no", "keep_in_benchmark": "keep"}) == "new stock, not second-hand"
+    assert drop_reason({"looks_actually_used": "yes", "photo_issues": ["stock_or_catalogue_photo"]})
+    assert drop_reason({"looks_actually_used": "yes", "tier": "not_for_sale"})
+    assert drop_reason({"looks_actually_used": "yes", "keep_in_benchmark": "drop", "drop_reason": "lot"}) == "lot"
+    assert drop_reason({"looks_actually_used": "yes", "photo_issues": ["watermark_or_logo"], "keep_in_benchmark": "keep"}) is None

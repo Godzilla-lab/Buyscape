@@ -284,11 +284,15 @@ def test_photo_review_drops_items_from_scoring_and_fixes_used():
     items = {i.id: i for i in load_items(ROOT / "eval" / "testify" / "items.jsonl")}
     reviews = yaml.safe_load((ROOT / "eval" / "testify" / "review_dev.yaml").read_text())
     assert len(reviews) == 100 and all(items[r["id"]].split == "dev" for r in reviews)
+    from buyscape.testify.rules import drop_reason
+
     for r in reviews:
         item = items[r["id"]]
-        assert (item.exclude is not None) == (r["keep_in_benchmark"] == "drop")
+        assert item.exclude == drop_reason(r)
+        if r["keep_in_benchmark"] == "drop":
+            assert item.exclude is not None
         if r["looks_actually_used"] == "no":
-            assert item.answer.price.used is False
+            assert item.answer.price.used is False and item.exclude is not None
 
 
 def test_advert_page_gives_every_photo_at_its_biggest_size():

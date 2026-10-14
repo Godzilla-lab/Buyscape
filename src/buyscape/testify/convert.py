@@ -20,6 +20,7 @@ import yaml
 
 from ..evalset import buyscrap
 from . import fetch as wider
+from .rules import drop_reason
 from ..protocols.schema import Protocol, load_protocols
 from .schema import (
     WANTED,
@@ -350,15 +351,16 @@ def all_items(root: Path, previous: Path | None = None) -> list[Item]:
         for item in items if items is not None else [i for i in kept if _group(i) == group]:
             out.setdefault(item.id, item)
     apply_reviews(out, root / "eval" / "testify" / "review_dev.yaml")
+    apply_ai_labels(out, root / "eval" / "testify" / "labels_ai" / f"{LABELLER}.jsonl")
     return sorted(out.values(), key=lambda i: (i.source, i.id))
 
 
 def apply_reviews(items: dict[str, Item], path: Path) -> None:
-    """Attach each photo review, and stop scoring what the review dropped.
+    """Attach each photo review, and stop scoring what the rule drops.
 
     A dropped item stays in the file with its reason, so the drop can be
-    argued with. An advert the review judged new stock is not a used price,
-    whatever the seller's condition tag said.
+    argued with. An advert judged new stock is not a used price, whatever
+    the seller's condition tag said.
     """
     if not path.exists():
         return
@@ -367,10 +369,40 @@ def apply_reviews(items: dict[str, Item], path: Path) -> None:
         if item is None:
             continue
         item.review = review
-        if review.get("keep_in_benchmark") == "drop":
-            item.exclude = review.get("drop_reason") or "dropped in photo review"
+        item.exclude = drop_reason(review)
         if review.get("looks_actually_used") == "no":
             item.answer.price.used = False
+
+
+# The model whose labels fill in where no hand review exists. It agreed with
+# the hand review on 88 of 100 keep or drop decisions once both were put
+# through the same rule (docs/research/failure-analysis.md).
+LABELLER = "gemini-3.5-flash-lite"
+
+
+def apply_ai_labels(items: dict[str, Item], path: Path) -> None:
+    """A model's photo check, for items no person or reviewer has looked at.
+
+    Its tier and kind replace the ones guessed from the search word, which
+    were wrong for most material lots. Where a hand review exists, the hand
+    review decides and the model's label is only attached.
+    """
+    if not path.exists():
+        return
+    for line in path.read_text().splitlines():
+        label = json.loads(line)
+        item = items.get(str(label.get("id")))
+        if item is None:
+            continue
+        item.ai_label = label
+        if item.split != "train" and label.get("tier") in Item.model_fields["tier"].annotation.__args__:
+            item.tier = label["tier"]
+        if label.get("kind"):
+            item.answer.kind = label["kind"]
+        if item.review is None:
+            item.exclude = drop_reason(label)
+            if label.get("looks_actually_used") == "no":
+                item.answer.price.used = False
 
 
 def write(items: list[Item], out: Path) -> None:

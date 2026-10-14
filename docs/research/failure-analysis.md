@@ -95,6 +95,32 @@ are natural "lie" items for the trick tier.
 - The failure groups above become the benchmark's **error categories**: every
   model's mistakes will be counted under them, not just as "wrong".
 
+## Can a model do this check? Agreement on the same 100
+
+Gemini 3.5 Flash Lite answered the same checklist for the same 100 items
+(`buyscape testify-label`), at about 5 seconds and 0.4 cents an item at list
+price. Agreement with the review, item by item:
+
+| Check | Agreement |
+|---|---|
+| Is the photo a stock or catalogue image | 95 of 100 |
+| Is it really second-hand | 86 of 100 |
+| Brand and model readable, or only the type | 76 of 100 |
+| Does the title match the photos | 69 of 100 |
+| Keep or drop, by each reviewer's own vote | 66 of 100 |
+| **Keep or drop, by the same rule applied to both** | **88 of 100** |
+
+The votes disagreed because both reviewers broke their own rule. Gemini
+judged an advert to be dealer stock and kept it anyway 33 times; the hand
+review did the same 12 times. So the decision no longer comes from a vote.
+It comes from the facts by one rule (`src/buyscape/testify/rules.py`): new
+stock, a photo that is not the seller's item, or a buyer's advert means drop.
+
+Of the 12 remaining disagreements, 11 are items the review drops and Gemini
+keeps, mostly bookshop stock it takes for used. So the model check is a
+little lenient: it should be spot-checked by a person before it is trusted
+on the test split.
+
 ## Next step
 
 Check every remaining item the same way, measure how often an AI reviewer

@@ -110,6 +110,7 @@ class Item(BaseModel):
     risks: list[RiskSeed] = Field(default_factory=list)
     baselines: dict[str, Baseline] = Field(default_factory=dict)
     review: dict | None = Field(None, description="Photo review from eval/testify/review_dev.yaml, when one exists.")
+    ai_label: dict | None = Field(None, description="A model's photo check from eval/testify/labels_ai/.")
     exclude: str | None = Field(None, description="Why the item is not scored, or None to score it.")
 
 
