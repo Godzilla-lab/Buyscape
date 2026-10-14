@@ -271,6 +271,8 @@ def page_photos(html: str, first_id: str | None = None, avatar_max: int = 100) -
     """
     best: dict[str, str] = {}
     order: list[str] = []
+    # The page's own JSON (images_data) writes its URLs with escaped slashes.
+    html = html.replace("\\u002F", "/").replace("\\/", "/")
     for match in _PIC.finditer(html):
         url, number = match.group(0), match.group(1)
         if _url_width(url) and _url_width(url) <= avatar_max:

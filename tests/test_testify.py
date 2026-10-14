@@ -312,3 +312,15 @@ def test_advert_page_gives_every_photo_at_its_biggest_size():
     assert page_photos(html, "200646914") == [
         pic(200646914, 620, 1102, "webp"), pic(200646915, 111, 197, "webp"), pic(200646917, 111, 197, "webp"),
     ]
+
+
+def test_advert_page_photos_written_with_escaped_slashes_are_read():
+    import base64
+
+    from buyscape.evalset.jiji import page_photos
+
+    token = base64.urlsafe_b64encode(b"1080-1920-6ed0811e07").decode().rstrip("=")
+    small = base64.urlsafe_b64encode(b"300-533-6ed0811e07").decode().rstrip("=")
+    html = (f'<img src="https://pictures-nigeria.jijistatic.net/200646915_{small}.jpg">'
+            f'"images_data":[{{"url":"https:\\/\\/pictures-nigeria.jijistatic.net\\/200646915_{token}.webp"}}]')
+    assert page_photos(html, "200646915") == [f"https://pictures-nigeria.jijistatic.net/200646915_{token}.webp"]
