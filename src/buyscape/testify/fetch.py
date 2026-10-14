@@ -54,7 +54,37 @@ KINDS: tuple[tuple[Tier, str, tuple[str, ...], tuple[str, ...]], ...] = (
     ("material_lot", "aluminium", ("scrap aluminium", "aluminium scrap"), ("alumin",)),
     ("material_lot", "car battery scrap", ("scrap battery", "used battery scrap"), ("scrap",)),
     ("material_lot", "carton and paper", ("used carton", "waste paper"), ("carton", "paper")),
-    ("material_lot", "plastic", ("plastic scrap", "pet bottles"), ("plastic", "pet")),
+    ("material_lot", "plastic", ("plastic scrap", "pet bottles"), ("plastic", " pet ")),
+    # Where Nigeria's second-hand trade actually is. The first fetch found no
+    # used fans, blenders or fridges on Jiji at all: those go through WhatsApp
+    # and scrap buyers. Tokunbo parts, tools, furniture and work equipment do
+    # trade used in public, so these kinds were added after it.
+    ("small_goods", "car engine", ("car engine", "engine for sale"), ("engine",)),
+    ("small_goods", "gearbox", ("gearbox", "gear box"), ("gearbox", "gear box")),
+    ("small_goods", "car headlamp", ("headlamp", "head light"), ("headlamp", "head lamp", "headlight", "head light")),
+    ("small_goods", "car alternator", ("alternator",), ("alternator",)),
+    ("small_goods", "tyres", ("tyres", "tires"), ("tyre", "tire")),
+    ("small_goods", "game console", ("ps4", "ps5", "xbox one"), ("ps4", "ps5", "playstation", "xbox")),
+    ("small_goods", "camera", ("dslr camera", "canon camera", "nikon camera"), ("camera", "canon", "nikon")),
+    ("small_goods", "drilling machine", ("drilling machine", "hand drill"), ("drill",)),
+    ("small_goods", "welding machine", ("welding machine",), ("welding",)),
+    ("small_goods", "bicycle", ("bicycle", "bike for sale"), ("bicycle", "bike")),
+    ("small_goods", "motorcycle", ("motorcycle", "okada bike"), ("motorcycle", "okada", "bajaj", "motor bike")),
+    ("small_goods", "wardrobe", ("wardrobe",), ("wardrobe",)),
+    ("small_goods", "bed frame", ("bed frame", "bed for sale"), ("bed",)),
+    ("small_goods", "dining table", ("dining table", "dining set"), ("dining",)),
+    ("small_goods", "office desk", ("office desk", "office table"), ("desk", "table")),
+    ("small_goods", "filing cabinet", ("filing cabinet", "steel cabinet"), ("cabinet",)),
+    ("small_goods", "salon equipment", ("salon chair", "hair dryer salon"), ("salon", "dryer")),
+    ("small_goods", "industrial sewing machine", ("industrial sewing machine", "embroidery machine"), ("sewing", "embroidery")),
+    ("small_goods", "printer", ("printer", "photocopier"), ("printer", "photocopier", "copier")),
+    ("small_goods", "keyboard instrument", ("yamaha keyboard", "piano keyboard"), ("keyboard", "piano")),
+    ("small_goods", "plastic drum", ("plastic drum", "200 litres drum"), ("drum",)),
+    ("small_goods", "gas cylinder", ("gas cylinder", "cooking gas cylinder"), ("cylinder",)),
+    ("material_lot", "used clothes bale", ("okrika bale", "bale of clothes"), ("bale", "okrika")),
+    ("material_lot", "pallets", ("wooden pallets", "pallets"), ("pallet",)),
+    ("material_lot", "scrap tyres", ("scrap tyres", "waste tyres"), ("tyre", "tire")),
+    ("material_lot", "used books", ("used books", "textbooks"), ("book",)),
 )
 
 
@@ -101,6 +131,7 @@ def build(
     only: tuple[str, ...] = (),
     max_photos: int = 3,
     progress=None,
+    skip_done: bool = False,
 ) -> dict[str, dict[str, int]]:
     """Fetch every kind in every phrasing, keeping second-hand adverts only.
 
@@ -109,7 +140,10 @@ def build(
     """
     out_dir.mkdir(parents=True, exist_ok=True)
     counts: dict[str, dict[str, int]] = {}
-    chosen = [k for k in KINDS if not only or k[1] in only]
+    chosen = [
+        k for k in KINDS
+        if (not only or k[1] in only) and not (skip_done and (out_dir / f"{k[1].replace(' ', '_')}.json").exists())
+    ]
     total = sum(len(phrasings(k[2])) for k in chosen)
     done = 0
     with httpx.Client(headers={"User-Agent": UA}, timeout=30.0) as client:

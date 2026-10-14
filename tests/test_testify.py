@@ -148,3 +148,13 @@ def test_a_slow_jiji_is_retried_and_then_skipped_not_fatal():
         raise httpx.ReadTimeout("slow")
 
     assert _patiently(dead, waits=(0, 0)) is None
+
+
+def test_skip_done_fetches_only_kinds_never_fetched(tmp_path, monkeypatch):
+    from buyscape.testify import fetch
+
+    asked = []
+    monkeypatch.setattr(fetch, "fetch_category", lambda q, *a, **k: asked.append(q.category) or [])
+    (tmp_path / "rechargeable_torchlight.json").write_text("[]")
+    fetch.build(tmp_path, only=("rechargeable torchlight", "tyres"), skip_done=True)
+    assert set(asked) == {"tyres"}
