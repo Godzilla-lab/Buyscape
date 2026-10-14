@@ -18,6 +18,7 @@ square brackets before sending. Nothing here has been sent.
 |---|---|---|---|
 | 1 | BuyScrap Nigeria | Past deals: photos, item, final price paid | Settled prices, the rarest data there is |
 | 2 | Scrapays, Pakam, Ecobarter | Weights and prices for paper, plastic and metal lots | Truth for the material tier |
+| 2b | Hinckley Recycling | E-waste intake: what dead devices weigh and pay as scrap | Truth for broken electronics, the tenant's biggest category |
 | 3 | Credlock | Phones valued as loan collateral | Phone values from real lending outcomes |
 | 4 | Cars45 | Car inspection reports with photos | The hidden condition, checked by an inspector |
 | 5 | Jiji | The largest used-goods market in Nigeria | Volume: tens of thousands of real adverts |
@@ -83,6 +84,49 @@ Would a 20 minute call next week work?
 Thank you,
 [Your name]
 [Phone] | [Email]
+
+---
+
+## 2b. Hinckley Recycling
+
+**Subject:** Research partnership: pricing broken electronics honestly
+
+Hello [name],
+
+I am building Buyscape, an open research project that measures how honestly AI
+models price second-hand goods from photos, focused on Nigeria. Its first user
+is BuyScrap, a Lagos scrap buyer whose largest category is e-waste.
+
+The hardest question we face is the one Hinckley answers every day: what is a
+dead laptop, phone, TV or UPS worth as scrap, and what does it weigh? We are
+asking for a sample of 200 to 500 past intake records with:
+- the type of device, and the brand and model where known
+- whether it worked
+- its weight
+- the price paid or the value recovered, and the date
+- a photo, if one was taken
+
+No customer details, please.
+
+Hinckley would be credited in the published benchmark and see the results
+first. The same tool could also help your intake team quote a collection from
+photos before a truck is sent.
+
+Would a 20 minute call work?
+
+Thank you,
+[Your name]
+[Phone] | [Email]
+
+---
+
+## Later: outside Nigeria
+
+**CoinAfrique** is the main classifieds site for Senegal, Cote d'Ivoire,
+Cameroon and Benin. It is reachable, and its robots.txt allows category pages
+but not search. Its terms have not been read yet. It is the natural second
+market once the Nigerian benchmark is done: the same kinds of item, in
+French, to test whether the engine works outside Nigeria.
 
 ---
 
