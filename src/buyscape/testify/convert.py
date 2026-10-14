@@ -283,6 +283,7 @@ def wider_items(root: Path, cache: str = "testify") -> list[Item]:
                 source="jiji",
                 url=f"https://jiji.ng{url}" if url.startswith("/") else url,
                 split="train" if training else split_for(row["id"]),
+                market=row.get("region") or "lagos",
                 tier="not_for_sale" if wanted else row["tier"],
                 photos=Photos(
                     count=len(row.get("media") or []),

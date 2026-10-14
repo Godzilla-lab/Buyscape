@@ -594,7 +594,10 @@ def testify_fetch(
     per_phrase: int = typer.Option(25, help="Adverts to keep per search phrasing."),
     only: list[str] = typer.Option(None, help="Fetch only these kinds, for example 'standing fan'."),
     max_photos: int = typer.Option(None, help="Photos per advert: 3 by default, 1 with --new-stock."),
-    skip_done: bool = typer.Option(False, help="Only fetch kinds that have never been fetched."),
+    skip_done: bool = typer.Option(False, help="Only fetch kinds never fetched for this city."),
+    region: str = typer.Option(
+        "lagos", help="Jiji city or state, as in its web address: lagos, abuja, rivers, oyo, ogun, kano."
+    ),
     new_stock: bool = typer.Option(
         False, help="Fetch dealers' brand new adverts instead, as training data for naming items. Never benchmark items."
     ),
@@ -613,6 +616,7 @@ def testify_fetch(
         progress=console.print,
         skip_done=skip_done,
         pool=pool,
+        region=region,
     )
     other = "second-hand" if new_stock else "brand new"
     console.print(f"{'kind':26s} {'kept':>5s} {'skipped ' + other:>22s} {'skipped buyers':>15s} {'timed out':>10s}")

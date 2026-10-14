@@ -186,3 +186,18 @@ def test_training_items_are_split_train(tmp_path):
     [item] = wider_items(tmp_path, "testify_new")
     assert item.split == "train"
     assert item.photos.cache == "eval/raw/testify_new/media/n1/"
+
+
+def test_each_city_is_fetched_once_and_lagos_history_counts(tmp_path, monkeypatch):
+    from buyscape.testify import fetch
+
+    asked = []
+    monkeypatch.setattr(fetch, "fetch_category", lambda q, *a, region="lagos", **k: asked.append(region) or [])
+    (tmp_path / "tyres.json").write_text("[]")
+    fetch.build(tmp_path, only=("tyres",), skip_done=True, region="lagos")
+    assert asked == []
+    fetch.build(tmp_path, only=("tyres",), skip_done=True, region="abuja")
+    assert set(asked) == {"abuja"}
+    asked.clear()
+    fetch.build(tmp_path, only=("tyres",), skip_done=True, region="abuja")
+    assert asked == []

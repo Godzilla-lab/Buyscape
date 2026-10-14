@@ -104,6 +104,22 @@ def _patiently(call, waits: tuple[float, ...] = (15.0, 60.0)):
     return None
 
 
+def _done(out_dir: Path, kind: str, region: str) -> bool:
+    """Whether this kind was fetched for this city. Each city shows different
+    adverts, so Lagos being done says nothing about Abuja. Lagos runs from
+    before cities were tracked left only the kind's file behind."""
+    slug = kind.replace(" ", "_")
+    if (out_dir / ".done" / region / slug).exists():
+        return True
+    return region == "lagos" and (out_dir / f"{slug}.json").exists()
+
+
+def _mark_done(out_dir: Path, kind: str, region: str) -> None:
+    marker = out_dir / ".done" / region / kind.replace(" ", "_")
+    marker.parent.mkdir(parents=True, exist_ok=True)
+    marker.touch()
+
+
 def phrasings(phrases: tuple[str, ...], pool: str = "used") -> list[str]:
     """Each phrase as written, then with every second-hand word in front.
 
@@ -154,10 +170,7 @@ def build(
     """
     out_dir.mkdir(parents=True, exist_ok=True)
     counts: dict[str, dict[str, int]] = {}
-    chosen = [
-        k for k in KINDS
-        if (not only or k[1] in only) and not (skip_done and (out_dir / f"{k[1].replace(' ', '_')}.json").exists())
-    ]
+    chosen = [k for k in KINDS if (not only or k[1] in only) and not (skip_done and _done(out_dir, k[1], region))]
     total = sum(len(phrasings(k[2], pool)) for k in chosen)
     done = 0
     with httpx.Client(headers={"User-Agent": UA}, timeout=30.0) as client:
@@ -194,6 +207,7 @@ def build(
                         row = listing.to_json()
                         row["tier"] = tier
                         row["kind"] = kind
+                        row["region"] = region
                         seen[listing.id] = row
                 # Saved after every phrasing, so a stopped run loses one search at most.
                 path.write_text(json.dumps(list(seen.values()), indent=1))
@@ -201,6 +215,7 @@ def build(
                 if progress:
                     progress(f"[{done}/{total}] {phrase}: {len(fresh)} new, {len(seen)} {kind} so far")
             path.write_text(json.dumps(list(seen.values()), indent=1))
+            _mark_done(out_dir, kind, region)
             tally["kept"] = len(seen)
             counts[kind] = tally
     return counts
