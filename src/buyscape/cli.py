@@ -583,11 +583,14 @@ def testify_fetch(
     out: Path = typer.Option(ROOT / "eval" / "raw" / "testify"),
     per_phrase: int = typer.Option(25, help="Adverts to keep per search phrasing."),
     only: list[str] = typer.Option(None, help="Fetch only these kinds, for example 'standing fan'."),
+    max_photos: int = typer.Option(3, help="Photos to download per advert. More is slower on a slow connection."),
 ) -> None:
     """Cache Jiji adverts for small goods and material lots. Run from an ordinary connection."""
     from .testify import fetch as wider
 
-    counts = wider.build(out, per_phrase=per_phrase, only=tuple(only or ()))
+    counts = wider.build(
+        out, per_phrase=per_phrase, only=tuple(only or ()), max_photos=max_photos, progress=console.print
+    )
     console.print(f"{'kind':26s} {'kept':>5s} {'skipped new':>12s} {'skipped buyers':>15s} {'timed out':>10s}")
     for kind, t in counts.items():
         console.print(
