@@ -276,3 +276,16 @@ def test_a_cached_thumbnail_advert_gets_its_bigger_photos(tmp_path, monkeypatch)
     assert counts["tyres"]["sharper photos"] == 1
     assert (tmp_path / "media" / "a1" / "00.jpg").read_bytes() == b"full"
     assert json.loads((tmp_path / "tyres.json").read_text())[0]["image_urls"] == [pic(1080)]
+
+
+def test_photo_review_drops_items_from_scoring_and_fixes_used():
+    from buyscape.testify.convert import load_items
+
+    items = {i.id: i for i in load_items(ROOT / "eval" / "testify" / "items.jsonl")}
+    reviews = yaml.safe_load((ROOT / "eval" / "testify" / "review_dev.yaml").read_text())
+    assert len(reviews) == 100 and all(items[r["id"]].split == "dev" for r in reviews)
+    for r in reviews:
+        item = items[r["id"]]
+        assert (item.exclude is not None) == (r["keep_in_benchmark"] == "drop")
+        if r["looks_actually_used"] == "no":
+            assert item.answer.price.used is False

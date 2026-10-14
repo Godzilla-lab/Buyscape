@@ -109,6 +109,8 @@ class Item(BaseModel):
     answer: Answer
     risks: list[RiskSeed] = Field(default_factory=list)
     baselines: dict[str, Baseline] = Field(default_factory=dict)
+    review: dict | None = Field(None, description="Photo review from eval/testify/review_dev.yaml, when one exists.")
+    exclude: str | None = Field(None, description="Why the item is not scored, or None to score it.")
 
 
 def split_for(item_id: str, dev_share: float = 0.25) -> Literal["dev", "test"]:
