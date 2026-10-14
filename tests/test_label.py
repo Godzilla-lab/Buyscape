@@ -28,3 +28,14 @@ def test_agreement_counts_only_shared_items():
     out = agreement(ai, ref)
     assert out["keep_in_benchmark"] == {"items": 2, "agree": 1, "rate": 0.5}
     assert out["stock_photo_flag"]["rate"] == 1.0
+
+
+def test_photos_are_found_inside_the_item_cache_folder(tmp_path):
+    from buyscape.testify.label import photos_for
+
+    item = next(i for i in load_items(ROOT / "eval" / "testify" / "items.jsonl") if i.source == "jiji" and i.photos.cache)
+    folder = tmp_path / item.photos.cache
+    folder.mkdir(parents=True)
+    for name in ("01.webp", "00.webp"):
+        (folder / name).write_bytes(b"x")
+    assert [p.name for p in photos_for(item, tmp_path)] == ["00.webp", "01.webp"]

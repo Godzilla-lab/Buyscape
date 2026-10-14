@@ -10,7 +10,6 @@ the review on the items both have seen.
 
 from __future__ import annotations
 
-import glob
 import json
 from pathlib import Path
 from typing import Literal
@@ -73,7 +72,8 @@ def photos_for(item: Item, root: Path) -> list[Path]:
         paths = [root / "eval" / "raw" / "buyscrap" / "media" / m for m in media]
     else:
         cache = item.photos.cache
-        paths = [Path(p) for p in sorted(glob.glob(str(root / cache) + "*"))] if cache else []
+        # The cache is a folder; Path drops its trailing slash, so list inside it.
+        paths = sorted((root / cache).glob("*")) if cache and (root / cache).is_dir() else []
     return [p for p in paths if p.is_file()]
 
 
