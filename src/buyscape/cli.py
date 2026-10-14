@@ -562,6 +562,38 @@ def fetch_buyscrap(out: Path = typer.Option(ROOT / "eval" / "raw" / "buyscrap"))
         console.print(f"  {n:3d}  {cat}")
 
 
+@app.command("testify-convert")
+def testify_convert(out: Path = typer.Option(ROOT / "eval" / "testify" / "items.jsonl")) -> None:
+    """Build Testify benchmark items from every cached source. Free: no model calls."""
+    from collections import Counter
+
+    from .testify import convert
+
+    items = convert.all_items(ROOT)
+    convert.write(items, out)
+    console.print(f"{len(items)} items written to {out}")
+    for (source, tier), n in sorted(Counter((i.source, i.tier) for i in items).items()):
+        console.print(f"  {n:4d}  {source:9s} {tier}")
+    splits = Counter(i.split for i in items)
+    console.print(f"  dev {splits['dev']}, test {splits['test']}")
+
+
+@app.command("testify-fetch")
+def testify_fetch(
+    out: Path = typer.Option(ROOT / "eval" / "raw" / "testify"),
+    per_phrase: int = typer.Option(25, help="Adverts to keep per search phrasing."),
+    only: list[str] = typer.Option(None, help="Fetch only these kinds, for example 'standing fan'."),
+) -> None:
+    """Cache Jiji adverts for small goods and material lots. Run from an ordinary connection."""
+    from .testify import fetch as wider
+
+    counts = wider.build(out, per_phrase=per_phrase, only=tuple(only or ()))
+    for kind, n in counts.items():
+        console.print(f"{kind:26s} {n}")
+    if not any(counts.values()):
+        console.print("[red]Nothing fetched. Jiji may be answering with a bot check from this network.[/red]")
+
+
 @app.command("spend")
 def spend_report(out: Path = typer.Option(ROOT / "docs" / "proof")) -> None:
     """What every run cost, per model pair, and what one item costs on each."""

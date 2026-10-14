@@ -68,6 +68,8 @@ money moves. The promise is "nothing hidden gets priced", not "we see inside".
     uv run buyscape fetch-buyscrap            cache the tenant's own adverts with photos
     uv run buyscape run --preset balanced --set buyscrap
     uv run buyscape spend                     every run's cost and the cost per item
+    uv run buyscape testify-convert           build the Testify benchmark items, free
+    uv run buyscape testify-fetch             cache Jiji small goods and material lots, from a home connection
     uv run buyscape ui                        seller page at /, back office at /office, staff questions at /office/questions, test bench at /bench
     uv run --group dev pytest
 
