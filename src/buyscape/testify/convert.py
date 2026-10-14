@@ -302,11 +302,38 @@ def wider_items(root: Path) -> list[Item]:
     return items
 
 
-def all_items(root: Path) -> list[Item]:
-    """Every source, deduped by id. The first source to name an id wins."""
+def _group(item: Item) -> str:
+    if item.source == "buyscrap":
+        return "buyscrap"
+    if (item.photos.cache or "").startswith("eval/raw/testify/"):
+        return "wider"
+    return "reports"
+
+
+def load_items(path: Path) -> list[Item]:
+    if not path.exists():
+        return []
+    return [Item.model_validate_json(line) for line in path.read_text().splitlines() if line.strip()]
+
+
+def all_items(root: Path, previous: Path | None = None) -> list[Item]:
+    """Every source, deduped by id. The first source to name an id wins.
+
+    A source whose cache is not on this machine keeps the items it had in the
+    previous file, so converting on a laptop that never fetched BuyScrap does
+    not quietly delete the BuyScrap items someone else fetched.
+    """
+    raw = root / "eval" / "raw"
+    fresh = {
+        "reports": jiji_items(root),
+        "buyscrap": buyscrap_items(root) if (raw / "buyscrap" / "listings.json").exists() else None,
+        "wider": wider_items(root) if (raw / "testify").is_dir() and any((raw / "testify").glob("*.json")) else None,
+    }
+    kept = load_items(previous) if previous else []
     out: dict[str, Item] = {}
-    for item in jiji_items(root) + buyscrap_items(root) + wider_items(root):
-        out.setdefault(item.id, item)
+    for group, items in fresh.items():
+        for item in items if items is not None else [i for i in kept if _group(i) == group]:
+            out.setdefault(item.id, item)
     return sorted(out.values(), key=lambda i: (i.source, i.id))
 
 

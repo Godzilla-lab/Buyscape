@@ -85,3 +85,22 @@ def test_released_items_hold_links_not_photos():
         assert item.photos.public is False
         assert item.url.startswith("https://")
         assert redact(item.seller_text) == item.seller_text
+
+
+def test_a_source_missing_here_keeps_its_previous_items(tmp_path):
+    from buyscape.testify.convert import all_items, write
+
+    root = tmp_path / "repo"
+    (root / "eval").mkdir(parents=True)
+    for name in ("protocols", "docs", "tenants"):
+        (root / name).symlink_to(ROOT / name)
+    (root / "eval" / "adjudications.yaml").symlink_to(ROOT / "eval" / "adjudications.yaml")
+    previous = tmp_path / "items.jsonl"
+    old = Item.model_validate_json((ROOT / "eval" / "testify" / "items.jsonl").read_text().splitlines()[0])
+    kept = old.model_copy(update={"id": "only-on-another-machine", "source": "buyscrap"})
+    write([kept], previous)
+
+    items = all_items(root, previous=previous)
+    ids = {i.id for i in items}
+    assert "only-on-another-machine" in ids
+    assert sum(i.source == "jiji" for i in items) == 178
