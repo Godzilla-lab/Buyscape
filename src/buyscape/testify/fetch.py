@@ -19,7 +19,7 @@ from pathlib import Path
 
 import httpx
 
-from ..evalset.jiji import UA, Query, download_media, fetch_category
+from ..evalset.jiji import UA, Query, _url_width, download_media, fetch_category, page_photos, photo_number
 from .schema import WANTED, Tier
 
 # The words Nigerian sellers use for second-hand. Tokunbo is foreign used.
@@ -104,6 +104,54 @@ def _patiently(call, waits: tuple[float, ...] = (15.0, 60.0)):
     return None
 
 
+# A word in front of a search is dropped for the rest of a run once it has
+# found nothing new this many times in a row. On the first city runs "used",
+# "tokunbo", "fairly used" and "UK used" found nothing on hundreds of
+# searches: Jiji answers them with the adverts the plain phrase already got.
+DRY_LIMIT = 8
+
+
+def _variants(phrases: tuple[str, ...], pool: str) -> list[tuple[str, str | None]]:
+    """Each phrasing with the word put in front of it, or None for the phrase as written."""
+    out: list[tuple[str, str | None]] = []
+    seen: set[str] = set()
+    words = SECOND_HAND if pool == "used" else ("brand new",)
+    for phrase in phrases:
+        base = phrase.removeprefix("used ").strip()
+        for candidate, word in ((phrase, None), *((f"{w} {base}", w) for w in words)):
+            if candidate not in seen:
+                seen.add(candidate)
+                out.append((candidate, word))
+    return out
+
+
+def _from_page(listing, client: httpx.Client) -> list[str]:
+    """The advert's photos read from its own page, or [] if the page fails."""
+    first = photo_number(listing.image_urls[0]) if listing.image_urls else None
+    try:
+        response = client.get("https://jiji.ng" + listing.url.split("?")[0] if listing.url.startswith("/") else listing.url)
+    except httpx.HTTPError:
+        return []
+    time.sleep(0.7)
+    return page_photos(response.text, first) if response.status_code == 200 else []
+
+
+def _thumbnails_only(row: dict) -> bool:
+    """Cached before the advert pages were read: every photo 300 pixels or less."""
+    widths = [_url_width(u) for u in row.get("image_urls") or []]
+    return bool(widths) and max(widths) <= 300
+
+
+def _sharper(new: list[str], old: list[str]) -> bool:
+    """Whether an advert now lists a bigger first photo than the cached one."""
+    return bool(new and old) and _url_width(new[0]) > max(_url_width(old[0]), 0) and _url_width(old[0]) > 0
+
+
+def _forget_photos(media: Path, row: dict) -> None:
+    for rel in row.get("media") or []:
+        (media / rel).unlink(missing_ok=True)
+
+
 def _done(out_dir: Path, kind: str, region: str) -> bool:
     """Whether this kind was fetched for this city. Each city shows different
     adverts, so Lagos being done says nothing about Abuja. Lagos runs from
@@ -126,15 +174,7 @@ def phrasings(phrases: tuple[str, ...], pool: str = "used") -> list[str]:
     The new-stock pool asks plainly and as "brand new", which is how dealers
     title their adverts.
     """
-    words = SECOND_HAND if pool == "used" else ("brand new",)
-    out: list[str] = []
-    for phrase in phrases:
-        base = phrase.removeprefix("used ").strip()
-        for candidate in (phrase, *(f"{word} {base}" for word in words)):
-            if candidate not in out:
-                out.append(candidate)
-    return out
-
+    return [candidate for candidate, _ in _variants(phrases, pool)]
 
 def keep(row: dict, pool: str = "used") -> str | None:
     """Why an advert is left out of a pool, or None to keep it.
@@ -173,6 +213,7 @@ def build(
     chosen = [k for k in KINDS if (not only or k[1] in only) and not (skip_done and _done(out_dir, k[1], region))]
     total = sum(len(phrasings(k[2], pool)) for k in chosen)
     done = 0
+    dry: dict[str, int] = {}
     with httpx.Client(headers={"User-Agent": UA}, timeout=30.0) as client:
         for tier, kind, phrases, words in chosen:
             path = out_dir / f"{kind.replace(' ', '_')}.json"
@@ -181,8 +222,11 @@ def build(
                 for row in json.loads(path.read_text()):
                     if keep(row, pool) is None:
                         seen[row["id"]] = row
-            tally = {"kept": 0, "brand new": 0, "second-hand": 0, "buyer, not seller": 0, "timed out": 0}
-            for phrase in phrasings(phrases, pool):
+            tally = {"kept": 0, "brand new": 0, "second-hand": 0, "buyer, not seller": 0, "timed out": 0, "sharper photos": 0}
+            for phrase, word in _variants(phrases, pool):
+                if word and dry.get(word, 0) >= DRY_LIMIT:
+                    done += 1
+                    continue
                 q = Query(category=kind, query=phrase, must_include=words)
                 found = _patiently(lambda: fetch_category(q, per_phrase, region=region, max_pages=3, client=client))
                 if found is None:
@@ -191,16 +235,29 @@ def build(
                 fresh = []
                 for listing in found:
                     if listing.id in seen:
+                        # Fetched before with thumbnails: take the bigger photos now offered.
+                        old = seen[listing.id]
+                        if listing.url and _thumbnails_only(old):
+                            listing.image_urls = _from_page(listing, client) or listing.image_urls
+                        if _sharper(listing.image_urls, old.get("image_urls") or []):
+                            _forget_photos(out_dir / "media", old)
+                            listing.image_urls = listing.image_urls[:max_photos]
+                            download_media([listing], out_dir / "media", client=client)
+                            if listing.media:
+                                old["image_urls"], old["media"] = listing.image_urls, listing.media
+                                tally["sharper photos"] += 1
                         continue
                     reason = keep(listing.to_json(), pool)
                     if reason:
                         tally[reason] += 1
                     else:
                         fresh.append(listing)
+                # The advert's own page has all its photos, and a bigger first one.
+                for listing in fresh:
+                    bigger = _from_page(listing, client) if listing.url else []
+                    listing.image_urls = (bigger or listing.image_urls)[:max_photos]
                 # Three photos tell what an item is and show its condition. Eight
                 # cost a slow connection hours for little more.
-                for listing in fresh:
-                    listing.image_urls = listing.image_urls[:max_photos]
                 download_media(fresh, out_dir / "media", client=client)
                 for listing in fresh:
                     if listing.media and listing.id not in seen:
@@ -212,6 +269,10 @@ def build(
                 # Saved after every phrasing, so a stopped run loses one search at most.
                 path.write_text(json.dumps(list(seen.values()), indent=1))
                 done += 1
+                if word:
+                    dry[word] = 0 if fresh else dry.get(word, 0) + 1
+                    if dry[word] == DRY_LIMIT and progress:
+                        progress(f"'{word}' found nothing new {DRY_LIMIT} times running; dropped for the rest of this run")
                 if progress:
                     progress(f"[{done}/{total}] {phrase}: {len(fresh)} new, {len(seen)} {kind} so far")
             path.write_text(json.dumps(list(seen.values()), indent=1))

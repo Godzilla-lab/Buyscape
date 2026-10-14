@@ -624,6 +624,9 @@ def testify_fetch(
         console.print(
             f"{kind:26s} {t['kept']:5d} {t[other]:22d} {t['buyer, not seller']:15d} {t['timed out']:10d}"
         )
+    sharper = sum(t.get("sharper photos", 0) for t in counts.values())
+    if sharper:
+        console.print(f"{sharper} adverts fetched before as thumbnails now have full-size photos.")
     if any(t["timed out"] for t in counts.values()):
         console.print("Some searches timed out. Run the same command again: it keeps what it has and fills the gaps.")
     if not any(t["kept"] for t in counts.values()):

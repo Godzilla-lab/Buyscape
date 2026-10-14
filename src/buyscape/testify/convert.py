@@ -349,7 +349,28 @@ def all_items(root: Path, previous: Path | None = None) -> list[Item]:
     for group, items in fresh.items():
         for item in items if items is not None else [i for i in kept if _group(i) == group]:
             out.setdefault(item.id, item)
+    apply_reviews(out, root / "eval" / "testify" / "review_dev.yaml")
     return sorted(out.values(), key=lambda i: (i.source, i.id))
+
+
+def apply_reviews(items: dict[str, Item], path: Path) -> None:
+    """Attach each photo review, and stop scoring what the review dropped.
+
+    A dropped item stays in the file with its reason, so the drop can be
+    argued with. An advert the review judged new stock is not a used price,
+    whatever the seller's condition tag said.
+    """
+    if not path.exists():
+        return
+    for review in yaml.safe_load(path.read_text()) or []:
+        item = items.get(str(review.get("id")))
+        if item is None:
+            continue
+        item.review = review
+        if review.get("keep_in_benchmark") == "drop":
+            item.exclude = review.get("drop_reason") or "dropped in photo review"
+        if review.get("looks_actually_used") == "no":
+            item.answer.price.used = False
 
 
 def write(items: list[Item], out: Path) -> None:
