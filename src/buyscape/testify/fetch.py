@@ -19,7 +19,7 @@ from pathlib import Path
 
 import httpx
 
-from ..evalset.jiji import UA, Query, download_media, fetch_category
+from ..evalset.jiji import UA, Query, _url_width, download_media, fetch_category
 from .schema import WANTED, Tier
 
 # The words Nigerian sellers use for second-hand. Tokunbo is foreign used.
@@ -125,6 +125,16 @@ def _variants(phrases: tuple[str, ...], pool: str) -> list[tuple[str, str | None
     return out
 
 
+def _sharper(new: list[str], old: list[str]) -> bool:
+    """Whether an advert now lists a bigger first photo than the cached one."""
+    return bool(new and old) and _url_width(new[0]) > max(_url_width(old[0]), 0) and _url_width(old[0]) > 0
+
+
+def _forget_photos(media: Path, row: dict) -> None:
+    for rel in row.get("media") or []:
+        (media / rel).unlink(missing_ok=True)
+
+
 def _done(out_dir: Path, kind: str, region: str) -> bool:
     """Whether this kind was fetched for this city. Each city shows different
     adverts, so Lagos being done says nothing about Abuja. Lagos runs from
@@ -195,7 +205,7 @@ def build(
                 for row in json.loads(path.read_text()):
                     if keep(row, pool) is None:
                         seen[row["id"]] = row
-            tally = {"kept": 0, "brand new": 0, "second-hand": 0, "buyer, not seller": 0, "timed out": 0}
+            tally = {"kept": 0, "brand new": 0, "second-hand": 0, "buyer, not seller": 0, "timed out": 0, "sharper photos": 0}
             for phrase, word in _variants(phrases, pool):
                 if word and dry.get(word, 0) >= DRY_LIMIT:
                     done += 1
@@ -208,6 +218,15 @@ def build(
                 fresh = []
                 for listing in found:
                     if listing.id in seen:
+                        # Fetched before with thumbnails: take the bigger photos now offered.
+                        old = seen[listing.id]
+                        if _sharper(listing.image_urls, old.get("image_urls") or []):
+                            _forget_photos(out_dir / "media", old)
+                            listing.image_urls = listing.image_urls[:max_photos]
+                            download_media([listing], out_dir / "media", client=client)
+                            if listing.media:
+                                old["image_urls"], old["media"] = listing.image_urls, listing.media
+                                tally["sharper photos"] += 1
                         continue
                     reason = keep(listing.to_json(), pool)
                     if reason:

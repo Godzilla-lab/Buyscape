@@ -15,6 +15,7 @@ not evidence about what a second-hand unit fetches.
 
 from __future__ import annotations
 
+import base64
 import json
 import time
 from dataclasses import dataclass, field
@@ -129,18 +130,57 @@ def _attrs(advert: dict) -> dict[str, str]:
     return out
 
 
+def _url_width(url: str) -> int:
+    """The width Jiji writes into a picture's name, 0 when it does not.
+
+    A Jiji picture is named <id>_<base64 of "W-H-hash-n">.jpg, so the size
+    can be read without downloading it. The sizes are signed: a URL with a
+    width we make up is refused, so the only way to a big photo is to take
+    the biggest one the advert itself lists.
+    """
+    stem = url.rsplit("/", 1)[-1].split(".", 1)[0]
+    if "_" not in stem:
+        return 0
+    token = stem.split("_", 1)[1]
+    try:
+        decoded = base64.urlsafe_b64decode(token + "=" * (-len(token) % 4)).decode("ascii", "ignore")
+        return int(decoded.split("-", 1)[0])
+    except ValueError:
+        return 0
+
+
+def _urls_in(value) -> list[str]:
+    if isinstance(value, str):
+        return [value] if value.startswith("http") else []
+    if isinstance(value, dict):
+        return [u for v in value.values() for u in _urls_in(v)]
+    if isinstance(value, list):
+        return [u for v in value for u in _urls_in(v)]
+    return []
+
+
+def _largest(value) -> str | None:
+    """The biggest picture among every URL an image entry lists.
+
+    The first fetches took each entry's "url", which is a 300 pixel
+    thumbnail: too small to read a rating plate. Unsized URLs rank after
+    sized ones, in the order the entry lists them.
+    """
+    urls = _urls_in(value)
+    if not urls:
+        return None
+    return max(urls, key=lambda u: (_url_width(u), -urls.index(u)))
+
+
 def _image_urls(advert: dict) -> list[str]:
     urls: list[str] = []
     for img in advert.get("images") or []:
-        if isinstance(img, dict):
-            url = img.get("url") or img.get("full") or img.get("origin")
-            if url:
-                urls.append(str(url))
-        elif isinstance(img, str):
-            urls.append(img)
-    main = (advert.get("image_obj") or {}).get("url")
-    if main and main not in urls:
-        urls.insert(0, str(main))
+        url = _largest(img)
+        if url and url not in urls:
+            urls.append(url)
+    main = _largest(advert.get("image_obj") or {})
+    if main and main not in urls and not urls:
+        urls.insert(0, main)
     return urls
 
 

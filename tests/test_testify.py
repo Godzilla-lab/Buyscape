@@ -225,3 +225,54 @@ def test_a_search_word_that_keeps_finding_nothing_is_dropped(tmp_path, monkeypat
     plain = [q for q in asked if not q.split()[0] in ("used", "tokunbo", "fairly", "uk")]
     assert len(tokunbo) == fetch.DRY_LIMIT
     assert len(plain) >= 6
+
+
+def test_jiji_photos_take_the_largest_size_an_advert_lists():
+    import base64
+
+    from buyscape.evalset.jiji import _image_urls, _url_width
+
+    def pic(w, h):
+        token = base64.urlsafe_b64encode(f"{w}-{h}-abc123-2".encode()).decode().rstrip("=")
+        return f"https://pictures-nigeria.jijistatic.net/1_{token}.jpg"
+
+    assert _url_width(pic(300, 225)) == 300
+    assert _url_width("https://example.com/plain.jpg") == 0
+    advert = {
+        "images": [{"url": pic(300, 225), "full": pic(1080, 810), "small": pic(150, 110)}, pic(640, 480)],
+        "image_obj": {"url": pic(300, 225)},
+    }
+    assert _image_urls(advert) == [pic(1080, 810), pic(640, 480)]
+    assert _image_urls({"image_obj": {"url": pic(300, 225)}}) == [pic(300, 225)]
+
+
+def test_a_cached_thumbnail_advert_gets_its_bigger_photos(tmp_path, monkeypatch):
+    import base64
+    import json
+
+    from buyscape.evalset.jiji import Listing
+    from buyscape.testify import fetch
+
+    def pic(w):
+        token = base64.urlsafe_b64encode(f"{w}-{w}-abc-2".encode()).decode().rstrip("=")
+        return f"https://pictures-nigeria.jijistatic.net/9_{token}.jpg"
+
+    (tmp_path / "media" / "a1").mkdir(parents=True)
+    (tmp_path / "media" / "a1" / "00.jpg").write_bytes(b"thumb")
+    row = {"id": "a1", "tier": "small_goods", "kind": "tyres", "title": "Tyre", "condition": "Used",
+           "image_urls": [pic(300)], "media": ["a1/00.jpg"]}
+    (tmp_path / "tyres.json").write_text(json.dumps([row]))
+    big = Listing(id="a1", category="tyres", title="Tyre", price_ngn=1, description="", condition="Used",
+                  is_used=True, attrs={}, image_urls=[pic(1080)], url="", fetched_at="")
+    monkeypatch.setattr(fetch, "fetch_category", lambda *a, **k: [big])
+
+    def save(listings, root, client=None):
+        for l in listings:
+            (root / l.id / "00.jpg").write_bytes(b"full")
+            l.media = [f"{l.id}/00.jpg"]
+
+    monkeypatch.setattr(fetch, "download_media", save)
+    counts = fetch.build(tmp_path, only=("tyres",))
+    assert counts["tyres"]["sharper photos"] == 1
+    assert (tmp_path / "media" / "a1" / "00.jpg").read_bytes() == b"full"
+    assert json.loads((tmp_path / "tyres.json").read_text())[0]["image_urls"] == [pic(1080)]
