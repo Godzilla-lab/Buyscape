@@ -94,7 +94,14 @@ def keep(row: dict) -> str | None:
     return None
 
 
-def build(out_dir: Path, per_phrase: int = 25, region: str = "lagos", only: tuple[str, ...] = ()) -> dict[str, dict[str, int]]:
+def build(
+    out_dir: Path,
+    per_phrase: int = 25,
+    region: str = "lagos",
+    only: tuple[str, ...] = (),
+    max_photos: int = 3,
+    progress=None,
+) -> dict[str, dict[str, int]]:
     """Fetch every kind in every phrasing, keeping second-hand adverts only.
 
     Adds to what is already cached, so a rerun only grows the set. New stock
@@ -102,10 +109,11 @@ def build(out_dir: Path, per_phrase: int = 25, region: str = "lagos", only: tupl
     """
     out_dir.mkdir(parents=True, exist_ok=True)
     counts: dict[str, dict[str, int]] = {}
+    chosen = [k for k in KINDS if not only or k[1] in only]
+    total = sum(len(phrasings(k[2])) for k in chosen)
+    done = 0
     with httpx.Client(headers={"User-Agent": UA}, timeout=30.0) as client:
-        for tier, kind, phrases, words in KINDS:
-            if only and kind not in only:
-                continue
+        for tier, kind, phrases, words in chosen:
             path = out_dir / f"{kind.replace(' ', '_')}.json"
             seen: dict[str, dict] = {}
             if path.exists():
@@ -128,6 +136,10 @@ def build(out_dir: Path, per_phrase: int = 25, region: str = "lagos", only: tupl
                         tally[reason] += 1
                     else:
                         fresh.append(listing)
+                # Three photos tell what an item is and show its condition. Eight
+                # cost a slow connection hours for little more.
+                for listing in fresh:
+                    listing.image_urls = listing.image_urls[:max_photos]
                 download_media(fresh, out_dir / "media", client=client)
                 for listing in fresh:
                     if listing.media and listing.id not in seen:
@@ -137,6 +149,9 @@ def build(out_dir: Path, per_phrase: int = 25, region: str = "lagos", only: tupl
                         seen[listing.id] = row
                 # Saved after every phrasing, so a stopped run loses one search at most.
                 path.write_text(json.dumps(list(seen.values()), indent=1))
+                done += 1
+                if progress:
+                    progress(f"[{done}/{total}] {phrase}: {len(fresh)} new, {len(seen)} {kind} so far")
             path.write_text(json.dumps(list(seen.values()), indent=1))
             tally["kept"] = len(seen)
             counts[kind] = tally
