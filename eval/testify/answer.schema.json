@@ -1,0 +1,218 @@
+{
+ "$defs": {
+  "ClaimAnswer": {
+   "properties": {
+    "claim": {
+     "description": "The seller's statement, quoted or shortened.",
+     "title": "Claim",
+     "type": "string"
+    },
+    "verdict": {
+     "enum": [
+      "supported",
+      "contradicted",
+      "unverified",
+      "unverifiable_remote"
+     ],
+     "title": "Verdict",
+     "type": "string"
+    },
+    "evidence": {
+     "default": "",
+     "description": "The photo that proves or contradicts it, or what is missing.",
+     "title": "Evidence",
+     "type": "string"
+    }
+   },
+   "required": [
+    "claim",
+    "verdict"
+   ],
+   "title": "ClaimAnswer",
+   "type": "object"
+  },
+  "IdentityAnswer": {
+   "properties": {
+    "status": {
+     "description": "named: a brand and model read off the item. by_type: a kind in a buyer's words, for items that carry no model. unknown: the photos do not say.",
+     "enum": [
+      "named",
+      "by_type",
+      "unknown"
+     ],
+     "title": "Status",
+     "type": "string"
+    },
+    "kind": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "description": "The item in a buyer's words, for example 'standing fan'.",
+     "title": "Kind"
+    },
+    "brand": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Brand"
+    },
+    "model": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Model"
+    },
+    "read_from": {
+     "description": "Where the identity was read: 'photo 2 plate', 'photo 1 screen'. Never the seller's text alone.",
+     "items": {
+      "type": "string"
+     },
+     "title": "Read From",
+     "type": "array"
+    }
+   },
+   "required": [
+    "status"
+   ],
+   "title": "IdentityAnswer",
+   "type": "object"
+  },
+  "PricePick": {
+   "properties": {
+    "low": {
+     "description": "Number of the comparable to use as the low end.",
+     "minimum": 0,
+     "title": "Low",
+     "type": "integer"
+    },
+    "high": {
+     "description": "Number of the comparable to use as the high end.",
+     "minimum": 0,
+     "title": "High",
+     "type": "integer"
+    }
+   },
+   "required": [
+    "low",
+    "high"
+   ],
+   "title": "PricePick",
+   "type": "object"
+  },
+  "RiskAnswer": {
+   "properties": {
+    "risk": {
+     "description": "Something that could be wrong and that the photos cannot show.",
+     "title": "Risk",
+     "type": "string"
+    },
+    "proof": {
+     "description": "The one shot, screenshot or clip that would settle it.",
+     "title": "Proof",
+     "type": "string"
+    },
+    "if_unproven": {
+     "description": "How it is priced until proven, for example 'as not working'.",
+     "title": "If Unproven",
+     "type": "string"
+    }
+   },
+   "required": [
+    "risk",
+    "proof",
+    "if_unproven"
+   ],
+   "title": "RiskAnswer",
+   "type": "object"
+  }
+ },
+ "properties": {
+  "observations": {
+   "description": "What the photos show, before any decision. Short lines.",
+   "items": {
+    "type": "string"
+   },
+   "title": "Observations",
+   "type": "array"
+  },
+  "identity": {
+   "$ref": "#/$defs/IdentityAnswer"
+  },
+  "claims": {
+   "items": {
+    "$ref": "#/$defs/ClaimAnswer"
+   },
+   "title": "Claims",
+   "type": "array"
+  },
+  "risks": {
+   "items": {
+    "$ref": "#/$defs/RiskAnswer"
+   },
+   "title": "Risks",
+   "type": "array"
+  },
+  "proof_requests": {
+   "description": "What to ask the seller for next, most decisive first.",
+   "items": {
+    "type": "string"
+   },
+   "title": "Proof Requests",
+   "type": "array"
+  },
+  "decision": {
+   "enum": [
+    "price",
+    "ask_for_proof",
+    "cannot_identify",
+    "no_price_data",
+    "fraud_suspected"
+   ],
+   "title": "Decision",
+   "type": "string"
+  },
+  "reason": {
+   "description": "One or two sentences. No prices.",
+   "title": "Reason",
+   "type": "string"
+  },
+  "price_pick": {
+   "anyOf": [
+    {
+     "$ref": "#/$defs/PricePick"
+    },
+    {
+     "type": "null"
+    }
+   ],
+   "default": null,
+   "description": "Only when decision is price: comparables sorted cheapest first, picked by number."
+  }
+ },
+ "required": [
+  "observations",
+  "identity",
+  "decision",
+  "reason"
+ ],
+ "title": "InspectionAnswer",
+ "type": "object"
+}
