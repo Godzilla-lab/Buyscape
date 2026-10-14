@@ -588,6 +588,68 @@ def testify_convert(out: Path = typer.Option(ROOT / "eval" / "testify" / "items.
         console.print(f"  {n:4d}  {kind}")
 
 
+@app.command("testify-label")
+def testify_label(
+    model: str = typer.Option("gemini-3.8-flash", help="Labelling model. A name with no slash is Google AI Studio."),
+    split: str = typer.Option("dev", help="dev, test or all."),
+    reviewed_only: bool = typer.Option(False, help="Only items the hand review covered, to measure agreement first."),
+    limit: int = typer.Option(0, help="Stop after this many items; 0 for no limit."),
+    budget_usd: float = typer.Option(0.5, help="Stop once list-price spend reaches this."),
+    mode: str = typer.Option("auto", help="record | replay | auto"),
+    fixtures: Path = typer.Option(Path("eval/fixtures")),
+) -> None:
+    """Check benchmark items photo by photo with a model, and compare it with the hand review."""
+    import yaml as _yaml
+
+    from .testify import label
+    from .testify.convert import load_items
+
+    _load_dotenv()
+    if not os.environ.get("GOOGLE_API_KEY") and os.environ.get("GEMINI_API_KEY"):
+        os.environ["GOOGLE_API_KEY"] = os.environ["GEMINI_API_KEY"]
+    provider = _provider(model, fixtures, mode)
+    reviews = {
+        str(r["id"]): r
+        for r in _yaml.safe_load((ROOT / "eval" / "testify" / "review_dev.yaml").read_text()) or []
+    }
+    items = [
+        i for i in load_items(ROOT / "eval" / "testify" / "items.jsonl")
+        if (split == "all" or i.split == split) and (not reviewed_only or i.id in reviews)
+    ]
+    out_path = ROOT / "eval" / "testify" / "labels_ai" / f"{model.replace('/', '_')}.jsonl"
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    done = {json.loads(l)["id"]: json.loads(l) for l in out_path.read_text().splitlines()} if out_path.exists() else {}
+    spend, called, skipped = 0.0, 0, 0
+    for item in items:
+        if limit and called >= limit:
+            break
+        if spend >= budget_usd:
+            console.print(f"[yellow]Stopped at the {budget_usd} USD budget.[/yellow]")
+            break
+        photos = label.photos_for(item, ROOT)
+        if not photos:
+            skipped += 1
+            continue
+        try:
+            answer, meta = provider.structured_call(label.request_for(item, photos))
+        except Exception as exc:  # a failed item is reported, never guessed
+            console.print(f"[red]{item.id}: {type(exc).__name__}: {str(exc)[:160]}[/red]")
+            continue
+        called += 1
+        spend += 0.0 if meta.replayed else meta.cost_usd
+        done[item.id] = {"id": item.id, "model": model, "prompt_version": label.PROMPT_VERSION, **answer.model_dump()}
+        out_path.write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in sorted(done.values(), key=lambda r: r["id"])))
+    console.print(f"{called} items labelled, {skipped} without photos here, list-price spend {spend:.4f} USD")
+    for name, row in label.agreement(done, reviews).items():
+        console.print(f"  agreement with the hand review, {name}: {row['agree']}/{row['items']} = {row['rate']}")
+    ledger = ROOT / "docs" / "proof" / "spend.jsonl"
+    with ledger.open("a") as fh:
+        fh.write(json.dumps({
+            "at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "task": "testify-label",
+            "model": model, "mode": mode, "cases": called, "spend_usd": round(spend, 4),
+        }) + "\n")
+
+
 @app.command("testify-fetch")
 def testify_fetch(
     out: Path = typer.Option(None, help="Defaults to eval/raw/testify, or eval/raw/testify_new with --new-stock."),
