@@ -19,7 +19,7 @@ from pathlib import Path
 
 import httpx
 
-from ..evalset.jiji import UA, Query, _url_width, download_media, fetch_category
+from ..evalset.jiji import UA, Query, _url_width, download_media, fetch_category, page_photos, photo_number
 from .schema import WANTED, Tier
 
 # The words Nigerian sellers use for second-hand. Tokunbo is foreign used.
@@ -125,6 +125,23 @@ def _variants(phrases: tuple[str, ...], pool: str) -> list[tuple[str, str | None
     return out
 
 
+def _from_page(listing, client: httpx.Client) -> list[str]:
+    """The advert's photos read from its own page, or [] if the page fails."""
+    first = photo_number(listing.image_urls[0]) if listing.image_urls else None
+    try:
+        response = client.get("https://jiji.ng" + listing.url.split("?")[0] if listing.url.startswith("/") else listing.url)
+    except httpx.HTTPError:
+        return []
+    time.sleep(0.7)
+    return page_photos(response.text, first) if response.status_code == 200 else []
+
+
+def _thumbnails_only(row: dict) -> bool:
+    """Cached before the advert pages were read: every photo 300 pixels or less."""
+    widths = [_url_width(u) for u in row.get("image_urls") or []]
+    return bool(widths) and max(widths) <= 300
+
+
 def _sharper(new: list[str], old: list[str]) -> bool:
     """Whether an advert now lists a bigger first photo than the cached one."""
     return bool(new and old) and _url_width(new[0]) > max(_url_width(old[0]), 0) and _url_width(old[0]) > 0
@@ -220,6 +237,8 @@ def build(
                     if listing.id in seen:
                         # Fetched before with thumbnails: take the bigger photos now offered.
                         old = seen[listing.id]
+                        if listing.url and _thumbnails_only(old):
+                            listing.image_urls = _from_page(listing, client) or listing.image_urls
                         if _sharper(listing.image_urls, old.get("image_urls") or []):
                             _forget_photos(out_dir / "media", old)
                             listing.image_urls = listing.image_urls[:max_photos]
@@ -233,10 +252,12 @@ def build(
                         tally[reason] += 1
                     else:
                         fresh.append(listing)
+                # The advert's own page has all its photos, and a bigger first one.
+                for listing in fresh:
+                    bigger = _from_page(listing, client) if listing.url else []
+                    listing.image_urls = (bigger or listing.image_urls)[:max_photos]
                 # Three photos tell what an item is and show its condition. Eight
                 # cost a slow connection hours for little more.
-                for listing in fresh:
-                    listing.image_urls = listing.image_urls[:max_photos]
                 download_media(fresh, out_dir / "media", client=client)
                 for listing in fresh:
                     if listing.media and listing.id not in seen:

@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import base64
 import json
+import re
 import time
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -254,6 +255,44 @@ def fetch_category(
     return kept
 
 
+_PIC = re.compile(r"https://pictures-nigeria\.jijistatic\.net/(\d+)_[A-Za-z0-9_-]+\.(?:jpg|jpeg|webp)")
+
+
+def page_photos(html: str, first_id: str | None = None, avatar_max: int = 100) -> list[str]:
+    """Every photo of one advert from its page, each at the largest size the page has.
+
+    The search API lists one 300 pixel thumbnail per advert. The advert's own
+    page lists all its photos and, for some, a bigger size: on the first
+    pages checked, 620 by 1102 for the first photo and 111 pixel previews for
+    the rest. Photos are grouped by their number, the biggest size kept for
+    each, in page order. Tiny square images are seller avatars and are left
+    out, as are photos numbered far from the advert's own, which belong to
+    other adverts shown on the page.
+    """
+    best: dict[str, str] = {}
+    order: list[str] = []
+    for match in _PIC.finditer(html):
+        url, number = match.group(0), match.group(1)
+        if _url_width(url) and _url_width(url) <= avatar_max:
+            continue
+        if first_id and first_id.isdigit() and abs(int(number) - int(first_id)) > 50:
+            continue
+        if number not in best:
+            order.append(number)
+            best[number] = url
+        elif _url_width(url) > _url_width(best[number]):
+            best[number] = url
+    if first_id in best:
+        order.remove(first_id)
+        order.insert(0, first_id)
+    return [best[n] for n in order]
+
+
+def photo_number(url: str) -> str | None:
+    match = _PIC.match(url)
+    return match.group(1) if match else None
+
+
 def download_media(listings: list[Listing], root: Path, client: httpx.Client | None = None) -> None:
     """Save each listing's photos under root/<id>/ and record relative paths."""
     own = client is None
@@ -264,7 +303,8 @@ def download_media(listings: list[Listing], root: Path, client: httpx.Client | N
             folder.mkdir(parents=True, exist_ok=True)
             saved: list[str] = []
             for i, url in enumerate(listing.image_urls):
-                dest = folder / f"{i:02d}.jpg"
+                suffix = Path(url.split("?")[0]).suffix.lower()
+                dest = folder / f"{i:02d}{suffix if suffix in ('.jpg', '.jpeg', '.png', '.webp') else '.jpg'}"
                 if not dest.exists():
                     try:
                         resp = client.get(url)

@@ -289,3 +289,26 @@ def test_photo_review_drops_items_from_scoring_and_fixes_used():
         assert (item.exclude is not None) == (r["keep_in_benchmark"] == "drop")
         if r["looks_actually_used"] == "no":
             assert item.answer.price.used is False
+
+
+def test_advert_page_gives_every_photo_at_its_biggest_size():
+    import base64
+
+    from buyscape.evalset.jiji import page_photos
+
+    def pic(n, w, h, ext="jpg"):
+        token = base64.urlsafe_b64encode(f"{w}-{h}-6ed0811e07".encode()).decode().rstrip("=")
+        return f"https://pictures-nigeria.jijistatic.net/{n}_{token}.{ext}"
+
+    html = " ".join([
+        pic(136029311, 96, 96),            # seller avatar
+        pic(200646914, 111, 197, "webp"),
+        pic(200646914, 300, 533),
+        pic(200646914, 620, 1102, "webp"),
+        pic(200646915, 111, 197, "webp"),
+        pic(200646917, 111, 197, "webp"),
+        pic(199000001, 300, 300),          # another advert on the page
+    ])
+    assert page_photos(html, "200646914") == [
+        pic(200646914, 620, 1102, "webp"), pic(200646915, 111, 197, "webp"), pic(200646917, 111, 197, "webp"),
+    ]
