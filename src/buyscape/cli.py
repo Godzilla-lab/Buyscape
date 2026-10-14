@@ -593,6 +593,7 @@ def testify_label(
     model: str = typer.Option("gemini-3.8-flash", help="Labelling model. A name with no slash is Google AI Studio."),
     split: str = typer.Option("dev", help="dev, test or all."),
     reviewed_only: bool = typer.Option(False, help="Only items the hand review covered, to measure agreement first."),
+    market: str = typer.Option("", help="Only items from this city, for example lagos. Empty for all."),
     limit: int = typer.Option(0, help="Stop after this many items; 0 for no limit."),
     budget_usd: float = typer.Option(0.5, help="Stop once list-price spend reaches this."),
     mode: str = typer.Option("auto", help="record | replay | auto"),
@@ -615,6 +616,7 @@ def testify_label(
     items = [
         i for i in load_items(ROOT / "eval" / "testify" / "items.jsonl")
         if (split == "all" or i.split == split) and (not reviewed_only or i.id in reviews)
+        and (not market or i.market == market)
     ]
     out_path = ROOT / "eval" / "testify" / "labels_ai" / f"{model.replace('/', '_')}.jsonl"
     out_path.parent.mkdir(parents=True, exist_ok=True)
