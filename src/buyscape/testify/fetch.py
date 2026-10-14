@@ -104,6 +104,27 @@ def _patiently(call, waits: tuple[float, ...] = (15.0, 60.0)):
     return None
 
 
+# A word in front of a search is dropped for the rest of a run once it has
+# found nothing new this many times in a row. On the first city runs "used",
+# "tokunbo", "fairly used" and "UK used" found nothing on hundreds of
+# searches: Jiji answers them with the adverts the plain phrase already got.
+DRY_LIMIT = 8
+
+
+def _variants(phrases: tuple[str, ...], pool: str) -> list[tuple[str, str | None]]:
+    """Each phrasing with the word put in front of it, or None for the phrase as written."""
+    out: list[tuple[str, str | None]] = []
+    seen: set[str] = set()
+    words = SECOND_HAND if pool == "used" else ("brand new",)
+    for phrase in phrases:
+        base = phrase.removeprefix("used ").strip()
+        for candidate, word in ((phrase, None), *((f"{w} {base}", w) for w in words)):
+            if candidate not in seen:
+                seen.add(candidate)
+                out.append((candidate, word))
+    return out
+
+
 def _done(out_dir: Path, kind: str, region: str) -> bool:
     """Whether this kind was fetched for this city. Each city shows different
     adverts, so Lagos being done says nothing about Abuja. Lagos runs from
@@ -126,15 +147,7 @@ def phrasings(phrases: tuple[str, ...], pool: str = "used") -> list[str]:
     The new-stock pool asks plainly and as "brand new", which is how dealers
     title their adverts.
     """
-    words = SECOND_HAND if pool == "used" else ("brand new",)
-    out: list[str] = []
-    for phrase in phrases:
-        base = phrase.removeprefix("used ").strip()
-        for candidate in (phrase, *(f"{word} {base}" for word in words)):
-            if candidate not in out:
-                out.append(candidate)
-    return out
-
+    return [candidate for candidate, _ in _variants(phrases, pool)]
 
 def keep(row: dict, pool: str = "used") -> str | None:
     """Why an advert is left out of a pool, or None to keep it.
@@ -173,6 +186,7 @@ def build(
     chosen = [k for k in KINDS if (not only or k[1] in only) and not (skip_done and _done(out_dir, k[1], region))]
     total = sum(len(phrasings(k[2], pool)) for k in chosen)
     done = 0
+    dry: dict[str, int] = {}
     with httpx.Client(headers={"User-Agent": UA}, timeout=30.0) as client:
         for tier, kind, phrases, words in chosen:
             path = out_dir / f"{kind.replace(' ', '_')}.json"
@@ -182,7 +196,10 @@ def build(
                     if keep(row, pool) is None:
                         seen[row["id"]] = row
             tally = {"kept": 0, "brand new": 0, "second-hand": 0, "buyer, not seller": 0, "timed out": 0}
-            for phrase in phrasings(phrases, pool):
+            for phrase, word in _variants(phrases, pool):
+                if word and dry.get(word, 0) >= DRY_LIMIT:
+                    done += 1
+                    continue
                 q = Query(category=kind, query=phrase, must_include=words)
                 found = _patiently(lambda: fetch_category(q, per_phrase, region=region, max_pages=3, client=client))
                 if found is None:
@@ -212,6 +229,10 @@ def build(
                 # Saved after every phrasing, so a stopped run loses one search at most.
                 path.write_text(json.dumps(list(seen.values()), indent=1))
                 done += 1
+                if word:
+                    dry[word] = 0 if fresh else dry.get(word, 0) + 1
+                    if dry[word] == DRY_LIMIT and progress:
+                        progress(f"'{word}' found nothing new {DRY_LIMIT} times running; dropped for the rest of this run")
                 if progress:
                     progress(f"[{done}/{total}] {phrase}: {len(fresh)} new, {len(seen)} {kind} so far")
             path.write_text(json.dumps(list(seen.values()), indent=1))

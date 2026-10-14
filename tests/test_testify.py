@@ -201,3 +201,27 @@ def test_each_city_is_fetched_once_and_lagos_history_counts(tmp_path, monkeypatc
     asked.clear()
     fetch.build(tmp_path, only=("tyres",), skip_done=True, region="abuja")
     assert asked == []
+
+
+def test_a_search_word_that_keeps_finding_nothing_is_dropped(tmp_path, monkeypatch):
+    from buyscape.evalset.jiji import Listing
+    from buyscape.testify import fetch
+
+    asked = []
+
+    def fake(q, *a, **k):
+        asked.append(q.query)
+        if " " in q.query and q.query.split()[0] in ("used", "tokunbo", "fairly", "uk"):
+            return []
+        n = len(asked)
+        return [Listing(id=f"a{n}", category=q.category, title=q.query, price_ngn=1, description="",
+                        condition="Used", is_used=True, attrs={}, image_urls=[], url="", fetched_at="")]
+
+    monkeypatch.setattr(fetch, "fetch_category", fake)
+    monkeypatch.setattr(fetch, "download_media", lambda listings, *a, **k: [setattr(l, "media", ["x.jpg"]) for l in listings])
+    kinds = tuple(k[1] for k in fetch.KINDS[:6])
+    fetch.build(tmp_path, only=kinds)
+    tokunbo = [q for q in asked if q.startswith("tokunbo ")]
+    plain = [q for q in asked if not q.split()[0] in ("used", "tokunbo", "fairly", "uk")]
+    assert len(tokunbo) == fetch.DRY_LIMIT
+    assert len(plain) >= 6
