@@ -569,7 +569,7 @@ def testify_convert(out: Path = typer.Option(ROOT / "eval" / "testify" / "items.
 
     from .testify import convert
 
-    items = convert.all_items(ROOT)
+    items = convert.all_items(ROOT, previous=out)
     convert.write(items, out)
     console.print(f"{len(items)} items written to {out}")
     for (source, tier), n in sorted(Counter((i.source, i.tier) for i in items).items()):
