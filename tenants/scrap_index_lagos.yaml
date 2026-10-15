@@ -1,9 +1,11 @@
 # Lagos scrap and item buy prices, Naira. Source: V-Martins Recycling published
-# price list, dated April 2026, the only dated public schedule in Lagos.
-# Naira prices go stale fast, so every observation carries this date and the
-# engine refuses to price on anything older than max_age_days.
+# price list, which states "current market conditions in Lagos as of October
+# 2026", read on 14 October 2026. It replaces their April 2026 list: iron fell
+# from 500-600 to 400-500 a kilo and bare copper rose from 10,000-13,000 to
+# 12,000-14,000. Naira prices go stale fast, so every observation carries this
+# date and the engine refuses to price on anything older than max_age_days.
 source: v-martins
-observed_on: 2026-04-01
+observed_on: 2026-10-14
 url: https://www.vmartinsrecyclingcompany.com/scrap-metal-prices
 currency: NGN
 max_age_days: 240
@@ -17,15 +19,19 @@ max_age_days: 240
 # vehicles and appliances only. An undated figure is worse than no figure, so
 # the board rate below comes from the tenant's own wanted adverts instead.
 per_kg:
-  iron: [500, 600]
-  steel: [500, 600]
-  copper: [10000, 13000]
-  copper_bare: [10000, 13000]
+  iron: [400, 500]
+  steel: [400, 500]
+  copper: [12000, 14000]
+  copper_bare: [12000, 14000]
   copper_insulated: [2500, 3000]
-  brass: [7000, 7500]
-  aluminium: [2000, 3000]
-  stainless: [800, 1000]
-  lead: [1500, 2500]
+  brass: [7500, 8000]
+  # The October list prices aluminium by grade. Plain aluminium spans them all,
+  # from bottle-cap sheet at the bottom to window profile at the top.
+  aluminium: [1500, 2500]
+  aluminium_cast: [1800, 2200]
+  aluminium_profile: [2000, 2500]
+  aluminium_radiator: [1800, 2000]
+  aluminium_cap_sheet: [1500, 1600]
 # Rates the tenant has published themselves, by advertising to buy at them.
 # A wanted advert is the strongest price evidence a buy-side engine can have:
 # it is what this business actually pays, in this city, on a stated date.
@@ -41,6 +47,10 @@ per_kg_tenant:
     circuit_board: [800, 1000]
     titanium: [800, 1000]
 per_kg_derived:
+  # Last published by V-Martins in April 2026 and dropped from their October
+  # list. Kept as estimates so a quote says so, rather than dated October.
+  stainless: [800, 1000]
+  lead: [1500, 2500]
   mixed_electronic: [700, 1500]
   pet_bottle: [120, 200]
   plastic: [100, 180]

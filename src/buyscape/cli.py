@@ -562,6 +562,147 @@ def fetch_buyscrap(out: Path = typer.Option(ROOT / "eval" / "raw" / "buyscrap"))
         console.print(f"  {n:3d}  {cat}")
 
 
+@app.command("testify-convert")
+def testify_convert(out: Path = typer.Option(ROOT / "eval" / "testify" / "items.jsonl")) -> None:
+    """Build Testify benchmark items from every cached source. Free: no model calls."""
+    from collections import Counter
+
+    from .testify import convert
+
+    items = convert.all_items(ROOT, previous=out)
+    convert.write(items, out)
+    console.print(f"{len(items)} items written to {out}")
+    for (source, tier), n in sorted(Counter((i.source, i.tier) for i in items).items()):
+        console.print(f"  {n:4d}  {source:9s} {tier}")
+    splits = Counter(i.split for i in items)
+    console.print(f"  dev {splits['dev']}, test {splits['test']}")
+
+    # Training pool: dealers' new stock, for naming items. An advert in the
+    # benchmark is never also a training example.
+    pool_path = out.parent / "train_pool.jsonl"
+    benchmark = {i.id for i in items}
+    pool = [i for i in convert.train_items(ROOT, previous=pool_path) if i.id not in benchmark]
+    convert.write(pool, pool_path)
+    console.print(f"{len(pool)} training items written to {pool_path}")
+    for kind, n in sorted(Counter(i.answer.kind for i in pool).items(), key=lambda kv: -kv[1])[:10]:
+        console.print(f"  {n:4d}  {kind}")
+
+
+@app.command("testify-label")
+def testify_label(
+    model: str = typer.Option("gemini-3.8-flash", help="Labelling model. A name with no slash is Google AI Studio."),
+    split: str = typer.Option("dev", help="dev, test or all."),
+    reviewed_only: bool = typer.Option(False, help="Only items the hand review covered, to measure agreement first."),
+    market: str = typer.Option("", help="Only items from this city, for example lagos. Empty for all."),
+    limit: int = typer.Option(0, help="Stop after this many items; 0 for no limit."),
+    budget_usd: float = typer.Option(0.5, help="Stop once list-price spend reaches this."),
+    mode: str = typer.Option("auto", help="record | replay | auto"),
+    fixtures: Path = typer.Option(Path("eval/fixtures")),
+) -> None:
+    """Check benchmark items photo by photo with a model, and compare it with the hand review."""
+    import yaml as _yaml
+
+    from .testify import label
+    from .testify.convert import load_items
+
+    _load_dotenv()
+    if not os.environ.get("GOOGLE_API_KEY") and os.environ.get("GEMINI_API_KEY"):
+        os.environ["GOOGLE_API_KEY"] = os.environ["GEMINI_API_KEY"]
+    provider = _provider(model, fixtures, mode)
+    reviews = {
+        str(r["id"]): r
+        for r in _yaml.safe_load((ROOT / "eval" / "testify" / "review_dev.yaml").read_text()) or []
+    }
+    items = [
+        i for i in load_items(ROOT / "eval" / "testify" / "items.jsonl")
+        if (split == "all" or i.split == split) and (not reviewed_only or i.id in reviews)
+        and (not market or i.market == market)
+    ]
+    out_path = ROOT / "eval" / "testify" / "labels_ai" / f"{model.replace('/', '_')}.jsonl"
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    done = {json.loads(l)["id"]: json.loads(l) for l in out_path.read_text().splitlines()} if out_path.exists() else {}
+    spend, called, skipped = 0.0, 0, 0
+    for item in items:
+        if limit and called >= limit:
+            break
+        if spend >= budget_usd:
+            console.print(f"[yellow]Stopped at the {budget_usd} USD budget.[/yellow]")
+            break
+        photos = label.photos_for(item, ROOT)
+        if not photos:
+            skipped += 1
+            continue
+        try:
+            answer, meta = provider.structured_call(label.request_for(item, photos))
+        except Exception as exc:  # a failed item is reported, never guessed
+            console.print(f"[red]{item.id}: {type(exc).__name__}: {str(exc)[:160]}[/red]")
+            continue
+        called += 1
+        spend += 0.0 if meta.replayed else meta.cost_usd
+        done[item.id] = {"id": item.id, "model": model, "prompt_version": label.PROMPT_VERSION, **answer.model_dump()}
+        out_path.write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in sorted(done.values(), key=lambda r: r["id"])))
+    console.print(f"{called} items labelled, {skipped} without photos here, list-price spend {spend:.4f} USD")
+    for name, row in label.agreement(done, reviews).items():
+        console.print(f"  agreement with the hand review, {name}: {row['agree']}/{row['items']} = {row['rate']}")
+    ledger = ROOT / "docs" / "proof" / "spend.jsonl"
+    with ledger.open("a") as fh:
+        fh.write(json.dumps({
+            "at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "task": "testify-label",
+            "model": model, "mode": mode, "cases": called, "spend_usd": round(spend, 4),
+        }) + "\n")
+
+
+@app.command("testify-fetch")
+def testify_fetch(
+    out: Path = typer.Option(None, help="Defaults to eval/raw/testify, or eval/raw/testify_new with --new-stock."),
+    per_phrase: int = typer.Option(25, help="Adverts to keep per search phrasing."),
+    only: list[str] = typer.Option(None, help="Fetch only these kinds, for example 'standing fan'."),
+    max_photos: int = typer.Option(None, help="Photos per advert: 3 by default, 1 with --new-stock."),
+    skip_done: bool = typer.Option(False, help="Only fetch kinds never fetched for this city."),
+    region: str = typer.Option(
+        "lagos", help="Jiji city or state, as in its web address: lagos, abuja, rivers, oyo, ogun, kano."
+    ),
+    new_stock: bool = typer.Option(
+        False, help="Fetch dealers' brand new adverts instead, as training data for naming items. Never benchmark items."
+    ),
+) -> None:
+    """Cache Jiji adverts for small goods and material lots. Run from an ordinary connection."""
+    from .testify import fetch as wider
+
+    pool = "new" if new_stock else "used"
+    out = out or ROOT / "eval" / "raw" / ("testify_new" if new_stock else "testify")
+    max_photos = max_photos or (1 if new_stock else 3)
+    counts = wider.build(
+        out,
+        per_phrase=per_phrase,
+        only=tuple(only or ()),
+        max_photos=max_photos,
+        progress=console.print,
+        skip_done=skip_done,
+        pool=pool,
+        region=region,
+    )
+    if not counts:
+        console.print(
+            f"Every kind is already fetched for {region}. Leave out --skip-done to refresh it, "
+            "or pick another city with --region."
+        )
+        return
+    other = "second-hand" if new_stock else "brand new"
+    console.print(f"{'kind':26s} {'kept':>5s} {'skipped ' + other:>22s} {'skipped buyers':>15s} {'timed out':>10s}")
+    for kind, t in counts.items():
+        console.print(
+            f"{kind:26s} {t['kept']:5d} {t[other]:22d} {t['buyer, not seller']:15d} {t['timed out']:10d}"
+        )
+    sharper = sum(t.get("sharper photos", 0) for t in counts.values())
+    if sharper:
+        console.print(f"{sharper} adverts fetched before as thumbnails now have full-size photos.")
+    if any(t["timed out"] for t in counts.values()):
+        console.print("Some searches timed out. Run the same command again: it keeps what it has and fills the gaps.")
+    if not any(t["kept"] for t in counts.values()):
+        console.print("[red]Nothing fetched. Jiji may be answering with a bot check from this network.[/red]")
+
+
 @app.command("spend")
 def spend_report(out: Path = typer.Option(ROOT / "docs" / "proof")) -> None:
     """What every run cost, per model pair, and what one item costs on each."""
