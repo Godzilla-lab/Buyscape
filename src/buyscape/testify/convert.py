@@ -378,6 +378,7 @@ def apply_reviews(items: dict[str, Item], path: Path) -> None:
 # the hand review on 88 of 100 keep or drop decisions once both were put
 # through the same rule (docs/research/failure-analysis.md).
 LABELLER = "gemini-3.5-flash-lite"
+REAL_TIERS = ("branded_electronics", "small_goods", "material_lot", "not_for_sale")
 
 
 def apply_ai_labels(items: dict[str, Item], path: Path) -> None:
@@ -395,7 +396,8 @@ def apply_ai_labels(items: dict[str, Item], path: Path) -> None:
         if item is None:
             continue
         item.ai_label = label
-        if item.split != "train" and label.get("tier") in Item.model_fields["tier"].annotation.__args__:
+        # Adversarial is the tier for items we plant on purpose; a labeller never assigns it.
+        if item.split != "train" and label.get("tier") in REAL_TIERS:
             item.tier = label["tier"]
         if label.get("kind"):
             item.answer.kind = label["kind"]
