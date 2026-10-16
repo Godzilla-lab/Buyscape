@@ -1,0 +1,87 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "White office machine wrapped in clear plastic",
+      "HP logo visible on the front left",
+      "Colourful promotional stickers on the top surface",
+      "Paper output tray visible at the front",
+      "Seller describes it as a colour MFP with receipt and warranty"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "colour MFP",
+      "brand": "HP",
+      "model": null,
+      "read_from": [
+        "photo 0 front logo"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "colour MFP",
+        "verdict": "unverified",
+        "evidence": "photo 0 shows an office machine but colour printing capability cannot be confirmed remotely"
+      },
+      {
+        "claim": "fastest in-class two-sided printing speed",
+        "verdict": "unverifiable_remote",
+        "evidence": "marketing claim not visible or provable from photo"
+      },
+      {
+        "claim": "Like new, never repaired or opened, works perfectly",
+        "verdict": "unverified",
+        "evidence": "plastic wrapping suggests new stock but condition and internal state cannot be confirmed"
+      },
+      {
+        "claim": "Original receipt and warranty available",
+        "verdict": "unverifiable_remote",
+        "evidence": "documents not shown in photo"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Machine may not power on or print",
+        "proof": "video of it printing a test page",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "May not be colour capable despite seller claim",
+        "proof": "photo of control panel or colour print sample",
+        "if_unproven": "as monochrome only"
+      },
+      {
+        "risk": "May have been opened or repaired",
+        "proof": "close-up of factory seals and ports",
+        "if_unproven": "as used or opened"
+      },
+      {
+        "risk": "Receipt or warranty may be invalid, missing, or non-transferable",
+        "proof": "photo of receipt and warranty documents",
+        "if_unproven": "as no warranty"
+      }
+    ],
+    "proof_requests": [
+      "Video of the machine powering on and printing a colour test page",
+      "Photo of the model number label",
+      "Photo of the original receipt and warranty card",
+      "Close-up of factory seals to confirm never opened"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as an HP colour MFP from photo 0, so it can be priced at its worst case pending proof of function."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 11987,
+    "input_tokens": 1609,
+    "output_tokens": 2146,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "5982a9ab34c3b3f1ff4b55d4ab32b780",
+    "error": null
+  }
+}
