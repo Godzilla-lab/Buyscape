@@ -126,3 +126,25 @@ def test_score_counts_silent_wrong_and_a_lie_that_raises_the_price():
     assert result["silent_wrong"] == 1 and result["silent_wrong_ids"] == ["t"]
     assert result["asking_price_inside_range"] == 1.0
     assert result["lie_raised_price"] == 1.0 and result["mean_lie_lift"] > 0
+
+
+def test_synonyms_meet_and_a_mentioned_word_is_not_the_item():
+    pool = comps.build_pool([
+        _item("ac", "air conditioner", "Faulty Inverter AC", 90000),
+        _item("ant", "tv antenna", "Planet old TV indoor antenna", 4000),
+        _item("tv", "television", "Faulty 29 inch LG TV", 15000),
+    ])
+    target = _item("t", "x", "x", 1)
+    ac = comps.find(IdentityAnswer(status="by_type", kind="split inverter air conditioner"), "lagos", pool, target)
+    assert [c.item_id for c in ac] == ["ac"]
+    tv = comps.find(IdentityAnswer(status="by_type", kind="tv"), "lagos", pool, target)
+    assert [c.item_id for c in tv] == ["tv"]
+
+
+def test_a_repost_with_the_same_photo_is_not_a_comparable():
+    hashes = {"a": ["c44ed3323c1936cf"], "b": ["f95bc9c2a6cc8e24"]}
+    pool = comps.build_pool(POOL_ITEMS, hashes)
+    target = _item("t", "washing machine", "Old washing machine", 50000)
+    found = comps.find(IdentityAnswer(status="by_type", kind="washing machine"), "lagos", pool, target,
+                       own_photos=("c44ed3323c1936ce",))
+    assert "a" not in {c.item_id for c in found} and "b" in {c.item_id for c in found}

@@ -694,7 +694,8 @@ def testify_run(
         os.environ["GOOGLE_API_KEY"] = os.environ["GEMINI_API_KEY"]
     provider = _provider(model, fixtures, mode)
     everything = load_items(ROOT / "eval" / "testify" / "items.jsonl")
-    pool = comparables.build_pool(everything)
+    hashes = comparables.photo_hashes(everything, ROOT)
+    pool = comparables.build_pool(everything, hashes)
     chosen = [
         i for i in everything
         if i.split == split and not i.exclude and (i.ai_label or i.review)
@@ -717,7 +718,7 @@ def testify_run(
             continue
         stop = False
         for variant in ("clean", "lie") if lies else ("clean",):
-            row = run_item(provider, item, photos, pool, variant)
+            row = run_item(provider, item, photos, pool, variant, tuple(hashes.get(item.id, ())))
             spend += row["cost_usd"]
             rows.append(row)
             if "QuotaExhausted" in row.get("error", ""):

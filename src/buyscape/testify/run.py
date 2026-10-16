@@ -23,7 +23,7 @@ from .answer import InspectionAnswer, PriceChoice, Reading, violations
 from .convert import redact
 from .schema import Item
 
-PROMPT_VERSION = "testify_read.v1"
+PROMPT_VERSION = "testify_read.v2"
 PICK_VERSION = "testify_pick.v1"
 
 SYSTEM = (
@@ -40,9 +40,12 @@ SYSTEM = (
     "- List the hidden risks that matter to the price, each with the one shot or clip that would "
     "settle it and how it is priced until then.\n"
     "- Never write a price or an amount of money. Prices come from a list you are shown later.\n"
-    "- Decide one of: price (you know what it is and can price it as seen), ask_for_proof (a claim "
-    "or risk that moves the price needs proof first), cannot_identify (you cannot tell what it "
-    "is), no_price_data, fraud_suspected (the photos or words show signs of a scam)."
+    "- An unproven claim or a hidden risk does not stop a price: price the item at its worst case "
+    "(an unproven 'works' is priced as not working) and list the proof that would raise it.\n"
+    "- Decide one of: price (you know what it is, so it can be priced at its worst case as seen), "
+    "ask_for_proof (not even a worst case price is possible without a missing shot, for example the "
+    "model that sets the price is unreadable), cannot_identify (you cannot tell what it is), "
+    "fraud_suspected (the photos or words show signs of a scam)."
 )
 
 PICK_SYSTEM = (
@@ -71,7 +74,7 @@ _PRICE_TEXT = re.compile(
     rf"(?:₦|#|\bN(?=\s?\d)|\bNGN\b)\s?{_AMOUNT}(?:\s?(?:naira|ngn)\b)?"
     rf"|\b(?:price|going for|selling for|sale at|asking|cost)\s*(?:is|:)?\s*{_AMOUNT}(?:\s?(?:naira|ngn)\b)?"
     rf"|\b{_AMOUNT}\s?(?:naira|ngn)\b",
-    re.I,
+    re.IGNORECASE,
 )
 
 
@@ -123,7 +126,14 @@ def pick_request(reading: Reading, found: list[comps.Comparable]) -> ModelReques
     )
 
 
-def run_item(provider, item: Item, photos: list[Path], pool: list[comps.Comparable], variant: str = "clean") -> dict:
+def run_item(
+    provider,
+    item: Item,
+    photos: list[Path],
+    pool: list[comps.Comparable],
+    variant: str = "clean",
+    own_photos: tuple[str, ...] = (),
+) -> dict:
     """One item, one variant. Never raises: a failed call is a scored failure."""
     row: dict = {"id": item.id, "variant": variant, "decision": "error", "cost_usd": 0.0, "latency_ms": 0,
                  "replayed": True}
@@ -148,7 +158,7 @@ def run_item(provider, item: Item, photos: list[Path], pool: list[comps.Comparab
         row["violations"] = violations(InspectionAnswer(**reading.model_dump()), 0)
         return row
 
-    found = comps.find(reading.identity, item.market, pool, item)
+    found = comps.find(reading.identity, item.market, pool, item, own_photos=own_photos)
     row["comparables"] = [{"n": n, "price_ngn": c.price_ngn, "source": c.source} for n, c in enumerate(found)]
     if not found:
         row["decision"] = "no_price_data"
