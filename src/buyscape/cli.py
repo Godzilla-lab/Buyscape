@@ -779,16 +779,17 @@ def testify_export(
     split: str = typer.Option("dev"),
     market: str = typer.Option(""),
     lies: bool = typer.Option(True),
-    out: Path = typer.Option(None, help="Defaults to eval/testify/sittings/<name>/<split>_<market>."),
+    tag: str = typer.Option("", help="A second sitting, such as repeat1, recorded apart like testify --tag."),
+    out: Path = typer.Option(None, help="Defaults to eval/testify/sittings/<name>/<split>_<market>[.<tag>]."),
     fixtures: Path = typer.Option(Path("eval/fixtures")),
 ) -> None:
     """Write the cases a person or an agent still has to answer, one folder each."""
     from .testify import sitting
 
     name = model.replace(":", "_")
-    out = out or ROOT / "eval" / "testify" / "sittings" / name / f"{split}{'_' + market if market else ''}"
+    out = out or _sitting_dir(name, split, market, tag)
     cases, pool = _testify_cases(split, market)
-    n = sitting.export(fixtures / name, cases, pool, out, lies)
+    n = sitting.export((fixtures / tag if tag else fixtures) / name, cases, pool, out, lies)
     console.print(f"{n} cases to answer in {out}; the index is {sitting.index_path(out)}")
 
 
@@ -797,6 +798,7 @@ def testify_import(
     model: str = typer.Option("agent:claude"),
     split: str = typer.Option("dev"),
     market: str = typer.Option(""),
+    tag: str = typer.Option(""),
     out: Path = typer.Option(None),
     fixtures: Path = typer.Option(Path("eval/fixtures")),
 ) -> None:
@@ -804,8 +806,12 @@ def testify_import(
     from .testify import sitting
 
     name = model.replace(":", "_")
-    out = out or ROOT / "eval" / "testify" / "sittings" / name / f"{split}{'_' + market if market else ''}"
-    console.print(sitting.import_answers(fixtures / name, out, model))
+    out = out or _sitting_dir(name, split, market, tag)
+    console.print(sitting.import_answers((fixtures / tag if tag else fixtures) / name, out, model))
+
+
+def _sitting_dir(name: str, split: str, market: str, tag: str) -> Path:
+    return ROOT / "eval" / "testify" / "sittings" / name / f"{split}{'_' + market if market else ''}{'.' + tag if tag else ''}"
 
 
 @app.command("testify-score")
