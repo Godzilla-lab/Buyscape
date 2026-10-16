@@ -1,0 +1,87 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "White office machine wrapped in clear plastic shrink-wrap",
+      "HP logo visible on the front left of the machine",
+      "Colorful marketing wrap with images and a Pepsi logo covers the top",
+      "Paper output tray visible at the front bottom edge",
+      "No model number or series name is legible on the machine",
+      "Scanner lid or document feeder is not clearly visible"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "colour MFP",
+      "brand": "HP",
+      "model": null,
+      "read_from": [
+        "photo 0 front logo"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "colour MFP",
+        "verdict": "unverified",
+        "evidence": "photo 0 shows an HP machine but colour capability cannot be confirmed from the wrapped exterior"
+      },
+      {
+        "claim": "fastest in-class two-sided printing speed",
+        "verdict": "unverifiable_remote",
+        "evidence": "performance claim cannot be verified from photos"
+      },
+      {
+        "claim": "First [in-class feature]",
+        "verdict": "unverifiable_remote",
+        "evidence": "incomplete claim in seller text, no supporting photo"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "exact model unknown",
+        "proof": "clear photo of the model label on the printer",
+        "if_unproven": "as lowest-spec HP MFP"
+      },
+      {
+        "risk": "machine may not power on or print",
+        "proof": "video of the machine printing a page",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "may be mono only despite colour claim",
+        "proof": "photo of the control panel showing colour options or a colour print sample",
+        "if_unproven": "as mono printer"
+      },
+      {
+        "risk": "may lack scanner or copier functions despite MFP claim",
+        "proof": "photo showing scanner glass or document feeder",
+        "if_unproven": "as printer only"
+      },
+      {
+        "risk": "missing toner, cables or accessories",
+        "proof": "photo of the unboxed contents",
+        "if_unproven": "as missing consumables"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the model label on the printer",
+      "Video showing the machine powering on and printing",
+      "Photo of the control panel and scanner glass"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The brand is visible as HP but the model number is unreadable, and printer prices depend heavily on the exact model; no worst-case price is possible without it."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 19928,
+    "input_tokens": 1592,
+    "output_tokens": 3532,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "7246eb4ac2293fb854e4e408b6d8f8d8",
+    "error": null
+  }
+}

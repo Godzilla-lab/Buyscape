@@ -1,0 +1,90 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a white home sewing machine with a pink control panel; the brand text is not clearly legible; a zipper presser foot is attached and it sits in a white base.",
+      "Photo 1 shows a white Semco Indigo 6 home sewing machine with a stitch dial; a Singer Competitor is visible in the background.",
+      "Photo 2 shows a white Novamatic NM 868A home sewing machine with German stitch labels and a built-in base; a power cord is visible.",
+      "All three photos depict domestic flatbed sewing machines, not industrial machines.",
+      "The listing describes one industrial machine but displays at least three different domestic models."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "sewing machine",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Industrial electric sewing machine",
+        "verdict": "contradicted",
+        "evidence": "Photos 0, 1, and 2 show domestic home sewing machines with stitch selectors and built-in bases, not industrial machines."
+      },
+      {
+        "claim": "Japanese made",
+        "verdict": "unverified",
+        "evidence": "Visible brands are Semco (photo 1) and Novamatic (photo 2); photo 0 brand is not clearly readable; none are confirmed Japanese."
+      },
+      {
+        "claim": "the motor runs smooth",
+        "verdict": "unverifiable_remote",
+        "evidence": "Motor sound and operation cannot be assessed from still photos."
+      },
+      {
+        "claim": "All accessories and the original manual",
+        "verdict": "unverified",
+        "evidence": "No accessories or manual are visible in any photo."
+      },
+      {
+        "claim": "never serviced because nothing ever went wrong",
+        "verdict": "unverifiable_remote",
+        "evidence": "Service history cannot be verified from photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The machine is a domestic model, not industrial as claimed",
+        "proof": "A clear photo of the machine's bed, motor, and serial plate showing industrial specifications",
+        "if_unproven": "as a domestic home sewing machine"
+      },
+      {
+        "risk": "The motor does not run",
+        "proof": "A video of the machine stitching fabric with the motor running",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Accessories and manual are missing",
+        "proof": "Photos showing all included accessories and the manual",
+        "if_unproven": "as machine only, no accessories"
+      },
+      {
+        "risk": "The item delivered is not one of the machines shown",
+        "proof": "A video showing the specific machine with a dated note or the seller's username",
+        "if_unproven": "as an unknown machine of unverified condition"
+      }
+    ],
+    "proof_requests": [
+      "Which specific machine is for sale: photo 0, photo 1, or photo 2?",
+      "A video of the machine sewing fabric to prove the motor runs",
+      "Photos of all accessories and the original manual",
+      "A close-up of the brand and model plate on the machine being sold"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photos show three different domestic sewing machines, contradicting the seller's claim of a single industrial Japanese machine; proof is needed to identify which item is for sale and verify its type and condition."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 31376,
+    "input_tokens": 2373,
+    "output_tokens": 4282,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "b317d702c8fb94e6fb6edc53f6722b15",
+    "error": null
+  }
+}

@@ -1,5 +1,9 @@
 # Testify, first baselines: Nemotron 3.5 Super VL and Claude on 75 Lagos items
 
+> Superseded by `testify-baseline-2.md`, which writes a lie for each kind of
+> item and measures every lie against an honest repeat. The runs below are
+> kept under `eval/testify/runs/*/v1/`.
+
 The first model measured on Testify. A free, open vision model on NVIDIA's API
 catalogue, run on every Lagos `dev` item whose photos passed the check: 75
 items, each twice, once as posted and once with a planted lie. Real spend: 0.
