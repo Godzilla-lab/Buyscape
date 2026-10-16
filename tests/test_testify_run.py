@@ -211,3 +211,21 @@ def test_a_sitting_exports_blind_cases_and_scores_the_answers_like_a_model(tmp_p
     lie = run_item(replay, item, [photo], pool, "lie")
     assert (clean["decision"], clean["price_low"], clean["price_high"]) == ("price", 45000, 60000)
     assert lie["decision"] == "error"  # an answer that is not JSON fails like a model's would
+
+
+def test_playstation_meets_ps4_and_plus_games_is_not_the_plus_tier():
+    fat = _item("f", "game console", "Neatly Used Ps4 Fat With 2 Pads", 230000)
+    named = {"status": "named", "brand": "Sony", "model": "PlayStation 4 (original model, storage unknown)"}
+    assert identity_correct(fat, named)
+    xbox = _item("x", "game console", "Xbox One S Digital Plus 10 Games Including Fc25", 200000)
+    assert identity_correct(xbox, {"status": "named", "brand": "Microsoft", "model": "Xbox One S All-Digital Edition"})
+    pro = _item("p", "game console", "Uk Used Ps4 Pro", 340000)
+    assert not identity_correct(pro, {"status": "named", "brand": "Sony", "model": "PlayStation 4"})
+
+
+def test_a_quote_above_the_asking_price_is_counted():
+    items = {"t": _item("t", "pressing iron", "Used dry pressing iron", 5000)}
+    row = {"id": "t", "variant": "clean", "decision": "price", "price_low": 15000, "price_high": 15000,
+           "reading": _reading(kind="dry pressing iron").model_dump(), "violations": []}
+    result = score([row], items)
+    assert result["priced_above_asking"] == 1.0 and result["median_quote_vs_asking"] == 3.0
