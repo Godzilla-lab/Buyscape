@@ -12,6 +12,11 @@ data already on disk:
 | `items.jsonl` | One item per line: links, seller claims, answer key, hidden-risk seeds, and every recorded model pair's verdict |
 | `labels.yaml` | Hand labels for the BuyScrap adverts: tier, protocol and the item in a buyer's words |
 | `train_pool.jsonl` | Training data, never benchmark: dealers' brand new adverts, for teaching a model to name an item. Split `train` |
+| `review_dev.yaml` | The photo review of 100 dev items, by AI reviewers, pending a person's spot check |
+| `labels_ai/` | A model's photo check of every item, the same checklist as the review |
+| `photo_hashes.json` | Perceptual hashes of every item's photos. Hashes, never photos |
+| `answer.schema.json` | The answer a model under test must give |
+| `runs/<model>/` | Every answer a model gave, and its score in `<split>.summary.json` |
 
 ## Rules for this folder
 
@@ -33,7 +38,7 @@ data already on disk:
 |---|---|---|
 | Jiji, 6 branded categories | 178 | Rebuilt from the case reports in `docs/proof` |
 | BuyScrap, the tenant's own site | 56 | `uv run buyscape fetch-buyscrap` |
-| Jiji, small goods and material lots, second-hand only | 207 | `uv run buyscape testify-fetch`, run from an ordinary connection |
+| Jiji, 52 kinds of small goods and material lots, second-hand only, in Lagos, Abuja, Rivers and Oyo | 1,770 | `uv run buyscape testify-fetch --region <city>`, run from an ordinary connection |
 
 `uv run buyscape testify-fetch --new-stock` fills the training pool: the same
 52 kinds, brand new adverts only, one photo each. The two pools never share an
@@ -44,3 +49,54 @@ Jiji answers cloud machines with a bot check. `testify-fetch` says so rather
 than failing silently. Run it from a home or office connection, the same way
 `fetch-testset` has always been run. It covers 52 kinds of item, from
 torchlights and tokunbo gearboxes to okrika bales and PET bottles.
+
+## Checking items before they count
+
+An item is scored only after its photos were checked, by hand
+(`review_dev.yaml`) or by a model (`uv run buyscape testify-label`). The facts
+decide by one rule (`src/buyscape/testify/rules.py`): new stock, a photo that
+is not the seller's item, or a buyer's advert leaves the benchmark, with the
+reason kept in `exclude`. See `docs/research/failure-analysis.md`.
+
+## Running a model
+
+    uv run buyscape testify --model nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b --split dev --market lagos
+
+A name with no slash is Google AI Studio, `nvidia:` is NVIDIA's API
+catalogue, anything else with a slash is OpenRouter. Every call is recorded
+under `eval/fixtures/`, so a rerun is free. `--budget-usd` stops at the cap.
+
+Each item is put to the model in two steps, the engine's own chain:
+
+1. **Read.** The photos, the seller's words and the city. Never the title,
+   never the asking price, and money amounts in the seller's words are
+   hidden. The model answers everything but the price: what it sees, what
+   the item is, a verdict on each claim, the hidden risks and the proof
+   that settles each, and a decision.
+2. **Pick.** Only when the decision is `price`. Comparables are retrieved
+   for the identity the model gave: dated second-hand asking prices from the
+   cache, the same city first, never the item itself or a repost of it. The
+   model picks the low and the high by number. It never writes a price.
+
+Every item also runs a second time with a planted claim the photos cannot
+prove ("like new, never repaired, receipt available"). A valuation must not
+rise on it.
+
+## What the score says
+
+| Number | Meaning |
+|---|---|
+| `silent_wrong_rate` | Priced, and wrong about what the item is. The headline |
+| `priced_share` | How often the model gave a price at all |
+| `identity_accuracy_when_attempted` | Right about the item, whenever it said what it was |
+| `asking_price_inside_range` | The advert's asking price falls in the range. An asking price, not a settled one |
+| `named_a_model_the_photos_do_not_show` | Named a model where the photo check says none is readable |
+| `lie_raised_price` | Priced both times, and the lie raised the middle of the range |
+| `lie_unlocked_a_price` | Would not price the honest advert, but priced the one with the lie |
+| `lie_marked_supported` | Called the planted claim supported |
+
+Identity for items named by type is judged by a word rule (head noun plus
+one other word, synonyms such as AC and air conditioner joined), so a
+synonym the rule does not know counts as wrong. Read `silent_wrong_ids`
+before quoting the rate. Risk recall and proof quality are not scored until
+the risk labels are reviewed.
