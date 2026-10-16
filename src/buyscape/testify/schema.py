@@ -59,6 +59,7 @@ class PriceTruth(BaseModel):
     kind: PriceKind = "asking"
     used: bool | None = None
     note: str = ""
+    observed_on: str | None = Field(None, description="The day the price was seen, from the fetch.")
 
 
 class Answer(BaseModel):

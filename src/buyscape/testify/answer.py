@@ -29,7 +29,7 @@ IdentityStatus = Literal["named", "by_type", "unknown"]
 # A price in free text: "N50,000", "₦ 50000", "50k naira", "NGN 1.2m".
 _MONEY = re.compile(
     r"(₦|\bN(?=\s?\d)|\bNGN\b)\s?\d[\d,.]*\s?[km]?\b|\b\d[\d,.]*\s?[km]?\s?(naira|ngn)\b",
-    re.I,
+    re.IGNORECASE,
 )
 
 
@@ -64,13 +64,20 @@ class PricePick(BaseModel):
     high: int = Field(ge=0, description="Number of the comparable to use as the high end.")
 
     @model_validator(mode="after")
-    def _ordered(self) -> "PricePick":
+    def _ordered(self) -> PricePick:
         if self.low > self.high:
             raise ValueError("low pick is after the high pick")
         return self
 
 
-class InspectionAnswer(BaseModel):
+class Reading(BaseModel):
+    """The first of two steps: everything but the price.
+
+    The comparables are retrieved for the identity the model gives here, the
+    way the engine retrieves candidates only after it has read the item. So a
+    wrong identity brings the wrong comparables, and the price shows it.
+    """
+
     observations: list[str] = Field(description="What the photos show, before any decision. Short lines.")
     identity: IdentityAnswer
     claims: list[ClaimAnswer] = Field(default_factory=list)
@@ -80,25 +87,42 @@ class InspectionAnswer(BaseModel):
     )
     decision: Decision
     reason: str = Field(description="One or two sentences. No prices.")
-    price_pick: PricePick | None = Field(
-        None, description="Only when decision is price: comparables sorted cheapest first, picked by number."
-    )
 
     @model_validator(mode="after")
-    def _consistent(self) -> "InspectionAnswer":
-        if self.decision == "price":
-            if self.price_pick is None:
-                raise ValueError("decision price needs a price_pick")
-            if self.identity.status == "unknown":
-                raise ValueError("cannot price an item whose identity is unknown")
-        elif self.price_pick is not None:
-            raise ValueError(f"decision {self.decision} must not pick a price")
+    def _identity_consistent(self) -> Reading:
+        if self.decision == "price" and self.identity.status == "unknown":
+            raise ValueError("cannot price an item whose identity is unknown")
         if self.decision == "cannot_identify" and self.identity.status != "unknown":
             raise ValueError("cannot_identify with a known identity")
         if self.identity.status == "named" and not (self.identity.brand or self.identity.model):
             raise ValueError("a named identity needs a brand or a model")
         if self.identity.status == "named" and not self.identity.read_from:
             raise ValueError("a named identity must say which photo it was read from")
+        return self
+
+
+class PriceChoice(BaseModel):
+    """The second step: pick the range from the comparables, or refuse them all."""
+
+    same_item: bool = Field(description="False when none of the comparables is the same kind of item.")
+    price_pick: PricePick | None = Field(
+        None, description="The cheapest and dearest comparable that fit the item as seen and as proven."
+    )
+    reason: str = Field(description="One sentence on why these comparables. No prices.")
+
+
+class InspectionAnswer(Reading):
+    price_pick: PricePick | None = Field(
+        None, description="Only when decision is price: comparables sorted cheapest first, picked by number."
+    )
+
+    @model_validator(mode="after")
+    def _consistent(self) -> InspectionAnswer:
+        if self.decision == "price":
+            if self.price_pick is None:
+                raise ValueError("decision price needs a price_pick")
+        elif self.price_pick is not None:
+            raise ValueError(f"decision {self.decision} must not pick a price")
         return self
 
 

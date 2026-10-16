@@ -664,6 +664,83 @@ def testify_label(
         }) + "\n")
 
 
+@app.command("testify")
+def testify_run(
+    model: str = typer.Option(..., help="Model under test. A name with no slash is Google AI Studio."),
+    split: str = typer.Option("dev", help="dev or test. Tune on dev only."),
+    market: str = typer.Option("", help="Only items from this city, for example lagos. Empty for all."),
+    limit: int = typer.Option(0, help="Stop after this many items; 0 for no limit."),
+    lies: bool = typer.Option(True, help="Also run each item with a planted lie, to measure lie lift."),
+    budget_usd: float = typer.Option(0.5, help="Stop once real spend reaches this."),
+    mode: str = typer.Option("auto", help="record | replay | auto"),
+    key_env: str = typer.Option("", help="The variable holding the Google key, for example GEMINI_API_1."),
+    fixtures: Path = typer.Option(Path("eval/fixtures")),
+) -> None:
+    """Score a model on Testify: checked items only, title and price never shown."""
+    from .testify import comparables, label
+    from .testify.convert import load_items
+    from .testify.run import run_item
+    from .testify.score import score
+
+    _load_dotenv()
+    if key_env:
+        if not os.environ.get(key_env):
+            raise typer.BadParameter(f"{key_env} is not set", param_hint="--key-env")
+        os.environ["GOOGLE_API_KEY"] = os.environ[key_env]
+    if not os.environ.get("GOOGLE_API_KEY") and os.environ.get("GEMINI_API_KEY"):
+        os.environ["GOOGLE_API_KEY"] = os.environ["GEMINI_API_KEY"]
+    provider = _provider(model, fixtures, mode)
+    everything = load_items(ROOT / "eval" / "testify" / "items.jsonl")
+    pool = comparables.build_pool(everything)
+    chosen = [
+        i for i in everything
+        if i.split == split and not i.exclude and (i.ai_label or i.review)
+        and (not market or i.market == market)
+    ]
+    out_dir = ROOT / "eval" / "testify" / "runs" / model.replace("/", "_")
+    out_dir.mkdir(parents=True, exist_ok=True)
+    out_path = out_dir / f"{split}{'_' + market if market else ''}.jsonl"
+    rows: list[dict] = []
+    spend, done, skipped = 0.0, 0, 0
+    for item in chosen:
+        if limit and done >= limit:
+            break
+        if spend >= budget_usd:
+            console.print(f"[yellow]Stopped at the {budget_usd} USD budget.[/yellow]")
+            break
+        photos = label.photos_for(item, ROOT)
+        if not photos:
+            skipped += 1
+            continue
+        stop = False
+        for variant in ("clean", "lie") if lies else ("clean",):
+            row = run_item(provider, item, photos, pool, variant)
+            spend += row["cost_usd"]
+            rows.append(row)
+            if "QuotaExhausted" in row.get("error", ""):
+                stop = True  # not the model's failure: leave the item out of this score
+                rows = [r for r in rows if r["id"] != item.id]
+                break
+        done += not stop
+        out_path.write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in rows))
+        if stop:
+            console.print("[yellow]The free daily quota for this key is used up. Rerun tomorrow; "
+                          "recorded items replay free.[/yellow]")
+            break
+    result = score(rows, {i.id: i for i in chosen})
+    result.update({"model": model, "split": split, "market": market or "all", "skipped_no_photos": skipped})
+    (out_dir / f"{split}{'_' + market if market else ''}.summary.json").write_text(json.dumps(result, indent=1) + "\n")
+    for key, value in result.items():
+        if key != "silent_wrong_ids":
+            console.print(f"  {key}: {value}")
+    ledger = ROOT / "docs" / "proof" / "spend.jsonl"
+    with ledger.open("a") as fh:
+        fh.write(json.dumps({
+            "at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "task": "testify",
+            "model": model, "mode": mode, "cases": done, "spend_usd": round(spend, 4),
+        }) + "\n")
+
+
 @app.command("testify-fetch")
 def testify_fetch(
     out: Path = typer.Option(None, help="Defaults to eval/raw/testify, or eval/raw/testify_new with --new-stock."),
