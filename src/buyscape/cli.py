@@ -677,6 +677,9 @@ def testify_run(
     budget_usd: float = typer.Option(0.5, help="Stop once real spend reaches this."),
     mode: str = typer.Option("auto", help="record | replay | auto"),
     key_env: str = typer.Option("", help="The variable holding the Google key, for example GEMINI_API_1."),
+    tag: str = typer.Option(
+        "", help="A second run of the same model, such as repeat1: recorded and written apart, to measure run noise."
+    ),
     fixtures: Path = typer.Option(Path("eval/fixtures")),
 ) -> None:
     """Score a model on Testify: checked items only, title and price never shown."""
@@ -692,7 +695,7 @@ def testify_run(
         os.environ["GOOGLE_API_KEY"] = os.environ[key_env]
     if not os.environ.get("GOOGLE_API_KEY") and os.environ.get("GEMINI_API_KEY"):
         os.environ["GOOGLE_API_KEY"] = os.environ["GEMINI_API_KEY"]
-    provider = _provider(model, fixtures, mode)
+    provider = _provider(model, fixtures / tag if tag else fixtures, mode)
     everything = load_items(ROOT / "eval" / "testify" / "items.jsonl")
     hashes = comparables.photo_hashes(everything, ROOT)
     pool = comparables.build_pool(everything, hashes)
@@ -703,7 +706,8 @@ def testify_run(
     ]
     out_dir = ROOT / "eval" / "testify" / "runs" / model.replace("/", "_").replace(":", "_")
     out_dir.mkdir(parents=True, exist_ok=True)
-    out_path = out_dir / f"{split}{'_' + market if market else ''}.jsonl"
+    name = f"{split}{'_' + market if market else ''}{'.' + tag if tag else ''}"
+    out_path = out_dir / f"{name}.jsonl"
     rows: list[dict] = []
     spend, done, skipped = 0.0, 0, 0
     for item in chosen:
@@ -733,7 +737,7 @@ def testify_run(
             break
     result = score(rows, {i.id: i for i in chosen})
     result.update({"model": model, "split": split, "market": market or "all", "skipped_no_photos": skipped})
-    (out_dir / f"{split}{'_' + market if market else ''}.summary.json").write_text(json.dumps(result, indent=1) + "\n")
+    (out_dir / f"{name}.summary.json").write_text(json.dumps(result, indent=1) + "\n")
     for key, value in result.items():
         if key != "silent_wrong_ids":
             console.print(f"  {key}: {value}")
