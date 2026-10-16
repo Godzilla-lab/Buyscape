@@ -24,6 +24,10 @@ class ProviderError(RuntimeError):
     """The provider could not answer. Callers decide whether to fail over."""
 
 
+class QuotaExhausted(ProviderError):
+    """The key's free daily quota is used up. Retrying before tomorrow is pointless."""
+
+
 class MissingFixture(RuntimeError):
     """Replay mode was asked for a call that was never recorded."""
 

@@ -598,14 +598,22 @@ def testify_label(
     budget_usd: float = typer.Option(0.5, help="Stop once list-price spend reaches this."),
     mode: str = typer.Option("auto", help="record | replay | auto"),
     fixtures: Path = typer.Option(Path("eval/fixtures")),
+    key_env: str = typer.Option(
+        "", help="The variable holding the Google key, for example GEMINI_API_1, to use a second project's free quota."
+    ),
 ) -> None:
     """Check benchmark items photo by photo with a model, and compare it with the hand review."""
     import yaml as _yaml
 
+    from .providers.base import QuotaExhausted
     from .testify import label
     from .testify.convert import load_items
 
     _load_dotenv()
+    if key_env:
+        if not os.environ.get(key_env):
+            raise typer.BadParameter(f"{key_env} is not set", param_hint="--key-env")
+        os.environ["GOOGLE_API_KEY"] = os.environ[key_env]
     if not os.environ.get("GOOGLE_API_KEY") and os.environ.get("GEMINI_API_KEY"):
         os.environ["GOOGLE_API_KEY"] = os.environ["GEMINI_API_KEY"]
     provider = _provider(model, fixtures, mode)
@@ -636,6 +644,10 @@ def testify_label(
             answer, meta = provider.structured_call(label.request_for(item, photos))
         except Exception as exc:  # a failed item is reported, never guessed
             console.print(f"[red]{item.id}: {type(exc).__name__}: {str(exc)[:160]}[/red]")
+            if isinstance(exc, QuotaExhausted):
+                console.print("[yellow]Rerun tomorrow, or with --key-env naming a key from another "
+                              "Google project.[/yellow]")
+                break
             continue
         called += 1
         spend += 0.0 if meta.replayed else meta.cost_usd

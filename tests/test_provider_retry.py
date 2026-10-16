@@ -94,3 +94,29 @@ def test_application_errors_keep_the_short_retry():
         provider.structured_call(_request())
     assert client.calls == 3
     assert slept == [1.5, 3.0]
+
+
+class _QuotaClient:
+    """Answers every call with the free tier's daily limit."""
+
+    def __init__(self) -> None:
+        self.calls = 0
+
+    def post(self, *args, **kwargs):
+        self.calls += 1
+        return httpx.Response(
+            429,
+            text='{"error": {"code": 429, "status": "RESOURCE_EXHAUSTED", "details": '
+            '[{"quotaId": "GenerateRequestsPerDayPerProjectPerModel-FreeTier"}]}}',
+        )
+
+
+def test_a_used_up_daily_quota_stops_at_once_instead_of_retrying() -> None:
+    from buyscape.providers.base import QuotaExhausted
+    from buyscape.providers.google import GoogleProvider
+
+    client = _QuotaClient()
+    provider = GoogleProvider("gemini-3.5-flash-lite", api_key="k", client=client)
+    with pytest.raises(QuotaExhausted):
+        provider.structured_call(_request())
+    assert client.calls == 1
