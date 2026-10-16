@@ -121,6 +121,32 @@ keeps, mostly bookshop stock it takes for used. So the model check is a
 little lenient: it should be spot-checked by a person before it is trusted
 on the test split.
 
+## Lagos, checked in full
+
+Every Lagos item with photos here was checked the same way on 16 Oct 2026,
+on the sharp photos (`buyscape testify-label --market lagos`). The same rule
+decides. Free on the Google AI Studio free tier; it would cost about 3 dollars
+at list price.
+
+| Lagos | Items |
+|---|---|
+| Checked | 722 |
+| **Kept** | **331** (46%) |
+| Dropped as new stock | 356 |
+| Dropped as a buyer's advert or a service | 16 |
+| Dropped because the photo is not the seller's item | 14 |
+| Dropped for other reasons in the hand review | 5 |
+| Not checked: no photos on this machine | 186 |
+
+Of the 331 kept, 40 are BuyScrap's own adverts and 291 are Jiji. Only 5 Jiji
+material lots survive, which confirms that material lots must come from
+recyclers and BuyScrap. The 186 unchecked are the 178 original phone, laptop
+and appliance cases, whose photos are only on the machine that fetched them,
+and 8 BuyScrap adverts with no photos at all.
+
+The keep or drop agreement with the hand review is still 88 of 100 after the
+photos were sharpened.
+
 ## Next step
 
 Check every remaining item the same way, measure how often an AI reviewer
