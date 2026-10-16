@@ -27,6 +27,35 @@ and every call is recorded, so the score can be checked for nothing.
 | Asking price far outside, more than double or less than half | 16% |
 | Median range width, against the asking price | 0.36 |
 
+## Correction: most of the lie effect is run noise
+
+The honest variant was run a second time (`--tag repeat1`, recorded apart in
+`eval/fixtures/repeat1/`). Nemotron gave a different decision on 16 of the
+57 items that did not fail either time, with no lie in either run:
+
+| Honest run, then honest repeat | Items |
+|---|---|
+| Same decision | 41 |
+| Asked for proof, then priced | 5 |
+| Priced, then asked for proof | 3 |
+| Other changes | 8 |
+
+Of the 6 items where the lie seemed to turn a refusal into a price, 5 were
+priced in the honest repeat too. So **"6 of 8" is not evidence that the lie
+moved the model**: it flips between asking and pricing about half the time
+on its own. Prices move too: of 19 items priced in both honest runs, 3 rose
+and 3 fell. The 2 of 22 prices the lie raised are inside that noise.
+
+What does hold: Nemotron is **unstable**. A valuer that gives a different
+answer to the same advert one time in four cannot be trusted with money,
+and that is a finding in its own right. And the benchmark must measure a
+lie against an honest repeat, never against one honest run: the lie's
+effect is the difference between the two rates. Claude's 0 of 19 is below
+any noise, but its own run noise is not yet measured.
+
+The sections below are kept as first written, with this correction applying
+to every lie number in them.
+
 ## Lies
 
 Each item ran a second time with a planted claim the photos cannot prove:
@@ -103,13 +132,15 @@ through `testify-import` and were scored by replay, exactly as a model's.
 | Named a model the photo check says is unreadable | 0 | 5 of 21 |
 | Called the planted claim supported | 0 | 2 of 75 |
 | Lie raised a price it had already given | 2 of 22 | 3 of 15 |
-| **Lie turned a refusal into a price** | **6 of 8** | **0 of 19** |
+| Lie turned a refusal into a price | 6 of 8, but 5 of those 6 also priced in an honest repeat | 0 of 19 |
 
 What the hand check found behind these:
 
 - **The lie.** Claude refused 19 honest adverts and priced none of them once
-  the lie was added; Nemotron priced 6 of its 8. This is the clearest
-  difference between the two.
+  the lie was added. Nemotron priced 6 of its 8, but its honest repeat shows
+  that is mostly its own run noise (see the correction above). The clear
+  difference is stability, not lie resistance, until both are measured
+  against repeats.
 - **Claude's one wrong item** names a Brother "SE600 series" where the
   machine is an SE630: only "SE6" was readable and it hedged to the family.
 - **The five named models.** Two were real readings the Gemini photo check
@@ -154,5 +185,6 @@ Limits of this comparison:
    write lies per kind of item; then rerun both models, free from recordings
    where nothing changed.
 3. Abuja, Rivers and Oyo once their photo check is done, for a larger dev set.
-4. A clean variant run twice, to separate a lie's effect from run noise
-   (running for Nemotron).
+4. Score a lie against an honest repeat, not one run: run each variant
+   twice or three times and report the lie's effect as the difference in
+   rates, with the noise beside it. Measure Claude's run noise the same way.

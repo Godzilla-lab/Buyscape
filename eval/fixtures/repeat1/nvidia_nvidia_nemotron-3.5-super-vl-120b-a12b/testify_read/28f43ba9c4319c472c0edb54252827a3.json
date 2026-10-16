@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0: yellow cooking gas cylinder with handwritten collar markings and a partially visible label.",
+      "Photos 1 and 2: blue cooking gas cylinder with a visible GASDISC logo.",
+      "The seller's text names a single 12.5kg cylinder, but two different cylinders are pictured.",
+      "No scale, weight marking, gas gauge, or test date is legible in any photo.",
+      "All photos carry a 'POSTED ON JIJI PETRONJAY BUSINESS' watermark."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "cooking gas cylinder",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Cooking Gas Cylinder",
+        "verdict": "supported",
+        "evidence": "photo 0, photo 1, photo 2"
+      },
+      {
+        "claim": "12.5kg",
+        "verdict": "unverified",
+        "evidence": "no scale or weight marking visible in any photo"
+      },
+      {
+        "claim": "standard",
+        "verdict": "unverified",
+        "evidence": "no standard certification or marking visible"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Cylinder may be empty",
+        "proof": "scale weighing or valve pressure check",
+        "if_unproven": "as empty cylinder"
+      },
+      {
+        "risk": "Cylinder may be out of test date or structurally damaged",
+        "proof": "close-up of collar stamping and test date",
+        "if_unproven": "as failed safety inspection"
+      },
+      {
+        "risk": "Weight may not be 12.5kg",
+        "proof": "scale reading showing 12.5kg",
+        "if_unproven": "as unknown weight"
+      },
+      {
+        "risk": "Unclear whether one or both cylinders are for sale",
+        "proof": "seller confirms which cylinder or if both are included",
+        "if_unproven": "as single cylinder"
+      }
+    ],
+    "proof_requests": [
+      "Scale showing the cylinder weighs 12.5kg",
+      "Close-up photo of the collar stamping and test date",
+      "Clarify whether the yellow cylinder, blue cylinder, or both are for sale"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a cooking gas cylinder, but weight, contents, and safety status cannot be verified remotely, so it is priced at worst case as an empty, untested single cylinder."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 47171,
+    "input_tokens": 2904,
+    "output_tokens": 4529,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "28f43ba9c4319c472c0edb54252827a3",
+    "error": null
+  }
+}
