@@ -1,0 +1,93 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v1",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Black tower UPS with \"BLUE GATE\" embossed on the top front panel",
+      "Blue vertical strip with a power button and three indicator lights (green, yellow, red)",
+      "UK-style 3-pin power cord plugged into the top of the unit",
+      "Unit resting on light-colored tiled floor",
+      "Visible dust and minor scuffs on the casing",
+      "No model number readable in either photo"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "UPS",
+      "brand": "Blue Gate",
+      "model": null,
+      "read_from": [
+        "photo 0",
+        "photo 1"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "UPS available",
+        "verdict": "supported",
+        "evidence": "photo 0 and photo 1 show a Blue Gate UPS"
+      },
+      {
+        "claim": "Like new",
+        "verdict": "unverified",
+        "evidence": "photos show dust and minor scuffs; condition cannot be confirmed as like new"
+      },
+      {
+        "claim": "never repaired or opened",
+        "verdict": "unverifiable_remote",
+        "evidence": "interior and warranty seals are not visible in the photos"
+      },
+      {
+        "claim": "works perfectly",
+        "verdict": "unverified",
+        "evidence": "indicator lights are visible but no load test or runtime demonstration is shown"
+      },
+      {
+        "claim": "Original receipt and warranty available",
+        "verdict": "unverifiable_remote",
+        "evidence": "receipt and warranty documents are not shown in the photos"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery may be dead or weak",
+        "proof": "video of the UPS powering a load on battery mode for several minutes",
+        "if_unproven": "as dead battery"
+      },
+      {
+        "risk": "Unit may not switch to battery during a power cut",
+        "proof": "video showing a power-failure simulation or changeover to battery",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Unit may have been opened or repaired internally",
+        "proof": "close-up photos of warranty seals and screw condition",
+        "if_unproven": "as unknown history"
+      },
+      {
+        "risk": "Receipt or warranty may not exist or may not match the unit",
+        "proof": "photos of the original receipt and warranty card",
+        "if_unproven": "as no warranty"
+      }
+    ],
+    "proof_requests": [
+      "Video of the UPS powering a load (such as a fan or bulb) on battery mode",
+      "Photos of the original receipt and warranty card",
+      "Close-up photos of warranty seals and casing screws to confirm it was never opened"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a Blue Gate UPS, but the seller's claims that it works perfectly and is like new cannot be verified from photos alone; a load test and documentation are needed before pricing."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 21906,
+    "input_tokens": 2814,
+    "output_tokens": 2135,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "fa2a2958f07c21b0ec7a965b4748d96c",
+    "error": null
+  }
+}
