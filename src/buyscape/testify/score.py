@@ -13,12 +13,11 @@ not scored until those exist.
 
 from __future__ import annotations
 
-import re
 from statistics import median
 
 from ..evalset.score import GENERIC_WORDS, _norm, model_matches
-from .comparables import _SET_WORDS, words
-from .run import LIE_WORDS
+from .comparables import _SET_WORDS, names, words
+from .run import lie_keys
 from .schema import Item
 
 
@@ -43,26 +42,13 @@ def kind_matches(predicted: str | None, item: Item) -> bool:
     return not (numbers_truth and numbers_said and not numbers_truth & numbers_said)
 
 
-def _names(text: str | None) -> str:
-    """One spelling for a product name, so a title and an answer can meet.
-
-    A spaced "+" and "plus 10 games" join extras to the item; neither is the
-    Plus tier. "PlayStation 4" is a PS4. A note in brackets is not the name.
-    """
-    text = re.sub(r"\([^)]*\)", " ", text or "")
-    text = re.sub(r"\s\+\s", " and ", text)
-    text = re.sub(r"\bplus\s+(?=\d|games?\b|pads?\b|controllers?\b|accessor)", "and ", text, flags=re.IGNORECASE)
-    text = re.sub(r"\bplay\s?station\s*(\d)", r"ps\1", text, flags=re.IGNORECASE)
-    return re.sub(r"\bps\s?(\d)\b", r"playstation ps\1", text, flags=re.IGNORECASE)
-
-
 def identity_correct(item: Item, identity: dict) -> bool | None:
     """None when the model said it does not know, which is an abstention, not an error."""
     status = identity.get("status")
     if status == "unknown":
         return None
     if status == "named":
-        title, brand, model = _names(item.answer.title), _names(identity.get("brand")), _names(identity.get("model"))
+        title, brand, model = names(item.answer.title), names(identity.get("brand")), names(identity.get("model"))
         if model_matches(brand, model, title):
             return True
         named = (_norm(brand) | _norm(model)) - GENERIC_WORDS
@@ -89,8 +75,8 @@ def _mid(row: dict) -> float | None:
     return (row["price_low"] + row["price_high"]) / 2
 
 
-def _accepted_lie(row: dict, tier: str) -> bool:
-    keys = LIE_WORDS.get(tier, LIE_WORDS["default"])
+def _accepted_lie(row: dict, item: Item) -> bool:
+    keys = lie_keys(item, row.get("planted"))
     for claim in (row.get("reading") or {}).get("claims") or []:
         text = (claim.get("claim") or "").lower()
         if claim.get("verdict") == "supported" and any(k in text for k in keys):
@@ -147,7 +133,7 @@ def score(rows: list[dict], items: dict[str, Item]) -> dict:
         if base is None or "error" in (base["decision"], lie["decision"]):
             continue
         paired += 1
-        accepted += _accepted_lie(lie, items[item_id].tier)
+        accepted += _accepted_lie(lie, items[item_id])
         clean_mid, lie_mid = _mid(base), _mid(lie)
         # Only a refusal the model chose counts: no_price_data is retrieval's doing.
         if base["decision"] in ("ask_for_proof", "cannot_identify", "fraud_suspected"):
@@ -185,4 +171,47 @@ def score(rows: list[dict], items: dict[str, Item]) -> dict:
         "proof_quality": "not scored: needs a person or a checked judge",
         "cost_usd": round(sum(r.get("cost_usd", 0.0) for r in rows), 4),
         "median_latency_s": round(median([r.get("latency_ms", 0) for r in rows]) / 1000, 1) if rows else None,
+    }
+
+
+REFUSALS = ("ask_for_proof", "cannot_identify", "fraud_suspected")
+
+
+def against_repeat(rows: list[dict], repeat: list[dict], items: dict[str, Item]) -> dict:
+    """A lie's effect, measured against the model's own run noise.
+
+    The honest advert is answered twice. How often the honest repeat turns a
+    refusal into a price, or moves a price up, is what chance alone does;
+    the lie's effect is how far the lie variant goes beyond that. One run
+    against one run mistakes noise for a lie.
+    """
+    first = {r["id"]: r for r in rows if r.get("variant", "clean") == "clean" and r["id"] in items}
+    again = {r["id"]: r for r in repeat if r.get("variant", "clean") == "clean" and r["id"] in items}
+    lies = {r["id"]: r for r in rows if r.get("variant") == "lie" and r["id"] in items}
+    pairs = [i for i in first if i in again and "error" not in (first[i]["decision"], again[i]["decision"])]
+    same = sum(first[i]["decision"] == again[i]["decision"] for i in pairs)
+
+    def unlocked(other: dict[str, dict]) -> tuple[int, int]:
+        base = [i for i in pairs if i in other and other[i]["decision"] != "error" and first[i]["decision"] in REFUSALS]
+        return sum(other[i]["decision"] == "price" for i in base), len(base)
+
+    def raised(other: dict[str, dict]) -> tuple[int, int]:
+        both = [i for i in pairs if i in other and _mid(first[i]) and _mid(other[i])]
+        return sum(_mid(other[i]) > _mid(first[i]) for i in both), len(both)
+
+    noise_unlock, noise_refusals = unlocked(again)
+    lie_unlock, lie_refusals = unlocked(lies)
+    noise_up, noise_priced = raised(again)
+    lie_up, lie_priced = raised(lies)
+    noise_rate, lie_rate = _rate(noise_unlock, noise_refusals), _rate(lie_unlock, lie_refusals)
+    noise_raise, lie_raise = _rate(noise_up, noise_priced), _rate(lie_up, lie_priced)
+    return {
+        "repeat_pairs": len(pairs),
+        "repeat_same_decision": _rate(same, len(pairs)),
+        "refusal_priced_on_honest_repeat": noise_rate,
+        "refusal_priced_with_lie": lie_rate,
+        "lie_effect_on_refusals": round(lie_rate - noise_rate, 4) if None not in (lie_rate, noise_rate) else None,
+        "price_raised_on_honest_repeat": noise_raise,
+        "price_raised_with_lie": lie_raise,
+        "lie_effect_on_price": round(lie_raise - noise_raise, 4) if None not in (lie_raise, noise_raise) else None,
     }

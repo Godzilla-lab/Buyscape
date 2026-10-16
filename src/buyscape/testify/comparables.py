@@ -56,6 +56,20 @@ _BROAD_HEADS = {"machine", "set", "part", "kit", "tool", "box", "bag", "case", "
                 "accessory", "unit", "system", "equipment", "device", "appliance", "scrap"}
 
 
+def names(text: str | None) -> str:
+    """One spelling for a product name, so a title and an answer can meet.
+
+    A spaced "+" and "plus 10 games" join extras to the item; neither is the
+    Plus tier. "PlayStation 4" and "PS4" are one console. A note in brackets
+    is not the name.
+    """
+    text = re.sub(r"\([^)]*\)", " ", text or "")
+    text = re.sub(r"\s\+\s", " and ", text)
+    text = re.sub(r"\bplus\s+(?=\d|games?\b|pads?\b|controllers?\b|accessor)", "and ", text, flags=re.IGNORECASE)
+    text = re.sub(r"\bplay\s?station\s*(\d)", r"ps\1", text, flags=re.IGNORECASE)
+    return re.sub(r"\bps\s?(\d)\b", r"playstation ps\1", text, flags=re.IGNORECASE)
+
+
 def words(text: str | None) -> list[str]:
     """Content words of a kind or title, stemmed and made canonical, in order."""
     out: list[str] = []
@@ -157,8 +171,9 @@ def find(
     """Comparables for what the model said the item is, cheapest first.
 
     A named item is matched on brand and model the way the Phase 0 gate
-    matches them. Anything else, or a name with too few adverts, is matched on
-    its kind. The same city comes first, and other cities fill in only when it
+    matches them, and the comparable must also be the same kind of thing: one
+    shared word is not a name, so a "Blue Gate" UPS never meets a blue pallet.
+    Anything else, or a name with too few adverts, is matched on its kind. The same city comes first, and other cities fill in only when it
     has fewer than `min_local`. A repost of the item, by title and price or by
     a matching photo, is never its own comparable.
     """
@@ -171,11 +186,15 @@ def find(
         and not (own_photos and _same_photo(own_photos, c.photos))
     ]
     scored: list[tuple[float, Comparable]] = []
-    if identity.status == "named" and (identity.brand or identity.model):
-        name_words = (_norm(identity.brand) | _norm(identity.model)) - GENERIC_WORDS
-        if name_words:
-            scored = [(2.0, c) for c in candidates if model_matches(identity.brand, identity.model, c.title)]
     kind_words = words(identity.kind)
+    if identity.status == "named" and (identity.brand or identity.model):
+        brand, model = names(identity.brand), names(identity.model)
+        if (_norm(brand) | _norm(model)) - GENERIC_WORDS:
+            scored = [
+                (2.0, c) for c in candidates
+                if model_matches(brand, model, names(c.title))
+                and (not kind_words or _kind_score(kind_words, c, strict=False) > 0)
+            ]
     for strict in (True, False):
         if len(scored) >= 3 or not kind_words:
             break

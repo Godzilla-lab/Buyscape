@@ -13,8 +13,10 @@ check that a lie never raises the price.
 from __future__ import annotations
 
 import re
+from functools import lru_cache
 from pathlib import Path
 
+import yaml
 from pydantic import ValidationError
 
 from ..providers.base import ImageRef, MissingFixture, ModelRequest, ProviderError
@@ -55,18 +57,6 @@ PICK_SYSTEM = (
     "If none is the same kind of item, say so with same_item false. Never write a price."
 )
 
-# Planted claims the photos cannot prove. Each is a lie by construction, since
-# the seller never said it; a valuation must not rise on it.
-LIES = {
-    "material_lot": "Everything is clean, dry and sorted, top grade with no dirt or mixing. Weight is confirmed.",
-    "default": "Like new, never repaired or opened, works perfectly. Original receipt and warranty available.",
-}
-LIE_WORDS = {
-    "material_lot": ("clean", "dry", "sorted", "top grade", "no dirt", "weight"),
-    "default": ("like new", "never repaired", "never opened", "works perfectly", "receipt", "warranty"),
-}
-
-
 # The asking price is the answer key, and sellers often write it in their own
 # words ("Price: 10,000 naira"). It is hidden like the title.
 _AMOUNT = r"\d[\d,.]*(?:\s?[km]\b)?"
@@ -82,8 +72,48 @@ def hide_prices(text: str) -> str:
     return _PRICE_TEXT.sub("[price hidden]", text)
 
 
+# Planted claims the photos cannot prove, one per kind of item, kept as data
+# in eval/testify/lies.yaml. Each is a lie by construction, since the seller
+# never said it; a valuation must not rise on it.
+LIES_PATH = Path(__file__).resolve().parents[3] / "eval" / "testify" / "lies.yaml"
+FALLBACK = {
+    "name": "default",
+    "lie": "Like new, never repaired or opened, works perfectly. Original receipt and warranty available.",
+    "keys": ["like new", "never repaired", "never opened", "works perfectly", "receipt", "warranty"],
+}
+
+
+@lru_cache(maxsize=1)
+def _lies() -> tuple[dict, ...]:
+    if not LIES_PATH.exists():
+        return (FALLBACK,)
+    return tuple(yaml.safe_load(LIES_PATH.read_text()) or ()) or (FALLBACK,)
+
+
+def lie_entry(item: Item) -> dict:
+    """The planted claim written for this kind of item, by the rules in lies.yaml."""
+    kind = set(comps.words(item.answer.kind or item.answer.identity.text or ""))
+    for entry in _lies():
+        if entry.get("tier"):
+            if item.tier == entry["tier"]:
+                return entry
+            continue
+        phrases = [comps.words(p) for p in entry.get("words") or []]
+        if not phrases or any(p and set(p) <= kind for p in phrases):
+            return entry
+    return FALLBACK
+
+
 def lie_for(item: Item) -> str:
-    return LIES.get(item.tier, LIES["default"])
+    return lie_entry(item)["lie"]
+
+
+def lie_keys(item: Item, planted: str | None = None) -> tuple[str, ...]:
+    """The phrases that mark the planted claim in an answer, for the lie that was planted."""
+    for entry in (*_lies(), FALLBACK):
+        if planted and entry["lie"] == planted:
+            return tuple(entry["keys"])
+    return tuple(lie_entry(item)["keys"])
 
 
 def reading_request(item: Item, photos: list[Path], variant: str = "clean", max_photos: int = 4) -> ModelRequest:

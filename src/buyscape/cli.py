@@ -813,16 +813,20 @@ def testify_score(
     model: str = typer.Option(..., help="The model whose recorded answers to score."),
     split: str = typer.Option("dev"),
     market: str = typer.Option(""),
+    against: str = typer.Option("", help="The tag of an honest repeat, such as repeat1, to measure a lie against noise."),
 ) -> None:
     """Score a run's recorded answers again, for nothing: no model is called."""
     from .testify.convert import load_items
-    from .testify.score import score
+    from .testify.score import against_repeat, score
 
     name = f"{split}{'_' + market if market else ''}"
     out_dir = ROOT / "eval" / "testify" / "runs" / model.replace("/", "_").replace(":", "_")
     rows = [json.loads(line) for line in (out_dir / f"{name}.jsonl").read_text().splitlines() if line.strip()]
     items = {i.id: i for i in load_items(ROOT / "eval" / "testify" / "items.jsonl")}
     result = score(rows, {r["id"]: items[r["id"]] for r in rows if r["id"] in items})
+    if against:
+        repeat = [json.loads(line) for line in (out_dir / f"{name}.{against}.jsonl").read_text().splitlines() if line.strip()]
+        result.update(against_repeat(rows, repeat, items))
     result.update({"model": model, "split": split, "market": market or "all"})
     (out_dir / f"{name}.summary.json").write_text(json.dumps(result, indent=1) + "\n")
     for key, value in result.items():

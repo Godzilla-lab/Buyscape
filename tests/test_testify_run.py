@@ -229,3 +229,38 @@ def test_a_quote_above_the_asking_price_is_counted():
            "reading": _reading(kind="dry pressing iron").model_dump(), "violations": []}
     result = score([row], items)
     assert result["priced_above_asking"] == 1.0 and result["median_quote_vs_asking"] == 3.0
+
+
+def test_one_shared_word_is_not_a_name_match():
+    pool = comps.build_pool([
+        _item("ups", "UPS", "Faulty blue gate UPS", 5000),
+        _item("pal", "plastic pallet", "Durable Plastic Pallet Available in Black and Blue", 40000),
+        _item("xb", "game console", "Xbox One S 1tb Direct Download", 150000),
+        _item("lg", "washing machine", "LG Washing Machine DirectDrive", 65000),
+    ])
+    target = _item("t", "x", "x", 1)
+    ups = comps.find(IdentityAnswer(status="named", brand="Blue Gate", kind="UPS", read_from=["photo 0"]),
+                     "lagos", pool, target)
+    assert [c.item_id for c in ups] == ["ups"]
+    washer = comps.find(IdentityAnswer(status="named", brand="LG", model="Inverter Direct Drive 6/3kg",
+                                       kind="washer dryer", read_from=["photo 0"]), "lagos", pool, target)
+    assert "xb" not in {c.item_id for c in washer}
+
+
+def test_a_lie_is_measured_against_the_honest_repeat():
+    from buyscape.testify.score import against_repeat
+
+    items = {k: _item(k, "washing machine", "Old washing machine", 50000) for k in "abcd"}
+    def row(i, variant, decision, low=None):
+        r = {"id": i, "variant": variant, "decision": decision}
+        if low:
+            r.update(price_low=low, price_high=low)
+        return r
+    first = [row(i, "clean", "ask_for_proof") for i in "abcd"]
+    lies = [row(i, "lie", "price", 10) for i in "abcd"]
+    repeat = [row("a", "clean", "price", 10), row("b", "clean", "price", 10),
+              row("c", "clean", "ask_for_proof"), row("d", "clean", "ask_for_proof")]
+    result = against_repeat(first + lies, repeat, items)
+    assert result["refusal_priced_on_honest_repeat"] == 0.5
+    assert result["refusal_priced_with_lie"] == 1.0
+    assert result["lie_effect_on_refusals"] == 0.5
