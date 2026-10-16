@@ -175,3 +175,39 @@ def test_naming_the_wrong_version_is_wrong_even_when_the_kind_fits():
 def test_a_spaced_plus_is_an_accessory_not_the_plus_tier():
     camera = _item("c", "camera", "Nikon Camera D3300 + 18-55mm Lens", 380000)
     assert identity_correct(camera, {"status": "named", "brand": "Nikon", "model": "D3300", "kind": "camera"})
+
+
+def test_a_sitting_exports_blind_cases_and_scores_the_answers_like_a_model(tmp_path: Path):
+    import json
+
+    from buyscape.providers.recording import RecordingProvider
+    from buyscape.testify import sitting
+
+    photo = tmp_path / "00.jpg"
+    photo.write_bytes(b"\xff\xd8\xff")
+    pool = comps.build_pool(POOL_ITEMS)
+    item = _item("bent-office-chair", "washing machine", "Secret Title", 50000)
+    fixtures, out = tmp_path / "fx", tmp_path / "cases"
+
+    assert sitting.export(fixtures, [(item, [photo], ())], pool, out) == 2  # clean and lie reads
+    prompt = (out / "case_000" / "prompt.md").read_text()
+    assert "Secret Title" not in prompt and "50000" not in prompt and "bent-office-chair" not in prompt
+    assert (out / "case_000" / "photo_0.jpg").exists()
+    assert "bent-office-chair" in sitting.index_path(out).read_text()  # the index sits outside
+
+    reading = _reading().model_dump()
+    (out / "case_000" / "answer.json").write_text(json.dumps(reading))
+    (out / "case_001" / "answer.json").write_text("not json")
+    assert sitting.import_answers(fixtures, out, "agent:test") == {"valid": 1, "invalid": 1, "missing": 0}
+
+    # The valid read now needs its price pick: that is the second batch.
+    assert sitting.export(fixtures, [(item, [photo], ())], pool, out, lies=False) == 1
+    pick = PriceChoice(same_item=True, price_pick=PricePick(low=0, high=1), reason="r").model_dump()
+    (out / "case_000" / "answer.json").write_text(json.dumps(pick))
+    sitting.import_answers(fixtures, out, "agent:test")
+
+    replay = RecordingProvider(None, fixtures, mode="replay")
+    clean = run_item(replay, item, [photo], pool, "clean")
+    lie = run_item(replay, item, [photo], pool, "lie")
+    assert (clean["decision"], clean["price_low"], clean["price_high"]) == ("price", 45000, 60000)
+    assert lie["decision"] == "error"  # an answer that is not JSON fails like a model's would

@@ -168,6 +168,10 @@ def _provider(model: str, fixtures: Path, mode: str) -> VisionProvider:
     """
     if model == "fake":
         return RecordingProvider(FakeProvider(), fixtures / "fake", mode="record")
+    if model.startswith("agent:"):
+        # A person or an agent who sat the test: answers come only from the
+        # recordings that testify-import wrote.
+        return RecordingProvider(None, fixtures / model.replace(":", "_"), mode="replay")
 
     served = model
     if model.startswith("grok"):
@@ -747,6 +751,61 @@ def testify_run(
             "at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "task": "testify",
             "model": model, "mode": mode, "cases": done, "spend_usd": round(spend, 4),
         }) + "\n")
+
+
+def _testify_cases(split: str, market: str):
+    """Checked, scored items with photos here, and the comparables pool, for one split and city."""
+    from .testify import comparables, label
+    from .testify.convert import load_items
+
+    everything = load_items(ROOT / "eval" / "testify" / "items.jsonl")
+    hashes = comparables.photo_hashes(everything, ROOT)
+    pool = comparables.build_pool(everything, hashes)
+    cases = []
+    for item in everything:
+        if item.split != split or item.exclude or not (item.ai_label or item.review):
+            continue
+        if market and item.market != market:
+            continue
+        photos = label.photos_for(item, ROOT)
+        if photos:
+            cases.append((item, photos, tuple(hashes.get(item.id, ()))))
+    return cases, pool
+
+
+@app.command("testify-export")
+def testify_export(
+    model: str = typer.Option("agent:claude", help="Who sits the test, as agent:<name>."),
+    split: str = typer.Option("dev"),
+    market: str = typer.Option(""),
+    lies: bool = typer.Option(True),
+    out: Path = typer.Option(None, help="Defaults to eval/testify/sittings/<name>/<split>_<market>."),
+    fixtures: Path = typer.Option(Path("eval/fixtures")),
+) -> None:
+    """Write the cases a person or an agent still has to answer, one folder each."""
+    from .testify import sitting
+
+    name = model.replace(":", "_")
+    out = out or ROOT / "eval" / "testify" / "sittings" / name / f"{split}{'_' + market if market else ''}"
+    cases, pool = _testify_cases(split, market)
+    n = sitting.export(fixtures / name, cases, pool, out, lies)
+    console.print(f"{n} cases to answer in {out}; the index is {sitting.index_path(out)}")
+
+
+@app.command("testify-import")
+def testify_import(
+    model: str = typer.Option("agent:claude"),
+    split: str = typer.Option("dev"),
+    market: str = typer.Option(""),
+    out: Path = typer.Option(None),
+    fixtures: Path = typer.Option(Path("eval/fixtures")),
+) -> None:
+    """Record the answers written in the exported folders, then run testify --mode replay to score them."""
+    from .testify import sitting
+
+    name = model.replace(":", "_")
+    out = out or ROOT / "eval" / "testify" / "sittings" / name / f"{split}{'_' + market if market else ''}"
+    console.print(sitting.import_answers(fixtures / name, out, model))
 
 
 @app.command("testify-score")

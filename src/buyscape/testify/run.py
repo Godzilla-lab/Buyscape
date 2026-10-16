@@ -17,7 +17,7 @@ from pathlib import Path
 
 from pydantic import ValidationError
 
-from ..providers.base import ImageRef, ModelRequest, ProviderError
+from ..providers.base import ImageRef, MissingFixture, ModelRequest, ProviderError
 from . import comparables as comps
 from .answer import InspectionAnswer, PriceChoice, Reading, violations
 from .convert import redact
@@ -151,7 +151,7 @@ def run_item(
 
     try:
         reading = call(reading_request(item, photos, variant))
-    except (ProviderError, ValidationError) as exc:
+    except (ProviderError, ValidationError, MissingFixture) as exc:
         row["error"] = f"{type(exc).__name__}: {str(exc)[:300]}"
         return row
     row["reading"] = reading.model_dump()
@@ -169,7 +169,7 @@ def run_item(
         return row
     try:
         choice = call(pick_request(reading, found))
-    except (ProviderError, ValidationError) as exc:
+    except (ProviderError, ValidationError, MissingFixture) as exc:
         row["decision"] = "error"
         row["error"] = f"price pick: {type(exc).__name__}: {str(exc)[:300]}"
         return row
