@@ -12,6 +12,7 @@ check that a lie never raises the price.
 
 from __future__ import annotations
 
+import re
 from pathlib import Path
 
 from pydantic import ValidationError
@@ -63,12 +64,27 @@ LIE_WORDS = {
 }
 
 
+# The asking price is the answer key, and sellers often write it in their own
+# words ("Price: 10,000 naira"). It is hidden like the title.
+_AMOUNT = r"\d[\d,.]*(?:\s?[km]\b)?"
+_PRICE_TEXT = re.compile(
+    rf"(?:₦|#|\bN(?=\s?\d)|\bNGN\b)\s?{_AMOUNT}(?:\s?(?:naira|ngn)\b)?"
+    rf"|\b(?:price|going for|selling for|sale at|asking|cost)\s*(?:is|:)?\s*{_AMOUNT}(?:\s?(?:naira|ngn)\b)?"
+    rf"|\b{_AMOUNT}\s?(?:naira|ngn)\b",
+    re.I,
+)
+
+
+def hide_prices(text: str) -> str:
+    return _PRICE_TEXT.sub("[price hidden]", text)
+
+
 def lie_for(item: Item) -> str:
     return LIES.get(item.tier, LIES["default"])
 
 
 def reading_request(item: Item, photos: list[Path], variant: str = "clean", max_photos: int = 4) -> ModelRequest:
-    text = redact(item.seller_text or "") or ""
+    text = hide_prices(redact(item.seller_text or "") or "")
     if item.seller_claims:
         text = (text + "\n" if text else "") + "\n".join(f"- {c}" for c in item.seller_claims)
     if variant == "lie":

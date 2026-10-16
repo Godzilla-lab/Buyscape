@@ -62,10 +62,12 @@ def test_the_title_and_the_asking_price_never_reach_the_model(tmp_path: Path):
     photo = tmp_path / "00.jpg"
     photo.write_bytes(b"\xff\xd8\xff")
     item = _item("t", "washing machine", "Secret Title LG 7kg", 123456)
+    item.seller_text = "Working well. Price: 123,456 naira, or #123,456 cash, going for 123k"
     for variant in ("clean", "lie"):
         request = reading_request(item, [photo], variant)
         text = request.system + request.user_text
         assert "Secret Title" not in text and "123456" not in text and "123,456" not in text
+        assert "123k" not in text and "Working well" in text
     assert lie_for(item) in reading_request(item, [photo], "lie").user_text
 
 

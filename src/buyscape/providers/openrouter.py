@@ -99,6 +99,8 @@ class OpenRouterProvider:
     ENDPOINTS: dict[str, tuple[str, str]] = {
         "openrouter": (API_URL, "OPENROUTER_API_KEY"),
         "xai": (XAI_URL, "XAI_API_KEY"),
+        # NVIDIA's API catalogue serves open vision models on a free developer tier.
+        "nvidia": ("https://integrate.api.nvidia.com/v1/chat/completions", "NVIDIA_API_KEY"),
     }
 
     def __init__(

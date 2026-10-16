@@ -169,8 +169,11 @@ def _provider(model: str, fixtures: Path, mode: str) -> VisionProvider:
     if model == "fake":
         return RecordingProvider(FakeProvider(), fixtures / "fake", mode="record")
 
+    served = model
     if model.startswith("grok"):
         vendor, key = "xai", "XAI_API_KEY"
+    elif model.startswith("nvidia:"):
+        vendor, key, served = "nvidia", "NVIDIA_API_KEY", model.removeprefix("nvidia:")
     elif "/" in model:
         vendor, key = "openrouter", "OPENROUTER_API_KEY"
     else:
@@ -185,13 +188,13 @@ def _provider(model: str, fixtures: Path, mode: str) -> VisionProvider:
         else:
             from .providers.openrouter import OpenRouterProvider
 
-            inner = OpenRouterProvider(model, vendor=vendor)
+            inner = OpenRouterProvider(served, vendor=vendor)
     elif mode != "replay":
         console.print(
             f"[yellow]{key} is not set, so only recorded calls can be replayed "
             f"for {model}.[/yellow]"
         )
-    return RecordingProvider(inner, fixtures / model.replace("/", "_"), mode=mode)
+    return RecordingProvider(inner, fixtures / model.replace("/", "_").replace(":", "_"), mode=mode)
 
 
 @app.command("fetch-testset")
@@ -697,7 +700,7 @@ def testify_run(
         if i.split == split and not i.exclude and (i.ai_label or i.review)
         and (not market or i.market == market)
     ]
-    out_dir = ROOT / "eval" / "testify" / "runs" / model.replace("/", "_")
+    out_dir = ROOT / "eval" / "testify" / "runs" / model.replace("/", "_").replace(":", "_")
     out_dir.mkdir(parents=True, exist_ok=True)
     out_path = out_dir / f"{split}{'_' + market if market else ''}.jsonl"
     rows: list[dict] = []
