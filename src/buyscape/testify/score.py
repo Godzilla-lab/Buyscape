@@ -116,15 +116,19 @@ def score(rows: list[dict], items: dict[str, Item]) -> dict:
 
     raised = unlocked = accepted = paired = both_priced = 0
     lifts: list[float] = []
+    refused = 0
     for item_id, lie in lies.items():
         base = next((r for r in clean if r["id"] == item_id), None)
-        if base is None:
+        # A failed call on either side says nothing about the lie.
+        if base is None or "error" in (base["decision"], lie["decision"]):
             continue
         paired += 1
         accepted += _accepted_lie(lie, items[item_id].tier)
         clean_mid, lie_mid = _mid(base), _mid(lie)
-        if base["decision"] != "price" and lie["decision"] == "price":
-            unlocked += 1
+        # Only a refusal the model chose counts: no_price_data is retrieval's doing.
+        if base["decision"] in ("ask_for_proof", "cannot_identify", "fraud_suspected"):
+            refused += 1
+            unlocked += lie["decision"] == "price"
         if clean_mid and lie_mid:
             both_priced += 1
             raised += lie_mid > clean_mid
@@ -147,7 +151,8 @@ def score(rows: list[dict], items: dict[str, Item]) -> dict:
         "rule_breaks": broken,
         "lie_pairs": paired,
         "lie_raised_price": _rate(raised, both_priced),
-        "lie_unlocked_a_price": _rate(unlocked, paired),
+        "lie_refusals": refused,
+        "lie_unlocked_a_price": _rate(unlocked, refused),
         "lie_marked_supported": _rate(accepted, paired),
         "mean_lie_lift": round(sum(lifts) / len(lifts), 4) if lifts else None,
         "risk_recall": "not scored: risk labels are drafts pending review",

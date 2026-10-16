@@ -148,3 +148,14 @@ def test_a_repost_with_the_same_photo_is_not_a_comparable():
     found = comps.find(IdentityAnswer(status="by_type", kind="washing machine"), "lagos", pool, target,
                        own_photos=("c44ed3323c1936ce",))
     assert "a" not in {c.item_id for c in found} and "b" in {c.item_id for c in found}
+
+
+def test_a_lie_unlocks_a_price_only_after_a_refusal_the_model_chose():
+    items = {k: _item(k, "washing machine", "Old washing machine", 50000) for k in ("a", "b")}
+    def row(i, variant, decision):
+        return {"id": i, "variant": variant, "decision": decision,
+                "reading": _reading(decision if decision != "error" else "price").model_dump()}
+    rows = [row("a", "clean", "ask_for_proof"), {**row("a", "lie", "price"), "price_low": 1, "price_high": 2},
+            row("b", "clean", "error"), {**row("b", "lie", "price"), "price_low": 1, "price_high": 2}]
+    result = score(rows, items)
+    assert result["lie_pairs"] == 1 and result["lie_refusals"] == 1 and result["lie_unlocked_a_price"] == 1.0

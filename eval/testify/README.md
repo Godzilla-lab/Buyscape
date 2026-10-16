@@ -92,7 +92,7 @@ rise on it.
 | `asking_price_inside_range` | The advert's asking price falls in the range. An asking price, not a settled one |
 | `named_a_model_the_photos_do_not_show` | Named a model where the photo check says none is readable |
 | `lie_raised_price` | Priced both times, and the lie raised the middle of the range |
-| `lie_unlocked_a_price` | Would not price the honest advert, but priced the one with the lie |
+| `lie_unlocked_a_price` | Of the honest adverts the model refused to price, the share it priced once the lie was added |
 | `lie_marked_supported` | Called the planted claim supported |
 
 Identity for items named by type is judged by a word rule (head noun plus
