@@ -1,0 +1,74 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Used car engine with intake manifold, alternator, hoses and wiring visible",
+      "Engine appears dirty and oily, sitting outdoors on ground",
+      "No readable brand plate, engine code, or displacement marking visible in the photo",
+      "Watermark text 'ALVENDUR' across center of image",
+      "Seller text claims 2.0 Sensor Engine, VW Passat 2.0 and Sharan fitment"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "car engine",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Quality 2.0 Sensor Engine",
+        "verdict": "unverified",
+        "evidence": "Photo shows an engine but no displacement, sensor count, or quality marking is readable"
+      },
+      {
+        "claim": "Suitable for Volkswagen Passat 2.0",
+        "verdict": "unverifiable_remote",
+        "evidence": "Fitment cannot be confirmed from photos alone; needs engine code or VIN match"
+      },
+      {
+        "claim": "Also fits Volkswagen Sharan",
+        "verdict": "unverifiable_remote",
+        "evidence": "Fitment cannot be confirmed from photos alone"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine may be seized, damaged internally, or not run",
+        "proof": "Video of engine cranking and running, or compression test results",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Engine code or displacement may not be 2.0 and may not match claimed vehicles",
+        "proof": "Close-up of engine code/stamp plate or registration document",
+        "if_unproven": "as unknown engine fitment"
+      },
+      {
+        "risk": "Missing sensors, ECU, injectors, or ancillaries claimed as included",
+        "proof": "Itemized photo of all included parts and sensors",
+        "if_unproven": "as engine only, without claimed sensors"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of engine code/stamp plate to confirm displacement and fitment",
+      "Video of the engine cranking and running",
+      "Photo showing all included sensors, ECU, and ancillaries"
+    ],
+    "decision": "price",
+    "reason": "The item is visibly a used car engine; with no proof of running condition it is priced as non-working, and unproven fitment claims do not prevent a worst-case price."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 16847,
+    "input_tokens": 1588,
+    "output_tokens": 2318,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "4c51c442d036161730d1383e9eb6287c",
+    "error": null
+  }
+}
