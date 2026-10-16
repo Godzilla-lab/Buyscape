@@ -745,6 +745,27 @@ def testify_run(
         }) + "\n")
 
 
+@app.command("testify-score")
+def testify_score(
+    model: str = typer.Option(..., help="The model whose recorded answers to score."),
+    split: str = typer.Option("dev"),
+    market: str = typer.Option(""),
+) -> None:
+    """Score a run's recorded answers again, for nothing: no model is called."""
+    from .testify.convert import load_items
+    from .testify.score import score
+
+    name = f"{split}{'_' + market if market else ''}"
+    out_dir = ROOT / "eval" / "testify" / "runs" / model.replace("/", "_").replace(":", "_")
+    rows = [json.loads(line) for line in (out_dir / f"{name}.jsonl").read_text().splitlines() if line.strip()]
+    items = {i.id: i for i in load_items(ROOT / "eval" / "testify" / "items.jsonl")}
+    result = score(rows, {r["id"]: items[r["id"]] for r in rows if r["id"] in items})
+    result.update({"model": model, "split": split, "market": market or "all"})
+    (out_dir / f"{name}.summary.json").write_text(json.dumps(result, indent=1) + "\n")
+    for key, value in result.items():
+        console.print(f"  {key}: {value}")
+
+
 @app.command("testify-fetch")
 def testify_fetch(
     out: Path = typer.Option(None, help="Defaults to eval/raw/testify, or eval/raw/testify_new with --new-stock."),

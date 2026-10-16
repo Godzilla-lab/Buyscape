@@ -48,6 +48,8 @@ _SYNONYMS = {
     "couch": ["sofa"], "settee": ["sofa"], "tire": ["tyre"], "ac": ["air", "conditioner"],
     "aircon": ["air", "conditioner"], "notebook": ["laptop"], "handset": ["phone"],
     "smartphone": ["phone"], "cellphone": ["phone"], "gen": ["generator"], "genset": ["generator"],
+    "playstation": ["playstation", "game"], "ps4": ["playstation", "game"], "ps5": ["playstation", "game"],
+    "xbox": ["xbox", "game"],
 }
 # Heads too broad to match on alone: a drilling machine is not a washing machine.
 _BROAD_HEADS = {"machine", "set", "part", "kit", "tool", "box", "bag", "case", "cover", "stand",

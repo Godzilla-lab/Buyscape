@@ -13,10 +13,11 @@ not scored until those exist.
 
 from __future__ import annotations
 
+import re
 from statistics import median
 
-from ..evalset.score import model_matches
-from .comparables import words
+from ..evalset.score import GENERIC_WORDS, _norm, model_matches
+from .comparables import _SET_WORDS, words
 from .run import LIE_WORDS
 from .schema import Item
 
@@ -30,6 +31,8 @@ def kind_matches(predicted: str | None, item: Item) -> bool:
     until a checked judge replaces this rule.
     """
     truth = words(item.answer.kind or item.answer.identity.text or "")
+    while len(truth) > 1 and truth[-1] in _SET_WORDS:
+        truth = truth[:-1]  # "sofa set": the item is the sofa, the set is the unit of sale
     said = set(words(predicted))
     if not truth or not said or truth[-1] not in said:
         return False
@@ -45,8 +48,14 @@ def identity_correct(item: Item, identity: dict) -> bool | None:
     status = identity.get("status")
     if status == "unknown":
         return None
-    if status == "named" and model_matches(identity.get("brand"), identity.get("model"), item.answer.title):
-        return True
+    if status == "named":
+        # A spaced "+" joins a lens or a pad to the item; it is not the Plus tier.
+        title = re.sub(r"\s\+\s", " and ", item.answer.title)
+        if model_matches(identity.get("brand"), identity.get("model"), title):
+            return True
+        named = (_norm(identity.get("brand")) | _norm(identity.get("model"))) - GENERIC_WORDS
+        if named & (_norm(title) - GENERIC_WORDS):
+            return False  # the same line with the wrong version: a PS4 is not a PS4 Pro
     return kind_matches(identity.get("kind"), item)
 
 

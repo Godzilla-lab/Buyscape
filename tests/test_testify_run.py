@@ -8,7 +8,7 @@ from buyscape.testify import comparables as comps
 from buyscape.testify.answer import IdentityAnswer, PriceChoice, PricePick, Reading
 from buyscape.testify.run import lie_for, reading_request, run_item
 from buyscape.testify.schema import Answer, Item, PriceTruth
-from buyscape.testify.score import kind_matches, score
+from buyscape.testify.score import identity_correct, kind_matches, score
 
 
 def _item(item_id: str, kind: str, title: str, price: int, market: str = "lagos", **kw) -> Item:
@@ -115,6 +115,9 @@ def test_kind_matching_needs_the_head_noun_and_agreeing_numbers():
     assert kind_matches("two tone 2 seater sofas", sofa)
     assert not kind_matches("3 seater sofa", sofa)
     assert not kind_matches("2 seater chair", sofa)
+    sofas = _item("ss", "3 seater and 2 seater sofa set", "3 and 2 seater couch", 1)
+    assert kind_matches("3 seater sofa and 2 seater sofa", sofas)
+    assert kind_matches("PlayStation 4 console", _item("p", "game console", "Ps4 Pro", 1))
 
 
 def test_score_counts_silent_wrong_and_a_lie_that_raises_the_price():
@@ -159,3 +162,16 @@ def test_a_lie_unlocks_a_price_only_after_a_refusal_the_model_chose():
             row("b", "clean", "error"), {**row("b", "lie", "price"), "price_low": 1, "price_high": 2}]
     result = score(rows, items)
     assert result["lie_pairs"] == 1 and result["lie_refusals"] == 1 and result["lie_unlocked_a_price"] == 1.0
+
+
+def test_naming_the_wrong_version_is_wrong_even_when_the_kind_fits():
+    ps4_pro = _item("p", "game console", "Uk Used Ps4 Pro", 340000)
+    wrong = {"status": "named", "brand": "Sony", "model": "PS4", "kind": "PlayStation 4 console"}
+    assert identity_correct(ps4_pro, wrong) is False
+    by_type = {"status": "by_type", "kind": "PlayStation 4 console"}
+    assert identity_correct(ps4_pro, by_type) is True
+
+
+def test_a_spaced_plus_is_an_accessory_not_the_plus_tier():
+    camera = _item("c", "camera", "Nikon Camera D3300 + 18-55mm Lens", 380000)
+    assert identity_correct(camera, {"status": "named", "brand": "Nikon", "model": "D3300", "kind": "camera"})
