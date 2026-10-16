@@ -1,0 +1,97 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "agent:claude",
+  "response": {
+    "observations": [
+      "Photo 0: one used car tyre, not on a rim, shown tread face up on a concrete floor; part of another tyre is at the left edge.",
+      "Photo 0: wide summer-type tread with four straight grooves and angled sipes; tread is visibly worn and dirty, grooves still present but shallow-looking toward the shoulders.",
+      "Photo 0: no sidewall is shown, so the brand, size, load and speed rating and DOT date code cannot be read.",
+      "Photo 0: a shop watermark 'N.J. VENTURE' and 'POSTED ON' text sits across the tread.",
+      "The seller's lines about never repaired or opened, works perfectly, receipt and warranty are boilerplate that does not fit a foreign-used tyre."
+    ],
+    "identity": {
+      "status": "unknown",
+      "kind": "used car tyre",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 tread only, no sidewall marking visible"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "295/40 R20",
+        "verdict": "unverified",
+        "evidence": "The size is printed on the sidewall, which photo 0 does not show. The tread looks wide but that does not fix the size."
+      },
+      {
+        "claim": "Tokunbo (foreign used) tyre",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo 0 shows a used tyre but its origin cannot be shown by a photo."
+      },
+      {
+        "claim": "Like new",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows clear tread wear and a used, dirty tyre."
+      },
+      {
+        "claim": "Never repaired or opened",
+        "verdict": "unverified",
+        "evidence": "The inner liner and sidewalls are not shown, so patches or plugs cannot be ruled out."
+      },
+      {
+        "claim": "Works perfectly",
+        "verdict": "unverified",
+        "evidence": "No sign of leaks, bulges or cracks can be checked without sidewall and inner liner photos."
+      },
+      {
+        "claim": "Original receipt and warranty available",
+        "verdict": "unverified",
+        "evidence": "No receipt shown; a used imported tyre normally carries no warranty."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual size, brand and load or speed rating differ from what the seller says, and size sets the price.",
+        "proof": "Sharp photo of the sidewall showing the brand and the full size marking.",
+        "if_unproven": "cannot be priced; size and brand unknown"
+      },
+      {
+        "risk": "Tyre is old; rubber hardened or cracked even with tread left.",
+        "proof": "Close photo of the four-digit DOT date code on the sidewall.",
+        "if_unproven": "as aged tyre near end of life"
+      },
+      {
+        "risk": "Tread depth too low for safe use.",
+        "proof": "Photo of a tread depth gauge or a coin set in the main groove.",
+        "if_unproven": "as near the wear limit"
+      },
+      {
+        "risk": "Plugs, patches, sidewall bulges or cuts hidden on the parts not shown.",
+        "proof": "Photos of both sidewalls and the inner liner.",
+        "if_unproven": "as repaired"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the sidewall showing brand and the full size marking.",
+      "Close photo of the DOT date code.",
+      "Tread depth gauge or coin in the groove.",
+      "Photos of both sidewalls and the inside of the tyre."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Photo 0 shows only the tread of a used tyre, so the size and brand that set its price cannot be read and the seller's size claim is unproven; a sidewall photo with the size marking is needed before even a worst-case price."
+  },
+  "meta": {
+    "provider": "sitting",
+    "model": "agent:claude",
+    "task": "testify_read",
+    "latency_ms": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "e3c798f84c648598d7ae9de6c0534a09",
+    "error": null
+  }
+}

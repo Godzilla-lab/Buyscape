@@ -1,0 +1,97 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "agent:claude",
+  "response": {
+    "observations": [
+      "Photo 0 and photo 1: a black Nikon DSLR body with body cap on, 'Nikon' and 'D3300' printed on the front of the body.",
+      "Photo 0 and photo 1: a Nikon DX kit zoom lens with front cap, zoom ring marked 18 to 55, 'VR' switch and 'Nikon DX' label visible.",
+      "Photo 0 and photo 1: the camera sits on its retail box printed 'D3300 18-55 VR II Kit, AF-S DX NIKKOR 18-55mm f/3.5-5.6G VR II, BLACK'.",
+      "Body and lens look clean with no visible scratches in these shots; the body shows no visible wear on the grip.",
+      "Background is a camera shop shelf with flashes and selfie sticks; a 'PHOTOPLUG INTEGRATED' watermark is on both photos, so these may be dealer stock photos rather than the exact unit.",
+      "No photo of the rear screen, the camera powered on, the sensor, the lens glass, the battery, the charger, or the serial number."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DSLR camera with 18-55mm kit lens",
+      "brand": "Nikon",
+      "model": "D3300 with AF-S DX 18-55mm f/3.5-5.6G VR II kit lens",
+      "read_from": [
+        "photo 0 body front 'Nikon D3300'",
+        "photo 0 lens barrel 'Nikon DX VR'",
+        "photo 0 box label 'D3300 18-55 VR II Kit'",
+        "photo 1 body front and box label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "24.2 MP CMOS DX-format sensor",
+        "verdict": "supported",
+        "evidence": "The body read in photo 0 is a Nikon D3300, a 24.2 MP DX model; this is a spec of the model, not proof of this unit's sensor condition."
+      },
+      {
+        "claim": "5 frames per second continuous shooting",
+        "verdict": "supported",
+        "evidence": "Matches the D3300 specification read from photo 0; this unit's shutter not shown working."
+      },
+      {
+        "claim": "11 AF points with 3D tracking",
+        "verdict": "supported",
+        "evidence": "Matches the D3300 specification read from photo 0; autofocus not shown working."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Camera does not power on or shutter is faulty.",
+        "proof": "Clip of the camera switching on, taking a shot with the 18-55 lens and showing the image on the rear screen.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "High shutter count from heavy use.",
+        "proof": "Screenshot of the shutter count read from a recent photo's file data, with the serial of the body in frame.",
+        "if_unproven": "as heavily used"
+      },
+      {
+        "risk": "Photos are dealer stock images and not the unit being sold.",
+        "proof": "Photo of this unit next to a handwritten note with today's date and the seller's name, plus the body serial number on the bottom plate.",
+        "if_unproven": "as used body and lens of unknown condition"
+      },
+      {
+        "risk": "Lens has fungus, haze, scratches or a failed VR or autofocus motor.",
+        "proof": "Photo through the lens with a light behind it, and a clip of autofocus and VR working.",
+        "if_unproven": "as body with a faulty lens"
+      },
+      {
+        "risk": "Battery, charger or strap missing from the box.",
+        "proof": "Photo of all box contents laid out: battery, charger, strap, cables.",
+        "if_unproven": "as body and lens only, no battery or charger"
+      },
+      {
+        "risk": "Dust or damage on the sensor or a cracked rear screen.",
+        "proof": "Photo of the rear screen and a photo of the open mount with mirror and sensor area visible.",
+        "if_unproven": "as damaged screen and sensor needing cleaning"
+      }
+    ],
+    "proof_requests": [
+      "Clip of the camera powering on, taking a photo with the kit lens and showing it on the rear screen.",
+      "Photo of the bottom plate serial number with a handwritten dated note in frame.",
+      "Shutter count screenshot from a recent image file.",
+      "Photo of all box contents: battery, charger, strap.",
+      "Photo through the lens against a light to check for fungus or haze."
+    ],
+    "decision": "price",
+    "reason": "The body, lens and box clearly read Nikon D3300 with the 18-55mm VR II kit lens, so it can be priced at its worst case as a used kit of unproven function; a working clip, serial and shutter count would raise it."
+  },
+  "meta": {
+    "provider": "sitting",
+    "model": "agent:claude",
+    "task": "testify_read",
+    "latency_ms": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "fc42ea4cd3032dabe8480f40d608e4c2",
+    "error": null
+  }
+}
