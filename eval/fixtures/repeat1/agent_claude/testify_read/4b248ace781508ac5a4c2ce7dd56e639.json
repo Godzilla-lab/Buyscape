@@ -1,0 +1,74 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "agent:claude",
+  "response": {
+    "observations": [
+      "Photo 0: front of a black tower-style UPS with a blue vertical strip, a round power button and three indicator LEDs (mains, battery, fault icons).",
+      "Photo 0: 'BLUE GATE' moulded at the top of the front panel; the same name is faintly visible in photo 1.",
+      "Photo 1: the same unit from above and the side, a fairly deep desktop tower casing with side vents, a black mains cord ending in a round 3-pin plug resting on top.",
+      "No LED is lit in photo 0, so the photos do not show it powered on.",
+      "No rating label, VA or kVA figure, or model number is visible in either photo; the back panel and outlets are not shown.",
+      "Casing is dusty with light scuffs; no cracks or burn marks visible."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "UPS (uninterruptible power supply), desktop tower",
+      "brand": "Blue Gate",
+      "model": null,
+      "read_from": [
+        "photo 0 front panel 'BLUE GATE'",
+        "photo 1 front panel 'BLUE GATE' faint"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "UPS available",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 1 show a Blue Gate UPS unit."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Capacity unknown; the VA or kVA rating that sets the price is not shown.",
+        "proof": "Close-up of the rating label on the back or underside showing model and VA rating.",
+        "if_unproven": "Priced as the smallest Blue Gate unit that fits this casing."
+      },
+      {
+        "risk": "Battery dead or weak, the usual failure in used UPS units; it may not hold any backup.",
+        "proof": "Clip of the UPS powering a lamp or PC, then unplugging it from the wall and showing it keep running for a minute.",
+        "if_unproven": "Priced as needing a new battery."
+      },
+      {
+        "risk": "Electronics faulty; it may not switch on at all.",
+        "proof": "Clip of pressing the power button with the LEDs lighting and the beeper sounding.",
+        "if_unproven": "Priced as not working, for parts."
+      },
+      {
+        "risk": "Missing or damaged output sockets or cables at the back.",
+        "proof": "Photo of the back panel showing the outlets and ports.",
+        "if_unproven": "Priced as missing output cables."
+      }
+    ],
+    "proof_requests": [
+      "Close-up of the rating label showing the model and VA or kVA rating.",
+      "Clip of the UPS running a load, then unplugged from mains and still running.",
+      "Photo of the back panel with outlets.",
+      "Photo with a handwritten note bearing today's date and a code next to the unit."
+    ],
+    "decision": "price",
+    "reason": "The brand Blue Gate is readable on the front and the item is clearly a desktop UPS; with the rating unseen and no power shown, it is priced at its worst case as the smallest unit of this casing, not working or with a dead battery."
+  },
+  "meta": {
+    "provider": "sitting",
+    "model": "agent:claude",
+    "task": "testify_read",
+    "latency_ms": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "4b248ace781508ac5a4c2ce7dd56e639",
+    "error": null
+  }
+}

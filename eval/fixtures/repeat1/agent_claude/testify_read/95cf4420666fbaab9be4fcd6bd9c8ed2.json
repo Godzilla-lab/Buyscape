@@ -1,0 +1,80 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "agent:claude",
+  "response": {
+    "observations": [
+      "Photo 0 shows a used inline four-cylinder petrol car engine out of a vehicle, standing on a workshop floor with other engines behind it.",
+      "Black plastic valve cover with four coil-on-plug ignition coils, plastic intake manifold, alternator and belt pulley visible at the bottom.",
+      "Green spray paint marks over the valve cover and manifold, typical of imported used engines marked at a yard.",
+      "A faint watermark runs across the middle of the photo; it is not legible as a brand or model.",
+      "No engine code, maker logo, plate or VIN stamp can be read anywhere in photo 0. The oil filler cap text is not legible.",
+      "Wiring harness and sensors appear attached; no damage is visible from this single top angle.",
+      "Only one photo: no view of the block stamp, the underside, the sump, the ports or the engine running."
+    ],
+    "identity": {
+      "status": "unknown",
+      "kind": "used 4-cylinder petrol car engine (seller says Korean, maker and engine code not readable)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 shows a 4-cylinder engine but no readable maker or engine code"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Korean parts (implying a Hyundai or Kia engine)",
+        "verdict": "unverified",
+        "evidence": "No maker logo or engine code is legible in photo 0; the layout fits many makers."
+      },
+      {
+        "claim": "Sold direct (imported, presumably foreign-used)",
+        "verdict": "unverifiable_remote",
+        "evidence": "Origin and import status cannot be shown by a photo of the engine."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine code and displacement unknown; this sets which engine it is and what it is worth.",
+        "proof": "Close-up photo of the engine code stamped on the block (and the sticker or plate on the valve cover or timing cover).",
+        "if_unproven": "not priceable; identity must be read first"
+      },
+      {
+        "risk": "Engine may not run, have low compression, knocking, or a damaged block or head.",
+        "proof": "Clip of the engine running on a test stand from cold start, with sound, plus a compression test reading on each cylinder.",
+        "if_unproven": "as a non-running core engine for parts"
+      },
+      {
+        "risk": "Missing or damaged ancillaries (alternator, starter, injectors, sensors, harness) on the sides and underside not shown.",
+        "proof": "Photos of all four sides and the underside of the engine, including sump and starter side.",
+        "if_unproven": "as a long block with ancillaries not included"
+      },
+      {
+        "risk": "Cracked block, oil sludge or water in oil.",
+        "proof": "Photo of the dipstick and under the oil filler cap, and of the sump and block sides.",
+        "if_unproven": "as a core with internal damage"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the engine code stamped on the block, readable",
+      "Clip of the engine running, cold start with sound",
+      "Photos of all sides and underside of the engine",
+      "Photo of oil on the dipstick and under the filler cap",
+      "State what is included: alternator, starter, harness, ECU, gearbox or not"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "This is a used four-cylinder car engine, but no maker or engine code can be read in the only photo, and the engine code is what sets the price, so not even a worst case price can be retrieved. A readable block stamp is needed first."
+  },
+  "meta": {
+    "provider": "sitting",
+    "model": "agent:claude",
+    "task": "testify_read",
+    "latency_ms": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "95cf4420666fbaab9be4fcd6bd9c8ed2",
+    "error": null
+  }
+}

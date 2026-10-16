@@ -1,0 +1,89 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "agent:claude",
+  "response": {
+    "observations": [
+      "Photo 0 shows one used car tyre, tread face only, standing on a concrete floor.",
+      "Four circumferential grooves with angled sipes, a road (summer) style tread; grooves still visible along the whole face, wear looks moderate with scuffing on the shoulders.",
+      "No sidewall is shown, so the size, brand, load/speed index and DOT date code cannot be read.",
+      "A second tyre is partly visible at the left edge and another at top left; only one tyre is clearly offered.",
+      "Watermark reads 'POSTED ON JIJI' and 'N.J. VENTURE'; small green paint mark near the bottom of the tread.",
+      "Photo is a single low resolution shot with no scale reference, so tread width cannot be measured."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used car tyre (size unread)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 tread view"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Size 295/40 R20",
+        "verdict": "unverified",
+        "evidence": "No sidewall in photo 0; the size marking is not visible."
+      },
+      {
+        "claim": "Tokunbo (foreign used) tyre",
+        "verdict": "unverifiable_remote",
+        "evidence": "Origin cannot be shown by a photo; DOT code and brand would at least show age and make."
+      },
+      {
+        "claim": "Single tyre for sale",
+        "verdict": "unverified",
+        "evidence": "Photo 0 centres one tyre but other tyres are in frame; quantity not stated or shown clearly."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual size differs from the claimed 295/40 R20 (a smaller, cheaper size).",
+        "proof": "Close, sharp photo of the sidewall size marking (e.g. 295/40 R20 with load and speed index).",
+        "if_unproven": "Cannot be priced as the claimed size; held until the size is read."
+      },
+      {
+        "risk": "Tyre is old; rubber hardened or cracked even with tread left.",
+        "proof": "Close photo of the four digit DOT date code on the sidewall.",
+        "if_unproven": "Priced as an old, near end of life tyre."
+      },
+      {
+        "risk": "Remaining tread is shallower than it looks.",
+        "proof": "Photo of a tread depth gauge or coin in the main groove, plus the wear indicator bar.",
+        "if_unproven": "Priced as worn close to the wear bars."
+      },
+      {
+        "risk": "Sidewall cuts, bulges, plugs or inner patches.",
+        "proof": "Short clip rotating the tyre showing both sidewalls fully and the inside liner.",
+        "if_unproven": "Priced as repaired or damaged."
+      },
+      {
+        "risk": "Brand unknown; budget brand versus premium brand changes value.",
+        "proof": "Sidewall photo showing the brand and tread pattern name.",
+        "if_unproven": "Priced as an unbranded budget tyre."
+      }
+    ],
+    "proof_requests": [
+      "Clear close photo of the sidewall size marking (295/40 R20 and load/speed index).",
+      "Close photo of the DOT date code.",
+      "Sidewall photo showing brand and pattern name.",
+      "Tread depth gauge or coin in the main groove.",
+      "Clip turning the tyre to show both sidewalls and the inside liner."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The tyre type is clear but its size and brand, which set the price, are not visible anywhere in photo 0 and rest only on the seller's words. A size shot is needed before even a worst case price can be set."
+  },
+  "meta": {
+    "provider": "sitting",
+    "model": "agent:claude",
+    "task": "testify_read",
+    "latency_ms": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "372f4e55cf95672db91e96e67249f0e9",
+    "error": null
+  }
+}

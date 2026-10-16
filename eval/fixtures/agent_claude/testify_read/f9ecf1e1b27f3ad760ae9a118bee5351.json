@@ -1,0 +1,89 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "agent:claude",
+  "response": {
+    "observations": [
+      "Photo 0: front of a small black tower desktop UPS with a blue front strip, one power button and three indicator lights; the lights are off.",
+      "Photo 0: 'BLUE GATE' is moulded on the front panel above the strip.",
+      "Photo 1: the same unit from above at an angle; a mains cable with a three pin plug lies on top; the case is dusty but not cracked or dented.",
+      "Photo 1: the case is small, the size of a home or office computer UPS, room for one or two small sealed batteries.",
+      "Neither photo shows the rating plate, the model or capacity, the rear sockets, or the unit switched on.",
+      "No photo shows the battery or its date label."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "small desktop UPS for a computer",
+      "brand": "Blue Gate",
+      "model": null,
+      "read_from": [
+        "photo 0 front panel lettering",
+        "photo 1 front panel lettering"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "UPS available",
+        "verdict": "supported",
+        "evidence": "Photos 0 and 1 show a Blue Gate desktop UPS."
+      },
+      {
+        "claim": "Battery is new",
+        "verdict": "unverified",
+        "evidence": "No photo of the battery, its label or purchase date; the unit is never shown powered."
+      },
+      {
+        "claim": "Holds charge for 8 hours",
+        "verdict": "unverified",
+        "evidence": "No clip of it running on battery; a desktop UPS of this size normally backs up a computer for minutes, so an 8 hour runtime is implausible without stating the load."
+      },
+      {
+        "claim": "Never repaired",
+        "verdict": "unverified",
+        "evidence": "No photos of the case screws or the inside."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Unit does not power on or does not switch to battery when mains is cut.",
+        "proof": "A clip: unit plugged in and switched on with lights showing, a load such as a bulb or fan connected, then the wall socket switched off while the load stays on.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Battery is old or dead, so there is no backup time.",
+        "proof": "Photo of the battery label and date with the cover opened, plus the clip above timing the backup.",
+        "if_unproven": "as needing a new battery"
+      },
+      {
+        "risk": "Capacity unknown; a lower VA rating is worth less.",
+        "proof": "Clear photo of the rating plate on the back or underside showing model and VA rating.",
+        "if_unproven": "as the smallest rating in this case size"
+      },
+      {
+        "risk": "Has been opened and repaired, or the inverter board is damaged.",
+        "proof": "Photo of the case screws and the inside with the cover off.",
+        "if_unproven": "as previously repaired"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the rating plate showing model and VA rating.",
+      "Clip of the unit powering a load, then holding it when the mains is switched off.",
+      "Photo of the battery label and date.",
+      "Photo of the rear sockets and case screws."
+    ],
+    "decision": "price",
+    "reason": "Photos 0 and 1 show a Blue Gate small desktop UPS, so it can be priced at its worst case: smallest rating for its size, battery dead and not working until a clip shows otherwise."
+  },
+  "meta": {
+    "provider": "sitting",
+    "model": "agent:claude",
+    "task": "testify_read",
+    "latency_ms": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "f9ecf1e1b27f3ad760ae9a118bee5351",
+    "error": null
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "agent:claude",
+  "response": {
+    "observations": [
+      "Photo 0: front of a black DSLR body with body cap fitted, no lens; badges read 'Canon', 'EOS 5D' and 'Mark II'.",
+      "Photo 1: rear of the body, LCD screen off, Canon buttons (MENU, INFO, AF-ON, ON/OFF switch), eyecup fitted; no wear visible at this resolution.",
+      "Photo 2: underside plate reads 'Canon DS126201', 'DC 8.1V', 'Made in Japan', serial '3761814763'; battery door is open and no battery is visible.",
+      "All three photos are clean studio-style shots on a white background with a dealer watermark 'CDICSON BUSINESS WORLD' and 'Posted on Jiji'; none shows the camera powered on.",
+      "No lens, battery, charger or strap is shown."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "full frame DSLR camera body",
+      "brand": "Canon",
+      "model": "EOS 5D Mark II",
+      "read_from": [
+        "photo 0 front badges 'Canon', 'EOS 5D', 'Mark II'",
+        "photo 2 base plate 'DS126201'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "The Canon EOS 5D Mark II",
+        "verdict": "supported",
+        "evidence": "Photo 0 front badges read EOS 5D Mark II and photo 2 base plate reads model code DS126201."
+      },
+      {
+        "claim": "Full-frame DSLR with a 21.1 megapixel sensor",
+        "verdict": "unverifiable_remote",
+        "evidence": "A factory specification of the model, not something the photos can show; it follows from the identity but says nothing about this unit's condition."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Camera may not power on, shutter or sensor may be faulty; no photo shows it running",
+        "proof": "Clip of the camera switched on, taking a shot and showing the image on the rear screen",
+        "if_unproven": "priced as not working, body for parts"
+      },
+      {
+        "risk": "High shutter count on an older body",
+        "proof": "Screenshot of the shutter count read from the camera, or a test image's EXIF shown with the serial 3761814763 in the same frame",
+        "if_unproven": "priced as worn out, end of shutter life"
+      },
+      {
+        "risk": "Photos may be stock or catalogue images rather than this unit, given the studio style and dealer watermark",
+        "proof": "Fresh photo of the camera with a handwritten note bearing today's date and the seller's name beside it, base plate serial visible",
+        "if_unproven": "priced as body only, not working, until the unit is shown"
+      },
+      {
+        "risk": "Battery and charger missing; battery door open and empty in photo 2",
+        "proof": "Photo of the battery and charger with the camera",
+        "if_unproven": "priced as body only with no battery or charger"
+      },
+      {
+        "risk": "Sensor dust, scratches or mount damage hidden under the body cap",
+        "proof": "Photo of the open mount and mirror with the body cap removed",
+        "if_unproven": "priced as needing a sensor clean and mount check"
+      }
+    ],
+    "proof_requests": [
+      "Clip of the camera powering on, taking a photo and reviewing it on the rear screen",
+      "Shutter count screenshot",
+      "Photo with a handwritten dated note next to the camera showing the base serial 3761814763",
+      "Photo of the mount and mirror with the body cap off",
+      "Photo of included accessories: battery, charger, strap, any lens"
+    ],
+    "decision": "price",
+    "reason": "The badges and base plate identify a Canon EOS 5D Mark II body, so it can be priced as a body only, not working, until a power-on clip and shutter count are shown."
+  },
+  "meta": {
+    "provider": "sitting",
+    "model": "agent:claude",
+    "task": "testify_read",
+    "latency_ms": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "2db083e476a46125393c1cdca8c7d230",
+    "error": null
+  }
+}
