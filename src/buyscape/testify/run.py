@@ -105,7 +105,9 @@ def reading_request(item: Item, photos: list[Path], variant: str = "clean", max_
         user_text="\n".join(lines),
         output_schema=Reading,
         images=tuple(ImageRef(p, label=f"photo {i}") for i, p in enumerate(shown)),
-        max_tokens=3000,
+        # Room for a thinking model's reasoning as well as the answer: a cap
+        # the answer needs is a cut-off answer, not a model failure.
+        max_tokens=8000,
         image_max_side=1280,
     )
 
@@ -122,7 +124,7 @@ def pick_request(reading: Reading, found: list[comps.Comparable]) -> ModelReques
         system=PICK_SYSTEM,
         user_text="\n".join(lines),
         output_schema=PriceChoice,
-        max_tokens=600,
+        max_tokens=4000,
     )
 
 
