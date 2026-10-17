@@ -168,10 +168,11 @@ def _provider(model: str, fixtures: Path, mode: str) -> VisionProvider:
     """
     if model == "fake":
         return RecordingProvider(FakeProvider(), fixtures / "fake", mode="record")
-    if model.startswith(("agent:", "human:")):
-        # A person or an agent who sat the test: answers come only from the
-        # recordings that testify-import wrote.
-        return RecordingProvider(None, fixtures / model.replace(":", "_"), mode="replay")
+    if model.startswith(("agent:", "human:", "local:")):
+        # A person or an agent who sat the test, or a model run on someone's
+        # own GPU: answers come only from the recordings that testify-import
+        # or testify-batch-import wrote.
+        return RecordingProvider(None, fixtures / _dir_name(model), mode="replay")
 
     served = model
     if model.startswith("grok"):
@@ -198,7 +199,12 @@ def _provider(model: str, fixtures: Path, mode: str) -> VisionProvider:
             f"[yellow]{key} is not set, so only recorded calls can be replayed "
             f"for {model}.[/yellow]"
         )
-    return RecordingProvider(inner, fixtures / model.replace("/", "_").replace(":", "_"), mode=mode)
+    return RecordingProvider(inner, fixtures / _dir_name(model), mode=mode)
+
+
+def _dir_name(model: str) -> str:
+    """A model name as one folder name: openrouter's vendor/model and our prefixes alike."""
+    return model.replace("/", "_").replace(":", "_")
 
 
 @app.command("fetch-testset")
@@ -712,7 +718,7 @@ def testify_run(
         if i.split == split and not i.exclude and (i.ai_label or i.review)
         and (not market or i.market == market)
     ]
-    out_dir = ROOT / "eval" / "testify" / "runs" / model.replace("/", "_").replace(":", "_")
+    out_dir = ROOT / "eval" / "testify" / "runs" / _dir_name(model)
     out_dir.mkdir(parents=True, exist_ok=True)
     name = f"{split}{'_' + market if market else ''}{'.' + tag if tag else ''}"
     out_path = out_dir / f"{name}.jsonl"
@@ -790,7 +796,7 @@ def testify_export(
     """Write the cases a person or an agent still has to answer, one folder each."""
     from .testify import sitting
 
-    name = model.replace(":", "_")
+    name = _dir_name(model)
     out = out or _sitting_dir(name, split, market, tag)
     cases, pool = _testify_cases(split, market)
     n = sitting.export((fixtures / tag if tag else fixtures) / name, cases, pool, out, lies)
@@ -809,9 +815,56 @@ def testify_import(
     """Record the answers written in the exported folders, then run testify --mode replay to score them."""
     from .testify import sitting
 
-    name = model.replace(":", "_")
+    name = _dir_name(model)
     out = out or _sitting_dir(name, split, market, tag)
     console.print(sitting.import_answers((fixtures / tag if tag else fixtures) / name, out, model))
+
+
+@app.command("testify-batch-export")
+def testify_batch_export(
+    model: str = typer.Option(..., help="The model the batch is for, as local:<vendor>/<model>."),
+    split: str = typer.Option("dev"),
+    market: str = typer.Option(""),
+    lies: bool = typer.Option(True),
+    tag: str = typer.Option("", help="A second run, such as repeat1, recorded apart like testify --tag."),
+    out: Path = typer.Option(None, help="Defaults to eval/testify/batches/<model>/<split>_<market>[.<tag>].jsonl."),
+    fixtures: Path = typer.Option(Path("eval/fixtures")),
+) -> None:
+    """Write the requests a model run on your own GPU still has to answer, one JSON line each.
+
+    Run them anywhere that speaks the chat format (vLLM, a lab cluster), then
+    testify-batch-import the answers. Reads come first; export again for the
+    price picks those reads lead to.
+    """
+    from .testify import sitting
+
+    name = _dir_name(model)
+    out = out or _batch_path(name, split, market, tag)
+    cases, pool = _testify_cases(split, market)
+    n = sitting.export_batch((fixtures / tag if tag else fixtures) / name, cases, pool, out, lies)
+    console.print(f"{n} requests to answer in {out}")
+
+
+@app.command("testify-batch-import")
+def testify_batch_import(
+    model: str = typer.Option(...),
+    results: Path = typer.Option(..., help="One JSON line per answer: custom_id and text."),
+    split: str = typer.Option("dev"),
+    market: str = typer.Option(""),
+    tag: str = typer.Option(""),
+    batch: Path = typer.Option(None, help="The exported batch these answer. Defaults to the export's path."),
+    fixtures: Path = typer.Option(Path("eval/fixtures")),
+) -> None:
+    """Record a batch's answers, then run testify --mode replay to score them."""
+    from .testify import sitting
+
+    name = _dir_name(model)
+    batch = batch or _batch_path(name, split, market, tag)
+    console.print(sitting.import_batch((fixtures / tag if tag else fixtures) / name, batch, results, model))
+
+
+def _batch_path(name: str, split: str, market: str, tag: str) -> Path:
+    return ROOT / "eval" / "testify" / "batches" / name / f"{split}{'_' + market if market else ''}{'.' + tag if tag else ''}.jsonl"
 
 
 def _sitting_dir(name: str, split: str, market: str, tag: str) -> Path:
@@ -830,7 +883,7 @@ def testify_score(
     from .testify.score import against_repeat, score
 
     name = f"{split}{'_' + market if market else ''}"
-    out_dir = ROOT / "eval" / "testify" / "runs" / model.replace("/", "_").replace(":", "_")
+    out_dir = ROOT / "eval" / "testify" / "runs" / _dir_name(model)
     rows = [json.loads(line) for line in (out_dir / f"{name}.jsonl").read_text().splitlines() if line.strip()]
     items = {i.id: i for i in load_items(ROOT / "eval" / "testify" / "items.jsonl")}
     result = score(rows, {r["id"]: items[r["id"]] for r in rows if r["id"] in items})

@@ -264,3 +264,47 @@ def test_a_lie_is_measured_against_the_honest_repeat():
     assert result["refusal_priced_on_honest_repeat"] == 0.5
     assert result["refusal_priced_with_lie"] == 1.0
     assert result["lie_effect_on_refusals"] == 0.5
+
+
+def test_a_batch_carries_the_api_body_and_its_answers_score_like_a_model(tmp_path: Path):
+    import json
+
+    from PIL import Image
+
+    from buyscape.providers.openrouter import chat_body
+    from buyscape.providers.recording import RecordingProvider
+    from buyscape.testify import sitting
+
+    photo = tmp_path / "00.jpg"
+    Image.new("RGB", (64, 48), "red").save(photo)
+    pool = comps.build_pool(POOL_ITEMS)
+    item = _item("bent-office-chair", "washing machine", "Secret Title", 50000)
+    fixtures, batch, results = tmp_path / "fx", tmp_path / "dev.jsonl", tmp_path / "dev.results.jsonl"
+
+    assert sitting.export_batch(fixtures, [(item, [photo], ())], pool, batch) == 2  # clean and lie reads
+    text = batch.read_text()
+    assert "Secret Title" not in text and "50000" not in text and "bent-office-chair" not in text
+    clean, lie = (json.loads(line) for line in text.splitlines())
+    assert clean["body"] == chat_body(reading_request(item, [photo]))  # what an API model is sent
+    assert clean["body"]["messages"][1]["content"][2]["image_url"]["url"].startswith("data:image/")
+
+    answer = "```json\n" + _reading().model_dump_json() + "\n```"
+    results.write_text(
+        json.dumps({"custom_id": clean["custom_id"], "text": answer, "output_tokens": 300}) + "\n"
+        + json.dumps({"custom_id": lie["custom_id"], "text": "", "error": "CUDA out of memory"}) + "\n"
+    )
+    assert sitting.import_batch(fixtures, batch, results, "local:test/model") == {
+        "valid": 1, "invalid": 0, "failed": 1, "unknown": 0}
+
+    # The failed run is asked again, and the valid read now needs its price pick.
+    assert sitting.export_batch(fixtures, [(item, [photo], ())], pool, batch) == 2
+    tasks = sorted(json.loads(line)["task"] for line in batch.read_text().splitlines())
+    assert tasks == ["testify_pick", "testify_read"]
+    pick = next(json.loads(line) for line in batch.read_text().splitlines() if '"testify_pick"' in line)
+    choice = PriceChoice(same_item=True, price_pick=PricePick(low=0, high=1), reason="r").model_dump_json()
+    results.write_text(json.dumps({"custom_id": pick["custom_id"], "text": choice}) + "\n")
+    sitting.import_batch(fixtures, batch, results, "local:test/model")
+
+    replay = RecordingProvider(None, fixtures, mode="replay")
+    done = run_item(replay, item, [photo], pool, "clean")
+    assert (done["decision"], done["price_low"], done["price_high"]) == ("price", 45000, 60000)

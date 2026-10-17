@@ -66,6 +66,39 @@ REASONING_HEADROOM = 4096
 _FENCE = re.compile(r"```(?:json)?\s*(.*?)```", re.DOTALL)
 
 
+def content(request: ModelRequest) -> list[dict]:
+    """The user turn: the request's text, then each photo after its label."""
+    parts: list[dict] = [{"type": "text", "text": request.user_text}]
+    for img in request.images:
+        if img.label:
+            parts.append({"type": "text", "text": f"[{img.label}]"})
+        parts.append({"type": "image_url", "image_url": {"url": img.data_url(request.image_max_side)}})
+    return parts
+
+
+def chat_body(request: ModelRequest) -> dict:
+    """The chat request every OpenAI-style server is sent, less the model name.
+
+    A batch run on someone's own GPU is sent the same body, so a model scores
+    the same wherever it runs.
+    """
+    schema = request.output_schema.model_json_schema()
+    system = (
+        f"{request.system}\n\n"
+        "Reply with a single JSON object and nothing else. It must validate "
+        f"against this JSON Schema:\n{json.dumps(schema)}"
+    )
+    return {
+        "messages": [
+            {"role": "system", "content": system},
+            {"role": "user", "content": content(request)},
+        ],
+        "max_tokens": request.max_tokens,
+        "temperature": request.temperature,
+        "response_format": {"type": "json_object"},
+    }
+
+
 def _extract_json(text: str) -> dict:
     """Models wrap JSON in prose or fences more often than they should."""
     text = text.strip()
@@ -129,14 +162,7 @@ class OpenRouterProvider:
         self._sleep = time.sleep
 
     def _content(self, request: ModelRequest) -> list[dict]:
-        parts: list[dict] = [{"type": "text", "text": request.user_text}]
-        for img in request.images:
-            if img.label:
-                parts.append({"type": "text", "text": f"[{img.label}]"})
-            parts.append(
-                {"type": "image_url", "image_url": {"url": img.data_url(request.image_max_side)}}
-            )
-        return parts
+        return content(request)
 
     def _cost(self, prompt_tokens: int, completion_tokens: int) -> float:
         rate_in, rate_out = PRICES.get(self.model, (0.0, 0.0))
@@ -145,22 +171,7 @@ class OpenRouterProvider:
         )
 
     def structured_call(self, request: ModelRequest) -> tuple[BaseModel, CallMeta]:
-        schema = request.output_schema.model_json_schema()
-        system = (
-            f"{request.system}\n\n"
-            "Reply with a single JSON object and nothing else. It must validate "
-            f"against this JSON Schema:\n{json.dumps(schema)}"
-        )
-        body = {
-            "model": self.model,
-            "messages": [
-                {"role": "system", "content": system},
-                {"role": "user", "content": self._content(request)},
-            ],
-            "max_tokens": request.max_tokens,
-            "temperature": request.temperature,
-            "response_format": {"type": "json_object"},
-        }
+        body = {"model": self.model, **chat_body(request)}
         if self._url == API_URL:
             # OpenRouter returns the amount it actually billed. That number,
             # not the list table, is what a spending cap must be measured on.
