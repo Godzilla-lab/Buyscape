@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows a yellow gas cylinder with '12.5' and other numbers handwritten on the collar.",
+      "Photo 1 shows a blue gas cylinder with a 'GERADISCO' logo on the body.",
+      "Photo 2 shows a top-down view of the blue cylinder's valve and collar.",
+      "Both cylinders show signs of heavy use, including paint chipping and surface rust on the protective collars.",
+      "The seller's text is singular, but the photos depict two distinct cylinders (one yellow, one blue)."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "cooking gas cylinder",
+      "brand": "Geradisco",
+      "model": "12.5kg",
+      "read_from": [
+        "photo 0 collar",
+        "photo 1 body"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "12.5kg",
+        "verdict": "supported",
+        "evidence": "Handwritten marking on the collar in photo 0."
+      },
+      {
+        "claim": "standard Cooking Gas Cylinder",
+        "verdict": "supported",
+        "evidence": "Visual appearance in all photos matches standard LPG cylinders used in Lagos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Cylinder may be expired",
+        "proof": "Photo of the manufacture or expiry date stamped into the metal of the collar or stay plate.",
+        "if_unproven": "as expired/scrap value"
+      },
+      {
+        "risk": "Valve may leak",
+        "proof": "Video of the valve being tested with soapy water while the cylinder is under pressure.",
+        "if_unproven": "as requiring a valve replacement"
+      },
+      {
+        "risk": "Item ambiguity",
+        "proof": "Confirmation of which specific cylinder (yellow or blue) is being offered for the price.",
+        "if_unproven": "priced as the more worn blue cylinder"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the stamped manufacture and expiry dates on the cylinder collar.",
+      "Clarification on which specific cylinder is for sale, or if it is a lot of two.",
+      "Video showing the valve is functional and leak-free."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The listing is ambiguous as it shows two different cylinders (yellow and blue) for a singular description. Additionally, the expiry date, which is the primary driver of value for used gas cylinders, is not visible."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 21645,
+    "input_tokens": 4491,
+    "output_tokens": 4078,
+    "cost_usd": 0.014479,
+    "replayed": false,
+    "fixture_key": "28f43ba9c4319c472c0edb54252827a3",
+    "error": null
+  }
+}
