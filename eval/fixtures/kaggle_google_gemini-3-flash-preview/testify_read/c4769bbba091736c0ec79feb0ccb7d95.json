@@ -1,0 +1,94 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Yellow industrial diesel engine.",
+      "Valve cover in photo 1 is labeled 'CAT C9 ACERT'.",
+      "Engine block shows significant oil staining and grime.",
+      "The intake manifold area in photo 0 appears open with components removed.",
+      "An Atlas Copco brand filter is attached in photo 0.",
+      "Hand tools (wrenches, pliers) are visible on the ground next to the engine in photo 1.",
+      "Watermark 'DNL EQUIPMENT SALES AND...' is visible on both photos."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "diesel engine",
+      "brand": "Caterpillar",
+      "model": "C9 ACERT",
+      "read_from": [
+        "photo 1 valve cover"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Complete caterpiller c9 engine (parts)",
+        "verdict": "contradicted",
+        "evidence": "The seller's text is self-contradictory ('complete' vs 'parts'), and photo 0 shows missing intake components."
+      },
+      {
+        "claim": "Tokunbo, direct from Belgium",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      },
+      {
+        "claim": "Tested and working",
+        "verdict": "unverified",
+        "evidence": "No video of the engine running is provided; missing components in photo 0 make 'working' status unlikely as shown."
+      },
+      {
+        "claim": "No knock",
+        "verdict": "unverified",
+        "evidence": "Requires a video with audio of the engine under load."
+      },
+      {
+        "claim": "Low mileage",
+        "verdict": "unverified",
+        "evidence": "No hour meter or ECU diagnostic report is shown."
+      },
+      {
+        "claim": "Never opened",
+        "verdict": "unverified",
+        "evidence": "The presence of tools and missing external parts suggests the engine has been partially disassembled."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The engine may have internal mechanical failure (seized or knocked).",
+        "proof": "A video of the engine starting and running.",
+        "if_unproven": "as non-running/scrap value"
+      },
+      {
+        "risk": "Major external components (ECU, turbo, injectors) may be missing or faulty.",
+        "proof": "Clear photos of all sides and a detailed inventory of included parts.",
+        "if_unproven": "as an incomplete parts engine"
+      },
+      {
+        "risk": "The engine may be locally used/rebuilt rather than a fresh import.",
+        "proof": "Import documentation or shipping manifests.",
+        "if_unproven": "as locally used"
+      }
+    ],
+    "proof_requests": [
+      "Video of the engine running.",
+      "Photos of the other two sides of the engine.",
+      "Close-up photo of the engine serial number plate.",
+      "Clear photo of the ECU (if present)."
+    ],
+    "decision": "price",
+    "reason": "The item is identified as a Caterpillar C9 ACERT engine. Because the seller describes it as 'parts' and photos show it is missing components, it is priced as a non-running, incomplete core engine."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 13854,
+    "input_tokens": 3443,
+    "output_tokens": 2514,
+    "cost_usd": 0.009263,
+    "replayed": false,
+    "fixture_key": "c4769bbba091736c0ec79feb0ccb7d95",
+    "error": null
+  }
+}
