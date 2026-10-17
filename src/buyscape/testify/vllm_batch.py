@@ -65,6 +65,10 @@ def main() -> None:
     parser.add_argument("--limit", type=int, default=0)
     parser.add_argument("--quantization", default=None, help="For example fp8, to make room on a small card.")
     parser.add_argument("--dtype", default="auto", help="half on a card without bfloat16, such as a T4.")
+    parser.add_argument(
+        "--plain-all-reduce", action="store_true",
+        help="Split across cards with NCCL alone, for pairs without a direct link such as two T4s.",
+    )
     args = parser.parse_args()
 
     done: set[str] = set()
@@ -89,6 +93,7 @@ def main() -> None:
         limit_mm_per_prompt={"image": args.max_images},
         quantization=args.quantization,
         dtype=args.dtype,
+        disable_custom_all_reduce=args.plain_all_reduce,
         seed=0,
     )
     mode = _json_mode()
