@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photos 0 and 1 show one wooden pallet lying on concrete, with worn slats and red paint on a bottom corner.",
+      "Photo 2 shows many stacked wooden pallets in a covered yard, of mixed sizes and types.",
+      "All three photos carry the watermark 'POSTED ON JIJI GOLDNEST'.",
+      "No scale, weight ticket, brand stamp, or model marking is visible in any photo."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "wooden pallet",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Standard wooden storage pallets",
+        "verdict": "supported",
+        "evidence": "photos 0-2 show wooden pallets"
+      },
+      {
+        "claim": "Everything is clean, dry and sorted",
+        "verdict": "unverified",
+        "evidence": "photos show surface appearance only; dryness and sorting cannot be confirmed remotely"
+      },
+      {
+        "claim": "no water added",
+        "verdict": "unverifiable_remote",
+        "evidence": "moisture content inside the wood cannot be checked from photos"
+      },
+      {
+        "claim": "Weighed at 500 kg on a certified scale this morning",
+        "verdict": "unverifiable_remote",
+        "evidence": "no scale or weight ticket appears in any photo"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Pallets may be wet, rotten, or moldy inside despite looking dry on the surface",
+        "proof": "close-up photo of cut end grain or a moisture meter reading",
+        "if_unproven": "priced as water-damaged or unsound"
+      },
+      {
+        "risk": "Actual count and total weight of the lot are unknown; 500 kg may refer to one pallet or the whole stack",
+        "proof": "photo of the full lot on a scale with the weight display visible, or a counted stack with dimensions",
+        "if_unproven": "priced as a single pallet of unknown weight"
+      },
+      {
+        "risk": "Boards or blocks may be cracked, split, or missing",
+        "proof": "photos or video of all four sides and the underside of each pallet",
+        "if_unproven": "priced as damaged or broken"
+      },
+      {
+        "risk": "The stack in photo 2 may not be the same lot as the single pallet in photos 0-1",
+        "proof": "video showing the seller's full stock and the specific pallets for sale",
+        "if_unproven": "priced based only on the single pallet shown in photos 0-1"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the pallets on a certified scale showing the total weight",
+      "Close-up photos of pallet ends and undersides to check for rot or breaks",
+      "Video or photo showing the full quantity being sold"
+    ],
+    "decision": "price",
+    "reason": "The item is clearly a wooden pallet, so it can be priced at its worst case; unverified claims about weight, dryness, and quantity are treated as unproven and priced down."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 26096,
+    "input_tokens": 2669,
+    "output_tokens": 2701,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "1cce5b9ec6d650311afc22405ffd036f",
+    "error": null
+  }
+}
