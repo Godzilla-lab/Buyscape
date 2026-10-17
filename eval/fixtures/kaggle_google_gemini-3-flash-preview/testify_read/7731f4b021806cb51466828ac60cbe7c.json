@@ -1,0 +1,67 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Large solar panel with half-cut cell design.",
+      "Monocrystalline cells (dark color).",
+      "Silver aluminum frame.",
+      "Back side shows three junction boxes and cables with MC4 connectors.",
+      "A specification label is visible on the back but the text is unreadable.",
+      "Watermark 'NETWORK SOLAR VENTURES' appears on all photos.",
+      "Date stamp '2025/08/07' is in the future.",
+      "Location tag 'Lagos, Nigeria' is on the photos."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Network Solar venture... We deal...",
+        "verdict": "unverifiable_remote",
+        "evidence": "The text is a general business introduction with no specific product claims."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The rated wattage and electrical specifications are unknown.",
+        "proof": "A clear, legible close-up photo of the specification label on the back of the panel.",
+        "if_unproven": "priced as a generic 300W panel (conservative for this physical size)"
+      },
+      {
+        "risk": "The panel may be non-functional or have significantly degraded output.",
+        "proof": "A video showing a multimeter reading of the open-circuit voltage (Voc) and short-circuit current (Isc) in direct sunlight.",
+        "if_unproven": "priced as non-functional/scrap"
+      },
+      {
+        "risk": "Internal damage such as micro-cracks or snail trails not visible in low-res photos.",
+        "proof": "High-resolution close-up photos of the cells under bright light.",
+        "if_unproven": "priced as used with heavy wear"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the specification label on the back of the panel.",
+      "Video of a multimeter test showing voltage and current output in sunlight.",
+      "Confirmation of the actual current date, as the photo timestamp is in the future."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The specification label that defines the wattage and model is unreadable, making it impossible to determine a base price even for a worst-case scenario."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 14511,
+    "input_tokens": 5570,
+    "output_tokens": 3359,
+    "cost_usd": 0.012862,
+    "replayed": false,
+    "fixture_key": "7731f4b021806cb51466828ac60cbe7c",
+    "error": null
+  }
+}

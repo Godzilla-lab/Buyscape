@@ -1,0 +1,80 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Multiple solar panels leaning against an outdoor wall in photo 0.",
+      "The panels appear to be monocrystalline based on the dark cell color and clipped corners.",
+      "A stack of several panels is visible behind the two in the foreground.",
+      "The text 'IZUTECH SOLAR ENERGY' is watermarked on the image.",
+      "The seller's text describes a battery, but no battery is visible in the photo."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panels",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Battery is new",
+        "verdict": "unverified",
+        "evidence": "No battery is shown in the provided photo."
+      },
+      {
+        "claim": "holds charge for 8 hours",
+        "verdict": "unverified",
+        "evidence": "No battery is shown, and discharge time is dependent on the connected load."
+      },
+      {
+        "claim": "Never repaired",
+        "verdict": "unverified",
+        "evidence": "Internal condition and repair history cannot be determined from a single exterior photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Unknown wattage and technical specifications",
+        "proof": "A clear photo of the manufacturer's specification sticker on the back of a panel.",
+        "if_unproven": "Priced as the lowest standard wattage for panels of this physical size."
+      },
+      {
+        "risk": "Unclear quantity",
+        "proof": "Seller confirmation of whether the price is per panel or for the entire stack shown.",
+        "if_unproven": "Priced as a single panel."
+      },
+      {
+        "risk": "Item mismatch (Battery vs Panels)",
+        "proof": "Photos of the battery mentioned in the text, including its labels.",
+        "if_unproven": "Priced as solar panels only; battery value excluded."
+      },
+      {
+        "risk": "Potential cell damage or micro-cracks",
+        "proof": "Close-up photos of the glass surface and a video showing a voltage test with a multimeter in sunlight.",
+        "if_unproven": "Priced as used/fair condition with potential degradation."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the specification label on the back of the solar panels.",
+      "Photos of the battery mentioned in the description, showing the brand and Ah rating.",
+      "Clarification on whether the price is for one panel or the whole set.",
+      "A video showing the output voltage of a panel using a multimeter."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "There is a significant mismatch between the seller's text (describing a battery) and the photo (showing solar panels). Additionally, the panels lack visible wattage or brand information necessary for an accurate valuation."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 13385,
+    "input_tokens": 2417,
+    "output_tokens": 2440,
+    "cost_usd": 0.008528,
+    "replayed": false,
+    "fixture_key": "79951c47b47ab5007ad8c79873ee1bbe",
+    "error": null
+  }
+}
