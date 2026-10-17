@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Front view shows a black DSLR body with 'Canon' and 'EOS 5D Mark II' branding.",
+      "A body cap is fitted; no lens is attached.",
+      "Rear view shows the LCD screen, control dial, and various buttons; the screen is off.",
+      "Bottom view shows a label with model 'DS126201', 'MADE IN JAPAN', and serial number '3761814763'.",
+      "Photos have a 'CDICSON BUSINESS WORLD' and 'POSTED ON JIJI' watermark.",
+      "The camera appears to be in good cosmetic condition with no obvious external impact damage."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DSLR camera body",
+      "brand": "Canon",
+      "model": "EOS 5D Mark II",
+      "read_from": [
+        "photo 0",
+        "photo 2 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Canon EOS 5D Mark II",
+        "verdict": "supported",
+        "evidence": "photo 0 shows the model name on the front of the body."
+      },
+      {
+        "claim": "21.1-megapixel sensor",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a standard technical specification for this model and cannot be confirmed via photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The camera may not power on or have electronic faults.",
+        "proof": "A video showing the camera powering on, the LCD working, and a photo being taken.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The sensor may be scratched, dirty, or have dead pixels.",
+        "proof": "A clear photo of the sensor with the body cap removed, and a sample image shot at a high aperture (e.g., f/22).",
+        "if_unproven": "as having a damaged sensor"
+      },
+      {
+        "risk": "The shutter may be near its end of life (high shutter count).",
+        "proof": "A screenshot from a shutter count utility showing the actual actuations for serial 3761814763.",
+        "if_unproven": "as having a very high shutter count"
+      },
+      {
+        "risk": "Essential accessories like the battery and charger may be missing.",
+        "proof": "A photo showing the camera body alongside the battery, charger, and any cables included.",
+        "if_unproven": "as body only, no battery or charger"
+      }
+    ],
+    "proof_requests": [
+      "Video of the camera powering on and taking a photo.",
+      "Screenshot of the shutter count.",
+      "Photo of the sensor with the body cap removed.",
+      "Photo of the included battery and charger."
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identified as a Canon EOS 5D Mark II. Since there is no evidence of functionality or shutter health, it is priced at the worst case for a non-functional body."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 12455,
+    "input_tokens": 4640,
+    "output_tokens": 2263,
+    "cost_usd": 0.008194,
+    "replayed": false,
+    "fixture_key": "2db083e476a46125393c1cdca8c7d230",
+    "error": null
+  }
+}
