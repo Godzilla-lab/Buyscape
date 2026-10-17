@@ -109,8 +109,30 @@ def save(root: Path, who: str, part: str, name: str, answer: dict) -> dict:
     except ValidationError as exc:
         problems = "; ".join(f"{'.'.join(str(p) for p in e['loc']) or 'answer'}: {e['msg']}" for e in exc.errors())
         raise ValueError(problems) from None
+    missing = _blank(task, answer)
+    if missing:
+        raise ValueError("Please fill in " + ", ".join(missing) + " before saving.")
     (folder / "answer.json").write_text(json.dumps(answer, indent=1, ensure_ascii=False) + "\n")
     return {"ok": True}
+
+
+def _blank(task: str, answer: dict) -> list[str]:
+    """What a person left empty that a real answer needs.
+
+    The schema lets a model leave lists empty; a person pressing save on an
+    untouched form would pass it with nothing said. So a person's read must
+    say what the item is (or that they cannot tell), what they saw, and why.
+    """
+    missing = []
+    if not (answer.get("reason") or "").strip():
+        missing.append("why")
+    if task == "testify_read":
+        identity = answer.get("identity") or {}
+        if identity.get("status") != "unknown" and not (identity.get("kind") or identity.get("brand")):
+            missing.append("what the item is")
+        if not answer.get("observations"):
+            missing.append("what the photos show")
+    return missing
 
 
 def photo(root: Path, who: str, part: str, name: str, file: str) -> Path:

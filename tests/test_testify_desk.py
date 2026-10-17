@@ -62,3 +62,13 @@ def test_names_outside_the_sitting_are_refused(root: Path):
     with pytest.raises(KeyError):
         desk.photo(root, "human_ada", "dev", name, "prompt.md")
     assert desk.photo(root, "human_ada", "dev", name, "photo_0.jpg").name == "photo_0.jpg"
+
+
+def test_an_untouched_form_is_not_an_answer(root: Path):
+    name = desk.cases(root, "human_ada", "dev")[0]["case"]
+    blank = Reading(observations=[], identity=IdentityAnswer(status="by_type"), decision="price", reason="").model_dump()
+    with pytest.raises(ValueError, match="what the item is"):
+        desk.save(root, "human_ada", "dev", name, blank)
+    unsure = Reading(observations=["a dark photo"], identity=IdentityAnswer(status="unknown"),
+                     decision="cannot_identify", reason="too dark to tell").model_dump()
+    assert desk.save(root, "human_ada", "dev", name, unsure) == {"ok": True}

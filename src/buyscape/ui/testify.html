@@ -73,7 +73,8 @@
       <label for="proof_requests">Ask the seller for (most decisive first, one line each)</label>
       <textarea id="proof_requests"></textarea>
       <label for="decision">Decision</label>
-      <select id="decision">
+      <select id="decision" required>
+        <option value="">choose one</option>
         <option value="price">price it at its worst case</option>
         <option value="ask_for_proof">ask for proof first</option>
         <option value="cannot_identify">cannot tell what it is</option>
@@ -183,7 +184,7 @@ async function openCase(name) {
     $("claims").innerHTML = ""; (a.claims || []).forEach((c) => row("claim", c)); if (!a.claims) row("claim");
     $("risks").innerHTML = ""; (a.risks || []).forEach((r) => row("risk", r)); if (!a.risks) row("risk");
     $("proof_requests").value = (a.proof_requests || []).join("\n");
-    $("decision").value = a.decision || "price";
+    $("decision").value = a.decision || "";
     $("reason").value = a.reason || "";
   } else {
     const pick = a.price_pick || {};
