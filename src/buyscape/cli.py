@@ -584,13 +584,17 @@ def testify_convert(out: Path = typer.Option(ROOT / "eval" / "testify" / "items.
     splits = Counter(i.split for i in items)
     console.print(f"  dev {splits['dev']}, test {splits['test']}")
 
-    # Training pool: dealers' new stock, for naming items. An advert in the
-    # benchmark is never also a training example.
+    # Training pool: dealers' new stock, for naming items, and second-hand
+    # adverts fetched for training. An advert in the benchmark, or a repost
+    # of one, is never also a training example.
     pool_path = out.parent / "train_pool.jsonl"
-    benchmark = {i.id for i in items}
-    pool = [i for i in convert.train_items(ROOT, previous=pool_path) if i.id not in benchmark]
+    pool = convert.train_items(ROOT, previous=pool_path)
+    repeats = convert.repeats(pool, items, ROOT)
+    pool = [i for i in pool if i.id not in repeats]
     convert.write(pool, pool_path)
-    console.print(f"{len(pool)} training items written to {pool_path}")
+    console.print(f"{len(pool)} training items written to {pool_path}, {len(repeats)} left out as benchmark adverts")
+    for (cache, market), n in sorted(Counter((i.photos.cache.split("/")[2], i.market) for i in pool).items()):
+        console.print(f"  {n:4d}  {cache:14s} {market}")
     for kind, n in sorted(Counter(i.answer.kind for i in pool).items(), key=lambda kv: -kv[1])[:10]:
         console.print(f"  {n:4d}  {kind}")
 
@@ -877,7 +881,10 @@ def testify_publish(
 
 @app.command("testify-fetch")
 def testify_fetch(
-    out: Path = typer.Option(None, help="Defaults to eval/raw/testify, or eval/raw/testify_new with --new-stock."),
+    out: Path = typer.Option(
+        None,
+        help="Defaults to eval/raw/testify; eval/raw/testify_new with --new-stock; eval/raw/testify_train with --for-training.",
+    ),
     per_phrase: int = typer.Option(25, help="Adverts to keep per search phrasing."),
     only: list[str] = typer.Option(None, help="Fetch only these kinds, for example 'standing fan'."),
     max_photos: int = typer.Option(None, help="Photos per advert: 3 by default, 1 with --new-stock."),
@@ -888,12 +895,19 @@ def testify_fetch(
     new_stock: bool = typer.Option(
         False, help="Fetch dealers' brand new adverts instead, as training data for naming items. Never benchmark items."
     ),
+    for_training: bool = typer.Option(
+        False,
+        help="Fetch second-hand adverts as training data, kept apart from the benchmark. Use it for any new city.",
+    ),
 ) -> None:
     """Cache Jiji adverts for small goods and material lots. Run from an ordinary connection."""
     from .testify import fetch as wider
 
+    if new_stock and for_training:
+        raise typer.BadParameter("--new-stock is already training data; pick one of --new-stock and --for-training")
     pool = "new" if new_stock else "used"
-    out = out or ROOT / "eval" / "raw" / ("testify_new" if new_stock else "testify")
+    cache = "testify_new" if new_stock else "testify_train" if for_training else "testify"
+    out = out or ROOT / "eval" / "raw" / cache
     max_photos = max_photos or (1 if new_stock else 3)
     counts = wider.build(
         out,

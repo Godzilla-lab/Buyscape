@@ -188,6 +188,58 @@ def test_training_items_are_split_train(tmp_path):
     assert item.photos.cache == "eval/raw/testify_new/media/n1/"
 
 
+def _cache(root, cache, rows):
+    import json
+
+    raw = root / "eval" / "raw" / cache
+    raw.mkdir(parents=True, exist_ok=True)
+    (raw / "standing_fan.json").write_text(json.dumps([
+        {"id": i, "tier": "small_goods", "kind": "standing fan", "title": f"Fan {i}", "url": f"/{region}/fan-{i}.html",
+         "media": [f"{i}/00.jpg"], "price_ngn": 20000, "is_used": True, "condition": "Used", "region": region}
+        for i, region in rows
+    ]))
+
+
+def test_second_hand_training_adverts_stay_out_of_the_benchmark(tmp_path):
+    import shutil
+
+    from buyscape.testify.convert import train_items, write
+
+    (tmp_path / "protocols").symlink_to(ROOT / "protocols")
+    _cache(tmp_path, "testify_train", [("k1", "kano"), ("k2", "enugu")])
+    _cache(tmp_path, "testify_new", [("n1", "lagos"), ("k1", "lagos")])
+    items = train_items(tmp_path)
+    assert [(i.id, i.split, i.market) for i in items] == [("k1", "train", "lagos"), ("k2", "train", "enugu"),
+                                                         ("n1", "train", "lagos")]
+    # A cache not on this machine keeps what the previous file had.
+    previous = tmp_path / "train_pool.jsonl"
+    write(items, previous)
+    shutil.rmtree(tmp_path / "eval" / "raw" / "testify_train")
+    assert {i.id for i in train_items(tmp_path, previous=previous)} == {"k1", "k2", "n1"}
+
+
+def test_a_repost_of_a_scored_advert_is_not_a_training_item(tmp_path):
+    import json
+
+    from buyscape.testify.convert import repeats, wider_items
+
+    (tmp_path / "protocols").symlink_to(ROOT / "protocols")
+    _cache(tmp_path, "testify", [("b1", "lagos"), ("b2", "lagos")])
+    _cache(tmp_path, "testify_train", [("b1", "kano"), ("t1", "kano"), ("t2", "kano"), ("t3", "kano")])
+    benchmark = wider_items(tmp_path, "testify")
+    benchmark[1].exclude = "new stock, not second-hand"
+    pool = wider_items(tmp_path, "testify_train")
+    hashes = tmp_path / "eval" / "testify"
+    hashes.mkdir(parents=True)
+    (hashes / "photo_hashes.json").write_text(json.dumps({"b1": ["ff00ff00ff00ff00"], "b2": ["0000000000000000"]}))
+    (hashes / "train_photo_hashes.json").write_text(json.dumps({
+        "t1": ["ff00ff00ff00ff01"],  # the scored advert again, one bit off
+        "t2": ["0000000000000001"],  # near an advert the photo check left out
+        "t3": ["123456789abcdef0"],
+    }))
+    assert repeats(pool, benchmark, tmp_path) == {"b1", "t1"}
+
+
 def test_each_city_is_fetched_once_and_lagos_history_counts(tmp_path, monkeypatch):
     from buyscape.testify import fetch
 

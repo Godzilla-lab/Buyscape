@@ -11,7 +11,7 @@ data already on disk:
 |---|---|
 | `items.jsonl` | One item per line: links, seller claims, answer key, hidden-risk seeds, and every recorded model pair's verdict |
 | `labels.yaml` | Hand labels for the BuyScrap adverts: tier, protocol and the item in a buyer's words |
-| `train_pool.jsonl` | Training data, never benchmark: dealers' brand new adverts, for teaching a model to name an item. Split `train` |
+| `train_pool.jsonl` | Training data, never benchmark: dealers' brand new adverts, for teaching a model to name an item, and second-hand adverts from cities outside the benchmark. Split `train` |
 | `review_dev.yaml` | The photo review of 100 dev items, by AI reviewers, pending a person's spot check |
 | `labels_ai/` | A model's photo check of every item, the same checklist as the review |
 | `photo_hashes.json` | Perceptual hashes of every item's photos. Hashes, never photos |
@@ -44,6 +44,14 @@ data already on disk:
 52 kinds, brand new adverts only, one photo each. The two pools never share an
 advert: the benchmark takes second-hand only, the pool takes new only, and
 `testify-convert` drops any pool item whose id is in the benchmark.
+
+`uv run buyscape testify-fetch --for-training --region kano` adds second-hand
+adverts to the training pool instead, cached in `eval/raw/testify_train`. Use
+it for every city past the first four, so the benchmark stays fixed while the
+training set grows. Sellers repost the same item in several cities, so
+`testify-convert` also drops a training advert whose photo is within repost
+distance of a scored benchmark photo (`train_photo_hashes.json` keeps the
+training hashes).
 
 Jiji answers cloud machines with a bot check. `testify-fetch` says so rather
 than failing silently. Run it from a home or office connection, the same way

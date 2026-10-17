@@ -266,8 +266,9 @@ def buyscrap_items(root: Path) -> list[Item]:
 def wider_items(root: Path, cache: str = "testify") -> list[Item]:
     """Small goods and material lots fetched by `buyscape testify-fetch`.
 
-    From the testify_new cache, which holds dealers' new stock, every item is
-    split `train`: training data for naming an item, never a benchmark item.
+    From the training caches, testify_new (dealers' new stock) and
+    testify_train (second-hand adverts fetched for training), every item is
+    split `train`: training data, never a benchmark item.
     """
     raw = root / "eval" / "raw" / cache
     training = cache != "testify"
@@ -312,12 +313,45 @@ def wider_items(root: Path, cache: str = "testify") -> list[Item]:
     return items
 
 
+TRAIN_CACHES = ("testify_new", "testify_train")
+
+
 def train_items(root: Path, previous: Path | None = None) -> list[Item]:
-    """The new-stock training pool. Kept from the previous file when the
-    cache is not on this machine, like every other source."""
-    if wider.load(root / "eval" / "raw" / "testify_new"):
-        return sorted(wider_items(root, "testify_new"), key=lambda i: i.id)
-    return load_items(previous) if previous else []
+    """The training pool: dealers' new stock, for naming items, and second-hand
+    adverts fetched for training. A cache not on this machine keeps the items
+    it had in the previous file, like every other source."""
+    kept = load_items(previous) if previous else []
+    out: dict[str, Item] = {}
+    for cache in TRAIN_CACHES:
+        if wider.load(root / "eval" / "raw" / cache):
+            items = wider_items(root, cache)
+        else:
+            items = [i for i in kept if (i.photos.cache or "").startswith(f"eval/raw/{cache}/")]
+        for item in items:
+            out.setdefault(item.id, item)
+    return sorted(out.values(), key=lambda i: i.id)
+
+
+def repeats(pool: list[Item], benchmark: list[Item], root: Path) -> set[str]:
+    """Training items that are a benchmark advert again: the same id, or a
+    photo within repost distance of a scored item's photo. Sellers repost the
+    same item in other cities, and a repost in training would leak an answer.
+    Items the photo check left out are never scored, so only their ids count:
+    plain studio shots of different goods can sit within repost distance.
+    """
+    from ..ui.sessions import DUPLICATE_DISTANCE
+    from .comparables import photo_hashes
+
+    ids = {i.id for i in benchmark}
+    bench = photo_hashes(benchmark, root)
+    seen = {int(h, 16) for i in benchmark if not i.exclude for h in bench.get(i.id, [])}
+    mine = photo_hashes(pool, root, cache=root / "eval" / "testify" / "train_photo_hashes.json")
+    out = set()
+    for item in pool:
+        hashes = [int(h, 16) for h in mine.get(item.id, [])]
+        if item.id in ids or any((h ^ s).bit_count() <= DUPLICATE_DISTANCE for h in hashes for s in seen):
+            out.add(item.id)
+    return out
 
 
 def _group(item: Item) -> str:
