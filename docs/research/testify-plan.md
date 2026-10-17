@@ -220,6 +220,13 @@ anyway. It is still a contribution.
 6. **Code:** the scoring harness and the protocol format. Tenant data and
    prices stay private.
 
+## Part 6b: after the release, the learning loop
+
+The benchmark and the model are the start. The product is a system any
+buyer of second-hand goods can run on a website or WhatsApp, where every
+price staff settle after a pickup makes the next quote better. That plan,
+with its guards and phases, is in `docs/research/learning-loop-plan.md`.
+
 ## Part 7: timeline (12 weeks, each phase ends at a gate)
 
 | Week | Work | Gate to pass before moving on |
