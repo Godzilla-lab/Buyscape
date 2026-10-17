@@ -839,6 +839,20 @@ def testify_score(
         console.print(f"  {key}: {value}")
 
 
+@app.command("testify-release")
+def testify_release(
+    out: Path = typer.Option(Path("release/testify-v0.1"), help="Where to write the release files."),
+) -> None:
+    """Write the public release: links and labels only, checked for anything private first."""
+    from .testify import comparables, release
+    from .testify.convert import load_items
+
+    items = load_items(ROOT / "eval" / "testify" / "items.jsonl")
+    hashes = comparables.photo_hashes(items, ROOT)
+    stats = release.build(items, hashes, ROOT, ROOT / out if not out.is_absolute() else out)
+    console.print(stats)
+
+
 @app.command("testify-fetch")
 def testify_fetch(
     out: Path = typer.Option(None, help="Defaults to eval/raw/testify, or eval/raw/testify_new with --new-stock."),
