@@ -174,8 +174,8 @@ Scores for the test split are computed privately on request.
 
 ## Contact
 
-olamibusari607@gmail.com. Questions, a model to score on the test split, or
-settled prices to contribute are all welcome.
+Olamilekan, olamibusari607@gmail.com. Questions, a model to score on the
+test split, or settled prices to contribute are all welcome.
 
 ## Licence and privacy
 
