@@ -1,0 +1,85 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows the motorcycle's instrument cluster with two analog gauges, handlebars, mirrors, and key in the ignition",
+      "Photo 1 shows the black fuel tank with 'Kawasaki' lettering visible on the side, plus the seat and frame",
+      "Photo 2 shows the rear wheel with a red-striped tire, disc brake, exhaust muffler, and chain drive"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "motorcycle",
+      "brand": "Kawasaki",
+      "model": null,
+      "read_from": [
+        "photo 1 fuel tank"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Kawasaki brand",
+        "verdict": "supported",
+        "evidence": "photo 1 fuel tank lettering"
+      },
+      {
+        "claim": "ZZR model",
+        "verdict": "unverified",
+        "evidence": "not visible in photos 0-2"
+      },
+      {
+        "claim": "Working fine",
+        "verdict": "unverified",
+        "evidence": "photos show exterior only; no engine start or ride shown"
+      },
+      {
+        "claim": "Selling to relocate",
+        "verdict": "unverifiable_remote",
+        "evidence": "seller's personal motive cannot be checked remotely"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine or transmission may not run",
+        "proof": "video of cold start, idle, and revving",
+        "if_unproven": "as not running"
+      },
+      {
+        "risk": "Hidden accident or frame damage",
+        "proof": "full walkaround video and close-ups of frame, forks, and swingarm",
+        "if_unproven": "as damaged"
+      },
+      {
+        "risk": "Actual mileage unknown or odometer tampered",
+        "proof": "clear photo of odometer reading with date context",
+        "if_unproven": "as unknown mileage"
+      },
+      {
+        "risk": "Missing or faulty ownership documents",
+        "proof": "photos of original vehicle papers and registration",
+        "if_unproven": "as no papers"
+      }
+    ],
+    "proof_requests": [
+      "Video of the engine starting and running",
+      "Clear photo of the model badge or registration document showing the ZZR variant",
+      "Full walkaround video of the motorcycle",
+      "Photos of ownership documents"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The Kawasaki brand is visible in photo 1, but the ZZR model and running condition are not shown; worst-case pricing still depends on which ZZR variant it is and whether it runs."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 179935,
+    "input_tokens": 2912,
+    "output_tokens": 3955,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "83f823153573b5d1d2ef5c3901e198b2",
+    "error": null
+  }
+}
