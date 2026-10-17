@@ -1,0 +1,69 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "A single tire shown from the tread face.",
+      "The tread shows significant wear, particularly on the outer shoulders.",
+      "The sidewall is not visible, so brand, model, size, and DOT date code cannot be seen.",
+      "Watermark 'NJ VENTURE' is visible on the image.",
+      "A second tire is partially visible to the left."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "car tire",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "295 40 r20",
+        "verdict": "unverified",
+        "evidence": "The sidewall markings showing the size are not visible in photo 0."
+      },
+      {
+        "claim": "tukubo (used)",
+        "verdict": "supported",
+        "evidence": "The tread in photo 0 shows clear signs of use and wear."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Incorrect size or premium brand mismatch.",
+        "proof": "A clear photo of the sidewall showing the brand and full size specifications.",
+        "if_unproven": "as a generic used tire of unknown specifications."
+      },
+      {
+        "risk": "Aged or expired rubber.",
+        "proof": "A photo of the 4-digit DOT date code on the sidewall.",
+        "if_unproven": "as end-of-life rubber/scrap."
+      },
+      {
+        "risk": "Hidden structural damage or internal repairs.",
+        "proof": "Photos of the inner liner and both sidewalls to check for bulges or patches.",
+        "if_unproven": "as a damaged/unsafe tire."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the sidewall showing the brand, model, and size (e.g., 295/40 R20).",
+      "Photo of the 4-digit DOT date code.",
+      "Photo of the inside of the tire to check for repairs or patches."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The size and brand, which are the primary price drivers for tires, cannot be verified from the single tread-only photo provided. The tread also appears heavily worn on the shoulders."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 10525,
+    "input_tokens": 2356,
+    "output_tokens": 2234,
+    "cost_usd": 0.00788,
+    "replayed": false,
+    "fixture_key": "372f4e55cf95672db91e96e67249f0e9",
+    "error": null
+  }
+}
