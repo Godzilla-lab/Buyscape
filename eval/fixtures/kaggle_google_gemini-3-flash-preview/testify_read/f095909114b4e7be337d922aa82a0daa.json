@@ -1,0 +1,80 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "White chest freezer with a top-opening lid.",
+      "Interior shows silver metallic lining and appears clean, but no baskets are visible (photo 0).",
+      "Front panel has a 'Haier THERMOCOOL' badge and a '3 YEARS WARRANTY' sticker (photo 1).",
+      "Significant rust and paint bubbling are visible along the entire bottom edge of the front (photo 1).",
+      "The back of the unit features external condenser coils and a technical specification label (photo 2).",
+      "The technical label on the back is blurry and illegible (photo 2).",
+      "Rust is also visible along the bottom rear edge (photo 2).",
+      "A control panel with a dial and indicator light is located at the bottom right front (photo 1)."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "chest freezer",
+      "brand": "Haier Thermocool",
+      "model": null,
+      "read_from": [
+        "photo 1 badge",
+        "photo 1 sticker"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "themocool freezer",
+        "verdict": "supported",
+        "evidence": "photo 1 shows the Haier Thermocool branding."
+      },
+      {
+        "claim": "string capacity",
+        "verdict": "unverifiable_remote",
+        "evidence": "The capacity in liters is not legible on any visible labels."
+      },
+      {
+        "claim": "long lasting freezing",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a performance claim that cannot be verified through photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The unit may not cool or freeze properly.",
+        "proof": "A video showing the freezer running with frost on the walls or a thermometer inside.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The capacity (liters) is unknown, affecting the value significantly.",
+        "proof": "A clear, readable photo of the technical specification sticker on the back.",
+        "if_unproven": "as a 100L model"
+      },
+      {
+        "risk": "The visible rust may be structural or indicate a leaking cabinet.",
+        "proof": "Close-up photos of the bottom edges and the underside of the unit.",
+        "if_unproven": "as having a compromised/failing cabinet"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the technical specification sticker on the back to confirm model and capacity.",
+      "Video of the freezer turned on and cooling, showing frost on the interior walls.",
+      "Close-up photos of the rust at the bottom of the unit to assess depth of damage."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The technical sticker that defines the model and capacity is unreadable in the current photos. Additionally, the significant rust at the base requires better documentation to determine if the unit is structurally sound."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 16756,
+    "input_tokens": 4607,
+    "output_tokens": 3476,
+    "cost_usd": 0.012731,
+    "replayed": false,
+    "fixture_key": "f095909114b4e7be337d922aa82a0daa",
+    "error": null
+  }
+}
