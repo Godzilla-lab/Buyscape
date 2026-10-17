@@ -1,0 +1,74 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0: A car tire lying flat on a tiled floor, tread pattern visible, sidewall markings not legible, a finger pointing at the tire, part of another tire visible at the top edge.",
+      "Photo 1: Same tire as photo 0 from a similar angle, watermark 'D-KACHI ENTERPRISE' across the tread, finger pointing at the lower right edge.",
+      "Photo 2: Two tires stacked, the top tire shows sidewall lettering that reads 'MASTERCOURT', the bottom tire shows tread only, watermarks 'POSTED ON JIJI' and 'D-KACHI ENTERPRISE' visible."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car tire",
+      "brand": "Mastercourt",
+      "model": null,
+      "read_from": [
+        "photo 2 sidewall"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "first grade Tokumbo tires",
+        "verdict": "unverified",
+        "evidence": "Photos show used tires but cannot confirm grade or foreign-used origin remotely."
+      },
+      {
+        "claim": "will last almost like new brand ones",
+        "verdict": "unverifiable_remote",
+        "evidence": "Future performance and remaining life cannot be judged from still photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Tread depth and remaining life unknown; tire may be near the legal limit or worn unevenly.",
+        "proof": "Close-up photo of a tread depth gauge inserted in multiple grooves, or a video showing tread wear indicators.",
+        "if_unproven": "priced as worn out or near end of life"
+      },
+      {
+        "risk": "Internal damage, bead damage, or hidden repairs not visible from the outside.",
+        "proof": "Video of the tire inflated and rotated, or close-up of the bead and inner liner if demounted.",
+        "if_unproven": "priced as potentially damaged or unsafe"
+      },
+      {
+        "risk": "Manufacturing age unknown; rubber may be old and hardened even if tread looks good.",
+        "proof": "Clear photo of the DOT date code on the sidewall.",
+        "if_unproven": "priced as old rubber with reduced lifespan"
+      },
+      {
+        "risk": "Brand or model misread; sidewall text may not be 'MASTERCOURT'.",
+        "proof": "Clear, well-lit photo of the full sidewall branding.",
+        "if_unproven": "priced as generic unbranded car tire"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the full sidewall showing all branding and the DOT date code",
+      "Photo of tread depth measured with a gauge in at least three spots",
+      "Video showing the tire inflated and rotated to check for bulges or bead issues"
+    ],
+    "decision": "price",
+    "reason": "The photos show a used car tire with a readable sidewall brand in photo 2, so it can be priced at its worst case as a second-hand tire with unknown tread depth, age, and internal condition."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 75848,
+    "input_tokens": 2238,
+    "output_tokens": 4838,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "b4d0c3192ae2c204b67d5c6512657f50",
+    "error": null
+  }
+}
