@@ -134,6 +134,9 @@ class OpenRouterProvider:
         "xai": (XAI_URL, "XAI_API_KEY"),
         # NVIDIA's API catalogue serves open vision models on a free developer tier.
         "nvidia": ("https://integrate.api.nvidia.com/v1/chat/completions", "NVIDIA_API_KEY"),
+        # Kaggle Benchmarks' model proxy: frontier models on a free daily quota.
+        # Its address and a two-hour key come from `kaggle benchmarks auth`.
+        "kaggle": ("", "MODEL_PROXY_API_KEY"),
     }
 
     def __init__(
@@ -152,6 +155,8 @@ class OpenRouterProvider:
         self.vendor = vendor
         self.name = f"{vendor}:{model}"
         self._url, env_var = self.ENDPOINTS[vendor]
+        if vendor == "kaggle":
+            self._url = os.environ.get("MODEL_PROXY_URL", "").rstrip("/") + "/openapi/chat/completions"
         self._key = api_key or os.environ.get(env_var, "")
         if not self._key:
             raise ProviderError(f"{env_var} is not set")
@@ -179,6 +184,12 @@ class OpenRouterProvider:
             if self.model in REASONING_MODELS:
                 body["reasoning"] = {"effort": REASONING_EFFORT, "exclude": True}
                 body["max_tokens"] = request.max_tokens + REASONING_HEADROOM
+        if self.vendor == "kaggle":
+            # The proxy refuses JSON mode, and Claude refuses a temperature;
+            # the system prompt still asks for the JSON object alone.
+            body.pop("response_format")
+            if self.model.startswith("anthropic/"):
+                body.pop("temperature")
         headers = {
             "Authorization": f"Bearer {self._key}",
             "Content-Type": "application/json",
@@ -203,6 +214,9 @@ class OpenRouterProvider:
                 prompt_tokens = int(usage.get("prompt_tokens") or 0)
                 completion_tokens = int(usage.get("completion_tokens") or 0)
                 billed = usage.get("cost")
+                if isinstance(billed, dict):
+                    # Kaggle's proxy reports its quota spent in nanodollars.
+                    billed = sum(float(v) for v in billed.values()) / 1e9
                 spent += (
                     round(float(billed), 6)
                     if billed is not None

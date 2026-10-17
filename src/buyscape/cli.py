@@ -179,6 +179,8 @@ def _provider(model: str, fixtures: Path, mode: str) -> VisionProvider:
         vendor, key = "xai", "XAI_API_KEY"
     elif model.startswith("nvidia:"):
         vendor, key, served = "nvidia", "NVIDIA_API_KEY", model.removeprefix("nvidia:")
+    elif model.startswith("kaggle:"):
+        vendor, key, served = "kaggle", "MODEL_PROXY_API_KEY", model.removeprefix("kaggle:")
     elif "/" in model:
         vendor, key = "openrouter", "OPENROUTER_API_KEY"
     else:

@@ -120,3 +120,30 @@ def test_a_used_up_daily_quota_stops_at_once_instead_of_retrying() -> None:
     with pytest.raises(QuotaExhausted):
         provider.structured_call(_request())
     assert client.calls == 1
+
+
+def test_kaggle_proxy_gets_no_json_mode_and_claude_no_temperature(monkeypatch) -> None:
+    sent = []
+
+    class _Proxy:
+        def post(self, url, json, headers):
+            sent.append((url, json))
+
+            class _R(_Response):
+                def json(self) -> dict:
+                    cost = {"input_tokens_cost_nanodollars": 3000, "output_tokens_cost_nanodollars": 7000}
+                    return {"choices": [{"message": {"content": self.text}}],
+                            "usage": {"prompt_tokens": 1, "completion_tokens": 1, "cost": cost}}
+
+            return _R()
+
+    monkeypatch.setenv("MODEL_PROXY_URL", "https://proxy.example/models")
+    claude = OpenRouterProvider("anthropic/claude-x", api_key="k", client=_Proxy(), vendor="kaggle")
+    _, meta = claude.structured_call(_request())
+    gemini = OpenRouterProvider("google/gemini-x", api_key="k", client=_Proxy(), vendor="kaggle")
+    gemini.structured_call(_request())
+    (url, first), (_, second) = sent
+    assert url == "https://proxy.example/models/openapi/chat/completions"
+    assert "response_format" not in first and "temperature" not in first
+    assert "response_format" not in second and second["temperature"] == 0.0
+    assert meta.cost_usd == 0.00001
