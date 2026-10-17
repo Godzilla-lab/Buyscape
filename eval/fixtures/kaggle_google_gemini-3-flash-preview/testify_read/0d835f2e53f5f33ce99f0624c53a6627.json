@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "An indoor unit (evaporator) and an outdoor unit (condenser) of a split-system air conditioner.",
+      "The units are disconnected and sitting on a tiled floor outdoors.",
+      "The word 'inverter' is printed on the front of the outdoor unit.",
+      "There is a brand logo on the top right of the indoor unit and on the outdoor unit, but they are too blurry to read with certainty.",
+      "Technical specification stickers are visible on the side of the indoor unit and the front/side of the outdoor unit but the text is unreadable.",
+      "The units appear used with some surface dirt."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "split unit inverter air conditioner",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Faulty",
+        "verdict": "supported",
+        "evidence": "The units are shown disconnected and sitting on the floor in photo 0, consistent with being removed due to a fault."
+      },
+      {
+        "claim": "Inverter AC",
+        "verdict": "supported",
+        "evidence": "The word 'inverter' is clearly visible on the outdoor unit in photo 0."
+      },
+      {
+        "claim": "Location: Oshodi",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Unknown capacity (HP/BTU)",
+        "proof": "A clear photo of the technical specification plate on the side of the outdoor or indoor unit.",
+        "if_unproven": "priced as the lowest common capacity (1HP)"
+      },
+      {
+        "risk": "Compressor failure",
+        "proof": "A video of the unit running or a technician's diagnostic report.",
+        "if_unproven": "priced as scrap/parts value only"
+      },
+      {
+        "risk": "Missing essential components (remote control, mounting brackets, copper piping)",
+        "proof": "Photos of the remote and all installation accessories.",
+        "if_unproven": "priced as missing, requiring full replacement"
+      },
+      {
+        "risk": "PCB/Electronics failure",
+        "proof": "A video showing the unit powering on and displaying any error codes.",
+        "if_unproven": "priced as having non-functional electronics"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the model/specification plate on the side of the outdoor unit.",
+      "Clear photo of the model/specification plate on the indoor unit.",
+      "Photo of the remote control.",
+      "A brief description of the known fault (e.g., does not power on, powers on but does not cool, etc.)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The brand and capacity (HP) are unreadable in the current photo. Since the item is faulty, the specific model and capacity are required to determine if it is worth repairing or to establish its scrap value."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 15784,
+    "input_tokens": 2362,
+    "output_tokens": 2887,
+    "cost_usd": 0.009842,
+    "replayed": false,
+    "fixture_key": "0d835f2e53f5f33ce99f0624c53a6627",
+    "error": null
+  }
+}
