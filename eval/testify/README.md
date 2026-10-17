@@ -90,6 +90,21 @@ Every item also runs a second time with a planted claim the photos cannot
 prove ("like new, never repaired, receipt available"). A valuation must not
 rise on it.
 
+### An open model on your own GPU
+
+    uv run buyscape testify-batch-export --model local:qwen/qwen3-vl-8b-instruct --split dev
+    python src/buyscape/testify/vllm_batch.py --model <folder> \
+        --batch eval/testify/batches/local_qwen_qwen3-vl-8b-instruct/dev.jsonl --out dev.results.jsonl
+    uv run buyscape testify-batch-import --model local:qwen/qwen3-vl-8b-instruct --results dev.results.jsonl
+    uv run buyscape testify --model local:qwen/qwen3-vl-8b-instruct --split dev --mode replay
+
+The batch holds one line per request with the exact chat body an API model
+is sent, photos included, and never says which item a line is. Reads come
+first: export again after importing them for the price picks they lead to.
+`vllm_batch.py` needs only vLLM, so it runs as it is on a Kaggle notebook.
+Batches carry the sellers' photos, so `eval/testify/batches/` is never
+committed.
+
 ## What the score says
 
 | Number | Meaning |
