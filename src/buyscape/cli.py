@@ -168,7 +168,7 @@ def _provider(model: str, fixtures: Path, mode: str) -> VisionProvider:
     """
     if model == "fake":
         return RecordingProvider(FakeProvider(), fixtures / "fake", mode="record")
-    if model.startswith("agent:"):
+    if model.startswith(("agent:", "human:")):
         # A person or an agent who sat the test: answers come only from the
         # recordings that testify-import wrote.
         return RecordingProvider(None, fixtures / model.replace(":", "_"), mode="replay")
@@ -775,7 +775,7 @@ def _testify_cases(split: str, market: str):
 
 @app.command("testify-export")
 def testify_export(
-    model: str = typer.Option("agent:claude", help="Who sits the test, as agent:<name>."),
+    model: str = typer.Option("agent:claude", help="Who sits the test, as agent:<name> or human:<name>."),
     split: str = typer.Option("dev"),
     market: str = typer.Option(""),
     lies: bool = typer.Option(True),

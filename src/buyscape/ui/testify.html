@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Valuation test</title>
+<style>
+  html { background: #fff; }
+  body { margin: 0; color: #000; font: 15px/1.5 Verdana, Geneva, Arial, sans-serif; }
+  header { padding: 14px 20px; border-bottom: 1px solid #000; display: flex; gap: 16px; align-items: baseline; flex-wrap: wrap; }
+  header h1 { font-size: 18px; margin: 0; }
+  header a { margin-left: auto; } header a + a { margin-left: 0; }
+  a { color: #0000ee; }
+  main { display: grid; grid-template-columns: minmax(220px, 300px) 1fr; gap: 24px; padding: 20px; }
+  @media (max-width: 900px) { main { grid-template-columns: 1fr; } }
+  h2 { font-size: 15px; margin: 0 0 10px; } h3 { font-size: 15px; margin: 18px 0 6px; }
+  .muted { color: #444; } .small { font-size: 13px; }
+  label { display: block; margin: 10px 0 2px; font-weight: bold; }
+  input[type=text], select, textarea { width: 100%; box-sizing: border-box; padding: 6px 8px; border: 1px solid #000; border-radius: 0; background: #fff; color: #000; font: inherit; }
+  textarea { min-height: 60px; }
+  button { font: inherit; padding: 6px 14px; border: 1px solid #000; border-radius: 0; background: #fff; color: #000; cursor: pointer; }
+  button.primary { font-weight: bold; } button.small { font-size: 12px; padding: 2px 8px; }
+  .status { min-height: 18px; font-size: 13px; margin-top: 8px; } .status.err { color: #b00; } .status.ok { color: #060; }
+  ol.cases { padding-left: 22px; margin: 0; } ol.cases li { margin: 2px 0; }
+  ol.cases li.on { font-weight: bold; } ol.cases .done { color: #060; }
+  .photos { display: flex; gap: 8px; flex-wrap: wrap; } .photos img { max-height: 260px; max-width: 100%; border: 1px solid #000; cursor: zoom-in; }
+  .photos img.big { max-height: none; width: 100%; cursor: zoom-out; }
+  pre.request { white-space: pre-wrap; font: inherit; background: #f4f4f4; padding: 10px; margin: 0; }
+  .row { display: grid; grid-template-columns: 2fr 1fr 2fr auto; gap: 6px; margin: 4px 0; align-items: start; }
+  .row.risk { grid-template-columns: 2fr 2fr 2fr auto; }
+  table { border-collapse: collapse; width: 100%; font-size: 14px; }
+  th, td { text-align: left; vertical-align: top; padding: 5px 6px; border-top: 1px dotted #999; }
+  th { border-top: 0; border-bottom: 1px solid #000; }
+  .radios label { display: inline; font-weight: normal; margin-right: 14px; }
+</style>
+</head>
+<body>
+<header><h1>Valuation test</h1><span class="small muted">You see what a model sees. Answer as a buyer about to send money.</span><a href="/office">back office</a></header>
+<main>
+  <section>
+    <label for="sitting">Your sitting</label>
+    <select id="sitting"></select>
+    <p class="small muted" id="progress"></p>
+    <ol class="cases" id="cases"></ol>
+    <p class="small muted">No sitting yet? Ask for one to be made with<br><span class="small">buyscape testify-export --model human:yourname --split dev --no-lies</span></p>
+  </section>
+  <section id="work" hidden>
+    <h2 id="title"></h2>
+    <details><summary class="small">The instructions every model is given</summary><pre class="request small" id="system"></pre></details>
+    <h3>The request</h3>
+    <pre class="request" id="request"></pre>
+    <div id="photoBox"><h3>Photos</h3><div class="photos" id="photos"></div></div>
+
+    <form id="readForm" hidden>
+      <label for="observations">What the photos show (one line each)</label>
+      <textarea id="observations"></textarea>
+      <label>What it is</label>
+      <div class="radios">
+        <label><input type="radio" name="status" value="named"> a brand or model I can read</label>
+        <label><input type="radio" name="status" value="by_type" checked> by type only</label>
+        <label><input type="radio" name="status" value="unknown"> I cannot tell</label>
+      </div>
+      <label for="kind">The item in a buyer's words</label>
+      <input type="text" id="kind" placeholder="2 seater sofa">
+      <label for="brand">Brand, if readable</label><input type="text" id="brand">
+      <label for="model">Model, if readable</label><input type="text" id="model">
+      <label for="read_from">Where you read it (one line each)</label>
+      <textarea id="read_from" placeholder="photo 1 plate"></textarea>
+      <h3>The seller's claims</h3>
+      <div id="claims"></div><button type="button" class="small" id="addClaim">add a claim</button>
+      <h3>Hidden risks</h3>
+      <div id="risks"></div><button type="button" class="small" id="addRisk">add a risk</button>
+      <label for="proof_requests">Ask the seller for (most decisive first, one line each)</label>
+      <textarea id="proof_requests"></textarea>
+      <label for="decision">Decision</label>
+      <select id="decision">
+        <option value="price">price it at its worst case</option>
+        <option value="ask_for_proof">ask for proof first</option>
+        <option value="cannot_identify">cannot tell what it is</option>
+        <option value="fraud_suspected">looks like a scam</option>
+      </select>
+      <label for="reason">Why, in one or two sentences. No prices.</label>
+      <textarea id="reason"></textarea>
+      <p><button class="primary" type="submit">Save and go to the next</button></p>
+    </form>
+
+    <form id="pickForm" hidden>
+      <p class="small muted">Pick the cheapest and the dearest adverts that match the item as seen, at the worst case for anything unproven.</p>
+      <table><thead><tr><th>Low</th><th>High</th><th>Advert</th></tr></thead><tbody id="comparables"></tbody></table>
+      <label><input type="checkbox" id="noMatch"> None of these is the same kind of item</label>
+      <label for="pickReason">Why, in one sentence. No prices.</label>
+      <textarea id="pickReason"></textarea>
+      <p><button class="primary" type="submit">Save and go to the next</button></p>
+    </form>
+    <div class="status" id="status"></div>
+  </section>
+</main>
+<script>
+const token = new URLSearchParams(location.search).get("token");
+const q = token ? "?token=" + encodeURIComponent(token) : "";
+const $ = (id) => document.getElementById(id);
+const lines = (id) => $(id).value.split("\n").map((s) => s.trim()).filter(Boolean);
+let sitting = null, list = [], current = null;
+
+async function api(path, body) {
+  const r = await fetch("/api/office/testify" + path + q, body === undefined ? {} :
+    { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+  const data = await r.json();
+  if (!r.ok) throw new Error(data.error || r.statusText);
+  return data;
+}
+
+function row(kind, values = {}) {
+  const div = document.createElement("div");
+  div.className = "row" + (kind === "risk" ? " risk" : "");
+  if (kind === "claim") {
+    div.innerHTML = '<input type="text" placeholder="the claim, quoted or short">' +
+      '<select><option value="unverified">unverified</option><option value="supported">supported</option>' +
+      '<option value="contradicted">contradicted</option><option value="unverifiable_remote">cannot be checked remotely</option></select>' +
+      '<input type="text" placeholder="the photo that proves or contradicts it, or what is missing">';
+    const [c, v, e] = div.querySelectorAll("input, select");
+    c.value = values.claim || ""; v.value = values.verdict || "unverified"; e.value = values.evidence || "";
+  } else {
+    div.innerHTML = '<input type="text" placeholder="what could be wrong that no photo shows">' +
+      '<input type="text" placeholder="the one shot or clip that settles it">' +
+      '<input type="text" placeholder="how it is priced until then">';
+    const [r, p, u] = div.querySelectorAll("input");
+    r.value = values.risk || ""; p.value = values.proof || ""; u.value = values.if_unproven || "";
+  }
+  const x = document.createElement("button");
+  x.type = "button"; x.className = "small"; x.textContent = "remove"; x.onclick = () => div.remove();
+  div.appendChild(x);
+  $(kind === "claim" ? "claims" : "risks").appendChild(div);
+}
+$("addClaim").onclick = () => row("claim");
+$("addRisk").onclick = () => row("risk");
+
+async function loadSittings() {
+  const all = await api("");
+  $("sitting").innerHTML = all.map((s) => `<option value="${s.who}/${s.part}">${s.who.replace("human_", "")}: ${s.part} (${s.answered} of ${s.cases})</option>`).join("");
+  if (all.length) { sitting = $("sitting").value; await loadCases(); }
+}
+$("sitting").onchange = async () => { sitting = $("sitting").value; await loadCases(); };
+
+async function loadCases(next) {
+  list = await api("/" + sitting);
+  const done = list.filter((c) => c.answered).length;
+  $("progress").textContent = `${done} of ${list.length} answered`;
+  $("cases").innerHTML = list.map((c, i) =>
+    `<li data-case="${c.case}"><a href="#">${c.task === "testify_pick" ? "price pick" : "item"} ${i + 1}</a>${c.answered ? ' <span class="done">done</span>' : ""}</li>`).join("");
+  $("cases").querySelectorAll("li").forEach((li) => li.querySelector("a").onclick = (e) => { e.preventDefault(); openCase(li.dataset.case); });
+  const target = next || (list.find((c) => !c.answered) || list[0] || {}).case;
+  if (target) await openCase(target);
+}
+
+async function openCase(name) {
+  current = await api("/" + sitting + "/" + name);
+  $("work").hidden = false;
+  $("cases").querySelectorAll("li").forEach((li) => li.classList.toggle("on", li.dataset.case === name));
+  const n = list.findIndex((c) => c.case === name) + 1;
+  $("title").textContent = (current.task === "testify_pick" ? "Price pick " : "Item ") + n;
+  $("system").textContent = current.system;
+  let shown = current.request.split("\n").filter((l) => !/^#\d+:/.test(l) && !l.startsWith("What you wrote:")).join("\n");
+  if (current.notes) {
+    const id = current.notes.identity || {};
+    shown = "Your notes on this item: " + [id.brand, id.model, id.kind].filter(Boolean).join(", ") +
+      "\n" + current.notes.observations.map((o) => "- " + o).join("\n");
+  }
+  $("request").textContent = shown;
+  $("photoBox").hidden = !current.photos.length;
+  $("photos").innerHTML = current.photos.map((p) => `<img alt="${p}" src="/api/office/testify/${sitting}/${name}/photo/${p}${q}">`).join("");
+  $("photos").querySelectorAll("img").forEach((img) => img.onclick = () => img.classList.toggle("big"));
+  $("status").textContent = ""; $("status").className = "status";
+  const a = current.answer || {};
+  $("readForm").hidden = current.task !== "testify_read";
+  $("pickForm").hidden = current.task !== "testify_pick";
+  if (current.task === "testify_read") {
+    const id = a.identity || {};
+    $("observations").value = (a.observations || []).join("\n");
+    document.querySelectorAll("input[name=status]").forEach((r) => r.checked = r.value === (id.status || "by_type"));
+    $("kind").value = id.kind || ""; $("brand").value = id.brand || ""; $("model").value = id.model || "";
+    $("read_from").value = (id.read_from || []).join("\n");
+    $("claims").innerHTML = ""; (a.claims || []).forEach((c) => row("claim", c)); if (!a.claims) row("claim");
+    $("risks").innerHTML = ""; (a.risks || []).forEach((r) => row("risk", r)); if (!a.risks) row("risk");
+    $("proof_requests").value = (a.proof_requests || []).join("\n");
+    $("decision").value = a.decision || "price";
+    $("reason").value = a.reason || "";
+  } else {
+    const pick = a.price_pick || {};
+    $("comparables").innerHTML = current.comparables.map((c) =>
+      `<tr><td><input type="radio" name="low" value="${c.n}"${pick.low === c.n ? " checked" : ""}></td>` +
+      `<td><input type="radio" name="high" value="${c.n}"${pick.high === c.n ? " checked" : ""}></td><td>#${c.n}: ${c.text.replace(/</g, "&lt;")}</td></tr>`).join("");
+    $("noMatch").checked = a.same_item === false;
+    $("pickReason").value = a.reason || "";
+  }
+}
+
+async function save(answer) {
+  try {
+    await api("/" + sitting + "/" + current.case, answer);
+    const at = list.findIndex((c) => c.case === current.case);
+    const next = list.slice(at + 1).find((c) => !c.answered) || list.find((c) => !c.answered && c.case !== current.case);
+    await loadCases(next ? next.case : current.case);
+    $("status").textContent = "Saved."; $("status").className = "status ok";
+  } catch (err) {
+    $("status").textContent = "Not saved: " + err.message; $("status").className = "status err";
+  }
+}
+
+$("readForm").onsubmit = (e) => {
+  e.preventDefault();
+  const claims = [...$("claims").children].map((d) => { const [c, v, ev] = d.querySelectorAll("input, select"); return { claim: c.value.trim(), verdict: v.value, evidence: ev.value.trim() }; }).filter((c) => c.claim);
+  const risks = [...$("risks").children].map((d) => { const [r, p, u] = d.querySelectorAll("input"); return { risk: r.value.trim(), proof: p.value.trim(), if_unproven: u.value.trim() }; }).filter((r) => r.risk);
+  const status = document.querySelector("input[name=status]:checked").value;
+  save({
+    observations: lines("observations"),
+    identity: { status, kind: $("kind").value.trim() || null, brand: $("brand").value.trim() || null, model: $("model").value.trim() || null, read_from: lines("read_from") },
+    claims, risks, proof_requests: lines("proof_requests"), decision: $("decision").value, reason: $("reason").value.trim(),
+  });
+};
+
+$("pickForm").onsubmit = (e) => {
+  e.preventDefault();
+  if ($("noMatch").checked) return save({ same_item: false, price_pick: null, reason: $("pickReason").value.trim() });
+  const low = document.querySelector("input[name=low]:checked"), high = document.querySelector("input[name=high]:checked");
+  if (!low || !high) { $("status").textContent = "Pick a low and a high, or tick none."; $("status").className = "status err"; return; }
+  save({ same_item: true, price_pick: { low: +low.value, high: +high.value }, reason: $("pickReason").value.trim() });
+};
+
+loadSittings().catch((err) => { $("progress").textContent = err.message; });
+</script>
+</body>
+</html>

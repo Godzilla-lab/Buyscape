@@ -87,6 +87,10 @@ def export(model_dir: Path, cases: list[tuple], pool, out: Path, lies: bool = Tr
             shutil.copyfile(image.path, folder / name)
             names.append(name)
         (folder / "prompt.md").write_text(_prompt(request, names))
+        # The same request as data, for the back office page a person answers in.
+        (folder / "case.json").write_text(json.dumps({
+            "task": request.task, "system": request.system, "user_text": request.user_text, "photos": names,
+        }, indent=1) + "\n")
         index.append({"case": folder.name, "task": request.task, "prompt_version": request.prompt_version,
                       "key": request.fixture_key(), "item": item_id, "variant": variant})
     # The index names the items, so it sits beside the cases, never inside them.

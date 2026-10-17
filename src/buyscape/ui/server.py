@@ -43,7 +43,7 @@ from .sessions import Store
 
 HERE = Path(__file__).parent
 PAGES = {"bench": HERE / "page.html", "seller": HERE / "seller.html", "office": HERE / "office.html",
-         "questions": HERE / "questions.html"}
+         "questions": HERE / "questions.html", "testify": HERE / "testify.html"}
 SAFE_NAME = re.compile(r"[^A-Za-z0-9._-]+")
 STAFF_GETS = {"meta", "runs", "testset"}
 
@@ -425,7 +425,7 @@ class Handler(BaseHTTPRequestHandler):
                 # Cheap on purpose: a watcher calls this every few minutes
                 # and it must never touch a model, the market or the disk.
                 self._json(200, {"ok": True, "tenant": eng.tenant.tenant, "valuing": not eng.store.valuing._value})
-            elif parts in (["office"], ["bench"], ["office", "questions"]):
+            elif parts in (["office"], ["bench"], ["office", "questions"], ["office", "testify"]):
                 if self._staff(url):
                     self._page(parts[-1])
                 else:
@@ -441,6 +441,8 @@ class Handler(BaseHTTPRequestHandler):
                     self._json(200, eng.store.list())
                 elif parts == ["api", "office", "questions"]:
                     self._json(200, eng.store.questions_view())
+                elif parts[:3] == ["api", "office", "testify"]:
+                    self._testify_get(parts[3:])
                 elif len(parts) == 4 and parts[1:3] == ["office", "sessions"]:
                     self._json(200, eng.store.office_view(eng.store.load(parts[3])))
                 elif parts == ["api", "meta"]:
@@ -469,6 +471,23 @@ class Handler(BaseHTTPRequestHandler):
             self._json(404, {"error": f"no such session {exc}"})
         except Exception as exc:  # a page must say what broke, never hang
             self._json(500, {"error": f"{type(exc).__name__}: {exc}"})
+
+    def _testify_get(self, rest: list[str]) -> None:
+        """A person sitting the Testify test: sittings, cases, one case, a photo."""
+        from . import testify_desk as desk
+
+        root = self.engine.root
+        if not rest:
+            self._json(200, desk.sittings(root))
+        elif len(rest) == 2:
+            self._json(200, desk.cases(root, *rest))
+        elif len(rest) == 3:
+            self._json(200, desk.case(root, *rest))
+        elif len(rest) == 5 and rest[3] == "photo":
+            path = desk.photo(root, rest[0], rest[1], rest[2], rest[4])
+            self._send(200, path.read_bytes(), MIME.get(path.suffix.lower(), "application/octet-stream"))
+        else:
+            self._json(404, {"error": "not found"})
 
     def do_POST(self) -> None:  # noqa: N802
         url = urlparse(self.path)
@@ -506,6 +525,13 @@ class Handler(BaseHTTPRequestHandler):
                     self._json(200, store.remove_question(body))
                 else:
                     self._json(200, store.save_question(body.get("question") or body))
+            elif parts[:3] == ["api", "office", "testify"] and len(parts) == 6:
+                from . import testify_desk as desk
+
+                if self._staff(url):
+                    self._json(200, desk.save(eng.root, parts[3], parts[4], parts[5], body))
+                else:
+                    self._json(401, {"error": "staff token required"})
             elif parts == ["api", "value"]:
                 if self._staff(url):
                     self._json(200, eng.value(body))
