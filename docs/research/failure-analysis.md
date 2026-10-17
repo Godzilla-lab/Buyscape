@@ -147,6 +147,27 @@ and 8 BuyScrap adverts with no photos at all.
 The keep or drop agreement with the hand review is still 88 of 100 after the
 photos were sharpened.
 
+## Every city, checked
+
+Abuja, Rivers and Oyo were checked the same way on 16 and 17 October 2026,
+on two free Google AI Studio keys.
+
+| City | Checked | Kept | Dropped as new stock | Buyer adverts | Not the seller's photo | Kept in `dev` |
+|---|---|---|---|---|---|---|
+| Lagos | 722 | 331 (46%) | 356 | 16 | 14 | 75 |
+| Abuja | 447 | 230 (51%) | 197 | 17 | 1 | 65 |
+| Rivers | 350 | 168 (48%) | 175 | 5 | 2 | 48 |
+| Oyo | 299 | 181 (61%) | 107 | 7 | 1 | 43 |
+| **All** | **1,818** | **910 (50%)** | 835 | 45 | 18 | **231** |
+
+About half of what Jiji calls used is a second-hand item for sale. New
+stock is the reason nine times in ten. Oyo keeps the most, perhaps because
+Ibadan has fewer dealer showrooms posting stock as used. Material lots stay
+rare everywhere: 29 kept in four cities, so they must come from recyclers
+and BuyScrap. The 186 Lagos items not checked are the 178 original phone,
+laptop and appliance cases, whose photos are not on this machine, and 8
+BuyScrap adverts with no photos.
+
 ## Next step
 
 Check every remaining item the same way, measure how often an AI reviewer
