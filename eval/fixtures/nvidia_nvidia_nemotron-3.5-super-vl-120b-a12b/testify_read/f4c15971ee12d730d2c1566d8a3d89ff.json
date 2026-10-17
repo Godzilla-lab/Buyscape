@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0: Orange gas cylinder in foreground with handle and top valve; red cylinder behind it; blue cylinder to the right; visible scuffs, scratches, and paint wear on the orange cylinder; watermark text overlaid on image.",
+      "Photo 1: Same scene; a second orange cylinder is stacked on top of the red cylinder; a gas stove is visible in the background; blue cylinder has a label but brand is not clearly readable.",
+      "Photo 2: Close-up of the orange cylinder; \"12.5kg\" is visible printed on the body; a brand marking near a logo appears on the upper body; stamped test/manufacturing markings run around the middle band; valve and handle are visible."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "12.5kg gas cylinder",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "12.5kg",
+        "verdict": "supported",
+        "evidence": "Photo 2 shows \"12.5kg\" printed on the cylinder body."
+      },
+      {
+        "claim": "Foreign-Used",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photos show wear consistent with use, but cannot confirm country of origin or prior use location."
+      },
+      {
+        "claim": "Strong & Reliable / durable and high-quality",
+        "verdict": "unverified",
+        "evidence": "Subjective quality claim; photos show external condition only and cannot prove strength or reliability."
+      },
+      {
+        "claim": "Cylinder holds gas and is safe to use",
+        "verdict": "unverified",
+        "evidence": "No leak test, pressure test, or fill status is shown in any photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Cylinder test date may be expired or missing",
+        "proof": "Photo of the stamped test/expiry date on the collar or body band.",
+        "if_unproven": "priced as expired or unsafe until proven"
+      },
+      {
+        "risk": "Valve or body may leak",
+        "proof": "Video of a leak test using soapy water on the valve and seams.",
+        "if_unproven": "priced as not holding gas until proven"
+      },
+      {
+        "risk": "Cylinder may be underfilled or empty",
+        "proof": "Video of the cylinder being weighed on a scale to confirm contents.",
+        "if_unproven": "priced as empty until proven"
+      },
+      {
+        "risk": "Internal corrosion or damage not visible externally",
+        "proof": "Internal inspection or hydrostatic test certificate.",
+        "if_unproven": "priced as internally damaged until proven"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the stamped test date and manufacturing markings on the cylinder collar or body band.",
+      "Video of a leak test with soapy water applied to the valve and seams.",
+      "Video of the cylinder being weighed to confirm it contains gas."
+    ],
+    "decision": "price",
+    "reason": "The item is clearly a used 12.5kg gas cylinder visible in all photos; it can be priced at its worst case (used, untested, possibly expired) while proof of test date and gas-tightness is requested."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 51890,
+    "input_tokens": 2923,
+    "output_tokens": 2430,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "f4c15971ee12d730d2c1566d8a3d89ff",
+    "error": null
+  }
+}
