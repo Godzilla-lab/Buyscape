@@ -1,0 +1,87 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a Canon DSLR front view with \"EOS 800D\" on the body front right and a lens marked \"18-55mm\"; lens cap reads \"Canon\"; watermark \"POSTED ON JIJI KJ-TECH\"; background boxes include \"EOS 4000D\" and a Nikon \"D700\" box.",
+      "Photo 1 shows the camera rear with LCD screen, control buttons, and dials; same watermark.",
+      "Photo 2 shows a front-side view with \"Canon\" on the top plate and \"EOS 800D\" clearly visible on the body; lens cap is on."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DSLR camera with lens",
+      "brand": "Canon",
+      "model": "EOS 800D",
+      "read_from": [
+        "photo 0 body",
+        "photo 2 body",
+        "photo 0 lens barrel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Canon 800D",
+        "verdict": "supported",
+        "evidence": "photo 0 and photo 2 show \"EOS 800D\" on the camera body"
+      },
+      {
+        "claim": "18-55mm lens",
+        "verdict": "supported",
+        "evidence": "photo 0 lens barrel shows \"18-55mm\""
+      },
+      {
+        "claim": "UK used",
+        "verdict": "unverifiable_remote",
+        "evidence": "photos cannot show country of origin"
+      },
+      {
+        "claim": "Neat",
+        "verdict": "unverified",
+        "evidence": "photos show a clean exterior but full condition cannot be verified remotely"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Camera may not power on or the shutter may be faulty",
+        "proof": "video of the camera turning on, taking a photo, and reviewing it on the LCD",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Lens may have fungus, scratches, or autofocus issues",
+        "proof": "close-up photos of the lens front and rear glass plus an autofocus test clip",
+        "if_unproven": "as faulty lens"
+      },
+      {
+        "risk": "Shutter count may be high",
+        "proof": "screenshot of the shutter count from the camera menu",
+        "if_unproven": "as high-actuation body"
+      },
+      {
+        "risk": "Battery and charger may be missing",
+        "proof": "photo of the battery and charger if included",
+        "if_unproven": "as body only"
+      }
+    ],
+    "proof_requests": [
+      "Video of the camera powering on, taking a photo, and reviewing it on the LCD",
+      "Close-up photos of the lens front and rear glass",
+      "Screenshot of the shutter count from the menu",
+      "Photo of the battery and charger if included"
+    ],
+    "decision": "price",
+    "reason": "The item is clearly a Canon EOS 800D with 18-55mm lens from the photos, so it can be priced at its worst case pending proof of function."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 26363,
+    "input_tokens": 3450,
+    "output_tokens": 2069,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "3ffa7236e90c64bb68d3109d1228e08e",
+    "error": null
+  }
+}
