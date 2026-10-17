@@ -166,10 +166,16 @@ not as one API call per item; read its numbers with that in mind.
 
 ## Use
 
-The scoring code is the `buyscape` package (`buyscape testify`,
-`buyscape testify-score`); a person or an agent can sit the test through
-`buyscape testify-export` and `buyscape testify-import`. Scores for the
-test split are computed privately on request.
+The scoring code is the `buyscape` package in
+[github.com/Godzilla-lab/Buyscape](https://github.com/Godzilla-lab/Buyscape)
+(`buyscape testify`, `buyscape testify-score`); a person or an agent can sit
+the test through `buyscape testify-export` and `buyscape testify-import`.
+Scores for the test split are computed privately on request.
+
+## Contact
+
+olamibusari607@gmail.com. Questions, a model to score on the test split, or
+settled prices to contribute are all welcome.
 
 ## Licence and privacy
 

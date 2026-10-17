@@ -853,6 +853,28 @@ def testify_release(
     console.print(stats)
 
 
+@app.command("testify-publish")
+def testify_publish(
+    repo: str = typer.Option("godzilla1215/testify", help="The Hugging Face dataset to create or update."),
+    folder: Path = typer.Option(Path("release/testify-v0.1")),
+) -> None:
+    """Upload a built release to Hugging Face as a public dataset. Only with the owner's yes."""
+    from huggingface_hub import HfApi
+
+    from .testify import release
+
+    _load_dotenv()
+    path = folder if folder.is_absolute() else ROOT / folder
+    stats = json.loads((path / "stats.json").read_text())
+    api = HfApi(token=os.environ.get("HF_TOKEN"))
+    api.create_repo(repo, repo_type="dataset", exist_ok=True, private=False)
+    api.upload_folder(
+        folder_path=str(path), repo_id=repo, repo_type="dataset",
+        commit_message=f"Testify v{stats['version']}: {stats['dev']} dev items, {stats['test']} test items",
+    )
+    console.print(f"published https://huggingface.co/datasets/{repo} (release v{release.VERSION})")
+
+
 @app.command("testify-fetch")
 def testify_fetch(
     out: Path = typer.Option(None, help="Defaults to eval/raw/testify, or eval/raw/testify_new with --new-stock."),
