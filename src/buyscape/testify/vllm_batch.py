@@ -66,6 +66,10 @@ def main() -> None:
     parser.add_argument("--quantization", default=None, help="For example fp8, to make room on a small card.")
     parser.add_argument("--dtype", default="auto", help="half on a card without bfloat16, such as a T4.")
     parser.add_argument(
+        "--attention-backend", default=None,
+        help="TRITON_ATTN on a card FlashInfer has no prebuilt kernels for, such as a T4.",
+    )
+    parser.add_argument(
         "--plain-all-reduce", action="store_true",
         help="Split across cards with NCCL alone, for pairs without a direct link such as two T4s.",
     )
@@ -85,7 +89,9 @@ def main() -> None:
 
     from vllm import LLM, SamplingParams
 
+    extra = {"attention_backend": args.attention_backend} if args.attention_backend else {}
     llm = LLM(
+        **extra,
         model=args.model,
         max_model_len=args.max_model_len,
         gpu_memory_utilization=args.gpu_memory,
