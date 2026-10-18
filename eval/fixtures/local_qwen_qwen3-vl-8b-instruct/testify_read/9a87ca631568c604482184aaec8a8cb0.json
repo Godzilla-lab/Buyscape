@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-8b-instruct",
+  "response": {
+    "observations": [
+      "Black road bike with red accents on the frame.",
+      "Red handlebar tape.",
+      "Single speed drivetrain visible at the rear, no gear shifter.",
+      "No visible hand selector gear controller.",
+      "Aluminum frame appears to be a road bike, not a mountain or hybrid.",
+      "No visible speedometer or top speed indicator.",
+      "Background shows a tire and a green and white object, possibly a vehicle."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "road bicycle",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "24 speed sports bicycle",
+        "verdict": "contradicted",
+        "evidence": "photo 0: single speed drivetrain visible, no gear shifter or multiple chainrings."
+      },
+      {
+        "claim": "hand selector gear controller",
+        "verdict": "contradicted",
+        "evidence": "photo 0: no gear controller visible on handlebars or frame."
+      },
+      {
+        "claim": "aluminum body",
+        "verdict": "unverified",
+        "evidence": "photo 0: frame appears metallic but material not confirmed by text or visible markings."
+      },
+      {
+        "claim": "has top speed",
+        "verdict": "unverifiable_remote",
+        "evidence": "photo 0: no speedometer or performance data visible; top speed cannot be determined from photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The bicycle is misrepresented as a 24-speed with a hand selector gear controller.",
+        "proof": "photo 0: close-up of the drivetrain and handlebars to confirm gear controller and number of speeds.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The frame is not aluminum, which affects durability and value.",
+        "proof": "photo 0: close-up of the frame to identify material (aluminum, steel, carbon fiber).",
+        "if_unproven": "as not aluminum"
+      },
+      {
+        "risk": "The bicycle is not a sports bike but a standard road bike, which affects performance and price.",
+        "proof": "photo 0: close-up of the frame and components to confirm sports bike features (e.g., drop handlebars, lightweight frame).",
+        "if_unproven": "as not a sports bike"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of the drivetrain and gear controller.",
+      "Close-up of the frame to identify material.",
+      "Close-up of the handlebars and frame to confirm sports bike features."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photos contradict the seller's claims about the gear system and top speed. The material and type of bike are unverified. Proof is needed to price the item accurately."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-8b-instruct",
+    "task": "testify_read",
+    "latency_ms": 7890,
+    "input_tokens": 1366,
+    "output_tokens": 641,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "9a87ca631568c604482184aaec8a8cb0",
+    "error": null
+  }
+}

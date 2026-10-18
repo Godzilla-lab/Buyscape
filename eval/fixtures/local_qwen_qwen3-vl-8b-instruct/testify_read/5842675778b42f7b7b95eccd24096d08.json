@@ -1,0 +1,64 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-8b-instruct",
+  "response": {
+    "observations": [
+      "Photo 0: Large yellow engine block with visible wear and dirt. A white fuel filter is attached. A yellow label with 'CATERPILLAR' is visible on the top. Text overlay: 'DNL EQUIPMENT SALES AND POSTED ON JI'.",
+      "Photo 1: Engine with black plastic cover. 'CAT' logo is visible on the cover. Text overlay: 'DNL EQUIPMENT SALES AND POSTED ON JI'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "engine",
+      "brand": "Caterpillar",
+      "model": "C9",
+      "read_from": [
+        "photo 0 label",
+        "photo 1 cover"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Complete Caterpillar C9 engine (parts)",
+        "verdict": "supported",
+        "evidence": "photo 0 label, photo 1 cover"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The engine is not complete (missing parts like belts, hoses, or sensors).",
+        "proof": "Photo showing all components attached and no visible missing parts.",
+        "if_unproven": "as not complete"
+      },
+      {
+        "risk": "The engine is not functional (damaged internals or worn components).",
+        "proof": "Photo showing engine running or a test report.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The engine is not a Caterpillar C9 (counterfeit or mislabeled).",
+        "proof": "Photo showing the full model number on the engine block or a certification.",
+        "if_unproven": "as not the model claimed"
+      }
+    ],
+    "proof_requests": [
+      "Photo showing all parts attached and no visible missing parts.",
+      "Photo showing the engine running or a test report.",
+      "Photo showing the full model number on the engine block or a certification."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photos confirm the brand and model but do not show the engine is complete or functional. The seller's claim of 'complete' and 'parts' is ambiguous without proof of all components and operational status."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-8b-instruct",
+    "task": "testify_read",
+    "latency_ms": 7685,
+    "input_tokens": 1854,
+    "output_tokens": 492,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "5842675778b42f7b7b95eccd24096d08",
+    "error": null
+  }
+}

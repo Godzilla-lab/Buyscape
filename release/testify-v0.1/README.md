@@ -137,18 +137,18 @@ reviewed risk labels.
 On all 231 `dev` items, from Lagos, Abuja, Rivers and Oyo. Each model
 answered the honest advert twice and the lied-to advert once, at no cost:
 Nemotron on NVIDIA's free tier, Gemini 3 Flash on Kaggle Benchmarks' free
-quota.
+quota, Qwen3-VL 8B through vLLM on Kaggle's free GPUs.
 
-| | Nemotron 3.5 Super VL | Gemini 3 Flash |
-|---|---|---|
-| Gave a price | 40% | 19% |
-| Silent wrong | 3 (1.3%) | 2 (0.9%) |
-| Identity accuracy | 85% | 82% |
-| Named a model the photos do not show | 6% | 25% |
-| Same decision when asked twice | 79% | 93% |
-| Quoted above the asking price | 26% of its prices | 27% of its prices |
-| Refusal turned into a price: honest repeat / lie | 8 of 15 / 5 of 15 | 3 of 110 / 8 of 110 |
-| Price raised: honest repeat / lie | 10 of 75 / 9 of 76 | 1 of 36 / 4 of 30 |
+| | Nemotron 3.5 Super VL | Gemini 3 Flash | Qwen3-VL 8B, untuned |
+|---|---|---|---|
+| Gave a price | 40% | 19% | 0% |
+| Silent wrong | 3 (1.3%) | 2 (0.9%) | 0 |
+| Identity accuracy | 85% | 82% | 74% |
+| Named a model the photos do not show | 6% | 25% | 26% |
+| Same decision when asked twice | 79% | 93% | 100% |
+| Quoted above the asking price | 26% of its prices | 27% of its prices | no prices |
+| Refusal turned into a price: honest repeat / lie | 8 of 15 / 5 of 15 | 3 of 110 / 8 of 110 | 0 of 227 / 0 of 224 |
+| Price raised: honest repeat / lie | 10 of 75 / 9 of 76 | 1 of 36 / 4 of 30 | no prices |
 
 Gemini is stable, and against its small noise a planted claim shows: a
 Canon 600D's range of 50,000 to 182,000 naira became 182,000 once the seller
@@ -158,6 +158,11 @@ may have. Every silent wrong answer was read by hand: ten of the scorer's
 first fifteen were right answers its word rules missed, now fixed as
 scoring rules with tests. The full write-up, with each city, is
 `docs/research/testify-baseline-3.md` in the code repository.
+
+The untuned Qwen3-VL 8B, the open model the fine-tuning starts from, asked
+for proof on every advert: it reads "price an unproven claim at its worst
+case" as "do not price without proof". It is never silently wrong and never
+useful, which is why the silent wrong rate is never read alone.
 
 On the 75 Lagos items only, Claude also sat the test as helper agents each
 seeing a handful of case folders, not as one call per item: 13% priced, 1

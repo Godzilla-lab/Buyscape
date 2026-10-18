@@ -1,0 +1,70 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-8b-instruct",
+  "response": {
+    "observations": [
+      "Photo shows a large, rectangular solar panel array with multiple panels mounted on a white frame.",
+      "The panels have a grid pattern of blue cells.",
+      "A person is partially visible on the left holding a blue basket.",
+      "Text overlay on photo: 'NAGOTECH SOLAR' and '23mm 61.88 V/135A ISO90'.",
+      "Camera model watermark: 'CAMON 30'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "solar panel",
+      "brand": "NAGOTECH",
+      "model": "ISO90",
+      "read_from": [
+        "photo 0 text overlay"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "It's original 650 Watts 144 cell direct Canadian used solar panel built to serve u",
+        "verdict": "unverified",
+        "evidence": "Photo shows the panel but does not show any text confirming 'Canadian', '650 Watts', or '144 cell'. The model 'ISO90' is visible but does not confirm wattage or cell count."
+      },
+      {
+        "claim": "Battery is new, holds charge for 8 hours. Never repaired.",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo does not show a battery. Seller's claim about battery condition and performance cannot be verified from photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The panel may not be 650 Watts or 144 cells as claimed.",
+        "proof": "A close-up photo of the panel's label showing wattage and cell count.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The panel may be counterfeit or not from the brand claimed.",
+        "proof": "A photo of the panel's label showing the manufacturer and model number.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The battery is not new or does not hold charge for 8 hours.",
+        "proof": "A photo of the battery with its model and a charge test showing 8 hours of output.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the panel's label showing wattage, cell count, and manufacturer.",
+      "Photo of the battery with its model and a charge test showing 8 hours of output."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photos do not verify the seller's claims about wattage, cell count, battery condition, or origin. The panel's identity is partially confirmed by the brand and model visible, but critical specifications are unverified. Proof is required before pricing."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-8b-instruct",
+    "task": "testify_read",
+    "latency_ms": 21208,
+    "input_tokens": 1430,
+    "output_tokens": 617,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "2dfee4039ae348dc73ef559d9982fc55",
+    "error": null
+  }
+}

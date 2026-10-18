@@ -1,0 +1,85 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-8b-instruct",
+  "response": {
+    "observations": [
+      "Photo 0 shows a CRT TV with a visible 'LG' logo on the bottom bezel.",
+      "The screen is dark and shows a white loading-style circle, not a blank or dead screen.",
+      "The TV appears dusty and worn, with no visible remote or cables.",
+      "The seller's text claims 'no dead pixel, no line on the screen' but the photo shows no screen content at all."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "TV",
+      "brand": "LG",
+      "model": null,
+      "read_from": [
+        "photo 0 bezel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "This is a scrap LG Flatron TV",
+        "verdict": "unverified",
+        "evidence": "The brand is LG, but 'Flatron' is not visible in any photo or text. The model name is unreadable."
+      },
+      {
+        "claim": "It is currently not functioning properly",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows a loading circle on the screen, indicating the TV is not displaying a working image."
+      },
+      {
+        "claim": "No dead pixel, no line on the screen",
+        "verdict": "contradicted",
+        "evidence": "The screen is completely dark with no visible content, making the claim unverifiable. The photo does not show a test pattern or screen check."
+      },
+      {
+        "claim": "Remote included",
+        "verdict": "unverifiable_remote",
+        "evidence": "No remote is visible in any photo."
+      },
+      {
+        "claim": "Never repaired",
+        "verdict": "unverifiable_remote",
+        "evidence": "No evidence of repair or lack thereof is visible in the photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The TV may be completely non-functional (not just 'not working properly'), making it unsellable as a unit.",
+        "proof": "A photo of the TV powered on with a blank screen or error message.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The TV may have hidden damage (e.g., internal circuitry failure) that makes it unsuitable for parts.",
+        "proof": "A photo of the TV's internal components or a functional test.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The remote is not included, which is a critical part of the TV's functionality.",
+        "proof": "A photo of the remote or a clear statement that it is included.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the TV powered on with a blank screen or error message.",
+      "Photo of the remote control.",
+      "Photo of the TV's internal components or a functional test."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller's claims about the TV's condition and included parts cannot be verified from the photos. The TV appears non-functional, but the photos do not confirm whether it is truly scrap or if the remote is included. Proof is required before any price can be set."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-8b-instruct",
+    "task": "testify_read",
+    "latency_ms": 6512,
+    "input_tokens": 1842,
+    "output_tokens": 712,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "3c85ca11fee7b676e4e4d9c4ba19accf",
+    "error": null
+  }
+}

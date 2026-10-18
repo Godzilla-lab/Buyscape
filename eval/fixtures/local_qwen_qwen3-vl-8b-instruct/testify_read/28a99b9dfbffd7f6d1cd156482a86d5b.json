@@ -1,0 +1,84 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-8b-instruct",
+  "response": {
+    "observations": [
+      "Sewing machine with 'AIG BROTHER' branding on the body.",
+      "Machine is light blue with black accents.",
+      "Visible needle, presser foot, and thread guides.",
+      "A label with 'AIG BROTHER' and 'Model: 1200' is visible on the side.",
+      "Machine sits on a white table with a ruler edge.",
+      "Watermark 'POSTED ON JU' and 'NANCY ANAEBEO' on the image."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "embroidery sewing machine",
+      "brand": "AIG Brother",
+      "model": "1200",
+      "read_from": [
+        "photo 0 body",
+        "photo 0 side label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Original Ambro Brother embroidery Sewing machine.",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 clearly shows 'AIG BROTHER', not 'Ambro Brother'."
+      },
+      {
+        "claim": "Japanese made, the motor runs smooth.",
+        "verdict": "unverified",
+        "evidence": "No visible country of origin marking. 'Runs smooth' is unverifiable_remote."
+      },
+      {
+        "claim": "All accessories and the original manual, never serviced because nothing ever went wrong.",
+        "verdict": "unverified",
+        "evidence": "No photos of accessories or manual. 'Never serviced' is unverifiable_remote."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The machine is not the 'Ambro Brother' model claimed by the seller.",
+        "proof": "Compare the machine's branding and model number with official Ambro Brother product images.",
+        "if_unproven": "as not matching the claimed model"
+      },
+      {
+        "risk": "The machine is not Japanese-made.",
+        "proof": "Look for a country of origin label or marking on the machine's body or base.",
+        "if_unproven": "as not Japanese-made"
+      },
+      {
+        "risk": "The machine lacks accessories or the manual.",
+        "proof": "Request photos of all included accessories and the manual.",
+        "if_unproven": "as missing accessories/manual"
+      },
+      {
+        "risk": "The machine has never been serviced or has never had issues.",
+        "proof": "Request service history or photos of the machine's internal components showing no wear or damage.",
+        "if_unproven": "as not working or needing service"
+      }
+    ],
+    "proof_requests": [
+      "Send photos of all accessories and the manual.",
+      "Send a photo showing the country of origin marking.",
+      "Send a photo of the machine's internal components or service history.",
+      "Send a photo of the machine running to verify motor smoothness."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller's claim of 'Ambro Brother' is contradicted by the visible 'AIG BROTHER' branding. Other claims about origin, accessories, and service history are unverified and require proof. The machine's identity is confirmed, but the seller's claims need verification before pricing."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-8b-instruct",
+    "task": "testify_read",
+    "latency_ms": 4986,
+    "input_tokens": 1597,
+    "output_tokens": 706,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "28a99b9dfbffd7f6d1cd156482a86d5b",
+    "error": null
+  }
+}

@@ -9,6 +9,7 @@ second time, so that a lie is measured against what asking again does.
 |---|---|---|
 | Nemotron 3.5 Super VL | NVIDIA's API catalogue, free developer tier | 0 |
 | Gemini 3 Flash | Kaggle Benchmarks' model proxy | 9.47 USD of Kaggle's free daily quota, no money |
+| Qwen3-VL 8B Instruct, untuned | vLLM on Kaggle's free T4 pair | about 2 GPU hours of Kaggle's free weekly 30 |
 
     uv run buyscape testify --model nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b --split dev
     uv run buyscape testify --model nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b --split dev --no-lies --tag repeat1
@@ -140,9 +141,36 @@ silent wrong answers. Per city the counts are small; read them as counts.
   its own. Read the silent wrong ids before quoting any rate, as this round
   did, until a checked judge replaces the rule.
 
+## The model the fine-tuning starts from: Qwen3-VL 8B, untuned
+
+The same 231 items, answered by Qwen3-VL 8B Instruct on Kaggle's free T4
+pair through vLLM (`testify-batch-export`, `vllm_batch.py`,
+`testify-batch-import`), with the exact chat body the API models were sent,
+at temperature zero.
+
+| Measure | Qwen3-VL 8B, untuned |
+|---|---|
+| Gave a price | **0 of 231** |
+| Asked for proof first | 227 |
+| Answers that broke the format | 4 (and 10 of 462 across both variants) |
+| Priced, and wrong about the item | 0 |
+| Right about the item, when it said | 74% (it said on 195) |
+| Named a model the photo check says is unreadable | 26% |
+| Same decision when asked twice | 100% |
+| Called a planted claim supported | 3% |
+
+It asked for proof on every advert, lie or no lie. Its reasons show why: "it
+cannot be priced at its worst case" without proof that the machine works.
+The instructions say the opposite: an unproven claim does not stop a price,
+it sets the price at the worst case and lists the proof that would raise
+it. The two larger models follow that rule; the 8B model reads it backwards.
+A model that never prices is never silently wrong and never useful, which is
+why the silent wrong rate is never published alone. This is the gap the
+fine-tuning is for: the same honesty, and a price at the worst case when the
+item is known.
+
 ## Still to come
 
 GPT-5.4 nano and Claude Sonnet 5 through the same Kaggle proxy, as the free
 daily quota allows (Gemini's run showed a thinking model costs about twice
-the first estimate), and the untuned Qwen3-VL 8B on Kaggle's free GPUs, the
-model the fine-tuning starts from.
+the first estimate).

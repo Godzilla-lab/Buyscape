@@ -1,0 +1,101 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-8b-instruct",
+  "response": {
+    "observations": [
+      "Front view of a silver pickup truck with Toyota logo on grille.",
+      "Side view showing truck's profile, black wheels, and side steps.",
+      "Rear view showing 'TRD' badge, 'V6' badge, and handwritten note 'No Start 963' on rear window."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "pickup truck",
+      "brand": "Toyota",
+      "model": "Tacoma",
+      "read_from": [
+        "photo 0 grille",
+        "photo 2 tailgate"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "2024 Toyota Tacoma TRD 4x4 with V6 engine",
+        "verdict": "unverified",
+        "evidence": "Model year and TRD trim not visible in photos; 'V6' badge is visible but not proof of engine type or year."
+      },
+      {
+        "claim": "push to start",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows interior or keyless entry system."
+      },
+      {
+        "claim": "moonroof",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows roof or interior ceiling."
+      },
+      {
+        "claim": "verified duty",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo or text shows duty verification documents."
+      },
+      {
+        "claim": "Like new, never repaired or opened",
+        "verdict": "contradicted",
+        "evidence": "Handwritten note 'No Start 963' on rear window indicates the vehicle is not working."
+      },
+      {
+        "claim": "Original receipt and warranty available",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo or text shows receipts or warranty documents."
+      },
+      {
+        "claim": "Works perfectly",
+        "verdict": "contradicted",
+        "evidence": "Handwritten note 'No Start 963' on rear window indicates the vehicle is not working."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Vehicle is not operational (does not start)",
+        "proof": "Photo 2 shows 'No Start 963' written on rear window.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Seller is misrepresenting the vehicle's condition",
+        "proof": "Photo 2 shows 'No Start 963' written on rear window.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Vehicle is not the 2024 model or TRD trim",
+        "proof": "Photo 0 and 2 show 'TRD' and 'V6' badges, but model year and trim are not visible.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Vehicle has not been verified for duty",
+        "proof": "No photo or text shows duty verification documents.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the vehicle's interior showing the push-to-start button and moonroof.",
+      "Photo of the vehicle's VIN and model year badge.",
+      "Photo of the duty verification documents.",
+      "Photo of the original receipt and warranty."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The vehicle is shown with a handwritten note 'No Start 963' on the rear window, contradicting the seller's claims that it is 'like new' and 'works perfectly'. Without proof of the vehicle's operational status, model year, and duty verification, the item cannot be priced at its worst case."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-8b-instruct",
+    "task": "testify_read",
+    "latency_ms": 7179,
+    "input_tokens": 3273,
+    "output_tokens": 830,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "2f16a108c3ae61b5be36dd0919dd7b8e",
+    "error": null
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-8b-instruct",
+  "response": {
+    "observations": [
+      "Front view of a silver pickup truck with Toyota logo on grille.",
+      "Side view showing truck's profile, black wheels, and side steps.",
+      "Rear view showing 'V6' badge on tailgate, 'No Start 963' written on rear window.",
+      "Watermark 'POSTED ON JIJI' visible on all photos.",
+      "Vehicle appears to be a Toyota Tacoma, but model year and trim not visible in photos."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "pickup truck",
+      "brand": "Toyota",
+      "model": "Tacoma",
+      "read_from": [
+        "photo 0 grille",
+        "photo 1 side",
+        "photo 2 tailgate"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "2024 Toyota Tacoma TRD 4x4 with V6 engine",
+        "verdict": "unverified",
+        "evidence": "No visible model year or TRD badge in photos. 'V6' badge is visible on tailgate, but not enough to confirm 2024 or TRD trim."
+      },
+      {
+        "claim": "push to start",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows interior or keyless entry system."
+      },
+      {
+        "claim": "moonroof",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows roof or interior to confirm moonroof."
+      },
+      {
+        "claim": "verified duty",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo or text shows proof of duty verification."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Vehicle does not start (as written on rear window)",
+        "proof": "Photo 2 shows 'No Start 963' written on rear window.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Seller is misrepresenting the model year or trim level",
+        "proof": "Photo showing model year badge or TRD trim badge.",
+        "if_unproven": "as not matching description"
+      },
+      {
+        "risk": "Vehicle is not actually a 2024 model",
+        "proof": "Photo showing model year badge or VIN plate.",
+        "if_unproven": "as not 2024"
+      },
+      {
+        "risk": "Vehicle has not been verified for duty",
+        "proof": "Photo showing duty verification document or stamp.",
+        "if_unproven": "as not verified"
+      }
+    ],
+    "proof_requests": [
+      "Photo of VIN plate or model year badge.",
+      "Photo of interior showing push-to-start and moonroof.",
+      "Photo of duty verification document.",
+      "Photo of engine bay showing V6 engine."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The vehicle appears to be a Toyota Tacoma, but the seller's claims about the model year, trim, features, and duty verification cannot be verified from the photos. The rear window shows 'No Start', which contradicts the seller's claim that it is functional. Proof is required before any price can be determined."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-8b-instruct",
+    "task": "testify_read",
+    "latency_ms": 6089,
+    "input_tokens": 3256,
+    "output_tokens": 710,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "53f81440e241742a580545761b84d23d",
+    "error": null
+  }
+}

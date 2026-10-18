@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-8b-instruct",
+  "response": {
+    "observations": [
+      "A large, dirty metal gearbox assembly with a label reading '480' and 'FIDEL AUTOS GLOBAL LIMITED'.",
+      "A separate, circular metal clutch disc with a splined center is shown next to the gearbox in photo 0.",
+      "The gearbox is shown from multiple angles, revealing bolts, ports, and signs of oil residue and wear.",
+      "The seller's watermark 'FIDEL AUTOS GLOBAL LIMITED' is visible on all photos."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "transmission gearbox",
+      "brand": "Mercedes",
+      "model": "M278",
+      "read_from": [
+        "photo 0 label",
+        "photo 0 screen",
+        "photo 1 screen",
+        "photo 2 screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Mercedes transmission gearbox.",
+        "verdict": "supported",
+        "evidence": "photo 0 label and screen text"
+      },
+      {
+        "claim": "M278 1282 OEM G63",
+        "verdict": "unverified",
+        "evidence": "The model number 'M278' is readable on the label in photo 0, but '1282', 'OEM', and 'G63' are not visible in any photo."
+      },
+      {
+        "claim": "Worked perfectly fine in...",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photos or text show the gearbox in working condition or provide proof of its operational history."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The gearbox is not the correct model or has been misrepresented.",
+        "proof": "A clear photo of the model number plate or a close-up of the 'M278' label to confirm it matches the seller's claim.",
+        "if_unproven": "as not matching the claimed model"
+      },
+      {
+        "risk": "The gearbox is damaged or has internal wear that is not visible in the photos.",
+        "proof": "A photo showing the inside of the gearbox casing or a video demonstrating its functionality.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The seller is not the legitimate owner or is selling a stolen or counterfeit part.",
+        "proof": "A photo of the seller's business license or a clear view of the 'FIDEL AUTOS GLOBAL LIMITED' watermark with a visible registration number.",
+        "if_unproven": "as unverified seller"
+      }
+    ],
+    "proof_requests": [
+      "A close-up photo of the model number plate or the 'M278' label to confirm the model.",
+      "A photo showing the inside of the gearbox casing or a video demonstrating its functionality.",
+      "A photo of the seller's business license or a clear view of the 'FIDEL AUTOS GLOBAL LIMITED' watermark with a visible registration number."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photos confirm the item is a Mercedes transmission gearbox with the model number M278, but the seller's claims about the specific model (1282, OEM, G63) and its working condition are unverified. Hidden risks include misrepresentation, damage, or a fraudulent seller, which require proof before a price can be set."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-8b-instruct",
+    "task": "testify_read",
+    "latency_ms": 6089,
+    "input_tokens": 2166,
+    "output_tokens": 737,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "3022fe410a050ffb73303c0812cc466c",
+    "error": null
+  }
+}
