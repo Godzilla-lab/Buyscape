@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Multiple car engines stored on a tiled floor against a dark wall.",
+      "Peugeot lion logo is embossed on the black plastic engine covers in photos 0 and 1.",
+      "Handwritten white marker on one engine timing cover reads '109016KM' in photo 1.",
+      "Foreground engine in photo 0 shows an alternator, AC compressor, and drive belt assembly.",
+      "Exhaust manifold with a silver heat shield and an oxygen sensor is visible in photo 0.",
+      "A wiring harness with several electrical connectors (yellow, green, blue) is visible in photo 2.",
+      "The engines appear dusty and used, consistent with second-hand auto parts."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car engine",
+      "brand": "Peugeot",
+      "model": null,
+      "read_from": [
+        "photo 0 logo",
+        "photo 1 logo"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Tukunbo/ foreign used",
+        "verdict": "unverifiable_remote",
+        "evidence": "Handwritten mileage is common on imported engines but does not prove origin."
+      },
+      {
+        "claim": "Peugeot 307",
+        "verdict": "unverified",
+        "evidence": "The Peugeot logo is visible, but no model number '307' is seen on the engines."
+      },
+      {
+        "claim": "automatic engine",
+        "verdict": "unverified",
+        "evidence": "An automatic gearbox is not clearly visible or attached to the engine in the photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Internal mechanical damage (e.g., seized, low compression).",
+        "proof": "Video of the engine running or a compression test report.",
+        "if_unproven": "as non-working/core"
+      },
+      {
+        "risk": "Missing automatic transmission (often sold together as 'automatic engine').",
+        "proof": "Photo showing the gearbox attached to the engine block.",
+        "if_unproven": "as engine only"
+      },
+      {
+        "risk": "Incorrect engine capacity/displacement for the buyer's needs.",
+        "proof": "Photo of the engine identification plate or stamped code on the block.",
+        "if_unproven": "as the lowest-value compatible Peugeot engine"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the engine code or ID plate stamped on the block.",
+      "Photo of the gearbox if it is included in the sale.",
+      "Video of the engine being turned over or a compression test."
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a Peugeot engine from the logos. It can be priced at a base value for an untested unit."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 20822,
+    "input_tokens": 4494,
+    "output_tokens": 4582,
+    "cost_usd": 0.015993,
+    "replayed": false,
+    "fixture_key": "1a1dd41a8da4fe31087b283ff01bfb77",
+    "error": null
+  }
+}
