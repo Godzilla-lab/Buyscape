@@ -1,0 +1,69 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0 shows multiple rectangular solar panels mounted in a frame/array (at least 4 panels visible).",
+      "No inverter/charge controller is visible in the photo.",
+      "Brand/model text is not clearly readable on the panel faces; no label/serial plate is readable.",
+      "No close-up of wiring, junction box, or panel ratings (Wattage, Voc, Isc) is visible."
+    ],
+    "identity": {
+      "status": "unknown",
+      "kind": "solar panel array (multiple panels in frames)",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Izutech solar energy specialize in all solar equipment such as: Inverter, panels, charge...",
+        "verdict": "unverifiable_remote",
+        "evidence": "Only a solar panel array is shown; no proof of the company specialization or that the listed items are included in this sale."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Panel specifications (wattage per panel, brand, model) are not readable, so the true value cannot be priced accurately.",
+        "proof": "A clear close-up photo of the panel label/serial plate showing brand, model, and rated wattage (W), plus Voc/Isc.",
+        "if_unproven": "Price as generic used solar panels with unknown wattage (worst-case: lower output/older specs)."
+      },
+      {
+        "risk": "Unclear whether panels are new or used, and whether they are fully functional (degradation, cracks, water ingress).",
+        "proof": "A short video/clip showing each panel\u2019s junction box area and a multimeter/IV test report (or at least a working test screenshot) for output.",
+        "if_unproven": "Price as used and not guaranteed (worst-case: treat as not tested/possibly underperforming)."
+      },
+      {
+        "risk": "Unclear if the sale includes only panels or also inverter/charge controller/cables/mounting hardware.",
+        "proof": "A photo of the full package contents laid out (inverter, charge controller, batteries if any, cables, mounting rails, fuses/MC4s) and a written itemized list.",
+        "if_unproven": "Price as panels only (worst-case: exclude any inverter/charge controller value)."
+      },
+      {
+        "risk": "Quantity and configuration are uncertain (how many panels total, and whether they are wired in series/parallel).",
+        "proof": "A wide shot showing the entire array and a close-up of the wiring/combiner/junction box showing series/parallel connections.",
+        "if_unproven": "Price for the visible portion only and assume wiring/config is unknown (worst-case: value reduced)."
+      }
+    ],
+    "proof_requests": [
+      "Clear close-up of each panel\u2019s label/serial plate (brand, model, rated wattage, Voc/Isc).",
+      "Photo/video of junction boxes and wiring/MC4 connectors (showing condition and how they\u2019re connected).",
+      "A photo of the full items included in the deal (confirm whether inverter/charge controller are included or not).",
+      "A test proof: IV curve/test report or a working output measurement under sun (or a technician test screenshot)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo shows a solar panel array, but the key pricing drivers (panel brand/model/wattage, quantity, and whether it\u2019s tested/working) are not readable or verifiable from the single image. Without those, any price would be guesswork."
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_read",
+    "latency_ms": 5433,
+    "input_tokens": 1442,
+    "output_tokens": 801,
+    "cost_usd": 0.00129,
+    "replayed": false,
+    "fixture_key": "e9cd18026dfadbc16a2db30c0d40bacf",
+    "error": null
+  }
+}
