@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0 shows a single car tire with visible tread grooves and sidewall.",
+      "The tire size markings (e.g., 295/40 R20) are not readable in the photo provided.",
+      "No clear view of the sidewall for DOT date, brand/model, or any repair marks."
+    ],
+    "identity": {
+      "status": "unknown",
+      "kind": "tire",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "295 40 r20 tukubo tire",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo 0 does not show readable sidewall text/size or brand name."
+      },
+      {
+        "claim": "Tread is still 90 percent",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows tread depth visually but cannot reliably confirm exact % without a tread-depth gauge and clearer angle."
+      },
+      {
+        "claim": "no patch, no bulge",
+        "verdict": "unverified",
+        "evidence": "Photo 0 does not show the full sidewall and both shoulders clearly enough to rule out prior repairs or bulges."
+      },
+      {
+        "claim": "Removed from a 2023 car",
+        "verdict": "unverifiable_remote",
+        "evidence": "No DOT date or vehicle info is readable in photo 0 to support the 2023 claim."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Wrong tire size/fitment (the 295/40 R20 claim is not readable).",
+        "proof": "A clear photo of the full sidewall text showing the exact size (e.g., 295/40 R20) and brand/model.",
+        "if_unproven": "Priced as an unknown used tire with possible mismatch risk (worst-case for buyer: may not fit)."
+      },
+      {
+        "risk": "Age/condition uncertainty (DOT date not readable).",
+        "proof": "A close-up photo of the DOT code on the sidewall (week/year).",
+        "if_unproven": "Priced as older/unknown age used tire (worst-case: reduced remaining life)."
+      },
+      {
+        "risk": "Hidden damage: sidewall cuts, internal puncture, or prior repair not visible from this angle.",
+        "proof": "Photos of both sidewalls and both shoulders, plus a close-up of any suspicious spots; ideally a quick inspection video while rotating the tire.",
+        "if_unproven": "Priced as not guaranteed (worst-case: treat as potentially compromised)."
+      },
+      {
+        "risk": "Tread depth not actually ~90% (visual estimate only).",
+        "proof": "Tread depth measurement at multiple points (center and both shoulders) with a gauge, shown in photos.",
+        "if_unproven": "Priced as lower remaining tread than claimed (worst-case: not 90%)."
+      }
+    ],
+    "proof_requests": [
+      "Clear sidewall close-up showing the exact size and brand/model (so we can confirm 295/40 R20 and 'tukubo').",
+      "Close-up of the DOT date code (week/year).",
+      "Photos of both sidewalls and both shoulders (front/back) to check for cuts, patches, and bulges.",
+      "Tread depth measurements (center + both shoulders) with a gauge."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo does not allow confirmation of the exact tire size/brand or the DOT date, and the key condition claims (90% tread, no patch/bulge, 2023 origin) are not verifiable from the single image. Without those, a correct worst-case price cannot be set confidently."
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_read",
+    "latency_ms": 5448,
+    "input_tokens": 1923,
+    "output_tokens": 840,
+    "cost_usd": 0.00295,
+    "replayed": false,
+    "fixture_key": "2742bba4a5489e91eabb4cffff754e0f",
+    "error": null
+  }
+}

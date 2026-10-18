@@ -1,0 +1,69 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0: A large rectangular solar panel with many dark cells; glare/flash across the surface; visible frame and junction area on the left side.",
+      "Photo 1: Another view of the same solar panel; heavy glare; watermark text across the middle.",
+      "Photo 2: Back/underside view of a solar panel with a white rear sheet; two cable ends/connectors visible near the bottom area.",
+      "Photo 3: Another back/underside view; connectors/cables visible at the bottom; no readable label shown."
+    ],
+    "identity": {
+      "status": "unknown",
+      "kind": "solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Thank you for contacting Network Solar venture Please let us know how we can help you. We deal...",
+        "verdict": "unverifiable_remote",
+        "evidence": "Seller text is generic and does not state the specific item specs (wattage, brand/model, condition, warranty)."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Panel wattage/size (which drives price) is not readable from the photos; could be lower or higher capacity than expected.",
+        "proof": "A clear close-up photo of the panel label/sticker (brand, model, rated wattage, voltage/current) on the frame/back.",
+        "if_unproven": "Price as a generic used solar panel with unknown wattage (worst-case for value)."
+      },
+      {
+        "risk": "Condition/health is unknown (possible cracks, delamination, hot spots, or reduced output). Photos show glare but no electrical test.",
+        "proof": "A working test: photo/video of an IV curve or a multimeter reading under sunlight, plus a short video showing the panel producing power.",
+        "if_unproven": "Price as not proven/possibly underperforming used panel."
+      },
+      {
+        "risk": "Compatibility/connection details are unknown (connector type, cable length, whether it includes MC4s or bare leads).",
+        "proof": "Close-up of the junction box and connector type (e.g., MC4) and cable length measurement.",
+        "if_unproven": "Price assuming basic panel only, with no guarantee of plug-and-play."
+      },
+      {
+        "risk": "Whether it is complete with mounting hardware or just the panel is unknown.",
+        "proof": "Photo showing everything included in the sale laid out (frame, junction box, cables, any brackets).",
+        "if_unproven": "Price as panel only (no extra hardware)."
+      }
+    ],
+    "proof_requests": [
+      "Clear close-up of the rating label/sticker (brand/model and rated wattage) on the panel frame/back.",
+      "A photo of the junction box label (if present) and connector type (MC4 or other) with cable length.",
+      "Evidence of working condition: IV curve screenshot or a simple power test under sunlight (video + readings).",
+      "Confirm what is included: panel only vs panel + cables + mounting hardware."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photos confirm it is a solar panel, but the key pricing driver (rated wattage/brand/model) and working condition are not readable or proven, so a reliable worst-case price cannot be set from the current images."
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_read",
+    "latency_ms": 5053,
+    "input_tokens": 2861,
+    "output_tokens": 744,
+    "cost_usd": 0.001502,
+    "replayed": false,
+    "fixture_key": "7731f4b021806cb51466828ac60cbe7c",
+    "error": null
+  }
+}

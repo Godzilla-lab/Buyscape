@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo shows a black electric scooter/bike with a front headlight and a rear cargo/seat area.",
+      "A battery pack is not clearly visible in the photo (no clear label/brand/model).",
+      "No readable brand/model name is visible on the scooter body in this image.",
+      "No close-up of tires, brakes, controller area, charging port, or battery condition."
+    ],
+    "identity": {
+      "status": "unknown",
+      "kind": "electric scooter/bike",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Cleanly used Electric bike for sale",
+        "verdict": "unverified",
+        "evidence": "Only one wide photo; condition details (battery health, brakes, wiring, battery compartment) are not shown."
+      },
+      {
+        "claim": "Runs on 72v 20ah lead acid battery",
+        "verdict": "unverified",
+        "evidence": "No visible battery label/spec plate or close-up confirming 72V 20Ah lead-acid in photo 0."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery may not actually be 72V/20Ah or may be degraded (lead-acid capacity loss), affecting range and performance.",
+        "proof": "Clear close-up photo of the battery label/spec (voltage, Ah, chemistry) and a photo of the battery connections/pack.",
+        "if_unproven": "Priced as worst case: lead-acid battery with unknown/possibly reduced capacity (assume lower range/performance)."
+      },
+      {
+        "risk": "Whether it truly 'runs' and how well (throttle response, motor noise, controller faults) is not testable from the single photo.",
+        "proof": "Short video clip starting from cold: power on, throttle test, and a brief ride or wheel spin test showing it accelerates.",
+        "if_unproven": "Priced as not proven to run properly (assume basic functionality only)."
+      },
+      {
+        "risk": "Tires/brakes may be worn or faulty; photo resolution doesn\u2019t confirm tread depth or brake condition.",
+        "proof": "Close-up photos of front and rear tires (tread) and both brake areas (disc/drum and pads/shoes).",
+        "if_unproven": "Priced as needing possible service/parts due to unknown wear."
+      },
+      {
+        "risk": "Charger compatibility and charging port condition (loose port, wrong charger voltage) could cause no-charge or battery damage.",
+        "proof": "Photo of the charger label (output voltage/current) and close-up of the charging port; show charging indicator if available.",
+        "if_unproven": "Priced assuming charger/charging setup may need replacement or repair."
+      }
+    ],
+    "proof_requests": [
+      "Clear close-up of the battery label/spec confirming 72V and 20Ah and that it is lead-acid (plus photos of the battery pack).",
+      "Video: power on + throttle test + brief ride/wheel movement showing it accelerates and stops reliably.",
+      "Close-ups: front/rear tires tread, brake area(s), and charging port.",
+      "Photo of the charger label (output specs) and confirmation it charges the bike."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item type is visible, but the key pricing drivers (exact battery specs/health and confirmed running condition) are not verifiable from the single photo. Without battery label and a running test, a worst-case price would be too speculative."
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_read",
+    "latency_ms": 5133,
+    "input_tokens": 1441,
+    "output_tokens": 797,
+    "cost_usd": 0.00254,
+    "replayed": false,
+    "fixture_key": "b15846db6040a3e06cdc9057afee4f9b",
+    "error": null
+  }
+}

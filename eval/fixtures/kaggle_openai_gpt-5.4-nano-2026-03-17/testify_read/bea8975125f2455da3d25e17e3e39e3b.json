@@ -1,0 +1,75 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0 shows a large rectangular solar panel with many small cells; there is a glare/bright reflection across the glass.",
+      "Photo 1 shows the back/underside of the same panel: a plain white/metal back sheet with mounting frame and two cable ends/ports visible near the bottom area.",
+      "Photo 2 shows the back/underside again from a slightly different angle; cable ends are visible.",
+      "Photo 3 shows the back/underside again; no clear brand/model label is readable on the panel or frame in these images."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel (grid-tie/off-grid type not confirmed)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Battery is new, holds charge for 8 hours.",
+        "verdict": "unverifiable_remote",
+        "evidence": "No battery is shown in the provided photos; only a solar panel is visible."
+      },
+      {
+        "claim": "Never repaired.",
+        "verdict": "unverifiable_remote",
+        "evidence": "No battery condition/history is shown; no repair indicators or serial/inspection records are visible."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The item shown may be only a solar panel, while the seller claims about a battery (mismatch).",
+        "proof": "Ask for a photo of the exact battery being sold (front label/brand, terminals, and a close-up of the rating plate/serial).",
+        "if_unproven": "Price as solar panel only (battery not included / battery performance not guaranteed)."
+      },
+      {
+        "risk": "Solar panel wattage (e.g., 100W/150W/200W/others) is not readable, which strongly affects price.",
+        "proof": "Ask for a close-up photo of the panel\u2019s label/rating plate showing Wp (watts), Voc, Isc, and brand/model.",
+        "if_unproven": "Price at the lowest plausible category for used panels in the market (worst-case wattage)."
+      },
+      {
+        "risk": "Panel condition (cracks, delamination, water ingress) cannot be confirmed due to glare and lack of close-ups.",
+        "proof": "Ask for close-up photos of the frame corners and the cell grid (no glare), plus a photo of the back for any burn marks/corrosion.",
+        "if_unproven": "Price as used/unknown condition (no performance guarantee)."
+      },
+      {
+        "risk": "Electrical performance is unknown (no test results like open-circuit voltage under sun or IV curve).",
+        "proof": "Ask for a working test: measured Voc and Isc (or a simple multimeter reading) under sunlight, or a video showing the readings.",
+        "if_unproven": "Price as not performance-tested (assume reduced output)."
+      }
+    ],
+    "proof_requests": [
+      "Send a clear close-up of the solar panel rating label showing brand, model, and wattage (Wp).",
+      "Confirm whether a battery is included; if yes, send battery photos (label/rating plate + terminals + serial).",
+      "Provide a simple performance test (Voc and Isc) or a short video of the measurements in daylight."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photos clearly show a solar panel, but the seller\u2019s claims are about a battery (not shown). Also, the panel\u2019s wattage/label is not readable, so a reliable worst-case price cannot be set without the key identifying specs."
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_read",
+    "latency_ms": 5551,
+    "input_tokens": 2875,
+    "output_tokens": 812,
+    "cost_usd": 0.00159,
+    "replayed": false,
+    "fixture_key": "bea8975125f2455da3d25e17e3e39e3b",
+    "error": null
+  }
+}
