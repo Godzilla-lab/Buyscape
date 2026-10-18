@@ -1,0 +1,87 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo shows a front-load washing machine with an LG logo on the top-left of the control panel.",
+      "On the left side of the control panel, text reads \u201cDirectDrive 7Kg\u201d (and \u201cInverter DirectDrive\u201d appears).",
+      "The control panel has a digital display and multiple program buttons; the door glass is visible.",
+      "There is visible rust/corrosion around the lower front area/door frame area (brown marks near the bottom edge).",
+      "No clear view of the model number/serial plate, power rating label, or the back/side where the motor and connections are."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "front-load washing machine",
+      "brand": "LG",
+      "model": "DirectDrive 7Kg (model number not readable)",
+      "read_from": [
+        "photo 0 control panel text (LG logo and \u201cDirectDrive 7Kg\u201d)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "LG DirectDrive 7kg washing machine for sale.",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows LG logo and \u201cDirectDrive 7Kg\u201d on the control panel."
+      },
+      {
+        "claim": "Barely used, bought new last year.",
+        "verdict": "unverified",
+        "evidence": "Photo 0 does not show purchase date/receipt; rust/corrosion at the bottom suggests it may not be \u201cbarely used\u201d or may have been exposed to moisture."
+      },
+      {
+        "claim": "No fault at all, the motor was never opened.",
+        "verdict": "unverified",
+        "evidence": "Photo 0 cannot confirm motor condition or whether it was opened/serviced."
+      },
+      {
+        "claim": "Receipt and warranty card available.",
+        "verdict": "unverifiable_remote",
+        "evidence": "No receipt/warranty card is shown in photo 0."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Rust/corrosion on the lower front area may indicate water ingress, poor drainage, or long-term exposure\u2014could affect longevity and cause future leaks.",
+        "proof": "A close-up photo of the rust area plus a photo of the machine\u2019s bottom edge and door seal/gasket from the side; also show the drain hose connection area.",
+        "if_unproven": "Price as a used unit with possible moisture exposure (assume higher chance of future maintenance/leaks)."
+      },
+      {
+        "risk": "Seller\u2019s \u201cno fault\u201d claim can\u2019t be verified remotely; common issues include drainage problems, noisy spin, or error codes.",
+        "proof": "Video of a full wash cycle (including spin) with no error codes; show the display during operation.",
+        "if_unproven": "Price as not guaranteed working perfectly (assume needs inspection/possible minor faults)."
+      },
+      {
+        "risk": "Exact model number/serial not readable; warranty/parts compatibility and true age can\u2019t be confirmed.",
+        "proof": "Photo of the rating plate/serial label (usually on the door frame or back panel) showing model number and serial.",
+        "if_unproven": "Price at the worst-case for a generic 7kg LG DirectDrive used unit (no warranty confirmation)."
+      },
+      {
+        "risk": "Potential tampering/repairs (seller says motor never opened) can\u2019t be confirmed from the front photo.",
+        "proof": "Photo of the back panel screws/cover condition and any service stickers; if possible, a quick inspection photo of the motor area (without disassembly).",
+        "if_unproven": "Price as if motor history is unknown (assume standard used condition, not \u201clike new\u201d)."
+      }
+    ],
+    "proof_requests": [
+      "Close-up photos of the rust/corrosion area and the door gasket/seal.",
+      "Video of a complete wash cycle (wash + rinse + spin) showing the display and no error codes.",
+      "Photo of the rating plate/serial label with the exact model number and serial.",
+      "Photos of receipt and warranty card (if available)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The identity (LG DirectDrive 7kg) is readable, but key claims (barely used, no faults, motor never opened, warranty/receipt) and the rust risk cannot be verified from the single front photo. A wash-cycle video and rating-plate photo are needed to price confidently."
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_read",
+    "latency_ms": 6250,
+    "input_tokens": 2754,
+    "output_tokens": 981,
+    "cost_usd": 0.001777,
+    "replayed": false,
+    "fixture_key": "bbf3aeb5dba734dd702887816b7d273b",
+    "error": null
+  }
+}

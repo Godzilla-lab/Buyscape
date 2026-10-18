@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo shows a window/portable-style air conditioner unit (single body) with front grille and top air outlet.",
+      "Brand/model text appears on the front label area, but it is not clearly readable in this photo.",
+      "Unit looks dusty/used; no obvious broken parts visible from this angle.",
+      "Seller says it is faulty, but the photo does not show the fault (no screen/error code, no running test)."
+    ],
+    "identity": {
+      "status": "unknown",
+      "kind": "window/portable air conditioner (single-piece AC)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 label area (text not legible)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Faulty inverter AC available for sale.",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows an AC unit but provides no proof of inverter type or the specific fault."
+      },
+      {
+        "claim": "Location: Oshodi, Lagos State.",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo evidence of location."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Whether it is actually inverter (vs non-inverter) and the exact capacity (e.g., 1HP/1.5HP/2HP) which strongly affects value.",
+        "proof": "A clear close-up photo of the rating plate/label showing brand, model, and capacity (HP/BTU) and whether it states inverter.",
+        "if_unproven": "Priced as a generic faulty AC with unknown capacity (worst-case value for repair/parts)."
+      },
+      {
+        "risk": "Fault type: compressor failure, gas leak, fan/motor issue, PCB/control issue\u2014each has very different repair costs.",
+        "proof": "Video of power-on showing any error code/LED behavior plus a short running test (even if it fails) and sound check (compressor/fan start).",
+        "if_unproven": "Priced as not working / major fault (worst-case)."
+      },
+      {
+        "risk": "Missing parts or damaged fins/coil from transport or prior repair.",
+        "proof": "Photos of both sides and the back/coil area (including any exposed copper lines) and a close-up of the fins for bends.",
+        "if_unproven": "Priced as needing inspection and possible parts replacement."
+      },
+      {
+        "risk": "Refrigerant status (gas leak) which may make it uneconomical to repair.",
+        "proof": "Technician test result: manifold gauge reading or leak test report (photo/screenshot).",
+        "if_unproven": "Priced as if refrigerant may be low/leaking (worst-case repair)."
+      }
+    ],
+    "proof_requests": [
+      "Clear close-up of the rating plate/label (brand, model, capacity/HP or BTU, and inverter wording).",
+      "Video of the unit being powered on: show any error lights/codes and whether compressor and fan start.",
+      "Photos of the back/side where the condenser coil and copper pipes are visible (and any damage).",
+      "If possible: technician\u2019s diagnosis (compressor/gas/PCB/fan) or a short test report."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo shows an AC unit, but the key details needed to price it correctly (exact model/capacity/inverter confirmation and the fault type) are not verifiable from the single image."
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_read",
+    "latency_ms": 5015,
+    "input_tokens": 2345,
+    "output_tokens": 782,
+    "cost_usd": 0.002595,
+    "replayed": false,
+    "fixture_key": "0d835f2e53f5f33ce99f0624c53a6627",
+    "error": null
+  }
+}
