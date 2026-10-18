@@ -1,0 +1,87 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "photo 0: one wooden pallet on a concrete floor; visible stringers and deck boards; some discoloration/staining on boards; red-painted underside edge is visible.",
+      "photo 1: another view of a wooden pallet; similar construction; visible gaps/openings; staining and wear on top boards.",
+      "photo 2: stack of multiple wooden pallets in a warehouse; pallets appear mixed in condition (some look darker/worn); no clear marking of pallet standard (e.g., ISPM/HT) visible."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "wooden storage pallets",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 pallet shape and construction",
+        "photo 1 pallet shape and construction",
+        "photo 2 stacked pallets"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Standard wooden storage pallets",
+        "verdict": "supported",
+        "evidence": "Photos show wooden pallets used for storage/handling (photo 0, photo 1, photo 2)."
+      },
+      {
+        "claim": "Everything is clean, dry and sorted",
+        "verdict": "unverified",
+        "evidence": "Photos show pallets with visible wear/staining; dryness/cleanliness and whether they are fully sorted cannot be confirmed remotely (photo 0, photo 1, photo 2)."
+      },
+      {
+        "claim": "no water added",
+        "verdict": "unverifiable_remote",
+        "evidence": "No test or moisture reading shown; cannot confirm from photos (photo 0, photo 1, photo 2)."
+      },
+      {
+        "claim": "Weighed at 500 kg on a certified scale this morning",
+        "verdict": "unverifiable_remote",
+        "evidence": "No scale ticket/receipt or photo of the certified weighing process shown (photo 0, photo 1, photo 2)."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Moisture/treated-wood status (could be wet, or not heat-treated/ISPM-compliant), affecting usability and resale value.",
+        "proof": "Request close-up photos of any stamp/mark on the pallet (e.g., HT/DB/IPPC) plus a moisture meter reading (or a video showing the meter on the wood).",
+        "if_unproven": "Price as mixed-condition pallets with unknown treatment/moisture (worst case: lower grade for reuse)."
+      },
+      {
+        "risk": "Quantity mismatch vs stated weight (500 kg) due to pallet count/size differences or inclusion of damaged pallets.",
+        "proof": "Request a photo/video of the certified scale reading with the pallets on it, and/or pallet count with dimensions of the pallet type.",
+        "if_unproven": "Price as not guaranteed to be exactly 500 kg (worst case: assume fewer usable pallets)."
+      },
+      {
+        "risk": "Damage level (broken boards, weak stringers, missing nails) reducing load-bearing capacity.",
+        "proof": "Request close-up photos of the worst pallet(s): underside stringers and corners, plus a quick video of a pallet being lifted/checked.",
+        "if_unproven": "Price as some pallets may be damaged/less usable (worst case: treat as lower-grade for storage only)."
+      },
+      {
+        "risk": "Contamination (oil/chemicals) or infestation risk not visible in photos.",
+        "proof": "Request a smell/visual inspection video and close-ups of board surfaces and any dark spots; ask if they were used for food/chemicals.",
+        "if_unproven": "Price as unknown contamination risk (worst case: discount for potential cleaning/limited use)."
+      }
+    ],
+    "proof_requests": [
+      "Photo/video of the certified weighing process showing the pallets on the scale and the reading (for the stated 500 kg).",
+      "Close-up photos of pallet stamps/marks on multiple pallets (look for HT/DB/IPPC or similar).",
+      "Moisture meter reading on at least 2\u20133 pallets (top deck and underside).",
+      "Close-ups of the most damaged pallets: corners and underside stringers."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item type (wooden pallets) is clear from the photos, but the key pricing drivers\u2014exact quantity/weight, dryness, and treatment/compliance\u2014are not verifiable remotely. Get the weighing proof and treatment/moisture evidence before pricing."
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_read",
+    "latency_ms": 6412,
+    "input_tokens": 2709,
+    "output_tokens": 995,
+    "cost_usd": 0.003124,
+    "replayed": false,
+    "fixture_key": "1cce5b9ec6d650311afc22405ffd036f",
+    "error": null
+  }
+}
