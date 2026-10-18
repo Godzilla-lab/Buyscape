@@ -172,6 +172,19 @@ def test_naming_the_wrong_version_is_wrong_even_when_the_kind_fits():
     assert identity_correct(ps4_pro, by_type) is True
 
 
+def test_a_brand_the_title_never_named_is_judged_by_kind_when_the_numbers_agree():
+    cylinder = _item("g", "gas cylinder", "12.5kg Gas Cylinder (Tokunbo)", 39500)
+    said = {"status": "named", "brand": "Repsol", "model": "12.5kg", "kind": "gas cylinder"}
+    assert identity_correct(cylinder, said) is True
+    assert identity_correct(cylinder, {**said, "kind": "gas cooker"}) is False
+
+
+def test_an_ibc_is_the_plastic_water_tank_the_market_sells_it_as():
+    tank = _item("t", "plastic water tank", "Ibc Tank 1000 Liter", 90000)
+    assert kind_matches("1000L IBC tank", item=tank)
+    assert not kind_matches("steel tank", item=tank)
+
+
 def test_a_spaced_plus_is_an_accessory_not_the_plus_tier():
     camera = _item("c", "camera", "Nikon Camera D3300 + 18-55mm Lens", 380000)
     assert identity_correct(camera, {"status": "named", "brand": "Nikon", "model": "D3300", "kind": "camera"})

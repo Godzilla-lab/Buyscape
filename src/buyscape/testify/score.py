@@ -21,6 +21,11 @@ from .run import lie_keys
 from .schema import Item
 
 
+# Names the market gives a kind the labels word another way. Scoring only:
+# retrieval stays as every model met it, so runs remain comparable.
+_SAME_KIND = {"ibc": {"plastic", "water"}}  # a 1,000 litre IBC is sold as a water tank
+
+
 def kind_matches(predicted: str | None, item: Item) -> bool:
     """The predicted kind carries the true kind's head noun and one of its other words, numbers agreeing.
 
@@ -33,6 +38,8 @@ def kind_matches(predicted: str | None, item: Item) -> bool:
     while len(truth) > 1 and truth[-1] in _SET_WORDS:
         truth = truth[:-1]  # "sofa set": the item is the sofa, the set is the unit of sale
     said = set(words(predicted))
+    for word in list(said):
+        said |= _SAME_KIND.get(word, set())
     if not truth or not said or truth[-1] not in said:
         return False
     if len(truth) > 1 and not any(w in said for w in truth[:-1]):
@@ -52,8 +59,12 @@ def identity_correct(item: Item, identity: dict) -> bool | None:
         if model_matches(brand, model, title):
             return True
         named = (_norm(brand) | _norm(model)) - GENERIC_WORDS
-        if named & (_norm(title) - GENERIC_WORDS):
-            return False  # the same line with the wrong version: a PS4 is not a PS4 Pro
+        shared = named & (_norm(title) - GENERIC_WORDS)
+        # A shared name is the same line in the wrong version: a PS4 is not a
+        # PS4 Pro. A shared number alone is not: "Repsol 12.5kg" agrees with a
+        # "12.5kg Gas Cylinder" whose title names no brand, and is judged by kind.
+        if any(not any(c.isdigit() for c in t) for t in shared):
+            return False
     return kind_matches(identity.get("kind"), item)
 
 
