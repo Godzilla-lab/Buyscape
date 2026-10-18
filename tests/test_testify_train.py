@@ -90,3 +90,23 @@ def test_build_writes_the_exact_prompt_with_photo_paths_and_a_twin(tmp_path: Pat
     assert {"type": "image", "image": "eval/raw/testify_train/media/f1/00.jpg"} in user["content"]
     assert train.train_lie(FAN) in user["content"][0]["text"]
     assert json.loads(said["content"])["claims"][-1]["claim"] == train.train_lie(FAN)
+
+
+def test_a_name_on_an_unchecked_advert_stays_only_if_the_ocr_found_it(tmp_path: Path):
+    photo = tmp_path / "00.jpg"
+    Image.new("RGB", (32, 24), "blue").save(photo)
+    named = _read(status="named", brand="Ox", model="SF-16", read_from=["photo 0 label"])
+    rows = [{"id": "f1", "variant": "clean", "reading": named}]
+    seen = train.build([(FAN, [photo])], rows, {}, tmp_path, ocr=lambda images: ["OX", "MODEL SF 16"])[0]
+    assert json.loads(seen[0]["messages"][2]["content"])["identity"]["model"] == "SF-16"
+    unseen, tally = train.build([(FAN, [photo])], rows, {}, tmp_path, ocr=lambda images: ["OXFORD", "220V"])
+    assert json.loads(unseen[0]["messages"][2]["content"])["identity"]["status"] == "by_type"
+    assert tally == {"kept: price at worst case, name cut to the kind": 1}
+    blind = train.build([(FAN, [photo])], rows, {}, tmp_path, ocr=None)[0]
+    assert json.loads(blind[0]["messages"][2]["content"])["identity"]["status"] == "by_type"
+
+
+def test_a_short_name_must_be_a_whole_word_on_the_photo():
+    read = _read(status="named", brand="LG", model="")
+    assert train.on_photos(read, ["LG", "Inverter"])
+    assert not train.on_photos(read, ["SLG-2201 part"])

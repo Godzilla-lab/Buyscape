@@ -12,6 +12,9 @@ without proof". So:
   doubt stays, it just no longer stops the price.
 - A model the teacher named that the photo check could not read is cut back
   to the kind, so the student does not learn to name what it cannot see.
+  Training adverts were never photo checked, so for them the local OCR is the
+  check: every brand and model word the teacher named must be text the OCR
+  found on a photo. OCR cannot add a name, only confirm one.
 - A read where the teacher could not tell what the item is stays a
   cannot_identify example, so the student also learns to decline.
 - A read that is wrong about the item is dropped. A wrong label teaches more
@@ -28,12 +31,14 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 from pathlib import Path
 
 import yaml
 from pydantic import ValidationError
 
-from ..providers.base import ModelRequest
+from ..identify.ocr import OcrReader
+from ..providers.base import ImageRef, ModelRequest
 from ..providers.openrouter import system_text
 from .answer import ClaimAnswer, IdentityAnswer, Reading, money_written
 from .run import lie_entry, reading_request
@@ -59,6 +64,40 @@ def train_lie(item: Item, entries: tuple[dict, ...] | None = None) -> str:
     return lines[int(hashlib.sha256(item.id.encode()).hexdigest(), 16) % len(lines)]
 
 
+def _norm(text: str) -> str:
+    return re.sub(r"[^a-z0-9]", "", text.lower())
+
+
+def on_photos(reading: dict, lines: list[str]) -> bool:
+    """Whether every brand and model word in a read is text the OCR found on a photo.
+
+    Each name must sit inside one OCR line, spaces and dashes ignored. A name
+    shorter than four letters must be a whole word of the line, so "LG" is
+    not found inside a part number."""
+    identity = reading.get("identity") or {}
+    names = [n for n in (identity.get("brand"), identity.get("model")) if n and _norm(n)]
+    if not names:
+        return False
+    for name in names:
+        want = _norm(name)
+        if len(want) < 4:
+            found = any(want in (_norm(w) for w in re.split(r"[^A-Za-z0-9]+", line)) for line in lines)
+        else:
+            found = any(want in _norm(line) for line in lines)
+        if not found:
+            return False
+    return True
+
+
+def ocr_label(reading: dict, photos: list[Path], ocr: OcrReader | None, max_photos: int = 4) -> dict:
+    """A photo check for an advert no labeller saw, from the photos the model was shown.
+    Without the OCR engine nothing can be confirmed, so a name is cut to the kind."""
+    if ocr is None:
+        return {"identity_from_photos_alone": "unchecked"}
+    lines = ocr(tuple(ImageRef(p) for p in photos[:max_photos]))
+    return {"identity_from_photos_alone": "named" if on_photos(reading, lines) else "by_type"}
+
+
 def target(item: Item, reading: dict, label: dict | None = None) -> tuple[Reading | None, str]:
     """The answer the student should give, and why it was kept or dropped."""
     try:
@@ -76,17 +115,19 @@ def target(item: Item, reading: dict, label: dict | None = None) -> tuple[Readin
     if identity_correct(item, read.identity.model_dump()) is not True:
         return None, "teacher wrong about the item"
     data = read.model_dump()
+    cut = ""
     if read.identity.status == "named" and label and label.get("identity_from_photos_alone") not in (None, "named"):
         # Named beyond what the photo check could read: keep only the kind.
         data["identity"] = IdentityAnswer(status="by_type", kind=read.identity.kind).model_dump()
         if not read.identity.kind or identity_correct(item, data["identity"]) is not True:
             return None, "named beyond the photos, and the kind alone is wrong"
+        cut = ", name cut to the kind"
     if read.decision != "price":
         data.update(decision="price", reason=WORST_CASE_REASON)
     answer = Reading.model_validate(data)
     if money_written(answer):
         return None, "teacher wrote a price"
-    return answer, "kept: price at worst case" if read.decision != "price" else "kept: priced"
+    return answer, ("kept: price at worst case" if read.decision != "price" else "kept: priced") + cut
 
 
 def twin(answer: Reading, lie: str) -> Reading:
@@ -111,8 +152,9 @@ def messages(request: ModelRequest, answer: Reading, root: Path) -> list[dict]:
 
 
 def build(cases: list[tuple], rows: list[dict], labels: dict[str, dict], root: Path,
-          entries: tuple[dict, ...] | None = None) -> tuple[list[dict], dict[str, int]]:
-    """Training examples from a teacher's clean reads. `cases` holds (item, photos)."""
+          entries: tuple[dict, ...] | None = None, ocr: OcrReader | None = None) -> tuple[list[dict], dict[str, int]]:
+    """Training examples from a teacher's clean reads. `cases` holds (item, photos).
+    An item with no photo check is checked by `ocr` when the teacher named it."""
     reads = {r["id"]: r for r in rows if r.get("variant", "clean") == "clean" and r.get("reading")}
     out: list[dict] = []
     tally: dict[str, int] = {}
@@ -121,7 +163,10 @@ def build(cases: list[tuple], rows: list[dict], labels: dict[str, dict], root: P
         if row is None:
             tally["no teacher read"] = tally.get("no teacher read", 0) + 1
             continue
-        answer, why = target(item, row["reading"], labels.get(item.id))
+        label = labels.get(item.id)
+        if label is None and (row["reading"].get("identity") or {}).get("status") == "named":
+            label = ocr_label(row["reading"], photos, ocr)
+        answer, why = target(item, row["reading"], label)
         tally[why] = tally.get(why, 0) + 1
         if answer is None:
             continue

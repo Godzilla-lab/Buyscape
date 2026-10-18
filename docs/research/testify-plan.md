@@ -162,6 +162,9 @@ Responses are recorded in `eval/fixtures/` so that every rerun is free.
 
 ## Part 5: the model
 
+What the model must beat, line by line, and the two hard stops, are in
+`docs/research/what-better-means.md`.
+
 ### Base
 Qwen3-VL 8B: open weights, strong on reading text, and small enough to serve
 cheaply. Qwen3-VL 4B is the fallback if memory is tight.

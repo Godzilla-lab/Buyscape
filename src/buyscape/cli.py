@@ -901,7 +901,9 @@ def testify_train_build(
 
     Run the teacher first: testify --model <teacher> --split train --no-lies
     --reads-only. Only reads right about the item are kept, a known item is
-    priced at its worst case, and each example gets a lied-to twin.
+    priced at its worst case, and each example gets a lied-to twin. A brand or
+    model on an advert no labeller checked stays only if the local OCR found
+    it on a photo.
     """
     from collections import Counter
 
@@ -916,7 +918,13 @@ def testify_train_build(
     labels = {}
     if labels_path.exists():
         labels = {json.loads(line)["id"]: json.loads(line) for line in labels_path.read_text().splitlines() if line}
-    examples, tally = train.build([(item, photos) for item, photos, _ in cases], rows, labels, ROOT)
+    from .identify.ocr import default_reader
+
+    ocr = default_reader()
+    if ocr is None:
+        console.print("[yellow]The OCR engine is not installed: every model name on an advert with no "
+                      "photo check is cut to the kind.[/yellow]")
+    examples, tally = train.build([(item, photos) for item, photos, _ in cases], rows, labels, ROOT, ocr=ocr)
     train.write(examples, out)
     console.print(f"{len(examples)} examples from {len(examples) // 2} items written to {out}")
     for why, n in sorted(tally.items(), key=lambda kv: -kv[1]):
