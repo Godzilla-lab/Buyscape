@@ -58,8 +58,26 @@ def kind_matches(predicted: str | None, item: Item) -> bool:
     return not (numbers_truth and numbers_said and not numbers_truth & numbers_said)
 
 
-def identity_correct(item: Item, identity: dict) -> bool | None:
-    """None when the model said it does not know, which is an abstention, not an error."""
+def title_kind_matches(predicted: str | None, title: str) -> bool:
+    """The predicted kind's head noun, and one of its other words if it has more, are in the title.
+
+    For training adverts. Their kind is only the word Jiji was searched with,
+    and the search is literal: "pallets" finds activated carbon sold by the
+    pallet, "bed frame" finds a hospital bed. The title is what the seller
+    sells, so the read is judged against it instead."""
+    # "gas cooker with oven": the item is what comes before the extras.
+    said = words(re.split(r"\b(?:with|plus)\b|\+", predicted or "", maxsplit=1, flags=re.I)[0])
+    while len(said) > 1 and said[-1] in _SET_WORDS:
+        said = said[:-1]
+    in_title = set(words(title))
+    if not said or said[-1] not in in_title:
+        return False
+    return len(said) == 1 or any(w in in_title for w in said[:-1])
+
+
+def identity_correct(item: Item, identity: dict, by_title: bool = False) -> bool | None:
+    """None when the model said it does not know, which is an abstention, not an error.
+    `by_title` judges the kind against the title, for training adverts."""
     status = identity.get("status")
     if status == "unknown":
         return None
@@ -77,6 +95,8 @@ def identity_correct(item: Item, identity: dict) -> bool | None:
         # "12.5kg Gas Cylinder" whose title names no brand, and is judged by kind.
         if any(not any(c.isdigit() for c in t) for t in shared):
             return False
+    if by_title:
+        return title_kind_matches(identity.get("kind"), item.answer.title)
     return kind_matches(identity.get("kind"), item)
 
 

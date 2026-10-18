@@ -113,7 +113,9 @@ committed.
 A teacher reads the training pool, priced only against training adverts so
 no benchmark title or price reaches a training prompt. `testify-train-build`
 keeps a read only when it is right about the item (checked against the
-title, which no model sees), turns a known item into a price at its worst
+title, which no model sees, and not against the kind the advert was searched
+under, since Jiji's search is literal), drops adverts for a repair service
+or from a buyer, turns a known item into a price at its worst
 case, cuts a model name the photo check could not read back to the kind
 (training adverts have no photo check, so there every brand and model word
 must be text the local OCR found on a photo), keeps an honest "cannot tell" as a cannot_identify example, and pairs each

@@ -192,8 +192,7 @@ refuses to price it: "without proof, the item must be treated as worst-case
 non-working, so..." ends in a request for proof, not a price at that worst
 case. A fifth of its answers break the format, and all of them the same
 way: a claim verdict it made up, `unverified_remote`, 107 times across both
-variants, where the schema allows only supported, contradicted and
-unverified. Its first pass broke the format on 29% of items; the 20% above
+variants, a blend of the schema's `unverified` and `unverifiable_remote`. Its first pass broke the format on 29% of items; the 20% above
 is after those items were asked once more, a second chance the other
 models mostly did not need.
 

@@ -123,3 +123,17 @@ def test_the_trainer_shrinks_big_photos_and_keeps_both_twins_on_one_side():
     for e in twins:
         sides.setdefault(e["id"], set()).add(sft_lora.held_out(e, 0.05))
     assert all(len(s) == 1 for s in sides.values()) and 0 < sum(s == {True} for s in sides.values()) < 30
+
+
+def test_a_training_read_is_judged_by_the_title_not_the_word_it_was_searched_under():
+    from buyscape.testify.score import title_kind_matches
+
+    bed = _item("b1", "bed frame", "Electric Hospital Bed")
+    assert train.target(bed, _read(kind="electric hospital bed"))[0] is not None
+    carbon = _item("c1", "pallets", "Pallet Activated Carbon")
+    assert train.target(carbon, _read(kind="activated carbon"))[0] is not None
+    assert train.target(carbon, _read(kind="wooden pallet"))[0] is None
+    assert not title_kind_matches("drill press", "Drilling Machine")
+    assert title_kind_matches("gas cooker with oven", "Gas Cooker")
+    service = _item("s1", "refrigerator", "AC Fridge Repair, Installation Gas Refilling")
+    assert train.target(service, _read(kind="air conditioner")) == (None, "the advert sells a service or wants to buy")

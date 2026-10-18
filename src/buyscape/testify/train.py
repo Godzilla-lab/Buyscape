@@ -8,7 +8,9 @@ without proof". So:
 
 - A read that names the item right, checked against the advert's title (the
   answer key, never an input), becomes a price at the worst case, whatever
-  the teacher decided. Its claims, risks and proof requests are kept: the
+  the teacher decided. The title, not the kind the advert was searched
+  under: Jiji's search is literal, so a search for "pallets" brings back
+  activated carbon sold by the pallet. Its claims, risks and proof requests are kept: the
   doubt stays, it just no longer stops the price.
 - A model the teacher named that the photo check could not read is cut back
   to the kind, so the student does not learn to name what it cannot see.
@@ -31,6 +33,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import re
 from pathlib import Path
 
@@ -51,6 +54,12 @@ WORST_CASE_REASON = (
     "proof asked for below arrives."
 )
 UNPROVEN = "No photo shows this; it is the seller's word only."
+# Title words of an advert that sells no item: a repair service or a buyer.
+# The benchmark leaves these out by its photo check; training adverts have
+# none, so their titles are read for it. The title only grades, never prompts.
+NOT_FOR_SALE = re.compile(
+    r"\b(repairs?|repairing|installation|servicing|services?|we buy|buying|wanted|for hire|for rent)\b", re.I
+)
 
 
 def _train_lies() -> tuple[dict, ...]:
@@ -104,6 +113,8 @@ def target(item: Item, reading: dict, label: dict | None = None) -> tuple[Readin
         read = Reading.model_validate(reading)
     except ValidationError:
         return None, "teacher's answer breaks the schema"
+    if NOT_FOR_SALE.search(item.answer.title or ""):
+        return None, "the advert sells a service or wants to buy"
     if read.decision == "fraud_suspected":
         return None, "teacher called fraud"
     if read.identity.status == "unknown":
@@ -112,14 +123,14 @@ def target(item: Item, reading: dict, label: dict | None = None) -> tuple[Readin
         data = read.model_dump()
         data.update(decision="cannot_identify")
         return Reading.model_validate(data), "kept: cannot identify"
-    if identity_correct(item, read.identity.model_dump()) is not True:
+    if identity_correct(item, read.identity.model_dump(), by_title=True) is not True:
         return None, "teacher wrong about the item"
     data = read.model_dump()
     cut = ""
     if read.identity.status == "named" and label and label.get("identity_from_photos_alone") not in (None, "named"):
         # Named beyond what the photo check could read: keep only the kind.
         data["identity"] = IdentityAnswer(status="by_type", kind=read.identity.kind).model_dump()
-        if not read.identity.kind or identity_correct(item, data["identity"]) is not True:
+        if not read.identity.kind or identity_correct(item, data["identity"], by_title=True) is not True:
             return None, "named beyond the photos, and the kind alone is wrong"
         cut = ", name cut to the kind"
     if read.decision != "price":
@@ -143,7 +154,8 @@ def messages(request: ModelRequest, answer: Reading, root: Path) -> list[dict]:
     for img in request.images:
         if img.label:
             parts.append({"type": "text", "text": f"[{img.label}]"})
-        parts.append({"type": "image", "image": str(Path(img.path).resolve().relative_to(root.resolve()))})
+        # Absolute, not resolved: eval/raw may be a link to another checkout's photos.
+        parts.append({"type": "image", "image": os.path.relpath(os.path.abspath(img.path), os.path.abspath(root))})
     return [
         {"role": "system", "content": system_text(request)},
         {"role": "user", "content": parts},
