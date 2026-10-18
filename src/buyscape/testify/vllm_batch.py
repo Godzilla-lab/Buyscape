@@ -22,6 +22,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import time
 from pathlib import Path
 
@@ -66,6 +67,10 @@ def main() -> None:
     parser.add_argument("--quantization", default=None, help="For example fp8, to make room on a small card.")
     parser.add_argument("--dtype", default="auto", help="half on a card without bfloat16, such as a T4.")
     parser.add_argument(
+        "--max-num-seqs", type=int, default=None,
+        help="Requests run together; fewer leaves room to read their photos on a small card.",
+    )
+    parser.add_argument(
         "--attention-backend", default=None,
         help="TRITON_ATTN on a card FlashInfer has no prebuilt kernels for, such as a T4.",
     )
@@ -90,6 +95,8 @@ def main() -> None:
     from vllm import LLM, SamplingParams
 
     extra = {"attention_backend": args.attention_backend} if args.attention_backend else {}
+    if args.max_num_seqs:
+        extra["max_num_seqs"] = args.max_num_seqs
     llm = LLM(
         **extra,
         model=args.model,
@@ -134,9 +141,15 @@ def main() -> None:
         except Exception as exc:  # noqa: BLE001 - a failed chunk is recorded, the run goes on
             rows = [{"custom_id": r["custom_id"], "text": "", "error": f"{type(exc).__name__}: {exc}"[:500]}
                     for r in chunk]
+            if "EngineDead" in type(exc).__name__:
+                # Every later chunk would fail the same way: stop now, loudly.
+                print(f"the engine died: {exc}", flush=True)
+                os._exit(1)
         with args.out.open("a") as fh:
             fh.writelines(json.dumps(row) + "\n" for row in rows)
         print(f"[{start + len(chunk)}/{len(todo)}] {time.perf_counter() - began:.0f}s", flush=True)
+    # vLLM can leave threads behind that keep the process alive for hours.
+    os._exit(0)
 
 
 if __name__ == "__main__":
