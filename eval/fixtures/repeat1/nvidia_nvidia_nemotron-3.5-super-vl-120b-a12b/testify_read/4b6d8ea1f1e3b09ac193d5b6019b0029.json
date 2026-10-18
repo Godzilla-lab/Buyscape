@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0: a stack of used wooden pallets next to a truck, with one pallet lying flat in the foreground on dirt ground with refuse.",
+      "Photo 1: a similar stack of wooden pallets with a silver car and white SUV in the background and a truck chassis on the left.",
+      "Photo 2: multiple stacks of wooden pallets under a shelter, with oval EPAL-style stamps visible on several pallet blocks.",
+      "Photo 3: a close-up of a weathered wooden pallet side or crate panel with vertical slats and no readable brand."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "wooden pallet",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0",
+        "photo 1",
+        "photo 2",
+        "photo 3"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Wooden",
+        "verdict": "supported",
+        "evidence": "photos 0-3 show timber pallet construction"
+      },
+      {
+        "claim": "foreign",
+        "verdict": "unverifiable_remote",
+        "evidence": "photos cannot confirm country of origin; EPAL-style stamps in photo 2 suggest a European standard but are not proof of origin"
+      },
+      {
+        "claim": "pallets",
+        "verdict": "supported",
+        "evidence": "photos 0-3 show pallets"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "structural condition - broken slats, rot, or insect damage hidden in the stack",
+        "proof": "close-up photos or video of every pallet, especially undersides and block joints",
+        "if_unproven": "priced as damaged or scrap timber"
+      },
+      {
+        "risk": "exact quantity in the lot",
+        "proof": "wide shot showing the full stack with all units countable, or seller video counting them",
+        "if_unproven": "priced per visible pallet only"
+      },
+      {
+        "risk": "missing heat treatment / ISPM 15 stamps affecting reuse or export value",
+        "proof": "close-up of IPPC or HT stamps on pallet blocks",
+        "if_unproven": "priced as untreated wood"
+      },
+      {
+        "risk": "EPAL authenticity if sold as branded foreign pallets",
+        "proof": "clear close-up of EPAL logo stamps",
+        "if_unproven": "priced as generic unbranded wooden pallet"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photos of the EPAL or IPPC stamps on the pallet blocks",
+      "Video showing the full stack and a count of all pallets",
+      "Close-up photos of pallet undersides and block joints to check for breaks or rot"
+    ],
+    "decision": "price",
+    "reason": "The item is clearly a used wooden pallet lot; even with unverified condition, origin, and count, it can be priced at its worst case as seen."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 105624,
+    "input_tokens": 3176,
+    "output_tokens": 3472,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "4b6d8ea1f1e3b09ac193d5b6019b0029",
+    "error": null
+  }
+}
