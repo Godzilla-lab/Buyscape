@@ -121,6 +121,17 @@ example with a twin carrying a planted claim from `train_lies.yaml`, never
 the benchmark's `lies.yaml`. The set lands in `eval/testify/train/`, which
 is never committed: it carries sellers' words.
 
+    python src/buyscape/testify/sft_lora.py --model <Qwen3-VL-8B-Instruct folder> \
+        --data eval/testify/train/sft.jsonl --root . --out adapter/
+    python src/buyscape/testify/sft_lora.py --model <same folder> --merge adapter/ --out merged/
+
+`sft_lora.py` needs only torch, transformers and peft, so it runs as it is on
+a Kaggle pair of T4s. It trains small adapters on the language part with the
+vision part frozen, counts the loss on the answer alone, keeps both twins of
+an advert on the same side of its held-out check, and saves on a time limit.
+The merged folder is a plain model that `vllm_batch.py` answers the dev batch
+with, the same way the untuned model sat it.
+
 ## What the score says
 
 | Number | Meaning |

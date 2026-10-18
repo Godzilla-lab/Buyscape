@@ -110,3 +110,16 @@ def test_a_short_name_must_be_a_whole_word_on_the_photo():
     read = _read(status="named", brand="LG", model="")
     assert train.on_photos(read, ["LG", "Inverter"])
     assert not train.on_photos(read, ["SLG-2201 part"])
+
+
+def test_the_trainer_shrinks_big_photos_and_keeps_both_twins_on_one_side():
+    from buyscape.testify import sft_lora
+
+    big = sft_lora.shrink(Image.new("RGB", (4000, 3000)), 576)
+    assert big.size[0] * big.size[1] <= 576 * sft_lora.PIXELS_PER_TOKEN and abs(big.size[0] / big.size[1] - 4 / 3) < 0.01
+    assert sft_lora.shrink(Image.new("RGB", (320, 240)), 576).size == (320, 240)
+    twins = [{"id": f"a{n}", "variant": v} for n in range(200) for v in ("clean", "lie")]
+    sides = {}
+    for e in twins:
+        sides.setdefault(e["id"], set()).add(sft_lora.held_out(e, 0.05))
+    assert all(len(s) == 1 for s in sides.values()) and 0 < sum(s == {True} for s in sides.values()) < 30
