@@ -1,0 +1,108 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a Dell monitor displaying the Xbox dashboard with game tiles, a black Xbox console covered in stickers, and an Xbox controller in front.",
+      "Photo 1 shows the same monitor displaying soccer gameplay, with the same sticker-covered console and controller.",
+      "Photo 2 shows the monitor displaying the EA SPORTS FC 26 title screen, with the same console and controller.",
+      "The Xbox brand logo is visible on the console front in photos 0 and 2, but the model text (Series S or Series X) is not readable because of stickers and angle.",
+      "No disc drive slot is clearly visible on the console front."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "Xbox console",
+      "brand": "Xbox",
+      "model": null,
+      "read_from": [
+        "photo 0 console logo",
+        "photo 2 dashboard"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Xbox series 1x",
+        "verdict": "unverified",
+        "evidence": "Model text is not readable on the console in any photo; 'Series 1x' is not a standard readable model name."
+      },
+      {
+        "claim": "6 games installed",
+        "verdict": "unverified",
+        "evidence": "Dashboard tiles are visible in photo 0, but the exact number of installed games cannot be confirmed remotely."
+      },
+      {
+        "claim": "Fc 26",
+        "verdict": "supported",
+        "evidence": "Photo 2 monitor clearly shows EA SPORTS FC 26."
+      },
+      {
+        "claim": "far cry 3",
+        "verdict": "unverified",
+        "evidence": "Not legible in the photos."
+      },
+      {
+        "claim": "modern warfare 3",
+        "verdict": "unverified",
+        "evidence": "Not legible in the photos."
+      },
+      {
+        "claim": "dishonored 2",
+        "verdict": "unverified",
+        "evidence": "Not legible in the photos."
+      },
+      {
+        "claim": "tomb...",
+        "verdict": "unverified",
+        "evidence": "Not legible in the photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The console may be an Xbox Series S (digital-only, lower spec) rather than a Series X.",
+        "proof": "Photo of the console system settings 'Console info' screen or the model label on the device.",
+        "if_unproven": "price as Xbox Series S"
+      },
+      {
+        "risk": "The console may not power on or may have hardware faults.",
+        "proof": "Video of the console booting to the dashboard and staying on.",
+        "if_unproven": "price as not working"
+      },
+      {
+        "risk": "The advertised games may not be installed or may not launch.",
+        "proof": "Video of each advertised game launching and running to a menu.",
+        "if_unproven": "price as console with no games"
+      },
+      {
+        "risk": "The controller may not sync or may have faulty buttons, triggers, or sticks.",
+        "proof": "Video of the controller connecting to the console and all inputs being tested.",
+        "if_unproven": "price as console without a working controller"
+      },
+      {
+        "risk": "The console may be banned from Xbox network services.",
+        "proof": "Screenshot of network settings showing online status and no ban.",
+        "if_unproven": "price as offline or banned unit"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the Xbox system settings 'Console info' screen showing the exact model (Series S or Series X)",
+      "Photo of the front of the console showing whether a disc drive slot is present",
+      "Video of the console booting to the dashboard and each advertised game launching",
+      "Video of the controller syncing and all buttons, triggers, and sticks responding"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as an Xbox console, but the exact model and disc-drive status are unreadable due to stickers and angle, and these determine the price; even a worst-case price requires the missing model shot."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 24333,
+    "input_tokens": 2268,
+    "output_tokens": 4344,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "9fc737af54989791977f9a6d5de7d661",
+    "error": null
+  }
+}
