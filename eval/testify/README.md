@@ -105,6 +105,21 @@ first: export again after importing them for the price picks they lead to.
 Batches carry the sellers' photos, so `eval/testify/batches/` is never
 committed.
 
+## The fine-tuning set
+
+    uv run buyscape testify --model kaggle:google/gemini-3-flash-preview --split train --market kano --no-lies --reads-only
+    uv run buyscape testify-train-build
+
+A teacher reads the training pool, priced only against training adverts so
+no benchmark title or price reaches a training prompt. `testify-train-build`
+keeps a read only when it is right about the item (checked against the
+title, which no model sees), turns a known item into a price at its worst
+case, cuts a model name the photo check could not read back to the kind,
+keeps an honest "cannot tell" as a cannot_identify example, and pairs each
+example with a twin carrying a planted claim from `train_lies.yaml`, never
+the benchmark's `lies.yaml`. The set lands in `eval/testify/train/`, which
+is never committed: it carries sellers' words.
+
 ## What the score says
 
 | Number | Meaning |

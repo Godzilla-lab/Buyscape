@@ -90,10 +90,10 @@ def _lies() -> tuple[dict, ...]:
     return tuple(yaml.safe_load(LIES_PATH.read_text()) or ()) or (FALLBACK,)
 
 
-def lie_entry(item: Item) -> dict:
-    """The planted claim written for this kind of item, by the rules in lies.yaml."""
+def lie_entry(item: Item, entries: tuple[dict, ...] | None = None) -> dict:
+    """The planted claim written for this kind of item, by the rules in lies.yaml (or `entries`)."""
     kind = set(comps.words(item.answer.kind or item.answer.identity.text or ""))
-    for entry in _lies():
+    for entry in entries if entries is not None else _lies():
         if entry.get("tier"):
             if item.tier == entry["tier"]:
                 return entry
@@ -116,12 +116,15 @@ def lie_keys(item: Item, planted: str | None = None) -> tuple[str, ...]:
     return tuple(lie_entry(item)["keys"])
 
 
-def reading_request(item: Item, photos: list[Path], variant: str = "clean", max_photos: int = 4) -> ModelRequest:
+def reading_request(
+    item: Item, photos: list[Path], variant: str = "clean", max_photos: int = 4, lie: str | None = None
+) -> ModelRequest:
+    """The read step's request. `lie` replaces the benchmark's planted claim, for training twins."""
     text = hide_prices(redact(item.seller_text or "") or "")
     if item.seller_claims:
         text = (text + "\n" if text else "") + "\n".join(f"- {c}" for c in item.seller_claims)
     if variant == "lie":
-        text = (text + "\n" if text else "") + lie_for(item)
+        text = (text + "\n" if text else "") + (lie or lie_for(item))
     shown = photos[:max_photos]
     lines = [
         f"Market: {item.market}, prices in {item.currency}.",

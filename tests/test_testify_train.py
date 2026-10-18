@@ -1,0 +1,92 @@
+"""The fine-tuning set: only right reads are kept, a known item is priced at
+its worst case, nothing named beyond the photos, and every twin's lie comes
+from the training lies, never the benchmark's."""
+
+import json
+from pathlib import Path
+
+from PIL import Image
+
+from buyscape.testify import train
+from buyscape.testify.run import lie_for
+from buyscape.testify.schema import Answer, Item, PriceTruth
+
+
+def _item(item_id: str, kind: str, title: str) -> Item:
+    return Item(
+        id=item_id, source="jiji", url=f"https://jiji.ng/x/{item_id}.html", split="train", tier="small_goods",
+        market="kano", seller_text="Very clean, no fault",
+        answer=Answer(title=title, kind=kind, price=PriceTruth(ngn=50000, used=True, observed_on="2026-10-17")),
+    )
+
+
+def _read(decision="ask_for_proof", status="by_type", kind="standing fan", **identity):
+    return {
+        "observations": ["a standing fan with three blades"],
+        "identity": {"status": status, "kind": kind, **identity},
+        "claims": [{"claim": "no fault", "verdict": "unverified", "evidence": "no clip of it running"}],
+        "risks": [{"risk": "motor may be weak", "proof": "clip of it running", "if_unproven": "as not working"}],
+        "proof_requests": ["clip of it running"],
+        "decision": decision,
+        "reason": "it may not work",
+    }
+
+
+FAN = _item("f1", "standing fan", "Ox standing fan")
+
+
+def test_a_right_read_becomes_a_price_at_the_worst_case_and_keeps_its_doubts():
+    answer, why = train.target(FAN, _read())
+    assert why == "kept: price at worst case"
+    assert answer.decision == "price" and answer.reason == train.WORST_CASE_REASON
+    assert answer.claims[0].verdict == "unverified" and answer.proof_requests == ["clip of it running"]
+
+
+def test_a_wrong_read_is_dropped_and_an_honest_unknown_is_kept_as_declining():
+    assert train.target(FAN, _read(kind="sewing machine"))[0] is None
+    answer, why = train.target(FAN, _read(status="unknown", kind=None))
+    assert why == "kept: cannot identify" and answer.decision == "cannot_identify"
+
+
+def test_a_model_the_photos_cannot_show_is_cut_back_to_the_kind():
+    named = _read(status="named", brand="Ox", model="SF-16", read_from=["photo 0 label"])
+    answer, _ = train.target(FAN, named, {"identity_from_photos_alone": "by_type"})
+    assert answer.identity.status == "by_type" and answer.identity.brand is None
+    kept, _ = train.target(FAN, named, {"identity_from_photos_alone": "named"})
+    assert kept.identity.brand == "Ox"
+
+
+def test_a_teacher_that_writes_a_price_is_dropped():
+    pricey = _read()
+    pricey["observations"] = ["a standing fan, worth about N25,000"]
+    assert train.target(FAN, pricey) == (None, "teacher wrote a price")
+
+
+def test_a_twin_lists_the_lie_as_unproven_and_changes_nothing_else():
+    answer, _ = train.target(FAN, _read())
+    lied = train.twin(answer, "Bought new last month")
+    assert lied.decision == answer.decision and lied.identity == answer.identity
+    assert lied.claims[-1].claim == "Bought new last month" and lied.claims[-1].verdict == "unverified"
+
+
+def test_training_lies_never_repeat_the_benchmark_and_are_stable():
+    lie = train.train_lie(FAN)
+    assert lie != lie_for(FAN) and lie == train.train_lie(FAN)
+    benchmark = (Path(train.TRAIN_LIES).parent / "lies.yaml").read_text()
+    for entry in train._train_lies():
+        for line in entry["lies"]:
+            assert line not in benchmark
+
+
+def test_build_writes_the_exact_prompt_with_photo_paths_and_a_twin(tmp_path: Path):
+    photo = tmp_path / "eval" / "raw" / "testify_train" / "media" / "f1" / "00.jpg"
+    photo.parent.mkdir(parents=True)
+    Image.new("RGB", (32, 24), "blue").save(photo)
+    rows = [{"id": "f1", "variant": "clean", "reading": _read()}]
+    examples, tally = train.build([(FAN, [photo])], rows, {}, tmp_path)
+    assert tally == {"kept: price at worst case": 1} and [e["variant"] for e in examples] == ["clean", "lie"]
+    system, user, said = examples[1]["messages"]
+    assert "JSON Schema" in system["content"] and "Ox standing fan" not in json.dumps(examples)
+    assert {"type": "image", "image": "eval/raw/testify_train/media/f1/00.jpg"} in user["content"]
+    assert train.train_lie(FAN) in user["content"][0]["text"]
+    assert json.loads(said["content"])["claims"][-1]["claim"] == train.train_lie(FAN)

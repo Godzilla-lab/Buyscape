@@ -76,21 +76,25 @@ def content(request: ModelRequest) -> list[dict]:
     return parts
 
 
+def system_text(request: ModelRequest) -> str:
+    """The system turn: the task's instructions, then the answer's JSON Schema."""
+    schema = request.output_schema.model_json_schema()
+    return (
+        f"{request.system}\n\n"
+        "Reply with a single JSON object and nothing else. It must validate "
+        f"against this JSON Schema:\n{json.dumps(schema)}"
+    )
+
+
 def chat_body(request: ModelRequest) -> dict:
     """The chat request every OpenAI-style server is sent, less the model name.
 
     A batch run on someone's own GPU is sent the same body, so a model scores
     the same wherever it runs.
     """
-    schema = request.output_schema.model_json_schema()
-    system = (
-        f"{request.system}\n\n"
-        "Reply with a single JSON object and nothing else. It must validate "
-        f"against this JSON Schema:\n{json.dumps(schema)}"
-    )
     return {
         "messages": [
-            {"role": "system", "content": system},
+            {"role": "system", "content": system_text(request)},
             {"role": "user", "content": content(request)},
         ],
         "max_tokens": request.max_tokens,

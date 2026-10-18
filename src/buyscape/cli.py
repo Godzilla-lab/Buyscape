@@ -697,10 +697,16 @@ def testify_run(
         "", help="A second run of the same model, such as repeat1: recorded and written apart, to measure run noise."
     ),
     fixtures: Path = typer.Option(Path("eval/fixtures")),
+    reads_only: bool = typer.Option(
+        False, help="The read step only, no price pick: a teacher's reads for the training set."
+    ),
 ) -> None:
-    """Score a model on Testify: checked items only, title and price never shown."""
-    from .testify import comparables, label
-    from .testify.convert import load_items
+    """Score a model on Testify: checked items only, title and price never shown.
+
+    --split train answers the training pool instead, priced only against
+    training adverts, for a teacher's reads; it is never a score.
+    """
+    from .testify import label
     from .testify.run import run_item
     from .testify.score import score
 
@@ -712,12 +718,12 @@ def testify_run(
     if not os.environ.get("GOOGLE_API_KEY") and os.environ.get("GEMINI_API_KEY"):
         os.environ["GOOGLE_API_KEY"] = os.environ["GEMINI_API_KEY"]
     provider = _provider(model, fixtures / tag if tag else fixtures, mode)
-    everything = load_items(ROOT / "eval" / "testify" / "items.jsonl")
-    hashes = comparables.photo_hashes(everything, ROOT)
-    pool = comparables.build_pool(everything, hashes)
+    everything, pool, hashes = _testify_pool(split)
+    if reads_only:
+        pool = []  # no comparables, so no price pick is asked for
     chosen = [
         i for i in everything
-        if i.split == split and not i.exclude and (i.ai_label or i.review)
+        if i.split == split and not i.exclude and (split == "train" or i.ai_label or i.review)
         and (not market or i.market == market)
     ]
     out_dir = ROOT / "eval" / "testify" / "runs" / _dir_name(model)
@@ -765,17 +771,33 @@ def testify_run(
         }) + "\n")
 
 
-def _testify_cases(split: str, market: str):
-    """Checked, scored items with photos here, and the comparables pool, for one split and city."""
-    from .testify import comparables, label
+def _testify_pool(split: str):
+    """The items a split draws on, the comparables they are priced against, and photo hashes.
+
+    Training items are priced only against training adverts: a benchmark
+    advert's title and asking price inside a training prompt would teach the
+    benchmark's answers.
+    """
+    from .testify import comparables
     from .testify.convert import load_items
 
-    everything = load_items(ROOT / "eval" / "testify" / "items.jsonl")
-    hashes = comparables.photo_hashes(everything, ROOT)
-    pool = comparables.build_pool(everything, hashes)
+    if split == "train":
+        items = load_items(ROOT / "eval" / "testify" / "train_pool.jsonl")
+        hashes = comparables.photo_hashes(items, ROOT, cache=ROOT / "eval" / "testify" / "train_photo_hashes.json")
+    else:
+        items = load_items(ROOT / "eval" / "testify" / "items.jsonl")
+        hashes = comparables.photo_hashes(items, ROOT)
+    return items, comparables.build_pool(items, hashes), hashes
+
+
+def _testify_cases(split: str, market: str):
+    """Checked, scored items with photos here, and the comparables pool, for one split and city."""
+    from .testify import label
+
+    everything, pool, hashes = _testify_pool(split)
     cases = []
     for item in everything:
-        if item.split != split or item.exclude or not (item.ai_label or item.review):
+        if item.split != split or item.exclude or not (split == "train" or item.ai_label or item.review):
             continue
         if market and item.market != market:
             continue
@@ -867,6 +889,40 @@ def testify_batch_import(
 
 def _batch_path(name: str, split: str, market: str, tag: str) -> Path:
     return ROOT / "eval" / "testify" / "batches" / name / f"{split}{'_' + market if market else ''}{'.' + tag if tag else ''}.jsonl"
+
+
+@app.command("testify-train-build")
+def testify_train_build(
+    teacher: str = typer.Option("kaggle:google/gemini-3-flash-preview", help="The model whose reads are the targets."),
+    market: str = typer.Option("", help="Only training items from this city. Empty for all."),
+    out: Path = typer.Option(None, help="Defaults to eval/testify/train/sft.jsonl, which is never committed."),
+) -> None:
+    """Build the fine-tuning set from a teacher's reads of the training pool.
+
+    Run the teacher first: testify --model <teacher> --split train --no-lies
+    --reads-only. Only reads right about the item are kept, a known item is
+    priced at its worst case, and each example gets a lied-to twin.
+    """
+    from collections import Counter
+
+    from .testify import train
+
+    out = out or ROOT / "eval" / "testify" / "train" / "sft.jsonl"
+    cases, _ = _testify_cases("train", market)
+    runs = ROOT / "eval" / "testify" / "runs" / _dir_name(teacher)
+    rows = [json.loads(line) for path in sorted(runs.glob("train*.jsonl")) if ".repeat" not in path.name
+            for line in path.read_text().splitlines() if line.strip()]
+    labels_path = ROOT / "eval" / "testify" / "labels_ai" / "gemini-3.5-flash-lite.jsonl"
+    labels = {}
+    if labels_path.exists():
+        labels = {json.loads(line)["id"]: json.loads(line) for line in labels_path.read_text().splitlines() if line}
+    examples, tally = train.build([(item, photos) for item, photos, _ in cases], rows, labels, ROOT)
+    train.write(examples, out)
+    console.print(f"{len(examples)} examples from {len(examples) // 2} items written to {out}")
+    for why, n in sorted(tally.items(), key=lambda kv: -kv[1]):
+        console.print(f"  {n:5d}  {why}")
+    for city, n in sorted(Counter(e["market"] for e in examples if e["variant"] == "clean").items()):
+        console.print(f"  {n:5d}  items from {city}")
 
 
 def _sitting_dir(name: str, split: str, market: str, tag: str) -> Path:

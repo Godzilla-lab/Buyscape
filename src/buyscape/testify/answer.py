@@ -131,12 +131,14 @@ def violations(answer: InspectionAnswer, comparables: int) -> list[str]:
     found: list[str] = []
     if answer.price_pick and answer.price_pick.high >= comparables:
         found.append(f"picked comparable {answer.price_pick.high}, but only {comparables} were given")
+    return found + money_written(answer)
+
+
+def money_written(answer: Reading) -> list[str]:
+    """Every free-text line that writes a price, which only retrieval may do."""
     texts = [answer.reason, *answer.observations, *answer.proof_requests]
     texts += [c.evidence for c in answer.claims] + [r.if_unproven for r in answer.risks]
-    for text in texts:
-        if _MONEY.search(text or ""):
-            found.append(f"wrote a price, which only retrieval may do: {text!r}")
-    return found
+    return [f"wrote a price, which only retrieval may do: {text!r}" for text in texts if _MONEY.search(text or "")]
 
 
 def parse(raw: str, comparables: int) -> tuple[InspectionAnswer | None, list[str]]:
