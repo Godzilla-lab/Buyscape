@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "White chest freezer with lid closed and handle latch visible",
+      "Front sticker reads \"3 YEARS\" and \"120 HOURS COOLING RETENTION\" with icons and a thumbs-up mark",
+      "Small control or switch plate on lower front right",
+      "Concrete floor and plain wall background",
+      "Watermark \"POSTED ON JIJI KICKS\" across the image"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "chest freezer",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "250-liter Capacity",
+        "verdict": "unverified",
+        "evidence": "No capacity label or model plate visible in photo 0"
+      },
+      {
+        "claim": "Low Voltage Operation",
+        "verdict": "unverifiable_remote",
+        "evidence": "Electrical rating not visible in photo 0"
+      },
+      {
+        "claim": "120 Hours Cooling Retention",
+        "verdict": "supported",
+        "evidence": "Photo 0 sticker reads \"120 HOURS COOLING RETENTION\""
+      },
+      {
+        "claim": "In working condition",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows exterior only; no power-on test shown"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Freezer does not work or compressor is faulty",
+        "proof": "Video of the unit running with compressor on and interior cooling",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Actual capacity is not 250 liters",
+        "proof": "Photo of the capacity/model specification plate",
+        "if_unproven": "as unverified smaller capacity"
+      },
+      {
+        "risk": "Does not operate on low voltage",
+        "proof": "Photo of the electrical rating plate showing voltage range",
+        "if_unproven": "as standard voltage only"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the capacity/model specification plate",
+      "Video of the freezer running with the lid open showing cooling",
+      "Photo of the electrical rating plate"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a chest freezer from photo 0; the cooling retention claim is supported by the sticker, but working condition and capacity are unproven so it is priced at worst case as non-working."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 37226,
+    "input_tokens": 2047,
+    "output_tokens": 2935,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "74f87038ff165bfbfcb29489bf7a2850",
+    "error": null
+  }
+}
