@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows two photovoltaic solar panels standing upright outdoors with silver aluminum frames.",
+      "The panels have dark cells with white grid lines and appear to be stacked or leaning against a wall.",
+      "A watermark reading \"IZUTECH SOLAR ENERGY\" is visible across the panels in photo 0.",
+      "No specification label, model number, wattage, or electrical rating is readable in the photo.",
+      "The rear of the panels, junction boxes, connectors, and cell surfaces are not visible in detail."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panels",
+      "brand": "Izutech",
+      "model": null,
+      "read_from": [
+        "photo 0 watermark"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Seller specializes in solar equipment such as inverters, panels, charge controllers",
+        "verdict": "unverifiable_remote",
+        "evidence": "Seller's text only; photo shows panels but cannot verify business specialization or other stock."
+      },
+      {
+        "claim": "Items are solar panels",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows two framed photovoltaic panels."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Panels may not produce electrical power or may have dead cells",
+        "proof": "Video of panels connected to a charge controller or inverter showing measurable output under daylight",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Cell damage such as microcracks, hot spots, or delamination not visible at this distance",
+        "proof": "Close-up photos of the cell surfaces in direct sunlight",
+        "if_unproven": "as physically damaged"
+      },
+      {
+        "risk": "Wattage and electrical specifications unknown; no spec plate visible",
+        "proof": "Photo of the specification label on the back of a panel",
+        "if_unproven": "at the lowest wattage for this physical size"
+      },
+      {
+        "risk": "Frame, junction box, and connector condition unknown",
+        "proof": "Photos of panel edges, rear junction box, and MC4 connectors",
+        "if_unproven": "as worn or weathered"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the specification label on the back of the panel",
+      "Video showing the panel connected and producing power",
+      "Close-up photos of the solar cell surfaces",
+      "Photos of the junction box and cable connectors"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as solar panels from photo 0 and can be priced at its worst case even though functionality and specifications are unproven."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 12772,
+    "input_tokens": 1590,
+    "output_tokens": 1611,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "e9cd18026dfadbc16a2db30c0d40bacf",
+    "error": null
+  }
+}
