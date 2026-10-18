@@ -1,0 +1,67 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0 shows a single large rectangular solar panel with a grid of dark photovoltaic cells and a metal frame.",
+      "No visible brand/model label, watt rating, serial number, or sticker is readable in the photo.",
+      "No inverter, battery, charge controller, mounting hardware, or wiring is shown."
+    ],
+    "identity": {
+      "status": "unknown",
+      "kind": "solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Contact us for ur Solar Energy Solution...",
+        "verdict": "unverifiable_remote",
+        "evidence": "Seller text only; photo shows only a solar panel, but no system components or solution details."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Panel wattage (power rating) is unknown; price depends heavily on Wp (e.g., 100W vs 550W).",
+        "proof": "A clear close-up photo of the panel\u2019s label/sticker showing Wp rating, model, and serial number (usually on the back or edge frame).",
+        "if_unproven": "Price as the lowest plausible value for a used generic panel of unknown rating (worst-case: treat as low-power and not guaranteed)."
+      },
+      {
+        "risk": "Condition/health is unknown (possible cracks, micro-cracks, delamination, or reduced output).",
+        "proof": "Photos of the panel surface from multiple angles plus a working test: IV curve or at least a power output reading under sun/with a tester.",
+        "if_unproven": "Price as not proven/possibly degraded (worst-case: treat as reduced output)."
+      },
+      {
+        "risk": "Compatibility and completeness are unknown (panel may be sold alone; buyer may need controller/inverter/battery).",
+        "proof": "Confirm exactly what is included in the sale (panel only vs full solar kit) with a photo of all items and quantities.",
+        "if_unproven": "Price as panel-only (no inverter/battery/controller included)."
+      },
+      {
+        "risk": "Electrical safety/connection integrity is unknown (junction box condition, cable condition, connectors).",
+        "proof": "Close-up photo of the junction box and connectors/cables; show any damage and confirm polarity/MC4 type.",
+        "if_unproven": "Price as requiring inspection/possible replacement of cables/connectors (worst-case: treat as needing minor repairs)."
+      }
+    ],
+    "proof_requests": [
+      "Clear close-up of the panel label showing brand, model, serial number, and watt rating (Wp).",
+      "Photos of the back/edge frame and junction box (including cable/connector type).",
+      "A test result showing actual output (or IV curve) and whether it was recently used/installed."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo confirms a solar panel exists, but the key pricing driver (brand/model and watt rating) is not readable, so a worst-case price cannot be set confidently without the label details."
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_read",
+    "latency_ms": 4436,
+    "input_tokens": 1899,
+    "output_tokens": 681,
+    "cost_usd": 0.001231,
+    "replayed": false,
+    "fixture_key": "14dc08070d5d8b6131a1e3966483526a",
+    "error": null
+  }
+}

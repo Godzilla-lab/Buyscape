@@ -1,0 +1,90 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo shows a white chest freezer with a metal lid and latch.",
+      "A label on the front reads \u201c120 HOURS COOLING RETENTION\u201d.",
+      "A capacity label appears to indicate \u201c250\u201d (liters) on the front sticker, but the full text is not fully clear.",
+      "No clear brand/model name is readable from the photo.",
+      "No power-on display is shown; only the exterior is visible."
+    ],
+    "identity": {
+      "status": "unknown",
+      "kind": "chest freezer (upright-lid freezer)",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "250-liter Capacity",
+        "verdict": "unverified",
+        "evidence": "Front sticker appears to show 250, but the full capacity text is not fully legible in photo 0."
+      },
+      {
+        "claim": "Low Voltage Operation",
+        "verdict": "unverifiable_remote",
+        "evidence": "No clear \u201clow voltage\u201d specification is readable on photo 0."
+      },
+      {
+        "claim": "120 Hours Cooling Retention",
+        "verdict": "supported",
+        "evidence": "Photo 0 front label clearly shows \u201c120 HOURS COOLING RETENTION\u201d."
+      },
+      {
+        "claim": "In working condition",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows the freezer exterior only; no running/temperature proof is shown."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Not actually working (compressor/thermostat/fan issues) despite the claim.",
+        "proof": "Ask for a short video of it switched on showing the compressor running and the temperature dropping (or a thermometer reading inside after 30\u201360 minutes).",
+        "if_unproven": "Price as not working / needs servicing."
+      },
+      {
+        "risk": "Cooling retention claim may be marketing; actual performance may be poor due to insulation damage or refrigerant leak.",
+        "proof": "Ask for a temperature hold test: measure internal temperature at start, then show it after 4\u20136 hours with lid closed (video + thermometer).",
+        "if_unproven": "Price as unknown performance (worst case: reduced cooling)."
+      },
+      {
+        "risk": "Capacity may not be truly 250L (label unclear) or may be different model variant.",
+        "proof": "Ask for a clear close-up photo of the rating plate/spec label showing capacity and model number.",
+        "if_unproven": "Price as a generic chest freezer with uncertain capacity."
+      },
+      {
+        "risk": "Electrical compatibility/low-voltage suitability may be incorrect (wrong voltage rating).",
+        "proof": "Ask for a clear photo of the electrical rating plate (voltage range/Hz) and a photo of the plug type.",
+        "if_unproven": "Price as standard-voltage only (assume not guaranteed for low voltage)."
+      },
+      {
+        "risk": "Physical condition issues not visible (dents, rust, damaged gasket causing air leaks).",
+        "proof": "Ask for close-up photos of the lid gasket all around and the corners/hinge/latch area.",
+        "if_unproven": "Price as having possible wear (worst case: gasket not sealing well)."
+      }
+    ],
+    "proof_requests": [
+      "Video of the freezer running (compressor sound/indicator) plus an internal thermometer reading after 30\u201360 minutes.",
+      "Close-up clear photo of the rating plate/spec label showing brand, model, voltage, and exact capacity.",
+      "Photos of the lid gasket (all around) and latch/hinge area.",
+      "Temperature hold test evidence (lid closed) with thermometer readings after several hours."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo supports only the \u201c120 hours cooling retention\u201d label, but the key pricing drivers\u2014working status, exact capacity, voltage suitability, and real cooling performance\u2014are not proven remotely from the single exterior photo."
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_read",
+    "latency_ms": 6381,
+    "input_tokens": 2148,
+    "output_tokens": 891,
+    "cost_usd": 0.001543,
+    "replayed": false,
+    "fixture_key": "74f87038ff165bfbfcb29489bf7a2850",
+    "error": null
+  }
+}

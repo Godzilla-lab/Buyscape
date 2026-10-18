@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo shows multiple car tyres stacked/arranged vertically.",
+      "Tread pattern looks like winter/all-season style with many sipes; sidewall text is not clearly readable.",
+      "No tyre size (e.g., 195/65R15) is readable from the photo.",
+      "No clear brand/model name is readable from the photo.",
+      "No visible damage close-up (cuts/bulges) is clearly shown, but the photo is not a full inspection view."
+    ],
+    "identity": {
+      "status": "unknown",
+      "kind": null,
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Tokunbo tyre available",
+        "verdict": "unverified",
+        "evidence": "The photo shows tyres but does not show import/production proof (e.g., DOT/age, brand/size, or any documentation)."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Tyre size is unknown; price depends heavily on exact size (width/aspect/rim).",
+        "proof": "A clear photo of the tyre sidewall showing the full size text (e.g., 195/65R15) for at least one tyre.",
+        "if_unproven": "Priced at the worst case for unknown size/fit: treat as generic used tyres with size not confirmed."
+      },
+      {
+        "risk": "Brand/model is unknown; different brands and tread quality change value.",
+        "proof": "A clear close-up photo of the sidewall where the brand name is readable.",
+        "if_unproven": "Priced as generic used tyres (no brand premium)."
+      },
+      {
+        "risk": "Condition/remaining tread depth is not measurable from this image; tyres may be near-worn-out.",
+        "proof": "A close-up photo of tread depth area plus a measurement (tread depth gauge reading) or a photo showing wear bars clearly.",
+        "if_unproven": "Priced as worn/low tread (worst case)."
+      },
+      {
+        "risk": "Age (DOT week/year) is not readable; old tyres can be unsafe even if tread looks okay.",
+        "proof": "A clear photo of the DOT code on the sidewall (week/year).",
+        "if_unproven": "Priced as older used tyres (worst case for age)."
+      },
+      {
+        "risk": "Damage/repairs (cuts, punctures, sidewall bulges) are not confirmed.",
+        "proof": "Close-up photos of each tyre\u2019s sidewall and tread for any cuts, patches, or bulges (front and both sides).",
+        "if_unproven": "Priced as tyres with unverified integrity (worst case: assume may need replacement)."
+      }
+    ],
+    "proof_requests": [
+      "Send a clear sidewall close-up showing the full tyre size (e.g., 195/65R15) for the exact tyres being sold.",
+      "Send a clear sidewall close-up showing brand/model name.",
+      "Send a clear DOT code photo (week/year).",
+      "Send tread wear bar visibility or tread depth measurement for at least one tyre (and ideally all sizes/sets).",
+      "Send close-ups of sidewalls and tread for any cuts, punctures, patches, or bulges."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo confirms tyres exist, but the key details needed to price in Oyo (exact size, brand/model, DOT/age, and tread condition) are not readable. Without those, any price would be unreliable."
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_read",
+    "latency_ms": 5854,
+    "input_tokens": 2184,
+    "output_tokens": 796,
+    "cost_usd": 0.00359,
+    "replayed": false,
+    "fixture_key": "d4eb81d0ad7d06a1b2a3e430382d2e26",
+    "error": null
+  }
+}
