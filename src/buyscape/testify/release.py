@@ -107,6 +107,8 @@ def baselines(runs: Path) -> list[dict]:
 
     A run still in progress, or one whose calls mostly failed (a used-up
     quota, a server down), is left out rather than published as a score.
+    Answers the model gave in the wrong shape ("broke_schema") are its own
+    result and do not hold a run back.
     """
     out = []
     for summary in sorted(runs.glob("*/dev*.summary.json")):

@@ -21,14 +21,14 @@ seller's lie can push up.** Testify is the public test that proves it.
 
 From `testify-baseline-3.md`, on the 231 dev items:
 
-| | Nemotron 3.5 Super VL | Gemini 3 Flash | Qwen3-VL 8B, untuned |
-|---|---|---|---|
-| Gave a price | 40% | 19% | 0% |
-| Silent wrong | 3 (1.3%) | 2 (0.9%) | 0 |
-| Identity accuracy | 85% | 82% | 74% |
-| Named a model the photos do not show | 6% | 25% | 26% |
-| Same decision when asked twice | 79% | 93% | 100% |
-| Quoted above the asking price | 26% of its prices | 27% of its prices | no prices |
+| | Nemotron 3.5 Super VL | Gemini 3 Flash | Qwen3-VL 8B, untuned | GPT-5.4 nano |
+|---|---|---|---|---|
+| Gave a price | 40% | 19% | 0% | 0% |
+| Silent wrong | 3 (1.3%) | 2 (0.9%) | 0 | 0 |
+| Identity accuracy | 85% | 82% | 74% | 88% |
+| Named a model the photos do not show | 6% | 25% | 26% | 19% |
+| Same decision when asked twice | 79% | 93% | 100% | 100% |
+| Quoted above the asking price | 26% of its prices | 27% of its prices | no prices | no prices |
 
 In plain words:
 
@@ -40,9 +40,11 @@ In plain words:
   182,000 naira became 182,000 flat once the seller "said" the shutter count
   was under 5,000.
 - Both quote above the seller's own asking price about a quarter of the time.
+- GPT-5.4 nano names the item right most often (88%), then refuses to price
+  anything, and a fifth of its answers break the format.
 
-GPT-5.4 nano and Claude Sonnet 5 are being run now. When they finish, each
-line below is set against the best of all of them, not just these two.
+Claude Sonnet 5 is still to run. When it finishes, each line below is set
+against the best of all of them.
 
 ## The scorecard the fine-tuned 8B must pass
 
@@ -52,7 +54,7 @@ On the same 231 dev items, the same prompts, the same comparables:
 |---|---|---|
 | Silent wrong | at most 2 of 231 (0.9%) | Gemini's 0.9%, Nemotron's 1.3% |
 | Gave a price | at least 40% | twice Gemini's 19% |
-| Identity accuracy | at least 82% | Gemini |
+| Identity accuracy | at least 85% | Nemotron; nano's 88% is on the few it named |
 | Named a model the photos do not show | under 6% | Nemotron's 6%, Gemini's 25% |
 | Same decision when asked twice | at least 93% | Gemini |
 | A lie raised the price | **0, on every item** | Gemini, which a lie moved |

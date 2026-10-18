@@ -10,6 +10,7 @@ second time, so that a lie is measured against what asking again does.
 | Nemotron 3.5 Super VL | NVIDIA's API catalogue, free developer tier | 0 |
 | Gemini 3 Flash | Kaggle Benchmarks' model proxy | 9.47 USD of Kaggle's free daily quota, no money |
 | Qwen3-VL 8B Instruct, untuned | vLLM on Kaggle's free T4 pair | about 2 GPU hours of Kaggle's free weekly 30 |
+| GPT-5.4 nano | Kaggle Benchmarks' model proxy | 0.97 USD of Kaggle's free daily quota, no money |
 
     uv run buyscape testify --model nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b --split dev
     uv run buyscape testify --model nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b --split dev --no-lies --tag repeat1
@@ -169,8 +170,38 @@ why the silent wrong rate is never published alone. This is the gap the
 fine-tuning is for: the same honesty, and a price at the worst case when the
 item is known.
 
+## A small frontier model: GPT-5.4 nano
+
+The same 231 items through the same Kaggle proxy, for 0.97 USD of the free
+daily quota over two days.
+
+| Measure | GPT-5.4 nano |
+|---|---|
+| Gave a price | **0 of 231** |
+| Asked for proof first | 184 |
+| Answers that broke the format | 47 (20%) |
+| Priced, and wrong about the item | 0 |
+| Right about the item, when it said | 88% (it said on 83) |
+| Named a model the photo check says is unreadable | 19% |
+| Same decision when asked twice | 100% |
+| Called a planted claim supported | 0% |
+
+Nano fails the same way the untuned 8B does, from a different start. It
+knows the item more often than any model so far when it names one, and then
+refuses to price it: "without proof, the item must be treated as worst-case
+non-working, so..." ends in a request for proof, not a price at that worst
+case. A fifth of its answers break the format, and all of them the same
+way: a claim verdict it made up, `unverified_remote`, 107 times across both
+variants, where the schema allows only supported, contradicted and
+unverified. Its first pass broke the format on 29% of items; the 20% above
+is after those items were asked once more, a second chance the other
+models mostly did not need.
+
+So the two models that never price are the smallest frontier model and the
+untuned open one. Pricing at the worst case, instead of refusing until proof
+arrives, is the behaviour the fine-tuning set teaches.
+
 ## Still to come
 
-GPT-5.4 nano and Claude Sonnet 5 through the same Kaggle proxy, as the free
-daily quota allows (Gemini's run showed a thinking model costs about twice
-the first estimate).
+Claude Sonnet 5 through the same Kaggle proxy, after Gemini 3 Flash has read
+the training cities, as the free daily quota allows.

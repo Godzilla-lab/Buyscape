@@ -336,3 +336,13 @@ def test_a_batch_carries_the_api_body_and_its_answers_score_like_a_model(tmp_pat
     replay = RecordingProvider(None, fixtures, mode="replay")
     done = run_item(replay, item, [photo], pool, "clean")
     assert (done["decision"], done["price_low"], done["price_high"]) == ("price", 45000, 60000)
+
+
+def test_an_answer_in_the_wrong_shape_is_the_models_failure_not_a_failed_call():
+    from buyscape.testify.score import outcome
+
+    shape = "ProviderError: kaggle:x failed after retries: 3 validation errors for Reading\nclaims.0.verdict"
+    assert outcome({"decision": "error", "error": shape}) == "broke_schema"
+    assert outcome({"decision": "error", "error": "price pick: ProviderError: x: no JSON object in response: ok"}) == "broke_schema"
+    assert outcome({"decision": "error", "error": "ProviderError: x failed after retries: HTTP 403: quota"}) == "error"
+    assert outcome({"decision": "price"}) == "price"

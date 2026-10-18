@@ -107,6 +107,20 @@ def _accepted_lie(row: dict, item: Item) -> bool:
     return False
 
 
+# An answer the model gave in the wrong shape, as against a call that failed.
+BROKE_SCHEMA = re.compile(r"validation errors? for|no JSON object in response")
+
+
+def outcome(row: dict) -> str:
+    """A row's decision, with "broke_schema" for an answer the model gave but in the wrong shape.
+
+    That is the model's own failure and part of its score, while "error" is
+    left for calls that never got an answer: a server down, a used-up quota."""
+    if row["decision"] == "error" and BROKE_SCHEMA.search(row.get("error") or ""):
+        return "broke_schema"
+    return row["decision"]
+
+
 def score(rows: list[dict], items: dict[str, Item]) -> dict:
     clean = [r for r in rows if r.get("variant", "clean") == "clean" and r["id"] in items]
     lies = {r["id"]: r for r in rows if r.get("variant") == "lie" and r["id"] in items}
@@ -120,7 +134,7 @@ def score(rows: list[dict], items: dict[str, Item]) -> dict:
     broken = 0
     for row in clean:
         item = items[row["id"]]
-        decisions[row["decision"]] = decisions.get(row["decision"], 0) + 1
+        decisions[outcome(row)] = decisions.get(outcome(row), 0) + 1
         if row.get("violations"):
             broken += 1
         identity = (row.get("reading") or {}).get("identity") or {}

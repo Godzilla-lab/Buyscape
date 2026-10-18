@@ -136,19 +136,19 @@ reviewed risk labels.
 
 On all 231 `dev` items, from Lagos, Abuja, Rivers and Oyo. Each model
 answered the honest advert twice and the lied-to advert once, at no cost:
-Nemotron on NVIDIA's free tier, Gemini 3 Flash on Kaggle Benchmarks' free
-quota, Qwen3-VL 8B through vLLM on Kaggle's free GPUs.
+Nemotron on NVIDIA's free tier, Gemini 3 Flash and GPT-5.4 nano on Kaggle
+Benchmarks' free quota, Qwen3-VL 8B through vLLM on Kaggle's free GPUs.
 
-| | Nemotron 3.5 Super VL | Gemini 3 Flash | Qwen3-VL 8B, untuned |
-|---|---|---|---|
-| Gave a price | 40% | 19% | 0% |
-| Silent wrong | 3 (1.3%) | 2 (0.9%) | 0 |
-| Identity accuracy | 85% | 82% | 74% |
-| Named a model the photos do not show | 6% | 25% | 26% |
-| Same decision when asked twice | 79% | 93% | 100% |
-| Quoted above the asking price | 26% of its prices | 27% of its prices | no prices |
-| Refusal turned into a price: honest repeat / lie | 8 of 15 / 5 of 15 | 3 of 110 / 8 of 110 | 0 of 227 / 0 of 224 |
-| Price raised: honest repeat / lie | 10 of 75 / 9 of 76 | 1 of 36 / 4 of 30 | no prices |
+| | Nemotron 3.5 Super VL | Gemini 3 Flash | Qwen3-VL 8B, untuned | GPT-5.4 nano |
+|---|---|---|---|---|
+| Gave a price | 40% | 19% | 0% | 0% |
+| Silent wrong | 3 (1.3%) | 2 (0.9%) | 0 | 0 |
+| Identity accuracy | 85% | 82% | 74% | 88% |
+| Named a model the photos do not show | 6% | 25% | 26% | 19% |
+| Same decision when asked twice | 79% | 93% | 100% | 100% |
+| Quoted above the asking price | 26% of its prices | 27% of its prices | no prices | no prices |
+| Refusal turned into a price: honest repeat / lie | 8 of 15 / 5 of 15 | 3 of 110 / 8 of 110 | 0 of 227 / 0 of 224 | 0 of 161 / 0 of 142 |
+| Price raised: honest repeat / lie | 10 of 75 / 9 of 76 | 1 of 36 / 4 of 30 | no prices | no prices |
 
 Gemini is stable, and against its small noise a planted claim shows: a
 Canon 600D's range of 50,000 to 182,000 naira became 182,000 once the seller
@@ -163,6 +163,11 @@ The untuned Qwen3-VL 8B, the open model the fine-tuning starts from, asked
 for proof on every advert: it reads "price an unproven claim at its worst
 case" as "do not price without proof". It is never silently wrong and never
 useful, which is why the silent wrong rate is never read alone.
+
+GPT-5.4 nano fails the same way: it names the item right more often than any
+other model here (88% when it names one) and then asks for proof instead of
+pricing at the worst case, on every advert it answered in the right shape. A fifth of its answers break the
+format with a claim verdict it made up, `unverified_remote`.
 
 On the 75 Lagos items only, Claude also sat the test as helper agents each
 seeing a handful of case folders, not as one call per item: 13% priced, 1

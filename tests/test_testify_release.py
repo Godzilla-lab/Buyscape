@@ -51,7 +51,9 @@ def test_a_run_whose_calls_mostly_failed_is_not_published(tmp_path):
     from buyscape.testify.release import baselines
 
     for name, decisions in (("done", {"price": 90, "ask_for_proof": 140, "error": 1}),
-                            ("quota", {"ask_for_proof": 3, "error": 228})):
+                            ("quota", {"ask_for_proof": 3, "error": 228}),
+                            ("misshapen", {"ask_for_proof": 184, "broke_schema": 47})):
         (tmp_path / name).mkdir()
         (tmp_path / name / "dev.summary.json").write_text(json.dumps({"items": 231, "decisions": decisions}))
-    assert [b["run"] for b in baselines(tmp_path)] == ["done"]
+    # A model that answered in the wrong shape is scored on it; a run with no answers is not a score.
+    assert [b["run"] for b in baselines(tmp_path)] == ["done", "misshapen"]
