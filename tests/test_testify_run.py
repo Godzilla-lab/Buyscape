@@ -185,6 +185,21 @@ def test_an_ibc_is_the_plastic_water_tank_the_market_sells_it_as():
     assert not kind_matches("steel tank", item=tank)
 
 
+def test_the_market_names_for_a_kind_match_its_label():
+    keyboard = _item("k", "keyboard instrument", "Yamaha Keyboard PSR E413", 400000)
+    assert kind_matches("electronic keyboard", item=keyboard)
+    assert not kind_matches("computer keyboard", item=keyboard)
+    iron = _item("i", "pressing iron", "Big Industrial Iron Steaming", 65000)
+    assert kind_matches("steam iron", item=iron)
+    assert not kind_matches("golf iron", item=iron)
+
+
+def test_extras_joined_by_a_plus_are_not_the_plus_tier():
+    console = _item("c", "game console", "Standard Ps4+10games", 199999)
+    said = {"status": "named", "brand": "Sony", "model": "PS4", "kind": "home game console"}
+    assert identity_correct(console, said) is True
+
+
 def test_a_spaced_plus_is_an_accessory_not_the_plus_tier():
     camera = _item("c", "camera", "Nikon Camera D3300 + 18-55mm Lens", 380000)
     assert identity_correct(camera, {"status": "named", "brand": "Nikon", "model": "D3300", "kind": "camera"})

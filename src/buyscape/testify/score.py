@@ -13,6 +13,7 @@ not scored until those exist.
 
 from __future__ import annotations
 
+import re
 from statistics import median
 
 from ..evalset.score import GENERIC_WORDS, _norm, model_matches
@@ -21,9 +22,16 @@ from .run import lie_keys
 from .schema import Item
 
 
-# Names the market gives a kind the labels word another way. Scoring only:
-# retrieval stays as every model met it, so runs remain comparable.
-_SAME_KIND = {"ibc": {"plastic", "water"}}  # a 1,000 litre IBC is sold as a water tank
+# Names the market gives a kind that its label words another way: a correct
+# answer carrying every word of one of these also matches. Found by reading
+# each silent wrong answer by hand. Scoring only: retrieval stays as every
+# model met it, so runs remain comparable.
+_SAME_KIND = {
+    "plastic water tank": ("ibc tank",),  # a 1,000 litre IBC is sold as a water tank
+    "keyboard instrument": ("electronic keyboard", "digital keyboard", "musical keyboard", "piano keyboard"),
+    "digital piano": ("digital keyboard", "electronic keyboard", "piano keyboard"),
+    "pressing iron": ("steam iron", "electric iron", "clothes iron"),
+}
 
 
 def kind_matches(predicted: str | None, item: Item) -> bool:
@@ -38,8 +46,9 @@ def kind_matches(predicted: str | None, item: Item) -> bool:
     while len(truth) > 1 and truth[-1] in _SET_WORDS:
         truth = truth[:-1]  # "sofa set": the item is the sofa, the set is the unit of sale
     said = set(words(predicted))
-    for word in list(said):
-        said |= _SAME_KIND.get(word, set())
+    label = " ".join(words(item.answer.kind or ""))
+    if any(set(words(other)) <= said for other in _SAME_KIND.get(label, ())):
+        return True
     if not truth or not said or truth[-1] not in said:
         return False
     if len(truth) > 1 and not any(w in said for w in truth[:-1]):
@@ -55,7 +64,10 @@ def identity_correct(item: Item, identity: dict) -> bool | None:
     if status == "unknown":
         return None
     if status == "named":
-        title, brand, model = names(item.answer.title), names(identity.get("brand")), names(identity.get("model"))
+        # "Ps4+10games": a "+" before a number of extras joins them to the
+        # item, it is not the Plus tier. Scoring only, like _SAME_KIND.
+        title = names(re.sub(r"\+(?=\s*\d)", " and ", item.answer.title))
+        brand, model = names(identity.get("brand")), names(identity.get("model"))
         if model_matches(brand, model, title):
             return True
         named = (_norm(brand) | _norm(model)) - GENERIC_WORDS
