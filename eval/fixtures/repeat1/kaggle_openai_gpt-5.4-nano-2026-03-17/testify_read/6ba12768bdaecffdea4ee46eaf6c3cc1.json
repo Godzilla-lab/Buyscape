@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0 shows a stainless gas cooker with 4 visible burners on the top (2 left burners, 2 right burners) and control knobs on the front panel.",
+      "Photo 1 shows the same cooker from another angle with 4 burners visible and flames lit on multiple burners.",
+      "Photo 2 shows the oven door and front panel; the top appears to be a 4-burner layout (no extra burners visible).",
+      "No brand/model label is readable in the provided photos."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "4-burner gas cooker with oven",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0",
+        "photo 1",
+        "photo 2"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "4 Gas cooker and 2 burner making 6 burner in total.",
+        "verdict": "contradicted",
+        "evidence": "Across photo 0 and photo 1, only 4 burners are visible on the cooker top; no second unit or extra 2 burners are shown."
+      },
+      {
+        "claim": "All working perfectly.",
+        "verdict": "unverified",
+        "evidence": "Photo 1 shows flames, but there is no clear proof of full functionality (e.g., oven heating, thermostat, burner stability) and no close-up of all burners/controls."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The seller may be bundling two cookers (or claiming 6 burners) but only one 4-burner cooker is shown in the photos.",
+        "proof": "Ask for a photo showing the full set laid out (both cookers) or a clear wide shot confirming 6 burners total.",
+        "if_unproven": "Price as a single 4-burner gas cooker (worst case: not the claimed 6-burner setup)."
+      },
+      {
+        "risk": "Oven may not heat properly even if burners light (common fault: igniter/thermostat/door seal).",
+        "proof": "Ask for a short video of the oven being turned on with temperature/heat visible (or a thermometer reading) for several minutes.",
+        "if_unproven": "Price as burners working but oven unproven (worst case: oven not working)."
+      },
+      {
+        "risk": "Burner performance issues (uneven flame, weak ignition, clogged jets) not fully testable from one photo.",
+        "proof": "Ask for a video showing each burner igniting from cold one-by-one and maintaining a steady blue flame.",
+        "if_unproven": "Price as not guaranteed (worst case: needs servicing)."
+      },
+      {
+        "risk": "Missing/incorrect gas parts (regulator, knobs, burner caps) or damaged burner grates not visible clearly.",
+        "proof": "Ask for close-up photos of all burner caps/grates and the control knobs, plus the back panel connection area.",
+        "if_unproven": "Price as may require replacement parts."
+      }
+    ],
+    "proof_requests": [
+      "Confirm whether it is 1 cooker or 2 cookers; send a wide photo showing the full quantity and total burner count (6 if that\u2019s the case).",
+      "Send a short video of the oven heating (turn on oven, show flame/heat and how long it takes to warm).",
+      "Send a video where each of the 4 burners ignites individually from cold and stays steady.",
+      "Send close-ups of burner caps/grates, all knobs, and the gas connection/back panel."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photos clearly show a single 4-burner gas cooker, which contradicts the seller\u2019s 6-burner claim. Also, \u201cworking perfectly\u201d is not fully provable remotely without oven and full burner-by-burner testing."
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_read",
+    "latency_ms": 5483,
+    "input_tokens": 2903,
+    "output_tokens": 866,
+    "cost_usd": 0.002875,
+    "replayed": false,
+    "fixture_key": "6ba12768bdaecffdea4ee46eaf6c3cc1",
+    "error": null
+  }
+}
