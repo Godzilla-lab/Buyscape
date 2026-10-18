@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0 shows a blue industrial gearbox with a shaft output on the right and a flange/mounting face on the left.",
+      "A label/plate is visible on the gearbox body, but the text is not clearly readable in this photo.",
+      "No electric motor is visible in photo 0\u2014only the gearbox."
+    ],
+    "identity": {
+      "status": "unknown",
+      "kind": null,
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Industrial gear box and electric motor 20hp ratio 1:10",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo 0 shows only a gearbox; no motor is visible, and the ratio/20hp are not readable."
+      },
+      {
+        "claim": "Tokunbo, direct from Belgium.",
+        "verdict": "unverifiable_remote",
+        "evidence": "No import documents, markings, or readable provenance are shown in photo 0."
+      },
+      {
+        "claim": "Tested and working, no knock, low mileage, never opened.",
+        "verdict": "unverified",
+        "evidence": "Photo 0 cannot confirm internal condition, testing, mileage, or whether it was opened."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The listing may not include the electric motor (photo shows only a gearbox).",
+        "proof": "Ask for a photo of the motor nameplate and the full set (gearbox + motor) together, plus the motor shaft coupling area.",
+        "if_unproven": "Price as gearbox only (motor not included)."
+      },
+      {
+        "risk": "Gearbox ratio may not be 1:10 (not readable in the photo).",
+        "proof": "Request a close-up photo of the gearbox nameplate showing ratio/model/serial number.",
+        "if_unproven": "Price as unknown ratio gearbox (worst-case for matching: treat as not confirmed 1:10)."
+      },
+      {
+        "risk": "Power rating (20hp) may be incorrect or not applicable to this gearbox/motor combination.",
+        "proof": "Request motor nameplate photo (HP/kW) and gearbox rating plate photo.",
+        "if_unproven": "Price as not confirmed 20hp (worst-case: treat as lower/unknown rating)."
+      },
+      {
+        "risk": "Condition/testing claims (no knock, working) cannot be verified remotely; internal wear or noise may exist.",
+        "proof": "Request a short video of the gearbox running under load (or at least a start-up test) and a sound check.",
+        "if_unproven": "Price as not proven working (worst-case: treat as needs inspection/possible fault)."
+      },
+      {
+        "risk": "Compatibility risks: mounting pattern, shaft diameter, and coupling type may not match the buyer\u2019s setup.",
+        "proof": "Request measurements/photos: gearbox mounting bolt pattern, input/output shaft diameters and keyway, and coupling type.",
+        "if_unproven": "Price with compatibility risk (worst-case: assume buyer may need adapters)."
+      }
+    ],
+    "proof_requests": [
+      "Close-up, readable photo of the gearbox nameplate (brand/model, ratio, serial number, input/output specs).",
+      "Photos of the electric motor nameplate (HP/kW, voltage, RPM, frame size) and the motor connected/coupled to the gearbox.",
+      "Video of the gearbox/motor running (showing smooth operation and any noise).",
+      "Photos/measurements of mounting face and both shaft ends (diameters, keyway, coupling type)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "From photo 0, only a gearbox is clearly visible and the key specs the seller mentions (motor presence, 20hp, and 1:10 ratio) are not readable or verifiable. Missing identity/spec proof prevents confident worst-case pricing."
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_read",
+    "latency_ms": 5828,
+    "input_tokens": 1662,
+    "output_tokens": 876,
+    "cost_usd": 0.001427,
+    "replayed": false,
+    "fixture_key": "c6130df6d95915583804c3ad04cb5441",
+    "error": null
+  }
+}

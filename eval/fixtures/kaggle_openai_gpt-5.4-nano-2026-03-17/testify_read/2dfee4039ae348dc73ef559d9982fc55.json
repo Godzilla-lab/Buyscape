@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0 shows multiple rectangular solar modules/panels with blue cells and white frames, stacked/arranged in a row.",
+      "No clear readable brand/model text is visible on the panel frames in the provided image.",
+      "The seller\u2019s photo appears to show solar panels only; no battery is shown in the photo."
+    ],
+    "identity": {
+      "status": "unknown",
+      "kind": null,
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "It's original 650 Watts 144 cell direct Canadian used solar panel",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo 0 does not show a readable label/spec sheet (watts rating, cell count, brand/origin)."
+      },
+      {
+        "claim": "Battery is new, holds charge for 8 hours",
+        "verdict": "unverifiable_remote",
+        "evidence": "No battery is shown in photo 0, and no capacity/charge test evidence is visible."
+      },
+      {
+        "claim": "Never repaired",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo 0 does not show backsheets/repair indicators or any documentation."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Panel wattage/cell count may not match the stated 650W/144-cell (could be lower-rated or different configuration).",
+        "proof": "A clear close-up photo of the panel nameplate/serial label showing brand, model, rated wattage (W), and cell count (or a photo of the full spec sticker).",
+        "if_unproven": "Price as a used, unverified-rated solar panel (worst case: treat as lower output than claimed)."
+      },
+      {
+        "risk": "Battery condition/capacity may be overstated (\"new\" and \"8 hours\" may not reflect real usable capacity under load).",
+        "proof": "Photos of the battery label/spec (Ah/Wh, voltage), plus a short video showing the battery connected to a known load with runtime measurement.",
+        "if_unproven": "Price as a battery with unknown capacity (worst case: assume reduced/uncertain performance)."
+      },
+      {
+        "risk": "Possible mismatch in quantity: photo shows more than one panel, but seller text mentions a single 650W panel; total system value depends on how many panels are included.",
+        "proof": "A photo showing the full set laid out with a count (or a screenshot listing quantity of panels and battery model/quantity).",
+        "if_unproven": "Price for the minimum implied item set (worst case: assume fewer panels than shown)."
+      },
+      {
+        "risk": "Shipping/installation readiness issues (connectors, junction box condition, cracked glass, water ingress) not visible from this angle.",
+        "proof": "Close-up photos of each panel\u2019s junction box, connector type, and edges/corners (and a backsheet photo if possible).",
+        "if_unproven": "Price as panels needing inspection/possible minor defects (worst case: assume at least one panel may be faulty)."
+      }
+    ],
+    "proof_requests": [
+      "Clear close-up of the panel nameplate/spec sticker (brand/model, rated watts, cell count, serial).",
+      "Photos of the battery label/spec (voltage and capacity in Ah/Wh) and the battery itself (not just panels).",
+      "A runtime test: battery connected to a known load with measured runtime (or a meter reading) to support the \"8 hours\" claim.",
+      "A full-set photo showing the exact number of panels included and the exact battery quantity/model."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "From photo 0, the item type (solar panels) is visible, but the key pricing drivers (exact rated wattage/cell count, brand/model, and the battery details) are not readable or shown. Without those, a worst-case price cannot be set confidently."
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_read",
+    "latency_ms": 6037,
+    "input_tokens": 1465,
+    "output_tokens": 887,
+    "cost_usd": 0.001402,
+    "replayed": false,
+    "fixture_key": "2dfee4039ae348dc73ef559d9982fc55",
+    "error": null
+  }
+}
