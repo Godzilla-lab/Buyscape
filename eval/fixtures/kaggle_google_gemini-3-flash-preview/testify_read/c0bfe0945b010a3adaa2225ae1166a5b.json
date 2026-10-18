@@ -1,0 +1,64 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Multiple large lead-acid batteries stacked on a tiled floor.",
+      "Top batteries have grey casings with orange lids and rope handles.",
+      "Bottom batteries have black casings.",
+      "A 'NOTICE' warning label is visible on the top battery in photo 0.",
+      "The text 'OZEE ENERGY' is watermarked on the image.",
+      "The seller describes the items as 'Bad', 'Scrap', and 'Condemned'."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "scrap inverter batteries",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Bad, Scrap inverter battery",
+        "verdict": "supported",
+        "evidence": "The seller explicitly states the condition, and the visual state in photo 0 is consistent with used/scrap storage."
+      },
+      {
+        "claim": "Condemned",
+        "verdict": "supported",
+        "evidence": "The seller identifies them as non-functional in the text."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The capacity (Ah rating) is not visible, which is the primary driver of scrap value.",
+        "proof": "A photo of the side or top label showing the Ah rating (e.g., 100Ah, 200Ah).",
+        "if_unproven": "priced as a 100Ah unit"
+      },
+      {
+        "risk": "The total number of batteries included in the offer is unclear.",
+        "proof": "A clear statement or photo showing all units intended for a single transaction.",
+        "if_unproven": "priced as a single unit"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the manufacturer's label on the side of the batteries showing the Ah capacity.",
+      "Confirmation of the total number of batteries included in the price."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The scrap value of inverter batteries depends entirely on their capacity (Ah) and the quantity of units, which are not specified or visible."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 36643,
+    "input_tokens": 2366,
+    "output_tokens": 7445,
+    "cost_usd": 0.023518,
+    "replayed": false,
+    "fixture_key": "c0bfe0945b010a3adaa2225ae1166a5b",
+    "error": null
+  }
+}

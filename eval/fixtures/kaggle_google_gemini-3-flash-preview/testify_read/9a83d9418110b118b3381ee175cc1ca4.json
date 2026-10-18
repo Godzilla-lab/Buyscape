@@ -1,0 +1,67 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Black battery with top terminals.",
+      "Label reads 'DEKA POWER AMERICA STANDARD'.",
+      "Label specifies 'HIGH-PERFORMANCE GEL BATTERY'.",
+      "Capacity marked as '12V 100AH' in a circular logo on the right.",
+      "Casing shows some scuffs and dust consistent with use.",
+      "Terminals appear slightly worn."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "gel battery",
+      "brand": "Deka Power",
+      "model": "12V 100AH",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Used 100ahs Deka Solar Battery",
+        "verdict": "supported",
+        "evidence": "photo 0 label shows brand and capacity."
+      },
+      {
+        "claim": "If fully charged, can last you for 6 hours without Sun",
+        "verdict": "unverifiable_remote",
+        "evidence": "Battery runtime depends entirely on the electrical load connected to it, which is not specified."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Internal degradation or low health (sulfation)",
+        "proof": "A video showing a load test with a battery tester or a multimeter reading while under a heavy load.",
+        "if_unproven": "as non-functional/scrap value"
+      },
+      {
+        "risk": "Battery age",
+        "proof": "A clear photo of the date code stamped into the plastic casing (usually on the top or side).",
+        "if_unproven": "as an old battery near the end of its life cycle"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the date code stamped on the battery casing.",
+      "Video of a load test showing the voltage holding steady under load.",
+      "Photo of the terminals without cables to check for corrosion."
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identified by brand and model. It can be priced at its worst-case value (scrap/end-of-life) due to the lack of health and age verification."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 7081,
+    "input_tokens": 2369,
+    "output_tokens": 1294,
+    "cost_usd": 0.005066,
+    "replayed": false,
+    "fixture_key": "9a83d9418110b118b3381ee175cc1ca4",
+    "error": null
+  }
+}

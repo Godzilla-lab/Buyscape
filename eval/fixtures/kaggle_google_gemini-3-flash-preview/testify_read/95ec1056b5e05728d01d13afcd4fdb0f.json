@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Four large rectangular batteries on a paved floor.",
+      "Black battery casings with yellow carrying handles.",
+      "Side labels on the batteries feature the 'INDEX NXT' branding.",
+      "Image contains watermarks for 'JIJI' and 'OZEE ENERGY'.",
+      "The batteries appear used and are stored in an outdoor environment."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "inverter batteries",
+      "brand": "Index",
+      "model": "NXT",
+      "read_from": [
+        "photo 0 side label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "scrap solar battery",
+        "verdict": "unverified",
+        "evidence": "Visual inspection shows used units, but 'scrap' status (non-functional) requires electrical confirmation."
+      },
+      {
+        "claim": "Spoiled, bad",
+        "verdict": "unverified",
+        "evidence": "The internal condition and ability to hold charge cannot be verified from the photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Unknown capacity (Ah rating)",
+        "proof": "Photo of the top label of the batteries showing the Ah specification.",
+        "if_unproven": "priced as 100Ah units (the lowest standard capacity for this model)"
+      },
+      {
+        "risk": "Physical casing damage or leaks",
+        "proof": "Photos showing all sides and the bottom of each battery unit.",
+        "if_unproven": "priced as damaged/leaking scrap"
+      },
+      {
+        "risk": "Internal short circuits or dead cells",
+        "proof": "A video showing a multimeter reading for each battery.",
+        "if_unproven": "priced as non-refurbishable scrap"
+      }
+    ],
+    "proof_requests": [
+      "Clear photos of the top labels to confirm the Ah capacity.",
+      "Photos of all sides and the bottom of the batteries to check for leaks or cracks.",
+      "Voltage readings for each battery using a multimeter."
+    ],
+    "decision": "price",
+    "reason": "The items are identified as Index NXT inverter batteries. Since the seller describes them as scrap/bad, they can be priced at their lowest recycling value based on the smallest standard capacity for this model."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 26243,
+    "input_tokens": 2381,
+    "output_tokens": 4665,
+    "cost_usd": 0.015185,
+    "replayed": false,
+    "fixture_key": "95ec1056b5e05728d01d13afcd4fdb0f",
+    "error": null
+  }
+}
