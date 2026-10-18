@@ -43,3 +43,15 @@ def test_a_title_the_seller_repeated_is_not_their_words():
     rows = [release.public_item(item, {})]
     assert release.check(rows, [item]) == []
     assert release.check(rows + [{"id": "x", "note": SELLER}], [item])
+
+
+def test_a_run_whose_calls_mostly_failed_is_not_published(tmp_path):
+    import json
+
+    from buyscape.testify.release import baselines
+
+    for name, decisions in (("done", {"price": 90, "ask_for_proof": 140, "error": 1}),
+                            ("quota", {"ask_for_proof": 3, "error": 228})):
+        (tmp_path / name).mkdir()
+        (tmp_path / name / "dev.summary.json").write_text(json.dumps({"items": 231, "decisions": decisions}))
+    assert [b["run"] for b in baselines(tmp_path)] == ["done"]

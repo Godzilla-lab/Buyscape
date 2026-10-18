@@ -134,23 +134,34 @@ reviewed risk labels.
 
 ## Baselines
 
-On the 75 Lagos `dev` items. Each model answered the honest advert twice and
-the lied-to advert once.
+On all 231 `dev` items, from Lagos, Abuja, Rivers and Oyo. Each model
+answered the honest advert twice and the lied-to advert once, at no cost:
+Nemotron on NVIDIA's free tier, Gemini 3 Flash on Kaggle Benchmarks' free
+quota.
 
-| | Nemotron 3.5 Super VL | Claude (sat as helper agents) |
+| | Nemotron 3.5 Super VL | Gemini 3 Flash |
 |---|---|---|
-| Gave a price | 40% | 13% |
-| Silent wrong | 3 (4%) | 1 (1%) |
-| Identity accuracy | 82% | 84% |
-| Same decision when asked twice | 71% | 85% |
-| Refusal turned into a price by the honest repeat | 5 of 9 | 0 of 19 |
-| Refusal turned into a price by the lie | 3 of 8 | 0 of 19 |
-| Quoted above the asking price | 7 of 30 | 2 of 10 |
+| Gave a price | 40% | 19% |
+| Silent wrong | 3 (1.3%) | 2 (0.9%) |
+| Identity accuracy | 85% | 82% |
+| Named a model the photos do not show | 6% | 25% |
+| Same decision when asked twice | 79% | 93% |
+| Quoted above the asking price | 26% of its prices | 27% of its prices |
+| Refusal turned into a price: honest repeat / lie | 8 of 15 / 5 of 15 | 3 of 110 / 8 of 110 |
+| Price raised: honest repeat / lie | 10 of 75 / 9 of 76 | 1 of 36 / 4 of 30 |
 
-Neither model shows a lie effect beyond its own noise. What sets them apart
-is stability, and coverage against caution. Claude sat the test through the
-same files a person would, as helper agents each seeing a handful of cases,
-not as one API call per item; read its numbers with that in mind.
+Gemini is stable, and against its small noise a planted claim shows: a
+Canon 600D's range of 50,000 to 182,000 naira became 182,000 once the seller
+"said" the shutter count was under 5,000. Nemotron changes its decision on
+one advert in five when simply asked again, which hides any lie effect it
+may have. Every silent wrong answer was read by hand: ten of the scorer's
+first fifteen were right answers its word rules missed, now fixed as
+scoring rules with tests. The full write-up, with each city, is
+`docs/research/testify-baseline-3.md` in the code repository.
+
+On the 75 Lagos items only, Claude also sat the test as helper agents each
+seeing a handful of case folders, not as one call per item: 13% priced, 1
+silent wrong, 85% the same decision when asked twice, and no lie effect.
 
 ## Limits
 
@@ -162,7 +173,7 @@ not as one API call per item; read its numbers with that in mind.
   confirm what survives; items whose links die will be marked, not replaced.
 - **Comparables are few.** Prices are retrieved from the 729 dated
   second-hand adverts in the set, so many answers end with no price data.
-- **75 items** stand behind every baseline number so far. Read the counts.
+- **231 items** stand behind each baseline, fewer per city. Read the counts.
 
 ## Use
 

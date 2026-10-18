@@ -103,12 +103,18 @@ def check(rows: list[dict], items: list[Item]) -> list[str]:
 
 
 def baselines(runs: Path) -> list[dict]:
-    """The current score of every run on the dev split, the selected fields only."""
+    """The current score of every finished run on the dev split, the selected fields only.
+
+    A run still in progress, or one whose calls mostly failed (a used-up
+    quota, a server down), is left out rather than published as a score.
+    """
     out = []
     for summary in sorted(runs.glob("*/dev*.summary.json")):
         if ".repeat" in summary.name:
             continue
         data = json.loads(summary.read_text())
+        if (data.get("decisions") or {}).get("error", 0) > 0.1 * (data.get("items") or 0):
+            continue
         out.append({"run": summary.parent.name, "set": summary.name.removesuffix(".summary.json"),
                     **{k: data.get(k) for k in SUMMARY_FIELDS}})
     return out
