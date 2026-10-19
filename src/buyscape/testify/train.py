@@ -19,7 +19,9 @@ without proof". So:
   and a console's shape. An advert it has not checked falls back on the
   local OCR: every brand and model word must be text the OCR found.
 - A model code (any model with a digit in it) stays only when the title or
-  the OCR carries it too; otherwise the brand stays and the code goes. Codes
+  the OCR carries it too; otherwise the brand stays and the code goes. A cut
+  name leaves no trace: a note that says it was read goes with it, so the
+  student never learns to claim it read what the answer does not use. Codes
   are where the benchmark's silent wrong answers came from: a cover badge
   read as an engine's model, a 7kg washer named with a code for another.
 - A read where the teacher could not tell what the item is stays a
@@ -60,6 +62,7 @@ WORST_CASE_REASON = (
     "proof asked for below arrives."
 )
 UNPROVEN = "No photo shows this; it is the seller's word only."
+UNREADABLE = "No photo shows this clearly enough to read."
 # Title words of an advert that sells no item: a repair service or a buyer.
 # The benchmark leaves these out by its photo check; training adverts have
 # none, so their titles are read for it. The title only grades, never prompts.
@@ -126,6 +129,28 @@ def code_confirmed(model: str | None, title: str, lines: list[str] | None) -> bo
     return lines is not None and on_photos({"identity": {"model": model}}, lines)
 
 
+def _forget(data: dict, gone: list[str]) -> dict | None:
+    """The answer with no word of a cut name left in it. A note that saw the name goes,
+    a claim proven only by reading it falls back to unverified, and a reason naming it
+    becomes the worst-case reason. None when nothing seen would be left."""
+    keys = [_norm(g) for g in gone if g and len(_norm(g)) >= 3]
+    if not keys:
+        return data
+
+    def names_it(text: str | None) -> bool:
+        return any(k in _norm(text or "") for k in keys)
+
+    data["observations"] = [o for o in data["observations"] if not names_it(o)]
+    if not data["observations"]:
+        return None
+    for claim in data["claims"]:
+        if claim["verdict"] == "supported" and names_it(claim.get("evidence")):
+            claim.update(verdict="unverified", evidence=UNREADABLE)
+    if names_it(data.get("reason")):
+        data["reason"] = WORST_CASE_REASON
+    return data
+
+
 def target(item: Item, reading: dict, label: dict | None = None,
            keep_code: bool = True) -> tuple[Reading | None, str]:
     """The answer the student should give, and why it was kept or dropped.
@@ -148,15 +173,18 @@ def target(item: Item, reading: dict, label: dict | None = None,
         return None, "teacher wrong about the item"
     data = read.model_dump()
     cut = ""
+    gone: list[str] = []
     if read.identity.status == "named" and label and label.get("identity_from_photos_alone") not in (None, "named"):
         # Named beyond what the photo check could read: keep only the kind.
         data["identity"] = IdentityAnswer(status="by_type", kind=read.identity.kind).model_dump()
         if not read.identity.kind or identity_correct(item, data["identity"], by_title=True) is not True:
             return None, "named beyond the photos, and the kind alone is wrong"
-        cut = ", name cut to the kind"
+        cut, gone = ", name cut to the kind", [read.identity.brand, read.identity.model]
     elif read.identity.status == "named" and read.identity.model and not keep_code:
         data["identity"]["model"] = None
-        cut = ", model code cut"
+        cut, gone = ", model code cut", [read.identity.model]
+    if gone and (data := _forget(data, gone)) is None:
+        return None, "nothing seen is left once the name is cut"
     if read.decision != "price":
         data.update(decision="price", reason=WORST_CASE_REASON)
     answer = Reading.model_validate(data)

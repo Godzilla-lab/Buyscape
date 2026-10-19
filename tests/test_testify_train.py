@@ -165,3 +165,16 @@ def test_a_vision_check_keeps_a_logo_name_and_a_code_needs_the_title_or_the_ocr(
     out, _ = train.build([(sewing, [photo])], rows, checked, tmp_path, ocr=lambda images: ["EM8500"])
     assert json.loads(out[0]["messages"][2]["content"])["identity"]["model"] == "EM 8500"
     assert train.code_confirmed("PlayStation 4", "Uk Used Clean Ps4 Fat", None)
+
+
+def test_a_cut_code_leaves_no_note_that_it_was_read():
+    sewing = _item("e2", "industrial sewing machine", "Emel Industrial Sewing Machine")
+    read = _read(status="named", brand="EMEL", model="EM 8500", kind="industrial sewing machine", read_from=["photo 1"])
+    read["observations"] = ["a white industrial sewing machine on a table", "The model number 'EM 8500' is on a sticker."]
+    read["claims"] = [{"claim": "EM 8500 model", "verdict": "supported", "evidence": "sticker reads EM 8500"}]
+    answer, why = train.target(sewing, read, {"identity_from_photos_alone": "named"}, keep_code=False)
+    assert why == "kept: price at worst case, model code cut"
+    assert answer.observations == ["a white industrial sewing machine on a table"]
+    assert answer.claims[0].verdict == "unverified" and "EM 8500" not in answer.model_dump_json().replace(answer.claims[0].claim, "")
+    only_the_code = dict(read, observations=["sticker reads EM 8500"])
+    assert train.target(sewing, only_the_code, {"identity_from_photos_alone": "named"}, keep_code=False)[0] is None
