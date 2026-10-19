@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Front view shows a silver Maxi standing cooker with 5 control knobs and two buttons.",
+      "Top view shows 3 gas burners and 1 electric hotplate.",
+      "The electric hotplate is heavily rusted and shows signs of significant wear or exposure.",
+      "Rear view shows a standard orange gas hose and a power cord with a UK-style plug.",
+      "The brand 'MAXI' is printed on the top right of the front panel."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "standing cooker",
+      "brand": "MAXI",
+      "model": null,
+      "read_from": [
+        "photo 0 panel",
+        "photo 1 panel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Maxi 50x50",
+        "verdict": "supported",
+        "evidence": "photo 0 shows the brand; dimensions are typical for this style but unmeasured."
+      },
+      {
+        "claim": "3 burners one hotplate",
+        "verdict": "supported",
+        "evidence": "photo 1"
+      },
+      {
+        "claim": "only been used few times",
+        "verdict": "contradicted",
+        "evidence": "photo 1 shows heavy rust/corrosion on the electric hotplate and staining around burners."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Gas burners or oven may not ignite or may have leaks.",
+        "proof": "Video of all burners and the oven burner lit and staying lit.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Electric hotplate may be non-functional due to visible corrosion.",
+        "proof": "Video of the hotplate heating up (glowing or boiling water).",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Oven interior may be damaged, dirty, or missing racks.",
+        "proof": "Photo of the oven interior with the door open.",
+        "if_unproven": "as missing internal components"
+      }
+    ],
+    "proof_requests": [
+      "Video of all three gas burners and the oven burner lit.",
+      "Video showing the electric hotplate heating up.",
+      "Photo of the inside of the oven.",
+      "Clear photo of the technical label on the back to confirm the model."
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identified as a Maxi 3+1 standing cooker. Due to the heavy rust on the hotplate and lack of functional proof, it is priced as a non-working unit for parts or repair."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 8932,
+    "input_tokens": 4510,
+    "output_tokens": 1756,
+    "cost_usd": 0.007523,
+    "replayed": false,
+    "fixture_key": "438a18e182c6ff55c7c17b86644396c1",
+    "error": null
+  }
+}
