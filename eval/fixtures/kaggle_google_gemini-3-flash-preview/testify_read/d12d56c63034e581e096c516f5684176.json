@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the rear of a black thermal printer with a manufacturer label.",
+      "The label in photo 0 identifies the brand as Xprinter and the model as XP-T80A.",
+      "Photo 1 shows a black metal cash drawer with a key inserted in the lock.",
+      "Photo 2 shows the front of the thermal printer with the paper output slot.",
+      "No POS terminal, monitor, or computer unit is visible in any of the provided photos."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "Thermal receipt printer and cash drawer",
+      "brand": "Xprinter",
+      "model": "XP-T80A",
+      "read_from": [
+        "photo 0 plate"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "The complete Pos terminal",
+        "verdict": "unverified",
+        "evidence": "No terminal, screen, or computer unit is shown in the photos."
+      },
+      {
+        "claim": "the printer",
+        "verdict": "supported",
+        "evidence": "Photos 0 and 2 show an Xprinter thermal printer."
+      },
+      {
+        "claim": "the safe",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows a cash drawer, which is the item referred to as a safe in this context."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The POS terminal may be a different model than expected or missing entirely.",
+        "proof": "A photo of the POS terminal unit (screen/computer) powered on.",
+        "if_unproven": "Excluded from valuation"
+      },
+      {
+        "risk": "The printer may have a damaged thermal head or failed motor.",
+        "proof": "A video of the printer producing a clear self-test printout.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The cash drawer solenoid may be broken, preventing it from opening automatically.",
+        "proof": "A video of the drawer opening via a command from the printer.",
+        "if_unproven": "as a manual-only drawer"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the POS terminal unit mentioned in the description.",
+      "Video of the printer performing a self-test print.",
+      "Video of the cash drawer opening using both the key and the electronic trigger."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller claims a complete POS terminal is included, but only the printer and cash drawer are pictured. The terminal is the most valuable component and its specifications are unknown."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 20322,
+    "input_tokens": 4492,
+    "output_tokens": 4114,
+    "cost_usd": 0.014588,
+    "replayed": false,
+    "fixture_key": "d12d56c63034e581e096c516f5684176",
+    "error": null
+  }
+}
