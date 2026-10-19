@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Rear view of a black electronic device, consistent with a desktop thermal printer.",
+      "The text 'HIPHEN SOLUTIONS' is embossed or printed on the rear casing in photo 0.",
+      "A power toggle switch (O/I) is visible on the bottom right.",
+      "A port cutout is visible on the bottom left.",
+      "Connectivity ports (likely USB and power) are partially visible at the very bottom edge.",
+      "No model number, serial number, or specification sticker is visible in the provided image."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "thermal receipt printer",
+      "brand": "Hiphen",
+      "model": null,
+      "read_from": [
+        "photo 0 casing"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "small USB Barcode Receipt Printer",
+        "verdict": "unverified",
+        "evidence": "The device type is consistent with a receipt printer, but USB connectivity and barcode printing capabilities are not demonstrated."
+      },
+      {
+        "claim": "by hiphen",
+        "verdict": "supported",
+        "evidence": "photo 0 shows 'HIPHEN SOLUTIONS' on the back of the unit."
+      },
+      {
+        "claim": "Support Windows software based on ESC/POS",
+        "verdict": "unverifiable_remote",
+        "evidence": "Software compatibility and command set support cannot be verified through a photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The thermal print head may be damaged, resulting in missing lines or unreadable text.",
+        "proof": "A photo of a printed self-test page.",
+        "if_unproven": "as having a defective print head"
+      },
+      {
+        "risk": "The paper width (58mm vs 80mm) is unknown, which significantly impacts the market value.",
+        "proof": "A photo of the printer with the top cover open or a shot of the model label.",
+        "if_unproven": "as the lower-value 58mm model"
+      },
+      {
+        "risk": "Essential accessories like the power adapter (brick) and USB cable may be missing.",
+        "proof": "A photo showing the printer alongside its power supply and cables.",
+        "if_unproven": "as the unit only, without power supply or cables"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the identification label (usually on the bottom) showing the model number.",
+      "Photo of the printer from the front with the paper lid open.",
+      "Photo of a self-test printout to verify print quality and specifications.",
+      "Photo of the included power adapter and cables."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The provided photo only shows the back of the device. Without a model number or a view of the paper slot, it is impossible to distinguish between a 58mm and 80mm printer, which defines the price."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 16106,
+    "input_tokens": 2374,
+    "output_tokens": 3096,
+    "cost_usd": 0.010475,
+    "replayed": false,
+    "fixture_key": "4772334b84f0250c880417cc71e7f9ab",
+    "error": null
+  }
+}
