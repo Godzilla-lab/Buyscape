@@ -1,0 +1,93 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Microwave oven with a mirror-finish door.",
+      "Interior contains a glass turntable and a metal grill rack.",
+      "Control panel has a digital display, several function buttons, and a rotary dial.",
+      "Buttons include 'Grill/Combi', 'Weight Defrost', and 'Time Defrost'.",
+      "No brand logo or model number is visible on the front or interior.",
+      "The interior cavity appears clean."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "microwave with grill",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 interior",
+        "photo 1 control panel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "clean",
+        "verdict": "supported",
+        "evidence": "photo 0 shows a clean interior cavity"
+      },
+      {
+        "claim": "scanfrost",
+        "verdict": "unverified",
+        "evidence": "no brand logo is visible in the photos"
+      },
+      {
+        "claim": "microwave + grill",
+        "verdict": "supported",
+        "evidence": "photo 0 shows a grill rack and photo 1 has a 'Grill/Combi' button"
+      },
+      {
+        "claim": "mirror door",
+        "verdict": "supported",
+        "evidence": "photo 1 shows a reflective door surface"
+      },
+      {
+        "claim": "25l",
+        "verdict": "unverified",
+        "evidence": "no manufacturer label or scale is visible to confirm capacity"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Magnetron failure (does not heat)",
+        "proof": "A video showing the microwave heating a cup of water to boiling point.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Grill element failure",
+        "proof": "A video showing the grill element glowing or a photo of it hot.",
+        "if_unproven": "as microwave only"
+      },
+      {
+        "risk": "Unverified brand and capacity",
+        "proof": "A clear photo of the manufacturer's specification plate on the back of the unit.",
+        "if_unproven": "as a generic 20L model"
+      },
+      {
+        "risk": "Faulty control panel",
+        "proof": "A video showing all buttons and the rotary dial responding correctly.",
+        "if_unproven": "as having faulty controls"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the manufacturer's label on the back or side of the microwave.",
+      "Video of the microwave heating water and the grill element in operation.",
+      "Video demonstrating the control panel and digital display."
+    ],
+    "decision": "price",
+    "reason": "The item is identified as a microwave with grill. Since the brand, capacity, and functionality are unverified, it is priced at the worst-case scenario as a generic, non-working unit."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 21107,
+    "input_tokens": 3435,
+    "output_tokens": 4630,
+    "cost_usd": 0.015607,
+    "replayed": false,
+    "fixture_key": "9aa490ca3d353e7bcd22ed3c5919aff4",
+    "error": null
+  }
+}

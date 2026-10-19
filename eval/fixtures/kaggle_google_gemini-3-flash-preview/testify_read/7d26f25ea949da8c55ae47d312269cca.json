@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Two red pallet trucks lying on their sides on a concrete floor.",
+      "Both units have '2500Kg' printed on the pump housing in photo 0.",
+      "The handles (tillers) are missing from both units in the photo.",
+      "The hydraulic pump assemblies are visible but appear disassembled from the steering mechanism.",
+      "Watermark 'EZE TOOLS' is present on the image.",
+      "Safety and instruction stickers are visible on the side of the pump housing."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "pallet truck",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Pallet truck (hand-operated)",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "2500Kg capacity",
+        "verdict": "supported",
+        "evidence": "photo 0 labels"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Missing handles/tillers",
+        "proof": "Photo of the complete unit with handle attached and functional.",
+        "if_unproven": "as incomplete/scrap parts"
+      },
+      {
+        "risk": "Hydraulic pump failure or internal leaks",
+        "proof": "Video of the truck lifting a heavy load and holding it for 1 minute.",
+        "if_unproven": "as non-functional/leaking"
+      },
+      {
+        "risk": "Seized or flat-spotted rollers/wheels",
+        "proof": "Video of the truck being pulled across a floor.",
+        "if_unproven": "as requiring wheel replacement"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the complete pallet truck with the handle/tiller assembly attached.",
+      "Video showing the hydraulic pump lifting a load and the release trigger working.",
+      "Clear photo of the manufacturer's identification plate for brand and model verification."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo shows only the fork and pump assemblies; the handles required to operate the trucks are missing. Without proof that these are complete, functional units, they cannot be priced as working equipment."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 7623,
+    "input_tokens": 2368,
+    "output_tokens": 1291,
+    "cost_usd": 0.005057,
+    "replayed": false,
+    "fixture_key": "7d26f25ea949da8c55ae47d312269cca",
+    "error": null
+  }
+}
