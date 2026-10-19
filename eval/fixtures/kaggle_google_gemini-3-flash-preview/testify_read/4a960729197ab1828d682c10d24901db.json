@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail box for an SKE Mini UPS.",
+      "The box displays the model number POE-830P-LFP.",
+      "The box specifies a capacity of 20000mAh.",
+      "The box lists output options: POE 24V, DC 9V/12V, and USB/Type-C 5V.",
+      "The actual device is not visible; only the packaging is shown.",
+      "The background suggests a retail or warehouse environment with other electronics visible."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "Mini UPS",
+      "brand": "SKE",
+      "model": "POE-830P-LFP",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Router power bank",
+        "verdict": "supported",
+        "evidence": "photo 0 box shows DC and POE ports intended for networking equipment."
+      },
+      {
+        "claim": "20000mah",
+        "verdict": "supported",
+        "evidence": "photo 0 box explicitly states 20000mAh."
+      },
+      {
+        "claim": "mini ups",
+        "verdict": "supported",
+        "evidence": "photo 0 box is titled 'Mini UPS'."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, lower-spec model.",
+        "proof": "A photo of the actual device outside of the box showing its label.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The internal lithium batteries may be degraded or non-functional.",
+        "proof": "A video showing the device powering a router while disconnected from mains power.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Essential DC-to-DC or POE cables may be missing.",
+        "proof": "A photo of all included accessories and cables spread out.",
+        "if_unproven": "as missing all cables"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual device out of the box showing the ports and label.",
+      "Photo of all included cables and the power adapter.",
+      "Video of the device turned on and powering a device."
+    ],
+    "decision": "price",
+    "reason": "The brand and model are clearly identified from the retail packaging, allowing for a valuation based on its worst-case condition (untested/missing unit)."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 13389,
+    "input_tokens": 2390,
+    "output_tokens": 2864,
+    "cost_usd": 0.009787,
+    "replayed": false,
+    "fixture_key": "4a960729197ab1828d682c10d24901db",
+    "error": null
+  }
+}

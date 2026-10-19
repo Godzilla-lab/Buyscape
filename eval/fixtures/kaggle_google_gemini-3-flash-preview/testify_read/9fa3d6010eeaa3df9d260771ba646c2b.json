@@ -1,0 +1,75 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Two solar panels leaning against a wall.",
+      "The panels have dark cells and black frames.",
+      "There are white streaks or smudges on the glass surface of the front panel.",
+      "A watermark 'NAGOTECH SOLAR' and 'POSTED ON JIJI' is visible across the center.",
+      "A small white sticker is visible on the top right corner of the left panel's frame, but the text is unreadable.",
+      "No specification plate or brand logo is visible on the front."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "350watts",
+        "verdict": "unverified",
+        "evidence": "The wattage is not visible on the panel; the specification label on the back is missing from the photos."
+      },
+      {
+        "claim": "ho solar",
+        "verdict": "unverified",
+        "evidence": "No brand name is legible in photo 0."
+      },
+      {
+        "claim": "all black panel",
+        "verdict": "supported",
+        "evidence": "photo 0 shows panels with black cells and black frames."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The actual power output (wattage) may be significantly lower than claimed.",
+        "proof": "A clear photo of the manufacturer's specification label on the back of the panel.",
+        "if_unproven": "as a generic 250W panel"
+      },
+      {
+        "risk": "Internal cell damage or micro-cracks not visible in a low-resolution photo.",
+        "proof": "Close-up photos of the glass surface and a video showing a multimeter test of Open Circuit Voltage (Voc) in direct sunlight.",
+        "if_unproven": "as used and potentially degraded"
+      },
+      {
+        "risk": "The panels may be a different, less reputable brand than claimed.",
+        "proof": "A photo of the specification label showing the brand and model.",
+        "if_unproven": "as an unbranded/generic panel"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the specification label on the back of the panel.",
+      "Close-up photos of the glass surface to check for cracks or delamination.",
+      "A video showing a multimeter reading of the panel's output in sunlight."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The critical information for valuation\u2014the rated wattage and brand\u2014is contained on the specification plate on the back, which is not shown. Without this, the item cannot be distinguished from lower-capacity panels."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 10937,
+    "input_tokens": 2382,
+    "output_tokens": 2270,
+    "cost_usd": 0.008001,
+    "replayed": false,
+    "fixture_key": "9fa3d6010eeaa3df9d260771ba646c2b",
+    "error": null
+  }
+}
