@@ -1,0 +1,96 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo is very dark/underexposed, taken at an angle.",
+      "Shape shows a deep, curved-back television cabinet consistent with a CRT (tube) TV, not a flat panel.",
+      "Vents and a glossy black plastic casing are visible on the back/side of the set.",
+      "Set sits on a tiled floor in what looks like a home interior; no power cable, remote, or screen face is visible.",
+      "No brand name, model number, or screen is visible or legible anywhere in the frame."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "CRT television (seller claims LG, 29-inch)",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "It's an LG 29-inch TV",
+        "verdict": "unverifiable_remote",
+        "evidence": "No LG logo, label, or size marking visible anywhere in photo 0; only a dark rear/side view is shown."
+      },
+      {
+        "claim": "The transformer is blown (i.e., it is not working)",
+        "verdict": "unverified",
+        "evidence": "Cannot see internal parts or power-on test in photo 0; this is the seller's own description of the fault."
+      },
+      {
+        "claim": "No dead pixel, no line on the screen",
+        "verdict": "unverifiable_remote",
+        "evidence": "The screen face is not shown at all in photo 0; also irrelevant/unusual phrasing for a CRT, which doesn't have 'pixels' in the LCD sense."
+      },
+      {
+        "claim": "Remote included",
+        "verdict": "unverifiable_remote",
+        "evidence": "No remote is visible in photo 0."
+      },
+      {
+        "claim": "Never repaired",
+        "verdict": "unverifiable_remote",
+        "evidence": "No service sticker, open casing, or internal shot provided to confirm repair history."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Unit confirmed non-functional by seller (blown transformer); true extent of damage (just transformer vs. other board damage) unknown.",
+        "proof": "A clear photo/video of the unit powering on or attempting to power on, plus an open-case photo showing the power board/transformer area.",
+        "if_unproven": "priced as non-working, parts/repair-only unit"
+      },
+      {
+        "risk": "Screen condition (claimed no dead pixels/lines) cannot be checked since this is a CRT with no screen shown.",
+        "proof": "A well-lit photo of the full screen face, ideally powered on or at least showing the tube clearly.",
+        "if_unproven": "priced as condition unknown, assume cosmetic/tube wear typical of an old CRT"
+      },
+      {
+        "risk": "Brand and screen size claim (LG, 29-inch) cannot be confirmed from any visible marking.",
+        "proof": "A clear, well-lit photo of the brand logo/nameplate and screen size label, typically on the front bezel or rear panel.",
+        "if_unproven": "priced as a generic unbranded/unconfirmed 29-inch-class CRT TV"
+      },
+      {
+        "risk": "Remote claimed included but not photographed; could be missing, wrong remote, or non-functional.",
+        "proof": "A photo of the actual remote next to the TV.",
+        "if_unproven": "priced as TV only, no remote"
+      },
+      {
+        "risk": "Overall cosmetic condition (cracks, burns, water damage) hidden by poor lighting and odd angle.",
+        "proof": "Multiple well-lit photos from front, back, and both sides in daylight.",
+        "if_unproven": "priced assuming heavy cosmetic wear, worst case for an old, non-working CRT"
+      }
+    ],
+    "proof_requests": [
+      "Clear, well-lit photo of the brand/model/size label on the TV (usually rear panel or front bottom bezel).",
+      "Photo or short video attempting to power the TV on, to confirm the 'blown transformer' fault and rule out further damage.",
+      "Well-lit photo of the full screen face.",
+      "Photo of the remote control alongside the TV.",
+      "Photo of the open back panel showing the power supply/transformer area."
+    ],
+    "decision": "price",
+    "reason": "The photo is dark and shows no readable brand/model/size, and the screen itself is never shown, but the seller's own words confirm the unit is non-working (blown transformer); this is enough to identify it generically as a CRT TV and price it at worst case as a non-functional, unconfirmed-brand set pending the listed proofs."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 26367,
+    "input_tokens": 3088,
+    "output_tokens": 2350,
+    "cost_usd": 0.026517,
+    "replayed": false,
+    "fixture_key": "d583f37e50e7b285fafa31d6e25e51a1",
+    "error": null
+  }
+}

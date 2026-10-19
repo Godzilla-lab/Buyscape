@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "A split-type air conditioner, indoor wall unit and outdoor condenser unit, both sitting on a tiled floor rather than installed.",
+      "Outdoor unit has faded pink/red text that appears to read 'inverter' but the brand lettering above it is too blurred to confirm.",
+      "Visible dust, grime and some rust-like staining on both units' casings.",
+      "Outdoor unit fan grille and fins look intact but dirty; no visible missing panels.",
+      "Indoor unit louvers are open; no remote control, mounting bracket, or copper piping/cables visible in frame.",
+      "No capacity/BTU or model label legible in the photo."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "split inverter air conditioner (indoor + outdoor unit)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 (partial 'inverter' text on outdoor unit, brand unreadable)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Faulty inverter AC",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo 0 shows the unit powered off and disconnected; no way to see what the fault is or confirm it even powers on."
+      },
+      {
+        "claim": "Inverter type AC",
+        "verdict": "unverified",
+        "evidence": "Partial 'inverter' text visible on outdoor unit in photo 0, but not fully legible or confirmed against a clear nameplate."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Unknown capacity/tonnage (1HP/1.5HP/2HP) affects base value",
+        "proof": "Clear close-up of the nameplate/rating label on indoor or outdoor unit",
+        "if_unproven": "priced at the lowest common split-AC capacity tier"
+      },
+      {
+        "risk": "Nature and severity of the fault (compressor dead, gas leak, PCB fault, just needs gas top-up)",
+        "proof": "Video of technician diagnostic or seller running it with a power source",
+        "if_unproven": "priced as non-working, parts/scrap value only"
+      },
+      {
+        "risk": "Missing accessories (remote, mounting bracket, copper pipe set, outdoor unit stand)",
+        "proof": "Photos of all accessories laid out together",
+        "if_unproven": "priced as unit only, no accessories included"
+      },
+      {
+        "risk": "Physical damage to coils/fins or compressor housing not visible from this angle",
+        "proof": "Close-up photos of rear coil area and compressor unit from multiple angles",
+        "if_unproven": "priced assuming possible hidden coil/compressor damage"
+      },
+      {
+        "risk": "Brand/model unverified, which affects resale and parts value",
+        "proof": "Clear photo of the full nameplate sticker",
+        "if_unproven": "priced as a generic unbranded split inverter AC"
+      }
+    ],
+    "proof_requests": [
+      "Close-up, well-lit photo of the nameplate/rating label on both indoor and outdoor units",
+      "Video showing an attempt to power the unit and what happens (error codes, no response, etc.)",
+      "Photos of the back of the outdoor unit showing coils and compressor",
+      "Photo of all included accessories (remote, bracket, piping)"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a split inverter AC unit, but it is seller-declared faulty with no diagnostic evidence, no visible capacity label, and no accessories shown, so it must be priced at worst case as a non-working unit of unconfirmed capacity."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 27711,
+    "input_tokens": 2971,
+    "output_tokens": 2216,
+    "cost_usd": 0.024943,
+    "replayed": false,
+    "fixture_key": "0d835f2e53f5f33ce99f0624c53a6627",
+    "error": null
+  }
+}
