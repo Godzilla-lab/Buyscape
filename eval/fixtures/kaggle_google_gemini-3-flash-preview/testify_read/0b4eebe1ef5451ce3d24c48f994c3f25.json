@@ -1,0 +1,86 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Michelin Energy Saver tyre mounted on a black steel rim.",
+      "The tyre sidewall clearly shows 'MICHELIN' and 'ENERGY SAVER' in photos 0 and 1.",
+      "The rim is a multi-hole steel design with surface rust visible around the center and lug holes.",
+      "Tyre tread is visible in photo 2 and appears to have significant remaining depth.",
+      "No jack or wheel spanner is visible in any of the three photos provided.",
+      "The specific tyre size (e.g., 195/65 R15) is not legible in the current photos.",
+      "The DOT manufacturing date code is not visible.",
+      "Watermarks 'ROGERS DELIVERIES' and 'POSTED ON JIJI' are present on the images."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "tyre on rim",
+      "brand": "Michelin",
+      "model": "Energy Saver",
+      "read_from": [
+        "photo 0",
+        "photo 1"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Size 15",
+        "verdict": "unverified",
+        "evidence": "The size markings on the sidewall are too blurry to read in the provided photos."
+      },
+      {
+        "claim": "Michelin Energy Saver Tyre",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 1 clearly show the brand and model on the sidewall."
+      },
+      {
+        "claim": "with jack",
+        "verdict": "unverified",
+        "evidence": "No jack is shown in any of the photos."
+      },
+      {
+        "claim": "wheel spanner",
+        "verdict": "unverified",
+        "evidence": "No wheel spanner is shown in any of the photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Tyre may be expired (old rubber)",
+        "proof": "A clear photo of the 4-digit DOT date code on the tyre sidewall.",
+        "if_unproven": "as expired/scrap value only"
+      },
+      {
+        "risk": "Missing accessories (jack and spanner)",
+        "proof": "A photo showing the jack and wheel spanner alongside the tyre.",
+        "if_unproven": "as tyre and rim only"
+      },
+      {
+        "risk": "Hidden tyre damage (plugs, sidewall repairs, or bulges)",
+        "proof": "A photo of the inside of the tyre or a video of it inflated and submerged/soaped.",
+        "if_unproven": "as needing repair"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the tyre size markings (e.g., 185/65 R15).",
+      "Photo of the jack and wheel spanner mentioned in the description.",
+      "Photo of the 4-digit DOT manufacturing date code on the sidewall.",
+      "Photo of the tyre tread depth using a coin or gauge for scale."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The tyre size is not legible in the photos, which is essential for pricing. Additionally, the jack and wheel spanner included in the seller's description are not pictured."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 17214,
+    "input_tokens": 4546,
+    "output_tokens": 3249,
+    "cost_usd": 0.01202,
+    "replayed": false,
+    "fixture_key": "0b4eebe1ef5451ce3d24c48f994c3f25",
+    "error": null
+  }
+}

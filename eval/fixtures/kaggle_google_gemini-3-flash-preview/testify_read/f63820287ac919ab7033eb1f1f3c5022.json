@@ -1,0 +1,70 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the front of a retail box for an 'Auto Darkening Welding Helmet'.",
+      "Photo 1 shows the back of the box with technical specifications, a shade guide, and feature icons (Solar, UV/IR).",
+      "The actual helmet is not visible in either photo; only the packaging is shown.",
+      "A digital watermark 'FOTUN SOLUTIONS' and 'POSTED ON JIJI' is overlaid on both images."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "auto-darkening welding helmet",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Auto Darkening",
+        "verdict": "unverified",
+        "evidence": "Text on the box in photo 0; the actual item is not shown or tested."
+      },
+      {
+        "claim": "protect the head and eyes from sparks",
+        "verdict": "supported",
+        "evidence": "This is the standard function of the product type shown on the box."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, lower-value item.",
+        "proof": "Photo of the actual helmet outside the box.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The auto-darkening electronic filter may be non-functional or have a dead battery/sensor.",
+        "proof": "Video of the lens darkening in response to a light source or spark.",
+        "if_unproven": "as a passive (non-electronic) welding mask"
+      },
+      {
+        "risk": "The internal headgear or adjustment mechanism may be broken or missing.",
+        "proof": "Photo of the helmet's interior showing the suspension system.",
+        "if_unproven": "as broken"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual welding helmet outside of the box.",
+      "Photo of the inside of the helmet showing the headgear.",
+      "Video showing the auto-darkening lens in operation."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller has only provided photos of the retail packaging. The presence, brand, and physical condition of the actual helmet cannot be verified without seeing the item itself."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 20698,
+    "input_tokens": 3431,
+    "output_tokens": 4191,
+    "cost_usd": 0.014289,
+    "replayed": false,
+    "fixture_key": "f63820287ac919ab7033eb1f1f3c5022",
+    "error": null
+  }
+}

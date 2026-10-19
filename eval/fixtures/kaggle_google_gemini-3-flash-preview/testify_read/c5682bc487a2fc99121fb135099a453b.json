@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black game console with 'SONY' and 'PS4' branding on the front face.",
+      "A single DualShock 4 controller is resting on the console in photo 0, with its light bar illuminated blue.",
+      "The controller in photo 0 has clear tape or plastic film across the touchpad area.",
+      "Photo 1 shows a television screen displaying the PlayStation 4 dashboard.",
+      "Dashboard icons in photo 1 include Star Wars Jedi: Fallen Order, EA Sports FC (looks like 24), Spotify, Spider-Man, and The Last of Us Part II.",
+      "The console has the slim form factor characteristic of the PS4 Slim model."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "game console",
+      "brand": "Sony",
+      "model": "PlayStation 4 Slim",
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Play station 4 slim",
+        "verdict": "supported",
+        "evidence": "The form factor and branding in photo 0 match the PS4 Slim."
+      },
+      {
+        "claim": "with 2 consoles",
+        "verdict": "contradicted",
+        "evidence": "Only one console is shown in photo 0. If the seller meant 'controllers', only one is shown."
+      },
+      {
+        "claim": "7 games [ fc26, batman, last of us, far cry 5, nba, ufc]",
+        "verdict": "unverified",
+        "evidence": "Photo 1 shows digital icons for some games, but no physical discs are shown. 'FC26' does not exist (likely FC24 or FC25)."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Games may be digital licenses tied to a personal account rather than physical discs.",
+        "proof": "Photo of all 7 physical game discs/cases.",
+        "if_unproven": "priced as having zero games."
+      },
+      {
+        "risk": "The second controller mentioned is missing or non-functional.",
+        "proof": "Photo showing both controllers powered on and side-by-side.",
+        "if_unproven": "priced as including only one controller."
+      },
+      {
+        "risk": "The internal storage capacity is unknown (500GB vs 1TB).",
+        "proof": "Screenshot of the 'Storage' menu in System Settings.",
+        "if_unproven": "priced as 500GB."
+      },
+      {
+        "risk": "The optical disc drive may be faulty.",
+        "proof": "Video of a disc being inserted, recognized, and launching a game.",
+        "if_unproven": "priced as having a broken disc drive."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the 7 physical game discs.",
+      "Photo of the second controller.",
+      "Screenshot of the System Storage settings showing capacity.",
+      "Video of the console reading a physical disc."
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identified as a PS4 Slim. It can be priced at the worst-case scenario (500GB, one controller, no games, broken disc drive) based on the current evidence."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 10867,
+    "input_tokens": 3527,
+    "output_tokens": 2216,
+    "cost_usd": 0.008412,
+    "replayed": false,
+    "fixture_key": "c5682bc487a2fc99121fb135099a453b",
+    "error": null
+  }
+}

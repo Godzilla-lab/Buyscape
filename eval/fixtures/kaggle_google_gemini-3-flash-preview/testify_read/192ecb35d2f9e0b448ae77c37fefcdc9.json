@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows a cardboard box for a 'TWO LION' industrial sewing machine.",
+      "Photo 1 shows a cardboard box for a 'HUDONG' industrial sewing machine.",
+      "Photo 2 shows a large, flat cardboard box typically used for an industrial sewing machine table.",
+      "All boxes are closed and secured with plastic strapping.",
+      "No model numbers (e.g., '8500') are visible on the boxes in the photos."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "industrial sewing machine",
+      "brand": "Two Lion",
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Two lion",
+        "verdict": "contradicted",
+        "evidence": "Photo 1 shows a box for the 'Hudong' brand, not 'Two Lion'."
+      },
+      {
+        "claim": "8500",
+        "verdict": "unverified",
+        "evidence": "The model number is not visible on any of the boxes."
+      },
+      {
+        "claim": "new, never used",
+        "verdict": "unverified",
+        "evidence": "The items are inside closed boxes; the actual condition of the machines cannot be seen."
+      },
+      {
+        "claim": "set of Two",
+        "verdict": "unverified",
+        "evidence": "Only three boxes are shown. A single industrial sewing machine typically requires three boxes (head, motor, and table/stand)."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The boxes may contain a different model or brand than the 8500 claimed.",
+        "proof": "Photos of the metal identification plates on the machine heads.",
+        "if_unproven": "as the lowest-value generic industrial lockstitch model"
+      },
+      {
+        "risk": "The set may be incomplete, missing essential components like the motor or stand.",
+        "proof": "Photos of all components (head, motor, and stand) unpacked.",
+        "if_unproven": "as a single machine head only"
+      },
+      {
+        "risk": "The quantity may be one machine instead of the claimed two.",
+        "proof": "A single photo showing all boxes for both machines (typically 6 boxes total).",
+        "if_unproven": "as a single machine"
+      }
+    ],
+    "proof_requests": [
+      "Photos of the machine heads showing the brand and model plates.",
+      "Photos of the contents of all boxes to verify the brand, model, and completeness.",
+      "A photo showing all boxes for both machines to confirm the 'set of two' claim.",
+      "Clarification on why one box is 'Hudong' brand if the machines are 'Two Lion'."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "There is a direct contradiction between the seller's claim of 'Two Lion' machines and the 'Hudong' brand visible in photo 1. Additionally, the number of boxes shown suggests only one machine is present, and the specific model number cannot be verified from the packaging."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 20529,
+    "input_tokens": 4499,
+    "output_tokens": 3933,
+    "cost_usd": 0.014049,
+    "replayed": false,
+    "fixture_key": "192ecb35d2f9e0b448ae77c37fefcdc9",
+    "error": null
+  }
+}
