@@ -89,7 +89,8 @@ only picks the low and the high from them.
 
 The next step is to train that pick too: given the comparables, choose the
 ones that match the item, with targets from real asking prices now and from
-BuyScrap's settled prices once pickups start. That is what moves "quoted above
+BuyScrap's settled prices once pickups start. Agreed on 19 Oct 2026 for after
+the first training run. That is what moves "quoted above
 the asking price" and "asking price inside the range", and it keeps the rule
 that a model never invents a price.
 
