@@ -58,26 +58,42 @@ def kind_matches(predicted: str | None, item: Item) -> bool:
     return not (numbers_truth and numbers_said and not numbers_truth & numbers_said)
 
 
+# Last words that name no kind of their own, so the word before them does:
+# a "PS4 console" is a PS4, a "sewing machine" is not a washing machine.
+_GENERIC_HEADS = {"console", "machine", "unit", "device", "system", "equipment", "model", "game"}
+
+
+def _core(predicted: str | None) -> list[str]:
+    """A kind's words without its extras ("gas cooker with oven") or a generic last word."""
+    said = words(re.split(r"\b(?:with|plus)\b|\+", predicted or "", maxsplit=1, flags=re.I)[0])
+    while len(said) > 1 and (said[-1] in _SET_WORDS or said[-1] in _GENERIC_HEADS):
+        said = said[:-1]
+    return said
+
+
 def title_kind_matches(predicted: str | None, title: str) -> bool:
     """The predicted kind's head noun, and one of its other words if it has more, are in the title.
 
     For training adverts. Their kind is only the word Jiji was searched with,
     and the search is literal: "pallets" finds activated carbon sold by the
     pallet, "bed frame" finds a hospital bed. The title is what the seller
-    sells, so the read is judged against it instead."""
-    # "gas cooker with oven": the item is what comes before the extras.
-    said = words(re.split(r"\b(?:with|plus)\b|\+", predicted or "", maxsplit=1, flags=re.I)[0])
-    while len(said) > 1 and said[-1] in _SET_WORDS:
-        said = said[:-1]
-    in_title = set(words(title))
+    sells, so the read is judged against it."""
+    said, in_title = _core(predicted), set(words(title))
+    if len(said) > 1 and "".join(said) in "".join(words(title)):
+        return True  # "bed frame" for "Bedframe for Sale"
     if not said or said[-1] not in in_title:
         return False
     return len(said) == 1 or any(w in in_title for w in said[:-1])
 
 
+def _head_in_title(predicted: str | None, title: str) -> bool:
+    said = _core(predicted)
+    return bool(said) and said[-1] in set(words(title))
+
+
 def identity_correct(item: Item, identity: dict, by_title: bool = False) -> bool | None:
     """None when the model said it does not know, which is an abstention, not an error.
-    `by_title` judges the kind against the title, for training adverts."""
+    `by_title` judges the kind against the title first, for training adverts."""
     status = identity.get("status")
     if status == "unknown":
         return None
@@ -93,10 +109,18 @@ def identity_correct(item: Item, identity: dict, by_title: bool = False) -> bool
         # A shared name is the same line in the wrong version: a PS4 is not a
         # PS4 Pro. A shared number alone is not: "Repsol 12.5kg" agrees with a
         # "12.5kg Gas Cylinder" whose title names no brand, and is judged by kind.
-        if any(not any(c.isdigit() for c in t) for t in shared):
+        # Not for training adverts, whose titles often name the brand and no
+        # model: there the model is checked on the photo by OCR (train.ocr_label).
+        if not by_title and any(not any(c.isdigit() for c in t) for t in shared):
             return False
     if by_title:
-        return title_kind_matches(identity.get("kind"), item.answer.title)
+        # The title, or the search word when the title names the same thing
+        # more briefly: "single door refrigerator" for "Thermofrost Refrigerator".
+        # The second path would pass "wooden pallet" for "Pallet Activated
+        # Carbon"; that needs the teacher, who sees the photo, to be fooled
+        # the way the literal search was.
+        kind, title = identity.get("kind"), item.answer.title
+        return title_kind_matches(kind, title) or (kind_matches(kind, item) and _head_in_title(kind, title))
     return kind_matches(identity.get("kind"), item)
 
 

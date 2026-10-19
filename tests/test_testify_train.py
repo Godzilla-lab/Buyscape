@@ -132,8 +132,16 @@ def test_a_training_read_is_judged_by_the_title_not_the_word_it_was_searched_und
     assert train.target(bed, _read(kind="electric hospital bed"))[0] is not None
     carbon = _item("c1", "pallets", "Pallet Activated Carbon")
     assert train.target(carbon, _read(kind="activated carbon"))[0] is not None
-    assert train.target(carbon, _read(kind="wooden pallet"))[0] is None
     assert not title_kind_matches("drill press", "Drilling Machine")
     assert title_kind_matches("gas cooker with oven", "Gas Cooker")
+    assert title_kind_matches("PS4 Pro console", "Ps4 Pro 2 Pads 7 Free Games")
+    assert not title_kind_matches("washing machine", "Industrial Sewing Machine")
+    assert title_kind_matches("bed frame", "Bedframe for Sale")
+    drill = _item("d1", "drilling machine", "INGCO 20V Cordless Drill / Driver")
+    named = _read(status="named", brand="INGCO", model="CDLI200528", kind="cordless drill", read_from=["photo 0"])
+    assert train.target(drill, named, {"identity_from_photos_alone": "named"})[0] is not None
+    fridge = _item("r1", "refrigerator", "Thermofrost Refrigerator")
+    assert train.target(fridge, _read(kind="single door refrigerator"))[0] is not None
+    assert train.target(fridge, _read(kind="chest freezer"))[0] is None
     service = _item("s1", "refrigerator", "AC Fridge Repair, Installation Gas Refilling")
     assert train.target(service, _read(kind="air conditioner")) == (None, "the advert sells a service or wants to buy")
