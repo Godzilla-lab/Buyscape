@@ -13,10 +13,15 @@ without proof". So:
   activated carbon sold by the pallet. Its claims, risks and proof requests are kept: the
   doubt stays, it just no longer stops the price.
 - A model the teacher named that the photo check could not read is cut back
-  to the kind, so the student does not learn to name what it cannot see.
-  Training adverts were never photo checked, so for them the local OCR is the
-  check: every brand and model word the teacher named must be text the OCR
-  found on a photo. OCR cannot add a name, only confirm one.
+  to the kind, so the student does not learn to name what it cannot see. The
+  check is the benchmark's own (`testify-label --split train`, a vision
+  model asked what the photos alone show), which sees logos, sideways text
+  and a console's shape. An advert it has not checked falls back on the
+  local OCR: every brand and model word must be text the OCR found.
+- A model code (any model with a digit in it) stays only when the title or
+  the OCR carries it too; otherwise the brand stays and the code goes. Codes
+  are where the benchmark's silent wrong answers came from: a cover badge
+  read as an engine's model, a 7kg washer named with a code for another.
 - A read where the teacher could not tell what the item is stays a
   cannot_identify example, so the student also learns to decline.
 - A read that is wrong about the item is dropped. A wrong label teaches more
@@ -44,6 +49,7 @@ from ..identify.ocr import OcrReader
 from ..providers.base import ImageRef, ModelRequest
 from ..providers.openrouter import system_text
 from .answer import ClaimAnswer, IdentityAnswer, Reading, money_written
+from .comparables import names
 from .run import lie_entry, reading_request
 from .schema import Item
 from .score import identity_correct
@@ -58,7 +64,7 @@ UNPROVEN = "No photo shows this; it is the seller's word only."
 # The benchmark leaves these out by its photo check; training adverts have
 # none, so their titles are read for it. The title only grades, never prompts.
 NOT_FOR_SALE = re.compile(
-    r"\b(repairs?|repairing|installation|servicing|services?|we buy|buying|wanted|for hire|for rent)\b", re.I
+    r"\b(repairs?|repairing|installation|servicing|services?|we buy|buying|wanted|for hire|for rent)\b", re.IGNORECASE
 )
 
 
@@ -98,17 +104,32 @@ def on_photos(reading: dict, lines: list[str]) -> bool:
     return True
 
 
-def ocr_label(reading: dict, photos: list[Path], ocr: OcrReader | None, max_photos: int = 4) -> dict:
+def ocr_label(reading: dict, photos: list[Path], ocr: OcrReader | None, max_photos: int = 4,
+              lines: list[str] | None = None) -> dict:
     """A photo check for an advert no labeller saw, from the photos the model was shown.
     Without the OCR engine nothing can be confirmed, so a name is cut to the kind."""
     if ocr is None:
         return {"identity_from_photos_alone": "unchecked"}
-    lines = ocr(tuple(ImageRef(p) for p in photos[:max_photos]))
+    if lines is None:
+        lines = ocr(tuple(ImageRef(p) for p in photos[:max_photos]))
     return {"identity_from_photos_alone": "named" if on_photos(reading, lines) else "by_type"}
 
 
-def target(item: Item, reading: dict, label: dict | None = None) -> tuple[Reading | None, str]:
-    """The answer the student should give, and why it was kept or dropped."""
+def code_confirmed(model: str | None, title: str, lines: list[str] | None) -> bool:
+    """A model with no digit is a name the photo check covers. A code must be in the title,
+    or be text the OCR found on a photo (`lines`, None when it was not run)."""
+    if not model or not any(c.isdigit() for c in model):
+        return True
+    want = _norm(names(model))
+    if want and want in _norm(names(title)):
+        return True
+    return lines is not None and on_photos({"identity": {"model": model}}, lines)
+
+
+def target(item: Item, reading: dict, label: dict | None = None,
+           keep_code: bool = True) -> tuple[Reading | None, str]:
+    """The answer the student should give, and why it was kept or dropped.
+    `keep_code` False drops a named read's model code and keeps its brand."""
     try:
         read = Reading.model_validate(reading)
     except ValidationError:
@@ -133,6 +154,9 @@ def target(item: Item, reading: dict, label: dict | None = None) -> tuple[Readin
         if not read.identity.kind or identity_correct(item, data["identity"], by_title=True) is not True:
             return None, "named beyond the photos, and the kind alone is wrong"
         cut = ", name cut to the kind"
+    elif read.identity.status == "named" and read.identity.model and not keep_code:
+        data["identity"]["model"] = None
+        cut = ", model code cut"
     if read.decision != "price":
         data.update(decision="price", reason=WORST_CASE_REASON)
     answer = Reading.model_validate(data)
@@ -166,7 +190,8 @@ def messages(request: ModelRequest, answer: Reading, root: Path) -> list[dict]:
 def build(cases: list[tuple], rows: list[dict], labels: dict[str, dict], root: Path,
           entries: tuple[dict, ...] | None = None, ocr: OcrReader | None = None) -> tuple[list[dict], dict[str, int]]:
     """Training examples from a teacher's clean reads. `cases` holds (item, photos).
-    An item with no photo check is checked by `ocr` when the teacher named it."""
+    When the teacher named the item, `ocr` checks a model code the title does
+    not carry, and the whole name on an advert with no photo check."""
     reads = {r["id"]: r for r in rows if r.get("variant", "clean") == "clean" and r.get("reading")}
     out: list[dict] = []
     tally: dict[str, int] = {}
@@ -175,10 +200,17 @@ def build(cases: list[tuple], rows: list[dict], labels: dict[str, dict], root: P
         if row is None:
             tally["no teacher read"] = tally.get("no teacher read", 0) + 1
             continue
-        label = labels.get(item.id)
-        if label is None and (row["reading"].get("identity") or {}).get("status") == "named":
-            label = ocr_label(row["reading"], photos, ocr)
-        answer, why = target(item, row["reading"], label)
+        label, keep_code = labels.get(item.id), True
+        identity = row["reading"].get("identity") or {}
+        if identity.get("status") == "named":
+            title = item.answer.title or ""
+            lines = None
+            if ocr is not None and (label is None or not code_confirmed(identity.get("model"), title, None)):
+                lines = ocr(tuple(ImageRef(p) for p in photos[:4]))
+            if label is None:
+                label = ocr_label(row["reading"], photos, ocr, lines=lines)
+            keep_code = code_confirmed(identity.get("model"), title, lines)
+        answer, why = target(item, row["reading"], label, keep_code)
         tally[why] = tally.get(why, 0) + 1
         if answer is None:
             continue

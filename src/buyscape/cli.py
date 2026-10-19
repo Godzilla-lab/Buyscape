@@ -610,7 +610,7 @@ def testify_convert(out: Path = typer.Option(ROOT / "eval" / "testify" / "items.
 @app.command("testify-label")
 def testify_label(
     model: str = typer.Option("gemini-3.8-flash", help="Labelling model. A name with no slash is Google AI Studio."),
-    split: str = typer.Option("dev", help="dev, test or all."),
+    split: str = typer.Option("dev", help="dev, test, all, or train for the training pool."),
     reviewed_only: bool = typer.Option(False, help="Only items the hand review covered, to measure agreement first."),
     market: str = typer.Option("", help="Only items from this city, for example lagos. Empty for all."),
     limit: int = typer.Option(0, help="Stop after this many items; 0 for no limit."),
@@ -621,7 +621,12 @@ def testify_label(
         "", help="The variable holding the Google key, for example GEMINI_API_1, to use a second project's free quota."
     ),
 ) -> None:
-    """Check benchmark items photo by photo with a model, and compare it with the hand review."""
+    """Check benchmark items photo by photo with a model, and compare it with the hand review.
+
+    --split train checks the training pool the same way, so the fine-tuning set
+    keeps a teacher's brand or model only where the benchmark's own photo check
+    would. Those labels go to eval/testify/train/, which is never committed.
+    """
     import yaml as _yaml
 
     from .providers.base import QuotaExhausted
@@ -640,12 +645,15 @@ def testify_label(
         str(r["id"]): r
         for r in _yaml.safe_load((ROOT / "eval" / "testify" / "review_dev.yaml").read_text()) or []
     }
+    source = "train_pool.jsonl" if split == "train" else "items.jsonl"
     items = [
-        i for i in load_items(ROOT / "eval" / "testify" / "items.jsonl")
-        if (split == "all" or i.split == split) and (not reviewed_only or i.id in reviews)
+        i for i in load_items(ROOT / "eval" / "testify" / source)
+        if (split in ("all", "train") or i.split == split) and (not reviewed_only or i.id in reviews)
         and (not market or i.market == market)
     ]
     out_path = ROOT / "eval" / "testify" / "labels_ai" / f"{model.replace('/', '_')}.jsonl"
+    if split == "train":
+        out_path = ROOT / "eval" / "testify" / "train" / f"labels_{_dir_name(model)}.jsonl"
     out_path.parent.mkdir(parents=True, exist_ok=True)
     done = {json.loads(l)["id"]: json.loads(l) for l in out_path.read_text().splitlines()} if out_path.exists() else {}
     spend, called, skipped = 0.0, 0, 0
@@ -914,10 +922,13 @@ def testify_train_build(
     runs = ROOT / "eval" / "testify" / "runs" / _dir_name(teacher)
     rows = [json.loads(line) for path in sorted(runs.glob("train*.jsonl")) if ".repeat" not in path.name
             for line in path.read_text().splitlines() if line.strip()]
-    labels_path = ROOT / "eval" / "testify" / "labels_ai" / "gemini-3.5-flash-lite.jsonl"
+    # The benchmark's photo check, and the same check run on the training pool.
     labels = {}
-    if labels_path.exists():
-        labels = {json.loads(line)["id"]: json.loads(line) for line in labels_path.read_text().splitlines() if line}
+    for labels_path in (ROOT / "eval" / "testify" / "labels_ai" / "gemini-3.5-flash-lite.jsonl",
+                        *sorted((ROOT / "eval" / "testify" / "train").glob("labels_*.jsonl"))):
+        if labels_path.exists():
+            labels.update({json.loads(line)["id"]: json.loads(line)
+                           for line in labels_path.read_text().splitlines() if line})
     from .identify.ocr import default_reader
 
     ocr = default_reader()

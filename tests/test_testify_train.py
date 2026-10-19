@@ -148,3 +148,20 @@ def test_a_training_read_is_judged_by_the_title_not_the_word_it_was_searched_und
     assert train.target(fridge, _read(kind="chest freezer"))[0] is None
     service = _item("s1", "refrigerator", "AC Fridge Repair, Installation Gas Refilling")
     assert train.target(service, _read(kind="air conditioner")) == (None, "the advert sells a service or wants to buy")
+
+
+def test_a_vision_check_keeps_a_logo_name_and_a_code_needs_the_title_or_the_ocr(tmp_path: Path):
+    photo = tmp_path / "00.jpg"
+    Image.new("RGB", (32, 24), "blue").save(photo)
+    sewing = _item("e1", "industrial sewing machine", "Emel Industrial Sewing Machine")
+    named = _read(status="named", brand="EMEL", model="EM 8500", kind="industrial sewing machine", read_from=["photo 0"])
+    rows = [{"id": "e1", "variant": "clean", "reading": named}]
+    checked = {"e1": {"identity_from_photos_alone": "named"}}
+    # The logo is no text the OCR can read, but the vision check saw it: the brand stays, the unconfirmed code goes.
+    out, tally = train.build([(sewing, [photo])], rows, checked, tmp_path, ocr=lambda images: [])
+    said = json.loads(out[0]["messages"][2]["content"])["identity"]
+    assert said["brand"] == "EMEL" and "model" not in said and tally == {"kept: price at worst case, model code cut": 1}
+    # A code on the sticker the OCR read is kept.
+    out, _ = train.build([(sewing, [photo])], rows, checked, tmp_path, ocr=lambda images: ["EM8500"])
+    assert json.loads(out[0]["messages"][2]["content"])["identity"]["model"] == "EM 8500"
+    assert train.code_confirmed("PlayStation 4", "Uk Used Clean Ps4 Fat", None)

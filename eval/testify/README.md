@@ -108,6 +108,7 @@ committed.
 ## The fine-tuning set
 
     uv run buyscape testify --model kaggle:google/gemini-3-flash-preview --split train --market kano --no-lies --reads-only
+    uv run buyscape testify-label --model kaggle:google/gemini-3.5-flash-lite --split train --budget-usd 9
     uv run buyscape testify-train-build
 
 A teacher reads the training pool, priced only against training adverts so
@@ -117,8 +118,9 @@ title, which no model sees, and not against the kind the advert was searched
 under, since Jiji's search is literal), drops adverts for a repair service
 or from a buyer, turns a known item into a price at its worst
 case, cuts a model name the photo check could not read back to the kind
-(training adverts have no photo check, so there every brand and model word
-must be text the local OCR found on a photo), keeps an honest "cannot tell" as a cannot_identify example, and pairs each
+(the benchmark's own check, run on the training pool with `testify-label
+--split train`; an advert it has not seen falls back on the local OCR),
+drops a model code that neither the title nor the OCR carries, keeps an honest "cannot tell" as a cannot_identify example, and pairs each
 example with a twin carrying a planted claim from `train_lies.yaml`, never
 the benchmark's `lies.yaml`. The set lands in `eval/testify/train/`, which
 is never committed: it carries sellers' words.
