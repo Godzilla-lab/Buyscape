@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "White rectangular portable power device with OLAX branding.",
+      "Top surface shows status LEDs for AC Mode, Battery Mode, and charge levels (100%, 50%, 5%).",
+      "Side view shows two RJ45 ports (LAN and POE), three DC output jacks, and a reset button.",
+      "Bottom label identifies the device as Model D8 PRO with a 20000mAh battery.",
+      "A significant crack is visible in the plastic casing on the bottom near the ventilation slats (photo 2).",
+      "The exterior casing appears scuffed and dirty (photo 1)."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "mini UPS",
+      "brand": "OLAX",
+      "model": "D8 PRO",
+      "read_from": [
+        "photo 1",
+        "photo 2 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Battery 20000 mah",
+        "verdict": "supported",
+        "evidence": "photo 2 label"
+      },
+      {
+        "claim": "input 100vac-240vac/50-60hz",
+        "verdict": "supported",
+        "evidence": "photo 2 label"
+      },
+      {
+        "claim": "output 1 poe 24v/0.63a",
+        "verdict": "supported",
+        "evidence": "photo 2 label specifies 15W at 24V, which calculates to 0.625A"
+      },
+      {
+        "claim": "output 2 dc 5v/9v/12v...",
+        "verdict": "supported",
+        "evidence": "photo 2 label lists these voltages across multiple DC outputs"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The internal battery may be degraded, swollen, or unable to hold a charge.",
+        "proof": "A video showing the device powering a router for at least 2 hours without AC input.",
+        "if_unproven": "as having a dead battery"
+      },
+      {
+        "risk": "The device may not function or switch to battery mode due to internal damage from the impact that cracked the case.",
+        "proof": "A video showing the device successfully powering a load when the AC power is disconnected.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Essential power and DC connection cables may be missing.",
+        "proof": "A photo showing the AC power cord and DC-to-DC cables included in the sale.",
+        "if_unproven": "as unit only"
+      }
+    ],
+    "proof_requests": [
+      "Video of the device powering a router or similar device while unplugged from the wall.",
+      "Photo of all included cables and accessories.",
+      "Clearer photo of the crack to assess if it affects the structural integrity of the ports."
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identified by the manufacturer's label. Due to the visible physical damage and lack of functional proof, it must be priced at its lowest value as a non-working or damaged unit."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 12566,
+    "input_tokens": 4539,
+    "output_tokens": 2614,
+    "cost_usd": 0.010112,
+    "replayed": false,
+    "fixture_key": "21c89a8f3a2293c0cfa0d0beb268b177",
+    "error": null
+  }
+}

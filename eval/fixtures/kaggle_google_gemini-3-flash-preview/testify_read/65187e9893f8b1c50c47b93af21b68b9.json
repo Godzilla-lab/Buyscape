@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "A Michelin Pilot Road 4 GT motorcycle tire is shown.",
+      "The sidewall in photo 0 and 2 clearly shows the size '180/55 ZR 17'.",
+      "The brand 'MICHELIN' and model 'Pilot Road 4 GT' are visible on the sidewall.",
+      "Photo 1 shows the tread pattern, which appears used but intact.",
+      "All three photos appear to show the same single tire (the rear 180/55).",
+      "The second tire mentioned by the seller (120/70 ZR17) is not visible in any photo.",
+      "The DOT manufacture date code is not visible in the provided shots."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "motorcycle tire",
+      "brand": "Michelin",
+      "model": "Pilot Road 4 GT 180/55 ZR 17",
+      "read_from": [
+        "photo 0",
+        "photo 2"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "1 piece ... Michelin 180/55 ZR17",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "1 piece ... 120/70 ZR17",
+        "verdict": "unverified",
+        "evidence": "No photo shows the second tire mentioned."
+      },
+      {
+        "claim": "for Yamaha motorcycles",
+        "verdict": "unverifiable_remote",
+        "evidence": "Tires are universal fitments based on size, not specific to one brand."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The second tire (120/70) may be in poor condition or missing.",
+        "proof": "A photo of the 120/70 ZR17 tire showing its sidewall and tread.",
+        "if_unproven": "as a single tire purchase only"
+      },
+      {
+        "risk": "The tires may be old and unsafe (rubber hardens over time).",
+        "proof": "A clear photo of the 4-digit DOT date code on the sidewall.",
+        "if_unproven": "as expired/scrap rubber"
+      },
+      {
+        "risk": "Hidden internal repairs or punctures.",
+        "proof": "A photo of the inside of the tire casings.",
+        "if_unproven": "as having multiple plugs or patches"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the second tire (120/70 ZR17) showing sidewall and tread.",
+      "Close-up photo of the 4-digit DOT date code for both tires.",
+      "Photos of the inside of both tires to check for repairs."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller is offering a pair of tires, but only one is pictured. Additionally, the manufacture date (DOT code) is missing, which is essential for valuing used tires safely."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 13639,
+    "input_tokens": 4515,
+    "output_tokens": 2907,
+    "cost_usd": 0.010979,
+    "replayed": false,
+    "fixture_key": "65187e9893f8b1c50c47b93af21b68b9",
+    "error": null
+  }
+}
