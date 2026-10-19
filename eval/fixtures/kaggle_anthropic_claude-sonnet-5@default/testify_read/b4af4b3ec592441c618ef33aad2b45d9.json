@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows a bare automotive engine assembly sitting on bare ground/pavement, disconnected from any vehicle.",
+      "Wiring harness, intake manifold, and various sensors/hoses are visible, still attached and dangling.",
+      "A watermark reading 'TI AUTOMOBILE' is overlaid on the image, appears to be a dealer/reseller stamp, not a vehicle marking.",
+      "No engine code, serial number, manufacturer logo, or part plate is legible anywhere on the block or covers.",
+      "Surface is dusty/dirty with some visible grime on the block, consistent with a used pull from a vehicle.",
+      "No stand, crate, or packaging visible; engine rests directly on concrete/tarmac, raising risk of debris ingress into ports.",
+      "No visible turbo, alternator, or starter motor in frame; unclear if these are included or already removed."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used car engine (complete assembly with wiring harness)",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Direct tokumbo engine (directly imported, used/second-hand)",
+        "verdict": "unverifiable_remote",
+        "evidence": "No import documents, container photo, or markings in photo 0 to confirm direct import origin."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Make/model and engine code are unknown, which is the single biggest driver of an engine's value and buyer compatibility.",
+        "proof": "Close-up photo of the stamped engine code/serial plate on the block, or a photo of the engine bay/VIN plate of the donor car.",
+        "if_unproven": "cannot be priced at all without this, since price ranges across engine types are too wide"
+      },
+      {
+        "risk": "Unknown whether the engine runs or has internal damage (compression, timing, bearings).",
+        "proof": "A start-up video showing the engine running smoothly with no unusual noise or smoke.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Possible missing ancillary parts (turbo, alternator, starter, sensors) not visible in frame.",
+        "proof": "Full 360-degree photo set showing all sides of the engine including front and rear faces.",
+        "if_unproven": "priced as incomplete/parts missing"
+      },
+      {
+        "risk": "Mileage/history of the donor vehicle is unknown.",
+        "proof": "Photo of odometer or service history sticker from the donor car if available.",
+        "if_unproven": "priced as high-mileage/unknown history"
+      },
+      {
+        "risk": "Engine sitting on bare ground exposes open ports to dirt/debris ingress, risking contamination.",
+        "proof": "Photo showing ports covered/plugged, or confirmation of how it was stored before listing.",
+        "if_unproven": "priced as contaminated/needs inspection"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the engine code/serial number stamped on the block.",
+      "Start-up video of the engine running.",
+      "Photos from all sides (front, rear, both flanks, top, bottom) to confirm completeness.",
+      "Photo of the donor vehicle or its VIN/engine bay for cross-reference.",
+      "Odometer or mileage documentation from donor vehicle, if available."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The engine's make, model, and engine code are not legible in the single photo, and this is the key fact that sets any price range for a used engine; without it, even a worst-case price cannot be assigned."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 20781,
+    "input_tokens": 1981,
+    "output_tokens": 1792,
+    "cost_usd": 0.018723,
+    "replayed": false,
+    "fixture_key": "b4af4b3ec592441c618ef33aad2b45d9",
+    "error": null
+  }
+}

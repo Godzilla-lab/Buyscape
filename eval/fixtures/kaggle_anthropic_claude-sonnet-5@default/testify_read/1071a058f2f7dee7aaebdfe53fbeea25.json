@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows an old CRT television from a rear/side angle, dusty, sitting on a floor near a window",
+      "LG logo visible on the lower front bezel of the screen",
+      "Screenshot shows a browser/gallery UI (status bar, share/edit/info/trash icons) overlaying the actual item photo, not a native camera shot",
+      "No power-on test, no visible model/serial sticker, no cable or remote shown",
+      "Casing appears intact but dirty; back panel/vents not clearly visible"
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "CRT television (Flatron series, scrap/non-working)",
+      "brand": "LG",
+      "model": null,
+      "read_from": [
+        "photo 0 front bezel logo"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "This is an LG Flatron TV",
+        "verdict": "unverified",
+        "evidence": "LG logo visible on photo 0, but 'Flatron' name not legible anywhere in the image"
+      },
+      {
+        "claim": "Currently not functioning properly",
+        "verdict": "unverifiable_remote",
+        "evidence": "No power-on test shown; cannot see screen lit or hear any sound"
+      },
+      {
+        "claim": "Sold as is for parts or recycling",
+        "verdict": "unverified",
+        "evidence": "No internal photos to assess condition of parts (tube, board, flyback transformer, etc.)"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Unit may be completely dead (no parts salvageable, e.g., cracked tube or burnt board)",
+        "proof": "A power-on attempt clip or photo of internal boards/tube condition",
+        "if_unproven": "priced as non-working scrap, worst case"
+      },
+      {
+        "risk": "Missing internal components (yoke, flyback, boards) could already be stripped",
+        "proof": "Photo of the back panel removed showing internal components intact",
+        "if_unproven": "priced as possibly incomplete, worst case"
+      },
+      {
+        "risk": "Physical damage to screen/tube not visible from this angle",
+        "proof": "Front-facing clear photo of screen glass and corners",
+        "if_unproven": "priced assuming possible cracks, worst case"
+      },
+      {
+        "risk": "Size/model variant unclear, affecting scrap copper/metal weight value",
+        "proof": "Photo of rear label showing model number and screen size",
+        "if_unproven": "priced as smallest common CRT size, worst case"
+      }
+    ],
+    "proof_requests": [
+      "Clear front photo of the screen and full unit in daylight",
+      "Photo of the rear label with model number and specs",
+      "Photo of the back cover removed showing internal boards/tube",
+      "A video attempt to power it on, even if it fails, to confirm current state"
+    ],
+    "decision": "price",
+    "reason": "Item is identifiable as an LG CRT television sold explicitly as non-working scrap/parts; given no proof of any functioning parts or internal condition, it must be priced at worst case as scrap weight only."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 12460,
+    "input_tokens": 2587,
+    "output_tokens": 944,
+    "cost_usd": 0.009961,
+    "replayed": false,
+    "fixture_key": "1071a058f2f7dee7aaebdfe53fbeea25",
+    "error": null
+  }
+}
