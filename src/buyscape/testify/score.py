@@ -60,12 +60,19 @@ def kind_matches(predicted: str | None, item: Item) -> bool:
 
 # Last words that name no kind of their own, so the word before them does:
 # a "PS4 console" is a PS4, a "sewing machine" is not a washing machine.
-_GENERIC_HEADS = {"console", "machine", "unit", "device", "system", "equipment", "model", "game"}
+_GENERIC_HEADS = {"console", "machine", "unit", "device", "system", "equipment", "model", "game", "assembly"}
+# Market words for one thing, read off training titles by hand: a "headlight
+# assembly" is the "Headlamp for Toyota 4runner" it was sold as. Training only.
+_TITLE_SAME = {"headlamp": "headlight", "hob": "cooker", "spinning": "spin", "catalyst": "catalytic"}
+
+
+def _title_words(text: str | None) -> list[str]:
+    return [_TITLE_SAME.get(w, w) for w in words(text)]
 
 
 def _core(predicted: str | None) -> list[str]:
     """A kind's words without its extras ("gas cooker with oven") or a generic last word."""
-    said = words(re.split(r"\b(?:with|plus)\b|\+", predicted or "", maxsplit=1, flags=re.I)[0])
+    said = _title_words(re.split(r"\b(?:with|plus)\b|\+", predicted or "", maxsplit=1, flags=re.I)[0])
     while len(said) > 1 and (said[-1] in _SET_WORDS or said[-1] in _GENERIC_HEADS):
         said = said[:-1]
     return said
@@ -78,17 +85,18 @@ def title_kind_matches(predicted: str | None, title: str) -> bool:
     and the search is literal: "pallets" finds activated carbon sold by the
     pallet, "bed frame" finds a hospital bed. The title is what the seller
     sells, so the read is judged against it."""
-    said, in_title = _core(predicted), set(words(title))
-    if len(said) > 1 and "".join(said) in "".join(words(title)):
+    said, in_title = _core(predicted), set(_title_words(title))
+    if len(said) > 1 and "".join(said) in "".join(_title_words(title)):
         return True  # "bed frame" for "Bedframe for Sale"
     if not said or said[-1] not in in_title:
         return False
     return len(said) == 1 or any(w in in_title for w in said[:-1])
 
 
-def _head_in_title(predicted: str | None, title: str) -> bool:
-    said = _core(predicted)
-    return bool(said) and said[-1] in set(words(title))
+def _confirmed_by_title(predicted: str | None, item: Item) -> bool:
+    """The title carries the read's head noun, or every word the advert was searched with."""
+    said, in_title = _core(predicted), set(_title_words(item.answer.title))
+    return bool(said) and (said[-1] in in_title or set(_title_words(item.answer.kind)) <= in_title)
 
 
 def identity_correct(item: Item, identity: dict, by_title: bool = False) -> bool | None:
@@ -120,7 +128,7 @@ def identity_correct(item: Item, identity: dict, by_title: bool = False) -> bool
         # Carbon"; that needs the teacher, who sees the photo, to be fooled
         # the way the literal search was.
         kind, title = identity.get("kind"), item.answer.title
-        return title_kind_matches(kind, title) or (kind_matches(kind, item) and _head_in_title(kind, title))
+        return title_kind_matches(kind, title) or (kind_matches(kind, item) and _confirmed_by_title(kind, item))
     return kind_matches(identity.get("kind"), item)
 
 

@@ -137,6 +137,9 @@ def test_a_training_read_is_judged_by_the_title_not_the_word_it_was_searched_und
     assert title_kind_matches("PS4 Pro console", "Ps4 Pro 2 Pads 7 Free Games")
     assert not title_kind_matches("washing machine", "Industrial Sewing Machine")
     assert title_kind_matches("bed frame", "Bedframe for Sale")
+    assert title_kind_matches("headlight assembly", "Headlamp for Toyota 4runner")
+    microwave = _item("m1", "microwave", "Hisense Microwave")
+    assert train.target(microwave, _read(kind="microwave oven"))[0] is not None
     drill = _item("d1", "drilling machine", "INGCO 20V Cordless Drill / Driver")
     named = _read(status="named", brand="INGCO", model="CDLI200528", kind="cordless drill", read_from=["photo 0"])
     assert train.target(drill, named, {"identity_from_photos_alone": "named"})[0] is not None
