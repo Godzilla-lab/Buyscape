@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Rigid tanker truck with three axles (6x2 or 6x4 configuration).",
+      "Tanker body features 'Millbrook Fuels' branding and an Irish phone number '049 8541300' (Photo 0).",
+      "Side-mounted discharge system with multiple valves, hoses, and meters (Photo 0).",
+      "Blue cab with a high-mounted air intake and a side-mounted fuel tank (Photo 1).",
+      "Diesel engine with visible dust and surface corrosion on metal lines and components (Photo 2).",
+      "External rust spots and staining visible on the white tanker shell (Photo 0).",
+      "Tires appear used with some visible wear; rims show surface rust (Photo 0)."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "diesel tanker truck",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "20000 diesels tanker",
+        "verdict": "unverified",
+        "evidence": "The capacity is not confirmed by a manufacturer's plate or calibration certificate in the photos."
+      },
+      {
+        "claim": "clean in and out",
+        "verdict": "unverified",
+        "evidence": "The exterior shows rust and stains (Photo 0), and the engine bay is dusty (Photo 2); the interior of the tank is not visible."
+      },
+      {
+        "claim": "more or less like new truck",
+        "verdict": "contradicted",
+        "evidence": "Visible rust on the tank, rims, and engine components indicates significant age and previous use."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Undisclosed mechanical faults in engine or transmission",
+        "proof": "A video of the engine starting from cold and the truck being driven through all gears.",
+        "if_unproven": "as non-running or requiring major overhaul"
+      },
+      {
+        "risk": "Tank leaks or faulty discharge meters/pumps",
+        "proof": "A video showing the discharge system in operation and a recent pressure test certificate.",
+        "if_unproven": "as a leaking tank with non-functional meters"
+      },
+      {
+        "risk": "Actual tank capacity is less than claimed",
+        "proof": "A clear photo of the tank's identification plate showing the total volume.",
+        "if_unproven": "as a 15,000L capacity tank"
+      },
+      {
+        "risk": "Unknown vehicle age and chassis model",
+        "proof": "Photos of the front grille (for brand) and the VIN/chassis plate (for year and model).",
+        "if_unproven": "as the lowest-value comparable chassis for this axle configuration"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the front of the truck showing the brand and model badges.",
+      "Photo of the tank's manufacturer/capacity plate.",
+      "Photo of the truck's VIN or chassis plate.",
+      "Photo of the dashboard showing the odometer (mileage).",
+      "Video of the engine running and the truck driving."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The truck's manufacturer, model, and year of production cannot be identified from the photos, and the tank's capacity is unverified. These details are essential for a commercial vehicle valuation."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 27546,
+    "input_tokens": 4502,
+    "output_tokens": 6223,
+    "cost_usd": 0.02092,
+    "replayed": false,
+    "fixture_key": "5fc33de03ef719915c30ce5a34d48850",
+    "error": null
+  }
+}
