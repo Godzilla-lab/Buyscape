@@ -1,0 +1,70 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows two framed monocrystalline solar panels leaning against a wall outdoors.",
+      "A faint watermark reading something like 'WIOLA SOLAR ENERGY' is visible on the panels, but no wattage or model label is legible.",
+      "No battery is visible in the photo, despite the seller's text describing a battery.",
+      "Panels show normal outdoor wear; no cracks or discoloration clearly visible, but image resolution is low and partially obscured by a motorcycle in the background."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel (pair, monocrystalline)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 (no readable brand/wattage plate)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Izutech solar energy specializes in all solar equipment (inverter, panels, charge controller, etc.)",
+        "verdict": "unverifiable_remote",
+        "evidence": "No shopfront, inventory, or business proof shown in photo 0."
+      },
+      {
+        "claim": "Battery is new, holds charge for 8 hours, never repaired.",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows only solar panels, no battery is depicted, so this claim cannot be matched to the item pictured."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Unknown wattage/output rating of the panels, which drives most of the price.",
+        "proof": "A clear close-up photo of the panel's rear label showing wattage, voltage, and model.",
+        "if_unproven": "priced as lowest-common generic unbranded panel wattage"
+      },
+      {
+        "risk": "Possible hidden cell damage, microcracks, or hotspot degradation not visible at this resolution.",
+        "proof": "Close-up photos of each panel's front glass and junction box, plus a daylight output reading from a multimeter or inverter display.",
+        "if_unproven": "priced as used/untested condition"
+      },
+      {
+        "risk": "Mismatch between seller's text (battery) and photo (panels) suggests either a wrong photo or an attempt to bundle unrelated claims.",
+        "proof": "A photo of the actual battery referenced in the text, with visible brand/model and age markings.",
+        "if_unproven": "battery claim excluded from pricing entirely; only panels priced"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the rear label on each solar panel showing wattage, voltage, and brand/model.",
+      "A photo or video of the panels connected to a charge controller/meter showing live output in daylight.",
+      "A separate, clear photo of the battery mentioned in the text, including brand, model, and age."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo only shows unlabeled solar panels with no visible wattage/model, and the seller's battery claim does not match anything in the image, so no worst-case price can be anchored without further proof."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 16679,
+    "input_tokens": 2017,
+    "output_tokens": 1466,
+    "cost_usd": 0.015535,
+    "replayed": false,
+    "fixture_key": "79951c47b47ab5007ad8c79873ee1bbe",
+    "error": null
+  }
+}
