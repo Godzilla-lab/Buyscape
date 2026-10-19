@@ -131,21 +131,24 @@ def code_confirmed(model: str | None, title: str, lines: list[str] | None) -> bo
 
 def _forget(data: dict, gone: list[str]) -> dict | None:
     """The answer with no word of a cut name left in it. A note that saw the name goes,
-    a claim proven only by reading it falls back to unverified, and a reason naming it
+    a claim settled by reading it falls back to unverified, and a reason naming it
     becomes the worst-case reason. None when nothing seen would be left."""
-    keys = [_norm(g) for g in gone if g and len(_norm(g)) >= 3]
+    keys = [_norm(g) for g in gone if g and _norm(g)]
     if not keys:
         return data
 
     def names_it(text: str | None) -> bool:
-        return any(k in _norm(text or "") for k in keys)
+        # A short code ("X3") must be a whole word, so it is not found inside another.
+        words = {_norm(w) for w in re.split(r"[^A-Za-z0-9]+", text or "")}
+        return any(k in _norm(text or "") if len(k) >= 3 else k in words for k in keys)
 
     data["observations"] = [o for o in data["observations"] if not names_it(o)]
     if not data["observations"]:
         return None
     for claim in data["claims"]:
-        if claim["verdict"] == "supported" and names_it(claim.get("evidence")):
-            claim.update(verdict="unverified", evidence=UNREADABLE)
+        if names_it(claim.get("evidence")):
+            verdict = "unverified" if claim["verdict"] in ("supported", "contradicted") else claim["verdict"]
+            claim.update(verdict=verdict, evidence=UNREADABLE)
     if names_it(data.get("reason")):
         data["reason"] = WORST_CASE_REASON
     return data

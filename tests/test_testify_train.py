@@ -176,5 +176,14 @@ def test_a_cut_code_leaves_no_note_that_it_was_read():
     assert why == "kept: price at worst case, model code cut"
     assert answer.observations == ["a white industrial sewing machine on a table"]
     assert answer.claims[0].verdict == "unverified" and "EM 8500" not in answer.model_dump_json().replace(answer.claims[0].claim, "")
+    read["claims"] = [{"claim": "Model: EM 850", "verdict": "contradicted", "evidence": "the sticker says EM 8500"}]
+    answer, _ = train.target(sewing, read, {"identity_from_photos_alone": "named"}, keep_code=False)
+    assert answer.claims[0].verdict == "unverified" and answer.claims[0].evidence == train.UNREADABLE
+    fan = _item("x3", "standing fan", "X3 Rechargeable Standing Fan")
+    short = _read(status="named", brand="Ox", model="X3", read_from=["photo 0"])
+    short["reason"] = "Clearly the X3 model."
+    short["decision"] = "price"
+    answer, _ = train.target(fan, short, {"identity_from_photos_alone": "named"}, keep_code=False)
+    assert answer.reason == train.WORST_CASE_REASON
     only_the_code = dict(read, observations=["sticker reads EM 8500"])
     assert train.target(sewing, only_the_code, {"identity_from_photos_alone": "named"}, keep_code=False)[0] is None
