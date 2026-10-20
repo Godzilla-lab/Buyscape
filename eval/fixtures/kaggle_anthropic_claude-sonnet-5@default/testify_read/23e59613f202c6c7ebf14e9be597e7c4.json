@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Single solar panel panel leaning against an interior wall, shot from an angle.",
+      "Panel has black frame, half-cut monocrystalline-style cells.",
+      "A watermark reading 'INNOSON GLOBAL GROUP' is overlaid on the image center.",
+      "No manufacturer nameplate, wattage sticker, or model number is legible anywhere on the frame.",
+      "No battery of any kind is visible in this photo, despite the seller's text describing a battery."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 (panel visible, no legible plate)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Battery is new, holds charge for 8 hours",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows only a solar panel; no battery is depicted at all, so the photo does not support or even relate to this claim."
+      },
+      {
+        "claim": "Never repaired",
+        "verdict": "unverifiable_remote",
+        "evidence": "No battery or panel damage history shown; nothing in photo 0 can confirm repair history."
+      },
+      {
+        "claim": "Implied: item for sale is a solar energy solution (panel + battery system)",
+        "verdict": "unverified",
+        "evidence": "Only one component (a panel) is shown; no system, inverter, or battery photographed."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Panel wattage/model unknown, which drives price heavily",
+        "proof": "Close-up photo of the rear nameplate sticker or frame-edge label showing wattage, model, and manufacturer",
+        "if_unproven": "priced as an unbranded/unknown-wattage generic panel at the lowest plausible wattage tier"
+      },
+      {
+        "risk": "Battery claimed in text is not shown; could be absent, different condition, or a bait mismatch",
+        "proof": "Direct photo of the actual battery unit with brand/model label and a voltage/charge meter reading",
+        "if_unproven": "battery priced as not included / not working, since no visual evidence exists"
+      },
+      {
+        "risk": "Hidden cell damage (microcracks, hot spots) not visible at this oblique angle/lighting",
+        "proof": "Straight-on, well-lit daylight photo of the full panel face, plus an electroluminescence or multimeter output test if available",
+        "if_unproven": "priced as possibly damaged/reduced-output panel"
+      },
+      {
+        "risk": "Frame or junction box corrosion/damage from handling or prior installation",
+        "proof": "Close-up photos of all four corners and the rear junction box/cables",
+        "if_unproven": "priced assuming worst-case cosmetic/functional frame damage"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the panel's rear nameplate/sticker showing wattage, model, and manufacturer",
+      "Photo of the actual battery referenced in the text, including its label/model and a charge-level or voltage reading",
+      "Straight-on daylit photo of the full panel face",
+      "Close-up of all four corners and the junction box on the panel's back"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo shows an unbranded, unlabeled solar panel with no wattage/model visible, and the seller's central claim concerns a battery that is not shown in any photo, so even a worst-case price cannot be assigned without the missing nameplate and battery images."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 20570,
+    "input_tokens": 2538,
+    "output_tokens": 1820,
+    "cost_usd": 0.023276,
+    "replayed": false,
+    "fixture_key": "23e59613f202c6c7ebf14e9be597e7c4",
+    "error": null
+  }
+}

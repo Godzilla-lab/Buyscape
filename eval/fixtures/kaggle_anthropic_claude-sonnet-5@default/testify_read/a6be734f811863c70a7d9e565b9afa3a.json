@@ -1,0 +1,103 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows a mirrorless camera body with a lens attached, dark blue background, text 'LUMIX' and a single letter 'G' visible on the body but no full model number legible",
+      "Photo 0 shows a lens front element, but lighting/glare limits clear inspection for scratches or fungus",
+      "Photo 1 shows the camera with the flip screen open displaying 'Please set the clock', indicating the camera powers on",
+      "Photo 1 shows one battery and one charger unit beside the camera, not two batteries",
+      "No shutter count display, no test shot, no serial number plate visible in either photo"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "mirrorless camera",
+      "brand": "Lumix",
+      "model": null,
+      "read_from": [
+        "photo 0 body badge 'LUMIX' and 'G'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Lumix G7 mirrorless camera",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows 'LUMIX' and 'G' but the specific model number (e.g. G7) is not legible in either photo"
+      },
+      {
+        "claim": "With 2 batteries and a charger",
+        "verdict": "contradicted",
+        "evidence": "Photo 1 shows only one battery and one charger unit, not two batteries"
+      },
+      {
+        "claim": "Shutter count under 5,000",
+        "verdict": "unverifiable_remote",
+        "evidence": "No menu screenshot or info display showing shutter count in either photo"
+      },
+      {
+        "claim": "No fungus or scratch on the lens",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows the lens front at an angle with glare; not a clear macro shot of the glass"
+      },
+      {
+        "claim": "Original battery and charger, never repaired",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal shots, no proof of repair history or battery authenticity markings visible"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Exact model number unknown (affects value significantly between Lumix G-series models)",
+        "proof": "Clear close-up photo of the model badge/nameplate on the top or front of the camera, or the model name in the on-screen menu",
+        "if_unproven": "priced as the lowest-value plausible model in the Lumix G-series until model is confirmed"
+      },
+      {
+        "risk": "True shutter count unverified, could be much higher than claimed",
+        "proof": "Photo or screen recording of the camera's shutter count from the setup/info menu",
+        "if_unproven": "priced as a high-use unit with unknown shutter count"
+      },
+      {
+        "risk": "Lens could have internal fungus, haze, or scratches not visible in current angle",
+        "proof": "Clear photos of the lens held up to light from both front and rear elements",
+        "if_unproven": "priced as lens with optical defects"
+      },
+      {
+        "risk": "Only one battery confirmed present despite claim of two",
+        "proof": "Photo showing both batteries side by side",
+        "if_unproven": "priced as sold with a single battery only"
+      },
+      {
+        "risk": "Sensor, autofocus, and overall functional condition unverified beyond power-on",
+        "proof": "A video clip showing the camera powering on, taking a photo, and autofocus engaging on the lens",
+        "if_unproven": "priced as functionality unconfirmed, worst case treated as partially working"
+      },
+      {
+        "risk": "Possible prior repair or parts swap not disclosed",
+        "proof": "Photo of screws/body seams for tamper marks, and serial number matching on body and any box/receipt",
+        "if_unproven": "priced as possibly repaired/non-original internals"
+      }
+    ],
+    "proof_requests": [
+      "Clear close-up photo of the model name/number plate on the camera body",
+      "Photo or video of the shutter count from the camera's menu",
+      "Macro photos of the front and rear lens elements under light, checking for fungus/scratches",
+      "Photo showing both batteries together",
+      "Short video of the camera powering on and taking a test shot"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The specific model number that materially sets the price is not legible in the photos, and the central condition claims (shutter count, lens clarity, battery count) are unverified or contradicted, so even a worst-case price cannot be anchored without a clearer model shot and supporting proof."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 28963,
+    "input_tokens": 2976,
+    "output_tokens": 2650,
+    "cost_usd": 0.029293,
+    "replayed": false,
+    "fixture_key": "a6be734f811863c70a7d9e565b9afa3a",
+    "error": null
+  }
+}

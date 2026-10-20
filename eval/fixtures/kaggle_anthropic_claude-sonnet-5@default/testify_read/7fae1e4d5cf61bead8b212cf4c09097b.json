@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 and 1 show a white game console body with a diamond-vent pattern and an Xbox logo on the top-left corner, consistent with the Xbox One S shape.",
+      "The console is wrapped in clear plastic and held by a hand near a shop window; no price tag, serial sticker, or model number is visible.",
+      "No power adapter, HDMI cable, controller, or retail box is visible in either photo.",
+      "The side of the unit that would show a disc-drive slot (to confirm 'disc-free' All-Digital Edition) is not clearly visible in either shot.",
+      "No screen-on or boot-up shot is shown, so functional state cannot be judged.",
+      "Background shows unrelated stock (hard drives, other gadgets) suggesting a general electronics resale shop, not a dedicated gaming store."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "games console",
+      "brand": "Microsoft",
+      "model": "Xbox One S",
+      "read_from": [
+        "photo 0 Xbox logo on console top",
+        "photo 1 Xbox logo on console top"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Xbox One S All-Digital Edition (disc-free)",
+        "verdict": "unverified",
+        "evidence": "Neither photo clearly shows the disc-slot area (or its absence) to confirm the All-Digital variant versus a standard disc-based One S."
+      },
+      {
+        "claim": "Compact '40%' sized Xbox One S console",
+        "verdict": "unverifiable_remote",
+        "evidence": "No reference object or dimension shown in either photo to confirm size claim."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Cannot confirm disc-free (All-Digital) vs standard disc-drive One S, which changes resale value.",
+        "proof": "A clear photo of the front/side edge showing either a disc slot or a flat panel where it would be.",
+        "if_unproven": "priced as the lower-value variant consistent with the seller's claim, i.e. All-Digital, since that cannot be upgraded to the higher-value disc model without proof"
+      },
+      {
+        "risk": "No power brick, HDMI cable, or controller shown, so the sale may be console-only.",
+        "proof": "A photo laying out all included accessories (power cable, HDMI cable, controller) next to the console.",
+        "if_unproven": "priced as console unit only, no accessories"
+      },
+      {
+        "risk": "No power-on or boot-to-dashboard test shown, so functionality (HDD, HDMI port, overheating issues) is unknown.",
+        "proof": "A short video clip of the console powering on and reaching the Xbox dashboard.",
+        "if_unproven": "priced as not working / for-parts condition"
+      },
+      {
+        "risk": "No serial number or storage capacity (e.g. 500GB/1TB) visible, which affects price tier.",
+        "proof": "A close-up photo of the rear/bottom label showing serial number and storage capacity.",
+        "if_unproven": "priced at the lowest standard storage tier for this model"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the disc-slot area (or flat panel) to confirm All-Digital vs disc edition.",
+      "Photo of all included accessories: power cable, HDMI cable, controller.",
+      "Short video of the console powering on to the dashboard.",
+      "Close-up photo of the rear label showing serial number and storage capacity."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The core identity (Xbox One S) is visible, but the variant that sets the price (All-Digital vs disc) and basic functionality cannot be confirmed from the photos, and accessory completeness is unknown, so even a worst-case price is not yet safely anchored without the disc-slot shot."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 23642,
+    "input_tokens": 2642,
+    "output_tokens": 2064,
+    "cost_usd": 0.022765,
+    "replayed": false,
+    "fixture_key": "7fae1e4d5cf61bead8b212cf4c09097b",
+    "error": null
+  }
+}
