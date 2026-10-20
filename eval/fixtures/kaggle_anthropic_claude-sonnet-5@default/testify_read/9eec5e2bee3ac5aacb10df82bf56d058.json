@@ -1,0 +1,97 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Three photos show a stack of used tires and separate alloy wheels on bare/muddy ground.",
+      "Tire sidewalls are caked in dust/mud; no readable brand name, size code, or DOT date stamp is visible in any photo.",
+      "Photo 2 shows four tires laid side by side; at least two different tread patterns are visible, suggesting the four tires may not be a matched set.",
+      "Yellow chalk/paint marks are visible on some sidewalls (likely dealer/auction marks), but no legible text.",
+      "Tread grooves appear present with some depth, but dirt obscures true wear level; no close-up of tread depth gauge or coin test.",
+      "No sidewall bulge or puncture/patch is clearly visible, but shot angle and dirt limit confidence."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "set of used car tyres with matching alloy wheels",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Direct Belgium tyres and wheels",
+        "verdict": "unverifiable_remote",
+        "evidence": "No brand, country-of-origin marking, or import sticker is legible in any photo."
+      },
+      {
+        "claim": "Tread is still 90 percent",
+        "verdict": "unverified",
+        "evidence": "Tread grooves are visible in photo 2 but covered in dirt; no measurement or clean close-up provided."
+      },
+      {
+        "claim": "No patch, no bulge",
+        "verdict": "unverified",
+        "evidence": "Sidewalls are dusty and only partially shown; no full 360-degree sidewall view or close-up of repair areas."
+      },
+      {
+        "claim": "Removed from a 2023 car",
+        "verdict": "unverifiable_remote",
+        "evidence": "No DOT/manufacture date code or vehicle documentation is visible in any photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Tire size and load/speed rating unknown, which drives most of the price",
+        "proof": "Clear close-up photo of the sidewall showing size code (e.g. 225/45R18) and brand name",
+        "if_unproven": "priced as generic unknown-size used tyre, lowest tier"
+      },
+      {
+        "risk": "Tires may not be a matched set (different tread patterns seen in photo 2)",
+        "proof": "Four separate close-ups, one per tyre, showing full sidewall and tread side by side",
+        "if_unproven": "priced as mismatched/non-set, lower than a matched set"
+      },
+      {
+        "risk": "True tread depth and even wear cannot be confirmed through dirt",
+        "proof": "Clean tread shot with a depth gauge or coin against the groove",
+        "if_unproven": "priced as worn/near-replacement tread"
+      },
+      {
+        "risk": "Manufacture date (age) unknown; old tyres are unsafe regardless of tread",
+        "proof": "Close-up of DOT code on sidewall showing week/year of manufacture",
+        "if_unproven": "priced as old/unknown-age stock, discounted"
+      },
+      {
+        "risk": "Hidden sidewall damage, patches, or bulges possible given dirt coverage",
+        "proof": "Full clean 360-degree sidewall video of each tyre",
+        "if_unproven": "priced as if damage present"
+      },
+      {
+        "risk": "Wheels' size, offset, and bolt pattern unknown, affecting fitment value",
+        "proof": "Photo of wheel back showing stamped size/offset/bolt pattern",
+        "if_unproven": "priced as generic used alloy wheel, unconfirmed fitment"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of each tyre's sidewall showing brand name and size code clearly",
+      "Close-up of DOT date code for manufacture year",
+      "Clean, dirt-free photo of tread depth with a gauge or coin",
+      "Full sidewall video of each tyre to check for patches/bulges",
+      "Photo of wheel backside showing stamped size/offset/bolt pattern"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "No brand, size, or age markings are legible in any photo, and tires may be mismatched, so even a worst-case price cannot be set until a clear sidewall/DOT shot is provided."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 20899,
+    "input_tokens": 3118,
+    "output_tokens": 1798,
+    "cost_usd": 0.024216,
+    "replayed": false,
+    "fixture_key": "9eec5e2bee3ac5aacb10df82bf56d058",
+    "error": null
+  }
+}

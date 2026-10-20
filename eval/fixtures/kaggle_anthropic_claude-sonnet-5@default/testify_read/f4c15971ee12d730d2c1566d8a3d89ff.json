@@ -1,0 +1,88 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: an orange gas cylinder with brass valve and carrying handle, sitting among other cylinders (a red one in mesh wrap, a blue one, and a green-capped one) in a cluttered storage area.",
+      "Photo 1: the same orange cylinder from another angle, showing scuffed paint and a second orange cylinder stacked on a red one behind it.",
+      "Photo 2: close-up of an orange cylinder showing printed text '12,5' and the brand name 'REPSOL' with a logo, plus a barcode sticker; the valve area is out of frame/cut off at top.",
+      "No visible hydrostatic test stamp, manufacture date, or safety certification sticker legible in any photo.",
+      "Surface shows scratches, scuffed paint and some rust-colored marks near the base and handle in photos 0 and 1.",
+      "Multiple cylinders of different colors are present in the background; unclear which exact cylinder(s) are being sold."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "12.5kg LPG gas cylinder",
+      "brand": "Repsol",
+      "model": null,
+      "read_from": [
+        "photo 2 label text 'REPSOL' and '12,5'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "12.5kg capacity",
+        "verdict": "supported",
+        "evidence": "photo 2 shows printed '12,5' on the cylinder body"
+      },
+      {
+        "claim": "Foreign-used",
+        "verdict": "supported",
+        "evidence": "photo 2 shows 'REPSOL' branding, a Spanish/European LPG brand, consistent with a foreign-sourced cylinder"
+      },
+      {
+        "claim": "Strong & Reliable / durable and high-quality",
+        "verdict": "unverifiable_remote",
+        "evidence": "no test certificate, date stamp, or leak/pressure test shown in any photo"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Valve or seal leaks, or valve does not hold pressure",
+        "proof": "a clip showing the cylinder connected to a regulator with a lit burner, or a soapy-water leak test on the valve",
+        "if_unproven": "priced as not working / valve unverified"
+      },
+      {
+        "risk": "Cylinder past its hydrostatic test/certification date (safety and legal resale risk)",
+        "proof": "a close-up photo of the stamped test date ring near the neck or shoulder of the cylinder",
+        "if_unproven": "priced as uncertified/expired"
+      },
+      {
+        "risk": "Internal or under-paint rust/corrosion reducing structural integrity",
+        "proof": "photos of the base and seams with paint removed, or a weight/sound test clip",
+        "if_unproven": "priced as cosmetic-only condition, risk of corrosion assumed"
+      },
+      {
+        "risk": "Cylinder may be empty or only partially filled despite 'gas cylinder' listing implying contents",
+        "proof": "a photo of the gas gauge or a weigh-in showing net gas weight",
+        "if_unproven": "priced as empty cylinder only"
+      },
+      {
+        "risk": "Ambiguity over which specific cylinder (of several shown) is actually for sale",
+        "proof": "a single clear photo of only the item being sold, isolated from other cylinders",
+        "if_unproven": "priced as the single orange 12.5kg unit shown in photo 2 only"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of the hydrostatic test/certification date stamp on the cylinder neck or shoulder",
+      "Photo or short clip of the cylinder connected to a regulator and stove, showing gas flow/flame",
+      "Confirmation photo isolating exactly which cylinder is for sale, with all sides visible for rust/dents",
+      "A weight check or gauge reading to confirm gas is included and amount remaining"
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identifiable as a 12.5kg Repsol-branded LPG gas cylinder with visible brand text, so it can be priced at worst case (valve untested, no certification date visible, contents assumed empty) pending the listed proofs."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 23447,
+    "input_tokens": 3945,
+    "output_tokens": 2108,
+    "cost_usd": 0.02897,
+    "replayed": false,
+    "fixture_key": "f4c15971ee12d730d2c1566d8a3d89ff",
+    "error": null
+  }
+}
