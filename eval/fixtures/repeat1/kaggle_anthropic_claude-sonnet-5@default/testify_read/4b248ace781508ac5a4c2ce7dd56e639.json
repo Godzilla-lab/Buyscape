@@ -1,0 +1,74 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: black UPS unit with embossed brand text 'BLUE GATE' on top front",
+      "Photo 0: blue vertical strip with power button and three indicator lights (labeled with small icons, not clearly readable)",
+      "Photo 1: same unit from rear/side angle, showing power cord with UK-style 3-pin plug",
+      "No model number, VA/capacity rating, or label with specs visible in either photo",
+      "No power-on state, battery indicator, or load test shown",
+      "Unit appears used, with visible surface scuffs/dust but no major physical damage visible"
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "UPS (uninterruptible power supply)",
+      "brand": "Blue Gate",
+      "model": null,
+      "read_from": [
+        "photo 0 embossed text 'BLUE GATE'",
+        "photo 1 embossed text 'BLUE GATE'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "UPS available",
+        "verdict": "supported",
+        "evidence": "photo 0 and photo 1 both show a UPS unit branded Blue Gate"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Unit may not power on or hold charge (battery health unknown)",
+        "proof": "Video clip showing unit plugged in, powered on, with load connected and indicator lights active",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "VA/capacity rating unknown, affects value significantly",
+        "proof": "Clear photo of rating label/sticker (usually on bottom or back) showing VA/Watts",
+        "if_unproven": "priced at lowest common capacity for this type of compact UPS"
+      },
+      {
+        "risk": "Battery may be old/dead (common issue in used UPS units)",
+        "proof": "Photo of battery compartment opened or seller statement on battery replacement date with proof of purchase",
+        "if_unproven": "priced as needing battery replacement"
+      },
+      {
+        "risk": "No output sockets visible to confirm functionality/type",
+        "proof": "Photo showing rear output sockets/ports",
+        "if_unproven": "priced as basic/unverified functionality"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the rating label/sticker (VA, watts, model number) typically on the base or rear",
+      "Video of unit powered on with a load plugged in, showing it sustains output after mains is unplugged",
+      "Close-up photo of the rear panel showing output sockets",
+      "Any purchase receipt or age indication for the internal battery"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a Blue Gate brand UPS by type, but without a visible VA/capacity rating or any proof of power/battery function, even a worst-case price cannot be set without knowing its capacity class."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 10410,
+    "input_tokens": 3764,
+    "output_tokens": 881,
+    "cost_usd": 0.016338,
+    "replayed": false,
+    "fixture_key": "4b248ace781508ac5a4c2ce7dd56e639",
+    "error": null
+  }
+}

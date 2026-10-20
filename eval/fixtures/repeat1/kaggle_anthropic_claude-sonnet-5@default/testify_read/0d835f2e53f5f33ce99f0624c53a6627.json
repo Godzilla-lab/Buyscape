@@ -1,0 +1,89 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo shows an indoor split-unit AC head sitting on top of its matching outdoor condenser unit, both placed on an outdoor tiled floor near a wooden door.",
+      "Indoor unit front panel has a small printed rating/label area but the text is too small and low-resolution to read any brand, model or BTU/HP rating.",
+      "Outdoor condenser has a hand-written pink/red marker mark that appears to read '...nverter' - this looks like a seller-applied label, not a manufacturer plate.",
+      "Dust and some discoloration visible on both units, consistent with outdoor storage or disuse.",
+      "No power cable, remote control, compressor nameplate, or refrigerant pipes clearly visible in the frame.",
+      "No visible physical damage (no dents, cracks) but image resolution and angle do not allow close inspection of the fan blades, coils, or rear pipe connections."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "split-unit air conditioner (indoor + outdoor unit)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 (label area unreadable)",
+        "photo 0 (handwritten 'inverter' marking on outdoor unit)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Faulty inverter AC",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo 0 shows no way to test power-on, cooling, or compressor function; 'faulty' is seller's own description and cannot be confirmed or denied remotely."
+      },
+      {
+        "claim": "It is an inverter-type AC",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows a hand-written mark resembling 'inverter' on the outdoor unit, but this is not a manufacturer plate or stamped spec, so it is unconfirmed."
+      },
+      {
+        "claim": "Location: Oshodi, Lagos State",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo evidence can confirm seller's stated location."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Unknown capacity/tonnage (e.g. 1HP vs 1.5HP vs 2HP), which strongly affects value",
+        "proof": "Clear close-up photo of the nameplate/rating label on indoor or outdoor unit showing BTU/HP and model number",
+        "if_unproven": "priced at the lowest common capacity tier for a faulty split AC"
+      },
+      {
+        "risk": "Extent of fault unknown (no cooling, compressor dead, just needs gas top-up, electrical fault, or stripped for parts)",
+        "proof": "A power-on test video showing it plugged in with any sound, fan movement, or error light, plus seller statement on what exactly is faulty",
+        "if_unproven": "priced as totally non-functional / scrap-level"
+      },
+      {
+        "risk": "Missing or cut copper pipes/coils at the back of the outdoor unit (common when AC units are sold as 'faulty' after copper theft)",
+        "proof": "Photo of the rear of the outdoor unit showing intact piping and valves",
+        "if_unproven": "priced assuming pipes may be missing/cut, i.e. scrap/parts-only value"
+      },
+      {
+        "risk": "Missing accessories (remote control, power cable, mounting brackets)",
+        "proof": "Photo showing remote, cable, and brackets alongside the unit",
+        "if_unproven": "priced as accessories not included"
+      },
+      {
+        "risk": "Corrosion or compressor seizure not visible in this single angled photo",
+        "proof": "Close-up photos of compressor housing and coils from multiple angles",
+        "if_unproven": "priced as possible internal corrosion/seizure, i.e. worst case"
+      }
+    ],
+    "proof_requests": [
+      "Close-up, well-lit photo of the nameplate/rating label on both indoor and outdoor units (for brand, model, BTU/HP).",
+      "A short video of the unit being powered on, showing any response (fan spin, light, sound).",
+      "Photo of the rear of the outdoor unit showing the condition of copper pipes and valves.",
+      "Photo of included accessories (remote, cable, brackets) if any."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is clearly a split-unit AC sold as faulty, but without a readable capacity/model label or any proof of the fault's extent and pipe/accessory condition, even a worst-case price cannot be reliably set."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 29222,
+    "input_tokens": 2971,
+    "output_tokens": 2490,
+    "cost_usd": 0.027683,
+    "replayed": false,
+    "fixture_key": "0d835f2e53f5f33ce99f0624c53a6627",
+    "error": null
+  }
+}

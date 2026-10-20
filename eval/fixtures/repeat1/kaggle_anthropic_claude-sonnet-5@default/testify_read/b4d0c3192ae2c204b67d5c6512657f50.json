@@ -1,0 +1,85 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: single used tire shown face-on, tread grooves visible, moderate-to-good tread depth, no sidewall text visible.",
+      "Photo 1: tire laid on its side, tread pattern with sipes visible, watermark reads 'D-KACHI ENTERPRISE' and 'VISION ON JIJI'.",
+      "Photo 2: two tires stacked, sidewall text reads 'MASTER-GRIP', watermark 'POSTED ON JIJI D-KACHI ENTERPRISE'.",
+      "No tire size (width/profile/rim diameter) is readable on any sidewall.",
+      "No DOT date code, load/speed rating, or main tire manufacturer name is visible.",
+      "No image shows a tread-depth gauge, a ruler, or any damage/patch/plug close-up.",
+      "Background is a plain shop floor; number of tires in the full lot is unclear (seller text implies a set but only 2-3 are shown)."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used (tokumbo) car tire, apparent winter/all-season tread pattern",
+      "brand": null,
+      "model": "Master-Grip (partial sidewall text only, full brand not legible)",
+      "read_from": [
+        "photo 2 sidewall text 'MASTER-GRIP'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "First grade Tokumbo tires",
+        "verdict": "unverifiable_remote",
+        "evidence": "No grading marks, DOT code, or internal inspection shot provided; 'first grade' is a seller label with no photographic proof."
+      },
+      {
+        "claim": "Will last almost like new",
+        "verdict": "unverifiable_remote",
+        "evidence": "No tread-depth measurement, no age/DOT code, no sidewall crack close-up to support longevity claim."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Tire size (width/aspect/rim diameter) unknown, which is the single biggest price driver for tires",
+        "proof": "Clear close-up of the sidewall size markings, e.g. '205/55R16'",
+        "if_unproven": "cannot price at all without this; price range would be too wide to be meaningful"
+      },
+      {
+        "risk": "Tire age unknown; rubber can be old/hardened even with good tread",
+        "proof": "Close-up of DOT date code (4-digit week/year stamp) on sidewall",
+        "if_unproven": "priced as old/aged stock, lower end"
+      },
+      {
+        "risk": "Hidden internal damage, patches, or sidewall bulges not visible in current angles",
+        "proof": "Close-up of full sidewall circumference and inner tire surface",
+        "if_unproven": "priced as possibly repaired/damaged, worst case"
+      },
+      {
+        "risk": "Actual tread depth not verifiable from photos alone",
+        "proof": "Photo with a tread-depth gauge or coin inserted in groove",
+        "if_unproven": "priced as minimum legal/worn tread"
+      },
+      {
+        "risk": "Mismatched tires (different sizes/brands) sold as a set",
+        "proof": "All tires photographed together with sidewalls fully legible side by side",
+        "if_unproven": "priced as unmatched/mixed set"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of sidewall showing full tire size (e.g. 205/55R16)",
+      "Close-up of DOT date code for manufacture year",
+      "Photo with tread-depth gauge or coin test",
+      "Full sidewall and inner surface photos to check for patches/bulges",
+      "All tires laid out together to confirm matching size/brand for the set"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The tire size, which is essential even for a worst-case price, is not legible in any photo, and no age or damage evidence is shown; without the size the item cannot be priced at all."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 22475,
+    "input_tokens": 2740,
+    "output_tokens": 2047,
+    "cost_usd": 0.022791,
+    "replayed": false,
+    "fixture_key": "b4d0c3192ae2c204b67d5c6512657f50",
+    "error": null
+  }
+}
