@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo shows a single blue-painted industrial gear reducer (gearbox) with an output shaft, sitting on bare ground outdoors.",
+      "A metal nameplate is visible on the gearbox housing but the text is too small/blurred to read any brand, model, ratio, or power rating.",
+      "No electric motor is visible anywhere in the photo; only the gearbox unit with a stub shaft and a bolt-on flange is shown.",
+      "A watermark 'CHIDONBEST INDUSTRIAL' overlays the image; this is a seller/reseller watermark, not a manufacturer marking.",
+      "Surface shows normal paint wear, light dust/dirt; no visible cracks, leaks, or missing bolts.",
+      "A length of cable is visible on the ground near the unit but it is not confirmed to be connected to the gearbox or any motor."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "industrial gearbox (speed reducer)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 nameplate (unreadable)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Industrial gear box",
+        "verdict": "supported",
+        "evidence": "photo 0 shows a gear reducer housing with input/output shaft typical of an industrial gearbox"
+      },
+      {
+        "claim": "electric motor 20hp",
+        "verdict": "contradicted",
+        "evidence": "photo 0 shows only the gearbox; no motor is visible attached or alongside it"
+      },
+      {
+        "claim": "ratio 1:10",
+        "verdict": "unverified",
+        "evidence": "a nameplate is present on the gearbox in photo 0 but its text is unreadable, so the ratio cannot be confirmed"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "No motor is shown, so the claimed 20hp electric motor may not exist or may not be included in the sale",
+        "proof": "A clear photo or video showing the motor coupled to the gearbox, with its nameplate legible",
+        "if_unproven": "priced as gearbox only, no motor included"
+      },
+      {
+        "risk": "Gearbox brand, model, torque/power rating and actual ratio are unknown since the nameplate is unreadable",
+        "proof": "A close-up, well-lit photo of the nameplate text",
+        "if_unproven": "priced as a generic unbranded industrial gearbox of estimated size, worst case"
+      },
+      {
+        "risk": "Working condition (smooth rotation, no internal gear damage, oil seal integrity) cannot be verified from a static photo",
+        "proof": "A video of the shaft being rotated by hand or the unit running under load, plus oil level/color check",
+        "if_unproven": "priced as not confirmed working, i.e. worst case as non-functional"
+      },
+      {
+        "risk": "Unit has been sitting on bare dirt/outdoors, raising risk of rust ingress or contamination inside seals",
+        "proof": "Photos of the shaft seal area and any oil drain/fill plug, plus interior oil sample photo if possible",
+        "if_unproven": "priced assuming possible seal/oil degradation"
+      }
+    ],
+    "proof_requests": [
+      "Close-up legible photo of the gearbox nameplate (brand, model, ratio, torque rating)",
+      "Photo or video showing the actual electric motor claimed to be included, with its own nameplate visible",
+      "Video of the shaft rotating freely by hand, or the unit running, to assess mechanical condition",
+      "Photo of the oil fill/drain plug and a sample of the internal oil if accessible"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The gearbox's identifying nameplate is unreadable and the claimed 20hp electric motor is not visible in the photo at all, so even a worst-case price cannot be set without proof of the motor's existence and a legible nameplate."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 23607,
+    "input_tokens": 2221,
+    "output_tokens": 2225,
+    "cost_usd": 0.023533,
+    "replayed": false,
+    "fixture_key": "9251d72956af75e5430d6540ed199486",
+    "error": null
+  }
+}

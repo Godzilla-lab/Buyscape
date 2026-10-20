@@ -1,0 +1,84 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: a single light-colored, clean, new-looking wooden pallet on a bare concrete floor, watermarked 'DANTILA RESOURCES / POSTED ON JIJI'.",
+      "Photo 1: the same single pallet from a slightly different angle, same clean condition, same watermark.",
+      "Photo 2: a large stack of multiple wooden pallets that are dark, weathered, worn, with visible dirt, staining and rough edges, under open sky \u2014 visually inconsistent with the clean pallet in photos 0-1.",
+      "No scale, weighbridge, or weight readout is shown in any photo.",
+      "No count or tally of pallets is visible; it is unclear if the sale is for one pallet or a bulk lot."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "wooden pallet(s)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0",
+        "photo 1",
+        "photo 2"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Wooden pallets are the backbone of supply chain logistics, manufacturing, and warehousing",
+        "verdict": "unverifiable_remote",
+        "evidence": "Generic marketing statement, not a checkable fact about this specific item."
+      },
+      {
+        "claim": "Everything is clean, dry and sorted, no water added",
+        "verdict": "contradicted",
+        "evidence": "Photo 2 shows a stack of visibly dirty, weathered, water-stained pallets, inconsistent with the clean condition shown in photos 0-1."
+      },
+      {
+        "claim": "Weighed at 500 kg on a certified scale this morning",
+        "verdict": "unverifiable_remote",
+        "evidence": "No scale, readout, or weighing photo/video is shown in any of the 3 photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Unclear quantity: photos show one clean pallet and a separate stack of worn pallets, but no count of how many units are actually included in the sale.",
+        "proof": "A single photo showing the full lot laid out with a visible count, or a tally/number stated against a clear shot of the stack.",
+        "if_unproven": "priced as the single unit shown, not as a 500kg bulk lot"
+      },
+      {
+        "risk": "Condition mismatch: the item actually delivered could be the worn, weathered pallets from photo 2 rather than the clean one in photos 0-1.",
+        "proof": "A close-up of the exact pallets to be delivered, timestamped, matching the clean examples.",
+        "if_unproven": "priced at the worn/weathered condition seen in photo 2 (worst case)"
+      },
+      {
+        "risk": "No proof of dryness or absence of water/mold damage inside the wood (claim of 'no water added').",
+        "proof": "A moisture-meter reading photo or a cut cross-section of the wood.",
+        "if_unproven": "priced as not verified dry, i.e. standard/used-grade condition"
+      },
+      {
+        "risk": "No proof of the 500kg weighing claim or what that weight corresponds to (one pallet vs a full stack).",
+        "proof": "A photo/video of the pallets on a scale with the readout visible and pallets identifiable.",
+        "if_unproven": "ignored for pricing; price based on visible unit count only"
+      }
+    ],
+    "proof_requests": [
+      "A clear photo showing the exact pallets being sold, with a visible count of units.",
+      "A photo or short video of the pallets on the certified scale showing the 500kg readout.",
+      "A close-up of the underside/joints of a few pallets from the stack in photo 2 to check for rot or damage.",
+      "Clarification: is the clean pallet in photos 0-1 representative of all units, or is the lot actually the worn stack in photo 2?"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photos show two visually inconsistent conditions (one clean pallet vs a stack of worn pallets) and give no clear count, so neither the quantity nor which condition applies to the actual sale can be fixed even at a worst-case price."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 26161,
+    "input_tokens": 3730,
+    "output_tokens": 2512,
+    "cost_usd": 0.029421,
+    "replayed": false,
+    "fixture_key": "a0ebf2aa2548118e164239767c1b72a5",
+    "error": null
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo shows a vertical stack of five used tires viewed from the tread/shoulder angle only",
+      "Tread grooves are visible and appear to have usable depth on the top few tires, but no ruler or depth gauge is shown",
+      "Sidewalls, DOT codes, brand names, and size markings are not visible in this photo",
+      "A watermark text 'ABDULWAHEED DAMOLA' overlays the image, seller's own stamp, not a size or brand label",
+      "No visible bulge or patch on the visible tread faces, but sidewalls (where bulges/patches usually show) are not shown"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "car tyre (used, stacked set)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Tread is still 90 percent",
+        "verdict": "unverified",
+        "evidence": "Tread grooves look present in photo 0 but no depth gauge or ruler shown to confirm a percentage"
+      },
+      {
+        "claim": "no patch, no bulge",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo 0 only shows tread faces stacked together; sidewalls where patches/bulges/plugs are usually visible are hidden"
+      },
+      {
+        "claim": "Removed from a 2023 car",
+        "verdict": "unverifiable_remote",
+        "evidence": "No DOT/manufacture date code or vehicle documentation visible in photo 0"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Tyre size (width/profile/rim diameter) unknown, which drives price heavily",
+        "proof": "Clear close-up photo of the sidewall showing the size code, e.g. 205/55R16",
+        "if_unproven": "cannot be priced at all without size; treat as unknown-size generic used tyre, lowest tier"
+      },
+      {
+        "risk": "Actual manufacture date (DOT code) may show the tyre is much older than the '2023 car' claim implies, since tyres can be older than the car",
+        "proof": "Photo of the DOT code on the sidewall (4-digit week/year stamp)",
+        "if_unproven": "priced as unknown age, worst case aged stock"
+      },
+      {
+        "risk": "Hidden sidewall damage, patches, plugs, or bulges not visible from the tread-only angle",
+        "proof": "Photos of both sidewalls of the specific tyre being sold, flat on the ground",
+        "if_unproven": "priced as if damaged/patched"
+      },
+      {
+        "risk": "Unclear how many tyres are actually for sale (single piece vs set of 4/5) and whether they're matching",
+        "proof": "Seller confirms quantity and photographs the exact tyre(s) being sold laid out individually",
+        "if_unproven": "priced as a single unverified tyre, not a matched set"
+      },
+      {
+        "risk": "Actual tread depth not measurable from this angle/photo quality",
+        "proof": "Close-up photo with a tread depth gauge or coin inserted in the groove",
+        "if_unproven": "priced as minimum legal/worn tread, not 90 percent"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the sidewall showing size code and DOT date stamp",
+      "Photo of both sidewalls of the actual tyre(s) for sale, laid flat",
+      "Photo with a tread depth gauge or coin in the main groove",
+      "Confirmation of exact quantity being sold and whether sizes match"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The tyre size and sidewall condition, which set the price tier and reveal hidden damage, are not visible in the single tread-only photo provided."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 17735,
+    "input_tokens": 2860,
+    "output_tokens": 1525,
+    "cost_usd": 0.017811,
+    "replayed": false,
+    "fixture_key": "a54c4cccd19104886b36e0ecdb5149c4",
+    "error": null
+  }
+}
