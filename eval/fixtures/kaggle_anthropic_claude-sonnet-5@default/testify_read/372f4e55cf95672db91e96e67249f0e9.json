@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows a close-up of a tire tread, standing on a bare floor.",
+      "Tread pattern shows multiple circumferential grooves, visible wear and some embedded dirt.",
+      "No sidewall is visible in the frame, so no brand, model, size, or DOT/date code can be read.",
+      "A second tire is partly visible in the background, also unidentified.",
+      "A watermark reading 'POSTED ON JIJI N.J. VENTURE' overlays the image; this is a listing stamp, not proof of the item's specifics.",
+      "Surface shows some fine cracking lines on the tread blocks, typical of aged rubber, but severity can't be judged without a clearer or sidewall shot."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "car tire (tokunbo/used, claimed 295/40 R20)",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "295/40 R20 size",
+        "verdict": "unverifiable_remote",
+        "evidence": "Sidewall with size marking is not visible in photo 0; only tread is shown."
+      },
+      {
+        "claim": "'Tukubo' (tokunbo/foreign-used) tire",
+        "verdict": "unverified",
+        "evidence": "No import sticker, grade mark, or sidewall text visible to confirm origin or used-import status."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "True tire size may differ from claimed 295/40 R20, which affects fitment and price.",
+        "proof": "Clear sidewall photo showing the size, load/speed rating molded on the rubber.",
+        "if_unproven": "priced as an unspecified/unverified-size used tire, lower-confidence bracket"
+      },
+      {
+        "risk": "Brand and manufacturing date (age) unknown; older tires are worth less regardless of tread.",
+        "proof": "Sidewall photo showing brand name and DOT date code (4-digit week/year stamp).",
+        "if_unproven": "priced as unbranded/unknown-age used tire"
+      },
+      {
+        "risk": "Remaining tread depth not measurable from this angle; wear could be uneven or near legal limit.",
+        "proof": "Photo with a tread depth gauge or coin inserted in the main grooves, plus a full top-down shot of tread.",
+        "if_unproven": "priced as minimum usable tread (near end-of-life)"
+      },
+      {
+        "risk": "Visible fine cracking could indicate dry rot/age-related sidewall weakness, a safety and value issue.",
+        "proof": "Close-up of full sidewall showing any cracking, bulges, or repairs.",
+        "if_unproven": "priced as having sidewall cracking present"
+      },
+      {
+        "risk": "Tire could be a mismatched single or part of a worn set with uneven wear between the two tires shown.",
+        "proof": "Photo of both tires side by side with tread facing camera, plus sidewalls.",
+        "if_unproven": "priced as a single unit with unknown set consistency"
+      }
+    ],
+    "proof_requests": [
+      "Full sidewall photo showing brand, model, size (295/40R20 confirmation), load/speed rating, and DOT date code.",
+      "Tread depth measurement photo (coin or gauge in the groove).",
+      "Wide shot of both tires together, sidewalls facing camera, to check consistency.",
+      "Close-up of any cracks, bulges, or repair patches on the sidewall."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo shows only tread with no sidewall, so the claimed size, brand, age, and true condition cannot be confirmed or even safely assumed at a worst-case price; a sidewall and tread-depth shot are needed before pricing."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 20859,
+    "input_tokens": 2510,
+    "output_tokens": 1824,
+    "cost_usd": 0.020101,
+    "replayed": false,
+    "fixture_key": "372f4e55cf95672db91e96e67249f0e9",
+    "error": null
+  }
+}

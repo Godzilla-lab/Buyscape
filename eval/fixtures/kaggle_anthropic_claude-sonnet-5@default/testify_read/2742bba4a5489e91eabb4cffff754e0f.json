@@ -1,0 +1,90 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Single tire shown face-on, tread pattern visible with circumferential grooves.",
+      "No sidewall visible, so no size markings, brand name, or DOT code can be read.",
+      "Tread surface shows some discoloration and fine cracking in the grooves.",
+      "Background shows other used tires stacked, consistent with a tire dealer's yard.",
+      "Watermark 'N.J. VENTURE' and 'POSTED ON JIJI' overlay the image, not seller markings on the tire itself."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used car tire",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Size is 295/40 R20",
+        "verdict": "unverifiable_remote",
+        "evidence": "Sidewall with size markings is not shown in photo 0; only the tread face is visible."
+      },
+      {
+        "claim": "Tukubo (foreign-used/import) tire",
+        "verdict": "unverifiable_remote",
+        "evidence": "No import marking, sidewall text, or documentation visible in photo 0."
+      },
+      {
+        "claim": "Tread is still 90 percent",
+        "verdict": "unverified",
+        "evidence": "Tread grooves are visible but no depth gauge or coin reference is shown to confirm remaining depth; some wear and surface cracking visible in photo 0."
+      },
+      {
+        "claim": "No patch, no bulge",
+        "verdict": "unverified",
+        "evidence": "Only one face of the tire is shown; the opposite sidewall and inner surface are not visible in photo 0."
+      },
+      {
+        "claim": "Removed from a 2023 car",
+        "verdict": "unverifiable_remote",
+        "evidence": "No vehicle, invoice, or removal context shown in photo 0."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual tire size/brand may not match the stated 295/40 R20, affecting fitment and price.",
+        "proof": "Clear photo of the sidewall showing size, brand, and model text.",
+        "if_unproven": "priced as unknown/generic size tire, not the specific premium size claimed"
+      },
+      {
+        "risk": "Tread depth may be lower than claimed 90 percent.",
+        "proof": "Photo of tread with a depth gauge or coin inserted in the groove.",
+        "if_unproven": "priced as heavily worn tread rather than near-new"
+      },
+      {
+        "risk": "Hidden sidewall bulge, patch, or plug on the unseen side.",
+        "proof": "Photo of the opposite sidewall and inner face of the tire.",
+        "if_unproven": "priced as possibly damaged/repaired, not defect-free"
+      },
+      {
+        "risk": "Tire age (manufacture date) unknown; old rubber can be unsafe even with good tread.",
+        "proof": "Close-up photo of the DOT code on the sidewall.",
+        "if_unproven": "priced as unknown age, treated as older stock"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the full sidewall showing size, brand, and model lettering.",
+      "Photo of the DOT date code on the sidewall.",
+      "Photo of the opposite side/inner sidewall for bulges or patches.",
+      "Photo of tread depth with a gauge or coin for scale."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo shows only the tread face with no visible sidewall, so the size and brand that set the price cannot be confirmed, and even a worst-case price cannot be anchored without that identifying shot."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 20851,
+    "input_tokens": 2542,
+    "output_tokens": 1978,
+    "cost_usd": 0.021705,
+    "replayed": false,
+    "fixture_key": "2742bba4a5489e91eabb4cffff754e0f",
+    "error": null
+  }
+}

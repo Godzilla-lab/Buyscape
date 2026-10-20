@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Close-up shot shows only a corner of a sewing machine head, cream/white body with red trim.",
+      "Hand wheel and bobbin winder visible on the right side.",
+      "Text 'EM81' printed on the body near the wheel.",
+      "No motor, table, stand, pedal, or full machine view is visible.",
+      "No power cord, belt, or needle area shown."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "industrial sewing machine head",
+      "brand": "Emel (unverified, read as 'EM81')",
+      "model": "EM81",
+      "read_from": [
+        "photo 0 body label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Direct drive industrial sewing machine",
+        "verdict": "unverifiable_remote",
+        "evidence": "No motor or drive mechanism visible in photo 0; direct-drive vs clutch-motor cannot be distinguished from this crop."
+      },
+      {
+        "claim": "Brand is Emel",
+        "verdict": "unverified",
+        "evidence": "Only 'EM81' text visible on casing in photo 0, no full brand logo or nameplate shown."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Unknown whether motor, table, and stand are included, which drastically affects value of an industrial machine",
+        "proof": "Full-length photo showing the machine mounted on its table with motor and pedal",
+        "if_unproven": "priced as head-only, no table or motor"
+      },
+      {
+        "risk": "Drive type (direct-drive vs belt/clutch) unconfirmed, affects price tier",
+        "proof": "Clear photo of the motor and drive coupling under the table",
+        "if_unproven": "priced as standard clutch-motor type, not premium direct-drive"
+      },
+      {
+        "risk": "Working condition unknown, no stitching demo or power-on shown",
+        "proof": "Video of machine running and stitching a sample",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Cosmetic wear/damage beyond visible crop unknown",
+        "proof": "Wide shot of entire machine body and base",
+        "if_unproven": "priced as heavily used, worst visible condition"
+      }
+    ],
+    "proof_requests": [
+      "Full photo of the entire machine including table, motor, and pedal",
+      "Clear photo of the motor/drive area to confirm direct-drive claim",
+      "Short video of the machine powered on and sewing a test stitch",
+      "Wide shot of the whole machine body showing nameplate and overall condition"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The single photo only shows a tiny branding close-up with no view of the motor, table, or overall machine, so even a worst-case price cannot be set until basic completeness and drive type are shown."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 16585,
+    "input_tokens": 2212,
+    "output_tokens": 1407,
+    "cost_usd": 0.015335,
+    "replayed": false,
+    "fixture_key": "8d60604f7ebdef0f7575b93041bac31e",
+    "error": null
+  }
+}
