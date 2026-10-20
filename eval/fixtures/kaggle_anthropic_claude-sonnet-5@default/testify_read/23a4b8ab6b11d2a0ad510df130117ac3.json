@@ -1,0 +1,100 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo shows stacked solar panels (appears to be 3-4 panels) resting on a metal frame/trolley outdoors on bare ground.",
+      "A person's legs and a blue plastic basket are visible at the edge of the frame.",
+      "A visible watermark reads 'NAGOTECH SOLAR' across the panels.",
+      "Bottom of image shows camera metadata 'CAMON 30' and exposure settings (23mm f/1.88 1/135s ISO50) - this is the photographer's phone info, not product info.",
+      "No manufacturer label, wattage sticker, cell count, or model plate is legible on any panel.",
+      "No close-up of cell condition, frame edges, junction box, or back sheet is provided.",
+      "Panels appear used/dusty with some surface glare; no visible cracks but resolution is too low to confirm micro-cracks or hotspots."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used solar panel (stack of multiple panels)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 (no legible brand/spec label, only watermark 'NAGOTECH SOLAR' and camera metadata)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Original",
+        "verdict": "unverifiable_remote",
+        "evidence": "No manufacturer label or certification mark visible in photo 0."
+      },
+      {
+        "claim": "650 Watts",
+        "verdict": "unverifiable_remote",
+        "evidence": "No wattage sticker or back-panel spec label visible in photo 0."
+      },
+      {
+        "claim": "144 cell",
+        "verdict": "unverifiable_remote",
+        "evidence": "Cell count not countable from the angle and resolution in photo 0."
+      },
+      {
+        "claim": "Direct Canadian (import/origin)",
+        "verdict": "unverifiable_remote",
+        "evidence": "No origin marking, customs sticker, or brand plate visible in photo 0."
+      },
+      {
+        "claim": "Used, built to serve you (implying working condition)",
+        "verdict": "unverified",
+        "evidence": "No test clip (multimeter reading, light output, or inverter connection) provided."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual wattage may be lower than claimed 650W",
+        "proof": "Clear photo of the rear specification sticker showing wattage, Voc, Isc, and cell count",
+        "if_unproven": "priced as a lower/unknown-wattage generic used panel"
+      },
+      {
+        "risk": "Panel may be non-functional or degraded (common with used imports)",
+        "proof": "Video or photo of panel connected to a multimeter/charge controller showing live voltage/current under sunlight",
+        "if_unproven": "priced as not working / not verified functional"
+      },
+      {
+        "risk": "Hidden micro-cracks or hotspots not visible in low-res photo",
+        "proof": "Close-up photos of each cell under bright light, plus back-sheet and frame edges",
+        "if_unproven": "priced assuming possible cell damage, at worst case"
+      },
+      {
+        "risk": "Origin ('Canadian') claim cannot be verified and may be a generic or rebranded panel",
+        "proof": "Photo of manufacturer brand plate/logo and any import documentation",
+        "if_unproven": "priced as unbranded/generic origin"
+      },
+      {
+        "risk": "Number of panels in the stack and whether all are being sold is unclear",
+        "proof": "Photo showing panels separated with each one fully visible and a count",
+        "if_unproven": "priced as a single panel only, the minimum visible unit"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the rear specification label (wattage, Voc, Isc, cell count, brand)",
+      "Video showing the panel connected to a multimeter or charge controller under sunlight, displaying live voltage/current",
+      "Close-up photos of each cell and the frame edges for cracks or corrosion",
+      "Clear photo of the brand/manufacturer logo plate",
+      "Photo clarifying how many panels are included in this sale"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable by type as a used solar panel, but none of the seller's specific claims (wattage, cell count, origin, working condition) can be confirmed from the single low-detail photo, so it must be priced at the worst case as an unverified, unbranded, condition-unknown used panel."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 19175,
+    "input_tokens": 2012,
+    "output_tokens": 1866,
+    "cost_usd": 0.019525,
+    "replayed": false,
+    "fixture_key": "23a4b8ab6b11d2a0ad510df130117ac3",
+    "error": null
+  }
+}
