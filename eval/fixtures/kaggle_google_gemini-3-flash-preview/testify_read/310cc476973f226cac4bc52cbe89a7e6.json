@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Teal and black cordless drill held in a hand.",
+      "Brand 'SUPER TECH' is visible on the tool's side label and the battery.",
+      "The word 'BRUSHLESS' is embossed on the tool housing.",
+      "The battery is labeled '48Vf Li-ion Battery'.",
+      "The side label specifies a 10mm max chuck and speeds of 0-350/0-1350r/min.",
+      "A teal plastic carrying case is visible in the background.",
+      "The tool appears clean with no obvious signs of heavy use."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "cordless brushless drill",
+      "brand": "Super Tech",
+      "model": "48Vf",
+      "read_from": [
+        "photo 0 label",
+        "photo 0 battery"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "48V",
+        "verdict": "unverifiable_remote",
+        "evidence": "The battery is labeled '48Vf', a common marketing term for generic tools that does not typically represent actual voltage (usually 18V-21V)."
+      },
+      {
+        "claim": "Brushless",
+        "verdict": "supported",
+        "evidence": "photo 0 housing text"
+      },
+      {
+        "claim": "Brand New",
+        "verdict": "unverified",
+        "evidence": "The tool looks clean, but no retail packaging, tags, or seals are shown."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Motor or trigger failure",
+        "proof": "A video showing the drill spinning and the variable speed trigger working.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Battery does not hold charge or is low capacity",
+        "proof": "A video showing the battery charging and then powering the tool under load.",
+        "if_unproven": "as having a dead battery"
+      },
+      {
+        "risk": "Missing essential accessories (charger, second battery)",
+        "proof": "A photo showing all items included in the sale inside the case.",
+        "if_unproven": "as tool and one battery only, no charger"
+      }
+    ],
+    "proof_requests": [
+      "Video of the drill operating through its speed settings.",
+      "Photo of the charger and any additional batteries or bits included.",
+      "Photo of the battery terminals to check for wear."
+    ],
+    "decision": "price",
+    "reason": "The item is a generic 'Super Tech' brushless drill. While the 48V claim is likely marketing exaggeration, the tool's type and brand are clearly identified, allowing it to be priced at its worst-case functional state."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 13536,
+    "input_tokens": 2402,
+    "output_tokens": 2311,
+    "cost_usd": 0.008134,
+    "replayed": false,
+    "fixture_key": "310cc476973f226cac4bc52cbe89a7e6",
+    "error": null
+  }
+}
