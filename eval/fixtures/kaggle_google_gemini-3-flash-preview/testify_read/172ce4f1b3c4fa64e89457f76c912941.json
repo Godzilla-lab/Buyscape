@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows a large cardboard shipping box for a refrigerator.",
+      "The box has 'REFRIGERATOR' printed on the front and side.",
+      "A '1 YEAR WARRANTY' circular badge is visible on the box.",
+      "A product information label is attached to the front, but the text is too blurry to read.",
+      "The box is sitting on a paved outdoor surface and appears to be secured with white plastic straps."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "refrigerator",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Color Red",
+        "verdict": "unverifiable_remote",
+        "evidence": "The item is inside a cardboard box; the exterior color cannot be seen."
+      },
+      {
+        "claim": "Net Capacity (Liter) 177 LTR",
+        "verdict": "unverifiable_remote",
+        "evidence": "The product label on the box is too blurry to confirm specifications."
+      },
+      {
+        "claim": "Defrost Manual",
+        "verdict": "unverifiable_remote",
+        "evidence": "The technical specifications are not legible on the box label."
+      },
+      {
+        "claim": "Low Noise: yes",
+        "verdict": "unverifiable_remote",
+        "evidence": "Operational noise cannot be determined from a photo of a box."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, used, or damaged item.",
+        "proof": "A photo of the actual refrigerator outside of the box.",
+        "if_unproven": "priced as an empty box"
+      },
+      {
+        "risk": "The brand and model, which dictate the price, are unknown.",
+        "proof": "A clear, close-up photo of the white product label on the box or the nameplate on the back of the fridge.",
+        "if_unproven": "priced as the lowest-tier generic brand"
+      },
+      {
+        "risk": "The refrigerator may have internal damage or cooling failure despite being in a box.",
+        "proof": "A video showing the interior light on and a thermometer showing a drop in temperature.",
+        "if_unproven": "priced as not working"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the white product label on the box.",
+      "Photos of the refrigerator outside of the box, including the front, open interior, and the back (compressor area).",
+      "Video of the unit plugged in and running."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the packaging is visible, and the identifying labels are illegible. I cannot confirm the brand, model, or the condition of the item inside."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 13950,
+    "input_tokens": 2370,
+    "output_tokens": 2612,
+    "cost_usd": 0.009021,
+    "replayed": false,
+    "fixture_key": "172ce4f1b3c4fa64e89457f76c912941",
+    "error": null
+  }
+}

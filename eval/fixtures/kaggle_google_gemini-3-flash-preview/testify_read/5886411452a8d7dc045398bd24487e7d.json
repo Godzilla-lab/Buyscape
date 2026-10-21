@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows three retail boxes for a Doukoff gravity feed steam iron.",
+      "The boxes are labeled 'DOUKOFF' and 'GRAVITY FEED STEAM IRON FOR INDUSTRIAL USE'.",
+      "The model number '300L' is visible on a sticker on the boxes.",
+      "Technical specs on the box: 220V/50Hz, 1300W.",
+      "The actual iron and its required accessories (water tank, hose) are not visible."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "gravity feed steam iron",
+      "brand": "DOUKOFF",
+      "model": "300L",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Type: It's a gravity feed steam iron",
+        "verdict": "supported",
+        "evidence": "photo 0 box text"
+      },
+      {
+        "claim": "designed specifically for [industrial use]",
+        "verdict": "supported",
+        "evidence": "photo 0 box text"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, lower-value item.",
+        "proof": "Photo of the iron outside of the box.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The iron may be used, refurbished, or damaged despite the new packaging.",
+        "proof": "Close-up photos of the soleplate and handle.",
+        "if_unproven": "as heavily used"
+      },
+      {
+        "risk": "Essential accessories like the gravity water tank and hose may be missing.",
+        "proof": "Photo showing the iron with its tank and hose.",
+        "if_unproven": "as missing all accessories"
+      },
+      {
+        "risk": "The heating element or steam valve may be faulty.",
+        "proof": "Video of the iron powered on and producing steam.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual iron outside of the box.",
+      "Photo of the soleplate (bottom) of the iron.",
+      "Photo of the water tank, hose, and any other included accessories.",
+      "Video showing the iron plugged in and steaming."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail packaging is shown. I cannot confirm the presence, condition, or completeness of the actual iron without photos of the item itself."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 11757,
+    "input_tokens": 2402,
+    "output_tokens": 2177,
+    "cost_usd": 0.007732,
+    "replayed": false,
+    "fixture_key": "5886411452a8d7dc045398bd24487e7d",
+    "error": null
+  }
+}

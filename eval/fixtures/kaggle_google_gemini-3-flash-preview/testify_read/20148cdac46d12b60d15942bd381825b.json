@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the back of a retail box for a Porodo branded product.",
+      "The box identifies the product as a 10000mAh MagSafe Power Bank.",
+      "Specifications listed include 15W wireless output and 20W USB-C output.",
+      "A model number PD-PBFCH043-BK is printed above the barcode.",
+      "The box art shows a power bank with a built-in stand and a short integrated cable.",
+      "There are watermarks for 'JIJI' and 'LEGIT DIGITAL' on the image."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "Magsafe Power Bank",
+      "brand": "Porodo",
+      "model": "PD-PBFCH043-BK",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Porodo Magsafe Power Bank 20w With Stand",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows the brand name, 20W output specs, and an image of the stand."
+      },
+      {
+        "claim": "10000mAh",
+        "verdict": "supported",
+        "evidence": "Photo 0 specifications list 'Battery Capacity - 10000mAh'."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, damaged, or non-functional item.",
+        "proof": "A photo of the actual power bank outside of the box, powered on.",
+        "if_unproven": "as a non-functional unit"
+      },
+      {
+        "risk": "The internal battery capacity may be significantly degraded from use.",
+        "proof": "A video showing the device charging a phone and displaying its own remaining percentage.",
+        "if_unproven": "as having a heavily degraded battery"
+      },
+      {
+        "risk": "The built-in kickstand or integrated cable may be frayed or broken.",
+        "proof": "Close-up photos of the cable and the stand in the deployed position.",
+        "if_unproven": "as having a broken stand and cable"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual power bank out of the box, showing both sides.",
+      "Photo of the power bank with the kickstand deployed.",
+      "Video of the power bank charging a mobile phone wirelessly and via the cable."
+    ],
+    "decision": "price",
+    "reason": "The brand and specific model number are clearly legible on the retail packaging, allowing for identification and pricing at a worst-case used condition."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 12774,
+    "input_tokens": 2392,
+    "output_tokens": 2486,
+    "cost_usd": 0.008654,
+    "replayed": false,
+    "fixture_key": "20148cdac46d12b60d15942bd381825b",
+    "error": null
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail packaging for a New Age brand power bank.",
+      "The box displays a capacity of 22500mAh in the top left corner.",
+      "A starburst label on the box reads 'TYPE-C IN & OUTPUT'.",
+      "A '12 months warranty' seal is visible at the bottom right of the box.",
+      "The actual power bank is not shown; only the illustration on the packaging is visible.",
+      "The photo contains a 'MADAM VSONIC' watermark and a 'POSTED ON JIJI' overlay."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "power bank",
+      "brand": "New Age",
+      "model": "22500mAh",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "NEW AGE",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "22500mAH",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "Type c input and output",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, lower-value item.",
+        "proof": "A photo of the actual power bank outside the packaging.",
+        "if_unproven": "as non-functional"
+      },
+      {
+        "risk": "The device may be used or have physical damage not visible through the box.",
+        "proof": "Clear photos of the device's exterior and charging ports.",
+        "if_unproven": "as used in fair condition"
+      },
+      {
+        "risk": "The product could be a counterfeit, which is common for this brand in this market.",
+        "proof": "A photo of the authenticity scratch-off code usually found on New Age packaging.",
+        "if_unproven": "as a generic unbranded item"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the power bank outside the box showing the ports and physical condition.",
+      "Photo of the authenticity scratch-off label on the packaging.",
+      "Photo of the back of the box showing the full model name and technical specifications."
+    ],
+    "decision": "price",
+    "reason": "The brand and capacity are clearly identified from the packaging, allowing for a valuation at the worst-case scenario of an unverified or non-functional unit."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 22167,
+    "input_tokens": 2362,
+    "output_tokens": 4427,
+    "cost_usd": 0.014462,
+    "replayed": false,
+    "fixture_key": "b21543f82666b0a21eb93c5e307dfaeb",
+    "error": null
+  }
+}
