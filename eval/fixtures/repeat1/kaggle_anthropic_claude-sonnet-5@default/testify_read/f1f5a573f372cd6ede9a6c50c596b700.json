@@ -1,0 +1,85 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows an orange LPG gas cylinder with black protective mesh netting wrapped around the body, outdoors in a market setting.",
+      "A brass valve is visible on top, uncapped, with a red plastic cap resting loosely on it.",
+      "A small black logo/symbol is molded or painted on the cylinder shoulder but is not legible as a brand name.",
+      "Photo 1 is a top-down view showing the valve and a hand-written black marker 'MX' on the cylinder dome.",
+      "No stamped manufacturer plate, tare weight, water capacity, or test/manufacture date is legible in either photo.",
+      "Cylinder appears unused/new in finish (paint and netting intact), but there is no gas gauge or fill indicator visible.",
+      "No scale, regulator, or burning stove shown to demonstrate actual gas content or function."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "12kg cooking gas cylinder (LPG)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 (body shape/valve)",
+        "photo 1 (valve close-up)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "12kg cylinder",
+        "verdict": "unverifiable_remote",
+        "evidence": "No stamped capacity or tare weight marking is legible in photo 0 or photo 1; size is only the seller's stated word."
+      },
+      {
+        "claim": "Foreign (implying imported, higher-grade) cylinder",
+        "verdict": "unverifiable_remote",
+        "evidence": "No country-of-origin stamp, maker's plate, or import marking visible in either photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual water capacity may not be 12kg",
+        "proof": "Clear photo of the stamped collar/shoulder markings showing tare weight (W) and water capacity (WC)",
+        "if_unproven": "priced as unverified capacity, treated as standard/generic size cylinder rather than premium foreign 12kg"
+      },
+      {
+        "risk": "Cylinder could be empty or only partially filled",
+        "proof": "Photo of a weighing scale with the cylinder on it, or a clip of gas flowing from a connected regulator/stove",
+        "if_unproven": "priced as empty cylinder only, no gas value included"
+      },
+      {
+        "risk": "Valve could be faulty or leaking",
+        "proof": "Close-up clip of soap-bubble leak test on the valve threads under pressure",
+        "if_unproven": "priced as valve condition unverified, worst case needing replacement"
+      },
+      {
+        "risk": "Cylinder could be past its safety test/recertification date or old stock relabelled as new",
+        "proof": "Photo of the stamped manufacture/test date on the shoulder",
+        "if_unproven": "priced as unverified age, not assumed new despite fresh paint"
+      },
+      {
+        "risk": "'Foreign' claim could just be marketing; could be a refurbished or repainted local cylinder",
+        "proof": "Photo of maker's plate or country-of-origin stamp",
+        "if_unproven": "priced as standard local-market cylinder, no import premium"
+      }
+    ],
+    "proof_requests": [
+      "Clear close-up of the stamped shoulder/collar markings (tare weight, water capacity, manufacture/test date, country of origin)",
+      "Photo of the cylinder on a weighing scale to confirm it is filled/empty and its actual kg",
+      "Short video/photo of a soap-bubble leak test on the valve",
+      "Photo of any maker's plate confirming import origin"
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identifiable by type as a gas cylinder in good cosmetic condition, but capacity, fill state, valve integrity, and origin are all unverified from the photos, so it must be priced at the worst-case (unverified size, empty, unverified condition, no import premium)."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 24754,
+    "input_tokens": 3207,
+    "output_tokens": 2134,
+    "cost_usd": 0.027754,
+    "replayed": false,
+    "fixture_key": "f1f5a573f372cd6ede9a6c50c596b700",
+    "error": null
+  }
+}

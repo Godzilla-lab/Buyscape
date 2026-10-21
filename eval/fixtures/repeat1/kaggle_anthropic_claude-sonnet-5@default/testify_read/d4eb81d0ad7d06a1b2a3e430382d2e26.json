@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo shows a vertical stack of used tires, tread-side visible",
+      "No sidewall, brand name, size marking, or DOT code visible in the photo",
+      "Tread shows moderate wear typical of used tires; some have cracking lines visible",
+      "A watermark text 'ABDULWAJID DAMOLA' overlays the image",
+      "Quantity of individual tires in the stack unclear (appears to be 4-5 tires stacked)"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "car tyre (used/tokunbo)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Tokunbo tyre available (used/foreign-used tyre)",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo 0 shows tread wear consistent with used tires, but 'tokunbo' origin claim itself cannot be confirmed from a photo alone"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Tyre size (rim diameter, width, profile) unknown, which drives price heavily",
+        "proof": "Clear photo of the sidewall showing size markings, e.g. 205/55R16",
+        "if_unproven": "cannot be priced without this, since size range spans very different price tiers"
+      },
+      {
+        "risk": "Brand/manufacturer unknown",
+        "proof": "Sidewall photo showing brand name",
+        "if_unproven": "priced as generic/unbranded tyre, lowest tier"
+      },
+      {
+        "risk": "Tyre age (manufacture date) unknown, old rubber can be unsafe even with good tread",
+        "proof": "Sidewall photo showing DOT date code",
+        "if_unproven": "priced as old stock, worst case"
+      },
+      {
+        "risk": "Hidden sidewall damage, bulges, or repairs not visible from tread-only angle",
+        "proof": "Full side profile photo of each tyre",
+        "if_unproven": "priced as damaged/risky"
+      },
+      {
+        "risk": "Exact tread depth not measurable from this angle/distance",
+        "proof": "Close-up photo with a tread depth gauge or coin",
+        "if_unproven": "priced as minimum legal/near-worn tread"
+      },
+      {
+        "risk": "Number of tyres actually being sold as a set is unclear",
+        "proof": "Photo or statement confirming quantity for the stated price",
+        "if_unproven": "priced as single unit unless proven otherwise"
+      }
+    ],
+    "proof_requests": [
+      "Clear sidewall photo showing size, brand, and DOT date code for each tyre",
+      "Full side-profile photo of each tyre to check for bulges or sidewall cracks",
+      "Confirmation of how many tyres are included in the listed price",
+      "Close-up of tread depth with a measuring reference"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Tyre size and brand, which are the primary price drivers, are not readable in the only photo provided, so even a worst-case price cannot be set without a sidewall shot."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 14865,
+    "input_tokens": 2828,
+    "output_tokens": 1328,
+    "cost_usd": 0.015777,
+    "replayed": false,
+    "fixture_key": "d4eb81d0ad7d06a1b2a3e430382d2e26",
+    "error": null
+  }
+}
