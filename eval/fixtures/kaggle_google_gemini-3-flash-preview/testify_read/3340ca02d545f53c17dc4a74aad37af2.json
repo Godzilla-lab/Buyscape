@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the front of a cardboard box for a welding machine.",
+      "The box is branded 'MAXMECH' and lists the model 'MMA-400T'.",
+      "The box is visibly worn, crumpled, and torn at the edges.",
+      "The actual welding machine is not visible; only a printed illustration of it on the box is shown.",
+      "Text on the box indicates '11KVA WELDING MACHINE'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "inverter welding machine",
+      "brand": "MAXMECH",
+      "model": "MMA-400T",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "400amps",
+        "verdict": "supported",
+        "evidence": "The model number MMA-400T on the box in photo 0 typically denotes a 400-ampere capacity."
+      },
+      {
+        "claim": "three phase",
+        "verdict": "unverified",
+        "evidence": "The box text visible in photo 0 does not specify the input phase requirements."
+      },
+      {
+        "claim": "for welding metals & iron",
+        "verdict": "supported",
+        "evidence": "This is the standard function of an MMA welding machine as shown on the box."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different/damaged item.",
+        "proof": "A photo of the actual machine outside of the box.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The machine may not function or have internal damage given the box condition.",
+        "proof": "A video of the machine powered on and striking an arc.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Essential accessories like electrode holders and earth clamps may be missing.",
+        "proof": "A photo showing all included cables and accessories.",
+        "if_unproven": "as machine only, no cables"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual welding machine out of the box.",
+      "Photo of the technical specification plate on the back or side of the machine.",
+      "Photo of all included accessories (cables, clamps).",
+      "Video of the machine powered on."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the box is shown, and it is in poor condition. The actual item must be seen to confirm its existence, condition, and specifications."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 7403,
+    "input_tokens": 2377,
+    "output_tokens": 1334,
+    "cost_usd": 0.00519,
+    "replayed": false,
+    "fixture_key": "3340ca02d545f53c17dc4a74aad37af2",
+    "error": null
+  }
+}

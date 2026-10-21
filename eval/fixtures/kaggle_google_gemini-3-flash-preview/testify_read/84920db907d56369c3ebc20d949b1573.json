@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail packaging for a TOTAL brand cordless drill.",
+      "The box identifies the tool as a 12V cordless drill with 20N.m torque.",
+      "The model number TDLI12208 is printed on the bottom right of the box.",
+      "The box indicates the package contains two 1.5Ah batteries and supports Type-C charging.",
+      "Icons on the box show drilling capacities for wood (20mm) and metal (10mm).",
+      "The actual drill, batteries, and charger are not visible in the photo; only the box is shown.",
+      "There is a watermark on the photo from a third-party marketplace and a company name."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "cordless drill",
+      "brand": "TOTAL",
+      "model": "TDLI12208",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "12 volts capacity",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows '12V' on the box."
+      },
+      {
+        "claim": "for wood & metal",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows icons for wood and metal drilling capacities."
+      },
+      {
+        "claim": "with Extra battery",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows '1.5Ah x 2', indicating two batteries in total."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Item presence and physical condition",
+        "proof": "Photo of the actual drill and both batteries outside of the box.",
+        "if_unproven": "as non-functional or missing"
+      },
+      {
+        "risk": "Battery health and motor functionality",
+        "proof": "Video of the drill operating under load (drilling into wood) with both batteries.",
+        "if_unproven": "as batteries needing replacement and motor non-functional"
+      },
+      {
+        "risk": "Completeness of accessories",
+        "proof": "Photo of all contents including the charger and any bits mentioned.",
+        "if_unproven": "as drill only, no charger or accessories"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual drill, both batteries, and the charger outside of the box.",
+      "Video of the drill being tested to confirm the motor and batteries work.",
+      "Photo of the rating plate on the drill body to confirm the model number."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller has only provided a photo of the retail box. Without seeing the actual tool and its accessories, it is impossible to verify their condition, authenticity, or even their presence."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 22329,
+    "input_tokens": 2360,
+    "output_tokens": 4143,
+    "cost_usd": 0.013609,
+    "replayed": false,
+    "fixture_key": "84920db907d56369c3ebc20d949b1573",
+    "error": null
+  }
+}

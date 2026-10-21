@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows a large cardboard shipping box for Africell solar panels.",
+      "The box is labeled 'AFRICELL' and 'SOLAR MODEL: AF-300W-MONO'.",
+      "Text on the box indicates 'SIZE: 1650*900*70MM WEIGHT: \u00b118KG*2PCS', suggesting it contains two panels.",
+      "The box is sealed with clear tape but shows some wear, scuffing, and minor denting at the corners.",
+      "The actual solar panels are not visible in the photo."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "solar panel",
+      "brand": "Africell",
+      "model": "AF-300W-MONO",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Brand New",
+        "verdict": "unverified",
+        "evidence": "Only the exterior of the box is shown; the condition of the contents is unknown."
+      },
+      {
+        "claim": "300w",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "60cell",
+        "verdict": "unverifiable_remote",
+        "evidence": "Requires a photo of the panel face to count the cells."
+      },
+      {
+        "claim": "25years lifespan",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain different, lower-value items.",
+        "proof": "Photo of the panels outside of the box.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The glass on the panels may be cracked or shattered inside the box.",
+        "proof": "Photo of the front (glass side) of the panels.",
+        "if_unproven": "as broken/scrap"
+      },
+      {
+        "risk": "The panels may be used or refurbished despite the box appearance.",
+        "proof": "Photo of the manufacturer's label and the frame on the back of the panel.",
+        "if_unproven": "as used"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the solar panels removed from the box.",
+      "Photo of the technical specification label on the back of the panel.",
+      "Clear photo of the front glass surface of the panels to check for damage."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the packaging is visible. The actual solar panels must be seen to confirm they exist, match the description, and are undamaged."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 14013,
+    "input_tokens": 2371,
+    "output_tokens": 2842,
+    "cost_usd": 0.009711,
+    "replayed": false,
+    "fixture_key": "19ec5fd0f38caa3334fb10c25a2a39d7",
+    "error": null
+  }
+}

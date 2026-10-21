@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Black mirrorless camera body with a body cap attached.",
+      "The brand 'Nikon' is visible on the top of the camera.",
+      "A 'Z 6' badge is visible on the bottom right of the camera front.",
+      "The camera is sitting on a white box that also has 'Z 6' and 'Kit' printed on it.",
+      "The body cap is labeled 'Nikon Z mount'.",
+      "The photo has a watermark 'CDICSON BUSINESS WORLD'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "mirrorless camera body",
+      "brand": "Nikon",
+      "model": "Z 6",
+      "read_from": [
+        "photo 0 camera body",
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Nikon Z6",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "24.5MP full-frame mirrorless camera",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a technical specification of the model shown, but the sensor cannot be inspected in the photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Sensor damage or heavy dust.",
+        "proof": "A clear photo of the sensor with the body cap removed.",
+        "if_unproven": "as having a damaged sensor"
+      },
+      {
+        "risk": "High shutter count (mechanical wear).",
+        "proof": "A screenshot of the shutter count from a recent photo's EXIF data.",
+        "if_unproven": "as high mileage/near end of life"
+      },
+      {
+        "risk": "Non-functional electronics or cracked rear screen.",
+        "proof": "A video of the camera powering on and the rear LCD/EVF working.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Missing essential accessories (battery, charger).",
+        "proof": "A photo showing the battery, charger, and any included lenses.",
+        "if_unproven": "as body only, no battery or charger"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the camera sensor with the cap off.",
+      "Photo of the rear LCD screen while the camera is powered on.",
+      "Screenshot of the current shutter count.",
+      "Photos of the battery, charger, and any lenses included in the 'Kit'."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only one photo of the front of the camera is provided. Crucial components like the sensor, rear screen, and accessories are not visible, and there is no proof of functionality."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 7051,
+    "input_tokens": 2396,
+    "output_tokens": 1259,
+    "cost_usd": 0.004975,
+    "replayed": false,
+    "fixture_key": "cbb1e242627476879c7721d40f570477",
+    "error": null
+  }
+}

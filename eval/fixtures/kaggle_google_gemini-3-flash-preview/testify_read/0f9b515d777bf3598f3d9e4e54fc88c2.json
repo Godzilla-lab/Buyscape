@@ -1,0 +1,73 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows a large cardboard shipping box for a Sharp Digital Multifunctional System.",
+      "The brand 'SHARP' is printed prominently on the front of the box.",
+      "A white identification label on the left side of the box shows 'BP-20M2', with the following characters obscured by a white plastic packing strap.",
+      "The box is sealed with two vertical white plastic straps.",
+      "The actual photocopier is not visible in the photo.",
+      "Text on the box confirms it is a 'DIGITAL MULTIFUNCTIONAL SYSTEM' in multiple languages."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "photocopier printer",
+      "brand": "Sharp",
+      "model": "BP-20M24L",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Sharp bp-20m24l photocopier printer",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows the Sharp brand and the start of the model number on the box label."
+      },
+      {
+        "claim": "multifunction: print, copy",
+        "verdict": "supported",
+        "evidence": "Photo 0 box text reads 'DIGITAL MULTIFUNCTIONAL SYSTEM'."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, older, or damaged unit.",
+        "proof": "A photo of the actual machine outside of the box.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The machine may not power on or may have internal mechanical faults.",
+        "proof": "A video of the machine powering on and printing a test page.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The internal page counter (meter) may be very high, indicating the machine is near the end of its service life.",
+        "proof": "A photo of the printed status page or the digital counter on the machine's display.",
+        "if_unproven": "as high-mileage/end-of-life"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual machine outside of the box.",
+      "Photo of the model and serial number plate on the back or side of the machine.",
+      "A photo of the total page count (meter reading) from the machine's display or a printed status sheet.",
+      "A video showing the machine performing a copy or print operation."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the shipping box is shown. For high-value office equipment, the actual unit must be inspected to verify its existence, physical condition, and usage history (page count) before a price can be determined."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 12838,
+    "input_tokens": 2392,
+    "output_tokens": 2486,
+    "cost_usd": 0.008654,
+    "replayed": false,
+    "fixture_key": "0f9b515d777bf3598f3d9e4e54fc88c2",
+    "error": null
+  }
+}
