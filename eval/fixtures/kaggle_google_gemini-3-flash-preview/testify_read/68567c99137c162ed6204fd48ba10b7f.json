@@ -1,0 +1,74 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Two tires wrapped in yellow plastic branded 'AUSTONE TIRES'.",
+      "Labels on both tires clearly show 'ATHENA SP-701' and size '245/45ZR18 100W XL'.",
+      "The tires appear to be new with factory labels still attached.",
+      "The setting is a tire shop with other stacked tires in the background."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car tires",
+      "brand": "Austone",
+      "model": "Athena SP-701",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "245/45 / 18",
+        "verdict": "supported",
+        "evidence": "photo 0 label"
+      },
+      {
+        "claim": "Austone",
+        "verdict": "supported",
+        "evidence": "photo 0 label and wrapping"
+      },
+      {
+        "claim": "original",
+        "verdict": "unverifiable_remote",
+        "evidence": "Authenticity of rubber products cannot be fully verified via photos."
+      },
+      {
+        "claim": "available in all sizes",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a claim about the seller's general inventory."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Old stock (expired rubber)",
+        "proof": "A photo of the 4-digit DOT code on the tire sidewall showing the week and year of manufacture.",
+        "if_unproven": "as old stock (over 5 years old)"
+      },
+      {
+        "risk": "Storage damage or dry rot under the wrapping",
+        "proof": "Photos of the full sidewalls and tread with the yellow wrapping removed.",
+        "if_unproven": "as having minor storage degradation"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the DOT code on the sidewall of each tire.",
+      "Photos of the tires without the yellow plastic wrapping."
+    ],
+    "decision": "price",
+    "reason": "The brand, model, and size are clearly visible on the manufacturer labels. While the age is unknown, they can be priced as old stock until a DOT code is provided."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 8018,
+    "input_tokens": 2372,
+    "output_tokens": 1483,
+    "cost_usd": 0.005635,
+    "replayed": false,
+    "fixture_key": "68567c99137c162ed6204fd48ba10b7f",
+    "error": null
+  }
+}

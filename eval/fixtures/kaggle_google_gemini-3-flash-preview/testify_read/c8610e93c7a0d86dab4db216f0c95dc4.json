@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the front of a retail box for a 'SMART' brand power bank.",
+      "The box features text '54600mAh' and '150W POWER MAX'.",
+      "The box lists features: 'FOUR USB & TWO TYPE-C & ONE MICRO'.",
+      "The actual power bank is not shown outside of the packaging.",
+      "A hand is holding the box, suggesting a physical item is present, but the contents are unconfirmed."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "power bank",
+      "brand": "SMART",
+      "model": "54600mAh 150W",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "SMART/BAVIN",
+        "verdict": "unverified",
+        "evidence": "The box shows 'SMART' but the brand 'BAVIN' is not visible in the photo."
+      },
+      {
+        "claim": "54,600mAh (196.56Wh)",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "150W Power Bank",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, lower-spec model.",
+        "proof": "Photo of the actual power bank outside of the box.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The device may be non-functional or have damaged ports.",
+        "proof": "Video showing the device charging a high-draw appliance (like a laptop) and being charged itself.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Generic brands often overstate battery capacity.",
+        "proof": "Photo of the technical specifications printed on the device's casing.",
+        "if_unproven": "as a lower capacity generic unit"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual power bank out of the box.",
+      "Photo of the specification label on the back or bottom of the device.",
+      "Video showing the device powered on and charging a laptop or phone."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail box is shown. The actual device must be seen to confirm its existence, condition, and specifications."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 20528,
+    "input_tokens": 2382,
+    "output_tokens": 4033,
+    "cost_usd": 0.01329,
+    "replayed": false,
+    "fixture_key": "c8610e93c7a0d86dab4db216f0c95dc4",
+    "error": null
+  }
+}

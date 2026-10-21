@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail box for an Edon welding machine.",
+      "The box is labeled 'DC INVERTER MMA WELDER'.",
+      "A red dot on the box identifies the specific model as ARC-500S.",
+      "The brand 'edon' is clearly printed on the box.",
+      "The actual welding machine is not visible; only the packaging is shown.",
+      "The photo includes a 'POSTED ON Jiji' watermark."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "inverter welding machine",
+      "brand": "Edon",
+      "model": "ARC-500S",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "High quality",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      },
+      {
+        "claim": "edon 500s",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "inverter welding machine",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, lower-spec item.",
+        "proof": "A photo of the actual machine outside of the box.",
+        "if_unproven": "priced as an empty box"
+      },
+      {
+        "risk": "The machine may be used or damaged despite the new-looking box.",
+        "proof": "Close-up photos of the machine's terminals and casing.",
+        "if_unproven": "priced as heavily used"
+      },
+      {
+        "risk": "The machine may not be functional.",
+        "proof": "A video of the machine powered on and striking an arc.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Essential accessories like the electrode holder and earth clamp may be missing.",
+        "proof": "A photo of the machine with all included cables and accessories.",
+        "if_unproven": "priced as a bare unit without cables"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual welding machine outside of the box.",
+      "Photo of the data plate on the back or bottom of the machine.",
+      "Photo of all included accessories (cables, mask, etc.).",
+      "Video of the machine powered on and welding."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the packaging is shown. Without seeing the actual machine, its presence, condition, and authenticity cannot be confirmed."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 10544,
+    "input_tokens": 2393,
+    "output_tokens": 2095,
+    "cost_usd": 0.007482,
+    "replayed": false,
+    "fixture_key": "53e39b8bee8ce72ba036227b67deb90c",
+    "error": null
+  }
+}

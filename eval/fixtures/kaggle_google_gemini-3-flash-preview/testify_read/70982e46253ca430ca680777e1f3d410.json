@@ -1,0 +1,74 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "A single solar panel with a white frame and dark cells.",
+      "The cells appear to be monocrystalline and use a half-cut design.",
+      "A watermark reading 'ZICO SOLAR ENERGY' is visible across the center of the photo.",
+      "No manufacturer name, brand, or technical specification label is visible on the front of the panel.",
+      "The panel is leaning against a wall in an indoor setting, possibly a warehouse or shop."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "monocrystalline solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Original",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      },
+      {
+        "claim": "400w",
+        "verdict": "unverified",
+        "evidence": "The wattage is not visible on the front; the technical label on the back is missing from the photos."
+      },
+      {
+        "claim": "mono",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows the dark, uniform cell structure typical of monocrystalline solar panels."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual wattage may be lower than claimed.",
+        "proof": "A clear photo of the manufacturer's specification label on the back of the panel.",
+        "if_unproven": "Priced as a generic 250W panel."
+      },
+      {
+        "risk": "The panel may be non-functional or have significantly degraded output.",
+        "proof": "A video showing a multimeter reading the open-circuit voltage (Voc) and short-circuit current (Isc) in full sunlight.",
+        "if_unproven": "Priced as non-functional/scrap."
+      },
+      {
+        "risk": "Internal cell damage (micro-cracks) not visible to the naked eye.",
+        "proof": "An electroluminescence (EL) test image, or at minimum, high-resolution close-ups of the glass surface.",
+        "if_unproven": "Priced as having minor defects."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the technical specification label on the back of the panel.",
+      "Video of a multimeter test showing the panel's output in direct sunlight.",
+      "Close-up photos of the front glass to check for chips or cracks."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The wattage, which is the primary factor for pricing a solar panel, cannot be verified without a photo of the specification label on the back. The current photo only confirms the type (monocrystalline) but not the capacity."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 15208,
+    "input_tokens": 2388,
+    "output_tokens": 2981,
+    "cost_usd": 0.010137,
+    "replayed": false,
+    "fixture_key": "70982e46253ca430ca680777e1f3d410",
+    "error": null
+  }
+}

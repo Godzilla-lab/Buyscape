@@ -1,0 +1,74 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows a retail box for a Canon EOS 5D Mark III camera.",
+      "The box is placed on a dark wooden desk in a shop environment.",
+      "The background contains shelves with various camera accessory boxes (flashes, etc.).",
+      "A circular sign in the background displays phone numbers and 'Business Ltd'.",
+      "A watermark 'JAMES WORLD BUSINESS LINE' is visible across the center of the photo.",
+      "The actual camera body is not visible in the photo.",
+      "The seller's text claims the item is a '5d mark 4'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DSLR camera",
+      "brand": "Canon",
+      "model": "EOS 5D Mark III",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Professional video camera",
+        "verdict": "supported",
+        "evidence": "The Canon 5D series is a professional-grade DSLR widely used for video production."
+      },
+      {
+        "claim": "5d mark 4",
+        "verdict": "contradicted",
+        "evidence": "The box in photo 0 clearly states 'EOS 5D Mark III'."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different item.",
+        "proof": "A photo of the camera body outside of the box.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The model may be the older Mark III as shown on the box, not the Mark IV claimed.",
+        "proof": "A clear photo of the camera body showing the model name badge.",
+        "if_unproven": "as a Mark III"
+      },
+      {
+        "risk": "The camera may have significant internal damage or a very high shutter count.",
+        "proof": "A video showing the camera powering on, the sensor condition, and a screenshot of the shutter count.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual camera body showing the 'EOS 5D' model badge.",
+      "Photo of the camera body with the lens cap off to show the sensor.",
+      "Video of the camera powering on and taking a test shot.",
+      "Screenshot of the current shutter count."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller's text claims a Mark IV, but the photo only shows a Mark III box. Furthermore, the camera body itself is not pictured, making it impossible to verify its existence, model, or condition."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 26917,
+    "input_tokens": 2376,
+    "output_tokens": 5266,
+    "cost_usd": 0.016986,
+    "replayed": false,
+    "fixture_key": "73ddea9038c43288dad4c1a5e4fc6676",
+    "error": null
+  }
+}

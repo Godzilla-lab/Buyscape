@@ -1,0 +1,91 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 is a promotional flyer or digital advertisement for a HomeFlower HF-1858S fan.",
+      "No photos of the actual physical item being sold are provided.",
+      "The flyer identifies the item as an AC/DC rechargeable stand fan with a 4500mAh battery.",
+      "The flyer shows a solar panel and a remote control as part of the product package.",
+      "The flyer displays two color options, black and white, but does not specify which one is for sale."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "rechargeable stand fan",
+      "brand": "HomeFlower",
+      "model": "HF-1858S",
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "3 speed cool wind",
+        "verdict": "supported",
+        "evidence": "photo 0 text '3 Wind Speed'"
+      },
+      {
+        "claim": "It has solar panels",
+        "verdict": "supported",
+        "evidence": "photo 0 shows a solar panel graphic and 'DC Socket for Solar' text"
+      },
+      {
+        "claim": "Height adjustable",
+        "verdict": "unverified",
+        "evidence": "Standard for stand fans but not explicitly stated in the flyer text"
+      },
+      {
+        "claim": "With remote control",
+        "verdict": "supported",
+        "evidence": "photo 0 shows a remote control graphic"
+      },
+      {
+        "claim": "copper",
+        "verdict": "unverifiable_remote",
+        "evidence": "Refers to internal motor windings which cannot be seen"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The item may not exist or the seller may not have it in their possession.",
+        "proof": "A photo of the actual fan in a domestic or shop setting, not a stock flyer.",
+        "if_unproven": "as non-existent"
+      },
+      {
+        "risk": "The rechargeable battery may be degraded or dead.",
+        "proof": "A video of the fan running on battery power alone with a timer.",
+        "if_unproven": "as having a dead battery"
+      },
+      {
+        "risk": "The solar panel and remote control may be missing or broken.",
+        "proof": "A photo showing the fan, the solar panel, and the remote together.",
+        "if_unproven": "as missing these accessories"
+      },
+      {
+        "risk": "Physical condition (cracks, rust, dirt) is hidden by the stock image.",
+        "proof": "Close-up photos of the actual unit's base, blades, and cage.",
+        "if_unproven": "as heavily used/damaged"
+      }
+    ],
+    "proof_requests": [
+      "Photos of the actual fan being sold, showing its current physical condition.",
+      "A photo of the solar panel and remote control that come with the unit.",
+      "A video of the fan operating while unplugged to verify the battery works."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller provided a promotional flyer instead of photos of the actual item. It is impossible to verify the condition, possession, or inclusion of accessories from a stock image."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 13809,
+    "input_tokens": 2404,
+    "output_tokens": 2832,
+    "cost_usd": 0.009698,
+    "replayed": false,
+    "fixture_key": "f409fabafd8c9c88001d6b87690899a0",
+    "error": null
+  }
+}

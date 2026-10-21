@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Large black floor-standing industrial cabinet.",
+      "Mercury logo visible in the top left corner of photo 0.",
+      "Control panel with an LCD screen and buttons at the top center.",
+      "The LCD screen appears dark/off.",
+      "Perforated front panel for ventilation.",
+      "Jiji watermark in the bottom right corner.",
+      "Image quality is low and details on the control panel are unreadable."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "UPS",
+      "brand": "Mercury",
+      "model": null,
+      "read_from": [
+        "photo 0 logo"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Mercury",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "3-phase",
+        "verdict": "unverifiable_remote",
+        "evidence": "Requires a photo of the rear terminals or the technical specification plate."
+      },
+      {
+        "claim": "30kva",
+        "verdict": "unverifiable_remote",
+        "evidence": "The capacity is not visible on the unit in the photo; requires the specification plate."
+      },
+      {
+        "claim": "online ups",
+        "verdict": "unverifiable_remote",
+        "evidence": "Requires confirmation from the model number on the specification plate."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The unit may be non-functional or have internal circuit damage.",
+        "proof": "A video of the unit powered on, showing the LCD status screen and output voltage.",
+        "if_unproven": "as not working/scrap"
+      },
+      {
+        "risk": "The actual capacity may be lower than the claimed 30kVA.",
+        "proof": "A clear photo of the manufacturer's specification plate (usually on the back or side).",
+        "if_unproven": "as the lowest capacity model using this chassis"
+      },
+      {
+        "risk": "Batteries may be expired, damaged, or missing entirely.",
+        "proof": "Photos of the internal battery compartment or external battery bank, and a load test log.",
+        "if_unproven": "as requiring a complete set of new batteries"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the manufacturer's specification plate showing the model number, kVA rating, and input/output phases.",
+      "Video of the unit powered on with the LCD screen active.",
+      "Photos of the battery bank and the rear connection terminals."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The capacity (30kVA) and phase configuration, which are the primary price drivers for this equipment, cannot be verified. A photo of the technical specification plate is mandatory for a reliable valuation."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 12414,
+    "input_tokens": 2390,
+    "output_tokens": 2372,
+    "cost_usd": 0.008311,
+    "replayed": false,
+    "fixture_key": "a8c62e263372ce6e8cc93db0bfc2bef9",
+    "error": null
+  }
+}

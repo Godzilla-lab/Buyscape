@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows an orange retail box for a 'COOLTIGER' brand battery.",
+      "The box is wrapped in clear plastic film.",
+      "The text 'Maintenance Free Battery' is visible on the front of the box.",
+      "A 'RUNALL' brand battery box is partially visible to the right.",
+      "The specific capacity (Ah) and model number are not legible on the box in the provided photo."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car battery",
+      "brand": "COOLTIGER",
+      "model": null,
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Brand new",
+        "verdict": "unverified",
+        "evidence": "The box is wrapped in plastic, but the battery itself is not visible to confirm condition."
+      },
+      {
+        "claim": "Original",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      },
+      {
+        "claim": "12V 75ahm",
+        "verdict": "unverified",
+        "evidence": "The capacity and voltage are not legible on the box in photo 0."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The actual capacity (Ah) may be lower than the 75Ah claimed.",
+        "proof": "Photo of the battery's top label showing the Ah rating.",
+        "if_unproven": "as a 45Ah battery"
+      },
+      {
+        "risk": "The box may be empty or contain a used/different battery.",
+        "proof": "Photo of the battery outside the box showing the terminals and casing.",
+        "if_unproven": "as a used battery"
+      },
+      {
+        "risk": "The battery may have been sitting in stock too long and lost charge/capacity.",
+        "proof": "Photo of the manufacturing date stamp on the battery casing.",
+        "if_unproven": "as old stock"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the battery outside the box showing the top label with the Ah rating.",
+      "Photo of the battery terminals to check for signs of use or corrosion.",
+      "Photo of the manufacturing date code stamped on the battery casing."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The capacity (Ah) is the primary factor for pricing and is not legible in the photo. Furthermore, the battery itself is not shown, only the retail packaging."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 12339,
+    "input_tokens": 2406,
+    "output_tokens": 2206,
+    "cost_usd": 0.007821,
+    "replayed": false,
+    "fixture_key": "b9ee57726a9a87ac70bf4afeb1a4f395",
+    "error": null
+  }
+}

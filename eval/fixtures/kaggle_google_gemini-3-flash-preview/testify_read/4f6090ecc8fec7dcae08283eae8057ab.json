@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "A brown cardboard box with a large black HP logo.",
+      "Handwritten '501dn' in green marker on the top left of the box.",
+      "Watermarks 'HOLLY FEM SOLUTION' and 'POSTED ON JIJI' are visible on the image.",
+      "The actual printer is not visible in the photo; only the packaging is shown."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "printer",
+      "brand": "HP",
+      "model": "501dn",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Enterprise Printer 501dn",
+        "verdict": "unverified",
+        "evidence": "The model is handwritten on a box, but the printer itself is not shown."
+      },
+      {
+        "claim": "Printer only",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, lower-value model.",
+        "proof": "A photo of the actual printer outside the box showing the manufacturer's label.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The printer may be non-functional or have significant internal wear (high page count).",
+        "proof": "A video of the printer printing a configuration or status page.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The toner cartridge may be missing or empty.",
+        "proof": "A photo of the supply status page or the internal toner compartment.",
+        "if_unproven": "as missing toner"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual printer out of the box.",
+      "Photo of the identification sticker on the back or side of the printer showing the model and serial number.",
+      "A video of the printer powering on and printing a test page.",
+      "A photo of the 'Supplies Status' page to check toner levels."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The only photo provided is of a cardboard box with a handwritten model number. The actual item must be seen to confirm its existence, identity, and condition."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 11901,
+    "input_tokens": 2390,
+    "output_tokens": 2006,
+    "cost_usd": 0.007213,
+    "replayed": false,
+    "fixture_key": "4f6090ecc8fec7dcae08283eae8057ab",
+    "error": null
+  }
+}
