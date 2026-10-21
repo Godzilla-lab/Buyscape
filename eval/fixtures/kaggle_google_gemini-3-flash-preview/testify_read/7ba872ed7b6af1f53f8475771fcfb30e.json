@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows a large inventory of car batteries in a warehouse or retail setting.",
+      "The brand 'RUNALL' is visible on several red and white boxes in the background.",
+      "Batteries in the foreground are individually wrapped in clear plastic.",
+      "No specific capacity (Ah) or model numbers are legible on the individual units.",
+      "The image appears to be a general stock photo of a shop rather than a specific item."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car battery",
+      "brand": "RUNALL",
+      "model": null,
+      "read_from": [
+        "photo 0 boxes"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Original car battery",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      },
+      {
+        "claim": "available with warranty",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      },
+      {
+        "claim": "home and office delivery",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery capacity (Ah) is unknown, which significantly dictates value.",
+        "proof": "A clear photo of the top or side label showing the Ah rating.",
+        "if_unproven": "as the lowest standard capacity (e.g., 45Ah)"
+      },
+      {
+        "risk": "The battery may be used or refurbished despite the packaging.",
+        "proof": "A close-up photo of the terminals showing no wear or lead deformation.",
+        "if_unproven": "as used/refurbished"
+      },
+      {
+        "risk": "Manufacturing date is unknown; lead-acid batteries degrade on the shelf.",
+        "proof": "A photo of the date code stamped into the plastic casing.",
+        "if_unproven": "as old stock"
+      }
+    ],
+    "proof_requests": [
+      "A clear photo of the label on a single battery showing the capacity (Ah) and voltage.",
+      "A photo of the top of the battery showing the terminals and any stamped date codes.",
+      "A photo of the specific battery being sold, unwrapped."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo shows a general stock of batteries but does not identify the specific capacity or model of the unit being offered. Since car battery prices vary greatly by amperage, the item cannot be priced without this information."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 11431,
+    "input_tokens": 2362,
+    "output_tokens": 2113,
+    "cost_usd": 0.00752,
+    "replayed": false,
+    "fixture_key": "7ba872ed7b6af1f53f8475771fcfb30e",
+    "error": null
+  }
+}

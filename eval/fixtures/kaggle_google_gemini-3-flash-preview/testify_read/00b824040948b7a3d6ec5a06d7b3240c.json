@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail box for a Marsriva Smart Mini DC UPS.",
+      "The box clearly displays the model number 'KP6'.",
+      "The box lists a capacity of 10000mAh (36Wh) and a power rating of 18W.",
+      "The actual UPS device is not shown outside of the packaging.",
+      "The seller's text mentions model 'KP2', which differs from the box shown."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "mini DC UPS",
+      "brand": "Marsriva",
+      "model": "KP6",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Model KP2",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows the model on the box is KP6."
+      },
+      {
+        "claim": "10000mAh capacity",
+        "verdict": "supported",
+        "evidence": "Photo 0 box text."
+      },
+      {
+        "claim": "Smart Mini DC UPS",
+        "verdict": "supported",
+        "evidence": "Photo 0 box text."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different model than what is pictured.",
+        "proof": "A photo of the actual device out of the box showing the model sticker.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The internal battery may be degraded or the unit may not function.",
+        "proof": "A video showing the device powering a router while disconnected from mains power.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual UPS device outside the box.",
+      "Photo of the specification sticker on the back of the device to confirm the model number.",
+      "Confirmation of whether the item is brand new or used."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "There is a direct contradiction between the seller's text (KP2) and the model shown on the box (KP6). Additionally, the device itself is not pictured, only the packaging."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 14859,
+    "input_tokens": 2373,
+    "output_tokens": 2571,
+    "cost_usd": 0.008899,
+    "replayed": false,
+    "fixture_key": "00b824040948b7a3d6ec5a06d7b3240c",
+    "error": null
+  }
+}

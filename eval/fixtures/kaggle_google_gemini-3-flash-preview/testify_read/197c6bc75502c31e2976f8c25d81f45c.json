@@ -1,0 +1,73 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows a three-piece furniture set: a long TV console, a round coffee table, and a smaller oval side table.",
+      "The TV console and coffee table have white bases, gold-toned legs, and marble-patterned tops.",
+      "The side table features a gold-toned metal frame and a dark-tinted glass top.",
+      "A large 'PELLY INTERIORS' watermark is visible across the center of the image.",
+      "The setting is a professional furniture showroom with polished floors and other display items.",
+      "The seller's text is a generic, truncated product description likely copied from a website."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "TV stand and coffee table set",
+      "brand": "Pelly Interiors",
+      "model": null,
+      "read_from": [
+        "photo 0 watermark"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Easy to clean",
+        "verdict": "unverifiable_remote",
+        "evidence": "Surface material properties cannot be verified from a photo."
+      },
+      {
+        "claim": "sofa table",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows a coffee table and side table designed for a living room setting."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Item possession (use of a watermarked showroom photo)",
+        "proof": "A photo of the items in a residential or warehouse setting with a handwritten note showing the current date and seller's name.",
+        "if_unproven": "as a non-existent item (zero value)"
+      },
+      {
+        "risk": "Material quality (genuine marble vs. printed laminate)",
+        "proof": "A close-up photo of the edge and underside of the tabletop.",
+        "if_unproven": "as laminate-covered MDF"
+      },
+      {
+        "risk": "Scope of the sale (unclear if price is for the set or one piece)",
+        "proof": "A clear statement or photo confirming which of the three pieces are included in the price.",
+        "if_unproven": "as the side table only"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual items in your possession with a handwritten note of today's date.",
+      "Close-up photos of the tabletop edges to verify material.",
+      "Confirmation of which pieces (TV stand, coffee table, side table) are included in the price.",
+      "Photos showing the condition of all surfaces and legs to check for scratches or damage."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The provided image is a watermarked showroom photo. Without proof of possession and a clear definition of which pieces are included in the sale, a reliable valuation is not possible."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 27794,
+    "input_tokens": 2377,
+    "output_tokens": 6260,
+    "cost_usd": 0.019969,
+    "replayed": false,
+    "fixture_key": "197c6bc75502c31e2976f8c25d81f45c",
+    "error": null
+  }
+}

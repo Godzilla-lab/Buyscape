@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Retail packaging for a Remax power bank.",
+      "Model FC-02 and 20000mAh capacity printed on box.",
+      "Box mentions 45W PD fast charging and built-in cables.",
+      "The actual power bank is not visible, only the box.",
+      "Background shows multiple similar boxes, suggesting a retail environment."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "power bank",
+      "brand": "REMAX",
+      "model": "FC-02",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Remax FC-02 20000mAh Power Bank",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "built-in dual [cables]",
+        "verdict": "supported",
+        "evidence": "photo 0 box shows two integrated cables"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Counterfeit product",
+        "proof": "Photo of the holographic security seal or scratch-off verification code on the box.",
+        "if_unproven": "as a generic/unbranded power bank"
+      },
+      {
+        "risk": "Box is empty or item is damaged",
+        "proof": "Photo of the actual power bank outside of the packaging.",
+        "if_unproven": "as missing or broken"
+      },
+      {
+        "risk": "Battery degradation or failure",
+        "proof": "Video showing the power bank charging a phone and its own display active.",
+        "if_unproven": "as non-functional"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual power bank outside the box.",
+      "Photo of the security/authenticity sticker on the packaging.",
+      "Video of the device charging a phone."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail packaging is shown. The actual device must be seen to verify condition and presence. Authenticity verification is required for this brand as it is frequently counterfeited."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 7110,
+    "input_tokens": 2387,
+    "output_tokens": 1416,
+    "cost_usd": 0.005442,
+    "replayed": false,
+    "fixture_key": "78e33e397d9c9ff6cf585b0401e120ce",
+    "error": null
+  }
+}

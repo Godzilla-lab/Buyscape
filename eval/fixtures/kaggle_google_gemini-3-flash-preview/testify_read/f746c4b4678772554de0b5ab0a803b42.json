@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the front of a retail box for a steam iron.",
+      "The box features a 'TM LG' logo, which is distinct from the standard LG Electronics logo.",
+      "The model number 'LG-280' is printed on the top right of the box.",
+      "The box specifies 'Power Wattage 1200W' and features like 'Non-stick soleplate'.",
+      "The actual iron is not shown; only the product illustration on the box is visible."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "steam iron",
+      "brand": "TM LG",
+      "model": "LG-280",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Lg steam Iron",
+        "verdict": "supported",
+        "evidence": "photo 0 box shows 'LG' and 'Steaming Iron'"
+      },
+      {
+        "claim": "lg-280",
+        "verdict": "supported",
+        "evidence": "photo 0 box shows 'LG-280'"
+      },
+      {
+        "claim": "1200watts",
+        "verdict": "supported",
+        "evidence": "photo 0 box shows 'Power Wattage 1200W'"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, inferior item.",
+        "proof": "Photo of the actual iron outside of the box.",
+        "if_unproven": "as missing item"
+      },
+      {
+        "risk": "The iron may be used, damaged, or have a burnt soleplate.",
+        "proof": "Clear photos of the iron's body and the soleplate.",
+        "if_unproven": "as heavily used/damaged"
+      },
+      {
+        "risk": "The iron may not heat up or produce steam.",
+        "proof": "Video of the iron plugged in, heating up, and emitting steam.",
+        "if_unproven": "as non-functional"
+      },
+      {
+        "risk": "The 'TM LG' branding indicates this is likely a generic or counterfeit product, not a genuine LG Electronics appliance.",
+        "proof": "Photo of the manufacturer's label/plate on the iron itself.",
+        "if_unproven": "as a generic/no-name brand"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual iron out of the box.",
+      "Photo of the soleplate (bottom) of the iron.",
+      "Photo of the technical specification sticker on the iron itself.",
+      "Video showing the iron powered on and steaming."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the box is visible in the provided photo. The actual iron must be seen to confirm its condition, existence, and to verify the suspicious 'TM LG' branding."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 11480,
+    "input_tokens": 2373,
+    "output_tokens": 2472,
+    "cost_usd": 0.008603,
+    "replayed": false,
+    "fixture_key": "f746c4b4678772554de0b5ab0a803b42",
+    "error": null
+  }
+}
