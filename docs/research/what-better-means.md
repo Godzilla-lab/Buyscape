@@ -21,14 +21,14 @@ seller's lie can push up.** Testify is the public test that proves it.
 
 From `testify-baseline-3.md`, on the 231 dev items:
 
-| | Nemotron 3.5 Super VL | Gemini 3 Flash | Qwen3-VL 8B, untuned | GPT-5.4 nano |
-|---|---|---|---|---|
-| Gave a price | 40% | 19% | 0% | 0% |
-| Silent wrong | 3 (1.3%) | 2 (0.9%) | 0 | 0 |
-| Identity accuracy | 85% | 82% | 74% | 88% |
-| Named a model the photos do not show | 6% | 25% | 26% | 19% |
-| Same decision when asked twice | 79% | 93% | 100% | 100% |
-| Quoted above the asking price | 26% of its prices | 27% of its prices | no prices | no prices |
+| | Nemotron 3.5 Super VL | Gemini 3 Flash | Claude Sonnet 5 | Qwen3-VL 8B, untuned | GPT-5.4 nano |
+|---|---|---|---|---|---|
+| Gave a price | 40% | 19% | 19% | 0% | 0% |
+| Silent wrong | 3 (1.3%) | 2 (0.9%) | 1 (0.4%) | 0 | 0 |
+| Identity accuracy | 85% | 82% | 89% | 74% | 88% |
+| Named a model the photos do not show | 6% | 25% | 13% | 26% | 19% |
+| Same decision when asked twice | 79% | 93% | 71% | 100% | 100% |
+| Quoted above the asking price | 26% of its prices | 27% of its prices | 22% of its prices | no prices | no prices |
 
 In plain words:
 
@@ -40,11 +40,12 @@ In plain words:
   182,000 naira became 182,000 flat once the seller "said" the shutter count
   was under 5,000.
 - Both quote above the seller's own asking price about a quarter of the time.
-- GPT-5.4 nano names the item right most often (88%), then refuses to price
+- GPT-5.4 nano names the item right often (88%), then refuses to price
   anything, and a fifth of its answers break the format.
+- Claude Sonnet 5 is the most accurate (89%) and was silently wrong once, but
+  asked the same question twice it changes its decision on 29% of adverts.
 
-Claude Sonnet 5 is still to run. When it finishes, each line below is set
-against the best of all of them.
+With all five in, each line below is set against the best of them.
 
 ## The scorecard the fine-tuned 8B must pass
 
@@ -52,20 +53,21 @@ On the same 231 dev items, the same prompts, the same comparables:
 
 | Line | Target | Beats |
 |---|---|---|
-| Silent wrong | at most 2 of 231 (0.9%) | Gemini's 0.9%, Nemotron's 1.3% |
-| Gave a price | at least 40% | twice Gemini's 19% |
-| Identity accuracy | at least 85% | Nemotron; nano's 88% is on the few it named |
+| Silent wrong | at most 1 of 231 (0.4%) | Claude's 1, Gemini's 2, Nemotron's 3 |
+| Gave a price | at least 40% | Nemotron's 40%, twice Claude's and Gemini's 19% |
+| Identity accuracy | at least 89% | Claude |
 | Named a model the photos do not show | under 6% | Nemotron's 6%, Gemini's 25% |
 | Same decision when asked twice | at least 93% | Gemini |
 | A lie raised the price | **0, on every item** | Gemini, which a lie moved |
 | A lie unlocked a price it had refused | **0** | both |
-| Quoted above the asking price | under 26% of its prices | both |
+| Quoted above the asking price | under 22% of its prices | Claude |
 | Answers that break the schema | under 1% | |
 | Cost per item | nothing, on a free Kaggle T4 | every paid API |
 
 Two lines are hard stops. If a lie ever raises a price, or the silent wrong
-count goes above Gemini's, the model does not ship, however good the other
-lines look. That is the rule from `fine-tuning-research.md`, step 9.
+count goes above 2, the model does not ship, however good the other lines
+look. The stop is at 2, not Claude's 1, because on 231 items one advert either
+way is within noise; the target stays at 1. That is the rule from `fine-tuning-research.md`, step 9.
 
 ## How we keep the result honest
 

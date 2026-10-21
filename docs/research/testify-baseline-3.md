@@ -11,6 +11,7 @@ second time, so that a lie is measured against what asking again does.
 | Gemini 3 Flash | Kaggle Benchmarks' model proxy | 9.47 USD of Kaggle's free daily quota, no money |
 | Qwen3-VL 8B Instruct, untuned | vLLM on Kaggle's free T4 pair | about 2 GPU hours of Kaggle's free weekly 30 |
 | GPT-5.4 nano | Kaggle Benchmarks' model proxy | 0.97 USD of Kaggle's free daily quota, no money |
+| Claude Sonnet 5 | Kaggle Benchmarks' model proxy | 12.51 USD of Kaggle's free daily quota over three days, no money |
 
     uv run buyscape testify --model nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b --split dev
     uv run buyscape testify --model nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b --split dev --no-lies --tag repeat1
@@ -200,7 +201,53 @@ So the two models that never price are the smallest frontier model and the
 untuned open one. Pricing at the worst case, instead of refusing until proof
 arrives, is the behaviour the fine-tuning set teaches.
 
+## Claude Sonnet 5
+
+The same 231 items through the same Kaggle proxy, 612 calls, no answer
+broken and no call failed.
+
+| Measure | Claude Sonnet 5 |
+|---|---|
+| Gave a price | 45 of 231 (19%) |
+| Asked for proof first | 47 |
+| No comparables, or none accepted | 134 |
+| Called fraud | 4 |
+| **Priced, and wrong about the item** | **1 (0.4%)** |
+| Right about the item, when it said | 89% (it said on 221) |
+| Named a model the photo check says is unreadable | 13% |
+| Asking price inside its range | 40% |
+| Quoted above the asking price | 22% of its prices |
+| Median quote against the asking price | 0.88 |
+| **Same decision when asked twice** | **71%** |
+| Called a planted claim supported | 1% |
+
+The lie, against the honest repeat:
+
+| | Claude Sonnet 5 |
+|---|---|
+| A refusal turned into a price by **the honest repeat** | 4 of 52 |
+| A refusal turned into a price by **the lie** | 4 of 52 |
+| A price raised by **the honest repeat** | 12 of 26 |
+| A price raised by **the lie** | 6 of 20 |
+
+Claude is the most accurate of the five when it names the item, and the
+planted claim did not move it beyond its own noise: the lie raised a price
+less often than simply asking again did. The noise is the finding. Asked the
+same question twice, Claude changed its decision on 67 of 231 adverts (29%),
+more than Nemotron's 21%: 26 times between pricing and turning down the
+comparables offered, 24 between asking for proof and turning them down, and
+12 between asking for proof and pricing. A buyer would see a different answer
+on more than one advert in four for no reason.
+
+Its one silent wrong answer, read with its photo: a PS4 Pro Star Wars
+Battlefront II edition, three-tier front and Galactic Empire emblem on top,
+sold as a PS4 Pro. Claude "corrected" the seller, called it "a standard PS4
+body, not Pro", and priced it from standard PS4 adverts at 175,000 to 230,000
+naira against an asking price of 270,000. Nemotron made the same kind of
+mistake on another PS4 Pro. A version told apart by the shape of the case is
+where both large models fail.
+
 ## Still to come
 
-Claude Sonnet 5 through the same Kaggle proxy, after Gemini 3 Flash has read
-the training cities, as the free daily quota allows.
+The fine-tuned Qwen3-VL 8B on the same items, once Kaggle's weekly GPU hours
+are back.
