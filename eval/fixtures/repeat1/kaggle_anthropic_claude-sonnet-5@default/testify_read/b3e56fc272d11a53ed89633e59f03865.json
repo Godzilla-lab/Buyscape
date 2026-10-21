@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Single photo shows a dark engine-bay component, appears to be an air intake duct/air cleaner housing attached to an engine assembly.",
+      "A wiring harness with a multi-pin connector (colored wires: pink, yellow, blue, black) hangs from the underside of the part.",
+      "Various hoses and clips are visible around the housing, consistent with an engine bay.",
+      "A watermark reading 'FAMOUS AUTO PARTS' is overlaid on the image; this is the seller's branding, not a part marking.",
+      "No manufacturer name, part number, or vehicle make/model is visible anywhere on the physical component.",
+      "No scale reference, no engine bay wide shot, no VIN plate or label is shown."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used engine air intake/air cleaner housing assembly with wiring harness (vehicle make/model unknown)",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "We offer all our clients 5 star service, never buy an item because it's cheap...",
+        "verdict": "unverifiable_remote",
+        "evidence": "General marketing statement in seller's text, not tied to any visible feature of the part; no way to confirm service quality or implied part quality from a photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Vehicle fitment (make, model, year, engine code) is unknown, which is essential for pricing an auto part.",
+        "proof": "A wide shot of the full engine bay or a label/sticker/part number stamped on the housing or nearby engine block.",
+        "if_unproven": "cannot be priced even at worst case without fitment; treat as unpriceable until fitment is confirmed"
+      },
+      {
+        "risk": "Functional condition of the part (cracks, warping, connector damage) cannot be assessed from a single partial-angle photo.",
+        "proof": "Close-up shots of all mounting points, seals, and the connector pins, plus a photo of the part removed and fully visible.",
+        "if_unproven": "priced as not working / damaged until proven otherwise"
+      },
+      {
+        "risk": "Completeness of the assembly (missing clips, sensors, or sub-parts) cannot be confirmed.",
+        "proof": "Photo from multiple angles showing all attachment points and any sensors that should be present.",
+        "if_unproven": "priced as incomplete until proven complete"
+      },
+      {
+        "risk": "Electrical connector/wiring harness integrity (pins bent, corrosion) cannot be judged from this distance/angle.",
+        "proof": "Close-up photo of the connector pins and harness insulation.",
+        "if_unproven": "priced as faulty wiring until proven intact"
+      }
+    ],
+    "proof_requests": [
+      "Photo showing the vehicle make/model (e.g., dashboard badge, VIN plate, or full engine bay with visible branding).",
+      "Any part number or manufacturer stamp on the housing itself, photographed close-up.",
+      "Close-up of the wiring harness connector and pins.",
+      "Photos from at least two more angles showing the full part removed from the vehicle."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The part cannot be priced even at a worst-case estimate because its vehicle fitment is unknown and no identifying marks are visible; fitment is a primary price driver for used auto parts."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 22657,
+    "input_tokens": 2005,
+    "output_tokens": 1946,
+    "cost_usd": 0.020311,
+    "replayed": false,
+    "fixture_key": "b3e56fc272d11a53ed89633e59f03865",
+    "error": null
+  }
+}

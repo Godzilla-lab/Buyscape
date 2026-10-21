@@ -1,0 +1,97 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: Front of a black DSLR body with 'Canon EOS 5D Mark II' text visible on the pentaprism and side plate; no lens attached, body cap on the mount.",
+      "Photo 1: Rear view showing LCD screen (screen appears dark/off, no power-on test shown), control buttons, 'Canon' logo below screen, viewfinder eyecup.",
+      "Photo 2: Bottom plate showing serial sticker 'Canon DS126201', serial number 3761814763, battery compartment door closed, tripod socket visible.",
+      "No battery, charger, lens, strap, memory card, or box visible in any photo.",
+      "No shot of the sensor (lens removed) or a powered-on screen/live view to confirm functionality.",
+      "No close-up of body corners/edges to assess cosmetic wear beyond general photos."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DSLR camera body",
+      "brand": "Canon",
+      "model": "EOS 5D Mark II",
+      "read_from": [
+        "photo 0 front badge",
+        "photo 1 rear logo",
+        "photo 2 bottom plate sticker"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Full-frame DSLR camera",
+        "verdict": "unverifiable_remote",
+        "evidence": "Sensor not visible in any photo; full-frame status is a known spec for this model but not confirmed by these images."
+      },
+      {
+        "claim": "21.1-megapixel sensor",
+        "verdict": "unverifiable_remote",
+        "evidence": "No way to confirm sensor resolution from external photos alone."
+      },
+      {
+        "claim": "Implied working condition (general listing tone)",
+        "verdict": "unverified",
+        "evidence": "No photo or video shows the camera powered on, screen lit, or shutter firing."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Camera may not power on or may have electrical faults",
+        "proof": "A photo or short video of the camera powered on with the screen showing a live menu or live view.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Shutter count could be very high, reducing remaining mechanical life",
+        "proof": "A screenshot from EOS Utility or a shutter-count checking tool showing the actuation count.",
+        "if_unproven": "priced as high-use/near end-of-life shutter"
+      },
+      {
+        "risk": "Sensor could be dusty, scratched, or have dead pixels",
+        "proof": "A clear close-up photo of the sensor with the lens removed, taken in good light.",
+        "if_unproven": "priced as sensor condition unknown/worst case"
+      },
+      {
+        "risk": "No lens, battery, charger, or memory card included, affecting usability and total cost",
+        "proof": "Photos of these accessories if they are actually included.",
+        "if_unproven": "priced as body-only with no accessories"
+      },
+      {
+        "risk": "Possible water or impact damage not visible externally",
+        "proof": "A photo of the battery compartment interior showing the moisture/drop indicator sticker.",
+        "if_unproven": "priced assuming no damage cannot be confirmed, so treated as a risk factor lowering price"
+      },
+      {
+        "risk": "Cosmetic wear (scratches, dents) on edges not shown in current angles",
+        "proof": "Close-up photos of all four corners and the top/bottom edges.",
+        "if_unproven": "priced as moderate-to-heavy cosmetic wear assumed"
+      }
+    ],
+    "proof_requests": [
+      "Photo/video of the camera powered on with menu or live view visible.",
+      "Shutter count screenshot via EOS Utility or similar software.",
+      "Close-up photo of the sensor with lens removed.",
+      "Photo of any included battery, charger, lens, and memory card.",
+      "Photo of the battery compartment interior showing the moisture indicator.",
+      "Close-up photos of body corners and edges for cosmetic assessment."
+    ],
+    "decision": "price",
+    "reason": "The brand and model are clearly readable across three photos, so identity is certain, but no functional test, accessories, or sensor condition are shown, so the body must be priced at worst case as a non-verified, body-only unit with no accessories."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 23075,
+    "input_tokens": 3057,
+    "output_tokens": 2051,
+    "cost_usd": 0.023465,
+    "replayed": false,
+    "fixture_key": "2db083e476a46125393c1cdca8c7d230",
+    "error": null
+  }
+}

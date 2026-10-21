@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photos show a roadside shop/stall with large stacks of used (visibly worn, dirty, scuffed) car tires under a tin roof.",
+      "Sidewalls have chalk/paint marks (numbers, arrows) typical of used-tire sorting, not new-tire markings.",
+      "No brand name or manufacturer logo is legible on any tire in any photo.",
+      "One tire in photo 1 and photo 2 shows a partial size code starting with 'R22...' but the rest of the digits are cut off/unreadable.",
+      "No single tire is isolated for sale; the photos depict general stock/inventory rather than one specific item.",
+      "Tread patterns vary across tires, indicating mixed makes/models within the stock."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used car tires (stock/inventory, mixed sizes and brands)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 1 partial size text on front tire",
+        "photo 2 same partial size text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Major distributor of Belgium tires",
+        "verdict": "unverifiable_remote",
+        "evidence": "No invoice, import document, or brand/origin marking visible in any photo; 'Belgium tires' is a common Nigerian market term for used European tires but cannot be confirmed from these images."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Exact tire size (rim diameter, width, profile) unknown, which drives price heavily",
+        "proof": "Close-up photo of a single tire's full sidewall showing size code (e.g., 205/55R16) and brand name",
+        "if_unproven": "priced as generic unspecified-size used tire, worst case small/common size"
+      },
+      {
+        "risk": "Tread depth/wear level not verifiable from these wide shots",
+        "proof": "Close-up photo or video of tread groove with a depth gauge or coin for scale",
+        "if_unproven": "priced as low tread/near end-of-life"
+      },
+      {
+        "risk": "Age of tires (DOT/manufacture date) unknown, affecting rubber hardness and safety",
+        "proof": "Clear photo of DOT code on sidewall",
+        "if_unproven": "priced as old/unknown-age stock"
+      },
+      {
+        "risk": "No visible brand/logo, so cannot confirm claimed 'Belgium' or any premium origin",
+        "proof": "Photo showing legible brand name and country-of-origin molding on sidewall",
+        "if_unproven": "priced as unbranded/generic used tire"
+      },
+      {
+        "risk": "Quantity and specific item being purchased is unclear (whole shop vs single tire)",
+        "proof": "Seller specifies exact tire(s) with photo matching a listing",
+        "if_unproven": "priced as single unspecified used tire, not bulk lot"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of one specific tire's full sidewall showing brand, size, and DOT code",
+      "Tread depth photo with a coin or gauge for scale",
+      "Confirmation of exact quantity/size being sold for this listing"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photos show general shop stock with no legible brand or complete size code, so even a worst-case price cannot be set without knowing which specific tire (size/brand) is being offered."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 20899,
+    "input_tokens": 3383,
+    "output_tokens": 1803,
+    "cost_usd": 0.021637,
+    "replayed": false,
+    "fixture_key": "4512d7ed8fa2fe5dfaebfab1632d14de",
+    "error": null
+  }
+}
