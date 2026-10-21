@@ -1,0 +1,92 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the front of a retail box for a Silver Crest blender.",
+      "The box identifies the model as SC-9009.",
+      "Text on the box claims 4.0L capacity, 9000W power, and 8 blades.",
+      "The box shows a red motor base, a large blender jar, and a smaller grinder jar.",
+      "A watermark 'POSTED ON JIJI' is visible on the image.",
+      "No photos of the actual physical item outside the box are provided."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "blender and grinder",
+      "brand": "Silver Crest",
+      "model": "SC-9009",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "4.0l capacity",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "silver crest",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "9000watts power",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "with extra jar",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "model: sc-9009",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, used, or damaged item.",
+        "proof": "Photo of the actual blender and jars outside the box.",
+        "if_unproven": "as not present"
+      },
+      {
+        "risk": "The motor may be non-functional or have internal damage.",
+        "proof": "Video of the blender motor running.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The 9000W power rating is likely a marketing exaggeration; actual wattage may be much lower.",
+        "proof": "Photo of the technical rating plate on the bottom of the motor base.",
+        "if_unproven": "as a low-power generic blender"
+      },
+      {
+        "risk": "Accessories like the tamper or the extra jar might be missing.",
+        "proof": "Photo of all included components laid out together.",
+        "if_unproven": "as missing parts"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual blender and all accessories outside of the box.",
+      "Photo of the rating plate on the bottom of the motor base.",
+      "Video of the blender powered on and spinning."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only a photo of the retail packaging is provided. It is impossible to verify the condition, authenticity, or even the presence of the item without photos of the actual product."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 8624,
+    "input_tokens": 2376,
+    "output_tokens": 1942,
+    "cost_usd": 0.007014,
+    "replayed": false,
+    "fixture_key": "8c593bab5290960e5eab224771ed3bb8",
+    "error": null
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "A sealed cardboard box for a Hisense Chest Freezer.",
+      "The box is secured with two white plastic shipping straps.",
+      "The brand 'Hisense' and 'CHEST FREEZER' are printed clearly on the box.",
+      "A white manufacturer's sticker is visible on the left side of the box, but the text is too blurry to read.",
+      "The background shows signage for 'Globaltech Trading Company'.",
+      "The item is shown only in its packaging; the actual freezer is not visible."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "chest freezer",
+      "brand": "Hisense",
+      "model": null,
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Brand: Hisense",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "Model: 270SH",
+        "verdict": "unverified",
+        "evidence": "The sticker on the side of the box in photo 0 is illegible."
+      },
+      {
+        "claim": "Capacity: 198 Litres",
+        "verdict": "unverified",
+        "evidence": "The capacity is not visible on the front of the box in photo 0."
+      },
+      {
+        "claim": "Type: Chest/Deep Freezer",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may contain a different model, a smaller capacity unit, or be empty.",
+        "proof": "Photo of the freezer outside the box showing the internal cavity and the model plate.",
+        "if_unproven": "priced as the smallest/cheapest Hisense chest freezer model"
+      },
+      {
+        "risk": "The unit may have transit damage or be non-functional (DOA).",
+        "proof": "Video of the unit unboxed, plugged in, and the compressor running.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The specific model (270SH) which determines the market value is unconfirmed.",
+        "proof": "A clear, close-up photo of the white specification sticker on the side of the box.",
+        "if_unproven": "priced as a generic base-model chest freezer"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the white specification sticker on the side of the box.",
+      "Photos of the freezer outside of the box from multiple angles.",
+      "A video showing the freezer powered on and the interior."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model number and capacity are illegible on the box sticker in the provided photo. Since these specifications significantly impact the price of a freezer, a clear photo of the model label is required."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 12244,
+    "input_tokens": 2378,
+    "output_tokens": 2616,
+    "cost_usd": 0.009037,
+    "replayed": false,
+    "fixture_key": "fd10b0aa58ad6f9ae79f5bf7cb2ce136",
+    "error": null
+  }
+}

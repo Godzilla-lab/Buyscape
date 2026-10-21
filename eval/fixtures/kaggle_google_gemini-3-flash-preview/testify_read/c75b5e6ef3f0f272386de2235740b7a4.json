@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail packaging for a Silver Crest blender.",
+      "Brand 'SILVER CREST' and model 'SC-1589' are printed on the box.",
+      "The box features text claiming '8500 watt' and 'GERMAN TECHNOLOGY'.",
+      "The box depicts a red blender base, a main jar, a tamper, and a smaller mill jar.",
+      "The actual physical item is not shown, only the box."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "blender",
+      "brand": "Silver Crest",
+      "model": "SC-1589",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Unique silver crest extra mill german blender",
+        "verdict": "supported",
+        "evidence": "photo 0 shows the brand and 'extra mill jar' text; 'German Technology' is printed on the box."
+      },
+      {
+        "claim": "8500Watt",
+        "verdict": "supported",
+        "evidence": "photo 0 shows '8500 watt' printed on the box."
+      },
+      {
+        "claim": "Super cute",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      },
+      {
+        "claim": "Highly recommended",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty, or the item inside may be used, damaged, or a different model.",
+        "proof": "Photo of the actual blender and accessories outside of the box.",
+        "if_unproven": "as missing or non-functional"
+      },
+      {
+        "risk": "The 8500W power rating is highly suspicious for a domestic blender and may be a marketing exaggeration.",
+        "proof": "Photo of the technical rating plate on the bottom of the motor base.",
+        "if_unproven": "as a standard low-wattage generic blender"
+      },
+      {
+        "risk": "The motor may be non-functional or have worn bearings.",
+        "proof": "Video of the blender running.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual blender and all included accessories out of the box.",
+      "Photo of the manufacturer's rating plate on the bottom of the blender base.",
+      "A video showing the blender plugged in and running."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail box is visible. I cannot confirm the condition, presence, or authenticity of the actual item without seeing it."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 8788,
+    "input_tokens": 2379,
+    "output_tokens": 1647,
+    "cost_usd": 0.00613,
+    "replayed": false,
+    "fixture_key": "c75b5e6ef3f0f272386de2235740b7a4",
+    "error": null
+  }
+}
