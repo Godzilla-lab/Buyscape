@@ -1,0 +1,121 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Silver double-cab pickup truck, front and rear views, parked on a gravel lot among other vehicles.",
+      "Toyota emblem visible on grille (photo 0, photo 1) and 'V6' badge visible on tailgate (photo 2).",
+      "Grille style is the standard mesh pattern seen on SR/SR5 Tacoma trims, not a visible TRD badge anywhere in the photos.",
+      "Rear windshield in photo 2 has handwritten text reading 'No Start 963' visible through the glass, consistent with an auction/import yard marking.",
+      "No interior, dashboard, engine bay, VIN plate, or duty/clearance paperwork shown in any photo.",
+      "Windshield has an auction/inspection sticker partly visible in photo 0 and photo 1, text not legible."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "double-cab pickup truck (Toyota Tacoma body style)",
+      "brand": "Toyota",
+      "model": null,
+      "read_from": [
+        "photo 0 grille badge",
+        "photo 1 grille badge",
+        "photo 2 tailgate V6 badge"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "2024 Toyota Tacoma",
+        "verdict": "unverifiable_remote",
+        "evidence": "No VIN, registration, or year sticker legible in any photo; body style shown is consistent with an older Tacoma generation, not confirmed as 2024."
+      },
+      {
+        "claim": "TRD trim",
+        "verdict": "unverified",
+        "evidence": "No TRD badge visible on grille, fender, or tailgate in photo 0, 1, or 2."
+      },
+      {
+        "claim": "4x4",
+        "verdict": "unverified",
+        "evidence": "No 4x4 badge or transfer case lever visible in any photo."
+      },
+      {
+        "claim": "V6 engine",
+        "verdict": "supported",
+        "evidence": "'V6' badge visible on tailgate in photo 2."
+      },
+      {
+        "claim": "Push to start",
+        "verdict": "unverifiable_remote",
+        "evidence": "No interior or dashboard photo showing a start button."
+      },
+      {
+        "claim": "Moonroof",
+        "verdict": "unverifiable_remote",
+        "evidence": "Roof is not visible from front or rear angles in any photo."
+      },
+      {
+        "claim": "Verified duty (customs cleared)",
+        "verdict": "unverifiable_remote",
+        "evidence": "No customs or duty document shown in any photo."
+      },
+      {
+        "claim": "Foreign used (implies good running condition)",
+        "verdict": "contradicted",
+        "evidence": "Photo 2 shows handwritten 'No Start' text on the rear windshield, suggesting the vehicle does not start, which the seller's listing does not disclose."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Vehicle may not start/run at all",
+        "proof": "A video of the engine being started and idling",
+        "if_unproven": "priced as not working / non-running"
+      },
+      {
+        "risk": "Actual trim may not be TRD, affecting value",
+        "proof": "Clear photo of TRD badge on grille, fender, or tailgate, or interior TRD-branded seats/steering wheel",
+        "if_unproven": "priced as base SR/SR5 trim, not TRD"
+      },
+      {
+        "risk": "4x4 capability unconfirmed",
+        "proof": "Photo of transfer case shifter/4x4 badge or underside drivetrain",
+        "if_unproven": "priced as 4x2"
+      },
+      {
+        "risk": "Model year unconfirmed, could be older than claimed",
+        "proof": "Photo of VIN plate or registration/particulars document",
+        "if_unproven": "priced as oldest plausible year for this body style"
+      },
+      {
+        "risk": "Customs duty status unverified, could incur import costs",
+        "proof": "Photo of customs duty certificate/receipt",
+        "if_unproven": "priced as duty not paid"
+      },
+      {
+        "risk": "Moonroof presence unconfirmed",
+        "proof": "Photo of roof exterior or interior sunroof control",
+        "if_unproven": "priced as no moonroof"
+      }
+    ],
+    "proof_requests": [
+      "Video of the engine starting and running, addressing the 'No Start' note visible in photo 2",
+      "Clear photo of TRD badging (grille, fender, tailgate) and interior TRD trim details",
+      "Photo of VIN plate and registration/particulars for year verification",
+      "Photo of customs duty certificate",
+      "Photo of roof showing moonroof, and interior push-start button"
+    ],
+    "decision": "fraud_suspected",
+    "reason": "The seller's own rear photo shows handwritten 'No Start' on the windshield, directly contradicting the implied working, drivable 'foreign used' condition being advertised, and none of the premium claims (TRD, 4x4, moonroof, push-to-start, verified duty) are shown or disclosed honestly alongside this defect."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 26951,
+    "input_tokens": 4632,
+    "output_tokens": 2448,
+    "cost_usd": 0.030585,
+    "replayed": false,
+    "fixture_key": "53f81440e241742a580545761b84d23d",
+    "error": null
+  }
+}

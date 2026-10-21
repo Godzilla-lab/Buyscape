@@ -1,0 +1,92 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: orange 12.5kg-style LPG cylinder with brass valve and carry handle, visible paint scuffs and dents, a red cylinder in wire mesh and a blue cylinder behind it, black bag in foreground.",
+      "Photo 1: same orange cylinder from another angle, a second orange cylinder stacked behind it, plus the red and blue cylinders and a tabletop gas burner and a white cooker in the background.",
+      "Photo 2: close-up of an orange cylinder showing printed text 'REPSOL' and a capacity marking '12,5' (kg), along with a barcode sticker and small-print manufacturer text.",
+      "No valve cap, no pressure/leak test, no hydrostatic test date or safety-inspection stamp is visible in any photo.",
+      "Several different cylinders (orange, red, blue) appear across the photos, making it unclear exactly which single cylinder is the one for sale."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "LPG gas cylinder, 12.5kg",
+      "brand": "Repsol",
+      "model": null,
+      "read_from": [
+        "photo 2 body text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "12.5kg capacity",
+        "verdict": "supported",
+        "evidence": "photo 2 shows printed '12,5' kg marking on the cylinder body"
+      },
+      {
+        "claim": "Foreign-Used",
+        "verdict": "unverifiable_remote",
+        "evidence": "Repsol is a Spanish brand so foreign origin is plausible, but 'used' condition, import history, and refill compliance cannot be confirmed from photos"
+      },
+      {
+        "claim": "Strong & Reliable",
+        "verdict": "unverified",
+        "evidence": "no photo shows a pressure test, leak test, or valve function check"
+      },
+      {
+        "claim": "Durable and high-quality",
+        "verdict": "unverified",
+        "evidence": "marketing language, not shown or demonstrated in any photo"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Valve may leak or not seal properly",
+        "proof": "close-up photo or short video of valve being opened/closed with soap-water leak test, or a lit-burner test",
+        "if_unproven": "priced as if valve condition is unverified/potentially faulty"
+      },
+      {
+        "risk": "No visible hydrostatic test date or safety certification stamp, so cylinder may be overdue for re-testing or unsafe for refill",
+        "proof": "clear photo of the stamped test date/manufacture date usually near the collar or neck",
+        "if_unproven": "priced as an uncertified/unverified-safety cylinder"
+      },
+      {
+        "risk": "Internal corrosion or dents beneath paint not visible externally",
+        "proof": "photo of cylinder base and any rust spots, plus weight-when-empty (tare) reading",
+        "if_unproven": "priced as cosmetic-only verified, structural condition unknown"
+      },
+      {
+        "risk": "Ambiguous which exact cylinder (of several shown) is for sale, since orange, red, and blue cylinders all appear",
+        "proof": "single clear photo of only the item being sold, with its tag/price marker",
+        "if_unproven": "priced only for one 12.5kg orange cylinder as described in text, excluding others shown"
+      },
+      {
+        "risk": "Unknown if cylinder is sold empty or with gas inside",
+        "proof": "photo of a gas-weighing scale reading or seller's written confirmation of empty/full status",
+        "if_unproven": "priced as empty cylinder only"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the valve being tested (e.g., soap-bubble leak test or regulator attached)",
+      "Clear photo of the hydrostatic test/manufacture date stamp near the cylinder neck",
+      "Photo isolating only the exact cylinder being sold, separate from the others in the background",
+      "Confirmation (photo or scale reading) of whether the cylinder is empty or has gas"
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identifiable as a 12.5kg Repsol-branded LPG gas cylinder with visible cosmetic wear; safety and fill-status claims are unverified, so it should be priced at the worst-case condition (unverified valve integrity, no visible safety certification) until further proof is supplied."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 26584,
+    "input_tokens": 3945,
+    "output_tokens": 2435,
+    "cost_usd": 0.03224,
+    "replayed": false,
+    "fixture_key": "f4c15971ee12d730d2c1566d8a3d89ff",
+    "error": null
+  }
+}

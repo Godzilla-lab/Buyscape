@@ -1,0 +1,84 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 and 1: front view of a dark-cell solar panel (half-cut monocrystalline style cells, silver aluminum frame), glare from flash obscures most of the cell surface.",
+      "A second panel is visible stacked behind the main one in photo 0/1, suggesting more than one unit may be for sale.",
+      "Photo 2 and 3: back view of a white-backsheet solar panel showing a junction box and two MC4-style connectors.",
+      "A manufacturer label is visible on the back in photo 3 but the text (brand, wattage, model, certification numbers) is too small and low-resolution to read.",
+      "Watermark 'NETWORK SOLAR VENTURES' and 'POSTED ON JIJI' overlay all images; timestamp reads 2025/08/07 14:54, location tag says 'Lagos, Nigeria' even though the buyer's market is Oyo.",
+      "Background shows a cluttered shop/warehouse with cables, sacks, and other stacked panels, consistent with a solar equipment dealer's premises.",
+      "No visible cracks, chips, or discoloration on the visible cell surface, but heavy glare limits inspection of cell integrity."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "monocrystalline solar panel (half-cut cell, with junction box and MC4 connectors)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 3 (back label present but unreadable)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Seller intro text 'Thank you for contacting Network Solar venture... We deal...' (message cut off, no explicit product claim stated)",
+        "verdict": "unverifiable_remote",
+        "evidence": "Text is a generic greeting with no verifiable product-specific claim; message appears truncated."
+      },
+      {
+        "claim": "Implied: item is a new, working solar panel suitable for sale",
+        "verdict": "unverified",
+        "evidence": "No power test, multimeter reading, or electroluminescence image shown in any photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Wattage/model/spec unknown since back label is unreadable, which is the primary driver of a solar panel's price.",
+        "proof": "A clear, well-lit close-up photo of the back label showing brand, wattage (Wp), voltage (Voc/Vmp), and certification marks.",
+        "if_unproven": "cannot be priced at all without this; treated as unknown-spec item."
+      },
+      {
+        "risk": "Cell damage (microcracks, hotspots) hidden by flash glare in front-view photos.",
+        "proof": "Daylight photo taken without direct flash glare, or an electroluminescence (EL) test image.",
+        "if_unproven": "priced as cosmetically unverified / possible defects, i.e. lowest condition tier."
+      },
+      {
+        "risk": "Panel may not actually generate rated power (dead cells, bypass diode failure).",
+        "proof": "Video of the panel connected to a multimeter/load under sunlight showing voltage and current output.",
+        "if_unproven": "priced as not working until tested."
+      },
+      {
+        "risk": "Unclear how many panels are actually included in this listing (a second panel is visible stacked behind).",
+        "proof": "A single photo showing all units laid out and counted, with a note on quantity included in this sale.",
+        "if_unproven": "priced as a single unit only, the one in clear focus."
+      },
+      {
+        "risk": "Location tag says Lagos while buyer is in Oyo, raising a small possibility that photos are stock/reused images rather than the actual current item.",
+        "proof": "A fresh photo with the panel next to a dated newspaper or the seller's shop signage in Oyo.",
+        "if_unproven": "does not block pricing but flagged as a trust/verification gap."
+      }
+    ],
+    "proof_requests": [
+      "Close-up, well-lit photo of the rear specification label (brand, wattage, Voc, Vmp, Isc, certification).",
+      "Photo or video of the panel's output reading on a multimeter while in sunlight.",
+      "Photo showing the full set/quantity of panels being offered in this listing.",
+      "A non-flash daylight photo of the front cell surface to check for cracks or discoloration."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable only as a generic monocrystalline solar panel; the spec label that determines wattage and therefore price is visible but unreadable, so even a worst-case price cannot be set without a clearer label shot."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 27681,
+    "input_tokens": 3577,
+    "output_tokens": 2402,
+    "cost_usd": 0.028015,
+    "replayed": false,
+    "fixture_key": "7731f4b021806cb51466828ac60cbe7c",
+    "error": null
+  }
+}
