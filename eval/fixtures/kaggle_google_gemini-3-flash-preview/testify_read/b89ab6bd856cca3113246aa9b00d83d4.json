@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "A single photo showing a black sealed lead-acid battery.",
+      "The label clearly displays the brand 'BLUE GATE' and model '6FM7(12V7AH/20HR)'.",
+      "The image is a professional product shot or stock photo, not a photo of the specific unit being sold.",
+      "There is a watermark 'NNUKA OKAFOR POSTED ON JIJI'.",
+      "The terminals are protected by white plastic caps."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "UPS battery",
+      "brand": "Blue Gate",
+      "model": "6FM7",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "12V/7AH Replacement Battery",
+        "verdict": "supported",
+        "evidence": "The label in photo 0 explicitly states 12V7AH."
+      },
+      {
+        "claim": "genuine replaceable battery",
+        "verdict": "unverifiable_remote",
+        "evidence": "Authenticity cannot be determined from a stock photo."
+      },
+      {
+        "claim": "latest battery technology",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a standard marketing claim for lead-acid batteries."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The battery may be depleted, unable to hold a charge, or internally damaged.",
+        "proof": "A video showing a multimeter voltage reading and a load test.",
+        "if_unproven": "priced as scrap/dead"
+      },
+      {
+        "risk": "The photo is a stock image; the actual item's physical condition is unknown.",
+        "proof": "A photo of the actual battery with a handwritten note of the current date.",
+        "if_unproven": "priced as heavily used"
+      },
+      {
+        "risk": "The battery may be old stock that has degraded while sitting on a shelf.",
+        "proof": "A photo of the manufacturing date code usually stamped into the plastic casing.",
+        "if_unproven": "priced as expired"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual battery with a handwritten note showing today's date and the seller's name.",
+      "Video showing a multimeter reading the battery's terminal voltage.",
+      "Close-up photo of the date code stamped on the top or side of the battery."
+    ],
+    "decision": "price",
+    "reason": "The brand and model are clearly identified from the label in the photo, allowing for a valuation at the worst-case condition (scrap value)."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 19977,
+    "input_tokens": 2390,
+    "output_tokens": 4555,
+    "cost_usd": 0.01486,
+    "replayed": false,
+    "fixture_key": "b89ab6bd856cca3113246aa9b00d83d4",
+    "error": null
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Retail packaging for a power bank.",
+      "Brand 'TRANSPARENT' and model 'PB30PD' are printed on the box in photo 0.",
+      "Box claims a capacity of 30000mAh and 20W Power Delivery (PD).",
+      "The box appears to be shrink-wrapped in plastic.",
+      "The actual power bank is not visible in the photo."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "power bank",
+      "brand": "TRANSPARENT",
+      "model": "PB30PD",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Super fast charging power bank",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows 'Super Fast Power Bank' and 'PD 20W' printed on the box."
+      },
+      {
+        "claim": "30000mAh capacity",
+        "verdict": "unverified",
+        "evidence": "Printed on the box in photo 0 but the device is not seen or tested."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, inferior item.",
+        "proof": "A photo of the actual power bank outside of the packaging.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The device may be a counterfeit with lower actual battery capacity.",
+        "proof": "A video of the device charging a phone, showing the LED percentage display.",
+        "if_unproven": "as a generic 10,000mAh power bank"
+      },
+      {
+        "risk": "The device may be used or refurbished despite the shrink-wrap.",
+        "proof": "Close-up photos of the USB ports and the casing to check for wear.",
+        "if_unproven": "as used"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the power bank outside of the box.",
+      "Clear photos of all sides of the device, especially the ports.",
+      "A video showing the device powered on and charging a phone."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail packaging is visible. To provide a reliable valuation, the actual device must be seen to confirm its existence, condition, and authenticity."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 11070,
+    "input_tokens": 2348,
+    "output_tokens": 2270,
+    "cost_usd": 0.007984,
+    "replayed": false,
+    "fixture_key": "966c92c46c2e298dfa888994b9143d1b",
+    "error": null
+  }
+}

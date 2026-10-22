@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail packaging for an inflatable bed.",
+      "The brand 'Leedsooy' is printed on the box.",
+      "Model number '91002' is visible on the box.",
+      "Dimensions are listed as \u00b1200*150*40cm.",
+      "The box indicates it is a 'Double Size' bed.",
+      "The actual bed is not visible outside of the box."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "inflatable bed",
+      "brand": "Leedsooy",
+      "model": "91002",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Leedsooy Inflatable Bed",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "Double Size",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "200*150*40cm",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, lower-quality item.",
+        "proof": "Photo of the actual bed out of the box.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The bed may have punctures or slow air leaks.",
+        "proof": "Video of the bed fully inflated and holding weight.",
+        "if_unproven": "as having a non-repairable leak"
+      },
+      {
+        "risk": "The internal or external pump may be missing or faulty.",
+        "proof": "Photo of the pump and video of it inflating the bed.",
+        "if_unproven": "as missing the pump"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual bed inflated.",
+      "Photo of the inflation valve and any included pump.",
+      "Video showing the bed remains firm after being inflated for several hours."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail box is shown. Without seeing the actual item inflated, its existence, condition, and ability to hold air cannot be confirmed."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 8506,
+    "input_tokens": 2364,
+    "output_tokens": 1552,
+    "cost_usd": 0.005838,
+    "replayed": false,
+    "fixture_key": "6efee745ab24b9085e3f7c479e02dc47",
+    "error": null
+  }
+}

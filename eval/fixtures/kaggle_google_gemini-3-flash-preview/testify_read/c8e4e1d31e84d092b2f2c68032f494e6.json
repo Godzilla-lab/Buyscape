@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the front of a retail box for an oraimo power bank.",
+      "Box text identifies the brand as 'oraimo' and the model as 'Traveler 15'.",
+      "Box text specifies a capacity of '20000mAh' and '15W TYPE-C FAST CHARGING'.",
+      "Box text states 'Fully Charge Your Phone Up to 4 Times'.",
+      "Box icons indicate 'Type-C IN & OUT' and 'Up to 160-Hour Illumination' (torch).",
+      "The actual power bank is not visible in the photo, only the packaging."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "power bank",
+      "brand": "oraimo",
+      "model": "Traveler 15",
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "High quality power bank from oraimo",
+        "verdict": "unverified",
+        "evidence": "The brand is visible on the box in photo 0, but the quality of the specific unit cannot be verified from a photo of a box."
+      },
+      {
+        "claim": "uses type C",
+        "verdict": "supported",
+        "evidence": "photo 0 box text"
+      },
+      {
+        "claim": "has torch light",
+        "verdict": "supported",
+        "evidence": "photo 0 box icon and text"
+      },
+      {
+        "claim": "can charge up to 6 phones full",
+        "verdict": "contradicted",
+        "evidence": "The box in photo 0 explicitly states 'Fully Charge Your Phone Up to 4 Times'."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, damaged, or used item.",
+        "proof": "Photo of the actual power bank outside of the packaging.",
+        "if_unproven": "as missing item"
+      },
+      {
+        "risk": "The item may be a counterfeit (common for this brand).",
+        "proof": "Photo of the authentication scratch-off code on the back of the box.",
+        "if_unproven": "as generic/counterfeit"
+      },
+      {
+        "risk": "The physical condition and port integrity are unknown.",
+        "proof": "Clear photos of the actual device from multiple angles, including the ports.",
+        "if_unproven": "as heavily worn"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual power bank outside the box.",
+      "Photo of the back of the box showing the authentication scratch code.",
+      "Photo of the ports on the actual device to check for wear or damage."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail packaging is shown, not the item itself. Furthermore, the seller's claim regarding the number of charges contradicts the information printed on the box."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 7888,
+    "input_tokens": 2379,
+    "output_tokens": 1834,
+    "cost_usd": 0.006692,
+    "replayed": false,
+    "fixture_key": "c8e4e1d31e84d092b2f2c68032f494e6",
+    "error": null
+  }
+}
