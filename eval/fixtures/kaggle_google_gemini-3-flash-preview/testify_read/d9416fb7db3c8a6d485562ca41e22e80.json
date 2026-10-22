@@ -1,0 +1,66 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows a cardboard retail box for a welding machine.",
+      "The box is branded 'MAXMECH' and identifies the model as 'MMA-400T'.",
+      "The box mentions '11KVA' and 'WELDING MACHINE'.",
+      "The box is secured with two white plastic packing straps.",
+      "The actual welding machine is not visible in the photo."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "welding machine",
+      "brand": "MAXMECH",
+      "model": "MMA-400T",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "400T welding machine",
+        "verdict": "supported",
+        "evidence": "The model 'MMA-400T' is printed clearly on the box in photo 0."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different item.",
+        "proof": "A photo of the actual welding machine outside of the box.",
+        "if_unproven": "priced as an empty box"
+      },
+      {
+        "risk": "The machine may be non-functional.",
+        "proof": "A video showing the machine powered on and striking an arc.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Essential accessories like welding cables, electrode holder, and earth clamp may be missing.",
+        "proof": "A photo showing all included cables and accessories.",
+        "if_unproven": "priced as the machine unit only without cables"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the welding machine outside the box.",
+      "Photo of the accessories (cables, clamps) included.",
+      "Video of the machine powered on and working."
+    ],
+    "decision": "price",
+    "reason": "The brand and model are clearly identifiable from the packaging, allowing for a valuation at the worst-case scenario (non-functional or missing unit) until the contents are verified."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 14719,
+    "input_tokens": 2350,
+    "output_tokens": 3146,
+    "cost_usd": 0.010613,
+    "replayed": false,
+    "fixture_key": "d9416fb7db3c8a6d485562ca41e22e80",
+    "error": null
+  }
+}

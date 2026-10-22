@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail packaging for a Blue Gate UPS.",
+      "The box lists two model options: BG1200 and BG1570; the checkboxes are not clearly marked.",
+      "The text 'BLUE GATE' and 'BEST UPS PRODUCT 2011' is visible on the box.",
+      "The actual UPS unit is not shown in the photo.",
+      "The image is a single, low-resolution shot of the box sitting on a desk or counter."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "UPS",
+      "brand": "Blue Gate",
+      "model": "BG1570",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Bluegate UPS 1570VA - BG1570",
+        "verdict": "unverified",
+        "evidence": "The box is shown, but the specific model checkbox is not clearly marked and the unit itself is not visible."
+      },
+      {
+        "claim": "1.57kva Bluegate Line Interactive UPS",
+        "verdict": "unverified",
+        "evidence": "The box mentions 'Internal AVR' which is typical for line-interactive units, but the actual device is not shown."
+      },
+      {
+        "claim": "900W rated power output",
+        "verdict": "unverified",
+        "evidence": "This specific power rating is not visible on the packaging in the photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, older, or damaged model.",
+        "proof": "A photo of the actual UPS unit out of the box, including the rear specification label.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The internal lead-acid batteries may be dead, leaking, or missing.",
+        "proof": "A video of the UPS powering a significant load (e.g., a desktop PC or a large fan) while unplugged from the wall.",
+        "if_unproven": "as needing new batteries"
+      },
+      {
+        "risk": "The unit may have internal electronic faults and fail to charge or switch.",
+        "proof": "A video showing the unit plugged in, charging, and successfully passing a self-test.",
+        "if_unproven": "as non-working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual UPS unit out of the box.",
+      "Photo of the specification sticker on the back of the UPS unit.",
+      "Video of the UPS turned on and powering a load while unplugged from the mains."
+    ],
+    "decision": "price",
+    "reason": "The brand and model are identified from the retail packaging. The item will be priced at its worst-case scenario (non-functional or empty box) until the actual unit and its condition are verified."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 26545,
+    "input_tokens": 2390,
+    "output_tokens": 5606,
+    "cost_usd": 0.018013,
+    "replayed": false,
+    "fixture_key": "33f583111365cd154c69ec8e30dfc84f",
+    "error": null
+  }
+}
