@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Tire tread is shown facing the camera.",
+      "A paper sticker is adhered to the tread reading 'GRANDTREK PT5' and '265/55R19 109V'.",
+      "Tread appears unused with visible vent spews (rubber hairs).",
+      "White factory marking '1B56H' is visible on the tread surface.",
+      "The sidewalls of the tire are not visible in the photo.",
+      "The DOT code (manufacturing date) is not visible."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "tire",
+      "brand": "Dunlop",
+      "model": "Grandtrek PT5",
+      "read_from": [
+        "photo 0 sticker"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "265/55R19 Dunlop Tire",
+        "verdict": "supported",
+        "evidence": "photo 0 sticker identifies the model as Grandtrek PT5 (a Dunlop line) and the size as 265/55R19."
+      },
+      {
+        "claim": "High quality certified",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      },
+      {
+        "claim": "brand new",
+        "verdict": "supported",
+        "evidence": "photo 0 shows intact tread hairs and a factory sticker."
+      },
+      {
+        "claim": "with warranty",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Expired stock (old manufacturing date)",
+        "proof": "A clear photo of the DOT code on the sidewall (4 digits in an oval).",
+        "if_unproven": "as expired/unsafe stock"
+      },
+      {
+        "risk": "Sidewall damage or hidden repairs",
+        "proof": "Photos of both the inner and outer sidewalls.",
+        "if_unproven": "as having structural defects"
+      },
+      {
+        "risk": "Mismatched identity (sticker on a different tire)",
+        "proof": "A photo of the brand and model molded into the rubber sidewall.",
+        "if_unproven": "as a generic unbranded tire"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the DOT code (4-digit date code) on the sidewall.",
+      "Photos of the full inner and outer sidewalls showing the molded brand and size.",
+      "Photo of the tire's interior to check for patches or repairs."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The manufacturing date (DOT code) is missing and is critical for tire safety and value. Additionally, the identity is currently only supported by a sticker; the molded sidewall markings are needed for confirmation."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 12131,
+    "input_tokens": 2400,
+    "output_tokens": 2394,
+    "cost_usd": 0.008382,
+    "replayed": false,
+    "fixture_key": "c3bcf13b617fbd9fe4caf43c6afc5385",
+    "error": null
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail box for a Binatone standing fan.",
+      "The brand 'Binatone' is clearly printed on the box.",
+      "The model 'ITAL-1660' is visible at the bottom of the box.",
+      "The box features text in French: '1.6M VENTILATEUR DESIGNER'.",
+      "A watermark 'OGBONNA CHRISTIAN NIG' is visible across the image.",
+      "The actual fan is not visible in the photo; only the packaging is shown."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "standing fan",
+      "brand": "Binatone",
+      "model": "ITAL-1660",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "16inch",
+        "verdict": "unverified",
+        "evidence": "The model ITAL-1660 is typically a 16-inch fan, but the text '16 inch' is not explicitly visible on the box in the photo."
+      },
+      {
+        "claim": "binatone",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "standing fan",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, inferior item.",
+        "proof": "A photo of the actual fan outside of the box.",
+        "if_unproven": "as an empty box or scrap"
+      },
+      {
+        "risk": "The fan may be used, dirty, or have physical damage (cracked blades or grill).",
+        "proof": "Clear photos of the fan's blades, grill, and base.",
+        "if_unproven": "as heavily damaged"
+      },
+      {
+        "risk": "The motor may be non-functional or the oscillation mechanism may be broken.",
+        "proof": "A video showing the fan powered on and oscillating.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual fan outside of the box.",
+      "Video of the fan operating through all speed settings.",
+      "Photo of the technical specification sticker/plate on the motor housing."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail packaging is shown. It is impossible to verify the condition, functionality, or even the presence of the fan without seeing the item itself."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 13908,
+    "input_tokens": 2352,
+    "output_tokens": 2460,
+    "cost_usd": 0.008556,
+    "replayed": false,
+    "fixture_key": "5b1d86de266ea2ce7aab35ec37e2b1ce",
+    "error": null
+  }
+}

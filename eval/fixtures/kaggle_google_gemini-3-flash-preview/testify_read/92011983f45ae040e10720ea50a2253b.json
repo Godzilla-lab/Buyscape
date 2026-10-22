@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the front of a retail box for a New Age brand power bank.",
+      "The box indicates a capacity of 22500mAh and 83Wh.",
+      "Labels for 'Quick Charge' and 'Type-C IN & OUTPUT' are visible on the packaging.",
+      "A '12 months warranty' badge is printed on the bottom right of the box.",
+      "The box appears to be wrapped in thin plastic film.",
+      "The actual power bank is not shown, only a graphic representation on the box."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "power bank",
+      "brand": "New Age",
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "New Age NA0225 Power Station",
+        "verdict": "unverified",
+        "evidence": "The brand 'New Age' is visible in photo 0, but the specific model number 'NA0225' is not printed on the front of the box."
+      },
+      {
+        "claim": "22,500mAh",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "high-capacity",
+        "verdict": "supported",
+        "evidence": "photo 0 shows 22500mAh, which is considered high capacity for a portable charger."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, lower-value item.",
+        "proof": "A photo of the actual power bank outside of the packaging.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The device may be a counterfeit or not meet the stated specifications.",
+        "proof": "A clear photo of the technical specifications and model number printed on the device itself.",
+        "if_unproven": "as a generic low-capacity power bank"
+      },
+      {
+        "risk": "The internal battery cells may be dead, damaged, or have significantly reduced capacity.",
+        "proof": "A video showing the device successfully charging a phone and being charged.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual power bank outside the box.",
+      "Photo of the back or bottom of the device showing the model number and regulatory markings.",
+      "Video of the device charging a mobile phone."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail packaging is shown. Without seeing the actual device and its model number, it is impossible to verify the item's existence, authenticity, or condition."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 19080,
+    "input_tokens": 2412,
+    "output_tokens": 3995,
+    "cost_usd": 0.013191,
+    "replayed": false,
+    "fixture_key": "92011983f45ae040e10720ea50a2253b",
+    "error": null
+  }
+}

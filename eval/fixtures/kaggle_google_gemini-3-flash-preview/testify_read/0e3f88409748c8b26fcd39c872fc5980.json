@@ -1,0 +1,87 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Retail packaging for an APC Back-UPS is shown.",
+      "The model number BX1600MI-MS is printed on the bottom right of the green band on the box.",
+      "The box features an image of a tower-style UPS.",
+      "The actual UPS unit is not visible outside of the box.",
+      "Multiple similar orange boxes are visible in the background, suggesting a commercial or retail environment.",
+      "A watermark for 'SETRACK DIGITAL SOLUTION' and 'POSTED ON JIJI' is visible on the image."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "UPS",
+      "brand": "APC",
+      "model": "BX1600MI-MS",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Product group: APC Back UPS",
+        "verdict": "supported",
+        "evidence": "The box in photo 0 is clearly labeled 'Back-UPS'."
+      },
+      {
+        "claim": "Series: APC UPS",
+        "verdict": "supported",
+        "evidence": "The APC logo and UPS type are visible on the box in photo 0."
+      },
+      {
+        "claim": "Type: Tower",
+        "verdict": "supported",
+        "evidence": "The illustration on the box in photo 0 shows a tower-style unit."
+      },
+      {
+        "claim": "Max Power: 900 W",
+        "verdict": "unverified",
+        "evidence": "While typical for a 1600VA unit, this specific wattage is not explicitly visible on the front of the box."
+      },
+      {
+        "claim": "Max apparent power: 1600",
+        "verdict": "supported",
+        "evidence": "The model number BX1600MI-MS on the box in photo 0 indicates a 1600VA rating."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, older, or damaged unit.",
+        "proof": "A photo of the actual UPS unit outside of the box.",
+        "if_unproven": "Priced as a used, non-functional unit."
+      },
+      {
+        "risk": "The internal lead-acid batteries may be depleted, missing, or end-of-life.",
+        "proof": "A video of the unit powering a significant load (e.g., a desktop PC or large lamp) while unplugged from the wall.",
+        "if_unproven": "Priced as requiring immediate battery replacement."
+      },
+      {
+        "risk": "The unit may have internal electronic faults not visible from the outside.",
+        "proof": "A video showing the unit successfully completing its self-test upon power-up.",
+        "if_unproven": "Priced as non-functional/for parts."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual UPS unit out of the box.",
+      "Photo of the manufacturer's label on the back or bottom of the unit showing the serial number.",
+      "Video of the unit powered on and supporting a load with the mains power disconnected."
+    ],
+    "decision": "price",
+    "reason": "The model number is clearly identifiable from the retail packaging, which allows for a baseline valuation at the worst-case condition (used/non-functional)."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 13933,
+    "input_tokens": 2403,
+    "output_tokens": 2715,
+    "cost_usd": 0.009347,
+    "replayed": false,
+    "fixture_key": "0e3f88409748c8b26fcd39c872fc5980",
+    "error": null
+  }
+}

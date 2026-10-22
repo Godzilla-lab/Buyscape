@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Multiple retail boxes for Blue Gate UPS are stacked together.",
+      "The top box clearly displays 'BLUE GATE' and 'BG1230 Elite Pro'.",
+      "The box indicates it is a 'Line Interactive UPS'.",
+      "A watermark 'NG COMPUTERS' is visible across the center of the image.",
+      "The boxes appear to be in a warehouse or retail storage area.",
+      "The actual UPS units are not visible, only the outer packaging."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "UPS",
+      "brand": "Blue Gate",
+      "model": "BG1230 Elite Pro",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Brand new",
+        "verdict": "unverified",
+        "evidence": "The boxes are shown but the seals are not clearly visible, and the units inside are not shown."
+      },
+      {
+        "claim": "BG 1230 elite pro",
+        "verdict": "supported",
+        "evidence": "The model name is clearly printed on the front of the box in photo 0."
+      },
+      {
+        "claim": "payment on delivery",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The internal batteries may be dead or degraded from long-term storage.",
+        "proof": "A video showing the UPS powering a significant load (e.g., a PC or lamp) while unplugged from the wall.",
+        "if_unproven": "priced as requiring immediate battery replacement"
+      },
+      {
+        "risk": "The unit may be Dead on Arrival (DOA) or have a faulty inverter.",
+        "proof": "A video of the unit being turned on and successfully passing a self-test.",
+        "if_unproven": "priced as not working/for parts"
+      },
+      {
+        "risk": "The box may be empty or contain a different/older model.",
+        "proof": "A photo of the actual unit out of the box showing the model sticker on the rear.",
+        "if_unproven": "priced as the model shown on the box"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual UPS unit outside of the box.",
+      "Photo of the specification/serial number sticker on the back of the unit.",
+      "Video of the unit powered on and running a device while disconnected from mains power."
+    ],
+    "decision": "price",
+    "reason": "The brand and model are clearly identifiable from the retail packaging in the photo. It will be priced at the worst-case functional state (not working) until proof of operation is provided."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 9622,
+    "input_tokens": 2357,
+    "output_tokens": 1868,
+    "cost_usd": 0.006783,
+    "replayed": false,
+    "fixture_key": "1ed70275861773229020d3ff10ac94ec",
+    "error": null
+  }
+}

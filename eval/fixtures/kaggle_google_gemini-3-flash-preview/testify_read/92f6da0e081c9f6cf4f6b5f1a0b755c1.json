@@ -1,0 +1,67 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Single tire shown with yellow manufacturer label and partial wrapping.",
+      "Label identifies the tire as AUSTONE TIRES, ATHENA SP-802.",
+      "Size is specified as 225/55R17 101V XL.",
+      "The visible tread appears deep and unused.",
+      "The label is heavily wrinkled and partially peeling.",
+      "Watermarks 'POSTED ON JIJI' and 'N.J VENTURE' are visible on the image."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "tire",
+      "brand": "Austone",
+      "model": "Athena SP-802",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Brand New",
+        "verdict": "unverified",
+        "evidence": "The label and wrap suggest it is unused, but the manufacture date (DOT code) is not visible to confirm it isn't old stock."
+      },
+      {
+        "claim": "tire austone",
+        "verdict": "supported",
+        "evidence": "photo 0 label"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The tire may be old stock with degraded rubber (expired).",
+        "proof": "A photo of the DOT code on the sidewall (a 4-digit number in an oval).",
+        "if_unproven": "as old stock/near expiry"
+      },
+      {
+        "risk": "Hidden sidewall damage or internal repairs.",
+        "proof": "Photos of both sidewalls and the inside of the tire.",
+        "if_unproven": "as having minor shelf-wear"
+      }
+    ],
+    "proof_requests": [
+      "A clear photo of the DOT code on the sidewall to verify the year of manufacture.",
+      "Photos of both sidewalls to check for bulges, cracks, or cuts.",
+      "A photo of the inside of the tire to ensure there are no patches or plugs."
+    ],
+    "decision": "price",
+    "reason": "The specific brand, model, and size are clearly legible on the factory label, allowing for a valuation based on the worst-case age for a 'new' tire."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 8429,
+    "input_tokens": 2348,
+    "output_tokens": 1426,
+    "cost_usd": 0.005452,
+    "replayed": false,
+    "fixture_key": "92f6da0e081c9f6cf4f6b5f1a0b755c1",
+    "error": null
+  }
+}
