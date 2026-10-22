@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail packaging for a fan.",
+      "The box is clearly labeled '18\"(445MM) STANDING FAN'.",
+      "The brand logo 'BB' (Buy The Best) is visible on the top left of the box.",
+      "The seller's text describes the item as 'heavy duty wall fans'.",
+      "The actual fan is not visible; only the box is shown.",
+      "There is a watermark 'ROYAN... LTD' across the center of the image, suggesting a commercial or stock photo."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "standing fan",
+      "brand": "BB",
+      "model": "18 inch (445mm)",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "heavy duty wall fans",
+        "verdict": "contradicted",
+        "evidence": "photo 0 shows a box for a standing fan, not a wall fan"
+      },
+      {
+        "claim": "from BB",
+        "verdict": "supported",
+        "evidence": "photo 0 logo"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The item type is ambiguous due to the conflict between the seller's text and the photo.",
+        "proof": "Photo of the actual fan out of the box.",
+        "if_unproven": "priced as the lower-value fan type"
+      },
+      {
+        "risk": "The photo may be a stock image and not represent the actual item or its condition.",
+        "proof": "Photo of the fan with a handwritten note of today's date.",
+        "if_unproven": "as used and potentially damaged"
+      },
+      {
+        "risk": "The fan may be non-functional or missing internal components.",
+        "proof": "Video of the fan powered on and oscillating.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual fan out of the box to confirm if it is a wall or standing fan.",
+      "Video of the fan plugged in and working.",
+      "Photo of the fan with a handwritten note showing the current date and seller's name."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "There is a direct contradiction between the seller's text (wall fan) and the provided photo (standing fan box). Furthermore, the actual item is not pictured, and the image provided appears to be a commercial stock photo."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 17245,
+    "input_tokens": 2374,
+    "output_tokens": 4050,
+    "cost_usd": 0.013337,
+    "replayed": false,
+    "fixture_key": "e8b4934b2b26009a3b16c31dcd4be703",
+    "error": null
+  }
+}

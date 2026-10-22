@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail box for an OLAX Smart Mini DC UPS Pro.",
+      "The model 'DB PRO' is visible on a sticker on the box in photo 0.",
+      "The box specifies '24Watts' and '20000mAh'.",
+      "The box illustration shows a device with multiple DC outputs, USB ports, and an AC input port.",
+      "The actual device is not shown, only the packaging.",
+      "The photo contains a watermark 'GRACELAND COMPUTERS' and 'POSTED ON Jiji', suggesting it may be a stock or promotional image from a retailer."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DC mini UPS",
+      "brand": "OLAX",
+      "model": "DB PRO",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Battery capacity: 20000 mah",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "power: 24wh",
+        "verdict": "contradicted",
+        "evidence": "The box in photo 0 specifies 24Watts (output power), not 24Wh (energy capacity)."
+      },
+      {
+        "claim": "type: dc mini ups",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "input: ac...",
+        "verdict": "supported",
+        "evidence": "The illustration on the box in photo 0 shows an AC input port."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different item as the actual device is not shown.",
+        "proof": "A photo of the actual device outside of the box.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The device may be non-functional or have a degraded battery.",
+        "proof": "A video showing the device powering a load (like a router) while disconnected from mains power.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Required cables (AC power and DC output) may be missing.",
+        "proof": "A photo of all included accessories.",
+        "if_unproven": "as missing all accessories"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual device outside the box.",
+      "Photo of the specification label on the device itself.",
+      "Photo of all included cables and accessories.",
+      "Video demonstrating the device powering a router or charging a phone."
+    ],
+    "decision": "price",
+    "reason": "The brand and model are clearly identified from the packaging. However, since the actual item is not shown, it is priced at the worst-case scenario of a non-functional or missing unit."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 21327,
+    "input_tokens": 2373,
+    "output_tokens": 5062,
+    "cost_usd": 0.016373,
+    "replayed": false,
+    "fixture_key": "2b7441d44f2b1617c0e59e06a760e823",
+    "error": null
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "A single photo shows a blue alternator sitting directly on sandy ground.",
+      "The unit has a top-mounted terminal box and a front-facing drive shaft with a coupling flange.",
+      "A watermark 'ROYAL GENERATORS LTD' is visible across the middle of the image.",
+      "No manufacturer nameplate, brand markings, or technical specification labels are visible in the photo."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "alternator",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "30kva 3phase",
+        "verdict": "unverified",
+        "evidence": "The nameplate is not visible in photo 0 to confirm capacity or phase."
+      },
+      {
+        "claim": "brand new",
+        "verdict": "unverified",
+        "evidence": "The item is sitting on dirt/sand, which is inconsistent with typical handling of new precision machinery."
+      },
+      {
+        "claim": "still in carton",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows the alternator resting directly on the ground, not in a carton."
+      },
+      {
+        "claim": "100% copper coil",
+        "verdict": "unverifiable_remote",
+        "evidence": "Internal windings cannot be inspected through photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The actual kVA rating and phase may be lower than claimed.",
+        "proof": "A clear photo of the manufacturer's nameplate.",
+        "if_unproven": "as a 5kVA single-phase unit (common low-end size)."
+      },
+      {
+        "risk": "The windings may be aluminum instead of copper.",
+        "proof": "A close-up photo of the windings through the ventilation mesh.",
+        "if_unproven": "as having aluminum windings."
+      },
+      {
+        "risk": "The unit may be used or refurbished rather than new.",
+        "proof": "Photos of the original packaging and the underside/mounting feet for wear.",
+        "if_unproven": "as used/refurbished."
+      },
+      {
+        "risk": "The alternator may not generate power or have internal shorts.",
+        "proof": "A video of the alternator coupled to an engine and producing stable voltage on a meter.",
+        "if_unproven": "as non-functional/for parts."
+      }
+    ],
+    "proof_requests": [
+      "A clear photo of the manufacturer's nameplate showing kVA, Voltage, and Phase.",
+      "A photo of the alternator inside its original carton as claimed.",
+      "A close-up photo of the internal copper windings through the side vents.",
+      "A video of the unit being tested or a photo of the terminal box interior."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The primary price driver (capacity/kVA) cannot be verified without a photo of the nameplate. Additionally, the seller's claim that it is 'in carton' is directly contradicted by the photo provided."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 11927,
+    "input_tokens": 2387,
+    "output_tokens": 2274,
+    "cost_usd": 0.008016,
+    "replayed": false,
+    "fixture_key": "8df6ca257c68dc40aed4483b7cef6449",
+    "error": null
+  }
+}

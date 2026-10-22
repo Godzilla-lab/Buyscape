@@ -1,0 +1,84 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "A petrol-powered generator with a silver tubular frame and red engine components.",
+      "The brand 'MAXI' is printed on the fuel tank and the recoil starter housing in photo 0.",
+      "The control panel features a voltmeter, an ignition key switch with keys inserted, a circuit breaker, and two AC outlets (one standard, one blue 32A industrial type).",
+      "The engine has a recoil pull-start and appears to have an electric start motor.",
+      "The unit is equipped with wheels and a folding handle.",
+      "The generator is positioned in a shop or warehouse environment, surrounded by other generator brands like Elepaq and Firman boxes.",
+      "No technical specification plate or model number is clearly legible."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "petrol generator",
+      "brand": "MAXI",
+      "model": null,
+      "read_from": [
+        "photo 0 fuel tank",
+        "photo 0 recoil starter"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "10kva",
+        "verdict": "unverified",
+        "evidence": "The rating plate showing the kVA or kW output is not visible."
+      },
+      {
+        "claim": "100% copper wire",
+        "verdict": "unverifiable_remote",
+        "evidence": "Internal alternator windings cannot be verified through photos."
+      },
+      {
+        "claim": "1yeras warranty",
+        "verdict": "unverifiable_remote",
+        "evidence": "Warranty terms from a stranger cannot be verified remotely."
+      },
+      {
+        "claim": "payment on delivery",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The actual power output may be lower than the claimed 10kVA (e.g., 6.5kVA or 8kVA).",
+        "proof": "A clear photo of the silver technical specification plate usually found on the alternator or frame.",
+        "if_unproven": "priced as a 5kVA unit"
+      },
+      {
+        "risk": "The alternator coils may be aluminum or copper-clad aluminum (CCA) rather than pure copper.",
+        "proof": "A video showing the end cover of the alternator removed to see the wire color at a scratch point.",
+        "if_unproven": "priced as having aluminum windings"
+      },
+      {
+        "risk": "The engine or alternator may have internal defects despite the clean exterior.",
+        "proof": "A video of the generator starting, running, and powering a heavy load (like an AC or multiple pumps).",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the technical specification/rating plate showing the model number and kVA rating.",
+      "Video of the generator running and successfully powering a significant electrical load.",
+      "Photo of the battery to confirm it is included and charged."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The 10kVA rating is a high-value specification that cannot be confirmed without seeing the manufacturer's rating plate. Without a model number, it is impossible to distinguish this from lower-capacity Maxi models that share the same frame."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 14111,
+    "input_tokens": 2369,
+    "output_tokens": 2299,
+    "cost_usd": 0.008082,
+    "replayed": false,
+    "fixture_key": "84fe1ae5675266adb960cc03f9d65725",
+    "error": null
+  }
+}
