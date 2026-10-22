@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail packaging for an SKE Mini UPS.",
+      "The brand 'SKE' and model 'POE-830P-LFP' are clearly printed on the box.",
+      "The box lists specifications: 20000mAh capacity, 24V POE port, 9V/12V selectable DC port, and 5V USB/Type-C ports.",
+      "The actual device is not visible; only the box is shown.",
+      "There are multiple identical boxes in the background, suggesting commercial stock.",
+      "A watermark 'ORIJO INTEGRITY COMMERCE' is present on the image."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "mini UPS",
+      "brand": "SKE",
+      "model": "POE-830P-LFP",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "20000 mah",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "poe port 24v",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "dc port 9v/ 12v selectable",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "usb and type-c port 5v",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different item.",
+        "proof": "A photo of the actual device outside the box showing its own labels.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The device may be non-functional or have dead battery cells.",
+        "proof": "A video showing the device powering a router and charging a device simultaneously.",
+        "if_unproven": "as non-functional"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual UPS unit outside the box.",
+      "Photo of the label on the back of the actual unit.",
+      "Video of the unit powered on and successfully charging/powering a device."
+    ],
+    "decision": "price",
+    "reason": "The brand and model are clearly identified from the retail packaging. It is priced at the worst-case scenario (non-functional) because the actual unit is not shown and its operation is unverified."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 13296,
+    "input_tokens": 2403,
+    "output_tokens": 3203,
+    "cost_usd": 0.010811,
+    "replayed": false,
+    "fixture_key": "aae8acab18715dad5d9622b03fb00bd7",
+    "error": null
+  }
+}

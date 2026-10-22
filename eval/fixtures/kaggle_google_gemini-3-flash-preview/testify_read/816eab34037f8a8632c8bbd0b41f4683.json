@@ -1,0 +1,87 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black car battery with a blue and white label.",
+      "The label clearly displays the brand 'Everstart' and 'Sealed Calcium MF Battery'.",
+      "The text 'Made in Korea' is visible at the bottom of the label.",
+      "The image contains a 'TRADEZONE' watermark and appears to be a stock or catalog photo rather than a photo of the actual item in situ.",
+      "The battery terminals are covered with blue protective caps."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car battery",
+      "brand": "Everstart",
+      "model": null,
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Everstart brand",
+        "verdict": "supported",
+        "evidence": "photo 0 label"
+      },
+      {
+        "claim": "Model CMF57528",
+        "verdict": "unverified",
+        "evidence": "The model number is not legible on the provided photo."
+      },
+      {
+        "claim": "75Ah capacity",
+        "verdict": "unverified",
+        "evidence": "The capacity is not legible on the provided photo."
+      },
+      {
+        "claim": "12V",
+        "verdict": "unverified",
+        "evidence": "Standard for car batteries but not explicitly readable on the label."
+      },
+      {
+        "claim": "Made in Korea",
+        "verdict": "supported",
+        "evidence": "photo 0 label"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Seller does not possess the item (stock photo used)",
+        "proof": "A photo of the actual battery in a real-world setting with a handwritten note showing the current date.",
+        "if_unproven": "as a potential scam"
+      },
+      {
+        "risk": "Battery is dead or has poor health",
+        "proof": "A video showing a multimeter reading the voltage or a battery load tester result.",
+        "if_unproven": "as scrap/non-functional"
+      },
+      {
+        "risk": "Battery is old or past its service life",
+        "proof": "A clear photo of the manufacturing date code stamped into the plastic casing or on the label.",
+        "if_unproven": "as an expired unit"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual battery being sold, not a stock image, showing its current condition.",
+      "Clear, close-up photo of the top label showing the model number and Ah rating.",
+      "Photo of the manufacturing date code stamped on the battery casing.",
+      "Video showing a voltage reading with a multimeter."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller has provided a watermarked stock photo, which does not confirm possession or the specific condition of the item. Additionally, the model and capacity specifications are not legible in the image."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 13766,
+    "input_tokens": 2397,
+    "output_tokens": 2503,
+    "cost_usd": 0.008707,
+    "replayed": false,
+    "fixture_key": "816eab34037f8a8632c8bbd0b41f4683",
+    "error": null
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail packaging for a Binatone standing fan.",
+      "The box identifies the model as 'A-1692 (MK5)'.",
+      "The box mentions '1.6M DUO VENTILATEUR SUR PIED' and '1640 Series'.",
+      "The packaging appears to be wrapped in thin clear plastic.",
+      "No photos of the actual fan or its components are provided."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "standing fan",
+      "brand": "Binatone",
+      "model": "A-1692 (MK5)",
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Binatone 1692 Standing Fan",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows the box for this specific brand and model."
+      },
+      {
+        "claim": "16 Inches",
+        "verdict": "unverified",
+        "evidence": "The box mentions 1.6M height but the blade size is not explicitly visible in the photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, used, or damaged item.",
+        "proof": "A photo of the actual fan out of the box.",
+        "if_unproven": "as a non-functional unit for parts only"
+      },
+      {
+        "risk": "The fan may be missing essential components like the base, blades, or grill.",
+        "proof": "A photo of all components laid out or the fully assembled fan.",
+        "if_unproven": "as incomplete"
+      },
+      {
+        "risk": "The motor may be faulty or non-functional.",
+        "proof": "A video of the fan powered on and oscillating at all speeds.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual fan outside of the box.",
+      "Photo of the fan assembled and standing.",
+      "Video of the fan working on all speed settings.",
+      "Photo of the manufacturer's label on the motor housing."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail packaging is shown. Photos of the actual item are necessary to confirm its existence, condition, and completeness before a price can be determined."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 10317,
+    "input_tokens": 2375,
+    "output_tokens": 2124,
+    "cost_usd": 0.00756,
+    "replayed": false,
+    "fixture_key": "b244386e645e281d960b65bb2ca8345e",
+    "error": null
+  }
+}

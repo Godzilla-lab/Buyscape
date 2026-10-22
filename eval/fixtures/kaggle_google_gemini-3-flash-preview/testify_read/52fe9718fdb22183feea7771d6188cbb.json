@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Multiple tires stacked and wrapped in yellow/gold plastic film.",
+      "The wrapping features the 'BOTO' brand name printed in black and red.",
+      "An orange manufacturer label is visible on the tread of the top tire in photo 0.",
+      "The label clearly shows the brand 'BOTO' and the model 'GENESYS 228'.",
+      "The tire size on the label is blurry but appears to be 215/60R16.",
+      "The tires appear to be unused as they are still in factory packaging."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car tires",
+      "brand": "BOTO",
+      "model": "GENESYS 228",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "brand new",
+        "verdict": "unverified",
+        "evidence": "While wrapped, the manufacture date (DOT code) is not visible to confirm the rubber is fresh and not old stock."
+      },
+      {
+        "claim": "factory-wrapped",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows the tires in branded BOTO plastic wrapping."
+      },
+      {
+        "claim": "BOTO tires",
+        "verdict": "supported",
+        "evidence": "The brand name is visible on both the wrapping and the tread label in photo 0."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The manufacture date (DOT code) is hidden; tires older than 5-6 years are unsafe regardless of tread wear.",
+        "proof": "A photo of the 4-digit DOT code on the tire sidewall (e.g., '1223').",
+        "if_unproven": "priced as expired stock (scrap value)"
+      },
+      {
+        "risk": "The exact tire size is not clearly legible from the current photo.",
+        "proof": "A clear, high-resolution photo of the orange tread label or the sidewall markings.",
+        "if_unproven": "priced as the smallest/cheapest common size for this model"
+      },
+      {
+        "risk": "The quantity of tires included in the offer is not explicitly stated.",
+        "proof": "Confirmation from the seller of the number of tires (e.g., a set of 4).",
+        "if_unproven": "priced as a single tire"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the tire sidewall showing the size and the 4-digit DOT manufacture code.",
+      "Confirmation of the total number of tires included in the sale.",
+      "A sharp photo of the orange tread label to confirm the size and load rating."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The tire size and manufacture date (DOT code) are not clearly legible. These details are critical for determining vehicle compatibility, safety, and market value."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 30396,
+    "input_tokens": 2382,
+    "output_tokens": 6563,
+    "cost_usd": 0.02088,
+    "replayed": false,
+    "fixture_key": "52fe9718fdb22183feea7771d6188cbb",
+    "error": null
+  }
+}

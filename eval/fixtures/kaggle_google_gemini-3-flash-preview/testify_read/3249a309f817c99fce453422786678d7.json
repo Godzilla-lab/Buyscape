@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail box for a QASA Steam & Spray Iron.",
+      "The box is wrapped in clear plastic film.",
+      "The brand 'QASA' and model 'QIR-2055' are printed on the box.",
+      "The box mentions 'Teflon Coated Soleplate' and 'Quick Heating'.",
+      "A watermark 'JEKSCO SOLAR' is visible on the image."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "steam iron",
+      "brand": "QASA",
+      "model": "QIR-2055",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Suitable for home, and dry cleaning shops",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      },
+      {
+        "claim": "it doesn't need a electricity",
+        "verdict": "unverified",
+        "evidence": "The box does not explicitly state 'DC' or 'Solar', although the model QIR-2055 is often associated with 12V DC use."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, used, or broken item.",
+        "proof": "A photo of the actual iron outside of the box.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The iron may be a standard AC version rather than the DC/Solar version implied by the seller.",
+        "proof": "A photo of the technical specification plate on the iron showing the voltage (e.g., 12V DC vs 220V AC).",
+        "if_unproven": "as a standard AC iron"
+      },
+      {
+        "risk": "The soleplate may be scratched or damaged.",
+        "proof": "A clear photo of the iron's soleplate.",
+        "if_unproven": "as damaged"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual iron out of the box.",
+      "Photo of the rating plate on the iron showing the voltage and wattage.",
+      "Photo of the soleplate (the bottom of the iron).",
+      "Photo of the power cord/connector."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail box is shown, which is insufficient to verify the contents, condition, or the specific power requirements claimed by the seller."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 10665,
+    "input_tokens": 2402,
+    "output_tokens": 2114,
+    "cost_usd": 0.032732,
+    "replayed": false,
+    "fixture_key": "3249a309f817c99fce453422786678d7",
+    "error": null
+  }
+}

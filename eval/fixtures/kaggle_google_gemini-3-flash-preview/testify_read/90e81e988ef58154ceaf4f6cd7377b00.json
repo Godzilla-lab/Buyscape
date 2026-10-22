@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Front view of a black UPS with a blue vertical center panel.",
+      "The brand 'BLUE GATE' is printed on the top front of the unit.",
+      "A power button and three indicator LEDs are visible on the blue panel.",
+      "The image contains watermarks: 'POSTED ON Jiji' and 'NEDU COMPUTERS'.",
+      "The photo appears to be a low-resolution stock or catalog image rather than a photo of the specific unit for sale."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "UPS",
+      "brand": "Blue Gate",
+      "model": null,
+      "read_from": [
+        "photo 0 front"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Bluegate ups",
+        "verdict": "supported",
+        "evidence": "The brand 'BLUE GATE' is clearly visible in photo 0."
+      },
+      {
+        "claim": "1.530elite pro",
+        "verdict": "unverified",
+        "evidence": "The specific model number or capacity is not visible in the provided photo."
+      },
+      {
+        "claim": "with internal AVR",
+        "verdict": "unverifiable_remote",
+        "evidence": "Automatic Voltage Regulation is an internal feature that cannot be confirmed via external photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The battery may be dead or have significantly reduced capacity.",
+        "proof": "A video showing the UPS powering a load (like a desktop PC or lamp) while the main power cord is unplugged.",
+        "if_unproven": "as having a dead battery requiring replacement"
+      },
+      {
+        "risk": "The actual capacity (VA rating) may be lower than claimed (e.g., 650VA instead of 1.5kVA).",
+        "proof": "A clear photo of the manufacturer's label on the back or bottom of the unit.",
+        "if_unproven": "at the price of the lowest capacity model in this product line"
+      },
+      {
+        "risk": "The photo is a stock image and does not represent the actual condition of the item.",
+        "proof": "Photos of the actual unit from multiple angles, including any scratches or wear.",
+        "if_unproven": "as being in poor cosmetic condition"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the specification label on the back or bottom of the actual unit.",
+      "Photos of the actual unit being sold, showing all sides.",
+      "Video of the unit turned on and supporting a load without wall power."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The provided photo is a low-quality stock image with a dealer watermark. The specific model and capacity, which are the primary price drivers for a UPS, cannot be verified without a photo of the manufacturer's label."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 11627,
+    "input_tokens": 2382,
+    "output_tokens": 2277,
+    "cost_usd": 0.008022,
+    "replayed": false,
+    "fixture_key": "90e81e988ef58154ceaf4f6cd7377b00",
+    "error": null
+  }
+}

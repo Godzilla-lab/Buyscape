@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail box for a Canon Selphy CP1000 photo printer.",
+      "The box is placed in what appears to be a shop or warehouse setting with other boxes visible.",
+      "The actual printer is not shown outside of the packaging.",
+      "The box features the brand 'Canon' and model 'SELPHY CP1000'.",
+      "A sticker on the box mentions 'Includes free dust cover'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "photo printer",
+      "brand": "Canon",
+      "model": "SELPHY CP1000",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Canon selphy cp1000 photo printer",
+        "verdict": "supported",
+        "evidence": "The retail box in photo 0 clearly displays the brand and model."
+      },
+      {
+        "claim": "for wait and take pictures and passports",
+        "verdict": "unverifiable_remote",
+        "evidence": "This describes the intended use of the device, which cannot be verified through a photo of the box."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, inferior item.",
+        "proof": "A photo of the actual printer outside of the box.",
+        "if_unproven": "priced as an empty box"
+      },
+      {
+        "risk": "The printer may not power on or have a faulty LCD screen.",
+        "proof": "A photo of the printer powered on with the screen active.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The thermal print head may be damaged, causing lines or artifacts in prints.",
+        "proof": "A video of the device successfully printing a test photo.",
+        "if_unproven": "priced as requiring expensive repair"
+      },
+      {
+        "risk": "Essential accessories like the power adapter or paper cassette may be missing.",
+        "proof": "A photo showing the printer alongside its power brick and paper tray.",
+        "if_unproven": "priced as unit only, missing all accessories"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual printer outside the box.",
+      "Photo of the printer powered on showing the menu on the LCD.",
+      "Video of the printer completing a full print cycle.",
+      "Photo of the power adapter and the paper input tray."
+    ],
+    "decision": "price",
+    "reason": "The model is clearly identified from the retail packaging. Since the actual item and its condition are not shown, it is priced at the worst-case scenario of a non-functional or incomplete unit."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 12097,
+    "input_tokens": 2361,
+    "output_tokens": 2351,
+    "cost_usd": 0.008233,
+    "replayed": false,
+    "fixture_key": "ce0ae024854c854557708e8d13643660",
+    "error": null
+  }
+}

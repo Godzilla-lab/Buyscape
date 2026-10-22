@@ -1,0 +1,75 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "A stack of items leaning against a wall outdoors.",
+      "The foremost item is a large cardboard box with 'Jinko Solar' and '350W MONO' printed on it.",
+      "Several solar panels are visible behind the box.",
+      "The photo has a watermark for 'CHARLES DON SOLAR'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "solar panel",
+      "brand": "Jinko Solar",
+      "model": "350W Mono",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Charles Don Solar enterprise do in all kinds of solar energy",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      },
+      {
+        "claim": "solar panel",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "350W MONO",
+        "verdict": "unverified",
+        "evidence": "The text is on the packaging, but the panel's own label is not visible."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The panel inside the box or behind it may not match the brand or wattage on the packaging.",
+        "proof": "A photo of the technical specification sticker on the back of the panel itself.",
+        "if_unproven": "as a generic unbranded panel"
+      },
+      {
+        "risk": "The glass or internal cells may be cracked or damaged.",
+        "proof": "A clear, high-resolution photo of the front glass surface of the panel.",
+        "if_unproven": "as damaged/for parts"
+      },
+      {
+        "risk": "The panel may be a counterfeit or have poor output.",
+        "proof": "A video showing a multimeter test of the Open Circuit Voltage (Voc) in direct sunlight.",
+        "if_unproven": "as non-functional"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the specification sticker on the back of the actual solar panel.",
+      "Clear photo of the front of the panel to check for cracks or cell defects.",
+      "Video showing a multimeter reading of the panel's output in sunlight."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the packaging is clearly visible. To value this as a Jinko 350W panel, the actual item's label and physical condition must be verified."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 7102,
+    "input_tokens": 2363,
+    "output_tokens": 1410,
+    "cost_usd": 0.005411,
+    "replayed": false,
+    "fixture_key": "ba5e06babad973829ba828cd308fd755",
+    "error": null
+  }
+}

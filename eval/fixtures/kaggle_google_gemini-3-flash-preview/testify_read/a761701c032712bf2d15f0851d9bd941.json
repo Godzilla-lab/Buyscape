@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail packaging (box) for a Century brand rechargeable mist fan.",
+      "The model number QRF-7116R is clearly printed on the box.",
+      "The box lists features including an 18-inch fan size, LED light, remote control, and mist/spray function.",
+      "The actual fan is not visible in the photo; only the box is shown.",
+      "The box is placed on a concrete floor, suggesting a storage or retail environment."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "rechargeable mist standing fan",
+      "brand": "Century",
+      "model": "QRF-7116R",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Rechargeable Mist standing fan",
+        "verdict": "supported",
+        "evidence": "photo 0 box text"
+      },
+      {
+        "claim": "single battery",
+        "verdict": "unverified",
+        "evidence": "The box shows a '12V 4.5Ah Battery' icon but does not explicitly state the quantity of batteries included."
+      },
+      {
+        "claim": "century",
+        "verdict": "supported",
+        "evidence": "photo 0 brand logo"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, damaged, or incomplete item.",
+        "proof": "Photo of the actual fan outside of the box.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The internal rechargeable battery may be dead or have significantly reduced capacity.",
+        "proof": "Video of the fan running on battery power alone for several minutes.",
+        "if_unproven": "as requiring a battery replacement"
+      },
+      {
+        "risk": "The misting/spray mechanism may be clogged or the pump may be non-functional.",
+        "proof": "Video showing the mist function actively spraying.",
+        "if_unproven": "as a standard standing fan without misting capability"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual fan out of the box to confirm condition and presence.",
+      "Video of the fan operating on battery power.",
+      "Video demonstrating the misting/spray function working.",
+      "Photo of the remote control and any included accessories."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail box is shown. In the second-hand market, a photo of the box is not proof of the item's existence, condition, or functionality."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 13908,
+    "input_tokens": 2387,
+    "output_tokens": 2814,
+    "cost_usd": 0.009635,
+    "replayed": false,
+    "fixture_key": "a761701c032712bf2d15f0851d9bd941",
+    "error": null
+  }
+}
