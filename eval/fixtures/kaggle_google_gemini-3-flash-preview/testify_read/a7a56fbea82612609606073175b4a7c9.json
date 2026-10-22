@@ -1,0 +1,74 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Back view of a single solar panel.",
+      "Three junction boxes are visible in the center section, typical of half-cut cell designs.",
+      "A technical specification label is visible in the top right corner but is too blurry to read.",
+      "The panel has a black frame.",
+      "Image contains a watermark for 'EDU SAINT ELECTRICAL'."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "550w",
+        "verdict": "unverified",
+        "evidence": "The technical label in photo 0 is illegible."
+      },
+      {
+        "claim": "jk",
+        "verdict": "unverified",
+        "evidence": "No brand name is readable in the photo."
+      },
+      {
+        "claim": "solar panels",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows the rear construction of a solar panel."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual wattage and brand identity",
+        "proof": "A clear, close-up photo of the technical specification label on the back.",
+        "if_unproven": "priced as a generic 300W panel"
+      },
+      {
+        "risk": "Damage to the front glass or solar cells",
+        "proof": "A photo showing the entire front surface of the panel.",
+        "if_unproven": "priced as damaged/scrap"
+      },
+      {
+        "risk": "Electrical functionality",
+        "proof": "A video showing a multimeter reading of the Open Circuit Voltage (Voc) in sunlight.",
+        "if_unproven": "priced as non-functional"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the technical specification label on the back.",
+      "Photo of the front side of the panel.",
+      "Video showing a multimeter test of the panel's output."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The technical label is unreadable and the front of the panel is not shown. Without confirming the wattage and the condition of the glass, a reliable price cannot be determined."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 7229,
+    "input_tokens": 2356,
+    "output_tokens": 1499,
+    "cost_usd": 0.005675,
+    "replayed": false,
+    "fixture_key": "a7a56fbea82612609606073175b4a7c9",
+    "error": null
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the front of a retail box for an itel power bank.",
+      "The box identifies the model as Tank 80 | A1992.",
+      "The box claims a capacity of 80000mAh and 100W fast charging.",
+      "The box features an illustration of a black power bank with a handle and a large LED light.",
+      "The background shows other retail boxes, suggesting a shop or stockroom environment.",
+      "The actual power bank is not visible in the photo."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "power bank",
+      "brand": "itel",
+      "model": "Tank 80 A1992",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Original",
+        "verdict": "unverifiable_remote",
+        "evidence": "Authenticity cannot be confirmed from a photo of the packaging alone."
+      },
+      {
+        "claim": "80,000mAh",
+        "verdict": "supported",
+        "evidence": "Printed on the box in photo 0."
+      },
+      {
+        "claim": "100W",
+        "verdict": "supported",
+        "evidence": "Printed on the box in photo 0."
+      },
+      {
+        "claim": "with Light & Display",
+        "verdict": "supported",
+        "evidence": "Printed on the box and shown in the illustration in photo 0."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, lower-value item.",
+        "proof": "A photo of the actual power bank outside of the box.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The item may be a counterfeit unit in genuine-looking packaging.",
+        "proof": "A photo of the scratch-off authenticity code or holographic seal on the box.",
+        "if_unproven": "as a generic/counterfeit unit"
+      },
+      {
+        "risk": "The device may be used or non-functional despite the new-looking box.",
+        "proof": "A video showing the device display active and successfully charging a phone.",
+        "if_unproven": "as non-functional"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual power bank outside the box.",
+      "Photo of the ports and the technical specification label on the device itself.",
+      "Photo of the authenticity/scratch-off verification label on the packaging.",
+      "Video of the device powered on and charging a mobile phone."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail packaging is shown. Without seeing the actual device, its presence, condition, and authenticity cannot be verified."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 13630,
+    "input_tokens": 2375,
+    "output_tokens": 2918,
+    "cost_usd": 0.009942,
+    "replayed": false,
+    "fixture_key": "50e199298a2b8c590a275f02e0f68104",
+    "error": null
+  }
+}

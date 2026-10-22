@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail packaging for an itel power bank.",
+      "The box identifies the model as PowerPulse Turbo 60 | A1990.",
+      "The box states a capacity of 60000mAh and a power output of 65W.",
+      "Text on the box mentions '65W Fast Charging Type-C In & Out' and 'Universal Compatibility'.",
+      "A '12 Months Warranty' seal is visible on the box.",
+      "The box appears to be shrink-wrapped in plastic.",
+      "The actual power bank device is not visible in the photo."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "power bank",
+      "brand": "itel",
+      "model": "PowerPulse Turbo 60 | A1990",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "itel power bank",
+        "verdict": "supported",
+        "evidence": "The itel logo and product name are clearly printed on the box in photo 0."
+      },
+      {
+        "claim": "support laptop",
+        "verdict": "unverified",
+        "evidence": "While 65W is typically sufficient for laptops, the box front does not explicitly state laptop support."
+      },
+      {
+        "claim": "type c in & output",
+        "verdict": "supported",
+        "evidence": "The box in photo 0 explicitly states 'Type-C In & Out'."
+      },
+      {
+        "claim": "Very powerful",
+        "verdict": "unverified",
+        "evidence": "This is a subjective claim that cannot be verified from a photo of a box."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, inferior item.",
+        "proof": "A photo of the actual power bank outside of the retail packaging.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The product may be a counterfeit or knockoff, which is common for this brand.",
+        "proof": "A clear photo of the holographic security sticker or the scratch-off verification code on the box or device.",
+        "if_unproven": "as a generic/counterfeit item"
+      },
+      {
+        "risk": "The internal battery cells may be degraded or non-functional despite the box appearance.",
+        "proof": "A video showing the power bank charging a laptop or high-capacity device, displaying the output wattage.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual power bank outside of the box.",
+      "Photo of the back or side of the box showing the security/authenticity scratch-off code.",
+      "Video of the device powered on and charging a laptop via the Type-C port."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller has only provided a photo of the retail box. Without seeing the actual device and verifying its authenticity, it cannot be safely priced even at a worst-case scenario."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 16350,
+    "input_tokens": 2357,
+    "output_tokens": 3270,
+    "cost_usd": 0.010989,
+    "replayed": false,
+    "fixture_key": "ac0fd2046541fcee1ce18da64994f267",
+    "error": null
+  }
+}

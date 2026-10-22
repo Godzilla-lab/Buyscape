@@ -1,0 +1,70 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Two retail boxes for Mercury Maverick 650 UPS units.",
+      "The boxes are stacked; the actual UPS devices are not visible outside the packaging.",
+      "The boxes feature the Mercury logo and 'UPS MAVERICK 650' text.",
+      "Technical features like 'Line Interactive UPS' and '650' are printed on the boxes."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "UPS",
+      "brand": "Mercury",
+      "model": "Maverick 650",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Line Interactive UPS topology includes technology that enables the UPS to interact with incoming AC",
+        "verdict": "supported",
+        "evidence": "photo 0 box text"
+      },
+      {
+        "claim": "Model is Maverick 650",
+        "verdict": "supported",
+        "evidence": "photo 0 box text"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The boxes may be empty or contain a different, lower-value item.",
+        "proof": "A photo of the actual UPS unit outside of its packaging.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The internal lead-acid battery may be depleted, dead, or missing.",
+        "proof": "A video showing the UPS powering a lamp or monitor while the UPS power cord is unplugged from the wall.",
+        "if_unproven": "as a non-functional unit with a dead battery"
+      },
+      {
+        "risk": "The unit may have physical damage or signs of heavy use not visible through the box.",
+        "proof": "Clear photos of the front, back, and sides of the actual UPS unit.",
+        "if_unproven": "as heavily used and damaged"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the UPS unit out of the box showing the serial number plate.",
+      "Video of the unit turned on and supporting a load (like a fan or light) while unplugged.",
+      "Photos of the rear outlets to confirm condition."
+    ],
+    "decision": "price",
+    "reason": "The brand and model are clearly identified from the retail packaging. Because the actual unit is not shown, it is priced at the worst-case value of a non-functional unit or empty box."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 10904,
+    "input_tokens": 2384,
+    "output_tokens": 1978,
+    "cost_usd": 0.007126,
+    "replayed": false,
+    "fixture_key": "8e0d55a62a1bfefdb567e55c75c460d0",
+    "error": null
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 is a stock image of a Hikvision UPS retail box.",
+      "The box is branded 'HIKVISION' and 'BACKUP SERIES UPS'.",
+      "A checkbox for '1000VA' is marked with a tick on the box front.",
+      "The box lists features such as 'Built-in AVR' and 'Overload Protection'.",
+      "A watermark 'POSTED ON JIJI EFFICIENT SECURITY' is present.",
+      "No photos of the actual physical UPS unit are provided."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "UPS",
+      "brand": "Hikvision",
+      "model": "1000VA",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Hikvision 1000VA / 600W",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows the Hikvision brand and a checked box for 1000VA capacity."
+      },
+      {
+        "claim": "Line-Interactive UPS",
+        "verdict": "supported",
+        "evidence": "Photo 0 lists 'Built-in AVR', which is the defining feature of line-interactive UPS systems."
+      },
+      {
+        "claim": "Model DS-UPS1000(O-STD)",
+        "verdict": "unverified",
+        "evidence": "The specific model number suffix is not visible on the box in photo 0."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The photo is a stock image; the actual unit's existence and condition are unconfirmed.",
+        "proof": "A photo of the actual UPS unit out of the box, preferably with a handwritten note showing the current date.",
+        "if_unproven": "as non-functional or missing"
+      },
+      {
+        "risk": "The internal battery may be degraded or dead, which is common in second-hand UPS units.",
+        "proof": "A video showing the UPS powering a load (like a lamp or monitor) while unplugged from the wall outlet.",
+        "if_unproven": "as requiring a battery replacement"
+      },
+      {
+        "risk": "The specific model and specifications cannot be fully verified from the box alone.",
+        "proof": "A clear photo of the manufacturer's specification sticker on the back or bottom of the actual unit.",
+        "if_unproven": "as the base 1000VA model"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual UPS unit out of the box.",
+      "Photo of the specification sticker on the back of the unit showing the full model number.",
+      "Video of the unit powered on and supporting a load on battery power."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller has provided only a stock photo of the packaging. Photos of the actual item are required to verify its condition, authenticity, and the specific model number before a reliable valuation can be made."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 25569,
+    "input_tokens": 2399,
+    "output_tokens": 5824,
+    "cost_usd": 0.018672,
+    "replayed": false,
+    "fixture_key": "f846e6cfca3ff5b1dd1338b87b8003f8",
+    "error": null
+  }
+}

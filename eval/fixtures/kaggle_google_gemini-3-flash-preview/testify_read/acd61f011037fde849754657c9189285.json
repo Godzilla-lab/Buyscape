@@ -1,0 +1,75 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows a cardboard shipping or retail box for a Blue Gate UPS.",
+      "The box is labeled 'UPS-2500' and 'UNINTERRUPTIBLE POWER SUPPLY'.",
+      "The box appears slightly worn with creases at the top edge.",
+      "The actual UPS unit is not visible in the photo; the box is closed."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "Uninterruptible Power Supply",
+      "brand": "Blue Gate",
+      "model": "UPS-2500",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Capacity: 2.5 KVA (2500 VA)",
+        "verdict": "supported",
+        "evidence": "photo 0 box shows model UPS-2500"
+      },
+      {
+        "claim": "Type: Line Interactive Offline UPS",
+        "verdict": "unverified",
+        "evidence": "The box text visible does not specify the topology."
+      },
+      {
+        "claim": "metal body design",
+        "verdict": "unverified",
+        "evidence": "The unit itself is not visible."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, inferior item.",
+        "proof": "Photo of the actual UPS unit outside of the box.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The internal lead-acid batteries may be depleted or dead.",
+        "proof": "Video of the UPS powering a significant load (e.g., a fan or PC) while disconnected from the wall outlet.",
+        "if_unproven": "as requiring immediate battery replacement"
+      },
+      {
+        "risk": "The unit may have physical damage, rust, or previous repairs.",
+        "proof": "Clear photos of the front, back (outlets), and sides of the actual unit.",
+        "if_unproven": "as heavily used with potential casing damage"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual UPS unit outside of the box.",
+      "Photo of the manufacturer's label/sticker on the back of the unit.",
+      "Video showing the unit turned on and supporting a load on battery power."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the packaging is shown. I cannot verify the existence, physical condition, or functionality of the actual device without photos of the unit itself."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 12320,
+    "input_tokens": 2417,
+    "output_tokens": 2422,
+    "cost_usd": 0.008474,
+    "replayed": false,
+    "fixture_key": "acd61f011037fde849754657c9189285",
+    "error": null
+  }
+}
