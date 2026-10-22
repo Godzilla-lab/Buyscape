@@ -1,0 +1,73 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Chest freezer with lid open.",
+      "Brand 'Bona' is printed on the front panel.",
+      "The text '118L' is superimposed in red on the inside of the lid, likely an edit.",
+      "Internal sliding glass doors and a wire basket are visible.",
+      "A watermark 'UA INDUSTRIAL KITCHEN' is visible across the center.",
+      "The unit appears to be in a warehouse or shop setting."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "chest freezer",
+      "brand": "Bona",
+      "model": "118L",
+      "read_from": [
+        "photo 0 front",
+        "photo 0 lid"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Solar Bona freezer",
+        "verdict": "unverified",
+        "evidence": "No photo shows the power input or a rating plate specifying DC voltage."
+      },
+      {
+        "claim": "118L",
+        "verdict": "unverified",
+        "evidence": "The capacity is edited onto the photo rather than shown on a manufacturer's label."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Cooling functionality",
+        "proof": "Video of the unit running with a thermometer inside showing freezing temperatures.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Solar (DC) vs Standard (AC) power",
+        "proof": "Photo of the manufacturer's rating plate showing voltage (e.g., 12V/24V DC vs 220V AC).",
+        "if_unproven": "as a standard AC freezer"
+      },
+      {
+        "risk": "Hidden exterior damage",
+        "proof": "Photos of the sides and back of the freezer.",
+        "if_unproven": "as having cosmetic dents or rust"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the manufacturer's rating plate showing the model number, capacity, and voltage.",
+      "Video of the freezer powered on and cooling.",
+      "Photos of the exterior sides and the back of the unit."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The capacity is edited onto the image and there is no proof of the 'solar' (DC) claim. Solar units carry a significant price premium over AC units, so the rating plate is essential for valuation."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 7705,
+    "input_tokens": 2384,
+    "output_tokens": 1522,
+    "cost_usd": 0.005758,
+    "replayed": false,
+    "fixture_key": "209c92826a21112ead4cfb3d025fd71c",
+    "error": null
+  }
+}

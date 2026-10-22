@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the front of a retail box for an LDNIO power bank.",
+      "The brand 'LDNIO' and model 'PQ20' are clearly printed on the box.",
+      "The box indicates a capacity of 20,000mAh and fast charging capabilities (22.5W/20W).",
+      "The box mentions built-in Type-C and Lightning cables.",
+      "The actual power bank device is not visible; only the packaging is shown.",
+      "There are watermarks for 'JIJI' and 'LDNIO NIGERIA' on the image."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "power bank",
+      "brand": "LDNIO",
+      "model": "PQ20",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "LDNIO 20,000 mAh powerbank",
+        "verdict": "unverified",
+        "evidence": "The capacity is printed on the box in photo 0, but the actual device is not shown to confirm it matches the packaging."
+      },
+      {
+        "claim": "With built in type-c and lightning cables",
+        "verdict": "unverified",
+        "evidence": "This feature is listed on the box in photo 0, but the physical cables are not visible."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, lower-value item.",
+        "proof": "A photo of the actual power bank outside of its packaging.",
+        "if_unproven": "priced as an empty box"
+      },
+      {
+        "risk": "The device may be non-functional or have a significantly degraded battery.",
+        "proof": "A video showing the power bank successfully charging a mobile device and being recharged itself.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The item could be a counterfeit product.",
+        "proof": "A photo of the authenticity scratch-off code or QR code usually found on the side or back of LDNIO packaging.",
+        "if_unproven": "as a generic/counterfeit item"
+      },
+      {
+        "risk": "The built-in cables may be frayed or have broken connectors.",
+        "proof": "Close-up photos of the Type-C and Lightning connectors and their attachment points.",
+        "if_unproven": "as having broken cables"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual power bank outside of the box.",
+      "Photos of the built-in cables and all ports.",
+      "Photo of the back or side of the box showing the authenticity/security sticker.",
+      "Video of the device powered on and charging a phone."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail box is visible in the provided photo. Without seeing the actual device, its presence, condition, and authenticity cannot be verified."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 21791,
+    "input_tokens": 2380,
+    "output_tokens": 5078,
+    "cost_usd": 0.016424,
+    "replayed": false,
+    "fixture_key": "5b63f25161f1675ea4ec564965aac1b9",
+    "error": null
+  }
+}
