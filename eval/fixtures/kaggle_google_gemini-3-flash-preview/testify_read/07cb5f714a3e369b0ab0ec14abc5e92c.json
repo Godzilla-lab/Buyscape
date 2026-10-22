@@ -1,0 +1,88 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "A black and yellow gasoline generator is the primary subject.",
+      "The brand 'COROLLA' and model 'CL7800E2R' are printed on the front panel.",
+      "The control panel includes a key-start ignition, a digital display (voltmeter), a circuit breaker, and two AC outlets.",
+      "A 12V battery (model LY-12-QFD-7) is visible, connected for the electric start system.",
+      "The unit is sitting on cardboard, stacked above an 'ELEPAQ SV22000E' generator.",
+      "A watermark for 'C MAX ELECTRONICS' is visible across the center of the image.",
+      "The generator appears to be in a retail or warehouse environment."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "gasoline generator",
+      "brand": "COROLLA",
+      "model": "CL7800E2R",
+      "read_from": [
+        "photo 0 panel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "4.5kva",
+        "verdict": "unverified",
+        "evidence": "The technical specification plate is not visible to confirm the rated output."
+      },
+      {
+        "claim": "corolla",
+        "verdict": "supported",
+        "evidence": "photo 0 panel"
+      },
+      {
+        "claim": "petorl generator",
+        "verdict": "supported",
+        "evidence": "photo 0 panel states 'GASOLINE GENERATOR'"
+      },
+      {
+        "claim": "100%copper wire",
+        "verdict": "unverifiable_remote",
+        "evidence": "Requires physical inspection of the internal alternator windings."
+      },
+      {
+        "claim": "1yeras warranty",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a seller's service promise, not a physical attribute."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The alternator windings may be aluminum or copper-clad aluminum instead of pure copper.",
+        "proof": "A photo of the alternator windings taken through the rear cooling vents.",
+        "if_unproven": "priced as aluminum windings"
+      },
+      {
+        "risk": "The generator may not start or may fail to produce electricity under load.",
+        "proof": "A video showing the generator starting via the key and powering a high-wattage appliance.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The actual power capacity may be lower than the claimed 4.5kVA.",
+        "proof": "A clear photo of the manufacturer's specification plate on the side of the alternator.",
+        "if_unproven": "priced as a 3kVA unit"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the technical specification plate showing the rated kVA and voltage.",
+      "Video of the generator running and powering a load.",
+      "Close-up photo of the alternator windings through the end cover."
+    ],
+    "decision": "price",
+    "reason": "The brand and model are clearly identified in the photo, allowing for a valuation at the worst-case scenario for this specific model."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 13518,
+    "input_tokens": 2371,
+    "output_tokens": 2765,
+    "cost_usd": 0.00948,
+    "replayed": false,
+    "fixture_key": "07cb5f714a3e369b0ab0ec14abc5e92c",
+    "error": null
+  }
+}

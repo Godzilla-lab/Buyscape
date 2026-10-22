@@ -1,0 +1,70 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail box for a Blue Gate UPS.",
+      "The brand 'BLUE GATE' and model 'BG1230 Elite Pro' are clearly printed on the box in photo 0.",
+      "The actual UPS unit is not visible in the provided photo; only the packaging is shown.",
+      "The box mentions 'Line Interactive UPS' and '1230VA' (implied by model number)."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "UPS",
+      "brand": "Blue Gate",
+      "model": "BG1230 Elite Pro",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Blue Gate 1230 Elite Pro UPS",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "Highly efficient and durable",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The actual UPS unit is not shown; the box may be empty or contain a different/damaged item.",
+        "proof": "Photo of the UPS unit outside of the box.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The internal lead-acid batteries may be dead or have very low capacity.",
+        "proof": "Video of the UPS powering a desktop computer or lamp while the UPS is unplugged from the wall outlet.",
+        "if_unproven": "as requiring immediate battery replacement"
+      },
+      {
+        "risk": "The charging circuit or inverter may be faulty.",
+        "proof": "Video showing the unit switching from AC to battery mode and back without losing the load.",
+        "if_unproven": "as non-functional/scrap"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual UPS unit out of the box, showing all sides.",
+      "Photo of the manufacturer's label/sticker on the back or bottom of the actual unit.",
+      "Video of the unit turned on and supporting a load (like a fan or light) while disconnected from mains power."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail packaging is shown. Without photos of the actual device, its existence, physical condition, and functional state cannot be verified."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 10740,
+    "input_tokens": 2364,
+    "output_tokens": 1995,
+    "cost_usd": 0.007167,
+    "replayed": false,
+    "fixture_key": "c0dd497a7ecf0b1ed9da45b158de8b60",
+    "error": null
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail packaging for a Nikai Heavy Iron.",
+      "The brand 'NIKAI' and model 'NDI724X' are printed on the box.",
+      "The box states a power rating of 1000-1200W.",
+      "Icons on the box indicate a 'Gold Finish Soleplate' and 'Thermostat Control'.",
+      "A '2 Year Warranty' seal is visible on the box.",
+      "The actual iron is not visible outside of the box.",
+      "The box is resting on another box for a Black+Decker iron.",
+      "A watermark 'BEST TIME ELECTRONICS' is present on the image.",
+      "Faint text '750W' is visible in the background above the box, which does not match the box specifications."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "dry iron",
+      "brand": "Nikai",
+      "model": "NDI724X",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Heavy Iron",
+        "verdict": "supported",
+        "evidence": "photo 0 box text"
+      },
+      {
+        "claim": "1000-1200W",
+        "verdict": "supported",
+        "evidence": "photo 0 box text"
+      },
+      {
+        "claim": "Gold color nish soleplate",
+        "verdict": "supported",
+        "evidence": "photo 0 box icon and text"
+      },
+      {
+        "claim": "Over heating protection",
+        "verdict": "unverifiable_remote",
+        "evidence": "This feature is not explicitly listed on the visible portion of the box."
+      },
+      {
+        "claim": "Adjustable thermostat",
+        "verdict": "supported",
+        "evidence": "photo 0 box icon and text"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, lower-value item.",
+        "proof": "Photo of the actual iron outside the box.",
+        "if_unproven": "as missing"
+      },
+      {
+        "risk": "The iron may be used, refurbished, or have a damaged soleplate.",
+        "proof": "Close-up photo of the iron's soleplate and body.",
+        "if_unproven": "as heavily used"
+      },
+      {
+        "risk": "The iron may have internal electrical faults or not heat up.",
+        "proof": "Video of the iron plugged in with the power indicator light turning on.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The item may be a counterfeit or clone of the Nikai brand.",
+        "proof": "Photo of the manufacturer's rating plate on the iron itself.",
+        "if_unproven": "as generic"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the iron outside the box showing the soleplate.",
+      "Photo of the rating plate on the iron to confirm model and specifications.",
+      "Video of the iron plugged in and heating up."
+    ],
+    "decision": "price",
+    "reason": "The brand and model are clearly identifiable from the packaging, allowing for a valuation based on the worst-case condition of the item."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 27134,
+    "input_tokens": 2374,
+    "output_tokens": 5750,
+    "cost_usd": 0.018437,
+    "replayed": false,
+    "fixture_key": "2c091e6e0cf4bab1d930818f4d464b99",
+    "error": null
+  }
+}

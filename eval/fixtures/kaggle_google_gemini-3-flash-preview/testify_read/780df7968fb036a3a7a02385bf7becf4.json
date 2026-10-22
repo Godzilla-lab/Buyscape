@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Multiple yellow hand pallet trucks are lined up in a warehouse setting.",
+      "A label on the foremost unit clearly reads '3000kg'.",
+      "A second label is visible below the weight rating but the text is too blurry to read.",
+      "The steering handles and control levers are not visible in the photo.",
+      "There is a faint, horizontal watermark across the middle of the image.",
+      "The equipment appears to be in new or very clean condition."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "hand pallet truck",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Hydraulic hand pallet truck",
+        "verdict": "supported",
+        "evidence": "photo 0 shows the hydraulic pump assembly at the base of the forks."
+      },
+      {
+        "claim": "3 tons",
+        "verdict": "supported",
+        "evidence": "photo 0 shows a '3000kg' label on the chassis."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Missing or damaged handles",
+        "proof": "A photo showing the complete unit including the handle and release lever.",
+        "if_unproven": "priced as incomplete/scrap"
+      },
+      {
+        "risk": "Hydraulic seal failure or leaks",
+        "proof": "A video showing the truck lifting a 2-ton+ load and holding it for 60 seconds.",
+        "if_unproven": "priced as non-functional/leaking"
+      },
+      {
+        "risk": "Stock photo or scam listing",
+        "proof": "A photo of the item with a handwritten note showing the current date and buyer's name.",
+        "if_unproven": "priced as a high-risk transaction"
+      },
+      {
+        "risk": "Worn or seized load rollers",
+        "proof": "Close-up photos of the wheels under the forks.",
+        "if_unproven": "priced as requiring wheel replacement"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the complete unit showing the handle and control lever.",
+      "Photo of the item with a handwritten note showing today's date to verify possession.",
+      "Video of the hydraulic pump in operation lifting a load.",
+      "Clear photo of the manufacturer's identification plate."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The image is a watermarked stock-style photo that excludes the handle assembly. A valuation cannot be provided without confirming the unit is complete and that the seller actually possesses the item."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 13570,
+    "input_tokens": 2366,
+    "output_tokens": 2669,
+    "cost_usd": 0.00919,
+    "replayed": false,
+    "fixture_key": "780df7968fb036a3a7a02385bf7becf4",
+    "error": null
+  }
+}
