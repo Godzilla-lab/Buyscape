@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail box for a Blue Gate UPS.",
+      "The box displays the brand 'BLUE GATE' and model 'BG2500'.",
+      "The box indicates a power rating of '900W'.",
+      "A large watermark for 'XCLUSIVE COMPUTERS LTD.' is visible across the center of the image.",
+      "The actual UPS unit is not visible in the photo."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "UPS",
+      "brand": "Blue Gate",
+      "model": "BG2500",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Blue Gate 2500 Elite Pro UPS",
+        "verdict": "supported",
+        "evidence": "The box in photo 0 shows the brand Blue Gate and model BG2500."
+      },
+      {
+        "claim": "2.5KVA / 900W",
+        "verdict": "supported",
+        "evidence": "The box in photo 0 explicitly states 900W; BG2500 is the standard model designation for their 2.5KVA unit."
+      },
+      {
+        "claim": "Heavy-duty",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      },
+      {
+        "claim": "Excellent backup choice",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The photo shows only the box and contains a third-party watermark, suggesting the seller may not physically possess the item.",
+        "proof": "A photo of the actual UPS unit out of the box with a handwritten note showing the seller's name and today's date.",
+        "if_unproven": "as a non-existent item or potential scam"
+      },
+      {
+        "risk": "Battery health is unknown; internal lead-acid batteries degrade significantly over time and with use.",
+        "proof": "A video showing the UPS powering a load (like a fan or PC) for several minutes while unplugged from the wall.",
+        "if_unproven": "as having completely dead batteries requiring immediate replacement"
+      },
+      {
+        "risk": "The physical condition and authenticity of the unit inside the box cannot be verified.",
+        "proof": "Clear photos of the actual unit's front panel, rear outlets, and the manufacturer's specification sticker.",
+        "if_unproven": "as a damaged or older version of the model"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual UPS unit outside of its box.",
+      "Photo of the unit next to a handwritten note with the current date and your name.",
+      "Video of the unit turned on and supporting a load while disconnected from the wall outlet.",
+      "Photo of the specification sticker on the back or bottom of the actual unit."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller has only provided a photo of a box which bears a watermark from a different retail company. Without seeing the actual unit, its existence and condition cannot be confirmed."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 14685,
+    "input_tokens": 2378,
+    "output_tokens": 3051,
+    "cost_usd": 0.010342,
+    "replayed": false,
+    "fixture_key": "e407c8c97a32086b690c272d0d160cb6",
+    "error": null
+  }
+}

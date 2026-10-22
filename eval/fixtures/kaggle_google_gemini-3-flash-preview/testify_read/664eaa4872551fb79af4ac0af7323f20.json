@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail packaging for a Crown Star Electric Kettle.",
+      "The model number MC-EK450 is visible on the box.",
+      "The box specifies a 45 Litre capacity and 2000 Watt power.",
+      "An inset image on the box shows two metal cups.",
+      "The box shows a stainless steel urn with a dispensing tap and water level indicator.",
+      "The actual item is not visible; only the box is shown."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "electric water boiler",
+      "brand": "Crown Star",
+      "model": "MC-EK450",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "45 liters capacity volume",
+        "verdict": "supported",
+        "evidence": "photo 0 box text"
+      },
+      {
+        "claim": "It has 2 small cups",
+        "verdict": "supported",
+        "evidence": "photo 0 box inset image"
+      },
+      {
+        "claim": "It has pump mouth for easy collection of water",
+        "verdict": "unverified",
+        "evidence": "The photo shows a standard lever tap; a pump mechanism is not clearly visible."
+      },
+      {
+        "claim": "Heat",
+        "verdict": "unverifiable_remote",
+        "evidence": "Heating performance cannot be verified from a photo of the box."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may not contain the item, or the item may be used or damaged.",
+        "proof": "Photo of the actual item outside the box.",
+        "if_unproven": "as a missing or damaged item"
+      },
+      {
+        "risk": "The heating element may be non-functional.",
+        "proof": "Video of the unit boiling water.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The tap or body may leak.",
+        "proof": "Video of the unit filled with water.",
+        "if_unproven": "as leaking"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual item outside of the box.",
+      "Video of the unit plugged in and heating water.",
+      "Photo of the internal base and heating element."
+    ],
+    "decision": "price",
+    "reason": "The brand and model are clearly identified from the packaging, allowing for a valuation at the worst-case condition."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 22627,
+    "input_tokens": 2387,
+    "output_tokens": 4916,
+    "cost_usd": 0.015942,
+    "replayed": false,
+    "fixture_key": "664eaa4872551fb79af4ac0af7323f20",
+    "error": null
+  }
+}

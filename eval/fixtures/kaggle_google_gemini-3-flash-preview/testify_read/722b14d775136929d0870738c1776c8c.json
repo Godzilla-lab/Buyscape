@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail box for a Sonik Steam Iron.",
+      "The box is being held by a person's hand.",
+      "The brand 'SONIK' is clearly visible on the box.",
+      "The model 'SI-2007S' is printed on the bottom right of the box.",
+      "The box specifies '1200W' power.",
+      "The actual iron is not visible, only the illustration on the packaging."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "steam iron",
+      "brand": "SONIK",
+      "model": "SI-2007S",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Sonik",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "steam and spray burst iron",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "1200 watts",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, older, or damaged unit.",
+        "proof": "Photo of the actual iron outside of the box.",
+        "if_unproven": "as missing"
+      },
+      {
+        "risk": "The iron may not heat up or produce steam.",
+        "proof": "Video of the iron plugged in and steaming.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The soleplate may be scratched or burnt, affecting performance.",
+        "proof": "Clear photo of the iron's soleplate.",
+        "if_unproven": "as damaged"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual iron out of the box.",
+      "Photo of the iron's soleplate.",
+      "Photo of the rating plate on the iron itself to confirm model and wattage.",
+      "Video of the iron powered on and emitting steam."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail packaging is shown. I cannot verify the existence, condition, or functionality of the actual iron without seeing the item itself."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 7474,
+    "input_tokens": 2356,
+    "output_tokens": 1500,
+    "cost_usd": 0.005678,
+    "replayed": false,
+    "fixture_key": "722b14d775136929d0870738c1776c8c",
+    "error": null
+  }
+}

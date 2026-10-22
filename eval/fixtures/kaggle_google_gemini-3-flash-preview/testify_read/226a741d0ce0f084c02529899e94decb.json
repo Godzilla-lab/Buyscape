@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail packaging for a Sonik AC/DC Pressing Iron.",
+      "Model number SPI-168DC2 is printed on the bottom right of the box.",
+      "The box indicates a power rating of 250W.",
+      "Features listed on the box include 5 temperature modes, 100% copper cable, and a non-stick soleplate.",
+      "The actual iron is not visible; only the box is shown.",
+      "A solar panel icon is visible on the box, suggesting DC compatibility."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "AC/DC pressing iron",
+      "brand": "SONIK",
+      "model": "SPI-168DC2",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "AC/DC Pressing Iron",
+        "verdict": "unverified",
+        "evidence": "Only the box is shown; the item itself is not visible."
+      },
+      {
+        "claim": "250W",
+        "verdict": "unverified",
+        "evidence": "Printed on the box, but the item is not seen."
+      },
+      {
+        "claim": "Non-Stick Soleplate",
+        "verdict": "unverified",
+        "evidence": "The soleplate of the actual iron is not visible."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, lower-value item.",
+        "proof": "Photo of the actual iron outside the box.",
+        "if_unproven": "as missing/zero value"
+      },
+      {
+        "risk": "The iron may be used, scratched, or have a damaged soleplate.",
+        "proof": "Clear photo of the soleplate and the body of the iron.",
+        "if_unproven": "as damaged"
+      },
+      {
+        "risk": "The heating element or the AC/DC switching circuitry may be defective.",
+        "proof": "Video showing the power indicator light on and the iron heating up.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual iron outside of the box.",
+      "Clear photo of the soleplate to check for wear or damage.",
+      "Video showing the iron powered on and heating up."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail packaging is shown. The actual item must be seen to verify its condition, model, and presence."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 8076,
+    "input_tokens": 2379,
+    "output_tokens": 1760,
+    "cost_usd": 0.00647,
+    "replayed": false,
+    "fixture_key": "226a741d0ce0f084c02529899e94decb",
+    "error": null
+  }
+}

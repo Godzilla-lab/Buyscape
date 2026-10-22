@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Multiple stainless steel gas cylinders stacked in an outdoor market setting.",
+      "Red labels with 'CEPSA' branding are clearly visible on the cylinders in photo 0.",
+      "Brass valves are installed on the top of the cylinders.",
+      "A cardboard box in the bottom left corner is partially visible with the text 'GAS REGULATOR' (photo 0).",
+      "The image contains a watermark 'INNOMEDIX DYNASTY NIG LTD'.",
+      "No gas burner stove is visible in the photo, despite the seller's description.",
+      "Background shows other orange gas cylinders and boxes for electronics like LG and Kenwood."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "gas cylinder",
+      "brand": "CEPSA",
+      "model": null,
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Gas Cylinder With Gas Burner Stove",
+        "verdict": "unverified",
+        "evidence": "The cylinders are shown, but no burner stove is visible in photo 0."
+      },
+      {
+        "claim": "Portable LPG Cooking Gas Cylinder Tank",
+        "verdict": "supported",
+        "evidence": "The items shown are standard LPG cylinders."
+      },
+      {
+        "claim": "For Home & Outdoor Use",
+        "verdict": "supported",
+        "evidence": "This is the standard use case for LPG cylinders of this type."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Capacity (kg) is unknown",
+        "proof": "A close-up photo of the weight stamp on the cylinder shroud or handle.",
+        "if_unproven": "priced as a 12.5kg cylinder (the most common large size) but could be smaller or larger."
+      },
+      {
+        "risk": "Cylinder may be expired",
+        "proof": "A photo of the manufacture or expiry date stamped on the metal shroud.",
+        "if_unproven": "priced as expired/scrap metal."
+      },
+      {
+        "risk": "Missing burner stove",
+        "proof": "A photo showing the burner stove mentioned in the text.",
+        "if_unproven": "priced as the cylinder only."
+      },
+      {
+        "risk": "Faulty or leaking valve",
+        "proof": "A video showing the valve operating or a pressure test.",
+        "if_unproven": "priced as requiring a valve replacement."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the weight stamp (e.g., 12.5kg) on the cylinder handle.",
+      "Photo of the expiry date stamped on the cylinder.",
+      "Photo of the gas burner stove that is claimed to be included."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The capacity (kg) which determines the price is not visible, and the burner stove mentioned in the description is missing from the photos."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 14293,
+    "input_tokens": 2363,
+    "output_tokens": 2837,
+    "cost_usd": 0.009692,
+    "replayed": false,
+    "fixture_key": "d9bd3795fa533c7301337ea4f46c2e5b",
+    "error": null
+  }
+}
