@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail box for a Crown Star Electric Kettle, model MC-EK350.",
+      "The box specifies a 35 Litre capacity and 2000 Watt power rating.",
+      "The box is sitting on a wooden pallet; another box for a water purifier (MC-WP250) is visible above it.",
+      "The actual appliance is not shown, only the cardboard packaging.",
+      "Watermarks for 'JET EDGE CONTRACTORS' and 'POSTED ON JIJI' are present."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "Electric water boiler",
+      "brand": "Crown Star",
+      "model": "MC-EK350",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Large electric kettle",
+        "verdict": "supported",
+        "evidence": "Photo 0 box text 'ELECTRIC KETTLE' and the large dimensions implied by the 35L capacity."
+      },
+      {
+        "claim": "Can heat up to 35litres at a goal",
+        "verdict": "supported",
+        "evidence": "Photo 0 box explicitly states '35 LITRE'."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, possibly inferior, item.",
+        "proof": "Photos of the actual kettle outside of the box.",
+        "if_unproven": "Priced as an empty box."
+      },
+      {
+        "risk": "The item may be used, damaged, or missing essential parts like the tap or lid.",
+        "proof": "Multiple photos of the kettle's exterior and interior.",
+        "if_unproven": "Priced as heavily used or damaged."
+      },
+      {
+        "risk": "The heating element may be defective.",
+        "proof": "A video showing the unit boiling water.",
+        "if_unproven": "Priced as not working."
+      }
+    ],
+    "proof_requests": [
+      "Photos of the actual kettle out of the box.",
+      "Photos of the interior and the heating element.",
+      "A video of the unit powered on and heating water."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail box is shown. Verification of the item's existence, condition, and functionality requires photos of the kettle itself."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 24944,
+    "input_tokens": 2396,
+    "output_tokens": 5672,
+    "cost_usd": 0.018214,
+    "replayed": false,
+    "fixture_key": "5580beec3b538373e6d05699b09344b0",
+    "error": null
+  }
+}
