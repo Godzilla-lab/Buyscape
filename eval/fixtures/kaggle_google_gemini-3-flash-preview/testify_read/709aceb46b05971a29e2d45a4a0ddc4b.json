@@ -1,0 +1,65 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Single tire shown with manufacturer label.",
+      "Label identifies brand as Windforce and model as Mile Max.",
+      "Size 195R14C 106/104R is printed on the label.",
+      "Tread shows vent spews (hairs) suggesting it is unused.",
+      "Label is an EU energy rating sticker."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "tire",
+      "brand": "Windforce",
+      "model": "Mile Max",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "195 r14c",
+        "verdict": "supported",
+        "evidence": "photo 0 label"
+      },
+      {
+        "claim": "brandnew",
+        "verdict": "supported",
+        "evidence": "photo 0 label and tread condition"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Manufacturing date (DOT code) is unknown; tires degrade with age.",
+        "proof": "Photo of the DOT code on the tire sidewall.",
+        "if_unproven": "as old stock (near expiry)"
+      },
+      {
+        "risk": "Total quantity of tires is unclear from the text 'tires'.",
+        "proof": "Photo showing all tires together.",
+        "if_unproven": "as a single tire"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the DOT code on the sidewall to check the manufacturing date.",
+      "Photo of all tires together to confirm quantity."
+    ],
+    "decision": "price",
+    "reason": "The brand, model, and size are clearly identified from the label in photo 0. The tire appears unused, allowing for a price based on a single unit of this specification."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 5833,
+    "input_tokens": 2354,
+    "output_tokens": 1212,
+    "cost_usd": 0.004813,
+    "replayed": false,
+    "fixture_key": "709aceb46b05971a29e2d45a4a0ddc4b",
+    "error": null
+  }
+}

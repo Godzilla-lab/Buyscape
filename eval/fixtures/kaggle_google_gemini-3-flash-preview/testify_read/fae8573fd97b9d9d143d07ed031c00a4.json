@@ -1,0 +1,73 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "A stack of car battery boxes in a retail or warehouse setting.",
+      "The brand 'RUNALL' is clearly visible on multiple red and black boxes in the center (photo 0).",
+      "The brand 'SUGN' is visible on a blue box at the top of the stack (photo 0).",
+      "The brand 'D.C.M' is visible on a box to the left (photo 0).",
+      "Most boxes appear to be factory-wrapped in clear plastic.",
+      "No individual battery is shown outside of its packaging.",
+      "Specific technical specifications like Ampere-hours (Ah) are not legible on the boxes."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car battery",
+      "brand": "RUNALL",
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Brand new",
+        "verdict": "unverified",
+        "evidence": "The boxes are wrapped in plastic, but the actual batteries are not visible to confirm condition or lack of terminal wear."
+      },
+      {
+        "claim": "Original Korea",
+        "verdict": "unverifiable_remote",
+        "evidence": "Requires a clear photo of the 'Made in' stamp or country of origin text on the battery casing or box."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Capacity and size (Ah rating)",
+        "proof": "A clear photo of the top or side label of a single battery showing the Ah rating (e.g., 75Ah, 100Ah).",
+        "if_unproven": "priced as the lowest standard capacity (e.g., 45Ah)."
+      },
+      {
+        "risk": "Battery age/shelf life",
+        "proof": "A close-up photo of the manufacturing date code heat-stamped into the plastic casing.",
+        "if_unproven": "priced as old stock with reduced lifespan."
+      },
+      {
+        "risk": "Internal health (Voltage/CCA)",
+        "proof": "A video showing a multimeter reading or a battery tester result.",
+        "if_unproven": "priced as a core/scrap battery."
+      }
+    ],
+    "proof_requests": [
+      "A clear photo of the label on top of one battery showing the model number and Ah rating.",
+      "A photo of the manufacturing date code stamped on the battery case.",
+      "A photo of the 'Made in' statement on the battery or box."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo shows a variety of stock, but the specific model and capacity (Ah) of the battery being sold are not legible. Car battery prices vary significantly based on these specifications."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 13009,
+    "input_tokens": 2357,
+    "output_tokens": 2562,
+    "cost_usd": 0.008865,
+    "replayed": false,
+    "fixture_key": "fae8573fd97b9d9d143d07ed031c00a4",
+    "error": null
+  }
+}

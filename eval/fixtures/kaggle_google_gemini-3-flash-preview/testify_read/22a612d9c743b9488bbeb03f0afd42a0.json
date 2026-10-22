@@ -1,0 +1,87 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows a retail box for a Hisense microwave oven.",
+      "Brand 'Hisense' and model 'H34MOBS10HG' are clearly printed on the box.",
+      "The box specifies 34L capacity and Inverter Technology.",
+      "The actual microwave unit is not visible; only the external packaging is shown.",
+      "The box is placed in what appears to be an outdoor market or shop front."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "microwave oven",
+      "brand": "Hisense",
+      "model": "H34MOBS10HG",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Original Hisense 34L",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "Black",
+        "verdict": "supported",
+        "evidence": "photo 0 box image"
+      },
+      {
+        "claim": "Grill",
+        "verdict": "unverified",
+        "evidence": "The visible text on the box in photo 0 does not explicitly mention a grill function."
+      },
+      {
+        "claim": "LED Display",
+        "verdict": "supported",
+        "evidence": "photo 0 box image"
+      },
+      {
+        "claim": "INVERTER",
+        "verdict": "supported",
+        "evidence": "photo 0 box text"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, older, or damaged model.",
+        "proof": "Photo of the actual microwave unit outside of the box.",
+        "if_unproven": "as item not present"
+      },
+      {
+        "risk": "The unit may be used or refurbished despite being in a box.",
+        "proof": "Close-up photos of the interior and the manufacturer's sticker on the rear.",
+        "if_unproven": "as used"
+      },
+      {
+        "risk": "The inverter board or heating element may be faulty.",
+        "proof": "Video of the unit powered on and successfully heating a cup of water.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual microwave unit outside of the box.",
+      "Photo of the interior of the microwave.",
+      "Video of the microwave powered on and heating water.",
+      "Photo of the manufacturer's label/plate on the back of the unit."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail packaging is shown. I cannot verify the existence, condition, or functionality of the actual item without seeing it outside the box."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 8124,
+    "input_tokens": 2371,
+    "output_tokens": 1697,
+    "cost_usd": 0.006276,
+    "replayed": false,
+    "fixture_key": "22a612d9c743b9488bbeb03f0afd42a0",
+    "error": null
+  }
+}

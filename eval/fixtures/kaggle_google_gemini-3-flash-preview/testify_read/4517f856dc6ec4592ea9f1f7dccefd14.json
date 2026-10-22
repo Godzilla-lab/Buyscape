@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows a retail box for a JOB Master 10mm Electric Drill.",
+      "Model JM-8103 ED is printed on the box.",
+      "A teal-colored electric drill matching the box art is partially visible in the bottom right.",
+      "A chuck key is visible on the table next to the drill.",
+      "Box claims 800W power, 0-2600RPM speed, and 230V~50Hz voltage."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "electric drill",
+      "brand": "JOB Master",
+      "model": "JM-8103 ED",
+      "read_from": [
+        "photo 0 box",
+        "photo 0 tool"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "10mm electric drill",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "800W",
+        "verdict": "unverified",
+        "evidence": "Printed on box but not visible on the tool's rating plate."
+      },
+      {
+        "claim": "2-YEARS WARRANTY",
+        "verdict": "unverifiable_remote",
+        "evidence": "Warranty terms for second-hand resale are typically void or non-transferable."
+      },
+      {
+        "claim": "GERMANY STANDARD",
+        "verdict": "unverifiable_remote",
+        "evidence": "Marketing slogan on packaging."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Motor or trigger failure",
+        "proof": "Video of the drill running and cycling through speeds.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Actual power rating differs from box claims",
+        "proof": "Photo of the rating plate on the drill body.",
+        "if_unproven": "as a lower wattage generic drill"
+      }
+    ],
+    "proof_requests": [
+      "Video of the drill powered on and running.",
+      "Clear photo of the rating plate on the side of the drill body.",
+      "Photo of all included accessories such as the chuck key and manual."
+    ],
+    "decision": "price",
+    "reason": "The brand and model are clearly identified from the packaging and the tool itself, allowing for a baseline valuation at its worst-case functional state."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 8299,
+    "input_tokens": 2400,
+    "output_tokens": 1609,
+    "cost_usd": 0.006027,
+    "replayed": false,
+    "fixture_key": "4517f856dc6ec4592ea9f1f7dccefd14",
+    "error": null
+  }
+}
