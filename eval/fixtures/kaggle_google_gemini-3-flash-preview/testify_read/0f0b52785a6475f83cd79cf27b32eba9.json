@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail box for a 'KoRo MIX-A-LOT BLENDER'.",
+      "The box indicates a 6-litre capacity and 2800W power.",
+      "A 'Hamilton Beach Commercial' box is partially visible at the top of the frame.",
+      "Another box for a '3.5 HP HI-POWER BLENDER' is visible at the bottom.",
+      "The actual blender unit is not visible in the photo; only the packaging is shown.",
+      "The seller's text describes the item as 'industrial' and suitable for 'nice cream' and 'Acia bowls'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "blender",
+      "brand": "KoRo",
+      "model": "MIX-A-LOT BLENDER",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "versatile for healthy and delicious nice cream Acia bowl and smoothie maker",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      },
+      {
+        "claim": "its industrial",
+        "verdict": "unverified",
+        "evidence": "The box claims 2800W power, but 'industrial' is a seller's descriptor not explicitly on the KoRo box."
+      },
+      {
+        "claim": "6 Litres",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "2800W Powerful",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The item for sale is ambiguous due to multiple different blender boxes in the photo.",
+        "proof": "A photo of the specific blender being sold, out of its box.",
+        "if_unproven": "as the lowest value model shown (KoRo)"
+      },
+      {
+        "risk": "The box may be empty or contain a different, lower-quality item.",
+        "proof": "Photo of the actual blender unit.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The blender may be used, damaged, or non-functional.",
+        "proof": "Video of the blender running and photos of the blades and drive socket.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual blender outside of the box.",
+      "Photo of the manufacturer's label on the blender base to confirm brand and model.",
+      "Video of the blender powered on and running.",
+      "Clear photo of the jar, lid, and blades to assess condition."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo only shows retail packaging for three different blenders (KoRo, Hamilton Beach, and a generic 3.5HP model). Without seeing the actual unit, its identity and condition cannot be confirmed, making a worst-case price unreliable."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 18189,
+    "input_tokens": 2361,
+    "output_tokens": 4065,
+    "cost_usd": 0.013376,
+    "replayed": false,
+    "fixture_key": "0f0b52785a6475f83cd79cf27b32eba9",
+    "error": null
+  }
+}

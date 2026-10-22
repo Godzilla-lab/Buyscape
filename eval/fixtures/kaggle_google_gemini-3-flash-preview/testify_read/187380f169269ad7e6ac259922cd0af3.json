@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows a retail box for a 'SMART' brand power bank.",
+      "The box displays a capacity of 54600mAh and a power output of 150W.",
+      "The packaging lists ports: four USB, two Type-C, and one Micro-USB.",
+      "The product illustration on the box shows an AC outlet on the top panel.",
+      "The box appears to be sealed in plastic shrink-wrap.",
+      "A watermark 'CHKWUDALITHANKGOD' is visible across the center of the image."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "power bank",
+      "brand": "SMART",
+      "model": "54600mAh 150W",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "54600mAh capacity",
+        "verdict": "unverified",
+        "evidence": "Stated on photo 0 box but internal cells are not visible."
+      },
+      {
+        "claim": "150W power output",
+        "verdict": "unverified",
+        "evidence": "Stated on photo 0 box."
+      },
+      {
+        "claim": "Four USB & Two Type-C & One Micro ports",
+        "verdict": "unverified",
+        "evidence": "Listed on photo 0 box; ports are not shown on the actual device."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual battery capacity may be significantly lower than the 54600mAh stated on the generic packaging.",
+        "proof": "A video showing the device charging a laptop of known battery capacity from 0% to 100% multiple times.",
+        "if_unproven": "priced as a generic 20,000mAh power bank"
+      },
+      {
+        "risk": "The AC outlet or high-wattage (150W) inverter may be non-functional or unable to handle the rated load.",
+        "proof": "Video of the unit powering a small AC appliance (like a fan) or a high-draw laptop.",
+        "if_unproven": "priced as a standard USB-only power bank"
+      },
+      {
+        "risk": "The box may be empty or contain a different, inferior item despite the shrink-wrap.",
+        "proof": "Photo of the actual device out of the box showing the specification label on the casing.",
+        "if_unproven": "priced as a generic power bank"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual power bank out of the box, specifically showing the ports and the printed specifications on the device itself.",
+      "Video demonstrating the AC outlet powering a device.",
+      "Photo of the back of the box showing any additional technical specifications or manufacturer details."
+    ],
+    "decision": "price",
+    "reason": "The item is identified by its retail packaging as a high-capacity power bank with specific claimed features. While the brand is generic and specs are unverified, it can be priced at the worst-case value for a generic power bank of this type."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 10427,
+    "input_tokens": 2351,
+    "output_tokens": 2150,
+    "cost_usd": 0.007626,
+    "replayed": false,
+    "fixture_key": "187380f169269ad7e6ac259922cd0af3",
+    "error": null
+  }
+}

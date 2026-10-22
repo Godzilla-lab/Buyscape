@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "A blue three-phase alternator sitting on a wooden pallet on dirt ground.",
+      "Top-mounted control box with an analog meter and a circuit breaker.",
+      "A technical nameplate is visible on the side of the main body, but the text is illegible.",
+      "Drive shaft is visible at the front.",
+      "Watermark 'CHINOTEX INDUSTRIAL' and 'POSTED ON JIJI' across the image.",
+      "The unit appears clean with fresh paint, but is stored in an outdoor environment."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "three-phase alternator",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Brand new",
+        "verdict": "unverified",
+        "evidence": "The item is clean but sitting on the ground outdoors without packaging in photo 0."
+      },
+      {
+        "claim": "12KVA",
+        "verdict": "unverified",
+        "evidence": "The capacity is likely on the nameplate in photo 0, but it is too blurry to read."
+      },
+      {
+        "claim": "copper coil",
+        "verdict": "unverifiable_remote",
+        "evidence": "Internal windings are not visible in the photo."
+      },
+      {
+        "claim": "for your diesel generator and welding machine",
+        "verdict": "supported",
+        "evidence": "This is the standard application for a three-phase alternator of this type."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The actual capacity (KVA) might be lower than the 12KVA claimed.",
+        "proof": "A clear close-up photo of the technical nameplate.",
+        "if_unproven": "priced as a 5KVA unit"
+      },
+      {
+        "risk": "The windings may be aluminum (cheaper/less durable) rather than copper.",
+        "proof": "A close-up photo of the windings through the cooling vents.",
+        "if_unproven": "priced as aluminum windings"
+      },
+      {
+        "risk": "The unit may be refurbished or used rather than brand new.",
+        "proof": "Photos of original packaging or a video showing the unit under load.",
+        "if_unproven": "priced as used"
+      }
+    ],
+    "proof_requests": [
+      "Clear close-up photo of the technical nameplate showing the KVA rating, brand, and model.",
+      "Close-up photo of the internal windings through the side vents to check wire material.",
+      "Video of the alternator being tested or generating power."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The capacity (KVA) and brand are the primary drivers of value for this item, and they are unreadable on the nameplate in the provided photo."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 8946,
+    "input_tokens": 2364,
+    "output_tokens": 1828,
+    "cost_usd": 0.006666,
+    "replayed": false,
+    "fixture_key": "c8928053e6d06b0ae44c5538ca96920e",
+    "error": null
+  }
+}

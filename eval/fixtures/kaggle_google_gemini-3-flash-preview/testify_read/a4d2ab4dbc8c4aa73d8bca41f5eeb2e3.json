@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail packaging for a dry iron.",
+      "The box identifies the brand as 'Super Sony Japan International Electric Products'.",
+      "The model number 'SJ-1720' is visible on the box.",
+      "A '300w' power rating is prominently displayed on the box.",
+      "The box is wrapped in thin plastic film.",
+      "The actual iron is not visible in the photo, only the box."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "dry iron",
+      "brand": "Super Sony Japan International",
+      "model": "SJ-1720",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Low power dry iron",
+        "verdict": "supported",
+        "evidence": "photo 0 shows a 300w rating on the box, which is low for an iron."
+      },
+      {
+        "claim": "Prepaird , inverter, solar , friendly",
+        "verdict": "unverifiable_remote",
+        "evidence": "While 300w is compatible with small inverters, the actual performance on these systems cannot be verified remotely."
+      },
+      {
+        "claim": "2 Years WARRANTY",
+        "verdict": "unverifiable_remote",
+        "evidence": "Manufacturer or seller warranties cannot be verified through a photo of a box."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Item may be missing or different from the box",
+        "proof": "A photo of the actual iron outside of the box.",
+        "if_unproven": "as not working/missing"
+      },
+      {
+        "risk": "Soleplate damage or wear",
+        "proof": "A clear photo of the underside (soleplate) of the iron.",
+        "if_unproven": "as heavily scratched or damaged"
+      },
+      {
+        "risk": "Non-functional heating element",
+        "proof": "A video showing the indicator light turning on and the iron producing heat.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual iron outside of the box.",
+      "Photo of the soleplate (the bottom heating surface).",
+      "Video of the iron plugged in and heating up."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller has only provided photos of the packaging. The actual item and its physical condition are not visible, making even a worst-case valuation unreliable."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 8846,
+    "input_tokens": 2383,
+    "output_tokens": 1719,
+    "cost_usd": 0.006348,
+    "replayed": false,
+    "fixture_key": "a4d2ab4dbc8c4aa73d8bca41f5eeb2e3",
+    "error": null
+  }
+}

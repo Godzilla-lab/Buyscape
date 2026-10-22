@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Two retail boxes for a KVRON Mini DC UPS are shown.",
+      "The model POE-831P-LFP is clearly printed on the boxes in photo 0.",
+      "A capacity of 30000mAh is printed on the front of the boxes.",
+      "The boxes feature a '1 Year Warranty' badge.",
+      "The actual UPS devices are not visible; only the packaging is shown.",
+      "Specifications for POE (24V), DC (9V/12V), and USB/Type-C (5V) are listed on the box."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "Mini DC UPS",
+      "brand": "KVRON",
+      "model": "POE-831P-LFP",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Built-in lithium battery",
+        "verdict": "supported",
+        "evidence": "The 'LFP' in the model name and '30000mAh' on the photo 0 box indicate a Lithium Iron Phosphate battery."
+      },
+      {
+        "claim": "Microprocessor controller guarantees high reliability",
+        "verdict": "unverifiable_remote",
+        "evidence": "This refers to internal circuitry that cannot be verified through photos."
+      },
+      {
+        "claim": "Auto start",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a functional claim that requires a video of the device in operation."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, damaged, or used item.",
+        "proof": "A photo of the actual device outside of the packaging.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The device may be dead on arrival or unable to hold a charge.",
+        "proof": "A video showing the device powered on and successfully charging a connected peripheral (e.g., a router).",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The battery capacity may be significantly lower than the 30000mAh stated on the box.",
+        "proof": "Unverifiable remote.",
+        "if_unproven": "at the lowest market capacity for this size"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual UPS unit out of the box showing the ports.",
+      "Video of the unit powered on and charging a device.",
+      "Photo of the serial number or manufacturing date sticker on the device itself."
+    ],
+    "decision": "price",
+    "reason": "The brand and model are clearly identifiable from the packaging. Since the actual device is not shown, it is priced at its worst case as a non-functional or missing item."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 10367,
+    "input_tokens": 2362,
+    "output_tokens": 2056,
+    "cost_usd": 0.007349,
+    "replayed": false,
+    "fixture_key": "d750de2727530c610e6414271a9c7a4f",
+    "error": null
+  }
+}

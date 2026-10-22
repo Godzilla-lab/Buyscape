@@ -1,0 +1,69 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Multiple large solar panels leaning against a stack of white materials.",
+      "The panels have dark blue cells, typical of polycrystalline or monocrystalline modules.",
+      "A watermark 'KINGSLEY SOLAR ENERGY' is visible across the center.",
+      "No technical specification labels or brand names are visible on the front of the panels.",
+      "The seller's text indicates they sell various components (panels, inverters, batteries) in different sizes."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "we have solar panel",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "inverter and batteries of different sizes",
+        "verdict": "unverified",
+        "evidence": "These items are mentioned in the text but are not visible in the provided photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Unknown wattage and technical specifications",
+        "proof": "Photo of the manufacturer's specification sticker on the back of the panel.",
+        "if_unproven": "priced as the lowest common wattage for this physical size"
+      },
+      {
+        "risk": "Potential for micro-cracks or non-functional cells",
+        "proof": "Video of a multimeter reading the open-circuit voltage (Voc) in direct sunlight.",
+        "if_unproven": "priced as non-functional/scrap"
+      },
+      {
+        "risk": "Generic or low-tier brand quality",
+        "proof": "Photo of the specification sticker showing the brand and Tier rating.",
+        "if_unproven": "priced as unbranded/generic"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the specification sticker on the back of the panel showing wattage (Wp), voltage (Voc), and brand.",
+      "Photos of the inverters and batteries mentioned in the description.",
+      "A video showing a multimeter test of the panels' output."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The wattage and brand, which are the primary drivers of price for solar panels, are not visible. The seller is advertising a general inventory rather than a specific item."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 7850,
+    "input_tokens": 2365,
+    "output_tokens": 1617,
+    "cost_usd": 0.006033,
+    "replayed": false,
+    "fixture_key": "6d05d12b9e9b7cda4d3c2a499d73fea2",
+    "error": null
+  }
+}
