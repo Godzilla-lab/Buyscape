@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Two retail boxes for EDON LV-400 welding machines are shown stacked.",
+      "The boxes are labeled 'DC INVERTER MMA WELDER'.",
+      "The model 'LV-400' is printed prominently on the boxes in photo 0.",
+      "The packaging claims the device is 'AVAILABLE AT LOW VOLTAGE (LOW VOLTAGE FROM 160V-265V)'.",
+      "Icons on the box indicate cable lengths of 2M, 1.8M, and 1.2M.",
+      "The actual welding machine is not visible; only the cardboard packaging is shown."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DC inverter MMA welder",
+      "brand": "EDON",
+      "model": "LV-400",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "EDON",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "400amps",
+        "verdict": "unverified",
+        "evidence": "The model name LV-400 on the box in photo 0 suggests 400 amps, but the actual output rating on the machine's technical plate is not visible."
+      },
+      {
+        "claim": "single phase",
+        "verdict": "unverified",
+        "evidence": "The voltage range 160V-265V shown on the box in photo 0 is consistent with single-phase power, but it is not explicitly stated."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, lower-value item.",
+        "proof": "Photo of the actual welding machine outside of its packaging.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The machine may be used or have physical damage hidden by the box.",
+        "proof": "Clear photos of the machine's casing, terminals, and cooling vents.",
+        "if_unproven": "as damaged"
+      },
+      {
+        "risk": "The internal inverter components may be faulty or non-functional.",
+        "proof": "Video of the machine powered on and striking an arc.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual welding machine outside the box.",
+      "Photo of the technical specification plate located on the machine.",
+      "Photo of all included accessories such as the electrode holder and earth clamp.",
+      "Video of the machine powered on and welding."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail packaging is visible in the photo. It is impossible to verify the presence, condition, or authenticity of the machine without seeing the unit itself."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 15480,
+    "input_tokens": 2354,
+    "output_tokens": 3422,
+    "cost_usd": 0.011443,
+    "replayed": false,
+    "fixture_key": "73f960884826cb0198557e2bdcab7152",
+    "error": null
+  }
+}
