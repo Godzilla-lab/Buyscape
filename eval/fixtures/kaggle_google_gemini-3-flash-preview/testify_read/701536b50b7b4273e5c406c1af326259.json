@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail packaging for a Hisense microwave oven.",
+      "The box identifies the model as H36MOMMI.",
+      "A circular badge on the box indicates a capacity of 36 Liters.",
+      "The box illustration shows a silver unit with a mirrored door and a digital control panel.",
+      "The actual microwave oven is not visible in the photo; only the box is shown."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "microwave oven",
+      "brand": "Hisense",
+      "model": "H36MOMMI",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "34L",
+        "verdict": "contradicted",
+        "evidence": "The box in photo 0 clearly states 36 Liters."
+      },
+      {
+        "claim": "inverter",
+        "verdict": "unverified",
+        "evidence": "The visible portion of the box does not specify inverter technology."
+      },
+      {
+        "claim": "Silver Mirror Color",
+        "verdict": "supported",
+        "evidence": "The product image on the box in photo 0 shows a mirrored finish."
+      },
+      {
+        "claim": "Digital... Soft touch button",
+        "verdict": "supported",
+        "evidence": "The box illustration shows a digital display and a touch-style keypad."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, older, or damaged unit.",
+        "proof": "A photo of the actual microwave oven outside of the box.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The unit may have internal faults or fail to heat.",
+        "proof": "A video showing the unit powered on, the timer counting down, and a cup of water being heated.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Hidden physical damage such as dents or a cracked door.",
+        "proof": "Clear photos of the top, sides, and the interior cavity of the actual unit.",
+        "if_unproven": "as heavily damaged"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual microwave oven outside of the box.",
+      "Photo of the manufacturer's label on the back of the unit to confirm model and specifications.",
+      "Video of the unit heating a cup of water to prove functionality.",
+      "Photos of the interior and all exterior sides of the unit."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail box is shown, and the seller's description of the capacity (34L) contradicts the box (36L). The actual item must be seen to verify its existence and condition."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 12527,
+    "input_tokens": 2371,
+    "output_tokens": 2670,
+    "cost_usd": 0.009196,
+    "replayed": false,
+    "fixture_key": "701536b50b7b4273e5c406c1af326259",
+    "error": null
+  }
+}

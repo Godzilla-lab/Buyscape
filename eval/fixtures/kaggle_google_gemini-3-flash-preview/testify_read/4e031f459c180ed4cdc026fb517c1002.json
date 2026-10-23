@@ -1,0 +1,75 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Two plastic retail packs of drill bits are shown on a concrete surface.",
+      "The left pack is labeled 'BOSCH', 'HSS-G', '\u00d8 5 mm', '10x', and part number '2 608 595 062'.",
+      "The right pack is labeled 'BOSCH', 'HSS-G', '\u00d8 4 mm', and '10x'.",
+      "The packs are closed; the actual drill bits are partially visible through the plastic, but their condition and exact count cannot be confirmed."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "drill bits",
+      "brand": "Bosch",
+      "model": "HSS-G",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Bosch",
+        "verdict": "supported",
+        "evidence": "photo 0 labels"
+      },
+      {
+        "claim": "5mm drilling bit",
+        "verdict": "supported",
+        "evidence": "photo 0 left pack label"
+      },
+      {
+        "claim": "for hard stainless steel",
+        "verdict": "unverifiable_remote",
+        "evidence": "HSS-G bits are designed for alloyed and non-alloyed steel; performance on 'hard' stainless steel grades cannot be verified without physical testing."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The packs may not contain the full quantity of 10 bits each as labeled.",
+        "proof": "A photo of both packs opened showing all 20 bits.",
+        "if_unproven": "as two individual drill bits (one 4mm and one 5mm)"
+      },
+      {
+        "risk": "The bits may be used, dull, or resharpened despite the packaging.",
+        "proof": "Close-up photos of the drill bit tips.",
+        "if_unproven": "as used/dull bits"
+      },
+      {
+        "risk": "The items may be counterfeit Bosch products.",
+        "proof": "Close-up photo of the laser-etched markings on the bit shanks.",
+        "if_unproven": "as generic HSS drill bits"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the packs opened to confirm the quantity of bits.",
+      "Close-up photo of the drill bit tips to check for wear.",
+      "Close-up photo of the markings on the shanks of the bits."
+    ],
+    "decision": "price",
+    "reason": "The brand, model (HSS-G), and sizes (4mm and 5mm) are clearly identified from the packaging in photo 0. The item can be priced at its worst-case condition (generic, used, single bits)."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 23519,
+    "input_tokens": 2364,
+    "output_tokens": 5082,
+    "cost_usd": 0.016428,
+    "replayed": false,
+    "fixture_key": "4e031f459c180ed4cdc026fb517c1002",
+    "error": null
+  }
+}

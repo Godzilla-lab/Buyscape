@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail packaging for a Homeflower rechargeable stand fan.",
+      "The box identifies the model as HF-1858S.",
+      "Features listed on the box include 3 wind speeds, a 4500mAh battery, and a DC socket for solar.",
+      "The actual fan is not visible; only the box is shown.",
+      "The box is resting on another box for a different product (ceiling fan)."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "rechargeable stand fan",
+      "brand": "HOMEFLOWER",
+      "model": "HF-1858S",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Features 3 adjustable wind speeds",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "oscillation function to distribute air",
+        "verdict": "unverified",
+        "evidence": "Not explicitly stated on the visible portion of the box."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty, or the fan inside may be used or damaged.",
+        "proof": "Photo of the actual fan out of the box.",
+        "if_unproven": "as used and potentially damaged"
+      },
+      {
+        "risk": "The internal lead-acid battery may be degraded or dead.",
+        "proof": "Video of the fan running on battery power alone.",
+        "if_unproven": "as battery non-functional"
+      },
+      {
+        "risk": "Accessories shown on the box (remote, solar panel) may be missing.",
+        "proof": "Photo of all included accessories outside the box.",
+        "if_unproven": "as missing accessories"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual fan out of the box.",
+      "Photo of the remote and solar panel if they are included.",
+      "Video of the fan operating on battery power to confirm battery health."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail box is shown. Without seeing the actual item, its condition, completeness, and functionality cannot be verified."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 7952,
+    "input_tokens": 2386,
+    "output_tokens": 1528,
+    "cost_usd": 0.005777,
+    "replayed": false,
+    "fixture_key": "0de542716b97cc95fb24a867badf14fa",
+    "error": null
+  }
+}

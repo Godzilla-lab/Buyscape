@@ -1,0 +1,70 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail box for a Maxmech electric drill.",
+      "The model number ED 750-13 and power rating 750W are printed on the box.",
+      "The actual drill is not visible in the photo, only the packaging.",
+      "The box is stacked among other similar boxes in what looks like a retail or warehouse environment."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "electric drill",
+      "brand": "MAXMECH",
+      "model": "ED 750-13",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "electric drilling machine",
+        "verdict": "supported",
+        "evidence": "photo 0 box text"
+      },
+      {
+        "claim": "13mm",
+        "verdict": "supported",
+        "evidence": "photo 0 box model number suffix"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, inferior item.",
+        "proof": "Photo of the actual drill outside the box.",
+        "if_unproven": "as not present"
+      },
+      {
+        "risk": "The drill may be used, refurbished, or damaged despite the box appearance.",
+        "proof": "Close-up photos of the drill body, chuck, and power cord.",
+        "if_unproven": "as heavily used"
+      },
+      {
+        "risk": "The motor may be non-functional or sparking.",
+        "proof": "Video of the drill running.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual drill outside of the box.",
+      "Photo of the technical specification plate on the drill body.",
+      "Video of the drill being plugged in and operated."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail packaging is shown. I cannot confirm the contents of the box or the condition of the tool without seeing the actual item."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 6626,
+    "input_tokens": 2369,
+    "output_tokens": 1258,
+    "cost_usd": 0.004959,
+    "replayed": false,
+    "fixture_key": "cae779495f59db9a80e4dc254717da26",
+    "error": null
+  }
+}
