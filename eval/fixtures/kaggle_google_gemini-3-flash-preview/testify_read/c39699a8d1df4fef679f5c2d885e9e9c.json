@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail packaging for two Sonik AC/DC Pressing Irons.",
+      "The box text identifies the item as an 'AC/DC Pressing Iron' with a power rating of '200-250W'.",
+      "Features listed on the box include '5 Temperature Modes', '100% Copper Cable', and 'Non-Stick Soleplate'.",
+      "The actual iron is not shown outside of its packaging.",
+      "A model number starting with 'SP' is partially visible on the side of the box but is cut off."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "AC/DC pressing iron",
+      "brand": "Sonik",
+      "model": null,
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Sonik solar/inverter ac/dc pressing dry iron",
+        "verdict": "supported",
+        "evidence": "photo 0 box text"
+      },
+      {
+        "claim": "200 - 250w",
+        "verdict": "supported",
+        "evidence": "photo 0 box text"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, used, or damaged item.",
+        "proof": "A photo of the actual iron outside of the box.",
+        "if_unproven": "as a non-functional or damaged unit"
+      },
+      {
+        "risk": "The iron may not heat up or function as intended.",
+        "proof": "A video showing the iron's power indicator light on and the soleplate heating.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The DC power cables or battery clips may be missing.",
+        "proof": "A photo showing all included accessories and cables.",
+        "if_unproven": "as missing essential cables"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual iron outside of the box.",
+      "Clear photo of the specification plate on the bottom or side of the iron.",
+      "Video demonstrating the iron heating up when connected to a power source."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller has only provided a photo of the retail packaging. The actual item's existence, condition, and specific model cannot be confirmed without seeing the iron itself."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 19130,
+    "input_tokens": 2390,
+    "output_tokens": 4325,
+    "cost_usd": 0.01417,
+    "replayed": false,
+    "fixture_key": "c39699a8d1df4fef679f5c2d885e9e9c",
+    "error": null
+  }
+}
