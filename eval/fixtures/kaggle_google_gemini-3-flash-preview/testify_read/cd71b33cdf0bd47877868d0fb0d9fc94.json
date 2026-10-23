@@ -1,0 +1,87 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the front of a retail box for a MACHES Power Bank.",
+      "The brand 'MACHES' and model 'PD303' are printed on the box.",
+      "The capacity '30000mAh' is printed on the box.",
+      "The box states 'COMES WITH LANYARD 2 WIRE'.",
+      "The box appears to be wrapped in plastic film, suggesting it is unopened.",
+      "The actual power bank is not visible, only the packaging."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "power bank",
+      "brand": "MACHES",
+      "model": "PD303",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Brand New",
+        "verdict": "unverified",
+        "evidence": "The box appears sealed, but the device itself is not shown to confirm its condition."
+      },
+      {
+        "claim": "Maches power bank",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "30000 mah",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "comes with lanyard 2 wire",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "Available for immediate pickup",
+        "verdict": "unverifiable_remote",
+        "evidence": "Availability and location cannot be confirmed through photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different item.",
+        "proof": "Photo of the power bank outside the box.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The device may be non-functional or unable to hold a charge.",
+        "proof": "Video of the device charging a phone.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The actual battery capacity may be significantly lower than the 30,000mAh label.",
+        "proof": "Unverifiable remote.",
+        "if_unproven": "at a lower capacity tier"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the power bank outside the box.",
+      "Photo of the back of the device showing technical specifications.",
+      "Video of the device charging a phone."
+    ],
+    "decision": "price",
+    "reason": "The brand and model are clearly identified from the packaging, allowing for a valuation based on its worst-case functional state."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 24287,
+    "input_tokens": 2369,
+    "output_tokens": 5620,
+    "cost_usd": 0.018045,
+    "replayed": false,
+    "fixture_key": "cd71b33cdf0bd47877868d0fb0d9fc94",
+    "error": null
+  }
+}

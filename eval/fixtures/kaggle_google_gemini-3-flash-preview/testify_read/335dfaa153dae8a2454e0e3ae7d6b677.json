@@ -1,0 +1,84 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Top view of a car battery with a black plastic casing.",
+      "Label identifies the model as CMF80L.",
+      "Specifications on label: 12V, 80Ah (20HR), 130MIN (RC), 600A (CCA).",
+      "Label and plastic casing both state 'MADE IN KOREA'.",
+      "A built-in hydrometer (magic eye) shows a green indicator.",
+      "One terminal is covered by a red protective cap.",
+      "Embossed codes 'ALS K80' and '803' are visible on the casing.",
+      "Barcode 8 809376 164475 is printed on the label."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car battery",
+      "brand": null,
+      "model": "CMF80L",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "80Ah",
+        "verdict": "supported",
+        "evidence": "photo 0 label"
+      },
+      {
+        "claim": "Korea",
+        "verdict": "supported",
+        "evidence": "photo 0 label and casing embossing"
+      },
+      {
+        "claim": "Everstart Battery",
+        "verdict": "unverified",
+        "evidence": "The brand name 'Everstart' is not visible on the label in photo 0."
+      },
+      {
+        "claim": "Powerful, durable, and reliable",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The battery may be old stock or have internal degradation despite the green indicator.",
+        "proof": "A video showing a multimeter reading (voltage) and a load test result.",
+        "if_unproven": "as used with unknown health"
+      },
+      {
+        "risk": "The battery may not be the 'Everstart' brand as claimed by the seller.",
+        "proof": "A photo of the complete top and side labels showing the brand logo.",
+        "if_unproven": "as a generic Korean-made battery"
+      },
+      {
+        "risk": "The manufacture date is unclear; the code '803' could indicate an older production year.",
+        "proof": "A clear photo of the heat-stamped date code on the battery casing.",
+        "if_unproven": "as old stock"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the full label showing the brand name.",
+      "Video of a multimeter reading showing the current voltage.",
+      "Close-up photo of any heat-stamped date codes on the top or side of the casing."
+    ],
+    "decision": "price",
+    "reason": "The model CMF80L and the 80Ah capacity are clearly visible, which allows for pricing as a standard Korean-manufactured battery of this specification, even without the brand name confirmed."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 12746,
+    "input_tokens": 2366,
+    "output_tokens": 2537,
+    "cost_usd": 0.008794,
+    "replayed": false,
+    "fixture_key": "335dfaa153dae8a2454e0e3ae7d6b677",
+    "error": null
+  }
+}

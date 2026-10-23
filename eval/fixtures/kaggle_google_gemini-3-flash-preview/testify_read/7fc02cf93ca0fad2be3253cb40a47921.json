@@ -1,0 +1,74 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the tread of a single tire.",
+      "The tread appears new with no signs of wear.",
+      "Factory markings (green and white lines) are visible on the tread surface.",
+      "The sidewall is not visible, obscuring brand, size, and date information.",
+      "A watermark 'NJI VENTURE' is overlaid on the image."
+    ],
+    "identity": {
+      "status": "unknown",
+      "kind": "car tire",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "245 45 r17",
+        "verdict": "unverified",
+        "evidence": "The size is not visible in the photo; it is typically found on the sidewall."
+      },
+      {
+        "claim": "brandnew",
+        "verdict": "supported",
+        "evidence": "The tread shows no wear and retains factory paint lines in photo 0."
+      },
+      {
+        "claim": "michelin",
+        "verdict": "unverified",
+        "evidence": "No brand name or logo is visible in the provided photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The tire size may not be 245/45 R17.",
+        "proof": "A photo of the sidewall showing the size specifications.",
+        "if_unproven": "priced as a generic small-diameter tire"
+      },
+      {
+        "risk": "The tire may be a budget brand instead of Michelin.",
+        "proof": "A photo of the sidewall showing the brand logo.",
+        "if_unproven": "priced as a budget brand"
+      },
+      {
+        "risk": "The tire may be old stock (expired rubber).",
+        "proof": "A photo of the 4-digit DOT date code.",
+        "if_unproven": "priced as expired stock"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the sidewall showing brand, model, and size.",
+      "Photo of the DOT date code.",
+      "Photo of the other side of the tire."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The brand and size, which are the primary factors for pricing and compatibility, are not visible in the photo. A sidewall shot is necessary to confirm the seller's claims."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 27842,
+    "input_tokens": 2394,
+    "output_tokens": 5923,
+    "cost_usd": 0.018966,
+    "replayed": false,
+    "fixture_key": "7fc02cf93ca0fad2be3253cb40a47921",
+    "error": null
+  }
+}

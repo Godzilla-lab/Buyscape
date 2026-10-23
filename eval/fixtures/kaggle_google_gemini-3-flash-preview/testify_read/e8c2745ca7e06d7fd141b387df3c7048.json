@@ -1,0 +1,66 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail box for an SKE Mini DC UPS.",
+      "The brand 'SKE' and model 'POE-36E-LFP' are clearly printed on the box.",
+      "The box specifies a 20000mAh Lithium Iron Battery (LiFePO4).",
+      "The box lists multiple outputs: 5V USB/DC, 9V/12V DC, and 24V POE.",
+      "The actual device is not visible; only the packaging is shown."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "Mini DC UPS",
+      "brand": "SKE",
+      "model": "POE-36E-LFP",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Ske 20000mah poe -36e-lfp mini dc ups",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different item.",
+        "proof": "Photo of the actual device outside the box.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The device may be non-functional or unable to hold a charge.",
+        "proof": "Video of the device powering a router or phone while disconnected from mains.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The internal battery capacity may be significantly degraded.",
+        "proof": "Video showing the device running a standard load for a specific duration.",
+        "if_unproven": "as having a dead battery"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual UPS device outside of the box.",
+      "Photo of the back panel showing ports and technical specifications.",
+      "Video of the device powered on and successfully charging a device."
+    ],
+    "decision": "price",
+    "reason": "The model is identified from the packaging. It is priced at its worst case (non-functional or empty box) until the actual unit is shown."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 22020,
+    "input_tokens": 2399,
+    "output_tokens": 5150,
+    "cost_usd": 0.041838,
+    "replayed": false,
+    "fixture_key": "e8c2745ca7e06d7fd141b387df3c7048",
+    "error": null
+  }
+}

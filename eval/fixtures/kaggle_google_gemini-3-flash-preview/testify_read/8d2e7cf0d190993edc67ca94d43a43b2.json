@@ -1,0 +1,66 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail box for a Blue Gate UPS.",
+      "The brand 'BLUE GATE' and model 'BG1530 Elite Pro' are clearly printed on the box.",
+      "The box indicates it is a 'Line Interactive UPS'.",
+      "The actual UPS device is not visible in the photo; only the packaging is shown.",
+      "The box is resting on a grey, possibly concrete, floor."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "UPS",
+      "brand": "Blue Gate",
+      "model": "BG1530 Elite Pro",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "A UPS is a device that provides backup power to electronic devices when the main power source fails.",
+        "verdict": "supported",
+        "evidence": "This is the standard definition of the product type shown on the box."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, lower-value item.",
+        "proof": "A photo of the actual UPS unit outside of the box.",
+        "if_unproven": "Priced as an empty box."
+      },
+      {
+        "risk": "The internal lead-acid batteries may be dead or have significantly reduced capacity.",
+        "proof": "A video of the UPS powering a known load (like a desktop PC or lamp) while unplugged from the wall.",
+        "if_unproven": "Priced as requiring immediate battery replacement."
+      },
+      {
+        "risk": "The unit may have internal circuit faults or blown fuses.",
+        "proof": "A video showing the unit successfully completing a self-test upon power-up.",
+        "if_unproven": "Priced as non-functional/for parts."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual UPS unit outside of the box.",
+      "Photo of the label/sticker on the back of the actual unit to confirm the model and serial number.",
+      "Video of the unit powered on and supporting a load while disconnected from the mains power."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail packaging is shown. Without photos of the actual device, its existence and physical condition cannot be verified."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 11371,
+    "input_tokens": 2362,
+    "output_tokens": 2381,
+    "cost_usd": 0.008324,
+    "replayed": false,
+    "fixture_key": "8d2e7cf0d190993edc67ca94d43a43b2",
+    "error": null
+  }
+}
