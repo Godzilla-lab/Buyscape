@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail packaging for a welding machine.",
+      "The brand 'JOB Master' and model 'JM-MINI200' are clearly printed on the box.",
+      "The box specifies '200A WELDING MACHINE'.",
+      "The box is secured with two white plastic shipping straps.",
+      "A watermark 'MAXITOOLS' is visible across the center of the image.",
+      "The actual welding machine is not visible, only the illustration on the box."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "welding machine",
+      "brand": "JOB Master",
+      "model": "JM-MINI200",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Job master mini welding machine",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "heavy duty",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a marketing descriptor for a mini inverter welder that cannot be tested remotely."
+      },
+      {
+        "claim": "200A",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, lower-value item.",
+        "proof": "Photo of the actual machine outside of the box.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The machine may be used, damaged, or non-functional despite the box appearance.",
+        "proof": "Video of the machine powered on and striking an arc.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Essential accessories (electrode holder, earth clamp, cables) may be missing.",
+        "proof": "Photo of all contents included in the sale.",
+        "if_unproven": "as the bare unit without cables"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual welding machine removed from the box.",
+      "Photo of the accessories included (cables, clamps, mask).",
+      "Video showing the machine plugged in and the digital display active."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail packaging is shown. Without seeing the actual item and its accessories, the condition and contents cannot be verified, and the watermark suggests the photo may not be original to the seller."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 10045,
+    "input_tokens": 2350,
+    "output_tokens": 2197,
+    "cost_usd": 0.007766,
+    "replayed": false,
+    "fixture_key": "9ae5338d87305d94043750fef2ad7fe2",
+    "error": null
+  }
+}

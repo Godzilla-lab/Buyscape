@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows a stainless steel electric kettle and its retail box.",
+      "The box and the kettle are branded 'SLIVERS CRIEST'.",
+      "The box lists model 'SC-401-10', power '1800 W', and capacity '10L'.",
+      "The kettle has a black plastic handle and a separate power base with a 2-pin plug.",
+      "The physical size of the kettle relative to the power plug suggests a much smaller capacity than 10 liters."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "electric kettle",
+      "brand": "Slivers Criest",
+      "model": "SC-401-10",
+      "read_from": [
+        "photo 0 box",
+        "photo 0 kettle"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "10-Litre",
+        "verdict": "supported",
+        "evidence": "photo 0 box explicitly states 10L, though this is physically inconsistent with the item's size."
+      },
+      {
+        "claim": "Silver Crest",
+        "verdict": "contradicted",
+        "evidence": "photo 0 box and kettle body clearly show the brand name is 'SLIVERS CRIEST'."
+      },
+      {
+        "claim": "2 Years Warranty",
+        "verdict": "unverifiable_remote",
+        "evidence": "Printed on the box in photo 0, but manufacturer warranties for such brands are often unenforceable in secondary markets."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual capacity is likely significantly lower than 10L (possibly 1.0L or 1.8L).",
+        "proof": "A photo of the kettle next to a standard 1.5L water bottle or a shot of internal volume markings.",
+        "if_unproven": "as a standard 1.8L kettle"
+      },
+      {
+        "risk": "The kettle may not heat water or the auto-shutoff may be broken.",
+        "proof": "A video showing the kettle boiling water and automatically switching off.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Internal scaling, rust, or debris.",
+        "proof": "A clear photo of the inside of the kettle.",
+        "if_unproven": "as heavily scaled/dirty"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the inside of the kettle.",
+      "Video of the kettle boiling water and shutting off.",
+      "Photo of the kettle next to a 1.5L bottle to verify size."
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identified as a 'Slivers Criest' kettle, which is a budget/knock-off brand. It can be priced as a generic small appliance at its worst-case functional state."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 10909,
+    "input_tokens": 2391,
+    "output_tokens": 2402,
+    "cost_usd": 0.008401,
+    "replayed": false,
+    "fixture_key": "c27e3a7c9b7a039f6088caa3abee6190",
+    "error": null
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows a retail box for a Romoss power bank being held by a hand.",
+      "The box is wrapped in clear plastic shrink-wrap.",
+      "The brand 'ROMOSS' is printed at the top of the box.",
+      "The text '100W Bidirectional Fast Charging Power Bank' is prominent on the front.",
+      "The product image on the box shows a capacity of '40000mAh'.",
+      "Icons at the bottom indicate 3 inputs, 3 outputs, and a power monitor display.",
+      "The background suggests a retail or warehouse environment with metal shelving."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "power bank",
+      "brand": "Romoss",
+      "model": "100W Bidirectional Fast Charging Power Bank 40000mAh",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Romoss brand",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "100W Bidirectional Fast Charging",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "40000mAh capacity",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different item as the device itself is not shown.",
+        "proof": "Photo of the actual power bank outside of the retail packaging.",
+        "if_unproven": "as a non-functional unit"
+      },
+      {
+        "risk": "The item may be a counterfeit; Romoss is a frequently cloned brand.",
+        "proof": "Photo of the scratch-off authenticity code on the side of the box.",
+        "if_unproven": "as a generic/counterfeit unit"
+      },
+      {
+        "risk": "Internal battery cells may be defective or have diminished capacity.",
+        "proof": "Video showing the device charging a high-wattage laptop and the display functioning.",
+        "if_unproven": "as having a dead battery"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual power bank out of the box showing the ports and the printed specification label.",
+      "Photo of the authenticity scratch-off sticker on the packaging.",
+      "Video of the device charging a phone or laptop to confirm the display and output work."
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identified by its retail packaging, which allows for a valuation at its worst-case condition despite the actual device not being visible."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 13718,
+    "input_tokens": 2363,
+    "output_tokens": 2828,
+    "cost_usd": 0.009666,
+    "replayed": false,
+    "fixture_key": "ba209b3882a5457a208680c9a0727edc",
+    "error": null
+  }
+}

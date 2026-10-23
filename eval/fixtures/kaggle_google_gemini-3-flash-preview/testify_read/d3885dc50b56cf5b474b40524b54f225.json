@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "A black motorcycle battery and its retail box resting on a blue plastic chair.",
+      "The battery and box are branded 'GrePower'.",
+      "The model number YTX12-BS(MF) is printed on both the battery and the box.",
+      "Specifications listed are 12V 12Ah/10HR.",
+      "The battery has protective caps on the terminals (red and black).",
+      "Text on the battery indicates it is a 'Sealed Lead-Acid Battery' made in Thailand."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "motorcycle battery",
+      "brand": "GrePower",
+      "model": "YTX12-BS(MF)",
+      "read_from": [
+        "photo 0 battery",
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "12v 12ahm",
+        "verdict": "supported",
+        "evidence": "photo 0 shows 12V 12Ah on the battery and box"
+      },
+      {
+        "claim": "12v 14ahm",
+        "verdict": "unverified",
+        "evidence": "The photo only shows a 12Ah model; a 14Ah model is not pictured."
+      },
+      {
+        "claim": "very strong batteries",
+        "verdict": "unverifiable_remote",
+        "evidence": "Battery health and cranking power cannot be determined from a still photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The battery may be discharged or have a low state of health (SOH).",
+        "proof": "A video showing a multimeter reading the resting voltage (should be above 12.6V for a full charge).",
+        "if_unproven": "as a dead battery or scrap value"
+      },
+      {
+        "risk": "The battery may have internal sulfation and fail under load.",
+        "proof": "A video of a load test or the battery successfully starting a motorcycle engine.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "A video showing a multimeter reading the battery's resting voltage.",
+      "A video of the battery being used to start a motorcycle."
+    ],
+    "decision": "price",
+    "reason": "The brand, model, and specifications are clearly visible in the photo. It can be priced based on its worst-case condition (used/unknown health)."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 7342,
+    "input_tokens": 2410,
+    "output_tokens": 1501,
+    "cost_usd": 0.005708,
+    "replayed": false,
+    "fixture_key": "d3885dc50b56cf5b474b40524b54f225",
+    "error": null
+  }
+}
