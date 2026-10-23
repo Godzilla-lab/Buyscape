@@ -187,3 +187,11 @@ def test_a_cut_code_leaves_no_note_that_it_was_read():
     assert answer.reason == train.WORST_CASE_REASON
     only_the_code = dict(read, observations=["sticker reads EM 8500"])
     assert train.target(sewing, only_the_code, {"identity_from_photos_alone": "named"}, keep_code=False)[0] is None
+
+
+def test_a_cut_code_that_was_the_whole_name_leaves_the_kind():
+    fan = _item("c9", "standing fan", "Industrial Standing Fan")
+    read = _read(status="named", model="SF-1650", kind="standing fan", read_from=["photo 0"])
+    answer, why = train.target(fan, read, {"identity_from_photos_alone": "named"}, keep_code=False)
+    assert why == "kept: price at worst case, name cut to the kind"
+    assert answer.identity.status == "by_type" and answer.identity.kind == "standing fan"

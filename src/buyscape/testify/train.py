@@ -184,8 +184,15 @@ def target(item: Item, reading: dict, label: dict | None = None,
             return None, "named beyond the photos, and the kind alone is wrong"
         cut, gone = ", name cut to the kind", [read.identity.brand, read.identity.model]
     elif read.identity.status == "named" and read.identity.model and not keep_code:
-        data["identity"]["model"] = None
-        cut, gone = ", model code cut", [read.identity.model]
+        if read.identity.brand:
+            data["identity"]["model"] = None
+            cut, gone = ", model code cut", [read.identity.model]
+        else:
+            # A code was the whole name: without it only the kind is left.
+            data["identity"] = IdentityAnswer(status="by_type", kind=read.identity.kind).model_dump()
+            if not read.identity.kind or identity_correct(item, data["identity"], by_title=True) is not True:
+                return None, "named beyond the photos, and the kind alone is wrong"
+            cut, gone = ", name cut to the kind", [read.identity.model]
     if gone and (data := _forget(data, gone)) is None:
         return None, "nothing seen is left once the name is cut"
     if read.decision != "price":
