@@ -1,0 +1,67 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail packaging for an Edon DC Inverter MMA Welder.",
+      "The box lists three models: ARC-400S, ARC-500S, and ARC-630S.",
+      "A red circular sticker is placed next to 'ARC-500S' on the box in photo 0.",
+      "The actual welding machine is not visible in the photo; only the box is shown.",
+      "The box appears to be on a shelf in a commercial or storage setting."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DC inverter MMA welder",
+      "brand": "Edon",
+      "model": "ARC-500S",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Edon DC inverter welding machine 500s",
+        "verdict": "supported",
+        "evidence": "The box in photo 0 has a red mark next to the ARC-500S model name."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, inferior item.",
+        "proof": "A photo of the actual machine outside of the box.",
+        "if_unproven": "as missing item"
+      },
+      {
+        "risk": "The machine may be used, damaged, or non-functional.",
+        "proof": "A video of the machine powered on and striking an arc.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Essential accessories like the electrode holder and earth clamp may be missing.",
+        "proof": "A photo showing all included cables and accessories.",
+        "if_unproven": "as machine only, without cables"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual welding machine out of the box.",
+      "Photo of the machine's nameplate/specification sticker on the unit itself.",
+      "Video of the machine powered on showing the digital display.",
+      "Photo of all included accessories (cables, clamps, mask)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail box is shown. Without seeing the actual machine, its condition, or its accessories, it is impossible to verify the item exists or functions."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 5588,
+    "input_tokens": 2354,
+    "output_tokens": 1062,
+    "cost_usd": 0.004363,
+    "replayed": false,
+    "fixture_key": "73a933e1f663b3ffd857ca1ed3b4a12b",
+    "error": null
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail packaging for a Binatone dry iron.",
+      "The brand 'Binatone' and model 'DI-1255 (MK2)' are clearly printed on the box.",
+      "The box features text for 'NON-STICK', 'SMOOTHER GLIDING', and a '2 Year Warranty' seal.",
+      "The actual iron is not visible in the photo; only the box is shown.",
+      "The background suggests a retail or storage environment with other boxes and items."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "dry iron",
+      "brand": "Binatone",
+      "model": "DI-1255 (MK2)",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Non stick",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "Smooth glide",
+        "verdict": "supported",
+        "evidence": "photo 0 box (printed as 'SMOOTHER GLIDING')"
+      },
+      {
+        "claim": "2years warranty",
+        "verdict": "unverifiable_remote",
+        "evidence": "A 2-year warranty seal is on the box in photo 0, but its validity for a remote buyer or second-hand purchase cannot be confirmed."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, lower-value item.",
+        "proof": "A photo of the actual iron outside of the box.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The iron's soleplate may be scratched, burnt, or damaged.",
+        "proof": "A clear photo of the underside (soleplate) of the iron.",
+        "if_unproven": "as heavily damaged"
+      },
+      {
+        "risk": "The iron may not be functional or have a faulty heating element.",
+        "proof": "A video showing the iron plugged in with the power indicator light turning on.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual iron out of the box.",
+      "Photo of the soleplate to check for scratches or residue.",
+      "Video of the iron powered on to confirm the indicator light works."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is clearly identified from the packaging, but the item itself is not shown. Without seeing the actual iron, its presence and physical condition cannot be verified."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 12395,
+    "input_tokens": 2353,
+    "output_tokens": 2646,
+    "cost_usd": 0.009114,
+    "replayed": false,
+    "fixture_key": "d97db29cf9f9aa01be3590ca6e36a0dd",
+    "error": null
+  }
+}
