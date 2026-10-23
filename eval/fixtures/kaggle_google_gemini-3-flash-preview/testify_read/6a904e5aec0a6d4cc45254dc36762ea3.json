@@ -1,0 +1,73 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows multiple retail boxes for 'GLOW ENERGY' batteries.",
+      "The boxes are labeled 'T-TUBULAR BATTERY' and 'GLOW 22090'.",
+      "Specifications '12V 220AH' are printed on the front of the boxes.",
+      "The boxes appear to be sealed with white plastic tension straps.",
+      "A watermark for 'MERCY CLASSIC VENTURE'S' and 'POSTED ON JIJI' is visible across the center.",
+      "Other solar equipment boxes, including 'Felicitysolar', are visible in the background."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "tall tubular battery",
+      "brand": "Glow Energy",
+      "model": "GLOW 22090",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "220Ah 12V Tall Tubular Battery",
+        "verdict": "supported",
+        "evidence": "The text on the boxes in photo 0 explicitly states '12V 220AH' and 'T-TUBULAR BATTERY'."
+      },
+      {
+        "claim": "high-performance deep cycle",
+        "verdict": "unverifiable_remote",
+        "evidence": "Performance and cycle life cannot be determined from a photo of the packaging."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The battery may be old stock with significant self-discharge or sulfation.",
+        "proof": "A clear photo of the manufacturing date code stamped on the top or side of the actual battery casing.",
+        "if_unproven": "as aged stock with degraded capacity"
+      },
+      {
+        "risk": "The battery may be dead or have a shorted cell despite being in a box.",
+        "proof": "A video showing a multimeter reading of the battery terminals (should be >12.6V for a healthy new battery).",
+        "if_unproven": "as scrap/non-functional"
+      },
+      {
+        "risk": "The box may be empty or contain a different, used, or lower-spec battery.",
+        "proof": "A photo of the actual battery outside of the box showing the labels and terminals.",
+        "if_unproven": "as the lowest value generic battery of similar weight"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual battery removed from the box.",
+      "Close-up photo of the manufacturing date or serial number stamped on the battery body.",
+      "Video of a voltage test using a multimeter.",
+      "Photo of the warranty card if available."
+    ],
+    "decision": "price",
+    "reason": "The brand, model, and specifications are clearly identified from the packaging in the photo. The item can be priced at its worst-case (non-functional/scrap) until health and age are verified."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 12060,
+    "input_tokens": 2361,
+    "output_tokens": 2542,
+    "cost_usd": 0.008807,
+    "replayed": false,
+    "fixture_key": "6a904e5aec0a6d4cc45254dc36762ea3",
+    "error": null
+  }
+}

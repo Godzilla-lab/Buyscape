@@ -1,0 +1,67 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "A single tire wrapped in manufacturer's protective plastic.",
+      "Manufacturer label identifies the brand as Three-A and the model as P606.",
+      "The label specifies the size as 235/55ZR17 and load/speed rating as 103W.",
+      "An EU energy label is visible on the packaging.",
+      "The tire tread shows factory-applied colored lines, suggesting it is unused.",
+      "The wrapping includes the text 'THREE-A RADIAL Engineered in Japan'.",
+      "A second tire is partially visible to the left, but the seller's text refers to a single tire."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "tire",
+      "brand": "Three-A",
+      "model": "P606",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Tree a tire",
+        "verdict": "supported",
+        "evidence": "Photo 0 label shows the brand 'THREE-A'."
+      },
+      {
+        "claim": "235 55 r17",
+        "verdict": "supported",
+        "evidence": "Photo 0 label shows '235/55ZR17'."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The manufacturing date (DOT code) is hidden by the wrapping; tires degrade even when unused.",
+        "proof": "A photo of the 4-digit DOT code stamped on the tire sidewall.",
+        "if_unproven": "Priced as old stock (over 5 years old)."
+      },
+      {
+        "risk": "The listing may be for a single tire while buyers often require pairs.",
+        "proof": "Seller confirmation of the number of tires included in the price.",
+        "if_unproven": "Priced as a single unit."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the 4-digit DOT code on the sidewall to verify the manufacturing date.",
+      "Confirmation of whether the price is for one tire or a pair."
+    ],
+    "decision": "price",
+    "reason": "The tire is clearly identified by brand, model, and size from the factory label and appears to be in new, unused condition."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 7651,
+    "input_tokens": 2356,
+    "output_tokens": 1457,
+    "cost_usd": 0.005549,
+    "replayed": false,
+    "fixture_key": "ee3bb4f7234455adcabaf42ab02b6d57",
+    "error": null
+  }
+}

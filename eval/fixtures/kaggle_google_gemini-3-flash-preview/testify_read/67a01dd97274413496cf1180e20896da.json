@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail box for a Blue Gate UPS.",
+      "The box is labeled 'BG1530 Elite Pro' and 'Line Interactive UPS'.",
+      "The actual UPS unit is not visible in the photo.",
+      "The background appears to be a shop or storage area with other boxed electronics.",
+      "There is a watermark for 'CHIBEN GADGETS' and 'Jiji'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "UPS",
+      "brand": "Blue Gate",
+      "model": "BG1530 Elite Pro",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Blue Gate BG 1530 Elite Pro",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "1.53kVA (1530VA)",
+        "verdict": "unverified",
+        "evidence": "The model number suggests this capacity, but the specific text on the box is too blurry to read as confirmation."
+      },
+      {
+        "claim": "line-interactive UPS",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, older, or damaged unit.",
+        "proof": "A photo of the actual UPS unit outside of the box.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The internal lead-acid batteries may be dead or have significantly reduced capacity.",
+        "proof": "A video showing the UPS powering a significant load (like a PC or large fan) while the mains power is disconnected.",
+        "if_unproven": "as having a dead battery"
+      },
+      {
+        "risk": "The unit may have internal circuit damage or blown fuses.",
+        "proof": "A video showing the unit successfully charging and switching to battery mode.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual UPS unit out of the box.",
+      "Photo of the back of the unit showing the outlets and the technical specification sticker.",
+      "Video of the unit powered on and supporting a load without being plugged into the wall."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail packaging is shown. The actual device must be seen to verify its existence, physical condition, and authenticity."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 12493,
+    "input_tokens": 2388,
+    "output_tokens": 2495,
+    "cost_usd": 0.008679,
+    "replayed": false,
+    "fixture_key": "67a01dd97274413496cf1180e20896da",
+    "error": null
+  }
+}

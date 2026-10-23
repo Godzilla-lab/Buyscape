@@ -1,0 +1,75 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Cardboard box for a car battery.",
+      "Brand 'RUNALL' visible on the box in photo 0.",
+      "Model 'MF DIN75' and specifications '12V75AH(20HR)' visible on the box in photo 0.",
+      "The actual battery is not visible; only the outer packaging is shown."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car battery",
+      "brand": "RUNALL",
+      "model": "MF DIN75",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Brand new",
+        "verdict": "unverified",
+        "evidence": "Only the box is shown; the battery itself is not visible to confirm condition."
+      },
+      {
+        "claim": "Original korea car battery",
+        "verdict": "unverifiable_remote",
+        "evidence": "The box does not show a 'Made in Korea' mark in this view."
+      },
+      {
+        "claim": "Two years warranty",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a seller's service claim that cannot be verified through photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, used, or inferior battery.",
+        "proof": "Photo of the actual battery outside the box showing its labels and terminals.",
+        "if_unproven": "as a used battery"
+      },
+      {
+        "risk": "The battery may be old stock and chemically degraded.",
+        "proof": "Photo of the manufacturing date code stamped into the plastic casing of the battery.",
+        "if_unproven": "as old stock"
+      },
+      {
+        "risk": "The battery may be defective or have low voltage.",
+        "proof": "Video of a multimeter reading the battery voltage.",
+        "if_unproven": "as non-functional/scrap"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual battery outside of the box.",
+      "Photo of the top of the battery showing the terminals and the stamped date code.",
+      "Video of a multimeter test showing the current voltage."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the packaging is visible. It is impossible to verify the contents of the box, the condition of the battery, or its manufacturing date without seeing the item itself."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 6626,
+    "input_tokens": 2397,
+    "output_tokens": 1458,
+    "cost_usd": 0.005573,
+    "replayed": false,
+    "fixture_key": "3c8de387818cf80eff6a3dbb10839469",
+    "error": null
+  }
+}

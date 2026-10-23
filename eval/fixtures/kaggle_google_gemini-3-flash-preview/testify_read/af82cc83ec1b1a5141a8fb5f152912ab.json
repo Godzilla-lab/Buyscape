@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Black power bank with four integrated cables: Lightning, USB-C, Micro-USB, and USB-A.",
+      "Original retail packaging is present, showing brand 'Depak' and capacity '30000mAh'.",
+      "Model number 'DP-B23S' is printed on the back of the device.",
+      "The back of the device lists multiple output ratings including 9V/2A and 12V/1.5A, consistent with fast charging.",
+      "The device has a built-in carrying strap.",
+      "The packaging is open and the item appears to be out of the box."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "power bank",
+      "brand": "Depak",
+      "model": "DP-B23S",
+      "read_from": [
+        "photo 0 box",
+        "photo 0 device back"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "fast-charging",
+        "verdict": "supported",
+        "evidence": "photo 0 box shows 22.5W PD and device back lists high voltage/amperage outputs"
+      },
+      {
+        "claim": "4 built-in cables",
+        "verdict": "supported",
+        "evidence": "photo 0 shows four cables integrated into the rear housing"
+      },
+      {
+        "claim": "30000 mAh",
+        "verdict": "unverified",
+        "evidence": "printed on box and device but actual capacity is not verifiable remotely"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual capacity is often significantly lower than labeled on generic brand power banks.",
+        "proof": "A video of a full discharge test using a USB load tester.",
+        "if_unproven": "priced as a 10,000mAh unit"
+      },
+      {
+        "risk": "Built-in cables are high-failure points and may be broken internally.",
+        "proof": "Video showing each of the four cables successfully charging a mobile device.",
+        "if_unproven": "priced as if cables are non-functional"
+      },
+      {
+        "risk": "Battery health may be degraded if the unit has undergone many cycles.",
+        "proof": "Video showing the device charging a phone while displaying its own remaining percentage.",
+        "if_unproven": "priced as heavily used"
+      }
+    ],
+    "proof_requests": [
+      "Video showing each of the four built-in cables charging a phone.",
+      "Photo of the power bank's display or status lights while it is charging a device.",
+      "Video showing the power bank itself being charged to confirm the input ports work."
+    ],
+    "decision": "price",
+    "reason": "The brand and model are clearly visible on the device and packaging, allowing for identification. It is priced at the worst-case scenario for a used generic power bank regarding capacity and cable reliability."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 8855,
+    "input_tokens": 2365,
+    "output_tokens": 1830,
+    "cost_usd": 0.006672,
+    "replayed": false,
+    "fixture_key": "af82cc83ec1b1a5141a8fb5f152912ab",
+    "error": null
+  }
+}

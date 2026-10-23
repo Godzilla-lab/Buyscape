@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail packaging for a Romoss power bank.",
+      "The box identifies the model as PEA60 with a 60000mAh capacity.",
+      "The box is being held by a hand in what appears to be a retail environment.",
+      "The actual power bank is not visible outside of the packaging.",
+      "There is a watermark from a Jiji seller: 'CHUKWUDALU THANKGOD'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "power bank",
+      "brand": "Romoss",
+      "model": "PEA60",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Romoss 60000mAh Power Bank (PEA60)",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "high-capacity",
+        "verdict": "supported",
+        "evidence": "photo 0 box shows 60000mAh"
+      },
+      {
+        "claim": "heavy-duty",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a subjective performance claim that cannot be verified remotely."
+      },
+      {
+        "claim": "portable charger",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different item.",
+        "proof": "A photo of the actual device outside the box.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The item may be a counterfeit unit with lower actual capacity.",
+        "proof": "A photo of the Romoss authenticity scratch-off label on the box.",
+        "if_unproven": "as a generic/fake unit"
+      },
+      {
+        "risk": "The device may be non-functional or have damaged ports.",
+        "proof": "A video showing the device charging a phone and its display active.",
+        "if_unproven": "as non-functional"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual power bank outside the box.",
+      "Photo of the authenticity scratch-off label on the packaging.",
+      "Video of the device powered on and charging a phone."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail packaging is shown. The actual device must be seen to confirm its presence, physical condition, and authenticity before a price can be determined."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 21704,
+    "input_tokens": 2374,
+    "output_tokens": 4884,
+    "cost_usd": 0.015839,
+    "replayed": false,
+    "fixture_key": "01ba4267289e38b3b409e040d22b32b5",
+    "error": null
+  }
+}

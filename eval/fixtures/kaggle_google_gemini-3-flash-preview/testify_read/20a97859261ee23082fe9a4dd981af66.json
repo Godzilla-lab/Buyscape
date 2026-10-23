@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the back of a retail box for a power bank.",
+      "The box lists the model number as PSW30-112.",
+      "The capacity is stated as 20000mAh (74Wh).",
+      "The manufacturer is identified as Shenzhen ROMOSS Technology Co., Ltd.",
+      "Technical specifications for input and output (fast charging) are printed on the box.",
+      "The actual power bank is not visible in the photo; only the packaging is shown."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "power bank",
+      "brand": "Romoss",
+      "model": "PSW30-112",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Strong nd durable",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      },
+      {
+        "claim": "fast charge",
+        "verdict": "supported",
+        "evidence": "photo 0 box lists multiple fast charging outputs including 9V and 12V modes."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, lower-value item.",
+        "proof": "A photo of the actual power bank out of the box.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The item may be a counterfeit, which is common for this brand.",
+        "proof": "A photo of the security scratch-off label on the box or the laser-etched details on the device.",
+        "if_unproven": "as a generic/counterfeit unit"
+      },
+      {
+        "risk": "The internal battery may be degraded or the unit may be faulty.",
+        "proof": "A video showing the device charging a phone and being charged itself.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual power bank out of the box.",
+      "Photo of the front of the retail box.",
+      "Photo of the authenticity/security scratch-off sticker."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the back of the packaging is shown. The actual device must be seen to confirm its existence, physical condition, and authenticity before a price can be determined."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 13553,
+    "input_tokens": 2349,
+    "output_tokens": 2381,
+    "cost_usd": 0.008318,
+    "replayed": false,
+    "fixture_key": "20a97859261ee23082fe9a4dd981af66",
+    "error": null
+  }
+}
