@@ -1,0 +1,80 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail box for a Binatone Blender with Grinder.",
+      "The model number BLG-620 is visible at the bottom of the box in photo 0.",
+      "The box features text claiming an 'Unbreakable Jug' and '100% Copper Motor'.",
+      "The actual blender, grinder mill, and accessories are not visible outside the packaging."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "blender with grinder",
+      "brand": "Binatone",
+      "model": "BLG-620",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Binatone blender and grinder",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "ice crusher",
+        "verdict": "unverified",
+        "evidence": "This specific function is not explicitly labeled on the visible portion of the box."
+      },
+      {
+        "claim": "unbreakable jar",
+        "verdict": "supported",
+        "evidence": "photo 0 box text"
+      },
+      {
+        "claim": "100% copper wire motor",
+        "verdict": "supported",
+        "evidence": "photo 0 box text"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, older, or damaged unit.",
+        "proof": "Photo of the actual blender and grinder mill outside of the box.",
+        "if_unproven": "as missing/zero value"
+      },
+      {
+        "risk": "The motor may be non-functional or have internal damage.",
+        "proof": "Video of the blender motor running.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The 'unbreakable' jug or the grinder mill may have physical cracks or leaks.",
+        "proof": "Close-up photos of the jug and grinder mill attachments.",
+        "if_unproven": "as damaged"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual blender and grinder attachments outside of the box.",
+      "Photo of the rating plate on the bottom of the blender base to confirm model and authenticity.",
+      "Video of the motor running."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail packaging is shown. Remote valuation requires seeing the actual item to confirm it exists, matches the box, and is in the stated condition."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 8357,
+    "input_tokens": 2363,
+    "output_tokens": 1831,
+    "cost_usd": 0.006674,
+    "replayed": false,
+    "fixture_key": "2656ce6e539c4eaa268b3f3b4377e954",
+    "error": null
+  }
+}
