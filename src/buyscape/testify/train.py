@@ -52,6 +52,7 @@ from ..providers.base import ImageRef, ModelRequest
 from ..providers.openrouter import system_text
 from .answer import ClaimAnswer, IdentityAnswer, Reading, money_written
 from .comparables import names
+from .convert import redact
 from .run import lie_entry, reading_request
 from .schema import Item
 from .score import identity_correct
@@ -221,7 +222,9 @@ def messages(request: ModelRequest, answer: Reading, root: Path) -> list[dict]:
     return [
         {"role": "system", "content": system_text(request)},
         {"role": "user", "content": parts},
-        {"role": "assistant", "content": answer.model_dump_json(exclude_none=True)},
+        # A teacher can copy a number off a "for sale" sign: contact details
+        # are hidden in the answer as they are in the seller's words.
+        {"role": "assistant", "content": redact(answer.model_dump_json(exclude_none=True))},
     ]
 
 

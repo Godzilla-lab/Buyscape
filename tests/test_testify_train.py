@@ -195,3 +195,13 @@ def test_a_cut_code_that_was_the_whole_name_leaves_the_kind():
     answer, why = train.target(fan, read, {"identity_from_photos_alone": "named"}, keep_code=False)
     assert why == "kept: price at worst case, name cut to the kind"
     assert answer.identity.status == "by_type" and answer.identity.kind == "standing fan"
+
+
+def test_a_phone_number_the_teacher_read_off_a_sign_is_hidden(tmp_path: Path):
+    photo = tmp_path / "00.jpg"
+    Image.new("RGB", (32, 24), "blue").save(photo)
+    read = _read()
+    read["observations"] = ["a standing fan", "a FOR SALE sign reads 08039101032"]
+    out, _ = train.build([(FAN, [photo])], [{"id": "f1", "variant": "clean", "reading": read}], {}, tmp_path)
+    said = out[0]["messages"][2]["content"]
+    assert "08039101032" not in said and "[phone]" in said
