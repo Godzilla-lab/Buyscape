@@ -1,0 +1,70 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black UPS with 'BLUE GATE' printed on the front.",
+      "The unit has a central blue strip with a power button and three LED indicators.",
+      "The image contains watermarks 'CNYTECH COMPUTERS' and 'POSTED ON JIJI'.",
+      "The photo appears to be a stock image or a professional product shot rather than a photo of the actual item in a domestic or office setting."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "UPS",
+      "brand": "Blue Gate",
+      "model": null,
+      "read_from": [
+        "photo 0 front"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "2000VA Blue Gate UPS (2.0KVA)",
+        "verdict": "unverified",
+        "evidence": "The capacity is not visible on the front of the device in photo 0; it is usually found on a rear label."
+      },
+      {
+        "claim": "more capacity for longer backup than the lesser bluegate UPS",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The internal lead-acid batteries may be depleted or dead, which is common in second-hand UPS units.",
+        "proof": "A video showing the UPS powering a known load (like a desktop PC or lamp) while the mains plug is disconnected.",
+        "if_unproven": "as having dead batteries"
+      },
+      {
+        "risk": "The actual capacity might be lower (e.g., 650VA or 1000VA) as different models often share the same chassis.",
+        "proof": "A clear photo of the manufacturer's sticker on the back or bottom of the unit.",
+        "if_unproven": "as the lowest capacity model (650VA)"
+      },
+      {
+        "risk": "The photo is likely a stock image, meaning the physical condition of the actual unit is unknown.",
+        "proof": "A photo of the actual unit in a real-world environment.",
+        "if_unproven": "as having significant cosmetic damage"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the specification label on the back of the unit to confirm the 2000VA rating.",
+      "A photo of the actual unit being sold to verify its physical condition.",
+      "A video of the unit successfully supporting a load on battery power."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The provided image is a stock photo and does not show the actual item or the specification label required to confirm the 2000VA capacity."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 8393,
+    "input_tokens": 2394,
+    "output_tokens": 1616,
+    "cost_usd": 0.006045,
+    "replayed": false,
+    "fixture_key": "56eaadf9b45292ea8f289de6dd755eef",
+    "error": null
+  }
+}

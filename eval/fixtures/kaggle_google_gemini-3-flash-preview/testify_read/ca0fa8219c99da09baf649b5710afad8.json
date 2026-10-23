@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail box for a Canon PIXMA G3411 printer.",
+      "The box text identifies it as a 'Refillable Ink Tank Wireless All-in-One'.",
+      "Yields of 12,000 pages for black and 7,000 pages for color are printed on the box.",
+      "The actual printer is not visible in the photo, only the packaging.",
+      "A watermark 'BLESSED STAN PAUL' and 'POSTED ON JIJI' is present.",
+      "The background contains other boxes, suggesting a retail or warehouse setting."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "Ink tank printer",
+      "brand": "Canon",
+      "model": "PIXMA G3411",
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Canon ink tank printer pixma G3411",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "all in one with wireless",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "black print 12,000 pages",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "and colors...",
+        "verdict": "unverified",
+        "evidence": "The seller's text is incomplete; the box shows 7,000 pages for color."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The printer itself is not shown and may be missing from the box.",
+        "proof": "A photo of the printer outside of the box.",
+        "if_unproven": "priced as an empty box"
+      },
+      {
+        "risk": "The print heads may be clogged, dried out, or electronically faulty.",
+        "proof": "A video of the printer performing a nozzle check or printing a test page.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The integrated ink tanks may be empty or contain low-quality third-party ink.",
+        "proof": "A clear photo of the front of the printer showing the ink levels in the tanks.",
+        "if_unproven": "as empty of ink"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual printer outside of the box.",
+      "Video of the printer producing a nozzle check or test print.",
+      "Photo of the ink tanks showing current levels."
+    ],
+    "decision": "price",
+    "reason": "The model is clearly identified from the retail packaging. It is priced at its worst case (empty box or non-functional unit) until the actual item is verified."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 25898,
+    "input_tokens": 2401,
+    "output_tokens": 6073,
+    "cost_usd": 0.019419,
+    "replayed": false,
+    "fixture_key": "ca0fa8219c99da09baf649b5710afad8",
+    "error": null
+  }
+}
