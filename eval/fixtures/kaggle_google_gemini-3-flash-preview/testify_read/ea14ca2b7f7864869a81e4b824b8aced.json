@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "A large stack of retail boxes for car batteries.",
+      "The brand 'THUNDERMAX' is printed on all visible boxes.",
+      "Model 'CMF 57512 DIN75' with '12V 75Ah' is visible on the left and center stacks in photo 0.",
+      "Model 'CMF 60038 DIN100' with '12V 100Ah' is visible on the right stack in photo 0.",
+      "The boxes appear sealed, but no individual batteries are visible outside their packaging."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car battery",
+      "brand": "THUNDERMAX",
+      "model": "CMF 57512 DIN75 / CMF 60038 DIN100",
+      "read_from": [
+        "photo 0 boxes"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Quality car battery",
+        "verdict": "unverifiable_remote",
+        "evidence": "Quality cannot be determined from photos of boxes; requires load testing and usage history."
+      },
+      {
+        "claim": "made from korea,Malaysia, Vietnam and Chinese etc",
+        "verdict": "unverifiable_remote",
+        "evidence": "The specific country of origin for these units is not legible on the boxes from this distance."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The boxes may be empty or contain used/different batteries.",
+        "proof": "A photo of an open box showing the battery inside.",
+        "if_unproven": "as empty packaging"
+      },
+      {
+        "risk": "The batteries may be old stock (expired shelf life) and unable to hold a charge.",
+        "proof": "A close-up photo of the manufacturing date code stamped on the battery casing.",
+        "if_unproven": "as dead/scrap value"
+      },
+      {
+        "risk": "The batteries may be discharged below the point of recovery.",
+        "proof": "A video showing a multimeter reading of at least 12.6V.",
+        "if_unproven": "as defective"
+      }
+    ],
+    "proof_requests": [
+      "Photo of a battery outside the box showing the top terminals and labels.",
+      "Close-up of the manufacturing date stamp on the battery body.",
+      "Video of a voltage test using a multimeter."
+    ],
+    "decision": "price",
+    "reason": "The brand and specific models (75Ah and 100Ah) are clearly identified from the retail packaging. The item can be priced at its worst-case (scrap/dead) until health and contents are proven."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 10094,
+    "input_tokens": 2393,
+    "output_tokens": 2073,
+    "cost_usd": 0.007416,
+    "replayed": false,
+    "fixture_key": "ea14ca2b7f7864869a81e4b824b8aced",
+    "error": null
+  }
+}

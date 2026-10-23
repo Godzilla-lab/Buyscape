@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "A small black portable fan with three blades and a metal cage.",
+      "A detachable battery pack is attached to the base, labeled '48V LITHIUM-ION'.",
+      "A power adapter with a two-pin plug is visible next to the fan.",
+      "The fan is resting on its retail packaging, which reads 'LITHIUM ION FAN' and 'High air volume'.",
+      "The item appears to be part of a larger stock in a cardboard box."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "rechargeable fan",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "lithium rechargeable battery fan",
+        "verdict": "supported",
+        "evidence": "photo 0 shows a battery pack labeled 'LITHIUM-ION'."
+      },
+      {
+        "claim": "48V",
+        "verdict": "unverified",
+        "evidence": "The label in photo 0 says 48V, but actual voltage cannot be confirmed remotely and is often exaggerated on generic tools."
+      },
+      {
+        "claim": "High air volume",
+        "verdict": "unverifiable_remote",
+        "evidence": "Airflow cannot be measured from a still photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The battery may be dead or have very low capacity.",
+        "proof": "A video showing the fan running continuously for at least 30 minutes on a single charge.",
+        "if_unproven": "as having a dead battery"
+      },
+      {
+        "risk": "The motor may be seized or non-functional.",
+        "proof": "A video showing the fan blades spinning at all speed settings.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The charger may not function or may be the wrong voltage for the battery.",
+        "proof": "A video showing the charging indicator light changing when plugged into the battery.",
+        "if_unproven": "as missing a charger"
+      }
+    ],
+    "proof_requests": [
+      "A video of the fan powered on and spinning through all its speed settings.",
+      "A video showing the fan being charged with the included adapter.",
+      "A photo of the technical specifications sticker on the back of the fan motor or the bottom of the battery."
+    ],
+    "decision": "price",
+    "reason": "The item is a generic rechargeable fan. While the brand is not specified, it can be priced as a generic portable cooling device at its worst-case functional state."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 9573,
+    "input_tokens": 2399,
+    "output_tokens": 1961,
+    "cost_usd": 0.007083,
+    "replayed": false,
+    "fixture_key": "0042022935ce2aa73b61cc81b0910129",
+    "error": null
+  }
+}

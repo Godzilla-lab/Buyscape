@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Multiple stacks of car batteries in retail cardboard packaging.",
+      "Brands 'RUNALL' (red boxes), 'SOLITE' (purple boxes), and 'ROCKET' (blue boxes) are visible.",
+      "The batteries are stacked on a paved outdoor surface.",
+      "Specific technical specifications like Ampere-hours (Ah) are not legible on the boxes.",
+      "Some boxes are wrapped in protective plastic film."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car battery",
+      "brand": "Runall, Solite, Rocket",
+      "model": null,
+      "read_from": [
+        "photo 0 boxes"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Brand new",
+        "verdict": "unverified",
+        "evidence": "The boxes appear intact and some are shrink-wrapped, but the actual batteries are not visible to confirm condition."
+      },
+      {
+        "claim": "Original",
+        "verdict": "unverifiable_remote",
+        "evidence": "Authenticity of automotive parts cannot be confirmed through photos alone."
+      },
+      {
+        "claim": "different ahm",
+        "verdict": "unverified",
+        "evidence": "The Ah ratings on the boxes are too small to read in the provided photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery capacity (Ah) is unknown",
+        "proof": "A close-up photo of the label on the box or the battery itself showing the Ah rating.",
+        "if_unproven": "priced as the lowest standard capacity (e.g., 45Ah)"
+      },
+      {
+        "risk": "Battery may be old stock/expired shelf life",
+        "proof": "A photo of the manufacturing date code stamped into the plastic casing of the battery.",
+        "if_unproven": "priced as old stock with reduced lifespan"
+      },
+      {
+        "risk": "Battery may be discharged or defective",
+        "proof": "A video showing a multimeter reading of the battery voltage (should be 12.6V or higher).",
+        "if_unproven": "priced as a core/scrap battery"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the label on the specific battery of interest showing the Ah rating and model.",
+      "Photo of the manufacturing date code stamped on the battery casing.",
+      "Video of a multimeter test showing the current voltage of the battery."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The capacity (Ah) and specific model numbers are not legible in the photo. Since car battery prices vary significantly based on these specs, a price cannot be determined without them."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 13910,
+    "input_tokens": 2377,
+    "output_tokens": 2666,
+    "cost_usd": 0.009187,
+    "replayed": false,
+    "fixture_key": "47f9fc5579a9eece57d92684b9611fe4",
+    "error": null
+  }
+}
