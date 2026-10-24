@@ -94,14 +94,26 @@ def encode(example: dict, processor, root: Path, max_tokens: int, max_len: int) 
     return dict(batch), len(ids) - n_prompt
 
 
+def work_dtype():
+    """bfloat16 only on a card built for it. torch.cuda.is_bf16_supported() also
+    says yes on a T4, which only emulates it: on 24 Oct that ran ten times slow."""
+    import torch
+
+    if torch.cuda.is_available() and torch.cuda.get_device_capability()[0] >= 8:
+        return torch.bfloat16
+    return torch.float16
+
+
 def merge(base: str, adapter: Path, out: Path) -> None:
     """The base with the adapter folded in, saved in 16 bits with its processor."""
     import torch
     from peft import PeftModel
     from transformers import AutoModelForImageTextToText, AutoProcessor
 
-    half = torch.bfloat16 if torch.cuda.is_available() and torch.cuda.is_bf16_supported() else torch.float16
-    model = AutoModelForImageTextToText.from_pretrained(base, dtype=half, device_map="cpu")
+    # On the cards, not in memory: the 8B at 16 bits plus the merge did not fit
+    # a Kaggle machine's 30 GB on 24 Oct.
+    where = "auto" if torch.cuda.is_available() else "cpu"
+    model = AutoModelForImageTextToText.from_pretrained(base, dtype=work_dtype(), device_map=where)
     model = PeftModel.from_pretrained(model, adapter).merge_and_unload()
     model.save_pretrained(out)
     AutoProcessor.from_pretrained(base).save_pretrained(out)
@@ -143,11 +155,12 @@ def main() -> None:
     if args.limit:
         examples = examples[: args.limit]
     train = [e for e in examples if not held_out(e, args.held_out)]
-    check = [e for e in examples if held_out(e, args.held_out)]
+    # Forty chats are enough to see the loss move, and a long check eats the time limit.
+    check = [e for e in examples if held_out(e, args.held_out)][:40]
     print(f"{len(train)} chats to train on, {len(check)} held out", flush=True)
 
     # A T4 has no bfloat16, so the work is done in float16 with a loss scaler.
-    half = torch.bfloat16 if torch.cuda.is_bf16_supported() else torch.float16
+    half = work_dtype()
     if args.bits == 4:
         from transformers import BitsAndBytesConfig
 
