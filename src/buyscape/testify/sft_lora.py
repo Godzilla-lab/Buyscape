@@ -175,13 +175,15 @@ def main() -> None:
         param.data = param.data.float()
     model.print_trainable_parameters()
     optimiser = torch.optim.AdamW(trainable, lr=args.lr, weight_decay=0.0)
-    total_steps = max(1, int(len(train) * args.epochs / args.accumulate))
-    warmup = max(1, total_steps // 20)
+    # Planned from the epochs, then cut to what the time limit allows once
+    # the first steps show the speed, so the learning rate still ends low.
+    plan = {"steps": max(1, int(len(train) * args.epochs / args.accumulate))}
+    warmup = max(1, plan["steps"] // 20)
 
     def rate(step: int) -> float:
         if step < warmup:
             return (step + 1) / warmup
-        return 0.5 * (1 + math.cos(math.pi * (step - warmup) / max(1, total_steps - warmup)))
+        return 0.5 * (1 + math.cos(math.pi * (step - warmup) / max(1, plan["steps"] - warmup)))
 
     schedule = torch.optim.lr_scheduler.LambdaLR(optimiser, rate)
     scaler = torch.amp.GradScaler("cuda", enabled=half == torch.float16)
@@ -219,12 +221,13 @@ def main() -> None:
         with log.open("a") as fh:
             fh.write(json.dumps(row) + "\n")
 
-    note(event="start", check_loss=round(check_loss(), 4) if check else None, steps=total_steps)
+    note(event="start", check_loss=round(check_loss(), 4) if check else None, steps=plan["steps"])
     model.train()
+    trained_from = time.time()
     rng = random.Random(0)
     step, seen, skipped, running = 0, 0, 0, []
     stop = False
-    while step < total_steps and not stop:
+    while step < plan["steps"] and not stop:
         order = train[:]
         rng.shuffle(order)
         for example in order:
@@ -248,12 +251,20 @@ def main() -> None:
             optimiser.zero_grad(set_to_none=True)
             schedule.step()
             step += 1
-            if step % 10 == 0 or step == total_steps:
+            if step == 3:
+                # Leave a quarter of an hour for the last check and the save.
+                per_chat = (time.time() - trained_from) / seen
+                left = args.hours * 3600 - (time.time() - started) - 900
+                fits = step + int(left / per_chat / args.accumulate)
+                if fits < plan["steps"]:
+                    plan["steps"] = max(warmup + 1, fits)
+                note(event="schedule fitted", seconds_per_chat=round(per_chat, 1), steps=plan["steps"])
+            if step % 10 == 0 or step == plan["steps"]:
                 note(event="step", step=step, loss=round(sum(running) / len(running), 4), lr=schedule.get_last_lr()[0])
                 running = []
             if step % 50 == 0:
                 model.save_pretrained(args.out)
-            if step >= total_steps:
+            if step >= plan["steps"]:
                 break
     model.save_pretrained(args.out)
     processor.save_pretrained(args.out)
