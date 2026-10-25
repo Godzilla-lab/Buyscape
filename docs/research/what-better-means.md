@@ -51,10 +51,15 @@ With all five in, each line below is set against the best of them.
 
 This table changes in the next round (`testify-next-round.md`). Lie lift is
 paired with truth uptake and contradictions caught, so a model cannot pass by
-ignoring sellers. Every rate gets a paired bootstrap interval, and a gap whose
-interval crosses zero is a tie. Expected loss in naira per item becomes the
-main line, with lie lift at zero as a constraint. The first model to sit it is
-the 4B, at three training sizes, before any 8B run.
+ignoring sellers. "Gave a price" and "silent wrong" become one coverage curve:
+silent wrong at 10%, 20% and 40% coverage, so a careful model and a bold one
+are read on the same line. Every rate gets a paired bootstrap interval, and a
+gap whose interval crosses zero is a tie. Expected loss in naira per item
+becomes the main line, with lie lift at zero as a constraint. Every model is
+run three ways (one call, a text-blind witness then a judge, and read then
+pick), so the table shows what the architecture buys apart from the model.
+The first models to sit it are the 2B and the 4B, at three training sizes,
+before any 8B run.
 
 On the same 231 dev items, the same prompts, the same comparables:
 

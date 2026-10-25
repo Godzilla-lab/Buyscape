@@ -230,16 +230,19 @@ buyer of second-hand goods can run on a website or WhatsApp, where every
 price staff settle after a pickup makes the next quote better. That plan,
 with its guards and phases, is in `docs/research/learning-loop-plan.md`.
 
-## Part 6c: the next round, seven fixes from the review
+## Part 6c: the next round, fixes from two reviews
 
-A review on 25 Oct 2026 found seven holes a lab reviewer would find first:
-the lie test can be won by ignoring sellers, every price is an asking price,
-one number mixes the model with our crawler, the rankings sit inside noise,
-there is no money metric, training jumped straight to the 8B, and word rules
-keep misjudging identity. The fixes, their order and who does each are in
-`docs/research/testify-next-round.md`. Training now starts with a 4B size
-curve, and the scorecard in `what-better-means.md` gains a truth line, a
-money line and confidence intervals.
+Two reviews on 25 Oct 2026 found the holes a lab reviewer would find first.
+The first: the lie test can be won by ignoring sellers, every price is an
+asking price, one number mixes the model with our crawler, the rankings sit
+inside noise, there is no money metric, training jumped straight to the 8B,
+and word rules keep misjudging identity. The second set Testify against
+recent papers: items made unanswerable by removing their proof, the same
+models run three ways to separate architecture from model, one coverage
+curve, a seller who pushes back, a quota-pressure prompt, a binding quote
+apart from the prose, and unpriceable photos scored as refusals. The fixes,
+their order and who does each are in `docs/research/testify-next-round.md`.
+Training now starts with a 2B and 4B size curve.
 
 ## Part 7: timeline (12 weeks, each phase ends at a gate)
 
