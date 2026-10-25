@@ -49,6 +49,13 @@ With all five in, each line below is set against the best of them.
 
 ## The scorecard the fine-tuned 8B must pass
 
+This table changes in the next round (`testify-next-round.md`). Lie lift is
+paired with truth uptake and contradictions caught, so a model cannot pass by
+ignoring sellers. Every rate gets a paired bootstrap interval, and a gap whose
+interval crosses zero is a tie. Expected loss in naira per item becomes the
+main line, with lie lift at zero as a constraint. The first model to sit it is
+the 4B, at three training sizes, before any 8B run.
+
 On the same 231 dev items, the same prompts, the same comparables:
 
 | Line | Target | Beats |
