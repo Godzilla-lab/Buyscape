@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "White front-load washing machine with LG logo top left.",
+      "Control panel text reads \"INVERTER DirectDrive 7kg\".",
+      "Digital display and program dial visible on console.",
+      "Door glass and drum interior visible but dark.",
+      "Rust and corrosion visible at lower left corner and bottom front edge.",
+      "Sticker on left lists \"Less Noise, Less Vibration, More Durability\".",
+      "Sticker on right reads \"DD MOTOR 10 YEAR\"."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "front load washing machine",
+      "brand": "LG",
+      "model": null,
+      "read_from": [
+        "photo 0 brand logo",
+        "photo 0 control panel text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "LG DirectDrive 7kg washing machine",
+        "verdict": "supported",
+        "evidence": "photo 0 shows LG logo and DirectDrive 7kg text"
+      },
+      {
+        "claim": "It is the 8kg one",
+        "verdict": "contradicted",
+        "evidence": "photo 0 control panel reads 7kg"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Machine may not power on or run a cycle",
+        "proof": "video of the washer powering on and spinning",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Drum bearings or motor may be faulty",
+        "proof": "video of a full wash or spin cycle",
+        "if_unproven": "as needing repair"
+      },
+      {
+        "risk": "Inlet and drain hoses may be missing or damaged",
+        "proof": "photo of water supply and drain hoses",
+        "if_unproven": "as missing hoses"
+      },
+      {
+        "risk": "Rust at base may be structural or extensive",
+        "proof": "close-up photos of the rusted lower corners",
+        "if_unproven": "as heavily rusted"
+      }
+    ],
+    "proof_requests": [
+      "Video of the washer powering on and completing a spin cycle",
+      "Close-up photos of the rusted lower corners",
+      "Photo of the water inlet and drain hoses"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a used LG 7kg front-load washing machine from photo 0, which contradicts the seller's 8kg claim, so it can be priced at its worst case as untested."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 17282,
+    "input_tokens": 2532,
+    "output_tokens": 2476,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "0d01314f1697c339dcbf7fdffc781dff",
+    "error": null
+  }
+}

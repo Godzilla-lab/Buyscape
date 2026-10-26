@@ -1,0 +1,89 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows a Nikon D750 retail box with a USPS Ground Advantage shipping label.",
+      "Photo 0 also shows a Nikkor 50mm lens box and a Zhiyun gimbal box in the background.",
+      "Photo 1 shows the D750 box open, containing two Nikon D750 User's Manuals (English and French).",
+      "Photo 2 shows the interior of the box with two objects wrapped in bubble wrap.",
+      "The camera body itself is not visible in any photo.",
+      "The seller's text identifies the item as both a D750 and a D850."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "Digital SLR camera",
+      "brand": "Nikon",
+      "model": "D750",
+      "read_from": [
+        "photo 0 box",
+        "photo 1 manuals"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Nikon D750 Body",
+        "verdict": "supported",
+        "evidence": "The box in photo 0 and manuals in photo 1 are for a D750."
+      },
+      {
+        "claim": "The model is D850",
+        "verdict": "contradicted",
+        "evidence": "The packaging and manuals shown in photos 0 and 1 are for a D750, not a D850."
+      },
+      {
+        "claim": "American used",
+        "verdict": "supported",
+        "evidence": "Photos 0 and 1 show USPS shipping labels on the boxes."
+      },
+      {
+        "claim": "clean and pure as new",
+        "verdict": "unverified",
+        "evidence": "The item is wrapped in bubble wrap in photo 2 and cannot be inspected."
+      },
+      {
+        "claim": "working perfectly",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The camera body is not visible and its presence or condition is unconfirmed.",
+        "proof": "A photo of the camera body out of the bubble wrap.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The seller claims it is a D850 while the box says D750.",
+        "proof": "A photo of the model name engraved on the camera body.",
+        "if_unproven": "as the lower-value D750 model"
+      },
+      {
+        "risk": "High shutter count or sensor damage.",
+        "proof": "A recent RAW file or a screenshot of the shutter count.",
+        "if_unproven": "as non-functional or for parts"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the camera body out of the bubble wrap showing the front, back, and bottom plate.",
+      "Photo of the camera body showing the model name clearly.",
+      "Screenshot of the current shutter count.",
+      "Photo of the camera sensor with the body cap removed."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The actual camera body is not shown in the photos, only the packaging. Furthermore, the seller's description provides conflicting information regarding the model (D750 vs D850)."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 24922,
+    "input_tokens": 4511,
+    "output_tokens": 5690,
+    "cost_usd": 0.019325,
+    "replayed": false,
+    "fixture_key": "3329db2fc19d068689878ac2188a2b99",
+    "error": null
+  }
+}

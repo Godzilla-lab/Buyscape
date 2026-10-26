@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "White top-loading washing machine shown in photo 0.",
+      "Front label reads NEXUS with a red X.",
+      "Clothes are piled on top and hanging on the right side.",
+      "Power cord is visible at the lower right.",
+      "No model number or rating plate is visible in the photo."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "top loading washing machine",
+      "brand": "NEXUS",
+      "model": null,
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "The brand is Midea.",
+        "verdict": "contradicted",
+        "evidence": "photo 0 front label reads NEXUS"
+      },
+      {
+        "claim": "Washing machine available at Abulegba",
+        "verdict": "unverifiable_remote",
+        "evidence": "location cannot be confirmed from the photo"
+      },
+      {
+        "claim": "Item is a washing machine",
+        "verdict": "supported",
+        "evidence": "photo 0 shows a top-loading washing machine"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Machine may not power on or complete wash/spin cycles.",
+        "proof": "video of the machine filling, agitating, and spinning",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Inner drum or tub may be damaged, rusted, or stained.",
+        "proof": "photo of the open lid showing the interior drum",
+        "if_unproven": "as damaged interior"
+      },
+      {
+        "risk": "Inlet hose, drain hose, or power plug may be missing or damaged.",
+        "proof": "photo of the rear connections and power plug",
+        "if_unproven": "missing accessories"
+      },
+      {
+        "risk": "Seller's Midea claim may mean the Nexus sticker is not the true brand.",
+        "proof": "clear photo of any manufacturer plate or other branding",
+        "if_unproven": "as Nexus or unknown brand"
+      }
+    ],
+    "proof_requests": [
+      "Video of the machine running a full wash and spin cycle",
+      "Photo of the inside drum with the lid open",
+      "Photo of the back panel showing hoses and power plug",
+      "Photo of any model or serial number plate"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a top-loading washing machine with a visible Nexus label, so it can be priced at its worst case as non-working pending proof of operation."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 26976,
+    "input_tokens": 1718,
+    "output_tokens": 2899,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "dccc80b7ace00841633a521a54beab80",
+    "error": null
+  }
+}
