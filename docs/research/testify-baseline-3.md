@@ -247,7 +247,33 @@ naira against an asking price of 270,000. Nemotron made the same kind of
 mistake on another PS4 Pro. A version told apart by the shape of the case is
 where both large models fail.
 
+## Within the noise: paired intervals (26 Oct)
+
+`uv run buyscape testify-compare` resamples the 231 items 2,000 times, the
+same items for every model, and puts a 95% interval on each rate and on each
+gap between two models. A gap whose interval crosses zero is a tie.
+
+| | Nemotron 3.5 Super VL | Gemini 3 Flash | Claude Sonnet 5 |
+|---|---|---|---|
+| Gave a price | 40% (34 to 47) | 19% (14 to 24) | 19% (14 to 25) |
+| Silent wrong | 1.3% (0 to 3.0) | 0.9% (0 to 2.2) | 0.4% (0 to 1.3) |
+| Identity accuracy | 85% (81 to 90) | 82% (76 to 87) | 89% (84 to 93) |
+| Silent wrong among its surest 10% | 0 | 0 | 4.3% (0 to 13) |
+| Area under the curve up to 19% coverage | 0 (0 to 0.7) | 0.4% (0 to 1.5) | 1.6% (0 to 5.6) |
+
+Only two gaps are real. Nemotron prices about twice as many adverts as either
+of the others, and Claude names items better than Gemini (7 points, interval
+2 to 12). **Every silent-wrong ranking is a tie**, on the raw rate and on the
+coverage curve. Read at the same coverage, the bolder Nemotron is no less safe:
+its 19% surest prices hold no silent wrong answer, while Claude's one wrong
+answer sits among its surest.
+
+The confidence that orders the curve is structural, never the model's own
+word: whether the honest repeat gave the same decision and name, then how many
+comparables there were, then how tight they sat.
+
 ## Still to come
 
-The fine-tuned Qwen3-VL 8B on the same items, once Kaggle's weekly GPU hours
-are back.
+The fine-tuned model on the same items, once Kaggle's weekly GPU hours are
+back. The size curve starts with the 2B and the 4B
+(`testify-next-round.md`).

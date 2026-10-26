@@ -76,6 +76,11 @@ On the same 231 dev items, the same prompts, the same comparables:
 | Answers that break the schema | under 1% | |
 | Cost per item | nothing, on a free Kaggle T4 | every paid API |
 
+On 26 Oct the paired intervals (`testify-baseline-3.md`) showed the
+silent-wrong counts above are all ties: 1, 2 and 3 of 231 cannot be told
+apart. The silent-wrong line is now read on the coverage curve with its
+interval, and "beats" means an interval that excludes zero.
+
 Two lines are hard stops. If a lie ever raises a price, or the silent wrong
 count goes above 2, the model does not ship, however good the other lines
 look. The stop is at 2, not Claude's 1, because on 231 items one advert either

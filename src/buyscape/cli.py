@@ -688,6 +688,48 @@ def testify_truths(
         console.print(f"  {n:4d}  {split:5s} {kind}")
 
 
+@app.command("testify-compare")
+def testify_compare(
+    split: str = typer.Option("dev"),
+    resamples: int = typer.Option(2000, help="Paired bootstrap draws."),
+    out: Path = typer.Option(ROOT / "eval" / "testify" / "runs" / "compare.json"),
+) -> None:
+    """Every scored model side by side, with paired intervals and the coverage curve. Free: no calls."""
+    import json
+
+    from .testify.schema import Item
+    from .testify.stats import COVERAGES, paired_bootstrap, per_item
+
+    items = {}
+    for line in (ROOT / "eval" / "testify" / "items.jsonl").open():
+        item = Item.model_validate_json(line)
+        if item.split == split and not item.exclude and item.ai_label:
+            items[item.id] = item
+    models = {}
+    for run in sorted((ROOT / "eval" / "testify" / "runs").glob(f"*/{split}.jsonl")):
+        rows = [json.loads(line) for line in run.read_text().splitlines()]
+        repeat = run.with_name(f"{split}.repeat1.jsonl")
+        again = [json.loads(line) for line in repeat.read_text().splitlines()] if repeat.exists() else None
+        models[run.parent.name] = per_item(rows, items, again)
+    result = paired_bootstrap(models, n=resamples)
+    result["split"] = split
+    out.write_text(json.dumps(result, indent=1) + "\n")
+    console.print(f"{result['items']} items every model answered, {resamples} paired resamples")
+    shown = ["priced_share", "silent_wrong_rate", "identity_accuracy",
+             *(f"silent_at_{round(c * 100)}pct" for c in COVERAGES), "silent_area"]
+    for name, stats in result["models"].items():
+        console.print(f"  {name}")
+        for stat in shown:
+            point, ci = stats[stat]["point"], stats[stat]["interval"]
+            console.print(f"    {stat:22s} {point if point is not None else '-':>8}  {ci or ''}")
+    console.print("Differences whose interval excludes zero:")
+    for pair, stats in result["pairs"].items():
+        for stat, value in stats.items():
+            if not value["tie"]:
+                console.print(f"  {pair}: {stat} {value['difference']} {value['interval']}")
+    console.print(f"Written to {out}")
+
+
 @app.command("testify-label")
 def testify_label(
     model: str = typer.Option("gemini-3.8-flash", help="Labelling model. A name with no slash is Google AI Studio."),
