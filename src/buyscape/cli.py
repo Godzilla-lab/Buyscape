@@ -642,6 +642,8 @@ def testify_construct(
         before = old.get((row["id"], row["route"]))
         if before and before.get("photos") == row.get("photos"):
             row["checked"] = before.get("checked")
+            if before.get("checked_by"):
+                row["checked_by"] = before["checked_by"]
         rows.append(row)
     out.write_text("".join(json.dumps(r) + "\n" for r in rows))
     console.print(f"{len(rows)} constructed items written to {out}")

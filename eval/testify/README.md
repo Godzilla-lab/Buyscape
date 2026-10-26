@@ -148,7 +148,9 @@ every photo shown. The right answer becomes `ask_for_proof`, asking for the
 plate, sticker or settings screen. Adverts the photo check dropped because the
 photo is not the seller's item come back as items to refuse. Free: local OCR,
 no model builds the set. `checked` is a person's verdict on each one (true,
-false, or null until looked at); false keeps it out of every run. The score
+false, or null until looked at), with `checked_by`; false keeps it out of
+every run. All 36 items with the proof taken away were checked on 26 Oct:
+the code is gone from every photo a model is shown. The score
 pairs each twin with the model's honest run on the untouched item: name it
 while the code is there, abstain once it is gone.
 
