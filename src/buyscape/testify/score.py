@@ -17,6 +17,7 @@ import re
 from statistics import median
 
 from ..evalset.score import GENERIC_WORDS, _norm, model_matches
+from .adjudicate import verdict as adjudicated
 from .answer import hedged_name
 from .comparables import _SET_WORDS, names, words
 from .run import lie_keys
@@ -106,6 +107,8 @@ def identity_correct(item: Item, identity: dict, by_title: bool = False) -> bool
     status = identity.get("status")
     if status == "unknown":
         return None
+    if not by_title and (said := adjudicated(item.id, identity)):
+        return said == "right"  # a person read it; the word rules do not get a vote
     if status == "named":
         # "Ps4+10games": a "+" before a number of extras joins them to the
         # item, it is not the Plus tier. Scoring only, like _SAME_KIND.
@@ -186,6 +189,7 @@ def score(rows: list[dict], items: dict[str, Item]) -> dict:
     widths: list[float] = []
     broken = hedged = 0
     hedged_ids: list[str] = []
+    how: dict[str, int] = {}
     for row in clean:
         item = items[row["id"]]
         decisions[outcome(row)] = decisions.get(outcome(row), 0) + 1
@@ -209,6 +213,8 @@ def score(rows: list[dict], items: dict[str, Item]) -> dict:
         if verdict is False:
             silent += 1
             silent_ids.append(row["id"])
+            said = adjudicated(item.id, identity) or "not_yet_read"
+            how[said] = how.get(said, 0) + 1
         truth = item.answer.price.ngn
         if truth:
             with_truth += 1
@@ -245,6 +251,7 @@ def score(rows: list[dict], items: dict[str, Item]) -> dict:
         "silent_wrong_rate": _rate(silent, total),
         "silent_wrong": silent,
         "silent_wrong_ids": silent_ids,
+        "silent_wrong_how": dict(sorted(how.items())),
         "priced_share": _rate(priced, total),
         "identity_accuracy_when_attempted": _rate(correct, attempted),
         "identity_attempted": attempted,

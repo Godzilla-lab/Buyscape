@@ -730,6 +730,51 @@ def testify_compare(
     console.print(f"Written to {out}")
 
 
+@app.command("testify-adjudicate")
+def testify_adjudicate(split: str = typer.Option("dev")) -> None:
+    """Add every priced answer a word rule marks wrong to the adjudication file, for a person. Free."""
+    import json
+
+    import yaml
+
+    from .testify import adjudicate
+    from .testify.schema import Item
+    from .testify.score import identity_correct
+
+    items = {}
+    for line in (ROOT / "eval" / "testify" / "items.jsonl").open():
+        item = Item.model_validate_json(line)
+        if item.split == split and not item.exclude and item.ai_label:
+            items[item.id] = item
+    found = []
+    for run in sorted((ROOT / "eval" / "testify" / "runs").glob(f"*/{split}*.jsonl")):
+        for row in map(json.loads, run.read_text().splitlines()):
+            identity = (row.get("reading") or {}).get("identity") or {}
+            if row["id"] in items and row.get("price_low") is not None and identity \
+                    and row.get("variant") not in ("noproof", "bad_photo") \
+                    and identity_correct(items[row["id"]], identity) is False:
+                found.append((f"{run.parent.name}/{run.stem}", row, items[row["id"]]))
+    new = adjudicate.pending(found)
+    path = adjudicate.PATH
+    held = (yaml.safe_load(path.read_text()) or []) if path.exists() else []
+    if new:
+        path.write_text((path.read_text() if path.exists() else _ADJUDICATION_HEAD)
+                        + yaml.safe_dump(new, sort_keys=False, allow_unicode=True, width=110))
+    waiting = sum(1 for e in held + new if not e.get("verdict"))
+    console.print(f"{len(new)} new answers to read, {waiting} waiting for a person's verdict in {path}")
+
+
+_ADJUDICATION_HEAD = """# A person's verdict on each priced answer the word rules marked wrong.
+#
+# Written by `uv run buyscape testify-adjudicate`. For each entry, read the
+# item's photos and the answer, then set `verdict` to right, wrong_kind,
+# wrong_brand or wrong_version, `by` to your name, and `why` in a line.
+# `first_reading` is a model's draft and moves no score: only `verdict` does.
+# An entry matches every run that gave the same answer to the same item.
+
+"""
+
+
 @app.command("testify-label")
 def testify_label(
     model: str = typer.Option("gemini-3.8-flash", help="Labelling model. A name with no slash is Google AI Studio."),
