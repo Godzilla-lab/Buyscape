@@ -1,0 +1,101 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0: large flat-screen TV mounted on a marble-tiled wall; screen shows \"Start new experience with LG webOS\" and the webOS logo.",
+      "Photo 0: smart TV interface shows app tiles including Netflix, YouTube, Disney+, and LG Channels.",
+      "Photo 1: same TV displays a tropical island wallpaper.",
+      "Photo 1: soundbar and black box sit on the cabinet below the TV.",
+      "No physical brand badge or model label is visible on the TV in either photo.",
+      "No object of known size is present to verify an 86-inch diagonal."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "large flat-screen TV",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Brand: LG",
+        "verdict": "supported",
+        "evidence": "photo 0 screen shows LG webOS interface"
+      },
+      {
+        "claim": "Screen Size: 86 Inches",
+        "verdict": "unverified",
+        "evidence": "no size reference in photos"
+      },
+      {
+        "claim": "Model: LG 86UA85006LA",
+        "verdict": "unverified",
+        "evidence": "model label not visible in photos"
+      },
+      {
+        "claim": "Display: UHD 4K",
+        "verdict": "unverified",
+        "evidence": "resolution cannot be confirmed from photos"
+      },
+      {
+        "claim": "AI Smart TV with advanced...",
+        "verdict": "supported",
+        "evidence": "photo 0 shows smart TV interface"
+      },
+      {
+        "claim": "The brand is Samsung.",
+        "verdict": "contradicted",
+        "evidence": "photo 0 shows LG webOS interface"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Exact model unknown; could be a lower-spec variant",
+        "proof": "photo of rear model/serial label",
+        "if_unproven": "as base-model large TV"
+      },
+      {
+        "risk": "Screen size may be smaller than 86 inches",
+        "proof": "photo with tape measure across diagonal or known reference object",
+        "if_unproven": "as smaller-size TV"
+      },
+      {
+        "risk": "TV may not power on or may have display faults",
+        "proof": "video of TV powering on and showing menu/input",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Screen may have cracks, lines, or burn-in not visible in listing photos",
+        "proof": "close-up photos of screen showing full white, gray, and black fields",
+        "if_unproven": "as screen damaged"
+      },
+      {
+        "risk": "Remote, stand, or cables may be missing",
+        "proof": "photo of all included accessories",
+        "if_unproven": "as unit only"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the model and serial number label on the back or side of the TV",
+      "Photo showing the TV's diagonal screen measurement or a reference object for scale",
+      "Video of the TV powering on, displaying an input, and responding to a remote",
+      "Close-up photos of the screen in white, gray, and black to check for cracks or dead pixels"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model number and screen size cannot be read from the photos, and these set the price; even a worst-case price is impossible without confirming the exact TV."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 33921,
+    "input_tokens": 2406,
+    "output_tokens": 5408,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "1f8d9dd78a172a0b280635a8fb5649c4",
+    "error": null
+  }
+}

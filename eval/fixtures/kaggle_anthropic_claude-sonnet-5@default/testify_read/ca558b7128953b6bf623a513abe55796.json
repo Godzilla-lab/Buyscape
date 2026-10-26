@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 is a single promotional/catalog-style image showing a grid of book covers, not a photo of the actual physical bundle in the seller's possession.",
+      "The grid appears to show 12 distinct book covers arranged in rows, not 13 as claimed.",
+      "Visible cover text reads 'Diary of a Wimpy Kid' repeated across covers, with some subtitles partially legible such as 'Old School', 'Hard Luck', 'Dog Days', 'The Long Haul', 'Cabin Fever', 'The Third Wheel', 'The Ugly Truth'.",
+      "No spines, no back covers, no barcodes, no indication of actual condition (wear, creases, torn pages, water damage) are visible.",
+      "Image resolution and layout strongly resemble a generic stock/promotional product shot rather than a photo taken by the seller of the item on hand."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "children's book bundle (paperback series set)",
+      "brand": "Diary of a Wimpy Kid",
+      "model": null,
+      "read_from": [
+        "photo 0 cover titles"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Bundle of 13 books",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows only 12 distinct book covers in the grid, not 13."
+      },
+      {
+        "claim": "Implied that this is the actual item for sale",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo 0 appears to be a stock/promotional composite image rather than a photo of the seller's actual physical books."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Image may be a stock photo, meaning actual books' appearance, edition, and condition are unknown.",
+        "proof": "A photo of the actual physical stack/spines in the seller's location, ideally with a handwritten note or today's date visible.",
+        "if_unproven": "priced as condition unknown / worst case heavily worn"
+      },
+      {
+        "risk": "Claimed count of 13 does not match the 12 covers visible, so true quantity is unverified.",
+        "proof": "A clear photo of all books laid out and counted, spines visible.",
+        "if_unproven": "priced for the lower, visible count of 12 until proven otherwise"
+      },
+      {
+        "risk": "Condition (torn pages, missing pages, water damage, writing/highlighting inside) cannot be assessed from a cover-only composite image.",
+        "proof": "Close-up photos of spines, covers corners, and a few interior page spreads.",
+        "if_unproven": "priced as heavily used/worn condition"
+      },
+      {
+        "risk": "Possible counterfeit or low-quality reprint editions, common in secondhand book bundles.",
+        "proof": "Clear photo of the publisher's imprint page and barcode/ISBN on the back cover.",
+        "if_unproven": "priced as unverified authenticity, treated as non-original/reprint risk"
+      }
+    ],
+    "proof_requests": [
+      "A real photo of the physical book bundle as it currently sits with the seller, all spines visible for counting.",
+      "Close-up photos of covers and spines showing wear, creases, or damage.",
+      "Photo of back covers/barcodes to confirm edition and authenticity.",
+      "A few interior page photos to check for writing, tears, or missing pages."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The only photo is a generic cover-grid image that does not confirm the claimed count of 13, nor show the actual physical condition of the books being sold, so even a worst-case price cannot be anchored without a real photo of the item and a verified count."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 31849,
+    "input_tokens": 1946,
+    "output_tokens": 2658,
+    "cost_usd": 0.030472,
+    "replayed": false,
+    "fixture_key": "ca558b7128953b6bf623a513abe55796",
+    "error": null
+  }
+}

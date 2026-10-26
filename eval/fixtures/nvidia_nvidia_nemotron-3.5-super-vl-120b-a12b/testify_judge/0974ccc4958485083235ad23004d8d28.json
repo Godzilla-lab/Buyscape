@@ -1,0 +1,61 @@
+{
+  "task": "testify_judge",
+  "prompt_version": "testify_judge.v1",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "claims": [
+      {
+        "claim": "UPS available",
+        "verdict": "supported",
+        "evidence": "Photo 0 and Photo 1 show a BLUE GATE tower UPS present."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Power capacity in VA or kVA is not shown.",
+        "proof": "Photo of the rating or specification label on the rear or base showing the VA/kVA capacity.",
+        "if_unproven": "Priced as an unknown-capacity unit at the lowest common tier."
+      },
+      {
+        "risk": "Battery health and age are unknown; the battery may not hold a charge.",
+        "proof": "Video clip of the UPS running a connected load on battery, or photo of the battery manufacture or replacement date.",
+        "if_unproven": "Priced as having a dead or unusable battery."
+      },
+      {
+        "risk": "Whether the unit powers on and works is not shown.",
+        "proof": "Video clip of the power button being pressed, indicator lights illuminating, and equipment staying on during a mains cut.",
+        "if_unproven": "Priced as not working."
+      },
+      {
+        "risk": "Original packaging and manuals are not shown.",
+        "proof": "Photo of the original box and manuals.",
+        "if_unproven": "Priced as unit only."
+      },
+      {
+        "risk": "Warranty status is unknown.",
+        "proof": "Photo or screenshot of the warranty card or purchase receipt.",
+        "if_unproven": "Priced as out of warranty with no cover."
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the rating label showing model and VA/kVA capacity.",
+      "Video of the UPS powering on and running a load on battery.",
+      "Photo of warranty card or purchase receipt.",
+      "Photo of original box and manuals if available."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The witness confirms a BLUE GATE tower UPS but cannot read the model or capacity label, and no operational test is shown, so even a worst-case price cannot be set without the missing shots."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_judge",
+    "latency_ms": 20629,
+    "input_tokens": 1028,
+    "output_tokens": 3442,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "0974ccc4958485083235ad23004d8d28",
+    "error": null
+  }
+}
