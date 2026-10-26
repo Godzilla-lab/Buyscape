@@ -752,6 +752,62 @@ def testify_compare(
             if not value["tie"]:
                 console.print(f"  {pair}: {stat} {value['difference']} {value['interval']}")
     console.print(f"Written to {out}")
+    tables = _stage_tables(split, items, money)
+    out.with_suffix(".md").write_text(tables)
+    console.print(f"Read and pick tables written to {out.with_suffix('.md')}")
+
+
+def _stage_tables(split: str, items: dict, money: dict) -> str:
+    """Two tables, not one number: what each model read, and how it priced.
+
+    The read stage is the model alone. The pick stage also depends on the
+    comparables our crawler found, so it is reported apart."""
+    import json
+
+    from .testify import construct, truths
+    from .testify.score import against_repeat, score
+
+    runs = ROOT / "eval" / "testify" / "runs"
+
+    def load(path: Path) -> list[dict]:
+        return [json.loads(line) for line in path.read_text().splitlines() if line.strip()] if path.exists() else []
+
+    def pct(value) -> str:
+        return "-" if value is None else f"{value * 100:.0f}%"
+
+    facts_path = ROOT / "eval" / "testify" / "truths.jsonl"
+    facts = {r["id"]: r for r in load(facts_path)}
+    built = load(ROOT / "eval" / "testify" / "constructed.jsonl")
+    read_rows, pick_rows = [], []
+    for run in sorted(runs.glob(f"*/{split}.jsonl")):
+        name, rows = run.parent.name, load(run)
+        s = score(rows, items)
+        noise = against_repeat(rows, load(run.with_name(f"{split}.repeat1.jsonl")), items)
+        t = truths.score(load(run.with_name(f"{split}.truth_contra.jsonl")), facts)
+        c = construct.score(load(run.with_name(f"{split}.constructed.jsonl")), built, items, rows)
+        read_rows.append(f"| {name} | {pct(s['identity_accuracy_when_attempted'])} | "
+                         f"{pct(s['named_a_model_the_photos_do_not_show'])} | {pct(s['lie_marked_supported'])} | "
+                         f"{pct(t.get('truth_marked_supported'))} | {pct(t.get('contra_caught'))} | "
+                         f"{pct(c.get('noproof_abstained'))} | {pct(c.get('proof_asked_first'))} | "
+                         f"{pct(noise.get('repeat_same_decision'))} |")
+        loss = (money.get(name) or [{}])[0]
+        pick_rows.append(f"| {name} | {pct(s['priced_share'])} | {s['silent_wrong']} | "
+                         f"{pct(s['asking_price_inside_range'])} | {pct(s['priced_above_asking'])} | "
+                         f"{pct(s['lie_raised_price'])} ({pct(noise.get('price_raised_on_honest_repeat'))}) | "
+                         f"{loss.get('loss_per_item', '-')} |")
+    return "\n".join([
+        f"# Testify {split}: the read and the pick", "",
+        "## The read: the model alone", "",
+        "| Model | Identity right | Named a model the photos do not show | Lie marked supported | "
+        "True claim marked supported | False claim caught | Abstained with the label gone | "
+        "Asked for the label first | Same decision asked twice |",
+        "|---|---|---|---|---|---|---|---|---|", *read_rows, "",
+        "## The pick: the model and our comparables", "",
+        "| Model | Gave a price | Silent wrong | Asking price inside the range | Offered above asking | "
+        "Lie raised the price (asking again raised it) | Expected loss per item, naira |",
+        "|---|---|---|---|---|---|---|", *pick_rows, "",
+        "Expected loss is at the first lost-deal cost in compare.json; it is not any business's own number.", "",
+    ])
 
 
 @app.command("testify-adjudicate")
