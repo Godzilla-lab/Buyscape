@@ -1,0 +1,65 @@
+{
+  "task": "testify_judge",
+  "prompt_version": "testify_judge.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "claims": [
+      {
+        "claim": "UPS available",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows a Blue Gate UPS."
+      },
+      {
+        "claim": "Battery is new",
+        "verdict": "unverified",
+        "evidence": "The witness cannot see the internal battery or its manufacture date."
+      },
+      {
+        "claim": "holds charge for 8 hours",
+        "verdict": "unverifiable_remote",
+        "evidence": "Battery duration depends on load and requires hours of observation."
+      },
+      {
+        "claim": "Never repaired",
+        "verdict": "unverified",
+        "evidence": "The witness did not report on the condition of the warranty seals or screw holes."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Unknown power capacity (VA rating)",
+        "proof": "A clear photo of the technical specification sticker on the back or side.",
+        "if_unproven": "as the lowest capacity model (650VA)"
+      },
+      {
+        "risk": "Dead or weak internal battery",
+        "proof": "A video showing the UPS powering a load (like a lamp) while the input plug is disconnected.",
+        "if_unproven": "as requiring immediate battery replacement"
+      },
+      {
+        "risk": "Damaged output sockets",
+        "proof": "A photo of the rear panel showing all power outlets.",
+        "if_unproven": "as having faulty or broken sockets"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the sticker on the back or side showing the model number and VA rating.",
+      "Photo of the rear panel to see the number and type of sockets.",
+      "Video of the unit powered on and supporting a device without being plugged into the wall."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The capacity (VA rating) is missing from the report, which is the primary factor for pricing a UPS. The battery health claim is also highly optimistic and needs verification."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_judge",
+    "latency_ms": 6970,
+    "input_tokens": 1002,
+    "output_tokens": 1308,
+    "cost_usd": 0.004425,
+    "replayed": false,
+    "fixture_key": "b17da554c168d06aa6b94ed22ca19835",
+    "error": null
+  }
+}
