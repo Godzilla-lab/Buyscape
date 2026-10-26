@@ -179,7 +179,7 @@ with the label taken away that asks for it; and an advert whose photos the
 photo check says cannot name it becomes "cannot identify" rather than being
 dropped. No advert from a seller who is also in the benchmark is used, read
 off Jiji's photo stamp and the phone number in the seller's words.
-`testify-ocr` reads every photo once into `eval/raw/testify_ocr_cache.json`,
+`testify-ocr` reads every photo once into `eval/raw/testify_ocr/cache.json`,
 which stays beside the photos and is never committed. The set lands in
 `eval/testify/train/`, which is never committed: it carries sellers' words.
 

@@ -3,9 +3,10 @@
 The seller check, the items with the proof taken away and the true claims
 all need the text on the same photos, and the OCR takes a second or two a
 photo. So each photo is read once, every line with its confidence and its
-box, into `eval/raw/testify_ocr_cache.json`. It sits beside the photos it
+box, into `eval/raw/testify_ocr/cache.json`. It sits beside the photos it
 was read from and, like them, is never committed: a stamp carries a seller's
-name and a photo can carry a phone number.
+name and a photo can carry a phone number. It has a folder of its own because
+the engine reads every JSON file at the top of `eval/raw` as cached adverts.
 """
 
 from __future__ import annotations
@@ -16,7 +17,7 @@ from pathlib import Path
 from ..identify.ocr import MIN_SCORE, default_reader
 from ..providers.base import ImageRef
 
-CACHE = Path("eval") / "raw" / "testify_ocr_cache.json"
+CACHE = Path("eval") / "raw" / "testify_ocr" / "cache.json"
 
 
 class OcrCache:
