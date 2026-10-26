@@ -277,9 +277,9 @@ comparables there were, then how tight they sat.
 `testify-compare` also prices each model's honest answers as a buyer would
 feel them. A price costs what the first offer (the low end) is above the
 asking price; a request for proof costs the share of sellers who drop off
-times a lost deal; a refusal costs a lost deal. BuyScrap has not set its two
-numbers yet (`tenants/buyscrap_ng.yaml`, `deal_costs`), so these use a 50%
-drop-off and three lost-deal costs that are not theirs:
+times a lost deal; a refusal costs a lost deal. No business's own numbers are
+used: these take a 50% drop-off and three lost-deal costs, and a tenant can
+set its own in `deal_costs`:
 
 | Lost deal costs | Nemotron | Gemini | Claude | GPT-5.4 nano | Qwen3-VL 8B |
 |---|---|---|---|---|---|
@@ -292,8 +292,8 @@ Two things stand out. One engine each sinks Nemotron and Claude: Nemotron
 offered at least 5.5 million naira for a Lexus engine asking 1 million, and
 Claude 7.9 million for a Caterpillar C9 asking 3.95 million. And at these
 costs a model that never prices loses least, which is TRAPSBench's point about
-abstention benchmarks: the money line means nothing until a lost deal has its
-real price. That number is BuyScrap's to give.
+abstention benchmarks: the money line ranks models only once a lost deal is
+priced high enough, so it is read across the range, never at one cost.
 
 ## Still to come
 

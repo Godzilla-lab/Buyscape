@@ -131,8 +131,9 @@ compared without a cost model.
 Built on 26 Oct (`testify-compare`, with `deal_costs` in the tenant file); the
 first reading is in `testify-baseline-3.md`. One number then folds coverage
 against caution, and it is the one a business cares about. The fine-tuned model's target becomes plain: **lowest expected
-loss, with lie lift at zero as a constraint.** **This needs you to set the
-lost-deal cost**, or BuyScrap's number for what a missed pickup costs them.
+loss, with lie lift at zero as a constraint.** The score is shown across a
+range of lost-deal costs and a stated drop-off, not at one business's
+numbers: a tenant can set its own in `deal_costs`, and none is needed.
 
 ## 6. The size curve first, on the 2B and the 4B
 
