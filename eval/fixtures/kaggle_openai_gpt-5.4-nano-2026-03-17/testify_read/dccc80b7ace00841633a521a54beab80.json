@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0 shows a top-loading washing machine with a white body and a front control panel area not clearly visible.",
+      "A label reading \u201cNEXUS\u201d is visible on the front (brand/model not fully shown).",
+      "No visible rating plate (model number, voltage, capacity) is shown in the photo.",
+      "No photo of the lid, drum condition, inlet/outlet hoses, power cord, or control buttons."
+    ],
+    "identity": {
+      "status": "unknown",
+      "kind": "top-loading washing machine",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Washing machine available at Abulegba",
+        "verdict": "unverifiable_remote",
+        "evidence": "Location is not shown in photo 0."
+      },
+      {
+        "claim": "The brand is Midea.",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows a \u201cNEXUS\u201d label on the machine front, not Midea."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Brand/model mismatch (seller says Midea but photo shows \u201cNEXUS\u201d), which affects parts availability and comparable pricing.",
+        "proof": "A clear photo of the washing machine rating plate/model sticker (usually on the back or inside the lid) showing brand and model number.",
+        "if_unproven": "Price as a generic/unverified top-loader (worst case for value due to possible wrong identity)."
+      },
+      {
+        "risk": "Unknown capacity (kg) and wash type (semi-auto vs fully automatic), which strongly affects price.",
+        "proof": "Photo of the rating plate showing capacity (e.g., 6kg/7kg/8kg) and whether it is fully automatic.",
+        "if_unproven": "Price at the lower end for used top-loaders until capacity is confirmed."
+      },
+      {
+        "risk": "Condition/working status not shown (could have issues like weak spin, drainage problems, or noisy motor).",
+        "proof": "Short video of a full wash cycle (fill \u2192 wash \u2192 drain \u2192 spin) or at least a spin test with water.",
+        "if_unproven": "Price as not guaranteed working (worst case)."
+      },
+      {
+        "risk": "Missing/defective accessories (inlet hose, drain hose, power cord, lid/hinges) not visible.",
+        "proof": "Photos showing all included accessories: inlet hose, drain hose, power cord, and lid/hinges.",
+        "if_unproven": "Price assuming accessories may be missing or not included."
+      },
+      {
+        "risk": "Electrical compatibility (Nigeria voltage) and safety condition not verifiable from the photo.",
+        "proof": "Photo of the rating plate showing voltage (e.g., 220\u2013240V) and a photo of the plug/cord condition.",
+        "if_unproven": "Price with a safety/compatibility discount until confirmed."
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the rating plate/model sticker showing brand, model number, voltage, and capacity.",
+      "Video of the machine running a complete cycle (or at minimum: fill + drain + spin).",
+      "Photos of inlet hose, drain hose, power cord/plug, and lid/hinges to confirm accessories and physical condition.",
+      "A photo of the control panel/buttons clearly showing the program options (to confirm fully automatic vs semi-auto)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo shows a \u201cNEXUS\u201d label while the seller claims \u201cMidea,\u201d so the identity is not reliable. Without the model/capacity and a working test, a correct worst-case price can\u2019t be set confidently."
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_read",
+    "latency_ms": 5664,
+    "input_tokens": 1760,
+    "output_tokens": 832,
+    "cost_usd": 0.001392,
+    "replayed": false,
+    "fixture_key": "dccc80b7ace00841633a521a54beab80",
+    "error": null
+  }
+}

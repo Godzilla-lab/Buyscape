@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black Canon DSLR front with lens cap on, no lens attached",
+      "Photo 1 shows the rear LCD screen and control buttons",
+      "Photo 2 shows the bottom label reading Canon DS126201 with serial 3761814763",
+      "Seller text describes Canon 5D Mark II specs but claims the brand is Sony"
+    ],
+    "identity": {
+      "status": "named",
+      "kind": null,
+      "brand": "Canon",
+      "model": "EOS 5D Mark II",
+      "read_from": [
+        "photo 0",
+        "photo 2"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "The Canon EOS 5D Mark II is a full-frame DSLR camera known for its 21.1-megapixel sensor",
+        "verdict": "supported",
+        "evidence": "photo 0 and photo 2 show Canon EOS 5D Mark II branding and label"
+      },
+      {
+        "claim": "The brand is Sony.",
+        "verdict": "contradicted",
+        "evidence": "photo 0 shows Canon logo; photo 2 shows Canon DS126201 label"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Shutter mechanism may be worn or faulty",
+        "proof": "Video of the shutter firing at different speeds",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Sensor may have dust, scratches, or dead pixels",
+        "proof": "Photo of the sensor with lens removed and light behind it",
+        "if_unproven": "as needing sensor cleaning or repair"
+      },
+      {
+        "risk": "Autofocus and metering may not work",
+        "proof": "Video showing focus confirmation and exposure changes",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "LCD screen may be cracked or non-functional",
+        "proof": "Video of camera powering on and displaying menus",
+        "if_unproven": "as screen faulty"
+      },
+      {
+        "risk": "Battery, charger, and accessories may be missing or dead",
+        "proof": "Photo of battery and charger included",
+        "if_unproven": "as body only"
+      }
+    ],
+    "proof_requests": [
+      "Video of camera powering on and shutter firing",
+      "Photo of sensor with lens removed",
+      "Photo of battery and charger if included",
+      "Shutter count screenshot from software"
+    ],
+    "decision": "price",
+    "reason": "The camera is identifiable as a Canon EOS 5D Mark II body from photos 0 and 2, so it can be priced at worst case as an untested unit despite the seller's contradictory Sony claim."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 52377,
+    "input_tokens": 2265,
+    "output_tokens": 3109,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "1f04042283b03e0e63647cd262d897e9",
+    "error": null
+  }
+}

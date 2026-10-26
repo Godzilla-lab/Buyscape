@@ -1,0 +1,86 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photos show a Nikon AF-S NIKKOR lens with front glass visible.",
+      "On the lens barrel, the text \u201cAF-S NIKKOR\u201d is readable (photo 0/1/2).",
+      "On the lens barrel, \u201c50mm 1/8G\u201d is readable (photo 0/1/2), which appears to be \u201c50mm 1.8G\u201d.",
+      "The front ring shows \u201cNikon\u201d and \u201c50mm 1.8G\u201d markings (photo 0/1/2).",
+      "The seller\u2019s words say it is the 60mm one, but the photos show 50mm 1.8G.",
+      "No clear photo shows the rear mount, contacts, or any included accessories (caps/hood/box).",
+      "No clear photo shows lens condition details like scratches on glass, fungus, haze, or internal dust."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": null,
+      "brand": "Nikon",
+      "model": "AF-S NIKKOR 50mm f/1.8G",
+      "read_from": [
+        "photo 0 lens barrel text",
+        "photo 1 lens barrel text",
+        "photo 2 lens barrel text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "American used lens",
+        "verdict": "unverified",
+        "evidence": "No photo evidence of origin (country of purchase/shipping) is visible."
+      },
+      {
+        "claim": "clean and pure like new",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photos do not show a clear inspection of the glass for haze/fungus/scratches; no close-up of front and rear elements."
+      },
+      {
+        "claim": "It is the 60mm one",
+        "verdict": "contradicted",
+        "evidence": "Lens markings show \u201c50mm 1.8G\u201d on the barrel (photo 0/1/2), not 60mm."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Wrong lens size/model sold (seller says 60mm, photos show 50mm f/1.8G).",
+        "proof": "Ask for a photo of the lens barrel text plus a photo of the rear mount (showing the exact model/part markings) and confirm the focal length on the lens.",
+        "if_unproven": "Price as the worst-case mismatch risk: treat as not matching the buyer\u2019s expected 60mm and price for the visible 50mm f/1.8G only."
+      },
+      {
+        "risk": "Lens glass condition (haze/fungus/scratches) not confirmed from these angles.",
+        "proof": "Request close-up photos of the front element and rear element in bright light (and a video of the focus ring moving while pointing at a light).",
+        "if_unproven": "Price as not like-new: assume possible dust/haze and discount accordingly (worst-case: not pristine)."
+      },
+      {
+        "risk": "Autofocus/operation not confirmed (AF-S motor may be weak or faulty).",
+        "proof": "Request a short video of autofocus locking on a subject using a Nikon body (or show AF confirmation in-camera).",
+        "if_unproven": "Price as not working properly (worst-case: AF unreliable), since no functional test is shown."
+      },
+      {
+        "risk": "Missing accessories/caps/hood or damaged mount/contacts.",
+        "proof": "Request photos of everything included: front cap, rear cap, hood (if any), and a clear shot of the rear contacts/mount.",
+        "if_unproven": "Price assuming minimal/no accessories and possible mount wear (worst-case: only the lens body)."
+      }
+    ],
+    "proof_requests": [
+      "Confirm the exact model by sending a clear photo of the full barrel text (including focal length) and the rear mount.",
+      "Send close-up front and rear element photos in bright light (to check fungus/haze/scratches).",
+      "Send a short video showing autofocus locking on and the focus ring movement.",
+      "Show what accessories are included (front/rear caps, hood/box) and a clear rear mount/contacts photo."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photos clearly identify it as a Nikon AF-S NIKKOR 50mm f/1.8G, which contradicts the seller\u2019s \u201c60mm\u201d claim. Condition and functionality (glass clarity and AF performance) are not provable from these images, so the safest next step is to request the key proof shots/videos before pricing."
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_read",
+    "latency_ms": 6694,
+    "input_tokens": 3886,
+    "output_tokens": 1031,
+    "cost_usd": 0.002066,
+    "replayed": false,
+    "fixture_key": "b29dda83278c0e370144beada64cfc46",
+    "error": null
+  }
+}

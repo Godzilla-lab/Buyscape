@@ -1,0 +1,84 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0 shows a Nikon-branded DSLR body (Nikon logo on top/front).",
+      "Photo 0 lens mount area is visible; no lens is clearly shown attached.",
+      "Photo 0 has a visible model marking that appears to read D7000 on the right side of the body.",
+      "Photo 1 also shows a Nikon-branded DSLR body with the same D7000 marking appearance.",
+      "Photo 1 shows the camera being held; a lens cap is visible in the foreground, but no lens is clearly attached.",
+      "Both photos show the camera in front of damaged cardboard packaging with Nikon text; no accessories (batteries/case) are clearly shown."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DSLR camera body",
+      "brand": "Nikon",
+      "model": "D7000",
+      "read_from": [
+        "photo 0 body marking (appears as D7000)",
+        "photo 1 body marking (appears as D7000)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "The camera is working perfectly fine.",
+        "verdict": "unverified",
+        "evidence": "No photo shows the camera powered on, recording, or displaying any live screen/menu."
+      },
+      {
+        "claim": "I am selling with 2 batteries and a silicone case.",
+        "verdict": "unverified",
+        "evidence": "Photos show the camera body and packaging, but no batteries or silicone case are visible."
+      },
+      {
+        "claim": "The brand is Canon.",
+        "verdict": "contradicted",
+        "evidence": "Photos show Nikon branding on the camera body (photo 0 and photo 1), not Canon."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Brand/model mismatch: seller says Canon, but photos show Nikon D7000. This can mean wrong item or bait-and-switch.",
+        "proof": "Ask for a photo of the exact camera\u2019s front/back with the LCD/menu powered on and the model name visible, plus a close-up of the brand/logo.",
+        "if_unproven": "Price as a Nikon D7000 body with unknown condition (worst case: not confirmed working)."
+      },
+      {
+        "risk": "Functionality not proven (shutter, autofocus, buttons, ports, sensor, and LCD).",
+        "proof": "Video clip: power on + menu navigation + take a short video/photo and show the resulting image on the LCD.",
+        "if_unproven": "Price as not working/untested until proven."
+      },
+      {
+        "risk": "Missing lens or accessories: photos do not clearly show a lens attached; batteries/case not shown.",
+        "proof": "Photo checklist: show all included items laid out (2 batteries, charger if any, silicone case, lens if included) with close-ups of labels/contacts.",
+        "if_unproven": "Price as camera body only, with batteries/case not included."
+      },
+      {
+        "risk": "Physical condition: packaging is damaged; camera may have hidden dents/scratches or wear not visible in these angles.",
+        "proof": "Close-up photos of: lens mount contacts, sensor area (if accessible), all sides/corners, and LCD screen for cracks.",
+        "if_unproven": "Price as used with possible cosmetic wear."
+      }
+    ],
+    "proof_requests": [
+      "Power-on video showing the LCD/menu and a captured photo/video playback (to confirm working).",
+      "Close-up photo of the model/serial area and brand/logo (to confirm Nikon D7000 is the exact item).",
+      "Photos of the included items laid out: 2 batteries (with labels), silicone case, and charger (if any).",
+      "Photos of lens mount and all ports/buttons, plus LCD close-up for cracks/scratches."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photos clearly show a Nikon D7000 body, contradicting the seller\u2019s Canon claim, and the key claims (working perfectly fine; includes 2 batteries and a silicone case) are not verifiable from the images. Proof is needed before pricing confidently."
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_read",
+    "latency_ms": 5753,
+    "input_tokens": 2279,
+    "output_tokens": 914,
+    "cost_usd": 0.00298,
+    "replayed": false,
+    "fixture_key": "f27b9543688c7be135457dc70910d0da",
+    "error": null
+  }
+}
