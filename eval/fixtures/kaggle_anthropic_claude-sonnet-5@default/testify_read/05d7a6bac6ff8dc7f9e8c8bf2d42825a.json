@@ -1,0 +1,84 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Front-loading washing machine visible, silver/grey cabinet.",
+      "LG logo clearly printed on upper left of control panel.",
+      "Model text on panel reads 'INVERTER DirectDrive 6/3kg'.",
+      "Sticker on door area reads 'LG Washer+Dryer 2 in 1'.",
+      "Control panel lights are illuminated (dial ring lit, digital display showing digits), suggesting the unit has power.",
+      "Door glass shows some laundry inside; drum area has grime and water staining at base.",
+      "No visible damage, dents, or missing parts; machine looks largely intact, not stripped as 'scrap' usually implies."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "front-load washing machine (washer+dryer combo)",
+      "brand": "LG",
+      "model": "DirectDrive 6/3kg (Washer+Dryer 2 in 1)",
+      "read_from": [
+        "photo 0 control panel and door sticker"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Brand is Samsung",
+        "verdict": "contradicted",
+        "evidence": "photo 0 shows 'LG' logo and 'LG DirectDrive' branding on the control panel, not Samsung."
+      },
+      {
+        "claim": "Doesn't work, needs repair",
+        "verdict": "unverified",
+        "evidence": "No power-on test, spin cycle, or error-code video shown; control panel lights appear lit in the photo, which is inconsistent with a fully dead unit but does not prove full function."
+      },
+      {
+        "claim": "Sold as scrap",
+        "verdict": "unverifiable_remote",
+        "evidence": "Physical condition in photo looks largely intact, not visibly cannibalized; scrap status cannot be confirmed from a single still photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Brand/model mismatch between seller's text and photo could indicate a copy-pasted or mismatched listing.",
+        "proof": "A new photo showing the rating plate/serial sticker (usually inside door frame or rear panel) confirming brand and model.",
+        "if_unproven": "priced as unknown/unverified identity, treated cautiously as possible listing error or scam risk"
+      },
+      {
+        "risk": "Actual functional state unknown (motor, drum bearing, control board, heating element could all be faulty).",
+        "proof": "Video of unit being powered on and attempting a wash cycle, or at least spinning drum manually.",
+        "if_unproven": "priced as non-working, parts/repair value only"
+      },
+      {
+        "risk": "Hidden water damage or rust inside drum/tub not visible from front photo.",
+        "proof": "Photo of drum interior with door open and tub removed if possible, plus rear panel photo.",
+        "if_unproven": "priced assuming possible internal corrosion, lower end of scrap value"
+      },
+      {
+        "risk": "Missing accessories (hoses, power cable, drawer) that affect resale/repair cost.",
+        "proof": "Photo of back of unit showing hoses and power cord, and detergent drawer.",
+        "if_unproven": "priced assuming incomplete set"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the rating/serial plate (inside door rim or rear panel) to confirm true brand and model.",
+      "Video of the machine being plugged in and powered on, showing display and any attempt to start a cycle.",
+      "Photo of the rear of the machine showing hoses, power cable, and overall condition.",
+      "Photo with drum/door open showing interior condition (rust, damage, foreign objects)."
+    ],
+    "decision": "fraud_suspected",
+    "reason": "The seller's text claims the brand is Samsung while the photographed unit is clearly branded LG (logo and model markings visible), a direct contradiction that raises concern about a mismatched or copy-pasted listing rather than a simple typo."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 26318,
+    "input_tokens": 3449,
+    "output_tokens": 2287,
+    "cost_usd": 0.026609,
+    "replayed": false,
+    "fixture_key": "05d7a6bac6ff8dc7f9e8c8bf2d42825a",
+    "error": null
+  }
+}

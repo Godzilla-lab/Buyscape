@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: Front of DSLR body with 'Canon EOS 5D Mark II' embossed, body cap attached, no lens mounted.",
+      "Photo 1: Rear view showing LCD screen (appears blank/off, no image to confirm function), Canon logo, control buttons, on/off switch.",
+      "Photo 2: Bottom plate with model plate reading 'Canon DS126201', serial number '3761814763', made in Japan, confirming 5D Mark II identity.",
+      "No lens, battery, charger, strap, or memory card visible in any photo.",
+      "No power-on or live-view shot showing the screen actually displaying an image.",
+      "No shot of sensor, lens mount contacts, or shutter curtain.",
+      "Watermarks 'POSTED ON JIJI' and 'CDICSON BUSINESS WORLD' overlay images, consistent with a listing platform, not a red flag by itself."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DSLR camera body",
+      "brand": "Canon",
+      "model": "EOS 5D Mark II",
+      "read_from": [
+        "photo 0 front badge",
+        "photo 2 bottom plate (DS126201)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Canon EOS 5D Mark II, full-frame DSLR, 21.1-megapixel sensor",
+        "verdict": "supported",
+        "evidence": "Photo 0 front badge and photo 2 model plate confirm this is genuinely a 5D Mark II body; the 21.1MP spec is a known factory spec for this model, not a condition claim."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Camera may not power on or the LCD/sensor may be faulty",
+        "proof": "A photo or short clip of the camera powered on, showing a live image on the LCD or a test shot on the screen",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Unknown shutter actuation count (5D Mark II shutters are rated ~150,000 but wear varies)",
+        "proof": "A screenshot of the shutter count from EOS Info or similar utility, or the info screen showing it",
+        "if_unproven": "priced as high/unknown shutter count, i.e. lower end"
+      },
+      {
+        "risk": "No lens, battery, charger, or memory card shown; item may be body-only",
+        "proof": "Photos of included accessories (lens, battery, charger) laid out together with the body",
+        "if_unproven": "priced as body-only, no accessories"
+      },
+      {
+        "risk": "Sensor dust, scratches, or mirror/mount damage hidden by the body cap",
+        "proof": "A clear close-up of the sensor and mirror box with the cap off, and the lens mount",
+        "if_unproven": "priced as condition unknown, risk of sensor/mirror issues"
+      },
+      {
+        "risk": "Autofocus and image quality cannot be judged from these shots",
+        "proof": "Sample full-resolution photos taken with the camera, or a short video of AF in action",
+        "if_unproven": "priced as unverified AF/image quality, worst case assumed"
+      }
+    ],
+    "proof_requests": [
+      "Power-on clip showing the LCD displaying a live image or menu",
+      "Shutter count screenshot or info screen reading",
+      "Clear photo of sensor/mirror box with body cap removed",
+      "Photo of all accessories included (lens, battery, charger, strap, card)",
+      "Sample photos taken with the camera to confirm image quality"
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identified as a Canon EOS 5D Mark II body via visible badges and the model plate, but no proof of power-on function, shutter count, or included accessories is shown, so it must be priced at worst case as a body-only, untested unit."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 20547,
+    "input_tokens": 3066,
+    "output_tokens": 1841,
+    "cost_usd": 0.021383,
+    "replayed": false,
+    "fixture_key": "44f95d28739cfc669deaf3a8d8ee1cbd",
+    "error": null
+  }
+}

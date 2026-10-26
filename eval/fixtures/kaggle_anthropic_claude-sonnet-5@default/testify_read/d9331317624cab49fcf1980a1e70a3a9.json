@@ -1,0 +1,84 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows a DSLR camera body with a lens attached, plus a second lens with rear cap lying separately on a round table",
+      "The camera body has 'Nikon' text clearly visible on the front",
+      "The attached lens also shows 'NIKON' text printed on its front cap",
+      "No Canon branding is visible anywhere in the photo",
+      "Lens focal lengths (18-55mm or 50mm) are not readable in the photo",
+      "A neck strap is attached to the camera body",
+      "Watermark 'POSTED BY SAMUEL' overlays the image"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "DSLR camera with two lenses",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 body and lens barrel show 'Nikon' text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "The brand is Canon",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows 'Nikon' text on both the camera body and the attached lens cap, not Canon"
+      },
+      {
+        "claim": "It has 2 lens 18-55mm and 50mm",
+        "verdict": "unverifiable_remote",
+        "evidence": "Two lenses are visible in photo 0 but focal length markings are not legible in the image"
+      },
+      {
+        "claim": "Clean and good to shoot videos and snapshots",
+        "verdict": "unverified",
+        "evidence": "No power-on, sensor, screen, or shutter-count shot provided to confirm functionality"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Seller's stated brand (Canon) does not match the visible brand (Nikon), raising doubt about whether photos match the actual item for sale or whether the description was copy-pasted from another listing",
+        "proof": "A fresh, clear photo of the actual item with brand name and model number visible, taken by the seller now",
+        "if_unproven": "treated as a listing/identity mismatch, priced at worst case as unverified generic DSLR, not as a working Canon kit"
+      },
+      {
+        "risk": "Camera functionality (power-on, shutter, sensor, LCD screen) unknown",
+        "proof": "Video of camera powering on, shutter firing, and a test shot displayed on screen",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Lens condition and actual focal lengths unverified; rear cap lens could be damaged or mismatched mount",
+        "proof": "Close-up photos of each lens showing focal length ring/markings and front/rear glass clarity",
+        "if_unproven": "priced as lowest-value unverified lens condition"
+      },
+      {
+        "risk": "Missing accessories (battery, charger, memory card, box) not shown",
+        "proof": "Photo of full accessory set included in sale",
+        "if_unproven": "priced as body and lenses only, no accessories"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo showing the true brand/model nameplate on the camera body",
+      "Video of the camera powering on and taking a shot, displayed on screen",
+      "Close-up of each lens showing focal length markings and glass condition",
+      "Photo of included accessories (battery, charger, strap, bag, memory card)"
+    ],
+    "decision": "fraud_suspected",
+    "reason": "The seller explicitly states the brand is Canon, but the only photo provided clearly shows 'Nikon' branding on both the camera body and lens, a direct contradiction that suggests mismatched or recycled listing photos."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 13278,
+    "input_tokens": 2242,
+    "output_tokens": 1246,
+    "cost_usd": 0.013785,
+    "replayed": false,
+    "fixture_key": "d9331317624cab49fcf1980a1e70a3a9",
+    "error": null
+  }
+}

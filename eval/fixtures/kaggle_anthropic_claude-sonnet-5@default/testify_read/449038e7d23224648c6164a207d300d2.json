@@ -1,0 +1,89 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: Black DSLR body with 'Canon' and 'EOS 600D' printed on front, paired with a Canon EFS 18-55mm lens, body cap on, shown on a white shelf.",
+      "Photo 1: Same body from the back, flip-out LCD screen visible but screen is off/blank, control dials and buttons visible, no power-on indicator shown.",
+      "Photo 2: Wider shelf shot showing the same 600D plus a second camera labeled 'Canon EOS 700D', another lens, and a Nikon lens cap in the background, suggesting this is a reseller's general stock photo rather than a shot of only the exact unit being sold.",
+      "No shots of the camera powered on, no LCD display lit, no shutter count screen, no battery/charger, no memory card, and no sample images shown.",
+      "No visible UK import stickers, customs marks, or seller shop stamps that would substantiate 'UK used' claim."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DSLR camera with kit lens",
+      "brand": "Canon",
+      "model": "EOS 600D",
+      "read_from": [
+        "photo 0 body text",
+        "photo 2 body text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "UK used Canon EOS 600D",
+        "verdict": "unverifiable_remote",
+        "evidence": "No import marking, customs sticker, or UK-specific packaging visible in any photo."
+      },
+      {
+        "claim": "very neat and sharp",
+        "verdict": "unverified",
+        "evidence": "Body looks cosmetically clean in photo 0 and 1, but 'sharp' implies image/optical quality which cannot be judged without a sample photo or video from the camera."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Camera may not power on or may have sensor/shutter faults",
+        "proof": "A video of the camera powering on, showing live view on the LCD and a test shutter fire",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Shutter actuation count unknown, could be heavily used despite cosmetic condition",
+        "proof": "A photo of the shutter count from Canon EOS Utility or a third-party shutter-count checker screen",
+        "if_unproven": "priced as high-usage/uncertain wear"
+      },
+      {
+        "risk": "LCD screen shown closed/off in photo 1, functionality not confirmed",
+        "proof": "A photo or video with the screen powered on displaying menu or live view",
+        "if_unproven": "priced as screen possibly faulty"
+      },
+      {
+        "risk": "Lens (EFS 18-55mm) optical condition unknown \u2014 possible fungus, scratches, or focus issues",
+        "proof": "Close-up photos of front and rear lens elements under light, plus a focus-test shot",
+        "if_unproven": "priced as lens condition unverified/worst case"
+      },
+      {
+        "risk": "Battery, charger, and memory card not shown \u2014 may not be included",
+        "proof": "A photo of the included battery, charger, and card alongside the camera",
+        "if_unproven": "priced as body+lens only, no accessories"
+      },
+      {
+        "risk": "Photo 2 shows multiple cameras together, raising doubt whether this exact unit is the one being sold or just a stock/shelf photo",
+        "proof": "A photo of the specific unit alone with a handwritten note/date or seller's name visible",
+        "if_unproven": "priced cautiously as stock-photo risk, exact unit unconfirmed"
+      }
+    ],
+    "proof_requests": [
+      "Video of the camera powering on with LCD live view and shutter fire sound",
+      "Screenshot or photo of the shutter actuation count",
+      "Close-up photos of the lens front/rear elements for fungus or scratches",
+      "Photo of the included battery, charger, and memory card",
+      "A single clear photo of only this exact camera (not the shelf with other units) to confirm which unit is for sale"
+    ],
+    "decision": "price",
+    "reason": "The brand and model are clearly readable in the photos, but functionality, shutter count, lens clarity, UK-import claim, and accessory inclusion are all unverified, so the item must be priced at its worst-case condition (body+lens only, unconfirmed working state) until further proof is given."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 25289,
+    "input_tokens": 3931,
+    "output_tokens": 2237,
+    "cost_usd": 0.030232,
+    "replayed": false,
+    "fixture_key": "449038e7d23224648c6164a207d300d2",
+    "error": null
+  }
+}

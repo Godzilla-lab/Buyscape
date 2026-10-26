@@ -1,0 +1,92 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black DSLR camera body with 'Nikon' logo visible on front, with a lens attached.",
+      "A second detached lens with rear cap sits to the left on the table.",
+      "Camera body model number is not legible in the photo.",
+      "Lens barrels show some text but focal length/model markings are not clearly readable.",
+      "No lens caps on front of either lens visible; one has only rear cap shown.",
+      "No power-on, screen display, or shutter-count shot provided.",
+      "No image quality sample or video sample shown.",
+      "Strap and body show normal handling wear, no visible major damage."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "DSLR camera with two lenses (18-55mm and 50mm claimed)",
+      "brand": "Nikon",
+      "model": null,
+      "read_from": [
+        "photo 0 body logo"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "It has 2 lens 18-55mm and 50mm",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows two lenses but focal length markings are not legible."
+      },
+      {
+        "claim": "Clean and good to shoot videos and snapshots",
+        "verdict": "unverifiable_remote",
+        "evidence": "No power-on, functional test, or sample image/video provided."
+      },
+      {
+        "claim": "Brand is Nikon",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows 'Nikon' logo on camera body."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Camera body model unknown, affecting base value significantly",
+        "proof": "Clear photo of top plate or body label showing model name/number",
+        "if_unproven": "priced at low-end generic entry-level Nikon DSLR body worst case"
+      },
+      {
+        "risk": "Sensor, shutter, or autofocus functionality unverified",
+        "proof": "Power-on photo showing LCD screen active, or a sample shot/video clip",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Lens focal lengths and condition (fungus, scratches, zoom/focus smoothness) unverified",
+        "proof": "Close-up photos of lens barrels showing focal length markings and glass clarity",
+        "if_unproven": "priced as lowest-grade unverified lenses"
+      },
+      {
+        "risk": "Shutter count unknown, affecting remaining usable life",
+        "proof": "Screenshot of shutter count from camera menu or EXIF data",
+        "if_unproven": "priced as high-use/unknown wear"
+      },
+      {
+        "risk": "Battery, charger, memory card, and accessories not shown",
+        "proof": "Photo of included accessories (battery, charger, cards)",
+        "if_unproven": "priced as body and lenses only, no accessories"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of top plate or model label on camera body",
+      "Power-on photo with LCD screen active",
+      "Close-up of each lens showing focal length and aperture markings",
+      "A sample photo or short video clip taken with the camera",
+      "Photo of shutter count from camera menu",
+      "Photo of included accessories (battery, charger, cards, bag)"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The camera body model cannot be read from the single photo, and no functional proof (power-on, sample shot, shutter count) is given, so even a worst-case price cannot be set without identifying the specific Nikon model."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 14038,
+    "input_tokens": 2243,
+    "output_tokens": 1347,
+    "cost_usd": 0.014797,
+    "replayed": false,
+    "fixture_key": "3b74f0b18c3cce32d33573b9f420b895",
+    "error": null
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows a cardboard box printed 'Nikon D750' with a Nikkor lens box beside it and a gimbal/stabilizer product image on another box.",
+      "Photo 1 shows the opened D750 box containing only paper manuals labeled 'Nikon D750 User's Manual', no camera body visible.",
+      "Photo 2 shows bubble-wrapped items inside a box; the wrapped shapes could be a lens hood or small lens, not clearly a camera body.",
+      "No camera body, LCD screen, lens mount, or serial plate is visible in any photo.",
+      "Seller's text claims 'Nikon D750 Body' then says 'The model is D850', a direct contradiction in the listing itself."
+    ],
+    "identity": {
+      "status": "unknown",
+      "kind": "DSLR camera (claimed Nikon D750/D850, unverified)",
+      "brand": "Nikon",
+      "model": null,
+      "read_from": [
+        "photo 0 box text 'D750'",
+        "photo 1 manual text 'D750'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "American used Nikon D750 Body, clean and pure as new",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 and photo 1 show D750 packaging, but seller's own text later states 'The model is D850', a self-contradiction; no camera body is visible in any photo to confirm either model or condition."
+      },
+      {
+        "claim": "working perfectly",
+        "verdict": "unverifiable_remote",
+        "evidence": "No power-on, screen, shutter count, or video proof shown; only closed/bubble-wrapped boxes are visible."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Model mismatch between box/manual (D750) and seller's stated model (D850) suggests wrong item, mislabeled stock photos, or an attempt to pass off a cheaper body as a pricier one.",
+        "proof": "A clear photo of the camera body itself showing the model name on the front/top plate and the serial number.",
+        "if_unproven": "priced at the lower/less certain of the two claimed models, or treated as unidentified body risk"
+      },
+      {
+        "risk": "No actual camera body is shown in any photo, only boxes and bubble wrap; this is a known pattern for empty-box or stock-photo listings.",
+        "proof": "Photo of the unwrapped camera body powered on, showing lens mount, shutter count on screen, and serial number matching the box.",
+        "if_unproven": "priced as not working / item not confirmed present"
+      },
+      {
+        "risk": "Shutter count and sensor/screen condition cannot be assessed from box photos.",
+        "proof": "Photo of LCD screen showing shutter count via menu, plus a photo of the sensor and top/rear body for wear.",
+        "if_unproven": "priced as heavy-use/unknown condition, worst case"
+      },
+      {
+        "risk": "'American used' origin and import/warranty status is an unverifiable claim.",
+        "proof": "Receipt, import sticker, or US retailer box sticker with serial number visible.",
+        "if_unproven": "priced as grey-market/no-warranty"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual camera body (not box) showing the model name plate on the front and the serial number.",
+      "Photo of the LCD screen displaying shutter actuation count.",
+      "Live photo/video of the camera powering on with lens attached, showing autofocus and shutter firing.",
+      "Clarification from seller resolving the D750 vs D850 discrepancy, matching serial number on box and body."
+    ],
+    "decision": "fraud_suspected",
+    "reason": "The listing text itself contradicts the model (D750 box/manual vs. stated D850), and no camera body is shown in any photo\u2014only sealed boxes and bubble wrap\u2014matching a common empty-box or bait-and-switch scam pattern."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 17326,
+    "input_tokens": 3934,
+    "output_tokens": 1493,
+    "cost_usd": 0.019639,
+    "replayed": false,
+    "fixture_key": "3329db2fc19d068689878ac2188a2b99",
+    "error": null
+  }
+}

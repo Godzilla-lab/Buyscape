@@ -1,0 +1,88 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: Camera body clearly marked 'Nikon' on front plate and 'Z fc' engraved near top right; rear lens cap reads 'Nikon Z mount'.",
+      "Photo 1: Top dial shows ISO markings (100\u201351200) and shutter speed dial; 'Z fc' text visible on body; attached lens is a manual-focus lens with aperture ring marked in both feet and meters.",
+      "Photo 2: Top-down view shows camera with battery, Nikon-branded charger, two rear lens caps, and a front lens cap marked 'TTArtisan APS-C 25mm f2.0'.",
+      "No screen-on, shutter-count, or power-up shot is visible in any photo.",
+      "No visible damage, but sensor, mount condition, and internal function cannot be judged from stills."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "retro-style mirrorless camera",
+      "brand": "Nikon",
+      "model": "Z fc",
+      "read_from": [
+        "photo 0",
+        "photo 1"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Nikon Z fc, retro-inspired SLR-style mirrorless camera, 20.9MP APS-C sensor",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 1 show 'Nikon' and 'Z fc' markings matching this description."
+      },
+      {
+        "claim": "The brand is Canon",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 clearly shows 'Nikon' branding and 'Z mount' lens cap, not Canon."
+      },
+      {
+        "claim": "Includes battery and charger",
+        "verdict": "supported",
+        "evidence": "Photo 2 shows a Nikon-branded battery and charger alongside the camera."
+      },
+      {
+        "claim": "Lens included is a Nikon lens",
+        "verdict": "contradicted",
+        "evidence": "Photo 2 cap reads 'TTArtisan APS-C 25mm f2.0', a third-party manual lens, not a Nikon-branded lens."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Camera may not power on or sensor may be faulty",
+        "proof": "A video or photo of the camera powered on showing the rear screen and a live image",
+        "if_unproven": "priced as non-functional"
+      },
+      {
+        "risk": "Shutter count unknown, could be heavily used",
+        "proof": "A screenshot of shutter count from camera menu or EXIF data",
+        "if_unproven": "priced as high-use/uncertain condition"
+      },
+      {
+        "risk": "Lens compatibility and condition (third-party manual lens, not Nikon OEM)",
+        "proof": "Close-up photo of lens glass and mount, plus confirmation of autofocus/manual operation",
+        "if_unproven": "priced as bundled third-party lens, not Nikon kit lens value"
+      },
+      {
+        "risk": "Mismatch between listed brand text ('Canon') and actual item (Nikon) suggests careless or copy-pasted listing",
+        "proof": "Seller confirmation or corrected listing text matching photographed brand",
+        "if_unproven": "treated as a listing error, not affecting the physical item's identity, but lowers seller reliability"
+      }
+    ],
+    "proof_requests": [
+      "Video of camera powering on, showing screen and shutter firing",
+      "Photo of shutter count or menu firmware screen",
+      "Close-up of lens mount and glass for scratches or fungus",
+      "Photo of memory card slot and battery contacts for corrosion"
+    ],
+    "decision": "price",
+    "reason": "Photos clearly identify the item as a Nikon Z fc body with a third-party TTArtisan lens despite the seller text's false 'Canon' claim; functionality is unverified so it is priced at worst case pending a power-on proof."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 24272,
+    "input_tokens": 4203,
+    "output_tokens": 2230,
+    "cost_usd": 0.027547,
+    "replayed": false,
+    "fixture_key": "13c9cd51ead7c28cc34626884292d7cc",
+    "error": null
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Camera body visible in hand, black DSLR-style body with pop-up flash and grip",
+      "Text on body reads \"Nikon\" clearly, with partial model text that could read D8xx",
+      "Lens mounted has a bayonet mount and lens cap with faint lettering, possibly a third-party brand, not clearly readable",
+      "A watermark overlay reading \"STARSHOOT IMAGE\" covers the photo, suggesting it may be a stock or reused image rather than the seller's own photo of the actual item",
+      "Wall switch and plain background visible, no other identifying marks"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "DSLR camera with lens",
+      "brand": "Nikon",
+      "model": null,
+      "read_from": [
+        "photo 0 body badge"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Nikon D810 DSLR Camera + 24-70mm Lens for Sale",
+        "verdict": "unverified",
+        "evidence": "photo 0 shows Nikon branding but no readable model number or lens markings to confirm D810 or 24-70mm lens"
+      },
+      {
+        "claim": "Clean and well-maintained",
+        "verdict": "unverifiable_remote",
+        "evidence": "No close-up of sensor, LCD screen, or body wear; condition cannot be judged from a single hand-held shot"
+      },
+      {
+        "claim": "The brand is Canon",
+        "verdict": "contradicted",
+        "evidence": "photo 0 clearly shows 'Nikon' lettering on the body, not Canon"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Brand/model mismatch between seller's own statements (Nikon D810 vs. 'brand is Canon') raises doubt about what is actually being sold or whether the listing is copy-pasted/fraudulent",
+        "proof": "A fresh, unwatermarked photo of the camera clearly showing the brand badge, model plate, and serial number",
+        "if_unproven": "treated as unverified identity, priced at worst case as a generic/unconfirmed body"
+      },
+      {
+        "risk": "Watermark 'STARSHOOT IMAGE' suggests the photo may be sourced from a stock/reseller image rather than the actual item in hand",
+        "proof": "An original, un-watermarked photo or video of the seller holding the exact unit with today's date or a handwritten note visible",
+        "if_unproven": "priced as unverified condition/ownership, worst case assuming stock photo misrepresentation"
+      },
+      {
+        "risk": "No shutter count or sensor condition shown, cannot confirm 'well-maintained' claim",
+        "proof": "Photo of the LCD menu showing shutter actuation count, and a close-up of the sensor and lens glass",
+        "if_unproven": "priced as not working/heavily used until proven otherwise"
+      },
+      {
+        "risk": "Lens identity (24-70mm) not confirmed; cap and barrel markings unreadable",
+        "proof": "Clear photo of the lens barrel showing focal length, aperture range, and brand markings",
+        "if_unproven": "priced as unverified/generic lens, not confirmed as 24-70mm"
+      }
+    ],
+    "proof_requests": [
+      "Clear, unwatermarked photo of the camera body showing brand badge, model number, and serial number",
+      "Photo of the lens barrel showing focal length and brand markings",
+      "Photo of the LCD screen showing shutter count and firmware info",
+      "Video of the camera powering on and lens autofocusing"
+    ],
+    "decision": "fraud_suspected",
+    "reason": "The seller's own text contradicts itself on the brand (Nikon D810 in the title but 'brand is Canon' in the description), and the photo carries a third-party stock watermark, both of which are classic signs of a copy-pasted or fraudulent listing rather than a genuine, verifiable item."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 20395,
+    "input_tokens": 2031,
+    "output_tokens": 1793,
+    "cost_usd": 0.021992,
+    "replayed": false,
+    "fixture_key": "e1d8aeb2bf6a0609d9491165c99b7fb5",
+    "error": null
+  }
+}
