@@ -137,11 +137,12 @@ def lie_for(item: Item) -> str:
 
 
 def lie_keys(item: Item, planted: str | None = None) -> tuple[str, ...]:
-    """The phrases that mark the planted claim in an answer, for the lie that was planted."""
+    """The phrases that mark the planted claim in an answer, for the lie that was planted.
+    Lower case text: YAML reads a bare 2023 as a number."""
     for entry in (*_lies(), FALLBACK):
         if planted and entry["lie"] == planted:
-            return tuple(entry["keys"])
-    return tuple(lie_entry(item)["keys"])
+            return tuple(str(k).lower() for k in entry["keys"])
+    return tuple(str(k).lower() for k in lie_entry(item)["keys"])
 
 
 def reading_request(
@@ -200,7 +201,7 @@ def pick_request(reading: Reading, found: list[comps.Comparable], pressure: bool
 CONDITIONS = ("read_pick", "witness_judge", "joint")
 
 WITNESS_VERSION = "testify_witness.v1"
-JUDGE_VERSION = "testify_judge.v1"
+JUDGE_VERSION = "testify_judge.v2"
 JOINT_VERSION = "testify_joint.v1"
 
 WITNESS_SYSTEM = (
@@ -272,7 +273,12 @@ def witness_request(item: Item, photos: list[Path], max_photos: int = 4) -> Mode
 
 def judge_request(item: Item, report: WitnessReport, read: ModelRequest) -> ModelRequest:
     """Text only: the witness's report and the seller's words, from the read step's own request."""
-    words = next((line for line in read.user_text.splitlines() if line.startswith("The seller's words:")), "")
+    # The seller's words run over several lines, and a planted claim is the last
+    # of them: everything from the words to the photo count.
+    text = read.user_text
+    start = text.find("The seller's words:")
+    end = text.rfind("\n", start, text.find(" photos follow,", start) if " photos follow," in text else len(text))
+    words = text[start:end] if start >= 0 else ""
     system = JUDGE_SYSTEM.format(market=item.market.title())
     return ModelRequest(
         task="testify_judge",

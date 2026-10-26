@@ -500,3 +500,22 @@ def test_the_frozen_pick_uses_the_recorded_read_and_one_list_for_the_kind():
     assert row["decision"] == "price" and row["price_low"] <= row["price_high"]
     refused = frozen_pick(provider, item, {"reading": _reading("ask_for_proof").model_dump()}, [])
     assert refused["decision"] == "ask_for_proof" and provider.seen == ["testify_pick"]
+
+
+def test_a_lie_key_yaml_reads_as_a_number_is_still_matched_as_text():
+    from buyscape.testify.run import lie_keys
+
+    tyre = _item("t", "car tyre", "Tyre", 50000)
+    keys = lie_keys(tyre)
+    assert all(isinstance(k, str) for k in keys) and "2023" in keys
+
+
+def test_the_judge_reads_every_line_of_the_seller_s_words_including_the_planted_claim():
+    from buyscape.testify.run import WitnessReport, judge_request
+
+    item = _item("t", "washing machine", "Old washing machine", 50000)
+    item.seller_text = "Working well\nBought in London"
+    read = reading_request(item, [], "lie")
+    report = WitnessReport(observations=["a top loader"], identity=IdentityAnswer(status="by_type", kind="washer"))
+    judged = judge_request(item, report, read).user_text
+    assert "Bought in London" in judged and lie_for(item) in judged and "photos follow" not in judged
