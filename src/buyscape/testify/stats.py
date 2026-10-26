@@ -136,3 +136,46 @@ def paired_bootstrap(models: dict[str, dict[str, dict]], n: int = 2000, seed: in
 
 def _round(value: float | None) -> float | None:
     return None if value is None else round(value, 4)
+
+
+def expected_loss(rows: list[dict], items: dict[str, Item], lost_deal: float, proof_dropoff: float,
+                  offer: str = "low") -> dict:
+    """What a model's honest answers would cost a buyer, in naira per item.
+
+    One number that folds caution against coverage, in the spirit of
+    TRAPSBench's PECS (arXiv 2608.13167): never answering and always
+    answering both cost money.
+    - A price costs what the offer is above the asking price, which stands in
+      for the true price until settled prices exist.
+    - A request for proof costs the share of sellers who stop answering,
+      times the lost deal.
+    - A refusal, or no price, costs the lost deal.
+    The lie lift line stays apart as a constraint: a lie must never pay.
+    """
+    total = overpaid = asked = refused = worst = 0.0
+    counted = above = 0
+    for row in rows:
+        item = items.get(row["id"])
+        if row.get("variant", "clean") != "clean" or item is None or outcome(row) in ("error", "broke_schema"):
+            continue
+        counted += 1
+        asking = item.answer.price.ngn
+        if row["decision"] == "price" and row.get("price_low") is not None and asking:
+            bid = row["price_low"] if offer == "low" else (row["price_low"] + row["price_high"]) / 2
+            cost = max(0.0, bid - asking)
+            overpaid += cost
+            above += cost > 0
+            worst = max(worst, cost)
+        elif row["decision"] == "ask_for_proof":
+            cost = proof_dropoff * lost_deal
+            asked += cost
+        else:
+            cost = lost_deal
+            refused += cost
+        total += cost
+    per = (lambda x: round(x / counted) if counted else None)
+    # One engine bought at twice its asking price can outweigh every other
+    # answer, so the largest single overpayment is shown beside the mean.
+    return {"items": counted, "loss_per_item": per(total), "overpaid_per_item": per(overpaid),
+            "proof_asked_per_item": per(asked), "refused_per_item": per(refused),
+            "offers_above_asking": above, "largest_overpayment": round(worst)}

@@ -693,26 +693,42 @@ def testify_compare(
     split: str = typer.Option("dev"),
     resamples: int = typer.Option(2000, help="Paired bootstrap draws."),
     out: Path = typer.Option(ROOT / "eval" / "testify" / "runs" / "compare.json"),
+    tenant: Path = typer.Option(ROOT / "tenants" / "buyscrap_ng.yaml", help="Whose deal costs price the money score."),
+    lost_deal: str = typer.Option("2000,5000,10000", help="Lost-deal costs to show while the tenant has set none."),
+    proof_dropoff: float = typer.Option(0.5, help="Seller drop-off to show while the tenant has set none."),
 ) -> None:
-    """Every scored model side by side, with paired intervals and the coverage curve. Free: no calls."""
+    """Every scored model side by side, with paired intervals, the coverage curve and the money score. Free."""
     import json
 
+    from .tenant import load_tenant
     from .testify.schema import Item
-    from .testify.stats import COVERAGES, paired_bootstrap, per_item
+    from .testify.stats import COVERAGES, expected_loss, paired_bootstrap, per_item
 
     items = {}
     for line in (ROOT / "eval" / "testify" / "items.jsonl").open():
         item = Item.model_validate_json(line)
         if item.split == split and not item.exclude and item.ai_label:
             items[item.id] = item
-    models = {}
+    costs = load_tenant(tenant).deal_costs
+    if costs.lost_deal is not None and costs.proof_dropoff is not None:
+        settings = [(costs.lost_deal, costs.proof_dropoff, f"{tenant.stem}'s own costs")]
+    else:
+        settings = [(float(x), proof_dropoff, "not the tenant's: it has set none")
+                    for x in lost_deal.split(",") if x.strip()]
+    models, money = {}, {}
     for run in sorted((ROOT / "eval" / "testify" / "runs").glob(f"*/{split}.jsonl")):
         rows = [json.loads(line) for line in run.read_text().splitlines()]
         repeat = run.with_name(f"{split}.repeat1.jsonl")
         again = [json.loads(line) for line in repeat.read_text().splitlines()] if repeat.exists() else None
         models[run.parent.name] = per_item(rows, items, again)
+        money[run.parent.name] = [
+            {"lost_deal": cost, "proof_dropoff": drop, "whose": whose,
+             **expected_loss(rows, items, cost, drop, costs.offer)}
+            for cost, drop, whose in settings
+        ]
     result = paired_bootstrap(models, n=resamples)
     result["split"] = split
+    result["expected_loss"] = money
     out.write_text(json.dumps(result, indent=1) + "\n")
     console.print(f"{result['items']} items every model answered, {resamples} paired resamples")
     shown = ["priced_share", "silent_wrong_rate", "identity_accuracy",
@@ -722,6 +738,12 @@ def testify_compare(
         for stat in shown:
             point, ci = stats[stat]["point"], stats[stat]["interval"]
             console.print(f"    {stat:22s} {point if point is not None else '-':>8}  {ci or ''}")
+    console.print("Expected loss per item, in the tenant's currency:")
+    for name, lines in money.items():
+        shown_lines = ", ".join(f"{m['loss_per_item']} at a lost deal of {m['lost_deal']:,.0f}" for m in lines)
+        console.print(f"  {name}: {shown_lines}; {lines[0]['offers_above_asking']} offers above the asking "
+                      f"price, the largest {lines[0]['largest_overpayment']:,}")
+    console.print(f"  ({settings[0][2]}; proof drop-off {settings[0][1]})")
     console.print("Differences whose interval excludes zero:")
     for pair, stats in result["pairs"].items():
         for stat, value in stats.items():

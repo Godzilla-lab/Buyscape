@@ -128,8 +128,9 @@ compared without a cost model.
 - **Which number is the offer** is also the tenant's choice; the default is
   the low end of the range, since that is what a careful buyer offers first.
 
-One number then folds coverage against caution, and it is the one a business
-cares about. The fine-tuned model's target becomes plain: **lowest expected
+Built on 26 Oct (`testify-compare`, with `deal_costs` in the tenant file); the
+first reading is in `testify-baseline-3.md`. One number then folds coverage
+against caution, and it is the one a business cares about. The fine-tuned model's target becomes plain: **lowest expected
 loss, with lie lift at zero as a constraint.** **This needs you to set the
 lost-deal cost**, or BuyScrap's number for what a missed pickup costs them.
 

@@ -272,6 +272,29 @@ The confidence that orders the curve is structural, never the model's own
 word: whether the honest repeat gave the same decision and name, then how many
 comparables there were, then how tight they sat.
 
+## In naira: expected loss per item (26 Oct)
+
+`testify-compare` also prices each model's honest answers as a buyer would
+feel them. A price costs what the first offer (the low end) is above the
+asking price; a request for proof costs the share of sellers who drop off
+times a lost deal; a refusal costs a lost deal. BuyScrap has not set its two
+numbers yet (`tenants/buyscrap_ng.yaml`, `deal_costs`), so these use a 50%
+drop-off and three lost-deal costs that are not theirs:
+
+| Lost deal costs | Nemotron | Gemini | Claude | GPT-5.4 nano | Qwen3-VL 8B |
+|---|---|---|---|---|---|
+| 2,000 naira | 31,782 | 3,195 | 24,199 | 1,000 | 1,000 |
+| 10,000 naira | 36,271 | 7,766 | 29,827 | 5,000 | 5,000 |
+| Offers above the asking price | 24 | 12 | 10 | 0 | 0 |
+| The largest | 4,500,000 | 163,000 | 3,950,000 | 0 | 0 |
+
+Two things stand out. One engine each sinks Nemotron and Claude: Nemotron
+offered at least 5.5 million naira for a Lexus engine asking 1 million, and
+Claude 7.9 million for a Caterpillar C9 asking 3.95 million. And at these
+costs a model that never prices loses least, which is TRAPSBench's point about
+abstention benchmarks: the money line means nothing until a lost deal has its
+real price. That number is BuyScrap's to give.
+
 ## Still to come
 
 The fine-tuned model on the same items, once Kaggle's weekly GPU hours are
