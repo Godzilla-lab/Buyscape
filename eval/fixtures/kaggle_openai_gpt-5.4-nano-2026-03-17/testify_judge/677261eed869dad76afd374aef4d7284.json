@@ -1,0 +1,72 @@
+{
+  "task": "testify_judge",
+  "prompt_version": "testify_judge.v2",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "claims": [
+      {
+        "claim": "A 29-inch LG TV is for sale.",
+        "verdict": "contradicted",
+        "evidence": "Witness photos show a dark glossy large kitchen appliance with a curved front edge and a vent/grille side panel\u2014described as a refrigerator or similar large appliance\u2014not a TV."
+      },
+      {
+        "claim": "It\u2019s the transformer that got blown up.",
+        "verdict": "unverified",
+        "evidence": "No TV/transformer evidence is shown in the witness report; the photos do not indicate a TV or any transformer component."
+      },
+      {
+        "claim": "No dead pixel, no line on the screen, remote included.",
+        "verdict": "unverifiable_remote",
+        "evidence": "The witness report does not show a TV screen or any display/lines/dead pixels, and does not confirm the remote."
+      },
+      {
+        "claim": "Never repaired.",
+        "verdict": "unverified",
+        "evidence": "No repair history evidence (service marks, opened casing, receipts) is shown in the witness report."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Item identity mismatch: the photos appear to be a refrigerator/large kitchen appliance, not a 29-inch LG TV.",
+        "proof": "A clear photo of the front of the TV showing the screen and bezel (and/or the LG logo), plus a photo of the back/ports and the model/rating label.",
+        "if_unproven": "Price as the worst-case for a non-matching item (treat as not the TV described; assume unusable for TV purpose)."
+      },
+      {
+        "risk": "If it is a TV, the seller claims a blown transformer, which typically means no power or no proper operation; cooling/working status cannot be inferred from the current photos.",
+        "proof": "A short video showing power-on attempt (plug in, power button, any standby light), and a screen-on test (even a blank backlight is evidence).",
+        "if_unproven": "Price as not working / faulty electronics."
+      },
+      {
+        "risk": "Remote and accessories may be missing or not included.",
+        "proof": "Photo of the remote in hand next to the TV (or in the same frame), and a photo of all accessories/shelves/bins if it\u2019s actually a refrigerator.",
+        "if_unproven": "Price as remote not included."
+      },
+      {
+        "risk": "Condition issues (dents, scratches, rust, broken seals/missing parts) are not shown.",
+        "proof": "Close-up photos of all sides and corners, plus the rating plate/serial label and any visible damage.",
+        "if_unproven": "Price as cosmetically used with possible minor damage."
+      }
+    ],
+    "proof_requests": [
+      "Send clear photos that confirm the item is a TV: front screen (powered off and powered on), and the back panel with ports.",
+      "Send the LG rating/model label (serial/model/country) and the exact screen size confirmation.",
+      "Send a short power-on video showing whether it turns on (standby light/backlight) and whether there is any display.",
+      "Send a photo of the remote included (remote in the same frame as the TV).",
+      "If it is actually a refrigerator/large appliance, send photos of the rating plate, interior, and any faults (cooling performance)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The witness photos do not match the seller\u2019s claim of a 29-inch LG TV; without proof of the actual item and working/power status, a reliable worst-case price cannot be set."
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_judge",
+    "latency_ms": 5930,
+    "input_tokens": 1072,
+    "output_tokens": 801,
+    "cost_usd": 0.001216,
+    "replayed": false,
+    "fixture_key": "677261eed869dad76afd374aef4d7284",
+    "error": null
+  }
+}

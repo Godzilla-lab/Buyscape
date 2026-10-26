@@ -1,0 +1,82 @@
+{
+  "task": "testify_judge",
+  "prompt_version": "testify_judge.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "claims": [
+      {
+        "claim": "UPS available",
+        "verdict": "supported",
+        "evidence": "Photos 0 and 1 show a UPS unit branded Blue Gate."
+      },
+      {
+        "claim": "Battery is new",
+        "verdict": "unverifiable_remote",
+        "evidence": "No battery compartment or battery visible in either photo; seller's statement alone cannot confirm this."
+      },
+      {
+        "claim": "Holds charge for 8 hours",
+        "verdict": "unverifiable_remote",
+        "evidence": "No power-on test, runtime demo, or screen/indicator reading shown; this is a performance claim that requires a live test."
+      },
+      {
+        "claim": "Never repaired",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal photos or service history shown; casing scuffs do not confirm or deny internal repair work."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery age/health unknown despite 'new' claim",
+        "proof": "Photo of battery compartment open showing battery date/manufacture sticker, or a timed video of unit running on battery only until cutoff",
+        "if_unproven": "priced as unknown/possibly degraded battery, needing replacement"
+      },
+      {
+        "risk": "Claimed 8-hour runtime unverified",
+        "proof": "Video showing unit disconnected from mains with a load attached, timestamped, running continuously",
+        "if_unproven": "priced as base/minimal runtime, not the claimed duration"
+      },
+      {
+        "risk": "VA/Wattage capacity not visible",
+        "proof": "Clear close-up photo of the rating label (usually on side or rear) showing VA/Watt specs",
+        "if_unproven": "priced at lowest common capacity for this form factor"
+      },
+      {
+        "risk": "Unit may not power on or hold any charge",
+        "proof": "Video of power button pressed, indicator lights activating, and output socket powering a test device",
+        "if_unproven": "priced as non-functional until shown working"
+      },
+      {
+        "risk": "Output ports/sockets condition unknown",
+        "proof": "Close-up photo of rear panel sockets",
+        "if_unproven": "priced assuming possible port damage"
+      },
+      {
+        "risk": "No box/accessories shown, affecting resale value",
+        "proof": "Photo of original box, manual, or extra cables if present",
+        "if_unproven": "priced as unit-only, no accessories"
+      }
+    ],
+    "proof_requests": [
+      "Video of the UPS powered on, running a connected load, disconnected from mains, timestamped to show actual backup duration",
+      "Clear photo of the rating/label sticker showing VA/Wattage",
+      "Photo of the battery compartment open, showing battery brand/date",
+      "Close-up photo of rear output sockets",
+      "Photo of any original box, receipt, or accessories if available"
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identified as a Blue Gate UPS, so it can be priced at worst case given unverified battery, runtime, and capacity claims, with clear proof points that would raise the price."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_judge",
+    "latency_ms": 14407,
+    "input_tokens": 1577,
+    "output_tokens": 1247,
+    "cost_usd": 0.013606,
+    "replayed": false,
+    "fixture_key": "51ed62998a64332cc6faf16379c18664",
+    "error": null
+  }
+}

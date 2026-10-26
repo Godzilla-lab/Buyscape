@@ -1,0 +1,78 @@
+{
+  "task": "testify_judge",
+  "prompt_version": "testify_judge.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "claims": [
+      {
+        "claim": "LG Washing machine scrap but doesn't work and needs repair",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo shows door closed, display lit with orange icons, but no operation is shown; cannot confirm working or non-working state remotely."
+      },
+      {
+        "claim": "Barely used, bought new last year",
+        "verdict": "unverified",
+        "evidence": "Photo shows some surface marks/stains near the sticker and a worn/patched wall behind it, which is inconclusive about usage age."
+      },
+      {
+        "claim": "No fault at all, the motor was never opened",
+        "verdict": "contradicted",
+        "evidence": "This directly contradicts the seller's own earlier statement in the same message that the unit 'doesn't work and needs repair' \u2014 an internal inconsistency, not something the photo can resolve."
+      },
+      {
+        "claim": "Receipt and warranty card available",
+        "verdict": "unverifiable_remote",
+        "evidence": "No receipt or warranty card is visible in the photo; would need a separate image to confirm."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual working state of wash and dry cycles is unknown and seller's own description is contradictory",
+        "proof": "A video showing the machine powered on, a wash cycle starting, and a dry cycle starting with sound",
+        "if_unproven": "price as non-functional, needs repair"
+      },
+      {
+        "risk": "Internal condition of drum, bearings, motor, seals, and hoses cannot be seen",
+        "proof": "Close-up photos/video of open door drum, door seal, and hose connections at the back",
+        "if_unproven": "price as needing parts/repair, worst case"
+      },
+      {
+        "risk": "Surface stains near control panel could indicate corrosion, leakage, or heat damage affecting electronics",
+        "proof": "Close-up, well-lit photo of the stained area and the full control panel",
+        "if_unproven": "price as cosmetically and possibly electrically compromised"
+      },
+      {
+        "risk": "Seller's contradictory claims (scrap/non-working vs. barely-used/no-fault) raise risk of misrepresentation or a swapped/faulty unit being sold as near-new",
+        "proof": "A clear video call or recorded walk-around showing serial number, power-on behavior, and matching receipt/warranty card with serial number",
+        "if_unproven": "price at worst case (non-working, unverified history) and treat claims of 'new/no fault' as unsupported"
+      },
+      {
+        "risk": "Completeness of accessories (inlet/outlet hoses, power cord condition, manual) is unknown",
+        "proof": "Photo of all included accessories laid out next to the unit",
+        "if_unproven": "price assuming missing accessories"
+      }
+    ],
+    "proof_requests": [
+      "Video of the unit powered on, attempting a wash cycle and a dry cycle, with audible sound",
+      "Close-up photos of the drum interior, door seal, and rear hose connections",
+      "Close-up, well-lit photo of the stained/marked area on the front panel",
+      "Photo of the serial number plate (usually on the back or inside the door) matching the receipt/warranty card",
+      "Photo of the receipt and warranty card itself",
+      "Photo of all accessories (hoses, manual, power cord) included"
+    ],
+    "decision": "fraud_suspected",
+    "reason": "The seller's own message is self-contradictory, claiming the unit both 'doesn't work and needs repair' and has 'no fault at all,' which is a red flag; until resolved, the unit should be treated at worst case as non-working scrap pending verification."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_judge",
+    "latency_ms": 28308,
+    "input_tokens": 1630,
+    "output_tokens": 2644,
+    "cost_usd": 0.027682,
+    "replayed": false,
+    "fixture_key": "901f6314ae0d47d6eac76852d0fee291",
+    "error": null
+  }
+}

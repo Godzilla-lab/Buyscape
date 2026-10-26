@@ -1,0 +1,92 @@
+{
+  "task": "testify_judge",
+  "prompt_version": "testify_judge.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "claims": [
+      {
+        "claim": "Faulty inverter AC (from listing title)",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photos cannot show power-on or cooling function; no video of operation provided."
+      },
+      {
+        "claim": "Barely used, bought new last year",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows visible dust and grime staining on the indoor unit casing, inconsistent with a near-new, lightly used appliance."
+      },
+      {
+        "claim": "No fault at all, motor was never opened",
+        "verdict": "unverifiable_remote",
+        "evidence": "This directly contradicts the seller's own listing title calling it 'Faulty inverter AC'; no photo can resolve which statement is true, and no internal/motor photo is shown."
+      },
+      {
+        "claim": "Receipt and warranty card available",
+        "verdict": "unverifiable_remote",
+        "evidence": "No image of receipt or warranty card was captured by the witness."
+      },
+      {
+        "claim": "Brand is an 'Inverter' type unit (implied by casing text)",
+        "verdict": "unverified",
+        "evidence": "Partial text reading 'Inverter' is visible on outdoor unit casing, but no clear nameplate or model sticker confirms brand/model/capacity."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Unit may not power on or cool at all (possible compressor or electrical fault)",
+        "proof": "Video clip of unit running with indoor unit blowing cold air and outdoor fan/compressor operating.",
+        "if_unproven": "priced as non-functional / faulty, worst case"
+      },
+      {
+        "risk": "Refrigerant gas may be low or empty",
+        "proof": "Technician gauge reading or clear sign of cooling performance in a running video.",
+        "if_unproven": "priced as needing regas, worst case"
+      },
+      {
+        "risk": "Compressor health/noise issue",
+        "proof": "Audio/video of outdoor unit running showing normal compressor sound without grinding/rattling.",
+        "if_unproven": "priced as compressor-risk, worst case"
+      },
+      {
+        "risk": "Unknown capacity (BTU/HP) affecting value tier",
+        "proof": "Legible nameplate/model sticker photo showing capacity rating.",
+        "if_unproven": "priced at lowest plausible capacity tier for a split AC"
+      },
+      {
+        "risk": "Missing accessories (remote, mounting bracket, copper pipes, power cord)",
+        "proof": "Photo showing remote, bracket, and pipes included in sale.",
+        "if_unproven": "priced as unit-only, accessories excluded"
+      },
+      {
+        "risk": "Age/usage history inconsistent with 'barely used' claim",
+        "proof": "Clear photo of purchase receipt with date and unit serial number matching the physical unit.",
+        "if_unproven": "priced as used/older unit, not near-new"
+      },
+      {
+        "risk": "Internal contradiction in seller's own description (faulty vs. no fault) suggests unreliable disclosure",
+        "proof": "A direct, unedited video call or recording where seller demonstrates the unit running start-to-finish.",
+        "if_unproven": "priced at worst case (assume faulty) until contradiction is resolved"
+      }
+    ],
+    "proof_requests": [
+      "Video of the AC powered on, running continuously for several minutes showing cold air output and outdoor fan/compressor operating with normal sound.",
+      "Clear close-up photo of the manufacturer nameplate/model sticker on both indoor and outdoor units.",
+      "Photo of the original receipt and warranty card with legible date, serial number, and purchaser name.",
+      "Photo showing remote control, mounting bracket, and copper pipes included with the unit.",
+      "Clarification from seller resolving the contradiction between 'faulty' in the title and 'no fault at all' in the description."
+    ],
+    "decision": "price",
+    "reason": "The witness confirms the item is a split AC indoor/outdoor set, but function, capacity, and completeness are unverifiable remotely, and the seller's own words contradict each other on fault status, so it must be priced at worst case (assume faulty, unit-only) pending the listed proofs."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_judge",
+    "latency_ms": 22444,
+    "input_tokens": 1712,
+    "output_tokens": 2096,
+    "cost_usd": 0.022366,
+    "replayed": false,
+    "fixture_key": "ccd18c29e513ad2fe129a660c276ed59",
+    "error": null
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "task": "testify_judge",
+  "prompt_version": "testify_judge.v2",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "claims": [
+      {
+        "claim": "Faulty inverter AC available for sale.",
+        "verdict": "unverified",
+        "evidence": "Witness photos show a white portable air conditioner, but do not show inverter status or any fault indicators; no power-on test is shown."
+      },
+      {
+        "claim": "Barely used, bought new last year.",
+        "verdict": "unverified",
+        "evidence": "Witness notes light dust/usage marks, but no readable age/receipt/warranty details are visible in the provided report."
+      },
+      {
+        "claim": "No fault at all, the motor was never opened.",
+        "verdict": "unverifiable_remote",
+        "evidence": "The report does not include any internal inspection or proof of whether the motor/compressor was opened; no working test is shown."
+      },
+      {
+        "claim": "Receipt and warranty card available.",
+        "verdict": "unverified",
+        "evidence": "No receipt/warranty card is shown in the witness observations."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The unit may not be working (seller says faulty inverter; witness provides no power-on/cooling/heating test).",
+        "proof": "A short video clip of the unit powered on showing temperature set, compressor running (audible/visible vibration), and steady cold air output for several minutes.",
+        "if_unproven": "Price as non-working/unknown performance portable AC."
+      },
+      {
+        "risk": "Brand/model and capacity (BTU) are not readable, which affects value and suitability.",
+        "proof": "A close-up, sharp photo of the front label/model plate showing brand, model, and BTU/capacity.",
+        "if_unproven": "Price at the worst-case for value: treat as lower-capacity/unknown-spec portable AC."
+      },
+      {
+        "risk": "Missing essential accessories/parts (remote, drain hose, window kit/brackets) can make it unusable or reduce usability.",
+        "proof": "A full photo inventory laid out on the floor: remote, drain hose, window kit/brackets, manual, and any power cable/fittings.",
+        "if_unproven": "Price as incomplete set (no remote/accessories)."
+      },
+      {
+        "risk": "Refrigerant leak or need for recharge (common failure for ACs; not verifiable from exterior photos).",
+        "proof": "A technician test report or a clip showing stable cooling performance plus any evidence of pressure/temperature readings (or leak test result).",
+        "if_unproven": "Price as potential refrigerant issue (recharge/repair risk)."
+      },
+      {
+        "risk": "Filter/evaporator condition (mold/dust buildup) affecting hygiene and performance.",
+        "proof": "A photo/clip of the filter removed and the evaporator coil condition (clean vs dusty/moldy).",
+        "if_unproven": "Price as needing cleaning/service."
+      },
+      {
+        "risk": "Electrical condition (plug/cable/fuse/board health) not shown; could be unsafe or intermittent.",
+        "proof": "A clear photo of the plug and cable condition plus a power-on test showing no tripping and stable operation.",
+        "if_unproven": "Price as electrical/board unknown (higher repair risk)."
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the brand/model plate showing exact model and BTU/capacity.",
+      "Video of the unit running: power on, compressor start, airflow, and cooling performance for at least 5\u201310 minutes.",
+      "Photos of included accessories: remote, drain hose, window kit/brackets, manual, and any warranty/receipt documents.",
+      "Photo/clip of the filter removed and evaporator coil condition.",
+      "If possible, technician confirmation of inverter/compressor health and refrigerant status (leak test or recharge history)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The witness confirms it is a portable air conditioner, but key value drivers (exact model/BTU, working status, accessories, and refrigerant/electrical health) are not verifiable from the report. Because the seller\u2019s statements conflict (faulty vs no fault) and no power-on evidence is provided, proof is needed before a reliable price."
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_judge",
+    "latency_ms": 6851,
+    "input_tokens": 1084,
+    "output_tokens": 936,
+    "cost_usd": 0.001387,
+    "replayed": false,
+    "fixture_key": "8ce9807f1a1e7513b564bdb17acff554",
+    "error": null
+  }
+}
