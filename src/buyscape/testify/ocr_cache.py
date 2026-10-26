@@ -22,15 +22,19 @@ CACHE = Path("eval") / "raw" / "testify_ocr_cache.json"
 class OcrCache:
     """Read photos through the cache; a photo not in it is read now and kept."""
 
-    def __init__(self, root: Path, reader=None) -> None:
+    def __init__(self, root: Path, reader=None, live: bool = True) -> None:
         self.root, self.path = root, root / CACHE
         self.lines_read: dict[str, list] = json.loads(self.path.read_text()) if self.path.exists() else {}
         self._reader = reader
+        # A build reads only what `testify-ocr` read, so it is quick and the same every time.
+        self.live = live
         self.added = 0
 
     def scored(self, path: Path) -> list[tuple[str, float, list]]:
         key = self._key(path)
         if key not in self.lines_read:
+            if not self.live:
+                return []
             reader = self._reader or default_reader()
             if reader is None:
                 return []

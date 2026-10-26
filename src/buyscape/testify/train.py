@@ -273,23 +273,58 @@ def checked_twins(answer: Reading, fact: dict) -> list[tuple[str, str, Reading]]
     ]
 
 
-def noproof_target(answer: Reading, record: dict, ask: str, shown: int) -> Reading | None:
+_PHOTO = re.compile(r"\b(photos?)\s*(\d+)", re.IGNORECASE)
+
+
+def _seen_now(text: str, renumber: dict[int, int], painted: bool) -> str | None:
+    """A note as it reads on the photos left: photo numbers moved to where the photos now
+    sit, or None when it is about a photo that is gone or, on painted photos, quotes a
+    number the paint now covers."""
+    if any(int(n) not in renumber for _, n in _PHOTO.findall(text)):
+        return None
+    if painted and re.search(r"\d", _PHOTO.sub("", text)):
+        return None
+    return _PHOTO.sub(lambda m: f"{m.group(1)} {renumber[int(m.group(2))]}", text)
+
+
+def noproof_target(answer: Reading, record: dict, ask: str, shown: int,
+                   brand_seen: int | None = None) -> Reading | None:
     """The answer once the photos that named the model are gone (`construct.construct`).
 
     The name is cut to the kind and forgotten, the decision is to ask, and the
-    first request is the protocol's shot that names the item. A note about a
-    photo that is no longer there goes too. None when nothing seen is left."""
+    first request is the protocol's shot that names the item. The teacher read
+    the photos as they were, so its notes are read again against the photos
+    left: a note about a dropped photo goes, the others are renumbered to
+    where their photo now sits, and on painted photos a note quoting a number
+    goes, since the paint covers every line with a digit. A claim settled by
+    such a note falls back to unverified. A brand the photos left still show
+    (`brand_seen`, the photo it is on) stays; the model goes. None when nothing
+    seen is left."""
     kind = answer.identity.kind
     if answer.identity.status != "named" or not kind:
         return None
-    data = _forget(answer.model_dump(), [answer.identity.brand, answer.identity.model, *record["found"]])
+    brand = answer.identity.brand if brand_seen is not None else None
+    data = _forget(answer.model_dump(), [n for n in (answer.identity.brand, answer.identity.model, *record["found"])
+                                         if n and n != brand])
     if data is None:
         return None
-    gone = re.compile(rf"\bphoto\s*([{shown}-9]|\d\d)\b", re.IGNORECASE)
-    data["observations"] = [o for o in data["observations"] if not gone.search(o)]
+    painted = record.get("route") == "blank"
+    left = [k for k in range(shown + len(record.get("removed") or [])) if k not in (record.get("removed") or [])]
+    renumber = {old: new for new, old in enumerate(left)} if not painted else {k: k for k in range(shown)}
+    data["observations"] = [n for o in data["observations"] if (n := _seen_now(o, renumber, painted))]
+    for claim in data["claims"]:
+        now = _seen_now(claim.get("evidence") or "", renumber, painted)
+        if now is None:
+            verdict = "unverified" if claim["verdict"] in ("supported", "contradicted") else claim["verdict"]
+            claim.update(verdict=verdict, evidence=UNREADABLE)
+        else:
+            claim["evidence"] = now
+    data["risks"] = [r for r in data["risks"] if _seen_now(f"{r['risk']} {r['proof']}", renumber, painted) is not None
+                     or not painted]
     if not data["observations"]:
         return None
-    data["identity"] = IdentityAnswer(status="by_type", kind=kind).model_dump()
+    data["identity"] = (IdentityAnswer(status="named", kind=kind, brand=brand, read_from=[f"photo {brand_seen}"])
+                        if brand else IdentityAnswer(status="by_type", kind=kind)).model_dump()
     data["decision"] = "ask_for_proof"
     data["proof_requests"] = [ask, *(r for r in data["proof_requests"] if r != ask)]
     data["reason"] = NOPROOF_REASON
@@ -359,7 +394,8 @@ def build(cases: list[tuple], rows: list[dict], labels: dict[str, dict], root: P
         if noproof and item.id in noproof and ask_for is not None:
             record = noproof[item.id]
             kept = [root / p for p in record["photos"]]
-            said = noproof_target(answer, record, ask_for(item), len(kept))
+            seen = record.get("brand_seen") if answer.identity.brand else None
+            said = noproof_target(answer, record, ask_for(item), len(kept), seen)
             if said is not None:
                 chats.append(("noproof", said, reading_request(item, kept, "clean")))
         for variant, said, request in chats:

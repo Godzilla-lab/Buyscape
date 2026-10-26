@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import threading
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
@@ -1313,6 +1314,7 @@ def testify_train_build(
     runs = ROOT / "eval" / "testify" / "runs" / _dir_name(teacher)
     rows = [json.loads(line) for path in sorted(runs.glob("train*.jsonl")) if ".repeat" not in path.name
             for line in path.read_text().splitlines() if line.strip()]
+    rows_by_id = {r["id"]: ((r.get("reading") or {}).get("identity") or {}) for r in rows}
     # The benchmark's photo check, and the same check run on the training pool.
     labels = {}
     for labels_path in (ROOT / "eval" / "testify" / "labels_ai" / "gemini-3.5-flash-lite.jsonl",
@@ -1331,12 +1333,13 @@ def testify_train_build(
     if default_reader() is None:
         console.print("[yellow]The OCR engine is not installed: every model name on an advert with no "
                       "photo check is cut to the kind, and no seller, fact or label is read.[/yellow]")
-    ocr = OcrCache(ROOT)
+    ocr = OcrCache(ROOT, live=False)
 
     # No training advert from a seller who is also in the benchmark: Jiji's photo
-    # stamp and the phone number in the seller's words name the seller.
+    # stamp and the phone number in the seller's words name the seller. The
+    # stamp is on every photo, so the first one is enough.
     def seller_keys(item, photos):
-        return sellers.keys([ocr.scored(p) for p in photos[:4]], item.seller_text)
+        return sellers.keys([ocr.scored(p) for p in photos[:1]], item.seller_text)
 
     held = set()
     for item in load_items(ROOT / "eval" / "testify" / "items.jsonl"):
@@ -1355,13 +1358,22 @@ def testify_train_build(
     rival_of = truths.rivals()
     facts = {item.id: f for item, photos in kept if (f := truths.fact(item, photos, ocr.lines, rival_of))}
     images = ROOT / "eval" / "raw" / "testify_train_constructed"
+    # A painted photo is new, so it is read live: the code must be gone from it,
+    # and a brand it still shows stays in the answer.
+    live = OcrCache(ROOT)
     noproof = {}
     for item, photos in kept:
         tier = (labels.get(item.id) or {}).get("tier")
         if tier == "branded_electronics":
-            record = construct.construct(item.model_copy(update={"tier": tier}), photos, ocr.boxes, images, ROOT)
+            record = construct.construct(item.model_copy(update={"tier": tier}), photos, live.boxes, images, ROOT)
             if record:
+                brand = (rows_by_id.get(item.id) or {}).get("brand") or ""
+                record["brand_seen"] = next(
+                    (k for k, p in enumerate(record["photos"])
+                     if brand and any(construct.carries(re.sub(r"[^a-z0-9]", "", brand.lower()), line)
+                                      for line in live.lines(ROOT / p))), None)
                 noproof[item.id] = record
+    live.save()
     protocols = load_protocols(ROOT / "protocols")
 
     def ask_for(item):

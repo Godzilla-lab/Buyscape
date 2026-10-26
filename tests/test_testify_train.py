@@ -251,3 +251,23 @@ def test_a_wrong_read_is_taught_as_cannot_tell_only_where_the_photos_cannot_name
     answer, why = train.target(FAN, wrong, {"identity_from_photos_alone": "unknown"})
     assert answer.decision == "cannot_identify" and answer.identity.status == "unknown"
     assert "photos cannot name it" in why
+
+
+def test_notes_are_read_again_against_the_photos_left():
+    answer, _ = train.target(CAMERA, NAMED, {"identity_from_photos_alone": "named"})
+    answer = answer.model_copy(update={"observations": [
+        "photo 0 shows the label", "photo 2 shows the lens cap", "rated 220-240V on the base"]})
+    dropped = train.noproof_target(answer, {"found": ["d3300"], "route": "drop", "removed": [0],
+                                            "photos": ["a", "b", "c"]}, "the sticker", shown=3)
+    assert dropped.observations == ["photo 1 shows the lens cap", "rated 220-240V on the base"]
+    painted = train.noproof_target(answer, {"found": ["d3300"], "route": "blank", "removed": [0, 1, 2],
+                                            "photos": ["a", "b", "c"]}, "the sticker", shown=3)
+    assert painted.observations == ["photo 0 shows the label", "photo 2 shows the lens cap"]
+
+
+def test_a_brand_the_photos_left_still_show_stays():
+    answer, _ = train.target(CAMERA, NAMED, {"identity_from_photos_alone": "named"})
+    said = train.noproof_target(answer, {"found": ["d3300"], "route": "blank", "removed": [0], "photos": ["a"]},
+                                "the sticker", shown=1, brand_seen=0)
+    assert said.identity.status == "named" and said.identity.brand == "Nikon" and said.identity.model is None
+    assert said.identity.read_from == ["photo 0"] and said.decision == "ask_for_proof"
