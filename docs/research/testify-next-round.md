@@ -405,6 +405,15 @@ review's last place, since every run after it would otherwise be repeated.
 | 8 | BuyScrap email sent; staged gold set photographed and tested | you, with BuyScrap | a weekend and some naira |
 | 9 | The 8B run, only if the curve says size helps | me | a Kaggle week |
 
+Where it stands on 26 Oct: steps 1 to 4 are built (the items with the proof
+taken away, checked by a person; the quote apart from the message; truth,
+contradiction, pushback, pressure and the three conditions in the runner;
+paired intervals, the coverage curve, the money score, the adjudication file
+and the read and pick tables in `testify-compare`). Step 5 is running on
+Kaggle's quota and NVIDIA's free tier. The training set for step 6 is being
+rebuilt with the new twins and the seller split, for the GPU hours that come
+back on 31 Oct.
+
 Steps 1 to 4 start now and need nothing from anyone. Steps 7 and 8 can start
 any time and are what turn Testify from an advert-reading benchmark into a
 valuation benchmark.
