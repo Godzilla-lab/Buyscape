@@ -607,6 +607,48 @@ def testify_convert(out: Path = typer.Option(ROOT / "eval" / "testify" / "items.
         console.print(f"  {n:4d}  {kind}")
 
 
+@app.command("testify-construct")
+def testify_construct(
+    out: Path = typer.Option(ROOT / "eval" / "testify" / "constructed.jsonl"),
+) -> None:
+    """Items with the proof taken away, and photos that cannot be priced. Free: local OCR only."""
+    import json
+    from collections import Counter
+
+    from .identify.ocr import default_reader
+    from .testify import construct, label
+    from .testify.schema import Item
+
+    reader = default_reader()
+    if reader is None:
+        console.print("[red]The local OCR is not installed, so the plates cannot be found.[/red]")
+        raise typer.Exit(1)
+    # A person's checks survive a rebuild: an item keeps its verdict while it is built the same way.
+    old = {}
+    if out.exists():
+        old = {(r["id"], r["route"]): r for r in map(json.loads, out.read_text().splitlines())}
+    items = [Item.model_validate_json(line) for line in (ROOT / "eval" / "testify" / "items.jsonl").open()]
+    images = ROOT / "eval" / "raw" / "testify_constructed"
+    rows = []
+    for item in items:
+        if item.split not in ("dev", "test") or (not item.ai_label and not item.exclude):
+            continue
+        row = construct.bad_photo(item) if item.exclude else None
+        if row is None and not item.exclude:
+            photos = label.photos_for(item, ROOT)
+            row = construct.construct(item, photos, reader.boxes, images, ROOT) if photos else None
+        if row is None:
+            continue
+        before = old.get((row["id"], row["route"]))
+        if before and before.get("photos") == row.get("photos"):
+            row["checked"] = before.get("checked")
+        rows.append(row)
+    out.write_text("".join(json.dumps(r) + "\n" for r in rows))
+    console.print(f"{len(rows)} constructed items written to {out}")
+    for (split, route), n in sorted(Counter((r["split"], r["route"]) for r in rows).items()):
+        console.print(f"  {n:4d}  {split:5s} {route}")
+
+
 @app.command("testify-label")
 def testify_label(
     model: str = typer.Option("gemini-3.8-flash", help="Labelling model. A name with no slash is Google AI Studio."),
@@ -708,6 +750,9 @@ def testify_run(
     reads_only: bool = typer.Option(
         False, help="The read step only, no price pick: a teacher's reads for the training set."
     ),
+    constructed: bool = typer.Option(
+        False, help="The items with the proof taken away, and photos that cannot be priced (testify-construct)."
+    ),
 ) -> None:
     """Score a model on Testify: checked items only, title and price never shown.
 
@@ -736,6 +781,9 @@ def testify_run(
     ]
     out_dir = ROOT / "eval" / "testify" / "runs" / _dir_name(model)
     out_dir.mkdir(parents=True, exist_ok=True)
+    if constructed:
+        _testify_constructed(provider, everything, pool, hashes, split, out_dir, tag, budget_usd, model, mode)
+        return
     name = f"{split}{'_' + market if market else ''}{'.' + tag if tag else ''}"
     out_path = out_dir / f"{name}.jsonl"
     rows: list[dict] = []
@@ -775,6 +823,56 @@ def testify_run(
     with ledger.open("a") as fh:
         fh.write(json.dumps({
             "at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "task": "testify",
+            "model": model, "mode": mode, "cases": done, "spend_usd": round(spend, 4),
+        }) + "\n")
+
+
+def _testify_constructed(provider, everything, pool, hashes, split, out_dir, tag, budget_usd, model, mode) -> None:
+    """Run the constructed items for one split and score them against the model's honest run."""
+    from .testify import construct, label
+    from .testify.run import run_item
+
+    path = ROOT / "eval" / "testify" / "constructed.jsonl"
+    if not path.exists():
+        raise typer.BadParameter("run testify-construct first", param_hint="--constructed")
+    records = [r for r in map(json.loads, path.read_text().splitlines())
+               if r["split"] == split and r.get("checked") is not False]
+    items = {i.id: i for i in everything}
+    name = f"{split}.constructed{'.' + tag if tag else ''}"
+    out_path = out_dir / f"{name}.jsonl"
+    rows: list[dict] = []
+    spend, done = 0.0, 0
+    for record in records:
+        if spend >= budget_usd:
+            console.print(f"[yellow]Stopped at the {budget_usd} USD budget.[/yellow]")
+            break
+        item = items[record["id"]]
+        if record["route"] == "bad_photo":
+            photos, variant = label.photos_for(item, ROOT), "bad_photo"
+        else:
+            photos, variant = [ROOT / p for p in record["photos"]], "noproof"
+        if not photos or not all(p.exists() for p in photos):
+            continue
+        row = run_item(provider, item, photos, pool, "clean", tuple(hashes.get(item.id, ())))
+        row["variant"] = variant
+        if "QuotaExhausted" in row.get("error", ""):
+            console.print("[yellow]The free daily quota for this key is used up. Rerun tomorrow; "
+                          "recorded items replay free.[/yellow]")
+            break
+        spend += row["cost_usd"]
+        rows.append(row)
+        done += 1
+        out_path.write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in rows))
+    honest = out_dir / f"{split}.jsonl"
+    clean = [json.loads(line) for line in honest.read_text().splitlines()] if honest.exists() else None
+    result = construct.score(rows, records, items, clean)
+    result.update({"model": model, "split": split})
+    (out_dir / f"{name}.summary.json").write_text(json.dumps(result, indent=1) + "\n")
+    for key, value in result.items():
+        console.print(f"  {key}: {value}")
+    with (ROOT / "docs" / "proof" / "spend.jsonl").open("a") as fh:
+        fh.write(json.dumps({
+            "at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "task": "testify-constructed",
             "model": model, "mode": mode, "cases": done, "spend_usd": round(spend, 4),
         }) + "\n")
 

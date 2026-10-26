@@ -72,6 +72,7 @@ money moves. The promise is "nothing hidden gets priced", not "we see inside".
     uv run buyscape testify-fetch             cache Jiji small goods and material lots, from a home connection
     uv run buyscape testify-fetch --for-training --region kano   more cities as training data, never benchmark
     uv run buyscape testify-label --market lagos --key-env GEMINI_API_1   check each item's photos, free tier
+    uv run buyscape testify-construct         items with the plate taken away, and unpriceable photos, free
     uv run buyscape testify --model nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b --split dev   score a model
     uv run buyscape testify-export --model human:ada --split dev --no-lies   a person sits the test at /office/testify
     uv run buyscape testify --model kaggle:google/gemini-3-flash-preview --split train --no-lies --reads-only   a teacher reads the training pool

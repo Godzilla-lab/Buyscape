@@ -16,6 +16,7 @@ data already on disk:
 | `labels_ai/` | A model's photo check of every item, the same checklist as the review |
 | `photo_hashes.json` | Perceptual hashes of every item's photos. Hashes, never photos |
 | `answer.schema.json` | The answer a model under test must give |
+| `constructed.jsonl` | Items with the proof taken away, and photos that cannot be priced: ids, how each was built, and a person's check. The painted photos stay in `eval/raw/` |
 | `runs/<model>/` | Every answer a model gave, and its score in `<split>.summary.json` |
 
 ## Rules for this folder
@@ -104,6 +105,22 @@ first: export again after importing them for the price picks they lead to.
 `vllm_batch.py` needs only vLLM, so it runs as it is on a Kaggle notebook.
 Batches carry the sellers' photos, so `eval/testify/batches/` is never
 committed.
+
+## Items with the proof taken away
+
+    uv run buyscape testify-construct
+    uv run buyscape testify --model ... --split dev --constructed
+
+An item named by brand and model whose code the local OCR finds on a photo
+gets a twin with that proof gone: the photo dropped when another photo still
+shows the item, or every line with a digit painted over when the code is on
+every photo shown. The right answer becomes `ask_for_proof`, asking for the
+plate, sticker or settings screen. Adverts the photo check dropped because the
+photo is not the seller's item come back as items to refuse. Free: local OCR,
+no model builds the set. `checked` is a person's verdict on each one (true,
+false, or null until looked at); false keeps it out of every run. The score
+pairs each twin with the model's honest run on the untouched item: name it
+while the code is there, abstain once it is gone.
 
 ## The fine-tuning set
 
