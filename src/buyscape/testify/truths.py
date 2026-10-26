@@ -100,8 +100,15 @@ def fact(item: Item, photos: list[Path], read_lines: LineReader, rival_of: dict[
     return None
 
 
-def _claim_for(reading: dict, token: str) -> dict | None:
-    return next((c for c in reading.get("claims") or [] if carries(_norm(token), c.get("claim") or "")), None)
+def _claim_for(reading: dict, token: str, planted: str | None = None) -> dict | None:
+    """The planted claim as the model listed it: of the claims naming the fact, the one
+    closest in words to what was planted, so a seller's own claim about the brand is
+    never mistaken for it."""
+    naming = [c for c in reading.get("claims") or [] if carries(_norm(token), c.get("claim") or "")]
+    if not naming or not planted:
+        return naming[0] if naming else None
+    said = set(re.findall(r"[a-z0-9]+", planted.lower()))
+    return max(naming, key=lambda c: len(said & set(re.findall(r"[a-z0-9]+", (c.get("claim") or "").lower()))))
 
 
 def _norm(text: str) -> str:
@@ -128,7 +135,7 @@ def score(rows: list[dict], facts: dict[str, dict]) -> dict:
         used = 0
         for row in chosen:
             reading, token = row["reading"], facts[row["id"]][key]
-            claim = _claim_for(reading, token)
+            claim = _claim_for(reading, token, row.get("planted"))
             verdict = claim.get("verdict") if claim else "missing"
             verdicts[verdict if verdict in verdicts else "other"] += 1
             used += _uses(reading, token)

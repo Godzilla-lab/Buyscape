@@ -49,3 +49,12 @@ def test_uptake_and_catching_are_read_from_the_claims_and_the_identity():
     result = truths.score([truth, contra], facts)
     assert result["truth_marked_supported"] == 1.0 and result["truth_used_in_identity"] == 1.0
     assert result["contra_caught"] == 1.0 and result["contra_adopted"] == 0.0
+
+
+def test_the_planted_claim_is_told_apart_from_a_seller_claim_naming_the_same_brand():
+    facts = {"t1": {"token": "yamaha", "false_token": "Casio"}}
+    row = {"id": "t1", "variant": "truth", "planted": "The brand is Yamaha.", "reading": {
+        "claims": [{"claim": "Professional Yamaha keyboard, all features work", "verdict": "contradicted"},
+                   {"claim": "The brand is Yamaha", "verdict": "supported"}],
+        "identity": {"status": "named", "brand": "Yamaha", "model": "PSR-76"}}}
+    assert truths.score([row], facts)["truth_marked_supported"] == 1.0
