@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Front view of a black UPS with a blue vertical accent (photo 0).",
+      "Brand 'BLUE GATE' is embossed on the front (photo 0, photo 1).",
+      "Top and side view showing the power cord and a 3-pin plug (photo 1).",
+      "The unit has a power button and three LED indicators on the front.",
+      "No specification sticker, model number, or VA rating is visible.",
+      "The rear panel and output sockets are not shown."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "UPS",
+      "brand": "Blue Gate",
+      "model": null,
+      "read_from": [
+        "photo 0",
+        "photo 1"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Battery is new",
+        "verdict": "unverified",
+        "evidence": "No photo of the battery itself or a dated receipt is provided."
+      },
+      {
+        "claim": "holds charge for 8 hours",
+        "verdict": "unverifiable_remote",
+        "evidence": "Battery performance depends on the connected load and cannot be confirmed through photos."
+      },
+      {
+        "claim": "Never repaired",
+        "verdict": "unverifiable_remote",
+        "evidence": "Internal condition and the presence of intact warranty seals are not shown."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Unknown VA capacity",
+        "proof": "Photo of the specification sticker on the back or bottom of the unit.",
+        "if_unproven": "priced as the lowest capacity 650VA model"
+      },
+      {
+        "risk": "Dead or end-of-life battery",
+        "proof": "Video of the UPS powering a device (e.g., a lamp) while the main power is unplugged.",
+        "if_unproven": "priced as requiring a battery replacement"
+      },
+      {
+        "risk": "Damaged output sockets",
+        "proof": "Photo of the rear panel.",
+        "if_unproven": "priced as having faulty outlets"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the specification sticker on the back or bottom showing the VA rating.",
+      "Photo of the back panel to see the output sockets.",
+      "Video of the unit functioning on battery power with a load connected."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model number and VA capacity, which are the primary price drivers, are not visible. The seller's refusal to provide a photo of the specification sticker prevents a confident valuation."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 20657,
+    "input_tokens": 3929,
+    "output_tokens": 4450,
+    "cost_usd": 0.015314,
+    "replayed": false,
+    "fixture_key": "a3fedcc4c03f612e039a633e7fcf46bd",
+    "error": null
+  }
+}
