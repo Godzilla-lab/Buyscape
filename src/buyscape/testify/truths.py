@@ -86,6 +86,7 @@ def fact(item: Item, photos: list[Path], read_lines: LineReader, rival_of: dict[
         where = shown_in(token)
         if written and where is not None and (false := raised(written)):
             return {"id": item.id, "split": item.split, "fact": "code", "token": token, "false_token": false,
+                    "written": written, "measure": bool(_MEASURE.fullmatch(written)),
                     "shown_in": where, "truth": _says(written), "contra": _says(false),
                     "checked": None}
     for word in re.split(r"[^A-Za-z]+", title):
@@ -93,7 +94,8 @@ def fact(item: Item, photos: list[Path], read_lines: LineReader, rival_of: dict[
         where = shown_in(word.lower()) if rival else None
         if rival and where is not None and rival.lower() != word.lower():
             return {"id": item.id, "split": item.split, "fact": "brand", "token": word.lower(),
-                    "false_token": rival, "shown_in": where, "truth": f"The brand is {word}.",
+                    "false_token": rival, "written": word, "measure": False,
+                    "shown_in": where, "truth": f"The brand is {word}.",
                     "contra": f"The brand is {rival}.", "checked": None}
     return None
 

@@ -26,11 +26,23 @@ without proof". So:
   read as an engine's model, a 7kg washer named with a code for another.
 - A read where the teacher could not tell what the item is stays a
   cannot_identify example, so the student also learns to decline.
-- A read that is wrong about the item is dropped. A wrong label teaches more
-  than a missing one.
+- A read that is wrong about the item is dropped: a wrong label teaches more
+  than a missing one. The exception is an advert the photo check says its
+  photos alone cannot name: that becomes "cannot identify" (Gekhman et al.:
+  what cannot be known is taught as not known), never a guess.
 - Each kept example gets a twin: the same photos and words plus a planted
   claim from train_lies.yaml, never the benchmark's lies.yaml. The twin's
   answer is the same, with the claim listed as unverified.
+- Where a photo shows a fact the title names (`truths.fact`), two more twins:
+  the fact claimed, marked supported, and the fact made false, marked
+  contradicted, in training's own words, so the student learns to use a claim
+  a photo proves and to catch one it disproves, not only to ignore sellers.
+- Where a photo carries a branded advert's label (`construct.construct`), a
+  twin with that photo gone or the code painted out, answered by asking for
+  the shot that names the item.
+- No advert from a seller who is also in the benchmark is used: Jiji's photo
+  stamp and the phone number in the seller's words name the seller
+  (`sellers.py`).
 
 Training items are priced only against training adverts, so no benchmark
 title or price reaches a training prompt (`_testify_pool` in cli.py).
@@ -52,6 +64,7 @@ from ..providers.base import ImageRef, ModelRequest
 from ..providers.openrouter import system_text
 from .answer import ClaimAnswer, IdentityAnswer, Reading, hedged_name, money_written
 from .comparables import names
+from .construct import carries
 from .convert import redact
 from .run import lie_entry, reading_request
 from .schema import Item
@@ -174,6 +187,14 @@ def target(item: Item, reading: dict, label: dict | None = None,
         data.update(decision="cannot_identify")
         return Reading.model_validate(data), "kept: cannot identify"
     if identity_correct(item, read.identity.model_dump(), by_title=True) is not True:
+        if label and label.get("identity_from_photos_alone") == "unknown":
+            # Gekhman et al.: what cannot be known is taught as "I cannot tell",
+            # not dropped. Only where the photo check says the photos alone
+            # cannot name it, so the student never learns to decline the knowable.
+            notes = _forget(read.model_dump(), [read.identity.brand, read.identity.model, read.identity.kind])
+            if notes is not None:
+                notes.update(identity=IdentityAnswer(status="unknown").model_dump(), decision="cannot_identify")
+                return Reading.model_validate(notes), "kept: cannot identify, the photos cannot name it"
         return None, "teacher wrong about the item"
     data = read.model_dump()
     cut = ""
@@ -212,6 +233,69 @@ def twin(answer: Reading, lie: str) -> Reading:
     return answer.model_copy(update={"claims": claims})
 
 
+# Training's own words for a planted claim a photo settles, never the benchmark's
+# "The model is X.", so the student learns to check the claim against the photo
+# rather than to spot the test's phrasing.
+TRAIN_SAYS = {
+    "code": "Model {x}, check the sticker.",
+    "measure": "This one is {x}, it is written on it.",
+    "brand": "It's {x}, the name is on it.",
+}
+NOPROOF_REASON = (
+    "What the item is shows, but not the model that sets its price: no photo shows the label. "
+    "The shot asked for first would settle it."
+)
+
+
+def _say(fact: dict, false: bool) -> str:
+    kind = "brand" if fact["fact"] == "brand" else "measure" if fact.get("measure") else "code"
+    return TRAIN_SAYS[kind].format(x=fact["false_token"] if false else fact["written"])
+
+
+def checked_twins(answer: Reading, fact: dict) -> list[tuple[str, str, Reading]]:
+    """The true-claim and false-claim twins of a kept answer, as (variant, claim, answer).
+
+    Only when the kept answer already names what the photo shows, so that the
+    claim marked supported and the identity agree. The true claim is marked
+    supported and nothing else moves; the false one contradicted, and the
+    identity keeps what the photo shows."""
+    named = f"{answer.identity.brand or ''} {answer.identity.model or ''}"
+    if answer.identity.status != "named" or not carries(fact["token"], named):
+        return []
+    k = fact["shown_in"]
+    true, false = _say(fact, False), _say(fact, True)
+    supported = ClaimAnswer(claim=true, verdict="supported", evidence=f"Photo {k} shows it.")
+    against = ClaimAnswer(claim=false, verdict="contradicted",
+                          evidence=f"Photo {k} shows {fact['written']}, not {fact['false_token']}.")
+    return [
+        ("truth", true, answer.model_copy(update={"claims": [*answer.claims, supported]})),
+        ("contra", false, answer.model_copy(update={"claims": [*answer.claims, against]})),
+    ]
+
+
+def noproof_target(answer: Reading, record: dict, ask: str, shown: int) -> Reading | None:
+    """The answer once the photos that named the model are gone (`construct.construct`).
+
+    The name is cut to the kind and forgotten, the decision is to ask, and the
+    first request is the protocol's shot that names the item. A note about a
+    photo that is no longer there goes too. None when nothing seen is left."""
+    kind = answer.identity.kind
+    if answer.identity.status != "named" or not kind:
+        return None
+    data = _forget(answer.model_dump(), [answer.identity.brand, answer.identity.model, *record["found"]])
+    if data is None:
+        return None
+    gone = re.compile(rf"\bphoto\s*([{shown}-9]|\d\d)\b", re.IGNORECASE)
+    data["observations"] = [o for o in data["observations"] if not gone.search(o)]
+    if not data["observations"]:
+        return None
+    data["identity"] = IdentityAnswer(status="by_type", kind=kind).model_dump()
+    data["decision"] = "ask_for_proof"
+    data["proof_requests"] = [ask, *(r for r in data["proof_requests"] if r != ask)]
+    data["reason"] = NOPROOF_REASON
+    return Reading.model_validate(data)
+
+
 def messages(request: ModelRequest, answer: Reading, root: Path) -> list[dict]:
     """The chat a model is trained on: the exact system and user turns an API model is sent,
     with photos as paths rather than inline data, then the answer."""
@@ -231,10 +315,17 @@ def messages(request: ModelRequest, answer: Reading, root: Path) -> list[dict]:
 
 
 def build(cases: list[tuple], rows: list[dict], labels: dict[str, dict], root: Path,
-          entries: tuple[dict, ...] | None = None, ocr: OcrReader | None = None) -> tuple[list[dict], dict[str, int]]:
+          entries: tuple[dict, ...] | None = None, ocr: OcrReader | None = None,
+          facts: dict[str, dict] | None = None, noproof: dict[str, dict] | None = None,
+          ask_for=None) -> tuple[list[dict], dict[str, int]]:
     """Training examples from a teacher's clean reads. `cases` holds (item, photos).
     When the teacher named the item, `ocr` checks a model code the title does
-    not carry, and the whole name on an advert with no photo check."""
+    not carry, and the whole name on an advert with no photo check.
+
+    `facts` (`truths.fact` on training adverts) add a true-claim and a
+    false-claim twin; `noproof` (`construct.construct` on training adverts)
+    adds the same advert with its label gone, answered by asking for the shot
+    `ask_for(item)` names."""
     reads = {r["id"]: r for r in rows if r.get("variant", "clean") == "clean" and r.get("reading")}
     out: list[dict] = []
     tally: dict[str, int] = {}
@@ -258,10 +349,22 @@ def build(cases: list[tuple], rows: list[dict], labels: dict[str, dict], root: P
         if answer is None:
             continue
         lie = train_lie(item, entries)
-        for variant, said, request in (
+        chats = [
             ("clean", answer, reading_request(item, photos, "clean")),
             ("lie", twin(answer, lie), reading_request(item, photos, "lie", lie=lie)),
-        ):
+        ]
+        if facts and item.id in facts:
+            for variant, claim, said in checked_twins(answer, facts[item.id]):
+                chats.append((variant, said, reading_request(item, photos, variant, planted=claim)))
+        if noproof and item.id in noproof and ask_for is not None:
+            record = noproof[item.id]
+            kept = [root / p for p in record["photos"]]
+            said = noproof_target(answer, record, ask_for(item), len(kept))
+            if said is not None:
+                chats.append(("noproof", said, reading_request(item, kept, "clean")))
+        for variant, said, request in chats:
+            if variant not in ("clean", "lie"):
+                tally[f"twin: {variant}"] = tally.get(f"twin: {variant}", 0) + 1
             out.append({"id": item.id, "variant": variant, "market": item.market,
                         "messages": messages(request, said, root)})
     return out, tally

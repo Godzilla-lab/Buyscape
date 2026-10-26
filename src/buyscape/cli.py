@@ -1191,6 +1191,26 @@ def _batch_path(name: str, split: str, market: str, tag: str) -> Path:
     return ROOT / "eval" / "testify" / "batches" / name / f"{split}{'_' + market if market else ''}{'.' + tag if tag else ''}.jsonl"
 
 
+@app.command("testify-ocr")
+def testify_ocr() -> None:
+    """Read the first four photos of every benchmark and training advert once with the local OCR. Free."""
+    from .testify.convert import load_items
+    from .testify.label import photos_for
+    from .testify.ocr_cache import OcrCache
+
+    ocr = OcrCache(ROOT)
+    items = load_items(ROOT / "eval" / "testify" / "train_pool.jsonl") + [
+        i for i in load_items(ROOT / "eval" / "testify" / "items.jsonl") if i.split in ("dev", "test")]
+    for n, item in enumerate(items, 1):
+        for photo in photos_for(item, ROOT)[:4]:
+            ocr.scored(photo)
+        if ocr.added >= 200:
+            ocr.save()
+            console.print(f"  {n} of {len(items)} adverts read")
+    ocr.save()
+    console.print(f"{len(ocr.lines_read)} photos read, kept in {ocr.path}")
+
+
 @app.command("testify-train-build")
 def testify_train_build(
     teacher: str = typer.Option("kaggle:google/gemini-3-flash-preview", help="The model whose reads are the targets."),
@@ -1200,10 +1220,13 @@ def testify_train_build(
     """Build the fine-tuning set from a teacher's reads of the training pool.
 
     Run the teacher first: testify --model <teacher> --split train --no-lies
-    --reads-only. Only reads right about the item are kept, a known item is
-    priced at its worst case, and each example gets a lied-to twin. A brand or
-    model on an advert no labeller checked stays only if the local OCR found
-    it on a photo.
+    --reads-only, and testify-ocr to read the photos once. Only reads right
+    about the item are kept, a known item is priced at its worst case, and each
+    example gets a lied-to twin; where a photo shows a fact, a true-claim and a
+    false-claim twin too, and where a photo carries the label, a twin with it
+    taken away that asks for it. A brand or model on an advert no labeller
+    checked stays only if the local OCR found it on a photo. No advert from a
+    seller who is also in the benchmark is used.
     """
     from collections import Counter
 
@@ -1223,13 +1246,59 @@ def testify_train_build(
                            for line in labels_path.read_text().splitlines() if line})
     from .identify.ocr import default_reader
 
-    ocr = default_reader()
-    if ocr is None:
+    from .protocols.schema import load_protocols
+    from .testify import construct, sellers, truths
+    from .testify.convert import load_items
+    from .testify.label import photos_for
+    from .testify.ocr_cache import OcrCache
+
+    if default_reader() is None:
         console.print("[yellow]The OCR engine is not installed: every model name on an advert with no "
-                      "photo check is cut to the kind.[/yellow]")
-    examples, tally = train.build([(item, photos) for item, photos, _ in cases], rows, labels, ROOT, ocr=ocr)
+                      "photo check is cut to the kind, and no seller, fact or label is read.[/yellow]")
+    ocr = OcrCache(ROOT)
+
+    # No training advert from a seller who is also in the benchmark: Jiji's photo
+    # stamp and the phone number in the seller's words name the seller.
+    def seller_keys(item, photos):
+        return sellers.keys([ocr.scored(p) for p in photos[:4]], item.seller_text)
+
+    held = set()
+    for item in load_items(ROOT / "eval" / "testify" / "items.jsonl"):
+        if item.split in ("dev", "test"):
+            held |= seller_keys(item, photos_for(item, ROOT))
+    exact = {k for k in held if k.startswith("phone:")}
+    names = [k for k in held if k.startswith("name:")]
+    kept, shared = [], 0
+    for item, photos, _ in cases:
+        mine = seller_keys(item, photos)
+        if mine & exact or any(sellers.same(k, n) for k in mine if k.startswith("name:") for n in names):
+            shared += 1
+            continue
+        kept.append((item, photos))
+
+    rival_of = truths.rivals()
+    facts = {item.id: f for item, photos in kept if (f := truths.fact(item, photos, ocr.lines, rival_of))}
+    images = ROOT / "eval" / "raw" / "testify_train_constructed"
+    noproof = {}
+    for item, photos in kept:
+        tier = (labels.get(item.id) or {}).get("tier")
+        if tier == "branded_electronics":
+            record = construct.construct(item.model_copy(update={"tier": tier}), photos, ocr.boxes, images, ROOT)
+            if record:
+                noproof[item.id] = record
+    protocols = load_protocols(ROOT / "protocols")
+
+    def ask_for(item):
+        protocol = protocols.get(item.answer.category or "") or protocols["generic"]
+        shot = next((s for s in protocol.shots if {"model", "model_name", "vin"} & set(s.extract)), None)
+        return (shot or next(s for s in protocols["generic"].shots if s.id == "label_or_plate")).ask
+
+    examples, tally = train.build(kept, rows, labels, ROOT, ocr=ocr, facts=facts, noproof=noproof, ask_for=ask_for)
+    ocr.save()
+    tally["seller also in the benchmark, left out"] = shared
     train.write(examples, out)
-    console.print(f"{len(examples)} examples from {len(examples) // 2} items written to {out}")
+    console.print(f"{len(examples)} examples from {sum(e['variant'] == 'clean' for e in examples)} items "
+                  f"written to {out}")
     for why, n in sorted(tally.items(), key=lambda kv: -kv[1]):
         console.print(f"  {n:5d}  {why}")
     for city, n in sorted(Counter(e["market"] for e in examples if e["variant"] == "clean").items()):

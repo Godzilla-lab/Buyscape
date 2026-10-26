@@ -212,3 +212,42 @@ def test_a_name_the_teacher_doubted_in_its_own_words_is_cut_to_the_kind():
     answer, why = train.target(FAN, hedged, {"identity_from_photos_alone": "named"})
     assert answer.identity.status == "by_type" and answer.identity.model is None
     assert "name cut to the kind" in why
+
+
+CAMERA = _item("c1", "camera", "Nikon D3300 camera")
+NAMED = _read(status="named", brand="Nikon", model="D3300", kind="DSLR camera", read_from=["photo 1 body"])
+NAMED["observations"] = ["a black DSLR body", "photo 1 shows D3300 on the grip"]
+FACT = {"fact": "code", "token": "d3300", "false_token": "D3400", "written": "D3300", "measure": False, "shown_in": 1}
+
+
+def test_a_true_claim_is_marked_supported_and_its_false_twin_contradicted_in_training_words():
+    answer, _ = train.target(CAMERA, NAMED, {"identity_from_photos_alone": "named"})
+    twins = train.checked_twins(answer, FACT)
+    assert [v for v, _, _ in twins] == ["truth", "contra"]
+    (_, true, said_true), (_, false, said_false) = twins
+    assert true == "Model D3300, check the sticker." and "The model is" not in true  # never the benchmark's words
+    assert said_true.claims[-1].verdict == "supported" and said_false.claims[-1].verdict == "contradicted"
+    assert said_false.identity.model == "D3300"  # the false claim moves nothing
+
+
+def test_no_claim_twins_when_the_answer_does_not_name_what_the_photo_shows():
+    answer, _ = train.target(FAN, _read())
+    assert train.checked_twins(answer, {**FACT, "token": "ox", "fact": "brand", "written": "Ox"}) == []
+
+
+def test_with_the_label_gone_the_target_asks_for_the_shot_that_names_it():
+    answer, _ = train.target(CAMERA, NAMED, {"identity_from_photos_alone": "named"})
+    record = {"found": ["d3300"], "photos": ["media/00.jpg"]}
+    said = train.noproof_target(answer, record, "Close-up of the sticker with the model number.", shown=1)
+    assert said.decision == "ask_for_proof" and said.identity.status == "by_type"
+    assert said.proof_requests[0] == "Close-up of the sticker with the model number."
+    assert "D3300" not in said.model_dump_json() and said.reason == train.NOPROOF_REASON
+
+
+def test_a_wrong_read_is_taught_as_cannot_tell_only_where_the_photos_cannot_name_it():
+    wrong = _read(kind="sewing machine")
+    wrong["observations"] = ["a white plastic body with three blades"]
+    assert train.target(FAN, wrong, {"identity_from_photos_alone": "by_type"})[0] is None
+    answer, why = train.target(FAN, wrong, {"identity_from_photos_alone": "unknown"})
+    assert answer.decision == "cannot_identify" and answer.identity.status == "unknown"
+    assert "photos cannot name it" in why

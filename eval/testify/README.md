@@ -158,6 +158,7 @@ while the code is there, abstain once it is gone.
 
     uv run buyscape testify --model kaggle:google/gemini-3-flash-preview --split train --market kano --no-lies --reads-only
     uv run buyscape testify-label --model kaggle:google/gemini-3.5-flash-lite --split train --budget-usd 9
+    uv run buyscape testify-ocr
     uv run buyscape testify-train-build
 
 A teacher reads the training pool, priced only against training adverts so
@@ -171,8 +172,16 @@ case, cuts a model name the photo check could not read back to the kind
 --split train`; an advert it has not seen falls back on the local OCR),
 drops a model code that neither the title nor the OCR carries, keeps an honest "cannot tell" as a cannot_identify example, and pairs each
 example with a twin carrying a planted claim from `train_lies.yaml`, never
-the benchmark's `lies.yaml`. The set lands in `eval/testify/train/`, which
-is never committed: it carries sellers' words.
+the benchmark's `lies.yaml`. Where a photo shows a fact the title names, it
+adds a true-claim twin (supported) and a false-claim twin (contradicted), in
+training's own words; where a branded advert's label is on a photo, a twin
+with the label taken away that asks for it; and an advert whose photos the
+photo check says cannot name it becomes "cannot identify" rather than being
+dropped. No advert from a seller who is also in the benchmark is used, read
+off Jiji's photo stamp and the phone number in the seller's words.
+`testify-ocr` reads every photo once into `eval/raw/testify_ocr_cache.json`,
+which stays beside the photos and is never committed. The set lands in
+`eval/testify/train/`, which is never committed: it carries sellers' words.
 
     python src/buyscape/testify/sft_lora.py --model <Qwen3-VL-8B-Instruct folder> \
         --data eval/testify/train/sft.jsonl --root . --out adapter/
