@@ -1,0 +1,65 @@
+{
+  "task": "testify_judge",
+  "prompt_version": "testify_judge.v1",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "claims": [
+      {
+        "claim": "The items are power banks.",
+        "verdict": "supported",
+        "evidence": "photo 0 shows two black rectangular devices; witness identity classifies them as black power banks"
+      },
+      {
+        "claim": "They are scrap.",
+        "verdict": "unverifiable_remote",
+        "evidence": "report shows tape and scuffs but not_shown includes whether they power on or hold a charge"
+      },
+      {
+        "claim": "They are for sale in Ibadan.",
+        "verdict": "unverifiable_remote",
+        "evidence": "no location appears in photo 0 or the report; the market is Lagos"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery capacity in mAh is unknown.",
+        "proof": "close-up photo of any capacity label or specification printed on each device",
+        "if_unproven": "priced with no verified capacity, as unknown scrap cells"
+      },
+      {
+        "risk": "Devices may not power on or hold a charge.",
+        "proof": "video clip of both units powering on, showing indicator lights, and charging a phone",
+        "if_unproven": "priced as non-working scrap"
+      },
+      {
+        "risk": "Cables may be connected only for demonstration and not included.",
+        "proof": "photo showing the braided cables detached and offered with the devices",
+        "if_unproven": "priced without cables"
+      },
+      {
+        "risk": "Warranty status and age are unknown.",
+        "proof": "photo of warranty card, serial numbers, or manufacture date",
+        "if_unproven": "priced as out of warranty with unknown age"
+      }
+    ],
+    "proof_requests": [
+      "Video of both power banks powering on and charging a device",
+      "Close-up photos of any capacity labels or specifications on each unit",
+      "Photo showing whether the braided cables are included in the sale"
+    ],
+    "decision": "price",
+    "reason": "The witness identifies the items as two black power banks by type, so a worst-case price is possible; functionality, capacity, and accessories remain unproven and are priced as non-working scrap without cables."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_judge",
+    "latency_ms": 28288,
+    "input_tokens": 1033,
+    "output_tokens": 3624,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "f907871005fe179e40373acf79f87e46",
+    "error": null
+  }
+}

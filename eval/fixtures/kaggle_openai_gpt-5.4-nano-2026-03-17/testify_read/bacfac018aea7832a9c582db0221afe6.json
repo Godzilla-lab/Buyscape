@@ -1,0 +1,74 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0 shows two large rectangular solar panels mounted on a roof, in a V/tilted arrangement.",
+      "The panel surface has a grid of dark cells with visible cell lines; no clear brand/model text is readable from this photo.",
+      "No label/serial sticker, watt rating, or electrical specs are visible in the image provided.",
+      "No close-up of connectors (MC4), junction box, or frame condition is shown."
+    ],
+    "identity": {
+      "status": "unknown",
+      "kind": null,
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "The 300W Suntex panel offers stable, high-efficiency power generation with durable monocrystalline...",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo 0 does not show any readable brand/model label or watt rating, and does not clearly confirm monocrystalline type."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Watt rating may not be 300W (or may be per panel vs total), which directly changes market value.",
+        "proof": "A clear close-up photo of the panel rating label (nameplate) showing Wp (e.g., 300W), model, and serial number.",
+        "if_unproven": "Price as not confirmed 300W (worst case: treat as lower-rated/unknown output)."
+      },
+      {
+        "risk": "Brand/model may not be Suntex (seller text could be inaccurate).",
+        "proof": "Photo of the label showing manufacturer name (Suntex) and model number.",
+        "if_unproven": "Price as generic/unknown brand solar panel."
+      },
+      {
+        "risk": "Monocrystalline claim may be wrong (could be polycrystalline or mixed), affecting value.",
+        "proof": "Close-up of the label/specs stating cell type (mono/poly) or a clear view of cell appearance plus label confirmation.",
+        "if_unproven": "Price as not confirmed (worst case: treat as lower-value type)."
+      },
+      {
+        "risk": "Condition and functionality are unknown (panel could be cracked, degraded, or damaged).",
+        "proof": "Close-up photos of the glass surface for cracks/chips and the junction box/backs; plus an IV curve test or at least a working test report.",
+        "if_unproven": "Price as not working / untested until proven."
+      },
+      {
+        "risk": "Quantity mismatch: photo shows two panels, but seller text says 'The 300W panel' (could be one or two).",
+        "proof": "Confirm how many panels are included and whether each is 300W; take a photo showing both labels or a count with labels visible.",
+        "if_unproven": "Price for the worst-case interpretation (only one panel at the stated rating, unless proven otherwise)."
+      }
+    ],
+    "proof_requests": [
+      "Clear close-up of the panel rating label/nameplate (brand, model, Wp, voltage/current, serial).",
+      "Photos showing both panels\u2019 labels (if two are included) so quantity and per-panel wattage are confirmed.",
+      "Close-ups of the glass for cracks/chips and the junction box/MC4 connectors.",
+      "A simple performance proof: IV curve test or a documented test showing output under sun/standard conditions."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "From photo 0, the item is a solar panel setup, but the key pricing drivers (exact brand/model, confirmed watt rating, mono vs poly, quantity, and working condition) are not readable or provable in the provided image. Without the label and condition proof, a correct worst-case price cannot be confidently set."
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_read",
+    "latency_ms": 5647,
+    "input_tokens": 1443,
+    "output_tokens": 827,
+    "cost_usd": 0.001322,
+    "replayed": false,
+    "fixture_key": "bacfac018aea7832a9c582db0221afe6",
+    "error": null
+  }
+}
