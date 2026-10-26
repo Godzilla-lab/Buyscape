@@ -346,3 +346,23 @@ def test_an_answer_in_the_wrong_shape_is_the_models_failure_not_a_failed_call():
     assert outcome({"decision": "error", "error": "price pick: ProviderError: x: no JSON object in response: ok"}) == "broke_schema"
     assert outcome({"decision": "error", "error": "ProviderError: x failed after retries: HTTP 403: quota"}) == "error"
     assert outcome({"decision": "price"}) == "price"
+
+
+def test_the_quote_binds_and_the_message_does_not():
+    from buyscape.testify.answer import hedged_name, message, quote
+
+    reading = {
+        "observations": ["a washing machine, the code on the panel is half legible"],
+        "identity": {"status": "named", "brand": "LG", "model": "DirectDrive 7kg (exact code unclear)", "kind": "washer"},
+        "claims": [{"claim": "works well", "verdict": "unverified", "evidence": "no clip"}],
+        "risks": [{"risk": "drum bearing", "proof": "spin clip", "if_unproven": "as needing a bearing"}],
+        "decision": "price", "reason": "it may be the 6kg model",
+    }
+    bound = quote(reading, {"price_pick": {"low": 0, "high": 2}})
+    assert bound["pick"] == {"low": 0, "high": 2} and bound["identity"]["model"].startswith("DirectDrive")
+    assert bound["conditions"] == ["as needing a bearing", "works well: priced as unproven"]
+    assert "it may be the 6kg model" in message(reading)
+    assert hedged_name(reading["identity"])
+    assert not hedged_name({"status": "named", "brand": "Nikon", "model": "D3300"})
+    assert not hedged_name({"status": "named", "brand": "LG", "model": "DirectDrive 6/3kg"})
+    assert not hedged_name({"status": "by_type", "kind": "fan or heater"})

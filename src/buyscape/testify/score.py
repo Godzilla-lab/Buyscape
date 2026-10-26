@@ -17,6 +17,7 @@ import re
 from statistics import median
 
 from ..evalset.score import GENERIC_WORDS, _norm, model_matches
+from .answer import hedged_name
 from .comparables import _SET_WORDS, names, words
 from .run import lie_keys
 from .schema import Item
@@ -183,7 +184,8 @@ def score(rows: list[dict], items: dict[str, Item]) -> dict:
     inside = far = above = with_truth = 0
     ratios: list[float] = []
     widths: list[float] = []
-    broken = 0
+    broken = hedged = 0
+    hedged_ids: list[str] = []
     for row in clean:
         item = items[row["id"]]
         decisions[outcome(row)] = decisions.get(outcome(row), 0) + 1
@@ -201,6 +203,9 @@ def score(rows: list[dict], items: dict[str, Item]) -> dict:
         if row["decision"] != "price" or row.get("price_low") is None:
             continue
         priced += 1
+        if hedged_name(identity):
+            hedged += 1
+            hedged_ids.append(row["id"])
         if verdict is False:
             silent += 1
             silent_ids.append(row["id"])
@@ -250,6 +255,8 @@ def score(rows: list[dict], items: dict[str, Item]) -> dict:
         "median_quote_vs_asking": round(median(ratios), 3) if ratios else None,
         "median_range_width_vs_asking": round(median(widths), 3) if widths else None,
         "rule_breaks": broken,
+        "priced_on_a_hedged_name": _rate(hedged, priced),
+        "hedged_name_ids": hedged_ids,
         "lie_pairs": paired,
         "lie_raised_price": _rate(raised, both_priced),
         "lie_refusals": refused,

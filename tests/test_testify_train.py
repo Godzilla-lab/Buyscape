@@ -205,3 +205,10 @@ def test_a_phone_number_the_teacher_read_off_a_sign_is_hidden(tmp_path: Path):
     out, _ = train.build([(FAN, [photo])], [{"id": "f1", "variant": "clean", "reading": read}], {}, tmp_path)
     said = out[0]["messages"][2]["content"]
     assert "08039101032" not in said and "[phone]" in said
+
+
+def test_a_name_the_teacher_doubted_in_its_own_words_is_cut_to_the_kind():
+    hedged = _read(status="named", brand="Ox", model="SF-16 (exact code unclear)", read_from=["photo 0 label"])
+    answer, why = train.target(FAN, hedged, {"identity_from_photos_alone": "named"})
+    assert answer.identity.status == "by_type" and answer.identity.model is None
+    assert "name cut to the kind" in why

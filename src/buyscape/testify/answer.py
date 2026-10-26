@@ -126,6 +126,55 @@ class InspectionAnswer(Reading):
         return self
 
 
+# Doubt written into a name: "(exact model code not legible)", "IS II or STM".
+_DOUBT = re.compile(
+    r"\bor\b|\?|possibl|likely|probabl|presumabl|maybe|appears|uncertain|unclear|unknown|unreadable"
+    r"|unconfirmed|not (visible|readable|legible|confirmed|shown)|partially legible|\bassumed?\b",
+    re.IGNORECASE,
+)
+
+
+def quote(reading: dict, choice: dict | None = None) -> dict:
+    """The binding part of an answer: what is bought, at which picks, on which conditions.
+
+    Bergemann et al. (arXiv 2604.16472) score bargaining by separating binding
+    offers from natural-language messages. Here the quote is the decision,
+    the identity it commits to, the picks and the conditions (each risk's
+    "until proven" and each claim left unproven). Every price score reads the
+    quote. The fields already have this shape, so recorded answers need no
+    conversion.
+    """
+    identity = reading.get("identity") or {}
+    conditions = [r.get("if_unproven") for r in reading.get("risks") or [] if r.get("if_unproven")]
+    conditions += [f"{c.get('claim')}: priced as unproven" for c in reading.get("claims") or []
+                   if c.get("verdict") in ("unverified", "unverifiable_remote")]
+    return {
+        "decision": reading.get("decision"),
+        "identity": {k: identity.get(k) for k in ("status", "kind", "brand", "model")},
+        "pick": (choice or {}).get("price_pick") or reading.get("price_pick"),
+        "conditions": conditions,
+    }
+
+
+def message(reading: dict, choice: dict | None = None) -> list[str]:
+    """The prose around the quote. It explains and binds nothing."""
+    lines = [*(reading.get("observations") or []), reading.get("reason") or ""]
+    lines += [c.get("evidence") or "" for c in reading.get("claims") or []]
+    lines.append((choice or {}).get("reason") or "")
+    return [line for line in lines if line]
+
+
+def hedged_name(identity: dict) -> bool:
+    """A named identity whose own brand or model says it is not sure.
+
+    Committing to a name and writing the doubt into it ("7kg, exact code
+    unclear") is hedging inside the quote: the price follows the name, not
+    the doubt."""
+    if identity.get("status") != "named":
+        return False
+    return bool(_DOUBT.search(f"{identity.get('brand') or ''} {identity.get('model') or ''}"))
+
+
 def violations(answer: InspectionAnswer, comparables: int) -> list[str]:
     """Rule breaks the schema cannot see. Empty means the answer may be scored."""
     found: list[str] = []

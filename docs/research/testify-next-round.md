@@ -331,15 +331,26 @@ offers from natural-language messages so that deals can be scored by code.
 together, so a model can hedge in the prose ("may not be the Pro") while
 committing to the Pro's price.
 
-**The fix.** The answer gets a `quote` object, the decision, the picks and the
-conditions it is subject to, and a separate `message`, the observations and
-the reason. The quote is binding and is what every price score reads. The
-message is scored apart: a doubt in the message that the quote does not carry
-as a condition is counted as an unbound hedge. Old answers convert to the new
-shape by code, so the v0.1 runs stay scorable. **This lands before any new
-run**, or every run after it is paid for twice.
+**The fix.** The quote is the decision, the identity it commits to, the picks
+and the conditions it is subject to (each risk's "until proven" and each claim
+left unproven). The message is the observations and the reasons. The quote is
+binding and is what every price score reads.
 
-**Cost.** Code: free.
+**Done on 26 Oct, as a view rather than a new format.** The answer's binding
+fields were already structured apart from its prose, so renaming them would
+have voided every recorded run for no new information. `answer.quote()` and
+`answer.message()` read the two apart, and recorded answers need no
+conversion.
+- **Scored by code: a hedge inside the quote.** A priced answer whose own
+  brand or model says it is not sure ("DirectDrive 7kg (exact suffix code
+  unclear, appears to start with F1068Q...)"). On the recorded dev runs, Claude
+  did this on 4 of its 45 priced answers, in both honest runs; Gemini and
+  Nemotron never did. The training set now cuts such a teacher name back to
+  the kind.
+- **Read by a person: a doubt in the prose.** Word rules cannot tell a doubt
+  about the model from a doubt about the condition: tried on the five
+  baselines, most hits were "working condition unverified". Those go to the
+  adjudication file (section 7) instead of a score.
 
 ## 14. Refusing a photo that cannot be priced
 

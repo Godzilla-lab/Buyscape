@@ -50,7 +50,7 @@ from pydantic import ValidationError
 from ..identify.ocr import OcrReader
 from ..providers.base import ImageRef, ModelRequest
 from ..providers.openrouter import system_text
-from .answer import ClaimAnswer, IdentityAnswer, Reading, money_written
+from .answer import ClaimAnswer, IdentityAnswer, Reading, hedged_name, money_written
 from .comparables import names
 from .convert import redact
 from .run import lie_entry, reading_request
@@ -178,8 +178,10 @@ def target(item: Item, reading: dict, label: dict | None = None,
     data = read.model_dump()
     cut = ""
     gone: list[str] = []
-    if read.identity.status == "named" and label and label.get("identity_from_photos_alone") not in (None, "named"):
-        # Named beyond what the photo check could read: keep only the kind.
+    beyond = label and label.get("identity_from_photos_alone") not in (None, "named")
+    if read.identity.status == "named" and (beyond or hedged_name(read.identity.model_dump())):
+        # Named beyond what the photo check could read, or a name the teacher
+        # doubted in its own words ("exact code unclear"): keep only the kind.
         data["identity"] = IdentityAnswer(status="by_type", kind=read.identity.kind).model_dump()
         if not read.identity.kind or identity_correct(item, data["identity"], by_title=True) is not True:
             return None, "named beyond the photos, and the kind alone is wrong"
