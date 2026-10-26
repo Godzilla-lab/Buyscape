@@ -1,0 +1,102 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "White split AC indoor unit with horizontal air louvers placed on top of an outdoor condenser unit",
+      "Both units sit on tiled floor indoors, not installed or connected to pipes or cables",
+      "Word 'inverter' visible on the side of the lower condenser unit",
+      "Red handwritten markings on the lower unit casing",
+      "No remote control visible in the photo",
+      "Wooden door and window frame in the background"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "inverter air conditioner",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Faulty inverter AC",
+        "verdict": "contradicted",
+        "evidence": "Seller's own text later states 'No fault at all'"
+      },
+      {
+        "claim": "Barely used, bought new last year",
+        "verdict": "unverifiable_remote",
+        "evidence": "No proof of age or usage shown in photo"
+      },
+      {
+        "claim": "No fault at all",
+        "verdict": "unverified",
+        "evidence": "Cannot test unit remotely; contradicts 'Faulty' in title"
+      },
+      {
+        "claim": "the motor was never opened",
+        "verdict": "unverifiable_remote",
+        "evidence": "Cannot inspect motor internals from photo"
+      },
+      {
+        "claim": "Receipt and warranty card available",
+        "verdict": "unverifiable_remote",
+        "evidence": "Documents not shown in photo"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Unit does not work or is faulty",
+        "proof": "Video of both units running and cooling",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Not actually an inverter model",
+        "proof": "Close-up photo of brand/model plate",
+        "if_unproven": "as standard non-inverter AC"
+      },
+      {
+        "risk": "Refrigerant gas missing or leaked",
+        "proof": "Video of compressor running or pressure test",
+        "if_unproven": "as needing regassing"
+      },
+      {
+        "risk": "Indoor and outdoor units are mismatched",
+        "proof": "Photo of model numbers on both units",
+        "if_unproven": "as mismatched components"
+      },
+      {
+        "risk": "Receipt or warranty not genuine or unavailable",
+        "proof": "Photos of receipt and warranty card",
+        "if_unproven": "without documentation"
+      }
+    ],
+    "proof_requests": [
+      "Video of both units connected and running with cold air output",
+      "Close-up photo of brand and model plate on both units",
+      "Photos of receipt and warranty card",
+      "Photo of compressor motor showing it is unopened"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as an inverter air conditioner from photo 0, so it can be priced at its worst case as not working despite unverified claims.",
+    "price_pick": {
+      "low": 0,
+      "high": 1
+    }
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_joint",
+    "latency_ms": 164736,
+    "input_tokens": 2527,
+    "output_tokens": 4884,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "a966d7f2901f2ba8b7056fbd2a914cc5",
+    "error": null
+  }
+}

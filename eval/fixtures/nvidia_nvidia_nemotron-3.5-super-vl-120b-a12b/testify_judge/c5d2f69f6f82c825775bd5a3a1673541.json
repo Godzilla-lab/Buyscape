@@ -1,0 +1,77 @@
+{
+  "task": "testify_judge",
+  "prompt_version": "testify_judge.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "claims": [
+      {
+        "claim": "The brand is LG.",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows the LG logo on the top left corner."
+      },
+      {
+        "claim": "The washing machine does not work.",
+        "verdict": "unverified",
+        "evidence": "The report does not show the machine operating; whether it powers on is not shown."
+      },
+      {
+        "claim": "The washing machine needs repair.",
+        "verdict": "unverified",
+        "evidence": "Static photos cannot confirm repair needs; operation is not shown."
+      },
+      {
+        "claim": "The washing machine is scrap.",
+        "verdict": "unverifiable_remote",
+        "evidence": "Scrap status is an economic and condition judgment not visible in the report."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Whether the machine powers on and operates correctly.",
+        "proof": "A video clip of the machine powering on, filling, agitating or spinning, and draining.",
+        "if_unproven": "Price as non-working."
+      },
+      {
+        "risk": "Condition of water inlet and drain hoses.",
+        "proof": "Close-up photos of both hoses showing no cracks, leaks, or blockages.",
+        "if_unproven": "Price as hoses damaged or missing."
+      },
+      {
+        "risk": "Age of the appliance.",
+        "proof": "Photo of the rating plate or serial number, or the original purchase receipt.",
+        "if_unproven": "Price as an older, out-of-warranty unit."
+      },
+      {
+        "risk": "Availability of original manuals or packaging.",
+        "proof": "Photo of the manuals and original box.",
+        "if_unproven": "Price without manuals or packaging."
+      },
+      {
+        "risk": "Warranty status.",
+        "proof": "Photo of the warranty card or a screenshot of LG warranty verification.",
+        "if_unproven": "Price as out of warranty."
+      }
+    ],
+    "proof_requests": [
+      "Video of the machine powering on and completing a wash or spin cycle.",
+      "Close-up photos of the water inlet and drain hoses.",
+      "Photo of the rating plate or serial number.",
+      "Photo of original manuals and packaging if available.",
+      "Warranty card or proof of warranty status."
+    ],
+    "decision": "price",
+    "reason": "The witness identifies the item as an LG front-load washing machine with a readable model, so it can be priced at its worst case; the seller's non-working claim is unverified but sets the floor."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_judge",
+    "latency_ms": 31175,
+    "input_tokens": 1073,
+    "output_tokens": 2552,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "c5d2f69f6f82c825775bd5a3a1673541",
+    "error": null
+  }
+}
