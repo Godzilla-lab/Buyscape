@@ -649,6 +649,45 @@ def testify_construct(
         console.print(f"  {n:4d}  {split:5s} {route}")
 
 
+@app.command("testify-truths")
+def testify_truths(
+    out: Path = typer.Option(ROOT / "eval" / "testify" / "truths.jsonl"),
+) -> None:
+    """True claims a photo shows, and their false twins, for the truth and contra variants. Free: local OCR."""
+    import json
+    from collections import Counter
+
+    from .identify.ocr import default_reader
+    from .providers.base import ImageRef
+    from .testify import label, truths
+    from .testify.schema import Item
+
+    reader = default_reader()
+    if reader is None:
+        console.print("[red]The local OCR is not installed, so no fact can be read off a photo.[/red]")
+        raise typer.Exit(1)
+    old = {}
+    if out.exists():
+        old = {r["id"]: r for r in map(json.loads, out.read_text().splitlines())}
+    rival_of = truths.rivals()
+    rows = []
+    for line in (ROOT / "eval" / "testify" / "items.jsonl").open():
+        item = Item.model_validate_json(line)
+        if item.split not in ("dev", "test") or not item.ai_label:
+            continue
+        row = truths.fact(item, label.photos_for(item, ROOT), lambda p: reader((ImageRef(p),)), rival_of)
+        if row is None:
+            continue
+        before = old.get(row["id"])
+        if before and before.get("truth") == row["truth"]:
+            row["checked"] = before.get("checked")
+        rows.append(row)
+    out.write_text("".join(json.dumps(r) + "\n" for r in rows))
+    console.print(f"{len(rows)} facts written to {out}")
+    for (split, kind), n in sorted(Counter((r["split"], r["fact"]) for r in rows).items()):
+        console.print(f"  {n:4d}  {split:5s} {kind}")
+
+
 @app.command("testify-label")
 def testify_label(
     model: str = typer.Option("gemini-3.8-flash", help="Labelling model. A name with no slash is Google AI Studio."),
@@ -753,6 +792,15 @@ def testify_run(
     constructed: bool = typer.Option(
         False, help="The items with the proof taken away, and photos that cannot be priced (testify-construct)."
     ),
+    variants: str = typer.Option(
+        "", help="Comma list from clean, lie, truth, contra, pressure, pushback. Empty: clean and lie, "
+        "or clean alone with --no-lies. truth and contra need testify-truths first. Score pushback "
+        "with lie and pressure with clean in the same list: they replay free."
+    ),
+    condition: str = typer.Option(
+        "read_pick", help="read_pick (read, then pick), witness_judge (photos-only witness, text-only judge) "
+        "or joint (one call reads and picks)."
+    ),
 ) -> None:
     """Score a model on Testify: checked items only, title and price never shown.
 
@@ -761,7 +809,7 @@ def testify_run(
     """
     from .testify import label
     from .testify.run import run_item
-    from .testify.score import score
+    from .testify.score import against_pressure, against_pushback, score
 
     _load_dotenv()
     if key_env:
@@ -781,11 +829,30 @@ def testify_run(
     ]
     out_dir = ROOT / "eval" / "testify" / "runs" / _dir_name(model)
     out_dir.mkdir(parents=True, exist_ok=True)
+    from .testify.run import CONDITIONS
+
+    if condition not in CONDITIONS:
+        raise typer.BadParameter(f"one of {', '.join(CONDITIONS)}", param_hint="--condition")
+    cond = "" if condition == "read_pick" else condition
     if constructed:
-        _testify_constructed(provider, everything, pool, hashes, split, out_dir, tag, budget_usd, model, mode)
+        _testify_constructed(provider, everything, pool, hashes, split, out_dir,
+                             ".".join(s for s in (tag, cond) if s), budget_usd, model, mode, condition)
         return
-    name = f"{split}{'_' + market if market else ''}{'.' + tag if tag else ''}"
+    # A run of other variants or another condition is written apart from the main
+    # run it would overwrite, but its calls share the main recordings, so a
+    # pushback replays the lie read.
+    extra = "_".join(v.strip() for v in variants.split(",") if v.strip() not in ("", "clean", "lie"))
+    suffix = ".".join(s for s in (tag, cond, extra) if s)
+    name = f"{split}{'_' + market if market else ''}{'.' + suffix if suffix else ''}"
     out_path = out_dir / f"{name}.jsonl"
+    wanted = [v.strip() for v in variants.split(",") if v.strip()] or (["clean", "lie"] if lies else ["clean"])
+    facts: dict[str, dict] = {}
+    if {"truth", "contra"} & set(wanted):
+        facts_path = ROOT / "eval" / "testify" / "truths.jsonl"
+        if not facts_path.exists():
+            raise typer.BadParameter("run testify-truths first", param_hint="--variants")
+        facts = {r["id"]: r for r in map(json.loads, facts_path.read_text().splitlines())
+                 if r.get("checked") is not False}
     rows: list[dict] = []
     spend, done, skipped = 0.0, 0, 0
     for item in chosen:
@@ -799,8 +866,13 @@ def testify_run(
             skipped += 1
             continue
         stop = False
-        for variant in ("clean", "lie") if lies else ("clean",):
-            row = run_item(provider, item, photos, pool, variant, tuple(hashes.get(item.id, ())))
+        for variant in wanted:
+            planted = None
+            if variant in ("truth", "contra"):
+                if item.id not in facts:
+                    continue
+                planted = facts[item.id][variant]
+            row = run_item(provider, item, photos, pool, variant, tuple(hashes.get(item.id, ())), planted, condition)
             spend += row["cost_usd"]
             rows.append(row)
             if "QuotaExhausted" in row.get("error", ""):
@@ -814,6 +886,14 @@ def testify_run(
                           "recorded items replay free.[/yellow]")
             break
     result = score(rows, {i.id: i for i in chosen})
+    if facts:
+        from .testify import truths
+
+        result.update(truths.score(rows, facts))
+    if "pushback" in wanted:
+        result.update(against_pushback(rows, {i.id: i for i in chosen}))
+    if "pressure" in wanted:
+        result.update(against_pressure(rows, {i.id: i for i in chosen}))
     result.update({"model": model, "split": split, "market": market or "all", "skipped_no_photos": skipped})
     (out_dir / f"{name}.summary.json").write_text(json.dumps(result, indent=1) + "\n")
     for key, value in result.items():
@@ -827,7 +907,8 @@ def testify_run(
         }) + "\n")
 
 
-def _testify_constructed(provider, everything, pool, hashes, split, out_dir, tag, budget_usd, model, mode) -> None:
+def _testify_constructed(provider, everything, pool, hashes, split, out_dir, tag, budget_usd, model, mode,
+                         condition="read_pick") -> None:
     """Run the constructed items for one split and score them against the model's honest run."""
     from .testify import construct, label
     from .testify.run import run_item
@@ -853,7 +934,7 @@ def _testify_constructed(provider, everything, pool, hashes, split, out_dir, tag
             photos, variant = [ROOT / p for p in record["photos"]], "noproof"
         if not photos or not all(p.exists() for p in photos):
             continue
-        row = run_item(provider, item, photos, pool, "clean", tuple(hashes.get(item.id, ())))
+        row = run_item(provider, item, photos, pool, "clean", tuple(hashes.get(item.id, ())), condition=condition)
         row["variant"] = variant
         if "QuotaExhausted" in row.get("error", ""):
             console.print("[yellow]The free daily quota for this key is used up. Rerun tomorrow; "
@@ -863,7 +944,7 @@ def _testify_constructed(provider, everything, pool, hashes, split, out_dir, tag
         rows.append(row)
         done += 1
         out_path.write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in rows))
-    honest = out_dir / f"{split}.jsonl"
+    honest = out_dir / f"{split}{'.' + condition if condition != 'read_pick' else ''}.jsonl"
     clean = [json.loads(line) for line in honest.read_text().splitlines()] if honest.exists() else None
     result = construct.score(rows, records, items, clean)
     result.update({"model": model, "split": split})

@@ -82,7 +82,10 @@ class GoogleProvider:
                     }
                 ]
             },
-            "contents": [{"role": "user", "parts": self._parts(request)}],
+            "contents": [{"role": "user", "parts": self._parts(request)}] + [
+                turn for reply, said in request.turns
+                for turn in ({"role": "model", "parts": [{"text": reply}]}, {"role": "user", "parts": [{"text": said}]})
+            ],
             "generationConfig": {
                 "temperature": request.temperature,
                 # Gemini 3.x thinks before it answers and the thoughts count

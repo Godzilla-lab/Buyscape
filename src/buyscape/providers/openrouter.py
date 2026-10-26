@@ -92,11 +92,14 @@ def chat_body(request: ModelRequest) -> dict:
     A batch run on someone's own GPU is sent the same body, so a model scores
     the same wherever it runs.
     """
+    messages = [
+        {"role": "system", "content": system_text(request)},
+        {"role": "user", "content": content(request)},
+    ]
+    for reply, said in request.turns:
+        messages += [{"role": "assistant", "content": reply}, {"role": "user", "content": said}]
     return {
-        "messages": [
-            {"role": "system", "content": system_text(request)},
-            {"role": "user", "content": content(request)},
-        ],
+        "messages": messages,
         "max_tokens": request.max_tokens,
         "temperature": request.temperature,
         "response_format": {"type": "json_object"},

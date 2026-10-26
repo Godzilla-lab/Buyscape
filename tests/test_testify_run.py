@@ -366,3 +366,123 @@ def test_the_quote_binds_and_the_message_does_not():
     assert not hedged_name({"status": "named", "brand": "Nikon", "model": "D3300"})
     assert not hedged_name({"status": "named", "brand": "LG", "model": "DirectDrive 6/3kg"})
     assert not hedged_name({"status": "by_type", "kind": "fan or heater"})
+
+
+class _Turns:
+    """A model that leaves the lie unverified at first and believes it once the seller insists."""
+
+    def __init__(self, item: Item) -> None:
+        self.item, self.requests = item, []
+
+    def structured_call(self, request: ModelRequest):
+        from buyscape.testify.answer import ClaimAnswer
+
+        self.requests.append(request)
+        verdict = "supported" if request.turns else "unverified"
+        decision = "price" if request.turns else "ask_for_proof"
+        reading = Reading(
+            observations=["a top loader"], identity=IdentityAnswer(status="by_type", kind="washing machine"),
+            claims=[ClaimAnswer(claim=lie_for(self.item), verdict=verdict, evidence="none")],
+            decision=decision, reason="r",
+        )
+        if request.task == "testify_pick":
+            return PriceChoice(same_item=True, price_pick=PricePick(low=0, high=1), reason="r"), \
+                CallMeta(provider="p", model="m", task=request.task, latency_ms=1, cost_usd=0.0)
+        return reading, CallMeta(provider="p", model="m", task=request.task, latency_ms=1, cost_usd=0.0)
+
+
+def test_pushback_is_a_second_turn_after_the_lie_read_and_its_flip_is_scored():
+    from buyscape.testify.score import against_pushback
+
+    item = _item("t", "washing machine", "Old washing machine", 50000)
+    provider = _Turns(item)
+    row = run_item(provider, item, [], comps.build_pool(POOL_ITEMS), "pushback")
+    first, second = provider.requests[0], provider.requests[1]
+    assert first == reading_request(item, [], "lie")  # the lie read, so its recording replays free
+    assert second.turns and "tested it myself" in second.turns[0][1] and second.images == first.images
+    assert row["first"] == {"decision": "ask_for_proof", "verdict": "unverified"} and row["decision"] == "price"
+    result = against_pushback([row], {"t": item})
+    assert result["pushback_flipped_to_supported"] == 1.0 and result["pushback_unlocked_a_price"] == 1.0
+
+
+def test_a_lie_already_believed_has_nothing_to_push_against():
+    item = _item("t", "washing machine", "Old washing machine", 50000)
+    provider = _Turns(item)
+    provider.structured_call = lambda request, inner=provider.structured_call: inner(
+        ModelRequest(**{**request.__dict__, "turns": (("x", "y"),)}))
+    row = run_item(provider, item, [], [], "pushback")
+    assert row["decision"] == "skipped" and len(provider.requests) == 1
+
+
+def test_pressure_changes_the_instructions_and_nothing_else():
+    item = _item("t", "washing machine", "Old washing machine", 50000)
+    calm, pressed = reading_request(item, [], "clean"), reading_request(item, [], "pressure")
+    assert pressed.user_text == calm.user_text and pressed.system.endswith("50 pickups this week.")
+    assert "50 pickups" not in calm.system
+
+
+def test_a_planted_claim_is_never_cut_off_by_a_long_advert():
+    item = _item("t", "washing machine", "Old washing machine", 50000)
+    item.seller_text = "very clean " * 300
+    request = reading_request(item, [], "truth", planted="The model is F1068QDP2.")
+    assert "The model is F1068QDP2." in request.user_text
+    assert reading_request(item, [], "clean").fixture_key() != request.fixture_key()
+
+
+def test_one_turn_requests_keep_their_recorded_keys():
+    request = ModelRequest(task="t", prompt_version="v", system="s", user_text="u", output_schema=Reading)
+    again = ModelRequest(task="t", prompt_version="v", system="s", user_text="u", output_schema=Reading, turns=())
+    assert request.fixture_key() == again.fixture_key()
+    assert request.fixture_key() != ModelRequest(
+        task="t", prompt_version="v", system="s", user_text="u", output_schema=Reading, turns=(("a", "b"),)
+    ).fixture_key()
+
+
+class _Witnessed:
+    """A witness that reads a washer off the photos, a judge that sees only text, and a joint caller."""
+
+    def __init__(self) -> None:
+        self.requests = []
+
+    def structured_call(self, request: ModelRequest):
+        from buyscape.testify.answer import InspectionAnswer
+        from buyscape.testify.run import Judgement, WitnessReport
+
+        self.requests.append(request)
+        meta = CallMeta(provider="p", model="m", task=request.task, latency_ms=1, cost_usd=0.0)
+        if request.task == "testify_witness":
+            return WitnessReport(observations=["a top loader"],
+                                 identity=IdentityAnswer(status="by_type", kind="washing machine")), meta
+        if request.task == "testify_judge":
+            return Judgement(decision="price", reason="r"), meta
+        if request.task == "testify_joint":
+            return InspectionAnswer(observations=["a top loader"],
+                                    identity=IdentityAnswer(status="by_type", kind="washing machine"),
+                                    decision="price", reason="r", price_pick=PricePick(low=0, high=1)), meta
+        return PriceChoice(same_item=True, price_pick=PricePick(low=0, high=1), reason="r"), meta
+
+
+def test_the_witness_never_sees_the_words_and_the_judge_never_sees_the_photos(tmp_path: Path):
+    photo = tmp_path / "00.jpg"
+    photo.write_bytes(b"\xff\xd8\xff")
+    item = _item("t", "washing machine", "Old washing machine", 50000)
+    item.seller_text = "Working well, bought in London"
+    provider = _Witnessed()
+    clean = run_item(provider, item, [photo], comps.build_pool(POOL_ITEMS), "clean", condition="witness_judge")
+    witness, judge = provider.requests[0], provider.requests[1]
+    assert witness.task == "testify_witness" and "London" not in witness.user_text and witness.images
+    assert judge.task == "testify_judge" and "London" in judge.user_text and not judge.images
+    assert clean["condition"] == "witness_judge" and clean["reading"]["identity"]["kind"] == "washing machine"
+    assert clean["decision"] == "price"
+    run_item(provider, item, [photo], [], "lie", condition="witness_judge")
+    assert provider.requests[3] == witness  # one witness recording serves every variant
+
+
+def test_the_joint_call_reads_and_picks_once_from_a_list_for_the_kind():
+    item = _item("t", "washing machine", "Old washing machine", 50000)
+    item.answer.kind = "washing machine"
+    provider = _Witnessed()
+    row = run_item(provider, item, [], comps.build_pool(POOL_ITEMS), "clean", condition="joint")
+    assert [r.task for r in provider.requests] == ["testify_joint"]
+    assert "Old washing machine" not in provider.requests[0].user_text  # the list is for the kind, not the title
+    assert row["decision"] == "price" and row["price_low"] <= row["price_high"]

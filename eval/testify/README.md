@@ -16,6 +16,8 @@ data already on disk:
 | `labels_ai/` | A model's photo check of every item, the same checklist as the review |
 | `photo_hashes.json` | Perceptual hashes of every item's photos. Hashes, never photos |
 | `answer.schema.json` | The answer a model under test must give |
+| `truths.jsonl` | One fact per item that the title names and the local OCR reads on a photo, as a true claim and its false twin, with a person's check |
+| `rivals.yaml` | Brands that sell the same goods, for a false brand claim |
 | `constructed.jsonl` | Items with the proof taken away, and photos that cannot be priced: ids, how each was built, and a person's check. The painted photos stay in `eval/raw/` |
 | `runs/<model>/` | Every answer a model gave, and its score in `<split>.summary.json` |
 
@@ -105,6 +107,34 @@ first: export again after importing them for the price picks they lead to.
 `vllm_batch.py` needs only vLLM, so it runs as it is on a Kaggle notebook.
 Batches carry the sellers' photos, so `eval/testify/batches/` is never
 committed.
+
+## Truth, contradiction, pushback and pressure
+
+    uv run buyscape testify-truths
+    uv run buyscape testify --model ... --split dev --variants clean,lie,truth,contra
+    uv run buyscape testify --model ... --split dev --variants lie,pushback
+    uv run buyscape testify --model ... --split dev --variants clean,pressure
+
+A lie test alone is won by a model that ignores the seller. `truth` plants a
+claim a photo proves ("The model is D3300.") and `contra` the same claim made
+false ("The model is D3400."); only facts the title names and the local OCR
+reads on a photo qualify. `pushback` answers the lie read with the seller
+insisting, as a second turn, and `pressure` adds a quota note from the
+business to the instructions. Clean and lie replay from the main run, so
+listing them costs nothing and gives the scores their baseline. Each run of
+other variants is written apart, as `dev.<variants>.jsonl`.
+
+## Three conditions
+
+    uv run buyscape testify --model ... --split dev --condition witness_judge
+    uv run buyscape testify --model ... --split dev --condition joint
+
+`read_pick` is the default: read with the seller's words, then pick from
+comparables for the identity the read gave. `witness_judge` reads the photos
+blind to the words, and a text-only judge weighs the words against that
+report; the identity is the witness's. `joint` reads and picks in one call
+from a list retrieved for the item's kind, never its name. The gap between the
+three is how much honesty the architecture buys apart from the model.
 
 ## Items with the proof taken away
 
