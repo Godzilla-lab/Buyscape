@@ -432,3 +432,38 @@ def _joint_row(row: dict, answer: InspectionAnswer, found: list[comps.Comparable
         return row
     row["price_low"], row["price_high"] = found[pick.low].price_ngn, found[pick.high].price_ngn
     return row
+
+
+def frozen_pick(provider, item: Item, read_row: dict, pool: list[comps.Comparable], own_photos=()) -> dict:
+    """The pick alone, from the same list for every model: the comparables for the item's kind.
+
+    The model's own recorded read goes in unchanged, so this measures picking
+    apart from what our crawler found for the name it gave."""
+    row: dict = {"id": item.id, "variant": "frozen_pick", "decision": "error", "cost_usd": 0.0, "latency_ms": 0,
+                 "replayed": True, "reading": read_row.get("reading")}
+    try:
+        reading = Reading.model_validate(read_row.get("reading") or {})
+    except ValidationError:
+        row["error"] = "no recorded read to pick for"
+        return row
+    row["decision"] = reading.decision
+    if reading.decision != "price":
+        return row
+    found = frozen_comparables(item, pool, own_photos)
+    row["comparables"] = [{"n": n, "price_ngn": c.price_ngn, "source": c.source} for n, c in enumerate(found)]
+    if not found:
+        row["decision"], row["why"] = "no_price_data", "no comparable of this kind"
+        return row
+    try:
+        choice, meta = provider.structured_call(pick_request(reading, found))
+    except (ProviderError, ValidationError, MissingFixture) as exc:
+        row["decision"], row["error"] = "error", f"price pick: {type(exc).__name__}: {str(exc)[:300]}"
+        return row
+    row["cost_usd"] = 0.0 if meta.replayed else meta.cost_usd
+    row["latency_ms"], row["replayed"] = meta.latency_ms, meta.replayed
+    row["choice"] = choice.model_dump()
+    if not choice.same_item or choice.price_pick is None or choice.price_pick.high >= len(found):
+        row["decision"], row["why"] = "no_price_data", "no comparable on the list is the same item"
+        return row
+    row["price_low"], row["price_high"] = found[choice.price_pick.low].price_ngn, found[choice.price_pick.high].price_ngn
+    return row

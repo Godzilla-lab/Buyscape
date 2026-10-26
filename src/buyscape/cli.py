@@ -968,6 +968,10 @@ def testify_run(
         "read_pick", help="read_pick (read, then pick), witness_judge (photos-only witness, text-only judge) "
         "or joint (one call reads and picks)."
     ),
+    frozen_pick: bool = typer.Option(
+        False, help="Pick again from one list for every model, the comparables for the item's kind, "
+        "on the model's recorded honest reads. Text only."
+    ),
 ) -> None:
     """Score a model on Testify: checked items only, title and price never shown.
 
@@ -1001,6 +1005,22 @@ def testify_run(
     if condition not in CONDITIONS:
         raise typer.BadParameter(f"one of {', '.join(CONDITIONS)}", param_hint="--condition")
     cond = "" if condition == "read_pick" else condition
+    if frozen_pick:
+        from .testify.run import frozen_pick as pick_again
+
+        reads = {r["id"]: r for r in map(json.loads, (out_dir / f"{split}.jsonl").read_text().splitlines())
+                 if r.get("variant", "clean") == "clean"}
+        rows = []
+        for item in chosen:
+            if item.id in reads:
+                rows.append(pick_again(provider, item, reads[item.id], pool, tuple(hashes.get(item.id, ()))))
+        (out_dir / f"{split}.frozen_pick.jsonl").write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in rows))
+        result = score([{**r, "variant": "clean"} for r in rows], {i.id: i for i in chosen})
+        result.update({"model": model, "split": split, "pick": "frozen list for the kind"})
+        (out_dir / f"{split}.frozen_pick.summary.json").write_text(json.dumps(result, indent=1) + "\n")
+        for key in ("items", "priced_share", "silent_wrong", "asking_price_inside_range", "priced_above_asking"):
+            console.print(f"  {key}: {result[key]}")
+        return
     if constructed:
         _testify_constructed(provider, everything, pool, hashes, split, out_dir,
                              ".".join(s for s in (tag, cond) if s), budget_usd, model, mode, condition)

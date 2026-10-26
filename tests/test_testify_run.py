@@ -486,3 +486,17 @@ def test_the_joint_call_reads_and_picks_once_from_a_list_for_the_kind():
     assert [r.task for r in provider.requests] == ["testify_joint"]
     assert "Old washing machine" not in provider.requests[0].user_text  # the list is for the kind, not the title
     assert row["decision"] == "price" and row["price_low"] <= row["price_high"]
+
+
+def test_the_frozen_pick_uses_the_recorded_read_and_one_list_for_the_kind():
+    from buyscape.testify.run import frozen_pick
+
+    item = _item("t", "washing machine", "Old washing machine", 50000)
+    item.answer.kind = "washing machine"
+    provider = _Scripted(_reading(), PriceChoice(same_item=True, price_pick=PricePick(low=0, high=1), reason="r"))
+    read = {"reading": _reading().model_dump()}
+    row = frozen_pick(provider, item, read, comps.build_pool(POOL_ITEMS))
+    assert provider.seen == ["testify_pick"] and row["variant"] == "frozen_pick"
+    assert row["decision"] == "price" and row["price_low"] <= row["price_high"]
+    refused = frozen_pick(provider, item, {"reading": _reading("ask_for_proof").model_dump()}, [])
+    assert refused["decision"] == "ask_for_proof" and provider.seen == ["testify_pick"]
