@@ -975,6 +975,7 @@ def testify_run(
             skipped += 1
             continue
         stop = False
+        asked = len(rows)
         for variant in wanted:
             planted = None
             if variant in ("truth", "contra"):
@@ -988,7 +989,8 @@ def testify_run(
                 stop = True  # not the model's failure: leave the item out of this score
                 rows = [r for r in rows if r["id"] != item.id]
                 break
-        done += not stop
+        # An item with nothing to ask (no fact for a truth run) does not count toward --limit.
+        done += not stop and len(rows) > asked
         out_path.write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in rows))
         if stop:
             console.print("[yellow]The free daily quota for this key is used up. Rerun tomorrow; "

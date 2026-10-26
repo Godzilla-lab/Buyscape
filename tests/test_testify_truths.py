@@ -20,6 +20,7 @@ def test_a_code_on_a_photo_and_in_the_title_becomes_a_truth_and_a_raised_false_t
     fact = truths.fact(_item("Nikon D3300 with 18-55mm lens"), PHOTOS, lambda p: lines[p.name], truths.rivals())
     assert fact["fact"] == "code" and fact["shown_in"] == 1
     assert fact["truth"] == "The model is D3300." and fact["contra"] == "The model is D3400."
+    assert truths._says("7kg") == "It is the 7kg one."
 
 
 def test_with_no_code_on_a_photo_the_brand_is_the_fact_and_its_rival_the_lie():

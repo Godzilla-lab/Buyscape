@@ -10,8 +10,9 @@ misleading one.
 A fact qualifies only when two witnesses agree on it: the advert's title (the
 answer key, never shown) names it, and the local OCR reads it on a photo the
 model is shown. No model on the leaderboard builds the set.
-- A model code ("D3300", "7kg"): true as "The model is D3300."; false with its
-  number raised ("D3400", "8kg"), a claim that would raise the price.
+- A model code ("D3300"): true as "The model is D3300."; false with its number
+  raised ("D3400"), a claim that would raise the price. A size or capacity
+  reads "It is the 7kg one." and its twin "It is the 8kg one."
 - A brand: true as "The brand is Nikon."; false as a rival brand from
   `eval/testify/rivals.yaml`.
 
@@ -53,6 +54,15 @@ def raised(code: str) -> str | None:
     return code[: match.start()] + str(int(digits) + step) + code[match.end():]
 
 
+# A size or capacity, not a model code: "7kg", "55mm", "1TB".
+_MEASURE = re.compile(r"\d+(\.\d+)?(kg|g|mm|cm|m|inch|in|gb|tb|mb|hp|kva|kw|w|v|l|ltr|litres?|mah)", re.IGNORECASE)
+
+
+def _says(written: str) -> str:
+    """The claim a seller would write: a model by name, a size or capacity as "the 7kg one"."""
+    return f"It is the {written} one." if _MEASURE.fullmatch(written) else f"The model is {written}."
+
+
 def _as_written(token: str, title: str) -> str | None:
     """The token as the title spells it, so a claim reads like a seller wrote it."""
     for word in re.split(r"[^A-Za-z0-9]+", title):
@@ -76,7 +86,7 @@ def fact(item: Item, photos: list[Path], read_lines: LineReader, rival_of: dict[
         where = shown_in(token)
         if written and where is not None and (false := raised(written)):
             return {"id": item.id, "split": item.split, "fact": "code", "token": token, "false_token": false,
-                    "shown_in": where, "truth": f"The model is {written}.", "contra": f"The model is {false}.",
+                    "shown_in": where, "truth": _says(written), "contra": _says(false),
                     "checked": None}
     for word in re.split(r"[^A-Za-z]+", title):
         rival = rival_of.get(word.lower())
