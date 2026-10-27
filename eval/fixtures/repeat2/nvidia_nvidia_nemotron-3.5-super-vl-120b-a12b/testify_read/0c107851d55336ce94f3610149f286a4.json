@@ -1,0 +1,75 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a used V-type car engine removed from a vehicle and sitting on the ground.",
+      "The engine has an air intake box, belts, pulleys, hoses, and wiring visible.",
+      "No legible Lexus or LX460 badging or plate is visible in the photo.",
+      "A watermark 'VICTOR NAZECO' appears across the center of the image.",
+      "The phone/camera footer reads 'SPARK 30C', unrelated to the item identity."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used car engine",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Lexus lx460",
+        "verdict": "unverified",
+        "evidence": "No Lexus or LX460 marking is legible in photo 0."
+      },
+      {
+        "claim": "Japan engine",
+        "verdict": "unverifiable_remote",
+        "evidence": "Origin cannot be determined from photos alone."
+      },
+      {
+        "claim": "car engine",
+        "verdict": "supported",
+        "evidence": "Photo 0 clearly shows an automotive internal combustion engine."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine may not run or may be seized internally.",
+        "proof": "Video of the engine cranking or running, or a compression test result.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "It may not be a Lexus LX460 engine; could be a different Toyota/Lexus engine or non-Japanese unit.",
+        "proof": "Clear photo of the engine block casting number or VIN plate matching LX460.",
+        "if_unproven": "as an unidentified used car engine"
+      },
+      {
+        "risk": "Internal damage, cracks, or missing components not visible externally.",
+        "proof": "Borescope inspection of cylinders and photos of all sides including the underside.",
+        "if_unproven": "as a core or non-running engine"
+      }
+    ],
+    "proof_requests": [
+      "Clear close-up of any engine block stamping, plate, or VIN to confirm LX460 identity.",
+      "Video of the engine turning over or running.",
+      "Photos of the engine from all angles, including the underside and bell housing.",
+      "Compression test or leak-down test results."
+    ],
+    "decision": "price",
+    "reason": "The item is visibly a used car engine, so it can be priced at its worst case as a non-running, unidentified engine; the Lexus LX460 claim is unverified and would require a block number or plate to raise the value."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 84475,
+    "input_tokens": 1873,
+    "output_tokens": 2166,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "0c107851d55336ce94f3610149f286a4",
+    "error": null
+  }
+}
