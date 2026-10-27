@@ -1,0 +1,79 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a single car headlight assembly with a clear lens and amber turn signal section.",
+      "The lens appears cloudy or yellowed with age.",
+      "A second headlight or housing is partially visible behind the main unit.",
+      "A watermark reading ARDON OYIGA is overlaid across the center of the image.",
+      "No brand badge, part number, or model year is visible on the part.",
+      "Mounting brackets and electrical connector are not clearly visible."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "car headlight",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Head light",
+        "verdict": "supported",
+        "evidence": "photo 0 shows a headlight assembly"
+      },
+      {
+        "claim": "honda accord",
+        "verdict": "unverifiable_remote",
+        "evidence": "no badge or marking visible in photo 0 to confirm vehicle make"
+      },
+      {
+        "claim": "2003 / 2007",
+        "verdict": "unverifiable_remote",
+        "evidence": "no year marking visible in photo 0"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The headlight may not fit a Honda Accord 2003-2007 or may be the wrong side (left/right).",
+        "proof": "Clear photo of the back housing, mounting points, part number, or the unit test-fitted on the car.",
+        "if_unproven": "as wrong fitment or wrong side"
+      },
+      {
+        "risk": "The lens may be cracked, hazy, or internally damaged; mounting tabs or adjusters may be broken.",
+        "proof": "Close-up photos of the lens surface, rear housing, and mounting clips.",
+        "if_unproven": "as damaged or non-functional"
+      },
+      {
+        "risk": "The assembly may not include bulbs, ballast, or wiring harness.",
+        "proof": "Photo showing the complete rear with connectors and bulbs installed.",
+        "if_unproven": "as housing only"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of the back of the headlight showing mounting points and connector",
+      "Clear shot of any part number or marking on the housing",
+      "Photo showing which side of the car the headlight fits (left or right)"
+    ],
+    "decision": "price",
+    "reason": "The item is visibly a car headlight assembly, so it can be priced at worst case despite unverified fitment and condition claims.",
+    "price_pick": {
+      "low": 0,
+      "high": 5
+    }
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_joint",
+    "latency_ms": 21020,
+    "input_tokens": 2200,
+    "output_tokens": 4273,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "93612f06217110b50bc449a8dec4cd8d",
+    "error": null
+  }
+}
