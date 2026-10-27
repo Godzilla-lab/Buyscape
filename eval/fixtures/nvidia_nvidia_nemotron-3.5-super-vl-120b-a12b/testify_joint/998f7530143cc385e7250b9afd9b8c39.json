@@ -1,0 +1,75 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "White top-loading washing machine in photo 0.",
+      "Front label reads NEXUS with a red X.",
+      "Clothes are piled on top of and beside the machine.",
+      "A power cord is visible at the lower right.",
+      "No model number is visible in the photo."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "top loading washing machine",
+      "brand": "NEXUS",
+      "model": null,
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "The brand is Midea.",
+        "verdict": "contradicted",
+        "evidence": "photo 0 shows a NEXUS label on the machine"
+      },
+      {
+        "claim": "Washing machine available at Abulegba",
+        "verdict": "unverifiable_remote",
+        "evidence": "location cannot be verified from the photo"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Machine does not power on or complete a wash cycle",
+        "proof": "video of the machine powering on, filling, agitating, and draining",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Drum or tub is damaged or leaking",
+        "proof": "photo of the interior drum and video of water fill and drain",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Capacity and age are unknown",
+        "proof": "photo of the specification or rating plate",
+        "if_unproven": "as unknown capacity and age"
+      }
+    ],
+    "proof_requests": [
+      "Video of the machine running a full wash cycle",
+      "Photo of the inside of the drum",
+      "Photo of the specification plate"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a top-loading washing machine with a visible Nexus brand label; the seller's Midea claim is contradicted by the photo, and functionality is unproven so it is priced as not working.",
+    "price_pick": {
+      "low": 0,
+      "high": 3
+    }
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_joint",
+    "latency_ms": 32256,
+    "input_tokens": 2137,
+    "output_tokens": 4223,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "998f7530143cc385e7250b9afd9b8c39",
+    "error": null
+  }
+}
