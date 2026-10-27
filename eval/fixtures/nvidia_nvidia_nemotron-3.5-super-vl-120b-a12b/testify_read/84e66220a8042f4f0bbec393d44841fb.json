@@ -1,0 +1,80 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Two rectangular photovoltaic panels with silver aluminum frames leaning against an outdoor wall",
+      "Dark solar cells with white grid lines visible under glass in photo 0",
+      "No readable brand plate, model label, or wattage sticker on either panel in photo 0",
+      "Watermark text \"IZUTECH SOLAR ENERGY\" overlaid across the image",
+      "Seller text describes a business selling solar equipment including panels"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Izutech solar energy specialize in all solar equipment such as: Inverter, panels, charge...",
+        "verdict": "unverifiable_remote",
+        "evidence": "Seller's words only; not shown or proven in photo 0"
+      },
+      {
+        "claim": "The items for sale are solar panels",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows two photovoltaic panels"
+      },
+      {
+        "claim": "The panels work",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows appearance only; no electrical test shown"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Cells may be cracked or have hot spots not visible at this resolution",
+        "proof": "Close-up photo of each panel surface in daylight",
+        "if_unproven": "as damaged or not working"
+      },
+      {
+        "risk": "Actual wattage and electrical ratings are unknown",
+        "proof": "Photo of the back label showing model and wattage",
+        "if_unproven": "as unrated used panel"
+      },
+      {
+        "risk": "Junction box and MC4 connectors may be missing or damaged",
+        "proof": "Photo of the panel back and connector ends",
+        "if_unproven": "as missing connectors"
+      },
+      {
+        "risk": "Panels may not produce power",
+        "proof": "Video of open-circuit voltage and short-circuit current in sunlight",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Back label photo showing wattage, voltage, and brand",
+      "Close-up of panel surface for cracks",
+      "Photo of junction box and MC4 connectors",
+      "Video of electrical output under sunlight"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as used solar panels from photo 0 even without a readable brand, so it can be priced at its worst case as untested and possibly non-working."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 16062,
+    "input_tokens": 1606,
+    "output_tokens": 2099,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "84e66220a8042f4f0bbec393d44841fb",
+    "error": null
+  }
+}

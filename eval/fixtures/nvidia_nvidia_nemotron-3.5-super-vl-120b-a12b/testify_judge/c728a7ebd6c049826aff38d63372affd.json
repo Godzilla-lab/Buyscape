@@ -1,0 +1,76 @@
+{
+  "task": "testify_judge",
+  "prompt_version": "testify_judge.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "claims": [
+      {
+        "claim": "Battery is new",
+        "verdict": "contradicted",
+        "evidence": "Witness report shows a solar panel in Photos 0-3, not a battery."
+      },
+      {
+        "claim": "holds charge for 8 hours",
+        "verdict": "contradicted",
+        "evidence": "The item is a solar panel; no battery or charge-holding test is shown in the report."
+      },
+      {
+        "claim": "Never repaired",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photos show exterior condition only; repair history cannot be determined remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Wattage or power rating is unknown",
+        "proof": "Close-up photo of the specification label on the panel back showing wattage, model, and brand.",
+        "if_unproven": "priced as an unknown/lowest-output panel"
+      },
+      {
+        "risk": "Age or usage history is unknown",
+        "proof": "Photo of the manufacture date sticker or original purchase receipt.",
+        "if_unproven": "priced as a used panel with degraded output"
+      },
+      {
+        "risk": "Warranty status is unknown",
+        "proof": "Screenshot or photo of a valid warranty card or manufacturer verification.",
+        "if_unproven": "priced with no warranty"
+      },
+      {
+        "risk": "Mounting hardware and cables may not be included",
+        "proof": "Photo showing all cables, connectors, and mounting brackets included with the panel.",
+        "if_unproven": "priced as panel only, without accessories"
+      },
+      {
+        "risk": "Exact dimensions are unknown",
+        "proof": "Photo of the panel next to a reference object or with a tape measure showing length and width.",
+        "if_unproven": "priced at an unknown size with worst-case shipping fit"
+      },
+      {
+        "risk": "Hidden cell defects such as microcracks or delamination",
+        "proof": "Electroluminescence test clip or close-up backlit photo of the cells.",
+        "if_unproven": "priced as potentially defective"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of the specification label on the back showing wattage, model, and brand",
+      "Photo showing whether cables and mounting hardware are included",
+      "Screenshot or photo of warranty documents",
+      "Backlit close-up or electroluminescence clip to check for cell defects"
+    ],
+    "decision": "price",
+    "reason": "The witness identified the item as a solar panel, so it can be priced at its worst case despite missing wattage, age, and accessory data; the seller's battery claims are contradicted by the report."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_judge",
+    "latency_ms": 92322,
+    "input_tokens": 1047,
+    "output_tokens": 3854,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "c728a7ebd6c049826aff38d63372affd",
+    "error": null
+  }
+}
