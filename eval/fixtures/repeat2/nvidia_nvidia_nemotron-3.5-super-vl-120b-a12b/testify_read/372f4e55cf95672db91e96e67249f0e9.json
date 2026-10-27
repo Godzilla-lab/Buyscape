@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "One used car tire lying flat on concrete",
+      "Tread shows circumferential grooves and sipes, low-profile pattern",
+      "Second tire partially visible at left edge",
+      "Watermark reads POSTED ON JIJI NIGERIA VENTURE",
+      "No sidewall size markings, brand name, or DOT code visible",
+      "Small green mark near bottom edge of tire"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "car tire",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "295 40 r20 size",
+        "verdict": "unverified",
+        "evidence": "sidewall size lettering not visible in photo 0"
+      },
+      {
+        "claim": "tukubo brand",
+        "verdict": "unverified",
+        "evidence": "no brand lettering visible on sidewall in photo 0"
+      },
+      {
+        "claim": "tire",
+        "verdict": "supported",
+        "evidence": "photo 0 shows a car tire"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual size is not 295/40 R20",
+        "proof": "close-up photo of sidewall showing molded size markings",
+        "if_unproven": "as a used tire of unknown size"
+      },
+      {
+        "risk": "Brand is not Tukubo or is unknown",
+        "proof": "close-up photo of sidewall showing brand name",
+        "if_unproven": "as an unbranded used tire"
+      },
+      {
+        "risk": "Tread is worn below safe limit or unevenly worn",
+        "proof": "close-up photo of tread wear bars or tread depth gauge reading",
+        "if_unproven": "as a worn-out tire"
+      },
+      {
+        "risk": "Tire is aged or has hidden punctures, patches, or bulges",
+        "proof": "photo of DOT date code and full 360-degree exterior view",
+        "if_unproven": "as an aged or damaged tire"
+      }
+    ],
+    "proof_requests": [
+      "Sidewall close-up showing size and brand markings",
+      "Tread depth close-up or gauge reading",
+      "DOT date code photo",
+      "Full tire rotation to check for patches, bulges, or bead damage"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is clearly a used car tire, but the size and brand that set the price are not readable in the photo, so even a worst-case price cannot be set without a sidewall shot."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 75731,
+    "input_tokens": 1836,
+    "output_tokens": 4266,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "372f4e55cf95672db91e96e67249f0e9",
+    "error": null
+  }
+}
