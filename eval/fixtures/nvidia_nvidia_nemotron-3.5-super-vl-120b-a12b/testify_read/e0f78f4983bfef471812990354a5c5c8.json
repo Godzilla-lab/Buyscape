@@ -1,0 +1,73 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a stainless steel cooker with four gas burners at the corners and two electric hotplates in the center, backguard raised, knobs on the front right.",
+      "Photo 1 shows the same cooker with all four gas burners lit with blue flames and the two central hotplates unlit, backguard raised.",
+      "Photo 2 shows a front angle with the backguard lowered, an oven door with handle, and control knobs along the top front edge; no brand or model is readable in any photo."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "gas cooker with electric hotplates",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "4 gas burners and 2 burners making 6 burners in total",
+        "verdict": "supported",
+        "evidence": "photo 0 and photo 1 show four gas burners and two central hotplates"
+      },
+      {
+        "claim": "All working perfectly",
+        "verdict": "unverifiable_remote",
+        "evidence": "photos show gas ignition but cannot prove oven, hotplates, or knobs work remotely"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Oven may not heat or door seal may be worn",
+        "proof": "video of oven reaching temperature or photo of oven interior",
+        "if_unproven": "as oven not working"
+      },
+      {
+        "risk": "Two electric hotplates may not heat",
+        "proof": "video of hotplates glowing red when switched on",
+        "if_unproven": "as electric hotplates not working"
+      },
+      {
+        "risk": "Gas burners may not light on Abuja gas supply or regulator",
+        "proof": "video of all four gas burners lighting with cylinder connected",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Control knobs or thermostat may be faulty",
+        "proof": "video of each knob being turned and burner responding",
+        "if_unproven": "as controls not working"
+      }
+    ],
+    "proof_requests": [
+      "Video of all four gas burners lighting with gas connected",
+      "Video of the two electric hotplates heating up",
+      "Video of the oven heating to temperature",
+      "Photo of the oven interior and door seal"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a gas cooker with electric hotplates and the burner count is visible, but working condition is unproven, so it is priced at worst case."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 22468,
+    "input_tokens": 2708,
+    "output_tokens": 2149,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "e0f78f4983bfef471812990354a5c5c8",
+    "error": null
+  }
+}
