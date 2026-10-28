@@ -1,0 +1,95 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black Xbox console covered in stickers, an Xbox controller in the foreground, and a Dell monitor displaying the Xbox dashboard with several game tiles.",
+      "Photo 1 shows the same console and controller with a football video game running on the monitor; a second controller is partially visible on the right edge.",
+      "Photo 2 shows the monitor displaying an FC 26 loading screen; the same sticker-covered console and controller are present."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "Xbox console",
+      "brand": "Xbox",
+      "model": null,
+      "read_from": [
+        "photo 0 console logo",
+        "photo 0 controller logo"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Xbox series 1x",
+        "verdict": "unverified",
+        "evidence": "No model text reading 'Series 1X' is visible on the console; that is not a known Xbox model name."
+      },
+      {
+        "claim": "with 6 games installed",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows multiple game tiles on screen, but the exact count and installation status cannot be confirmed remotely."
+      },
+      {
+        "claim": "Fc 26",
+        "verdict": "supported",
+        "evidence": "Photo 2 shows FC 26 on the monitor."
+      },
+      {
+        "claim": "far cry 3, modern warfare 3, dishonored 2 and tomb...",
+        "verdict": "unverified",
+        "evidence": "None of these titles are visible in the photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Exact Xbox model (One S, One X, Series S, or Series X) cannot be confirmed",
+        "proof": "Clear photo of the console model label or a system information screen",
+        "if_unproven": "as base Xbox One"
+      },
+      {
+        "risk": "Console may output video but not read discs or play games properly",
+        "proof": "Video of the console launching and playing a game",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Controller condition and button/stick function are unproven",
+        "proof": "Close-up photos of the controller from all angles",
+        "if_unproven": "as faulty controller"
+      },
+      {
+        "risk": "Claimed games may not be installed or playable",
+        "proof": "Screenshot of the installed games library or each game launching",
+        "if_unproven": "as console only"
+      },
+      {
+        "risk": "Console may be banned, modded, or otherwise restricted",
+        "proof": "Screenshot of system settings showing network and account status",
+        "if_unproven": "as banned or limited"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the console model label or system information screen",
+      "Video of the console navigating the dashboard and launching a game",
+      "Close-up photos of the controller from all angles",
+      "Screenshot of the installed games or library"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as an Xbox console with a controller and video output, but the model and game claims are unproven, so it is priced at the worst case using Xbox One comparables.",
+    "price_pick": {
+      "low": 0,
+      "high": 1
+    }
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_joint",
+    "latency_ms": 54833,
+    "input_tokens": 3167,
+    "output_tokens": 4410,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "4fc96d32b424d358d1fffb4fceaefd59",
+    "error": null
+  }
+}
