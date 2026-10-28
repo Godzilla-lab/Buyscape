@@ -11,6 +11,10 @@ Wrong is split three ways, because they are different failures:
 - kind: the wrong thing ("sofa" for a 3 and 2 seater set, an engine for a gearbox);
 - brand: the wrong maker;
 - version: the right line, the wrong model ("PS4" for a PS4 Pro).
+
+A person who reads it and cannot tell marks it unsure. The rule's call then
+stands, and the answer is counted apart as unsure, so a reader sees how many
+of the silent wrongs nobody could settle.
 """
 
 from __future__ import annotations
@@ -24,7 +28,7 @@ import yaml
 from .schema import Item
 
 PATH = Path(__file__).resolve().parents[3] / "eval" / "testify" / "adjudication.yaml"
-VERDICTS = ("right", "wrong_kind", "wrong_brand", "wrong_version")
+VERDICTS = ("right", "wrong_kind", "wrong_brand", "wrong_version", "unsure")
 
 
 def answer_text(identity: dict) -> str:

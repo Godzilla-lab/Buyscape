@@ -38,6 +38,15 @@ def test_a_silent_wrong_is_counted_by_how_it_is_wrong(tmp_path, monkeypatch):
     adjudicate._entries.cache_clear()
 
 
+def test_unsure_leaves_the_rule_standing_and_is_counted_apart(tmp_path, monkeypatch):
+    _file(tmp_path, monkeypatch, "unsure", first="wrong_kind")
+    row = {"id": "e1", "variant": "clean", "decision": "price", "price_low": 800000, "price_high": 950000,
+           "reading": {"identity": V6}}
+    assert identity_correct(ITEM, V6) is False
+    assert score([row], {"e1": ITEM})["silent_wrong_how"] == {"unsure": 1}
+    adjudicate._entries.cache_clear()
+
+
 def test_new_answers_are_listed_once_with_every_run_that_gave_them(tmp_path, monkeypatch):
     _file(tmp_path, monkeypatch, "null")
     row = {"reading": {"identity": {"status": "named", "brand": "Toyota", "model": "V6"}}}

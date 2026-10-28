@@ -108,7 +108,9 @@ def identity_correct(item: Item, identity: dict, by_title: bool = False) -> bool
     if status == "unknown":
         return None
     if not by_title and (said := adjudicated(item.id, identity)):
-        return said == "right"  # a person read it; the word rules do not get a vote
+        # A person read it; the word rules do not get a vote. Every entry is
+        # one the rules marked wrong, so "unsure" leaves it wrong.
+        return said == "right"
     if status == "named":
         # "Ps4+10games": a "+" before a number of extras joins them to the
         # item, it is not the Plus tier. Scoring only, like _SAME_KIND.

@@ -850,6 +850,7 @@ _ADJUDICATION_HEAD = """# A person's verdict on each priced answer the word rule
 # Written by `uv run buyscape testify-adjudicate`. For each entry, read the
 # item's photos and the answer, then set `verdict` to right, wrong_kind,
 # wrong_brand or wrong_version, `by` to your name, and `why` in a line.
+# Unsure leaves the rule's call standing and is counted apart.
 # `first_reading` is a model's draft and moves no score: only `verdict` does.
 # An entry matches every run that gave the same answer to the same item.
 
