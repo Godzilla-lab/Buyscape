@@ -1,0 +1,62 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-instruct",
+  "response": {
+    "observations": [
+      "Photo 0: A close-up of a tire's tread with a watermark 'D-KACHI ENTERPRISE'.",
+      "Photo 1: Another close-up of the same tire's tread, showing the same watermark.",
+      "Photo 2: Two tires stacked, with the top one showing the brand name 'MASTER' and the watermark 'D-KACHI ENTERPRISE'."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "tire",
+      "read_from": [
+        "photo 2 plate"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "This is a girst grade Tokumbo tires that will last almost like new brand ones.",
+        "verdict": "unverifiable_remote",
+        "evidence": "The brand name 'Tokumbo' is not visible in any photo. The brand name 'MASTER' is visible on photo 2, which is likely a different brand."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The tire is not a Tokumbo brand.",
+        "proof": "Photo 2 clearly shows the brand name 'MASTER' on the sidewall, not 'Tokumbo'.",
+        "if_unproven": "Priced as if it were a Tokumbo tire, which is not confirmed."
+      },
+      {
+        "risk": "The tire's tread depth is not 90% as claimed.",
+        "proof": "A close-up of the tread pattern in photo 0 or 1 would show the actual tread depth relative to the original depth, which is not visible in the photos.",
+        "if_unproven": "Priced as if the tread is 90% deep, which is not confirmed."
+      },
+      {
+        "risk": "The tire has been removed from a 2023 car, but the age or condition is not verified.",
+        "proof": "A photo showing the car or the date of manufacture would settle this risk.",
+        "if_unproven": "Priced as if it were from a 2023 car, which is not confirmed."
+      }
+    ],
+    "proof_requests": [
+      "Ask for a photo of the tire's sidewall showing the full brand name and model number.",
+      "Ask for a photo of the tire's tread depth measurement or a tread depth gauge reading.",
+      "Ask for a photo of the car from which the tire was removed, including the year of manufacture."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller claims the tire is a 'Tokumbo' brand, but the photos show a 'MASTER' brand. The tread depth and car origin are not verifiable from the photos alone."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-instruct",
+    "task": "testify_read",
+    "latency_ms": 3832,
+    "input_tokens": 1970,
+    "output_tokens": 584,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "0178b2cadecbfc7116005fb6d1ee28f3",
+    "error": null
+  }
+}

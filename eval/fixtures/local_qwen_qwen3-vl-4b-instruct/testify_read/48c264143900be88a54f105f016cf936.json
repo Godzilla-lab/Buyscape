@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-instruct",
+  "response": {
+    "observations": [
+      "A black and silver electric scooter parked outside a building.",
+      "The scooter has a rear storage box with 'KAWASAKI' visible on the side.",
+      "The scooter has a rearview mirror, handlebars, and a seat.",
+      "The ground is concrete and appears weathered.",
+      "A watermark 'PRAYER WORKS' is visible on the photo."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "electric scooter",
+      "brand": "KAWASAKI",
+      "model": null,
+      "read_from": [
+        "photo 0 plate"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Cleanly used Electric bike for sale",
+        "verdict": "unverified",
+        "evidence": "Photo shows a scooter, not a bike. No visible signs of cleaning or wear beyond general use."
+      },
+      {
+        "claim": "Runs on 72v 20ah lead acid battery",
+        "verdict": "unverifiable_remote",
+        "evidence": "No battery or electrical components visible in the photo. No text or label confirms battery specs."
+      },
+      {
+        "claim": "Bought new 6 months ago",
+        "verdict": "unverifiable_remote",
+        "evidence": "No date or purchase documentation visible. No visible signs of age or wear that contradict this claim."
+      },
+      {
+        "claim": "Gears and brakes perfect, no rust, all parts original",
+        "verdict": "unverifiable_remote",
+        "evidence": "No close-up shots of gears, brakes, or rust. No visible signs of wear or damage in the photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery condition and performance",
+        "proof": "Photo of the battery or its location",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Age and originality of parts",
+        "proof": "Close-up shots of gears, brakes, and chassis",
+        "if_unproven": "as not original or worn"
+      },
+      {
+        "risk": "Seller's claim of 'cleanly used'",
+        "proof": "Photo of the scooter's interior or undercarriage for signs of cleaning or damage",
+        "if_unproven": "as not cleaned or in poor condition"
+      }
+    ],
+    "proof_requests": [
+      "Send a close-up photo of the battery and its specifications",
+      "Send a photo of the gears and brakes",
+      "Send a photo of the scooter's interior or undercarriage"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The identity is confirmed as a Kawasaki electric scooter, but the seller's claims about battery specs, age, and condition lack photographic evidence. Proof is required to verify these claims before pricing."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-instruct",
+    "task": "testify_read",
+    "latency_ms": 4428,
+    "input_tokens": 1418,
+    "output_tokens": 623,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "48c264143900be88a54f105f016cf936",
+    "error": null
+  }
+}

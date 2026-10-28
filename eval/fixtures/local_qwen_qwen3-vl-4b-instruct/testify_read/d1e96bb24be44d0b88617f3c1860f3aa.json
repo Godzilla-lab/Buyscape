@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-instruct",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black Canon camera with 'Canon' logo, 'EOS 5D', and 'Mark II' visible on the top.",
+      "Photo 1 shows the back of the camera with the screen and control dials.",
+      "Photo 2 shows the bottom of the camera with a label that reads 'Canon EOS 5D Mark II', 'Made in Japan', and a serial number.",
+      "All photos have a watermark 'POSTED ON JII CDICSON BUSINESS WORLD'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "camera",
+      "brand": "Canon",
+      "model": "EOS 5D Mark II",
+      "read_from": [
+        "photo 0 screen",
+        "photo 2 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "The Canon EOS 5D Mark II is a full-frame DSLR camera known for its 21.1-megapixel sensor...",
+        "verdict": "supported",
+        "evidence": "Photo 0 and Photo 2 clearly show the model name 'EOS 5D Mark II' and the Canon brand, which matches the known model specifications."
+      },
+      {
+        "claim": "Shutter count under 5,000, no fungus or scratch on the lens.",
+        "verdict": "unverifiable_remote",
+        "evidence": "The photos do not show the lens or any shutter count information. No visible signs of fungus or scratches are visible on the body or lens cap, but this cannot be verified remotely."
+      },
+      {
+        "claim": "Original battery and charger, never repaired.",
+        "verdict": "unverifiable_remote",
+        "evidence": "The photos do not show the battery or charger. There is no visible evidence of repairs or damage to the camera body."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The camera may have been repaired or modified.",
+        "proof": "Photo 0, 1, and 2 show no visible signs of repair, but the absence of a battery or charger in the photos makes it impossible to verify the condition of internal components.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The shutter count may be inaccurate or not verified.",
+        "proof": "Photo 0, 1, and 2 do not show any shutter count information or any way to verify it remotely.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The camera may have fungus or scratches on the lens, even if not visible on the body.",
+        "proof": "Photo 0, 1, and 2 do not show the lens, so the condition of the lens cannot be verified remotely.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Send a photo of the lens to verify its condition.",
+      "Send a photo of the battery and charger to verify their condition.",
+      "Send a photo of the camera's shutter count display or a digital readout of the shutter count."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller's claims about the camera's condition and components cannot be verified remotely from the photos alone. Additional proof is required to confirm the accuracy of the claims."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-instruct",
+    "task": "testify_read",
+    "latency_ms": 4100,
+    "input_tokens": 2171,
+    "output_tokens": 726,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "d1e96bb24be44d0b88617f3c1860f3aa",
+    "error": null
+  }
+}

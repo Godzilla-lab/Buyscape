@@ -1,0 +1,50 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-instruct",
+  "response": {
+    "observations": [
+      "Photo 0: A stainless steel gas cooker with four burners and a glass panel above, mounted on a tiled wall.",
+      "Photo 1: The same cooker with four burners lit, showing blue flames, with a glass panel above.",
+      "Photo 2: A different appliance, a stainless steel oven with a glass top and control knobs, no visible burners."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "gas cooker",
+      "read_from": [
+        "photo 0 screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "4 Gas cooker and 2 burner making 6 burner in total. All working perfectly.",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 and Photo 1 show a single gas cooker with four burners. Photo 2 shows a different appliance, an oven, with no visible burners. The seller claims six burners, but only four are visible in the photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The seller is claiming six burners but only four are visible in the photos.",
+        "proof": "Photo 0 and Photo 1 show a single gas cooker with four burners. Photo 2 shows a different appliance, an oven, with no visible burners.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Show the other two burners and the second gas cooker."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller claims six burners but only four are visible in the photos. The second appliance shown is an oven, not a gas cooker. Proof is needed to verify the claim."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-instruct",
+    "task": "testify_read",
+    "latency_ms": 13502,
+    "input_tokens": 2575,
+    "output_tokens": 383,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "6ba12768bdaecffdea4ee46eaf6c3cc1",
+    "error": null
+  }
+}

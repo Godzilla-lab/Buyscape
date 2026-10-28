@@ -1,0 +1,76 @@
+{
+  "task": "testify_judge",
+  "prompt_version": "testify_judge.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "claims": [
+      {
+        "claim": "Wooden foreign pallets",
+        "verdict": "unverified",
+        "evidence": "Photo 2 shows an 'EPAL' stamp suggesting a European standard pallet, but photos 0/1 show a different, less legible stamped stack and photo 3 shows an unmarked new-looking frame \u2014 origin is inconsistent across the lot."
+      },
+      {
+        "claim": "Everything is clean, dry and sorted, no water added",
+        "verdict": "contradicted",
+        "evidence": "Photos 0, 1 and 3 show pallets sitting on dirt/debris-strewn ground with junk scattered around, not a sorted clean yard; wood moisture itself cannot be assessed from any photo."
+      },
+      {
+        "claim": "Weighed at 500 kg on a certified scale this morning",
+        "verdict": "unverifiable_remote",
+        "evidence": "No scale, receipt, or weighing scene appears in any photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Lot may be a mixed batch of different pallet grades (two visibly different stacks shown)",
+        "proof": "A single wide shot showing all pallets being sold together with a count of each type/condition",
+        "if_unproven": "priced as the lower-grade, dirtier stack (photos 0/1)"
+      },
+      {
+        "risk": "EPAL stamp may not be genuine or consistent across all units",
+        "proof": "Close-up, well-lit photo of the stamp on several pallets, not just one",
+        "if_unproven": "priced as unbranded generic pallets"
+      },
+      {
+        "risk": "Wood condition (rot, insect damage, moisture) cannot be judged from current distance shots",
+        "proof": "Close-up photos/video of wood grain, corners, and undersides of several pallets",
+        "if_unproven": "priced as unverified condition, assume moderate wear"
+      },
+      {
+        "risk": "Nails/fasteners may be rusted, loose, or protruding",
+        "proof": "Close-up photo of joints and nail heads",
+        "if_unproven": "priced as needing repair"
+      },
+      {
+        "risk": "No proof of heat-treatment (HT) marking required for export-grade pallets",
+        "proof": "Clear photo of the stamp showing 'HT' or treatment code",
+        "if_unproven": "priced as untreated/local-use only"
+      },
+      {
+        "risk": "Actual total weight/quantity unverified",
+        "proof": "Video or photo of pallets on a scale with reading visible, plus a count",
+        "if_unproven": "priced at the lower bound quantity visible in photos"
+      }
+    ],
+    "proof_requests": [
+      "Wide shot of the entire lot being sold together with a visible count",
+      "Close-up, well-lit photos of the EPAL/HT stamps on multiple pallets",
+      "Close-up photos of wood surfaces, corners, and nail joints",
+      "Video or photo of the pallets being weighed on a scale with the reading visible"
+    ],
+    "decision": "price",
+    "reason": "The witness confirms the item is wooden pallets, so it can be priced at worst case given unverified quality, mixed stacks, and unproven weight/treatment claims."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_judge",
+    "latency_ms": 17927,
+    "input_tokens": 1679,
+    "output_tokens": 1658,
+    "cost_usd": 0.01792,
+    "replayed": false,
+    "fixture_key": "3ee3ccb5b3ff0ded28500bafcebd4b72",
+    "error": null
+  }
+}

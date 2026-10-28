@@ -1,0 +1,73 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-instruct",
+  "response": {
+    "observations": [
+      "Photo 0: Close-up of dashboard with two gauges, keyhole, and handlebars. Watermark 'POSTED ON JIJI OSISIOGU LIBRARY'.",
+      "Photo 1: Side view of motorcycle showing black seat, black fuel tank with 'Kawasaki' logo, and a textured wall background. Watermark 'POSTED ON JIJI OSISIOGU LIBRARY'.",
+      "Photo 2: Rear view showing rear wheel with red rim, disc brake, exhaust pipe, and muddy ground. Watermark 'POSTED ON JIJI OSISIOGU LIBRARY'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "motorcycle",
+      "brand": "Kawasaki",
+      "model": "zzr",
+      "read_from": [
+        "photo 1 screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Kawasaki zzr power bike up for sales",
+        "verdict": "supported",
+        "evidence": "photo 1 screen"
+      },
+      {
+        "claim": "Working fine",
+        "verdict": "unverified",
+        "evidence": "no photo shows engine running or test ride, only static images"
+      },
+      {
+        "claim": "Bought new 6 months ago. Gears and brakes perfect, no rust, all parts original.",
+        "verdict": "unverified",
+        "evidence": "no photo shows gears, brakes, or parts in detail; rust is visible on exhaust and wheel rim in photo 2"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The motorcycle may have hidden mechanical issues not visible in photos.",
+        "proof": "video of engine running or test ride",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The 'all parts original' claim may be false.",
+        "proof": "close-up photo of engine, frame, or other parts to verify authenticity",
+        "if_unproven": "as not original"
+      },
+      {
+        "risk": "The 'no rust' claim is contradicted by visible rust on exhaust and wheel rim.",
+        "proof": "photo showing rust on exhaust or wheel rim",
+        "if_unproven": "as rusted"
+      }
+    ],
+    "proof_requests": [
+      "Ask for a video of the motorcycle running to verify it works.",
+      "Ask for close-up photos of the engine and other parts to verify they are original."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller's claims about the motorcycle's condition and parts are unverified by the photos, and critical risks like hidden mechanical issues and authenticity of parts require proof before pricing."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-instruct",
+    "task": "testify_read",
+    "latency_ms": 4611,
+    "input_tokens": 2803,
+    "output_tokens": 598,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "c72cf1bb9fb6f1025438b555ff27c4f0",
+    "error": null
+  }
+}

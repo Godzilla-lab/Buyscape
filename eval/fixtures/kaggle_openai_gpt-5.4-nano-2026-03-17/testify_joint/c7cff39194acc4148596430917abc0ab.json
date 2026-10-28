@@ -1,0 +1,68 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0 shows multiple rectangular solar panels mounted/stacked in a frame/stand.",
+      "No readable brand/model/wattage text is visible on the panels in the photo.",
+      "No visible label/spec sheet, serial number, or inverter/battery is shown in the photo."
+    ],
+    "identity": {
+      "status": "unknown",
+      "kind": null,
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Battery is new, holds charge for 8 hours. Never repaired.",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo 0 shows solar panels only; no battery label, test result, or repair history evidence is visible."
+      },
+      {
+        "claim": "Izutech solar energy specialize in all solar equipment such as: Inverter, panels, charge...",
+        "verdict": "unverifiable_remote",
+        "evidence": "Seller text only; photo 0 does not show an inverter or charge controller."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Wattage/brand/model of the panels is not readable; price depends heavily on exact panel rating (e.g., 300W vs 400W vs 450W).",
+        "proof": "A close-up photo of the panel label showing brand + model + wattage (W) and serial number (photo of the sticker on the back or front frame).",
+        "if_unproven": "Price at the worst-case comparable among the list (lowest wattage/most uncertain match) until wattage/brand is confirmed."
+      },
+      {
+        "risk": "Quantity is unclear (photo shows multiple panels, but the listing price may be for one panel or a set).",
+        "proof": "A photo showing the exact number of panels included, with one panel clearly marked as included (e.g., count visible + one close-up label).",
+        "if_unproven": "Assume the lowest quantity (single panel) until the included quantity is confirmed."
+      },
+      {
+        "risk": "Battery claim (new, 8-hour hold, never repaired) cannot be verified; the item being sold may be only panels.",
+        "proof": "Close-up photos of the battery brand/model, capacity (Ah/Wh), date code, and a test/charge-discharge report showing runtime.",
+        "if_unproven": "Price as panels only (ignore battery value) until battery details and test evidence are provided."
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the panel specification label showing brand + model + wattage (W) and serial number.",
+      "Confirm whether the sale is for 1 panel or multiple panels; provide a photo where the included count is clearly visible.",
+      "If a battery is included: provide battery brand/model, capacity (Ah/voltage), date code, and a runtime test result showing ~8 hours under stated load."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo shows solar panels but does not provide readable wattage/brand/model, and the seller\u2019s battery claims are not supported by any battery evidence. Without the exact panel rating (and quantity), a safe price cannot be selected from the comparables.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_joint",
+    "latency_ms": 5878,
+    "input_tokens": 2168,
+    "output_tokens": 721,
+    "cost_usd": 0.001335,
+    "replayed": false,
+    "fixture_key": "c7cff39194acc4148596430917abc0ab",
+    "error": null
+  }
+}

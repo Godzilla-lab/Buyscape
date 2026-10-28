@@ -1,0 +1,68 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-instruct",
+  "response": {
+    "observations": [
+      "A bicycle leaning against a concrete wall with visible rust on the frame and chain, and a blue pipe nearby.",
+      "The bike has a dark green frame, black tires, and a blue handlebar area.",
+      "The bike appears to be a mountain bike with a rear rack and a kickstand.",
+      "The background shows a weathered concrete wall with stains and cracks."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "mountain bike",
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Very affordable Belgium standard break is would gear is working perfectly available for negotiation...",
+        "verdict": "unverifiable_remote",
+        "evidence": "The seller's text is unclear and contains typos; no photo confirms the brand or model, and no photo shows the gears or brakes in detail."
+      },
+      {
+        "claim": "Bought new 6 months ago. Gears and brakes perfect, no rust, all parts original.",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows visible rust on the frame and chain, contradicting the claim of 'no rust'. No close-up of gears or brakes is available."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Rust on the frame and chain",
+        "proof": "Photo 0",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Gears and brakes not functioning properly",
+        "proof": "Close-up photo of gears and brakes",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Parts not original",
+        "proof": "Photo 0",
+        "if_unproven": "as not original"
+      }
+    ],
+    "proof_requests": [
+      "Send a close-up photo of the gears and brakes.",
+      "Send a photo of the bike's frame and chain to confirm rust condition.",
+      "Send a photo of the bike's brand and model."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller's claims are vague and contradicted by visible rust in the photo. Without proof of gear and brake functionality and original parts, the item's condition cannot be verified remotely."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-instruct",
+    "task": "testify_read",
+    "latency_ms": 3917,
+    "input_tokens": 1458,
+    "output_tokens": 503,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "dc49cacded845848c7251622bb80d7ce",
+    "error": null
+  }
+}

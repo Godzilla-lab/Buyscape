@@ -1,0 +1,69 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-instruct",
+  "response": {
+    "observations": [
+      "Photo 0: Engine with black cover, red valve covers, and suspension components attached. Text 'POSTED ON JIJI' and 'EZE PORSCHE GLOBAL AUTOS' visible.",
+      "Photo 1: Engine with transmission attached, surrounded by other disassembled car parts. Text 'POSTED ON JIJI' and 'EZE PORSCHE GLOBAL AUTOS' visible.",
+      "Photo 2: Engine with transmission attached, viewed from above. Text 'POSTED ON JIJI' and 'EZE PORSCHE GLOBAL AUTOS' visible. A person's shoe is visible in the bottom right corner."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "car engine and transmission assembly",
+      "read_from": [
+        "photo 0 screen",
+        "photo 1 screen",
+        "photo 2 screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "We also deals on all kinds of car spare parts",
+        "verdict": "unverified",
+        "evidence": "Photos show only engine and transmission assemblies, not other spare parts."
+      },
+      {
+        "claim": "Tokunbo, direct from Belgium. Tested and working, no knock, low mileage, never opened.",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photos show the origin, testing, mileage, or condition beyond visual inspection. No proof of 'Tokunbo' or 'Belgium' origin."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The engine and transmission are not tested or certified for working condition.",
+        "proof": "Photo 0, 1, 2: No visible test equipment or certification marks. No video or documentation of testing.",
+        "if_unproven": "Priced as not working."
+      },
+      {
+        "risk": "The 'low mileage' and 'never opened' claims are unproven.",
+        "proof": "Photo 0, 1, 2: No visible odometer, no signs of disassembly or use beyond what is visible. No documentation or proof of mileage.",
+        "if_unproven": "Priced as if it has been used or opened."
+      },
+      {
+        "risk": "The 'Tokunbo' and 'direct from Belgium' claims are unproven.",
+        "proof": "Photo 0, 1, 2: No visible branding, labels, or documentation indicating origin or distributor. No proof of 'Tokunbo' or 'Belgium' origin.",
+        "if_unproven": "Priced as if sourced from unknown origin or distributor."
+      }
+    ],
+    "proof_requests": [
+      "Ask for proof of origin (Tokunbo, Belgium) with documentation or labels.",
+      "Ask for test reports or certification of working condition.",
+      "Ask for mileage documentation or proof of 'never opened' status."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller's claims about origin, condition, and usage cannot be verified remotely from the photos. The item is a car engine and transmission assembly, but without proof of working condition, origin, or mileage, the price cannot be determined."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-instruct",
+    "task": "testify_read",
+    "latency_ms": 4100,
+    "input_tokens": 2797,
+    "output_tokens": 695,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "66cc43ea811bb41fab56e744de4801cf",
+    "error": null
+  }
+}

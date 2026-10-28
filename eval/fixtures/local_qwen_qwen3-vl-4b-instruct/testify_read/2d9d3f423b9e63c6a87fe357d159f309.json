@@ -1,0 +1,57 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-instruct",
+  "response": {
+    "observations": [
+      "Two photos show a large, black, rectangular solar panel with a grid of cells.",
+      "The text 'INNOSON GLOBAL GROUP' is watermarked on both photos.",
+      "The panel appears to be new and uninstalled, standing upright on a concrete floor.",
+      "No brand or model number is visible on the panel itself."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel",
+      "read_from": [
+        "photo 0 screen",
+        "photo 1 screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Battery is new, holds charge for 8 hours. Never repaired.",
+        "verdict": "unverifiable_remote",
+        "evidence": "The photos show solar panels, not batteries. The claim about a battery is not supported by the images."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The item is not a battery but a solar panel, and the seller is misrepresenting the product.",
+        "proof": "The photos show solar panels, not batteries. The seller's claim about a battery is inconsistent with the visual evidence.",
+        "if_unproven": "as not a battery"
+      },
+      {
+        "risk": "The panel may be counterfeit or of low quality, as the seller does not provide any brand or model information.",
+        "proof": "A clear brand or model name on the panel or in the seller's text.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Ask for the brand and model of the solar panel."
+    ],
+    "decision": "fraud_suspected",
+    "reason": "The seller claims to be selling a battery but the photos show solar panels. This misrepresentation is a red flag for fraud."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-instruct",
+    "task": "testify_read",
+    "latency_ms": 10603,
+    "input_tokens": 1915,
+    "output_tokens": 400,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "2d9d3f423b9e63c6a87fe357d159f309",
+    "error": null
+  }
+}
