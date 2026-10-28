@@ -1,0 +1,92 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black Nikon DSLR camera body with the Nikon logo clearly visible on the front",
+      "A lens is mounted on the camera body and a second lens-sized object sits beside it",
+      "A camera strap is attached",
+      "The exterior appears clean",
+      "No model number is legible on the body or lens in the photo",
+      "The seller claims Canon, but the photo shows Nikon"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "DSLR camera",
+      "brand": "Nikon",
+      "model": null,
+      "read_from": [
+        "photo 0 body"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "The brand is Canon",
+        "verdict": "contradicted",
+        "evidence": "photo 0 shows Nikon branding on the camera body"
+      },
+      {
+        "claim": "It has 2 lens 18-55mm and 50mm",
+        "verdict": "unverified",
+        "evidence": "two lens-like objects are visible but focal lengths cannot be read"
+      },
+      {
+        "claim": "Clean",
+        "verdict": "supported",
+        "evidence": "photo 0 shows a clean exterior"
+      },
+      {
+        "claim": "good to shoot videos and snapshots",
+        "verdict": "unverifiable_remote",
+        "evidence": "functionality cannot be confirmed from a still photo"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Camera may not power on, focus, or take photos",
+        "proof": "video of the camera turning on, navigating menus, and releasing the shutter",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Lens may have fungus, separation, or focus/aperture issues",
+        "proof": "close-up photos of both lens elements and mounts, plus sample photos taken through each lens",
+        "if_unproven": "as body only or with faulty lens"
+      },
+      {
+        "risk": "Exact Nikon model is unknown, which strongly affects value",
+        "proof": "clear photo of the model label on the camera body",
+        "if_unproven": "at entry-level DSLR value"
+      },
+      {
+        "risk": "Shutter count and video capability are unproven",
+        "proof": "screenshot of the menu showing shutter count and video mode",
+        "if_unproven": "as a basic stills camera"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the model label on the camera body",
+      "Video of the camera powering on, focusing, and taking a photo",
+      "Close-up photos of both lenses' glass and mounts",
+      "Sample photo or video taken with the camera"
+    ],
+    "decision": "price",
+    "reason": "The photo shows a Nikon DSLR camera, contradicting the seller's Canon claim; it can be priced as a used Nikon DSLR with lens at worst-case working condition.",
+    "price_pick": {
+      "low": 1,
+      "high": 8
+    }
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_joint",
+    "latency_ms": 28543,
+    "input_tokens": 2597,
+    "output_tokens": 4417,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "6167a8a47dcd767603b2f99328775543",
+    "error": null
+  }
+}
