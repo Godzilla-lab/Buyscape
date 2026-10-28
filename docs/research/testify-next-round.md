@@ -58,7 +58,8 @@ hope. The benchmark cannot say whether a range is calibrated until some items
 have a price someone actually paid.
 
 **The fix, two routes, both:**
-- **BuyScrap's past deals.** The email is drafted in
+- **Past deals from a business that buys used goods.** Buyscape is for any
+  such business; BuyScrap is the first one to ask. The email is drafted in
   `docs/research/partnership-emails.md`. Fifty settled items with their photos
   are worth more than all 679 test items, because they are the only prices that
   are not hopes. **This needs you to fill in the bracketed parts and send it.**

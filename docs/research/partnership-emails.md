@@ -32,8 +32,10 @@ square brackets before sending. Nothing here has been sent.
 
 Hello [name],
 
-Buyscape, the valuation engine we are building for BuyScrap, now runs on your
-adverts. The next step that would help most is your history of past deals.
+Buyscape is an open valuation engine for second-hand goods, built for any
+business that buys them. BuyScrap is the first we would like to work with, and
+the engine already runs on your adverts. The next step that would help most is
+your history of past deals.
 
 What we would like, for as many past deals as you can find:
 - the photos the seller sent
