@@ -1,0 +1,103 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows the front of a silver Toyota pickup truck with headlights illuminated.",
+      "Photo 1 shows the front-left quarter view of the same silver double-cab pickup truck.",
+      "Photo 2 shows the rear of the truck with 'TRD' and 'V6' badges on the tailgate.",
+      "Photo 2 has handwritten text on the rear window reading 'No Start 963'.",
+      "The truck bed is covered with a tonneau cover."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "pickup truck",
+      "brand": "Toyota",
+      "model": "Tacoma",
+      "read_from": [
+        "photo 0 emblem",
+        "photo 2 badges"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "2024 Toyota Tacoma TRD 4x4",
+        "verdict": "unverified",
+        "evidence": "Year and 4x4 status not visible; TRD badge visible in photo 2"
+      },
+      {
+        "claim": "V6 engine",
+        "verdict": "supported",
+        "evidence": "V6 badge visible on tailgate in photo 2"
+      },
+      {
+        "claim": "push to start",
+        "verdict": "unverifiable_remote",
+        "evidence": "Interior not shown"
+      },
+      {
+        "claim": "moonroof",
+        "verdict": "unverifiable_remote",
+        "evidence": "Roof not clearly shown"
+      },
+      {
+        "claim": "verified duty",
+        "verdict": "unverifiable_remote",
+        "evidence": "No documents shown"
+      },
+      {
+        "claim": "foreign used",
+        "verdict": "unverifiable_remote",
+        "evidence": "No customs documents shown"
+      },
+      {
+        "claim": "vehicle is operational",
+        "verdict": "contradicted",
+        "evidence": "Photo 2 rear window text reads 'No Start'"
+      },
+      {
+        "claim": "2024 model year",
+        "verdict": "unverified",
+        "evidence": "No VIN or registration plate visible"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine does not start",
+        "proof": "Video of engine cranking and running",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Hidden mechanical or transmission faults",
+        "proof": "Test drive video",
+        "if_unproven": "as faulty"
+      },
+      {
+        "risk": "Duty/customs status is false",
+        "proof": "Customs duty payment documents",
+        "if_unproven": "as unverified duty status"
+      }
+    ],
+    "proof_requests": [
+      "Video of the engine starting and idling",
+      "Photos of the undercarriage and chassis",
+      "Screenshots of customs duty payment documents"
+    ],
+    "decision": "no_price_data",
+    "reason": "The item is identifiable as a Toyota Tacoma pickup, but none of the provided comparables match this vehicle type.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_joint",
+    "latency_ms": 70424,
+    "input_tokens": 3774,
+    "output_tokens": 4208,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "7277308a1d7ee8d645545ad3d9f66d12",
+    "error": null
+  }
+}

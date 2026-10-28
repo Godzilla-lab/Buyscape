@@ -1,0 +1,87 @@
+{
+  "task": "testify_judge",
+  "prompt_version": "testify_judge.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "claims": [
+      {
+        "claim": "This is a 'first grade' Tokumbo tire",
+        "verdict": "unverifiable_remote",
+        "evidence": "No DOT code, tread depth gauge, or sidewall close-up showing wear grade is visible in any photo."
+      },
+      {
+        "claim": "Will last almost like new brand ones",
+        "verdict": "unverifiable_remote",
+        "evidence": "Durability cannot be assessed from static photos; no tread depth measurement or age code shown."
+      },
+      {
+        "claim": "Implied: tires are a matching set (two shown stacked)",
+        "verdict": "unverified",
+        "evidence": "Only two tires are photographed together; sidewall brand text differs in legibility between photo 1 (D-KACHI ENTERPRISE, likely seller watermark) and photo 2 (MASTER-GRIP), so matching model is not confirmed."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Tire size (width/aspect/rim diameter) unknown, affects fitment and price tier",
+        "proof": "Clear close-up photo of the sidewall size markings (e.g., 195/65R15)",
+        "if_unproven": "Priced as unknown/generic size, worst case smallest common value tier"
+      },
+      {
+        "risk": "Age of tire (DOT date code) unknown, old tires degrade even if tread looks fine",
+        "proof": "Close-up photo of DOT code on sidewall",
+        "if_unproven": "Priced as oldest plausible Tokumbo stock (high age risk)"
+      },
+      {
+        "risk": "Actual tread depth not measurable from angled/face-on shots",
+        "proof": "Photo with tread depth gauge or coin test against tread grooves",
+        "if_unproven": "Priced as minimum legal/worn tread"
+      },
+      {
+        "risk": "Sidewall cracks, bulges, or weather-checking not visible in current angles",
+        "proof": "Full 360\u00b0 sidewall video or multiple close-ups of both sidewalls per tire",
+        "if_unproven": "Priced as having sidewall damage (worst case)"
+      },
+      {
+        "risk": "Hidden repairs, plugs, or punctures on inner tread/liner",
+        "proof": "Photo of inner tire surface and any plug/patch marks",
+        "if_unproven": "Priced as repaired/compromised tire"
+      },
+      {
+        "risk": "Load index and speed rating unknown, affects vehicle compatibility and value",
+        "proof": "Close-up of sidewall rating markings (e.g., 91H)",
+        "if_unproven": "Priced as unrated/base generic rating"
+      },
+      {
+        "risk": "Unclear total number of tires included in this sale listing",
+        "proof": "Seller confirmation photo showing all tires being sold laid out together with count visible",
+        "if_unproven": "Priced per single tire, not as a set"
+      },
+      {
+        "risk": "Tires may not match each other (different brand/model as hinted by sidewall text differences)",
+        "proof": "Side-by-side photo of all tire sidewalls showing identical brand, size, and pattern",
+        "if_unproven": "Priced as mismatched set (lower value)"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of each tire's full sidewall showing size, DOT date code, and load/speed rating",
+      "Photo of inner tread/liner for puncture or repair marks",
+      "Video panning around each tire's full circumference",
+      "Photo showing tread depth measured with a gauge or coin",
+      "Photo of all tires being sold laid out together to confirm count and matching"
+    ],
+    "decision": "price",
+    "reason": "The witness confirms the item is a used car tire (by type), so it can be priced at worst case for an unverified-age, unverified-size Tokumbo tire pending the listed proofs."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_judge",
+    "latency_ms": 18272,
+    "input_tokens": 1570,
+    "output_tokens": 1639,
+    "cost_usd": 0.01953,
+    "replayed": false,
+    "fixture_key": "5597d54e137b10c4935dd45eb7b44425",
+    "error": null
+  }
+}

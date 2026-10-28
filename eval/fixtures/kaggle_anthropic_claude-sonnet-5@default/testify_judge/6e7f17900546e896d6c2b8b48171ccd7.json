@@ -1,0 +1,83 @@
+{
+  "task": "testify_judge",
+  "prompt_version": "testify_judge.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "claims": [
+      {
+        "claim": "Very clean double plate Red Dead Redemption II",
+        "verdict": "unverifiable_remote",
+        "evidence": "Case shown confirms title/platform, but disc cleanliness or plate count (single vs double disc) cannot be seen from the case photo alone."
+      },
+      {
+        "claim": "Neatly used, never opened or repaired",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo of the open case or disc surface was taken; case exterior alone cannot show if it was opened."
+      },
+      {
+        "claim": "No overheating, all ports working",
+        "verdict": "unverifiable_remote",
+        "evidence": "This claim describes a hardware device (console/controller), not a disc game case; nothing in the report shows ports or heat-related components for this item."
+      },
+      {
+        "claim": "Comes with original pads",
+        "verdict": "unverifiable_remote",
+        "evidence": "No controllers ('pads') are visible in the photo; only the game case was shown."
+      },
+      {
+        "claim": "Comes with UK receipt",
+        "verdict": "unverifiable_remote",
+        "evidence": "No receipt image was captured by the witness."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Disc may be scratched, unreadable, or missing entirely (empty case)",
+        "proof": "Photo of the open case showing the disc(s) resting in the tray, plus a close-up of the disc surface",
+        "if_unproven": "price as disc condition unknown / possibly non-functional"
+      },
+      {
+        "risk": "Mismatch between seller's hardware-related claims (overheating, ports, pads) and the actual item (a disc-only game case) suggests generic or copy-pasted listing text, or wrong/misleading description",
+        "proof": "Seller must clarify what 'pads' and 'ports' refer to for a disc game, or show the actual bundled items, console, or controllers claimed",
+        "if_unproven": "price as disc-only item, ignore unverified add-ons, treat description mismatch as a trust flag"
+      },
+      {
+        "risk": "Case may not include original artwork insert, manual, or DLC codes",
+        "proof": "Photo of the case interior with insert/manual visible",
+        "if_unproven": "price as disc-only, no extras"
+      },
+      {
+        "risk": "Region coding unknown, may not match buyer's console region expectations",
+        "proof": "Close-up photo of the region code area on the case or disc",
+        "if_unproven": "price as unconfirmed region, assume standard PAL/UK import per receipt claim but unverified"
+      },
+      {
+        "risk": "Receipt claim unverifiable, could be fabricated or for a different item",
+        "proof": "Clear photo of the actual UK receipt matching this item/date",
+        "if_unproven": "price as no proof of purchase, ignore receipt claim"
+      }
+    ],
+    "proof_requests": [
+      "Open-case photo showing the disc(s) in the tray",
+      "Close-up of the disc surface for scratch/wear check",
+      "Photo of case interior showing any insert/manual",
+      "Photo of the region code on case or disc",
+      "Clear photo of the UK receipt matching this item",
+      "Clarification and photo of the 'pads' and any hardware claimed (ports/overheating) since these do not match a disc-only item"
+    ],
+    "decision": "fraud_suspected",
+    "reason": "The seller's claims about overheating, ports, and pads describe hardware/console features that have no bearing on a disc-only game case, indicating likely copy-pasted or mismatched listing text, a red flag for scam or misrepresentation."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_judge",
+    "latency_ms": 22193,
+    "input_tokens": 1556,
+    "output_tokens": 2064,
+    "cost_usd": 0.021734,
+    "replayed": false,
+    "fixture_key": "6e7f17900546e896d6c2b8b48171ccd7",
+    "error": null
+  }
+}
