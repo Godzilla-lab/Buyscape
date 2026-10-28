@@ -1,0 +1,82 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows the rear housing of a used alternator with a label, cooling vents, and mounting points.",
+      "Photo 1 shows the side of the alternator with copper windings visible through the vents.",
+      "Photo 2 shows the pulley end and drive shaft of the alternator.",
+      "The unit is dusty and appears used; no testing or installation is shown."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "car alternator",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Direct Tokunbo Valeo Alternator",
+        "verdict": "unverified",
+        "evidence": "photo 0 label is present but not legible enough to confirm Valeo"
+      },
+      {
+        "claim": "for Mercedes-Benz M278",
+        "verdict": "unverifiable_remote",
+        "evidence": "no photo shows the vehicle, engine, or fitment data"
+      },
+      {
+        "claim": "439741",
+        "verdict": "unverified",
+        "evidence": "part number is not legible in photo 0"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The alternator may not generate electricity or may have internal faults.",
+        "proof": "video of a bench test showing voltage output",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The brand may not be Valeo.",
+        "proof": "close-up photo of the label that is readable",
+        "if_unproven": "as an unbranded alternator"
+      },
+      {
+        "risk": "It may not fit a Mercedes-Benz M278 engine.",
+        "proof": "photo of the part number cross-referenced to M278 fitment",
+        "if_unproven": "as a wrong-fitment core"
+      },
+      {
+        "risk": "Bearings, regulator, or diodes may be worn out.",
+        "proof": "video of the pulley spinning freely and quietly",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the label in photo 0 to read the brand and part number",
+      "Video of the alternator being spun and tested for electrical output",
+      "Photo of any part number stamped on the metal housing"
+    ],
+    "decision": "price",
+    "reason": "The photos show a used car alternator; because the brand, part number, fitment, and working condition are unproven, it is priced at its worst case as a non-working alternator core.",
+    "price_pick": {
+      "low": 0,
+      "high": 2
+    }
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_joint",
+    "latency_ms": 58017,
+    "input_tokens": 2636,
+    "output_tokens": 3724,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "ca679f5ef9c9c335f51ebf12e747a0cf",
+    "error": null
+  }
+}
