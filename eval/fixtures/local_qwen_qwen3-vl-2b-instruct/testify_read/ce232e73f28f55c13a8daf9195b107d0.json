@@ -1,0 +1,69 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-instruct",
+  "response": {
+    "observations": [
+      "A white chest freezer with a hinged lid, shown open in photo 0.",
+      "The freezer is a standing unit with a rectangular shape, visible in photo 1 and 2.",
+      "The brand name 'Haier Thermocool' is visible on the front of the freezer in photo 1.",
+      "The freezer has a metal interior with a silver finish, visible in photo 0.",
+      "The back of the freezer shows a black wire mesh coil, which is the condenser, in photo 2.",
+      "The freezer has a control panel with a dial and a power switch, visible in photo 1.",
+      "The freezer has a label with a warranty sticker on the front, visible in photo 1.",
+      "The freezer has a small door on the top, visible in photo 0.",
+      "The freezer has a label with a diagram and text on the back, visible in photo 2."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "chest freezer",
+      "brand": "Haier",
+      "model": "Thermocool",
+      "read_from": [
+        "photo 1"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Classic and reliable themocool freezer with a string capacity long lasting freezing for up to five...",
+        "verdict": "supported",
+        "evidence": "photo 1"
+      },
+      {
+        "claim": "Barely used, bought new last year. No fault at all, the motor was never opened. Receipt and warranty card available.",
+        "verdict": "supported",
+        "evidence": "photo 1"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The freezer may not be working properly due to the condenser coil being exposed and possibly damaged.",
+        "proof": "photo 2",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The warranty may not be valid or the claim may be invalid.",
+        "proof": "the warranty card is not shown in the photos",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Can you please provide the warranty card?",
+      "Can you please show the receipt?"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photos do not show the warranty card or receipt, which are necessary to verify the claim of being a new, unused freezer. The seller's words are not enough to confirm the claim. The risk of the freezer not working is significant and could affect the price. Therefore, I need more information from the seller to make a decision."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-instruct",
+    "task": "testify_read",
+    "latency_ms": 43442,
+    "input_tokens": 3265,
+    "output_tokens": 578,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "ce232e73f28f55c13a8daf9195b107d0",
+    "error": null
+  }
+}

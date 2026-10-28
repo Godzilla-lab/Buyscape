@@ -94,15 +94,16 @@ for a person.
 
 The models the size curve starts from, on Kaggle's free T4 pair:
 
-| Model | Right about the item | Named a model the photos do not show | Called the lie supported | Gave a price |
-|---|---|---|---|---|
-| Qwen3-VL 8B | 74% | 26% | 3% | 0% |
-| Qwen3-VL 4B | **81%** | **24%** | **2%** | 0.9% |
-| Qwen3-VL 2B, 296 of 462 answers | 80% | 53% | 46% | 0% |
+| Model | Right about the item | Named a model the photos do not show | Called the lie supported | Broke the format | Gave a price |
+|---|---|---|---|---|---|
+| Qwen3-VL 8B | 74% | 26% | 3% | 4 of 231 | 0% |
+| Qwen3-VL 4B | **81%** | **24%** | **2%** | **1 of 231** | 0.9% |
+| Qwen3-VL 2B | 77% | 54% | 47% | 60 of 231 | 0% |
 
-The 4B reads better than the 8B, and like it almost never prices. A third of
-the 2B's answers repeat until the token cap, and it believes the planted lie
-almost half the time. The training set now also teaches the price step, the
+The 4B reads better than the 8B, and like it almost never prices. The 2B is
+not a usable starting point as it stands: 163 of its 462 answers repeat
+until the 8,000 token cap, a quarter of its honest answers break the format,
+and it believes the planted lie almost half the time. The training set now also teaches the price step, the
 pick from real adverts that bracket an advert's own asking price, on the 222
 second-hand training adverts where one exists.
 
