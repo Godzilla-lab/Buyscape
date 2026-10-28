@@ -1,0 +1,107 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black Canon DSLR body with a body cap on; front reads 'Canon', 'EOS', '5D', and 'Mark II'.",
+      "Photo 1 shows the rear of the same camera with LCD screen, control dial, and buttons.",
+      "Photo 2 shows the bottom label reading 'Canon DS126201', 'DC 7.4V', and regulatory marks.",
+      "No lens is attached in any photo; the mount is covered by a body cap in photo 0.",
+      "No battery, charger, box, or accessories are visible in any photo."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DSLR camera body",
+      "brand": "Canon",
+      "model": "EOS 5D Mark II",
+      "read_from": [
+        "photo 0",
+        "photo 2"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Canon EOS 5D Mark II full-frame DSLR camera",
+        "verdict": "supported",
+        "evidence": "photo 0 front markings and photo 2 bottom label"
+      },
+      {
+        "claim": "21.1-megapixel sensor",
+        "verdict": "unverifiable_remote",
+        "evidence": "sensor specification cannot be read from photos"
+      },
+      {
+        "claim": "Shutter count under 5,000",
+        "verdict": "unverifiable_remote",
+        "evidence": "shutter count is not shown in any photo"
+      },
+      {
+        "claim": "no fungus or scratch on the lens",
+        "verdict": "unverifiable_remote",
+        "evidence": "lens is not shown; body cap is on in photo 0"
+      },
+      {
+        "claim": "Original battery and charger",
+        "verdict": "unverifiable_remote",
+        "evidence": "battery and charger are not shown in any photo"
+      },
+      {
+        "claim": "never repaired",
+        "verdict": "unverifiable_remote",
+        "evidence": "repair history cannot be determined from photos"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Shutter count is higher than claimed or shutter mechanism is worn",
+        "proof": "Photo of the camera info menu showing the shutter count",
+        "if_unproven": "as high-shutter or worn body"
+      },
+      {
+        "risk": "Lens has fungus, scratches, or is not included",
+        "proof": "Photo of the lens front and rear elements without caps",
+        "if_unproven": "as body only or lens damaged"
+      },
+      {
+        "risk": "Battery and charger are missing, non-original, or faulty",
+        "proof": "Photo of the battery and charger",
+        "if_unproven": "without battery and charger"
+      },
+      {
+        "risk": "Camera does not power on or has hidden electronic faults",
+        "proof": "Video of the camera turning on, navigating menus, and taking a photo",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Image sensor has spots, damage, or focus issues",
+        "proof": "Sample photo taken by the camera at a small aperture",
+        "if_unproven": "as sensor faulty"
+      }
+    ],
+    "proof_requests": [
+      "Video of camera powering on and taking a photo",
+      "Photo of shutter count in the camera menu",
+      "Photo of lens front and rear glass",
+      "Photo of battery and charger"
+    ],
+    "decision": "price",
+    "reason": "Photos clearly identify a Canon EOS 5D Mark II DSLR body; it can be priced at worst case as an untested body using comparable DSLR listings.",
+    "price_pick": {
+      "low": 0,
+      "high": 9
+    }
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_joint",
+    "latency_ms": 54517,
+    "input_tokens": 3231,
+    "output_tokens": 6221,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "ef1ab1f385469b3faf314d7fdf1a552f",
+    "error": null
+  }
+}
