@@ -1,0 +1,77 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black mountain bike with blue GIANT lettering on the frame, parked on a kickstand outdoors.",
+      "Tires appear worn and possibly cracked; chain and drivetrain are visible but not tested.",
+      "Seller states the bike has been unused for about 3 years and only needs tires and chain oil.",
+      "A watermark 'SAMMY LAVAN' overlays the image."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "mountain bike",
+      "brand": "Giant",
+      "model": null,
+      "read_from": [
+        "photo 0 frame"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Haven't been used in about 3 years",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo shows the bike but cannot confirm storage duration."
+      },
+      {
+        "claim": "just change the tires and oil the chain then you're good to go",
+        "verdict": "unverified",
+        "evidence": "Photo shows tires and chain but cannot confirm mechanical condition or required repairs."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Tires may be perished, cracked, or unable to hold air after 3 years of disuse.",
+        "proof": "Close-up photo of tire sidewalls and tread, or video of inflating the tires.",
+        "if_unproven": "price as needing new tires"
+      },
+      {
+        "risk": "Chain and drivetrain may be seized, rusted, or broken.",
+        "proof": "Video of backpedaling the cranks and shifting through gears.",
+        "if_unproven": "price as needing drivetrain repair"
+      },
+      {
+        "risk": "Brakes may not function or may need pads and cables.",
+        "proof": "Video of squeezing brake levers with wheels spinning.",
+        "if_unproven": "price as needing brake repair"
+      },
+      {
+        "risk": "Frame may have hidden cracks or damage not visible in one angle.",
+        "proof": "Photos of the frame from all angles, especially welds and joints.",
+        "if_unproven": "price as possible frame damage"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of the tires to check for cracks and air retention",
+      "Video of pedaling and gear shifting to test the drivetrain",
+      "Video of brake lever operation",
+      "Additional photos of the frame from all sides"
+    ],
+    "decision": "no_price_data",
+    "reason": "The item is a used Giant mountain bike, but the only comparable listed is a motorcycle, so there are no matching prices to use.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_joint",
+    "latency_ms": 39622,
+    "input_tokens": 1824,
+    "output_tokens": 4511,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "dd43b2c3faa437c23a65c3786acbf596",
+    "error": null
+  }
+}
