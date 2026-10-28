@@ -1,0 +1,76 @@
+{
+  "task": "testify_judge",
+  "prompt_version": "testify_judge.v2",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "claims": [
+      {
+        "claim": "The item is a high quality solar panel.",
+        "verdict": "contradicted",
+        "evidence": "Witness photos show a large black metal mesh/grid panel, not a solar panel surface (no cells/lamination visible)."
+      },
+      {
+        "claim": "The item is an inverter.",
+        "verdict": "contradicted",
+        "evidence": "Witness photos show a mesh metal panel; no inverter casing, display, or ports visible."
+      },
+      {
+        "claim": "The item is a lithium or tubular battery.",
+        "verdict": "contradicted",
+        "evidence": "Witness photos show a metal grille/mesh sheet; no battery terminals, labels, or casing visible."
+      },
+      {
+        "claim": "The item is a charge device (charger).",
+        "verdict": "contradicted",
+        "evidence": "Witness photos show a mesh metal panel; no charger body or connectors visible."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Wrong item category: the photos appear to be a metal mesh/grille panel, while the seller\u2019s message is about solar/inverter/batteries.",
+        "proof": "A clear photo of the exact item being sold showing its front/back and any identifying features (e.g., solar cell grid for panels, inverter label for inverters, battery terminals/label for batteries).",
+        "if_unproven": "Price as a non-electrical metal mesh/grille panel (lowest value case) until the seller proves the item matches the intended electrical product."
+      },
+      {
+        "risk": "Unknown dimensions and thickness (value depends heavily on size and gauge).",
+        "proof": "One photo with a measuring tape/known reference (e.g., ruler) showing height and width, plus a close-up showing thickness/gauge or a caliper measurement.",
+        "if_unproven": "Price at the worst-case for smaller/thinner grille panels."
+      },
+      {
+        "risk": "Condition issues not fully visible: rust, dents, bent frame, loose welds/fasteners, or corrosion under paint.",
+        "proof": "Close-up clips of corners/edges and any weld lines/fastener points, plus a photo in strong side lighting to reveal dents/bends.",
+        "if_unproven": "Price as used/possibly damaged with no guarantee of structural integrity."
+      },
+      {
+        "risk": "Material uncertainty (steel vs aluminum) affects corrosion risk and resale value.",
+        "proof": "A close-up showing material markings (if any) and a photo of a magnet test result (magnet sticks = likely steel).",
+        "if_unproven": "Price as steel with higher corrosion risk."
+      },
+      {
+        "risk": "Whether it includes a frame/hinges/locks (if applicable) is unknown; that changes usability and price.",
+        "proof": "Photos showing the full perimeter and any frame, hinges, locks, or mounting points (front and back).",
+        "if_unproven": "Price as a standalone mesh sheet with no frame/hardware."
+      }
+    ],
+    "proof_requests": [
+      "Send clear photos of the exact item for sale (front, back, edges) with a measuring tape showing height and width.",
+      "Show close-ups of corners/edges/welds/fasteners (if any) and any rust/corrosion spots.",
+      "Confirm the material (steel vs aluminum) with a magnet test photo or any label/marking.",
+      "If it is actually a solar panel/inverter/battery, send photos that clearly show the product type (solar cells, inverter label/ports, battery terminals/label) matching the item in the photos."
+    ],
+    "decision": "price",
+    "reason": "The witness photos consistently show a metal mesh/grid panel, so it can be priced as that worst-case category; the seller\u2019s electrical-product message is not supported by the observed item."
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_judge",
+    "latency_ms": 5563,
+    "input_tokens": 1028,
+    "output_tokens": 849,
+    "cost_usd": 0.001267,
+    "replayed": false,
+    "fixture_key": "69a5dfcc863c53a22f6faa2839622924",
+    "error": null
+  }
+}

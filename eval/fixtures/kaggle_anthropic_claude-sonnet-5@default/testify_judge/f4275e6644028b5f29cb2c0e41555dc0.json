@@ -1,0 +1,72 @@
+{
+  "task": "testify_judge",
+  "prompt_version": "testify_judge.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "claims": [
+      {
+        "claim": "Izutech solar energy specialize in all solar equipment such as inverter, panels, charge controllers etc.",
+        "verdict": "unverifiable_remote",
+        "evidence": "Business reputation/catalog claim; no photo can confirm a company's product range."
+      },
+      {
+        "claim": "Battery is new, holds charge for 8 hours. Never repaired.",
+        "verdict": "contradicted",
+        "evidence": "Witness report shows only two solar panels leaning against a wall; no battery is visible in any photo, so this claim does not match the item identified."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Mismatch between seller's claim (battery) and witnessed item (solar panels) suggests either a copy-pasted generic ad or a bait-and-switch listing.",
+        "proof": "A fresh photo/video of the actual item for sale with a battery (if one exists) clearly shown alongside the panels, and a seller clarification of what exactly is being sold.",
+        "if_unproven": "Treat the battery claim as inapplicable/non-existent; price only the two panels as seen."
+      },
+      {
+        "risk": "Unknown wattage/voltage rating of panels, which drives most of the price.",
+        "proof": "Close-up photo of the rating label/sticker on the back of each panel.",
+        "if_unproven": "Price at lowest plausible wattage tier for panels of this visible size."
+      },
+      {
+        "risk": "Unknown cell condition (micro-cracks, hotspots, delamination).",
+        "proof": "Close-up photos of each panel's surface in bright light, plus an electroluminescence or multimeter output test clip.",
+        "if_unproven": "Price as untested/cosmetic-only condition."
+      },
+      {
+        "risk": "No visibility of junction box, back frame, or connectors (MC4 cables).",
+        "proof": "Photo of the rear of each panel showing junction box and cable ends.",
+        "if_unproven": "Price as if connectors/junction box may need replacement."
+      },
+      {
+        "risk": "No proof of actual power output under load.",
+        "proof": "Video of panel connected to a load/multimeter in sunlight showing voltage and current readings.",
+        "if_unproven": "Price as unverified output, worst-case low performance."
+      },
+      {
+        "risk": "Age/usage history unknown, could be heavily used or salvaged.",
+        "proof": "Any purchase receipt, warranty card, or serial number photo matched to manufacture date.",
+        "if_unproven": "Price as used/unknown-age stock."
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the rating label on the back of each panel (wattage, voltage, current).",
+      "Photo of the rear/junction box and connector cables on each panel.",
+      "Video of the panels producing voltage/current under sunlight with a multimeter.",
+      "Clarification from seller on whether a battery is actually included, with a photo of that battery if so.",
+      "Close-up shots of cell surfaces for crack/hotspot inspection."
+    ],
+    "decision": "fraud_suspected",
+    "reason": "The seller's detailed claim is about a battery's charge life, but the witness only saw two solar panels with no battery present, a mismatch that signals a possibly copy-pasted or bait-and-switch listing rather than a genuine description of the pictured item."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_judge",
+    "latency_ms": 20948,
+    "input_tokens": 1524,
+    "output_tokens": 1838,
+    "cost_usd": 0.01941,
+    "replayed": false,
+    "fixture_key": "f4275e6644028b5f29cb2c0e41555dc0",
+    "error": null
+  }
+}
