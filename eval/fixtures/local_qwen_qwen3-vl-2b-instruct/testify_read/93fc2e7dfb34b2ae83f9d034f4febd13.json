@@ -1,0 +1,74 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-instruct",
+  "response": {
+    "observations": [
+      "A black Nikon DSLR camera with a 70-300mm lens is shown in three photos. The camera is placed on a white box with 'McSteve' written on it. The camera has a strap and appears to be used, with some dirt on the body. The lens has a gold label with 'Nikon DX' and '70-300mm' written on it. The camera body has a red accent on the shutter button. The photos show the camera from different angles, including the top, side, and front."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DSLR camera",
+      "brand": "Nikon",
+      "model": "D3400",
+      "read_from": [
+        "photo 0",
+        "photo 1",
+        "photo 2"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "This is a Used Nikon D3400 DSLR Camera With 70-300mm Lens... working perfectly ok with no fault",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "Shutter count under 5,000, no fungus or scratch on the lens.",
+        "verdict": "unverified",
+        "evidence": "photo 1"
+      },
+      {
+        "claim": "Original battery and charger, never repaired.",
+        "verdict": "unverified",
+        "evidence": "photo 2"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The camera may not be working properly due to the visible dirt and wear on the body.",
+        "proof": "photo 2",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The shutter count may be higher than stated, even if the camera is not visibly damaged.",
+        "proof": "photo 0",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The lens may have fungus or scratches that are not visible in the photos.",
+        "proof": "photo 1",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Can you provide a certificate of authenticity or a warranty card for the camera?",
+      "Can you show the shutter count on the camera?",
+      "Can you provide a photo of the lens with no visible fungus or scratches?"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller's claims are not fully supported by the photos. The camera's condition and the shutter count are not verifiable. The photos show some dirt and wear, but it is not clear if the camera is working properly. The seller cannot provide proof of the shutter count or the lens condition. Therefore, I need more information from the seller to make a decision."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-instruct",
+    "task": "testify_read",
+    "latency_ms": 30356,
+    "input_tokens": 2823,
+    "output_tokens": 632,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "93fc2e7dfb34b2ae83f9d034f4febd13",
+    "error": null
+  }
+}

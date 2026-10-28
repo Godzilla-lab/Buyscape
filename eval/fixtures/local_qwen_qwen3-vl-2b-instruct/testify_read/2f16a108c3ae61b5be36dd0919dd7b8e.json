@@ -1,0 +1,63 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-instruct",
+  "response": {
+    "observations": [
+      "A silver Toyota Tacoma TRD 4x4 pickup truck is shown in three photos. The front view shows the grille, headlights, and front bumper. The rear view shows the tailgate, taillights, and a black tonneau cover. The truck is parked on a gravel surface. The photos show the vehicle in a parking lot with other cars and red canopies in the background. The truck has a V6 engine, push-to-start, moonroof, and is described as 'like new' and 'never repaired'. A handwritten note on the rear window says 'No Start 963'. The seller claims it is a 2024 model with an original receipt and warranty."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "pickup truck",
+      "brand": "Toyota",
+      "model": "Tacoma",
+      "read_from": [
+        "photo 0",
+        "photo 1",
+        "photo 2"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "!!foreign used 2024 toyota tocoma trd 4x4 with v6 engine,push to start,moonroof and verified duty...",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "Like new, never repaired or opened, works perfectly. Original receipt and warranty available.",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The truck has a handwritten note on the rear window that says 'No Start 963'. This could indicate a mechanical issue or a problem with the vehicle's starting system, which contradicts the seller's claim that it 'works perfectly'.",
+        "proof": "photo 2",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The seller claims the truck is 'verified duty' and 'original receipt and warranty available', but the photos do not show any official documentation or proof of these claims.",
+        "proof": "photo 0",
+        "if_unproven": "as not verified"
+      }
+    ],
+    "proof_requests": [
+      "Can you provide a copy of the original receipt and warranty for the vehicle?",
+      "Can you show me the vehicle's VIN number and any maintenance records?"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller's claims are supported by the photos, but the handwritten note on the rear window contradicts the claim that the truck 'works perfectly'. The seller cannot provide proof of the original receipt and warranty, which are essential for verification. Therefore, I must ask for proof to determine the true condition of the vehicle."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-instruct",
+    "task": "testify_read",
+    "latency_ms": 23883,
+    "input_tokens": 3273,
+    "output_tokens": 597,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "2f16a108c3ae61b5be36dd0919dd7b8e",
+    "error": null
+  }
+}

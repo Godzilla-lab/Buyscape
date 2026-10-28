@@ -1,0 +1,64 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-instruct",
+  "response": {
+    "observations": [
+      "Photo 0: A yellow cooking gas cylinder with a handle, sitting on a marble floor. The cylinder has a label with a red logo and some text, including 'Shop 90' and '0003'. There is handwritten text on the side. The cylinder appears to be used, with some wear and tear.",
+      "Photo 1: A blue cooking gas cylinder with a metal valve. The cylinder has a logo that says 'BERADISCO'. The cylinder is sitting on a tiled floor. The cylinder appears to be used, with some rust and wear.",
+      "Photo 2: A blue cooking gas cylinder with a metal valve. The cylinder has a logo that says 'BERADISCO'. The cylinder is sitting on a tiled floor. The cylinder appears to be used, with some rust and wear."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "cooking gas cylinder",
+      "brand": "BERADISCO",
+      "model": "unknown",
+      "read_from": [
+        "photo 1",
+        "photo 2"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "12.5kg standard Cooking Gas Cylinder",
+        "verdict": "supported",
+        "evidence": "Photo 1 and 2 show a blue cylinder, which is a common size for a cooking gas cylinder. The seller's claim is consistent with the visual evidence."
+      },
+      {
+        "claim": "Recently tested and certified, no leak, the valve is new.",
+        "verdict": "contradicted",
+        "evidence": "Photo 1 and 2 show a blue cylinder with a valve that appears to be old and worn. The valve is not new. The cylinder has a label that says 'Shop 90' and '0003', which is not a standard certification mark. The cylinder is not certified by a recognized authority."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The cylinder is not certified by a recognized authority.",
+        "proof": "The label on the cylinder says 'Shop 90' and '0003', which is not a standard certification mark. The cylinder is not certified by a recognized authority.",
+        "if_unproven": "as not certified"
+      },
+      {
+        "risk": "The valve is not new.",
+        "proof": "Photo 1 and 2 show a blue cylinder with a valve that appears to be old and worn. The valve is not new.",
+        "if_unproven": "as not new"
+      }
+    ],
+    "proof_requests": [
+      "Can you provide a certificate of test and certification for the cylinder?",
+      "Can you show the valve is new?"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller's claims are contradicted by the visual evidence. The cylinder is not certified by a recognized authority, and the valve is not new. The seller cannot provide proof of the cylinder's certification or the valve's newness. Therefore, I need more information from the seller to make a decision."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-instruct",
+    "task": "testify_read",
+    "latency_ms": 30356,
+    "input_tokens": 2788,
+    "output_tokens": 663,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "6c929a64f33f89bb0a156261431db044",
+    "error": null
+  }
+}
