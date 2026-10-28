@@ -1,0 +1,88 @@
+{
+  "task": "testify_judge",
+  "prompt_version": "testify_judge.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "claims": [
+      {
+        "claim": "The brand is Canon",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows a visible 'Nikon' logo on the camera body front, not Canon."
+      },
+      {
+        "claim": "It has 2 lens 18-55mm and 50mm",
+        "verdict": "unverified",
+        "evidence": "Two lenses are visible (one mounted, one detached with rear cap), matching the count, but focal length markings are not legible in the photo."
+      },
+      {
+        "claim": "Clean",
+        "verdict": "unverifiable_remote",
+        "evidence": "No close-up of sensor, lens glass, or body surfaces to check for scratches, dust, or fungus."
+      },
+      {
+        "claim": "Good to shoot videos and snapshots",
+        "verdict": "unverifiable_remote",
+        "evidence": "No power-on, live view, or sample shot/video provided to confirm functionality."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Brand identity mismatch between seller's words (Canon) and visible logo (Nikon), possible wrong listing or scam",
+        "proof": "Clear photo of the camera body's model nameplate and lens mount brand marking together",
+        "if_unproven": "treat as unverified/suspect identity, price at worst case or withhold pricing pending clarification"
+      },
+      {
+        "risk": "Exact camera model unknown, which sets baseline value",
+        "proof": "Close-up of model name/number on top or front of body",
+        "if_unproven": "price as base/entry-level model in this line"
+      },
+      {
+        "risk": "Shutter count / usage history unknown",
+        "proof": "Photo of shutter count from camera menu or EXIF data screenshot",
+        "if_unproven": "price as heavily used"
+      },
+      {
+        "risk": "Sensor and lens glass condition (scratches, fungus, dust) unknown",
+        "proof": "Close-up through lens against light and sensor shot with body cap off",
+        "if_unproven": "price as having visible defects"
+      },
+      {
+        "risk": "Functionality (power on, autofocus, video recording) unverified",
+        "proof": "Short video clip of camera powering on, focusing, and recording a test clip",
+        "if_unproven": "price as non-functional/for parts"
+      },
+      {
+        "risk": "Included accessories (battery, charger, memory card, bag) unclear",
+        "proof": "Photo of all included accessories laid out together",
+        "if_unproven": "price as body and lenses only, no accessories"
+      },
+      {
+        "risk": "Lens focal lengths and aperture specs unconfirmed",
+        "proof": "Close-up of lens barrel text showing focal length and f-stop",
+        "if_unproven": "price as generic kit lenses, lowest spec assumption"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the camera's nameplate/model number and brand logo together",
+      "Photo or video of the camera powering on and a live view/autofocus test",
+      "Close-up photos of both lenses' barrel text (focal length, aperture)",
+      "Photo of shutter count or EXIF info from a test shot",
+      "Photo of sensor (body cap off) and lens elements against light for scratches/fungus/dust",
+      "Photo of all accessories included (battery, charger, memory card, strap, bag)"
+    ],
+    "decision": "fraud_suspected",
+    "reason": "The seller claims the camera is a Canon, but the witness clearly saw a Nikon logo on the body, a direct contradiction on the item's core identity that warrants suspicion before any pricing."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_judge",
+    "latency_ms": 17841,
+    "input_tokens": 1538,
+    "output_tokens": 1643,
+    "cost_usd": 0.017488,
+    "replayed": false,
+    "fixture_key": "578a322642ae246dcef0adde1a29800a",
+    "error": null
+  }
+}
