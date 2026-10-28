@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0: Two stacks of used passenger car tyres on dirt ground; one silver alloy wheel with black centre on the left; tyres show worn tread and sidewall scuffing; no readable sidewall branding.",
+      "Photo 1: Similar view of stacked used tyres and one alloy wheel; no readable branding.",
+      "Photo 2: Four used tyres laid flat side by side; two alloy wheels in background (one multi-spoke silver/black, one five-spoke silver/black); tyres show winter-style siping; no readable sidewall branding; person's foot visible at right edge."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used tyres and alloy wheels",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Direct Belgium tyres",
+        "verdict": "unverifiable_remote",
+        "evidence": "No sidewall branding, country of origin marking, or barcode visible in any photo to confirm Belgium origin."
+      },
+      {
+        "claim": "wheels",
+        "verdict": "supported",
+        "evidence": "Alloy wheels visible in photo 0, photo 1, and photo 2."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Tyre tread depth and overall condition",
+        "proof": "Close-up photo of tread wear indicators or a tread depth gauge on each tyre",
+        "if_unproven": "as worn out or scrap value"
+      },
+      {
+        "risk": "Tyre age and manufacture date",
+        "proof": "Photo of the DOT code on the sidewall of each tyre",
+        "if_unproven": "as expired or unsafe"
+      },
+      {
+        "risk": "Wheel condition (cracks, bends, curb rash)",
+        "proof": "Close-up photo of the face and outer lip of each alloy wheel",
+        "if_unproven": "as damaged wheels"
+      },
+      {
+        "risk": "Whether tyres and wheels are sold together or separately",
+        "proof": "Wide shot showing the complete lot with the seller's hand or a note",
+        "if_unproven": "as tyres only"
+      },
+      {
+        "risk": "Total quantity of tyres and wheels for sale",
+        "proof": "Wide shot of the entire lot being offered",
+        "if_unproven": "as the minimum visible count (4 tyres, 2 wheels)"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of sidewall markings on each tyre to read brand, size, and DOT date code",
+      "Close-up of each alloy wheel to check for cracks, bends, and curb damage",
+      "Wide shot showing the complete lot being sold"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as used tyres and alloy wheels from the photos; no brand or model is readable, but type-based pricing applies; worst case assumes worn tyres and damaged wheels."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 33038,
+    "input_tokens": 2441,
+    "output_tokens": 2801,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "24faa3ff9c7085a4c6c8de8ef7b205a0",
+    "error": null
+  }
+}

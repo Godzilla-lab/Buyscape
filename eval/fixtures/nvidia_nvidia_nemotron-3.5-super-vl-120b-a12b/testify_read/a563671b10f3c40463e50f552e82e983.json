@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Dark mountain bike with front suspension fork and disc brakes",
+      "Rear cassette and derailleur visible; front chainrings and shifters not clearly shown",
+      "No legible brand or model on the frame; photo carries an 'AUSTIN BODY' watermark",
+      "Hardtail frame; no rear shock visible",
+      "Seller claims 18 speeds and shock absorbers"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "mountain bike",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "High quality bicycle",
+        "verdict": "unverifiable_remote",
+        "evidence": "photo 0 shows condition but quality is subjective and cannot be verified remotely"
+      },
+      {
+        "claim": "18 speed gears",
+        "verdict": "unverified",
+        "evidence": "photo 0 shows rear gears but not shifters or front chainrings to confirm 18 speeds"
+      },
+      {
+        "claim": "shock absorbers",
+        "verdict": "supported",
+        "evidence": "photo 0 shows a front suspension fork; rear shock not visible"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Gears may not shift across 18 speeds",
+        "proof": "video of rider shifting through the full gear range",
+        "if_unproven": "as non-shifting or fewer speeds"
+      },
+      {
+        "risk": "Front suspension fork may leak or be seized",
+        "proof": "close-up of fork stanchions and seals plus compression video",
+        "if_unproven": "as rigid fork"
+      },
+      {
+        "risk": "Frame may have hidden cracks at welds",
+        "proof": "close-up photos of head tube, bottom bracket, and seat tube junctions",
+        "if_unproven": "as cracked frame"
+      },
+      {
+        "risk": "Disc brakes may not function",
+        "proof": "video of brake lever pull with wheel spinning",
+        "if_unproven": "as no brakes"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of frame brand and model location",
+      "Video of gear shifting through full range",
+      "Close-up of suspension fork seals and compression test",
+      "Video of front and rear brake operation"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a mountain bike from photo 0, so it can be priced at worst case even though the seller's performance claims are unproven."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 31103,
+    "input_tokens": 1608,
+    "output_tokens": 2701,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "a563671b10f3c40463e50f552e82e983",
+    "error": null
+  }
+}

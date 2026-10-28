@@ -1,0 +1,76 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Large green rectangular battery with top terminals and thick cables connected",
+      "Label reads \"Multi Power\" and \"Inverter Battery\" on photo 0",
+      "Second similar battery partially visible to the right",
+      "Blue electronic device with display behind the battery",
+      "Plastic water bottle in foreground",
+      "\"POSTED ON JIJI MR, G\" watermark across the image"
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "inverter battery",
+      "brand": "Multi Power",
+      "model": null,
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "dead inverter battery / condemned inverter battery",
+        "verdict": "unverified",
+        "evidence": "photo shows battery exterior but cannot test electrical condition"
+      },
+      {
+        "claim": "Free pick up",
+        "verdict": "unverifiable_remote",
+        "evidence": "cannot verify pickup terms from photo"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery is dead and cannot hold charge",
+        "proof": "Video of multimeter voltage test on terminals or load test clip",
+        "if_unproven": "as dead/scrap battery"
+      },
+      {
+        "risk": "Battery case is cracked or leaking electrolyte",
+        "proof": "Close-up video of battery case, seams, and terminals",
+        "if_unproven": "as damaged battery"
+      },
+      {
+        "risk": "Capacity and age are unknown",
+        "proof": "Clear photo of label specifications and manufacturing date",
+        "if_unproven": "as unknown/low capacity used battery"
+      }
+    ],
+    "proof_requests": [
+      "Video of multimeter voltage test on battery terminals",
+      "Clear close-up photos of battery label specs and date code",
+      "Video showing battery case and terminals for leaks or damage"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a used Multi Power inverter battery from photo 0; unproven condition claims are priced at worst case as non-working, and the single comparable battery sets the range.",
+    "price_pick": {
+      "low": 0,
+      "high": 0
+    }
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_joint",
+    "latency_ms": 40362,
+    "input_tokens": 2249,
+    "output_tokens": 6188,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "54b117f2748cc3d0a625afa7e499cdfe",
+    "error": null
+  }
+}

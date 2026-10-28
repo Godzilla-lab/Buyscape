@@ -1,0 +1,89 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows the front of a framed solar photovoltaic panel with dark cells, white grid lines, and a silver frame; glare is visible on the upper surface.",
+      "Photo 1 shows the same panel front from a similar angle.",
+      "Photo 2 shows the back of the panel with a white backsheet, central junction box, and two black output cables.",
+      "Photo 3 shows the same panel back from a slightly different angle.",
+      "No brand name, model number, or wattage label is legible in any photo.",
+      "A watermark reading 'NETWORK SOLAR VENTURES' appears on the images."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0",
+        "photo 1",
+        "photo 2",
+        "photo 3"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Battery is new",
+        "verdict": "contradicted",
+        "evidence": "Photos 0-3 show a solar panel, not a battery"
+      },
+      {
+        "claim": "holds charge for 8 hours",
+        "verdict": "contradicted",
+        "evidence": "Photos show a solar panel, which generates power rather than storing charge"
+      },
+      {
+        "claim": "Never repaired",
+        "verdict": "unverifiable_remote",
+        "evidence": "No repair history or service records are visible in the photos"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Wattage and electrical specifications are unknown",
+        "proof": "Clear photo of the specification label on the back",
+        "if_unproven": "priced as an unrated used panel"
+      },
+      {
+        "risk": "The panel may not generate electrical power",
+        "proof": "Video of the panel in sunlight connected to a multimeter or load",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Hidden physical defects such as cracks, hot spots, or delamination",
+        "proof": "Close-up photos of the cell surface or an electroluminescence image",
+        "if_unproven": "priced as physically damaged"
+      },
+      {
+        "risk": "Age and usage history cannot be verified",
+        "proof": "Photo of the manufacturing date sticker or original receipt",
+        "if_unproven": "priced as old and heavily used"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the specification label on the back showing brand, model, and wattage",
+      "Video of the panel producing voltage and current under sunlight",
+      "Close-up photos of the front surface to check for cracks or hot spots"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a used solar panel by type, but its brand, wattage, and working condition are unproven; the seller's battery claims are contradicted by the photos, so it is valued at the worst case using the comparable solar panel range.",
+    "price_pick": {
+      "low": 0,
+      "high": 10
+    }
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_joint",
+    "latency_ms": 37859,
+    "input_tokens": 3818,
+    "output_tokens": 6165,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "db92f7b7fa9235a1af4f60baee6b41fb",
+    "error": null
+  }
+}
