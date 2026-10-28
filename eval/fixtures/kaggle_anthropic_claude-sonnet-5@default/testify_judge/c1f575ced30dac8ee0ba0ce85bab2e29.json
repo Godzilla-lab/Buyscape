@@ -1,0 +1,72 @@
+{
+  "task": "testify_judge",
+  "prompt_version": "testify_judge.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "claims": [
+      {
+        "claim": "We also deal in all kinds of car spare parts",
+        "verdict": "unverifiable_remote",
+        "evidence": "General business claim, not depicted or contradicted by the three photos; no way to confirm scope of seller's inventory remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Make, model, and engine displacement/type unknown (critical for any price lookup)",
+        "proof": "Close-up of engine block casting number, ECU label, or any VIN/part-number sticker",
+        "if_unproven": "cannot be priced at all without this; treated as unidentified parts lot"
+      },
+      {
+        "risk": "Engine may not run or may be damaged internally",
+        "proof": "Video/audio clip of engine being started and running, or compression test readout",
+        "if_unproven": "priced as non-running/for-parts only"
+      },
+      {
+        "risk": "Completeness unclear (ECU, wiring harness, sensors, turbo) ",
+        "proof": "Full 360\u00b0 photos including wiring harness connectors and sensor ports",
+        "if_unproven": "priced as incomplete/stripped unit"
+      },
+      {
+        "risk": "Mileage/usage history and reason for removal (accident vs swap) unknown",
+        "proof": "Odometer photo from donor vehicle or service record",
+        "if_unproven": "priced as unknown-history salvage unit"
+      },
+      {
+        "risk": "Transmission may or may not be included in sale",
+        "proof": "Seller's written confirmation plus photo showing transmission still attached at sale",
+        "if_unproven": "priced as engine-only, transmission excluded"
+      },
+      {
+        "risk": "Strut assemblies' compatibility and condition unverified",
+        "proof": "Close-up of strut mounting brackets and any wear/rust at the mount points",
+        "if_unproven": "priced as used, unverified-condition struts"
+      },
+      {
+        "risk": "Watermark 'Porsche Global Autos' may suggest branding not matching actual part origin",
+        "proof": "Clear shot of any manufacturer logo/casting mark on the engine block itself",
+        "if_unproven": "ignored as marketing name, not treated as brand confirmation"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of engine block casting/part number or ECU label showing make and model",
+      "Video of engine starting and idling",
+      "Photo of wiring harness and sensor completeness",
+      "Written confirmation on whether transmission and struts are included at the stated price",
+      "Any documentation on donor vehicle (mileage, accident history)"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The witness could not read any make, model, or engine identifier, and pricing used car engines requires knowing at least the vehicle type/displacement; without that, even a worst-case price cannot be set."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_judge",
+    "latency_ms": 17462,
+    "input_tokens": 1713,
+    "output_tokens": 1552,
+    "cost_usd": 0.016928,
+    "replayed": false,
+    "fixture_key": "c1f575ced30dac8ee0ba0ce85bab2e29",
+    "error": null
+  }
+}
