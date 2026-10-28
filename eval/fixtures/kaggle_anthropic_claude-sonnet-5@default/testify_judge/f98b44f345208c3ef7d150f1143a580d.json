@@ -1,0 +1,76 @@
+{
+  "task": "testify_judge",
+  "prompt_version": "testify_judge.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "claims": [
+      {
+        "claim": "Scrap power banks for sale",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows two cased mobile phones, not power banks."
+      },
+      {
+        "claim": "Battery is new, holds charge for 8 hours",
+        "verdict": "unverifiable_remote",
+        "evidence": "No power-on, charging, or battery test shot; also refers to a different item type than what is shown."
+      },
+      {
+        "claim": "Never repaired",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal/board photo or screws/seal close-up to check for repair traces."
+      },
+      {
+        "claim": "Location: Ibadan",
+        "verdict": "unverified",
+        "evidence": "No geotag or location proof; market context specifies Lagos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Item mismatch - seller describes power banks, photo shows phones",
+        "proof": "A fresh photo of the actual item being sold, matching the seller's text",
+        "if_unproven": "treat listing as unreliable; do not price against seller's text"
+      },
+      {
+        "risk": "Screen/display condition and power-on status unknown",
+        "proof": "Photo of both phones powered on, showing home screen",
+        "if_unproven": "priced as non-functional/for parts"
+      },
+      {
+        "risk": "Hidden cracks or damage under cases",
+        "proof": "Photos with cases removed, all sides",
+        "if_unproven": "priced as damaged"
+      },
+      {
+        "risk": "IMEI/network lock status unknown",
+        "proof": "Photo of IMEI/settings screen or *#06# dial result",
+        "if_unproven": "priced as locked/unverified"
+      },
+      {
+        "risk": "Only one unit may actually be for sale",
+        "proof": "Clear statement/photo confirming both units included",
+        "if_unproven": "priced as single unit"
+      }
+    ],
+    "proof_requests": [
+      "Please send photos of the actual power banks you are selling, matching your description.",
+      "If phones are the actual item, provide front-screen power-on photos and IMEI/*#06# screenshot.",
+      "Photo of phones with cases removed to check for cracks/dents.",
+      "Confirm exact location and provide a recent photo with date/location context."
+    ],
+    "decision": "fraud_suspected",
+    "reason": "The seller's text describes scrap power banks while the witnessed photo clearly shows two cased mobile phones, a fundamental mismatch that suggests a copy-pasted or mismatched listing."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_judge",
+    "latency_ms": 11798,
+    "input_tokens": 1605,
+    "output_tokens": 994,
+    "cost_usd": 0.011132,
+    "replayed": false,
+    "fixture_key": "f98b44f345208c3ef7d150f1143a580d",
+    "error": null
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a used yellow industrial diesel engine with fuel filter, hoses, and components attached; watermark reads DNL EQUIPMENT SALES AND PORT HARCOURT",
+      "Photo 1 shows the top of the engine with C9 embossed on the valve cover and a Caterpillar logo visible"
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "complete engine",
+      "brand": "Caterpillar",
+      "model": "C9",
+      "read_from": [
+        "photo 1 valve cover"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Complete caterpiller c9 engine",
+        "verdict": "supported",
+        "evidence": "photo 1 shows C9 and Caterpillar logo; photo 0 shows engine assembly"
+      },
+      {
+        "claim": "(parts)",
+        "verdict": "unverifiable_remote",
+        "evidence": "photos cannot confirm sale condition or whether it is being sold for parts"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine does not run",
+        "proof": "video of engine running",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Internal damage such as cracks or seized components",
+        "proof": "borescope inspection or teardown photos",
+        "if_unproven": "as internally damaged"
+      },
+      {
+        "risk": "Not actually complete despite seller claim",
+        "proof": "detailed all-angle photos or component inventory",
+        "if_unproven": "as incomplete"
+      }
+    ],
+    "proof_requests": [
+      "Video of the engine running",
+      "Photos of all sides and any data plates",
+      "Borescope footage or compression test results"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a Caterpillar C9 engine from photo 1 and can be priced at worst case as a non-running parts engine using Rivers-market Caterpillar comparables.",
+    "price_pick": {
+      "low": 3,
+      "high": 4
+    }
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_joint",
+    "latency_ms": 17580,
+    "input_tokens": 2430,
+    "output_tokens": 3400,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "04c3506312c346eae4ae17419f126d48",
+    "error": null
+  }
+}
