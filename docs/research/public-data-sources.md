@@ -15,6 +15,24 @@ what is missing. Checked on 14 October 2026.
 | Konga | konga.com | Allows product pages | Not read: its terms load by script and could not be checked | No | Permission for new prices |
 | Jiji | jiji.ng | Blocks this machine | Fetched from a home connection with `testify-fetch` | Yes | Bulk access, if the home fetch is not enough |
 
+## New-price shops, checked on 28 October 2026
+
+BuyScrap's own site still lists the same 56 adverts cached on 14 October, so
+nothing new there. These shops sell new goods, so their prices are for the
+"dealers' new price times `resale_fraction`" route when used adverts are thin.
+Today that route uses only the dealers' new stock on Jiji. Only robots files
+were read; no shop page was fetched.
+
+| Shop | Website | Robots | What it could add |
+|---|---|---|---|
+| Jumia | jumia.com.ng | Allows product and category pages; blocks filters, search and its app API | New prices for phones, appliances, TVs, generators |
+| Slot | slot.ng | Allows all but cart, checkout and profile | New prices for phones, laptops, accessories |
+| Pointek | pointekonline.com | Allows all but admin and cart; has a sitemap | New prices for electronics |
+| Kara | kara.com.ng | Timed out | Not known |
+| Autochek | autochek.africa | Sends visitors to a welcome page | Used car prices, if the listings are reachable |
+| Badili | badili.africa | No robots file; the site is an app | Refurbished phone prices by grade, if reachable |
+| Nairaland | nairaland.com | Blocks this machine, like Jiji | Forum adverts, from a home connection only |
+
 ## Press figures, not used
 
 Articles quote per-kilo prices for plastics: PET at 250 a kilo from pickers
