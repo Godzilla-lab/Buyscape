@@ -1,0 +1,72 @@
+{
+  "task": "testify_judge",
+  "prompt_version": "testify_judge.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "claims": [
+      {
+        "claim": "Very neat 2 seater couch for sale",
+        "verdict": "contradicted",
+        "evidence": "Photo 1 shows faint stains on the seat cushion, and the witness describes a single long seat cushion forming what looks like a 3-seater bench-style sofa, not a clearly defined 2-seater."
+      },
+      {
+        "claim": "Item is a couch/sofa (implicit)",
+        "verdict": "supported",
+        "evidence": "Both photos show a cream/beige upholstered sofa with curved back and armrest."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual number of seats/length not confirmed (2-seater vs 3-seater bench)",
+        "proof": "Full-length photo with a tape measure or a person standing beside it for scale",
+        "if_unproven": "priced as ambiguous size, assume smaller/cheaper 2-seater configuration until measurement confirms otherwise"
+      },
+      {
+        "risk": "Hidden stains, odors, or tears not visible in the two photos",
+        "proof": "Close-up photos of each cushion and armrest in bright light, plus a verbal/video confirmation of smell",
+        "if_unproven": "priced as stained/used condition, not 'very neat'"
+      },
+      {
+        "risk": "Frame material and structural integrity (wood vs cheap particle board, wobble, broken springs)",
+        "proof": "Photo of underside/frame joints and a short video of someone sitting on it",
+        "if_unproven": "priced as unknown frame quality, worst-case low durability"
+      },
+      {
+        "risk": "Foam/cushion firmness and sagging",
+        "proof": "Video of someone pressing or sitting on the cushions",
+        "if_unproven": "priced as worn/soft foam, lower comfort grade"
+      },
+      {
+        "risk": "Age and usage history (pets, smoking, prior repairs)",
+        "proof": "Seller statement with supporting close-up photos of wear points (arms, back corners)",
+        "if_unproven": "priced as heavily used, no age discount applied"
+      },
+      {
+        "risk": "Possible reused/stock photo (watermark suggests listing reposted from Jiji)",
+        "proof": "A fresh photo with today's date or a handwritten note visible in frame",
+        "if_unproven": "priced cautiously as unverified listing, risk of stale or misrepresented item"
+      }
+    ],
+    "proof_requests": [
+      "Full-length photo with a tape measure or person for scale to confirm 2-seater vs 3-seater",
+      "Close-up shots of all stains, tears, and armrest stitching under good light",
+      "Photo of the frame underside and joints",
+      "Short video of someone sitting on the sofa to show cushion support and stability",
+      "A fresh photo with current date/newspaper to confirm listing is current and not reused"
+    ],
+    "decision": "price",
+    "reason": "The witness confirms it is a sofa, so it can be priced at worst case given visible stains and an unconfirmed seat count, pending measurement and condition proof."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_judge",
+    "latency_ms": 17825,
+    "input_tokens": 1550,
+    "output_tokens": 1497,
+    "cost_usd": 0.016052,
+    "replayed": false,
+    "fixture_key": "d58df536a9aa681840a5a6c19134fa7c",
+    "error": null
+  }
+}
