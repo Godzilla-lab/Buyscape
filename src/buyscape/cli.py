@@ -1302,16 +1302,20 @@ def testify_train_build(
     about the item are kept, a known item is priced at its worst case, and each
     example gets a lied-to twin; where a photo shows a fact, a true-claim and a
     false-claim twin too, and where a photo carries the label, a twin with it
-    taken away that asks for it. A brand or model on an advert no labeller
-    checked stays only if the local OCR found it on a photo. No advert from a
-    seller who is also in the benchmark is used.
+    taken away that asks for it. A priced example also teaches the price step:
+    which of the training adverts found for it bracket its asking price. A
+    brand or model on an advert no labeller checked stays only if the local
+    OCR found it on a photo. No advert from a seller who is also in the
+    benchmark is used.
     """
     from collections import Counter
 
     from .testify import train
 
     out = out or ROOT / "eval" / "testify" / "train" / "sft.jsonl"
-    cases, _ = _testify_cases("train", market)
+    # The pool is training adverts only, so no benchmark price reaches a training prompt.
+    cases, pool = _testify_cases("train", market)
+    hashes = {item.id: own for item, _, own in cases}
     runs = ROOT / "eval" / "testify" / "runs" / _dir_name(teacher)
     rows = [json.loads(line) for path in sorted(runs.glob("train*.jsonl")) if ".repeat" not in path.name
             for line in path.read_text().splitlines() if line.strip()]
@@ -1382,7 +1386,8 @@ def testify_train_build(
         shot = next((s for s in protocol.shots if {"model", "model_name", "vin"} & set(s.extract)), None)
         return (shot or next(s for s in protocols["generic"].shots if s.id == "label_or_plate")).ask
 
-    examples, tally = train.build(kept, rows, labels, ROOT, ocr=ocr, facts=facts, noproof=noproof, ask_for=ask_for)
+    examples, tally = train.build(kept, rows, labels, ROOT, ocr=ocr, facts=facts, noproof=noproof, ask_for=ask_for,
+                                  pool=pool, hashes=hashes)
     ocr.save()
     tally["seller also in the benchmark, left out"] = shared
     train.write(examples, out)

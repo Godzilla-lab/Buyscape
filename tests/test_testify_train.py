@@ -271,3 +271,52 @@ def test_a_brand_the_photos_left_still_show_stays():
                                 "the sticker", shown=1, brand_seen=0)
     assert said.identity.status == "named" and said.identity.brand == "Nikon" and said.identity.model is None
     assert said.identity.read_from == ["photo 0"] and said.decision == "ask_for_proof"
+
+
+def _comp(n: int, price: int, title: str):
+    from buyscape.testify.comparables import Comparable
+
+    return Comparable(item_id=f"c{n}", price_ngn=price, title=title, kind="standing fan", market="kano",
+                      observed_on="2026-10-17", url=f"https://jiji.ng/x/c{n}.html")
+
+
+def test_the_price_step_picks_the_real_adverts_either_side_of_the_asking_price():
+    answer, _ = train.target(FAN, _read())
+    found = [_comp(0, 20000, "Standing fan"), _comp(1, 30000, "Ceiling fan"), _comp(2, 45000, "Ox standing fan"),
+             _comp(3, 60000, "Standing fan 18 inch"), _comp(4, 90000, "Standing fan")]
+    choice = train.pick_target(FAN, answer, found)  # FAN asks 50,000
+    assert choice.same_item and (choice.price_pick.low, choice.price_pick.high) == (2, 3)
+    assert "50,000" not in choice.reason and "50000" not in choice.reason
+
+
+def test_adverts_at_the_asking_price_give_one_pick():
+    answer, _ = train.target(FAN, _read())
+    found = [_comp(0, 50000, "Standing fan"), _comp(1, 50000, "Ox standing fan"), _comp(2, 50000, "Standing fan")]
+    pick = train.pick_target(FAN, answer, found).price_pick
+    assert pick.low == pick.high and found[pick.low].price_ngn == 50000
+
+
+def test_no_price_example_when_no_advert_matches_or_the_asking_price_is_far_off():
+    answer, _ = train.target(FAN, _read())
+    assert train.pick_target(FAN, answer, [_comp(0, 40000, "Ceiling fan")]) is None
+    assert train.pick_target(FAN, answer, [_comp(0, 120000, "Standing fan")]) is None  # asks under half
+    new = FAN.model_copy(update={"answer": FAN.answer.model_copy(update={
+        "price": PriceTruth(ngn=50000, used=False, observed_on="2026-10-17")})})
+    assert train.pick_target(new, answer, [_comp(0, 45000, "Standing fan")]) is None  # a new price
+    refused, _ = train.target(FAN, _read(status="unknown", kind=None))
+    assert train.pick_target(FAN, refused, [_comp(0, 45000, "Standing fan")]) is None
+
+
+def test_build_adds_the_price_step_and_the_lie_cannot_move_it(tmp_path: Path):
+    photo = tmp_path / "f1.jpg"
+    Image.new("RGB", (64, 64)).save(photo)
+    pool = [_comp(0, 45000, "Ox standing fan"), _comp(1, 60000, "Standing fan")]
+    rows = [{"id": "f1", "variant": "clean", "reading": _read()}]
+    examples, _ = train.build([(FAN, [photo])], rows, {}, tmp_path, pool=pool)
+    picks = {e["variant"]: e["messages"] for e in examples if e["variant"].startswith("pick")}
+    assert set(picks) == {"pick", "pick_lie"}
+    assert picks["pick"][-1]["content"] == picks["pick_lie"][-1]["content"]
+    assert json.loads(picks["pick"][-1]["content"])["price_pick"] == {"low": 0, "high": 1}
+    prompt = picks["pick_lie"][1]["content"][0]["text"]
+    assert "45,000 NGN" in prompt and "50,000" not in prompt and "50000" not in prompt
+    assert not any(p["type"] == "image" for p in picks["pick"][1]["content"])
