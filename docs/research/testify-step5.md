@@ -34,7 +34,7 @@ longer separates the models. What does is below.
 
 | Model | True claim used, read then pick | Judged apart | False claim caught, read then pick | Judged apart |
 |---|---|---|---|---|
-| Nemotron | 89% | running | 100% | running |
+| Nemotron | 89% | 85% | 100% | 93% |
 | Gemini | 74% | **93%** | 96% | **100%** |
 | Claude | 44% | running | 96% | running |
 | nano | 39% | **70%** | 91% | 81% |
@@ -42,6 +42,11 @@ longer separates the models. What does is below.
 No model took the false name into its answer. When one step reports only
 what the photos show, the judge can check a claim against it, and true claims
 stop being ignored. nano catches fewer false claims that way.
+
+Judged apart, Nemotron never called the planted lie supported (0% against
+4.4%), and a lie raised its price on 4.9% of items against 11.8%. It prices
+more (48% against 40%), but the word rules mark 14 of those answers wrong:
+the witness names the item from the photos alone. They wait for a person.
 
 ## The label taken away
 
