@@ -1,0 +1,77 @@
+{
+  "task": "testify_judge",
+  "prompt_version": "testify_judge.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "claims": [
+      {
+        "claim": "High Quality Solar Panels, Inverters, Lithium&Tubular Batteries, Charge...",
+        "verdict": "unverifiable_remote",
+        "evidence": "Generic advertising text, not tied to any specific photo or spec."
+      },
+      {
+        "claim": "Battery is new, holds charge for 8 hours",
+        "verdict": "contradicted",
+        "evidence": "The witness report identifies the item as a solar panel, not a battery; no battery is shown in either photo, so this claim does not match the photographed item."
+      },
+      {
+        "claim": "Never repaired",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internals, junction box, or repair history visible in the photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Claim text describes a battery while photos show a solar panel",
+        "proof": "A photo of the actual item with seller confirming correct listing, plus a nameplate/wattage photo matching the panel",
+        "if_unproven": "treat listing as mismatched/unverified identity, price at worst case for an unbranded, unrated solar panel only"
+      },
+      {
+        "risk": "Unknown wattage/power rating",
+        "proof": "Close-up of nameplate or wattage sticker on panel back",
+        "if_unproven": "price as lowest common wattage for this panel size/type"
+      },
+      {
+        "risk": "Unknown age or usage history",
+        "proof": "Manufacture date sticker or seller-provided purchase receipt photo",
+        "if_unproven": "price as used, unknown age"
+      },
+      {
+        "risk": "Possible hidden cell damage, hotspots, or microcracks",
+        "proof": "Close-up front-face photo in bright light or an electroluminescence/thermal test clip",
+        "if_unproven": "price as possibly damaged/untested"
+      },
+      {
+        "risk": "Condition of junction box and cables unknown",
+        "proof": "Photo of the back junction box and cable connectors",
+        "if_unproven": "price as needing cable/junction repair"
+      },
+      {
+        "risk": "No output/performance test shown",
+        "proof": "Clip of panel under sunlight with multimeter reading voltage/current",
+        "if_unproven": "price as non-verified output, worst case low performance"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the item actually for sale matching the battery claim, or confirmation that only the solar panel is being sold",
+      "Close-up of panel nameplate showing wattage, model, and manufacturer",
+      "Photo of the back junction box and cables",
+      "Short video of panel output test with a multimeter under sunlight",
+      "Any purchase receipt or date-of-manufacture sticker"
+    ],
+    "decision": "fraud_suspected",
+    "reason": "The seller's claims describe a battery's charge life, but the witness report shows only an unbranded, unrated solar panel with no battery present, a mismatch that raises scam risk until clarified."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_judge",
+    "latency_ms": 16958,
+    "input_tokens": 1634,
+    "output_tokens": 1619,
+    "cost_usd": 0.01744,
+    "replayed": false,
+    "fixture_key": "8d013f91191e9a10989ad57bdc7a38cb",
+    "error": null
+  }
+}

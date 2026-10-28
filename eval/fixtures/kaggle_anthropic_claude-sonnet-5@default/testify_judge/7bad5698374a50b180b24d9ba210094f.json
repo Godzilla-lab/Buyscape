@@ -1,0 +1,82 @@
+{
+  "task": "testify_judge",
+  "prompt_version": "testify_judge.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "claims": [
+      {
+        "claim": "Used Nikon D610 in good condition",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 and Photo 1 clearly show 'Nikon D810' text on the body, not D610; this is a different model with different market value."
+      },
+      {
+        "claim": "The brand is Canon",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 and Photo 1 show a Nikon logo, not Canon."
+      },
+      {
+        "claim": "May show sign of cosmetic wears",
+        "verdict": "supported",
+        "evidence": "Photo 2 shows visible scuffing and wear on the top plate and worn/dusty hot shoe contacts."
+      },
+      {
+        "claim": "Comes with original battery and...",
+        "verdict": "unverifiable_remote",
+        "evidence": "No battery, charger, or box is visible in any photo; claim text is also cut off."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Shutter actuation count unknown, critical for DSLR valuation",
+        "proof": "Photo or screenshot of shutter count from camera menu or EXIF data of a test shot",
+        "if_unproven": "price as high-use/unknown-count body"
+      },
+      {
+        "risk": "Sensor condition (dust, scratches, fungus) not visible",
+        "proof": "Close-up photo of sensor with lens removed under light, or a test photo at small aperture showing spots",
+        "if_unproven": "price as needing sensor cleaning/inspection"
+      },
+      {
+        "risk": "Model identity mismatch between seller's words (D610) and photographed body (D810) raises doubt about which camera will actually ship",
+        "proof": "Clear photo of serial number plate and a video panning the body matching the listing",
+        "if_unproven": "price at worst case for lower-spec/uncertain model until confirmed"
+      },
+      {
+        "risk": "Included accessories (lens, battery, charger, strap, case) not shown",
+        "proof": "Photo of full bundle laid out together",
+        "if_unproven": "price as body-only, no accessories"
+      },
+      {
+        "risk": "Functional faults (autofocus, buttons, LCD, memory card slots) cannot be assessed from stills",
+        "proof": "Short video showing power-on, menu navigation, shutter firing, and live view",
+        "if_unproven": "price as untested/for-parts risk"
+      },
+      {
+        "risk": "Internal electronic faults or corrosion not visible externally",
+        "proof": "Video of camera operating continuously for a few minutes, including flash/exposure test",
+        "if_unproven": "price as unverified functional state"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the serial number plate on the camera body",
+      "Video walkthrough: power on, menu showing shutter count, autofocus test, shutter firing sound",
+      "Photo of sensor with lens removed, in good light",
+      "Photo of all included accessories laid out together (battery, charger, lens, strap, case)",
+      "Clarification of actual model and brand to resolve mismatch with seller's text"
+    ],
+    "decision": "fraud_suspected",
+    "reason": "The seller's description names a different brand (Canon) and a different model (D610) than what the witness clearly saw (Nikon D810), a core identity mismatch that is a strong scam indicator and must be resolved before any price is set."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_judge",
+    "latency_ms": 14823,
+    "input_tokens": 1602,
+    "output_tokens": 1336,
+    "cost_usd": 0.014546,
+    "replayed": false,
+    "fixture_key": "7bad5698374a50b180b24d9ba210094f",
+    "error": null
+  }
+}
