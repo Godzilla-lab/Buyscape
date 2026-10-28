@@ -413,7 +413,7 @@ paired intervals, the coverage curve, the money score, the adjudication file
 and the read and pick tables in `testify-compare`). Step 5 is running on
 Kaggle's quota and NVIDIA's free tier. The training set for step 6 is being
 rebuilt with the new twins and the seller split, for the GPU hours that come
-back on 31 Oct.
+back on 31 Oct. Results so far are in `testify-step5.md` (28 Oct).
 
 Steps 1 to 4 start now and need nothing from anyone. Steps 7 and 8 can start
 any time and are what turn Testify from an advert-reading benchmark into a

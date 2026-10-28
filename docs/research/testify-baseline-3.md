@@ -299,4 +299,5 @@ priced high enough, so it is read across the range, never at one cost.
 
 The fine-tuned model on the same items, once Kaggle's weekly GPU hours are
 back. The size curve starts with the 2B and the 4B
-(`testify-next-round.md`).
+(`testify-next-round.md`). The new tests on these baselines, and the
+untuned 2B and 4B, are in `testify-step5.md`.
