@@ -1,0 +1,77 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0 shows a top-loading washing machine with a front control panel area not clearly visible.",
+      "A label on the lid/front reads \u201cNEXUS\u201d.",
+      "No visible brand/model plate, capacity (kg), or power/rating information is readable.",
+      "No photo shows the drum condition, lid seal, drain hose, or control buttons in use."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "washing machine",
+      "brand": "NEXUS",
+      "model": null,
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Washing machine available at Abulegba",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo or text evidence confirms location (Abulegba)."
+      },
+      {
+        "claim": "The brand is Midea.",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows a \u201cNEXUS\u201d label on the machine, not Midea."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Brand mismatch: the photo shows \u201cNEXUS\u201d while the seller claims \u201cMidea\u201d, which affects value and buyer expectations.",
+        "proof": "Ask for a clear photo of the machine\u2019s rating/brand plate (usually on the back or side) showing brand and model number.",
+        "if_unproven": "Price as a generic/unknown-condition washing machine (worst case vs the comparables)."
+      },
+      {
+        "risk": "Unknown capacity (kg) and type (fully automatic vs semi-automatic) because it\u2019s not readable in the photo.",
+        "proof": "Ask for a photo of the rating plate showing capacity (kg) and model, plus a photo of the control panel.",
+        "if_unproven": "Price at the lowest comparable level."
+      },
+      {
+        "risk": "Working condition not proven (no test run, no sound/operation shown).",
+        "proof": "Ask for a short video of a full wash cycle starting (water filling \u2192 agitation \u2192 draining) or at least a power-on + spin test.",
+        "if_unproven": "Price as not proven/assume worst case (treat like faulty/needs checking)."
+      },
+      {
+        "risk": "Possible missing parts/accessories (drain hose, inlet hose, knobs) not visible.",
+        "proof": "Ask for photos showing included hoses and all knobs/buttons, and the back connections.",
+        "if_unproven": "Price at the lowest comparable level until accessories are confirmed."
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the rating/brand/model plate (back/side) showing brand, model number, and capacity (kg).",
+      "Photo of the control panel with all buttons/knobs visible.",
+      "Short video of a wash cycle (or at minimum: power on, water fill, agitation, and draining).",
+      "Photos of the back connections and included inlet/drain hoses."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo contradicts the seller\u2019s claimed brand (shows \u201cNEXUS\u201d not Midea) and key pricing factors (capacity, exact model, and working condition) are not verifiable from the single image.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_joint",
+    "latency_ms": 5694,
+    "input_tokens": 2123,
+    "output_tokens": 734,
+    "cost_usd": 0.003333,
+    "replayed": false,
+    "fixture_key": "998f7530143cc385e7250b9afd9b8c39",
+    "error": null
+  }
+}

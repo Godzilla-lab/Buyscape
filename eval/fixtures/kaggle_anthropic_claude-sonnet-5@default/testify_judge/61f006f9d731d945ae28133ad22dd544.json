@@ -1,0 +1,68 @@
+{
+  "task": "testify_judge",
+  "prompt_version": "testify_judge.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "claims": [
+      {
+        "claim": "Battery is new, holds charge for 8 hours, never repaired",
+        "verdict": "unverifiable_remote",
+        "evidence": "Report shows solar panels only; no battery is visible in any photo, so this claim cannot be matched to any pictured item."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Seller's claim describes a battery, but the witness only saw solar panels \u2014 possible mismatched listing, wrong text pasted, or an attempt to bundle an unseen item into the price.",
+        "proof": "A photo of the actual battery (model/label) being referenced, or seller confirmation of what exactly is being sold.",
+        "if_unproven": "Price only the solar panel(s) actually seen; exclude any value for a battery."
+      },
+      {
+        "risk": "Panel wattage, voltage and current rating unknown, which drives most of the value.",
+        "proof": "Clear close-up of the rating label on the back junction box or a datasheet/sticker shot.",
+        "if_unproven": "Price as lowest-common unbranded panel of visible size, worst-case wattage tier."
+      },
+      {
+        "risk": "Number of panels actually included in the sale is unclear (one, two, or more units).",
+        "proof": "A single photo showing all panels laid out together with a count-confirming caption or video pan.",
+        "if_unproven": "Price as a single panel only."
+      },
+      {
+        "risk": "Cell condition (micro-cracks, hotspots, delamination) cannot be judged from glare-heavy front shots.",
+        "proof": "Close-up photos of each cell under even, non-glare light, plus an electroluminescence or multimeter output test if possible.",
+        "if_unproven": "Price as used/unknown condition, assume possible hidden cell damage."
+      },
+      {
+        "risk": "Age and prior usage/storage duration unknown, affecting expected lifespan.",
+        "proof": "Manufacture date code on label, or purchase receipt/invoice.",
+        "if_unproven": "Price as used, indeterminate age."
+      },
+      {
+        "risk": "No certification or datasheet shown, so compliance/quality tier is unverifiable.",
+        "proof": "Photo of certification sticker or datasheet document.",
+        "if_unproven": "Price as uncertified/generic panel."
+      }
+    ],
+    "proof_requests": [
+      "Legible close-up of the junction box rating label (wattage, voltage, current)",
+      "Full count shot of all panels being sold laid out together",
+      "Clear, glare-free photos of each cell surface for crack/hotspot inspection",
+      "Manufacture date code or purchase receipt",
+      "Clarification/photo of the battery mentioned in the seller's message, if it is part of this sale",
+      "Any certification or datasheet document for the panel"
+    ],
+    "decision": "price",
+    "reason": "The witness clearly identifies solar panels, so they can be priced at worst-case (unknown wattage, unverified condition, possible single unit); the seller's battery claim does not match the photographed item and is treated as unverifiable rather than used to inflate value."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_judge",
+    "latency_ms": 21328,
+    "input_tokens": 1779,
+    "output_tokens": 1811,
+    "cost_usd": 0.01965,
+    "replayed": false,
+    "fixture_key": "61f006f9d731d945ae28133ad22dd544",
+    "error": null
+  }
+}
