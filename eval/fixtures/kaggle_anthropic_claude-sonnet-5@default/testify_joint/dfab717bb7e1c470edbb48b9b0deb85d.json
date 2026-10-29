@@ -1,0 +1,92 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows a silver front-load LG washer/dryer unit with 'LG' logo and 'InverteR DirectDrive 6/3kg' text visible on the front panel.",
+      "A red sticker reads 'Washer+Dryer 2 in 1'.",
+      "The control panel display is lit with numbers and a spinning dial illuminated, suggesting the unit has power.",
+      "The machine is sitting on a tiled floor in what looks like a small utility room, door glass shows clothes inside, cosmetic wear visible around the door seal.",
+      "No visible receipt, warranty card, or any proof of purchase date in the photo."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "washing machine (washer/dryer combo)",
+      "brand": "LG",
+      "model": "DirectDrive 6/3kg",
+      "read_from": [
+        "photo 0 front panel text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Washing machine scrap but doesn't work and needs repair",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo 0 shows display lit and dial illuminated, which is inconsistent with a fully non-functional unit, but no run/spin test is shown."
+      },
+      {
+        "claim": "Barely used, bought new last year",
+        "verdict": "unverified",
+        "evidence": "No date-stamped receipt or purchase proof visible in the photo."
+      },
+      {
+        "claim": "No fault at all, motor was never opened",
+        "verdict": "contradicted",
+        "evidence": "This directly contradicts the seller's own statement that it 'doesn't work and needs repair'; internal inconsistency in the seller's text."
+      },
+      {
+        "claim": "Receipt and warranty card available",
+        "verdict": "unverified",
+        "evidence": "Not shown in the single photo provided."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Unknown actual fault (motor, drum bearing, PCB, pump) since claims are contradictory",
+        "proof": "A video of the machine attempting a wash/spin cycle",
+        "if_unproven": "priced as fully not working / for parts"
+      },
+      {
+        "risk": "Possible hidden water damage or rust inside drum/tub",
+        "proof": "Photo of open drum and tub interior",
+        "if_unproven": "priced as not working, condition unknown"
+      },
+      {
+        "risk": "No proof of age or purchase history despite claim of 'bought new last year'",
+        "proof": "Photo of receipt and warranty card with date and serial number",
+        "if_unproven": "treated as unknown age, not factored into price uplift"
+      },
+      {
+        "risk": "Cosmetic damage (door seal wear, sticker peeling) may indicate heavier use than claimed",
+        "proof": "Close-up photos of door seal and drum interior",
+        "if_unproven": "priced as used/worn condition"
+      }
+    ],
+    "proof_requests": [
+      "Video of the machine plugged in and attempting a wash or spin cycle",
+      "Photo of the serial number plate (usually inside door frame or rear) matching any warranty card",
+      "Photo of the receipt and warranty card itself",
+      "Photo of the open drum/tub interior for rust or damage",
+      "Close-up of door seal and hinge condition"
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identifiable as an LG DirectDrive 6/3kg washer/dryer from the photo, but the seller's claims are self-contradictory (not working vs. no fault) and unverifiable remotely, so it must be priced at worst case as non-functional.",
+    "price_pick": {
+      "low": 0,
+      "high": 2
+    }
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 24767,
+    "input_tokens": 4021,
+    "output_tokens": 2322,
+    "cost_usd": 0.027709,
+    "replayed": false,
+    "fixture_key": "dfab717bb7e1c470edbb48b9b0deb85d",
+    "error": null
+  }
+}

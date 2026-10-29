@@ -1,0 +1,87 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows a front-load washing machine with LG logo on top-left and text 'Inverter DirectDrive 7kg F1068QDP2' on the control panel.",
+      "Visible rust spots on the metal body near the door hinge area and at the bottom front panel.",
+      "Door rubber gasket shows some discoloration; drum interior is dark, no clear view of condition.",
+      "A sticker reads 'Less Noise, Less Vibration, More Durability' and a '10 Year Warranty' DD Motor badge is visible.",
+      "No power cord, water hoses, or control panel close-up to confirm button/dial function.",
+      "No photo of the machine running or drum spinning."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "front-load washing machine",
+      "brand": "LG",
+      "model": "F1068QDP2 (DirectDrive 7kg)",
+      "read_from": [
+        "photo 0 control panel text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Barely used, bought new last year",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows noticeable rust spots on the body, which is inconsistent with a machine bought new only a year ago and barely used."
+      },
+      {
+        "claim": "No fault at all, the motor was never opened",
+        "verdict": "unverifiable_remote",
+        "evidence": "No power-on or spin-cycle video/photo provided; motor and drum internals not shown."
+      },
+      {
+        "claim": "Receipt and warranty card available",
+        "verdict": "unverified",
+        "evidence": "No photo of receipt or warranty card included."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Rust may indicate water leakage or prolonged exposure, risking internal corrosion of drum bearings or electronics.",
+        "proof": "Close-up photos of the rear panel, drum interior, and base, plus a video of the machine filling and spinning.",
+        "if_unproven": "priced as not working / needing repair"
+      },
+      {
+        "risk": "Unverified functional state (no demonstration of wash/spin cycle).",
+        "proof": "Short video clip of the machine running a full cycle with water and spin.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Missing accessories (power cable, inlet/outlet hoses) could add extra cost for buyer.",
+        "proof": "Photo showing included cables and hoses.",
+        "if_unproven": "priced as accessories not included"
+      },
+      {
+        "risk": "Receipt/warranty authenticity unverified, could be for a different unit or expired.",
+        "proof": "Clear photo of receipt and warranty card with matching serial number.",
+        "if_unproven": "treated as no warranty"
+      }
+    ],
+    "proof_requests": [
+      "Video of the machine running a complete wash and spin cycle.",
+      "Close-up photos of the rear panel and underside showing extent of rust/corrosion.",
+      "Photo of the receipt and warranty card with serial number matching the unit.",
+      "Photo of included power cable and water hoses."
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identified as an LG DirectDrive 7kg washer (model F1068QDP2) from the photo, but visible rust contradicts the 'barely used' claim and no functional proof is given, so it must be priced at worst case as an unverified/possibly faulty unit.",
+    "price_pick": {
+      "low": 0,
+      "high": 1
+    }
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 21981,
+    "input_tokens": 4017,
+    "output_tokens": 2066,
+    "cost_usd": 0.025141,
+    "replayed": false,
+    "fixture_key": "fd1d0def812849379bac251c9c6d90fd",
+    "error": null
+  }
+}

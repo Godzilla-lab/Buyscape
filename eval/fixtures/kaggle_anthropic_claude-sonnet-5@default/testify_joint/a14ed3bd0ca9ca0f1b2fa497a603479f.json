@@ -1,0 +1,79 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows a front-load washing machine with 'LG' logo clearly visible on top left of control panel.",
+      "Panel text reads 'INVERTER DirectDrive 6/3kg' and a red badge says 'Washer+Dryer 2 in 1'.",
+      "Display panel shows lit indicator lights and a glowing dial, suggesting the unit has power connected to it.",
+      "Machine is sitting on a pedestal/dryer base, drum door closed, some clothes visible inside drum.",
+      "No visible damage, rust, or missing parts in the single photo; unit looks physically intact from the front.",
+      "Only one photo supplied; no back panel, plug, serial plate, or power-on test shown."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "front-load washing machine",
+      "brand": "LG",
+      "model": "DirectDrive 6/3kg Washer+Dryer 2in1",
+      "read_from": [
+        "photo 0 control panel and badge"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "The brand is Samsung",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 clearly shows 'LG' logo and LG model branding, not Samsung."
+      },
+      {
+        "claim": "Washing machine scrap but doesn't work and needs repair",
+        "verdict": "unverifiable_remote",
+        "evidence": "No power-on/drum-spin video or test clip provided; display lights visible in photo 0 could mean partial power, but working state of motor/drum cannot be confirmed from a still photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Seller's text names a different brand (Samsung) than what is shown in the photo (LG), raising doubt about which unit is actually being sold or whether listing details were copied from elsewhere.",
+        "proof": "A fresh photo of the same unit's rating plate/serial sticker (usually on the back or side) matching the brand and model claimed.",
+        "if_unproven": "priced as the item actually shown in the photo (LG), not as claimed (Samsung), and treated as a mismatch risk lowering confidence"
+      },
+      {
+        "risk": "Actual functional state unknown beyond seller's claim of 'doesn't work' \u2014 could be totally dead (motherboard/motor dead) or only a minor fault (belt, pump), which changes scrap/repair value a lot.",
+        "proof": "Video of plugging in and attempting a wash cycle, or at minimum power-on with door lock engaging.",
+        "if_unproven": "priced at worst case: fully non-functional, scrap/parts value only"
+      },
+      {
+        "risk": "Hidden damage to drum, bearings, or internal electronics not visible from a single front-facing photo.",
+        "proof": "Additional photos of the back panel, drum interior, and underside/motor area.",
+        "if_unproven": "priced as if hidden internal damage exists (worst case)"
+      },
+      {
+        "risk": "Missing accessories (hoses, power cable, detergent drawer) could add repair/replacement cost.",
+        "proof": "Photo showing power cable, inlet/outlet hoses attached.",
+        "if_unproven": "priced as missing until shown present"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the rating plate/serial sticker (usually rear or inside door frame) to confirm actual brand and model.",
+      "Video of the unit being plugged in, showing any power response, door lock, or drum movement attempt.",
+      "Photo of the back of the unit showing hoses, power cable, and overall condition.",
+      "Photo of the drum interior and detergent drawer area for wear/damage."
+    ],
+    "decision": "fraud_suspected",
+    "reason": "The seller's own words claim the brand is Samsung, but the photo unambiguously shows an LG-branded unit with LG model markings, a direct contradiction that raises concern about listing accuracy or a possible mismatched/scam advert.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 18043,
+    "input_tokens": 3994,
+    "output_tokens": 1711,
+    "cost_usd": 0.021545,
+    "replayed": false,
+    "fixture_key": "a14ed3bd0ca9ca0f1b2fa497a603479f",
+    "error": null
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo shows a flat-screen LG-branded TV with the screen appearing dark/blank.",
+      "A circular loading/spinner graphic is visible on the screen area (may be from the TV powering on, or from a reflection/overlay).",
+      "No clear model number or screen size is readable from the photo.",
+      "No visible remote in the photo.",
+      "No visible damage details (cracks, missing parts, stand condition) are clearly shown."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "flat-screen TV",
+      "brand": "LG",
+      "model": null,
+      "read_from": [
+        "photo 0 (LG branding visible on the TV bezel)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "This is a scrap LG Flatron TV",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows an LG TV, but 'scrap' status and 'Flatron' model naming are not verifiable from the image."
+      },
+      {
+        "claim": "Currently not functioning properly",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows a dark screen with a spinner-like graphic, but the exact fault (no power, no signal, backlight issue, etc.) is not confirmed."
+      },
+      {
+        "claim": "Sold as is for parts or recycling",
+        "verdict": "unverifiable_remote",
+        "evidence": "Seller text only; photo 0 does not confirm sale terms."
+      },
+      {
+        "claim": "Buyer is responsible for pickup",
+        "verdict": "unverifiable_remote",
+        "evidence": "Seller text only; photo 0 does not confirm logistics."
+      },
+      {
+        "claim": "Remote included",
+        "verdict": "unverified",
+        "evidence": "No remote is shown in photo 0."
+      },
+      {
+        "claim": "No dead pixel, no line on the screen",
+        "verdict": "unverified",
+        "evidence": "Photo 0 does not show a full test pattern or close-up of the panel."
+      },
+      {
+        "claim": "Never repaired",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal/repair evidence is visible in photo 0."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Fault type is unknown (e.g., backlight failure vs. mainboard vs. power supply). This affects whether it\u2019s usable for parts only or potentially repairable.",
+        "proof": "Ask for a short video: plug in, power on, show whether there is sound/OSD/backlight glow, and show a full-screen test pattern if it can display anything.",
+        "if_unproven": "Price as not working / parts-only."
+      },
+      {
+        "risk": "Screen size and exact model are not readable, so the scrap value could be lower or higher than the comparables.",
+        "proof": "Ask for a clear photo of the label/sticker on the back showing model number and screen size.",
+        "if_unproven": "Price using the closest scrap TV comparable (worst-case: treat as a smaller/older faulty LG)."
+      },
+      {
+        "risk": "Remote may not actually be included.",
+        "proof": "Ask for a photo showing the remote next to the TV (or in the same frame).",
+        "if_unproven": "Price as remote not included."
+      },
+      {
+        "risk": "Hidden physical damage (cracked panel, bent frame, missing stand/legs) not visible in this single angle.",
+        "proof": "Ask for photos of: front corners, back corners, and the stand/legs from multiple angles.",
+        "if_unproven": "Price as potentially damaged/complete parts not guaranteed."
+      }
+    ],
+    "proof_requests": [
+      "Clear back-label photo showing LG model number and screen size.",
+      "Short power-on video showing: power indicator, any sound/OSD, and whether backlight is working.",
+      "Photo/video confirming the remote is included.",
+      "Multiple-angle photos of physical condition: front corners, back, and stand/legs."
+    ],
+    "decision": "price",
+    "reason": "The photo supports that it\u2019s an LG TV with a non-working/blank screen, but key details (fault type, model, remote) are not fully verifiable; so it should be priced at the worst-case parts/recycling value. The cheapest matching comparable is the faulty LG TV scrap listing.",
+    "price_pick": {
+      "low": 10000,
+      "high": 10000
+    }
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_joint",
+    "latency_ms": 8334,
+    "input_tokens": 2337,
+    "output_tokens": 1012,
+    "cost_usd": 0.004731,
+    "replayed": false,
+    "fixture_key": "70d50d986fd6bf542b71070c17d35c61",
+    "error": null
+  }
+}

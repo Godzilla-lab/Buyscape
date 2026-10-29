@@ -1,0 +1,78 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Single photo shows a red/orange gas cylinder with a valve, sitting in a car trunk.",
+      "No manufacturer name, capacity stamp, or serial number is legible on the cylinder body or collar.",
+      "Surface shows rust spots and chipped paint, consistent with heavy prior use.",
+      "No regulator is attached or visible in the photo.",
+      "Background clutter (car boot, boxes, duster) gives no scale reference to judge cylinder size."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "cooking gas cylinder",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "20kg capacity",
+        "verdict": "unverified",
+        "evidence": "No weight/capacity stamp visible on the collar or body in photo 0; shape alone does not confirm 20kg versus 12.5kg or other sizes."
+      },
+      {
+        "claim": "direct tokunbo (foreign used, imported)",
+        "verdict": "unverifiable_remote",
+        "evidence": "No import marking, foreign brand stamp, or paperwork shown in photo 0."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual capacity may be smaller than claimed (e.g. 12.5kg instead of 20kg), which changes the price bracket significantly.",
+        "proof": "Close-up photo of the stamped capacity/manufacture date on the cylinder collar.",
+        "if_unproven": "priced as the smaller common size (12.5kg) rather than the claimed 20kg"
+      },
+      {
+        "risk": "Valve or threading may be damaged or leaking, unsafe for use.",
+        "proof": "Video of the valve being opened/closed and a soap-bubble leak test.",
+        "if_unproven": "priced as not confirmed working/safe"
+      },
+      {
+        "risk": "Corrosion/rust may have weakened the cylinder wall, a safety hazard.",
+        "proof": "Close-up photos of the rusted areas and any pitting.",
+        "if_unproven": "priced as cosmetically and structurally worn"
+      },
+      {
+        "risk": "No regulator included, which buyers often expect bundled.",
+        "proof": "Photo showing a regulator included in the sale.",
+        "if_unproven": "priced as cylinder only, no regulator"
+      }
+    ],
+    "proof_requests": [
+      "Clear close-up photo of the capacity/weight stamp on the cylinder collar or body.",
+      "Photo or video showing any import/foreign brand marking to support 'tokunbo' claim.",
+      "Video of the valve opening and a leak check.",
+      "Photo confirming whether a regulator is included."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The capacity claim (20kg) that determines which price bracket applies cannot be read from the single photo, and no stamp or scale reference is visible to confirm it.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 19714,
+    "input_tokens": 3574,
+    "output_tokens": 1686,
+    "cost_usd": 0.017578,
+    "replayed": false,
+    "fixture_key": "bd6c847ffcf280338c06ea5eba7a93c4",
+    "error": null
+  }
+}
