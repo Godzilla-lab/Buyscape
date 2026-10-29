@@ -1,0 +1,85 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Black box-shaped thermal receipt printer with the paper roll compartment open",
+      "Front label reads \"HIPHEN SOLUTIONS\"",
+      "Blue port panel visible on the front lower edge",
+      "Seller text calls it \"Speedy POS Thermal Receipt Printer by hiphen\" and claims ESC/POS Windows support"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "thermal receipt printer",
+      "brand": "Hiphen",
+      "model": null,
+      "read_from": [
+        "photo 0 front label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Brand is Hiphen",
+        "verdict": "supported",
+        "evidence": "photo 0 shows HIPHEN SOLUTIONS on the front"
+      },
+      {
+        "claim": "Model is Speedy POS",
+        "verdict": "unverified",
+        "evidence": "model name is not legible in photo 0"
+      },
+      {
+        "claim": "Device is a thermal receipt printer",
+        "verdict": "supported",
+        "evidence": "photo 0 shows the open paper roll compartment typical of a thermal receipt printer"
+      },
+      {
+        "claim": "Supports Windows software based on ESC/POS",
+        "verdict": "unverifiable_remote",
+        "evidence": "software compatibility cannot be confirmed from photos alone"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Printer may not power on or print at all",
+        "proof": "video of the printer powering on and printing a test receipt",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Missing power adapter, data cable, or paper roll",
+        "proof": "photo showing all included accessories",
+        "if_unproven": "as unit only"
+      },
+      {
+        "risk": "Print head or cutter is worn or damaged",
+        "proof": "close-up photo of the print head and cutter plus a test print",
+        "if_unproven": "as needing repair"
+      },
+      {
+        "risk": "Unit is not the specific \"Speedy\" model claimed",
+        "proof": "clear photo of the model or serial label",
+        "if_unproven": "as a generic Hiphen thermal printer"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the model/serial/rating label",
+      "Video of the printer powering on and printing a receipt",
+      "Photo of all cables, adapter, and paper roll included"
+    ],
+    "decision": "price",
+    "reason": "The photos identify a Hiphen thermal receipt printer, so it can be priced at its worst case even though the model number and working condition are unproven."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 40309,
+    "input_tokens": 1609,
+    "output_tokens": 2541,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "62556650649cf6bf7d6966a0cfdcc3ef",
+    "error": null
+  }
+}

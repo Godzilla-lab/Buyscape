@@ -1,0 +1,67 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0: white chest freezer exterior, scratched and dirty, thermostat dial visible bottom right, no readable brand plate.",
+      "Photo 1: interior copper evaporator tubing along the walls, no markings or capacity visible.",
+      "Photo 2: lid open showing empty interior, light wear, no brand or model visible."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "chest freezer",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "It's a used chest freezer",
+        "verdict": "supported",
+        "evidence": "photo 0, photo 1, photo 2"
+      },
+      {
+        "claim": "slight faulty compressor",
+        "verdict": "unverifiable_remote",
+        "evidence": "compressor not shown or testable from photos"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Compressor does not start or pump refrigerant, so the freezer does not cool",
+        "proof": "video of compressor running and cabinet reaching freezing temperature",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Sealed system leak or blockage",
+        "proof": "sustained cooling demonstration or technician pressure test",
+        "if_unproven": "as not cooling"
+      },
+      {
+        "risk": "Power cord, plug, or thermostat failure",
+        "proof": "close-up of plug and cord plus power-on demonstration",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Video showing the compressor starting and the freezer cooling",
+      "Photo of the compressor and any rating plate",
+      "Close-up of the power cord and plug"
+    ],
+    "decision": "price",
+    "reason": "The photos clearly show a used chest freezer; the compressor claim cannot be verified remotely, so it is priced at its worst case as non-working."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 58458,
+    "input_tokens": 2466,
+    "output_tokens": 2689,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "f784f8495a65e0b467e0ec94cc9b596f",
+    "error": null
+  }
+}

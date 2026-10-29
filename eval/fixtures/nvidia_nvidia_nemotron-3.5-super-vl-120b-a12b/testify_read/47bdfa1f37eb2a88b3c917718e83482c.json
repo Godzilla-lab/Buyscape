@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows two black desktop thermal receipt printers side by side",
+      "Each unit has a top paper feed slot and a front paper exit slot",
+      "Each unit has a blue sticker or control panel on the front face",
+      "Text on the blue stickers is not legible in the photo",
+      "No brand name or model number is readable from the image",
+      "A small port or button is visible on the left side of each unit"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "thermal receipt printer",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Brand is hiphen",
+        "verdict": "unverifiable_remote",
+        "evidence": "Brand name not readable in photo 0; seller text alone is not proof"
+      },
+      {
+        "claim": "Barcode printer",
+        "verdict": "unverified",
+        "evidence": "Photo shows a receipt printer but cannot confirm barcode printing capability"
+      },
+      {
+        "claim": "Supports Windows software based on ESC/POS",
+        "verdict": "unverifiable_remote",
+        "evidence": "Software compatibility cannot be verified from photos"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Printer may not power on or print",
+        "proof": "Video of the printer powering on and printing a test receipt",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Brand or model is not hiphen as claimed",
+        "proof": "Clear close-up photo of the brand label and model plate",
+        "if_unproven": "as generic unbranded thermal printer"
+      },
+      {
+        "risk": "Missing power cable, USB cable, or paper roll",
+        "proof": "Photo showing all accessories included with the unit",
+        "if_unproven": "as unit only with no accessories"
+      },
+      {
+        "risk": "ESC/POS or Windows compatibility is false",
+        "proof": "Photo of specification label or screenshot of working driver/software",
+        "if_unproven": "as not supporting claimed software"
+      }
+    ],
+    "proof_requests": [
+      "Clear close-up of the brand label and model number on the printer",
+      "Video of the printer powering on and printing a test receipt",
+      "Photo of all included cables and accessories",
+      "Photo of the specification label showing interface and compatibility"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a thermal receipt printer from the photo, so it can be priced at its worst case as a non-working unit with no accessories, pending proof of function and brand."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 19968,
+    "input_tokens": 1609,
+    "output_tokens": 2509,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "47bdfa1f37eb2a88b3c917718e83482c",
+    "error": null
+  }
+}
