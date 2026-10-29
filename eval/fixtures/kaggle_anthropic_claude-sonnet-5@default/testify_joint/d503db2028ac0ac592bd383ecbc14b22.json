@@ -1,0 +1,84 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows a Nikon-branded cardboard box labeled 'D750' next to a smaller box labeled 'Nikkor Lens 50' and a larger box printed with an image of a gimbal/stabilizer rig holding a camera, plus a torn/taped shipping label.",
+      "Photo 1 shows the same D750 box open, containing only printed manuals ('D750 User's Manual', an apparel/accessory manual) and barcode stickers, no visible camera body.",
+      "Photo 2 shows a box interior with items fully wrapped in bubble wrap; shapes are indistinct, no visible lens glass, mount, buttons, or screen.",
+      "No photo shows the actual camera body out of wrapping, no serial number plate, no lens mount, no power-on/LCD screen, no shutter count display.",
+      "Box shows shipping tape, tears, and a used/resealed look consistent with a repackaged or reused box."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": null,
+      "brand": "Nikon",
+      "model": "D750",
+      "read_from": [
+        "photo 0 box text",
+        "photo 1 manual cover"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "American used Nikon D750 Body",
+        "verdict": "unverifiable_remote",
+        "evidence": "Only the outer box and manuals are shown in photos 0-2; the camera body itself is never visible, so origin and even presence of the body cannot be confirmed."
+      },
+      {
+        "claim": "clean and pure as new",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo of the body's exterior, LCD, or lens mount to assess cosmetic condition."
+      },
+      {
+        "claim": "working perfectly",
+        "verdict": "unverifiable_remote",
+        "evidence": "No power-on shot, no shutter count screen, no sample image; only bubble-wrapped bulges are shown in photo 2."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Box may not actually contain a Nikon D750 body (empty box or wrong item swapped in).",
+        "proof": "A photo of the unwrapped body showing the Nikon D750 nameplate, lens mount, and serial number sticker.",
+        "if_unproven": "priced as unverified identity/contents, worst case treated as unconfirmed body"
+      },
+      {
+        "risk": "Camera may not power on or may have shutter/sensor faults (common in grey-market 'American used' imports).",
+        "proof": "A clip or photo of the camera powered on, showing live view/LCD menu and shutter count screen.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Shutter count may be very high despite cosmetic claims of 'as new'.",
+        "proof": "Photo of the shutter count from a diagnostic app or menu screen.",
+        "if_unproven": "priced as high-use/worst case shutter life"
+      },
+      {
+        "risk": "Lens (Nikkor 50mm) and gimbal/stabilizer box shown may or may not be included in this sale, creating confusion on what is actually being sold.",
+        "proof": "A single photo with all included items laid out together with the camera body visible.",
+        "if_unproven": "priced as body-only, unconfirmed accessories excluded"
+      }
+    ],
+    "proof_requests": [
+      "Unbox and photograph the actual camera body fully out of wrapping, showing the Nikon D750 badge and lens mount.",
+      "Photo of the serial number plate on the body base.",
+      "Power the camera on and photograph the LCD screen showing menu or shutter count.",
+      "A short video of the shutter firing and lens autofocus (if a lens is included) in operation."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "All three photos show only boxes, manuals, and bubble-wrapped bulges; the camera body itself, its serial number, and any sign of power-on are never shown, so neither identity-in-hand nor a worst-case working/non-working price can be anchored without a photo of the actual unwrapped body.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 39529,
+    "input_tokens": 4986,
+    "output_tokens": 3272,
+    "cost_usd": 0.039139,
+    "replayed": false,
+    "fixture_key": "d503db2028ac0ac592bd383ecbc14b22",
+    "error": null
+  }
+}

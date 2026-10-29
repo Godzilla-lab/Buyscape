@@ -1,0 +1,100 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows a sealed/taped Nikon-branded cardboard box labeled 'D750' sitting on an orange sofa, next to a smaller 'Nikkor Lens 50' box and what looks like a promotional/stock image of a camera on a gimbal printed on another box.",
+      "Photo 1 shows the open D750 box containing only manuals (Nikon D750 User's Manual, lens manual) still in factory plastic wrap, plus another branded box (Zhiyun/gimbal) with a barcode.",
+      "Photo 2 shows bubble-wrapped items inside a box - shapes are not identifiable as a camera body; no visible camera, lens glass, mount, buttons, screen, or serial number plate.",
+      "No photo shows the actual camera body out of its wrapping, no lens element, no LCD screen, no shutter, no serial number.",
+      "Packaging looks factory-sealed/new, with manuals still in shrink wrap, which is inconsistent with an item described as 'used'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DSLR camera body",
+      "brand": "Nikon",
+      "model": "D750",
+      "read_from": [
+        "photo 0 box text",
+        "photo 1 manual text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "American used Nikon D750 Body",
+        "verdict": "unverified",
+        "evidence": "Only the outer box is shown; no camera body, import markings, or usage wear visible in any photo."
+      },
+      {
+        "claim": "clean and pure as new",
+        "verdict": "contradicted",
+        "evidence": "No camera is actually shown; what is shown is a sealed box and shrink-wrapped manuals, which does not demonstrate a used body's cosmetic condition and visually suggests unopened/new packaging rather than a used item being inspected."
+      },
+      {
+        "claim": "working perfectly",
+        "verdict": "unverifiable_remote",
+        "evidence": "No power-on, screen, shutter-fire, or sensor shot provided in any of the 3 photos."
+      },
+      {
+        "claim": "Shutter count under 5,000",
+        "verdict": "unverifiable_remote",
+        "evidence": "No shutter-count screen (menu/software readout) shown in any photo."
+      },
+      {
+        "claim": "no fungus or scratch on the lens",
+        "verdict": "unverifiable_remote",
+        "evidence": "No lens glass is visible in any photo; only an unopened Nikkor lens box is shown in photo 0."
+      },
+      {
+        "claim": "Original battery and charger, never repaired",
+        "verdict": "unverifiable_remote",
+        "evidence": "Neither battery nor charger nor any internal/service sticker is visible in any photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Box/manual photos may not correspond to the actual item being sold (box-only or stock-photo scam), item inside could be missing, different, or non-functional.",
+        "proof": "Photo of the camera body itself, powered on, with lens mount, top LCD, and a visible serial number matching the box label.",
+        "if_unproven": "priced as not working / unverified body (worst case)"
+      },
+      {
+        "risk": "Shutter count claim cannot be checked remotely.",
+        "proof": "Screenshot of shutter count from a counter app/tool with the camera's serial number visible in frame.",
+        "if_unproven": "priced as unknown/high shutter count, i.e. worst case"
+      },
+      {
+        "risk": "Lens condition (fungus/scratches) cannot be verified since lens is still boxed.",
+        "proof": "Clear photo of lens front/rear elements against a light source.",
+        "if_unproven": "priced as having visible lens issues (worst case)"
+      },
+      {
+        "risk": "'Used' vs 'new/grey-import' mismatch \u00e2\u20ac\u201d packaging looks factory new, raising authenticity/condition doubt.",
+        "proof": "Photo of the actual used body showing normal wear (grip, hot-shoe, ports) alongside the box.",
+        "if_unproven": "priced at worst case for an unverified/used body with no condition proof"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the actual Nikon D750 body out of the box, front and back, with lens mount visible.",
+      "Photo/video of the camera powered on, showing the top LCD and rear screen.",
+      "Screenshot of shutter count from the camera menu or a shutter-count checker tool.",
+      "Close-up photo of the lens front and rear elements under light.",
+      "Photo of the serial number sticker on the body matching the serial on the box."
+    ],
+    "decision": "fraud_suspected",
+    "reason": "All three photos show only sealed boxes and shrink-wrapped manuals/accessories with no visible camera body, lens glass, or working evidence, which contradicts the seller's description of a 'used, clean, working perfectly' camera and matches a pattern of stock/box photos rather than real used-item proof.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 30359,
+    "input_tokens": 5017,
+    "output_tokens": 2566,
+    "cost_usd": 0.032141,
+    "replayed": false,
+    "fixture_key": "16d2bf1adc95a29045a885ee8eb537a2",
+    "error": null
+  }
+}

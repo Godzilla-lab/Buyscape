@@ -1,0 +1,86 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0 shows a Nikon lens with text 'AF-S NIKKOR' and '50mm 1/8G' (appears to read 50mm f/1.8G).",
+      "Photo 1 shows the side label 'Nikon' and 'AF-S NIKKOR' and '50mm 1/8G' (appears to be 50mm f/1.8G).",
+      "Photo 2 shows the front ring with 'NIKON' and '50mm 1/8G' (appears to be 50mm f/1.8G).",
+      "Seller text says 'It is the 60mm one' but the photos show '50mm'.",
+      "No clear photo of the front element clarity (haze/fungus/scratches) beyond reflections; no close-up of glass edges.",
+      "No photo of lens mount contacts or rear element close-up."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": null,
+      "brand": "Nikon",
+      "model": "AF-S NIKKOR 50mm f/1.8G (appears from photos as '50mm 1/8G')",
+      "read_from": [
+        "photo 0 lens front ring text",
+        "photo 1 side label text",
+        "photo 2 lens front ring text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "American used lens",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photos only show a Nikon lens; no origin/receipt/serial-region proof."
+      },
+      {
+        "claim": "clean and pure like new",
+        "verdict": "unverified",
+        "evidence": "Photos show the lens, but not a decisive close-up of the front/rear glass for scratches, fungus, haze, or coating damage."
+      },
+      {
+        "claim": "It is the 60mm one",
+        "verdict": "contradicted",
+        "evidence": "Photos show '50mm 1/8G' on the lens (photo 0/1/2), not 60mm."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Wrong focal length stated by seller (60mm claimed vs 50mm shown). This affects compatibility and value.",
+        "proof": "Ask for a photo of the lens nameplate showing the focal length clearly (the exact '50mm' or '60mm' text) plus the full front ring.",
+        "if_unproven": "Price as the worst-case mismatch: treat as not matching the stated 60mm and price for the shown 50mm lens only."
+      },
+      {
+        "risk": "Lens glass condition unknown (possible fungus/haze/scratches).",
+        "proof": "Ask for a close-up video/photo of the front element and rear element under bright light at angles (including edges), plus a shot with the lens held against a light.",
+        "if_unproven": "Price as not guaranteed 'like new' (assume possible wear) and do not price at top-of-market."
+      },
+      {
+        "risk": "Mount/contacts and aperture mechanism condition unknown (could be damaged or sticky).",
+        "proof": "Ask for a clear photo of the rear mount contacts and a short clip showing aperture blades moving when the lens is tilted/operated (or a test in-camera).",
+        "if_unproven": "Price as potentially needing service/with uncertain function."
+      },
+      {
+        "risk": "Compatibility unknown (Nikon F-mount vs other mount).",
+        "proof": "Ask for a photo of the rear mount showing the exact mount type and a photo of the lens on the camera body (or the camera mount it fits).",
+        "if_unproven": "Price as generic/assume it may not fit your camera without confirmation."
+      }
+    ],
+    "proof_requests": [
+      "Send a clear close-up photo of the lens nameplate showing the focal length (confirm 50mm vs 60mm) and the exact model text.",
+      "Send front and rear element close-ups under bright light (angled shots to reveal fungus/haze/scratches).",
+      "Send a clear photo of the rear mount (contacts) and a short clip showing aperture movement / in-camera test.",
+      "Confirm mount type by showing the lens attached to the exact camera body (or show the mount clearly)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photos identify the lens as a Nikon AF-S NIKKOR 50mm f/1.8G, which contradicts the seller\u2019s '60mm' claim, and the photos do not decisively prove glass condition or functional/aperture health\u2014so a confident price pick from the provided comparables isn\u2019t safe yet.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_joint",
+    "latency_ms": 7893,
+    "input_tokens": 4484,
+    "output_tokens": 1061,
+    "cost_usd": 0.003536,
+    "replayed": false,
+    "fixture_key": "64fb86d06736277e0cbce132f76dc4eb",
+    "error": null
+  }
+}

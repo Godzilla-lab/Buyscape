@@ -1,0 +1,80 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows a hand holding a PS4 game case for 'Red Dead Redemption II' (Rockstar Games) in front of a shop backdrop with 'PREZIN Gadgets' watermark.",
+      "No disc, no manual, no receipt, and no packaging interior is visible.",
+      "Case art and PS4 logo are legible; no PS5 branding is seen despite seller mentioning 'double plate' which could imply PS4/PS5 dual version, not shown."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "PS4 game disc",
+      "brand": "Rockstar Games",
+      "model": "Red Dead Redemption II (PS4)",
+      "read_from": [
+        "photo 0 case cover"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Very clean double plate",
+        "verdict": "unverified",
+        "evidence": "Only the case front is shown; disc surface and back cover not visible."
+      },
+      {
+        "claim": "Neatly used, never opened or repaired",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo of the open case or disc to confirm seal or usage history."
+      },
+      {
+        "claim": "No overheating, all ports working",
+        "verdict": "contradicted",
+        "evidence": "This claim is irrelevant to a game disc (no ports or heat components); suggests a copy-pasted or mismatched description, a sign of a templated or careless listing."
+      },
+      {
+        "claim": "Comes with original pads and UK receipt",
+        "verdict": "unverified",
+        "evidence": "No receipt or pad (manual/inlay) shown in the photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Claims reference features (ports, overheating) that do not apply to a disc, indicating possible mismatched or copy-pasted ad text.",
+        "proof": "A photo or video of the actual disc and case interior matching the described claims.",
+        "if_unproven": "treat listing as unreliable; price at worst case assuming only the case is confirmed, not the disc or accessories"
+      },
+      {
+        "risk": "Disc condition (scratches, functionality) unknown.",
+        "proof": "Close-up photo of the disc surface or a video of it running on a PS4.",
+        "if_unproven": "priced as used/working unverified, same as base case-only item"
+      },
+      {
+        "risk": "Claimed 'UK receipt' and 'original pads' unproven, could inflate perceived value.",
+        "proof": "Photo of the receipt and manual/pad included in the case.",
+        "if_unproven": "excluded from value calculation"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the open case showing the actual disc and manual/pad.",
+      "Photo or video of the UK receipt mentioned.",
+      "Video of the disc running on a PS4 to confirm no read errors."
+    ],
+    "decision": "fraud_suspected",
+    "reason": "The seller's claims of 'no overheating' and 'all ports working' do not apply to a game disc, indicating a mismatched or copy-pasted description that raises doubt about the listing's authenticity and the seller's attention to the actual item.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 21269,
+    "input_tokens": 2972,
+    "output_tokens": 1861,
+    "cost_usd": 0.039329,
+    "replayed": false,
+    "fixture_key": "eeea1116c15237b63c07836d01c59bba",
+    "error": null
+  }
+}
