@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows a retail box for a tripod.",
+      "The box is labeled 'YD-9908 TRIPOD'.",
+      "The box lists features: 3-way head, built-in level, 4-section aluminum legs, lifting gear, and quick lever lock.",
+      "The actual tripod is not visible; only the packaging is shown.",
+      "The background appears to be a retail shop named 'Dozzydata Teleglobal'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "Camera Tripod",
+      "brand": null,
+      "model": "YD-9908",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Tripod",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "with Travel Bag",
+        "verdict": "unverified",
+        "evidence": "Bag is not shown in the photo."
+      },
+      {
+        "claim": "with Remote",
+        "verdict": "unverified",
+        "evidence": "Remote is not shown in the photo."
+      },
+      {
+        "claim": "Aluminum",
+        "verdict": "supported",
+        "evidence": "photo 0 box text"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, lower-quality item.",
+        "proof": "Photo of the tripod outside of the box.",
+        "if_unproven": "as empty box"
+      },
+      {
+        "risk": "Missing accessories like the remote, phone holder, or bag.",
+        "proof": "Photo showing all included accessories together.",
+        "if_unproven": "as tripod only without accessories"
+      },
+      {
+        "risk": "Mechanical defects in the leg locks or the pan/tilt head.",
+        "proof": "Video showing legs extending/locking and the head moving smoothly.",
+        "if_unproven": "as broken/for parts"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the tripod out of the box.",
+      "Photo of the remote, phone holder, and travel bag.",
+      "Video showing the legs extending and the head rotating."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail box is shown. Without seeing the actual tripod and its accessories, it is impossible to verify the condition or even the presence of the item."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 7974,
+    "input_tokens": 2364,
+    "output_tokens": 1626,
+    "cost_usd": 0.00606,
+    "replayed": false,
+    "fixture_key": "5db5d08489e22ae1753b187647a9716f",
+    "error": null
+  }
+}
