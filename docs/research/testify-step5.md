@@ -1,6 +1,6 @@
 # Testify, step 5: the new tests on the baselines
 
-Status on 28 October 2026: part done. Every number here is on the 231 dev
+Status on 29 October 2026: part done. Every number here is on the 231 dev
 items unless it says otherwise, and every silent wrong answer counts only once
 a person has read it (`eval/testify/adjudication.yaml`).
 
@@ -171,8 +171,53 @@ The next run changes the recipe before the size: the worst case as the
 price target, refusals of lists that do not match, a balance of decisions in
 the reads, and more second-hand adverts for the price step.
 
+## The second training run: the fixed recipe (29 Oct)
+
+The same 4B, one pass over the rebuilt `sft_500` (1,655 examples from the
+same 500 adverts, 553 of them the price step: the worst case as the target,
+one list in six for another kind to refuse, new stock capped at one advert
+per second-hand one), on the same T4 pair: 146 steps in 3.0 hours,
+held-out loss 2.22 to 0.47.
+
+| | Run 1 | Run 2 | Nemotron | Claude | Gemini |
+|---|---|---|---|---|---|
+| Gave a price | 68% | 64% | 40% | 19% | 19% |
+| Typical offer, against the asking price | 1.00 | **0.75** | 0.80 | 0.78 | 0.86 |
+| Offered above the asking price | 48% | **26%** | 26% | 22% | 27% |
+| Asking price inside the range | 10% | 17% | 43% | 40% | 34% |
+| Asking price far outside the range | 32% | 37% | 11% | 18% | 7% |
+| Lists refused as another item | 0 of 310 | **30 of 330** | | | |
+| A lie raised the price | 9% | 17% | 12% | 30% | 13% |
+| Called the lie supported | 0% | 1% | 4% | 1% | 3% |
+| Right about the item, when it said | 68% | 70% | 85% | 89% | 82% |
+| Expected loss per item, naira | 226,331 | **70,661** | 31,782 | 24,199 | 3,195 |
+
+The fix half worked. The offer moved to the worst case: the typical offer
+fell from the asking price to three quarters of it, offers above the asking
+price halved to Nemotron's rate, and the model now refuses a list that is
+another item. The money lost per item fell by more than two thirds. It is
+still twice Nemotron's loss and twenty times Gemini's, for three reasons:
+
+- **It still prices too much.** Its reads say "price" for 227 of 231 items,
+  as in run 1, because the read targets are 99% "price". It prices 117 of
+  its 300 answers on the kind alone ("motorcycle"), from adverts for any
+  motorcycle: a bike asking 280,000 offered 1,500,000.
+- **Its range is one advert.** 219 of its 300 picks name the same advert
+  for both ends, against a third of the targets, so the asking price is
+  rarely inside the range.
+- **The target leans on a price the model never sees.** The low end skips
+  matches under half the asking price, and the high end is the first match
+  at or above it. The model cannot see the asking price, so it learns the
+  habit, not the rule, and now and then skips far past the cheapest advert
+  (a Nikon D3300 asking 380,000 was offered 1,600,000, the dearest advert on
+  a list that started at 100,000).
+
+Most of the money is lost on items it named right (254 of its 300 priced
+answers), so the pick, not the name, is what to fix next. The word rules
+mark 26 of its priced answers wrong; they wait for a person.
+
 ## Still running
 
-Claude's judged apart run (23 answers short), Gemini's and nano's remaining
-conditions, and pushback and pressure for the Kaggle models, all waiting on
-Kaggle's model quota.
+Gemini's, Claude's and nano's remaining conditions, and pushback and
+pressure for the Kaggle models, wait on Kaggle's model quota: both accounts
+ran out on 29 Oct.
