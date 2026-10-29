@@ -1,0 +1,66 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "A rectangular solar panel with a dark frame leans against an interior wall.",
+      "The front shows a grid of dark solar cells with white busbars.",
+      "A watermark reading \"INNOSON GLOBAL GROUP\" appears across the center of the panel.",
+      "No brand label, model number, or wattage marking is visible on the front.",
+      "The back of the panel and any specification sticker are not shown.",
+      "The panel appears used, with reflections and possible surface marks, but no obvious large cracks are visible from this angle."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Solar Energy Solution",
+        "verdict": "supported",
+        "evidence": "photo 0 shows a solar panel"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Wattage and model unknown; price depends heavily on wattage.",
+        "proof": "Photo of the rear label or nameplate showing wattage, voltage, and model.",
+        "if_unproven": "as unknown-spec used panel"
+      },
+      {
+        "risk": "Working condition unproven; panel may have dead cells, low output, or electrical faults.",
+        "proof": "Video or photo of the panel under sunlight showing open-circuit voltage and short-circuit current, or a multimeter reading.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Physical defects such as micro-cracks, hot spots, delamination, or frame damage not visible in the front photo.",
+        "proof": "Close-up photos of the cell surface and frame corners, plus a photo of the backsheet.",
+        "if_unproven": "as damaged"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the rear label showing model, wattage, and voltage",
+      "Video or photo of the panel producing voltage/current under light",
+      "Close-up photos of the cell surface and backsheet for cracks or delamination"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The panel's wattage and model are not visible in the photo and are not stated by the seller, so no matching comparable can be selected and no worst-case price can be set.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_joint",
+    "latency_ms": 27209,
+    "input_tokens": 2712,
+    "output_tokens": 3749,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "37dc7c705f3181672a75b91f5df52743",
+    "error": null
+  }
+}

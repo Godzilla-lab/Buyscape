@@ -1,0 +1,87 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0: black mirrorless camera with lens attached; \"LUMIX\" readable on front; mode dial shows \"G\"; battery charger partly visible at right edge.",
+      "Photo 1: camera rear with flip screen open showing \"Please set the clock\"; \"LUMIX\" on charger; one battery beside charger; no second battery visible."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "mirrorless camera",
+      "brand": "Lumix",
+      "model": null,
+      "read_from": [
+        "photo 0 front",
+        "photo 1 charger"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Lumix G7 mirrorless camera",
+        "verdict": "unverified",
+        "evidence": "LUMIX brand readable in photo 0 and photo 1, but G7 model not readable in any photo"
+      },
+      {
+        "claim": "neatly used",
+        "verdict": "unverifiable_remote",
+        "evidence": "photos show appearance only; usage history cannot be checked remotely"
+      },
+      {
+        "claim": "With 2 batteries and a charger",
+        "verdict": "unverified",
+        "evidence": "photo 1 shows one battery and charger; second battery not visible"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Camera body or shutter is faulty",
+        "proof": "video of camera powering on, focusing, and taking a photo",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Model is not a G7",
+        "proof": "clear photo of model label on camera body",
+        "if_unproven": "as generic Lumix mirrorless camera"
+      },
+      {
+        "risk": "Claimed second battery is missing or dead",
+        "proof": "photo of both batteries together and clip of each powering the camera",
+        "if_unproven": "as one battery only"
+      },
+      {
+        "risk": "Charger is faulty",
+        "proof": "video of charger charging a battery",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Lens has fungus, scratches, or separation",
+        "proof": "close-up photos of lens front and rear elements",
+        "if_unproven": "as damaged lens"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the model label on the camera body",
+      "Video of the camera turning on, focusing, and taking a photo",
+      "Photo showing both batteries together",
+      "Video of the charger charging a battery",
+      "Close-up photos of the lens front and rear glass"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The Lumix brand is visible but the G7 model cannot be read from the photos, and camera price depends on the exact model; functionality and the second battery are also unproven.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_joint",
+    "latency_ms": 33839,
+    "input_tokens": 3070,
+    "output_tokens": 5831,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "11bfb0811d2444039fbf59e3d85eb107",
+    "error": null
+  }
+}
