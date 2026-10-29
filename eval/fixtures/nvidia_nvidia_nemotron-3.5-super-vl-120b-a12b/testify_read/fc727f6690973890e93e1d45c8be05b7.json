@@ -1,0 +1,92 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a Continental branded tyre sidewall with safety warning text and visible tread wear.",
+      "Photo 1 shows the sidewall size marking 195/65 R15 T and partial Continental branding.",
+      "Photo 2 shows a top-down view with Continental brand, WinterContact TS 860 model, 195/65 R15 size, and winter snowflake symbol."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car tyre",
+      "brand": "Continental",
+      "model": "WinterContact TS 860",
+      "read_from": [
+        "photo 0 sidewall",
+        "photo 1 sidewall",
+        "photo 2 sidewall"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Continental tyre",
+        "verdict": "supported",
+        "evidence": "photo 0 sidewall, photo 2 sidewall"
+      },
+      {
+        "claim": "used",
+        "verdict": "supported",
+        "evidence": "visible tread wear in photos 0, 1, 2"
+      },
+      {
+        "claim": "Grade 1",
+        "verdict": "unverifiable_remote",
+        "evidence": "no grade marking or condition certificate visible in photos"
+      },
+      {
+        "claim": "195/65/R15",
+        "verdict": "supported",
+        "evidence": "photo 1 sidewall, photo 2 sidewall"
+      },
+      {
+        "claim": "This popular size is used by different vehicles including...",
+        "verdict": "unverifiable_remote",
+        "evidence": "incomplete statement; vehicle fitment cannot be confirmed from tyre photos alone"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Remaining tread depth and uneven wear",
+        "proof": "close-up of tread wear indicators across the tread surface",
+        "if_unproven": "as bald or near end of life"
+      },
+      {
+        "risk": "Tyre age and rubber expiry from DOT date code",
+        "proof": "photo of the DOT manufacture code on the sidewall",
+        "if_unproven": "as expired or old rubber"
+      },
+      {
+        "risk": "Internal damage, punctures, or hidden repairs",
+        "proof": "inspection of the inner liner or a run-hand feel for patches",
+        "if_unproven": "as damaged or repaired"
+      },
+      {
+        "risk": "Sidewall bulges, cracks, or bead damage",
+        "proof": "full 360-degree video of both sidewalls",
+        "if_unproven": "as structurally unsound"
+      }
+    ],
+    "proof_requests": [
+      "DOT code sidewall shot",
+      "Tread depth close-up with wear bars",
+      "Full 360 video of both sidewalls",
+      "Inner liner inspection for patches or repairs"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a Continental WinterContact TS 860 195/65 R15 car tyre from the photos, so it can be priced at its worst case pending proof of tread, age, and condition."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 26718,
+    "input_tokens": 2920,
+    "output_tokens": 3509,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "fc727f6690973890e93e1d45c8be05b7",
+    "error": null
+  }
+}

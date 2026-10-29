@@ -1,0 +1,84 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0: Silver double door refrigerator with Scanfrost 35-year badge at top, green energy label, and CYCLOPENTANE sticker area; Honda car in background.",
+      "Photo 1: Rear of the same unit with back panel removed, compressor and wiring exposed, yellow CYCLOPENTANE refrigerant sticker, being moved on a red trolley.",
+      "Photo 2: Interior with both doors open, empty top freezer compartment and bottom fridge compartment, door bins and shelf supports visible."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "double door refrigerator",
+      "brand": "Scanfrost",
+      "model": null,
+      "read_from": [
+        "photo 0 top badge"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Scanfrost Double Door Refrigerator",
+        "verdict": "supported",
+        "evidence": "photo 0 badge and two-door shape"
+      },
+      {
+        "claim": "Fairly used",
+        "verdict": "unverified",
+        "evidence": "photos show a used appliance but the grade is subjective"
+      },
+      {
+        "claim": "Inverter",
+        "verdict": "unverified",
+        "evidence": "no legible inverter label or model plate in any photo"
+      },
+      {
+        "claim": "Very clean and in top working condition",
+        "verdict": "unverified",
+        "evidence": "interior looks clean in photo 2 but operation cannot be confirmed from still images"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Compressor or sealed gas system may be faulty; photo 1 shows the back exposed with components visible.",
+        "proof": "video of the unit running and cooling to temperature with doors closed.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Inverter claim is unproven.",
+        "proof": "close-up of the model plate or specification label showing inverter technology.",
+        "if_unproven": "as a conventional non-inverter fridge"
+      },
+      {
+        "risk": "Door gaskets may be torn or perished.",
+        "proof": "close-up of the rubber seals with the doors shut.",
+        "if_unproven": "as needing new gaskets"
+      },
+      {
+        "risk": "Shelves, drawers or door bins may be missing or broken.",
+        "proof": "full interior shot showing all fittings in place.",
+        "if_unproven": "as missing fittings"
+      }
+    ],
+    "proof_requests": [
+      "Video of the refrigerator running for at least 30 minutes with doors closed, showing the interior cooling down.",
+      "Close-up photo of the model/serial plate and any inverter label.",
+      "Close-up photo of the door gaskets with the doors closed."
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a Scanfrost double door refrigerator from photo 0; because working condition and inverter status are unproven, it is priced at worst case as a non-working conventional double door fridge."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 23465,
+    "input_tokens": 2917,
+    "output_tokens": 2538,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "7ff2df4bbb114a469a2b3200fd18e170",
+    "error": null
+  }
+}

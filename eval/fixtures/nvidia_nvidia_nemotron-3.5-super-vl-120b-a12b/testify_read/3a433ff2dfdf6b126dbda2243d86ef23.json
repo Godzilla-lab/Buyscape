@@ -1,0 +1,90 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a grey DIN-rail industrial module with SIEMENS and SITOP branding, terminal blocks, a red LED bar graph, and a DB9 serial port on the lower right.",
+      "Photo 1 shows a cardboard box label reading SIEMENS SITOP DC UPS, item 6EP1931-2EC31, input 24V 15A, output 24V 15A load and 0.0-5A battery, date 06.2018, made in Austria.",
+      "Photo 2 shows the box sealed with an ORIGINAL PACKAGING sticker."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DC UPS module",
+      "brand": "Siemens",
+      "model": "6EP1931-2EC31",
+      "read_from": [
+        "photo 1 label",
+        "photo 0 front plate"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "6ep1931-2ec31",
+        "verdict": "supported",
+        "evidence": "photo 1 label shows item 6EP1931-2EC31"
+      },
+      {
+        "claim": "siemens sitop dc ups module",
+        "verdict": "supported",
+        "evidence": "photo 0 shows SIEMENS SITOP; photo 1 label shows SITOP DC UPS"
+      },
+      {
+        "claim": "15a",
+        "verdict": "supported",
+        "evidence": "photo 1 label shows input and output 15A ratings"
+      },
+      {
+        "claim": "with serial interface",
+        "verdict": "supported",
+        "evidence": "photo 0 shows a DB9 serial port on the module base"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Internal electronics may be dead or damaged",
+        "proof": "video of the unit powering on with LED status and a multimeter reading on the output terminals",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Battery charging or battery output circuit may be faulty",
+        "proof": "load test on the battery output terminals",
+        "if_unproven": "as a load-only supply without UPS function"
+      },
+      {
+        "risk": "Serial interface may not communicate",
+        "proof": "terminal communication test through the DB9 port",
+        "if_unproven": "without serial function"
+      },
+      {
+        "risk": "Box may be empty or contain a different unit",
+        "proof": "unboxing video showing the Siemens module inside the box",
+        "if_unproven": "as packaging only"
+      },
+      {
+        "risk": "Connectors or casing may be worn or damaged",
+        "proof": "close-up photos of the terminal blocks and housing condition",
+        "if_unproven": "as heavily used"
+      }
+    ],
+    "proof_requests": [
+      "Unboxing video showing the Siemens module inside the box",
+      "Video of the unit powering up with all LEDs and a multimeter on the DC output",
+      "Close-up photos of the terminal blocks and serial port condition"
+    ],
+    "decision": "price",
+    "reason": "The Siemens model 6EP1931-2EC31 is clearly readable on the box label and matches the device in photo 0, so it can be priced at its worst case as an untested industrial module."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 22312,
+    "input_tokens": 2767,
+    "output_tokens": 2515,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "3a433ff2dfdf6b126dbda2243d86ef23",
+    "error": null
+  }
+}
