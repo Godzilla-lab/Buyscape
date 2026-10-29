@@ -1330,9 +1330,10 @@ def testify_ocr() -> None:
 @app.command("testify-train-build")
 def testify_train_build(
     teacher: str = typer.Option(
-        "kaggle:google/gemini-3-flash-preview,gemini-3-flash-preview",
-        help="The model whose reads are the targets, one route or several joined by commas: the same "
-        "model on Kaggle's quota and on Google's free tier. An advert read on two routes keeps the first.",
+        "kaggle:google/gemini-3-flash-preview,gemini-3-flash-preview,nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+        help="The model whose reads are the targets, or several joined by commas, in order of trust: Gemini "
+        "on Kaggle's quota and on Google's free tier, then Nemotron for the adverts no Gemini quota reached "
+        "(29 Oct). An advert read by two keeps the first.",
     ),
     market: str = typer.Option("", help="Only training items from this city. Empty for all."),
     out: Path = typer.Option(None, help="Defaults to eval/testify/train/sft.jsonl, which is never committed."),
