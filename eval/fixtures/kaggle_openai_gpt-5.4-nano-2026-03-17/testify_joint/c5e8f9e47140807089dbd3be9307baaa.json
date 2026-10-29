@@ -1,0 +1,87 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0 shows a DSLR with a Nikon logo on the top and a large lens mount; the body has a visible model marking area that appears to read D610.",
+      "Photo 1 shows the same Nikon DSLR from a similar angle; Nikon branding is clear.",
+      "Photo 2 shows the top/rear controls and a rear LCD; the camera body is clearly Nikon, and the top dial area is visible."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": null,
+      "brand": "Nikon",
+      "model": "D610",
+      "read_from": [
+        "photo 0",
+        "photo 1"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Used Nikon D610 in good condition.",
+        "verdict": "unverified",
+        "evidence": "Photos show a Nikon DSLR body, but condition (sensor, shutter count, autofocus, buttons, LCD health) is not testable from these images."
+      },
+      {
+        "claim": "May show sign of cosmetic wears.",
+        "verdict": "unverified",
+        "evidence": "Cosmetic wear is not clearly assessable (no close-ups of scratches/dents; lighting glare)."
+      },
+      {
+        "claim": "Comes with original battery and...",
+        "verdict": "unverifiable_remote",
+        "evidence": "No accessories are shown in the provided photos; the text is truncated and cannot be verified remotely."
+      },
+      {
+        "claim": "The brand is Canon.",
+        "verdict": "contradicted",
+        "evidence": "Photos show Nikon branding on the camera top (photo 0 and photo 1), not Canon."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Brand/model mismatch risk: seller text says Canon, but photos show Nikon D610. This can mean wrong item, swapped listing, or confusion about what\u2019s being sold.",
+        "proof": "Ask for a photo of the camera with the seller\u2019s handwritten note showing the exact model (Nikon D610) and the listing date, plus a close-up of the model text on the body.",
+        "if_unproven": "Price as Nikon D610 body only (worst case for missing accessories), and treat any Canon claim as unreliable."
+      },
+      {
+        "risk": "Accessory completeness risk (battery/charger/other items not shown).",
+        "proof": "Request a single photo laid out: battery, charger, cables, strap, and any included items, all together and clearly labeled.",
+        "if_unproven": "Price as body only (no guaranteed battery/charger)."
+      },
+      {
+        "risk": "Functional risk (shutter count, autofocus, metering, buttons, LCD, and sensor condition not testable from photos).",
+        "proof": "Request a short video showing: power on, menu navigation, autofocus on a moving subject, and a sample photo at a normal setting (plus a close-up of the LCD showing no dead pixels).",
+        "if_unproven": "Price as not fully proven/assume typical used wear and possible faults; do not price at \u201cgood working\u201d premium."
+      },
+      {
+        "risk": "Cosmetic damage risk (scratches/dents around mount, grips, and top dials not shown in close-up).",
+        "proof": "Request close-up photos of: lens mount area, top dials, grip edges, and any visible scuffs with flash.",
+        "if_unproven": "Price at the lower end of the comparable range."
+      }
+    ],
+    "proof_requests": [
+      "Confirm the exact item: send a close-up photo of the model marking (D610) and a photo of the full camera with a handwritten note matching the listing.",
+      "Show all included accessories in one laid-out photo (battery, charger, cables/strap, and anything else).",
+      "Provide a short test video: power on + menu + autofocus on a moving object + take one sample photo.",
+      "Send close-ups of lens mount, top dials, and grip edges (with flash) to assess cosmetic damage."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photos clearly show a Nikon D610, but the seller\u2019s text says Canon and the accessories/working condition are not verifiable from the images. Without proof of the exact package and functionality, a confident price pick isn\u2019t safe.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_joint",
+    "latency_ms": 6440,
+    "input_tokens": 3141,
+    "output_tokens": 961,
+    "cost_usd": 0.003081,
+    "replayed": false,
+    "fixture_key": "c5e8f9e47140807089dbd3be9307baaa",
+    "error": null
+  }
+}

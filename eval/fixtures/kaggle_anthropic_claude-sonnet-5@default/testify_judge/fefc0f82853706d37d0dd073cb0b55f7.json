@@ -1,0 +1,72 @@
+{
+  "task": "testify_judge",
+  "prompt_version": "testify_judge.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "claims": [
+      {
+        "claim": "Contact us for ur Solar Energy Solution",
+        "verdict": "unverifiable_remote",
+        "evidence": "Generic marketing text, not a verifiable claim about the item in the photo."
+      },
+      {
+        "claim": "Battery is new, holds charge for 8 hours",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows a solar panel, not a battery; no battery is visible anywhere in the report."
+      },
+      {
+        "claim": "Never repaired",
+        "verdict": "unverifiable_remote",
+        "evidence": "Refers to the battery claim above, which has no matching object in the photo; cannot be checked against a solar panel."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Seller's text describes a battery while the witnessed item is a solar panel, suggesting mismatched or copy-pasted ad content.",
+        "proof": "A photo of the actual battery (if one exists) alongside the panel, or a corrected listing matching the panel only.",
+        "if_unproven": "treat the battery claim as inapplicable/void; price only the panel, at worst case for an unidentified unit"
+      },
+      {
+        "risk": "No wattage/model/rating plate visible on panel, so power output and spec are unknown.",
+        "proof": "Close-up photo of the rear label or junction box sticker showing wattage, Voc/Isc/Vmp/Imp.",
+        "if_unproven": "price as lowest plausible wattage tier for this panel size/cell type"
+      },
+      {
+        "risk": "Condition of cells, backsheet, frame, and junction box/connectors not shown; could have hidden cracks or corrosion.",
+        "proof": "Close-up shots of front cells under angled light, full rear side, and junction box/connectors.",
+        "if_unproven": "price as used/unknown condition, worst case (possible hidden damage)"
+      },
+      {
+        "risk": "Unknown age/usage history and whether sold as single unit or part of a set.",
+        "proof": "Seller statement with purchase date/receipt, or photo of multiple matching panels if sold as a set.",
+        "if_unproven": "price as single used unit of unknown age"
+      },
+      {
+        "risk": "No certification or compliance documentation shown, authenticity of brand/build quality uncertain.",
+        "proof": "Photo of any certification sticker, datasheet, or invoice.",
+        "if_unproven": "price as uncertified generic panel"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the panel's rear rating label showing wattage, model, Voc/Isc/Vmp/Imp",
+      "Photo of the full rear side and junction box/connectors",
+      "Close-up of the cell surface for cracks or hotspots",
+      "Clarification and photo of the actual battery being referenced, since none appears in the panel photo",
+      "Any receipt, warranty card, or certification document"
+    ],
+    "decision": "fraud_suspected",
+    "reason": "The seller's claims are entirely about a 'battery' with no battery visible in the witnessed photo of a solar panel, indicating either copy-pasted/templated ad text or a mismatched listing that warrants suspicion before any price is set."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_judge",
+    "latency_ms": 17314,
+    "input_tokens": 1572,
+    "output_tokens": 1560,
+    "cost_usd": 0.016726,
+    "replayed": false,
+    "fixture_key": "fefc0f82853706d37d0dd073cb0b55f7",
+    "error": null
+  }
+}
