@@ -1,0 +1,100 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: standing gas cooker, lid up (reflective panel), 2 gas burners + 1 large and 1 small electric hotplate visible, front panel has several knob positions but most are empty or have bare stems, only one or two knobs fitted.",
+      "Photo 1: same cooker with 2 of the 4 gas burners lit (blue flame), glass lid propped open, tiles behind are marble-pattern (different wall than photo 0, suggesting different location/angle or edited background).",
+      "Photo 2: wider view showing full standing unit with oven compartment below, glass oven door, a row of 8 control knob positions on the front fascia but only 2 knobs actually present (rest are bare metal stems or empty holes), floor is dark tiled, window light visible.",
+      "No brand name, logo or model plate is legible in any photo.",
+      "No photo shows the oven interior, the electric hotplates in operation, the receipt, or the warranty card."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "standing gas cooker with 4 gas burners and 2 electric hotplates, oven below",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "4 gas cooker and 2 burner making 6 burner in total",
+        "verdict": "unverified",
+        "evidence": "Photo 0/2 show 4 gas rings and 2 electric hotplates consistent with the count, but only 2 gas burners are shown actually lit (photo 1); the electric plates are never shown powered on."
+      },
+      {
+        "claim": "All working perfectly",
+        "verdict": "contradicted",
+        "evidence": "Photo 2 shows the control panel missing most of its knobs (only 2 of roughly 8 positions have knobs fitted), which is itself a fault and casts doubt on whether all burners can even be controlled."
+      },
+      {
+        "claim": "Barely used, bought new last year",
+        "verdict": "unverifiable_remote",
+        "evidence": "No purchase date, receipt, or low-usage indicator visible in any photo; cooker shows visible wear (scuffed panel, missing knobs, worn edges in photo 2)."
+      },
+      {
+        "claim": "No fault at all, the motor was never opened",
+        "verdict": "contradicted",
+        "evidence": "Missing control knobs visible in photo 2 are a visible fault; 'motor never opened' cannot be checked from photos regardless."
+      },
+      {
+        "claim": "Receipt and warranty card available",
+        "verdict": "unverifiable_remote",
+        "evidence": "No receipt or warranty card is shown in any of the 3 photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Missing knobs may mean some burners cannot be ignited/controlled without pliers or replacement knobs, lowering functional burner count below the claimed 6.",
+        "proof": "Close-up photo of the full control panel with all knob positions, plus a video of each burner being turned on individually.",
+        "if_unproven": "priced as only the 2 confirmed-lit gas burners working, rest treated as non-functional"
+      },
+      {
+        "risk": "Electric hotplates (the 2 round elements) may not heat at all; only gas burners were demonstrated lit.",
+        "proof": "Video showing the electric plates glowing/heating when switched on.",
+        "if_unproven": "priced as electric plates not working"
+      },
+      {
+        "risk": "Oven function and interior condition unknown (rust, broken heating element, broken door seal).",
+        "proof": "Photo/video of oven interior and a demonstration of oven heating.",
+        "if_unproven": "priced as oven not working"
+      },
+      {
+        "risk": "Gas safety (leaks, worn hose connections, regulator condition) not visible.",
+        "proof": "Close-up of gas inlet/hose/regulator and a leak test clip.",
+        "if_unproven": "priced as needing safety check/repair"
+      },
+      {
+        "risk": "Claimed receipt/warranty cannot be confirmed to belong to this exact unit.",
+        "proof": "Photo of receipt/warranty card with matching serial or model visible.",
+        "if_unproven": "priced without warranty value"
+      }
+    ],
+    "proof_requests": [
+      "Video showing every one of the 4 gas burners and both electric hotplates switched on simultaneously.",
+      "Clear close-up of the full control panel showing all knobs present and functional.",
+      "Photo of the oven interior and a short clip of it heating.",
+      "Photo of the receipt and warranty card with legible date and item match.",
+      "Close-up of the gas hose/regulator connection for leak/safety assessment."
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identifiable as a standing gas cooker with 4 gas burners and 2 electric hotplates, but visible missing knobs and unverified electric/oven function mean it must be priced at worst case as a used standing cooker with functional defects, comparable to the lower-priced generic used standing cookers rather than the higher branded or fully-demonstrated ones.",
+    "price_pick": {
+      "low": 4,
+      "high": 7
+    }
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 32724,
+    "input_tokens": 4765,
+    "output_tokens": 3005,
+    "cost_usd": 0.03958,
+    "replayed": false,
+    "fixture_key": "4a53d2710c7aba651bf309c0fd422d5f",
+    "error": null
+  }
+}
