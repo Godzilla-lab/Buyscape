@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-sft500",
+  "response": {
+    "observations": [
+      "Blue bicycle with wide, knobby tires.",
+      "Brand name 'MAXDIS' is visible on the tire sidewalls in photo 0.",
+      "The frame appears to be a mountain bike style with a front suspension fork.",
+      "The bike is equipped with a black saddle and handlebars.",
+      "The photo contains a watermark 'SUNBEST SPORTS'.",
+      "The background shows a paved area with artificial grass and a metal gate."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "mountain bike",
+      "brand": "MAXDIS",
+      "read_from": [
+        "photo 0 tire"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Big tire bicycle",
+        "verdict": "supported",
+        "evidence": "photo 0 shows large, knobby tires typical of fat bikes."
+      },
+      {
+        "claim": "with complete accessories",
+        "verdict": "unverified",
+        "evidence": "The photo shows the frame, tires, and saddle, but the drivetrain (chain, cassette, derailleurs) and pedals are not clearly visible."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The drivetrain (chain, cassette, derailleurs) may be missing or damaged.",
+        "proof": "A photo of the rear wheel showing the cassette and the chain.",
+        "if_unproven": "as missing drivetrain"
+      },
+      {
+        "risk": "The bike may have a broken or missing front suspension fork.",
+        "proof": "A photo of the front fork showing the spring and shock.",
+        "if_unproven": "as a rigid frame"
+      },
+      {
+        "risk": "The bike may be missing the pedals.",
+        "proof": "A photo of the crankset and pedals.",
+        "if_unproven": "as missing pedals"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the rear wheel showing the cassette and chain.",
+      "Photo of the front fork to verify suspension.",
+      "Photo of the drivetrain and pedals.",
+      "Photo of the bike with the frame number plate."
+    ],
+    "decision": "price",
+    "reason": "The item is known from the photos. What they cannot prove is priced at its worst case until the proof asked for below arrives."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-sft500",
+    "task": "testify_read",
+    "latency_ms": 22010,
+    "input_tokens": 1365,
+    "output_tokens": 383,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "b9ec0b50a5f901221b9ebe5dce4b457d",
+    "error": null
+  }
+}

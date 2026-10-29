@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-sft500",
+  "response": {
+    "observations": [
+      "Black UPS unit with a purple vertical strip on the front panel.",
+      "Brand 'BLUE GATE' is embossed on the top of the unit in both photos.",
+      "The unit has a power button and three indicator lights (green, yellow, red) on the front panel.",
+      "The rear of the unit is visible in photo 1, showing a 3-pin plug and a power cable.",
+      "The unit shows signs of surface wear and dirt on the casing."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "UPS",
+      "brand": "Blue Gate",
+      "read_from": [
+        "photo 0 top",
+        "photo 1 top"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "UPS",
+        "verdict": "supported",
+        "evidence": "photo 0 and photo 1 show a standard desktop UPS unit."
+      },
+      {
+        "claim": "UPS available",
+        "verdict": "unverifiable_remote",
+        "evidence": "The unit's internal battery and inverter health cannot be verified remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The unit may not power on or the battery may be dead.",
+        "proof": "A video showing the unit powering on and the green battery light staying on.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The inverter may be faulty or the output voltage unstable.",
+        "proof": "A video of the unit running a load (like a computer) while the power is switched off.",
+        "if_unproven": "as a basic inverter only"
+      },
+      {
+        "risk": "The unit may be a counterfeit or a generic clone.",
+        "proof": "A clear photo of the technical specification label on the back of the unit.",
+        "if_unproven": "as a generic/unbranded unit"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the technical specification label on the back of the unit showing the model number and capacity.",
+      "Video of the unit powered on and the battery light illuminated.",
+      "Video of the unit running a load to test the inverter."
+    ],
+    "decision": "price",
+    "reason": "The item is known from the photos. What they cannot prove is priced at its worst case until the proof asked for below arrives."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-sft500",
+    "task": "testify_read",
+    "latency_ms": 3975,
+    "input_tokens": 2704,
+    "output_tokens": 402,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "4b248ace781508ac5a4c2ce7dd56e639",
+    "error": null
+  }
+}

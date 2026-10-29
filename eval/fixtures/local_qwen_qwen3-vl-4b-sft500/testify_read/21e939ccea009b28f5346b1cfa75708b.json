@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-sft500",
+  "response": {
+    "observations": [
+      "Orange gas cylinder with a handle and a brass valve.",
+      "The cylinder has a manufacturer's label on the side.",
+      "The label shows '12.5kg' and 'REPIOL' brand name.",
+      "The label also shows 'Special Valve 12.5kg'.",
+      "The cylinder appears to be used with visible scuffs and dirt on the body.",
+      "A red cylinder is visible in the background, partially obscured by a mesh net.",
+      "A blue cylinder with a 'CNG' sticker is visible in the background."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "gas cylinder",
+      "brand": "REPIOL",
+      "model": "12.5kg",
+      "read_from": [
+        "photo 2 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "12.5kg",
+        "verdict": "supported",
+        "evidence": "photo 2 label"
+      },
+      {
+        "claim": "Foreign-Used",
+        "verdict": "supported",
+        "evidence": "photo 0 and photo 2 show signs of wear and dirt consistent with use."
+      },
+      {
+        "claim": "Strong & Reliable!",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      },
+      {
+        "claim": "Recently tested and certified, no leak, the valve is new.",
+        "verdict": "unverified",
+        "evidence": "No photo shows this; it is the seller's word only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The cylinder may be expired or past its safe re-pressurization date.",
+        "proof": "A clear photo of the 'Manufacture Date' and 'Expiry Date' stamped on the label.",
+        "if_unproven": "as expired"
+      },
+      {
+        "risk": "The valve may be leaking or the cylinder may be empty.",
+        "proof": "A video showing the valve being opened and gas being released into a container.",
+        "if_unproven": "as empty and non-functional"
+      },
+      {
+        "risk": "The cylinder may be a counterfeit or a different capacity than stated.",
+        "proof": "A clear, close-up photo of the manufacturer's label showing the brand, model, and weight.",
+        "if_unproven": "as a generic 12.5kg cylinder"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the manufacturer's label showing the 'Manufacture Date' and 'Expiry Date'.",
+      "Video of the valve being opened to confirm it is not leaking.",
+      "Photo of the other cylinders mentioned in the listing to confirm they are the same brand and model."
+    ],
+    "decision": "price",
+    "reason": "The item is known from the photos. What they cannot prove is priced at its worst case until the proof asked for below arrives."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-sft500",
+    "task": "testify_read",
+    "latency_ms": 3868,
+    "input_tokens": 2807,
+    "output_tokens": 493,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "21e939ccea009b28f5346b1cfa75708b",
+    "error": null
+  }
+}

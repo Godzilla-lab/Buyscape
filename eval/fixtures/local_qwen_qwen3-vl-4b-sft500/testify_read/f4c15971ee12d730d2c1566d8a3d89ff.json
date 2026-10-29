@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-sft500",
+  "response": {
+    "observations": [
+      "Three orange gas cylinders are shown in a storage area.",
+      "The cylinders have visible scuffs, scratches, and minor rust on the metal.",
+      "A label on the side of the cylinder in photo 2 identifies the brand as 'REPIOL' and the capacity as '12.5kg'.",
+      "The cylinders are stacked on top of each other.",
+      "A blue gas cylinder with a 'CNG' label is visible in the background.",
+      "The photo contains a watermark 'POSTED ON JIJI HITHE TECHNOLOGIES'.",
+      "The text '12.5kg Foreign-Used Gas Cylinders \u2013 Strong & Reliable!' is the seller's description."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "gas cylinder",
+      "brand": "REPIOL",
+      "model": "12.5kg",
+      "read_from": [
+        "photo 2 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "12.5kg",
+        "verdict": "supported",
+        "evidence": "photo 2 label"
+      },
+      {
+        "claim": "Foreign-Used",
+        "verdict": "unverified",
+        "evidence": "The origin is not specified on the label; it is a generic term for used goods."
+      },
+      {
+        "claim": "Strong & Reliable!",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a subjective marketing claim about durability and performance."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The cylinders may be expired or have a 'use by' date that has passed.",
+        "proof": "A clear photo of the manufacturing date stamp on the cylinder's body.",
+        "if_unproven": "as expired"
+      },
+      {
+        "risk": "The cylinders may be empty or contain a dangerous gas like LPG or CNG.",
+        "proof": "A photo of the gas cylinder valve with a gas leak test or a photo of a gas burner lit.",
+        "if_unproven": "as empty"
+      },
+      {
+        "risk": "The cylinders may be non-functional or have a faulty valve.",
+        "proof": "A video showing the valve being opened and a gas leak test performed.",
+        "if_unproven": "as non-functional"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the manufacturing date stamp on the cylinder.",
+      "Photo of the valve with a gas leak test.",
+      "Video of the cylinder being filled or a burner lit.",
+      "Confirmation of the total number of cylinders being sold."
+    ],
+    "decision": "price",
+    "reason": "The item is known from the photos. What they cannot prove is priced at its worst case until the proof asked for below arrives."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-sft500",
+    "task": "testify_read",
+    "latency_ms": 3868,
+    "input_tokens": 2794,
+    "output_tokens": 474,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "f4c15971ee12d730d2c1566d8a3d89ff",
+    "error": null
+  }
+}
