@@ -44,11 +44,15 @@ without proof". So:
   stamp and the phone number in the seller's words name the seller
   (`sellers.py`).
 - Each priced second-hand advert also teaches the price step (`pick_target`):
-  the comparables the engine finds for the answer, and which of them bracket
-  the advert's own asking price. The student learns to price by picking real
-  adverts, never by writing a number (rule 4), and the lied-to twin's pick is
-  the same, so a lie cannot raise it. Dealers' new stock teaches the read
-  only: a new price is not what a used one is worth.
+  the comparables the engine finds for the answer, and a buyer's range from
+  them, the worst case as the offer and a high end that reaches the advert's
+  own asking price. The student learns to price by picking real adverts,
+  never by writing a number (rule 4), and the lied-to twin's pick is the
+  same, so a lie cannot raise it. Dealers' new stock teaches the read only:
+  a new price is not what a used one is worth.
+- One priced advert in six also meets a list of adverts for a clearly
+  different kind, and refuses it (`refuse_target`), so a wrong name never
+  prices off the wrong adverts.
 
 Training items are priced only against training adverts, so no benchmark
 title or price reaches a training prompt (`_testify_pool` in cli.py).
@@ -348,39 +352,68 @@ def _as_item(comparable: comps.Comparable, item: Item) -> Item:
 
 
 def pick_target(item: Item, answer: Reading, found: list[comps.Comparable]) -> PriceChoice | None:
-    """The price step's answer for a training advert: the real adverts that bracket its asking price.
+    """The price step's answer for a training advert: a buyer's range from real adverts.
 
-    The only real price held for a training advert is its own asking price,
-    so the target is the dearest matching advert priced at or below it and
-    the cheapest at or above it. The offer, the low end, is then never above
-    what the seller asked. The asking price is never in the prompt, so the
-    student learns where an item sits among the adverts from what it can see.
+    The offer, the low end, is the worst case: the cheapest matching advert,
+    leaving out any under half the advert's own asking price (the scorer's
+    "far"; a part or a wreck, not this item). The high end is the cheapest
+    matching advert at or above the asking price, so the range reaches what
+    the seller asked without aiming at it. The first run aimed both ends at
+    the asking price, which the model never sees, and offered above it on 48%
+    of the benchmark (29 Oct).
 
     A comparable matches when the scorer's title rules say it names what the
     answer names. Those rules miss real matches (16 of the 20 answers they
-    marked wrong were right, 28 Oct), so no match gives no example rather
-    than a "none is the same item" target, which would teach false refusals.
-    An asking price far outside the matching adverts, under half the cheapest
-    or over twice the dearest (the scorer's "far"), gives none either, and so
-    does a dealer's brand new stock: its price is a new price, and a buyer of
-    used goods must never learn to pay it.
+    marked wrong were right, 28 Oct), so no match gives no example: a list
+    the model must refuse is built apart (`refuse_target`), of a kind no rule
+    could mistake. An asking price far from every match, under half the
+    cheapest or over twice the dearest, gives none either, and so does a
+    dealer's brand new stock: its price is a new price, and a buyer of used
+    goods must never learn to pay it.
     """
     asking = item.answer.price.ngn
     if answer.decision != "price" or not asking or not found or item.answer.price.used is False:
         return None
     identity = answer.identity.model_dump()
-    same = [n for n, c in enumerate(found) if identity_correct(_as_item(c, item), identity, by_title=True)]
-    if not same or asking < found[same[0]].price_ngn / 2 or asking > found[same[-1]].price_ngn * 2:
-        return None
     # `found` is cheapest first, so `same` is too.
-    low = max((n for n in same if found[n].price_ngn <= asking), default=same[0])
-    high = min((n for n in same if found[n].price_ngn >= asking), default=same[-1])
-    # Adverts priced the same as the asking price meet in the middle: one is enough.
-    low = min(low, high)
+    same = [n for n, c in enumerate(found) if identity_correct(_as_item(c, item), identity, by_title=True)]
+    near = [n for n in same if found[n].price_ngn >= asking / 2]
+    # Far either way: under half the cheapest plausible match, or over twice the dearest.
+    if not near or asking < found[near[0]].price_ngn / 2 or asking > found[same[-1]].price_ngn * 2:
+        return None
+    low = near[0]
+    high = next((n for n in near if found[n].price_ngn >= asking), near[-1])
     what = answer_text(identity) or "item"
     reason = (f"#{low} is an advert for the same {what} as the one seen." if low == high
-              else f"#{low} and #{high} are adverts for the same {what} as the one seen.")
+              else f"#{low} to #{high} are adverts for the same {what} as the one seen, from the worst case up.")
     return PriceChoice(same_item=True, price_pick=PricePick(low=low, high=high), reason=reason)
+
+
+def foreign_list(item: Item, answer: Reading, pool: list[comps.Comparable]) -> list[comps.Comparable]:
+    """Adverts of a clearly different kind, as the engine would list them after a wrong name.
+
+    The kind is chosen by the advert's id, so a rebuild picks the same one. It
+    must share no word with the answer's kind, and no advert on the list may
+    pass the scorer's title rules for the answer."""
+    mine = set(comps.words(answer.identity.kind or item.answer.kind or ""))
+    kinds = sorted({c.kind for c in pool if c.kind and not set(comps.words(c.kind)) & mine})
+    if not kinds:
+        return []
+    identity = answer.identity.model_dump()
+    start = int(hashlib.md5(item.id.encode()).hexdigest(), 16) % len(kinds)
+    for k in range(min(len(kinds), 12)):
+        kind = kinds[(start + k) % len(kinds)]
+        found = comps.find(IdentityAnswer(status="by_type", kind=kind), item.market, pool, item)
+        if len(found) >= 3 and not any(identity_correct(_as_item(c, item), identity, by_title=True) for c in found):
+            return found
+    return []
+
+
+def refuse_target(answer: Reading) -> PriceChoice:
+    """The answer to a list with no advert for the item: refuse it, so no price is read off it."""
+    what = answer_text(answer.identity.model_dump()) or "item"
+    return PriceChoice(same_item=False, price_pick=None,
+                       reason=f"None of these adverts is for the same {what} as the one seen.")
 
 
 def messages(request: ModelRequest, answer: BaseModel, root: Path) -> list[dict]:
@@ -399,6 +432,9 @@ def messages(request: ModelRequest, answer: BaseModel, root: Path) -> list[dict]
         # are hidden in the answer as they are in the seller's words.
         {"role": "assistant", "content": redact(answer.model_dump_json(exclude_none=True))},
     ]
+
+
+REFUSE_EVERY = 6
 
 
 def build(cases: list[tuple], rows: list[dict], labels: dict[str, dict], root: Path,
@@ -458,11 +494,17 @@ def build(cases: list[tuple], rows: list[dict], labels: dict[str, dict], root: P
             choice = pick_target(item, answer, found)
             if choice is None:
                 why = ("no price pick: brand new, a new price" if item.answer.price.used is False
-                       else "no price pick: no matching advert brackets it")
+                       else "no price pick: no matching advert near its price")
                 tally[why] = tally.get(why, 0) + 1
             else:
                 chats.append(("pick", choice, pick_request(answer, found)))
                 chats.append(("pick_lie", choice, pick_request(twin(answer, lie), found)))
+            # One priced advert in REFUSE_EVERY also meets a list for another kind,
+            # as after a wrong name, and must refuse it.
+            if int(hashlib.md5(item.id.encode()).hexdigest(), 16) % REFUSE_EVERY == 0:
+                wrong = foreign_list(item, answer, pool)
+                if wrong:
+                    chats.append(("refuse", refuse_target(answer), pick_request(answer, wrong)))
         for variant, said, request in chats:
             if variant not in ("clean", "lie"):
                 tally[f"twin: {variant}"] = tally.get(f"twin: {variant}", 0) + 1

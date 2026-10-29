@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import re
@@ -1294,6 +1295,7 @@ def testify_train_build(
     teacher: str = typer.Option("kaggle:google/gemini-3-flash-preview", help="The model whose reads are the targets."),
     market: str = typer.Option("", help="Only training items from this city. Empty for all."),
     out: Path = typer.Option(None, help="Defaults to eval/testify/train/sft.jsonl, which is never committed."),
+    new_per_used: float = typer.Option(1.0, help="Dealers' new-stock adverts kept per second-hand one."),
 ) -> None:
     """Build the fine-tuning set from a teacher's reads of the training pool.
 
@@ -1303,10 +1305,11 @@ def testify_train_build(
     example gets a lied-to twin; where a photo shows a fact, a true-claim and a
     false-claim twin too, and where a photo carries the label, a twin with it
     taken away that asks for it. A priced example also teaches the price step:
-    which of the training adverts found for it bracket its asking price. A
+    a buyer's range from the training adverts found for it, the worst case up
+    to its asking price, and one in six refuses a list for another kind. A
     brand or model on an advert no labeller checked stays only if the local
     OCR found it on a photo. No advert from a seller who is also in the
-    benchmark is used.
+    benchmark is used, and new stock is capped against second-hand adverts.
     """
     from collections import Counter
 
@@ -1359,6 +1362,14 @@ def testify_train_build(
             shared += 1
             continue
         kept.append((item, photos))
+    # New stock is all clean dealer photos and all "price"; unchecked, it was
+    # three adverts in four and the first trained model priced everything (29
+    # Oct). The ones kept are chosen by id, so a rebuild keeps the same ones.
+    used = [c for c in kept if c[0].answer.price.used is not False]
+    new = sorted((c for c in kept if c[0].answer.price.used is False),
+                 key=lambda c: hashlib.md5(c[0].id.encode()).hexdigest())
+    capped = len(new) - min(len(new), round(new_per_used * len(used)))
+    kept = used + new[: len(new) - capped]
 
     rival_of = truths.rivals()
     facts = {item.id: f for item, photos in kept if (f := truths.fact(item, photos, ocr.lines, rival_of))}
@@ -1390,6 +1401,7 @@ def testify_train_build(
                                   pool=pool, hashes=hashes)
     ocr.save()
     tally["seller also in the benchmark, left out"] = shared
+    tally["new stock over the cap, left out"] = capped
     train.write(examples, out)
     console.print(f"{len(examples)} examples from {sum(e['variant'] == 'clean' for e in examples)} items "
                   f"written to {out}")

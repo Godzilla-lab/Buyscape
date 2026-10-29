@@ -289,6 +289,26 @@ def test_the_price_step_picks_the_real_adverts_either_side_of_the_asking_price()
     assert "50,000" not in choice.reason and "50000" not in choice.reason
 
 
+def test_the_offer_is_the_worst_case_and_a_wreck_under_half_the_price_is_not_it():
+    answer, _ = train.target(FAN, _read())
+    found = [_comp(0, 8000, "Standing fan"), _comp(1, 38000, "Standing fan"), _comp(2, 47000, "Ox standing fan"),
+             _comp(3, 55000, "Standing fan"), _comp(4, 70000, "Standing fan")]
+    pick = train.pick_target(FAN, answer, found).price_pick  # FAN asks 50,000
+    assert (pick.low, pick.high) == (1, 3)  # 38,000 offered, 55,000 reaches the asking price
+
+
+def test_a_list_for_another_kind_is_refused_and_never_priced():
+    answer, _ = train.target(FAN, _read())
+    from buyscape.testify.comparables import Comparable
+
+    pool = [Comparable(item_id=f"k{n}", price_ngn=90000 + n, title=f"Chest freezer {n}", kind="chest freezer",
+                       market="kano", observed_on="2026-10-17", url=f"https://jiji.ng/x/k{n}.html") for n in range(4)]
+    wrong = train.foreign_list(FAN, answer, pool + [_comp(9, 45000, "Ox standing fan")])
+    assert len(wrong) == 4 and all("freezer" in c.title.lower() for c in wrong)
+    refused = train.refuse_target(answer)
+    assert refused.same_item is False and refused.price_pick is None
+
+
 def test_adverts_at_the_asking_price_give_one_pick():
     answer, _ = train.target(FAN, _read())
     found = [_comp(0, 50000, "Standing fan"), _comp(1, 50000, "Ox standing fan"), _comp(2, 50000, "Standing fan")]
