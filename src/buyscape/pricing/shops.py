@@ -42,6 +42,15 @@ SHOPS = ("pointek", "slot", "jumia")
 Row = dict
 
 
+# A shop's own data can call a pre-owned phone new: Slot's product blocks say
+# NewCondition for titles that begin "PRE-OWNED" (29 Oct). The title decides.
+_PRE_OWNED = re.compile(r"\b(pre[- ]?owned|refurb\w*|renewed|uk[- ]used|used|open[- ]box|second[- ]hand)\b", re.IGNORECASE)
+
+
+def condition_of(title: str, stated: str = "new") -> str:
+    return "pre_owned" if stated != "new" or _PRE_OWNED.search(title or "") else "new"
+
+
 def _now() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="seconds")
 
@@ -49,13 +58,14 @@ def _now() -> str:
 def _row(shop: str, key: str, title: str, price: float, url: str, condition: str = "new",
          category: str | None = None) -> Row:
     """One shop price in the cached advert format, so the comps source reads it like Jiji's."""
+    title = re.sub(r"\s+", " ", html.unescape(title)).strip()
     return {
         "id": f"{shop}:{key}",
         "category": category,
-        "title": re.sub(r"\s+", " ", html.unescape(title)).strip(),
+        "title": title,
         "price_ngn": int(round(price)),
         "description": "",
-        "condition": condition,
+        "condition": condition_of(title, condition),
         "is_used": False,
         "attrs": {},
         "image_urls": [],
@@ -214,7 +224,7 @@ def load(root: Path, shops: Iterable[str]) -> list[Row]:
     for shop in shops:
         path = root / CACHE / f"{shop}.json"
         if path.exists():
-            rows += [r for r in json.loads(path.read_text()) if r.get("condition") == "new"]
+            rows += [r for r in json.loads(path.read_text()) if condition_of(r.get("title", ""), r.get("condition", "new")) == "new"]
     return rows
 
 

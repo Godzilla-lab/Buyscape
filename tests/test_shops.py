@@ -65,3 +65,21 @@ def test_a_product_read_again_keeps_its_newest_price(tmp_path: Path):
     shops.save([shops._row("pointek", "1", "Phone", 100, "u")], path)
     assert shops.save([shops._row("pointek", "1", "Phone", 120, "u"), shops._row("pointek", "2", "Other", 5, "v")], path) == 2
     assert {r["id"]: r["price_ngn"] for r in json.loads(path.read_text())} == {"pointek:1": 120, "pointek:2": 5}
+
+
+def test_a_title_that_says_pre_owned_is_kept_apart_whatever_the_shop_data_says(tmp_path: Path):
+    row = shops._row("slot", "x", "PRE-OWNED APPLE IPHONE 11 128GB", 330000, "https://slot.ng/products/x", "new")
+    assert row["condition"] == "pre_owned"
+    assert shops.condition_of("HUAWEI HONOR 8X Smartphone(Refurbished)") == "pre_owned"
+    assert shops.condition_of("Samsung Galaxy A07 128GB") == "new"
+    old = dict(row, condition="new")  # a cache written before the title check
+    shops.save([old], tmp_path / shops.CACHE / "slot.json")
+    assert shops.load(tmp_path, ["slot"]) == []
+
+
+def test_a_tier_word_must_be_on_both_sides():
+    rows = [shops._row("jumia", str(n), title, price, f"u{n}", category="phone") for n, (title, price) in enumerate([
+        ("Apple iPhone 12 128GB", 433440), ("Apple iPhone 12 Pro Max 256GB", 680000), ("Apple iPhone 12 Pro 128GB", 610000)])]
+    comps = JijiComps(Path("/nonexistent"), shop_rows=rows)
+    assert [o.amount for o in comps.fetch("phone", "Apple iPhone 12", new=True)] == [433440.0]
+    assert [o.amount for o in comps.fetch("phone", "Apple iPhone 12 Pro", new=True)] == [610000.0]

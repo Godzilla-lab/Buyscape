@@ -52,6 +52,12 @@ TYPE_SEARCH_PAGES = 3
 FAULTY_WORDS = ("faulty", "for parts", "for part", "not working", "spoilt", "spoiled", "dead", "damaged", "cracked")
 
 
+# A tier word names a different model: an iPhone 12 Pro is not an iPhone 12,
+# and a PS4 Slim is not a PS4 Pro. A comparable must carry exactly the tier
+# words the key carries. "Plus" is left out: sellers write "PS4 plus 10 games".
+TIER_WORDS = {"pro", "max", "mini", "ultra", "lite", "slim"}
+
+
 def is_faulty_listing(title: str) -> bool:
     t = f" {title.lower()} "
     return any(w in t for w in FAULTY_WORDS)
@@ -189,6 +195,8 @@ class JijiComps:
                 if not have:
                     continue
                 if want_numeric and not want_numeric.issubset(have):
+                    continue
+                if (want ^ have) & TIER_WORDS:
                     continue
                 if by_type:
                     if is_set_listing(title):
