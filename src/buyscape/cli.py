@@ -1329,7 +1329,11 @@ def testify_ocr() -> None:
 
 @app.command("testify-train-build")
 def testify_train_build(
-    teacher: str = typer.Option("kaggle:google/gemini-3-flash-preview", help="The model whose reads are the targets."),
+    teacher: str = typer.Option(
+        "kaggle:google/gemini-3-flash-preview,gemini-3-flash-preview",
+        help="The model whose reads are the targets, one route or several joined by commas: the same "
+        "model on Kaggle's quota and on Google's free tier. An advert read on two routes keeps the first.",
+    ),
     market: str = typer.Option("", help="Only training items from this city. Empty for all."),
     out: Path = typer.Option(None, help="Defaults to eval/testify/train/sft.jsonl, which is never committed."),
     new_per_used: float = typer.Option(1.0, help="Dealers' new-stock adverts kept per second-hand one."),
@@ -1356,9 +1360,18 @@ def testify_train_build(
     # The pool is training adverts only, so no benchmark price reaches a training prompt.
     cases, pool = _testify_cases("train", market)
     hashes = {item.id: own for item, _, own in cases}
-    runs = ROOT / "eval" / "testify" / "runs" / _dir_name(teacher)
-    rows = [json.loads(line) for path in sorted(runs.glob("train*.jsonl")) if ".repeat" not in path.name
-            for line in path.read_text().splitlines() if line.strip()]
+    rows, seen = [], set()
+    for route in teacher.split(","):
+        runs = ROOT / "eval" / "testify" / "runs" / _dir_name(route.strip())
+        for path in sorted(runs.glob("train*.jsonl")):
+            if ".repeat" in path.name:
+                continue
+            for line in path.read_text().splitlines():
+                row = json.loads(line) if line.strip() else None
+                # A read that failed on one route can be read on the other.
+                if row and (row["id"], row.get("variant")) not in seen and not row.get("error"):
+                    seen.add((row["id"], row.get("variant")))
+                    rows.append(row)
     rows_by_id = {r["id"]: ((r.get("reading") or {}).get("identity") or {}) for r in rows}
     # The benchmark's photo check, and the same check run on the training pool.
     labels = {}
