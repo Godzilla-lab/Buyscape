@@ -24,6 +24,12 @@ without proof". So:
   student never learns to claim it read what the answer does not use. Codes
   are where the benchmark's silent wrong answers came from: a cover badge
   read as an engine's model, a 7kg washer named with a code for another.
+- A branded electronics advert (the photo check's tier) whose answer names
+  no model, after any cut, asks for the shot that names it instead of
+  pricing: its price is set by the model. Gemini, the benchmark's cheapest
+  pricer, prices 47 of 54 such items it names to the model and 6 of 26 it
+  names by brand alone (29 Oct); every read forced to a price taught the
+  second run to price 227 of 231.
 - A read where the teacher could not tell what the item is stays a
   cannot_identify example, so the student also learns to decline.
 - A read that is wrong about the item is dropped: a wrong label teaches more
@@ -43,13 +49,16 @@ without proof". So:
 - No advert from a seller who is also in the benchmark is used: Jiji's photo
   stamp and the phone number in the seller's words name the seller
   (`sellers.py`).
-- Each priced second-hand advert also teaches the price step (`pick_target`):
-  the comparables the engine finds for the answer, and a buyer's range from
-  them, the worst case as the offer and a high end that reaches the advert's
-  own asking price. The student learns to price by picking real adverts,
-  never by writing a number (rule 4), and the lied-to twin's pick is the
-  same, so a lie cannot raise it. Dealers' new stock teaches the read only:
-  a new price is not what a used one is worth.
+- Each priced second-hand advert also teaches the price step: the
+  comparables the engine finds for the answer, and a teacher's own pick from
+  them (`taught_pick`), kept only where it is a buyer's answer for that
+  advert. The pick is made from what the student is shown, the answer and
+  the list; a rule that reads the advert's asking price (`pick_target`, the
+  second run's target) teaches a habit the student cannot follow. The
+  student learns to price by picking real adverts, never by writing a
+  number (rule 4), and the lied-to twin's pick is the same, so a lie cannot
+  raise it. Dealers' new stock teaches the read only: a new price is not
+  what a used one is worth.
 - One priced advert in six also meets a list of adverts for a clearly
   different kind, and refuses it (`refuse_target`), so a wrong name never
   prices off the wrong adverts.
@@ -89,6 +98,10 @@ WORST_CASE_REASON = (
 )
 UNPROVEN = "No photo shows this; it is the seller's word only."
 UNREADABLE = "No photo shows this clearly enough to read."
+NO_MODEL_REASON = (
+    "What the item is shows, but not the model that sets its price: no photo shows it clearly enough to "
+    "read. The shot asked for first would settle it."
+)
 # Title words of an advert that sells no item: a repair service or a buyer.
 # The benchmark leaves these out by its photo check; training adverts have
 # none, so their titles are read for it. The title only grades, never prompts.
@@ -181,9 +194,11 @@ def _forget(data: dict, gone: list[str]) -> dict | None:
 
 
 def target(item: Item, reading: dict, label: dict | None = None,
-           keep_code: bool = True) -> tuple[Reading | None, str]:
+           keep_code: bool = True, ask: str | None = None) -> tuple[Reading | None, str]:
     """The answer the student should give, and why it was kept or dropped.
-    `keep_code` False drops a named read's model code and keeps its brand."""
+    `keep_code` False drops a named read's model code and keeps its brand.
+    `ask` is the shot that names the item: a branded advert left with no
+    model asks for it first."""
     try:
         read = Reading.model_validate(reading)
     except ValidationError:
@@ -231,6 +246,13 @@ def target(item: Item, reading: dict, label: dict | None = None,
             cut, gone = ", name cut to the kind", [read.identity.model]
     if gone and (data := _forget(data, gone)) is None:
         return None, "nothing seen is left once the name is cut"
+    if ask and (label or {}).get("tier") == "branded_electronics" and not data["identity"].get("model"):
+        data.update(decision="ask_for_proof", reason=NO_MODEL_REASON,
+                    proof_requests=[ask, *(r for r in data["proof_requests"] if r != ask)])
+        answer = Reading.model_validate(data)
+        if money_written(answer):
+            return None, "teacher wrote a price"
+        return answer, "kept: ask for the label, no model named" + cut
     if read.decision != "price":
         data.update(decision="price", reason=WORST_CASE_REASON)
     answer = Reading.model_validate(data)
@@ -389,6 +411,36 @@ def pick_target(item: Item, answer: Reading, found: list[comps.Comparable]) -> P
     return PriceChoice(same_item=True, price_pick=PricePick(low=low, high=high), reason=reason)
 
 
+def taught_pick(item: Item, answer: Reading, found: list[comps.Comparable],
+                choice: PriceChoice | None) -> tuple[PriceChoice | None, str]:
+    """A teacher's pick from the list as the price step's answer, and why it was kept or not.
+
+    The teacher saw what the student sees, the answer and the list, so its
+    pick can be learnt; the rules tried on the benchmark's own lists (29 Oct)
+    could not tell which adverts are the same item, and every one of them
+    lost more money than the model picks they were tried against. The
+    advert's asking price only chooses which picks to learn from, never what
+    they are: an offer above it, or a high end under half of it, is a pick no
+    buyer should copy. The reason is written here, so no number the teacher
+    wrote reaches a target (rule 4)."""
+    if choice is None:
+        return None, "no price pick: no teacher pick yet"
+    if not choice.same_item or choice.price_pick is None:
+        return None, "no price pick: the teacher found no advert for the same item"
+    low, high = choice.price_pick.low, choice.price_pick.high
+    if not 0 <= low <= high < len(found):
+        return None, "no price pick: the teacher's pick is off the list"
+    asking = item.answer.price.ngn
+    if found[low].price_ngn > asking:
+        return None, "no price pick: the teacher offered above the asking price"
+    if asking > 2 * found[high].price_ngn:
+        return None, "no price pick: the teacher's range is far under the asking price"
+    what = answer_text(answer.identity.model_dump()) or "item"
+    reason = (f"#{low} is an advert for the same {what} as the one seen." if low == high
+              else f"#{low} to #{high} are adverts for the same {what} as the one seen, from the worst case up.")
+    return PriceChoice(same_item=True, price_pick=PricePick(low=low, high=high), reason=reason), "price pick: the teacher's"
+
+
 def foreign_list(item: Item, answer: Reading, pool: list[comps.Comparable]) -> list[comps.Comparable]:
     """Adverts of a clearly different kind, as the engine would list them after a wrong name.
 
@@ -441,7 +493,8 @@ def build(cases: list[tuple], rows: list[dict], labels: dict[str, dict], root: P
           entries: tuple[dict, ...] | None = None, ocr: OcrReader | None = None,
           facts: dict[str, dict] | None = None, noproof: dict[str, dict] | None = None,
           ask_for=None, pool: list[comps.Comparable] | None = None,
-          hashes: dict[str, tuple[str, ...]] | None = None) -> tuple[list[dict], dict[str, int]]:
+          hashes: dict[str, tuple[str, ...]] | None = None,
+          pick_choice=None) -> tuple[list[dict], dict[str, int]]:
     """Training examples from a teacher's clean reads. `cases` holds (item, photos).
     When the teacher named the item, `ocr` checks a model code the title does
     not carry, and the whole name on an advert with no photo check.
@@ -449,9 +502,12 @@ def build(cases: list[tuple], rows: list[dict], labels: dict[str, dict], root: P
     `facts` (`truths.fact` on training adverts) add a true-claim and a
     false-claim twin; `noproof` (`construct.construct` on training adverts)
     adds the same advert with its label gone, answered by asking for the shot
-    `ask_for(item)` names. `pool`, the training adverts' comparables, adds the
-    price step for a priced answer, for it and for its lied-to twin, the same
-    pick for both; `hashes` keep an advert's reposts out of its own list."""
+    `ask_for(item)` names, and a branded advert left with no model asks for
+    that shot too. `pool`, the training adverts' comparables, adds the price
+    step for a priced second-hand answer, for it and for its lied-to twin,
+    the same pick for both; `hashes` keep an advert's reposts out of its own
+    list. `pick_choice(request)` is a teacher's answer to the price step, or
+    None when it has none; without it the pick is `pick_target`'s."""
     reads = {r["id"]: r for r in rows if r.get("variant", "clean") == "clean" and r.get("reading")}
     out: list[dict] = []
     tally: dict[str, int] = {}
@@ -470,7 +526,7 @@ def build(cases: list[tuple], rows: list[dict], labels: dict[str, dict], root: P
             if label is None:
                 label = ocr_label(row["reading"], photos, ocr, lines=lines)
             keep_code = code_confirmed(identity.get("model"), title, lines)
-        answer, why = target(item, row["reading"], label, keep_code)
+        answer, why = target(item, row["reading"], label, keep_code, ask_for(item) if ask_for else None)
         tally[why] = tally.get(why, 0) + 1
         if answer is None:
             continue
@@ -491,12 +547,17 @@ def build(cases: list[tuple], rows: list[dict], labels: dict[str, dict], root: P
                 chats.append(("noproof", said, reading_request(item, kept, "clean")))
         if pool is not None and answer.decision == "price":
             found = comps.find(answer.identity, item.market, pool, item, own_photos=(hashes or {}).get(item.id, ()))
-            choice = pick_target(item, answer, found)
-            if choice is None:
-                why = ("no price pick: brand new, a new price" if item.answer.price.used is False
-                       else "no price pick: no matching advert near its price")
-                tally[why] = tally.get(why, 0) + 1
+            if item.answer.price.used is False:
+                choice, why = None, "no price pick: brand new, a new price"
+            elif not found:
+                choice, why = None, "no price pick: no adverts found"
+            elif pick_choice is not None:
+                choice, why = taught_pick(item, answer, found, pick_choice(pick_request(answer, found)))
             else:
+                choice = pick_target(item, answer, found)
+                why = "price pick: the rule's" if choice else "no price pick: no matching advert near its price"
+            tally[why] = tally.get(why, 0) + 1
+            if choice is not None:
                 chats.append(("pick", choice, pick_request(answer, found)))
                 chats.append(("pick_lie", choice, pick_request(twin(answer, lie), found)))
             # One priced advert in REFUSE_EVERY also meets a list for another kind,

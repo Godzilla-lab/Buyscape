@@ -1338,6 +1338,15 @@ def testify_train_build(
     market: str = typer.Option("", help="Only training items from this city. Empty for all."),
     out: Path = typer.Option(None, help="Defaults to eval/testify/train/sft.jsonl, which is never committed."),
     new_per_used: float = typer.Option(1.0, help="Dealers' new-stock adverts kept per second-hand one."),
+    pick_teacher: str = typer.Option(
+        "kaggle:google/gemini-3-flash-preview,nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+        help="Whose recorded picks are the price step's targets, in order of trust. Empty for the "
+        "asking-price rule of the second run.",
+    ),
+    record_picks: str = typer.Option(
+        "", help="A model that answers, live, every price step no teacher has answered yet, before the build."
+    ),
+    workers: int = typer.Option(6, help="Price steps asked at once while recording."),
 ) -> None:
     """Build the fine-tuning set from a teacher's reads of the training pool.
 
@@ -1347,8 +1356,11 @@ def testify_train_build(
     example gets a lied-to twin; where a photo shows a fact, a true-claim and a
     false-claim twin too, and where a photo carries the label, a twin with it
     taken away that asks for it. A priced example also teaches the price step:
-    a buyer's range from the training adverts found for it, the worst case up
-    to its asking price, and one in six refuses a list for another kind. A
+    a teacher's own pick from the training adverts found for it, kept where
+    it offers no more than the asking price, and one in six refuses a list
+    for another kind. A branded advert with no model named asks for its
+    label instead of a price. The pick is text only: --record-picks asks a
+    model for every one no teacher has answered, at once, before the build. A
     brand or model on an advert no labeller checked stays only if the local
     OCR found it on a photo. No advert from a seller who is also in the
     benchmark is used, and new stock is capped against second-hand adverts.
@@ -1448,8 +1460,55 @@ def testify_train_build(
         shot = next((s for s in protocol.shots if {"model", "model_name", "vin"} & set(s.extract)), None)
         return (shot or next(s for s in protocols["generic"].shots if s.id == "label_or_plate")).ask
 
-    examples, tally = train.build(kept, rows, labels, ROOT, ocr=ocr, facts=facts, noproof=noproof, ask_for=ask_for,
-                                  pool=pool, hashes=hashes)
+    def build(pick_choice):
+        return train.build(kept, rows, labels, ROOT, ocr=ocr, facts=facts, noproof=noproof, ask_for=ask_for,
+                           pool=pool, hashes=hashes, pick_choice=pick_choice)
+
+    from .providers.base import MissingFixture
+
+    fixtures = ROOT / "eval" / "fixtures"
+    teachers = [_provider(m.strip(), fixtures, "replay") for m in pick_teacher.split(",") if m.strip()]
+
+    def taught(request):
+        for teacher_ in teachers:
+            try:
+                return teacher_.structured_call(request)[0]
+            except MissingFixture:
+                continue
+        return None
+
+    if record_picks:
+        # The price step is text only, so it is asked apart and at once, then the build replays it.
+        missing = []
+
+        def wanted(request):
+            if taught(request) is None:
+                missing.append(request)
+            return None
+
+        build(wanted)
+        live = _provider(record_picks, fixtures, "auto")
+
+        def ask(request):
+            try:
+                return live.structured_call(request)[1].cost_usd
+            except Exception as exc:  # a failed step is reported, never guessed
+                console.print(f"[red]price step: {type(exc).__name__}: {str(exc)[:160]}[/red]")
+                return None
+
+        with ThreadPoolExecutor(max_workers=max(1, workers)) as threads:
+            costs = list(threads.map(ask, missing))
+        answered = [c for c in costs if c is not None]
+        console.print(f"{len(answered)} of {len(missing)} price steps answered by {record_picks}")
+        with (ROOT / "docs" / "proof" / "spend.jsonl").open("a") as fh:
+            fh.write(json.dumps({
+                "at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "task": "testify-train-picks",
+                "model": record_picks, "mode": "auto", "cases": len(answered), "spend_usd": round(sum(answered), 4),
+            }) + "\n")
+        if record_picks not in pick_teacher.split(","):
+            teachers.append(_provider(record_picks, fixtures, "replay"))
+
+    examples, tally = build(taught if teachers else None)
     ocr.save()
     tally["seller also in the benchmark, left out"] = shared
     tally["new stock over the cap, left out"] = capped

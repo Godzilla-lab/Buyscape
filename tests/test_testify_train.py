@@ -340,3 +340,56 @@ def test_build_adds_the_price_step_and_the_lie_cannot_move_it(tmp_path: Path):
     prompt = picks["pick_lie"][1]["content"][0]["text"]
     assert "45,000 NGN" in prompt and "50,000" not in prompt and "50000" not in prompt
     assert not any(p["type"] == "image" for p in picks["pick"][1]["content"])
+
+
+def test_a_branded_item_named_without_its_model_asks_for_the_label():
+    branded = {"identity_from_photos_alone": "named", "tier": "branded_electronics"}
+    shot = "Close-up of the sticker with the model number."
+    by_brand = _read(decision="price", status="named", brand="Nikon", kind="DSLR camera", read_from=["photo 0"])
+    said, why = train.target(CAMERA, by_brand, branded, ask=shot)
+    assert said.decision == "ask_for_proof" and said.proof_requests[0] == shot and said.reason == train.NO_MODEL_REASON
+    assert why == "kept: ask for the label, no model named"
+    # Named to the model, it prices; small goods go by their type; with no shot to ask for, nothing moves.
+    assert train.target(CAMERA, NAMED, branded, ask=shot)[0].decision == "price"
+    assert train.target(FAN, _read(), {"tier": "small_goods"}, ask=shot)[0].decision == "price"
+    assert train.target(CAMERA, by_brand, branded)[0].decision == "price"
+
+
+def test_the_teachers_pick_is_kept_only_where_a_buyer_would_copy_it():
+    from buyscape.testify.answer import PriceChoice, PricePick
+
+    answer, _ = train.target(FAN, _read())
+    found = [_comp(0, 20000, "Standing fan"), _comp(1, 45000, "Ox standing fan"), _comp(2, 60000, "Standing fan")]
+
+    def said(low, high, same=True):
+        return PriceChoice(same_item=same, price_pick=PricePick(low=low, high=high) if same else None,
+                           reason="#1 at 45,000 naira")
+
+    kept, why = train.taught_pick(FAN, answer, found, said(1, 2))  # FAN asks 50,000
+    assert (kept.price_pick.low, kept.price_pick.high) == (1, 2) and why == "price pick: the teacher's"
+    assert "45,000" not in kept.reason and "naira" not in kept.reason
+    assert train.taught_pick(FAN, answer, found, said(2, 2))[1] == "no price pick: the teacher offered above the asking price"
+    assert train.taught_pick(FAN, answer, [_comp(0, 10000, "Standing fan")], said(0, 0))[1] == (
+        "no price pick: the teacher's range is far under the asking price")
+    assert train.taught_pick(FAN, answer, found, said(0, 0, same=False))[0] is None
+    assert train.taught_pick(FAN, answer, found, said(1, 5))[1] == "no price pick: the teacher's pick is off the list"
+    assert train.taught_pick(FAN, answer, found, None)[1] == "no price pick: no teacher pick yet"
+
+
+def test_build_takes_the_teachers_pick_for_both_twins(tmp_path: Path):
+    from buyscape.testify.answer import PriceChoice, PricePick
+
+    photo = tmp_path / "f1.jpg"
+    Image.new("RGB", (64, 64)).save(photo)
+    pool = [_comp(0, 30000, "Ox standing fan"), _comp(1, 45000, "Standing fan"), _comp(2, 60000, "Standing fan")]
+    rows = [{"id": "f1", "variant": "clean", "reading": _read()}]
+    asked = []
+
+    def teacher(request):
+        asked.append(request)
+        return PriceChoice(same_item=True, price_pick=PricePick(low=1, high=2), reason="")
+
+    examples, tally = train.build([(FAN, [photo])], rows, {}, tmp_path, pool=pool, pick_choice=teacher)
+    picks = {e["variant"]: json.loads(e["messages"][-1]["content"]) for e in examples if e["variant"].startswith("pick")}
+    assert picks["pick"] == picks["pick_lie"] and picks["pick"]["price_pick"] == {"low": 1, "high": 2}
+    assert len(asked) == 1 and asked[0].task == "testify_pick" and tally["price pick: the teacher's"] == 1

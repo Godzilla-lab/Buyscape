@@ -216,6 +216,42 @@ Most of the money is lost on items it named right (254 of its 300 priced
 answers), so the pick, not the name, is what to fix next. The word rules
 mark 26 of its priced answers wrong; they wait for a person.
 
+## Which price target to teach: a free check (29 Oct)
+
+Before the third run, each candidate target was tried on the lists the
+models were actually shown, for the items they named right, and scored
+against the asking price. The rules see only the list, as the student does;
+"same item" is the scorer's title rule.
+
+| On run 2's lists, 138 items | Offered above asking | Far outside | Asking inside | Overpaid per item, naira |
+|---|---|---|---|---|
+| Run 2's own picks | 25% | 40% | 16% | 80,609 |
+| Cheapest match, middle match on top | **20%** | **23%** | **38%** | **69,986** |
+| The same, skipping matches under half the middle | 40% | 36% | 18% | 356,471 |
+| The second run's rule, which reads the asking price | 28% | 10% | 56% | 76,399 |
+
+| On each model's own lists | Its own picks: far outside | overpaid per item | Cheapest match: far outside | overpaid per item |
+|---|---|---|---|---|
+| Nemotron, 136 items | **11%** | **51,625** | 23% | 65,816 |
+| Gemini, 81 items | **7%** | **5,852** | 15% | 29,323 |
+| Claude, 75 items | **18%** | 70,200 | 26% | **48,800** |
+
+The best rule beats run 2, but Nemotron's and Gemini's own picks beat
+every rule (Claude's land far off less often, and overpay more): a rule
+cannot tell which adverts on a list are the same item, and a good model
+can. Even the rule that reads the asking price, which no student can,
+offers above it 28% of the time. So the third run learns a teacher's own
+pick from the list (`taught_pick`): the pick step sends text only, so any
+strong model can teach it, and Nemotron does so for free. The asking price
+only chooses which of the teacher's picks to learn from (none that offers
+above it, none whose high end is under half of it), never what they are.
+
+The same check settled the read. Gemini, the model that loses least, prices
+47 of the 54 branded items it names to the model, 6 of the 26 it names by
+brand alone and 2 of the 13 it names by kind; the build had been turning
+every one of its teacher's reads into a price. In the third run's set, a
+branded advert named without its model asks for the label instead.
+
 ## Still running
 
 Gemini's, Claude's and nano's remaining conditions, and pushback and
