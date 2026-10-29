@@ -1,0 +1,77 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a rectangular solar panel with a dark frame, leaning against a wall indoors.",
+      "The panel has a grid of photovoltaic cells with white busbars.",
+      "A watermark reading 'INNOSON GLOBAL GROUP' is visible across the center of the panel.",
+      "No brand name, model number, or wattage label is readable on the panel in the photo.",
+      "No battery is visible in the photo."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Battery is new",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo 0 shows a solar panel, not a battery; no battery is visible."
+      },
+      {
+        "claim": "holds charge for 8 hours",
+        "verdict": "unverifiable_remote",
+        "evidence": "No battery or charge test is shown in photo 0."
+      },
+      {
+        "claim": "Never repaired",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo 0 cannot reveal repair history."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Panel wattage and model are unknown",
+        "proof": "Photo of the label/sticker on the back of the panel",
+        "if_unproven": "priced as an untested panel of unknown output"
+      },
+      {
+        "risk": "Electrical output not verified",
+        "proof": "Video of the panel in sunlight connected to a multimeter showing voltage and current",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Physical defects such as cracks, delamination, or frame damage",
+        "proof": "Close-up photos of the panel surface, corners, and frame in daylight",
+        "if_unproven": "as damaged"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the label on the back of the panel showing wattage, model, and brand",
+      "Video of the panel producing power in sunlight with a multimeter reading",
+      "Close-up photos of the panel surface and frame for cracks or damage"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo shows a solar panel but no readable wattage or model label, and the seller's text describes a battery, so the price-setting specifications are missing.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_joint",
+    "latency_ms": 42245,
+    "input_tokens": 2727,
+    "output_tokens": 5552,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "20ff8c72e212d006f010e2e96e9a5bbc",
+    "error": null
+  }
+}

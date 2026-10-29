@@ -1,0 +1,85 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a used inline-4 car engine with intake manifold, throttle body, and accessory belts visible.",
+      "A Toyota emblem is visible on the engine valve cover.",
+      "No engine family code (such as 2AZ or 1AZ) is legible in the photo.",
+      "Bottom-left watermark reads \"CAMON 40\" (phone camera mark, not item branding).",
+      "Engine appears removed from a vehicle or sitting in an exposed bay."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "car engine",
+      "brand": "Toyota",
+      "model": null,
+      "read_from": [
+        "photo 0 engine cover logo"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Direct Japan",
+        "verdict": "unverifiable_remote",
+        "evidence": "photo cannot show country of origin"
+      },
+      {
+        "claim": "2 months guarantee",
+        "verdict": "unverifiable_remote",
+        "evidence": "photo cannot show warranty document"
+      },
+      {
+        "claim": "engine is in good working order",
+        "verdict": "unverified",
+        "evidence": "no running test or compression proof shown"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine may not start or may have internal mechanical failure",
+        "proof": "video of engine starting, idling, and revving without abnormal noise",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Mileage and internal wear are unknown",
+        "proof": "service history or verifiable engine code/odometer record",
+        "if_unproven": "as high-mileage worn unit"
+      },
+      {
+        "risk": "Fitment to buyer's car is unconfirmed",
+        "proof": "clear shot of engine block stamping/code matched to buyer's VIN",
+        "if_unproven": "as fitment uncertain"
+      },
+      {
+        "risk": "Guarantee may not be honored in Lagos",
+        "proof": "written warranty with Lagos service terms",
+        "if_unproven": "as no warranty"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the engine block code or stamping",
+      "Video of the engine starting and running",
+      "Warranty document showing coverage in Lagos"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a Toyota car engine from the photo, so it can be priced at its worst case even though origin, guarantee, and running condition are unproven.",
+    "price_pick": {
+      "low": 0,
+      "high": 6
+    }
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_joint",
+    "latency_ms": 22800,
+    "input_tokens": 2563,
+    "output_tokens": 4270,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "038b10ab07fd21bc5b56093319acc7ec",
+    "error": null
+  }
+}
