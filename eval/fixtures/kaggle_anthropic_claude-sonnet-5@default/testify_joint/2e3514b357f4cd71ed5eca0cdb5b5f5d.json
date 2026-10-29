@@ -1,0 +1,76 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Single photo shows a used inline-4 engine photographed outdoors on pavement, with a pair of feet visible for scale.",
+      "Green paint markings are visible on parts of the block and intake, typical of the paint-dot system used by used-parts yards to mark tested units, but this does not identify make or model.",
+      "No brand badge, casting number, or model sticker is legible anywhere in the image.",
+      "Wiring harness, sensors, and alternator appear attached but condition and completeness of wiring/connectors cannot be judged from this angle.",
+      "No startup, compression test, or documentation is shown."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used car engine (inline 4-cylinder)",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "We sell direct Korean parts",
+        "verdict": "unverifiable_remote",
+        "evidence": "No badge, casting mark, or text in photo 0 ties the engine to any Korean manufacturer (e.g. Hyundai/Kia); the visible shape and intake design do not confirm the claim."
+      },
+      {
+        "claim": "Implied working/tested engine (green paint dots)",
+        "verdict": "unverified",
+        "evidence": "Green paint is a common yard marking but is not proof of a running test; no video or compression check shown."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Make/model of engine is unknown, and price for used engines in this market varies by a factor of 7x or more depending on brand (e.g., Toyota vs Kia vs Acura vs diesel).",
+        "proof": "Close-up photo of the engine block casting number, VIN plate, or any stamped brand marking.",
+        "if_unproven": "Cannot be priced even at worst case without this; must treat as unidentified generic engine."
+      },
+      {
+        "risk": "Engine may not run or may have internal damage despite being marked 'tested'.",
+        "proof": "Video of the engine starting and running, or a compression test reading.",
+        "if_unproven": "Priced as non-working."
+      },
+      {
+        "risk": "Mileage and import history are unverifiable; could be high-mileage or accident-sourced.",
+        "proof": "Photo of mileage sticker, import paperwork, or engine history document.",
+        "if_unproven": "Priced as high-mileage/worst case."
+      },
+      {
+        "risk": "Completeness of the unit (turbo, sensors, ECU, wiring harness) cannot be confirmed from one angle.",
+        "proof": "Multiple photos from all sides plus a parts list.",
+        "if_unproven": "Priced as incomplete/short block."
+      }
+    ],
+    "proof_requests": [
+      "Clear close-up photo of any casting number, brand stamp, or VIN/engine code plate on the block.",
+      "Video of the engine running or at minimum a compression test result.",
+      "Photos from multiple angles (front, rear, both sides) showing full wiring harness and accessories.",
+      "Any import/customs documentation stating origin and mileage."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The single photo shows an unidentifiable engine with no legible brand or model marking, and the comparable listings for 'used engines' in this market range enormously by make, so no safe worst-case price can be set without proof of identity.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 30911,
+    "input_tokens": 3132,
+    "output_tokens": 2634,
+    "cost_usd": 0.029051,
+    "replayed": false,
+    "fixture_key": "2e3514b357f4cd71ed5eca0cdb5b5f5d",
+    "error": null
+  }
+}

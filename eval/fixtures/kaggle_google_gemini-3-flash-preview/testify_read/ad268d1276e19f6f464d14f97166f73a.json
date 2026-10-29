@@ -1,0 +1,67 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Black rectangular battery.",
+      "Brand 'Century' visible in photo 0.",
+      "Labeled 'Maintenance-free Sealed Lead-acid Battery' in photo 0.",
+      "Labeled '12V 7.0AH' in photo 0.",
+      "Terminals are visible on the top surface.",
+      "The casing shows signs of use, including dust and minor surface marks."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "Sealed Lead-acid Battery",
+      "brand": "Century",
+      "model": "12V 7.0AH",
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Chemistry: Valve Regulated Lead Acid (VRLA)",
+        "verdict": "supported",
+        "evidence": "photo 0 label states 'Sealed Lead-acid Battery', which is the same as VRLA."
+      },
+      {
+        "claim": "Dimensions: 151mm (L) x 65mm (W) x 93.5mm (H)",
+        "verdict": "unverified",
+        "evidence": "Dimensions cannot be confirmed from a single photo without a scale."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The battery may be depleted, sulfated, or unable to hold a charge.",
+        "proof": "A video showing a multimeter reading the voltage under a load test.",
+        "if_unproven": "as a scrap or dead battery"
+      },
+      {
+        "risk": "The age of the battery is unknown, and lead-acid batteries have a limited shelf life.",
+        "proof": "A photo of the manufacturing date code stamped on the casing.",
+        "if_unproven": "as an old unit near end-of-life"
+      }
+    ],
+    "proof_requests": [
+      "Video of a multimeter test showing the current voltage.",
+      "Photo of the manufacturing date stamp, usually found on the top or side.",
+      "Clear photo of the terminals to check for corrosion or damage."
+    ],
+    "decision": "price",
+    "reason": "The brand and specifications are clearly visible in the photo. Since the internal health and age are unverified, it will be priced at the lowest value for a used/scrap unit of this type."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 6685,
+    "input_tokens": 2394,
+    "output_tokens": 1357,
+    "cost_usd": 0.005268,
+    "replayed": false,
+    "fixture_key": "ad268d1276e19f6f464d14f97166f73a",
+    "error": null
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "A single solar panel with a 6x10 cell grid (60 cells total).",
+      "The panel is leaning against a dark truck or shipping container.",
+      "The bottom edge of the panel is resting directly on the dirt ground.",
+      "Text overlay at the bottom of the image: 'Trina solar 265 watts available'.",
+      "Watermark 'MEGA ENERGY SOLAR' and 'POSTED ON JIJI' is present.",
+      "The background shows a person and other panels, indicating a warehouse or yard environment."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Trina solar",
+        "verdict": "unverified",
+        "evidence": "The brand name appears as a text overlay in photo 0, not on a manufacturer's label."
+      },
+      {
+        "claim": "265 watts",
+        "verdict": "unverified",
+        "evidence": "The wattage is stated in an overlay; the technical specification plate is not visible."
+      },
+      {
+        "claim": "We sell all kind of Solar Inverter panels and batteries",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The panel may be a lower wattage or a different brand than claimed.",
+        "proof": "A photo of the technical specification label on the back of the panel.",
+        "if_unproven": "Priced as a generic 240W solar panel."
+      },
+      {
+        "risk": "Potential for micro-cracks or reduced electrical output due to age or handling.",
+        "proof": "A video showing a multimeter test of Voc and Isc in full sunlight.",
+        "if_unproven": "Priced as a used panel with significant output degradation."
+      },
+      {
+        "risk": "Physical damage to the frame or glass from being stored on the ground.",
+        "proof": "Close-up photos of the glass surface and all four frame corners.",
+        "if_unproven": "Priced as having minor frame damage or scratches."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the manufacturer's label on the back of the panel.",
+      "Close-up photos of the glass and frame edges.",
+      "Multimeter test results (Voc and Isc) in direct sunlight."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The brand and wattage are only provided as text overlays. Since these specifications are the primary drivers of value for solar panels, a photo of the rear technical label is necessary for a reliable valuation."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 23021,
+    "input_tokens": 2407,
+    "output_tokens": 5120,
+    "cost_usd": 0.016563,
+    "replayed": false,
+    "fixture_key": "fa9fefc01ff24432c0e3ac85c0d87508",
+    "error": null
+  }
+}

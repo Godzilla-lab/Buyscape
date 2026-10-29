@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Black thermal receipt printer.",
+      "Power adapter and power cable included.",
+      "Control panel with three LEDs and one button on the left.",
+      "Watermark 'HIPHEN SOLUTIONS' present on the image.",
+      "No brand or model name is visible on the device in the photo."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "thermal receipt printer",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Network Receipt printer",
+        "verdict": "unverified",
+        "evidence": "The rear ports are not visible in photo 0 to confirm an Ethernet (LAN) port."
+      },
+      {
+        "claim": "by hiphen",
+        "verdict": "unverified",
+        "evidence": "No branding is visible on the hardware; the watermark suggests the seller's identity rather than the manufacturer."
+      },
+      {
+        "claim": "Support Windows software based on ESC/POS",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The printer may not be functional.",
+        "proof": "A video of the printer performing a self-test (holding the feed button while powering on).",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The interface may be USB-only rather than Network (Ethernet).",
+        "proof": "Photo of the rear interface ports.",
+        "if_unproven": "as a USB-only model"
+      },
+      {
+        "risk": "The paper width may be 58mm rather than the more valuable 80mm.",
+        "proof": "Photo of the printer with the lid open or a test print showing width.",
+        "if_unproven": "as a 58mm model"
+      },
+      {
+        "risk": "The thermal print head may be damaged, causing streaks or gaps in text.",
+        "proof": "A clear photo of a printed receipt or self-test page.",
+        "if_unproven": "as having a faulty print head"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the back of the printer showing all connection ports.",
+      "Photo of the manufacturer's label on the bottom or back of the device.",
+      "A video or photo of a self-test printout to confirm functionality and print quality."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The provided photo is a generic product shot that does not show the interface ports or the specification label. The value of a receipt printer depends significantly on its paper width and connectivity options, which are currently unverified."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 11625,
+    "input_tokens": 2392,
+    "output_tokens": 2468,
+    "cost_usd": 0.0086,
+    "replayed": false,
+    "fixture_key": "c76a82268714b9b05ab633052f03b4d9",
+    "error": null
+  }
+}

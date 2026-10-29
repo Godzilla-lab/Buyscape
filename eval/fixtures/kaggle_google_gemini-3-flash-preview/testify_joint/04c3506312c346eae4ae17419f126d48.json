@@ -1,0 +1,77 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Large yellow industrial diesel engine.",
+      "The valve cover has 'CAT C9' printed on it in photo 1.",
+      "An Electronic Control Module (ECM) is visible on the side in photo 0.",
+      "The exhaust manifold ports are open, suggesting the turbocharger is missing in photo 0.",
+      "An Atlas Copco branded filter is attached in photo 0.",
+      "The engine is sitting on a frame or floor with tools nearby in photo 1.",
+      "Watermark 'DNL EQUIPMENT SALES AND...' appears on both photos."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "diesel engine",
+      "brand": "Caterpillar",
+      "model": "C9",
+      "read_from": [
+        "photo 1 valve cover"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Complete",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows open exhaust ports where a turbocharger should be, indicating it is not complete."
+      },
+      {
+        "claim": "caterpiller c9 engine",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows 'CAT C9' on the engine cover."
+      },
+      {
+        "claim": "(parts)",
+        "verdict": "unverified",
+        "evidence": "The seller's own text suggests it is for salvage or non-functional, which matches the missing components seen."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The engine may be seized or have internal mechanical failure.",
+        "proof": "A video showing the crankshaft being turned manually (barred over).",
+        "if_unproven": "as a non-running core for parts"
+      },
+      {
+        "risk": "Critical expensive components like injectors or the ECM may be faulty or missing.",
+        "proof": "A 360-degree walkaround video and a diagnostic report from the ECM.",
+        "if_unproven": "as incomplete and non-functional"
+      }
+    ],
+    "proof_requests": [
+      "Video of the crankshaft being turned manually to ensure it isn't seized.",
+      "360-degree video of the engine to identify all missing external components.",
+      "Clear photo of the engine's serial number plate for specification verification."
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identified as a Caterpillar C9. The seller's own description and the visual evidence of missing parts (turbocharger) indicate it is a non-running unit sold for parts, so it is priced as a core.",
+    "price_pick": {
+      "low": 2,
+      "high": 4
+    }
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_joint",
+    "latency_ms": 14507,
+    "input_tokens": 3903,
+    "output_tokens": 2925,
+    "cost_usd": 0.010726,
+    "replayed": false,
+    "fixture_key": "04c3506312c346eae4ae17419f126d48",
+    "error": null
+  }
+}
