@@ -1,0 +1,85 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a retail box held in hand with front text: 20000 mAh, HIGH-SPEED, Omni-TANK, TECNO top right, image of black power bank, 2 PORT SYNCHRONOUS FAST CHARGING, AIRLINE FRIENDLY, watermark OBATEK GLOBAL POSTED ON JIJI.",
+      "Photo 1 shows the same box angled with TECNO on the left edge, 20000 mAh, HIGH-SPEED, Omni-TANK, device image, same watermark.",
+      "Both photos show sealed packaging only; the actual power bank is not shown outside the box."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "power bank",
+      "brand": "TECNO",
+      "model": "Omni-TANK",
+      "read_from": [
+        "photo 0",
+        "photo 1"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Capacity 20,000mAh",
+        "verdict": "supported",
+        "evidence": "photo 0 and photo 1 box front"
+      },
+      {
+        "claim": "Power rated input 15W",
+        "verdict": "unverified",
+        "evidence": "not visible in photos"
+      },
+      {
+        "claim": "Power output 15W",
+        "verdict": "unverified",
+        "evidence": "not visible in photos"
+      },
+      {
+        "claim": "USB output port -...",
+        "verdict": "unverified",
+        "evidence": "text cut off in seller words, not visible in photos"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Box may be empty or contain a different unit",
+        "proof": "video of unboxing showing the actual power bank",
+        "if_unproven": "as empty box / not working"
+      },
+      {
+        "risk": "Actual capacity may be below 20,000mAh",
+        "proof": "capacity test or teardown showing cells",
+        "if_unproven": "as lower-capacity or unknown unit"
+      },
+      {
+        "risk": "Input/output wattage and ports may not match claims",
+        "proof": "close-up of rating label or tester reading",
+        "if_unproven": "as basic/unknown output"
+      },
+      {
+        "risk": "Unit may be used or damaged despite sealed appearance",
+        "proof": "clear photos of actual unit out of box",
+        "if_unproven": "as used/untested"
+      }
+    ],
+    "proof_requests": [
+      "Video of unboxing the sealed box and powering on the unit",
+      "Close-up of the actual power bank's ports and rating label",
+      "Capacity test or weight comparison"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a TECNO Omni-TANK 20,000 mAh power bank in retail box from the photos; even untested, it can be priced at worst case pending proof."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 28753,
+    "input_tokens": 2175,
+    "output_tokens": 3250,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "ed274449c38191e6a55e3715516656bb",
+    "error": null
+  }
+}

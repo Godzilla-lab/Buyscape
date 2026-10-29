@@ -1,0 +1,80 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a close-up of a fan label reading San Ace 80, MODEL 9GV0848P1G13, DC 48V 0.84A, SANYO DENKI, Made in The Philippines, with UL/cULus marks; the fan is wrapped in clear plastic.",
+      "Photo 1 shows the same label and model from a slightly different angle, still wrapped and held by hand.",
+      "Photo 2 shows one unwrapped fan on top of several wrapped identical fans on bubble wrap; the top fan displays the same San Ace 80 SANYO DENKI label."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "80mm DC cooling fan",
+      "brand": "SANYO DENKI",
+      "model": "9GV0848P1G13",
+      "read_from": [
+        "photo 0 label",
+        "photo 1 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Model 9GV0848P1G13",
+        "verdict": "supported",
+        "evidence": "photo 0 label and photo 1 label"
+      },
+      {
+        "claim": "Voltage 48V",
+        "verdict": "supported",
+        "evidence": "photo 0 label DC 48V and photo 1 label DC 48V"
+      },
+      {
+        "claim": "Current 0.84A",
+        "verdict": "supported",
+        "evidence": "photo 0 label 0.84A and photo 1 label 0.84A"
+      },
+      {
+        "claim": "Size 80X80X38mm",
+        "verdict": "unverifiable_remote",
+        "evidence": "dimensions are not visible on the label in photos 0 or 1"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Fan may not spin or may be electrically dead",
+        "proof": "video of the fan connected to a 48V DC supply running",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Unit may be counterfeit or mislabeled",
+        "proof": "close-up of label printing quality, connector pins, and frame markings compared to genuine Sanyo Denki",
+        "if_unproven": "as an unbranded generic fan"
+      },
+      {
+        "risk": "Wrapped units in photo 2 may be different models or damaged",
+        "proof": "photo of the label on one wrapped unit from the lot, or unwrap and inspect blades and frame",
+        "if_unproven": "price per single unwrapped unit only"
+      }
+    ],
+    "proof_requests": [
+      "Video of the fan powered at 48V DC spinning freely",
+      "Close-up photo of the label on a still-wrapped unit from the lot",
+      "Unwrapped photo showing fan blades, frame, and connector condition"
+    ],
+    "decision": "price",
+    "reason": "The item is identified from the label in photos 0 and 1 as a Sanyo Denki San Ace 80 model 9GV0848P1G13 48V fan; the seller's electrical claims match the label, but working condition is unproven so it is priced as not working."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 38360,
+    "input_tokens": 2817,
+    "output_tokens": 2677,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "12358281359d409a886e901600d64b2e",
+    "error": null
+  }
+}

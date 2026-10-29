@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "A black solar panel standing upright outdoors on dirt ground",
+      "Silver aluminum frame around dark photovoltaic cells with white grid lines",
+      "Small white label in top right corner, text not legible",
+      "Watermark reads 'POSTED ON JIJI NAGOTECH SOLAR' across center",
+      "Partial view of another panel on the right edge",
+      "People and a tire visible in background"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Jinko brand",
+        "verdict": "unverified",
+        "evidence": "photo 0 top-right label too small to read"
+      },
+      {
+        "claim": "250 watt rating",
+        "verdict": "unverified",
+        "evidence": "photo 0 top-right label too small to read"
+      },
+      {
+        "claim": "direct",
+        "verdict": "unverifiable_remote",
+        "evidence": "seller term not shown or explained in photo 0"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Panel may have cracked cells or hidden physical damage",
+        "proof": "close-up photo of cell surface under light",
+        "if_unproven": "as damaged or not working"
+      },
+      {
+        "risk": "Actual wattage may be below 250W",
+        "proof": "clear photo of nameplate label or flash test result",
+        "if_unproven": "as lower-wattage or unrated panel"
+      },
+      {
+        "risk": "Panel may not produce power",
+        "proof": "video showing voltage/current output under sunlight",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Brand may not be Jinko",
+        "proof": "clear close-up of brand logo on frame or label",
+        "if_unproven": "as generic unbranded solar panel"
+      }
+    ],
+    "proof_requests": [
+      "Clear close-up of the label on the top-right corner showing brand and wattage",
+      "Video of the panel connected to a multimeter or charge controller showing output in sunlight",
+      "Close-up photo of the cell surface to check for cracks or hot spots"
+    ],
+    "decision": "price",
+    "reason": "Photo 0 shows a solar panel, so it can be identified by type; brand and wattage are unreadable, so it is priced at worst case as a non-working panel of unknown output."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 32624,
+    "input_tokens": 2019,
+    "output_tokens": 2685,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "8811ab48c6e0884c602670f0a72da7ac",
+    "error": null
+  }
+}

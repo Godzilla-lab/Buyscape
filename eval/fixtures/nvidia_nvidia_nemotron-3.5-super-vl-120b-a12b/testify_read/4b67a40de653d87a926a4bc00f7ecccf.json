@@ -1,0 +1,75 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a white battery label with YUASA logo and model SWL2500E, text 'Valve Regulated Lead Acid Battery', recycling symbols, and Pb marking.",
+      "Photo 1 shows the black top casing and white side of the battery resting on a wooden pallet.",
+      "Photo 2 shows the same YUASA SWL2500E battery from a different angle with a red positive terminal cap and silver negative terminal visible."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "12V valve regulated lead acid battery",
+      "brand": "YUASA",
+      "model": "SWL2500E",
+      "read_from": [
+        "photo 0 label",
+        "photo 2 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Yuasa SWL2500E Valve Regulated Lead Acid Battery",
+        "verdict": "supported",
+        "evidence": "photo 0 and photo 2 labels"
+      },
+      {
+        "claim": "12V",
+        "verdict": "supported",
+        "evidence": "photo 0 label"
+      },
+      {
+        "claim": "Strong Backup...",
+        "verdict": "unverifiable_remote",
+        "evidence": "subjective performance claim cannot be verified from photos"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery may not hold charge or may be dead",
+        "proof": "video of battery under load or multimeter voltage reading",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Battery age and remaining lifespan unknown",
+        "proof": "photo of manufacturing date sticker",
+        "if_unproven": "as aged with unknown remaining life"
+      },
+      {
+        "risk": "Case cracks, leaks, or terminal corrosion not visible in photos",
+        "proof": "close-up photos of terminals and case seams",
+        "if_unproven": "as physically damaged"
+      }
+    ],
+    "proof_requests": [
+      "Video of the battery powering a load or multimeter voltage test",
+      "Photo of the manufacturing date code sticker",
+      "Close-up photos of both terminals and battery case seams"
+    ],
+    "decision": "price",
+    "reason": "The item is clearly a Yuasa SWL2500E 12V VRLA battery from the label in photos 0 and 2, so it can be priced at its worst case as seen."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 29179,
+    "input_tokens": 2700,
+    "output_tokens": 3573,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "4b67a40de653d87a926a4bc00f7ecccf",
+    "error": null
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Large cardboard boxes stacked on wooden pallets in a shop or warehouse",
+      "Photo 0 shows model checkboxes including BCT-UU-48-150(M) through BCT-UU-48-350(M) and BCT-UU-48S series",
+      "Photo 1 boxes are clearly labeled \"LITHIUM ION BATTERIES\" and \"LiFePO4 Batteries\" with UN3480 and UN38.3 markings",
+      "Smaller white boxes labeled \"Fidelity solar\" visible in the background of both photos",
+      "Top box in photo 0 has a line drawing of equipment with a ventilation grille, possibly an inverter diagram",
+      "\"MIMI SOLAR POSTED ON JIJI\" watermark across both images"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "lithium ion battery",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 1"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "seller deals in solar panels, inverters, and solar chest freezers",
+        "verdict": "unverified",
+        "evidence": "none of these items are visible in the photos"
+      },
+      {
+        "claim": "enterprise does all kinds of solar energy",
+        "verdict": "unverifiable_remote",
+        "evidence": "business scope cannot be confirmed from product photos"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "exact battery capacity or model unknown; multiple models listed as checkboxes from 150 to 350",
+        "proof": "clear photo of the specific battery unit label or seller stating the exact model",
+        "if_unproven": "priced as smallest capacity non-functional battery"
+      },
+      {
+        "risk": "battery health and condition cannot be verified from a sealed box",
+        "proof": "video of voltage output, BMS reading, or load test",
+        "if_unproven": "priced as dead battery"
+      },
+      {
+        "risk": "box may be empty, repacked, or contain different chemistry than labeled",
+        "proof": "unboxing video showing actual battery cells and label match",
+        "if_unproven": "priced as empty box or mismatched contents"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the specific battery unit label showing model, voltage, and capacity",
+      "Video showing battery terminals voltage or BMS display",
+      "Unboxing clip confirming the box contains the labeled battery"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a 48V lithium ion battery, but the exact capacity and condition are unknown; even a worst-case price requires knowing which model is being sold and whether the box contains a working battery."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 38670,
+    "input_tokens": 2382,
+    "output_tokens": 4249,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "dd3ed913dac93e543fd1bf59e34fd040",
+    "error": null
+  }
+}

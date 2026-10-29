@@ -1,0 +1,80 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0: green mill with blue hopper on a red steel base, belt-driven by a red diesel engine; workshop background with similar units.",
+      "Photo 1: same mill type with red diesel engine and belt drive; an illegible data plate is on the green housing; many similar machines are visible in the background.",
+      "Photo 2: same mill type driven by a blue electric motor on the same red base; no legible brand or model plate."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "hammer mill",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "weight: 600-800kg",
+        "verdict": "unverifiable_remote",
+        "evidence": "weight cannot be confirmed from photos"
+      },
+      {
+        "claim": "power: electric motor (15kw)",
+        "verdict": "unverified",
+        "evidence": "photo 2 shows a motor but its rating plate is not legible"
+      },
+      {
+        "claim": "diesel engine (1115 diesel engine...)",
+        "verdict": "unverified",
+        "evidence": "photos 0 and 1 show a red engine but no legible model plate"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "electric motor may not run or may not be 15kw",
+        "proof": "clear photo of the motor nameplate or a video of it running under load",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "diesel engine may not run or may not be the claimed model",
+        "proof": "video of the engine starting and running, plus a clear photo of its nameplate",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "mill hammers or screen may be worn or damaged",
+        "proof": "photo of the milling chamber interior and hammers",
+        "if_unproven": "as needing repair"
+      },
+      {
+        "risk": "stated weight 600-800kg may be inaccurate, affecting freight cost",
+        "proof": "video of the item on a weighing scale",
+        "if_unproven": "as unknown weight"
+      }
+    ],
+    "proof_requests": [
+      "clear photo of the electric motor nameplate",
+      "clear photo of the diesel engine nameplate",
+      "video of the mill running with the electric motor",
+      "video of the mill running with the diesel engine",
+      "photo of the milling chamber interior and hammers",
+      "video of the item on a weighing scale"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a hammer mill from the photos, but no brand or model is legible, so it is priced at its worst case as untested with unverified power."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 30548,
+    "input_tokens": 2228,
+    "output_tokens": 3048,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "d95fa1a24519b13913c429151d994645",
+    "error": null
+  }
+}
