@@ -1,0 +1,80 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0: tabletop gas cooker with 4 visible burners (3 gas flame burners + 1 large circular electric/solid hotplate-looking burner).",
+      "Photo 1: top view shows 4 gas burners with blue flames lit, plus 2 circular electric/solid hotplate-looking burners (total 6 cooking zones visible).",
+      "Photo 2: side/back view shows a built-in/standing unit with a glass/metal top and control panel; no clear brand/model label readable."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "6-burner gas/electric cooker (4 gas burners + 2 hotplates) / standing gas cooker",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0",
+        "photo 1",
+        "photo 2"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "4 Gas cooker and 2 burner making 6 burner in total.",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows 4 gas burners with blue flames and 2 circular hotplate-style burners; photo 0 also shows mixed gas + hotplate zones."
+      },
+      {
+        "claim": "All working perfectly.",
+        "verdict": "unverified",
+        "evidence": "Photo 1 shows burners lit at the time of the photo, but there is no proof of long-term performance, ignition consistency, thermostat control, or that all burners work under load."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Some burners may not ignite reliably or may have weak flame/uneven heating (photo only shows a moment with flames).",
+        "proof": "Ask for a short video clip showing ignition of each of the 6 zones one-by-one (including the 2 hotplates) and then a 5\u201310 minute continuous burn test.",
+        "if_unproven": "Price as not fully proven/possible faults (worst case: treat as used with unknown reliability)."
+      },
+      {
+        "risk": "The 2 non-gas burners may be electric hotplates that require power; if the buyer only has gas setup, they may be unusable.",
+        "proof": "Ask for a photo of the rating plate/label and a clip showing the hotplates heating when powered (or confirm they are gas burners if that is the case).",
+        "if_unproven": "Price as gas-only usable (worst case: hotplates not usable/unknown)."
+      },
+      {
+        "risk": "Missing/unclear brand/model and build quality; could be a lower-grade unit or have parts issues not visible.",
+        "proof": "Ask for a clear photo of the brand/model label and the full control knobs/igniter area.",
+        "if_unproven": "Price at the lower end of similar used cookers."
+      },
+      {
+        "risk": "Condition issues (scratches, dents, burner cap wear, grease buildup) that affect value.",
+        "proof": "Ask for close-up photos of burner caps, pan supports/grates, and the control panel knobs.",
+        "if_unproven": "Price as average used condition."
+      }
+    ],
+    "proof_requests": [
+      "Send a clear photo of the rating plate/brand & model label (or any sticker) on the cooker.",
+      "Send a short video: ignite each of the 4 gas burners one-by-one, then demonstrate the 2 hotplates heating (show power source if electric).",
+      "Close-up photos of burner caps/grates and the igniter/control knobs."
+    ],
+    "decision": "price",
+    "reason": "The photos clearly show a 6-zone cooker layout (4 gas flames + 2 circular hotplate-style burners). The only unverified part is \u201call working perfectly,\u201d so it should be priced at the worst case within the comparable range.",
+    "price_pick": {
+      "low": 47000,
+      "high": 52000
+    }
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_joint",
+    "latency_ms": 5740,
+    "input_tokens": 3652,
+    "output_tokens": 868,
+    "cost_usd": 0.001815,
+    "replayed": false,
+    "fixture_key": "d8bd7d3ddcff0e90f1245b472b27a7e4",
+    "error": null
+  }
+}

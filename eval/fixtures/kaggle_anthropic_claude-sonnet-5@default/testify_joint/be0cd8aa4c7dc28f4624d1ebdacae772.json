@@ -1,0 +1,88 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: a yellow/orange gas cylinder, top valve area shown, some faint handwritten/printed marks on the collar but no legible brand or kg size, valve has visible rust spots.",
+      "Photo 1: a different, blue gas cylinder with cast lettering 'BERADISCO' on the body, paint worn at the collar and handles, valve area dark/rusty.",
+      "Photo 2: a close-up top view of the same blue cylinder from photo 1, valve looks weathered with rust/oxidation, no new or shiny parts visible.",
+      "No certification sticker, test date stamp, or weight/kg stamp is legible in any photo.",
+      "The listing claims to be a single 12.5kg cylinder, but two visually distinct cylinders (different color, different brand) appear across the three photos."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "12.5kg cooking gas cylinder",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 1 body casting 'BERADISCO'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "12.5kg standard cooking gas cylinder",
+        "verdict": "unverifiable_remote",
+        "evidence": "No kg stamp or size marking is legible in any photo; two different cylinders are shown, so even the single-item identity is unclear."
+      },
+      {
+        "claim": "Recently tested and certified",
+        "verdict": "unverifiable_remote",
+        "evidence": "No certification sticker, inspection stamp, or document visible in any photo."
+      },
+      {
+        "claim": "No leak",
+        "verdict": "unverifiable_remote",
+        "evidence": "Leak testing cannot be done from photos; no soap-bubble test or gauge shot provided."
+      },
+      {
+        "claim": "The valve is new",
+        "verdict": "contradicted",
+        "evidence": "Photo 1 and photo 2 show a valve with visible rust/oxidation and worn finish, not consistent with a new part."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Listing photos show two different cylinders (different color and brand), raising doubt about which item, if any, will actually be delivered.",
+        "proof": "A single set of photos (all angles) of the one specific cylinder being sold, including a shot of its kg stamp and manufacture/test date.",
+        "if_unproven": "treated as unidentified/mismatched item, priced at the lowest worst case for an unverified used cylinder"
+      },
+      {
+        "risk": "Valve condition and age not verifiable, could be unsafe or near end-of-life despite 'new valve' claim.",
+        "proof": "Close-up photo of valve brand/date stamp and a video of gas connection test with no hiss/smell.",
+        "if_unproven": "priced as having an old/unverified valve, not new"
+      },
+      {
+        "risk": "No proof of recent certification or safety testing (NMDPRA/SON stamp).",
+        "proof": "Photo of certification sticker or test report with date and cylinder serial number matching the item.",
+        "if_unproven": "priced as untested/uncertified"
+      },
+      {
+        "risk": "Possible leak not detectable remotely.",
+        "proof": "Video of soap-water test on valve and seams showing no bubbles.",
+        "if_unproven": "priced as leak-unverified (worst case: not guaranteed leak-free)"
+      }
+    ],
+    "proof_requests": [
+      "Clear photos of the actual single cylinder being sold, all from the same unit, including the kg stamp and manufacturer plate.",
+      "Photo or video of the certification/test sticker with a readable date.",
+      "Video of a soap-bubble leak test on the valve and body seams.",
+      "Explanation for why two different-colored/branded cylinders appear in the same listing."
+    ],
+    "decision": "fraud_suspected",
+    "reason": "The three photos show two visually distinct cylinders (a yellow one and a blue 'BERADISCO' one) for what is advertised as a single 12.5kg cylinder, and the valve shown is visibly worn/rusty despite the 'new valve' claim, which together suggest mismatched or misrepresented photos rather than a verifiable single item.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 25558,
+    "input_tokens": 4989,
+    "output_tokens": 2233,
+    "cost_usd": 0.032308,
+    "replayed": false,
+    "fixture_key": "be0cd8aa4c7dc28f4624d1ebdacae772",
+    "error": null
+  }
+}

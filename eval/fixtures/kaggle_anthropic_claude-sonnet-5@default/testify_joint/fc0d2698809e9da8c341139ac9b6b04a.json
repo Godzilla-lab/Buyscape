@@ -1,0 +1,89 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: A DSLR camera body sitting in front of a worn cardboard box. Both the camera's top plate and the box clearly show the word 'Nikon' and the model 'D7100'.",
+      "Photo 1: The same camera held in a hand, lens mount open (no lens attached), body cap and rear cap visible nearby. The box behind it again reads 'Nikon D7100'.",
+      "No batteries are visible in either photo.",
+      "No silicone case is visible in either photo.",
+      "No Canon branding appears anywhere in the two photos."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DSLR camera body",
+      "brand": "Nikon",
+      "model": "D7100",
+      "read_from": [
+        "photo 0 top plate and box",
+        "photo 1 box text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "The brand is Canon",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 and photo 1 both show 'Nikon' and 'D7100' printed on the camera body and box, not Canon."
+      },
+      {
+        "claim": "The camera is working perfectly fine",
+        "verdict": "unverifiable_remote",
+        "evidence": "No power-on, sensor, shutter-fire, or lens-mount test shown; lens mount in photo 1 is empty so no image-quality or autofocus check possible."
+      },
+      {
+        "claim": "Selling with 2 batteries",
+        "verdict": "unverified",
+        "evidence": "No batteries visible in either photo."
+      },
+      {
+        "claim": "Selling with a silicone case",
+        "verdict": "unverified",
+        "evidence": "No case visible in either photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Brand/model misstated by seller (claims Canon, photos show Nikon D7100) \u2014 could indicate a copy-pasted or mismatched listing, or an attempt to pass off a cheaper/older body as something else.",
+        "proof": "A fresh photo of the actual camera top plate and lens mount together with a video showing the seller naming the correct brand/model on camera.",
+        "if_unproven": "Treated as a high-risk, possibly fraudulent listing; not priced as a working Canon camera."
+      },
+      {
+        "risk": "Sensor/shutter functionality unknown \u2014 DSLR shown with no lens, cap off, could have mirror or shutter fault.",
+        "proof": "Video of camera powering on, shutter firing, and a test photo on its screen or card.",
+        "if_unproven": "Priced as non-working/for-parts body."
+      },
+      {
+        "risk": "Included accessories (batteries, case) not shown \u2014 may not actually be included.",
+        "proof": "Photo of the 2 batteries and silicone case laid out next to the camera.",
+        "if_unproven": "Priced as body-only, no accessories."
+      },
+      {
+        "risk": "No lens included \u2014 box and photos show only a body, lens mount empty.",
+        "proof": "Photo confirming whether a lens is part of the sale.",
+        "if_unproven": "Priced as body-only."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the camera's brand label and model number matching the seller's claim of 'Canon'.",
+      "Video of the camera powering on and firing the shutter.",
+      "Photo showing the 2 batteries and silicone case alongside the camera.",
+      "Confirmation of whether a lens is included."
+    ],
+    "decision": "fraud_suspected",
+    "reason": "The seller claims the item is a Canon, but both photos clearly show a Nikon D7100 body and matching box, a direct and significant brand contradiction that undermines trust in the rest of the listing.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 15568,
+    "input_tokens": 3291,
+    "output_tokens": 1533,
+    "cost_usd": 0.018359,
+    "replayed": false,
+    "fixture_key": "fc0d2698809e9da8c341139ac9b6b04a",
+    "error": null
+  }
+}

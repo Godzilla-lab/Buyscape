@@ -1,0 +1,81 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: an orange/yellow gas cylinder, neck ring has hand-written marks that look like '15.9' but are not clearly legible, a small sticker with a phone number and shop name is present, the valve area is bare (no valve/regulator fitted), surface has scuffs and dark marks near the base.",
+      "Photo 1: a different, blue gas cylinder with a stamped logo reading 'BERADISCO' on the body, valve area also bare with just a brass fitting, rust staining visible around the collar weld.",
+      "Photo 2: close-up of the same blue cylinder's neck, showing a brass valve stub but no actual gas valve/regulator attached, rust around the collar weld is visible.",
+      "No capacity stamp (e.g. '12.5KG') is clearly legible in any photo.",
+      "Two visually different cylinders (one yellow, one blue) appear across the three photos, which is inconsistent for a single-item listing."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "12.5kg cooking gas cylinder",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 1 body text 'BERADISCO' (brand marking only, not a capacity/model proof)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "12.5kg standard cooking gas cylinder",
+        "verdict": "unverified",
+        "evidence": "No capacity stamp or weight marking is clearly readable in any of the three photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Two different-colored cylinders appear in the listing photos, so it's unclear which physical item is actually for sale.",
+        "proof": "A single photo showing the actual cylinder to be sold, with its capacity stamp and any identifying marks clearly in frame.",
+        "if_unproven": "Priced as the lower-value, less certain of the two shown (generic used 12.5kg, no extras)."
+      },
+      {
+        "risk": "No valve or regulator is fitted/visible, so it is unclear if the cylinder is sold with a working valve.",
+        "proof": "A close-up photo of the valve assembly screwed in and a short clip of it being turned.",
+        "if_unproven": "Priced as not including a working valve."
+      },
+      {
+        "risk": "No visible safety/inspection or re-test date stamp, which matters for refill station acceptance.",
+        "proof": "A clear photo of the stamped manufacture/test date on the collar.",
+        "if_unproven": "Priced as unverified safety status, i.e. may need re-certification before refill."
+      },
+      {
+        "risk": "Rust and weld staining visible near the collar on the blue cylinder could indicate corrosion or leak risk.",
+        "proof": "Close-up photos of the weld seams and base from multiple angles, plus any pressure/leak test documentation.",
+        "if_unproven": "Priced as cosmetically worn with possible structural risk, i.e. lower end of used-cylinder pricing."
+      },
+      {
+        "risk": "Actual cylinder capacity (12.5kg) cannot be confirmed visually.",
+        "proof": "A clear photo of the stamped capacity (e.g., '12.5KG') on the cylinder shoulder.",
+        "if_unproven": "Priced as a generic used cylinder in the 12.5kg class at worst case (no premium for confirmed capacity)."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the exact cylinder being sold (only one, not two different ones) with the capacity stamp clearly visible.",
+      "Photo of the valve assembly fitted and a short clip of it opening/closing to show it is intact.",
+      "Photo of the manufacture/re-test date stamp on the collar.",
+      "Close-up of the weld seams and base to assess rust/corrosion extent."
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a generic used 12.5kg cooking gas cylinder by type, but photo inconsistency (two different cylinders), missing capacity stamp, and absent valve mean it must be priced at the worst case for a plain used 12.5kg cylinder with no proven extras or certification.",
+    "price_pick": {
+      "low": 4,
+      "high": 6
+    }
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 29318,
+    "input_tokens": 4969,
+    "output_tokens": 2598,
+    "cost_usd": 0.032365,
+    "replayed": false,
+    "fixture_key": "32f009568582344649bdc2dc079bb2c7",
+    "error": null
+  }
+}
