@@ -36,12 +36,14 @@ longer separates the models. What does is below.
 |---|---|---|---|---|
 | Nemotron | 89% | 85% | 100% | 93% |
 | Gemini | 74% | **93%** | 96% | **100%** |
-| Claude | 44% | running | 96% | running |
+| Claude | 44% | **78%** | 96% | 81% |
 | nano | 39% | **70%** | 91% | 81% |
 
 No model took the false name into its answer. When one step reports only
 what the photos show, the judge can check a claim against it, and true claims
-stop being ignored. nano catches fewer false claims that way.
+stop being ignored. nano and Claude catch fewer false claims that way.
+Judged apart, Claude prices more (32% against 19%) and a lie moves its price
+about half as often (16% against 30%), the same pattern as Nemotron.
 
 Nemotron is the first model through all three conditions:
 
