@@ -1,0 +1,103 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0 shows a DSLR with a visible Canon logo on the body front.",
+      "Photo 0 shows the top-right marking appears to read \u201cEOS 5D\u201d (exact suffix not fully clear).",
+      "Photo 1 shows the rear LCD and controls; Canon branding is visible.",
+      "Photo 2 shows the front of the camera with a \u201cMark III\u201d marking visible near the lens mount area.",
+      "No lens is clearly shown in any photo.",
+      "No batteries, charger, or Godox mini trigger are shown in the photos."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": null,
+      "brand": "Canon",
+      "model": "EOS 5D Mark III",
+      "read_from": [
+        "photo 2 (Mark III marking visible)",
+        "photo 0 (EOS 5D marking visible, suffix not fully readable but consistent with Mark III)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Used CANON 5D Marklll",
+        "verdict": "supported",
+        "evidence": "photo 2 shows \u201cMark III\u201d marking on the Canon body; photo 0 shows \u201cEOS 5D\u201d marking."
+      },
+      {
+        "claim": "2 Batteries",
+        "verdict": "unverified",
+        "evidence": "No batteries are visible in photos 0\u20132."
+      },
+      {
+        "claim": "1 Battery Charger",
+        "verdict": "unverified",
+        "evidence": "No charger is visible in photos 0\u20132."
+      },
+      {
+        "claim": "1 Godox mini Trigger",
+        "verdict": "unverified",
+        "evidence": "No Godox trigger is visible in photos 0\u20132."
+      },
+      {
+        "claim": "Condition: it has a...",
+        "verdict": "unverifiable_remote",
+        "evidence": "The condition statement is incomplete in the provided text; no clear condition details are shown in photos."
+      },
+      {
+        "claim": "The brand is Sony.",
+        "verdict": "contradicted",
+        "evidence": "Photos 0\u20132 show a Canon-branded camera body (Canon logo visible)."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Accessories may not be included (batteries/charger/trigger not shown).",
+        "proof": "Ask for a single photo/clip showing all included items laid out together: camera + both batteries + charger + Godox mini trigger (with brand/model visible).",
+        "if_unproven": "Price as camera body only (worst case vs claimed accessories)."
+      },
+      {
+        "risk": "Lens may be missing (no lens shown).",
+        "proof": "Ask for a photo showing the full lens attached to the camera, including front element and mount, or a separate photo of the lens model.",
+        "if_unproven": "Price as body only (worst case)."
+      },
+      {
+        "risk": "Unclear condition/defects (the condition text is incomplete; photos don\u2019t confirm shutter count, sensor health, or faults).",
+        "proof": "Ask for a short video showing: camera powers on, menu navigation, live view, autofocus attempt, and a screen showing shutter count (or EXIF/shutter count screen).",
+        "if_unproven": "Price as not fully proven/possible faults (worst case within body-only comparables)."
+      },
+      {
+        "risk": "Possible mismatch in listing text (seller says Sony, but photos show Canon).",
+        "proof": "Ask the seller to confirm the exact model name on the camera body/menu (e.g., \u201cEOS 5D Mark III\u201d) in a photo of the About/Model screen.",
+        "if_unproven": "Treat as Canon 5D Mark III only if confirmed on-screen; otherwise price at the lowest matching comparable for a DSLR body with uncertainty."
+      }
+    ],
+    "proof_requests": [
+      "Send a photo showing the exact included items together: 2 batteries, charger, and the Godox mini trigger (with the trigger brand/model visible).",
+      "Send a photo showing whether a lens is included (lens attached or separate with model visible).",
+      "Send a photo of the camera\u2019s \u201cAbout/Model\u201d screen showing \u201cEOS 5D Mark III\u201d.",
+      "Send a short video demonstrating power-on, live view, and autofocus, plus a shutter count screen if available."
+    ],
+    "decision": "price",
+    "reason": "The photos clearly show a Canon EOS 5D Mark III body, but accessories and lens are not shown and the seller\u2019s text is inconsistent (Sony vs Canon). So the safest pricing is the worst-case body-only match from the comparables.",
+    "price_pick": {
+      "low": 850000,
+      "high": 850000
+    }
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_joint",
+    "latency_ms": 8445,
+    "input_tokens": 3921,
+    "output_tokens": 1060,
+    "cost_usd": 0.002109,
+    "replayed": false,
+    "fixture_key": "2a2cdc7bca8108b170bb1f28155029d0",
+    "error": null
+  }
+}

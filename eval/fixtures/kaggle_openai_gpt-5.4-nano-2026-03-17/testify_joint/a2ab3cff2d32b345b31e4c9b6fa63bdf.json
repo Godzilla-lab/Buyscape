@@ -1,0 +1,73 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0 shows a rectangular mono solar panel with a grid of cells; appears to be a used panel.",
+      "No clearly readable brand/model name, watt rating, or cell count is visible in the photo.",
+      "A watermark/logo text is visible on the image, but it does not clearly identify the panel\u2019s brand/model or rating."
+    ],
+    "identity": {
+      "status": "unknown",
+      "kind": "solar panel (mono, used)",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "It's original 650 Watts 144 cell direct Canadian used solar panel",
+        "verdict": "unverified",
+        "evidence": "Photo 0 does not show a readable label/specs (brand, wattage, or 144-cell marking) to confirm 650W/144-cell/Canadian/original."
+      },
+      {
+        "claim": "built to serve u",
+        "verdict": "unverifiable_remote",
+        "evidence": "No performance/working test shown in photo 0."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Wattage/cell count mismatch (e.g., not actually 650W or not 144 cells).",
+        "proof": "A clear close-up photo of the panel\u2019s sticker/label showing brand, model, rated watts (W), Voc/Vmp, and cell count.",
+        "if_unproven": "Price as a lower/unknown-rated used mono panel (worst case: treat as not confirmed 650W/144-cell)."
+      },
+      {
+        "risk": "Not original/brand different from \u201cCanadian Solar\u201d.",
+        "proof": "Close-up photo of the label with the manufacturer name (e.g., Canadian Solar) and model number.",
+        "if_unproven": "Price as generic used mono panel (worst case: not original)."
+      },
+      {
+        "risk": "Panel may be damaged or underperforming (cracks, delamination, degraded cells).",
+        "proof": "Video/clip showing the full front surface under light + a working test reading (I-V curve or at least measured Voc and current under sun).",
+        "if_unproven": "Price as not proven to be working at rated output (worst case: treat as not working/low output)."
+      },
+      {
+        "risk": "Missing/incorrect connectors or junction box issues.",
+        "proof": "Photo of the junction box and connectors (MC4 or equivalent) plus a continuity check clip.",
+        "if_unproven": "Price as needing basic electrical check/possible connector/junction box issue."
+      }
+    ],
+    "proof_requests": [
+      "Send a clear close-up of the panel label/sticker (brand, model, rated watts, Voc, Vmp, Isc, cell count).",
+      "Send a full-front photo with no angle distortion plus a close-up of the junction box and connectors.",
+      "Send a working test result (measured Voc and Vmp under sun, or I-V curve) to confirm output."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo does not show any readable brand/model/rating, so the exact item needed to match the comparables (650W/144-cell Canadian Solar) is not confirmable. Without that, a safe worst-case price cannot be chosen confidently.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_joint",
+    "latency_ms": 5092,
+    "input_tokens": 2168,
+    "output_tokens": 749,
+    "cost_usd": 0.00137,
+    "replayed": false,
+    "fixture_key": "a2ab3cff2d32b345b31e4c9b6fa63bdf",
+    "error": null
+  }
+}
