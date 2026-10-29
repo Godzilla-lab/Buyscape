@@ -1,0 +1,96 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0: Table-top gas cooker with 4 visible burners (2 left, 2 right) and a control panel; no clear oven/grill shown.",
+      "Photo 1: Same cooker from front; shows 4 gas burners with blue flames lit; also shows 2 electric/solid hotplate-style circles in the middle.",
+      "Photo 2: Side/back view of the cooker body; no readable brand/model label; no clear oven/grill cavity details."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "4-burner gas cooker with 2 electric hotplates (hybrid hob)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0",
+        "photo 1",
+        "photo 2"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "4 Gas cooker and 2 burner making 6 burner in total.",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows 4 gas burners; Photo 1 shows 2 additional hotplate circles (not clearly gas burners, but they are 2 additional burners/heat zones)."
+      },
+      {
+        "claim": "All working perfectly.",
+        "verdict": "unverified",
+        "evidence": "Photo 1 shows flames/hot zones lit at the time of the photo, but there is no proof of long-term performance, ignition reliability, or that every burner works under normal load."
+      },
+      {
+        "claim": "Barely used, bought new last year.",
+        "verdict": "unverifiable_remote",
+        "evidence": "No readable date/receipt/warranty details are visible in the provided photos."
+      },
+      {
+        "claim": "No fault at all, the motor was never opened.",
+        "verdict": "unverifiable_remote",
+        "evidence": "No motor/inside inspection photos are provided; photos only show the exterior/hob."
+      },
+      {
+        "claim": "Receipt and warranty card available.",
+        "verdict": "unverifiable_remote",
+        "evidence": "No receipt/warranty card is shown or readable in the photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The 2 middle 'burners' may be electric hotplates (not gas). If you need 6 gas burners, this would be a mismatch.",
+        "proof": "Ask for a short video showing each of the 2 middle zones turning on and heating (and confirm whether they are electric hotplates or gas burners).",
+        "if_unproven": "Price as a 4-gas-burner cooker (worst case for the '6 gas burners' expectation)."
+      },
+      {
+        "risk": "Only some burners may be working reliably; photos show them lit once, not that they stay stable or ignite every time.",
+        "proof": "Ask for a video where all 4 gas burners are ignited one-by-one from cold, then adjusted from low to high for 2\u20133 minutes each.",
+        "if_unproven": "Price as not guaranteed perfect working (worst case: treat as used with possible minor faults)."
+      },
+      {
+        "risk": "Missing/unclear oven/grill function: seller text doesn\u2019t clearly match what\u2019s shown; photos don\u2019t confirm an oven/grill cavity.",
+        "proof": "Ask for a photo/video opening any oven/grill door and showing the cavity and burner/heating element (if present).",
+        "if_unproven": "Price as hob-only functionality (no confirmed oven/grill)."
+      },
+      {
+        "risk": "Brand/model and condition cannot be verified remotely; could be a lower-grade unit or have cosmetic/structural issues not visible.",
+        "proof": "Ask for a clear close-up photo of the brand/model label and serial plate (if any) plus a photo of the underside/legs and any dents.",
+        "if_unproven": "Price at the lower end of comparable used table-top gas cookers."
+      }
+    ],
+    "proof_requests": [
+      "Video: ignite all 4 gas burners from cold, then demonstrate low-to-high adjustment for each (2\u20133 minutes each).",
+      "Confirm the 2 middle zones: are they electric hotplates or gas burners? Provide a video showing them heating and how they are powered/controlled.",
+      "Clear close-up photo of brand/model label/serial plate (and any rating plate).",
+      "Photos of receipt and warranty card (readable), or a screenshot/scan showing the details."
+    ],
+    "decision": "price",
+    "reason": "Photos show a table-top cooker with 4 gas burners plus 2 additional heat zones, but the 'perfect working' and 'barely used/new last year' parts are not provable from images. I will price it at worst-case as a used 4-gas-burner cooker without confirmed oven/grill and without assuming perfect condition.",
+    "price_pick": {
+      "low": 47000,
+      "high": 52000
+    }
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_joint",
+    "latency_ms": 8131,
+    "input_tokens": 3678,
+    "output_tokens": 1096,
+    "cost_usd": 0.005003,
+    "replayed": false,
+    "fixture_key": "4a53d2710c7aba651bf309c0fd422d5f",
+    "error": null
+  }
+}

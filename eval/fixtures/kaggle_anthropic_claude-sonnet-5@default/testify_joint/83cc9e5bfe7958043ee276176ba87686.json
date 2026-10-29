@@ -1,0 +1,71 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 and 1 show the front of a mono/half-cut cell solar panel, cells split into two horizontal sections (possibly two panels stacked or one split-cell design), with visible glare and reflections",
+      "Photo 2 and 3 show the back of a white-backsheet panel with a junction box in the center and two MC4-style connector cables, plus a small printed specification label near the junction box",
+      "The specification label in photo 3 is too small and low-resolution to read any wattage, brand, or model number",
+      "No visible brand markings, wattage stickers, or model plates are legible in any of the four photos",
+      "Timestamps/location metadata on all photos read 'Lagos, Nigeria' despite the buyer's market being Oyo",
+      "Background shows a cluttered shop/storage area with other panel stacks, cables, and sacks, consistent with a solar parts dealer"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Thank you for contacting Network Solar venture Please let us know how we can help you. We deal...",
+        "verdict": "unverifiable_remote",
+        "evidence": "No specific product claim (wattage, brand, condition) is made in the text; it is a generic greeting with no verifiable content."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual wattage of the panel is unknown; comparables range widely (300w to 650w) with very different prices",
+        "proof": "A clear close-up photo of the rear specification/rating label showing wattage, Voc, Isc, and model",
+        "if_unproven": "cannot be priced at any single worst-case point since the plausible wattage range spans the entire comparable list"
+      },
+      {
+        "risk": "Brand/manufacturer unverified, affecting authenticity and resale value (e.g. Canadian Solar, Longi, generic/no-name)",
+        "proof": "Legible photo of brand name/logo on frame or back label",
+        "if_unproven": "priced as generic/unbranded, i.e. at the low end of comparable range"
+      },
+      {
+        "risk": "New vs used condition not stated; cell cracks, hotspots, or delamination cannot be seen from reflections and glare in photos 0-1",
+        "proof": "Flat, non-glare daylight photo of full panel face plus a photo of any frame corner damage",
+        "if_unproven": "priced as used/worst-case condition"
+      },
+      {
+        "risk": "Seller location mismatch: photo metadata says Lagos while buyer market is Oyo, raising doubt about current stock location and delivery logistics",
+        "proof": "Screenshot of seller's current shop location or live video call showing the panel in Oyo",
+        "if_unproven": "treat as remote/out-of-market stock, added delivery/verification risk"
+      }
+    ],
+    "proof_requests": [
+      "Clear, well-lit close-up of the rear specification label showing wattage, model, and brand",
+      "A non-glare daylight photo of the full panel front to check for cracks or cell damage",
+      "Confirmation of current physical location of the panel (Oyo vs Lagos) with a recent dated photo or live video"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller's text gives no specification at all and the rear label in the photos is unreadable, so wattage and brand cannot be determined; without that, no single worst-case price can be set given comparables span a very wide range.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 21567,
+    "input_tokens": 4576,
+    "output_tokens": 1772,
+    "cost_usd": 0.026872,
+    "replayed": false,
+    "fixture_key": "83cc9e5bfe7958043ee276176ba87686",
+    "error": null
+  }
+}
