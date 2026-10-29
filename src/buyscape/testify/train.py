@@ -57,8 +57,9 @@ without proof". So:
   second run's target) teaches a habit the student cannot follow. The
   student learns to price by picking real adverts, never by writing a
   number (rule 4), and the lied-to twin's pick is the same, so a lie cannot
-  raise it. Dealers' new stock teaches the read only: a new price is not
-  what a used one is worth.
+  raise it. A dealer's new stock teaches the pick too, since the teacher
+  picks from the list and never aims at the new price; under the
+  asking-price rule it taught the read only.
 - One priced advert in six also meets a list of adverts for a clearly
   different kind, and refuses it (`refuse_target`), so a wrong name never
   prices off the wrong adverts.
@@ -421,8 +422,10 @@ def taught_pick(item: Item, answer: Reading, found: list[comps.Comparable],
     lost more money than the model picks they were tried against. The
     advert's asking price only chooses which picks to learn from, never what
     they are: an offer above it, or a high end under half of it, is a pick no
-    buyer should copy. The reason is written here, so no number the teacher
-    wrote reaches a target (rule 4)."""
+    buyer should copy. A dealer's new stock asks a new price, and a used
+    one's worth is often under half of it, so there only the offer is
+    checked. The reason is written here, so no number the teacher wrote
+    reaches a target (rule 4)."""
     if choice is None:
         return None, "no price pick: no teacher pick yet"
     if not choice.same_item or choice.price_pick is None:
@@ -433,7 +436,7 @@ def taught_pick(item: Item, answer: Reading, found: list[comps.Comparable],
     asking = item.answer.price.ngn
     if found[low].price_ngn > asking:
         return None, "no price pick: the teacher offered above the asking price"
-    if asking > 2 * found[high].price_ngn:
+    if asking > 2 * found[high].price_ngn and item.answer.price.used is not False:
         return None, "no price pick: the teacher's range is far under the asking price"
     what = answer_text(answer.identity.model_dump()) or "item"
     reason = (f"#{low} is an advert for the same {what} as the one seen." if low == high
@@ -547,12 +550,13 @@ def build(cases: list[tuple], rows: list[dict], labels: dict[str, dict], root: P
                 chats.append(("noproof", said, reading_request(item, kept, "clean")))
         if pool is not None and answer.decision == "price":
             found = comps.find(answer.identity, item.market, pool, item, own_photos=(hashes or {}).get(item.id, ()))
-            if item.answer.price.used is False:
-                choice, why = None, "no price pick: brand new, a new price"
-            elif not found:
+            if not found:
                 choice, why = None, "no price pick: no adverts found"
             elif pick_choice is not None:
                 choice, why = taught_pick(item, answer, found, pick_choice(pick_request(answer, found)))
+            elif item.answer.price.used is False:
+                # The asking-price rule would aim at a new price.
+                choice, why = None, "no price pick: brand new, a new price"
             else:
                 choice = pick_target(item, answer, found)
                 why = "price pick: the rule's" if choice else "no price pick: no matching advert near its price"

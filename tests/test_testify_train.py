@@ -393,3 +393,17 @@ def test_build_takes_the_teachers_pick_for_both_twins(tmp_path: Path):
     picks = {e["variant"]: json.loads(e["messages"][-1]["content"]) for e in examples if e["variant"].startswith("pick")}
     assert picks["pick"] == picks["pick_lie"] and picks["pick"]["price_pick"] == {"low": 1, "high": 2}
     assert len(asked) == 1 and asked[0].task == "testify_pick" and tally["price pick: the teacher's"] == 1
+
+
+def test_new_stock_teaches_the_teachers_pick_but_never_an_offer_above_its_price():
+    from buyscape.testify.answer import PriceChoice, PricePick
+
+    answer, _ = train.target(FAN, _read())
+    new = FAN.model_copy(update={"answer": FAN.answer.model_copy(update={
+        "price": PriceTruth(ngn=50000, used=False, observed_on="2026-10-17")})})
+    found = [_comp(0, 15000, "Standing fan"), _comp(1, 20000, "Ox standing fan"), _comp(2, 60000, "Standing fan")]
+    said = PriceChoice(same_item=True, price_pick=PricePick(low=0, high=1), reason="")
+    kept, _ = train.taught_pick(new, answer, found, said)  # a used worth well under half the new price
+    assert (kept.price_pick.low, kept.price_pick.high) == (0, 1)
+    dear = PriceChoice(same_item=True, price_pick=PricePick(low=2, high=2), reason="")
+    assert train.taught_pick(new, answer, found, dear)[1] == "no price pick: the teacher offered above the asking price"
