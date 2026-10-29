@@ -1,0 +1,73 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-sft500v2",
+  "response": {
+    "observations": [
+      "Three solar panels are shown in a row on a white metal frame.",
+      "The panels have a blue glass surface with a grid of cells.",
+      "A watermark 'NAGOTECH SOLAR' is visible across the center of the image.",
+      "The bottom of the image contains a technical specification: '25mm 6/188 1/135a IS090'.",
+      "The image is taken from a low angle, showing the side of the frame and the ground.",
+      "A person is partially visible on the left side of the frame."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panels",
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "original 650 Watts 144 cell",
+        "verdict": "unverified",
+        "evidence": "The technical specification '6/188 1/135a IS090' in photo 0 suggests a 6x188 cell configuration, which is a different standard from 144 cells. The actual wattage is not shown."
+      },
+      {
+        "claim": "direct Canadian used solar panel",
+        "verdict": "unverifiable_remote",
+        "evidence": "Origin and condition cannot be confirmed from a single photo."
+      },
+      {
+        "claim": "Battery is new, holds charge for 8 hours. Never repaired.",
+        "verdict": "unverified",
+        "evidence": "No photo shows this; it is the seller's word only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The panels may be damaged or have micro-cracks not visible in the photo.",
+        "proof": "A close-up photo of the glass surface of each panel.",
+        "if_unproven": "as having visible surface damage"
+      },
+      {
+        "risk": "The actual wattage and cell count may differ from the technical specification shown.",
+        "proof": "A photo of the manufacturer's label on the back of the panels.",
+        "if_unproven": "as a lower-wattage generic panel"
+      },
+      {
+        "risk": "The frame or mounting hardware may be rusted or damaged.",
+        "proof": "A photo of the underside of the panels and the frame.",
+        "if_unproven": "as having a damaged frame"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the manufacturer's label on the back of the panels to confirm wattage and cell count.",
+      "Close-up photos of the glass surface to check for cracks or scratches.",
+      "Photo of the underside of the panels to check for rust or damage."
+    ],
+    "decision": "price",
+    "reason": "The item is known from the photos. What they cannot prove is priced at its worst case until the proof asked for below arrives."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-sft500v2",
+    "task": "testify_read",
+    "latency_ms": 3646,
+    "input_tokens": 1430,
+    "output_tokens": 505,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "2dfee4039ae348dc73ef559d9982fc55",
+    "error": null
+  }
+}

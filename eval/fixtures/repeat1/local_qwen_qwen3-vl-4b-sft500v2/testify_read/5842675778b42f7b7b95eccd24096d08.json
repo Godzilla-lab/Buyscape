@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-sft500v2",
+  "response": {
+    "observations": [
+      "Photo 0 shows a large, yellow-painted engine block with a white fuel filter and various hoses and pipes attached.",
+      "Photo 1 shows the top of the engine, which is black and features the 'CAT' logo and the number '32' in the center.",
+      "The engine appears to be a used, heavy-duty industrial unit.",
+      "The photos contain a watermark for 'DNL EQUIPMENT SALES AND POSTED ON JIJI'.",
+      "The engine is shown in a workshop or garage setting."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "heavy-duty engine",
+      "brand": "CAT",
+      "model": "32",
+      "read_from": [
+        "photo 1 logo and text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Complete caterpiller c9 engine (parts)",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows a yellow engine block, while photo 1 shows a black engine block with 'CAT 32'. The C9 is a different model from the 32."
+      },
+      {
+        "claim": "Complete",
+        "verdict": "unverified",
+        "evidence": "The engine is shown in a workshop, but the state of the internal components (e.g., pistons, rings, valves) is not visible."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The engine may be seized or have internal mechanical failure.",
+        "proof": "A video of the engine being started and running.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The engine may have significant rust or structural damage to the block.",
+        "proof": "Close-up photos of the engine block and cylinder head.",
+        "if_unproven": "as heavily damaged"
+      },
+      {
+        "risk": "The engine may be missing critical components like the flywheel or crankshaft.",
+        "proof": "A photo of the engine with the crankshaft and flywheel visible.",
+        "if_unproven": "as missing key parts"
+      }
+    ],
+    "proof_requests": [
+      "Video of the engine running.",
+      "Close-up photos of the engine block and cylinder head.",
+      "Photo of the engine with the flywheel and crankshaft.",
+      "Photo of the engine identification plate."
+    ],
+    "decision": "price",
+    "reason": "The item is known from the photos. What they cannot prove is priced at its worst case until the proof asked for below arrives."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-sft500v2",
+    "task": "testify_read",
+    "latency_ms": 3205,
+    "input_tokens": 1854,
+    "output_tokens": 437,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "5842675778b42f7b7b95eccd24096d08",
+    "error": null
+  }
+}
