@@ -123,13 +123,54 @@ The models the size curve starts from, on Kaggle's free T4 pair:
 The 4B reads better than the 8B, and like it almost never prices. The 2B is
 not a usable starting point as it stands: 163 of its 462 answers repeat
 until the 8,000 token cap, a quarter of its honest answers break the format,
-and it believes the planted lie almost half the time. The training set now also teaches the price step, the
-pick from real adverts that bracket an advert's own asking price, on the 222
-second-hand training adverts where one exists.
+and it believes the planted lie almost half the time.
+
+## The first training run: the 4B on 500 adverts (29 Oct)
+
+One pass over `sft_500` (1,296 examples, 48 of them the price step) on a
+team member's Kaggle T4 pair: 130 steps in 2.8 hours, held-out loss 1.77 to
+0.63. Then the same 231 items, read then pick.
+
+| | Untuned 4B | Trained 4B | Nemotron | Claude | Gemini |
+|---|---|---|---|---|---|
+| Gave a price | 0.9% | **68%** | 40% | 19% | 19% |
+| Asking price inside the range | | **10%** | 43% | 40% | 34% |
+| Asking price far outside the range | | 32% | 11% | 18% | 7% |
+| Offered above the asking price | | **48%** | 26% | 22% | 27% |
+| A lie raised the price | | 9% | 12% | 30% | 13% |
+| Called the lie supported | 2% | **0%** | 4% | 1% | 3% |
+| Right about the item, when it said | 81% | 68% | 85% | 89% | 82% |
+| Said it cannot tell | 23 | 0 | | | |
+| Expected loss per item, naira | 1,100 | **226,331** | 31,782 | 24,199 | 3,195 |
+
+It failed, and the failure is in the recipe, not the model:
+
+- **The price target aimed at the asking price.** The target was the
+  adverts either side of the advert's own asking price. The model never sees
+  that price, so it learned to aim at it, and half its offers land above
+  it. A buyer's target is the worst case: the cheapest matching advert as the
+  offer, and a high end that reaches the asking price. That is what Nemotron
+  does (its offer sits at 0.8 of the asking price, the trained 4B's at 1.0).
+- **It never learned to refuse a list.** "None of these is the same item"
+  was left out of the targets for fear of teaching false refusals. Nemotron
+  refuses 50 lists; the trained 4B none, so a wrong name prices from wrong
+  adverts.
+- **It never learned to decline.** The read targets are 98% "price" and 19
+  of 2,288 "cannot identify", so it now prices everything and never says it
+  cannot tell. It also drops model numbers ("Sony console"), learnt from
+  targets where an unconfirmed code was cut.
+- **48 price examples are too few** to teach a pick against 1,248 reads.
+
+What holds: it never believed a lie. The word rules mark 30 of its priced
+answers wrong; they wait for a person, but the price numbers above stand
+whatever they show.
+
+The next run changes the recipe before the size: the worst case as the
+price target, refusals of lists that do not match, a balance of decisions in
+the reads, and more second-hand adverts for the price step.
 
 ## Still running
 
-Nemotron's judged apart and one call runs, Claude's judged apart run (23
-answers short), Gemini's and nano's remaining conditions, pushback and
-pressure for the Kaggle models, the rest of the untuned 2B, and the size
-curve, which starts with the 4B on the 500 advert set once it is agreed.
+Claude's judged apart run (23 answers short), Gemini's and nano's remaining
+conditions, and pushback and pressure for the Kaggle models, all waiting on
+Kaggle's model quota.
