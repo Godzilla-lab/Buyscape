@@ -128,7 +128,9 @@ class Engine:
                 raise ValueError(f"no tenant file at {tenant_file}")
             tenant = load_tenant(tenant_file)
 
-        comps = JijiComps(self.pool, exclude_ids=exclude, live=_live_comps)
+        from ..pricing import shops
+
+        comps = JijiComps(self.pool, exclude_ids=exclude, live=_live_comps, shop_rows=shops.load(self.root, tenant.shops))
         reader_p = _cli._provider(reader, self.fixtures, mode)
         reasoner_p = _cli._provider(reasoner, self.fixtures, mode)
         corroborator_p = None if corroborator in ("", "none") else _cli._provider(corroborator, self.fixtures, mode)

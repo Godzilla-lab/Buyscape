@@ -124,6 +124,11 @@ class Tenant(BaseModel):
     # category. Used only when the used market is too thin to price from and
     # dealers' new stock of the same thing is listed.
     resale_fraction: dict[str, list[float]] = Field(default_factory=dict)
+    # The shops whose new prices this business trusts for that share of new,
+    # cached by `buyscape fetch-shops`; and, for a shop whose search is closed
+    # to crawlers, the categories to read whole, each to the business's own.
+    shops: list[str] = Field(default_factory=list)
+    shop_categories: dict[str, dict[str, str]] = Field(default_factory=dict)
     # Written by staff in the back office, kept in <tenant>.questions.yaml.
     questions: list[TenantQuestion] = Field(default_factory=list)
     deal_costs: DealCosts = Field(default_factory=DealCosts)

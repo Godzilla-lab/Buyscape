@@ -23,6 +23,13 @@ nothing new there. These shops sell new goods, so their prices are for the
 Today that route uses only the dealers' new stock on Jiji. Only robots files
 were read; no shop page was fetched.
 
+Built on 29 October 2026 (`buyscape fetch-shops`, `pricing/shops.py`): Pointek
+through its WooCommerce store API, Slot from the product pages its sitemap
+lists (its search API refuses requests without its own site's headers, so it
+is not used), and Jumia by whole categories, since its search is closed to
+crawlers. Slot's pre-owned phones are kept apart and never used as a new
+price. A tenant names the shops it trusts in its own YAML.
+
 | Shop | Website | Robots | What it could add |
 |---|---|---|---|
 | Jumia | jumia.com.ng | Allows product and category pages; blocks filters, search and its app API | New prices for phones, appliances, TVs, generators |

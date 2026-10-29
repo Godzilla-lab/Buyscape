@@ -329,7 +329,9 @@ def run(
     # A listing must never be its own comparable price. The price pool is a
     # separate, larger cache; the test set is only a fallback when it is absent.
     pool = prices if prices.exists() else raw
-    comps = JijiComps(pool, exclude_ids=frozenset(c.id for c in cases))
+    from .pricing import shops
+
+    comps = JijiComps(pool, exclude_ids=frozenset(c.id for c in cases), shop_rows=shops.load(ROOT, tenant_config.shops))
     scrap = ScrapIndex(ROOT / "tenants" / "scrap_index_lagos.yaml")
     materials = MaterialsFloor(ROOT / "tenants" / "scrap_index_lagos.yaml")
     reader_p = _provider(reader, fixtures, mode)
@@ -503,7 +505,10 @@ def assess(
     catalogue = load_catalogue(ROOT / "catalogue")
     tenant_config = load_tenant(tenant_file)
     pool = prices if prices.exists() else ROOT / "eval" / "raw"
-    comps = JijiComps(pool, live=lambda key, cat, pages, used=True: [l.to_json() for l in jiji.search_used(key, cat, max_pages=pages, limit=20 * pages, used=used)])
+    from .pricing import shops
+
+    comps = JijiComps(pool, live=lambda key, cat, pages, used=True: [l.to_json() for l in jiji.search_used(key, cat, max_pages=pages, limit=20 * pages, used=used)],
+                      shop_rows=shops.load(ROOT, tenant_config.shops))
     scrap = ScrapIndex(ROOT / "tenants" / "scrap_index_lagos.yaml")
     materials = MaterialsFloor(ROOT / "tenants" / "scrap_index_lagos.yaml")
     reader_p = _provider(reader, fixtures, mode)
@@ -564,6 +569,38 @@ def ui(
 
     _load_dotenv()
     serve(ROOT, host=host, port=port, open_browser=not no_browser, tenant=tenant)
+
+
+@app.command("fetch-shops")
+def fetch_shops(
+    tenant: str = typer.Option("buyscrap_ng", help="Whose shops, and whose categories for Jumia."),
+    shop: list[str] = typer.Option(None, help="Only these shops. Default: every shop the tenant names."),
+    pages: int = typer.Option(5, help="Pages read per Jumia category, 40 products a page."),
+    limit: int = typer.Option(0, help="At most this many Slot product pages. 0 for all of them."),
+) -> None:
+    """Cache new asking prices from the shops a tenant trusts, for the share-of-new route. Free.
+
+    Pointek through its store API, Slot from its sitemap's product pages,
+    Jumia by whole categories since its search is closed to crawlers. Every
+    price keeps its shop, its product link and the day it was read."""
+    from .pricing import shops
+
+    config = load_tenant(ROOT / "tenants" / f"{tenant}.yaml")
+    chosen = shop or config.shops
+    with shops.client() as client:
+        for name in chosen:
+            if name not in shops.FETCHERS:
+                console.print(f"[red]No fetcher for {name!r}; known: {', '.join(shops.SHOPS)}[/red]")
+                continue
+            if name == "jumia":
+                rows = shops.fetch_jumia(client, config.shop_categories.get("jumia", {}), pages=pages)
+            elif name == "slot":
+                rows = shops.fetch_slot(client, limit=limit or None)
+            else:
+                rows = shops.fetch_pointek(client)
+            total = shops.save(rows, ROOT / shops.CACHE / f"{name}.json")
+            used = sum(r["condition"] != "new" for r in rows)
+            console.print(f"  {name}: {len(rows)} prices read ({used} pre-owned, kept apart), {total} cached")
 
 
 @app.command("fetch-buyscrap")

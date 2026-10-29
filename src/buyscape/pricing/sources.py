@@ -131,11 +131,14 @@ class JijiComps:
         cache_dir: Path,
         exclude_ids: frozenset[str] = frozenset(),
         live: Callable[[str, str, int, bool], list[dict]] | None = None,
+        shop_rows: list[dict] | tuple = (),
     ) -> None:
         """`live(query, category, pages, used)` fetches listings the cache lacks.
 
         None keeps the source offline, which is what an eval run wants: a
-        recorded run must not depend on what Jiji shows today.
+        recorded run must not depend on what Jiji shows today. `shop_rows`
+        adds the new prices cached from the shops the tenant trusts
+        (`shops.load`), each one sourced to its shop.
         """
         self._rows: list[dict] = []
         # A dealer's new stock is never a used-price comp. It is kept apart,
@@ -151,6 +154,7 @@ class JijiComps:
                 if row.get("id") in exclude_ids:
                     continue
                 (self._rows if row.get("is_used") else self._new_rows).append(row)
+        self._new_rows += [r for r in shop_rows if r.get("id") not in exclude_ids]
 
     def fetch(
         self, category: str, model_key: str, limit: int = 12, faulty: bool = False, by_type: bool = False,
@@ -229,7 +233,7 @@ class JijiComps:
         scored.sort(key=lambda pair: pair[0], reverse=True)
         return [
             Observation(
-                source=self.source_id_new if new else self.source_id,
+                source=row.get("source") or (self.source_id_new if new else self.source_id),
                 kind="asking_new" if new else "asking",
                 amount=float(row["price_ngn"]),
                 currency="NGN",

@@ -66,6 +66,7 @@ money moves. The promise is "nothing hidden gets priced", not "we see inside".
                         --reasoner google/gemini-3.8-flash
     uv run buyscape run --preset balanced --budget-usd 0.5 stop once real spend hits the cap
     uv run buyscape fetch-buyscrap            cache the tenant's own adverts with photos
+    uv run buyscape fetch-shops               new prices from the tenant's shops (Pointek, Slot, Jumia), for the share-of-new route
     uv run buyscape run --preset balanced --set buyscrap
     uv run buyscape spend                     every run's cost and the cost per item
     uv run buyscape testify-convert           build the Testify benchmark items, free
