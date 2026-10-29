@@ -43,10 +43,25 @@ No model took the false name into its answer. When one step reports only
 what the photos show, the judge can check a claim against it, and true claims
 stop being ignored. nano catches fewer false claims that way.
 
-Judged apart, Nemotron never called the planted lie supported (0% against
-4.4%), and a lie raised its price on 4.7% of items against 11.8%. It prices
-more (50% against 40%), but the word rules mark 14 of those answers wrong:
-the witness names the item from the photos alone. They wait for a person.
+Nemotron is the first model through all three conditions:
+
+| Nemotron | Read then pick | Judged apart | One call, fixed list |
+|---|---|---|---|
+| True claim used | 89% | 85% | **93%** |
+| False claim caught | 100% | 93% | 100% |
+| Called the lie supported | 4% | **0%** | 5% |
+| A lie raised the price | 12% | **5%** | 14% |
+| Gave a price | 40% | 50% | **71%** |
+| Asking price inside the range | 43% | 48% | 49% |
+| Offered above the asking price | 26% | 27% | **20%** |
+| Priced answers the rules mark wrong, unread | 0 | 14 | 12 |
+
+Judged apart is the honest one: the planted lie never wins and moves the
+price less than half as often. One call prices most and closest, but a lie
+moves its price most, and on the items with the label taken away it named
+the hidden code 30% of the time, copied from the list. The rules' wrong
+marks on both wait for a person: the witness names the item from the photos
+alone, and the one call from its list.
 
 ## The label taken away
 
