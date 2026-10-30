@@ -1,0 +1,97 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows a used car engine on a workshop floor, turbocharger and intercooler piping visible, wiring harness and sensors attached.",
+      "No engine code, casting number, or manufacturer plate is legible anywhere in the photo.",
+      "Watermark reads 'CAMON 40' (phone camera brand), not related to the engine.",
+      "No vehicle, VIN, or fitment label visible to confirm which car model this engine belongs to.",
+      "No video or sound clip showing the engine running is provided despite the 'tested and working' claim."
+    ],
+    "identity": {
+      "status": "unknown",
+      "kind": "used car engine (turbocharged, possibly diesel)",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Direct Japan with 2 months guarantee",
+        "verdict": "unverifiable_remote",
+        "evidence": "No paperwork, import sticker, or guarantee document shown in photo 0."
+      },
+      {
+        "claim": "Tokunbo, direct from Belgium",
+        "verdict": "contradicted",
+        "evidence": "Contradicts the same seller's claim of 'Direct Japan' in the same message; origin cannot both be Japan and Belgium."
+      },
+      {
+        "claim": "Tested and working",
+        "verdict": "unverified",
+        "evidence": "No start-up video, compression test, or sound clip provided; photo shows a static, disconnected engine."
+      },
+      {
+        "claim": "No knock",
+        "verdict": "unverified",
+        "evidence": "Cannot be assessed from a still photo; requires audio/video of running engine."
+      },
+      {
+        "claim": "Low mileage",
+        "verdict": "unverifiable_remote",
+        "evidence": "No odometer, service sticker, or mileage document visible; engines alone carry no mileage proof."
+      },
+      {
+        "claim": "Never opened",
+        "verdict": "unverifiable_remote",
+        "evidence": "No sign of factory seals, untouched bolt paint, or sealed gasket shown in photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine model/fitment unknown, which drives price enormously (from basic 4-cylinder petrol to premium diesel/V-engine).",
+        "proof": "Clear close-up of the engine code/casting number stamped on the block, or a VIN/parts tag.",
+        "if_unproven": "cannot be priced at all, since worst-case range spans the entire comparable list"
+      },
+      {
+        "risk": "Internal condition (compression, knocking, oil sludge) cannot be seen in a static photo.",
+        "proof": "Video of the engine running/idling with audible sound, plus a compression test printout.",
+        "if_unproven": "priced as non-running / worst case"
+      },
+      {
+        "risk": "Origin claim is self-contradictory (Japan vs Belgium), raising doubt about the whole history and documentation.",
+        "proof": "Import/customs paperwork or auction sheet showing country of origin and mileage.",
+        "if_unproven": "treated as unverifiable origin, no premium for 'low mileage' or 'direct import' claims"
+      },
+      {
+        "risk": "Turbocharger and sensor wiring condition unknown; turbo failure is costly and common in used Tokunbo engines.",
+        "proof": "Close-up photos of turbo shaft play and intact wiring/connectors.",
+        "if_unproven": "priced as if turbo needs replacement"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the engine code/casting number stamped on the block (e.g., near the cylinder head or block face).",
+      "A video of the engine starting and idling with audible sound, to check for knocking.",
+      "Any import/customs document or auction sheet showing mileage and country of origin.",
+      "Close-up of the turbocharger and wiring harness for visible wear or damage.",
+      "Clarification from the seller on the real country of origin (Japan or Belgium)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The engine's make/model cannot be read from the single photo, and comparable prices vary by over 6x depending on engine type, so no worst-case price can be set without a legible engine code or fitment proof; the seller's origin claim is also internally contradictory.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 29142,
+    "input_tokens": 3183,
+    "output_tokens": 2628,
+    "cost_usd": 0.029093,
+    "replayed": false,
+    "fixture_key": "861e0a4c5faa64814a8e92d792eb95ff",
+    "error": null
+  }
+}

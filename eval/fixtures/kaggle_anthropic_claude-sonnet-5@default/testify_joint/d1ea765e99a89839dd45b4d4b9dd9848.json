@@ -1,0 +1,107 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Single photo shows a chest freezer (box-type) with a stainless-steel lid and grey/white body.",
+      "A sticker on the front reads '3 YEARS WARRANTY, 120 HOURS COOLING RETENTION' with icons.",
+      "No brand name, model number, or capacity label is legible anywhere in the photo.",
+      "Unit appears cosmetically clean with no visible dents or rust; floor and wall in background look like a storage room, not a shop.",
+      "No power cord, plug, compressor view, or display showing it is running is visible.",
+      "Watermark 'POSTED ON JIJI KICKS' suggests the image is a reused/stock listing photo rather than a fresh photo of the actual unit for sale."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "chest freezer, 250L claimed",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 sticker (only shows '3 YEARS WARRANTY, 120 HOURS COOLING RETENTION', no brand/model)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "250-liter capacity",
+        "verdict": "unverified",
+        "evidence": "No capacity label or nameplate visible in photo 0."
+      },
+      {
+        "claim": "Low voltage operation",
+        "verdict": "unverifiable_remote",
+        "evidence": "No spec plate or technical label visible."
+      },
+      {
+        "claim": "120 Hours Cooling Retention",
+        "verdict": "supported",
+        "evidence": "Sticker on front of unit in photo 0 states this."
+      },
+      {
+        "claim": "In working condition",
+        "verdict": "unverified",
+        "evidence": "No plugged-in, running, or frost/cooling evidence shown."
+      },
+      {
+        "claim": "Barely used, bought new last year, motor never opened",
+        "verdict": "unverified",
+        "evidence": "No wear/usage indicators visible; purchase history not shown."
+      },
+      {
+        "claim": "Receipt and warranty card available",
+        "verdict": "unverifiable_remote",
+        "evidence": "No receipt/warranty card photographed."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Freezer may not actually cool or hold temperature as claimed.",
+        "proof": "A video of the unit plugged in, running, and showing frost build-up or a thermometer reading after some hours.",
+        "if_unproven": "priced as not working / for parts"
+      },
+      {
+        "risk": "True capacity could differ from the claimed 250L.",
+        "proof": "Clear photo of the manufacturer's nameplate or capacity sticker inside the lid.",
+        "if_unproven": "priced as the smallest plausible comparable capacity"
+      },
+      {
+        "risk": "Brand/model unknown, which affects resale value and spare parts availability.",
+        "proof": "Close-up photo of the brand logo or model plate.",
+        "if_unproven": "priced as a generic unbranded chest freezer"
+      },
+      {
+        "risk": "Compressor/motor condition cannot be confirmed despite seller's claim it was 'never opened'.",
+        "proof": "Photo of the compressor unit and a short video of it running without unusual noise.",
+        "if_unproven": "priced as risk of compressor failure, i.e., worst case"
+      },
+      {
+        "risk": "Receipt/warranty card claimed but not shown, so age and new-purchase claim can't be confirmed.",
+        "proof": "Photo of the receipt and warranty card with date and model matching the unit.",
+        "if_unproven": "priced as unknown age, assume older/used"
+      }
+    ],
+    "proof_requests": [
+      "Video of the freezer plugged in and running, ideally with visible frost or a thermometer reading.",
+      "Close-up photo of the nameplate/capacity/model sticker (usually inside lid or on back).",
+      "Photo of the receipt and warranty card showing purchase date and matching model.",
+      "Photo of the compressor/back of unit to check for rust, leaks, or tampering."
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a chest freezer by type, but no brand, model, or capacity can be read from the photo, and no proof of working condition is shown, so it must be priced at worst case (unverified working, generic/unbranded) while still comparing against similar-sized used chest freezers.",
+    "price_pick": {
+      "low": 0,
+      "high": 3
+    }
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 28894,
+    "input_tokens": 3348,
+    "output_tokens": 2670,
+    "cost_usd": 0.029843,
+    "replayed": false,
+    "fixture_key": "d1ea765e99a89839dd45b4d4b9dd9848",
+    "error": null
+  }
+}

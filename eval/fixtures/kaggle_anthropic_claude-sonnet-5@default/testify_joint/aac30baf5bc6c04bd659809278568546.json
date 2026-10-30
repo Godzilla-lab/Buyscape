@@ -1,0 +1,82 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: Front of a DSLR body with 'Canon' logo, 'EOS 5D' and 'Mark II' labels clearly visible; body cap is on, no lens attached.",
+      "Photo 1: Rear of the same body, LCD screen appears blank/off, 'Canon' logo visible, no memory card or battery compartment shown open.",
+      "Photo 2: Bottom plate shows a label reading 'Canon DS126201', serial number, and 'Made in Japan' markings, consistent with a Canon 5D Mark II body.",
+      "No lens, battery, charger, strap, or box is shown in any photo.",
+      "No power-on, shutter count, or image-sample shot is provided."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "full-frame DSLR camera body",
+      "brand": "Canon",
+      "model": "EOS 5D Mark II",
+      "read_from": [
+        "photo 0 front badge",
+        "photo 2 bottom plate label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "The brand is Sony.",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 and photo 2 both show 'Canon' branding and 'EOS 5D Mark II' / 'Canon DS126201' labels, not Sony."
+      },
+      {
+        "claim": "Canon EOS 5D Mark II is a full-frame DSLR with a 21.1-megapixel sensor (generic description, not a specific condition claim).",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is generic product text, not a claim about this specific unit's condition or functionality."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Camera may not power on or may have sensor/shutter faults (common on old 5D II units).",
+        "proof": "A clip or photo of the camera powered on, showing the LCD live view and a test shot.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "No lens, battery, or charger included, which are needed for a usable kit.",
+        "proof": "Photo showing included accessories (battery, charger, lens) alongside the body.",
+        "if_unproven": "priced as body-only, accessories excluded"
+      },
+      {
+        "risk": "Shutter count unknown; high-mileage units lose value and reliability.",
+        "proof": "A photo of the shutter count from a diagnostic app or EXIF data of a test shot.",
+        "if_unproven": "priced at worst case as high-mileage/unknown"
+      },
+      {
+        "risk": "Seller's text misidentifies the brand as Sony, raising doubt about the reliability of the rest of the listing's claims.",
+        "proof": "A clear, consistent seller description matching the photographed item.",
+        "if_unproven": "treated as an unreliable listing description; price based on photos only"
+      }
+    ],
+    "proof_requests": [
+      "Video of the camera powering on and taking a test photo.",
+      "Photo of the shutter count display or a test image's EXIF data.",
+      "Photo showing battery, charger, and any lens included in the sale.",
+      "Close-up of the sensor (with lens off) to check for dust, scratches, or fungus."
+    ],
+    "decision": "price",
+    "reason": "Photos clearly identify a Canon EOS 5D Mark II body (no lens/accessories, power-on unverified), so it can be priced at worst case as a non-verified, body-only full-frame DSLR despite the seller's contradictory Sony claim.",
+    "price_pick": {
+      "low": 0,
+      "high": 7
+    }
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 25304,
+    "input_tokens": 4159,
+    "output_tokens": 2279,
+    "cost_usd": 0.027555,
+    "replayed": false,
+    "fixture_key": "aac30baf5bc6c04bd659809278568546",
+    "error": null
+  }
+}

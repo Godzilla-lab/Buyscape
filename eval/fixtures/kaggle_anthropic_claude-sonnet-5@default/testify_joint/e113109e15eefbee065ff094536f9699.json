@@ -1,0 +1,88 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: Front of a black DSLR body with 'Canon', 'EOS', '5D', 'Mark II' badges visible; body cap attached, no lens mounted.",
+      "Photo 1: Rear of the same body showing LCD screen (appears dark/off, no image or menu visible), control buttons, 'Canon' logo, power switch.",
+      "Photo 2: Underside of body showing a manufacturer label reading 'Canon DS126201', 'DC 8.1V', 'Made in Japan', and a serial number '3761814763'.",
+      "No lens, battery, charger, memory card, strap, or box visible in any photo.",
+      "No power-on test, shutter count screen, or sample image shown to confirm the camera actually functions.",
+      "No visible shutter count, sensor photo, or test shot."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DSLR camera (full-frame, body only)",
+      "brand": "Canon",
+      "model": "EOS 5D Mark II",
+      "read_from": [
+        "photo 0 front badge",
+        "photo 2 label 'Canon DS126201'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "The Canon EOS 5D Mark II is a full-frame DSLR camera known for its 21.1-megapixel sensor",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a generic description of the model line, not a tested claim about this specific unit; no sensor or spec screen shown."
+      },
+      {
+        "claim": "Implied working condition (no fault stated)",
+        "verdict": "unverified",
+        "evidence": "Photo 1 shows the LCD off with no menu, image, or battery indicator; no power-on or shutter-fire clip provided."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Camera may not power on or may have shutter/mirror/sensor faults",
+        "proof": "A clip or photo of the camera powered on, showing live view or a menu screen, plus an audible/visual shutter actuation",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "No lens included, affecting usability and comparables that bundle a lens",
+        "proof": "Photo of a lens being sold with the body, or explicit confirmation it is body-only",
+        "if_unproven": "priced as body-only, no lens"
+      },
+      {
+        "risk": "Shutter count unknown; high-mileage units lose value",
+        "proof": "Screenshot from EOS Info or third-party shutter-count tool",
+        "if_unproven": "priced as high-use/unknown shutter count"
+      },
+      {
+        "risk": "Possible counterfeit or re-badged body despite matching label",
+        "proof": "Clear photo of serial number matching Canon's official lookup, or video showing menu firmware version",
+        "if_unproven": "priced as unverified authenticity, but photo 2 label format is consistent with genuine 5D Mark II markings"
+      },
+      {
+        "risk": "Battery, charger, memory card not shown; may not be included",
+        "proof": "Photo of included accessories (battery, charger)",
+        "if_unproven": "priced as body-only without accessories"
+      }
+    ],
+    "proof_requests": [
+      "Video of the camera powering on and firing the shutter",
+      "Screenshot of shutter count from camera menu",
+      "Photo of any included lens, battery, and charger",
+      "Close-up photo of sensor/mirror box to check for dust, scratches, or fungus"
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identified as a Canon EOS 5D Mark II body via matching badge and label, but with no proof of power-on, shutter function, or included lens/accessories, it must be priced at worst case as a body-only, unverified-working unit, in line with the cheapest comparable units.",
+    "price_pick": {
+      "low": 0,
+      "high": 2
+    }
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 39325,
+    "input_tokens": 4159,
+    "output_tokens": 3436,
+    "cost_usd": 0.039125,
+    "replayed": false,
+    "fixture_key": "e113109e15eefbee065ff094536f9699",
+    "error": null
+  }
+}

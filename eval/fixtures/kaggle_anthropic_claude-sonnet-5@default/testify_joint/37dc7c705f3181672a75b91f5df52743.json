@@ -1,0 +1,74 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Single solar panel photographed at an angle, leaning against an interior wall near a glass door.",
+      "Black-framed monocrystalline panel with visible half-cut cell pattern (horizontal split line across middle, typical of 120/144 half-cell panels).",
+      "A faint watermark overlay reads 'INNOSON GLOBAL GROUP' across the panel face \u2014 this appears to be the seller's business stamp, not a manufacturer brand printed on the panel itself.",
+      "No visible rating label, junction box sticker, or wattage/voltage plate on the back or frame.",
+      "No scale reference (ruler, person, or known object) to estimate physical dimensions.",
+      "Panel surface looks clean and unscratched, but this single partial-angle shot does not show corners, back junction box, or cables."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 (no legible brand/model/wattage marking visible)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Contact us for ur Solar Energy Solution",
+        "verdict": "unverifiable_remote",
+        "evidence": "Generic business pitch in seller's text; not a specific, checkable claim about this item."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Wattage/power rating unknown \u2014 this is the primary price driver for solar panels and comparables range widely by wattage (42,000\u2013155,000 NGN).",
+        "proof": "Close-up photo of the rear rating label/sticker showing Wp, Voc, Isc.",
+        "if_unproven": "Cannot be priced at all without this; no safe worst-case band can be chosen."
+      },
+      {
+        "risk": "Brand/manufacturer unverified \u2014 watermark is the seller's company name, not a panel brand.",
+        "proof": "Clear photo of manufacturer logo/name printed on the panel or frame.",
+        "if_unproven": "Treat as unbranded/generic, priced at the lower end of comparable wattage bracket once wattage is known."
+      },
+      {
+        "risk": "New vs used condition unverified \u2014 no shot of frame corners, backsheet, or junction box for wear, cracks, or hot-spot staining.",
+        "proof": "Photos of all four corners, the junction box/cables, and the backsheet.",
+        "if_unproven": "Price as used/worst condition."
+      },
+      {
+        "risk": "Single unit vs lot \u2014 unclear if only one panel is for sale or a batch.",
+        "proof": "Wide shot showing full stock/quantity available.",
+        "if_unproven": "Price as single unit only."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the rear rating label showing wattage (Wp), Voc, Isc, and model number.",
+      "Photo of manufacturer branding/logo on the panel.",
+      "Photos of all four frame corners and the junction box/cables for condition check.",
+      "Confirmation and photo of quantity available (single panel or lot)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo shows a generic unbranded-looking monocrystalline panel but no visible wattage, model, or rating label, and solar panel prices vary enormously by wattage; without that figure not even a worst-case price tier can be chosen.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 20166,
+    "input_tokens": 3516,
+    "output_tokens": 1800,
+    "cost_usd": 0.025032,
+    "replayed": false,
+    "fixture_key": "37dc7c705f3181672a75b91f5df52743",
+    "error": null
+  }
+}

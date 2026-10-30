@@ -1,0 +1,91 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Single photo shows a chest freezer, white/silver body, closed lid, standing on a bare concrete floor.",
+      "A sticker on the front reads '3 YEARS WARRANTY, 120 HOURS COOLING RETENTION' with icons, but this is a manufacturer promotional sticker, not a test result.",
+      "No brand name, model number, or capacity marking is legible anywhere in the photo.",
+      "No power cord plugged in, no frost/ice visible inside (lid closed), no view of the compressor or back condenser unit.",
+      "Surface shows some dirt/stain marks near the base and a small sticker patch missing/peeling bottom-left, suggesting used condition."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "chest freezer",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 (sticker visible but shows only warranty/cooling claim, not brand or model)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "250-liter capacity",
+        "verdict": "unverifiable_remote",
+        "evidence": "No capacity label or size reference visible in photo 0."
+      },
+      {
+        "claim": "Low voltage operation",
+        "verdict": "unverifiable_remote",
+        "evidence": "No rating plate or spec sticker legible in photo 0."
+      },
+      {
+        "claim": "120 Hours Cooling Retention",
+        "verdict": "unverified",
+        "evidence": "Sticker in photo 0 shows this as a printed manufacturer claim, not a demonstrated test result."
+      },
+      {
+        "claim": "In working condition",
+        "verdict": "unverified",
+        "evidence": "No power-on shot, no frost/cold interior view, no compressor sound/clip provided."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Freezer may not power on or cool at all (compressor failure is common in used units)",
+        "proof": "Video of unit plugged in, compressor running, and frost forming inside after some minutes",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Actual capacity may differ from claimed 250L",
+        "proof": "Photo of capacity/rating plate or interior tape-measure shot",
+        "if_unproven": "priced as base/unverified capacity, not premium-sized unit"
+      },
+      {
+        "risk": "Hidden rust, corrosion or gas leak on rear condenser/compressor unit",
+        "proof": "Clear photo of the back/underside of the freezer",
+        "if_unproven": "priced as risk of major repair needed"
+      },
+      {
+        "risk": "Door/lid seal may be damaged causing poor retention despite sticker claim",
+        "proof": "Close-up photo of rubber gasket all around the lid",
+        "if_unproven": "priced as seal possibly compromised"
+      }
+    ],
+    "proof_requests": [
+      "Video of the freezer plugged in and running, showing compressor sound and door open with frost forming",
+      "Clear photo of the rating/capacity plate (usually inside lid or on back)",
+      "Photo of the rear compressor unit and condenser coils",
+      "Close-up of the door gasket/seal condition"
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identifiable as a used chest freezer by type, but none of the seller's performance claims (capacity, voltage, cooling retention, working condition) are demonstrated in the single photo, so it must be priced at worst case as a possibly non-working unit of this type.",
+    "price_pick": {
+      "low": 0,
+      "high": 2
+    }
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 28685,
+    "input_tokens": 3311,
+    "output_tokens": 2410,
+    "cost_usd": 0.024766,
+    "replayed": false,
+    "fixture_key": "81129c10cc1d3f9c9d0a73b1e98b51ae",
+    "error": null
+  }
+}

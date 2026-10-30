@@ -1,0 +1,99 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: Front of a black DSLR body with 'Canon' and 'EOS 5D' lettering visible, body cap on, no lens attached, sitting on a blue sofa with a TV in background.",
+      "Photo 1: Rear view showing Canon logo, LCD screen (appears off/blank), control buttons, viewfinder, hot-shoe cover on.",
+      "Photo 2: Front view again, 'Canon' logo and small top LCD panel showing some digits, 'MarkIII' text visible on the lower right of the body grip area.",
+      "No lens is attached in any photo; body cap is on in photo 0 and 2.",
+      "No batteries, charger, or Godox trigger are visible in any of the three photos.",
+      "Seller's condition description is cut off mid-sentence ('it has a...'), leaving the actual condition statement missing.",
+      "No shot of the camera powered on, no shutter count screen, no sample image shown."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DSLR camera body",
+      "brand": "Canon",
+      "model": "EOS 5D Mark III",
+      "read_from": [
+        "photo 0 (EOS 5D text)",
+        "photo 2 (MarkIII text)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Used CANON 5D Mark III",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows 'EOS 5D' and photo 2 shows 'MarkIII' lettering on the body."
+      },
+      {
+        "claim": "2 Batteries included",
+        "verdict": "unverifiable_remote",
+        "evidence": "No batteries shown in any of the 3 photos."
+      },
+      {
+        "claim": "1 Battery Charger included",
+        "verdict": "unverifiable_remote",
+        "evidence": "No charger shown in any of the 3 photos."
+      },
+      {
+        "claim": "1 Godox mini Trigger included",
+        "verdict": "unverifiable_remote",
+        "evidence": "No trigger shown in any of the 3 photos."
+      },
+      {
+        "claim": "Condition: it has a... (statement incomplete)",
+        "verdict": "unverified",
+        "evidence": "Text is truncated; no condition detail is actually given, and no functional proof (power-on, screen, shutter count) is shown."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Camera may not power on or have a faulty sensor/shutter; LCD appears blank/off in photo 1.",
+        "proof": "A clip or photo of the camera powered on showing live view and a shutter count screen (via menu or EOSInfo).",
+        "if_unproven": "priced as not working / body-only worst case"
+      },
+      {
+        "risk": "Claimed accessories (2 batteries, charger, Godox trigger) may not actually accompany the sale.",
+        "proof": "A single photo showing the camera together with the two batteries, the charger, and the Godox trigger, ideally with the trigger's model name visible.",
+        "if_unproven": "priced as body only, no accessories"
+      },
+      {
+        "risk": "Seller's condition statement is cut off, possibly hiding a defect (e.g., shutter count, sensor dust, dented mount) that was meant to be disclosed.",
+        "proof": "Full, uncut condition text from seller, plus close-up photos of the lens mount, sensor, and LCD screen for scratches/cracks.",
+        "if_unproven": "priced at worst case for cosmetic/functional condition"
+      },
+      {
+        "risk": "No lens is included, so buyer needs to budget separately for one.",
+        "proof": "Confirmed by photos showing body cap only; no lens photo provided.",
+        "if_unproven": "priced as body alone"
+      }
+    ],
+    "proof_requests": [
+      "Video of the camera powering on, showing live view on the LCD and the shutter count via Canon menu.",
+      "Photo of the camera together with the 2 batteries, charger, and Godox trigger for verification.",
+      "The complete, uncut condition description from the seller.",
+      "Close-up photos of the sensor (with mirror up) and the lens mount for scratches, fungus, or dust."
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a Canon EOS 5D Mark III body (no lens) from the visible lettering in photos 0 and 2, but working condition is unverified (blank LCD, no power-on proof) and the claimed accessories are not shown, so it must be priced at worst case as a body-only unit matching the one directly comparable listing.",
+    "price_pick": {
+      "low": 9,
+      "high": 9
+    }
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 42036,
+    "input_tokens": 4988,
+    "output_tokens": 3798,
+    "cost_usd": 0.044403,
+    "replayed": false,
+    "fixture_key": "98423627811979c8284e4ef612c4a627",
+    "error": null
+  }
+}
