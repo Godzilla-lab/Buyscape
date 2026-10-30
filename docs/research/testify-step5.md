@@ -261,7 +261,9 @@ cannot tell which adverts on a list are the same item, and a good model
 can. Even the rule that reads the asking price, which no student can,
 offers above it 28% of the time. So the third run learns a teacher's own
 pick from the list (`taught_pick`): the pick step sends text only, so any
-strong model can teach it, and Nemotron does so for free. The asking price
+strong model can teach it. Gemini taught it, the model whose own picks lose
+least; Nemotron, free but rate-limited after a day's reads, answered too
+few in time. The asking price
 only chooses which of the teacher's picks to learn from (none that offers
 above it, none whose high end is under half of it), never what they are.
 
@@ -271,8 +273,51 @@ brand alone and 2 of the 13 it names by kind; the build had been turning
 every one of its teacher's reads into a price. In the third run's set, a
 branded advert named without its model asks for the label instead.
 
+## The third training run: a teacher's picks (30 Oct)
+
+The same 4B on `sft_r3`: 526 adverts and 1,849 chats, every advert that
+teaches the price step first. 303 Gemini picks with their lied-to twins
+(Gemini answered all 549 training lists, found no matching advert on 178,
+and 68 of its picks were left out for offering above the asking price or
+falling far under it), 68 lists for another kind to refuse, and reads that
+ask for the label on 24% of adverts. Dealers' new stock teaches the pick
+too. One full pass on the same T4 pair: 220 steps in 4.7 hours, held-out
+loss 2.32 to 0.42.
+
+| | Run 2 | Run 3 | Nemotron | Claude | Gemini |
+|---|---|---|---|---|---|
+| Gave a price | 64% | 65% | 40% | 19% | 19% |
+| Typical offer, against the asking price | 0.75 | 0.74 | 0.80 | 0.78 | 0.86 |
+| Offered above the asking price | 26% | 23% | 26% | 22% | 27% |
+| Asking price inside the range | 17% | **49%** | 43% | 40% | 34% |
+| Asking price far outside the range | 37% | 15% | 11% | 18% | 7% |
+| A lie raised the price | 17% | **12%** | 12% | 30% | 13% |
+| Called the lie supported | 1% | **0.4%** | 4% | 1% | 3% |
+| Lists refused as another item, both twins | 30 | 18 | 92 | 71 | 72 |
+| Right about the item, when it said | 70% | 78% | 85% | 89% | 82% |
+| Priced answers the rules mark wrong, unread | 26 | 13 | | | |
+| Expected loss per item, naira | 70,661 | **55,208** | 31,782 | 24,199 | 3,195 |
+
+It worked on the pick and not yet on the money. Its range now holds the
+asking price more often than any model's, it lands far off less than half
+as often as run 2, a lie moves its price no more than Nemotron's, and on its
+own lists its picks now beat every rule (58,073 naira overpaid per item
+against 78,014 for the best rule; run 2's lost to the rules). The money
+lost per item fell by a fifth, but it is still about twice Nemotron's and
+Claude's, and seventeen times Gemini's.
+
+The money is in a few items. Three carry 64% of what it overpays: the
+Caterpillar engine Claude also overpays on (offered 7,900,000 against an
+asking price of 3,950,000), a Lumix camera offered 4,000,000 against
+600,000, and a motorcycle offered from dearer bikes. What Gemini does that
+the student does not is decline: it prices 19% of items, the student 65%.
+Its reads still say "price" for 222 of 231 clean items, asking mostly when
+a seller makes a claim (22 of the lied-to items). And the 178 lists Gemini
+refused taught nothing: only lists of another kind are taught as
+refusals, so a list of dearer bikes for a cheap one is never refused.
+
 ## Still running
 
 Gemini's, Claude's and nano's remaining conditions, and pushback and
 pressure for the Kaggle models, wait on Kaggle's model quota: both accounts
-ran out on 29 Oct.
+ran out again on 30 Oct.
