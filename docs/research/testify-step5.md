@@ -65,6 +65,25 @@ the hidden code 30% of the time, copied from the list. The rules' wrong
 marks on both wait for a person: the witness names the item from the photos
 alone, and the one call from its list.
 
+Claude is the second model through all three (30 Oct):
+
+| Claude | Read then pick | Judged apart | One call, fixed list |
+|---|---|---|---|
+| True claim used | 44% | **78%** | 41% |
+| False claim caught | **96%** | 81% | **96%** |
+| Called the lie supported | 1% | 1% | 2% |
+| A lie raised the price | 30% | **16%** | 22% |
+| Gave a price | 19% | 32% | **55%** |
+| Asking price inside the range | **40%** | 33% | **40%** |
+| Offered above the asking price | 22% | 27% | **21%** |
+| Priced answers the rules mark wrong, unread | 1 | 9 | 9 |
+
+The same pattern as Nemotron's. Judged apart, a lie moves Claude's price
+about half as often and a true claim is used, at the cost of catching fewer
+false ones. One call with a fixed list prices nearly three times as often
+as read then pick, no less closely, and a lie moves it less than there,
+though more than judged apart.
+
 ## The label taken away
 
 Ten branded items, read then pick:
