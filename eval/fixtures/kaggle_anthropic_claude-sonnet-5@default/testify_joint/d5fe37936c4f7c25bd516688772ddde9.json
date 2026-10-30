@@ -1,0 +1,71 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 and photo 1 show the same all-black monocrystalline solar panel leaning against a wall, outdoors.",
+      "Watermark reads 'INNOSON GLOBAL GROUP' and 'POSTED ON JIJI' overlaid on both images.",
+      "No visible rating label, specification sticker, wattage, cell count, or brand name on the panel frame or back sheet in either photo.",
+      "Background shows other panels and frames stacked, suggesting a dealer yard rather than a single item for sale.",
+      "No inverter, battery, or charge controller is shown despite being mentioned in the seller's text."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "all-black monocrystalline solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "High Quality Solar Panels, Inverters, Lithium & Tubular Batteries, Charge...",
+        "verdict": "unverifiable_remote",
+        "evidence": "No inverter, battery, or charge controller visible in either photo; only one panel shown."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Wattage and cell count unknown, which drives most of the price difference between comparables.",
+        "proof": "Clear close-up photo of the rating label on the back of the panel showing watts, voltage, and cell count.",
+        "if_unproven": "priced at the lowest wattage tier seen in comparable 'all-black' panels"
+      },
+      {
+        "risk": "Brand unknown (e.g., Canadian Solar, Longi, Suntex) which affects resale value and warranty trust.",
+        "proof": "Photo of brand/model sticker or frame engraving.",
+        "if_unproven": "priced as unbranded/generic, not premium brand"
+      },
+      {
+        "risk": "Condition unknown \u2014 could be new, used, or refurbished; no output test shown.",
+        "proof": "A multimeter or solar tester reading clip showing open-circuit voltage under sunlight.",
+        "if_unproven": "priced as used/untested condition"
+      },
+      {
+        "risk": "Physical damage (micro-cracks, frame bending) not visible due to glare and low-angle shots.",
+        "proof": "Straight-on, well-lit photo of the full panel face and frame edges.",
+        "if_unproven": "priced assuming possible cosmetic/functional defects"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the rating label (wattage, voltage, cell count, brand) on the back of the panel.",
+      "A test clip or photo showing voltage output under sunlight.",
+      "Photo of the panel's full face in bright, even light without glare.",
+      "Confirmation of whether the panel is new or used."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The panel's wattage, brand, and condition are not readable in either photo, and these are the main price drivers among comparable all-black solar panels; a worst-case price cannot be fixed without at least the rating label or a wattage figure.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 14565,
+    "input_tokens": 3721,
+    "output_tokens": 1353,
+    "cost_usd": 0.017419,
+    "replayed": false,
+    "fixture_key": "d5fe37936c4f7c25bd516688772ddde9",
+    "error": null
+  }
+}

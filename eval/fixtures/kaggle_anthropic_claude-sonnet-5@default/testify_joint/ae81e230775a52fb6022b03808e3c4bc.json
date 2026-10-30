@@ -1,0 +1,76 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 and Photo 1 both show the same all-black solar panel (mono-crystalline cell pattern) leaning against a wall, outdoors.",
+      "A watermark reading 'INNOSON GLOBAL GROUP' and 'POSTED ON JIJI' appears on both images; this is a reseller/marketplace watermark, not a manufacturer brand plate.",
+      "No wattage, cell-count, or manufacturer label is visible on the panel frame or junction box in either photo.",
+      "No battery of any kind (tubular, lithium, or otherwise) is visible in either photo, despite the seller's text describing a battery's charge-holding performance.",
+      "The panel's physical condition (frame, glass, cells) appears intact and unweathered in both shots, but no close-up of the nameplate/specs sticker is given."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel (black mono-crystalline type)",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Battery is new, holds charge for 8 hours, never repaired",
+        "verdict": "unverifiable_remote",
+        "evidence": "No battery appears in photo 0 or photo 1; only a solar panel is shown, so this claim cannot be matched to the pictured item at all."
+      },
+      {
+        "claim": "High Quality Solar Panels, Inverters, Lithium & Tubular Batteries (general catalog claim)",
+        "verdict": "unverified",
+        "evidence": "Generic shop-wide claim with no item-specific proof; only one panel type is shown in the two photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Wattage and cell-count of the panel are unknown, which drives most of the price difference in comparables.",
+        "proof": "Close-up photo of the nameplate/specification sticker on the back of the panel showing watts, voltage, and cell count.",
+        "if_unproven": "cannot be priced at all without this, since comparables range from ~42,000 to 155,000 NGN by wattage"
+      },
+      {
+        "risk": "Brand/manufacturer unverified (watermark is a reseller name, not a panel maker).",
+        "proof": "Photo of manufacturer logo or model sticker, e.g. Canadian Solar, Longi, Jinko, Suntex etc.",
+        "if_unproven": "priced as unbranded/generic, at the low end of comparable wattage bracket once wattage is known"
+      },
+      {
+        "risk": "Panel's electrical output/condition (cracks, hotspots, actual wattage output) not demonstrated.",
+        "proof": "Video or photo of a multimeter/clamp meter reading under sunlight, or an inverter display showing panel output.",
+        "if_unproven": "priced as untested/worst case, i.e. not confirmed to produce rated output"
+      },
+      {
+        "risk": "The seller's text describes a battery, not a panel \u2014 suggests this may be a copy-pasted or mismatched advert, raising doubt about which item is actually for sale.",
+        "proof": "A fresh photo of the actual item being sold, matching the text description, or clarification from seller confirming the panel is the item in question.",
+        "if_unproven": "treat the panel in the photos as the only verifiable item; the battery claims are disregarded for pricing"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the panel's rear nameplate/specification sticker showing wattage, voltage, and cell count",
+      "Photo of manufacturer branding/logo on the panel",
+      "Video of panel output under sunlight via multimeter or connected inverter",
+      "Clarification/photo confirming whether a battery is also being sold, matching the text description"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photos show only an unlabeled black solar panel with no visible wattage, cell-count, or brand markings, which are exactly the attributes that set the price among the comparables; the seller's text describes an unrelated battery, adding further mismatch that proof must resolve before even a worst-case price can be assigned.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 20457,
+    "input_tokens": 3745,
+    "output_tokens": 1924,
+    "cost_usd": 0.023177,
+    "replayed": false,
+    "fixture_key": "ae81e230775a52fb6022b03808e3c4bc",
+    "error": null
+  }
+}
