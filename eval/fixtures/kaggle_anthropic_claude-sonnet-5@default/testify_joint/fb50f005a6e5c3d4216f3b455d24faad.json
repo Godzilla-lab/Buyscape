@@ -1,0 +1,86 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows a single automotive headlamp assembly, black housing with amber turn-signal section and clear lens, on a dirty cloth/floor background.",
+      "A text watermark overlay reads 'HONDA AND ACURA' across the lower portion of the image.",
+      "No manufacturer logo, part number, or model tag is legible on the lamp itself.",
+      "No visible cracks in the lens from this angle, but only one side of the lamp is shown and the rear/clip area is not visible.",
+      "Seller's text claims the stock covers body, engine and suspension parts for 'all model of Honda, Acura and Toyota', but only one headlamp photo is provided."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "headlamp assembly (Honda/Acura type)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 watermark text 'HONDA AND ACURA'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Body, engine and suspension parts for all models of Honda, Acura and Toyota",
+        "verdict": "unverifiable_remote",
+        "evidence": "Only one headlamp photo supplied; no body, engine, or suspension parts shown."
+      },
+      {
+        "claim": "Original Toyota part, not China copy",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 watermark reads 'HONDA AND ACURA', not Toyota, so this specific item is not shown to be a Toyota part."
+      },
+      {
+        "claim": "No crack, all clips and brackets complete",
+        "verdict": "unverified",
+        "evidence": "Only a single front-angle shot is given; rear mounting points, clips, and brackets are not visible."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Exact model fitment (which Honda/Acura model this lamp fits) cannot be confirmed",
+        "proof": "Close-up photo of any molded part number or OEM sticker on the back of the housing",
+        "if_unproven": "priced as a generic unverified-fitment used headlamp, not model-specific"
+      },
+      {
+        "risk": "Lens could be cracked or fogged on the unseen side/rear",
+        "proof": "Photo of the rear housing and a side/angled shot showing the full lens surface",
+        "if_unproven": "priced as condition unverified, treated as worst case (possible crack/damage)"
+      },
+      {
+        "risk": "Electrical function (bulb sockets, wiring, adjuster motor if HID/projector) unknown",
+        "proof": "Short video of the lamp powered on, showing low/high beam and turn signal working",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Mismatch between seller's broad multi-brand claim and the single photographed item raises genuineness concern for 'original Toyota part' line",
+        "proof": "Photo of a part tagged specifically as Toyota, if that is what is being sold, matching a visible Toyota logo",
+        "if_unproven": "treat as Honda/Acura item only, ignore Toyota claim for pricing"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of the back of the headlamp showing any part number or OEM marking",
+      "Photo of the rear connector/socket area and clips/brackets",
+      "Short clip of the lamp powered on to confirm beams and signal work",
+      "Clarify exact make/model/year this specific lamp fits, since the ad covers many models"
+    ],
+    "decision": "price",
+    "reason": "The photo shows a genuine headlamp assembly (type identifiable) with a Honda/Acura watermark, but model, fitment, and working condition are unverified, so it is priced at worst case using comparable Honda/Acura headlamp listings.",
+    "price_pick": {
+      "low": 1,
+      "high": 6
+    }
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 28411,
+    "input_tokens": 2868,
+    "output_tokens": 2526,
+    "cost_usd": 0.027443,
+    "replayed": false,
+    "fixture_key": "fb50f005a6e5c3d4216f3b455d24faad",
+    "error": null
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: front view of a silver/grey pickup truck, Toyota grille badge visible, parked on gravel at what looks like a car lot with umbrella shades and other vehicles in background.",
+      "Photo 1: front-three-quarter view, same truck, black alloy-style wheels, roof rails visible, no visible moonroof glass from this angle.",
+      "Photo 2: rear view of the same truck. The rear window has hand-written marker text reading approximately 'No Start 963' - this looks like an auction/lot tag, not a seller's own marking.",
+      "Tailgate badge in photo 2 appears to read 'TACOME' rather than 'TACOMA' - either a worn/damaged badge or a sign of a non-genuine or mismatched part.",
+      "A 'V6' badge is visible on the right side of the tailgate in photo 2, consistent with a V6 trim tailgate.",
+      "No VIN plate, dashboard, instrument cluster, engine bay, interior, or start-up shown in any photo.",
+      "No customs/duty paperwork, plate number, or registration document shown.",
+      "Styling (grille, headlights, tailgate) resembles the pre-2024 (third generation, roughly 2016-2023) Tacoma body, not the redesigned fourth-generation 2024 Tacoma."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "pickup truck",
+      "brand": "Toyota",
+      "model": "Tacoma",
+      "read_from": [
+        "photo 0 grille badge",
+        "photo 2 tailgate badge"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "2024 Toyota Tacoma",
+        "verdict": "contradicted",
+        "evidence": "Photos 0-2 show third-generation Tacoma body styling (pre-redesign), not the 2024 fourth-generation Tacoma's distinct front and tailgate design."
+      },
+      {
+        "claim": "foreign used",
+        "verdict": "unverifiable_remote",
+        "evidence": "No import sticker, VIN, or paperwork visible in any photo."
+      },
+      {
+        "claim": "TRD 4x4",
+        "verdict": "unverified",
+        "evidence": "No TRD badge or 4x4 drivetrain marking clearly visible on grille, fender, or tailgate in any photo."
+      },
+      {
+        "claim": "V6 engine",
+        "verdict": "unverified",
+        "evidence": "A 'V6' tailgate badge is visible in photo 2, but badge alone does not confirm the actual engine installed."
+      },
+      {
+        "claim": "push to start",
+        "verdict": "unverifiable_remote",
+        "evidence": "No interior/dashboard photo showing a start button."
+      },
+      {
+        "claim": "moonroof",
+        "verdict": "unverifiable_remote",
+        "evidence": "No roof-glass or interior headliner shot in any of the 3 photos."
+      },
+      {
+        "claim": "verified duty",
+        "verdict": "unverifiable_remote",
+        "evidence": "No customs/duty certificate or document shown."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The rear window carries a hand-written 'No Start' tag, strongly suggesting the vehicle was tagged non-running at an auction/lot and this was not disclosed by the seller.",
+        "proof": "A video clip of the seller starting the engine and it running, plus a clear photo without the tag obscured.",
+        "if_unproven": "priced as not working / non-running"
+      },
+      {
+        "risk": "Tailgate badge appears misspelled ('TACOME'), raising doubt about whether this is a genuine Toyota tailgate/trim or a reworked/rebadged unit, possibly linked to accident or parts-swap history.",
+        "proof": "Close-up, well-lit photo of the tailgate badge and a VIN plate photo to cross-check against Toyota records.",
+        "if_unproven": "priced as unverifiable trim/possible accident history, discounted accordingly"
+      },
+      {
+        "risk": "Claimed model year (2024) does not match the body styling seen, suggesting a possible misrepresented year to inflate price.",
+        "proof": "VIN plate photo or registration document showing the manufacture year.",
+        "if_unproven": "priced as the older generation model year, not 2024"
+      },
+      {
+        "risk": "No engine bay, interior, or odometer photo, so mechanical condition, mileage, and interior condition (including the moonroof claim) cannot be assessed.",
+        "proof": "Photos of engine bay, dashboard/odometer, and interior roof.",
+        "if_unproven": "priced as base condition with no extras confirmed, and engine priced as not working per the 'No Start' tag"
+      },
+      {
+        "risk": "No customs duty certificate shown despite the 'verified duty' claim, which matters for import vehicles in Abuja.",
+        "proof": "Photo of the customs duty certificate/paper with matching chassis number.",
+        "if_unproven": "priced as duty-unverified, with added import risk"
+      }
+    ],
+    "proof_requests": [
+      "A video of the engine being started and idling, showing the key/push-button and the dashboard.",
+      "A clear, unobstructed photo of the VIN plate and chassis number.",
+      "A photo of the customs duty certificate matching the VIN.",
+      "Interior photos: dashboard, odometer, seats, and roof (to confirm moonroof).",
+      "A close-up of the tailgate 'TACOME/TACOMA' badge and TRD badge if present."
+    ],
+    "decision": "fraud_suspected",
+    "reason": "The seller presents this as a pristine, fully-featured 2024 foreign-used TRD Tacoma, but photo 2 shows an undisclosed auction-style 'No Start' tag on the rear window and a misspelled tailgate badge, both of which suggest the vehicle's true condition and authenticity are being concealed rather than merely unverified.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 45949,
+    "input_tokens": 5019,
+    "output_tokens": 4118,
+    "cost_usd": 0.047665,
+    "replayed": false,
+    "fixture_key": "7277308a1d7ee8d645545ad3d9f66d12",
+    "error": null
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo shows a DSLR camera body with a lens attached, plus a second lens lying separately on a table, with a camera strap visible.",
+      "The word 'Nikon' is legibly printed on the front of the camera body in photo 0.",
+      "No model number (e.g. D3300, D90, D5300) is readable anywhere on the body, top dial, or LCD in the photo.",
+      "The attached lens and the separate lens both have rear caps on; no focal-length markings (e.g. '18-55mm' or '50mm') are legible on either lens barrel.",
+      "No power-on screen, lens glass, sensor, or shutter is visible to judge cosmetic or functional condition beyond the exterior shell.",
+      "Lighting is dim/indoor, image is a single static shot with no date, serial number, or test shot shown."
+    ],
+    "identity": {
+      "status": "unknown",
+      "kind": "DSLR camera with two lenses",
+      "brand": "Nikon",
+      "model": null,
+      "read_from": [
+        "photo 0 body front logo"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "It has 2 lens 18-55mm and 50mm",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows two lenses present but no focal-length engravings are legible on either lens barrel."
+      },
+      {
+        "claim": "Clean and good to shoot videos and snapshots",
+        "verdict": "unverifiable_remote",
+        "evidence": "No power-on, sample shot, or video clip provided; condition and function cannot be judged from a static exterior photo."
+      },
+      {
+        "claim": "The brand is Nikon",
+        "verdict": "supported",
+        "evidence": "Photo 0: 'Nikon' logo clearly visible on camera body front."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Camera model unknown, which drives price heavily across the Nikon DSLR range (entry-level to mid-range differ 2-5x in local comps).",
+        "proof": "Close-up of the top-plate model badge or the rear LCD boot screen showing model name.",
+        "if_unproven": "Cannot be priced at all without this; treat as unpriceable until model is confirmed."
+      },
+      {
+        "risk": "Lens focal lengths unconfirmed; could be shorter/cheaper lenses than claimed or a mismatched mount.",
+        "proof": "Close-up of each lens barrel showing the focal length ring/engraving (e.g. '18-55mm', '50mm').",
+        "if_unproven": "Priced as generic unspecified lens, not the claimed kit+prime combo."
+      },
+      {
+        "risk": "Functional status (shutter, autofocus, sensor dust/scratches, video recording) is unverified.",
+        "proof": "A short video of the camera powering on, taking a test shot, and playing it back, plus a photo through the lens showing no dust/fungus.",
+        "if_unproven": "Priced as not working / non-functional per the worst-case rule."
+      },
+      {
+        "risk": "Shutter count/usage history unknown, affecting mechanical lifespan value.",
+        "proof": "Screenshot of shutter count from camera menu or EXIF data reader.",
+        "if_unproven": "Priced as high-use/near-end-of-life."
+      },
+      {
+        "risk": "Battery, charger, and memory card inclusion not shown or mentioned.",
+        "proof": "Photo of full accessory set laid out together.",
+        "if_unproven": "Priced as body+lenses only, no accessories."
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the model name on the top plate or the camera's power-on LCD screen",
+      "Close-up of both lens barrels showing focal length and 'Nikon' markings",
+      "A short video of the camera powering on and taking/playing back a photo",
+      "Photo looking through the lens mount at the sensor for dust/scratches",
+      "Photo of included accessories (battery, charger, memory card, caps)"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The Nikon logo is visible but no model number can be read anywhere in the photo, and Nikon DSLR prices vary widely by model across the comparables list, so even a worst-case price cannot be set without a legible model shot.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 27635,
+    "input_tokens": 3363,
+    "output_tokens": 2489,
+    "cost_usd": 0.028063,
+    "replayed": false,
+    "fixture_key": "18d6fd812e039794b7af775fd4142541",
+    "error": null
+  }
+}

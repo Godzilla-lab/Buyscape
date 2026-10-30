@@ -1,0 +1,88 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows a mountain-style bicycle (not a motorcycle) parked against a wall, partially obscured by a watermark reading 'POSTED BY SAMMY LAWAN'.",
+      "Frame has blue/black coloring with some text on the down-tube, but it is too small/blurred to read a brand or model.",
+      "Front tire looks low or partially deflated; rear wheel and gear cassette are visible but chain tension/condition cannot be judged from this angle.",
+      "No visible rust on frame, but image resolution is too low to confirm 'no rust' claim fully.",
+      "Only one angle is provided; no close-up of chain, brakes, gears, or frame serial/brand plate."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "mountain bicycle",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Bought new 6 months ago",
+        "verdict": "contradicted",
+        "evidence": "Seller also states item 'hasn't been used in about 3 years', which is inconsistent with a 6-month-old purchase."
+      },
+      {
+        "claim": "Haven't been used in about 3 years, just change tires and oil chain",
+        "verdict": "unverified",
+        "evidence": "No close-up of chain or tires to confirm current condition or disuse."
+      },
+      {
+        "claim": "Gears and brakes perfect",
+        "verdict": "unverifiable_remote",
+        "evidence": "No video or close photo showing gear shifting or brake function."
+      },
+      {
+        "claim": "No rust, all parts original",
+        "verdict": "unverified",
+        "evidence": "Single low-resolution photo; rust could be hidden by angle or lighting."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Internal contradiction in seller's timeline (bought new 6 months ago vs unused for 3 years) suggests dishonest or copy-pasted listing.",
+        "proof": "Seller should clarify purchase date with receipt or consistent story.",
+        "if_unproven": "treat listing as unreliable, price at worst case (heavily used, unverified condition)"
+      },
+      {
+        "risk": "Tire and chain condition unknown; tires appear low in the only photo.",
+        "proof": "Close-up photo of tires and chain, plus a short video of pedaling/gear shifting.",
+        "if_unproven": "price as needing tire replacement and chain service"
+      },
+      {
+        "risk": "Brake and gear function unverified.",
+        "proof": "Video clip of braking and gear shifting in action.",
+        "if_unproven": "price as non-functional brakes/gears"
+      },
+      {
+        "risk": "No brand/model visible, so true market value tier unknown.",
+        "proof": "Clear photo of frame badge or sticker with brand/model.",
+        "if_unproven": "price as generic unbranded mountain bike"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the frame's brand/model sticker or badge.",
+      "Close-up photos of both tires, chain, and brake pads.",
+      "Short video showing gear shifting and braking in action.",
+      "Clarification on actual purchase date and usage history to resolve contradiction."
+    ],
+    "decision": "fraud_suspected",
+    "reason": "The seller's own statements directly contradict each other (bought new 6 months ago vs unused for 3 years), and the only comparable provided is for an unrelated item (a motorcycle), both of which are signs of an unreliable or mismatched listing rather than a priceable bicycle.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 20177,
+    "input_tokens": 2329,
+    "output_tokens": 1810,
+    "cost_usd": 0.019205,
+    "replayed": false,
+    "fixture_key": "edd18f7c3375212ceb0b6e34fc7f64bf",
+    "error": null
+  }
+}
