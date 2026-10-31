@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows a split-type air conditioner: indoor wall unit sitting on top of an outdoor condenser unit, both placed on a tiled floor against a wall and wooden door.",
+      "Indoor unit has visible dust/dirt streaks and a small rating label on the front panel, but text is too small/blurred to read.",
+      "Outdoor unit has a partial faded red text on the side casing that could read '...nverter' but no clear brand or model name is legible.",
+      "No power cable, remote control, or piping/refrigerant lines are visible in the frame.",
+      "Unit shows general wear: grime on vents, scratches on casing, no visible physical damage like dents or broken fan blades."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "split inverter air conditioner (indoor + outdoor unit)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 - partial faded text on outdoor unit casing, not clearly readable"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Faulty inverter AC",
+        "verdict": "unverifiable_remote",
+        "evidence": "No power-on test, gas pressure check, or compressor sound/video provided in photo 0; seller's self-description of fault cannot be confirmed or contradicted remotely."
+      },
+      {
+        "claim": "Inverter type AC",
+        "verdict": "unverified",
+        "evidence": "Faded text on outdoor unit in photo 0 may say 'inverter' but is not clearly legible; no model plate confirms inverter compressor technology."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Compressor may be seized or completely dead, not just a minor fault",
+        "proof": "Video clip of unit being powered on, showing compressor hum/start or confirming no response",
+        "if_unproven": "priced as non-working unit (compressor failure, scrap/parts value)"
+      },
+      {
+        "risk": "Copper piping or coils may have been removed or damaged (common in faulty/abandoned units)",
+        "proof": "Photo of the rear of outdoor unit showing intact copper pipework and valves",
+        "if_unproven": "priced assuming piping may be missing or compromised"
+      },
+      {
+        "risk": "Refrigerant gas may be fully leaked out",
+        "proof": "Photo/video of gauge reading or technician's gas-charge confirmation",
+        "if_unproven": "priced as no refrigerant present"
+      },
+      {
+        "risk": "Model/capacity (BTU/HP) unknown, which affects resale and repair cost",
+        "proof": "Close-up photo of the rating plate on indoor or outdoor unit",
+        "if_unproven": "priced as a generic small-capacity unit (lowest common split AC size)"
+      },
+      {
+        "risk": "Missing remote control or indoor unit internal parts (PCB, fan motor)",
+        "proof": "Photo of remote and open indoor unit cover showing PCB/fan motor intact",
+        "if_unproven": "priced assuming remote and internal parts missing/non-functional"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the rating/model plate on both indoor and outdoor units",
+      "Video of the unit being plugged in, showing any response (lights, fan, compressor hum)",
+      "Photo of the rear of the outdoor unit showing piping, valves, and compressor housing",
+      "Photo of the remote control if available"
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identifiable by type as a split air conditioner sold explicitly as faulty, so it can be priced at worst case (non-working, parts/scrap value) without needing further identification, though model-specific details remain unproven."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 21566,
+    "input_tokens": 2989,
+    "output_tokens": 1832,
+    "cost_usd": 0.024298,
+    "replayed": false,
+    "fixture_key": "d4956165b11da3ba31093fabe91218a8",
+    "error": null
+  }
+}
