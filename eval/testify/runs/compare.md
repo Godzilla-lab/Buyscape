@@ -11,6 +11,7 @@
 | local_qwen_qwen3-vl-2b-r4 | 74% | 25% | 0% | - | - | - | - | 96% |
 | local_qwen_qwen3-vl-4b-instruct | 81% | 24% | 2% | - | - | - | - | 99% |
 | local_qwen_qwen3-vl-4b-r3 | 78% | 23% | 0% | - | - | - | - | 99% |
+| local_qwen_qwen3-vl-4b-r4 | 78% | 24% | 0% | - | - | - | - | 96% |
 | local_qwen_qwen3-vl-4b-sft500 | 68% | 22% | 0% | - | - | - | - | 100% |
 | local_qwen_qwen3-vl-4b-sft500v2 | 70% | 29% | 1% | - | - | - | - | 100% |
 | local_qwen_qwen3-vl-8b-instruct | 75% | 26% | 3% | - | - | - | - | 100% |
@@ -27,6 +28,7 @@
 | local_qwen_qwen3-vl-2b-r4 | 30% | 8 | 56% | 16% | 6% (0%) | 3600 |
 | local_qwen_qwen3-vl-4b-instruct | 1% | 0 | 0% | 0% | - (0%) | 1100 |
 | local_qwen_qwen3-vl-4b-r3 | 65% | 13 | 49% | 23% | 12% (1%) | 55208 |
+| local_qwen_qwen3-vl-4b-r4 | 41% | 8 | 54% | 22% | 7% (2%) | 14961 |
 | local_qwen_qwen3-vl-4b-sft500 | 68% | 30 | 10% | 48% | 9% (3%) | 226331 |
 | local_qwen_qwen3-vl-4b-sft500v2 | 64% | 26 | 17% | 26% | 17% (4%) | 70661 |
 | local_qwen_qwen3-vl-8b-instruct | 0% | 0 | - | - | - (-) | 1000 |

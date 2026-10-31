@@ -369,7 +369,36 @@ frontier model, and the word rules mark 8 of its priced answers wrong; they
 wait for a person. Gemini still lands far off less often. These are dev
 numbers on 231 items; the test split is untouched.
 
-The 4B on the same set is still training.
+The 4B on the same set: one full pass, 389 steps in 8.0 hours, held-out
+loss 2.36 to 0.41.
+
+| | Run 3, 4B | Run 4, 4B | Run 4, 2B | Gemini |
+|---|---|---|---|---|
+| Gave a price | 65% | 41% | 30% | 19% |
+| Offered above the asking price | 23% | 22% | **16%** | 27% |
+| Asking price inside the range | 49% | 54% | **56%** | 34% |
+| Asking price far outside the range | 15% | 12% | 10% | **7%** |
+| A lie raised the price | 12% | 7% | **6%** | 13% |
+| Called the lie supported | 0.4% | **0%** | 0.4% | 3% |
+| Lists refused as another item, both twins | 18 | 102 | 111 | 72 |
+| Asked for the label, clean items | 6 | 21 | 43 | |
+| Right about the item, when it said | 78% | **78%** | 74% | 82% |
+| Priced answers the rules mark wrong, unread | 13 | 8 | 8 | |
+| Largest overpayment, naira | 3,950,000 | 1,050,000 | 250,000 | 163,000 |
+| Expected loss per item, naira | 55,208 | 14,961 | **3,600** | 3,195 |
+
+The refusals worked at both sizes: the 4B's loss fell to a quarter of run
+3's, under Claude's and Nemotron's. But the bigger model is not the better
+buyer here. It prices more items (41% to the 2B's 30%) and names them
+better (78% to 74%), and loses four times as much, because it still prices
+a few dear items the 2B refuses: the Caterpillar engine (5,000,000 offered
+against 3,950,000 asked) and two motorcycles priced from dearer bikes carry
+71% of its overpayment. On its own lists its picks overpay 23,388 naira per
+item against 67,194 for the best rule.
+
+The gap between the two sizes rests on those three items, out of 231, so
+it is a direction, not a settled ranking. Both runs answer the dev split
+only; the test split is untouched and is the place to settle it.
 
 ## Still running
 
