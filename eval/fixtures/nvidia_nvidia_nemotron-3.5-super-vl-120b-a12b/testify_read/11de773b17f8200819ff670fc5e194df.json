@@ -1,0 +1,74 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Blue three-phase electric motor with ribbed cooling frame and terminal box on right side.",
+      "Red protective cap on output shaft in photo 0.",
+      "Nameplate in photo 1 reads model Y2-90S-4, power 1.1 kW, voltage 380 V, frequency 50 Hz, speed 1400 r/min, current 2.6 A, IP 55, efficiency 84.1%, insulation F, manufacture date 2024.09.",
+      "Nameplate in photo 2 confirms same data.",
+      "Puddle of water on ground beside motor in photo 0.",
+      "Paint worn and chipped on blue housing."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "three-phase electric motor",
+      "brand": null,
+      "model": "Y2-90S-4",
+      "read_from": [
+        "photo 1 nameplate",
+        "photo 2 nameplate"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Original 2 HP electric motor",
+        "verdict": "contradicted",
+        "evidence": "photo 1 nameplate reads power 1.1 kW, about 1.5 HP, not 2 HP"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Motor may not run or may have electrical faults",
+        "proof": "Video of motor running under power, or at least spinning freely with no unusual noise",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Shaft may be bent, rusted, or damaged under the red cap",
+        "proof": "Close-up photo of shaft end with red cap removed",
+        "if_unproven": "as damaged shaft"
+      },
+      {
+        "risk": "Bearings may be worn or noisy",
+        "proof": "Video running close to motor to hear bearing noise",
+        "if_unproven": "as worn bearings"
+      },
+      {
+        "risk": "Water ingress from puddle beside motor may have damaged windings or terminal box",
+        "proof": "Photo inside terminal box and insulation resistance test reading",
+        "if_unproven": "as water damaged"
+      }
+    ],
+    "proof_requests": [
+      "Video of the motor running under power",
+      "Close-up of shaft with red cap removed",
+      "Photo inside terminal box",
+      "Insulation resistance test result"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a Y2-90S-4 three-phase motor from the nameplate; the seller's 2 HP claim is contradicted by the 1.1 kW rating, but the motor can still be priced at its worst case as not working."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 12971,
+    "input_tokens": 2457,
+    "output_tokens": 2536,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "11de773b17f8200819ff670fc5e194df",
+    "error": null
+  }
+}
