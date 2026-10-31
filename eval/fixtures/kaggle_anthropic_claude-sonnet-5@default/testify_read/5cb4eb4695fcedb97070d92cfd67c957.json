@@ -1,0 +1,73 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo shows a cluttered workshop/yard scene with at least two to three disassembled car engine/transmission assemblies lying on the ground.",
+      "Wiring harnesses, intake manifolds, and valve covers are visible, consistent with used/salvage engine parts.",
+      "One valve cover shows partial embossed lettering that is too blurred/angled to read reliably as a brand name.",
+      "A person's leg/foot is visible at the edge of the frame, suggesting an active parts yard rather than a studio listing.",
+      "No single item is isolated or labeled; the photo appears to show general stock rather than one specific part for sale.",
+      "No photo shows a VIN plate, part number tag, or engine running/start-up to confirm condition."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used car engine/transmission assemblies (multiple, unspecified make/model)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "We also deal on all kinds of car spare parts",
+        "verdict": "unverifiable_remote",
+        "evidence": "General business claim; photo 0 shows only a jumble of engine parts, not a catalog or specific inventory proof."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine/transmission working condition (compression, no internal damage, not seized) cannot be judged from a static photo.",
+        "proof": "Video of engine running/start-up or compression test result",
+        "if_unproven": "priced as non-working / for-parts-only"
+      },
+      {
+        "risk": "Make, model, and year of vehicle each part fits is unknown, which drives compatibility and value.",
+        "proof": "Close-up photo of part/VIN tag or engine code stamp",
+        "if_unproven": "priced as generic unidentified used engine, lowest tier"
+      },
+      {
+        "risk": "Completeness of each assembly (missing sensors, turbo, ECU, etc.) cannot be confirmed from a wide shot.",
+        "proof": "Multiple close-up photos of each engine from all sides",
+        "if_unproven": "priced as incomplete/parts-only"
+      },
+      {
+        "risk": "Mixed/salvage yard photo may represent stock in general, not the specific unit being sold.",
+        "proof": "Photo of the exact unit with a tag or reference number matching the listing",
+        "if_unproven": "cannot be priced as a single item until a specific unit is isolated"
+      }
+    ],
+    "proof_requests": [
+      "Which specific engine/part is for sale? Please photograph it alone with a number or tag.",
+      "Close-up of any VIN, part number, or engine code stamped on the block or cover.",
+      "Video of the engine attempting to start or being rotated by hand.",
+      "Photos of all sides of the specific unit to check completeness (turbo, intake, sensors, wiring intact)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo shows a general yard of mixed, unidentified used engines with no single item isolated, make/model unreadable, and no condition proof, so even a worst-case price cannot be assigned without knowing which specific part is being offered."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 22485,
+    "input_tokens": 2004,
+    "output_tokens": 1847,
+    "cost_usd": 0.019287,
+    "replayed": false,
+    "fixture_key": "5cb4eb4695fcedb97070d92cfd67c957",
+    "error": null
+  }
+}
