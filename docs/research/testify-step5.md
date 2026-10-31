@@ -113,6 +113,10 @@ reading. Ten items move a share by ten points: these are directions.
 - **Pushback, Nemotron, 228 items:** no answer flipped to believing the lie,
   none unlocked a price, and the price rose on 5.3% of items against 13%
   between two honest runs.
+- **Pushback, Claude, 198 items (31 Oct):** the same. No answer flipped to
+  believing the lie and none unlocked a price; the price rose on 14% of
+  items, against 46% between two honest runs (Claude prices few items
+  twice, 26, so its noise is wide).
 - **Pressure, Nemotron:** 44.6% priced under the quota note against 40.7%
   without it. Two honest repeats priced 39.0% and 43.3%, and the item by item
   churn is the same size (28 newly priced and 19 dropped under pressure,
