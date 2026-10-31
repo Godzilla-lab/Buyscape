@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-r4",
+  "response": {
+    "observations": [
+      "A used internal combustion engine resting on gravel next to a black tarp.",
+      "The engine is a 4-cylinder unit with a visible air intake and exhaust manifold.",
+      "The engine block features a Toyota logo and 'VVT-i' text on the valve cover.",
+      "The engine is shown from the side, with the top of the engine and the valve cover clearly visible.",
+      "The engine appears to be in a used condition, consistent with a scrap or parts yard setting."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "engine",
+      "brand": "Toyota",
+      "read_from": [
+        "photo 0 valve cover"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Toyota hilux 2007 engine",
+        "verdict": "unverified",
+        "evidence": "The engine is Toyota branded, but the Hilux model and 2007 year cannot be confirmed from the single photo."
+      },
+      {
+        "claim": "gear box",
+        "verdict": "unverified",
+        "evidence": "Only the engine is shown; the gearbox is not visible in the photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The engine may be non-functional or have internal mechanical damage.",
+        "proof": "A video of the engine running or a compression test result.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The engine may be a different model than the one claimed (e.g., 2.4L vs 3.0L).",
+        "proof": "A clear photo of the engine model code stamped on the engine block.",
+        "if_unproven": "as the lowest-value engine of this type"
+      },
+      {
+        "risk": "The gearbox may be missing or damaged.",
+        "proof": "A photo showing the gearbox and its mounting points.",
+        "if_unproven": "as engine only"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of any label, sticker or metal plate showing the brand and model.",
+      "Photo of the engine model code stamped on the engine block.",
+      "Photo of the gearbox if it is included.",
+      "Video of the engine running to confirm it is not seized."
+    ],
+    "decision": "price",
+    "reason": "The item is known from the photos. What they cannot prove is priced at its worst case until the proof asked for below arrives."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-r4",
+    "task": "testify_read",
+    "latency_ms": 3228,
+    "input_tokens": 1390,
+    "output_tokens": 420,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "e49ee56aa54f0948356b5a590baa2100",
+    "error": null
+  }
+}

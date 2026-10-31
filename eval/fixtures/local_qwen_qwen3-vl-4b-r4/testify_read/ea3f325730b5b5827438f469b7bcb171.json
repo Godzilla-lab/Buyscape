@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-r4",
+  "response": {
+    "observations": [
+      "Photo 1 shows a Toyota engine with a grey plastic valve cover featuring a Toyota logo.",
+      "The engine is equipped with a white plastic fan and a timing belt.",
+      "A turbocharger is visible on the left side of the engine.",
+      "The engine is mounted on a metal stand in a workshop environment.",
+      "The engine appears to be a used or scrap unit, not a new or factory-fresh unit."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "diesel engine",
+      "brand": "Toyota",
+      "read_from": [
+        "photo 1 valve cover"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Toyota 1KD-FTV (3.0L) or 2KD-FTV (2.5L) D-4D turbo-diesel engine",
+        "verdict": "unverified",
+        "evidence": "No photo shows this clearly enough to read."
+      },
+      {
+        "claim": "Tokunbo, direct from Belgium. Tested and working, no knock, low mileage, never opened.",
+        "verdict": "unverified",
+        "evidence": "No photo shows this; it is the seller's word only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The engine may be a different model than the one claimed (e.g., 1KD-FTV vs 2KD-FTV).",
+        "proof": "A clear photo of the engine code stamped on the engine block or the engine identification plate.",
+        "if_unproven": "as the lowest-value model (2KD-FTV) in the claimed family"
+      },
+      {
+        "risk": "The engine may be non-functional or have internal damage.",
+        "proof": "A video of the engine running and a compression test result.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The mileage may be very high, indicating significant wear.",
+        "proof": "A clear photo of the odometer or mileage counter.",
+        "if_unproven": "as high mileage"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of any label, sticker or metal plate showing the brand and model.",
+      "Photo of the engine code stamped on the engine block.",
+      "Photo of the engine identification plate (engine code sticker).",
+      "Video of the engine running.",
+      "Photo of the mileage counter."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "What the item is shows, but not the model that sets its price: no photo shows it clearly enough to read. The shot asked for first would settle it."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-r4",
+    "task": "testify_read",
+    "latency_ms": 3948,
+    "input_tokens": 2778,
+    "output_tokens": 460,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "ea3f325730b5b5827438f469b7bcb171",
+    "error": null
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-r4",
+  "response": {
+    "observations": [
+      "Orange gas cylinder with a black top and two handles.",
+      "The brand 'REPSOL' is visible on the top of the cylinder.",
+      "The cylinder has a capacity marking of '60kg' on the side.",
+      "The cylinder is sitting on a tiled countertop.",
+      "There is a watermark 'POSTED ON JIJI' across the center of the image."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "gas cylinder",
+      "brand": "Repsol",
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Fairly used",
+        "verdict": "unverifiable_remote",
+        "evidence": "The exterior shows some wear, but internal condition cannot be determined from photos."
+      },
+      {
+        "claim": "Repsol gas cylinder",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "Recently tested and certified, no leak, the valve is new.",
+        "verdict": "unverified",
+        "evidence": "No photo shows this; it is the seller's word only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The cylinder may be expired or past its re-test date, making it unsafe.",
+        "proof": "A clear photo of the manufacture or expiry date stamped on the metal shroud or handle.",
+        "if_unproven": "as expired/scrap value"
+      },
+      {
+        "risk": "The valve may be leaking or the seal may be damaged.",
+        "proof": "A video showing a soap bubble test on the valve while under pressure.",
+        "if_unproven": "as requiring a valve replacement"
+      },
+      {
+        "risk": "The cylinder may be empty or contain a different gas than LPG.",
+        "proof": "A photo of the cylinder's weight stamp or a recent filling receipt.",
+        "if_unproven": "as empty"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the stamped date on the cylinder shroud or handle to verify the expiry date.",
+      "Photo of the valve and a video showing it is not leaking.",
+      "Photo of the weight stamp to confirm the current gas content."
+    ],
+    "decision": "price",
+    "reason": "The item is known from the photos. What they cannot prove is priced at its worst case until the proof asked for below arrives."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-r4",
+    "task": "testify_read",
+    "latency_ms": 3382,
+    "input_tokens": 1398,
+    "output_tokens": 410,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "8e935291328d605a289cbdb4bca5db12",
+    "error": null
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-r4",
+  "response": {
+    "observations": [
+      "Multiple blue gas cylinders standing outdoors on concrete.",
+      "The cylinders are cylindrical with rounded domed tops.",
+      "Visible wear and scratches on the blue paint.",
+      "A large white sticker is partially peeled off the side of the cylinders.",
+      "The text 'OXYGEN' is visible on the sticker in photo 0.",
+      "The text 'ISO 9809-3' is visible on the cylinder in photo 1.",
+      "The text '40L' is visible on the cylinder in photo 1.",
+      "The text 'P22.8' is visible on the cylinder in photo 1.",
+      "The text '5.7MM 47.3 KG' is visible on the cylinder in photo 1."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "oxygen gas cylinder",
+      "brand": "Oxygen",
+      "read_from": [
+        "photo 0 sticker",
+        "photo 1 cylinder"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "40L Oxygen Gas Cylinders",
+        "verdict": "supported",
+        "evidence": "photo 1 cylinder shows 40L"
+      },
+      {
+        "claim": "Industrial Grade",
+        "verdict": "unverifiable_remote",
+        "evidence": "ISO 9809-3 is an industrial standard but does not confirm the specific manufacturing grade."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The cylinders may be expired or past their re-test date.",
+        "proof": "A clear photo of the manufacture or expiry date stamped on the handle or collar.",
+        "if_unproven": "as expired"
+      },
+      {
+        "risk": "The cylinders may be empty or contain a different gas.",
+        "proof": "A photo of the cylinder with a weight stamp showing the current tare weight.",
+        "if_unproven": "as empty"
+      },
+      {
+        "risk": "The valve may be leaking or damaged.",
+        "proof": "A video showing a soap bubble test on the valve while under pressure.",
+        "if_unproven": "as requiring a valve replacement"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the stamped date on the handle or collar.",
+      "Photo of the weight stamp on the cylinder.",
+      "Video of the valve being tested for leaks."
+    ],
+    "decision": "price",
+    "reason": "The item is known from the photos. What they cannot prove is priced at its worst case until the proof asked for below arrives."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-r4",
+    "task": "testify_read",
+    "latency_ms": 3214,
+    "input_tokens": 2592,
+    "output_tokens": 434,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "ead6ab74c6aff28dfeba2dd0ccbe8ab2",
+    "error": null
+  }
+}

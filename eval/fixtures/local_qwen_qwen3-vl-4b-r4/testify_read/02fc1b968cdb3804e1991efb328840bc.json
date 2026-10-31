@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-r4",
+  "response": {
+    "observations": [
+      "Photo 0 shows a close-up of an engine block with '2GR' stamped on the side and a Toyota engine identification plate.",
+      "Photo 1 and 2 show multiple engines in a pile, consistent with a scrap yard or warehouse setting.",
+      "The engines appear used, with visible dirt and wear on the components.",
+      "No individual engine is shown in isolation to confirm it is the one being sold."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "engine",
+      "brand": "Toyota",
+      "model": "2GR",
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Complete engine",
+        "verdict": "unverified",
+        "evidence": "Photo 1 and 2 show multiple engines in a pile, but it is not confirmed if this is the specific engine being sold."
+      },
+      {
+        "claim": "for toyota 2GR engine",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows the '2GR' model code on the engine block."
+      },
+      {
+        "claim": "direct Belgium",
+        "verdict": "unverifiable_remote",
+        "evidence": "Origin cannot be confirmed from photos."
+      },
+      {
+        "claim": "Tested and working, no knock, low mileage, never opened.",
+        "verdict": "unverified",
+        "evidence": "No photo shows this; it is the seller's word only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine may be non-functional or have internal damage.",
+        "proof": "A video of the engine running or a compression test result.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Engine may be missing a specific component (e.g., ECU, timing belt, or oil pan).",
+        "proof": "A photo of the engine with all components assembled.",
+        "if_unproven": "as incomplete"
+      },
+      {
+        "risk": "Engine may be a different model than the 2GR claimed.",
+        "proof": "A clear photo of the engine code stamped on the block.",
+        "if_unproven": "as a different, lower-value engine"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of any label, sticker or metal plate showing the brand and model.",
+      "Video of the engine running to confirm it is functional.",
+      "Photo of the engine with all components assembled to confirm completeness.",
+      "Clear photo of the engine code stamped on the block."
+    ],
+    "decision": "price",
+    "reason": "The item is known from the photos. What they cannot prove is priced at its worst case until the proof asked for below arrives."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-r4",
+    "task": "testify_read",
+    "latency_ms": 3826,
+    "input_tokens": 2798,
+    "output_tokens": 466,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "02fc1b968cdb3804e1991efb328840bc",
+    "error": null
+  }
+}

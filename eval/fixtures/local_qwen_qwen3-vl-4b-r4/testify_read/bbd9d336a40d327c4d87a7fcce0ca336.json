@@ -1,0 +1,67 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-r4",
+  "response": {
+    "observations": [
+      "Single black plastic pallet leaning against a wall.",
+      "The pallet has a standard 4-hole design for forklift insertion.",
+      "The surface shows some dust and minor surface wear.",
+      "A watermark 'JOHNSON OLUWATOBILIBA' is visible across the center.",
+      "The photo appears to be a single shot of one unit."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "plastic pallet",
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Use plastic pallet",
+        "verdict": "supported",
+        "evidence": "photo 0 shows a black plastic pallet"
+      },
+      {
+        "claim": "3 units available",
+        "verdict": "unverified",
+        "evidence": "photo 0 shows only one pallet; the seller's text is not a photo"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The photo may be a stock image or a composite rather than a photo of the actual inventory.",
+        "proof": "A photo of all three units together in a single shot.",
+        "if_unproven": "as one unit only"
+      },
+      {
+        "risk": "The pallets may be damaged (cracks, tears, or missing corners) not visible in the single photo.",
+        "proof": "Clear photos of all three pallets from multiple angles.",
+        "if_unproven": "as damaged or incomplete"
+      },
+      {
+        "risk": "The pallets may be expired or degraded plastic.",
+        "proof": "A photo of the manufacturing date stamp (usually molded into the plastic).",
+        "if_unproven": "as low-grade or expired plastic"
+      }
+    ],
+    "proof_requests": [
+      "Photos of all three pallets together.",
+      "Clear photos of the underside and all four sides of each pallet.",
+      "Photos of the date stamps molded into the plastic to check for expiration."
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identified as a plastic pallet from the photos. It can be priced at its worst-case condition (one unit, damaged, and low-grade plastic) until further proof is provided."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-r4",
+    "task": "testify_read",
+    "latency_ms": 3392,
+    "input_tokens": 1772,
+    "output_tokens": 372,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "bbd9d336a40d327c4d87a7fcce0ca336",
+    "error": null
+  }
+}

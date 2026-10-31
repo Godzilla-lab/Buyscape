@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-r4",
+  "response": {
+    "observations": [
+      "Large, thick-walled rubber tyres.",
+      "Brand 'MICHELIN' is embossed on the sidewall in photos 2 and 3.",
+      "The tyres are stored outdoors on a gravel surface.",
+      "A bottle of motor oil is placed inside the centre of one tyre in photos 0, 1, 2, and 3.",
+      "The tread pattern is not clearly visible in the provided photos."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "marine tyre",
+      "brand": "Michelin",
+      "read_from": [
+        "photo 2 sidewall",
+        "photo 3 sidewall"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Fender Tyre",
+        "verdict": "supported",
+        "evidence": "The large, thick-walled construction visible in photos 0-3 is characteristic of fender tyres used on boats."
+      },
+      {
+        "claim": "for Marine use",
+        "verdict": "supported",
+        "evidence": "The embossed 'MICHELIN' brand and the large, fender-style profile are standard for marine applications."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The tyre may be expired or near its service life limit.",
+        "proof": "A clear photo of the 4-digit DOT code on the sidewall.",
+        "if_unproven": "as expired/scrap"
+      },
+      {
+        "risk": "The tyre may have hidden punctures or structural damage.",
+        "proof": "A video showing the tyre being inflated to a high pressure.",
+        "if_unproven": "as having a leak"
+      },
+      {
+        "risk": "The tyre may be a different size or model than the one claimed.",
+        "proof": "A photo of the tyre's size markings (e.g., 1200/80R20).",
+        "if_unproven": "as the smallest standard size for this brand"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the 4-digit DOT code on the sidewall to verify the manufacture date.",
+      "Photo of the tyre size markings (e.g., 1200/80R20).",
+      "Video of the tyre being inflated to demonstrate its condition."
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identified as a Michelin marine fender tyre from the photos. It can be priced at its worst-case value (expired and potentially leaking) until further proof of condition and size is provided."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-r4",
+    "task": "testify_read",
+    "latency_ms": 15471,
+    "input_tokens": 3756,
+    "output_tokens": 441,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "b9e032ad5e066a0753daa8bc652d0ad4",
+    "error": null
+  }
+}

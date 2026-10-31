@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-r4",
+  "response": {
+    "observations": [
+      "Blue plastic industrial drum with a black metal clamping lid.",
+      "A white label on the drum reads 'Aopl PS504 STYRENE ACRYLIC'.",
+      "The label specifies a net weight of 250.0 KGS.",
+      "The label indicates the drum is made in India.",
+      "The drum shows some surface dirt and minor scuffs."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "plastic drum",
+      "brand": "Aopl",
+      "model": "PS504",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "250 litters",
+        "verdict": "supported",
+        "evidence": "photo 0 label shows NET WT: 250.0 KGS"
+      },
+      {
+        "claim": "original plastic drum",
+        "verdict": "unverifiable_remote",
+        "evidence": "The plastic material is visible, but 'original' is a subjective claim."
+      },
+      {
+        "claim": "Food grade",
+        "verdict": "unverified",
+        "evidence": "The label does not explicitly state food-grade; it is marked as 'NON HAZARDOUS'."
+      },
+      {
+        "claim": "used only once for clean water. No crack, no leak, lids complete.",
+        "verdict": "unverified",
+        "evidence": "No photo shows this; it is the seller's word only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The drum may be empty or contain a different substance than claimed.",
+        "proof": "A photo of the drum with a weight scale showing the current weight.",
+        "if_unproven": "as empty"
+      },
+      {
+        "risk": "The plastic may be thin-walled or degraded, reducing its structural integrity.",
+        "proof": "A photo of the drum's base and the thickness of the walls.",
+        "if_unproven": "as low-grade plastic"
+      },
+      {
+        "risk": "The lid may be loose or the clamps may be rusted.",
+        "proof": "A photo of the lid and clamps with the drum closed.",
+        "if_unproven": "as needing a new lid"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the drum's base and the thickness of the walls.",
+      "Photo of the lid and clamps.",
+      "Photo of the drum with a weight scale showing the current weight."
+    ],
+    "decision": "price",
+    "reason": "The item is known from the photos. What they cannot prove is priced at its worst case until the proof asked for below arrives."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-r4",
+    "task": "testify_read",
+    "latency_ms": 3932,
+    "input_tokens": 1791,
+    "output_tokens": 457,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "3de2eab13d75ea2b4e8d4ceba45e579c",
+    "error": null
+  }
+}

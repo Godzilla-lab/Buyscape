@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-r4",
+  "response": {
+    "observations": [
+      "Photo 0 shows a large pile of used car batteries in a storage area.",
+      "Photo 1 shows a single battery with a label reading 'GREEN ENERGY AUTOMOTIVE GE 60-12 540A (EN)' and 'MADE IN ITALY'.",
+      "The battery in photo 1 has a red positive terminal cap and a black negative terminal.",
+      "The label in photo 1 is partially torn, and the top plastic shroud is also damaged.",
+      "The seller's text mentions 'Direct second hand battery' and 'Available in stock'.",
+      "The seller's text mentions 'good warranty'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car battery",
+      "brand": "Green Energy",
+      "model": "GE 60-12",
+      "read_from": [
+        "photo 1 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Direct second hand battery",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows a large stockpile of used batteries."
+      },
+      {
+        "claim": "Available in stock",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows a large quantity of batteries."
+      },
+      {
+        "claim": "good warranty",
+        "verdict": "unverifiable_remote",
+        "evidence": "Warranty terms cannot be verified from photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The battery may be dead or have a significantly reduced capacity.",
+        "proof": "A video showing a multimeter reading of the battery voltage.",
+        "if_unproven": "as scrap value"
+      },
+      {
+        "risk": "The battery may be sulfated or have internal damage.",
+        "proof": "A load test showing a healthy cold cranking amperage (CCA).",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The battery may be past its 'use by' date, making it unsafe.",
+        "proof": "A clear photo of the manufacturing date code stamped on the case.",
+        "if_unproven": "as expired"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of any label, sticker or metal plate showing the brand and model.",
+      "Photo of the manufacturing date code stamped on the battery case.",
+      "Video of a multimeter test showing the current voltage.",
+      "Video of a load test showing the cold cranking amperage (CCA)."
+    ],
+    "decision": "price",
+    "reason": "The item is known from the photos. What they cannot prove is priced at its worst case until the proof asked for below arrives."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-r4",
+    "task": "testify_read",
+    "latency_ms": 3382,
+    "input_tokens": 2048,
+    "output_tokens": 461,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "eaecc7a6a3153e4ed53d3de9beac27cb",
+    "error": null
+  }
+}

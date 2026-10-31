@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-r4",
+  "response": {
+    "observations": [
+      "Photo 0 shows the front of a large TV screen.",
+      "The screen is powered off and reflective.",
+      "The TV is resting on a cardboard box with '75\" TV' printed on it.",
+      "The brand 'SAMSUNG' is visible on the lower bezel in photo 0.",
+      "The screen is dark and shows no image or logo.",
+      "A person's hand and feet are visible at the bottom and right edges of the frame."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "TV",
+      "brand": "Samsung",
+      "read_from": [
+        "photo 0 bezel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "75\" Outdoor Samsung Smart TV",
+        "verdict": "unverified",
+        "evidence": "The size is suggested by the box, but the screen is off and the model is not clearly readable."
+      },
+      {
+        "claim": "It has a power fault only",
+        "verdict": "unverified",
+        "evidence": "The TV is not shown powered on; a power fault cannot be confirmed remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The TV may not power on or may have a dead pixel or dead zone.",
+        "proof": "A video showing the TV powered on and displaying a clear image.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The screen may have dead pixels or a dead zone.",
+        "proof": "A clear, close-up photo of the screen while powered on.",
+        "if_unproven": "as having dead pixels"
+      },
+      {
+        "risk": "The model may be a lower-specification unit (e.g., QLED vs. QN900A).",
+        "proof": "A photo of the model number on the back of the TV.",
+        "if_unproven": "as a basic Samsung 75-inch model"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of any label, sticker or metal plate showing the brand and model.",
+      "Photo of the model number on the back of the TV.",
+      "Video of the TV powered on and displaying a clear image.",
+      "Photo of the TV powered on showing the screen is working."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "What the item is shows, but not the model that sets its price: no photo shows it clearly enough to read. The shot asked for first would settle it."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-r4",
+    "task": "testify_read",
+    "latency_ms": 4659,
+    "input_tokens": 2164,
+    "output_tokens": 434,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "45aaf4ae856b57761b999bb28eea37c5",
+    "error": null
+  }
+}
