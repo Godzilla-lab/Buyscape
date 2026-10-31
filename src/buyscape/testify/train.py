@@ -62,7 +62,10 @@ without proof". So:
   asking-price rule it taught the read only.
 - One priced advert in six also meets a list of adverts for a clearly
   different kind, and refuses it (`refuse_target`), so a wrong name never
-  prices off the wrong adverts.
+  prices off the wrong adverts. A list the teacher itself refused, though
+  it holds adverts of the same kind (dearer bikes for a cheap one), is
+  refused too, by the advert and its lied-to twin: declining is how
+  Gemini, the cheapest pricer, keeps its losses low (30 Oct).
 
 Training items are priced only against training adverts, so no benchmark
 title or price reaches a training prompt (`_testify_pool` in cli.py).
@@ -422,14 +425,15 @@ def taught_pick(item: Item, answer: Reading, found: list[comps.Comparable],
     lost more money than the model picks they were tried against. The
     advert's asking price only chooses which picks to learn from, never what
     they are: an offer above it, or a high end under half of it, is a pick no
-    buyer should copy. A dealer's new stock asks a new price, and a used
+    buyer should copy. A list the teacher refused is taught as refused.
+    A dealer's new stock asks a new price, and a used
     one's worth is often under half of it, so there only the offer is
     checked. The reason is written here, so no number the teacher wrote
     reaches a target (rule 4)."""
     if choice is None:
         return None, "no price pick: no teacher pick yet"
     if not choice.same_item or choice.price_pick is None:
-        return None, "no price pick: the teacher found no advert for the same item"
+        return refuse_target(answer), "refused: the teacher found no advert for the same item"
     low, high = choice.price_pick.low, choice.price_pick.high
     if not 0 <= low <= high < len(found):
         return None, "no price pick: the teacher's pick is off the list"
@@ -562,8 +566,10 @@ def build(cases: list[tuple], rows: list[dict], labels: dict[str, dict], root: P
                 why = "price pick: the rule's" if choice else "no price pick: no matching advert near its price"
             tally[why] = tally.get(why, 0) + 1
             if choice is not None:
-                chats.append(("pick", choice, pick_request(answer, found)))
-                chats.append(("pick_lie", choice, pick_request(twin(answer, lie), found)))
+                # The same answer for the lied-to twin: a lie neither raises a price nor unlocks one.
+                kind = "pick" if choice.same_item else "refuse_taught"
+                chats.append((kind, choice, pick_request(answer, found)))
+                chats.append((f"{kind}_lie", choice, pick_request(twin(answer, lie), found)))
             # One priced advert in REFUSE_EVERY also meets a list for another kind,
             # as after a wrong name, and must refuse it.
             if int(hashlib.md5(item.id.encode()).hexdigest(), 16) % REFUSE_EVERY == 0:

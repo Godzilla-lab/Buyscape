@@ -371,7 +371,8 @@ def test_the_teachers_pick_is_kept_only_where_a_buyer_would_copy_it():
     assert train.taught_pick(FAN, answer, found, said(2, 2))[1] == "no price pick: the teacher offered above the asking price"
     assert train.taught_pick(FAN, answer, [_comp(0, 10000, "Standing fan")], said(0, 0))[1] == (
         "no price pick: the teacher's range is far under the asking price")
-    assert train.taught_pick(FAN, answer, found, said(0, 0, same=False))[0] is None
+    refused, why = train.taught_pick(FAN, answer, found, said(0, 0, same=False))
+    assert refused.same_item is False and refused.price_pick is None and why.startswith("refused:")
     assert train.taught_pick(FAN, answer, found, said(1, 5))[1] == "no price pick: the teacher's pick is off the list"
     assert train.taught_pick(FAN, answer, found, None)[1] == "no price pick: no teacher pick yet"
 
@@ -407,3 +408,20 @@ def test_new_stock_teaches_the_teachers_pick_but_never_an_offer_above_its_price(
     assert (kept.price_pick.low, kept.price_pick.high) == (0, 1)
     dear = PriceChoice(same_item=True, price_pick=PricePick(low=2, high=2), reason="")
     assert train.taught_pick(new, answer, found, dear)[1] == "no price pick: the teacher offered above the asking price"
+
+
+def test_a_list_the_teacher_refused_is_taught_refused_for_both_twins(tmp_path: Path):
+    from buyscape.testify.answer import PriceChoice
+
+    photo = tmp_path / "f1.jpg"
+    Image.new("RGB", (64, 64)).save(photo)
+    pool = [_comp(0, 300000, "Standing fan industrial"), _comp(1, 450000, "Standing fan industrial")]
+    rows = [{"id": "f1", "variant": "clean", "reading": _read()}]
+
+    def teacher(request):
+        return PriceChoice(same_item=False, price_pick=None, reason="These are industrial fans.")
+
+    examples, tally = train.build([(FAN, [photo])], rows, {}, tmp_path, pool=pool, pick_choice=teacher)
+    said = {e["variant"]: json.loads(e["messages"][-1]["content"]) for e in examples}
+    assert said["refuse_taught"] == said["refuse_taught_lie"] and said["refuse_taught"]["same_item"] is False
+    assert "pick" not in said and tally["refused: the teacher found no advert for the same item"] == 1
