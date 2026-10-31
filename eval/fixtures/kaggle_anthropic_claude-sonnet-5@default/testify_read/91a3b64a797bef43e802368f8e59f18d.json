@@ -1,0 +1,103 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 (unchanged) shows a used inline 4-cylinder car engine on pavement, wiring harness attached, removed from a vehicle.",
+      "Green paint marks on valve cover/intake area, typical dealer marking, not a manufacturer identifier.",
+      "A watermark/logo in the corner is the seller's own stamp, not a part identifier.",
+      "No engine code, casting number, VIN tag, or brand nameplate is legible anywhere on the block, head, or intake manifold.",
+      "Person's legs/sandals visible in background, outdoor open-yard setting.",
+      "No odometer, dashboard, or import/customs document shown.",
+      "Seller's new message is a verbal reassurance only ('I tested it myself yesterday'); no new photo, video, or document was provided."
+    ],
+    "identity": {
+      "status": "unknown",
+      "kind": "used car engine (make/model unreadable)",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Direct Korean parts",
+        "verdict": "unverifiable_remote",
+        "evidence": "No Korean brand badge, sticker, or casting mark visible in photo 0."
+      },
+      {
+        "claim": "Tokunbo, direct from Belgium",
+        "verdict": "unverifiable_remote",
+        "evidence": "No import tag, customs sticker, or shipping document shown."
+      },
+      {
+        "claim": "Tested and working (reaffirmed verbally: 'I tested it myself yesterday')",
+        "verdict": "unverified",
+        "evidence": "Still no start-up video, compression test, or diagnostic readout; a verbal claim from the seller is not visual proof."
+      },
+      {
+        "claim": "No knock",
+        "verdict": "unverified",
+        "evidence": "Cannot be judged from a still photo; requires audio/video of running engine."
+      },
+      {
+        "claim": "Low mileage",
+        "verdict": "unverifiable_remote",
+        "evidence": "No odometer or mileage sticker shown."
+      },
+      {
+        "claim": "Never opened",
+        "verdict": "unverified",
+        "evidence": "Valve cover bolts appear intact in photo 0 but no close-up of seals/torque marks to confirm."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine make, model, and displacement are unreadable, which determines vehicle compatibility and base price tier.",
+        "proof": "Close-up photo of the engine code sticker/plate or casting number stamped into the block.",
+        "if_unproven": "cannot be priced at all without this, since compatible-vehicle price tiers differ drastically"
+      },
+      {
+        "risk": "Internal mechanical condition (knock, compression, timing chain wear) cannot be assessed from a static photo or a verbal claim.",
+        "proof": "Video of the engine running with audible idle and revs, plus a compression test reading.",
+        "if_unproven": "priced as not working / needs rebuild"
+      },
+      {
+        "risk": "Claimed low mileage cannot be confirmed.",
+        "proof": "Photo of odometer or original import mileage sticker/manifest.",
+        "if_unproven": "priced as unknown/high mileage"
+      },
+      {
+        "risk": "Claimed Belgian/Korean origin is unverifiable.",
+        "proof": "Photo of shipping container papers, customs duty receipt, or Belgian de-registration document.",
+        "if_unproven": "priced as ungraded/unverified origin"
+      },
+      {
+        "risk": "Hidden damage such as cracked block, stripped threads, or missing sensors/wiring not visible from this single angle.",
+        "proof": "Additional photos from all sides including underside/oil pan and close-ups of connector plugs.",
+        "if_unproven": "priced assuming additional missing/damaged parts"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the engine code/ID plate or stamped casting number to identify make, model, and displacement.",
+      "Video of the engine running (with sound) to support 'tested, no knock' claim.",
+      "Photo of odometer reading or original mileage documentation.",
+      "Photos from additional angles (rear, underside, both sides) to check for cracks, missing parts, or oil leaks.",
+      "Any import/customs paperwork supporting the Belgium/Tokunbo claim."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "A verbal reassurance with no new photo or video does not change the evidence; the engine's identity and working condition remain unverifiable from the single photo, so the same missing proof is still required before pricing."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 11737,
+    "input_tokens": 3525,
+    "output_tokens": 1457,
+    "cost_usd": 0.02162,
+    "replayed": false,
+    "fixture_key": "91a3b64a797bef43e802368f8e59f18d",
+    "error": null
+  }
+}
