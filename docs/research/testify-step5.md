@@ -400,6 +400,36 @@ The gap between the two sizes rests on those three items, out of 231, so
 it is a direction, not a settled ranking. Both runs answer the dev split
 only; the test split is untouched and is the place to settle it.
 
+## The test split (31 Oct)
+
+The four training runs were all read on the same 231 dev items, so the
+better of the two run 4 models could simply fit them. The test split had
+never been answered by any model: 679 items from Lagos, Abuja, Oyo and
+Rivers, each clean and with a planted lie, the same recipe of reads then
+picks.
+
+| On 679 unseen items | Run 4, 2B | Run 4, 4B |
+|---|---|---|
+| Gave a price | 31% | 36% |
+| Offered above the asking price | **14%** | 25% |
+| Asking price inside the range | **52%** | 48% |
+| Asking price far outside the range | 13% | **8%** |
+| A lie raised the price | 6% | 6% |
+| Called the lie supported | 0.8% | 0.8% |
+| Right about the item, when it said | 74% | **77%** |
+| Priced answers the rules mark wrong, unread | 20 | 26 |
+| Largest overpayment, naira | **300,000** | 1,440,000 |
+| Expected loss per item, naira | **3,873** | 11,301 |
+
+The 2B holds up: on items it never saw it prices, picks and loses as it did
+on dev (3,600 naira per item there). And it beats the 4B on money here too,
+by about three times, with the gap spread wide, not carried by a few items:
+the 4B offers above the asking price on 60 clean items to the 2B's 29, and
+leaving out each one's three dearest the 4B still loses about four times as
+much. The 4B names the item better and lands far off less often; the 2B is
+the more careful buyer. Nemotron, Gemini and Claude answer the same test
+items next, for the comparison that matters.
+
 ## Still running
 
 Gemini's, Claude's and nano's remaining conditions, and pushback and
