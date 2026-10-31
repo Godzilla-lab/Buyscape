@@ -1,0 +1,84 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r4",
+  "response": {
+    "observations": [
+      "Large solar panel with 144 cells.",
+      "White frame with a grid pattern.",
+      "Watermark 'NAGOTECE SOLAR' across the center.",
+      "Text '25mm 6/188 V/144s ISO50' at the bottom right.",
+      "No brand name or model number is legible on the panel surface.",
+      "The panel is shown indoors or in a covered area."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel",
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "600watts",
+        "verdict": "unverified",
+        "evidence": "The wattage is not visible on the panel itself."
+      },
+      {
+        "claim": "144cell",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows a 144-cell configuration."
+      },
+      {
+        "claim": "Canadian",
+        "verdict": "unverifiable_remote",
+        "evidence": "Origin cannot be confirmed from a photo."
+      },
+      {
+        "claim": "used",
+        "verdict": "unverified",
+        "evidence": "The panel appears clean, but its history is unknown."
+      },
+      {
+        "claim": "Battery is new, holds charge for 8 hours. Never repaired.",
+        "verdict": "unverified",
+        "evidence": "No battery is visible in photo 0."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The panel may be a lower wattage model (e.g., 300W) despite the 600W claim.",
+        "proof": "A clear photo of the manufacturer's label on the back of the panel.",
+        "if_unproven": "as a 300W panel"
+      },
+      {
+        "risk": "The panel may be a counterfeit or substandard brand.",
+        "proof": "A photo of the manufacturer's label showing the brand and model.",
+        "if_unproven": "as a generic or unbranded panel"
+      },
+      {
+        "risk": "The panel may be non-functional or have cell damage.",
+        "proof": "A video showing a multimeter reading of the open-circuit voltage (Voc).",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of any label, sticker or metal plate showing the brand and model.",
+      "Photo of the back of the panel showing the manufacturer's label.",
+      "Photo of the front of the panel with the label removed to check for scratches or damage.",
+      "Video of a multimeter test showing the open-circuit voltage (Voc)."
+    ],
+    "decision": "price",
+    "reason": "The item is known from the photos. What they cannot prove is priced at its worst case until the proof asked for below arrives."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r4",
+    "task": "testify_read",
+    "latency_ms": 2238,
+    "input_tokens": 1426,
+    "output_tokens": 498,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "319141a8fe5d4fe9ab8e4d5016ff1db4",
+    "error": null
+  }
+}

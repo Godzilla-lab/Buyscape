@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a used car engine bay with an alternator, belts, hoses, and 'TFSI' visible on a green-painted engine cover section.",
+      "Photo 1 shows the top of the engine with a barcode sticker, dual valve covers, and 'TFSI' on the cover.",
+      "Photo 2 shows an Audi four-ring logo and 'TFSI' badge on the engine cover, with the engine installed in a vehicle bay.",
+      "All photos carry a watermark for 'EZE PORSCHE GLOBAL AUTOS'; photo 2 also shows 'POSTED ON JIJI'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car engine",
+      "brand": "Audi",
+      "model": "TFSI",
+      "read_from": [
+        "photo 2 Audi logo",
+        "photo 0 TFSI text",
+        "photo 1 TFSI text",
+        "photo 2 TFSI text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Also deals on all kinds of car spare parts",
+        "verdict": "unverifiable_remote",
+        "evidence": "Seller's text only; no proof of inventory or business provided in photos"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine may not run or may be seized internally",
+        "proof": "Video of the engine cranking and running, or a compression test result",
+        "if_unproven": "as a non-running engine for parts only"
+      },
+      {
+        "risk": "Internal wear or damage cannot be seen from outside",
+        "proof": "Borescope inspection of cylinders or documented service history",
+        "if_unproven": "as unknown internal condition"
+      },
+      {
+        "risk": "Mileage and usage history are unknown",
+        "proof": "Service records or donor vehicle odometer photo",
+        "if_unproven": "as high-mileage used engine"
+      },
+      {
+        "risk": "Engine may be missing sensors, ECU, harness, or ancillaries",
+        "proof": "Photo showing the complete engine with all accessories and wiring",
+        "if_unproven": "as an incomplete engine"
+      },
+      {
+        "risk": "It is unclear whether a gearbox or transmission is included",
+        "proof": "Photo showing engine and gearbox together as a unit",
+        "if_unproven": "as engine only"
+      }
+    ],
+    "proof_requests": [
+      "Video of the engine starting and running",
+      "Photo of the complete engine with all ancillaries and wiring harness",
+      "Service history or donor vehicle details to confirm mileage"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as an Audi TFSI car engine from the badging in the photos, so it can be priced at its worst case as a non-running used engine pending proof of operation."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 19588,
+    "input_tokens": 2902,
+    "output_tokens": 2978,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "e9021c4913e81d496ee191df976fc2fa",
+    "error": null
+  }
+}

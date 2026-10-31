@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo shows a used internal combustion car engine in a bay, dusty and oily",
+      "Visible parts include valve cover, intake manifold, alternator, hoses, wiring, and throttle body",
+      "No readable brand, model, or VIN plate is visible on the item in the photo",
+      "Bottom text \"CAMON 40\" and camera settings are phone watermarks, not item markings",
+      "Seller describes it as \"Direct Tokumbo\" (imported used), \"Tested ok\", with \"1 months guarantee\""
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used car engine",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Direct Tokumbo (imported used)",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo cannot show import origin or source"
+      },
+      {
+        "claim": "1 months guarantee",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo cannot show a warranty document or seller commitment"
+      },
+      {
+        "claim": "Tested ok",
+        "verdict": "unverified",
+        "evidence": "Photo shows a static engine with no running or test evidence"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine may not start or run",
+        "proof": "Video of the engine starting, idling, and reaching operating temperature",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Internal damage or unknown high mileage",
+        "proof": "Compression test report or service history",
+        "if_unproven": "as unknown/high mileage used engine"
+      },
+      {
+        "risk": "Missing accessories such as ECU, harness, alternator, or ancillaries",
+        "proof": "Complete photo showing all included parts",
+        "if_unproven": "as engine only/long block"
+      },
+      {
+        "risk": "Oil or coolant leaks",
+        "proof": "Clean engine run with leak check underneath",
+        "if_unproven": "as leaking"
+      }
+    ],
+    "proof_requests": [
+      "Video of the engine running",
+      "Photos of any visible brand or model plates",
+      "List of included components and accessories"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a used car engine from the photo, so it can be priced at its worst case (non-running, unverified condition) without relying on the seller's unproven claims."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 10374,
+    "input_tokens": 1595,
+    "output_tokens": 1855,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "2658dd149c9e86aab2c16ae34a89be8a",
+    "error": null
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black rectangular UPS-style device sitting on a tiled floor.",
+      "The front face reads \"BLUE GATE\" in white capital letters.",
+      "A black power cord with a three-pin plug is attached to the front of the unit.",
+      "A vertical blue panel or button is visible in the center of the front face.",
+      "No model number, capacity, or rating label is visible in the photo."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "UPS",
+      "brand": "BLUE GATE",
+      "model": null,
+      "read_from": [
+        "photo 0 front label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Blue Gate UPS",
+        "verdict": "supported",
+        "evidence": "photo 0 shows BLUE GATE branding on the device front"
+      },
+      {
+        "claim": "Faulty",
+        "verdict": "unverifiable_remote",
+        "evidence": "photo cannot show whether the device powers on or holds a charge"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The UPS may not power on at all",
+        "proof": "video of the unit switching on with a load connected",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The internal battery may be dead or missing",
+        "proof": "photo of the open battery compartment or a load test",
+        "if_unproven": "as dead battery"
+      },
+      {
+        "risk": "It may not regulate or backup power under load",
+        "proof": "video running a connected device during a power cut",
+        "if_unproven": "as not regulating"
+      }
+    ],
+    "proof_requests": [
+      "Video of the UPS powering on and running a load",
+      "Photo of the rear panel showing sockets, switches, and any rating label",
+      "Photo of the battery compartment to confirm battery presence"
+    ],
+    "decision": "price",
+    "reason": "The device is identifiable as a Blue Gate UPS from photo 0, and the seller already describes it as faulty, so it can be priced at its worst case as non-working."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 14989,
+    "input_tokens": 2246,
+    "output_tokens": 2851,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "acafdfac2db9d0954fb9d8eecd2d8223",
+    "error": null
+  }
+}

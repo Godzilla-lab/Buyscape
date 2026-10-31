@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r4",
+  "response": {
+    "observations": [
+      "Toyota engine with a 2GR engine code visible on the cylinder head in photo 0.",
+      "The engine is shown from the front with the timing belt and pulleys visible.",
+      "The engine is sitting on a concrete floor in what appears to be a workshop or yard.",
+      "The engine has significant rust and dirt on the lower intake manifold and the timing cover.",
+      "A watermark 'ALEX AUTO ALEXANDER' is present on both photos."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "engine",
+      "brand": "Toyota",
+      "read_from": [
+        "photo 0 cylinder head"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "2GR engine",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "Toyota Camry 2008/10/12",
+        "verdict": "unverified",
+        "evidence": "The engine code 2GR is a Toyota 2.0L engine, but the specific model year cannot be confirmed from the photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The engine may not be rebuilt or refurbished.",
+        "proof": "A photo of the engine with the cover removed showing the internal condition.",
+        "if_unproven": "as a used engine with unknown internal condition"
+      },
+      {
+        "risk": "The engine may be a different model (e.g., 2GR-FE) than the 2GR specified.",
+        "proof": "A clear photo of the engine code stamped on the cylinder head.",
+        "if_unproven": "as a generic 2GR engine"
+      },
+      {
+        "risk": "The engine may be missing the necessary timing belt.",
+        "proof": "A photo of the engine with the timing belt installed.",
+        "if_unproven": "as an engine without a timing belt"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the engine code stamped on the cylinder head.",
+      "Photo of the engine with the cover removed to check for internal damage.",
+      "Photo of the engine with the timing belt installed.",
+      "Photo of the engine with the intake manifold and timing cover cleaned."
+    ],
+    "decision": "price",
+    "reason": "The engine is known from the photos. What they cannot prove is priced at its worst case until the proof asked for below arrives."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r4",
+    "task": "testify_read",
+    "latency_ms": 2065,
+    "input_tokens": 2017,
+    "output_tokens": 414,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "17003ad6d572e93fa800952b28090b6c",
+    "error": null
+  }
+}

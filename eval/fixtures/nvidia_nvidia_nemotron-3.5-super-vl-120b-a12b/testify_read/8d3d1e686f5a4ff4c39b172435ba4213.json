@@ -1,0 +1,75 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Single passenger car tire shown head-on from the tread face",
+      "Tire appears used with visible tread wear and road grime",
+      "Watermark text across the center of the tire image",
+      "Sidewall markings, brand, size, and date code are not visible or legible",
+      "Background shows stacked tires and a workshop or yard setting"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "car tire",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Run-Flat tires for Mercedes Benz and bmw,Audi,Volkswagen etc",
+        "verdict": "unverified",
+        "evidence": "Tread photo does not show sidewall run-flat markings, tire size, or brand; seller text alone cannot confirm fitment or run-flat status"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Tire is not actually run-flat despite seller claim",
+        "proof": "Sidewall photo showing RFT, Runflat, or equivalent run-flat marking",
+        "if_unproven": "as a standard non-run-flat tire"
+      },
+      {
+        "risk": "Tire size unknown, so fitment for Mercedes, BMW, Audi, or VW cannot be confirmed",
+        "proof": "Sidewall photo showing tire size (width, aspect ratio, rim diameter)",
+        "if_unproven": "as unknown fitment"
+      },
+      {
+        "risk": "Tire age unknown; rubber may be expired or degraded",
+        "proof": "DOT code photo on sidewall showing manufacture date",
+        "if_unproven": "as unknown or old age"
+      },
+      {
+        "risk": "Hidden punctures, repairs, or internal damage",
+        "proof": "Full circumference photos and inner liner inspection",
+        "if_unproven": "as damaged or repaired"
+      },
+      {
+        "risk": "Tread depth below safe or legal limit",
+        "proof": "Tread depth gauge photo or close-up of tread wear indicators",
+        "if_unproven": "as worn out"
+      }
+    ],
+    "proof_requests": [
+      "Sidewall photo showing brand, model, size, and run-flat marking",
+      "DOT date code photo on sidewall",
+      "Tread depth close-up or gauge reading",
+      "Full tire rotation photos to check for repairs or damage"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The sidewall markings that set the tire's size, brand, run-flat status, and age are not visible, so even a worst-case price cannot be determined without those shots."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 14984,
+    "input_tokens": 1587,
+    "output_tokens": 2840,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "8d3d1e686f5a4ff4c39b172435ba4213",
+    "error": null
+  }
+}

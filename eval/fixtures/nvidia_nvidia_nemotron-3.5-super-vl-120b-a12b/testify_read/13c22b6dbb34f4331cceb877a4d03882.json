@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a removed inline-4 car engine bolted to a gearbox, sitting on a concrete floor.",
+      "The intake manifold, throttle body, and ancillaries are visible on top of the block.",
+      "Other engines and car parts are stacked in the background of the workshop.",
+      "A watermark reading 'BLESSED CH' is stamped across the center of the engine block.",
+      "No 'Toyota', 'Corolla', '2005', or '1ZZ' text is legible on the engine in this photo."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "car engine and gearbox",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Toyota Corolla 2005",
+        "verdict": "unverifiable_remote",
+        "evidence": "No Toyota, Corolla, or 2005 markings are legible in photo 0."
+      },
+      {
+        "claim": "engine and gear box",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows an engine mated to a gearbox."
+      },
+      {
+        "claim": "1zz",
+        "verdict": "unverifiable_remote",
+        "evidence": "No '1ZZ' engine code is legible in photo 0."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine does not run or has internal damage",
+        "proof": "Video of the engine starting and running, or compression test results",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Gearbox has faults or missing components",
+        "proof": "Video of the gearbox shifting through gears or a bench inspection",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Engine is not a 1ZZ or is from a different model/year",
+        "proof": "Close-up photo of the engine code stamped on the block",
+        "if_unproven": "as unidentified engine"
+      },
+      {
+        "risk": "High mileage or worn internals",
+        "proof": "Service history or verifiable mileage reading",
+        "if_unproven": "as high mileage/unknown condition"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the engine block showing the engine code (e.g., 1ZZ)",
+      "Video of the engine starting and running",
+      "Video or photos showing the gearbox shifting and condition"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a used car engine and gearbox assembly, so it can be priced at worst case as non-working even though the model and condition are unverified."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 26829,
+    "input_tokens": 1604,
+    "output_tokens": 3291,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "13c22b6dbb34f4331cceb877a4d03882",
+    "error": null
+  }
+}

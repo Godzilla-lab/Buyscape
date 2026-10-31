@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a used automotive transmission or gearbox assembly.",
+      "The casing is metal, oily, and dirty with visible bell housing, mounting points, and linkage.",
+      "A watermark reading \"JP AUTO SPARE PARTS\" appears across the center of the image.",
+      "No brand badge, model plate, part number, or Toyota logo is legible in the photo.",
+      "No marking indicates Camry, 2005-2009, Japan specification, or automatic versus manual type."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "car transmission",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Toyota Camry 2005-2009",
+        "verdict": "unverified",
+        "evidence": "no badge, plate, or part number visible in photo 0"
+      },
+      {
+        "claim": "Japan gear",
+        "verdict": "unverified",
+        "evidence": "no JDM marking visible in photo 0"
+      },
+      {
+        "claim": "one month guarantee",
+        "verdict": "unverifiable_remote",
+        "evidence": "seller promise not shown in photo"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Internal mechanical condition of gears, bearings, and synchronizers cannot be seen",
+        "proof": "video of the unit being shifted through gears on a test stand",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "May not fit a 2005-2009 Toyota Camry",
+        "proof": "legible part number tag or VIN fitment confirmation",
+        "if_unproven": "as wrong fitment"
+      },
+      {
+        "risk": "May not be Japanese-market specification",
+        "proof": "JDM part number or import documentation",
+        "if_unproven": "as non-JDM unit"
+      },
+      {
+        "risk": "Guarantee may not be honored remotely",
+        "proof": "written warranty terms",
+        "if_unproven": "as no warranty"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of any part number or casting number tag on the transmission",
+      "Photo showing any Toyota logo or Camry-specific marking",
+      "Video of the transmission being shifted through all gears on a test stand",
+      "Confirmation of whether it is automatic or manual"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photos show a used transmission but no readable part number, brand badge, or Camry-specific marking, so the exact model that determines value cannot be confirmed even at worst case."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 16973,
+    "input_tokens": 1588,
+    "output_tokens": 2876,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "ca1fc1d4382fc51b8d064a64ac8b321e",
+    "error": null
+  }
+}

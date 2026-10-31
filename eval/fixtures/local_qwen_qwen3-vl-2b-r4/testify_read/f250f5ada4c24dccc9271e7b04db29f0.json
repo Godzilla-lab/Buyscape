@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r4",
+  "response": {
+    "observations": [
+      "Photo 0 shows a car engine with a black plastic cover, a visible alternator, and a water pump pulley.",
+      "Photo 1 shows the same engine with a 'TFSI' badge on the cover and a barcode sticker.",
+      "Photo 2 shows the engine with a black plastic cover featuring the Audi logo and 'TFSI' badge.",
+      "The engine appears dirty and used, with visible grime and some paint chipping on the cover.",
+      "A watermark 'EZE PORSCHE GLOBAL AUTOS' is present on all three photos."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car engine",
+      "brand": "Audi",
+      "model": "TFSI",
+      "read_from": [
+        "photo 2 cover",
+        "photo 1 badge"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "car spare parts",
+        "verdict": "supported",
+        "evidence": "The photos show a used car engine, which is a type of car spare part."
+      },
+      {
+        "claim": "direct from Belgium",
+        "verdict": "unverifiable_remote",
+        "evidence": "The origin cannot be confirmed from photos."
+      },
+      {
+        "claim": "Tested and working, no knock, low mileage, never opened.",
+        "verdict": "unverified",
+        "evidence": "No photo shows this; it is the seller's word only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The engine may not be rebuilt or refurbished.",
+        "proof": "A photo of the engine with the cover removed, showing the cylinders and pistons.",
+        "if_unproven": "as a used engine with no internal work"
+      },
+      {
+        "risk": "The engine may be a different Audi model than claimed.",
+        "proof": "A photo of the engine code or VIN plate.",
+        "if_unproven": "as the lowest-value Audi TFSI model"
+      },
+      {
+        "risk": "The engine may be a different brand or a used part from a different car.",
+        "proof": "A photo of the engine with the cover removed.",
+        "if_unproven": "as a generic used engine"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the engine with the cover removed to see the cylinders.",
+      "Photo of the engine code or VIN plate.",
+      "Photo of the engine with the alternator removed to see the pulleys and belts."
+    ],
+    "decision": "price",
+    "reason": "The item is clearly an Audi TFSI engine, which can be priced at its worst-case value as a used engine with no internal work."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r4",
+    "task": "testify_read",
+    "latency_ms": 6830,
+    "input_tokens": 2796,
+    "output_tokens": 459,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "f250f5ada4c24dccc9271e7b04db29f0",
+    "error": null
+  }
+}

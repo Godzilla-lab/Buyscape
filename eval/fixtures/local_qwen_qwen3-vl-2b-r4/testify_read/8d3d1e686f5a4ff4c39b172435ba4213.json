@@ -1,0 +1,67 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r4",
+  "response": {
+    "observations": [
+      "Single tire shown in a shop or yard setting.",
+      "Tread pattern is a 5-ply design with a 3D tread block pattern.",
+      "The sidewall is visible but the specific brand and model are not legible.",
+      "The tire appears to be used, with some surface wear visible.",
+      "A watermark 'OPEL TECH WHEELS' is present on the image."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "run-flat tire",
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Run-Flat tires",
+        "verdict": "unverified",
+        "evidence": "The tread pattern is consistent with a run-flat tire, but the sidewall text is not legible to confirm the specific model."
+      },
+      {
+        "claim": "for Mercedes Benz and bmw,Audi,Volkswagen etc",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The tire may be a generic or budget brand rather than a high-end Mercedes or BMW model tire.",
+        "proof": "A clear photo of the sidewall showing the brand name and model code.",
+        "if_unproven": "priced as a generic budget tire"
+      },
+      {
+        "risk": "The tire may be expired or have a low tread life despite the run-flat claim.",
+        "proof": "A photo of the 4-digit DOT code on the sidewall showing the manufacture date.",
+        "if_unproven": "priced as expired"
+      },
+      {
+        "risk": "The tire may be a different size from the vehicle it is intended for.",
+        "proof": "A photo of the sidewall showing the size (e.g., 225/45R17).",
+        "if_unproven": "priced as a generic size"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of the sidewall to read the brand and model.",
+      "Close-up of the sidewall to read the size (e.g., 225/45R17).",
+      "Photo of the 4-digit DOT code on the sidewall to confirm the manufacture date."
+    ],
+    "decision": "price",
+    "reason": "The item is known from the photos. What they cannot prove is priced at its worst case until the proof asked for below arrives."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r4",
+    "task": "testify_read",
+    "latency_ms": 2087,
+    "input_tokens": 1393,
+    "output_tokens": 426,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "8d3d1e686f5a4ff4c39b172435ba4213",
+    "error": null
+  }
+}

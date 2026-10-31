@@ -1,0 +1,69 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black SOLITE car battery with label CMF59015, dusty and used, sitting on gravel with terminals and a yellow warning label visible.",
+      "Photo 1 shows a second car battery inside an open cardboard box on gravel, with a person's foot nearby; its brand and model are not readable.",
+      "Both batteries appear used; no charger, tester, or vehicle is shown connected to them."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car battery",
+      "brand": "SOLITE",
+      "model": "CMF59015",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Scarp batteries for sale",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 1 show used batteries with dust, wear, and no packaging, consistent with scrap or used condition."
+      },
+      {
+        "claim": "Serious buyers only",
+        "verdict": "unverifiable_remote",
+        "evidence": "Cannot be determined from photos or remote text."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Batteries do not hold charge or are dead",
+        "proof": "Video of a voltage test under load or the battery cranking a vehicle",
+        "if_unproven": "as scrap/not working"
+      },
+      {
+        "risk": "Battery case is cracked or leaking acid",
+        "proof": "Close-up video of the battery case and terminals for cracks, corrosion, or leakage",
+        "if_unproven": "as hazardous scrap with possible leak damage"
+      },
+      {
+        "risk": "Second battery in photo 1 is a different type or condition than the SOLITE",
+        "proof": "Clear photo of the second battery's label and terminals",
+        "if_unproven": "as an unidentified scrap battery"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the second battery's label and terminals",
+      "Video showing voltage reading under load for each battery",
+      "Close-up of battery cases for cracks, leaks, or terminal corrosion"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as used car batteries, with one SOLITE CMF59015 clearly readable; worst case is scrap value since no working condition is proven."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 12220,
+    "input_tokens": 2369,
+    "output_tokens": 2358,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "bf89f93aedc708583fb5ba5eadcf6d59",
+    "error": null
+  }
+}

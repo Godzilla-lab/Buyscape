@@ -1,0 +1,95 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Light blue industrial sewing machine mounted on a table with an inset bed",
+      "Brand name 'Emel' visible on the front panel in photo 2",
+      "Model 'EM20U33' visible on the right side in photos 1 and 2",
+      "Single needle, presser foot, and stitch plate typical of a lockstitch machine, not an embroidery machine",
+      "Motor mounted underneath the table with belt drive",
+      "Control box with red and green buttons on the right side of the table",
+      "Watermark 'VASILIKOS FASHION OUTLET' across all photos"
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "industrial sewing machine",
+      "brand": "Emel",
+      "model": "EM20U33",
+      "read_from": [
+        "photo 2 front panel",
+        "photo 1 right side",
+        "photo 2 right side"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Emel brand",
+        "verdict": "supported",
+        "evidence": "photo 2 front panel reads Emel"
+      },
+      {
+        "claim": "model 20u / EM20U33",
+        "verdict": "supported",
+        "evidence": "photo 1 and photo 2 show EM20U33"
+      },
+      {
+        "claim": "embroidery machine",
+        "verdict": "contradicted",
+        "evidence": "photos show a single-needle lockstitch industrial machine, not an embroidery machine"
+      },
+      {
+        "claim": "perfect condition",
+        "verdict": "unverified",
+        "evidence": "photos show appearance only, no stitch test or power-on demonstration"
+      },
+      {
+        "claim": "used like new",
+        "verdict": "unverified",
+        "evidence": "photos cannot show usage hours, internal wear, or service history"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Machine may not run or stitch at all",
+        "proof": "video of the motor running and the needle stitching fabric",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "It is a standard lockstitch machine, not an embroidery machine as claimed",
+        "proof": "close-up of the needle bar, presser foot, and stitch plate, or demonstration of embroidery function",
+        "if_unproven": "as a standard lockstitch machine"
+      },
+      {
+        "risk": "Hidden wear in internal mechanisms not visible in photos",
+        "proof": "stitch test on fabric showing even stitches and no skipped stitches",
+        "if_unproven": "as used with unknown condition"
+      },
+      {
+        "risk": "Motor, belt, or table damage not visible from the angles shown",
+        "proof": "clear photo of the motor label, belt, and underside wiring",
+        "if_unproven": "as-is with motor and table risk"
+      }
+    ],
+    "proof_requests": [
+      "Video of the machine running and stitching fabric",
+      "Close-up of the needle bar, presser foot, and stitch plate",
+      "Clear photo of the motor label and underside belt drive"
+    ],
+    "decision": "price",
+    "reason": "The brand and model are readable from the photos, so the item is identified; it can be priced at its worst case as a non-working industrial sewing machine."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 9992,
+    "input_tokens": 2429,
+    "output_tokens": 2065,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "33c26bacde3c1f73cac684afe8f672ef",
+    "error": null
+  }
+}

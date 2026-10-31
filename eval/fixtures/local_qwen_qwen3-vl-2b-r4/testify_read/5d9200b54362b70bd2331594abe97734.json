@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r4",
+  "response": {
+    "observations": [
+      "Red Toyota Camry sedan parked on a paved driveway.",
+      "The front driver's door is open in all photos.",
+      "The front passenger's door is open in photo 1.",
+      "The car has a Nigerian license plate (N111111).",
+      "The Toyota emblem is visible on the front grille in photo 0.",
+      "The interior is not visible in any photo.",
+      "The car appears to be in good cosmetic condition with no visible body damage."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "sedan",
+      "brand": "Toyota",
+      "model": "Camry",
+      "read_from": [
+        "photo 0 grille"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "good condition",
+        "verdict": "unverified",
+        "evidence": "The exterior is clean, but the interior is not shown."
+      },
+      {
+        "claim": "interior pafect",
+        "verdict": "unverified",
+        "evidence": "No interior photos provided."
+      },
+      {
+        "claim": "Like new, never repaired or opened, works perfectly. Original receipt and warranty available.",
+        "verdict": "unverified",
+        "evidence": "No photo shows this; it is the seller's word only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The car may be a used vehicle with hidden mechanical or electrical faults.",
+        "proof": "A video of the car running and a mechanic's inspection report.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The car may be a high-value model (e.g., 2.4L) while the seller may be selling a lower-value 2.0L model.",
+        "proof": "A photo of the engine or chassis number plate.",
+        "if_unproven": "as the lowest-value 2.0L model"
+      },
+      {
+        "risk": "The car may be a used model (e.g., 2010) while the seller may be selling a newer model.",
+        "proof": "A photo of the interior dashboard or the engine bay.",
+        "if_unproven": "as a 2010 model"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of any label, sticker or metal plate showing the brand and model.",
+      "Photo of the engine or chassis number plate.",
+      "Photo of the interior dashboard.",
+      "Video of the car running and a mechanic's inspection report."
+    ],
+    "decision": "price",
+    "reason": "The car is identifiable as a Toyota Camry. It can be priced at its worst-case value as a used 2.0L model in fair condition."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r4",
+    "task": "testify_read",
+    "latency_ms": 8989,
+    "input_tokens": 2377,
+    "output_tokens": 468,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "5d9200b54362b70bd2331594abe97734",
+    "error": null
+  }
+}

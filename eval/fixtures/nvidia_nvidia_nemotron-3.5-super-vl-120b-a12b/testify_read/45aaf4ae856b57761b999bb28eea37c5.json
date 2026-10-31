@@ -1,0 +1,94 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Large flat-screen TV lying flat on the ground with screen off and reflective",
+      "Cardboard box on the left has \"75\"\" handwritten on it",
+      "Text on the lower bezel reads \"Google TV\" with another word that may be a brand",
+      "No Samsung branding visible anywhere in the photo",
+      "Person's hand holding the right edge of the TV",
+      "Reflection of a person standing visible on the screen surface"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "75 inch flat screen TV",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 box",
+        "photo 0 bezel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "75 inch size",
+        "verdict": "supported",
+        "evidence": "photo 0 cardboard marked 75\""
+      },
+      {
+        "claim": "Samsung brand",
+        "verdict": "contradicted",
+        "evidence": "photo 0 bezel shows Google TV, not Samsung"
+      },
+      {
+        "claim": "Smart TV",
+        "verdict": "supported",
+        "evidence": "photo 0 bezel shows Google TV"
+      },
+      {
+        "claim": "Outdoor use",
+        "verdict": "unverifiable_remote",
+        "evidence": "no outdoor rating or weatherproofing visible"
+      },
+      {
+        "claim": "Power fault only",
+        "verdict": "unverified",
+        "evidence": "screen is off, no power test shown"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Screen may be cracked or damaged beneath the reflection",
+        "proof": "close-up photo of the screen surface or a video of the TV powered on",
+        "if_unproven": "as screen damaged"
+      },
+      {
+        "risk": "Power fault may be more serious than stated",
+        "proof": "video of the TV powering on and displaying an image",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Not actually outdoor-rated",
+        "proof": "clear photo of rear label or spec sheet",
+        "if_unproven": "as indoor TV"
+      },
+      {
+        "risk": "Brand is unknown and may be low-value",
+        "proof": "clear photo of rear brand/model label",
+        "if_unproven": "as generic brand"
+      }
+    ],
+    "proof_requests": [
+      "Video of the TV powering on and displaying an image",
+      "Close-up photo of the screen surface for cracks",
+      "Clear photo of the rear brand/model label",
+      "Tape measure shot confirming the 75 inch diagonal"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a 75 inch flat screen TV by type, so even at the worst case of not working it can be priced without further proof."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 20905,
+    "input_tokens": 2238,
+    "output_tokens": 3156,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "45aaf4ae856b57761b999bb28eea37c5",
+    "error": null
+  }
+}

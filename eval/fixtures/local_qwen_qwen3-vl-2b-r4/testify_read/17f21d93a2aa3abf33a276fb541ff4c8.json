@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r4",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black car battery with a red 'SOLITE' logo and a white label reading 'CMF59015'.",
+      "The battery has a 'FITTING DATE' sticker showing 12/2023.",
+      "The battery is sitting on gravel with other batteries and a cardboard box visible in the background.",
+      "Photo 1 shows the same battery in a cardboard box, with a person's foot visible on the gravel.",
+      "The battery terminals are visible but the casing appears worn and dusty."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car battery",
+      "brand": "SOLITE",
+      "model": "CMF59015",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Scarp batteries",
+        "verdict": "supported",
+        "evidence": "The brand 'SOLITE' is clearly visible on the battery in photo 0."
+      },
+      {
+        "claim": "Serious buyers only",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      },
+      {
+        "claim": "Everything is clean, dry and sorted, no water added. Weighed at 500 kg on a certified scale this morning.",
+        "verdict": "unverified",
+        "evidence": "No photo shows this; it is the seller's word only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The battery may be dead or have a high internal resistance (sulfation).",
+        "proof": "A video showing a multimeter reading of the battery's voltage.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The battery may be near the end of its service life (5-year warranty).",
+        "proof": "A photo of the 'FITTING DATE' sticker on the battery.",
+        "if_unproven": "as expired"
+      },
+      {
+        "risk": "The battery may be a different brand or model than the one shown.",
+        "proof": "A photo of the manufacturer's label on the battery.",
+        "if_unproven": "as a generic brand"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of any label, sticker or metal plate showing the brand and model.",
+      "Photo of the 'FITTING DATE' sticker on the battery.",
+      "Video of a multimeter test showing the battery voltage.",
+      "Photo of the manufacturer's label on the battery."
+    ],
+    "decision": "price",
+    "reason": "The brand and model are clearly identified from the label in photo 0, allowing for a valuation at the worst-case condition (non-working)."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r4",
+    "task": "testify_read",
+    "latency_ms": 7699,
+    "input_tokens": 2300,
+    "output_tokens": 472,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "17f21d93a2aa3abf33a276fb541ff4c8",
+    "error": null
+  }
+}

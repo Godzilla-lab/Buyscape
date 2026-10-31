@@ -1,0 +1,87 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a standard blue PS5 game case lying on a wood surface.",
+      "The cover reads \"PS5\" at top left and \"EA SPORTS FC 26\" in large text.",
+      "Two football players appear on the cover art.",
+      "A PEGI 3 age rating is visible in the bottom left corner.",
+      "The word \"HYPERMOTION\" appears at bottom right.",
+      "A watermark reading \"OBOTE DOMO\" is overlaid across the center of the cover."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "PS5 game",
+      "brand": "EA Sports",
+      "model": "FC 26",
+      "read_from": [
+        "photo 0 cover"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "FC 26",
+        "verdict": "supported",
+        "evidence": "photo 0 title on cover"
+      },
+      {
+        "claim": "CD",
+        "verdict": "supported",
+        "evidence": "photo 0 shows a physical disc-based PS5 game case"
+      },
+      {
+        "claim": "for PS5",
+        "verdict": "supported",
+        "evidence": "photo 0 PS5 logo on cover"
+      },
+      {
+        "claim": "for sale",
+        "verdict": "unverifiable_remote",
+        "evidence": "not visible in photo"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The case may be empty with no disc inside.",
+        "proof": "Photo showing the disc inside the case or the disc itself.",
+        "if_unproven": "priced as empty case"
+      },
+      {
+        "risk": "The disc may be scratched, cracked, or unreadable.",
+        "proof": "Video of the game installing or loading on a PS5 console.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The copy may be counterfeit or pirated.",
+        "proof": "Close-up photos of the disc label, case spine, and barcode.",
+        "if_unproven": "priced as counterfeit"
+      },
+      {
+        "risk": "The game may be region-locked and not work on a Nigerian PS5 account.",
+        "proof": "Photo of the case spine showing the region code.",
+        "if_unproven": "priced as region-incompatible"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the game disc itself",
+      "Photo of the case spine and back cover showing region and barcode",
+      "Video of the disc loading on a PS5"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as EA Sports FC 26 for PS5 from photo 0, so it can be priced at its worst case (missing or unreadable disc) while awaiting proof."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 45812,
+    "input_tokens": 1578,
+    "output_tokens": 2639,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "3375446e7d87b2016e918cc00e17dd97",
+    "error": null
+  }
+}

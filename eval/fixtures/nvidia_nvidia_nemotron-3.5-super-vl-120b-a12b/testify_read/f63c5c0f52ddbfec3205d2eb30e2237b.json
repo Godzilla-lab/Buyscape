@@ -1,0 +1,84 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows the rear of a black Canon DSLR with top LCD, buttons, and SET dial.",
+      "Photo 1 shows the front of a black Canon DSLR with \"EOS 6D\" badge and body cap on the mount.",
+      "Photo 2 shows the same camera from a front-left angle with \"EOS 6D\" badge and body cap.",
+      "A strap is attached in photos 1 and 2.",
+      "No lens is attached in any photo."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": null,
+      "brand": "Canon",
+      "model": "EOS 6D",
+      "read_from": [
+        "photo 1",
+        "photo 2"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Canon 6D camera",
+        "verdict": "supported",
+        "evidence": "EOS 6D badge visible on front in photo 1 and photo 2"
+      },
+      {
+        "claim": "body only",
+        "verdict": "supported",
+        "evidence": "Body cap on lens mount, no lens attached in photo 1 and photo 2"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Camera does not power on or shutter does not fire",
+        "proof": "video of camera turning on, taking a photo, and reviewing the image",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Shutter count is unknown or high",
+        "proof": "screenshot of shutter count from camera menu or computer",
+        "if_unproven": "as unknown or high shutter count"
+      },
+      {
+        "risk": "Sensor has dust, scratches, or fungus",
+        "proof": "photo of sensor with mirror locked up or test shot against a white wall",
+        "if_unproven": "as sensor needs cleaning or repair"
+      },
+      {
+        "risk": "LCD screen or viewfinder is damaged",
+        "proof": "close-up of LCD screen powered on and viewfinder",
+        "if_unproven": "as screen or viewfinder faulty"
+      },
+      {
+        "risk": "Battery and charger are not included",
+        "proof": "photo of LP-E6 battery and LC-E6 charger",
+        "if_unproven": "as body only with no power accessories"
+      }
+    ],
+    "proof_requests": [
+      "Video of camera powering on, taking a photo, and reviewing the image",
+      "Screenshot of shutter count from the camera menu",
+      "Photo of the sensor with mirror locked up",
+      "Close-up of the LCD screen powered on",
+      "Photo of battery and charger if included"
+    ],
+    "decision": "price",
+    "reason": "The item is clearly a Canon EOS 6D body visible in the photos, so it can be priced at its worst case pending proof of function and condition."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 15562,
+    "input_tokens": 2327,
+    "output_tokens": 3024,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "f63c5c0f52ddbfec3205d2eb30e2237b",
+    "error": null
+  }
+}

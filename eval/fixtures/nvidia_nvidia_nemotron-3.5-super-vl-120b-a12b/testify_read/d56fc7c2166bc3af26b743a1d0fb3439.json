@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Black electric bike with front wire basket",
+      "Dual headlamp front fairing",
+      "Handlebars with black grips and brake levers",
+      "Front wheel with tire and disc brake visible",
+      "Mosaic tile floor",
+      "Metal gate and wooden shelving in background",
+      "No battery, charger, or brand plate visible in the photo"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "electric bike",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Electric bike",
+        "verdict": "unverified",
+        "evidence": "photo 0 shows a bike form factor but no motor, battery, or power-on proof"
+      },
+      {
+        "claim": "48v Battery",
+        "verdict": "unverifiable_remote",
+        "evidence": "battery not visible in photo 0"
+      },
+      {
+        "claim": "Charger",
+        "verdict": "unverifiable_remote",
+        "evidence": "charger not visible in photo 0"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery may be missing, dead, or not 48v",
+        "proof": "photo of battery with voltage label",
+        "if_unproven": "as without a usable battery"
+      },
+      {
+        "risk": "Charger may be missing or broken",
+        "proof": "photo of charger",
+        "if_unproven": "as without a charger"
+      },
+      {
+        "risk": "Bike may not power on or run",
+        "proof": "video of bike turning on and moving under power",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of battery with voltage label",
+      "Photo of charger",
+      "Video of bike powering on and running"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as an electric bike from photo 0, but the battery, charger, and working condition are unproven, so it must be priced at worst case as a non-running bike without verified battery or charger."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 10928,
+    "input_tokens": 1577,
+    "output_tokens": 1749,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "d56fc7c2166bc3af26b743a1d0fb3439",
+    "error": null
+  }
+}

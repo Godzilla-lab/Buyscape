@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Black DSLR camera body with 'Nikon' logo on front (photo 0)",
+      "'D3300' model marking visible on front right and back top (photos 0, 1)",
+      "Lens marked 'AF-S DX NIKKOR 18-55mm' (photos 0, 1)",
+      "Camera strap attached (photos 1, 2)",
+      "Sitting on white paper with 'McSteve 1 Online Gadget Store' watermark (all photos)",
+      "'POSTED ON JIJI' watermark across center (all photos)"
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DSLR camera with 18-55mm lens",
+      "brand": "Nikon",
+      "model": "D3300",
+      "read_from": [
+        "photo 0",
+        "photo 1"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Used Nikon D3300 DSLR camera with 18-55mm lens",
+        "verdict": "supported",
+        "evidence": "photo 0 and photo 1 show Nikon branding and D3300 model marking; lens shows 18-55mm"
+      },
+      {
+        "claim": "working perfectly ok",
+        "verdict": "unverified",
+        "evidence": "photos cannot show camera function"
+      },
+      {
+        "claim": "but the glass...",
+        "verdict": "unverifiable_remote",
+        "evidence": "seller's text is cut off; no close-up of lens glass provided"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Lens glass may be scratched, fogged, or damaged (seller text cuts off at 'the glass')",
+        "proof": "close-up photo of front and rear lens elements held to light",
+        "if_unproven": "as lens damaged or unusable"
+      },
+      {
+        "risk": "Camera may not power on, shutter may be faulty, or sensor may be dirty/damaged",
+        "proof": "video of camera turning on, taking a photo, and displaying the image",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Shutter count may be high or unknown",
+        "proof": "screenshot of camera menu showing shutter count",
+        "if_unproven": "as high shutter count"
+      },
+      {
+        "risk": "Battery, charger, or memory card may be missing",
+        "proof": "photo of battery, charger, and memory card included",
+        "if_unproven": "as body and lens only"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of front and rear lens glass",
+      "Video of camera powering on and taking a photo",
+      "Photo of included battery, charger, and memory card"
+    ],
+    "decision": "price",
+    "reason": "The camera model is clearly readable from the photos, so it can be priced at worst case (non-working, damaged glass) pending proof of function and lens condition."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 11201,
+    "input_tokens": 2923,
+    "output_tokens": 2200,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "b705133da5836638574e44daf10e8ef7",
+    "error": null
+  }
+}
