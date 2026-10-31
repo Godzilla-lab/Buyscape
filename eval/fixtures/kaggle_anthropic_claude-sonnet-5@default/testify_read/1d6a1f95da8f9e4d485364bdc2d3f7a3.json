@@ -1,0 +1,80 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: Interior of an open chest freezer, metal liner with frost/ice buildup and some dark staining on walls.",
+      "Photo 1: Front view of a white chest freezer with lid open; a circular sticker reads 'Haier Thermocool', '2 Years Warranty', and 'Chain Compressor'; visible rust spots along the bottom edge of the cabinet.",
+      "Photo 2: Rear view showing condenser coil, a rating label (text not legible), a power plug, and rust at the lower corners of the casing."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "chest freezer",
+      "brand": "Haier Thermocool",
+      "model": null,
+      "read_from": [
+        "photo 1 sticker"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Classic and reliable Thermocool freezer",
+        "verdict": "unverifiable_remote",
+        "evidence": "No power-on or running clip provided; brand is visible in photo 1 but reliability cannot be judged from stills."
+      },
+      {
+        "claim": "Strong capacity, long-lasting freezing for up to five (days, implied)",
+        "verdict": "unverifiable_remote",
+        "evidence": "No thermometer reading, no video showing sustained cold retention; frost in photo 0 could be pre-existing or manually placed."
+      },
+      {
+        "claim": "2 Years Warranty (from sticker)",
+        "verdict": "unverifiable_remote",
+        "evidence": "Sticker in photo 1 shows a warranty badge, but this reflects the original manufacturer warranty period, not current coverage status; no proof of purchase date or active warranty."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Unit may not power on or cool effectively (compressor failure, gas leak).",
+        "proof": "A video clip of the unit plugged in, running, with audible compressor hum and visible frost forming over a few minutes, or a thermometer reading showing sub-zero interior temperature.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Visible rust at the base (photos 1 and 2) may indicate corrosion of the cabinet or leakage history, lowering resale value and raising failure risk.",
+        "proof": "Close-up photos of the rusted areas and the base/feet to assess severity and whether it has penetrated the insulation or coolant lines.",
+        "if_unproven": "priced as significant cosmetic/structural damage, deducted from a working-unit price"
+      },
+      {
+        "risk": "Interior frost shown in photo 0 may not reflect a true cooling test; could be residual ice from freezer being unplugged or staged.",
+        "proof": "A video showing the freezer being plugged in from a warm/empty state and frost developing naturally over time.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "No model number visible, so exact capacity and age/generation of the unit cannot be confirmed, affecting comparable pricing.",
+        "proof": "A clear photo of the rating label on the back (visible but unreadable in photo 2) showing model number, capacity, and manufacture date.",
+        "if_unproven": "priced as a generic small/mid-capacity Haier Thermocool chest freezer at worst case"
+      }
+    ],
+    "proof_requests": [
+      "Video of the freezer plugged in and running, showing compressor sound and door seal, ideally with a thermometer inside.",
+      "Clear, well-lit photo of the rating label on the rear (photo 2) showing model number and capacity.",
+      "Close-up photos of the rusted areas at the base front and rear to assess corrosion severity.",
+      "Photo of the door gasket/seal condition for air-tightness."
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identifiable by brand and type as a used Haier Thermocool chest freezer, but working condition is unverified and visible rust is a real defect, so it must be priced at worst case (not confirmed working, with cosmetic/structural rust) until the seller provides a running test and clearer label/rust photos."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 25291,
+    "input_tokens": 4449,
+    "output_tokens": 2097,
+    "cost_usd": 0.026677,
+    "replayed": false,
+    "fixture_key": "1d6a1f95da8f9e4d485364bdc2d3f7a3",
+    "error": null
+  }
+}

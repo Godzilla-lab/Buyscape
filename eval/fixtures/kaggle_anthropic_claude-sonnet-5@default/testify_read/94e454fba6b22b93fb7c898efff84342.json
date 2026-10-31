@@ -1,0 +1,66 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Single photo (photo 0) shows a stack of six paperback book spines lying flat.",
+      "Visible titles/authors on spines: 'Rich Dad Poor Dad' (Robert T. Kiyosaki, partially visible, top), 'This Is Marketing' (Seth Godin), 'Sell Like Crazy' (Sabri Suby), 'Crushing It!' (Gary Vaynerchuk), 'Guerrilla Marketing' (Jay Conrad Levinson, Houghton Mifflin), 'Sell or Be Sold' (Grant Cardone).",
+      "A semi-transparent watermark reading 'GLOBALSPORTSANDBOOKS POSTED ON...' runs diagonally across the image.",
+      "No book covers, front/back pages, or condition (creases, stains, highlighting, missing pages) are visible.",
+      "No hand, ID, date marker, or surface context that ties this photo to the seller's actual possession of the item."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "Bundle of 6 marketing/sales paperback books: Rich Dad Poor Dad (partial), This Is Marketing, Sell Like Crazy, Crushing It!, Guerrilla Marketing, Sell or Be Sold",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 spines"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Selected collection of books on marketing and sales",
+        "verdict": "supported",
+        "evidence": "photo 0 spine titles are all marketing/sales related (Godin, Suby, Vaynerchuk, Levinson, Cardone)"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Image appears watermarked by a third-party listing site ('GLOBALSPORTSANDBOOKS'), suggesting it may be copied from another seller's listing rather than a photo of the actual item in the seller's possession.",
+        "proof": "A fresh, unwatermarked photo of the same books taken by the seller, ideally with a handwritten note or today's date visible, plus a photo of the book covers.",
+        "if_unproven": "treat listing as unverified possession; price at zero confidence pending proof, equivalent to worst case for a resale/stock-photo scam"
+      },
+      {
+        "risk": "Physical condition of pages and covers (water damage, missing pages, heavy highlighting) cannot be assessed from spine-only view.",
+        "proof": "Clear photos of each book's front cover, back cover, and a flip-through of interior pages.",
+        "if_unproven": "priced as heavily used/worn condition"
+      },
+      {
+        "risk": "Completeness of the 'Rich Dad Poor Dad' book is unclear since only a sliver of its spine is visible; it may not actually be included in the sale.",
+        "proof": "Full photo showing all 6 book spines/covers clearly, confirming all titles are part of the lot.",
+        "if_unproven": "priced as a 5-book bundle, excluding Rich Dad Poor Dad"
+      }
+    ],
+    "proof_requests": [
+      "A new, unwatermarked photo taken by the seller right now, showing the same books alongside a handwritten note with today's date.",
+      "Close-up photos of each book's front and back cover.",
+      "A photo confirming 'Rich Dad Poor Dad' is fully present and included in the lot."
+    ],
+    "decision": "fraud_suspected",
+    "reason": "The sole photo carries a visible third-party watermark ('GLOBALSPORTSANDBOOKS POSTED ON...'), a strong indicator the image was lifted from another online listing rather than taken by the seller, which is a classic sign of a resale/stock-photo scam and cannot be priced until proof of genuine possession is provided."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 27124,
+    "input_tokens": 2138,
+    "output_tokens": 2613,
+    "cost_usd": 0.027215,
+    "replayed": false,
+    "fixture_key": "94e454fba6b22b93fb7c898efff84342",
+    "error": null
+  }
+}

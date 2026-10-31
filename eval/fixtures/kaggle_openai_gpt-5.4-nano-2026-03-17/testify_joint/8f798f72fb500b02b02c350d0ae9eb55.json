@@ -1,0 +1,79 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0 shows a used car engine assembly on the floor (bare engine, not installed).",
+      "There is a label/marking on the engine cover area, but the exact engine code/model is not clearly readable from this image.",
+      "No clear view of mileage, whether it was opened, or any test equipment/results."
+    ],
+    "identity": {
+      "status": "unknown",
+      "kind": "engine (tokunbo/used) for car",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Direct America very neet and tested ok,, with 3 month guarantee",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo 0 does not show any test result or written/dated guarantee terms."
+      },
+      {
+        "claim": "Tokunbo, direct from Belgium.",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo 0 does not show origin documents or shipping/auction paperwork."
+      },
+      {
+        "claim": "Tested and working, no knock, low mileage, never opened.",
+        "verdict": "unverified",
+        "evidence": "Photo 0 cannot confirm running condition, knocking sound, mileage, or whether the engine has been opened."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine identification mismatch (wrong engine code/variant for the buyer\u2019s car). The photo label is not readable enough to confirm exact model/variant.",
+        "proof": "Ask for a clear close-up photo of the engine code/variant stamping (e.g., on engine block/plate) and the full engine nameplate, plus a photo of the VIN/fitment info if available.",
+        "if_unproven": "Price as a generic used engine with unknown exact variant (worst-case fitment risk)."
+      },
+      {
+        "risk": "Not actually tested to running condition (could be sold as 'tested ok' but not truly verified).",
+        "proof": "Request a short video clip of the engine running (cold start if possible) showing stable idle and no abnormal noise, plus a video of the gauge readings if any.",
+        "if_unproven": "Price as not proven running (worst-case: treat as needs further verification)."
+      },
+      {
+        "risk": "Internal wear/damage not visible (compression, head gasket, timing chain/belt condition).",
+        "proof": "Request compression test results (or leak-down test) screenshot/photo, or at least a mechanic\u2019s test report with readings.",
+        "if_unproven": "Price as potentially worn/unknown internal condition."
+      },
+      {
+        "risk": "Missing parts/accessories or incomplete assembly (alternator, starter, sensors, ECU, intake/exhaust components).",
+        "proof": "Ask for a full inventory photo: both sides of the engine, and close-ups of all sensors/connectors and what is included/excluded.",
+        "if_unproven": "Price as incomplete/unknown inclusions."
+      }
+    ],
+    "proof_requests": [
+      "Clear close-up photo of the engine code/variant stamping and any label that identifies the exact engine (so we can match to the comparables).",
+      "Video of the engine running (start + 2\u20133 minutes idle) showing no knock and stable operation.",
+      "Compression/leak-down test results (photo/screenshot) or a mechanic\u2019s written report with readings.",
+      "Photos showing what accessories are included (starter, alternator, sensors, ECU/ignition components) and what is not."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo shows an engine, but the exact engine code/variant and key proof of 'tested ok/low mileage/never opened' are not verifiable from the single image. Without identification, a correct worst-case price pick from the comparables is not reliable.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_joint",
+    "latency_ms": 5549,
+    "input_tokens": 2293,
+    "output_tokens": 860,
+    "cost_usd": 0.002918,
+    "replayed": false,
+    "fixture_key": "8f798f72fb500b02b02c350d0ae9eb55",
+    "error": null
+  }
+}
