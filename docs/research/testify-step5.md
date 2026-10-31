@@ -320,6 +320,57 @@ a seller makes a claim (22 of the lied-to items). And the 178 lists Gemini
 refused taught nothing: only lists of another kind are taught as
 refusals, so a list of dearer bikes for a cheap one is never refused.
 
+## The fourth training run: the teacher's refusals (31 Oct)
+
+Run 3 learnt Gemini's picks but never its refusals, so the 178 training
+lists Gemini turned down were taught as nothing. In `sft_r4` they are taught
+as refused, for the advert and its lied-to twin: 957 adverts and 3,299
+chats, every advert that teaches the price step first (303 picks, 178
+refusals, 119 lists of another kind), reads that ask for the label on 31%
+of adverts. The same set trains both sizes, each on its own team account's
+T4 pair, so the size curve and the recipe are read on the same data.
+
+The 2B came first: one full pass, 389 steps in 3.8 hours (4.3 seconds a
+chat, half the 4B's), held-out loss 2.40 to 0.46.
+
+| | Untuned 2B | Run 3, 4B | **Run 4, 2B** | Nemotron | Claude | Gemini |
+|---|---|---|---|---|---|---|
+| Gave a price | 0% | 65% | **30%** | 40% | 19% | 19% |
+| Typical offer, against the asking price | | 0.74 | 0.75 | 0.80 | 0.78 | 0.86 |
+| Offered above the asking price | | 23% | **16%** | 26% | 22% | 27% |
+| Asking price inside the range | | 49% | **56%** | 43% | 40% | 34% |
+| Asking price far outside the range | | 15% | 10% | 11% | 18% | **7%** |
+| A lie raised the price | | 12% | **6%** | 12% | 30% | 13% |
+| Called the lie supported | 47% | 0.4% | 0.4% | 4% | 1% | 3% |
+| Lists refused as another item, both twins | | 18 | 111 | 92 | 71 | 72 |
+| Asked for the label, clean items | | 6 | 43 | | | |
+| Right about the item, when it said | 77% | 78% | 74% | 85% | 89% | 82% |
+| Priced answers the rules mark wrong, unread | | 13 | 8 | | | |
+| Largest overpayment, naira | | 3,950,000 | **250,000** | 4,500,000 | 3,950,000 | 163,000 |
+| Expected loss per item, naira | 1,012 | 55,208 | **3,600** | 31,782 | 24,199 | 3,195 |
+
+It worked. The 2B, the smallest model in the size curve, now loses about
+as little money as Gemini, a seventh of what Claude loses and a ninth of
+Nemotron, while pricing half again as many items as Gemini. Its range holds
+the asking price more often than any model's, it offers above the asking
+price least, and a lie moves its price least. The untuned 2B believed the
+planted lie 47% of the time; the trained one almost never does.
+
+Declining is what changed. It refused 111 lists where run 3 refused 18, and
+asked for the label on 43 clean items where run 3 asked on 6. The items
+that cost the others most it declined: the Caterpillar engine list (offered
+at twice its asking price by Claude and run 3) it refused, and the Lumix
+camera it asked a label for. On its own lists its picks overpay 4,429 naira
+per item against 16,750 for the best rule. Its largest overpayment is a
+gearbox at 900,000 against 650,000.
+
+What it does worse: it is right about the item 74% of the time, under every
+frontier model, and the word rules mark 8 of its priced answers wrong; they
+wait for a person. Gemini still lands far off less often. These are dev
+numbers on 231 items; the test split is untouched.
+
+The 4B on the same set is still training.
+
 ## Still running
 
 Gemini's, Claude's and nano's remaining conditions, and pushback and

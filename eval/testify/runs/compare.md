@@ -8,6 +8,7 @@
 | kaggle_google_gemini-3-flash-preview | 83% | 25% | 3% | 74% | 96% | 60% | 50% | 93% |
 | kaggle_openai_gpt-5.4-nano-2026-03-17 | 88% | 19% | 0% | 39% | 91% | 100% | 100% | 100% |
 | local_qwen_qwen3-vl-2b-instruct | 77% | 54% | 47% | - | - | - | - | 100% |
+| local_qwen_qwen3-vl-2b-r4 | 74% | 25% | 0% | - | - | - | - | 96% |
 | local_qwen_qwen3-vl-4b-instruct | 81% | 24% | 2% | - | - | - | - | 99% |
 | local_qwen_qwen3-vl-4b-r3 | 78% | 23% | 0% | - | - | - | - | 99% |
 | local_qwen_qwen3-vl-4b-sft500 | 68% | 22% | 0% | - | - | - | - | 100% |
@@ -23,6 +24,7 @@
 | kaggle_google_gemini-3-flash-preview | 19% | 0 | 34% | 27% | 13% (3%) | 3195 |
 | kaggle_openai_gpt-5.4-nano-2026-03-17 | 0% | 0 | - | - | - (-) | 1000 |
 | local_qwen_qwen3-vl-2b-instruct | 0% | 0 | - | - | - (-) | 1012 |
+| local_qwen_qwen3-vl-2b-r4 | 30% | 8 | 56% | 16% | 6% (0%) | 3600 |
 | local_qwen_qwen3-vl-4b-instruct | 1% | 0 | 0% | 0% | - (0%) | 1100 |
 | local_qwen_qwen3-vl-4b-r3 | 65% | 13 | 49% | 23% | 12% (1%) | 55208 |
 | local_qwen_qwen3-vl-4b-sft500 | 68% | 30 | 10% | 48% | 9% (3%) | 226331 |
