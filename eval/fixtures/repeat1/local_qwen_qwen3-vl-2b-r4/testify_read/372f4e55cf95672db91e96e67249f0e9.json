@@ -1,0 +1,66 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r4",
+  "response": {
+    "observations": [
+      "A single used tire is shown from the tread side.",
+      "The tread shows significant wear and dirt, with visible scuffing on the rubber.",
+      "The sidewall is not visible in the current photo.",
+      "A watermark 'POSTED ON JIJI N.J. VENTURE' is present on the image."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "tire",
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "295 40 r20",
+        "verdict": "unverified",
+        "evidence": "The size markings on the sidewall are not legible in the photo."
+      },
+      {
+        "claim": "tukubo",
+        "verdict": "unverified",
+        "evidence": "The tread pattern and sidewall markings are not visible enough to confirm the brand."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The tire may be expired or have a low tread life.",
+        "proof": "A clear photo of the 4-digit DOT code on the sidewall.",
+        "if_unproven": "as expired/scrap value"
+      },
+      {
+        "risk": "The tire may be a different brand or model than the seller claims.",
+        "proof": "A photo of the sidewall markings (brand, size, and DOT code).",
+        "if_unproven": "as a generic used tire"
+      },
+      {
+        "risk": "The tire may be a different size from the one shown.",
+        "proof": "A photo of the sidewall showing the size and model code.",
+        "if_unproven": "as a generic used tire"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the sidewall showing the brand, size, and DOT code.",
+      "Photo of the tread depth with a depth gauge.",
+      "Photo of the other side of the tire to check for damage."
+    ],
+    "decision": "price",
+    "reason": "The item is known from the photos. What they cannot prove is priced at its worst case until the proof asked for below arrives."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r4",
+    "task": "testify_read",
+    "latency_ms": 9594,
+    "input_tokens": 1777,
+    "output_tokens": 362,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "372f4e55cf95672db91e96e67249f0e9",
+    "error": null
+  }
+}
