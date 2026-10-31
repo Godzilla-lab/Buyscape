@@ -1,0 +1,96 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: Canon EOS 600D body with rear body cap on, front lens cap on a separate EF-S 18-55mm lens, strap labeled 'EOS DIGITAL' lying on a white shelf.",
+      "Photo 1: Rear view of the same 600D body, flip-out LCD screen closed/folded against body, screen is off, no visible power-on state.",
+      "Photo 2: Same 600D body and lens sit alongside a second camera (visible label 'EOS 700D') and a Nikon lens cap top-left, indicating this is a shelf of multiple used cameras for sale, not a single isolated unit.",
+      "No shot of the lens mount, sensor, memory card slot, battery compartment, or a powered-on screen/shutter count.",
+      "No UK import sticker, box, or paperwork visible to support 'UK used' claim.",
+      "Body and lens exterior look clean with no obvious dents or scuffs, but this only confirms cosmetic condition, not function."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DSLR camera with kit lens",
+      "brand": "Canon",
+      "model": "EOS 600D",
+      "read_from": [
+        "photo 0 body badge",
+        "photo 1 body badge",
+        "photo 2 body badge and lens barrel text 'EFS 18-55mm'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "UK used",
+        "verdict": "unverifiable_remote",
+        "evidence": "No import sticker, serial tag close-up, or UK packaging shown in any photo."
+      },
+      {
+        "claim": "very neat",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 1 show a cosmetically clean body and lens with no visible dents or scratches."
+      },
+      {
+        "claim": "sharp (implying lens/image quality is good)",
+        "verdict": "unverified",
+        "evidence": "No sample photo taken with the camera, no lens glass close-up, no autofocus test shown."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Camera may not power on or shutter may not fire",
+        "proof": "A photo/video of the camera powered on showing the LCD menu or a live shutter count display",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "LCD flip screen could be cracked, dead-pixeled, or hinge-broken",
+        "proof": "A photo of the screen open and powered on showing a live image or menu",
+        "if_unproven": "priced as screen faulty"
+      },
+      {
+        "risk": "Lens could have fungus, haze, or scratched glass affecting image sharpness",
+        "proof": "A close-up photo of front and rear lens elements held up to light",
+        "if_unproven": "priced as lens optics unverified/degraded"
+      },
+      {
+        "risk": "Shutter count could be very high, reducing remaining lifespan",
+        "proof": "A photo of the shutter count reading from camera menu or software",
+        "if_unproven": "priced as high/unknown shutter count"
+      },
+      {
+        "risk": "Battery, charger, or memory card may not be included, affecting usability out of box",
+        "proof": "A photo showing battery, charger, and card alongside the camera",
+        "if_unproven": "priced as body+lens only, no accessories"
+      },
+      {
+        "risk": "Item may be mixed up with the adjacent 700D or Nikon units in a multi-camera shop lot, risking wrong item shipped",
+        "proof": "A photo of this specific 600D with its own tag/label or serial number isolated from other units",
+        "if_unproven": "priced with identity-mixup risk noted, seller must confirm exact unit"
+      }
+    ],
+    "proof_requests": [
+      "Power-on photo/video showing LCD menu and a shutter actuation count",
+      "Close-up of front and rear lens glass for fungus/scratches",
+      "Photo of included accessories: battery, charger, memory card",
+      "Close-up of body serial number and any UK import label",
+      "A sample photo taken with the camera to show real image sharpness"
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identifiable as a Canon EOS 600D with an EF-S 18-55mm kit lens, but no proof of power-on, shutter function, or lens optical condition is shown, so it must be priced at worst case as an unverified-working body and lens."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 22713,
+    "input_tokens": 3940,
+    "output_tokens": 1980,
+    "cost_usd": 0.02768,
+    "replayed": false,
+    "fixture_key": "b7c9d31e92e73a2ab980941a3e5fff2c",
+    "error": null
+  }
+}

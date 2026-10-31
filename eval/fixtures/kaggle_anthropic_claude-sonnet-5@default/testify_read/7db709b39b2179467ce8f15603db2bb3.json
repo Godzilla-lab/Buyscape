@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows a bare automotive engine assembly (cylinder head, intake manifold, alternator, wiring harness) sitting on a concrete/paved surface outdoors.",
+      "Green paint daubs are visible on several engine surfaces, a marking style common on Nigerian used-parts ('tokunbo') engines, but no brand or model lettering is legible.",
+      "A person's legs and sandals are visible in the background, suggesting a roadside or yard sale setting.",
+      "No VIN plate, engine code stamp, ECU label, or manufacturer badge is readable in the frame.",
+      "No spark plugs, turbo, or full wiring loom confirmed present; only partial harness visible.",
+      "No video or audio evidence of the engine running."
+    ],
+    "identity": {
+      "status": "unknown",
+      "kind": "car engine assembly (make/model unread)",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "We sell direct Korean parts",
+        "verdict": "unverifiable_remote",
+        "evidence": "No origin marking, import sticker, or Korean-brand badge visible in photo 0; claim rests on seller's word only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Unknown make/model means price could range from a small sedan engine to a larger SUV engine; this is the single biggest price driver.",
+        "proof": "Close-up photo of the engine code stamp (usually on block near gearbox mount) or any VIN/parts tag, or a legible manufacturer badge.",
+        "if_unproven": "cannot be priced at all without this; price list cannot be applied to an unidentified engine type"
+      },
+      {
+        "risk": "Running condition unknown (no start-up video, no compression test).",
+        "proof": "Video of engine cranking/running with sound, or compression test readout.",
+        "if_unproven": "priced as non-running/for-parts only once identity is established"
+      },
+      {
+        "risk": "Completeness unknown - sensors, turbo, injectors, wiring loom may be missing or swapped.",
+        "proof": "Full 360-degree photo set of the engine including underside and connector ends.",
+        "if_unproven": "priced as incomplete/core-only once identity is established"
+      },
+      {
+        "risk": "Claimed 'Korean' origin and grade (e.g., direct import vs locally used) cannot be confirmed from a photo.",
+        "proof": "Photo of import/clearance documentation or a clear origin stamp on the block.",
+        "if_unproven": "no origin premium applied; treated as unverified local used stock"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the engine code/stamp or any identification plate on the block or near the gearbox bell housing.",
+      "Photo or video showing the engine starting and running, with audible sound.",
+      "Full set of photos from all sides including underside, intake, and exhaust manifold.",
+      "Any import/clearance paperwork or origin documentation for the 'Korean parts' claim."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The engine's make and model are not legible in the photo, and price for an engine varies enormously by that identity, so even a worst-case price cannot be set until a readable engine code or badge is provided."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 23033,
+    "input_tokens": 1999,
+    "output_tokens": 1908,
+    "cost_usd": 0.019887,
+    "replayed": false,
+    "fixture_key": "7db709b39b2179467ce8f15603db2bb3",
+    "error": null
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0-1: front view of a large monocrystalline, half-cut-cell solar panel, mounted on a white aluminium frame, glare across cells obscuring micro-crack inspection",
+      "Photo 1 shows at least two more panels stacked behind the one in focus, suggesting multiple units for sale",
+      "Photo 2-3: rear view of a panel, white backsheet, junction box with two MC4-style connectors, a small rectangular specification sticker present but text too small/blurred to read",
+      "Watermark 'NETWORK SOLAR VENTURES' / 'POSTED ON JIJI' is the seller's own branding stamp, not a manufacturer mark on the product",
+      "No visible wattage, brand, or model number legible on panel frame or sticker in any photo",
+      "Background shows an open-air shop/warehouse setting with bags and cables, consistent with a solar equipment dealer"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "monocrystalline solar panel (half-cell), quantity uncertain",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0",
+        "photo 1",
+        "photo 2",
+        "photo 3"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Seller states 'We deal...' (message cut off, implying they deal in solar equipment)",
+        "verdict": "unverifiable_remote",
+        "evidence": "Text is incomplete and is a business description, not a verifiable product claim"
+      },
+      {
+        "claim": "Implied claim of new/unused panel (clean frame, no visible wear)",
+        "verdict": "unverified",
+        "evidence": "Photos 0-3 show no dirt or scratches but no purchase receipt, box, or manufacturer seal is shown"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual wattage/spec unknown, which is the primary price driver for solar panels",
+        "proof": "Close-up, well-lit photo of the rear specification sticker showing model, wattage (Wp), Voc/Isc values",
+        "if_unproven": "cannot be priced without this data; treat as unknown-spec panel"
+      },
+      {
+        "risk": "Hidden micro-cracks or cell damage under glare",
+        "proof": "Photo taken in shade or with electroluminescence/flash test showing full cell surface without glare",
+        "if_unproven": "priced as possibly damaged/lower-grade"
+      },
+      {
+        "risk": "Panel may be used/refurbished rather than new despite clean appearance",
+        "proof": "Photo of original packaging, invoice, or manufacturer seal/date code",
+        "if_unproven": "priced as used condition"
+      },
+      {
+        "risk": "Number of panels actually included in the sale is unclear (multiple units visible in background)",
+        "proof": "Seller statement with photo showing all units laid out and counted, or confirmation of single-unit listing",
+        "if_unproven": "priced as single unit only"
+      },
+      {
+        "risk": "Output performance (actual power delivered) unverified",
+        "proof": "Video of panel connected to a multimeter/charge controller showing voltage/current under sunlight",
+        "if_unproven": "priced as not verified working, i.e. worst case"
+      }
+    ],
+    "proof_requests": [
+      "Clear, well-lit close-up photo of the rear specification label showing brand, model number, and wattage (Wp)",
+      "A photo or short video of the panel tested with a multimeter/charge controller showing actual voltage and current output",
+      "Confirmation of exact quantity included in this listing with all units shown together",
+      "Any original packaging, invoice, or date code proving new condition"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable only as a generic monocrystalline solar panel; without a readable wattage/model label, which is the key price determinant for solar panels, not even a worst-case price can be set."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 21021,
+    "input_tokens": 3595,
+    "output_tokens": 1735,
+    "cost_usd": 0.021349,
+    "replayed": false,
+    "fixture_key": "1282e564340bfbd054a249af7bc98692",
+    "error": null
+  }
+}
