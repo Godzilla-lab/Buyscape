@@ -1,0 +1,104 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Orange MAN cab with grille badge visible",
+      "Wooden tipper body mounted on chassis",
+      "Multiple rear axles visible on left side",
+      "Parked on dirt beside yellow building",
+      "No model number or engine type visible",
+      "No odometer or interior visible"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "tipper truck",
+      "brand": "MAN",
+      "model": null,
+      "read_from": [
+        "photo 0 grille"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "MAN brand",
+        "verdict": "supported",
+        "evidence": "photo 0 front grille"
+      },
+      {
+        "claim": "Diesel engine",
+        "verdict": "unverified",
+        "evidence": "no engine badge or running evidence in photo 0"
+      },
+      {
+        "claim": "10tyre / 10 tires",
+        "verdict": "unverified",
+        "evidence": "photo 0 shows multiple axles but full tire count cannot be confirmed from one angle"
+      },
+      {
+        "claim": "Tipper",
+        "verdict": "supported",
+        "evidence": "photo 0 dump body"
+      },
+      {
+        "claim": "Original belgium used",
+        "verdict": "unverifiable_remote",
+        "evidence": "no origin markings or documents visible in photo 0"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine does not run",
+        "proof": "video of cold start and idle",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Tipper hydraulics fail",
+        "proof": "video of bed raising and lowering",
+        "if_unproven": "as non-tipper"
+      },
+      {
+        "risk": "Transmission or gearbox faults",
+        "proof": "video of gear engagement and driving",
+        "if_unproven": "as not drivable"
+      },
+      {
+        "risk": "Chassis rust or frame damage",
+        "proof": "underside and chassis photos",
+        "if_unproven": "as structurally unsound"
+      },
+      {
+        "risk": "Odometer unknown / high mileage",
+        "proof": "photo of odometer reading",
+        "if_unproven": "as high mileage"
+      },
+      {
+        "risk": "Not actually from Belgium",
+        "proof": "customs or import documents",
+        "if_unproven": "as local or unknown origin"
+      }
+    ],
+    "proof_requests": [
+      "Video of engine starting and running",
+      "Video of tipper bed operating",
+      "Photo of odometer",
+      "Underside and chassis photos",
+      "Import or customs documents for Belgium origin"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a MAN tipper truck from photo 0, allowing a worst-case price despite unverified claims about engine, origin, and tire count."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 34405,
+    "input_tokens": 1622,
+    "output_tokens": 3965,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "3461713c7e6f02175b15aa2884f95179",
+    "error": null
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Large brown box labeled SOLAR POWER with specs EP-7790, QTY 40 PCS, N.W. 27 KGS, G.W. 31 KGS, SIZE 48X32.5X57CM, MADE IN CHINA",
+      "Smaller retail box in front labeled SOLAR POWER EP-7790 showing 4V 3.5W and USB output 5V/500mA",
+      "Green-framed solar panel lying in front",
+      "Two small LED lamps visible behind the panel",
+      "Watermark POSTED ON JIJI and JIJI.COM.NG across the image"
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "solar panel kit",
+      "brand": "SOLAR POWER",
+      "model": "EP-7790",
+      "read_from": [
+        "photo 0 box",
+        "photo 0 product box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Solar panel to charge phones and 2 bulbs",
+        "verdict": "supported",
+        "evidence": "photo 0 shows USB output on box and two LED lamps present"
+      },
+      {
+        "claim": "3.5watts",
+        "verdict": "supported",
+        "evidence": "photo 0 product box reads 4V 3.5W"
+      },
+      {
+        "claim": "6 voltage",
+        "verdict": "contradicted",
+        "evidence": "photo 0 product box reads 4V 3.5W"
+      },
+      {
+        "claim": "Led output 3.7v",
+        "verdict": "unverified",
+        "evidence": "not readable on box or panel in photo 0"
+      },
+      {
+        "claim": "Usb output 5v/ 500mA",
+        "verdict": "supported",
+        "evidence": "photo 0 product box reads USB output 5V/500mA"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Panel may not produce power under sunlight",
+        "proof": "video of panel in sun connected to a multimeter or phone showing charging",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "USB port may not output 5V/500mA",
+        "proof": "video of a phone charging from the USB port",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "LED bulbs may not light",
+        "proof": "video of both bulbs switched on",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Battery or charge controller may be missing or faulty",
+        "proof": "photo of all kit contents and video of system running",
+        "if_unproven": "as panel only, no storage"
+      }
+    ],
+    "proof_requests": [
+      "Video of the panel in sunlight charging a phone via USB",
+      "Video of both LED bulbs lighting up",
+      "Photo of the complete kit contents including any battery or controller"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a SOLAR POWER EP-7790 solar kit from the box in photo 0, and even if every function is unproven it can be priced at its worst case as a non-working panel."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 23715,
+    "input_tokens": 1866,
+    "output_tokens": 3415,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "11c5f4f9b6a2691cfc1675dbd59b903b",
+    "error": null
+  }
+}

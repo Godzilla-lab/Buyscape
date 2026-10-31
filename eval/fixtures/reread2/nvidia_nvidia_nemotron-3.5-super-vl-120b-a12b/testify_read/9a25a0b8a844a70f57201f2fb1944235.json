@@ -1,0 +1,80 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a retail box for a WORXFLEX power tool.",
+      "The box front displays the brand 'WORXFLEX professional power tools'.",
+      "A model label 'WF13-800W' is visible on the lower left of the box.",
+      "An image of a blue corded electric drill is printed on the box.",
+      "A red burst graphic shows '800W'.",
+      "A power cord is visible on the drill pictured on the box.",
+      "Certification marks including CE are visible on the box.",
+      "The seller's text describes a 13mm Worxflex hand electric drilling machine, rugged and corded."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "corded electric drill",
+      "brand": "WORXFLEX",
+      "model": "WF13-800W",
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "13mm Worxflex Hand Electric Drilling Machine",
+        "verdict": "supported",
+        "evidence": "photo 0 shows WORXFLEX branding, model WF13-800W, and an electric drill"
+      },
+      {
+        "claim": "rugged",
+        "verdict": "unverified",
+        "evidence": "photo 0 shows only packaging; build quality cannot be assessed"
+      },
+      {
+        "claim": "corded",
+        "verdict": "supported",
+        "evidence": "photo 0 shows a power cord on the drill pictured on the box"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The drill inside may not work or may be missing from the box",
+        "proof": "video of the drill running or photo of the actual unit outside the box",
+        "if_unproven": "as not working or box only"
+      },
+      {
+        "risk": "The actual drill may differ from the box (wrong wattage, chuck size, or model)",
+        "proof": "close-up photo of the drill's nameplate and chuck",
+        "if_unproven": "as box-described but unverified specifications"
+      },
+      {
+        "risk": "The box may be empty or contain a different item",
+        "proof": "photo of the drill removed from the packaging",
+        "if_unproven": "as empty box"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual drill outside the box",
+      "Video of the drill running under load",
+      "Close-up of the drill nameplate or spec label",
+      "Photo of the chuck to confirm 13mm capacity"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable from photo 0 as a WORXFLEX WF13-800W corded electric drill, so it can be priced at its worst case (unproven working condition) while proof is requested to raise value."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 13576,
+    "input_tokens": 1598,
+    "output_tokens": 2820,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "9a25a0b8a844a70f57201f2fb1944235",
+    "error": null
+  }
+}

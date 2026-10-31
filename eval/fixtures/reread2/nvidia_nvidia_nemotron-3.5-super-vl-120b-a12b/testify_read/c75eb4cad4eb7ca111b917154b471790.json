@@ -1,0 +1,89 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a generator on a metal rack with a control panel, sockets, and a red engine fan cover",
+      "A blue industrial socket and various switches/gauges are visible on the control panel",
+      "Partial text appears on the red engine cover, but no clear brand or model plate is readable",
+      "A yellow generator below is marked 'RIGMAN', but it is a separate unit",
+      "No kVA rating plate or specification label is visible on the main generator"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "petrol generator",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "10kva",
+        "verdict": "unverified",
+        "evidence": "No rating plate or kVA marking visible in photo 0"
+      },
+      {
+        "claim": "maxi petrol generator",
+        "verdict": "unverified",
+        "evidence": "Brand/model not clearly readable; fuel type cannot be confirmed remotely"
+      },
+      {
+        "claim": "100% copper wire",
+        "verdict": "unverifiable_remote",
+        "evidence": "Internal windings not visible in any photo"
+      },
+      {
+        "claim": "1 year warranty",
+        "verdict": "unverifiable_remote",
+        "evidence": "Seller claim only, not shown in photos"
+      },
+      {
+        "claim": "payment on delivery",
+        "verdict": "unverifiable_remote",
+        "evidence": "Seller term, not shown in photos"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual kVA rating is unknown; unit may be much smaller than 10kva",
+        "proof": "Clear photo of the specification/rating plate showing kVA and model",
+        "if_unproven": "priced as an unverified small petrol generator"
+      },
+      {
+        "risk": "Generator may not start or run",
+        "proof": "Video of the generator starting and running under load",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Windings may not be 100% copper",
+        "proof": "Cannot be settled remotely; requires physical inspection",
+        "if_unproven": "priced as non-copper/unknown windings"
+      },
+      {
+        "risk": "No valid warranty",
+        "proof": "Warranty document or seller verification",
+        "if_unproven": "priced as no warranty"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the specification/rating plate showing kVA, model, and serial number",
+      "Video of the generator starting and running under load",
+      "Photo of the engine model number"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The generator's kVA rating and model are not visible in the photos, so even a worst-case price cannot be determined; the seller's 10kva claim is unverified."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 27413,
+    "input_tokens": 1598,
+    "output_tokens": 3665,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "c75eb4cad4eb7ca111b917154b471790",
+    "error": null
+  }
+}

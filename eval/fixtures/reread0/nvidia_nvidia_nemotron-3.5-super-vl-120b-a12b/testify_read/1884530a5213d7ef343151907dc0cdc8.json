@@ -1,0 +1,85 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a used car engine with a Peugeot lion emblem on the valve cover and yellow chalk markings on the left side.",
+      "Photo 1 shows the front timing belt cover, alternator, pulleys, and an illegible metal plate.",
+      "Photo 2 shows the intake manifold, throttle body, and wiring with no visible factory model plate.",
+      "The engine is removed from a vehicle and appears dusty and used."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "car engine",
+      "brand": "Peugeot",
+      "model": null,
+      "read_from": [
+        "photo 0 logo"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Tukunbo / foreign used",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photos cannot confirm prior use or import status."
+      },
+      {
+        "claim": "Belgium",
+        "verdict": "unverifiable_remote",
+        "evidence": "No markings or documents in the photos show a country of origin."
+      },
+      {
+        "claim": "307/206 Engines",
+        "verdict": "unverified",
+        "evidence": "Peugeot logo is visible in photo 0; chalk marking may read 206 but no factory model plate is readable."
+      },
+      {
+        "claim": "Engine works",
+        "verdict": "unverified",
+        "evidence": "Engine is out of the car and cannot be tested remotely; priced as not working."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine does not run or has internal damage",
+        "proof": "Video of the engine cranking and running, or compression test results",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Missing components such as injectors, sensors, ECU, or wiring harness",
+        "proof": "Complete photo inventory of all included parts",
+        "if_unproven": "as incomplete core"
+      },
+      {
+        "risk": "Wrong model or engine family (not actually 206 or 307)",
+        "proof": "Close-up of the factory model or VIN plate on the block or head",
+        "if_unproven": "as generic Peugeot engine"
+      },
+      {
+        "risk": "High mileage or worn internals",
+        "proof": "Service history or borescope inspection of cylinders",
+        "if_unproven": "as high-mileage core"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of any factory model or VIN plate on the engine block or head",
+      "Video of the engine cranking and running",
+      "Photo showing all included components such as injectors, coils, sensors, ECU, and harness"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a used Peugeot car engine from the logo in photo 0; because it cannot be tested remotely and the exact model is unproven, it is priced at its worst case as a non-running core."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 59820,
+    "input_tokens": 2912,
+    "output_tokens": 4248,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "1884530a5213d7ef343151907dc0cdc8",
+    "error": null
+  }
+}

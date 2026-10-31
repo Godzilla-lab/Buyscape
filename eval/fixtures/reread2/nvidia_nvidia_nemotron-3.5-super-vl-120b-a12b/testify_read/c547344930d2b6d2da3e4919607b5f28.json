@@ -1,0 +1,88 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Stack of sealed cardboard boxes branded \"Fidelity solar\" and \"GEL BATTERY SERIES\"",
+      "At least one box reads ITEM: FLG-200AH 12V, GROSS WEIGHT: 60.5 KGS, MEASUREMENT: 520*226*255MM, QUANTITY: 1 PCS/CARTON",
+      "Another visible box reads ITEM: FLG-226AH 12V",
+      "Boxes appear new and sealed but are stacked indoors against a wall",
+      "Background shows a \"MUST\" inverter box and other packaging",
+      "Watermark \"POSTED ON JIJI\" and \"D SOLAR ENERGY ENTERPRISE\" visible across the image"
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "12V gel solar battery",
+      "brand": "Fidelity",
+      "model": "FLG-200AH",
+      "read_from": [
+        "photo 0 box label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Fidelity solar battery",
+        "verdict": "supported",
+        "evidence": "photo 0 shows Fidelity solar branding on GEL BATTERY SERIES boxes"
+      },
+      {
+        "claim": "200ah",
+        "verdict": "supported",
+        "evidence": "photo 0 shows FLG-200AH 12V on at least one box; other boxes show FLG-226AH"
+      },
+      {
+        "claim": "12v",
+        "verdict": "supported",
+        "evidence": "photo 0 shows 12V on box labels"
+      },
+      {
+        "claim": "is available now",
+        "verdict": "unverifiable_remote",
+        "evidence": "photo cannot confirm current stock availability"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Sealed boxes may be empty or contain no battery",
+        "proof": "Photo of an opened box showing the battery inside with its label visible",
+        "if_unproven": "as empty packaging with no battery"
+      },
+      {
+        "risk": "Battery age, health, and actual capacity cannot be verified while sealed",
+        "proof": "Video of voltage test, load test, or manufacturing date code on the battery",
+        "if_unproven": "as not working / unknown capacity"
+      },
+      {
+        "risk": "Stock may be mixed 200AH and 226AH boxes",
+        "proof": "Clear photo of every box label to be sold",
+        "if_unproven": "as mixed capacity priced at 200AH or lower"
+      },
+      {
+        "risk": "Warranty status and origin unknown",
+        "proof": "Photo of warranty card or purchase receipt",
+        "if_unproven": "as no warranty"
+      }
+    ],
+    "proof_requests": [
+      "Photo of an opened box showing the battery inside with its label visible",
+      "Video showing battery voltage and terminals",
+      "Clear photos of all box labels to confirm 200AH versus 226AH",
+      "Photo of manufacturing date or warranty card"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a Fidelity solar gel battery with 12V and 200AH markings visible on the box, so it can be priced at worst case while listing proof that would raise the value."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 56529,
+    "input_tokens": 1839,
+    "output_tokens": 4147,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "c547344930d2b6d2da3e4919607b5f28",
+    "error": null
+  }
+}

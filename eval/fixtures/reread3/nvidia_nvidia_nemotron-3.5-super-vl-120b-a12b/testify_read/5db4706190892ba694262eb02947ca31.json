@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a retail box labeled CHARGING DOCK by DOBE, for X-Series S/X / X-One controllers.",
+      "Box text states 2 can charge 2 controllers simultaneously and 800mAh high capacity.",
+      "Photo 1 shows the black dock unit with DOBE logo and controller icons on the base.",
+      "Photo 1 box shows Model No: TKY-1817X, MADE IN CHINA, and Quality Guarantee Since 1999.",
+      "No loose batteries are clearly visible in either photo.",
+      "No playing time figure is visible on the box."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "Xbox controller charging dock",
+      "brand": "DOBE",
+      "model": "TKY-1817X",
+      "read_from": [
+        "photo 0 box front",
+        "photo 1 box label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Two batteries and a charging dock",
+        "verdict": "unverified",
+        "evidence": "Photo 1 shows the dock unit; no separate batteries are visible in the photos."
+      },
+      {
+        "claim": "playing time more than 5 hours",
+        "verdict": "unverifiable_remote",
+        "evidence": "Box lists 800mAh battery but no playtime rating is visible."
+      },
+      {
+        "claim": "Waybill available from Lagos to...",
+        "verdict": "unverifiable_remote",
+        "evidence": "Shipping arrangement is not shown in the photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The two batteries may not be included or may be faulty",
+        "proof": "Photo of both batteries with labels, or inserted in the dock",
+        "if_unproven": "as a dock without batteries"
+      },
+      {
+        "risk": "The dock may not power on or charge controllers",
+        "proof": "Video of the dock charging a controller with indicator light on",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The dock may be missing its power cable or adapter",
+        "proof": "Photo of the power cable and plug",
+        "if_unproven": "as missing accessories"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the two batteries included",
+      "Video of the dock charging a controller",
+      "Photo of the power cable and plug"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a DOBE TKY-1817X Xbox controller charging dock from the box and unit, so it can be priced at worst case pending proof of included batteries and function."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 19332,
+    "input_tokens": 2042,
+    "output_tokens": 2398,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "5db4706190892ba694262eb02947ca31",
+    "error": null
+  }
+}

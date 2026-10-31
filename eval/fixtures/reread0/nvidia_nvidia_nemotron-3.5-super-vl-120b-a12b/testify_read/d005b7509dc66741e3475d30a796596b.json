@@ -1,0 +1,75 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows two used metal suspension control arms or wishbones with rubber bushings lying on concrete; no brand or model is readable.",
+      "Photo 1 shows a used car engine assembly with alternator, intake manifold, hoses, and pulleys on pavement; no brand or model plate is readable.",
+      "Photo 2 shows another angle of a used car engine with valve cover, intake manifold, and exhaust components; no brand or model is readable.",
+      "All three photos carry a 'CHIJO MOTOR' watermark.",
+      "The seller text mentions Toyota engines and a transmission gearbox, but photo 0 depicts suspension arms rather than an engine or transmission."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used car engine",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "We sale all types of Toyota engine",
+        "verdict": "unverifiable_remote",
+        "evidence": "No Toyota nameplate, logo, or branding is visible in photos 0, 1, or 2."
+      },
+      {
+        "claim": "and transmission gear box",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo 0 shows suspension arms; photos 1 and 2 show engines only, with no transmission visible."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The engine may be seized, damaged, or non-functional.",
+        "proof": "A video of the engine cranking or running, or a compression test result.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The engine model and displacement are unknown, which sets the market value.",
+        "proof": "A clear photo of an engine block casting number, identification plate, or VIN stamp.",
+        "if_unproven": "as an unidentified used engine"
+      },
+      {
+        "risk": "No transmission is visible in the photos despite the seller's claim.",
+        "proof": "A clear photo showing a transmission gearbox included in the sale.",
+        "if_unproven": "as engine only, with no transmission"
+      },
+      {
+        "risk": "Photo 0 shows suspension control arms, not an engine or transmission, creating uncertainty about what is actually for sale.",
+        "proof": "A clear photo of the exact item for sale with seller confirmation of what is included.",
+        "if_unproven": "as unspecified used parts"
+      }
+    ],
+    "proof_requests": [
+      "Photo of any engine identification plate, block stamp, or VIN to confirm make and model",
+      "Video of the engine starting and running",
+      "Clear photo showing whether a transmission gearbox is included",
+      "Clarification whether the suspension arms in photo 0 are part of the sale"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "No Toyota branding or engine model is readable in the photos, photo 0 shows suspension arms rather than an engine or transmission, and the seller's claims cannot be verified remotely, so even a worst-case price cannot be determined without proof of what is being sold."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 29336,
+    "input_tokens": 3088,
+    "output_tokens": 3263,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "d005b7509dc66741e3475d30a796596b",
+    "error": null
+  }
+}
