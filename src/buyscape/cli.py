@@ -993,6 +993,10 @@ def testify_run(
         "", help="A second run of the same model, such as repeat1: recorded and written apart, to measure run noise."
     ),
     fixtures: Path = typer.Option(Path("eval/fixtures")),
+    ids_file: Path = typer.Option(
+        None, help="Only the adverts listed, one id per line, such as a second teacher's look at the training "
+        "adverts the first read wrong (testify-train-build --wrong-ids). Needs --tag, so it is written apart."
+    ),
     reads_only: bool = typer.Option(
         False, help="The read step only, no price pick: a teacher's reads for the training set."
     ),
@@ -1033,10 +1037,13 @@ def testify_run(
     everything, pool, hashes = _testify_pool(split)
     if reads_only:
         pool = []  # no comparables, so no price pick is asked for
+    wanted = set(ids_file.read_text().split()) if ids_file else None
+    if wanted is not None and not tag:
+        raise typer.BadParameter("give the second look a --tag, so it is written apart", param_hint="--ids-file")
     chosen = [
         i for i in everything
         if i.split == split and not i.exclude and (split == "train" or i.ai_label or i.review)
-        and (not market or i.market == market)
+        and (not market or i.market == market) and (wanted is None or i.id in wanted)
     ]
     out_dir = ROOT / "eval" / "testify" / "runs" / _dir_name(model)
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -1333,7 +1340,7 @@ def testify_train_build(
         "kaggle:google/gemini-3-flash-preview,gemini-3-flash-preview,nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
         help="The model whose reads are the targets, or several joined by commas, in order of trust: Gemini "
         "on Kaggle's quota and on Google's free tier, then Nemotron for the adverts no Gemini quota reached "
-        "(29 Oct). An advert read by two keeps the first.",
+        "(29 Oct). An advert read by several is taught from the first read that is right about it.",
     ),
     market: str = typer.Option("", help="Only training items from this city. Empty for all."),
     out: Path = typer.Option(None, help="Defaults to eval/testify/train/sft.jsonl, which is never committed."),
@@ -1347,6 +1354,10 @@ def testify_train_build(
         "", help="A model that answers, live, every price step no teacher has answered yet, before the build."
     ),
     workers: int = typer.Option(6, help="Price steps asked at once while recording."),
+    wrong_ids: Path = typer.Option(
+        None, help="Write the ids of adverts no teacher read right, one per line, for another teacher to read "
+        "(testify --ids-file)."
+    ),
 ) -> None:
     """Build the fine-tuning set from a teacher's reads of the training pool.
 
@@ -1373,19 +1384,17 @@ def testify_train_build(
     # The pool is training adverts only, so no benchmark price reaches a training prompt.
     cases, pool = _testify_cases("train", market)
     hashes = {item.id: own for item, _, own in cases}
-    rows, seen = [], set()
+    # Every teacher's reads, in order of trust; a failed read is no read.
+    rows = []
     for route in teacher.split(","):
         runs = ROOT / "eval" / "testify" / "runs" / _dir_name(route.strip())
         for path in sorted(runs.glob("train*.jsonl")):
             if ".repeat" in path.name:
                 continue
-            for line in path.read_text().splitlines():
-                row = json.loads(line) if line.strip() else None
-                # A read that failed on one route can be read on the other.
-                if row and (row["id"], row.get("variant")) not in seen and not row.get("error"):
-                    seen.add((row["id"], row.get("variant")))
-                    rows.append(row)
-    rows_by_id = {r["id"]: ((r.get("reading") or {}).get("identity") or {}) for r in rows}
+            rows += [row for line in path.read_text().splitlines()
+                     if line.strip() and not (row := json.loads(line)).get("error")]
+    # The most trusted teacher's name for each advert.
+    rows_by_id = {r["id"]: ((r.get("reading") or {}).get("identity") or {}) for r in reversed(rows)}
     # The benchmark's photo check, and the same check run on the training pool.
     labels = {}
     for labels_path in (ROOT / "eval" / "testify" / "labels_ai" / "gemini-3.5-flash-lite.jsonl",
@@ -1460,9 +1469,9 @@ def testify_train_build(
         shot = next((s for s in protocol.shots if {"model", "model_name", "vin"} & set(s.extract)), None)
         return (shot or next(s for s in protocols["generic"].shots if s.id == "label_or_plate")).ask
 
-    def build(pick_choice):
+    def build(pick_choice, misread=None):
         return train.build(kept, rows, labels, ROOT, ocr=ocr, facts=facts, noproof=noproof, ask_for=ask_for,
-                           pool=pool, hashes=hashes, pick_choice=pick_choice)
+                           pool=pool, hashes=hashes, pick_choice=pick_choice, misread=misread)
 
     from .providers.base import MissingFixture
 
@@ -1508,8 +1517,12 @@ def testify_train_build(
         if record_picks not in pick_teacher.split(","):
             teachers.append(_provider(record_picks, fixtures, "replay"))
 
-    examples, tally = build(taught if teachers else None)
+    misread: list[str] = []
+    examples, tally = build(taught if teachers else None, misread)
     ocr.save()
+    if wrong_ids:
+        wrong_ids.write_text("".join(f"{i}\n" for i in misread))
+        console.print(f"{len(misread)} adverts no teacher read right written to {wrong_ids}")
     tally["seller also in the benchmark, left out"] = shared
     tally["new stock over the cap, left out"] = capped
     train.write(examples, out)

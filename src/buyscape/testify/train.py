@@ -494,6 +494,8 @@ def messages(request: ModelRequest, answer: BaseModel, root: Path) -> list[dict]
 
 
 REFUSE_EVERY = 6
+# A read dropped for these is worth a second teacher's look.
+SECOND_LOOK = ("teacher wrong about the item", "named beyond the photos, and the kind alone is wrong")
 
 
 def build(cases: list[tuple], rows: list[dict], labels: dict[str, dict], root: Path,
@@ -501,7 +503,7 @@ def build(cases: list[tuple], rows: list[dict], labels: dict[str, dict], root: P
           facts: dict[str, dict] | None = None, noproof: dict[str, dict] | None = None,
           ask_for=None, pool: list[comps.Comparable] | None = None,
           hashes: dict[str, tuple[str, ...]] | None = None,
-          pick_choice=None) -> tuple[list[dict], dict[str, int]]:
+          pick_choice=None, misread: list[str] | None = None) -> tuple[list[dict], dict[str, int]]:
     """Training examples from a teacher's clean reads. `cases` holds (item, photos).
     When the teacher named the item, `ocr` checks a model code the title does
     not carry, and the whole name on an advert with no photo check.
@@ -514,15 +516,19 @@ def build(cases: list[tuple], rows: list[dict], labels: dict[str, dict], root: P
     step for a priced second-hand answer, for it and for its lied-to twin,
     the same pick for both; `hashes` keep an advert's reposts out of its own
     list. `pick_choice(request)` is a teacher's answer to the price step, or
-    None when it has none; without it the pick is `pick_target`'s."""
-    reads = {r["id"]: r for r in rows if r.get("variant", "clean") == "clean" and r.get("reading")}
-    out: list[dict] = []
-    tally: dict[str, int] = {}
-    for item, photos in cases:
-        row = reads.get(item.id)
-        if row is None:
-            tally["no teacher read"] = tally.get("no teacher read", 0) + 1
-            continue
+    None when it has none; without it the pick is `pick_target`'s.
+
+    `rows` may hold several teachers' reads of one advert, in order of trust:
+    where the first names the item wrong, the next is tried. `misread`, when
+    given, collects the adverts no teacher read right, for another to read."""
+    # Every teacher's read of an advert, in the order given: a second teacher's
+    # read is tried where the first named the item wrong.
+    reads: dict[str, list[dict]] = {}
+    for r in rows:
+        if r.get("variant", "clean") == "clean" and r.get("reading"):
+            reads.setdefault(r["id"], []).append(r)
+
+    def taught(item: Item, photos: list[Path], row: dict) -> tuple[Reading | None, str]:
         label, keep_code = labels.get(item.id), True
         identity = row["reading"].get("identity") or {}
         if identity.get("status") == "named":
@@ -533,7 +539,23 @@ def build(cases: list[tuple], rows: list[dict], labels: dict[str, dict], root: P
             if label is None:
                 label = ocr_label(row["reading"], photos, ocr, lines=lines)
             keep_code = code_confirmed(identity.get("model"), title, lines)
-        answer, why = target(item, row["reading"], label, keep_code, ask_for(item) if ask_for else None)
+        return target(item, row["reading"], label, keep_code, ask_for(item) if ask_for else None)
+
+    out: list[dict] = []
+    tally: dict[str, int] = {}
+    for item, photos in cases:
+        candidates = reads.get(item.id)
+        if not candidates:
+            tally["no teacher read"] = tally.get("no teacher read", 0) + 1
+            continue
+        for second, row in enumerate(candidates):
+            answer, why = taught(item, photos, row)
+            if answer is not None or why not in SECOND_LOOK:
+                break
+        if answer is None and why in SECOND_LOOK and misread is not None:
+            misread.append(item.id)
+        if answer is not None and second:
+            why += ", from a second teacher"
         tally[why] = tally.get(why, 0) + 1
         if answer is None:
             continue

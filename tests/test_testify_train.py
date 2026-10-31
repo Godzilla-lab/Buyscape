@@ -425,3 +425,17 @@ def test_a_list_the_teacher_refused_is_taught_refused_for_both_twins(tmp_path: P
     said = {e["variant"]: json.loads(e["messages"][-1]["content"]) for e in examples}
     assert said["refuse_taught"] == said["refuse_taught_lie"] and said["refuse_taught"]["same_item"] is False
     assert "pick" not in said and tally["refused: the teacher found no advert for the same item"] == 1
+
+
+def test_a_second_teachers_read_is_tried_where_the_first_named_the_item_wrong(tmp_path: Path):
+    photo = tmp_path / "f1.jpg"
+    Image.new("RGB", (64, 64)).save(photo)
+    wrong_read = _read(kind="ceiling fan")  # the title says standing fan
+    rows = [{"id": "f1", "variant": "clean", "reading": wrong_read},
+            {"id": "f1", "variant": "clean", "reading": _read()}]
+    examples, tally = train.build([(FAN, [photo])], rows, {}, tmp_path)
+    assert tally == {"kept: price at worst case, from a second teacher": 1}
+    assert json.loads(examples[0]["messages"][-1]["content"])["identity"]["kind"] == "standing fan"
+    missed: list[str] = []
+    _, tally = train.build([(FAN, [photo])], rows[:1], {}, tmp_path, misread=missed)
+    assert missed == ["f1"] and tally == {"teacher wrong about the item": 1}
