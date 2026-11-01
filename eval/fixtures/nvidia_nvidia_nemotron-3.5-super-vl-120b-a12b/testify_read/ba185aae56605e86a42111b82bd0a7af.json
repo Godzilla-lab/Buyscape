@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a used internal combustion engine removed from a vehicle and resting on a concrete floor.",
+      "A radiator is visible at the top with dirt between the cooling fins.",
+      "The engine has an oil filler cap, drive belts, pulleys, hoses, and wiring, but no readable manufacturer badge, VIN plate, or engine code is visible.",
+      "A watermark reads \"POSTED ON JIJI. BARRY BEST GENERAL\".",
+      "The seller's text describes the item as \"Direct tokunbo Engine Acura RDX 08 to 010\"."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "car engine",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Direct tokunbo Engine",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo 0 shows an engine but cannot confirm import status or that it is tokunbo."
+      },
+      {
+        "claim": "Acura RDX",
+        "verdict": "unverified",
+        "evidence": "Not visible in photo 0; appears only in the seller's text."
+      },
+      {
+        "claim": "08 to 010",
+        "verdict": "unverified",
+        "evidence": "Year range is not visible in photo 0; appears only in the seller's text."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine may be seized, damaged, or non-functional.",
+        "proof": "Video of the engine cranking and running.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Engine may not be an Acura RDX or may be the wrong year variant.",
+        "proof": "Clear close-up photo of the engine identification plate, engine code, or VIN sticker.",
+        "if_unproven": "as unidentified engine"
+      },
+      {
+        "risk": "Missing components such as ECU, wiring harness, mounts, or sensors.",
+        "proof": "Photo showing the complete engine package with all ancillaries included.",
+        "if_unproven": "as engine only, missing components"
+      },
+      {
+        "risk": "Internal wear or hidden damage not visible externally.",
+        "proof": "Borescope inspection or compression test results.",
+        "if_unproven": "as high-mileage unknown condition"
+      }
+    ],
+    "proof_requests": [
+      "Clear close-up photo of any engine identification plate, engine code, or VIN sticker.",
+      "Video of the engine starting and running.",
+      "Photo showing all included components such as ECU, harness, mounts, and sensors."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a car engine, but the specific make, model, and year that determine its value are only claimed by the seller and cannot be read from the photo, so no price can be set even at worst case without proof of identity and condition."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 15814,
+    "input_tokens": 2040,
+    "output_tokens": 2347,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "ba185aae56605e86a42111b82bd0a7af",
+    "error": null
+  }
+}

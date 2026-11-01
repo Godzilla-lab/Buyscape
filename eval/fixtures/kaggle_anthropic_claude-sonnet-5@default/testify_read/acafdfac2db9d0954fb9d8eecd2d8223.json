@@ -1,0 +1,73 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows a rectangular UPS unit standing upright, tower-style casing.",
+      "Front panel reads \"BLUE GATE\" in white text, with a purple status strip and a single button, no visible display screen.",
+      "Power cord with a local-style plug is wound around the top and hangs loose.",
+      "No capacity/VA rating, model number, or serial sticker is visible on the unit.",
+      "Unit sits on a tiled floor next to other dark equipment (possibly a PC case or speaker) and some loose items.",
+      "No visible external damage, cracks, or burn marks on the casing."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "UPS (uninterruptible power supply)",
+      "brand": "Blue Gate",
+      "model": null,
+      "read_from": [
+        "photo 0 front panel label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Faulty blue gate UPS available for sale",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows no visible damage; the fault itself (e.g., not powering on, bad battery, no output) cannot be confirmed from a static image. Seller's description of a fault is taken as self-reported, not visually contradicted or supported."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Exact nature/extent of the fault (battery dead, circuit board failure, no output at all) unknown",
+        "proof": "A video showing the unit plugged in, powered on, and attempted to hold a load, or a clear fault description from seller (e.g., error beep codes)",
+        "if_unproven": "priced as fully non-functional / for-parts only"
+      },
+      {
+        "risk": "Capacity (VA/W rating) unknown, affecting part-value",
+        "proof": "A close-up photo of the rating label (usually on the back or bottom of the unit)",
+        "if_unproven": "priced at the low end for an unspecified small-capacity faulty UPS"
+      },
+      {
+        "risk": "Battery may be missing, swollen, or leaking even if casing looks intact",
+        "proof": "Photo of the unit's rear panel or opened battery compartment",
+        "if_unproven": "priced assuming battery needs replacement"
+      },
+      {
+        "risk": "Hidden physical damage (cracks, water exposure) not visible from this angle",
+        "proof": "Additional photos from side, back, and bottom of the unit",
+        "if_unproven": "priced as cosmetically unverified, default to worst case condition"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the rating/label sticker (VA/W capacity, model number)",
+      "Photo or video of the back/bottom panel showing ports and any damage",
+      "Short video attempting to power on the unit, showing any lights or sounds",
+      "Photo of the battery compartment if accessible"
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identifiable as a Blue Gate brand UPS from the visible label, and the seller explicitly states it is faulty; with no capacity label or working-condition proof, it can be priced at worst case as a non-functional unit of unspecified rating."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 18671,
+    "input_tokens": 3042,
+    "output_tokens": 1586,
+    "cost_usd": 0.021944,
+    "replayed": false,
+    "fixture_key": "acafdfac2db9d0954fb9d8eecd2d8223",
+    "error": null
+  }
+}

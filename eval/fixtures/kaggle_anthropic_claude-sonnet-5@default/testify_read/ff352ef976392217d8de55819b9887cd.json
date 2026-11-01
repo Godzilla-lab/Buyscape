@@ -1,0 +1,89 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows a dark automotive control module (ECU) held by a hand, with handwritten marker 'TK' twice on the casing.",
+      "A Mazda-branded label is visible: 'L37L', 'L37L 18 881A', 'E6T35777H', made in Japan.",
+      "A brownish stain/residue patch is visible on the casing near the label, possible corrosion or glue residue.",
+      "Photo 1 shows the same unit's connector end with two multi-pin plugs, held near a person's leg; pins appear intact but photo is low detail.",
+      "No engine is shown in either photo despite being mentioned in the seller's text.",
+      "Background shows a workshop/parts-yard setting typical of used-parts dealers."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "ECU / engine control module (brainbox)",
+      "brand": "Mazda",
+      "model": "L37L 18 881A",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Direct tokumbo (used import)",
+        "verdict": "unverifiable_remote",
+        "evidence": "No import documentation or shipping tag visible in either photo."
+      },
+      {
+        "claim": "For CX7 (fits Mazda CX-7)",
+        "verdict": "unverified",
+        "evidence": "Label in photo 0 confirms Mazda part number L37L 18 881A, which is consistent with Mazda MZR engines used in CX-7/Mazda3/6, but no vehicle-specific fitment chart or VIN match is shown."
+      },
+      {
+        "claim": "The engine is also available",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo of any engine is provided; only the ECU is shown."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "ECU may be non-functional or faulty (common failure point in used ECUs)",
+        "proof": "Video of the unit being bench-tested or powering up with a diagnostic tool showing live data",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "ECU may be immobilizer-locked/keyed to the original donor vehicle, making it unusable without reprogramming",
+        "proof": "Seller statement or screenshot confirming the unit is virgin/unlocked or can be flashed",
+        "if_unproven": "priced as locked/non-functional"
+      },
+      {
+        "risk": "Visible brown stain near the label could indicate corrosion or water damage affecting internal circuitry",
+        "proof": "Close-up photo of the stained area and the underside of the casing",
+        "if_unproven": "priced as potentially damaged"
+      },
+      {
+        "risk": "Connector pins could be bent, corroded, or missing, affecting installation",
+        "proof": "Close-up, well-lit photo of both connector faces",
+        "if_unproven": "priced as risk of connector damage"
+      },
+      {
+        "risk": "Exact Mazda CX-7 model year/engine variant compatibility unconfirmed",
+        "proof": "Photo of full part number cross-referenced with a fitment chart, or chassis/VIN tag from donor car",
+        "if_unproven": "priced as generic/unverified fitment"
+      }
+    ],
+    "proof_requests": [
+      "Video of the ECU being tested on a bench rig or in a running vehicle",
+      "Confirmation (with proof) that the ECU is not immobilizer-locked to the original car",
+      "Close-up, clear photo of the corrosion/stain spot and the full casing",
+      "Close-up photo of both connector pin blocks",
+      "Photo of the engine mentioned in the listing, including its part/casting number"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a Mazda ECU with a readable part number, but functionality, lock status, and condition are unverified, so it must be priced at worst case as a used, untested, possibly locked unit; the separately mentioned engine cannot be priced at all since no photo of it exists."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 23801,
+    "input_tokens": 2923,
+    "output_tokens": 2205,
+    "cost_usd": 0.024737,
+    "replayed": false,
+    "fixture_key": "ff352ef976392217d8de55819b9887cd",
+    "error": null
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "3 photos show a blue industrial gear reducer/gearbox unit with cast body and a yellow output shaft/coupling area.",
+      "Unit has a large circular end housing and a base mounting plate with bolt holes.",
+      "No visible nameplate, model number, gear ratio, input/output speed, or HP rating in the photos.",
+      "Brand watermark text on photos reads 'FABROS INDUSTRIAL' (appears to be a posting watermark, not a readable model)."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "gear reducer / industrial gearbox (cast body)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0",
+        "photo 1",
+        "photo 2"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Gear reducer 15 to 20hp cast bodies types",
+        "verdict": "unverified",
+        "evidence": "Photos show a cast-body gear reducer, but no readable nameplate/specs confirming 15\u201320hp or the exact type."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "HP rating / duty rating may not be 15\u201320hp (could be lower/higher), affecting safe use and price.",
+        "proof": "Ask for a clear photo of the nameplate/spec label showing HP rating, input speed (RPM), output speed (RPM), gear ratio, and model/serial.",
+        "if_unproven": "Price as a generic industrial gear reducer with unknown rating (worst case for buyer: treat as not confirmed for 15\u201320hp)."
+      },
+      {
+        "risk": "Wrong input/output configuration (shaft size, mounting pattern, flange type) may not match the buyer\u2019s motor or application.",
+        "proof": "Ask for a close-up measurement/shot of: input shaft diameter & keyway, output shaft diameter & keyway, bolt-hole pattern on the base, and any coupling/flange dimensions.",
+        "if_unproven": "Price as mismatched/unknown fit (worst case: buyer may need adaptation)."
+      },
+      {
+        "risk": "Condition/working status unknown (could be seized, noisy, leaking, or worn bearings/gears).",
+        "proof": "Ask for a short video of it running under load (or at least free-spin test) plus a photo of oil level/any leaks.",
+        "if_unproven": "Price as not proven working (worst case: assume needs service/repair)."
+      },
+      {
+        "risk": "Gear ratio/type unknown (single-stage vs multi-stage, reduction ratio) which determines value.",
+        "proof": "Nameplate photo showing gear ratio and type, or a spec sheet from the manufacturer.",
+        "if_unproven": "Price as unknown ratio (worst case: lowest-value generic reducer)."
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the nameplate/spec label (HP rating, input/output RPM, gear ratio, model/serial).",
+      "Close-up measurements: input shaft diameter/keyway, output shaft diameter/keyway, and base mounting bolt-hole pattern.",
+      "Video showing it running (or at minimum: smooth free-spin) and photos of any oil/leak points."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photos confirm it is an industrial cast-body gear reducer, but the key details that determine the correct match and price (HP rating confirmation, gear ratio/type, and working condition) are not readable or verifiable from the provided images.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_joint",
+    "latency_ms": 4906,
+    "input_tokens": 3452,
+    "output_tokens": 779,
+    "cost_usd": 0.002753,
+    "replayed": false,
+    "fixture_key": "bfee15f4dca453dfaeb83adfd4effd4d",
+    "error": null
+  }
+}
