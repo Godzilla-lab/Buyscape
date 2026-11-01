@@ -1,0 +1,73 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r5",
+  "response": {
+    "observations": [
+      "Black DSLR camera body with a 'Nikon' logo on the top right.",
+      "The camera is fitted with a 18-55mm lens.",
+      "The lens barrel shows 'NIKKOR 18-55' and 'AF-S NIKKOR 18-55G ED VR'.",
+      "A strap is attached to the camera body.",
+      "The image contains a watermark 'POSTED ON JIJI KOMONE ZOE'.",
+      "The lens appears to have a matte finish, which is common for this model.",
+      "The specific model number is not clearly legible on the body or lens."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DSLR camera",
+      "brand": "Nikon",
+      "read_from": [
+        "photo 0 body"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Nikon D3300 DSLR Camera",
+        "verdict": "supported",
+        "evidence": "The 'Nikon' logo is visible on the body in photo 0."
+      },
+      {
+        "claim": "The camera body is...",
+        "verdict": "unverified",
+        "evidence": "The lens is attached, but the internal condition of the body is not shown."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The lens may be scratched, fungus, or have internal fungus (common in older Nikon lenses).",
+        "proof": "A clear photo of the front and rear lens elements.",
+        "if_unproven": "as having a damaged lens"
+      },
+      {
+        "risk": "The camera may have electronic faults or a dead sensor.",
+        "proof": "A video showing the camera powering on, taking a photo, and the screen displaying the shutter count.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The shutter may be near the end of its life (around 500,000 shots).",
+        "proof": "A screenshot of the shutter count from a recent photo.",
+        "if_unproven": "as having a high shutter count"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of any label, sticker or metal plate showing the brand and model.",
+      "Clear photo of the lens front and rear glass.",
+      "Video of the camera powering on and taking a photo.",
+      "Screenshot of the shutter count."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "What the item is shows, but not the model that sets its price: no photo shows it clearly enough to read. The shot asked for first would settle it."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r5",
+    "task": "testify_read",
+    "latency_ms": 2183,
+    "input_tokens": 1450,
+    "output_tokens": 464,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "224b7850065fa9502aeade2cf3f6da20",
+    "error": null
+  }
+}

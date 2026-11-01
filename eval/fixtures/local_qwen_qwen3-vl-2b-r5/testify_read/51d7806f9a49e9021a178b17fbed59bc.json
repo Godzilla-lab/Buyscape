@@ -1,0 +1,87 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r5",
+  "response": {
+    "observations": [
+      "Silver-colored plastic engine control unit with a black plastic top cover.",
+      "Multiple colored wires (yellow, blue, red, green, purple, etc.) are visible at the bottom.",
+      "The unit is resting on a dirt or gravel surface.",
+      "A watermark 'EZE PORSCHE GLOBAL AUTOS' is visible across the center of all photos.",
+      "The top cover is shown in photo 2, which is a close-up of the junction box."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "engine control unit",
+      "brand": "Bosch",
+      "read_from": [
+        "photo 0",
+        "photo 1"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "volkswagen",
+        "verdict": "supported",
+        "evidence": "photo 1 label shows VW logo and 07K 906 055 CR"
+      },
+      {
+        "claim": "audi",
+        "verdict": "unverified",
+        "evidence": "No Audi logo or specific model code visible in photos"
+      },
+      {
+        "claim": "porsche",
+        "verdict": "unverified",
+        "evidence": "No Porsche logo or specific model code visible in photos"
+      },
+      {
+        "claim": "bentley",
+        "verdict": "unverified",
+        "evidence": "No Bentley logo or specific model code visible in photos"
+      },
+      {
+        "claim": "car spare parts",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a general business claim and cannot be verified from photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The unit may be a generic or 'off-brand' part rather than a genuine Bosch for the specific Volkswagen model.",
+        "proof": "A clear photo of the VIN plate or the manufacturer's identification plate on the unit.",
+        "if_unproven": "as a generic Bosch part for Volkswagen"
+      },
+      {
+        "risk": "The unit may be non-functional or have a faulty ECU (Electronic Control Unit).",
+        "proof": "A video showing the unit powered on and successfully communicating with a diagnostic scanner.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The wiring harness may be damaged or have loose connections.",
+        "proof": "A video showing a multimeter test of the resistance across the harness pins.",
+        "if_unproven": "as requiring a full harness replacement"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of any label, sticker or metal plate showing the brand and model.",
+      "Photo of the VIN plate or identification plate on the unit.",
+      "Video of the unit powered on and communicating with a diagnostic scanner.",
+      "Photo of the wiring harness with a multimeter test showing no open circuits."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "What the item is shows, but not the model that sets its price: no photo shows it clearly enough to read. The shot asked for first would settle it."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r5",
+    "task": "testify_read",
+    "latency_ms": 2292,
+    "input_tokens": 2788,
+    "output_tokens": 518,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "51d7806f9a49e9021a178b17fbed59bc",
+    "error": null
+  }
+}

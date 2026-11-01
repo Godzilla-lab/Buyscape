@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r5",
+  "response": {
+    "observations": [
+      "Red gas cylinder with a metal collar at the top.",
+      "The collar has embossed text: 'UKPP 32' and 'PROPERTY OF COMMERCE'.",
+      "The main body of the cylinder has a white rectangular label with the text 'CALOR GAS' and '47kg Propellant'.",
+      "The cylinder shows significant surface wear and dirt, particularly on the shoulder and body.",
+      "A watermark 'POSTED ON JIJI NWOBODO PETER' is visible across the center of the image."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "gas cylinder",
+      "brand": "Calor",
+      "model": "47kg Propellant",
+      "read_from": [
+        "photo 0 collar",
+        "photo 0 body label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "50kg",
+        "verdict": "unverified",
+        "evidence": "The capacity is not clearly legible on the visible parts of the cylinder."
+      },
+      {
+        "claim": "direct London",
+        "verdict": "unverifiable_remote",
+        "evidence": "This refers to the origin of the cylinder, which cannot be confirmed from a photo."
+      },
+      {
+        "claim": "tokunbo",
+        "verdict": "unverified",
+        "evidence": "The manufacturing date is not visible on the cylinder."
+      },
+      {
+        "claim": "Total gas blue colour",
+        "verdict": "unverified",
+        "evidence": "The cylinder is red, which is the standard color for LPG in Nigeria, but the specific brand 'Total' is not visible."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The cylinder may be expired or past its re-qualification date.",
+        "proof": "A clear photo of the manufacturing and expiry date stamps on the collar or handle.",
+        "if_unproven": "as expired/scrap value"
+      },
+      {
+        "risk": "The cylinder may be a counterfeit or a different brand (e.g., Total) than the seller claims.",
+        "proof": "A photo of the manufacturer's identification plate (usually on the collar) showing the brand and model.",
+        "if_unproven": "as a generic 47kg cylinder"
+      },
+      {
+        "risk": "The valve or shroud may be damaged or leaking.",
+        "proof": "A video showing a soap bubble test on the valve and a close-up of the shroud.",
+        "if_unproven": "as requiring a full valve replacement"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of any label, sticker or metal plate showing the brand and model.",
+      "Photo of the manufacturing and expiry date stamps on the collar.",
+      "Photo of the valve and shroud to check for leaks.",
+      "Photo of the full cylinder with the collar removed to verify the actual capacity."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "What the item is shows, but not the model that sets its price: no photo shows it clearly enough to read. The shot asked for first would settle it."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r5",
+    "task": "testify_read",
+    "latency_ms": 2325,
+    "input_tokens": 1583,
+    "output_tokens": 538,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "36d3d6924cf63722bedf90025668b198",
+    "error": null
+  }
+}

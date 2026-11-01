@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r5",
+  "response": {
+    "observations": [
+      "Multiple stacks of used car tyres piled outdoors.",
+      "Tyres show significant tread wear and dirt, suggesting they are used or expired.",
+      "A watermark 'POSTED ON JIJI EMANUEL EKE' is visible across the center.",
+      "A sign for 'Dm' is visible in the background, but the text is too blurry to read clearly."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used car tyres",
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "tyres",
+        "verdict": "supported",
+        "evidence": "photo 0 shows multiple tyres stacked in a pile."
+      },
+      {
+        "claim": "rim",
+        "verdict": "unverified",
+        "evidence": "The rims are not visible in the photo."
+      },
+      {
+        "claim": "general car spare parts",
+        "verdict": "unverified",
+        "evidence": "Only tyres are visible; other parts are not shown."
+      },
+      {
+        "claim": "Dm",
+        "verdict": "unverifiable_remote",
+        "evidence": "The sign in the background is too blurry to read."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Tyres may be expired or have low tread life.",
+        "proof": "A photo of the 4-digit DOT code on the sidewall of a tyre.",
+        "if_unproven": "as expired tyres"
+      },
+      {
+        "risk": "Rims may be damaged or have significant wear.",
+        "proof": "A photo of the rim with the tyre removed.",
+        "if_unproven": "as damaged rims"
+      },
+      {
+        "risk": "Tyres may be of a different size or model than the buyer's vehicle.",
+        "proof": "A photo of the size markings (e.g., 195/65R15) on the sidewall.",
+        "if_unproven": "as the smallest available size"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the 4-digit DOT code on the sidewall of a tyre.",
+      "Photo of the rim with the tyre removed.",
+      "Photo of the size markings on the sidewall of a tyre."
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identifiable as used car tyres from the photo. While the seller's text is vague, the item can be priced at its worst-case value based on the visible condition."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r5",
+    "task": "testify_read",
+    "latency_ms": 2583,
+    "input_tokens": 1779,
+    "output_tokens": 420,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "de1fd3baee9f3011499cd76b423c6f6d",
+    "error": null
+  }
+}

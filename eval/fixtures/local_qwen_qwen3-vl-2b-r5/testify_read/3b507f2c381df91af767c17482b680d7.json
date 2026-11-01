@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r5",
+  "response": {
+    "observations": [
+      "Photo 0 shows a blue plastic barrel with a black lid and a metal handle, standing on a concrete floor with other barrels in the background.",
+      "Photo 1 shows a close-up of a white label on the barrel's side.",
+      "The label identifies the contents as 'BUTANOL + HYDROXYDE - BPJUSP' and lists a capacity of '25 KG'.",
+      "The label also states 'MADE IN NOVA' and 'BATCH NO 2023'.",
+      "The barrel shows some surface wear and scuffing."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "plastic barrel",
+      "brand": "BPJUSP",
+      "model": "25 KG",
+      "read_from": [
+        "photo 1 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Plastic buckets 80 liters",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows a 25 kg capacity label, not 80 liters."
+      },
+      {
+        "claim": "empty plastic containers",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 1 show empty barrels."
+      },
+      {
+        "claim": "blue barrel",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 1 show blue barrels."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The barrel may be empty or contain a different substance than claimed.",
+        "proof": "A photo of the interior of the barrel showing the bottom and the inside walls.",
+        "if_unproven": "as empty"
+      },
+      {
+        "risk": "The contents may be contaminated or the seal may be compromised.",
+        "proof": "A video showing the seal being opened and the contents being poured out.",
+        "if_unproven": "as contaminated or leaking"
+      },
+      {
+        "risk": "The barrel may be a different size or capacity than the 25 kg label indicates.",
+        "proof": "A photo of the manufacturer's stamped capacity on the barrel's body.",
+        "if_unproven": "as a 25 kg barrel"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the interior of the barrel showing the bottom and the inside walls.",
+      "Photo of the manufacturer's stamped capacity on the barrel's body.",
+      "Video of the seal being opened and the contents being poured out."
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identified as a 25 kg plastic barrel. It can be priced at its worst-case scenario (empty) until the contents and capacity are verified."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r5",
+    "task": "testify_read",
+    "latency_ms": 2292,
+    "input_tokens": 2277,
+    "output_tokens": 465,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "3b507f2c381df91af767c17482b680d7",
+    "error": null
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r5",
+  "response": {
+    "observations": [
+      "Toyota Hilux engine with a manual transmission and a manual gearbox.",
+      "The engine is resting on gravel with a black tarp partially covering it.",
+      "The engine has a 'V6' badge on the side of the cylinder head.",
+      "The engine is missing its original plastic engine cover.",
+      "The seller's text mentions '2007' and 'gear box' but the photo does not confirm this.",
+      "A watermark 'BLESSED WORLD' is visible across the center of the image."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "V6 engine and gearbox",
+      "brand": "Toyota",
+      "read_from": [
+        "photo 0 engine"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Toyota hilux",
+        "verdict": "supported",
+        "evidence": "photo 0 engine badge"
+      },
+      {
+        "claim": "2007",
+        "verdict": "unverified",
+        "evidence": "The photo does not show a year stamp or model plate."
+      },
+      {
+        "claim": "engine",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "gear box",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The engine may be a used or rebuilt unit rather than a genuine Toyota part.",
+        "proof": "A clear photo of the engine's identification plate (usually on the side or back).",
+        "if_unproven": "as a used or rebuilt engine"
+      },
+      {
+        "risk": "The gearbox may be missing or in poor condition.",
+        "proof": "A photo of the gearbox and its shifter assembly.",
+        "if_unproven": "as missing the gearbox"
+      },
+      {
+        "risk": "The engine may have internal damage or be non-running.",
+        "proof": "A video of the engine running or a compression test result.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of any label, sticker or metal plate showing the brand and model.",
+      "Photo of the engine's identification plate showing the model and year.",
+      "Photo of the gearbox and its shifter.",
+      "Video of the engine starting and running.",
+      "Photo of the engine cover to check for rust or damage."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "What the item is shows, but not the model that sets its price: no photo shows it clearly enough to read. The shot asked for first would settle it."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r5",
+    "task": "testify_read",
+    "latency_ms": 2183,
+    "input_tokens": 1390,
+    "output_tokens": 442,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "e49ee56aa54f0948356b5a590baa2100",
+    "error": null
+  }
+}

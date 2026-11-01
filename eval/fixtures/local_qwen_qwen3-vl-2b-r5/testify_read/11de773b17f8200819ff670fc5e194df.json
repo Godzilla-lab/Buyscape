@@ -1,0 +1,75 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r5",
+  "response": {
+    "observations": [
+      "Blue industrial electric motor with ribbed aluminum housing.",
+      "Red coupling shaft protruding from the bottom.",
+      "A metal nameplate is attached to the side of the motor housing.",
+      "The motor is sitting on a wet concrete floor with some water stains.",
+      "The nameplate in photo 1 and photo 2 identifies the brand as '\u4e09\u76f8\u5f02\u6b65\u7535\u52a8\u673a' (Three-phase asynchronous motor) and the model as 'YB-90S-4'.",
+      "The nameplate in photo 1 and photo 2 lists the technical specifications: 1.1 kW, 380 V, 50 Hz, IP 55, and 2.6 A.",
+      "The nameplate in photo 1 and photo 2 lists the manufacturer as '\u6c5f\u897f\u8d63\u7279\u7535\u673a\u6709\u9650\u516c\u53f8' (Jiangxi Gantai Electric Motor Co., Ltd.).",
+      "The motor shows significant surface rust and wear, particularly on the top cover and side plates."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "industrial electric motor",
+      "brand": "YB-90S-4",
+      "read_from": [
+        "photo 1 nameplate",
+        "photo 2 nameplate"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Original 2 HP electric motor",
+        "verdict": "contradicted",
+        "evidence": "The nameplate in photo 1 and photo 2 shows 1.1 kW, not 2 HP."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The motor may not be functional or may have internal faults.",
+        "proof": "A video showing the motor running or a clear photo of the nameplate with the 'Rated Power' field filled.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The shaft may be seized, cracked, or have excessive wear.",
+        "proof": "A video showing the shaft rotating freely.",
+        "if_unproven": "as seized/shaft damaged"
+      },
+      {
+        "risk": "The coupling may be damaged or loose.",
+        "proof": "A photo of the coupling with the shaft removed.",
+        "if_unproven": "as damaged coupling"
+      },
+      {
+        "risk": "The motor may be a counterfeit or a different model from the seller's description.",
+        "proof": "A clear photo of the manufacturer's identification plate on the motor housing.",
+        "if_unproven": "as a generic 1.1 kW motor"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of any label, sticker or metal plate showing the brand and model.",
+      "Video of the motor running to confirm it is not a static photo.",
+      "Photo of the shaft and coupling to check for wear.",
+      "Photo of the manufacturer's identification plate on the motor housing."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "What the item is shows, but not the model that sets its price: no photo shows it clearly enough to read. The shot asked for first would settle it."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r5",
+    "task": "testify_read",
+    "latency_ms": 2646,
+    "input_tokens": 2352,
+    "output_tokens": 549,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "11de773b17f8200819ff670fc5e194df",
+    "error": null
+  }
+}

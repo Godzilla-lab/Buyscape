@@ -1,0 +1,88 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r5",
+  "response": {
+    "observations": [
+      "Blue plastic drum with a black rubber lid and metal clasp.",
+      "The label identifies the contents as 'STYRENE ACRYLIC' and the weight as '250.0 KGS'.",
+      "The label shows an expiry date of 'DECEMBER 2024' and a manufacturing date of 'NOVEMBER 2023'.",
+      "The label also states 'MADE IN INDIA'.",
+      "The drum shows significant surface scratches and scuffs, particularly on the shoulder and body.",
+      "A watermark 'ABDUL HOPE VENTURES' is visible across the center of the image."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "plastic drum",
+      "brand": "Ambani Orgochem Ltd.",
+      "model": "AOPL PS 504",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "250 litters",
+        "verdict": "supported",
+        "evidence": "photo 0 label"
+      },
+      {
+        "claim": "original plastic drum",
+        "verdict": "supported",
+        "evidence": "photo 0 label"
+      },
+      {
+        "claim": "Food grade",
+        "verdict": "unverified",
+        "evidence": "The label does not explicitly state 'Food Grade'. The material is styrene acrylic, which is not typically food-grade plastic."
+      },
+      {
+        "claim": "used only once for clean water. No crack, no leak, lids complete.",
+        "verdict": "unverified",
+        "evidence": "No photo shows this; it is the seller's word only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The drum may be empty or contain a different substance.",
+        "proof": "A photo of the empty drum with a weight or volume measurement.",
+        "if_unproven": "as empty"
+      },
+      {
+        "risk": "The material may not be food-grade as claimed.",
+        "proof": "A photo of the material specification or a close-up of the label showing the grade.",
+        "if_unproven": "as non-food grade plastic"
+      },
+      {
+        "risk": "The interior may be rusted or damaged.",
+        "proof": "A photo of the inside of the drum.",
+        "if_unproven": "as having a damaged interior"
+      },
+      {
+        "risk": "The lid may be cracked or the clasp may be broken.",
+        "proof": "A photo of the lid and the clasp.",
+        "if_unproven": "as having a damaged lid"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the empty drum to confirm weight.",
+      "Photo of the interior of the drum.",
+      "Photo of the material specification label to confirm food-grade status.",
+      "Photo of the lid and the clasp."
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identified by brand and model from the label. It can be priced at its worst-case scenario (empty and non-food grade) until further proof is provided."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r5",
+    "task": "testify_read",
+    "latency_ms": 2597,
+    "input_tokens": 1791,
+    "output_tokens": 532,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "3de2eab13d75ea2b4e8d4ceba45e579c",
+    "error": null
+  }
+}

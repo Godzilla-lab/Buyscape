@@ -1,0 +1,73 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r5",
+  "response": {
+    "observations": [
+      "Multiple blue oxygen gas cylinders are shown in photo 0 and photo 1.",
+      "The cylinders have a 'P227.8' marking on the shoulder, which is the standard for 40L cylinders.",
+      "The cylinders are marked with 'ISO 9809-8' and '47.3 KG 40L'.",
+      "The cylinders show significant surface wear, scratches, and some peeling of protective labels.",
+      "A red fire extinguisher is visible in the background in both photos.",
+      "A watermark 'DE-JOE GLOBAL SERVICES' is present on both images."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "oxygen gas cylinder",
+      "brand": "Unknown",
+      "model": "40L",
+      "read_from": [
+        "photo 0 shoulder",
+        "photo 1 shoulder"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "40L Oxygen Gas Cylinders",
+        "verdict": "supported",
+        "evidence": "The markings '47.3 KG 40L' and 'P227.8' on the shoulder of the cylinders in photo 0 and 1."
+      },
+      {
+        "claim": "Industrial Grade",
+        "verdict": "unverifiable_remote",
+        "evidence": "Material quality and manufacturing grade cannot be determined from photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Cylinders may be expired or past their re-test date.",
+        "proof": "A clear photo of the manufacture or expiry date stamped on the shoulder of the cylinder.",
+        "if_unproven": "as expired/scrap value"
+      },
+      {
+        "risk": "The cylinders may be leaking or have internal damage.",
+        "proof": "A video showing a soap bubble test on the valve or a close-up of the valve shroud.",
+        "if_unproven": "as leaking/scrap value"
+      },
+      {
+        "risk": "The cylinders may be non-industrial grade or of a different material (e.g., aluminum).",
+        "proof": "A photo of the manufacturer's identification plate on the cylinder.",
+        "if_unproven": "as scrap value"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the manufacture or expiry date stamped on the shoulder of the cylinders.",
+      "Close-up photo of the valve shroud to check for leaks.",
+      "Photo of the manufacturer's identification plate."
+    ],
+    "decision": "price",
+    "reason": "The cylinders are clearly identifiable as 40L oxygen gas cylinders from the markings in the photos, so they can be priced at their worst case (expired and leaking) until further proof is provided."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r5",
+    "task": "testify_read",
+    "latency_ms": 2163,
+    "input_tokens": 2592,
+    "output_tokens": 473,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "ead6ab74c6aff28dfeba2dd0ccbe8ab2",
+    "error": null
+  }
+}

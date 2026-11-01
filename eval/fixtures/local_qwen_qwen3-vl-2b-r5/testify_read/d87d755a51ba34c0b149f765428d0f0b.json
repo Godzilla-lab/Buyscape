@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r5",
+  "response": {
+    "observations": [
+      "Multiple black plastic water tanks stacked in an outdoor area.",
+      "The tanks have horizontal ribbed construction.",
+      "A tank in the background has a white logo with a cross and the text 'GEEPEE'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "water tank",
+      "brand": "Geepee",
+      "read_from": [
+        "photo 0 logo"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "1000 Liters",
+        "verdict": "unverified",
+        "evidence": "The capacity is not visible on the tanks in the photo."
+      },
+      {
+        "claim": "Geepee water tank",
+        "verdict": "supported",
+        "evidence": "photo 0 logo"
+      },
+      {
+        "claim": "Food grade",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      },
+      {
+        "claim": "used only once for clean water. No crack, no leak, lids complete.",
+        "verdict": "unverified",
+        "evidence": "No photo shows this; it is the seller's word only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The capacity may be significantly lower than 1000L.",
+        "proof": "A photo of the manufacturer's stamped capacity plate on the tank.",
+        "if_unproven": "as a 500L tank"
+      },
+      {
+        "risk": "The tank may have structural cracks or leaks.",
+        "proof": "A video showing the tank being filled with water and a pressure test.",
+        "if_unproven": "as leaking"
+      },
+      {
+        "risk": "The tank may be empty or contain rusted internal components.",
+        "proof": "A photo of the interior of the tank.",
+        "if_unproven": "as empty and scrap metal"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the stamped capacity plate on the tank.",
+      "Photo of the interior of the tank.",
+      "Video of the tank being filled with water to check for leaks."
+    ],
+    "decision": "price",
+    "reason": "The brand is clearly identified from the logo in the photo, so it can be priced at its worst case (unverified capacity and untested condition)."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r5",
+    "task": "testify_read",
+    "latency_ms": 2341,
+    "input_tokens": 1794,
+    "output_tokens": 377,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "d87d755a51ba34c0b149f765428d0f0b",
+    "error": null
+  }
+}

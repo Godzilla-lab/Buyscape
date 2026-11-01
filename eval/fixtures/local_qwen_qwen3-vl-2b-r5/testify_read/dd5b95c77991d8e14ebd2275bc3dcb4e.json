@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r5",
+  "response": {
+    "observations": [
+      "Blue plastic drum with a black rubber lid and a metal clasp.",
+      "The label identifies the contents as 'STYRENE ACRYLIC' and the weight as '250.0 KGS'.",
+      "The label shows a gross weight of '259.8 KGS'.",
+      "The expiry date is listed as 'DECEMBER 2024'.",
+      "The manufacturer is 'AMBANI ORGOCHEM LTD'.",
+      "The drum is marked 'NON HAZARDOUS'.",
+      "The background shows other similar blue drums and a metal fence.",
+      "The surface of the drum shows some white residue or dust."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "plastic drum",
+      "brand": "Ambani Orgochem Ltd",
+      "model": "Aopl PS 504",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "250 litters",
+        "verdict": "supported",
+        "evidence": "The label in photo 0 shows a gross weight of 259.8 KGS, which is the standard capacity for this size."
+      },
+      {
+        "claim": "original plastic drum",
+        "verdict": "supported",
+        "evidence": "The label in photo 0 identifies the contents as styrene acrylic, which is a common industrial chemical."
+      },
+      {
+        "claim": "1 photos follow, numbered from photo 0.",
+        "verdict": "unverified",
+        "evidence": "The photo provided is photo 0."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The drum may be empty or contain a different, lower-value substance.",
+        "proof": "A photo of the empty drum with a clear label showing 'EMPTY' or 'NOT FOR SALE'.",
+        "if_unproven": "as an empty drum"
+      },
+      {
+        "risk": "The drum may be leaking or have structural damage.",
+        "proof": "A video showing the drum being filled with water to test for leaks.",
+        "if_unproven": "as leaking"
+      },
+      {
+        "risk": "The contents may be expired or degraded.",
+        "proof": "A photo of the date code on the bottom of the drum.",
+        "if_unproven": "as expired"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the empty drum.",
+      "Photo of the bottom of the drum to verify the contents and date code.",
+      "Video of the drum being filled with water to check for leaks."
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identified by brand and model from the label. It can be priced at its worst-case scenario (empty and leaking) until further proof is provided."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r5",
+    "task": "testify_read",
+    "latency_ms": 2597,
+    "input_tokens": 1772,
+    "output_tokens": 489,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "dd5b95c77991d8e14ebd2275bc3dcb4e",
+    "error": null
+  }
+}
