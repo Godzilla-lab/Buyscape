@@ -10,6 +10,7 @@ from buyscape.testify import crawl
 
 def _advert(i, condition="Used", title=None, category="Refrigerators"):
     return {"guid": i, "title": title or f"LG fridge {i}", "price_obj": {"value": 90000},
+            "details": "Clean fridge, call 0803 123 4567 or mail ade@example.com",
             "images": [{"url": f"https://pictures-nigeria.jijistatic.net/{i}_x.jpg"}],
             "attrs": [{"name": "Condition", "value": condition}], "url": f"/lagos/fridges/{i}.html",
             "category_name": category}
@@ -40,6 +41,7 @@ def test_second_hand_sellers_only_and_the_benchmark_passed_over(tmp_path, monkey
     rows = json.loads((tmp_path / "home-appliances.json").read_text())
     assert [r["id"] for r in rows] == ["a"]
     assert rows[0]["kind"] == "refrigerators" and rows[0]["region"] == "lagos" and rows[0]["tier"] == "small_goods"
+    assert rows[0]["description"] == "Clean fridge, call [phone] or mail [email]"
     assert tally["in the benchmark"] == 1 and tally["buyer, not seller"] == 1
 
 

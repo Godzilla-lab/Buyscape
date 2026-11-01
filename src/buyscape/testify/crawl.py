@@ -24,6 +24,7 @@ from pathlib import Path
 import httpx
 
 from ..evalset.jiji import BASE, UA, Listing, _attrs, _image_urls, _is_used, _url_width, download_media
+from .convert import redact
 from .fetch import _from_page, _patiently
 from .schema import WANTED
 
@@ -225,6 +226,8 @@ def crawl(
             for listing, advert in fresh:
                 if listing.media:
                     row = listing.to_json()
+                    # Item fields only: a seller's phone number or email in the text is never kept.
+                    row["description"] = redact(row["description"])
                     row.update(tier=tier, kind=kind_of(advert, slug), region=region, protocol=protocol,
                                site_category=site_category(advert))
                     rows[listing.id] = row
