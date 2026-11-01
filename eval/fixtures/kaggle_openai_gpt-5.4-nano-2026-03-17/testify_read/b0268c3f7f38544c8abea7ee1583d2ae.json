@@ -1,0 +1,91 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo shows a split AC outdoor unit (or a portable/indoor unit placed outdoors) with a large front grille and a white casing.",
+      "Brand text appears on the front label area, but it is not fully readable in this single photo.",
+      "A red/orange sticker with numbers appears on the right side of the front label area, but the capacity/model is not clearly readable.",
+      "No close-up of the rating plate (model/serial), no remote, and no power-on/working video is shown.",
+      "Seller says it is faulty, but the photo itself does not show the fault."
+    ],
+    "identity": {
+      "status": "unknown",
+      "kind": "split AC (outdoor/indoor unit not fully confirmable from one photo)",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Faulty inverter AC available for sale.",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows an AC unit but does not show inverter status or the specific fault."
+      },
+      {
+        "claim": "Barely used, bought new last year.",
+        "verdict": "unverifiable_remote",
+        "evidence": "No receipt/date or warranty card is shown in the photo."
+      },
+      {
+        "claim": "No fault at all, the motor was never opened.",
+        "verdict": "contradicted",
+        "evidence": "Seller\u2019s own first line says it is faulty; the photo does not resolve which statement is true."
+      },
+      {
+        "claim": "Receipt and warranty card available.",
+        "verdict": "unverified",
+        "evidence": "No receipt/warranty card is shown."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual fault type is unknown (e.g., compressor, fan motor, gas leak, PCB). Photos cannot confirm.",
+        "proof": "Short video of power-on with temperature/operation mode, plus a clear sound check (compressor start) and any error code on the display/remote.",
+        "if_unproven": "Priced as not working / needs diagnosis and possible major repair."
+      },
+      {
+        "risk": "Capacity (BTU) and exact model are not readable, which strongly affects Lagos pricing and repair cost.",
+        "proof": "Close-up photo of the rating plate showing model number and BTU/capacity (and serial).",
+        "if_unproven": "Priced at the worst-case assumption for an unknown-capacity AC (treated as lower-value/repairable unit)."
+      },
+      {
+        "risk": "Inverter vs non-inverter is not confirmable from the photo; inverter units price differently and repairs differ.",
+        "proof": "Photo of the label/plate where inverter is stated, or a clear shot of the control board/model marking.",
+        "if_unproven": "Priced as non-inverter/unknown (worst-case for resale)."
+      },
+      {
+        "risk": "Unit shown may be the outdoor unit or a different component; missing matching indoor/outdoor parts can make it unusable.",
+        "proof": "Photos of both indoor and outdoor units (if split), including the connecting pipes/ports and model plates for each.",
+        "if_unproven": "Priced as incomplete/uncertain setup (worst-case)."
+      },
+      {
+        "risk": "Refrigerant leak or compressor failure may not be obvious until tested under load.",
+        "proof": "After power-on, show sustained cooling for at least 15\u201320 minutes (or show gauges/technician test if available).",
+        "if_unproven": "Priced as likely to require gas/compressor service."
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the rating plate (model number, serial, BTU/capacity, inverter/non-inverter marking).",
+      "Video of the AC being powered on and running (compressor start + any error code).",
+      "If split: photos of both indoor and outdoor units with their rating plates.",
+      "Photos of the receipt and warranty card (showing date and model).",
+      "If the seller claims \u201cmotor never opened\u201d: photo of the unit\u2019s casing/fasteners to show it hasn\u2019t been tampered with (and any service stickers)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "From the single photo, the AC\u2019s exact model/capacity and the inverter status are not reliably readable, and the seller\u2019s \u201cfaulty\u201d vs \u201cno fault\u201d statements can\u2019t be verified remotely. A power-on test and clear rating-plate close-up are needed before a safe price."
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_read",
+    "latency_ms": 5766,
+    "input_tokens": 2371,
+    "output_tokens": 1019,
+    "cost_usd": 0.00393,
+    "replayed": false,
+    "fixture_key": "b0268c3f7f38544c8abea7ee1583d2ae",
+    "error": null
+  }
+}

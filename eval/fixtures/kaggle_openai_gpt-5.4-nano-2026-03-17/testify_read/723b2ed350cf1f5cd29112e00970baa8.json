@@ -1,0 +1,90 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0 shows a NEXUS top-loading washing machine (brand label visible).",
+      "No model number/capacity/rating plate details are visible in photo 0.",
+      "No evidence in photo 0 of a functional test (no running video, no control panel display, no drum interior)."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "top-loading washing machine",
+      "brand": "NEXUS",
+      "model": null,
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Washing machine available at Abulegba",
+        "verdict": "unverified",
+        "evidence": "Location is not shown in photo 0; seller text only."
+      },
+      {
+        "claim": "Barely used, bought new last year.",
+        "verdict": "unverified",
+        "evidence": "Photo 0 does not show purchase date/usage; seller text only."
+      },
+      {
+        "claim": "No fault at all, the motor was never opened.",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows no motor access/service history and no functional test; seller text only."
+      },
+      {
+        "claim": "Receipt and warranty card available.",
+        "verdict": "unverified",
+        "evidence": "No receipt/warranty card shown in photo 0; seller text only."
+      },
+      {
+        "claim": "\u201cI tested it myself yesterday, everything I said is true. Please check again.\u201d",
+        "verdict": "unverifiable_remote",
+        "evidence": "No new photo/video or test result is provided; cannot verify remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Working condition (wash/agitate/drain/spin) not verifiable from the current photo.",
+        "proof": "Short video of a full cycle or at least: fill \u2192 agitation \u2192 drain \u2192 spin, with water running and the machine completing the cycle.",
+        "if_unproven": "Price as not confirmed working (worst case: buyer must treat as needing service)."
+      },
+      {
+        "risk": "Hidden leaks or weak pump/suspension issues may appear only during drain/spin.",
+        "proof": "Video showing drain/spin with the machine on a level surface, plus a quick check under/around the base for leaks during operation.",
+        "if_unproven": "Price as potentially leaking/needs inspection (worst case: service required)."
+      },
+      {
+        "risk": "Exact model/capacity unknown; value and parts depend on the variant.",
+        "proof": "Photo of the rating plate/model sticker showing model number and capacity (kg).",
+        "if_unproven": "Price using the lowest-value assumption for an unknown NEXUS top-loader variant."
+      },
+      {
+        "risk": "Missing accessories (inlet hose, drain hose, power cable, manual) not shown.",
+        "proof": "Photos of all included items laid out (inlet hose, drain hose, power cable, manual) and any receipt/warranty card.",
+        "if_unproven": "Price as missing/uncertain accessories (worst case: buyer sources parts)."
+      }
+    ],
+    "proof_requests": [
+      "Send a photo of the rating plate/model sticker (model number + capacity in kg).",
+      "Send a short video of the machine running: fill \u2192 wash/agitate \u2192 drain \u2192 spin.",
+      "Send a photo/video confirming no leaks during drain/spin (check under the base).",
+      "Send photos of included accessories and the receipt/warranty card."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller\u2019s \u201cI tested it\u201d statement is not supported by any new photo/video. With only photo 0, the model/capacity and functional working condition remain unverified, so pricing must wait for proof."
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_read",
+    "latency_ms": 4060,
+    "input_tokens": 2509,
+    "output_tokens": 695,
+    "cost_usd": 0.001371,
+    "replayed": false,
+    "fixture_key": "723b2ed350cf1f5cd29112e00970baa8",
+    "error": null
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Single photo shows a step-through frame electric bicycle on dirt ground",
+      "Front wire basket, rear cargo rack with padded seat, kickstand deployed",
+      "A box-shaped unit on the frame consistent with a battery pack",
+      "Pedals and chain visible, suggesting pedal-assist design",
+      "Red-rimmed wheels, tires appear inflated in the single visible angle",
+      "Watermark text reading something like '...TED... TAYO' overlaid on image, likely a photo-credit watermark, not a product label",
+      "No brand or model text legible anywhere on the frame, battery, or motor hub",
+      "Background shows a dirt yard and a building with dark gates, no other context clues"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "electric bicycle (e-bike)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Electric bicycle",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows a bicycle-shaped frame with an attached box that could be a battery, but no visible motor hub, wiring, display, or throttle to confirm it is electrically powered."
+      },
+      {
+        "claim": "Perfect condition",
+        "verdict": "unverifiable_remote",
+        "evidence": "No close-up of tires, brakes, chain, battery terminals, or frame joints; no video of it moving or charging."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery may be dead, degraded, or missing cells",
+        "proof": "Close-up photo of battery label/capacity and a photo or short clip of it charging or showing charge indicator lights",
+        "if_unproven": "priced as non-functional battery (bicycle-only value)"
+      },
+      {
+        "risk": "Motor may be absent, broken, or not actually electric (could be a converted/plain bicycle with a battery-shaped box)",
+        "proof": "Clip of the rear/front wheel hub spinning under power, or a photo showing motor wiring and controller",
+        "if_unproven": "priced as a manual bicycle, not an e-bike"
+      },
+      {
+        "risk": "Tire wear, flat spots, or dry rot not visible from this single distant angle",
+        "proof": "Close-up photos of both tires including tread",
+        "if_unproven": "priced assuming tires need replacement"
+      },
+      {
+        "risk": "Brake condition unknown (disc/rim wear, cable fray)",
+        "proof": "Close-up photo of brake pads/discs and a clip of braking in motion",
+        "if_unproven": "priced assuming brakes need servicing"
+      },
+      {
+        "risk": "Frame rust, cracks, or prior accident damage hidden by angle/lighting",
+        "proof": "Multiple close-up photos of frame joints, especially near pedals and rear rack mount",
+        "if_unproven": "priced assuming moderate cosmetic/structural wear"
+      },
+      {
+        "risk": "Charger may not be included",
+        "proof": "Photo of the charger unit alongside the bike",
+        "if_unproven": "priced as charger not included"
+      }
+    ],
+    "proof_requests": [
+      "A clip of the bike running on motor power (wheel turning without pedaling)",
+      "Close-up photo of the battery pack showing voltage/capacity label and charge ports",
+      "Close-up photos of both tires and brake components",
+      "A photo of the charger, if included",
+      "Additional angles of the frame, especially welds and rear rack mount"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a generic electric bicycle of unknown brand with no model markings; functional claims like 'perfect condition' and even the electric drive itself are unverified from a single static photo, so it must be priced at worst case (manual bicycle with non-functional or absent e-drive) until proof is supplied."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 20712,
+    "input_tokens": 1984,
+    "output_tokens": 1701,
+    "cost_usd": 0.020978,
+    "replayed": false,
+    "fixture_key": "0efd8b20cb40031f694355da019e578b",
+    "error": null
+  }
+}
