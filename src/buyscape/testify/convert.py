@@ -266,16 +266,18 @@ def buyscrap_items(root: Path) -> list[Item]:
 def wider_items(root: Path, cache: str = "testify") -> list[Item]:
     """Small goods and material lots fetched by `buyscape testify-fetch`.
 
-    From the training caches, testify_new (dealers' new stock) and
-    testify_train (second-hand adverts fetched for training), every item is
-    split `train`: training data, never a benchmark item.
+    From the training caches, testify_new (dealers' new stock), testify_train
+    (second-hand adverts fetched for training) and testify_crawl (whole Jiji
+    categories paged through), every item is split `train`: training data,
+    never a benchmark item.
     """
     raw = root / "eval" / "raw" / cache
     training = cache != "testify"
     protocols = load_protocols(root / "protocols")
     items: list[Item] = []
     for row in wider.load(raw):
-        category = "material_lot" if row["tier"] == "material_lot" else "generic"
+        # A crawled advert names its own protocol (phone, laptop, furniture).
+        category = row.get("protocol") or ("material_lot" if row["tier"] == "material_lot" else "generic")
         # Most scrap adverts on Jiji are dealers asking to buy, not sellers.
         wanted = bool(WANTED.search(row["title"]))
         protocol = _protocol_for(category, protocols)
@@ -313,7 +315,7 @@ def wider_items(root: Path, cache: str = "testify") -> list[Item]:
     return items
 
 
-TRAIN_CACHES = ("testify_new", "testify_train")
+TRAIN_CACHES = ("testify_new", "testify_train", "testify_crawl")
 
 
 def train_items(root: Path, previous: Path | None = None) -> list[Item]:

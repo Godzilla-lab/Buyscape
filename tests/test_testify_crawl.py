@@ -1,0 +1,65 @@
+"""A category crawl keeps second-hand sellers only, passes over the benchmark,
+names each advert by the site's own category, and resumes where it stopped."""
+
+import json
+
+import httpx
+
+from buyscape.testify import crawl
+
+
+def _advert(i, condition="Used", title=None, category="Refrigerators"):
+    return {"guid": i, "title": title or f"LG fridge {i}", "price_obj": {"value": 90000},
+            "images": [{"url": f"https://pictures-nigeria.jijistatic.net/{i}_x.jpg"}],
+            "attrs": [{"name": "Condition", "value": condition}], "url": f"/lagos/fridges/{i}.html",
+            "category_name": category}
+
+
+def _jiji(pages):
+    def handler(request):
+        number = int(request.url.params["page"])
+        adverts = pages[number - 1] if number <= len(pages) else []
+        return httpx.Response(200, json={"adverts_list": {"adverts": adverts}})
+    return httpx.Client(transport=httpx.MockTransport(handler))
+
+
+def _no_downloads(monkeypatch):
+    monkeypatch.setattr(crawl, "_from_page", lambda listing, client: [])
+    monkeypatch.setattr(crawl, "download_media",
+                        lambda listings, *a, **k: [setattr(x, "media", [f"{x.id}/00.jpg"]) for x in listings])
+    monkeypatch.setattr(crawl.time, "sleep", lambda s: None)
+
+
+def test_second_hand_sellers_only_and_the_benchmark_passed_over(tmp_path, monkeypatch):
+    _no_downloads(monkeypatch)
+    pages = [[_advert("a"), _advert("b", "Brand New"), _advert("c", title="We buy used fridges"), _advert("bench")]]
+    tally = crawl.crawl(tmp_path, "lagos", "home-appliances", pages=3, avoid=frozenset({"bench"}),
+                        client=_jiji(pages))
+    rows = json.loads((tmp_path / "home-appliances.json").read_text())
+    assert [r["id"] for r in rows] == ["a"]
+    assert rows[0]["kind"] == "refrigerators" and rows[0]["region"] == "lagos" and rows[0]["tier"] == "small_goods"
+    assert tally["in the benchmark"] == 1 and tally["buyer, not seller"] == 1
+
+
+def test_a_crawl_resumes_after_its_last_page_and_never_fetches_an_advert_twice(tmp_path, monkeypatch):
+    _no_downloads(monkeypatch)
+    pages = [[_advert("a")], [_advert("b")], [_advert("c")]]
+    crawl.crawl(tmp_path, "lagos", "home-appliances", pages=2, client=_jiji(pages))
+    assert (tmp_path / ".progress" / "lagos" / "home-appliances").read_text() == "2"
+    tally = crawl.crawl(tmp_path, "lagos", "home-appliances", pages=3, held=frozenset({"c"}), client=_jiji(pages))
+    rows = json.loads((tmp_path / "home-appliances.json").read_text())
+    assert [r["id"] for r in rows] == ["a", "b"] and tally["held already"] == 1 and tally["pages"] == 1
+
+
+def test_a_crawl_stops_once_pages_bring_nothing_new(tmp_path, monkeypatch):
+    _no_downloads(monkeypatch)
+    pages = [[_advert("a")]] + [[_advert("a")]] * 20
+    tally = crawl.crawl(tmp_path, "lagos", "home-appliances", pages=50, client=_jiji(pages))
+    assert tally["pages"] == 1 + crawl.STALE_PAGES
+
+
+def test_a_phone_is_filed_under_its_protocol_and_a_slug_is_checked():
+    assert crawl.CATEGORIES["mobile-phones"] == ("branded_electronics", "phone")
+    assert crawl.kind_of({"category": {"name": "Mobile Phones"}}, "mobile-phones") == "mobile phones"
+    assert crawl.kind_of({}, "tv-dvd-equipment") == "tv dvd equipment"
+    assert crawl.valid_slug("home-appliances") and not crawl.valid_slug("../etc")
