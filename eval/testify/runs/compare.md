@@ -9,6 +9,7 @@
 | kaggle_openai_gpt-5.4-nano-2026-03-17 | 88% | 19% | 0% | 39% | 91% | 100% | 100% | 100% |
 | local_qwen_qwen3-vl-2b-instruct | 77% | 54% | 47% | - | - | - | - | 100% |
 | local_qwen_qwen3-vl-2b-r4 | 74% | 25% | 0% | - | - | - | - | 96% |
+| local_qwen_qwen3-vl-2b-r5 | 74% | 22% | 1% | - | - | - | - | 95% |
 | local_qwen_qwen3-vl-4b-instruct | 81% | 24% | 2% | - | - | - | - | 99% |
 | local_qwen_qwen3-vl-4b-r3 | 78% | 23% | 0% | - | - | - | - | 99% |
 | local_qwen_qwen3-vl-4b-r4 | 78% | 24% | 0% | - | - | - | - | 96% |
@@ -26,6 +27,7 @@
 | kaggle_openai_gpt-5.4-nano-2026-03-17 | 0% | 0 | - | - | - (-) | 1000 |
 | local_qwen_qwen3-vl-2b-instruct | 0% | 0 | - | - | - (-) | 1012 |
 | local_qwen_qwen3-vl-2b-r4 | 30% | 8 | 56% | 16% | 6% (0%) | 3600 |
+| local_qwen_qwen3-vl-2b-r5 | 23% | 3 | 58% | 21% | 16% (2%) | 3241 |
 | local_qwen_qwen3-vl-4b-instruct | 1% | 0 | 0% | 0% | - (0%) | 1100 |
 | local_qwen_qwen3-vl-4b-r3 | 65% | 13 | 49% | 23% | 12% (1%) | 55208 |
 | local_qwen_qwen3-vl-4b-r4 | 41% | 8 | 54% | 22% | 7% (2%) | 14961 |
