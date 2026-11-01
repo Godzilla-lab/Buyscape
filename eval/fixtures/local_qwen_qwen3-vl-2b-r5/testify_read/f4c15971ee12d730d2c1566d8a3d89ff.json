@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r5",
+  "response": {
+    "observations": [
+      "Multiple gas cylinders of various sizes and colors (orange, red, blue) are shown.",
+      "The orange cylinder in photo 2 has a 'REPOL' brand label and a capacity of '12.5kg' printed on it.",
+      "The cylinders show significant surface wear, scratches, and paint chipping.",
+      "A red cylinder is visible in the background of photo 1.",
+      "A blue cylinder with a 'Teflon' label is visible in the background of photo 1.",
+      "The cylinders are stacked and appear to be in a storage or shop environment."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "gas cylinder",
+      "brand": "REPOL",
+      "model": "12.5kg",
+      "read_from": [
+        "photo 2 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "12.5kg Foreign-Used",
+        "verdict": "supported",
+        "evidence": "Photo 2 shows a 12.5kg capacity label on the orange cylinder."
+      },
+      {
+        "claim": "Strong & Reliable",
+        "verdict": "unverifiable_remote",
+        "evidence": "Strength and reliability cannot be determined from photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Cylinders may be expired or past their re-test date.",
+        "proof": "A clear photo of the manufacturing or expiry date stamped on the handle or base of the cylinder.",
+        "if_unproven": "as expired/scrap value"
+      },
+      {
+        "risk": "The cylinders may be non-functional or leaking.",
+        "proof": "A video showing a soap bubble test on the valve or a pressure test on the cylinder.",
+        "if_unproven": "as non-functional/scrap value"
+      },
+      {
+        "risk": "The cylinders may be of a different brand or type (e.g., LPG vs. Propane).",
+        "proof": "A photo of the manufacturer's identification plate on the cylinder.",
+        "if_unproven": "as a generic foreign-used cylinder"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the manufacturing/expiry date stamped on the handle or base of the orange cylinder.",
+      "Photo of the manufacturer's identification plate on the orange cylinder.",
+      "Video of a soap bubble test on the valve to check for leaks."
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identified as a 12.5kg foreign-used gas cylinder with a REPOL brand label visible in photo 2. It can be priced at its worst-case value (expired and non-functional) until further proof is provided."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r5",
+    "task": "testify_read",
+    "latency_ms": 2381,
+    "input_tokens": 2794,
+    "output_tokens": 466,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "f4c15971ee12d730d2c1566d8a3d89ff",
+    "error": null
+  }
+}

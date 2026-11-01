@@ -1,0 +1,85 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r5",
+  "response": {
+    "observations": [
+      "Photo 0 shows a Canon DSLR camera body with an EF-S 18-55mm lens, both with lens caps.",
+      "Photo 1 shows the same camera body with the lens removed, showing the rear LCD screen and control buttons.",
+      "Photo 2 shows two cameras on a shelf: a Canon EOS 600D and a Nikon 24-70mm lens.",
+      "The Canon EOS 600D is clearly visible on the left in photo 2.",
+      "The seller's text claims the camera is 'very neat and sharp'.",
+      "The photos show the camera body but do not show the lens attached or the camera powered on."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DSLR camera",
+      "brand": "Canon",
+      "model": "EOS 600D",
+      "read_from": [
+        "photo 0 body",
+        "photo 2 body"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "UK used",
+        "verdict": "unverifiable_remote",
+        "evidence": "No UK import stamps or documentation is shown."
+      },
+      {
+        "claim": "Canon EOS 600D",
+        "verdict": "supported",
+        "evidence": "photo 0 and photo 2"
+      },
+      {
+        "claim": "very neat",
+        "verdict": "unverified",
+        "evidence": "The photos show the body and lens caps, but the actual lens is not shown attached."
+      },
+      {
+        "claim": "sharp",
+        "verdict": "unverified",
+        "evidence": "No photos of the camera taking a clear photo are provided."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The lens may be missing or damaged.",
+        "proof": "A photo of the lens attached to the camera body.",
+        "if_unproven": "as a camera body only"
+      },
+      {
+        "risk": "The camera may not power on or take photos.",
+        "proof": "A video of the camera powering on and taking a photo.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The sensor may be scratched or dirty.",
+        "proof": "A clear photo of the camera sensor with the lens removed.",
+        "if_unproven": "as having a damaged sensor"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of any label, sticker or metal plate showing the brand and model.",
+      "Photo of the lens attached to the camera body.",
+      "Video of the camera powering on and taking a photo.",
+      "Photo of the camera sensor with the lens removed.",
+      "Photo of the battery and charger."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "What the item is shows, but not the model that sets its price: no photo shows it clearly enough to read. The shot asked for first would settle it."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r5",
+    "task": "testify_read",
+    "latency_ms": 7619,
+    "input_tokens": 2779,
+    "output_tokens": 499,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "15405d183cd3199de51a8e4180bb18a8",
+    "error": null
+  }
+}

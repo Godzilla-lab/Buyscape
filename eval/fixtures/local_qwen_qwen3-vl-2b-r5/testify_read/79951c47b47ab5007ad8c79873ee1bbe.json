@@ -1,0 +1,73 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r5",
+  "response": {
+    "observations": [
+      "Two solar panels leaning against a wall.",
+      "The panels have a silver aluminum frame.",
+      "The surface is dark, consistent with a monocrystalline or polycrystalline solar cell design.",
+      "A watermark 'IZUTECH SOLAR ENERGY' is visible across the center of the image.",
+      "The panels appear to be in a warehouse or storage area."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel",
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Izutech solar energy",
+        "verdict": "unverified",
+        "evidence": "The watermark is present, but the seller's name is not visible on the panels in the photo."
+      },
+      {
+        "claim": "specialize in all solar equipment such as Inverter, panels, charge...",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a business description and cannot be verified from a photo of panels."
+      },
+      {
+        "claim": "Battery is new, holds charge for 8 hours. Never repaired.",
+        "verdict": "unverified",
+        "evidence": "No battery is visible in the photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The panels may be used or have physical damage.",
+        "proof": "A clear photo of the manufacturer's specification label (usually on the back) showing the model and wattage.",
+        "if_unproven": "as used panels"
+      },
+      {
+        "risk": "The panels may be non-functional or have significantly reduced output.",
+        "proof": "A video showing a multimeter test of the open-circuit voltage (Voc) and short-circuit current (Isc).",
+        "if_unproven": "as non-functional"
+      },
+      {
+        "risk": "The panels may be counterfeit or of a different brand than the watermark suggests.",
+        "proof": "A photo of the serial number or identification plate on the back of the panel.",
+        "if_unproven": "as generic panels"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of any label, sticker or metal plate showing the brand and model.",
+      "Photo of the specification label on the back of the panels.",
+      "Photo of the serial number or identification plate on the back of the panels.",
+      "Video of a multimeter test showing the open-circuit voltage (Voc) and short-circuit current (Isc)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "What the item is shows, but not the model that sets its price: no photo shows it clearly enough to read. The shot asked for first would settle it."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r5",
+    "task": "testify_read",
+    "latency_ms": 2194,
+    "input_tokens": 1411,
+    "output_tokens": 474,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "79951c47b47ab5007ad8c79873ee1bbe",
+    "error": null
+  }
+}
