@@ -37,7 +37,7 @@ longer separates the models. What does is below.
 | Nemotron | 89% | 85% | 100% | 93% |
 | Gemini | 74% | **93%** | 96% | **100%** |
 | Claude | 44% | **78%** | 96% | 81% |
-| nano | 39% | **70%** | 91% | 81% |
+| nano | 44% | **70%** | 92% | 81% |
 
 No model took the false name into its answer. When one step reports only
 what the photos show, the judge can check a claim against it, and true claims
@@ -83,6 +83,22 @@ about half as often and a true claim is used, at the cost of catching fewer
 false ones. One call with a fixed list prices nearly three times as often
 as read then pick, no less closely, and a lie moves it less than there,
 though more than judged apart.
+
+GPT 5.4 nano is the third (1 Nov), and the conditions barely matter for it,
+because it almost never prices:
+
+| nano | Read then pick | Judged apart | One call, fixed list |
+|---|---|---|---|
+| True claim used | 44% | **70%** | 44% |
+| False claim caught | **92%** | 81% | 84% |
+| Called the lie supported | 0% | 1% | 0% |
+| Gave a price, clean items | 0% | 0% | 0.4% (one item) |
+| Asked for proof | 80% | 54% | 71% |
+| Broke the answer format | 20% | 12% | 18% |
+
+It asks for proof on most items whatever it is shown, and one answer in
+five breaks the format. That is safe, never wrong about money, and useless
+to a buyer: a model that never prices cannot lose and cannot buy.
 
 ## The label taken away
 
