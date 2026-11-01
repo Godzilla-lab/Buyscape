@@ -1,0 +1,62 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a person in a green hard hat and grey coveralls standing on a large pile of used engines and gearboxes inside a warehouse; watermark reads \"NZ JAPANESE AUTOS\" and \"POSTED ON JIJI\".",
+      "Photo 1 shows a used car engine assembly wrapped in clear plastic, stored indoors on shelves with other wrapped units; a blue plate or sticker is visible but unreadable.",
+      "Photo 2 shows the same wrapped engine from a similar angle; no brand, model, or identification number is legible on the unit."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used car engine",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "We sale all kinds of toyota,lexus,Hyundai, Honda engines and gearbox, etc.",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photos show engines but no readable badges, plates, or inventory list to confirm any specific brand."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine may be seized, damaged, or non-functional.",
+        "proof": "Video of the engine turning over or running, or a compression test result.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Brand and model unknown; may not fit the buyer's vehicle.",
+        "proof": "Clear photo of the engine block stamp, VIN plate, or manufacturer label.",
+        "if_unproven": "as unidentified engine"
+      },
+      {
+        "risk": "Missing components such as gearbox, ECU, or wiring harness.",
+        "proof": "Itemized photo showing every part included in the sale.",
+        "if_unproven": "as engine block only"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the engine block identification number or manufacturer label.",
+      "Video of the engine turning over or running.",
+      "Photo showing all included components such as gearbox, ECU, and harness."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The specific engine brand and model are unreadable in the photos, so even a worst-case price cannot be set without knowing what the item is."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 26504,
+    "input_tokens": 2914,
+    "output_tokens": 2934,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "30d08fd7e63a34c9c5a06cdbdf1b0cee",
+    "error": null
+  }
+}

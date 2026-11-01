@@ -430,6 +430,42 @@ much. The 4B names the item better and lands far off less often; the 2B is
 the more careful buyer. Nemotron, Gemini and Claude answer the same test
 items next, for the comparison that matters.
 
+## The fifth training run: every advert (1 Nov)
+
+The 2B again, on `sft_r5`: every training advert, 1,443 (957 in run 4),
+including 72 that a second teacher rescued (Nemotron re-read the 207
+adverts Gemini named wrong and had not seen). One full pass, 528 steps in
+4.75 hours, held-out loss 2.40 to 0.44.
+
+| | Run 4 2B, dev | Run 5 2B, dev | Run 4 2B, test | Run 5 2B, test |
+|---|---|---|---|---|
+| Gave a price | 30% | 23% | 31% | 21% |
+| Asked for the label, clean items | 19% | 54% | | |
+| Offered above the asking price | 16% | 21% | 14% | 16% |
+| Asking price inside the range | 56% | 58% | 52% | 56% |
+| Asking price far outside the range | 10% | 4% | 13% | 14% |
+| A lie raised the price | 6% | 16% | 6% | 6% |
+| Right about the item, when it said | 74% | 74% | 74% | 75% |
+| Priced answers the rules mark wrong, unread | 8 | 3 | 20 | 16 |
+| Largest overpayment, naira | 250,000 | 250,000 | 300,000 | 550,000 |
+| Expected loss per item, naira | 3,600 | **3,241** | 3,873 | 3,850 |
+
+More data did not help on its own. On dev run 5 came within 46 naira of
+Gemini, but on the 679 test items it loses what run 4 lost while pricing a
+third fewer items: the same money for fewer deals. The extra adverts were
+mostly reads, not price steps: the set grew by half, its price picks only
+from 303 to 318, and most of the new adverts were branded ones named
+without a model, which ask for the label. Asked on 37% of reads in the set,
+the trained model asks on 54% of clean dev items. Reading did not move
+either (74% to 75%). The dev gain was the dev items, which is why the test
+split exists. (The lie figure on dev rests on 32 items priced both ways;
+on test it is 6% for both.)
+
+Run 4's 2B stays the one to build on: it prices half again as many items
+for the same loss. What would move the price step is more priced
+second-hand adverts with matching adverts to pick from, which more cities
+bring, not more reads.
+
 ## Still running
 
 Gemini's, Claude's and nano's remaining conditions, and pushback and
