@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo shows only a cardboard shipping box, not the camera itself.",
+      "Box has a yellow 'Nikon' sticker and 'D800' printed in black on the side.",
+      "Background shows other camera boxes (an 'Olympus' box and a 'Kodak EasyShare' box), suggesting a shop/stock shelf rather than a single private seller's item.",
+      "A faint watermark reads 'POSTED ON ... ANCHOR MEDIA', indicating this image may be a reposted/stock photo rather than an original photo of the seller's actual unit.",
+      "A finger is visible holding the box, but no camera body, lens, screen, serial number, or shutter count is shown anywhere.",
+      "Box appears sealed/box-fresh in presentation, not opened."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": null,
+      "brand": "Nikon",
+      "model": "D800",
+      "read_from": [
+        "photo 0 box text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "UK used Nikon D800 DSLR full frame camera",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows only a sealed-looking box with no visible wear, opened flaps, or camera body; 'used' condition cannot be confirmed and the sealed appearance contradicts a 'used' claim."
+      },
+      {
+        "claim": "Item is a Nikon D800 (model identity)",
+        "verdict": "unverifiable_remote",
+        "evidence": "Only the box label is visible; no body, mount, or serial plate shown to confirm the actual contents match the box."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Box may not contain an actual working Nikon D800 (could be empty, a different/cheaper body, or a non-functional unit).",
+        "proof": "Photo of the camera body removed from the box, showing the Nikon D800 nameplate, lens mount, and serial number.",
+        "if_unproven": "priced as condition/functionality unverified, i.e. worst case as non-working or mismatched item"
+      },
+      {
+        "risk": "Shutter count and sensor condition unknown, critical for a high-megapixel full-frame body like the D800.",
+        "proof": "Photo or screenshot of shutter count from camera menu or a shutter-count app reading.",
+        "if_unproven": "priced as high-shutter-count/near-end-of-life unit"
+      },
+      {
+        "risk": "Photo may be a stock/reposted image ('ANCHOR MEDIA' watermark) rather than the seller's actual item, raising risk of bait-and-switch.",
+        "proof": "A fresh, timestamped photo of the actual box and camera in the seller's possession, ideally with a handwritten note or date.",
+        "if_unproven": "treated as unverified listing authenticity, priced conservatively"
+      },
+      {
+        "risk": "No image of included accessories (battery, charger, strap, memory card) claimed or shown.",
+        "proof": "Photo of full kit contents laid out.",
+        "if_unproven": "priced as body-only, no accessories"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual camera body out of the box, showing front, top LCD, and lens mount.",
+      "Photo of the serial number sticker/plate on the camera body.",
+      "Photo or video showing the camera powering on and shutter firing.",
+      "Screenshot of shutter count from camera menu.",
+      "Photo of all accessories included (battery, charger, strap, box contents laid out)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the outer box is shown with no image of the actual camera body, serial number, or functionality, so even a worst-case price cannot be set until the real item is photographed."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 23072,
+    "input_tokens": 2035,
+    "output_tokens": 2059,
+    "cost_usd": 0.021501,
+    "replayed": false,
+    "fixture_key": "250c9b59e376d0554837b3fadbbd9867",
+    "error": null
+  }
+}
