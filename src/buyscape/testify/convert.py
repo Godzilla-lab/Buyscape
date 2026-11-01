@@ -299,7 +299,10 @@ def wider_items(root: Path, cache: str = "testify") -> list[Item]:
                 answer=Answer(
                     title=row["title"],
                     category=category,
-                    kind=row["kind"],
+                    # A crawled advert's kind is the site's broad category
+                    # ("Home Appliances"): no label, so its title says what it is
+                    # and a fridge still finds fridges to be priced against.
+                    kind=None if cache == "testify_crawl" else row["kind"],
                     identity=Identity(text=row["kind"], source="title"),
                     price=PriceTruth(
                         ngn=row.get("price_ngn"),

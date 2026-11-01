@@ -63,3 +63,27 @@ def test_a_phone_is_filed_under_its_protocol_and_a_slug_is_checked():
     assert crawl.kind_of({"category": {"name": "Mobile Phones"}}, "mobile-phones") == "mobile phones"
     assert crawl.kind_of({}, "tv-dvd-equipment") == "tv dvd equipment"
     assert crawl.valid_slug("home-appliances") and not crawl.valid_slug("../etc")
+
+
+def test_a_crawl_keeps_at_most_its_share_and_a_dealers_page_is_still_new(tmp_path, monkeypatch):
+    _no_downloads(monkeypatch)
+    dealers = [[_advert(f"n{p}{i}", "Brand New") for i in range(3)] for p in range(8)]
+    used = [[_advert(f"u{i}")] for i in range(4)]
+    tally = crawl.crawl(tmp_path, "lagos", "home-appliances", pages=20, keep=2, client=_jiji(dealers + used))
+    assert tally["kept"] == 2 and tally["pages"] == len(dealers) + 2
+
+
+def test_a_crawled_advert_has_no_kind_label_so_its_title_finds_comparables(tmp_path):
+    import json as j
+
+    from buyscape.testify.convert import wider_items
+
+    raw = tmp_path / "eval" / "raw" / "testify_crawl"
+    raw.mkdir(parents=True)
+    (tmp_path / "protocols").symlink_to(__import__("pathlib").Path(__file__).resolve().parents[1] / "protocols")
+    row = {"id": "x1", "title": "LG double door fridge", "price_ngn": 250000, "condition": "Used", "is_used": True,
+           "media": ["x1/00.jpg"], "url": "/lagos/home-appliances/x1.html", "fetched_at": "2026-11-01T10:00:00Z",
+           "tier": "small_goods", "kind": "home appliances", "region": "lagos", "protocol": None}
+    (raw / "home-appliances.json").write_text(j.dumps([row]))
+    [item] = wider_items(tmp_path, "testify_crawl")
+    assert item.answer.kind is None and item.answer.identity.text == "home appliances" and item.split == "train"

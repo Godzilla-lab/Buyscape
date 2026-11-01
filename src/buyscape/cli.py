@@ -1748,6 +1748,7 @@ def testify_crawl(
     region: list[str] = typer.Option(["lagos"], help="Jiji cities, as in its web address: lagos, abuja, rivers, oyo."),
     slug: list[str] = typer.Option(None, help="Jiji category slugs; every one in testify/crawl.py by default."),
     pages: int = typer.Option(100, help="Listing pages per category and city, about two dozen adverts each."),
+    keep: int = typer.Option(400, help="New second-hand adverts kept per category and city in one run."),
     max_photos: int = typer.Option(3, help="Photos per advert."),
 ) -> None:
     """Page through whole Jiji categories for second-hand training adverts. Run from an ordinary connection."""
@@ -1763,7 +1764,7 @@ def testify_crawl(
     held = crawl.held_ids(raw / "testify_train", raw / "testify_new")
     for city in region:
         for s in slugs:
-            tally = crawl.crawl(raw / "testify_crawl", city, s, pages=pages, max_photos=max_photos,
+            tally = crawl.crawl(raw / "testify_crawl", city, s, pages=pages, keep=keep, max_photos=max_photos,
                                 avoid=avoid, held=held, progress=console.print)
             console.print(f"[bold]{city} {s}[/bold]: {tally}")
     console.print(f"{len(wider.load(raw / 'testify_crawl'))} crawled adverts cached in {raw / 'testify_crawl'}")
