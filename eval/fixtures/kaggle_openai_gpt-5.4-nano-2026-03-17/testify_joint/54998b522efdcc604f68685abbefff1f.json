@@ -1,0 +1,87 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0 shows a Konica Minolta bizhub PRO C754e color laser multifunction printer/copier (brand/model text visible on the front).",
+      "The machine appears dusty/used; there is visible plastic wrap/packaging material around the output/upper area.",
+      "No close-up of the control panel, counters, error messages, paper trays, or output quality.",
+      "No photo of inside paper path, fuser area, or toner/drum condition."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "color laser multifunction printer/copier",
+      "brand": "Konica Minolta",
+      "model": "bizhub PRO C754e",
+      "read_from": [
+        "photo 0 front panel (bizhub PRO C754e text)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Konica Minolta Bizhub Pro C754e is a large, full colour, laser multifunctional printer.",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows the unit is a Konica Minolta bizhub PRO C754e (model visible)."
+      },
+      {
+        "claim": "Low page count, under 20,000 copies.",
+        "verdict": "unverified",
+        "evidence": "No photo of the meter/counter screen or a counter report."
+      },
+      {
+        "claim": "New drum and toner just fitted.",
+        "verdict": "unverified",
+        "evidence": "No close-up of drum/toner labels, installation date stickers, or a consumables status page."
+      },
+      {
+        "claim": "No paper jam.",
+        "verdict": "unverified",
+        "evidence": "No video/test print showing successful feeding and no jam; no error display shown."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Page count/counter may be higher than claimed (affects wear and value).",
+        "proof": "A clear photo/screenshot of the machine\u2019s total counter (and color/black counters if available) from the control panel/service menu.",
+        "if_unproven": "Price as higher-wear used machine (worst case vs the claim)."
+      },
+      {
+        "risk": "\u201cNew drum and toner\u201d may not be true or may be near-empty/incorrectly installed (affects print quality and cost).",
+        "proof": "Close-up photos of toner/drum status page plus visible toner/drum part labels and/or installation date stickers; ideally a test page showing solid fills with no banding.",
+        "if_unproven": "Price as consumables unknown (worst case: treat as needing toner/drum soon)."
+      },
+      {
+        "risk": "Paper feed path or fuser may have intermittent faults even if no jam is reported (affects reliability).",
+        "proof": "Short video of a full test run: load paper, print multiple pages, show no jam/error, and show output.",
+        "if_unproven": "Price as not guaranteed reliable (worst case: assume potential faults)."
+      },
+      {
+        "risk": "Color printer may have calibration/registration issues (common on used units) not visible in this single angle photo.",
+        "proof": "Print a color test page (CMYK/registration chart) and photograph the result.",
+        "if_unproven": "Price as worst-case: color quality not guaranteed."
+      }
+    ],
+    "proof_requests": [
+      "Clear photo/screenshot of the total counters (and any consumables life remaining) from the control panel.",
+      "Close-up photos of toner and drum status/labels (and any installation date stickers).",
+      "Video of a test print from tray 1 through to output (showing no jam/error).",
+      "Photo of a printed color test page (solid blocks + registration) to confirm calibration/quality."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is readable (bizhub PRO C754e), but the key value drivers\u2014page count, new drum/toner, and no-jam reliability\u2014are not verifiable from the single photo. Without counter/consumables and a test print, a safe worst-case price cannot be confidently selected from the comparables.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_joint",
+    "latency_ms": 5456,
+    "input_tokens": 2690,
+    "output_tokens": 933,
+    "cost_usd": 0.001704,
+    "replayed": false,
+    "fixture_key": "54998b522efdcc604f68685abbefff1f",
+    "error": null
+  }
+}

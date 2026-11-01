@@ -1,0 +1,75 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows a used (tokumbo) car engine, removed from a vehicle, sitting on a truck bed.",
+      "Engine has visible wiring harness, intake manifold, pulley/belt system, and some bolts with surface corrosion/oil grime typical of a used unit.",
+      "No engine code, manufacturer logo, or model plate is legible anywhere on the block or manifold.",
+      "Bottom of image has an overlay 'CAMON 40' with camera settings (23mm f/1.8 1/100s ISO65) - this is phone camera metadata, likely the photographer's phone model, not the engine or car model.",
+      "A watermark 'NWANONSOBLESS' is visible, likely the seller's shop/brand name, not a product identifier."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used car engine (tokumbo)",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Direct tokumbo (directly imported used engine)",
+        "verdict": "unverifiable_remote",
+        "evidence": "No import documents, foreign plate stamp, or shipping marks visible in photo 0."
+      },
+      {
+        "claim": "2 months guarantee",
+        "verdict": "unverifiable_remote",
+        "evidence": "No written warranty document, receipt, or shop signage shown; a guarantee claim cannot be confirmed from a photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Which vehicle make/model/engine code this fits is unknown, and this is the single biggest driver of price for a used engine.",
+        "proof": "Close-up photo of the engine code/stamp (usually on the block near the bellhousing or on a sticker) or a clear seller statement of the exact car model it was pulled from, cross-checked against engine shape.",
+        "if_unproven": "cannot be priced at all, since engine value varies enormously by fitment"
+      },
+      {
+        "risk": "Mechanical condition unknown (compression, oil consumption, knocking, timing chain wear) \u2014 a used engine photo alone cannot show if it runs well.",
+        "proof": "Video of the engine running/idling with sound, plus a compression test reading if available.",
+        "if_unproven": "priced as not confirmed running / worst case non-functional"
+      },
+      {
+        "risk": "Completeness of parts (sensors, injectors, turbo if applicable, wiring harness) may be missing or swapped from photo.",
+        "proof": "Multiple angle photos including full harness, intake, exhaust side, and oil pan.",
+        "if_unproven": "priced as bare block, missing accessories"
+      },
+      {
+        "risk": "Tokumbo origin and mileage/history claim cannot be verified, affecting expected remaining lifespan.",
+        "proof": "Photo of import documents, auction sheet, or chassis/engine number paperwork.",
+        "if_unproven": "priced as unverified used import, no history discount applied"
+      }
+    ],
+    "proof_requests": [
+      "Clear close-up of the engine code/stamp or plate to identify exact model and vehicle fitment.",
+      "Video of the engine running/idling with audible sound.",
+      "Additional photos from other angles showing full completeness (exhaust side, oil pan, sensors).",
+      "Any import/auction documentation supporting the 'direct tokumbo' claim."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The engine's exact model/fitment cannot be read from the photo, and this is the primary factor determining its price range, so even a worst-case price is not yet possible without a legible engine code or confirmed vehicle match."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 22124,
+    "input_tokens": 2002,
+    "output_tokens": 1903,
+    "cost_usd": 0.023034,
+    "replayed": false,
+    "fixture_key": "c65dbf53354d1902291dd324fde5e138",
+    "error": null
+  }
+}

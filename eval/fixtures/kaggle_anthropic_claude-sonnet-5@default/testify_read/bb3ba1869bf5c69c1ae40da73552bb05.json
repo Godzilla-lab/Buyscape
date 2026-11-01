@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Single automotive headlight/headlamp assembly shown on a plain background.",
+      "Lamp appears clear-lensed with amber turn-signal section, consistent with a mid-2010s sedan style headlight.",
+      "Watermark text overlaid on the image reads 'HONDA AND ACURA POSTED ON...' but this is a seller-added watermark, not a label or part number printed on the physical part.",
+      "No visible OEM part number, connector detail, or model-specific marking on the housing itself.",
+      "No photos of bulbs, wiring harness, back of housing, or any cracks/fog inside the lens."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used car headlight/headlamp assembly",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 (watermark only, not a part marking)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Body, engine and suspension parts for all model of Honda, Acura and Toyota cars and SUVs",
+        "verdict": "unverifiable_remote",
+        "evidence": "Only one headlight is shown; no inventory, no other parts, no proof of range across models or brands."
+      },
+      {
+        "claim": "Implied fitment (Honda/Acura) via watermark text",
+        "verdict": "unverified",
+        "evidence": "Watermark is seller-applied text, not a photo of a part number, badge, or fitment sticker on the item."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Exact make/model/year fitment unknown, which drives price heavily for headlights",
+        "proof": "Close-up photo of any molded part number or OEM sticker on the back of the housing, or a photo showing the connector plug shape",
+        "if_unproven": "cannot be priced at all without this; fitment-dependent parts need a model to select a comparable"
+      },
+      {
+        "risk": "Internal condition (cracked lens, moisture fogging, broken tabs, missing bulbs/ballast)",
+        "proof": "Photos of the rear housing, connector, and a lit-up test clip",
+        "if_unproven": "priced as non-functional/damaged until shown working"
+      },
+      {
+        "risk": "Whether this is OEM or aftermarket reproduction",
+        "proof": "Close-up of any manufacturer logo or stamped part number on the lens or housing",
+        "if_unproven": "priced as aftermarket/generic, the lower-value assumption"
+      },
+      {
+        "risk": "Completeness of the part (bulbs, adjusters, wiring pigtail included or not)",
+        "proof": "Full-item photo including back and underside showing all connectors and sockets",
+        "if_unproven": "priced as incomplete/bare housing"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the part number or OEM sticker on the rear of the headlight housing",
+      "Photo of the connector/plug area to help identify the vehicle model",
+      "Photo or short clip of the headlight powered on to show both low and high beam working",
+      "Photo of the rear housing and any cracks, fog, or moisture inside the lens",
+      "Wider photo of the full stock of parts mentioned (engine, suspension items) if buyer wants those too"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The single photo shows a generic headlight assembly with no readable model, part number, or fitment marking, so the vehicle model that determines its value cannot be set even at a worst-case price; a close-up of the part number or connector is needed first."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 20788,
+    "input_tokens": 1914,
+    "output_tokens": 1808,
+    "cost_usd": 0.018749,
+    "replayed": false,
+    "fixture_key": "bb3ba1869bf5c69c1ae40da73552bb05",
+    "error": null
+  }
+}
