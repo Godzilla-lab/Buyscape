@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a red gas cylinder in the center with a bent black top collar and a central opening.",
+      "A yellow cylinder to the right is marked 13 KG; white, orange and grey cylinders are also visible.",
+      "Photo 1 is a close-up of the red cylinder showing chipped paint, a side valve, and partial white lettering.",
+      "Seller states they have different gas cylinders for sale."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "cooking gas cylinder",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0",
+        "photo 1"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "We have different gas cylinder for sale",
+        "verdict": "supported",
+        "evidence": "Multiple cylinders of different colors appear in photo 0 and photo 1"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Cylinder contents unknown; may be empty",
+        "proof": "Cylinder weighed on a scale",
+        "if_unproven": "as empty"
+      },
+      {
+        "risk": "Valve assembly may be damaged or missing; top collar looks bent in photo 0",
+        "proof": "Video of valve opening/closing and attaching to a regulator",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Test date and certification not visible; cylinder may be out of date",
+        "proof": "Close-up of stamped markings on the cylinder neck",
+        "if_unproven": "as uncertified"
+      },
+      {
+        "risk": "Hidden dents, rust or repairs on the cylinder body",
+        "proof": "Video rotating the cylinder to show all sides",
+        "if_unproven": "as damaged"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of the neck/collar stamping showing capacity and test date",
+      "Video of the valve operating and connecting to a regulator",
+      "Video of the cylinder being weighed on a scale"
+    ],
+    "decision": "price",
+    "reason": "The item is clearly a cooking gas cylinder visible in both photos, so a worst-case price can be set even though condition and contents are unproven."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 16866,
+    "input_tokens": 2367,
+    "output_tokens": 2446,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "fda77282ad0657aed09fb3fe84af0a94",
+    "error": null
+  }
+}
