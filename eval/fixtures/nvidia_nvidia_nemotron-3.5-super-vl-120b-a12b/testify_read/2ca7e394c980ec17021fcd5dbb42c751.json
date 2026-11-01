@@ -1,0 +1,89 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black Canon DSLR body with a Tamron lens mounted and a Canon charger in the foreground; the rear LCD is on.",
+      "Photo 1 shows the top-left and back-right of the Canon body with mode dial and buttons.",
+      "Photo 2 shows the back-right of the Canon body with the LCD off and Canon branding visible.",
+      "No photo shows the text \"5D Mark III\" on the camera body.",
+      "A watermark \"OLAJIDE AMOS BISHOP\" appears across the photos."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "Canon DSLR camera body",
+      "brand": "Canon",
+      "model": null,
+      "read_from": [
+        "photo 0 body",
+        "photo 1 back",
+        "photo 2 back"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Canon 5D Mark III",
+        "verdict": "unverified",
+        "evidence": "Canon brand is readable in photos 0-2, but the 5D Mark III model text is not visible in any photo."
+      },
+      {
+        "claim": "body alone",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows a Tamron lens mounted on the body, so it is not body alone."
+      },
+      {
+        "claim": "with Charger",
+        "verdict": "supported",
+        "evidence": "A Canon charger is clearly visible in photo 0."
+      },
+      {
+        "claim": "and the battery",
+        "verdict": "unverified",
+        "evidence": "The battery is not clearly shown in any photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Exact model may not be 5D Mark III; price depends heavily on the specific Canon model.",
+        "proof": "Clear photo of the model label on the body or a menu screenshot showing \"5D Mark III\".",
+        "if_unproven": "price as an unidentified Canon DSLR body at the lowest comparable value."
+      },
+      {
+        "risk": "Shutter count and mechanical wear are unknown.",
+        "proof": "Photo of the camera information menu showing shutter actuations.",
+        "if_unproven": "price as a worn or high-actuation body."
+      },
+      {
+        "risk": "Sensor, autofocus, or shutter may be faulty.",
+        "proof": "Video of autofocus operation and a test shot taken with the camera.",
+        "if_unproven": "price as not working."
+      },
+      {
+        "risk": "Battery or charger may not work.",
+        "proof": "Video showing the charger indicator light and the camera powering on.",
+        "if_unproven": "price without a working battery or charger."
+      }
+    ],
+    "proof_requests": [
+      "Clear photo showing the camera model name on the body",
+      "Photo of the camera body with no lens attached",
+      "Screenshot of the camera information menu showing shutter count",
+      "Video showing the battery charging and the camera turning on"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The Canon brand is visible but the 5D Mark III model is not readable in any photo, and the price depends on the exact model; photo 0 also contradicts \"body alone\" by showing a mounted lens."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 19922,
+    "input_tokens": 3507,
+    "output_tokens": 3657,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "2ca7e394c980ec17021fcd5dbb42c751",
+    "error": null
+  }
+}
