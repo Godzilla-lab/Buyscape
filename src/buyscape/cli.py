@@ -1743,6 +1743,71 @@ def testify_publish(
     console.print(f"published https://huggingface.co/datasets/{repo} (release v{release.VERSION})")
 
 
+@app.command("vast-offers")
+def vast_offers(
+    gpu: list[str] = typer.Option(["RTX 4090", "RTX 5090", "A100 PCIE", "A100 SXM4", "L40S", "RTX A6000", "H100 SXM"]),
+    any_host: bool = typer.Option(False, help="Also machines in people's homes, not only datacenters."),
+    reserve: float = typer.Option(1.0, help="Dollars kept back for disk and downloads."),
+) -> None:
+    """Rentable GPUs on Vast.ai and how long the credit trains on each. Reads only; rents nothing."""
+    from .testify import vast
+
+    left = vast.credit()
+    found = vast.offers(tuple(gpu), datacenter_only=not any_host)
+    console.print(f"credit ${left:.2f}; {len(found)} offers")
+    for offer in found[:12]:
+        console.print(f"{offer.line()}: {vast.training_hours(left, offer.dollars_per_hour, reserve)} hours of training")
+
+
+@app.command("vast-train")
+def vast_train(
+    offer: int = typer.Option(..., help="An offer id from vast-offers."),
+    data_repo: str = typer.Option(..., help="The private Hugging Face dataset with sft_lora.py, the chats and photos."),
+    run_repo: str = typer.Option(..., help="The private Hugging Face repo the save points and adapter go to."),
+    data_file: str = typer.Option(..., help="The chats file inside the dataset, the same name as on Kaggle."),
+    train_args: str = typer.Option("--image-tokens 640 --max-len 4096", help="The recipe, the same on every machine."),
+    reserve: float = typer.Option(1.0, help="Dollars kept back for disk and downloads."),
+    yes: bool = typer.Option(False, help="Rent it. Without this the plan and its cost are only shown."),
+) -> None:
+    """Train on a rented GPU from the last save point, within the credit. Shows the cost first."""
+    from .testify import vast
+
+    left = vast.credit()
+    chosen = next((o for o in vast.offers(("RTX 4090", "RTX 5090", "A100 PCIE", "A100 SXM4", "L40S", "RTX A6000",
+                                           "H100 SXM"), datacenter_only=False) if o.id == offer), None)
+    if chosen is None:
+        raise typer.BadParameter(f"offer {offer} is not rentable now; run vast-offers again")
+    hours = vast.training_hours(left, chosen.dollars_per_hour, reserve)
+    if hours < 1:
+        raise typer.BadParameter(f"${left:.2f} buys under an hour of training on this machine")
+    cost = (hours + vast.SETUP_HOURS) * chosen.dollars_per_hour
+    console.print(f"{chosen.line()}\ncredit ${left:.2f}: up to {hours} hours of training, about ${cost:.2f} at most, "
+                  f"${reserve:.2f} kept back. The machine stops itself when the run ends.")
+    script = vast.onstart(data_repo, run_repo, data_file, train_args, hours)
+    if not yes:
+        console.print("[bold]Not rented.[/bold] The machine would run:\n" + script)
+        return
+    token = os.environ.get("HF_TRAIN_TOKEN")
+    if not token:
+        raise typer.BadParameter("HF_TRAIN_TOKEN is not set: a Hugging Face token for these two repos only")
+    instance = vast.create(chosen, script, token)
+    console.print(f"rented: instance {instance}. Watch it with vast-status; it stops itself when the run ends.")
+
+
+@app.command("vast-status")
+def vast_status(destroy_finished: bool = typer.Option(True, help="Destroy machines whose run has stopped.")) -> None:
+    """Credit and every machine rented, destroying the ones that have finished. Free."""
+    from .testify import vast
+
+    console.print(f"credit ${vast.credit():.2f}")
+    for inst in vast.instances():
+        state = inst.get("actual_status") or inst.get("cur_state")
+        console.print(f"instance {inst['id']}: {inst.get('gpu_name')} {state}, ${inst.get('dph_total', 0):.2f} an hour")
+        if destroy_finished and state in ("exited", "stopped", "offline"):
+            vast.destroy(int(inst["id"]))
+            console.print(f"  destroyed: its run had stopped, so it only cost disk")
+
+
 @app.command("testify-select")
 def testify_select(
     n: int = typer.Option(3000, help="How many adverts the teacher reads."),
