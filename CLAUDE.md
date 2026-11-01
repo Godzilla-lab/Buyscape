@@ -80,6 +80,7 @@ money moves. The promise is "nothing hidden gets priced", not "we see inside".
     uv run buyscape testify-export --model human:ada --split dev --no-lies   a person sits the test at /office/testify
     uv run buyscape testify --model kaggle:google/gemini-3-flash-preview --split train --no-lies --reads-only   a teacher reads the training pool
     uv run buyscape testify-label --model kaggle:google/gemini-3.5-flash-lite --split train   the same photo check on the training pool
+    uv run buyscape testify-judge --split dev --split test   judge the answers the word rules mark wrong, same thing in other words, free
     uv run buyscape testify-ocr               read every advert's photos once with the local OCR, free
     uv run buyscape testify-train-build       the fine-tuning set from those reads, never committed
     uv run buyscape testify-train-build --record-picks nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b   a teacher picks the price step first, free

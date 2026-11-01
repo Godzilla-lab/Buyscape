@@ -466,6 +466,65 @@ for the same loss. What would move the price step is more priced
 second-hand adverts with matching adverts to pick from, which more cities
 bring, not more reads.
 
+## Naming, judged: the same thing in other words (1 Nov)
+
+The naming figure so far was a word rule: an answer had to carry the title's
+own words. Sellers name things loosely and titles can be wrong, so "mountain
+bike" for a "Bicycle", "car headlight" for a "Headlamp" and "multifunction
+copier" for an old "Photocopier" all counted as wrong. The user's rule: the
+answer does not have to use the seller's name for it, it has to name the
+same thing.
+
+A judge now reads every answer the word rule marks wrong, with the title,
+the benchmark's kind and what the photo check saw, and decides right, or
+wrong kind, brand or version (`buyscape testify-judge`, `testify/judge.py`).
+It is MiniMax M3.1 on NVIDIA's free tier, a family that sits no Testify
+table, fifteen answers to a call. A person's verdict always comes first.
+Before it was used it was checked three ways:
+
+| Check | Result |
+|---|---|
+| A person's verdicts from round 2 | agrees on 15 of 15 |
+| Right answers moved to another kind's advert | calls 40 of 40 wrong |
+| Answers moved to another advert of the same kind, with its own model | calls 38 of 40 wrong |
+
+The first prompt called a "PS4" for a PS4 Pro wrong; the person had called it
+right, as the less exact name for the same thing, and the engine of an
+"engine, gearbox and wiring" bundle right too. The prompt now says less exact
+is right unless it contradicts the advert (a PS4 Slim for a PS4 Pro stays
+wrong). Mistral Large 4 and DeepSeek on the same free tier were too slow to
+use. 1,143 answers judged: 881 right, 134 wrong kind, 65 wrong version, 63
+wrong brand.
+
+| Right about the item, when it said | Word rule, dev | Judged, dev | Word rule, test | Judged, test |
+|---|---|---|---|---|
+| Claude Sonnet 5 | 89% | **99%** | 85% | **99%** (247 of 679 so far) |
+| Gemini 3 Flash | 83% | 98% | | |
+| Nemotron 3.5 Super | 87% | 98% | 78% | 97% (395 so far) |
+| GPT 5.4 nano | 88% | 98% | | |
+| Qwen3-VL 8B, untuned | 75% | 94% | | |
+| Qwen3-VL 2B, untuned | 77% | 93% | | |
+| Qwen3-VL 4B, untuned | 81% | 98% | | |
+| Run 4, 4B | 78% | 97% | 77% | 94% |
+| Run 4, 2B | 74% | 95% | 74% | 94% |
+| Run 5, 2B | 74% | 94% | 75% | 95% |
+
+The gap was mostly the rule's. Judged, the run 4 2B trails the big models by
+three to five points, not eight to fifteen. What it still gets wrong, on
+both splits (50 answers):
+
+- model numbers misread: a PSR-550 read as a PSR-350, a PSR-S910 as a PSR-S310,
+  a PSR-175 as a PGR-173, the small digits of a plate at about 570 pixels;
+- brands made up: Panasonic on an unbranded iron, Bosch on a BMX, Porsche on an
+  Audi gearbox;
+- the accessory for the item: a gamepad for a PS4 bundle;
+- rare kinds it has not seen: a PET blowing machine called an injection
+  moulder, a gearbox called a gear pump.
+
+Most of these it did not price (no price data, or it asked for the label), so
+they cost little money. Sharper photos, brands only when they show, and the
+rare kinds from more cities are what run 6 would add.
+
 ## Still running
 
 Gemini's, Claude's and nano's remaining conditions, and pushback and

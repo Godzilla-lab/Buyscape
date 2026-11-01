@@ -825,6 +825,7 @@ def _stage_tables(split: str, items: dict, money: dict) -> str:
         t = truths.score(load(run.with_name(f"{split}.truth_contra.jsonl")), facts)
         c = construct.score(load(run.with_name(f"{split}.constructed.jsonl")), built, items, rows)
         read_rows.append(f"| {name} | {pct(s['identity_accuracy_when_attempted'])} | "
+                         f"{pct(s['identity_accuracy_judged'])} | "
                          f"{pct(s['named_a_model_the_photos_do_not_show'])} | {pct(s['lie_marked_supported'])} | "
                          f"{pct(t.get('truth_marked_supported'))} | {pct(t.get('contra_caught'))} | "
                          f"{pct(c.get('noproof_abstained'))} | {pct(c.get('proof_asked_first'))} | "
@@ -837,10 +838,12 @@ def _stage_tables(split: str, items: dict, money: dict) -> str:
     return "\n".join([
         f"# Testify {split}: the read and the pick", "",
         "## The read: the model alone", "",
-        "| Model | Identity right | Named a model the photos do not show | Lie marked supported | "
-        "True claim marked supported | False claim caught | Abstained with the label gone | "
+        "| Model | Identity right | Same thing, judged | Named a model the photos do not show | "
+        "Lie marked supported | True claim marked supported | False claim caught | Abstained with the label gone | "
         "Asked for the label first | Same decision asked twice |",
-        "|---|---|---|---|---|---|---|---|---|", *read_rows, "",
+        "|---|---|---|---|---|---|---|---|---|---|", *read_rows, "",
+        "Identity right is the word rule; same thing, judged also counts other words for the same thing "
+        "(testify/judge.py), and a person's verdict comes first in both.", "",
         "## The pick: the model and our comparables", "",
         "| Model | Gave a price | Silent wrong | Asking price inside the range | Offered above asking | "
         "Lie raised the price (asking again raised it) | Expected loss per item, naira |",
@@ -893,6 +896,147 @@ _ADJUDICATION_HEAD = """# A person's verdict on each priced answer the word rule
 # An entry matches every run that gave the same answer to the same item.
 
 """
+
+
+@app.command("testify-judge")
+def testify_judge(
+    split: list[str] = typer.Option(["dev"], help="Splits whose answers to judge: dev, test."),
+    model: str = typer.Option("nvidia:minimaxai/minimax-m3.1-flash", help="A judge that sits no Testify table."),
+    workers: int = typer.Option(2),
+    check: bool = typer.Option(False, help="Only measure the judge: a person's verdicts, and answers swapped between kinds."),
+    limit: int = typer.Option(None, help="Judge at most this many new answers."),
+) -> None:
+    """Judge every answer the word rules mark wrong: the same thing in other words is right. Free on NVIDIA."""
+    import random
+    import time
+
+    from .testify import adjudicate, judge
+    from .testify.schema import Item
+    from .testify.score import identity_correct
+
+    items = {}
+    for line in (ROOT / "eval" / "testify" / "items.jsonl").open():
+        item = Item.model_validate_json(line)
+        if not item.exclude and item.ai_label:
+            items[item.id] = item
+    provider = _provider(model, ROOT / "eval" / "fixtures", "auto")
+
+    def ask(pairs):
+        """Verdicts for (item, answer) pairs, judge.BATCH to a call; a failed call leaves its batch unjudged."""
+        out = []
+        for start in range(0, len(pairs), judge.BATCH):
+            chunk = pairs[start:start + judge.BATCH]
+            cases = [(item.answer.title, identity, item.answer.kind,
+                      (item.review or item.ai_label or {}).get("what_it_is")) for item, identity in chunk]
+            out.append((start, chunk, judge.request(cases)))
+        said: list = [None] * len(pairs)
+
+        def one(job):
+            start, chunk, request = job
+            for wait in (30, 60, 120, 0):
+                try:
+                    batch = provider.structured_call(request)[0]
+                    said[start:start + len(chunk)] = judge.read(batch, len(chunk))
+                    return
+                except Exception as exc:  # never guessed: the batch stays unjudged
+                    if "429" not in str(exc) or not wait:
+                        console.print(f"[red]batch at {start}: {type(exc).__name__}: {str(exc)[:160]}[/red]")
+                        return
+                    time.sleep(wait)  # the free tier's rate limit: wait it out
+
+        with ThreadPoolExecutor(max_workers=max(1, workers)) as threads:
+            list(threads.map(one, out))
+        return said
+
+    def answers(splits, keep):
+        out = {}
+        for s in splits:
+            for run in sorted((ROOT / "eval" / "testify" / "runs").glob(f"*/{s}*.jsonl")):
+                for row in map(json.loads, run.read_text().splitlines()):
+                    identity = (row.get("reading") or {}).get("identity") or {}
+                    item = items.get(row["id"])
+                    if item and item.split == s and identity and row.get("variant", "clean") == "clean" \
+                            and identity.get("status") != "unknown" and keep(item, identity):
+                        out.setdefault(judge.key(item.id, identity), (item, identity))
+        return out
+
+    if check:
+        # A person's verdicts, then answers the rules call right put on another kind's advert.
+        people = {}
+        for entry in yaml.safe_load(adjudicate.PATH.read_text()) or []:
+            if entry.get("verdict") in ("right", "wrong_kind", "wrong_brand", "wrong_version"):
+                people[(entry["item"], re.sub(r"[^a-z0-9]", "", entry["answer"].lower()))] = entry["verdict"]
+        found = answers(["dev", "test"], lambda item, identity: adjudicate._key(item.id, identity) in people)
+        persons = {}
+        for item, identity in found.values():
+            persons.setdefault(adjudicate._key(item.id, identity), (item, identity))
+        right = answers(["dev"], lambda item, identity: identity_correct(item, identity) is True)
+        pool = list(right.values())
+        random.Random(1).shuffle(pool)
+        head = lambda item: (item.answer.kind or "").lower().split()[-1:]  # noqa: E731
+        swapped = []  # (item, someone else's answer, "kind" or "same")
+        for (item, _), (donor, identity) in zip(pool, pool[1:] + pool[:1]):
+            if sum(w == "kind" for *_, w in swapped) < 40 and head(item) != head(donor) \
+                    and identity_correct(item, identity) is False:
+                swapped.append((item, identity, "kind"))
+        # The harder half: another advert of the same kind, with a model of its own.
+        models = [(i, o) for i, o in pool if o.get("status") == "named" and o.get("model")]
+        for item, _ in pool:
+            donor = next((o for i, o in models if i.answer.kind == item.answer.kind and i.id != item.id
+                          and identity_correct(item, o) is False), None)
+            if donor and sum(w == "same" for *_, w in swapped) < 40:
+                swapped.append((item, donor, "same"))
+
+        # One shuffled list, so no batch is all swaps or all a person's.
+        cases = [("person", k, item, identity) for k, (item, identity) in persons.items()] \
+            + [("swap", k, item, identity) for k, (item, identity, _) in enumerate(swapped)]
+        random.Random(2).shuffle(cases)
+        verdicts = ask([(item, identity) for _, _, item, identity in cases])
+        said_people = [next(v for (w, k2, *_), v in zip(cases, verdicts) if w == "person" and k2 == k) for k in persons]
+        said_swap = [next(v for (w, k2, *_), v in zip(cases, verdicts) if w == "swap" and k2 == k)
+                     for k in range(len(swapped))]
+        agree = 0
+        for (k, (item, identity)), said in zip(persons.items(), said_people):
+            truth = people[k]
+            ok = said is not None and (said.verdict == "right") == (truth == "right")
+            agree += ok
+            mark = "" if ok else "  [red]disagrees[/red]"
+            console.print(f"person {truth:13s} judge {said.verdict if said else 'none':13s} "
+                          f"{item.answer.title.strip()[:50]!r} <- {judge.answer_line(identity)[:60]!r}{mark}")
+        caught = {"kind": 0, "same": 0}
+        for (item, identity, how), said in zip(swapped, said_swap):
+            if said is not None and said.verdict != "right":
+                caught[how] += 1
+            else:
+                console.print(f"swap passed: {item.answer.title.strip()[:50]!r} <- {judge.answer_line(identity)[:60]!r} "
+                              f"({said.why if said else 'no answer'})")
+        tried = {w: sum(how == w for *_, how in swapped) for w in caught}
+        console.print(f"agrees with a person on {agree} of {len(persons)}; calls {caught['kind']} of {tried['kind']} "
+                      f"answers moved to another kind's advert wrong, and {caught['same']} of {tried['same']} "
+                      "moved to another advert of the same kind")
+        return
+
+    held = judge._verdicts(judge.PATH)
+    todo = answers(split, lambda item, identity: identity_correct(item, identity) is False
+                   and adjudicate.verdict(item.id, identity) is None)
+    todo = {k: v for k, v in todo.items() if k not in held}
+    if limit:
+        todo = dict(list(todo.items())[:limit])
+    console.print(f"{len(todo)} answers the word rules mark wrong to judge with {model}")
+    pairs, judged_n, tally = list(todo.items()), 0, {}
+    step = judge.BATCH * max(1, workers) * 2  # written as it goes, so a stopped run keeps what it judged
+    for start in range(0, len(pairs), step):
+        part = pairs[start:start + step]
+        said = ask([pair for _, pair in part])
+        rows = [{"item": k[0], "key": k[1], "answer": judge.answer_line(identity), "title": item.answer.title.strip(),
+                 "verdict": v.verdict, "why": v.why, "by": model, "version": judge.JUDGE_VERSION}
+                for (k, (item, identity)), v in zip(part, said) if v is not None]
+        judge.record(rows)
+        judged_n += len(rows)
+        for r in rows:
+            tally[r["verdict"]] = tally.get(r["verdict"], 0) + 1
+        console.print(f"{judged_n} of {len(pairs)} judged: {tally}")
+    console.print(f"{judged_n} judged, {len(todo) - judged_n} failed: {tally}")
 
 
 @app.command("testify-label")

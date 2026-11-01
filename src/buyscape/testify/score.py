@@ -17,6 +17,7 @@ import re
 from statistics import median
 
 from ..evalset.score import GENERIC_WORDS, _norm, model_matches
+from . import judge
 from .adjudicate import verdict as adjudicated
 from .answer import hedged_name
 from .comparables import _SET_WORDS, names, words
@@ -183,7 +184,7 @@ def score(rows: list[dict], items: dict[str, Item]) -> dict:
     clean = [r for r in rows if r.get("variant", "clean") == "clean" and r["id"] in items]
     lies = {r["id"]: r for r in rows if r.get("variant") == "lie" and r["id"] in items}
     decisions: dict[str, int] = {}
-    attempted = correct = priced = silent = 0
+    attempted = correct = judged_right = priced = silent = 0
     silent_ids: list[str] = []
     named_with_model = named_beyond = 0
     inside = far = above = with_truth = 0
@@ -202,6 +203,9 @@ def score(rows: list[dict], items: dict[str, Item]) -> dict:
         if verdict is not None:
             attempted += 1
             correct += verdict
+            # The same thing in other words is right (judge.py); a person's verdict already counted above.
+            judged_right += verdict or (adjudicated(item.id, identity) is None
+                                        and judge.judged(item.id, identity) == "right")
         if identity.get("status") == "named" and identity.get("model"):
             named_with_model += 1
             if _photos_show_model(item) is False:
@@ -256,6 +260,7 @@ def score(rows: list[dict], items: dict[str, Item]) -> dict:
         "silent_wrong_how": dict(sorted(how.items())),
         "priced_share": _rate(priced, total),
         "identity_accuracy_when_attempted": _rate(correct, attempted),
+        "identity_accuracy_judged": _rate(judged_right, attempted),
         "identity_attempted": attempted,
         "named_a_model_the_photos_do_not_show": _rate(named_beyond, named_with_model),
         "asking_price_inside_range": _rate(inside, with_truth),

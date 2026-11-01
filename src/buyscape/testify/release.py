@@ -26,6 +26,7 @@ LABELLER = "gemini-3.5-flash-lite"
 CHECK_FIELDS = ("identity_from_photos_alone", "looks_actually_used", "title_matches_photos", "unit_of_sale", "photo_issues")
 SUMMARY_FIELDS = (
     "items", "decisions", "silent_wrong", "silent_wrong_rate", "priced_share", "identity_accuracy_when_attempted",
+    "identity_accuracy_judged",
     "named_a_model_the_photos_do_not_show", "asking_price_inside_range", "priced_above_asking",
     "median_quote_vs_asking", "lie_marked_supported", "repeat_same_decision", "refusal_priced_on_honest_repeat",
     "refusal_priced_with_lie", "lie_effect_on_refusals", "price_raised_on_honest_repeat", "price_raised_with_lie",

@@ -2,21 +2,23 @@
 
 ## The read: the model alone
 
-| Model | Identity right | Named a model the photos do not show | Lie marked supported | True claim marked supported | False claim caught | Abstained with the label gone | Asked for the label first | Same decision asked twice |
-|---|---|---|---|---|---|---|---|---|
-| kaggle_anthropic_claude-sonnet-5@default | 89% | 13% | 1% | 44% | 96% | 60% | 60% | 71% |
-| kaggle_google_gemini-3-flash-preview | 83% | 25% | 3% | 74% | 96% | 60% | 50% | 93% |
-| kaggle_openai_gpt-5.4-nano-2026-03-17 | 88% | 19% | 0% | 39% | 91% | 100% | 100% | 100% |
-| local_qwen_qwen3-vl-2b-instruct | 77% | 54% | 47% | - | - | - | - | 100% |
-| local_qwen_qwen3-vl-2b-r4 | 74% | 25% | 0% | - | - | - | - | 96% |
-| local_qwen_qwen3-vl-2b-r5 | 74% | 22% | 1% | - | - | - | - | 95% |
-| local_qwen_qwen3-vl-4b-instruct | 81% | 24% | 2% | - | - | - | - | 99% |
-| local_qwen_qwen3-vl-4b-r3 | 78% | 23% | 0% | - | - | - | - | 99% |
-| local_qwen_qwen3-vl-4b-r4 | 78% | 24% | 0% | - | - | - | - | 96% |
-| local_qwen_qwen3-vl-4b-sft500 | 68% | 22% | 0% | - | - | - | - | 100% |
-| local_qwen_qwen3-vl-4b-sft500v2 | 70% | 29% | 1% | - | - | - | - | 100% |
-| local_qwen_qwen3-vl-8b-instruct | 75% | 26% | 3% | - | - | - | - | 100% |
-| nvidia_nvidia_nemotron-3.5-super-vl-120b-a12b | 87% | 6% | 4% | 89% | 100% | 30% | 70% | 79% |
+| Model | Identity right | Same thing, judged | Named a model the photos do not show | Lie marked supported | True claim marked supported | False claim caught | Abstained with the label gone | Asked for the label first | Same decision asked twice |
+|---|---|---|---|---|---|---|---|---|---|
+| kaggle_anthropic_claude-sonnet-5@default | 89% | 99% | 13% | 1% | 44% | 96% | 60% | 60% | 71% |
+| kaggle_google_gemini-3-flash-preview | 83% | 98% | 25% | 3% | 74% | 96% | 60% | 50% | 93% |
+| kaggle_openai_gpt-5.4-nano-2026-03-17 | 88% | 98% | 19% | 0% | 39% | 91% | 100% | 100% | 100% |
+| local_qwen_qwen3-vl-2b-instruct | 77% | 93% | 54% | 47% | - | - | - | - | 100% |
+| local_qwen_qwen3-vl-2b-r4 | 74% | 95% | 25% | 0% | - | - | - | - | 96% |
+| local_qwen_qwen3-vl-2b-r5 | 74% | 94% | 22% | 1% | - | - | - | - | 95% |
+| local_qwen_qwen3-vl-4b-instruct | 81% | 98% | 24% | 2% | - | - | - | - | 99% |
+| local_qwen_qwen3-vl-4b-r3 | 78% | 98% | 23% | 0% | - | - | - | - | 99% |
+| local_qwen_qwen3-vl-4b-r4 | 78% | 97% | 24% | 0% | - | - | - | - | 96% |
+| local_qwen_qwen3-vl-4b-sft500 | 68% | 95% | 22% | 0% | - | - | - | - | 100% |
+| local_qwen_qwen3-vl-4b-sft500v2 | 70% | 97% | 29% | 1% | - | - | - | - | 100% |
+| local_qwen_qwen3-vl-8b-instruct | 75% | 94% | 26% | 3% | - | - | - | - | 100% |
+| nvidia_nvidia_nemotron-3.5-super-vl-120b-a12b | 87% | 98% | 6% | 4% | 89% | 100% | 30% | 70% | 79% |
+
+Identity right is the word rule; same thing, judged also counts other words for the same thing (testify/judge.py), and a person's verdict comes first in both.
 
 ## The pick: the model and our comparables
 
