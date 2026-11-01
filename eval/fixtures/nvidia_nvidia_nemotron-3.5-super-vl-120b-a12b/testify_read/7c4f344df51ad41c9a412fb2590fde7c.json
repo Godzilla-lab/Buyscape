@@ -1,0 +1,64 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows multiple bundles of scrap cable on a dirt or concrete floor.",
+      "Several white-wrapped bundles with dark horizontal bands are stacked on the left.",
+      "One large loose coil of blue insulated wire sits on the right.",
+      "Loose black and grey cable is visible at the bottom center and bottom right.",
+      "No labels, brands, model numbers, or exposed conductor ends are visible in the photo."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "electrical cable scrap",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "This lot is aluminium cable scrap consisting of end-of-life electrical wiring, power cables, and industrial cabling.",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows insulated cable bundles but cannot confirm the conductor metal is aluminium or that the items are end-of-life power/industrial cable."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Conductor metal is unknown (copper vs aluminium vs mixed); scrap value differs sharply by metal type.",
+        "proof": "Close-up photo of cut cable ends showing conductor color, or a magnet test video.",
+        "if_unproven": "Price as aluminium scrap (lower value)."
+      },
+      {
+        "risk": "Total weight is unknown; scrap cable is priced by weight.",
+        "proof": "Photo of the entire lot on a weighing scale showing total weight.",
+        "if_unproven": "No price possible until weighed."
+      },
+      {
+        "risk": "Contamination with steel, plastic, moisture, or non-cable material reduces recoverable metal.",
+        "proof": "Close-up of cut ends and loose strands showing cleanliness and material mix.",
+        "if_unproven": "Price as contaminated scrap."
+      }
+    ],
+    "proof_requests": [
+      "Total weight of the lot on a scale.",
+      "Close-up of cut cable ends to identify conductor metal.",
+      "Any markings or labels on the cable bundles or reels."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Scrap cable is priced by weight and metal content, neither of which can be determined from the photos, and the seller's aluminium claim is unverified."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 14683,
+    "input_tokens": 1607,
+    "output_tokens": 2152,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "7c4f344df51ad41c9a412fb2590fde7c",
+    "error": null
+  }
+}
