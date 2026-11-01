@@ -155,8 +155,10 @@ def test_skip_done_fetches_only_kinds_never_fetched(tmp_path, monkeypatch):
 
     asked = []
     monkeypatch.setattr(fetch, "fetch_category", lambda q, *a, **k: asked.append(q.category) or [])
-    (tmp_path / "rechargeable_torchlight.json").write_text("[]")
-    fetch.build(tmp_path, only=("rechargeable torchlight", "tyres"), skip_done=True)
+    cache = tmp_path / "testify"  # the benchmark's cache, whose early Lagos runs left only a file
+    cache.mkdir()
+    (cache / "rechargeable_torchlight.json").write_text("[]")
+    fetch.build(cache, only=("rechargeable torchlight", "tyres"), skip_done=True)
     assert set(asked) == {"tyres"}
 
 
@@ -245,14 +247,61 @@ def test_each_city_is_fetched_once_and_lagos_history_counts(tmp_path, monkeypatc
 
     asked = []
     monkeypatch.setattr(fetch, "fetch_category", lambda q, *a, region="lagos", **k: asked.append(region) or [])
-    (tmp_path / "tyres.json").write_text("[]")
-    fetch.build(tmp_path, only=("tyres",), skip_done=True, region="lagos")
+    cache = tmp_path / "testify"
+    cache.mkdir()
+    (cache / "tyres.json").write_text("[]")
+    fetch.build(cache, only=("tyres",), skip_done=True, region="lagos")
     assert asked == []
-    fetch.build(tmp_path, only=("tyres",), skip_done=True, region="abuja")
+    fetch.build(cache, only=("tyres",), skip_done=True, region="abuja")
     assert set(asked) == {"abuja"}
     asked.clear()
-    fetch.build(tmp_path, only=("tyres",), skip_done=True, region="abuja")
+    fetch.build(cache, only=("tyres",), skip_done=True, region="abuja")
     assert asked == []
+    # A training cache's file is other cities' adverts: Lagos was never fetched there.
+    train = tmp_path / "testify_train"
+    train.mkdir()
+    (train / "tyres.json").write_text("[]")
+    fetch.build(train, only=("tyres",), skip_done=True, region="lagos")
+    assert asked == ["lagos"] * len(fetch.phrasings(("tyres", "tires")))
+
+
+def test_more_words_ask_the_makers_first_and_are_marked_done_apart(tmp_path, monkeypatch):
+    from buyscape.testify import fetch
+
+    assert fetch.phrasings(("gearbox",), more=("toyota gearbox", "gearbox"))[:3] == [
+        "toyota gearbox", "gearbox", "used gearbox"]
+    asked = []
+    monkeypatch.setattr(fetch, "fetch_category", lambda q, *a, **k: asked.append(q.query) or [])
+    fetch.build(tmp_path, only=("gearbox",), region="abuja")
+    plain = list(asked)
+    asked.clear()
+    fetch.build(tmp_path, only=("gearbox",), region="abuja", skip_done=True, more_words=True)
+    assert set(fetch.MORE_WORDS["gearbox"]) <= set(asked) and set(plain) <= set(asked)
+    asked.clear()
+    fetch.build(tmp_path, only=("gearbox",), region="abuja", skip_done=True, more_words=True)
+    assert asked == []
+
+
+def test_a_training_fetch_passes_over_the_benchmarks_adverts(tmp_path, monkeypatch):
+    import json
+
+    from buyscape.evalset.jiji import Listing
+    from buyscape.testify import fetch
+
+    def found(q, *a, **k):
+        return [Listing(id=i, category=q.category, title="Toyota gearbox", price_ngn=1, description="",
+                        condition="Used", is_used=True, attrs={}, image_urls=[], url="", fetched_at="")
+                for i in ("bench1", "fresh1")]
+
+    monkeypatch.setattr(fetch, "fetch_category", found)
+    monkeypatch.setattr(fetch, "download_media", lambda listings, *a, **k: [setattr(l, "media", ["x.jpg"]) for l in listings])
+    bench = tmp_path / "testify"
+    bench.mkdir()
+    (bench / "gearbox.json").write_text(json.dumps([{"id": "bench1"}]))
+    (bench / "summary.json").write_text(json.dumps({"not": "adverts"}))
+    counts = fetch.build(tmp_path / "train", only=("gearbox",), avoid=fetch.benchmark_ids(bench))
+    kept = json.loads((tmp_path / "train" / "gearbox.json").read_text())
+    assert [r["id"] for r in kept] == ["fresh1"] and counts["gearbox"]["in the benchmark"] > 0
 
 
 def test_a_search_word_that_keeps_finding_nothing_is_dropped(tmp_path, monkeypatch):

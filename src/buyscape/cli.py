@@ -1763,12 +1763,17 @@ def testify_fetch(
         False,
         help="Fetch second-hand adverts as training data, kept apart from the benchmark. Use it for any new city.",
     ),
+    more_words: bool = typer.Option(
+        False, help="With --for-training: also search the makers and models the market names, for many more adverts."
+    ),
 ) -> None:
     """Cache Jiji adverts for small goods and material lots. Run from an ordinary connection."""
     from .testify import fetch as wider
 
     if new_stock and for_training:
         raise typer.BadParameter("--new-stock is already training data; pick one of --new-stock and --for-training")
+    if more_words and not for_training:
+        raise typer.BadParameter("--more-words is for training data only: add --for-training")
     pool = "new" if new_stock else "used"
     cache = "testify_new" if new_stock else "testify_train" if for_training else "testify"
     out = out or ROOT / "eval" / "raw" / cache
@@ -1782,6 +1787,8 @@ def testify_fetch(
         skip_done=skip_done,
         pool=pool,
         region=region,
+        more_words=more_words,
+        avoid=wider.benchmark_ids(ROOT / "eval" / "raw" / "testify") if for_training or new_stock else frozenset(),
     )
     if not counts:
         console.print(

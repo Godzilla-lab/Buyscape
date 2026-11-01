@@ -88,6 +88,112 @@ KINDS: tuple[tuple[Tier, str, tuple[str, ...], tuple[str, ...]], ...] = (
 )
 
 
+# More search phrasings per kind, for training data only (--more-words). Jiji's
+# search is literal and gives about twenty adverts a phrasing, so a kind asked
+# for two ways stops at about forty adverts a city; the makers and models the
+# market names find different adverts. Each must carry a word the kind's
+# titles carry, or every advert it finds is dropped. Never a benchmark fetch.
+MORE_WORDS: dict[str, tuple[str, ...]] = {
+    "rechargeable torchlight": ("solar torch", "torchlight", "police torch", "led torchlight", "searchlight torch",
+                                "head torch", "zoom torch", "rechargeable torch"),
+    "standing fan": ("binatone standing fan", "ox standing fan", "qlink standing fan", "lontor standing fan",
+                     "thermocool standing fan", "pedestal fan", "solar standing fan", "rechargeable standing fan"),
+    "pressing iron": ("philips pressing iron", "binatone pressing iron", "electric iron", "industrial pressing iron",
+                      "steam pressing iron", "sonik iron", "silver crest iron", "industrial dry iron"),
+    "electric kettle": ("binatone kettle", "kenwood kettle", "philips kettle", "stainless kettle", "cordless kettle",
+                        "silver crest kettle", "kettle for sale"),
+    "blender": ("binatone blender", "kenwood blender", "philips blender", "silver crest blender", "industrial blender",
+                "nutribullet blender", "qlink blender", "master chef blender"),
+    "microwave": ("lg microwave", "samsung microwave", "hisense microwave", "scanfrost microwave", "kenwood microwave",
+                  "midea microwave", "sharp microwave", "panasonic microwave"),
+    "gas cooker": ("4 burner gas cooker", "5 burner gas cooker", "maxi gas cooker", "nexus gas cooker",
+                   "scanfrost gas cooker", "thermocool gas cooker", "table top gas cooker", "polystar gas cooker",
+                   "gas cooker with oven"),
+    "chest freezer": ("haier thermocool freezer", "hisense freezer", "lg freezer", "nexus freezer", "scanfrost freezer",
+                      "polystar freezer", "midea freezer", "deep freezer", "display freezer", "restpoint freezer"),
+    "refrigerator": ("lg fridge", "samsung fridge", "hisense fridge", "haier thermocool fridge", "nexus fridge",
+                     "scanfrost fridge", "double door fridge", "side by side fridge", "small fridge", "midea fridge",
+                     "polystar fridge"),
+    "power bank": ("oraimo power bank", "new age power bank", "anker power bank", "xiaomi power bank",
+                   "20000mah power bank", "30000mah power bank", "solar power bank"),
+    "UPS": ("apc ups", "mercury ups", "eaton ups", "1000va ups", "1500va ups", "online ups", "ups for sale"),
+    "inverter battery": ("tubular battery", "lithium battery", "200ah battery", "220ah battery", "luminous battery",
+                         "quanta battery", "felicity battery", "deep cycle battery", "gel battery", "100ah battery"),
+    "solar panel": ("mono solar panel", "poly solar panel", "300w solar panel", "450w solar panel", "550w solar panel",
+                    "jinko solar panel", "canadian solar panel", "200w solar panel"),
+    "sewing machine": ("butterfly sewing machine", "singer sewing machine", "brother sewing machine",
+                       "janome sewing machine", "electric sewing machine", "manual sewing machine"),
+    "office chair": ("executive office chair", "swivel chair", "mesh office chair", "gaming chair", "visitor chair",
+                     "boss chair", "conference chair"),
+    "2 seater sofa": ("2 seater leather sofa", "2 seater fabric sofa", "two seater sofa", "2 seater sofa chair",
+                      "2 seater recliner", "2 seater settee"),
+    "centre table": ("glass centre table", "wooden centre table", "marble centre table", "coffee table",
+                     "mirror centre table", "center table set"),
+    "plastic water tank": ("geepee tank", "1000 litres tank", "2000 litres tank", "5000 litres tank",
+                           "500 litres tank", "overhead tank", "water storage tank"),
+    "car battery": ("exide battery", "varta battery", "bosch car battery", "75ah car battery", "100ah car battery",
+                    "tokunbo car battery", "amaron battery"),
+    "speaker": ("jbl speaker", "sony speaker", "lg home theatre", "samsung home theatre", "pa speaker",
+                "active speaker", "bose speaker", "rechargeable speaker", "sony home theatre"),
+    "scrap metal": ("metal scrap", "heavy metal scrap", "steel scrap", "scrap for sale", "scrap iron rods"),
+    "copper wire": ("copper scrap", "copper cable", "armoured copper cable", "copper coil", "pure copper"),
+    "aluminium": ("aluminium cans", "aluminium profile scrap", "aluminium wire", "aluminium sheet"),
+    "car battery scrap": ("battery scrap", "dead battery scrap", "scrap batteries", "lead acid battery scrap"),
+    "carton and paper": ("waste carton", "carton scrap", "paper scrap", "old newspaper", "used cartons"),
+    "plastic": ("plastic waste", "pet bottle flakes", "hdpe plastic scrap", "plastic bottles", "waste plastic"),
+    "car engine": ("toyota engine", "honda engine", "lexus engine", "camry engine", "corolla engine", "benz engine",
+                   "tokunbo engine", "v6 engine", "hyundai engine", "nissan engine", "ford engine", "kia engine"),
+    "gearbox": ("toyota gearbox", "honda gearbox", "lexus gearbox", "camry gear box", "corolla gearbox",
+                "automatic gearbox", "manual gearbox", "benz gearbox", "tokunbo gearbox"),
+    "car headlamp": ("toyota headlamp", "camry headlight", "corolla headlamp", "lexus headlight", "honda headlamp",
+                     "benz headlamp", "highlander headlight", "tokunbo headlamp", "headlight"),
+    "car alternator": ("toyota alternator", "honda alternator", "lexus alternator", "benz alternator",
+                       "camry alternator", "tokunbo alternator"),
+    "tyres": ("michelin tyres", "bridgestone tyres", "dunlop tyres", "tokunbo tyres", "17 inch tyres",
+              "16 inch tyres", "car tyres", "jeep tyres", "continental tyres"),
+    "game console": ("ps4 pro", "ps4 slim", "ps5 slim", "playstation 4", "playstation 5", "xbox series x",
+                     "xbox series s", "xbox 360", "hacked ps4"),
+    "camera": ("sony camera", "canon 5d", "nikon d750", "mirrorless camera", "video camera", "canon 80d",
+               "nikon d3500", "fujifilm camera"),
+    "drilling machine": ("dewalt drill", "bosch drill", "makita drill", "impact drill", "cordless drill",
+                         "hammer drill", "electric drill", "magnetic drill"),
+    "welding machine": ("inverter welding machine", "arc welding machine", "co2 welding machine",
+                        "argon welding machine", "mig welding machine", "lincoln welding machine"),
+    "bicycle": ("mountain bike", "children bicycle", "kids bicycle", "bmx bicycle", "sport bicycle", "road bike",
+                "folding bicycle", "adult bicycle"),
+    "motorcycle": ("bajaj boxer", "honda motorcycle", "suzuki motorcycle", "tvs motorcycle", "qlink motorcycle",
+                   "haojue motorcycle", "jincheng motorcycle", "bajaj motorcycle", "power bike motorcycle"),
+    "wardrobe": ("wooden wardrobe", "3 door wardrobe", "4 door wardrobe", "2 door wardrobe", "sliding wardrobe",
+                 "mirror wardrobe"),
+    "bed frame": ("6 by 6 bed", "4 by 6 bed", "upholstered bed", "wooden bed", "bunk bed", "king size bed",
+                  "queen size bed", "double decker bed"),
+    "dining table": ("6 seater dining", "4 seater dining", "8 seater dining", "glass dining table",
+                     "wooden dining table", "marble dining table"),
+    "office desk": ("executive office table", "office workstation table", "computer desk", "study desk",
+                    "executive desk", "reception table", "conference table"),
+    "filing cabinet": ("4 drawer filing cabinet", "metal cabinet", "office cabinet", "file cabinet",
+                       "steel filing cabinet", "storage cabinet"),
+    "salon equipment": ("salon hair dryer", "hood dryer", "standing hair dryer", "salon wash basin",
+                        "salon trolley", "salon steamer"),
+    "industrial sewing machine": ("juki sewing machine", "industrial straight sewing machine",
+                                  "overlocking sewing machine", "brother industrial sewing machine",
+                                  "jack sewing machine", "embroidery machine for sale"),
+    "printer": ("hp printer", "canon printer", "epson printer", "laserjet printer", "konica minolta photocopier",
+                "sharp photocopier", "kyocera photocopier", "ricoh copier", "large format printer"),
+    "keyboard instrument": ("yamaha psr keyboard", "casio keyboard", "korg keyboard", "roland keyboard",
+                            "digital piano", "yamaha piano", "61 keys keyboard", "workstation keyboard"),
+    "plastic drum": ("250 litres drum", "25 litres drum", "plastic drums", "blue drum", "chemical drum",
+                     "150 litres drum"),
+    "gas cylinder": ("12.5kg gas cylinder", "6kg gas cylinder", "25kg gas cylinder", "50kg gas cylinder",
+                     "empty gas cylinder", "3kg gas cylinder"),
+    "used clothes bale": ("okrika bales", "first grade okrika", "bale of jeans", "bale of shoes", "uk bale",
+                          "bale for sale"),
+    "pallets": ("plastic pallets", "pallet for sale", "used pallets", "euro pallets", "pallet wood"),
+    "scrap tyres": ("tyre scrap", "old tyres", "tire scrap", "used tyres scrap"),
+    "used books": ("school books", "university textbooks", "law books", "medical textbooks", "children books",
+                   "story books"),
+}
+
 def _patiently(call, waits: tuple[float, ...] = (15.0, 60.0)):
     """Run a fetch, waiting and retrying when Jiji is slow. None if it never answers.
 
@@ -111,11 +217,17 @@ def _patiently(call, waits: tuple[float, ...] = (15.0, 60.0)):
 DRY_LIMIT = 8
 
 
-def _variants(phrases: tuple[str, ...], pool: str) -> list[tuple[str, str | None]]:
-    """Each phrasing with the word put in front of it, or None for the phrase as written."""
+def _variants(phrases: tuple[str, ...], pool: str, more: tuple[str, ...] = ()) -> list[tuple[str, str | None]]:
+    """Each phrasing with the word put in front of it, or None for the phrase as written.
+
+    `more` are asked as written only: the words in front find nothing new."""
     out: list[tuple[str, str | None]] = []
     seen: set[str] = set()
     words = SECOND_HAND if pool == "used" else ("brand new",)
+    for phrase in more:
+        if phrase not in seen:
+            seen.add(phrase)
+            out.append((phrase, None))
     for phrase in phrases:
         base = phrase.removeprefix("used ").strip()
         for candidate, word in ((phrase, None), *((f"{w} {base}", w) for w in words)):
@@ -159,7 +271,9 @@ def _done(out_dir: Path, kind: str, region: str) -> bool:
     slug = kind.replace(" ", "_")
     if (out_dir / ".done" / region / slug).exists():
         return True
-    return region == "lagos" and (out_dir / f"{slug}.json").exists()
+    # Only the benchmark's own cache had Lagos runs from before cities were
+    # tracked; in a training cache the kind's file is other cities' adverts.
+    return region == "lagos" and out_dir.name == "testify" and (out_dir / f"{slug}.json").exists()
 
 
 def _mark_done(out_dir: Path, kind: str, region: str) -> None:
@@ -168,13 +282,13 @@ def _mark_done(out_dir: Path, kind: str, region: str) -> None:
     marker.touch()
 
 
-def phrasings(phrases: tuple[str, ...], pool: str = "used") -> list[str]:
+def phrasings(phrases: tuple[str, ...], pool: str = "used", more: tuple[str, ...] = ()) -> list[str]:
     """Each phrase as written, then with every second-hand word in front.
 
     The new-stock pool asks plainly and as "brand new", which is how dealers
-    title their adverts.
+    title their adverts. `more` (MORE_WORDS) go first, as written.
     """
-    return [candidate for candidate, _ in _variants(phrases, pool)]
+    return [candidate for candidate, _ in _variants(phrases, pool, more)]
 
 def keep(row: dict, pool: str = "used") -> str | None:
     """Why an advert is left out of a pool, or None to keep it.
@@ -202,16 +316,23 @@ def build(
     progress=None,
     skip_done: bool = False,
     pool: str = "used",
+    more_words: bool = False,
+    avoid: frozenset[str] = frozenset(),
 ) -> dict[str, dict[str, int]]:
     """Fetch every kind in every phrasing, keeping second-hand adverts only.
 
     Adds to what is already cached, so a rerun only grows the set. New stock
     and buyers' adverts are skipped before any photo is downloaded.
+    `more_words` also asks MORE_WORDS, for training data; it is marked done
+    apart, so a city fetched before is asked again in the new words. Adverts
+    in `avoid` (the benchmark's) are passed over before any photo is fetched.
     """
     out_dir.mkdir(parents=True, exist_ok=True)
     counts: dict[str, dict[str, int]] = {}
-    chosen = [k for k in KINDS if (not only or k[1] in only) and not (skip_done and _done(out_dir, k[1], region))]
-    total = sum(len(phrasings(k[2], pool)) for k in chosen)
+    mark = (lambda kind: f"{kind} more") if more_words else (lambda kind: kind)  # noqa: E731
+    more = (lambda kind: MORE_WORDS.get(kind, ())) if more_words else (lambda kind: ())  # noqa: E731
+    chosen = [k for k in KINDS if (not only or k[1] in only) and not (skip_done and _done(out_dir, mark(k[1]), region))]
+    total = sum(len(phrasings(k[2], pool, more(k[1]))) for k in chosen)
     done = 0
     dry: dict[str, int] = {}
     with httpx.Client(headers={"User-Agent": UA}, timeout=30.0) as client:
@@ -222,8 +343,9 @@ def build(
                 for row in json.loads(path.read_text()):
                     if keep(row, pool) is None:
                         seen[row["id"]] = row
-            tally = {"kept": 0, "brand new": 0, "second-hand": 0, "buyer, not seller": 0, "timed out": 0, "sharper photos": 0}
-            for phrase, word in _variants(phrases, pool):
+            tally = {"kept": 0, "brand new": 0, "second-hand": 0, "buyer, not seller": 0, "timed out": 0, "sharper photos": 0,
+                     "in the benchmark": 0}
+            for phrase, word in _variants(phrases, pool, more(kind)):
                 if word and dry.get(word, 0) >= DRY_LIMIT:
                     done += 1
                     continue
@@ -234,6 +356,9 @@ def build(
                     continue
                 fresh = []
                 for listing in found:
+                    if listing.id in avoid:
+                        tally["in the benchmark"] += 1
+                        continue
                     if listing.id in seen:
                         # Fetched before with thumbnails: take the bigger photos now offered.
                         old = seen[listing.id]
@@ -276,7 +401,7 @@ def build(
                 if progress:
                     progress(f"[{done}/{total}] {phrase}: {len(fresh)} new, {len(seen)} {kind} so far")
             path.write_text(json.dumps(list(seen.values()), indent=1))
-            _mark_done(out_dir, kind, region)
+            _mark_done(out_dir, mark(kind), region)
             tally["kept"] = len(seen)
             counts[kind] = tally
     return counts
@@ -294,3 +419,13 @@ def load(out_dir: Path) -> list[dict]:
         if isinstance(data, list):
             rows.extend(r for r in data if isinstance(r, dict) and "tier" in r and "kind" in r)
     return rows
+
+
+def benchmark_ids(cache: Path) -> frozenset[str]:
+    """Every advert id the benchmark's cache holds, so training never fetches one again."""
+    ids: set[str] = set()
+    for path in cache.glob("*.json"):
+        rows = json.loads(path.read_text())
+        if isinstance(rows, list):
+            ids.update(r["id"] for r in rows if isinstance(r, dict) and r.get("id"))
+    return frozenset(ids)
