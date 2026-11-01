@@ -429,3 +429,32 @@ def test_advert_page_photos_written_with_escaped_slashes_are_read():
     html = (f'<img src="https://pictures-nigeria.jijistatic.net/200646915_{small}.jpg">'
             f'"images_data":[{{"url":"https:\\/\\/pictures-nigeria.jijistatic.net\\/200646915_{token}.webp"}}]')
     assert page_photos(html, "200646915") == [f"https://pictures-nigeria.jijistatic.net/200646915_{token}.webp"]
+
+
+def test_more_words_also_fetch_the_kinds_buyscrap_buys_and_the_benchmark_lacks(tmp_path, monkeypatch):
+    import json
+
+    from buyscape.evalset.jiji import Listing
+    from buyscape.testify import fetch
+
+    kinds = {k[1]: k for k in fetch.TRAIN_KINDS}
+    assert {"faulty laptop", "faulty television", "glass bottles", "circuit boards", "scrap car"} <= set(kinds)
+    assert not set(kinds) & {k[1] for k in fetch.KINDS}
+    for tier, kind, phrases, words in fetch.TRAIN_KINDS:
+        assert all(any(w.strip() in p for w in words) for p in phrases), kind
+
+    asked = []
+
+    def found(q, *a, **k):
+        asked.append(q.category)
+        return [Listing(id=f"{q.category}-{len(asked)}", category=q.category, title=f"Faulty HP laptop {len(asked)}",
+                        price_ngn=40000, description="", condition="Used", is_used=True, attrs={}, image_urls=[],
+                        url="", fetched_at="")]
+
+    monkeypatch.setattr(fetch, "fetch_category", found)
+    monkeypatch.setattr(fetch, "download_media", lambda listings, *a, **k: [setattr(l, "media", ["x.jpg"]) for l in listings])
+    fetch.build(tmp_path, only=("faulty laptop",), region="lagos")
+    assert asked == []  # not a benchmark kind: only with --more-words
+    fetch.build(tmp_path, only=("faulty laptop",), region="lagos", more_words=True)
+    rows = json.loads((tmp_path / "faulty_laptop.json").read_text())
+    assert rows and rows[0]["protocol"] == "laptop" and rows[0]["tier"] == "branded_electronics"

@@ -1791,7 +1791,8 @@ def testify_fetch(
         help="Fetch second-hand adverts as training data, kept apart from the benchmark. Use it for any new city.",
     ),
     more_words: bool = typer.Option(
-        False, help="With --for-training: also search the makers and models the market names, for many more adverts."
+        False, help="With --for-training: also search the makers and models the market names, and the training-only "
+        "kinds (faulty and broken goods, glass, circuit boards, scrap cars, machines)."
     ),
 ) -> None:
     """Cache Jiji adverts for small goods and material lots. Run from an ordinary connection."""

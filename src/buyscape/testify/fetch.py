@@ -194,6 +194,53 @@ MORE_WORDS: dict[str, tuple[str, ...]] = {
                    "story books"),
 }
 
+# Kinds for training only, asked with --more-words: what BuyScrap buys and the
+# benchmark's kinds miss. Faulty and broken goods are a large part of its
+# trade, and its own adverts are mostly e-waste, glass, circuit boards and
+# scrap cars. (tier, kind, search phrasings, words a title must carry), as in
+# KINDS; a buyer's advert ("we buy faulty laptops") is dropped as in KINDS.
+TRAIN_KINDS: tuple[tuple[Tier, str, tuple[str, ...], tuple[str, ...]], ...] = (
+    ("branded_electronics", "faulty television", ("faulty tv", "spoilt tv", "bad tv", "broken tv screen",
+                                                  "tv for parts", "scrap tv", "cracked tv screen"), ("tv", "television")),
+    ("branded_electronics", "faulty laptop", ("faulty laptop", "spoilt laptop", "broken laptop", "laptop for parts",
+                                              "bad laptop", "cracked laptop screen", "dead laptop"),
+     ("laptop", "macbook", "notebook")),
+    ("branded_electronics", "faulty phone", ("faulty phone", "spoilt phone", "broken phone", "cracked screen phone",
+                                             "phone for parts", "faulty iphone", "faulty samsung", "bad iphone"),
+     ("phone", "iphone", "samsung", "tecno", "infinix", "itel", "galaxy")),
+    ("small_goods", "faulty air conditioner", ("faulty ac", "spoilt ac", "scrap ac", "bad air conditioner",
+                                               "faulty split unit", "scrap split ac", "ac compressor"),
+     (" ac", "a/c", "air condition", "split unit", "compressor")),
+    ("small_goods", "faulty refrigerator", ("faulty fridge", "spoilt fridge", "scrap fridge", "faulty freezer",
+                                            "spoilt freezer", "scrap freezer", "bad fridge"),
+     ("fridge", "freezer", "refrigerator")),
+    ("small_goods", "faulty washing machine", ("faulty washing machine", "spoilt washing machine",
+                                               "scrap washing machine", "washing machine for parts"), ("washing",)),
+    ("small_goods", "faulty generator", ("faulty generator", "spoilt generator", "scrap generator",
+                                         "generator for parts", "bad generator"), ("generator",)),
+    ("small_goods", "faulty inverter", ("faulty inverter", "spoilt inverter", "scrap inverter", "faulty ups",
+                                        "bad inverter"), ("inverter", "ups")),
+    ("branded_electronics", "computer monitor", ("computer monitor", "lg monitor", "dell monitor", "hp monitor",
+                                                 "samsung monitor", "faulty monitor"), ("monitor",)),
+    ("branded_electronics", "desktop computer", ("system unit", "desktop computer", "all in one computer",
+                                                 "hp desktop", "dell desktop"),
+     ("system unit", "desktop", "all in one", "computer")),
+    ("material_lot", "circuit boards", ("circuit boards", "scrap motherboard", "e waste", "ewaste", "computer scrap",
+                                        "scrap pcb", "scrap ram", "electronic waste"),
+     ("board", "e-waste", "e waste", "ewaste", "pcb", "electronic", "scrap", "ram")),
+    ("material_lot", "glass bottles", ("glass bottles", "empty bottles", "empty glass bottles", "used bottles",
+                                       "scrap glass", "broken glass", "glass cullet"), ("bottle", "glass")),
+    ("material_lot", "scrap car", ("scrap car", "accidented car", "car for scrap", "scrap vehicle", "accident car",
+                                   "rickety car", "car scrap"), ("scrap", "accident", "rickety")),
+    ("small_goods", "industrial machine", ("grinding machine", "pure water machine", "block making machine",
+                                           "industrial mixer", "milling machine", "popcorn machine",
+                                           "industrial machine"), ("machine", "mixer")),
+)
+
+# The evidence protocol a training kind is asked under, where one fits it.
+TRAIN_PROTOCOL = {"faulty laptop": "laptop", "faulty phone": "phone", "faulty air conditioner": "split_ac",
+                  "faulty washing machine": "washing_machine", "faulty generator": "generator"}
+
 def _patiently(call, waits: tuple[float, ...] = (15.0, 60.0)):
     """Run a fetch, waiting and retrying when Jiji is slow. None if it never answers.
 
@@ -323,15 +370,16 @@ def build(
 
     Adds to what is already cached, so a rerun only grows the set. New stock
     and buyers' adverts are skipped before any photo is downloaded.
-    `more_words` also asks MORE_WORDS, for training data; it is marked done
-    apart, so a city fetched before is asked again in the new words. Adverts
+    `more_words` also asks MORE_WORDS and the TRAIN_KINDS, for training data;
+    it is marked done apart, so a city fetched before is asked again. Adverts
     in `avoid` (the benchmark's) are passed over before any photo is fetched.
     """
     out_dir.mkdir(parents=True, exist_ok=True)
     counts: dict[str, dict[str, int]] = {}
     mark = (lambda kind: f"{kind} more") if more_words else (lambda kind: kind)  # noqa: E731
     more = (lambda kind: MORE_WORDS.get(kind, ())) if more_words else (lambda kind: ())  # noqa: E731
-    chosen = [k for k in KINDS if (not only or k[1] in only) and not (skip_done and _done(out_dir, mark(k[1]), region))]
+    kinds = KINDS + TRAIN_KINDS if more_words else KINDS
+    chosen = [k for k in kinds if (not only or k[1] in only) and not (skip_done and _done(out_dir, mark(k[1]), region))]
     total = sum(len(phrasings(k[2], pool, more(k[1]))) for k in chosen)
     done = 0
     dry: dict[str, int] = {}
@@ -390,6 +438,8 @@ def build(
                         row["tier"] = tier
                         row["kind"] = kind
                         row["region"] = region
+                        if kind in TRAIN_PROTOCOL:
+                            row["protocol"] = TRAIN_PROTOCOL[kind]
                         seen[listing.id] = row
                 # Saved after every phrasing, so a stopped run loses one search at most.
                 path.write_text(json.dumps(list(seen.values()), indent=1))
