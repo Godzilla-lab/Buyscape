@@ -120,6 +120,12 @@ replay, and the run says so rather than failing silently.
   phones, car parts, scrap cars, industrial machines, furniture, glass and every
   material lot. Test on kinds it never trained on. Where it cannot name or price
   an item it says so (rule 8); it never guesses.
+- **The right data, not just more.** Training data is chosen for what the
+  model gets wrong: second-hand adverts with several others for the same item
+  (the price step learns from those), photos where a label or plate can be
+  read, items with and without a brand in view, bundles, rare kinds, faulty
+  and scrap items, and final sale prices above all. Crawl wide, then choose
+  what the teacher reads: the read is the costly step.
 - **Never deploy without an explicit yes.** Draft deploys count as deploys.
 - **No em dashes or en dashes in any shipped text**, code comments included.
 - Anything tenant-specific belongs in `tenants/`, never in code. If onboarding a
