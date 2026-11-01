@@ -1,0 +1,110 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: DSLR body wrapped in a camouflage silicone/rubber skin; 'Nikon' logo and 'D610' text visible on the front plate beneath the logo.",
+      "Photo 0: No lens attached, body cap or mount cover present, lens mount area visible.",
+      "Photo 1: Rear LCD screen is on, showing a 'SETUP MENU' with options like Format memory card, Save user settings, Monitor brightness, etc. Hand is holding the camera.",
+      "Photo 2: Camera body laid flat next to a small prime lens (black, front element visible, no readable brand/focal length markings), a soft pouch marked 'YONGNUO', and two separate battery packs (no visible model numbers).",
+      "No lens caps, straps, charger, memory card, or original box visible in any photo.",
+      "No 85mm lens appears in any photo."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DSLR camera body",
+      "brand": "Nikon",
+      "model": "D610",
+      "read_from": [
+        "photo 0 front plate text 'Nikon D610'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Body is a Nikon D610",
+        "verdict": "supported",
+        "evidence": "photo 0 front plate shows 'Nikon' and 'D610' text"
+      },
+      {
+        "claim": "Comes with 2 batteries",
+        "verdict": "supported",
+        "evidence": "photo 2 shows two separate battery packs laid out with the body"
+      },
+      {
+        "claim": "50mm lens available as optional add-on",
+        "verdict": "unverified",
+        "evidence": "photo 2 shows a small prime lens but no readable focal length or brand markings; cannot confirm it is a 50mm"
+      },
+      {
+        "claim": "85mm lens available as optional add-on",
+        "verdict": "unverifiable_remote",
+        "evidence": "no 85mm lens appears in any of the 3 photos"
+      },
+      {
+        "claim": "Camera is functional (implied by live menu screen)",
+        "verdict": "unverified",
+        "evidence": "photo 1 shows the menu lit and navigable, which only proves the screen and basic menu system work, not shutter, sensor, autofocus, or mirror function"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Shutter actuation count unknown on a body this old; D610s are known for high shutter-count units and a shutter-replacement history (some D600/D610 units had sensor dust/oil-spot issues)",
+        "proof": "Screenshot of shutter count from a menu/app (e.g. via a shutter-count checking tool or EXIF of a fresh photo)",
+        "if_unproven": "priced as high-mileage/unknown shutter life, i.e. at the low end for a used D610 body"
+      },
+      {
+        "risk": "Sensor condition (dust, oil spots, scratches) cannot be judged from exterior photos",
+        "proof": "A photo of a test shot against a plain white/blue sky at narrow aperture (f/16-f/22) showing the full frame",
+        "if_unproven": "priced as having unknown/potential sensor issues"
+      },
+      {
+        "risk": "Actual shutter/autofocus/metering function not demonstrated (only menu screen shown)",
+        "proof": "A short video clip of the camera firing the shutter, autofocusing, and displaying a live-view image",
+        "if_unproven": "priced as not confirmed working, i.e. worst case as non-functional until shown"
+      },
+      {
+        "risk": "Lens identity and condition (claimed 50mm) not confirmed; could be a cheaper or different focal length, and optical condition (fungus, scratches, haze) is unknown",
+        "proof": "Close-up photo of the lens barrel showing brand/model/focal-length text, plus a photo through the front and rear elements against light",
+        "if_unproven": "priced as a generic/unverified kit lens rather than a confirmed 50mm prime"
+      },
+      {
+        "risk": "Battery health/cycle count unknown; batteries could be degraded or third-party with short life",
+        "proof": "Photo of battery info screen (menu showing battery charge/life indicator) for each battery",
+        "if_unproven": "priced as batteries of unknown/degraded capacity"
+      },
+      {
+        "risk": "No charger, memory card, strap, or original box shown; these affect bundle value",
+        "proof": "Photo of charger, strap, and any included accessories together with the camera",
+        "if_unproven": "priced as body+lens+batteries only, no accessories included"
+      },
+      {
+        "risk": "85mm lens claim cannot be assessed at all since it is not shown",
+        "proof": "Photo of the actual 85mm lens with visible brand/model text",
+        "if_unproven": "excluded from pricing entirely until shown; cannot be priced as an add-on"
+      }
+    ],
+    "proof_requests": [
+      "Video clip of the camera powering on, firing the shutter, and autofocusing with a lens attached",
+      "Shutter count screenshot or EXIF data from a fresh test shot",
+      "Clear close-up photo of the 50mm lens barrel showing brand and focal length markings",
+      "Test photo shot at narrow aperture against a plain bright background to check sensor for dust/spots",
+      "Photo of the actual 85mm lens if it is to be considered part of the sale",
+      "Photo of charger and any other included accessories"
+    ],
+    "decision": "price",
+    "reason": "The body is clearly identifiable as a Nikon D610 with two batteries shown, and a lens is visible though unconfirmed as 50mm, so the core bundle can be priced at its worst-case (unverified function, unknown shutter count, unverified lens) while the 85mm lens cannot be priced since it is never shown in any photo."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 28699,
+    "input_tokens": 3935,
+    "output_tokens": 2685,
+    "cost_usd": 0.031561,
+    "replayed": false,
+    "fixture_key": "cdb6d077e6c6f124d79494172ce4c0e4",
+    "error": null
+  }
+}
