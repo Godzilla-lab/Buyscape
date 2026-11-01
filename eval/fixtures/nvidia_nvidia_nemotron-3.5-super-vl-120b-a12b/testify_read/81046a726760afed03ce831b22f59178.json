@@ -1,0 +1,74 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Single car headlight assembly wrapped in clear plastic",
+      "Clear lens with slanted LED daytime running light strips",
+      "Amber turn signal section on the outer edge",
+      "Lying on rough concrete ground",
+      "No visible brand, model, or part number on the lens or housing",
+      "Back housing and mounting brackets not visible",
+      "Seller text only mentions waybill services"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "car headlight assembly",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Waybill services also available",
+        "verdict": "unverifiable_remote",
+        "evidence": "photo 0 shows only the headlight; no shipping terms or waybill details are visible"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Headlight does not power on or LEDs are faulty",
+        "proof": "Video of the headlight connected to power and fully illuminated",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Lens is cracked, hazy, or scratched beneath the plastic wrap",
+        "proof": "Close-up photos of the lens from multiple angles without plastic wrap",
+        "if_unproven": "as damaged"
+      },
+      {
+        "risk": "Mounting brackets or adjustment tabs are broken",
+        "proof": "Photos of the back and mounting points of the assembly",
+        "if_unproven": "as broken mounts"
+      },
+      {
+        "risk": "Wrong fitment for buyer's car (wrong side, model, or year)",
+        "proof": "Photo of the part number label or seller stating exact car make, model, and year fitment",
+        "if_unproven": "as wrong fitment"
+      }
+    ],
+    "proof_requests": [
+      "What car make, model, and year does this headlight fit?",
+      "Photo of the part number or label on the back of the headlight",
+      "Video of the headlight powered on and working",
+      "Close-up photos of the lens without the plastic wrap"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a car headlight assembly, but no brand, model, or vehicle fitment is visible in the photo, and that fitment sets the price; without it even a worst-case price cannot be set."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 15624,
+    "input_tokens": 1594,
+    "output_tokens": 2580,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "81046a726760afed03ce831b22f59178",
+    "error": null
+  }
+}
