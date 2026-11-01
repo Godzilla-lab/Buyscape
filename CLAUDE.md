@@ -114,6 +114,12 @@ replay, and the run says so rather than failing silently.
 
 ## Working rules
 
+- **Anything a seller sends must work.** The trained model is not for the
+  benchmark's 52 kinds. Train on every category the market and BuyScrap trade:
+  e-waste (laptops, TVs, monitors, ACs, washing machines, UPS, circuit boards),
+  phones, car parts, scrap cars, industrial machines, furniture, glass and every
+  material lot. Test on kinds it never trained on. Where it cannot name or price
+  an item it says so (rule 8); it never guesses.
 - **Never deploy without an explicit yes.** Draft deploys count as deploys.
 - **No em dashes or en dashes in any shipped text**, code comments included.
 - Anything tenant-specific belongs in `tenants/`, never in code. If onboarding a
