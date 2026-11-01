@@ -1743,6 +1743,52 @@ def testify_publish(
     console.print(f"published https://huggingface.co/datasets/{repo} (release v{release.VERSION})")
 
 
+@app.command("testify-select")
+def testify_select(
+    n: int = typer.Option(3000, help="How many adverts the teacher reads."),
+    source: str = typer.Option("crawl", help="crawl: crawled adverts only; all: the whole training pool."),
+    out: Path = typer.Option(None, help="The ids file for testify --ids-file. Defaults to eval/testify/selected_<source>.txt."),
+    skip_read: bool = typer.Option(True, help="Leave out adverts a teacher has read already."),
+) -> None:
+    """Choose what the teacher reads: clean, spread over every category and price, the most useful first. Free."""
+    from collections import Counter
+
+    from .testify import select
+    from .testify.ocr_cache import OcrCache
+    from .testify.schema import Item
+
+    if source not in ("crawl", "all"):
+        raise typer.BadParameter("--source is crawl or all")
+    items = [Item.model_validate_json(line) for line in (ROOT / "eval" / "testify" / "train_pool.jsonl").open()]
+    if source == "crawl":
+        items = [i for i in items if (i.photos.cache or "").startswith("eval/raw/testify_crawl/")]
+    read: set[str] = set()
+    if skip_read:
+        for run in (ROOT / "eval" / "testify" / "runs").glob("*/train*.jsonl"):
+            for row in map(json.loads, run.read_text().splitlines()):
+                if ((row.get("reading") or {}).get("identity") or {}).get("status"):
+                    read.add(row["id"])
+    fresh = [i for i in items if i.id not in read]
+    hashes_path = ROOT / "eval" / "testify" / "train_photo_hashes.json"
+    hashes = json.loads(hashes_path.read_text()) if hashes_path.exists() else {}
+    kept, dropped = select.clean(fresh, hashes)
+    chosen, why = select.choose(kept, n, select.PhotoLines(ROOT, OcrCache(ROOT, live=False)))
+    out = out or ROOT / "eval" / "testify" / f"selected_{source}.txt"
+    out.write_text("".join(f"{i.id}\n" for i in chosen))
+    console.print(f"{len(items)} adverts, {len(items) - len(fresh)} read already, {len(kept)} kept after cleaning:")
+    for reason, count in dropped.most_common():
+        console.print(f"  left out, {reason}: {count}")
+    share = lambda key: sum(bool(why[i.id][key]) and (key != "same item in the pool" or why[i.id][key] >= 2)  # noqa: E731
+                            for i in chosen)
+    console.print(f"{len(chosen)} chosen for the teacher, written to {out}: "
+                  f"{share('same item in the pool')} with others for the same item, "
+                  f"{share('a code on a photo')} with a code on a photo, {share('faulty or scrap')} faulty or scrap")
+    bands = Counter(select.BAND_NAMES[select.band(i.answer.price.ngn or 0)] for i in chosen)
+    console.print("by price: " + ", ".join(f"{b} {bands[b]}" for b in select.BAND_NAMES if bands[b]))
+    kinds = Counter(select.category(i) for i in chosen)
+    console.print(f"{len(kinds)} categories; the most: " + ", ".join(f"{k} {c}" for k, c in kinds.most_common(12)))
+
+
 @app.command("testify-crawl")
 def testify_crawl(
     region: list[str] = typer.Option(["lagos"], help="Jiji cities, as in its web address: lagos, abuja, rivers, oyo."),
