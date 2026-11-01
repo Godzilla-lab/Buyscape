@@ -24,6 +24,12 @@ The recipe is steps 7 and 8 of docs/research/fine-tuning-research.md:
 It stops on a time limit and always saves what it has, because a Kaggle
 session that runs over loses everything.
 
+With --resumable the whole plan is trained over as many sessions as it
+takes, on any machine: a save point (the adapter, the optimiser, the place in
+the data) every --save-minutes, and each session starts from the last one.
+With --hub-repo the save points also go to a private Hugging Face repo, so a
+rented GPU and a free Kaggle session can take turns on one run.
+
     python sft_lora.py --model <base> --merge adapter/ --out merged/
 
 folds the adapter into the 16 bit base, a plain model folder vLLM serves
@@ -36,7 +42,9 @@ import argparse
 import hashlib
 import json
 import math
+import os
 import random
+import shutil
 import time
 from pathlib import Path
 
@@ -94,6 +102,80 @@ def encode(example: dict, processor, root: Path, max_tokens: int, max_len: int) 
     return dict(batch), len(ids) - n_prompt
 
 
+# A save point is only resumed with the recipe it was made with.
+RECIPE = ("model", "rank", "alpha", "lr", "epochs", "accumulate", "image_tokens", "max_len", "held_out", "limit", "data")
+
+
+def recipe(args, model: str) -> dict:
+    """What must not change between the sessions of one run. `model` is the base's own
+    signature and the data goes by file name, since each machine keeps them in its own folder."""
+    out = {k: getattr(args, k) for k in RECIPE if k not in ("model", "data")}
+    out["model"] = model
+    out["data"] = Path(str(args.data)).name
+    return out
+
+
+def model_signature(config) -> str:
+    """The base by what it is, not where it sits: Kaggle mounts a model under a version number."""
+    text = getattr(config, "text_config", config)
+    return f"{config.model_type}:{text.hidden_size}x{text.num_hidden_layers}:{text.vocab_size}"
+
+
+def recipe_changes(saved: dict, now: dict) -> list[str]:
+    return [f"{k}: {saved.get(k)!r} then, {now.get(k)!r} now" for k in RECIPE if saved.get(k) != now.get(k)]
+
+
+def epoch_order(train: list[dict], epoch: int) -> list[dict]:
+    """The chats of one pass in an order fixed by the pass's number, so a resumed run sees the rest of it."""
+    order = train[:]
+    random.Random(f"epoch {epoch}").shuffle(order)
+    return order
+
+
+def read_state(save: Path) -> dict | None:
+    path = save / "state.json"
+    return json.loads(path.read_text()) if path.exists() else None
+
+
+def swap_in(fresh: Path, save: Path) -> None:
+    """Put a finished save point in place of the last one, so a stop mid-save never leaves half of one."""
+    old = save.with_name(save.name + ".old")
+    shutil.rmtree(old, ignore_errors=True)
+    if save.exists():
+        save.rename(old)
+    fresh.rename(save)
+    shutil.rmtree(old, ignore_errors=True)
+
+
+def hub_pull(repo: str, token: str, save: Path) -> bool:
+    """Take the hub's save point when it is further on than this machine's. True when taken."""
+    from huggingface_hub import snapshot_download
+    from huggingface_hub.utils import RepositoryNotFoundError
+
+    landing = save.with_name(save.name + ".hub")
+    shutil.rmtree(landing, ignore_errors=True)
+    try:
+        snapshot_download(repo, allow_patterns=["savepoint/*"], local_dir=landing, token=token)
+    except RepositoryNotFoundError:
+        return False
+    theirs, mine = read_state(landing / "savepoint"), read_state(save)
+    if theirs and (not mine or theirs["step"] > mine["step"]):
+        swap_in(landing / "savepoint", save)
+        shutil.rmtree(landing, ignore_errors=True)
+        return True
+    shutil.rmtree(landing, ignore_errors=True)
+    return False
+
+
+def hub_push(repo: str, token: str, save: Path, step: int) -> None:
+    from huggingface_hub import HfApi
+
+    api = HfApi(token=token)
+    api.create_repo(repo, private=True, exist_ok=True)
+    api.upload_folder(folder_path=save, repo_id=repo, path_in_repo="savepoint",
+                      commit_message=f"save point at step {step}")
+
+
 def work_dtype():
     """bfloat16 only on a card built for it. torch.cuda.is_bf16_supported() also
     says yes on a T4, which only emulates it: on 24 Oct that ran ten times slow."""
@@ -139,6 +221,12 @@ def main() -> None:
     parser.add_argument("--limit", type=int, default=0, help="Use only this many chats, for a quick check.")
     parser.add_argument("--bits", type=int, choices=(16, 4), default=16, help="4 is QLoRA, for a single card.")
     parser.add_argument("--card-gb", type=float, default=12.0, help="Weights per card at 16 bits; the rest trains.")
+    parser.add_argument("--resumable", action="store_true",
+                        help="Train the whole plan over many sessions, from save points, on any machine.")
+    parser.add_argument("--save-minutes", type=float, default=30.0, help="How often a resumable run saves its place.")
+    parser.add_argument("--hub-repo", help="A private Hugging Face repo the save points go to and come from.")
+    parser.add_argument("--hub-token-env", default="HF_TRAIN_TOKEN",
+                        help="The variable holding a token that can write that one repo.")
     args = parser.parse_args()
     if args.merge:
         merge(args.model, args.merge, args.out)
@@ -182,6 +270,22 @@ def main() -> None:
     model = get_peft_model(model, LoraConfig(
         r=args.rank, lora_alpha=args.alpha, lora_dropout=0.05, target_modules=LANGUAGE_LINEAR, task_type="CAUSAL_LM",
     ))
+    signature = model_signature(model.config)
+    save = args.out / "savepoint"
+    token = os.environ.get(args.hub_token_env) if args.hub_repo else None
+    if args.hub_repo and not token:
+        parser.error(f"--hub-repo needs a token in ${args.hub_token_env}")
+    if args.resumable and token and hub_pull(args.hub_repo, token, save):
+        print(f"took the save point from {args.hub_repo}", flush=True)
+    state = read_state(save) if args.resumable else None
+    if state:
+        changed = recipe_changes(state["recipe"], recipe(args, signature))
+        if changed:
+            parser.error("the save point was made with another recipe: " + "; ".join(changed))
+        from peft import set_peft_model_state_dict
+        from safetensors.torch import load_file
+
+        set_peft_model_state_dict(model, load_file(str(save / "adapter_model.safetensors")))
     trainable = [p for p in model.parameters() if p.requires_grad]
     for param in trainable:
         # The scaler can only unscale float32 gradients.
@@ -190,7 +294,7 @@ def main() -> None:
     optimiser = torch.optim.AdamW(trainable, lr=args.lr, weight_decay=0.0)
     # Planned from the epochs, then cut to what the time limit allows once
     # the first steps show the speed, so the learning rate still ends low.
-    plan = {"steps": max(1, int(len(train) * args.epochs / args.accumulate))}
+    plan = {"steps": state["plan_steps"] if state else max(1, int(len(train) * args.epochs / args.accumulate))}
     warmup = max(1, plan["steps"] // 20)
 
     def rate(step: int) -> float:
@@ -200,6 +304,12 @@ def main() -> None:
 
     schedule = torch.optim.lr_scheduler.LambdaLR(optimiser, rate)
     scaler = torch.amp.GradScaler("cuda", enabled=half == torch.float16)
+    if state:
+        kept = torch.load(save / "trainer.pt", map_location="cpu", weights_only=False)
+        optimiser.load_state_dict(kept["optimiser"])
+        schedule.load_state_dict(kept["schedule"])
+        if kept.get("dtype") == str(half) and kept.get("scaler"):
+            scaler.load_state_dict(kept["scaler"])  # a card of the other kind starts its own scaler
 
     def loss_of(example: dict):
         encoded = encode(example, processor, args.root, args.image_tokens, args.max_len)
@@ -234,21 +344,45 @@ def main() -> None:
         with log.open("a") as fh:
             fh.write(json.dumps(row) + "\n")
 
-    note(event="start", check_loss=round(check_loss(), 4) if check else None, steps=plan["steps"])
+    def save_point(at: tuple[int, int], step: int, skipped: int) -> None:
+        """The adapter, the optimiser and the place in the data, swapped in whole."""
+        fresh = save.with_name(save.name + ".new")
+        shutil.rmtree(fresh, ignore_errors=True)
+        model.save_pretrained(fresh)
+        torch.save({"optimiser": optimiser.state_dict(), "schedule": schedule.state_dict(),
+                    "scaler": scaler.state_dict() if scaler.is_enabled() else None, "dtype": str(half)},
+                   fresh / "trainer.pt")
+        (fresh / "state.json").write_text(json.dumps({
+            "step": step, "plan_steps": plan["steps"], "epoch": at[0], "index": at[1], "skipped": skipped,
+            "recipe": recipe(args, signature), "saved_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+        }, indent=1))
+        swap_in(fresh, save)
+        note(event="save point", step=step, epoch=at[0], index=at[1])
+        if token:
+            hub_push(args.hub_repo, token, save, step)
+            note(event="save point on the hub", step=step)
+
+    note(event="resumed" if state else "start", step=state["step"] if state else 0, steps=plan["steps"],
+         check_loss=round(check_loss(), 4) if check else None)
     model.train()
     trained_from = time.time()
-    rng = random.Random(0)
-    step, seen, skipped, running = 0, 0, 0, []
+    step = state["step"] if state else 0
+    skipped = state["skipped"] if state else 0
+    epoch, index = (state["epoch"], state["index"]) if state else (0, 0)
+    boundary = (epoch, index)  # where the last optimiser step left the data
+    seen, session_steps, running = 0, 0, []
+    last_save = time.time()
+    # A resumable run keeps a quarter of an hour for the last save and its upload.
+    limit = args.hours * 3600 - (900 if args.resumable else 0)
     stop = False
     while step < plan["steps"] and not stop:
-        order = train[:]
-        rng.shuffle(order)
-        for example in order:
-            if time.time() - started > args.hours * 3600:
+        order = epoch_order(train, epoch)
+        for i in range(index, len(order)):
+            if time.time() - started > limit:
                 note(event="time limit", step=step)
                 stop = True
                 break
-            loss = loss_of(example)
+            loss = loss_of(order[i])
             if loss is None:
                 skipped += 1
                 continue
@@ -264,7 +398,9 @@ def main() -> None:
             optimiser.zero_grad(set_to_none=True)
             schedule.step()
             step += 1
-            if step == 3:
+            session_steps += 1
+            boundary = (epoch, i + 1)
+            if session_steps == 3 and not args.resumable:
                 # Leave a quarter of an hour for the last check and the save.
                 per_chat = (time.time() - trained_from) / seen
                 left = args.hours * 3600 - (time.time() - started) - 900
@@ -275,13 +411,23 @@ def main() -> None:
             if step % 10 == 0 or step == plan["steps"]:
                 note(event="step", step=step, loss=round(sum(running) / len(running), 4), lr=schedule.get_last_lr()[0])
                 running = []
-            if step % 50 == 0:
+            if args.resumable and time.time() - last_save > args.save_minutes * 60:
+                save_point(boundary, step, skipped)
+                last_save = time.time()
+            elif not args.resumable and step % 50 == 0:
                 model.save_pretrained(args.out)
             if step >= plan["steps"]:
+                stop = True
                 break
+        else:
+            epoch, index = epoch + 1, 0
+    if args.resumable:
+        # Chats seen since the last optimiser step are seen again next session.
+        save_point(boundary, step, skipped)
     model.save_pretrained(args.out)
     processor.save_pretrained(args.out)
-    note(event="end", step=step, skipped_too_long=skipped, check_loss=round(check_loss(), 4) if check else None)
+    note(event="end", step=step, of=plan["steps"], skipped_too_long=skipped,
+         check_loss=round(check_loss(), 4) if check else None)
 
 
 if __name__ == "__main__":

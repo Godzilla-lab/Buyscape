@@ -439,3 +439,42 @@ def test_a_second_teachers_read_is_tried_where_the_first_named_the_item_wrong(tm
     missed: list[str] = []
     _, tally = train.build([(FAN, [photo])], rows[:1], {}, tmp_path, misread=missed)
     assert missed == ["f1"] and tally == {"teacher wrong about the item": 1}
+
+
+def test_a_resumed_run_sees_the_rest_of_its_pass_and_refuses_another_recipe(tmp_path):
+    import json
+    from types import SimpleNamespace
+
+    from buyscape.testify import sft_lora
+
+    train = [{"id": str(i)} for i in range(50)]
+    first, again = sft_lora.epoch_order(train, 0), sft_lora.epoch_order(train, 0)
+    assert first == again and first != sft_lora.epoch_order(train, 1) and first != train
+    args = SimpleNamespace(model="/kaggle/input/qwen3-vl/transformers/2b-instruct/1", rank=16, alpha=32, lr=1e-4,
+                           epochs=2.0, accumulate=8, image_tokens=576, max_len=4096, held_out=0.05, limit=0,
+                           data="/kaggle/input/x/sft_r6.jsonl")
+    there = sft_lora.recipe(args, "qwen3_vl:2048x28:151936")
+    here = sft_lora.recipe(SimpleNamespace(**{**vars(args), "model": "Qwen/Qwen3-VL-2B-Instruct",
+                                              "data": "/workspace/sft_r6.jsonl"}), "qwen3_vl:2048x28:151936")
+    assert sft_lora.recipe_changes(there, here) == []
+    assert sft_lora.recipe_changes(there, {**here, "lr": 2e-4}) == ["lr: 0.0001 then, 0.0002 now"]
+    config = SimpleNamespace(model_type="qwen3_vl", text_config=SimpleNamespace(hidden_size=2048, num_hidden_layers=28,
+                                                                               vocab_size=151936))
+    assert sft_lora.model_signature(config) == "qwen3_vl:2048x28:151936"
+
+
+def test_a_save_point_is_swapped_in_whole(tmp_path):
+    import json
+
+    from buyscape.testify import sft_lora
+
+    save = tmp_path / "savepoint"
+    save.mkdir()
+    (save / "state.json").write_text(json.dumps({"step": 10}))
+    fresh = tmp_path / "savepoint.new"
+    fresh.mkdir()
+    (fresh / "state.json").write_text(json.dumps({"step": 20}))
+    sft_lora.swap_in(fresh, save)
+    assert sft_lora.read_state(save)["step"] == 20 and not fresh.exists()
+    assert not (tmp_path / "savepoint.old").exists()
+    assert sft_lora.read_state(tmp_path / "missing") is None
