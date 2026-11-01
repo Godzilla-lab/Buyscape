@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo shows tall stacks of used (tokunbo) car tyres piled outside a storefront.",
+      "Shop signage partly visible but not clearly readable; a sign fragment reads '...REWARD FOR PASSION...' and a phone number is faintly visible but blurry.",
+      "No rims or wheels are visible anywhere in the photo despite the seller's claim of selling 'tyres and rim'.",
+      "No single tyre is isolated for close inspection; sidewalls, tread depth, size markings (e.g. 195/65R15) and brand names are not legible on any tyre in the stack.",
+      "Tyres appear used, with visible wear, dirt, and some painted number markings (likely grading/batch marks used by tyre resellers), consistent with imported used tyres sold in bulk.",
+      "Two people are visible on a balcony in the background, unrelated to the tyres."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used car tyres (bulk stock, size/brand unspecified)",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Seller sells 'all kinds of tyres and rim with general car spare parts'",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo 0 shows only tyres; no rims or other spare parts are visible in the frame."
+      },
+      {
+        "claim": "Implied that tyres are in usable condition for resale",
+        "verdict": "unverified",
+        "evidence": "No close-up of tread depth, sidewall cracks, or size/DOT code on any single tyre in photo 0."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Unknown tyre size/diameter, which is the primary price driver",
+        "proof": "Close-up photo of a sidewall showing size code (e.g. 205/55R16) for the specific tyre being offered",
+        "if_unproven": "cannot be priced generically; price depends entirely on size"
+      },
+      {
+        "risk": "Unknown brand/tread pattern and remaining tread depth",
+        "proof": "Close-up of tread face and sidewall brand logo for the specific tyre",
+        "if_unproven": "priced as generic low-grade used tyre, worst case"
+      },
+      {
+        "risk": "No rims visible despite claim of selling rims",
+        "proof": "Photo of actual rims/wheels in stock",
+        "if_unproven": "rim claim treated as unsubstantiated, not priced"
+      },
+      {
+        "risk": "Possible hidden sidewall damage, bulges, or repairs on individual units within the stack",
+        "proof": "Individual photos/video of the specific tyre(s) intended for sale, rotated to show full sidewall",
+        "if_unproven": "priced as damaged/worst-case condition"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the specific tyre size code on the sidewall for the item being quoted",
+      "Close-up of tread depth and sidewall condition (no cracks/bulges) for that specific tyre",
+      "Photo of any rims actually in stock, if rims are part of the deal",
+      "Confirmation of quantity and whether price is per tyre or per set"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo shows an undifferentiated bulk stack of used tyres with no readable size, brand, or condition for any single item, so even a worst-case price cannot be assigned without a close-up of the specific tyre being offered."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 18369,
+    "input_tokens": 2521,
+    "output_tokens": 1731,
+    "cost_usd": 0.019193,
+    "replayed": false,
+    "fixture_key": "de1fd3baee9f3011499cd76b423c6f6d",
+    "error": null
+  }
+}

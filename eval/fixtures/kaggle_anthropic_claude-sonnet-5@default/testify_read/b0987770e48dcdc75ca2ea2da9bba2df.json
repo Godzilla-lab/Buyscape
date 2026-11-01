@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 and Photo 1 both show the same single paperback book held in a hand.",
+      "Cover reads 'Becoming Like Jesus: God's Key To Abundant Living' by Gbile Akanni.",
+      "A watermark reading 'EDENBOOKSTORE' and 'POSTED ON JIJI' appears on both images.",
+      "No other book titles, spines, or a stack/pile of books is visible in either photo.",
+      "Cover appears glossy and corners look unworn, but no interior pages or spine wear are shown."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "paperback book",
+      "brand": "Gbile Akanni (author)",
+      "model": "Becoming Like Jesus: God's Key To Abundant Living",
+      "read_from": [
+        "photo 0 cover text",
+        "photo 1 cover text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "A collection of Christian books across many genres like marriage, spiritual growth and more",
+        "verdict": "contradicted",
+        "evidence": "Both photo 0 and photo 1 show only one single title ('Becoming Like Jesus'); no other books, genres, or a collection/stack is visible."
+      },
+      {
+        "claim": "Book condition (implied usable/good) ",
+        "verdict": "unverified",
+        "evidence": "Cover looks clean in both photos but no shot of spine, back cover, or interior pages to confirm condition."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Seller claims a multi-book collection but only one title is photographed; the rest of the described collection may not exist or may differ in title/condition.",
+        "proof": "A single photo showing all books in the collection laid out together, each cover visible.",
+        "if_unproven": "priced as a single copy of 'Becoming Like Jesus' only, not a collection"
+      },
+      {
+        "risk": "Interior condition (missing/torn pages, water damage, writing) cannot be seen from cover-only photos.",
+        "proof": "Photo of the spine, back cover, and a few interior pages.",
+        "if_unproven": "priced as used/worn condition, not as new"
+      },
+      {
+        "risk": "Possible duplicate/stock photo use by a bookstore reseller (watermark suggests a store listing, not necessarily the seller's own stock in hand).",
+        "proof": "A photo of the book next to a handwritten note with today's date or the seller's name, confirming current possession.",
+        "if_unproven": "unverifiable_remote, treated as standard secondhand risk"
+      }
+    ],
+    "proof_requests": [
+      "Photo showing all the books claimed to be in the 'collection', laid out together.",
+      "Photo of the back cover and spine of this book.",
+      "Photo of a few interior pages to confirm completeness and condition."
+    ],
+    "decision": "price",
+    "reason": "The photos clearly identify one specific book by title and author, so it can be priced at its worst-case condition as a single copy; the broader 'collection' claim is unsupported by any photo and is treated as not present for pricing purposes."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 16325,
+    "input_tokens": 2696,
+    "output_tokens": 1452,
+    "cost_usd": 0.016753,
+    "replayed": false,
+    "fixture_key": "b0987770e48dcdc75ca2ea2da9bba2df",
+    "error": null
+  }
+}

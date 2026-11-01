@@ -1,0 +1,89 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Two LPG gas cylinders shown side by side on a rack with other red cylinders in background.",
+      "One cylinder is bright orange with glossy paint and a netted lower section; valve is brass colored and intact.",
+      "Second cylinder is pale/beige, with visible scuffing, faded paint and a worn valve, no netting visible.",
+      "No size, manufacturer, or test-date markings are legible on either cylinder in either photo.",
+      "Watermark reads 'POSTED ON JIJI' and 'HITHE TECHNOLOGIES', which is a listing watermark, not a product label.",
+      "Seller's text says 'Neatly used 12.5kg Gas cylinder' (singular) but two cylinders of differing condition are pictured."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "12.5kg LPG gas cylinder",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0",
+        "photo 1"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Neatly used",
+        "verdict": "unverified",
+        "evidence": "Orange cylinder looks relatively clean in photo 0/1, but the second cylinder shows wear, scuffing and faded paint, contradicting a uniform 'neatly used' description."
+      },
+      {
+        "claim": "12.5kg capacity",
+        "verdict": "unverifiable_remote",
+        "evidence": "No capacity stamp or size marking is visible on either cylinder in photo 0 or photo 1."
+      },
+      {
+        "claim": "Implied single item for sale",
+        "verdict": "contradicted",
+        "evidence": "Two distinct cylinders (different color, finish, and wear) appear in both photos, making it unclear which one is actually being offered."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Cylinder may be empty or only partially filled with gas.",
+        "proof": "A photo of the gas gauge/weighing receipt or a video of gas flow/weight on a scale.",
+        "if_unproven": "priced as empty, gas not included"
+      },
+      {
+        "risk": "Valve or thread may be damaged or leaking, unsafe to use.",
+        "proof": "Close-up photo of the valve threads and a leak-test (soapy water) video or photo.",
+        "if_unproven": "priced as not verified for safety, treated as needing valve inspection/replacement"
+      },
+      {
+        "risk": "Cylinder may be past its safety test/expiry date, which is usually stamped near the collar.",
+        "proof": "Close-up photo of the stamped manufacture/test date on the cylinder neck.",
+        "if_unproven": "priced as expired/uncertified until date is shown"
+      },
+      {
+        "risk": "Internal corrosion or dents not visible from outside photos.",
+        "proof": "Photo of the cylinder base and any dent/rust spots, plus a weight-check against the tare weight stamp.",
+        "if_unproven": "priced as having possible internal wear, worst case condition"
+      },
+      {
+        "risk": "Ambiguity about which of the two cylinders is actually for sale.",
+        "proof": "A single clear photo of only the cylinder being sold, with no other units in frame.",
+        "if_unproven": "priced based on the more worn example shown, since it is unclear which is offered"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the capacity/size stamp and manufacture/test date near the cylinder collar.",
+      "A single photo showing only the cylinder actually for sale (not both).",
+      "Photo or video showing the valve being opened/closed and any hiss or leak check.",
+      "Weighing photo showing current gas weight versus tare weight stamped on the cylinder."
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a 12.5kg-type LPG gas cylinder by general appearance, but capacity, gas content, valve safety and certification date are all unverified, so it must be priced at worst case (empty, unverified safety) until proof is given."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 18252,
+    "input_tokens": 3214,
+    "output_tokens": 1583,
+    "cost_usd": 0.019099,
+    "replayed": false,
+    "fixture_key": "47583a1b9de827685942803cdc32ead7",
+    "error": null
+  }
+}

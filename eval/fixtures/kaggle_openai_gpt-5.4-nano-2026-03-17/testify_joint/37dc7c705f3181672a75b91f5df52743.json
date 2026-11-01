@@ -1,0 +1,68 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0 shows a single rectangular solar panel with a grid of dark cells and white frame.",
+      "No visible wattage rating, brand logo, serial/model label, or sticker is readable in the photo provided.",
+      "No close-up of the junction box, connectors, or back label is shown."
+    ],
+    "identity": {
+      "status": "unknown",
+      "kind": "solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Contact us for ur Solar Energy Solution...",
+        "verdict": "unverifiable_remote",
+        "evidence": "Seller text only; photo does not show any matching offer details (wattage/brand/condition)."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Wattage/size is unknown; price depends heavily on whether it\u2019s 300W vs 400W vs 600W+.",
+        "proof": "Ask for a clear close-up photo of the panel\u2019s label/sticker showing wattage (W), brand, and model (usually on the back or near the frame).",
+        "if_unproven": "Price at the worst-case comparable for the lowest wattage shown in the market list (treat as a low-watt used panel)."
+      },
+      {
+        "risk": "Condition/working status is unknown (could be damaged, cracked cells, or underperforming).",
+        "proof": "Ask for a short video of the panel under sunlight plus an output reading from a multimeter/solar tester (or a simple I-V curve reading if they have a tester).",
+        "if_unproven": "Price as not guaranteed/used-worst-case (assume reduced performance)."
+      },
+      {
+        "risk": "Brand authenticity is unknown (photo doesn\u2019t show Canadian Solar/Longi/Jinko/etc.).",
+        "proof": "Ask for a close-up of the brand/model text on the frame/back label.",
+        "if_unproven": "Price as generic/unknown used panel rather than premium brand."
+      },
+      {
+        "risk": "Missing accessories/compatibility (MC4 connectors, junction box condition, cable length) can affect usability.",
+        "proof": "Ask for photos of the junction box and the connector type (MC4 or other) and whether cables are included.",
+        "if_unproven": "Price as panel only (no guaranteed cables/connectors)."
+      }
+    ],
+    "proof_requests": [
+      "Send a clear close-up photo of the panel\u2019s back label/sticker showing: brand, model, rated wattage (W), voltage/current (Vmp/Imp), and serial number.",
+      "Send a close-up photo of the junction box and connectors (MC4 type) and confirm whether cables are included.",
+      "Send a short test clip showing output under sunlight (or a solar tester reading) to confirm it\u2019s working and approximate performance."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo shows a solar panel but the key pricing driver (brand/model/wattage label) is not readable, so a worst-case price cannot be reliably matched to the correct comparable.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_joint",
+    "latency_ms": 4279,
+    "input_tokens": 2613,
+    "output_tokens": 700,
+    "cost_usd": 0.001398,
+    "replayed": false,
+    "fixture_key": "37dc7c705f3181672a75b91f5df52743",
+    "error": null
+  }
+}
