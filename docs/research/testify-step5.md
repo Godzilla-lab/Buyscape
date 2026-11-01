@@ -446,6 +446,32 @@ much. The 4B names the item better and lands far off less often; the 2B is
 the more careful buyer. Nemotron, Gemini and Claude answer the same test
 items next, for the comparison that matters.
 
+Nemotron, a 120B model, has now answered all 679 (1 Nov). Six of its
+answers broke the answer format and count against it, as on dev; Gemini's
+and Claude's wait for Kaggle's quota (Claude's is half done and left out
+until it finishes).
+
+| On 679 unseen items | Run 4, 2B | Nemotron 3.5 Super (120B) |
+|---|---|---|
+| Gave a price | 31% | **43%** |
+| Asking price inside the range | **52%** | 43% |
+| Offered above the asking price | **14%** | 25% |
+| Priced answers the rules mark wrong, unread | **20** | 30 |
+| Right about the item, judged | 94% | **97%** |
+| Items overpaid | **29** | 73 |
+| Largest overpayment, naira | **300,000** | 14,550,000 |
+| Overpaid per item, naira | **2,560** | 54,059 |
+| The same, leaving out each one's five dearest | **1,205** | 14,207 |
+| Expected loss per item, naira | **3,873** | 55,602 |
+
+On items no one tuned on, the 2B loses about a fourteenth of what Nemotron
+loses per item, and about a twelfth with each one's five worst items left
+out, so the gap is not one disaster: Nemotron offered above the asking price
+on 73 items to the 2B's 29. Nemotron prices more items and names them a
+little better; the 2B prices fewer but closer, and is the better buyer.
+Nemotron's worst was ₦15 million offered for a 15kVA Stamford alternator
+listed at ₦450,000.
+
 ## The fifth training run: every advert (1 Nov)
 
 The 2B again, on `sft_r5`: every training advert, 1,443 (957 in run 4),

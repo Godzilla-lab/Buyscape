@@ -729,6 +729,15 @@ def testify_truths(
         console.print(f"  {n:4d}  {split:5s} {kind}")
 
 
+def _unfinished(rows: list[dict]) -> str | None:
+    """Why a run is not ready to compare: calls that never got an answer, a used-up quota or a
+    server down, are not the model's to be scored on. None when it is ready."""
+    from .testify.score import outcome
+
+    lost = sum(outcome(r) == "error" for r in rows)
+    return f"incomplete: {lost} of {len(rows)} calls got no answer" if lost > max(2, len(rows) // 100) else None
+
+
 @app.command("testify-compare")
 def testify_compare(
     split: str = typer.Option("dev"),
@@ -759,6 +768,9 @@ def testify_compare(
     models, money = {}, {}
     for run in sorted((ROOT / "eval" / "testify" / "runs").glob(f"*/{split}.jsonl")):
         rows = [json.loads(line) for line in run.read_text().splitlines()]
+        if why := _unfinished(rows):
+            console.print(f"[yellow]{run.parent.name} left out, {why}[/yellow]")
+            continue
         repeat = run.with_name(f"{split}.repeat1.jsonl")
         again = [json.loads(line) for line in repeat.read_text().splitlines()] if repeat.exists() else None
         models[run.parent.name] = per_item(rows, items, again)
@@ -818,8 +830,12 @@ def _stage_tables(split: str, items: dict, money: dict) -> str:
     facts = {r["id"]: r for r in load(facts_path)}
     built = load(ROOT / "eval" / "testify" / "constructed.jsonl")
     read_rows, pick_rows = [], []
+    left_out = []
     for run in sorted(runs.glob(f"*/{split}.jsonl")):
         name, rows = run.parent.name, load(run)
+        if why := _unfinished(rows):
+            left_out.append(f"{name}: {why}")
+            continue
         s = score(rows, items)
         noise = against_repeat(rows, load(run.with_name(f"{split}.repeat1.jsonl")), items)
         t = truths.score(load(run.with_name(f"{split}.truth_contra.jsonl")), facts)
@@ -849,6 +865,7 @@ def _stage_tables(split: str, items: dict, money: dict) -> str:
         "Lie raised the price (asking again raised it) | Expected loss per item, naira |",
         "|---|---|---|---|---|---|---|", *pick_rows, "",
         "Expected loss is at the first lost-deal cost in compare.json; it is not any business's own number.", "",
+        *(["Not compared yet: " + "; ".join(left_out) + ".", ""] if left_out else []),
     ])
 
 
