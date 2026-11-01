@@ -86,12 +86,14 @@ def kind_of(advert: dict, slug: str) -> str:
     return (named or slug.replace("-", " ")).lower()
 
 
-def page(slug: str, number: int, region: str, client: httpx.Client) -> list[tuple[Listing, dict]] | None:
-    """One listing page as (listing, raw advert) pairs, or None when the page fails."""
+def page(slug: str, number: int, region: str, client: httpx.Client) -> tuple[list[tuple[Listing, dict]], int] | None:
+    """One listing page as (listing, raw advert) pairs and the listing's page count, or None when it fails."""
     r = client.get(BASE, params={"region_slug": region, "slug": slug, "page": str(number)})
     if r.status_code != 200:
         return None
-    adverts = (r.json().get("adverts_list") or {}).get("adverts") or []
+    listing_info = r.json().get("adverts_list") or {}
+    adverts = listing_info.get("adverts") or []
+    total = int(listing_info.get("total_pages") or 0)
     out = []
     for advert in adverts:
         price = (advert.get("price_obj") or {}).get("value")
@@ -113,7 +115,7 @@ def page(slug: str, number: int, region: str, client: httpx.Client) -> list[tupl
             fetched_at=time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         )
         out.append((listing, advert))
-    return out
+    return out, total
 
 
 def why_not(listing: Listing) -> str | None:
@@ -126,7 +128,20 @@ def why_not(listing: Listing) -> str | None:
 
 
 def _progress(out_dir: Path, region: str, slug: str) -> Path:
-    return out_dir / ".progress" / region / slug
+    return out_dir / ".progress" / region / f"{slug}.json"
+
+
+def order(total: int, region: str, slug: str) -> list[int]:
+    """Every page of the listing in a fixed random order for this city and category.
+
+    The first pages are paid promotions and the newest posts, mostly dealers; a
+    sample across the whole listing sees every kind and price the market has.
+    The same order every run, so a stopped crawl resumes where it was."""
+    import random
+
+    pages = list(range(1, total + 1))
+    random.Random(f"{region}/{slug}").shuffle(pages)
+    return pages
 
 
 def crawl(
@@ -141,9 +156,10 @@ def crawl(
     progress=None,
     client: httpx.Client | None = None,
 ) -> dict[str, int]:
-    """Page through one category in one city, keeping new second-hand adverts.
+    """Visit `pages` pages of one category in one city, picked at random across
+    its whole listing, keeping new second-hand adverts.
 
-    Resumes after the last page finished, and saves after every page, so a
+    Resumes with the pages not yet visited, and saves after every page, so a
     stopped run loses one page at most. `avoid` is the benchmark's adverts and
     `held` the training adverts already cached elsewhere. At most `keep` new
     adverts a run, so one huge category never crowds out the rest."""
@@ -152,22 +168,29 @@ def crawl(
     path = out_dir / f"{slug}.json"
     rows: dict[str, dict] = {r["id"]: r for r in json.loads(path.read_text())} if path.exists() else {}
     mark = _progress(out_dir, region, slug)
-    start = int(mark.read_text()) + 1 if mark.exists() else 1
+    visited: set[int] = set(json.loads(mark.read_text())) if mark.exists() else set()
     tally = {"kept": 0, "pages": 0, "in the benchmark": 0, "held already": 0, "buyer, not seller": 0,
              "brand new or condition not stated": 0, "failed pages": 0}
     own = client is None
     client = client or httpx.Client(headers={"User-Agent": UA}, timeout=30.0)
     stale = 0
     try:
-        for number in range(start, pages + 1):
-            found = _patiently(lambda: page(slug, number, region, client))
-            if found is None:
+        first = _patiently(lambda: page(slug, 1, region, client))
+        if first is None:
+            tally["failed pages"] += 1
+            return tally
+        todo = [n for n in order(max(first[1], 1), region, slug) if n not in visited][: max(0, pages - len(visited))]
+        for number in todo:
+            got = first if number == 1 else _patiently(lambda: page(slug, number, region, client))
+            if got is None:
                 tally["failed pages"] += 1
                 if tally["failed pages"] >= 3:
                     break
                 continue
+            found = got[0]
             if not found:
-                break
+                visited.add(number)
+                continue
             unseen = [listing for listing, _ in found
                       if listing.id not in avoid and listing.id not in held and listing.id not in rows]
             fresh = []
@@ -192,8 +215,9 @@ def crawl(
                     rows[listing.id] = row
                     tally["kept"] += 1
             path.write_text(json.dumps(list(rows.values()), indent=1))
+            visited.add(number)
             mark.parent.mkdir(parents=True, exist_ok=True)
-            mark.write_text(str(number))
+            mark.write_text(json.dumps(sorted(visited)))
             tally["pages"] += 1
             stale = 0 if unseen else stale + 1
             if progress:

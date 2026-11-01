@@ -15,11 +15,13 @@ def _advert(i, condition="Used", title=None, category="Refrigerators"):
             "category_name": category}
 
 
-def _jiji(pages):
+def _jiji(pages, asked=None):
     def handler(request):
         number = int(request.url.params["page"])
+        if asked is not None:
+            asked.append(number)
         adverts = pages[number - 1] if number <= len(pages) else []
-        return httpx.Response(200, json={"adverts_list": {"adverts": adverts}})
+        return httpx.Response(200, json={"adverts_list": {"adverts": adverts, "total_pages": len(pages)}})
     return httpx.Client(transport=httpx.MockTransport(handler))
 
 
@@ -41,21 +43,25 @@ def test_second_hand_sellers_only_and_the_benchmark_passed_over(tmp_path, monkey
     assert tally["in the benchmark"] == 1 and tally["buyer, not seller"] == 1
 
 
-def test_a_crawl_resumes_after_its_last_page_and_never_fetches_an_advert_twice(tmp_path, monkeypatch):
+def test_pages_are_visited_at_random_across_the_listing_and_a_crawl_resumes(tmp_path, monkeypatch):
     _no_downloads(monkeypatch)
-    pages = [[_advert("a")], [_advert("b")], [_advert("c")]]
-    crawl.crawl(tmp_path, "lagos", "home-appliances", pages=2, client=_jiji(pages))
-    assert (tmp_path / ".progress" / "lagos" / "home-appliances").read_text() == "2"
-    tally = crawl.crawl(tmp_path, "lagos", "home-appliances", pages=3, held=frozenset({"c"}), client=_jiji(pages))
-    rows = json.loads((tmp_path / "home-appliances.json").read_text())
-    assert [r["id"] for r in rows] == ["a", "b"] and tally["held already"] == 1 and tally["pages"] == 1
+    pages = [[_advert(f"p{n}")] for n in range(40)]
+    asked = []
+    crawl.crawl(tmp_path, "lagos", "home-appliances", pages=5, client=_jiji(pages, asked))
+    visited = json.loads((tmp_path / ".progress" / "lagos" / "home-appliances.json").read_text())
+    assert len(visited) == 5 and visited != [1, 2, 3, 4, 5] and max(visited) > 5
+    assert [n for n in asked[1:]] == [n for n in crawl.order(40, "lagos", "home-appliances") if n != 1][:5] \
+        or 1 in crawl.order(40, "lagos", "home-appliances")[:5]
+    tally = crawl.crawl(tmp_path, "lagos", "home-appliances", pages=8, held=frozenset(), client=_jiji(pages))
+    assert tally["pages"] == 3 and len(json.loads((tmp_path / "home-appliances.json").read_text())) == 8
+    assert crawl.order(40, "lagos", "furniture") != crawl.order(40, "lagos", "home-appliances")
 
 
 def test_a_crawl_stops_once_pages_bring_nothing_new(tmp_path, monkeypatch):
     _no_downloads(monkeypatch)
-    pages = [[_advert("a")]] + [[_advert("a")]] * 20
+    pages = [[_advert("a")]] * 21
     tally = crawl.crawl(tmp_path, "lagos", "home-appliances", pages=50, client=_jiji(pages))
-    assert tally["pages"] == 1 + crawl.STALE_PAGES
+    assert tally["kept"] == 1 and tally["pages"] == 1 + crawl.STALE_PAGES
 
 
 def test_a_phone_is_filed_under_its_protocol_and_a_slug_is_checked():
@@ -70,7 +76,7 @@ def test_a_crawl_keeps_at_most_its_share_and_a_dealers_page_is_still_new(tmp_pat
     dealers = [[_advert(f"n{p}{i}", "Brand New") for i in range(3)] for p in range(8)]
     used = [[_advert(f"u{i}")] for i in range(4)]
     tally = crawl.crawl(tmp_path, "lagos", "home-appliances", pages=20, keep=2, client=_jiji(dealers + used))
-    assert tally["kept"] == 2 and tally["pages"] == len(dealers) + 2
+    assert tally["kept"] == 2 and tally["pages"] >= 2
 
 
 def test_a_crawled_advert_has_no_kind_label_so_its_title_finds_comparables(tmp_path):

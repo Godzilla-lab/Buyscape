@@ -124,8 +124,10 @@ replay, and the run says so rather than failing silently.
   model gets wrong: second-hand adverts with several others for the same item
   (the price step learns from those), photos where a label or plate can be
   read, items with and without a brand in view, bundles, rare kinds, faulty
-  and scrap items, and final sale prices above all. Crawl wide, then choose
-  what the teacher reads: the read is the costly step.
+  and scrap items, and final sale prices above all. Variety is the point:
+  every kind, every price level, working and broken, sampled at random across
+  a listing rather than its first pages. Crawl wide, then choose what the
+  teacher reads: the read is the costly step.
 - **Never deploy without an explicit yes.** Draft deploys count as deploys.
 - **No em dashes or en dashes in any shipped text**, code comments included.
 - Anything tenant-specific belongs in `tenants/`, never in code. If onboarding a
