@@ -1,0 +1,84 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Large black office copier wrapped in clear plastic sheeting",
+      "Model marking '224e' visible on the front in photo 0 and photo 1",
+      "A test page with grayscale patches and sample text rests on top of the machine",
+      "Watermark 'SMATECH MEGA EQUIPMENT' overlaid across both photos",
+      "No brand logo is legible on the machine",
+      "No power cable, paper trays, or output trays are clearly shown",
+      "The machine is not shown powered on or making a copy"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "office photocopier",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0",
+        "photo 1"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Germany use",
+        "verdict": "unverifiable_remote",
+        "evidence": "No origin label, voltage plate, or country marking is readable in the photos"
+      },
+      {
+        "claim": "Print Speed 22cpm A4 & 14cpm A3 Print",
+        "verdict": "unverified",
+        "evidence": "The marking 224e is visible but print speed is not demonstrated; the spec sheet on top is too blurry to confirm"
+      },
+      {
+        "claim": "Resolution 1800 x 600 dpi",
+        "verdict": "unverified",
+        "evidence": "Resolution is not visible or demonstrable from the photos"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Machine does not power on or is otherwise non-functional",
+        "proof": "Video of the copier powering up, warming up, and producing a test copy",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Scanner or print engine defective, producing poor copy quality",
+        "proof": "Video of a document being scanned and copied, with the resulting copy shown",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Toner, drum, or developer near end of life",
+        "proof": "Photo of the control panel showing page count and toner status",
+        "if_unproven": "as needing immediate consumables"
+      },
+      {
+        "risk": "Paper feed or fuser unit worn, causing jams",
+        "proof": "Video of multiple copies feeding through without jams",
+        "if_unproven": "as needing repair"
+      }
+    ],
+    "proof_requests": [
+      "Video of the copier powering on and making a copy",
+      "Photo of the control panel showing page count and toner levels",
+      "Close-up of any brand or model plate on the machine"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as an office photocopier with the marking 224e visible in the photos; even with every function unproven, it can be priced at its worst case as non-working."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 19586,
+    "input_tokens": 2400,
+    "output_tokens": 3879,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "95c12df4e0ca819802487eea2fb9e310",
+    "error": null
+  }
+}

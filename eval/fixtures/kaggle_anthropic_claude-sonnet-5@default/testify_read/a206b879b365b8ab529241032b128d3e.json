@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Single photo showing a motorcycle/scooter tyre held by a hand.",
+      "Tread pattern is visible and appears to have decent tread depth with small rubber 'nibs' still present, suggesting light use or near-new.",
+      "No sidewall markings (brand, size, DOT code) are visible in the frame.",
+      "A watermark 'CENOCAUTOS' overlays the image, seller-added, not proof of condition.",
+      "No shots of the opposite sidewall, bead, or inner surface for damage/repair check."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "scooter/motorcycle tyre",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 tread view"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Fairly used scooter motorcycle tyre",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows tread wear consistent with some use, but no sidewall or size data to confirm make/age or cross-check against claim."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Tyre size/fitment unknown, which is the main price driver for tyres",
+        "proof": "Clear photo of the sidewall showing size markings (e.g., 110/70-12) and brand name",
+        "if_unproven": "cannot be priced as no comparable size class can be assigned"
+      },
+      {
+        "risk": "Tyre age and rubber hardening/cracking not visible from tread-only shot",
+        "proof": "Photo of sidewall DOT date code and close-up of sidewall for cracks",
+        "if_unproven": "priced as old stock risk, not fresh rubber"
+      },
+      {
+        "risk": "Possible puncture repairs or internal damage not visible",
+        "proof": "Photo of inner tyre surface and bead area",
+        "if_unproven": "priced as unverified condition, assume possible repair"
+      },
+      {
+        "risk": "Actual tread depth not measurable from angle shown",
+        "proof": "Photo with tread depth gauge or coin for scale",
+        "if_unproven": "priced as average worn tyre, not near-new"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the sidewall showing tyre size and brand name",
+      "Photo of DOT date code for age verification",
+      "Photo of the opposite side and inner bead for damage/repair check",
+      "Photo with a coin or ruler against tread for depth reference"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The tyre's size and brand, which are essential to any price estimate, are not visible in the single photo provided, so even a worst-case price cannot be set without a sidewall shot."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 15144,
+    "input_tokens": 2066,
+    "output_tokens": 1290,
+    "cost_usd": 0.013873,
+    "replayed": false,
+    "fixture_key": "a206b879b365b8ab529241032b128d3e",
+    "error": null
+  }
+}
