@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Blue manual pallet jack on dirt ground",
+      "Only one pallet jack is visible in photo 0",
+      "White capacity/brand label on the head is present but text is not legible",
+      "Forks show wear, scuffs, and chipped paint",
+      "Background includes a generator, cardboard box, plastic bucket, and a person sitting"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "manual pallet jack",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Imported pallet jack from usa",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo 0 shows the jack but no origin markings, labels, or documents are readable"
+      },
+      {
+        "claim": "two pallet jacks imported from usa",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows only one pallet jack"
+      },
+      {
+        "claim": "2.2 tons and 3 tons",
+        "verdict": "unverified",
+        "evidence": "The capacity plate on the jack head is visible but unreadable in photo 0"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual load capacity is unknown",
+        "proof": "Close-up photo of the capacity/nameplate on the jack head",
+        "if_unproven": "as lowest common capacity"
+      },
+      {
+        "risk": "Jack may not pump, lift, or hold pressure",
+        "proof": "Short video of the jack raising and lowering under load",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Only one jack exists despite seller claiming two",
+        "proof": "Photo showing both jacks together",
+        "if_unproven": "as single unit"
+      },
+      {
+        "risk": "Imported-from-USA claim is false",
+        "proof": "Shipping or customs documents",
+        "if_unproven": "as locally sourced used equipment"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of the capacity label/nameplate on the jack head",
+      "Video of the pallet jack lifting and lowering a load",
+      "Photo showing both pallet jacks if two are for sale",
+      "Import or shipping documents if origin affects price"
+    ],
+    "decision": "price",
+    "reason": "The item is clearly a manual pallet jack, so it can be priced at its worst case as a single used unit with unknown capacity and unverified function; the seller's multi-jack and capacity claims are unproven."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 9827,
+    "input_tokens": 1853,
+    "output_tokens": 1771,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "52fbf7464b61aaef266038ec1ad63fc3",
+    "error": null
+  }
+}
