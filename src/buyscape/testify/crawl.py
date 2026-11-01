@@ -23,7 +23,7 @@ from pathlib import Path
 
 import httpx
 
-from ..evalset.jiji import BASE, UA, _attrs, _image_urls, _is_used, Listing, download_media
+from ..evalset.jiji import BASE, UA, Listing, _attrs, _image_urls, _is_used, _url_width, download_media
 from .fetch import _from_page, _patiently
 from .schema import WANTED
 
@@ -63,6 +63,10 @@ CATEGORIES: dict[str, tuple[str, str | None]] = {
     "medical-equipment": ("small_goods", None),
     "lighting": ("small_goods", None),
 }
+
+# Photos this wide or wider read a rating plate; a listing offering them
+# saves opening the advert's own page, the slow part on a home connection.
+SHARP = 700
 
 # A run of pages showing no advert not seen before means the listing has
 # wrapped or ended. A page of dealers' new stock is still a new page.
@@ -116,6 +120,12 @@ def page(slug: str, number: int, region: str, client: httpx.Client) -> tuple[lis
         )
         out.append((listing, advert))
     return out, total
+
+
+def sharp_enough(urls: list[str], max_photos: int) -> bool:
+    """Whether the listing already offers enough photos wide enough to read a plate."""
+    wanted = urls[:max_photos]
+    return len(wanted) >= min(max_photos, 2) and min(_url_width(u) for u in wanted) >= SHARP
 
 
 def why_not(listing: Listing) -> str | None:
@@ -180,6 +190,8 @@ def crawl(
             tally["failed pages"] += 1
             return tally
         todo = [n for n in order(max(first[1], 1), region, slug) if n not in visited][: max(0, pages - len(visited))]
+        if progress:
+            progress(f"{region} {slug}: {first[1]} pages listed, visiting {len(todo)} of them at random")
         for number in todo:
             got = first if number == 1 else _patiently(lambda: page(slug, number, region, client))
             if got is None:
@@ -203,9 +215,12 @@ def crawl(
                     tally[reason] += 1
                 else:
                     fresh.append((listing, advert))
+            if progress and fresh:
+                progress(f"{region} {slug} page {number}: {len(fresh)} second-hand adverts, fetching their photos")
             for listing, _ in fresh:
-                bigger = _from_page(listing, client) if listing.url else []
-                listing.image_urls = (bigger or listing.image_urls)[:max_photos]
+                if not sharp_enough(listing.image_urls, max_photos) and listing.url:
+                    listing.image_urls = _from_page(listing, client) or listing.image_urls
+                listing.image_urls = listing.image_urls[:max_photos]
             download_media([listing for listing, _ in fresh], out_dir / "media", client=client)
             for listing, advert in fresh:
                 if listing.media:

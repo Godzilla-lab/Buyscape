@@ -93,3 +93,15 @@ def test_a_crawled_advert_has_no_kind_label_so_its_title_finds_comparables(tmp_p
     (raw / "home-appliances.json").write_text(j.dumps([row]))
     [item] = wider_items(tmp_path, "testify_crawl")
     assert item.answer.kind is None and item.answer.identity.text == "home appliances" and item.split == "train"
+
+
+def test_the_advert_page_is_opened_only_when_the_listing_photos_are_small():
+    import base64
+
+    def url(width):
+        code = base64.b64encode(f"{width}-{width}-abc".encode()).decode().rstrip("=")
+        return f"https://pictures-nigeria.jijistatic.net/1_{code}.webp"
+
+    assert crawl.sharp_enough([url(800), url(1000), url(720)], 3)
+    assert not crawl.sharp_enough([url(300), url(1000)], 3)
+    assert not crawl.sharp_enough([url(1000)], 3)
