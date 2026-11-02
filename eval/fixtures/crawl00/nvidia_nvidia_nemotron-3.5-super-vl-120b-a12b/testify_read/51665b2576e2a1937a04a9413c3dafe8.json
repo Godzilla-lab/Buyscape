@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Orange iPhone with diagonal dual-camera system held in hand",
+      "White grading label on back reads iPhone 13pro, 256 GB, Sierra Blue, Grade A, Battery 99%",
+      "Bottom edge shows Lightning port and speaker grilles",
+      "Side edge shows volume buttons, mute switch, and SIM tray",
+      "Seller claims neatness 100% and battery capacity 100%",
+      "Watermark DANNY TUNEZ GADGETS visible across photos"
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "smartphone",
+      "brand": "Apple",
+      "model": "iPhone 13pro",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Neatness 100%",
+        "verdict": "unverified",
+        "evidence": "Photos show clean exterior but screen and full condition not visible"
+      },
+      {
+        "claim": "Battery capacity 100%",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 label reads Battery: 99%"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Screen may have cracks, dead pixels, or touch issues not visible in photos",
+        "proof": "Photo or video of the screen powered on showing full display and touch response",
+        "if_unproven": "as screen faulty"
+      },
+      {
+        "risk": "Label says iPhone 13pro but dual-camera body suggests iPhone 13 or 13 mini",
+        "proof": "Photo of Settings > General > About showing exact model, or clear back photo of all cameras",
+        "if_unproven": "as iPhone 13 non-Pro"
+      },
+      {
+        "risk": "Face ID or front sensors may not work",
+        "proof": "Video of Face ID enrollment or unlock",
+        "if_unproven": "as Face ID not working"
+      },
+      {
+        "risk": "iCloud activation lock or carrier lock may be active",
+        "proof": "Screenshot of Settings showing no activation lock and carrier status",
+        "if_unproven": "as locked"
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of Settings > General > About to confirm exact model and iOS version",
+      "Video of screen powered on and Face ID unlock",
+      "Screenshot of Battery Health in Settings"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as an Apple iPhone from the label and camera layout, so it can be priced at its worst case despite unverified screen, battery, and lock status."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 17738,
+    "input_tokens": 2907,
+    "output_tokens": 3131,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "51665b2576e2a1937a04a9413c3dafe8",
+    "error": null
+  }
+}

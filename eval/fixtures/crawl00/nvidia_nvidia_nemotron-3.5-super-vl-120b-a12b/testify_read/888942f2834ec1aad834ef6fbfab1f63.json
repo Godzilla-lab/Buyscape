@@ -1,0 +1,106 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a silver laptop with a black keyboard and large trackpad; screen displays a lock screen dated Wed Oct 29 08:18; a pink sticky note is attached to the palm rest.",
+      "Photo 1 shows the same laptop from a slightly different angle; the pink sticky note lists handwritten specs including MacBook Pro 14in 2021, Apple M1 Pro, 16GB Ram, 512GB SSD, Touch ID, and Space Gray.",
+      "Photo 2 shows the macOS About window: MacBook Pro, 14-inch, 2021; Chip: Apple M1 Pro; Memory: 16 GB; Serial number: NGPN7DR66F; macOS Tahoe Version 26.0; Storage: 466.28 GB available of 494.38 GB; Display: Built-in Liquid Retina XDR Display 14-inch (3024 x 1964)."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Apple",
+      "model": "MacBook Pro 14-inch 2021 M1 Pro",
+      "read_from": [
+        "photo 2 screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "MacBook Pro 2021 M1 Pro",
+        "verdict": "supported",
+        "evidence": "photo 2 About screen shows MacBook Pro, 14-inch, 2021, Chip Apple M1 Pro"
+      },
+      {
+        "claim": "16GB RAM",
+        "verdict": "supported",
+        "evidence": "photo 2 About screen shows Memory 16 GB"
+      },
+      {
+        "claim": "512GB SSD",
+        "verdict": "supported",
+        "evidence": "photo 2 About screen shows 494.38 GB total storage, consistent with a 512GB SSD"
+      },
+      {
+        "claim": "14-inch",
+        "verdict": "supported",
+        "evidence": "photo 2 About screen shows 14-inch, 2021"
+      },
+      {
+        "claim": "Touch ID",
+        "verdict": "unverified",
+        "evidence": "not visible in any photo"
+      },
+      {
+        "claim": "Space Gray",
+        "verdict": "unverified",
+        "evidence": "photos show a silver-colored chassis; lighting may affect color"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery health and cycle count unknown",
+        "proof": "screenshot of System Report > Power or battery health app",
+        "if_unproven": "priced as dead battery requiring replacement"
+      },
+      {
+        "risk": "Internal functionality unknown (ports, Touch ID, camera, speakers, keyboard)",
+        "proof": "video of boot-up, port testing, camera, speakers, and Touch ID",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Activation Lock / Find My status unknown",
+        "proof": "screenshot showing signed out of iCloud and Find My off",
+        "if_unproven": "priced as activation locked"
+      },
+      {
+        "risk": "Cosmetic condition of corners, bottom case, ports, and screen not fully shown",
+        "proof": "close-up photos of all exterior angles and screen off",
+        "if_unproven": "priced as heavily worn or damaged"
+      },
+      {
+        "risk": "SSD health and wear unknown",
+        "proof": "Disk Utility or System Report storage SMART status",
+        "if_unproven": "priced as failing storage"
+      },
+      {
+        "risk": "OS integrity suspect: About screen shows 'macOS Tahoe Version 26.0', which is not a real Apple OS version",
+        "proof": "video of Terminal sw_vers or genuine macOS version check",
+        "if_unproven": "priced as tampered software or non-genuine OS"
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of System Report > Power for battery health",
+      "Video of boot-up, Touch ID, camera, speakers, and all ports working",
+      "Screenshot showing Find My / Activation Lock is off",
+      "Close-up photos of all corners, bottom case, ports, and screen off",
+      "Screenshot of Terminal sw_vers to confirm genuine macOS version"
+    ],
+    "decision": "price",
+    "reason": "The laptop is identifiable from photo 2 as a 14-inch MacBook Pro 2021 with M1 Pro and 16GB RAM; the 512GB claim matches the shown storage. A worst-case price is possible even with unproven functionality, battery, lock status, and OS integrity."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 23290,
+    "input_tokens": 2926,
+    "output_tokens": 5374,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "888942f2834ec1aad834ef6fbfab1f63",
+    "error": null
+  }
+}

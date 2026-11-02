@@ -1,0 +1,100 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0: Silver laptop lid with a circular Dell logo, still wrapped in clear plastic, held by a hand.",
+      "Photo 1: Bottom case of the laptop, still wrapped in plastic, with a service tag label and a blue sticker visible but unreadable.",
+      "Photo 2: Laptop open with a Windows 11 desktop on screen, keyboard and trackpad covered in plastic, screen on."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "laptop",
+      "brand": "Dell",
+      "model": null,
+      "read_from": [
+        "photo 0 lid logo"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Latitude 7300",
+        "verdict": "unverified",
+        "evidence": "Photo 1 shows a label area that may say Latitude, but the model number 7300 is not readable."
+      },
+      {
+        "claim": "256 SSD",
+        "verdict": "unverifiable_remote",
+        "evidence": "Storage capacity cannot be seen in any photo."
+      },
+      {
+        "claim": "8GB RAM",
+        "verdict": "unverifiable_remote",
+        "evidence": "Memory size cannot be seen in any photo."
+      },
+      {
+        "claim": "Core i5",
+        "verdict": "unverified",
+        "evidence": "Photo 1 shows a blue sticker that may be Intel Inside, but 'i5' is not readable."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery may be dead or not hold a charge",
+        "proof": "Photo of the battery icon showing charge, or video of the laptop running unplugged",
+        "if_unproven": "as dead battery"
+      },
+      {
+        "risk": "Screen may have dead pixels, backlight issues, or hidden damage",
+        "proof": "Video of the screen displaying solid colors and brightness levels",
+        "if_unproven": "as faulty screen"
+      },
+      {
+        "risk": "Keyboard or trackpad may not work",
+        "proof": "Video of typing and trackpad use",
+        "if_unproven": "as non-functional keyboard/trackpad"
+      },
+      {
+        "risk": "SSD may be smaller than 256GB or failing",
+        "proof": "Screenshot of disk management showing capacity and health",
+        "if_unproven": "as smaller or failed drive"
+      },
+      {
+        "risk": "RAM may be less than 8GB",
+        "proof": "Screenshot of system information showing installed RAM",
+        "if_unproven": "as lower RAM"
+      },
+      {
+        "risk": "Processor may not be Core i5",
+        "proof": "Screenshot of system information showing processor model",
+        "if_unproven": "as lower processor"
+      },
+      {
+        "risk": "Charger may not be included",
+        "proof": "Photo of the power adapter with the laptop",
+        "if_unproven": "without charger"
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of Windows Settings > System > About showing processor, RAM, and model",
+      "Screenshot of Disk Management showing SSD capacity",
+      "Video of the laptop booting, keyboard, trackpad, and screen",
+      "Photo of the power adapter/charger"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a Dell laptop, but the exact model and specifications are unproven, so it can be priced at worst case as untested with unknown specs."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 32593,
+    "input_tokens": 2912,
+    "output_tokens": 4221,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "afbafc8433238d28fbf41a38e24a0773",
+    "error": null
+  }
+}

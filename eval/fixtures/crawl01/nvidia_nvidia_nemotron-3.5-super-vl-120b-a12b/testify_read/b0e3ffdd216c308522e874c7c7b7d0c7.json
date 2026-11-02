@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows an iPhone About screen with 128 GB capacity, SIM locked status under Network Provider Lock, Bluetooth address, modem firmware, and device ID.",
+      "Photo 1 shows the rear of a purple Apple smartphone with a vertical dual-camera array and Apple logo.",
+      "Photo 2 shows a Battery Health screen with Maximum Capacity 92%, Cycle Count 469, Manufacture Date June 2025, and First Use November 2025.",
+      "A watermark reading DANNY TUNEZ GADGETS appears across all three photos."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "smartphone",
+      "brand": "Apple",
+      "model": null,
+      "read_from": [
+        "photo 1 logo"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Can be used with WiFi only",
+        "verdict": "supported",
+        "evidence": "photo 0 shows Network Provider Lock: SIM locked"
+      },
+      {
+        "claim": "Great battery capacity",
+        "verdict": "unverified",
+        "evidence": "photo 2 shows Maximum Capacity 92%, but 'great' is subjective"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "SIM lock prevents cellular use with Nigerian networks",
+        "proof": "Video of a Nigerian SIM working in the device or official carrier unlock confirmation",
+        "if_unproven": "priced as WiFi-only locked device"
+      },
+      {
+        "risk": "iPhone model generation is unreadable, so resale value cannot be bracketed",
+        "proof": "Photo of Settings > General > About showing Model Name or Model Number, or rear model number text",
+        "if_unproven": "priced as an unidentified used smartphone"
+      },
+      {
+        "risk": "Battery health may decline or 'great' is overstated",
+        "proof": "No further proof needed; current health is shown in photo 2",
+        "if_unproven": "priced as used battery at 92%"
+      },
+      {
+        "risk": "Manufacture date June 2025 and first use November 2025 may be impossible or indicate tampered software",
+        "proof": "Apple serial number check via official support page",
+        "if_unproven": "priced as potentially tampered or non-genuine"
+      },
+      {
+        "risk": "Activation or iCloud lock status is not shown",
+        "proof": "Video of the home screen or completed setup",
+        "if_unproven": "priced as potentially activation locked"
+      }
+    ],
+    "proof_requests": [
+      "Photo of Settings > General > About showing Model Name and Model Number",
+      "Video of the phone on its home screen to rule out activation lock",
+      "Video or photo of a Nigerian SIM card working in the device, or official unlock confirmation",
+      "Apple serial number eligibility or coverage check screenshot"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The device is an Apple smartphone, but the model is not readable in any photo, and model drives resale value; even a worst-case price cannot be set without it."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 29559,
+    "input_tokens": 3444,
+    "output_tokens": 4515,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "b0e3ffdd216c308522e874c7c7b7d0c7",
+    "error": null
+  }
+}

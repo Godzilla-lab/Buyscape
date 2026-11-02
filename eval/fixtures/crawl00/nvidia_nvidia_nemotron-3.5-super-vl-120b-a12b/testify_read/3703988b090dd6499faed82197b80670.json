@@ -1,0 +1,68 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows two Micron 5100 ECO TCG-E 2.5 SSD drives in caddies",
+      "Photo 1 shows two more identical Micron 5100 ECO TCG-E 2.5 SSD drives",
+      "Labels are legible and show brand Micron, model 5100 ECO TCG-E 2.5 SSD",
+      "Model number MTFDDAK3T8TBY-1AR1ZABHA is visible on labels in both photos",
+      "Serial numbers 1740A0704646 and 17391037316 are visible",
+      "Cisco asset stickers are attached to the right side of each drive"
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "2.5 inch SATA SSD",
+      "brand": "Micron",
+      "model": "5100 ECO TCG-E 2.5 SSD (MTFDDAK3T8TBY-1AR1ZABHA)",
+      "read_from": [
+        "photo 0 label",
+        "photo 1 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Micron 3.84TB SATA SSD",
+        "verdict": "supported",
+        "evidence": "Label reads Micron 5100 ECO TCG-E 2.5 SSD and model MTFDDAK3T8TBY-1AR1ZABHA; 3T8 in Micron model numbering denotes 3.84TB"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "SSD health and remaining lifespan unknown; enterprise drive may be heavily worn",
+        "proof": "SMART data screenshot showing health percentage, data written, and power-on hours",
+        "if_unproven": "as worn-out or not working"
+      },
+      {
+        "risk": "Drive may not be detected or may have bad blocks or firmware faults",
+        "proof": "Video showing drive recognized in BIOS/OS and full 3.84TB capacity visible",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "TCG-E self-encrypting drive may be locked with an unknown password",
+        "proof": "Screenshot or video showing security status is unlocked or can be cleared",
+        "if_unproven": "as locked / unusable"
+      }
+    ],
+    "proof_requests": [
+      "SMART health screenshot from CrystalDiskInfo or Micron Storage Executive",
+      "Video of drive detected in system showing 3.84TB capacity",
+      "Proof the TCG-E encryption is not locked with an unknown password"
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identifiable from readable labels in both photos as a Micron 5100 ECO 3.84TB SATA SSD, so it can be priced at its worst case as an untested used enterprise SSD."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 33544,
+    "input_tokens": 2374,
+    "output_tokens": 5528,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "3703988b090dd6499faed82197b80670",
+    "error": null
+  }
+}

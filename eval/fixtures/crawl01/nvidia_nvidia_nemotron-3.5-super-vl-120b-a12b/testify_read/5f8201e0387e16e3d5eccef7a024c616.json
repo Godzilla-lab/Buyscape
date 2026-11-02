@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a close-up of an ASUS Z97-K motherboard with the model printed vertically near the PCIe slot.",
+      "Photo 1 shows the full board with an Intel-branded CPU cooler, four DDR3 slots, and Z97-K printed near the center.",
+      "Photo 2 is a duplicate angle of photo 1 showing the same ASUS Z97-K board.",
+      "Visible features include UEFI BIOS, CrossFireX Ready, M.2 Support, DirectX 11 Support, and SX PROTECTION."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "motherboard",
+      "brand": "ASUS",
+      "model": "Z97-K",
+      "read_from": [
+        "photo 0",
+        "photo 1",
+        "photo 2"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Asus Z97-K",
+        "verdict": "supported",
+        "evidence": "photo 0, photo 1, and photo 2 show ASUS Z97-K printed on the PCB"
+      },
+      {
+        "claim": "Intel 4th gen motherboard",
+        "verdict": "supported",
+        "evidence": "Z97-K is an Intel LGA1150 chipset motherboard for 4th/5th gen Core, visible in photos 0-2"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Motherboard does not power on or POST",
+        "proof": "video of the board booting to BIOS with CPU, RAM, and display connected",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Hidden physical damage such as bent CPU socket pins, cracked PCB, or swollen capacitors",
+        "proof": "close-up photos of the CPU socket, VRM heatsink area, and capacitor banks",
+        "if_unproven": "as damaged"
+      },
+      {
+        "risk": "BIOS password locked or missing I/O shield and accessories",
+        "proof": "photo of the BIOS screen and a photo of all included accessories",
+        "if_unproven": "as board only, possibly locked"
+      }
+    ],
+    "proof_requests": [
+      "Video of the motherboard booting to BIOS with CPU, RAM, and monitor connected",
+      "Close-up photo of the CPU socket pins",
+      "Photo of all included accessories and I/O shield"
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identifiable as an ASUS Z97-K motherboard from the photos, so it can be priced at its worst case (non-working) while awaiting proof of function."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 15969,
+    "input_tokens": 2248,
+    "output_tokens": 3059,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "5f8201e0387e16e3d5eccef7a024c616",
+    "error": null
+  }
+}

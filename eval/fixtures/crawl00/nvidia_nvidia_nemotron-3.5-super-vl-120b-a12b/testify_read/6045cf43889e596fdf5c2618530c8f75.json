@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a graphics card with a ZOTAC-branded heatsink shroud and a yellow label at the PCB edge.",
+      "Photo 1 shows the back of the PCB with a white label reading ZOTAC G210 1GB DDR3 and regulatory marks.",
+      "Photo 2 shows the back of the PCB with the same white label, PCIe gold fingers, and a display output bracket."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "desktop graphics card",
+      "brand": "ZOTAC",
+      "model": "G210",
+      "read_from": [
+        "photo 0 heatsink",
+        "photo 1 label",
+        "photo 2 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Uk used",
+        "verdict": "unverifiable_remote",
+        "evidence": "photos cannot show the country of prior use"
+      },
+      {
+        "claim": "1gb",
+        "verdict": "supported",
+        "evidence": "photo 1 and photo 2 white label reads 1GB DDR3"
+      },
+      {
+        "claim": "desktop graphics card",
+        "verdict": "supported",
+        "evidence": "photos show a PCIe add-in card with heatsink and output bracket"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "card may not power on or output video",
+        "proof": "video of the card installed in a PC and booting to desktop",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "GPU or memory may be defective or artifacting",
+        "proof": "screenshot of GPU-Z or benchmark run detected by the buyer",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "cooling fan may be missing, noisy, or seized",
+        "proof": "close-up video of the fan spinning freely",
+        "if_unproven": "as needing fan or heatsink repair"
+      },
+      {
+        "risk": "bracket, driver disc, or accessories may be missing",
+        "proof": "photo of every item included in the sale",
+        "if_unproven": "as card only"
+      }
+    ],
+    "proof_requests": [
+      "Video of the card installed in a PC and displaying video",
+      "Screenshot of GPU-Z showing the detected model and memory size",
+      "Close-up video of the fan spinning (if a fan is present)"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a ZOTAC G210 1GB DDR3 desktop graphics card from the labels in photos 1 and 2, so it can be priced at its worst case as not working."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 25370,
+    "input_tokens": 2650,
+    "output_tokens": 3650,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "6045cf43889e596fdf5c2618530c8f75",
+    "error": null
+  }
+}
