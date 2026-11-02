@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows a large stack of metal cylinders laid on their sides, viewed end-on from the valve/base end.",
+      "Many cylinder rims show heavy rust and corrosion; some rims are painted blue, others bare metal or white.",
+      "No brand, model, capacity, or safety certification markings are legible on any cylinder.",
+      "No pressure gauge, valve, or regulator is visible on any cylinder to indicate fill level or gas presence.",
+      "A watermark/name overlay is present but is just a photo credit, not product information.",
+      "Unclear whether the sale is for a single cylinder or the entire stacked lot."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "CO2 gas cylinder",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Co2 Gas cylinders for sale with gas inside",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo 0 only shows the closed base/valve end of stacked cylinders; no gauge, valve state, or fill indicator is visible to confirm gas content."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Cylinder may be empty or only partially filled despite seller's claim.",
+        "proof": "A clear photo of the pressure gauge or a weighing/fill-check video.",
+        "if_unproven": "priced as empty/unfilled"
+      },
+      {
+        "risk": "Heavy rust visible on many rims may indicate corrosion compromising structural integrity or failing safety inspection.",
+        "proof": "Close-up photos of individual cylinder bodies and valve threads, plus any hydrostatic test stamp.",
+        "if_unproven": "priced as corroded/risk-of-rejection condition"
+      },
+      {
+        "risk": "Cylinder size/capacity (e.g., 20kg, 40kg, small vs industrial) is not stated or visible.",
+        "proof": "A photo with a tape measure or a legible capacity stamp on the cylinder neck.",
+        "if_unproven": "priced at smallest common capacity assumption"
+      },
+      {
+        "risk": "Valve type and condition (threading, leaks, missing cap) unknown, affecting usability.",
+        "proof": "Close-up photo of an individual valve assembly.",
+        "if_unproven": "priced as valve condition unknown/non-functional"
+      },
+      {
+        "risk": "Quantity being sold (single unit vs bulk lot) is ambiguous from the image.",
+        "proof": "Seller confirmation of unit count matched to a photo showing them separated or tagged.",
+        "if_unproven": "priced per single unit only"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of one cylinder showing any capacity/brand stamp near the neck.",
+      "Photo of the pressure gauge or valve showing fill status.",
+      "Photo with a tape measure or known-size object for scale.",
+      "Confirmation of how many units are actually being sold in this listing."
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable by type as a CO2 gas cylinder, but gas content, condition, and size are unverified, so it must be priced at the worst case of an empty, rusted, unspecified-capacity cylinder until further proof is given."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 18229,
+    "input_tokens": 2216,
+    "output_tokens": 1548,
+    "cost_usd": 0.016753,
+    "replayed": false,
+    "fixture_key": "bca9ad807e66a20465d8332e4761006e",
+    "error": null
+  }
+}

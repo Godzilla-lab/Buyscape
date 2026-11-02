@@ -1,0 +1,93 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: Black Nikon DSLR camera with attached zoom lens, held in hand; lens cap on.",
+      "Photo 0 shows 'Nikon' logo on the camera's pentaprism hump, no model number visible.",
+      "Photo 1: Front view of same camera, lens cap off, lens barrel reads 'AF-S DX NIKKOR 18-55mm' and 'Nikon' branding.",
+      "Photo 1 shows 'Nikon' logo on camera body but no visible model designation (e.g., 'D60').",
+      "Photo 2: Rear view of camera showing control buttons, 'OK' button, and 'Nikon' logo near the LCD screen.",
+      "LCD screen in photo 2 appears blank/off, so power-on state and screen condition cannot be confirmed.",
+      "No shots of the camera's top panel, serial plate, battery compartment, or memory card slot.",
+      "No accessories (battery, charger, strap tag, box) shown beyond the included neck strap."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "DSLR camera with kit zoom lens",
+      "brand": "Nikon",
+      "model": null,
+      "read_from": [
+        "photo 0 body logo",
+        "photo 1 body logo and lens barrel text 'AF-S DX NIKKOR 18-55mm'",
+        "photo 2 body logo"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Nikon D60 DSLR camera",
+        "verdict": "unverified",
+        "evidence": "No model number or nameplate reading 'D60' is visible in any photo; only the 'Nikon' brand logo appears in photos 0, 1, and 2."
+      },
+      {
+        "claim": "Paired with the versatile Nikon [lens]",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows lens barrel text 'AF-S DX NIKKOR 18-55mm', confirming a genuine Nikon kit lens."
+      },
+      {
+        "claim": "Capture beautiful photos and videos (implying full functionality)",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows the camera powered on, a live preview, a captured image, or a test shot; LCD in photo 2 appears blank."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Camera body model cannot be confirmed, which materially changes value (D60 vs. other Nikon DSLR bodies).",
+        "proof": "Clear close-up photo of the top plate or a photo of the menu/info screen showing the model name.",
+        "if_unproven": "Priced as an unspecified low-end/base Nikon DSLR body, the lowest plausible model in this line."
+      },
+      {
+        "risk": "Unknown shutter count / sensor wear, common issue on older DSLRs.",
+        "proof": "Screenshot from shutter-count software or EXIF data of a sample photo.",
+        "if_unproven": "Priced as high-use / near end-of-life shutter."
+      },
+      {
+        "risk": "Power-on and functional state unverified (screen, autofocus, image capture).",
+        "proof": "Short video of camera powering on, focusing, and displaying a captured image on the LCD.",
+        "if_unproven": "Priced as not working."
+      },
+      {
+        "risk": "Missing accessories (battery, charger, memory card, box) not shown.",
+        "proof": "Photo of included accessories laid out together.",
+        "if_unproven": "Priced as body and lens only, no accessories included."
+      },
+      {
+        "risk": "Lens optical condition (fungus, scratches, zoom/focus ring smoothness) not visible in detail.",
+        "proof": "Close-up photo of front and rear lens elements under light.",
+        "if_unproven": "Priced as lens with unknown optical defects."
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the camera's top plate or model nameplate confirming 'D60' or actual model.",
+      "Short video of the camera powering on, showing the LCD screen live and a test shot playback.",
+      "Photo of shutter count from camera menu or EXIF data of a test image.",
+      "Photo of all included accessories (battery, charger, memory card, strap, box).",
+      "Close-up photos of front and rear lens elements for fungus/scratches."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller's claimed model (Nikon D60) is not readable in any photo, only the generic 'Nikon' brand logo is visible, so even a worst-case price cannot be set without confirming the actual body model."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 36965,
+    "input_tokens": 3936,
+    "output_tokens": 3364,
+    "cost_usd": 0.038353,
+    "replayed": false,
+    "fixture_key": "48ebefb88ad98567b6d3095c96891c5e",
+    "error": null
+  }
+}

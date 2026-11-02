@@ -1,0 +1,68 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0 shows a single large rectangular solar panel with a grid of dark photovoltaic cells and a white frame.",
+      "No visible brand/model label, watt rating, serial number, or connector details are readable in the photo.",
+      "No inverter, battery, charge controller, mounting hardware, or system wiring is shown."
+    ],
+    "identity": {
+      "status": "unknown",
+      "kind": "solar panel (single PV module)",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Contact us for ur Solar Energy Solution...",
+        "verdict": "unverifiable_remote",
+        "evidence": "Only a generic message; no specific item details (panel wattage, kit components, condition, or warranty) are shown."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Panel wattage/efficiency is unknown; price depends heavily on whether it\u2019s ~100W, ~200W, ~400W class, etc.",
+        "proof": "A clear close-up photo of the panel\u2019s label/sticker showing: brand, model, rated wattage (W), Voc/Isc, and serial number.",
+        "if_unproven": "Priced at worst case for an unknown used panel (assume lower wattage and no verified performance)."
+      },
+      {
+        "risk": "Condition/performance is unknown (possible cracks, micro-cracks, delamination, or reduced output).",
+        "proof": "A photo of the backsheet/edges plus a working test: IV curve or at least a multimeter reading under sunlight (or a power output test report).",
+        "if_unproven": "Priced as not guaranteed to meet rated output (assume reduced performance)."
+      },
+      {
+        "risk": "Whether this is only the panel or a full solar kit is unknown; seller text suggests a \u201csolution\u201d.",
+        "proof": "List of what\u2019s included with photos: panel(s) count, inverter model, battery type/capacity, charge controller specs, cables, and mounting/rails.",
+        "if_unproven": "Priced as a single standalone solar panel only (no inverter/battery)."
+      },
+      {
+        "risk": "Compatibility/connector type is unknown (MC4 vs other), affecting installation cost.",
+        "proof": "Close-up photo of the junction box and connectors (MC4 markings) and the cable length/condition.",
+        "if_unproven": "Priced assuming standard MC4 but with no guarantee; installation may require extra parts."
+      }
+    ],
+    "proof_requests": [
+      "Clear label close-up on the panel showing brand, model, rated wattage (W), Voc, Isc, and serial number.",
+      "Photo of the junction box and connectors (MC4 markings) plus cable condition.",
+      "Show what is included in the \u201csolar energy solution\u201d (panel count, inverter model, battery type/capacity, charge controller specs).",
+      "Any proof of performance: test report, IV curve, or a power output measurement under sunlight."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "From the photo, it\u2019s only possible to confirm a solar panel exists; the key pricing drivers (rated wattage/model, quantity, and whether it\u2019s a full kit) are not readable or shown. Without that, a correct worst-case price can\u2019t be set confidently."
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_read",
+    "latency_ms": 5773,
+    "input_tokens": 1913,
+    "output_tokens": 742,
+    "cost_usd": 0.00131,
+    "replayed": false,
+    "fixture_key": "64025eca959c3911a9c441b6452dcd1b",
+    "error": null
+  }
+}
