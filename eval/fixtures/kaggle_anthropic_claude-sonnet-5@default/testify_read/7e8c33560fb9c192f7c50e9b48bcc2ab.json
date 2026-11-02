@@ -1,0 +1,84 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Stacked tires photographed in a yard/cage setting, multiple tires visible.",
+      "Tread pattern visible on top tires, appears to have reasonable tread depth but no measurement shown.",
+      "Sidewall text is visible but blurry/out of focus; numbers and letters cannot be reliably read.",
+      "Other tire stacks in background appear more worn, with lighter/cracked sidewalls, not clearly part of this listing.",
+      "Watermark 'NJ VENTURE' overlaid on image, no size or brand marking confirmed legible.",
+      "No DOT date code, brand name, or model stamp clearly readable on any sidewall."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "car tire (used/tukunbo, claimed 265/45 R20)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 (sidewalls visible but text illegible)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Size is 265/45 R20",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo 0 sidewall text is too blurry to confirm the size markings."
+      },
+      {
+        "claim": "Tires are 'tukunbo' (foreign used, implying good quality second-hand import)",
+        "verdict": "unverifiable_remote",
+        "evidence": "No import sticker, DOT code, or country-of-origin marking is legible in photo 0."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual tire size may differ from claimed 265/45 R20, which would change price significantly.",
+        "proof": "Close-up photo of one sidewall clearly showing the size imprint (e.g., '265/45R20').",
+        "if_unproven": "cannot be priced as this specific size; treat as unidentified size"
+      },
+      {
+        "risk": "Tread depth and wear level unknown precisely; photo shows general tread but no depth gauge or close-up.",
+        "proof": "Close-up of tread with a gauge or coin for scale on each tire being sold.",
+        "if_unproven": "priced as low/worn tread (worst case)"
+      },
+      {
+        "risk": "Tire age unknown; older tires (even with tread) can be unsafe due to rubber degradation.",
+        "proof": "Close-up of DOT date code on sidewall (4-digit week/year stamp).",
+        "if_unproven": "priced as old/near end-of-life"
+      },
+      {
+        "risk": "Unclear how many tires are included in this specific offer (stack contains multiple, possibly mixed sizes/brands).",
+        "proof": "Photo or count confirming exact number and matching sizes of tires in the lot being sold.",
+        "if_unproven": "priced as single unit unless proven otherwise"
+      },
+      {
+        "risk": "Hidden sidewall damage, bulges, or repairs not visible from this angle.",
+        "proof": "Full 360\u00b0 photos of each tire sidewall and inner surface.",
+        "if_unproven": "priced as condition unknown/risk of defect"
+      }
+    ],
+    "proof_requests": [
+      "Clear, well-lit close-up photo of the sidewall size marking (e.g., 265/45R20) in focus.",
+      "Close-up of the DOT date code for age verification.",
+      "Tread depth photo with a gauge or coin for reference, for each tire included.",
+      "Confirmation of exact quantity of tires being sold at this size/price.",
+      "Full-circle photos of each tire showing no cracks, bulges, or patches."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The size, which is the key attribute that sets tire pricing, is not legibly readable in the photo and the seller's text claim alone cannot be treated as proof; a clear sidewall shot is needed before even a worst-case price can be assigned."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 22402,
+    "input_tokens": 2511,
+    "output_tokens": 1994,
+    "cost_usd": 0.021803,
+    "replayed": false,
+    "fixture_key": "7e8c33560fb9c192f7c50e9b48bcc2ab",
+    "error": null
+  }
+}

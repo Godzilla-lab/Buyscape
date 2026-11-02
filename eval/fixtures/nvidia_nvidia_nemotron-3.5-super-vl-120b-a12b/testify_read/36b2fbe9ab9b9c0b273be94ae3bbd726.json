@@ -1,0 +1,80 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a large black solar panel with a white grid of busbars and cell interconnections.",
+      "Photo 1 shows a silver specification label reading \"CanadianSolar\" with model \"CS6K-250M\" and electrical ratings including 250 W.",
+      "Photo 2 shows the panel junction box with black solar cables and connectors.",
+      "Green product boxes are visible at the left edge of photo 0."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "solar panel",
+      "brand": "CanadianSolar",
+      "model": "CS6K-250M",
+      "read_from": [
+        "photo 1 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Canadian 250watts solar panel",
+        "verdict": "supported",
+        "evidence": "photo 1 label shows CanadianSolar CS6K-250M rated 250 W"
+      },
+      {
+        "claim": "Cells: 72cells",
+        "verdict": "unverified",
+        "evidence": "cell count is not legible in any photo"
+      },
+      {
+        "claim": "Type: Mono-crystalline",
+        "verdict": "supported",
+        "evidence": "photo 0 shows black uniform cells typical of monocrystalline"
+      },
+      {
+        "claim": "Authentic: 100%",
+        "verdict": "unverifiable_remote",
+        "evidence": "authenticity cannot be confirmed from photos alone"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Panel produces no power or below-rated output",
+        "proof": "video of multimeter measuring Voc and Isc in direct sunlight",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Hidden physical damage such as cracks, delamination, or hot spots",
+        "proof": "close-up photos of the full panel surface in bright light",
+        "if_unproven": "as damaged"
+      },
+      {
+        "risk": "Label does not match the panel or is counterfeit",
+        "proof": "clear photo of the serial-number label fixed to the panel frame",
+        "if_unproven": "as unbranded unknown panel"
+      }
+    ],
+    "proof_requests": [
+      "Video of open-circuit voltage and short-circuit current measured in sunlight",
+      "Close-up photos of the panel surface for cracks or delamination",
+      "Clear photo of the label fixed to the panel frame with serial number visible"
+    ],
+    "decision": "price",
+    "reason": "The panel is identifiable as a Canadian Solar CS6K-250M from the label in photo 1, so it can be priced at its worst case as an untested module."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 39688,
+    "input_tokens": 2930,
+    "output_tokens": 3993,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "36b2fbe9ab9b9c0b273be94ae3bbd726",
+    "error": null
+  }
+}

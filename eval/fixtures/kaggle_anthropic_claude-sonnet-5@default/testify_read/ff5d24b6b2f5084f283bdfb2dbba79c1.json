@@ -1,0 +1,80 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Four used tires photographed outdoors on bare concrete/asphalt ground.",
+      "Tires are stacked/leaning against each other, sidewalls angled away from camera.",
+      "Tread shows moderate wear with grooves still visible, but exact depth cannot be measured from the photo.",
+      "No brand name, size code, or DOT date stamp is legible on any sidewall in the photo.",
+      "A watermark 'GF GLOBAL POSTED ON JIJI' overlays the image; this is the lister's stamp, not product information.",
+      "Background shows a shop/yard setting with other tires and a vehicle fender, consistent with a tire resale yard."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used car tire (set of 4)",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Good quality tokunbo (used import) tires",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows worn tires but condition grading ('good quality') cannot be confirmed without close-up of tread depth and sidewall integrity."
+      },
+      {
+        "claim": "Michelin brand",
+        "verdict": "unverifiable_remote",
+        "evidence": "No Michelin logo or lettering is legible anywhere on the sidewalls in photo 0."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Tire size (width/profile/rim diameter) unknown",
+        "proof": "Close-up photo of sidewall showing the size code (e.g., 205/55R16)",
+        "if_unproven": "cannot be priced at all, since tire value is driven mainly by size"
+      },
+      {
+        "risk": "Brand cannot be confirmed as Michelin",
+        "proof": "Close-up photo of sidewall logo/lettering",
+        "if_unproven": "priced as unbranded/generic used tire, not premium brand"
+      },
+      {
+        "risk": "Tread depth and wear level unknown precisely",
+        "proof": "Close-up photo of tread with a depth gauge or coin for scale",
+        "if_unproven": "priced as low/minimum tread (near legal limit)"
+      },
+      {
+        "risk": "Age of tire (rubber hardening) unknown",
+        "proof": "Photo of DOT date code on sidewall",
+        "if_unproven": "priced as old stock (assume aged beyond ideal range)"
+      },
+      {
+        "risk": "Hidden sidewall damage, bulges, or repair patches",
+        "proof": "Photos of each tire's full sidewall and inner surface",
+        "if_unproven": "priced assuming possible hidden damage, i.e., lowest condition tier"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of one tire's sidewall showing size code, brand name, and DOT date stamp",
+      "Photo of tread depth with a coin or gauge for scale",
+      "Photos of each tire's full sidewall (inner and outer) for cracks or repairs"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Neither the tire size nor the brand can be read from the single photo, and both are essential to set even a worst-case price for tires."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 16804,
+    "input_tokens": 2045,
+    "output_tokens": 1580,
+    "cost_usd": 0.016731,
+    "replayed": false,
+    "fixture_key": "ff5d24b6b2f5084f283bdfb2dbba79c1",
+    "error": null
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Large cardboard box on a wooden pallet",
+      "Box printed with \"LITHIUM ION BATTERIES\" and \"LifePO4 Batteries\"",
+      "UN3480 Class 9 marking visible on box",
+      "Box appears sealed with packing tape and has edge wear",
+      "Green straps and a yellow bucket visible around the box",
+      "Watermark \"MIMI SOLAR\" across both photos"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "boxed lithium ion battery",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 box text",
+        "photo 1 box text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "seller deals in solar panels, inverters, solar chest freezers and all solar energy",
+        "verdict": "unverifiable_remote",
+        "evidence": "photos show only a sealed battery box"
+      },
+      {
+        "claim": "item is lithium ion / LifePO4 batteries",
+        "verdict": "supported",
+        "evidence": "photo 0 and photo 1 box printing"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "the sealed box may be empty or contain something other than a battery",
+        "proof": "video of the box being opened to reveal the battery unit",
+        "if_unproven": "as empty packaging"
+      },
+      {
+        "risk": "the battery may not hold a charge or may be dead",
+        "proof": "video of the battery under load or a multimeter voltage reading",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "actual capacity, voltage, and model of the battery are unknown",
+        "proof": "close-up photo of the specification label on the battery unit inside",
+        "if_unproven": "as unknown capacity"
+      },
+      {
+        "risk": "battery age and condition (new versus used or refurbished) cannot be told from the box",
+        "proof": "photo of the manufacturing date and the physical battery unit",
+        "if_unproven": "as used with unknown age"
+      }
+    ],
+    "proof_requests": [
+      "Open the box and show the battery unit inside",
+      "Show a close-up of the specification label on the battery unit",
+      "Provide a video of the battery being tested with a multimeter or under load"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a boxed lithium ion battery from the box text, so it can be priced at its worst case (empty box or non-working battery) pending proof."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 20571,
+    "input_tokens": 2386,
+    "output_tokens": 3046,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "d92bb2477ff009f661b0a4ccaf41bf0b",
+    "error": null
+  }
+}

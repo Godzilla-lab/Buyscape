@@ -1,0 +1,88 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Single photo shows an upright gas cylinder standing against a rough concrete/stone wall.",
+      "Cylinder body colour is a faded reddish-orange, with surface rust and paint wear visible.",
+      "Embossed text near the top reads 'UKPP 92' and 'PROPERTY OF CORPORATION'.",
+      "A stencilled white panel on the body reads 'CALOR GAS' and below it '47kg Propane'.",
+      "A dark round object (possibly another cylinder base or tyre) sits at bottom left, partly obscuring the view.",
+      "Watermarks 'POSTED ON JIJI', 'NWOBODO PETER', and 'Selloff.ng' overlay the image."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "LPG gas cylinder",
+      "brand": "Calor Gas",
+      "model": "47kg Propane cylinder",
+      "read_from": [
+        "photo 0 stencilled panel reading 'CALOR GAS 47kg Propane'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "50kg gas cylinder",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 stencil clearly reads '47kg Propane', not 50kg."
+      },
+      {
+        "claim": "Total gas",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows branding for 'CALOR GAS', not Total."
+      },
+      {
+        "claim": "Blue colour",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows the cylinder is reddish-orange, not blue."
+      },
+      {
+        "claim": "Direct London tokunbo (UK import, used)",
+        "verdict": "unverifiable_remote",
+        "evidence": "UK-style markings ('UKPP 92', 'PROPERTY OF CORPORATION') are consistent with a UK-origin cylinder, but origin and import history cannot be confirmed from a photo alone."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Cylinder identity mismatch between seller's text and actual item shown",
+        "proof": "A clear, unedited photo of the exact cylinder being sold, matching the seller's stated brand, colour, and weight",
+        "if_unproven": "treated as unverified listing, priced only off what is actually visible (47kg Calor-branded cylinder)"
+      },
+      {
+        "risk": "Valve and thread condition unknown, affects safety and usability",
+        "proof": "Close-up photo of the valve/collar area free of glare",
+        "if_unproven": "priced as not verified functional, i.e. worst case needing valve service"
+      },
+      {
+        "risk": "Cylinder test/certification date may be expired (common for old UK cylinders)",
+        "proof": "Photo of the stamped test date ring near the collar",
+        "if_unproven": "priced as expired/needs retest"
+      },
+      {
+        "risk": "Rust/corrosion depth on body not fully visible, could affect structural safety",
+        "proof": "Multiple angle photos in good light showing full body condition",
+        "if_unproven": "priced as cosmetically poor, worst case"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual cylinder matching the claimed Total brand, blue colour, and 50kg size, or clarification if this is the only cylinder for sale",
+      "Close-up of the valve and collar area",
+      "Close-up of the stamped test/certification date",
+      "Full-body photo in clear daylight from multiple angles"
+    ],
+    "decision": "fraud_suspected",
+    "reason": "The seller's description (50kg, Total brand, blue) directly contradicts what the single photo shows (47kg, Calor Gas brand, reddish-orange), a mismatch too large to be a simple typo, so the listing's accuracy cannot be trusted without the seller correcting or re-photographing the actual item."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 20100,
+    "input_tokens": 2246,
+    "output_tokens": 1956,
+    "cost_usd": 0.020893,
+    "replayed": false,
+    "fixture_key": "36d3d6924cf63722bedf90025668b198",
+    "error": null
+  }
+}

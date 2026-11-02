@@ -1,0 +1,69 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Black rectangular power bank held in a hand, photo 0",
+      "Same black power bank with a white cable coiled around it, photo 1",
+      "No brand, model, port, button, or capacity marking is visible in either photo",
+      "Photos show only the flat casing of the device",
+      "Seller watermark 'POSTED ON JIJI ANNIE' appears across both images"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "power bank",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "In good conditions",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photos show the exterior only; function and battery health cannot be tested remotely"
+      },
+      {
+        "claim": "20000mah",
+        "verdict": "unverifiable_remote",
+        "evidence": "No capacity label, model number, or specification plate is visible in photo 0 or photo 1"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual capacity is lower than 20000mah or the cell is dead",
+        "proof": "Close-up photo of any label showing brand, model, and capacity",
+        "if_unproven": "as a non-working generic power bank of unknown capacity"
+      },
+      {
+        "risk": "Charging ports or cable are damaged",
+        "proof": "Photo of the ports and cable connectors",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Device does not power on or hold a charge",
+        "proof": "Video showing the power bank charging a phone",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of any label showing brand, model, and capacity",
+      "Photo of the ports on the edge of the power bank",
+      "Video showing the power bank charging a device"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a power bank, but the capacity and model that set the price are not visible in the photos, so even a worst-case price cannot be set without proof of capacity and function."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 16799,
+    "input_tokens": 2734,
+    "output_tokens": 2676,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "0b3895355527eab0a90d2890f825573d",
+    "error": null
+  }
+}

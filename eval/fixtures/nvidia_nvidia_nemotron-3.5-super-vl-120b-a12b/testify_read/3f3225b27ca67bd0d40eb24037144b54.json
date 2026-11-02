@@ -1,0 +1,85 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0: framed solar panel standing vertically outdoors on dirt ground",
+      "Silver aluminum frame with dark photovoltaic cells visible",
+      "Watermark \"FRANK SOLAR ENTERPRISES\" across photo 0",
+      "Photo 1: close-up of white label on back of solar panel",
+      "Label text \"Made in China\" and model \"SHN450-72M\" visible",
+      "Certification marks and barcode present on label",
+      "Date stamp \"05/02/2025\" on both photos",
+      "Camera watermark \"REDMI 13C\" on both photos"
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "solar panel",
+      "brand": null,
+      "model": "SHN450-72M",
+      "read_from": [
+        "photo 1 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "we have solar panel",
+        "verdict": "supported",
+        "evidence": "photo 0 shows a solar panel"
+      },
+      {
+        "claim": "inverter and batteries",
+        "verdict": "unverified",
+        "evidence": "not shown in either photo"
+      },
+      {
+        "claim": "different sizes",
+        "verdict": "unverified",
+        "evidence": "only one panel size shown in photos"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "hidden cracks, micro-cracks, or delamination not visible in outdoor photo",
+        "proof": "close-up photo of full front surface in direct sunlight",
+        "if_unproven": "as damaged or defective panel"
+      },
+      {
+        "risk": "actual electrical output below the 450W rating on the label",
+        "proof": "video showing Voc and Isc measured under sunlight with a multimeter",
+        "if_unproven": "as non-performing or lower-wattage panel"
+      },
+      {
+        "risk": "panel age and usage history unknown; could be heavily used",
+        "proof": "clear photo of manufacturing date on label or original purchase receipt",
+        "if_unproven": "as used panel with unknown remaining lifespan"
+      },
+      {
+        "risk": "label may not belong to this panel or specs may be misrepresented",
+        "proof": "photo showing the label physically attached to this exact panel frame with serial number visible",
+        "if_unproven": "as misrepresented or unknown-spec panel"
+      }
+    ],
+    "proof_requests": [
+      "Full front surface photo in direct sunlight to check for cracks or hot spots",
+      "Clear back label photo showing serial number and manufacturing date",
+      "Video or photo of panel connected to charge controller/inverter producing power",
+      "Photo of junction box and output cables"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a solar panel with a readable model in photo 1, so it can be priced at its worst case as seen; missing performance proof does not prevent a worst-case price."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 52856,
+    "input_tokens": 2378,
+    "output_tokens": 5918,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "3f3225b27ca67bd0d40eb24037144b54",
+    "error": null
+  }
+}

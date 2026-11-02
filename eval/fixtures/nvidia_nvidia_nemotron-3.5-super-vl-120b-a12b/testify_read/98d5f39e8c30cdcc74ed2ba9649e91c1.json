@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Two red gas cylinders stand side by side on pavement in photo 0 and photo 1.",
+      "Photo 2 shows a close-up of one red gas cylinder.",
+      "The left cylinder in photo 0 displays a white CALOR logo and text including Propane and a phone number.",
+      "Photo 2 shows CALOR branding, a diamond hazard symbol, and embossed capacity text near the top that is partly obscured by a watermark.",
+      "Both cylinders show surface rust, scratches, and faded paint.",
+      "No regulator, hose, or valve operation is shown in any photo.",
+      "Photos 0 and 1 show two cylinders, while the seller states only one is for sale."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "gas cylinder",
+      "brand": "Calor",
+      "model": null,
+      "read_from": [
+        "photo 0",
+        "photo 2"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "50kg gas cylinder",
+        "verdict": "unverified",
+        "evidence": "Capacity marking in photo 2 is partly obscured; 50kg is not clearly legible."
+      },
+      {
+        "claim": "Selling only one",
+        "verdict": "contradicted",
+        "evidence": "Photos 0 and 1 show two cylinders together."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Cylinder may be empty or contain an unknown amount of gas.",
+        "proof": "Video of gas release or a weighbridge receipt showing full weight.",
+        "if_unproven": "as empty"
+      },
+      {
+        "risk": "Valve may be damaged, seized, or leaking.",
+        "proof": "Close-up video of the valve being opened and closed, plus a soapy-water leak test.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Cylinder may have hidden corrosion, cracks, or an expired test date.",
+        "proof": "Close-up photos of the base, seams, and collar, or a valid hydrostatic test certificate.",
+        "if_unproven": "as unsafe or scrap"
+      },
+      {
+        "risk": "Actual capacity may be smaller than 50kg.",
+        "proof": "Clear, unobstructed photo of the embossed capacity marking.",
+        "if_unproven": "as a smaller standard cylinder"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the capacity/weight marking on the cylinder collar or body",
+      "Video showing the valve being opened and closed",
+      "Photo of the cylinder on a weighing scale"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a used Calor gas cylinder; despite unverified capacity and hidden condition risks, it can be priced at worst case (empty, non-working valve, unproven size)."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 31786,
+    "input_tokens": 2873,
+    "output_tokens": 3654,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "98d5f39e8c30cdcc74ed2ba9649e91c1",
+    "error": null
+  }
+}

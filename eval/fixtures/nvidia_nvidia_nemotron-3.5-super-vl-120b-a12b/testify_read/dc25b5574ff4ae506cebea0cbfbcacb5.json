@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "White desktop device with a paper output slot across the top",
+      "Front brand reads SONY",
+      "Lower front label reads HYBRID GRAPHIC PRINTER UP-X898MD",
+      "Green LCD screen shows READY",
+      "Control buttons include PUSH ENTER, CONTRAST, BRIGHT, FEED, COPY, PRINT, OPEN",
+      "Watermark reads SCANTRIK MEDICAL POSTED ON JIJI"
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "hybrid graphic printer",
+      "brand": "SONY",
+      "model": "UP-X898MD",
+      "read_from": [
+        "photo 0 front panel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "It is an ultrasound machine",
+        "verdict": "contradicted",
+        "evidence": "photo 0 shows a SONY HYBRID GRAPHIC PRINTER UP-X898MD, not an ultrasound scanner"
+      },
+      {
+        "claim": "It is designed to print the result of ultrasound",
+        "verdict": "supported",
+        "evidence": "photo 0 identifies a Sony medical hybrid graphic printer used to print ultrasound images"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The photo may be a stock or watermarked image (SCANTRIK MEDICAL / JIJI) rather than the actual item for sale",
+        "proof": "photo of the actual unit with a handwritten note or seller's username",
+        "if_unproven": "as described but condition unverified"
+      },
+      {
+        "risk": "Unit may not power on or print despite the READY display",
+        "proof": "video of the printer powering on and producing a test print",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Missing power cable, interface cable, or paper roll",
+        "proof": "photo of all included accessories and the rear connection panel",
+        "if_unproven": "as unit only"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual unit with a handwritten note or seller's username to confirm it is not a stock image",
+      "Video of the printer powering on and printing a test page",
+      "Photo of the rear panel and all included cables and paper roll"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable from photo 0 as a Sony UP-X898MD hybrid graphic printer and can be priced at its worst case as a non-working unit pending proof of operation."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 25956,
+    "input_tokens": 1715,
+    "output_tokens": 3264,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "dc25b5574ff4ae506cebea0cbfbcacb5",
+    "error": null
+  }
+}

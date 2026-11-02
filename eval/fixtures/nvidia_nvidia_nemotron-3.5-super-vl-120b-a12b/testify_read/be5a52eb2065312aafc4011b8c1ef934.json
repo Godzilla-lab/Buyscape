@@ -1,0 +1,93 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a large grey battery with an orange top sitting on a wooden table.",
+      "The battery label reads \"Felicitysolar\", \"12v 220 Ah\", \"DEEP CYCLE TUBULAR BATTERY\", and \"FOR SOLAR USE\".",
+      "A white box labeled \"Felicitysolar\" and \"MPPT SOLAR CHARGE CONTROLLER\" sits on top of the battery.",
+      "A standing fan is visible on the left and a solar panel edge is visible on the right.",
+      "The seller's text claims a 240a 12v India standard tubular battery."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "solar battery",
+      "brand": "Felicitysolar",
+      "model": null,
+      "read_from": [
+        "photo 0 battery label",
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Felicity solar battery",
+        "verdict": "supported",
+        "evidence": "photo 0 shows Felicitysolar branding on the battery and box"
+      },
+      {
+        "claim": "240a",
+        "verdict": "contradicted",
+        "evidence": "photo 0 battery label reads 220 Ah"
+      },
+      {
+        "claim": "12v",
+        "verdict": "supported",
+        "evidence": "photo 0 battery label reads 12v"
+      },
+      {
+        "claim": "India standard tubular battery",
+        "verdict": "unverifiable_remote",
+        "evidence": "no standard certification or origin marking visible in photo 0"
+      },
+      {
+        "claim": "Original",
+        "verdict": "unverified",
+        "evidence": "photo 0 shows branding but cannot prove authenticity"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery may not hold charge or deliver rated capacity",
+        "proof": "video of load test with multimeter showing voltage under load",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Battery may be old or near end of service life",
+        "proof": "photo of manufacturing date sticker on the battery",
+        "if_unproven": "as aged stock"
+      },
+      {
+        "risk": "Casing, terminals, or posts may be damaged",
+        "proof": "close-up photos of battery terminals, casing, and bottom",
+        "if_unproven": "as damaged"
+      },
+      {
+        "risk": "No warranty or proof of purchase",
+        "proof": "photo of original receipt or warranty card",
+        "if_unproven": "as no warranty"
+      }
+    ],
+    "proof_requests": [
+      "Video of battery under load with multimeter readings",
+      "Photo of manufacturing date sticker",
+      "Close-up photos of terminals and battery casing",
+      "Photo of original receipt or warranty card"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable from photo 0 as a Felicitysolar 12V 220Ah tubular solar battery, and the visible 220Ah label contradicts the seller's 240Ah claim, so it can be priced at its worst-case non-working condition."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 19947,
+    "input_tokens": 1842,
+    "output_tokens": 3205,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "be5a52eb2065312aafc4011b8c1ef934",
+    "error": null
+  }
+}

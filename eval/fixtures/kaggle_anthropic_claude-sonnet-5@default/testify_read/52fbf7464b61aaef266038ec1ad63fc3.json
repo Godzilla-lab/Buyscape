@@ -1,0 +1,85 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows a single blue manual hand pallet jack/pallet truck sitting outdoors on dirt/rubble.",
+      "A nameplate/sticker is visible on the body but text is too small/blurred to read any brand, model, or capacity rating.",
+      "Forks show scuffing and some wear; wheels/casters are not clearly visible under the forks.",
+      "Background shows unrelated items (generator, bucket, bags, a seated person) - a casual outdoor sales setting, not a warehouse.",
+      "Only one pallet jack is visible despite seller claiming two units (2.2 ton and 3 ton) are being sold."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "manual hand pallet jack",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Imported pallet jack from USA",
+        "verdict": "unverifiable_remote",
+        "evidence": "No shipping label, customs mark, or country-of-origin text is legible in photo 0."
+      },
+      {
+        "claim": "Two pallet jacks imported from USA, 2.2 tons and 3 tons",
+        "verdict": "unverified",
+        "evidence": "Only one unit is shown in photo 0; the second unit is not pictured."
+      },
+      {
+        "claim": "Capacity of this unit (2.2 ton or 3 ton)",
+        "verdict": "unverified",
+        "evidence": "Nameplate on the jack body is visible but the capacity text is unreadable in photo 0."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "True load capacity cannot be confirmed, and 2.2t vs 3t units differ materially in price.",
+        "proof": "Close-up photo of the nameplate/capacity sticker showing legible tonnage and model.",
+        "if_unproven": "priced at the lower disclosed capacity (2.2 ton) as worst case"
+      },
+      {
+        "risk": "Hydraulic pump mechanism may be worn, leaking, or not lifting properly.",
+        "proof": "Short video clip of the jack being pumped to raise forks and then lowered smoothly under a loaded pallet.",
+        "if_unproven": "priced as not working / needing hydraulic service"
+      },
+      {
+        "risk": "Wheels/casters condition (cracked, flat-spotted, or seized) not visible in this angle.",
+        "proof": "Photo of the steering wheel and load rollers from the side/underside.",
+        "if_unproven": "priced as worn wheels needing replacement"
+      },
+      {
+        "risk": "Structural rust or frame damage hidden by dirt/paint.",
+        "proof": "Photos from both sides and underneath showing frame welds and fork undersides.",
+        "if_unproven": "priced as cosmetic-plus-unknown-structural risk, i.e. lower tier"
+      },
+      {
+        "risk": "Second unit (3 ton) condition and existence is unconfirmed.",
+        "proof": "A separate photo clearly showing the second pallet jack with its own nameplate.",
+        "if_unproven": "treated as unverified listing, not priced as part of this unit"
+      }
+    ],
+    "proof_requests": [
+      "Clear close-up photo of the nameplate/capacity sticker on this pallet jack.",
+      "Video of the pump handle being operated to lift and lower the forks.",
+      "Photos of the wheels, rollers, and underside of the forks.",
+      "A photo of the second claimed pallet jack (3 ton) with its own nameplate."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is clearly a manual pallet jack, but the capacity rating that determines its price tier is on an unreadable nameplate, and a second claimed unit is not shown at all, so even a worst-case price cannot be set without the nameplate and hydraulic-function proof."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 22048,
+    "input_tokens": 2539,
+    "output_tokens": 2026,
+    "cost_usd": 0.025338,
+    "replayed": false,
+    "fixture_key": "52fbf7464b61aaef266038ec1ad63fc3",
+    "error": null
+  }
+}
