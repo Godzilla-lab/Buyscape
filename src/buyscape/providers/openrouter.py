@@ -251,7 +251,9 @@ class OpenRouterProvider:
                 if outages > self._network_retries:
                     break
                 self._sleep(min(2.0 * 2 ** (outages - 1), 32.0))
-            except (httpx.HTTPError, ProviderError, KeyError, ValidationError) as exc:
+            # TypeError and IndexError: a 200 reply with no answer in it ("choices": null), which
+            # Kaggle's proxy sends now and then; on 2 Nov one took a whole test run down.
+            except (httpx.HTTPError, ProviderError, KeyError, TypeError, IndexError, ValidationError) as exc:
                 last = exc
                 failures += 1
                 if failures > self._max_retries:
