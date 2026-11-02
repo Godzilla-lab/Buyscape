@@ -472,6 +472,29 @@ little better; the 2B prices fewer but closer, and is the better buyer.
 Nemotron's worst was ₦15 million offered for a 15kVA Stamford alternator
 listed at ₦450,000.
 
+Claude Sonnet 5 has answered 644 of the 679 (2 Nov; Kaggle's quota ran out
+on the last 35). On those 644, the same items for all three:
+
+| On the 644 items Claude answered | Run 4, 2B | Nemotron (120B) | Claude Sonnet 5 |
+|---|---|---|---|
+| Gave a price | 30% | **43%** | 19% |
+| Asking price inside the range | **52%** | 44% | 34% |
+| Offered above the asking price | **15%** | 25% | 24% |
+| Priced answers the rules mark wrong, unread | 20 | 30 | **6** |
+| Right about the item, judged | 94% | 97% | **99%** |
+| Items overpaid | **29** | 69 | **29** |
+| Largest overpayment, naira | **300,000** | 4,500,000 | 1,500,000 |
+| Overpaid per item, naira | **2,700** | 29,125 | 6,334 |
+| The same, leaving out each one's five dearest | **1,271** | 11,019 | 1,354 |
+| Expected loss per item, naira | **4,017** | 30,421 | 7,742 |
+
+Claude names the item best and prices least: it gives a price on one item
+in five, and when it does the asking price falls inside its range only a
+third of the time. The 2B prices half again as many items, lands inside the
+range half the time, and loses about half of what Claude loses per item;
+with each one's five worst overpayments left out the two overpay about the
+same. Claude's last 35 items follow when its quota returns.
+
 ## The fifth training run: every advert (1 Nov)
 
 The 2B again, on `sft_r5`: every training advert, 1,443 (957 in run 4),
