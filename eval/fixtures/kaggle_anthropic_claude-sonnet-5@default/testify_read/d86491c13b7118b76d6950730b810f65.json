@@ -1,0 +1,87 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Both photos show a large pile of multiple used green corded power drills stacked together, not a single isolated item.",
+      "The word 'BOSCH' is legible in white text on at least one tool body in photo 1.",
+      "Cords, chucks and nameplates are mostly obscured by overlapping tools; no voltage or chuck-size markings are legible in either photo.",
+      "No plug, power cable end, or rating plate is clearly visible in either photo.",
+      "Tools appear worn, dusty, and used (second-hand bulk stock), consistent with a 'tokunbo' resale shop."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "corded electric drill",
+      "brand": "Bosch",
+      "model": null,
+      "read_from": [
+        "photo 1 (text 'BOSCH' visible on tool body)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "220v",
+        "verdict": "unverifiable_remote",
+        "evidence": "No voltage rating plate or plug visible in either photo."
+      },
+      {
+        "claim": "13mm (chuck size)",
+        "verdict": "unverifiable_remote",
+        "evidence": "No chuck or nameplate clearly visible in either photo to confirm size."
+      },
+      {
+        "claim": "Bosch drilling machine",
+        "verdict": "supported",
+        "evidence": "Brand text 'BOSCH' legible on a tool in photo 1."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Specific unit buyer receives is unclear since photos show a mixed pile, not the individual item for sale.",
+        "proof": "A photo of the single actual unit being sold, isolated and clearly labeled.",
+        "if_unproven": "priced as generic used unit, lowest condition in the pile"
+      },
+      {
+        "risk": "Working condition unknown; used tools in bulk piles are often untested or faulty.",
+        "proof": "Video of the drill powering on and spinning under load.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Chuck size (claimed 13mm) unverified, affects capability and price tier.",
+        "proof": "Close-up photo of chuck or nameplate showing size.",
+        "if_unproven": "priced as smallest common chuck size (10mm) until proven"
+      },
+      {
+        "risk": "Voltage (claimed 220v) unverified; some used imports are 110v needing a converter.",
+        "proof": "Close-up photo of rating plate or plug.",
+        "if_unproven": "priced as needing voltage verification, treated as uncertain/non-standard"
+      },
+      {
+        "risk": "Cord and internal wiring condition unknown; visible coiled cords could be damaged or repaired with tape/splices.",
+        "proof": "Close-up photo of full cord length and plug.",
+        "if_unproven": "priced as having cord damage"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the single exact unit being sold, separated from the pile.",
+      "Close-up of the nameplate showing voltage, wattage, and model number.",
+      "Close-up of the chuck showing size markings.",
+      "Video of the drill powering on and chuck spinning."
+    ],
+    "decision": "price",
+    "reason": "A Bosch-branded used corded drill is identifiable by type and brand from photo 1, but with no visible nameplate, chuck, or power-on proof, it must be priced at worst case as an untested generic used unit with unverified voltage and chuck size."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 25123,
+    "input_tokens": 2161,
+    "output_tokens": 2087,
+    "cost_usd": 0.022033,
+    "replayed": false,
+    "fixture_key": "d86491c13b7118b76d6950730b810f65",
+    "error": null
+  }
+}

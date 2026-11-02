@@ -1,0 +1,85 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black DSLR camera body held in a hand, with a zoom lens attached.",
+      "The top/front plate shows 'Nikon' brand lettering in gold, clearly readable.",
+      "No specific model number (e.g. 'D3300') is legible anywhere on the body in the photo.",
+      "Lens barrel text reads something like 'Nikkor AF-S DX NIKKOR' but the exact focal length/aperture numbers are blurred and unreadable.",
+      "Camera sits on a wood table next to a dark folder/book; no battery, charger, memory card, strap, or box visible.",
+      "No photo of the LCD screen turned on, no shutter count, no sample images shown.",
+      "Watermark text 'POST GIJIJI' and 'KOMONE ZOE' overlay the image, likely a listing site watermark."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "DSLR camera",
+      "brand": "Nikon",
+      "model": null,
+      "read_from": [
+        "photo 0 body plate (brand only, model not legible)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Nikon D3300 DSLR Camera For Sale",
+        "verdict": "unverified",
+        "evidence": "Photo 0 confirms 'Nikon' brand only; the 'D3300' model designation is not visible or legible on the body."
+      },
+      {
+        "claim": "The camera body is... (description cut off)",
+        "verdict": "unverifiable_remote",
+        "evidence": "Seller's description is incomplete; no condition details given in visible text."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Model cannot be confirmed as D3300 vs another Nikon DSLR body, which changes price significantly.",
+        "proof": "Close-up photo of the model label (usually on the top LCD panel, back screen housing, or base plate) and the serial number sticker.",
+        "if_unproven": "cannot be priced at all until model is confirmed; treat as unidentified Nikon DSLR body"
+      },
+      {
+        "risk": "Unknown whether the camera powers on or functions (shutter, autofocus, sensor).",
+        "proof": "Video or photo of camera powered on with image showing on the LCD screen, and a test shot.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Lens condition and whether it is included in the sale or just shown for display.",
+        "proof": "Seller confirmation in photo/text showing lens mount compatibility and a clear shot of lens glass for fungus/scratches.",
+        "if_unproven": "priced as lens not included / lens condition unknown"
+      },
+      {
+        "risk": "Accessories (battery, charger, memory card, strap, box) not shown.",
+        "proof": "Photo of all included accessories laid out together.",
+        "if_unproven": "priced as body/lens only, no accessories"
+      },
+      {
+        "risk": "Shutter count and sensor dust/scratches unknown, affecting remaining usable life.",
+        "proof": "Screenshot of shutter count from a diagnostic tool or EXIF data, plus a clear sensor photo.",
+        "if_unproven": "priced as high shutter count / worst case wear"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the model nameplate/label on the camera body confirming 'D3300' (or actual model).",
+      "Photo or video of the camera powered on with a live image on the LCD screen.",
+      "Clear photo of the lens glass (front and rear elements) for fungus, scratches, or haze.",
+      "Photo of all accessories included (battery, charger, strap, memory card, box).",
+      "Shutter count screenshot or sample photos taken with the camera."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The brand 'Nikon' is visible but the specific model that determines price cannot be read from the photo, and no proof of working condition or included accessories is shown."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 25026,
+    "input_tokens": 2067,
+    "output_tokens": 2401,
+    "cost_usd": 0.024985,
+    "replayed": false,
+    "fixture_key": "224b7850065fa9502aeade2cf3f6da20",
+    "error": null
+  }
+}
