@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a white chest freezer with a large front sticker reading NEXUS and a small metal NEXUS badge on the upper right",
+      "The sticker shows polar bears, vegetables, and feature icons but the model number is not legible",
+      "A padlock with key is attached to the lid handle",
+      "A temperature control dial is visible at the bottom right front",
+      "Photo 1 shows the open interior with a metal liner, a white plastic basket, and visible staining at the bottom corner",
+      "Both photos carry the watermark POSTED ON JIJI ADEBAYO ELIZABETH"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "chest freezer",
+      "brand": "Nexus",
+      "model": null,
+      "read_from": [
+        "photo 0 sticker",
+        "photo 0 badge"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Nexus brand",
+        "verdict": "supported",
+        "evidence": "photo 0 sticker and top-right badge"
+      },
+      {
+        "claim": "NX150H model",
+        "verdict": "unverified",
+        "evidence": "model number not legible in either photo"
+      },
+      {
+        "claim": "Chest freezer",
+        "verdict": "supported",
+        "evidence": "photo 0 exterior and photo 1 interior"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Does not power on or cool",
+        "proof": "video of the freezer running with the dial turned and interior temperature dropping",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Thermostat or control dial faulty",
+        "proof": "close-up video of the dial being adjusted and compressor responding",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Interior liner damage beyond visible staining",
+        "proof": "well-lit video panning the full interior walls and floor",
+        "if_unproven": "as damaged interior"
+      },
+      {
+        "risk": "Lock or key does not work",
+        "proof": "video of the key locking and unlocking the lid",
+        "if_unproven": "as lock not working"
+      }
+    ],
+    "proof_requests": [
+      "Video of the freezer powered on and cooling",
+      "Close-up of any model or serial plate",
+      "Video of the key operating the lock"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a Nexus chest freezer from the photos, so it can be priced at its worst case as non-working; the unreadable model number does not prevent identification by type."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 21009,
+    "input_tokens": 2371,
+    "output_tokens": 2518,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "fb49dbb3204bae8f7f09f76b21c8fcf0",
+    "error": null
+  }
+}
