@@ -1,0 +1,91 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows a single solar panel with a white aluminium frame, standing upright against an outdoor wall.",
+      "Cell grid is visible: multiple columns and rows of rectangular monocrystalline-style cells, consistent with a large multi-busbar panel.",
+      "A faint 'NAGOTECH SOLAR' watermark and camera metadata (Camon 30, 23mm, f/1.88, 1/146s, ISO50) overlay the image; these are seller/app additions, not panel markings.",
+      "No manufacturer label, spec sticker, serial number, or junction box is visible or legible.",
+      "No close-up of frame corners, backsheet, or cable/connector ends.",
+      "No multimeter, load test, or output reading shown anywhere."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "600 watts",
+        "verdict": "unverifiable_remote",
+        "evidence": "No spec sticker or label visible in photo 0; wattage cannot be read or confirmed from the panel face alone."
+      },
+      {
+        "claim": "144 cell",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows a dense cell grid consistent with a large-format panel, but individual cell count cannot be reliably counted due to angle and glare."
+      },
+      {
+        "claim": "Canadian (brand)",
+        "verdict": "unverifiable_remote",
+        "evidence": "No brand name, logo, or label visible anywhere on the panel in photo 0."
+      },
+      {
+        "claim": "Used",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows visible surface smudging, slight haze on the glass, and frame wear consistent with a used panel."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual power output may be far below the claimed 600W, or panel may be non-functional.",
+        "proof": "Photo or short video of a multimeter/clamp meter connected to the panel in direct sunlight showing Voc/Isc or a load test.",
+        "if_unproven": "priced as non-functional / lowest-tier output"
+      },
+      {
+        "risk": "Brand cannot be confirmed as a reputable Canadian manufacturer (e.g. Canadian Solar); could be an unbranded or rebadged panel.",
+        "proof": "Close-up photo of the rear nameplate/sticker showing brand, model, and rated specs.",
+        "if_unproven": "priced as unbranded/generic panel"
+      },
+      {
+        "risk": "Hidden microcracks, hotspots, or delamination common in used panels, not visible in a glare-heavy front shot.",
+        "proof": "Multiple angled photos in even light, plus an electroluminescence (EL) test image if available.",
+        "if_unproven": "priced assuming possible cell damage"
+      },
+      {
+        "risk": "Junction box, bypass diodes, or cable connectors could be damaged or missing, affecting usability.",
+        "proof": "Close-up photo of the rear junction box and cable/MC4 connectors.",
+        "if_unproven": "priced assuming connector repair/replacement needed"
+      },
+      {
+        "risk": "Frame or glass could have cracks or dents not visible from this single distant angle.",
+        "proof": "Close-up photos of all four corners and the glass surface.",
+        "if_unproven": "priced assuming cosmetic/structural damage present"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the rear nameplate/sticker showing brand, model number, and rated wattage.",
+      "Video/photo of a multimeter test (Voc, Isc) under sunlight to confirm functional output.",
+      "Close-up of the junction box and cable connectors.",
+      "Full front and rear photos in even lighting without glare, showing all four corners."
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identifiable as a used solar panel of the type shown, but the seller's wattage, cell count, and brand claims are unverifiable from the single glare-heavy photo with no label or test shown, so it must be priced at worst case pending the listed proof."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 28336,
+    "input_tokens": 2002,
+    "output_tokens": 2512,
+    "cost_usd": 0.025965,
+    "replayed": false,
+    "fixture_key": "f475b696294f1ee980d85945ed688093",
+    "error": null
+  }
+}

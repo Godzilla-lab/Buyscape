@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Two black photovoltaic solar panels shown side by side",
+      "White grid lines and diamond patterns visible between cells",
+      "Watermark reads INNOSON GLOBAL GROUP across the image",
+      "Text Innoson Global Group appears at bottom left",
+      "No brand name, model number, or wattage label visible on the panels"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "200w Canadian Solar Panel",
+        "verdict": "unverified",
+        "evidence": "No Canadian Solar branding or 200W rating visible in photo 0"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Panel is not made by Canadian Solar",
+        "proof": "Close-up photo of the manufacturer label on the panel frame",
+        "if_unproven": "as generic unbranded solar panel"
+      },
+      {
+        "risk": "Panel is not rated at 200W",
+        "proof": "Close-up photo of the specification sticker showing rated power",
+        "if_unproven": "as lower-wattage panel"
+      },
+      {
+        "risk": "Panel does not generate electricity",
+        "proof": "Video of the panel under sunlight with multimeter voltage and current readings",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Hidden physical damage such as microcracks or delamination",
+        "proof": "Close-up photos of the cell surfaces and backsheet",
+        "if_unproven": "as damaged"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the specification label on the panel frame",
+      "Video of the panel producing voltage and current in sunlight",
+      "Close-up photos of the panel surface and backsheet"
+    ],
+    "decision": "price",
+    "reason": "The item is clearly a solar panel in photo 0, but the claimed brand and wattage cannot be verified from the image, so it is priced at worst case as a generic untested panel."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 17029,
+    "input_tokens": 1834,
+    "output_tokens": 2784,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "c51324617c8ebeb1f63ef4996fefa510",
+    "error": null
+  }
+}

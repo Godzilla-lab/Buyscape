@@ -1,0 +1,85 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0: front of a framed solar panel with black photovoltaic cells and silver grid lines.",
+      "Photo 1: back label reads Acrosol ET Solar, Photovoltaic Module ET-M660300WB, Maximum Power 300W.",
+      "Photo 2: white backsheet with junction box and two black output cables.",
+      "Watermark \"POSTED ON JIJI DON MOSES.\" appears on photos 0 and 2."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "solar panel",
+      "brand": "Acrosol ET Solar",
+      "model": "ET-M660300WB",
+      "read_from": [
+        "photo 1 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Solar panel",
+        "verdict": "supported",
+        "evidence": "photo 0 front face, photo 1 label, photo 2 backsheet"
+      },
+      {
+        "claim": "deep cycle",
+        "verdict": "unverified",
+        "evidence": "no battery shown in any photo"
+      },
+      {
+        "claim": "Donmoses New Life Energy Delars",
+        "verdict": "unverifiable_remote",
+        "evidence": "seller business identity not shown in photos"
+      },
+      {
+        "claim": "suppliers of solar equipment",
+        "verdict": "unverifiable_remote",
+        "evidence": "no inventory or premises shown"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Panel may not produce rated 300W or any power due to unseen cell damage or degradation",
+        "proof": "measured open-circuit voltage or flash test result",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Microcracks or hot spots invisible in the front photo",
+        "proof": "close-up of cell surface or electroluminescence image",
+        "if_unproven": "as damaged"
+      },
+      {
+        "risk": "Junction box or cable insulation may be faulty",
+        "proof": "close-up of junction box terminals and cable condition",
+        "if_unproven": "as electrically unsafe"
+      },
+      {
+        "risk": "Label in photo 1 may belong to a different panel than photo 0",
+        "proof": "matching serial number visible on the same unit across all photos",
+        "if_unproven": "as mismatched stock image"
+      }
+    ],
+    "proof_requests": [
+      "Multimeter reading of open-circuit voltage on the panel terminals",
+      "Close-up photo of the junction box and output cables",
+      "Video showing one serial number on the frame, label, and backsheet"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a 300W Acrosol ET Solar ET-M660300WB module from the label in photo 1, so a worst-case price can be set without further proof."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 22382,
+    "input_tokens": 2916,
+    "output_tokens": 2818,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "3426c0708f46f32451e1442cec3528ed",
+    "error": null
+  }
+}

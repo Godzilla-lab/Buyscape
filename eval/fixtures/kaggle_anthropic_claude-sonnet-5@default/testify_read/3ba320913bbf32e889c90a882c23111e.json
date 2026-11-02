@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: close-up of a black plastic tank with 'STOREX' text and an 'S' logo molded into the dome top.",
+      "Photo 0: tank surface has visible dirt streaks, scuff marks, and what look like scratches near the base.",
+      "Photo 0: a small circular inlet/outlet hole is visible near the top, and another hole near the bottom edge.",
+      "Photo 0: tank is sitting among other used-looking tanks, suggesting a tank yard or resale lot.",
+      "Photo 1: a black tank (same general shape/ribbing) is laid horizontally, roped onto the back of a motorcycle for delivery/logistics.",
+      "Photo 1: no brand text is readable on this tank; a sticker and a recycling/triangle symbol are faintly visible but not legible.",
+      "No liter/capacity marking is readable in either photo.",
+      "No shot of the full tank body, base, or any crack/repair areas.",
+      "No water-fill or leak test shown."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "plastic water storage tank",
+      "brand": "Storex",
+      "model": null,
+      "read_from": [
+        "photo 0 tank dome text 'STOREX'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Black Storex plastic water tank",
+        "verdict": "supported",
+        "evidence": "photo 0 shows 'STOREX' molded lettering and logo on the tank dome"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Tank capacity (liters) unknown, which is the primary price driver for water tanks",
+        "proof": "A clear shot of the capacity/size label or embossed liter marking, usually near the inlet or on the side wall",
+        "if_unproven": "cannot be priced at all, even at worst case, since price bands differ by capacity tier"
+      },
+      {
+        "risk": "Tank may be used/second-hand rather than new, given dirt and scuff marks in photo 0",
+        "proof": "Close-up of the base and a wider full-body shot showing wear, patches, or repairs",
+        "if_unproven": "priced as used/worn condition"
+      },
+      {
+        "risk": "Unknown if tank holds water without leaking (no cracks visible but not fully shown)",
+        "proof": "A video or photo of the tank filled with water, or a close inspection of the full exterior including base",
+        "if_unproven": "priced as not verified leak-free, i.e. functional status unproven"
+      },
+      {
+        "risk": "Photo 1 may show a different tank (no visible branding) possibly used to pad the listing or taken from stock photos",
+        "proof": "A photo of this specific horizontal tank showing the Storex branding to confirm it is the same unit",
+        "if_unproven": "treated as unverifiable, not counted toward the item being sold"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the capacity/liter marking on the tank (usually near the inlet cap or embossed on the side)",
+      "Full-body photo from a few steps back showing the entire tank including the base",
+      "Photo or short video of the tank filled with water or being tested for leaks",
+      "Confirmation that the tank in photo 1 is the same unit being sold, with a shot showing its Storex branding"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The brand is confirmed from photo 0, but no capacity/liter marking is visible anywhere, and water tank prices vary enormously by size, so even a worst-case price cannot be set without that one missing shot."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 20959,
+    "input_tokens": 3207,
+    "output_tokens": 1845,
+    "cost_usd": 0.021705,
+    "replayed": false,
+    "fixture_key": "3ba320913bbf32e889c90a882c23111e",
+    "error": null
+  }
+}
