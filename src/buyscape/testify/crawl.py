@@ -129,13 +129,28 @@ def sharp_enough(urls: list[str], max_photos: int) -> bool:
     return len(wanted) >= min(max_photos, 2) and min(_url_width(u) for u in wanted) >= SHARP
 
 
+# Many categories have no condition field (all of lighting in Abuja on 1 Nov:
+# 1,157 adverts, none kept). There a seller's own words say second-hand: any of
+# these in the title, and only the unmistakable ones in the description, where
+# "can be used for" is common.
+_USED_TITLE = re.compile(r"\b(used|tokunbo|second[- ]hand|2nd hand|faulty|spoilt|scrap|refurbished|pre-?owned|"
+                         r"condemned|for parts)\b", re.IGNORECASE)
+_USED_TEXT = re.compile(r"\b(fairly used|uk used|london used|foreign used|nigerian used|slightly used|tokunbo|"
+                        r"second[- ]hand|2nd hand|faulty|spoilt|for parts)\b", re.IGNORECASE)
+
+
 def why_not(listing: Listing) -> str | None:
     """Why an advert is left out of the crawl, or None to keep it: second-hand sellers only."""
     if WANTED.search(listing.title):
         return "buyer, not seller"
-    if (listing.condition or "").strip().lower() == "brand new" or not listing.is_used:
-        return "brand new or condition not stated"
-    return None
+    condition = (listing.condition or "").strip().lower()
+    if condition == "brand new":
+        return "brand new"
+    if listing.is_used:
+        return None
+    if _USED_TITLE.search(listing.title) or _USED_TEXT.search(listing.description or ""):
+        return None
+    return "condition not stated"
 
 
 def _progress(out_dir: Path, region: str, slug: str) -> Path:
@@ -181,7 +196,7 @@ def crawl(
     mark = _progress(out_dir, region, slug)
     visited: set[int] = set(json.loads(mark.read_text())) if mark.exists() else set()
     tally = {"kept": 0, "pages": 0, "in the benchmark": 0, "held already": 0, "buyer, not seller": 0,
-             "brand new or condition not stated": 0, "failed pages": 0}
+             "brand new": 0, "condition not stated": 0, "failed pages": 0}
     own = client is None
     client = client or httpx.Client(headers={"User-Agent": UA}, timeout=30.0)
     stale = 0

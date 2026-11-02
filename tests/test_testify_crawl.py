@@ -107,3 +107,19 @@ def test_the_advert_page_is_opened_only_when_the_listing_photos_are_small():
     assert crawl.sharp_enough([url(800), url(1000), url(720)], 3)
     assert not crawl.sharp_enough([url(300), url(1000)], 3)
     assert not crawl.sharp_enough([url(1000)], 3)
+
+
+def test_an_advert_with_no_condition_is_kept_when_its_seller_says_second_hand():
+    from buyscape.evalset.jiji import Listing
+
+    def listing(title, condition="", description=""):
+        return Listing(id="x", category="lighting", title=title, price_ngn=9000, description=description,
+                       condition=condition, is_used=condition == "Used", attrs={}, image_urls=[], url="",
+                       fetched_at="")
+
+    assert crawl.why_not(listing("UK Used Philips floor lamp")) is None
+    assert crawl.why_not(listing("Floor lamp", description="Fairly used, works well")) is None
+    assert crawl.why_not(listing("Faulty Samsung TV for parts")) is None
+    assert crawl.why_not(listing("Floor lamp", description="Can be used for reading")) == "condition not stated"
+    assert crawl.why_not(listing("Floor lamp", condition="Brand New")) == "brand new"
+    assert crawl.why_not(listing("Floor lamp", condition="Used")) is None
