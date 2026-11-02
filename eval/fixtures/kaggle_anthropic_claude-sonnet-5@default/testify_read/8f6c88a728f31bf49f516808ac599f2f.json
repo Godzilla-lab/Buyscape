@@ -1,0 +1,85 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: White Canon DSLR body with a white kit zoom lens, lens cap on, held in hand against a tiled floor background; 'Canon' logo visible on lens cap and body.",
+      "Photo 1: Rear view of the same white Canon body; LCD screen appears black/off, viewfinder, MENU/INFO buttons, Av, SET dial, playback and trash icons visible; 'Canon' logo printed below screen.",
+      "Photo 2: Close-up of top/front of body showing 'Canon' logo and a partially obscured model badge that reads ambiguously as 'EOS 100D' or 'EOS 1000D' (text is blurry and partly cut off by hand/angle).",
+      "No shots of a power-on screen, serial number plate, battery compartment, memory card slot, included accessories (battery, charger, strap, box), or the camera actually focusing/zooming.",
+      "Watermark 'CDICSON BUSINESS WORLD' and 'Posted on Jiji' overlay all three photos; no other listing context visible."
+    ],
+    "identity": {
+      "status": "unknown",
+      "kind": "DSLR camera with kit zoom lens",
+      "brand": "Canon",
+      "model": null,
+      "read_from": [
+        "photo 0",
+        "photo 1",
+        "photo 2"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Canon EOS 100D (Rebel SL1)",
+        "verdict": "unverified",
+        "evidence": "Photo 2 shows a model badge that is blurry/obscured; it could read '100D' or '1000D', which are very different cameras in price and spec. No clear, well-lit, unobstructed shot of the badge is provided."
+      },
+      {
+        "claim": "18-megapixel APS-C DSLR",
+        "verdict": "unverifiable_remote",
+        "evidence": "No sensor spec, menu screen, or EXIF/photo sample shown in any image."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Model confusion between EOS 100D (higher-end, newer, pricier) and EOS 1000D (older, much lower-value entry DSLR) based on ambiguous badge text in photo 2.",
+        "proof": "A sharp, well-lit, straight-on close-up of the model badge/nameplate on the front of the body, unobstructed by fingers.",
+        "if_unproven": "Priced as the lower-value model (EOS 1000D) until the badge is clearly confirmed as 100D."
+      },
+      {
+        "risk": "LCD screen appears black/off in photo 1 \u2014 could indicate a dead or faulty screen rather than just being powered off.",
+        "proof": "A photo or short video of the camera powered on showing the screen displaying a live image or menu.",
+        "if_unproven": "Priced as screen not working."
+      },
+      {
+        "risk": "Lens and autofocus functionality not demonstrated \u2014 no evidence of zoom, focus, or image capture working.",
+        "proof": "A short video showing the lens zooming, autofocus engaging, and a sample photo taken.",
+        "if_unproven": "Priced as lens/AF not working."
+      },
+      {
+        "risk": "Unknown accessory completeness (battery, charger, strap, box, memory card) which affects resale value.",
+        "proof": "A photo of all included accessories laid out together with the camera.",
+        "if_unproven": "Priced as body and lens only, no accessories."
+      },
+      {
+        "risk": "Shutter count/sensor wear and overall mechanical condition cannot be assessed from exterior photos alone.",
+        "proof": "A photo of the camera's menu shutter count screen or a sample full-resolution image showing sensor dust/spots.",
+        "if_unproven": "Priced assuming high shutter count / unknown sensor condition."
+      }
+    ],
+    "proof_requests": [
+      "Clear, unobstructed, well-lit close-up of the model nameplate/badge on the front of the camera body.",
+      "Photo or video of the camera powered on with the LCD screen displaying a live view or menu.",
+      "Video of the lens zooming and autofocusing, plus one sample photo taken with it.",
+      "Photo of all included accessories (battery, charger, strap, memory card, box).",
+      "Photo of the in-camera shutter count screen (via menu) or a sample image showing sensor condition."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The core identity claim (EOS 100D vs a visually similar but very different EOS 1000D) cannot be confirmed from the blurry badge in photo 2, and this model distinction drives the price tier; a readable close-up of the nameplate is needed before even a worst-case price can be set."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 38015,
+    "input_tokens": 4775,
+    "output_tokens": 3423,
+    "cost_usd": 0.040621,
+    "replayed": false,
+    "fixture_key": "8f6c88a728f31bf49f516808ac599f2f",
+    "error": null
+  }
+}

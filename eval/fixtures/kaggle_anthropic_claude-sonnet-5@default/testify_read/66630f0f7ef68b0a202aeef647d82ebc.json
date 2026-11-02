@@ -1,0 +1,100 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: A truck chassis with 'MACK' visible on the grille, carrying a yellow crane superstructure marked 'PPM'. Large truck tires lie detached on the ground nearby.",
+      "Photo 1: Close-up of the crane boom showing painted text 'Crane CAPACITY 50T' and 'S.W.L 25T', with a hydraulic cylinder and pivot visible, some rust and wear on the metal.",
+      "Photo 2: A separate yellow wheel loader/backhoe-type machine with a front bucket, parked in a dirt yard, cab windows appear broken or missing glass.",
+      "Background in all photos shows a residential compound with concrete block walls, banana plants, and a building with AC units - consistent with a Nigerian compound, not a dedicated industrial yard.",
+      "No generators, no dredging pipes, and no 'workshop' structure are visible in any of the three photos."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "truck-mounted mobile crane",
+      "brand": "PPM",
+      "model": null,
+      "read_from": [
+        "photo 0 (PPM lettering on crane body, MACK on truck grille)",
+        "photo 1 (painted 'Crane CAPACITY 50T S.W.L 25T')"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Item list: '4 big generators'",
+        "verdict": "contradicted",
+        "evidence": "No generator is visible in any of the 3 photos; only a crane truck and a wheel loader are shown."
+      },
+      {
+        "claim": "Item list: '42 pieces of dredging pipes'",
+        "verdict": "contradicted",
+        "evidence": "No pipes of any kind are visible in photo 0, 1, or 2."
+      },
+      {
+        "claim": "Item list: '2 Two standing workshop all with...'",
+        "verdict": "contradicted",
+        "evidence": "No workshop structure or related equipment is shown; only a crane and a loader appear."
+      },
+      {
+        "claim": "Crane capacity 50T (S.W.L 25T) as painted on boom",
+        "verdict": "unverifiable_remote",
+        "evidence": "Text is painted on the machine in photo 1, but painted capacity ratings cannot be confirmed as accurate without a manufacturer plate or load test record."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Seller's written item list (generators, dredging pipes, workshop) does not match any item in the photos, raising doubt about what is actually being sold or whether photos/listing were mixed up or copied from elsewhere.",
+        "proof": "A fresh, unedited photo set showing the actual generators, pipes, and workshop structures claimed in the text, in the same location/background as the crane and loader photos.",
+        "if_unproven": "treat listing as unverifiable for the stated items; only the crane and loader visible in photos can be considered, and only at worst-case non-working condition"
+      },
+      {
+        "risk": "Mechanical/engine condition of the crane truck and loader is unknown; could be non-functional, missing engine parts, or have no battery/hydraulics working",
+        "proof": "Video of the engine starting, crane boom being raised/lowered, and loader bucket moving under its own hydraulic power",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Tires on the ground near the crane in photo 0 suggest wheels/tires may be removed or damaged, not just stored",
+        "proof": "Close-up photo of all wheel hubs/axles on the crane showing tires properly mounted and inflated",
+        "if_unproven": "priced as missing/damaged tires needing replacement"
+      },
+      {
+        "risk": "Crane boom shows rust and wear (photo 1); structural integrity for rated 50T/25T lifting capacity cannot be confirmed",
+        "proof": "Close-up photos of weld points, pins, and manufacturer's data/certification plate, plus any recent inspection certificate",
+        "if_unproven": "priced as scrap/non-certified lifting equipment, not as a rated working crane"
+      },
+      {
+        "risk": "Loader's cab glass appears broken or missing (photo 2), and overall machine condition (hydraulics, bucket teeth, undercarriage) is unclear",
+        "proof": "Photos of cab interior, hydraulic hoses, and a video of the bucket lifting/digging",
+        "if_unproven": "priced as non-working/damaged"
+      },
+      {
+        "risk": "No ownership, registration, or import/customs documents shown for heavy equipment, which is often required for resale of such machinery in Nigeria",
+        "proof": "Photo of title/ownership documents, customs papers, or government registration for the crane and loader",
+        "if_unproven": "treated as unverifiable ownership, added legal/resale risk"
+      }
+    ],
+    "proof_requests": [
+      "Photos of the actual generators, dredging pipes, and workshop items described in the text listing",
+      "Video of the crane truck engine starting and the boom operating",
+      "Video of the wheel loader engine starting and bucket/arm moving",
+      "Close-up photos of the crane's manufacturer data plate and any load certification",
+      "Photos of ownership/registration documents for both machines",
+      "Close-up photos of all tires properly mounted on the crane truck"
+    ],
+    "decision": "fraud_suspected",
+    "reason": "The seller's text describes generators, dredging pipes, and a workshop, but none of these appear in any of the three photos, which instead show an unrelated truck-mounted crane and a wheel loader; this mismatch between words and visual evidence is a strong red flag that the listing is mixed up, copied, or deceptive."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 31594,
+    "input_tokens": 2553,
+    "output_tokens": 2854,
+    "cost_usd": 0.030487,
+    "replayed": false,
+    "fixture_key": "66630f0f7ef68b0a202aeef647d82ebc",
+    "error": null
+  }
+}

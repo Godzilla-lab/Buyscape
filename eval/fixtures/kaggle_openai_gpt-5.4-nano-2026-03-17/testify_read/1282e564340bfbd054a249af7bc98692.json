@@ -1,0 +1,69 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0: A large rectangular solar panel with many cells; brand text on the frame appears to read 'NETWORK SOLAR VENTURES' (watermark/printing). No clear wattage/model label visible.",
+      "Photo 1: Another close view of the same solar panel; no readable manufacturer/model/wattage sticker visible.",
+      "Photo 2: Back/underside view of a solar panel; shows mounting/terminal area and cables; no readable specs plate visible.",
+      "Photo 3: Back/underside view from farther back; terminal area visible but no readable model/specs."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel (grid-tie/off-grid type not confirmed)",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "We deal... (seller introduction)",
+        "verdict": "unverifiable_remote",
+        "evidence": "Seller text is generic and does not state the item specs, condition, or price."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Wattage/brand/model is not readable, so the price could be wrong (e.g., 100W vs 400W class).",
+        "proof": "A clear close-up photo of the panel\u2019s label/specs (manufacturer + model + wattage + serial) on the frame/back.",
+        "if_unproven": "Price it at the worst-case for unknown specs: treat as a lower-watt, generic used solar panel (not premium)."
+      },
+      {
+        "risk": "Condition/health of cells is unknown (possible micro-cracks, hot spots, or reduced output). Photos only show appearance, not performance.",
+        "proof": "A working test: photo/video of an IV curve test or at least a multimeter/solar tester reading under sun (or a charge controller log showing output).",
+        "if_unproven": "Price it as not guaranteed to be at full output (used/possibly degraded)."
+      },
+      {
+        "risk": "Compatibility/connection details unknown (connector type, cable length, junction box condition).",
+        "proof": "Close-up of the junction box and connectors (MC4 or other), plus cable length measurement.",
+        "if_unproven": "Price as requiring standard replacement/adapter if connectors are not usable."
+      },
+      {
+        "risk": "Mounting frame integrity and backsheet condition unknown (bent frame, corrosion, water ingress).",
+        "proof": "Photos of the frame edges and backsheet corners in good light, plus any visible rust/cracks.",
+        "if_unproven": "Price as having possible cosmetic/structural wear typical of used panels."
+      }
+    ],
+    "proof_requests": [
+      "Send a clear close-up of the panel rating label (wattage, voltage/current, model, serial) from photo 0/1 frame or photo 2/3 back.",
+      "Send a photo/video of the junction box and connector type (e.g., MC4) with cable length.",
+      "Provide a performance proof: IV test result or a simple output test under sun (and/or controller log).",
+      "Show the panel\u2019s full frame edges and backsheet corners for cracks/corrosion."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photos show a solar panel, but the key pricing driver (brand/model/wattage rating) and condition/performance proof are not readable or verifiable from the images provided. Without the spec label and a test, any price would be guesswork."
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_read",
+    "latency_ms": 6120,
+    "input_tokens": 2875,
+    "output_tokens": 785,
+    "cost_usd": 0.001556,
+    "replayed": false,
+    "fixture_key": "1282e564340bfbd054a249af7bc98692",
+    "error": null
+  }
+}
