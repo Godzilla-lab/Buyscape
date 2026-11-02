@@ -1,0 +1,111 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0: Multiple closed laptops on glass shelves, wrapped in clear plastic; HP logo visible on a silver laptop; Windows logo visible on one unit; labels and stickers present",
+      "Photo 1: Several laptops standing vertically showing side profiles; Apple logo visible on the leftmost silver laptop; various silver and grey finishes",
+      "Photo 2: Laptops standing and lying flat; DELL logo visible on a black laptop in the foreground; multiple silver laptops standing in the background; most units wrapped in plastic",
+      "All photos carry a VIBRA GLOBAL LIMITED watermark",
+      "No screens are visible; all units appear closed or wrapped",
+      "No chargers, boxes, or accessories are visible in any photo"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "laptop",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0",
+        "photo 1",
+        "photo 2"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Hp",
+        "verdict": "supported",
+        "evidence": "photo 0 shows HP logo on a silver laptop"
+      },
+      {
+        "claim": "Dell",
+        "verdict": "supported",
+        "evidence": "photo 2 shows DELL logo on a black laptop"
+      },
+      {
+        "claim": "Lenovo",
+        "verdict": "unverified",
+        "evidence": "no Lenovo logo visible in any photo"
+      },
+      {
+        "claim": "MS Surface",
+        "verdict": "unverified",
+        "evidence": "no Surface branding visible in any photo"
+      },
+      {
+        "claim": "MAC book Pro and Air",
+        "verdict": "supported",
+        "evidence": "photo 1 shows Apple logo on the leftmost laptop"
+      },
+      {
+        "claim": "All type and sizes",
+        "verdict": "unverifiable_remote",
+        "evidence": "photos show only a subset; cannot confirm all types and sizes"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Laptop does not power on",
+        "proof": "video of each unit booting to the desktop",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Battery dead or missing",
+        "proof": "photo of battery health reading or unit running on battery",
+        "if_unproven": "as dead battery"
+      },
+      {
+        "risk": "Screen cracked or defective",
+        "proof": "photo of each screen turned on",
+        "if_unproven": "as damaged screen"
+      },
+      {
+        "risk": "Charger not included",
+        "proof": "photo of charger with each unit",
+        "if_unproven": "as no charger"
+      },
+      {
+        "risk": "Specification lower than expected (processor, RAM, storage)",
+        "proof": "screenshot of system information",
+        "if_unproven": "as lowest specification"
+      },
+      {
+        "risk": "Physical damage hidden by plastic wrap",
+        "proof": "close-up photos of each laptop unwrapped",
+        "if_unproven": "as poor physical condition"
+      }
+    ],
+    "proof_requests": [
+      "Video of each laptop booting to the desktop",
+      "Photo of each screen turned on",
+      "Photo of charger included with each unit",
+      "Screenshot of system specifications (processor, RAM, storage)",
+      "Close-up photos of each laptop unwrapped to show casing condition"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as used laptops from multiple brands visible in the photos; even at worst case (non-working, no charger, unknown specs), a price can be set."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 16692,
+    "input_tokens": 2480,
+    "output_tokens": 3135,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "2bd8e35ed6fa55591b0c6a9e03e41391",
+    "error": null
+  }
+}

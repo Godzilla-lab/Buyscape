@@ -1,0 +1,93 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows approximately twenty M.2 solid-state drives laid out on a wooden floor",
+      "Drives are single-sided M.2 2280 form factor with blue and green PCBs",
+      "White labels carry CE, FC, UKCA, RoHS and other regulatory marks plus barcodes",
+      "Label text is too small to read brand, model, capacity, or generation reliably",
+      "A CORNERSTONE watermark runs across the center of the image",
+      "No packaging, cables, or adapters are visible",
+      "Seller text describes one 256GB M.2 Gen3 SSD, but the photo shows many units"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "M.2 solid state drive",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "It is an M.2 solid state drive",
+        "verdict": "supported",
+        "evidence": "photo 0 shows M.2 form factor"
+      },
+      {
+        "claim": "Capacity 256GB",
+        "verdict": "unverified",
+        "evidence": "label text unreadable in photo 0"
+      },
+      {
+        "claim": "Generation Gen3 / Genx3",
+        "verdict": "unverified",
+        "evidence": "label text unreadable in photo 0"
+      },
+      {
+        "claim": "One drive for sale",
+        "verdict": "unverifiable_remote",
+        "evidence": "photo 0 shows many units; listing does not state if sold singly or as a lot"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Drive does not work or is dead on arrival",
+        "proof": "Video of drive installed and detected in BIOS or operating system",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Capacity is not 256GB",
+        "proof": "Close-up label photo or OS screenshot showing advertised capacity",
+        "if_unproven": "as unknown capacity"
+      },
+      {
+        "risk": "Interface is SATA M.2 or Gen2 rather than Gen3 NVMe",
+        "proof": "Label close-up or benchmark screenshot showing interface and generation",
+        "if_unproven": "as SATA M.2 / Gen2"
+      },
+      {
+        "risk": "NAND has high wear or is used",
+        "proof": "SMART health screenshot such as CrystalDiskInfo",
+        "if_unproven": "as heavily used"
+      },
+      {
+        "risk": "Drive is counterfeit or rebranded",
+        "proof": "Clear close-up of brand and model matching a known manufacturer",
+        "if_unproven": "as unbranded generic"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of a drive label showing brand, model, and capacity",
+      "Screenshot of drive health and capacity from CrystalDiskInfo or similar",
+      "Photo of the drive installed and detected in a computer"
+    ],
+    "decision": "price",
+    "reason": "The goods are identifiable as M.2 solid-state drives from photo 0, so they can be priced at worst case (untested, unknown capacity and generation) while proof is gathered."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 150396,
+    "input_tokens": 2018,
+    "output_tokens": 3840,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "05ae214179263e8fb0eee9ccba51c36c",
+    "error": null
+  }
+}

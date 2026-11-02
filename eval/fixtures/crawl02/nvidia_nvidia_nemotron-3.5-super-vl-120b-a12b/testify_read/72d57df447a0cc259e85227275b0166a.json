@@ -1,0 +1,110 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "A hand holds a dark blue iPhone in front of iPhone retail boxes in all three photos.",
+      "The back label is visible in photo 0, photo 1, and photo 2 and reads iPhone SE 2022 with 256GB capacity.",
+      "A second red phone appears beside the blue one in photo 1 and photo 2.",
+      "The background shows a shop interior with a SEADOT GROUP wall sign in photo 1.",
+      "Watermarks read POSTED ON JIJI and SEADOT GROUP across the images."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "iPhone SE 2022 256GB",
+      "brand": "Apple",
+      "model": "iPhone SE 2022",
+      "read_from": [
+        "photo 0 label",
+        "photo 1 label",
+        "photo 2 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Mint condition",
+        "verdict": "unverified",
+        "evidence": "photos show the back only; no close-ups of screen, edges, corners, or battery health"
+      },
+      {
+        "claim": "iPhone SE 2022",
+        "verdict": "supported",
+        "evidence": "label reads iPhone SE 2022 in photo 0, photo 1, and photo 2"
+      },
+      {
+        "claim": "5G",
+        "verdict": "unverified",
+        "evidence": "label does not visibly show 5G; model implies it but cannot be confirmed remotely from photos"
+      },
+      {
+        "claim": "256GB",
+        "verdict": "supported",
+        "evidence": "label reads 256GB in photo 0, photo 1, and photo 2"
+      },
+      {
+        "claim": "physical sim",
+        "verdict": "unverified",
+        "evidence": "SIM tray is not visible in any photo"
+      },
+      {
+        "claim": "Esim available",
+        "verdict": "unverified",
+        "evidence": "no screenshot of cellular or eSIM settings"
+      },
+      {
+        "claim": "available for pickup",
+        "verdict": "unverifiable_remote",
+        "evidence": "logistics claim not visible in photos"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery health is degraded or unknown",
+        "proof": "screenshot of Settings > Battery > Battery Health",
+        "if_unproven": "as worn battery"
+      },
+      {
+        "risk": "Phone does not power on or has hidden functional faults",
+        "proof": "video of the phone booting, unlocking, touchscreen responding, and both cameras working",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "iCloud or activation lock is enabled",
+        "proof": "video showing the home screen with no activation lock",
+        "if_unproven": "as iCloud locked"
+      },
+      {
+        "risk": "Physical SIM or eSIM is not functional",
+        "proof": "screenshot of Settings > Cellular showing active SIM status",
+        "if_unproven": "as no working SIM"
+      },
+      {
+        "risk": "Cosmetic damage not visible in the photos",
+        "proof": "close-up photos of the screen, sides, and corners",
+        "if_unproven": "as fair condition with visible wear"
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of Settings > General > About showing model, capacity, and serial number",
+      "Video of the phone powering on, unlocking, and both cameras working",
+      "Screenshot of Settings > Battery > Battery Health",
+      "Screenshot of Settings > Cellular showing SIM status",
+      "Close-up photos of the screen, sides, and corners"
+    ],
+    "decision": "price",
+    "reason": "The phone is identifiable as an iPhone SE 2022 256GB from the label visible in all three photos; seller claims about condition and features are unproven so it is priced at worst case."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 30324,
+    "input_tokens": 2922,
+    "output_tokens": 2739,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "72d57df447a0cc259e85227275b0166a",
+    "error": null
+  }
+}

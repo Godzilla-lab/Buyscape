@@ -1,0 +1,113 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows the laptop underside with \"Precision 3561\" printed near the center",
+      "Photo 0 shows regulatory labels and stickers along the bottom edge",
+      "Photo 1 shows the closed lid with a centered Dell logo",
+      "Photo 2 shows the laptop open with the screen on and a Dell logo below the display",
+      "Photo 2 shows an Intel sticker on the palm rest lower right, but the text is unreadable",
+      "Photo 2 shows an NVIDIA sticker on the palm rest lower right corner, but the model is unreadable",
+      "A hand holds the laptop in all three photos against a wood-paneled background"
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Dell",
+      "model": "Precision 3561",
+      "read_from": [
+        "photo 0",
+        "photo 1",
+        "photo 2"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Dell Precision 15 3561 Laptop",
+        "verdict": "supported",
+        "evidence": "photo 0 shows \"Precision 3561\" on the underside; photo 1 and photo 2 show the Dell logo"
+      },
+      {
+        "claim": "Intel Core i7, 11th Generation",
+        "verdict": "unverified",
+        "evidence": "photo 2 shows an Intel sticker but the generation and tier are unreadable"
+      },
+      {
+        "claim": "16gb Ram",
+        "verdict": "unverifiable_remote",
+        "evidence": "no photo shows system information or a RAM label"
+      },
+      {
+        "claim": "512gb SSD",
+        "verdict": "unverifiable_remote",
+        "evidence": "no photo shows storage capacity or a drive label"
+      },
+      {
+        "claim": "Nvidia Quadro...",
+        "verdict": "unverified",
+        "evidence": "photo 2 shows an NVIDIA sticker but the specific Quadro model is unreadable"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery health and runtime unknown",
+        "proof": "screenshot of Windows battery report or cycle count",
+        "if_unproven": "as dead battery requiring replacement"
+      },
+      {
+        "risk": "Actual CPU generation and tier unconfirmed",
+        "proof": "screenshot of System Information or dxdiag showing the processor",
+        "if_unproven": "as a lower-spec processor than claimed"
+      },
+      {
+        "risk": "Actual RAM amount and speed unconfirmed",
+        "proof": "screenshot of Task Manager performance tab showing memory",
+        "if_unproven": "as less than 16GB RAM"
+      },
+      {
+        "risk": "Actual SSD capacity and health unconfirmed",
+        "proof": "screenshot of Disk Management showing drive size and health",
+        "if_unproven": "as a smaller or failing drive"
+      },
+      {
+        "risk": "Actual GPU model unconfirmed",
+        "proof": "screenshot of Device Manager or dxdiag showing the display adapter",
+        "if_unproven": "as integrated graphics or a lower Quadro model"
+      },
+      {
+        "risk": "Screen, keyboard, trackpad, and ports untested",
+        "proof": "video showing a solid-color screen test, typing, trackpad clicks, and port use",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Charger not shown",
+        "proof": "photo of the power adapter and cable",
+        "if_unproven": "as sold without charger"
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of System Information showing processor, RAM, and Windows version",
+      "Screenshot of Disk Management showing SSD capacity",
+      "Screenshot of Device Manager or dxdiag showing GPU model",
+      "Screenshot of battery report or cycle count",
+      "Video of screen, keyboard, trackpad, and ports in use",
+      "Photo of charger and cable"
+    ],
+    "decision": "price",
+    "reason": "The model is readable as Dell Precision 3561 from photo 0, so it can be priced at its worst case despite unverified specs and untested functions."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 21287,
+    "input_tokens": 2934,
+    "output_tokens": 3327,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "5d8539d66b406fcbd29bcb8d7cc804c8",
+    "error": null
+  }
+}

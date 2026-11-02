@@ -1,0 +1,105 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Two orange smartphones in white boxes shown side by side in photos 0 and 1",
+      "Single orange smartphone in white box shown in photo 2",
+      "Phones have triple rear cameras in a triangular arrangement with flash and sensor",
+      "Apple logo visible on the bottom edge of the box in photo 2",
+      "No model number, storage capacity, IMEI, or serial number visible in any photo",
+      "Front screens are not visible in any photo",
+      "Watermark \"POSTED ON JIJI\" and \"GODWIN FRANCIS\" appears on all photos"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "smartphone",
+      "brand": "Apple",
+      "model": null,
+      "read_from": [
+        "photo 2 box edge"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Open box",
+        "verdict": "supported",
+        "evidence": "Boxes are visibly open with phones inside in photos 0, 1, and 2"
+      },
+      {
+        "claim": "iPhone 17 pro",
+        "verdict": "unverified",
+        "evidence": "No model number readable on the phone or box in any photo"
+      },
+      {
+        "claim": "256gb",
+        "verdict": "unverifiable_remote",
+        "evidence": "Storage capacity is not shown in the photos"
+      },
+      {
+        "claim": "eSIM unlocked",
+        "verdict": "unverifiable_remote",
+        "evidence": "SIM or eSIM status cannot be seen in the photos"
+      },
+      {
+        "claim": "UK standard",
+        "verdict": "unverifiable_remote",
+        "evidence": "Region or network standard is not visible in the photos"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Phone is an older iPhone model, not iPhone 17 Pro",
+        "proof": "Photo of the box back showing model name or screenshot of Settings > General > About",
+        "if_unproven": "as an older iPhone model"
+      },
+      {
+        "risk": "Storage is less than 256GB",
+        "proof": "Screenshot of Settings > General > About showing capacity",
+        "if_unproven": "as lower storage"
+      },
+      {
+        "risk": "Phone is carrier locked or not eSIM unlocked",
+        "proof": "Screenshot of SIM lock status or eSIM settings",
+        "if_unproven": "as locked"
+      },
+      {
+        "risk": "Front screen is cracked or damaged",
+        "proof": "Front view photo of the screen",
+        "if_unproven": "as damaged screen"
+      },
+      {
+        "risk": "Phone does not power on or has hidden faults",
+        "proof": "Video of the phone booting and navigating menus",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "IMEI is blacklisted or stolen",
+        "proof": "IMEI number and blacklist check result",
+        "if_unproven": "as blacklisted"
+      }
+    ],
+    "proof_requests": [
+      "Photo of box back showing model name and storage",
+      "Screenshot of Settings > General > About showing model, storage, and serial number",
+      "Front view photo of the phone screen",
+      "Video of the phone powering on and functioning",
+      "IMEI number for blacklist check"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The exact iPhone model is unreadable in the photos, and all functional claims cannot be verified remotely, so no worst-case price can be set without proof."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 26206,
+    "input_tokens": 3132,
+    "output_tokens": 4321,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "6c998354eb86c31d54681f3b29731701",
+    "error": null
+  }
+}
