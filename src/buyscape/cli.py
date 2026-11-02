@@ -1657,7 +1657,9 @@ def testify_train_build(
             return None
 
         build(wanted)
+        console.print(f"{len(missing)} price steps have no teacher's pick yet; asking {record_picks}")
         live = _provider(record_picks, fixtures, "auto")
+        asked = [0]
 
         def ask(request):
             try:
@@ -1665,6 +1667,10 @@ def testify_train_build(
             except Exception as exc:  # a failed step is reported, never guessed
                 console.print(f"[red]price step: {type(exc).__name__}: {str(exc)[:160]}[/red]")
                 return None
+            finally:
+                asked[0] += 1
+                if asked[0] % 50 == 0:
+                    console.print(f"  {asked[0]} of {len(missing)} price steps asked")
 
         with ThreadPoolExecutor(max_workers=max(1, workers)) as threads:
             costs = list(threads.map(ask, missing))
