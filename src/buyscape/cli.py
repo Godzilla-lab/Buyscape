@@ -1657,15 +1657,29 @@ def testify_train_build(
             return None
 
         build(wanted)
-        console.print(f"{len(missing)} price steps have no teacher's pick yet; asking {record_picks}")
+        # A step this teacher answered in the wrong shape before is not asked again: it answers
+        # the same way at temperature 0, and every restart would spend its minutes on them.
+        refused_path = fixtures / _dir_name(record_picks) / "testify_pick_refused.txt"
+        refused = set(refused_path.read_text().split()) if refused_path.exists() else set()
+        before = len(missing)
+        missing = [r for r in missing if r.fixture_key() not in refused]
+        console.print(f"{len(missing)} price steps have no teacher's pick yet; asking {record_picks}"
+                      f" ({before - len(missing)} it answered in the wrong shape before, left out)")
         live = _provider(record_picks, fixtures, "auto")
         asked = [0]
+        lock = threading.Lock()
+        from .testify.score import BROKE_SCHEMA
 
         def ask(request):
             try:
                 return live.structured_call(request)[1].cost_usd
             except Exception as exc:  # a failed step is reported, never guessed
                 console.print(f"[red]price step: {type(exc).__name__}: {str(exc)[:160]}[/red]")
+                if BROKE_SCHEMA.search(str(exc)):
+                    with lock:
+                        refused_path.parent.mkdir(parents=True, exist_ok=True)
+                        with refused_path.open("a") as fh:
+                            fh.write(request.fixture_key() + "\n")
                 return None
             finally:
                 asked[0] += 1
