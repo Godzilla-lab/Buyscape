@@ -1,0 +1,80 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Large yellow-painted welded steel box sections/girders stacked in an outdoor yard, bolted plate joints visible.",
+      "One section has a rusted circular cut-out, suggesting it was repurposed or cut from larger equipmentt.",
+      "Mobile crane with orange boom and cab visible in background (photo 0, 1).",
+      "Shipping container marked 'CHINA SHIPPING' in background (photo 3), not part of the sale, just yard context.",
+      "Ground is muddy/wet, items sit directly on soil, no weighbridge, scale, or measuring reference visible in any photo.",
+      "No weight tags, tonnage markers, or quantity count visible on any item."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "heavy steel scrap (box girder/beam sections)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0",
+        "photo 1",
+        "photo 2",
+        "photo 3"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Scrap Metals For Sale Any Quantities",
+        "verdict": "unverifiable_remote",
+        "evidence": "No weighbridge ticket, scale photo, or itemized count shown in any of the 4 photos; quantity claim cannot be checked remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual weight/tonnage of the scrap lot is unknown, and scrap metal is priced by weight.",
+        "proof": "Photo or video of the lot on a weighbridge/scale with a legible ticket, or a itemized count with individual piece dimensions.",
+        "if_unproven": "cannot be priced at all without a weight basis; worst case assumption of weight is not reliable enough even for a floor price"
+      },
+      {
+        "risk": "Material grade/composition (mild steel vs alloy vs mixed with non-ferrous) affects price per kg.",
+        "proof": "Close-up shot showing any stamped grade marking, or a magnet test clip, or a mill certificate if available.",
+        "if_unproven": "price as ungraded mixed mild steel scrap, the lowest common grade"
+      },
+      {
+        "risk": "Visible heavy rust and surface contamination (mud, possible coatings/paint) may reduce net recoverable metal weight.",
+        "proof": "Close-up of rusted/cut sections and any coating, plus a clean-weight statement from seller.",
+        "if_unproven": "priced assuming gross weight includes non-metal contamination, i.e. discounted net yield"
+      },
+      {
+        "risk": "Site accessibility and loading conditions (muddy ground, crane required) affect buyer's pickup/transport cost, which is a hidden cost beyond the scrap price itself.",
+        "proof": "Wider site photo or video showing access road and whether crane/loading equipment is included in sale or must be separately arranged.",
+        "if_unproven": "assume difficult access, buyer bears full loading/haulage cost"
+      },
+      {
+        "risk": "\"Any quantities\" claim implies larger stock than what is shown in 4 photos; unverified inventory beyond the pictured pieces.",
+        "proof": "Full yard video walk-through or itemized photo list of all available pieces with sizes.",
+        "if_unproven": "price only the pieces actually shown, not the unverified larger claimed stock"
+      }
+    ],
+    "proof_requests": [
+      "Weighbridge ticket or scale photo showing total tonnage of the lot being sold.",
+      "Close-up of any grade stamp or a magnet test video to confirm ferrous mild steel.",
+      "Wider yard video showing full extent of 'any quantities' stock and site access for loading."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Scrap metal is priced per unit weight, and none of the four photos show a scale, weighbridge ticket, or any quantity/tonnage reference, so even a worst-case price per the pictured pieces cannot be grounded in an actual weight figure."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 24518,
+    "input_tokens": 4088,
+    "output_tokens": 1979,
+    "cost_usd": 0.024807,
+    "replayed": false,
+    "fixture_key": "6b08131a8fc98dfeca32d9b242044408",
+    "error": null
+  }
+}

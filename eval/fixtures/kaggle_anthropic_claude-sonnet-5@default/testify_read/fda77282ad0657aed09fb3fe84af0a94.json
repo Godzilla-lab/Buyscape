@@ -1,0 +1,73 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: overhead view of a red gas cylinder with the black protective collar/carry handle open, showing a central valve-hole but no valve or regulator fitted or visible.",
+      "Photo 0 and 1: other cylinders in the background (a grey cylinder, a yellow cylinder marked 'BUTANE 13KG') but these are not the item being sold, only context.",
+      "Photo 1: close-up of the same red cylinder's neck, black collar heavily scraped, red paint flaking, some metal fitting visible but partly obscured, no legible capacity or brand markings.",
+      "No manufacturer name, capacity (kg), or safety/test-date stamp is legible on the red cylinder in either photo.",
+      "Cylinder body shows surface rust and worn paint at the neck/collar junction."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "LPG cooking gas cylinder",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0",
+        "photo 1"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "We have different gas cylinder for sale",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photos show only one cylinder in focus; no listing of sizes or types confirmed by image."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Cylinder capacity (kg) unknown, which is the main price-setting factor for gas cylinders",
+        "proof": "Clear photo of the stamped capacity marking (e.g. '12.5KG', '6KG') usually near the neck or on the collar",
+        "if_unproven": "cannot be priced without this; treat as unknown capacity"
+      },
+      {
+        "risk": "No valve or regulator visible in the neck opening (photo 0 shows an empty hole)",
+        "proof": "Close-up photo of the valve assembly screwed into the neck, or confirmation it is sold valve-less",
+        "if_unproven": "priced as incomplete/not functional, missing valve"
+      },
+      {
+        "risk": "Visible rust and paint loss at the neck collar could indicate corrosion or structural weakness",
+        "proof": "Close-up photo of the rusted area and any seam/weld points",
+        "if_unproven": "priced as cosmetically and structurally compromised"
+      },
+      {
+        "risk": "LPG cylinders require periodic safety/test certification (stamped date); unknown if current or expired",
+        "proof": "Photo of the stamped manufacture/test date near the neck",
+        "if_unproven": "priced as expired/uncertified until shown otherwise"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the capacity/kg marking stamped on the cylinder neck or collar",
+      "Close-up of the valve or confirmation that a valve/regulator is included",
+      "Photo of the manufacture/test date stamp",
+      "A side view showing the full body without obstruction to check for dents or deep rust"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The cylinder's capacity, which sets its price category, is not legible in either photo, and it is unclear whether a valve is fitted, so even a worst-case price cannot be assigned without these missing shots."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 21920,
+    "input_tokens": 3208,
+    "output_tokens": 2012,
+    "cost_usd": 0.023377,
+    "replayed": false,
+    "fixture_key": "fda77282ad0657aed09fb3fe84af0a94",
+    "error": null
+  }
+}

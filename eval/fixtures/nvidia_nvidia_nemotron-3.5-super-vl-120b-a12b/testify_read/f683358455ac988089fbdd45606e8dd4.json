@@ -1,0 +1,93 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a Canon DSLR body with lens cap, an EF-S 18-135mm lens, a second lens or lens cap in the foreground, a Canon battery, and a tripod in the background.",
+      "Photo 1 shows the top of the camera body with mode dial and hot shoe.",
+      "Photo 2 shows the front of the camera body with \"Canon\" on the prism and \"750D\" visible on the right side near the grip.",
+      "The lens in photo 0 on the right is clearly marked \"EFS 18-135mm\".",
+      "The second lens in photo 0 is not clearly marked as 50mm f/1.8 STM; the marking is not readable."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "Canon DSLR camera kit with lenses",
+      "brand": "Canon",
+      "model": "EOS 750D",
+      "read_from": [
+        "photo 2 body"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Canon EOS 750D camera body",
+        "verdict": "supported",
+        "evidence": "photo 2 body shows Canon and 750D"
+      },
+      {
+        "claim": "Canon EF-S 18\u2013135mm f/3.5 lens",
+        "verdict": "supported",
+        "evidence": "photo 0 lens shows EFS 18-135mm"
+      },
+      {
+        "claim": "Canon EF 50mm f/1.8 STM lens",
+        "verdict": "unverified",
+        "evidence": "photo 0 shows a second lens but the 50mm/STM marking is not readable"
+      },
+      {
+        "claim": "and two... (incomplete, likely two batteries or accessories)",
+        "verdict": "unverifiable_remote",
+        "evidence": "seller text is cut off; photos show one battery but not two of anything clearly"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Camera body does not power on or function (shutter, sensor, autofocus)",
+        "proof": "video of camera turning on, navigating menus, and taking a photo",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Lens autofocus, aperture, or image stabilization malfunction",
+        "proof": "video of each lens mounted, focusing, and aperture blades moving",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Battery dead or charger missing",
+        "proof": "video of battery charging and powering the camera",
+        "if_unproven": "as missing battery/charger"
+      },
+      {
+        "risk": "High shutter count or worn shutter mechanism",
+        "proof": "screenshot of shutter count from camera menu",
+        "if_unproven": "as high shutter count/worn"
+      },
+      {
+        "risk": "Sensor, mirror, or lens element damage/fungus not visible in photos",
+        "proof": "close-up photos of mirror box, sensor, and lens glass",
+        "if_unproven": "as damaged"
+      }
+    ],
+    "proof_requests": [
+      "Video of camera powering on, navigating menu, and taking a photo",
+      "Video of each lens mounted, focusing, and aperture operating",
+      "Close-up photos of lens glass and camera mirror/sensor",
+      "Screenshot of shutter count",
+      "Photo of battery and charger"
+    ],
+    "decision": "price",
+    "reason": "The Canon EOS 750D model is readable in photo 2 and the 18-135mm lens is readable in photo 0, so the item can be priced at its worst case as untested."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 21429,
+    "input_tokens": 2939,
+    "output_tokens": 2981,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "f683358455ac988089fbdd45606e8dd4",
+    "error": null
+  }
+}
