@@ -458,3 +458,13 @@ def test_more_words_also_fetch_the_kinds_buyscrap_buys_and_the_benchmark_lacks(t
     fetch.build(tmp_path, only=("faulty laptop",), region="lagos", more_words=True)
     rows = json.loads((tmp_path / "faulty_laptop.json").read_text())
     assert rows and rows[0]["protocol"] == "laptop" and rows[0]["tier"] == "branded_electronics"
+
+
+def test_a_sellers_line_separator_never_splits_a_pool_line(tmp_path):
+    import json as _json
+
+    from buyscape.testify.convert import jsonl_line
+
+    line = jsonl_line({"id": "x", "seller_text": "two\u2028lines\u2029here"})
+    assert line.count("\n") == 1 and len(line.splitlines()) == 1
+    assert _json.loads(line)["seller_text"] == "two\u2028lines\u2029here"

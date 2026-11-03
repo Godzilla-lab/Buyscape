@@ -43,6 +43,8 @@ VLLM = "vllm==0.32.0"
 READ_CUDA = 13.0
 # Minutes a reading machine spends before its first read: tools, the model's 36 GB, loading it.
 READ_SETUP_MINUTES = 20
+# What a reading machine downloads before its first read: the model and vLLM's software.
+READ_SETUP_GB = 46
 TOKEN_VAR = "HF_TRAIN_TOKEN"
 
 
@@ -56,11 +58,18 @@ class Offer:
     reliability: float
     down_mbps: float
     cuda: float = 0.0
+    # Hosts charge for downloads too: on 3 Nov one charged $26.67 a TB, so the reader's 46 GB of
+    # model and software cost more than its first half hour of GPU.
+    down_per_tb: float = 0.0
+
+    def setup_dollars(self, gigabytes: float) -> float:
+        return gigabytes / 1000 * self.down_per_tb
 
     def line(self) -> str:
         where = "datacenter" if self.datacenter else "someone's machine"
-        return (f"#{self.id}: {self.gpu} {self.gpu_gb:.0f} GB, ${self.dollars_per_hour:.2f} an hour, {where}, "
-                f"reliability {self.reliability:.3f}, {self.down_mbps:.0f} Mbps down")
+        return (f"#{self.id}: {self.gpu} {self.gpu_gb:.0f} GB, ${self.dollars_per_hour:.2f} an hour, "
+                f"downloads ${self.down_per_tb:.2f} a TB, {where}, reliability {self.reliability:.3f}, "
+                f"{self.down_mbps:.0f} Mbps down")
 
 
 def _headers() -> dict[str, str]:
@@ -91,7 +100,8 @@ def offers(gpus: tuple[str, ...], min_gb: float = 24, datacenter_only: bool = Tr
                           dollars_per_hour=float(o.get("dph_total") or 0), datacenter=bool(o.get("hosting_type") == 1
                                                                                             or o.get("datacenter")),
                           reliability=float(o.get("reliability2") or 0), down_mbps=float(o.get("inet_down") or 0),
-                          cuda=float(o.get("cuda_max_good") or 0))
+                          cuda=float(o.get("cuda_max_good") or 0),
+                          down_per_tb=float(o.get("internet_down_cost_per_tb") or o.get("inet_down_cost", 0) * 1024 or 0))
             if offer.gpu_gb >= min_gb and (offer.datacenter or not datacenter_only):
                 found.append(offer)
     return sorted(found, key=lambda o: o.dollars_per_hour)
@@ -197,7 +207,7 @@ def read_onstart(data_repo: str, run_repo: str, job: str, minutes: int, model: s
         "cd /workspace && pip install -q uv 'huggingface_hub>=1.0'",
         f"hf download {q(data_repo)} --repo-type dataset --include {q(job + '/*')} --local-dir in",
         f"mkdir -p job && tar xzf in/{job}/code.tar.gz -C job && tar xf in/{job}/photos.tar -C job",
-        f"cp in/{job}/ids.txt job/ids.txt",
+        f"cp in/{job}/ids.txt job/ids.txt && mkdir -p job/docs/proof",
         "uv venv -q -p 3.12 /workspace/venv && . /workspace/venv/bin/activate",
         f"uv pip install -q {q(VLLM)} -e job",
         (f"vllm serve {q(model)} --api-key local --max-model-len 16384 --limit-mm-per-prompt '{{\"image\": 4}}' "
@@ -207,18 +217,25 @@ def read_onstart(data_repo: str, run_repo: str, job: str, minutes: int, model: s
          "'http://localhost:8000/v1/models', headers={'Authorization': 'Bearer local'}), timeout=5)\" "
          "2>/dev/null && break; sleep 10; done"),
         f"cd job && split -n l/{parallel} -d ids.txt part_ && export VLLM_API_KEY=local",
-        (f"for p in part_*; do buyscape testify --model vllm:{model} --split train --ids-file $p --tag {job}_$p "
-         "--no-lies --reads-only --budget-usd 9 > $p.log 2>&1 & done; wait"),
+        # Wait for the readers only: a bare wait would also wait for the model server, which never ends.
+        (f"pids=''; for p in part_*; do buyscape testify --model vllm:{model} --split train --ids-file $p "
+         f"--tag {job}_$p --no-lies --reads-only --budget-usd 9 > $p.log 2>&1 & pids=\"$pids $!\"; done; "
+         "wait $pids"),
     ])
+    send = ("mkdir -p /workspace/out && cd /workspace/out && "
+            "cp -r /workspace/job/eval/testify/runs . 2>/dev/null; cp -r /workspace/job/eval/fixtures . 2>/dev/null; "
+            f"cp /workspace/job/*.log . 2>/dev/null; hf upload {q(run_repo)} /workspace/out reads/{job} >/dev/null 2>&1")
     return "\n".join([
         # The token goes to the hf tool as HF_TOKEN, before any command is echoed, so no log carries it.
         f'test -n "${TOKEN_VAR}" || {{ echo "{TOKEN_VAR} is not on the Vast account"; exit 3; }}',
         f'export HF_TOKEN="${TOKEN_VAR}"',
+        # What is read so far goes back every half hour, so a machine lost midway loses half an hour at most.
+        f"(while sleep 1800; do {send}; done) & keeper=$!",
         f"timeout {int(minutes)}m bash -c {q(work)}",
         'code=$?',
-        "mkdir -p /workspace/out && cd /workspace/out",
-        "cp -r /workspace/job/eval/testify/runs runs 2>/dev/null; cp -r /workspace/job/eval/fixtures fixtures 2>/dev/null",
-        "cp /workspace/job/*.log . 2>/dev/null; echo \"$code\" > EXIT",
+        "kill $keeper 2>/dev/null",
+        f"{send}",
+        "echo \"$code\" > /workspace/out/EXIT",
         f"hf upload {q(run_repo)} /workspace/out reads/{job}",
     ])
 

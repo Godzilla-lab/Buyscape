@@ -33,8 +33,10 @@ def test_a_reading_machine_serves_the_model_reads_in_parts_and_always_sends_back
     assert "split -n l/8 -d ids.txt part_" in script and "--model vllm:Qwen/Qwen3-VL-32B-Instruct-FP8" in script
     assert "--reads-only" in script and "--tag test100_$p" in script
     assert "curl" not in script, "the image has no curl"
+    assert "wait $pids" in script and "; wait\n" not in script, "a bare wait also waits for the model server"
+    assert "mkdir -p job/docs/proof" in script and "while sleep 1800" in script
     # The upload is outside the time limit, so a run cut short still sends back its reads and logs.
-    assert script.index("timeout 40m") < script.index("EXIT") < script.index("hf upload godzilla1215/r /workspace/out reads/test100")
+    assert script.index("timeout 40m") < script.index("EXIT") < script.rindex("hf upload godzilla1215/r /workspace/out reads/test100")
 
 
 def test_a_bundle_holds_the_code_the_pool_and_only_the_wanted_photos(tmp_path, monkeypatch):

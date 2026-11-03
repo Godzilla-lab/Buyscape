@@ -1858,9 +1858,11 @@ def vast_read(
     if chosen.cuda < vast.READ_CUDA:
         raise typer.BadParameter(f"offer {offer}'s driver runs CUDA {chosen.cuda}; {vast.VLLM} needs {vast.READ_CUDA}")
     ids = [line.strip() for line in ids_file.read_text().splitlines() if line.strip()]
-    most = minutes / 60 * chosen.dollars_per_hour
+    downloads = chosen.setup_dollars(vast.READ_SETUP_GB)
+    most = minutes / 60 * chosen.dollars_per_hour + downloads
     console.print(f"{chosen.line()}\n{len(ids)} adverts read by {model}, {parallel} at once. Hard limit {minutes} "
-                  f"minutes, {vast.READ_SETUP_MINUTES} of them setup: at most ${most:.2f}. Credit ${vast.credit():.2f}.")
+                  f"minutes, {vast.READ_SETUP_MINUTES} of them setup; ${downloads:.2f} of downloads: "
+                  f"at most ${most:.2f}. Credit ${vast.credit():.2f}.")
     if not yes:
         console.print("[bold]Not rented.[/bold] Add --yes to rent it.")
         return

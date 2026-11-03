@@ -370,7 +370,8 @@ def _group(item: Item) -> str:
 def load_items(path: Path) -> list[Item]:
     if not path.exists():
         return []
-    return [Item.model_validate_json(line) for line in path.read_text().splitlines() if line.strip()]
+    # Split on newlines only: str.splitlines also breaks at U+2028 and its kin, which sellers' text carries.
+    return [Item.model_validate_json(line) for line in path.read_text().split("\n") if line.strip()]
 
 
 def all_items(root: Path, previous: Path | None = None) -> list[Item]:
@@ -453,4 +454,10 @@ def write(items: list[Item], out: Path) -> None:
         item.seller_text = redact(item.seller_text)
         item.seller_claims = [redact(c) or "" for c in item.seller_claims]
     out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text("".join(json.dumps(i.model_dump(mode="json"), ensure_ascii=False) + "\n" for i in items))
+    out.write_text("".join(jsonl_line(i.model_dump(mode="json")) for i in items))
+
+
+def jsonl_line(row: dict) -> str:
+    """One JSON line that any line reader keeps whole: the Unicode line and paragraph separators,
+    which sellers paste from phones, are written escaped."""
+    return json.dumps(row, ensure_ascii=False).replace("\u2028", "\\u2028").replace("\u2029", "\\u2029") + "\n"
