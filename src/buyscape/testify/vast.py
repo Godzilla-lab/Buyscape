@@ -46,6 +46,11 @@ READ_SETUP_MINUTES = 20
 # What a reading machine downloads before its first read: the model and vLLM's software.
 READ_SETUP_GB = 46
 TOKEN_VAR = "HF_TRAIN_TOKEN"
+# Vast gives each machine its own id and a key that can manage only that machine.
+SELF_STOP = ("python -c \"import os, urllib.request as u; u.urlopen(u.Request("
+             "'https://console.vast.ai/api/v0/instances/' + os.environ['CONTAINER_ID'] + '/', "
+             "data=b'{\\\"state\\\": \\\"stopped\\\"}', method='PUT', headers={'Authorization': 'Bearer ' + "
+             "os.environ['CONTAINER_API_KEY'], 'Content-Type': 'application/json'}), timeout=30)\" || true")
 
 
 @dataclass(frozen=True)
@@ -123,6 +128,9 @@ def onstart(data_repo: str, run_repo: str, data_file: str, train_args: str, hour
         f'export HF_TOKEN="${TOKEN_VAR}"',
         "set -x",
         "cd /workspace",
+        # Vast starts the script again whenever it ends. A second start trains nothing: it asks Vast
+        # to stop this machine, and waits to be stopped or destroyed, rather than paying to start over.
+        f"if [ -f /workspace/.ran ]; then {SELF_STOP}; sleep 3600; exit 0; fi; touch /workspace/.ran",
         # The versions the 2B trained with on Kaggle (run 5, 1 Nov), not whatever is newest today.
         "pip install -q torch==2.10.0 torchvision==0.25.0 --index-url https://download.pytorch.org/whl/cu128",
         "pip install -q transformers==5.0.0 peft==0.19.1 accelerate safetensors pillow 'huggingface_hub>=1.0'",
@@ -140,6 +148,7 @@ def onstart(data_repo: str, run_repo: str, data_file: str, train_args: str, hour
         # The done mark only for a run that ended well, so a failed run is never taken for a finished one.
         (f"[ $code -eq 0 ] && hf upload {q(run_repo)} out adapter --private && echo done > DONE "
          f"&& hf upload {q(run_repo)} DONE DONE --private"),
+        SELF_STOP,
     ])
 
 
@@ -237,6 +246,7 @@ def read_onstart(data_repo: str, run_repo: str, job: str, minutes: int, model: s
     return "\n".join([
         # The token goes to the hf tool as HF_TOKEN, before any command is echoed, so no log carries it.
         f'test -n "${TOKEN_VAR}" || {{ echo "{TOKEN_VAR} is not on the Vast account"; exit 3; }}',
+        f"if [ -f /workspace/.ran ]; then {SELF_STOP}; sleep 3600; exit 0; fi; touch /workspace/.ran",
         f'export HF_TOKEN="${TOKEN_VAR}"',
         # What is read so far goes back every half hour, so a machine lost midway loses half an hour at most.
         f"(while sleep 1800; do {send}; done) & keeper=$!",
@@ -248,6 +258,7 @@ def read_onstart(data_repo: str, run_repo: str, job: str, minutes: int, model: s
         f"hf upload {q(run_repo)} /workspace/out reads/{job}",
         # The model server outlives the reads and keeps the machine running, and billed, until it is stopped.
         "pkill -f 'vllm serve'; pkill -f vllm; sleep 5",
+        SELF_STOP,
     ])
 
 

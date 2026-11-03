@@ -84,6 +84,9 @@ def encode(example: dict, processor, root: Path, max_tokens: int, max_len: int) 
         parts = []
         for part in turn["content"]:
             if part["type"] == "image":
+                # A photo missing on this machine skips the chat, counted, instead of ending hours of training.
+                if not (root / part["image"]).is_file():
+                    return None
                 with Image.open(root / part["image"]) as im:
                     images.append(shrink(im.convert("RGB"), max_tokens))
                 parts.append({"type": "image"})
