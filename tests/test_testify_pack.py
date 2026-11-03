@@ -89,9 +89,10 @@ def test_an_advert_the_photo_check_left_out_is_held_back_and_keeps_its_split(tmp
 
 
 @pytest.mark.parametrize("row,expected", [
-    ({"role": "training", "condition": "", "is_used": False}, "used, by the seller's words"),
-    ({"role": "training", "condition": "Used", "is_used": True}, "used, by the site's field"),
-    ({"role": "new stock", "condition": "Brand New", "is_used": False}, "new"),
+    ({"role": "training", "cache": "testify_crawl", "condition": "", "is_used": False}, "used, by the seller's words"),
+    ({"role": "training", "cache": "testify_train", "condition": "", "is_used": False}, "not stated"),
+    ({"role": "training", "cache": "testify_train", "condition": "Used", "is_used": True}, "used, by the site's field"),
+    ({"role": "new stock", "cache": "testify_new", "condition": "Brand New", "is_used": False}, "new"),
 ])
 def test_condition_is_told_apart(row, expected):
     assert pack.condition_of(row) == expected

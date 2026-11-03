@@ -219,7 +219,8 @@ def condition_of(row: dict) -> str:
         return "new"
     if row.get("is_used") or condition:
         return "used, by the site's field"
-    return "used, by the seller's words" if row["role"] == "training" else "not stated"
+    # Only the crawl keeps an advert with no condition field, and only when its seller says second-hand.
+    return "used, by the seller's words" if row["cache"] == "testify_crawl" else "not stated"
 
 
 def stats(rows: list[dict], photos: tuple[int, int, int], checks: list[dict], reads: list[dict]) -> dict:
