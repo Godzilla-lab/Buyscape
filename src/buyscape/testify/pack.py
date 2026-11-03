@@ -268,7 +268,7 @@ def datasheet(s: dict, public: bool = False) -> str:
                "none: no photo, no title, no description. It carries the link to each advert, facts anyone\n"
                "can read there (price, city, condition, date), our own labels, and photo fingerprints for\n"
                "finding reposts. The benchmark's test split shows only its links, so it stays an honest test.\n"
-               "Our labels and this table are shared under CC BY 4.0; each advert remains its seller's."
+               "Our labels and this table are shared under CC BY-SA 4.0; each advert remains its seller's."
                if public else
                "The photos and the sellers' words belong to the sellers and the site. The public version\n"
                "carries the link, facts anyone can read at the link (price, city, condition, date), our own\n"
@@ -464,7 +464,8 @@ def kaggle_metadata(s: dict, slug: str, public: bool) -> dict:
         "subtitle": f"{s['adverts']:,} used-goods adverts from Nigeria with prices, cities and labels"[:80],
         "description": datasheet(s, public=public),
         "isPrivate": not public,
-        "licenses": [{"name": "CC-BY-4.0" if public else "other"}],
+        # Kaggle's own names: CC BY 4.0 is not among them, CC BY-SA 4.0 is.
+        "licenses": [{"name": "CC-BY-SA-4.0" if public else "other"}],
         # Kaggle takes at most five tags.
         "keywords": ["business", "africa", "retail and shopping", "e-commerce services",
                      "tabular" if public else "computer vision"],
