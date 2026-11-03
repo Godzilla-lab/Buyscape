@@ -183,6 +183,8 @@ def _provider(model: str, fixtures: Path, mode: str) -> VisionProvider:
         vendor, key, served = "nvidia", "NVIDIA_API_KEY", model.removeprefix("nvidia:")
     elif model.startswith("kaggle:"):
         vendor, key, served = "kaggle", "MODEL_PROXY_API_KEY", model.removeprefix("kaggle:")
+    elif model.startswith("vllm:"):
+        vendor, key, served = "vllm", "VLLM_API_KEY", model.removeprefix("vllm:")
     elif "/" in model:
         vendor, key = "openrouter", "OPENROUTER_API_KEY"
     else:
@@ -1824,11 +1826,98 @@ def vast_train(
     if not yes:
         console.print("[bold]Not rented.[/bold] The machine would run:\n" + script)
         return
-    token = os.environ.get("HF_TRAIN_TOKEN")
-    if not token:
-        raise typer.BadParameter("HF_TRAIN_TOKEN is not set: a Hugging Face token for these two repos only")
-    instance = vast.create(chosen, script, token)
+    if not vast.account_has(vast.TOKEN_VAR):
+        raise typer.BadParameter(f"{vast.TOKEN_VAR} is not among the Vast account's environment variables: "
+                                 "a Hugging Face token for the two private repos only")
+    instance = vast.create(chosen, script)
     console.print(f"rented: instance {instance}. Watch it with vast-status; it stops itself when the run ends.")
+
+
+@app.command("vast-read")
+def vast_read(
+    ids_file: Path = typer.Option(..., help="The training adverts to read, one id a line."),
+    offer: int = typer.Option(..., help="An offer id from vast-offers: one GPU with 80 GB."),
+    job: str = typer.Option(..., help="A short name for this read, for example test100."),
+    minutes: int = typer.Option(45, help="The machine's hard time limit, setup included. Sets the most it can cost."),
+    parallel: int = typer.Option(16, help="Reads asked at once; the model server batches them."),
+    model: str = typer.Option("", help="The open vision model to serve. Defaults to the engine's own reader."),
+    data_repo: str = typer.Option("godzilla1215/testify-vast-data", help="Private dataset the job is uploaded to."),
+    run_repo: str = typer.Option("godzilla1215/testify-vast-run", help="Private repo the answers come back to."),
+    yes: bool = typer.Option(False, help="Rent it. Without this the plan and its most cost are only shown."),
+) -> None:
+    """The teacher's reads on a rented GPU: an open model served beside the adverts. Shows the cost first."""
+    from huggingface_hub import HfApi
+
+    from .testify import vast
+
+    model = model or vast.READER
+    chosen = next((o for o in vast.offers(("A100 SXM4", "A100 PCIE", "H100 SXM", "H100 PCIE", "H100 NVL"),
+                                          min_gb=79) if o.id == offer), None)
+    if chosen is None:
+        raise typer.BadParameter(f"offer {offer} is not a rentable 80 GB datacenter GPU now; run vast-offers again")
+    if chosen.cuda < vast.READ_CUDA:
+        raise typer.BadParameter(f"offer {offer}'s driver runs CUDA {chosen.cuda}; {vast.VLLM} needs {vast.READ_CUDA}")
+    ids = [line.strip() for line in ids_file.read_text().splitlines() if line.strip()]
+    most = minutes / 60 * chosen.dollars_per_hour
+    console.print(f"{chosen.line()}\n{len(ids)} adverts read by {model}, {parallel} at once. Hard limit {minutes} "
+                  f"minutes, {vast.READ_SETUP_MINUTES} of them setup: at most ${most:.2f}. Credit ${vast.credit():.2f}.")
+    if not yes:
+        console.print("[bold]Not rented.[/bold] Add --yes to rent it.")
+        return
+    if not vast.account_has(vast.TOKEN_VAR):
+        raise typer.BadParameter(f"{vast.TOKEN_VAR} is not among the Vast account's environment variables yet")
+    folder = ROOT / "eval" / "vast" / job
+    counts = vast.bundle(ROOT, ids, folder)
+    console.print(f"bundle: {counts}")
+    if counts["adverts"] == 0:
+        raise typer.BadParameter("none of these ids is in the training pool")
+    HfApi(token=os.environ["HF_TOKEN"]).upload_folder(repo_id=data_repo, repo_type="dataset", folder_path=folder,
+                                                     path_in_repo=job, commit_message=f"read job {job}")
+    script = vast.read_onstart(data_repo, run_repo, job, minutes, model, parallel)
+    instance = vast.create(chosen, script, label=f"testify-read-{job}")
+    console.print(f"rented: instance {instance}. It stops itself within {minutes} minutes; "
+                  f"then vast-fetch --job {job} brings the reads back and vast-status destroys it.")
+
+
+@app.command("vast-fetch")
+def vast_fetch(
+    job: str = typer.Option(..., help="The read job's name."),
+    run_repo: str = typer.Option("godzilla1215/testify-vast-run"),
+) -> None:
+    """Bring a rented machine's reads and recordings back into this checkout. Free."""
+    import shutil
+    import tempfile
+
+    from huggingface_hub import snapshot_download
+
+    with tempfile.TemporaryDirectory() as tmp:
+        try:
+            got = Path(snapshot_download(run_repo, allow_patterns=[f"reads/{job}/*", f"reads/{job}/**"],
+                                         local_dir=tmp, token=os.environ["HF_TOKEN"])) / "reads" / job
+        except Exception as e:  # noqa: BLE001
+            console.print(f"[yellow]nothing back yet for {job}: {e}[/yellow]")
+            raise typer.Exit(1)
+        if not got.exists():
+            console.print(f"[yellow]nothing back yet for {job}[/yellow]")
+            raise typer.Exit(1)
+        exit_code = (got / "EXIT").read_text().strip() if (got / "EXIT").exists() else "not written"
+        copied = 0
+        for sub, dest in (("runs", ROOT / "eval" / "testify" / "runs"), ("fixtures", ROOT / "eval" / "fixtures")):
+            for path in (got / sub).rglob("*") if (got / sub).exists() else []:
+                if path.is_file():
+                    target = dest / path.relative_to(got / sub)
+                    target.parent.mkdir(parents=True, exist_ok=True)
+                    if not target.exists():
+                        shutil.copy2(path, target)
+                        copied += 1
+        logs = ROOT / "eval" / "vast" / job / "logs"
+        logs.mkdir(parents=True, exist_ok=True)
+        for log in got.glob("*.log"):
+            shutil.copy2(log, logs / log.name)
+        reads = sum(1 for path in (got / "runs").rglob("train*.jsonl") for line in path.read_text().splitlines()
+                    if '"reading"' in line) if (got / "runs").exists() else 0
+    console.print(f"{job}: the machine's script ended with {exit_code}; {reads} reads, {copied} files copied in; "
+                  f"logs in {logs}")
 
 
 @app.command("vast-status")
@@ -1842,7 +1931,7 @@ def vast_status(destroy_finished: bool = typer.Option(True, help="Destroy machin
         console.print(f"instance {inst['id']}: {inst.get('gpu_name')} {state}, ${inst.get('dph_total', 0):.2f} an hour")
         if destroy_finished and state in ("exited", "stopped", "offline"):
             vast.destroy(int(inst["id"]))
-            console.print(f"  destroyed: its run had stopped, so it only cost disk")
+            console.print("  destroyed: its run had stopped, so it only cost disk")
 
 
 @app.command("data-pack")

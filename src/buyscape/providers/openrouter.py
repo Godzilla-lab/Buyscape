@@ -144,6 +144,8 @@ class OpenRouterProvider:
         # Kaggle Benchmarks' model proxy: frontier models on a free daily quota.
         # Its address and a two-hour key come from `kaggle benchmarks auth`.
         "kaggle": ("", "MODEL_PROXY_API_KEY"),
+        # An open model served by vLLM on a rented GPU, beside the reads: VLLM_URL, default this machine.
+        "vllm": ("", "VLLM_API_KEY"),
     }
 
     def __init__(
@@ -164,6 +166,8 @@ class OpenRouterProvider:
         self._url, env_var = self.ENDPOINTS[vendor]
         if vendor == "kaggle":
             self._url = os.environ.get("MODEL_PROXY_URL", "").rstrip("/") + "/openapi/chat/completions"
+        if vendor == "vllm":
+            self._url = os.environ.get("VLLM_URL", "http://127.0.0.1:8000").rstrip("/") + "/v1/chat/completions"
         self._key = api_key or os.environ.get(env_var, "")
         if not self._key:
             raise ProviderError(f"{env_var} is not set")
