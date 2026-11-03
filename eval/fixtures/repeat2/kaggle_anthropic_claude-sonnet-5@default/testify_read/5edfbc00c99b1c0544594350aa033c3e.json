@@ -1,0 +1,88 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black DSLR camera body held in a hand, with a zoom lens attached and the lens cap on.",
+      "The word 'Nikon' is legible in gold/white lettering on the camera body's front.",
+      "No visible model number (e.g., 'D810') or lens focal-length markings are legible in this image.",
+      "A semi-transparent watermark reading 'STARSHOOT IMAGE' overlays the photo.",
+      "Background shows a wall switch/socket, suggesting an indoor, informal photo setting rather than a studio shot.",
+      "Only one photo is provided; no shots of the top LCD, serial number, lens markings, or camera powered on."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "DSLR camera with attached zoom lens",
+      "brand": "Nikon",
+      "model": null,
+      "read_from": [
+        "photo 0 body nameplate"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Nikon D810 DSLR Camera",
+        "verdict": "unverified",
+        "evidence": "Brand 'Nikon' is visible in photo 0, but no model number (e.g. D810) is legible anywhere in the image."
+      },
+      {
+        "claim": "24-70mm Lens",
+        "verdict": "unverifiable_remote",
+        "evidence": "Lens cap is on in photo 0; no focal length or brand markings on the lens barrel are visible."
+      },
+      {
+        "claim": "Clean and well-maintained",
+        "verdict": "unverified",
+        "evidence": "No close-up of body wear, LCD screen, sensor, or lens glass is provided to assess condition."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Camera could be a different, lower-value Nikon model than the claimed D810.",
+        "proof": "Clear photo of the top LCD panel or body nameplate showing the model number, or the serial number sticker inside the battery compartment.",
+        "if_unproven": "priced as a generic/lower-tier Nikon DSLR body, not as a D810"
+      },
+      {
+        "risk": "Lens may not actually be a 24-70mm (could be a kit lens or third-party lens of lesser value).",
+        "proof": "Photo of the lens barrel with cap off, showing focal length range and brand/model text.",
+        "if_unproven": "priced as an unspecified/unknown lens, not as a 24-70mm"
+      },
+      {
+        "risk": "Camera may not power on or have functional issues (shutter, autofocus, sensor dust/fungus).",
+        "proof": "Short video of the camera powering on, displaying a live view image, and a shot of the shutter-count screen via a diagnostic app or menu.",
+        "if_unproven": "priced as not working / for-parts condition"
+      },
+      {
+        "risk": "Hidden physical damage (cracked screen, dented mount, broken ports) obscured by hand grip and angle.",
+        "proof": "Additional photos from top, back (LCD), bottom (battery/card doors), and lens mount area.",
+        "if_unproven": "priced assuming cosmetic/functional damage present"
+      },
+      {
+        "risk": "Accessories (battery, charger, strap, box) may not be included despite implied 'comes with...' in cut-off description.",
+        "proof": "Photo of all included accessories laid out together.",
+        "if_unproven": "priced as body and lens only, no accessories"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the top LCD panel or nameplate showing the exact model number (D810 vs other).",
+      "Photo of the lens with cap removed, showing focal length and brand markings.",
+      "Video of the camera powering on and taking a sample photo, plus shutter count if possible.",
+      "Additional angle photos: back screen, battery/card compartment, lens mount, and any accessories included."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The price hinges entirely on confirming the Nikon model and the lens specification, neither of which is legible in the single photo provided, so even a worst-case price cannot be set without a clearer identifying shot."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 26055,
+    "input_tokens": 2022,
+    "output_tokens": 2369,
+    "cost_usd": 0.024575,
+    "replayed": false,
+    "fixture_key": "5edfbc00c99b1c0544594350aa033c3e",
+    "error": null
+  }
+}
