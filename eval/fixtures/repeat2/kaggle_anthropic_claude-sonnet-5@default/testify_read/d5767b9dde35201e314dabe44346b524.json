@@ -1,0 +1,85 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: engine shown still partially installed/removed from a vehicle, covered in grime and dust, intake manifold and wiring harness visible, belt and accessory bracket visible, no compressor clearly visible.",
+      "Photo 1: engine sitting on ground wrapped partly in plastic sheeting, surrounded by other used parts (transmissions, pulleys) in background, suggesting a used-parts yard.",
+      "Photo 2: top engine cover has hand-written marker 'V6' and some other faint writing, no manufacturer plate, part number, or engine code legible.",
+      "No visible air conditioning compressor unit in any photo despite seller's claim.",
+      "No wiring loom connectors, ECU, or sensor completeness confirmable from any image.",
+      "No visual confirmation of oil leaks, cracked housings, or physical damage beyond normal dirt/grime.",
+      "No start-up, compression test, or functional demonstration shown."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used V6 engine assembly (claimed fit for Toyota Venza/Camry/Sienna/Highlander)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 2 engine cover marking 'V6'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Complete engine with compressor and all the operators",
+        "verdict": "contradicted",
+        "evidence": "No compressor visible in any of the 3 photos; wiring/accessory completeness cannot be confirmed."
+      },
+      {
+        "claim": "Fits Toyota Venza, Camry, Sienna, Highlander",
+        "verdict": "unverifiable_remote",
+        "evidence": "No engine code, displacement marking, or VIN tag visible to confirm cross-model compatibility."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine may not run or have internal damage (no compression/start-up proof)",
+        "proof": "Video of engine cranking/running with audio",
+        "if_unproven": "priced as non-running salvage engine"
+      },
+      {
+        "risk": "AC compressor claimed but not visible \u2014 may be missing or non-functional",
+        "proof": "Clear photo of compressor unit attached and a close-up of its tag",
+        "if_unproven": "priced as engine only, without compressor"
+      },
+      {
+        "risk": "Unconfirmed engine displacement/code (could be 2.7L 4-cyl or 3.5L V6, affects compatibility and price)",
+        "proof": "Photo of engine ID plate or stamped code on block",
+        "if_unproven": "priced at lowest common variant (4-cylinder base engine)"
+      },
+      {
+        "risk": "Wiring harness, sensors, or ECU may be incomplete despite 'all operators' claim",
+        "proof": "Full-length photo of wiring harness and connectors, plus ECU box if included",
+        "if_unproven": "priced as partial engine (harness/ECU not included)"
+      },
+      {
+        "risk": "Hidden corrosion or cracked block/head under dirt and grime",
+        "proof": "Close-up photos after wipe-down of block, head, and oil pan",
+        "if_unproven": "priced assuming cosmetic/structural risk present"
+      }
+    ],
+    "proof_requests": [
+      "Video of engine running (cold start) with sound",
+      "Clear photo of engine ID/code plate or stamped number on block",
+      "Photo showing AC compressor physically attached to engine",
+      "Photo of complete wiring harness and connectors",
+      "Close-up photos of block/head after cleaning for cracks or corrosion"
+    ],
+    "decision": "price",
+    "reason": "Item is identifiable by type as a used V6 engine assembly, but the compressor and full wiring/operator completeness claimed by the seller are not visible in photos, and no running/start-up proof exists, so it must be priced at worst case as an untested, possibly incomplete engine."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 21908,
+    "input_tokens": 3930,
+    "output_tokens": 1820,
+    "cost_usd": 0.02606,
+    "replayed": false,
+    "fixture_key": "d5767b9dde35201e314dabe44346b524",
+    "error": null
+  }
+}

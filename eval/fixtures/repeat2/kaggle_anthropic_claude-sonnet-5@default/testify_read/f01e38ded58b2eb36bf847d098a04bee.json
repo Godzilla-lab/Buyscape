@@ -1,0 +1,89 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Single photo shows a silver/grey microwave oven with digital control panel and buttons on the right side",
+      "Microwave appears to be displayed on a shelf in what looks like a shop selling used electronics",
+      "No brand or model name is legible on the unit itself",
+      "No visible damage from this angle, but only front view is shown",
+      "Watermark text overlay on image reads a shop/vendor name, not product identity",
+      "Seller mentions 'for both microwave and grill' suggesting a combo listing or two items, but only microwave is shown in photo"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "microwave oven",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "London used (implies imported/foreign-used, often taken as a mark of quality in Nigeria)",
+        "verdict": "unverifiable_remote",
+        "evidence": "No origin marking or proof visible in photo 0"
+      },
+      {
+        "claim": "working very well",
+        "verdict": "unverified",
+        "evidence": "No power-on, display, or heating test shown in photo 0"
+      },
+      {
+        "claim": "For both microwave and grill (bundle including a grill function or separate grill item)",
+        "verdict": "unverified",
+        "evidence": "No grill item or grill function shown in photo 0; only the microwave body is visible"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Unit may not power on or heat properly despite 'working very well' claim",
+        "proof": "Video of microwave plugged in, running a heating cycle with display lit and turntable rotating",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Interior condition (rust, burnt smell, broken turntable, damaged door seal) not visible",
+        "proof": "Photo of open microwave showing interior, turntable, and door seal",
+        "if_unproven": "priced as poor/unknown interior condition"
+      },
+      {
+        "risk": "Grill item/function mentioned in text is not shown at all",
+        "proof": "Separate photo of the grill item or demonstration of microwave's grill function if combo unit",
+        "if_unproven": "priced as if grill not included"
+      },
+      {
+        "risk": "Physical damage to back/sides or cord condition not visible from single front photo",
+        "proof": "Additional photos of back, sides, and power cord",
+        "if_unproven": "priced assuming possible hidden damage"
+      },
+      {
+        "risk": "Door seal/glass integrity and latch function not confirmed",
+        "proof": "Close-up photo of door latch and seal, plus clip of door opening/closing",
+        "if_unproven": "priced as latch/seal condition unknown"
+      }
+    ],
+    "proof_requests": [
+      "Video of the microwave powered on, heating a cup of water, with display and turntable visible",
+      "Photo of the interior including turntable and door seal",
+      "Photo or separate listing image of the 'grill' item referenced in the text",
+      "Photos of back and sides of the unit showing vents and power cord condition",
+      "Close-up of any rating label (wattage/model) if present on the unit"
+    ],
+    "decision": "price",
+    "reason": "Item is identifiable by type as a used microwave oven, but 'working very well' and the bundled grill are unverified from the single photo, so it must be priced at worst case (not confirmed working, grill not confirmed included) pending further proof."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 12929,
+    "input_tokens": 1922,
+    "output_tokens": 1059,
+    "cost_usd": 0.011275,
+    "replayed": false,
+    "fixture_key": "f01e38ded58b2eb36bf847d098a04bee",
+    "error": null
+  }
+}

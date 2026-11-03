@@ -1,0 +1,88 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Extreme close-up of a sewing machine head, showing the front corner near the handwheel.",
+      "Text on the housing reads 'EM81' in red lettering.",
+      "Housing is cream/white with red trim, consistent with an industrial sewing machine head casing.",
+      "No motor, table, stand, pedal, or belt is visible in the frame.",
+      "No needle plate, bobbin area, or full machine body is visible to judge completeness or condition.",
+      "Watermark reads 'NATHANZ SEWING EQUIPMENT' and 'POSTED ON JIJI', seller-added text, not proof of condition."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "industrial sewing machine head",
+      "brand": "Emel",
+      "model": "EM81",
+      "read_from": [
+        "photo 0 (model text 'EM81' on housing)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Direct drive",
+        "verdict": "unverifiable_remote",
+        "evidence": "No motor or drive mechanism is visible in photo 0; direct-drive vs clutch-motor cannot be distinguished from this crop."
+      },
+      {
+        "claim": "Industrial sewing machine",
+        "verdict": "unverified",
+        "evidence": "Housing style (heavy head, large handwheel) is consistent with industrial machines, but no table, stand, or full body shown to confirm."
+      },
+      {
+        "claim": "Emel EM81",
+        "verdict": "supported",
+        "evidence": "Model text 'EM81' is legible on the housing in photo 0."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Motor type and presence (direct-drive motor vs none vs clutch) not shown",
+        "proof": "Photo of underside/back of machine showing motor mounted to head",
+        "if_unproven": "priced as bare head without motor"
+      },
+      {
+        "risk": "No table or stand visible, which is usually bundled with industrial machines",
+        "proof": "Full-width photo showing table, stand, and pedal",
+        "if_unproven": "priced as head-only, no table/stand"
+      },
+      {
+        "risk": "Working condition unknown, no stitching or power-on evidence",
+        "proof": "Video of machine running a stitch line",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Possible missing accessories (bobbin case, foot, belt)",
+        "proof": "Wide photo of full machine with accessories visible",
+        "if_unproven": "priced as missing accessories"
+      },
+      {
+        "risk": "Cosmetic condition of rest of housing (scratches, rust, cracks) not visible outside this crop",
+        "proof": "Multiple angle photos of full housing",
+        "if_unproven": "priced as heavily used/cosmetically worn"
+      }
+    ],
+    "proof_requests": [
+      "Wide shot of the entire machine including table/stand and motor",
+      "Photo or video of the machine powered on and stitching",
+      "Close-up of motor mount to confirm direct-drive vs clutch type",
+      "Photo of accessories: bobbin case, pedal, belt"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only a tight close-up of the machine head is given, so brand/model is readable but completeness (motor, table, stand), drive type, and working condition cannot even be worst-cased without seeing the rest of the machine."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 21334,
+    "input_tokens": 2212,
+    "output_tokens": 1988,
+    "cost_usd": 0.021145,
+    "replayed": false,
+    "fixture_key": "8d60604f7ebdef0f7575b93041bac31e",
+    "error": null
+  }
+}

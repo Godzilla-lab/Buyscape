@@ -1,0 +1,68 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0 shows a large rectangular solar panel with a dark glass surface and grid lines; no visible brand/model label.",
+      "Photo 1 shows the same style solar panel from a different angle; still no readable rating sticker (Wattage, Voc, Isc, brand/model).",
+      "Both photos show the panel outdoors/near a building; there are reflections and a visible watermark text on the image, but no clear product identification."
+    ],
+    "identity": {
+      "status": "unknown",
+      "kind": "solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "High Quality Solar Panels, Inverters, Lithium & Tubular Batteries, Charge...",
+        "verdict": "unverifiable_remote",
+        "evidence": "Seller text only; photos show only a solar panel and no inverter/battery/charge controller."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Panel wattage/efficiency class is unknown (price depends heavily on Wp rating like 100W/150W/200W+).",
+        "proof": "A clear close-up photo of the panel\u2019s label/sticker showing brand, model, and electrical ratings (Wp, Voc, Isc, Vmp, Imp).",
+        "if_unproven": "Price as the lowest common/unknown-spec solar panel (worst case: lower wattage and standard performance)."
+      },
+      {
+        "risk": "Condition risk: possible shipping damage, micro-cracks, or water ingress not visible in these reflections.",
+        "proof": "Photos of the panel edges/frame and backsheet, plus a close-up of the glass for cracks; also a video showing it under light (or an IV test report).",
+        "if_unproven": "Price as used/possibly damaged (worst case: treat as not guaranteed to be defect-free)."
+      },
+      {
+        "risk": "Compatibility risk: connector type and cable length may not match the buyer\u2019s system (MC4 vs other, length, polarity).",
+        "proof": "Photo of the junction box and connectors (close-up), including connector type and cable length measurement.",
+        "if_unproven": "Price assuming basic compatibility but without confirming connector/cable details (worst case: buyer may need adapters)."
+      },
+      {
+        "risk": "Authenticity/brand risk: the panel could be generic or mismatched to the seller\u2019s \u201chigh quality\u201d claim.",
+        "proof": "Label photo with brand/model and serial number (if present) and a matching photo of the same label on the physical unit.",
+        "if_unproven": "Price as generic/unknown brand (worst case: no premium brand value)."
+      }
+    ],
+    "proof_requests": [
+      "Send a close-up photo of the panel rating label/sticker (brand, model, Wp, Voc, Isc, Vmp, Imp).",
+      "Send a clear photo of the junction box + connector type (MC4 or other) and cable length.",
+      "Send close-ups of the glass surface and frame edges for cracks/chips, plus a backsheet photo.",
+      "If possible, provide an IV test report or a simple performance test reading (measured Vmp/Imp under sun)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photos confirm it\u2019s a solar panel, but the key pricing driver (brand/model and wattage rating) is not readable, and condition/connector details can\u2019t be verified from these images. Without the label, any price would be guesswork."
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_read",
+    "latency_ms": 6173,
+    "input_tokens": 2085,
+    "output_tokens": 784,
+    "cost_usd": 0.001397,
+    "replayed": false,
+    "fixture_key": "26cc2a87ed415f01767bbb293fc056ea",
+    "error": null
+  }
+}

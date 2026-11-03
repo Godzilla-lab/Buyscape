@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 and 1 show a bare 4-cylinder car engine assembly, removed from a vehicle, sitting on a shop floor.",
+      "Visible parts: valve cover with 4 ignition coils, oil filler cap, alternator, serpentine belt pulleys, various hoses and brackets.",
+      "A watermark reads 'EMMY GOLD AUTO SPARE' and 'POSTED ON JIJI' - this is the seller's shop branding, not an engine identifier.",
+      "No manufacturer logo (Hyundai or Kia emblem) is visible on the block, head, or covers in either photo.",
+      "No engine code, casting number, or ID plate is legible in either photo.",
+      "No spark plugs, no fuel rail detail, no wiring harness connectors are shown in a way that indicates completeness.",
+      "No power-on, compression test, or video evidence of the engine running is shown."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "4-cylinder car engine (used, pulled)",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Hyundai Kia engine",
+        "verdict": "unverifiable_remote",
+        "evidence": "No Hyundai or Kia logo, casting mark, or engine code is legible in photo 0 or photo 1; claim rests on seller's text alone."
+      },
+      {
+        "claim": "4 cylinder",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows four ignition coils mounted in a row on the valve cover, consistent with an inline-4 layout."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Exact engine code/displacement unconfirmed, which drives most of the price difference between Hyundai/Kia 4-cylinder variants.",
+        "proof": "Close-up photo of the stamped engine code/ID plate (usually on the block near the bellhousing or on a sticker on the valve cover).",
+        "if_unproven": "priced as unidentified generic 4-cylinder Hyundai/Kia engine, lowest common variant"
+      },
+      {
+        "risk": "Running condition unknown - no compression, no start-up, no smoke/noise check possible from photos.",
+        "proof": "Video of the engine cranking/running with audio, plus a compression test reading.",
+        "if_unproven": "priced as not confirmed running (worst case: non-running/parts engine)"
+      },
+      {
+        "risk": "Mileage and internal wear (timing chain/belt, bearings, sludge) cannot be seen from exterior shots.",
+        "proof": "Odometer photo from the donor vehicle or workshop mileage/teardown report.",
+        "if_unproven": "priced as high-mileage/unknown wear"
+      },
+      {
+        "risk": "Completeness not verified - sensors, wiring harness, turbo (if any), intake manifold condition not fully shown.",
+        "proof": "Full 360\u00b0 photo set including intake side, harness connectors, and underside of the engine.",
+        "if_unproven": "priced as possibly missing ancillary parts"
+      },
+      {
+        "risk": "Possible flood, fire, or accident damage not visible in these close crops.",
+        "proof": "Wide shot of the whole engine bay/engine on a stand plus photos of underside and bellhousing for damage.",
+        "if_unproven": "priced as unverified condition, worst case assumed"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the engine code/ID plate or stamped number on the block",
+      "Video of the engine cranking or running with sound",
+      "Wide shot showing the full engine from multiple angles including underside and bellhousing",
+      "Photo of the donor vehicle's VIN plate or registration showing the matching engine spec"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photos show a plausible 4-cylinder engine but no legible brand, model, or engine code to confirm the seller's Hyundai/Kia claim or which variant it is, and pricing used engines depends heavily on that exact identification."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 24856,
+    "input_tokens": 3671,
+    "output_tokens": 2122,
+    "cost_usd": 0.028562,
+    "replayed": false,
+    "fixture_key": "93c0071b2e97996245dfa1d8a54ae31d",
+    "error": null
+  }
+}
