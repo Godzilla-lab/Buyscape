@@ -27,6 +27,7 @@ p.add_argument("--hours", type=float, default=11.5)
 p.add_argument("--eval-minutes", type=int, default=100)
 p.add_argument("--settings", default="--image-tokens 320 --max-len 4096", help="Must match the save point's recipe.")
 p.add_argument("--suffix", default="resume1")
+p.add_argument("--sources", default="", help="Comma-separated datasets in place of the default pair, owner/slug each.")
 a = p.parse_args()
 
 t = (SP / "ktrain" / "template.py").read_text()
@@ -44,18 +45,56 @@ for k, v in subs.items():
     assert k in t, k
     t = t.replace(k, v)
 
+old = '''def find(pattern):
+    hits = sorted(glob.glob("/kaggle/input/**/" + pattern, recursive=True))
+    if not hits:
+'''
+new = '''INPUTS, RAW = [], []
+
+
+def walk():
+    """Every input file once, without entering a photo folder (eval/raw/<cache>)."""
+    for top, dirs, files in os.walk("/kaggle/input", followlinks=True):
+        if top.endswith("/eval/raw"):
+            RAW.extend(os.path.join(top, d) for d in dirs)
+            dirs[:] = []
+            continue
+        INPUTS.extend(os.path.join(top, f) for f in files)
+
+
+def find(pattern):
+    # On 3 Nov a recursive glob walked every photo Kaggle had unpacked and took 48 minutes.
+    if not INPUTS:
+        walk()
+    hits = sorted(p for p in INPUTS if fnmatch.fnmatch(p, "*/" + pattern))
+    if not hits:
+'''
+assert t.count(old) == 1, "find"
+t = t.replace(old, new)
+t = t.replace("import base64, glob, importlib,", "import base64, fnmatch, glob, importlib,", 1)
+
 old = '''photos = find("testify_train/media").parent.parent
 root = Path("/tmp/root")
 (root / "eval").mkdir(parents=True, exist_ok=True)
 if not (root / "eval" / "raw").exists():
     os.symlink(photos, root / "eval" / "raw")
 '''
-new = '''# The photos travel as archives whose paths start at eval/raw.
+new = '''# The photos travel as tar archives named .photos, whose paths start at
+# eval/raw: Kaggle unpacks a .tar on upload into thousands of files. Any
+# folders it did unpack are linked in as they are.
 root = Path("/tmp/root")
-root.mkdir(parents=True, exist_ok=True)
-photos = find("testify_train.tar").parent
-for archive in sorted(photos.glob("*.tar")):
+photos = root / "eval" / "raw"
+photos.mkdir(parents=True, exist_ok=True)
+find("sft_*.jsonl")
+for archive in sorted(p for p in INPUTS if p.endswith(".photos")):
     sh(f"tar xf {archive} -C {root}", 1800)
+for folder in RAW:
+    if not (photos / Path(folder).name).exists():
+        os.symlink(folder, photos / Path(folder).name)
+print("photo caches", sorted(p.name for p in photos.iterdir()), flush=True)
+if not any(photos.iterdir()):
+    print("missing input: photos", flush=True)
+    os._exit(2)
 # The save point the last machine left, where --resumable looks for it.
 save = find("savepoint/state.json").parent
 (W / "adapter").mkdir(parents=True, exist_ok=True)
@@ -95,8 +134,9 @@ meta = {
     "id": f"{a.owner}/{slug}", "title": slug, "code_file": "run.py", "language": "python",
     "kernel_type": "script", "is_private": True, "enable_gpu": True, "enable_tpu": False,
     "enable_internet": False,
-    "dataset_sources": [f"godzilla1215/{a.dataset}", "godzilla1215/testify-batches",
-                        "metric/gemma-4-developer-agent-wheelhouse"],
+    "dataset_sources": ([s.strip() for s in a.sources.split(",") if s.strip()] if a.sources else
+                        [f"godzilla1215/{a.dataset}", "godzilla1215/testify-batches"])
+                       + ["metric/gemma-4-developer-agent-wheelhouse"],
     "kernel_sources": [], "competition_sources": [],
     "model_sources": [f"qwen-lm/qwen-3-vl/transformers/{a.size}-instruct/1"],
     "machine_shape": "NvidiaTeslaT4",
