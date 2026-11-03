@@ -126,18 +126,20 @@ def onstart(data_repo: str, run_repo: str, data_file: str, train_args: str, hour
         # The versions the 2B trained with on Kaggle (run 5, 1 Nov), not whatever is newest today.
         "pip install -q torch==2.10.0 torchvision==0.25.0 --index-url https://download.pytorch.org/whl/cu128",
         "pip install -q transformers==5.0.0 peft==0.19.1 accelerate safetensors pillow 'huggingface_hub>=1.0'",
-        # Only the training folder: every gigabyte a host sends is paid for.
+        # Only the training folder: every gigabyte a host sends is paid for. One pattern: a second
+        # one is read as a file name, and then the tool ignores the pattern altogether.
         (f"hf download {q(data_repo)} --repo-type dataset --local-dir data"
-         + (f" --include {q(folder + '/*')} {q(folder + '/**')}" if folder else "")),
+         + (f" --include {q(folder + '/*')}" if folder else "")),
         # Photos travel as one archive per cache, far fewer files than one upload each.
         f"for t in data/{folder}/*.tar; do [ -f \"$t\" ] && tar xf \"$t\" -C data/{folder}; done",
         (f"python data/{folder + '/' if folder else ''}sft_lora.py --model Qwen/Qwen3-VL-2B-Instruct "
          f"--data data/{folder + '/' if folder else ''}{q(data_file)} --root data/{folder} "
          f"--out out --resumable --hub-repo {q(run_repo)} --hours {hours} {train_args} > train.log 2>&1"),
-        f"hf upload {q(run_repo)} out adapter --private",
+        "code=$?",
         f"hf upload {q(run_repo)} train.log logs/train.log --private",
-        "echo done > DONE",
-        f"hf upload {q(run_repo)} DONE DONE --private",
+        # The done mark only for a run that ended well, so a failed run is never taken for a finished one.
+        (f"[ $code -eq 0 ] && hf upload {q(run_repo)} out adapter --private && echo done > DONE "
+         f"&& hf upload {q(run_repo)} DONE DONE --private"),
     ])
 
 

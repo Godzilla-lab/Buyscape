@@ -14,6 +14,7 @@ def test_the_machine_runs_the_script_as_its_only_command_and_resumes_from_the_hu
                           "--image-tokens 640", 18.5)
     assert "--resumable --hub-repo godzilla1215/testify-2b-run6 --hours 18.5 --image-tokens 640" in script
     assert script.index("hf download") < script.index("sft_lora.py") < script.index("hf upload") < script.index("DONE")
+    assert script.index("[ $code -eq 0 ]") < script.index("echo done > DONE")
     body = vast.request_body(script)
     assert body["runtype"] == "args" and body["args"][:2] == ["bash", "-c"] and "onstart" not in body
     assert body["env"] == {}, "the token comes from the Vast account, never from here"
@@ -83,5 +84,6 @@ def test_a_model_served_on_the_rented_machine_is_called_there(monkeypatch):
 
 def test_a_training_machine_downloads_only_its_own_folder():
     script = vast.onstart("godzilla1215/d", "godzilla1215/r", "sft_r6.jsonl", "--epochs 1", 5.0, folder="train6")
-    assert "--include train6/* 'train6/**'" in script or "--include 'train6/*' 'train6/**'" in script
+    assert "--include 'train6/*'" in script and "train6/**" not in script
+    assert script.index("code=$?") < script.index("logs/train.log") < script.index("[ $code -eq 0 ]")
     assert "python data/train6/sft_lora.py" in script and "--data data/train6/sft_r6.jsonl --root data/train6" in script
