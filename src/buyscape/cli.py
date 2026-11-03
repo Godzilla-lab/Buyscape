@@ -1909,7 +1909,8 @@ def vast_fetch(
                 if path.is_file():
                     target = dest / path.relative_to(got / sub)
                     target.parent.mkdir(parents=True, exist_ok=True)
-                    if not target.exists():
+                    # A recording never changes; an answers file grows with every read, so the newer one wins.
+                    if not target.exists() or (sub == "runs" and path.stat().st_size > target.stat().st_size):
                         shutil.copy2(path, target)
                         copied += 1
         logs = ROOT / "eval" / "vast" / job / "logs"
