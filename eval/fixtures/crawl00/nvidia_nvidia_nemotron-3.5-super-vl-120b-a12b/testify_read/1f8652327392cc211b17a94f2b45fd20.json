@@ -1,0 +1,75 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a 2.5 inch internal solid state drive",
+      "The top cover reads \"SAMSUNG solid state drive\"",
+      "A SATA connector is visible along the edge of the drive",
+      "A regulatory label is partially visible but its text is not fully legible",
+      "The drive is resting on cardboard packaging"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "2.5 inch SATA SSD",
+      "brand": "Samsung",
+      "model": null,
+      "read_from": [
+        "photo 0 top cover"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "SanDisk SSD",
+        "verdict": "contradicted",
+        "evidence": "photo 0 shows Samsung branding"
+      },
+      {
+        "claim": "1TB (960GB)",
+        "verdict": "unverified",
+        "evidence": "capacity is not legible on the label in photo 0"
+      },
+      {
+        "claim": "SATA",
+        "verdict": "supported",
+        "evidence": "SATA connector is visible in photo 0"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual capacity is not 1TB/960GB",
+        "proof": "clear photo of the label showing the capacity",
+        "if_unproven": "as unknown capacity"
+      },
+      {
+        "risk": "SSD does not work",
+        "proof": "video of the drive being detected by a computer and reading/writing files",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "SSD has high wear or low remaining life",
+        "proof": "screenshot of SMART health data",
+        "if_unproven": "as worn out"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the label showing model and capacity",
+      "Video of the SSD being recognized by a computer and reading/writing files"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a Samsung 2.5 inch SATA SSD from photo 0, but the seller's SanDisk claim is contradicted and capacity and function are unproven, so it is priced at worst case."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 115339,
+    "input_tokens": 1837,
+    "output_tokens": 2686,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "1f8652327392cc211b17a94f2b45fd20",
+    "error": null
+  }
+}

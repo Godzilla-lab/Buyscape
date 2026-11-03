@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo shows a bare automotive engine assembly (block, turbo, wiring harness, injector pump) sitting on a dark floor.",
+      "No manufacturer plate, engine code, or VIN sticker is legible anywhere in the frame.",
+      "Image has a visible watermark 'CAMON 40' and camera EXIF text overlay, not seller-applied documentation.",
+      "No compression gauge, running video, or odometer/mileage sticker visible.",
+      "No accessories (alternator pulley belt, starter motor) clearly shown as included or excluded."
+    ],
+    "identity": {
+      "status": "unknown",
+      "kind": "used car engine (type/model not legible)",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Direct Japan",
+        "verdict": "unverifiable_remote",
+        "evidence": "No import paperwork, auction sheet, or shipping tag visible in photo 0."
+      },
+      {
+        "claim": "2 months guarantee",
+        "verdict": "unverifiable_remote",
+        "evidence": "No warranty card, shop stamp, or written terms shown in photo 0."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine model/displacement unknown, which drives most of the price difference between engine types.",
+        "proof": "Clear close-up photo of the engine code/plate or casting number stamped on the block.",
+        "if_unproven": "cannot be priced at all without this, since even a worst-case range depends on knowing the model"
+      },
+      {
+        "risk": "Engine may not run or may have internal damage (compression, timing, crank issues) not visible externally.",
+        "proof": "Video of the engine actually starting and running, or a compression test printout.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Mileage/usage history on the engine is unknown.",
+        "proof": "Photo of the odometer or Japan auction sheet with recorded km.",
+        "if_unproven": "priced as high-mileage/unknown"
+      },
+      {
+        "risk": "'Direct Japan' origin claim cannot be confirmed, affecting trust in low-mileage/low-wear assumptions.",
+        "proof": "Photo of the import auction sheet, bill of lading, or customs paperwork.",
+        "if_unproven": "treated as unverified local-market unit, not premium Japan-import"
+      },
+      {
+        "risk": "Completeness of the engine (turbo, injectors, sensors, loom) not confirmed as all original/working.",
+        "proof": "Full 360\u00b0 photos with all attached parts labeled, plus a parts list from seller.",
+        "if_unproven": "priced as partial/incomplete assembly"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the engine code/casting number or manufacturer plate.",
+      "Video of the engine running (cold start preferred).",
+      "Photo of Japan auction sheet or import documentation showing mileage and grade.",
+      "Written warranty terms or shop receipt showing the 2-month guarantee.",
+      "Additional angle photos showing turbo, injectors, and wiring harness fully."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The engine's model/type cannot be read from the photo, and model is the primary driver of price for engines, so even a worst-case figure is not possible until the engine code or plate is shown."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 19376,
+    "input_tokens": 2015,
+    "output_tokens": 1665,
+    "cost_usd": 0.017489,
+    "replayed": false,
+    "fixture_key": "3c19971b6dca7a9cd1362b7a687697a9",
+    "error": null
+  }
+}

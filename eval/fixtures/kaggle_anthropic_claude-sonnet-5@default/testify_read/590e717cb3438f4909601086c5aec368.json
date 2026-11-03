@@ -1,0 +1,80 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: single wooden pallet, light-colored unweathered wood, clean concrete warehouse floor, watermark 'DANTILA RESOURCES'",
+      "Photo 1: same or similar single pallet, close-up, light wood, visible nail heads, same watermark",
+      "Photo 2: outdoor stack of multiple wooden pallets that are dark, weathered, stained, with visible wear, gaps, and rough boards - visually a different batch/condition from photos 0 and 1",
+      "No ruler, tape measure, or size reference in any photo",
+      "No stamp, ISPM-15 heat-treatment mark, or any identifying plate/brand visible on any pallet",
+      "Seller's text is generic marketing copy about pallets in general, not a specific condition claim for this lot"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "wooden pallet",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0",
+        "photo 1",
+        "photo 2"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Wooden pallets are the backbone of supply chain logistics, manufacturing, and warehousing",
+        "verdict": "unverifiable_remote",
+        "evidence": "Generic marketing statement, not a claim about this specific lot's condition or count"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Mismatch between the clean, apparently new pallets in photos 0-1 and the old, weathered, stacked pallets in photo 2 - unclear which condition/batch is actually being sold",
+        "proof": "A single photo or short video showing the entire lot to be delivered, side by side, with consistent lighting",
+        "if_unproven": "priced as the lower-condition (used/weathered) pallets seen in photo 2"
+      },
+      {
+        "risk": "Pallet dimensions unknown (standard sizes vary e.g. 1000x1200mm, 1100x1100mm, etc.) which affects bulk pricing",
+        "proof": "A photo with a tape measure or ruler against the pallet edge",
+        "if_unproven": "priced as standard/smallest common size"
+      },
+      {
+        "risk": "No ISPM-15 heat-treatment stamp visible, which matters for export/compliance use",
+        "proof": "Close-up photo of any stamped marking on the pallet block or stringer",
+        "if_unproven": "priced as non-certified/local-use only"
+      },
+      {
+        "risk": "Structural condition of individual boards/nails in the used stack (photo 2) cannot be fully assessed - splits, protruding nails, missing deck boards",
+        "proof": "Close-up photos of each pallet's underside and corners in the actual lot for sale",
+        "if_unproven": "priced as needing repair/lower grade"
+      },
+      {
+        "risk": "Quantity being sold is unstated - is this per single pallet or the whole stack in photo 2?",
+        "proof": "Seller confirmation of unit count matching the listing, with a count-visible photo",
+        "if_unproven": "priced as single unit only"
+      }
+    ],
+    "proof_requests": [
+      "Photo/video of the actual lot to be handed over at pickup, showing all units together",
+      "Close-up of any stamp or heat-treatment mark on the pallet blocks",
+      "A photo with a tape measure showing pallet length and width",
+      "Confirmation of exact quantity included in this listing's price"
+    ],
+    "decision": "price",
+    "reason": "This is a plain, identifiable-by-type good (wooden pallet) with no model/brand needed; despite the photo mismatch between new-looking and worn stock, a worst-case price can be set assuming the lower, used/weathered condition shown in photo 2 until matching proof is given."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 24050,
+    "input_tokens": 3709,
+    "output_tokens": 2011,
+    "cost_usd": 0.024337,
+    "replayed": false,
+    "fixture_key": "590e717cb3438f4909601086c5aec368",
+    "error": null
+  }
+}

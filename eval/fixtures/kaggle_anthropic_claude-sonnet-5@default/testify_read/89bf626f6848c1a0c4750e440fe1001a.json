@@ -1,0 +1,86 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Orange LPG gas cylinder with protective netting covering most of the body.",
+      "Brass valve fitted at neck, looks new/unused in photo 1.",
+      "A stylized dark logo/icon on the side (triangle/mountain shape) with no legible brand text or model number.",
+      "No visible stamped specification ring (manufacture date, test date, capacity, country of origin) on the neck or shoulder in either photo.",
+      "Photo 1 shows handwritten marker 'MX' on the shoulder, origin/meaning unclear.",
+      "Background shows an outdoor market setting consistent with a roadside photo, not a studio or warehouse.",
+      "Netting partially obscures the lower body, so dents, rust, or scratches on that area cannot be confirmed."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "12kg LPG gas cylinder",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 logo area (no legible text)",
+        "photo 1 valve and shoulder (no legible stamp)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "12kg cylinder",
+        "verdict": "unverified",
+        "evidence": "No stamped capacity marking is legible in photo 0 or photo 1; size is only inferred from seller's text."
+      },
+      {
+        "claim": "Foreign (implying imported/higher quality manufacture)",
+        "verdict": "unverifiable_remote",
+        "evidence": "No country-of-origin stamp, manufacturer plate, or import marking visible in either photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "True water capacity/kg rating not confirmed, could be smaller than claimed.",
+        "proof": "Close-up photo of the stamped capacity ring on the cylinder neck/shoulder.",
+        "if_unproven": "priced as a generic unverified-capacity cylinder, not confirmed 12kg"
+      },
+      {
+        "risk": "Cylinder could be empty, partially filled, or damaged internally; weight/fill state not shown.",
+        "proof": "Photo or video of the cylinder on a scale showing tare+gas weight.",
+        "if_unproven": "priced as empty cylinder only"
+      },
+      {
+        "risk": "Netting hides lower body; possible dents, rust, or weld damage underneath.",
+        "proof": "Photo with netting removed showing full body from base to shoulder.",
+        "if_unproven": "priced assuming possible cosmetic/structural defects under netting"
+      },
+      {
+        "risk": "Valve/seal functionality unverified; could leak or be seized.",
+        "proof": "Video of valve being turned and a leak test (soapy water) with gas connected.",
+        "if_unproven": "priced as valve condition unknown, treated as not confirmed working"
+      },
+      {
+        "risk": "'Foreign' origin claim could be a marketing label rather than fact, no test/certification body marking seen.",
+        "proof": "Photo of manufacturer country stamp or certification mark (e.g., SON, NIS, or import stamp).",
+        "if_unproven": "priced as standard/local-grade cylinder, no premium for 'foreign' claim"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of the stamped specification ring (capacity, test date, manufacture date) on the neck.",
+      "Photo with the protective netting removed, showing the full cylinder body.",
+      "Video of the valve opening/closing and a leak check.",
+      "Weight/scale photo showing current fill state.",
+      "Any certification or country-of-origin marking to support the 'foreign' claim."
+    ],
+    "decision": "price",
+    "reason": "This is a recognizable item type (12kg LPG cylinder) that can be priced at its worst-case condition (unverified capacity, empty, unproven valve integrity, possible hidden body damage under netting) even though several seller claims remain unverified or unverifiable from the photos."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 23983,
+    "input_tokens": 3225,
+    "output_tokens": 2101,
+    "cost_usd": 0.024269,
+    "replayed": false,
+    "fixture_key": "89bf626f6848c1a0c4750e440fe1001a",
+    "error": null
+  }
+}

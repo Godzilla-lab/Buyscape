@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows a vertical stack of five used tyres, viewed from the tread/shoulder side only.",
+      "No sidewall is visible in the frame, so no brand, size, or DOT date can be read.",
+      "Tread patterns differ across the stack, suggesting mixed brands or models rather than a matched set.",
+      "Tread appears moderately worn with visible wear lines, but depth cannot be measured from this angle.",
+      "A watermark reading 'ABDULWASIU OK DAMOLA' overlays the image; no other text is legible.",
+      "No visible cracks, bulges, or sidewall damage are shown because the sidewall is not in view."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used car tyre (tokunbo)",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Tokunbo tyre available",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo 0 shows worn tread consistent with used tyres, but 'tokunbo' (imported used) origin cannot be confirmed from a photo alone."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Tyre size (rim diameter, width, profile) unknown, which is the main price driver",
+        "proof": "A close-up photo of the sidewall showing the size code, e.g. 205/55R16",
+        "if_unproven": "cannot be priced at all without size; price range too wide to default"
+      },
+      {
+        "risk": "Brand/model unknown, affects value tier",
+        "proof": "Sidewall close-up showing brand logo and model name",
+        "if_unproven": "priced as generic/unbranded worst case"
+      },
+      {
+        "risk": "Age of tyre (rubber hardening) unknown",
+        "proof": "Photo of DOT code on sidewall showing week/year of manufacture",
+        "if_unproven": "priced as old stock, worst case"
+      },
+      {
+        "risk": "Remaining tread depth unclear from this angle",
+        "proof": "Photo with a tread depth gauge or coin placed in the groove",
+        "if_unproven": "priced as minimum legal/near-worn tread"
+      },
+      {
+        "risk": "Hidden sidewall damage (cracks, bulges, patches) not visible in stacked view",
+        "proof": "Individual photos of each tyre's full sidewall, both sides",
+        "if_unproven": "priced as damaged/risky until shown undamaged"
+      },
+      {
+        "risk": "Number of tyres being sold as a set vs individually unclear",
+        "proof": "Seller confirmation with photo showing count and labeling",
+        "if_unproven": "priced per single tyre, worst case"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of one tyre's full sidewall showing brand, model, and size code",
+      "Photo of the DOT date code for age verification",
+      "Photo showing tread depth with a gauge or coin",
+      "Separate photos of each tyre's sidewall for damage/crack check",
+      "Confirmation of whether sold as a single tyre or as a set"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The only photo shows a stack of tyres from the tread side with no sidewall, so size and brand - the main price determinants - cannot be read, making even a worst-case price impossible without a sidewall shot."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 17041,
+    "input_tokens": 2846,
+    "output_tokens": 1569,
+    "cost_usd": 0.018191,
+    "replayed": false,
+    "fixture_key": "5a070a464e68284a2b3e2fa34181f1ed",
+    "error": null
+  }
+}

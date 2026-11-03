@@ -1,0 +1,86 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: a V-shaped automotive engine sitting on a paved/interlocked floor, person sitting on an orange plastic chair in background, no vehicle or chassis visible.",
+      "Photo 0 and 1: plastic engine cover bears embossed text 'PORSCHE' in large letters.",
+      "Photo 1: close-up of the same cover showing 'PORSCHE' logo clearly, oil residue/staining visible around valve cover gaskets.",
+      "Photo 2: another angle of the same engine, showing wiring harness, intake manifold runners, and a tan/beige component (possibly a reservoir or cover) with visible grime.",
+      "No VIN plate, engine code sticker, odometer, or chassis tag visible in any photo.",
+      "No test rig, stand with engine running, or multimeter/compression gauge shown.",
+      "Watermark 'EZE PORSCHE GLOBAL AUTOS' overlaid on all three photos - this is the seller's own branding, not independent proof.",
+      "Engine appears to be removed from a vehicle (pulled unit), resting directly on ground/pavement, with a cart and bare wheel rim in background suggesting a parts yard."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "used V-type car engine (pulled/removed unit)",
+      "brand": "Porsche",
+      "model": null,
+      "read_from": [
+        "photo 0 cover text 'PORSCHE'",
+        "photo 1 cover text 'PORSCHE'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "We also deals in all kinds of car spare parts",
+        "verdict": "unverifiable_remote",
+        "evidence": "General business claim about seller's inventory range; no photo can confirm or deny this."
+      },
+      {
+        "claim": "Implied: this is a genuine Porsche engine",
+        "verdict": "unverified",
+        "evidence": "Brand name is molded into the plastic cover (photo 0, 1) which supports it being an OEM-style Porsche cover, but a cover alone does not confirm the internal engine block, nor which Porsche model it fits, nor that it is not a counterfeit/aftermarket cover."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Exact Porsche model/engine code is unreadable, and engine prices vary enormously between Porsche lines (e.g., Boxster/Cayenne V6 vs Panamera/Cayenne V8).",
+        "proof": "Close-up photo of the engine code stamp/plate on the block, or a chassis/VIN tag from the donor car.",
+        "if_unproven": "cannot be priced at all without this, since worst-case and best-case prices differ by an order of magnitude"
+      },
+      {
+        "risk": "Running condition unknown - no start-up, compression, or leak-down evidence shown.",
+        "proof": "Video of the engine cranking/running with audio, or a compression/leak-down test readout.",
+        "if_unproven": "priced as non-running/for-parts condition"
+      },
+      {
+        "risk": "Completeness unknown - turbochargers, sensors, wiring loom, ECU, accessories may be missing (only partial engine visible, no turbo units seen despite Porsche engines of this era often being turbocharged).",
+        "proof": "Full 360-degree photo set showing intake side, exhaust manifolds/turbo mounts, and accessory brackets.",
+        "if_unproven": "priced as incomplete/stripped unit"
+      },
+      {
+        "risk": "Visible oil staining/residue around valve covers (photo 1) may indicate gasket leaks or prior internal issues.",
+        "proof": "Close-up of gasket mating surfaces after cleaning, or a pressure/leak test.",
+        "if_unproven": "priced as leaking/needing gasket work"
+      },
+      {
+        "risk": "Mileage and service history of the donor vehicle are unknown.",
+        "proof": "Odometer photo from the donor car or service book/records.",
+        "if_unproven": "priced as unknown/high-mileage risk"
+      }
+    ],
+    "proof_requests": [
+      "Clear close-up photo of the engine code/serial plate stamped on the block",
+      "A short video of the engine attempting to crank or run, with audible sound",
+      "Wide shots showing the intake manifold side and exhaust/turbo mounting points to assess completeness",
+      "Any donor-vehicle documentation (VIN, registration, or odometer photo) linking the engine to a specific Porsche model"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The brand 'Porsche' is legible on the cover but the specific model/engine code that sets the price is not readable in any photo, and running condition plus completeness are unverifiable, so even a worst-case price cannot be anchored without the engine code or donor-vehicle ID."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 27954,
+    "input_tokens": 3929,
+    "output_tokens": 2336,
+    "cost_usd": 0.028027,
+    "replayed": false,
+    "fixture_key": "e87dd236679de9e9fda3a1f56584d22a",
+    "error": null
+  }
+}
