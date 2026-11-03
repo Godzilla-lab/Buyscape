@@ -1,0 +1,108 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Silver laptop with black keyboard, shown open on a green surface.",
+      "Photo 0: Side view showing the keyboard, trackpad, and a blue Intel Core sticker. The screen is dark and reflects surroundings.",
+      "Photo 1: Front view of the keyboard and trackpad. The word 'ELITEBOOK' is visible on the palm rest. A small blue Intel Core sticker is present.",
+      "Photo 2: Similar front view to photo 1, with the same 'ELITEBOOK' branding and Intel sticker. The screen remains off.",
+      "No visible damage to the keyboard or casing in any photo.",
+      "No screen content is visible in any photo \u2014 screen appears off or black.",
+      "No ports, hinges, or underside are shown.",
+      "No model number or serial number is visible on any surface.",
+      "The seller's text claims it is an HP Elitebook 840 G8 with Core i5, 256GB SSD, 8GB RAM, keyboard light, and touch screen."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "Elitebook 840 G8",
+      "read_from": [
+        "photo 1 palm rest: 'ELITEBOOK' text",
+        "photo 2 palm rest: 'ELITEBOOK' text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP Elitebook 840 G8",
+        "verdict": "supported",
+        "evidence": "The word 'ELITEBOOK' is visible on the palm rest in photo 1 and photo 2. The model 840 G8 is a known variant in this series, and the design matches."
+      },
+      {
+        "claim": "corei5",
+        "verdict": "unverifiable_remote",
+        "evidence": "No CPU sticker or BIOS screen is visible. The Intel Core sticker is present but does not specify the generation or model (e.g., i5-10210U, i5-1135G7)."
+      },
+      {
+        "claim": "256ssd",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal components or disk labels are visible. No system information screen shown."
+      },
+      {
+        "claim": "8gb ram",
+        "verdict": "unverifiable_remote",
+        "evidence": "No RAM modules or system specs visible. No BIOS or Windows screen to confirm."
+      },
+      {
+        "claim": "keyboard light",
+        "verdict": "unverified",
+        "evidence": "No photo shows the keyboard illuminated. The keyboard appears dark in all photos, which could be due to ambient lighting or the keyboard being off."
+      },
+      {
+        "claim": "touch screen",
+        "verdict": "unverified",
+        "evidence": "The screen is off in all photos, so no touch functionality can be observed. No visible touch indicators (like a touchpad icon or gesture area) on the screen bezel."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Screen may be non-functional or have dead pixels",
+        "proof": "A photo of the screen turned on, showing a clear display with no defects.",
+        "if_unproven": "priced as not working or with screen defect"
+      },
+      {
+        "risk": "Keyboard backlight may not work",
+        "proof": "A photo of the keyboard illuminated in a dark environment.",
+        "if_unproven": "priced as without backlight"
+      },
+      {
+        "risk": "Touch screen may not be functional",
+        "proof": "A video or photo showing a finger interacting with the screen (e.g., swiping or tapping) while the screen is on.",
+        "if_unproven": "priced as non-touch screen"
+      },
+      {
+        "risk": "Internal components (SSD, RAM, CPU) may not match the claimed specs",
+        "proof": "A photo of the BIOS screen or Windows system information showing the exact CPU, RAM, and storage details.",
+        "if_unproven": "priced as unknown specs, likely lower tier"
+      },
+      {
+        "risk": "Battery may be degraded or non-functional",
+        "proof": "A photo of the laptop running on battery with the battery percentage visible on screen.",
+        "if_unproven": "priced as battery not included or degraded"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the screen turned on, showing a clear display.",
+      "Photo of the keyboard with backlight enabled in a dark room.",
+      "Video or photo showing touch screen interaction.",
+      "Photo of BIOS or Windows system information showing CPU, RAM, and storage details.",
+      "Photo of the laptop running on battery with battery percentage visible."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identifiable as an HP Elitebook from the branding, but critical claims (CPU, RAM, SSD, keyboard light, touch screen) cannot be verified from the photos. The screen is off in all images, making functionality and display quality unverifiable. Without proof of these features, the item cannot be priced accurately and must be assessed further."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 49479,
+    "input_tokens": 2794,
+    "output_tokens": 1139,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "0d036789f373628d8722dd46daacd82e",
+    "error": null
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: MacBook Pro open, showing desktop with time 08:18, date Wed Oct 29. Keyboard and trackpad visible. Pink sticky note on left side with handwritten text: 'MacBook Pro 14-inch 2021 M1 Pro 16GB Ram 512GB SSD'.",
+      "Photo 1: Same view as photo 0, slightly different angle. Sticky note visible with same text. Watermark 'POSTED ON JIJI BY QUALITY GADGETS' overlaid.",
+      "Photo 2: Screenshot of macOS 'About This Mac' window. Shows 'MacBook Pro 14-inch, 2021', 'Chip: Apple M1 Pro', 'Memory: 16 GB', 'Storage: 494.38 GB total, 466.28 GB available', 'macOS: Version 26.0 (Tahoe)'. Serial number visible: NGPN7DR66F. Watermark present."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "MacBook Pro",
+      "brand": "Apple",
+      "model": "14-inch 2021 M1 Pro",
+      "read_from": [
+        "photo 2 screen: 'MacBook Pro 14-inch, 2021', 'Chip: Apple M1 Pro'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "MacBook Pro 2021 M1 Pro",
+        "verdict": "supported",
+        "evidence": "photo 2 screen: 'MacBook Pro 14-inch, 2021', 'Chip: Apple M1 Pro'"
+      },
+      {
+        "claim": "16GB RAM",
+        "verdict": "supported",
+        "evidence": "photo 2 screen: 'Memory: 16 GB'"
+      },
+      {
+        "claim": "512GB SSD",
+        "verdict": "unverified",
+        "evidence": "photo 2 shows '494.38 GB' total storage, which is close to 512GB but not exact. Could be 512GB with some space used by system or formatting. No direct label of '512GB SSD'."
+      },
+      {
+        "claim": "Experience exceptional speed and performance",
+        "verdict": "unverifiable_remote",
+        "evidence": "Subjective claim; cannot verify performance remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The storage capacity is listed as 494.38 GB, which may indicate a 512GB drive but could also suggest a different capacity or data corruption.",
+        "proof": "A screenshot of 'System Report' or 'Storage Settings' showing the exact drive model and capacity.",
+        "if_unproven": "Priced as if it is 512GB, but with a discount for uncertainty; if proven to be less, price drops."
+      },
+      {
+        "risk": "The device may have been jailbroken, modified, or have unauthorized software, which could affect performance or warranty.",
+        "proof": "A screenshot of 'System Report' showing no unauthorized modifications or software, and verification of macOS version authenticity.",
+        "if_unproven": "Priced as if it is standard, but with a discount for potential software issues."
+      },
+      {
+        "risk": "Physical damage not visible in photos, such as hinge wear, screen scratches, or keyboard issues.",
+        "proof": "A close-up video or photo of the entire laptop, including hinges, screen edges, and keyboard, under good lighting.",
+        "if_unproven": "Priced as if in good condition, but with a discount for potential hidden wear."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of 'System Report' to confirm exact storage capacity and drive model.",
+      "Close-up video or photos of the entire laptop, including hinges, screen edges, and keyboard.",
+      "Proof of original purchase or warranty status, if available."
+    ],
+    "decision": "price",
+    "reason": "The model and RAM are confirmed via photo 2. Storage is close to 512GB and likely correct, but not definitively proven. Risks are noted but do not prevent pricing; item is priced at worst-case scenario (storage slightly less than 512GB, potential minor wear)."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 32993,
+    "input_tokens": 2797,
+    "output_tokens": 970,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "888942f2834ec1aad834ef6fbfab1f63",
+    "error": null
+  }
+}
