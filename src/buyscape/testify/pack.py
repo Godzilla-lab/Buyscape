@@ -465,8 +465,9 @@ def kaggle_metadata(s: dict, slug: str, public: bool) -> dict:
         "description": datasheet(s, public=public),
         "isPrivate": not public,
         "licenses": [{"name": "CC-BY-4.0" if public else "other"}],
-        "keywords": ["business", "africa", "retail and shopping", "e-commerce services", "tabular",
-                     *([] if public else ["image", "computer vision"])],
+        # Kaggle takes at most five tags.
+        "keywords": ["business", "africa", "retail and shopping", "e-commerce services",
+                     "tabular" if public else "computer vision"],
         "resources": files,
         "userSpecifiedSources": ("Jiji Nigeria (jiji.ng) adverts read from its public listing pages; "
                                  "BuyScrap Nigeria's own adverts; Jumia, Slot and Pointek shop prices. "
