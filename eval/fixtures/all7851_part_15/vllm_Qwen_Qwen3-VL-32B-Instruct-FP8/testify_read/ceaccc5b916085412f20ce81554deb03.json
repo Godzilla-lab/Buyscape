@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a close-up of a used car tyre tread with visible wear, including some cracking and uneven wear patterns.",
+      "The tyre appears dirty with embedded debris and some white residue, possibly from road grime or previous use.",
+      "Photo 1 shows the sidewall of the tyre with visible markings: '185/65R14 86H', a DOT code '0221976', and partial brand text ending in 'IAL'.",
+      "The tyre is mounted on a rim, which is partially visible in photo 0.",
+      "The tyre appears to be a standard passenger car tyre, not a performance or off-road type."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "car tyre",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 1 sidewall"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Clean and durable tyre available for sale.",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows significant dirt, debris, and wear on the tread; photo 1 shows a dirty sidewall. The tyre is not clean."
+      },
+      {
+        "claim": "Strong grip and excellent road performance.",
+        "verdict": "unverifiable_remote",
+        "evidence": "Performance cannot be assessed from photos alone. Tread depth and wear patterns suggest reduced grip, but actual performance is not visible."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Tread depth is below legal or safe limit, reducing grip and increasing accident risk.",
+        "proof": "A close-up photo of the tread with a tread depth gauge or a coin inserted into the grooves to measure depth.",
+        "if_unproven": "priced as unsafe and near end-of-life, with low value"
+      },
+      {
+        "risk": "Internal damage or dry rot not visible from outside, which could lead to blowout.",
+        "proof": "A video or photo showing the tyre being rotated to inspect the sidewall for cracks, bulges, or cuts, especially near the bead.",
+        "if_unproven": "priced as potentially unsafe, with reduced value"
+      },
+      {
+        "risk": "Tyre is expired or near expiry based on DOT code '0221976' (week 21, year 2019).",
+        "proof": "A clear photo of the DOT code with the full date visible, and confirmation of age.",
+        "if_unproven": "priced as aged tyre, with reduced value due to potential degradation"
+      }
+    ],
+    "proof_requests": [
+      "A close-up photo of the tread with a tread depth gauge or coin to measure depth.",
+      "A video or photo showing the tyre rotated to inspect the sidewall for cracks or bulges.",
+      "A clear photo of the full DOT code to confirm manufacturing date."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The tyre shows visible wear and dirt, contradicting the 'clean' claim. Performance claims are unverifiable. Critical risks like tread depth, internal damage, and age cannot be assessed from current photos. Proof is needed to determine safe and accurate pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 70913,
+    "input_tokens": 2583,
+    "output_tokens": 711,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "ceaccc5b916085412f20ce81554deb03",
+    "error": null
+  }
+}

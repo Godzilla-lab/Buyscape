@@ -1,0 +1,90 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Open laptop showing a colorful desktop wallpaper with a space-themed image. The screen is on, displaying Windows 10/11 interface. The Dell logo is visible below the screen. Keyboard is black with white lettering. A blue Intel sticker is on the bottom right of the palm rest. The laptop is placed on a gray tufted surface.",
+      "Photo 1: Closed laptop lid showing the Dell logo in the center. The laptop is dark gray or black. The left side ports are partially visible: USB-A, HDMI, and possibly a power jack. The surface is the same gray tufted material.",
+      "Photo 2: Open laptop showing a Windows System Information window. The screen displays details including: 'System Manufacturer: Dell Inc.', 'System Model: Latitude 7380', 'Processor: Intel(R) Core(TM) i5-7300U CPU @ 2.60GHz', 'Installed Memory (RAM): 8.00 GB', 'System Type: 64-bit Operating System, x64-based processor'. The laptop is on a wooden surface. A black external SSD or drive is visible under the laptop. The same blue Intel sticker is on the palm rest."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Dell",
+      "model": "Latitude 7380",
+      "read_from": [
+        "photo 2 screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "American used Dell Latitude 7380",
+        "verdict": "supported",
+        "evidence": "Photo 2 screen shows 'System Model: Latitude 7380' and 'System Manufacturer: Dell Inc.'"
+      },
+      {
+        "claim": "Intel Core i5(7th gen)",
+        "verdict": "supported",
+        "evidence": "Photo 2 screen shows 'Processor: Intel(R) Core(TM) i5-7300U CPU @ 2.60GHz', which is a 7th gen i5."
+      },
+      {
+        "claim": "256gb(ssd)",
+        "verdict": "unverified",
+        "evidence": "Photo 2 shows 'Installed Memory (RAM): 8.00 GB', but does not show storage size. The storage type (SSD) and capacity (256GB) are not visible in any photo."
+      },
+      {
+        "claim": "8gb ram",
+        "verdict": "supported",
+        "evidence": "Photo 2 screen shows 'Installed Memory (RAM): 8.00 GB'."
+      },
+      {
+        "claim": "Keyboard...",
+        "verdict": "unverified",
+        "evidence": "Keyboard is visible in photos 0 and 2, but no details about condition, backlight, or specific features are visible. The claim is incomplete."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Storage capacity and type (SSD vs HDD) not confirmed",
+        "proof": "Photo showing the system information window with 'System Drive' or 'Total Size' under 'Disk' section, or a screenshot from Disk Management.",
+        "if_unproven": "Priced as if storage is unknown or possibly HDD, which reduces value."
+      },
+      {
+        "risk": "Battery health and charge cycles not visible",
+        "proof": "Photo showing battery health percentage or cycle count from Windows Battery Report or BIOS.",
+        "if_unproven": "Priced as if battery is degraded or non-functional, which reduces value."
+      },
+      {
+        "risk": "Physical damage or wear not fully visible (e.g., screen cracks, hinge issues, keyboard damage)",
+        "proof": "Close-up photos of the screen, hinges, keyboard, and all edges of the laptop.",
+        "if_unproven": "Priced as if there may be hidden damage, which reduces value."
+      },
+      {
+        "risk": "Laptop may not be fully functional (e.g., ports, webcam, audio)",
+        "proof": "Video or photos showing all ports in use, webcam working, and audio output.",
+        "if_unproven": "Priced as if some components may be faulty, which reduces value."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot or photo showing the storage capacity and type (SSD/HDD) from System Information or Disk Management.",
+      "Photo or video showing the battery health and cycle count.",
+      "Close-up photos of the screen, keyboard, hinges, and all edges for physical condition.",
+      "Video or photos showing all ports in use, webcam, and audio working."
+    ],
+    "decision": "price",
+    "reason": "The model and key specs (CPU, RAM) are confirmed from photo 2. The storage claim is unverified but can be priced at worst case (HDD or unknown). The item is identifiable and functional as shown, so a price can be assigned based on worst-case assumptions for unproven claims."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 86348,
+    "input_tokens": 2668,
+    "output_tokens": 1092,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "f97fd5adeef5225f735e40695923bf0c",
+    "error": null
+  }
+}

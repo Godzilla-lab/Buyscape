@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black tower computer case with vertical cooling fins on the front panel.",
+      "The front panel has a label 'Z240' and an HP logo below it.",
+      "There are multiple USB ports and audio jacks on the front panel.",
+      "The case is placed among other stacked computer equipment, some wrapped in plastic.",
+      "A handwritten note is visible in the foreground with '16GB' and '2GB V GA' written on it, possibly referring to RAM and graphics memory.",
+      "The case appears to be a desktop or workstation, not a rack-mounted server, based on its form factor.",
+      "No internal components are visible; the case is closed."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "desktop computer",
+      "brand": "HP",
+      "model": "Z240",
+      "read_from": [
+        "photo 0 front panel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Xeon server",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows an HP Z240, which is a workstation, not a server. The form factor is a tower, not rack-mounted, and there is no visible server branding or rack rails."
+      },
+      {
+        "claim": "2tb hdd",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal drives are visible. The case is closed. The claim cannot be verified from the photo."
+      },
+      {
+        "claim": "16gig Ram",
+        "verdict": "unverified",
+        "evidence": "The handwritten note in photo 0 says '16GB', which may refer to RAM, but it is not confirmed to be part of this unit. No RAM slots or modules are visible."
+      },
+      {
+        "claim": "4gig dedicated graphics",
+        "verdict": "unverified",
+        "evidence": "The handwritten note says '2GB V GA', which may refer to 2GB video graphics, contradicting the 4GB claim. No GPU is visible. The claim cannot be confirmed."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The unit may not have the advertised 2TB HDD, 16GB RAM, or 4GB dedicated graphics card.",
+        "proof": "Photo of the internal components showing the drives, RAM sticks, and GPU with their labels.",
+        "if_unproven": "Priced as not having those components, i.e., as a barebones or lower-spec unit."
+      },
+      {
+        "risk": "The unit may be non-functional or have damaged components.",
+        "proof": "Video or photo of the unit powered on, showing BIOS or OS boot, and a photo of the internal components in good condition.",
+        "if_unproven": "Priced as not working or with unknown functionality."
+      },
+      {
+        "risk": "The unit may be a workstation (Z240) and not a server as claimed, which affects its intended use and value.",
+        "proof": "Photo of the motherboard or system information showing the CPU type (e.g., Intel Xeon) and system type.",
+        "if_unproven": "Priced as a workstation, not a server, which may be less valuable for server-specific use cases."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the internal components showing the HDD, RAM, and GPU with their labels.",
+      "Photo of the system powered on, showing BIOS or OS boot screen.",
+      "Photo of the motherboard or system information showing the CPU type and system model details."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identified as an HP Z240 workstation, contradicting the seller's claim of it being a Xeon server. The advertised specifications (2TB HDD, 16GB RAM, 4GB GPU) cannot be verified from the current photo. Without proof of internal components and functionality, the item cannot be priced accurately. The handwritten note suggests 16GB RAM and 2GB GPU, which contradicts the seller's claim of 4GB GPU. Proof is needed to confirm the actual specs and condition."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 76125,
+    "input_tokens": 2009,
+    "output_tokens": 920,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "bd9581d2e1ff4011b0e28ffcb7cbabfe",
+    "error": null
+  }
+}

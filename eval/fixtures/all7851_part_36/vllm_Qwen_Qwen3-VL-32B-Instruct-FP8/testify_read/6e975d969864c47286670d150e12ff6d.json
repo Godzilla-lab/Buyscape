@@ -1,0 +1,97 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Silver laptop with black screen, keyboard, and trackpad. Screen has plastic wrap with a tear. HP logo visible on lid. Watermark 'TIRESLESS IT SOLUTIONS' over keyboard. Intel sticker on palm rest.",
+      "Photo 1: Multiple silver laptops stacked in a store. One laptop in foreground shows ports and side profile. Background shelves contain boxed items and plastic-wrapped goods. Watermark 'TIRESLESS IT SOLUTIONS' and 'FILTERRA' visible.",
+      "Photo 2: Closed laptop with plastic wrap. HP logo centered on lid. Watermark 'TIRESLESS IT SOLUTIONS' and 'POSTED ON JIJI' visible.",
+      "All photos show plastic wrapping, suggesting the laptop is new or refurbished and not used."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": null,
+      "read_from": [
+        "photo 0 screen bezel",
+        "photo 2 lid"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP EliteBook 820 G3",
+        "verdict": "unverified",
+        "evidence": "No model name visible in any photo. The HP logo is present, but the specific model cannot be confirmed from the images."
+      },
+      {
+        "claim": "256GB SSD",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal components shown. Cannot verify storage type or capacity from photos."
+      },
+      {
+        "claim": "8GB RAM",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal components shown. RAM cannot be verified from photos."
+      },
+      {
+        "claim": "Intel Core i5 processor",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows an Intel sticker on the palm rest, indicating Intel processor. However, generation and exact model (i5) cannot be confirmed from sticker alone."
+      },
+      {
+        "claim": "6th generation",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible CPU model or generation indicator. Intel sticker does not specify generation."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Laptop may not be the claimed model (EliteBook 820 G3)",
+        "proof": "Photo showing model label on bottom chassis or inside lid, or a clear shot of the BIOS screen showing model name.",
+        "if_unproven": "Priced as generic HP laptop, not as EliteBook 820 G3, which affects value."
+      },
+      {
+        "risk": "Storage may not be 256GB SSD or may be HDD",
+        "proof": "Photo of open laptop showing internal drive or BIOS screen showing storage details.",
+        "if_unproven": "Priced as unknown storage, which could be HDD or smaller SSD, reducing value."
+      },
+      {
+        "risk": "RAM may not be 8GB or may be non-upgradable",
+        "proof": "Photo of open laptop showing RAM slots and modules, or BIOS screen showing RAM amount.",
+        "if_unproven": "Priced as unknown RAM, which could be less than 8GB, reducing value."
+      },
+      {
+        "risk": "Processor may not be 6th gen i5 or may be lower tier",
+        "proof": "Photo of BIOS screen showing CPU model or a system information screenshot.",
+        "if_unproven": "Priced as generic Intel processor, not 6th gen i5, reducing value."
+      },
+      {
+        "risk": "Laptop may be non-functional or have hidden damage",
+        "proof": "Video of laptop turning on, showing boot screen and operating system, or a photo of the screen displaying content.",
+        "if_unproven": "Priced as not working, since screen is off and no proof of functionality."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the bottom chassis showing model label or serial number.",
+      "Photo or video of the laptop turning on and showing the BIOS or operating system.",
+      "Photo of the internal components showing the SSD and RAM.",
+      "Screenshot or photo of system information showing CPU, RAM, and storage details."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model cannot be confirmed from the photos, and key specifications (SSD, RAM, CPU generation) are unverifiable. Without proof of functionality and exact specs, the item cannot be priced accurately. The plastic wrapping suggests it may be new or refurbished, but this does not confirm working condition or true specs."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 82125,
+    "input_tokens": 2592,
+    "output_tokens": 1016,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "6e975d969864c47286670d150e12ff6d",
+    "error": null
+  }
+}

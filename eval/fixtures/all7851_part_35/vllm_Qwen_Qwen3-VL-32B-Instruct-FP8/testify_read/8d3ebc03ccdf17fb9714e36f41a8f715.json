@@ -1,0 +1,66 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a silver SUV with severe front-end damage: crumpled hood, broken front bumper, damaged grille, and exposed engine components.",
+      "The vehicle is parked on a dirt lot with makeshift structures and shipping containers in the background.",
+      "The front left headlight is broken and hanging loose; the front left wheel is damaged and appears to be missing its hubcap.",
+      "The windshield has a sticker with text that appears to be a license plate or registration number, but it is not clearly legible.",
+      "The front grille has a circular emblem, but the brand is not clearly identifiable from the photo.",
+      "There is a watermark on the photo: 'JP&C UNIQUE VENTURES NIG'."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "damaged SUV",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "We also offer services like auto body repairs and supply high quality replacement parts.",
+        "verdict": "unverifiable_remote",
+        "evidence": "The photo shows a damaged vehicle, but no proof of repair services or parts supply is visible. The claim is based on seller text only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The vehicle may have structural damage beyond what is visible, such as frame damage or airbag deployment.",
+        "proof": "A photo showing the undercarriage, frame, and interior, especially the driver\u2019s side airbag and dashboard.",
+        "if_unproven": "priced as having structural damage, which reduces value significantly."
+      },
+      {
+        "risk": "The engine may be damaged or non-functional due to the front-end collision.",
+        "proof": "A photo of the engine bay with the hood open, showing the condition of the engine, belts, and fluids.",
+        "if_unproven": "priced as not working, which reduces value to scrap or parts-only."
+      },
+      {
+        "risk": "The vehicle may have been written off or declared a total loss by an insurer.",
+        "proof": "A photo of the vehicle\u2019s VIN plate and a copy of the vehicle\u2019s registration or inspection report.",
+        "if_unproven": "priced as a salvage vehicle, which reduces value."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the engine bay with the hood open.",
+      "Photo of the vehicle\u2019s VIN plate.",
+      "Photo of the undercarriage and frame.",
+      "Photo of the interior, especially the driver\u2019s side airbag and dashboard."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The vehicle is clearly damaged, but the extent of the damage and its functional status are unknown. Without proof of the engine, frame, and VIN, the item cannot be priced accurately. The seller\u2019s claim about services is unverifiable from the photo alone."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 49097,
+    "input_tokens": 1777,
+    "output_tokens": 631,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "8d3ebc03ccdf17fb9714e36f41a8f715",
+    "error": null
+  }
+}

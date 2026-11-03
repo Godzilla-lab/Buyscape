@@ -1,0 +1,74 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 and Photo 1 show the same black and orange folding bicycle from different angles.",
+      "The frame has 'FLOORS' and 'GT' branding visible on the top tube and down tube.",
+      "The wheels are large, with a distinctive three-spoke design and 'KENDA' written on the tire sidewall.",
+      "The front fork is suspension-equipped, and disc brakes are visible on both wheels.",
+      "The rear derailleur and gear system are visible, but no brand is clearly readable.",
+      "The bike has a folding hinge near the bottom bracket, indicating it is a folding mountain bike.",
+      "The seller claims 27.5-inch wheels and Shimano 21-speed gearing, but neither is clearly visible or readable in the photos."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "folding mountain bike",
+      "brand": "FLOORS",
+      "model": null,
+      "read_from": [
+        "photo 0 frame",
+        "photo 1 frame"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "27.5 inches wheels",
+        "verdict": "unverified",
+        "evidence": "The wheel size is not readable in the photos; the tires show 'KENDA' but no size. The three-spoke design is unusual for standard 27.5-inch wheels, which typically have more spokes."
+      },
+      {
+        "claim": "shimano 21 speed",
+        "verdict": "unverified",
+        "evidence": "The rear derailleur and gear system are visible, but no brand name is legible. The number of gears cannot be confirmed from the photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The wheels may not be 27.5 inches as claimed.",
+        "proof": "A close-up photo of the tire sidewall showing the size marking.",
+        "if_unproven": "priced as smaller or non-standard wheel size, which reduces value and comfort claim."
+      },
+      {
+        "risk": "The gear system may not be Shimano 21-speed.",
+        "proof": "A close-up photo of the rear derailleur and shifters showing the brand and gear count.",
+        "if_unproven": "priced as generic or lower-quality gearing, reducing performance value."
+      },
+      {
+        "risk": "The bike may be a low-quality or counterfeit model despite branding.",
+        "proof": "A close-up of the frame welds, components, and any serial number or manufacturer label.",
+        "if_unproven": "priced as unbranded or generic folding bike, reducing perceived quality."
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the tire sidewall to confirm wheel size.",
+      "Close-up photo of the rear derailleur and shifters to confirm Shimano 21-speed.",
+      "Close-up of the frame near the bottom bracket or head tube for any serial number or manufacturer label."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a folding mountain bike with visible branding, but key claims about wheel size and gear system are unverified. Without proof, the price cannot be determined accurately due to risks of misrepresentation."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 60920,
+    "input_tokens": 1793,
+    "output_tokens": 712,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "532e1d5acb6ce2e361ae189b47f49e44",
+    "error": null
+  }
+}

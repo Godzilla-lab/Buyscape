@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo shows a white smartphone with a single rear camera and a small flash, held in a hand.",
+      "The back has a sticker with text: 'iPhone 17air, 512G 94%, US iOS26.5.2 sim lock, IMEI: 358838940005532, 2026010150630006'.",
+      "The Apple logo is visible below the sticker.",
+      "The phone has a flat edge design, similar to iPhone 12 or later models.",
+      "The sticker claims 'iPhone 17air' \u2014 a non-existent model as of now.",
+      "The iOS version '26.5.2' is not real; current iOS is around 17.x.",
+      "The IMEI number is 15 digits, which is invalid (IMEI should be 15 digits, but the format and prefix may be suspicious).",
+      "The sticker also says 'sim lock', indicating carrier lock.",
+      "The phone appears to be in good physical condition, no visible cracks or dents."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "smartphone",
+      "brand": "Apple",
+      "model": null,
+      "read_from": [
+        "photo 0 back"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "iPhoneAir locked 256gig available",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows a sticker claiming 'iPhone 17air 512G', not 'iPhoneAir 256G'. The model 'iPhoneAir' does not exist; 'iPhone 17air' is also fictional. The capacity is listed as 512G, not 256G."
+      },
+      {
+        "claim": "50% down payment for buy now pay later",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a payment term, not visible in the photo. Cannot verify from image alone."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The phone is a fake or non-existent model (iPhone 17air) \u2014 likely a scam or mislabeled device.",
+        "proof": "A clear photo of the phone's front screen showing the actual model name or settings menu with device info.",
+        "if_unproven": "Priced as a non-functional or fake device, with no value."
+      },
+      {
+        "risk": "The IMEI number is invalid or fake \u2014 may be a cloned or stolen device.",
+        "proof": "A photo of the phone's settings > General > About > IMEI, or a screenshot of IMEI check from a trusted source.",
+        "if_unproven": "Priced as a high-risk device, possibly non-functional or illegal \u2014 significantly devalued."
+      },
+      {
+        "risk": "The phone is SIM locked \u2014 may not work with Nigerian networks without unlocking.",
+        "proof": "A video or photo showing the phone being powered on and attempting to insert a Nigerian SIM card, with network status shown.",
+        "if_unproven": "Priced as a locked device, which reduces value significantly in Lagos market."
+      },
+      {
+        "risk": "The iOS version '26.5.2' is fictional \u2014 indicates the device may be a fake or modified device.",
+        "proof": "A screenshot of the phone's settings > General > Software Update, showing the actual iOS version.",
+        "if_unproven": "Priced as a non-genuine or modified device, with reduced value."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of the phone's settings showing the actual model name and iOS version.",
+      "Photo of the phone's front screen with the model name visible.",
+      "Screenshot of the IMEI check from a trusted source (e.g., Apple or GSMA).",
+      "Video showing the phone being turned on and a Nigerian SIM card being inserted and tested for network connectivity."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The phone is advertised as an 'iPhoneAir 256G', but the photo shows a sticker claiming 'iPhone 17air 512G' with a fictional iOS version and invalid IMEI. The model does not exist, indicating a high risk of fraud or misrepresentation. Without proof of the actual device identity and functionality, a price cannot be determined."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 80917,
+    "input_tokens": 1938,
+    "output_tokens": 982,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "705ca2fde959d9d77cb00de485a9ac86",
+    "error": null
+  }
+}

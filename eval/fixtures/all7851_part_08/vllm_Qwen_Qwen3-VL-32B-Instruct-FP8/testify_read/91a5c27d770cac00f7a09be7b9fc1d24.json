@@ -1,0 +1,86 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Closed black Lenovo laptop, logo visible on top left corner. Watermark 'DEETECH GADGETZ' and 'POSTED ON JIJI'.",
+      "Photo 1: Open laptop showing screen with game wallpaper, keyboard, and trackpad. 'IdeaPad' visible on bezel below screen. Stickers on palm rest: AMD Ryzen and NVIDIA GeForce RTX. Watermark present.",
+      "Photo 2: Same as photo 1, but with Task Manager open showing CPU: AMD Ryzen 5 5600H, Memory: 16.0 GB, Disk: 512 GB. Watermark present."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Lenovo",
+      "model": "IdeaPad 3",
+      "read_from": [
+        "photo 0: Lenovo logo",
+        "photo 1: 'IdeaPad' on bezel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "16gb/ 512gb SSD",
+        "verdict": "supported",
+        "evidence": "Photo 2: Task Manager shows 16.0 GB memory and 512 GB disk."
+      },
+      {
+        "claim": "15.6\" FHD 120Hz Display",
+        "verdict": "unverified",
+        "evidence": "Display size and resolution not visible in photos. Refresh rate not verifiable from screen content or settings."
+      },
+      {
+        "claim": "AMD Ryzen 5 5600H",
+        "verdict": "supported",
+        "evidence": "Photo 2: Task Manager clearly shows 'AMD Ryzen 5 5600H'."
+      },
+      {
+        "claim": "comparable to intel i5",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a subjective comparison; cannot be proven or disproven from photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Display refresh rate is not 120Hz as claimed",
+        "proof": "Screenshot of display settings showing refresh rate, or a video showing smooth motion at 120Hz.",
+        "if_unproven": "Priced as 60Hz display, which reduces value."
+      },
+      {
+        "risk": "SSD is not genuine 512GB or is a slow SATA drive",
+        "proof": "CrystalDiskInfo screenshot showing drive type and actual capacity.",
+        "if_unproven": "Priced as if it were a slower or smaller drive, reducing value."
+      },
+      {
+        "risk": "Laptop has physical damage or wear not visible in photos",
+        "proof": "Full 360-degree video or close-up photos of all edges, hinges, and ports.",
+        "if_unproven": "Priced as if in good condition, but risk of hidden damage reduces value."
+      },
+      {
+        "risk": "Battery health is poor or non-functional",
+        "proof": "Battery report screenshot showing cycle count and health percentage.",
+        "if_unproven": "Priced as if battery is good, but may be dead or degraded."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of display settings showing refresh rate.",
+      "CrystalDiskInfo screenshot of the SSD.",
+      "Battery report screenshot.",
+      "Full 360-degree video or close-up photos of all edges, hinges, and ports."
+    ],
+    "decision": "price",
+    "reason": "The laptop is identifiable as a Lenovo IdeaPad 3 with confirmed AMD Ryzen 5 5600H, 16GB RAM, and 512GB storage. The 120Hz display claim is unverified but not contradicted. Hidden risks exist but are priced at worst case (e.g., 60Hz display, degraded battery). The item can be priced based on visible specs and known risks."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 70750,
+    "input_tokens": 2603,
+    "output_tokens": 876,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "91a5c27d770cac00f7a09be7b9fc1d24",
+    "error": null
+  }
+}

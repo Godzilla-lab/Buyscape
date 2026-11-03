@@ -1,0 +1,68 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a grey industrial welding machine with a control panel.",
+      "The front panel has two large dials: 'JOB SELECTOR' on the left and 'CURRENT CONTROL' on the right.",
+      "A label in the center reads 'LINCOLN ELECTRIC' and 'SHIELD-ARC SAE-400'.",
+      "Below the dials, there is a control section with gauges, switches, and a 'LINCOLN ELECTRIC' logo with a '3' badge.",
+      "The machine is mounted on a wooden pallet and appears to be in a workshop or storage area.",
+      "The text 'UNCO-SISTEC COMPANY OF CHINA' is visible below the model name.",
+      "There is a watermark 'MARIDON SERVICES' across the image."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "diesel welding machine",
+      "brand": "Lincoln Electric",
+      "model": "SHIELD-ARC SAE-400",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "400amps diesel Lincoln welding machine",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows 'SHIELD-ARC SAE-400' on the label, which is a 400-amp model. The brand 'Lincoln Electric' is also visible. The term 'diesel' is not visible in the photo, but the model name and context suggest it is a diesel-powered unit, common for this type of machine."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The machine may not be functional or may have internal damage.",
+        "proof": "A video or photo showing the machine starting and running, with gauges responding and no smoke or unusual noise.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The diesel engine may be damaged or missing parts.",
+        "proof": "Photo of the engine compartment or side view showing the engine and fuel system.",
+        "if_unproven": "priced as missing engine"
+      },
+      {
+        "risk": "The machine may have been modified or repaired with non-original parts.",
+        "proof": "Photo of the engine serial number and any repair tags or labels.",
+        "if_unproven": "priced as possibly modified"
+      }
+    ],
+    "proof_requests": [
+      "Video of the machine starting and running.",
+      "Photo of the engine compartment or side view showing the engine and fuel system.",
+      "Photo of the engine serial number and any repair tags."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The machine is identifiable as a Lincoln Electric SHIELD-ARC SAE-400, but critical functional and mechanical details are not visible. Without proof of operation and engine condition, it cannot be priced accurately. The risks of non-functionality or damage must be resolved before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 54069,
+    "input_tokens": 1639,
+    "output_tokens": 652,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "ca7d024c301f943ba7ea8be4ee7268d9",
+    "error": null
+  }
+}

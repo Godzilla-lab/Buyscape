@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: White Samsung phone back with triple camera module and a sticker with serial number and model info. The sticker is partially legible, showing 'SM-N986B' and '256GB'.",
+      "Photo 1: Front screen showing Samsung Galaxy Note20 Ultra 5G boot screen. Text is clear and readable.",
+      "Photo 2: Front screen turned off, showing a dark screen with no visible cracks or damage from this angle.",
+      "All photos show the phone being held in hand, with a glass display cabinet in the background containing other phones.",
+      "No visible cracks on the screen in photo 2, but the seller claims a cracked screen."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "Samsung Galaxy Note20 Ultra",
+      "brand": "Samsung",
+      "model": "Galaxy Note20 Ultra",
+      "read_from": [
+        "photo 1 screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Samsung gallery note20 ultra 256gb 12g ram",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows 'Galaxy Note20 Ultra 5G' on boot screen. Photo 0 sticker shows '256GB' and model 'SM-N986B', which is the Note20 Ultra. RAM is not visible but consistent with known model specs."
+      },
+      {
+        "claim": "cracked screen",
+        "verdict": "unverified",
+        "evidence": "Photo 2 shows the screen off and no visible cracks. No photo shows the screen on with cracks. The claim is not visually confirmed."
+      },
+      {
+        "claim": "working perfectly",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo 1 shows boot screen, indicating power and basic function. No further operation (e.g., home screen, apps) is shown. Cannot verify full functionality remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Screen is cracked as claimed, but not visible in photos",
+        "proof": "Photo of the screen turned on, showing the crack clearly.",
+        "if_unproven": "Priced as if screen is not cracked, which would be higher. If crack is confirmed, price drops significantly."
+      },
+      {
+        "risk": "Phone has software issues or is not fully functional",
+        "proof": "Video or photo showing the phone on home screen, opening apps, and responding to touch.",
+        "if_unproven": "Priced as not working, which is lower. If working, price increases."
+      },
+      {
+        "risk": "Water damage or internal issues not visible",
+        "proof": "Photo of the phone's charging port, speaker grills, and SIM tray, showing no corrosion or damage.",
+        "if_unproven": "Priced as potentially damaged internally, which reduces value."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the screen turned on, showing the crack clearly.",
+      "Video or photo showing the phone on home screen and opening apps.",
+      "Photo of the charging port and speaker grills to check for water damage."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and storage are confirmed, but the claimed cracked screen is not visible in the photos, and full functionality cannot be verified remotely. The price depends on these unproven claims, so proof is needed before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 63311,
+    "input_tokens": 2787,
+    "output_tokens": 761,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "3465747e26c9a10ae9aca74917c17179",
+    "error": null
+  }
+}

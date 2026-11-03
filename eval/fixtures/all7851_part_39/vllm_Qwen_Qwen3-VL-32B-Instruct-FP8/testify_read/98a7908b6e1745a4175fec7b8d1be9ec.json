@@ -1,0 +1,106 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the back of a silver iPhone with a white sticker labeled 'iPhone 17pro', listing 256GB capacity, LL/A country, 93% battery, silver color, Grade A condition, and 'Tested' function.",
+      "Photo 1 shows the side profile of the same phone, confirming the silver color and triple-camera setup.",
+      "Photo 2 shows the iPhone's 'About' screen with iOS 28.6, Model Name 'iPhone 17 Pro', Model Number 'M7ZT3LL/A', Serial Number 'C2XQVWYKDJ', 256 GB capacity, and 239.37 GB available.",
+      "The sticker in photo 0 claims 'iPhone 17pro', but the screen in photo 2 shows 'iPhone 17 Pro' \u2014 a likely typo in the sticker.",
+      "The model number M7ZT3LL/A is not a known Apple model number for any iPhone; current models use different prefixes (e.g., M, A, etc., but not M7ZT3).",
+      "The iOS version 28.6 is not real; current iOS versions are around 17.x as of 2024.",
+      "The phone has a white protective case or back cover, obscuring the original back panel.",
+      "The seller's text mentions '50% down payment available now' \u2014 a financing offer, not a product claim."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "iPhone 17 Pro",
+      "brand": "Apple",
+      "model": "iPhone 17 Pro",
+      "read_from": [
+        "photo 0 sticker",
+        "photo 2 screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "iPhone 17pro",
+        "verdict": "supported",
+        "evidence": "Photo 0 sticker and photo 2 screen both show 'iPhone 17 Pro' (sticker has typo '17pro', screen shows '17 Pro')."
+      },
+      {
+        "claim": "Capacity: 256GB",
+        "verdict": "supported",
+        "evidence": "Photo 2 screen shows 'Capacity: 256 GB'."
+      },
+      {
+        "claim": "Country: LL/A",
+        "verdict": "supported",
+        "evidence": "Photo 0 sticker and photo 2 screen both show 'LL/A'."
+      },
+      {
+        "claim": "Battery: 93%",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo 0 sticker claims 93% battery, but no photo shows battery health or current charge level. The 'About' screen does not show battery percentage."
+      },
+      {
+        "claim": "Color: Silver",
+        "verdict": "supported",
+        "evidence": "Photo 0 sticker and visual inspection of photos 0 and 1 show silver color."
+      },
+      {
+        "claim": "Condition Grade A",
+        "verdict": "unverified",
+        "evidence": "Photo 0 sticker claims Grade A, but no photos show the front screen, edges, or any signs of wear. No proof of cosmetic condition."
+      },
+      {
+        "claim": "Function: Tested",
+        "verdict": "unverified",
+        "evidence": "Photo 0 sticker says 'Tested', but no proof of functionality (e.g., camera, charging, call test) is shown. The 'About' screen only confirms the device is powered on."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Fake or non-existent model \u2014 the model number M7ZT3LL/A and iOS 28.6 are not real Apple identifiers.",
+        "proof": "A clear shot of the device's Settings > General > About screen showing real model number and iOS version, or a screenshot from Apple's official check tool.",
+        "if_unproven": "Priced as a non-functional or fake device, with no value."
+      },
+      {
+        "risk": "Battery health is not verified \u2014 sticker claims 93% but no proof.",
+        "proof": "A screenshot from the iPhone's battery health settings showing cycle count and maximum capacity.",
+        "if_unproven": "Priced as a battery with unknown health, which could be degraded \u2014 lower value."
+      },
+      {
+        "risk": "Physical damage or cosmetic flaws \u2014 no front or edge views shown.",
+        "proof": "Photos of the front screen, sides, and back (without the white case) to show scratches, cracks, or dents.",
+        "if_unproven": "Priced as having potential cosmetic damage \u2014 lower value."
+      },
+      {
+        "risk": "Device is not unlocked or has iCloud lock \u2014 not verifiable from photos.",
+        "proof": "A video showing the phone being turned on, unlocking with a passcode, and connecting to a network without iCloud activation screen.",
+        "if_unproven": "Priced as potentially locked \u2014 lower value."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of Settings > General > About showing real model number and iOS version.",
+      "Screenshot of Battery Health from Settings > Battery > Battery Health.",
+      "Photos of the front screen, sides, and back without the white case.",
+      "Video showing the phone turning on, unlocking, and connecting to Wi-Fi or cellular network."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The device claims to be an iPhone 17 Pro, but the model number and iOS version are not real, indicating a likely fake or mislabeled device. Without proof of real model, battery health, and physical condition, the item cannot be priced. The photos are insufficient to confirm authenticity or condition."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 107184,
+    "input_tokens": 3229,
+    "output_tokens": 1263,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "98a7908b6e1745a4175fec7b8d1be9ec",
+    "error": null
+  }
+}

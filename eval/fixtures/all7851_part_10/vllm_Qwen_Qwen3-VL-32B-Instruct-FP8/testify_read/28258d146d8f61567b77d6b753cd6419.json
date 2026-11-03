@@ -1,0 +1,80 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: A dark-colored laptop open on a wooden table, screen displaying a graphic with 'Sakamoto Days' and a watermark 'DOLF TECHNOLOGIES'. The laptop has a black keyboard and a touchpad with an Intel logo sticker on the bottom right.",
+      "Photo 1: The back of the same laptop, dark matte finish, with a small red Alienware logo in the center. The bottom edge shows ports and a blue accent strip. Watermark 'DOLF TECHNOLOGIES' is visible.",
+      "Photo 2: A close-up of the laptop screen showing Windows Task Manager. CPU is identified as 'Intel(R) Core(TM) 7 240H'. Memory shows 3.8/31.7 GB used (18%), indicating 32GB RAM. Disk 0 is labeled 'SSD (NVMe)'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Dell Alienware",
+      "model": "Aurora 16",
+      "read_from": [
+        "seller's text",
+        "photo 1: red Alienware logo on back"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Dell Alienware Aurora 16",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows the red Alienware logo on the back of the laptop, and the seller's text explicitly names the model."
+      },
+      {
+        "claim": "Intel Core\u2122 7 240H processor",
+        "verdict": "supported",
+        "evidence": "Photo 2 clearly shows 'Intel(R) Core(TM) 7 240H' in the Task Manager window."
+      },
+      {
+        "claim": "32GB DDR5 RAM",
+        "verdict": "supported",
+        "evidence": "Photo 2 shows '31.7 GB' of memory, which is consistent with 32GB RAM. The type (DDR5) is not visible but is standard for this CPU and model."
+      },
+      {
+        "claim": "1TB PCIe Gen4 NVMe\u2122 SSD",
+        "verdict": "unverified",
+        "evidence": "Photo 2 shows 'SSD (NVMe)' but does not specify capacity or PCIe generation. The 1TB claim cannot be confirmed from the photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The SSD capacity is not confirmed as 1TB",
+        "proof": "A screenshot of Disk Management or a system information tool showing the exact SSD size.",
+        "if_unproven": "priced as a smaller SSD (e.g., 512GB), which reduces value."
+      },
+      {
+        "risk": "The laptop may have been tampered with or is not genuine (e.g., repurposed parts, cloned BIOS)",
+        "proof": "A full system information screenshot (e.g., from CPU-Z or HWiNFO) showing the exact model, serial number, and hardware details.",
+        "if_unproven": "priced as potentially non-genuine or modified, which reduces value."
+      },
+      {
+        "risk": "The laptop may have physical damage not visible in photos (e.g., screen dead pixels, hinge wear, keyboard issues)",
+        "proof": "A video showing the laptop being opened, closed, and used, including a close-up of the screen and keyboard.",
+        "if_unproven": "priced as having potential cosmetic or functional defects."
+      }
+    ],
+    "proof_requests": [
+      "A full system information screenshot (CPU-Z or HWiNFO) showing model, serial number, and hardware details.",
+      "A screenshot of Disk Management showing the exact SSD capacity.",
+      "A video showing the laptop being opened, closed, and used, including screen and keyboard close-ups."
+    ],
+    "decision": "price",
+    "reason": "The laptop is identifiable as a Dell Alienware Aurora 16 with a confirmed Intel Core 7 240H processor and 32GB RAM. The SSD capacity and other risks are unproven but can be priced at worst case. The photos are consistent and show no obvious fraud."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 72792,
+    "input_tokens": 2808,
+    "output_tokens": 916,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "28258d146d8f61567b77d6b753cd6419",
+    "error": null
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a grey and orange portable power station with a digital display reading '13.1V', two AC outlets, multiple USB ports, and a handle on top. The box behind it has 'MAXWELL' and 'ENERGY STORAGE' visible.",
+      "Photo 1 shows the same power station with four yellow LED work lights and various cables in front of it. The box is still visible in the background.",
+      "Photo 2 shows the front of the product box with 'MAXWELL' brand, 'SOLAR PORTABLE OUTDOOR ENERGY STORAGE POWER SUPPLY', and icons for solar panels, car charging, and mains charging. The box image shows a similar unit with a display reading '12.6V'.",
+      "The digital display on the unit in photo 0 shows 13.1V, suggesting it is powered and possibly charged.",
+      "No solar panel is visible in any photo, though the box mentions 'SOLAR PANELS CHARGE'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "portable solar power generator",
+      "brand": "MAXWELL",
+      "model": "not visible",
+      "read_from": [
+        "photo 0 box",
+        "photo 1 box",
+        "photo 2 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "300w solar power generator",
+        "verdict": "unverified",
+        "evidence": "The power output (300W) is not visible on the unit or box. The box only says 'ENERGY STORAGE POWER' and 'POWER SUPPLY' without specifying wattage."
+      },
+      {
+        "claim": "with 40w solar panel",
+        "verdict": "unverifiable_remote",
+        "evidence": "No solar panel is visible in any photo. The box mentions 'SOLAR PANELS CHARGE' but does not specify wattage or confirm inclusion."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The solar panel is not included or is not 40W as claimed",
+        "proof": "A photo of the solar panel with its label showing wattage and model, or a photo of the panel connected to the unit.",
+        "if_unproven": "priced as not including a solar panel or as a lower-wattage panel"
+      },
+      {
+        "risk": "The unit's actual power output is less than 300W",
+        "proof": "A photo of the unit's label or manual showing the rated power output, or a video showing the unit powering a 300W load.",
+        "if_unproven": "priced as a lower-wattage unit, e.g. 200W or 250W"
+      },
+      {
+        "risk": "The unit is not functional or has low battery capacity",
+        "proof": "A video showing the unit powering a device for a sustained period, or a photo of the battery capacity label.",
+        "if_unproven": "priced as possibly not working or with low capacity"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the solar panel with its label showing wattage and model.",
+      "Photo of the unit's label or manual showing rated power output and battery capacity.",
+      "Video showing the unit powering a device for 10 minutes or more."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The key claims about 300W output and 40W solar panel cannot be verified from the photos. The solar panel is not visible, and the power rating is not shown on the unit or box. Without proof, the item cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 60063,
+    "input_tokens": 2154,
+    "output_tokens": 808,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "f5e1d5b499bef3cb7a26058a0fb4ffe2",
+    "error": null
+  }
+}

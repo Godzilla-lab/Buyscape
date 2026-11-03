@@ -1,0 +1,98 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Open laptop showing keyboard, trackpad, and screen. 'VICTUS' logo on lower left of keyboard. Intel Core i7 and NVIDIA GeForce RTX stickers visible on palm rest.",
+      "Photo 1: Laptop partially closed, showing hinge and back of screen. A white sticker is visible on the back of the screen, but text is illegible. 'VICTUS' logo on lower right of keyboard.",
+      "Photo 2: Laptop closed, showing lid with 'VICTUS' logo and a white sticker in top right corner. Text on sticker is too blurry to read. 'VICTUS' also visible on bottom edge of lid.",
+      "All photos show a dark gray or black laptop with a matte finish. Background is a wood-patterned surface. Watermark 'POSTED ON JIJI COLLINS COMPUTER' is present on all images."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "gaming laptop",
+      "brand": "HP",
+      "model": "Victus",
+      "read_from": [
+        "photo 0 keyboard",
+        "photo 1 keyboard",
+        "photo 2 lid"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP Victus gaming system",
+        "verdict": "supported",
+        "evidence": "Photo 0, 1, and 2 show 'VICTUS' branding on keyboard and lid."
+      },
+      {
+        "claim": "Core i7 processor, 13th generation",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows an Intel Core i7 sticker, but no generation is visible. No other photo shows processor details."
+      },
+      {
+        "claim": "512 SSD storage",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal components or system information visible. Cannot confirm storage type or size from photos."
+      },
+      {
+        "claim": "16GB RAM",
+        "verdict": "unverifiable_remote",
+        "evidence": "No system specs or internal components visible. RAM cannot be confirmed from photos."
+      },
+      {
+        "claim": "RTX 4080 8GB",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows an NVIDIA GeForce RTX sticker, but it does not specify the model. RTX 4080 is not visible. The sticker is too small to read the exact model. The HP Victus line typically does not include RTX 4080 in standard models, which is a high-end GPU usually found in more premium laptops. This claim is likely false or misleading."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Processor is not 13th generation Intel Core i7",
+        "proof": "Photo of system information screen or BIOS showing CPU model, or a clear shot of the CPU sticker with generation visible.",
+        "if_unproven": "Priced as a lower-generation i7 or non-i7, which reduces value significantly."
+      },
+      {
+        "risk": "Storage is not 512GB SSD",
+        "proof": "Photo of system information screen showing storage capacity and type, or a clear shot of the SSD label.",
+        "if_unproven": "Priced as HDD or smaller SSD, which reduces value."
+      },
+      {
+        "risk": "RAM is not 16GB",
+        "proof": "Photo of system information screen showing RAM amount, or a clear shot of RAM modules.",
+        "if_unproven": "Priced as 8GB or less, which reduces value."
+      },
+      {
+        "risk": "GPU is not RTX 4080",
+        "proof": "Photo of system information screen showing GPU model, or a clear shot of the GPU sticker or label.",
+        "if_unproven": "Priced as a lower-tier GPU (e.g., RTX 3050 or 4060), which reduces value significantly."
+      },
+      {
+        "risk": "Laptop is not genuine or has been modified",
+        "proof": "Photo of serial number and warranty sticker, or a clear shot of the system information screen showing full specs.",
+        "if_unproven": "Priced as a lower-tier or non-genuine unit, which reduces value."
+      }
+    ],
+    "proof_requests": [
+      "Photo of system information screen (Windows + R, type 'msinfo32') showing CPU, RAM, storage, and GPU details.",
+      "Photo of the bottom of the laptop showing serial number and model number.",
+      "Photo of the white sticker on the back of the screen or lid, if legible.",
+      "Photo of the BIOS screen showing CPU model."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The laptop is identifiable as an HP Victus, but key claims about the 13th gen i7, 512GB SSD, 16GB RAM, and RTX 4080 GPU cannot be verified from the photos. The RTX 4080 claim is likely false given the model line. Without proof of specs, the item cannot be priced accurately and risks being misrepresented."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 95455,
+    "input_tokens": 2803,
+    "output_tokens": 1139,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "1d2db18ca34c757697e07f6a7a4dfa7d",
+    "error": null
+  }
+}

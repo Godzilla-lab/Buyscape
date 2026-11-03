@@ -1,0 +1,106 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Closed black laptop with 'ThinkPad' logo on the bottom right corner. The lid shows dust and smudges. A small sticker is visible on the top right. The Lenovo logo is faintly visible on the top left.",
+      "Photo 1: Open laptop showing keyboard with red TrackPoint, black keys, and a trackpad with orange trim. The bottom right corner has the 'ThinkPad' logo. A blue Intel sticker is visible on the bottom left of the palm rest.",
+      "Photo 2: Laptop open, screen on, displaying a blue Windows desktop background. A handwritten note is taped to the screen: 'LENOVO THINKPAD T480 CORE I5 8TH GEN 256 SSD 8GB RAM SCREEN'. The bottom right of the screen bezel has 'T480' printed. The keyboard and trackpad are visible below the screen. The laptop is on a wooden surface with a brick wall in the background."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Lenovo",
+      "model": "ThinkPad T480",
+      "read_from": [
+        "photo 2 screen bezel",
+        "photo 2 handwritten note"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Lenovo Thinkpad T480",
+        "verdict": "supported",
+        "evidence": "Photo 2: 'T480' printed on the screen bezel and handwritten note on screen."
+      },
+      {
+        "claim": "Core i5 8th Gen",
+        "verdict": "unverified",
+        "evidence": "Photo 2: Handwritten note says 'CORE I5 8TH GEN', but no visible hardware or BIOS screen to confirm. Intel sticker on photo 1 is generic and does not specify generation."
+      },
+      {
+        "claim": "8GB RAM",
+        "verdict": "unverified",
+        "evidence": "Photo 2: Handwritten note says '8GB RAM', but no system information or BIOS screen to confirm. RAM is not visible."
+      },
+      {
+        "claim": "256 SSD",
+        "verdict": "unverified",
+        "evidence": "Photo 2: Handwritten note says '256 SSD', but no system information or BIOS screen to confirm. SSD is not visible."
+      },
+      {
+        "claim": "Touchscreen",
+        "verdict": "unverified",
+        "evidence": "Photo 2: Screen is on, but no visible touch indicators or gestures shown. The handwritten note does not mention touchscreen. The T480 model can have touchscreen, but it is not confirmed here."
+      },
+      {
+        "claim": "Fast in operating",
+        "verdict": "unverifiable_remote",
+        "evidence": "Performance cannot be assessed from photos alone. No benchmark or usage video provided."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "RAM may not be 8GB",
+        "proof": "Photo of BIOS or system information screen showing installed RAM.",
+        "if_unproven": "priced as having less than 8GB RAM"
+      },
+      {
+        "risk": "SSD may not be 256GB or may be faulty",
+        "proof": "Photo of BIOS or system information screen showing SSD size and health, or a disk utility screenshot.",
+        "if_unproven": "priced as having smaller or non-functional SSD"
+      },
+      {
+        "risk": "Processor may not be 8th Gen Core i5",
+        "proof": "Photo of BIOS or system information screen showing CPU model.",
+        "if_unproven": "priced as having an older or slower CPU"
+      },
+      {
+        "risk": "Screen may not be touchscreen",
+        "proof": "Video or photo showing touch interaction on the screen.",
+        "if_unproven": "priced as non-touchscreen"
+      },
+      {
+        "risk": "Laptop may have physical damage or wear not visible in photos",
+        "proof": "Close-up photos of hinges, ports, screen edges, and underside.",
+        "if_unproven": "priced as having potential hidden damage"
+      },
+      {
+        "risk": "Battery may be degraded or non-functional",
+        "proof": "Photo of battery health in Windows or BIOS, or a video showing battery usage.",
+        "if_unproven": "priced as having a dead or weak battery"
+      }
+    ],
+    "proof_requests": [
+      "Photo of BIOS or system information screen showing CPU, RAM, and SSD details.",
+      "Video or photo showing touch functionality on the screen.",
+      "Close-up photos of all ports, hinges, and underside.",
+      "Photo of battery health or video showing battery usage."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is confirmed as ThinkPad T480, but key specifications (CPU generation, RAM, SSD, touchscreen) are only claimed in a handwritten note and not verifiable from the photos. Hidden risks like battery health and physical damage are also unproven. Proof is needed to confirm the claims and assess risks before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 92601,
+    "input_tokens": 2373,
+    "output_tokens": 1127,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "c77a026aeb40e46027c614b8f858220e",
+    "error": null
+  }
+}

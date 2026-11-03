@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 and Photo 1 show the same outdoor unit of a split air conditioner.",
+      "The brand 'Midea' is clearly visible on a blue label on the outdoor unit in both photos.",
+      "The unit is white with a metal grille covering the fan, and there are visible signs of dirt and wear on the grille and casing.",
+      "The indoor unit is not shown in either photo.",
+      "The seller claims it is a 'Haier Thermocool' but the photos show 'Midea'.",
+      "The unit appears to be placed outdoors on a concrete surface, possibly in a yard or storage area with other units around.",
+      "No model number is legible in either photo.",
+      "There is no visible damage to the casing, but the condition is not clean."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "split air conditioner",
+      "brand": "Midea",
+      "model": null,
+      "read_from": [
+        "photo 0 label",
+        "photo 1 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Haier Thermocool 1hp & 1.5hp split air conditioners",
+        "verdict": "contradicted",
+        "evidence": "Photos 0 and 1 clearly show the brand 'Midea' on the outdoor unit, not 'Haier'."
+      },
+      {
+        "claim": "Grade A Foreign used",
+        "verdict": "unverified",
+        "evidence": "No visual evidence of the unit's condition beyond surface dirt and wear. No proof of origin or usage history."
+      },
+      {
+        "claim": "1hp & 1.5hp",
+        "verdict": "unverifiable_remote",
+        "evidence": "No model number or capacity label is legible in the photos. The capacity cannot be confirmed from the images alone."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The unit may not be functional or may have internal damage (e.g., compressor, refrigerant, electrical components).",
+        "proof": "A video showing the unit running with the indoor unit, or a close-up of the indoor unit and control panel, and a service report.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The unit may have been improperly maintained or has accumulated dust and debris affecting performance.",
+        "proof": "Close-up photos of the indoor unit's filter, coils, and drain pan, and a video of the unit running.",
+        "if_unproven": "priced as low-efficiency or requiring cleaning"
+      },
+      {
+        "risk": "The unit may not be the advertised 1hp or 1.5hp capacity.",
+        "proof": "A clear photo of the model number plate on the outdoor or indoor unit, or a service tag showing the capacity.",
+        "if_unproven": "priced as unknown capacity, which may be lower than advertised"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the model number plate on the outdoor or indoor unit.",
+      "Photo of the indoor unit and control panel.",
+      "Video of the unit running with both indoor and outdoor units visible.",
+      "Proof of service history or inspection report if available."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The brand shown in the photos is Midea, contradicting the seller's claim of Haier. The capacity (1hp/1.5hp) and condition (Grade A) cannot be verified from the current photos. The indoor unit is not shown, and there is no proof of functionality or maintenance. Without these, a reliable price cannot be assigned."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 62876,
+    "input_tokens": 2043,
+    "output_tokens": 802,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "a7980a51c3d1b11bfce80b96f0d6e763",
+    "error": null
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 and Photo 1 show the same pink iPhone from the back, held in a hand against artificial grass.",
+      "The phone has a dual-camera setup in a pill-shaped module with a pink border, consistent with iPhone 15 design.",
+      "The Apple logo is visible in the center of the back panel.",
+      "A white sticker is affixed to the back with text: 'iPhone 15 128GB', 'iCloud: OFF', 'SIM: Unlocked', 'LCD: Good', 'Functional: Good', and a barcode with number '364872886274930'.",
+      "The sticker also has a 'C' in a circle, possibly a grading or category mark.",
+      "No front view, screen, or internal components are shown.",
+      "No signs of major damage on the back, but no close-up of edges or corners.",
+      "The photos are watermarked 'POSTED ON JIJI' and 'BLUTECH SOLUTION'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "iPhone 15",
+      "brand": "Apple",
+      "model": "iPhone 15",
+      "read_from": [
+        "photo 0 sticker",
+        "photo 1 sticker"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Direct uk used iPhone 15 128gb eSIM factory unlocked battery health 90",
+        "verdict": "unverified",
+        "evidence": "The sticker in photo 0 and photo 1 confirms 'iPhone 15 128GB' and 'SIM: Unlocked', but battery health is not visible in any photo. 'Direct uk' and 'eSIM' are not verifiable from photos. 'Factory unlocked' is not confirmed; 'SIM: Unlocked' may imply it, but not guaranteed."
+      },
+      {
+        "claim": "battery health 90",
+        "verdict": "unverifiable_remote",
+        "evidence": "No screen or settings photo is provided to show battery health. This cannot be verified remotely."
+      },
+      {
+        "claim": "iCloud: OFF",
+        "verdict": "supported",
+        "evidence": "Sticker in photo 0 and photo 1 explicitly states 'iCloud: OFF'."
+      },
+      {
+        "claim": "LCD: Good",
+        "verdict": "unverified",
+        "evidence": "Sticker claims 'LCD: Good', but no front view or screen photo is provided to verify this claim."
+      },
+      {
+        "claim": "Functional: Good",
+        "verdict": "unverified",
+        "evidence": "Sticker claims 'Functional: Good', but no video or photo of the phone in use is provided to verify functionality."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery health is not 90% or worse than claimed",
+        "proof": "A photo of the phone's settings screen showing battery health percentage.",
+        "if_unproven": "priced as not working or with degraded battery, which reduces value significantly."
+      },
+      {
+        "risk": "Phone is not factory unlocked or has carrier restrictions",
+        "proof": "A photo of the phone's settings showing 'Carrier' or 'SIM status' as 'No SIM restrictions' or 'Factory Unlocked'.",
+        "if_unproven": "priced as locked to a carrier, which reduces value."
+      },
+      {
+        "risk": "Screen is cracked or has dead pixels despite 'LCD: Good' claim",
+        "proof": "A front view photo of the screen with a white screen test or video showing screen functionality.",
+        "if_unproven": "priced as screen damaged, which reduces value."
+      },
+      {
+        "risk": "Phone is not genuine iPhone 15 or is a clone",
+        "proof": "A photo of the phone's settings showing 'About Phone' with model number and serial number, or a photo of the box or original packaging.",
+        "if_unproven": "priced as a clone or fake, which reduces value to near zero."
+      },
+      {
+        "risk": "Phone has water damage or internal issues not visible from the back",
+        "proof": "A photo of the phone's charging port, speaker grills, or internal components (if opened) to check for corrosion or damage.",
+        "if_unproven": "priced as potentially damaged internally, which reduces value."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the phone's settings screen showing battery health percentage.",
+      "Photo of the phone's settings showing 'Carrier' or 'SIM status' to confirm factory unlock.",
+      "Front view photo of the screen with a white screen test or video showing screen functionality.",
+      "Photo of the phone's 'About Phone' settings showing model number and serial number.",
+      "Photo of the charging port and speaker grills to check for water damage."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The phone is identified as an iPhone 15 128GB from the sticker, but critical claims like battery health, true unlock status, and screen condition cannot be verified from the current photos. Multiple hidden risks affect pricing, and without proof, the item cannot be priced accurately. The next step is to request specific photos to verify these claims."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 87972,
+    "input_tokens": 2285,
+    "output_tokens": 1163,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "dfa97591ac9b9a07f80d61275fd39dd6",
+    "error": null
+  }
+}

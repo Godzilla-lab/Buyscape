@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Side view of a blue truck with a large blue container body. The cab has 'Canter' written on the side. The truck is parked on dirt, with visible rust and wear on the wheels and undercarriage.",
+      "Photo 1: Front view of the truck. The Mitsubishi logo is visible on the hood. The word 'CANTER' is visible on the front grille. The front bumper is dirty and shows signs of wear. The license plate is blurred.",
+      "Photo 2: Same as photo 1, slightly different angle, confirming the front view with Mitsubishi logo and 'CANTER' on grille. The windshield is dirty and reflective."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "Mitsubishi Canter truck",
+      "brand": "Mitsubishi",
+      "model": "Canter",
+      "read_from": [
+        "photo 1 front grille",
+        "photo 2 front grille",
+        "photo 0 side of cab"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Mildly used Mitsubishi Canter short frame with Container body for sale",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows the container body and the cab with 'Canter' branding. Photos 1 and 2 confirm the Mitsubishi brand and model. The condition appears used but not severely damaged."
+      },
+      {
+        "claim": "4M40 diesel Engine",
+        "verdict": "unverifiable_remote",
+        "evidence": "No engine is visible in any photo. The engine model cannot be confirmed from exterior shots."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine condition and whether it is indeed a 4M40 model",
+        "proof": "Photo of the engine bay with visible model plate or VIN tag",
+        "if_unproven": "priced as unknown engine, possibly lower value"
+      },
+      {
+        "risk": "Structural damage or rust in the chassis or container body",
+        "proof": "Undercarriage and chassis photos, especially near the frame and container joints",
+        "if_unproven": "priced as potentially compromised structure, lower value"
+      },
+      {
+        "risk": "Mechanical issues such as transmission, brakes, or suspension",
+        "proof": "Video of the truck starting, driving, and stopping, or photos of brake lines, suspension components",
+        "if_unproven": "priced as possibly non-functional or unreliable"
+      },
+      {
+        "risk": "Body damage or leaks in the container body",
+        "proof": "Interior view of the container body and close-up of seams and corners",
+        "if_unproven": "priced as potentially damaged or leaky container"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the engine bay showing the engine model plate",
+      "Undercarriage and chassis photos",
+      "Interior view of the container body",
+      "Video of the truck starting and driving"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The truck is identifiable as a Mitsubishi Canter with a container body, but critical details like engine model, mechanical condition, and structural integrity cannot be verified from the current photos. These factors significantly affect value and safety, so proof is required before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 61329,
+    "input_tokens": 2773,
+    "output_tokens": 718,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "767dfa662c4cc72e9c0c119210da39c2",
+    "error": null
+  }
+}

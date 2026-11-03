@@ -1,0 +1,107 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: White iPhone with triple camera setup and MagSafe ring, in a clear case. A red sticker is visible near the camera module.",
+      "Photo 1: Front view of the iPhone showing lock screen with time 16:37 and date Mon Oct 12. The screen has visible smudges and reflections. The notch is present, indicating a modern iPhone model.",
+      "Photo 2: Screen shows 'Parts & Service' menu. Text indicates 'A new battery was detected' under Configuration Available. Service History lists Camera and Display as 'Unknown' with warning icons. Time shown is 16:38."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "iPhone 15 Pro Max",
+      "brand": "Apple",
+      "model": "iPhone 15 Pro Max",
+      "read_from": [
+        "photo 0 camera module design (three lenses in diagonal arrangement with LiDAR sensor, consistent with iPhone 15 Pro Max)",
+        "photo 2 screen showing 'Parts & Service' menu with 'A new battery was detected' \u2014 this is Apple's system, and the interface matches iOS 17+ on iPhone 15 Pro Max"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Wifi only",
+        "verdict": "unverifiable_remote",
+        "evidence": "No SIM tray or cellular settings screen shown. Cannot confirm if it's a Wi-Fi-only model or if cellular functionality is disabled."
+      },
+      {
+        "claim": "Very neat 15 pro max",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows clean back with no visible cracks or dents. Case appears to be in good condition. Screen in photo 1 has smudges but no visible damage."
+      },
+      {
+        "claim": "Changed parts",
+        "verdict": "supported",
+        "evidence": "Photo 2 shows 'A new battery was detected' under Parts & Service, confirming battery replacement. Service History shows Camera and Display as 'Unknown' with warning icons, suggesting non-Apple replacements or service history not synced."
+      },
+      {
+        "claim": "86% BH and strong",
+        "verdict": "unverified",
+        "evidence": "Battery health (BH) is not shown in any photo. The 'strong' claim is subjective and not verifiable from images."
+      },
+      {
+        "claim": "Face ID active",
+        "verdict": "unverified",
+        "evidence": "No photo shows Face ID being used or tested. The front camera is visible, but functionality cannot be confirmed remotely."
+      },
+      {
+        "claim": "Cannot be wipe",
+        "verdict": "unverifiable_remote",
+        "evidence": "No proof of activation lock or iCloud status. 'Cannot be wipe' likely refers to being locked to an Apple ID, but this cannot be confirmed without checking iCloud status or attempting to erase."
+      },
+      {
+        "claim": "Ios...",
+        "verdict": "supported",
+        "evidence": "Photo 2 shows iOS interface with 'Parts & Service' menu, confirming iOS is active."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery health is not 86% as claimed",
+        "proof": "Photo of Settings > Battery > Battery Health showing actual percentage.",
+        "if_unproven": "Priced as unknown battery health, which may be worse than 86%, reducing value."
+      },
+      {
+        "risk": "Face ID is not working",
+        "proof": "Video or photo showing Face ID being used to unlock the phone.",
+        "if_unproven": "Priced as Face ID not working, which significantly reduces value for a Pro Max model."
+      },
+      {
+        "risk": "Phone is iCloud locked (cannot be wiped)",
+        "proof": "Screenshot of Settings > [Your Name] > iCloud > Find My iPhone showing 'Find My iPhone' status, or attempt to erase showing Apple ID prompt.",
+        "if_unproven": "Priced as potentially iCloud locked, which may render the phone unusable without the original owner's credentials."
+      },
+      {
+        "risk": "Non-Apple parts (camera/display) may affect performance or durability",
+        "proof": "Photo of camera performance (e.g., taking a photo) and display quality (e.g., color accuracy, dead pixels).",
+        "if_unproven": "Priced as having potentially inferior non-Apple parts, reducing reliability and resale value."
+      },
+      {
+        "risk": "Wi-Fi only model \u2014 no cellular functionality",
+        "proof": "Photo of Settings > Cellular showing 'No SIM' or 'Cellular Data Off' with no carrier option, or a video showing no cellular signal.",
+        "if_unproven": "Priced as potentially Wi-Fi only, which reduces value for buyers needing cellular service."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of Settings > Battery > Battery Health showing actual percentage.",
+      "Video or photo showing Face ID unlocking the phone.",
+      "Screenshot of Settings > [Your Name] > iCloud > Find My iPhone status.",
+      "Photo of camera taking a picture and display showing a clear image.",
+      "Photo of Settings > Cellular to confirm if it's Wi-Fi only or has cellular capability."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identifiable as iPhone 15 Pro Max, but critical claims (battery health, Face ID, iCloud lock, cellular status) cannot be verified from current photos. Hidden risks significantly affect value and usability. Proof is needed to price accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 98635,
+    "input_tokens": 2797,
+    "output_tokens": 1220,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "301d03f9ed97c878455ac2a215b571c6",
+    "error": null
+  }
+}

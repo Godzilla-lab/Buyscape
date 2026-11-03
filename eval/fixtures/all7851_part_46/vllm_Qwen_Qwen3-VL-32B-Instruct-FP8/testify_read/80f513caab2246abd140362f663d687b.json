@@ -1,0 +1,80 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Silver laptop with Apple logo on back, held in hand. Orange stickers on top corners. Tiled floor background.",
+      "Photo 1: Same laptop from a different angle, placed on a glass surface with 'ACCESS' sign in background. Apple logo visible.",
+      "Photo 2: Bottom of laptop showing 'MacBook Pro' text, four rubber feet, and some scuff marks. Hand holding it. Text 'MacBook Pro' is faintly visible vertically on the bottom casing."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Apple",
+      "model": "MacBook Pro",
+      "read_from": [
+        "photo 2 bottom casing"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "MacBook M1 2012",
+        "verdict": "contradicted",
+        "evidence": "Photo 2 shows 'MacBook Pro' but no M1 chip or 2012 model indicators. M1 MacBooks were released in 2020, not 2012. The design in photos matches pre-M1 models."
+      },
+      {
+        "claim": "512 SSD",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal photos or system specs shown. Cannot verify storage capacity from exterior photos."
+      },
+      {
+        "claim": "16 gb ram",
+        "verdict": "unverifiable_remote",
+        "evidence": "No system information or internal photos. RAM cannot be confirmed remotely."
+      },
+      {
+        "claim": "16 inches",
+        "verdict": "unverified",
+        "evidence": "Screen size not visible. The device appears to be a 13-15 inch MacBook Pro based on proportions, not 16 inches. 16-inch MacBook Pro was introduced in 2019, which conflicts with '2012' claim."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Incorrect model year and chip (claimed 2012 M1, but M1 was 2020+)",
+        "proof": "Photo of the model identifier sticker or system report showing exact model and chip.",
+        "if_unproven": "Priced as a pre-M1 MacBook Pro, not M1, which is a major downgrade in value."
+      },
+      {
+        "risk": "Storage and RAM not matching claimed 512GB SSD and 16GB RAM",
+        "proof": "Screenshot of system information or internal photos showing actual specs.",
+        "if_unproven": "Priced as unknown specs, which reduces value significantly."
+      },
+      {
+        "risk": "Physical damage or wear not visible in photos (scratches, dents, screen issues)",
+        "proof": "Full 360-degree video or close-up photos of screen, keyboard, and ports.",
+        "if_unproven": "Priced as having potential cosmetic or functional issues, lowering value."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of system report showing exact model, chip, RAM, and storage.",
+      "Close-up photo of the model identifier sticker on the bottom.",
+      "Video showing the laptop turning on and running, including screen and keyboard functionality.",
+      "Photos of the screen, keyboard, and ports from all angles."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller's claims about M1 chip and 2012 model are contradicted by the photos, which show a pre-M1 MacBook Pro. Storage and RAM cannot be verified remotely. Without proof of actual specs and condition, the item cannot be priced accurately. The model and specs are critical for pricing, and current photos do not provide them."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 67202,
+    "input_tokens": 2503,
+    "output_tokens": 827,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "80f513caab2246abd140362f663d687b",
+    "error": null
+  }
+}

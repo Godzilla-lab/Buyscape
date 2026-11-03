@@ -1,0 +1,84 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the back of a light purple iPhone with a triple-camera system in a square module, Apple logo centered, and a glossy finish. The phone is held in a hand, with iPhone boxes visible in the background.",
+      "Photo 1 shows the front of the same phone with the screen on, displaying iOS home screen with widgets and app icons. Battery shows 10%, time is 12:23. The notch is visible, and the screen appears to be intact with no visible cracks.",
+      "The phone appears to be an iPhone 13 Pro Max based on the camera module design and screen notch shape.",
+      "The seller claims it is 'factory unlocked' and 'UK used', but no proof is visible in the photos.",
+      "The phone is being held in a hand, and the background includes multiple iPhone boxes, suggesting a retail or reseller environment."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "iPhone 13 Pro Max",
+      "brand": "Apple",
+      "model": "iPhone 13 Pro Max",
+      "read_from": [
+        "photo 0 camera module and back design",
+        "photo 1 screen notch and iOS interface"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Very neat uk used iPhone 13 promax",
+        "verdict": "unverified",
+        "evidence": "The phone appears to be an iPhone 13 Pro Max based on design, but 'UK used' cannot be verified from photos. 'Very neat' is subjective and not proven by visible condition."
+      },
+      {
+        "claim": "factory unlocked",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible proof such as settings screen showing carrier status or IMEI check. Cannot be confirmed remotely."
+      },
+      {
+        "claim": "128gb",
+        "verdict": "unverifiable_remote",
+        "evidence": "Storage capacity is not visible in the photos. Cannot be confirmed without checking settings or box."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Phone may be locked to a carrier or have activation lock",
+        "proof": "Screenshot of Settings > General > About > Carrier or Activation Lock status",
+        "if_unproven": "priced as potentially locked, which reduces value significantly"
+      },
+      {
+        "risk": "Battery health may be degraded",
+        "proof": "Screenshot of Settings > Battery > Battery Health showing capacity percentage",
+        "if_unproven": "priced as if battery is degraded (e.g., below 80%)"
+      },
+      {
+        "risk": "Phone may have been repaired or have hidden damage",
+        "proof": "Full 360-degree video or photos showing all edges, ports, and screen under different lighting",
+        "if_unproven": "priced as if there may be hidden damage or repairs"
+      },
+      {
+        "risk": "Storage capacity may not be 128GB",
+        "proof": "Screenshot of Settings > General > iPhone Storage showing total capacity",
+        "if_unproven": "priced as if storage is less than claimed (e.g., 64GB)"
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of Settings > General > About showing model, carrier status, and IMEI",
+      "Screenshot of Settings > Battery > Battery Health",
+      "Screenshot of Settings > General > iPhone Storage showing total capacity",
+      "Video or photos showing all sides, ports, and screen under different lighting",
+      "Proof of origin (e.g., UK receipt or box if available)"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The phone appears to be an iPhone 13 Pro Max, but critical claims like factory unlocked, storage capacity, and condition cannot be verified from current photos. Hidden risks such as carrier lock, battery health, and hidden damage affect pricing significantly. Proof is needed before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 67704,
+    "input_tokens": 2734,
+    "output_tokens": 855,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "22624fcbf5688a53673269137e9b8c4b",
+    "error": null
+  }
+}

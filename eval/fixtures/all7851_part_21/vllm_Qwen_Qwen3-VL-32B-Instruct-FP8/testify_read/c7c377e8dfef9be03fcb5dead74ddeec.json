@@ -1,0 +1,90 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: HP laptop open, screen on with blue Windows background, screen covered in plastic wrap, keyboard visible, HP logo on bezel.",
+      "Photo 1: Back of laptop covered in plastic wrap, HP logo visible on lid.",
+      "Photo 2: Side view of laptop, screen partially closed, plastic wrap on screen, ports visible on left side (USB, HDMI, etc.).",
+      "All photos show the laptop wrapped in plastic, suggesting it is new or recently unboxed.",
+      "No visible damage to casing or keyboard in photos.",
+      "No internal components, labels, or stickers visible in any photo.",
+      "Seller claims model is '15-bwoxx', AMD A9 Ryzen 5 7th gen, 4GB RAM, 500GB HDD."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": null,
+      "read_from": [
+        "photo 0 bezel",
+        "photo 1 lid"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP laptop 15-bwoxx",
+        "verdict": "unverified",
+        "evidence": "Model number '15-bwoxx' is not visible in any photo. The HP logo is visible, but no model label is shown."
+      },
+      {
+        "claim": "AMD A9 Ryzen 5 -7generation",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal components or system information visible. The term 'AMD A9 Ryzen 5' is contradictory \u2014 AMD A9 is a legacy APU, while Ryzen 5 is a separate line; this is likely a misstatement or confusion. No proof in photos."
+      },
+      {
+        "claim": "Memory 4gb ram and storage capacity 500hdd",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal components or system specs visible. Cannot verify RAM or storage from photos."
+      },
+      {
+        "claim": "Ram can...",
+        "verdict": "unverified",
+        "evidence": "Incomplete claim. No further context or proof in photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Incorrect or misleading CPU specification (AMD A9 vs Ryzen 5)",
+        "proof": "Photo of system information screen (e.g., BIOS or Windows About) or internal CPU label.",
+        "if_unproven": "Priced as a low-end laptop with legacy APU, not a Ryzen 5, which would be a significant downgrade."
+      },
+      {
+        "risk": "RAM and storage not as advertised (4GB RAM, 500GB HDD)",
+        "proof": "Photo of system information screen showing installed RAM and storage, or internal drive and RAM slots.",
+        "if_unproven": "Priced as if RAM and storage are not as claimed \u2014 possibly 2GB RAM or smaller HDD, which would reduce value."
+      },
+      {
+        "risk": "Laptop is not as described (e.g., refurbished, not new, or model mismatch)",
+        "proof": "Photo of the model label on the bottom of the laptop or inside the battery compartment.",
+        "if_unproven": "Priced as a generic used HP laptop, not the specific model or condition claimed."
+      },
+      {
+        "risk": "Screen or plastic wrap damage not visible in photos",
+        "proof": "Close-up photo of screen edges and bezel without plastic wrap, and underside of laptop for wear.",
+        "if_unproven": "Priced assuming minor cosmetic wear; if damage is present, value drops."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the model label on the bottom of the laptop.",
+      "Photo of the system information screen (Windows About or BIOS) showing CPU, RAM, and storage.",
+      "Photo of the laptop without plastic wrap, especially screen and keyboard.",
+      "Photo of the internal components (if possible) or drive/RAM slots."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model number and internal specifications are not visible in any photo. The seller's claims about CPU, RAM, and storage cannot be verified remotely. Without proof of the actual model and specs, the item cannot be accurately priced. The plastic wrap suggests it may be new or refurbished, but this also needs confirmation."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 82063,
+    "input_tokens": 2801,
+    "output_tokens": 960,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "c7c377e8dfef9be03fcb5dead74ddeec",
+    "error": null
+  }
+}

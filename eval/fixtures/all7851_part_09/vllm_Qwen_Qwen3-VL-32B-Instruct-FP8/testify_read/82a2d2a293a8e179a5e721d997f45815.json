@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a blender with a transparent jug and a black base.",
+      "The jug has a red sticker with 'tritan' and 'Unbreakable jug' written on it, along with '1500 W TURBO POWER'.",
+      "The base has a control panel with a power switch, a dial, and a pulse switch.",
+      "The brand name 'Binatone' is visible on the base, below the control panel.",
+      "The blender is placed outdoors on a wooden surface, with other appliances visible in the background.",
+      "The jug appears to be made of clear plastic with measurement markings.",
+      "The base is dark green or black with a metallic trim around the control panel."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "blender",
+      "brand": "Binatone",
+      "model": null,
+      "read_from": [
+        "photo 0 base"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "2liter Binatone blender",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows the brand 'Binatone' on the base, but no capacity marking is visible on the jug. The sticker says 'Unbreakable jug' but does not state 2 liters."
+      },
+      {
+        "claim": "1500 W TURBO POWER",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows a red sticker on the jug with '1500 W TURBO POWER' clearly visible."
+      },
+      {
+        "claim": "Unbreakable jug",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows a red sticker on the jug with 'Unbreakable jug' written on it."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Blender may not be functional (motor or blade not working)",
+        "proof": "A video clip showing the blender in operation, including turning on, blending, and stopping.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Jug capacity is not 2 liters as claimed",
+        "proof": "A photo showing the jug filled to the top with a measuring tape or known volume container next to it.",
+        "if_unproven": "priced as unknown capacity, likely less than 2 liters"
+      },
+      {
+        "risk": "Base or controls are damaged or non-functional",
+        "proof": "Close-up photo of the control panel and base, showing no cracks, loose parts, or signs of damage.",
+        "if_unproven": "priced as potentially damaged"
+      }
+    ],
+    "proof_requests": [
+      "Video of the blender in operation to confirm it works.",
+      "Photo of the jug filled to the top with a measuring tape or known volume container to verify 2-liter capacity.",
+      "Close-up photo of the base and control panel to check for damage or wear."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The brand is confirmed as Binatone, and the 1500W and 'unbreakable jug' claims are supported. However, the 2-liter capacity is unverified, and functionality is unknown. Without proof of operation and capacity, the item cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 58802,
+    "input_tokens": 1922,
+    "output_tokens": 728,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "82a2d2a293a8e179a5e721d997f45815",
+    "error": null
+  }
+}

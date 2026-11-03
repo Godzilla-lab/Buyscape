@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a red and grey bicycle with front suspension forks, black handlebars, and a black saddle.",
+      "The frame has a visible brand name 'SCHWINN' in white letters on the down tube.",
+      "The bike has a rear derailleur and multiple gears, indicating a multi-speed system.",
+      "The front wheel has a suspension fork, confirming front suspension.",
+      "The tires are knobby, suggesting off-road or hybrid use.",
+      "The bike is photographed on a tiled floor, likely indoors or in a covered area."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "bicycle",
+      "brand": "Schwinn",
+      "model": null,
+      "read_from": [
+        "photo 0 frame"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "This is schwinn quality sport bicycle",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows 'SCHWINN' written on the frame."
+      },
+      {
+        "claim": "with front suspension",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows visible front suspension forks."
+      },
+      {
+        "claim": "double gear system",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows a rear derailleur and multiple gears, but 'double gear system' is ambiguous \u2014 it may mean 2-speed or 2-chainring. The exact gear count is not visible."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The bicycle may not be in working condition (e.g., brakes, chain, gears not functioning).",
+        "proof": "A video or photo showing the bike being pedaled, shifting gears, and brakes engaged.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The frame or components may have hidden damage or rust not visible in the photo.",
+        "proof": "Close-up photos of the frame joints, chain, and wheels from multiple angles.",
+        "if_unproven": "priced as possibly damaged"
+      },
+      {
+        "risk": "The 'double gear system' may be misrepresented \u2014 it could be a 2x8 or 2x9 system, or just 2 chainrings, which affects value.",
+        "proof": "Photo of the front chainrings and rear cassette showing the number of gears.",
+        "if_unproven": "priced as low-end multi-speed"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the front chainrings and rear cassette to confirm gear count.",
+      "Video or photo showing the bike being ridden or gears shifting.",
+      "Close-up photos of the frame, brakes, and wheels to check for damage or rust."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The brand and front suspension are confirmed, but the gear system claim is ambiguous and the working condition and hidden damage are unverified. These affect pricing and must be proven before assigning a value."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 52882,
+    "input_tokens": 1354,
+    "output_tokens": 664,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "7fcb02d387d2c1e0d846ca179612bbfa",
+    "error": null
+  }
+}

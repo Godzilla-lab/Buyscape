@@ -1,0 +1,85 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Open MacBook Pro with silver body, black keyboard, and trackpad. Screen shows macOS desktop with time 06:46 and date Wed 29 Oct. Apple logo visible on lower bezel. Watermark 'DY QUALITY GADGETS' across keyboard.",
+      "Photo 1: macOS 'About This Mac' screen showing 'MacBook Pro', 'Apple M1' chip, '16 GB' memory, '13.3-inch (2560 x 1600)' display, and '460.3 GB available of 494.38 GB' storage. Serial number partially visible: C92C8MCQ9EQ. Watermark 'DY QUALITY GADGETS' across screen.",
+      "Photo 2: Closed MacBook Pro from side and back. Silver aluminum body, Apple logo on back. Side shows ports: two USB-C/Thunderbolt, one headphone jack. Pink sticky note on back with handwritten text. Watermark 'DY QUALITY GADGETS' across center."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "MacBook Pro",
+      "brand": "Apple",
+      "model": "MacBook Pro 13-inch M1",
+      "read_from": [
+        "photo 1 screen: 'MacBook Pro', 'Apple M1' chip, '13.3-inch' display"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Apple MacBook Pro 13 M1 8-Core 16GB 512GB 2020",
+        "verdict": "unverified",
+        "evidence": "Photo 1 shows 'Apple M1' chip, '16 GB' memory, and '460.3 GB available of 494.38 GB' storage \u2014 close to 512GB. However, the year 2020 is not visible in any photo. The '8-Core' claim (likely referring to CPU+GPU) is not directly verifiable from the photos, though M1 chip typically has 8-core CPU+GPU. The '13 M1' is supported by photo 1's '13.3-inch' display and 'Apple M1' chip."
+      },
+      {
+        "claim": "Processor: 3.2 GHz Apple M1",
+        "verdict": "unverified",
+        "evidence": "Photo 1 shows 'Apple M1' chip, but does not display the base clock speed. The 3.2 GHz is a known spec for M1, but not visible in photos."
+      },
+      {
+        "claim": "16GB RAM",
+        "verdict": "supported",
+        "evidence": "Photo 1 clearly shows 'Memory: 16 GB'."
+      },
+      {
+        "claim": "512GB storage",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows '460.3 GB available of 494.38 GB' \u2014 consistent with 512GB total storage after system files. The 512GB claim is supported by the visible storage capacity."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery health or degradation",
+        "proof": "Photo showing 'About This Mac' with battery health percentage or cycle count.",
+        "if_unproven": "priced as average battery health (e.g., 80-90%)"
+      },
+      {
+        "risk": "Physical damage not visible in photos (e.g., screen cracks, hinge issues, keyboard damage)",
+        "proof": "Close-up photos of screen edges, hinges, and keyboard keys from multiple angles.",
+        "if_unproven": "priced as having minor wear, not major damage"
+      },
+      {
+        "risk": "Water damage or internal issues",
+        "proof": "Photo of the inside of the laptop (if opened) or a diagnostic report showing no water damage indicators.",
+        "if_unproven": "priced as possibly having hidden internal damage"
+      },
+      {
+        "risk": "Not original or refurbished with non-genuine parts",
+        "proof": "Photo of the original box or receipt, or a serial number check via Apple's website.",
+        "if_unproven": "priced as possibly refurbished or non-genuine"
+      }
+    ],
+    "proof_requests": [
+      "Photo of battery health percentage and cycle count from 'About This Mac' or System Report.",
+      "Close-up photos of the screen edges, hinges, and keyboard for signs of damage.",
+      "Photo of the original box or receipt, or a serial number check via Apple's website.",
+      "Photo of the laptop from the front and back with the lid closed, showing all ports and condition."
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as an Apple MacBook Pro 13-inch M1 with 16GB RAM and 512GB storage, supported by photo 1. The 2020 model year and 3.2 GHz processor are unverified but plausible. Hidden risks like battery health and physical damage are present but can be priced conservatively. The item can be priced at its worst-case condition based on visible evidence."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 94587,
+    "input_tokens": 2387,
+    "output_tokens": 1143,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "c8c97addd079ea7f72759e27d26b1b03",
+    "error": null
+  }
+}

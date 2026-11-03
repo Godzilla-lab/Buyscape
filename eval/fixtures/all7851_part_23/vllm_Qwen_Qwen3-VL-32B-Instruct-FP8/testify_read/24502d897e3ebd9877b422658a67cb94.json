@@ -1,0 +1,67 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a silver laptop held at an angle, screen open, with visible damage to the screen's left edge and hinge area. The screen is dark and reflective, showing no display.",
+      "Photo 1 shows the same laptop from a top-down view. The keyboard is visible with 'ELITEBOOK' printed on the lower left. The HP logo is visible on the screen bezel. The screen is off and reflective. The hinge area appears intact from this angle, but the left side of the screen shows a dark, possibly cracked or detached section.",
+      "The laptop has a silver chassis, black keys, and a large trackpad. The Intel Core logo is visible on the lower right of the keyboard deck.",
+      "No model number is visible on the screen, keyboard, or chassis in either photo."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": null,
+      "read_from": [
+        "photo 1 screen bezel",
+        "photo 1 keyboard deck"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Broken screen and hinge only",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows damage to the screen's left edge and hinge area, but photo 1 shows the hinge appears intact from the top view. The screen is off in both photos, so it is unclear if the screen is broken or just powered off. The extent of hinge damage is not fully visible."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Screen is not just cracked but completely non-functional or detached",
+        "proof": "A close-up photo of the screen from the side showing the damage, and a video of the screen turning on or the hinge moving.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Hinge is broken and cannot support the screen in an open position",
+        "proof": "A video showing the screen being opened and closed, or a photo of the hinge from the side showing cracks or looseness.",
+        "if_unproven": "priced as non-functional hinge"
+      },
+      {
+        "risk": "Internal components are damaged or the laptop does not power on",
+        "proof": "A video showing the laptop powering on, or a photo of the power button and indicator lights.",
+        "if_unproven": "priced as not working"
+      }
+    ],
+    "proof_requests": [
+      "A close-up photo of the screen damage from the side.",
+      "A video showing the screen turning on and the hinge moving.",
+      "A photo of the laptop's model number, if visible on the bottom or back.",
+      "A video showing the laptop powering on and running."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as an HP EliteBook laptop, but the model is not visible. The seller claims only the screen and hinge are broken, but the photos do not confirm this. The screen is off in both photos, and the hinge damage is not fully visible. Without proof of functionality and extent of damage, a worst-case price cannot be determined."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 55693,
+    "input_tokens": 2271,
+    "output_tokens": 691,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "24502d897e3ebd9877b422658a67cb94",
+    "error": null
+  }
+}

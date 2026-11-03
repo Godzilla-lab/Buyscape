@@ -1,0 +1,90 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the outdoor unit of an air conditioner wrapped in plastic, with the LG logo clearly visible.",
+      "The unit is placed on a concrete surface, next to a car, with a shop and building in the background.",
+      "Photo 1 shows the same outdoor unit from a slightly different angle, with a box labeled 'LG' and 'Air Conditioner' on top, along with coiled cables and a white plastic-wrapped item.",
+      "The indoor unit is not visible in either photo.",
+      "No remote control, indoor unit, or installation accessories are shown.",
+      "The text 'THE HOUSEHOLD STYLING' is watermarked on both photos, likely from a seller or reseller."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "1hp air conditioner",
+      "brand": "LG",
+      "model": null,
+      "read_from": [
+        "photo 0 logo",
+        "photo 1 box label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Tokunbo LG 1hp air conditioner",
+        "verdict": "supported",
+        "evidence": "LG logo visible on outdoor unit in photo 0 and box in photo 1; '1hp' is a common size for such units, though not explicitly labeled."
+      },
+      {
+        "claim": "Working perfectly",
+        "verdict": "unverified",
+        "evidence": "No photo or video shows the unit running or being tested. No indoor unit or remote is visible to confirm functionality."
+      },
+      {
+        "claim": "With warranty",
+        "verdict": "unverifiable_remote",
+        "evidence": "No warranty document, sticker, or proof is visible in the photos. Warranty status cannot be confirmed remotely."
+      },
+      {
+        "claim": "With accessories 235k",
+        "verdict": "unverified",
+        "evidence": "Accessories are not shown in photos. The price is stated by seller, not visible in images."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Unit may not be functional or may have hidden damage",
+        "proof": "Video or photo of the unit running, with indoor unit and remote control in use.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Missing indoor unit or key accessories (remote, installation kit, etc.)",
+        "proof": "Photo showing the indoor unit, remote control, and all included accessories laid out.",
+        "if_unproven": "priced as incomplete"
+      },
+      {
+        "risk": "Warranty claim is false or expired",
+        "proof": "Photo of warranty card or proof of purchase with valid date and terms.",
+        "if_unproven": "priced as no warranty"
+      },
+      {
+        "risk": "Unit is not 1hp or is misrepresented",
+        "proof": "Photo of the model label on the outdoor unit showing exact model number and capacity.",
+        "if_unproven": "priced as unknown capacity"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the indoor unit and remote control.",
+      "Video of the unit running with both indoor and outdoor units.",
+      "Photo of the model label on the outdoor unit showing exact model and capacity.",
+      "Photo of warranty card or proof of purchase.",
+      "Photo of all accessories included (installation kit, cables, etc.)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as an LG 1hp air conditioner, but critical claims about functionality, warranty, and completeness cannot be verified from the photos. The indoor unit and accessories are not shown, and there is no proof of working condition. Without these, the item cannot be priced accurately and must be assessed further."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 65482,
+    "input_tokens": 2233,
+    "output_tokens": 825,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "9d15dab5bd2532dbdf640c05250d2d9e",
+    "error": null
+  }
+}

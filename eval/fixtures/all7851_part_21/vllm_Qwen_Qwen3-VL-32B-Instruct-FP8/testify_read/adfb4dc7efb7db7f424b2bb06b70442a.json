@@ -1,0 +1,69 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a close-up of a 4-burner gas stove top with visible grime and discoloration on the burners and around the edges.",
+      "Photo 1 shows a full view of a black and stainless steel gas cooker with an oven below; the brand 'NEXUS' is visible on the oven door.",
+      "Photo 2 is similar to photo 1 but with a red indicator light illuminated on the control panel.",
+      "The oven door has a glass window with visible smudges and dirt inside.",
+      "The surrounding kitchen area appears cluttered and not well-maintained.",
+      "The stove top has two front burners and two rear burners, with the rear right burner appearing to be a flat electric or ceramic type, which is unusual for a gas stove \u2014 possibly a hybrid or mislabeled unit."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "gas cooker with oven",
+      "brand": "NEXUS",
+      "model": null,
+      "read_from": [
+        "photo 1 oven door",
+        "photo 2 oven door"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "D oven is still very clean",
+        "verdict": "contradicted",
+        "evidence": "Photo 1 and photo 2 show visible dirt and smudges on the oven door glass and inside the oven cavity. The stove top also shows grime and discoloration in photo 0."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The oven may not be functional or may have internal damage not visible from the outside.",
+        "proof": "A video or photo showing the oven door opening, interior lighting, and the oven in operation with heat or light.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The rear right burner may be electric or non-functional, which contradicts the typical gas stove design.",
+        "proof": "A close-up photo or video of the rear right burner with a flame test or label identification.",
+        "if_unproven": "priced as a 3-burner gas stove with one non-functional burner"
+      },
+      {
+        "risk": "The unit may have gas leaks or faulty connections, which cannot be seen in photos.",
+        "proof": "A video showing the gas ignition on all burners and a professional gas safety check report.",
+        "if_unproven": "priced with a safety discount"
+      }
+    ],
+    "proof_requests": [
+      "Video of the oven door opening and closing, and the oven heating up.",
+      "Close-up of the rear right burner with a flame test.",
+      "Video of all burners igniting and burning properly.",
+      "Photo of the control panel labels or model number if available."
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a NEXUS gas cooker with oven. The seller's claim of cleanliness is contradicted by visible dirt. Hidden risks include oven functionality and burner type, which are priced conservatively as not working or non-functional until proven. The item can be priced at its worst case based on visible condition and known risks."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 52502,
+    "input_tokens": 2772,
+    "output_tokens": 693,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "adfb4dc7efb7db7f424b2bb06b70442a",
+    "error": null
+  }
+}

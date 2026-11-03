@@ -1,0 +1,95 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Open laptop showing Dell logo on blue screen, keyboard visible, Intel Core sticker on palm rest.",
+      "Photo 1: Closed laptop lid with Dell logo, silver or light gray finish.",
+      "Photo 2: Open laptop showing Windows desktop, same keyboard and Intel Core sticker as photo 0.",
+      "All photos show a watermark 'CIMLET INNOVATION' and 'POSTED ON JIJI'.",
+      "No visible model number or serial plate in any photo.",
+      "No visible signs of damage or wear in the photos.",
+      "No ports, hinges, or underside shown."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "laptop",
+      "brand": "Dell",
+      "model": null,
+      "read_from": [
+        "photo 0 screen",
+        "photo 1 lid"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Dell Precision 5560 workstation Laptop",
+        "verdict": "unverified",
+        "evidence": "No model number visible in any photo; brand is confirmed as Dell, but model cannot be verified from images."
+      },
+      {
+        "claim": "Core i7 11th generation",
+        "verdict": "unverified",
+        "evidence": "Intel Core sticker visible in photo 0 and 2, but no generation or specific model number readable."
+      },
+      {
+        "claim": "512ssd 16gb ram",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal components visible; cannot confirm SSD size or RAM amount from photos."
+      },
+      {
+        "claim": "4gb Dedicated...",
+        "verdict": "unverifiable_remote",
+        "evidence": "No GPU or dedicated graphics info visible; cannot confirm from photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The laptop may not be a Dell Precision 5560, but a consumer model like Latitude or XPS.",
+        "proof": "Photo of the model label or serial plate on the bottom or inside lid.",
+        "if_unproven": "Priced as a generic Dell laptop, not a workstation, which reduces value."
+      },
+      {
+        "risk": "The CPU may not be an 11th gen Core i7; could be older or lower tier.",
+        "proof": "System information screenshot showing CPU model, or BIOS screen with CPU details.",
+        "if_unproven": "Priced as a generic Intel Core laptop, not a high-end 11th gen i7, which reduces value."
+      },
+      {
+        "risk": "RAM and SSD specs may be inaccurate; could be less than advertised.",
+        "proof": "System information screenshot showing installed RAM and storage details.",
+        "if_unproven": "Priced as if 8GB RAM and 256GB SSD, which is lower than claimed, reducing value."
+      },
+      {
+        "risk": "Dedicated GPU may not be 4GB or may be integrated graphics.",
+        "proof": "Device Manager or GPU information screenshot showing dedicated graphics card and VRAM.",
+        "if_unproven": "Priced as if no dedicated GPU, which reduces value for workstation use."
+      },
+      {
+        "risk": "Laptop may have physical damage, hinge issues, or screen defects not visible in photos.",
+        "proof": "Video showing full 360-degree view, hinge movement, and screen from multiple angles.",
+        "if_unproven": "Priced with a discount for potential hidden damage."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the model label or serial plate on the bottom of the laptop.",
+      "Screenshot of system information showing CPU, RAM, and storage details.",
+      "Screenshot of GPU information from Device Manager or GPU utility.",
+      "Video showing full 360-degree view, hinge movement, and screen from multiple angles."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and key specs cannot be verified from the photos. Without proof of the Precision 5560 model, CPU generation, RAM, SSD, and GPU, the item cannot be accurately priced. The current photos show a generic Dell laptop, and the claims are unverified or unverifiable remotely."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 77284,
+    "input_tokens": 2798,
+    "output_tokens": 942,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "7af5551ef7c25730fcd1b6d411c5ca93",
+    "error": null
+  }
+}

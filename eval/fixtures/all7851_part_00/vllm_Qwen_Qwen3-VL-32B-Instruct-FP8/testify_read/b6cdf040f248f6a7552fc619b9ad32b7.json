@@ -1,0 +1,69 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a white chest freezer in a corner, with a green plastic container in front of it. The freezer has visible blue tape on the top edge and appears to be in a kitchen or storage area.",
+      "Photo 1 shows the front of a silver chest freezer with a large sticker that reads 'Fast & Fresh Frozen' and the Midea logo. The freezer has a white handle and a power cord visible at the bottom. The top surface is covered with plastic wrap.",
+      "Photo 2 shows a close-up of the label on the freezer. The brand 'Midea' is visible, along with the model 'HS-129C'. The label also lists specifications: Climate Class T, Rated Voltage AC220-240V, Frequency 50Hz, Rated Current 0.72A, Foaming Agent Cyclopentane, Total Storage Volume 86000L (likely a typo, should be 86L or 860L), and 'MADE IN CHINA'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "chest freezer",
+      "brand": "Midea",
+      "model": "HS-129C",
+      "read_from": [
+        "photo 2 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Barely used almost new",
+        "verdict": "unverified",
+        "evidence": "Photo 1 shows plastic wrap on the top, suggesting newness, but photo 0 shows tape and possible wear. No interior or usage signs are visible. The condition cannot be confirmed from the photos alone."
+      },
+      {
+        "claim": "Midea chest freezer",
+        "verdict": "supported",
+        "evidence": "Photo 2 clearly shows the Midea brand and 'CHEST FREEZER' on the label."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The freezer may not be working or may have internal damage not visible in the photos.",
+        "proof": "A video showing the freezer being turned on, the compressor running, and the interior being opened to show clean, undamaged shelves and no frost buildup.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The storage volume listed as 86000L is likely a typo (probably 86L or 860L), which affects the size and value.",
+        "proof": "A clear photo of the label showing the correct storage volume, or a photo of the freezer with a known object for scale.",
+        "if_unproven": "priced as a small chest freezer (e.g., 86L) until proven otherwise"
+      },
+      {
+        "risk": "The freezer may have been used in a humid or dirty environment, leading to internal mold or odor.",
+        "proof": "A video showing the interior being opened and cleaned, with no visible mold, odor, or residue.",
+        "if_unproven": "priced as potentially having odor or mold"
+      }
+    ],
+    "proof_requests": [
+      "Video of the freezer being turned on and running, showing the compressor and interior.",
+      "Clear photo of the label showing the correct storage volume.",
+      "Video showing the interior being opened and cleaned, confirming no mold or odor."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and brand are confirmed, but the condition and functionality cannot be verified from the photos. The storage volume is likely misprinted, and internal condition is unknown. Proof of working condition and interior state is needed before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 66035,
+    "input_tokens": 2959,
+    "output_tokens": 787,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "b6cdf040f248f6a7552fc619b9ad32b7",
+    "error": null
+  }
+}

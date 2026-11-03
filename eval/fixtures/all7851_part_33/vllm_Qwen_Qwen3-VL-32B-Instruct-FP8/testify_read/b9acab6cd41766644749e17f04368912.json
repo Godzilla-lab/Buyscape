@@ -1,0 +1,86 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Open Dell laptop box with foam insert showing Dell logo. Laptop is wrapped in black protective bag inside. Box has Intel Inside sticker on front.",
+      "Photo 1: Same as photo 0, slightly different angle. Box shows 'This packaging is made from 100% recycled or renewable materials' text at bottom.",
+      "Photo 2: Side view of closed box with warning label about battery ingestion hazard. Box appears to be sealed with tape, but no visible model or serial number. Seller's watermark 'VESHE TECH NIG. LTD' is present on all photos."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "laptop",
+      "brand": "Dell",
+      "model": null,
+      "read_from": [
+        "photo 0 foam insert",
+        "photo 1 box front"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Dell pro 14 premium laptop",
+        "verdict": "supported",
+        "evidence": "Dell logo visible on foam insert in photo 0 and photo 1, and box design matches Dell packaging."
+      },
+      {
+        "claim": "14\" non-touch FHD+ display",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows the screen or display specifications. Cannot verify size or touch capability from current images."
+      },
+      {
+        "claim": "Intel Core Ultra 7 266V VPro (15th gen)",
+        "verdict": "unverifiable_remote",
+        "evidence": "Intel Inside sticker visible on box in photo 0 and 1, but no model or generation details visible. Cannot confirm specific CPU model."
+      },
+      {
+        "claim": "16GB...",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible RAM specification in photos. Cannot confirm memory amount."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Laptop may be non-functional or damaged",
+        "proof": "Photo of the laptop turned on, showing screen and keyboard, with clear view of model number and serial number.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Laptop may be a different model than claimed (e.g., not Pro 14 or not 15th gen Intel)",
+        "proof": "Clear photo of the laptop's label or sticker showing model number and specifications.",
+        "if_unproven": "priced as lower-end model or generic Dell laptop"
+      },
+      {
+        "risk": "Laptop may be refurbished or used without disclosure",
+        "proof": "Photo of the laptop's condition, including screen, keyboard, and ports, with close-up of any wear or damage.",
+        "if_unproven": "priced as used with unknown condition"
+      },
+      {
+        "risk": "Battery may be defective or not original",
+        "proof": "Photo of the battery label showing model and capacity, or a video showing battery health and charge cycles.",
+        "if_unproven": "priced as battery may not hold charge"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the laptop turned on, showing screen and keyboard with model number visible.",
+      "Photo of the laptop's label or sticker showing full specifications.",
+      "Photo of the laptop's condition, including screen, keyboard, and ports.",
+      "Photo of the battery label or video showing battery health."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a Dell laptop, but critical specifications such as model, CPU, RAM, and display cannot be verified from the current photos. The box is sealed and no internal components are visible. Without proof of the claimed specifications and condition, a price cannot be determined."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 70858,
+    "input_tokens": 2804,
+    "output_tokens": 832,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "b9acab6cd41766644749e17f04368912",
+    "error": null
+  }
+}

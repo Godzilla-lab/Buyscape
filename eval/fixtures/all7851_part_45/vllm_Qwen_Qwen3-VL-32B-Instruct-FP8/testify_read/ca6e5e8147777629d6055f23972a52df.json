@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows an outdoor unit of an air conditioner wrapped in plastic, with a blue 'Midea' logo visible on the side.",
+      "The unit is placed on concrete blocks, suggesting it is in a storage or sales yard.",
+      "Photo 1 shows multiple stacked outdoor units, all with the 'Midea' logo, indicating a stock of units for sale.",
+      "The units appear to be used or second-hand, as they are not in original packaging and are stored outdoors.",
+      "No indoor units are visible in either photo.",
+      "The seller claims 'newer model' and '12...' (incomplete) features, but no specific model numbers or technical details are visible in the photos."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "air conditioner outdoor unit",
+      "brand": "Midea",
+      "model": null,
+      "read_from": [
+        "photo 0 side label",
+        "photo 1 multiple units"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Tokunbo Midea 1hp & 1.5hp air conditioners are available.",
+        "verdict": "unverified",
+        "evidence": "The brand 'Midea' is visible in both photos, but no model numbers or capacity labels (1hp/1.5hp) are readable. The term 'Tokunbo' (second-hand) is not visually verifiable but consistent with the context."
+      },
+      {
+        "claim": "newer model",
+        "verdict": "unverifiable_remote",
+        "evidence": "No model number or production date is visible. The appearance is generic and does not indicate a specific generation."
+      },
+      {
+        "claim": "12...",
+        "verdict": "unverifiable_remote",
+        "evidence": "The claim is incomplete and cannot be assessed without further context or visible features."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Unit may be non-functional or have internal damage not visible in photos.",
+        "proof": "Video of the unit running or a close-up of the compressor and wiring.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Model capacity (1hp or 1.5hp) is not confirmed, which affects pricing.",
+        "proof": "Clear photo of the model label or rating plate on the unit.",
+        "if_unproven": "priced at lower capacity (1hp) as worst case"
+      },
+      {
+        "risk": "Unit may have been exposed to moisture or corrosion due to outdoor storage.",
+        "proof": "Close-up of the unit's base, fins, and electrical connections.",
+        "if_unproven": "priced with corrosion risk discount"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the model label or rating plate on the outdoor unit.",
+      "Video showing the unit running and the indoor unit matching.",
+      "Close-up of the unit's base and electrical connections to check for corrosion or damage."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The brand is confirmed as Midea, but the model, capacity, and condition cannot be verified from the current photos. Key risks like functionality, exact model, and damage are unproven, making a worst-case price unreliable without further evidence."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 57848,
+    "input_tokens": 1917,
+    "output_tokens": 728,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "ca6e5e8147777629d6055f23972a52df",
+    "error": null
+  }
+}

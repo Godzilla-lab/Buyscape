@@ -1,0 +1,66 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a GPS tracking interface on a map, centered on Auchi, Edo State, Nigeria.",
+      "The interface displays a pop-up with device data: Name: Okada, Status: Static (22H47M), ACC state: Shut, ICCID: 89234010004786821024, Lon: 6.24479, Lat: 7.05752, Main supply voltage: 0 (V), Location signal type: GPS+ Beidou, Location timestamp: 2025-02-22 21:56:55, Signal timestamp: 2025-02-23 20:43:09.",
+      "The map shows local landmarks like Hotel Iyamho, Presto Hotel, Afemai Co-educational College, and Warake Rd.",
+      "The interface includes Google Maps branding and navigation controls.",
+      "The seller's text claims it is a 'GPS tracker security for your vehicles'."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "GPS vehicle tracker",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 interface"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "GPS tracker security for your vehicles",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows a GPS tracking interface with vehicle-related data (name 'Okada', ACC state, location, etc.) and is labeled as a tracker for vehicles."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The device may not be functional or may be a fake tracker (e.g., spoofed data or no real hardware).",
+        "proof": "A photo of the physical GPS tracker device, showing its casing, ports, and any brand/model labels, along with a video of it being powered on and connected to a vehicle.",
+        "if_unproven": "priced as non-functional or fake"
+      },
+      {
+        "risk": "The ICCID number may be inactive or belong to a non-working SIM card.",
+        "proof": "A screenshot from the tracker's app or service provider showing active subscription status and signal strength.",
+        "if_unproven": "priced as inactive or with no service"
+      },
+      {
+        "risk": "The device may not be compatible with vehicles or may require professional installation.",
+        "proof": "A photo or video showing the tracker installed in a vehicle, connected to the power source and OBD port (if applicable).",
+        "if_unproven": "priced as uninstalled or incompatible"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the physical GPS tracker device with visible brand/model and ports.",
+      "Video showing the device powered on and connected to a vehicle.",
+      "Screenshot of the tracker's service status showing active subscription and signal."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a GPS vehicle tracker from the interface shown, but there is no visual proof of the physical device, its functionality, or service status. Without proof, it cannot be priced reliably."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 57210,
+    "input_tokens": 1998,
+    "output_tokens": 709,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "ee6dc37d63576fcf66f5502f7be44548",
+    "error": null
+  }
+}

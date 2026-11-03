@@ -1,0 +1,80 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a yellow and maroon solar power generator with wheels.",
+      "The brand 'QASA' is visible on the front and top panel.",
+      "Model 'SPG-1200' is printed on the front, below the brand name.",
+      "Text 'SOLAR POWER GENERATOR' is printed below the model.",
+      "An 'MPPT' label is visible next to the model number.",
+      "The front panel has two AC outlets labeled 'AC 220V', a small digital display, and several control buttons or indicators.",
+      "The side has ventilation grilles and a handle or speaker-like cutout.",
+      "The image appears to be a stock photo with a watermark 'VC SOLAR ELECTRICAL GLOBAL' and 'POSTED ON JIJI'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "solar power generator",
+      "brand": "QASA",
+      "model": "SPG-1200",
+      "read_from": [
+        "photo 0 front panel",
+        "photo 0 top panel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Powerful qasa 1200w solar generator",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows 'QASA' and 'SPG-1200' on the front, and '1200w' is implied by the model name and the two 220V AC outlets typical of such units."
+      },
+      {
+        "claim": "comes with 400mah gel batteries",
+        "verdict": "unverifiable_remote",
+        "evidence": "No batteries are visible in the photo. The capacity '400mah' is likely a typo (should be 400Ah) and cannot be verified from the image alone."
+      },
+      {
+        "claim": "1200w inverter",
+        "verdict": "supported",
+        "evidence": "The model SPG-1200 and the presence of two 220V AC outlets suggest a 1200W inverter, which is standard for this model type."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Batteries may be missing, damaged, or not 400Ah as claimed",
+        "proof": "Photo of the internal battery compartment or the batteries themselves, showing brand, capacity, and condition.",
+        "if_unproven": "priced as no batteries or batteries not included"
+      },
+      {
+        "risk": "Unit may be non-functional or have damaged components (e.g., display, outlets, inverter)",
+        "proof": "Video or photo showing the unit powered on, with display lit and outlets working.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The image is a stock photo, not the actual item for sale",
+        "proof": "Photo of the actual unit from multiple angles, including serial number or unique wear, taken in the seller's possession.",
+        "if_unproven": "priced as possibly not genuine"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the internal battery compartment or the batteries themselves, showing brand and capacity.",
+      "Video or photo showing the unit powered on with display lit and outlets working.",
+      "Photo of the actual unit from multiple angles, including serial number or unique wear."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and brand are identifiable, but critical claims about batteries and functionality cannot be verified from the current photo. The image appears to be a stock photo, raising concerns about authenticity. Proof of batteries, working condition, and actual item is needed before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 63907,
+    "input_tokens": 1586,
+    "output_tokens": 821,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "a445fc7a4347bc6c0bf73ab023587ca0",
+    "error": null
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Closed silver laptop with HP logo (three horizontal bars) on lid. A small handwritten sticker is visible on the lower left corner. The laptop is on a black stool on a wooden floor.",
+      "Photo 1: Open laptop showing keyboard, trackpad, and screen. The keyboard has black keys with white lettering. The HP logo is visible on the bezel below the screen. The model name 'ELITEBOOK' is visible on the lower left of the keyboard deck. The screen is off and reflects the surroundings.",
+      "Photo 2: Bottom view of the laptop. A label with regulatory and model information is visible in the center. The HP logo is on the lower right corner. The laptop is on the same black stool on wooden floor."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "EliteBook 830 G7",
+      "read_from": [
+        "photo 1 keyboard deck: 'ELITEBOOK'",
+        "photo 0 lid: HP logo (three bars)",
+        "photo 2 bottom: HP logo and label (partially visible)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Hp 830g7 non x360",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows 'ELITEBOOK' on the keyboard deck, and the design matches the HP EliteBook 830 G7. The 'non x360' is consistent with the fixed hinge visible in photo 1."
+      },
+      {
+        "claim": "512/16gb ram corei7 10th gen laptop",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal components or system information visible. The specs cannot be confirmed from photos alone."
+      },
+      {
+        "claim": "Good battery",
+        "verdict": "unverifiable_remote",
+        "evidence": "No battery usage test or charge cycle data shown. Battery health cannot be assessed remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Internal components do not match claimed specs (512GB SSD, 16GB RAM, Core i7 10th gen)",
+        "proof": "Photo of BIOS screen or system information showing CPU, RAM, and storage details.",
+        "if_unproven": "Priced as lower-spec model (e.g., Core i5 or 8GB RAM) or as not matching claim."
+      },
+      {
+        "risk": "Battery is not functional or has low health",
+        "proof": "Video of battery charge cycle test or battery health report from system diagnostics.",
+        "if_unproven": "Priced as battery not working or degraded."
+      },
+      {
+        "risk": "Screen damage or dead pixels not visible in photos",
+        "proof": "Video of screen displaying full white, full black, and color gradients.",
+        "if_unproven": "Priced as screen may have defects."
+      },
+      {
+        "risk": "Keyboard or trackpad malfunction",
+        "proof": "Video of typing and trackpad operation.",
+        "if_unproven": "Priced as peripherals may not work."
+      }
+    ],
+    "proof_requests": [
+      "Video of BIOS screen or system information showing CPU, RAM, and storage.",
+      "Video of battery charge cycle test or battery health report.",
+      "Video of screen displaying full white, full black, and color gradients.",
+      "Video of typing and trackpad operation."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identifiable as HP EliteBook 830 G7, but critical claims about internal specs and battery health cannot be verified from photos. Risks include mismatched components and non-functional battery, which affect pricing. Proof is needed to confirm specs and condition before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 67303,
+    "input_tokens": 2799,
+    "output_tokens": 851,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "cb440fb721c54c08539c0691d9325b17",
+    "error": null
+  }
+}

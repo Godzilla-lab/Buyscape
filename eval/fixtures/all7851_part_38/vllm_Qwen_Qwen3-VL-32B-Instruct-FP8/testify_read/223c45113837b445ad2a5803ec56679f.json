@@ -1,0 +1,97 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: A laptop wrapped in plastic, placed on foam inside an open cardboard box. The box has a Lenovo logo visible on the side.",
+      "Photo 1: The laptop is open, showing a black keyboard and trackpad. A sticker on the bottom right of the keyboard area shows a Lenovo logo and a QR code. The screen is off. The laptop is still partially in packaging.",
+      "Photo 2: The closed lid of the laptop, showing a matte black finish with the 'Lenovo' logo on the top left corner. The surface has minor smudges and fingerprints.",
+      "All photos have a watermark: 'POSTED ON Jiji DARRENGADGET HUB'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Lenovo",
+      "model": "not readable",
+      "read_from": [
+        "photo 2 lid: 'Lenovo' logo",
+        "photo 1 keyboard area: Lenovo sticker"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Open box new intel core i7-1065g7 1.3g",
+        "verdict": "unverified",
+        "evidence": "No CPU label or system information visible in photos. The model number is not readable. The 'open box new' status is not verifiable from photos alone."
+      },
+      {
+        "claim": "8gb ram",
+        "verdict": "unverifiable_remote",
+        "evidence": "RAM is internal; no photos of the inside or BIOS screen. Cannot be confirmed remotely."
+      },
+      {
+        "claim": "512ssd",
+        "verdict": "unverifiable_remote",
+        "evidence": "SSD is internal; no photos of the drive or system specs. Cannot be confirmed remotely."
+      },
+      {
+        "claim": "gpc: intergrated",
+        "verdict": "unverifiable_remote",
+        "evidence": "No GPU specs visible. Integrated graphics are typical for this CPU, but not confirmed."
+      },
+      {
+        "claim": "display:14\"fhd tn",
+        "verdict": "unverified",
+        "evidence": "Screen is off in photo 1; no visible bezel or label to confirm size or panel type. TN panel is common for budget laptops, but not confirmed."
+      },
+      {
+        "claim": "battery:...",
+        "verdict": "unverified",
+        "evidence": "Battery status not visible. No photos of battery or power adapter. Capacity or health unknown."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The laptop may not be new or may have been used before.",
+        "proof": "A photo of the laptop's serial number sticker (usually on the bottom) and a screenshot of the BIOS or system information showing the CPU, RAM, and SSD.",
+        "if_unproven": "Priced as used, with potential for lower value due to unknown condition."
+      },
+      {
+        "risk": "The advertised specs (i7-1065g7, 8GB RAM, 512GB SSD) may be false or mismatched.",
+        "proof": "A screenshot of the system information (Windows 'About' or BIOS) showing the CPU, RAM, and storage details.",
+        "if_unproven": "Priced as if specs are not guaranteed, which reduces value significantly."
+      },
+      {
+        "risk": "The screen may be damaged or have dead pixels, or the display type may not be FHD TN.",
+        "proof": "A photo of the screen turned on, displaying a white screen or test pattern, to check for defects and resolution.",
+        "if_unproven": "Priced as if screen quality is unknown, which may reduce value."
+      },
+      {
+        "risk": "The battery may be degraded or non-functional.",
+        "proof": "A photo of the battery health report (via Windows Powercfg or third-party tool) or a video showing the laptop running on battery.",
+        "if_unproven": "Priced as if battery is not working, which reduces value."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of system information (Windows 'About' or BIOS) showing CPU, RAM, and SSD details.",
+      "Photo of the laptop's serial number sticker (on the bottom).",
+      "Photo of the screen turned on, displaying a white screen or test pattern.",
+      "Photo or video of the battery health report or laptop running on battery."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The laptop is identifiable as a Lenovo, but the model and key specs (CPU, RAM, SSD) are not verifiable from the photos. The 'open box new' claim and all technical specifications require proof. Without proof, the item cannot be priced accurately and carries significant risk of misrepresentation."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 86282,
+    "input_tokens": 2185,
+    "output_tokens": 1063,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "223c45113837b445ad2a5803ec56679f",
+    "error": null
+  }
+}

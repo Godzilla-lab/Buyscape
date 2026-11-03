@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Open silver Dell laptop showing Windows 11 desktop with blue default wallpaper. Dell logo visible below screen. Keyboard is black with white lettering. Touchpad is large and centered. Intel Core i5 sticker on bottom right of palm rest. Watermark 'EMMA TECH COMPUTERS' across keyboard.",
+      "Photo 1: Same laptop from slightly different angle, same desktop. Background shows glass shelves with stacked electronics. Watermark present.",
+      "Photo 2: Slightly angled view, same laptop, same desktop. Fan visible on left. Watermark present. No visible damage to screen or keyboard.",
+      "All photos show the laptop powered on, screen working, keyboard visible, no obvious physical damage to exterior."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "laptop",
+      "brand": "Dell",
+      "model": null,
+      "read_from": [
+        "photo 0 screen bezel",
+        "photo 0 palm rest sticker"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Uk used dell laptop core i5 11th generation",
+        "verdict": "unverified",
+        "evidence": "Intel Core i5 sticker visible in photo 0, but no visible model number or generation indicator. The sticker does not specify 11th generation. Seller's claim cannot be confirmed from photos."
+      },
+      {
+        "claim": "excellent battery life",
+        "verdict": "unverifiable_remote",
+        "evidence": "No battery usage data, no power settings visible, no video of battery test. Cannot verify from still photos."
+      },
+      {
+        "claim": "non-touch screen",
+        "verdict": "supported",
+        "evidence": "No touch screen indicators (like a touchpad overlay or gesture icons) visible. Screen bezel is standard, no touch screen markings. No evidence of touch functionality in photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery may not be functional or may have degraded capacity",
+        "proof": "Video of battery usage test showing time on battery, or screenshot of battery health in Windows settings.",
+        "if_unproven": "priced as not working or with poor battery life"
+      },
+      {
+        "risk": "Laptop may have hidden physical damage or internal issues (e.g., cracked screen, dead pixels, keyboard issues, fan noise, overheating)",
+        "proof": "Close-up of screen for dead pixels, video of keyboard typing, video of laptop under load showing fan and temperature.",
+        "if_unproven": "priced as potentially faulty or with unknown condition"
+      },
+      {
+        "risk": "Model and generation not confirmed; could be older or lower-tier i5 (e.g., 10th gen or i5-1135G7 vs i5-1145G7)",
+        "proof": "Screenshot of system information (Windows + R, then 'msinfo32') showing exact CPU model and generation.",
+        "if_unproven": "priced as generic i5 laptop, not 11th gen"
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of system information (msinfo32) showing exact CPU model and generation.",
+      "Video of battery usage test showing time on battery.",
+      "Close-up of screen for dead pixels and video of keyboard typing.",
+      "Video of laptop under load (e.g., running a CPU-intensive task) showing fan noise and temperature."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The laptop is identifiable as a Dell with an Intel Core i5, but the 11th generation claim cannot be verified from the photos. Battery life and internal condition are unverifiable. Without proof of model, generation, and battery health, a worst-case price cannot be confidently assigned. Proof is needed to confirm specifications and condition."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 68574,
+    "input_tokens": 2787,
+    "output_tokens": 842,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "6e7fa849e8126255374f47c95f5fd658",
+    "error": null
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the back of a white smartphone with a dual-camera module in a square bump, typical of iPhone 14 models.",
+      "A white sticker is affixed to the back with printed text including 'Model: iPhone 14', 'Battery Health: 100%', 'Grade: A', and 'Phonecheck' branding.",
+      "Photo 1 shows the front of the same phone with a black screen, no visible damage, and rounded corners with a notch at the top.",
+      "The phone is placed on a wooden surface in both photos.",
+      "The sticker in photo 0 appears to be a third-party inspection label, not an official Apple label."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "iPhone 14",
+      "brand": "Apple",
+      "model": "iPhone 14",
+      "read_from": [
+        "photo 0 sticker: 'Model: iPhone 14'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Grade A iPhone 14 UK used iPhone",
+        "verdict": "unverified",
+        "evidence": "The sticker in photo 0 says 'Grade: A' and 'Model: iPhone 14', but there is no visible proof of UK origin. The 'UK' claim is unverifiable_remote."
+      },
+      {
+        "claim": "battery health 100%",
+        "verdict": "supported",
+        "evidence": "Photo 0 sticker explicitly states 'Battery Health: 100%'."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The phone may be non-functional or have hidden defects not visible in photos.",
+        "proof": "A video showing the phone turning on, displaying the home screen, and running basic functions.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The phone may be stolen, blacklisted, or have an invalid IMEI.",
+        "proof": "Screenshot of IMEI check from a trusted source (e.g., Apple's website or Nigerian NCC checker) showing the phone is active and not blacklisted.",
+        "if_unproven": "priced as potentially blacklisted or invalid IMEI"
+      },
+      {
+        "risk": "The sticker may be fake or tampered with, and the phone may not be an iPhone 14.",
+        "proof": "Close-up photo of the phone's serial number and model number engraved on the device (usually on the back or inside the SIM tray), or a screenshot of the Settings > General > About section showing the model name.",
+        "if_unproven": "priced as possibly not genuine iPhone 14"
+      }
+    ],
+    "proof_requests": [
+      "Video of the phone turning on and showing the home screen.",
+      "Screenshot of IMEI check confirming the phone is active and not blacklisted.",
+      "Close-up photo of the engraved serial number or screenshot of Settings > General > About showing the model name."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The phone is identified as an iPhone 14 from the sticker, and battery health is supported. However, the UK origin is unverifiable, and critical risks like functionality, IMEI status, and authenticity cannot be confirmed from current photos. Proof is needed to price accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 74976,
+    "input_tokens": 2394,
+    "output_tokens": 726,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "7529897261efef01815fb6303cd4cf7f",
+    "error": null
+  }
+}

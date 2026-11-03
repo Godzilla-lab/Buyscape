@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a close-up of an engine with a valve cover labeled '1.6L DOHC' and 'VTEC' in reverse, indicating it is likely a Honda engine, not a Lexus.",
+      "The engine in photo 0 has visible wear, dirt, and grime, with hoses, belts, and pulleys attached.",
+      "Photo 1 shows a wider view of a workshop with multiple engines laid out, including the one from photo 0, suggesting a used engine yard or repair shop.",
+      "No Lexus branding or model identifiers are visible in either photo.",
+      "The seller claims 'All kinds of Japanese Lexus engines', but the visible engine is clearly Honda VTEC, which contradicts the claim."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car engine",
+      "brand": "Honda",
+      "model": "1.6L DOHC VTEC",
+      "read_from": [
+        "photo 0 valve cover"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "All kinds of Japanese Lexus engines",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows a Honda VTEC engine, not a Lexus engine. No Lexus branding is visible in either photo."
+      },
+      {
+        "claim": "good quality",
+        "verdict": "unverified",
+        "evidence": "No evidence of internal condition, compression, or mechanical integrity. The engine appears dirty and used, but no test or inspection is shown."
+      },
+      {
+        "claim": "affordable prices",
+        "verdict": "unverifiable_remote",
+        "evidence": "Price is not stated or shown; cannot verify affordability without knowing the actual price or market comparison."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine may be damaged internally (e.g., blown head gasket, worn bearings, cracked block)",
+        "proof": "Video or photo of engine running, compression test results, or internal inspection (e.g., cylinder bores, crankshaft, head gasket condition).",
+        "if_unproven": "priced as not working or severely damaged"
+      },
+      {
+        "risk": "Engine may not be compatible with the buyer's vehicle",
+        "proof": "Photo of engine VIN or model plate, or matching vehicle model and year.",
+        "if_unproven": "priced as generic used engine, lower value due to uncertainty"
+      },
+      {
+        "risk": "Engine may have been salvaged from a wrecked or accident-damaged vehicle",
+        "proof": "Photo of vehicle's VIN or accident history report.",
+        "if_unproven": "priced as unknown history, lower value"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the engine's VIN or model plate to confirm exact model and year.",
+      "Video of the engine running or a compression test to verify mechanical condition.",
+      "Photo of the vehicle the engine came from, if available.",
+      "Proof of origin (e.g., salvage yard receipt or export documentation)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The engine is clearly a Honda VTEC, contradicting the seller's claim of Lexus engines. Without proof of condition, compatibility, or origin, the item cannot be priced accurately. The risks of internal damage and incompatibility are high and must be verified before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 57786,
+    "input_tokens": 1859,
+    "output_tokens": 740,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "4f27bcab462c4b78663e956ca6d094b6",
+    "error": null
+  }
+}

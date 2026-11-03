@@ -1,0 +1,74 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a children's bicycle with a blue frame, black seat, and black tires.",
+      "The front fork has a visible suspension system, and the rear wheel has a derailleur indicating a multi-speed gear system.",
+      "The frame is partially wrapped in plastic, suggesting it is new or recently unpacked.",
+      "The bike is positioned outdoors on a tiled pavement, with a car and building in the background.",
+      "No brand or model name is visible on the frame, wheels, or components in the photo."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "children's bicycle",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "This is terrain children bicycle",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows a bicycle designed for children, with a small frame and components appropriate for a child rider."
+      },
+      {
+        "claim": "with double suspension",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows front suspension, but rear suspension is not visible. The term 'double suspension' implies both front and rear, which cannot be confirmed from the photo."
+      },
+      {
+        "claim": "and shift gear system",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows a rear derailleur and gear cassette, indicating a multi-speed gear system."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The rear suspension may not exist, contradicting the 'double suspension' claim.",
+        "proof": "A photo showing the rear fork or frame from the side, clearly displaying or disproving a rear suspension system.",
+        "if_unproven": "priced as having only front suspension, which reduces value."
+      },
+      {
+        "risk": "The bicycle may be damaged or have missing parts not visible in the photo.",
+        "proof": "A full 360-degree view of the bicycle, including close-ups of the chain, brakes, and wheels.",
+        "if_unproven": "priced as potentially damaged or incomplete, reducing value."
+      },
+      {
+        "risk": "The bike may not be functional (e.g., gears not shifting, brakes not working).",
+        "proof": "A video clip showing the bike being pedaled with gear shifts and brakes engaged.",
+        "if_unproven": "priced as not working, which significantly reduces value."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the rear fork or frame from the side to confirm or deny rear suspension.",
+      "Full 360-degree photos of the bicycle, including close-ups of the chain, brakes, and wheels.",
+      "Video clip showing the bike being pedaled with gear shifts and brakes engaged."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a children's bicycle, and some claims are supported, but the 'double suspension' claim cannot be verified without a view of the rear suspension. Hidden risks like damage, missing parts, or non-functionality cannot be ruled out from the current photo. More proof is needed to price accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 52545,
+    "input_tokens": 1352,
+    "output_tokens": 694,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "1b368dae3bdc6ec6063745d2c02c0334",
+    "error": null
+  }
+}

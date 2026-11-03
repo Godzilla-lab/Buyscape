@@ -1,0 +1,66 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: A folded smartphone with a silver back and black front. Three vertically aligned camera lenses on the back. The screen is off, reflecting surroundings.",
+      "Photo 1: Side view of the same phone, showing the hinge and the 'SAMSUNG' logo vertically on the side. The phone is closed.",
+      "Photo 2: The phone is open, showing the front screen with a lock screen displaying time '09:38', date 'Wed, August 13', and 'Emergency call' options. The status bar shows 'No SIM - Limited service'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "foldable smartphone",
+      "brand": "SAMSUNG",
+      "model": "Galaxy Z Fold",
+      "read_from": [
+        "photo 1 side: SAMSUNG logo",
+        "photo 0: triple camera module and foldable design consistent with Galaxy Z Fold series"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Only Bluetooth doesn't work. Everything else works perfectly.",
+        "verdict": "unverified",
+        "evidence": "The screen is on in photo 2, showing time and date, which suggests the phone is powered on. However, no functional test (e.g., camera, charging, call, Wi-Fi, or app usage) is shown. Bluetooth functionality cannot be verified remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Bluetooth is not working as claimed.",
+        "proof": "A video or photo showing Bluetooth settings being accessed and a device being paired or failing to pair.",
+        "if_unproven": "Priced as if Bluetooth is non-functional, which reduces value."
+      },
+      {
+        "risk": "The phone has a hardware issue not visible in photos, such as hinge damage, screen burn-in, or battery degradation.",
+        "proof": "A video showing the phone being opened and closed smoothly, and a close-up of the screen for dead pixels or discoloration.",
+        "if_unproven": "Priced as if there may be hidden hardware defects, reducing value."
+      },
+      {
+        "risk": "The phone is locked to a carrier or has a blacklisted IMEI.",
+        "proof": "A screenshot of the phone's settings showing 'About phone' with IMEI and carrier status, or a video of the phone successfully connecting to a network with a SIM card.",
+        "if_unproven": "Priced as if it may be carrier-locked or blacklisted, which reduces value."
+      }
+    ],
+    "proof_requests": [
+      "Video showing the phone being opened and closed smoothly.",
+      "Video or photo showing Bluetooth being turned on and attempting to pair with a device.",
+      "Screenshot or video of 'About phone' showing IMEI and carrier status.",
+      "Video showing the phone making a call or connecting to Wi-Fi."
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a Samsung Galaxy Z Fold series phone. The seller claims Bluetooth is the only non-working feature, but this cannot be verified remotely. The screen is on, suggesting basic functionality. Hidden risks include Bluetooth failure, hinge issues, or carrier lock, which are priced in as worst-case scenarios. The item can be priced based on its visible condition and known model, with adjustments for the unverified claims."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 59356,
+    "input_tokens": 2780,
+    "output_tokens": 726,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "4918c07699bc4e896065df13083f98ef",
+    "error": null
+  }
+}

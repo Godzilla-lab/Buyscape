@@ -1,0 +1,93 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Front view of a black iPhone showing the Apple logo on boot screen. Screen has visible cracks and smudges. Home button is present.",
+      "Photo 1: Back view of the same iPhone. Black glass back with Apple logo. There is a large crack starting from the bottom right corner and spreading upward. The dual-camera setup is visible, consistent with iPhone 8 Plus.",
+      "Photo 2: Side profile of the phone. Volume buttons, power button, and SIM tray are visible. The phone has a metallic frame, typical of iPhone 8 Plus.",
+      "All photos show a watermark 'TERRIFICK GADGETS' and 'POSTED ON JIJI'.",
+      "The phone appears to be powered on in photo 0, showing the Apple logo."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "iPhone 8 Plus",
+      "brand": "Apple",
+      "model": "iPhone 8 Plus",
+      "read_from": [
+        "photo 1: dual-camera setup and back design",
+        "photo 2: side profile with volume/power buttons and SIM tray"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "IPHONE 8 plus",
+        "verdict": "supported",
+        "evidence": "Photo 1 and photo 2 show the dual-camera setup and side profile consistent with iPhone 8 Plus."
+      },
+      {
+        "claim": "256gb",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows the storage capacity. Cannot be confirmed from images alone."
+      },
+      {
+        "claim": "cracked screen and back glass",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows cracks on the front screen; photo 1 shows a large crack on the back glass."
+      },
+      {
+        "claim": "touches well",
+        "verdict": "unverified",
+        "evidence": "No photo or video shows the touchscreen being used. Cannot verify functionality from still images."
+      },
+      {
+        "claim": "Service battery",
+        "verdict": "unverified",
+        "evidence": "No photo shows battery health or performance. 'Service battery' is a claim about condition, not visible in photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery health is poor or degraded",
+        "proof": "A video or photo showing battery percentage during use, or a battery health report from Settings > Battery > Battery Health.",
+        "if_unproven": "priced as having a degraded battery, which reduces value significantly"
+      },
+      {
+        "risk": "Touchscreen is not fully functional despite claim",
+        "proof": "A video showing the user swiping, tapping, and scrolling on the screen.",
+        "if_unproven": "priced as not working, since unproven functionality is treated as failure"
+      },
+      {
+        "risk": "Storage capacity is not 256GB",
+        "proof": "A photo of the phone's Settings > General > About > Capacity, or a screenshot showing the storage info.",
+        "if_unproven": "priced as lower storage (e.g., 64GB), which reduces value"
+      },
+      {
+        "risk": "Internal damage from cracks (e.g., display, motherboard, or camera)",
+        "proof": "A video showing the phone in use, including camera function, and a close-up of the screen under different lighting to check for dead pixels or color distortion.",
+        "if_unproven": "priced as having potential internal damage, which reduces value"
+      }
+    ],
+    "proof_requests": [
+      "Video showing the touchscreen being used (swiping, tapping, scrolling).",
+      "Photo or video of the battery health report in Settings.",
+      "Photo of the phone's Settings > General > About > Capacity to confirm 256GB.",
+      "Video showing the camera working and screen display under different lighting."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identifiable as iPhone 8 Plus, but key claims (256GB, touchscreen functionality, battery condition) cannot be verified from the photos alone. Hidden risks related to battery, touchscreen, and internal damage affect pricing. Proof is needed to price accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 79362,
+    "input_tokens": 2789,
+    "output_tokens": 934,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "8b15aecf64d0f3e604f5d5f230105253",
+    "error": null
+  }
+}

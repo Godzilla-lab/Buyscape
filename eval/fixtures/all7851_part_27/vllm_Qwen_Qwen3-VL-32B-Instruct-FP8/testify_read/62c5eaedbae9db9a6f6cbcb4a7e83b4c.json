@@ -1,0 +1,69 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black glass-top gas cooker with three burners and three control knobs. The brand 'SK magic' is visible on the front right side of the cooktop.",
+      "Photo 1 shows a different gas cooker with a stainless steel top, three burners, and three control knobs. The brand 'Magic Chef' is visible on the front left side of the cooktop.",
+      "Both cookers are placed on a dark wooden surface against a corrugated metal wall.",
+      "The two photos appear to show two different units, not the same item from different angles.",
+      "The seller claims it is a 3-burner gas coker, stainless. Photo 0 is black glass, not stainless. Photo 1 is stainless steel."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "3 burner gas cooker",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "It is 3 Burner gas Coker",
+        "verdict": "supported",
+        "evidence": "Both photos show 3 burners and 3 control knobs, consistent with a 3-burner gas cooker."
+      },
+      {
+        "claim": "Stainless",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows a black glass-top cooker, not stainless. Photo 1 shows a stainless steel top, but since the two photos appear to be different units, the claim is contradicted for the item in photo 0, which is the first and primary photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The item may not be in working condition or may have damaged parts not visible in photos.",
+        "proof": "A video showing the cookers being lit and functioning, or close-up photos of the burner heads, igniters, and gas connections.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The cookers may have hidden damage or wear, such as cracks in the glass top (photo 0) or corrosion on the stainless steel (photo 1).",
+        "proof": "Close-up photos of the cooktop surface, especially around the burners and edges.",
+        "if_unproven": "priced as damaged"
+      },
+      {
+        "risk": "The two photos may represent two different items, and the seller may be misrepresenting one as the other.",
+        "proof": "A single photo showing both cookers side by side or a clear statement from the seller specifying which unit is for sale.",
+        "if_unproven": "priced as uncertain, with lower value due to ambiguity"
+      }
+    ],
+    "proof_requests": [
+      "Clarify which of the two cookers is for sale and provide a single photo of that unit.",
+      "Provide close-up photos of the cooktop surface, burner heads, and control knobs.",
+      "Provide a video showing the cooker being lit and functioning."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The two photos show two different cookers, one black glass and one stainless steel, making it unclear which item is being sold. The seller's claim of 'stainless' is contradicted by the first photo. Without clarification and additional proof, a reliable price cannot be determined."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 60440,
+    "input_tokens": 2292,
+    "output_tokens": 729,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "62c5eaedbae9db9a6f6cbcb4a7e83b4c",
+    "error": null
+  }
+}

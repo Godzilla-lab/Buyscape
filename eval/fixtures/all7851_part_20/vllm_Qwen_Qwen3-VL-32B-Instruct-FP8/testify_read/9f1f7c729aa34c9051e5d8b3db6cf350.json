@@ -1,0 +1,74 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a stainless steel industrial machine with a conical hopper, a curved metal pipe, and a control panel with red and green buttons.",
+      "The machine has a label at the bottom left: 'JMS60 Colloid Mill Machine' and 'Peanut Butter Making'.",
+      "Text overlay in green says 'ZENZINNY MACHINERY'.",
+      "Specifications listed: Power: 2.2KW, Supply: 220V/50HZ.",
+      "CE and ISO9001:2008 logos are visible in the bottom right corner.",
+      "The machine appears clean and new-looking, with no visible wear or damage."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "colloid mill machine",
+      "brand": "ZENZINNY MACHINERY",
+      "model": "JMS60",
+      "read_from": [
+        "photo 0 label",
+        "photo 0 text overlay"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "This powerful machine is used to grind grains like peanut, almond nut, tahini, beans and so on.",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows 'Peanut Butter Making' and 'Colloid Mill Machine', which aligns with grinding grains and nuts."
+      },
+      {
+        "claim": "Power: 2.2KW, Supply: 220V/50HZ",
+        "verdict": "supported",
+        "evidence": "Photo 0 clearly displays these specifications."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The machine may be non-functional or have internal damage not visible in the photo.",
+        "proof": "A video showing the machine operating or a close-up of the motor and grinding chamber.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The machine may be a replica or counterfeit, especially since the brand 'ZENZINNY MACHINERY' is not widely known.",
+        "proof": "A serial number or manufacturer's certificate, or a video of the machine being used in a real setting.",
+        "if_unproven": "priced as unbranded or lower-tier"
+      },
+      {
+        "risk": "The machine may not be suitable for the Nigerian power grid or may require modifications for 220V/50HZ supply.",
+        "proof": "A photo of the power plug or a label showing voltage compatibility with Nigerian standards.",
+        "if_unproven": "priced as requiring adaptation"
+      }
+    ],
+    "proof_requests": [
+      "Video of the machine in operation.",
+      "Close-up of the motor and grinding chamber.",
+      "Photo of the power plug or electrical label.",
+      "Serial number or manufacturer's certificate."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "While the machine's identity and specifications are clear, its functionality, authenticity, and compatibility with local power supply cannot be confirmed from the photo alone. These factors are critical for pricing and must be verified."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 57868,
+    "input_tokens": 1652,
+    "output_tokens": 684,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "9f1f7c729aa34c9051e5d8b3db6cf350",
+    "error": null
+  }
+}

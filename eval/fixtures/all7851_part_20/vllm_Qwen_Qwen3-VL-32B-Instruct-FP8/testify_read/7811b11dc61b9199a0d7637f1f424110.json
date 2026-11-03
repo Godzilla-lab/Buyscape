@@ -1,0 +1,101 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the back of a dark gray iPhone with a triple-camera module and Apple logo. The camera lenses are illuminated with a blue light, possibly from a flash or reflection.",
+      "Photo 1 and Photo 2 show the same iPhone placed in an open box. The box has a cutout image of the phone's front screen with a purple and blue abstract wallpaper.",
+      "The box appears to be the original Apple packaging, but no model or capacity label is visible on the box or phone.",
+      "The phone's back has a matte finish, consistent with iPhone 15 Pro or iPhone 16 Pro models.",
+      "The seller's text claims it is an iPhone 16 Pro 128GB, 94% battery health, eSIM unlocked, fully operational with minor pouch spots.",
+      "No screen, front, or internal components are shown. No serial number or model label is visible on the device or box.",
+      "The watermark 'EMPEROR'S GADGETS D.C.LTD' is present on all photos, suggesting a reseller or shop."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "iPhone 16 Pro",
+      "brand": "Apple",
+      "model": null,
+      "read_from": [
+        "photo 0 back design",
+        "photo 1 box design"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "iPhone 16 Pro 128GB",
+        "verdict": "unverified",
+        "evidence": "The model name is not visible on the phone or box. The design is consistent with iPhone 15 Pro or 16 Pro, but cannot be confirmed without a model label or screen."
+      },
+      {
+        "claim": "eSIM unlocked",
+        "verdict": "unverifiable_remote",
+        "evidence": "No SIM tray or settings screen shown. Cannot verify carrier lock status remotely."
+      },
+      {
+        "claim": "94% battery health",
+        "verdict": "unverifiable_remote",
+        "evidence": "No screen shot or diagnostic tool shown. Battery health cannot be confirmed without a live screen display."
+      },
+      {
+        "claim": "fully operational",
+        "verdict": "unverified",
+        "evidence": "No screen or functionality shown. Cannot confirm operational status from photos alone."
+      },
+      {
+        "claim": "minor pouch spots",
+        "verdict": "unverified",
+        "evidence": "No close-up of the back or screen to confirm 'pouch spots'. The back appears clean in the photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Incorrect model (e.g., iPhone 15 Pro instead of 16 Pro)",
+        "proof": "Photo of the phone's screen showing the model name or settings > General > About.",
+        "if_unproven": "Priced as iPhone 15 Pro, which is lower value."
+      },
+      {
+        "risk": "Battery health not 94% (could be lower)",
+        "proof": "Screenshot of battery health from Settings > Battery > Battery Health.",
+        "if_unproven": "Priced as battery health unknown, which reduces value."
+      },
+      {
+        "risk": "Device is locked to a carrier or not eSIM unlocked",
+        "proof": "Screenshot of Settings > General > About > Carrier or SIM status.",
+        "if_unproven": "Priced as potentially locked, which reduces value."
+      },
+      {
+        "risk": "Hidden screen damage or dead pixels not visible in photos",
+        "proof": "Video or photo of the screen displaying full white, full black, and color patterns.",
+        "if_unproven": "Priced as screen condition unknown, which reduces value."
+      },
+      {
+        "risk": "Not genuine Apple product (fake or refurbished without disclosure)",
+        "proof": "Photo of the serial number on the back or box, and verification via Apple's website.",
+        "if_unproven": "Priced as potentially counterfeit, which reduces value significantly."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of the phone's screen showing Settings > General > About to confirm model and storage.",
+      "Screenshot of Battery Health from Settings > Battery > Battery Health.",
+      "Screenshot of carrier or SIM status from Settings > General > About.",
+      "Video or photo of the screen displaying full white, full black, and color patterns.",
+      "Photo of the serial number on the phone or box."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model cannot be confirmed from the photos, and critical claims like battery health, unlock status, and operational condition are unverifiable remotely. Without proof, the item cannot be priced accurately and carries significant hidden risks."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 85426,
+    "input_tokens": 2792,
+    "output_tokens": 1037,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "7811b11dc61b9199a0d7637f1f424110",
+    "error": null
+  }
+}

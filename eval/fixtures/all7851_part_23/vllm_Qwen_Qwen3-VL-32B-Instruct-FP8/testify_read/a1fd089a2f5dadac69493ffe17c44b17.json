@@ -1,0 +1,104 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: A dark blue iPhone with a triple-camera setup and a large camera module. The back has stickers and a white label with a barcode and partial text 'iPhone 13 Pro Max'.",
+      "Photo 1: The front screen is on, showing iOS with widgets and app icons. The notch is visible, and the screen appears to be in good condition. The phone is held in a hand, with reflections from a glass display case.",
+      "Photo 2: Same as photo 0, showing the back of the phone with the same stickers and label. The label text is partially obscured but appears to read 'iPhone 13 Pro Max'.",
+      "All photos show the phone in a retail environment with other phones in display cases in the background.",
+      "The seller claims it is an 'iPhone 17 Promax', but the label and design match an iPhone 13 Pro Max.",
+      "The phone is described as 'UK used', '1TB', 'eSIM unlocked', and available in 'white and orange', but only one blue phone is shown."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "iPhone 13 Pro Max",
+      "brand": "Apple",
+      "model": "iPhone 13 Pro Max",
+      "read_from": [
+        "photo 0 label",
+        "photo 2 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "iPhone 17 Promax",
+        "verdict": "contradicted",
+        "evidence": "The label on the back of the phone in photo 0 and photo 2 clearly reads 'iPhone 13 Pro Max'. The design, including the camera module and notch, matches the iPhone 13 Pro Max, not the non-existent iPhone 17 Pro Max."
+      },
+      {
+        "claim": "Very mint !!",
+        "verdict": "unverified",
+        "evidence": "The phone appears clean in the photos, but there is no close-up of the screen, edges, or ports to verify condition. Scratches or wear could be hidden."
+      },
+      {
+        "claim": "UK used !!",
+        "verdict": "unverifiable_remote",
+        "evidence": "No proof of origin or usage history is visible. The label and stickers appear to be in Chinese, suggesting a different origin. No UK-specific identifiers (like IMEI, warranty, or packaging) are shown."
+      },
+      {
+        "claim": "1TB !!",
+        "verdict": "unverifiable_remote",
+        "evidence": "The storage capacity cannot be confirmed from the photos. The label does not show storage size. The iPhone 13 Pro Max does not come in 1TB; the max is 1TB only for iPhone 15 Pro Max and later models. This claim is likely false."
+      },
+      {
+        "claim": "Esim unlocked !!",
+        "verdict": "unverifiable_remote",
+        "evidence": "No proof of eSIM functionality or carrier unlock status is visible. The phone is on, but no settings or carrier info is shown."
+      },
+      {
+        "claim": "Available in white and orange",
+        "verdict": "contradicted",
+        "evidence": "Only one blue phone is shown in all photos. No other colors are visible. The claim of availability in white and orange is not supported by the images."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The phone is not an iPhone 17 Pro Max, but an iPhone 13 Pro Max \u2014 a significant model mismatch.",
+        "proof": "A clear shot of the phone's label or settings screen showing the model name.",
+        "if_unproven": "Priced as an iPhone 13 Pro Max, not as the claimed iPhone 17 Pro Max, which does not exist."
+      },
+      {
+        "risk": "The 1TB storage claim is false \u2014 iPhone 13 Pro Max maxes out at 1TB only in later models.",
+        "proof": "A screenshot of the phone's settings showing the model and storage capacity.",
+        "if_unproven": "Priced as a lower-capacity model (e.g., 512GB) or as not meeting the advertised spec."
+      },
+      {
+        "risk": "The phone may be a refurbished or used unit with hidden damage or software issues.",
+        "proof": "Close-up shots of the screen, edges, charging port, and camera lenses, plus a video of the phone turning on and off.",
+        "if_unproven": "Priced as used with potential defects, not as 'very mint'."
+      },
+      {
+        "risk": "The phone may not be eSIM unlocked or may have carrier restrictions.",
+        "proof": "A screenshot of the phone's settings showing 'Carrier' or 'Cellular' with 'No SIM' or 'Unlocked' status.",
+        "if_unproven": "Priced as potentially locked, reducing value."
+      },
+      {
+        "risk": "The phone may be imported from China or another region, not UK as claimed, affecting warranty and compatibility.",
+        "proof": "A clear shot of the IMEI label or settings screen showing the country of origin or carrier.",
+        "if_unproven": "Priced as non-UK, which may affect resale or serviceability."
+      }
+    ],
+    "proof_requests": [
+      "A clear photo of the phone's label or settings screen showing the exact model name and storage capacity.",
+      "A screenshot of the phone's settings showing carrier status and eSIM unlock status.",
+      "Close-up photos of the screen, edges, and ports to verify condition.",
+      "A video of the phone turning on, off, and showing the home screen and settings."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller claims an iPhone 17 Pro Max, but the photos show an iPhone 13 Pro Max. The 1TB claim is unverifiable and likely false. Multiple critical claims (model, storage, unlock status, origin) cannot be confirmed from the current photos. The item cannot be priced accurately without proof of these key attributes."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 108615,
+    "input_tokens": 2791,
+    "output_tokens": 1331,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "a1fd089a2f5dadac69493ffe17c44b17",
+    "error": null
+  }
+}

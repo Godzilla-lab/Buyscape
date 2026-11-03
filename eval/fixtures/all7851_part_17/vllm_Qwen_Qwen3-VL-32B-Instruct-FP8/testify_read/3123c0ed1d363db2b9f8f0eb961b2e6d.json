@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Front view of a silver laptop with black keyboard, HP logo on screen bezel, 'EliteBook' text on palm rest, Intel Core i5 sticker (not i7 as claimed), and a watermark 'GOLD TECHNOLOGIES POSTED ON JIJI'.",
+      "Photo 1: Side angle of the same laptop, screen on with Windows 10/11 default wallpaper, HP logo visible, same Intel Core i5 sticker, watermark present.",
+      "Photo 2: Closed laptop lid, showing a grey finish with a circular 'dy' logo (not HP), suggesting a possible rebrand or non-genuine HP product. Watermark present."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": null,
+      "read_from": [
+        "photo 0 screen bezel",
+        "photo 0 palm rest (EliteBook)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP folio Intel core i7",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 and Photo 1 show an Intel Core i5 sticker, not i7. Also, the model name 'EliteBook' is visible, not 'Folio'."
+      },
+      {
+        "claim": "backlight keyboard",
+        "verdict": "unverified",
+        "evidence": "No photo shows the keyboard lit in dark conditions. The keyboard appears to be standard black keys without visible backlighting in the current lighting."
+      },
+      {
+        "claim": "working perfectly great like brand new",
+        "verdict": "unverifiable_remote",
+        "evidence": "No video or functional demonstration is provided. The screen is on, but no proof of full functionality (e.g., ports, battery, performance)."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The laptop may be a rebranded or non-genuine HP product, as indicated by the 'dy' logo on the lid.",
+        "proof": "Photo of the bottom chassis or service tag to confirm the actual manufacturer and model.",
+        "if_unproven": "Priced as a generic or rebranded laptop, which is significantly lower than genuine HP EliteBook."
+      },
+      {
+        "risk": "The keyboard may not have backlighting as claimed.",
+        "proof": "Photo of the keyboard in a dark room with backlighting activated.",
+        "if_unproven": "Priced as a non-backlit keyboard, which reduces value."
+      },
+      {
+        "risk": "The CPU is Intel Core i5, not i7 as claimed, which affects performance and price.",
+        "proof": "Photo of the system information screen (e.g., Windows About or CPU-Z) showing the exact CPU model.",
+        "if_unproven": "Priced as an i5 laptop, not i7, which is a major downgrade."
+      },
+      {
+        "risk": "The laptop may have hidden damage or wear not visible in photos, such as hinge issues, screen dead pixels, or battery degradation.",
+        "proof": "Video showing full opening/closing, screen test with white background, and battery health check.",
+        "if_unproven": "Priced as potentially damaged or degraded, with lower value."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the bottom chassis or service tag to confirm the actual model and manufacturer.",
+      "Photo of the system information screen showing the exact CPU model.",
+      "Photo of the keyboard with backlighting turned on in a dark room.",
+      "Video showing the laptop opening/closing, screen test with white background, and battery health check."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller's claims about the CPU (i7) and backlight keyboard are contradicted or unverified by the photos. The 'dy' logo on the lid raises concerns about authenticity. Without proof of the actual model, CPU, and functionality, a reliable price cannot be determined. The item must be verified before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 71045,
+    "input_tokens": 2159,
+    "output_tokens": 882,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "3123c0ed1d363db2b9f8f0eb961b2e6d",
+    "error": null
+  }
+}

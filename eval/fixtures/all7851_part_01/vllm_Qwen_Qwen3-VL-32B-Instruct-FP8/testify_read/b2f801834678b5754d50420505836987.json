@@ -1,0 +1,98 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Front view of a black Dell laptop, screen off, keyboard visible with backlit keys, Dell logo on bezel, Intel Core sticker on palm rest.",
+      "Photo 1: Closed lid view, Dell logo centered, white sticker on bottom right with handwritten text, background shows other laptops in boxes.",
+      "Photo 2: Bottom view of laptop, ventilation grilles, regulatory labels, and model label visible: 'Latitude 5480'.",
+      "All photos show a watermark: 'DE BIG EAGLE CONCEPTS'.",
+      "The laptop appears to be in used condition with minor scuffs and dust."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Dell",
+      "model": "Latitude 5480",
+      "read_from": [
+        "photo 2 bottom label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "dell 5480 i5 6th gen",
+        "verdict": "supported",
+        "evidence": "Model 'Latitude 5480' is visible in photo 2. The 'i5 6th gen' claim is unverified but plausible for this model; no CPU sticker or BIOS screen shown."
+      },
+      {
+        "claim": "keyboard light",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows backlit keys with visible illumination around the keys, indicating backlighting is present."
+      },
+      {
+        "claim": "8gb ram",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal photos or system specs shown. RAM is not visible in any photo."
+      },
+      {
+        "claim": "256 ssd",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal photos or system specs shown. Storage type and size cannot be confirmed from photos."
+      },
+      {
+        "claim": "processor (cpu): intel core i5-6200u or...",
+        "verdict": "unverified",
+        "evidence": "No CPU sticker or BIOS screen shown. The model Latitude 5480 commonly uses i5-6200U, but not confirmed."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "RAM may not be 8GB",
+        "proof": "Photo of open laptop showing RAM slots and modules, or a system information screenshot.",
+        "if_unproven": "priced as 4GB or lower, which reduces value significantly."
+      },
+      {
+        "risk": "SSD may not be 256GB or may be a mechanical drive",
+        "proof": "Photo of internal drive bay or system information screenshot showing storage type and size.",
+        "if_unproven": "priced as HDD or smaller SSD, which reduces value."
+      },
+      {
+        "risk": "Battery health may be poor or non-functional",
+        "proof": "Video of battery charging and discharging, or battery health report from system diagnostics.",
+        "if_unproven": "priced as if battery is dead or degraded, reducing usability."
+      },
+      {
+        "risk": "Screen may have dead pixels, burn-in, or backlight issues",
+        "proof": "Video of screen displaying full white, full black, and color gradients to check for defects.",
+        "if_unproven": "priced as if screen has defects, which reduces value."
+      },
+      {
+        "risk": "Laptop may have internal damage or non-working ports",
+        "proof": "Video of all ports being tested with appropriate cables or devices.",
+        "if_unproven": "priced as if ports are non-functional, reducing usability."
+      }
+    ],
+    "proof_requests": [
+      "Photo or video of the system information screen showing RAM, storage, and CPU details.",
+      "Video of the screen displaying full white, full black, and color gradients.",
+      "Video of all ports being tested with cables or devices.",
+      "Photo of the internal drive bay or RAM slots.",
+      "Battery health report or video of battery charging and discharging."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is confirmed as Dell Latitude 5480, but critical specs like RAM, SSD, and CPU are unverified. Hidden risks such as battery health, screen defects, and port functionality cannot be assessed from current photos. These factors significantly affect price and usability, so proof is required before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 81375,
+    "input_tokens": 2806,
+    "output_tokens": 978,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "b2f801834678b5754d50420505836987",
+    "error": null
+  }
+}

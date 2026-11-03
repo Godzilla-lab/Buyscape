@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the product box for a sewing machine. The box is labeled 'Sewing Machine WITH TWO SPEED CONTROL' and lists features: 'Sews all sorts of fabric', 'Sews sleeves', 'Dual speed', 'Double stitch'. The model number 'JYSM-301' is visible on the right side of the box. The brand 'FATIMA' is watermarked on the image, but not clearly printed on the box.",
+      "Photo 1 shows the actual sewing machine. It is white with pink knobs and controls. The machine appears used, with visible dirt, stains, and scratches on the body. The needle and presser foot are in place, and the thread is threaded through the machine. The control panel has 'ON/OFF' and 'L/H' (likely low/high speed) switches, matching the 'two speed control' claim. The machine is not shown in operation."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "mini sewing machine",
+      "brand": "FATIMA",
+      "model": "JYSM-301",
+      "read_from": [
+        "photo 0 box, right side",
+        "photo 0 box, top right corner"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Electric Pink mini sewing machine with two speed control",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows a white machine with pink knobs and controls. Photo 0 box confirms 'WITH TWO SPEED CONTROL' and 'JYSM-301' model, which matches the visual."
+      },
+      {
+        "claim": "sews all sort of fabric",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a functional claim. The machine's capability to sew all fabrics cannot be verified from photos alone. The box claims it, but no proof of performance is shown."
+      },
+      {
+        "claim": "sews sleeves",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a functional claim. The machine may be capable, but no demonstration or proof is provided in the photos."
+      },
+      {
+        "claim": "Free Gratis",
+        "verdict": "unverified",
+        "evidence": "Photo 0 mentions 'Free Gratis' at the bottom, but no accessories or included items are shown in photo 1. The content of the 'gratis' is not visible."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The machine may not be functional or may have internal damage.",
+        "proof": "A video showing the machine powered on, running at both low and high speeds, and stitching fabric.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The machine has visible wear and tear, including dirt, scratches, and possible plastic damage, which may affect performance or resale value.",
+        "proof": "Close-up photos of the stained and scratched areas, especially around the needle plate and base, to assess depth and extent.",
+        "if_unproven": "priced as heavily used, with cosmetic and potential mechanical wear"
+      },
+      {
+        "risk": "The 'Free Gratis' items are not shown, and may not be included.",
+        "proof": "Photo of the included accessories or a list from the seller.",
+        "if_unproven": "priced without any bonus items"
+      }
+    ],
+    "proof_requests": [
+      "Video of the machine in operation, showing both speeds and stitching.",
+      "Close-up photos of the machine's base, needle plate, and any damaged areas.",
+      "Photo or list of any included accessories (free gratis)."
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a FATIMA JYSM-301 mini sewing machine. The photos confirm the two-speed control and pink accents. While functional claims are unverifiable, the item can be priced at its worst case (not working, heavily used) based on visible condition. The risks are noted and priced conservatively."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 69346,
+    "input_tokens": 2038,
+    "output_tokens": 885,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "d17f0322a9f1f90b780620b48b3565f7",
+    "error": null
+  }
+}

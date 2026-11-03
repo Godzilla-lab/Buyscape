@@ -1,0 +1,89 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the NVIDIA System Information window, listing a GeForce GTX 1050 graphics card, Windows 10 Pro 64-bit OS, and 4096 MB dedicated video memory.",
+      "Photo 1 shows a black Dell laptop on a stand, screen displaying a police car wallpaper, with the Dell logo visible below the screen and an Intel Core i7 sticker on the lower right of the palm rest.",
+      "Photo 2 shows the same laptop from a side angle, revealing ports on the left side (USB, HDMI, etc.) and the textured palm rest. The screen displays the same wallpaper.",
+      "No physical labels, serial numbers, or model stickers are visible on the laptop chassis in any photo.",
+      "The seller claims the model is XPS 15 9570, brand Dell, with 8th gen Intel Core i7 processor."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "laptop",
+      "brand": "Dell",
+      "model": null,
+      "read_from": [
+        "photo 1 screen (Dell logo)",
+        "photo 2 screen (Dell logo)",
+        "photo 1 sticker (Intel Core i7)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "model: xps 15 9570",
+        "verdict": "unverified",
+        "evidence": "No model label or serial number visible in any photo. The Dell logo is present, but not the XPS 15 9570 model designation."
+      },
+      {
+        "claim": "brand: dell",
+        "verdict": "supported",
+        "evidence": "Dell logo visible on the bezel below the screen in photo 1 and photo 2."
+      },
+      {
+        "claim": "processor: intel core i7 processor",
+        "verdict": "supported",
+        "evidence": "Intel Core i7 sticker visible on the lower right of the palm rest in photo 1 and photo 2."
+      },
+      {
+        "claim": "generation: 8th gen",
+        "verdict": "unverifiable_remote",
+        "evidence": "No system information window showing CPU details. The Intel sticker does not specify the generation. The GTX 1050 is typically paired with 7th or 8th gen CPUs, but this is not proof."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The laptop may not be the claimed XPS 15 9570 model, possibly a different Dell model (e.g., Inspiron or Latitude) with similar specs.",
+        "proof": "A clear photo of the bottom chassis or hinge area showing the model label (e.g., 'XPS 15 9570') or a screenshot of the System Information window showing the exact model name.",
+        "if_unproven": "Priced as a generic Dell laptop with i7 and GTX 1050, not as the premium XPS 15 9570."
+      },
+      {
+        "risk": "The processor may not be 8th gen, possibly 7th gen or lower, affecting performance and value.",
+        "proof": "A screenshot of the System Information window showing the CPU name (e.g., Intel Core i7-8750H) or the Device Manager/Properties window with CPU details.",
+        "if_unproven": "Priced as a laptop with unspecified i7 generation, which may be lower than 8th gen."
+      },
+      {
+        "risk": "The laptop may have physical damage or wear not visible in the photos, such as screen dead pixels, keyboard issues, or hinge problems.",
+        "proof": "A close-up video or photo of the screen under different lighting, keyboard keys, and hinge movement.",
+        "if_unproven": "Priced assuming minor wear, but with a discount for potential unseen damage."
+      },
+      {
+        "risk": "The laptop may not be in working condition or may have software issues (e.g., Windows activation, drivers).",
+        "proof": "A video showing the laptop booting up, running a benchmark, and accessing system settings.",
+        "if_unproven": "Priced as not working, since 'works' is unproven."
+      }
+    ],
+    "proof_requests": [
+      "A clear photo of the bottom chassis or hinge area showing the model label.",
+      "A screenshot of the System Information window showing the CPU name and model.",
+      "A video showing the laptop booting up and running a simple task (e.g., opening a browser).",
+      "A close-up photo of the screen under different lighting to check for dead pixels."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and processor generation cannot be confirmed from the current photos. The laptop is identifiable as a Dell with an Intel Core i7 and GTX 1050, but without proof of the exact model and CPU generation, it cannot be priced accurately. The risks of misrepresentation and hidden defects require additional verification."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 98083,
+    "input_tokens": 2323,
+    "output_tokens": 1103,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "b7ecfc06cc2a34e644e666569d2b9dcf",
+    "error": null
+  }
+}

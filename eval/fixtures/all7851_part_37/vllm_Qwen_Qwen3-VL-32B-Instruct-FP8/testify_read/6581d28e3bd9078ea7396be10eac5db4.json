@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows two black rectangular batteries stacked vertically on a concrete floor.",
+      "The top battery has a red cap on one terminal and a silver cap on the other, with visible cracks and dirt on the casing.",
+      "The bottom battery has a label with the word 'SUNPOWER' visible on its side.",
+      "Both batteries have metal handles attached to their sides.",
+      "The casing of the top battery shows signs of wear, including scratches and possible acid leakage near the top edge.",
+      "The background includes a weathered wooden door and a concrete wall."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "inverter battery",
+      "brand": "SUNPOWER",
+      "model": null,
+      "read_from": [
+        "photo 0 side label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "We are buyer of dead solar battery in FCT, Abuja.",
+        "verdict": "unverifiable_remote",
+        "evidence": "The seller's words state they are buyers, but the photo shows batteries for sale, not purchase. No proof of buyer status is visible."
+      },
+      {
+        "claim": "Used, scrap inverter battery buyer in Abuja.",
+        "verdict": "unverifiable_remote",
+        "evidence": "The photo shows used batteries, but the seller's role as a buyer is not verifiable from the image."
+      },
+      {
+        "claim": "Free...",
+        "verdict": "unverified",
+        "evidence": "The word 'Free' is incomplete and context is missing. No evidence in photo confirms what is free."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery may be damaged or non-functional due to visible cracks and possible acid leakage.",
+        "proof": "Close-up photo of the top battery showing the crack and leakage area, with a multimeter test showing voltage.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Battery capacity or health is unknown; may be depleted or degraded.",
+        "proof": "Video or photo of a load test or multimeter reading under load.",
+        "if_unproven": "priced as scrap"
+      },
+      {
+        "risk": "Brand or model not fully visible; may not be SUNPOWER or may be counterfeit.",
+        "proof": "Clear photo of the label on the bottom battery showing full brand and model details.",
+        "if_unproven": "priced as generic used battery"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the label on the bottom battery showing full brand and model.",
+      "Close-up of the top battery's crack and leakage area.",
+      "Video or photo of a multimeter test under load to verify functionality."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a used inverter battery, but critical details like model, full condition, and functionality are missing. The seller's claims about being a buyer are not verifiable from the photo. Proof is needed to assess damage, functionality, and brand authenticity before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 60303,
+    "input_tokens": 1961,
+    "output_tokens": 679,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "6581d28e3bd9078ea7396be10eac5db4",
+    "error": null
+  }
+}

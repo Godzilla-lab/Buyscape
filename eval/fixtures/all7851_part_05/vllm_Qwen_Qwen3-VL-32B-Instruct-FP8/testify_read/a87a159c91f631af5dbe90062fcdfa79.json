@@ -1,0 +1,69 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a white split air conditioner with the indoor unit on top and outdoor unit below, both labeled 'SAMSUNG'.",
+      "The outdoor unit has a visible fan grille, wiring, and a water hose attached.",
+      "The indoor unit has a control panel on the right side with buttons and a small display.",
+      "The unit appears to be in a storage or workshop environment with other appliances nearby.",
+      "No remote control, filters, or indoor hanger are visible in the photos.",
+      "The brand 'SAMSUNG' is clearly visible on the indoor unit in all three photos."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "split air conditioner",
+      "brand": "SAMSUNG",
+      "model": null,
+      "read_from": [
+        "photo 0 indoor unit",
+        "photo 1 indoor unit",
+        "photo 2 indoor unit"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Tokunbo samsung split air conditioner with the remote, indoor hanger, water hose, filters",
+        "verdict": "unverified",
+        "evidence": "The remote, indoor hanger, and filters are not visible in any photo. The water hose is visible in photo 0, so that part is supported."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The unit may not be functional or may have internal damage not visible in photos.",
+        "proof": "A video showing the unit turning on, cooling, and the fan operating, or a technician's inspection report.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The model and capacity (e.g., 1.5HP, 2HP) are not visible, which affects pricing.",
+        "proof": "A clear photo of the model label on the indoor or outdoor unit, or the rating plate.",
+        "if_unproven": "priced at the lowest common model in the market"
+      },
+      {
+        "risk": "The unit may be missing critical components like the remote or filters, which are claimed to be included.",
+        "proof": "Photos of the remote, filters, and indoor hanger included with the unit.",
+        "if_unproven": "priced as missing accessories"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the model label on the indoor or outdoor unit.",
+      "Photo of the remote control, filters, and indoor hanger.",
+      "Video of the unit operating (cooling and fan function)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The brand is confirmed as Samsung, but the model, functionality, and inclusion of claimed accessories (remote, filters, indoor hanger) are not verifiable from current photos. Without proof of these, the item cannot be priced accurately and carries significant hidden risks."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 51204,
+    "input_tokens": 1988,
+    "output_tokens": 623,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "a87a159c91f631af5dbe90062fcdfa79",
+    "error": null
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the back of a black smartphone with a large circular camera module, ZEISS branding, and 'vivo' logo at the bottom.",
+      "Photo 1 and Photo 2 show the 'About phone' screen with 'Device name: vivo X80 Pro', 'Processor: Snapdragon 8 Gen 1', 'RAM: 12 + 8 GB', 'Phone storage: 256 GB', and 'Android version: 15'.",
+      "The phone's screen is clear and legible in both photos.",
+      "The seller claims it is a single SIM phone, but no SIM tray or settings screen is shown to verify this."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "smartphone",
+      "brand": "vivo",
+      "model": "X80 Pro",
+      "read_from": [
+        "photo 1 screen",
+        "photo 2 screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "The phone very sharp",
+        "verdict": "unverified",
+        "evidence": "The screen is clear in photos 1 and 2, but 'sharp' is subjective and not verifiable remotely without testing display quality."
+      },
+      {
+        "claim": "single sim vivo x80 pro",
+        "verdict": "unverifiable_remote",
+        "evidence": "No SIM tray or settings screen is shown. The 'About phone' screen does not indicate SIM count. The model X80 Pro is typically dual SIM, so this claim is suspicious without proof."
+      },
+      {
+        "claim": "not dual sim",
+        "verdict": "unverifiable_remote",
+        "evidence": "Same as above \u2014 no visual proof of SIM configuration. The 'About phone' screen does not show SIM details."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The phone may be dual SIM, contradicting the seller's claim of single SIM.",
+        "proof": "Photo of the SIM tray or a settings screen showing SIM configuration.",
+        "if_unproven": "Priced as dual SIM, which is the standard for this model and may reduce value if the buyer specifically wants single SIM."
+      },
+      {
+        "risk": "The phone may be a clone or modified device, not genuine vivo X80 Pro.",
+        "proof": "Photo of the device's IMEI or serial number from the settings or physical label, and a screenshot of the device's model in the settings with a trusted source verification.",
+        "if_unproven": "Priced as a generic or unverified device, which could be significantly lower than genuine X80 Pro."
+      },
+      {
+        "risk": "The phone may have software tampering or be a repackaged device (e.g., Android 15 is not official for vivo X80 Pro).",
+        "proof": "Screenshot of the 'Software information' section showing the exact build number and official firmware version.",
+        "if_unproven": "Priced as potentially modified or unofficial, which may affect performance and warranty."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the SIM tray showing the number of SIM slots.",
+      "Screenshot of the 'Software information' section showing the build number and firmware version.",
+      "Photo of the device's IMEI or serial number from the settings or physical label."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identified as vivo X80 Pro from the 'About phone' screen, but the claim of being single SIM is unverifiable remotely and contradicts the typical configuration of this model. There are also risks of software modification or non-genuine device. Proof of SIM configuration and device authenticity is needed before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 71847,
+    "input_tokens": 3579,
+    "output_tokens": 815,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "e3d4e962a620c76fbb92f225b7c907d0",
+    "error": null
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a smartphone with an iOS home screen, displaying the date as Thursday 29, with app icons including Messages, Calendar, Camera, etc. The phone has a notch and rounded corners, typical of recent iPhones. The hand holding it wears a white Apple Watch band.",
+      "Photo 1 shows the back of the same phone, which is pink. It has a dual-camera setup in a pill-shaped module. A white sticker is affixed to the back with Chinese text and details: 'iPhone 16 Plus', '\u5bb9\u91cf:512GB', 'MXV73', '\u7535\u6c60\u5bff\u547d:93%', '\u5145\u7535\u6b21\u6570:490', 'iOS\u7248\u672c:26.0.1', 'LL/A', '\u65e0\u9501', and a barcode with number 359410897965453.",
+      "The sticker includes Chinese characters, suggesting the phone may be from a Chinese market or reseller.",
+      "The phone's model name 'iPhone 16 Plus' is written on the sticker in photo 1, but this is not a real model \u2014 Apple has not released an iPhone 16 Plus as of 2024. The current models are iPhone 15 series.",
+      "The iOS version listed is 26.0.1, which does not exist \u2014 the current iOS version is around 17.x as of 2024.",
+      "The serial number on the sticker is 359410897965453, which is unusually long for an Apple serial number (typically 12 characters).",
+      "The background in both photos shows a glass display case with multiple boxed phones, suggesting a retail or reseller environment."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "smartphone",
+      "brand": "Apple",
+      "model": null,
+      "read_from": [
+        "photo 0 screen",
+        "photo 1 sticker"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Very mint !! Uk used !! No scratches !!",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows the front screen, which appears clean, but no close-up of edges or back is provided to verify 'no scratches'. Photo 1 shows the back, but the sticker covers part of it. The 'UK used' claim cannot be verified from photos."
+      },
+      {
+        "claim": "iPhone 16 plus !! 512gb !!",
+        "verdict": "contradicted",
+        "evidence": "Photo 1 sticker says 'iPhone 16 Plus', but this model does not exist. Apple's current lineup is iPhone 15 series. The 512GB capacity is stated on the sticker, which is plausible, but the model name is false."
+      },
+      {
+        "claim": "eSIM unlocked !!",
+        "verdict": "unverified",
+        "evidence": "The sticker says '\u65e0\u9501' (unlocked in Chinese), which supports the claim, but without verification of carrier settings or IMEI check, this remains unverified. The 'LL/A' on the sticker suggests it may be a global model, which is often unlocked."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The phone is not an iPhone 16 Plus \u2014 it is likely a fake or mislabeled device, possibly an iPhone 15 or older model with a sticker altered to say 'iPhone 16 Plus'.",
+        "proof": "A clear photo of the phone's back without the sticker, showing the actual model engraving (e.g., near the camera module or bottom edge), or a screenshot of the Settings > General > About section showing the actual model name and serial number.",
+        "if_unproven": "Priced as a non-existent model, which would be worthless or significantly discounted \u2014 treated as a mislabeled or fake device."
+      },
+      {
+        "risk": "The iOS version 26.0.1 is invalid \u2014 this suggests the sticker is fake or the phone is not genuine.",
+        "proof": "A screenshot of the Settings > General > Software Update screen showing the actual iOS version.",
+        "if_unproven": "Priced as a non-functional or fake device, since the software version is impossible."
+      },
+      {
+        "risk": "The serial number is invalid \u2014 359410897965453 is too long and does not match Apple's format.",
+        "proof": "A screenshot of the Settings > General > About section showing the actual serial number.",
+        "if_unproven": "Priced as a fake or non-genuine device, since the serial number is invalid."
+      },
+      {
+        "risk": "Battery health is 93% with 490 charge cycles \u2014 this may be inaccurate or manipulated.",
+        "proof": "A screenshot of the battery health from Settings > Battery > Battery Health (or equivalent) showing the actual cycle count and maximum capacity.",
+        "if_unproven": "Priced as having unknown battery health \u2014 treated as potentially degraded."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of Settings > General > About showing the actual model name and serial number.",
+      "Screenshot of Settings > General > Software Update showing the actual iOS version.",
+      "Screenshot of Settings > Battery > Battery Health showing the actual battery condition and cycle count.",
+      "Photo of the phone's back without the sticker, showing any engraving or model markings.",
+      "Photo of the original box or packaging, if available."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller claims an iPhone 16 Plus, which does not exist, and provides a sticker with impossible iOS version and invalid serial number. The photos do not confirm the actual model or software state. Without proof of the real model and software, the item cannot be priced accurately and may be a fake or mislabeled device."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 102912,
+    "input_tokens": 2289,
+    "output_tokens": 1291,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "f2214e5b7812f3d14c1a54c81e9c518a",
+    "error": null
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: A black iPhone with a dual-camera setup and Apple logo is held in hand. A sticker with '16' and '128' is visible on the back, suggesting model and storage. The background shows a sign for 'GEE POINT TRADING'.",
+      "Photo 1: The phone's screen shows 'Battery Health' with 'Maximum Capacity: 97%', 'Cycle Count: 279', and 'Manufacture Date: March 2025'. The time on the phone is 9:18. The same 'GEE POINT TRADING' sign is in the background.",
+      "Photo 2: The phone's lock screen shows time '9:18', date 'Mon Oct 26', and a blue abstract wallpaper. The same 'GEE POINT TRADING' sign is visible in the background.",
+      "All photos show the same hand holding the phone, with a silver metal watch on the wrist. The watermark 'POSTED ON JIJI GEE POINT' is present on all images.",
+      "The 'Manufacture Date: March 2025' in photo 1 is impossible \u2014 Apple iPhone 16 has not been released as of 2024, and March 2025 is in the future."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "iPhone",
+      "brand": "Apple",
+      "model": null,
+      "read_from": [
+        "photo 0: Apple logo on back",
+        "photo 1: iOS interface and Battery Health screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Model: Apple iPhone 16",
+        "verdict": "unverified",
+        "evidence": "The phone has a dual-camera setup and design consistent with iPhone 14/15 series, not iPhone 16. No visible model name or number. The 'Manufacture Date: March 2025' in photo 1 is impossible, suggesting the screen is fake or edited."
+      },
+      {
+        "claim": "Storage: 128GB",
+        "verdict": "unverified",
+        "evidence": "A sticker with '128' is visible on the back in photo 0, but this is not proof. No settings screen showing storage capacity is shown."
+      },
+      {
+        "claim": "Colour: Black",
+        "verdict": "supported",
+        "evidence": "Photo 0 clearly shows the phone is black."
+      },
+      {
+        "claim": "Camera: Advanced dual-camera system",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows a dual-camera module on the back."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The phone is not an iPhone 16, but an older model (likely iPhone 14 or 15) being misrepresented.",
+        "proof": "A clear shot of the phone's back showing the model name or a settings screen showing the model and iOS version.",
+        "if_unproven": "Priced as an older iPhone model, not iPhone 16."
+      },
+      {
+        "risk": "The 'Manufacture Date: March 2025' is fake \u2014 the phone may be older or the screen is edited.",
+        "proof": "A video or screenshot of the Settings > General > About screen showing the actual model and serial number, or a video of the phone booting up.",
+        "if_unproven": "Priced as a used phone with unknown age, with lower value due to potential tampering."
+      },
+      {
+        "risk": "The battery health screen may be fake or edited.",
+        "proof": "A video of the phone navigating to Settings > Battery > Battery Health, or a screenshot taken without watermark.",
+        "if_unproven": "Priced as if battery health is unknown, which reduces value."
+      },
+      {
+        "risk": "The phone may be stolen or have a blacklisted IMEI.",
+        "proof": "A video of the phone showing Settings > General > About > IMEI, or a check via official Apple or Nigerian telecom verification.",
+        "if_unproven": "Priced as if IMEI is unknown, which reduces value and increases risk."
+      }
+    ],
+    "proof_requests": [
+      "Video or screenshot of Settings > General > About screen showing the actual model name and serial number.",
+      "Video of the phone booting up and showing the lock screen without watermark.",
+      "Screenshot of the phone's storage settings to verify 128GB capacity.",
+      "Video of the battery health screen without watermark to verify authenticity."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The phone is claimed to be an iPhone 16, but the 'Manufacture Date: March 2025' is impossible, and the design matches older models. The battery health screen may be fake. Without proof of the actual model and authenticity, the item cannot be priced accurately. The risks of misrepresentation and tampering are high."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 90962,
+    "input_tokens": 2795,
+    "output_tokens": 1097,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "1f71576866057aecf3b83f625f420757",
+    "error": null
+  }
+}

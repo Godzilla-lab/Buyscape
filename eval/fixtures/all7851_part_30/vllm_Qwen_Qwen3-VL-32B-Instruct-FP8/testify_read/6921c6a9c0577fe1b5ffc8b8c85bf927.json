@@ -1,0 +1,69 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 and 1 show the same hard drive label from different angles, with clear HP branding and specifications.",
+      "The label reads: 1.2TB 10K SAS, HP Model EG1200F DNJT, HP P/N 726480-001, manufactured 09SEP2014.",
+      "The drive is marked as made in Thailand, with firmware HPD6.",
+      "Photo 2 shows the bottom edge of the drive with a black tray or carrier, likely for server installation.",
+      "The drive is 2.5-inch form factor, as indicated by size and tray.",
+      "No visible damage to the casing or label in any photo.",
+      "Watermark 'I.G SERVERTECH POSTED ON JIJI' is present on all photos."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "server hard drive",
+      "brand": "HP",
+      "model": "EG1200F DNJT",
+      "read_from": [
+        "photo 0 label",
+        "photo 1 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP Proliant 1.2TB 10k SAS 6G 2.5 Hard Drive DL380 DL360 G10",
+        "verdict": "supported",
+        "evidence": "Photo 0 and 1 show 1.2TB 10K SAS drive, 2.5-inch form factor, and HP model EG1200F DNJT, which is compatible with DL380 and DL360 G10 servers. The 6G SAS is implied by SAS 6G standard for this model."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Drive may be faulty or have bad sectors",
+        "proof": "A SMART report or diagnostic test video showing the drive spinning up and being recognized by a system.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Drive may have been removed from a failed server and is not functional",
+        "proof": "Video of the drive being powered on and detected in a server or external enclosure.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Drive may have been wiped or have residual data, but not verified",
+        "proof": "Proof of data wipe or clean disk utility report.",
+        "if_unproven": "priced as is, with data risk"
+      }
+    ],
+    "proof_requests": [
+      "Video of the drive being powered on and recognized in a system.",
+      "SMART report or diagnostic test results.",
+      "Proof of data wipe or clean disk utility report."
+    ],
+    "decision": "price",
+    "reason": "The drive is clearly identified as an HP 1.2TB 10K SAS 2.5-inch server drive, model EG1200F DNJT, compatible with DL380 and DL360 G10. All seller claims are supported by visible label data. Hidden risks include functionality and data status, which are priced conservatively as not working until proven."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 58829,
+    "input_tokens": 2381,
+    "output_tokens": 704,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "6921c6a9c0577fe1b5ffc8b8c85bf927",
+    "error": null
+  }
+}

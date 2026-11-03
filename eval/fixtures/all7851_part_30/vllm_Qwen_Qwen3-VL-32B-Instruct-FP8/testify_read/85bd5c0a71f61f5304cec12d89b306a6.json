@@ -1,0 +1,88 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: A silver laptop with the HP logo on the lid, held in a hand against a wooden surface. The laptop appears to be closed.",
+      "Photo 1: The same laptop open, showing a Windows 'System Information' screen. The screen displays details like processor (Intel Core i5), RAM (8GB), and storage (512GB SSD). The keyboard and trackpad are visible. The HP logo is also visible on the lower bezel.",
+      "Photo 2: The back of the laptop, showing a silver chassis with a speaker grille, a small sticker (possibly Windows or Intel), and hinges. The laptop appears to be a 2-in-1 convertible model due to the visible hinges allowing rotation.",
+      "All photos show a watermark: 'POSTED ON JIJI VICKY COMPUTERS EMAB'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "convertible laptop",
+      "brand": "HP",
+      "model": "HP ProBook x360 11 G5",
+      "read_from": [
+        "photo 1 screen: 'HP ProBook x360 11 G5' is visible in the System Information window under 'System Model'.",
+        "photo 0: HP logo on lid.",
+        "photo 2: Back panel design consistent with x360 series."
+      ]
+    },
+    "claims": [
+      {
+        "claim": "It's convertible",
+        "verdict": "supported",
+        "evidence": "Photo 2 shows the back of the laptop with hinges designed for 360-degree rotation, typical of convertible laptops. The model name 'x360' in photo 1 also supports this."
+      },
+      {
+        "claim": "It's portable",
+        "verdict": "supported",
+        "evidence": "The laptop is being held in one hand in all photos, indicating a lightweight and compact design suitable for portability."
+      },
+      {
+        "claim": "It's durable",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible signs of damage, but durability cannot be assessed from photos alone. No proof of drop tests, material quality, or wear and tear history."
+      },
+      {
+        "claim": "as clean as seen",
+        "verdict": "supported",
+        "evidence": "All visible surfaces (lid, keyboard, screen, back) appear clean and free of major smudges, stains, or debris in the photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery health or capacity may be degraded",
+        "proof": "A screenshot of the battery health report from Windows (e.g., using Command Prompt or third-party tool) showing cycle count and remaining capacity.",
+        "if_unproven": "priced as if battery is degraded (e.g., 50% capacity or less), which reduces value for portable use."
+      },
+      {
+        "risk": "Screen may have dead pixels, burn-in, or hinge issues",
+        "proof": "A video or photo showing the screen displaying solid colors (black, white, red, green, blue) and full movement of the hinge through all positions.",
+        "if_unproven": "priced as if screen has minor defects or hinge is stiff, reducing value."
+      },
+      {
+        "risk": "Internal components may be faulty or not as advertised (e.g., SSD not 512GB, RAM not 8GB)",
+        "proof": "A screenshot of the system information from a trusted tool (like HWiNFO or Speccy) showing exact specs, or a video of the device running a benchmark or stress test.",
+        "if_unproven": "priced as if specs are not as advertised, which could be a major downgrade."
+      },
+      {
+        "risk": "Laptop may have been water-damaged or has hidden physical damage",
+        "proof": "Close-up photos of the keyboard, ports, and internal components (if possible) showing no signs of corrosion or liquid damage.",
+        "if_unproven": "priced as if there is potential water damage, which significantly reduces value."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of battery health report.",
+      "Video or photo of screen displaying solid colors and hinge rotating fully.",
+      "Screenshot of system specs from a trusted tool (HWiNFO or Speccy).",
+      "Close-up photos of keyboard, ports, and internal components for signs of damage."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and key claims (convertible, portable, clean) are supported by the photos. However, critical hidden risks like battery health, screen quality, and internal component authenticity cannot be verified remotely and significantly affect value. The item cannot be priced accurately without proof of these aspects."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 83105,
+    "input_tokens": 2778,
+    "output_tokens": 1043,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "85bd5c0a71f61f5304cec12d89b306a6",
+    "error": null
+  }
+}

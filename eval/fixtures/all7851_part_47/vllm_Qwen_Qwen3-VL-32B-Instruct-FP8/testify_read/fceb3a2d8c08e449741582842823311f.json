@@ -1,0 +1,112 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Front view of a silver laptop with a black keyboard, screen on showing Windows desktop with a beach wallpaper. 'ELITEBOOK' is visible on the keyboard bezel. Watermark 'SPRINGS FAVOUR COMPUTERS' is overlaid.",
+      "Photo 1: Laptop in tent mode, screen angled forward, keyboard visible. Same watermark. The hinge allows 360-degree rotation, indicating a 2-in-1 design.",
+      "Photo 2: Closed laptop lid, silver finish, HP logo (three diagonal lines) centered. Watermark present. Background shows 'SPRING FAVOUR COMPUTER' sign.",
+      "All photos show a clean, well-lit setup with a marble surface and branded backdrop, suggesting a professional listing."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "EliteBook 640 G9",
+      "read_from": [
+        "seller's text",
+        "photo 0 keyboard bezel: 'ELITEBOOK'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP EliteBook 640 G9",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows 'ELITEBOOK' on the keyboard bezel, and seller's text matches known model naming. HP logo on lid (photo 2) confirms brand."
+      },
+      {
+        "claim": "12th gen Intel Core i5-1235U",
+        "verdict": "unverifiable_remote",
+        "evidence": "No system information, BIOS, or sticker visible. Cannot confirm CPU from photos alone."
+      },
+      {
+        "claim": "Keyboard light",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows backlit keys with visible illumination under the keys, consistent with keyboard light."
+      },
+      {
+        "claim": "256 SSD",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal photos or system specs visible. Cannot confirm storage size or type from photos."
+      },
+      {
+        "claim": "8GB RAM",
+        "verdict": "unverifiable_remote",
+        "evidence": "No system information or internal photos. Cannot confirm RAM from photos."
+      },
+      {
+        "claim": "3 USB ports",
+        "verdict": "unverified",
+        "evidence": "No side or rear views of the laptop shown. Ports are not visible in any photo."
+      },
+      {
+        "claim": "HDMI",
+        "verdict": "unverified",
+        "evidence": "No side or rear views shown. HDMI port not visible in any photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "CPU is not the claimed i5-1235U or is a lower-tier model",
+        "proof": "Photo of system information screen (e.g., Windows About or BIOS) showing CPU model.",
+        "if_unproven": "priced as lower-end CPU (e.g., i3 or older gen), reducing value"
+      },
+      {
+        "risk": "RAM is less than 8GB or not upgradeable",
+        "proof": "Photo of open laptop showing RAM slots and modules, or system information screen showing installed RAM.",
+        "if_unproven": "priced as 4GB or non-upgradable, reducing value"
+      },
+      {
+        "risk": "SSD is not 256GB or is a slow SATA drive instead of NVMe",
+        "proof": "Photo of system information screen showing storage details, or internal photo of SSD.",
+        "if_unproven": "priced as smaller or slower storage, reducing value"
+      },
+      {
+        "risk": "Missing ports (e.g., no HDMI or fewer than 3 USB ports)",
+        "proof": "Photo of left and right sides of the laptop showing all ports.",
+        "if_unproven": "priced as missing ports, reducing value"
+      },
+      {
+        "risk": "Battery health is poor or not included",
+        "proof": "Photo of battery health in Windows Power Management or a photo of the battery being removed.",
+        "if_unproven": "priced as battery not included or degraded, reducing value"
+      },
+      {
+        "risk": "Laptop has physical damage not visible in photos (e.g., hinge wear, screen dead pixels, keyboard issues)",
+        "proof": "Close-up video or photo of hinge, screen edges, and keyboard under different lighting.",
+        "if_unproven": "priced as potentially damaged, reducing value"
+      }
+    ],
+    "proof_requests": [
+      "Photo of system information screen (Windows About or BIOS) showing CPU, RAM, and storage details.",
+      "Photo of both left and right sides of the laptop showing all ports (USB, HDMI, etc.).",
+      "Photo of battery health in Windows Power Management or battery removal.",
+      "Close-up video or photo of hinge, screen edges, and keyboard under different lighting to check for damage or dead pixels."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identifiable as HP EliteBook 640 G9, but critical specifications (CPU, RAM, SSD, ports) cannot be verified from the photos. Hidden risks related to hardware specs and physical condition affect pricing. Proof is needed to confirm claims and assess true value."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 91810,
+    "input_tokens": 2814,
+    "output_tokens": 1173,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "fceb3a2d8c08e449741582842823311f",
+    "error": null
+  }
+}

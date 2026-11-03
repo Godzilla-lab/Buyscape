@@ -1,0 +1,74 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Three photos show a large brown cardboard box standing upright.",
+      "The box has printed text: 'CanadianSolar 300W MONO' and a small solar cell graphic.",
+      "The box appears to be new and unopened, with no visible damage.",
+      "The background shows a concrete staircase and another similar box to the right.",
+      "Watermark 'BIG FUTURE SOLAR ENERGY' is visible across all photos.",
+      "No solar panel is visible \u2014 only the packaging."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "300W solar panel",
+      "brand": "CanadianSolar",
+      "model": "300W MONO",
+      "read_from": [
+        "photo 0 box label",
+        "photo 1 box label",
+        "photo 2 box label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "300w CANADIAN SOLAR PANEL 72c",
+        "verdict": "supported",
+        "evidence": "The box in all three photos clearly shows 'CanadianSolar 300W MONO'. The '72c' (72-cell) is a common configuration for 300W mono panels and is consistent with the model, though not explicitly printed on the box."
+      },
+      {
+        "claim": "It\u2019s available with 25 years warranty",
+        "verdict": "unverifiable_remote",
+        "evidence": "The warranty claim cannot be verified from the photos. No warranty document, label, or serial number is visible. The box does not show warranty details."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The panel may be counterfeit or not genuine Canadian Solar",
+        "proof": "A clear photo of the panel itself, showing the brand label, serial number, and cell layout, or a photo of the warranty certificate.",
+        "if_unproven": "priced as potentially counterfeit, which would reduce value significantly"
+      },
+      {
+        "risk": "The panel may be damaged or defective inside the box",
+        "proof": "A photo of the unboxed panel showing front and back, including junction box and frame condition.",
+        "if_unproven": "priced as possibly damaged, which would reduce value"
+      },
+      {
+        "risk": "The panel may not be 300W as claimed",
+        "proof": "A photo of the panel's nameplate or label showing the exact model and power rating.",
+        "if_unproven": "priced as possibly underpowered, which would reduce value"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the unboxed solar panel showing front and back, including brand label and serial number.",
+      "Photo of the nameplate or label on the panel showing exact model and power rating.",
+      "Photo of the warranty certificate or document, if available."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identified as a CanadianSolar 300W MONO panel from the box, but critical risks remain unproven: authenticity, condition, and actual power rating. The warranty claim is unverifiable. Without proof of the panel itself, the price cannot be determined confidently."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 59777,
+    "input_tokens": 2791,
+    "output_tokens": 701,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "60f985349c7d40657768a19c7a1fa082",
+    "error": null
+  }
+}

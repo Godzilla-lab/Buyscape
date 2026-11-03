@@ -1,0 +1,73 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows two identical stainless steel machines with 'DINGLI PACKAGING MACHINERY' branding on blue panels at the top.",
+      "Each machine has a control panel with buttons and a digital display, a hopper, and a sealing and cutting mechanism at the bottom.",
+      "The machines are in a dirty, cluttered environment with debris and tires on the ground.",
+      "Photo 1 shows one machine wrapped in plastic, with a white label partially visible that appears to say 'MODEL: AS1000'.",
+      "Photo 2 shows the same machine inside a wooden crate, wrapped in plastic, indicating it is being prepared for shipping or storage.",
+      "The seller claims it is a 'fairly used AS1000 sachet water production machine' and that it is 'still in good shape and working'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "sachet water production machine",
+      "brand": "DINGLI PACKAGING MACHINERY",
+      "model": "AS1000",
+      "read_from": [
+        "photo 0 top panel",
+        "photo 1 white label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "A few months fairly used AS1000 sachet water production machine.",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows a label with 'MODEL: AS1000' and the machine appears to be in used condition, not new, consistent with 'fairly used'."
+      },
+      {
+        "claim": "it's still a good shape and working",
+        "verdict": "unverified",
+        "evidence": "Photos show the machine is clean and intact, but there is no visual proof of operation. No video or photo of it running or producing sachets."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The machine may not be working despite the seller's claim.",
+        "proof": "A video clip showing the machine in operation, filling and sealing sachets.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The machine may have hidden mechanical or electrical faults not visible in photos.",
+        "proof": "A close-up video or photo of the internal components, especially the filling mechanism and control panel, during operation.",
+        "if_unproven": "priced at lower end of used range"
+      },
+      {
+        "risk": "The machine may not be suitable for sachet water production (e.g., wrong configuration or missing parts).",
+        "proof": "A photo or video showing the machine producing water sachets, or a close-up of the nozzle and sealing mechanism.",
+        "if_unproven": "priced as general packaging machine, not specialized for water"
+      }
+    ],
+    "proof_requests": [
+      "Video of the machine in operation, producing sachets.",
+      "Close-up of the control panel and internal components during operation.",
+      "Photo or video showing the machine producing water sachets to confirm suitability."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The machine is identified as a DINGLI AS1000 sachet water production machine, but the claim that it is working cannot be verified from the photos. Without proof of operation, it must be priced as not working, and key risks like functionality and suitability for water sachets remain unproven."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 59274,
+    "input_tokens": 2941,
+    "output_tokens": 745,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "30dafc094d303e0716b07a015161c38b",
+    "error": null
+  }
+}

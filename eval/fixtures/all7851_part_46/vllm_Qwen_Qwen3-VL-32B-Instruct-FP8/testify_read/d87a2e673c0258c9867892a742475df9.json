@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the front of a smartphone with a notch, displaying the lock screen with 'Swipe up to unlock' and time '2:30'. The screen has a watermark 'POSTED ON JIJI MEDIACRACY MARKET'.",
+      "Photo 1 shows the back of a white smartphone with a single vertical camera lens and an Apple logo. Below the logo, 'iPhone' is visible, and a small sticker is partially covering the text. A blue striped case with an Apple logo is placed next to it.",
+      "The phone in photo 1 has a single rear camera, consistent with iPhone XR design.",
+      "The screen in photo 0 shows no visible cracks or damage, but reflections and glare make detailed inspection difficult.",
+      "The back of the phone in photo 1 shows no major scratches or dents, but the sticker may obscure serial or model info.",
+      "The seller claims it is an iPhone XR 64 GB and mentions conversion to '17 pro or 18 pro', which is not a real product and likely a misstatement or scam."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "iPhone XR",
+      "brand": "Apple",
+      "model": "iPhone XR",
+      "read_from": [
+        "photo 1 back: 'iPhone' text and single vertical camera module"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "iPhone XR 64 GB",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows the back of the phone with 'iPhone' branding and single vertical camera, consistent with iPhone XR. The 64 GB storage cannot be verified from photos but is a common variant."
+      },
+      {
+        "claim": "can be converted to 17 pro or 18 pro",
+        "verdict": "unverifiable_remote",
+        "evidence": "No such models exist; this is likely a misstatement or scam. No evidence in photos supports this claim."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Phone may be stolen or blacklisted",
+        "proof": "IMEI number check via official Apple or Nigerian telecom database.",
+        "if_unproven": "priced as potentially blacklisted, which reduces value significantly"
+      },
+      {
+        "risk": "Screen damage not visible in photos",
+        "proof": "Close-up video or photo of screen under different lighting, especially around edges and corners.",
+        "if_unproven": "priced as possibly damaged, reducing value"
+      },
+      {
+        "risk": "Battery health or performance issues",
+        "proof": "Screenshot of battery health from Settings > Battery > Battery Health.",
+        "if_unproven": "priced as possibly degraded battery, reducing value"
+      },
+      {
+        "risk": "Water damage or internal issues",
+        "proof": "Photo of the SIM tray and charging port, or a video showing the phone being turned on and used.",
+        "if_unproven": "priced as possibly damaged internally, reducing value"
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of battery health from Settings > Battery > Battery Health.",
+      "Close-up photo of the screen under different lighting to check for cracks or dead pixels.",
+      "Photo of the SIM tray and charging port to check for water damage.",
+      "IMEI number for verification (ask seller to provide it)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The phone is identifiable as an iPhone XR, but critical risks like battery health, screen condition, and potential blacklisting cannot be assessed from current photos. The claim about 'conversion to 17 pro or 18 pro' is unverifiable and likely misleading. Proof is needed to price accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 65425,
+    "input_tokens": 2289,
+    "output_tokens": 812,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "d87a2e673c0258c9867892a742475df9",
+    "error": null
+  }
+}

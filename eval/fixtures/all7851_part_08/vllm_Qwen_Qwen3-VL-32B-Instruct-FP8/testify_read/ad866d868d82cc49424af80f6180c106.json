@@ -1,0 +1,100 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: A closed silver laptop with an Apple logo, held in hand. A pink sticker on the back reads 'MacBook Air 2022, M2, 16/512, P947X7D TFT, CC: 315 87%, Port: 1234'.",
+      "Photo 1: The same laptop open, showing a macOS login screen with a beach wallpaper. The keyboard is visible, with a Touch ID button on the right side of the spacebar. The screen has a noticeable reflection and glare.",
+      "Photo 2: A closer view of the back of the laptop, same pink sticker as in photo 0, with the same text. The Apple logo is slightly smudged or damaged.",
+      "The laptop appears to be a MacBook Air, based on design and sticker text.",
+      "The sticker includes a serial number-like code 'P947X7D TFT' and 'CC: 315 87%', which may refer to cycle count or battery health.",
+      "No visible damage to the body or screen from these angles, but reflections make screen condition hard to assess."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "MacBook Air",
+      "brand": "Apple",
+      "model": null,
+      "read_from": [
+        "photo 0 sticker",
+        "photo 2 sticker"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "MacBook Air 2022",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 2 show a pink sticker with 'MacBook Air 2022' written on it."
+      },
+      {
+        "claim": "M2 chip",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 2 show 'M2' on the sticker."
+      },
+      {
+        "claim": "16gb RAM",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 2 show '16/512' on the sticker, which implies 16GB RAM."
+      },
+      {
+        "claim": "512gb storage",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 2 show '16/512' on the sticker, which implies 512GB storage."
+      },
+      {
+        "claim": "Works",
+        "verdict": "unverified",
+        "evidence": "Photo 1 shows the login screen, but no proof of full functionality (e.g., booting into desktop, running apps, battery health)."
+      },
+      {
+        "claim": "Battery health 87%",
+        "verdict": "supported",
+        "evidence": "Photo 2 sticker says 'CC: 315 87%', which is consistent with battery health reporting."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery health may be misrepresented or degraded beyond 87%.",
+        "proof": "A screenshot of the macOS Battery Health info (System Settings > Battery > Battery Health) showing the actual cycle count and condition.",
+        "if_unproven": "Priced as if battery is degraded, possibly requiring replacement soon."
+      },
+      {
+        "risk": "Screen damage or dead pixels not visible due to glare and reflections.",
+        "proof": "A photo of the screen with a solid white or black background, taken in good lighting, to check for dead pixels or cracks.",
+        "if_unproven": "Priced as if screen has minor to moderate damage, reducing value."
+      },
+      {
+        "risk": "The device may be stolen, gray market, or have a tampered serial number.",
+        "proof": "A clear photo of the serial number engraved on the bottom of the laptop, or a screenshot from Apple's Check Coverage page with the serial number.",
+        "if_unproven": "Priced as if it is a gray market or unverified unit, with lower value and higher risk."
+      },
+      {
+        "risk": "Keyboard or trackpad malfunction not visible in photos.",
+        "proof": "A video showing the keyboard typing and trackpad scrolling and clicking.",
+        "if_unproven": "Priced as if keyboard or trackpad may be faulty, reducing value."
+      }
+    ],
+    "proof_requests": [
+      "A clear photo of the serial number engraved on the bottom of the laptop.",
+      "A screenshot from Apple's Check Coverage page with the serial number.",
+      "A photo of the screen with a solid white background to check for dead pixels or damage.",
+      "A video showing the keyboard typing and trackpad functioning.",
+      "A screenshot of the macOS Battery Health info showing cycle count and condition."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a MacBook Air with the claimed specs based on the sticker, but critical functionality and condition risks (battery, screen, serial authenticity, keyboard/trackpad) cannot be verified from the current photos. Proof is needed to price accurately and avoid hidden defects."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 87024,
+    "input_tokens": 2784,
+    "output_tokens": 1115,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "ad866d868d82cc49424af80f6180c106",
+    "error": null
+  }
+}

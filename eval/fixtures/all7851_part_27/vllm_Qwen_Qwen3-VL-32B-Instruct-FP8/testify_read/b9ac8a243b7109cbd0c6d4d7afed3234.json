@@ -1,0 +1,85 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 and Photo 1 show the same white iPhone held in hand, with a label on the back.",
+      "The label on the phone's back is clearly visible and reads 'Apple iPhone 14 Pro Max 256GB' in photo 0 and photo 1.",
+      "The phone has a triple-camera system in a square module, consistent with iPhone 14 Pro Max design.",
+      "The phone appears to be in good physical condition with no visible cracks or dents.",
+      "The background shows a glass display case with other phones, and a sign that says 'SEADOT GROUP'.",
+      "The label also includes a barcode and some serial/IMEI information, but it is not fully legible.",
+      "The seller's text mentions 'Mint Europe', '88% 89% battery health', and 'physical sim E-sim'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "iPhone 14 Pro Max",
+      "brand": "Apple",
+      "model": "iPhone 14 Pro Max",
+      "read_from": [
+        "photo 0 label",
+        "photo 1 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Mint Europe used iPhone 14 Pro Max 256GB",
+        "verdict": "supported",
+        "evidence": "The label on the phone in photo 0 and photo 1 clearly states 'Apple iPhone 14 Pro Max 256GB'."
+      },
+      {
+        "claim": "physical sim E-sim",
+        "verdict": "unverifiable_remote",
+        "evidence": "The SIM tray or settings cannot be seen in the photos. This can only be verified by checking the phone's settings or physically inspecting the SIM tray."
+      },
+      {
+        "claim": "88% 89% battery health",
+        "verdict": "unverifiable_remote",
+        "evidence": "Battery health is not visible in the photos. It requires checking the phone's settings or using diagnostic software."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery health is not 88-89% as claimed",
+        "proof": "A screenshot from the phone's settings showing battery health percentage.",
+        "if_unproven": "Priced as if battery is degraded (e.g., 70% or lower), which reduces value significantly."
+      },
+      {
+        "risk": "Phone is not unlocked or has carrier restrictions",
+        "proof": "A screenshot of the phone's settings showing 'Carrier' or 'Network' status, or a test call to a different network.",
+        "if_unproven": "Priced as if it may be locked to a carrier, reducing value."
+      },
+      {
+        "risk": "Phone has been repaired or has hidden damage",
+        "proof": "A full 360-degree video or photos showing all edges, ports, and screen for cracks or repairs.",
+        "if_unproven": "Priced as if it may have hidden damage, reducing value."
+      },
+      {
+        "risk": "Phone is not genuine or has been cloned (fake IMEI)",
+        "proof": "A screenshot of the phone's settings showing IMEI, or a verification via Apple's official website using the IMEI.",
+        "if_unproven": "Priced as if it may be counterfeit or cloned, which could be worthless."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of battery health from the phone's settings.",
+      "Screenshot of carrier/Network settings to confirm it is unlocked.",
+      "Full 360-degree video or photos showing all sides, ports, and screen.",
+      "Screenshot of IMEI from settings or verification via Apple's website."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and storage are confirmed from the label, but critical claims like battery health, unlock status, and authenticity cannot be verified from the photos alone. Hidden risks such as battery degradation, carrier lock, or fake IMEI could drastically reduce value. Proof is needed before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 74221,
+    "input_tokens": 2298,
+    "output_tokens": 894,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "b9ac8a243b7109cbd0c6d4d7afed3234",
+    "error": null
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows multiple stacked cardboard boxes labeled '500W SOLAR POWER SYSTEM'.",
+      "The boxes are uniform in design, with green and white labeling, and feature icons for handling (fragile, this way up, etc.).",
+      "The text '500W SOLAR POWER SYSTEM' is clearly visible on the front and sides of the boxes.",
+      "No 'Alltop' branding or '1000W' label is visible on any box in the photo.",
+      "No solar panel or generator is visible \u2014 only boxes.",
+      "The boxes appear to be new and sealed, with no visible damage.",
+      "Watermark 'VC SOLAR ELECTRICAL GLOBAL' is present on the photo."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "500W solar power system",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 box label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Alltop solar generator 1000w",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows boxes labeled '500W SOLAR POWER SYSTEM' with no visible 'Alltop' branding or '1000W' specification."
+      },
+      {
+        "claim": "comes with 200w solar panel",
+        "verdict": "unverifiable_remote",
+        "evidence": "No solar panel is visible in the photo; only boxes labeled '500W SOLAR POWER SYSTEM' are shown. The contents of the boxes are not visible."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The item may not be a 1000W generator as claimed, but rather a 500W system.",
+        "proof": "A clear photo of the generator unit or its label showing 'Alltop' brand and '1000W' power rating.",
+        "if_unproven": "priced as 500W system, not 1000W"
+      },
+      {
+        "risk": "The 200W solar panel may not be included or may be damaged.",
+        "proof": "A photo of the solar panel itself, showing its label and condition.",
+        "if_unproven": "priced as not including solar panel"
+      },
+      {
+        "risk": "The generator may be non-functional or defective.",
+        "proof": "A video or photo showing the generator powering a device or its control panel lit up.",
+        "if_unproven": "priced as not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the generator unit showing brand and power rating.",
+      "Photo of the 200W solar panel included.",
+      "Video or photo showing the generator in operation."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The boxes shown are labeled '500W SOLAR POWER SYSTEM', contradicting the seller's claim of a 1000W Alltop generator. The contents and actual specifications are not visible, so the item cannot be priced without further proof. The presence of the solar panel and the generator's functionality are also unverified."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 58083,
+    "input_tokens": 1784,
+    "output_tokens": 710,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "7138e5fb72c02bd2f5752f3af4d392b8",
+    "error": null
+  }
+}

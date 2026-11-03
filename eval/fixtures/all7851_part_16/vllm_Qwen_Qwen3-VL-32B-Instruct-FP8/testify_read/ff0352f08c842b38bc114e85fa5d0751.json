@@ -1,0 +1,85 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: A large all-in-one PC screen wrapped in plastic, with a yellow sticky note on the top left corner reading '4K GEN CORE I7 8GB 1TB'. The screen is on an orange table, and the base is silver.",
+      "Photo 1: Side view of the same unit, showing the Dell logo on the back of the screen, still wrapped in plastic. The stand is silver with a rectangular cutout. Other wrapped units are visible on shelves in the background.",
+      "Photo 2: Close-up of the back panel label. Text reads 'OptiPlex 9030 AIO Series', with a service tag 'FM53V...', service code '33990569', and Mfg. Date '20150817'. A QR code and serial number are also visible."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "all-in-one PC",
+      "brand": "Dell",
+      "model": "OptiPlex 9030 AIO",
+      "read_from": [
+        "photo 2 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Used Dell OptiPlex 9030 all in one PC",
+        "verdict": "supported",
+        "evidence": "Photo 2 shows the label 'OptiPlex 9030 AIO Series' on the back of the unit."
+      },
+      {
+        "claim": "23.8 inches",
+        "verdict": "unverified",
+        "evidence": "No screen size is visible in any photo. The seller's text claims 23.8 inches, but this cannot be confirmed from the images."
+      },
+      {
+        "claim": "i7 8gb 1tb hdd storage",
+        "verdict": "unverifiable_remote",
+        "evidence": "The internal specs (CPU, RAM, storage) are not visible. The yellow sticky note in photo 0 says 'CORE I7 8GB 1TB', but this is not a label from the device itself and could be inaccurate. No internal components are shown."
+      },
+      {
+        "claim": "Windows 10",
+        "verdict": "unverifiable_remote",
+        "evidence": "No screen is on, and no operating system is visible. The OS cannot be confirmed from the photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The internal components (CPU, RAM, storage) may not match the seller's claims.",
+        "proof": "A photo of the BIOS screen or system information screen showing the actual CPU, RAM, and storage details.",
+        "if_unproven": "Priced as if the specs are not as claimed (e.g., lower CPU, less RAM, or smaller SSD)."
+      },
+      {
+        "risk": "The screen may be damaged or have dead pixels, not visible under plastic wrap.",
+        "proof": "A photo of the screen turned on, showing a full white screen or a test pattern to check for defects.",
+        "if_unproven": "Priced as if the screen has defects or is not fully functional."
+      },
+      {
+        "risk": "The unit may not power on or may have hardware faults.",
+        "proof": "A video clip showing the unit powering on, booting, and running the OS.",
+        "if_unproven": "Priced as if the unit does not work."
+      },
+      {
+        "risk": "The screen size may not be 23.8 inches as claimed.",
+        "proof": "A photo with a ruler or known object next to the screen to measure the diagonal.",
+        "if_unproven": "Priced as if the screen is smaller than advertised."
+      }
+    ],
+    "proof_requests": [
+      "Video of the unit powering on and booting into Windows 10.",
+      "Photo of the BIOS or system information screen showing CPU, RAM, and storage details.",
+      "Photo of the screen turned on with a full white screen or test pattern.",
+      "Photo with a ruler or known object next to the screen to confirm the 23.8-inch size."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is confirmed as Dell OptiPlex 9030 AIO from photo 2, but critical claims about specs, screen size, and functionality cannot be verified from the current photos. Hidden risks include mismatched internal components, screen defects, and non-functionality. Proof is needed to price accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 78259,
+    "input_tokens": 2802,
+    "output_tokens": 996,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "ff0352f08c842b38bc114e85fa5d0751",
+    "error": null
+  }
+}

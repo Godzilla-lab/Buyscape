@@ -1,0 +1,97 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Back of a grey iPhone with triple camera setup and Apple logo. The phone is held in a black glove. Background has a lit sign with partial letters 'm' and 'dg', likely 'SkrimGadgets'.",
+      "Photo 1: Right side of the phone showing volume buttons and power button. The side is metallic, and the phone appears to be in good condition.",
+      "Photo 2: Left side of the phone showing the SIM tray and a single button (likely mute switch). The phone has a flat edge design, consistent with iPhone 13 Pro or later models.",
+      "No screen is visible in any photo. No model number, serial number, or internal details are shown.",
+      "The seller claims 'Direct US Used | Physical + E sim | Battery Health : 72% | FaceID | True Tone | No replaced parts...'."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "iPhone",
+      "brand": "Apple",
+      "model": null,
+      "read_from": [
+        "photo 0: Apple logo visible on back"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Direct US Used",
+        "verdict": "unverifiable_remote",
+        "evidence": "No proof of origin or documentation visible in photos. Seller's claim only."
+      },
+      {
+        "claim": "Physical + E sim",
+        "verdict": "unverified",
+        "evidence": "No SIM tray or internal components shown. Cannot confirm dual SIM capability from photos alone."
+      },
+      {
+        "claim": "Battery Health : 72%",
+        "verdict": "unverifiable_remote",
+        "evidence": "No screen shown to verify battery health. Claim cannot be confirmed remotely."
+      },
+      {
+        "claim": "FaceID",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows the triple camera setup and no notch, consistent with iPhone 13 Pro or later, which use FaceID. No front view to confirm, but design supports claim."
+      },
+      {
+        "claim": "True Tone",
+        "verdict": "supported",
+        "evidence": "True Tone is standard on iPhone 13 Pro and later models. Design in photos matches those models."
+      },
+      {
+        "claim": "No replaced parts",
+        "verdict": "unverified",
+        "evidence": "No internal or detailed external inspection visible. Cannot confirm if parts are original."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery health is not 72% or is degraded beyond claim",
+        "proof": "Photo of the screen showing battery health percentage in Settings > Battery > Battery Health.",
+        "if_unproven": "Priced as if battery is degraded (e.g., 50-60% health), which reduces value significantly."
+      },
+      {
+        "risk": "Phone has been repaired or has replaced parts despite claim",
+        "proof": "Close-up of the camera module, screen edges, and internal components (if possible) to check for mismatched screws, glue, or alignment.",
+        "if_unproven": "Priced as if parts may be replaced, which reduces value due to potential reliability issues."
+      },
+      {
+        "risk": "Screen damage or dead pixels not visible in photos",
+        "proof": "Photo of the screen turned on, showing full display with white background and text to check for damage.",
+        "if_unproven": "Priced as if screen may have damage, which reduces value."
+      },
+      {
+        "risk": "Not genuine iPhone or model misrepresented",
+        "proof": "Photo of the back with model number visible (e.g., under the Apple logo or on the bottom edge) or a photo of the Settings > General > About screen showing model name.",
+        "if_unproven": "Priced as a lower-tier model (e.g., iPhone 13 instead of 13 Pro) or as a non-genuine device, which reduces value."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the screen showing battery health percentage.",
+      "Photo of the front screen turned on with white background to check for damage.",
+      "Photo of the Settings > General > About screen to confirm model and serial number.",
+      "Photo of the back showing model number (if any) or close-up of the camera module for alignment check."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model cannot be confirmed from the photos, and critical claims like battery health and no replaced parts cannot be verified remotely. Without proof of model, battery health, and screen condition, the item cannot be priced accurately. The photos show a likely iPhone 13 Pro or later, but confirmation is needed to set the correct price."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 86074,
+    "input_tokens": 2794,
+    "output_tokens": 1042,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "92224d6544039efa0d9fe93a69ed9e75",
+    "error": null
+  }
+}

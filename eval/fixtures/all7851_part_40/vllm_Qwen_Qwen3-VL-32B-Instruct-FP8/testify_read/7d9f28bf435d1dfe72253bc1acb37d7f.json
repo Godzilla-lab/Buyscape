@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows two used car tires side by side, with visible tread patterns and colored tread wear indicators (blue and red lines).",
+      "Photo 1 is a close-up of one tire, showing detailed tread wear, including cracks and uneven wear, especially near the edges.",
+      "Photo 2 shows the sidewall of a tire with visible text: '235/45R18 94V' and the brand name 'Kormo'.",
+      "The tires appear to be used, with significant wear and some damage to the tread.",
+      "The seller mentions 'Belgium tyres useds and rim', but no rim is visible in any photo."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car tires",
+      "brand": "Kormo",
+      "model": "235/45R18 94V",
+      "read_from": [
+        "photo 2 sidewall"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Belgium tyres useds and rim",
+        "verdict": "unverified",
+        "evidence": "The brand 'Kormo' is visible on photo 2, but there is no evidence that it is from Belgium. No rim is visible in any photo."
+      },
+      {
+        "claim": "used tyres",
+        "verdict": "supported",
+        "evidence": "Photos 0 and 1 show visible tread wear, cracks, and uneven wear, confirming they are used."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "tread depth is below legal limit or unsafe for driving",
+        "proof": "A close-up shot of the tread depth measured with a tread depth gauge or a coin test.",
+        "if_unproven": "priced as unsafe or near end-of-life, which reduces value significantly"
+      },
+      {
+        "risk": "internal damage or sidewall cracks not visible from outside",
+        "proof": "A video or photo showing the tire being rotated slowly to inspect the sidewall and inner surface for bulges or cracks.",
+        "if_unproven": "priced as potentially unsafe, with reduced value"
+      },
+      {
+        "risk": "tire is not from Belgium as claimed",
+        "proof": "Documentation or proof of origin, or a clear shot of the tire's manufacturing details including country of origin.",
+        "if_unproven": "priced as unverified origin, which may reduce value if buyer values 'Belgium' as a quality indicator"
+      },
+      {
+        "risk": "no rim included despite seller mentioning 'rim'",
+        "proof": "A photo showing the rim or a clear statement from seller confirming whether rim is included.",
+        "if_unproven": "priced as tires only, with no rim, which reduces value"
+      }
+    ],
+    "proof_requests": [
+      "A close-up photo or video of the tread depth using a tread depth gauge or coin test.",
+      "A video showing the tire rotated slowly to inspect the sidewall for cracks or bulges.",
+      "A clear photo of the tire's manufacturing details including country of origin.",
+      "Confirmation from seller whether the rim is included, and if so, a photo of the rim."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The tires are clearly used and the brand/model is readable, but critical risks like tread depth, internal damage, and the inclusion of a rim are unproven. The claim of 'Belgium' origin is also unverified. Without proof of these, the item cannot be priced accurately and safely."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 61286,
+    "input_tokens": 2772,
+    "output_tokens": 778,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "7d9f28bf435d1dfe72253bc1acb37d7f",
+    "error": null
+  }
+}

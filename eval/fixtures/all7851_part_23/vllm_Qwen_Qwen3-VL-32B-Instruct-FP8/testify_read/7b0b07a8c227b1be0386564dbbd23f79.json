@@ -1,0 +1,69 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black plastic bucket with a white and yellow label.",
+      "The label has the CAT logo (Caterpillar) and text: 'Cat Gear Oil 80W-90', 'SAE 80W-90', '7X-7867', 'CATERPILLAR\u00ae'.",
+      "The bucket is 20L, as indicated on the label.",
+      "The label also shows 'Product Number 130397', 'Batch No.', 'Filling Date 12/2022', and 'Expiry Date 12/2024'.",
+      "The bucket is stacked on top of another identical bucket.",
+      "The label includes distributor information: 'Distributed by: Singapore: Tractors Singapore Limited'.",
+      "There is a watermark 'EKESON MARINE GLOBAL' across the photo."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "Cat Gear Oil 80W-90",
+      "brand": "Caterpillar",
+      "model": "7X-7867",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "For softener of gear",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 label clearly states 'Cat Gear Oil 80W-90', which is a gear oil for lubrication, not a softener. The term 'softener' is misleading and incorrect for this product."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Product may be expired or near expiry",
+        "proof": "Photo 0 shows 'Expiry Date 12/2024' \u2014 if current date is after that, it is expired. If before, it is near expiry.",
+        "if_unproven": "Priced as expired or near-expiry, which reduces value significantly."
+      },
+      {
+        "risk": "Product may be counterfeit or repackaged",
+        "proof": "Close-up of the label showing authenticity marks, holograms, or batch number verification via Caterpillar's official channel.",
+        "if_unproven": "Priced as potentially counterfeit, which reduces value."
+      },
+      {
+        "risk": "Container may be damaged or compromised",
+        "proof": "Photo showing the bucket's seal, lid, and overall condition \u2014 especially if there are leaks, dents, or tampering.",
+        "if_unproven": "Priced as potentially compromised, which reduces value."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the expiry date close-up to confirm it is not expired.",
+      "Photo of the bucket's seal and lid to check for tampering or damage.",
+      "Photo of the batch number and any hologram or authenticity mark on the label.",
+      "Photo of the product being poured or tested to confirm it is not solidified or degraded."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The product is identified as Caterpillar Cat Gear Oil 80W-90, but the seller's claim of it being a 'softener of gear' is contradicted by the label. The expiry date is critical and must be verified. There are also risks of counterfeiting and container damage that must be checked before pricing. Without proof of authenticity and condition, a price cannot be confidently assigned."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 60397,
+    "input_tokens": 1993,
+    "output_tokens": 749,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "7b0b07a8c227b1be0386564dbbd23f79",
+    "error": null
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a white inverter unit with 'SINAI' branding and a digital display, mounted on a wall. An inset image shows solar panels on a roof. A text overlay at the bottom reads '10kw Hybrid Inverter 10kwh Lithium battery'.",
+      "Photo 1 shows a white inverter with 'MUST' branding and 'Solar Inverter' label, mounted above a white battery unit also labeled 'MUST' and 'LiFePo4'.",
+      "Photo 2 shows a yellow inverter with 'SMS' branding and a yellow battery unit labeled 'Lithium Battery'. Wiring and a circuit breaker are visible.",
+      "All photos have a watermark 'NUEL_TECH_ENGINEERING' and 'POSTED ON JIJI'.",
+      "The seller claims a '3.5KVA Solar Pack Installation' with '3.5Kva Inverter (1pc)' and '500W Mono Solar'.",
+      "The text overlays in the photos contradict the seller's description: photo 0 claims 10kW inverter and 10kWh battery; photo 1 shows a MUST inverter and LiFePo4 battery; photo 2 shows SMS inverter and lithium battery."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar power system installation",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "3.5KVA Solar Pack Installation",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 text overlay states '10kw Hybrid Inverter 10kwh Lithium battery', and photo 1 and 2 show different brands and sizes, inconsistent with 3.5KVA."
+      },
+      {
+        "claim": "3.5Kva Inverter (1pc)",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 text overlay says '10kw Hybrid Inverter', photo 1 shows a MUST inverter (no visible rating), photo 2 shows an SMS inverter (no visible rating). No photo shows a 3.5KVA inverter."
+      },
+      {
+        "claim": "500W Mono Solar",
+        "verdict": "unverified",
+        "evidence": "Photo 0 inset shows solar panels, but no visible rating or model. No other photo shows solar panels. Cannot confirm wattage or type from photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Inverter capacity is misrepresented (claimed 3.5KVA vs. 10kW shown)",
+        "proof": "Clear photo of the inverter's nameplate showing its rated capacity.",
+        "if_unproven": "Priced as a 3.5KVA system, but the visual evidence suggests a higher capacity system, which may be overpriced or mislabeled."
+      },
+      {
+        "risk": "Battery capacity and chemistry not confirmed (claimed 3.5KVA pack, but photos show 10kWh LiFePo4)",
+        "proof": "Photo of the battery's nameplate showing capacity and chemistry (e.g., LiFePo4, lead-acid, etc.).",
+        "if_unproven": "Priced as a small battery system, but the visual evidence suggests a larger 10kWh lithium battery, which would be a significant upgrade and affect pricing."
+      },
+      {
+        "risk": "Solar panel wattage and type not confirmed (claimed 500W mono, but no visible rating)",
+        "proof": "Photo of the solar panel's nameplate showing wattage and type (mono, poly, etc.).",
+        "if_unproven": "Priced as a 500W system, but without proof, it may be underpowered or misrepresented."
+      },
+      {
+        "risk": "System not installed as described (photos show different brands and configurations than claimed)",
+        "proof": "Full system photo with all components labeled and nameplates visible, matching the claimed 3.5KVA setup.",
+        "if_unproven": "Priced as a 3.5KVA system, but the photos suggest a larger, more expensive system, which may be a misrepresentation or fraud."
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the inverter's nameplate showing its rated capacity (kVA/kW).",
+      "Clear photo of the battery's nameplate showing capacity (kWh) and chemistry (LiFePo4, lead-acid, etc.).",
+      "Clear photo of the solar panel's nameplate showing wattage and type (mono, poly).",
+      "Photo of the entire system with all components labeled, matching the claimed 3.5KVA setup."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller's claims of a 3.5KVA solar pack are contradicted by the photos, which show a 10kW inverter and 10kWh lithium battery. The system's actual components and specifications cannot be confirmed from the current photos, and the mismatch raises concerns about misrepresentation. Proof of the actual components is required before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 94582,
+    "input_tokens": 2612,
+    "output_tokens": 1142,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "c08a62ccd1d4921059dbdd9b2259987f",
+    "error": null
+  }
+}

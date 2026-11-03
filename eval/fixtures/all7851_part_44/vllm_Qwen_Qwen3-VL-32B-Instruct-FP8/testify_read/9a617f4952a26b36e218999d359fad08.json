@@ -1,0 +1,90 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Three photos show a white HP laptop being held in front of shelves stacked with similar laptops.",
+      "The HP logo is visible on the lid in all photos.",
+      "A barcode sticker with number '11022368' is visible on the top right corner of the lid in photo 0 and photo 2.",
+      "The laptop appears to be closed in all photos; no screen, keyboard, or ports are visible.",
+      "The background shelves contain multiple identical or similar laptops, suggesting bulk stock.",
+      "No visible damage to the lid, but minor scratches or wear may be present."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": null,
+      "read_from": [
+        "photo 0 lid",
+        "photo 1 lid",
+        "photo 2 lid"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Clean UK used laptops",
+        "verdict": "unverifiable_remote",
+        "evidence": "No proof of origin or condition beyond visual inspection; no photos of interior, screen, or keyboard. 'Clean' is subjective and cannot be verified remotely."
+      },
+      {
+        "claim": "10th generation",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible model number or internal specs to confirm generation. The seller's text alone is insufficient."
+      },
+      {
+        "claim": "Core i3",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible CPU label or system information. Cannot be confirmed from photos."
+      },
+      {
+        "claim": "Non touch screen",
+        "verdict": "unverifiable_remote",
+        "evidence": "Screen is closed and not visible. No way to confirm if it is touch or non-touch from current photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Laptop may be non-functional or have internal damage",
+        "proof": "Photo of the laptop powered on, showing screen and keyboard, with system information visible.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Screen may be cracked, dead pixels, or non-touch as claimed",
+        "proof": "Photo of the screen turned on, showing full display and no touch indicators.",
+        "if_unproven": "priced as screen may be damaged or touch screen"
+      },
+      {
+        "risk": "Model and specs may not match claim (e.g., not 10th gen Core i3)",
+        "proof": "Photo of the BIOS screen or system information showing CPU model and generation.",
+        "if_unproven": "priced as unknown specs, likely lower tier"
+      },
+      {
+        "risk": "Battery may be dead or degraded",
+        "proof": "Photo of the laptop running on battery with battery percentage shown.",
+        "if_unproven": "priced as battery may not hold charge"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the laptop powered on, showing screen and system information (BIOS or Windows about page).",
+      "Photo of the keyboard and screen from the front, showing no damage and confirming non-touch.",
+      "Photo of the bottom of the laptop showing model number or serial number.",
+      "Photo of the laptop running on battery with battery percentage visible."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as an HP laptop, but critical claims about generation, CPU, screen type, and condition cannot be verified from the current photos. Hidden risks include non-functionality, incorrect specs, and screen damage. A worst-case price cannot be assigned without proof of working condition and specs."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 66396,
+    "input_tokens": 3238,
+    "output_tokens": 812,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "9a617f4952a26b36e218999d359fad08",
+    "error": null
+  }
+}

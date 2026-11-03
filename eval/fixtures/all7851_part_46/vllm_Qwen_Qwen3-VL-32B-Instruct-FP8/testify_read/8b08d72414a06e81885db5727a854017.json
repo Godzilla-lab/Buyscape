@@ -1,0 +1,90 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Closed silver laptop with Apple logo centered on lid. Watermark 'NICK MARK ENTERPRISE' and 'POSTED ON JIJI' visible. Surface shows minor smudges and fingerprints.",
+      "Photo 1: Laptop open, showing screen with macOS desktop (Catalina or later, based on wallpaper and dock). Keyboard visible with 'MacBook Pro' label above it. Hand holding the device. Background includes white HP box.",
+      "Photo 2: Same closed laptop from different angle, held in hand. Apple logo visible. Watermark same as photo 0. Surface appears slightly scratched or scuffed near bottom edge."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "MacBook Pro",
+      "brand": "Apple",
+      "model": null,
+      "read_from": [
+        "photo 1 screen label: 'MacBook Pro'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Macbook pro 2016",
+        "verdict": "unverified",
+        "evidence": "No model year visible. The 'MacBook Pro' label in photo 1 is consistent with 2016 models, but not definitive. The design (e.g., no Touch Bar) suggests pre-2016 or 2016 model, but cannot confirm year from photos alone."
+      },
+      {
+        "claim": "core i5",
+        "verdict": "unverifiable_remote",
+        "evidence": "No system information visible. Cannot confirm CPU from photos."
+      },
+      {
+        "claim": "8gb ram",
+        "verdict": "unverifiable_remote",
+        "evidence": "No system information visible. Cannot confirm RAM from photos."
+      },
+      {
+        "claim": "256gb ssd",
+        "verdict": "unverifiable_remote",
+        "evidence": "No system information visible. Cannot confirm storage from photos."
+      },
+      {
+        "claim": "mac os",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows macOS desktop with dock, menu bar, and Apple-specific UI elements."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The laptop may not be a 2016 model, or may be a different generation (e.g., 2015 or 2017) with different specs.",
+        "proof": "Photo of the model number label on the bottom of the laptop (usually near the hinge or battery area) or a screenshot of System Report (About This Mac > System Report).",
+        "if_unproven": "Priced as a generic MacBook Pro without year, which may be lower than 2016 model value."
+      },
+      {
+        "risk": "The CPU, RAM, and SSD specifications may not match the seller's claims.",
+        "proof": "Screenshot of 'About This Mac' showing processor, memory, and storage details.",
+        "if_unproven": "Priced as if specs are not confirmed, which may be lower than advertised value."
+      },
+      {
+        "risk": "The laptop may have physical damage not visible in photos, such as screen cracks, hinge issues, or internal damage.",
+        "proof": "Video showing the laptop opening and closing, screen flex test, and close-up of the screen and keyboard.",
+        "if_unproven": "Priced with assumption of minor wear only, but potential for hidden damage reduces value."
+      },
+      {
+        "risk": "The laptop may have been restored or have a non-original SSD or RAM, affecting performance and warranty.",
+        "proof": "Screenshot of System Report showing serial number and hardware details, and possibly a verification of SSD health via Disk Utility.",
+        "if_unproven": "Priced as if original components, but may be lower if non-original or degraded."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of 'About This Mac' showing model year, processor, RAM, and storage.",
+      "Photo or video of the model number label on the bottom of the laptop.",
+      "Video showing the laptop opening and closing, screen flex test, and keyboard function.",
+      "Screenshot of System Report to verify hardware authenticity and SSD health."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a MacBook Pro, but the model year and key specifications (CPU, RAM, SSD) cannot be confirmed from the photos. Without proof of these, the price cannot be accurately determined, and hidden risks (e.g., wrong model, non-original parts, damage) affect valuation. Proof is needed to proceed."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 85735,
+    "input_tokens": 2734,
+    "output_tokens": 1002,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "8b08d72414a06e81885db5727a854017",
+    "error": null
+  }
+}

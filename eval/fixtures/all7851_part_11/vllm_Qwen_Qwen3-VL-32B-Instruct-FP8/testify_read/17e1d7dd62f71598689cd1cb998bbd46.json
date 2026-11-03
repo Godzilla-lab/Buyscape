@@ -1,0 +1,88 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Front view of a monitor wrapped in plastic. The Samsung logo is visible at the bottom center of the bezel. The screen is reflective, showing the seller taking the photo. The monitor has a black frame and stand.",
+      "Photo 1: Rear view of the same monitor, also wrapped in plastic. A white label with technical specifications and certifications (CE, etc.) is visible on the back. The stand is a single black pedestal.",
+      "Photo 2: Side view of the monitor, still wrapped. The thickness of the bezel and the stand are visible. No ports or model number are visible on this side.",
+      "All photos show the monitor fully wrapped in clear plastic, suggesting it is new or unused. No visible damage to the casing or stand.",
+      "No power cable, HDMI cable, or VGA cable is visible in any photo.",
+      "The seller's text claims it is an IPS panel, full color, gaming display with HDMI and VGA inputs."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "computer monitor",
+      "brand": "Samsung",
+      "model": null,
+      "read_from": [
+        "photo 0 screen bezel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Samsung monitor",
+        "verdict": "supported",
+        "evidence": "Photo 0: Samsung logo is clearly visible on the bezel."
+      },
+      {
+        "claim": "HDMI display VGA",
+        "verdict": "unverifiable_remote",
+        "evidence": "No ports are visible in any photo. The back is covered in plastic. The claim cannot be verified from current images."
+      },
+      {
+        "claim": "IPS panel",
+        "verdict": "unverifiable_remote",
+        "evidence": "No technical label or screen specification is visible. The back label is obscured by plastic and too blurry to read. Cannot confirm panel type."
+      },
+      {
+        "claim": "display colour full and gaming",
+        "verdict": "unverifiable_remote",
+        "evidence": "Screen is off and covered in plastic. No display output or color accuracy can be assessed. 'Gaming' is a subjective claim not verifiable from photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Monitor is not functional or has dead pixels",
+        "proof": "A video or photo showing the monitor powered on, displaying a test pattern or image, with no dead pixels or color distortion.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Missing or non-functional ports (HDMI/VGA)",
+        "proof": "Photo of the back of the monitor with plastic removed, clearly showing HDMI and VGA ports.",
+        "if_unproven": "priced as lacking required ports"
+      },
+      {
+        "risk": "Model is not IPS or not suitable for gaming",
+        "proof": "Photo of the back label or user manual showing panel type and specifications.",
+        "if_unproven": "priced as generic TN panel, not premium"
+      },
+      {
+        "risk": "Monitor is used or damaged despite plastic wrap",
+        "proof": "Close-up photo of the screen surface under the plastic, or a photo of the monitor after plastic removal, showing no scratches, cracks, or dead pixels.",
+        "if_unproven": "priced as possibly used or damaged"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the back of the monitor with plastic removed, showing all ports (HDMI, VGA, etc.).",
+      "Photo or video of the monitor powered on, displaying a full-screen test pattern or image.",
+      "Photo of the label on the back with model number and specifications clearly visible.",
+      "Photo of the included cables (HDMI, VGA, power)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The monitor is identified as Samsung, but critical claims (HDMI/VGA ports, IPS panel, functionality) cannot be verified from the current photos. The plastic wrap hides key details, and no proof of working condition or model specifications is available. Without these, the item cannot be priced accurately and carries significant hidden risks."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 78675,
+    "input_tokens": 2155,
+    "output_tokens": 906,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "17e1d7dd62f71598689cd1cb998bbd46",
+    "error": null
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a blue rectangular lithium-ion battery pack with a label reading 'Lion-Battery 48V' and '13S3P'.",
+      "The label lists capacities: 20Ah, 30Ah, 40Ah, 50Ah, 60Ah, 70Ah, 80Ah, 100Ah, with 80Ah highlighted in red.",
+      "Photo 0 also shows a 54.6V charger included, with plug options for US and EU.",
+      "Photo 1 shows the side view with dimensions labeled as 'Size:238*66*60mm'.",
+      "Photo 2 shows the top view of the battery, wrapped in blue shrink wrap, with no visible branding or model.",
+      "All photos have watermarks: 'POSTED ON JIJI' and 'GOODIE BUY'.",
+      "No visible brand name 'Jungla' on any photo.",
+      "No visible 18650 cells or cell configuration details in the photos."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "48V 80Ah lithium-ion battery pack",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Battery brand: Jungla",
+        "verdict": "unverified",
+        "evidence": "No 'Jungla' branding visible in any photo. Seller's text only."
+      },
+      {
+        "claim": "Battery Type: 18650",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible cells or internal structure in photos. 13S3P configuration is shown, which is consistent with 18650 cells, but not proven."
+      },
+      {
+        "claim": "48V 80Ah",
+        "verdict": "supported",
+        "evidence": "Photo 0 label clearly shows '48V' and '80Ah' with 80Ah highlighted."
+      },
+      {
+        "claim": "Includes 54.6V charger",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows an inset image of a 54.6V charger with cables."
+      },
+      {
+        "claim": "Size: 238*66*60mm",
+        "verdict": "supported",
+        "evidence": "Photo 1 has red text overlay stating 'Size:238*66*60mm'."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery may not be genuine 18650 cells or may be misrepresented as 18650 when using different cell types.",
+        "proof": "Close-up photo of the battery cells inside the pack, showing cell type and configuration.",
+        "if_unproven": "Priced as lower-quality or counterfeit, with reduced value."
+      },
+      {
+        "risk": "Battery may be damaged, swollen, or have internal faults not visible externally.",
+        "proof": "Video or photo showing the battery under load, or a close-up of the terminals and casing for signs of swelling or corrosion.",
+        "if_unproven": "Priced as potentially defective, with significant discount."
+      },
+      {
+        "risk": "Charger may be non-functional or incompatible with the battery.",
+        "proof": "Photo of the charger's output voltage and amperage label, or a video showing it charging the battery.",
+        "if_unproven": "Priced as charger not included or non-functional, reducing value."
+      },
+      {
+        "risk": "Battery may not be from 'Jungla' brand as claimed.",
+        "proof": "Photo of the battery's label or casing showing the brand name 'Jungla', or a serial number traceable to Jungla.",
+        "if_unproven": "Priced as unbranded or generic, with lower value."
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the battery cells inside the pack to confirm 18650 type.",
+      "Photo of the battery's label or casing showing the brand 'Jungla'.",
+      "Photo of the charger's output specifications label.",
+      "Video or photo showing the battery under load or being charged."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The battery's identity is known by type (48V 80Ah lithium-ion pack), but critical claims like brand ('Jungla') and cell type (18650) are unverified or unverifiable from current photos. Hidden risks include counterfeit cells, internal damage, and non-functional charger. Proof is needed to price accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 86313,
+    "input_tokens": 2392,
+    "output_tokens": 1058,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "fd4d3d6e2f6fb592799d3801f172621f",
+    "error": null
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Three identical black and silver HP ProDesk small form factor desktops stacked on a cardboard box.",
+      "Each unit has 'hp' logo and 'PRODESK' text on the front panel (photo 0, photo 1).",
+      "Intel Core i3 sticker visible on top of each unit (photo 0, photo 1).",
+      "Stickers also show 'Intel Core i3 7th Gen' and 'Windows 10 Pro' (photo 1).",
+      "Front panel ports: two USB ports, headphone/mic jacks, and power button (photo 0, photo 1).",
+      "Rear panel ports: VGA, DisplayPort, multiple USB, Ethernet, and power input (photo 2).",
+      "Units show minor scuffs and dust, especially on top surfaces (photo 1).",
+      "Box underneath has shipping symbols and 'NICK MARK ENTERPRISE' watermark (photo 0, photo 1, photo 2)."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "small form factor desktop",
+      "brand": "HP",
+      "model": "ProDesk 400 G4",
+      "read_from": [
+        "photo 0 front panel",
+        "photo 1 front panel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP ProDesk 400 G4",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 1 show 'hp' logo and 'PRODESK' text on front panel, consistent with ProDesk 400 G4 model."
+      },
+      {
+        "claim": "Core i3 7th gen",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows Intel Core i3 sticker with '7th Gen' text."
+      },
+      {
+        "claim": "8GB RAM",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows RAM slots or system information; cannot verify from images alone."
+      },
+      {
+        "claim": "256GB SSD",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows internal drive or system specs; cannot verify from images alone."
+      },
+      {
+        "claim": "Windows 11",
+        "verdict": "contradicted",
+        "evidence": "Photo 1 shows 'Windows 10 Pro' sticker; no evidence of Windows 11."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "RAM may not be 8GB",
+        "proof": "Photo of system BIOS or open case showing RAM modules with capacity labels.",
+        "if_unproven": "priced as having less than 8GB RAM"
+      },
+      {
+        "risk": "SSD may not be 256GB or may be faulty",
+        "proof": "Photo of disk management screen or open case showing SSD with capacity label.",
+        "if_unproven": "priced as having smaller or no SSD"
+      },
+      {
+        "risk": "Unit may not power on or have hardware faults",
+        "proof": "Video of unit powering on, booting, and showing desktop.",
+        "if_unproven": "priced as non-working"
+      },
+      {
+        "risk": "Windows 11 claim is false; unit may still run Windows 10",
+        "proof": "Screenshot of Windows version from system settings or about page.",
+        "if_unproven": "priced as Windows 10 only"
+      }
+    ],
+    "proof_requests": [
+      "Video of unit powering on and booting to desktop.",
+      "Screenshot of system information showing RAM and SSD capacity.",
+      "Screenshot of Windows version from Settings > System > About.",
+      "Photo of open case showing RAM and SSD modules with labels."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and CPU generation are confirmed, but RAM, SSD, and OS claims cannot be verified from photos. Hidden risks include incorrect specs and non-functionality. Proof is needed to price accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 74140,
+    "input_tokens": 2778,
+    "output_tokens": 901,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "1a79713487eb1c1232ec3b6767ff7880",
+    "error": null
+  }
+}

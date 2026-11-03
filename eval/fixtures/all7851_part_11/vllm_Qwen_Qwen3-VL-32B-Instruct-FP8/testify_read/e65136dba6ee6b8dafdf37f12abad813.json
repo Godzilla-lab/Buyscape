@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a white industrial sewing machine with a silver metal base, mounted on a white table with a ruler along the front edge. The brand 'Emel' is visible on the top front, and the model 'EM 737D' is labeled on the side.",
+      "Photo 1 shows a different white industrial sewing machine, also with the brand 'Emel' on the side, and the model 'EM 870' labeled on a sticker near the front. The machine has a large handwheel and a grey power cord.",
+      "Both machines appear to be in clean condition with no visible damage or wear.",
+      "The seller claims the machine has no fault and is being sold because the user no longer wants to do tailoring."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "industrial sewing machine",
+      "brand": "Emel",
+      "model": "EM 737D and EM 870",
+      "read_from": [
+        "photo 0 side label",
+        "photo 1 front sticker"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "The machine doesn't have any fault",
+        "verdict": "unverified",
+        "evidence": "Photos show no visible damage, but internal functionality (e.g., motor, needle, thread tension) cannot be assessed remotely. No video or test footage is provided."
+      },
+      {
+        "claim": "is just that the person using it, don't want to do tailoring",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a subjective reason for sale and cannot be verified from photos or text."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Machine may not be functional (e.g., motor failure, broken needle, thread tension issues)",
+        "proof": "Video of the machine operating, including starting, stitching, and stopping smoothly.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Missing parts or accessories (e.g., foot pedal, extra needles, bobbins)",
+        "proof": "Photo showing all included accessories and the foot pedal connected and working.",
+        "if_unproven": "priced as missing accessories"
+      },
+      {
+        "risk": "Machine may be damaged internally or have wear not visible in photos (e.g., worn gears, electrical issues)",
+        "proof": "Close-up video of the needle area, motor, and internal components during operation.",
+        "if_unproven": "priced as potentially damaged"
+      }
+    ],
+    "proof_requests": [
+      "Video of the machine operating, including starting, stitching, and stopping.",
+      "Photo or video showing the foot pedal and all included accessories.",
+      "Close-up of the needle and thread mechanism during operation."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Two different Emel models (EM 737D and EM 870) are shown, but the seller's claim that the machine has no fault cannot be verified remotely. Functionality, accessories, and internal condition are hidden risks that must be proven before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 57739,
+    "input_tokens": 1834,
+    "output_tokens": 688,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "e65136dba6ee6b8dafdf37f12abad813",
+    "error": null
+  }
+}

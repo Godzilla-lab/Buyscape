@@ -1,0 +1,70 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Back of a blue iPhone with a triple-camera module; the top-left lens has a visible crack or damage around the rim. Apple logo is centered. A water bottle labeled 'La Sier' is in the background.",
+      "Photo 1: Front of the same iPhone showing a lit screen with app icons; the display appears intact with no visible cracks or dead pixels. The time shown is 08:31.",
+      "Photo 2: iPhone screen showing 'About' settings: Name: iPhone 1, iOS Version: 16.5, Model Name: iPhone 12 Pro Max, Model Number: MGYF3LL/A, Serial Number: F2J796000263. Storage: 256 GB, 155.46 GB available. The screen is clear and legible.",
+      "All photos show the same hand holding the phone, with a blue phone case lying on the table in the background."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "iPhone 12 Pro Max",
+      "brand": "Apple",
+      "model": "iPhone 12 Pro Max",
+      "read_from": [
+        "photo 2 screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "One camera lens is broken, slight crack at the back.",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows a visible crack or damage around the rim of the top-left camera lens."
+      },
+      {
+        "claim": "Every other thing works perfectly!",
+        "verdict": "unverified",
+        "evidence": "Photos show the screen is on and displaying apps (photo 1) and settings (photo 2), but there is no proof of functionality beyond display. No video or audio test, no camera test, no charging or connectivity test shown."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The cracked lens may affect camera performance or cause further damage to the sensor.",
+        "proof": "A close-up photo or video of the camera module showing the crack and testing the camera output (photos/videos taken with that lens).",
+        "if_unproven": "Priced as having a non-functional or degraded camera module."
+      },
+      {
+        "risk": "The phone may have internal damage or software issues not visible in the photos.",
+        "proof": "A video showing the phone being charged, making a call, using Wi-Fi/Bluetooth, and taking photos with all cameras.",
+        "if_unproven": "Priced as potentially non-functional or with hidden defects."
+      },
+      {
+        "risk": "The phone may be stolen or have an active iCloud lock.",
+        "proof": "A screenshot of the 'Find My' status showing 'This iPhone is not activated' or 'No iCloud lock'.",
+        "if_unproven": "Priced as potentially locked or unusable."
+      }
+    ],
+    "proof_requests": [
+      "A close-up photo or video of the cracked camera lens showing the extent of the damage and a sample photo taken with that lens.",
+      "A video showing the phone being charged, making a call, using Wi-Fi, and taking photos with all cameras.",
+      "A screenshot of the 'Find My' status to confirm no iCloud lock."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is clearly identified as iPhone 12 Pro Max from the settings screen. The crack on the camera lens is visible and supported. However, the claim that 'everything else works perfectly' is unverified, and there are hidden risks such as internal damage, software issues, or iCloud lock. Without proof of functionality and security status, the item cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 66416,
+    "input_tokens": 2154,
+    "output_tokens": 811,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "08791533b38e7d6fc7ab436b07bc4b5f",
+    "error": null
+  }
+}

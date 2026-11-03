@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a stack of white and grey rectangular batteries with white rope handles.",
+      "The top battery has a visible label with the brand 'LEOCH' and model 'LP12-200(12V200AH)'.",
+      "The label states 'Maintenance-free Sealed Lead-acid Battery', 'Made in Malaysia', and includes CE and UL markings.",
+      "The batteries appear to be in a storage or scrap environment with concrete floor and other batteries around.",
+      "Some batteries show signs of dust and minor wear, but no visible damage or leaks."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "inverter battery",
+      "brand": "LEOCH",
+      "model": "LP12-200(12V200AH)",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Sell your used/scrap/Inverter Batteries to Us.",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows used batteries with visible wear and dust, consistent with 'used' or 'scrap' condition."
+      },
+      {
+        "claim": "Sell your used/Scrap/Inverter Batteries, Ups...",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows inverter batteries, which are commonly used with UPS systems."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery may be damaged internally or have reduced capacity despite external appearance.",
+        "proof": "A close-up photo of the battery terminals and casing showing no corrosion, cracks, or swelling, plus a voltage test reading.",
+        "if_unproven": "priced as scrap or low-capacity battery"
+      },
+      {
+        "risk": "Battery may be non-functional or have expired shelf life.",
+        "proof": "A video clip showing the battery being tested with a multimeter or load tester to confirm voltage and health.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Battery may have been improperly stored or exposed to extreme temperatures, affecting performance.",
+        "proof": "Photo of the storage environment showing temperature and humidity conditions, or a statement from seller on storage history.",
+        "if_unproven": "priced at reduced value for potential degradation"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of battery terminals and casing to check for corrosion or damage.",
+      "Video clip of battery being tested with a multimeter or load tester.",
+      "Photo of the storage environment or seller's statement on storage conditions."
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identifiable as a LEOCH LP12-200 inverter battery. The photos support the seller's claim of used/scrap batteries. While internal condition and capacity are unverified, the item can be priced at its worst case (as scrap or low-capacity) based on visible condition and model. Risks are noted and priced conservatively until proven."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 52722,
+    "input_tokens": 1789,
+    "output_tokens": 672,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "a44a1e6f4f6d6bd7057ec7f6df317534",
+    "error": null
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the back of a white iPhone with a single rear camera and Apple logo. The word 'iPhone' is visible below the logo.",
+      "Photo 1 shows the side profile of the phone with volume buttons and a power button, consistent with iPhone XR design.",
+      "Photo 2 shows the iPhone's Battery Health & Charging screen with 'Maximum Capacity' at 77% and a message about degraded battery health.",
+      "The phone has a white back with some minor discoloration or yellowing near the bottom, possibly from aging or heat exposure.",
+      "No visible cracks or major damage on the back or sides in the photos.",
+      "The screen in photo 2 is clear and legible, showing iOS interface."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "iPhone XR",
+      "brand": "Apple",
+      "model": "iPhone XR",
+      "read_from": [
+        "photo 0: 'iPhone' text below Apple logo",
+        "photo 2: iOS Battery Health screen with design consistent with iPhone XR"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "iPhone XR 64gb",
+        "verdict": "unverified",
+        "evidence": "The model is identified as iPhone XR from design and screen, but storage capacity (64GB) is not visible in any photo. No model number or storage info is shown."
+      },
+      {
+        "claim": "Working perfect",
+        "verdict": "unverified",
+        "evidence": "The phone screen is on and showing iOS, but no functional test (e.g., camera, calls, apps) is shown. The battery health screen is visible, but does not confirm full functionality."
+      },
+      {
+        "claim": "Battery health 77%, better than a changed battery",
+        "verdict": "supported",
+        "evidence": "Photo 2 clearly shows 'Maximum Capacity: 77%' in the Battery Health screen. The claim about being 'better than a changed battery' is subjective and unverifiable remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery degradation affecting performance and lifespan",
+        "proof": "A video showing battery drain over time or performance under load (e.g., gaming, video playback).",
+        "if_unproven": "Priced as having reduced battery life and potential throttling, which lowers value."
+      },
+      {
+        "risk": "Hidden physical damage or screen issues not visible in photos",
+        "proof": "A video showing the phone being turned on, camera used, and screen viewed from multiple angles under different lighting.",
+        "if_unproven": "Priced as potentially having screen defects or internal damage, which reduces value."
+      },
+      {
+        "risk": "Storage capacity not matching claimed 64GB",
+        "proof": "A screenshot of the phone's Settings > General > iPhone Storage showing the actual storage capacity.",
+        "if_unproven": "Priced as unknown storage, which could be 128GB or 256GB, but since 64GB is claimed, priced at worst case (lowest value)."
+      },
+      {
+        "risk": "Water damage or non-functional components",
+        "proof": "A video showing the phone being used for calls, camera, and apps, and a close-up of the charging port and speakers.",
+        "if_unproven": "Priced as potentially non-functional or with hidden defects, which reduces value."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of Settings > General > iPhone Storage to confirm 64GB capacity.",
+      "Video showing the phone in use: making a call, using camera, and running apps.",
+      "Close-up video of the charging port and speakers to check for water damage or debris.",
+      "Video of battery drain over 1-2 hours of usage to assess real-world performance."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identified as iPhone XR, but the storage capacity is unverified. The 'working perfect' claim is not proven by the photos. Battery health is confirmed at 77%, but performance and other functional aspects are unverified. Hidden risks like screen defects, water damage, or incorrect storage capacity require additional proof before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 79912,
+    "input_tokens": 2788,
+    "output_tokens": 926,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "3d3b2171ab9ff7eb773e9062249dfdd7",
+    "error": null
+  }
+}

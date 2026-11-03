@@ -1,0 +1,75 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a collage: central image is white granules in a bowl, labeled 'PET APPLICATION', surrounded by images of plastic bottles, containers, and packaging made from PET.",
+      "Photo 1 shows four large white bags stacked, labeled with Chinese text and the brand 'WK' or 'WKQY'.",
+      "The bags have text in Chinese: '\u805a\u916f\u5207\u7247' (polyester chips) and '\u4e07\u90a6\u5851\u6599\u80a1\u4efd\u6709\u9650\u516c\u53f8' (Wanbang Plastic Co., Ltd.).",
+      "The seller claims '1 Ton of food-grade pet resin granules'.",
+      "The bags appear to be 25 kg each (text 'Net Weight: 25 kg' is visible on the bags in photo 1).",
+      "The granules in photo 0 are white, cylindrical, and resemble PET resin pellets.",
+      "The seller's text mentions 'food-grade', but no certification or label in the photos confirms this."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "PET resin granules",
+      "brand": "WKQY",
+      "model": null,
+      "read_from": [
+        "photo 1 bag label",
+        "photo 0 central image"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "1 Ton of food-grade pet resin granules",
+        "verdict": "unverified",
+        "evidence": "Photo 1 shows 4 bags of 25 kg each, totaling 100 kg, not 1 ton. The 'food-grade' claim is not visible on any label or certification in the photos."
+      },
+      {
+        "claim": "high-quality",
+        "verdict": "unverifiable_remote",
+        "evidence": "No quality tests or certifications are visible in the photos. Quality is subjective and cannot be assessed remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The product is not actually 1 ton as claimed, but only 100 kg.",
+        "proof": "A photo showing the total quantity or a weighing scale with the full load.",
+        "if_unproven": "priced as 100 kg, not 1 ton"
+      },
+      {
+        "risk": "The resin is not food-grade as claimed.",
+        "proof": "A photo of a food-grade certification label or test report.",
+        "if_unproven": "priced as non-food-grade, which is lower value"
+      },
+      {
+        "risk": "The material is not PET resin but another type of plastic (e.g., polyester chips as labeled in Chinese).",
+        "proof": "A close-up of the granules with a label or test report confirming PET resin.",
+        "if_unproven": "priced as generic plastic resin, not PET"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the total quantity or a weighing scale showing 1 ton.",
+      "Photo of a food-grade certification or test report.",
+      "Close-up of the granules with a label confirming PET resin.",
+      "Photo of the full batch with a clear view of all bags and their net weight."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller claims 1 ton of food-grade PET resin, but the photos show only 100 kg of material labeled as 'polyester chips' in Chinese, which may not be PET. The food-grade claim is unverified. Without proof of quantity, material type, and certification, the item cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 62029,
+    "input_tokens": 1790,
+    "output_tokens": 762,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "3574318550ff9fa1fcbe77880ff6edd9",
+    "error": null
+  }
+}

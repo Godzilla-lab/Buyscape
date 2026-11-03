@@ -1,0 +1,87 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: A black HP laptop is held open at an angle, showing the back of the lid with the HP logo, part of the keyboard, and the left side of the base. The background is an outdoor street scene with vehicles and people.",
+      "Photo 1: The laptop is shown open from the front, displaying the screen, keyboard, and touchpad. The HP logo is visible on the bezel below the screen. The 'zbook' branding is visible on the palm rest to the left of the touchpad. The keyboard has a standard layout with a numeric keypad on the right.",
+      "Photo 2: A close-up of the lower right corner of the keyboard, showing the numeric keypad and a blue 'Intel Inside Core i5' sticker. A USB port is visible above the sticker.",
+      "The laptop appears to be a business-class model with a sturdy build. The screen is off in all photos. No visible damage to the casing or keyboard is apparent from these angles."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "ZBook",
+      "read_from": [
+        "photo 1 palm rest (zbook)",
+        "photo 0 lid (HP logo)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Hp zbook 15",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows 'zbook' branding on the palm rest. The size appears consistent with a 15-inch model based on proportions, though screen size is not directly measurable."
+      },
+      {
+        "claim": "Core i5",
+        "verdict": "supported",
+        "evidence": "Photo 2 shows a blue 'Intel Inside Core i5' sticker on the lower right of the keyboard."
+      },
+      {
+        "claim": "8gb 500",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible RAM or storage labels. The '8gb 500' likely refers to 8GB RAM and 500GB storage, but this cannot be confirmed from photos. No internal components are shown."
+      },
+      {
+        "claim": "1gb nvidia quadro",
+        "verdict": "unverifiable_remote",
+        "evidence": "No GPU information is visible. The sticker in photo 2 only confirms Intel Core i5. No NVIDIA or Quadro branding is visible on the exterior. This claim cannot be verified remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The laptop may not be functional or may have hardware issues (e.g., screen, battery, ports, or internal components).",
+        "proof": "A video showing the laptop powering on, displaying a desktop, and running basic operations (e.g., opening a browser, checking system specs).",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The RAM and storage specifications (8GB, 500GB) may be inaccurate or upgraded/downgraded.",
+        "proof": "A screenshot of the system information or BIOS showing the installed RAM and storage details.",
+        "if_unproven": "priced as having unknown or lower specs"
+      },
+      {
+        "risk": "The NVIDIA Quadro 1GB graphics card may not be present or may be non-functional.",
+        "proof": "A screenshot of the device manager or GPU information showing the NVIDIA Quadro model and 1GB VRAM.",
+        "if_unproven": "priced as having no dedicated GPU or lower-end integrated graphics"
+      },
+      {
+        "risk": "The laptop may have physical damage not visible in these photos (e.g., cracked screen, hinge issues, keyboard damage, or internal wear).",
+        "proof": "A 360-degree video or additional photos showing all sides, hinges, screen edges, and keyboard in detail.",
+        "if_unproven": "priced as having potential hidden damage"
+      }
+    ],
+    "proof_requests": [
+      "A video showing the laptop powering on and running the operating system.",
+      "A screenshot of the system information or BIOS showing RAM and storage details.",
+      "A screenshot of the device manager or GPU information showing the NVIDIA Quadro model and 1GB VRAM.",
+      "Additional photos or a video showing the screen, hinges, and all sides of the laptop in detail."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and CPU are confirmed, but critical specifications (RAM, storage, GPU) are unverifiable from the photos. The functionality and condition of the laptop are also unknown. Without proof of these, the item cannot be priced accurately and carries significant risk."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 85980,
+    "input_tokens": 2903,
+    "output_tokens": 1025,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "e00b91298a804cb9e71d07db13658f3d",
+    "error": null
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: A pink iPhone with a white label on the back. The label shows 'Model: iPhone 13', 'Capacity: 256GB', and a blue sticker with '256G'. The label also has a 'WARRANTY' stamp and a serial number. The phone has a dual-camera setup.",
+      "Photo 1: The iPhone's 'About' screen is visible, showing 'Model Name: iPhone 13', 'Model Number: MLQA3X/A', 'Serial Number: QH7XRX2CJ', 'Capacity: 256 GB', and 'Available: 240.22 GB'. The iOS version is 26.6.",
+      "Photo 2: The 'Battery Health & Charging' screen shows 'Maximum Capacity: 90%'. The text explains that this is relative to when the battery was new.",
+      "All photos have a watermark: 'DANNY TUNEZ GADGETS' and 'POSTED ON JIJI'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "iPhone 13",
+      "brand": "Apple",
+      "model": "iPhone 13",
+      "read_from": [
+        "photo 0 label",
+        "photo 1 screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "battery condition 100%",
+        "verdict": "contradicted",
+        "evidence": "Photo 2 shows 'Maximum Capacity: 90%' in the Battery Health & Charging screen."
+      },
+      {
+        "claim": "40% with bnpl",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a payment term, not a physical attribute of the phone. Cannot be verified from photos."
+      },
+      {
+        "claim": "164,000",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a price claim, not a physical attribute. Cannot be verified from photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery health is 90%, not 100% as claimed, which may affect performance and longevity.",
+        "proof": "A video showing the battery health screen and the phone's performance under load (e.g., gaming or video playback).",
+        "if_unproven": "Priced as having degraded battery (90% capacity), which reduces value."
+      },
+      {
+        "risk": "The phone may have been repaired or have hidden damage not visible in photos.",
+        "proof": "A full 360-degree video of the phone, including close-ups of the screen, edges, and ports, and a video of the phone being turned on and off, with camera and speaker tests.",
+        "if_unproven": "Priced as potentially having hidden damage or repair history, which reduces value."
+      },
+      {
+        "risk": "The phone may be blacklisted or have activation lock issues.",
+        "proof": "A screenshot of the phone's IMEI check on a trusted site (e.g., Apple's official site or a Nigerian IMEI checker) showing no blacklisting or lock status.",
+        "if_unproven": "Priced as potentially blacklisted or locked, which reduces value significantly."
+      }
+    ],
+    "proof_requests": [
+      "A video showing the phone's battery health screen and performance under load.",
+      "A full 360-degree video of the phone, including close-ups of the screen, edges, and ports, and a video of the phone being turned on and off, with camera and speaker tests.",
+      "A screenshot of the phone's IMEI check on a trusted site showing no blacklisting or lock status."
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as an iPhone 13 with 256GB capacity. The seller's claim of 100% battery condition is contradicted by the 90% shown in Photo 2. The phone's condition is visible, and while there are hidden risks (battery degradation, hidden damage, blacklisting), they are priced at their worst case. The item can be priced based on its current state."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 77752,
+    "input_tokens": 2789,
+    "output_tokens": 921,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "e4cd3c7496c8618a4f764a1551ac9d9f",
+    "error": null
+  }
+}

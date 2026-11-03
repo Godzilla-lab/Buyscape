@@ -1,0 +1,93 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a Samsung Galaxy phone in a hand, screen on with 'SAMSUNG Galaxy' and 'Secured by Knox' visible.",
+      "Photo 1 shows the same phone with the lock screen displaying time '05:34', date '9 June', and 'Limited service' at the top.",
+      "The phone appears to be in a protective case or film, with visible smudges and reflections.",
+      "No physical damage is visible on the front, but the screen has minor dust or smudges.",
+      "The seller claims it is a Samsung S23 Ultra, 5G, working perfectly, and very clean."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "Samsung Galaxy smartphone",
+      "brand": "Samsung",
+      "model": null,
+      "read_from": [
+        "photo 0 screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Samsung S23 Ultra",
+        "verdict": "unverified",
+        "evidence": "The screen shows 'Samsung Galaxy' but not the model. No model label is visible in either photo."
+      },
+      {
+        "claim": "5G network",
+        "verdict": "unverifiable_remote",
+        "evidence": "No network settings or SIM status visible. 'Limited service' on lock screen does not confirm 5G capability."
+      },
+      {
+        "claim": "Physical & eSIM",
+        "verdict": "unverifiable_remote",
+        "evidence": "No SIM tray or settings screen shown. Cannot verify SIM type from photos."
+      },
+      {
+        "claim": "Working perfectly",
+        "verdict": "unverified",
+        "evidence": "Screen is on and displaying time, but no proof of full functionality (camera, charging, apps, etc.)."
+      },
+      {
+        "claim": "Very Clean",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 and 1 show smudges, dust, and reflections on the screen, indicating it is not very clean."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Phone is not a Samsung S23 Ultra",
+        "proof": "Photo of the back of the phone showing model name or a screenshot of Settings > About phone.",
+        "if_unproven": "Priced as a generic Samsung Galaxy phone, not S23 Ultra."
+      },
+      {
+        "risk": "Phone is not 5G capable or has network issues",
+        "proof": "Screenshot of Settings > Network > SIM status showing 5G connectivity or network type.",
+        "if_unproven": "Priced as 4G-only or with network issues."
+      },
+      {
+        "risk": "Phone has hardware damage or non-functional components",
+        "proof": "Video showing camera, charging, speaker, and app functionality.",
+        "if_unproven": "Priced as not working or with unknown functionality."
+      },
+      {
+        "risk": "Phone is stolen or blacklisted",
+        "proof": "Screenshot of IMEI check or carrier verification.",
+        "if_unproven": "Priced as potentially blacklisted or with ownership issues."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the back of the phone showing the model name.",
+      "Screenshot of Settings > About phone showing model and software version.",
+      "Screenshot of network settings showing 5G connectivity.",
+      "Video showing camera, charging, and app functionality.",
+      "IMEI check result or carrier verification."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model cannot be confirmed as S23 Ultra from current photos, and key claims about 5G, SIM type, and condition are unverified or contradicted. Risks include incorrect model, network issues, and hidden damage. Proof is needed to price accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 71885,
+    "input_tokens": 2290,
+    "output_tokens": 841,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "765c146eca67ef44a1c64e3b995c8fd8",
+    "error": null
+  }
+}

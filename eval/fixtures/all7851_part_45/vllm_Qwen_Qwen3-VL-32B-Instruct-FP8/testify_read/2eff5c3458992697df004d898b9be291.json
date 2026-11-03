@@ -1,0 +1,86 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Three photos show the same engine from slightly different angles, placed on a dirty ground in what appears to be a scrapyard or auto parts market.",
+      "The engine is large, with visible components including the intake manifold, alternator, belts, pulleys, and various hoses and connectors.",
+      "The front of the engine block has a label with text, partially visible in all photos, showing 'TOYOTA' and possibly '2AR-FE' or similar, but the full model number is not clearly readable.",
+      "The engine is partially wrapped in transparent plastic on the left side.",
+      "The background shows other wrapped engine blocks, tires, and a white truck, indicating a commercial auto parts environment.",
+      "No transmission is visible in any photo; the item shown is an engine only.",
+      "The seller claims it is a 'Toyota Venza 2011 automatic transmission box 4wd 22pin', but the photos show only an engine, not a transmission."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "engine",
+      "brand": "Toyota",
+      "model": "2AR-FE",
+      "read_from": [
+        "photo 0 engine block label",
+        "photo 1 engine block label",
+        "photo 2 engine block label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Toyota Venza 2011",
+        "verdict": "unverified",
+        "evidence": "The engine block label shows 'TOYOTA' and likely '2AR-FE', which is used in several models including the Venza, but the exact model and year cannot be confirmed from the photos alone."
+      },
+      {
+        "claim": "automatic transmission box",
+        "verdict": "contradicted",
+        "evidence": "The photos show only an engine; no transmission is visible. The item is not a transmission box."
+      },
+      {
+        "claim": "4wd",
+        "verdict": "unverifiable_remote",
+        "evidence": "The engine itself does not indicate 4WD capability; this would require verification of the vehicle's drivetrain, which is not shown."
+      },
+      {
+        "claim": "22pin",
+        "verdict": "unverified",
+        "evidence": "The term '22pin' likely refers to the electrical connector configuration, but no such connector is visible in the photos to confirm this."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine may be damaged or non-functional",
+        "proof": "A close-up video or photo showing the internal components, such as the cylinder head, crankshaft, and oil pan, to check for cracks, corrosion, or signs of prior damage.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Engine is not from a 2011 Toyota Venza",
+        "proof": "A clear photo of the engine block label showing the full model number and VIN stamp, or a photo of the original vehicle's VIN plate.",
+        "if_unproven": "priced as a generic 2AR-FE engine, not a Venza-specific unit"
+      },
+      {
+        "risk": "Engine has been used in a high-mileage or accident-damaged vehicle",
+        "proof": "A photo of the engine's serial number and a vehicle history report if available.",
+        "if_unproven": "priced as a used engine with unknown history"
+      }
+    ],
+    "proof_requests": [
+      "Clear close-up photo of the engine block label showing the full model number and serial number.",
+      "Photo of the original vehicle's VIN plate or a document proving the engine came from a 2011 Toyota Venza.",
+      "Video or photo showing the engine's internal components to verify condition.",
+      "Photo of the 22-pin electrical connector if available."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is an engine, not a transmission box as claimed. The model and year cannot be confirmed from the current photos, and critical risks such as damage, history, and authenticity remain unproven. A clear photo of the engine label and vehicle VIN is needed to proceed."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 70746,
+    "input_tokens": 2784,
+    "output_tokens": 913,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "2eff5c3458992697df004d898b9be291",
+    "error": null
+  }
+}

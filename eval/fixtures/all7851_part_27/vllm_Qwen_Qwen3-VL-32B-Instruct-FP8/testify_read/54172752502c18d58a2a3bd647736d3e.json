@@ -1,0 +1,88 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the back of a silver, rectangular device with ports: power, Ethernet, HDMI, USB-A, USB-C, and audio jack. The design matches Apple Mac mini.",
+      "Photo 1 shows the top of the device with a black Apple logo and blue handwritten text 'm1 8gb'.",
+      "Photo 2 shows the bottom of the device with a circular black pad, faint 'Mac mini' text, and regulatory symbols. Blue ink mark is visible.",
+      "All photos have a watermark 'CONTECH APPLE' and 'POSTED ON JIJI'.",
+      "The device is wrapped in clear plastic, suggesting it is being handled for sale."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "Mac mini",
+      "brand": "Apple",
+      "model": "Mac mini",
+      "read_from": [
+        "photo 2 bottom: 'Mac mini' text",
+        "photo 1 top: Apple logo"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Apple M1 Macmini",
+        "verdict": "supported",
+        "evidence": "Photo 2 shows 'Mac mini' text on the bottom; photo 1 shows Apple logo. The port layout in photo 0 matches M1 Mac mini."
+      },
+      {
+        "claim": "8gb ram",
+        "verdict": "unverified",
+        "evidence": "Photo 1 has handwritten 'm1 8gb' in blue ink, but this is not official labeling. No internal or system photo confirms RAM."
+      },
+      {
+        "claim": "256gb ssd",
+        "verdict": "unverified",
+        "evidence": "No photo shows internal storage or system specs. Handwritten note does not confirm SSD size."
+      },
+      {
+        "claim": "Working perfectly and neat",
+        "verdict": "unverifiable_remote",
+        "evidence": "No video or system boot photo. No proof of functionality. 'Neat' is subjective; plastic wrap and blue ink suggest handling, not pristine condition."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Not an M1 Mac mini (could be older model or counterfeit)",
+        "proof": "Photo of the model identifier sticker or system report showing 'Apple M1' chip.",
+        "if_unproven": "Priced as older model or non-M1, which is significantly cheaper."
+      },
+      {
+        "risk": "RAM or SSD not as claimed (8GB RAM, 256GB SSD)",
+        "proof": "Photo of system information screen showing exact specs, or internal drive photo.",
+        "if_unproven": "Priced as lower-spec model (e.g., 4GB RAM or 128GB SSD)."
+      },
+      {
+        "risk": "Physical damage or wear not visible in photos (scratches, dents, internal corrosion)",
+        "proof": "Full 360-degree video or close-up photos of all surfaces, including ports and edges.",
+        "if_unproven": "Priced as used with potential cosmetic or functional issues."
+      },
+      {
+        "risk": "Not working or requires repair",
+        "proof": "Video of the device powering on, booting into macOS, and showing system specs.",
+        "if_unproven": "Priced as non-working or requires repair, which drastically reduces value."
+      }
+    ],
+    "proof_requests": [
+      "Video of the device powering on and booting into macOS.",
+      "Photo of the system report screen showing exact model, RAM, and SSD size.",
+      "Photo of the model identifier sticker (if present).",
+      "Full 360-degree photos showing all sides, ports, and condition."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The device appears to be a Mac mini, and the M1 model is plausible based on design and handwritten note, but critical claims (RAM, SSD, working condition) are unverified. Without proof of specs and functionality, it cannot be priced accurately. The blue ink and plastic wrap suggest handling, which may affect condition. Proof is needed to confirm model, specs, and working state."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 73958,
+    "input_tokens": 2789,
+    "output_tokens": 910,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "54172752502c18d58a2a3bd647736d3e",
+    "error": null
+  }
+}

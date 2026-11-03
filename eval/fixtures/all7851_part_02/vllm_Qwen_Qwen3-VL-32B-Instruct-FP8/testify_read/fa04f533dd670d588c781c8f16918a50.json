@@ -1,0 +1,73 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows three stacked white cardboard boxes labeled 'THERMAL PAPER ROLL' and 'THE BEST THERMAL PAPER'.",
+      "One box is open on the left, revealing 10 rolls arranged in 2 rows of 5, wrapped in clear plastic.",
+      "The boxes appear worn, with tape and some damage. The middle box has 'EXCELLENT' printed vertically on the side.",
+      "Text on the middle box includes '57 mm', '100 m', and 'ADDITIONAL 30% QUALITY'.",
+      "The open box contains 10 rolls, suggesting each full carton holds 100 pieces (10 rolls per layer \u00d7 10 layers).",
+      "The seller claims 3 full cartons (300 pieces) and half a carton (50 pieces), totaling 350 pieces.",
+      "The open box shows only 10 rolls, which may be one layer of a 10-layer carton, implying 100 rolls per carton."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "thermal paper rolls for POS machines",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 box labels"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "3 cartons of POS paper (100 pieces) each + half carton (50 pieces)",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows 3 stacked boxes and one open box with 10 rolls. The open box may be one layer of a 10-layer carton (100 rolls), but the full contents of the other boxes are not visible. The claim of 350 pieces total cannot be confirmed from the photo alone."
+      },
+      {
+        "claim": "Selling all together, not carton",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows the boxes stacked and one open, suggesting the items are being sold as a bulk lot, not individually per carton."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The total quantity may be less than claimed (e.g., boxes may not be full or may contain fewer rolls per layer)",
+        "proof": "A photo showing the full contents of each of the three stacked boxes, or a count of rolls per box.",
+        "if_unproven": "priced as fewer than 350 pieces, possibly as low as 100 pieces (only the open box's contents visible)"
+      },
+      {
+        "risk": "The paper may be expired or damaged (e.g., moisture, fading, or physical damage to rolls)",
+        "proof": "Close-up photos of the rolls inside each box, especially the inner layers, showing condition and any signs of damage or discoloration.",
+        "if_unproven": "priced as potentially lower quality or unusable, with a discount for unverified condition"
+      },
+      {
+        "risk": "The rolls may not be 57mm x 100m as labeled (size mismatch for POS machines)",
+        "proof": "A photo showing a single roll with a ruler or measuring tape to verify diameter and length, or a close-up of the label with clear dimensions.",
+        "if_unproven": "priced as possibly incompatible with standard POS machines, reducing value"
+      }
+    ],
+    "proof_requests": [
+      "Photos of the full contents of each of the three stacked boxes, showing all rolls inside.",
+      "Close-up of the label on one roll to confirm dimensions (57mm x 100m) and any batch or expiry date.",
+      "Close-up photos of the rolls inside the boxes, especially the inner layers, to check for damage, moisture, or discoloration."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The total quantity and condition of the thermal paper rolls cannot be verified from the current photo. The open box shows only 10 rolls, which may be one layer of a 100-roll carton, but the contents of the other boxes are hidden. Without proof of full contents and condition, the item cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 72483,
+    "input_tokens": 1794,
+    "output_tokens": 924,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "fa04f533dd670d588c781c8f16918a50",
+    "error": null
+  }
+}

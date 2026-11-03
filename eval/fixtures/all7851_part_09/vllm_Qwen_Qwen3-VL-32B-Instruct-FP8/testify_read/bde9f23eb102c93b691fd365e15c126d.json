@@ -1,0 +1,88 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: A dark gray laptop open on a wooden table, screen on with Windows 11 default wallpaper. Lenovo logo visible on bottom right of keyboard deck. Watermark 'DOLF TECHNOLOGIES' across screen.",
+      "Photo 1: Windows Task Manager Performance tab showing CPU details: '11th Gen Intel(R) Core(TM) i7-11800H @ 2.30GHz', 8 cores, 16 threads, current speed 4.03 GHz. GPU listed as 'NVIDIA GeForce RTX ...' (model cut off).",
+      "Photo 2: Windows Task Manager Memory tab showing 16.0 GB total RAM, 5.2/15.8 GB in use, speed 3200 MT/s, form factor SO-DIMM, 2 slots used. Disk 0 (C:) is an NVMe SSD."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "gaming laptop",
+      "brand": "Lenovo",
+      "model": "Legion 5 Pro 16ITH6H",
+      "read_from": [
+        "seller's text",
+        "photo 1 screen: '11th Gen Intel(R) Core(TM) i7-11800H'",
+        "photo 2 screen: '16.0 GB' RAM, 'SO-DIMM' form factor"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Lenovo Legion 5 Pro 16ITH6H",
+        "verdict": "supported",
+        "evidence": "Seller's text and photo 0 (Lenovo logo) support the brand and model line. The CPU in photo 1 matches the Legion 5 Pro 16ITH6H's typical configuration."
+      },
+      {
+        "claim": "Intel Core i7 - 11800H / up to 4.6 GHz",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows '11th Gen Intel(R) Core(TM) i7-11800H @ 2.30GHz' and current speed of 4.03 GHz, consistent with turbo boost up to 4.6 GHz."
+      },
+      {
+        "claim": "Win 11 Pro",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows Windows 11 interface, but edition (Pro vs Home) cannot be confirmed from the screen. No system info or settings screenshot provided."
+      },
+      {
+        "claim": "8gb nvidia...",
+        "verdict": "contradicted",
+        "evidence": "Photo 2 shows 16.0 GB of RAM. The seller's text says '8gb', which is incorrect. GPU is partially visible as 'NVIDIA GeForce RTX ...' in photo 1, but model is cut off."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "GPU model not visible, which affects performance and value",
+        "proof": "Photo showing full GPU name in Task Manager or Device Manager, or a screenshot of GPU-Z or similar tool.",
+        "if_unproven": "Priced as a lower-end RTX model (e.g., RTX 3050) until proven otherwise."
+      },
+      {
+        "risk": "RAM may be soldered or non-upgradable, or may be a mix of speeds",
+        "proof": "Photo of the RAM slots with modules removed, or a screenshot from CPU-Z showing module details and timings.",
+        "if_unproven": "Priced as if RAM is standard 3200MHz DDR4, but with a discount for potential non-upgradability or mixed modules."
+      },
+      {
+        "risk": "SSD capacity not confirmed",
+        "proof": "Photo showing full disk properties in Windows (e.g., This PC > Properties) or a screenshot of Disk Management.",
+        "if_unproven": "Priced assuming 512GB NVMe SSD, as it's the most common for this model, but with a discount for uncertainty."
+      },
+      {
+        "risk": "Laptop may have physical damage or wear not visible in photos",
+        "proof": "Photos of all sides, hinges, screen edges, and keyboard for signs of damage, scratches, or dead pixels.",
+        "if_unproven": "Priced with a discount for potential cosmetic or structural issues."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot showing full GPU model name (e.g., RTX 3060, 3070, etc.)",
+      "Screenshot of CPU-Z or similar tool showing RAM details (speed, timings, module info)",
+      "Photo of the laptop's bottom showing RAM slots and SSD access",
+      "Photo of the screen edges and keyboard for damage or dead pixels",
+      "Screenshot of Disk Management or This PC showing exact SSD capacity"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and CPU are confirmed, but critical specs like GPU model, exact RAM configuration, and SSD capacity are incomplete or contradicted. The seller's claim of '8gb' RAM is contradicted by the 16GB shown in photo 2. Without proof of GPU model and RAM details, the item cannot be accurately priced. The risks of hidden damage or misrepresentation are significant."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 91463,
+    "input_tokens": 2813,
+    "output_tokens": 1170,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "bde9f23eb102c93b691fd365e15c126d",
+    "error": null
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Front view of a silver laptop with black keyboard, HP logo above screen, 'PROBOOK' label below keyboard, Intel Core sticker on palm rest. Screen is off. Watermark 'WHITE STORE GADGET' visible.",
+      "Photo 1: Bottom view of the laptop, silver with a vertical vent, four screws, QR code and regulatory labels. Hand holding the laptop on the left.",
+      "Photo 2: Front view similar to photo 0, but from a slightly different angle, screen off, same stickers and labels. Background shows a cluttered workspace with electronics and cables.",
+      "No photos show the screen turned on, no ports, no battery, no power adapter, no internal components, no serial number or model label clearly readable."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "ProBook 440 G9",
+      "read_from": [
+        "photo 0 keyboard label 'PROBOOK'",
+        "photo 2 keyboard label 'PROBOOK'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Neatly used openbox Hp probook 440 G9 512 16 gb intel core i5 12th generation",
+        "verdict": "unverified",
+        "evidence": "Model name 'ProBook 440 G9' is visible on keyboard in photo 0 and 2. Intel Core sticker is visible, but no text confirms '12th generation' or 'i5'. No visible storage or RAM labels. 'Openbox' and 'neatly used' cannot be verified from photos."
+      },
+      {
+        "claim": "in perfect working",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows the laptop powered on or in use. No screen content, no boot-up, no operating system visible. Cannot verify functionality remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Laptop may not be powered on or may have a dead battery or power issue",
+        "proof": "A video or photo showing the laptop turned on, displaying the desktop or boot screen.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Storage and RAM may not be 512GB and 16GB as claimed",
+        "proof": "A photo or video showing the BIOS/UEFI screen or system information (e.g., Windows About page) confirming RAM and storage size.",
+        "if_unproven": "priced as lower specs (e.g., 256GB or 8GB)"
+      },
+      {
+        "risk": "Processor may not be Intel Core i5 12th generation",
+        "proof": "A photo or video showing the BIOS/UEFI screen or system information confirming the CPU model.",
+        "if_unproven": "priced as lower generation or lower tier CPU"
+      },
+      {
+        "risk": "Screen may have dead pixels, cracks, or backlight issues",
+        "proof": "A photo or video of the screen displaying a solid white or black screen to check for defects.",
+        "if_unproven": "priced as screen with potential defects"
+      },
+      {
+        "risk": "Laptop may be missing accessories (battery, charger, etc.)",
+        "proof": "A photo showing the battery installed and the power adapter included.",
+        "if_unproven": "priced as missing accessories"
+      }
+    ],
+    "proof_requests": [
+      "Video or photo of the laptop turned on, showing the desktop or boot screen.",
+      "Photo or video of the BIOS/UEFI screen or system information showing RAM, storage, and CPU model.",
+      "Photo of the screen displaying a solid white or black screen to check for defects.",
+      "Photo showing the battery installed and the power adapter included."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identifiable as HP ProBook 440 G9 from the keyboard label, but key claims about specs (i5 12th gen, 16GB RAM, 512GB storage) and working condition cannot be verified from the photos. The screen is off in all images, so functionality is unverifiable. Risks include incorrect specs, non-working state, and missing accessories. Proof is needed to confirm these before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 79874,
+    "input_tokens": 2801,
+    "output_tokens": 961,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "47b460d07fe8518a51f0cf014c2aff36",
+    "error": null
+  }
+}

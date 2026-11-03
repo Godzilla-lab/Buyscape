@@ -1,0 +1,80 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Open laptop showing a Windows desktop with a blue abstract wallpaper. Keyboard is visible with black keys and silver frame. Touchpad is centered below keyboard. Intel vPRO sticker on bottom right of palm rest. Screen bezel is thin, top bezel has a webcam. No visible brand or model on screen or keyboard.",
+      "Photo 1: Closed laptop lid, silver-gray finish with a large 'Z' logo in the center. No visible text or model name. Surface appears clean with minor reflections.",
+      "Photo 2: Blurry, angled shot of the same closed laptop lid, showing the 'Z' logo. Background is out of focus. No readable text or model details."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "ZBook Fury 16 G9",
+      "read_from": [
+        "seller's text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP ZBook Fury 16 G9 mobile workstation",
+        "verdict": "unverified",
+        "evidence": "The 'Z' logo on the lid (photo 1) is consistent with HP ZBook series, but no model name or serial is visible in photos. Seller's text claims the model, but cannot be verified remotely."
+      },
+      {
+        "claim": "NVIDIA Quadro RTX A3000 12GB GPU",
+        "verdict": "unverifiable_remote",
+        "evidence": "No GPU information visible in photos. Cannot be confirmed without system specs or device manager screenshot."
+      },
+      {
+        "claim": "Direct US-used",
+        "verdict": "unverifiable_remote",
+        "evidence": "No proof of origin or usage history in photos. Cannot verify remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "GPU not as claimed (NVIDIA Quadro RTX A3000 12GB)",
+        "proof": "Screenshot of Device Manager or GPU-Z showing GPU model and VRAM",
+        "if_unproven": "priced as lower-end GPU or no dedicated GPU"
+      },
+      {
+        "risk": "Laptop not genuine HP ZBook Fury 16 G9",
+        "proof": "Clear photo of model label or serial number on bottom chassis or inside lid",
+        "if_unproven": "priced as generic business laptop or counterfeit"
+      },
+      {
+        "risk": "Physical damage or wear not visible in photos",
+        "proof": "Full 360-degree video or close-up photos of all edges, hinges, screen, and ports",
+        "if_unproven": "priced with assumption of moderate wear"
+      },
+      {
+        "risk": "Battery health or performance issues",
+        "proof": "Battery report screenshot or Windows battery health check",
+        "if_unproven": "priced as battery degraded or unknown"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the model label or serial number on the bottom of the laptop",
+      "Screenshot of Device Manager or GPU-Z showing GPU model and VRAM",
+      "Screenshot of battery health report",
+      "Full 360-degree video or close-up photos of all edges, hinges, screen, and ports"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and GPU claims cannot be verified from the photos alone. The 'Z' logo suggests HP ZBook, but no model name is visible. Critical specs like GPU and battery health are unverifiable remotely. Price cannot be determined without proof of model, GPU, and condition."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 69803,
+    "input_tokens": 2800,
+    "output_tokens": 793,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "77448dc2c877d2683fb1e51ad64ea02b",
+    "error": null
+  }
+}

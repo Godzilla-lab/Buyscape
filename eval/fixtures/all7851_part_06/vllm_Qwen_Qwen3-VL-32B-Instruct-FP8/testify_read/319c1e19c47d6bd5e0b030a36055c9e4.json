@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Blue gas cylinder with peeling paint and visible rust spots.",
+      "Top handle is bent and shows signs of wear and rust.",
+      "Photo 1 shows stamped markings: 'SR NO 62369', 'NIS 69-1975', 'GAS Wt 12.5kg', 'W.C 26.5 Ltrs', 'T.P 34 bar', 'T.Wt 5.2kg', 'G.Wt 27.7kg', 'DGPL TESTED RETEST 12-08'.",
+      "Photo 2 shows the valve area with rust around the valve and base.",
+      "No visible damage to the body, but surface corrosion is present.",
+      "The cylinder appears to be a standard 12.5kg LPG cylinder, not 12kg as claimed."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "12.5kg LPG gas cylinder",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 1"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Used 12kg gas cylinder",
+        "verdict": "contradicted",
+        "evidence": "Photo 1 shows 'GAS Wt 12.5kg', not 12kg."
+      },
+      {
+        "claim": "in good condition",
+        "verdict": "unverified",
+        "evidence": "Photos show rust and paint peeling, but no structural damage is visible. Condition is subjective and not fully verifiable from photos alone."
+      },
+      {
+        "claim": "ready for new user",
+        "verdict": "unverifiable_remote",
+        "evidence": "The retest date is '12-08' (likely December 2008), which is over 15 years ago. Safety compliance for use is not verifiable remotely. The valve and internal condition are not visible."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Cylinder may be past its safe usage period due to expired retest date (December 2008).",
+        "proof": "A recent retest certificate or a photo of the cylinder being tested by an authorized body.",
+        "if_unproven": "priced as unsafe and unusable"
+      },
+      {
+        "risk": "Internal corrosion or valve damage not visible in photos.",
+        "proof": "A video or photo showing the valve being turned and gas flow, or an inspection report.",
+        "if_unproven": "priced as potentially non-functional"
+      },
+      {
+        "risk": "Rust and paint damage may indicate structural weakness.",
+        "proof": "A close-up photo of the base and seams showing no cracks or dents.",
+        "if_unproven": "priced as potentially unsafe"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the cylinder's retest certificate or recent inspection report.",
+      "Video showing the valve being operated and gas flow.",
+      "Close-up of the base and seams to check for cracks or dents."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The cylinder's retest date is over 15 years old, making its safety unverifiable. The claimed weight is contradicted by the photo. Without proof of recent inspection and functional valve, it cannot be priced safely."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 60608,
+    "input_tokens": 3460,
+    "output_tokens": 751,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "319c1e19c47d6bd5e0b030a36055c9e4",
+    "error": null
+  }
+}

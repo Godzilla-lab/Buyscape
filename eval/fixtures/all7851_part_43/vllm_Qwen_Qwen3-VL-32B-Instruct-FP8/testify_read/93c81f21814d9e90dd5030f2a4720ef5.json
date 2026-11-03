@@ -1,0 +1,91 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Closed blue Dell laptop with Dell logo visible on lid. Watermark 'POSTED ON JIJI CIMLET INNOVATION' overlaid.",
+      "Photo 1: Laptop open, showing Dell boot screen with 'Secured with Dell SafeBIOS' text. Keyboard and trackpad visible. Intel Core sticker on bottom right of palm rest. Watermark present.",
+      "Photo 2: Laptop open, showing Windows desktop with time '6:32' and date 'Tuesday, August 11'. Keyboard and trackpad visible. Intel Core sticker present. Watermark present.",
+      "All photos show the same laptop from different angles, with consistent lighting and background (wooden surface, artificial flowers).",
+      "No visible damage to exterior in photos. Screen appears clear in photo 2.",
+      "No model number or serial number visible in any photo.",
+      "No internal components (RAM, SSD) shown."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "laptop",
+      "brand": "Dell",
+      "model": null,
+      "read_from": [
+        "photo 0 lid logo",
+        "photo 1 screen and sticker",
+        "photo 2 screen and sticker"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Dell Latitude 5430 Ultrabook laptop",
+        "verdict": "unverified",
+        "evidence": "No model number visible in any photo. The Dell logo is present, but 'Latitude 5430' cannot be confirmed from images."
+      },
+      {
+        "claim": "Intel core i7 12th generation",
+        "verdict": "unverified",
+        "evidence": "Intel Core sticker visible in photo 1 and 2, but no text indicating 'i7' or '12th generation'. The sticker only says 'Intel Core'."
+      },
+      {
+        "claim": "512ssd drive 16gb ram",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal components shown. Cannot verify SSD size or RAM amount from photos alone."
+      },
+      {
+        "claim": "14inches",
+        "verdict": "supported",
+        "evidence": "Screen size appears consistent with 14-inch laptop based on proportions relative to keyboard and bezel. No direct measurement, but typical for this form factor."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Incorrect model or generation claimed (e.g., not Latitude 5430 or not 12th gen i7)",
+        "proof": "Photo of the model label or serial number sticker, typically on the bottom of the laptop or inside the lid.",
+        "if_unproven": "Priced as a generic Dell laptop, not as a specific high-value model."
+      },
+      {
+        "risk": "RAM or SSD not as advertised (e.g., less than 16GB RAM or not 512GB SSD)",
+        "proof": "Photo of the BIOS screen showing system specifications, or a screenshot of 'System Information' in Windows.",
+        "if_unproven": "Priced as a lower-spec laptop, assuming minimum common configuration."
+      },
+      {
+        "risk": "Laptop not working or has hidden defects (e.g., screen damage, keyboard issues, battery failure)",
+        "proof": "Video showing full boot-up, keyboard typing, touchpad use, and battery health check.",
+        "if_unproven": "Priced as potentially non-functional or with unknown defects."
+      },
+      {
+        "risk": "Watermark or edited photos indicating non-authentic listing",
+        "proof": "Photo without watermark, or video showing real-time operation.",
+        "if_unproven": "Priced with discount for potential fraud or low authenticity."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the model label or serial number sticker on the bottom of the laptop.",
+      "Screenshot or photo of the BIOS or Windows 'System Information' showing CPU, RAM, and SSD details.",
+      "Video showing full boot-up, keyboard and touchpad operation, and battery health check.",
+      "Photo of the laptop without watermark, if possible."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and key specifications (CPU generation, RAM, SSD) cannot be verified from the current photos. The laptop appears to be a Dell, and screen size is consistent with 14 inches, but without proof of model and internal specs, it cannot be priced accurately. The risks of misrepresentation are high, requiring additional evidence before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 99183,
+    "input_tokens": 2803,
+    "output_tokens": 1001,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "93c81f21814d9e90dd5030f2a4720ef5",
+    "error": null
+  }
+}

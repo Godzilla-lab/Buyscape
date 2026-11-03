@@ -1,0 +1,91 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Front view of an open Acer laptop. The screen is off. The keyboard is black with a silver palm rest. The Acer logo is visible below the screen. A sticker on the lower left of the palm rest shows 'Intel Core i3'. A white label with text is on the lower right of the palm rest, but the text is too small to read. The laptop is on a wooden surface.",
+      "Photo 1: Side view of the laptop, showing the back of the screen with the Acer logo, the right side ports (VGA, USB, headphone jack), and the keyboard. The laptop is on a wooden floor with a black and white wall in the background.",
+      "Photo 2: Front view similar to photo 0, but from a slightly different angle. The screen is off. The Acer logo is visible. The Intel Core i3 sticker is visible. The white label on the palm rest is still unreadable. The laptop is on a wooden surface with a white wall and black trim behind it."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "laptop",
+      "brand": "Acer",
+      "model": null,
+      "read_from": [
+        "photo 0 screen bezel",
+        "photo 1 back lid"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Acer core i3",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 2 show the 'Acer' logo on the screen bezel and the 'Intel Core i3' sticker on the palm rest."
+      },
+      {
+        "claim": "4GB RAM",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows the RAM or any system information that confirms 4GB. The sticker on the palm rest is unreadable."
+      },
+      {
+        "claim": "750GB HDD",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows the hard drive or any system information that confirms 750GB. The sticker on the palm rest is unreadable."
+      },
+      {
+        "claim": "Windows 10",
+        "verdict": "unverifiable_remote",
+        "evidence": "The screen is off in all photos, so the operating system cannot be seen. No evidence of Windows 10 is visible."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "RAM is not 4GB as claimed",
+        "proof": "A photo of the system information screen showing RAM size, or a photo of the RAM sticks inside the laptop.",
+        "if_unproven": "priced as having less than 4GB RAM, which reduces value"
+      },
+      {
+        "risk": "HDD is not 750GB as claimed",
+        "proof": "A photo of the system information screen showing storage size, or a photo of the hard drive.",
+        "if_unproven": "priced as having less than 750GB, which reduces value"
+      },
+      {
+        "risk": "Operating system is not Windows 10 or is not installed",
+        "proof": "A photo of the desktop screen showing the Windows 10 interface or a system information screen confirming the OS.",
+        "if_unproven": "priced as not having Windows 10, which reduces value"
+      },
+      {
+        "risk": "Laptop is not functional (screen, keyboard, ports, battery)",
+        "proof": "A video or photo showing the laptop turned on, with the screen displaying, keyboard working, and ports in use.",
+        "if_unproven": "priced as not working, which reduces value"
+      },
+      {
+        "risk": "Physical damage not visible in photos (cracked screen, broken hinges, damaged ports)",
+        "proof": "Close-up photos of the screen, hinges, and all ports from multiple angles.",
+        "if_unproven": "priced as having potential physical damage, which reduces value"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the system information screen showing RAM and storage size.",
+      "Photo of the desktop screen to confirm Windows 10 is installed and working.",
+      "Video or photo of the laptop turned on with screen displaying and keyboard working.",
+      "Close-up photos of the screen, hinges, and all ports to check for damage."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The laptop is identifiable as an Acer with an Intel Core i3 processor, but key specifications (RAM, HDD, OS) are unverifiable from the photos. Physical condition and functionality are also unconfirmed. Without proof of these, the item cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 82287,
+    "input_tokens": 2746,
+    "output_tokens": 1023,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "ef135b52d8c5afd412c92a06de4dc2e1",
+    "error": null
+  }
+}

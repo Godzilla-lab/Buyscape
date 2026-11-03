@@ -1,0 +1,80 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Closed flip phone with silver back and black front, 'SAMSUNG' logo visible on back.",
+      "Photo 1: Same phone from a slightly different angle, silver back with 'SAMSUNG' logo.",
+      "Photo 2: Phone open, showing black keypad and small screen, 'SAMSUNG' logo above screen.",
+      "All photos show the phone on a purple fabric background with 'POSTED ON JI FUTURE RAINBOW' watermark.",
+      "No charger is visible in any photo.",
+      "No model number is visible on the phone in any photo.",
+      "The screen is dark and unlit in photo 2, no indication of power or functionality."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "flip phone",
+      "brand": "Samsung",
+      "model": null,
+      "read_from": [
+        "photo 0 back",
+        "photo 1 back",
+        "photo 2 screen above"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Silver Samsung GT-E1150i",
+        "verdict": "unverified",
+        "evidence": "Brand 'Samsung' is visible in photos 0, 1, and 2. Color appears silver on back. Model 'GT-E1150i' is not visible in any photo; cannot be confirmed from images alone."
+      },
+      {
+        "claim": "no charger",
+        "verdict": "supported",
+        "evidence": "No charger is visible in any of the three photos."
+      },
+      {
+        "claim": "works perfectly",
+        "verdict": "unverifiable_remote",
+        "evidence": "Screen is off in photo 2; no indication of power, buttons, or functionality. No video or live test shown."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Phone may not power on or function properly",
+        "proof": "Video showing the phone turning on, screen lighting up, and keypad responding to input.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Model is not GT-E1150i as claimed",
+        "proof": "Clear photo of the model number, typically on the back or under the battery.",
+        "if_unproven": "priced as generic Samsung flip phone, lower value"
+      },
+      {
+        "risk": "Battery is dead or not holding charge",
+        "proof": "Video showing the phone powering on and staying on for at least 30 seconds without external power.",
+        "if_unproven": "priced as not working"
+      }
+    ],
+    "proof_requests": [
+      "Video showing the phone turning on and functioning (screen, keypad, call test).",
+      "Photo of the model number, preferably under the battery or on the back.",
+      "Photo of the battery and SIM card tray if removable."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model number is not visible, and functionality cannot be confirmed from still images. The phone may not work, and the model claim is unverified. Proof of function and model is needed before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 57662,
+    "input_tokens": 2780,
+    "output_tokens": 695,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "a292c998823939ae5a693be8fb28a845",
+    "error": null
+  }
+}

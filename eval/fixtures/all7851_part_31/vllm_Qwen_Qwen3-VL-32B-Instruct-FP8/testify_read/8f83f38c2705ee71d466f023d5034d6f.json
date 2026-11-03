@@ -1,0 +1,65 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: A black computer power supply unit (PSU) with multiple black cables extending from it, placed on a white surface. The label on the PSU shows '600W' and 'COOLER MASTER' clearly. There is a watermark 'OKAFOR CHIBUIKE' and 'POSTED ON Jiji'.",
+      "Photo 1: Same PSU from a slightly different angle, showing the same label with '600W' and 'COOLER MASTER'. The cables are tangled. The same watermark is present.",
+      "Photo 2: Side view of the PSU showing the fan and the label again. The brand 'COOLER MASTER' and '600W' are visible. The fan is black with a circular design. The same watermark is present."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "computer power supply unit",
+      "brand": "Cooler Master",
+      "model": "600W",
+      "read_from": [
+        "photo 0 label",
+        "photo 1 label",
+        "photo 2 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "600w cooler master power",
+        "verdict": "supported",
+        "evidence": "The brand 'COOLER MASTER' and '600W' are clearly visible on the label in photo 0, photo 1, and photo 2."
+      },
+      {
+        "claim": "has 8+8+8+8 that means you can use 2 graphics card on it",
+        "verdict": "unverified",
+        "evidence": "The photos show multiple cables, but no clear view of the PCIe power connectors (8-pin) or their count. The claim about 8+8+8+8 connectors and dual GPU support cannot be confirmed from the images."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The PSU may not have the claimed 8+8+8+8 PCIe connectors, making it unsuitable for dual graphics cards.",
+        "proof": "A close-up photo showing the PCIe power connectors and their count, specifically confirming four 8-pin connectors.",
+        "if_unproven": "Priced as not suitable for dual GPU setups, which reduces its value for buyers needing that capability."
+      },
+      {
+        "risk": "The PSU may be damaged or non-functional despite appearing intact.",
+        "proof": "A video clip showing the PSU powering on and delivering stable voltage to a test load, or a photo of the PSU connected to a working PC with a multimeter reading.",
+        "if_unproven": "Priced as potentially non-working, which significantly reduces its value."
+      }
+    ],
+    "proof_requests": [
+      "A close-up photo of the PCIe power connectors to confirm the 8+8+8+8 configuration.",
+      "A video or photo showing the PSU powering on and functioning with a test load or in a working PC."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The brand and wattage are confirmed, but the key claim about 8+8+8+8 connectors and dual GPU support cannot be verified from the current photos. Additionally, functionality is unproven. These factors are critical to pricing and must be confirmed before assigning a value."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 56347,
+    "input_tokens": 2167,
+    "output_tokens": 717,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "8f83f38c2705ee71d466f023d5034d6f",
+    "error": null
+  }
+}

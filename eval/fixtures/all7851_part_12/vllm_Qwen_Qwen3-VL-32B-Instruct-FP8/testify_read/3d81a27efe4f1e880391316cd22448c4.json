@@ -1,0 +1,73 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows multiple white boxes labeled 'Solar energy Light bulb' with a solar panel and three bulbs inside one open box. The bulbs are standard E27 base LED bulbs. A black cable connects the bulbs to a small solar panel and a power bank-like device.",
+      "Photo 1 is a staged product shot showing the same setup: three white LED bulbs connected via black cables to a rectangular solar panel and an orange power bank. The text 'Solar energy savings portfolio' is visible in the background.",
+      "The solar panel in both photos has a grid of 12 small photovoltaic cells (3x4).",
+      "The power bank is orange, rectangular, with a white label area and a USB port visible in photo 1.",
+      "The packaging in photo 0 has a green leaf logo and the word 'Charging' next to the solar panel image.",
+      "The seller's text claims the item contains 3 bulbs with solar panels and power bank, and can be used when there's no electricity."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar-powered LED lighting kit with 3 bulbs, solar panel, and power bank",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 box label",
+        "photo 1 setup"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "This contains 3 bulb with solar panels and power bank",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows 3 bulbs, a solar panel, and a power bank in the open box. Photo 1 confirms the same components connected together."
+      },
+      {
+        "claim": "it can be use when there's no electricity",
+        "verdict": "unverified",
+        "evidence": "The setup includes a solar panel and power bank, which implies off-grid use, but there is no proof of functionality (e.g., no video of it working, no indication of battery charge level or bulb brightness)."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The solar panel and power bank may not charge or power the bulbs effectively.",
+        "proof": "A video showing the solar panel charging the power bank and the bulbs turning on and staying lit for a period.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The bulbs may be low quality or non-functional.",
+        "proof": "A close-up video of the bulbs turning on and off, showing brightness and color temperature.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The power bank may be counterfeit or have a very low capacity.",
+        "proof": "A video showing the power bank's charge indicator or a test of how long it powers the bulbs.",
+        "if_unproven": "priced as low capacity or non-functional"
+      }
+    ],
+    "proof_requests": [
+      "Video showing the solar panel charging the power bank and the bulbs turning on and staying lit.",
+      "Close-up of the power bank's charge indicator or a test of its capacity.",
+      "Close-up of the bulbs when turned on to check brightness and quality."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a solar-powered LED lighting kit, and the components are visible. However, functionality is unverified, and key risks (battery capacity, bulb quality, charging capability) cannot be assessed from still photos alone. Proof of operation is required before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 65288,
+    "input_tokens": 1944,
+    "output_tokens": 770,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "3d81a27efe4f1e880391316cd22448c4",
+    "error": null
+  }
+}

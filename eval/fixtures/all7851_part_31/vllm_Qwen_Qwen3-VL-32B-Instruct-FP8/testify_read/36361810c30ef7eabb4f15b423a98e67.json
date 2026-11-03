@@ -1,0 +1,65 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a gray and black carrying case with a green label. The label reads 'DIGITAL AC/DC CLAMP METER' and 'MASTECH' in red. The model series 'MS2101 SERIES' is visible in red text. An image of the clamp meter is shown on the label with a yellow jaw and black body.",
+      "Photo 1 shows the open case with the actual clamp meter inside. The meter has a yellow jaw and black body. The brand 'MASTECH' is visible on the top of the meter. The display is off. Test leads (red and black) are in a plastic bag. A manual with 'MASTECH' and 'MS2101' is visible. A 9V battery (GP SuperCell) is also in the case.",
+      "The meter has a rotary dial with settings including 'OFF', 'V~', 'V-', 'A~', 'A-', '\u03a9', 'Hz', 'CAP', 'Diode', and 'Continuity'. The display is a small LCD screen. The case appears to be in good condition with no visible damage."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "digital AC/DC clamp meter",
+      "brand": "MASTECH",
+      "model": "MS2101",
+      "read_from": [
+        "photo 0 label: 'MASTECH' and 'MS2101 SERIES'",
+        "photo 1 meter: 'MASTECH' on the device, manual labeled 'MS2101'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Ac/Dc clamp meter, 1000v",
+        "verdict": "supported",
+        "evidence": "Photo 0 label shows 'DIGITAL AC/DC CLAMP METER' and '1000V' in the specifications. Photo 1 shows the meter with '1000A' and '1000V' marked on the dial and body."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The meter may not be functional (e.g., dead battery, broken display, or internal damage).",
+        "proof": "A video or photo showing the meter powered on, with the display lit and responding to dial changes, or a test reading on a known voltage source.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The test leads may be damaged or broken (e.g., frayed wires, loose connectors).",
+        "proof": "A close-up photo of the test lead tips and connectors, showing no damage or corrosion.",
+        "if_unproven": "priced as leads possibly damaged"
+      },
+      {
+        "risk": "The battery may be dead or not included (though one is visible).",
+        "proof": "A photo showing the battery installed in the meter and the meter powered on, or a close-up of the battery label to confirm it is not expired.",
+        "if_unproven": "priced as battery possibly dead or not included"
+      }
+    ],
+    "proof_requests": [
+      "Video or photo of the meter powered on with display lit and dial responding.",
+      "Close-up of test lead tips and connectors to confirm they are intact.",
+      "Photo of the battery installed and meter powered on, or close-up of battery label to check expiry."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a MASTECH MS2101 digital AC/DC clamp meter, and the seller's claim is supported by the photos. However, functionality cannot be confirmed from the current images. The meter, leads, and battery must be proven to work to justify a full price. Until proven, it is priced as not working."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 65364,
+    "input_tokens": 1859,
+    "output_tokens": 827,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "36361810c30ef7eabb4f15b423a98e67",
+    "error": null
+  }
+}

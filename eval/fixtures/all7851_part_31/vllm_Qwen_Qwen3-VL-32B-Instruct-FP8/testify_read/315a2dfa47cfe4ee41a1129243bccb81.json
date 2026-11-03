@@ -1,0 +1,97 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the front of an iPhone with the home screen visible, displaying app icons and a time of 07:51. The screen has a watermark 'POSTED ON JI DENACO COMMUNICATION'.",
+      "Photo 1 shows the back of the phone, which is gold-colored, with a triple-camera setup. A white sticker is affixed to the back with printed text including 'Apple iPhone 12 Pro 256GB', 'Battery 85+', 'Sim Unlock', 'Lock OFF', 'Color: Gold', 'Testing Pass', 'iCloud Unlocked', and 'Denaco TAM'.",
+      "The phone appears to be held in a hand in both photos, with a glass display cabinet and tiled floor in the background, suggesting a retail or second-hand store environment.",
+      "The screen in photo 0 shows no visible cracks or scratches, but the 'Waiting...' text on app icons suggests the phone is not fully responsive or is in a testing mode.",
+      "The sticker in photo 1 is not an official Apple label and appears to be a third-party seller's label."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "iPhone 12 Pro",
+      "brand": "Apple",
+      "model": "iPhone 12 Pro 256GB",
+      "read_from": [
+        "photo 1 sticker"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "no crack",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows the screen with no visible cracks or damage."
+      },
+      {
+        "claim": "no scratches",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows the screen, but close-up shots of the edges, frame, or back are missing. Scratches may be present on the frame or back, which are not visible."
+      },
+      {
+        "claim": "no screen issues at all",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows the screen is on, but the 'Waiting...' text on all app icons suggests a software or responsiveness issue. This could indicate a screen or system problem not visible in the photo."
+      },
+      {
+        "claim": "iPhone 12 Pro 256GB",
+        "verdict": "supported",
+        "evidence": "Photo 1 sticker clearly states 'Apple iPhone 12 Pro 256GB'."
+      },
+      {
+        "claim": "Battery 85+",
+        "verdict": "supported",
+        "evidence": "Photo 1 sticker states 'Battery 85+'."
+      },
+      {
+        "claim": "Sim Unlock, Lock OFF, iCloud Unlocked",
+        "verdict": "unverifiable_remote",
+        "evidence": "These claims are on the sticker, but cannot be verified remotely without checking the device's settings or IMEI. The sticker may be misleading."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Software or responsiveness issue",
+        "proof": "A video or photo showing the phone in use, with apps opening normally and no 'Waiting...' messages.",
+        "if_unproven": "priced as potentially non-functional or with software issues"
+      },
+      {
+        "risk": "Hidden scratches or damage on frame or back",
+        "proof": "Close-up photos of the phone's edges, frame, and back, especially around the camera module and buttons.",
+        "if_unproven": "priced as possibly damaged, reducing value"
+      },
+      {
+        "risk": "Sticker claims not verified (e.g., iCloud unlocked, SIM unlock)",
+        "proof": "Screenshot of the phone's settings showing 'iCloud' status and 'Carrier' or 'SIM' status, or an IMEI check report.",
+        "if_unproven": "priced as potentially locked or restricted, reducing value"
+      },
+      {
+        "risk": "Battery health not confirmed",
+        "proof": "Screenshot from the phone's 'Battery Health' settings showing actual battery capacity and performance.",
+        "if_unproven": "priced as battery health unknown, possibly lower than claimed"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photos of the phone's frame, edges, and back to check for scratches or damage.",
+      "A video or photo showing the phone in use, with apps opening normally and no 'Waiting...' messages.",
+      "Screenshot of the phone's settings showing iCloud status and SIM/Carrier status.",
+      "Screenshot from 'Battery Health' settings showing actual battery capacity."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The phone is identified as an iPhone 12 Pro 256GB from the sticker, but key claims about screen condition, software functionality, and unlock status cannot be verified from the current photos. The 'Waiting...' on the screen suggests a potential software issue, and the sticker is not official. Hidden risks include scratches, software problems, and unverified unlock status, which affect pricing. More proof is needed to price accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 95803,
+    "input_tokens": 2293,
+    "output_tokens": 1093,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "315a2dfa47cfe4ee41a1129243bccb81",
+    "error": null
+  }
+}

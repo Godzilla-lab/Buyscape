@@ -1,0 +1,85 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Open laptop showing Windows 11 desktop with blue abstract wallpaper. Keyboard is black with silver keys, trackpad is large, carbon fiber texture on palm rest. Dell logo visible on bottom right. A hand with a gold watch holds the laptop. Background shows shelves with other electronics and price tags.",
+      "Photo 1: Closed laptop lid, silver/white color, Dell logo centered. Same hand with gold watch holding it. Background shows shelves with other laptops and price tags.",
+      "Photo 2: Bottom of laptop, white, with 'XPS' logo vertically aligned on the left side. Ventilation grille on the right. Four screws visible at corners. Same hand holding it. Background shows shelves with electronics."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Dell",
+      "model": "XPS",
+      "read_from": [
+        "photo 1 lid: Dell logo",
+        "photo 2 bottom: XPS logo"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Dell XPS",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows Dell logo on lid, photo 2 shows XPS logo on bottom."
+      },
+      {
+        "claim": "16gb ram",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows RAM or system specs. Cannot verify from photos alone."
+      },
+      {
+        "claim": "1t ssd",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows storage or system specs. Cannot verify from photos alone."
+      },
+      {
+        "claim": "8 gb nvidia graphics card rtx 4060",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows GPU or system specs. Cannot verify from photos alone."
+      },
+      {
+        "claim": "corei9 /13th generation",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows CPU or system specs. Cannot verify from photos alone."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The laptop may not have the advertised specs (16GB RAM, 1TB SSD, RTX 4060, Core i9 13th gen)",
+        "proof": "A screenshot of the system information (Windows + R, type 'msinfo32') showing RAM, storage, GPU, and CPU details.",
+        "if_unproven": "Priced as a generic Dell XPS with unknown specs, which is significantly lower than a high-end model."
+      },
+      {
+        "risk": "The laptop may be a non-gaming XPS model (e.g., XPS 15 or 17) that does not support RTX 4060, which is typically found in gaming laptops like the Dell G15 or Alienware, not standard XPS models.",
+        "proof": "A clear photo of the laptop's model number (usually on the bottom or near the hinge) or a screenshot of the system information showing the exact model and GPU.",
+        "if_unproven": "Priced as a standard XPS laptop without discrete gaming GPU, which is much lower than a gaming laptop with RTX 4060."
+      },
+      {
+        "risk": "The laptop may be damaged or have cosmetic issues not visible in the photos (e.g., screen dead pixels, keyboard issues, hinge problems).",
+        "proof": "A video showing the laptop being opened, keyboard pressed, screen rotated, and trackpad used.",
+        "if_unproven": "Priced with a discount for potential cosmetic or functional issues."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of system information (msinfo32) showing RAM, storage, GPU, and CPU.",
+      "Photo or video of the laptop's model number (usually on the bottom or near the hinge).",
+      "Video showing the laptop being opened, keyboard pressed, screen rotated, and trackpad used."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photos confirm it is a Dell XPS laptop, but the advertised high-end specs (RTX 4060, Core i9 13th gen, 16GB RAM, 1TB SSD) cannot be verified from the images. The model may not support the advertised GPU, and the specs are critical to pricing. Proof is needed to confirm the actual configuration."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 79673,
+    "input_tokens": 2807,
+    "output_tokens": 987,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "b0383eccd2f3264fdffab73ca75b4107",
+    "error": null
+  }
+}

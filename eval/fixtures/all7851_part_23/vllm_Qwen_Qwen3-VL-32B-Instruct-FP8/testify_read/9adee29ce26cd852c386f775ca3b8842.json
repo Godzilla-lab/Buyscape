@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the front of a cardboard box for an 'OX' brand standing fan. The box features an image of a woman sitting next to the fan, with text in English and Spanish. The model name 'OX18 PLUS' is visible at the bottom. The fan is described as 18 inches (460mm) with AC 220V 50Hz power, 92W power, and made in Nigeria by Falcon Manufacturing Limited.",
+      "Photo 1 shows the side of the same box. It includes close-up images of the fan's guard, motor, and base. The brand 'OX' is visible on the motor cover. The box lists quantity as 4 sets, gross weight 4.5 kg, net weight 3.5 kg, and dimensions 49x20x50 cm. It also states 'Produced by Falcon Manufacturing Ltd, Nigeria'.",
+      "The box appears to be new and unopened, with no visible damage to the packaging.",
+      "The seller's text claims it is an 'Ox 18 inches Standing fan' available for immediate pickup."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "standing fan",
+      "brand": "OX",
+      "model": "OX18 PLUS",
+      "read_from": [
+        "photo 0 bottom text",
+        "photo 0 top logo",
+        "photo 1 motor cover"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Ox 18 inches Standing fan available for immediate pick up",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows the box labeled 'OX18 PLUS' and '18 (460mm) Standing Fan'. Photo 1 confirms the brand and production details. The box appears unopened, supporting 'available for immediate pickup'."
+      },
+      {
+        "claim": "Standing fan",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 1 both show the product as a standing fan with a base and pole, and the text on the box confirms 'Standing Fan'."
+      },
+      {
+        "claim": "18 inches",
+        "verdict": "supported",
+        "evidence": "Photo 0 clearly states '18 (460mm) Standing Fan' in the specifications section."
+      },
+      {
+        "claim": "Ox brand",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows the 'OX' logo prominently at the top and bottom. Photo 1 shows the 'OX' logo on the motor cover."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The fan may be defective or not working despite being new in box.",
+        "proof": "A video or photo of the fan being powered on and running, showing the blades spinning and the motor operating without noise or vibration.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The box may contain a different model or be empty (fraudulent packaging).",
+        "proof": "A photo of the fan inside the box, or the fan removed from the box showing the actual product matching the box description.",
+        "if_unproven": "priced as not matching description"
+      },
+      {
+        "risk": "The fan may not be compatible with local power supply (e.g., voltage or plug type).",
+        "proof": "A close-up photo of the fan's power cord and plug, and the voltage rating label on the fan itself.",
+        "if_unproven": "priced as incompatible"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the fan inside the box or removed from the box to confirm contents.",
+      "Video of the fan running to confirm it works.",
+      "Close-up of the power cord and plug to confirm compatibility with Nigerian outlets."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as an OX OX18 PLUS standing fan, and the seller's claims are supported by the box. However, without proof that the fan is functional and matches the box contents, it cannot be priced at its full value. The risks of non-functionality or mismatched contents must be resolved before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 77515,
+    "input_tokens": 2579,
+    "output_tokens": 931,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "9adee29ce26cd852c386f775ca3b8842",
+    "error": null
+  }
+}

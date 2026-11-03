@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a complete car engine with various components attached, including the alternator, intake manifold, and oil cap.",
+      "The engine appears to be a modern inline-four with a black plastic cover over the cylinder head.",
+      "The oil cap has visible text: 'ENGINE OIL SAE 5W-30' and a Hyundai logo, indicating it is a Hyundai engine.",
+      "The engine is sitting on a concrete floor, surrounded by other engine parts and debris, suggesting a workshop or scrapyard environment.",
+      "There is a watermark 'GADGETS ENTERPRISE' across the image.",
+      "No visible damage to the engine block or major components, but some dirt and grime are present."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car engine",
+      "brand": "Hyundai",
+      "model": "Tucson engine",
+      "read_from": [
+        "photo 0 oil cap (Hyundai logo and 'ENGINE OIL SAE 5W-30')",
+        "seller's words ('Hyundai Tucson')"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Complete engine for Hyundai Tucson",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows a complete engine with Hyundai branding on the oil cap, and the seller specifies 'Hyundai Tucson'."
+      },
+      {
+        "claim": "Working perfectly fine",
+        "verdict": "unverifiable_remote",
+        "evidence": "No video or test run is shown; engine condition cannot be verified from a still photo alone."
+      },
+      {
+        "claim": "Very clean nothing to fix",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows visible dirt, grime, and some rust on surrounding parts; the engine is not visibly 'very clean'."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine may not be functional or may have internal damage",
+        "proof": "Video of the engine running or a compression test report.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Engine may not be from a Hyundai Tucson (could be from another model)",
+        "proof": "VIN or engine number plate photo, or a clear shot of the engine block casting number.",
+        "if_unproven": "priced as generic Hyundai engine, not Tucson-specific"
+      },
+      {
+        "risk": "Hidden damage to internal components (pistons, crankshaft, head gasket)",
+        "proof": "Dismantled inspection video or mechanic's report.",
+        "if_unproven": "priced as potentially needing major repairs"
+      }
+    ],
+    "proof_requests": [
+      "Video of the engine running or a compression test.",
+      "Clear photo of the engine block casting number or VIN tag.",
+      "Photo of the engine from the front and rear to check for damage or missing parts."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The engine is identifiable as Hyundai, but the claim of 'working perfectly fine' and 'very clean' is not supported by the photo. Internal condition and model authenticity cannot be confirmed remotely. Proof of functionality and model match is required before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 58410,
+    "input_tokens": 1648,
+    "output_tokens": 709,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "ccd20be6d56bfbf2a12e669d40f53788",
+    "error": null
+  }
+}

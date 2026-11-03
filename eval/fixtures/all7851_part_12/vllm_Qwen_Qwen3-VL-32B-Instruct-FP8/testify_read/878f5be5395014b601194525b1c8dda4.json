@@ -1,0 +1,96 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: A black HP laptop lid being held, showing the HP logo. The laptop appears to have some dust and minor scuffs. Background shows a fan, a wall socket, and cluttered surroundings.",
+      "Photo 1: The laptop open, showing the HP login screen on the display. The keyboard is visible with a silver palm rest. The model name 'EliteBook' is visible on the lower left of the keyboard. An Intel Core i5 sticker is on the lower right of the palm rest.",
+      "Photo 2: The same laptop open, screen off, showing the keyboard and palm rest. The 'EliteBook' label and Intel Core i5 sticker are visible. The screen has a dark blue reflection, possibly from ambient light. The keyboard has some visible wear, especially around the spacebar and keys."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "EliteBook",
+      "read_from": [
+        "photo 1 keyboard left side",
+        "photo 2 keyboard left side"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "American used like new hp laptop",
+        "verdict": "unverified",
+        "evidence": "Photos show some dust and minor wear on the lid and keyboard, but no clear signs of heavy use. 'Like new' is subjective and not verifiable from photos alone."
+      },
+      {
+        "claim": "core i5",
+        "verdict": "supported",
+        "evidence": "Photo 1 and photo 2 show an Intel Core i5 sticker on the palm rest."
+      },
+      {
+        "claim": "500gb",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows the internal storage or BIOS/OS details. Cannot confirm capacity from photos."
+      },
+      {
+        "claim": "8gb",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows RAM details. Cannot confirm from photos."
+      },
+      {
+        "claim": "touch screen",
+        "verdict": "contradicted",
+        "evidence": "Photo 1 and photo 2 show a standard laptop screen with no visible touch indicators (e.g., no touch gestures, no touch screen bezel design). The screen is not being touched in any photo, and there is no evidence of touch functionality."
+      },
+      {
+        "claim": "keyboard light",
+        "verdict": "unverified",
+        "evidence": "No photo shows the keyboard illuminated. The keyboard is visible in ambient light, but backlighting is not demonstrated."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Internal components may not match advertised specs (500GB, 8GB RAM)",
+        "proof": "Photo of BIOS screen or Windows system info showing storage and RAM details.",
+        "if_unproven": "Priced as lower-spec or unknown-spec laptop, which reduces value."
+      },
+      {
+        "risk": "Screen may have dead pixels, cracks, or touch functionality not working (despite claim)",
+        "proof": "Close-up video or photo of screen with white screen test and touch gesture demonstration.",
+        "if_unproven": "Priced as non-touch screen, with potential for screen defects, reducing value."
+      },
+      {
+        "risk": "Battery may be degraded or not included",
+        "proof": "Photo of battery connected and charging indicator, or a video showing battery life during use.",
+        "if_unproven": "Priced as if battery is not functional or not included, reducing value."
+      },
+      {
+        "risk": "Laptop may have hidden physical damage or liquid damage",
+        "proof": "Photo of the bottom casing, hinges, and ports showing no corrosion or damage.",
+        "if_unproven": "Priced as potentially damaged, reducing value."
+      }
+    ],
+    "proof_requests": [
+      "Photo of BIOS or Windows system info showing exact RAM and storage capacity.",
+      "Video or photo showing screen with white screen test and touch functionality (if claimed).",
+      "Photo of the laptop bottom and ports to check for damage or liquid signs.",
+      "Photo of battery connected and charging indicator."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identifiable as an HP EliteBook, and the Core i5 sticker supports that claim. However, key claims like 500GB, 8GB RAM, and touch screen are unverifiable or contradicted by the photos. Hidden risks related to internal specs, screen condition, and battery are significant and must be proven before pricing. Without proof, the item cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 82183,
+    "input_tokens": 2404,
+    "output_tokens": 1017,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "878f5be5395014b601194525b1c8dda4",
+    "error": null
+  }
+}

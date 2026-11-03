@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black and gold graphics card with a single fan, PCIe connector, and multiple output ports. Text overlay identifies it as 'Nvidia RTX A5000 24GB GPU Ampere GDDR6 PCI-E 4.0 Deep learning AI Graphics Card'.",
+      "Photo 1 shows the NVIDIA Control Panel with 'System Information' open. The graphics card is listed as 'NVIDIA RTX A5000'. Details include: Driver version 596.86, CUDA cores 8192, Memory clock 16.00 Gbps, Memory interface 384-bit, Memory bandwidth 768.10 GB/s.",
+      "Photo 2 is a continuation of the same NVIDIA Control Panel window, showing additional details: Resizable BAR 'No', Graphics boost clock 1695 MHz, Total available graphics memory 57257 MB (which is ~55.9 GB, inconsistent with 24GB claim), and System video memory 8 MB.",
+      "The text overlay in photo 0 is not part of the hardware; it is added by the seller. The NVIDIA Control Panel screenshots appear to be from a Windows system, but the resolution is low and pixelated, suggesting possible screen capture or low-quality photo."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "graphics card",
+      "brand": "Nvidia",
+      "model": "RTX A5000",
+      "read_from": [
+        "photo 0 text overlay",
+        "photo 1 NVIDIA Control Panel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Grade A and has never been removed inside desktop it came with",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photos of the physical condition, packaging, or installation environment. The claim about 'never been removed' cannot be verified from the provided images."
+      },
+      {
+        "claim": "Nvidia RTX A5000 24GB GPU",
+        "verdict": "contradicted",
+        "evidence": "Photo 2 shows 'Total available graphics memory: 57257 MB' (~55.9 GB), which contradicts the 24GB claim. The NVIDIA Control Panel does not list 24GB; it lists ~56GB, which is inconsistent with the RTX A5000's known 24GB specification. This suggests either a mislabeled card, a different model (like RTX A6000), or a software error."
+      },
+      {
+        "claim": "Ampere GDDR6 PCI-E 4.0 Deep learning AI Graphics Card",
+        "verdict": "supported",
+        "evidence": "Photo 0 text overlay and photo 1/2 show 'NVIDIA RTX A5000', which is an Ampere-based card with GDDR6 memory and PCIe 4.0 support. The 'Deep learning AI' description is consistent with the card's intended use."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The card may not be a genuine RTX A5000 24GB, or it may be a different model (e.g., RTX A6000 48GB) mislabeled as A5000 24GB.",
+        "proof": "A clear photo of the card's PCB with the model label, or a screenshot from GPU-Z or similar tool showing the exact model and VRAM size.",
+        "if_unproven": "Priced as a lower-value or non-existent model, potentially a scam or mislabeled item."
+      },
+      {
+        "risk": "The card may be faulty or have hidden damage, as no physical condition photos are provided.",
+        "proof": "Photos of the card from all angles, showing connectors, fan, heatsink, and any signs of wear, dust, or damage.",
+        "if_unproven": "Priced as potentially non-functional or with unknown condition, reducing value."
+      },
+      {
+        "risk": "The 'Total available graphics memory' shown in photo 2 (~55.9 GB) is inconsistent with the RTX A5000's 24GB specification, suggesting a software error or misconfiguration.",
+        "proof": "A screenshot from GPU-Z or another hardware monitoring tool showing the correct VRAM size, or a photo of the card's label.",
+        "if_unproven": "Priced as potentially misrepresented, with value reduced due to uncertainty."
+      }
+    ],
+    "proof_requests": [
+      "A clear photo of the card's PCB showing the model label.",
+      "A screenshot from GPU-Z or similar tool showing the exact model, VRAM size, and other specs.",
+      "Photos of the card from all angles, including connectors and fan.",
+      "Proof of the card's physical condition and packaging, if available."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identified as RTX A5000 from the NVIDIA Control Panel, but the memory size shown (~55.9 GB) contradicts the 24GB claim, raising serious doubts about the card's authenticity or condition. Without proof of the actual VRAM size and physical condition, the item cannot be priced accurately and may be misrepresented."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 95387,
+    "input_tokens": 2516,
+    "output_tokens": 1160,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "90327c6ec67fc797fe40c91d75c7ecfd",
+    "error": null
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the iPhone's Battery Health screen: Maximum Capacity is 84%, Cycle Count is 563, Manufacture Date is September 2024, and First Use is November 2024.",
+      "Photo 1 shows the front of the phone with a heavily scratched and smudged screen.",
+      "Photo 2 shows the back of the phone: white color, triple camera module with a LiDAR sensor, and a flat edge design consistent with iPhone 14 Pro or later models.",
+      "The phone has a notch at the top of the screen, visible in photo 0.",
+      "The seller's watermark 'DANNY TUNEZ GADGETS' is present on all photos."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "iPhone 14 Pro or later model",
+      "brand": "Apple",
+      "model": null,
+      "read_from": [
+        "photo 0 screen: notch, battery health UI",
+        "photo 2: triple camera module with LiDAR, flat edges"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "The battery is on 84%",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows 'Maximum Capacity: 84%' in the Battery Health screen."
+      },
+      {
+        "claim": "The phone is in good condition",
+        "verdict": "contradicted",
+        "evidence": "Photo 1 shows the front screen is heavily scratched and smudged, indicating significant wear."
+      },
+      {
+        "claim": "The phone is a recent model",
+        "verdict": "unverified",
+        "evidence": "Manufacture date shown in photo 0 is September 2024, but model is not confirmed. The design matches iPhone 14 Pro or later, but exact model is unreadable."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The phone may have a cracked screen or display damage not visible in the photos.",
+        "proof": "A close-up photo of the screen showing the full surface, especially under direct light, to check for cracks or dead pixels.",
+        "if_unproven": "priced as having screen damage"
+      },
+      {
+        "risk": "The phone may have water damage or internal issues not visible externally.",
+        "proof": "A photo of the SIM tray, charging port, and speaker grills to check for corrosion or residue.",
+        "if_unproven": "priced as potentially water-damaged"
+      },
+      {
+        "risk": "The battery may be degraded beyond the 84% capacity shown, or the battery health data may be tampered with.",
+        "proof": "A video showing the phone being charged from 0% to 100% with a timer, or a screenshot of battery usage over time.",
+        "if_unproven": "priced as battery may not hold charge well"
+      },
+      {
+        "risk": "The phone may be a refurbished or non-genuine unit, or have been jailbroken or modified.",
+        "proof": "A photo of the Settings > General > About screen showing the serial number and model number, or a video of the phone being turned on and off to check for any unusual behavior.",
+        "if_unproven": "priced as potentially non-genuine or modified"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the Settings > General > About screen to confirm the exact model and serial number.",
+      "Close-up photo of the screen under direct light to check for cracks or dead pixels.",
+      "Photo of the charging port and speaker grills to check for water damage.",
+      "Video of the phone being charged from 0% to 100% to verify battery health."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The exact model cannot be confirmed from the photos, and there are visible signs of screen damage. Hidden risks like water damage, screen cracks, and battery tampering cannot be ruled out without additional proof. The item cannot be priced accurately without confirming the model and verifying the condition."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 74324,
+    "input_tokens": 2772,
+    "output_tokens": 897,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "3e2340f06caf2b30b502459ce55d1a00",
+    "error": null
+  }
+}

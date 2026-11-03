@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black projector with the brand name 'JADE' written in white on the front. The logo is mirrored, suggesting the photo may be flipped or the text is reversed.",
+      "A sticker on the front says 'SOLD/SERVICED BY MEGAPROJECTORS 08033745326'.",
+      "There is a small orange sticker with '151' and '13104' on the lower left.",
+      "Photo 1 shows the back of the projector with ports: VGA, yellow RCA (Video), HDMI, USB, and a power socket. A blue label with 'X1130H' is visible near the bottom left.",
+      "Photo 2 is similar to Photo 0 but shows a lens cap or cover attached to the lens with a string. The 'JADE' logo is again mirrored.",
+      "The seller claims it is an 'Original Acer projector from London', but the visible brand is 'JADE', not 'Acer'.",
+      "The 'JADE' logo appears to be a mirror image of 'ACER' \u2014 suggesting the photo may be flipped or the brand is mislabeled.",
+      "The model label 'X1130H' is visible on the back (Photo 1). This is a known model for Acer projectors (Acer X1130H).",
+      "The projector appears to be in used condition with visible scratches and dust."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "projector",
+      "brand": "Acer",
+      "model": "X1130H",
+      "read_from": [
+        "photo 1 label 'X1130H'",
+        "photo 0 and 2 mirrored 'JADE' logo \u2014 interpreted as 'ACER' due to mirror effect"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Original Acer projector from London",
+        "verdict": "unverified",
+        "evidence": "The brand name 'JADE' is visible on the front (photos 0 and 2), which is mirrored and likely meant to be 'ACER'. The model 'X1130H' (photo 1) is an Acer model. The 'from London' claim cannot be verified remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The projector may not be functional or may have internal damage not visible in photos.",
+        "proof": "A video showing the projector turning on, projecting an image, and responding to inputs.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The 'JADE' branding may indicate a counterfeit or rebranded unit, not an original Acer.",
+        "proof": "A clear photo of the original Acer label or serial number plate, or a video of the projector's menu showing the Acer brand.",
+        "if_unproven": "priced as a generic or rebranded unit, lower value"
+      },
+      {
+        "risk": "The projector may have lamp or cooling issues, common in used projectors.",
+        "proof": "A video showing the projector running for 1-2 minutes with the lamp light and fan noise.",
+        "if_unproven": "priced with assumption of potential lamp or cooling failure"
+      }
+    ],
+    "proof_requests": [
+      "A clear photo of the original Acer label or serial number plate.",
+      "A video showing the projector turning on and projecting an image.",
+      "A video of the projector running for 1-2 minutes to check lamp and fan operation.",
+      "A photo of the front without the lens cap, showing the lens and any damage."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The brand name 'JADE' is mirrored and likely intended to be 'ACER', and the model 'X1130H' matches an Acer projector. However, without proof of authenticity and functionality, the item cannot be priced confidently. The seller's claim of 'Original Acer' is unverified, and hidden risks like non-functionality or counterfeit branding require further proof."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 72233,
+    "input_tokens": 2144,
+    "output_tokens": 900,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "1b0bd1f533801a5ced3fdf677f364136",
+    "error": null
+  }
+}

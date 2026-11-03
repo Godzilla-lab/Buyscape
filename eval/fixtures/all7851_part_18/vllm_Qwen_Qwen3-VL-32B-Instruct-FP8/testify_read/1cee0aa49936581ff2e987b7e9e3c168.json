@@ -1,0 +1,66 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a hand holding a blue box labeled 'Desk lamp' with an image of a black clamp desk lamp with a flexible swing arm.",
+      "The box has text at the bottom: 'E27 MAX 60W AC230V-50HZ'.",
+      "The background shows shelves with various boxed products, including UV LED lamps and handheld nail lamps.",
+      "The lamp in the image on the box has a clamp base, a flexible arm, and a conical shade.",
+      "No actual lamp is visible outside the box; only the packaging is shown."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "clamp desk lamp",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Adjustable Clamp Desk Lamp \u2013 E27 60W",
+        "verdict": "supported",
+        "evidence": "Photo 0 box shows 'Desk lamp' and 'E27 MAX 60W AC230V-50HZ'. The image on the box shows a clamp desk lamp with a flexible arm, matching 'adjustable'."
+      },
+      {
+        "claim": "Brand new",
+        "verdict": "unverifiable_remote",
+        "evidence": "Only the box is shown; no proof the lamp inside is new or unopened. The box appears intact, but contents are not visible."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Lamp may be damaged or non-functional inside the box",
+        "proof": "Photo of the lamp inside the box, unboxed and powered on, showing light output and movement of the arm.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Box may be reused or lamp may be second-hand",
+        "proof": "Close-up of the box seal and any serial numbers or barcodes, plus a photo of the lamp itself showing no wear or damage.",
+        "if_unproven": "priced as used"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the lamp unboxed, showing the actual product.",
+      "Photo of the lamp turned on, demonstrating functionality.",
+      "Close-up of the box seal and any serial numbers or barcodes."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a clamp desk lamp by type, and the E27 60W claim is supported by the box text. However, the 'brand new' claim cannot be verified remotely, and the actual condition and functionality of the lamp inside the box are unknown. Without proof of the lamp\u2019s condition and working state, pricing cannot be determined."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 49240,
+    "input_tokens": 1788,
+    "output_tokens": 609,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "1cee0aa49936581ff2e987b7e9e3c168",
+    "error": null
+  }
+}

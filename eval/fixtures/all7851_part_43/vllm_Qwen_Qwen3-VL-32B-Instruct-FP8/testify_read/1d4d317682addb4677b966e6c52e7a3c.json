@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black DSLR camera with a lens cap on, a Canon battery charger, and a strap. The camera body has 'Canon' and 'EOS' visible on top. The lens has 'EF-S 18-55mm' written on it.",
+      "Photo 1 shows the same camera from a top-down angle, with the lens cap removed, revealing the lens. The battery charger is visible beside it. The camera's mode dial and top controls are visible.",
+      "Photo 2 shows the camera held in a hand, with the lens cap on. The pop-up flash is raised. The 'Canon' logo is visible on the front of the camera body. The battery charger is in the background."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "Canon EOS 400D DSLR camera with 18-55mm lens",
+      "brand": "Canon",
+      "model": "EOS 400D",
+      "read_from": [
+        "photo 0 camera body: 'Canon' and 'EOS' visible",
+        "photo 0 lens: 'EF-S 18-55mm' visible",
+        "photo 2 camera body: 'Canon' and 'EOS' visible"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Canon EOS 400D DSLR Camera with 18\u201355mm Lens for Sale",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows the camera body with 'Canon' and 'EOS' visible, and the lens marked 'EF-S 18-55mm'."
+      },
+      {
+        "claim": "Camera Model: Canon EOS 400D (Digital Rebel)",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 2 show the camera body with 'Canon' and 'EOS' visible; the model name '400D' is not directly readable, but the combination of 'EOS' and 'EF-S 18-55mm' lens is consistent with the Canon EOS 400D (also known as Digital Rebel XTi)."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Camera may not be functional (e.g., shutter failure, sensor damage, or non-working flash)",
+        "proof": "A video clip showing the camera powering on, taking a photo, and the flash firing.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Lens may have internal damage or scratches not visible in photos",
+        "proof": "A close-up photo of the lens front and rear elements, and a photo of the lens barrel interior.",
+        "if_unproven": "priced as having potential lens damage"
+      },
+      {
+        "risk": "Battery or charger may be non-functional or missing",
+        "proof": "A photo of the battery inserted into the camera and the charger with a battery inserted, showing the charging indicator light.",
+        "if_unproven": "priced as missing or non-functional battery/charger"
+      }
+    ],
+    "proof_requests": [
+      "Video clip showing the camera powering on, taking a photo, and the flash firing.",
+      "Close-up photos of the lens front and rear elements, and the lens barrel interior.",
+      "Photo of the battery inserted into the camera and the charger with a battery inserted, showing the charging indicator light."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The camera model and lens are identifiable from the photos, but critical functional and condition details (like working state, lens condition, and battery/charger functionality) cannot be verified remotely. These risks affect pricing and must be proven before a price can be assigned."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 66645,
+    "input_tokens": 2383,
+    "output_tokens": 818,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "1d4d317682addb4677b966e6c52e7a3c",
+    "error": null
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a large black and white inverter with a label 'DIAMOND' and text 'Pure Sine Wave Inverter with charger' and '15000VA - 3000W'.",
+      "The front panel has a small digital display, control buttons, and a diagram of connections.",
+      "Photo 1 shows the top of the inverter with two cooling fans, red and black battery terminals labeled 'POSITIVE' and 'NEGATIVE', and a 48VDC label.",
+      "The unit appears used, with visible dust, scratches, and some wear on the casing.",
+      "No power cord or batteries are visible in the photos.",
+      "The seller claims it is a '10kv inverter machine working perfectly'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "inverter",
+      "brand": "DIAMOND",
+      "model": "15000VA - 3000W",
+      "read_from": [
+        "photo 0 side label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "10kv inverter machine",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows '15000VA - 3000W' on the label, which is 15kVA, not 10kV. Voltage and power are different units; 10kV is not a standard inverter rating. The label clearly states 15000VA."
+      },
+      {
+        "claim": "working perfectly",
+        "verdict": "unverified",
+        "evidence": "No photo shows the inverter powered on or in operation. The display is dark and no indicators are lit. No proof of functionality is provided."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Inverter may not be functional or may have internal damage",
+        "proof": "A video or photo showing the inverter powered on, display lit, and output voltage measured with a multimeter.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Battery terminals or internal components may be corroded or damaged",
+        "proof": "Close-up photos of the battery terminals, internal circuitry, and wiring connections.",
+        "if_unproven": "priced with assumption of wear and potential failure"
+      },
+      {
+        "risk": "Unit may be missing critical components (e.g., batteries, remote, manual)",
+        "proof": "Photo showing all accessories and components included with the inverter.",
+        "if_unproven": "priced as incomplete"
+      }
+    ],
+    "proof_requests": [
+      "Video or photo of the inverter turned on with display lit and output voltage shown.",
+      "Close-up of the battery terminals and internal connections.",
+      "Photo of all included accessories and components."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller's claim of '10kv' is contradicted by the visible '15000VA' label. The claim of 'working perfectly' is unverified as no operational proof is shown. The unit's condition and functionality require further evidence before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 58878,
+    "input_tokens": 2274,
+    "output_tokens": 708,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "c539dc1d73bba4c09bec0ff5614fc9ef",
+    "error": null
+  }
+}

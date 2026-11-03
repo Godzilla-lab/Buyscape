@@ -1,0 +1,96 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Laptop open, screen shows Omen logo, keyboard visible, palm rest has stickers including '016', 'Intel Core', 'NVIDIA GeForce RTX', and '16.1'.",
+      "Photo 1: Laptop screen shows Windows desktop with scenic wallpaper, keyboard and palm rest same as photo 0, stickers visible.",
+      "Photo 2: Same as photo 1, slightly different angle, same stickers and screen content.",
+      "All photos show a black laptop with 'OMEN' branding on screen bezel and palm rest.",
+      "Stickers on palm rest indicate 'Intel Core' and 'NVIDIA GeForce RTX', but no specific model numbers visible.",
+      "No visible damage to screen or keyboard in photos.",
+      "No internal components or ports shown.",
+      "No serial number or model plate visible."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "gaming laptop",
+      "brand": "HP Omen",
+      "model": null,
+      "read_from": [
+        "photo 0 screen",
+        "photo 0 palm rest"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP Omen 16 gaming PC",
+        "verdict": "supported",
+        "evidence": "Photo 0: 'OMEN' logo on screen and '016' on palm rest, consistent with HP Omen 16 series."
+      },
+      {
+        "claim": "Core i9 14th generation",
+        "verdict": "unverified",
+        "evidence": "Photo 0: 'Intel Core' sticker present, but no generation or model number visible. Cannot confirm 14th gen from photos."
+      },
+      {
+        "claim": "1TB SSD",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal components shown. Cannot verify storage capacity from photos."
+      },
+      {
+        "claim": "16GB RAM",
+        "verdict": "unverifiable_remote",
+        "evidence": "No system information or internal components shown. Cannot verify RAM from photos."
+      },
+      {
+        "claim": "8GB Nvidia RTX 5070 dedicated",
+        "verdict": "contradicted",
+        "evidence": "Photo 0: 'NVIDIA GeForce RTX' sticker visible, but no 'RTX 5070' or '8GB' text. RTX 5070 does not exist as a real product; likely a misstatement for RTX 4070 or similar. Also, no 8GB specification visible."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Incorrect or outdated GPU model (RTX 5070 does not exist)",
+        "proof": "Photo of GPU label or system information showing actual GPU model.",
+        "if_unproven": "Priced as lower-end GPU, e.g., RTX 4070 or 4060, which reduces value."
+      },
+      {
+        "risk": "RAM and storage specifications not matching claims (16GB RAM, 1TB SSD)",
+        "proof": "Screenshot of system information (e.g., Windows Task Manager or Device Manager) showing actual RAM and storage.",
+        "if_unproven": "Priced as lower specs, e.g., 8GB RAM or 512GB SSD, which reduces value."
+      },
+      {
+        "risk": "CPU generation not 14th (claimed Core i9 14th gen)",
+        "proof": "Screenshot of system information showing CPU model and generation.",
+        "if_unproven": "Priced as older generation CPU, e.g., 13th gen, which reduces value."
+      },
+      {
+        "risk": "Hidden physical damage or wear not visible in photos (e.g., hinge, screen, ports)",
+        "proof": "Close-up photos of all ports, hinges, screen edges, and underside.",
+        "if_unproven": "Priced with assumption of minor wear, but potential for major defects reduces value."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of system information showing CPU model, RAM, and storage.",
+      "Photo of GPU label or system information showing actual GPU model.",
+      "Close-up photos of all ports, hinges, and underside of laptop.",
+      "Photo of serial number or model plate if available."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The laptop is identifiable as an HP Omen 16 gaming laptop, but key specifications (CPU generation, RAM, storage, GPU model) cannot be verified from the photos. The claim of 'RTX 5070' is contradicted as it does not exist. Without proof of actual specs, the item cannot be priced accurately and risks being misvalued."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 86559,
+    "input_tokens": 2805,
+    "output_tokens": 1050,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "08e07b21afdc50e7f6d180f28b362622",
+    "error": null
+  }
+}

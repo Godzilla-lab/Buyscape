@@ -1,0 +1,96 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: A black Dell laptop open on a wooden table, screen showing a browser with a Dell laptop image. The Dell logo is visible below the screen. Keyboard is backlit, keys are black with white lettering. Touchpad is centered below the keyboard.",
+      "Photo 1: Same laptop from a slightly different angle, screen showing Windows 11 default wallpaper. The Dell logo is visible below the screen. Keyboard and touchpad are visible. A power adapter is plugged into the wall in the background.",
+      "Photo 2: A close-up of the Windows File Explorer window showing 'Local Disk (C:)' with '440 GB free of 476 GB'. The system appears to be running Windows 11. The screen has a slight glare."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "laptop",
+      "brand": "Dell",
+      "model": null,
+      "read_from": [
+        "photo 0 screen below display",
+        "photo 1 screen below display"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Dell xps 13",
+        "verdict": "unverified",
+        "evidence": "The brand 'Dell' is visible in photos 0 and 1, but the model 'XPS 13' is not readable on the device. The seller's text claims it, but no photo confirms the model name."
+      },
+      {
+        "claim": "512gb Ssd",
+        "verdict": "supported",
+        "evidence": "Photo 2 shows 'Local Disk (C:) 440 GB free of 476 GB', which is consistent with a 512GB SSD (accounting for system files and formatting overhead)."
+      },
+      {
+        "claim": "16gb ram",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows the RAM amount. The system information or task manager is not visible. The seller's claim cannot be verified from the photos."
+      },
+      {
+        "claim": "intel core i7",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows the CPU model. The system information or task manager is not visible. The seller's claim cannot be verified from the photos."
+      },
+      {
+        "claim": "Keyboard lighting",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows the keyboard with visible backlighting. The keys are illuminated, confirming the presence of keyboard lighting."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The laptop may not be an XPS 13 model as claimed, possibly a different Dell model (e.g., Latitude or Inspiron).",
+        "proof": "A clear photo of the laptop's bottom chassis or hinge area showing the model name, or a screenshot of the system information showing the model.",
+        "if_unproven": "Priced as a generic Dell laptop, not an XPS 13, which would reduce value significantly."
+      },
+      {
+        "risk": "The RAM may not be 16GB as claimed.",
+        "proof": "A screenshot of the Windows Task Manager or System Information showing the installed RAM.",
+        "if_unproven": "Priced as if RAM is less than 16GB (e.g., 8GB), which would lower the price."
+      },
+      {
+        "risk": "The CPU may not be an Intel Core i7.",
+        "proof": "A screenshot of the Windows Task Manager or System Information showing the CPU model.",
+        "if_unproven": "Priced as if CPU is lower tier (e.g., i5 or i3), which would lower the price."
+      },
+      {
+        "risk": "The SSD may be a 476GB drive, not a 512GB drive, or may be a slower SATA drive rather than NVMe, affecting performance.",
+        "proof": "A screenshot of the Disk Management tool or a benchmark tool showing the drive type and speed.",
+        "if_unproven": "Priced as a standard SSD, not a high-performance NVMe, which may reduce value."
+      },
+      {
+        "risk": "The laptop may have physical damage or wear not visible in the photos, such as hinge issues, screen dead pixels, or keyboard key failures.",
+        "proof": "A video showing the laptop being opened, closed, and used, including a close-up of the screen and keyboard under different lighting.",
+        "if_unproven": "Priced with a discount for potential hidden defects."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of System Information or Task Manager showing the exact model, CPU, and RAM.",
+      "Photo or video of the bottom of the laptop showing the model name.",
+      "Screenshot of Disk Management or a benchmark tool showing the SSD type and speed.",
+      "Video showing the laptop being opened, closed, and used, including keyboard and screen close-ups."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is not confirmed as XPS 13, and critical specs like RAM and CPU are unverifiable from the photos. Without proof, the item cannot be accurately priced. The photos support some claims (SSD size, keyboard lighting) but not others (model, RAM, CPU)."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 92853,
+    "input_tokens": 2585,
+    "output_tokens": 1163,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "e68626e85ba055de57d7b00a395b6c7f",
+    "error": null
+  }
+}

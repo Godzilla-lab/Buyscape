@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows multiple units of a small electronic device in plastic packaging, arranged in rows.",
+      "Each unit has a black rectangular box with two BNC connectors and a short black cable with a connector on the other end.",
+      "The packaging is labeled 'Video Balun' and 'HD-CVI/TVI/AHD' in green and white text.",
+      "Some packages have a red label with 'DB BUILDING TECHNOLOGY' watermarked across them.",
+      "The devices appear identical across all packages.",
+      "No visible damage to packaging or devices in the photo."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "1 channel passive balun",
+      "brand": "DB BUILDING TECHNOLOGY",
+      "model": "Video Balun",
+      "read_from": [
+        "photo 0 packaging text",
+        "photo 0 red label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "1 channel passive balun",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows the device with one video input/output pair (BNC connectors) and no power input, consistent with a passive balun."
+      },
+      {
+        "claim": "Can enhance poor video quality resulting from extensive...",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a functional claim that cannot be verified from photos alone. No test or demonstration is shown."
+      },
+      {
+        "claim": "Weight 3.00 kg",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows multiple units (at least 12 visible), each likely weighing ~50-100g. 3.00 kg would be the weight of ~30-60 units, not the single unit implied by the claim. The weight is likely for the entire lot, not per unit."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Device may be non-functional or defective",
+        "proof": "A close-up photo of the device with the packaging removed, showing the circuit board and connectors, and a test video showing it in use with a camera and monitor.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Units may be counterfeit or non-branded",
+        "proof": "A close-up of the device's label or circuit board showing manufacturer markings or serial numbers.",
+        "if_unproven": "priced as generic/no-brand"
+      },
+      {
+        "risk": "Packaging may be reused or damaged, affecting resale value",
+        "proof": "A photo of the back of the packaging or the seal to check for tampering or reuse.",
+        "if_unproven": "priced as used packaging"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of one unit with packaging removed, showing the circuit board and connectors.",
+      "Photo of the device in use with a camera and monitor to verify functionality.",
+      "Photo of the back of the packaging or seal to check for tampering.",
+      "Clarification on whether the weight of 3.00 kg is per unit or for the entire lot."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a 1-channel passive balun, but the weight claim is contradicted by the visual evidence (multiple units shown). Functional claims cannot be verified remotely. Hidden risks include non-functionality and counterfeit status, which require additional proof to resolve before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 59351,
+    "input_tokens": 1579,
+    "output_tokens": 765,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "d1f19226e009b5852e22a154ce23e442",
+    "error": null
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Open laptop showing Windows login screen, HP logo on bezel, 'ELITEBOOK' text on palm rest, Intel Core i7 sticker on lower right of keyboard area. Keyboard appears to be backlit. Screen shows 14-inch size based on proportions and bezel width.",
+      "Photo 1: Closed laptop from top view, silver lid with HP logo. No visible model number or serial. Background shows shelves with other electronics.",
+      "Photo 2: Same as photo 0, slightly different angle. Windows login screen visible, same stickers and branding. No visible fingerprint reader or ports.",
+      "All photos show a watermark: 'STAND TALL GADGETS STORES'.",
+      "No photos show the bottom of the laptop, ports, or internal components."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "EliteBook 840 G5",
+      "read_from": [
+        "seller's text",
+        "photo 0: 'ELITEBOOK' text on palm rest"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP Elitebook 840g5",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows 'ELITEBOOK' on palm rest, consistent with model name. Seller's text matches."
+      },
+      {
+        "claim": "corei7",
+        "verdict": "supported",
+        "evidence": "Photo 0 and 2 show Intel Core i7 sticker on lower right of keyboard area."
+      },
+      {
+        "claim": "8gb ram",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows system information or BIOS. RAM cannot be verified from exterior photos."
+      },
+      {
+        "claim": "256gb ssd",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows disk management, BIOS, or internal drive. SSD size cannot be confirmed remotely."
+      },
+      {
+        "claim": "keyboard light",
+        "verdict": "supported",
+        "evidence": "Photo 0 and 2 show illuminated keys, indicating backlit keyboard. Seller's claim is consistent with visual evidence."
+      },
+      {
+        "claim": "8th gen",
+        "verdict": "unverified",
+        "evidence": "Intel Core i7 sticker does not specify generation. 8th gen is plausible for 840 G5, but not confirmed by photos."
+      },
+      {
+        "claim": "finger print",
+        "verdict": "unverified",
+        "evidence": "No visible fingerprint reader on keyboard or touchpad. Could be hidden under touchpad or not present. No photo confirms its existence."
+      },
+      {
+        "claim": "14 inches",
+        "verdict": "supported",
+        "evidence": "Screen size appears consistent with 14-inch laptop based on bezel width and proportions in photos 0 and 2."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "RAM is not 8GB",
+        "proof": "Photo of system properties or BIOS showing installed RAM",
+        "if_unproven": "priced as having less than 8GB RAM"
+      },
+      {
+        "risk": "SSD is not 256GB or is not SSD",
+        "proof": "Photo of disk management or BIOS showing drive size and type",
+        "if_unproven": "priced as having smaller or HDD drive"
+      },
+      {
+        "risk": "Fingerprint reader is not present",
+        "proof": "Close-up photo of touchpad area showing fingerprint sensor",
+        "if_unproven": "priced as without fingerprint reader"
+      },
+      {
+        "risk": "Laptop has physical damage or wear not visible in photos",
+        "proof": "Photo of bottom of laptop, hinges, and all sides showing condition",
+        "if_unproven": "priced as having potential hidden damage"
+      },
+      {
+        "risk": "Battery health is poor or not included",
+        "proof": "Photo of battery status in Windows or BIOS, or photo of battery being removed",
+        "if_unproven": "priced as battery may be dead or not included"
+      }
+    ],
+    "proof_requests": [
+      "Photo of system properties or BIOS showing RAM and SSD details",
+      "Close-up photo of touchpad area to confirm fingerprint reader",
+      "Photo of bottom of laptop showing ports, battery, and condition",
+      "Photo of battery status in Windows or BIOS"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "While the model and some features are supported, critical claims like RAM, SSD size, and fingerprint reader cannot be verified from current photos. Hidden risks like battery condition and physical damage also require additional proof. Pricing cannot be accurately determined without these details."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 88536,
+    "input_tokens": 2803,
+    "output_tokens": 1069,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "5bfbeaf072e07a24f690822b2fa1fcdf",
+    "error": null
+  }
+}

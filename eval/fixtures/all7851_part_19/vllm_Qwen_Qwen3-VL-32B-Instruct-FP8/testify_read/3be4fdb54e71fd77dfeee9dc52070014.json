@@ -1,0 +1,91 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the front of a black desktop tower with a matte finish and a small handle at the bottom. There is a watermark 'COMPUTER SURPLUS LTD' and 'POSTED ON JIJI'.",
+      "Photo 1 shows the rear of the same desktop tower. It has a grid-style ventilation panel, a power connector, multiple ports including USB, Ethernet, HDMI, and audio jacks. A white sticker with a barcode and serial number is visible. The sticker includes 'Dell' and 'OptiPlex' text, and the model number '000143' is visible below the barcode.",
+      "The rear panel also shows a small purple sticker with 'Intel' and 'Processor' text, indicating an Intel CPU.",
+      "The chassis appears to be a small form factor (SFF) desktop, typical of Dell OptiPlex models."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "desktop computer",
+      "brand": "Dell",
+      "model": "OptiPlex 3040",
+      "read_from": [
+        "photo 1 sticker: 'Dell OptiPlex' and '000143' (model identifier for OptiPlex 3040)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Dell optilex 3040",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows a sticker with 'Dell OptiPlex' and model identifier '000143', which corresponds to the OptiPlex 3040 model."
+      },
+      {
+        "claim": "intel core i5, 3.20ghz",
+        "verdict": "unverified",
+        "evidence": "Photo 1 shows an 'Intel Processor' sticker, but no specific model or clock speed is visible. The claim cannot be confirmed from the photos."
+      },
+      {
+        "claim": "8gb, 500gb hdd",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal components are visible. RAM and storage cannot be confirmed from the exterior photos."
+      },
+      {
+        "claim": "used usa refurbished desktop",
+        "verdict": "unverifiable_remote",
+        "evidence": "The photos show no proof of origin or refurbishment status. The watermark 'COMPUTER SURPLUS LTD' suggests a reseller, but not the origin or refurbishment process."
+      },
+      {
+        "claim": "ready to...",
+        "verdict": "unverified",
+        "evidence": "No indication of power-on state, operating system, or functionality is visible in the photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The CPU is not an Intel Core i5 3.20GHz as claimed",
+        "proof": "A photo of the CPU label or BIOS screen showing the exact model and clock speed.",
+        "if_unproven": "priced as a generic Intel processor, not a specific i5 3.20GHz"
+      },
+      {
+        "risk": "RAM is not 8GB or storage is not 500GB HDD",
+        "proof": "A photo of the system BIOS screen showing installed RAM and storage, or a photo of the internal components showing the RAM sticks and HDD.",
+        "if_unproven": "priced as unknown RAM and storage, which may be less than claimed"
+      },
+      {
+        "risk": "The unit is not functional or has hidden damage",
+        "proof": "A video or photo showing the desktop powering on, booting into an OS, and running a basic task.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The unit is not refurbished or has not been properly tested",
+        "proof": "A photo or document from the refurbisher showing testing logs or certification.",
+        "if_unproven": "priced as used without refurbishment guarantee"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the BIOS screen showing CPU model, RAM, and storage details.",
+      "Video or photo of the desktop powering on and booting into an operating system.",
+      "Photo of the internal components showing RAM and HDD.",
+      "Proof of refurbishment or testing, if available."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is confirmed as Dell OptiPlex 3040, but critical claims about CPU, RAM, storage, and functionality cannot be verified from the current photos. Hidden risks related to performance and condition require additional proof before pricing can be determined."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 78638,
+    "input_tokens": 2097,
+    "output_tokens": 1017,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "3be4fdb54e71fd77dfeee9dc52070014",
+    "error": null
+  }
+}

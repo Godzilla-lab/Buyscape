@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Closed silver laptop with HP logo on lid, placed on wooden table with decorative flowers in background. Watermark 'POSTED ON JIJI CIMLET INNOVATION' visible.",
+      "Photo 1: Laptop open, showing Windows desktop with time 13:04, date Thursday 23 October. Keyboard and trackpad visible. Sticker on palm rest reads 'HP ENVY x360 Laptop' with 'All-out performance' and QR code. Intel Core i5 sticker visible on bottom right of keyboard area. Watermark same as photo 0.",
+      "Photo 2: Side view of laptop in tent mode, showing hinge and back of keyboard. Ventilation grille visible on back. Watermark same as previous photos."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "ENVY x360",
+      "read_from": [
+        "photo 1 sticker on palm rest"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP envy 14 2in1 convertible Laptop",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows sticker 'HP ENVY x360 Laptop' and photo 2 shows tent mode, confirming 2-in-1 convertible design. The '14' is not visible but consistent with typical x360 14-inch models."
+      },
+      {
+        "claim": "Core i7 11th generation",
+        "verdict": "contradicted",
+        "evidence": "Photo 1 shows an Intel Core i5 sticker, not i7. The sticker does not specify generation, but the model 'ENVY x360' with i5 is common in 11th gen, but the claim of i7 is not supported by visible evidence."
+      },
+      {
+        "claim": "512ssd 16gb ram",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal components or system specs visible. Cannot verify SSD size or RAM amount from photos."
+      },
+      {
+        "claim": "14inches screen",
+        "verdict": "unverified",
+        "evidence": "Screen size not directly visible or labeled. The model 'ENVY x360' typically comes in 14-inch variants, but not confirmed by photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Internal components may not match claimed specs (i7, 16GB RAM, 512GB SSD)",
+        "proof": "Photo of system information screen (e.g., Windows About or BIOS) showing CPU, RAM, and storage details.",
+        "if_unproven": "Priced as lower-spec model (e.g., i5, 8GB RAM, 256GB SSD) or not working."
+      },
+      {
+        "risk": "Laptop may have physical damage not visible in photos (e.g., hinge wear, screen dead pixels, keyboard issues)",
+        "proof": "Close-up video or photos of hinge, screen edges, and keyboard under different lighting.",
+        "if_unproven": "Priced as used with potential defects, reducing value."
+      },
+      {
+        "risk": "Battery health may be degraded",
+        "proof": "Photo or video of battery health report from Windows or BIOS.",
+        "if_unproven": "Priced as if battery is poor (e.g., 50% capacity or less)."
+      }
+    ],
+    "proof_requests": [
+      "Photo of system information screen showing CPU, RAM, and storage details.",
+      "Close-up video or photos of hinge, screen edges, and keyboard under different lighting.",
+      "Photo or video of battery health report."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identified as HP ENVY x360 from the sticker in photo 1, but key claims (i7, 16GB RAM, 512GB SSD) cannot be verified remotely. The i5 sticker contradicts the i7 claim. Without proof of internal specs and condition, the item cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 77587,
+    "input_tokens": 2802,
+    "output_tokens": 915,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "a8c86b81c68d330fb64fd0e9312c7e61",
+    "error": null
+  }
+}

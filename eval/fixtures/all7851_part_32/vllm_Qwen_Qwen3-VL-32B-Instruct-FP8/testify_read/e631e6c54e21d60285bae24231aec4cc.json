@@ -1,0 +1,88 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the back of a black iPhone with a single vertical camera lens and flash, and the Apple logo centered. The design matches the iPhone XR.",
+      "Photo 1 shows the front of the same phone with a notch at the top of the screen, consistent with iPhone XR design.",
+      "No visible damage or cracks on the back or front in the photos.",
+      "No text or labels visible on the phone itself to confirm model or storage capacity.",
+      "Watermark 'POSTED ON JIJI SYLVA UGBODU' is present on both photos."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "iPhone XR",
+      "brand": "Apple",
+      "model": null,
+      "read_from": [
+        "photo 0 back design",
+        "photo 1 front notch design"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Usa used iphone xr",
+        "verdict": "supported",
+        "evidence": "The design in photo 0 (single vertical camera, Apple logo) and photo 1 (notch) matches iPhone XR. No other model fits this design."
+      },
+      {
+        "claim": "64gb storage",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows the phone's settings, box, or label to confirm storage. Cannot be verified from current images."
+      },
+      {
+        "claim": "10/10 neatness",
+        "verdict": "unverified",
+        "evidence": "No visible damage in photos, but no close-up of screen edges, buttons, or ports. Scratches or wear may be hidden."
+      },
+      {
+        "claim": "bulk purchase available",
+        "verdict": "unverifiable_remote",
+        "evidence": "No evidence in photos or text to confirm availability of multiple units. Seller's statement only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Phone may be faulty or not working",
+        "proof": "Video or photo showing the phone powered on, with home screen visible and responsive touch.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Storage capacity may not be 64GB (could be 128GB or 256GB, or downgraded)",
+        "proof": "Photo of phone settings screen showing 'General > About' with storage capacity listed.",
+        "if_unproven": "priced as 32GB or unknown storage, which is lower value"
+      },
+      {
+        "risk": "Phone may be blacklisted or have iCloud lock",
+        "proof": "Photo of phone settings showing 'iCloud' status and 'Find My iPhone' disabled, or proof of activation with seller's Apple ID.",
+        "if_unproven": "priced as locked or blacklisted, which reduces value significantly"
+      },
+      {
+        "risk": "Hidden physical damage (cracks, water damage, loose buttons)",
+        "proof": "Close-up photos of screen edges, charging port, volume buttons, and speaker grills.",
+        "if_unproven": "priced as having minor to moderate wear, reducing value"
+      }
+    ],
+    "proof_requests": [
+      "Photo of phone screen showing 'Settings > General > About' to confirm storage and model.",
+      "Video of phone turning on and showing home screen.",
+      "Close-up photos of charging port, buttons, and speaker grills.",
+      "Proof of iCloud status (e.g., 'Find My iPhone' disabled)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The phone appears to be an iPhone XR based on design, but critical details like storage capacity, working condition, and iCloud status cannot be confirmed from current photos. These factors significantly affect price and must be verified before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 66489,
+    "input_tokens": 2608,
+    "output_tokens": 835,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "e631e6c54e21d60285bae24231aec4cc",
+    "error": null
+  }
+}

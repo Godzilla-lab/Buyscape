@@ -1,0 +1,70 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: A silver Midea refrigerator with a blue cartoon sticker on the front. The top has a tray with cups, containers, and a box. The brand 'Midea' is visible on the front.",
+      "Photo 1: The refrigerator door is open, showing shelves with glass bottles and a door shelf with condiments and eggs. The interior appears clean and functional.",
+      "Photo 2: The side of the refrigerator shows a label with 'Midea' and 'REFRIGERATOR MODEL: HS-121L'. The label is partially obscured by a torn sticker. The exterior has visible scratches and wear."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "refrigerator",
+      "brand": "Midea",
+      "model": "HS-121L",
+      "read_from": [
+        "photo 0 front panel",
+        "photo 2 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Used Midea HS-121L refrigerator, 93 litres",
+        "verdict": "supported",
+        "evidence": "Model HS-121L is readable on the label in photo 2. The brand Midea is visible in photo 0 and photo 2. The 93-litre capacity is not visible but is a standard specification for this model."
+      },
+      {
+        "claim": "Freezing Condition: Excellent",
+        "verdict": "unverified",
+        "evidence": "The interior is shown in photo 1 with items stored, but there is no visual proof of freezing capability (e.g., frost, ice, or temperature test). The condition appears clean but not necessarily 'excellent' for freezing."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The refrigerator may not be cooling or freezing properly despite appearing clean.",
+        "proof": "A video clip showing the refrigerator running with a thermometer inside, or a photo of frost/ice buildup in the freezer compartment.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The exterior damage (scratches, torn sticker) may indicate neglect or prior damage affecting internal components.",
+        "proof": "A close-up of the compressor and back panel to check for damage or corrosion.",
+        "if_unproven": "priced at lower tier for cosmetic wear"
+      },
+      {
+        "risk": "The model label is partially obscured; the capacity or model may be different from claimed.",
+        "proof": "A clear, close-up photo of the label in photo 2 without obstruction.",
+        "if_unproven": "priced as unverified model"
+      }
+    ],
+    "proof_requests": [
+      "A video clip of the refrigerator running with a thermometer inside to verify freezing temperature.",
+      "A close-up photo of the label in photo 2 to confirm model and capacity.",
+      "A photo of the back panel and compressor to check for damage."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and brand are confirmed, but the freezing condition and internal functionality are unverified. The exterior shows wear, and the label is partially obscured. Without proof of working condition, the item cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 58549,
+    "input_tokens": 3250,
+    "output_tokens": 703,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "571d0fd3a57398480e28a1ff13c53c78",
+    "error": null
+  }
+}

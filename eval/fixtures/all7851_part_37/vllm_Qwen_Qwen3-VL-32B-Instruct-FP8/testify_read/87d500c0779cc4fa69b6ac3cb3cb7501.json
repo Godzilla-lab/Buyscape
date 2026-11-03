@@ -1,0 +1,87 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Electric bike secured in a wooden crate, wrapped partially in plastic.",
+      "Thick, knobby tires consistent with 'fat tyre' description.",
+      "Battery pack visible on the downtube with 'MASTROM' branding.",
+      "No visible damage to frame or tires in the photos.",
+      "No signs of use or wear; appears new.",
+      "No visible motor or battery specifications on the bike itself.",
+      "No photos of the battery, motor, or control panel close-up.",
+      "No photos of the bike outside the crate or in operation."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "electric bike",
+      "brand": "MASTROM",
+      "model": null,
+      "read_from": [
+        "photo 0 battery pack",
+        "photo 1 battery pack",
+        "photo 2 battery pack"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Brand new fat tyre electric bike",
+        "verdict": "supported",
+        "evidence": "Photos show bike wrapped in plastic, no visible wear, secured in crate for shipping \u2014 consistent with new condition. Tires are thick and knobby, matching 'fat tyre' description."
+      },
+      {
+        "claim": "48v 1000w motor",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible motor label or specification plate in any photo. No close-up of motor or control unit to verify voltage or wattage."
+      },
+      {
+        "claim": "Quality lithium battery that gives a range of...",
+        "verdict": "unverifiable_remote",
+        "evidence": "Battery pack is visible with 'MASTROM' branding, but no voltage, capacity (Ah), or range specs visible. No close-up of battery label or serial number."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Motor may not be 1000W or 48V as claimed",
+        "proof": "Close-up photo of the motor label or control panel showing voltage and wattage specifications.",
+        "if_unproven": "Priced as lower-power motor (e.g., 250W or 350W), which significantly reduces value."
+      },
+      {
+        "risk": "Battery may not be lithium or may have lower capacity than claimed",
+        "proof": "Close-up photo of the battery label showing voltage, capacity (Ah), and chemistry (e.g., Li-ion).",
+        "if_unproven": "Priced as lead-acid or low-capacity battery, which reduces range and value."
+      },
+      {
+        "risk": "Bike may be non-functional or have hidden damage",
+        "proof": "Video or photo of the bike being turned on, displaying dashboard, and riding briefly.",
+        "if_unproven": "Priced as not working or with unknown functionality, reducing value."
+      },
+      {
+        "risk": "Battery may be counterfeit or non-original",
+        "proof": "Photo of battery serial number and matching it with official MASTROM documentation or warranty card.",
+        "if_unproven": "Priced as generic or unbranded battery, reducing trust and value."
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the motor label showing voltage and wattage.",
+      "Close-up photo of the battery label showing voltage, capacity, and chemistry.",
+      "Video or photo of the bike being turned on and riding briefly.",
+      "Photo of the battery serial number and any warranty or documentation."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The bike appears new and matches the 'fat tyre' description, and the brand 'MASTROM' is visible. However, critical claims about motor power (48V 1000W) and battery quality are unverifiable from current photos. Without proof of motor and battery specs, the item cannot be priced accurately and risks being misvalued as lower-spec. Proof is needed to confirm functionality and specifications before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 71469,
+    "input_tokens": 2014,
+    "output_tokens": 872,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "87d500c0779cc4fa69b6ac3cb3cb7501",
+    "error": null
+  }
+}

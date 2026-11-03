@@ -1,0 +1,69 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: A grey and white steam iron with a black power cord and a 3-pin UK plug, standing on its base. The soleplate has a logo resembling an 'S' inside an oval. A label is visible on the base but is not legible.",
+      "Photo 1: The iron is lying on its side next to its base. The base has a dial and buttons, and the iron's handle and body are visible. The brand name is not clearly readable.",
+      "Photo 2: The iron is standing upright on its base. The brand name 'SUNN' is visible on the side of the iron. The power cord with a 3-pin UK plug is coiled beside it. The control panel on the iron's handle is visible, with a dial and buttons. The soleplate has the same 'S' logo as in photo 0."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "steam iron",
+      "brand": "SUNN",
+      "model": null,
+      "read_from": [
+        "photo 2 side of iron"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Direct UK working fine",
+        "verdict": "unverified",
+        "evidence": "The photos show a UK 3-pin plug, which supports 'Direct UK', but there is no visual proof of the iron working. The claim 'working fine' cannot be verified from photos alone."
+      },
+      {
+        "claim": "Tested okay",
+        "verdict": "unverifiable_remote",
+        "evidence": "There is no visual evidence of testing. The photos do not show the iron in operation or any test results."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The iron may not work or may have internal damage not visible in photos.",
+        "proof": "A video showing the iron turning on, heating up, and producing steam.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The UK plug may not be compatible with Nigerian power outlets without an adapter, and the voltage may be incompatible (230V UK vs 220-240V Nigeria, but frequency is 50Hz in both).",
+        "proof": "A photo of the voltage rating label on the iron or base.",
+        "if_unproven": "priced as incompatible, requiring an adapter and voltage check"
+      },
+      {
+        "risk": "The iron may have water or mineral buildup inside, which is not visible externally.",
+        "proof": "A video showing steam output and water flow from the soleplate.",
+        "if_unproven": "priced as potentially clogged, reducing performance"
+      }
+    ],
+    "proof_requests": [
+      "Video of the iron turning on, heating up, and producing steam.",
+      "Photo of the voltage rating label on the iron or base.",
+      "Video showing steam output and water flow from the soleplate."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a SUNN steam iron, but the claims of working condition and compatibility cannot be verified from the photos. Hidden risks include non-functionality, voltage incompatibility, and internal clogging. Proof is needed to assess the item's true condition and usability in Abuja."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 56313,
+    "input_tokens": 2774,
+    "output_tokens": 724,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "fcd0369019dec860756d953e8a0bb007",
+    "error": null
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the top of a white drum with 'Mobil Jet' branding, 'Mobil Jet Oil II', 'Synthetic Jet Engine Oil', and '55 U.S. Gallons' printed on it.",
+      "A label on the drum in photo 0 includes batch code '11121K19A', production date '2025-10-05', and 'USE BY 2030-10-04'.",
+      "Photo 1 shows the side of the drum, which is white on top and blue on the bottom, with a label repeating 'MOBIL JET\u2122 OIL II', batch code, production date, and expiry date.",
+      "Photo 2 is a duplicate of photo 0, showing the same top view with identical text and label.",
+      "All photos show a watermark 'EMPIRE ENGINE LUBE LTD' and 'POSTED ON JIJI'.",
+      "The drum appears to be in good condition with no visible damage or leakage."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "Mobil Jet Oil II drum",
+      "brand": "Mobil",
+      "model": "Mobil Jet Oil II",
+      "read_from": [
+        "photo 0 top label",
+        "photo 1 side label",
+        "photo 2 top label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Mobil jet type ii/ Jet type1 1208litres Drum",
+        "verdict": "contradicted",
+        "evidence": "Photos show 'Mobil Jet Oil II' and '55 U.S. Gallons', which is approximately 208 litres, not 1208 litres. 'Jet type1' is not mentioned on the drum."
+      },
+      {
+        "claim": "O.25 litres 24 in a carton available also",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photos of 0.25-litre cartons are provided. The claim cannot be verified from the given images."
+      },
+      {
+        "claim": "Mobil Jet...",
+        "verdict": "supported",
+        "evidence": "The brand 'Mobil Jet' is clearly visible on the drum in all photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The drum may be empty or partially used, despite the label indicating full contents.",
+        "proof": "A photo showing the inside of the drum or a weight measurement to confirm contents.",
+        "if_unproven": "priced as potentially empty or partially used, which would significantly reduce value."
+      },
+      {
+        "risk": "The product may be counterfeit or mislabeled.",
+        "proof": "A close-up of the batch code and barcode scanned against official Mobil records, or a photo of the drum's seal integrity.",
+        "if_unproven": "priced as potentially counterfeit, which would reduce value or make it unsellable."
+      },
+      {
+        "risk": "The expiry date is in the future, but the product may have been stored improperly, affecting quality.",
+        "proof": "A photo of the storage environment (e.g., temperature, humidity, exposure to sunlight) and a certificate of authenticity or storage log.",
+        "if_unproven": "priced as potentially degraded, which would reduce value."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the inside of the drum to confirm contents.",
+      "Close-up of the seal and batch code for authenticity verification.",
+      "Photo of the storage environment to assess condition.",
+      "Proof of purchase or certificate of authenticity from Mobil or distributor."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as Mobil Jet Oil II, but critical risks such as contents, authenticity, and storage condition cannot be confirmed from the current photos. These risks significantly affect value and must be verified before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 72365,
+    "input_tokens": 2800,
+    "output_tokens": 861,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "1b4650655e58bf7b9ba49cae0ec14a22",
+    "error": null
+  }
+}

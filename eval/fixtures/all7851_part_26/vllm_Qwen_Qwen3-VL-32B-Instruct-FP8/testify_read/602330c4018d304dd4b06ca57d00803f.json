@@ -1,0 +1,88 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a pink box labeled 'Mini Sewing Machine' with '4 in 1' and 'TV' branding, featuring an image of a white and purple mini sewing machine with a foot pedal.",
+      "Photo 1 shows the back of the same box with bullet points listing features: pre-threaded, chain locking stitch, mini size, power alloy gears, large spool, foot pedal, AC/DC operation (requires 4 'AA' batteries or AC adapter, not included), two-speed control, light for sewing, and ease of sewing sleeves.",
+      "The box appears used, with visible creases and wear, and is photographed in a store-like setting with jars and bottles in the background.",
+      "The brand name 'SARAB' is watermarked on both photos, likely from the listing platform Jiji.",
+      "No actual sewing machine is visible \u2014 only the box."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "mini sewing machine",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 box label",
+        "photo 1 box label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "comes prethreaded and ready to use",
+        "verdict": "unverified",
+        "evidence": "The box states 'Comes pre-threaded & Ready to use' in photo 1, but the machine itself is not shown, so we cannot verify if it is actually pre-threaded."
+      },
+      {
+        "claim": "Sews in a durable chain looking stitch",
+        "verdict": "supported",
+        "evidence": "Photo 1 states 'Sews in a Durable Chain Locking Stitch', which matches the seller's claim."
+      },
+      {
+        "claim": "Ac/dc operation",
+        "verdict": "supported",
+        "evidence": "Photo 1 states 'AC/DC Operation (requires 4 \"AA\" Batteries or AC Adapter. (not included))', confirming AC/DC capability."
+      },
+      {
+        "claim": "Sew...",
+        "verdict": "unverifiable_remote",
+        "evidence": "The claim is cut off and incomplete; no further context is provided."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The machine may not be pre-threaded or ready to use as claimed.",
+        "proof": "A clear photo of the actual sewing machine showing the thread path and needle threaded.",
+        "if_unproven": "priced as not pre-threaded, requiring setup by buyer"
+      },
+      {
+        "risk": "The machine may be damaged or non-functional.",
+        "proof": "A video or photo of the machine operating, showing the needle moving and stitching fabric.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The AC adapter is not included, as stated on the box.",
+        "proof": "A photo showing the contents of the box, including or excluding the AC adapter.",
+        "if_unproven": "priced as missing AC adapter, requiring buyer to supply"
+      },
+      {
+        "risk": "The machine may be a low-quality or counterfeit product.",
+        "proof": "A close-up photo of the machine's build quality, including gears, motor, and casing, and a photo of any brand/model label on the machine itself.",
+        "if_unproven": "priced as generic low-quality model"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual sewing machine showing the needle and thread path.",
+      "Video or photo of the machine in operation.",
+      "Photo of the box contents, including or excluding the AC adapter.",
+      "Close-up photo of the machine's build quality and any brand/model label."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identified as a mini sewing machine by the box, but no actual machine is shown. Key claims like 'pre-threaded' and functionality cannot be verified without seeing the machine. Risks include non-functionality, missing parts, and poor quality. Proof is needed to assess the true condition and value."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 72280,
+    "input_tokens": 2291,
+    "output_tokens": 900,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "602330c4018d304dd4b06ca57d00803f",
+    "error": null
+  }
+}

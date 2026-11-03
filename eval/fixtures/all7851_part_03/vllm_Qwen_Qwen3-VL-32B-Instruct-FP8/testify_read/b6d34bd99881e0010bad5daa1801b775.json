@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Samsung Galaxy boot screen, dark screen with 'SAMSUNG Galaxy' and 'Powered by android' visible. Screen has smudges and minor scratches. No visible cracks in this shot.",
+      "Photo 1: 'About phone' screen showing 'Galaxy S23 Ultra', model number 'SM-S918B/DS', storage '512 GB', Android version '14'. The screen is clear and readable. No visible cracks in this shot.",
+      "Photo 2: Same as Photo 0, Samsung Galaxy boot screen. No visible cracks. Screen appears smudged and slightly dusty.",
+      "All photos show the phone being held in hand, with no view of the back, sides, or charging port.",
+      "The seller claims a 256GB model, but photo 1 shows 512GB storage."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "Samsung Galaxy S23 Ultra",
+      "brand": "Samsung",
+      "model": "S23 Ultra",
+      "read_from": [
+        "photo 1 screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Clean Used 256gb S23ultra",
+        "verdict": "contradicted",
+        "evidence": "Photo 1 shows '512 GB' storage, contradicting the 256GB claim. The screen is not visibly clean; smudges and dust are present in photos 0 and 2."
+      },
+      {
+        "claim": "with small cracked screen",
+        "verdict": "unverified",
+        "evidence": "No crack is visible in any of the provided photos. The screen appears smudged and scratched but not cracked. The claim cannot be confirmed or denied from current images."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Screen has a crack not visible in current photos",
+        "proof": "Close-up photo of the screen under bright light, showing the entire surface, especially corners and edges.",
+        "if_unproven": "priced as having a cracked screen (reducing value significantly)"
+      },
+      {
+        "risk": "Phone has physical damage or water damage not visible in current photos",
+        "proof": "Photos of the back, sides, charging port, and SIM tray, showing no dents, corrosion, or liquid damage indicators.",
+        "if_unproven": "priced as potentially damaged (reducing value)"
+      },
+      {
+        "risk": "Storage capacity is misrepresented (claimed 256GB, shown 512GB)",
+        "proof": "Photo of the 'About phone' screen showing storage details, or a screenshot of the storage settings.",
+        "if_unproven": "priced as 256GB model (lower value), but actual 512GB may be worth more \u2014 risk of misrepresentation"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the entire screen under bright light to verify if there is a crack.",
+      "Photos of the back, sides, charging port, and SIM tray to check for physical or water damage.",
+      "Screenshot or photo of the 'About phone' screen showing storage details to confirm capacity.",
+      "Video showing the phone turning on and off, and screen responsiveness."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The phone is identified as a Samsung Galaxy S23 Ultra, but the seller's claim of 256GB storage is contradicted by the 512GB shown in photo 1. The claim of a cracked screen is unverified as no crack is visible in the photos. Hidden risks include undetected screen cracks, physical damage, and misrepresentation of storage. Without proof of these, the item cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 68242,
+    "input_tokens": 2732,
+    "output_tokens": 828,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "b6d34bd99881e0010bad5daa1801b775",
+    "error": null
+  }
+}

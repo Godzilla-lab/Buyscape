@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Three photos show a used car engine on a concrete ground, surrounded by other engine parts.",
+      "The engine has a black valve cover with 'HONDA MOTOR CO.' written vertically in white letters, visible in all three photos.",
+      "The engine appears dirty, with paint chipping off the valve cover and some rust on metal parts.",
+      "The front of the engine shows the crankshaft pulley and timing belt area, with some missing or loose components.",
+      "The engine is not in a vehicle; it is lying on the ground, likely in a scrapyard or workshop.",
+      "No visible model number or engine code is readable on the engine block or elsewhere in the photos.",
+      "The watermark 'HENRY CAR POSTED ON JIJI' is present on all photos."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car engine",
+      "brand": "Honda",
+      "model": null,
+      "read_from": [
+        "photo 0 valve cover",
+        "photo 1 valve cover",
+        "photo 2 valve cover"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "It is a Honda engine.",
+        "verdict": "supported",
+        "evidence": "The text 'HONDA MOTOR CO.' is clearly visible on the valve cover in all three photos."
+      },
+      {
+        "claim": "It is a complete engine.",
+        "verdict": "unverified",
+        "evidence": "The engine is missing parts such as the intake manifold, some hoses, and possibly the oil filter. The front pulley and timing components appear incomplete. No photo shows the entire engine from all angles."
+      },
+      {
+        "claim": "It works.",
+        "verdict": "unverifiable_remote",
+        "evidence": "There is no visual or functional evidence of the engine running or being tested. No video or sound is provided."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Internal damage (e.g., blown head gasket, cracked block, worn bearings).",
+        "proof": "A video of the engine running, or a compression test report, or a close-up of the oil for metal particles.",
+        "if_unproven": "priced as not working or severely damaged"
+      },
+      {
+        "risk": "Missing critical components (e.g., timing belt, water pump, sensors).",
+        "proof": "A full 360-degree photo or video showing all sides of the engine, including the front, back, and underside.",
+        "if_unproven": "priced as incomplete or requiring major parts"
+      },
+      {
+        "risk": "Engine is from a salvaged or accident-damaged vehicle.",
+        "proof": "VIN or engine number matching a vehicle history report, or a photo of the engine number on the block.",
+        "if_unproven": "priced as unknown history, lower value"
+      }
+    ],
+    "proof_requests": [
+      "A clear photo of the engine block number (usually on the side or front of the block).",
+      "A video of the engine running, if possible.",
+      "Photos of the underside and rear of the engine to confirm completeness.",
+      "Proof of origin or vehicle history if available."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The engine is identifiable as Honda, but the model and completeness are unconfirmed. Critical risks like internal damage and missing parts cannot be assessed from current photos. A full inspection or proof of condition is needed before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 64296,
+    "input_tokens": 2737,
+    "output_tokens": 761,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "14c273390652a967930a41eab1801b39",
+    "error": null
+  }
+}

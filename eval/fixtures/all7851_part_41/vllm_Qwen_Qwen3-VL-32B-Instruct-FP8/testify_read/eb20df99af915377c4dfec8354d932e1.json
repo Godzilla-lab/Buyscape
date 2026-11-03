@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Back of a dark blue iPhone with dual-camera setup and Apple logo. The glass back is visibly smudged and scratched. The camera module is intact, no visible cracks.",
+      "Photo 1: Side profile of the same phone, showing volume buttons and power button. No visible damage to the frame or buttons. The phone appears to be a modern iPhone model with flat edges.",
+      "Photo 2: Screen shows 'Battery Health & Charging' settings. Maximum Capacity is 84%. The phone is powered on and responsive. The screen has a pinkish tint, possibly due to lighting or screen protector.",
+      "All photos show a watermark 'UNIQDAMZ GLOBAL' and 'POSTED ON JIJI'.",
+      "The phone is being held in a hand, likely in a store with shelves of boxed phones in the background."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "iPhone 13",
+      "brand": "Apple",
+      "model": "iPhone 13",
+      "read_from": [
+        "photo 0: dual-camera module and design match iPhone 13",
+        "photo 1: side profile with flat edges and button placement consistent with iPhone 13"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Phone is working perfectly",
+        "verdict": "unverified",
+        "evidence": "Photo 2 shows the phone is powered on and displaying settings, but no functional test (e.g., camera, calls, apps) is shown. The screen tint may indicate a screen issue."
+      },
+      {
+        "claim": "No changed part",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal components or serial number check is visible. The back glass is scratched, but no evidence of replacement. Cannot verify without physical inspection or serial number check."
+      },
+      {
+        "claim": "Everything sharp",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows significant smudges and scratches on the back glass. Photo 2 shows a pinkish screen tint, which may indicate a screen issue or protector, contradicting 'sharp' condition."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Screen damage or tint issue",
+        "proof": "Close-up of the screen under natural light, showing if there is discoloration, dead pixels, or cracks.",
+        "if_unproven": "priced as having screen issue, reducing value"
+      },
+      {
+        "risk": "Battery health below 80% (84% shown, but may degrade)",
+        "proof": "Video of battery health check in settings, or a full charge cycle test.",
+        "if_unproven": "priced as having degraded battery, reducing value"
+      },
+      {
+        "risk": "Replaced parts or non-original components",
+        "proof": "Serial number check via Apple website or video showing internal components.",
+        "if_unproven": "priced as potentially refurbished or with replaced parts, reducing value"
+      },
+      {
+        "risk": "Water damage or internal issues",
+        "proof": "Video showing the phone being turned on, camera working, and audio output.",
+        "if_unproven": "priced as possibly non-functional or with hidden damage"
+      }
+    ],
+    "proof_requests": [
+      "Video showing the phone turning on, camera working, and making a call.",
+      "Close-up of the screen under natural light to check for discoloration or damage.",
+      "Serial number check via Apple website or video of the settings page.",
+      "Video of the battery health check and a full charge cycle."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The phone is identifiable as an iPhone 13, but key claims about condition and functionality are unverified or contradicted by visible scratches and screen tint. Hidden risks like screen damage, battery degradation, and replaced parts cannot be ruled out without further proof. A worst-case price cannot be confidently assigned without additional evidence."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 71774,
+    "input_tokens": 2783,
+    "output_tokens": 874,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "eb20df99af915377c4dfec8354d932e1",
+    "error": null
+  }
+}

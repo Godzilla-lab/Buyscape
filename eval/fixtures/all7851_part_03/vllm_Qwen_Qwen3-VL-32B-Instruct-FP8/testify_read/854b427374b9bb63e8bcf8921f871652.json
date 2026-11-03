@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black car battery with a label featuring the brand 'BOSS' in red with a yellow star, and text 'MAINTENANCE FREE CALCIUM BATTERY', 'DIN75MF', '12V 75Ah (C20)'.",
+      "Photo 1 is similar to photo 0, showing the same label and top of the battery with a red sticker that says 'BOSS DIN75MF 12V 75Ah (C20)' and a 'START DATE' grid with months and years.",
+      "Photo 2 is a blurry, low-resolution side view of the battery, showing part of the label with 'BOSS' and some symbols, and the side casing with a handle-like structure. The background is a patterned surface.",
+      "All photos show the same battery from different angles. The label is consistent across photos 0 and 1. Photo 2 is too blurry to read fine details."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car battery",
+      "brand": "BOSS",
+      "model": "DIN75MF",
+      "read_from": [
+        "photo 0 label",
+        "photo 1 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Indicator DIN75MF 12V 75Ah maintenance-free car battery",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 1 clearly show the label with 'BOSS', 'DIN75MF', '12V 75Ah (C20)', and 'MAINTENANCE FREE CALCIUM BATTERY'."
+      },
+      {
+        "claim": "URGENT SALE",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a seller's marketing statement, not a physical attribute. Cannot be verified from photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery may be used or have low charge/age, affecting performance and lifespan.",
+        "proof": "A clear photo of the 'START DATE' grid on the top of the battery (visible in photo 1) showing the month and year of manufacture or first use.",
+        "if_unproven": "Priced as potentially old or used, with reduced value."
+      },
+      {
+        "risk": "Battery may have internal damage or corrosion not visible from exterior photos.",
+        "proof": "A close-up photo of the terminals and top surface showing no corrosion, cracks, or leaks.",
+        "if_unproven": "Priced as potentially damaged or with hidden defects, reducing value."
+      },
+      {
+        "risk": "Battery may not be genuine or may be a counterfeit product.",
+        "proof": "A clear, high-resolution photo of the label and serial number, or a photo of the battery in its original packaging with a hologram or QR code if applicable.",
+        "if_unproven": "Priced as potentially counterfeit, with lower value."
+      }
+    ],
+    "proof_requests": [
+      "A clear, close-up photo of the 'START DATE' grid on the top of the battery to confirm age.",
+      "A close-up photo of the terminals and top surface to check for corrosion or damage.",
+      "A high-resolution photo of the entire label, including any serial number or hologram."
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a BOSS DIN75MF 12V 75Ah maintenance-free car battery based on clear label text in photos 0 and 1. The seller's claims are supported by the visible label. Hidden risks such as age, condition, and authenticity exist but are common for used batteries and can be priced at worst case. The item can be priced based on its model and condition as seen."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 64531,
+    "input_tokens": 2382,
+    "output_tokens": 836,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "854b427374b9bb63e8bcf8921f871652",
+    "error": null
+  }
+}

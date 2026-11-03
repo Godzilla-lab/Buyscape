@@ -1,0 +1,105 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Open laptop showing silver chassis, black keyboard, HP logo on keyboard bezel, Intel Core i5 sticker on palm rest. Screen is off, reflecting the person taking the photo. Watermark 'UNIQUE GLOBAL STORE POSTED ON JIJI'.",
+      "Photo 1: Back of laptop lid with a white label showing model 'HP ELITEBOOK 840 G5', CPU 'CORE I5-8250U', RAM '8 GB', SSD '256 GB', OS 'WIN11/PRO', and date '24 MAY 2023'. Also shows serial number and other specs. Watermark present.",
+      "Photo 2: Bottom of laptop showing vents, ports, and regulatory stickers. No visible damage. Watermark present."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "EliteBook 840 G5",
+      "read_from": [
+        "photo 1 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP EliteBook 840 G5",
+        "verdict": "supported",
+        "evidence": "Photo 1 label clearly shows 'HP ELITEBOOK 840 G5'"
+      },
+      {
+        "claim": "7th Gen",
+        "verdict": "contradicted",
+        "evidence": "Photo 1 label shows CPU 'CORE I5-8250U', which is 8th Gen, not 7th Gen"
+      },
+      {
+        "claim": "8GB RAM",
+        "verdict": "supported",
+        "evidence": "Photo 1 label shows 'RAM 8 GB'"
+      },
+      {
+        "claim": "256GB SSD",
+        "verdict": "supported",
+        "evidence": "Photo 1 label shows 'SSD 256 GB'"
+      },
+      {
+        "claim": "Core i5",
+        "verdict": "supported",
+        "evidence": "Photo 1 label shows 'CPU CORE I5-8250U', and photo 0 shows Intel Core i5 sticker"
+      },
+      {
+        "claim": "Touch screen",
+        "verdict": "unverified",
+        "evidence": "No photo shows the screen being touched or any touch indicator; screen is off and reflective"
+      },
+      {
+        "claim": "Windows 11 Pro",
+        "verdict": "supported",
+        "evidence": "Photo 1 label shows 'OS WIN11/PRO'"
+      },
+      {
+        "claim": "Fairly UK used",
+        "verdict": "unverifiable_remote",
+        "evidence": "No proof of origin or usage history; cannot verify 'UK used' from photos"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Screen may not be touch-enabled",
+        "proof": "Photo showing the screen being touched or a close-up of the screen bezel with a touch indicator",
+        "if_unproven": "priced as non-touch screen"
+      },
+      {
+        "risk": "Laptop may not be working or may have hidden hardware issues",
+        "proof": "Video or photo of the laptop powered on, showing Windows 11 Pro desktop and responsive touch screen if claimed",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Battery may be degraded or non-functional",
+        "proof": "Photo or video showing battery health in Windows settings or laptop running on battery",
+        "if_unproven": "priced as battery not included or degraded"
+      },
+      {
+        "risk": "Laptop may have been refurbished or have non-original parts",
+        "proof": "Photo of the inside of the laptop showing original components or serial number matching the label",
+        "if_unproven": "priced as possibly refurbished or with non-original parts"
+      }
+    ],
+    "proof_requests": [
+      "Video or photo of the laptop powered on, showing Windows 11 Pro desktop and touch screen functionality.",
+      "Photo of the battery health in Windows settings or laptop running on battery.",
+      "Photo of the inside of the laptop showing original components or serial number matching the label.",
+      "Photo showing the screen being touched to verify touch functionality."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and key specs are confirmed, but the touch screen claim is unverified and the laptop's working condition, battery health, and internal components are not proven. The '7th Gen' claim is contradicted by the 8th Gen CPU label. Without proof of functionality and touch capability, the item cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 78769,
+    "input_tokens": 2803,
+    "output_tokens": 1027,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "d28d20cd9adc34f29b8dda8a3522fccc",
+    "error": null
+  }
+}

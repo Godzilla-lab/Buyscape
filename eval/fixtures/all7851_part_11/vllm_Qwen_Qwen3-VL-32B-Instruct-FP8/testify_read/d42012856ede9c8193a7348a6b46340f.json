@@ -1,0 +1,103 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Closed silver laptop with HP logo on lid, placed on glass surface. Watermark 'KINGSPower TECH COMPUTERS' visible.",
+      "Photo 1: Bottom of laptop showing ventilation grille, screws, and a label with small text (unreadable). Watermark present.",
+      "Photo 2: Open laptop showing black screen, keyboard with black keys, silver palm rest, and 'EliteBook' text near keyboard. Intel Core i7 sticker visible on lower right corner. Watermark present."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "EliteBook 840 G8",
+      "read_from": [
+        "photo 2 keyboard area: 'EliteBook' text",
+        "photo 2 sticker: 'Intel Core i7' (supports 840 G8 model)",
+        "seller's text: 'HP Elitebook 840 g8'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP Elitebook 840 g8",
+        "verdict": "supported",
+        "evidence": "Photo 2 shows 'EliteBook' text near keyboard and Intel Core i7 sticker, consistent with 840 G8 model. Seller's text matches."
+      },
+      {
+        "claim": "Core i7 11th generation",
+        "verdict": "unverified",
+        "evidence": "Photo 2 shows Intel Core i7 sticker, but no visible generation mark. 11th gen is plausible for G8, but not confirmed."
+      },
+      {
+        "claim": "16gb RAM",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal photos or system specs visible. Cannot verify RAM from exterior."
+      },
+      {
+        "claim": "512gb SSD",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal photos or system specs visible. Cannot verify storage from exterior."
+      },
+      {
+        "claim": "keyboard lit",
+        "verdict": "unverified",
+        "evidence": "Photo 2 shows keyboard in ambient light; no backlight visible. No photo shows keyboard lit."
+      },
+      {
+        "claim": "used 3 months",
+        "verdict": "unverifiable_remote",
+        "evidence": "No proof of usage duration. Photos show no visible wear, but condition cannot confirm 3-month use."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "RAM is not 16GB",
+        "proof": "Photo of system information screen or BIOS showing RAM amount",
+        "if_unproven": "priced as lower RAM (e.g., 8GB), which reduces value"
+      },
+      {
+        "risk": "SSD is not 512GB or is faulty",
+        "proof": "Photo of disk management screen or BIOS showing storage size and health",
+        "if_unproven": "priced as smaller or unverified storage, reducing value"
+      },
+      {
+        "risk": "keyboard backlight does not work",
+        "proof": "Photo of keyboard with backlight turned on in dark environment",
+        "if_unproven": "priced as non-backlit keyboard, reducing value"
+      },
+      {
+        "risk": "laptop has physical damage or screen issues not visible",
+        "proof": "Close-up photos of screen edges, hinges, and body for scratches, dents, or dead pixels",
+        "if_unproven": "priced as potentially damaged, reducing value"
+      },
+      {
+        "risk": "laptop does not power on or has software issues",
+        "proof": "Video of laptop powering on, booting, and showing desktop",
+        "if_unproven": "priced as non-working or untested, reducing value"
+      }
+    ],
+    "proof_requests": [
+      "Video of laptop powering on and showing desktop",
+      "Photo of system information screen showing RAM and storage",
+      "Photo of keyboard with backlight turned on",
+      "Close-up photos of screen and body for damage",
+      "Photo of BIOS or label showing exact model and serial number"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identifiable as HP EliteBook 840 G8, but key claims (RAM, SSD, keyboard backlight, working condition) cannot be verified from current photos. Hidden risks like non-working components or damage affect pricing. Proof is needed to price accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 76475,
+    "input_tokens": 2801,
+    "output_tokens": 980,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "d42012856ede9c8193a7348a6b46340f",
+    "error": null
+  }
+}

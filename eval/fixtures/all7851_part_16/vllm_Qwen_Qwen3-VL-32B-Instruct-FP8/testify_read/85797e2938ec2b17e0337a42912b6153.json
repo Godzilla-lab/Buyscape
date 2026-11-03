@@ -1,0 +1,65 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: A dual-fan graphics card held in hand, with 'GIGABYTE' visible on both fan hubs. The card has a black shroud with 'WINDFORCE' written vertically on the side. The background is artificial green grass.",
+      "Photo 1: Side view of the card showing the metal bracket and part of the PCB edge. The 'INNOSON GLOBAL GROUP' watermark is visible.",
+      "Photo 2: Back of the card showing the blue PCB. A white sticker with a barcode and text is visible near the center. The 'GIGABYTE' logo is visible near the bottom left. The card has a gold PCIe connector and a small heatsink at the bottom. The 'INNOSON GLOBAL GROUP' watermark is present."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "graphics card",
+      "brand": "GIGABYTE",
+      "model": "GTX 750 2GB",
+      "read_from": [
+        "photo 0 fan hub",
+        "photo 2 PCB sticker"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Gtx 750 2gb graphics card",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows 'GIGABYTE' branding and 'WINDFORCE' which is consistent with GIGABYTE's GTX 750 models. Photo 2 shows a sticker with 'GIGABYTE' and a model number that appears to be 'GV-N750OC-2GI', which corresponds to a GTX 750 2GB card."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The card may be non-functional or have hidden defects (e.g., dead pixels, overheating, or power issues).",
+        "proof": "A video showing the card being powered on and displaying output on a monitor, or a test bench video with GPU load testing.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The card may have physical damage not visible in photos, such as bent pins on the PCIe connector or cracked PCB.",
+        "proof": "A close-up photo of the PCIe connector pins and the edge of the PCB.",
+        "if_unproven": "priced as damaged"
+      },
+      {
+        "risk": "The card may be a rebranded or non-reference model with lower performance or reliability.",
+        "proof": "A clear photo of the full model number on the sticker in photo 2, or a close-up of the PCB markings.",
+        "if_unproven": "priced as generic GTX 750 2GB"
+      }
+    ],
+    "proof_requests": [
+      "A close-up photo of the full model number on the sticker in photo 2.",
+      "A video showing the card being powered on and displaying output on a monitor.",
+      "A close-up photo of the PCIe connector pins and the edge of the PCB."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a GIGABYTE GTX 750 2GB graphics card, but critical functional and physical condition risks remain unproven. Without proof of working condition and full model details, the item cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 61203,
+    "input_tokens": 2786,
+    "output_tokens": 721,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "85797e2938ec2b17e0337a42912b6153",
+    "error": null
+  }
+}

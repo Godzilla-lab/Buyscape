@@ -1,0 +1,80 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a yellow and black petrol generator with 'SUMEC FIRMAN SPG2900' branding on the front panel and top cover.",
+      "The front panel includes an engine switch, AC and DC outlets, a circuit protector, and a voltage meter.",
+      "Photo 1 shows the front side of the generator, revealing a 5.5 HP engine with 'SFE16' label on the flywheel cover.",
+      "Photo 2 shows the rear side with a label containing model details, CE mark, and warnings. The engine cover has 'FIRMAN' embossed on it.",
+      "The generator appears to be in used condition with some scuffs and dust, but no visible damage.",
+      "The seller claims '2 times used', '100% copper coil', and 'AVR (Automatic Voltage Regulator)' \u2014 none of which are visible in the photos."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "petrol generator",
+      "brand": "SUMEC FIRMAN",
+      "model": "SPG2900",
+      "read_from": [
+        "photo 0 front panel",
+        "photo 0 top cover",
+        "photo 2 rear label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "2 times used",
+        "verdict": "unverified",
+        "evidence": "No visual proof of usage count; condition appears light but not verifiable remotely."
+      },
+      {
+        "claim": "100% copper coil",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible access to the stator or coil; cannot confirm material remotely."
+      },
+      {
+        "claim": "AVR (Automatic Voltage Regulator)",
+        "verdict": "unverified",
+        "evidence": "No visible AVR label or indicator; voltage meter present but does not confirm AVR presence."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Generator may not have 100% copper coil (could be aluminum or mixed)",
+        "proof": "Close-up photo of the stator or coil inside the generator housing.",
+        "if_unproven": "Priced as lower quality (aluminum coil), which reduces value significantly."
+      },
+      {
+        "risk": "AVR may not be present or functional",
+        "proof": "Video or photo showing voltage stability under load or label confirming AVR.",
+        "if_unproven": "Priced as non-AVR model, which is less desirable and less valuable."
+      },
+      {
+        "risk": "Engine or generator may have hidden wear or mechanical issues",
+        "proof": "Video of the generator starting and running under load, or close-up of engine components.",
+        "if_unproven": "Priced as potentially non-working or requiring repair."
+      }
+    ],
+    "proof_requests": [
+      "Video of the generator starting and running under load to verify functionality.",
+      "Close-up photo of the stator or coil to verify 100% copper claim.",
+      "Photo or label confirming AVR presence.",
+      "Photo of the engine oil level and condition."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identifiable, but critical claims (copper coil, AVR) and functional risks cannot be verified from current photos. Price cannot be set without proof of these features and operational condition."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 65173,
+    "input_tokens": 2337,
+    "output_tokens": 740,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "ceb9454b8c4a24f0f365de07d9d92a9d",
+    "error": null
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black Corsair power supply unit with a label clearly displaying 'CORSAIR' and 'VS450'.",
+      "The label in photo 0 includes 'TOTAL POWER 450W' and part numbers 'CP-9020170 / 76-008431'.",
+      "Photo 1 shows the side of the same PSU with 'VS450' and 'CORSAIR' branding visible.",
+      "Cables are visible, some with blue connectors, suggesting modular or semi-modular design.",
+      "The background shows a partially assembled PC with a green CPU cooler and an MSI motherboard.",
+      "The PSU appears to be held in hand, not installed, and shows minor scuffs and dust.",
+      "No visible damage or burn marks on the PSU casing."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "power supply unit",
+      "brand": "Corsair",
+      "model": "VS450",
+      "read_from": [
+        "photo 0 label",
+        "photo 1 side panel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "450 watts Corsair power supply units",
+        "verdict": "supported",
+        "evidence": "Photo 0 label clearly shows 'TOTAL POWER 450W' and 'CORSAIR VS450'."
+      },
+      {
+        "claim": "For high graphics system",
+        "verdict": "unverified",
+        "evidence": "The PSU is a 450W unit, which is generally insufficient for high-end graphics cards; however, the claim is subjective and not directly contradicted by the photos."
+      },
+      {
+        "claim": "Working perfectly fine",
+        "verdict": "unverifiable_remote",
+        "evidence": "No functional test is shown in the photos; the unit is not connected or powered on."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The PSU may not be functional or may have internal damage not visible in photos.",
+        "proof": "A video showing the PSU powering on and delivering stable voltage under load, or a test with a PSU tester.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The PSU may have been used in a system with poor power quality, leading to internal degradation.",
+        "proof": "A close-up of the internal components (if opened) or a test report from a technician.",
+        "if_unproven": "priced as used with unknown internal condition"
+      },
+      {
+        "risk": "The PSU may be counterfeit or rebranded, despite the visible branding.",
+        "proof": "A close-up of the serial number and part number (CP-9020170 / 76-008431) cross-referenced with official Corsair documentation, or a video of the unit being powered on with a known-good load.",
+        "if_unproven": "priced as genuine but unverified"
+      }
+    ],
+    "proof_requests": [
+      "Video of the PSU powering on and running under load (e.g., connected to a motherboard with a fan or LED lit).",
+      "Close-up of the serial number and part number for verification.",
+      "Photo of the PSU's internal components if opened, or a test report from a technician."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a Corsair VS450 450W PSU, but its functional status and authenticity cannot be confirmed from the photos alone. The claim of 'working perfectly fine' is unverifiable remotely, and there are hidden risks related to functionality and internal condition that must be resolved before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 67533,
+    "input_tokens": 2589,
+    "output_tokens": 824,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "6dcbbeb48a31df6126fec6a77aa798c7",
+    "error": null
+  }
+}

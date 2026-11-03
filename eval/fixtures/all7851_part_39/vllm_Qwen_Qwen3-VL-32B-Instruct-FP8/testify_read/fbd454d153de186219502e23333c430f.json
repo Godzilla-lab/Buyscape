@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: A hand holds a tablet-like device with a Windows desktop visible. The screen shows a sports car wallpaper, taskbar, and icons. The device has a black bezel and appears to be a 2-in-1 convertible laptop.",
+      "Photo 1: The same device is shown open as a laptop. The keyboard is dark blue with a textured surface. The bottom left of the keyboard has 'ELITEBOOK' printed. A small sticker near the touchpad shows 'Intel Core' branding. The screen displays the same wallpaper as photo 0.",
+      "Photo 2: The back of the device is shown, dark blue with a silver HP logo. A white label is affixed to the lower left, but the text is too blurry to read. The device appears to be a 2-in-1 convertible laptop."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "2-in-1 laptop",
+      "brand": "HP",
+      "model": "Elite Dragonfly G2",
+      "read_from": [
+        "seller's text",
+        "photo 1 keyboard: 'ELITEBOOK'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "MODEL: ELITE Dragonfly G2",
+        "verdict": "supported",
+        "evidence": "Seller's text and 'ELITEBOOK' on keyboard in photo 1. 'Elite Dragonfly G2' is a known model in the HP EliteBook series."
+      },
+      {
+        "claim": "BRAND: HP",
+        "verdict": "supported",
+        "evidence": "HP logo visible on the back of the device in photo 2."
+      },
+      {
+        "claim": "PROCESSOR: INTEL CORE i7",
+        "verdict": "unverified",
+        "evidence": "Intel Core sticker visible near touchpad in photo 1, but no specific model or generation is readable. The sticker does not confirm i7."
+      },
+      {
+        "claim": "GENERATION: 11TH GEN",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible text or sticker in photos confirms the 11th generation. The Intel sticker in photo 1 is too blurry to read the exact processor model."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Processor is not an Intel Core i7 or not 11th generation as claimed",
+        "proof": "Clear photo of the Intel sticker near the touchpad (photo 1) or a system information screenshot showing the exact processor model.",
+        "if_unproven": "Priced as a lower-tier processor (e.g., i5 or 10th gen), which significantly reduces value."
+      },
+      {
+        "risk": "Device has physical damage not visible in photos (e.g., hinge issues, screen cracks, keyboard damage)",
+        "proof": "Close-up video or photos of the hinges, screen edges, and keyboard under different lighting.",
+        "if_unproven": "Priced as having potential hidden damage, which reduces value."
+      },
+      {
+        "risk": "Battery health is poor or not original",
+        "proof": "Battery health report screenshot from Windows or a video showing battery usage over time.",
+        "if_unproven": "Priced as having degraded battery, which reduces value."
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the Intel sticker near the touchpad to confirm processor model and generation.",
+      "System information screenshot showing exact processor, RAM, and storage details.",
+      "Video or close-up photos of the hinges, screen edges, and keyboard.",
+      "Battery health report screenshot."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and brand are supported by visible evidence, but the processor claims (i7, 11th gen) cannot be verified from current photos. Hidden risks like battery health and physical damage also affect pricing. Without proof of the processor and condition, the item cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 73616,
+    "input_tokens": 3029,
+    "output_tokens": 866,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "fbd454d153de186219502e23333c430f",
+    "error": null
+  }
+}

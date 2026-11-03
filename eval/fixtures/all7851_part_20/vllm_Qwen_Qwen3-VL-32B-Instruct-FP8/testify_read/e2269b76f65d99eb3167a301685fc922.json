@@ -1,0 +1,75 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows three glass perfume bottles with gold caps and black ribbons, placed on a marble surface. One is clear with yellow liquid, one is black, and one is clear with no visible liquid. Text overlay: 'LUXURY IN EVERY BOTTLE'.",
+      "Photo 1 shows a hand holding two faceted glass perfume bottles with gold caps. One is gradient purple-to-teal, the other is gradient blue-to-purple. Boxes with 'Lavender' visible in the background.",
+      "Photo 2 shows a row of small, cylindrical rollerball-style perfume bottles with metallic caps in green, gold, black, blue, and yellow. Some contain gradient liquids. Decorative metallic balls are scattered around. All bottles appear to be the same size, likely 5-10ml.",
+      "No brand names or model numbers are visible on any bottle in any photo.",
+      "The seller's text lists prices for 3ml to 100ml bottles, but no photos show a 100ml bottle or any size label."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "perfume bottles",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Perfume bottles from 3ml to 100ml",
+        "verdict": "unverified",
+        "evidence": "No size markings are visible on any bottle in the photos. The 100ml size is not shown, and no bottle is labeled to confirm any volume."
+      },
+      {
+        "claim": "3 ml 1400, 6ml 1800, 10ml 600, 20 ml 750, 30ml 1k, 50ml 1600",
+        "verdict": "unverifiable_remote",
+        "evidence": "The photos do not show any price tags or labels. The prices are stated by the seller but cannot be verified from the images."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Bottles may be empty or contain non-perfume liquid (e.g., water, alcohol)",
+        "proof": "Close-up shot of the liquid inside each bottle, showing clarity, color, and consistency, ideally with a label or ingredient list.",
+        "if_unproven": "priced as empty or non-perfume"
+      },
+      {
+        "risk": "Bottles may be damaged or cracked, especially the glass ones in photo 0 and 1",
+        "proof": "Close-up shot of each bottle's surface, especially around the neck and base, under direct light to reveal any cracks or chips.",
+        "if_unproven": "priced as potentially damaged"
+      },
+      {
+        "risk": "No proof of authenticity or brand identity \u2014 could be generic or counterfeit",
+        "proof": "Clear shot of any branding, barcode, or manufacturing mark on the bottle or packaging.",
+        "if_unproven": "priced as unbranded or generic"
+      },
+      {
+        "risk": "Size claims are unverified \u2014 the 100ml bottle is not shown, and no bottle has a visible volume label",
+        "proof": "Photo showing a bottle with a visible volume label or a size comparison with a known object (e.g., a 10ml bottle next to a 100ml bottle).",
+        "if_unproven": "priced as smallest size shown (likely 5-10ml)"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of each bottle showing the liquid inside and any labels or markings.",
+      "Photo of a bottle with a visible volume label or size comparison with a known object.",
+      "Photo of the packaging or any branding on the bottles or boxes.",
+      "Proof of authenticity or ingredient list if available."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photos show various perfume bottles, but no brand, model, or size labels are visible. The seller's size and price claims cannot be verified from the images. Hidden risks include empty bottles, damage, and unverified sizes. Without proof of volume, authenticity, and condition, a worst-case price cannot be confidently assigned."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 74890,
+    "input_tokens": 2413,
+    "output_tokens": 930,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "e2269b76f65d99eb3167a301685fc922",
+    "error": null
+  }
+}

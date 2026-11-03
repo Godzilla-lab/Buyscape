@@ -1,0 +1,88 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black Lenovo ThinkPad laptop with the screen on, displaying a Windows desktop. The ThinkPad logo is visible on the lower right of the palm rest. The keyboard has no backlight, as the keys are dark and not illuminated. A blue Intel sticker is visible on the lower left of the palm rest. The background shows glass display cases with HP laptops.",
+      "Photo 1 shows a Windows 10 System Properties window. The processor is listed as 'Intel(R) Core(TM) i5-8365U CPU @ 1.60GHz 1.60 GHz'. Installed memory (RAM) is 16.0 GB (15.2 GB usable). The system type is 64-bit. The Windows edition is Windows 10 Pro. The screen is slightly blurry and has a watermark 'ABZ HICEL GADGETS'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Lenovo",
+      "model": "ThinkPad",
+      "read_from": [
+        "photo 0 palm rest"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "16GB RAM",
+        "verdict": "supported",
+        "evidence": "Photo 1: System Properties shows 'Installed memory (RAM): 16.0 GB (15.2 GB usable)'"
+      },
+      {
+        "claim": "256GB SSD",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows the storage capacity. The System Properties in photo 1 does not list the drive size or type."
+      },
+      {
+        "claim": "Core i5 8th Generation",
+        "verdict": "supported",
+        "evidence": "Photo 1: System Properties shows 'Intel(R) Core(TM) i5-8365U CPU @ 1.60GHz'. The '8' in 'i5-8365U' indicates 8th generation."
+      },
+      {
+        "claim": "No keyboard light",
+        "verdict": "supported",
+        "evidence": "Photo 0: The keyboard is dark and no backlight is visible. The keys are not illuminated."
+      },
+      {
+        "claim": "Intel UHD Graphics 620",
+        "verdict": "unverified",
+        "evidence": "Photo 1 does not show graphics information. The i5-8365U typically comes with Intel UHD Graphics 620, but this is not confirmed by the photos."
+      },
+      {
+        "claim": "Strong Battery",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows battery health, charge cycles, or runtime. Battery condition cannot be assessed remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The SSD capacity is not confirmed; it may be less than 256GB or a slower HDD.",
+        "proof": "A screenshot of Disk Management or a system information tool showing the drive size and type.",
+        "if_unproven": "priced as having unknown or smaller storage, which reduces value"
+      },
+      {
+        "risk": "The battery may be degraded or not hold a full charge.",
+        "proof": "A screenshot of the battery health report (e.g., from Windows Powercfg or a third-party tool) showing cycle count and capacity.",
+        "if_unproven": "priced as having a weak or dead battery, which reduces value"
+      },
+      {
+        "risk": "The laptop may have physical damage not visible in the photos, such as screen dead pixels, hinge wear, or keyboard issues.",
+        "proof": "A close-up video or photo of the screen, hinges, and keyboard under different lighting.",
+        "if_unproven": "priced as having potential hidden physical damage, which reduces value"
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of Disk Management or system information showing the SSD size and type.",
+      "Screenshot of battery health report (e.g., Powercfg /batteryreport or third-party tool).",
+      "Close-up photos or video of the screen, hinges, and keyboard under different lighting to check for damage."
+    ],
+    "decision": "price",
+    "reason": "The laptop is identifiable as a Lenovo ThinkPad with confirmed 16GB RAM and 8th Gen i5-8365U processor. The 'no keyboard light' claim is supported. The 256GB SSD and battery strength are unverified but can be priced at worst case. The graphics are likely UHD 620 based on the CPU, but not confirmed. Hidden risks are noted and priced conservatively."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 88335,
+    "input_tokens": 2301,
+    "output_tokens": 1025,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "e66cea0496511982fa77b7333fa5a63b",
+    "error": null
+  }
+}

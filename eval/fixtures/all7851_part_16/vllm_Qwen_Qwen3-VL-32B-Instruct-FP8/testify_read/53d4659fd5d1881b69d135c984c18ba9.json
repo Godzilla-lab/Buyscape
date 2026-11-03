@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a cardboard box for a popcorn machine.",
+      "The brand 'HOMEPOINT' is printed vertically on the left side of the box.",
+      "The text 'POPCORN MACHINE Model: HP-8RB' is clearly visible on the right side of the box.",
+      "There is a line drawing of the popcorn machine on the box, showing a transparent front and a metal frame.",
+      "The box has barcodes and some tape on the left edge.",
+      "The seller's name 'BETHELKITCHENWORLD' is watermarked across the image, but not printed on the box itself."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "popcorn machine",
+      "brand": "HOMEPOINT",
+      "model": "HP-8RB",
+      "read_from": [
+        "photo 0 box text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Bethel kitchen world we are the kitchen...",
+        "verdict": "unverifiable_remote",
+        "evidence": "The seller's text is not visible on the product or box; it is a watermark on the photo. Cannot verify if the seller is the actual retailer or reseller."
+      },
+      {
+        "claim": "POPCORN MACHINE Model: HP-8RB",
+        "verdict": "supported",
+        "evidence": "Photo 0: The text is clearly printed on the box."
+      },
+      {
+        "claim": "HOMEPOINT brand",
+        "verdict": "supported",
+        "evidence": "Photo 0: The brand name is printed vertically on the box."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The machine may be damaged or incomplete inside the box.",
+        "proof": "A photo of the opened box showing the machine and all accessories, or a video of the machine being unboxed and inspected.",
+        "if_unproven": "Priced as potentially damaged or missing parts, which reduces value."
+      },
+      {
+        "risk": "The machine may not work or may be non-functional.",
+        "proof": "A video of the machine operating, showing the heating element, kernel popping, and motor function.",
+        "if_unproven": "Priced as not working, which significantly reduces value."
+      },
+      {
+        "risk": "The machine may be counterfeit or not genuine HOMEPOINT.",
+        "proof": "A close-up photo of the machine's label or serial number, or a receipt or proof of purchase from HOMEPOINT.",
+        "if_unproven": "Priced as potentially counterfeit, which reduces value."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the opened box showing the popcorn machine and all included parts.",
+      "Video of the machine operating to confirm functionality.",
+      "Close-up photo of the machine's label or serial number to verify authenticity."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a HOMEPOINT HP-8RB popcorn machine, but critical risks such as damage, functionality, and authenticity cannot be assessed from the box alone. Proof of condition and operation is required before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 53254,
+    "input_tokens": 1574,
+    "output_tokens": 683,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "53d4659fd5d1881b69d135c984c18ba9",
+    "error": null
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows four batteries placed on a concrete floor against a cracked wall.",
+      "One white battery is on top of a blue battery labeled 'LUMINOUS'.",
+      "The blue battery is on top of a black battery with a yellow sticker that says 'HOPPECKE'.",
+      "Two green batteries are stacked on the right, labeled 'Eastman'.",
+      "All batteries appear to be deep-cycle or inverter-type, with visible terminals and handles.",
+      "The batteries show signs of use: dust, minor scuffs, and some corrosion on terminals.",
+      "The photo has a watermark 'POSTED ON JI OZE ENERGY'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "inverter batteries",
+      "brand": "LUMINOUS, Eastman, HOPPECKE",
+      "model": "not clearly readable",
+      "read_from": [
+        "photo 0 label on blue battery",
+        "photo 0 label on green batteries",
+        "photo 0 sticker on black battery"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "We are buyer of dead/bad/used Inverter battery. Sell your weak battery to us with good return. scrap...",
+        "verdict": "unverifiable_remote",
+        "evidence": "The seller is offering to buy, not selling. The photos show batteries, but their condition (dead, bad, weak) cannot be confirmed remotely. No proof of functionality or state of charge."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Batteries may be completely dead or have very low capacity, not just 'weak'.",
+        "proof": "A voltage test with a multimeter or a load test video showing charge retention.",
+        "if_unproven": "priced as scrap or very low value"
+      },
+      {
+        "risk": "Batteries may have internal damage or leakage not visible in photos.",
+        "proof": "Close-up shots of battery casing for cracks, bulges, or acid leakage.",
+        "if_unproven": "priced as potentially hazardous or low-value scrap"
+      },
+      {
+        "risk": "Battery terminals may be corroded or damaged, affecting usability.",
+        "proof": "Close-up of terminals and connections.",
+        "if_unproven": "priced as needing repair or lower value"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of each battery's label to read model and specifications.",
+      "Voltage test video or multimeter reading for each battery.",
+      "Close-up of terminals and casing for damage or corrosion.",
+      "Confirm if batteries are for sale or being bought \u2014 the listing is ambiguous."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller claims to buy used batteries, but the photos show batteries that may be for sale. Their condition (dead, weak, scrap) cannot be verified remotely. Without proof of voltage, model, and physical condition, a price cannot be determined. The listing is ambiguous and requires clarification and evidence before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 55575,
+    "input_tokens": 1788,
+    "output_tokens": 664,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "01e8545b12eb1dce79dcd7c592f7fea3",
+    "error": null
+  }
+}

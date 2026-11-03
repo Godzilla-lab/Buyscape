@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Back of a blue iPhone with triple camera setup and Apple logo. The design matches iPhone 13 Pro Max.",
+      "Photo 1: Front screen showing lock screen with time 14:30, date Saturday, 24 October. Screen has visible cracks on the top right corner.",
+      "Photo 2: Side view showing volume buttons, mute switch, and SIM tray. The phone has a flat edge design consistent with iPhone 13 Pro Max.",
+      "All photos have watermark 'POSTED ON JIJI MALAM ALISKY'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "iPhone 13 Pro Max",
+      "brand": "Apple",
+      "model": "iPhone 13 Pro Max",
+      "read_from": [
+        "photo 0: triple camera module and Apple logo",
+        "photo 2: flat edge design and button layout"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "iPhone 13 Pro Max",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows the triple camera module and Apple logo consistent with iPhone 13 Pro Max; photo 2 shows the flat edge design and button layout matching the model."
+      },
+      {
+        "claim": "good working condition",
+        "verdict": "unverified",
+        "evidence": "Photo 1 shows the screen is on, indicating it powers up, but there are visible cracks on the screen. No proof of functionality beyond lock screen. No proof of camera, charging, or software performance."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Screen damage (cracks visible on front screen)",
+        "proof": "Close-up photo of the cracked screen area showing extent and depth of damage.",
+        "if_unproven": "priced as damaged screen, which reduces value significantly"
+      },
+      {
+        "risk": "Water damage or internal issues not visible in photos",
+        "proof": "Photo of the phone's interior or diagnostic report showing no water damage or hardware faults.",
+        "if_unproven": "priced as potentially faulty, with lower value"
+      },
+      {
+        "risk": "Not unlocked or carrier-locked",
+        "proof": "Screenshot showing the phone is unlocked or a photo of the settings menu showing carrier status.",
+        "if_unproven": "priced as potentially locked, which reduces value"
+      },
+      {
+        "risk": "Battery health or performance issues",
+        "proof": "Screenshot of battery health percentage or a video showing phone performance under load.",
+        "if_unproven": "priced as unknown battery health, which reduces value"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the cracked screen to assess damage extent.",
+      "Screenshot showing the phone is unlocked and carrier status.",
+      "Photo or video of the phone in use (camera, charging, apps).",
+      "Screenshot of battery health percentage."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The phone is identifiable as an iPhone 13 Pro Max, but the screen has visible cracks and the 'good working condition' claim is unverified. Hidden risks like water damage, battery health, and carrier lock cannot be assessed from current photos. Proof is needed to determine the true condition and value."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 57977,
+    "input_tokens": 3153,
+    "output_tokens": 722,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "20fb2a09d40e22675f2f79cb72e01cf4",
+    "error": null
+  }
+}

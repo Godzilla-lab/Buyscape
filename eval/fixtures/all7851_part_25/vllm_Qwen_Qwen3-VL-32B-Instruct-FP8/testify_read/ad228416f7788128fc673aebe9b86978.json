@@ -1,0 +1,87 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Bottom of a silver laptop showing speaker grille and regulatory labels. No visible model or serial number.",
+      "Photo 1: Front view of the laptop open, showing keyboard, trackpad, and screen. HP logo above screen, 'PROBOOK' text below keyboard, and Intel Core i5 sticker on palm rest.",
+      "Photo 2: Closed lid of the laptop with HP logo. A handwritten note is taped to the top right corner: 'HP Probook 440 G9, i5 12th Gen, 16gb, 512 SSD'.",
+      "All photos show a watermark 'POSTED ON JIJI CIMLET INNOVATION'.",
+      "The laptop appears to be silver/gray, in good physical condition with no visible dents or cracks."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "ProBook 440 G9",
+      "read_from": [
+        "photo 2 note",
+        "photo 1 keyboard label 'PROBOOK'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP ProBook 440 G9",
+        "verdict": "supported",
+        "evidence": "Photo 2 shows a handwritten note stating 'HP Probook 440 G9'. Photo 1 shows 'PROBOOK' label below keyboard, consistent with the model line."
+      },
+      {
+        "claim": "Intel Core i5 12th generation",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows an Intel Core i5 sticker on the palm rest. The sticker does not specify generation, but the seller's claim is consistent with the model (G9 series typically uses 12th gen)."
+      },
+      {
+        "claim": "512 SSD drive",
+        "verdict": "unverified",
+        "evidence": "No internal photos or system specs shown. The handwritten note in photo 2 mentions '512 SSD', but this is not visible on the device itself."
+      },
+      {
+        "claim": "16gb ram",
+        "verdict": "unverified",
+        "evidence": "No system specs or internal photos. The handwritten note in photo 2 mentions '16gb', but this is not visible on the device itself."
+      },
+      {
+        "claim": "14 inches screen",
+        "verdict": "supported",
+        "evidence": "The HP ProBook 440 G9 is a 14-inch model by standard. The screen size is consistent with the physical dimensions shown in photo 1."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The laptop may not have 16GB RAM or 512GB SSD as claimed.",
+        "proof": "A photo of the BIOS/UEFI screen showing RAM and storage details, or a screenshot of system information (e.g., Windows System Properties or Disk Management).",
+        "if_unproven": "Priced as if having less than 16GB RAM or smaller SSD, which would reduce value significantly."
+      },
+      {
+        "risk": "The laptop may be non-functional or have hidden hardware issues (e.g., battery, screen, ports).",
+        "proof": "A video showing the laptop powering on, booting into OS, and demonstrating screen, keyboard, touchpad, and ports.",
+        "if_unproven": "Priced as not working, which would reduce value to scrap or parts-only price."
+      },
+      {
+        "risk": "The model may not be G9 (e.g., older G8 or G7 model with sticker or note mislabeled).",
+        "proof": "Photo of the serial number label on the bottom (photo 0) or a clear shot of the model number from the BIOS or system info.",
+        "if_unproven": "Priced as an older generation model, which would reduce value."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the BIOS/UEFI screen or system information showing RAM and storage details.",
+      "Video of the laptop powering on and booting into the operating system.",
+      "Clear photo of the serial number label on the bottom of the laptop (photo 0)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and brand are supported by visible evidence, but critical specs (RAM, SSD) are only claimed via a handwritten note and not verifiable from the photos. Functionality and exact model generation are also unproven. Without proof of specs and working condition, the item cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 82460,
+    "input_tokens": 2802,
+    "output_tokens": 1013,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "ad228416f7788128fc673aebe9b86978",
+    "error": null
+  }
+}

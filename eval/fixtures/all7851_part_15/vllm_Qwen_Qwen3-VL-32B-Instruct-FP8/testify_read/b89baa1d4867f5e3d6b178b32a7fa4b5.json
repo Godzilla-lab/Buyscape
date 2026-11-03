@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Back of a black smartphone with a dual-camera module and a Google 'G' logo. A pink sticker reads 'UNLOCKED PIXEL 8'.",
+      "Photo 1: Front of the phone showing the lock screen with time 6:28, date Wed, Sep 2, and a 'Thunderstorm Warning' from Nigerian Meteorological Agency. The screen has visible smudges and minor scratches.",
+      "Photo 2: Front of the phone showing the home screen with app icons (Play Store, Gmail, Photos, YouTube, Chrome, etc.) and a weather widget showing 28\u00b0C. The screen has noticeable smudges and scratches.",
+      "All photos show the same device from different angles, held in a hand. The background is an indoor setting with orange and green walls."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "smartphone",
+      "brand": "Google",
+      "model": "Pixel 8",
+      "read_from": [
+        "photo 0 sticker",
+        "photo 1 screen (lock screen with 'Pixel 8' in notification text)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Google Pixel 8 128gb",
+        "verdict": "unverified",
+        "evidence": "The model 'Pixel 8' is supported by the sticker in photo 0 and the lock screen in photo 1, but the storage capacity '128gb' is not visible in any photo. No settings or storage info is shown."
+      },
+      {
+        "claim": "Foreign used",
+        "verdict": "unverifiable_remote",
+        "evidence": "The term 'foreign used' refers to origin and usage history, which cannot be verified from photos alone. No IMEI, box, or documentation is shown."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The phone may be locked to a foreign carrier or have activation issues.",
+        "proof": "A screenshot of the phone's settings showing 'About phone' with IMEI, carrier, and activation status.",
+        "if_unproven": "priced as potentially locked or non-functional"
+      },
+      {
+        "risk": "The storage capacity may not be 128GB as claimed.",
+        "proof": "A screenshot of the phone's settings > 'Storage' showing the total capacity and used space.",
+        "if_unproven": "priced as unknown storage, possibly lower than 128GB"
+      },
+      {
+        "risk": "The screen has visible scratches and smudges, which may affect usability or resale value.",
+        "proof": "A close-up photo of the screen under direct light to assess scratch depth and smudge severity.",
+        "if_unproven": "priced as having cosmetic damage"
+      },
+      {
+        "risk": "The phone may have water damage or internal issues not visible externally.",
+        "proof": "A video showing the phone being powered on, camera functioning, and a full boot-up sequence.",
+        "if_unproven": "priced as possibly non-functional or with hidden defects"
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of 'About phone' in settings showing model, IMEI, and carrier.",
+      "Screenshot of 'Storage' settings to confirm 128GB capacity.",
+      "Video of the phone booting up and camera working.",
+      "Close-up photo of the screen under direct light to assess scratches."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identified as Pixel 8 from the sticker and lock screen, but the 128GB claim is unverified. The 'foreign used' status and potential hidden risks (lock status, storage, screen damage, internal issues) require further proof before pricing. Without this, the item cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 69732,
+    "input_tokens": 2777,
+    "output_tokens": 831,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "b89baa1d4867f5e3d6b178b32a7fa4b5",
+    "error": null
+  }
+}

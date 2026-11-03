@@ -1,0 +1,88 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: A hand holds a small, dark gray Lenovo desktop PC. The 'Lenovo' logo is embossed on the top. A blue Intel sticker is visible on the front edge. In the background, multiple identical units are stacked.",
+      "Photo 1: Side view of the same unit, showing ports: power, USB, audio jacks, and a blue USB 3.0 port. The 'ThinkCentre' logo is visible on the perforated side panel. A red stripe with 'Lenovo' runs vertically.",
+      "Photo 2: Another side view, similar to photo 1, showing the same ports and branding. The background shows more stacked units, some with visible labels and stickers.",
+      "All units appear to be in used condition, with some dust and minor scuffs. No visible damage or missing parts."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "desktop PC",
+      "brand": "Lenovo",
+      "model": "ThinkCentre M900",
+      "read_from": [
+        "photo 0: 'Lenovo' logo on top",
+        "photo 1: 'ThinkCentre' logo on side panel",
+        "photo 2: 'ThinkCentre' logo on side panel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Lenovo Thinkcentre m900 tiny",
+        "verdict": "supported",
+        "evidence": "Photo 0, 1, and 2 show the 'Lenovo' and 'ThinkCentre' branding, consistent with the ThinkCentre M900 Tiny model."
+      },
+      {
+        "claim": "Intel core i5",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows an Intel sticker, but it does not specify the processor model. No BIOS or system screen is shown to confirm the CPU."
+      },
+      {
+        "claim": "256Gb",
+        "verdict": "unverified",
+        "evidence": "No internal drive or system information is visible. The storage capacity cannot be confirmed from the photos."
+      },
+      {
+        "claim": "8Gb",
+        "verdict": "unverified",
+        "evidence": "No RAM modules or system information are visible. The RAM amount cannot be confirmed from the photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The CPU is not an Intel Core i5, or it is a lower-tier model.",
+        "proof": "A photo of the system BIOS screen or a screenshot from the Windows system info showing the exact CPU model.",
+        "if_unproven": "Priced as if it has a lower-end or non-i5 CPU, which reduces value."
+      },
+      {
+        "risk": "The storage is not 256GB SSD, or it is a slower HDD or smaller capacity.",
+        "proof": "A photo of the internal drive or a screenshot from the Windows Disk Management showing the drive size and type.",
+        "if_unproven": "Priced as if it has a smaller or slower drive, reducing value."
+      },
+      {
+        "risk": "The RAM is not 8GB, or it is not functional.",
+        "proof": "A photo of the RAM modules inside the unit or a screenshot from the Windows system info showing the installed RAM.",
+        "if_unproven": "Priced as if it has less than 8GB or non-functional RAM, reducing value."
+      },
+      {
+        "risk": "The unit is not working or has hidden hardware faults (e.g., power supply, motherboard).",
+        "proof": "A video clip showing the unit powering on, booting, and running a basic system check or Windows desktop.",
+        "if_unproven": "Priced as if it is non-functional or has faults, reducing value."
+      }
+    ],
+    "proof_requests": [
+      "A photo or video of the system BIOS screen or Windows system info showing the exact CPU model.",
+      "A photo or video of the internal drive or Windows Disk Management showing the storage size and type.",
+      "A photo or video of the RAM modules or Windows system info showing the installed RAM.",
+      "A video clip showing the unit powering on and booting to the desktop."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identifiable as Lenovo ThinkCentre M900, but key specifications (CPU, RAM, storage) are unverified. Hidden risks include incorrect specs and non-functionality. Without proof of these, the item cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 81582,
+    "input_tokens": 2786,
+    "output_tokens": 982,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "a81f7be56eeea35e9f6035af9253ea3a",
+    "error": null
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a white Panasonic microwave with a digital control panel and a display showing '8888'. The brand 'Panasonic' is visible below the door.",
+      "Photo 1 shows a black Sharp microwave with a digital display showing '8888' and a control panel with buttons. The brand 'SHARP' is visible on the top left.",
+      "Photo 2 shows a white microwave with two rotary dials for power and defrost/time, and the brand 'ok.' is visible below the door.",
+      "All three microwaves are wrapped in plastic on top, suggesting they are being sold as used but protected.",
+      "The microwaves are placed on a tiled floor against a plain wall, with no visible damage to the exterior in any photo.",
+      "The seller's text claims the microwave is 'neatly used', 'clean and sharp', and 'tested okay'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "microwave oven",
+      "brand": "Panasonic",
+      "model": null,
+      "read_from": [
+        "photo 0 screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "This is neatly used London microwave",
+        "verdict": "unverifiable_remote",
+        "evidence": "The term 'London microwave' is not a known brand or model; it may refer to a style or be a misnomer. The photos show three different brands (Panasonic, Sharp, ok.), so the claim is ambiguous. The 'neatly used' condition is subjective and not verifiable from photos alone."
+      },
+      {
+        "claim": "Looks clean and sharp",
+        "verdict": "supported",
+        "evidence": "All three microwaves appear clean and undamaged in the photos, with no visible stains, dents, or scratches. The plastic wrapping suggests care in presentation."
+      },
+      {
+        "claim": "Tested okay",
+        "verdict": "unverified",
+        "evidence": "There is no visual proof of testing. The display showing '8888' is common for default or test mode, but does not confirm functionality. No video or photo of operation is provided."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The microwave may not be functional despite the 'tested okay' claim.",
+        "proof": "A video clip showing the microwave turning on, heating a cup of water, and turning off normally.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The microwave may have internal damage or wear not visible in exterior photos.",
+        "proof": "A photo or video showing the interior cavity, turntable, and door seal.",
+        "if_unproven": "priced as having potential internal damage"
+      },
+      {
+        "risk": "The model or capacity is not specified, which affects value.",
+        "proof": "A clear photo of the model number label, usually on the inside of the door or back panel.",
+        "if_unproven": "priced at lowest common model value"
+      }
+    ],
+    "proof_requests": [
+      "Video of the microwave in operation, heating a cup of water.",
+      "Photo of the interior cavity and turntable.",
+      "Photo of the model number label inside the door or on the back."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a Panasonic microwave from photo 0, but the seller's claim of 'tested okay' is unverified, and there are hidden risks regarding functionality and internal condition. Without proof of operation and interior condition, the item cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 64351,
+    "input_tokens": 2154,
+    "output_tokens": 795,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "3a43b71c40b23aa78ca24c9084bf717c",
+    "error": null
+  }
+}

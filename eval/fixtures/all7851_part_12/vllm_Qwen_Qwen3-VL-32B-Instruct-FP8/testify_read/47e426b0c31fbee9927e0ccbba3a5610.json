@@ -1,0 +1,95 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows two identical-looking Dell laptops side by side, both open, with black screens. The Dell logo is visible below the screen on both. The keyboards are full-sized with a trackpad below. A small Intel Core i7 sticker is visible on the bottom right of the palm rest.",
+      "Photo 1 is a close-up of one laptop's screen showing the Windows 'About' system settings. It lists: 12th Gen Intel(R) Core(TM) i7-1265U, 32 GB RAM, Intel(R) Iris(R) Xe Graphics, 477 GB storage. The device name is DESKTOP-3PE1I6M, and the product ID is visible. The laptop model is listed as 'Latitude 7430'. The keyboard is visible below the screen, with the Dell logo on the bezel.",
+      "Photo 2 shows both laptops open again, side by side. The left laptop displays a capybara wallpaper. The right laptop shows the same 'About' screen as in photo 1. Both screens are on and appear to be functioning. The Dell logo is visible on both screens' bezels. The Intel Core i7 sticker is visible on both palm rests."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Dell",
+      "model": "Latitude 7430",
+      "read_from": [
+        "photo 1 screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Dell Latitude 7430",
+        "verdict": "supported",
+        "evidence": "Photo 1 screen clearly shows 'Latitude 7430' under 'Device info'."
+      },
+      {
+        "claim": "14inch Touchscreen",
+        "verdict": "unverified",
+        "evidence": "The screen size is not visible in any photo. The touchscreen capability is not demonstrated (no finger interaction shown). The seller's text claims it, but no photo proves it."
+      },
+      {
+        "claim": "Core i7 (12th Gen)",
+        "verdict": "supported",
+        "evidence": "Photo 1 screen shows '12th Gen Intel(R) Core(TM) i7-1265U'."
+      },
+      {
+        "claim": "32GB RAM",
+        "verdict": "supported",
+        "evidence": "Photo 1 screen shows 'Installed RAM: 32 GB'."
+      },
+      {
+        "claim": "512GB SSD",
+        "verdict": "contradicted",
+        "evidence": "Photo 1 screen shows 'Storage: 477 GB'. This is less than 512GB, and the seller's claim of 512GB is not supported. The actual storage is 477GB, which is likely a 512GB drive with some space used by the OS and pre-installed software."
+      },
+      {
+        "claim": "Face ID",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows a fingerprint sensor or facial recognition in action. The camera is visible above the screen, but no proof of Face ID functionality is provided. The seller's text claims it, but it cannot be verified from the photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The touchscreen functionality is not proven.",
+        "proof": "A video or photo showing a finger interacting with the screen to demonstrate touch input.",
+        "if_unproven": "priced as non-touchscreen"
+      },
+      {
+        "risk": "Face ID is not proven to work.",
+        "proof": "A video or photo showing the laptop unlocking via facial recognition.",
+        "if_unproven": "priced as without biometric login"
+      },
+      {
+        "risk": "The actual storage is 477GB, not 512GB as claimed.",
+        "proof": "The photo already shows 477GB, so this is not a hidden risk but a contradiction. The item is priced based on 477GB storage.",
+        "if_unproven": "priced as 477GB SSD"
+      },
+      {
+        "risk": "The laptop may have physical damage not visible in the photos, such as scratches, dents, or keyboard issues.",
+        "proof": "A close-up video or photo of the entire laptop, including the lid, base, hinges, and keyboard, from multiple angles.",
+        "if_unproven": "priced with assumption of minor wear, as typical for used laptops"
+      }
+    ],
+    "proof_requests": [
+      "Video or photo showing the touchscreen in use (finger swiping, tapping).",
+      "Video or photo showing Face ID unlocking the laptop.",
+      "Close-up photos of the entire laptop, including the lid, base, hinges, and keyboard, from multiple angles to check for damage.",
+      "Photo of the laptop's serial number or service tag, if available."
+    ],
+    "decision": "price",
+    "reason": "The laptop is identifiable as a Dell Latitude 7430 with a 12th Gen i7-1265U, 32GB RAM, and 477GB SSD, as shown in photo 1. The seller's claim of 512GB is contradicted by the photo showing 477GB. Touchscreen and Face ID are unverified but not contradicted. The item can be priced at its worst case (non-touch, no Face ID, 477GB SSD) based on visible evidence."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 101496,
+    "input_tokens": 2351,
+    "output_tokens": 1220,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "47e426b0c31fbee9927e0ccbba3a5610",
+    "error": null
+  }
+}

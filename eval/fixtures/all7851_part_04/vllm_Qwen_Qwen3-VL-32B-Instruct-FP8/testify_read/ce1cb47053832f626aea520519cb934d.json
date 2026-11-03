@@ -1,0 +1,85 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a white Samsung phone box held in hand.",
+      "The box displays the Samsung logo at the top.",
+      "The front of the box shows an image of a dark-colored phone with a dual-camera setup on the back and a green gradient screen.",
+      "Text on the box reads 'Galaxy A06' at the bottom.",
+      "A blue shield sticker says '24 MONTH WARRANTY FOR AFRICA'.",
+      "The box appears to be new or lightly used, with some glare and minor creases.",
+      "The seller's text mentions the phone is 1 year old and still functions well, with a screen guard on the screen."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "Samsung Galaxy A06 smartphone",
+      "brand": "Samsung",
+      "model": "Galaxy A06",
+      "read_from": [
+        "photo 0 box front"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "It is 1 year old till now.",
+        "verdict": "unverifiable_remote",
+        "evidence": "No serial number, IMEI, or purchase receipt is visible. The box appears new, which contradicts a 1-year-old device unless it was unused. The warranty sticker is for 24 months, which may still be valid if purchased recently."
+      },
+      {
+        "claim": "Still function well.",
+        "verdict": "unverified",
+        "evidence": "No photo of the phone turned on or in use. No video or screenshot of the interface. The box does not confirm functionality."
+      },
+      {
+        "claim": "For the screen, it has a screen guard.",
+        "verdict": "unverified",
+        "evidence": "No photo of the actual screen or screen guard. The box image does not show a screen guard applied."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The phone may be non-functional or have hidden defects.",
+        "proof": "A video or photo of the phone turned on, showing the home screen and basic operations.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The phone may be a different model or a fake, despite the box.",
+        "proof": "A photo of the phone itself, showing the back and front, with the model name visible on the device or in settings.",
+        "if_unproven": "priced as a lower-tier or unknown model"
+      },
+      {
+        "risk": "The phone may be stolen or have a blacklisted IMEI.",
+        "proof": "A photo of the phone's IMEI number (usually under the SIM tray or in settings) and a verification check.",
+        "if_unproven": "priced as high-risk, with potential for non-delivery or legal issues"
+      },
+      {
+        "risk": "The screen guard may be missing or damaged.",
+        "proof": "A close-up photo of the screen showing the screen guard applied and intact.",
+        "if_unproven": "priced as without screen guard"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual phone turned on, showing the home screen.",
+      "Photo of the phone's back and front, confirming the model.",
+      "Photo of the IMEI number (under SIM tray or in settings).",
+      "Close-up photo of the screen showing the screen guard.",
+      "Video of the phone in use, including camera and apps."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identifiable from the box, but the phone itself is not shown. Functionality, age, and screen guard claims cannot be verified. Hidden risks include non-functionality, wrong model, or blacklisted IMEI. Proof is needed to price accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 67752,
+    "input_tokens": 1791,
+    "output_tokens": 824,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "ce1cb47053832f626aea520519cb934d",
+    "error": null
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Closed silver laptop with Apple logo on lid, placed on tiled floor. Logo is greenish, possibly due to lighting or screen reflection.",
+      "Photo 1: Open laptop showing black screen (off or faulty), keyboard with visible damage: multiple keys missing or broken, especially in the middle row and spacebar area. Trackpad is intact. 'MacBook' text visible below screen.",
+      "Photo 2: Bottom of laptop, silver, with four rubber feet and visible screws. Held by a hand with a chain bracelet. Tiled floor background."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "laptop",
+      "brand": "Apple",
+      "model": null,
+      "read_from": [
+        "photo 0 logo",
+        "photo 1 screen label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Only have a Faulty Screen",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows a black, non-responsive screen, consistent with a faulty display. No other visible damage to the body or ports."
+      },
+      {
+        "claim": "Everything is working perfectly fine",
+        "verdict": "contradicted",
+        "evidence": "Photo 1 shows multiple keys missing or broken on the keyboard, which contradicts 'everything working perfectly fine'."
+      },
+      {
+        "claim": "Keyboards are working",
+        "verdict": "unverified",
+        "evidence": "Photo 1 shows physical damage to the keyboard (missing/broken keys), but no video or photo of it being used. Cannot verify functionality remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Internal damage or non-functioning components beyond screen and keyboard",
+        "proof": "Video showing the laptop powered on, booting, and running basic operations (e.g., opening a browser or document).",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Battery not holding charge or missing",
+        "proof": "Photo of the laptop running on battery power, or a photo of the battery compartment or battery status indicator.",
+        "if_unproven": "priced as battery dead or missing"
+      },
+      {
+        "risk": "Missing or damaged ports (USB, charging, audio)",
+        "proof": "Close-up photo of all ports on the sides of the laptop.",
+        "if_unproven": "priced as ports possibly non-functional"
+      }
+    ],
+    "proof_requests": [
+      "Video of the laptop turning on and running (to verify screen and internal functions).",
+      "Close-up photo of all ports on the sides.",
+      "Photo of the battery compartment or battery status indicator.",
+      "Photo of the keyboard being pressed (to verify functionality despite visible damage)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as an Apple laptop with a faulty screen and visible keyboard damage. The seller's claim that 'everything is working' is contradicted by the broken keys. However, internal functionality, battery status, and port condition cannot be verified from current photos. Without proof of working internals and ports, the item cannot be priced accurately and must be assessed further."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 56587,
+    "input_tokens": 2576,
+    "output_tokens": 704,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "0ba1866eb811e0bdb37b61269a36d413",
+    "error": null
+  }
+}

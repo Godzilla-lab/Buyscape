@@ -1,0 +1,92 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Open HP laptop showing Windows 10 desktop with Start menu open. HP logo visible on screen and bottom bezel. Model name 'ProBook 6570b' visible on lower bezel. Keyboard and trackpad appear intact. Watermark 'NICK MARK ENTERPRISE POSTED ON JIJI' overlaid.",
+      "Photo 1: Closed HP laptop from top and side view. HP logo on lid. Side ports visible: USB, HDMI, Ethernet, and audio jack. Background shows shelves with stacked laptops and boxes, suggesting a resale shop.",
+      "Photo 2: Same as Photo 0, slightly different angle. Windows 10 desktop visible. Model name 'ProBook 6570b' visible on lower bezel. Watermark present.",
+      "All photos show the same laptop, stacked on top of other laptops. No internal components shown. No clear view of RAM, storage, or CPU."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "ProBook 6570b",
+      "read_from": [
+        "photo 0 lower bezel",
+        "photo 2 lower bezel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Core i5",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows CPU or system specs. Windows 10 desktop does not display CPU model. Cannot verify from photos alone."
+      },
+      {
+        "claim": "8GB HDD",
+        "verdict": "contradicted",
+        "evidence": "The claim '8GB HDD' is physically impossible. HDDs are measured in GB or TB, not 8GB. 8GB is a typical RAM size. This is likely a typo for '8GB RAM'."
+      },
+      {
+        "claim": "500GB HDD",
+        "verdict": "unverified",
+        "evidence": "No photo shows internal storage. Cannot confirm if 500GB HDD is present. Could be SSD or different size. No disk management or system info visible."
+      },
+      {
+        "claim": "Windows 10",
+        "verdict": "supported",
+        "evidence": "Photo 0 and Photo 2 show Windows 10 desktop with Start menu, taskbar, and characteristic UI. HP logo on screen confirms OS is running."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "CPU is not Core i5 (could be lower tier or non-existent)",
+        "proof": "Photo of system information screen (e.g., Windows About or CPU-Z) showing CPU model.",
+        "if_unproven": "Priced as if CPU is unknown or lower tier, which reduces value."
+      },
+      {
+        "risk": "Storage is not 500GB HDD (could be smaller, SSD, or missing)",
+        "proof": "Photo of Disk Management or system info showing storage size and type.",
+        "if_unproven": "Priced as if storage is unknown or smaller, which reduces value."
+      },
+      {
+        "risk": "RAM is not 8GB (could be less, e.g., 4GB)",
+        "proof": "Photo of system information screen showing installed RAM.",
+        "if_unproven": "Priced as if RAM is 4GB or less, which reduces value."
+      },
+      {
+        "risk": "Laptop has physical damage not visible (e.g., cracked screen, keyboard issues, hinge wear)",
+        "proof": "Close-up photos of screen, keyboard, hinges, and ports from multiple angles.",
+        "if_unproven": "Priced as if condition is unknown, which reduces value."
+      },
+      {
+        "risk": "Battery does not hold charge or is missing",
+        "proof": "Video or photo showing battery status in Windows, or laptop running on battery.",
+        "if_unproven": "Priced as if battery is non-functional or missing, which reduces value."
+      }
+    ],
+    "proof_requests": [
+      "Photo of system information screen showing CPU, RAM, and storage details.",
+      "Close-up photos of screen, keyboard, hinges, and ports.",
+      "Video or photo showing battery status and laptop running on battery.",
+      "Photo of internal storage (if possible) or Disk Management screen."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identified as HP ProBook 6570b, but critical specs like CPU, RAM, and storage are unverified or contradicted. The claim '8GB HDD' is physically impossible and likely a typo. Without proof of actual specs and condition, the item cannot be priced accurately. The photos show a working Windows 10 system, but internal components and physical condition are unknown."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 88296,
+    "input_tokens": 2574,
+    "output_tokens": 1051,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "c2f1bd473cda34b6b3d1f05cf140d32b",
+    "error": null
+  }
+}

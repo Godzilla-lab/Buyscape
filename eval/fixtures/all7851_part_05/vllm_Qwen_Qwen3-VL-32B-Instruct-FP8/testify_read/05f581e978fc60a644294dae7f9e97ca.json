@@ -1,0 +1,68 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a large white battery with an orange label.",
+      "The label reads 'Orizone' with the tagline 'INNOVATION | PRODUCT | SOLUTION'.",
+      "Text on the label: 'TALL TUBULAR LONG-LIFE BATTERY', 'MADE IN INDIA', 'UZT-220Ah', '12V @ C20'.",
+      "The battery has six red-capped terminals on top, with some visible dust and minor grime.",
+      "The battery is mounted in a black metal rack, with another similar battery below it.",
+      "There is a watermark 'POSTED ON JIJI' and 'VIGORVINZI' across the image."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "tall tubular long-life battery",
+      "brand": "Orizone",
+      "model": "UZT-220Ah",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Fairly used battery, giving out four for 400k",
+        "verdict": "unverified",
+        "evidence": "The seller claims the battery is 'fairly used' and 'giving out four' (likely meaning 4 hours of runtime or 4 cycles), but no photo shows the battery in operation, load test, or condition of internal plates. The visual condition shows dust and minor wear, but no signs of leakage, bulging, or corrosion are visible. The claim of 'giving out four' is not verifiable from the photo alone."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery may not hold charge or deliver rated capacity due to internal degradation.",
+        "proof": "A video or photo of the battery under load test, showing voltage output over time, or a multimeter reading of voltage and specific gravity of each cell.",
+        "if_unproven": "priced as not working or severely degraded"
+      },
+      {
+        "risk": "Internal damage or sulfation not visible from exterior.",
+        "proof": "Close-up of the battery terminals and casing for signs of corrosion, cracks, or leakage; or a video of the battery being charged and discharged.",
+        "if_unproven": "priced as potentially defective"
+      },
+      {
+        "risk": "Battery may be old or past its useful life despite 'fairly used' claim.",
+        "proof": "Photo of the manufacturing date or date code on the battery label or casing.",
+        "if_unproven": "priced as unknown age, with lower value"
+      }
+    ],
+    "proof_requests": [
+      "Video or photo of the battery under load test showing voltage output over time.",
+      "Close-up of the battery terminals and casing for signs of corrosion, cracks, or leakage.",
+      "Photo of the manufacturing date or date code on the battery.",
+      "Photo of the battery being charged and discharged to verify functionality."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The battery model and brand are clearly visible, but the seller's claim about its performance ('giving out four') and condition ('fairly used') cannot be verified from the photo alone. Hidden risks such as internal degradation, sulfation, or age affect value significantly. Without proof of functionality and condition, a worst-case price cannot be confidently assigned."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 58059,
+    "input_tokens": 1778,
+    "output_tokens": 737,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "05f581e978fc60a644294dae7f9e97ca",
+    "error": null
+  }
+}

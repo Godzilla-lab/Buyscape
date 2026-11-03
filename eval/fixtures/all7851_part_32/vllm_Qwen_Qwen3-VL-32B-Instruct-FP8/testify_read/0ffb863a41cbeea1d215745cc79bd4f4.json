@@ -1,0 +1,105 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Stack of 6 silver laptops, top one open, showing black keyboard, silver palm rest, HP logo on screen bezel, and 'g3' label on top right of keyboard deck.",
+      "Photo 1: Stack of 6 closed silver laptops, HP logo visible on lid.",
+      "Photo 2: Stack of 6 laptops from a diagonal angle, top one open, showing screen and keyboard.",
+      "All laptops appear identical, stacked neatly, suggesting bulk availability.",
+      "No visible damage or wear in photos.",
+      "No internal components, ports, or labels visible.",
+      "No screen activity or keyboard backlight shown."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "840 g3",
+      "read_from": [
+        "photo 0 screen bezel",
+        "photo 0 top right of keyboard deck"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP 840 g3",
+        "verdict": "supported",
+        "evidence": "Photo 0: 'HP' logo on screen bezel and 'g3' label on keyboard deck."
+      },
+      {
+        "claim": "Core i5 6th gen",
+        "verdict": "unverifiable_remote",
+        "evidence": "No CPU label or system information visible. Cannot be confirmed from photos."
+      },
+      {
+        "claim": "8GB Ram",
+        "verdict": "unverifiable_remote",
+        "evidence": "No RAM label or system info visible. Cannot be confirmed from photos."
+      },
+      {
+        "claim": "256ssd",
+        "verdict": "unverifiable_remote",
+        "evidence": "No storage label or system info visible. Cannot be confirmed from photos."
+      },
+      {
+        "claim": "Keyboard light",
+        "verdict": "unverified",
+        "evidence": "No keyboard backlight shown in any photo. No indication of backlight functionality."
+      },
+      {
+        "claim": "Available in bulk",
+        "verdict": "supported",
+        "evidence": "Photo 0, 1, and 2 show a stack of 6 identical laptops, indicating multiple units available."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "CPU is not a 6th gen Core i5",
+        "proof": "Photo of BIOS screen or system information showing CPU model.",
+        "if_unproven": "priced as lower-end or unknown CPU, reducing value."
+      },
+      {
+        "risk": "RAM is less than 8GB",
+        "proof": "Photo of system information or open laptop showing RAM modules.",
+        "if_unproven": "priced as 4GB or lower, reducing value."
+      },
+      {
+        "risk": "Storage is not 256GB SSD",
+        "proof": "Photo of system information or open laptop showing storage type and size.",
+        "if_unproven": "priced as HDD or smaller SSD, reducing value."
+      },
+      {
+        "risk": "Keyboard backlight does not work",
+        "proof": "Video or photo showing keyboard backlight turned on.",
+        "if_unproven": "priced as no backlight, reducing value."
+      },
+      {
+        "risk": "Laptops have hidden damage or defects (screen, battery, ports)",
+        "proof": "Video showing all ports, screen test, battery health, and full boot-up.",
+        "if_unproven": "priced as potentially non-functional or with defects, reducing value."
+      }
+    ],
+    "proof_requests": [
+      "Video or photo showing BIOS or system information with CPU, RAM, and storage details.",
+      "Video or photo showing keyboard backlight turned on.",
+      "Video showing full boot-up, screen test, and all ports working.",
+      "Photo of the bottom of the laptop showing model number or serial number."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is confirmed as HP 840 g3, but critical specs (CPU, RAM, SSD, keyboard light) cannot be verified from photos. Hidden risks include non-functional components or incorrect specs. Proof is needed to price accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 73760,
+    "input_tokens": 2797,
+    "output_tokens": 922,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "0ffb863a41cbeea1d215745cc79bd4f4",
+    "error": null
+  }
+}

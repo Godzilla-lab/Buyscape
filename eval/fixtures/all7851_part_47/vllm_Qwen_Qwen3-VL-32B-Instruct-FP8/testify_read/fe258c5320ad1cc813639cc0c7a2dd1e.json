@@ -1,0 +1,85 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: iPhone with cracked screen, displaying time 12:54, next to a white box with text and barcode. The screen shows a music app interface with visible cracks.",
+      "Photo 1: Back of a red iPhone with Apple logo, dual-camera setup, and a red light glowing near the camera. The phone is in a clear case.",
+      "Photo 2: Front of the same iPhone, screen on, showing time 8:44, wallpaper with laptop and glass, and visible cracks on the screen. The status bar shows signal and battery icons.",
+      "The box in photo 0 has text that includes 'iPhone' and 'PRODUCT' with a barcode, but no model number is clearly readable.",
+      "The phone has a notch at the top of the screen, consistent with iPhone X or later models.",
+      "The dual-camera setup on the back (photo 1) is vertical, typical of iPhone X, XS, or XR models.",
+      "The red light near the camera in photo 1 may indicate a camera or sensor issue, or it could be a reflection or LED from another device."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "iPhone with cracked screen",
+      "brand": "Apple",
+      "model": null,
+      "read_from": [
+        "photo 1 back with Apple logo",
+        "photo 0 box with 'iPhone' text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Cracked screen",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 2 show visible cracks on the screen."
+      },
+      {
+        "claim": "Works with chip battery 78",
+        "verdict": "unverified",
+        "evidence": "No photo shows battery percentage or health. The '78' may refer to battery percentage, but it is not visible in any photo. The phone is on, so it powers on, but battery health and chip status are not shown."
+      },
+      {
+        "claim": "Everything other thing working perfectly",
+        "verdict": "unverifiable_remote",
+        "evidence": "No functional tests (camera, speakers, charging, buttons, etc.) are shown. The screen is cracked but functional, but other components are not demonstrated."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery health is poor or degraded",
+        "proof": "A screenshot showing battery percentage and health in Settings > Battery > Battery Health, or a video of the phone charging and discharging.",
+        "if_unproven": "priced as battery health unknown, which may be poor, reducing value"
+      },
+      {
+        "risk": "The 'chip' issue may affect performance or functionality",
+        "proof": "A video showing the phone running apps, switching between tasks, and checking for lag or crashes.",
+        "if_unproven": "priced as potentially non-functional or slow, reducing value"
+      },
+      {
+        "risk": "Cracked screen may have touch issues or display problems",
+        "proof": "A video showing the user swiping, tapping, and scrolling across the screen to test responsiveness.",
+        "if_unproven": "priced as screen may not respond properly, reducing value"
+      },
+      {
+        "risk": "Camera or sensor malfunction (red light in photo 1)",
+        "proof": "A video showing the camera taking photos and videos, and checking for any red light or error messages.",
+        "if_unproven": "priced as camera may be faulty, reducing value"
+      }
+    ],
+    "proof_requests": [
+      "Video of the phone turning on, showing battery percentage and health in settings.",
+      "Video of the phone being used: swiping, tapping, opening apps, and checking camera functionality.",
+      "Photo or video of the phone's model number (if any) or box label showing exact model.",
+      "Video of the phone charging and discharging to verify battery performance."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The phone is identifiable as an iPhone with a cracked screen, but critical claims about battery health, chip status, and overall functionality are unverified. Without proof of working condition and battery health, the item cannot be priced accurately. The red light on the back may indicate a hardware issue. Proof is needed to assess true value."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 74867,
+    "input_tokens": 2934,
+    "output_tokens": 938,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "fe258c5320ad1cc813639cc0c7a2dd1e",
+    "error": null
+  }
+}

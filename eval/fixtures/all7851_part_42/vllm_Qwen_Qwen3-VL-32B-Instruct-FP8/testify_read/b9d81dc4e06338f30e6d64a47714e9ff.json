@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a large solar panel with a grid of dark photovoltaic cells and a white frame, leaning against a wall.",
+      "Photo 1 shows the back of the same solar panel, white and flat, with a black junction box and cables extending from the top, ending in a connector.",
+      "Photo 2 is a close-up of the label on the back of the panel, clearly showing the brand 'SUNTECH', model 'STP450', rated power '450 W', and 'Made in Japan'.",
+      "The label also lists technical specs: voltage, current, dimensions, and certifications (IEC, ISO, T\u00dcV, CE).",
+      "The watermark 'MILLER TECHNOLOGIES LTD' appears on all photos, suggesting a seller or reseller."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "solar panel",
+      "brand": "SUNTECH",
+      "model": "STP450",
+      "read_from": [
+        "photo 2 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Rated Maximum Power (Pmax) is 450 W",
+        "verdict": "supported",
+        "evidence": "photo 2 label"
+      },
+      {
+        "claim": "Model Number is STP450",
+        "verdict": "supported",
+        "evidence": "photo 2 label"
+      },
+      {
+        "claim": "Made in Japan",
+        "verdict": "supported",
+        "evidence": "photo 2 label"
+      },
+      {
+        "claim": "Payment on delivery is only within Lagos",
+        "verdict": "unverifiable_remote",
+        "evidence": "Seller's text; cannot verify from photos"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Panel may be damaged or have microcracks not visible in photos",
+        "proof": "Close-up photos of the front surface under bright light, or a video panning across the cells",
+        "if_unproven": "priced as potentially reduced efficiency or non-functional"
+      },
+      {
+        "risk": "Junction box or connectors may be faulty or corroded",
+        "proof": "Close-up of the junction box and cable connectors, showing internal components if possible",
+        "if_unproven": "priced as potentially not working"
+      },
+      {
+        "risk": "Panel may be counterfeit or reconditioned despite 'Made in Japan' claim",
+        "proof": "Serial number verification via Suntech's official channel or a video of the panel being powered under sunlight",
+        "if_unproven": "priced as potentially lower value or non-genuine"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photos of the front surface under bright light to check for cracks or defects.",
+      "Close-up of the junction box and connectors, including the inside if possible.",
+      "Video of the panel being tested under sunlight to confirm output.",
+      "Proof of authenticity or serial number verification from Suntech."
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identified as a Suntech STP450 solar panel with 450W capacity, and the model and specs are readable from photo 2. While there are hidden risks (damage, faults, authenticity), they are common to used solar panels and can be priced at worst case. The photos provide sufficient information to assign a price based on the model and condition as seen."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 59613,
+    "input_tokens": 2784,
+    "output_tokens": 765,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "b9d81dc4e06338f30e6d64a47714e9ff",
+    "error": null
+  }
+}

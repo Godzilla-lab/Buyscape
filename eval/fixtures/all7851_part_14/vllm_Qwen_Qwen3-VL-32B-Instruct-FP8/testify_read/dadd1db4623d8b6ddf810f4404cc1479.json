@@ -1,0 +1,66 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a stack of used tires with deep, aggressive tread patterns, typical of off-road or all-terrain tires.",
+      "The sidewall of the top tire is visible and shows partial branding: 'BFGoodrich' and 'All-Terrain T/A KO2'.",
+      "The tire size is not clearly readable on the sidewall in the photo, but the seller claims '265 65 ZR 18'.",
+      "The tires appear to be in used condition with visible wear, but no obvious damage like cuts or bulges is visible in this shot.",
+      "The background shows a warehouse or storage area with more tires and metal racks."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "off-road tire",
+      "brand": "BFGoodrich",
+      "model": "All-Terrain T/A KO2",
+      "read_from": [
+        "photo 0 sidewall"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Tokunbo tire 265 65 ZR 18",
+        "verdict": "unverified",
+        "evidence": "The tire size is not clearly readable in photo 0; the visible text shows 'BFGoodrich All-Terrain T/A KO2' but not the size. The seller's claim of '265 65 ZR 18' cannot be confirmed from the photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Tire size mismatch or incorrect specification",
+        "proof": "A clear, close-up photo of the sidewall showing the full tire size (e.g., 265/65R18) and load/speed rating.",
+        "if_unproven": "Priced as unknown size, which may be undervalued or overvalued depending on actual size."
+      },
+      {
+        "risk": "Hidden damage or structural issues (e.g., sidewall cracks, internal damage, or dry rot)",
+        "proof": "A close-up photo of the tire sidewall and tread from multiple angles, including the inner and outer edges.",
+        "if_unproven": "Priced as potentially damaged, which reduces value."
+      },
+      {
+        "risk": "Tire tread depth is insufficient for safe use",
+        "proof": "A photo showing a tread depth gauge inserted into the tread grooves, or a close-up of the tread with visible wear indicators.",
+        "if_unproven": "Priced as worn, assuming low tread depth."
+      }
+    ],
+    "proof_requests": [
+      "A clear, close-up photo of the tire sidewall showing the full size (e.g., 265/65R18) and load/speed rating.",
+      "Close-up photos of the tire tread and sidewall from multiple angles to check for damage or wear.",
+      "A photo of the tread depth using a tread depth gauge or showing wear bars."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The tire brand and model are identifiable, but the claimed size '265 65 ZR 18' cannot be verified from the current photo. Hidden risks like tread depth, damage, and actual size affect pricing and safety. Without proof, the item cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 58379,
+    "input_tokens": 1932,
+    "output_tokens": 723,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "dadd1db4623d8b6ddf810f4404cc1479",
+    "error": null
+  }
+}

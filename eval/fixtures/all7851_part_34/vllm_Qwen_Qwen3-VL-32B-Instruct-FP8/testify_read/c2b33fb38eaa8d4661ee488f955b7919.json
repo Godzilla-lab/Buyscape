@@ -1,0 +1,67 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: A pink and blue box labeled 'Nail Drill Machine' with an image of a purple handheld device. Text on box: 'Unisex Manicure Pedicure Machine'.",
+      "Photo 1: Open box showing a purple handheld nail drill, a black power adapter with visible text 'AC/DC ADAPTOR', and a coiled black cable. The adapter has 'MADE IN CHINA' and voltage specs (INPUT: AC 100-240V, OUTPUT: DC 12V 2A).",
+      "Photo 2: The same box from photo 0, with the actual purple drill placed on top, showing the drill bit end. The drill has a metallic finish with a gold band near the middle.",
+      "All photos show a watermark 'PEKOAUTOSFLEET' and 'POSTED ON JIJI'.",
+      "The drill appears to be in used condition; the box is slightly worn and has tape on the edges."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "electric nail drill machine",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 box label",
+        "photo 1 device and adapter"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "electric nail drill machine used for manicures, pedicures, and removing gel or acrylic nails",
+        "verdict": "supported",
+        "evidence": "Photo 0 box label says 'Nail Drill Machine' and 'Unisex Manicure Pedicure Machine'. Photo 1 shows the device and power adapter, confirming it is electric. Photo 2 shows the drill bit, consistent with nail work."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The device may not work due to damage or faulty power adapter.",
+        "proof": "A video showing the drill turning on and spinning the bit when plugged in.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The drill bit may be worn or damaged, affecting performance.",
+        "proof": "Close-up photo of the drill bit tip showing condition and wear.",
+        "if_unproven": "priced as having a worn bit"
+      },
+      {
+        "risk": "The power adapter may not be compatible with Nigerian voltage (220-240V) or may be faulty.",
+        "proof": "Photo of the adapter's input/output specs and a test video showing it powering the drill in Nigeria.",
+        "if_unproven": "priced as potentially incompatible or faulty"
+      }
+    ],
+    "proof_requests": [
+      "Video of the drill turning on and spinning the bit when plugged in.",
+      "Close-up photo of the drill bit tip to check for wear or damage.",
+      "Photo of the adapter's input/output specs and a test video showing it working in Nigeria."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as an electric nail drill machine, and the seller's claims are supported by the photos. However, functionality, condition of the drill bit, and adapter compatibility cannot be verified remotely. These hidden risks affect pricing and must be proven before a final price can be assigned."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 60969,
+    "input_tokens": 2158,
+    "output_tokens": 711,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "c2b33fb38eaa8d4661ee488f955b7919",
+    "error": null
+  }
+}

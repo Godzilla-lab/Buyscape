@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a close-up of a solar panel with a white label containing technical specifications.",
+      "The label includes text such as 'Maximum System Voltage 1500V', 'Open Circuit Voltage (Voc) 40.5V', 'Short Circuit Current (Isc) 11.56A', 'Maximum Power (Pmax) 300W', and 'Type 29'.",
+      "The brand name 'SUN BRAVE SOLAR' is visible in large letters on the label.",
+      "The panel has blue photovoltaic cells arranged in rows, separated by white borders.",
+      "The label also includes a warning symbol and text about maximum system voltage and temperature range."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "solar panel",
+      "brand": "SUN BRAVE SOLAR",
+      "model": "Type 29",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "solar panels",
+        "verdict": "supported",
+        "evidence": "photo 0 shows a solar panel with visible cells and label"
+      },
+      {
+        "claim": "300W solar panel",
+        "verdict": "supported",
+        "evidence": "photo 0 label clearly states 'Maximum Power (Pmax) 300W'"
+      },
+      {
+        "claim": "solar battery, solar inverter, solar charger, controller",
+        "verdict": "unverifiable_remote",
+        "evidence": "only a solar panel is shown; no other components are visible in the photo"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "panel may be damaged or defective (e.g., microcracks, delamination, or hot spots not visible in photo)",
+        "proof": "a full view of the panel from front and back, including close-ups of the cells and edges, under natural light",
+        "if_unproven": "priced as potentially defective, with lower value"
+      },
+      {
+        "risk": "label may be fake or mislabeled (e.g., 300W claim not genuine)",
+        "proof": "a clear, unobstructed photo of the label with serial number and QR code if present, plus a photo of the panel's frame and junction box",
+        "if_unproven": "priced as unverified, with lower value"
+      },
+      {
+        "risk": "panel may not be functional (e.g., broken wiring, damaged junction box)",
+        "proof": "a video showing the panel connected to a multimeter or load, demonstrating output under sunlight",
+        "if_unproven": "priced as not working, with lowest value"
+      }
+    ],
+    "proof_requests": [
+      "Full front and back view of the solar panel, including edges and junction box.",
+      "Close-up of the label with serial number and QR code if present.",
+      "Video of the panel under sunlight connected to a multimeter or load to verify output.",
+      "Photo of the panel installed or in context to confirm size and condition."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a 300W SUN BRAVE SOLAR Type 29 solar panel, but critical risks such as physical damage, label authenticity, and functionality cannot be assessed from the current photo. Proof is needed to verify condition and performance before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 62651,
+    "input_tokens": 1571,
+    "output_tokens": 759,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "62c7ec1396e9e7eda5765c10bccdcef3",
+    "error": null
+  }
+}

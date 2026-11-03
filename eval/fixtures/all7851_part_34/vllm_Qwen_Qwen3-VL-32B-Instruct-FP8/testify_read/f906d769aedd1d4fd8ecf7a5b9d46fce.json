@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Back of a dark-colored smartphone with a triple camera module, a red '128G' sticker, and a white label with barcodes and text. The brand 'SAMSUNG' is visible at the bottom.",
+      "Photo 1: Same back view from a slightly different angle, showing the same features and a patterned window blind in the background.",
+      "Photo 2: Front view of the phone showing the screen on, with a visible vertical line running from top to bottom, passing through the weather widget and app icons. The screen displays a blue wallpaper, time '1:00', and battery at 91%.",
+      "The phone appears to be a Samsung Galaxy S21 or similar model based on the camera module and design.",
+      "The screen has a clear vertical line defect, visible in photo 2, which contradicts the seller's claim of 'very perfect condition'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "smartphone",
+      "brand": "SAMSUNG",
+      "model": "Galaxy S21",
+      "read_from": [
+        "photo 0 back panel",
+        "photo 1 back panel",
+        "photo 2 front screen design and camera module"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "It\u2019s still very perfect condition",
+        "verdict": "contradicted",
+        "evidence": "Photo 2 shows a clear vertical line on the screen, indicating a display defect."
+      },
+      {
+        "claim": "battery very strong",
+        "verdict": "unverifiable_remote",
+        "evidence": "No battery health data or usage test shown. Screen shows 91% charge, but this does not prove battery strength."
+      },
+      {
+        "claim": "just a slight line on the screen",
+        "verdict": "supported",
+        "evidence": "Photo 2 clearly shows a vertical line on the screen, matching the description."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Screen damage or malfunction beyond the visible line (e.g., dead pixels, touch issues, or internal damage)",
+        "proof": "A video showing the screen being touched and swiped across the line, and a full-screen test with solid colors and patterns.",
+        "if_unproven": "priced as having a defective screen, which reduces value significantly."
+      },
+      {
+        "risk": "Battery degradation or cycle count not matching 'very strong' claim",
+        "proof": "Screenshot of battery health from settings or a diagnostic app showing cycle count and health percentage.",
+        "if_unproven": "priced as battery condition unknown, which may lower value if not proven strong."
+      },
+      {
+        "risk": "Water damage or internal issues not visible from photos",
+        "proof": "Photo of the SIM tray, charging port, and speaker grills to check for corrosion or moisture.",
+        "if_unproven": "priced as potentially damaged internally, which reduces value."
+      }
+    ],
+    "proof_requests": [
+      "Video showing the screen being touched and swiped across the line, and a full-screen test with solid colors.",
+      "Screenshot of battery health from settings or diagnostic app.",
+      "Photo of SIM tray, charging port, and speaker grills to check for water damage or corrosion."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The screen has a visible vertical line, contradicting the 'very perfect condition' claim. While the model is identifiable as a Samsung Galaxy S21, the screen defect and battery condition are unproven. The item cannot be priced accurately without proof of screen functionality and battery health, which are critical to value."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 65279,
+    "input_tokens": 2782,
+    "output_tokens": 803,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "f906d769aedd1d4fd8ecf7a5b9d46fce",
+    "error": null
+  }
+}

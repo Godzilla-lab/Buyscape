@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black laptop with the AORUS logo on the bezel, placed on a black carrying case labeled 'AORUS 17G'. The background includes a lit 'GEEK' sign and shelves with boxes.",
+      "Photo 1 shows the DirectX Diagnostic Tool open on the laptop screen, displaying system information: 'Processor: 11th Gen Intel(R) Core(TM) i7-11800H @ 3.00GHz (8 CPUs, ~3.0GHz)', 'Memory: 32768MB RAM', 'System Manufacturer: GIGABYTE', 'System Model: AORUS 17G'.",
+      "The laptop screen is on and displaying a desktop wallpaper with a pier over water.",
+      "The carrying case has a handle and a small label, possibly a serial or asset tag, but it is not legible.",
+      "The seller's text claims 'Fresh Openedbox GIGABYTE AORUS 17G YD - 2.3ghz Intel Corei7-11800H 11th gen Octa Core (16 Processor...'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "gaming laptop",
+      "brand": "GIGABYTE",
+      "model": "AORUS 17G",
+      "read_from": [
+        "photo 0 case",
+        "photo 1 DirectX Diagnostic Tool"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Fresh Openedbox GIGABYTE AORUS 17G YD",
+        "verdict": "unverified",
+        "evidence": "The photos show the laptop and case, but there is no visible proof of it being 'fresh opened box' \u2014 no original packaging, seals, or documentation are shown. The case may be a carry case, not the original box."
+      },
+      {
+        "claim": "2.3ghz Intel Corei7-11800H 11th gen Octa Core",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows the DirectX Diagnostic Tool listing 'Processor: 11th Gen Intel(R) Core(TM) i7-11800H @ 3.00GHz (8 CPUs, ~3.0GHz)', which matches the claim of 11th gen, 8-core (octa-core), and the model. The base clock is listed as 3.00GHz, not 2.3GHz, which is a discrepancy."
+      },
+      {
+        "claim": "16 Processor",
+        "verdict": "contradicted",
+        "evidence": "Photo 1 shows '8 CPUs', meaning 8 cores. The claim of '16 Processor' is incorrect unless referring to threads (which is not stated). The i7-11800H is an 8-core, 16-thread processor, but the seller's wording is misleading and technically inaccurate."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The laptop may not be in 'fresh opened box' condition as claimed, possibly used or refurbished.",
+        "proof": "A photo of the original sealed box, all accessories, and documentation (warranty, manual, etc.) inside the box.",
+        "if_unproven": "Priced as used/refurbished, not new, which reduces value."
+      },
+      {
+        "risk": "The base clock speed is listed as 3.00GHz in the system info, not 2.3GHz as claimed \u2014 this may indicate a misstatement or misrepresentation.",
+        "proof": "A screenshot of the CPU-Z or similar tool showing the base and boost clocks, or a clear shot of the system info with the correct clock speed.",
+        "if_unproven": "Priced as is, but the discrepancy may affect buyer trust and perceived value."
+      },
+      {
+        "risk": "The laptop may have physical damage or wear not visible in the photos, such as scratches, dents, or screen issues.",
+        "proof": "A 360-degree video or multiple close-up photos showing all sides, hinges, keyboard, and screen edges.",
+        "if_unproven": "Priced as is, but with a discount for potential unseen damage."
+      },
+      {
+        "risk": "The RAM may be user-upgraded or not original to the model, affecting authenticity.",
+        "proof": "A photo of the RAM sticks inside the laptop (if accessible) or a screenshot from CPU-Z showing the RAM manufacturer and type.",
+        "if_unproven": "Priced as is, but with a discount for potential non-original or mismatched RAM."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the original sealed box with all accessories and documentation.",
+      "Screenshot from CPU-Z showing detailed CPU and RAM specifications.",
+      "360-degree video or close-up photos of the laptop's exterior, hinges, keyboard, and screen edges.",
+      "Photo of the laptop's bottom panel or inside showing RAM and storage."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and core specifications are supported, but the 'fresh opened box' claim is unverified, and the clock speed claim is contradicted. Hidden risks include physical damage, non-original components, and condition. Without proof of condition and authenticity, a worst-case price cannot be confidently assigned."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 100633,
+    "input_tokens": 2615,
+    "output_tokens": 1179,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "b2d651176add307e64e0787a7c337561",
+    "error": null
+  }
+}

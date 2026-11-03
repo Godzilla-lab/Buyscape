@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the 'About' section of Windows 11, listing device name as 'DESKTOP-HJLRDA9', model as 'HP Pavilion Laptop 15-cw0xxx', processor as 'AMD Ryzen 3 2300U with Radeon Vega Mobile Gfx', 8.00 GB RAM, and Windows 11 Enterprise 23H2.",
+      "Photo 1 shows the laptop open, displaying the Windows 11 desktop with the HP logo on the lower bezel. The laptop is silver/gray with a blue screen background. A 'JAYSMART' logo is visible in the background.",
+      "Photo 2 shows the closed laptop from the back, which is blue with the HP logo centered. The same 'JAYSMART' logo is in the background."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "Pavilion Laptop 15-cw0xxx",
+      "read_from": [
+        "photo 0 screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "brand name: HP Pavilion Laptop 15-cw0xox",
+        "verdict": "supported",
+        "evidence": "Photo 0 screen clearly shows 'HP Pavilion Laptop 15-cw0xxx' under 'Device specifications'."
+      },
+      {
+        "claim": "PROCESSOR SPEED: AMD Ryzen 3 2300U",
+        "verdict": "supported",
+        "evidence": "Photo 0 screen lists 'Processor: AMD Ryzen 3 2300U with Radeon Vega Mobile Gfx'."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The laptop may have physical damage, scratches, or wear not visible in the photos.",
+        "proof": "A close-up shot of the laptop's body, keyboard, screen edges, and hinges from multiple angles.",
+        "if_unproven": "Priced as having potential cosmetic damage, which reduces value."
+      },
+      {
+        "risk": "The screen may have dead pixels, burn-in, or backlight issues not visible in the current photo.",
+        "proof": "A video or photo showing the screen displaying solid colors (white, black, red, green, blue) and moving patterns.",
+        "if_unproven": "Priced as potentially having screen defects, which reduces value."
+      },
+      {
+        "risk": "The laptop may not be fully functional (e.g., keyboard, touchpad, ports, battery, webcam) or may have software issues.",
+        "proof": "A video showing the laptop being used: typing, touchpad navigation, connecting to a USB device, battery charging, and webcam functionality.",
+        "if_unproven": "Priced as not working, since unproven 'works' is priced as not working."
+      },
+      {
+        "risk": "The RAM may be less than advertised or not fully usable (e.g., 8GB total, 6.94GB usable as shown in photo 0).",
+        "proof": "A screenshot from Task Manager or System Information showing actual RAM usage and available memory.",
+        "if_unproven": "Priced as having less usable RAM, which reduces value."
+      },
+      {
+        "risk": "The storage drive may be failing or have bad sectors.",
+        "proof": "A screenshot from CrystalDiskInfo or similar tool showing the health status of the drive.",
+        "if_unproven": "Priced as potentially having a failing drive, which reduces value."
+      }
+    ],
+    "proof_requests": [
+      "A close-up video or photo of the laptop's body, keyboard, screen edges, and hinges from multiple angles.",
+      "A video showing the screen displaying solid colors and moving patterns.",
+      "A video showing the laptop being used: typing, touchpad navigation, connecting to a USB device, battery charging, and webcam functionality.",
+      "A screenshot from Task Manager or System Information showing actual RAM usage.",
+      "A screenshot from CrystalDiskInfo or similar tool showing the health status of the drive."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and processor are confirmed from photo 0, but critical functional and physical conditions are unverified. Without proof of working condition, screen quality, physical state, and storage health, the item cannot be priced accurately. The worst-case assumption (e.g., not working, damaged) would undervalue it, but the true value depends on the missing proof."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 84627,
+    "input_tokens": 2521,
+    "output_tokens": 980,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "95771b2fe2cb3bfbdab9208e1956629a",
+    "error": null
+  }
+}

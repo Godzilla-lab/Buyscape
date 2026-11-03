@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Silver laptop open, showing Windows 11 desktop with blue abstract wallpaper. HP logo visible below screen. Keyboard and trackpad are clean. Watermark 'POSTED ON JIJI GODWIN SIMON' overlays image.",
+      "Photo 1: Side view of laptop, showing left side ports: USB-A, HDMI, Ethernet, and headphone jack. Keyboard and palm rest visible. Same watermark.",
+      "Photo 2: Bottom view of laptop, showing ventilation grilles, rubber feet, and a sticker with model info. Sticker partially visible, but text is not legible. Watermark present.",
+      "All photos show a retail or repair shop environment with shelves of electronics in background."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "ProBook 450 G7",
+      "read_from": [
+        "photo 0 screen (HP logo)",
+        "photo 2 bottom sticker (partially visible, but consistent with ProBook 450 G7 design)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Ho probook 450 g7 8gb/500hdd core i5 10th generation",
+        "verdict": "unverified",
+        "evidence": "Model name is supported by visual design and sticker in photo 2, but RAM, HDD, and CPU specs are not visible. No system info or BIOS screen shown."
+      },
+      {
+        "claim": "everything working perfectly fine",
+        "verdict": "unverifiable_remote",
+        "evidence": "Screen is on and showing desktop, but no proof of full functionality (keyboard, ports, battery, cooling, etc.). No video or clip of operation."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "RAM is not 8GB or HDD is not 500GB as claimed",
+        "proof": "Photo of system properties or BIOS screen showing RAM and storage specs",
+        "if_unproven": "priced as lower-spec configuration (e.g., 4GB RAM or 256GB SSD)"
+      },
+      {
+        "risk": "CPU is not Intel Core i5 10th generation",
+        "proof": "Photo of system information or BIOS screen showing CPU model",
+        "if_unproven": "priced as lower-tier CPU (e.g., i3 or 8th gen i5)"
+      },
+      {
+        "risk": "laptop has hardware issues (e.g., battery not working, keyboard dead keys, fan noise, screen flicker)",
+        "proof": "Video clip showing laptop in use: typing, charging, running for 5 minutes, and checking ports",
+        "if_unproven": "priced as not working or with unknown defects"
+      },
+      {
+        "risk": "laptop is stolen or has been tampered with (e.g., serial number altered)",
+        "proof": "Clear photo of the serial number sticker on the bottom (photo 2 is too blurry)",
+        "if_unproven": "priced with discount for potential legal risk"
+      }
+    ],
+    "proof_requests": [
+      "Photo of system information screen showing RAM, storage, and CPU model",
+      "Video clip of laptop in use: typing, charging, running for 5 minutes, and checking ports",
+      "Clear photo of the serial number sticker on the bottom of the laptop"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identifiable as HP ProBook 450 G7, but critical specs (RAM, HDD, CPU) and functionality claims are unverified. Without proof of specs and working condition, the item cannot be priced accurately. The photos show a clean unit, but hidden risks affect value."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 66666,
+    "input_tokens": 2796,
+    "output_tokens": 827,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "be0be209698d91af891ace34447af853",
+    "error": null
+  }
+}

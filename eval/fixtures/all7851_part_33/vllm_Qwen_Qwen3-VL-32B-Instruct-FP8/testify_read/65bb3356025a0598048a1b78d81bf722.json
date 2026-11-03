@@ -1,0 +1,115 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Open laptop showing black screen, backlit keyboard, and Dell logo on palm rest. The keyboard has white backlighting. The laptop is placed on a dark surface next to a grey brick wall.",
+      "Photo 1: Closed laptop lid showing a silver finish with a circular Dell logo in the center. The surface is reflective, and the background is the same brick wall and dark surface.",
+      "Photo 2: Bottom view of the laptop showing vents, a barcode sticker, and a small orange sticker. The chassis is silver, and the design matches a Dell Precision model. The barcode sticker is partially visible but not readable.",
+      "All photos have a watermark: 'TUFF GONG COMPUTERS LTD'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Dell",
+      "model": "Precision 5540",
+      "read_from": [
+        "photo 1 lid logo",
+        "photo 2 bottom plate"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Dell precision 5540",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows the Dell logo on the lid, and photo 2 shows the bottom plate with 'Precision' label, consistent with Dell Precision 5540 design."
+      },
+      {
+        "claim": "core i7 9th generation",
+        "verdict": "unverifiable_remote",
+        "evidence": "No CPU label or system information visible. Cannot confirm generation or model from photos alone."
+      },
+      {
+        "claim": "16gb",
+        "verdict": "unverifiable_remote",
+        "evidence": "No RAM label or system info visible. Cannot confirm RAM amount from photos."
+      },
+      {
+        "claim": "512ssd",
+        "verdict": "unverifiable_remote",
+        "evidence": "No storage label or system info visible. Cannot confirm SSD size from photos."
+      },
+      {
+        "claim": "keyboard light",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows white backlighting on the keyboard keys, confirming backlit keyboard."
+      },
+      {
+        "claim": "4gb nvidia graphics card",
+        "verdict": "unverifiable_remote",
+        "evidence": "No GPU label or system info visible. Cannot confirm graphics card brand or VRAM from photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "CPU is not 9th generation or not Core i7",
+        "proof": "Photo of BIOS screen or system information showing CPU model and generation.",
+        "if_unproven": "priced as lower-end CPU (e.g., 8th gen or i5)"
+      },
+      {
+        "risk": "RAM is less than 16GB or not 16GB",
+        "proof": "Photo of RAM slots or system information showing installed RAM.",
+        "if_unproven": "priced as 8GB or lower"
+      },
+      {
+        "risk": "SSD is not 512GB or is a smaller drive",
+        "proof": "Photo of drive label or system information showing storage capacity.",
+        "if_unproven": "priced as 256GB or lower"
+      },
+      {
+        "risk": "Graphics card is not 4GB NVIDIA or is integrated",
+        "proof": "Photo of GPU label or system information showing GPU model and VRAM.",
+        "if_unproven": "priced as integrated graphics or lower VRAM"
+      },
+      {
+        "risk": "Laptop has physical damage or wear not visible in photos",
+        "proof": "Close-up photos of hinges, screen bezel, ports, and bottom chassis for scratches, dents, or wear.",
+        "if_unproven": "priced as having moderate wear"
+      },
+      {
+        "risk": "Screen is cracked or has dead pixels",
+        "proof": "Photo of screen with white background or full-screen test pattern.",
+        "if_unproven": "priced as screen may have defects"
+      },
+      {
+        "risk": "Battery is degraded or not functional",
+        "proof": "Photo of battery health report or laptop running on battery with power adapter unplugged.",
+        "if_unproven": "priced as battery may not hold charge"
+      }
+    ],
+    "proof_requests": [
+      "Photo of BIOS or system information showing CPU model and generation.",
+      "Photo of RAM slots or system information showing installed RAM.",
+      "Photo of storage drive label or system information showing SSD capacity.",
+      "Photo of GPU label or system information showing graphics card model and VRAM.",
+      "Close-up photos of all ports, hinges, and chassis for damage.",
+      "Photo of screen with white background to check for dead pixels or cracks.",
+      "Photo of battery health report or laptop running on battery."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identifiable as Dell Precision 5540, but key specifications (CPU, RAM, SSD, GPU) are unverifiable from photos alone. Hidden risks include incorrect specs, screen damage, and battery condition. These must be proven before pricing can be determined accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 87575,
+    "input_tokens": 2172,
+    "output_tokens": 1138,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "65bb3356025a0598048a1b78d81bf722",
+    "error": null
+  }
+}

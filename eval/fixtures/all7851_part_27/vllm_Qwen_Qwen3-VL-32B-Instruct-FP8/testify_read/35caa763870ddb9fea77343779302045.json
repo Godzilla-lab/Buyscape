@@ -1,0 +1,66 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows multiple stacked boxes labeled 'GEL BATTERY SERIES' with the brand 'Felicitysolar'.",
+      "Boxes are white with orange trim and feature an image of a rectangular battery with an orange top.",
+      "Text on the box includes 'MADE IN CHINA', 'ITEM: G12V200AH', 'QTY: 1 PC', 'G.W.: 45.0 KG', 'N.W.: 43.0 KG', 'SIZE: 530x244x220MM'.",
+      "The seller's text claims 'Gel battery 200ahs solid dry cell'.",
+      "Boxes are in a warehouse or storage setting, stacked high, suggesting bulk or new stock."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "gel battery",
+      "brand": "Felicitysolar",
+      "model": "G12V200AH",
+      "read_from": [
+        "photo 0 box label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Gel battery 200ahs solid dry cell",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows 'GEL BATTERY SERIES' and 'ITEM: G12V200AH' on the box, which matches the 200Ah capacity. 'Solid dry cell' is a common description for gel batteries, which are sealed and maintenance-free."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery may be counterfeit or not genuine Felicitysolar product",
+        "proof": "Close-up of the box label showing the brand logo, serial number, or QR code, and a photo of the actual battery inside the box.",
+        "if_unproven": "Priced as potentially counterfeit, which would reduce value significantly."
+      },
+      {
+        "risk": "Battery may be damaged or defective despite being new in box",
+        "proof": "Photo of the actual battery removed from the box, showing terminals, casing, and any damage or signs of leakage.",
+        "if_unproven": "Priced as potentially defective, which would reduce value."
+      },
+      {
+        "risk": "Battery may not be in working condition or may have been stored improperly",
+        "proof": "Proof of charge or a test report from a technician, or a video showing the battery being charged and discharged.",
+        "if_unproven": "Priced as not working, which would reduce value."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual battery inside the box, showing terminals and casing.",
+      "Close-up of the box label with brand logo and serial number.",
+      "Proof of charge or test report if available."
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a Felicitysolar G12V200AH gel battery from the box label in photo 0. The seller's claim is supported. Hidden risks exist regarding authenticity and condition, but the item can be priced at its worst case (as potentially counterfeit or defective) until further proof is provided."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 53884,
+    "input_tokens": 1754,
+    "output_tokens": 692,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "35caa763870ddb9fea77343779302045",
+    "error": null
+  }
+}

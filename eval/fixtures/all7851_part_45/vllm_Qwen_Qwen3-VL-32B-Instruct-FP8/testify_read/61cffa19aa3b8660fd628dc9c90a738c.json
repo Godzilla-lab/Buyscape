@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Front view of a grey chest deep freezer with a DIGITREX brand label and an energy label showing model DX150. The freezer has a control panel with a knob and two indicator lights (red and green). A large sticker with 'smart freezing' and ice cubes is visible. The top lid has a handle and a lock mechanism. The top edge shows some white residue or damage.",
+      "Photo 1: Interior view with lid open, showing a white plastic basket on the right, a small container with ice or frozen items on the left, and a lit interior light. The interior walls are textured with frost or condensation.",
+      "Photo 2: Rear view showing the back panel with a vent, power socket, and a white power cord plugged into a wall outlet. The top edge has white residue or damage, similar to photo 0. The freezer is on a marble-patterned floor."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "deep freezer",
+      "brand": "DIGITREX",
+      "model": "DX150",
+      "read_from": [
+        "photo 0 label",
+        "photo 0 energy label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "108L deep freezer",
+        "verdict": "unverified",
+        "evidence": "The energy label in photo 0 shows 'Freezer total volume: 128 L', contradicting the 108L claim. The seller's text is unverified by the photos."
+      },
+      {
+        "claim": "Never fixed",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible signs of repair, but no proof of maintenance history. Cannot verify from photos alone."
+      },
+      {
+        "claim": "Never repaired",
+        "verdict": "unverifiable_remote",
+        "evidence": "Same as above; no proof of repair history."
+      },
+      {
+        "claim": "Working perfectly",
+        "verdict": "unverified",
+        "evidence": "Photo 1 shows the interior light is on, suggesting power is connected, but no proof of cooling function or temperature. The red and green lights on the control panel are not explained, and their status is unclear."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Freezer not cooling properly despite lights being on",
+        "proof": "A video clip showing the freezer running for 10 minutes with a thermometer inside showing sub-zero temperature, or a photo of frost buildup inside after 24 hours of operation.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Top lid damage or seal failure causing cold air loss",
+        "proof": "Close-up photo of the top lid seal and edges, showing whether the gasket is intact and free of cracks or gaps.",
+        "if_unproven": "priced with reduced efficiency, as potential energy loss"
+      },
+      {
+        "risk": "Internal damage or mold not visible in current photos",
+        "proof": "Photo of the entire interior with lid fully open, showing all corners and walls for signs of mold, rust, or damage.",
+        "if_unproven": "priced with assumption of clean interior, but with discount for hidden damage"
+      }
+    ],
+    "proof_requests": [
+      "Video clip of the freezer running for 10 minutes with a thermometer inside showing sub-zero temperature.",
+      "Close-up photo of the top lid seal and edges to check for damage or gaps.",
+      "Photo of the entire interior with lid fully open, showing all corners and walls.",
+      "Photo of the control panel with lights labeled (red/green meaning)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identified as DIGITREX DX150 from the energy label, but the seller's claim of 108L is contradicted by the 128L label. The working condition is unverified, and there are visible signs of damage on the top lid. Without proof of cooling function and interior condition, the item cannot be priced accurately. The risks of non-functionality and seal damage must be resolved before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 70734,
+    "input_tokens": 2782,
+    "output_tokens": 914,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "61cffa19aa3b8660fd628dc9c90a738c",
+    "error": null
+  }
+}
