@@ -1517,6 +1517,9 @@ def testify_train_build(
         "", help="A model that answers, live, every price step no teacher has answered yet, before the build."
     ),
     workers: int = typer.Option(6, help="Price steps asked at once while recording."),
+    pick_share: str = typer.Option(
+        "", help="k/n: record only every n-th missing price step, starting at k, so n free keys share the work "
+        "without asking any step twice."),
     wrong_ids: Path = typer.Option(
         None, help="Write the ids of adverts no teacher read right, one per line, for another teacher to read "
         "(testify --ids-file)."
@@ -1665,6 +1668,9 @@ def testify_train_build(
         refused = set(refused_path.read_text().split()) if refused_path.exists() else set()
         before = len(missing)
         missing = [r for r in missing if r.fixture_key() not in refused]
+        if pick_share:
+            k, n = (int(x) for x in pick_share.split("/"))
+            missing = [r for r in missing if int(hashlib.sha256(r.fixture_key().encode()).hexdigest(), 16) % n == k]
         console.print(f"{len(missing)} price steps have no teacher's pick yet; asking {record_picks}"
                       f" ({before - len(missing)} it answered in the wrong shape before, left out)")
         live = _provider(record_picks, fixtures, "auto")
