@@ -242,6 +242,8 @@ def read_onstart(data_repo: str, run_repo: str, job: str, minutes: int, model: s
         f"{send}",
         "echo \"$code\" > /workspace/out/EXIT",
         f"hf upload {q(run_repo)} /workspace/out reads/{job}",
+        # The model server outlives the reads and keeps the machine running, and billed, until it is stopped.
+        "pkill -f 'vllm serve'; pkill -f vllm; sleep 5",
     ])
 
 

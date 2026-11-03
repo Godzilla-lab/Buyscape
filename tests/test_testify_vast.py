@@ -35,6 +35,7 @@ def test_a_reading_machine_serves_the_model_reads_in_parts_and_always_sends_back
     assert "curl" not in script, "the image has no curl"
     assert "wait $pids" in script and "; wait\n" not in script, "a bare wait also waits for the model server"
     assert "mkdir -p job/docs/proof" in script and "while sleep 1800" in script
+    assert script.rindex("pkill -f 'vllm serve'") > script.rindex("hf upload"), "the server is stopped last"
     # The upload is outside the time limit, so a run cut short still sends back its reads and logs.
     assert script.index("timeout 40m") < script.index("EXIT") < script.rindex("hf upload godzilla1215/r /workspace/out reads/test100")
 
