@@ -472,28 +472,32 @@ little better; the 2B prices fewer but closer, and is the better buyer.
 Nemotron's worst was ₦15 million offered for a 15kVA Stamford alternator
 listed at ₦450,000.
 
-Claude Sonnet 5 has answered 644 of the 679 (2 Nov; Kaggle's quota ran out
-on the last 35). On those 644, the same items for all three:
+Claude Sonnet 5 has now answered all 679 too (3 Nov; its last 35 waited a
+night for Kaggle's quota), with no call unanswered. All three on the same
+679 items:
 
-| On the 644 items Claude answered | Run 4, 2B | Nemotron (120B) | Claude Sonnet 5 |
+| On 679 unseen items | Run 4, 2B | Nemotron (120B) | Claude Sonnet 5 |
 |---|---|---|---|
 | Gave a price | 30% | **43%** | 19% |
-| Asking price inside the range | **52%** | 44% | 34% |
-| Offered above the asking price | **15%** | 25% | 24% |
+| Asking price inside the range | **52%** | 43% | 34% |
+| Offered above the asking price | **14%** | 25% | 23% |
 | Priced answers the rules mark wrong, unread | 20 | 30 | **6** |
 | Right about the item, judged | 94% | 97% | **99%** |
-| Items overpaid | **29** | 69 | **29** |
-| Largest overpayment, naira | **300,000** | 4,500,000 | 1,500,000 |
-| Overpaid per item, naira | **2,700** | 29,125 | 6,334 |
-| The same, leaving out each one's five dearest | **1,271** | 11,019 | 1,354 |
-| Expected loss per item, naira | **4,017** | 30,421 | 7,742 |
+| Items overpaid | **29** | 73 | **29** |
+| Largest overpayment, naira | **300,000** | 14,550,000 | 1,500,000 |
+| Overpaid per item, naira | **2,560** | 54,059 | 6,007 |
+| The same, leaving out each one's five dearest | **1,205** | 14,207 | 1,284 |
+| Expected loss per item, naira | **3,873** | 55,602 | 7,415 |
 
 Claude names the item best and prices least: it gives a price on one item
 in five, and when it does the asking price falls inside its range only a
 third of the time. The 2B prices half again as many items, lands inside the
-range half the time, and loses about half of what Claude loses per item;
-with each one's five worst overpayments left out the two overpay about the
-same. Claude's last 35 items follow when its quota returns.
+range half the time, and loses about half of what Claude loses per item.
+With each one's five worst overpayments left out the two overpay about the
+same, so the gap is Claude's few large misses (₦1.5 million and ₦752,000
+over the asking price) and the items it would not price at all. Claude
+breaks the rules least: six priced answers the rules mark wrong to the
+2B's twenty.
 
 ## The fifth training run: every advert (1 Nov)
 
@@ -563,9 +567,9 @@ wrong brand.
 
 | Right about the item, when it said | Word rule, dev | Judged, dev | Word rule, test | Judged, test |
 |---|---|---|---|---|
-| Claude Sonnet 5 | 89% | **99%** | 85% | **99%** (247 of 679 so far) |
+| Claude Sonnet 5 | 89% | **99%** | 85% | **99%** |
 | Gemini 3 Flash | 83% | 98% | | |
-| Nemotron 3.5 Super | 87% | 98% | 78% | 97% (395 so far) |
+| Nemotron 3.5 Super | 87% | 98% | 80% | 97% |
 | GPT 5.4 nano | 88% | 98% | | |
 | Qwen3-VL 8B, untuned | 75% | 94% | | |
 | Qwen3-VL 2B, untuned | 77% | 93% | | |
