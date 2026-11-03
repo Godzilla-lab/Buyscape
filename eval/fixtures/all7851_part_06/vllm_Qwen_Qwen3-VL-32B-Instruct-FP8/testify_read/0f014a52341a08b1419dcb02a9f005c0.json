@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a stack of four tires with aggressive off-road tread patterns.",
+      "The top tire has visible branding: 'BFGoodrich' and 'All-Terrain T/A' on the sidewall.",
+      "The tire size is not clearly readable on the sidewall in the photo, but the seller claims 'LT 285 70 R 18'.",
+      "The tires appear used, with some wear and cracking visible on the sidewalls of the lower tires.",
+      "The top tire is held by a person whose hand and foot are partially visible.",
+      "The background shows a yard or workshop with more tires stacked."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "off-road tire",
+      "brand": "BFGoodrich",
+      "model": "All-Terrain T/A",
+      "read_from": [
+        "photo 0 sidewall"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "LT 285 70 R 18",
+        "verdict": "unverified",
+        "evidence": "The size is not clearly readable on the sidewall in photo 0; the seller's text is the only source."
+      },
+      {
+        "claim": "Tokunbo tire",
+        "verdict": "supported",
+        "evidence": "The tires show signs of use, including wear and cracking on the lower tires, consistent with used (tokunbo) tires."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Sidewall cracking and dry rot, which can compromise safety and structural integrity.",
+        "proof": "Close-up photo of the sidewall of each tire, especially the lower ones, showing depth and extent of cracks.",
+        "if_unproven": "Priced as having significant wear and potential safety issues, reducing value."
+      },
+      {
+        "risk": "Incorrect tire size or mismatch with claimed 'LT 285 70 R 18'.",
+        "proof": "Clear, close-up photo of the sidewall showing the full size marking.",
+        "if_unproven": "Priced as unverified size, which may not fit the buyer's vehicle, reducing value."
+      },
+      {
+        "risk": "Hidden damage or internal structural failure not visible from the outside.",
+        "proof": "X-ray or cutaway view of the tire (not feasible remotely), or a professional inspection report.",
+        "if_unproven": "Priced as potentially unsafe or unreliable, reducing value."
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the sidewall of each tire showing the full size marking (e.g., LT 285/70R18).",
+      "Close-up of the sidewall of the lower tires to assess cracking and dry rot.",
+      "Photo of the tread depth on each tire to assess wear."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The tire brand and model are identifiable, but the claimed size is not verifiable from the photo. The condition shows signs of wear and cracking, which must be assessed for safety. Without proof of size and condition, a reliable price cannot be determined."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 55880,
+    "input_tokens": 1932,
+    "output_tokens": 698,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "0f014a52341a08b1419dcb02a9f005c0",
+    "error": null
+  }
+}

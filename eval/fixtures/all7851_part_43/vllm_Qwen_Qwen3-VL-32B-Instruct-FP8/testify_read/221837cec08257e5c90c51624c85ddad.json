@@ -1,0 +1,94 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Open laptop showing black screen, HP logo on bezel, black keyboard, silver palm rest with Intel sticker, held outdoors with cars in background.",
+      "Photo 1: Closed laptop from top and side, silver lid with HP logo, visible vents and ports on side, held outdoors.",
+      "Photo 2: Open laptop from front angle, black screen, HP logo, keyboard, palm rest with 'PROBOOK' text visible, Intel sticker, held outdoors.",
+      "All photos show the same laptop from different angles, with consistent branding and design.",
+      "No internal components, screen, or ports are shown in detail.",
+      "No power cord, charger, or accessories visible."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "ProBook 440 G6",
+      "read_from": [
+        "photo 2 palm rest"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Probook 440 g6",
+        "verdict": "supported",
+        "evidence": "Photo 2: 'PROBOOK' text visible on palm rest, consistent with ProBook 440 G6 model."
+      },
+      {
+        "claim": "256ssd / 8gig ram",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal components shown; no BIOS, disk management, or system info visible. Cannot verify SSD size or RAM amount from photos."
+      },
+      {
+        "claim": "corei5/8thgen",
+        "verdict": "unverifiable_remote",
+        "evidence": "No CPU sticker, system info, or BIOS screen visible. Intel sticker present but does not specify generation or model."
+      },
+      {
+        "claim": "14 inches",
+        "verdict": "supported",
+        "evidence": "Photo 0 and 2: Screen size appears consistent with 14-inch laptop; bezel and keyboard layout match typical 14-inch ProBook design."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "SSD capacity is not 256GB or RAM is not 8GB",
+        "proof": "Photo of BIOS screen or Windows system info showing exact storage and RAM details.",
+        "if_unproven": "Priced as having lower specs (e.g., 128GB SSD or 4GB RAM), which reduces value."
+      },
+      {
+        "risk": "CPU is not Intel Core i5 8th Gen",
+        "proof": "Photo of BIOS screen or Windows system info showing CPU model and generation.",
+        "if_unproven": "Priced as having lower-tier CPU (e.g., i3 or 7th Gen), which reduces value."
+      },
+      {
+        "risk": "Screen damage or dead pixels",
+        "proof": "Photo of screen with white background or pattern to reveal defects.",
+        "if_unproven": "Priced as having potential screen issues, which reduces value."
+      },
+      {
+        "risk": "Battery not working or degraded",
+        "proof": "Video of laptop running on battery with battery percentage and time shown.",
+        "if_unproven": "Priced as battery may not hold charge, reducing usability and value."
+      },
+      {
+        "risk": "Keyboard or touchpad damage or non-functionality",
+        "proof": "Video of keyboard and touchpad being used, showing responsiveness.",
+        "if_unproven": "Priced as potentially non-functional input devices, reducing value."
+      }
+    ],
+    "proof_requests": [
+      "Photo of BIOS screen or Windows system info showing exact CPU, RAM, and SSD details.",
+      "Photo of screen with white background to check for dead pixels or damage.",
+      "Video of laptop running on battery with battery percentage and time shown.",
+      "Video of keyboard and touchpad being used to confirm functionality.",
+      "Photo of charger and any included accessories."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is confirmed as HP ProBook 440 G6, but critical specs (SSD, RAM, CPU) cannot be verified from photos. Hidden risks like screen, battery, and input functionality also need proof. Without these, the item cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 79969,
+    "input_tokens": 3254,
+    "output_tokens": 941,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "221837cec08257e5c90c51624c85ddad",
+    "error": null
+  }
+}

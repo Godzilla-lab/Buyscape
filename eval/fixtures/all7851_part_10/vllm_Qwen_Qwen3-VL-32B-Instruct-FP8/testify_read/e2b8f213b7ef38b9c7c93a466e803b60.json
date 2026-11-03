@@ -1,0 +1,104 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Open laptop showing NVIDIA Control Panel on screen, red backlit keyboard, ASUS logo below screen, stickers on palm rest (Intel, NVIDIA GeForce, Windows).",
+      "Photo 1: Bottom of laptop held in hand, showing vents, rubber feet, and a label with model/serial info (text too small to read). Background shows glass display with HP and Dell laptops.",
+      "Photo 2: Same as photo 0, slightly different angle, same screen content and keyboard lighting.",
+      "All photos have watermark 'POSTED ON JIJI IDYL COMPUTERS & GADGETS'.",
+      "No clear view of the screen bezel, ports, or hinges. No view of the screen's condition (scratches, dead pixels)."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "gaming laptop",
+      "brand": "ASUS",
+      "model": "unreadable",
+      "read_from": [
+        "photo 0 screen bezel",
+        "photo 2 screen bezel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Asus gaming laptop",
+        "verdict": "supported",
+        "evidence": "ASUS logo visible on screen bezel in photo 0 and photo 2."
+      },
+      {
+        "claim": "Intel core i7",
+        "verdict": "unverified",
+        "evidence": "Intel sticker visible on palm rest in photo 0 and photo 2, but no model or generation visible. NVIDIA Control Panel does not show CPU info."
+      },
+      {
+        "claim": "16gb ram",
+        "verdict": "unverifiable_remote",
+        "evidence": "No system information visible in photos. NVIDIA Control Panel does not show RAM. Cannot verify without system specs or BIOS view."
+      },
+      {
+        "claim": "512ssd",
+        "verdict": "unverifiable_remote",
+        "evidence": "No disk management or system info visible. Cannot verify storage type or size from photos alone."
+      },
+      {
+        "claim": "4gb dedicated nvidia GTX 1050",
+        "verdict": "unverified",
+        "evidence": "NVIDIA Control Panel visible in photo 0 and photo 2, but specific GPU model and VRAM not readable. NVIDIA GeForce sticker present, but not specific to GTX 1050."
+      },
+      {
+        "claim": "Keyboard light",
+        "verdict": "supported",
+        "evidence": "Red backlight visible on keyboard in photo 0 and photo 2."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "GPU is not GTX 1050 or has less than 4GB VRAM",
+        "proof": "Screenshot of GPU properties from Device Manager or DirectX Diagnostic Tool (dxdiag) showing exact model and VRAM.",
+        "if_unproven": "priced as lower-end GPU (e.g., GTX 950 or 1050 Ti with 2GB) or not working"
+      },
+      {
+        "risk": "RAM is less than 16GB or not DDR4",
+        "proof": "Screenshot of system information or Task Manager showing installed RAM and type.",
+        "if_unproven": "priced as 8GB or 12GB RAM"
+      },
+      {
+        "risk": "Storage is not 512GB SSD or is a hybrid drive",
+        "proof": "Screenshot of Disk Management or system info showing drive type and size.",
+        "if_unproven": "priced as 256GB SSD or HDD"
+      },
+      {
+        "risk": "Laptop has physical damage or wear not visible in photos (e.g., hinge issues, cracked screen, dead pixels)",
+        "proof": "Close-up of screen for dead pixels, video of hinge movement, and full view of all sides and ports.",
+        "if_unproven": "priced as having moderate wear or potential defects"
+      },
+      {
+        "risk": "Battery is degraded or not included",
+        "proof": "Video of battery health in Windows Battery Report or showing battery being removed/installed.",
+        "if_unproven": "priced as battery not included or degraded"
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of Device Manager or dxdiag showing exact GPU model and VRAM.",
+      "Screenshot of system information showing RAM size and type.",
+      "Screenshot of Disk Management showing storage type and size.",
+      "Video of laptop hinge movement and close-up of screen for dead pixels.",
+      "Photo or video of battery health or confirmation if battery is included."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The laptop is identifiable as an ASUS gaming laptop, but critical specs (CPU, RAM, storage, GPU) cannot be verified from the photos. The NVIDIA Control Panel does not show full system info, and the model is unreadable. Without proof of the claimed specs, the item cannot be priced accurately and must be assessed at worst-case assumptions for each unverified claim."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 66338,
+    "input_tokens": 2799,
+    "output_tokens": 1094,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "e2b8f213b7ef38b9c7c93a466e803b60",
+    "error": null
+  }
+}

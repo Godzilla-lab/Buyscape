@@ -1,0 +1,73 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a purple iPhone with a dual-camera setup and a sticker that reads 'HMM APPLE iPhone 12 128GB'.",
+      "Photo 1 shows a white iPhone with a dual-camera setup and a sticker that reads 'MODEL = IPHONE 11, MEMORY = 64GB, GRADE = A+'.",
+      "Photo 2 shows a blue iPhone with a single-camera setup and a sticker that reads 'MODEL = IPHONE XR, MEMORY = 128 GB, GRADE = A+'.",
+      "All three phones have stickers from 'CELLAIR WIRELESS LLC' or 'HMM APPLE', with different model and memory specifications.",
+      "The seller claims to be selling an iPhone 11 64GB, but the photos show three different phones: iPhone 12, iPhone 11, and iPhone XR."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "three different iPhones",
+      "brand": "Apple",
+      "model": null,
+      "read_from": [
+        "photo 0 sticker",
+        "photo 1 sticker",
+        "photo 2 sticker"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Get the Apple iPhone 11 64GB",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows an iPhone 12, photo 2 shows an iPhone XR, and only photo 1 shows an iPhone 11 64GB. The seller is advertising one phone but showing three different models."
+      },
+      {
+        "claim": "a reliable and stylish smartphone with a 6.1-inch Liquid Retina HD",
+        "verdict": "unverifiable_remote",
+        "evidence": "No screen or front view is shown to verify display size or quality. The claim is not contradicted but cannot be confirmed from the photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The phone being sold may not be the iPhone 11 64GB as advertised, but one of the other models shown (iPhone 12 or iPhone XR).",
+        "proof": "A clear photo of the phone's front screen with the model name visible, or a screenshot of the Settings > General > About section showing the model and storage.",
+        "if_unproven": "Priced as the lowest value among the three models shown, which is the iPhone 11 64GB, but with a discount for potential misrepresentation."
+      },
+      {
+        "risk": "The phones may be non-functional or have hidden damage not visible in the photos.",
+        "proof": "A video showing the phone turning on, navigating the home screen, and using the camera.",
+        "if_unproven": "Priced as not working, since '100% WORKING' is claimed but not proven."
+      },
+      {
+        "risk": "The phones may be stolen, gray market, or have iCloud lock issues.",
+        "proof": "A screenshot of the phone's Settings > General > About section showing the serial number, and a verification that the device is not blacklisted or locked.",
+        "if_unproven": "Priced with a significant discount for potential lock or legal issues."
+      }
+    ],
+    "proof_requests": [
+      "A clear photo of the front screen showing the model name or a screenshot of Settings > General > About.",
+      "A video showing the phone turning on and operating normally.",
+      "A screenshot of the device's serial number and verification that it is not iCloud locked or blacklisted."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller claims to sell an iPhone 11 64GB, but the photos show three different models, including an iPhone 12 and an iPhone XR. Without proof that the correct model is being sold, and without verification of functionality or lock status, a price cannot be confidently assigned. The photos are inconsistent with the claim, and critical proof is missing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 68578,
+    "input_tokens": 3059,
+    "output_tokens": 866,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "0a30114c392a8db4327666f2771ddad1",
+    "error": null
+  }
+}

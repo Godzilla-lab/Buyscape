@@ -1,0 +1,92 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black Dell OptiPlex 7060 desktop tower with a textured front panel, a Dell logo, and an Intel sticker at the bottom.",
+      "The front panel has a DVD drive, USB ports (including one blue USB 3.0), and audio jacks.",
+      "Photo 1 is a close-up of the Intel sticker on the front, clearly showing 'Intel Core i5 8th Gen'.",
+      "Photo 2 shows the rear panel with various ports: VGA, HDMI, multiple USB ports (including blue USB 3.0), Ethernet, audio jacks, and a power connector.",
+      "The rear panel also has a Windows sticker and a QR code sticker.",
+      "The unit appears to be in used condition with some minor scuffs and dust, but no visible damage."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "desktop computer",
+      "brand": "Dell",
+      "model": "OptiPlex 7060",
+      "read_from": [
+        "photo 0 top front panel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Dell Optiplex 7060",
+        "verdict": "supported",
+        "evidence": "Photo 0: 'OptiPlex 7060' is clearly visible on the top front panel."
+      },
+      {
+        "claim": "Core i5 8th generation processor",
+        "verdict": "supported",
+        "evidence": "Photo 1: Intel sticker clearly reads 'CORE i5 8th Gen'."
+      },
+      {
+        "claim": "16gb ram",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows RAM sticks or BIOS/OS screen to confirm RAM amount. Cannot be verified from photos alone."
+      },
+      {
+        "claim": "1Tb hdd hard drive",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal drive bay or disk is visible. No BIOS/OS screen to confirm drive size. Cannot be verified from photos alone."
+      },
+      {
+        "claim": "windows 11pro",
+        "verdict": "unverified",
+        "evidence": "Photo 2 shows a Windows sticker, but it does not specify Windows 11 Pro. Could be Windows 10 or another version. No OS screen shown."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "RAM is not 16GB as claimed",
+        "proof": "Photo of the open case showing RAM sticks, or a BIOS/OS screen showing installed RAM.",
+        "if_unproven": "priced as having less than 16GB RAM, which reduces value."
+      },
+      {
+        "risk": "Hard drive is not 1TB or is faulty",
+        "proof": "Photo of the internal drive or a BIOS/OS screen showing drive size and health.",
+        "if_unproven": "priced as having a smaller or non-functional drive, which reduces value."
+      },
+      {
+        "risk": "Windows 11 Pro is not installed or is not genuine",
+        "proof": "Screenshot of the Windows OS showing version and activation status.",
+        "if_unproven": "priced as not having Windows 11 Pro, or as having a non-genuine license, which reduces value."
+      },
+      {
+        "risk": "Unit is not functional or has internal damage",
+        "proof": "Video of the unit powering on, booting, and running a system check or benchmark.",
+        "if_unproven": "priced as not working, which drastically reduces value."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the open case showing RAM sticks and the hard drive.",
+      "Screenshot of the BIOS or Windows OS showing installed RAM, drive size, and Windows version.",
+      "Video of the unit powering on and booting into Windows."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and processor are confirmed, but critical claims about RAM, storage, and OS cannot be verified from the photos. Hidden risks include incorrect specs or non-functionality, which must be proven before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 63443,
+    "input_tokens": 2803,
+    "output_tokens": 920,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "42cf00be90781ba117b55eb3a121d615",
+    "error": null
+  }
+}

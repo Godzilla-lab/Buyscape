@@ -1,0 +1,85 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Front view of a silver laptop with screen on, showing an Intel Core i7 promotional graphic. The keyboard has a 'ZBOOK' logo on the bottom left. The screen displays 'INTEL CORE i7' and '210000 DA' (likely a price in another currency).",
+      "Photo 1: Top lid of the laptop, showing a large 'Z' logo, consistent with HP ZBook branding. The laptop is silver, held by a hand with a watch.",
+      "Photo 2: Bottom of the laptop, showing a large vent, screws, and a label with regulatory marks and a QR code. The label is too small to read details. No visible model number or serial number is legible."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "ZBook",
+      "read_from": [
+        "photo 0 keyboard (ZBOOK)",
+        "photo 1 lid (Z logo)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP Zbook Power G7",
+        "verdict": "unverified",
+        "evidence": "The 'Z' logo and 'ZBOOK' on keyboard suggest HP ZBook, but the specific model 'Power G7' is not visible in any photo. No model number is readable on the bottom label (photo 2)."
+      },
+      {
+        "claim": "Intel Core i7(10th gen)",
+        "verdict": "supported",
+        "evidence": "Photo 0 screen shows 'INTEL CORE i7' and '10TH GEN' in the graphic. The screen content is not the laptop's actual specs, but the seller's claim is visually supported by the displayed image."
+      },
+      {
+        "claim": "512gb(ssd)",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows the internal drive or BIOS/OS storage info. Cannot verify from photos alone."
+      },
+      {
+        "claim": "16gb ram(3200A)",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows RAM modules or system information. Cannot verify from photos alone."
+      },
+      {
+        "claim": "4gb Nvidia Graphics",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows GPU info or system specs. Cannot verify from photos alone."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The laptop may not be a ZBook Power G7 as claimed; it could be a different model or generation.",
+        "proof": "A clear photo of the bottom label showing the model number, or a photo of the BIOS/UEFI screen showing the exact model.",
+        "if_unproven": "Priced as a generic HP ZBook, which may be lower than a Power G7."
+      },
+      {
+        "risk": "The advertised specs (512GB SSD, 16GB RAM, 4GB Nvidia GPU) may not be accurate; the laptop could be downgraded or have different components.",
+        "proof": "A photo of the BIOS/UEFI screen showing system information, or a screenshot of Windows Device Manager or System Information showing exact specs.",
+        "if_unproven": "Priced as a laptop with unknown or lower specs, which reduces value."
+      },
+      {
+        "risk": "The screen is displaying a promotional image, not the actual operating system or performance. The laptop may be non-functional or have a dead screen.",
+        "proof": "A video or photo showing the laptop booting into Windows or a live OS, with the desktop visible.",
+        "if_unproven": "Priced as not working, which is a major devaluation."
+      }
+    ],
+    "proof_requests": [
+      "A clear photo of the bottom label showing the model number.",
+      "A photo or video of the BIOS/UEFI screen or Windows System Information showing exact specs (CPU, RAM, GPU, storage).",
+      "A video showing the laptop booting into Windows with the desktop visible."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model 'Power G7' cannot be confirmed from the photos, and the advertised specs are unverifiable. The screen shows a promotional image, not the actual OS, so functionality is uncertain. Without proof of model and specs, the item cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 40670,
+    "input_tokens": 2655,
+    "output_tokens": 973,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "995d4773d6ecc013dae09df678475af4",
+    "error": null
+  }
+}

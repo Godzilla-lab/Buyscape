@@ -1,0 +1,92 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the back of a smartphone with a triple-camera module and a LiDAR sensor, consistent with iPhone 13 Pro Max design.",
+      "A white sticker on the back lists: 'Apple iPhone 13 Pro Max MLKYYLL/A 256GB', 'Color: SIERRA BLUE', 'Version 20.2', '85% unlocked', '100% Working Phone', and a serial number.",
+      "An orange sticker says '256 GB'.",
+      "Photo 1 shows the front of the phone with a black screen, reflecting the hand holding it and surroundings. The screen appears to have some smudges or minor scratches.",
+      "The phone is held in a hand, and the background suggests a shop or retail environment with glass display cases."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "iPhone 13 Pro Max",
+      "brand": "Apple",
+      "model": "iPhone 13 Pro Max",
+      "read_from": [
+        "photo 0 sticker"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Apple phone 13 pro max",
+        "verdict": "supported",
+        "evidence": "Photo 0 sticker clearly reads 'Apple iPhone 13 Pro Max MLKYYLL/A 256GB'."
+      },
+      {
+        "claim": "256 GB",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows both a sticker and a label indicating '256 GB'."
+      },
+      {
+        "claim": "100% Working Phone",
+        "verdict": "unverified",
+        "evidence": "The sticker in photo 0 claims '100% Working Phone', but no functional test is shown. The screen in photo 1 is off, so no operation is visible."
+      },
+      {
+        "claim": "85% unlocked",
+        "verdict": "unverified",
+        "evidence": "The sticker in photo 0 says '85% unlocked', but this is not verifiable from photos alone. It may refer to battery health or network unlock status, which requires verification via settings or carrier check."
+      },
+      {
+        "claim": "Color: SIERRA BLUE",
+        "verdict": "supported",
+        "evidence": "Photo 0 sticker lists 'Color: SIERRA BLUE', and the phone's back appears to be a dark blue-gray, consistent with Sierra Blue."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Phone may be non-functional or have software issues",
+        "proof": "A video or photo showing the phone turned on, with home screen visible and apps launching.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Battery health may be degraded (85% claimed)",
+        "proof": "Screenshot of battery health from Settings > Battery > Battery Health, showing actual percentage.",
+        "if_unproven": "priced as having degraded battery"
+      },
+      {
+        "risk": "Screen may have cracks or damage not visible in reflection",
+        "proof": "Close-up photo of the front screen with light shining on it to reveal scratches or cracks.",
+        "if_unproven": "priced as screen may be damaged"
+      },
+      {
+        "risk": "Phone may be stolen or blacklisted",
+        "proof": "Screenshot of IMEI check from a trusted source (e.g., Apple's website or Nigerian NCC check) confirming the device is not blacklisted.",
+        "if_unproven": "priced as potentially blacklisted"
+      }
+    ],
+    "proof_requests": [
+      "Video or photo of the phone turned on, showing home screen and app functionality.",
+      "Screenshot of battery health from Settings.",
+      "Close-up photo of the front screen under light to check for damage.",
+      "Screenshot of IMEI check confirming the device is not blacklisted."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The phone's identity and storage are confirmed, but critical claims like '100% working' and '85% unlocked' are unverified. Hidden risks include potential damage, battery degradation, and blacklisting. Without proof of functionality and status, the item cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 74181,
+    "input_tokens": 2271,
+    "output_tokens": 936,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "d3b89bd1a78719ef8ee8df4ea19d99d8",
+    "error": null
+  }
+}

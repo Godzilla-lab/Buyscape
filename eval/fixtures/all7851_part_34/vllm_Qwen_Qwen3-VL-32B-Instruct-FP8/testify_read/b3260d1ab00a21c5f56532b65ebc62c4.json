@@ -1,0 +1,100 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Front view of a Dell laptop with a black screen, keyboard, and trackpad. The Dell logo is visible below the screen. A sticker on the bottom right of the keyboard area shows 'Intel Core i7' and '10th Gen'.",
+      "Photo 1: Side view of the closed laptop on a blue tufted surface. The lid has a textured pattern and the Dell logo. Ports are visible on the left side: USB, HDMI, and possibly Ethernet.",
+      "Photo 2: Another angle of the closed laptop on the same blue surface, showing the textured lid and Dell logo. The left side ports are visible again.",
+      "No photos show the inside of the laptop, the screen from the front, the bottom, or any internal components.",
+      "No photos show the keyboard backlight in action, nor the camera in use.",
+      "The seller claims 14\" screen, 16GB RAM, 256GB SSD, and a camera \u2014 none of these are visible in the photos."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Dell",
+      "model": "unknown",
+      "read_from": [
+        "photo 0 screen below keyboard",
+        "photo 0 sticker on keyboard area"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Intel Core i7 10th gen",
+        "verdict": "supported",
+        "evidence": "Photo 0: sticker on keyboard area clearly shows 'Intel Core i7' and '10th Gen'."
+      },
+      {
+        "claim": "256Gb SSD Storage",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows internal storage or BIOS/OS screen. Cannot verify SSD size or type."
+      },
+      {
+        "claim": "14\" Screen",
+        "verdict": "unverified",
+        "evidence": "Screen size is not visible in any photo. The laptop appears to be 14\" based on proportions, but no measurement or label confirms it."
+      },
+      {
+        "claim": "16Gb RAM",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows RAM or system information. Cannot verify RAM amount."
+      },
+      {
+        "claim": "Keyboard backlit",
+        "verdict": "unverified",
+        "evidence": "No photo shows the keyboard with backlight on. The keyboard is visible in photo 0, but lighting is off."
+      },
+      {
+        "claim": "Cam",
+        "verdict": "supported",
+        "evidence": "Photo 0: a small camera lens is visible above the screen, centered in the bezel."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Internal components (RAM, SSD) may not match the seller's claims",
+        "proof": "Photo of BIOS screen or Windows system info showing RAM and storage details, or a photo of the opened laptop showing the SSD and RAM modules.",
+        "if_unproven": "Priced as if RAM and SSD are not as claimed (e.g., lower capacity or not SSD)."
+      },
+      {
+        "risk": "Screen may be damaged or have dead pixels",
+        "proof": "Photo of the screen turned on, displaying a solid color or test pattern.",
+        "if_unproven": "Priced as if screen has defects or is not fully functional."
+      },
+      {
+        "risk": "Keyboard backlight may not work",
+        "proof": "Photo of the keyboard with backlight turned on.",
+        "if_unproven": "Priced as if backlight is non-functional."
+      },
+      {
+        "risk": "Laptop may have physical damage not visible in photos (e.g., dents, cracks, hinge issues)",
+        "proof": "Photo of the bottom of the laptop and close-up of hinges and edges.",
+        "if_unproven": "Priced as if there is hidden physical damage."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the screen turned on, showing a solid color or test pattern.",
+      "Photo of the BIOS or Windows system info showing RAM and storage details.",
+      "Photo of the keyboard with backlight turned on.",
+      "Photo of the bottom of the laptop and close-up of hinges and edges.",
+      "Photo of the laptop with the lid open, showing the inside and ports clearly."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The laptop is identifiable as a Dell with an Intel Core i7 10th Gen processor and a camera, but critical claims about RAM, SSD, screen size, and keyboard backlight cannot be verified from the photos. Hidden risks include mismatched internal components, screen defects, and physical damage. Without proof, the item cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 85238,
+    "input_tokens": 2668,
+    "output_tokens": 1048,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "b3260d1ab00a21c5f56532b65ebc62c4",
+    "error": null
+  }
+}

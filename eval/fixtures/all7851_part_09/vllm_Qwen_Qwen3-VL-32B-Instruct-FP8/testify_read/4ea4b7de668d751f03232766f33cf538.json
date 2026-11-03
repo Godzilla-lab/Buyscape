@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a chest freezer with a 'Haier Thermocool' sticker and a label claiming '100 Hours Frozen Retention After Power Outage'.",
+      "The freezer is dark gray with a silver handle and a blue sticker with white text.",
+      "Photo 1 shows the side and back of the freezer, with a red inverter or power device in front of it. A white label is visible on the back, but text is unreadable.",
+      "Photo 2 shows the interior of the freezer: a white ceiling with circular indentations and a central vent, and the bottom shelf with bottles and a wire rack. The interior appears dark and slightly frosty.",
+      "No power cord or plug is visible in any photo.",
+      "No model number or serial number is visible on any photo."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "chest freezer",
+      "brand": "Haier",
+      "model": "Thermocool",
+      "read_from": [
+        "photo 0 sticker"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "2 months old",
+        "verdict": "unverifiable_remote",
+        "evidence": "No serial number or production date visible; age cannot be confirmed from photos."
+      },
+      {
+        "claim": "used",
+        "verdict": "supported",
+        "evidence": "Interior shows signs of use (bottles, frost, rack)."
+      },
+      {
+        "claim": "working perfectly",
+        "verdict": "unverified",
+        "evidence": "No proof of operation; no power cord visible, no video or sound. Interior appears cold but not proof of function."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Freezer not working or malfunctioning",
+        "proof": "Video clip showing the freezer running, compressor cycling, and interior temperature.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Interior damage or mold not visible in photos",
+        "proof": "Full interior shot with door open, showing all sides and corners.",
+        "if_unproven": "priced with assumption of minor wear, but not severe damage"
+      },
+      {
+        "risk": "Missing or damaged power cord or plug",
+        "proof": "Photo of the power cord and plug, or confirmation from seller that it is included.",
+        "if_unproven": "priced as if cord is missing or damaged"
+      },
+      {
+        "risk": "Model or capacity not confirmed (affects price)",
+        "proof": "Clear photo of the model number or capacity label, usually on the back or side.",
+        "if_unproven": "priced at lowest common capacity for this brand/model"
+      }
+    ],
+    "proof_requests": [
+      "Video of the freezer running with compressor sound and interior light.",
+      "Photo of the power cord and plug.",
+      "Photo of the model number or capacity label on the back or side.",
+      "Full interior shot showing all sides and corners."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The brand and model are identifiable, but critical claims like 'working perfectly' and age cannot be verified. Hidden risks include non-functionality, missing cord, and interior damage. Without proof, the item cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 60267,
+    "input_tokens": 3234,
+    "output_tokens": 727,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "4ea4b7de668d751f03232766f33cf538",
+    "error": null
+  }
+}

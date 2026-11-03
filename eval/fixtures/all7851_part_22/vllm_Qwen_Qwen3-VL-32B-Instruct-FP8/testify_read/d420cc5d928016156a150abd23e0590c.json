@@ -1,0 +1,105 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the 'About' screen of an iPhone with Model Name 'iPhone 17 Pro Max', iOS Version 26.5, 256 GB capacity, and serial number GXNC7YWR7G.",
+      "Photo 1 shows the back of a blue iPhone with a sticker labeled 'JARAR' listing 'IPHONE 17 PRO MAX USK USE', 'COLOR: BLUE', 'STORAGE: 256GB', 'BATTERY: 100%', 'GRADE: EXCELLENT', 'SIM: OK', 'FACIAL: OFF', 'ICLOUD: OFF', and a barcode.",
+      "Photo 2 shows the 'Battery Health' screen with 'Maximum Capacity: 100%', 'Cycle Count: 119', 'Manufacture Date: November 2025', and 'First Use: December 2026'.",
+      "The 'First Use' date in photo 2 is December 2026, which is in the future, indicating a data inconsistency.",
+      "The model name 'iPhone 17 Pro Max' is not a real Apple product as of 2024; the latest is iPhone 15 series.",
+      "The iOS version 26.5 is not real; current iOS is around version 17 as of 2024.",
+      "The manufacture date (November 2025) and first use (December 2026) are future dates, which is impossible for a used phone.",
+      "The sticker in photo 1 claims 'USK USE' which may imply 'used' or 'second-hand', but the future dates contradict this."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "iPhone",
+      "brand": "Apple",
+      "model": null,
+      "read_from": [
+        "photo 0 screen",
+        "photo 1 sticker"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Very neat and sleek phone",
+        "verdict": "unverified",
+        "evidence": "Photos show the phone's appearance, but 'neat and sleek' is subjective and not verifiable remotely."
+      },
+      {
+        "claim": "iPhone 17 Pro Max",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows 'iPhone 17 Pro Max' on the screen, but this model does not exist as of 2024. The iOS version 26.5 and future dates also contradict this."
+      },
+      {
+        "claim": "256 GB capacity",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows 'Capacity: 256 GB'."
+      },
+      {
+        "claim": "Battery: 100%",
+        "verdict": "supported",
+        "evidence": "Photo 2 shows 'Maximum Capacity: 100%'."
+      },
+      {
+        "claim": "Grade: Excellent",
+        "verdict": "unverified",
+        "evidence": "Photo 1 sticker says 'GRADE: EXCELLENT', but this is a seller's label and not independently verifiable."
+      },
+      {
+        "claim": "SIM: OK, iCloud: OFF, Facial: OFF",
+        "verdict": "unverified",
+        "evidence": "Photo 1 sticker claims these, but no proof is shown in the photos. iCloud status cannot be verified remotely."
+      },
+      {
+        "claim": "You can purchase with 50%",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a payment term, not a physical attribute of the phone. Cannot be verified from photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The phone is not a real iPhone 17 Pro Max; it may be a fake or a modified device.",
+        "proof": "A photo of the phone's box or a screenshot from Apple's official website showing the model details, or a video of the phone being used with real iOS features.",
+        "if_unproven": "priced as a fake or non-functional device"
+      },
+      {
+        "risk": "The future dates (November 2025 manufacture, December 2026 first use) indicate the phone's settings have been tampered with or the device is not genuine.",
+        "proof": "A video showing the phone's settings being accessed without manipulation, or a screenshot from Apple's official device verification tool.",
+        "if_unproven": "priced as a non-genuine or tampered device"
+      },
+      {
+        "risk": "The iCloud status is not confirmed as 'OFF'; the phone may be locked to an account.",
+        "proof": "A video showing the phone being turned on and the 'Activation Lock' screen being bypassed or showing 'No iCloud Lock' status.",
+        "if_unproven": "priced as potentially iCloud-locked"
+      },
+      {
+        "risk": "The 'Facial: OFF' claim may be false; the Face ID may not work.",
+        "proof": "A video showing the Face ID being tested and successfully unlocking the phone.",
+        "if_unproven": "priced as Face ID not working"
+      }
+    ],
+    "proof_requests": [
+      "A video showing the phone being turned on and used normally, including Face ID testing and iCloud status verification.",
+      "A photo of the original box or a screenshot from Apple's official website confirming the model.",
+      "A video showing the phone's settings without manipulation, especially the date and time settings."
+    ],
+    "decision": "fraud_suspected",
+    "reason": "The phone displays impossible future dates for manufacture and first use, and the model 'iPhone 17 Pro Max' does not exist. These are strong indicators of a fake or tampered device. The iOS version 26.5 is also non-existent, further suggesting fraud."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 106216,
+    "input_tokens": 2787,
+    "output_tokens": 1290,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "d420cc5d928016156a150abd23e0590c",
+    "error": null
+  }
+}

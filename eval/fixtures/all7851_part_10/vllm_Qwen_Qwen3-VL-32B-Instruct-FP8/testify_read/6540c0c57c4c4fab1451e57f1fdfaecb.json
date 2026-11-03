@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a Dell laptop with the Windows 'About' system screen open, displaying: 128 GB RAM, 904 GB storage, Intel Core i7-12700H processor, and NVIDIA GeForce RTX 3060 graphics.",
+      "The keyboard has red backlighting and a 'G' logo on the bottom left, indicating a Dell G series gaming laptop.",
+      "Photo 1 shows the laptop from above, open, with a silver chassis and red backlit keyboard. The Intel Core i7 sticker is visible on the bottom right.",
+      "Photo 2 shows the closed lid of the laptop with the Dell logo centered. The lid is silver and has visible scratches and scuffs.",
+      "All photos have a watermark: 'DARRENGADGET HUB'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "gaming laptop",
+      "brand": "Dell",
+      "model": "G15",
+      "read_from": [
+        "photo 0 screen: 'Dell G15 15.6-inch'",
+        "photo 0 keyboard: 'G' logo"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "16GB memory",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows '128 GB' under 'Installed RAM' in the Windows 'About' screen."
+      },
+      {
+        "claim": "512SSD storage",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows '904 GB' under 'Storage' in the Windows 'About' screen."
+      },
+      {
+        "claim": "Intel core i7",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows 'Intel Core i7-12700H' in the system info. Also visible on the sticker in photo 1."
+      },
+      {
+        "claim": "Max performance Alienware-inspired thermal design features...",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible thermal design features shown in photos. Cannot verify from remote images."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The 904 GB storage may be a combination of SSD and HDD, or the SSD may be a 1TB drive with less than 904 GB usable space.",
+        "proof": "A photo of the drive bay or a screenshot of Disk Management showing drive type and partition details.",
+        "if_unproven": "Priced as if it is a 1TB SSD, but if it's a hybrid or HDD, the value drops significantly."
+      },
+      {
+        "risk": "The 128 GB RAM may be a misconfiguration or error in the system display, or it may be a 128 GB RAM module (unusual for consumer laptops) or a typo.",
+        "proof": "A photo of the RAM slots with the modules visible, or a screenshot from Task Manager or CPU-Z showing actual RAM configuration.",
+        "if_unproven": "Priced as if it is 128 GB RAM, but if it's actually 16 GB, the price must be adjusted downward."
+      },
+      {
+        "risk": "The laptop may have physical damage or wear not visible in the photos, such as screen dead pixels, hinge issues, or keyboard damage.",
+        "proof": "A video showing the laptop being opened, closed, and used, including screen brightness and keyboard function.",
+        "if_unproven": "Priced as if in good condition, but if damage is found, value decreases."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot from Task Manager or CPU-Z showing actual RAM configuration.",
+      "Photo of the drive bay or Disk Management showing drive type and size.",
+      "Video showing the laptop being opened, closed, and used, including screen and keyboard function."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller's claims about 16GB RAM and 512GB SSD are contradicted by the system info in photo 0, which shows 128GB RAM and 904GB storage. The actual configuration must be verified before pricing, as the discrepancy could indicate a misrepresentation or error. The model is identifiable as a Dell G15, but the RAM and storage details need confirmation to determine the correct value."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 78467,
+    "input_tokens": 2792,
+    "output_tokens": 968,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "6540c0c57c4c4fab1451e57f1fdfaecb",
+    "error": null
+  }
+}

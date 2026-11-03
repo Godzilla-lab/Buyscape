@@ -1,0 +1,91 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows an open HP laptop with a silver base and black screen bezel. The HP logo is visible above the screen. The keyboard is black with a silver touchpad. Stickers on the palm rest include 'DESIGNED FOR YOUR LIFE' and 'TIME TO PLAY', along with an HP Product Entertainment PC label.",
+      "Photo 1 and Photo 2 show the closed laptop from the back. The lid is black with a textured pattern and an HP logo in the bottom right corner. The surface is reflective and shows smudges and fingerprints.",
+      "The screen is off in all photos. No ports, hinges, or internal components are visible.",
+      "The seller's text claims 'Dv600', 'Dual core', '3GB RAM', '160GB HDD', 'Windows 8'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "dv6000",
+      "read_from": [
+        "photo 0 screen bezel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Dv600",
+        "verdict": "supported",
+        "evidence": "Photo 0: 'dv6000' is visible on the screen bezel, right side."
+      },
+      {
+        "claim": "Dual core",
+        "verdict": "unverifiable_remote",
+        "evidence": "No CPU label or system information visible. Cannot be confirmed from photos."
+      },
+      {
+        "claim": "3GB RAM",
+        "verdict": "unverifiable_remote",
+        "evidence": "No RAM label or system information visible. Cannot be confirmed from photos."
+      },
+      {
+        "claim": "160GB HDD",
+        "verdict": "unverifiable_remote",
+        "evidence": "No drive label or system information visible. Cannot be confirmed from photos."
+      },
+      {
+        "claim": "Windows 8",
+        "verdict": "unverifiable_remote",
+        "evidence": "Screen is off; no OS interface visible. Cannot be confirmed from photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The laptop may not power on or may have a dead screen.",
+        "proof": "A video showing the laptop powering on, displaying the BIOS or Windows login screen.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The internal components (CPU, RAM, HDD) may not match the seller's claims.",
+        "proof": "A photo or video showing the BIOS screen with system information, or the open laptop with RAM/HDD labels visible.",
+        "if_unproven": "priced as having unknown specs"
+      },
+      {
+        "risk": "The screen may have dead pixels, cracks, or backlight issues.",
+        "proof": "A photo or video of the screen displaying a solid white or black color to check for defects.",
+        "if_unproven": "priced as screen condition unknown"
+      },
+      {
+        "risk": "The keyboard or touchpad may be non-functional.",
+        "proof": "A video showing the keyboard and touchpad being used while the laptop is on.",
+        "if_unproven": "priced as input peripherals untested"
+      }
+    ],
+    "proof_requests": [
+      "Video of the laptop powering on and showing the BIOS or Windows login screen.",
+      "Photo or video of the BIOS screen showing CPU, RAM, and HDD details.",
+      "Photo of the screen displaying a solid white or black color to check for defects.",
+      "Video showing the keyboard and touchpad being used while the laptop is on."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identifiable as HP dv6000 from the screen bezel, but the seller's claims about CPU, RAM, HDD, and OS cannot be verified from the photos. Critical risks include non-functionality and mismatched specs. Proof is needed to price accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 70475,
+    "input_tokens": 2730,
+    "output_tokens": 875,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "bd2b428bbc5b49bd6f17eba61670df2d",
+    "error": null
+  }
+}

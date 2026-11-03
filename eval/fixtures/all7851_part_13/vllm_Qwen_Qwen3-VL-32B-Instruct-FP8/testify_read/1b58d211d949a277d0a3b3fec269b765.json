@@ -1,0 +1,97 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Closed black ASUS laptop with textured lid, ASUS logo visible. Watermark 'NICK MARK ENTERPRISE' and 'POSTED ON JIJI'.",
+      "Photo 1: Open laptop showing keyboard, touchpad, and black screen. ASUS logo below screen. Stickers on palm rest: Intel, Windows, and NVIDIA. Watermark present.",
+      "Photo 2: Same as photo 0, but with visible smudges and fingerprints on lid. Watermark present.",
+      "No visible model number on any photo. No internal components shown. No power-on or screen activity shown."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "laptop",
+      "brand": "ASUS",
+      "model": null,
+      "read_from": [
+        "photo 0 lid",
+        "photo 1 below screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Asus X53S",
+        "verdict": "unverified",
+        "evidence": "Model number not visible in any photo. Seller's text only."
+      },
+      {
+        "claim": "Core i5",
+        "verdict": "unverifiable_remote",
+        "evidence": "No CPU sticker or BIOS screen shown. Intel sticker present but does not specify i5."
+      },
+      {
+        "claim": "8GB RAM",
+        "verdict": "unverifiable_remote",
+        "evidence": "No RAM slots or system info shown. Cannot verify from photos."
+      },
+      {
+        "claim": "500GB HDD",
+        "verdict": "unverifiable_remote",
+        "evidence": "No drive bay or system info shown. Cannot verify from photos."
+      },
+      {
+        "claim": "Windows 10",
+        "verdict": "unverifiable_remote",
+        "evidence": "Screen is off. No OS boot screen or desktop shown. Windows sticker present but not proof of current OS."
+      },
+      {
+        "claim": "2GB Nvidia graphics",
+        "verdict": "unverifiable_remote",
+        "evidence": "NVIDIA sticker present, but no GPU model or specs visible. Cannot confirm 2GB or exact model."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Laptop does not power on or has dead screen",
+        "proof": "Video of power-on, BIOS screen, or Windows boot.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "RAM, HDD, or GPU specs are misrepresented",
+        "proof": "Screenshot of system information (e.g., Windows Task Manager or CPU-Z) or video showing internal components.",
+        "if_unproven": "priced as lower-spec or non-functional"
+      },
+      {
+        "risk": "Laptop is stolen or has blacklisted serial number",
+        "proof": "Clear photo of serial number (usually under battery or on bottom chassis) and verification via official channels.",
+        "if_unproven": "priced with discount for risk"
+      },
+      {
+        "risk": "Battery does not hold charge or is missing",
+        "proof": "Video showing battery charge level and usage without power adapter.",
+        "if_unproven": "priced as battery not included or dead"
+      }
+    ],
+    "proof_requests": [
+      "Video of power-on and Windows boot screen.",
+      "Screenshot of system information showing CPU, RAM, and GPU specs.",
+      "Clear photo of the serial number on the bottom of the laptop.",
+      "Video showing battery usage without adapter."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and key specs (CPU, RAM, HDD, GPU) cannot be verified from the photos. The screen is off, so functionality is unproven. Without proof of specs and working condition, a worst-case price cannot be determined. Proof is needed to confirm identity and functionality."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 70553,
+    "input_tokens": 2737,
+    "output_tokens": 853,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "1b58d211d949a277d0a3b3fec269b765",
+    "error": null
+  }
+}

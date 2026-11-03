@@ -1,0 +1,91 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Open laptop showing Windows 11 desktop with blue abstract wallpaper. Keyboard is silver-gray, trackpad is large, Dell VPRO sticker visible on bottom right of palm rest. Background shows glass display cabinet with multiple laptops in plastic wrapping.",
+      "Photo 1: Closed laptop lid, dark gray textured surface with Dell logo centered. A white sticker with handwritten text is on the top left corner. Background same as photo 0.",
+      "Photo 2: Laptop propped open on a silver laptop stand, viewed from side. Screen is tilted back, keyboard and hinge visible. Background is plain white wall and surface.",
+      "No visible model number or serial label in any photo. No clear view of the bottom chassis or inside lid where model info is usually located."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "laptop",
+      "brand": "Dell",
+      "model": null,
+      "read_from": [
+        "photo 1 lid logo"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "MODEL: INSPIRON 7430",
+        "verdict": "unverified",
+        "evidence": "No model number visible in any photo. Seller's text only. The laptop design (thin bezels, VPRO sticker) is more typical of Dell Latitude or XPS series, not Inspiron 7430."
+      },
+      {
+        "claim": "BRAND: DELL",
+        "verdict": "supported",
+        "evidence": "Dell logo clearly visible on lid in photo 1."
+      },
+      {
+        "claim": "PROCESSOR: INTEL CORE i7 12TH GEN",
+        "verdict": "unverifiable_remote",
+        "evidence": "No system information visible. Cannot confirm processor from photos alone. Requires BIOS or system specs screenshot."
+      },
+      {
+        "claim": "MEMORY: 32GB",
+        "verdict": "unverifiable_remote",
+        "evidence": "No RAM information visible. Cannot confirm from photos. Requires system specs screenshot or physical inspection."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Incorrect model claim (Inspiron 7430 may be false)",
+        "proof": "Photo of the bottom chassis or inside lid showing model number or serial label.",
+        "if_unproven": "Priced as a generic Dell laptop, not as Inspiron 7430, which may be a higher-value model."
+      },
+      {
+        "risk": "Processor not 12th Gen i7",
+        "proof": "Screenshot of system information (e.g., Windows About or CPU-Z) showing processor model.",
+        "if_unproven": "Priced as a lower-tier laptop, assuming generic or older processor."
+      },
+      {
+        "risk": "RAM not 32GB",
+        "proof": "Screenshot of system information showing installed RAM.",
+        "if_unproven": "Priced as 16GB or lower, assuming unverified claim."
+      },
+      {
+        "risk": "Battery health or condition unknown",
+        "proof": "Video of battery charge cycle or screenshot of battery health (e.g., from Windows Battery Report or HWInfo).",
+        "if_unproven": "Priced as if battery is degraded or non-functional, reducing value."
+      },
+      {
+        "risk": "Screen damage or dead pixels",
+        "proof": "Photo of screen displaying solid white, black, and color patterns to reveal defects.",
+        "if_unproven": "Priced as if screen has minor defects, reducing value."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the bottom chassis or inside lid showing model number or serial label.",
+      "Screenshot of system information showing processor and RAM details.",
+      "Photo of screen displaying solid white, black, and color patterns.",
+      "Video of battery charge cycle or battery health report."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model claim (Inspiron 7430) cannot be verified from photos, and key specs (processor, RAM) are unverifiable remotely. Without proof, the item cannot be accurately priced. The brand is confirmed, but the model and specs are critical for valuation in Lagos market."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 78994,
+    "input_tokens": 2998,
+    "output_tokens": 927,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "af81d3f10afff411242b697e3f7598e3",
+    "error": null
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a white front-load washing machine with the door open, revealing the drum. The brand 'SAMSUNG' is visible on the top left of the control panel.",
+      "Photo 1 shows the same machine with the door closed. The control panel includes a digital display, a dial, and buttons. The text 'Digital Inverter' is visible below the brand name.",
+      "On the right side of the control panel in photo 1, a sticker reads '7.5kg 6.5kg', indicating wash and dry capacities.",
+      "The machine appears to be in a warehouse or storage area with concrete flooring and other appliances in the background.",
+      "The door seal and drum interior appear clean and intact in both photos.",
+      "No visible damage to the exterior casing or control panel is evident."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "front-load washing machine",
+      "brand": "SAMSUNG",
+      "model": "not readable",
+      "read_from": [
+        "photo 0 top left",
+        "photo 1 top left"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Samsung 7.5 KG wash and dry digital inverter front load",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows 'SAMSUNG' brand, 'Digital Inverter' label, and '7.5kg 6.5kg' sticker indicating wash and dry capacity. Photo 0 confirms front-load design."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Internal damage or wear not visible in photos, such as drum imbalance, motor issues, or control board faults.",
+        "proof": "Video of the machine running a full cycle, including spin and wash, with close-ups of the drum and control panel.",
+        "if_unproven": "priced as possibly not working or with hidden defects"
+      },
+      {
+        "risk": "The 'dry' function may not be operational or may be misrepresented (e.g., condenser dry vs. vented dry, or not a true dryer).",
+        "proof": "Video showing the drying cycle in operation, with temperature and time display, and evidence of moisture removal.",
+        "if_unproven": "priced as a washer only, not a washer-dryer"
+      },
+      {
+        "risk": "Hidden water leaks or drainage issues not visible in static photos.",
+        "proof": "Video of the machine running a wash cycle with a full load, showing water intake and drainage.",
+        "if_unproven": "priced as potentially leaking"
+      }
+    ],
+    "proof_requests": [
+      "Video of the machine running a full wash and dry cycle, including spin and drainage.",
+      "Close-up of the model number plate (if any) on the machine.",
+      "Proof of the dryer function working, including temperature and time display during drying."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a Samsung front-load washer-dryer with supported claims, but critical functional risks (dryer operation, internal condition, leaks) cannot be assessed from photos alone. Proof of operation is needed before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 54440,
+    "input_tokens": 2279,
+    "output_tokens": 691,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "531af5b8c0fb474e7733968463522e13",
+    "error": null
+  }
+}

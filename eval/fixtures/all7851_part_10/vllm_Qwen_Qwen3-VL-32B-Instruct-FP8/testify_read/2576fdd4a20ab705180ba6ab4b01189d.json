@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: A hand holds a silver/grey iPhone with a triple-camera module and Apple logo. A white sticker with text is affixed to the back, partially readable as 'iPhone 15 Pro', 'Capacity: 256GB', 'Color: Space Black', 'Serial No: ...', and a barcode. The background shows a sign with 'DANNY TUNEZ' and 'IT' logo.",
+      "Photo 1: Side view of the same iPhone, showing the volume buttons and power button. The phone appears to have a metallic finish. The same 'DANNY TUNEZ' sign is in the background.",
+      "Photo 2: Front view of the iPhone screen displaying the 'Parts & Service' section of the Settings app. It shows 'SERVICE HISTORY' with 'Genuine' status for 'Display'. The time on the phone is 10:19. The background sign is again visible."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "iPhone 15 Pro",
+      "brand": "Apple",
+      "model": "iPhone 15 Pro",
+      "read_from": [
+        "photo 0 sticker"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "iPhone 15 Pro available for buy now pay later",
+        "verdict": "unverified",
+        "evidence": "The seller's text states this, but no proof of financing or payment plan is shown in the photos. The photos only show the phone and a shop sign."
+      },
+      {
+        "claim": "The phone is genuine",
+        "verdict": "supported",
+        "evidence": "Photo 2 shows the 'Parts & Service' screen with 'Genuine' status for the display, indicating Apple's verification. The sticker in photo 0 also lists Apple model details."
+      },
+      {
+        "claim": "The phone is 256GB",
+        "verdict": "supported",
+        "evidence": "Photo 0 sticker clearly reads 'Capacity: 256GB'."
+      },
+      {
+        "claim": "The phone is Space Black",
+        "verdict": "supported",
+        "evidence": "Photo 0 sticker reads 'Color: Space Black'. The phone's back appears dark grey/silver, consistent with Space Black finish."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The phone may have been repaired with non-genuine parts (e.g., battery, camera, logic board) not shown in the 'Parts & Service' screen.",
+        "proof": "A full screenshot of the 'Parts & Service' screen showing all components (battery, camera, logic board, etc.) and their status (Genuine or Not Genuine).",
+        "if_unproven": "Priced as potentially having non-genuine parts, which reduces value."
+      },
+      {
+        "risk": "The phone may have water damage or internal issues not visible in photos.",
+        "proof": "A video showing the phone being powered on, camera functioning, and a full diagnostic test (e.g., screen, speakers, mic, charging port, buttons).",
+        "if_unproven": "Priced as potentially non-functional or with hidden defects."
+      },
+      {
+        "risk": "The serial number on the sticker may be fake or mismatched with the actual device.",
+        "proof": "A clear photo of the serial number on the phone's settings screen (Settings > General > About) to verify it matches the sticker in photo 0.",
+        "if_unproven": "Priced as potentially counterfeit or stolen, which drastically reduces value."
+      }
+    ],
+    "proof_requests": [
+      "A clear screenshot of the 'Parts & Service' screen showing all components and their status.",
+      "A video showing the phone powered on, camera working, and all buttons functioning.",
+      "A clear photo of the serial number from the phone's settings screen to match the sticker."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "While the phone appears to be an iPhone 15 Pro with 256GB and Space Black color, and the 'Parts & Service' screen shows the display is genuine, critical risks remain unproven: other components may be non-genuine, the serial number may be mismatched, and internal damage is not visible. These risks must be verified before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 82239,
+    "input_tokens": 2777,
+    "output_tokens": 943,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "2576fdd4a20ab705180ba6ab4b01189d",
+    "error": null
+  }
+}

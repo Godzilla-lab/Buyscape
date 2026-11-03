@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Open laptop showing screen with anime wallpaper, Dell logo below screen, black keyboard with carbon fiber texture, Intel sticker on bottom right of palm rest.",
+      "Photo 1: Closed laptop lid, gray matte finish, Dell logo centered, no visible model name.",
+      "Photo 2: Bottom of laptop, gray matte finish, 'Precision 5540' engraved on battery cover, serial sticker on top right corner, ventilation grills on right side, rubber feet at corners.",
+      "All photos show a hand holding the laptop against a wooden background.",
+      "Watermark 'POSTED ON JIJI DY QUALITY GADGETS' is present on all photos."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Dell",
+      "model": "Precision 5540",
+      "read_from": [
+        "photo 2 bottom plate"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Dell precision 5540",
+        "verdict": "supported",
+        "evidence": "Photo 2: 'Precision 5540' engraved on the bottom plate."
+      },
+      {
+        "claim": "processor: intel core i9-9880h (9th gen)",
+        "verdict": "unverified",
+        "evidence": "No visible CPU label or system information in photos. Intel sticker on palm rest (photo 0) does not specify model."
+      },
+      {
+        "claim": "cpu: 8 cores, 16...",
+        "verdict": "unverified",
+        "evidence": "No visible system specs or BIOS screen. Cannot confirm core count or thread count from photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "CPU may not be i9-9880H or may be downgraded/modified",
+        "proof": "Photo of BIOS screen or system information (e.g., Windows About page) showing CPU model.",
+        "if_unproven": "Priced as if CPU is not i9-9880H, which would reduce value significantly."
+      },
+      {
+        "risk": "Battery health or capacity may be degraded",
+        "proof": "Screenshot of battery health report (e.g., from Windows Powercfg or third-party tool).",
+        "if_unproven": "Priced as if battery is degraded, reducing usability and value."
+      },
+      {
+        "risk": "Screen may have dead pixels, burn-in, or damage not visible in photo",
+        "proof": "Video or photo of screen displaying solid white, black, and color gradients.",
+        "if_unproven": "Priced as if screen has defects, reducing value."
+      },
+      {
+        "risk": "Keyboard or trackpad may be unresponsive or damaged",
+        "proof": "Video of keyboard and trackpad in use, typing and clicking.",
+        "if_unproven": "Priced as if input devices are faulty, reducing value."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of system information showing CPU model and specs.",
+      "Video or photo of screen displaying solid colors to check for defects.",
+      "Video of keyboard and trackpad in use.",
+      "Screenshot of battery health report."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is confirmed as Dell Precision 5540 from photo 2, but key claims about the CPU and core count are unverified. Hidden risks like battery health, screen defects, and input device functionality cannot be assessed from current photos. Proof is needed to confirm specifications and condition before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 55173,
+    "input_tokens": 2803,
+    "output_tokens": 795,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "b94780f8b932a1113f067043dc19aa65",
+    "error": null
+  }
+}

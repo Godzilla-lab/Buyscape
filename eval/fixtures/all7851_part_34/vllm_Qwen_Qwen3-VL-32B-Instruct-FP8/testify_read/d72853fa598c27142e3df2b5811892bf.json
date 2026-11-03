@@ -1,0 +1,75 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a close-up of the laptop keyboard and palm rest. The keyboard has a fingerprint sensor on the left side, and the keys are labeled with standard function keys. The palm rest has a sticker with 'HP ZOL'S S.D. HPT' and an Intel vPro sticker labeled 'An Evo Design i7'.",
+      "Photo 1 shows the laptop open, held in hand. The left side of the palm rest has 'DRAGONFLY' engraved. The screen is off, reflecting a person in a leopard-print top. The background shows a display shelf with other laptops.",
+      "Photo 2 shows the closed laptop lid, held in hand. The lid is dark blue/grey with a gold HP logo in the center. There is a small scratch or mark near the bottom right of the lid."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "Dragonfly",
+      "read_from": [
+        "photo 1 left palm rest",
+        "photo 2 lid logo"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP Elite Dragonfly",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows 'DRAGONFLY' engraved on the palm rest, and the HP logo is visible on the lid in photo 2. The seller's claim of 'HP Elite Dragonfly' is consistent with the visible branding."
+      },
+      {
+        "claim": "12th gen Intel Core i7",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows an Intel vPro sticker with 'i7' and 'An Evo Design', which suggests an Intel Core i7 processor, but the specific generation (12th) is not visible. The sticker does not state '12th gen'."
+      },
+      {
+        "claim": "premium laptop",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a subjective claim. The photos show a sleek design, B&O speakers, and vPro branding, which suggest premium features, but 'premium' cannot be objectively verified from photos alone."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The laptop may not be a 12th gen Intel Core i7, or the processor may be damaged or non-functional.",
+        "proof": "A clear photo of the system information screen (e.g., Windows System Properties or BIOS) showing the exact CPU model.",
+        "if_unproven": "Priced as if it has a lower-generation or non-i7 processor, or as not working."
+      },
+      {
+        "risk": "The laptop may have internal damage or wear not visible in photos, such as screen dead pixels, keyboard key failure, or battery degradation.",
+        "proof": "A video showing the laptop powered on, with keyboard typing, screen display, and battery health check.",
+        "if_unproven": "Priced as if it has functional issues or reduced battery life."
+      },
+      {
+        "risk": "The laptop may be stolen or have a blacklisted serial number.",
+        "proof": "A photo of the serial number sticker (usually on the bottom of the laptop) and a verification check via HP's website or a trusted service.",
+        "if_unproven": "Priced as if it has a high risk of being stolen or blacklisted."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the system information screen showing the exact CPU model.",
+      "Video of the laptop powered on, showing keyboard, screen, and battery health.",
+      "Photo of the serial number sticker on the bottom of the laptop."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identifiable as HP Dragonfly, but the 12th gen Intel Core i7 claim is unverified. Key risks such as processor authenticity, functionality, and theft status cannot be assessed from current photos. Proof is needed to price accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 70090,
+    "input_tokens": 2796,
+    "output_tokens": 867,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "d72853fa598c27142e3df2b5811892bf",
+    "error": null
+  }
+}

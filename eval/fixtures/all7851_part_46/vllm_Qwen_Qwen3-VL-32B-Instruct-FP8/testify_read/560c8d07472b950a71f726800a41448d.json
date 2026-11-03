@@ -1,0 +1,96 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Open laptop showing Windows desktop with a scenic wallpaper. Keyboard and trackpad visible. Watermark 'GEEK CONSULT NG' and 'POSTED ON JIJI'.",
+      "Photo 1: Same laptop showing login screen with 'SURFACE LAPTOP' text and Windows logo. Keyboard and trackpad visible. Same watermark.",
+      "Photo 2: Closed laptop lid with Windows logo centered. Stacked on other laptops. Background shows stacks of laptops, suggesting a resale or bulk environment. Same watermark.",
+      "All photos show a black laptop with slim bezels, typical of Surface design. No visible damage to screen or body in photos.",
+      "No model number, serial number, or internal specs visible in any photo.",
+      "Seller claims 'Fresh Like New Microsoft Surface Laptop 5 15inches - 2.6ghz corei7-1255U 12th gen 10cores'."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "15-inch laptop",
+      "brand": "Microsoft",
+      "model": null,
+      "read_from": [
+        "photo 0 screen text",
+        "photo 1 screen text",
+        "photo 2 lid logo"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Fresh Like New",
+        "verdict": "unverified",
+        "evidence": "Photos show no visible damage, but no close-up of screen, hinges, or ports. No proof of internal condition or usage history."
+      },
+      {
+        "claim": "Microsoft Surface Laptop 5",
+        "verdict": "unverified",
+        "evidence": "Photos show 'SURFACE LAPTOP' on login screen (photo 1) and Windows logo (photo 2), but no model number or specific 'Laptop 5' branding visible. Could be Surface Laptop 4 or 5."
+      },
+      {
+        "claim": "15 inches",
+        "verdict": "unverified",
+        "evidence": "Screen size not visible in any photo. No ruler or reference object for scale. Assumed from seller text."
+      },
+      {
+        "claim": "2.6ghz corei7-1255U 12th gen 10cores",
+        "verdict": "unverifiable_remote",
+        "evidence": "No system information visible in photos. Cannot verify CPU specs without BIOS, system info, or sticker. Seller text only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Not Surface Laptop 5, possibly an older model",
+        "proof": "Photo of the bottom chassis or a sticker showing model number (e.g., 'Surface Laptop 5' or '1950')",
+        "if_unproven": "Priced as Surface Laptop 4 or generic 15-inch laptop, which is lower value."
+      },
+      {
+        "risk": "CPU not as claimed (i7-1255U)",
+        "proof": "Screenshot of system information (e.g., Windows 'About' page or CPU-Z) showing exact processor model",
+        "if_unproven": "Priced as unknown CPU, likely lower than i7-1255U."
+      },
+      {
+        "risk": "Screen damage or dead pixels not visible in photos",
+        "proof": "Close-up photo of screen under bright light, showing full screen with white background",
+        "if_unproven": "Priced as screen with possible defects, reducing value."
+      },
+      {
+        "risk": "Battery health or charging issues",
+        "proof": "Video of battery charging and discharging cycle, or screenshot of battery health report",
+        "if_unproven": "Priced as battery with unknown health, possibly degraded."
+      },
+      {
+        "risk": "Physical damage to hinges, ports, or keyboard not visible",
+        "proof": "Close-up photos of all ports, hinges, and keyboard keys from multiple angles",
+        "if_unproven": "Priced as possibly damaged, reducing value."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the bottom chassis or sticker showing the exact model name (e.g., 'Surface Laptop 5')",
+      "Screenshot of system information showing CPU model and RAM",
+      "Close-up photo of the screen with white background to check for dead pixels or damage",
+      "Close-up photos of all ports, hinges, and keyboard",
+      "Video of the laptop booting and running for 30 seconds to confirm functionality"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a Microsoft Surface laptop, but the exact model and specs are not verifiable from the photos. The seller's claims about the model, CPU, and condition cannot be confirmed. Without proof of the model and internal specs, the item cannot be priced accurately. The background of stacked laptops suggests a resale environment, increasing the risk of misrepresentation."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 89014,
+    "input_tokens": 2806,
+    "output_tokens": 1072,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "560c8d07472b950a71f726800a41448d",
+    "error": null
+  }
+}

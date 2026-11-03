@@ -1,0 +1,89 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: White iPhone back with Apple logo, dual-camera setup, red '128' sticker. Watermark 'POSTED ON JIJI ECLEAR BT SOLAR ENERGY'.",
+      "Photo 1: Front view of the phone, screen off, showing black display and white bezels. Watermark present. Some smudges or dirt visible on screen.",
+      "Photo 2: Same white iPhone back, dual-camera, blue '128' sticker. Watermark present. Slight reflection on back glass.",
+      "All photos show a hand holding the phone, no box, no accessories, no serial number or model label visible.",
+      "The camera module has two lenses and a flash, consistent with iPhone 13 or 13 mini, but not iPhone 13 Pro (which has three lenses)."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "iPhone 13",
+      "brand": "Apple",
+      "model": null,
+      "read_from": [
+        "photo 0 back design",
+        "photo 2 back design"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "iPhone 13",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 2 show the back design with dual-camera module and Apple logo, consistent with iPhone 13 (not Pro or mini due to size and camera count)."
+      },
+      {
+        "claim": "128gb",
+        "verdict": "unverified",
+        "evidence": "Sticker with '128' visible in photo 0 and photo 2, but no internal verification or settings screen shown. Could be misleading."
+      },
+      {
+        "claim": "uk used",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible proof of origin (e.g., box, SIM tray, settings language, or IMEI check). Cannot verify remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Not genuine iPhone 13 (could be counterfeit or repainted)",
+        "proof": "Close-up of the back with serial number or model label, or a video showing the settings screen with model name.",
+        "if_unproven": "priced as potentially counterfeit, which would be a major devaluation"
+      },
+      {
+        "risk": "Storage not 128GB (could be 64GB or 256GB, or storage tampered)",
+        "proof": "Screenshot of the phone's settings > General > About > Capacity, or a video showing the storage info.",
+        "if_unproven": "priced as 64GB (lowest common storage), which is a significant price reduction"
+      },
+      {
+        "risk": "Screen damage or dead pixels not visible in photos",
+        "proof": "Video of the screen turning on, showing full display with white screen and moving content.",
+        "if_unproven": "priced as screen may be damaged, reducing value"
+      },
+      {
+        "risk": "Battery health degraded or not working",
+        "proof": "Video showing battery percentage and health in settings, or a charge test.",
+        "if_unproven": "priced as battery may be dead or degraded, reducing value"
+      },
+      {
+        "risk": "Water damage or internal issues not visible",
+        "proof": "Video showing the phone turning on, camera working, and charging, or a full diagnostic test.",
+        "if_unproven": "priced as possibly non-functional or with hidden damage"
+      }
+    ],
+    "proof_requests": [
+      "Video showing the phone turning on and displaying the home screen.",
+      "Screenshot or video of settings > General > About > Model and Capacity.",
+      "Video of the camera working and screen displaying full white.",
+      "Video of battery health and charging test.",
+      "Close-up of the serial number or model label on the back or inside the SIM tray."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item appears to be an iPhone 13 based on design, but critical claims like storage capacity and authenticity cannot be verified from current photos. Hidden risks like screen damage, battery health, and water damage are not visible. Proof is needed to price accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 71427,
+    "input_tokens": 2929,
+    "output_tokens": 927,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "5a2064c45e9084b8cb5eae43289357b2",
+    "error": null
+  }
+}

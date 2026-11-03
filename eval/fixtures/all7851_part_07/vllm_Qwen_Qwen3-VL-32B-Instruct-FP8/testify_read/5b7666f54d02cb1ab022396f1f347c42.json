@@ -1,0 +1,70 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows two trucks in a warehouse or garage. The front truck is white with a blue stripe and has a visible license plate 'KYN-556'. The truck behind it is blue and appears to be a chassis cab with no body, possibly a DAF. The white truck has a dump body attached.",
+      "Photo 1 shows a white truck with a dump body, parked outdoors. The front grille has 'DAF' written on it, and the model '85' is visible below the grille. The truck has a V-shaped logo above the grille. The front bumper is black, and the headlights are intact. The truck appears to be in fair condition with some dirt and wear.",
+      "The seller claims it is a 'DAF 85 CF injector chassis cab on springs' and says it is 'in very good condition and ready to...'.",
+      "The truck in photo 1 matches the description of a DAF 85 CF, but it has a dump body, not a chassis cab. The truck in photo 0 (blue) is a chassis cab, which may be the one the seller is referring to."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DAF 85 CF truck",
+      "brand": "DAF",
+      "model": "85 CF",
+      "read_from": [
+        "photo 1 grille"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "DAF 85 CF injector chassis cab on springs",
+        "verdict": "contradicted",
+        "evidence": "Photo 1 shows a DAF 85 CF with a dump body, not a chassis cab. Photo 0 shows a blue chassis cab, which may be the intended subject, but the seller's description does not match the visible truck in photo 1."
+      },
+      {
+        "claim": "in very good condition and ready to...",
+        "verdict": "unverified",
+        "evidence": "The truck in photo 1 appears to be in fair condition with visible dirt and wear, but no interior or mechanical details are shown. The 'ready to...' part is incomplete and unverifiable."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The truck may not be a chassis cab as claimed, but rather a dump truck with a body attached.",
+        "proof": "A clear photo of the truck without the dump body, or a photo showing the chassis cab configuration.",
+        "if_unproven": "priced as a dump truck, not a chassis cab, which affects value."
+      },
+      {
+        "risk": "The truck may have mechanical issues or be non-functional despite the claim of 'very good condition'.",
+        "proof": "A video or photo showing the engine running, interior condition, and undercarriage inspection.",
+        "if_unproven": "priced as not working or with unknown mechanical condition."
+      },
+      {
+        "risk": "The truck may have hidden damage or rust, especially under the body or in the frame.",
+        "proof": "A close-up photo of the chassis, frame, and undercarriage.",
+        "if_unproven": "priced with a discount for potential hidden damage."
+      }
+    ],
+    "proof_requests": [
+      "A clear photo of the truck without the dump body to confirm if it is a chassis cab.",
+      "A video or photo showing the engine running and interior condition.",
+      "Close-up photos of the chassis, frame, and undercarriage to check for rust or damage."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The truck in the photos does not match the seller's description of a chassis cab; it appears to be a dump truck. The condition and mechanical status are unverified. Proof is needed to confirm the type and condition before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 68652,
+    "input_tokens": 2283,
+    "output_tokens": 826,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "5b7666f54d02cb1ab022396f1f347c42",
+    "error": null
+  }
+}

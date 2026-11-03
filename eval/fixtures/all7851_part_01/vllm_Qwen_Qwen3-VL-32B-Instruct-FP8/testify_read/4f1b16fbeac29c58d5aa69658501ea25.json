@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a used car engine with a black plastic valve cover, visible belts, pulleys, and some rust and grime. The engine is mounted on wooden blocks.",
+      "Photo 1 shows a closer view of the valve cover with 'VVT-i 16 VALVE' printed on it. The cover is cracked and has a piece of cloth or rag on it.",
+      "Photo 2 shows the front of the engine with a label that reads 'V6 2000 FOUR CAM 24 VVT-i'. The engine appears dirty with visible rust and wear on components like the alternator and intake manifold.",
+      "The engine has a 6-cylinder configuration based on the intake manifold and label.",
+      "The 'VVT-i' label suggests it is a Toyota engine, not Nissan, as VVT-i is Toyota's variable valve timing technology.",
+      "The seller claims it is a Nissan engine, but the visible branding contradicts this."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "V6 engine",
+      "brand": "Toyota",
+      "model": "V6 2000 FOUR CAM 24 VVT-i",
+      "read_from": [
+        "photo 2 label",
+        "photo 1 valve cover"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Nissan motors",
+        "verdict": "contradicted",
+        "evidence": "Photo 2 shows 'VVT-i' and 'V6 2000 FOUR CAM 24 VVT-i' on the engine label, which is Toyota branding. Photo 1 shows 'VVT-i 16 VALVE' on the valve cover, also Toyota-specific. Nissan uses VVEL or other tech, not VVT-i."
+      },
+      {
+        "claim": "Gasoline engines",
+        "verdict": "supported",
+        "evidence": "The engine has a typical gasoline engine configuration with intake manifold, spark plug wires (visible in photo 2), and no signs of diesel (e.g., no glow plugs or turbocharger typical of diesel)."
+      },
+      {
+        "claim": "Horsepower > High performance\u2606",
+        "verdict": "unverifiable_remote",
+        "evidence": "No horsepower rating is visible. The 'V6 2000 FOUR CAM 24' suggests a 2.0L V6 with 24 valves, which is not typically high performance. Performance claims cannot be verified from photos alone."
+      },
+      {
+        "claim": "classic\u2606 fairly used but like...",
+        "verdict": "unverified",
+        "evidence": "The engine shows visible wear, rust, and grime, consistent with 'fairly used'. 'Classic' is subjective and not verifiable from photos. No evidence of damage or major repairs is visible, but internal condition is unknown."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Internal engine damage (e.g., blown head gasket, worn bearings, cracked block)",
+        "proof": "A video showing the engine running with no smoke, steady idle, and no knocking sounds, or a compression test report.",
+        "if_unproven": "priced as not working or severely worn"
+      },
+      {
+        "risk": "Missing or damaged components (e.g., sensors, wiring harness, ECU)",
+        "proof": "A full view of the engine bay with all components attached, or a list of included parts.",
+        "if_unproven": "priced as incomplete or requiring parts"
+      },
+      {
+        "risk": "Mileage or usage history not disclosed",
+        "proof": "A service history or odometer reading from the original vehicle (if available).",
+        "if_unproven": "priced as unknown mileage, which reduces value"
+      }
+    ],
+    "proof_requests": [
+      "Video of the engine running smoothly with no smoke or knocking.",
+      "Photos of all included components (e.g., ECU, sensors, wiring harness).",
+      "Service history or mileage record if available."
+    ],
+    "decision": "price",
+    "reason": "The engine is identifiable as a Toyota V6 2000 FOUR CAM 24 VVT-i from visible labels. The seller's claim of 'Nissan' is contradicted by the branding. The engine appears used with visible wear, but no major damage is evident. Risks like internal damage or missing parts are unproven, so it is priced at worst case (as not working or incomplete) until proof is provided."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 81524,
+    "input_tokens": 2576,
+    "output_tokens": 984,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "4f1b16fbeac29c58d5aa69658501ea25",
+    "error": null
+  }
+}

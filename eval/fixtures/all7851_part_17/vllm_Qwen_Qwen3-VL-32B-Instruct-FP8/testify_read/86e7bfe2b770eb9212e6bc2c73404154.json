@@ -1,0 +1,91 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 and Photo 1 show a solar panel leaning against a wall, with two boxes in front of it.",
+      "The solar panel is rectangular, dark with grid lines, and has a white frame.",
+      "One box is labeled 'HITHIUM HeroEE' and 'HITHIUM' with a logo; it appears to be a battery or power system unit.",
+      "The other box is wrapped in plastic, with a label showing the 'HITHIUM' logo and recycling symbols.",
+      "The background includes a sign for 'ZICTECH ELECTRIC ENT' with a solar logo and RC number.",
+      "The photos appear to be taken in a showroom or retail space with marble-patterned walls.",
+      "No visible text on the solar panel itself indicates its wattage or brand.",
+      "No visible text on the battery or inverter unit indicates its capacity or model beyond 'HITHIUM HeroEE'."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar power system with battery and solar panel",
+      "brand": "HITHIUM",
+      "model": "HeroEE",
+      "read_from": [
+        "photo 0 box",
+        "photo 1 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "1000wh Lithium Battery System",
+        "verdict": "unverified",
+        "evidence": "The box is labeled 'HITHIUM HeroEE' but no capacity (e.g., 1000Wh) is visible on the box or any other part in the photos."
+      },
+      {
+        "claim": "200w Power Output",
+        "verdict": "unverifiable_remote",
+        "evidence": "No label or text on the solar panel or any component shows 200W output. The panel's specs are not visible."
+      },
+      {
+        "claim": "180w Solar panel",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible text or label on the solar panel indicates 180W. The panel's rating is not readable."
+      },
+      {
+        "claim": "Load: 1-6 Low Energy bulbs, 1 low...",
+        "verdict": "unverifiable_remote",
+        "evidence": "No load capacity or compatibility details are visible on any component. The system's inverter or battery does not show load specs."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery capacity is not 1000Wh as claimed",
+        "proof": "A clear photo of the battery label showing its capacity (e.g., 1000Wh or 1kWh).",
+        "if_unproven": "priced as lower capacity or unknown capacity, which reduces value."
+      },
+      {
+        "risk": "Solar panel is not 180W or 200W as claimed",
+        "proof": "A close-up photo of the solar panel's label showing its rated wattage.",
+        "if_unproven": "priced as lower wattage or unknown, reducing system output value."
+      },
+      {
+        "risk": "Inverter or system does not support the claimed load (e.g., 6 low-energy bulbs)",
+        "proof": "A photo of the inverter or battery unit showing its power output or load capacity rating.",
+        "if_unproven": "priced as unable to support claimed load, reducing utility value."
+      },
+      {
+        "risk": "System components are not genuine HITHIUM or are counterfeit",
+        "proof": "A close-up of the battery and solar panel labels showing serial numbers, model numbers, and manufacturer details.",
+        "if_unproven": "priced as potentially counterfeit, which reduces trust and value."
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the battery label showing capacity (e.g., 1000Wh).",
+      "Close-up photo of the solar panel label showing its wattage (e.g., 180W).",
+      "Photo of the inverter or system unit showing its power output and load capacity.",
+      "Photo of the battery and solar panel labels showing model numbers and serial numbers for authenticity."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The system's key specifications (battery capacity, solar panel wattage, load capacity) are not visible in the photos and cannot be verified remotely. Without proof, the item cannot be priced accurately, and risks of misrepresentation or counterfeit parts remain."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 25772,
+    "input_tokens": 2301,
+    "output_tokens": 987,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "86e7bfe2b770eb9212e6bc2c73404154",
+    "error": null
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Open laptop showing Windows 11 desktop with blue default wallpaper. Keyboard has backlit keys, visible stickers: Intel Core i9, NVIDIA GeForce RTX, 165Hz refresh rate, and a QR code sticker. HP logo visible on bezel. Background shows cardboard boxes, possibly in a store or warehouse.",
+      "Photo 1: Close-up of keyboard and palm rest. Backlit keys with purple/blue lighting. Stickers: Intel Core i9, NVIDIA GeForce RTX, 165Hz refresh rate, Microsoft Office (Chinese text), and a black sticker with Chinese characters (likely a reseller or distributor).",
+      "Photo 2: Another angle of the open laptop, similar to photo 0. Windows 11 desktop visible. HP logo on bezel. Stickers same as photo 0. Background shows cardboard boxes, one labeled 'Smart Transport'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "gaming laptop",
+      "brand": "HP",
+      "model": "Omen 16",
+      "read_from": [
+        "photo 0 screen bezel (HP logo)",
+        "photo 1 stickers (Intel Core i9, NVIDIA GeForce RTX, 165Hz)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP Omen gaming 16-K0xxx",
+        "verdict": "unverified",
+        "evidence": "Model number '16-K0xxx' is not visible in any photo. The 'Omen' branding is not visible, only HP logo. The '16' in 'Omen 16' is inferred from the 16-inch screen and '165Hz' sticker, but not confirmed."
+      },
+      {
+        "claim": "Core i9 12th generation",
+        "verdict": "unverified",
+        "evidence": "Intel Core i9 sticker is visible in photo 1, but no text indicates '12th generation'. The sticker does not specify the generation."
+      },
+      {
+        "claim": "512 SSD",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows the internal drive or system information. Cannot verify storage capacity from photos alone."
+      },
+      {
+        "claim": "16gb RAM",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows system information or RAM details. Cannot verify from photos."
+      },
+      {
+        "claim": "6gb Nvidia RTX 3060 dedicated graphics",
+        "verdict": "unverified",
+        "evidence": "NVIDIA GeForce RTX sticker is visible in photo 1, but no text specifies 'RTX 3060' or '6GB'. The sticker is generic and does not confirm model or VRAM."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Incorrect or outdated CPU generation (e.g., not 12th gen)",
+        "proof": "Photo of the CPU sticker or system information screen showing the exact model (e.g., i9-12900H).",
+        "if_unproven": "Priced as lower-generation CPU, which reduces value."
+      },
+      {
+        "risk": "Graphics card is not RTX 3060 or has less than 6GB VRAM",
+        "proof": "Photo of the GPU specifications from Device Manager or GPU-Z, or the exact sticker showing 'RTX 3060 6GB'.",
+        "if_unproven": "Priced as lower-tier GPU (e.g., RTX 3050 or 3060 with 3GB), which reduces value."
+      },
+      {
+        "risk": "Storage is not 512GB SSD or is a slower type (e.g., SATA instead of NVMe)",
+        "proof": "Photo of Disk Management or system information showing drive type and capacity.",
+        "if_unproven": "Priced as smaller or slower storage, reducing value."
+      },
+      {
+        "risk": "RAM is not 16GB or is not DDR5 (if expected)",
+        "proof": "Photo of system information or Task Manager showing RAM details.",
+        "if_unproven": "Priced as lower RAM capacity or slower type, reducing value."
+      },
+      {
+        "risk": "Laptop is not genuine or has been refurbished/repainted",
+        "proof": "Photo of the bottom chassis showing serial number and original HP Omen branding, or a full unboxing video.",
+        "if_unproven": "Priced as used/refurbished with unknown history, reducing value."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the bottom chassis showing the serial number and model name (e.g., 'Omen 16-K0xxx').",
+      "Photo of the system information screen (e.g., from Windows Settings or DirectX Diagnostic Tool) showing CPU, GPU, RAM, and storage details.",
+      "Photo of the GPU-Z or Device Manager screen showing exact GPU model and VRAM.",
+      "Photo of the Disk Management or system information showing storage type and capacity.",
+      "Photo of the BIOS screen or original box if available."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and key specifications (CPU generation, GPU model, RAM, storage) cannot be confirmed from the current photos. The stickers are generic and do not provide enough detail. Without proof of the exact specs, the item cannot be accurately priced, and risks of misrepresentation are high."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 96128,
+    "input_tokens": 2807,
+    "output_tokens": 1212,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "791501b38db35db37a13fe1aa9978270",
+    "error": null
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a red and black portable generator with a handle, wheels, and a fuel cap on top. A small black switch or button is visible on the top panel. A sticker is present but not legible.",
+      "Photo 1 shows the front side of the same generator, with 'MAXI' and 'E75KWH' clearly visible on the black frame. The generator has a black metal frame with wheels and a handle for portability.",
+      "The generator appears to be in used condition with some minor scuffs and dust. No visible damage or leaks.",
+      "No electrical outlets, control panel, or engine details are visible in either photo.",
+      "The seller's text claims it is a 9.3kva (7.5kw) key starter generator with 100% copper, but no such details are visible in the photos."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "portable generator",
+      "brand": "MAXI",
+      "model": "E75KWH",
+      "read_from": [
+        "photo 1 front frame"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "9.3kva (7.5kw) Key Starter Generator",
+        "verdict": "unverified",
+        "evidence": "The power rating is not visible in the photos. The model name 'E75KWH' suggests 7.5kW, but the kVA rating and key starter feature are not visible. The seller's text claims it, but no photo confirms it."
+      },
+      {
+        "claim": "100% Copper",
+        "verdict": "unverifiable_remote",
+        "evidence": "There is no visible evidence of the internal wiring or windings. This claim cannot be verified from photos alone."
+      },
+      {
+        "claim": "Rated power: 7.5 KW",
+        "verdict": "supported",
+        "evidence": "The model name 'E75KWH' in photo 1 implies 7.5kW, which matches the seller's claim. This is a common naming convention for generators."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Generator may not be functional or may have internal damage (e.g., worn engine, faulty starter, or damaged windings).",
+        "proof": "A video showing the generator starting and running, with sound and output voltage measured on a multimeter.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The '100% copper' claim may be false; the generator may use aluminum windings, which are cheaper and less efficient.",
+        "proof": "A close-up photo or video of the stator windings or a professional inspection report.",
+        "if_unproven": "priced as aluminum-wound, which reduces value"
+      },
+      {
+        "risk": "The key starter may not work or may be missing; the photos do not show the starter mechanism.",
+        "proof": "A close-up photo of the key starter switch and a video showing it in operation.",
+        "if_unproven": "priced as manual pull-start only, which reduces value"
+      },
+      {
+        "risk": "Fuel tank or engine may have leaks or corrosion not visible in the photos.",
+        "proof": "A close-up photo of the fuel tank, engine base, and exhaust area, ideally with the generator running.",
+        "if_unproven": "priced as potentially leaking or corroded"
+      }
+    ],
+    "proof_requests": [
+      "Video of the generator starting and running with sound and output voltage check.",
+      "Close-up photo of the key starter switch and control panel.",
+      "Close-up photo of the engine and fuel tank area to check for leaks or corrosion.",
+      "Photo or video of the stator windings to verify '100% copper' claim."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The generator's model and brand are identifiable, but critical claims like key starter, 100% copper, and functional status cannot be verified from the current photos. Hidden risks such as internal damage, false material claims, and non-functional starter affect pricing. Proof is needed to price accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 78650,
+    "input_tokens": 2757,
+    "output_tokens": 926,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "c4bf286088e420ffa281d7e72586807d",
+    "error": null
+  }
+}

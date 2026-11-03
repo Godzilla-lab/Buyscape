@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a rectangular solar panel with a white frame and black photovoltaic cells arranged in a grid. There is a watermark 'KINGS SOLAR INTEGRATED' across the panel.",
+      "Photo 1 shows a label with technical specifications for a 'Photovoltaic Module: SRF-300'.",
+      "The label lists electrical ratings: Maximum Power (Pmax) 300W, Voltage at Pmax 32.2V, Current at Pmax 9.20A, Open Circuit Voltage 38.8V, Short Circuit Current 9.80A.",
+      "The label also includes temperature coefficients, operating temperature range (-40\u00b0C to +85\u00b0C), application class (Class A), fire resistance (Class A), and certification marks (CE, ISO, CQC).",
+      "The label is photographed at an angle, slightly blurry, but text is mostly legible."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "solar panel",
+      "brand": "Kings Solar Integrated",
+      "model": "SRF-300",
+      "read_from": [
+        "photo 1 label: 'Photovoltaic Module: SRF-300'",
+        "photo 0 watermark: 'KINGS SOLAR INTEGRATED'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Kings solar energy deals in all kinds of solar energy, solar panels, inverters, solar chest freezer...",
+        "verdict": "unverified",
+        "evidence": "The seller's text claims a range of products, but only a solar panel is shown in the photos. No proof of inverters or solar chest freezers is visible."
+      },
+      {
+        "claim": "This is a solar panel",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows a solar panel, and photo 1 confirms it is a 'Photovoltaic Module'."
+      },
+      {
+        "claim": "Model is SRF-300",
+        "verdict": "supported",
+        "evidence": "Photo 1 label clearly states 'Photovoltaic Module: SRF-300'."
+      },
+      {
+        "claim": "Maximum Power (Pmax) is 300W",
+        "verdict": "supported",
+        "evidence": "Photo 1 label lists 'Maximum Power(Pmax) 300 W'."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The panel may be damaged or have defects not visible in the photos, such as microcracks in the cells or delamination.",
+        "proof": "A close-up photo of the panel surface under bright light, showing the entire grid of cells for cracks or discoloration.",
+        "if_unproven": "priced as potentially defective, which may reduce value"
+      },
+      {
+        "risk": "The panel may not be functional or may have degraded performance due to age or exposure.",
+        "proof": "A video or photo of the panel being tested under sunlight with a multimeter or power meter showing output matching the 300W rating.",
+        "if_unproven": "priced as not working or degraded, which may reduce value"
+      },
+      {
+        "risk": "The label may be fake or misapplied, and the panel may not be the SRF-300 model.",
+        "proof": "A photo of the back of the panel showing the manufacturer's serial number or QR code, or a close-up of the frame or junction box with brand/model markings.",
+        "if_unproven": "priced as unverified model, which may reduce value"
+      }
+    ],
+    "proof_requests": [
+      "A close-up photo of the entire panel surface under sunlight to check for cracks or damage.",
+      "A video or photo of the panel being tested with a multimeter or power meter to verify 300W output.",
+      "A photo of the back of the panel showing the serial number or any other manufacturer markings."
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a Kings Solar Integrated SRF-300 solar panel with 300W capacity, supported by the label in photo 1. While there are hidden risks (damage, functionality, authenticity), these are common for second-hand solar panels and can be priced at worst case. The photos provide sufficient information to assign a price based on the model and condition as seen."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 77417,
+    "input_tokens": 1715,
+    "output_tokens": 973,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "cdad99e7b9e0ccc70e945ce76a157e02",
+    "error": null
+  }
+}

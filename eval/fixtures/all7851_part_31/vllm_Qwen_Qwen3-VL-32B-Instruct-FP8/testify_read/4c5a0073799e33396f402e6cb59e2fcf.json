@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the front of a white truck cab with a Mercedes-Benz logo on the grille.",
+      "The cab has a single door visible, with a side mirror and a small badge below the door handle.",
+      "Photo 1 and 2 show the interior of the cab: a single driver's seat with fabric upholstery, a steering wheel, a manual gear stick, and a dashboard with multiple switches and vents.",
+      "The interior appears worn: the seat is torn, the floor is dirty and damaged, and the dashboard has visible wear and tear.",
+      "The windows are foggy or dirty, and the overall condition suggests heavy use or neglect.",
+      "No engine or undercarriage is visible in any photo."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "truck cab",
+      "brand": "Mercedes-Benz",
+      "model": "not readable",
+      "read_from": [
+        "photo 0 grille"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "A clean and neat car, everything working fine",
+        "verdict": "contradicted",
+        "evidence": "Photos 1 and 2 show a dirty, worn interior with torn seat and damaged floor, contradicting 'clean and neat'."
+      },
+      {
+        "claim": "Duty fully paid",
+        "verdict": "unverifiable_remote",
+        "evidence": "No documentation or official stamp visible in photos; cannot verify remotely."
+      },
+      {
+        "claim": "Engine working fine",
+        "verdict": "unverified",
+        "evidence": "No engine visible in any photo; no video or sound to verify operation."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine not working or in poor condition",
+        "proof": "Photo of engine bay with visible components and running test video or sound clip.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Hidden mechanical damage or wear",
+        "proof": "Undercarriage and chassis inspection photo or video.",
+        "if_unproven": "priced as high-risk, possibly non-functional"
+      },
+      {
+        "risk": "Interior damage affecting usability or safety",
+        "proof": "Close-up of seat, floor, and dashboard showing extent of wear.",
+        "if_unproven": "priced as worn and requiring repairs"
+      },
+      {
+        "risk": "Duty not paid or import issues",
+        "proof": "Copy of import documents or tax clearance certificate.",
+        "if_unproven": "priced as high-risk, possibly illegal to register"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the engine bay with engine running (video preferred).",
+      "Photo of the undercarriage and chassis.",
+      "Close-up of the interior damage (seat, floor, dashboard).",
+      "Copy of import documents or tax clearance certificate."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The truck's interior is visibly worn and dirty, contradicting the seller's claim of being 'clean and neat'. The engine and mechanical condition are unverified, and duty status cannot be confirmed remotely. Without proof of engine function, undercarriage condition, and import legality, a worst-case price cannot be determined."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 59828,
+    "input_tokens": 2156,
+    "output_tokens": 715,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "4c5a0073799e33396f402e6cb59e2fcf",
+    "error": null
+  }
+}

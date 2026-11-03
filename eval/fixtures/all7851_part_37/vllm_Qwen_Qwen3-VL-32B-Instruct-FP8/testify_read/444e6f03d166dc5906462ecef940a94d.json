@@ -1,0 +1,74 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the front of a product box for a UV sterilizer.",
+      "The box features an image of a white and black rectangular device labeled 'UV STERILIZER'.",
+      "The brand 'NEW G SIN PROFESSIONAL' is visible in the top left corner.",
+      "The model is stated as 'PRO UV IRON CERMIX' with model number 'PRO-0001' below it.",
+      "The box includes text: 'UV LIGHT KILL VIRUS MORE ACCURATE EASIER AND FASTER', 'Stay away from bacteria!', and 'NEW STYLE' badges.",
+      "The box appears to be new and unopened, with no visible damage.",
+      "The product is marketed for sterilizing barber tools and towels."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "UV sterilizer",
+      "brand": "NEW G SIN PROFESSIONAL",
+      "model": "PRO-0001",
+      "read_from": [
+        "photo 0 box top left",
+        "photo 0 box center right"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "UVR Sterilizing machine for keeping your barbing tool and towels clean and safe for use at all times",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows the product box with 'UV STERILIZER' and images of barber tools and towels, along with text promoting sterilization for safety."
+      },
+      {
+        "claim": "UV LIGHT KILL VIRUS MORE ACCURATE EASIER AND FASTER",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a marketing claim on the box; no technical data or proof is visible in the photo to verify its accuracy."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The device may be non-functional or defective (e.g., UV light not working, power issues).",
+        "proof": "A video or photo showing the device powered on with UV light emitting inside the chamber.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The product may be counterfeit or not as described (e.g., model number does not match actual device).",
+        "proof": "Photo of the actual device with the model number visible on the unit itself, not just the box.",
+        "if_unproven": "priced as lower-tier or generic model"
+      },
+      {
+        "risk": "The box may be opened or the product used previously, despite appearing new.",
+        "proof": "Photo of the sealed box from multiple angles, including the seal and any tamper-evident features.",
+        "if_unproven": "priced as used or with reduced value"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual device with model number visible on the unit.",
+      "Video or photo showing the device powered on with UV light active.",
+      "Photo of the sealed box from multiple angles, including any seals or tamper evidence."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable by brand and model from the box, but critical risks remain unproven: whether the device works, if it matches the model on the box, and if it is new. These affect pricing and must be verified before assigning a price."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 61992,
+    "input_tokens": 1576,
+    "output_tokens": 734,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "444e6f03d166dc5906462ecef940a94d",
+    "error": null
+  }
+}

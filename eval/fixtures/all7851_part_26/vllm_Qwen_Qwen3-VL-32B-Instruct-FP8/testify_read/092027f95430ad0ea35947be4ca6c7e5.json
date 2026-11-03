@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black inverter placed on top of a red and black battery.",
+      "The inverter has a digital display and control buttons, with the brand 'PURE' visible on the front.",
+      "The battery has a large red label with 'STAR PLUS' branding and text 'TALL TUBULAR BATTERY SP 22000 XB'.",
+      "The battery is labeled as '220 Ah' (ampere-hour) capacity, visible on the label.",
+      "The inverter is connected to the battery with thick cables.",
+      "The setup is placed on a tiled floor against a wall with a power socket visible.",
+      "The seller claims '1.5 kva inverter' and '2 pcs of 220 ah battery', but only one battery is visible in the photo."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "inverter and battery system",
+      "brand": "PURE",
+      "model": "not readable",
+      "read_from": [
+        "photo 0 front of inverter"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "1.5 kva inverter",
+        "verdict": "unverified",
+        "evidence": "The inverter's front panel does not show the kVA rating; only the brand 'PURE' is visible. No model or power rating is readable in photo 0."
+      },
+      {
+        "claim": "2 pcs of 220 ah battery",
+        "verdict": "contradicted",
+        "evidence": "Only one battery is visible in photo 0. The label on the battery reads 'SP 22000 XB' and '220 Ah', which supports the 220 Ah claim for one battery, but the '2 pcs' claim is not supported by the photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The inverter may not be 1.5 kVA as claimed.",
+        "proof": "A clear photo of the inverter's label or rating plate showing the kVA or wattage rating.",
+        "if_unproven": "priced as a lower-rated inverter (e.g., 1 kVA or less), which reduces value."
+      },
+      {
+        "risk": "Only one battery is shown, but the seller claims two.",
+        "proof": "A photo showing both batteries, or a photo of the second battery's label.",
+        "if_unproven": "priced as a single-battery system, which is significantly less valuable than a two-battery system."
+      },
+      {
+        "risk": "Battery condition is unknown; may be old or damaged.",
+        "proof": "Close-up photos of the battery terminals, casing, and any signs of leakage, corrosion, or swelling.",
+        "if_unproven": "priced as potentially degraded or low-capacity battery, reducing value."
+      },
+      {
+        "risk": "Inverter may be non-functional or have internal damage.",
+        "proof": "A video or photo showing the inverter powering a load or its display indicating normal operation.",
+        "if_unproven": "priced as possibly non-working, which reduces value."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the inverter's label or rating plate showing the kVA or wattage rating.",
+      "Photo of the second battery, if it exists, including its label.",
+      "Close-up photos of both battery terminals and casing for signs of damage or corrosion.",
+      "Video or photo of the inverter in operation, showing it powering a device or its display indicating normal function."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The inverter's power rating is not visible, and only one battery is shown despite the claim of two. Without proof of the inverter's 1.5 kVA rating and the existence of the second battery, the item cannot be accurately priced. The condition of both components is also unknown, which affects value."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 72583,
+    "input_tokens": 1932,
+    "output_tokens": 865,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "092027f95430ad0ea35947be4ca6c7e5",
+    "error": null
+  }
+}

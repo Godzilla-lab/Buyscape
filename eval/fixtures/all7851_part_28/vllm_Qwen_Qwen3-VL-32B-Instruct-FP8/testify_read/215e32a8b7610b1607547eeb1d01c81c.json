@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 and Photo 1 show the same scene: a corrugated metal sheet being produced or handled on a rolling machine in a workshop.",
+      "The sheet is black, with a wavy, ribbed profile typical of roofing sheets.",
+      "Two men are seated near the machine; one in a yellow shirt, the other in a grey hoodie and beanie.",
+      "The machine has a blue base and yellow components, with a control panel and warning labels.",
+      "Text overlay on both photos reads 'DESMART ALUMINUM CONCEPT'.",
+      "The environment appears to be an industrial or workshop setting with concrete floors and walls.",
+      "No visible branding or model numbers on the roofing sheet itself.",
+      "The sheet appears to be new and freshly produced, with no visible damage or wear."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "corrugated roofing sheet",
+      "brand": "Desmart",
+      "model": null,
+      "read_from": [
+        "photo 0 text overlay",
+        "photo 1 text overlay"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Desmart Aluminum roofing",
+        "verdict": "supported",
+        "evidence": "Text overlay in photo 0 and photo 1 reads 'DESMART ALUMINUM CONCEPT'."
+      },
+      {
+        "claim": "Roofing Made Simple With Desmart",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a marketing slogan; cannot be verified from photos alone."
+      },
+      {
+        "claim": "Building or renovating? Don\u2019t stress your roof.",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a promotional statement, not a factual claim about the product."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Material is not aluminum as claimed, but galvanized steel or another metal",
+        "proof": "Close-up photo of the sheet's edge or surface showing material composition, or a test for aluminum (e.g., spark test or density check).",
+        "if_unproven": "Priced as galvanized steel, which is typically cheaper than aluminum."
+      },
+      {
+        "risk": "Sheet is not new or has surface damage not visible in photos",
+        "proof": "Full-length side view of the sheet showing both ends and edges, and close-up of surface for scratches, dents, or coating defects.",
+        "if_unproven": "Priced as used or damaged, with potential discount for imperfections."
+      },
+      {
+        "risk": "Thickness or gauge of the sheet is not specified and may be substandard",
+        "proof": "Close-up of the sheet's edge with a ruler or caliper to measure thickness, or a label indicating gauge.",
+        "if_unproven": "Priced as standard thickness, but with lower value if thickness is unknown or suspected to be thin."
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the sheet's edge showing thickness or gauge.",
+      "Photo of the sheet's surface from multiple angles to check for defects.",
+      "Confirmation of material type (aluminum vs. steel) with a test or certificate.",
+      "Photo of the machine's control panel or any labels indicating specifications."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a corrugated roofing sheet, and the brand 'Desmart' is visible in the text overlay. However, critical details such as material composition, thickness, and condition cannot be confirmed from the current photos. These factors significantly affect pricing, so additional proof is required before a price can be assigned."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 60500,
+    "input_tokens": 2288,
+    "output_tokens": 799,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "215e32a8b7610b1607547eeb1d01c81c",
+    "error": null
+  }
+}

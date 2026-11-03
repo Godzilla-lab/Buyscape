@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a Philips kettle box, front view, with the kettle image and product details.",
+      "The brand 'PHILIPS' is visible in large blue letters on the box and on the kettle image.",
+      "The product is labeled as 'Kettle 5000 Series'.",
+      "Specifications on the box: 2200W, 1.7L capacity, auto off function, 2-year warranty.",
+      "Text on box: 'Durable crystal clear glass with intuitive sensor light'.",
+      "The kettle in the image has a transparent glass body, silver base and lid, black handle.",
+      "The box is in good condition, appears new, with no visible damage or signs of use.",
+      "The seller's text matches the box claims: 'Durable crystal clear glass with intuitive sensor light', 'Auto off', '2200w'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "electric kettle",
+      "brand": "PHILIPS",
+      "model": "5000 Series",
+      "read_from": [
+        "photo 0 box label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Durable crystal clear glass with intuitive sensor light",
+        "verdict": "supported",
+        "evidence": "Photo 0: text on box and image of kettle show 'Durable crystal clear glass with intuitive sensor light'."
+      },
+      {
+        "claim": "Auto off",
+        "verdict": "supported",
+        "evidence": "Photo 0: box icon and text state 'Auto off function'."
+      },
+      {
+        "claim": "2200w",
+        "verdict": "supported",
+        "evidence": "Photo 0: box icon and text state '2200W'."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The kettle may be a counterfeit or not genuine Philips product.",
+        "proof": "A clear photo of the actual kettle, not the box, showing the brand and model on the base or handle, and possibly a serial number or QR code.",
+        "if_unproven": "Priced as a generic kettle, not a Philips, due to unverified authenticity."
+      },
+      {
+        "risk": "The kettle may be damaged or used, despite the box appearing new.",
+        "proof": "A photo of the actual kettle inside the box, showing the glass, base, and handle for signs of scratches, cracks, or wear.",
+        "if_unproven": "Priced as potentially damaged or used, with lower value."
+      },
+      {
+        "risk": "The kettle may not be compatible with Nigerian voltage (220-240V) or plug type (G type), though 2200W suggests 220V compatibility.",
+        "proof": "A close-up photo of the kettle's power base showing the plug type and voltage rating.",
+        "if_unproven": "Priced as potentially incompatible, with lower value."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual kettle inside the box, showing the base, handle, and glass.",
+      "Close-up of the kettle's power base showing the plug type and voltage rating.",
+      "Photo of the kettle's serial number or QR code, if any."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identified as a Philips 5000 Series kettle from the box, and the seller's claims are supported by the box text. However, without seeing the actual kettle, risks of counterfeit, damage, or incompatibility remain. These risks affect pricing and must be verified before assigning a price."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 63805,
+    "input_tokens": 1933,
+    "output_tokens": 807,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "71b528d60955e5139a9a12f100eb6e77",
+    "error": null
+  }
+}

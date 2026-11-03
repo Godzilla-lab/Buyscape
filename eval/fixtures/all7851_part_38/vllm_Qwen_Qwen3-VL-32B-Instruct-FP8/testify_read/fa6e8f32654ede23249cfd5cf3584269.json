@@ -1,0 +1,100 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the system information window of Windows 11 Pro, listing the model as 'HP EliteBook x360 1030 G7 Notebook PC' and the processor as 'Intel(R) Core(TM) i7-10810U CPU @ 1.10GHz, 1608 Mhz, 6 Cores, 12 Logical Processors'.",
+      "Photo 1 shows the laptop open, displaying the Windows 11 default wallpaper, with the HP logo visible on the bottom bezel and 'ELITEBOOK' engraved on the palm rest.",
+      "Photo 2 shows the laptop in a partially folded position, confirming the 360-degree hinge design, with the screen tilted back over the keyboard."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "EliteBook x360 1030 G7",
+      "read_from": [
+        "photo 0 system information window"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP EliteBook x360 1030 G7",
+        "verdict": "supported",
+        "evidence": "Photo 0: System Model field in Windows system information window reads 'HP EliteBook x360 1030 G7 Notebook PC'."
+      },
+      {
+        "claim": "Core i7 10th generation",
+        "verdict": "supported",
+        "evidence": "Photo 0: Processor field lists 'Intel(R) Core(TM) i7-10810U CPU', which is a 10th generation Core i7 processor."
+      },
+      {
+        "claim": "16gb ram",
+        "verdict": "unverified",
+        "evidence": "Photo 0 does not show RAM information; only processor, OS, and system model are visible. RAM is not listed in the visible fields."
+      },
+      {
+        "claim": "512gb ssd",
+        "verdict": "unverified",
+        "evidence": "Photo 0 does not show storage information; no disk or SSD capacity is visible in the system information window."
+      },
+      {
+        "claim": "Touchscreen x360",
+        "verdict": "supported",
+        "evidence": "Photo 2 shows the screen folded back over the keyboard, confirming the 360-degree hinge. The screen is active and displaying content, indicating it is a touchscreen (as per typical x360 design)."
+      },
+      {
+        "claim": "Face id",
+        "verdict": "unverified",
+        "evidence": "No camera or facial recognition hardware is visible in any photo. The system information does not mention Windows Hello or IR camera. Cannot confirm presence of Face ID."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "RAM is not 16GB as claimed",
+        "proof": "Photo showing the system information window with the 'Installed Physical Memory' field, or a screenshot from Task Manager or Device Manager showing RAM.",
+        "if_unproven": "priced as having less than 16GB RAM, which reduces value"
+      },
+      {
+        "risk": "Storage is not 512GB SSD as claimed",
+        "proof": "Photo showing the system information window with the 'Device Manager' or 'Disk Management' view, or a screenshot showing the SSD capacity.",
+        "if_unproven": "priced as having smaller or HDD storage, which reduces value"
+      },
+      {
+        "risk": "Face ID not functional or not present",
+        "proof": "Photo showing the front camera or IR sensor, or a video clip demonstrating Windows Hello facial recognition login.",
+        "if_unproven": "priced as lacking biometric login, which reduces value"
+      },
+      {
+        "risk": "Screen damage or dead pixels not visible in photos",
+        "proof": "Photo showing the screen with a solid color (e.g., white or black) to reveal dead pixels or cracks.",
+        "if_unproven": "priced as potentially having screen defects, which reduces value"
+      },
+      {
+        "risk": "Battery health or charge cycle count not disclosed",
+        "proof": "Photo showing the battery information from Windows Power Management or a battery health tool.",
+        "if_unproven": "priced as having degraded battery, which reduces value"
+      }
+    ],
+    "proof_requests": [
+      "Photo of system information showing installed RAM and storage capacity.",
+      "Photo or video demonstrating Face ID login or showing the IR camera.",
+      "Photo of the screen with a solid white or black background to check for dead pixels or damage.",
+      "Photo showing battery health or charge cycle count."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and processor are confirmed, but key claims about RAM, SSD, and Face ID are unverified. Hidden risks like screen defects and battery health cannot be assessed from current photos. Price cannot be determined accurately without proof of these specifications and conditions."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 91824,
+    "input_tokens": 2411,
+    "output_tokens": 1104,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "fa6e8f32654ede23249cfd5cf3584269",
+    "error": null
+  }
+}

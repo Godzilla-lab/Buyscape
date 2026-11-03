@@ -1,0 +1,84 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Open laptop showing keyboard, trackpad, and screen. ThinkPad logo visible on lower right of palm rest. Red TrackPoint present. 'Intel Core i7' and 'Windows 11' stickers on lower left. Screen is off, reflecting surroundings. Background is patterned wooden surface.",
+      "Photo 1: Identical to photo 0, same angle and details. No new information.",
+      "Photo 2: Closed laptop, showing lid. ThinkPad logo visible on lower right. A small white sticker with '02.23' and 'DACHEN' on upper left. Background same as before. No visible damage or wear.",
+      "All photos show a blue/grey laptop, consistent with ThinkPad T14s color options. No ports, hinges, or underside visible. No signs of liquid damage or major scratches."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Lenovo",
+      "model": "ThinkPad T14s Gen 3",
+      "read_from": [
+        "seller's text",
+        "photo 0: ThinkPad logo on palm rest",
+        "photo 2: ThinkPad logo on lid"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Lenovo Thinkpad T14s Gen 3 Laptop",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 2 show ThinkPad logo; seller's text matches known model naming. The design (keyboard, TrackPoint, palm rest) is consistent with T14s Gen 3."
+      },
+      {
+        "claim": "Core i7 13th generation",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows 'Intel Core i7' sticker, but does not specify generation. The sticker is generic and could be from any i7 generation. No BIOS or system info visible."
+      },
+      {
+        "claim": "512ssd 16gb ram",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal components visible. No system information or disk/ram labels shown. Cannot verify without opening or booting."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The laptop may not have a 13th gen Core i7 processor",
+        "proof": "Photo of BIOS screen or system information showing CPU model (e.g., Intel Core i7-1365U or similar).",
+        "if_unproven": "Priced as if it has a lower-generation i7 or non-i7 processor, which reduces value."
+      },
+      {
+        "risk": "The SSD may not be 512GB or RAM may not be 16GB",
+        "proof": "Photo of system information screen showing storage and RAM details, or a screenshot of disk management.",
+        "if_unproven": "Priced as if it has less storage or RAM, which reduces value."
+      },
+      {
+        "risk": "The laptop may have hidden damage (e.g., screen dead pixels, hinge issues, liquid damage)",
+        "proof": "Video of screen turning on and displaying full color, close-up of hinges, and underside showing no liquid damage.",
+        "if_unproven": "Priced as if screen or hinges are faulty, which reduces value."
+      },
+      {
+        "risk": "Battery health may be poor or non-functional",
+        "proof": "Video of battery charging and discharging, or screenshot of battery health from Windows Power Management.",
+        "if_unproven": "Priced as if battery is dead or degraded, which reduces value."
+      }
+    ],
+    "proof_requests": [
+      "Video of the laptop turning on and showing the desktop with system information (CPU, RAM, SSD).",
+      "Close-up photo or video of the BIOS screen showing CPU model.",
+      "Video of screen displaying full color and movement to check for dead pixels or flickering.",
+      "Photo or video of the underside and hinges to check for damage.",
+      "Screenshot or video of battery health status."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identifiable as ThinkPad T14s Gen 3, but critical claims about CPU generation, RAM, and SSD capacity cannot be verified from current photos. Hidden risks like screen, battery, and internal damage are also unproven. Without proof, the item cannot be priced accurately and must be evaluated further."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 79107,
+    "input_tokens": 2797,
+    "output_tokens": 974,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "dee84d4c9353256107d1aacb377d836d",
+    "error": null
+  }
+}

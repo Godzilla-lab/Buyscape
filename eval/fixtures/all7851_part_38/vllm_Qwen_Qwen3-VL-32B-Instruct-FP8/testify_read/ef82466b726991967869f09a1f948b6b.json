@@ -1,0 +1,64 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black car battery with a label on the top right side. The label reads 'SOLAR POWER' with a sun logo. Below it, the model number 'SME 5751' and specifications '12V 75AH' are visible. The label also includes 'RESERVE CAPACITY (RC) 170'. The battery has two terminals on the left side, with 'Korea Technology' embossed on the cover between them. The surface is dusty and shows minor wear.",
+      "Photo 1 shows the same battery from a side angle, held by a hand. The label is visible again, showing 'SOLAR POWER', 'MAINTENANCE FREE', 'SME 5751', '12V 75AH', and 'RESERVE CAPACITY (RC) 170'. The side of the battery has a ribbed design. The battery appears to be intact with no visible cracks or leaks. The background is a dusty ground."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car battery",
+      "brand": "SOLAR POWER",
+      "model": "SME 5751",
+      "read_from": [
+        "photo 0 label",
+        "photo 1 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Car battery works very well and strong.",
+        "verdict": "unverified",
+        "evidence": "No visual proof of functionality. The battery appears physically intact, but there is no test or load demonstration. The seller's claim cannot be verified from photos alone."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery may be dead or have low charge despite appearing intact.",
+        "proof": "A video showing the battery being tested with a multimeter or connected to a car to start the engine.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Battery may have internal damage or sulfation not visible externally.",
+        "proof": "A close-up of the battery terminals and casing for corrosion or swelling, and a load test video.",
+        "if_unproven": "priced as potentially degraded"
+      },
+      {
+        "risk": "Battery may be counterfeit or mislabeled.",
+        "proof": "A clear shot of the label with serial number and manufacturing date, and a comparison with official product images.",
+        "if_unproven": "priced as unverified brand"
+      }
+    ],
+    "proof_requests": [
+      "Video of the battery being tested with a multimeter or connected to a car to start the engine.",
+      "Close-up of the battery terminals and casing for signs of corrosion or swelling.",
+      "Clear shot of the label showing serial number and manufacturing date."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The battery is identifiable by brand and model, but its functionality cannot be confirmed from the photos. The seller claims it works well, but this is unverified. Hidden risks include internal damage, low charge, or counterfeiting. Proof of functionality and condition is required before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 58420,
+    "input_tokens": 2728,
+    "output_tokens": 681,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "ef82466b726991967869f09a1f948b6b",
+    "error": null
+  }
+}

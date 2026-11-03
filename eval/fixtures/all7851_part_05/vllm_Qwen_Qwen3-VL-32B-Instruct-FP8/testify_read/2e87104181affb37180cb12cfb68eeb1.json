@@ -1,0 +1,73 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Two blue car batteries are shown side by side in both photos.",
+      "The brand 'BOSCH' is clearly visible in red text on the side and top of both batteries.",
+      "The model 'S4 013' is printed on both batteries, along with specifications: '800A (EN)', '95Ah 12V'.",
+      "The batteries appear new and sealed, with no visible damage or wear.",
+      "Watermark 'EAGLE PAWA BATTERIES POSTED ON JIJI' is present on both photos.",
+      "The batteries are placed on a tiled or stone floor, suggesting an outdoor or workshop setting."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car battery",
+      "brand": "BOSCH",
+      "model": "S4 013",
+      "read_from": [
+        "photo 0 side label",
+        "photo 1 top label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "100ah bosch from Germany car battery",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 and photo 1 show '95Ah 12V' on the label, not 100Ah. The origin 'from Germany' is unverifiable_remote as no country of origin is visible on the label."
+      },
+      {
+        "claim": "3 years guarantee",
+        "verdict": "unverifiable_remote",
+        "evidence": "No warranty label, document, or text in the photos confirms a 3-year guarantee. The claim cannot be verified from the images alone."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery may be counterfeit or not genuine Bosch",
+        "proof": "A close-up of the barcode and serial number, along with a scan or verification from Bosch's official website or distributor.",
+        "if_unproven": "Priced as potentially counterfeit, which would reduce value significantly."
+      },
+      {
+        "risk": "Battery may be used or not new despite appearance",
+        "proof": "A video showing the battery being opened or a close-up of the terminals and casing for signs of corrosion or use.",
+        "if_unproven": "Priced as new, but with a discount for potential hidden use or damage."
+      },
+      {
+        "risk": "Battery may not be from Germany as claimed",
+        "proof": "A clear shot of the manufacturing label or serial number that includes country of origin, or a certificate of origin.",
+        "if_unproven": "Priced as origin unverified, which may affect value in the market."
+      }
+    ],
+    "proof_requests": [
+      "Close-up of the barcode and serial number for verification.",
+      "Video showing the battery being opened or inspection of terminals and casing.",
+      "Proof of origin or warranty document if available."
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a Bosch S4 013 car battery with 95Ah capacity. While the seller's claim of 100Ah is contradicted by the label, and the 3-year guarantee is unverifiable, the item can still be priced at its worst case (as a genuine 95Ah battery with no warranty). Hidden risks like counterfeit or used condition are noted but do not prevent pricing, as the item is clearly a known model."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 60245,
+    "input_tokens": 2489,
+    "output_tokens": 743,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "2e87104181affb37180cb12cfb68eeb1",
+    "error": null
+  }
+}

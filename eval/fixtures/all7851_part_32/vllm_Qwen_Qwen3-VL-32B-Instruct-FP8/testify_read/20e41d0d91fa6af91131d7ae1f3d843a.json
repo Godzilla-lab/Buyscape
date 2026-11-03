@@ -1,0 +1,92 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Open laptop showing Windows System > About screen. Screen displays: 12th Gen Intel Core i7-12700H, 32.0 GB RAM, 16 GB Graphics, 954 GB Storage. Keyboard has MSI and NVIDIA RTX stickers. Palm rest has a 'STEALTH GAMES' sticker with a QR code and 'HDMI' label. Watermark 'POSTED ON JIJI HEDGE COMPUTERS' is overlaid.",
+      "Photo 1: Closed laptop lid, dark blue/black. MSI dragon logo centered. White sticker on top right corner with handwritten text: 'MSI STEALTH GS66', 'i7 12700H', '32/16 (3200MHz)', 'NVIDIA GeForce RTX 3080', '954GB SSD', 'VIN: K221101010F2'. Watermark same as photo 0.",
+      "Photo 2: Same as photo 0, identical view of open laptop with System > About screen. No new information."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "gaming laptop",
+      "brand": "MSI",
+      "model": "Stealth GS66 12UH",
+      "read_from": [
+        "photo 1 sticker",
+        "photo 0 screen text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "The msi stealth gs66 12uh is a high-performance, ultra-slim 15.6-inch gaming and creator laptop",
+        "verdict": "supported",
+        "evidence": "Photo 1 sticker and photo 0 screen confirm model as MSI Stealth GS66. The 'STEALTH GAMES' sticker and RTX 3080 GPU (from sticker) support 'gaming and creator' use. 'Ultra-slim' is unverifiable_remote, but not contradicted."
+      },
+      {
+        "claim": "12th Gen Intel Core i7-12700H processor",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 2 System > About screen clearly show '12th Gen Intel Core i7-12700H'."
+      },
+      {
+        "claim": "32GB RAM",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 2 System > About screen show '32.0 GB' under 'Installed RAM'."
+      },
+      {
+        "claim": "NVIDIA GeForce RTX 3080",
+        "verdict": "supported",
+        "evidence": "Photo 1 sticker explicitly states 'NVIDIA GeForce RTX 3080'."
+      },
+      {
+        "claim": "954GB SSD",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 2 System > About screen show '954 GB' under 'Storage'."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The laptop may have been tampered with or have a cloned BIOS/Windows activation (common in second-hand laptops in Nigeria)",
+        "proof": "A clear shot of the laptop's BIOS screen showing the model and serial number, or a screenshot of Windows activation status and serial number.",
+        "if_unproven": "Priced as potentially non-genuine or with activation issues, which reduces value significantly."
+      },
+      {
+        "risk": "The RTX 3080 GPU may be a downgraded or non-functional unit (e.g., replaced with a lower-tier card or disabled)",
+        "proof": "A screenshot of GPU-Z or DirectX Diagnostic Tool showing the actual GPU model and VRAM, or a video of GPU stress test (e.g., FurMark) showing stable performance.",
+        "if_unproven": "Priced as if GPU is not RTX 3080, or as potentially non-functional, which reduces value."
+      },
+      {
+        "risk": "The 32GB RAM may be a combination of soldered and upgradable sticks, and the 16GB graphics may be shared memory (not dedicated VRAM)",
+        "proof": "A screenshot of Task Manager or Resource Monitor showing actual GPU memory usage, or a photo of the RAM slots (if accessible) to confirm configuration.",
+        "if_unproven": "Priced as if RAM is not fully 32GB or GPU has less than 16GB dedicated VRAM, which reduces value."
+      },
+      {
+        "risk": "The 954GB SSD may be a partitioned drive or have bad sectors, or may be a slower SATA drive masquerading as NVMe",
+        "proof": "A screenshot of CrystalDiskInfo or similar tool showing drive health, type (NVMe/SATA), and actual capacity, or a speed test result.",
+        "if_unproven": "Priced as if SSD is slower or has reduced capacity, which reduces value."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of BIOS showing model and serial number.",
+      "Screenshot of GPU-Z or DirectX Diagnostic Tool showing GPU details.",
+      "Screenshot of Task Manager or Resource Monitor showing GPU memory usage.",
+      "Screenshot of CrystalDiskInfo or speed test for the SSD.",
+      "Video of the laptop running a GPU stress test (e.g., FurMark) for 5 minutes."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and key specs are supported by the photos, but critical hidden risks related to authenticity, GPU functionality, RAM configuration, and SSD health cannot be verified remotely. These risks significantly affect value and must be proven before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 98864,
+    "input_tokens": 3250,
+    "output_tokens": 1245,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "20e41d0d91fa6af91131d7ae1f3d843a",
+    "error": null
+  }
+}

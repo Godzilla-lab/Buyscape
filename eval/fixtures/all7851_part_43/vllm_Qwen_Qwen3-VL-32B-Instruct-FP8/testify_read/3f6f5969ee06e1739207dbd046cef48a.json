@@ -1,0 +1,95 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: A hand holds a pink smartphone vertically, showing the side profile. A sticker with '5 DAY TUNEZ' and 'Danny Tunez Gadgets' is visible in the background. The phone has a white protective film or sticker on the side.",
+      "Photo 1: The back of the same pink smartphone is shown. It has a dual-camera setup in a pill-shaped module, an Apple logo, and a white sticker with printed details: 'Model iPhone 16 Plus', 'IMEI: 356919156555240', 'Color: Pink', 'Storage: 256GB', 'IN Grade A', 'Battery 94%', and a barcode. The phone appears to be in a protective case or has a protective film.",
+      "Photo 2: The front of the phone is shown, covered by a white protective film or screen protector. The top edge shows a notch, typical of recent iPhones. The background sticker is the same as in the other photos."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "iPhone 16 Plus",
+      "brand": "Apple",
+      "model": "iPhone 16 Plus",
+      "read_from": [
+        "photo 1 sticker"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "iPhone 16plus eSIM 256gig available for buy now pay later",
+        "verdict": "unverified",
+        "evidence": "The sticker in photo 1 confirms 'iPhone 16 Plus' and '256GB'. The 'eSIM' claim is unverifiable remotely as it requires checking the phone's settings. 'Buy now pay later' is a sales term, not a product attribute, and cannot be verified from photos."
+      },
+      {
+        "claim": "Model iPhone 16 Plus",
+        "verdict": "supported",
+        "evidence": "Photo 1 sticker clearly states 'Model iPhone 16 Plus'."
+      },
+      {
+        "claim": "256GB",
+        "verdict": "supported",
+        "evidence": "Photo 1 sticker states 'Storage 256GB'."
+      },
+      {
+        "claim": "Color: Pink",
+        "verdict": "supported",
+        "evidence": "Photo 1 sticker states 'Color: Pink', and the phone's back is visibly pink."
+      },
+      {
+        "claim": "Battery 94%",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo 1 sticker claims 'Battery 94%', but this cannot be verified remotely without checking the phone's settings or battery health. The sticker may be falsified."
+      },
+      {
+        "claim": "IN Grade A",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo 1 sticker states 'IN Grade A', but this is a subjective condition claim that cannot be verified from photos alone. The phone may have hidden damage or wear."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The phone may be a counterfeit or rebranded device, not a genuine iPhone 16 Plus.",
+        "proof": "A clear shot of the phone's screen displaying the Settings > General > About section, showing the model name and serial number, and a shot of the original box with matching serial number.",
+        "if_unproven": "Priced as a counterfeit or non-genuine device, which would significantly reduce value."
+      },
+      {
+        "risk": "The battery health claim of 94% may be false or inaccurate.",
+        "proof": "A screenshot from the phone's Settings > Battery > Battery Health showing the actual battery health percentage.",
+        "if_unproven": "Priced as if battery health is unknown, which could be lower than claimed, reducing value."
+      },
+      {
+        "risk": "The phone may have hidden physical damage, scratches, or screen issues not visible in the photos.",
+        "proof": "A close-up video or photo of the entire front and back, including edges, under bright light, showing any cracks, scratches, or discoloration.",
+        "if_unproven": "Priced as if in unknown condition, which may be worse than Grade A, reducing value."
+      },
+      {
+        "risk": "The IMEI number may be invalid, blacklisted, or associated with a stolen device.",
+        "proof": "A screenshot of the IMEI check result from a trusted source (e.g., Apple's official website or Nigerian NCC database).",
+        "if_unproven": "Priced as if IMEI is unverified, which could mean the phone is blacklisted or invalid, reducing value."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of Settings > General > About showing model and serial number.",
+      "Screenshot of Settings > Battery > Battery Health showing actual battery percentage.",
+      "Close-up video or photos of the front and back under bright light to check for damage.",
+      "Screenshot of IMEI check result from a trusted source."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identified as an iPhone 16 Plus from the sticker in photo 1, but critical claims like battery health, condition grade, and authenticity cannot be verified remotely. Hidden risks such as counterfeit, blacklisted IMEI, or hidden damage significantly affect value. Proof is required to price accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 94675,
+    "input_tokens": 2785,
+    "output_tokens": 1174,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "3f6f5969ee06e1739207dbd046cef48a",
+    "error": null
+  }
+}

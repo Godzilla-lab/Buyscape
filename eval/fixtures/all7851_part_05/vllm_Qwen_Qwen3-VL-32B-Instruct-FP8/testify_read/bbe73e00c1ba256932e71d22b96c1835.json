@@ -1,0 +1,69 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the back of a silver laptop with the HP logo and a watermark 'ADELEKE OLUGBENGA'. The surface is heavily scratched and dusty.",
+      "Photo 1 shows the side of the same laptop, with visible ports (USB, HDMI, etc.) and a power cable plugged in. The laptop is closed and resting on a patterned surface.",
+      "Photo 2 is a screenshot of the Windows 'About' page showing system specs: Intel(R) Core(TM) i5-7200U CPU @ 2.50GHz, 8.00 GB RAM, Intel HD Graphics 620, 466 GB storage. The device name is 'CONQUEROR', and the model is listed as 'HP Pavilion x360 Convertible'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "HP Pavilion x360 convertible laptop",
+      "brand": "HP",
+      "model": "Pavilion x360 Convertible",
+      "read_from": [
+        "photo 2 screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Used HP pavilion x360 convertible - core i5 7th Gen laptop",
+        "verdict": "supported",
+        "evidence": "Photo 2 shows the model as 'HP Pavilion x360 Convertible' and the processor as 'Intel(R) Core(TM) i5-7200U', which is 7th Gen."
+      },
+      {
+        "claim": "Conditions: Used, faulty",
+        "verdict": "unverified",
+        "evidence": "The photos show heavy wear and dust, but no visible signs of damage or malfunction. The 'faulty' claim cannot be confirmed from photos alone."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The laptop may not power on or may have hardware faults (e.g., screen, keyboard, battery, touchpad) despite being plugged in.",
+        "proof": "A video showing the laptop powering on, booting into Windows, and demonstrating touch screen and keyboard functionality.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The storage may be failing or corrupted, as 277 GB of 466 GB is used, but no health check is visible.",
+        "proof": "A screenshot of the disk management tool or a SMART status check.",
+        "if_unproven": "priced as potentially failing storage"
+      },
+      {
+        "risk": "The screen may have dead pixels, cracks, or touch issues, which are not visible in the photos.",
+        "proof": "A video showing the screen displaying full color gradients and touch input working.",
+        "if_unproven": "priced as screen may be faulty"
+      }
+    ],
+    "proof_requests": [
+      "Video of the laptop powering on, booting into Windows, and demonstrating touch screen and keyboard functionality.",
+      "Screenshot of disk health (SMART status) or disk management.",
+      "Video showing screen display and touch functionality."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and specs are confirmed from the screenshot, but the 'faulty' condition cannot be verified. Critical risks like power, screen, and storage health are unproven and must be demonstrated before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 60992,
+    "input_tokens": 2164,
+    "output_tokens": 732,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "bbe73e00c1ba256932e71d22b96c1835",
+    "error": null
+  }
+}

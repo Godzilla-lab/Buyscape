@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a laptop screen with a Windows login screen, blue background, and a cracked screen visible on the top-left corner. The keyboard is silver with visible wear.",
+      "Photo 1 shows the laptop open with a desktop background of a green and blue map. The keyboard is silver, and the word 'SPECTRE' is visible on the lower left of the keyboard deck. The screen appears to be on and functional.",
+      "Photo 2 shows the closed lid of the laptop, which is silver and heavily scratched and worn. The brand 'HEWLETT-PACKARD' is visible vertically on the lid."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Hewlett-Packard",
+      "model": "Spectre",
+      "read_from": [
+        "photo 1 keyboard deck",
+        "photo 2 lid"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Used laptop, only fault is battery and cracked screen",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows a cracked screen. The laptop is powered on in photos 0 and 1, suggesting it works, but the seller states the battery is faulty, which cannot be verified remotely."
+      },
+      {
+        "claim": "screen still works perfectly",
+        "verdict": "supported",
+        "evidence": "Photos 0 and 1 show the screen displaying content clearly, indicating functionality despite the crack."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery is faulty and may not hold a charge",
+        "proof": "A video or photo showing the laptop running on battery power, or a screenshot of battery health from the system settings.",
+        "if_unproven": "priced as not working on battery, requiring constant power connection"
+      },
+      {
+        "risk": "Internal damage from the cracked screen affecting display or touch functionality",
+        "proof": "A close-up video of the screen showing no dead pixels, flickering, or touch response (if touch screen) under different lighting and content.",
+        "if_unproven": "priced as screen may have hidden defects beyond the visible crack"
+      },
+      {
+        "risk": "Keyboard or trackpad damage not visible in photos",
+        "proof": "A video showing all keys being pressed and the trackpad being used.",
+        "if_unproven": "priced as keyboard/trackpad may be unresponsive or damaged"
+      },
+      {
+        "risk": "General wear and tear or internal component failure due to age or use",
+        "proof": "A system diagnostic report or video showing the laptop running a stress test or booting up without errors.",
+        "if_unproven": "priced as potentially unreliable due to unknown internal condition"
+      }
+    ],
+    "proof_requests": [
+      "Video of the laptop running on battery power to verify battery functionality.",
+      "Close-up video of the screen under different content to check for dead pixels or flickering.",
+      "Video showing all keyboard keys and trackpad functionality.",
+      "System diagnostic report or boot-up video to confirm internal health."
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a Hewlett-Packard Spectre laptop. The seller's claims about the cracked screen and battery fault are supported by the photos and description. The screen is functional, and the laptop is powered on. Hidden risks related to battery, internal damage, and peripherals are noted, but the item can be priced at its worst case (non-functional battery, potential screen issues, and possible keyboard/trackpad problems) based on visible evidence and seller claims."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 63107,
+    "input_tokens": 2575,
+    "output_tokens": 787,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "765e8cc215a15de9e6159d69693d0786",
+    "error": null
+  }
+}

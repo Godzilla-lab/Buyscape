@@ -1,0 +1,74 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 and Photo 1 are identical, showing stacked blue boxes labeled 'High Quality Cookware' and 'TORNADO'.",
+      "Each box displays an image of a 7-piece cookware set: three pots with lids and one frypan.",
+      "Text on the box lists: '20CM, 22CM, 24CM CASSEROLE WITH GLASS LID' and '24CM FRY PAN WITHOUT LID'.",
+      "The brand name 'TORNADO' is visible in large yellow letters on the box.",
+      "The boxes are stacked in a retail or storage environment, with other products visible in the background.",
+      "No actual cookware is shown outside the box; only the packaging is visible.",
+      "The seller claims '4 pots & 1 frypan', but the box shows 3 pots and 1 frypan (7 pieces total)."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "7-piece cookware set",
+      "brand": "TORNADO",
+      "model": null,
+      "read_from": [
+        "photo 0 box front",
+        "photo 1 box front"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Blue carton tornado non-stick 4 pots & 1 frypan cookware set",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 and Photo 1 show the box lists 3 pots (20cm, 22cm, 24cm) and 1 frypan, totaling 7 pieces, not 4 pots. The brand 'TORNADO' is visible, but the 'non-stick' claim cannot be verified from the box alone."
+      },
+      {
+        "claim": "very neat & heavy is available",
+        "verdict": "unverifiable_remote",
+        "evidence": "The condition 'very neat' and weight 'heavy' cannot be assessed from the box photos alone. The cookware is not shown outside the packaging."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The cookware may not be non-stick as claimed.",
+        "proof": "A close-up photo of the interior surface of one of the pots or frypan showing the coating.",
+        "if_unproven": "priced as non-non-stick or lower quality coating"
+      },
+      {
+        "risk": "The set may be damaged or incomplete inside the box.",
+        "proof": "An unboxed photo showing all 7 pieces laid out, with lids and handles intact.",
+        "if_unproven": "priced as potentially incomplete or damaged"
+      },
+      {
+        "risk": "The cookware may not be as heavy as claimed.",
+        "proof": "A photo of the cookware being lifted or held to show weight, or a scale reading if available.",
+        "if_unproven": "priced as standard weight, not heavy"
+      }
+    ],
+    "proof_requests": [
+      "Unbox and show all 7 pieces of the cookware set laid out clearly.",
+      "Provide a close-up photo of the interior surface of one pot or frypan to verify non-stick coating.",
+      "Show a photo of the cookware being lifted or held to demonstrate weight."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a TORNADO 7-piece cookware set from the box, but the seller's claim of '4 pots' is contradicted by the box's 3 pots. The non-stick, neat, and heavy claims cannot be verified from the current photos. The cookware is not shown unboxed, so condition, completeness, and quality are unknown. Proof is needed to assess these risks before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 65635,
+    "input_tokens": 2216,
+    "output_tokens": 815,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "cf638a6e318842a45edba56b96a8e55a",
+    "error": null
+  }
+}

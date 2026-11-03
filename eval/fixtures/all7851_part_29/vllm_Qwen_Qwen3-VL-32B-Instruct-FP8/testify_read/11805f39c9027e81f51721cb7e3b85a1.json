@@ -1,0 +1,106 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a white Dell all-in-one desktop with a cracked screen. Handwritten text on the screen reads 'CORE I3', '24GB', '500GB', and 'DVDRW'. The Dell logo is visible at the bottom center of the bezel.",
+      "Photo 1 shows the back of the same unit, wrapped in plastic with 'Upfield' branding. The Dell logo is centered on the back panel. The stand is silver and attached to the base.",
+      "Photo 2 shows the side I/O panel, partially unwrapped. Visible ports include two USB-A, one HDMI, one Ethernet (RJ45), and a headphone jack. A hand is holding the plastic wrap back."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "all-in-one desktop",
+      "brand": "Dell",
+      "model": "Inspiron 22 3264",
+      "read_from": [
+        "photo 0 screen text",
+        "photo 1 back panel logo"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Dell Inspiron 22 3264 series",
+        "verdict": "supported",
+        "evidence": "Photo 0 screen text shows '24GB' (likely a typo for 22) and 'CORE I3', consistent with Inspiron 22 3264. Photo 1 shows Dell logo. The model is inferred from the seller's text and screen writing."
+      },
+      {
+        "claim": "Core i3, 7th generation",
+        "verdict": "unverified",
+        "evidence": "Photo 0 has 'CORE I3' written on screen, but no generation info. No visible CPU label or system info. Cannot confirm 7th gen from photos."
+      },
+      {
+        "claim": "500gb",
+        "verdict": "supported",
+        "evidence": "Photo 0 has '500GB' written on screen. No internal drive visible, but the claim is written on the screen and matches seller's text."
+      },
+      {
+        "claim": "8gb RAM",
+        "verdict": "unverified",
+        "evidence": "Photo 0 has '24GB' written, which contradicts 8GB. This is likely a typo for 22 (screen size), but RAM is not visible. Cannot confirm 8GB from photos."
+      },
+      {
+        "claim": "22 inches screen size",
+        "verdict": "supported",
+        "evidence": "Photo 0 has '24GB' written, which may be a typo for 22. The unit appears to be a 22-inch all-in-one based on size and model name. Seller's text says 22 inches."
+      },
+      {
+        "claim": "HDMI",
+        "verdict": "supported",
+        "evidence": "Photo 2 clearly shows an HDMI port on the side I/O panel."
+      },
+      {
+        "claim": "DVDRW",
+        "verdict": "unverified",
+        "evidence": "Photo 0 has 'DVDRW' written on screen, but no optical drive is visible in any photo. Cannot confirm presence from photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Cracked screen",
+        "proof": "Close-up of the cracked area on the screen (photo 0 shows a visible crack near the bottom left).",
+        "if_unproven": "Priced as damaged screen, which reduces value significantly."
+      },
+      {
+        "risk": "RAM is not 8GB (possibly 4GB or 2GB)",
+        "proof": "Photo of the system BIOS or open case showing RAM modules, or a screenshot of system information.",
+        "if_unproven": "Priced as 4GB or lower RAM, which is less valuable than 8GB."
+      },
+      {
+        "risk": "CPU is not 7th generation Core i3",
+        "proof": "System information screenshot showing CPU model, or BIOS screen.",
+        "if_unproven": "Priced as unknown CPU generation, which may be older or less powerful."
+      },
+      {
+        "risk": "No optical drive (DVDRW not present)",
+        "proof": "Photo of the front or side showing an optical drive bay or absence thereof.",
+        "if_unproven": "Priced as no optical drive, which reduces value for buyers needing one."
+      },
+      {
+        "risk": "Unit is not functional (no power or display test shown)",
+        "proof": "Video or photo of the unit powered on, showing desktop and working screen.",
+        "if_unproven": "Priced as not working, which is a major devaluation."
+      }
+    ],
+    "proof_requests": [
+      "Video or photo of the unit powered on, showing desktop and working screen.",
+      "Photo of system information screen showing CPU model, RAM size, and storage.",
+      "Photo of the front or side showing optical drive or absence.",
+      "Close-up of the cracked screen area to assess severity."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a Dell Inspiron 22 3264 all-in-one, but critical claims (RAM, CPU generation, optical drive) are unverified, and the screen is visibly cracked. Without proof of functionality and accurate specs, the price cannot be determined confidently. The cracked screen alone reduces value, but the true condition and specs must be confirmed."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 96156,
+    "input_tokens": 2180,
+    "output_tokens": 1208,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "11805f39c9027e81f51721cb7e3b85a1",
+    "error": null
+  }
+}

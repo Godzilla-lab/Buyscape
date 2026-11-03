@@ -1,0 +1,84 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: A closed silver laptop with Apple logo on lid, placed on an open white box labeled 'MacBook Pro' on top. Box has a screen image of a blue abstract design.",
+      "Photo 1: The same laptop open, showing black keyboard, trackpad, and screen with Apple logo booting. Background shows a desk and a person's arm.",
+      "Photo 2: The white box lid alone, showing the same screen image as in photo 0, with a small scratch or mark visible on the plastic window.",
+      "All photos have a watermark 'POSTED ON JIJI OLUSOLA ADEMOYE'.",
+      "No visible serial number, model label, or internal specs in any photo.",
+      "No power adapter, charger, or accessories shown."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "laptop",
+      "brand": "Apple",
+      "model": null,
+      "read_from": [
+        "photo 0 box top: 'MacBook Pro'",
+        "photo 0 lid: Apple logo"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "2021 MacBookPro M1Pro",
+        "verdict": "unverified",
+        "evidence": "No model or serial number visible in photos. The box says 'MacBook Pro' but not M1 Pro or year. The design matches 2021 models, but cannot confirm without internal or label proof."
+      },
+      {
+        "claim": "32gb 1TB 14inch",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal specs visible. RAM and storage cannot be confirmed from photos. Screen size may be inferred from design, but not confirmed."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Not the claimed M1 Pro model or year",
+        "proof": "Photo of the bottom of the laptop showing the model number or serial number, or a screenshot of System Report showing processor and specs.",
+        "if_unproven": "Priced as a generic MacBook Pro, not as M1 Pro, which could be a significant discount."
+      },
+      {
+        "risk": "Storage or RAM not as claimed (32GB RAM, 1TB SSD)",
+        "proof": "Screenshot of System Report or About This Mac showing exact specs.",
+        "if_unproven": "Priced as lower-spec model (e.g., 16GB RAM, 512GB SSD), which reduces value significantly."
+      },
+      {
+        "risk": "Screen damage or scratches",
+        "proof": "Close-up photo of the screen under bright light, showing any scratches, dead pixels, or blemishes.",
+        "if_unproven": "Priced with assumption of minor or no screen damage, but could be discounted if damage is present."
+      },
+      {
+        "risk": "Battery health or usage history",
+        "proof": "Screenshot of battery health from System Report or a video showing battery cycle count and condition.",
+        "if_unproven": "Priced assuming good battery health, but could be discounted if degraded."
+      },
+      {
+        "risk": "Not original or refurbished without disclosure",
+        "proof": "Photo of the original receipt or proof of purchase, or a video showing the laptop being powered on and showing Apple ID login screen.",
+        "if_unproven": "Priced as used, but could be significantly discounted if not original or has been repaired."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the bottom of the laptop showing the model number or serial number.",
+      "Screenshot of System Report showing processor, RAM, storage, and battery health.",
+      "Close-up photo of the screen under bright light to check for damage.",
+      "Photo of the original receipt or proof of purchase if available."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as an Apple MacBook Pro by the box and logo, but the specific model (M1 Pro), year (2021), and specs (32GB RAM, 1TB SSD) cannot be verified from the photos. Key risks like incorrect model, storage, RAM, screen condition, and battery health remain unproven. Without proof, the item cannot be priced accurately and must be verified before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 79187,
+    "input_tokens": 2786,
+    "output_tokens": 936,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "db63d5e3af0f72c1c8658d29e1f4a2ef",
+    "error": null
+  }
+}

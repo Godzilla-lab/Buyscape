@@ -1,0 +1,84 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a product box for a 'SOLAR PORTABLE LAMP'.",
+      "The box features an image of a black and beige lamp with a handle and a large LED panel.",
+      "Text on the box includes: 'Dual light source | Battery display | Solar charging'.",
+      "A label on the box reads 'LED 7739-L HIGH BRIGHTNESS'.",
+      "The box also shows an image of a toolkit with tools inside, labeled 'TOOLKIT'.",
+      "The box has a watermark 'POSTED ON JUMIA GABISTORE'.",
+      "No actual lamp is shown, only the packaging."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "solar portable lamp",
+      "brand": null,
+      "model": "7739-L",
+      "read_from": [
+        "photo 0 box label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Dual light source",
+        "verdict": "supported",
+        "evidence": "Photo 0: the box shows the lamp with a large LED panel and a separate headlight, indicating dual light sources."
+      },
+      {
+        "claim": "Battery display",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo 0: the box mentions 'Battery display' but does not show the actual display or any screen on the lamp. No photo of the lamp's interface is provided."
+      },
+      {
+        "claim": "Solar charging",
+        "verdict": "supported",
+        "evidence": "Photo 0: the box explicitly states 'Solar charging' and shows a solar panel icon."
+      },
+      {
+        "claim": "Light up your space anytime, anywhere with this powerful Solar Portable Lamp!",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo 0: the claim is promotional and subjective; no photo shows the lamp in use or its brightness. The actual performance cannot be verified from the box alone."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The lamp may not function as advertised (e.g., battery display not working, solar charging ineffective).",
+        "proof": "A photo of the lamp turned on, showing the battery display and the solar panel in use.",
+        "if_unproven": "priced as not working or with reduced functionality"
+      },
+      {
+        "risk": "The lamp may be damaged or missing parts (e.g., broken handle, missing accessories).",
+        "proof": "A photo of the actual lamp outside the box, showing all components and condition.",
+        "if_unproven": "priced as possibly damaged or incomplete"
+      },
+      {
+        "risk": "The toolkit shown on the box may not be included (it is shown as part of the same product image).",
+        "proof": "A photo of the actual contents of the box, showing whether the toolkit is included.",
+        "if_unproven": "priced as possibly missing the toolkit"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual lamp outside the box, showing all parts and condition.",
+      "Photo of the lamp turned on, showing the battery display and light output.",
+      "Photo of the solar panel being charged (if possible).",
+      "Photo of the contents of the box to confirm if the toolkit is included."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identified as a solar portable lamp model 7739-L, but critical claims like battery display and actual functionality cannot be verified from the box alone. The presence of the toolkit is also unclear. Without photos of the actual lamp and its features in use, the item cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 63244,
+    "input_tokens": 1781,
+    "output_tokens": 811,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "235aca70fbd0009444904b3a8a4096dd",
+    "error": null
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Front view of a silver laptop with a visible keyboard and screen. The Dell logo is centered below the screen. The keyboard has a 'LATTITUDE 3350' label on the bottom left. The screen is off and reflective.",
+      "Photo 1: Back view of the laptop lid, showing the Dell logo in the center. The surface is matte silver. A watermark 'DEBIG EAGLE CONCEPTS' is visible.",
+      "Photo 2: Bottom view of the laptop, showing ventilation grills, a barcode sticker, and a Dell label with model and serial information. The label is partially obscured but appears to include 'Latitude 3350'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Dell",
+      "model": "Latitude 3350",
+      "read_from": [
+        "photo 0 keyboard label",
+        "photo 2 bottom label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "dell 3350 i5 5th gen",
+        "verdict": "supported",
+        "evidence": "Model 'Latitude 3350' is visible on keyboard (photo 0) and bottom label (photo 2). The CPU claim (i5 5th gen) is unverified but consistent with known specs for this model."
+      },
+      {
+        "claim": "non touch",
+        "verdict": "unverified",
+        "evidence": "No clear view of screen edges or bezel to confirm touch capability. The screen appears to be standard non-touch based on design, but no definitive proof."
+      },
+      {
+        "claim": "8gb ram",
+        "verdict": "unverifiable_remote",
+        "evidence": "RAM cannot be verified from photos. Requires internal inspection or system info."
+      },
+      {
+        "claim": "500gb hdd",
+        "verdict": "unverifiable_remote",
+        "evidence": "Storage cannot be verified from photos. Requires system info or physical inspection."
+      },
+      {
+        "claim": "cpu: intel core i5-5200u (5th generation)",
+        "verdict": "unverified",
+        "evidence": "CPU model not visible in photos. The model 3350 is known to use i5-5200U, but not confirmed here."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "RAM may not be 8GB",
+        "proof": "System information screenshot or physical RAM inspection",
+        "if_unproven": "priced as less than 8GB (e.g., 4GB)"
+      },
+      {
+        "risk": "HDD may not be 500GB or may be faulty",
+        "proof": "Disk management screenshot or physical inspection",
+        "if_unproven": "priced as smaller or failing drive"
+      },
+      {
+        "risk": "CPU may not be i5-5200U or may be damaged",
+        "proof": "System information screenshot showing CPU model and health",
+        "if_unproven": "priced as lower-tier CPU or non-functional"
+      },
+      {
+        "risk": "Battery may be degraded or non-functional",
+        "proof": "Battery health report or video showing battery life",
+        "if_unproven": "priced as no battery or poor battery"
+      },
+      {
+        "risk": "Screen may have dead pixels, cracks, or backlight issues",
+        "proof": "Video showing screen with full white and black screens",
+        "if_unproven": "priced as screen with defects"
+      }
+    ],
+    "proof_requests": [
+      "System information screenshot showing CPU, RAM, and storage details",
+      "Video of screen with full white and black to check for defects",
+      "Battery health report or video showing battery life",
+      "Photo or video of the bottom label with clear model and serial number"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identified as Dell Latitude 3350, but critical specs like RAM, storage, and CPU cannot be verified from photos alone. Hidden risks such as battery health and screen defects also require proof. Without this, the item cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 77520,
+    "input_tokens": 2809,
+    "output_tokens": 939,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "be9a142cb8dd976fb32e9507649462c9",
+    "error": null
+  }
+}

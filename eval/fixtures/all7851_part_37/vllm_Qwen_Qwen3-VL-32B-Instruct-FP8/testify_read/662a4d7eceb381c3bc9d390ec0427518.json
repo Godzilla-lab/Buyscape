@@ -1,0 +1,80 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows two silver laptops with Apple logos, one closed and one open, stacked on top of other laptops on a tufted gray surface.",
+      "Photo 1 is similar to photo 0, showing the same two laptops from a slightly different angle.",
+      "Photo 2 shows a MacBook Pro screen with macOS Catalina (version 10.15.7) open to the 'About This Mac' window.",
+      "In photo 2, the system information lists: 2.3 GHz Dual-Core Intel Core i5, 8 GB 2133 MHz LPDDR3 memory, and Intel Iris Plus Graphics 640.",
+      "The model name in photo 2 is 'MacBook Pro', but the processor is a Core i5, not Core i7 as claimed.",
+      "The memory is listed as 8 GB, not 16 GB as claimed.",
+      "The battery information shows 185 cycle count, health 42% (fully charged capacity 4218 mAh, design capacity 1388 mAh).",
+      "The serial number is visible: FSD7477FXGQT7A1.",
+      "The device name is 'bq202451'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "MacBook Pro",
+      "brand": "Apple",
+      "model": "MacBook Pro",
+      "read_from": [
+        "photo 2 screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Macbook pro 2020 corei7",
+        "verdict": "contradicted",
+        "evidence": "Photo 2 shows '2.3 GHz Dual-Core Intel Core i5', not Core i7. The model year cannot be confirmed from the photo, but the processor type contradicts the claim."
+      },
+      {
+        "claim": "512 SSD",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo 2 does not show storage capacity. The 'Storage' tab is not open, so the SSD size is not visible."
+      },
+      {
+        "claim": "16GB memory",
+        "verdict": "contradicted",
+        "evidence": "Photo 2 shows '8 GB 2133 MHz LPDDR3 Memory', contradicting the 16GB claim."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery health is poor (42% health, 185 cycles), which may affect performance and runtime.",
+        "proof": "A video showing the battery's performance under load or a full battery health report from Apple Diagnostics.",
+        "if_unproven": "Priced as having degraded battery, which reduces value significantly."
+      },
+      {
+        "risk": "The SSD capacity is not shown; it may be less than 512GB, or the storage may be full or failing.",
+        "proof": "Photo of the 'Storage' tab in 'About This Mac' showing the actual SSD size and usage.",
+        "if_unproven": "Priced as having unknown storage, which could be less than claimed, reducing value."
+      },
+      {
+        "risk": "The laptop may have been refurbished or have hidden damage not visible in photos.",
+        "proof": "A video showing the laptop being powered on, keyboard, trackpad, screen, and ports in use, including a full boot and system check.",
+        "if_unproven": "Priced as potentially non-functional or with hidden defects, reducing value."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the 'Storage' tab in 'About This Mac' to confirm SSD size.",
+      "Video showing the laptop booting up, keyboard, trackpad, screen, and ports working.",
+      "Proof of the model year (e.g., serial number lookup or Apple support verification)."
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a MacBook Pro with visible system specs, but the seller's claims about Core i7 and 16GB RAM are contradicted by photo 2. The SSD size is unverified. Battery health is poor. The item can be priced at its worst case (i5, 8GB RAM, degraded battery, unknown SSD) based on visible evidence."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 76900,
+    "input_tokens": 2368,
+    "output_tokens": 943,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "662a4d7eceb381c3bc9d390ec0427518",
+    "error": null
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Laptop screen is on, showing Windows desktop with icons and a scenic wallpaper. The screen is partially visible, with a watermark 'POSTED ON JIJI MONDAY PETER'.",
+      "Photo 1: Top-down view of a black laptop on a patterned fabric surface. The screen is off. The 'ThinkPad' logo is visible on the palm rest. A black external device (possibly a power bank or hard drive) is connected via USB. The keyboard is visible, and the laptop appears to be open at a wide angle.",
+      "Photo 2: Closer top-down view of the same laptop, showing the keyboard and part of the screen. The 'Lenovo' logo is visible on the right side of the keyboard. The 'ThinkPad' logo is also visible on the palm rest. The external device is still connected. The keyboard has a small yellow sticker on the '0' key. The screen remains off."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Lenovo",
+      "model": "ThinkPad",
+      "read_from": [
+        "photo 1 palm rest",
+        "photo 2 palm rest and keyboard side"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Lenovo ThinkPad Laptop for Sale \u2013 For Repair or Spare Parts",
+        "verdict": "supported",
+        "evidence": "The brand 'Lenovo' and model 'ThinkPad' are visible on the palm rest in photo 1 and photo 2."
+      },
+      {
+        "claim": "I'm selling my used Lenovo ThinkPad...",
+        "verdict": "supported",
+        "evidence": "Photos show a used laptop with visible wear and a non-functional screen (off in photos 1 and 2), consistent with 'used'."
+      },
+      {
+        "claim": "For Repair or Spare Parts",
+        "verdict": "unverified",
+        "evidence": "The screen is off in photos 1 and 2, but photo 0 shows the screen on. This suggests it may work, but no proof of full functionality is provided. The seller's intent to sell for repair or parts is not contradicted, but not proven by the photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The laptop may not power on or may have a dead battery, despite the screen being on in photo 0.",
+        "proof": "A video showing the laptop powering on from cold, with the screen turning on and the operating system loading, or a photo of the power adapter plugged in and the laptop running.",
+        "if_unproven": "priced as not working or with dead battery"
+      },
+      {
+        "risk": "The screen may be damaged or non-functional, as it is off in two of the three photos.",
+        "proof": "A video or photo showing the screen turning on and displaying a clear image, or a photo of the screen with a test pattern or diagnostic tool.",
+        "if_unproven": "priced as screen may be dead or damaged"
+      },
+      {
+        "risk": "The keyboard or other components may be faulty or missing parts.",
+        "proof": "A close-up photo of the keyboard with all keys visible and functional, or a video showing key presses and responses.",
+        "if_unproven": "priced as keyboard may be faulty"
+      },
+      {
+        "risk": "The laptop may have physical damage or internal issues not visible in the photos.",
+        "proof": "A photo of the laptop's underside, hinges, and ports, or a video showing the laptop being opened and closed, and ports being tested.",
+        "if_unproven": "priced as potentially damaged or with hidden defects"
+      }
+    ],
+    "proof_requests": [
+      "Video showing the laptop powering on from cold and the screen turning on with the OS loading.",
+      "Photo of the laptop's underside and ports.",
+      "Close-up photo of the keyboard with all keys visible.",
+      "Photo of the laptop with the screen on, showing a clear image."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The laptop is identifiable as a Lenovo ThinkPad, but critical functionality (screen, power, keyboard) is unproven. The seller claims it is for repair or spare parts, but the screen is shown on in one photo, suggesting it may work. Without proof of full functionality, the item cannot be priced accurately. The risks of non-working components are significant and must be verified before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 83197,
+    "input_tokens": 3144,
+    "output_tokens": 973,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "98e03c7bcd05de25cb884f466fe86d06",
+    "error": null
+  }
+}

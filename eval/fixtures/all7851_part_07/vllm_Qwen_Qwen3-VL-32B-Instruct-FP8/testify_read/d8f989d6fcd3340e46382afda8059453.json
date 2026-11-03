@@ -1,0 +1,93 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the front of an HP ProDesk desktop with a visible Intel Core i7 7th Gen sticker and multiple USB ports.",
+      "Photo 1 is a close-up of the Intel Core i7 7th Gen sticker and the HP ProDesk branding on the front panel.",
+      "Photo 2 shows the rear of the unit with various ports including VGA, Ethernet, and power input, but no internal components are visible.",
+      "The unit appears to be in a retail or storage environment with other equipment in the background.",
+      "No screen, keyboard, or mouse are shown. No internal components like RAM or SSD are visible."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "desktop computer",
+      "brand": "HP",
+      "model": "ProDesk 600",
+      "read_from": [
+        "photo 0 front panel",
+        "photo 1 front panel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP ProDesk 600",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 1 show 'HP PRODESK' branding on the front panel."
+      },
+      {
+        "claim": "Core i7 7th gen",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows a sticker clearly reading 'Intel Core i7 7th Gen'."
+      },
+      {
+        "claim": "8GB RAM",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal components shown; RAM cannot be verified from photos."
+      },
+      {
+        "claim": "256GB SSD",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal components shown; SSD cannot be verified from photos."
+      },
+      {
+        "claim": "Windows 11 Pro",
+        "verdict": "unverifiable_remote",
+        "evidence": "No screen or OS interface shown; cannot verify operating system."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "RAM is not 8GB or is faulty",
+        "proof": "Photo of the internal RAM slots with installed modules, showing capacity and brand.",
+        "if_unproven": "priced as having less than 8GB or non-functional RAM"
+      },
+      {
+        "risk": "SSD is not 256GB or is faulty",
+        "proof": "Photo of the internal SSD drive, showing capacity and brand.",
+        "if_unproven": "priced as having less than 256GB or non-functional SSD"
+      },
+      {
+        "risk": "Operating system is not Windows 11 Pro or is not activated",
+        "proof": "Screenshot of the desktop showing the OS version and activation status.",
+        "if_unproven": "priced as not having Windows 11 Pro or unactivated"
+      },
+      {
+        "risk": "Unit is not functional or has hardware issues",
+        "proof": "Video of the unit powering on, booting, and running a basic system check.",
+        "if_unproven": "priced as non-working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the internal RAM modules showing capacity and brand.",
+      "Photo of the internal SSD drive showing capacity and brand.",
+      "Screenshot of the desktop showing Windows 11 Pro and activation status.",
+      "Video of the unit powering on and booting."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and CPU are confirmed, but critical claims about RAM, SSD, and OS cannot be verified from the photos. Hidden risks related to internal components and functionality must be resolved before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 65089,
+    "input_tokens": 2380,
+    "output_tokens": 809,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "d8f989d6fcd3340e46382afda8059453",
+    "error": null
+  }
+}

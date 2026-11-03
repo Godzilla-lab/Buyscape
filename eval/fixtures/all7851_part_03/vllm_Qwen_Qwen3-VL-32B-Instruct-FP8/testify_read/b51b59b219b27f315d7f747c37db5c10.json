@@ -1,0 +1,86 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 and Photo 1 show multiple standing air conditioners in a store setting.",
+      "Two units in the foreground have outdoor condenser units wrapped in plastic with visible 'LG' logos and brand marks.",
+      "The indoor units are tall, white, and appear to be floor-standing models.",
+      "The indoor units have different designs: one has floral patterns, another has a digital display, and one is plain with a blue stripe.",
+      "The brand 'Whisen' is visible on the digital display panels of two indoor units in both photos.",
+      "The outdoor units are labeled 'LG' but no model numbers are visible.",
+      "The indoor units do not show any clear model numbers or capacity labels.",
+      "The seller claims '3hp standing ac with kit and warranty'."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "standing air conditioner",
+      "brand": "LG",
+      "model": null,
+      "read_from": [
+        "photo 0 outdoor unit",
+        "photo 1 outdoor unit"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "3hp standing ac",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible model number or capacity label on indoor or outdoor units. The '3hp' claim cannot be confirmed from photos."
+      },
+      {
+        "claim": "with kit",
+        "verdict": "unverified",
+        "evidence": "No installation kit (drain pipe, copper lines, etc.) is visible in the photos. Cannot confirm presence."
+      },
+      {
+        "claim": "warranty",
+        "verdict": "unverifiable_remote",
+        "evidence": "No warranty document, sticker, or proof is visible. Cannot verify remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The unit may not be 3hp as claimed",
+        "proof": "A clear photo of the model number on the indoor or outdoor unit, or a label showing cooling capacity (BTU or HP).",
+        "if_unproven": "priced as lower capacity unit (e.g., 1.5hp or 2hp), which reduces value."
+      },
+      {
+        "risk": "The unit may be used or refurbished, not new",
+        "proof": "Close-up of the indoor unit's control panel, vents, and casing for signs of wear or dirt.",
+        "if_unproven": "priced as used/refurbished, which reduces value."
+      },
+      {
+        "risk": "The installation kit may be missing or incomplete",
+        "proof": "Photo showing all components of the installation kit (copper pipes, drain hose, mounting brackets, etc.) laid out.",
+        "if_unproven": "priced as without kit, which reduces value."
+      },
+      {
+        "risk": "The warranty may be invalid or expired",
+        "proof": "Photo of the warranty card or certificate, or a label showing warranty period and terms.",
+        "if_unproven": "priced as no warranty, which reduces value."
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the model number on the indoor or outdoor unit.",
+      "Photo showing the full installation kit (copper pipes, drain hose, brackets, etc.).",
+      "Photo of the warranty card or certificate.",
+      "Close-up of the indoor unit's control panel and casing to check for wear."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a standing air conditioner with LG branding, but the key claims (3hp, kit, warranty) cannot be verified from the current photos. The model number is missing, and risks like capacity, condition, and completeness of kit affect pricing. Proof is needed to proceed to pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 65382,
+    "input_tokens": 2217,
+    "output_tokens": 819,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "b51b59b219b27f315d7f747c37db5c10",
+    "error": null
+  }
+}

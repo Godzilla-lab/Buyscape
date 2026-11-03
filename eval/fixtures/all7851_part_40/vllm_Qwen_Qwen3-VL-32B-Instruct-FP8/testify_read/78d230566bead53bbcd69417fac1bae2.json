@@ -1,0 +1,67 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a 2.5-inch hard disk drive in a black metal tray, likely for server use.",
+      "The label on the drive is white with black text and barcodes, showing HPE branding and model information.",
+      "The label includes 'HPE MODEL: EG002400JWJNT', '2.4TB 10K SAS', and 'CT: 2N2A13000H10Q'.",
+      "The drive is marked 'MADE IN THAILAND' and has various compliance logos (CE, RoHS, etc.).",
+      "The tray has a metal cage with screw holes and a latch mechanism on the side.",
+      "The drive appears clean and undamaged in the photo."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "2.5\" SAS hard drive",
+      "brand": "HPE",
+      "model": "EG002400JWJNT",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "876939-002 hpe 2.4tb 10k 12g sff 2.5\" sas sc hdd eg002400jwjnt",
+        "verdict": "supported",
+        "evidence": "Photo 0 label shows 'HPE MODEL: EG002400JWJNT', '2.4TB 10K SAS', and 'SFF 2.5\"'. The part number '876939-002' is not visible but is a known HPE part number for this model."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The drive may be faulty or have bad sectors.",
+        "proof": "A SMART report or a video showing the drive spinning up and being recognized by a system.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The drive may have been pulled from a failed server and has high usage or wear.",
+        "proof": "A photo of the drive's serial number and a SMART report showing power-on hours and reallocated sectors.",
+        "if_unproven": "priced as used with unknown wear"
+      },
+      {
+        "risk": "The tray may be damaged or incompatible with the buyer's server.",
+        "proof": "A close-up photo of the tray's connectors and latch mechanism, and a photo showing the tray installed in a server.",
+        "if_unproven": "priced as tray may not fit"
+      }
+    ],
+    "proof_requests": [
+      "SMART report or video of the drive spinning up and being recognized.",
+      "Photo of the drive's serial number and power-on hours.",
+      "Close-up of the tray's connectors and latch mechanism."
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identified as an HPE EG002400JWJNT 2.4TB 10K SAS 2.5\" drive in a tray. The seller's claims are supported by the label in photo 0. Hidden risks include potential drive failure or high usage, which are priced conservatively until proven otherwise."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 60800,
+    "input_tokens": 1545,
+    "output_tokens": 725,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "78d230566bead53bbcd69417fac1bae2",
+    "error": null
+  }
+}

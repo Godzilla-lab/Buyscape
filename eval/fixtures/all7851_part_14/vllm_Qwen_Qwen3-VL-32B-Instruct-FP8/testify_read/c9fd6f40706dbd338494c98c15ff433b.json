@@ -1,0 +1,74 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a white air curtain unit from a front-facing angle, with a grille and visible internal components. It appears to be installed or placed on a surface with cardboard boxes behind it.",
+      "Photo 1 shows the same unit inside a cardboard box, wrapped in plastic. A remote control is visible attached to the unit. The unit has a vertical orientation with vents and a control panel.",
+      "Photo 2 shows a label with Chinese text and specifications. The brand 'SMK \u9882\u7f8e\u79d1' is visible at the top. The label lists models, dimensions, voltage, power, airflow, speed, and weight. The model FM-1208L-4 has dimensions 600*151*182 mm, which is approximately 2 feet in length, not 6 feet as claimed. The label also states '\u6d59\u6c5f\u00b7\u6d77\u76d0\u767e\u80dc\u7535\u5668\u6709\u9650\u516c\u53f8' (Zhejiang Haimen Baisheng Electrical Appliances Co., Ltd.)."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "air curtain",
+      "brand": "SMK \u9882\u7f8e\u79d1",
+      "model": "FM-1208L-4",
+      "read_from": [
+        "photo 2 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Air curtain",
+        "verdict": "supported",
+        "evidence": "Photo 2 label explicitly states '\u9ad8\u7aef\u7cfb\u5217\u98ce\u5e55\u673a' which translates to 'High-end series air curtain'."
+      },
+      {
+        "claim": "6 feet",
+        "verdict": "contradicted",
+        "evidence": "Photo 2 label lists model FM-1208L-4 with dimensions 600*151*182 mm, which is approximately 2 feet in length, not 6 feet."
+      },
+      {
+        "claim": "Brand New",
+        "verdict": "unverified",
+        "evidence": "The unit is in packaging and wrapped in plastic (photo 1), suggesting it is new, but there is no visible proof of unopened packaging or original seal. The label (photo 2) is a factory certificate, not a warranty or proof of newness."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The unit may be used or refurbished despite being advertised as 'Brand New'.",
+        "proof": "A photo of the original sealed box with factory seal intact, or a receipt or warranty document.",
+        "if_unproven": "priced as used or refurbished, which reduces value significantly."
+      },
+      {
+        "risk": "The unit may not be compatible with Nigerian electrical standards (220V/50Hz).",
+        "proof": "A photo of the unit's power plug or a clear view of the voltage specification on the unit itself.",
+        "if_unproven": "priced as potentially incompatible, which may require an adapter or voltage converter, reducing value."
+      },
+      {
+        "risk": "The unit may be damaged or missing parts despite being in packaging.",
+        "proof": "A full 360-degree view of the unit outside the box, showing all components and no damage.",
+        "if_unproven": "priced as potentially damaged or incomplete, which reduces value."
+      }
+    ],
+    "proof_requests": [
+      "A photo of the original sealed box with factory seal intact.",
+      "A photo of the unit's power plug or a clear view of the voltage specification on the unit itself.",
+      "A full 360-degree view of the unit outside the box, showing all components and no damage."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller's claim of '6 feet' is contradicted by the label in photo 2, which shows a 2-foot unit. The 'Brand New' claim is unverified, and there are hidden risks regarding condition, compatibility, and completeness. Without proof of original seal, voltage compatibility, and full condition, a worst-case price cannot be confidently assigned."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 71972,
+    "input_tokens": 2355,
+    "output_tokens": 875,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "c9fd6f40706dbd338494c98c15ff433b",
+    "error": null
+  }
+}

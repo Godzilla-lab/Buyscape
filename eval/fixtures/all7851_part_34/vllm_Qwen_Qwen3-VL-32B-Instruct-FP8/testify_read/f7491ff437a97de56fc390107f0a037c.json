@@ -1,0 +1,96 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a car engine with a black plastic cover labeled 'ECOTEC' and a Chevrolet bowtie logo.",
+      "The engine is surrounded by debris, including plastic bags and other mechanical parts, suggesting a junkyard or salvage environment.",
+      "Photo 1 shows the same engine from a different angle, with visible dirt, grime, and dried plant matter on the components, indicating outdoor storage or use.",
+      "Photo 2 shows a wider view of the engine and another similar engine nearby, both with 'ECOTEC' covers, suggesting they may be from the same vehicle or batch.",
+      "No visible damage to the engine block or major components, but the overall condition appears used and dirty.",
+      "No visible serial numbers, model tags, or VINs on the engine itself in any photo.",
+      "The seller's text mentions 'Buick motors', 'Gasoline engines', 'Horsepower', 'High performance', 'classic', and 'fairly used but like...', but no specific model or year is given."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "gasoline car engine",
+      "brand": "Chevrolet",
+      "model": null,
+      "read_from": [
+        "photo 0 cover",
+        "photo 1 cover",
+        "photo 2 cover"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Buick motors",
+        "verdict": "unverified",
+        "evidence": "The engine cover shows Chevrolet branding (bowtie logo and 'ECOTEC'), not Buick. Buick engines are typically badged as such, but none is visible. The claim is not supported by the photos."
+      },
+      {
+        "claim": "Gasoline engines",
+        "verdict": "supported",
+        "evidence": "The engine is a typical internal combustion engine with visible intake manifold, throttle body, and spark plug wires, consistent with a gasoline engine."
+      },
+      {
+        "claim": "Horsepower > High performance",
+        "verdict": "unverifiable_remote",
+        "evidence": "No performance data, model, or specifications are visible. Horsepower cannot be determined from appearance alone."
+      },
+      {
+        "claim": "classic",
+        "verdict": "unverifiable_remote",
+        "evidence": "No year or model is visible. 'Classic' is subjective and cannot be confirmed without knowing the vehicle or engine generation."
+      },
+      {
+        "claim": "fairly used but like...",
+        "verdict": "unverified",
+        "evidence": "The engine appears dirty and stored outdoors, but no signs of major damage or wear are visible. The condition is not clearly 'fairly used' without inspection of internals or running test."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine may be non-functional or have internal damage (e.g., seized, blown head gasket, worn bearings)",
+        "proof": "Video of the engine running or a compression test report.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Engine may be from a non-Buick vehicle, contradicting seller's claim",
+        "proof": "Photo of the vehicle's VIN plate or engine block casting number.",
+        "if_unproven": "priced as generic Chevrolet ECOTEC, not Buick"
+      },
+      {
+        "risk": "Engine may have been salvaged from a wrecked or accident-damaged vehicle",
+        "proof": "Photo of the vehicle's VIN plate or accident report.",
+        "if_unproven": "priced as unknown history, lower value"
+      },
+      {
+        "risk": "Engine may be missing critical components (e.g., ECU, sensors, timing chain)",
+        "proof": "Full disassembly photo or inventory list of included parts.",
+        "if_unproven": "priced as incomplete"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the engine block casting number or VIN plate from the vehicle it came from.",
+      "Video of the engine running or a compression test report.",
+      "Photo of all included parts (ECU, sensors, belts, etc.).",
+      "Photo of the vehicle's front grille or badge to confirm make and model."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The engine is identifiable as a Chevrolet ECOTEC gasoline engine, but the seller's claim of 'Buick motors' is unverified and may be false. The condition and performance cannot be confirmed without further proof. Hidden risks include non-functionality, missing parts, and accident history. A price cannot be assigned without verification of these factors."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 75712,
+    "input_tokens": 2160,
+    "output_tokens": 1003,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "f7491ff437a97de56fc390107f0a037c",
+    "error": null
+  }
+}

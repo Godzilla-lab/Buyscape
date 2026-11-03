@@ -1,0 +1,102 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the bottom of a silver laptop with a barcode sticker, regulatory labels, and a large vent grille. The model number is not clearly visible.",
+      "Photo 1 shows the open laptop with a black screen, silver chassis, black keyboard, and a visible 'hp' logo above the keyboard. A 'Core i7' sticker is on the bottom right of the palm rest.",
+      "Photo 2 shows the closed lid of the laptop with a silver finish, an orange dot, a gray logo resembling 'dy', and a blue circular sticker on the bottom left. No model name is visible on the lid.",
+      "All photos have a watermark: 'POSTED ON JIJI DISTINGUISHED MULTI GLOBAL'."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "laptop",
+      "brand": "hp",
+      "model": null,
+      "read_from": [
+        "photo 1 screen (hp logo)",
+        "photo 1 palm rest (Core i7 sticker)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "hp 840g8",
+        "verdict": "unverified",
+        "evidence": "No model number is visible in any photo. The bottom plate in photo 0 has a barcode but no readable model name."
+      },
+      {
+        "claim": "corei7",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows a 'Core i7' sticker on the palm rest."
+      },
+      {
+        "claim": "16gb 512gb",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal components or system information visible. Cannot confirm RAM or storage size from photos."
+      },
+      {
+        "claim": "touchscreen",
+        "verdict": "unverifiable_remote",
+        "evidence": "Screen is off and no touch indicators (like a touchpad or screen bezel design) are visible. No proof of touchscreen functionality."
+      },
+      {
+        "claim": "11gen",
+        "verdict": "unverifiable_remote",
+        "evidence": "The 'Core i7' sticker does not specify the generation. Cannot confirm 11th gen from photos."
+      },
+      {
+        "claim": "with warranty",
+        "verdict": "unverifiable_remote",
+        "evidence": "No warranty documents, stickers, or proof visible in photos. Cannot verify warranty status remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The laptop may not be an HP 840G8 as claimed.",
+        "proof": "A clear photo of the model label on the bottom or side of the laptop, or a screenshot of the system information showing the model.",
+        "if_unproven": "Priced as a generic HP laptop with Core i7, not as the specific 840G8 model."
+      },
+      {
+        "risk": "The RAM and storage may not be 16GB and 512GB as claimed.",
+        "proof": "A screenshot of the system information (e.g., Windows System Properties or BIOS) showing RAM and storage details.",
+        "if_unproven": "Priced as a laptop with unknown RAM and storage, which reduces value."
+      },
+      {
+        "risk": "The screen may not be touchscreen.",
+        "proof": "A video or photo showing the screen being touched and responding, or a clear view of the screen bezel with touch indicators.",
+        "if_unproven": "Priced as a non-touchscreen laptop, which is less valuable."
+      },
+      {
+        "risk": "The CPU may not be 11th generation.",
+        "proof": "A screenshot of the system information showing the exact CPU model (e.g., Intel Core i7-1185G7).",
+        "if_unproven": "Priced as a laptop with an unverified CPU generation, which affects performance valuation."
+      },
+      {
+        "risk": "The warranty claim is unverified and may be false.",
+        "proof": "A copy of the warranty document or a screenshot of the warranty status from the manufacturer's website.",
+        "if_unproven": "Priced as a used laptop without warranty, which reduces value."
+      }
+    ],
+    "proof_requests": [
+      "A clear photo of the model label on the bottom or side of the laptop.",
+      "A screenshot of the system information showing RAM, storage, and CPU model.",
+      "A video or photo demonstrating the touchscreen functionality.",
+      "Proof of warranty (document or screenshot)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is not identifiable from the photos, and key claims (RAM, storage, touchscreen, CPU generation, warranty) cannot be verified remotely. Without proof, the item cannot be accurately priced or identified."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 89878,
+    "input_tokens": 2793,
+    "output_tokens": 1056,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "4a9a36d986613060f8ac0555990048c1",
+    "error": null
+  }
+}

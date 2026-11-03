@@ -1,0 +1,69 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Two boxes of Century Automatic Electric Kettles are stacked, both in original packaging.",
+      "Top box labeled model CK-8119D, 4.3L capacity, 2000 watts.",
+      "Bottom box labeled model CK-8119E, 5.2L capacity, 2000 watts.",
+      "Both boxes show stainless steel kettles with black handles and spouts.",
+      "Boxes are in a market setting with other goods visible in background.",
+      "No actual kettle is shown outside the box.",
+      "Seller claims 'stainless electric kettle' \u2014 this matches the product type shown on boxes."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "electric kettle",
+      "brand": "Century",
+      "model": "CK-8119D and CK-8119E",
+      "read_from": [
+        "photo 0 box top: 'Century Automatic Electric Kettle CK-8119D'",
+        "photo 0 box bottom: 'Century Automatic Electric Kettle CK-8119E'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "This is a stainless electric kettle.",
+        "verdict": "supported",
+        "evidence": "Photo 0: both boxes show stainless steel kettles with 'stainless' implied by visual finish and typical product description; seller's claim matches product type."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The kettles may be damaged or non-functional inside the box.",
+        "proof": "A photo of the actual kettle removed from the box, showing no damage and working power cord and switch.",
+        "if_unproven": "priced as potentially non-working or damaged"
+      },
+      {
+        "risk": "The product may be counterfeit or not as advertised (e.g., wrong model or capacity).",
+        "proof": "A close-up photo of the kettle's base or label showing the model number and capacity matching the box.",
+        "if_unproven": "priced as possibly counterfeit or mislabeled"
+      },
+      {
+        "risk": "The kettle may not be compatible with Nigerian voltage (220-240V) or plug type.",
+        "proof": "A photo of the power cord and plug, showing Nigerian-compatible plug and voltage rating on the kettle or label.",
+        "if_unproven": "priced as possibly incompatible with local power"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual kettle removed from the box, showing no damage and working components.",
+      "Close-up of the kettle's base or label to confirm model and capacity.",
+      "Photo of the power cord and plug to confirm Nigerian compatibility."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a Century electric kettle, but the actual product is not shown outside the box. Hidden risks include damage, non-functionality, counterfeit, and voltage/plug incompatibility. These must be verified before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 52818,
+    "input_tokens": 2231,
+    "output_tokens": 661,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "fba8ee50153c72a1c4c641f00925d82c",
+    "error": null
+  }
+}

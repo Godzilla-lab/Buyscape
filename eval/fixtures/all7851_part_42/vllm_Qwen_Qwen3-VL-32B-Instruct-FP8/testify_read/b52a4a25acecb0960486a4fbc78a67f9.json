@@ -1,0 +1,75 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a rectangular solar panel with a dark blue surface and a black frame, leaning against a wall. The panel has a grid of cells with visible white lines. A watermark 'FRANK SOLAR ENTERPRISES' is overlaid.",
+      "Photo 1 shows a close-up of the solar panel's label. The brand 'JinKO' is visible at the top. The label reads 'PHOTOVOLTAIC MODULE' and lists 'Solar Module Type: JKM450M-60'. Key specs include Maximum Power (Pmax) 450W, dimensions 2006x1039x35(mm), and 'Made in Penang, Malaysia'.",
+      "The label includes certification marks: UL Listed, CE, and a square with a circle (likely TUV or similar).",
+      "The photos are taken with a Redmi 13C phone, timestamped 18/11/2024."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "solar panel",
+      "brand": "JinKO",
+      "model": "JKM450M-60",
+      "read_from": [
+        "photo 1 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "we have solar panel, inverter and batteries of different sizes",
+        "verdict": "unverified",
+        "evidence": "Only the solar panel is shown in the photos. No inverter or batteries are visible."
+      },
+      {
+        "claim": "solar panel",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows a solar panel, and photo 1 confirms it with a label."
+      },
+      {
+        "claim": "different sizes",
+        "verdict": "unverifiable_remote",
+        "evidence": "Only one panel is shown. The seller claims other sizes exist, but no proof is provided in the photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The panel may be damaged or have microcracks not visible in the photos.",
+        "proof": "A close-up photo of the panel's surface under bright, even light, showing the entire grid of cells.",
+        "if_unproven": "priced as potentially defective, with reduced value"
+      },
+      {
+        "risk": "The panel may not be functional or may have degraded performance.",
+        "proof": "A video or photo of the panel being tested with a multimeter or a solar panel tester showing output under sunlight.",
+        "if_unproven": "priced as not working, or with significant discount for unverified condition"
+      },
+      {
+        "risk": "The label may be fake or misapplied.",
+        "proof": "A photo of the panel's serial number and the label's barcode scanned, or a photo showing the label physically attached to the panel's frame.",
+        "if_unproven": "priced as unverified authenticity, with discount"
+      }
+    ],
+    "proof_requests": [
+      "A close-up photo of the entire solar panel surface under bright light to check for cracks or damage.",
+      "A video or photo of the panel being tested with a multimeter or solar tester under sunlight.",
+      "A photo showing the label's barcode being scanned or the serial number clearly visible on the panel frame."
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a JinKO JKM450M-60 solar panel from the label in photo 1. The photos support the claim of a solar panel, but other claims (like different sizes or inverter/batteries) are unverified. Hidden risks include physical damage, non-functionality, and label authenticity, which are priced conservatively until proven."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 62930,
+    "input_tokens": 2281,
+    "output_tokens": 821,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "b52a4a25acecb0960486a4fbc78a67f9",
+    "error": null
+  }
+}

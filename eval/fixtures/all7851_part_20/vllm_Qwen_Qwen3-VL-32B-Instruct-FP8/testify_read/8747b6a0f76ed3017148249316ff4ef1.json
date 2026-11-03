@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "A red metal drum with a white label on the lid and partial branding 'Totalen' visible on the side.",
+      "The drum has a metal clasp on the rim, suggesting it is sealed or has been opened before.",
+      "The label on the lid is small and contains text and a hazard symbol, but the text is not legible.",
+      "The drum appears to be outdoors on a concrete surface, with some rust or dirt visible on the rim and body.",
+      "The seller's text mentions 'TotalEnergies MULTIS COMPLEX S2 A', which is a blue, semi-synthetic lithium complex grease, but the drum is red and no blue color is visible."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "industrial grease drum",
+      "brand": "TotalEnergies",
+      "model": "MULTIS COMPLEX S2 A",
+      "read_from": [
+        "photo 0 label (partial brand name 'Totalen')",
+        "seller's text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "TotalEnergies MULTIS COMPLEX S2 A is a blue, semi-synthetic lithium complex grease",
+        "verdict": "contradicted",
+        "evidence": "photo 0 shows a red drum, and no blue color is visible on the product or container. The label text is illegible, so the product inside cannot be confirmed visually."
+      },
+      {
+        "claim": "The product is in a drum",
+        "verdict": "supported",
+        "evidence": "photo 0 shows a red metal drum with a lid and clasp."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The product inside may not be the claimed TotalEnergies MULTIS COMPLEX S2 A grease, or may be contaminated or expired.",
+        "proof": "A clear photo of the label on the drum, showing the full product name, batch number, and expiry date.",
+        "if_unproven": "priced as unknown or potentially counterfeit, with lower value due to uncertainty."
+      },
+      {
+        "risk": "The drum may have been opened or tampered with, affecting product integrity.",
+        "proof": "A close-up photo of the drum's seal or clasp, showing whether it is intact or broken.",
+        "if_unproven": "priced as potentially compromised, with reduced value."
+      },
+      {
+        "risk": "The product may not be blue as claimed, indicating a mismatch between description and actual product.",
+        "proof": "A photo showing the color of the grease inside the drum, or a sample taken from the drum.",
+        "if_unproven": "priced as not matching description, with lower value."
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the full label on the drum, including product name, batch, and expiry.",
+      "Close-up of the drum's seal or clasp to verify if it is intact.",
+      "Photo of the grease inside the drum to confirm color and consistency."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The drum is red, contradicting the seller's claim that the product is blue. The label is illegible, and the product inside cannot be verified. Without proof of the actual product, its identity and condition are uncertain, making a price impossible to assign confidently."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 60912,
+    "input_tokens": 1729,
+    "output_tokens": 731,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "8747b6a0f76ed3017148249316ff4ef1",
+    "error": null
+  }
+}

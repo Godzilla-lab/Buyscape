@@ -1,0 +1,86 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the front of a silver server chassis with a vented panel, multiple ports (including VGA and USB), and orange and clear handles on the right side.",
+      "Photo 1 shows the rear of the same server, with a large flat panel, a handle, and several labels including a regulatory sticker and a diagram for LED behavior and configuration.",
+      "Photo 2 shows the front again, with the Dell EMC logo visible on the front bezel, and the model number 'R640' clearly visible on the front bezel.",
+      "The server is placed on a blue surface, likely a table or mat, with 'I.G SERVER TECH' watermarked across all photos.",
+      "No internal components (CPUs, RAM, drives) are visible in any photo."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "server",
+      "brand": "Dell",
+      "model": "PowerEdge R640",
+      "read_from": [
+        "photo 2 front bezel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Dell PowerEdge R640 Server",
+        "verdict": "supported",
+        "evidence": "Photo 2: 'Dell EMC' logo and 'R640' model number visible on front bezel."
+      },
+      {
+        "claim": "2x 4110=16 Cores",
+        "verdict": "unverifiable_remote",
+        "evidence": "No CPU or internal components visible. Cannot confirm processor model or count from photos."
+      },
+      {
+        "claim": "H730p",
+        "verdict": "unverifiable_remote",
+        "evidence": "No RAID controller visible. Cannot confirm H730p model from photos."
+      },
+      {
+        "claim": "64gb RAM",
+        "verdict": "unverifiable_remote",
+        "evidence": "No RAM modules visible. Cannot confirm amount or presence from photos."
+      },
+      {
+        "claim": "2Tb Drives",
+        "verdict": "unverifiable_remote",
+        "evidence": "No drives visible. Cannot confirm size or presence from photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Internal components (CPUs, RAM, drives, RAID controller) may not match the seller's claims.",
+        "proof": "Photos of the internal components, including CPU sockets, RAM slots, drive bays, and RAID controller.",
+        "if_unproven": "Priced as if components are missing or not as described (e.g., no RAM, no drives, or wrong CPU)."
+      },
+      {
+        "risk": "Server may be non-functional or have hardware faults (e.g., dead drives, failed RAID controller).",
+        "proof": "Video or photos showing the server powered on, BIOS screen, or POST process.",
+        "if_unproven": "Priced as not working."
+      },
+      {
+        "risk": "Server may have physical damage or wear not visible in current photos (e.g., bent chassis, damaged ports).",
+        "proof": "Close-up photos of all ports, handles, and chassis edges.",
+        "if_unproven": "Priced as is, with assumption of minor wear; major damage would reduce value."
+      }
+    ],
+    "proof_requests": [
+      "Photos of the internal components: CPUs, RAM, drives, and RAID controller.",
+      "Video or photos showing the server powered on and booting into BIOS or OS.",
+      "Close-up photos of all ports, handles, and chassis edges for physical condition assessment."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is confirmed as Dell PowerEdge R640 from photo 2, but all internal specifications (CPUs, RAM, drives, RAID controller) are unverifiable from current photos. Without proof of internal components and functionality, the item cannot be priced accurately. The risks of mismatched or non-functional parts are significant and must be resolved before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 67711,
+    "input_tokens": 2350,
+    "output_tokens": 879,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "4cc4245bbf04641861422b941d79d4d1",
+    "error": null
+  }
+}

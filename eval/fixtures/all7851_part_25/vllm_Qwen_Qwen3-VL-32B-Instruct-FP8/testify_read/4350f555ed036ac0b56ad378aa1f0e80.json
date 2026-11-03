@@ -1,0 +1,88 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the back of a silver iPhone with a triple-camera system in a square module, Apple logo centered below it. The design matches iPhone 14 Pro or later models, not iPhone 16 Pro Max.",
+      "Photo 1 shows the front of the phone with a notch and iOS home screen. The UI and widget layout are consistent with iOS 17 or later, but the notch shape and camera module design are more similar to iPhone 14 Pro/15 Pro than iPhone 16 Pro Max.",
+      "The phone appears to be in good physical condition with no visible cracks or dents.",
+      "No model name or serial number is visible in either photo.",
+      "The seller claims it is an iPhone 16 Pro Max, but the design does not match the known iPhone 16 Pro Max (which has a different camera module and no notch)."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "iPhone",
+      "brand": "Apple",
+      "model": null,
+      "read_from": [
+        "photo 0 back panel",
+        "photo 1 front screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "iPhone 16 Pro Max",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 and photo 1 show a phone with a triple-camera module and notch, which matches iPhone 14 Pro or 15 Pro design, not iPhone 16 Pro Max which has a different camera layout and no notch."
+      },
+      {
+        "claim": "256gb",
+        "verdict": "unverifiable_remote",
+        "evidence": "No storage information visible in photos. Cannot verify from remote images."
+      },
+      {
+        "claim": "100bh (100% battery health)",
+        "verdict": "unverifiable_remote",
+        "evidence": "Battery health cannot be verified from photos. Requires checking Settings > Battery > Battery Health."
+      },
+      {
+        "claim": "network locked wifi only",
+        "verdict": "unverifiable_remote",
+        "evidence": "No SIM tray or network settings visible. Cannot verify lock status from photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The phone is not an iPhone 16 Pro Max but an older model (likely iPhone 14 Pro or 15 Pro).",
+        "proof": "Photo showing the model name on the back or in Settings > General > About.",
+        "if_unproven": "Priced as an older model (iPhone 14 Pro/15 Pro), not iPhone 16 Pro Max."
+      },
+      {
+        "risk": "Battery health is not 100% as claimed.",
+        "proof": "Screenshot of Settings > Battery > Battery Health showing battery condition.",
+        "if_unproven": "Priced as degraded battery, which reduces value significantly."
+      },
+      {
+        "risk": "Phone is not truly 'wifi only' or is network locked to a carrier.",
+        "proof": "Photo of SIM tray or screenshot of Settings > Cellular > Cellular Data Network showing carrier lock status.",
+        "if_unproven": "Priced as potentially locked, which reduces resale value."
+      },
+      {
+        "risk": "Phone is stolen or has been reported lost.",
+        "proof": "IMEI check via Apple's website or carrier verification.",
+        "if_unproven": "Priced as potentially blacklisted, which may render it unusable."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of Settings > General > About showing the exact model name and storage capacity.",
+      "Screenshot of Settings > Battery > Battery Health showing battery condition.",
+      "Photo of the SIM tray or screenshot of Settings > Cellular > Cellular Data Network to verify network lock status.",
+      "IMEI number for verification against Apple's database or carrier blacklist."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The phone's design contradicts the seller's claim of being an iPhone 16 Pro Max. The model cannot be confirmed from current photos, and critical claims (storage, battery health, network lock) are unverifiable. Proof is needed to determine the actual model and condition before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 74914,
+    "input_tokens": 2285,
+    "output_tokens": 923,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "4350f555ed036ac0b56ad378aa1f0e80",
+    "error": null
+  }
+}

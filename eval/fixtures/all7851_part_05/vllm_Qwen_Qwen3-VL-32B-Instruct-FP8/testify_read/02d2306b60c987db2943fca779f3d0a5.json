@@ -1,0 +1,105 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: White box with MacBook Pro image and label reading 'MacBook Pro A2442 M1 Pro 16GB 512 SSD Tahoe 24.4.1 NO' and SKU 'Refurb D-3 EM 700'.",
+      "Photo 1: Open box showing silver MacBook Pro lid with Apple logo. Orange sticky note with handwritten text: 'SPARE GREY', 'SN: DWWY6VXK31', 'OC: 130', 'RAM: 16GB', 'SSD: 512GB', 'Color: Grey', 'ID: D-3', 'Tahoe 24.4.1', 'M1 PRO CHIP', '14\" 2021'.",
+      "Photo 2: Open laptop showing screen with Apple logo and loading bar, keyboard, trackpad. Yellow sticky note: 'MacBook Pro 2021', 'Apple M1 Pro chip', '16gb Ram / 512gb SSD', 'Touch ID', 'Hrs: 130', 'Lot: 130', 'SN: DWWY6VXK31', 'D34'.",
+      "All photos show a retail box and laptop in a store setting with visible 'DY QUALITY GADGETS' watermark.",
+      "The serial number DWWY6VXK31 is visible on both sticky notes in photos 1 and 2."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "MacBook Pro",
+      "brand": "Apple",
+      "model": "MacBook Pro 14\" 2021 M1 Pro",
+      "read_from": [
+        "photo 0 label: 'MacBook Pro A2442 M1 Pro 16GB 512 SSD'",
+        "photo 1 sticky note: '14\" 2021', 'M1 PRO CHIP'",
+        "photo 2 sticky note: 'MacBook Pro 2021', 'Apple M1 Pro chip'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "MacBook Pro 14\" 2021 M1 Pro",
+        "verdict": "supported",
+        "evidence": "Photo 0 label, photo 1 sticky note, photo 2 sticky note all state 'MacBook Pro 2021' and 'M1 Pro chip'."
+      },
+      {
+        "claim": "16GB RAM",
+        "verdict": "supported",
+        "evidence": "Photo 0 label: '16GB', photo 1 sticky note: 'RAM: 16GB', photo 2 sticky note: '16gb Ram'."
+      },
+      {
+        "claim": "512GB SSD",
+        "verdict": "supported",
+        "evidence": "Photo 0 label: '512 SSD', photo 1 sticky note: 'SSD: 512GB', photo 2 sticky note: '512gb SSD'."
+      },
+      {
+        "claim": "Apple M1 Pro chip",
+        "verdict": "supported",
+        "evidence": "Photo 0 label: 'M1 Pro', photo 1 sticky note: 'M1 PRO CHIP', photo 2 sticky note: 'Apple M1 Pro chip'."
+      },
+      {
+        "claim": "Touch ID",
+        "verdict": "supported",
+        "evidence": "Photo 2 sticky note: 'Touch ID'."
+      },
+      {
+        "claim": "Refurbished",
+        "verdict": "unverified",
+        "evidence": "Photo 0 label: 'Refurb D-3 EM 700'. But no official Apple refurbishment label or certification visible. The term 'Refurb' is used in the label, but not confirmed by Apple branding or documentation."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery health or cycle count not verified",
+        "proof": "A screenshot of the macOS System Report showing battery cycle count and current capacity percentage.",
+        "if_unproven": "Priced as if battery is degraded (e.g., 60-70% health), which reduces value significantly."
+      },
+      {
+        "risk": "Serial number mismatch or cloned device",
+        "proof": "A clear photo of the serial number engraved on the bottom of the laptop, and a verification via Apple's official check page (https://checkcoverage.apple.com) showing the device's model, warranty status, and original purchase date.",
+        "if_unproven": "Priced as if the device is not genuine or has been cloned, which could be a fraud risk."
+      },
+      {
+        "risk": "Screen damage or dead pixels not visible in photos",
+        "proof": "A video or photo showing the screen from multiple angles, especially under bright light, and a full-screen white test to check for dead pixels or backlight issues.",
+        "if_unproven": "Priced as if screen has minor defects, which reduces value."
+      },
+      {
+        "risk": "Keyboard or trackpad malfunction",
+        "proof": "A video showing the keyboard typing and trackpad scrolling and clicking functions.",
+        "if_unproven": "Priced as if keyboard or trackpad may be faulty, reducing value."
+      },
+      {
+        "risk": "Not actually 2021 model or M1 Pro chip",
+        "proof": "A screenshot of the macOS About This Mac window showing the exact model identifier (e.g., MacBookPro18,1) and chip type.",
+        "if_unproven": "Priced as if it may be a lower model (e.g., M1 or M1 Max), which would be a significant downgrade."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of macOS About This Mac showing model identifier and chip type.",
+      "Screenshot of System Report showing battery cycle count and health.",
+      "Photo of the serial number engraved on the bottom of the laptop.",
+      "Video of keyboard and trackpad functionality.",
+      "Photo of screen under bright light with full white screen to check for dead pixels or backlight issues."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "While the seller's claims are supported by visible labels and sticky notes, critical risks remain unproven: battery health, authenticity via serial number verification, screen condition, and hardware functionality. Without proof, the item cannot be priced accurately and may be misrepresented. The device appears to be a 2021 MacBook Pro with M1 Pro, 16GB RAM, and 512GB SSD, but verification is needed to confirm these specs and condition."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 121384,
+    "input_tokens": 2602,
+    "output_tokens": 1461,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "02d2306b60c987db2943fca779f3d0a5",
+    "error": null
+  }
+}

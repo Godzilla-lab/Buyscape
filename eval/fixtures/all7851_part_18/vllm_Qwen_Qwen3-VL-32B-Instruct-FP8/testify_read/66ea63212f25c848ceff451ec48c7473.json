@@ -1,0 +1,95 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: MacBook Air open, showing setup screen with 'Welcome' and world map. Keyboard is visible, with 'MacBook Air' label below it. Watermark 'VICKY COMPUTERS EMAB' is overlaid. Background shows other Apple devices and a glass counter.",
+      "Photo 1: Back of the laptop showing Apple logo and two stickers. One sticker lists specs: '15.62107 1.60GHZ', '8GB RAM', '256 SSD', 'UHD GRAPHICS 617'. Another sticker says 'BATTERY: 82.8%', 'OS LOADED', 'NO DEF', 'CLOAK: 204'.",
+      "Photo 2: Bottom of the laptop showing four rubber feet and a clean aluminum base. A hand holds the device, and a watch is visible on the wrist. Watermark 'VICKY COMPUTERS EMAB' is present.",
+      "The device appears to be a MacBook Air, but the sticker in photo 1 lists '15.62107 1.60GHZ' which is inconsistent with a 13-inch 2019 MacBook Air (which typically has a 1.6GHz or 1.6GHz dual-core Intel Core i5).",
+      "The sticker also says 'UHD Graphics 617', which is typical for 8th-gen Intel processors, consistent with 2019 models.",
+      "The screen shows the macOS setup, indicating the OS is loaded and the device powers on.",
+      "No visible damage to the body or screen in the photos."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "MacBook Air",
+      "brand": "Apple",
+      "model": "MacBook Air 2019",
+      "read_from": [
+        "photo 0 screen (MacBook Air label)",
+        "photo 1 sticker (specifications including 8GB RAM, 256 SSD, UHD Graphics 617)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "MacBook Air 2019",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows 'MacBook Air' label below keyboard. Photo 1 sticker lists specs consistent with 2019 model (UHD Graphics 617, 8GB RAM, 256 SSD)."
+      },
+      {
+        "claim": "256 SSD",
+        "verdict": "supported",
+        "evidence": "Photo 1 sticker clearly states '256 SSD'."
+      },
+      {
+        "claim": "8GB RAM",
+        "verdict": "supported",
+        "evidence": "Photo 1 sticker clearly states '8GB RAM'."
+      },
+      {
+        "claim": "13 inches",
+        "verdict": "unverified",
+        "evidence": "Photo 1 sticker says '15.62107' which may be a misprint or mislabeling; 13-inch is typical for MacBook Air 2019, but not confirmed by photo. No direct measurement or screen size indicator in photos."
+      },
+      {
+        "claim": "Core i5",
+        "verdict": "unverified",
+        "evidence": "Photo 1 sticker says '1.60GHZ' but does not specify 'Core i5'. The processor is likely an 8th-gen Intel Core i5 based on UHD Graphics 617, but not explicitly stated."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The device may not be a genuine 2019 MacBook Air; the sticker's '15.62107' is suspicious and could indicate a mislabeled or non-Apple device.",
+        "proof": "Photo of the serial number or a screenshot from System Report (About This Mac) showing exact model and processor.",
+        "if_unproven": "Priced as a lower-tier or non-genuine device, possibly a refurbished or cloned unit."
+      },
+      {
+        "risk": "Battery health may be degraded despite sticker claiming 82.8% \u2014 this is a common issue with used MacBooks.",
+        "proof": "Screenshot from System Report showing battery cycle count and condition.",
+        "if_unproven": "Priced as if battery is degraded, reducing value."
+      },
+      {
+        "risk": "The device may have hidden physical damage or screen issues not visible in photos.",
+        "proof": "Video showing the device being opened, closed, and screen being touched and moved through full range of motion.",
+        "if_unproven": "Priced as if minor damage or screen issues are present."
+      },
+      {
+        "risk": "The 'NO DEF' claim on sticker may be false \u2014 there could be software or hardware defects not visible.",
+        "proof": "Video of the device running for 5 minutes, showing no crashes, fans, or lag.",
+        "if_unproven": "Priced as if potentially defective."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot from System Report (About This Mac) showing exact model, processor, and serial number.",
+      "Video of the device running for 5 minutes, showing no crashes or fan issues.",
+      "Photo of the serial number sticker or barcode.",
+      "Screenshot of battery health and cycle count."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The device appears to be a MacBook Air with specs matching the 2019 model, but the sticker's '15.62107' is suspicious and could indicate a mislabeled or non-genuine device. Battery health and hidden defects are unverified. Proof is needed to confirm model authenticity and condition before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 98554,
+    "input_tokens": 3245,
+    "output_tokens": 1259,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "66ea63212f25c848ceff451ec48c7473",
+    "error": null
+  }
+}

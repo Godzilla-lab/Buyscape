@@ -1,0 +1,91 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Open laptop showing a colorful desktop wallpaper with a clownfish, Windows taskbar visible, silver chassis, black keyboard, HP logo on bezel, vPRO sticker on palm rest.",
+      "Photo 1: Same laptop with screen off, reflecting surroundings, same silver chassis and keyboard, vPRO sticker visible.",
+      "Photo 2: Windows 'About' screen showing system info: 12th Gen Intel Core i7-1265U, 32 GB RAM, 477 GB storage (59 GB used), Intel Iris Xe Graphics, device name 'DESKTOP-0KMGJLG', product ID '00330-80000-00000-AA732', and 'HP Elite Dragonfly 13.5 inch G3 Notebook PC' in device info.",
+      "All photos show a watermark 'GADGETBAY' and 'POSTED ON JIJI'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "Elite Dragonfly G3",
+      "read_from": [
+        "photo 2 screen: 'HP Elite Dragonfly 13.5 inch G3 Notebook PC'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP Elite Dragonfly G3 13.5\" Touchscreen",
+        "verdict": "supported",
+        "evidence": "Photo 2 screen shows 'HP Elite Dragonfly 13.5 inch G3 Notebook PC' and 'Pen and touch: Touch support with 10 touch points'."
+      },
+      {
+        "claim": "Core i7 (12th Gen)",
+        "verdict": "supported",
+        "evidence": "Photo 2 screen shows '12th Gen Intel(R) Core(TM) i7-1265U'."
+      },
+      {
+        "claim": "32GB RAM",
+        "verdict": "supported",
+        "evidence": "Photo 2 screen shows 'Installed RAM: 32.0 GB (31.6 GB usable)'."
+      },
+      {
+        "claim": "512GB SSD",
+        "verdict": "contradicted",
+        "evidence": "Photo 2 screen shows 'Storage: 477 GB' (59 GB used), which is less than 512GB. The exact capacity is not 512GB as claimed."
+      },
+      {
+        "claim": "Fingerprint, Face...",
+        "verdict": "unverified",
+        "evidence": "No visible fingerprint reader or camera in photos. The 'Face' claim is not verifiable from images alone; no front-facing camera is visible in photo 0 or 1. The 'Fingerprint' claim is not visible in any photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Physical damage or wear not visible in photos",
+        "proof": "Close-up shots of the screen edges, hinges, keyboard, and chassis for scratches, dents, or wear.",
+        "if_unproven": "Priced as having potential cosmetic damage, which may reduce value."
+      },
+      {
+        "risk": "Battery health or performance not shown",
+        "proof": "Battery health report or a video showing battery life under load.",
+        "if_unproven": "Priced as having unknown battery condition, which may affect usability and value."
+      },
+      {
+        "risk": "Fingerprint reader and face recognition not confirmed",
+        "proof": "Video or photo showing the fingerprint reader in use and the front camera active.",
+        "if_unproven": "Priced as lacking biometric features, reducing value for security-focused buyers."
+      },
+      {
+        "risk": "Storage capacity discrepancy (claimed 512GB, shown 477GB)",
+        "proof": "Detailed disk management screenshot or command prompt output showing exact partition sizes.",
+        "if_unproven": "Priced as having less storage than advertised, which may be a material defect or misrepresentation."
+      }
+    ],
+    "proof_requests": [
+      "Close-up photos of the laptop's hinges, screen edges, and keyboard for physical condition.",
+      "Video or photo showing the fingerprint reader and front camera in use.",
+      "Battery health report or video showing battery life.",
+      "Detailed disk management screenshot to confirm exact storage capacity."
+    ],
+    "decision": "price",
+    "reason": "The laptop is identifiable as an HP Elite Dragonfly G3 with confirmed specs from the Windows 'About' screen. The 512GB SSD claim is contradicted by the 477GB shown, and biometric features are unverified. Hidden risks include physical wear, battery health, and storage discrepancy. The item can be priced at its worst case (e.g., 477GB SSD, no biometrics) based on visible evidence."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 85957,
+    "input_tokens": 2712,
+    "output_tokens": 1070,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "30b92bb05e4620555c44302034386708",
+    "error": null
+  }
+}

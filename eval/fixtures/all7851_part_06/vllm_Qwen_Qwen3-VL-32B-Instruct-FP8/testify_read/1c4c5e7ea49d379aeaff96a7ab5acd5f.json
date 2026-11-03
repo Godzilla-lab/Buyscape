@@ -1,0 +1,103 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the back of a silver laptop with an Apple logo and a handwritten note taped to it.",
+      "The note on photo 0 reads: 'Macbook Air 2018 M1, Apple M1 Chip, Ram: 8GB, Storage: 256GB, CC: IT / MXC: 100%, SN: HXJKL56F1MFV, Space Grey'.",
+      "Photo 1 shows the same laptop open, displaying the macOS login screen with a beach wallpaper and time '07:15'.",
+      "The keyboard and trackpad are visible in photo 1, and the laptop appears to be powered on.",
+      "The background in both photos shows a store with glass shelves holding other Apple laptops."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Apple",
+      "model": "MacBook Air",
+      "read_from": [
+        "photo 0 note",
+        "photo 1 screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Model: Apple MacBook Air (Late 2020)",
+        "verdict": "unverified",
+        "evidence": "The note in photo 0 says 'Macbook Air 2018 M1', which contradicts the 'Late 2020' claim. The M1 chip was introduced in 2020, so '2018' is likely a mistake. The model year cannot be confirmed from the photos alone."
+      },
+      {
+        "claim": "Apple M1 Chip",
+        "verdict": "supported",
+        "evidence": "The note in photo 0 explicitly states 'Apple M1 Chip'. The macOS interface in photo 1 is consistent with M1 Macs."
+      },
+      {
+        "claim": "8GB Unified Memory (RAM)",
+        "verdict": "supported",
+        "evidence": "The note in photo 0 states 'Ram: 8GB'. This is consistent with the M1 MacBook Air configuration."
+      },
+      {
+        "claim": "256GB SSD",
+        "verdict": "supported",
+        "evidence": "The note in photo 0 states 'Storage: 256GB'."
+      },
+      {
+        "claim": "CC: IT / MXC: 100%",
+        "verdict": "unverifiable_remote",
+        "evidence": "This refers to condition and battery health, which cannot be verified from photos alone. The 'MXC: 100%' likely means battery health is 100%, but this requires system report proof."
+      },
+      {
+        "claim": "SN: HXJKL56F1MFV",
+        "verdict": "supported",
+        "evidence": "The serial number is written on the note in photo 0. It can be verified via Apple's website, but that is not possible remotely."
+      },
+      {
+        "claim": "Space Grey",
+        "verdict": "supported",
+        "evidence": "The laptop's color in both photos matches Apple's Space Grey finish."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The model year is claimed as 'Late 2020' but the note says '2018', which is likely incorrect. The M1 chip was not available in 2018.",
+        "proof": "A clear shot of the laptop's bottom case showing the model identifier (e.g., A2337 for Late 2020) or a screenshot of the About This Mac window showing the model year.",
+        "if_unproven": "Priced as a 2018 model, which is not accurate and would be a significant downgrade in value."
+      },
+      {
+        "risk": "Battery health is claimed as 100% (MXC: 100%), but this cannot be verified from photos.",
+        "proof": "A screenshot of the System Report > Power section showing battery cycle count and condition.",
+        "if_unproven": "Priced as if battery health is unknown, which may be lower than 100% and affects resale value."
+      },
+      {
+        "risk": "The laptop may have been repaired or have hidden damage (e.g., screen, hinges, keyboard) not visible in the photos.",
+        "proof": "A video showing the laptop being opened and closed, keyboard typing, and screen from multiple angles.",
+        "if_unproven": "Priced as if there may be hidden damage, which could reduce value."
+      },
+      {
+        "risk": "The serial number may be fake or the device may be stolen or gray market.",
+        "proof": "A screenshot of Apple's Check Coverage page with the serial number entered, showing warranty status and device type.",
+        "if_unproven": "Priced as if authenticity is uncertain, which reduces value."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of About This Mac showing model year and chip type.",
+      "Screenshot of System Report > Power showing battery health and cycle count.",
+      "Video of the laptop being opened, closed, and keyboard typing.",
+      "Screenshot of Apple's Check Coverage page with the serial number HXJKL56F1MFV."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model year claim is inconsistent with the note, and critical details like battery health and authenticity cannot be verified from the photos. The item cannot be priced accurately without further proof."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 93771,
+    "input_tokens": 2599,
+    "output_tokens": 1204,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "1c4c5e7ea49d379aeaff96a7ab5acd5f",
+    "error": null
+  }
+}

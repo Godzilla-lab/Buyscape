@@ -1,0 +1,106 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a yellow and black high-pressure washer with the brand 'INGCO' visible on the body and spray gun. The unit has a handle, a power switch, and a water inlet. A coiled black hose and spray gun are shown separately.",
+      "Photo 1 is a composite image showing four use cases: cleaning a kitchen, washing a car, cleaning a garden, and cleaning a patio. These are illustrative, not photos of the actual item in use.",
+      "Photo 2 shows the same washer and accessories with a specification table. The brand 'INGCO' is visible on the unit. The table lists: Voltage 220-240V~50/60Hz, Carbon brush motor, Input power 1200W, Max Pressure 90Bar (1300PSI), Flow rate 5.5L/min, Aluminum wire motor, Auto stop system, 1 set water spray gun, 3m high pressure hose."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "high pressure washer",
+      "brand": "INGCO",
+      "model": null,
+      "read_from": [
+        "photo 0 body",
+        "photo 0 spray gun",
+        "photo 2 unit"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Voltage: 220-240V~50/60Hz",
+        "verdict": "supported",
+        "evidence": "Photo 2 specification table"
+      },
+      {
+        "claim": "Carbon brush motor",
+        "verdict": "supported",
+        "evidence": "Photo 2 specification table"
+      },
+      {
+        "claim": "Input power: 1200W",
+        "verdict": "supported",
+        "evidence": "Photo 2 specification table"
+      },
+      {
+        "claim": "Max Pressure: 90Bar (1300PSI)",
+        "verdict": "supported",
+        "evidence": "Photo 2 specification table"
+      },
+      {
+        "claim": "Flow rate: 5.5L/min",
+        "verdict": "supported",
+        "evidence": "Photo 2 specification table"
+      },
+      {
+        "claim": "Aluminum wire motor",
+        "verdict": "supported",
+        "evidence": "Photo 2 specification table"
+      },
+      {
+        "claim": "Auto stop system",
+        "verdict": "supported",
+        "evidence": "Photo 2 specification table"
+      },
+      {
+        "claim": "1 set water spray gun",
+        "verdict": "supported",
+        "evidence": "Photo 0 and Photo 2 show the spray gun included"
+      },
+      {
+        "claim": "3m high pressure hose",
+        "verdict": "supported",
+        "evidence": "Photo 0 and Photo 2 show the hose, and Photo 2 specification table lists 3m"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The unit may not be functional or may have internal damage not visible in photos.",
+        "proof": "A video showing the washer operating, including startup, water flow, and pressure output.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The hose or spray gun may be damaged or missing parts not visible in the photos.",
+        "proof": "Close-up photos of the hose connectors and spray gun nozzle, showing no cracks or wear.",
+        "if_unproven": "priced as possibly damaged"
+      },
+      {
+        "risk": "The item may be a counterfeit or rebranded unit not matching the specifications.",
+        "proof": "A photo of the product label or serial number plate, or a video of the unit being powered on and running.",
+        "if_unproven": "priced as unverified brand"
+      }
+    ],
+    "proof_requests": [
+      "Video of the washer operating, showing water flow and pressure.",
+      "Close-up photos of the hose connectors and spray gun nozzle.",
+      "Photo of the product label or serial number plate."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "While the brand and specifications are visible and supported by the photos, the functional condition and absence of hidden damage cannot be confirmed remotely. The item must be proven to work and be complete before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 62973,
+    "input_tokens": 2410,
+    "output_tokens": 956,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "1d0dca210d02852a572c0da61f0ae2b0",
+    "error": null
+  }
+}

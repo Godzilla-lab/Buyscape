@@ -1,0 +1,70 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a 5-liter transparent plastic bottle of KTC Pure Sunflower Oil with a red cap and handle, placed on top of shrink-wrapped cartons of the same product.",
+      "The label on the bottle is green and yellow, with 'KTC' logo, 'PURE SUNFLOWER OIL', and '5 Litres' clearly visible.",
+      "The cartons below are wrapped in clear plastic, with green and yellow branding matching the bottle label.",
+      "Photo 1 is nearly identical to Photo 0, with the same bottle and cartons, and a watermark 'BERRISA GLOBAL SHOPS LTD'.",
+      "Photo 2 is a closer shot of the bottle, showing the label more clearly, including '5 Litres' and the KTC logo.",
+      "All photos show the same product, with no visible damage to the bottle or cartons.",
+      "The setting appears to be a storage or shop area with a concrete wall and wooden structure."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "5-liter bottle of sunflower oil",
+      "brand": "KTC",
+      "model": "Pure Sunflower Oil",
+      "read_from": [
+        "photo 0 label",
+        "photo 1 label",
+        "photo 2 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Carton 5Litres KTC Sunflower Oil by 3",
+        "verdict": "supported",
+        "evidence": "Photo 0, 1, and 2 show multiple cartons wrapped in plastic, each labeled '5 Litres KTC Pure Sunflower Oil'. The bottle on top confirms the product and volume."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Product may be expired or past best-before date",
+        "proof": "Clear photo of the bottle label showing the expiration or best-before date",
+        "if_unproven": "priced as potentially expired, which reduces value"
+      },
+      {
+        "risk": "Oil may be adulterated or not genuine KTC product",
+        "proof": "Close-up of the bottle label showing batch number, barcode, and manufacturer details",
+        "if_unproven": "priced as unverified authenticity, which reduces value"
+      },
+      {
+        "risk": "Cartons may be damaged or contain less than 3 units",
+        "proof": "Photo showing the contents of one carton, or a count of bottles inside a carton",
+        "if_unproven": "priced as possibly incomplete, which reduces value"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the bottle label showing the expiration date and batch number",
+      "Photo showing the inside of one carton to confirm the number of bottles inside",
+      "Photo of the carton's side or back label with manufacturing details"
+    ],
+    "decision": "price",
+    "reason": "The product is clearly identified as KTC Pure Sunflower Oil, 5-liter bottles, with multiple cartons visible. The seller's claim is supported by the photos. Hidden risks include expiration and authenticity, which are priced conservatively until proven. The item can be priced at its worst case as seen."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 56600,
+    "input_tokens": 2780,
+    "output_tokens": 695,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "e0f4f2610ac184570b9142727dc52a04",
+    "error": null
+  }
+}

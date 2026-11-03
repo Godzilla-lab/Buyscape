@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Bottom of a silver laptop with 'MacBook Pro' engraved near the center. Four rubber feet are visible. A small white sticker with 'Jiji' is present. The surface is wooden.",
+      "Photo 1: Laptop open, showing a black keyboard, silver trackpad, and a screen displaying a lock screen with time '5:34' and date 'Mon 25 Oct'. The screen has a notch at the top. The laptop is on a wooden surface with plastic wrap underneath.",
+      "Photo 2: Top lid of the laptop, silver with Apple logo. A white sticker with a barcode is above the logo. A handwritten white sticker on the bottom left says 'M1 Pro 16/512gb'. The surface is wooden."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "MacBook Pro",
+      "brand": "Apple",
+      "model": "M1 Pro",
+      "read_from": [
+        "photo 2 sticker",
+        "photo 0 engraving"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "London use MacBook Pro 2021 M1 Pro 14inches 16gb /512ssd",
+        "verdict": "unverified",
+        "evidence": "The model 'M1 Pro' is written on a sticker in photo 2, and 'MacBook Pro' is engraved in photo 0. The 16GB/512GB is also on the sticker. However, the year '2021' and '14 inches' are not visible in any photo. The screen size is not directly measurable from the photos, and the year cannot be confirmed without serial number or system info."
+      },
+      {
+        "claim": "everything working perfectly fine",
+        "verdict": "unverifiable_remote",
+        "evidence": "The screen is on and shows a lock screen, indicating the device powers on. However, no functional test (e.g., keyboard, trackpad, ports, battery, software) is shown. The claim cannot be verified remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The laptop may be stolen or imported illegally (\u2018London use\u2019 may imply grey market or stolen goods)",
+        "proof": "A clear shot of the serial number and a verification of its status via Apple\u2019s website or a trusted reseller.",
+        "if_unproven": "Priced as high-risk import, with potential legal or warranty issues."
+      },
+      {
+        "risk": "The screen size is not confirmed as 14 inches; it may be 16 inches (M1 Pro models come in 14 and 16 inch variants)",
+        "proof": "A photo showing the screen bezel or a ruler next to the screen to measure diagonal size.",
+        "if_unproven": "Priced as 14-inch model, but if actually 16-inch, the price should be higher. If unproven, assume 14-inch as claimed."
+      },
+      {
+        "risk": "The RAM and SSD may not be 16GB/512GB as claimed; the sticker could be fake or mislabeled",
+        "proof": "A screenshot of the 'About This Mac' system info showing the actual RAM and storage.",
+        "if_unproven": "Priced as 16GB/512GB, but if false, the value drops significantly. Assume worst case: not as specified."
+      },
+      {
+        "risk": "Battery health or condition is unknown; may be degraded",
+        "proof": "A screenshot of the battery health info from macOS (under 'About This Mac' > 'System Report' > 'Power')",
+        "if_unproven": "Priced as if battery is healthy, but if degraded, value drops. Assume worst case: battery is degraded."
+      },
+      {
+        "risk": "The device may have physical damage not visible in photos (e.g., hinge, ports, screen cracks under light)",
+        "proof": "A close-up video or photo of all edges, ports, hinges, and screen under different lighting.",
+        "if_unproven": "Priced as if no damage, but if damage exists, value drops. Assume worst case: minor damage present."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of 'About This Mac' showing model year, RAM, and storage.",
+      "Screenshot of battery health from System Report.",
+      "Photo or video of the laptop\u2019s serial number.",
+      "Close-up photo of the screen edges and ports under light to check for damage.",
+      "Photo of the laptop with a ruler next to the screen to confirm size."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identified as M1 Pro from a sticker, but key claims (year, screen size, specs) are unverified. Functional claims are unverifiable remotely. Hidden risks like battery health, physical damage, and authenticity require proof before pricing. Without these, a worst-case price cannot be confidently assigned."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 92034,
+    "input_tokens": 2379,
+    "output_tokens": 1099,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "0925ffbbf962f424e8c8754a3b469923",
+    "error": null
+  }
+}

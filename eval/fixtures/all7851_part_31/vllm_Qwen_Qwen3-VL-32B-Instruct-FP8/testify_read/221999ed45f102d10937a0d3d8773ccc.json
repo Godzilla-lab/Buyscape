@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a car engine on the ground, with visible components like hoses, intake manifold, and a silver engine cover.",
+      "Photo 1 is a closer view of the same engine cover, showing the Lexus logo and text 'VVT-i V6 3.3'.",
+      "The engine cover has scratches, dirt, and some blue paint splatters.",
+      "The engine appears to be removed from a vehicle and is in a used, possibly damaged condition.",
+      "The seller's text is grammatically incorrect and vague: 'You promise to give you what you order feel free to us'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car engine",
+      "brand": "Lexus",
+      "model": "VVT-i V6 3.3",
+      "read_from": [
+        "photo 1 engine cover"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "You promise to give you what you order feel free to us",
+        "verdict": "unverifiable_remote",
+        "evidence": "The statement is vague and grammatically incorrect; no specific claim about the item's condition or authenticity can be verified from the photos."
+      },
+      {
+        "claim": "VVT-i V6 3.3 engine",
+        "verdict": "supported",
+        "evidence": "The text 'VVT-i V6 3.3' is clearly visible on the engine cover in photo 1."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine may not be functional or may have internal damage (e.g., blown head gasket, cracked block, worn internals).",
+        "proof": "A video showing the engine running or a mechanic's inspection report.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Engine may have been salvaged from a wrecked or accident-damaged vehicle.",
+        "proof": "Photos of the vehicle's body or VIN plate, or a vehicle history report.",
+        "if_unproven": "priced as salvage"
+      },
+      {
+        "risk": "Engine may have high mileage or be from a vehicle with poor maintenance history.",
+        "proof": "Odometer reading or service records from the previous owner.",
+        "if_unproven": "priced as unknown mileage"
+      }
+    ],
+    "proof_requests": [
+      "Video of the engine running or a mechanic's inspection report.",
+      "Photos of the vehicle's VIN plate or a vehicle history report.",
+      "Odometer reading or service records from the previous owner."
+    ],
+    "decision": "price",
+    "reason": "The engine is identifiable as a Lexus VVT-i V6 3.3 from the text on the cover. While the condition is not fully known, the item can be priced at its worst case (not working, salvage, unknown mileage) based on visible wear and lack of proof of functionality. The seller's text is unverifiable but does not affect the physical identification."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 54683,
+    "input_tokens": 2276,
+    "output_tokens": 657,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "221999ed45f102d10937a0d3d8773ccc",
+    "error": null
+  }
+}

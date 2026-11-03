@@ -1,0 +1,108 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Open laptop showing Omen logo on screen, red backlit keyboard, Intel and NVIDIA RTX stickers on palm rest.",
+      "Photo 1: Same angle as photo 0, screen shows Omen logo, keyboard backlit red, stickers visible.",
+      "Photo 2: Screen shows HP logo (red diamond) during boot, keyboard backlit red, stickers visible on palm rest.",
+      "All photos show a black laptop with red accents, likely a gaming model.",
+      "Stickers on palm rest: Intel Core i7 and NVIDIA GeForce RTX (no model number visible).",
+      "No visible model number or serial on chassis or screen bezel.",
+      "Screen bezel has '144Hz' label in photo 2, indicating high refresh rate display.",
+      "Watermark 'RICKYCOLTECH.LTD' overlaid on all photos."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "gaming laptop",
+      "brand": "HP",
+      "model": null,
+      "read_from": [
+        "photo 0 screen: Omen logo",
+        "photo 2 screen: HP logo",
+        "photo 0 palm rest: Intel and NVIDIA RTX stickers"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP Omen 15",
+        "verdict": "supported",
+        "evidence": "Omen logo visible on screen in photo 0 and photo 1, HP logo on screen in photo 2."
+      },
+      {
+        "claim": "Core i7 9th generation",
+        "verdict": "unverified",
+        "evidence": "Intel sticker visible on palm rest in all photos, but no model number or generation visible."
+      },
+      {
+        "claim": "512 SSD",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal photos or system specs visible; cannot confirm storage type or size from photos."
+      },
+      {
+        "claim": "16GB RAM",
+        "verdict": "unverifiable_remote",
+        "evidence": "No system specs visible; RAM cannot be confirmed from photos."
+      },
+      {
+        "claim": "6GB Nvidia RTX 2060",
+        "verdict": "unverified",
+        "evidence": "NVIDIA RTX sticker visible on palm rest, but no model number or VRAM visible; 'RTX 2060' is assumed but not confirmed."
+      },
+      {
+        "claim": "direct London",
+        "verdict": "unverifiable_remote",
+        "evidence": "No proof of origin or shipping details in photos; seller's claim cannot be verified remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Incorrect or outdated CPU generation (not 9th gen i7)",
+        "proof": "Photo of system information screen or BIOS showing CPU model.",
+        "if_unproven": "priced as lower-end CPU, possibly 8th gen or 10th gen"
+      },
+      {
+        "risk": "Graphics card is not RTX 2060 or has less than 6GB VRAM",
+        "proof": "Photo of GPU specifications from device manager or GPU-Z screenshot.",
+        "if_unproven": "priced as lower-tier GPU, e.g., RTX 2050 or GTX 1660"
+      },
+      {
+        "risk": "Storage is not 512GB SSD (could be HDD or smaller SSD)",
+        "proof": "Photo of system information showing storage type and size.",
+        "if_unproven": "priced as HDD or smaller SSD"
+      },
+      {
+        "risk": "RAM is not 16GB (could be 8GB or 12GB)",
+        "proof": "Photo of system information showing RAM amount.",
+        "if_unproven": "priced as 8GB RAM"
+      },
+      {
+        "risk": "Laptop has physical damage or screen issues not visible in photos",
+        "proof": "Close-up photos of screen for dead pixels, scratches, or hinge damage; underside for wear.",
+        "if_unproven": "priced with assumption of minor wear, but potential for hidden damage"
+      }
+    ],
+    "proof_requests": [
+      "Photo of system information screen (Windows + R, type 'msinfo32') showing CPU, RAM, and storage details.",
+      "Screenshot from GPU-Z or device manager showing GPU model and VRAM.",
+      "Photo of BIOS screen showing CPU model.",
+      "Close-up photos of the laptop's underside, hinges, and screen edges for damage.",
+      "Photo of the original box or warranty sticker if available."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The laptop is identifiable as an HP Omen gaming model, but critical specifications like CPU generation, RAM, storage, and GPU model cannot be confirmed from the photos. Without proof of these, the item cannot be priced accurately and risks being misrepresented. The seller's claims are unverified or unverifiable remotely, requiring additional evidence before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 95239,
+    "input_tokens": 2803,
+    "output_tokens": 1107,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "5dc7ac46ceb0a2c0f868badbe8219876",
+    "error": null
+  }
+}

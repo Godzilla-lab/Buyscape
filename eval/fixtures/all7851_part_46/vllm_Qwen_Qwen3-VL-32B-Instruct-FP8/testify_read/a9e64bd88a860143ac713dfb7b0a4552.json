@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Front view of a smartphone with a black screen, gold-colored frame, held in hand. Reflections visible on screen. No visible damage to front glass.",
+      "Photo 1: Back view of the phone, yellow/gold color, Apple logo centered. Dual-camera system in top-left corner. A purple sticker with text and QR code is affixed to the back.",
+      "Photo 2: Same as photo 1, slightly different angle. Sticker text is legible: 'iPhone 14 Plus 512GB Yellow', 'Unlocked', '127.141.72.27912', 'PQ/AU/1/BATT/IAI', 'W4.13', '1431.3141.6', 'RIN: 6717Y586', '35006934483617'.",
+      "All photos show a watermark: 'POSTED ON JIJI HUSHGADGETS LIMITED'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "iPhone 14 Plus",
+      "brand": "Apple",
+      "model": "iPhone 14 Plus",
+      "read_from": [
+        "photo 2 sticker"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "iPhone 14 Plus 512GB",
+        "verdict": "supported",
+        "evidence": "Photo 2 sticker clearly reads 'iPhone 14 Plus 512GB Yellow'."
+      },
+      {
+        "claim": "eSIM unlocked",
+        "verdict": "supported",
+        "evidence": "Photo 2 sticker includes 'Unlocked'."
+      },
+      {
+        "claim": "UK used",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible proof of UK origin or usage history. Sticker has no country code or serial number traceable to UK. Seller's claim only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Phone may be stolen or blacklisted (IMEI check required)",
+        "proof": "Screenshot of IMEI check from a trusted source (e.g., Apple, GSMA, or Nigerian NCC) showing clean status.",
+        "if_unproven": "Priced as potentially blacklisted or stolen, which would reduce value significantly."
+      },
+      {
+        "risk": "Screen or body damage not visible in photos",
+        "proof": "Close-up video or photo of the entire front and back, including edges, under bright light, showing no cracks, scratches, or dents.",
+        "if_unproven": "Priced as having possible hidden damage, reducing value."
+      },
+      {
+        "risk": "Battery health or performance issues",
+        "proof": "Screenshot of battery health from Settings > Battery > Battery Health (showing % and 'Peak Performance Capability') or a video of phone in use.",
+        "if_unproven": "Priced as having degraded battery or performance issues."
+      },
+      {
+        "risk": "Sticker information may be fake or altered",
+        "proof": "Photo of the phone's original box or a video showing the phone being powered on and displaying settings with the same IMEI and model.",
+        "if_unproven": "Priced as potentially counterfeit or misrepresented."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of IMEI check showing clean status.",
+      "Video or close-up photos of the phone's front and back under bright light, showing condition.",
+      "Screenshot of battery health from the phone's settings.",
+      "Photo of the original box or video of the phone powering on with settings visible."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and storage are confirmed from the sticker, but critical risks like IMEI status, physical condition, and battery health cannot be verified from current photos. The 'UK used' claim is unverifiable. Without proof of these, the item cannot be priced accurately and carries significant risk."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 74428,
+    "input_tokens": 2780,
+    "output_tokens": 886,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "a9e64bd88a860143ac713dfb7b0a4552",
+    "error": null
+  }
+}

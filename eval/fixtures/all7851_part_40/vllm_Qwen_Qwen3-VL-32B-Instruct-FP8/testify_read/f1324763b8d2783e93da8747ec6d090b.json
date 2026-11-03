@@ -1,0 +1,75 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a small, black, rectangular device with a vented top and side, placed on a wooden surface. A power adapter is plugged into a wall socket behind it. The device has a circular HP logo on the front and a vertical slot (possibly USB or SD card) below it.",
+      "Photo 1 shows the bottom of the device with a label. The label clearly reads 'HP Pro 650 Thin Client'. The label includes serial number, product number, regulatory info, and a barcode.",
+      "Photo 2 is a close-up of the same label, showing the same text and barcode. The HP logo is visible next to the text 'HP Pro 650 Thin Client'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "thin client",
+      "brand": "HP",
+      "model": "Pro 650",
+      "read_from": [
+        "photo 1 label",
+        "photo 2 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Uk used thin client",
+        "verdict": "unverifiable_remote",
+        "evidence": "The photos show the device and its label, but no proof of origin or usage history. The label does not indicate UK origin or usage."
+      },
+      {
+        "claim": "8gb ram pc4",
+        "verdict": "unverified",
+        "evidence": "The label in photo 1 and 2 does not list RAM or memory type. No internal components are visible. The claim cannot be confirmed from the photos."
+      },
+      {
+        "claim": "128gb ssd",
+        "verdict": "unverified",
+        "evidence": "The label in photo 1 and 2 does not list storage capacity or type. No internal components are visible. The claim cannot be confirmed from the photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "RAM is not 8GB or not PC4 type",
+        "proof": "Photo of the internal components showing the RAM module and its specifications, or a system information screenshot showing installed RAM.",
+        "if_unproven": "priced as having unknown or less than 8GB RAM"
+      },
+      {
+        "risk": "Storage is not 128GB SSD",
+        "proof": "Photo of the internal storage drive or a system information screenshot showing storage capacity and type.",
+        "if_unproven": "priced as having unknown or less than 128GB storage, or HDD instead of SSD"
+      },
+      {
+        "risk": "Device is not functional or has hidden damage",
+        "proof": "Video or photo showing the device powered on, displaying a working screen, and responding to input.",
+        "if_unproven": "priced as not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo or video of the device powered on and working.",
+      "Photo of the internal RAM module or system information showing 8GB PC4 RAM.",
+      "Photo of the internal storage drive or system information showing 128GB SSD."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The device is identified as an HP Pro 650 Thin Client, but the seller's claims about 8GB RAM and 128GB SSD cannot be verified from the photos. The device's functionality and internal specifications are hidden risks that must be proven before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 60063,
+    "input_tokens": 2668,
+    "output_tokens": 745,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "f1324763b8d2783e93da8747ec6d090b",
+    "error": null
+  }
+}

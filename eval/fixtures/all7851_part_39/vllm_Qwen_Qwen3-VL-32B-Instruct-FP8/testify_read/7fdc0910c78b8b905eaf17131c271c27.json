@@ -1,0 +1,87 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Silver laptop in tent mode, keyboard and trackpad visible, HP logo on top right of keyboard, Intel Core i7 sticker on bottom right.",
+      "Photo 1: Laptop open, screen on showing a colorful desktop background, keyboard visible, same Intel sticker, screen appears to be 14-inch, bezels are thin.",
+      "Photo 2: Closed laptop lid, silver finish, HP logo centered, no visible model number or serial plate.",
+      "All photos show a watermark 'POSTED ON JIJI GADGETBAY'."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "14-inch convertible laptop",
+      "brand": "HP",
+      "model": null,
+      "read_from": [
+        "photo 0 keyboard top right",
+        "photo 2 lid center"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP EliteBook x360 1040 G6",
+        "verdict": "unverified",
+        "evidence": "No model number visible in any photo; brand is confirmed as HP, but model cannot be read from photos."
+      },
+      {
+        "claim": "14\" Touchscreen",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows screen size consistent with 14-inch, and convertible design (photo 0) implies touchscreen capability; no visible damage to screen."
+      },
+      {
+        "claim": "Intel Core i7 (8th Gen)",
+        "verdict": "supported",
+        "evidence": "Intel Core i7 sticker visible in photo 0 and photo 1, though generation not readable from sticker."
+      },
+      {
+        "claim": "16GB RAM || 512GB",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal specs visible; cannot confirm RAM or storage from photos alone."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Model is not HP EliteBook x360 1040 G6",
+        "proof": "Photo showing model number on bottom chassis or inside lid, or a clear shot of the model label.",
+        "if_unproven": "Priced as generic 14-inch HP convertible, not as specific EliteBook model."
+      },
+      {
+        "risk": "RAM or storage is not 16GB/512GB as claimed",
+        "proof": "Screenshot of system information or BIOS showing RAM and storage specs.",
+        "if_unproven": "Priced as lower-spec configuration (e.g., 8GB RAM or 256GB SSD)."
+      },
+      {
+        "risk": "Touchscreen is not functional or has damage",
+        "proof": "Video showing touchscreen interaction or close-up of screen for cracks/blemishes.",
+        "if_unproven": "Priced as non-touchscreen or with screen defect."
+      },
+      {
+        "risk": "Battery health is poor or not included",
+        "proof": "Screenshot of battery health report or photo of battery in laptop.",
+        "if_unproven": "Priced as if battery is dead or missing."
+      }
+    ],
+    "proof_requests": [
+      "Photo of model number label (usually on bottom chassis or inside lid).",
+      "Screenshot of system information showing RAM and storage.",
+      "Video showing touchscreen functionality.",
+      "Photo of battery or screenshot of battery health."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model cannot be confirmed from the photos, and internal specs like RAM and storage are unverifiable. Without proof of model and specs, the item cannot be priced accurately. The convertible design and Intel sticker support some claims, but critical details are missing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 71514,
+    "input_tokens": 2661,
+    "output_tokens": 818,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "7fdc0910c78b8b905eaf17131c271c27",
+    "error": null
+  }
+}

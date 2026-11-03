@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a DxDiag screen with system details: Acer Predator PHN16-71, 13th Gen Intel Core i7-13700HX, 16GB RAM, Windows 11 Home 64-bit.",
+      "Photo 1 shows the laptop open with the Predator logo on the screen, keyboard with RGB lighting, and stickers indicating Intel Core and NVIDIA GeForce RTX.",
+      "Photo 2 shows the same laptop with a colorful desktop wallpaper, RGB keyboard lighting, and the same stickers visible.",
+      "The laptop appears to be in good physical condition with no visible damage in the photos.",
+      "The seller claims 'Fresh like New (New condition)' and lists model PHN16-71, which matches the DxDiag screen."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "gaming laptop",
+      "brand": "Acer",
+      "model": "Predator PHN16-71",
+      "read_from": [
+        "photo 0 screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Fresh like New (New condition)",
+        "verdict": "unverified",
+        "evidence": "Photos show no visible damage, but no proof of internal condition, battery health, or usage history. No serial number or warranty check shown."
+      },
+      {
+        "claim": "Acer Predator Helios Neo 16 PHN16-71 - 2.1ghz Intel Core i7-13700HX",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows 'System Model: Predator PHN16-71' and 'Processor: 13th Gen Intel(R) Core(TM) i7-13700HX'."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery health is unknown and may be degraded.",
+        "proof": "A screenshot of the battery health report from Windows Power Management or a battery stress test.",
+        "if_unproven": "priced as if battery is degraded (e.g., 50% health or less)"
+      },
+      {
+        "risk": "The laptop may have been used or refurbished, despite the 'new condition' claim.",
+        "proof": "A photo of the original box, receipt, or serial number check via Acer's website.",
+        "if_unproven": "priced as used, not new"
+      },
+      {
+        "risk": "Graphics card not specified in the seller's text or photos; may be missing or downgraded.",
+        "proof": "A DxDiag or GPU-Z screenshot showing the exact graphics card model.",
+        "if_unproven": "priced as if no dedicated GPU or lower-end GPU"
+      },
+      {
+        "risk": "Storage type and capacity not shown; may be slow or insufficient.",
+        "proof": "A screenshot of Disk Management or a storage benchmark showing drive type (SSD/HDD) and capacity.",
+        "if_unproven": "priced as if using HDD or small SSD"
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of battery health report.",
+      "Photo of the original box or receipt.",
+      "GPU-Z or DxDiag screenshot showing graphics card model.",
+      "Disk Management screenshot showing storage type and capacity."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and processor are confirmed, but critical risks like battery health, storage, and GPU are unproven. The 'new condition' claim is unverified. Price cannot be set without proof of these hidden risks."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 65426,
+    "input_tokens": 2805,
+    "output_tokens": 788,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "49203fb9bbde722e8398945845c479c3",
+    "error": null
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a green industrial machine with a red engine on top, blue gearbox, and a hopper for input.",
+      "Text on the image labels it as a '300-500kg/h Single Screw Palm Oil Press Machine'.",
+      "The image includes a diagram showing the process: fresh palm fruit bunches \u2192 loose palm fruits \u2192 crude palm oil.",
+      "The machine is branded with 'HENAN DOING' in watermark text.",
+      "The machine has a metal frame, a cylindrical pressing unit, and a collection box at the front.",
+      "No photos of the machine in operation, no close-ups of wear, no photos of the output or input ports."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "single screw palm oil press machine",
+      "brand": "Henan Doing",
+      "model": null,
+      "read_from": [
+        "photo 0 text",
+        "photo 0 watermark"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Processes up to 300-500kg/h",
+        "verdict": "unverified",
+        "evidence": "The claim is stated in the photo text, but there is no proof of actual throughput or calibration. No operational footage or test data is provided."
+      },
+      {
+        "claim": "Single screw pressing",
+        "verdict": "supported",
+        "evidence": "The machine design in photo 0 shows a single screw mechanism, consistent with the description."
+      },
+      {
+        "claim": "Crude palm oil output",
+        "verdict": "supported",
+        "evidence": "The diagram in photo 0 shows crude palm oil as the output, and the machine is designed for this purpose."
+      },
+      {
+        "claim": "Easy operation",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a subjective claim. No photos of controls, interface, or operator interaction are provided."
+      },
+      {
+        "claim": "Suitable for small palm oil mills",
+        "verdict": "supported",
+        "evidence": "The machine's size and capacity (300-500kg/h) are consistent with small-scale operations, as stated in the photo text."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Machine may not achieve stated 300-500kg/h capacity",
+        "proof": "A video or photo of the machine in operation with a timer and measured input/output.",
+        "if_unproven": "priced as lower capacity, possibly 100-200kg/h"
+      },
+      {
+        "risk": "Engine or motor may be non-functional or damaged",
+        "proof": "Close-up of the engine and electrical connections, and a video of the engine starting and running.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Wear and tear on screw or internal components",
+        "proof": "Close-up photos of the screw, pressing chamber, and internal parts.",
+        "if_unproven": "priced as used with unknown wear"
+      },
+      {
+        "risk": "Machine may be a replica or non-branded unit despite 'Henan Doing' watermark",
+        "proof": "Serial number or factory label photo, or official documentation from Henan Doing.",
+        "if_unproven": "priced as unverified brand"
+      }
+    ],
+    "proof_requests": [
+      "Video of the machine in operation with input/output measurement.",
+      "Close-up photos of the engine, electrical connections, and internal screw mechanism.",
+      "Photo of the machine's serial number or factory label.",
+      "Photo of the output crude palm oil and palm nuts with fiber."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The machine is identifiable as a single screw palm oil press, but critical claims about capacity, functionality, and condition cannot be verified from the single photo. Hidden risks related to performance and wear require additional proof before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 70523,
+    "input_tokens": 1650,
+    "output_tokens": 877,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "68616654ce3ff6469b5128b74c297c81",
+    "error": null
+  }
+}

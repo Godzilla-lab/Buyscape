@@ -1,0 +1,96 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Silver HP laptop lid with visible scratches and scuffs. HP logo centered. Background shows outdoor urban setting with vehicles and people.",
+      "Photo 1: Laptop open, showing black keyboard, touchpad, and screen. Sticker on palm rest reads 'Pavilion' and 'HP Pavilion TouchSmart Notebook'. Screen is off, reflecting surroundings. Intel Core i5 sticker visible on lower right.",
+      "Photo 2: Same laptop open, screen now shows a red/pinkish display with a dark square in the center, possibly a dead pixel cluster or screen damage. Keyboard and stickers same as photo 1. Reflections on screen show outdoor environment."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "Pavilion",
+      "read_from": [
+        "photo 0 lid logo",
+        "photo 1 sticker: 'Pavilion', 'HP Pavilion TouchSmart Notebook'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP Pavilion 15",
+        "verdict": "unverified",
+        "evidence": "Model name 'Pavilion' is visible in photo 1 sticker, but '15' (screen size) is not visible in any photo. No model number or size label is readable."
+      },
+      {
+        "claim": "Core i5 4th gen",
+        "verdict": "unverified",
+        "evidence": "Intel Core i5 sticker visible in photo 1 and 2, but no generation info is readable. Cannot confirm 4th gen from photos."
+      },
+      {
+        "claim": "8GB RAM",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible RAM label or system info. Cannot verify from photos alone."
+      },
+      {
+        "claim": "256 SSD",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible drive label or system info. Cannot verify from photos alone."
+      },
+      {
+        "claim": "Touchscreen",
+        "verdict": "supported",
+        "evidence": "Sticker on palm rest in photo 1 and 2 says 'HP Pavilion TouchSmart Notebook', which implies touchscreen. Also, screen shows reflection and interaction in photo 2, consistent with touchscreen use."
+      },
+      {
+        "claim": "Used",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows visible scratches and scuffs on lid. General wear on keyboard and body in photos 1 and 2."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Screen damage or dead pixels",
+        "proof": "Close-up photo of screen showing the dark square in photo 2, or a video showing screen functionality across all areas.",
+        "if_unproven": "priced as having screen defect, which reduces value significantly"
+      },
+      {
+        "risk": "Battery not working or degraded",
+        "proof": "Video showing laptop running unplugged for at least 15 minutes, or battery health report.",
+        "if_unproven": "priced as battery may not hold charge, reducing usability"
+      },
+      {
+        "risk": "Internal components not matching claims (RAM, SSD, CPU)",
+        "proof": "Screenshot of system information (e.g., Windows System Info or BIOS) showing exact CPU, RAM, and storage specs.",
+        "if_unproven": "priced as unverified specs, which may be lower than advertised"
+      },
+      {
+        "risk": "Laptop not functional",
+        "proof": "Video showing laptop powering on, booting to desktop, and running basic tasks.",
+        "if_unproven": "priced as not working, which is a major devaluation"
+      }
+    ],
+    "proof_requests": [
+      "Video showing laptop powering on and running normally.",
+      "Screenshot of system information showing exact CPU, RAM, and storage specs.",
+      "Close-up photo or video of screen to confirm no dead pixels or damage.",
+      "Video of laptop running unplugged to test battery."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and some features are partially visible, but critical specs like CPU generation, RAM, SSD, and screen condition cannot be confirmed from current photos. The screen shows a possible defect. Without proof of functionality and exact specs, the item cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 79770,
+    "input_tokens": 2907,
+    "output_tokens": 957,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "0d06e3fe936e3aa8c5c00122aec15311",
+    "error": null
+  }
+}

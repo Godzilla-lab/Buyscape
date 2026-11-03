@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a blue electric bicycle with thick tires and orange rims, parked on a paved surface.",
+      "The frame has visible text: 'LIFE FORCE' and 'ARROW 4.0'.",
+      "The bike has front suspension forks, a black saddle, and a rear rack.",
+      "The background shows a street with buildings, a yellow construction vehicle, and other vehicles.",
+      "No battery, motor, or control panel is clearly visible in the photo.",
+      "No signs of damage or wear are evident from this angle."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "electric bicycle",
+      "brand": "LIFE FORCE",
+      "model": "ARROW 4.0",
+      "read_from": [
+        "photo 0 frame"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Available in stock for sales",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows one unit, but no proof of stock quantity or availability for sale beyond this single item."
+      },
+      {
+        "claim": "Available in different sizes and varies in prices",
+        "verdict": "unverifiable_remote",
+        "evidence": "No other sizes or models are shown in the photo; no size indicators or price details are visible."
+      },
+      {
+        "claim": "Electric Bicycles...",
+        "verdict": "supported",
+        "evidence": "The item is clearly a bicycle with features typical of an electric bike (thick tires, robust frame, rear rack), and the seller explicitly labels it as such. However, no motor or battery is visible, so functionality as electric is assumed based on context."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The bike may not be electric (no visible motor or battery)",
+        "proof": "A close-up photo of the motor (usually near the crank or rear wheel) and the battery (usually on the frame or seat tube).",
+        "if_unproven": "priced as a regular bicycle, not electric"
+      },
+      {
+        "risk": "The bike may be damaged or have mechanical issues not visible in the photo",
+        "proof": "A video or photo showing the bike being ridden, or close-ups of the chain, brakes, and suspension.",
+        "if_unproven": "priced as potentially non-functional or with hidden defects"
+      },
+      {
+        "risk": "The battery may be missing or dead",
+        "proof": "A photo of the battery installed on the bike, or a video showing the bike powered on and in motion.",
+        "if_unproven": "priced as not working or without battery"
+      }
+    ],
+    "proof_requests": [
+      "A close-up photo of the motor and battery location.",
+      "A video or photo showing the bike being ridden or powered on.",
+      "Photos of the bike from all angles, including underside and chain area.",
+      "Proof of other sizes or models if claiming availability in different sizes."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identified as a LIFE FORCE ARROW 4.0 electric bicycle, but critical components like the motor and battery are not visible. Without proof of electric functionality and condition, the item cannot be priced accurately. The seller's claims about stock and sizes are unverifiable from the single photo."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 59754,
+    "input_tokens": 1933,
+    "output_tokens": 731,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "39f16b58466fcbba73f73a5f26a685f0",
+    "error": null
+  }
+}

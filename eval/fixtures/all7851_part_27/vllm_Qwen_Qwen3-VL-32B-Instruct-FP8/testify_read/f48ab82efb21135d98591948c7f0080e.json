@@ -1,0 +1,93 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Silver HP laptop open, screen on, showing reflection of person taking photo. HP logo visible on bezel. Keyboard has 'ProBook' label below it. Watermark 'YEMIGHT MASTERY TECH' across keyboard.",
+      "Photo 1: Same laptop from side angle, held in hand, screen off. Silver chassis, black keyboard, trackpad visible. Watermark present.",
+      "Photo 2: Same as photo 0, slightly different angle. Screen on, reflection visible. HP logo and 'ProBook' label visible. Watermark present.",
+      "All photos show a 13-14 inch laptop with a silver body and black keyboard. No visible damage to exterior. No ports, labels, or stickers visible in photos.",
+      "No internal components, model stickers, or serial numbers visible in any photo."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": null,
+      "read_from": [
+        "photo 0 screen bezel",
+        "photo 0 keyboard label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP ProBook 430 G5 Touchscreen",
+        "verdict": "unverified",
+        "evidence": "HP logo and 'ProBook' label visible in photos 0 and 2, but model number '430 G5' is not visible. Touchscreen claim cannot be verified from photos alone."
+      },
+      {
+        "claim": "FHD Touchscreen",
+        "verdict": "unverifiable_remote",
+        "evidence": "Screen resolution and touch functionality cannot be confirmed from photos. No on-screen content or touch interaction shown."
+      },
+      {
+        "claim": "Intel Core i5 7th Generation",
+        "verdict": "unverifiable_remote",
+        "evidence": "No CPU information visible. Cannot be confirmed from photos."
+      },
+      {
+        "claim": "256GB SSD",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal components or drive labels visible. Cannot be confirmed from photos."
+      },
+      {
+        "claim": "8GB RAM",
+        "verdict": "unverifiable_remote",
+        "evidence": "No RAM or system information visible. Cannot be confirmed from photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Model is not HP ProBook 430 G5",
+        "proof": "Photo of bottom chassis or inside lid showing model sticker with '430 G5' or serial number.",
+        "if_unproven": "Priced as generic HP ProBook, lower than 430 G5."
+      },
+      {
+        "risk": "Screen is not touchscreen",
+        "proof": "Video clip showing finger swiping or tapping on screen to confirm touch functionality.",
+        "if_unproven": "Priced as non-touchscreen model, lower value."
+      },
+      {
+        "risk": "Specs (i5 7th Gen, 256GB SSD, 8GB RAM) are not accurate",
+        "proof": "Screenshot of system information (e.g., Windows About page) or BIOS showing CPU, RAM, and storage details.",
+        "if_unproven": "Priced as unknown specs, lower value."
+      },
+      {
+        "risk": "Laptop has physical damage or wear not visible in photos",
+        "proof": "Close-up photos of all edges, hinges, ports, and keyboard for signs of damage or wear.",
+        "if_unproven": "Priced as is, with assumption of minor wear."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the bottom chassis or inside lid showing the model sticker.",
+      "Video clip showing touch functionality on the screen.",
+      "Screenshot of system information showing CPU, RAM, and storage details.",
+      "Close-up photos of all edges, hinges, ports, and keyboard."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model number and key specifications (CPU, RAM, SSD, touchscreen) cannot be verified from the current photos. Without proof of these, the item cannot be accurately priced. The identity is confirmed as an HP ProBook laptop, but the exact model and specs are unverified."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 74952,
+    "input_tokens": 2344,
+    "output_tokens": 937,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "f48ab82efb21135d98591948c7f0080e",
+    "error": null
+  }
+}

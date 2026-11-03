@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Closed silver laptop on a pink shelf, showing the bottom edge with ports and a power button. No visible branding or model on the bottom.",
+      "Photo 1: Open laptop showing a Windows lock screen with a mountain wallpaper, time 1:39, and an HP logo centered below the screen. Keyboard is silver with black keys, trackpad visible. No visible model or serial number.",
+      "Photo 2: Same laptop open, showing Windows 11 desktop with blue abstract wallpaper. HP logo visible below screen. No visible model or serial number.",
+      "All photos have a watermark: 'POSTED ON JIJI BILLPARK TECHNOLOGIES'.",
+      "No photos show the underside, hinge, or any label with model number or serial."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": null,
+      "read_from": [
+        "photo 1 screen",
+        "photo 2 screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "American used as new HP 14s-dq2050nd",
+        "verdict": "unverified",
+        "evidence": "Model number '14s-dq2050nd' is not visible in any photo. Brand 'HP' is visible on screen bezel in photo 1 and 2, but no model number is readable. 'American' and 'used as new' are not verifiable from photos."
+      },
+      {
+        "claim": "11th Gen Intel COREi5-1135G7, 4 Core(s)",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows the system information, BIOS, or any label indicating CPU model. Cannot verify from photos alone."
+      },
+      {
+        "claim": "Ram: 8gb ddr4",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows system specs, task manager, or RAM label. Cannot verify from photos alone."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Incorrect or missing model number (claimed 14s-dq2050nd)",
+        "proof": "Photo of the underside or palm rest showing the model sticker or serial number.",
+        "if_unproven": "Priced as generic HP laptop, not as specific model 14s-dq2050nd, which may affect value."
+      },
+      {
+        "risk": "CPU not matching claimed i5-1135G7",
+        "proof": "Screenshot of system information or BIOS showing CPU model.",
+        "if_unproven": "Priced as unknown CPU, which may be lower than i5-1135G7."
+      },
+      {
+        "risk": "RAM not 8GB DDR4",
+        "proof": "Screenshot of system information or task manager showing RAM size and type.",
+        "if_unproven": "Priced as unknown RAM, which may be lower than 8GB DDR4."
+      },
+      {
+        "risk": "Laptop not working or has hidden damage (e.g., hinge, screen, battery)",
+        "proof": "Video showing full operation: opening/closing, keyboard, touchpad, screen brightness, battery charge, and ports.",
+        "if_unproven": "Priced as possibly non-functional or with hidden defects, reducing value."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the underside or palm rest showing the model sticker or serial number.",
+      "Screenshot of system information or BIOS showing CPU model and RAM details.",
+      "Video showing full operation: opening/closing, keyboard, touchpad, screen, battery, and ports."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model number and key specs (CPU, RAM) are not visible in any photo and cannot be verified remotely. Without proof of the claimed model and specs, the item cannot be accurately priced. The photos show an HP laptop, but not the specific model or configuration claimed."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 71710,
+    "input_tokens": 2413,
+    "output_tokens": 895,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "2ae509714313944a0eb8599d6843ad4e",
+    "error": null
+  }
+}

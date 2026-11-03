@@ -1,0 +1,68 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a yellow and black industrial machine with a motor on the left, rollers in the center, and control buttons on the front panel. It has wheels for mobility.",
+      "Photo 1 shows the same machine in a warehouse with many identical units lined up, suggesting mass production or inventory.",
+      "The background of photo 1 has Chinese text on a banner, including '\u5e9f\u65e7\u94a2\u7b4b\u8c03\u76f4\u673a' which translates to 'used rebar straightening machine'.",
+      "The machine has warning labels and red digital displays on top, possibly for settings or measurements.",
+      "The machine appears to be new or well-maintained, with no visible damage or wear.",
+      "The seller's text claims it is an 'industrial scrap rebar straightening machine'."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "rebar straightening machine",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 1 banner text: '\u5e9f\u65e7\u94a2\u7b4b\u8c03\u76f4\u673a'",
+        "photo 0 visual features: rollers, motor, control panel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "The highlighted object is an industrial scrap rebar straightening machine",
+        "verdict": "supported",
+        "evidence": "Photo 1 banner text in Chinese reads '\u5e9f\u65e7\u94a2\u7b4b\u8c03\u76f4\u673a' (used rebar straightening machine), and the machine's design matches typical rebar straightening equipment."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Machine may not be functional or may have hidden mechanical defects",
+        "proof": "Video or photo of the machine operating with rebar being fed through and straightened",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Machine may not be suitable for scrap rebar (e.g., rusted, bent, or irregular pieces)",
+        "proof": "Photo or video showing the machine processing scrap rebar, not just new straight bars",
+        "if_unproven": "priced as not suitable for scrap rebar"
+      },
+      {
+        "risk": "Machine may not be compatible with Nigerian electrical standards (voltage, phase, plug type)",
+        "proof": "Photo of the power cord and plug, or electrical specifications label",
+        "if_unproven": "priced as incompatible with local power"
+      }
+    ],
+    "proof_requests": [
+      "Video or photo of the machine in operation with scrap rebar",
+      "Photo of the electrical specifications label or power cord plug",
+      "Photo of the machine's control panel with settings visible"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The machine is identifiable as a rebar straightening machine, but critical functional and compatibility risks remain unproven. Without proof of operation and electrical compatibility, it cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 49527,
+    "input_tokens": 2147,
+    "output_tokens": 622,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "f407bf17504fe1bd1e316099ad80b492",
+    "error": null
+  }
+}

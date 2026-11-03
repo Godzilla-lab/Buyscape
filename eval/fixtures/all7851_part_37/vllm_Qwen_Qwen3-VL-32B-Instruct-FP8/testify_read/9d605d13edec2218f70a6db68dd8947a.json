@@ -1,0 +1,97 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Silver laptop with black keyboard, 'ELITEBOOK' visible on palm rest, Intel Core i5 sticker on top right of keyboard. Screen is off, reflecting surroundings. Hand holding the laptop.",
+      "Photo 1: Closed laptop lid with HP logo centered. Surface has visible scratches and plastic wrap residue. Hand holding it.",
+      "Photo 2: Bottom of laptop showing vents, screws, and a label with regulatory marks and QR code. No visible model number or serial number legible in the photo."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "EliteBook 840 G5",
+      "read_from": [
+        "seller's text",
+        "photo 0: 'ELITEBOOK' on palm rest"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP EliteBook 840 G5",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows 'ELITEBOOK' on the palm rest, and seller's text matches known model naming. No conflicting evidence."
+      },
+      {
+        "claim": "Intel Core i5 8th Gen",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows an Intel Core i5 sticker, but it does not specify the generation. The sticker is generic and could be from any generation. No BIOS or system info visible."
+      },
+      {
+        "claim": "8GB RAM",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible RAM slots or system information. Cannot verify without opening or booting the laptop."
+      },
+      {
+        "claim": "256GB",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible storage label or system info. Cannot verify without opening or booting the laptop."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Laptop may not be the claimed model (HP EliteBook 840 G5)",
+        "proof": "Photo of the model label or serial number on the bottom or inside the lid, or a screenshot of the BIOS/system info showing the exact model.",
+        "if_unproven": "Priced as a generic HP EliteBook, not the specific G5 model, which reduces value."
+      },
+      {
+        "risk": "Intel Core i5 is not 8th Gen",
+        "proof": "Screenshot of system information or BIOS showing CPU model (e.g., i5-8250U or similar).",
+        "if_unproven": "Priced as a generic Core i5, which may be older or less powerful, reducing value."
+      },
+      {
+        "risk": "RAM is not 8GB or is not functional",
+        "proof": "Screenshot of system information showing installed RAM, or video of RAM being tested or removed.",
+        "if_unproven": "Priced as if RAM is less than 8GB or not working, reducing value."
+      },
+      {
+        "risk": "Storage is not 256GB or is not functional",
+        "proof": "Screenshot of disk management or system info showing 256GB drive, or video of drive being tested.",
+        "if_unproven": "Priced as if storage is smaller or not working, reducing value."
+      },
+      {
+        "risk": "Laptop has physical damage or wear affecting usability",
+        "proof": "Close-up photos of scratches, dents, or hinge wear, especially on screen, keyboard, and ports.",
+        "if_unproven": "Priced as if in poor condition, reducing value."
+      },
+      {
+        "risk": "Battery is dead or degraded",
+        "proof": "Video of laptop running on battery, or screenshot of battery health from system info.",
+        "if_unproven": "Priced as if battery is not functional, reducing value."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of BIOS or system information showing exact model, CPU, RAM, and storage.",
+      "Video or photo of the model label on the bottom or inside the lid.",
+      "Close-up of the bottom label with serial number and model number.",
+      "Video of the laptop booting and running on battery.",
+      "Photo of the screen and keyboard showing any damage or dead pixels."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is supported by the seller's text and visible 'ELITEBOOK' branding, but key specifications (CPU generation, RAM, storage) cannot be verified from the photos. Physical condition and battery health are also unverified. Without proof of these, the item cannot be priced accurately and risks being misvalued."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 81529,
+    "input_tokens": 2807,
+    "output_tokens": 1032,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "9d605d13edec2218f70a6db68dd8947a",
+    "error": null
+  }
+}

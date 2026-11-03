@@ -1,0 +1,90 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Red motorcycle with black seat and rear rack.",
+      "Brand name 'BOXER' visible on fuel tank in photo 1 and photo 2.",
+      "Model '100' visible on side of fuel tank in photo 1.",
+      "Front fender has green spring cover.",
+      "Rear fender has visible damage and rust.",
+      "Tires appear worn, especially rear tire.",
+      "Exhaust pipe is long and shows signs of rust and soot.",
+      "Engine and frame show dirt and grime, consistent with use.",
+      "License plate reads 'MEN-714P' in photo 0.",
+      "No visible engine number or VIN in photos.",
+      "No interior or dashboard close-up shown."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "motorcycle",
+      "brand": "BOXER",
+      "model": "100",
+      "read_from": [
+        "photo 1 fuel tank",
+        "photo 2 fuel tank"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Red bajaj motorcycle",
+        "verdict": "contradicted",
+        "evidence": "Photos show 'BOXER' brand on fuel tank (photo 1, photo 2), not Bajaj. Bajaj is a different brand."
+      },
+      {
+        "claim": "It's used but ok",
+        "verdict": "unverified",
+        "evidence": "Photos show wear and tear, rust, and damage (e.g., rear fender, tires, exhaust). No proof of mechanical condition or recent servicing. 'Ok' is subjective and not verifiable from photos alone."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine not working or poor performance",
+        "proof": "Video of engine starting and running, or close-up of engine components showing oil leaks, corrosion, or damage.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Frame or structural damage",
+        "proof": "Close-up of frame, especially near engine and rear suspension, to check for cracks or bends.",
+        "if_unproven": "priced as structurally compromised"
+      },
+      {
+        "risk": "Tires in poor condition or unsafe for riding",
+        "proof": "Close-up of tire treads and sidewalls to check for wear, cuts, or bulges.",
+        "if_unproven": "priced as unsafe to ride"
+      },
+      {
+        "risk": "Electrical system issues (lights, horn, battery)",
+        "proof": "Video of lights, horn, and dashboard indicators working.",
+        "if_unproven": "priced as electrical system unverified"
+      },
+      {
+        "risk": "Missing or tampered VIN/engine number",
+        "proof": "Clear photo of engine number and frame number, ideally from under the seat or near the engine.",
+        "if_unproven": "priced as unverified provenance"
+      }
+    ],
+    "proof_requests": [
+      "Video of engine starting and running.",
+      "Close-up of engine number and frame number.",
+      "Close-up of tire treads and sidewalls.",
+      "Video of lights and horn working.",
+      "Close-up of frame for cracks or bends."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The motorcycle is identified as a BOXER 100, contradicting the seller's claim of it being a Bajaj. While the item is visible, critical mechanical and safety conditions cannot be verified from photos alone. Risks such as engine condition, frame integrity, and tire safety must be proven before pricing. Without proof, the item cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 63240,
+    "input_tokens": 2567,
+    "output_tokens": 805,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "1412d0c04d032ba6aa477c53c81fdc9d",
+    "error": null
+  }
+}

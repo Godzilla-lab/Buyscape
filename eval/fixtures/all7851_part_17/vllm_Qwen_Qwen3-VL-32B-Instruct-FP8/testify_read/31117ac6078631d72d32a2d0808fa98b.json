@@ -1,0 +1,92 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Open Lenovo ThinkPad laptop showing Windows 11 desktop with blue default wallpaper. Keyboard is black with red TrackPoint. A yellow sticky note is taped to the screen with handwritten text: 'Lenovo Thinkpad T480s Core i5 8th gen 256 SSD 8GB RAM KBL'. The ThinkPad logo is visible on the palm rest. The laptop is on a cardboard box with cables and other items around.",
+      "Photo 1: Same laptop from front view, screen off. Yellow sticky note with same text as photo 0. The laptop is on a wooden table. A person in a blue shirt is partially visible on the left.",
+      "Photo 2: Same laptop, screen on, showing Windows 11 desktop. Yellow sticky note with same text. The ThinkPad logo is visible on the palm rest. A small Intel logo sticker is visible on the bottom left of the keyboard bezel. The laptop is on a surface with shelves and boxes in the background."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Lenovo",
+      "model": "ThinkPad T480s",
+      "read_from": [
+        "photo 0 screen sticky note",
+        "photo 1 screen sticky note",
+        "photo 2 screen sticky note"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Lenovo Thinkpad T480s",
+        "verdict": "supported",
+        "evidence": "The model name is written on the yellow sticky note in all three photos."
+      },
+      {
+        "claim": "Core i5 8th gen",
+        "verdict": "unverified",
+        "evidence": "The sticky note says 'Core i5 8th gen' but there is no visible CPU label or system information to confirm. The Intel sticker is present but does not specify generation."
+      },
+      {
+        "claim": "8GB RAM",
+        "verdict": "unverified",
+        "evidence": "The sticky note says '8GB RAM' but there is no system information or physical RAM slots shown to confirm."
+      },
+      {
+        "claim": "256 SSD",
+        "verdict": "unverified",
+        "evidence": "The sticky note says '256 SSD' but there is no system information or physical drive shown to confirm."
+      },
+      {
+        "claim": "keyboard light",
+        "verdict": "unverified",
+        "evidence": "The keyboard is shown in ambient light but no backlight is visible. No photo shows the keyboard lit up."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The laptop may not have the advertised 8GB RAM or 256GB SSD",
+        "proof": "A screenshot of the system information (e.g., Windows Settings > System > About) showing RAM and storage details.",
+        "if_unproven": "priced as having less than advertised, possibly 4GB RAM or 128GB SSD"
+      },
+      {
+        "risk": "The CPU may not be an 8th gen Core i5",
+        "proof": "A screenshot of the system information showing the exact CPU model.",
+        "if_unproven": "priced as having a lower generation or less powerful CPU"
+      },
+      {
+        "risk": "The keyboard backlight may not work or may be missing",
+        "proof": "A photo or video showing the keyboard with backlight turned on in a dark environment.",
+        "if_unproven": "priced as having no backlight"
+      },
+      {
+        "risk": "The laptop may have physical damage or wear not visible in photos",
+        "proof": "A full 360-degree video or close-up photos of all surfaces, hinges, screen edges, and ports.",
+        "if_unproven": "priced as having potential hidden damage"
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of system information showing exact CPU model, RAM, and storage details.",
+      "Photo or video of the keyboard with backlight turned on.",
+      "Close-up photos of the laptop's hinges, screen edges, and ports.",
+      "Photo of the laptop's bottom panel showing any labels or serial numbers."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identified as Lenovo ThinkPad T480s from the sticky note, but key specifications like CPU generation, RAM, SSD, and keyboard backlight are unverified. Hidden risks include possible misrepresentation of specs and physical damage. Proof is needed to confirm the advertised features before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 31755,
+    "input_tokens": 2582,
+    "output_tokens": 995,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "31117ac6078631d72d32a2d0808fa98b",
+    "error": null
+  }
+}

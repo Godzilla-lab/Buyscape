@@ -1,0 +1,94 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a pink and white foldable hair dryer next to its box. The box has 'NOVA' branding and model 'NV-1290' printed on it.",
+      "The box lists: Type NV-1290, Power 1000W, Voltage AC220V, Frequency 50Hz, and size 10.9x7.5x17(cm).",
+      "Photo 1 shows the hair dryer alone, with the same pink and white color scheme and 'NOVA' logo visible on the body.",
+      "Photo 2 is a composite image, repeating the same box and dryer from photo 0, with a smaller duplicate below.",
+      "The plug shown is a two-pin European-style plug, not compatible with Nigerian outlets (which use BS 1363 or similar).",
+      "No photos show the dryer in use, folded, or with any accessories like a diffuser or concentrator nozzle."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "foldable hair dryer",
+      "brand": "NOVA",
+      "model": "NV-1290",
+      "read_from": [
+        "photo 0 box",
+        "photo 2 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Foldable Hair Dryer",
+        "verdict": "supported",
+        "evidence": "The box in photo 0 and photo 2 clearly labels it as 'Foldable Hair Dryer'."
+      },
+      {
+        "claim": "Two hot speed settings",
+        "verdict": "unverified",
+        "evidence": "No photo shows the control panel or switches. The box does not specify number of settings."
+      },
+      {
+        "claim": "220V ~ 50Hz",
+        "verdict": "supported",
+        "evidence": "Photo 0 box lists 'Voltage: AC220V, Frequency: 50Hz'."
+      },
+      {
+        "claim": "Power: 1000W",
+        "verdict": "supported",
+        "evidence": "Photo 0 box lists 'Power: 1000W'."
+      },
+      {
+        "claim": "Nova Foldable High Grade Mini Hair Dryer",
+        "verdict": "supported",
+        "evidence": "Brand 'NOVA' and 'Foldable' are visible on box and dryer in photo 0 and photo 2."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Incompatible plug for Nigerian outlets",
+        "proof": "Photo showing the plug inserted into a Nigerian socket or a photo of the plug with a Nigerian adapter.",
+        "if_unproven": "priced as unusable without adapter, which reduces value"
+      },
+      {
+        "risk": "No visible folding mechanism or proof of foldability",
+        "proof": "Photo showing the dryer folded or a close-up of the hinge mechanism.",
+        "if_unproven": "priced as non-foldable, which reduces value"
+      },
+      {
+        "risk": "No proof of working condition or number of heat/speed settings",
+        "proof": "Video or photo showing the dryer turned on and switching between settings.",
+        "if_unproven": "priced as not working, which reduces value"
+      },
+      {
+        "risk": "Missing accessories (e.g., diffuser, concentrator nozzle)",
+        "proof": "Photo showing all included accessories laid out.",
+        "if_unproven": "priced as missing accessories, which reduces value"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the dryer folded to show the folding mechanism.",
+      "Photo or video of the dryer turned on, showing the control panel and switching between settings.",
+      "Photo of the plug with a Nigerian adapter or showing it plugged into a Nigerian socket.",
+      "Photo showing all included accessories."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a NOVA NV-1290 foldable hair dryer, but critical risks remain unproven: the plug is incompatible with Nigerian outlets, foldability is not demonstrated, and working condition is unverified. These affect usability and value. Proof is needed before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 75818,
+    "input_tokens": 2419,
+    "output_tokens": 927,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "d23e814fd5780e822b40d654f37452ad",
+    "error": null
+  }
+}

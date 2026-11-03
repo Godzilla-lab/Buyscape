@@ -1,0 +1,102 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Silver laptop lid with HP logo. A yellow sticky note is attached, handwritten with details: 'Hp Elitebook x360 1030 G8', 'Intel core i7', 'Ram: 16gb', 'Storage: 512gb SSD', 'Touch screen, Fingerprint', 'N56141', 'S/N: 6NDD25724XK'.",
+      "Photo 1: Laptop in tablet mode, screen on, showing Windows desktop with lighthouse wallpaper. The screen is fully functional and responsive. The hinge is visible on the right side.",
+      "Photo 2: Laptop in tent mode, screen on, same desktop wallpaper. The HP logo is visible on the bottom bezel. The screen appears undamaged and bright."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "EliteBook x360 1030 G8",
+      "read_from": [
+        "photo 0 sticky note",
+        "photo 0 lid logo"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP EliteBook x360 1030 G8",
+        "verdict": "supported",
+        "evidence": "Photo 0 sticky note clearly states 'Hp Elitebook x360 1030 G8'."
+      },
+      {
+        "claim": "Core i7-11th gen",
+        "verdict": "unverified",
+        "evidence": "Photo 0 sticky note says 'Intel core i7' but does not specify the generation. No system info or BIOS screen is shown to confirm 11th gen."
+      },
+      {
+        "claim": "16gb/512gb",
+        "verdict": "supported",
+        "evidence": "Photo 0 sticky note states 'Ram: 16gb' and 'Storage: 512gb SSD'."
+      },
+      {
+        "claim": "Touchscreen",
+        "verdict": "supported",
+        "evidence": "Photo 1 and 2 show the device in tablet and tent modes, indicating a 360-degree hinge and touchscreen functionality. The sticky note also confirms 'Touch screen'."
+      },
+      {
+        "claim": "Fingerprint scanner",
+        "verdict": "unverified",
+        "evidence": "Sticky note mentions 'Fingerprint', but no photo shows the scanner or its location. No close-up of the power button or side panel is provided."
+      },
+      {
+        "claim": "Face Unlock",
+        "verdict": "unverified",
+        "evidence": "No camera or IR sensor is visible in any photo. No evidence of Windows Hello or face unlock functionality is shown."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The CPU is not confirmed as 11th gen Intel Core i7",
+        "proof": "A screenshot of the system information or BIOS showing the exact CPU model.",
+        "if_unproven": "Priced as a generic i7, which may be lower than 11th gen."
+      },
+      {
+        "risk": "Fingerprint scanner may be non-functional or missing",
+        "proof": "A close-up photo of the fingerprint scanner, ideally with a finger pressing it, or a screenshot of Windows Hello setup.",
+        "if_unproven": "Priced as if no fingerprint scanner is present."
+      },
+      {
+        "risk": "Face Unlock may not work due to missing or non-functional IR camera",
+        "proof": "A close-up of the top bezel showing the camera and IR sensor, or a screenshot of Windows Hello face setup.",
+        "if_unproven": "Priced as if face unlock is not available."
+      },
+      {
+        "risk": "Battery health or charge cycle count is unknown",
+        "proof": "A screenshot of the battery information in Windows (PowerShell or Command Prompt command 'powercfg /batteryreport') or a video showing battery life under load.",
+        "if_unproven": "Priced as if battery is degraded or not included."
+      },
+      {
+        "risk": "Screen damage or dead pixels not visible in photos",
+        "proof": "A video or photo showing the screen with a solid white or black background, or a full-screen test pattern.",
+        "if_unproven": "Priced as if screen has minor defects or is not fully functional."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of system information showing exact CPU model (e.g., Intel Core i7-1165G7).",
+      "Close-up photo of the fingerprint scanner and a screenshot of Windows Hello setup.",
+      "Close-up of the top bezel showing the camera and IR sensor, or a screenshot of face unlock setup.",
+      "Screenshot of battery report or video showing battery life under load.",
+      "Photo or video of the screen with a solid white/black background to check for dead pixels or damage."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and basic specs are confirmed, but critical features like CPU generation, fingerprint scanner, face unlock, and battery health are unverified. Without proof, the item cannot be priced accurately and risks being undervalued or misrepresented."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 95921,
+    "input_tokens": 2808,
+    "output_tokens": 1154,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "abca6c5fc589f576032f9dacd20ef952",
+    "error": null
+  }
+}

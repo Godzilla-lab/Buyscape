@@ -1,0 +1,73 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows two 2.5-inch SSDs stacked together.",
+      "The front SSD has a blue and silver label with 'crucial' brand name and '2.5-inch SOLID STATE DRIVE' text.",
+      "The back SSD has a black label with 'SAMSUNG' brand name, '2.5-inch SATA SSD', and model details including 'MZ-7TE1T0BW' and '1TB' capacity.",
+      "Both drives appear to be in used condition with minor scuffs and scratches.",
+      "The Samsung drive has a visible serial number and barcode, along with regulatory marks (CE, FCC, etc.).",
+      "The Crucial drive has a watermark 'POSTED ON JIJI VIBRA GLOBAL LIMITED' over the label."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "1TB 2.5-inch SATA SSD",
+      "brand": "Crucial and Samsung",
+      "model": "Crucial: not readable; Samsung: MZ-7TE1T0BW",
+      "read_from": [
+        "photo 0 label: 'crucial' and '2.5-inch SOLID STATE DRIVE'",
+        "photo 0 label: 'SAMSUNG' and 'MZ-7TE1T0BW' on the black label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "1TB SSD, sata, for desktop and laptop.",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows two 2.5-inch SATA SSDs, one labeled Samsung MZ-7TE1T0BW (1TB) and the other Crucial (2.5-inch SSD). Both are compatible with desktops and laptops."
+      },
+      {
+        "claim": "Solid",
+        "verdict": "unverified",
+        "evidence": "The term 'Solid' likely refers to the drives being functional, but there is no visual or functional proof of operation. No power test or data read/write verification is shown."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The drives may be faulty or have bad sectors.",
+        "proof": "A video showing the drives being powered on, recognized by a computer, and running a disk health check (e.g., CrystalDiskInfo or similar) would confirm functionality.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The Crucial drive's model and capacity are not visible; it may not be 1TB.",
+        "proof": "A close-up photo of the Crucial drive's label showing the model number and capacity.",
+        "if_unproven": "priced as unknown capacity, possibly lower than 1TB"
+      },
+      {
+        "risk": "The Samsung drive may have been used in a failed system or have hidden wear.",
+        "proof": "A screenshot or video of the drive's SMART data showing health status and usage history.",
+        "if_unproven": "priced as potentially degraded performance or reduced lifespan"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the Crucial SSD label showing model and capacity.",
+      "Video of both drives being powered on and recognized by a computer.",
+      "Screenshot of SMART data for the Samsung drive showing health status."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "While the items are identifiable as 2.5-inch SATA SSDs with one clearly being a 1TB Samsung model, the Crucial drive's capacity and model are unreadable, and there is no proof of functionality. The 'Solid' claim is unverified. Without proof of working condition and full specifications, a worst-case price cannot be confidently assigned."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 63204,
+    "input_tokens": 1778,
+    "output_tokens": 808,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "f175e42864b7555c58504d79545592ac",
+    "error": null
+  }
+}

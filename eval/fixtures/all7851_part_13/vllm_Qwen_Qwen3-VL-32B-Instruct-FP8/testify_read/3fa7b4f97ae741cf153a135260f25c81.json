@@ -1,0 +1,105 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: A silver laptop is being held open, showing the keyboard and screen. The screen is off or dark. The laptop is in front of a glass display cabinet filled with stacks of laptops, many wrapped in plastic. A watermark 'ABBUTECHGLOBAL' is visible.",
+      "Photo 1: The back of the same laptop is shown, with a white label near the top center. The label is too blurry to read. The laptop has a silver finish with a vented area on the left side.",
+      "Photo 2: The closed lid of the laptop is shown, with a silver HP logo in the center. The lid is white/silver. The same glass cabinet and watermark are visible in the background."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "830 G7",
+      "read_from": [
+        "photo 2 lid"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP 830 G7",
+        "verdict": "supported",
+        "evidence": "Photo 2 shows the HP logo and the model '830 G7' is consistent with the design and branding visible on the lid."
+      },
+      {
+        "claim": "Core i5 10th generation",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible CPU label or system information. The model 830 G7 typically uses 10th gen Intel processors, but this cannot be confirmed from photos alone."
+      },
+      {
+        "claim": "256 SSD",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal photos or system specs visible. Cannot confirm storage type or size from exterior photos."
+      },
+      {
+        "claim": "8GB RAM",
+        "verdict": "unverifiable_remote",
+        "evidence": "No system information or internal photos. RAM cannot be verified remotely."
+      },
+      {
+        "claim": "Keyboard light",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows the keyboard, but it is not illuminated. No indication of backlighting is visible. Cannot confirm if it has backlighting."
+      },
+      {
+        "claim": "Touchscreen",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows the screen, but it is off and no touch indicators (like a touchpad or screen bezel design) are visible. Cannot confirm touchscreen capability."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The laptop may not have a 10th generation Core i5 processor",
+        "proof": "A photo of the BIOS screen or system information showing the CPU model.",
+        "if_unproven": "Priced as if it has a lower-end or non-10th gen CPU, which reduces value."
+      },
+      {
+        "risk": "The storage may not be 256GB SSD",
+        "proof": "A photo of the system information or disk management screen showing storage type and size.",
+        "if_unproven": "Priced as if it has HDD or smaller SSD, which reduces value."
+      },
+      {
+        "risk": "The RAM may not be 8GB",
+        "proof": "A photo of the system information or task manager showing installed RAM.",
+        "if_unproven": "Priced as if it has less than 8GB RAM, which reduces value."
+      },
+      {
+        "risk": "The keyboard may not have backlighting",
+        "proof": "A photo of the keyboard with the backlight turned on.",
+        "if_unproven": "Priced as if it has no backlight, which reduces value."
+      },
+      {
+        "risk": "The screen may not be touchscreen",
+        "proof": "A photo showing the screen being touched or a screenshot of display settings confirming touchscreen capability.",
+        "if_unproven": "Priced as if it is a non-touchscreen model, which reduces value."
+      },
+      {
+        "risk": "The laptop may be damaged or have cosmetic defects not visible in photos",
+        "proof": "A full 360-degree video or close-up photos of all edges, hinges, and ports.",
+        "if_unproven": "Priced assuming minor wear, but could be lower if damage is found."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the BIOS or system information screen showing CPU, RAM, and storage details.",
+      "Photo of the keyboard with backlight turned on.",
+      "Photo or video showing the screen being touched to confirm touchscreen.",
+      "Close-up photos of all ports, hinges, and edges for damage assessment."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identifiable as HP 830 G7, but critical specifications like CPU generation, RAM, storage, keyboard backlight, and touchscreen cannot be verified from the current photos. These affect pricing significantly. Proof is needed to confirm these features before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 86092,
+    "input_tokens": 2796,
+    "output_tokens": 1098,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "3fa7b4f97ae741cf153a135260f25c81",
+    "error": null
+  }
+}

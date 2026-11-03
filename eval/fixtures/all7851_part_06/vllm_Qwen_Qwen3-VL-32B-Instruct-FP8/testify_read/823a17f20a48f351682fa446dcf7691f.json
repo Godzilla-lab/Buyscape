@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: A black smartphone lies next to a black box with 'SAMSUNG' visible on the top flap. The box has a cutout for the phone screen. The phone is off, screen dark. A second box with a white logo (resembling a stylized 'B' or '3') is also visible, labeled 'ONE PLUS NARZO'.",
+      "Photo 1: The same phone is shown from the back, revealing a white rear panel with a triple camera module and a small label with a QR code and CE mark. A brown leather case with a circular cutout for the camera is placed above the phone. The 'ONE PLUS NARZO' box is still visible.",
+      "Photo 2: The phone is turned on, displaying a lock screen with the time '8:08' and a circular design. The screen appears intact with no visible cracks. The 'ONE PLUS NARZO' box is still present.",
+      "All photos show the phone and boxes on a wooden surface with a paper underneath that says 'Delta Housing'.",
+      "The phone's brand is not visible on the front or back; only the box indicates 'ONE PLUS NARZO'.",
+      "The Samsung box appears to be for a different device, possibly a Galaxy S series, and is not related to the phone being sold."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "smartphone",
+      "brand": "OnePlus",
+      "model": "Narzo",
+      "read_from": [
+        "photo 0 box",
+        "photo 1 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Operfect working condition",
+        "verdict": "unverified",
+        "evidence": "Photo 2 shows the screen is on, but no interaction or functionality is demonstrated. No proof of camera, charging, or network function."
+      },
+      {
+        "claim": "still clean",
+        "verdict": "supported",
+        "evidence": "Photos show no visible dirt, smudges, or damage on the phone or case. The screen appears clean in photo 2."
+      },
+      {
+        "claim": "Just 2 months old",
+        "verdict": "unverifiable_remote",
+        "evidence": "No serial number, IMEI, or purchase receipt is visible. The phone's age cannot be confirmed from photos alone."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Phone may be faulty or not working (e.g., screen flickering, camera not working, battery issues)",
+        "proof": "Video showing the phone being turned on, unlocking, using the camera, and charging.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Phone may be stolen or blacklisted (common in Nigeria)",
+        "proof": "IMEI number and a screenshot of the IMEI check on a Nigerian network provider's website (e.g., MTN, Airtel, 9mobile).",
+        "if_unproven": "priced as potentially blacklisted, which reduces value significantly"
+      },
+      {
+        "risk": "Phone may be a fake or refurbished unit sold as new",
+        "proof": "Close-up of the phone's serial number and IMEI, and a video of the phone's settings menu showing the model and software version.",
+        "if_unproven": "priced as potentially refurbished, which reduces value"
+      }
+    ],
+    "proof_requests": [
+      "Video showing the phone being turned on, unlocked, and used (camera, calls, charging).",
+      "IMEI number and screenshot of IMEI check on a Nigerian network provider's website.",
+      "Close-up of the phone's serial number and IMEI.",
+      "Photo of the phone's settings menu showing model and software version."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The phone is identified as a OnePlus Narzo by the box, but its functionality and authenticity cannot be confirmed from the photos alone. The claim of 'perfect working condition' is unverified, and risks like being blacklisted or faulty are unproven. Proof of functionality and IMEI check are required before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 59145,
+    "input_tokens": 1923,
+    "output_tokens": 906,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "823a17f20a48f351682fa446dcf7691f",
+    "error": null
+  }
+}

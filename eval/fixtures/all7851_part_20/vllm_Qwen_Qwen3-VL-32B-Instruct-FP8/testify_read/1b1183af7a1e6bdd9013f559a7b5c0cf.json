@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: A silver, upright refrigerator with a curved handle on the left and a water dispenser on the right. The top edge shows the brand name 'TOSHIBA' in small letters. A green circular sticker with 'Direct Cool' and an apple is visible. The fridge is in a kitchen setting with tiled walls and a wooden shelf to the right.",
+      "Photo 1: Interior view of the fridge with door open. It has multiple wire shelves, a crisper drawer at the bottom, and a freezer compartment at the top with a 'Toshiba Freezer' label. The interior light is on, showing a clean but empty interior.",
+      "Photo 2: Close-up of the green circular sticker on the fridge door. The sticker reads 'TOSHIBA', 'uper Direct Cool', and 'Toshiba 35 Anniversary'. Below the sticker is the water dispenser nozzle. The fridge surface shows some smudges and minor wear."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "refrigerator",
+      "brand": "Toshiba",
+      "model": null,
+      "read_from": [
+        "photo 0 top edge",
+        "photo 2 sticker"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "380 litres plus outside dispenser",
+        "verdict": "unverified",
+        "evidence": "The volume is not visible in any photo. The dispenser is visible in photo 0 and photo 2, but the '380 litres' claim cannot be verified from the images."
+      },
+      {
+        "claim": "Available for immediate pick up",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a logistical claim about availability and location; cannot be verified from photos alone."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The refrigerator may not be in working condition or may have internal damage not visible in the photos.",
+        "proof": "A video showing the fridge running, cooling, and the dispenser dispensing water.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The dispenser may be non-functional or clogged.",
+        "proof": "A close-up video of the dispenser in operation, showing water flow.",
+        "if_unproven": "priced as dispenser not working"
+      },
+      {
+        "risk": "The actual capacity may be less than 380 litres.",
+        "proof": "A photo or video showing the fridge filled with standard-sized containers to demonstrate volume.",
+        "if_unproven": "priced as smaller capacity"
+      }
+    ],
+    "proof_requests": [
+      "Video of the refrigerator running and cooling.",
+      "Video of the water dispenser in operation.",
+      "Photo or video showing the interior filled with standard containers to verify capacity.",
+      "Photo of the model number plate, if visible."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The brand is identifiable as Toshiba, but the model and capacity are not verifiable from the photos. The dispenser is visible but its functionality is unknown. The working condition and actual volume are hidden risks that must be proven before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 54536,
+    "input_tokens": 2780,
+    "output_tokens": 693,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "1b1183af7a1e6bdd9013f559a7b5c0cf",
+    "error": null
+  }
+}

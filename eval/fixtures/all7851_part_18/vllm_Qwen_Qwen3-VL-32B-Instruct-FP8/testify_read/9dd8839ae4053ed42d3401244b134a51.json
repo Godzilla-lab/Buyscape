@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black plastic tank with a metal plate indicating 'NET CAPACITY 1500 LTRS' and 'MADE IN NIGERIA'.",
+      "The tank has horizontal ribbing and a wide top opening.",
+      "Photo 1 and 2 show the full tank from slightly different angles, standing outdoors against a white block wall.",
+      "The tank appears to be in used condition with some dust and minor surface marks.",
+      "A blue tap is visible near the bottom on the right side.",
+      "The top cover is not visible in any photo; only the opening is shown.",
+      "No visible cracks or major damage, but the tank is not shown empty or with the cover."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "1500L GP water tank",
+      "brand": "GP",
+      "model": "Qayer",
+      "read_from": [
+        "photo 0 plate"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "A very neat 1500 capacity GP qayer tank.",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows the capacity and brand on the plate. The tank appears clean and intact in photos 1 and 2."
+      },
+      {
+        "claim": "Everything is intact with cover.",
+        "verdict": "unverified",
+        "evidence": "The cover is not visible in any photo. Only the opening is shown. The tank appears intact externally."
+      },
+      {
+        "claim": "Less than 6 months in use.",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visual evidence of usage duration. The condition does not contradict the claim but cannot confirm it."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The cover is missing or damaged, which affects usability and value.",
+        "proof": "A photo showing the cover placed on the tank or stored nearby.",
+        "if_unproven": "priced as missing cover"
+      },
+      {
+        "risk": "Internal damage or contamination not visible from outside.",
+        "proof": "A photo of the inside of the tank, showing cleanliness and structural integrity.",
+        "if_unproven": "priced as potentially contaminated or damaged"
+      },
+      {
+        "risk": "The tank is not actually 1500L or is not made by GP Qayer (brand/model mismatch).",
+        "proof": "A clear, close-up photo of the plate with readable text, or a photo of the tank with a known reference object for size verification.",
+        "if_unproven": "priced as unverified capacity/brand"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the cover on or near the tank.",
+      "Photo of the inside of the tank to check for damage or contamination.",
+      "Clear close-up of the plate to confirm brand and capacity."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The tank's identity is confirmed by the plate in photo 0, but critical claims like the presence of the cover and internal condition cannot be verified from current photos. Without proof of the cover and internal state, the item cannot be priced accurately and carries hidden risks that affect value."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 58219,
+    "input_tokens": 2792,
+    "output_tokens": 711,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "9dd8839ae4053ed42d3401244b134a51",
+    "error": null
+  }
+}
