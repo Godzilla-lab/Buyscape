@@ -113,7 +113,7 @@ def training_hours(credit_left: float, dollars_per_hour: float, reserve: float =
     return round(max(0.0, usable), 2)
 
 
-def onstart(data_repo: str, run_repo: str, data_file: str, train_args: str, hours: float) -> str:
+def onstart(data_repo: str, run_repo: str, data_file: str, train_args: str, hours: float, folder: str = "") -> str:
     """The machine's start script: tools, data and save point in, train, adapter out, then a done mark.
 
     The token arrives as HF_TRAIN_TOKEN, a Hugging Face token for these two repos only."""
@@ -124,8 +124,13 @@ def onstart(data_repo: str, run_repo: str, data_file: str, train_args: str, hour
         "set -x",
         "cd /workspace",
         "pip install -q 'transformers>=4.57' peft accelerate safetensors pillow huggingface_hub",
-        f"hf download {q(data_repo)} --repo-type dataset --local-dir data",
-        (f"python data/sft_lora.py --model Qwen/Qwen3-VL-2B-Instruct --data data/{q(data_file)} --root data "
+        # Only the training folder: every gigabyte a host sends is paid for.
+        (f"hf download {q(data_repo)} --repo-type dataset --local-dir data"
+         + (f" --include {q(folder + '/*')} {q(folder + '/**')}" if folder else "")),
+        # Photos travel as one archive per cache, far fewer files than one upload each.
+        f"for t in data/{folder}/*.tar; do [ -f \"$t\" ] && tar xf \"$t\" -C data/{folder}; done",
+        (f"python data/{folder + '/' if folder else ''}sft_lora.py --model Qwen/Qwen3-VL-2B-Instruct "
+         f"--data data/{folder + '/' if folder else ''}{q(data_file)} --root data/{folder} "
          f"--out out --resumable --hub-repo {q(run_repo)} --hours {hours} {train_args} > train.log 2>&1"),
         f"hf upload {q(run_repo)} out adapter --private",
         f"hf upload {q(run_repo)} train.log logs/train.log --private",

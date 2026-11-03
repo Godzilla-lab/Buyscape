@@ -78,3 +78,9 @@ def test_a_model_served_on_the_rented_machine_is_called_there(monkeypatch):
     monkeypatch.delenv("VLLM_URL", raising=False)
     assert OpenRouterProvider("Qwen/Qwen3-VL-32B-Instruct-FP8", vendor="vllm")._url == \
         "http://127.0.0.1:8000/v1/chat/completions"
+
+
+def test_a_training_machine_downloads_only_its_own_folder():
+    script = vast.onstart("godzilla1215/d", "godzilla1215/r", "sft_r6.jsonl", "--epochs 1", 5.0, folder="train6")
+    assert "--include train6/* 'train6/**'" in script or "--include 'train6/*' 'train6/**'" in script
+    assert "python data/train6/sft_lora.py" in script and "--data data/train6/sft_r6.jsonl --root data/train6" in script

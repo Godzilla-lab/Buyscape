@@ -1801,9 +1801,13 @@ def vast_offers(
 @app.command("vast-train")
 def vast_train(
     offer: int = typer.Option(..., help="An offer id from vast-offers."),
-    data_repo: str = typer.Option(..., help="The private Hugging Face dataset with sft_lora.py, the chats and photos."),
-    run_repo: str = typer.Option(..., help="The private Hugging Face repo the save points and adapter go to."),
+    data_repo: str = typer.Option("godzilla1215/testify-vast-data",
+                                  help="The private Hugging Face dataset with sft_lora.py, the chats and photos."),
+    run_repo: str = typer.Option("godzilla1215/testify-vast-run",
+                                 help="The private Hugging Face repo the save points and adapter go to."),
     data_file: str = typer.Option(..., help="The chats file inside the dataset, the same name as on Kaggle."),
+    folder: str = typer.Option("", help="The folder in the dataset holding sft_lora.py, the chats and eval/raw."),
+    download_gb: float = typer.Option(8.0, help="What the machine downloads: the base model, tools and data."),
     train_args: str = typer.Option("--image-tokens 640 --max-len 4096", help="The recipe, the same on every machine."),
     reserve: float = typer.Option(1.0, help="Dollars kept back for disk and downloads."),
     yes: bool = typer.Option(False, help="Rent it. Without this the plan and its cost are only shown."),
@@ -1813,16 +1817,17 @@ def vast_train(
 
     left = vast.credit()
     chosen = next((o for o in vast.offers(("RTX 4090", "RTX 5090", "A100 PCIE", "A100 SXM4", "L40S", "RTX A6000",
-                                           "H100 SXM"), datacenter_only=False) if o.id == offer), None)
+                                           "H100 SXM")) if o.id == offer), None)
     if chosen is None:
         raise typer.BadParameter(f"offer {offer} is not rentable now; run vast-offers again")
-    hours = vast.training_hours(left, chosen.dollars_per_hour, reserve)
+    downloads = chosen.setup_dollars(download_gb)
+    hours = vast.training_hours(left - downloads, chosen.dollars_per_hour, reserve)
     if hours < 1:
         raise typer.BadParameter(f"${left:.2f} buys under an hour of training on this machine")
-    cost = (hours + vast.SETUP_HOURS) * chosen.dollars_per_hour
-    console.print(f"{chosen.line()}\ncredit ${left:.2f}: up to {hours} hours of training, about ${cost:.2f} at most, "
-                  f"${reserve:.2f} kept back. The machine stops itself when the run ends.")
-    script = vast.onstart(data_repo, run_repo, data_file, train_args, hours)
+    cost = (hours + vast.SETUP_HOURS) * chosen.dollars_per_hour + downloads
+    console.print(f"{chosen.line()}\ncredit ${left:.2f}: up to {hours} hours of training, ${downloads:.2f} of downloads, "
+                  f"about ${cost:.2f} at most, ${reserve:.2f} kept back. The machine stops itself when the run ends.")
+    script = vast.onstart(data_repo, run_repo, data_file, train_args, hours, folder)
     if not yes:
         console.print("[bold]Not rented.[/bold] The machine would run:\n" + script)
         return
