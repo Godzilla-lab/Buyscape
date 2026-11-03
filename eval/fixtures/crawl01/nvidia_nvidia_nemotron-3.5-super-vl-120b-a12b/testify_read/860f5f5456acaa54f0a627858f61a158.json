@@ -1,0 +1,110 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a silver laptop keyboard deck with black chiclet keys, a large trackpad, and a green sticky note on the palm rest.",
+      "Photo 1 shows the same laptop with the bottom case removed, exposing the battery, logic board area, speaker enclosures, and internal frame.",
+      "Photo 0 shows physical function keys including an esc key along the top row.",
+      "No model number, brand logo, or regulatory label is readable in either photo.",
+      "Both photos carry a \"MARSHADAKH MULTILINKS\" watermark."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "laptop parts (keyboard deck and exposed internals)",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "MacBook Pro 2020 Intel 13\"",
+        "verdict": "unverifiable_remote",
+        "evidence": "No model identifier or year is readable in photo 0 or photo 1."
+      },
+      {
+        "claim": "keyboard",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows the keyboard physically present."
+      },
+      {
+        "claim": "Mouse",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows the trackpad physically present."
+      },
+      {
+        "claim": "Speaker",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows speaker enclosures inside the chassis."
+      },
+      {
+        "claim": "Touch bar",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows physical function keys and an esc key, not a Touch Bar strip."
+      },
+      {
+        "claim": "TouchID",
+        "verdict": "unverified",
+        "evidence": "The power button area is visible in photo 0 but the Touch ID sensor cannot be confirmed."
+      },
+      {
+        "claim": "Battery",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows battery cells inside the chassis."
+      },
+      {
+        "claim": "Palm rest",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows the palm rest with a green sticky note."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Keyboard or trackpad may not function.",
+        "proof": "Video of keys being pressed and trackpad clicking.",
+        "if_unproven": "priced as non-working input parts."
+      },
+      {
+        "risk": "Battery may be dead or have a high cycle count.",
+        "proof": "Screenshot of battery health and cycle count.",
+        "if_unproven": "priced as a dead battery."
+      },
+      {
+        "risk": "Logic board may be damaged or non-functional.",
+        "proof": "Photo of the logic board or video of the laptop booting.",
+        "if_unproven": "priced as a non-working board."
+      },
+      {
+        "risk": "Screen may be missing or damaged (not shown).",
+        "proof": "Photo of the screen turned on.",
+        "if_unproven": "priced without a screen."
+      },
+      {
+        "risk": "Touch ID sensor may be absent or non-functional.",
+        "proof": "Close-up of the power button and a Touch ID enrollment video.",
+        "if_unproven": "priced without Touch ID."
+      }
+    ],
+    "proof_requests": [
+      "Model identifier (Axxxx) or \"About This Mac\" screenshot to confirm 2020 Intel 13\".",
+      "Video of keyboard, trackpad, and power button functioning.",
+      "Battery cycle count and health percentage.",
+      "Photo of the screen turned on."
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a laptop sold for parts, and the photos show the keyboard, trackpad, battery, and internals, so it can be priced at worst case (non-functional) while proof would raise the value."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 73543,
+    "input_tokens": 2393,
+    "output_tokens": 5572,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "860f5f5456acaa54f0a627858f61a158",
+    "error": null
+  }
+}

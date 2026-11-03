@@ -1,0 +1,92 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows the back of a white/silver smartphone with a triple-lens camera array.",
+      "A white label on the back reads: Apple logo, iPhone 15 Pro Max, Capacity: 256GB, Color: Silver, Condition: Grade A, Function: TESTED, Battery: 99%.",
+      "Photos 1 and 2 show the right side frame with volume and side buttons.",
+      "Background sign reads DANNY TUNEZ with RC:3418170 and lists iPhones, Samsung, Macbooks, Accessories.",
+      "Seller text mentions ESIM unlock, 60% down payment, and buy now pay later terms."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "smartphone",
+      "brand": "Apple",
+      "model": "iPhone 15 Pro Max",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "ESIM unlock",
+        "verdict": "unverified",
+        "evidence": "Photos show hardware only, not SIM lock or network settings."
+      },
+      {
+        "claim": "Buy now pay later",
+        "verdict": "unverifiable_remote",
+        "evidence": "Payment terms are commercial claims not visible in photos."
+      },
+      {
+        "claim": "60% down payment",
+        "verdict": "unverifiable_remote",
+        "evidence": "Payment terms are commercial claims not visible in photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Device may be network-locked despite the unlock claim.",
+        "proof": "Screenshot of Settings > General > About showing No SIM restrictions, or video of a different carrier SIM working.",
+        "if_unproven": "as network-locked"
+      },
+      {
+        "risk": "Battery health may not be 99% or the label may be fake.",
+        "proof": "Screenshot of Settings > Battery showing Battery Health percentage.",
+        "if_unproven": "as unknown or degraded battery"
+      },
+      {
+        "risk": "Device may not power on or functions may fail despite the TESTED label.",
+        "proof": "Video of boot-up, touchscreen, cameras, Face ID, and speakers.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Cosmetic condition may be worse than Grade A; the front screen is not shown.",
+        "proof": "Close-up photos of the front screen, corners, and all sides.",
+        "if_unproven": "as fair or poor cosmetic condition"
+      },
+      {
+        "risk": "IMEI may be blacklisted or the device stolen.",
+        "proof": "Video of dialing *#06# to display the IMEI, plus an online blacklist check screenshot.",
+        "if_unproven": "as blacklisted or stolen"
+      },
+      {
+        "risk": "Label may be a third-party sticker, not original Apple certification.",
+        "proof": "Photo of original box with matching serial, or Settings > General > About showing model and serial.",
+        "if_unproven": "as unverified refurbished or non-original"
+      }
+    ],
+    "proof_requests": [
+      "Video of the phone powering on and passing touch, camera, Face ID, and speaker tests.",
+      "Screenshot of Settings > General > About showing SIM restrictions and battery health.",
+      "Close-up photos of the front screen and all corners/edges.",
+      "Video of dialing *#06# to display the IMEI."
+    ],
+    "decision": "price",
+    "reason": "The item is clearly an Apple iPhone 15 Pro Max 256GB Silver from the label in photo 0, so it can be priced at its worst case while pending proof."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 54487,
+    "input_tokens": 3463,
+    "output_tokens": 3493,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "e2122605686a925f0907c9ae6f8a42ad",
+    "error": null
+  }
+}
