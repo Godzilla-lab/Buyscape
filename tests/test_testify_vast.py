@@ -32,6 +32,7 @@ def test_a_reading_machine_serves_the_model_reads_in_parts_and_always_sends_back
     assert "vllm serve Qwen/Qwen3-VL-32B-Instruct-FP8" in script and "--max-num-seqs 16" in script
     assert "split -n l/8 -d ids.txt part_" in script and "--model vllm:Qwen/Qwen3-VL-32B-Instruct-FP8" in script
     assert "--reads-only" in script and "--tag test100_$p" in script
+    assert "curl" not in script, "the image has no curl"
     # The upload is outside the time limit, so a run cut short still sends back its reads and logs.
     assert script.index("timeout 40m") < script.index("EXIT") < script.index("hf upload godzilla1215/r /workspace/out reads/test100")
 

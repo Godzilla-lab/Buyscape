@@ -202,8 +202,10 @@ def read_onstart(data_repo: str, run_repo: str, job: str, minutes: int, model: s
         f"uv pip install -q {q(VLLM)} -e job",
         (f"vllm serve {q(model)} --api-key local --max-model-len 16384 --limit-mm-per-prompt '{{\"image\": 4}}' "
          f"--gpu-memory-utilization 0.92 --max-num-seqs {parallel * 2} > job/vllm.log 2>&1 &"),
-        ("for i in $(seq 1 90); do curl -sf -H 'Authorization: Bearer local' localhost:8000/v1/models && break; "
-         "sleep 10; done"),
+        # The image has no curl: python asks the server, and the reads start the moment it answers.
+        ("for i in $(seq 1 120); do python -c \"import urllib.request as u; u.urlopen(u.Request("
+         "'http://localhost:8000/v1/models', headers={'Authorization': 'Bearer local'}), timeout=5)\" "
+         "2>/dev/null && break; sleep 10; done"),
         f"cd job && split -n l/{parallel} -d ids.txt part_ && export VLLM_API_KEY=local",
         (f"for p in part_*; do buyscape testify --model vllm:{model} --split train --ids-file $p --tag {job}_$p "
          "--no-lies --reads-only --budget-usd 9 > $p.log 2>&1 & done; wait"),
