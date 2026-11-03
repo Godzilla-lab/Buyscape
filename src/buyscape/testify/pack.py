@@ -28,6 +28,8 @@ from .release import _LOCAL, CHECK_FIELDS
 from .select import BAND_NAMES, band
 
 VERSION = "1"
+KAGGLE_PRIVATE = "godzilla1215/buyscape-market-data"
+KAGGLE_PUBLIC = "godzilla1215/buyscape-market-data-public"
 
 # Cache folder under eval/raw: (what it is used for, how it was gathered). In
 # priority order: an advert held by two caches takes the first one's role.
@@ -48,9 +50,10 @@ TEST_HIDDEN = ("kind", "price_ngn", "site_category", "condition", "is_used")
 
 
 def _url(url: str, cache: str) -> str:
+    """The advert's address without the listing's tracking codes (?page=1&pos=8&lid=...)."""
     if url.startswith("/"):
-        return "https://jiji.ng" + url
-    return url
+        url = "https://jiji.ng" + url
+    return url.split("?", 1)[0] if "jiji.ng/" in url else url
 
 
 def _area(url: str) -> str | None:
@@ -261,13 +264,25 @@ def datasheet(s: dict, public: bool = False) -> str:
     """A README for the pack: what is inside, where it came from, how it was chosen and what may be shared."""
     sources = "\n".join(f"| `{cache}` | {role} | {how} |" for cache, (role, how) in SOURCES.items())
     reads = "\n".join(f"| {m} | {n:,} |" for m, n in s["reads_by_model"].items()) or "| none yet | 0 |"
+    sharing = ("The photos and the sellers' words belong to the sellers and the site, so this version holds\n"
+               "none: no photo, no title, no description. It carries the link to each advert, facts anyone\n"
+               "can read there (price, city, condition, date), our own labels, and photo fingerprints for\n"
+               "finding reposts. The benchmark's test split shows only its links, so it stays an honest test.\n"
+               "Our labels and this table are shared under CC BY 4.0; each advert remains its seller's."
+               if public else
+               "The photos and the sellers' words belong to the sellers and the site. The public version\n"
+               "carries the link, facts anyone can read at the link (price, city, condition, date), our own\n"
+               "labels and photo hashes for finding duplicates; never a photo, a title or a seller's words,\n"
+               "and nothing that answers the benchmark's test split.")
     if public:
         intro = "This is the public version: links and labels only, no photos and no seller's words."
-        files = """| `adverts.jsonl` | One row per advert: id, role, split, source, link, city, category, kind, price, condition, date, photo count, photo hashes, and our photo check where there is one. The benchmark's test split shows only its link |"""
+        files = """| `adverts.csv` | One row per advert: id, role, split, source, link, city, area, kind, price, condition, date, photo count, and our photo check where there is one. The benchmark's test split shows only its link |
+| `adverts.jsonl` | The same rows as JSON lines, with each photo's fingerprint |"""
     else:
         intro = ("This is the private pack. It holds photos and sellers' own words, which are not ours to share;\n"
                  "`public/` holds the shareable version.")
-        files = """| `adverts.jsonl` | One row per advert: id, role, split, source, link, city, category, kind, title, price, condition, details, date, photo paths |
+        files = """| `adverts.csv` | One row per advert: id, role, split, source, link, city, area, kind, title, price, condition, date, photo count and paths |
+| `adverts.jsonl` | The same rows as JSON lines, with the seller's details (phone numbers removed), attributes and photo fingerprints |
 | `photos/<id>/` | The advert's photos as the site served them |
 | `annotations/photo_checks.jsonl` | A model's check of each training advert's photos: what it shows, whether the title matches, any text on the item |
 | `annotations/reads.jsonl` | A teacher model's full read of an advert, the training target for the small model |
@@ -333,11 +348,7 @@ for; the area is the place its link names, a state or a district.
 
 ## What may be shared
 
-The photos and the sellers' words belong to the sellers and the site. The public version
-carries the link, facts anyone can read at the link (price, city, condition, date), our own
-labels and photo hashes for finding duplicates; never a photo, a title or a seller's words,
-and nothing that answers the benchmark's test split. Jiji's terms are being checked with
-Jiji before anything is published.
+{sharing}
 
 ## Rebuild
 
@@ -384,6 +395,118 @@ def check_public(public: list[dict], private: list[dict]) -> list[str]:
     return found
 
 
+# Column, meaning: the CSV's columns, described for whoever opens the file.
+COLUMNS: dict[str, str] = {
+    "id": "The advert's id on its site",
+    "role": "What the advert is used for: benchmark, held back, training, tenant, new stock or shop price",
+    "split": "Benchmark dev or test, train for training adverts, empty otherwise. Test is never trained on",
+    "source": "Where it was listed: jiji, buyscrap, jumia, slot or pointek",
+    "url": "The advert's address",
+    "city": "The state it was fetched for, online for shops; empty when not known",
+    "area": "The place the advert's link names: a state or a district within one",
+    "kind": "What the item is: our search kind, the site's category for crawled adverts",
+    "site_category": "The category the site files the advert under, for crawled adverts",
+    "title": "The seller's title",
+    "price_ngn": "The asking price in naira, as listed",
+    "condition": "The site's condition field: Used, Brand New, or empty",
+    "is_used": "True when the site marks the item used",
+    "fetched_at": "When the advert was read, UTC",
+    "photo_count": "How many photos the advert has",
+    "photos": "The photo files in this dataset, separated by semicolons",
+    "photo_check_identity": "Our photo check: whether the photos alone name the item (named, by type, unknown)",
+    "photo_check_title_matches": "Our photo check: whether the title matches the photos",
+    "photo_check_used": "Our photo check: whether the item looks used",
+    "photo_check_unit": "Our photo check: what is for sale, one item, a set or a lot",
+}
+PRIVATE_CSV = ("id", "role", "split", "source", "url", "city", "area", "kind", "site_category", "title", "price_ngn",
+               "condition", "is_used", "fetched_at", "photo_count", "photos")
+PUBLIC_CSV = ("id", "role", "split", "source", "url", "city", "area", "kind", "site_category", "price_ngn", "condition",
+              "is_used", "fetched_at", "photo_count", "photo_check_identity", "photo_check_title_matches",
+              "photo_check_used", "photo_check_unit")
+
+
+def _csv_row(row: dict) -> dict:
+    check = row.get("photo_check") or {}
+    flat = dict(row)
+    flat["photo_count"] = row.get("photo_count", len(row.get("photos") or []))
+    flat["photos"] = ";".join(row.get("photos") or [])
+    flat.update(photo_check_identity=check.get("identity_from_photos_alone"),
+                photo_check_title_matches=check.get("title_matches_photos"),
+                photo_check_used=check.get("looks_actually_used"), photo_check_unit=check.get("unit_of_sale"))
+    return flat
+
+
+def write_csv(path: Path, rows: list[dict], columns: tuple[str, ...]) -> None:
+    import csv
+
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=columns, extrasaction="ignore")
+        writer.writeheader()
+        for row in rows:
+            writer.writerow({k: ("" if v is None else v) for k, v in _csv_row(row).items() if k in columns})
+
+
+def kaggle_metadata(s: dict, slug: str, public: bool) -> dict:
+    """The dataset's card on Kaggle: everything its usability score reads, from the same counts as the README."""
+    columns = PUBLIC_CSV if public else PRIVATE_CSV
+    files = [{"path": "adverts.csv", "description": "One row per advert, the table to start from",
+              "schema": {"fields": [{"name": c, "description": COLUMNS[c],
+                                     "type": "number" if c in ("price_ngn", "photo_count") else
+                                     "boolean" if c == "is_used" else "string"} for c in columns]}},
+             {"path": "adverts.jsonl", "description": "The same adverts as JSON lines, every field"},
+             {"path": "README.md", "description": "The datasheet: sources, coverage, how adverts were chosen"}]
+    if not public:
+        files.append({"path": "manifest.json", "description": "Counts, sizes and checksums of this version"})
+    return {
+        "title": "Buyscape Nigeria second-hand market" + (" (public)" if public else ""),
+        "id": slug,
+        "subtitle": f"{s['adverts']:,} used-goods adverts from Nigeria with prices, cities and labels"[:80],
+        "description": datasheet(s, public=public),
+        "isPrivate": not public,
+        "licenses": [{"name": "CC-BY-4.0" if public else "other"}],
+        "keywords": ["business", "africa", "retail and shopping", "e-commerce services", "tabular",
+                     *([] if public else ["image", "computer vision"])],
+        "resources": files,
+        "userSpecifiedSources": ("Jiji Nigeria (jiji.ng) adverts read from its public listing pages; "
+                                 "BuyScrap Nigeria's own adverts; Jumia, Slot and Pointek shop prices. "
+                                 "Collected with the Buyscape tools, github.com/Godzilla-lab/Buyscape."),
+        "expectedUpdateFrequency": "weekly",
+    }
+
+
+def cover_image(path: Path, s: dict) -> None:
+    """A plain cover drawn from the counts: never a seller's photo."""
+    from PIL import Image, ImageDraw, ImageFont
+
+    width, height = 1120, 560
+    image = Image.new("RGB", (width, height), (18, 32, 47))
+    draw = ImageDraw.Draw(image)
+
+    def font(size: int):
+        for name in ("DejaVuSans-Bold.ttf", "Arial Bold.ttf", "Arial.ttf"):
+            try:
+                return ImageFont.truetype(name, size)
+            except OSError:
+                continue
+        return ImageFont.load_default()
+
+    draw.text((56, 48), "Buyscape", font=font(56), fill=(255, 255, 255))
+    draw.text((56, 118), "Nigeria's second-hand market, priced", font=font(30), fill=(170, 200, 225))
+    facts = [f"{s['adverts']:,} adverts", f"{len(s['by_city'])} cities", f"{len(s['by_kind'])} kinds",
+             f"{s['first_fetched']} to {s['last_fetched']}"]
+    draw.text((56, 172), "   |   ".join(facts), font=font(24), fill=(220, 230, 240))
+    top = [(k, v) for k, v in s["by_kind"].items() if k != "not stated"][:8]
+    most = max((v for _, v in top), default=1)
+    for n, (kind, count) in enumerate(top):
+        y = 240 + n * 36
+        draw.text((56, y), kind[:28], font=font(20), fill=(220, 230, 240))
+        draw.rectangle((420, y + 4, 420 + int(600 * count / most), y + 26), fill=(52, 152, 219))
+        draw.text((430 + int(600 * count / most), y), f"{count:,}", font=font(18), fill=(170, 200, 225))
+    path.parent.mkdir(parents=True, exist_ok=True)
+    image.save(path)
+
+
 def _sha(path: Path) -> str:
     digest = hashlib.sha256()
     with path.open("rb") as f:
@@ -416,11 +539,16 @@ def build(root: Path, out: Path, copy: bool = False) -> dict:
     if problems:
         raise ValueError("public version not written, private data found: " + "; ".join(problems[:5]))
     _write_jsonl(out / "adverts.jsonl", rows)
+    write_csv(out / "adverts.csv", rows, PRIVATE_CSV)
+    write_csv(out / "public" / "adverts.csv", public, PUBLIC_CSV)
     _write_jsonl(out / "annotations" / "photo_checks.jsonl", checks)
     _write_jsonl(out / "annotations" / "reads.jsonl", reads)
     (out / "README.md").write_text(datasheet(counts))
     _write_jsonl(out / "public" / "adverts.jsonl", public)
     (out / "public" / "README.md").write_text(datasheet(counts, public=True))
-    files = {p.relative_to(out).as_posix(): _sha(p) for p in sorted(out.rglob("*.jsonl"))}
+    files = {p.relative_to(out).as_posix(): _sha(p) for p in sorted([*out.rglob("*.jsonl"), *out.rglob("*.csv")])}
     (out / "manifest.json").write_text(json.dumps({**counts, "sha256": files}, indent=1) + "\n")
+    for folder, slug, public_card in ((out, KAGGLE_PRIVATE, False), (out / "public", KAGGLE_PUBLIC, True)):
+        (folder / "dataset-metadata.json").write_text(json.dumps(kaggle_metadata(counts, slug, public_card), indent=1))
+        cover_image(folder / "dataset-cover-image.png", counts)
     return counts
