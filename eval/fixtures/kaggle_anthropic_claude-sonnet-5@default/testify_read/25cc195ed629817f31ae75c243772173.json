@@ -1,0 +1,80 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Two tires stacked vertically, tread facing camera, both appear similar tread pattern.",
+      "Yellow paint/chalk marks and some yellow pen writing on both tires, typical of grading marks used by importers.",
+      "A hand rests on the top tire, apparently for scale, no measurement tool shown.",
+      "No sidewall text (brand, size, DOT date) is visible in the photo; only tread face is shown.",
+      "Background shows a tire shop or roadside stall with other tire stacks and signage."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used car tire (pair)",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Size 215/60/17C",
+        "verdict": "unverifiable_remote",
+        "evidence": "No sidewall visible in photo 0; size cannot be confirmed from tread-only shot."
+      },
+      {
+        "claim": "Grade 1 (implying high quality/condition)",
+        "verdict": "unverified",
+        "evidence": "Yellow marks may be grading marks but no legible grading system or certificate shown; tread depth and sidewall condition not fully visible."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Tire size mismatch with buyer's vehicle (215/60/17C stated but unconfirmed)",
+        "proof": "Clear close-up of sidewall showing size, load index, and speed rating",
+        "if_unproven": "priced as unknown/generic size, cannot match specific fitment"
+      },
+      {
+        "risk": "Tire age (old rubber can be hard/cracked despite good tread)",
+        "proof": "Photo of DOT date code on sidewall (4-digit week/year stamp)",
+        "if_unproven": "priced as old/aged stock, worst case for longevity"
+      },
+      {
+        "risk": "Hidden sidewall damage, bulges, or repairs",
+        "proof": "Full 360\u00b0 sidewall photos of both tires, inner and outer",
+        "if_unproven": "priced as having possible structural damage"
+      },
+      {
+        "risk": "Tread depth not independently verified (hand-on-tire is not a measurement)",
+        "proof": "Photo with tread depth gauge or coin inserted in groove",
+        "if_unproven": "priced as minimum legal tread depth, not premium"
+      },
+      {
+        "risk": "Brand/model unknown, affects resale value and quality tier",
+        "proof": "Clear photo of sidewall brand logo and model name",
+        "if_unproven": "priced as unbranded/generic used tire"
+      }
+    ],
+    "proof_requests": [
+      "Clear sidewall photo showing size (215/60/17C), brand, and model",
+      "Close-up of DOT date code for tire age",
+      "Full sidewall photos (inner and outer) for both tires showing no cracks or bulges",
+      "Tread depth measurement with gauge or ruler at multiple points"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The single tread-only photo does not show the sidewall, so size, brand, and age (all critical to price) cannot be confirmed, and even a worst-case price requires knowing the stated size is genuine."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 17200,
+    "input_tokens": 2118,
+    "output_tokens": 1469,
+    "cost_usd": 0.015767,
+    "replayed": false,
+    "fixture_key": "25cc195ed629817f31ae75c243772173",
+    "error": null
+  }
+}

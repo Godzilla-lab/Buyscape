@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a desktop motherboard with a CPU fan labeled FHS0402S1533, a blue VGA cable, gold PCIe and RAM slots, and SATA ports.",
+      "Photo 1 shows ASUS branding on a heatsink and model text reading B85M-G on the PCB, plus SATA 6Gb/s and PCIEX1 labels.",
+      "No CPU, RAM, storage, power supply, or case is shown.",
+      "There is no evidence the board powers on or POSTs.",
+      "A watermark reading INNOSON GLOBAL GROUP appears across both photos."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "desktop motherboard",
+      "brand": "ASUS",
+      "model": "B85M-G",
+      "read_from": [
+        "photo 1 heatsink",
+        "photo 1 PCB silkscreen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Contact us for all types Computer hardwares",
+        "verdict": "supported",
+        "evidence": "photo 0 and photo 1 show computer hardware (a motherboard)"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Motherboard does not power on or POST",
+        "proof": "Video of the board booting to BIOS with CPU, RAM, and power connected",
+        "if_unproven": "as not working / for parts only"
+      },
+      {
+        "risk": "RAM slots, PCIe slots, or SATA ports may be dead or damaged",
+        "proof": "Close-up photos of each slot and a test with known-good components",
+        "if_unproven": "as not working / for parts only"
+      },
+      {
+        "risk": "BIOS may be locked or carry an unknown password",
+        "proof": "Screenshot of the BIOS setup screen",
+        "if_unproven": "as locked / unknown configuration"
+      },
+      {
+        "risk": "Hidden physical damage such as cracks, bent socket pins, or leaking capacitors",
+        "proof": "High-resolution photos of both sides of the board and the CPU socket area",
+        "if_unproven": "as damaged / for parts only"
+      }
+    ],
+    "proof_requests": [
+      "Video of the motherboard powering on and displaying the BIOS screen with CPU and RAM installed",
+      "Clear photos of the CPU socket and both sides of the motherboard",
+      "Confirmation of included accessories such as I/O shield, SATA cables, and manual"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as an ASUS B85M-G desktop motherboard from the photos, so it can be priced at its worst case (not working, for parts) pending proof of operation."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 26205,
+    "input_tokens": 1928,
+    "output_tokens": 3634,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "d1013204416e0852911c65d7499926f0",
+    "error": null
+  }
+}

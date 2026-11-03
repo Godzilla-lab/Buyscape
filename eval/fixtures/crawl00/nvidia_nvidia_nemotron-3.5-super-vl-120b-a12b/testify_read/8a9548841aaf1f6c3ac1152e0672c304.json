@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows an HP power supply label with part number 512325-001, spare part number 512326-001, serial 4460220162, and a 460W rating visible.",
+      "Photo 1 shows the bare metal chassis of the power supply with no readable labels.",
+      "Photo 2 shows the power connector end with a blue 460W sticker and a partial HP label.",
+      "A watermark reading 'I.G SERVER TECH POSTED ON JIJI' appears on all three photos."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "server power supply",
+      "brand": "hp",
+      "model": null,
+      "read_from": [
+        "photo 0 label",
+        "photo 2 sticker"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Brand is HP",
+        "verdict": "supported",
+        "evidence": "photo 0 hp logo"
+      },
+      {
+        "claim": "460W",
+        "verdict": "supported",
+        "evidence": "photo 0 label and photo 2 blue sticker"
+      },
+      {
+        "claim": "Compatible with DL360 G7 and DL380 G7",
+        "verdict": "unverified",
+        "evidence": "specific server model compatibility not clearly legible on the label in photo 0"
+      },
+      {
+        "claim": "Computer Power Supply",
+        "verdict": "supported",
+        "evidence": "visible in photos 0, 1, and 2"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Unit may not power on or output correct voltage",
+        "proof": "video of the PSU running under load or multimeter readings at the output connector",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "May not be compatible with DL360 G7 or DL380 G7 despite seller claim",
+        "proof": "clear close-up of the full product name line on the label",
+        "if_unproven": "as a generic HP 460W server PSU with unconfirmed server fit"
+      },
+      {
+        "risk": "Internal components may be damaged or worn",
+        "proof": "close-up of the fan and power connector pins",
+        "if_unproven": "as-is with unknown internal condition"
+      }
+    ],
+    "proof_requests": [
+      "Clear close-up of the full product name line on the label to confirm DL360 G7/DL380 G7 compatibility",
+      "Video showing the PSU powering on and outputting voltage",
+      "Close-up of the fan and power connector pins"
+    ],
+    "decision": "price",
+    "reason": "The item is visibly an HP 460W server power supply, so it can be priced at its worst case as non-working with unconfirmed server compatibility."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 31178,
+    "input_tokens": 2259,
+    "output_tokens": 4483,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "8a9548841aaf1f6c3ac1152e0672c304",
+    "error": null
+  }
+}

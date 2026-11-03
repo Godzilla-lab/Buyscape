@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows an HP 3.5-inch internal hard drive label reading 4TB 7200rpm SAS, HP MODEL: MB4000FCWDK, HP P/N: 695507-004, manufactured by Seagate Technology LLC, DOM 07/2015.",
+      "Photo 0 also shows ST4000NM0023 printed on the label, not ST4000NM0125 as claimed by the seller.",
+      "Photo 1 shows the green PCB and drive mechanism with Jiji and I.G SERVER TECH watermarks.",
+      "Photo 2 shows the drive mounted in a black caddy or tray held in a hand."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "3.5 inch internal SAS hard drive",
+      "brand": "HP",
+      "model": "MB4000FCWDK",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP 4TB 3.5 inch Internal Hard Drive SAS",
+        "verdict": "supported",
+        "evidence": "photo 0 label reads 4TB 7200rpm SAS and HP logo"
+      },
+      {
+        "claim": "Model ST4000NM0125",
+        "verdict": "contradicted",
+        "evidence": "photo 0 label reads HP MODEL: MB4000FCWDK and shows ST4000NM0023"
+      },
+      {
+        "claim": "Tested",
+        "verdict": "unverifiable_remote",
+        "evidence": "photos cannot show whether the drive was tested or works"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Drive may not power on or may have bad sectors",
+        "proof": "Video of the drive spinning up and being recognized by a server, plus SMART data screenshot",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Actual model differs from seller's claimed ST4000NM0125",
+        "proof": "Clear photo of the full label matching the claimed model",
+        "if_unproven": "as the model shown in photo 0 (MB4000FCWDK / ST4000NM0023)"
+      },
+      {
+        "risk": "SAS interface requires a SAS controller and will not work in standard SATA desktops",
+        "proof": "Buyer confirms they have a SAS controller or server",
+        "if_unproven": "as incompatible with standard desktop PCs"
+      },
+      {
+        "risk": "Enterprise drive may have high power-on hours or wear",
+        "proof": "SMART data showing power-on hours and health status",
+        "if_unproven": "as high-mileage used enterprise drive"
+      }
+    ],
+    "proof_requests": [
+      "Video of the drive recognized in a server with SMART data visible",
+      "Clear photo of the full label to confirm the exact model number"
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identifiable from photo 0 as an HP 4TB SAS drive, so it can be priced at its worst case despite unproven working condition and a model-number mismatch."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 24966,
+    "input_tokens": 3057,
+    "output_tokens": 3646,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "95ac9721265214999dd76c258c0e92a3",
+    "error": null
+  }
+}
