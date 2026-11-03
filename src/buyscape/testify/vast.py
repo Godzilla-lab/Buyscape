@@ -123,7 +123,9 @@ def onstart(data_repo: str, run_repo: str, data_file: str, train_args: str, hour
         f'export HF_TOKEN="${TOKEN_VAR}"',
         "set -x",
         "cd /workspace",
-        "pip install -q 'transformers>=4.57' peft accelerate safetensors pillow huggingface_hub",
+        # The versions the 2B trained with on Kaggle (run 5, 1 Nov), not whatever is newest today.
+        "pip install -q torch==2.10.0 torchvision==0.25.0 --index-url https://download.pytorch.org/whl/cu128",
+        "pip install -q transformers==5.0.0 peft==0.19.1 accelerate safetensors pillow 'huggingface_hub>=1.0'",
         # Only the training folder: every gigabyte a host sends is paid for.
         (f"hf download {q(data_repo)} --repo-type dataset --local-dir data"
          + (f" --include {q(folder + '/*')} {q(folder + '/**')}" if folder else "")),
