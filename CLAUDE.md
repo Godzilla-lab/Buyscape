@@ -74,6 +74,7 @@ money moves. The promise is "nothing hidden gets priced", not "we see inside".
     uv run buyscape testify-fetch --for-training --region kano   more cities as training data, never benchmark
     uv run buyscape testify-fetch --for-training --more-words --region lagos   also the makers and models the market names, for far more adverts
     uv run buyscape testify-crawl --region lagos --pages 100   whole Jiji categories paged through, every kind in them, training only
+    uv run buyscape data-pack                 every advert we hold in one folder with its photos, labels, reads and a datasheet; a public version with links and labels only, free
     uv run buyscape testify-select --n 3000   choose what the teacher reads: clean, every category and price, most useful first, free
     uv run buyscape testify-label --market lagos --key-env GEMINI_API_1   check each item's photos, free tier
     uv run buyscape testify-construct         items with the plate taken away, and unpriceable photos, free

@@ -1845,6 +1845,31 @@ def vast_status(destroy_finished: bool = typer.Option(True, help="Destroy machin
             console.print(f"  destroyed: its run had stopped, so it only cost disk")
 
 
+@app.command("data-pack")
+def data_pack(
+    out: Path = typer.Option(None, help="Defaults to eval/pack. The public version goes in its public/ folder."),
+    copy: bool = typer.Option(False, help="Copy the photos instead of linking them to the caches."),
+) -> None:
+    """Every advert we hold in one folder, with its photos, labels, reads and a datasheet; and a public version. Free."""
+    from .testify import pack
+
+    out = out or ROOT / "eval" / "pack"
+    try:
+        counts = pack.build(ROOT, out, copy=copy)
+    except ValueError as e:
+        console.print(f"[red]{e}[/red]")
+        raise typer.Exit(1)
+    console.print(f"{counts['adverts']:,} adverts, {counts['photos']:,} photos ({counts['photo_megabytes']:,} MB), "
+                  f"fetched {counts['first_fetched']} to {counts['last_fetched']}, written to {out}")
+    if counts["photos_missing"]:
+        console.print(f"[yellow]{counts['photos_missing']} photos named in the caches are missing on disk[/yellow]")
+    for key in ("by_role", "by_source", "by_condition"):
+        console.print(f"  {key.removeprefix('by_')}: " + ", ".join(f"{k} {v:,}" for k, v in counts[key].items()))
+    console.print(f"  {len(counts['by_kind'])} kinds, {len(counts['by_city'])} cities; "
+                  f"{counts['photo_checks']:,} photo checks, {sum(counts['reads_by_model'].values()):,} teacher reads")
+    console.print(f"The public version, links and labels only, is in {out / 'public'}; nothing is published.")
+
+
 @app.command("testify-select")
 def testify_select(
     n: int = typer.Option(3000, help="How many adverts the teacher reads."),
