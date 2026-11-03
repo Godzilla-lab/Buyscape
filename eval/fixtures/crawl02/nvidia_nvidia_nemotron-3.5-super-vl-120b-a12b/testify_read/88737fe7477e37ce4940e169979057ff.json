@@ -1,0 +1,95 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows an HP thin client standing vertically on a stack of similar units, with an HP logo visible on the lower front.",
+      "Photo 1 shows a stack of HP thin clients with front USB ports and HP/AMD stickers visible.",
+      "Photo 2 shows more stacked HP thin clients with front USB ports and HP/AMD stickers visible.",
+      "No screens, power cables, keyboards, or operating system interfaces are shown in any photo.",
+      "No labels showing RAM, storage capacity, or Windows version are legible in the photos.",
+      "A watermark reading 'POSTED ON JIJI AVONLEE GLOBAL LTD' appears across the images."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "thin client",
+      "brand": "hp",
+      "model": null,
+      "read_from": [
+        "photo 0 front panel",
+        "photo 1 front panel",
+        "photo 2 front panel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Hp t620",
+        "verdict": "unverified",
+        "evidence": "HP logo is visible in photos 0-2, but the model number t620 is not clearly readable from the photos."
+      },
+      {
+        "claim": "4gb RAM",
+        "verdict": "unverifiable_remote",
+        "evidence": "RAM cannot be determined from exterior photos of the unit."
+      },
+      {
+        "claim": "128GB SSD",
+        "verdict": "unverifiable_remote",
+        "evidence": "Storage capacity cannot be determined from exterior photos of the unit."
+      },
+      {
+        "claim": "WINDOWS 11",
+        "verdict": "unverifiable_remote",
+        "evidence": "No screen or operating system interface is shown in any photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Device does not power on or boot",
+        "proof": "Video of the unit powering on and reaching the desktop",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "RAM is less than 4GB",
+        "proof": "Screenshot of system information showing installed RAM",
+        "if_unproven": "as lower specification"
+      },
+      {
+        "risk": "SSD is smaller than 128GB or missing",
+        "proof": "Screenshot of disk management or BIOS showing drive capacity",
+        "if_unproven": "as no usable storage"
+      },
+      {
+        "risk": "Windows 11 is not installed or not activated",
+        "proof": "Screenshot of Windows About or activation screen",
+        "if_unproven": "as no operating system"
+      },
+      {
+        "risk": "Ports or chassis are damaged",
+        "proof": "Close-up video of all front and rear ports",
+        "if_unproven": "as damaged"
+      }
+    ],
+    "proof_requests": [
+      "Video of the unit powering on and reaching the desktop",
+      "Screenshot of system information showing RAM, processor, and Windows version",
+      "Screenshot of disk management showing SSD capacity",
+      "Close-up photos of all ports on front and rear"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as an HP thin client from the logos and form factor in the photos, so it can be priced at its worst case pending proof of specifications and functionality."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 24230,
+    "input_tokens": 2917,
+    "output_tokens": 2795,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "88737fe7477e37ce4940e169979057ff",
+    "error": null
+  }
+}

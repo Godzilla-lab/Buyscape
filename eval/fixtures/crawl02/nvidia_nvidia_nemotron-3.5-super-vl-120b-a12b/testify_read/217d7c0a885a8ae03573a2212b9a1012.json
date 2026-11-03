@@ -1,0 +1,80 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows the front of a smartphone with a Dynamic Island and iOS toggles for Dark Mode, Night Shift, and True Tone.",
+      "Photo 1 shows the back of a blue phone with an Apple logo and two vertically arranged rear cameras.",
+      "Photo 2 shows an iOS Battery Health screen with Maximum Capacity 91%, Cycle Count 859, Manufacture Date September 2024, and First Use October 2024.",
+      "All three photos carry watermarks reading POSTED ON JIJI and ECLEAR BT SOLAR ENERGY."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "iPhone",
+      "brand": "Apple",
+      "model": null,
+      "read_from": [
+        "photo 1 back logo"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "iPhone 16",
+        "verdict": "unverified",
+        "evidence": "No photo shows the model name or number; photo 2 manufacture date is consistent with a 2024 iPhone but does not prove it is a 16."
+      },
+      {
+        "claim": "128gb",
+        "verdict": "unverified",
+        "evidence": "No photo shows storage capacity in Settings or on the device."
+      },
+      {
+        "claim": "uk used",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photos cannot show where the phone was previously used."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The phone may not be an iPhone 16; it could be another iPhone model or a non-Apple device running an iOS-like interface.",
+        "proof": "Screenshot of Settings > General > About showing model name and model number.",
+        "if_unproven": "as an unverified used smartphone, not an iPhone 16"
+      },
+      {
+        "risk": "Storage may not be 128GB.",
+        "proof": "Screenshot of Settings > General > About showing total capacity.",
+        "if_unproven": "as unknown or lower storage"
+      },
+      {
+        "risk": "A cycle count of 859 is high for a phone first used in October 2024, suggesting heavy use or a replaced battery.",
+        "proof": "Video of the Battery Health screen to confirm it is genuine and unaltered.",
+        "if_unproven": "as a battery needing imminent replacement"
+      },
+      {
+        "risk": "The condition of the charging port, SIM tray, side buttons, and frame is not shown.",
+        "proof": "Close-up photos of the charging port, SIM tray, side buttons, and all corners.",
+        "if_unproven": "as having hidden physical damage"
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of Settings > General > About showing model name, model number, and capacity.",
+      "Close-up photos of the charging port, SIM tray, side buttons, and all corners.",
+      "Video of the Battery Health screen to confirm it is genuine."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photos confirm an Apple iPhone with a September 2024 manufacture date, but no image reads the model name or storage, so the exact item and its worst-case value cannot be determined without the seller's About screen."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 52589,
+    "input_tokens": 3444,
+    "output_tokens": 6475,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "217d7c0a885a8ae03573a2212b9a1012",
+    "error": null
+  }
+}

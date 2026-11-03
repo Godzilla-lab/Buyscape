@@ -1,0 +1,88 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0: open silver laptop on macOS desktop; an 'About This Mac' window reads 'MacBook Pro'.",
+      "Photo 1: close-up of keyboard with Touch Bar and trackpad.",
+      "Photo 2: closed silver lid with Apple logo.",
+      "No photo shows the model identifier, year, screen size, processor, memory, or storage."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "MacBook Pro laptop",
+      "brand": "Apple",
+      "model": null,
+      "read_from": [
+        "photo 0 screen",
+        "photo 2 lid"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "2019 MacBook Pro 16-inch",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows 'MacBook Pro' but not the year or screen size."
+      },
+      {
+        "claim": "built for professionals who require maximum performance",
+        "verdict": "unverifiable_remote",
+        "evidence": "Subjective marketing claim not provable from photos."
+      },
+      {
+        "claim": "powered by...",
+        "verdict": "unverifiable_remote",
+        "evidence": "Seller text is incomplete and no specs appear in photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Exact model, year, processor, memory, and storage are unknown.",
+        "proof": "Screenshot of About This Mac or System Information.",
+        "if_unproven": "priced as an unspecified base MacBook Pro"
+      },
+      {
+        "risk": "Battery health and cycle count are unknown.",
+        "proof": "Screenshot of battery health from System Information or coconutBattery.",
+        "if_unproven": "priced as needing a battery replacement"
+      },
+      {
+        "risk": "Activation lock or Find My could be enabled.",
+        "proof": "Video showing the Mac reaches the desktop with no iCloud lock.",
+        "if_unproven": "priced as locked or unusable"
+      },
+      {
+        "risk": "Screen, keyboard, trackpad, ports, or camera may have defects not visible in still photos.",
+        "proof": "Video testing display, keyboard, trackpad, camera, and all ports.",
+        "if_unproven": "priced as having defective components"
+      },
+      {
+        "risk": "Physical damage, dents, or liquid damage on sides or bottom not shown.",
+        "proof": "Photos of all sides, corners, ports, and bottom case.",
+        "if_unproven": "priced as cosmetically damaged"
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of About This Mac / System Information showing model, year, processor, memory, and storage.",
+      "Screenshot of battery health and cycle count.",
+      "Video showing the Mac boots to desktop with no iCloud activation lock.",
+      "Photos of all sides, corners, ports, and bottom case.",
+      "Video testing keyboard, trackpad, camera, speakers, and ports."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photos show a working MacBook Pro, but the exact model and year that sets the price cannot be read from the images, so even a worst-case price is not possible yet."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 35489,
+    "input_tokens": 2416,
+    "output_tokens": 4650,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "d1425aa36b57e29057d74593efdfbe75",
+    "error": null
+  }
+}

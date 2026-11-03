@@ -1,0 +1,124 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows an open black convertible laptop with a Windows 11 desktop, ThinkPad logo on the right palm rest, an Intel sticker on the bottom left palm rest, and a TrackPoint keyboard.",
+      "Photo 1 shows the same laptop from a similar angle; ThinkPad logo is visible on the right palm rest, and model text appears on the bottom right of the screen bezel.",
+      "Photo 2 shows the laptop held in tent/flip mode against a brick wall, demonstrating the 360-degree hinge and convertible design."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "2-in-1 convertible laptop",
+      "brand": "Lenovo",
+      "model": "ThinkPad X380 Yoga",
+      "read_from": [
+        "photo 0 palm rest",
+        "photo 1 palm rest",
+        "photo 1 screen bezel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Lenovo ThinkPad X380 Yoga 20LH",
+        "verdict": "supported",
+        "evidence": "ThinkPad logo on palm rest in photo 0 and photo 1; X380 Yoga text on bottom right bezel in photo 1"
+      },
+      {
+        "claim": "flip design",
+        "verdict": "supported",
+        "evidence": "photo 2 shows the screen folded back in tent mode"
+      },
+      {
+        "claim": "Intel Core i5",
+        "verdict": "unverified",
+        "evidence": "Intel sticker visible in photo 0 and photo 1, but the i5 text is not readable"
+      },
+      {
+        "claim": "8250u",
+        "verdict": "unverifiable_remote",
+        "evidence": "processor model is not visible in any photo"
+      },
+      {
+        "claim": "Win 11 Pro 64-bit",
+        "verdict": "unverified",
+        "evidence": "Windows 11 desktop is visible in photo 0, photo 1, and photo 2, but edition and bitness are not shown"
+      },
+      {
+        "claim": "UHD...",
+        "verdict": "unverifiable_remote",
+        "evidence": "screen resolution cannot be confirmed from the photos"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery health and runtime",
+        "proof": "screenshot of battery report or powercfg cycle count",
+        "if_unproven": "as dead battery"
+      },
+      {
+        "risk": "Screen defects such as dead pixels, backlight bleed, or flicker",
+        "proof": "close-up video of the screen showing full white, gray, and black at full brightness",
+        "if_unproven": "as damaged screen"
+      },
+      {
+        "risk": "Keyboard, TrackPoint, and trackpad functionality",
+        "proof": "video of typing all keys and using the TrackPoint and trackpad",
+        "if_unproven": "as faulty input"
+      },
+      {
+        "risk": "Charging port and all USB/HDMI ports",
+        "proof": "video plugging in the charger and testing each port",
+        "if_unproven": "as dead ports"
+      },
+      {
+        "risk": "Webcam, speakers, and microphone",
+        "proof": "video recording audio and showing the camera working",
+        "if_unproven": "as missing AV"
+      },
+      {
+        "risk": "Hinge and convertible mechanism wear",
+        "proof": "close-up video opening and closing through laptop, tent, stand, and tablet modes",
+        "if_unproven": "as broken hinge"
+      },
+      {
+        "risk": "BIOS/admin password or account lock",
+        "proof": "video booting to the desktop without a lock screen",
+        "if_unproven": "as locked"
+      },
+      {
+        "risk": "Charger included",
+        "proof": "photo of the original charger",
+        "if_unproven": "as no charger"
+      },
+      {
+        "risk": "Storage capacity and health",
+        "proof": "screenshot of Disk Management and drive health tool",
+        "if_unproven": "as small or failed drive"
+      }
+    ],
+    "proof_requests": [
+      "Video booting to the desktop with no BIOS or Windows password",
+      "Screenshot of battery report, processor, and RAM specifications",
+      "Close-up video of the screen at full brightness showing white, gray, and black",
+      "Video testing keyboard, TrackPoint, trackpad, webcam, speakers, and microphone",
+      "Video testing the charger and all ports including USB and HDMI",
+      "Photo of the charger and any original box"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a Lenovo ThinkPad X380 Yoga convertible from the logos and model text visible in the photos, so it can be priced at its worst case as untested while proof of function is gathered."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 30882,
+    "input_tokens": 2640,
+    "output_tokens": 3884,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "54f887269909f8140c0b754264e885d7",
+    "error": null
+  }
+}
