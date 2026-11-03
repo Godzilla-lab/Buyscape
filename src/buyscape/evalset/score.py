@@ -7,11 +7,11 @@ silent-wrong rate: confident, wrong, and not flagged.
 
 from __future__ import annotations
 
+import functools
 import json
+import re
 from dataclasses import dataclass, field
 from pathlib import Path
-
-import re
 
 import yaml
 
@@ -97,6 +97,17 @@ _LETTER_SUFFIX = re.compile(r"^(\d+)[a-z]+$")
 
 
 def _norm(text: str | None) -> set[str]:
+    """Tokenise so the same number written two ways still meets. A fresh set each call, from a cache:
+    building the training set compares every advert with every other, the same titles again and again."""
+    return set(_norm_cached(text or ""))
+
+
+@functools.lru_cache(maxsize=200_000)
+def _norm_cached(text: str) -> frozenset[str]:
+    return frozenset(_norm_uncached(text))
+
+
+def _norm_uncached(text: str | None) -> set[str]:
     """Tokenise so the same number written two ways still meets.
 
     512gb equals 512 gb; 4.5kva stays one number rather than a 4 and a 5;

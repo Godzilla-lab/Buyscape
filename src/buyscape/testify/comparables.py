@@ -12,6 +12,7 @@ along with any repost of it.
 
 from __future__ import annotations
 
+import functools
 import re
 from collections.abc import Iterable
 from dataclasses import dataclass
@@ -126,6 +127,27 @@ def build_pool(items: Iterable[Item], hashes: dict[str, list[str]] | None = None
     return pool
 
 
+# Every lookup scores the whole pool, so each comparable's words are worked out once, not once a lookup.
+@functools.lru_cache(maxsize=200_000)
+def _words_of(text: str) -> tuple[str, ...]:
+    return tuple(words(text))
+
+
+@functools.lru_cache(maxsize=200_000)
+def _carries(title: str, kind: str) -> frozenset[str]:
+    return frozenset(_words_of(title)) | frozenset(_words_of(kind))
+
+
+@functools.lru_cache(maxsize=200_000)
+def _title_key(title: str) -> str:
+    return " ".join(sorted(_norm(title)))
+
+
+@functools.lru_cache(maxsize=200_000)
+def _names(title: str) -> str:
+    return names(title)
+
+
 def _same_photo(a: Iterable[str], b: Iterable[str]) -> bool:
     from ..ui.sessions import DUPLICATE_DISTANCE, _hamming
 
@@ -141,8 +163,8 @@ def _kind_score(kind_words: list[str], comparable: Comparable, strict: bool = Tr
     """
     if not kind_words:
         return 0.0
-    labelled = words(comparable.kind)
-    have = set(words(comparable.title)) | set(labelled)
+    labelled = _words_of(comparable.kind or "")
+    have = _carries(comparable.title, comparable.kind or "")
     # The head must be what the comparable is, not a word it mentions: a TV
     # antenna is not a TV. Its kind label says what it is, when it has one.
     if (labelled[-1] != kind_words[-1]) if labelled else kind_words[-1] not in have:
@@ -177,14 +199,18 @@ def find(
     has fewer than `min_local`. A repost of the item, by title and price or by
     a matching photo, is never its own comparable.
     """
-    own = (" ".join(sorted(_norm(item.answer.title))), item.answer.price.ngn)
+    own = (_title_key(item.answer.title), item.answer.price.ngn)
     own_photos = tuple(own_photos)
     candidates = [
         c for c in pool
-        if c.item_id != item.id and c.url != item.url
-        and (" ".join(sorted(_norm(c.title))), c.price_ngn) != own
-        and not (own_photos and _same_photo(own_photos, c.photos))
+        if c.item_id != item.id and c.url != item.url and (_title_key(c.title), c.price_ngn) != own
     ]
+
+    # A repost by photo is never a comparable. Asked last, of the few that match, not of the whole pool:
+    # comparing every photo of every advert made building the training set take hours.
+    def not_repost(c: Comparable) -> bool:
+        return not (own_photos and _same_photo(own_photos, c.photos))
+
     scored: list[tuple[float, Comparable]] = []
     kind_words = words(identity.kind)
     if identity.status == "named" and (identity.brand or identity.model):
@@ -192,8 +218,9 @@ def find(
         if (_norm(brand) | _norm(model)) - GENERIC_WORDS:
             scored = [
                 (2.0, c) for c in candidates
-                if model_matches(brand, model, names(c.title))
+                if model_matches(brand, model, _names(c.title))
                 and (not kind_words or _kind_score(kind_words, c, strict=False) > 0)
+                and not_repost(c)
             ]
     for strict in (True, False):
         if len(scored) >= 3 or not kind_words:
@@ -201,7 +228,7 @@ def find(
         taken = {c.item_id for _, c in scored}
         for c in candidates:
             s = _kind_score(kind_words, c, strict)
-            if s >= 0.4 and c.item_id not in taken:
+            if s >= 0.4 and c.item_id not in taken and not_repost(c):
                 scored.append((s, c))
     local = [(s, c) for s, c in scored if c.market == market]
     chosen = sorted(local, key=lambda sc: -sc[0])[:limit]
