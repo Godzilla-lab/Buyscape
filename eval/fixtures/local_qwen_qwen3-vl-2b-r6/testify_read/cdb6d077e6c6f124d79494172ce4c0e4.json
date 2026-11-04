@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r6",
+  "response": {
+    "observations": [
+      "Photo 0 shows a DSLR camera body with a camouflage-patterned silicone skin. The brand 'Nikon' is visible on the front, and 'D610' is visible on the side.",
+      "Photo 1 shows the rear of the camera with the screen on, displaying the 'SETUP MENU'. The screen is functional, and the camera appears to be powered on.",
+      "Photo 2 shows the camera body with a lens, two batteries, and a black pouch. The lens has 'CE' and 'R' markings, suggesting it is a Canon lens, not Nikon. The pouch has 'YONGNUO' printed on it.",
+      "The seller claims the body is Nikon D610 with 2 batteries, but the lens in photo 2 is not Nikon; it is a Canon lens. The pouch is YONGNUO, which is a third-party brand, not Nikon.",
+      "The camera's screen is on in photo 1, indicating it powers on and displays menus, so it is functional."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DSLR camera body",
+      "brand": "Nikon",
+      "model": "D610",
+      "read_from": [
+        "photo 0 front label",
+        "photo 0 side label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "The body of the Nikon with 2 batteries is 450k",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows Nikon D610 body; photo 2 shows 2 batteries."
+      },
+      {
+        "claim": "if you want the 50mm lens and 85mm is optional",
+        "verdict": "unverifiable_remote",
+        "evidence": "The lens in photo 2 is not Nikon; it is a Canon lens. The seller's claim about lens availability cannot be verified from the photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The lens is not Nikon; it is a Canon lens, which may not be included or may be a mismatch.",
+        "proof": "A clear photo of the lens's barrel showing the brand name or model.",
+        "if_unproven": "Priced as if the lens is not included or is a mismatch, which reduces value."
+      },
+      {
+        "risk": "The camera body may have internal damage or wear not visible in photos, such as sensor issues or shutter failure.",
+        "proof": "A video showing the camera taking a photo and displaying it on a screen, or a close-up of the sensor and shutter mechanism.",
+        "if_unproven": "Priced as if it may not work or have hidden defects, reducing value."
+      },
+      {
+        "risk": "The batteries may be non-functional or have degraded capacity.",
+        "proof": "A video showing the camera powering on and taking a photo using the batteries.",
+        "if_unproven": "Priced as if batteries are not working, reducing value."
+      }
+    ],
+    "proof_requests": [
+      "A clear photo of the lens barrel showing the brand and model.",
+      "A video showing the camera taking a photo and displaying it on a screen.",
+      "A video showing the camera powering on and taking a photo using the batteries."
+    ],
+    "decision": "price",
+    "reason": "The item is known from the photos. What they cannot prove is priced at its worst case until the proof asked for below arrives."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r6",
+    "task": "testify_read",
+    "latency_ms": 2520,
+    "input_tokens": 2796,
+    "output_tokens": 637,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "cdb6d077e6c6f124d79494172ce4c0e4",
+    "error": null
+  }
+}

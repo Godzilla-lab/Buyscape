@@ -1,0 +1,68 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r6",
+  "response": {
+    "observations": [
+      "Photo 0 shows a stack of multiple black car batteries on a wooden pallet against a yellow wall. The batteries appear dusty and used, with some showing signs of wear and dirt.",
+      "Photo 1 is a close-up of a single battery with a blue label. The label clearly shows 'GREEN ENERGY AUTOMOTIVE', 'GE 60 - 12V 540A (EN)', 'MADE IN ITALY', and '95% Capacity Guaranteed'. The battery has a red terminal cap and a black terminal post. The top of the battery has blue protective tape with '45% Capacity Guaranteed' and 'Appena Caricate e Pronte All\u2019uso' (Newly Charged and Ready to Use) written on it. The label also includes a barcode and a warning symbol."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car battery",
+      "brand": "GREEN ENERGY",
+      "model": "GE 60 - 12V 540A (EN)",
+      "read_from": [
+        "photo 1 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Direct second hand battery available with good warranty",
+        "verdict": "unverified",
+        "evidence": "Photo 1 shows a warranty label, but the seller's claim of 'direct second hand' is not verifiable from the photos. The 'good warranty' is supported by the visible label, but the term 'direct' is not proven."
+      },
+      {
+        "claim": "Available in stock",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows a stack of batteries, suggesting availability, but no proof of current stock or condition beyond the visible ones."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery may be damaged or have internal issues not visible in photos",
+        "proof": "A video showing the battery being tested with a multimeter or a load test, or a close-up of the battery terminals and casing for cracks or corrosion.",
+        "if_unproven": "priced as potentially non-functional or with reduced capacity"
+      },
+      {
+        "risk": "Battery may be counterfeit or not genuine Green Energy product",
+        "proof": "A close-up of the barcode and serial number, or a video of the battery being tested with a known-good battery for comparison.",
+        "if_unproven": "priced as potentially counterfeit, which would reduce value significantly"
+      },
+      {
+        "risk": "Battery may be old or have degraded state of health",
+        "proof": "A video showing the battery being charged and discharged, or a multimeter reading of voltage and state of charge.",
+        "if_unproven": "priced as potentially degraded, which would reduce value"
+      }
+    ],
+    "proof_requests": [
+      "Video of the battery being tested with a multimeter or load test to verify voltage and condition.",
+      "Close-up of the barcode and serial number for authenticity verification.",
+      "Video showing the battery being charged and discharged to confirm state of health."
+    ],
+    "decision": "price",
+    "reason": "The item is known from the photos. What they cannot prove is priced at its worst case until the proof asked for below arrives."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r6",
+    "task": "testify_read",
+    "latency_ms": 6752,
+    "input_tokens": 2048,
+    "output_tokens": 590,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "eaecc7a6a3153e4ed53d3de9beac27cb",
+    "error": null
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r6",
+  "response": {
+    "observations": [
+      "Black scooter parked on a gravel surface.",
+      "The brand 'HONDA' is visible on the front fairing in photo 0.",
+      "The model name 'CIVIC' is visible on the front fairing in photo 0.",
+      "The scooter has a rearview mirror, a central headlight, and a rear taillight.",
+      "A sticker on the lower front fender reads 'HONDA CIVIC'.",
+      "The background shows a road and dry ground, suggesting an outdoor setting."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "scooter",
+      "brand": "Honda",
+      "model": "Civic",
+      "read_from": [
+        "photo 0 fairing"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Motorcycle for transportation",
+        "verdict": "supported",
+        "evidence": "photo 0 shows a scooter designed for personal transport."
+      },
+      {
+        "claim": "Bought new 6 months ago. Gears and brakes perfect, no rust, all parts original.",
+        "verdict": "unverified",
+        "evidence": "No photo shows this; it is the seller's word only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The engine may be seized or have internal mechanical issues.",
+        "proof": "A video of the scooter starting and idling.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The odometer reading is unknown, which is critical for value.",
+        "proof": "A photo of the odometer showing the total mileage.",
+        "if_unproven": "as having high mileage (over 1000km)"
+      },
+      {
+        "risk": "The actual model year (e.g., 2018 vs 2020) is unknown.",
+        "proof": "A photo of the manufacturer's identification plate (usually on the side or under the seat).",
+        "if_unproven": "as the oldest model in the range (2018)"
+      },
+      {
+        "risk": "The photo may be a stock or third-party image rather than the actual item.",
+        "proof": "A photo of the vehicle with a handwritten note showing the current date and the seller's name.",
+        "if_unproven": "as a potential scam"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of any label, sticker or metal plate showing the brand and model.",
+      "Photo of the odometer showing the total mileage.",
+      "Photo of the manufacturer's identification plate showing the model year.",
+      "Video of the scooter starting and driving through the first few kilometers."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "What the item is shows, but not the model that sets its price: no photo shows it clearly enough to read. The shot asked for first would settle it."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r6",
+    "task": "testify_read",
+    "latency_ms": 2006,
+    "input_tokens": 1402,
+    "output_tokens": 507,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "d1f7b4bbf1d1c5500d6e844373ae436f",
+    "error": null
+  }
+}

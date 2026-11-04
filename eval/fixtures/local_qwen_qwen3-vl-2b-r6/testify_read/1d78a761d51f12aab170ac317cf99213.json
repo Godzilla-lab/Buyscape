@@ -1,0 +1,80 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r6",
+  "response": {
+    "observations": [
+      "Two stacked white plastic IBC tanks with metal cage frames.",
+      "The tanks show visible dirt, algae, and some discoloration, especially on the lower tank.",
+      "The lower tank has a blue spigot and a white plastic cap.",
+      "The upper tank has a white plastic spigot and a blue cap.",
+      "Both tanks have labels with text, but the text is too blurry to read clearly.",
+      "The tanks are placed on a concrete floor next to a wall with moss and stains.",
+      "The metal frames show rust and wear, especially at the base and corners.",
+      "The lower tank has a visible label with '22.5kg max' and 'ADPRO TREAT 604120' partially visible.",
+      "The tanks appear to be used and may have been previously filled with chemicals or water."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "IBC tank",
+      "read_from": [
+        "photo 0",
+        "photo 1",
+        "photo 2"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Iron reinforced white plastic tank for sale.",
+        "verdict": "supported",
+        "evidence": "Photo 0, 1, and 2 show white plastic IBC tanks with metal cage frames, consistent with iron-reinforced plastic tanks."
+      },
+      {
+        "claim": "It can be used for fish pond, water storage, diesel...",
+        "verdict": "unverifiable_remote",
+        "evidence": "The tanks appear used and may have been filled with chemicals or water, which could affect suitability for fish ponds or water storage. The claim about diesel is not supported by the photos."
+      },
+      {
+        "claim": "Food grade, used only once for clean water. No crack, no leak, lids complete.",
+        "verdict": "unverified",
+        "evidence": "No photo shows this; it is the seller's word only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The tanks may have been previously filled with chemicals or water, which could contaminate or damage the tanks.",
+        "proof": "A close-up photo of the inside of the tanks, showing the condition of the plastic and any residue or stains.",
+        "if_unproven": "priced as potentially contaminated or damaged, reducing value"
+      },
+      {
+        "risk": "The metal frames may be corroded or weakened, affecting structural integrity.",
+        "proof": "A close-up photo of the metal frame, especially at the base and corners, showing rust and wear.",
+        "if_unproven": "priced as potentially structurally compromised"
+      },
+      {
+        "risk": "The tanks may have cracks or leaks, which are not visible from the outside.",
+        "proof": "A video or photo showing the interior of the tanks, or a pressure test video.",
+        "if_unproven": "priced as potentially leaking or cracked"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the inside of the tanks to check for contamination or damage.",
+      "Close-up photo of the metal frame to assess rust and structural integrity.",
+      "Video or photo showing the interior of the tanks to check for cracks or leaks."
+    ],
+    "decision": "price",
+    "reason": "The item is known from the photos. What they cannot prove is priced at its worst case until the proof asked for below arrives."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r6",
+    "task": "testify_read",
+    "latency_ms": 2836,
+    "input_tokens": 2766,
+    "output_tokens": 608,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "1d78a761d51f12aab170ac317cf99213",
+    "error": null
+  }
+}
