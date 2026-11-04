@@ -1,0 +1,93 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r7",
+  "response": {
+    "observations": [
+      "Photo 0 shows a silver laptop with a black keyboard and trackpad, held open at an angle.",
+      "The screen is off and reflects the surroundings, including a wooden door and pink wall.",
+      "The keyboard has visible wear and smudges, especially on the right side.",
+      "The trackpad has a small crack or chip near the center, visible in the photo.",
+      "The laptop appears to be a MacBook Pro, as indicated by the 'MacBook Pro' text on the bezel below the screen.",
+      "No ports, hinges, or underside are visible.",
+      "The laptop is not powered on; no indication of battery health or charging status."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "MacBook Pro",
+      "read_from": [
+        "photo 0 screen bezel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "MacBook Pro (17-inch, Late 2011)",
+        "verdict": "unverified",
+        "evidence": "The model name 'MacBook Pro' is visible in photo 0, but the size and year are not confirmed by any visible label or serial number. The seller's text claims 17-inch and Late 2011, which is plausible for a 2011 MacBook Pro, but not proven."
+      },
+      {
+        "claim": "Laptops health 50%",
+        "verdict": "unverifiable_remote",
+        "evidence": "Battery health cannot be verified from a single photo. No screenshot or test result is provided."
+      },
+      {
+        "claim": "Physical damage 5%",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows a crack or chip on the trackpad, which is a form of physical damage. The claim of '5%' is subjective and not verifiable from the photo alone."
+      },
+      {
+        "claim": "No charger",
+        "verdict": "unverified",
+        "evidence": "No charger is visible in the photo. The seller's text states it is not included, but no proof is shown."
+      },
+      {
+        "claim": "Color Grey (Nb: Laptop has not been used for a longtime)",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows a silver laptop, not grey. The seller's text says 'Grey', but the photo shows silver. This is a contradiction."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery health is not 50% as claimed",
+        "proof": "A screenshot from macOS showing battery health percentage, or a video of the laptop charging and discharging.",
+        "if_unproven": "priced as battery health unknown, which may be lower than 50%"
+      },
+      {
+        "risk": "Laptop is not functional or has hidden damage",
+        "proof": "A video showing the laptop turning on, booting into macOS, and running basic tasks.",
+        "if_unproven": "priced as not working, since functionality cannot be confirmed remotely"
+      },
+      {
+        "risk": "Charger is not included or is damaged",
+        "proof": "Photo of the charger and its condition, or a video showing it charging the laptop.",
+        "if_unproven": "priced as charger not included, which reduces value"
+      },
+      {
+        "risk": "Screen damage or dead pixels not visible in photo",
+        "proof": "A video showing the screen displaying different colors and moving content to reveal dead pixels or damage.",
+        "if_unproven": "priced as screen condition unknown, which may be worse than shown"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the sticker on the underside showing the model, serial or service tag.",
+      "Video of the laptop turning on and booting into macOS.",
+      "Screenshot or video showing battery health percentage.",
+      "Photo of the charger and its condition.",
+      "Video showing the screen displaying different colors and moving content to reveal dead pixels or damage."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "What the item is shows, but not the model that sets its price: no photo shows it clearly enough to read. The shot asked for first would settle it."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r7",
+    "task": "testify_read",
+    "latency_ms": 3433,
+    "input_tokens": 2510,
+    "output_tokens": 755,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "133afd091f1513776b6f29ae9bf66bc8",
+    "error": null
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r7",
+  "response": {
+    "observations": [
+      "Photo 0 shows a used car engine and gearbox assembly on a dirt ground.",
+      "The engine has a black plastic cover with a visible 'Venza' logo on the front.",
+      "The gearbox is attached to the engine and has a silver metallic casing.",
+      "There are various hoses, wires, and mechanical components visible, including a black plastic intake manifold and a black plastic oil filler cap.",
+      "The engine appears to be a 4-cylinder inline engine, consistent with a 2AR-FE model.",
+      "The gearbox has a 22-pin connector visible on the side, matching the seller's claim.",
+      "The engine and gearbox are dirty and show signs of use, with some rust and grime.",
+      "The background is a concrete or dirt surface, suggesting an outdoor or workshop setting."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car engine and gearbox",
+      "brand": "Venza",
+      "read_from": [
+        "photo 0 engine cover"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Venza 2010 4plug engine and gear box 2ar-22pin",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows a 'Venza' logo on the engine cover, and the 22-pin connector is visible on the gearbox, matching the seller's description."
+      },
+      {
+        "claim": "Tokunbo, direct from Belgium. Tested and working, no knock, low mileage, never opened.",
+        "verdict": "unverified",
+        "evidence": "No photo shows this; it is the seller's word only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine may not be in working condition or may have internal damage (e.g., blown head gasket, worn bearings).",
+        "proof": "A video showing the engine running or a compression test report.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Gearbox may have internal damage or be non-functional.",
+        "proof": "A video showing the gearbox shifting or a test run with the engine.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Engine may not be from a 2010 model or may be from a different generation than claimed.",
+        "proof": "VIN plate or engine number matching a 2010 Venza 2AR-FE model.",
+        "if_unproven": "priced as unknown model, lower value"
+      },
+      {
+        "risk": "Engine may have been salvaged from a wrecked or accident-damaged vehicle.",
+        "proof": "Vehicle history report or photos of the original vehicle's condition.",
+        "if_unproven": "priced as unknown history, lower value"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of the engine or gearbox code: the plate, sticker or number stamped on the block or case.",
+      "Video of the engine running or a compression test.",
+      "Video of the gearbox shifting or a test run with the engine.",
+      "Photo of the engine or gearbox number plate or VIN plate.",
+      "Vehicle history report or photos of the original vehicle."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "What the item is shows, but not the model that sets its price: no photo shows it clearly enough to read. The shot asked for first would settle it."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r7",
+    "task": "testify_read",
+    "latency_ms": 2916,
+    "input_tokens": 1382,
+    "output_tokens": 618,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "7d91184f06d65d7d3fcaea21f42bff5d",
+    "error": null
+  }
+}

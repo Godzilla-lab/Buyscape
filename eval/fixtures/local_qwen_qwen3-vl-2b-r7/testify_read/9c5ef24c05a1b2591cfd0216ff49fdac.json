@@ -1,0 +1,69 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r7",
+  "response": {
+    "observations": [
+      "Photo 0 shows a used car engine with visible components: intake manifold, valve cover, oil pan, and various hoses and wires. The engine appears dirty and used, with some rust and grime.",
+      "Photo 1 shows the same engine from a slightly different angle, revealing the front of the engine with the alternator, throttle body, and various electrical connectors. The engine block has yellow paint marks, possibly from a previous repair or marking.",
+      "No visible brand or model markings are readable on the engine block or components in either photo.",
+      "The watermark 'PROVISE AUTO VENTURE' is present on both photos, suggesting a seller or listing platform.",
+      "The engine is not running; no signs of operation are visible.",
+      "The seller claims 'direct Japanese products' and 'Tokunbo, direct from Belgium. Tested and working, no knock, low mileage, never opened.'"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "car engine",
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "We sell direct Japanese products",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible brand or model markings in photos to confirm origin. The claim cannot be verified from the images alone."
+      },
+      {
+        "claim": "Tokunbo, direct from Belgium. Tested and working, no knock, low mileage, never opened.",
+        "verdict": "unverified",
+        "evidence": "No photo shows this; it is the seller's word only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine may be damaged or non-functional",
+        "proof": "A video showing the engine running or a close-up of the cylinder head and internal components to check for cracks or wear.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Engine may be from a non-Japanese or non-Tokunbo origin",
+        "proof": "Clear photo of the engine block with visible brand/model markings, or a photo of the VIN tag or engine serial number.",
+        "if_unproven": "priced as generic used engine, not premium Tokunbo"
+      },
+      {
+        "risk": "Engine may have hidden mechanical issues (e.g., seized, worn bearings)",
+        "proof": "Close-up of the crankshaft, oil pan, and timing cover to check for wear or damage.",
+        "if_unproven": "priced as potentially faulty"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of the engine or gearbox code: the plate, sticker or number stamped on the block or case.",
+      "Clear photo of the engine block showing brand and model markings.",
+      "Video of the engine running or a close-up of the internal components.",
+      "Photo of the VIN tag or engine serial number if available."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "What the item is shows, but not the model that sets its price: no photo shows it clearly enough to read. The shot asked for first would settle it."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r7",
+    "task": "testify_read",
+    "latency_ms": 2509,
+    "input_tokens": 2742,
+    "output_tokens": 557,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "9c5ef24c05a1b2591cfd0216ff49fdac",
+    "error": null
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r7",
+  "response": {
+    "observations": [
+      "Photo 0 shows a large blue plastic barrel with a black lid and a black D-ring handle. The barrel is dirty and shows signs of wear and scratches. Other similar blue barrels are visible in the background.",
+      "Photo 1 shows the same barrel from a side angle with a white label attached. The label is printed in English and includes technical specifications: 'BUTANOL, 100% HYDROXYDE - BP-100', 'MOLARITY 1000', 'NET WT 100 KG', 'STORAGE 25 KG', 'DATE OF ISSUE 2023', 'MADE IN INDIA'.",
+      "The label also mentions 'MADE IN INDIA' and 'BUTANOL, 100% HYDROXYDE - BP-100'.",
+      "The barrel appears to be a standard industrial chemical container, not food-grade as claimed by the seller.",
+      "The seller's text mentions '80 liters' and 'empty plastic containers', but the label in photo 1 indicates '100 KG' net weight, which is inconsistent with 80 liters capacity."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "plastic barrel",
+      "read_from": [
+        "photo 0",
+        "photo 1"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Plastic buckets 80 liters, empty plastic containers",
+        "verdict": "unverified",
+        "evidence": "The label in photo 1 indicates 'NET WT 100 KG', which is inconsistent with 80 liters capacity. The seller's claim of 80 liters cannot be confirmed from the photos."
+      },
+      {
+        "claim": "blue barrel",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 1 show a blue plastic barrel."
+      },
+      {
+        "claim": "Food grade, used only once for clean water. No crack, no leak, lids complete.",
+        "verdict": "unverified",
+        "evidence": "No photo shows this; it is the seller's word only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The barrel is not food-grade as claimed, and may be unsuitable for food storage or use.",
+        "proof": "A clear shot of the label or any certification that confirms food-grade status.",
+        "if_unproven": "priced as non-food-grade, which reduces value significantly."
+      },
+      {
+        "risk": "The barrel may be damaged or compromised internally, such as cracks or leaks, which are not visible from the exterior.",
+        "proof": "A video or photo showing the interior of the barrel, or a pressure test.",
+        "if_unproven": "priced as potentially compromised, which reduces value."
+      },
+      {
+        "risk": "The label may be fake or misstated, and the actual contents or capacity may be different.",
+        "proof": "A close-up of the label with a clear view of the barcode and serial number, or a video showing the label being read.",
+        "if_unproven": "priced as unverified capacity, which reduces value."
+      }
+    ],
+    "proof_requests": [
+      "Close-up of the label showing the brand and model.",
+      "A clear shot of the label with the barcode and serial number.",
+      "A video or photo showing the interior of the barrel.",
+      "A close-up of the label to confirm it is genuine and not a fake."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "What the item is shows, but not the model that sets its price: no photo shows it clearly enough to read. The shot asked for first would settle it."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r7",
+    "task": "testify_read",
+    "latency_ms": 2731,
+    "input_tokens": 2296,
+    "output_tokens": 692,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "43fa758b95f7e4e131cfdb3e705c388d",
+    "error": null
+  }
+}

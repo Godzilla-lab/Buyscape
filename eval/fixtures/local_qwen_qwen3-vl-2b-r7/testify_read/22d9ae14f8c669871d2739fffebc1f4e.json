@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r7",
+  "response": {
+    "observations": [
+      "Photo 0 shows a stack of multiple black car batteries on a wooden pallet, some with visible wear and dirt, others with labels or stickers.",
+      "Photo 1 shows a single battery with a blue label and red top terminal, placed on a tiled floor. The label is clearly visible with 'GREEN ENERGY' and 'MADE IN ITALY' printed on it.",
+      "The battery in photo 1 has a red terminal cap and a black terminal post, with a blue protective cover partially peeled back.",
+      "The label also shows 'GE 60 - 12V 540A (EN)' and 'MADE IN ITALY' with a 95% capacity claim and a barcode.",
+      "The seller claims 'Direct second hand battery available with good warranty Available in stock'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car battery",
+      "brand": "GREEN ENERGY",
+      "model": "GE 60 - 12V 540A (EN)",
+      "read_from": [
+        "photo 1 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Direct second hand battery available with good warranty Available in stock",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows multiple batteries, but no proof of 'direct second hand' or warranty. Photo 1 shows one battery, but no proof of warranty. The term 'direct second hand' is not verifiable from photos alone."
+      },
+      {
+        "claim": "Battery is new, holds charge for 8 hours. Never repaired.",
+        "verdict": "unverified",
+        "evidence": "No photo shows this; it is the seller's word only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery may be used or damaged despite appearing new",
+        "proof": "Close-up of the battery terminals, casing, and internal components (if possible) to check for corrosion, cracks, or signs of use.",
+        "if_unproven": "priced as used or potentially damaged, which reduces value"
+      },
+      {
+        "risk": "Battery may not be genuine or may be counterfeit",
+        "proof": "Clear shot of the barcode and serial number, and a close-up of the label text and hologram (if any), to verify authenticity.",
+        "if_unproven": "priced as potentially counterfeit, which reduces value"
+      },
+      {
+        "risk": "Battery may not be in working condition",
+        "proof": "Video or photo showing the battery being tested with a multimeter or loaded into a vehicle to verify voltage and charge.",
+        "if_unproven": "priced as not working, which reduces value"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of the battery terminals and casing to check for corrosion or damage.",
+      "Clear shot of the barcode and serial number on the label.",
+      "Video or photo showing the battery being tested with a multimeter or loaded into a vehicle to verify voltage and charge."
+    ],
+    "decision": "price",
+    "reason": "The item is known from the photos. What they cannot prove is priced at its worst case until the proof asked for below arrives."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r7",
+    "task": "testify_read",
+    "latency_ms": 2541,
+    "input_tokens": 2062,
+    "output_tokens": 579,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "22d9ae14f8c669871d2739fffebc1f4e",
+    "error": null
+  }
+}

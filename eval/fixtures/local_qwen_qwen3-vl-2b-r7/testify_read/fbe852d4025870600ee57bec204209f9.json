@@ -1,0 +1,90 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r7",
+  "response": {
+    "observations": [
+      "Photo 0 shows a front-loading washing machine with a white exterior and a large circular door.",
+      "The brand 'SAMSUNG' is clearly visible on the top left of the control panel.",
+      "The control panel includes a dial for cycle selection, a digital display, and buttons for various wash programs.",
+      "A sticker on the right side of the control panel reads 'eco bubble 9.0kg'.",
+      "A '10 WARRANTY' sticker is visible on the right side of the machine.",
+      "The machine shows signs of wear and dirt, especially on the front panel and door seal.",
+      "The door has a small rectangular indentation or damage near the bottom right.",
+      "The machine is placed in a tiled room, next to a bottle of cleaning solution.",
+      "No model number is visible on the front or control panel in the photo."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "front-loading washing machine",
+      "brand": "Samsung",
+      "read_from": [
+        "photo 0 top left"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Model: Samsung Eco Bubble",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows 'SAMSUNG' on the control panel and 'eco bubble 9.0kg' on the right side, matching the claim."
+      },
+      {
+        "claim": "Condition: Scrap/for repair",
+        "verdict": "unverified",
+        "evidence": "The machine shows visible wear and dirt, but there is no visual proof of internal damage or repairability. The term 'scrap' is subjective and not verifiable from the photo."
+      },
+      {
+        "claim": "Capacity: 9kg",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows '9.0kg' on the control panel, confirming the capacity."
+      },
+      {
+        "claim": "Location: Agege, Lagos, Nigeria",
+        "verdict": "unverifiable_remote",
+        "evidence": "The location is stated by the seller but cannot be verified from the photo alone."
+      },
+      {
+        "claim": "The power comes on",
+        "verdict": "unverified",
+        "evidence": "No photo shows the machine powered on or running. The display is off, and no indicator lights are visible."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Internal damage or wear not visible in the photo",
+        "proof": "A video showing the machine running through a full cycle, including spin and water drainage, or a close-up of the drum and internal components.",
+        "if_unproven": "priced as not working or with major internal damage"
+      },
+      {
+        "risk": "Missing or damaged parts (e.g., door seal, control panel, or motor)",
+        "proof": "Close-up photos of the door seal, control panel, and motor area, showing no cracks, missing parts, or loose components.",
+        "if_unproven": "priced as incomplete or with missing parts"
+      },
+      {
+        "risk": "Not functional despite 'scrap' claim",
+        "proof": "A video of the machine operating, including starting, filling, washing, and draining.",
+        "if_unproven": "priced as not working"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of the sticker with the model number, usually inside the door or on the back.",
+      "Video of the machine running through a full wash cycle.",
+      "Close-up photos of the door seal, control panel, and motor area.",
+      "Photo of the back of the machine showing the model number and serial number."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "What the item is shows, but not the model that sets its price: no photo shows it clearly enough to read. The shot asked for first would settle it."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r7",
+    "task": "testify_read",
+    "latency_ms": 3433,
+    "input_tokens": 2526,
+    "output_tokens": 688,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "fbe852d4025870600ee57bec204209f9",
+    "error": null
+  }
+}

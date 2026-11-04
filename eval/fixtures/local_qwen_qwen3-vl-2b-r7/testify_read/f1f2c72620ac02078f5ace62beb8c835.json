@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r7",
+  "response": {
+    "observations": [
+      "Photo 0 shows a used car engine with a hand resting on the top, placed on a concrete floor. The engine has visible components like the intake manifold, alternator, and timing cover. A label with '2AR' is visible on the timing cover.",
+      "Photo 1 shows the same engine from a different angle, with the intake manifold and various hoses and connectors visible. The engine appears to be in a workshop or garage setting.",
+      "Photo 2 shows the front of the engine with the intake manifold and a hand holding the timing cover. The '2AR' label is clearly visible on the intake manifold.",
+      "The engine appears to be a 4-cylinder inline engine, consistent with the 2AR designation.",
+      "The seller claims it is a 'Direct Belgium engine for Toyota 2AR, can be found in car's such as Toyota Camry Hybrid (2010-2017)'."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "Toyota 2AR engine",
+      "read_from": [
+        "photo 0 timing cover",
+        "photo 2 intake manifold"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Direct Belgium engine for Toyota 2AR",
+        "verdict": "unverified",
+        "evidence": "The '2AR' label is visible in photos 0 and 2, but the origin (Belgium) is not verifiable from the photos. The seller's claim cannot be confirmed remotely."
+      },
+      {
+        "claim": "can be found in car's such as Toyota Camry Hybrid (2010-2017)",
+        "verdict": "supported",
+        "evidence": "The 2AR engine is known to be used in Toyota Camry Hybrid (2010-2017) and other models. The photos show the engine's design consistent with this application."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine may be damaged or non-functional",
+        "proof": "A video showing the engine running or a close-up of the internal components (e.g., cylinder head, crankshaft) to check for wear or damage.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Engine may have been salvaged from a wrecked or accident-damaged vehicle",
+        "proof": "A photo of the engine's VIN tag or a vehicle history report, or a video showing the engine being tested on a vehicle.",
+        "if_unproven": "priced as salvage-grade"
+      },
+      {
+        "risk": "Engine may not be from the claimed origin (Belgium)",
+        "proof": "A photo of the engine's serial number or a document showing import/export records from Belgium.",
+        "if_unproven": "priced as unknown origin"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of the engine or gearbox code: the plate, sticker or number stamped on the block or case.",
+      "Video of the engine running or being tested.",
+      "Photo of the engine's serial number or VIN tag.",
+      "Photo of the engine's origin documentation or import records."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "What the item is shows, but not the model that sets its price: no photo shows it clearly enough to read. The shot asked for first would settle it."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r7",
+    "task": "testify_read",
+    "latency_ms": 7281,
+    "input_tokens": 2799,
+    "output_tokens": 619,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "f1f2c72620ac02078f5ace62beb8c835",
+    "error": null
+  }
+}
