@@ -37,8 +37,8 @@ modest GPU loses about 3,900 naira per item, against 7,415 for Claude Sonnet
 5 and 55,602 for Nemotron 3.5 Super, while naming the item right 95% of the
 time (Claude 99%).
 
-**The market data**, every advert collected (15,000 and more, 29 places, with
-prices, conditions and labels), is on Kaggle as links and labels at
+**The market data**, every advert collected (15,471 from 31 cities and
+regions, with prices, conditions and labels), is on Kaggle as links and labels at
 [godzilla1215/buyscape-market-data-public](https://www.kaggle.com/datasets/godzilla1215/buyscape-market-data-public).
 Jiji adverts are used with the permission of Jiji Nigeria, granted on
 4 Nov 2026.
