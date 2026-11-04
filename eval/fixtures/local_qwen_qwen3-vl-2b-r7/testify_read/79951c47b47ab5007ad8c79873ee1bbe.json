@@ -1,0 +1,74 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r7",
+  "response": {
+    "observations": [
+      "Two solar panels leaning against a wall.",
+      "Silver-colored aluminum frames.",
+      "Black photovoltaic cells arranged in a grid.",
+      "Watermark 'IZUTECH SOLAR ENERGY' is visible across the center of the image.",
+      "No brand name, model number, or technical specifications are legible on the front of the panels.",
+      "The panels appear to be standard monocrystalline or polycrystalline design."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel",
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Izutech solar energy specialize in all solar equipment",
+        "verdict": "unverifiable_remote",
+        "evidence": "The watermark in photo 0 matches the seller's name, but the business itself is not shown."
+      },
+      {
+        "claim": "Inverter, panels, charge...",
+        "verdict": "unverified",
+        "evidence": "Only panels are visible in the photo."
+      },
+      {
+        "claim": "Battery is new, holds charge for 8 hours. Never repaired.",
+        "verdict": "unverified",
+        "evidence": "No photo shows this; it is the seller's word only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Unknown wattage (Wp)",
+        "proof": "A clear photo of the specification label on the back of the panel.",
+        "if_unproven": "priced as the lowest wattage standard for this size (e.g., 300W)."
+      },
+      {
+        "risk": "Unknown output under sunlight",
+        "proof": "A video showing a multimeter reading of the Open Circuit Voltage (Voc) in direct sunlight.",
+        "if_unproven": "priced as a non-functional or low-output unit."
+      },
+      {
+        "risk": "Internal cell damage or micro-cracks",
+        "proof": "A close-up photo of the cell surface under magnification or a video of a multimeter test.",
+        "if_unproven": "priced as damaged or requiring replacement."
+      }
+    ],
+    "proof_requests": [
+      "Close-up of any label, sticker or metal plate showing the brand and model.",
+      "Photo of the specification label on the back of the panel showing the model and wattage.",
+      "Close-up photo of the cell surface to check for cracks or discoloration.",
+      "Video of a multimeter test showing the open-circuit voltage (Voc) in sunlight."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "What the item is shows, but not the model that sets its price: no photo shows it clearly enough to read. The shot asked for first would settle it."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r7",
+    "task": "testify_read",
+    "latency_ms": 2520,
+    "input_tokens": 1411,
+    "output_tokens": 484,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "79951c47b47ab5007ad8c79873ee1bbe",
+    "error": null
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r7",
+  "response": {
+    "observations": [
+      "Photo 0 shows a pile of used car engines and engine components in a cluttered outdoor or semi-outdoor setting.",
+      "One engine has a visible silver valve cover with 'HONDA' embossed on it.",
+      "Another engine has a black plastic cover with a ribbed grille design.",
+      "The engines appear dirty, with oil residue and grime, and some parts are missing or damaged.",
+      "A person's legs are visible on the right edge of the photo, suggesting the photo was taken in a workshop or scrapyard.",
+      "No visible branding or model numbers on the engines themselves.",
+      "The seller's text mentions 'all kinds of car spare parts' and 'Tokunbo, direct from Belgium. Tested and working, no knock, low mileage, never opened.'"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used car engines",
+      "brand": "HONDA",
+      "read_from": [
+        "photo 0 valve cover"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "We also deals on all kinds of car spare parts",
+        "verdict": "unverifiable_remote",
+        "evidence": "Seller's text only; no photo shows this clearly enough to read."
+      },
+      {
+        "claim": "Tokunbo, direct from Belgium. Tested and working, no knock, low mileage, never opened.",
+        "verdict": "unverified",
+        "evidence": "No photo shows this; it is the seller's word only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engines may be damaged, non-functional, or have hidden mechanical issues (e.g., internal wear, cracked block, seized components).",
+        "proof": "Close-up photos of the engine block, cylinder head, and internal components (e.g., crankshaft, pistons, oil pan) to verify condition.",
+        "if_unproven": "Priced as not working or severely damaged."
+      },
+      {
+        "risk": "Engine may be from a non-Honda vehicle or not compatible with buyer's vehicle.",
+        "proof": "Photo of the engine's VIN tag or casting number, or a photo showing the engine installed in a vehicle.",
+        "if_unproven": "Priced as generic used engine, not Honda-specific."
+      },
+      {
+        "risk": "Engine may have been salvaged from a wrecked or accident-damaged vehicle.",
+        "proof": "Photo of the vehicle's VIN plate or documentation showing the source vehicle's condition.",
+        "if_unproven": "Priced as unknown source, lower value."
+      }
+    ],
+    "proof_requests": [
+      "Close-up of the engine or gearbox code: the plate, sticker or number stamped on the block or case.",
+      "Photo of the engine's VIN tag or casting number.",
+      "Close-up photos of the engine block, cylinder head, and internal components.",
+      "Photo of the engine installed in a vehicle or documentation of its source."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "What the item is shows, but not the model that sets its price: no photo shows it clearly enough to read. The shot asked for first would settle it."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r7",
+    "task": "testify_read",
+    "latency_ms": 2487,
+    "input_tokens": 1418,
+    "output_tokens": 576,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "ea219dd8dee3b226f9aee7d7426b2138",
+    "error": null
+  }
+}

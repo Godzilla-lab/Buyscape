@@ -1,0 +1,101 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r7",
+  "response": {
+    "observations": [
+      "Photo 0: Front view of a silver pickup truck with a hexagonal grille, Toyota emblem, and LED headlights. The truck is on a gravel surface, with a red canopy and trees in the background.",
+      "Photo 1: Side view of the same truck, showing a black front bumper, black side mirrors, and black wheels. The truck appears to be a 4-door pickup. The windshield has a sticker with 'No Start' and '963' written on it.",
+      "Photo 2: Rear view of the truck, showing a black tonneau cover, red taillights, and a black rear bumper. The tailgate has 'TOYOTA' and 'V6' visible. The same 'No Start' and '963' sticker is on the rear window.",
+      "All photos show a watermark 'POSTED ON JIJI' and 'TEEKAYWHEELS'.",
+      "The truck appears to be a 4x4 model based on the design and visible suspension components.",
+      "The 'V6' badge on the tailgate suggests a 6-cylinder engine, which contradicts the seller's claim of a V6 engine."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "4x4 pickup truck",
+      "brand": "Toyota",
+      "read_from": [
+        "photo 0 grille",
+        "photo 1 side view",
+        "photo 2 tailgate"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "2024 Toyota Tacoma TRD 4x4",
+        "verdict": "unverified",
+        "evidence": "The year 2024 is not visible in any photo. The model name 'Tacoma TRD' is not readable on the vehicle. The 'V6' badge on the tailgate suggests a 6-cylinder engine, which contradicts the claim of a V6 engine."
+      },
+      {
+        "claim": "V6 engine",
+        "verdict": "contradicted",
+        "evidence": "Photo 2 shows 'V6' on the tailgate, which is a 6-cylinder engine. The seller's claim of a V6 engine is false."
+      },
+      {
+        "claim": "push to start",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows the ignition or engine start. The 'No Start' sticker on the windshield suggests the engine may not start, but this does not confirm the 'push to start' feature."
+      },
+      {
+        "claim": "moonroof",
+        "verdict": "unverified",
+        "evidence": "No photo shows the roof or any opening. The windshield has a sticker, but no evidence of a moonroof is visible."
+      },
+      {
+        "claim": "verified duty",
+        "verdict": "unverifiable_remote",
+        "evidence": "No proof of recent inspection or service history is visible. The 'No Start' sticker suggests mechanical issues, but this does not confirm 'verified duty'."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine is not a V6 as claimed, but a 4-cylinder or smaller engine",
+        "proof": "Photo of the engine bay or engine block with visible cylinder count or VIN plate showing engine type.",
+        "if_unproven": "Priced as a 4-cylinder engine, which is significantly cheaper than a V6."
+      },
+      {
+        "risk": "Engine does not start or has mechanical issues",
+        "proof": "Video of the engine starting and running, or a photo of the engine bay with the key turned and engine running.",
+        "if_unproven": "Priced as not working, which reduces value significantly."
+      },
+      {
+        "risk": "No moonroof or roof opening",
+        "proof": "Photo of the roof with the sunroof or moonroof open, or a photo of the roof structure.",
+        "if_unproven": "Priced as lacking a moonroof, which reduces value."
+      },
+      {
+        "risk": "Vehicle has accident history or damage not visible in photos",
+        "proof": "Photo of the interior, especially dashboard and door panels, and a full 360-degree video or photo tour.",
+        "if_unproven": "Priced as having unknown damage, which reduces value."
+      },
+      {
+        "risk": "Vehicle is not 2024 model as claimed",
+        "proof": "Photo of the VIN plate or dashboard showing the model year, or a photo of the engine bay with the year visible.",
+        "if_unproven": "Priced as an older model, which reduces value."
+      }
+    ],
+    "proof_requests": [
+      "Close-up of the VIN plate, usually on the inner driver's side door jamb.",
+      "Photo of the engine bay showing the engine or engine block with visible cylinder count or VIN plate.",
+      "Video of the engine starting and running.",
+      "Photo of the roof with the sunroof or moonroof open.",
+      "Photo of the interior, especially dashboard and door panels.",
+      "Photo of the VIN plate or dashboard showing the model year."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "What the item is shows, but not the model that sets its price: no photo shows it clearly enough to read. The shot asked for first would settle it."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r7",
+    "task": "testify_read",
+    "latency_ms": 2588,
+    "input_tokens": 3256,
+    "output_tokens": 981,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "53f81440e241742a580545761b84d23d",
+    "error": null
+  }
+}
