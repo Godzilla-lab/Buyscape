@@ -1,0 +1,78 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: stacked used tires outdoors, many with spray-paint marks (size/price codes) on sidewalls, visible wear and dirt, no clear brand lettering legible.",
+      "Photo 1: more stacked used tires, wheel rims hanging in background, tread visible but worn, no size or brand markings readable.",
+      "Photo 2: similar stacked tires with spray paint, a car and shop stalls in background, no close-up of any sidewall text, DOT code, or tread depth gauge.",
+      "All three photos show a roadside tire market scene, not a single specific tire being sold; no size, brand, or manufacture date is legible in any shot."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used car tires (tokunbo/second-hand tire stock)",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "First grade Belgium tires",
+        "verdict": "unverifiable_remote",
+        "evidence": "No sidewall brand, size, or DOT/manufacture code is legible in any of the three photos; 'Belgium' and 'first grade' are market terms used locally for used European tires and cannot be confirmed from images."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual tread depth and wear per tire unknown (photos show general wear but no close gauge/ruler shot)",
+        "proof": "Close-up photo of tread with a ruler or coin for depth reference on the specific tire being sold",
+        "if_unproven": "priced as worn/near-end-of-life stock"
+      },
+      {
+        "risk": "Tire size not specified, which materially changes value",
+        "proof": "Clear photo of sidewall size markings (e.g., 205/55R16)",
+        "if_unproven": "priced at lowest matching comparable range"
+      },
+      {
+        "risk": "Age/manufacture date (DOT code) unknown, affecting rubber degradation risk",
+        "proof": "Close-up of DOT code on sidewall",
+        "if_unproven": "priced as older stock, worst case"
+      },
+      {
+        "risk": "Hidden sidewall damage, plugs, or bulges not visible due to distance and paint marks",
+        "proof": "Close-up photos of each tire's full sidewall and inner surface",
+        "if_unproven": "priced as possibly damaged/unverified condition"
+      },
+      {
+        "risk": "'Belgium' origin claim cannot be confirmed; could be mixed-origin used tires",
+        "proof": "Photo of any import/brand stamp or batch documentation",
+        "if_unproven": "priced as generic used tire stock, not premium import"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of one tire's sidewall showing brand name, size, and DOT date",
+      "Photo with a ruler or coin showing tread depth",
+      "Full 360-degree shot of a single tire to check for cracks, plugs, or bulges",
+      "Any import or batch paperwork for 'Belgium' origin claim"
+    ],
+    "decision": "price",
+    "reason": "Photos confirm this is generic used/tokunbo tire stock at a roadside market with no verifiable brand, size, or grade; 'first grade' and 'Belgium' claims are unverifiable from images, so it is priced at worst case as ordinary used tire stock comparable to similar unverified listings.",
+    "price_pick": {
+      "low": 0,
+      "high": 4
+    }
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 19857,
+    "input_tokens": 3921,
+    "output_tokens": 1687,
+    "cost_usd": 0.040927,
+    "replayed": false,
+    "fixture_key": "c74fa55faafb7b7cf96aca841e3421b7",
+    "error": null
+  }
+}

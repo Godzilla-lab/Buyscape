@@ -1,0 +1,93 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the phone's screen displaying 'Device care' with 'Great!' status, battery at 11% with 3h 34m left, storage showing 462.6 GB available out of 512 GB, and memory at 7.8 GB available.",
+      "Photo 1 and Photo 2 show the back of the phone with a holographic finish, the Samsung logo, a vertical triple-camera module, and a white sticker with barcodes and text including 'MADE IN VIETNAM'.",
+      "A green 'A++' sticker is affixed to the back of the phone in both photos 1 and 2.",
+      "The phone appears to be held in a hand against a corrugated metal background in all photos.",
+      "No charging port, buttons, or screen edges are visible in the photos."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "Samsung Galaxy Note 10",
+      "brand": "Samsung",
+      "model": "Note 10",
+      "read_from": [
+        "photo 1 back panel text",
+        "photo 2 back panel text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Samsung Note 10",
+        "verdict": "supported",
+        "evidence": "Photo 1 and Photo 2 show 'SAMSUNG' logo and design consistent with Galaxy Note 10."
+      },
+      {
+        "claim": "256GB",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows '512 GB' total storage, with 462.6 GB available."
+      },
+      {
+        "claim": "Working perfectly",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows the device is on and displaying system info, but no functional test (e.g., camera, calls, apps) is shown."
+      },
+      {
+        "claim": "Very clean",
+        "verdict": "unverified",
+        "evidence": "Photos show the back and front screen, but no close-ups of edges, ports, or buttons to verify cleanliness."
+      },
+      {
+        "claim": "comes with warranty",
+        "verdict": "unverifiable_remote",
+        "evidence": "No warranty document, receipt, or proof of validity is shown. The sticker 'A++' is not a warranty."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery health is poor or degraded",
+        "proof": "A screenshot of battery health percentage or a video showing battery usage over time.",
+        "if_unproven": "priced as battery may be degraded (e.g., under 80% health)"
+      },
+      {
+        "risk": "Screen or body damage not visible in photos",
+        "proof": "Close-up photos of all edges, corners, and screen for scratches, cracks, or dead pixels.",
+        "if_unproven": "priced as possibly damaged (e.g., minor scratches or screen issues)"
+      },
+      {
+        "risk": "Phone is not unlocked or has carrier restrictions",
+        "proof": "Screenshot of SIM settings or a video showing the phone accepting a SIM card from a different network.",
+        "if_unproven": "priced as possibly locked (reduces value)"
+      },
+      {
+        "risk": "Storage is not 256GB as claimed (claimed 256GB, shown 512GB)",
+        "proof": "Photo of settings > About phone > Storage showing total capacity.",
+        "if_unproven": "priced as 512GB model (higher value), but claim of 256GB is contradicted"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photos of all edges, buttons, charging port, and screen for damage.",
+      "Screenshot of 'About phone' showing model and storage capacity.",
+      "Video showing the phone making a call, using camera, and charging.",
+      "Proof of warranty (receipt or warranty card)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identified as Samsung Note 10, but the storage claim is contradicted (512GB shown, 256GB claimed). Functionality, battery health, and physical condition are unverified. Warranty is unverifiable. Missing proof of condition and specs prevents pricing at worst case."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 76147,
+    "input_tokens": 2786,
+    "output_tokens": 962,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "0bb8d3cdfea1fc9e81757feca4125848",
+    "error": null
+  }
+}

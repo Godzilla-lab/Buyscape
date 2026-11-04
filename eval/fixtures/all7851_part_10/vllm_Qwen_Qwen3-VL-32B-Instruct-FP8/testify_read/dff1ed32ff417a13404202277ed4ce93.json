@@ -1,0 +1,93 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the iPhone's 'About' screen with Model Name: iPhone 17 Pro, Model Number: MG7K4LL/A, Capacity: 256 GB, iOS Version: 26.6.",
+      "Photo 1 shows the back of the phone with a white sticker labeled 'iPhone 17pro', Capacity: 256G, Country: LL/A, Color: Silver, Battery: 100%, Condition: Grade A, Function: Tested.",
+      "Photo 2 shows the side profile of the phone, including volume buttons and power button, with a white protective case or cover.",
+      "The phone appears to be in a white or silver case, and the sticker on the back is likely from a reseller or refurbisher.",
+      "The model name 'iPhone 17 Pro' is not a real Apple product; the latest iPhone as of 2024 is the iPhone 15 series."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "iPhone 17 Pro",
+      "brand": "Apple",
+      "model": null,
+      "read_from": [
+        "photo 0 screen",
+        "photo 1 sticker"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "iPhone 17 Pro",
+        "verdict": "unverified",
+        "evidence": "Photo 0 screen shows 'iPhone 17 Pro' but this model does not exist; Apple's latest is iPhone 15 series. Photo 1 sticker also says 'iPhone 17pro'."
+      },
+      {
+        "claim": "256 GB capacity",
+        "verdict": "supported",
+        "evidence": "Photo 0 screen shows 'Capacity: 256 GB'. Photo 1 sticker also says 'Capacity: 256G'."
+      },
+      {
+        "claim": "Battery: 100%",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo 1 sticker claims 'Battery: 100%' but no battery health or cycle count is shown in the photos. Cannot verify without a battery health screenshot."
+      },
+      {
+        "claim": "Condition Grade A, Function: Tested",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo 1 sticker claims 'Condition Grade A, Function: Tested' but no functional test video or proof is provided. Cannot verify without a working demo."
+      },
+      {
+        "claim": "Color: Silver",
+        "verdict": "supported",
+        "evidence": "Photo 1 sticker says 'Color: Silver' and the phone appears silver in all photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Fake or non-existent model (iPhone 17 Pro)",
+        "proof": "A screenshot of the Settings > General > About screen showing a real Apple model (e.g., iPhone 15 Pro) or a video of the phone booting up with a real iOS version.",
+        "if_unproven": "Priced as a non-functional or fake device, which would be worthless."
+      },
+      {
+        "risk": "Battery health is not 100% or has high cycle count",
+        "proof": "A screenshot of the battery health percentage and cycle count from Settings > Battery > Battery Health.",
+        "if_unproven": "Priced as a phone with degraded battery, which reduces value significantly."
+      },
+      {
+        "risk": "Phone is not functional or has hidden defects",
+        "proof": "A 30-second video showing the phone turning on, unlocking, opening apps, and making a call.",
+        "if_unproven": "Priced as not working, which is the worst-case scenario."
+      },
+      {
+        "risk": "Sticker is fake or phone is not genuine",
+        "proof": "A close-up of the model number on the back of the phone (if visible) or a video of the phone's serial number being checked on Apple's website.",
+        "if_unproven": "Priced as a counterfeit or non-genuine device, which reduces value to near zero."
+      }
+    ],
+    "proof_requests": [
+      "A screenshot of the Settings > General > About screen showing the real model name and iOS version.",
+      "A screenshot of Battery Health showing percentage and cycle count.",
+      "A 30-second video of the phone turning on, unlocking, and making a call.",
+      "A close-up of the phone's serial number or model number on the back, or a video of the serial number being checked on Apple's website."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The phone is advertised as an 'iPhone 17 Pro', which does not exist, indicating a high risk of fraud or misrepresentation. The battery health and functionality cannot be verified from the current photos. Without proof of a real model, battery health, and working condition, the item cannot be priced reliably."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 89795,
+    "input_tokens": 3231,
+    "output_tokens": 1079,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "dff1ed32ff417a13404202277ed4ce93",
+    "error": null
+  }
+}

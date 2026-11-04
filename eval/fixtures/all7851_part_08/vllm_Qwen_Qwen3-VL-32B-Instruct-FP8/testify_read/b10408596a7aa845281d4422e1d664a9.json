@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a full view of a mountain bike leaning against a grey wall.",
+      "The frame is blue and silver with the word 'TREK' visible in large letters on the down tube.",
+      "The bike has knobby tires, front suspension forks, and a rear derailleur system.",
+      "The seat is covered in plastic wrap, suggesting it is new or unused.",
+      "There is a watermark 'KAYSPORTS' across the center of the image.",
+      "The handlebars have a front light attached.",
+      "The frame appears to be made of aluminum, consistent with the seller's claim."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "mountain bike",
+      "brand": "Trek",
+      "model": "not clearly visible",
+      "read_from": [
+        "photo 0 frame down tube"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Trek MTB Adult sport bicycle",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows 'TREK' written on the frame, and the bike is clearly a mountain bike (MTB) with adult-sized frame and components."
+      },
+      {
+        "claim": "Complete aluminum frame",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows a frame that appears to be aluminum, but material cannot be confirmed remotely without a close-up of the frame or manufacturer label. No visible welds or markings to confirm."
+      },
+      {
+        "claim": "Dual button gear system",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo 0 does not show the shifters or gear controls clearly. The presence of a rear derailleur suggests a derailleur system, not a dual-button (typically found on internal gear hubs or some e-bikes). No evidence of dual-button controls."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Frame material is not aluminum as claimed",
+        "proof": "Close-up photo of the frame showing material markings or welds, or a label indicating aluminum.",
+        "if_unproven": "Priced as if frame is not aluminum, which may reduce value."
+      },
+      {
+        "risk": "Gear system is not dual-button as claimed",
+        "proof": "Close-up photo of the handlebars showing the shifters and controls.",
+        "if_unproven": "Priced as if it has a standard derailleur system, not dual-button, which may reduce value."
+      },
+      {
+        "risk": "Bike is not new or has hidden damage",
+        "proof": "Photos of the chain, cassette, brakes, and tires from multiple angles, especially close-ups of wear or rust.",
+        "if_unproven": "Priced as used, with potential for hidden wear or damage reducing value."
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the frame showing material markings or welds.",
+      "Close-up photo of the handlebars showing the gear shifters.",
+      "Photos of the chain, cassette, brakes, and tires from multiple angles."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The brand is confirmed as Trek, but the material of the frame and the type of gear system cannot be verified from the current photo. These are critical for pricing. Additional photos are needed to confirm claims and assess condition."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 62812,
+    "input_tokens": 1570,
+    "output_tokens": 738,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "b10408596a7aa845281d4422e1d664a9",
+    "error": null
+  }
+}

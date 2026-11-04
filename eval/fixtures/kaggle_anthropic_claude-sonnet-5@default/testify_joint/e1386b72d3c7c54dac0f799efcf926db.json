@@ -1,0 +1,87 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black UPS unit with 'BLUE GATE' embossed on the top, a blue vertical strip with a power button and three small indicator lights (LEDs).",
+      "Photo 1 shows the same unit from behind/side, revealing a standard two/three-pin plug and cord, confirming it is a mains-powered device.",
+      "No model number, serial number, or rating label is visible in either photo.",
+      "No photo shows the unit powered on, any display reading, or battery compartment opened.",
+      "No clip or video showing it running on battery power is provided."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "UPS (uninterruptible power supply)",
+      "brand": "Blue Gate",
+      "model": null,
+      "read_from": [
+        "photo 0 top of unit",
+        "photo 1 side of unit"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "UPS available",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 1 show a physical Blue Gate UPS unit."
+      },
+      {
+        "claim": "Battery is new, holds charge for 8 hours",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo or clip shows the unit running on battery, a timer, or the battery itself; claim cannot be checked from static photos."
+      },
+      {
+        "claim": "Never repaired",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows the internal casing opened or any service sticker; seller's word alone cannot confirm repair history."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery may be old, weak, or dead despite the claim of 'new' and '8 hours'",
+        "proof": "A video showing the UPS running a loaded device after mains power is cut, with a visible clock/timer",
+        "if_unproven": "priced as a faulty/non-functional unit"
+      },
+      {
+        "risk": "Unit may have been opened or repaired, possibly with non-original parts",
+        "proof": "Photo of the opened casing showing original seals/components, or a receipt/service history",
+        "if_unproven": "priced as unverified condition, same as worst case"
+      },
+      {
+        "risk": "Output capacity (VA/W rating) unknown, affects what it can power",
+        "proof": "A close-up photo of the rating label on the back or bottom of the unit",
+        "if_unproven": "treated as lowest-capacity comparable"
+      },
+      {
+        "risk": "Unit may not power on at all",
+        "proof": "A photo or video showing the LED lights lit and the unit in standby/active mode when plugged in",
+        "if_unproven": "priced as non-working, matching 'faulty' comparables"
+      }
+    ],
+    "proof_requests": [
+      "Video of the UPS switched on and running a load (e.g., a lamp or fan) after mains power is disconnected, showing elapsed time",
+      "Close-up photo of the rating/label sticker (VA/W output, model, serial) usually on the back or bottom",
+      "Photo of the battery itself or the open battery compartment showing brand/date if replaceable",
+      "Any proof of purchase or repair invoice if the battery was indeed replaced"
+    ],
+    "decision": "price",
+    "reason": "The item is clearly a Blue Gate UPS, but the key claims about a new battery and working condition are unverifiable from photos alone, so it must be priced at worst case as a faulty/non-working unit, consistent with the only comparable listings available for this brand.",
+    "price_pick": {
+      "low": 0,
+      "high": 1
+    }
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 17540,
+    "input_tokens": 4161,
+    "output_tokens": 1528,
+    "cost_usd": 0.020049,
+    "replayed": false,
+    "fixture_key": "e1386b72d3c7c54dac0f799efcf926db",
+    "error": null
+  }
+}

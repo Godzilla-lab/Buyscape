@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail packaging for a 'KENWOOD' branded blender and grinder.",
+      "The box displays model number 'KCB 239k'.",
+      "The box features a '4L' capacity label and a '12000W' badge in the bottom right corner.",
+      "The seller's text claims '10000W', which differs from the '12000W' printed on the box.",
+      "The packaging includes a German flag icon and the text 'UK standard'.",
+      "The actual blender unit is not visible outside of the box."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "blender and grinder",
+      "brand": "KENWOOD",
+      "model": "KCB 239k",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "10000W Advanced Motor",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 box shows a 12000W badge in the bottom right corner."
+      },
+      {
+        "claim": "4L Heavy Duty Unbreakable Plastic Jug",
+        "verdict": "supported",
+        "evidence": "Photo 0 box shows 4L and a plastic jug."
+      },
+      {
+        "claim": "Variable Speed Function",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows a speed control dial on the base image."
+      },
+      {
+        "claim": "Pulse & Smoothie",
+        "verdict": "supported",
+        "evidence": "These are standard functions for this type of high-speed blender."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The actual item is not shown, so its presence and physical condition are unverified.",
+        "proof": "Photo of the blender and grinder out of the box.",
+        "if_unproven": "as an empty box or non-functional"
+      },
+      {
+        "risk": "The branding and extreme wattage claims are characteristic of generic or counterfeit products in this market.",
+        "proof": "Photo of the manufacturer's rating plate on the bottom of the motor base.",
+        "if_unproven": "as a generic/no-name blender"
+      },
+      {
+        "risk": "The motor power claim (10kW+) is physically impossible for a standard domestic outlet.",
+        "proof": "Video of the unit running under load.",
+        "if_unproven": "as a standard 1500W-2000W motor"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual blender and grinder outside of the box.",
+      "Photo of the technical specification plate on the bottom of the motor base.",
+      "Video of the blender powered on and running."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the box is shown, making it impossible to verify the item's condition or even its presence. There is also a contradiction between the seller's wattage claim and the box badge."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 20060,
+    "input_tokens": 2370,
+    "output_tokens": 4423,
+    "cost_usd": 0.014454,
+    "replayed": false,
+    "fixture_key": "64310ec8c4651d8999b48ac6db8baf2f",
+    "error": null
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r5",
+  "response": {
+    "observations": [
+      "Nikon DSLR camera body with a 35mm DX lens.",
+      "The camera body shows significant dust and surface grime, particularly around the top and rear panels.",
+      "The lens barrel shows some dust and surface wear.",
+      "The camera is resting on a white bag with 'McSteve Online Gadget Store' printed on it.",
+      "The shutter count is not visible in the photos.",
+      "The seller's text mentions 'Working perfectly ok' and 'no fungus or scratch on the lens', but these cannot be verified from the photos."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DSLR camera",
+      "brand": "Nikon",
+      "read_from": [
+        "photo 0 body",
+        "photo 2 body"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Used Nikon D7200 DSLR Camera",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "35MM Nikkor Nikon Lens",
+        "verdict": "supported",
+        "evidence": "photo 0 lens barrel"
+      },
+      {
+        "claim": "Working perfectly ok",
+        "verdict": "unverified",
+        "evidence": "No photo shows this; it is the seller's word only."
+      },
+      {
+        "claim": "Shutter count under 5,000, no fungus or scratch on the lens. Original battery and charger, never repaired.",
+        "verdict": "unverified",
+        "evidence": "No photo shows this; it is the seller's word only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The camera may not power on or take photos.",
+        "proof": "A video showing the camera powering on and the LCD screen displaying a photo.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The shutter count may be high, indicating the camera is near the end of its life.",
+        "proof": "A photo of the shutter count screen from a recent photo or a screenshot of the shutter count from a recent photo.",
+        "if_unproven": "as high shutter count (near end of life)"
+      },
+      {
+        "risk": "The lens may have fungus or scratches on the front element.",
+        "proof": "A clear photo of the front lens element with the lens cap removed.",
+        "if_unproven": "as having lens fungus"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of any label, sticker or metal plate showing the brand and model.",
+      "Video of the camera powering on and taking a photo.",
+      "Photo of the shutter count screen.",
+      "Photo of the front lens element with the lens cap removed.",
+      "Photo of the rear LCD screen."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "What the item is shows, but not the model that sets its price: no photo shows it clearly enough to read. The shot asked for first would settle it."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r5",
+    "task": "testify_read",
+    "latency_ms": 2397,
+    "input_tokens": 2821,
+    "output_tokens": 515,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "93760f11602a2e5f8d158f7108bed681",
+    "error": null
+  }
+}

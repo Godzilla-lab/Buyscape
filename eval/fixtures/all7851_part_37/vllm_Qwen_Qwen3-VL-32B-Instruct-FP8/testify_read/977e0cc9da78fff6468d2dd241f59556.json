@@ -1,0 +1,97 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the bottom of a laptop with 'Latitude 7400' printed on it, along with a Dell label containing model and serial information.",
+      "Photo 1 shows the front view of a laptop with a black screen, keyboard, and trackpad. A small Intel sticker is visible on the bottom right of the palm rest.",
+      "Photo 2 shows two laptops closed, one with a smooth lid and the other with a textured carbon fiber-like pattern. Both have the Dell logo. The lower laptop has a visible carbon fiber texture on the lid.",
+      "The seller claims a 'carbon fibre cover', 'Dell Latitude 7400', 'Core i7 8th gen', '16GB RAM', '256GB SSD', and '14.1 FHD screen'.",
+      "The photos show two laptops, suggesting the item for sale may be the one with the carbon fiber cover, or both are being sold together."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Dell",
+      "model": "Latitude 7400",
+      "read_from": [
+        "photo 0 bottom plate"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Carbon fibre cover",
+        "verdict": "supported",
+        "evidence": "Photo 2 shows the lower laptop with a distinct carbon fiber texture on the lid."
+      },
+      {
+        "claim": "Dell Latitude 7400",
+        "verdict": "supported",
+        "evidence": "Photo 0 clearly shows 'Latitude 7400' printed on the bottom plate."
+      },
+      {
+        "claim": "Core i7 8th gen",
+        "verdict": "unverifiable_remote",
+        "evidence": "No CPU sticker or system information visible. The Intel sticker in photo 1 is too small to read the generation or model."
+      },
+      {
+        "claim": "16GB RAM",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal components or system specs visible. RAM cannot be confirmed from photos."
+      },
+      {
+        "claim": "256GB SSD",
+        "verdict": "unverifiable_remote",
+        "evidence": "No drive bay or system information visible. Storage cannot be confirmed from photos."
+      },
+      {
+        "claim": "14.1 FHD screen",
+        "verdict": "unverified",
+        "evidence": "Screen is off in photo 1; size and resolution cannot be confirmed visually. The screen appears to be 14-inch, but FHD cannot be verified without a display test or specs."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The laptop may not be functional or may have hardware issues (e.g., dead pixels, non-working ports, battery failure).",
+        "proof": "A video showing the laptop powering on, booting into OS, and displaying a clear screen with all ports tested.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The advertised specs (Core i7 8th gen, 16GB RAM, 256GB SSD) may be false or inaccurate.",
+        "proof": "A screenshot of the system information (e.g., Windows System Info or BIOS) showing CPU, RAM, and storage details.",
+        "if_unproven": "priced as lower-spec model or not working"
+      },
+      {
+        "risk": "The carbon fiber cover may be a skin or sticker, not a genuine carbon fiber material.",
+        "proof": "A close-up photo or video showing the texture under light and flexing to confirm material authenticity.",
+        "if_unproven": "priced as standard plastic cover"
+      },
+      {
+        "risk": "The laptop may have physical damage not visible in photos (e.g., cracked screen, loose hinges, internal damage).",
+        "proof": "A video showing the laptop being opened, closed, and rotated to check for damage or wear.",
+        "if_unproven": "priced as having potential damage"
+      }
+    ],
+    "proof_requests": [
+      "Video of the laptop powering on and booting into the operating system.",
+      "Screenshot of system information showing CPU, RAM, and storage details.",
+      "Close-up video of the carbon fiber lid texture under light and flexing.",
+      "Video showing the laptop being opened and closed to check for physical damage or wear."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is confirmed as Dell Latitude 7400 with a carbon fiber cover, but critical specs (CPU, RAM, SSD) and functionality cannot be verified from the photos. The item must be tested and proven to meet the advertised specs before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 84815,
+    "input_tokens": 2596,
+    "output_tokens": 1046,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "977e0cc9da78fff6468d2dd241f59556",
+    "error": null
+  }
+}

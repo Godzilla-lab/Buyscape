@@ -1,0 +1,78 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows a yellow gas cylinder with '12.5' stamped on the collar.",
+      "Photo 1 shows a blue gas cylinder with a 'GERADISCO' logo.",
+      "Photo 2 shows a top-down view of the blue cylinder's valve.",
+      "All photos contain a 'PETRONJAY BUSINESS' watermark.",
+      "The seller's text describes a single 12.5kg cylinder.",
+      "No manufacturing or expiry dates are visible on either cylinder."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "12.5kg gas cylinder",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 collar"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "12.5kg standard Cooking Gas Cylinder",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows '12.5' stamped on the collar."
+      },
+      {
+        "claim": "Recently tested and certified",
+        "verdict": "unverifiable_remote",
+        "evidence": "No certification document or test stamp is shown in the photos."
+      },
+      {
+        "claim": "no leak",
+        "verdict": "unverifiable_remote",
+        "evidence": "Leaks cannot be verified through static photos."
+      },
+      {
+        "claim": "the valve is new",
+        "verdict": "unverified",
+        "evidence": "Photo 2 shows a valve, but its age and condition cannot be confirmed as new from the image."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Conflicting items shown",
+        "proof": "A single photo of the specific cylinder being sold.",
+        "if_unproven": "cannot be priced due to ambiguity"
+      },
+      {
+        "risk": "Expired cylinder",
+        "proof": "A clear photo of the manufacturing and expiry date stamps on the collar.",
+        "if_unproven": "as an expired unit"
+      }
+    ],
+    "proof_requests": [
+      "A photo of the specific cylinder for sale to clarify if it is the yellow or blue unit.",
+      "A clear shot of the date markings stamped on the cylinder collar.",
+      "A photo of the certification or test document mentioned in the description."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The advertisement shows two different cylinders (yellow in photo 0 and blue in photos 1 and 2), making it unclear which item is for sale. Additionally, the critical expiry date is not visible.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_joint",
+    "latency_ms": 21290,
+    "input_tokens": 5342,
+    "output_tokens": 4970,
+    "cost_usd": 0.017581,
+    "replayed": false,
+    "fixture_key": "be0cd8aa4c7dc28f4624d1ebdacae772",
+    "error": null
+  }
+}

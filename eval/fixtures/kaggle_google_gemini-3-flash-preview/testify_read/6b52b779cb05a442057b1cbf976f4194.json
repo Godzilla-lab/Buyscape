@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 is a stock marketing graphic, not a photo of the actual item.",
+      "The brand 'KONNWEI' is visible on the device casing in photo 0.",
+      "The device is a handheld battery analyzer with a color screen and five navigation buttons.",
+      "Text in the graphic specifies compatibility with 12V and 24V lead-acid batteries.",
+      "The graphic claims a testing range of 3Ah to 200Ah.",
+      "Watermarks for 'REDEEMER STORES' and 'JIJI' are visible."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "battery analyzer",
+      "brand": "KONNWEI",
+      "model": null,
+      "read_from": [
+        "photo 0 device casing"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "detect all automotive 12v & 24v lead acid batteries",
+        "verdict": "unverified",
+        "evidence": "The image is a stock graphic; the actual device's capabilities are not demonstrated."
+      },
+      {
+        "claim": "test range: 3Ah - 200Ah",
+        "verdict": "unverified",
+        "evidence": "This is a specification from a marketing image."
+      },
+      {
+        "claim": "machine will not burn if it is connected incorrectly",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The actual item's physical condition is unknown as only a stock photo is provided.",
+        "proof": "Photos of the actual unit being sold, showing all sides.",
+        "if_unproven": "as heavily used with casing damage"
+      },
+      {
+        "risk": "The device may be non-functional or have a faulty screen.",
+        "proof": "A video showing the device powered on and completing a battery test cycle.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The specific model number determines the feature set and value.",
+        "proof": "A clear photo of the model number, usually found on the back or bottom of the device.",
+        "if_unproven": "as the lowest-value 12V/24V model in the brand's range"
+      }
+    ],
+    "proof_requests": [
+      "Photos of the actual item you have in hand, not the marketing graphic.",
+      "A photo of the back of the device showing the model number and technical specifications label.",
+      "A short video of the device connected to a battery to confirm the screen and buttons work."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller has provided only a stock marketing image. The specific model number, which significantly impacts the price, is not visible or stated."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 15960,
+    "input_tokens": 2385,
+    "output_tokens": 3623,
+    "cost_usd": 0.062423,
+    "replayed": false,
+    "fixture_key": "6b52b779cb05a442057b1cbf976f4194",
+    "error": null
+  }
+}

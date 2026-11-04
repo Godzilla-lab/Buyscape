@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail box for a Boscon Electric Iron.",
+      "The brand 'Boscon' and model 'BOS-IR6001' are printed on the box.",
+      "The box features checkboxes for power ratings; the '300W' option is visible and matches the seller's description.",
+      "The box depicts a pink and white iron, but the actual device is not visible in the photo.",
+      "The box is in a retail or warehouse setting, surrounded by other boxed appliances like a microwave and a kettle."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "electric iron",
+      "brand": "Boscon",
+      "model": "BOS-IR6001",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "300w pressing iron",
+        "verdict": "supported",
+        "evidence": "photo 0 shows the 300W specification option on the box"
+      },
+      {
+        "claim": "for homes/ hotels/ dry cleaning businesses",
+        "verdict": "unverifiable_remote",
+        "evidence": "The suitability for these environments is a marketing claim that cannot be verified remotely."
+      },
+      {
+        "claim": "get from powerline global company",
+        "verdict": "unverifiable_remote",
+        "evidence": "The seller's business name matches the watermark in the photo but cannot be verified as a legitimate entity."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, lower-value item.",
+        "proof": "A photo of the actual iron outside of the box.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The iron may be used, refurbished, or have physical defects like a scratched soleplate.",
+        "proof": "Close-up photos of the iron's soleplate and body.",
+        "if_unproven": "as heavily used or damaged"
+      },
+      {
+        "risk": "The heating element or thermostat may be non-functional.",
+        "proof": "A video of the iron plugged in and heating up.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual iron out of the box.",
+      "Photo of the soleplate (bottom) of the iron.",
+      "Photo of the manufacturer's label on the iron itself to confirm the model and wattage.",
+      "Video showing the iron powered on and heating up."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail packaging is shown. The actual iron must be seen to confirm its existence, physical condition, and that it matches the model on the box."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 18369,
+    "input_tokens": 2401,
+    "output_tokens": 4092,
+    "cost_usd": 0.013477,
+    "replayed": false,
+    "fixture_key": "2589a7d56c5057ad402adf9082bb12d5",
+    "error": null
+  }
+}

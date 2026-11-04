@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-r4",
+  "response": {
+    "observations": [
+      "Photo 0 shows a used automotive gearbox (transmission) in a pile of other engine parts.",
+      "The unit has a 22-pin input/output connector visible on the side.",
+      "The casing shows significant surface rust and dirt, consistent with a used or scrap part.",
+      "The internal components are not visible; only the exterior casing and the connector are shown."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "gearbox",
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "2012 Toyota Camry Japan",
+        "verdict": "unverified",
+        "evidence": "No photo shows this clearly enough to read."
+      },
+      {
+        "claim": "gear box",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "22pin",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Internal mechanical damage or seized gears",
+        "proof": "A video of the gearbox being manually rotated or a photo of the internal splined shaft.",
+        "if_unproven": "as non-functional/scrap"
+      },
+      {
+        "risk": "Incorrect fitment (wrong Toyota model or year)",
+        "proof": "A clear photo of the part number stamped on the casing.",
+        "if_unproven": "as a generic used gearbox"
+      },
+      {
+        "risk": "Missing or damaged input/output connectors",
+        "proof": "A photo of the connector assembly and the pins.",
+        "if_unproven": "as missing connectors"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of any label, sticker or metal plate showing the brand and model.",
+      "Photo of the part number stamped on the gearbox casing.",
+      "Photo of the 22-pin connector to confirm pin count and condition.",
+      "Video showing the gearbox being turned by hand to check for smooth operation."
+    ],
+    "decision": "price",
+    "reason": "The item is known from the photos. What they cannot prove is priced at its worst case until the proof asked for below arrives."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-r4",
+    "task": "testify_read",
+    "latency_ms": 3425,
+    "input_tokens": 1392,
+    "output_tokens": 364,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "abcc2e1e6feac423fb2e9efde1bc6b0d",
+    "error": null
+  }
+}

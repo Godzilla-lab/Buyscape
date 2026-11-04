@@ -1,0 +1,84 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Yellow and black handheld sealing machine on a blue table",
+      "Detachable power-tool-style battery pack attached to the handle",
+      "Two spools of white thread and plastic bags on the table",
+      "Photo 1 rating label reads AC 220V 50/60Hz, 300W, and model GK9-007",
+      "Photo 2 is a manufacturer stock image, not a photo of the actual item"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "handheld sealing machine",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "220V",
+        "verdict": "supported",
+        "evidence": "photo 1 rating label reads AC 220V 50/60Hz"
+      },
+      {
+        "claim": "Rechargeable",
+        "verdict": "unverified",
+        "evidence": "battery pack visible in photos 0 and 1, but charge state and recharge function cannot be confirmed remotely"
+      },
+      {
+        "claim": "Portable",
+        "verdict": "supported",
+        "evidence": "handheld form factor with handle and battery in photos 0 and 1"
+      },
+      {
+        "claim": "Electric High Power",
+        "verdict": "unverified",
+        "evidence": "photo 1 label shows 300W, but actual heating performance is untested"
+      },
+      {
+        "claim": "Sewing Woven",
+        "verdict": "unverified",
+        "evidence": "photo 1 label identifies it as a sealing machine; sewing function is not demonstrated"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery does not hold charge or is dead",
+        "proof": "video of the machine sealing a bag using only the battery pack",
+        "if_unproven": "priced as a corded-only unit with no working battery"
+      },
+      {
+        "risk": "Machine does not heat or seal",
+        "proof": "video of the machine making a seal on a bag",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Thread and accessories are incomplete or non-functional",
+        "proof": "close-up of all accessories and a demonstration",
+        "if_unproven": "priced as machine only, with no value added for accessories"
+      }
+    ],
+    "proof_requests": [
+      "Video of the machine sealing a bag using only the battery",
+      "Close-up photo of the battery label and contacts",
+      "Video of the machine plugged into 220V and sealing"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a handheld 220V sealing machine with a battery pack; even if untested, it can be priced at its worst case as a non-working sealer."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 25592,
+    "input_tokens": 2781,
+    "output_tokens": 3449,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "50cc5928e17b84c3152aad6b7b85be46",
+    "error": null
+  }
+}

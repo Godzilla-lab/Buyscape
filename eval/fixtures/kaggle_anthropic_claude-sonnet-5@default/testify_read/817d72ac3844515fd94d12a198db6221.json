@@ -1,0 +1,87 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Single photo shows a used car headlight/headlamp assembly, black housing with clear lens, amber turn-signal section at left end",
+      "A watermark reading 'PUREGOLD GLOBAL' is overlaid on the image",
+      "Item rests on a worn cloth/towel on what looks like a bare floor or ground",
+      "No brand name, logo, or part number is visible on the housing itself",
+      "Rear of the unit (wiring, bulb sockets, mounting clips) is not shown"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "car headlight assembly",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "All Hyundai and Kia genuine spare parts and accessories are available, new and fairly used",
+        "verdict": "unverifiable_remote",
+        "evidence": "General shop claim, not tied to the item in photo 0; no Hyundai/Kia badge or part number visible"
+      },
+      {
+        "claim": "Original Toyota part, not China copy",
+        "verdict": "contradicted",
+        "evidence": "Seller's own text first advertises Hyundai/Kia parts, then calls this specific item a Toyota part \u2014 internally inconsistent; photo 0 shows no brand marking to confirm either way"
+      },
+      {
+        "claim": "No crack, all clips and brackets complete",
+        "verdict": "unverified",
+        "evidence": "Only the front face is shown; rear mounting clips, brackets, and connector area are not visible in photo 0"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Vehicle fitment (make/model/year) cannot be confirmed, so it may not fit the buyer's car",
+        "proof": "Close-up of embossed part number or OEM sticker on the back of the housing",
+        "if_unproven": "priced as unknown-fitment generic headlight, lowest comparable tier"
+      },
+      {
+        "risk": "Hidden rear damage (cracked mounting tabs, broken clips) not visible from front view",
+        "proof": "Photo of the rear housing and all mounting clips/brackets",
+        "if_unproven": "priced as if clips/brackets are missing or broken"
+      },
+      {
+        "risk": "Authenticity (OEM vs aftermarket/China copy) cannot be verified from this image",
+        "proof": "Clear photo of OEM logo/part number stamped on housing or connector",
+        "if_unproven": "priced as unverified/aftermarket, not as genuine OEM"
+      },
+      {
+        "risk": "Electrical function (bulbs, wiring, connector condition) unknown",
+        "proof": "Short video of the headlight powered on, showing low/high beam and signal working",
+        "if_unproven": "priced as non-working/untested"
+      },
+      {
+        "risk": "Lens condition (scratches, fogging, water ingress) partly obscured by watermark and lighting",
+        "proof": "Well-lit photo from multiple angles without watermark overlay",
+        "if_unproven": "priced as cosmetically average/worst-case"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the back of the headlight showing mounting clips, brackets, and connector",
+      "Close-up of any embossed part number, OEM logo, or sticker on the housing",
+      "Video of the headlight lit up (low beam, high beam, turn signal) to confirm it works",
+      "Confirm make/model/year this headlight fits"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller's own description is self-contradictory (Hyundai/Kia shop claim vs. 'Original Toyota part'), and no brand, part number, or fitment is readable in the single photo, so even a worst-case price cannot be anchored to a specific vehicle application without further proof."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 18299,
+    "input_tokens": 1941,
+    "output_tokens": 1621,
+    "cost_usd": 0.016933,
+    "replayed": false,
+    "fixture_key": "817d72ac3844515fd94d12a198db6221",
+    "error": null
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: Sigma lens held in hand, zoom scale marked 12-24, focus distance window visible, AF/MF switch on barrel, no rear mount or electrical contacts visible.",
+      "Photo 1: Front element shown at an angle with reflections; no obvious scratches visible in this lighting, but coating/fungus at edges cannot be fully judged from a glare shot.",
+      "Photo 2: Barrel text reads 'LENS MADE IN JAPAN' with serial number 1016378; hood is folded/attached; rear mount, contacts, and camera-mount type (EF vs other) are not shown in any photo.",
+      "No photo of rear element, aperture blades, zoom/focus ring action, or any test/sample image.",
+      "No battery, charger, or camera body appears in any photo despite being mentioned in the text; lenses do not have a shutter count or battery."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "wide-angle zoom lens",
+      "brand": "Sigma",
+      "model": "12-24mm (exact f-stop/version unreadable)",
+      "read_from": [
+        "photo 0 barrel markings",
+        "photo 2 barrel text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "US used Sigma 12-24mm lens for Canon camera",
+        "verdict": "unverified",
+        "evidence": "Brand and focal length visible in photo 0 and 2; Canon mount (EF) is not visible in any photo since rear of lens is never shown."
+      },
+      {
+        "claim": "Looks new and in perfect working condition",
+        "verdict": "unverifiable_remote",
+        "evidence": "No test shot, no autofocus/zoom demonstration, no rear element or aperture blade photo."
+      },
+      {
+        "claim": "Shutter count under 5,000",
+        "verdict": "contradicted",
+        "evidence": "This is a lens, not a camera body; lenses do not have a shutter count. No camera body is shown in any photo."
+      },
+      {
+        "claim": "No fungus or scratch on the lens",
+        "verdict": "unverified",
+        "evidence": "Photo 1 shows the front element at a glare-heavy angle; rear element is never shown, so fungus/scratch on either cannot be confirmed."
+      },
+      {
+        "claim": "Original battery and charger, never repaired",
+        "verdict": "contradicted",
+        "evidence": "A lens has no battery or charger; none is shown in any of the 3 photos, and the claim does not match the product type."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Mount type may not actually be Canon EF (could be mismatched or adapted)",
+        "proof": "Clear photo of rear mount showing lens contacts and mount markings",
+        "if_unproven": "priced as mount unconfirmed, treat as generic/unknown-mount risk"
+      },
+      {
+        "risk": "Fungus, haze, or scratches on rear element or internal glass",
+        "proof": "Photo of rear element and a shot with lens held up to light showing internal elements",
+        "if_unproven": "priced as if fungus/haze present (worst case)"
+      },
+      {
+        "risk": "Aperture blades may be sticky, oily, or not closing properly",
+        "proof": "Video clip of aperture stopping down when pressing the manual aperture lever (if present) or mounted-on-camera test",
+        "if_unproven": "priced as aperture mechanism faulty"
+      },
+      {
+        "risk": "Autofocus and image sharpness/centering not demonstrated",
+        "proof": "Sample photos taken with the lens, ideally at multiple focal lengths, plus AF-in-action video",
+        "if_unproven": "priced as autofocus/optical performance unverified (worst case: not working)"
+      },
+      {
+        "risk": "Seller's claims about shutter count/battery suggest a copy-pasted or templated listing, raising doubt about listing accuracy generally",
+        "proof": "Ask seller to confirm these lines were an error and provide lens-specific details (serial match to box/warranty card, actual mount)",
+        "if_unproven": "priced with general distrust discount, treat unconfirmed details as unfavorable"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the rear mount and electrical contacts to confirm Canon EF compatibility",
+      "Photo of the rear element and a light-through shot to check for fungus/haze/scratches",
+      "Video of zoom ring, focus ring, and AF/MF switch in operation, ideally mounted on a camera body",
+      "Sample images shot with the lens at wide and tele end",
+      "Clarification on the shutter count/battery claims, which do not apply to a lens"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a Sigma 12-24mm wide-angle zoom lens, but mount type, optical condition, and mechanical function are unverified from the photos, and some seller claims do not even apply to a lens, so it must be priced at worst case pending further proof."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 29768,
+    "input_tokens": 3077,
+    "output_tokens": 2576,
+    "cost_usd": 0.028755,
+    "replayed": false,
+    "fixture_key": "1b9e4553606e7b24a942beb469a9bb1f",
+    "error": null
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a red iPhone with a notch, displaying the lock screen with time 11:19 and date Monday, 25 March. The screen is on and appears functional.",
+      "Photo 1 shows the back of the same red iPhone, with a dual-camera setup in a square module, Apple logo centered, and no visible damage or cracks.",
+      "The phone has a red finish, consistent with iPhone 14 models.",
+      "No model number, serial number, or storage capacity is visible in either photo.",
+      "The seller claims it is an iPhone 14, 128GB, factory unlocked, and from the UK with physical SIM support."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "iPhone 14",
+      "brand": "Apple",
+      "model": null,
+      "read_from": [
+        "photo 0 screen design (notch, interface)",
+        "photo 1 camera module and back design"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "iPhone 14",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 1 show the design features consistent with iPhone 14: notch, dual-camera module, and back finish."
+      },
+      {
+        "claim": "128GB",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows the storage capacity. The internal settings or box are not visible."
+      },
+      {
+        "claim": "Factory unlocked",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows the settings menu or carrier lock status. Cannot verify remotely."
+      },
+      {
+        "claim": "UK used",
+        "verdict": "unverified",
+        "evidence": "No proof of origin. No UK box, receipt, or IMEI check shown."
+      },
+      {
+        "claim": "Physical SIM",
+        "verdict": "supported",
+        "evidence": "iPhone 14 models support physical SIM (nano-SIM) alongside eSIM. This is standard for the model."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Storage capacity not 128GB",
+        "proof": "Photo of the Settings > General > About section showing storage capacity.",
+        "if_unproven": "Priced as lower storage (e.g., 64GB) or unknown capacity, which reduces value."
+      },
+      {
+        "risk": "Not factory unlocked",
+        "proof": "Photo of Settings > General > About > Carrier Lock or a screenshot showing no carrier restriction.",
+        "if_unproven": "Priced as locked, which reduces value significantly in Lagos market."
+      },
+      {
+        "risk": "Water damage or internal issues",
+        "proof": "Photo of the SIM tray, charging port, and internal diagnostics screen (if available).",
+        "if_unproven": "Priced as potentially damaged, reducing value."
+      },
+      {
+        "risk": "Not genuine iPhone 14",
+        "proof": "Photo of the back with model number (e.g., A2628) or serial number, or a screenshot of Settings > General > About.",
+        "if_unproven": "Priced as possibly counterfeit or wrong model, which reduces value."
+      }
+    ],
+    "proof_requests": [
+      "Photo of Settings > General > About showing model number, serial number, and storage capacity.",
+      "Photo of Settings > General > About > Carrier Lock status.",
+      "Photo of the SIM tray and charging port to check for damage or water exposure.",
+      "Photo of the original box or receipt if available."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identifiable as iPhone 14 by design, but critical claims like storage capacity, unlock status, and authenticity cannot be verified from current photos. Hidden risks like water damage or incorrect storage affect pricing. Proof is needed to price accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 67569,
+    "input_tokens": 2281,
+    "output_tokens": 869,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "d19c1049d15cb638f0434e83a9a02c82",
+    "error": null
+  }
+}

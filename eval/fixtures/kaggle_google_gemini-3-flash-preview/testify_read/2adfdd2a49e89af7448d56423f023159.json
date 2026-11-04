@@ -1,0 +1,94 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail box for an LG DVD Home Theater System.",
+      "The box identifies the model as LHD667.",
+      "The box indicates a power output of 600 W RMS.",
+      "The box features icons for DVD, Bluetooth, Full HD, and Dolby Audio.",
+      "The box shows an illustration of two floor-standing speakers and a central player unit.",
+      "The bottom of the box appears slightly crushed or worn.",
+      "No photos of the actual electronic components or speakers are provided."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DVD Home Theater System",
+      "brand": "LG",
+      "model": "LHD667",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Lg 600w dvd bluetooth home theater system",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "aud 667hd",
+        "verdict": "contradicted",
+        "evidence": "photo 0 box shows model LHD667"
+      },
+      {
+        "claim": "600 w",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "2.2 ch",
+        "verdict": "unverifiable_remote",
+        "evidence": "The box mentions 'Built-in Subwoofers' but does not explicitly state 2.2 channel configuration."
+      },
+      {
+        "claim": "2 speakers",
+        "verdict": "supported",
+        "evidence": "photo 0 box illustration"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different item.",
+        "proof": "Photo of the actual player and speakers outside of the box.",
+        "if_unproven": "priced as an empty box"
+      },
+      {
+        "risk": "The system may not power on or function correctly.",
+        "proof": "Video of the unit powered on and playing audio from a disc or Bluetooth.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Physical damage to speaker cones or the player unit.",
+        "proof": "Close-up photos of the speaker drivers (with grilles off if possible) and the player's front/rear panels.",
+        "if_unproven": "priced as heavily damaged"
+      },
+      {
+        "risk": "Missing essential accessories like the remote control or speaker cables.",
+        "proof": "Photo showing the remote, power cables, and speaker wires.",
+        "if_unproven": "priced as missing all accessories"
+      }
+    ],
+    "proof_requests": [
+      "Photos of the actual speakers and player unit outside of the box.",
+      "A video showing the system powered on and playing sound.",
+      "Photos of the remote control and all included cables.",
+      "Close-up photos of the model/serial number plate on the back of the main unit."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail box is shown. For second-hand goods, photos of the actual items are required to verify their existence, condition, and completeness."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 11080,
+    "input_tokens": 2383,
+    "output_tokens": 2360,
+    "cost_usd": 0.008271,
+    "replayed": false,
+    "fixture_key": "2adfdd2a49e89af7448d56423f023159",
+    "error": null
+  }
+}

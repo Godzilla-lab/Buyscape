@@ -1,0 +1,75 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Two photos show the same stack of flat-plate solar panels (monocrystalline cell pattern, black hexagon-cut cells) leaning against a wall, viewed from similar angles.",
+      "Multiple panels appear stacked side by side, suggesting more than one unit in the shop.",
+      "A semi-transparent watermark reads 'DON KACHI SOLAR ENERGY' and 'POSTED ON JIJI' overlaid on the image - this is the seller's branding/platform watermark, not a manufacturer label on the product.",
+      "No visible manufacturer logo, model number, or wattage/spec sticker on the panel frame or glass.",
+      "No junction box, cabling, or back of panel shown.",
+      "Panels show some dust and frame wear consistent with either new stock sitting in storage or used/removed panels.",
+      "Floor is bare concrete, indoor storage/warehouse setting."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel (monocrystalline)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0",
+        "photo 1"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Very affordable prices",
+        "verdict": "unverifiable_remote",
+        "evidence": "No price, spec sheet, or comparison given in photos or text; this is a subjective sales phrase."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Unknown wattage/power rating, which is the primary price determinant for solar panels",
+        "proof": "Close-up photo of the rear specification sticker showing model, wattage (Wp), voltage, and current ratings",
+        "if_unproven": "cannot be priced at any tier without this; wattage spans too wide a price range to assume worst case"
+      },
+      {
+        "risk": "Panel may be used/pulled rather than new, affecting output and lifespan",
+        "proof": "Clear photo of full panel back and frame corners, plus any visible date-of-manufacture or install marks",
+        "if_unproven": "priced as used/worn condition"
+      },
+      {
+        "risk": "Actual power output unverified - cracks or delamination not visible from this angle/distance",
+        "proof": "Multimeter or solar panel tester reading under sunlight, shown in photo or video, plus close-up of full cell surface without glare",
+        "if_unproven": "priced as not working / non-functional"
+      },
+      {
+        "risk": "Ambiguous whether listing covers one panel or the whole stack shown",
+        "proof": "Seller confirmation in writing of quantity included at the stated price",
+        "if_unproven": "priced as a single unit only"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the rear specification label showing brand, model, and wattage (Wp)",
+      "Video or photo of a multimeter test showing voltage/current output under sunlight",
+      "Clear photo of the full panel back and all four corners for crack/delamination check",
+      "Confirmation of exact quantity included in the offer"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Solar panel pricing depends heavily on wattage/model, and no specification label, logo, or rating is visible in either photo, so even a worst-case price cannot be set without that missing shot."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 19647,
+    "input_tokens": 3663,
+    "output_tokens": 1642,
+    "cost_usd": 0.020587,
+    "replayed": false,
+    "fixture_key": "2851aa4c017d1da71675d5e3ff43fd16",
+    "error": null
+  }
+}

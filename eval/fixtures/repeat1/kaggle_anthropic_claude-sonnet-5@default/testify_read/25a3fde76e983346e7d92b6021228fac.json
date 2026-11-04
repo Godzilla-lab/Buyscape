@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 and 1 show a full-black solar panel (black cells, black frame) standing upright outdoors on bare ground against a wall, with other panels leaning in the background.",
+      "No visible manufacturer label, model number, wattage sticker, or junction box on the panel in either photo.",
+      "Watermark text 'Innoson Global Group' and 'POSTED ON JIJI' is a listing-platform/reseller watermark, not a manufacturer marking on the panel itself.",
+      "Panel surface shows reflections/glare obscuring parts of the cell surface, so hairline cracks or micro-damage cannot be ruled out.",
+      "No scale reference, no backside shot, no connector/cable shot, no multimeter or output test shown."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0",
+        "photo 1"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "High Quality Solar Panels, Inverters, Lithium&Tubular Batteries, Charge...",
+        "verdict": "unverifiable_remote",
+        "evidence": "General ad text covering multiple product lines; no photo ties 'high quality' to this specific panel's specs or performance."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Wattage/power rating unknown, which is the primary price driver for a solar panel",
+        "proof": "Close-up photo of the rear nameplate sticker showing wattage, voltage, and model",
+        "if_unproven": "cannot be priced at all without this, since worst-case price band is undefined"
+      },
+      {
+        "risk": "Panel could be used/refurbished rather than new despite 'high quality' claim",
+        "proof": "Close-up of frame corners and junction box for wear, plus any manufacture date sticker",
+        "if_unproven": "priced as used/refurbished"
+      },
+      {
+        "risk": "Hidden micro-cracks or cell damage obscured by glare in photos",
+        "proof": "Photo taken at an angle without glare, or an electroluminescence/flash test clip",
+        "if_unproven": "priced as having possible cell damage"
+      },
+      {
+        "risk": "Output not verified; panel could be dead or underperforming",
+        "proof": "Video of panel connected to a multimeter in sunlight showing voltage/current",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Connectors/cables could be missing or damaged",
+        "proof": "Photo of the junction box and MC4 connectors on the rear",
+        "if_unproven": "priced as missing/damaged connectors"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of the rear nameplate sticker (wattage, voltage, model, serial)",
+      "Photo or video of the panel's backside showing junction box and connectors",
+      "Multimeter test video in daylight showing open-circuit voltage/current",
+      "Clear glare-free photo of the full cell surface for crack inspection"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The panel's wattage/model, which sets even a worst-case price band for a solar panel, is not readable in either photo and no nameplate is shown."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 15623,
+    "input_tokens": 2712,
+    "output_tokens": 1466,
+    "cost_usd": 0.016925,
+    "replayed": false,
+    "fixture_key": "25a3fde76e983346e7d92b6021228fac",
+    "error": null
+  }
+}

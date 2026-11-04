@@ -1,0 +1,90 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "White countertop microwave oven with two mechanical control dials on the right",
+      "Door opens to the left; glass turntable visible inside",
+      "Interior appears empty and white; warning label visible at top of cavity",
+      "No brand name or model number is legible on the front, door, or control panel in any photo",
+      "Watermark 'POSTED ON JIJI' and 'YULGO ENTERPRISES' appears across the images",
+      "Seller text describes it as 'UK used George Home 20L Microwave oven'"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "microwave oven",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "George Home brand",
+        "verdict": "unverified",
+        "evidence": "No brand name is readable on the item in photos 0-3"
+      },
+      {
+        "claim": "20L capacity",
+        "verdict": "unverified",
+        "evidence": "No capacity label or rating plate is legible in any photo"
+      },
+      {
+        "claim": "UK used",
+        "verdict": "unverifiable_remote",
+        "evidence": "Origin and prior use cannot be determined from photos alone"
+      },
+      {
+        "claim": "Microwave oven",
+        "verdict": "supported",
+        "evidence": "Photos 0-3 clearly show a countertop microwave oven with door, cavity, turntable, and control dials"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Microwave does not power on or heat",
+        "proof": "Video of the unit running with a cup of water inside, showing the light on and turntable rotating",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Door seal or latch is damaged, preventing safe operation",
+        "proof": "Close-up photo of the door closed and the latch/seal area",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Turntable does not rotate or is missing",
+        "proof": "Video showing the glass turntable rotating during operation",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Interior has rust, burns, or damage not visible in current lighting",
+        "proof": "Well-lit photo of the interior ceiling, walls, and floor of the cavity",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Actual capacity is not 20L",
+        "proof": "Photo of the capacity or rating label",
+        "if_unproven": "as unknown/smaller capacity"
+      }
+    ],
+    "proof_requests": [
+      "Video of the microwave running with water inside",
+      "Photo of the rating/capacity label",
+      "Close-up of the door seal and latch"
+    ],
+    "decision": "price",
+    "reason": "The item is clearly a countertop microwave oven, so it can be priced at its worst case as a non-working generic unit; brand and capacity claims are unproven and do not block pricing."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 9587,
+    "input_tokens": 3180,
+    "output_tokens": 1875,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "571c77ad0f68745dd7f73df4e44335bf",
+    "error": null
+  }
+}

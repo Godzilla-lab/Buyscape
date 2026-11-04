@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Multiple dark solar panels with white frames installed in rows on a reddish corrugated metal roof",
+      "Watermark text 'VC SOLAR ELECTRICAL GLOBAL' across the panel surfaces",
+      "No readable brand, model, or wattage label visible on the panels",
+      "Background shows hilly terrain, trees, buildings, and parked vehicles"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panels",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "520w",
+        "verdict": "unverified",
+        "evidence": "No wattage label or specification plate is readable in photo 0"
+      },
+      {
+        "claim": "mono",
+        "verdict": "unverified",
+        "evidence": "Cell type cannot be confirmed from an exterior roof photo in photo 0"
+      },
+      {
+        "claim": "solar panels",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows installed photovoltaic panels"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual wattage is not 520W",
+        "proof": "Close-up photo of the specification label on the back of one panel",
+        "if_unproven": "as lower-wattage or non-functioning panels"
+      },
+      {
+        "risk": "Panels have cracks, delamination, or hot spots",
+        "proof": "Close-up photos of each panel surface or an electroluminescence image",
+        "if_unproven": "as damaged panels"
+      },
+      {
+        "risk": "Panels produce no electrical output",
+        "proof": "Video showing open-circuit voltage and short-circuit current in sunlight",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Age and degradation unknown",
+        "proof": "Photo of manufacturing date sticker or purchase receipt",
+        "if_unproven": "as aged or degraded panels"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of the specification label on the back of one panel",
+      "Video of the panels producing voltage and current in sunlight",
+      "Close-up photos of the panel surfaces for cracks or damage"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as solar panels from the photo; the 520W and monocrystalline claims are unproven, so it is priced at worst case as non-working or unknown-output panels pending label and output proof."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 13322,
+    "input_tokens": 1714,
+    "output_tokens": 2193,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "4d0a47b91c835cd704ef56204d72385a",
+    "error": null
+  }
+}

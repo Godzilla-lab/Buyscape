@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail packaging for an electric kettle.",
+      "The brand 'RAF' and model 'R.7522' are clearly printed on the box.",
+      "The box indicates a 1.5L capacity and 1500W power rating.",
+      "An analog thermometer is shown on the kettle illustration and mentioned in text on the box.",
+      "The box features icons for a 360-degree swivel base, LED lamp, and auto-off function.",
+      "The actual kettle is not visible outside of the box."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "electric kettle",
+      "brand": "RAF",
+      "model": "R.7522",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "equipped with a thermometer",
+        "verdict": "supported",
+        "evidence": "photo 0 box illustration and text"
+      },
+      {
+        "claim": "low energy consumption",
+        "verdict": "unverifiable_remote",
+        "evidence": "Box specifies 1500W, which is standard, but actual efficiency cannot be verified remotely."
+      },
+      {
+        "claim": "360 degree swivel base",
+        "verdict": "supported",
+        "evidence": "photo 0 box icon"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The kettle may be missing from the box or physically damaged.",
+        "proof": "A photo of the actual kettle outside of the packaging.",
+        "if_unproven": "priced as missing or broken"
+      },
+      {
+        "risk": "The heating element or thermostat (auto-off) may be faulty.",
+        "proof": "A video showing the kettle boiling water and automatically switching off.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual kettle outside the box to verify condition.",
+      "Video of the kettle plugged in and boiling water.",
+      "Photo of the base and the power plug."
+    ],
+    "decision": "price",
+    "reason": "The brand and model are clearly identified from the packaging. The item is priced at its worst-case value (non-functional/parts) because the actual unit is not shown."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 13626,
+    "input_tokens": 2393,
+    "output_tokens": 2413,
+    "cost_usd": 0.008436,
+    "replayed": false,
+    "fixture_key": "2f04863dfd910797e6c35b3d7213c667",
+    "error": null
+  }
+}

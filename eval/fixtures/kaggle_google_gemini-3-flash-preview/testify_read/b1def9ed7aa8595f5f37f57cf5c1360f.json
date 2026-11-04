@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the front of a retail box for an HP Laser 107a printer.",
+      "The actual printer unit is not visible in the photo.",
+      "The box appears to be in a storage or retail environment, placed on top of a 'Blue Gate' box.",
+      "A watermark 'POSTED ON Jiji BLESSED STAN PAUL' is visible across the center."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laser printer",
+      "brand": "HP",
+      "model": "Laser 107a",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Hp Laserjet printer m107a",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "single printer",
+        "verdict": "supported",
+        "evidence": "photo 0 box illustration shows a single-function unit without a scanner"
+      },
+      {
+        "claim": "black and white",
+        "verdict": "supported",
+        "evidence": "photo 0 box shows a single black toner dot icon"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, older, or broken model.",
+        "proof": "A photo of the actual printer unit outside of the box.",
+        "if_unproven": "priced as an empty box"
+      },
+      {
+        "risk": "The printer may have internal damage or missing components like the toner cartridge.",
+        "proof": "Photos of the printer with the toner access door open and a printed supplies status page.",
+        "if_unproven": "priced as missing toner and internal components"
+      },
+      {
+        "risk": "The printer may not be functional or have poor print quality (streaks, fading).",
+        "proof": "A video of the printer powering on and printing a clean test page.",
+        "if_unproven": "priced as non-functional/parts only"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual printer unit out of the box.",
+      "Photo of the label on the back/bottom of the printer showing the serial number and model.",
+      "Video of the printer printing a test page.",
+      "Photo of the printed test page to verify print quality."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail box is pictured. The actual printer must be seen to confirm its existence, physical condition, and functionality before any value can be assigned."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 15945,
+    "input_tokens": 2357,
+    "output_tokens": 3549,
+    "cost_usd": 0.011825,
+    "replayed": false,
+    "fixture_key": "b1def9ed7aa8595f5f37f57cf5c1360f",
+    "error": null
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Front view of a black Dell laptop with a backlit keyboard, screen displaying a geometric wallpaper with a 'G' logo, and stickers for NVIDIA GeForce RTX and Intel Core i9 on the palm rest.",
+      "Photo 1: Bottom view of the laptop showing a large vented area, screws, and a label with regulatory marks and a barcode on the right side.",
+      "Photo 2: Windows 'About' system settings screen showing: Processor: 13th Gen Intel(R) Core(TM) i9-13900HX, Installed RAM: 32.0 GB, Graphics card: NVIDIA GeForce RTX 4070 Laptop GPU (8 GB), Storage: 932 GB, Device name: DESKTOP-23RM39A, Model: Dell G16 7630, Product ID: 00330-81623-74526-AA842, Installed on: 8/5/2026.",
+      "The screen in photo 2 shows a future date (8/5/2026) for installation, which is impossible and suggests manipulation or a fake screenshot."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "gaming laptop",
+      "brand": "Dell",
+      "model": "G16 7630",
+      "read_from": [
+        "photo 2 screen: 'Dell G16 7630'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Dell g16 7630 gaming laptop rtx 4070",
+        "verdict": "supported",
+        "evidence": "Photo 2 screen shows 'Dell G16 7630' and 'NVIDIA GeForce RTX 4070 Laptop GPU (8 GB)'"
+      },
+      {
+        "claim": "13th gen intel core i9-13900hx 24-cores",
+        "verdict": "supported",
+        "evidence": "Photo 2 screen shows '13th Gen Intel(R) Core(TM) i9-13900HX'"
+      },
+      {
+        "claim": "direct us import",
+        "verdict": "unverifiable_remote",
+        "evidence": "No proof in photos; seller's claim only."
+      },
+      {
+        "claim": "Installed on 8/5/2026",
+        "verdict": "contradicted",
+        "evidence": "Photo 2 shows an impossible future date; this is a red flag for a fake screenshot."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The system information screenshot is fake or manipulated, especially the installation date of 8/5/2026.",
+        "proof": "A real screenshot of the 'About' page taken on the current date, or a video showing the system info live.",
+        "if_unproven": "Priced as a non-functional or non-existent item, as the core identity claim is suspect."
+      },
+      {
+        "risk": "The laptop may be stolen, gray market, or have a tampered serial number or warranty.",
+        "proof": "A clear photo of the serial number sticker on the bottom (photo 1 shows a label but not readable) and a warranty check via Dell's website.",
+        "if_unproven": "Priced as a used item with no warranty, which reduces value significantly."
+      },
+      {
+        "risk": "The laptop may have physical damage or wear not visible in the photos, such as screen dead pixels, hinge issues, or keyboard damage.",
+        "proof": "A video showing the laptop being opened, closed, and keyboard pressed, and a close-up of the screen with a white background to check for dead pixels.",
+        "if_unproven": "Priced as having potential hidden defects, which lowers the value."
+      }
+    ],
+    "proof_requests": [
+      "A real-time video of the 'About' page showing the current date.",
+      "A clear photo of the serial number sticker on the bottom of the laptop.",
+      "A video showing the laptop being opened, closed, and keyboard pressed, and a screen test with a white background."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The system information screenshot contains an impossible future date, which strongly suggests it is fake. Without proof of the laptop's real state and identity, it cannot be priced. The model and specs are claimed but must be verified to avoid fraud."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 79619,
+    "input_tokens": 2809,
+    "output_tokens": 999,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "fdd6deb6f9265ba0fc93551690bb1e50",
+    "error": null
+  }
+}

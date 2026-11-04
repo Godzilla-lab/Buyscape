@@ -1,0 +1,79 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: A cardboard shipping box printed with 'Nikon D750' and a separate 'Nikkor Lens 50' box, sitting on an orange sofa. A stock product image (gimbal with camera) is visible in the background, not the actual item.",
+      "Photo 1: Open outer box showing two white manual boxes labeled 'Nikon D750 User's Manual' and a French-language manual, plus more branded boxes in the background (Zhiyun gimbal box visible).",
+      "Photo 2: Interior of a box showing two items wrapped in bubble wrap, shapes not identifiable as a camera body or any specific part.",
+      "No actual camera body, lens, LCD screen, serial number plate, or power-on test is visible in any photo.",
+      "Watermark 'OLAJIDE AMOS BISHOP' overlaid on all images, consistent with reused/stock marketing photos rather than photos of the seller's own unit."
+    ],
+    "identity": {
+      "status": "unknown",
+      "kind": "DSLR camera body",
+      "brand": "Nikon",
+      "model": null,
+      "read_from": [
+        "photo 0 box text 'D750'",
+        "photo 1 manual box text 'D750'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "American used Nikon D750 Body, clean and pure as new, working perfectly",
+        "verdict": "contradicted",
+        "evidence": "Photos show only sealed/bubble-wrapped boxes, never the camera body itself, so 'clean, as new, working perfectly' cannot be observed; also no camera is visible at all to confirm it is even present."
+      },
+      {
+        "claim": "The model is D850 (per seller's own added text)",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 and photo 1 boxes are printed 'D750', not D850, directly contradicting the seller's own follow-up statement."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Model identity is internally inconsistent (seller says D750 in title, D850 in body text; box says D750)",
+        "proof": "A clear photo of the camera body's top plate and bottom serial plate showing the actual model name engraved on the camera, not the box",
+        "if_unproven": "priced as unverified/lowest-tier body, cannot be priced as a confirmed D750 or D850"
+      },
+      {
+        "risk": "No photo shows the actual camera, only boxes and bubble wrap; item may be missing, empty box, or a different/lower item",
+        "proof": "Unboxing video or photo of the camera body unwrapped, powered on, showing lens mount, screen, and shutter count",
+        "if_unproven": "priced at worst case as non-functional/unverified unit, same as 'not working'"
+      },
+      {
+        "risk": "Shutter count and sensor condition unknown (critical for DSLR pricing)",
+        "proof": "Photo/screenshot of shutter count from camera menu or a sample test shot",
+        "if_unproven": "priced as high-shutter-count/worst case"
+      },
+      {
+        "risk": "'American used' import claim unverifiable, affects warranty/grey-market status",
+        "proof": "Photo of import/customs paperwork or purchase receipt with US retailer info",
+        "if_unproven": "treated as ungraded import, no premium applied"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the camera body itself (not the box) showing the top LCD, lens mount, and model name plate",
+      "Photo/video of camera powered on with a test shot or menu screen showing shutter count",
+      "Clarification resolving the D750 vs D850 discrepancy, with the serial number visible",
+      "Photo of the bottom serial plate matching the model claimed"
+    ],
+    "decision": "fraud_suspected",
+    "reason": "Seller's own text contradicts itself on the model (D750 vs D850), and no photo shows the actual camera body, only boxes and bubble-wrapped contents with stock/marketing imagery and a watermark, a pattern consistent with a reused-image or non-existent-item scam.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 17782,
+    "input_tokens": 4986,
+    "output_tokens": 1556,
+    "cost_usd": 0.025532,
+    "replayed": false,
+    "fixture_key": "c6d3965863b2c8fd590c42654ac81aff",
+    "error": null
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Closed laptop lid with a pattern of small cutouts and a watermark 'GLORY LOVE'. No visible brand or model on lid.",
+      "Photo 1: Open laptop showing screen with 'Bubu & Co' text, ASUS logo below screen, rose gold chassis, black keyboard. Stickers on palm rest: Intel, ASUS Laptop, and others. Power cable connected.",
+      "Photo 2: Similar view to photo 1, screen shows 'Bubu & Co' in white text, ASUS logo visible, same stickers on palm rest. Cables and power strip visible under desk.",
+      "The laptop appears to be powered on in both photos 1 and 2, as the screen is lit and Windows taskbar is visible.",
+      "No visible damage to screen or keyboard in photos, but no close-up of screen for dead pixels or cracks.",
+      "Battery status is not visible in any photo; seller states 'Battery is bad'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "ASUS",
+      "model": "E410M",
+      "read_from": [
+        "seller's text: 'AsusE410M notebook pc'",
+        "photo 1: ASUS logo below screen",
+        "photo 2: ASUS logo below screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "AsusE410M notebook pc",
+        "verdict": "supported",
+        "evidence": "Seller's text and ASUS logo visible in photo 1 and photo 2. Model name 'E410M' is stated by seller and consistent with ASUS branding."
+      },
+      {
+        "claim": "4gb ram",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows RAM or system specs. Cannot verify from photos alone."
+      },
+      {
+        "claim": "128gb SSD",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows storage or system specs. Cannot verify from photos alone."
+      },
+      {
+        "claim": "Intel celeron",
+        "verdict": "supported",
+        "evidence": "Intel sticker visible on palm rest in photo 1 and photo 2. While not specifying 'Celeron', Intel branding is present and consistent with seller's claim."
+      },
+      {
+        "claim": "Battery is bad",
+        "verdict": "unverified",
+        "evidence": "Seller states battery is bad, but no photo shows battery or charging status. Laptop is plugged in, so battery condition cannot be confirmed."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery is not functional or has very low capacity",
+        "proof": "Photo of battery indicator on screen or a video showing laptop running on battery for 5 minutes.",
+        "if_unproven": "priced as not working (battery dead)"
+      },
+      {
+        "risk": "RAM is less than 4GB or not functioning properly",
+        "proof": "Screenshot of system properties showing installed RAM or a video of system running memory diagnostic tool.",
+        "if_unproven": "priced as 2GB or less RAM"
+      },
+      {
+        "risk": "SSD is less than 128GB or not functioning properly",
+        "proof": "Screenshot of disk management or file explorer showing drive size and health.",
+        "if_unproven": "priced as 64GB or less SSD"
+      },
+      {
+        "risk": "Screen has dead pixels, cracks, or backlight issues",
+        "proof": "Close-up photo of screen with solid white and black backgrounds.",
+        "if_unproven": "priced as screen with minor defects"
+      },
+      {
+        "risk": "Keyboard or touchpad has dead keys or unresponsive areas",
+        "proof": "Video of typing all keys and using touchpad.",
+        "if_unproven": "priced as keyboard with minor issues"
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of system properties showing RAM and storage details.",
+      "Video of laptop running on battery for 5 minutes.",
+      "Close-up photo of screen with solid white and black backgrounds.",
+      "Video of typing all keys and using touchpad."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and brand are supported, but key specifications (RAM, SSD, battery) cannot be verified from photos. Hidden risks related to battery, storage, RAM, screen, and keyboard must be proven before pricing. Without proof, the item cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 81295,
+    "input_tokens": 3312,
+    "output_tokens": 1001,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "7418f8763eb99ad71316e2859194393d",
+    "error": null
+  }
+}

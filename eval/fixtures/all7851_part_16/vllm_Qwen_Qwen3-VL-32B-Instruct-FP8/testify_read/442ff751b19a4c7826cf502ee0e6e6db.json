@@ -1,0 +1,86 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Front view of a smartphone showing lock screen with time 7:29, date Wed 14 Oct, carrier 'Airtel Nig', battery at 98%. Screen has visible cracks and scratches, especially on the top left and right edges. Watermark 'POSTED ON JIJI SOLATY OLAJUMOKE' is overlaid.",
+      "Photo 1: Back view of the phone, dark blue or purple color, triple camera setup in a square module, a blue sticker with '256G' on top right, and a large white rectangular sticker covering the center back. Watermark same as photo 0.",
+      "Photo 2: Front view identical to photo 0, same screen, same cracks and scratches, same watermark. Carrier now shows 'Nigeria'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "smartphone",
+      "brand": "Apple",
+      "model": "iPhone 13 Pro",
+      "read_from": [
+        "photo 1 camera module design (three lenses in square, with LiDAR sensor) and overall back design",
+        "photo 0 and 2: notch shape, lock screen UI, and iOS interface elements"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "It\u2019s in good condition",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 and 2 show multiple visible cracks and scratches on the front screen, especially at the top corners. This contradicts 'good condition'."
+      },
+      {
+        "claim": "Camera very sharp",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows camera output or sample images. The camera hardware is visible, but performance cannot be assessed remotely."
+      },
+      {
+        "claim": "Face ID working",
+        "verdict": "unverified",
+        "evidence": "No photo or video shows Face ID in use. The screen is on, but no unlock or authentication attempt is shown."
+      },
+      {
+        "claim": "No bad conditions",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 and 2 show screen damage (cracks/scratches), which is a bad condition. The large white sticker on the back (photo 1) may also indicate damage or repair, but it's not visible."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Screen damage affecting usability or display quality",
+        "proof": "Close-up photo of the screen showing the cracks and scratches, ideally with a flashlight to check for dead pixels or touch responsiveness.",
+        "if_unproven": "priced as damaged screen, which reduces value significantly"
+      },
+      {
+        "risk": "Back glass damage or repair under the white sticker",
+        "proof": "Photo of the back without the white sticker, or a close-up showing the edges and surface under the sticker.",
+        "if_unproven": "priced as potentially damaged or repaired back, which may affect structural integrity or water resistance"
+      },
+      {
+        "risk": "Face ID not working despite claim",
+        "proof": "Video clip showing Face ID unlocking the phone from a locked state.",
+        "if_unproven": "priced as not working, which reduces value significantly"
+      },
+      {
+        "risk": "Water damage or internal issues not visible",
+        "proof": "Photo of the SIM tray, charging port, and speaker grills to check for corrosion or moisture residue.",
+        "if_unproven": "priced as potentially water-damaged, which reduces value significantly"
+      }
+    ],
+    "proof_requests": [
+      "Video showing Face ID unlocking the phone.",
+      "Close-up photo of the screen damage, especially the cracks.",
+      "Photo of the back without the white sticker.",
+      "Photo of the charging port and SIM tray to check for water damage."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The phone is identifiable as an iPhone 13 Pro, but the screen damage is visible and contradicts the seller's claim of 'good condition'. Key functional claims like Face ID and camera performance cannot be verified remotely. Hidden risks like back damage, water damage, or internal issues are not visible. A worst-case price cannot be confidently assigned without proof of functionality and full condition."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 78492,
+    "input_tokens": 2787,
+    "output_tokens": 939,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "442ff751b19a4c7826cf502ee0e6e6db",
+    "error": null
+  }
+}

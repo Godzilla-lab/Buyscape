@@ -1,0 +1,75 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "A blue gas cylinder standing in a tiled corner.",
+      "A regulator and a red hose are attached to the valve.",
+      "Significant paint peeling and surface rust are visible on the lower half of the cylinder.",
+      "The photos 0 and 1 appear to be nearly identical shots of the same item.",
+      "A watermark 'POSTED ON JIJI MAYOR' is present on both images."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "12.5kg gas cylinder",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Blue",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "12.5 kg",
+        "verdict": "unverified",
+        "evidence": "The size is consistent with a 12.5kg cylinder, but the weight stamp is not visible in the photos."
+      },
+      {
+        "claim": "gas for sale",
+        "verdict": "unverified",
+        "evidence": "There is no way to verify if the cylinder contains gas or is empty from a photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The cylinder may be past its expiry date, making it unsafe and illegal to refill.",
+        "proof": "A clear photo of the date stamps on the handle or shroud of the cylinder.",
+        "if_unproven": "as expired/scrap value"
+      },
+      {
+        "risk": "The visible rust may be deep (pitting), compromising the structural integrity of the pressure vessel.",
+        "proof": "Close-up photos of the rusted areas after being cleaned.",
+        "if_unproven": "as requiring professional refurbishment and testing"
+      },
+      {
+        "risk": "The cylinder may be empty despite the seller's description.",
+        "proof": "A photo of the cylinder placed on a weighing scale.",
+        "if_unproven": "as empty"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the manufacturing and expiry date stamps on the handle/shroud.",
+      "Photo of the cylinder on a weighing scale to confirm if it is full.",
+      "Close-up photos of the rusted sections to check for deep corrosion.",
+      "A video showing a soap-bubble test on the valve to ensure there are no leaks."
+    ],
+    "decision": "price",
+    "reason": "The item is a standard 12.5kg gas cylinder. Although the condition is poor with visible rust and the expiry date is unknown, it can be priced at its worst-case value as an empty, rusted, and potentially expired unit."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 9871,
+    "input_tokens": 3430,
+    "output_tokens": 1982,
+    "cost_usd": 0.007661,
+    "replayed": false,
+    "fixture_key": "80c76c59328e911c4f443182ef3a6ad2",
+    "error": null
+  }
+}

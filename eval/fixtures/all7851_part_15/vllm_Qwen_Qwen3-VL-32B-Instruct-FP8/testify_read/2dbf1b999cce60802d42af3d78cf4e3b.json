@@ -1,0 +1,99 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Open laptop showing ThinkPad logo on palm rest, red TrackPoint, and screen displaying Windows desktop with airplane wallpaper. 'T14' visible on bottom right of screen bezel.",
+      "Photo 1: Closed laptop lid with ThinkPad logo and a white sticker with serial number and model info. The sticker is partially legible: '202407', 'JMG', 'T14', '1.540'.",
+      "Photo 2: Multiple closed laptops on a couch, all with ThinkPad logos. One has a white sticker similar to photo 1. The arrangement suggests multiple units for sale, possibly a bulk listing.",
+      "All photos have a watermark: 'POSTED ON JIJI CIMLET INNOVATION'.",
+      "The screen in photo 0 is on and appears functional. Keyboard and trackpad are visible and appear intact.",
+      "No visible damage to the chassis in photos 1 and 2, but no close-up of hinges, ports, or underside."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Lenovo",
+      "model": "ThinkPad T14 Gen 1",
+      "read_from": [
+        "photo 0 screen bezel (T14)",
+        "photo 1 sticker (T14)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Lenovo Thinkpad T14 Gen 1",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows 'T14' on screen bezel; photo 1 shows 'T14' on sticker. ThinkPad logo visible on all photos."
+      },
+      {
+        "claim": "Amd ryzen 5 processor",
+        "verdict": "unverified",
+        "evidence": "No visible CPU label or system specs in photos. BIOS or system info screen not shown."
+      },
+      {
+        "claim": "256ssd 8gb ram",
+        "verdict": "unverified",
+        "evidence": "No visible storage or RAM labels. No system information screen shown. Cannot verify from photos."
+      },
+      {
+        "claim": "10th generation",
+        "verdict": "unverifiable_remote",
+        "evidence": "The term '10th generation' is ambiguous. It may refer to the processor generation, but AMD Ryzen 5 is not Intel's 10th gen. No system info to confirm. Seller may be misusing terminology."
+      },
+      {
+        "claim": "14inches screen",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows a 14-inch screen, consistent with T14 model. 'T14' model designation implies 14-inch screen."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Processor is not AMD Ryzen 5 or is a lower-tier model",
+        "proof": "Photo of BIOS screen or Windows system info showing CPU model.",
+        "if_unproven": "Priced as if it has a generic or lower-tier processor, which reduces value."
+      },
+      {
+        "risk": "RAM or SSD is not 8GB or 256GB, or is faulty",
+        "proof": "Photo of system information screen showing RAM and storage details, or a diagnostic tool output.",
+        "if_unproven": "Priced as if it has less than 8GB RAM or smaller SSD, or as non-functional storage."
+      },
+      {
+        "risk": "Laptop has physical damage not visible in photos (e.g., hinge wear, cracked screen, port damage)",
+        "proof": "Close-up photos of hinges, ports, screen edges, and underside.",
+        "if_unproven": "Priced as if it has moderate wear or damage, reducing value."
+      },
+      {
+        "risk": "Battery health is poor or battery is missing",
+        "proof": "Photo of battery status in Windows or BIOS, or a video showing battery charge cycle.",
+        "if_unproven": "Priced as if battery is non-functional or degraded, which affects usability."
+      },
+      {
+        "risk": "Multiple units listed, but only one is available or condition varies",
+        "proof": "Confirmation from seller that all units are identical and available, or photos of each unit's serial number and condition.",
+        "if_unproven": "Priced as if only one unit is available or condition is inconsistent, reducing value."
+      }
+    ],
+    "proof_requests": [
+      "Photo of BIOS or Windows system information screen showing CPU, RAM, and SSD details.",
+      "Close-up photos of all ports, hinges, and underside of the laptop.",
+      "Photo of battery health or charge cycle in Windows.",
+      "Confirmation that all units shown are available and in identical condition."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identifiable as ThinkPad T14 Gen 1, but critical specs like CPU, RAM, and SSD are unverified. Physical condition and battery health are not fully visible. Multiple units are shown, raising questions about availability and consistency. Proof is needed to confirm specs and condition before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 91049,
+    "input_tokens": 2594,
+    "output_tokens": 1131,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "2dbf1b999cce60802d42af3d78cf4e3b",
+    "error": null
+  }
+}

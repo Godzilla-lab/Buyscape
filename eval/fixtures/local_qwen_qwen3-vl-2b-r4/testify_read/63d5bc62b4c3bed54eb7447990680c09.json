@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r4",
+  "response": {
+    "observations": [
+      "Photo 0 shows a single tire mounted on a steel rim with a 5-hole pattern.",
+      "Photo 1 shows a second tire on the same rim, with the tread visible.",
+      "The sidewall of the tire in photo 1 is embossed with 'ACTIMAX ARCTIC' and 'GENERA'.",
+      "The tire size '215/60/R16' is visible on the sidewall in photo 1.",
+      "The tire in photo 0 is not clearly legible.",
+      "A watermark 'STACEY DAVIES' is present on both photos."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "tire and rim",
+      "brand": "Actimax",
+      "model": "Arctic",
+      "read_from": [
+        "photo 1 sidewall"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "2units plus rim",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows one tire and photo 1 shows a second tire on the same rim."
+      },
+      {
+        "claim": "Altimax Arctic Tyre 215/60/R16",
+        "verdict": "supported",
+        "evidence": "Photo 1 sidewall shows this text."
+      },
+      {
+        "claim": "Others available with no Rim carries",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a seller's statement about other units; no photo shows it."
+      },
+      {
+        "claim": "215/45/ R17 also...",
+        "verdict": "unverified",
+        "evidence": "No photo shows this; it is the seller's word only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The tire in photo 0 may be a different size or brand than the one in photo 1.",
+        "proof": "A clear photo of the sidewall of the tire in photo 0.",
+        "if_unproven": "priced as a generic tire of the same size as the one in photo 1."
+      },
+      {
+        "risk": "The tire may be expired or have a low tread depth.",
+        "proof": "A photo of the 4-digit DOT code on the sidewall.",
+        "if_unproven": "priced as scrap or used with a high mileage claim."
+      },
+      {
+        "risk": "The rim may be a different brand or size than the tire.",
+        "proof": "A photo of the rim's sidewall and the tire size stamped on it.",
+        "if_unproven": "priced as a generic steel rim."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the sidewall of the tire in photo 0 to confirm the size and brand.",
+      "Photo of the rim's sidewall to confirm the brand and size.",
+      "Photo of the 4-digit DOT code on the tire to check the manufacture date."
+    ],
+    "decision": "price",
+    "reason": "The item is known from the photos. What they cannot prove is priced at its worst case until the proof asked for below arrives."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r4",
+    "task": "testify_read",
+    "latency_ms": 6482,
+    "input_tokens": 2116,
+    "output_tokens": 554,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "63d5bc62b4c3bed54eb7447990680c09",
+    "error": null
+  }
+}

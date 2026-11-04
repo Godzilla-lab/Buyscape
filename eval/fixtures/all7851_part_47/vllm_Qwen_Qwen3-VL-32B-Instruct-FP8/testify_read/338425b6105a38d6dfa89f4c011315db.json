@@ -1,0 +1,85 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the back of a blue smartphone with a white label containing technical details.",
+      "The label in photo 0 clearly states 'Model: iPhone 12, 64 GB, T-Mobile (unlocked)', 'Color: Blue', 'iOS 26.1', 'IMEI/ESN: Unfriised', 'Firmware: OFF', and 'Functionality: PASS'.",
+      "The label also includes a serial number: DNPB212WQXY1.",
+      "Photo 1 shows the front of the same blue smartphone with a black, off screen.",
+      "The phone has a dual-camera setup on the back, consistent with iPhone 12 design.",
+      "The phone appears to be held in a hand, with a decorative background featuring large black and white letters.",
+      "No visible damage to the phone's exterior is apparent in either photo.",
+      "The seller's text claims the phone is 'working perfectly' and has a 'physical sim'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "iPhone 12",
+      "brand": "Apple",
+      "model": "iPhone 12",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "iPhone 12 64gb",
+        "verdict": "supported",
+        "evidence": "Photo 0 label clearly states 'Model: iPhone 12, 64 GB'."
+      },
+      {
+        "claim": "physical sim",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows the SIM tray or SIM card slot. The label does not mention SIM type. The phone is labeled 'T-Mobile (unlocked)', which suggests it supports physical SIMs, but this is not proven by the photos."
+      },
+      {
+        "claim": "working perfectly",
+        "verdict": "unverified",
+        "evidence": "The label in photo 0 says 'Functionality: PASS', but this is a seller-added label, not a verified test. Photo 1 shows the screen off. No video or photo shows the phone powered on or in use."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The phone may not be functional despite the 'Functionality: PASS' label.",
+        "proof": "A video or photo showing the phone powered on, displaying the home screen, and running an app.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The phone may be blacklisted or have a compromised IMEI (label says 'Unfriised', which may be a typo for 'Unfriised' or 'Unfriised', possibly meaning 'Unfriised' or 'Unfriised', but unclear).",
+        "proof": "A screenshot of an IMEI check from a trusted source (e.g., Apple, GSMA, or Nigerian NCC) showing the IMEI status as clean and active.",
+        "if_unproven": "priced as potentially blacklisted or with compromised IMEI"
+      },
+      {
+        "risk": "The phone may have a cracked or damaged screen not visible in the photo.",
+        "proof": "A close-up photo of the front screen with the phone powered on, showing no cracks, scratches, or dead pixels.",
+        "if_unproven": "priced as screen may be damaged"
+      },
+      {
+        "risk": "The phone may not support physical SIMs as claimed, or may be a fake or modified device.",
+        "proof": "A photo of the SIM tray being pulled out and a physical SIM inserted, or a video showing the phone connecting to a network with a physical SIM.",
+        "if_unproven": "priced as SIM functionality unproven"
+      }
+    ],
+    "proof_requests": [
+      "Video or photo of the phone powered on, showing the home screen and running an app.",
+      "Screenshot of an IMEI check showing the device is clean and active.",
+      "Close-up photo of the front screen with the phone on, showing no damage.",
+      "Photo or video of the SIM tray being opened and a physical SIM inserted."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The phone is identified as an iPhone 12 64GB from the label in photo 0, but critical claims like 'working perfectly' and 'physical sim' are unverified or unverifiable from the current photos. Hidden risks include potential non-functionality, blacklisted IMEI, screen damage, and SIM compatibility. Without proof of these, the item cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 80669,
+    "input_tokens": 2277,
+    "output_tokens": 1008,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "338425b6105a38d6dfa89f4c011315db",
+    "error": null
+  }
+}

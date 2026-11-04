@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Retail packaging for a 'SECURE' brand power bank.",
+      "The box prominently displays '54600 mAh'.",
+      "The packaging is shrink-wrapped in plastic.",
+      "The illustration shows a portable power station design with a carrying handle and an AC outlet.",
+      "A watermark 'BEYOND GADGETS HUB' is visible across the center.",
+      "The bottom right corner of the box lists the model as 'SEC-PB-54600-BLUE'.",
+      "Text at the bottom indicates 'Made in China' and mentions an ISO certification logo."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "portable power station",
+      "brand": "SECURE",
+      "model": "SEC-PB-54600-BLUE",
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "54,600mAh capacity",
+        "verdict": "supported",
+        "evidence": "photo 0 shows this capacity printed on the box."
+      },
+      {
+        "claim": "Fast Charging",
+        "verdict": "unverified",
+        "evidence": "The box claims it, but no specific protocols (like PD or QC) or wattage are visible."
+      },
+      {
+        "claim": "Secure brand",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual battery capacity may be significantly lower than the 54,600mAh stated on the box, a common issue with generic brands.",
+        "proof": "A photo of the technical specifications label printed on the physical device itself.",
+        "if_unproven": "priced as a 10,000mAh unit"
+      },
+      {
+        "risk": "The device may be non-functional or have dead internal cells despite the sealed box.",
+        "proof": "A video showing the device powered on, displaying its charge level, and successfully charging a mobile phone.",
+        "if_unproven": "priced as non-working"
+      },
+      {
+        "risk": "The AC outlet wattage limit is unknown, which restricts what it can power.",
+        "proof": "A photo of the rating plate on the device showing the AC output wattage (e.g., 100W, 200W).",
+        "if_unproven": "priced at the lowest standard wattage for this form factor"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual power station out of the box.",
+      "Photo of the technical specifications label/sticker on the back or bottom of the device.",
+      "Video of the device charging a phone and/or powering a small AC device."
+    ],
+    "decision": "price",
+    "reason": "The brand and model are clearly identifiable from the retail packaging. While the actual performance and capacity are unverified, the item can be priced at its worst-case value as a generic, potentially lower-capacity unit."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 16722,
+    "input_tokens": 2374,
+    "output_tokens": 3050,
+    "cost_usd": 0.010337,
+    "replayed": false,
+    "fixture_key": "b87cc5ec08737befbfea1009f1e61387",
+    "error": null
+  }
+}

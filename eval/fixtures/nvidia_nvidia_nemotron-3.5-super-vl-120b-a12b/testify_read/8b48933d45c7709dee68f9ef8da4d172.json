@@ -1,0 +1,84 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Two-door refrigerator with top freezer compartment and bottom fridge compartment",
+      "Photo 1 shows brand POLYSTAR and model PV-DD205L on the upper front panel",
+      "Photo 0 shows empty interior with wire shelves and a translucent crisper drawer",
+      "Brown rust stains visible around the freezer-fridge hinge and along the bottom frame in photo 0",
+      "Door rubber gaskets look aged and discolored in photo 0",
+      "Front sticker displays fruit images and text including \"KEEP FRESH & ENERGY SAVING\" in photo 1",
+      "Both photos carry a \"POSTED ON JIJI N MIKE\" watermark"
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "2-door refrigerator",
+      "brand": "POLYSTAR",
+      "model": "PV-DD205L",
+      "read_from": [
+        "photo 1 front label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "80 liters capacity",
+        "verdict": "contradicted",
+        "evidence": "photo 1 model plate reads PV-DD205L, indicating 205 liters"
+      },
+      {
+        "claim": "very good condition",
+        "verdict": "contradicted",
+        "evidence": "photo 0 shows rust at hinge and bottom, worn gaskets, stained interior"
+      },
+      {
+        "claim": "zero issue",
+        "verdict": "unverifiable_remote",
+        "evidence": "still photos cannot show electrical or cooling function"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Compressor or cooling system may not work",
+        "proof": "video of unit running with doors open, showing compressor operation and interior temperature",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Electrical fault or unsafe power cord",
+        "proof": "video of unit plugged in and operating, plus close-up of plug and cord",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Door seals leak cold air",
+        "proof": "close-up of gasket condition and a dollar-bill seal test",
+        "if_unproven": "as needing seal replacement"
+      },
+      {
+        "risk": "Rust damage is worse than visible",
+        "proof": "close-up photos of hinge rust and bottom frame corrosion",
+        "if_unproven": "as heavily damaged"
+      }
+    ],
+    "proof_requests": [
+      "Video of the refrigerator running with doors open to confirm compressor and cooling",
+      "Close-up photos of the rusted hinge area and bottom frame",
+      "Close-up of door gaskets",
+      "Photo of the rating plate showing voltage and power details"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a POLYSTAR PV-DD205L 2-door refrigerator from photo 1, and visible rust and wear contradict the condition claim, so it can be priced at its worst case as seen."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 23937,
+    "input_tokens": 2366,
+    "output_tokens": 3021,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "8b48933d45c7709dee68f9ef8da4d172",
+    "error": null
+  }
+}

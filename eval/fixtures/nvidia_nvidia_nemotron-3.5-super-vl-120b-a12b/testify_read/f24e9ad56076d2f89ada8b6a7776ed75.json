@@ -1,0 +1,91 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "A single car headlight assembly resting on cardboard outdoors",
+      "Clear lens with an LED daytime running light strip across the upper portion",
+      "Amber turn signal section on the outer edge",
+      "Mounting brackets and adjustment points visible on the rear housing",
+      "A watermark reading \"HARDONTOMIA\" across the lens",
+      "No visible Honda logo, part number, or model year marking in the photo"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "car headlight assembly",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Head light",
+        "verdict": "supported",
+        "evidence": "photo 0 shows a headlight assembly"
+      },
+      {
+        "claim": "honda accord",
+        "verdict": "unverified",
+        "evidence": "no Honda logo or part number visible in photo 0"
+      },
+      {
+        "claim": "2018",
+        "verdict": "unverifiable_remote",
+        "evidence": "model year cannot be read from the item in the photo"
+      },
+      {
+        "claim": "Touring",
+        "verdict": "unverifiable_remote",
+        "evidence": "trim level is not marked on the headlight in photo 0"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Wrong side (left vs right) for vehicle fitment",
+        "proof": "Photo showing the rear mounting configuration and which side the amber turn signal sits on",
+        "if_unproven": "priced as wrong fitment or unusable"
+      },
+      {
+        "risk": "Electrical components not working (LED strip, bulbs, ballast)",
+        "proof": "Video of the headlight powered on with all functions illuminated",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Aftermarket or non-genuine part rather than original Honda",
+        "proof": "Close-up of any Honda logo, part number, or OEM packaging",
+        "if_unproven": "priced as aftermarket or non-genuine"
+      },
+      {
+        "risk": "Lens damage, cracks, or heavy haze not visible in the photo",
+        "proof": "Close-up photos of the lens surface from multiple angles",
+        "if_unproven": "priced as damaged or cloudy"
+      },
+      {
+        "risk": "Missing bulbs, ballast, or wiring harness",
+        "proof": "Photo of the rear with all electrical components installed",
+        "if_unproven": "priced as housing only"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of the rear housing showing mounting points and side orientation",
+      "Video of the headlight powered on",
+      "Close-up of any branding or part number on the housing",
+      "Photos of the lens surface to check for cracks or haze"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a car headlight assembly from the photo, so it can be priced at its worst case assuming it does not work, is aftermarket, and may be the wrong side; proof would raise the value."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 20249,
+    "input_tokens": 1580,
+    "output_tokens": 2928,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "f24e9ad56076d2f89ada8b6a7776ed75",
+    "error": null
+  }
+}

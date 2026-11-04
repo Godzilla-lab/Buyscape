@@ -1,0 +1,73 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Three photos show a used car engine on a concrete floor, likely in a workshop or yard.",
+      "The engine has a black plastic intake manifold with 'VVT-i' visible in photo 0 and photo 2.",
+      "Photo 1 shows a silver engine block with a barcode sticker labeled 'V2H-0515' and 'P59'.",
+      "The engine appears dirty, with oil stains and grime, and has various components like alternator, belts, and pulleys attached.",
+      "There are no visible signs of recent operation or testing; the engine is stationary and appears dismantled or removed from a vehicle.",
+      "The watermark 'POSTED ON JIJI OKEYSON AUTOS' is present on all photos, indicating a listing platform and seller name."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used car engine",
+      "brand": "Toyota",
+      "model": "VVT-i",
+      "read_from": [
+        "photo 0 intake manifold",
+        "photo 2 intake manifold"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Dealer on all kinds of quality fairly Used spare parts ( Tokunbo ) Such as Nissan, Toyota, Honda,...",
+        "verdict": "unverified",
+        "evidence": "The seller claims to deal in various brands, but only a Toyota engine is visible in the photos. No proof of other brands or 'quality' is shown."
+      },
+      {
+        "claim": "Used spare parts (Tokunbo)",
+        "verdict": "supported",
+        "evidence": "The engine is visibly used, with dirt, oil, and wear. The term 'Tokunbo' is commonly used in Nigeria for imported used parts, which fits the context."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine may not run or have internal damage (e.g., seized, blown head gasket, worn bearings).",
+        "proof": "A video of the engine running or a compression test report.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Engine may have been salvaged from a wrecked or accident-damaged vehicle.",
+        "proof": "Vehicle history report or photo of the donor car\u2019s condition.",
+        "if_unproven": "priced as high-risk salvage"
+      },
+      {
+        "risk": "Engine may be mismatched or not compatible with the buyer\u2019s vehicle model.",
+        "proof": "Photo of the engine\u2019s VIN tag or matching part numbers with the buyer\u2019s vehicle.",
+        "if_unproven": "priced as unverified fit"
+      }
+    ],
+    "proof_requests": [
+      "Video of the engine running or a compression test.",
+      "Photo of the engine\u2019s VIN tag or donor vehicle\u2019s condition.",
+      "Photo showing the full part number or engine code on the block."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The engine is identifiable as a Toyota VVT-i unit, but critical risks like functionality, damage history, and compatibility cannot be assessed from the photos alone. Without proof of operation or donor vehicle condition, it cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 56432,
+    "input_tokens": 2787,
+    "output_tokens": 693,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "cefda29d411aca166b3c340a317829d5",
+    "error": null
+  }
+}

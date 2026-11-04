@@ -1,0 +1,88 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Yellow and black cordless drill in a cardboard box.",
+      "Brand 'INGCO' is visible on the drill body and the charger in photo 0.",
+      "Two batteries are visible, both labeled '20V MAX 2.0Ah SHARE' in photo 0.",
+      "A battery charger and a small plastic case of drill bits are included.",
+      "The drill has a torque adjustment ring numbered up to 23.",
+      "No 'Brushless' text or specific model number is legible on the tool in the provided photo."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "cordless drill",
+      "brand": "INGCO",
+      "model": null,
+      "read_from": [
+        "photo 0 drill body",
+        "photo 0 charger"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "20v",
+        "verdict": "supported",
+        "evidence": "photo 0 battery labels"
+      },
+      {
+        "claim": "brushless",
+        "verdict": "unverified",
+        "evidence": "The word 'Brushless' is not visible on the tool; Ingco brushless models typically feature prominent branding for this feature."
+      },
+      {
+        "claim": "lithium-ion",
+        "verdict": "supported",
+        "evidence": "The 20V MAX SHARE platform is a lithium-ion system."
+      },
+      {
+        "claim": "INGCO PRODUCT",
+        "verdict": "supported",
+        "evidence": "photo 0 branding"
+      },
+      {
+        "claim": "with extra battery",
+        "verdict": "supported",
+        "evidence": "photo 0 shows two batteries in the box"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The drill may be a standard brushed motor model rather than the claimed brushless version.",
+        "proof": "A clear photo of the model specification plate on the side of the drill.",
+        "if_unproven": "priced as a brushed model"
+      },
+      {
+        "risk": "The batteries may be depleted or unable to hold a charge.",
+        "proof": "A video showing the drill running under load or the battery level indicators being tested.",
+        "if_unproven": "priced as having dead batteries"
+      },
+      {
+        "risk": "The tool may have internal electrical or mechanical faults.",
+        "proof": "A video of the tool operating through its speed and torque settings.",
+        "if_unproven": "priced as not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the model specification plate on the side of the drill.",
+      "Photo of the other side of the drill to check for 'Brushless' branding.",
+      "Video of the drill working with both batteries."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The specific model number is not visible, and the 'brushless' claim is unverified. In power tools, the model number and motor type (brushed vs brushless) are the primary drivers of value."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 17536,
+    "input_tokens": 2391,
+    "output_tokens": 3055,
+    "cost_usd": 0.01036,
+    "replayed": false,
+    "fixture_key": "87cd547e493e138dc2d8ea39338028a6",
+    "error": null
+  }
+}

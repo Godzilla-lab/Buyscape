@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail packaging for a power bank.",
+      "The brand 'Mikorean' and model 'MGP-L021' are printed on the box.",
+      "The box prominently displays '30000mAh' as the capacity.",
+      "The box indicates '2A SAFE CHARGING' and 'Self-contained Four Line Design'.",
+      "The seller's text claims a '20,000mAh' capacity, which differs from the box.",
+      "The actual power bank is not shown outside of the packaging."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "power bank",
+      "brand": "Mikorean",
+      "model": "MGP-L021",
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Large 20,000mAh Battery Capacity",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows the box is labeled as 30000mAh."
+      },
+      {
+        "claim": "Fast Charging Support",
+        "verdict": "unverified",
+        "evidence": "The box specifies '2A SAFE CHARGING', which is standard speed and not typically marketed as 'fast charging' (usually 18W+)."
+      },
+      {
+        "claim": "Multiple Device Charging",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows four built-in output cables and additional ports."
+      },
+      {
+        "claim": "Compact",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Item is missing or does not match the box",
+        "proof": "A photo of the actual device outside the packaging.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "Actual capacity is significantly lower than rated (common with budget brands)",
+        "proof": "A video of a discharge test or a photo of the unit on a scale to check weight.",
+        "if_unproven": "as a generic 10,000mAh unit"
+      },
+      {
+        "risk": "Device is non-functional or has dead battery cells",
+        "proof": "A video showing the device charging a phone and being charged itself.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual power bank outside of the box.",
+      "Clarification on the capacity discrepancy (seller says 20k, box says 30k).",
+      "Video showing the device successfully charging a mobile phone."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The actual item is not pictured, only the retail box. Furthermore, the seller's description of the capacity contradicts the information printed on the packaging."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 12024,
+    "input_tokens": 2386,
+    "output_tokens": 2421,
+    "cost_usd": 0.008456,
+    "replayed": false,
+    "fixture_key": "969524e5c2ae734f3a588a376a709ab0",
+    "error": null
+  }
+}

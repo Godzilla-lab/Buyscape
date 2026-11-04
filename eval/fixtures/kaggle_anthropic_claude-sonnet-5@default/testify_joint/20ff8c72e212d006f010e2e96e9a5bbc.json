@@ -1,0 +1,79 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows a single mono-crystalline solar panel with a black frame, propped against a wall near a glass door.",
+      "Visible dark blue/black cells, no visible cracks or discoloration from this angle.",
+      "A watermark reading 'INNOSON GLOBAL GROUP' overlays the image, appears to be a reseller/studio watermark, not a manufacturer brand on the panel itself.",
+      "No wattage, model number, or manufacturer label is readable on the panel frame or any rear junction box sticker.",
+      "No battery is shown in the photo at all, despite the seller's text describing a battery's charge-holding performance.",
+      "No cables, connectors, or mounting hardware visible."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel (mono-crystalline)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 (no legible brand/wattage label visible)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Battery is new, holds charge for 8 hours",
+        "verdict": "unverifiable_remote",
+        "evidence": "No battery appears anywhere in photo 0; only a solar panel is shown, so this claim cannot be checked against any image."
+      },
+      {
+        "claim": "Never repaired",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal or close-up shot of the panel's junction box, backsheet, or cell soldering is provided to check for repair marks."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Wattage and brand of the panel are unknown, which is the main price driver for solar panels",
+        "proof": "Clear close-up photo of the rear label/sticker showing wattage, cell count, and manufacturer",
+        "if_unproven": "cannot be priced at all without this, since wattage range among comparables spans a wide value band"
+      },
+      {
+        "risk": "Mismatch between seller's text (describes a battery) and the photo (shows only a panel) suggests the actual item for sale is unclear or the listing may be a generic template reused across multiple products",
+        "proof": "Seller to confirm and photograph the exact item being sold, matching the text description",
+        "if_unproven": "treat the panel as the only verifiable item; battery claims are disregarded entirely"
+      },
+      {
+        "risk": "Physical condition (microcracks, hotspots, delamination) cannot be assessed from a single angled photo",
+        "proof": "Close-up shots of all four corners, backsheet, and a multimeter/open-circuit voltage test video",
+        "if_unproven": "priced as used/unverified condition, lowest tier for its (unknown) wattage class"
+      },
+      {
+        "risk": "No cables/MC4 connectors or frame integrity shown",
+        "proof": "Photo of connectors and frame edges",
+        "if_unproven": "assume missing/damaged connectors, priced as bare panel only"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the rear specification label showing wattage, voltage, and cell count",
+      "Confirmation and photo of the actual battery being sold, since the text describes a battery but no battery photo was provided",
+      "Close-up photos of panel corners and backsheet for crack/repair inspection",
+      "A video or photo of a multimeter test showing open-circuit voltage under sunlight"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo shows an unlabeled solar panel with no readable wattage or brand, which is essential to place it within the wide price range of comparables, and the seller's text describes a battery that is not shown in any photo, making the actual item for sale unclear.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 30896,
+    "input_tokens": 3540,
+    "output_tokens": 2878,
+    "cost_usd": 0.032307,
+    "replayed": false,
+    "fixture_key": "20ff8c72e212d006f010e2e96e9a5bbc",
+    "error": null
+  }
+}

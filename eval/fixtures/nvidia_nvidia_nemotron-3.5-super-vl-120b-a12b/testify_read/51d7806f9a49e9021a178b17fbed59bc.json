@@ -1,0 +1,63 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a metal automotive ECU with a Bosch label, VW part number 07K 906 055 CR, and a multicolored wiring harness lying on dirt.",
+      "Photo 1 shows the same ECU label clearly: BOSCH, 07K 906 055 CR, VW, 07K 907 309 B, BENZIN ME17.5.6, Assembled in Mexico, MOTRONIC, with a 2021 date code.",
+      "Photo 2 shows the metal cover side of the unit with wiring and the same watermark text."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car ECU (engine control unit)",
+      "brand": "Bosch",
+      "model": "07K 906 055 CR",
+      "read_from": [
+        "photo 1 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "We also deals on all kinds of car spare parts such as volkswagen,audi,porsche and bentley",
+        "verdict": "unverifiable_remote",
+        "evidence": "Seller's general business claim cannot be verified from photos of a single part."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The ECU may not work or may be internally faulty; condition cannot be judged from exterior photos.",
+        "proof": "Video of the unit being bench-tested or installed and running in a vehicle, or a diagnostic scan report.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The part may not match the buyer's specific vehicle due to immobilizer coding, VIN, or model-year differences.",
+        "proof": "Confirmation of compatibility with the buyer's VIN or exact vehicle model, year, and engine code.",
+        "if_unproven": "as wrong part or unusable"
+      },
+      {
+        "risk": "Internal damage, water ingress, or previous repair is not visible from the outside.",
+        "proof": "Photos of the internal circuit board or a seller-provided testing report.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Video of the ECU being tested in a vehicle or on a bench.",
+      "Confirmation that the part matches the buyer's specific VIN or vehicle model/year/engine."
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a Bosch VW ECU with a readable part number, so it can be priced at its worst case as non-working even though condition is unproven."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 15041,
+    "input_tokens": 2915,
+    "output_tokens": 2269,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "51d7806f9a49e9021a178b17fbed59bc",
+    "error": null
+  }
+}

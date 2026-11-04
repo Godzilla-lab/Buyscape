@@ -1,0 +1,84 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo shows a large white chest freezer with a metal lid and latch.",
+      "A label on the front reads '120 HOURS COOLING RETENTION' and '250 LITER CAPACITY' (text appears on the sticker).",
+      "No clear brand/model name is readable from the photo.",
+      "No power-on display is shown; only the exterior and front sticker are visible."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "chest freezer (250-liter capacity)",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "250-liter Capacity",
+        "verdict": "supported",
+        "evidence": "Photo 0 front sticker shows '250 LITER CAPACITY'."
+      },
+      {
+        "claim": "Low Voltage Operation",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo 0 does not clearly show any low-voltage specification; only the cooling retention/capacity sticker is readable."
+      },
+      {
+        "claim": "120 Hours Cooling Retention",
+        "verdict": "supported",
+        "evidence": "Photo 0 front sticker reads '120 HOURS COOLING RETENTION'."
+      },
+      {
+        "claim": "In working condition",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows the freezer exterior only; there is no proof it powers on or cools."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Whether the compressor/refrigeration system is actually working (could be dead, weak, or leaking).",
+        "proof": "A short video of the freezer plugged in with the compressor running and the temperature dropping (or an IR thermometer showing cold interior after 30\u201360 minutes).",
+        "if_unproven": "Priced as not guaranteed working (worst case: treat as needs repair / not cooling)."
+      },
+      {
+        "risk": "Whether it holds temperature for the claimed duration (insulation/door seal condition).",
+        "proof": "Photo/video of door gasket condition plus a temperature log (e.g., thermometer reading inside after a set time).",
+        "if_unproven": "Priced as average/unknown cooling performance (worst case: not meeting the 120-hour claim)."
+      },
+      {
+        "risk": "Electrical compatibility/safety (low-voltage claim may be incorrect; also check for faulty wiring).",
+        "proof": "A photo of the rating plate (voltage/Hz) and a test showing it runs on the buyer\u2019s available supply (with a stabilizer if needed).",
+        "if_unproven": "Priced assuming standard operation only and possible electrical issues (worst case: may not run reliably)."
+      },
+      {
+        "risk": "Age/condition and possible dents/rust affecting resale value.",
+        "proof": "More photos: sides, back, underside, and close-ups of dents/rust and the lid seal.",
+        "if_unproven": "Priced at a conservative condition level based on exterior-only visibility."
+      }
+    ],
+    "proof_requests": [
+      "Rating plate photo (brand/model, voltage/Hz, refrigerant info) and serial number if available.",
+      "Video showing it plugged in: compressor start + interior temperature dropping (or thermometer reading).",
+      "Close-up photos of the door gasket/seal and latch.",
+      "Photos of the back/side vents and any rust/dents."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo supports the capacity and the '120 hours cooling retention' sticker text, but there is no remote proof it is actually working or that it meets the cooling claim; the key price driver is functional performance."
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_read",
+    "latency_ms": 5355,
+    "input_tokens": 2148,
+    "output_tokens": 802,
+    "cost_usd": 0.001432,
+    "replayed": false,
+    "fixture_key": "74f87038ff165bfbfcb29489bf7a2850",
+    "error": null
+  }
+}

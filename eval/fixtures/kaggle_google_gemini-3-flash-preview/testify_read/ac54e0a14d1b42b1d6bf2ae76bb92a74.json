@@ -1,0 +1,85 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows a submersible pump, PVC pipes, and two men at a dirt site.",
+      "Photo 1 shows a completed borehole head with PVC plumbing and a red-handled valve.",
+      "Photo 2 shows a manual hand pump being operated by children, with a man in a branded vest standing behind it.",
+      "All photos contain a watermark text: 'HKDRILLE EARTH SERVICES'.",
+      "The man in photo 2 wears a vest with a South African flag and an unidentified logo.",
+      "The equipment in photo 0 (submersible pump) appears used or dirty."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "borehole drilling service",
+      "brand": "HKDRILLE EARTH SERVICES",
+      "model": null,
+      "read_from": [
+        "photo 0 watermark",
+        "photo 1 watermark",
+        "photo 2 watermark"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "We do manual [drilling]",
+        "verdict": "supported",
+        "evidence": "Photo 2 shows a manual hand pump installation."
+      },
+      {
+        "claim": "We do machine drilling",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows a submersible pump which requires a machine-drilled hole, but no drilling rig is visible."
+      },
+      {
+        "claim": "We do collapsing jobs",
+        "verdict": "unverified",
+        "evidence": "No photos show the repair or recovery of a collapsed borehole."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Water yield and depth are unknown.",
+        "proof": "A video of a continuous yield test showing flow rate.",
+        "if_unproven": "priced as a shallow, low-yield well."
+      },
+      {
+        "risk": "Water quality/potability is unverified.",
+        "proof": "A laboratory water analysis report for a completed site.",
+        "if_unproven": "priced as non-potable utility water only."
+      },
+      {
+        "risk": "The submersible pump provided may be used or low-grade.",
+        "proof": "A clear photo of the pump nameplate and a new-in-box unit.",
+        "if_unproven": "priced as used/refurbished equipment."
+      },
+      {
+        "risk": "Photos may be stock images or from other regions (South African flag in photo 2).",
+        "proof": "A photo of the drilling team at a recognizable Kwara landmark.",
+        "if_unproven": "priced as an unverified independent contractor."
+      }
+    ],
+    "proof_requests": [
+      "Video of a yield test being performed on a completed well.",
+      "Close-up photo of the submersible pump nameplate showing brand and specifications.",
+      "Drilling log or certificate of completion for a recent job in Kwara.",
+      "Photo of the machine drilling rig mentioned in the text."
+    ],
+    "decision": "price",
+    "reason": "The service is clearly identified as borehole drilling (manual and machine). It can be priced based on the worst-case scenario of a shallow, low-yield, non-potable well using basic equipment."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 12096,
+    "input_tokens": 4532,
+    "output_tokens": 2240,
+    "cost_usd": 0.008986,
+    "replayed": false,
+    "fixture_key": "ac54e0a14d1b42b1d6bf2ae76bb92a74",
+    "error": null
+  }
+}

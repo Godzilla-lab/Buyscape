@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a red electric scooter with a front basket, dual seats, and a visible 'SK' logo on the side panel. The word 'BION' is visible on the rear fender.",
+      "Photo 1 shows a black battery labeled '6-DZF-12' with Chinese characters and a logo that appears to be '\u5357\u90fd' (Nanda). The battery is dusty and placed on a cluttered surface.",
+      "Photo 2 shows the top of the same battery with red and blue terminals and a date stamp '20240621'. The battery casing is scratched and worn.",
+      "The seller claims it is a used electric ebike for sale, but no photos show the bike in use or with the battery installed."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "electric scooter",
+      "brand": "SK",
+      "model": null,
+      "read_from": [
+        "photo 0 side panel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Used Electric Ebike For Sales",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows a scooter with features typical of an electric ebike, including a battery compartment and electric motor housing."
+      },
+      {
+        "claim": "The battery is included",
+        "verdict": "unverified",
+        "evidence": "Photos 1 and 2 show a battery, but there is no photo showing it installed or connected to the scooter. No proof of compatibility or functionality."
+      },
+      {
+        "claim": "The battery is in good condition",
+        "verdict": "contradicted",
+        "evidence": "Photo 1 and 2 show a dusty, scratched battery with visible wear. The date '20240621' suggests it is new, but the condition contradicts a 'used' claim unless it is a replacement battery."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery may not be compatible or functional with the scooter",
+        "proof": "A photo showing the battery installed and connected to the scooter, or a video of the scooter running with the battery.",
+        "if_unproven": "priced as not working or incompatible"
+      },
+      {
+        "risk": "Scooter may have mechanical or electrical faults not visible in photos",
+        "proof": "A video of the scooter being ridden or a close-up of the motor, brakes, and wiring.",
+        "if_unproven": "priced as potentially non-functional or requiring repairs"
+      },
+      {
+        "risk": "Battery may be counterfeit or of low quality",
+        "proof": "A clear photo of the battery label with full specifications and a serial number, or a receipt or warranty document.",
+        "if_unproven": "priced as low-quality or potentially fake"
+      }
+    ],
+    "proof_requests": [
+      "Video or photo of the scooter running with the battery installed.",
+      "Close-up of the battery label showing full specifications and manufacturer details.",
+      "Photo of the scooter's motor, brakes, and wiring to confirm condition.",
+      "Proof of battery compatibility with the scooter model."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as an electric scooter, but critical risks remain unproven: battery compatibility, functionality, and overall condition. Without proof of the battery being installed and working, and without evidence of the scooter's operational state, a worst-case price cannot be confidently assigned. The seller's claim of 'used' is contradicted by the battery's appearance, which may be new or replaced."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 67452,
+    "input_tokens": 2449,
+    "output_tokens": 783,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "a826152c20eeb3be106b5da2aa4d2ad3",
+    "error": null
+  }
+}

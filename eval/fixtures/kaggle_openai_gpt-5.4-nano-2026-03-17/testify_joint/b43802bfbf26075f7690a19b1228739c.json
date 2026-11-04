@@ -1,0 +1,64 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0 shows a single car headlamp assembly (front headlight) with clear lens and amber turn-signal section.",
+      "No readable brand/model markings are visible on the headlamp in the photo.",
+      "The seller\u2019s text claims body/engine/suspension parts for Honda/Acura/Toyota, but the photo shows a headlamp, not body/engine/suspension."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "front headlamp (headlight) assembly",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Body, engine n suspension for all model of honda, acura n toyota cars n suvs",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows a headlamp assembly, not body/engine/suspension parts."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Wrong part type/model/year: the photo is a headlamp, but the seller claims body/engine/suspension; even for headlamps, fitment depends on exact car model/year and side (RH/LH).",
+        "proof": "Ask for a clear photo of the headlamp label/part number and a photo showing the exact car it came from (dashboard/plate or VIN area) plus whether it is RH or LH.",
+        "if_unproven": "Price as a generic/unverified headlamp with uncertain fitment (worst-case comparable: the cheapest headlamp listing)."
+      },
+      {
+        "risk": "Condition/working status unknown (bulbs, reflector clarity, internal cracks, moisture ingress).",
+        "proof": "Ask for a short video turning on the headlamp (low/high beam) and a close-up of the lens/reflector for cracks or cloudiness.",
+        "if_unproven": "Price as not guaranteed working/fully serviceable."
+      }
+    ],
+    "proof_requests": [
+      "Confirm the exact item being sold: is it a headlamp assembly (and which side RH/LH)?",
+      "Send a close-up photo of any part number/label on the headlamp (and the connector area).",
+      "Send a photo of the car it was removed from (model/year visible) or the VIN/registration details.",
+      "Send a short video showing the headlamp working (low beam and high beam)."
+    ],
+    "decision": "price",
+    "reason": "The photo clearly shows a headlamp assembly, but the seller\u2019s text claims different categories (body/engine/suspension). With fitment and working condition unverified, price it at the worst-case comparable for headlamps.",
+    "price_pick": {
+      "low": 8000,
+      "high": 8000
+    }
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_joint",
+    "latency_ms": 4086,
+    "input_tokens": 2048,
+    "output_tokens": 626,
+    "cost_usd": 0.001192,
+    "replayed": false,
+    "fixture_key": "b43802bfbf26075f7690a19b1228739c",
+    "error": null
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "The photo shows the side of a retail box for a power bank.",
+      "Text on the box confirms features: 'Laptop Charging', 'Charge 4 devices', and 'LED Light'.",
+      "The illustration shows a white, rectangular power bank with multiple USB ports.",
+      "No brand name, model number, or battery capacity (mAh) is visible on this side of the box.",
+      "The background contains boxes for other electronics like JBL speakers."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "power bank",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Supports 22.5W SCP",
+        "verdict": "unverified",
+        "evidence": "The side of the box shown does not specify the wattage or protocol."
+      },
+      {
+        "claim": "Laptop Charging",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows 'Laptop Charging' text and icon on the box."
+      },
+      {
+        "claim": "Charge 4 devices",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows 'Charge 4 devices' text and icon on the box."
+      },
+      {
+        "claim": "LED Light",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows 'LED Light' text and icon on the box."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery capacity (mAh) is unknown",
+        "proof": "Photo of the front or back of the box showing the mAh rating.",
+        "if_unproven": "priced as a 10,000mAh unit"
+      },
+      {
+        "risk": "Brand and model are unknown",
+        "proof": "Photo of the front of the box showing the brand logo and model name.",
+        "if_unproven": "priced as a generic unbranded unit"
+      },
+      {
+        "risk": "Item condition and contents",
+        "proof": "Photo of the actual power bank outside the box.",
+        "if_unproven": "priced as used/open-box"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the front of the box showing the brand and capacity (mAh).",
+      "Photo of the specifications label (usually on the back or bottom of the box).",
+      "Photo of the actual power bank out of the box."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The battery capacity (mAh) and brand are not visible. Since capacity is the primary factor in power bank pricing, a valuation cannot be made without it."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 18657,
+    "input_tokens": 2367,
+    "output_tokens": 4082,
+    "cost_usd": 0.01343,
+    "replayed": false,
+    "fixture_key": "647085a2c9720f89251b9bf745520857",
+    "error": null
+  }
+}

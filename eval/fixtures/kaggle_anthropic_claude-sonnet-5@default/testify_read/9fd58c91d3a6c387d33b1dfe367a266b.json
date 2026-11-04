@@ -1,0 +1,90 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: hand holding a retail box labeled 'Canon EOS 700D' with 'EF-S 18-55 IS STM Kit', printed specs 18.0 MEGA, ISO 100-12800/6400, 5.0 fps, 9 AF, Hybrid CMOS AF, 3.2in LCD ClearView II.",
+      "Photo 1: back of the same box showing barcode, 'Body No.' and 'POS Code' fields left blank/empty, 'Camera: Made in Japan / Lens: Made in Taiwan', Canon Inc. address in Chinese.",
+      "Photo 2: top of the box showing a printed image of the camera with kit lens, dials, and on/off switch - still just box artwork, not the real item.",
+      "No photo shows the actual camera body, lens, screen, ports, battery, or any sign of the unit working or its true cosmetic condition.",
+      "No serial number, shutter count, or functional screenshot (e.g. shots taken, menu screen) is visible anywhere."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DSLR camera with kit lens",
+      "brand": "Canon",
+      "model": "EOS 700D (EF-S 18-55mm IS STM kit)",
+      "read_from": [
+        "photo 0 box front text",
+        "photo 1 box back text",
+        "photo 2 box top text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Original Canon 700D",
+        "verdict": "unverifiable_remote",
+        "evidence": "Only the retail box is shown in all three photos; no photo of the actual camera body or serial number match is provided."
+      },
+      {
+        "claim": "UK used",
+        "verdict": "unverifiable_remote",
+        "evidence": "No UK import sticker, agent tag, or usage evidence visible; box only shows manufacturing origin (Japan/Taiwan), not country of prior use."
+      },
+      {
+        "claim": "18-megapixel APS-C CMOS sensor",
+        "verdict": "unverified",
+        "evidence": "Matches printed spec on photo 0 box ('18.0 MEGA'), but this is manufacturer box text, not proof the actual unit inside matches or functions."
+      },
+      {
+        "claim": "DIGIC 5 image processor / ISO range",
+        "verdict": "unverified",
+        "evidence": "Standard spec for this model as printed on box (photo 0), not confirmed against the actual camera shown in use."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "No photo of the actual camera body exists; box could be empty, swapped, or contain a different/damaged unit.",
+        "proof": "Clear photo of the camera itself powered on, lens mounted, showing LCD screen active and a shot preview.",
+        "if_unproven": "priced as not working / item not confirmed to exist as described"
+      },
+      {
+        "risk": "Sensor, shutter, and lens condition (scratches, fungus, dead pixels, shutter count) unknown.",
+        "proof": "Close-up photos of lens glass, sensor (with mirror lifted or lens off), and a shutter-count reading from a utility or menu screen.",
+        "if_unproven": "priced as worst-case cosmetic/functional condition"
+      },
+      {
+        "risk": "Battery, charger, memory card, and strap (accessories) may not be included despite 'kit' box.",
+        "proof": "Photo of all accessories laid out together with the camera.",
+        "if_unproven": "priced as body+lens only, no accessories"
+      },
+      {
+        "risk": "'UK used' claim cannot be tied to any real import/usage history; could be a locally rebranded or grey-market unit.",
+        "proof": "Photo of UK customs/import sticker or dealer tag, or video showing region-specific settings/menu language.",
+        "if_unproven": "priced as unverified origin, treated as generic used import"
+      }
+    ],
+    "proof_requests": [
+      "Photo/video of the actual camera body powered on, outside the box.",
+      "Photo of the lens glass and sensor for scratches/fungus/dust.",
+      "Shutter count reading via menu or software.",
+      "Photo of included accessories (battery, charger, card, strap).",
+      "Any evidence of UK origin (import sticker, prior listing, or receipt)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "All three photos show only the retail box artwork and text, never the actual camera; no worst-case price can be set without at least one photo of the real unit confirming it exists and its visible condition."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 23456,
+    "input_tokens": 3947,
+    "output_tokens": 2101,
+    "cost_usd": 0.025745,
+    "replayed": false,
+    "fixture_key": "9fd58c91d3a6c387d33b1dfe367a266b",
+    "error": null
+  }
+}

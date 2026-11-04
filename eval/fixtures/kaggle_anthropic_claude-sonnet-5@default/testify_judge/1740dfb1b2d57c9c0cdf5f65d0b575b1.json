@@ -1,0 +1,78 @@
+{
+  "task": "testify_judge",
+  "prompt_version": "testify_judge.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "claims": [
+      {
+        "claim": "All Kia and Hyundai genuine spare parts and accessories are available, new and fairly used",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a general shop claim about seller's inventory, not a specific attribute of the item in photo 0; no brand or model markings are legible on the part itself to confirm Kia/Hyundai fitment or genuineness."
+      },
+      {
+        "claim": "Item is genuine (OEM)",
+        "verdict": "unverified",
+        "evidence": "No brand or model markings legible on the housing; witness explicitly notes OEM vs aftermarket status is not shown."
+      },
+      {
+        "claim": "Item fits a Kia or Hyundai model",
+        "verdict": "unverified",
+        "evidence": "No model markings visible and vehicle make/model/year fitment is in the not_shown list."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Headlight may not be OEM/genuine despite seller's blanket claim",
+        "proof": "Close-up photo of embossed/molded brand logo and part number on the housing or lens",
+        "if_unproven": "priced as unbranded aftermarket"
+      },
+      {
+        "risk": "Unknown vehicle fitment (make/model/year) and side (L/R)",
+        "proof": "Clear shot of part number sticker or seller confirmation matched to a photo of the sticker",
+        "if_unproven": "priced as generic/unmatched fitment, lowest tier"
+      },
+      {
+        "risk": "Electrical components (bulb, wiring, connector) may be damaged or missing",
+        "proof": "Photo/video of the rear connector, wiring pigtail, and bulb socket, ideally powered on showing it lights up",
+        "if_unproven": "priced as non-functional electrics"
+      },
+      {
+        "risk": "Internal lens damage: cracks, fogging, or water ingress not visible from the given angle",
+        "proof": "Photos from multiple angles including straight-on through the lens and a tilted shot to check for moisture or haze",
+        "if_unproven": "priced as cosmetically/functionally compromised"
+      },
+      {
+        "risk": "Missing mounting brackets or clips affecting installability",
+        "proof": "Photo of the rear mounting points and brackets",
+        "if_unproven": "priced as incomplete, bracket cost added"
+      },
+      {
+        "risk": "Watermark 'PUREGOLD GLOBAL' suggests stock/reused photo rather than actual item photo",
+        "proof": "A fresh, unwatermarked photo of the exact unit for sale, ideally with today's date or a handwritten note",
+        "if_unproven": "priced as unverified stock-photo listing, worst case condition assumed"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of any part number or brand marking on the housing",
+      "Photo of the rear connector, wiring, and bulb socket",
+      "Photo confirming which side (left/right) it is",
+      "Multiple lens angle shots to check for cracks, fogging, or water damage",
+      "Photo of mounting brackets/clips",
+      "A current, unwatermarked photo of the actual unit being sold"
+    ],
+    "decision": "price",
+    "reason": "The witness confirms it is a used car headlight assembly of unknown fitment and origin; all seller claims about brand/genuineness are unverified, so it must be priced at worst case as an unverified, possibly aftermarket, unmatched-fitment unit pending proof."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_judge",
+    "latency_ms": 14892,
+    "input_tokens": 1463,
+    "output_tokens": 1387,
+    "cost_usd": 0.016796,
+    "replayed": false,
+    "fixture_key": "1740dfb1b2d57c9c0cdf5f65d0b575b1",
+    "error": null
+  }
+}

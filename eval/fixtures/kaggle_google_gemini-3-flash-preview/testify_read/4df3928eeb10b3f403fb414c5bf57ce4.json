@@ -1,0 +1,87 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail box for a QASA dry iron.",
+      "The box is wrapped in clear plastic shrink-wrap.",
+      "Brand 'QASA' and model 'QDL-350A' are clearly printed on the box.",
+      "The box specifies '350W Energy Saving' and 'Teflon Coated Soleplate'.",
+      "The actual iron is not visible; only the packaging is shown."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "dry iron",
+      "brand": "QASA",
+      "model": "QDL-350A",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "QASA QDL-350A",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "350W",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "energy-saving",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "inverter-friendly",
+        "verdict": "unverifiable_remote",
+        "evidence": "This specific term is not visible on the box, though 350W is a low power draw."
+      },
+      {
+        "claim": "dry iron",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different item.",
+        "proof": "A photo of the actual iron outside of the box.",
+        "if_unproven": "as a missing item"
+      },
+      {
+        "risk": "The iron may be non-functional or have electrical faults.",
+        "proof": "A video showing the iron plugged in with the indicator light active.",
+        "if_unproven": "as non-functional"
+      },
+      {
+        "risk": "The Teflon soleplate may be scratched or damaged, which is not visible through the box.",
+        "proof": "A clear photo of the soleplate.",
+        "if_unproven": "as damaged"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual iron outside the box.",
+      "Photo of the soleplate (underside) of the iron.",
+      "Video of the iron plugged in and powered on.",
+      "Photo of the rating plate on the iron itself to confirm model and wattage."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail packaging is visible. Without seeing the actual item, its presence and physical condition cannot be confirmed."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 10480,
+    "input_tokens": 2410,
+    "output_tokens": 2189,
+    "cost_usd": 0.007772,
+    "replayed": false,
+    "fixture_key": "4df3928eeb10b3f403fb414c5bf57ce4",
+    "error": null
+  }
+}

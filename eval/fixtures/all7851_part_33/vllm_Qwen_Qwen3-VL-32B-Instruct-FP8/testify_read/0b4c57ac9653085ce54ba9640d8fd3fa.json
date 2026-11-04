@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the front of a smartphone with a notch, displaying iOS home screen with app icons like Weather, Find My, Stocks, and iTunes. The time shown is 17:26.",
+      "Photo 1 shows the back of the same phone, with a dual-camera system in a diagonal arrangement, a silver Apple logo, and a light purple/pinkish back panel.",
+      "The phone has a flat-edged design consistent with iPhone 13 series.",
+      "The seller's watermark 'GEE-GADGETS LTD POSTED ON JUJ' is visible on both photos.",
+      "The background includes boxes with 'iPhone' text, suggesting a retail or reselling environment."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "iPhone 13",
+      "brand": "Apple",
+      "model": "iPhone 13",
+      "read_from": [
+        "photo 0 screen (iOS interface and notch design)",
+        "photo 1 back (dual-camera layout and Apple logo)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Uk used iPhone 13",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 1 show a phone with the design and iOS interface of an iPhone 13. The dual-camera layout and notch confirm the model. 'UK used' cannot be verified remotely but is plausible given the context."
+      },
+      {
+        "claim": "256gb",
+        "verdict": "unverifiable_remote",
+        "evidence": "Storage capacity cannot be read from the photos. No settings screen or About section is visible."
+      },
+      {
+        "claim": "factory unlocked",
+        "verdict": "unverifiable_remote",
+        "evidence": "No SIM tray, carrier settings, or activation lock status is visible. Cannot confirm if factory unlocked."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Phone may be blacklisted or have activation lock",
+        "proof": "Screenshot of Settings > General > About > Carrier or Activation Lock status, or a check via Apple's Find My website.",
+        "if_unproven": "priced as potentially locked or blacklisted, which reduces value significantly"
+      },
+      {
+        "risk": "Storage capacity may not be 256GB",
+        "proof": "Screenshot of Settings > General > About > Capacity section.",
+        "if_unproven": "priced as lower storage (e.g., 128GB), which reduces value"
+      },
+      {
+        "risk": "Physical damage not visible in photos (e.g., cracked screen, water damage, battery health)",
+        "proof": "Close-up of screen for cracks, flashlight test for dead pixels, and battery health check in Settings.",
+        "if_unproven": "priced as having potential damage, which reduces value"
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of Settings > General > About showing model and storage capacity.",
+      "Screenshot of carrier/activation lock status.",
+      "Close-up of screen for cracks or dead pixels.",
+      "Video of phone turning on and off, and battery health check."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identifiable as iPhone 13 from the photos, but critical claims like storage capacity and factory unlock status cannot be verified remotely. Hidden risks like activation lock or physical damage affect pricing. Proof is needed to price accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 64139,
+    "input_tokens": 2731,
+    "output_tokens": 751,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "0b4c57ac9653085ce54ba9640d8fd3fa",
+    "error": null
+  }
+}

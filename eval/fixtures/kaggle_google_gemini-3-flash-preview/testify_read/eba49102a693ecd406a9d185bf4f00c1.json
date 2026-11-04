@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows a large cardboard box for a Hisense Chest Freezer.",
+      "The box is secured with white plastic straps and sits on a metal cart in an outdoor setting.",
+      "A product sticker on the right side of the box identifies the model as FC-91DD.",
+      "The box features the Hisense logo and the words 'CHEST FREEZER' in several languages.",
+      "The actual freezer is not visible; only the external packaging is shown."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "chest freezer",
+      "brand": "Hisense",
+      "model": "FC-91DD",
+      "read_from": [
+        "photo 0 box",
+        "photo 0 sticker"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Hisense chest freezer",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "702liters",
+        "verdict": "unverified",
+        "evidence": "The capacity text on the box sticker is too blurry to confirm."
+      },
+      {
+        "claim": "silver colour",
+        "verdict": "unverified",
+        "evidence": "The item is inside the box and cannot be seen."
+      },
+      {
+        "claim": "double door",
+        "verdict": "unverified",
+        "evidence": "The item is inside the box and cannot be seen."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, lower-value item.",
+        "proof": "A photo of the freezer outside of the box.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The unit may have transit damage or cosmetic defects hidden by the packaging.",
+        "proof": "Clear photos of all exterior sides of the freezer unit.",
+        "if_unproven": "as a heavily dented or damaged unit"
+      },
+      {
+        "risk": "The freezer may be non-functional or have internal components missing.",
+        "proof": "A video showing the freezer powered on and the interior cooling.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual freezer outside of the box.",
+      "Photo of the freezer with the doors open to verify the interior and double-door claim.",
+      "Video of the unit plugged in and running."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the manufacturer's box is visible. The actual freezer must be seen to verify its existence, condition, and that it matches the seller's description."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 23298,
+    "input_tokens": 2358,
+    "output_tokens": 5304,
+    "cost_usd": 0.017091,
+    "replayed": false,
+    "fixture_key": "eba49102a693ecd406a9d185bf4f00c1",
+    "error": null
+  }
+}

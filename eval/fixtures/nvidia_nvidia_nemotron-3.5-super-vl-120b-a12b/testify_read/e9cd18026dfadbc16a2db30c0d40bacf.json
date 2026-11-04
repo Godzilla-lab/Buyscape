@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Two framed photovoltaic solar panels standing upright outdoors against a wall.",
+      "Silver aluminum frames with dark cells and white grid lines.",
+      "Watermark text 'IZUTECH SOLAR ENERGY' across the image.",
+      "No readable brand plate, model number, or wattage label on the panels.",
+      "Concrete ground; partial motorcycle and building wall in background."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Seller is Izutech solar energy, specializing in solar equipment such as inverters, panels, charge controllers.",
+        "verdict": "unverifiable_remote",
+        "evidence": "Seller's text only; not provable from the photo."
+      },
+      {
+        "claim": "The items are solar panels.",
+        "verdict": "supported",
+        "evidence": "photo 0 shows two photovoltaic panels."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Wattage, voltage, and electrical specifications are unknown.",
+        "proof": "Close-up photo of the specification label on the back of a panel.",
+        "if_unproven": "priced as unknown-output used panel"
+      },
+      {
+        "risk": "Panels may have cracks, delamination, or cell damage not visible at this distance.",
+        "proof": "Close-up daylight photo of the front cell surface of each panel.",
+        "if_unproven": "priced as damaged or non-working"
+      },
+      {
+        "risk": "Electrical output is unproven; panels may not produce power.",
+        "proof": "Video of a panel connected to a multimeter or charge controller showing voltage and current.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The two panels may not be identical in make, model, or output.",
+        "proof": "Photo of the back labels of both panels side by side.",
+        "if_unproven": "priced as a mismatched pair"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the specification label on the back of one panel.",
+      "Close-up daylight photos of the front cell surface of both panels.",
+      "Video showing the panel connected to a tester or charge controller producing output.",
+      "Photo of the back labels of both panels to confirm they match."
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a used solar panel from photo 0 even without a model number, so it can be priced at its worst case (non-working, unknown output) pending proof."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 113723,
+    "input_tokens": 1590,
+    "output_tokens": 2496,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "e9cd18026dfadbc16a2db30c0d40bacf",
+    "error": null
+  }
+}

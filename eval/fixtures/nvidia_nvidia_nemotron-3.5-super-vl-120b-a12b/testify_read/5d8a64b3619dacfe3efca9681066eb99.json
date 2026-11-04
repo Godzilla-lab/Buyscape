@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a blue PS4 game case with \"HITMAN 2\" on the cover.",
+      "PS4 logo is visible at the top left of the cover.",
+      "ESRB \"M\" rating appears in the bottom left corner.",
+      "IOI and WB Games logos appear in the bottom right.",
+      "A watermark reading \"DERA NW OYE\" is overlaid across the center of the cover.",
+      "Only the front of the case is visible; the game disc itself is not shown."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "PS4 game",
+      "brand": "Hitman 2",
+      "model": "Hitman 2 PS4",
+      "read_from": [
+        "photo 0 cover",
+        "photo 0 header"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Hitman 2 PS4",
+        "verdict": "supported",
+        "evidence": "photo 0 cover and header"
+      },
+      {
+        "claim": "Disc",
+        "verdict": "unverified",
+        "evidence": "photo 0 shows the case only; the disc is not visible"
+      },
+      {
+        "claim": "Neatly used",
+        "verdict": "unverified",
+        "evidence": "photo 0 shows only the front case; no close-up of disc or case condition"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The disc is missing, cracked, or not the matching disc for this case.",
+        "proof": "A photo of the actual disc together with the case spine and back.",
+        "if_unproven": "as case only / no disc"
+      },
+      {
+        "risk": "The case or disc is damaged (cracks, scratches, water damage) despite the \"neatly used\" claim.",
+        "proof": "Close-up photos of the case edges, disc surface, and inside case.",
+        "if_unproven": "as damaged / poor condition"
+      },
+      {
+        "risk": "Region lock makes the game incompatible with the buyer's PS4 account or console.",
+        "proof": "A photo of the back cover showing region or compatibility details.",
+        "if_unproven": "as region-locked / possibly incompatible"
+      }
+    ],
+    "proof_requests": [
+      "Send a photo of the actual game disc, not just the case.",
+      "Send close-up photos of the case edges, disc surface, and inside case.",
+      "Send a photo of the back cover showing region and compatibility details."
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a Hitman 2 PS4 game from photo 0, so it can be priced at its worst case (disc unverified and possibly missing) while the listed proof would raise the value."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 45513,
+    "input_tokens": 1597,
+    "output_tokens": 2224,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "5d8a64b3619dacfe3efca9681066eb99",
+    "error": null
+  }
+}

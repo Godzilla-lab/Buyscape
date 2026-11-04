@@ -1,0 +1,58 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-instruct",
+  "response": {
+    "observations": [
+      "Photo 0: Yellow gas cylinder with handwritten markings and a sticker that says 'Shop 90' and '08033'.",
+      "Photo 1: Blue gas cylinder with 'BERADISCU' logo.",
+      "Photo 2: Close-up of the blue gas cylinder's top, showing the valve and the 'BERADISCU' logo."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "cooking gas cylinder",
+      "read_from": [
+        "photo 0 screen",
+        "photo 1 screen",
+        "photo 2 screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "12.5kg standard Cooking Gas Cylinder",
+        "verdict": "unverified",
+        "evidence": "The weight is not visible on any photo. The cylinder in photo 0 has a sticker with 'Shop 90' and '08033', but no weight indication. The blue cylinder in photos 1 and 2 has 'BERADISCU' logo, but no weight indication."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The cylinder may be expired or damaged.",
+        "proof": "Photo 0: The sticker with 'Shop 90' and '08033' might indicate a shop or date, but it's not clear if it's an expiration date or a shop code. The yellow cylinder has visible damage and scratches.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The cylinder may be counterfeit or not from a recognized brand.",
+        "proof": "Photo 1: The 'BERADISCU' logo is visible, but the logo is not a well-known brand in Nigeria. The seller's claim of 'standard' is not verified by the photos.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Ask for a photo of the cylinder's label or sticker that shows the weight and expiration date.",
+      "Ask for a photo of the cylinder's serial number or batch number."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller's claim of '12.5kg standard' is not supported by the photos, and the cylinder's condition and brand are not clearly identifiable. More proof is needed to verify the claim and assess the risk."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-instruct",
+    "task": "testify_read",
+    "latency_ms": 4611,
+    "input_tokens": 2775,
+    "output_tokens": 525,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "28f43ba9c4319c472c0edb54252827a3",
+    "error": null
+  }
+}

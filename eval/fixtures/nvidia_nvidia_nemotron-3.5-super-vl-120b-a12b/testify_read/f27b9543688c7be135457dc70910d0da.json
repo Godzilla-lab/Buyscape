@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black Nikon DSLR with a body cap on, 'Nikon' on the top pentaprism, and 'D7100' on the front right near the mount; a Nikon box is behind it.",
+      "Photo 1 shows the same camera without the body cap, exposing the mirror box and sensor; 'D7100' is visible on the top right and on the box behind it.",
+      "A hand holds the camera in photo 1; the body cap rests on the table.",
+      "No batteries, charger, or silicone case appear in either photo."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DSLR camera body",
+      "brand": "Nikon",
+      "model": "D7100",
+      "read_from": [
+        "photo 0",
+        "photo 1"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "The camera is working perfectly fine",
+        "verdict": "unverified",
+        "evidence": "No power-on, menu, or shutter test is shown in the photos."
+      },
+      {
+        "claim": "I am selling with 2 batteries and a silicone case",
+        "verdict": "unverified",
+        "evidence": "Neither batteries nor a case are visible in photo 0 or photo 1."
+      },
+      {
+        "claim": "The brand is Canon",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 and photo 1 show Nikon branding and the D7100 model on the camera and box."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Camera does not power on or function correctly",
+        "proof": "Video of the camera turning on, navigating the menu, and taking a photo",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Shutter count is high or sensor/mirror box is dirty or damaged",
+        "proof": "Close-up photo of the sensor/mirror box or a screenshot of the shutter count",
+        "if_unproven": "as unknown condition with possible sensor or shutter issues"
+      },
+      {
+        "risk": "Batteries are missing or do not hold charge",
+        "proof": "Photo of two batteries and a charger",
+        "if_unproven": "without batteries"
+      },
+      {
+        "risk": "Silicone case is missing or damaged",
+        "proof": "Photo of the silicone case",
+        "if_unproven": "without case"
+      }
+    ],
+    "proof_requests": [
+      "Video of the camera powering on, navigating menus, and taking a sample photo",
+      "Photo of two batteries and charger",
+      "Photo of the silicone case",
+      "Close-up of the sensor/mirror box or shutter count reading"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a Nikon D7100 DSLR body from the branding in both photos; the seller's Canon claim is contradicted, and functionality and accessories are unproven, so it is priced at its worst case as a non-working body without batteries or case."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 18085,
+    "input_tokens": 2164,
+    "output_tokens": 2075,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "f27b9543688c7be135457dc70910d0da",
+    "error": null
+  }
+}

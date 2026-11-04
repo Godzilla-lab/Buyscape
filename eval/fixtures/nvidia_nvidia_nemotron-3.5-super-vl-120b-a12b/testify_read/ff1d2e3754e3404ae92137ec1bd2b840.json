@@ -1,0 +1,80 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a stainless steel chest freezer with the lid open, empty interior with a divider, and a front sticker bearing Snowsea branding and the word FRESH.",
+      "Photo 1 shows a sealed cardboard box labeled snowsea HORIZONTAL FREEZER with handling symbols and a model label, sitting on a tiled floor.",
+      "Both photos carry CHRISBOSCO NIG LTD and POSTED ON JIJI watermarks."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "chest freezer",
+      "brand": "Snowsea",
+      "model": null,
+      "read_from": [
+        "photo 1 box",
+        "photo 0 front sticker"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Brand New",
+        "verdict": "unverified",
+        "evidence": "photo 0 shows the unit out of the box but no factory seals or proof of unused condition"
+      },
+      {
+        "claim": "SNOWSEA",
+        "verdict": "supported",
+        "evidence": "photo 1 box and photo 0 sticker"
+      },
+      {
+        "claim": "deep freezer / horizontal freezer",
+        "verdict": "supported",
+        "evidence": "photo 1 box text and photo 0 chest design"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Compressor or cooling system may not work",
+        "proof": "video of the freezer powered on and freezing",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Unit may be used or refurbished despite brand new claim",
+        "proof": "unboxing video or intact factory seals on the unit",
+        "if_unproven": "as used"
+      },
+      {
+        "risk": "Plug type or voltage may not suit Nigerian supply",
+        "proof": "photo of the power plug and rating label",
+        "if_unproven": "as incompatible"
+      },
+      {
+        "risk": "Interior damage or odor not visible in photos",
+        "proof": "close-up video of the full interior",
+        "if_unproven": "as damaged"
+      }
+    ],
+    "proof_requests": [
+      "Video of the freezer powered on and freezing",
+      "Clear photo of the model and capacity label on the unit body",
+      "Photo of the power plug and voltage rating"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a Snowsea chest freezer from the box and unit branding, so it can be priced at its worst case while proof is collected."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 22829,
+    "input_tokens": 2446,
+    "output_tokens": 2703,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "ff1d2e3754e3404ae92137ec1bd2b840",
+    "error": null
+  }
+}

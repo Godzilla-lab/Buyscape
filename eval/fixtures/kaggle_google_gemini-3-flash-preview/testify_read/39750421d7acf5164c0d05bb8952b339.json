@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Multiple cardboard boxes stacked, labeled 'GEL BATTERY SERIES'.",
+      "The brand 'Fidelity solar' and model 'FL-G-220AH 12V' are printed on the boxes in photo 0.",
+      "Technical specifications like gross weight (60.5 KGS) and dimensions (530*245*262MM) are visible on the box ends.",
+      "The actual batteries are not visible; only the retail packaging is shown.",
+      "There is a watermark for 'MERCY CLASSIC VENTURE'S' and 'POSTED ON JIJI' across the image."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "GEL battery",
+      "brand": "Fidelity solar",
+      "model": "FL-G-220AH 12V",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Fidelity Solar 220Ah 12V GEL Battery",
+        "verdict": "supported",
+        "evidence": "Text on the boxes in photo 0 confirms the brand, capacity, and type."
+      },
+      {
+        "claim": "designed for reliable...",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a subjective performance claim that cannot be verified through photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The boxes may be empty or contain a different, lower-value item.",
+        "proof": "A photo of the actual battery outside of its packaging.",
+        "if_unproven": "priced as an empty cardboard box"
+      },
+      {
+        "risk": "The battery may be used, refurbished, or have physical damage (like swelling).",
+        "proof": "Close-up photos of the battery casing and terminals.",
+        "if_unproven": "priced as a damaged/scrap unit"
+      },
+      {
+        "risk": "The battery may be chemically depleted or 'dead' (unable to hold a charge).",
+        "proof": "A video showing a multimeter reading the voltage or a load test being performed.",
+        "if_unproven": "priced as scrap lead"
+      },
+      {
+        "risk": "The battery may be old stock with a degraded lifespan.",
+        "proof": "A clear photo of the manufacturing date code stamped into the battery casing.",
+        "if_unproven": "priced as old/near-end-of-life stock"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the battery outside the box showing the top and terminals.",
+      "Photo of the manufacturing date stamp on the battery body.",
+      "Video of a voltage test using a multimeter."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller has only provided photos of the packaging. The actual battery must be seen to verify its existence, physical condition, and age before a price can be determined."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 19930,
+    "input_tokens": 2393,
+    "output_tokens": 4392,
+    "cost_usd": 0.014372,
+    "replayed": false,
+    "fixture_key": "39750421d7acf5164c0d05bb8952b339",
+    "error": null
+  }
+}

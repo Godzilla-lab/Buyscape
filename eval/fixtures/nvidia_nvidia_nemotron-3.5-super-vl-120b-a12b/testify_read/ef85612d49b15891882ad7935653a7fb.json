@@ -1,0 +1,69 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a Canadian Solar specification label: model CS3K-450 MONO, Nominal Maximum Power (Pmax) 450W, Voc 52.20V, Isc 11.48A.",
+      "Photo 1 shows the front of a black framed solar panel with white grid lines and busbars, standing outdoors.",
+      "Photo 2 shows the back of the panel with a junction box, two output cables with connectors, and a small certification sticker."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "solar panel",
+      "brand": "Canadian Solar",
+      "model": "CS3K-450 MONO",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Solar panel 450watts Canadian solar",
+        "verdict": "supported",
+        "evidence": "photo 0 label reads CanadianSolar, model CS3K-450 MONO, Pmax 450W"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Physical defects such as microcracks, hot spots, or delamination are not visible in still photos.",
+        "proof": "Close-up video or photos of the cell surface under bright light.",
+        "if_unproven": "as damaged or non-performing"
+      },
+      {
+        "risk": "Electrical performance cannot be verified remotely; output may be degraded or zero.",
+        "proof": "Video showing multimeter readings of open-circuit voltage and short-circuit current at the connectors.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Junction box, bypass diodes, or MC4 connectors may be faulty.",
+        "proof": "Close-up photo of the junction box and a continuity test of the output cables.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Age and usage history are unknown; panel may be heavily used.",
+        "proof": "Original purchase receipt or installation date.",
+        "if_unproven": "as used with unknown wear"
+      }
+    ],
+    "proof_requests": [
+      "Close-up video of the front cell surface to check for cracks or discoloration.",
+      "Video of multimeter voltage and current readings at the panel connectors.",
+      "Photo of the junction box label and connector condition."
+    ],
+    "decision": "price",
+    "reason": "The panel is identified as a Canadian Solar CS3K-450 MONO 450W from the label in photo 0, so it can be priced at its worst case as an untested used panel."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 14995,
+    "input_tokens": 2904,
+    "output_tokens": 2517,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "ef85612d49b15891882ad7935653a7fb",
+    "error": null
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows the front of a black Canon DSLR with a body cap on the lens mount; 'Canon', 'EOS', '5D', and 'Mark II' are visible on the body.",
+      "Photo 1 shows the rear LCD screen, control dial, AF-ON button, and power switch set to ON.",
+      "Photo 2 shows the bottom label reading 'Canon DS126021', 'DC 7.4V', and serial number '3761814763'.",
+      "No lens, battery, charger, strap, or box is visible in any photo.",
+      "A watermark 'CDICSON BUSINESS WORLD' and 'POSTED ON JIJI' appears across all photos."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DSLR camera body",
+      "brand": "Canon",
+      "model": "EOS 5D Mark II",
+      "read_from": [
+        "photo 0",
+        "photo 2"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Canon EOS 5D Mark II",
+        "verdict": "supported",
+        "evidence": "photo 0 front branding and photo 2 label"
+      },
+      {
+        "claim": "full-frame DSLR camera",
+        "verdict": "unverifiable_remote",
+        "evidence": "photos show the body but cannot confirm sensor format"
+      },
+      {
+        "claim": "21.1-megapixel sensor",
+        "verdict": "unverifiable_remote",
+        "evidence": "photos do not show sensor specifications"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Camera may not power on, fire the shutter, or display images",
+        "proof": "video of camera turning on, taking a photo, and playing back an image",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Shutter count is unknown and may be high",
+        "proof": "screenshot of the camera info menu showing shutter actuations",
+        "if_unproven": "as high-mileage body"
+      },
+      {
+        "risk": "Sensor may have dust, scratches, or fungus",
+        "proof": "photo of the sensor with mirror locked up",
+        "if_unproven": "as needing sensor cleaning or repair"
+      },
+      {
+        "risk": "No lens is included",
+        "proof": "photo of a lens mounted or separate",
+        "if_unproven": "as body only"
+      },
+      {
+        "risk": "Battery and charger may be missing",
+        "proof": "photo of LP-E6 battery and charger",
+        "if_unproven": "as body only"
+      }
+    ],
+    "proof_requests": [
+      "Video of camera powering on, firing shutter, and reviewing image",
+      "Photo of sensor with mirror locked up",
+      "Screenshot of shutter count from camera menu",
+      "Photo of any lens, battery, and charger included"
+    ],
+    "decision": "price",
+    "reason": "The camera body is clearly identifiable as a Canon EOS 5D Mark II from the photos, so it can be priced at worst case as an untested body only."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 13332,
+    "input_tokens": 2276,
+    "output_tokens": 2468,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "41ff5491a7953eae7586adf9aaf3de77",
+    "error": null
+  }
+}

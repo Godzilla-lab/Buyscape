@@ -1,0 +1,70 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo shows a front headlight/upper front corner of a car (blue/purple body color).",
+      "A yellow/orange reflector strip is visible on the headlight assembly.",
+      "Text on the image reads: \u201cHONDA AND ACURA\u201d (appears printed/overlaid on the photo).",
+      "No clear part label (part number), no visible brand/model of the exact car, and no view of the full item being sold (only a portion)."
+    ],
+    "identity": {
+      "status": "unknown",
+      "kind": null,
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Body, engine n suspension parts for all model of honda, acura n toyota cars n suvs",
+        "verdict": "unverifiable_remote",
+        "evidence": "Only one photo of a car front/headlight area; no parts list, no inventory photos, and no part numbers or specific items shown."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The photo may not match the exact part being sold (could be a headlight/trim, not body/engine/suspension parts).",
+        "proof": "Ask for a clear photo of the exact item(s) for sale laid out, including any labels/part numbers and the full item view.",
+        "if_unproven": "Price as the worst-case mismatch: treat it as an unspecified/possibly non-compatible part."
+      },
+      {
+        "risk": "Compatibility risk: \u201call models\u201d is unlikely; Honda/Acura/Toyota parts vary by year, engine code, and trim.",
+        "proof": "Request the exact vehicle details the part fits (make, model, year, engine/variant) and/or the part number from the item.",
+        "if_unproven": "Price as not guaranteed compatible (worst-case: buyer may need returns or replacement)."
+      },
+      {
+        "risk": "Condition risk: used parts may be cracked, missing brackets, or have internal damage not visible in one angle.",
+        "proof": "Request close-up photos of damage points (mounting tabs/brackets, lens cracks, corrosion) plus a short video showing the part from multiple angles.",
+        "if_unproven": "Price as damaged/needs replacement or not fully functional."
+      },
+      {
+        "risk": "If it\u2019s an electrical part (e.g., headlight), functionality (bulb/reflector/leveling) can fail.",
+        "proof": "Request a video test (power-on) showing beam/indicator/leveling (if applicable) and any included bulbs/ballasts.",
+        "if_unproven": "Price as not working."
+      }
+    ],
+    "proof_requests": [
+      "What exact part is being sold in this listing (name + whether it\u2019s body/engine/suspension or a headlight/trim)?",
+      "Send clear photos of the full item (not just the car corner) and any labels/part numbers.",
+      "Provide compatibility: vehicle make/model/year and engine/variant the part fits (or the part number cross-reference).",
+      "If electrical: send a short power-on test video and confirm what\u2019s included (bulbs/ballast/connector).",
+      "Confirm condition: any cracks, missing mounting points, leaks, or repairs (with close-ups)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "From the single photo, the exact item and its compatibility/condition are not clear, so a worst-case price cannot be reliably set without the specific part identity and proof of fit/function."
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_read",
+    "latency_ms": 5316,
+    "input_tokens": 1507,
+    "output_tokens": 790,
+    "cost_usd": 0.001289,
+    "replayed": false,
+    "fixture_key": "4b504784914681f933b6234d2d01eb81",
+    "error": null
+  }
+}

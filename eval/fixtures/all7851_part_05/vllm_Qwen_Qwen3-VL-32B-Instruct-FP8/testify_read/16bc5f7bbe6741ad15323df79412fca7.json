@@ -1,0 +1,84 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows four large, stainless steel machines in a warehouse or workshop setting.",
+      "Each machine has a vertical structure with a control panel on the right side featuring orange and red buttons and a digital display.",
+      "The machines are mounted on wooden pallets.",
+      "The machine on the far right has a blue label at the top that reads 'DINGLI PACKING MACHINERY'.",
+      "The machines appear to be industrial packaging units, likely for sachet water, with visible tubing and mechanical components.",
+      "The environment is clean, with patterned wallpaper and a ceiling fan visible.",
+      "A watermark 'MICO MACHINE POSTED ON JIJI' is overlaid on the image."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "sachet water packaging machine",
+      "brand": "Dingli",
+      "model": "not visible",
+      "read_from": [
+        "photo 0 label: 'DINGLI PACKING MACHINERY'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "As 1000 dingli sachet water packaging machine.",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows a machine with 'DINGLI PACKING MACHINERY' label, matching the brand claim."
+      },
+      {
+        "claim": "capacity... 2300 sachets/h",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible label or display in photo 0 shows capacity. The claim cannot be verified from the image alone."
+      },
+      {
+        "claim": "voltage of 220-380v",
+        "verdict": "unverifiable_remote",
+        "evidence": "No voltage label or specification is visible in photo 0. Cannot be confirmed from image."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Machine may not be functional or may have hidden mechanical damage.",
+        "proof": "A close-up video or photo of the machine in operation, showing the filling and sealing process.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The stated capacity of 2300 sachets/h may be inaccurate or unachievable under real-world conditions.",
+        "proof": "A video of the machine running at full speed with a timer and count of sachets produced in one hour.",
+        "if_unproven": "priced as lower capacity, e.g., 1000-1500 sachets/h"
+      },
+      {
+        "risk": "Voltage compatibility may not match the seller's claim (220-380V), potentially causing damage if connected to wrong supply.",
+        "proof": "Photo of the machine's electrical panel or nameplate showing voltage specifications.",
+        "if_unproven": "priced as incompatible with standard Nigerian voltage (220V), requiring conversion"
+      },
+      {
+        "risk": "Machine may be used or refurbished with hidden wear, especially in moving parts and seals.",
+        "proof": "Close-up photos of the filling nozzles, sealing mechanism, and internal components.",
+        "if_unproven": "priced as used with potential wear, reducing lifespan and efficiency"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo or video of the machine in operation, showing filling and sealing process.",
+      "Photo of the electrical panel or nameplate showing voltage and model details.",
+      "Close-up of the control panel and any labels indicating capacity or model.",
+      "Photos of the internal components and moving parts to check for wear or damage."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The brand 'Dingli' is confirmed from the label, but critical claims about capacity and voltage cannot be verified from the current photo. Hidden risks related to functionality, wear, and electrical compatibility require additional proof before pricing can be determined."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 65821,
+    "input_tokens": 1705,
+    "output_tokens": 858,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "16bc5f7bbe6741ad15323df79412fca7",
+    "error": null
+  }
+}

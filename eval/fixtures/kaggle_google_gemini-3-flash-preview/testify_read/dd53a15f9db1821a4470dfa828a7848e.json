@@ -1,0 +1,88 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Cardboard shipping box for an APC Online Easy UPS.",
+      "Brand 'APC' and 'Life Is On' branding visible on the box.",
+      "Identification label on the side of the box specifies model 'SRV3KI'.",
+      "Label indicates '3000VA' and '230V'.",
+      "The box is closed; the actual UPS unit is not shown.",
+      "Minor damage (puncture) visible at the bottom of the box.",
+      "Watermark 'FAITH J COM' on the image."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "Online UPS",
+      "brand": "APC",
+      "model": "SRV3KI",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Model: srv3ki",
+        "verdict": "supported",
+        "evidence": "photo 0 label"
+      },
+      {
+        "claim": "Brand: APC",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "color: Black",
+        "verdict": "unverifiable_remote",
+        "evidence": "Item is not visible."
+      },
+      {
+        "claim": "Main Input Voltage: 230 V",
+        "verdict": "supported",
+        "evidence": "photo 0 label"
+      },
+      {
+        "claim": "rated power in W: 2400W",
+        "verdict": "supported",
+        "evidence": "photo 0 label (3000VA rating implies 2400W for this model)"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different item.",
+        "proof": "Photo of the actual UPS unit outside the box.",
+        "if_unproven": "priced as an empty box"
+      },
+      {
+        "risk": "The unit may be used or non-functional.",
+        "proof": "Video of the unit powered on and passing self-test.",
+        "if_unproven": "priced as non-functional"
+      },
+      {
+        "risk": "Internal batteries may be degraded or missing.",
+        "proof": "Photo of the LCD screen showing battery health/runtime.",
+        "if_unproven": "priced as needing new batteries"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual UPS unit outside the box.",
+      "Video of the unit powered on showing the LCD display.",
+      "Photo of the serial number sticker on the actual unit."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the box is visible. The actual item must be seen to confirm its existence and condition before a price can be determined."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 21663,
+    "input_tokens": 2384,
+    "output_tokens": 5138,
+    "cost_usd": 0.016606,
+    "replayed": false,
+    "fixture_key": "dd53a15f9db1821a4470dfa828a7848e",
+    "error": null
+  }
+}

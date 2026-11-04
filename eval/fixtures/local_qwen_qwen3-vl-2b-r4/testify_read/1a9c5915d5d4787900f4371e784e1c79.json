@@ -1,0 +1,66 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r4",
+  "response": {
+    "observations": [
+      "A single used car tire is shown from the tread side.",
+      "The sidewall is visible but the text is too blurry to read.",
+      "A yellow 'X' mark is painted on the tread surface.",
+      "The tire has a moderate amount of dirt and grime on the rubber."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "car tire",
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Tukunbo tire",
+        "verdict": "unverified",
+        "evidence": "The brand name is not legible in the photo."
+      },
+      {
+        "claim": "285 45 r22",
+        "verdict": "unverified",
+        "evidence": "The sidewall markings are too blurry to read."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The tire may be expired or have a hidden age stamp.",
+        "proof": "A clear photo of the 4-digit DOT code on the sidewall.",
+        "if_unproven": "as expired/scrap value"
+      },
+      {
+        "risk": "The tire may be a generic or replica brand rather than a genuine Tukunbo.",
+        "proof": "A clear photo of the 4-digit DOT code on the sidewall.",
+        "if_unproven": "as a generic tire"
+      },
+      {
+        "risk": "The tire may be a different size from the vehicle it is meant for.",
+        "proof": "A photo of the sidewall showing the size markings.",
+        "if_unproven": "as a generic tire of the same size as the one shown"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of any label, sticker or metal plate showing the brand and model.",
+      "Clear photo of the 4-digit DOT code on the sidewall.",
+      "Photo of the sidewall showing the size (e.g., 285/45R22)."
+    ],
+    "decision": "price",
+    "reason": "The item is known from the photos. What they cannot prove is priced at its worst case until the proof asked for below arrives."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r4",
+    "task": "testify_read",
+    "latency_ms": 6637,
+    "input_tokens": 1778,
+    "output_tokens": 371,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "1a9c5915d5d4787900f4371e784e1c79",
+    "error": null
+  }
+}

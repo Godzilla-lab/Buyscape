@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows a brown cardboard shipping box.",
+      "The box has 'BLUE GATE' and 'HIGH FREQUENCY ONLINE UPS' printed on the side.",
+      "The box is secured with two yellow plastic packing straps.",
+      "The actual UPS unit is not visible; only the external packaging is shown.",
+      "No specific model number or capacity (e.g., '3kVA') is legible on the box in the provided photo."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "Online UPS",
+      "brand": "Bluegate",
+      "model": null,
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Bluegate",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "3kva",
+        "verdict": "unverified",
+        "evidence": "The capacity rating is not visible on the box in photo 0."
+      },
+      {
+        "claim": "Online UPS",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, less valuable item.",
+        "proof": "A photo of the UPS unit outside of the box.",
+        "if_unproven": "as an empty cardboard box"
+      },
+      {
+        "risk": "The capacity may be lower than the claimed 3kVA (e.g., 1kVA or 2kVA).",
+        "proof": "A clear photo of the manufacturer's specification plate on the back of the unit.",
+        "if_unproven": "as the lowest capacity model in the product line"
+      },
+      {
+        "risk": "The internal lead-acid batteries may be depleted or missing.",
+        "proof": "A video showing the UPS supporting a load while disconnected from mains power.",
+        "if_unproven": "as requiring a full set of replacement batteries"
+      },
+      {
+        "risk": "The unit may have internal electronic faults despite being in a box.",
+        "proof": "A video of the unit powering on and passing its self-test.",
+        "if_unproven": "as non-functional/for parts"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the UPS unit itself, out of the box.",
+      "Photo of the specification sticker or plate on the back of the UPS showing the model and kVA rating.",
+      "Video of the UPS powered on and functioning."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the outer packaging is visible. The actual device and its critical specifications, such as the 3kVA rating, cannot be verified without seeing the unit itself."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 13788,
+    "input_tokens": 2362,
+    "output_tokens": 2436,
+    "cost_usd": 0.008489,
+    "replayed": false,
+    "fixture_key": "9de16589b3035b414cea0d1fe8dec746",
+    "error": null
+  }
+}

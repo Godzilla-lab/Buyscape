@@ -1,0 +1,86 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "All four photos show a rectangular photovoltaic module with half-cut monocrystalline cells arranged in two columns of cell-strings.",
+      "Photo 0 and 1 show the front (cell) side with strong glare across the surface, obscuring parts of the cells.",
+      "Photo 2 and 3 show the white back sheet with a junction box in the center and two MC4-style connector cables, one on each side.",
+      "A small printed label is visible on the back sheet near the junction box in photo 3, but the text is too small/blurred to read any brand or wattage.",
+      "A 'NETWORK SOLAR VENTURES' watermark appears across photos 0-3, indicating the seller's own marketing overlay, not a product label.",
+      "Background shows a cluttered shop/warehouse setting with other panels, cables, and sacks; a man is visible bending over a sack in photos 0 and 1.",
+      "No battery, charge controller, inverter, or any battery-related equipment appears in any of the four photos.",
+      "No visible cracks, chips, or discoloration on the glass/cells can be confirmed due to glare; frame edges appear straight and undamaged where visible."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel (photovoltaic module, half-cut cell type)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 3 back label area (illegible)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Battery is new, holds charge for 8 hours, never repaired.",
+        "verdict": "contradicted",
+        "evidence": "No battery appears in any of the 4 photos (0-3); all four show only a solar panel, front and back. The claim does not match the pictured item."
+      },
+      {
+        "claim": "Implied: this is a new/undamaged solar panel.",
+        "verdict": "unverifiable_remote",
+        "evidence": "Glare in photos 0 and 1 obscures much of the cell surface, so cracks or micro-damage cannot be ruled out from the images."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Seller's text describes a battery, but photos show only a panel; the actual item for sale is unclear or the listing may be mismatched/copy-pasted.",
+        "proof": "A photo or video of the actual battery being sold, or confirmation from seller that the battery text is a template error and the panel is the only item.",
+        "if_unproven": "priced as solar panel only, with no battery included"
+      },
+      {
+        "risk": "Wattage, voltage, and brand of the panel cannot be read from the label photo.",
+        "proof": "A clear close-up photo of the rear specification label showing brand, model, and wattage.",
+        "if_unproven": "priced at the low end of generic unbranded half-cut panels of estimated size"
+      },
+      {
+        "risk": "Glare obscures the cell surface, so hairline cracks or hotspots are unconfirmed.",
+        "proof": "Photos taken at an angle without direct light reflection, or an electroluminescence/flash test if available.",
+        "if_unproven": "priced as possibly having undetected cell damage"
+      },
+      {
+        "risk": "No way to confirm actual power output or whether the panel is functional under load.",
+        "proof": "A video or photo of the panel connected to a multimeter/charge controller showing voltage/current output under sunlight.",
+        "if_unproven": "priced as not verified working"
+      },
+      {
+        "risk": "Physical size/dimensions not confirmed, which affects wattage class and price tier.",
+        "proof": "A photo with a tape measure against the panel's length and width.",
+        "if_unproven": "priced at the smallest plausible wattage class for this cell layout"
+      }
+    ],
+    "proof_requests": [
+      "Clear close-up photo of the rear specification label (brand, model, wattage, voltage).",
+      "Clarify whether a battery is actually included in this sale, and if so, photos of that battery.",
+      "Photo of the panel from a non-glare angle showing full cell surface.",
+      "Video/photo of panel output reading on a multimeter under sunlight.",
+      "Photo with a measuring tape showing panel dimensions."
+    ],
+    "decision": "price",
+    "reason": "The photos clearly show a solar panel of a generic half-cut-cell type that can be priced at a worst-case (unverified wattage, unverified working output, unbranded) level; the seller's battery claim is contradicted by the images and should be disregarded or clarified separately."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 24001,
+    "input_tokens": 3601,
+    "output_tokens": 2116,
+    "cost_usd": 0.025203,
+    "replayed": false,
+    "fixture_key": "bea8975125f2455da3d25e17e3e39e3b",
+    "error": null
+  }
+}

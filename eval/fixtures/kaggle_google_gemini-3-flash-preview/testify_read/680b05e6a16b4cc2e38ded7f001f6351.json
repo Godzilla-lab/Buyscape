@@ -1,0 +1,92 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows a cardboard shipping box for a GBM Deep Cycle Gel Battery.",
+      "The box is labeled with model GEL100-12 and specifications 12V/100AH.",
+      "The box is sealed with brown adhesive tape.",
+      "The actual battery is not visible in the provided photo.",
+      "Text on the box mentions 'Korean Technology' and applications including solar systems."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "Deep cycle gel battery",
+      "brand": "GBM",
+      "model": "GEL100-12",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "100ah",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "gbm",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "dry cell",
+        "verdict": "contradicted",
+        "evidence": "photo 0 box explicitly states 'GEL BATTERY'"
+      },
+      {
+        "claim": "solar battery",
+        "verdict": "supported",
+        "evidence": "photo 0 box lists 'Solar system' as an application"
+      },
+      {
+        "claim": "12volts",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different item.",
+        "proof": "A photo of the battery outside of the box.",
+        "if_unproven": "as zero value"
+      },
+      {
+        "risk": "The battery may be used, refurbished, or have damaged terminals.",
+        "proof": "A clear photo of the top of the battery showing the terminals.",
+        "if_unproven": "as scrap"
+      },
+      {
+        "risk": "The battery may be old stock with a degraded shelf life.",
+        "proof": "A photo of the manufacturing date code stamped on the battery casing.",
+        "if_unproven": "as end-of-life"
+      },
+      {
+        "risk": "The battery may be dead or unable to hold a charge.",
+        "proof": "A video showing a multimeter reading of the voltage.",
+        "if_unproven": "as non-working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual battery outside of the box.",
+      "Close-up photo of the battery terminals.",
+      "Photo of the manufacturing date stamp on the battery casing.",
+      "Video of a multimeter reading showing the current voltage."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the packaging is visible. The actual battery must be seen to confirm its condition, authenticity, and age before a price can be determined."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 9388,
+    "input_tokens": 2359,
+    "output_tokens": 2062,
+    "cost_usd": 0.057699,
+    "replayed": false,
+    "fixture_key": "680b05e6a16b4cc2e38ded7f001f6351",
+    "error": null
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows a single solar panel with a half-cut cell design.",
+      "The panel is leaning against an indoor wall.",
+      "There is a digital watermark 'INNOSON GLOBAL GROUP' across the center of the image.",
+      "No manufacturer labels, brand names, or technical specifications are visible on the front of the panel.",
+      "The seller's text mentions a battery, but no battery is visible in the photo."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Battery is new",
+        "verdict": "unverified",
+        "evidence": "No battery is shown in the provided photo."
+      },
+      {
+        "claim": "holds charge for 8 hours",
+        "verdict": "unverifiable_remote",
+        "evidence": "Battery performance cannot be verified through photos and the battery itself is missing from the imagery."
+      },
+      {
+        "claim": "Never repaired",
+        "verdict": "unverified",
+        "evidence": "The rear of the panel and the internal state of the (unseen) battery cannot be inspected."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Unknown wattage and output specifications",
+        "proof": "A clear photo of the technical specification label on the back of the solar panel.",
+        "if_unproven": "as a generic low-wattage panel of this physical size"
+      },
+      {
+        "risk": "The mentioned battery may not be included or may be a different model",
+        "proof": "Photos of the battery showing its brand, model, and capacity labels.",
+        "if_unproven": "as panel only, no battery included"
+      },
+      {
+        "risk": "Internal cell damage or micro-cracks",
+        "proof": "A video showing a multimeter reading of the open-circuit voltage (Voc) in direct sunlight.",
+        "if_unproven": "as non-functional/damaged"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the specification sticker on the back of the solar panel.",
+      "Photos of the battery mentioned in the description, including its labels.",
+      "A photo of the connectors (MC4) at the back of the panel to check for wear or damage."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The wattage of the solar panel, which is the primary driver of its value, is not visible. Additionally, the seller describes a battery that is completely missing from the photos."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 10582,
+    "input_tokens": 2367,
+    "output_tokens": 2353,
+    "cost_usd": 0.008242,
+    "replayed": false,
+    "fixture_key": "23e59613f202c6c7ebf14e9be597e7c4",
+    "error": null
+  }
+}

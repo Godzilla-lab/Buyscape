@@ -1,0 +1,89 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black desktop computer tower with a glossy front panel.",
+      "The brand 'ADVENT' is visible in the center of the front panel.",
+      "There are two optical drive bays: the top one labeled 'dvd rw', the lower one labeled 'CD/DVD RW'.",
+      "Stickers on the front panel include Windows 7, Intel Core i7, and a blue Intel sticker.",
+      "The case appears dusty and has visible smudges and scratches.",
+      "The background shows an outdoor or semi-outdoor setting with a concrete surface and steps.",
+      "No internal components, screen, or peripherals are visible."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "desktop computer",
+      "brand": "ADVENT",
+      "model": "not visible",
+      "read_from": [
+        "photo 0 front panel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Advent Intel core i7",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows an Intel Core i7 sticker on the front panel."
+      },
+      {
+        "claim": "500Gb HDD",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal components visible; no label or sticker indicating HDD size."
+      },
+      {
+        "claim": "8Gb RAM",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal components visible; no label or sticker indicating RAM size."
+      },
+      {
+        "claim": "Very Clean and working perfectly Ok",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows visible dust, smudges, and scratches on the case, contradicting 'very clean'. Functionality cannot be verified remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The computer may not be working or may have hardware issues.",
+        "proof": "A video showing the computer powering on, booting into Windows, and running a system information tool to confirm CPU, RAM, and HDD.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The HDD may not be 500GB or may be faulty.",
+        "proof": "A screenshot from the computer's disk management or system information showing the HDD size and health.",
+        "if_unproven": "priced as unknown HDD size or faulty"
+      },
+      {
+        "risk": "The RAM may not be 8GB or may be faulty.",
+        "proof": "A screenshot from the computer's system information or a memory diagnostic tool showing 8GB RAM and no errors.",
+        "if_unproven": "priced as unknown RAM size or faulty"
+      },
+      {
+        "risk": "The case may have hidden damage or missing parts.",
+        "proof": "Photos of the back panel, internal components, and all ports and connections.",
+        "if_unproven": "priced as potentially damaged or incomplete"
+      }
+    ],
+    "proof_requests": [
+      "Video of the computer powering on and booting into Windows.",
+      "Screenshot of system information showing CPU, RAM, and HDD details.",
+      "Photos of the back panel and internal components.",
+      "Proof of Windows 7 license or activation status."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as an Advent desktop with an Intel Core i7 sticker, but critical claims about HDD size, RAM, and condition cannot be verified from the photo. The visible dust and scratches contradict the 'very clean' claim. Functionality and internal specs must be proven before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 32188,
+    "input_tokens": 1785,
+    "output_tokens": 795,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "4cc41be42d37f3a0095334b7e63479c8",
+    "error": null
+  }
+}

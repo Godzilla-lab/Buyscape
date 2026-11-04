@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a blue painted industrial gearbox mounted on a flat base plate with bolt holes.",
+      "A metal output shaft protrudes from the right side with a visible keyway.",
+      "A black nameplate is attached to the top but the text is not legible.",
+      "No electric motor is visible in the frame; only the gearbox housing is shown.",
+      "The item rests on bare ground; a watermark reads 'CHIDONBEST INDUSTRIAL' and 'POSTED ON JIJI'."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "industrial gearbox",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Industrial gear box",
+        "verdict": "supported",
+        "evidence": "photo 0 shows the blue gearbox housing and output shaft"
+      },
+      {
+        "claim": "and electric motor",
+        "verdict": "unverified",
+        "evidence": "no motor is visible in photo 0"
+      },
+      {
+        "claim": "20hp",
+        "verdict": "unverifiable_remote",
+        "evidence": "nameplate in photo 0 is illegible"
+      },
+      {
+        "claim": "ratio 1:10",
+        "verdict": "unverifiable_remote",
+        "evidence": "nameplate in photo 0 is illegible"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The electric motor may be missing, broken, or not actually coupled to the gearbox.",
+        "proof": "a photo showing the motor attached to the gearbox and its own nameplate",
+        "if_unproven": "priced as gearbox only, motor not working"
+      },
+      {
+        "risk": "Internal gears, bearings, and oil condition cannot be assessed from the exterior.",
+        "proof": "a video of the output shaft turning freely by hand",
+        "if_unproven": "priced as not working / as-is"
+      },
+      {
+        "risk": "The actual horsepower and ratio may differ from the seller's claim.",
+        "proof": "a legible close-up photo of the nameplate",
+        "if_unproven": "priced as an unspecified used gearbox"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the nameplate to confirm horsepower and ratio",
+      "Photo showing whether an electric motor is coupled to the gearbox",
+      "Video of the output shaft rotating by hand to check for seizure or broken gears"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a used industrial gearbox; even with the motor and specifications unproven, it can be priced at its worst case as a gearbox only."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 18677,
+    "input_tokens": 1635,
+    "output_tokens": 3097,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "5e79f76f2f8d4616883047931b380fa7",
+    "error": null
+  }
+}

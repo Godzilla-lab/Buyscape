@@ -1,0 +1,92 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows an open silver laptop with \"MacBook Pro\" printed below the screen, a physical function-key row, and a large trackpad; the screen is off and reflective.",
+      "Photo 1 shows the closed silver lid with a centered Apple logo.",
+      "Photo 2 shows the bottom case with rubber feet and screw holes; no model or serial number is legible.",
+      "No photo shows the laptop powered on, the screen displaying an image, or any system information."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Apple",
+      "model": "MacBook Pro",
+      "read_from": [
+        "photo 0 screen bezel",
+        "photo 1 lid"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Apple MacBook 2019",
+        "verdict": "unverified",
+        "evidence": "Brand and model line appear in photos 0 and 1, but no year or serial number is visible."
+      },
+      {
+        "claim": "1TB storage",
+        "verdict": "unverifiable_remote",
+        "evidence": "No system information or storage capacity is shown in any photo."
+      },
+      {
+        "claim": "16gb Ram",
+        "verdict": "unverifiable_remote",
+        "evidence": "No system information or memory capacity is shown in any photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Laptop does not power on or boot.",
+        "proof": "Video of startup to the macOS desktop.",
+        "if_unproven": "as not working."
+      },
+      {
+        "risk": "Actual storage and RAM are lower than claimed.",
+        "proof": "Screenshot of About This Mac or System Report.",
+        "if_unproven": "as base configuration."
+      },
+      {
+        "risk": "Screen has backlight, flexgate, or panel defects.",
+        "proof": "Video of solid full-screen colors at maximum brightness.",
+        "if_unproven": "as screen faulty."
+      },
+      {
+        "risk": "Battery is dead or severely degraded.",
+        "proof": "Screenshot of battery health or cycle count.",
+        "if_unproven": "as battery dead."
+      },
+      {
+        "risk": "Keyboard or trackpad keys fail.",
+        "proof": "Video pressing every key and using the trackpad.",
+        "if_unproven": "as keyboard/trackpad faulty."
+      },
+      {
+        "risk": "Hidden liquid damage or internal corrosion.",
+        "proof": "Internal photos showing the logic board and liquid contact indicators.",
+        "if_unproven": "as liquid damaged."
+      }
+    ],
+    "proof_requests": [
+      "Video of the MacBook Pro booting to the desktop and opening About This Mac.",
+      "Screenshot of the System Report showing model identifier, memory, and storage.",
+      "Video of the screen showing solid red, green, blue, white, and black at full brightness.",
+      "Screenshot of battery health and cycle count."
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as an Apple MacBook Pro from the photos; because it is unproven that it works or matches the claimed specs, it is priced at its worst case as a non-working unit with base specifications."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 30237,
+    "input_tokens": 2696,
+    "output_tokens": 4137,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "da8c8b0dbcab157c001c1e5e7a544589",
+    "error": null
+  }
+}

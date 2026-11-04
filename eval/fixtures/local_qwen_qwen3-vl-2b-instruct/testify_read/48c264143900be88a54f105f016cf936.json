@@ -1,0 +1,66 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-instruct",
+  "response": {
+    "observations": [
+      "A black electric scooter parked outside a building. The scooter has a rear storage box, a front headlight, and a rearview mirror. The brand name 'KING' is visible on the side of the rear storage box. The scooter has a silver-colored front fork and a black seat. The wheels are black with silver rims. The scooter is parked on a concrete surface. The background shows a building with two windows and a green door."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "electric scooter",
+      "brand": "KING",
+      "model": "KING",
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Cleanly used Electric bike for sale",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "Runs on 72v 20ah lead acid battery",
+        "verdict": "unverified",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "Bought new 6 months ago. Gears and brakes perfect, no rust, all parts original.",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The battery may not be 72v 20ah as claimed. The battery could be a different voltage or capacity.",
+        "proof": "The battery is not visible in the photo. The seller claims it runs on 72v 20ah, but the photo does not show the battery.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The scooter may have a defect or damage that is not visible in the photo.",
+        "proof": "The photo shows the scooter in a stationary position. There is no visible damage or defect on the scooter.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Can you show the battery? The seller claims it runs on 72v 20ah lead acid battery, but the battery is not visible in the photo.",
+      "Can you show the battery label? The seller claims it runs on 72v 20ah lead acid battery, but the battery is not visible in the photo."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller's claim about the battery is unverified, and the photo does not show the battery. The seller cannot provide proof of the battery's specifications. Therefore, I need to ask for proof to determine the battery's specifications."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-instruct",
+    "task": "testify_read",
+    "latency_ms": 23979,
+    "input_tokens": 1418,
+    "output_tokens": 582,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "48c264143900be88a54f105f016cf936",
+    "error": null
+  }
+}

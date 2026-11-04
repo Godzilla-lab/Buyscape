@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0 shows a rectangular solar panel with a grid of blue cells and a white frame.",
+      "No visible brand/model label, wattage rating sticker, serial number, or manufacturer text is readable in the photo.",
+      "The panel appears to be a single module; no clear indication of whether it is 144-cell or the exact wattage from the image."
+    ],
+    "identity": {
+      "status": "unknown",
+      "kind": "solar panel (used, direct/Canadian claimed by seller)",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "It's original 650 Watts 144 cell direct Canadian used solar panel",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo 0 does not show a readable rating label (650W), cell count (144), or manufacturer/origin text."
+      },
+      {
+        "claim": "built to serve u",
+        "verdict": "unverifiable_remote",
+        "evidence": "No performance/compatibility details or readable specs in Photo 0."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Wattage rating may not be 650W (could be a different module size/rating).",
+        "proof": "A clear close-up photo of the panel\u2019s back label or front rating sticker showing the exact model and rated wattage (W) and Voc/Isc.",
+        "if_unproven": "Price as a generic used solar panel with unknown rating (worst-case: treated as lower-rated/uncertain output)."
+      },
+      {
+        "risk": "Cell count may not be 144 (could be 120/132/other), affecting expected output and compatibility.",
+        "proof": "A close-up photo where the cell layout is clearly countable OR a label showing '144 cells'.",
+        "if_unproven": "Price as not-confirmed cell count (worst-case: assume lower output than claimed)."
+      },
+      {
+        "risk": "Condition/performance unknown (possible cracks, hot spots, delamination, or reduced output).",
+        "proof": "A working test: photo/video of an IV curve or at least a multimeter reading of Voc and Isc under sun, plus a close-up of the glass edges/corners.",
+        "if_unproven": "Price as not guaranteed working at full spec (worst-case: treated as reduced output)."
+      },
+      {
+        "risk": "Origin/brand authenticity (seller may be misrepresenting 'original' and 'Canadian').",
+        "proof": "Clear label photo showing manufacturer name, country of origin, and model/serial number.",
+        "if_unproven": "Price as generic used panel (worst-case: no premium for brand/origin)."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the back label/rating sticker showing: brand, model, rated wattage (W), Voc, Isc, and serial number (if any).",
+      "Close-up of the panel corners/edges and the junction box area (to check for cracks/damage).",
+      "A quick performance test photo/video: Voc and Isc readings (or IV curve) taken in sunlight."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo shows a used solar panel, but the key pricing drivers (exact wattage/model and confirmed cell count) are not readable, so a worst-case price cannot be set confidently without the label/specs."
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_read",
+    "latency_ms": 5331,
+    "input_tokens": 1465,
+    "output_tokens": 766,
+    "cost_usd": 0.001251,
+    "replayed": false,
+    "fixture_key": "b0c2d2a32734069d4b0bfddefc934b37",
+    "error": null
+  }
+}

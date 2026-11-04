@@ -1,0 +1,80 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black screen or monitor mounted on top of a black vertical base unit with ventilation slots.",
+      "A watermark reading \"HIPHEN SOLUTIONS\" appears across the base.",
+      "No cash drawer, note slots, or coin compartments are visible in the photo.",
+      "The item resembles a POS terminal or touchscreen monitor on a stand rather than a cash drawer."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "POS terminal",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Cash Drawer",
+        "verdict": "contradicted",
+        "evidence": "photo 0 shows a monitor/terminal on a stand, not a cash drawer"
+      },
+      {
+        "claim": "5 note, 8 coin",
+        "verdict": "contradicted",
+        "evidence": "photo 0 shows no cash drawer compartments"
+      },
+      {
+        "claim": "robust steel",
+        "verdict": "unverifiable_remote",
+        "evidence": "material cannot be confirmed from the photo"
+      },
+      {
+        "claim": "designed to...",
+        "verdict": "unverifiable_remote",
+        "evidence": "seller's description is incomplete and cannot be verified remotely"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The item is not a cash drawer as advertised; it is a monitor/POS terminal.",
+        "proof": "a photo of the item opened as a cash drawer showing note and coin sections",
+        "if_unproven": "priced as the item shown (POS terminal/monitor), not as a cash drawer"
+      },
+      {
+        "risk": "Whether the terminal powers on and functions.",
+        "proof": "a video of the device booting up",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Physical condition of the screen and base.",
+        "proof": "close-up photos of the screen, ports, and base",
+        "if_unproven": "as damaged"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the item as a cash drawer, open, showing note and coin compartments",
+      "Video of the device powering on",
+      "Close-up photos of screen condition and ports"
+    ],
+    "decision": "price",
+    "reason": "The photo shows a POS terminal/monitor on a stand, contradicting the seller's cash-drawer claim, so it can be priced at its worst case as the item actually shown."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 14100,
+    "input_tokens": 1587,
+    "output_tokens": 1979,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "2c9612b6656dd5cb9bafa3e967993834",
+    "error": null
+  }
+}

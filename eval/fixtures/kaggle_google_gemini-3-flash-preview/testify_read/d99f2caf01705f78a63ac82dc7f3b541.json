@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Multiple retail boxes for a power bank are visible.",
+      "The brand 'LINKCO' is printed on the boxes.",
+      "The capacity '50000mAh' is prominently displayed.",
+      "The model number 'LKP-50F' is visible on the front of the boxes.",
+      "Features listed include '22.5W FAST CHARGING' and 'Includes USB-A to Type-C Charging Cable'.",
+      "A '12 Months Warranty' badge is printed on the packaging.",
+      "The photo appears to be taken in a retail or warehouse setting."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "power bank",
+      "brand": "LINKCO",
+      "model": "LKP-50F",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Linkco powerbank",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "50,000 mah",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "Long lasting",
+        "verdict": "unverifiable_remote",
+        "evidence": "Battery endurance depends on actual cell quality and usage patterns which cannot be seen."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual capacity may be significantly lower than the 50,000mAh label (common in generic brands).",
+        "proof": "A video showing the power bank charging a device with a known battery capacity from 0% to 100% multiple times.",
+        "if_unproven": "as a generic 20,000mAh power bank"
+      },
+      {
+        "risk": "The box may be empty or contain a different/refurbished item.",
+        "proof": "A photo of the actual unit out of the box next to a handwritten note with the current date.",
+        "if_unproven": "as an open-box or used item"
+      },
+      {
+        "risk": "The 22.5W fast charging feature may not be functional or compatible with all devices.",
+        "proof": "A video showing the power bank connected to a phone that displays a 'Fast Charging' notification.",
+        "if_unproven": "as a standard 10W charging power bank"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual power bank outside of its packaging.",
+      "Video of the device charging a phone to confirm the fast charging status.",
+      "Photo of the back or side of the actual device showing the printed specifications."
+    ],
+    "decision": "price",
+    "reason": "The brand and model are clearly identified from the retail packaging in the photo, allowing for a valuation based on its stated specifications at a worst-case performance level."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 8515,
+    "input_tokens": 2396,
+    "output_tokens": 1632,
+    "cost_usd": 0.006094,
+    "replayed": false,
+    "fixture_key": "d99f2caf01705f78a63ac82dc7f3b541",
+    "error": null
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a close-up of tire tread with visible wear and a hand pressed against the rubber.",
+      "Photo 1 shows the embossed brand name \"Kleber\" on the tire sidewall.",
+      "Photo 2 shows the full tire with \"Kleber\" and embossed size markings including \"195/65 R15\" on the sidewall."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "passenger car tire",
+      "brand": "Kleber",
+      "model": null,
+      "read_from": [
+        "photo 1 sidewall",
+        "photo 2 sidewall"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Klebar brand",
+        "verdict": "contradicted",
+        "evidence": "photo 1 sidewall reads Kleber"
+      },
+      {
+        "claim": "195/65 R15 size",
+        "verdict": "supported",
+        "evidence": "photo 2 sidewall embossing"
+      },
+      {
+        "claim": "Grade 1",
+        "verdict": "unverified",
+        "evidence": "no grade marking visible in any photo"
+      },
+      {
+        "claim": "used",
+        "verdict": "supported",
+        "evidence": "photo 0 shows worn tread"
+      },
+      {
+        "claim": "popular size used by different vehicles",
+        "verdict": "unverifiable_remote",
+        "evidence": "seller's sentence is incomplete and no vehicle list is provided"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Tire manufacturing date unknown; rubber may be aged or expired",
+        "proof": "Photo of DOT code on sidewall",
+        "if_unproven": "priced as aged scrap rubber"
+      },
+      {
+        "risk": "Tread depth may be below safe or legal limit",
+        "proof": "Tread depth gauge photo across the tread",
+        "if_unproven": "priced as bald or replacement needed"
+      },
+      {
+        "risk": "Internal damage, hidden punctures, or poor air retention",
+        "proof": "Video of tire inflated and holding pressure, or inner liner photo",
+        "if_unproven": "priced as not holding air"
+      },
+      {
+        "risk": "Sidewall cuts, bulges, or bead damage not visible in current angles",
+        "proof": "Full 360-degree close-up of both sidewalls and bead area",
+        "if_unproven": "priced as structurally unsound"
+      }
+    ],
+    "proof_requests": [
+      "DOT code photo",
+      "Tread depth measurements",
+      "Inflation / air retention test video",
+      "Full sidewall and bead inspection photos"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a used Kleber 195/65 R15 passenger car tire from the photos, so it can be priced at its worst case assuming hidden defects; proof of age, tread depth, and integrity would raise the value."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 56718,
+    "input_tokens": 2481,
+    "output_tokens": 5228,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "6e912b94e4bea98942964b0a9d74471a",
+    "error": null
+  }
+}

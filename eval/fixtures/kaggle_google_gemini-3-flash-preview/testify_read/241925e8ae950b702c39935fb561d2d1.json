@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "White multi-function printer on a wooden surface.",
+      "Control panel with a small LCD screen and buttons on the front left.",
+      "Flatbed scanner lid on top.",
+      "Paper input tray is extended at the bottom.",
+      "Model name 'LaserJet Pro MFP M130a' is visible on the front panel.",
+      "Power cable is connected to an extension block."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "multi-function printer",
+      "brand": "HP",
+      "model": "LaserJet Pro MFP M130a",
+      "read_from": [
+        "photo 0 front panel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP laserjet m130a",
+        "verdict": "supported",
+        "evidence": "The model name is printed on the front panel in photo 0."
+      },
+      {
+        "claim": "printer/scanner/photocopier",
+        "verdict": "supported",
+        "evidence": "The device is a Multi-Function Printer (MFP) with a flatbed scanner visible in photo 0."
+      },
+      {
+        "claim": "fax",
+        "verdict": "contradicted",
+        "evidence": "The M130a model does not have fax capabilities; it lacks a numeric keypad and phone line ports."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Poor print quality or drum damage (streaks, spots, or fading).",
+        "proof": "A photo of a printed 'Configuration Report' or 'Supplies Status' page.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Scanner glass or sensor failure.",
+        "proof": "A photo of a successful scan or a copy made by the machine.",
+        "if_unproven": "as scanner broken"
+      },
+      {
+        "risk": "Toner cartridge is empty or near empty.",
+        "proof": "A photo of the 'Supplies Status' page showing toner levels.",
+        "if_unproven": "as toner empty"
+      },
+      {
+        "risk": "Damaged USB connectivity port.",
+        "proof": "A clear photo of the rear ports.",
+        "if_unproven": "as port damaged"
+      }
+    ],
+    "proof_requests": [
+      "Photo of a printed 'Supplies Status' page to verify print quality and toner levels.",
+      "Photo of the back of the printer to check the condition of the ports.",
+      "Short video of the printer making a photocopy to verify the scanner and paper path."
+    ],
+    "decision": "price",
+    "reason": "The model is clearly identified from the photo. It can be priced at its worst-case value (non-functional/parts) until proof of operation is provided."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 10055,
+    "input_tokens": 2359,
+    "output_tokens": 2056,
+    "cost_usd": 0.007347,
+    "replayed": false,
+    "fixture_key": "241925e8ae950b702c39935fb561d2d1",
+    "error": null
+  }
+}

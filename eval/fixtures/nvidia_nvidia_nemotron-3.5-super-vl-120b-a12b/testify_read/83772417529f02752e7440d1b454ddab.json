@@ -1,0 +1,85 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Multiple used internal combustion engines stored on shelves in a warehouse",
+      "Engines appear dusty and used, with blue and orange caps on some fluid ports",
+      "Yellow tags attached, one reads \"No Oil No Filter\" and another shows \"LKG\"",
+      "No clearly readable engine model numbers such as 2AR or 2GR visible on any engine",
+      "No transmissions clearly visible in either photo"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used car engine",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "2ar v4 engines",
+        "verdict": "unverified",
+        "evidence": "no readable 2AR marking on engines in photos"
+      },
+      {
+        "claim": "2gr v6 engines",
+        "verdict": "unverified",
+        "evidence": "no readable 2GR marking on engines in photos"
+      },
+      {
+        "claim": "22pins auto transmissions",
+        "verdict": "unverified",
+        "evidence": "photos show engines only, no transmissions visible"
+      },
+      {
+        "claim": "First grades tokumbo/foreign used",
+        "verdict": "unverifiable_remote",
+        "evidence": "grade and origin cannot be confirmed from photos alone"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "engine may be seized, blown, or internally damaged",
+        "proof": "video of engine cranking or running, or compression test results",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "actual engine model differs from claimed 2AR/2GR",
+        "proof": "close-up photo of engine block identification plate",
+        "if_unproven": "as generic used engine"
+      },
+      {
+        "risk": "transmissions are not included or are different from claimed",
+        "proof": "photo of transmission with model tag",
+        "if_unproven": "as engine only"
+      },
+      {
+        "risk": "missing ancillaries such as ECU, wiring harness, or sensors",
+        "proof": "photo showing complete engine assembly",
+        "if_unproven": "as incomplete"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of engine model or identification plate",
+      "Video of engine running or compression test results",
+      "Photo of any included transmission",
+      "Photo showing complete engine with all ancillaries"
+    ],
+    "decision": "price",
+    "reason": "The items are identifiable as used car engines from the photos, so a worst-case price is possible even though the seller's specific model claims are unproven."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 36335,
+    "input_tokens": 2788,
+    "output_tokens": 3440,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "83772417529f02752e7440d1b454ddab",
+    "error": null
+  }
+}

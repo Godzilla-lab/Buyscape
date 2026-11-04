@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-r4",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail box for a Canon EOS 60D DSLR camera.",
+      "The box is slightly worn and has a piece of tape on the top flap.",
+      "The actual camera is not visible; only the illustration on the box is shown.",
+      "The box is sitting in a cardboard shipping crate.",
+      "No photos of the camera body, lens, or accessories are provided."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DSLR camera",
+      "brand": "Canon",
+      "model": "EOS 60D",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Canon eos 60d dslr camera",
+        "verdict": "supported",
+        "evidence": "photo 0 shows the retail box for this model."
+      },
+      {
+        "claim": "Shutter count under 5,000, no fungus or scratch on the lens. Original battery and charger, never repaired.",
+        "verdict": "unverified",
+        "evidence": "No photo shows this; it is the seller's word only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, lower-value item.",
+        "proof": "A photo of the actual camera outside of the box.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The camera may be non-functional or have internal electronic faults.",
+        "proof": "A video of the camera powering on and taking a photo.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The lens may be damaged, scratched, or have fungus.",
+        "proof": "Clear photos of the front and rear lens elements.",
+        "if_unproven": "as having a damaged lens"
+      },
+      {
+        "risk": "The shutter count may be very high, indicating the camera is near the end of its life.",
+        "proof": "A screenshot of a shutter count tool showing the current count.",
+        "if_unproven": "as having a high shutter count"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual camera body out of the box.",
+      "Photo of the lens detached from the camera.",
+      "Photo of the camera's LCD screen powered on.",
+      "Photo of the camera's rear sensor.",
+      "A screenshot of the shutter count."
+    ],
+    "decision": "price",
+    "reason": "The item is known from the photos. What they cannot prove is priced at its worst case until the proof asked for below arrives."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-r4",
+    "task": "testify_read",
+    "latency_ms": 2873,
+    "input_tokens": 1396,
+    "output_tokens": 447,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "b63369f02129c6de71fc70399d948b31",
+    "error": null
+  }
+}

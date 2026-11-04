@@ -1,0 +1,78 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Front-loading washing machine.",
+      "LG brand logo visible on the top left.",
+      "Text 'Inverter DirectDrive 6/3kg' on the detergent drawer.",
+      "Sticker 'Washer+Dryer 2in1' on the front panel.",
+      "Control panel is powered on with orange and green lights visible.",
+      "Digital display shows three dashes '---'.",
+      "The '2in1' sticker is peeling and damaged.",
+      "General signs of use and wear on the chassis."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "washer-dryer",
+      "brand": "LG",
+      "model": "Inverter DirectDrive 6/3kg",
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "LG Washing machine",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "scrap but doesn\u2019t work",
+        "verdict": "unverified",
+        "evidence": "The machine is powered on in photo 0, but mechanical or electronic failure cannot be confirmed from a still image."
+      },
+      {
+        "claim": "needs repair",
+        "verdict": "unverified",
+        "evidence": "The specific fault is not identified in the photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The main PCB (control board) is faulty despite the lights being on.",
+        "proof": "A video showing the machine attempting to start a cycle and any resulting error codes.",
+        "if_unproven": "as non-functional scrap"
+      },
+      {
+        "risk": "The drum bearings or motor are seized or failed.",
+        "proof": "A video of the drum being spun manually by hand to check for noise or resistance.",
+        "if_unproven": "as non-functional scrap"
+      }
+    ],
+    "proof_requests": [
+      "Video of the drum being spun by hand.",
+      "Video of the machine attempting to start a wash cycle to see if it fills or displays an error code.",
+      "Photo of the technical specification sticker on the back or inside the door frame."
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identified as an LG washer-dryer. Since the seller explicitly states it is non-functional scrap, it can be priced at the worst-case value for a faulty unit of this brand and capacity.",
+    "price_pick": {
+      "low": 1,
+      "high": 2
+    }
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_joint",
+    "latency_ms": 11508,
+    "input_tokens": 2771,
+    "output_tokens": 2347,
+    "cost_usd": 0.008426,
+    "replayed": false,
+    "fixture_key": "5e10d3b9d0dfe00cb6882d2370d476db",
+    "error": null
+  }
+}

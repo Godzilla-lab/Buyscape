@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "A blue and white solar-powered torch in its original packaging.",
+      "The packaging has a clear plastic front and cardboard back with printed text.",
+      "The torch has a solar panel on the front, a white head with a lens, and a blue body with ridged texture.",
+      "Text on the packaging includes '1W', '7H', '1100mAh', 'RECHARGEABLE', 'SOLAR TORCH', and 'CTL-T1'.",
+      "The brand name 'CONTOR' is visible at the top of the packaging.",
+      "The item is held in a hand, with cardboard boxes in the background."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "solar torch",
+      "brand": "CONTOR",
+      "model": "CTL-T1",
+      "read_from": [
+        "photo 0 packaging top",
+        "photo 0 packaging bottom"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Solar charge",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows a solar panel on the torch and 'SOLAR TORCH' on the packaging."
+      },
+      {
+        "claim": "7H Maximum working Time",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows '7H' on the packaging next to the battery icon."
+      },
+      {
+        "claim": "1100mAh",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows '1100mAh' on the packaging."
+      },
+      {
+        "claim": "Charge the battery 8 hours before first use",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo or text shows charging instructions or time; this is a common recommendation for solar torches but not visible here."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery may be dead or not holding charge",
+        "proof": "A video or photo showing the torch turned on and running for 7 hours, or a test of the solar charging function.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Solar panel may be damaged or non-functional",
+        "proof": "Close-up photo of the solar panel under sunlight showing charge indicator or a video of it charging.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Item may be counterfeit or not as described",
+        "proof": "Photo of the item without packaging, showing the brand and model on the body, or a serial number.",
+        "if_unproven": "priced as lower quality or generic"
+      }
+    ],
+    "proof_requests": [
+      "Video or photo of the torch turned on and running for 7 hours.",
+      "Close-up photo of the solar panel under sunlight showing charge indicator or charging.",
+      "Photo of the torch without packaging showing the brand and model on the body."
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a CONTOR CTL-T1 solar torch with visible specs matching the seller's claims. While some claims (like 8-hour charging) are unverifiable remotely, the core identity and key features are confirmed. Hidden risks like battery or solar panel functionality are priced as worst case (not working) until proven."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 57262,
+    "input_tokens": 1787,
+    "output_tokens": 738,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "e191c58857ca059757838b03c7b1b3b6",
+    "error": null
+  }
+}

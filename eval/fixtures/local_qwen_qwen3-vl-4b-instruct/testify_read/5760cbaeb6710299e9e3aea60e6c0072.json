@@ -1,0 +1,73 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-instruct",
+  "response": {
+    "observations": [
+      "Photo shows two drive shafts (axle shafts) leaning against a wall, a steering rack (or gear) mounted on the wall, a radiator (or condenser) to the right, and a starter motor on the ground.",
+      "The items appear dirty and rusty, with some visible corrosion and grime.",
+      "The items are placed against a rough concrete wall, with no clear packaging or labeling.",
+      "The seller claims the items are clean, dry, and sorted, and weighed at 500 kg on a certified scale."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "car parts",
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Scrap car metal parts available for sale: Two Drive Shafts (Axle Shafts) A Steering Rack (or Steering Gear) A Radiator (or Condenser) A Starter Motor",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "Everything is clean, dry and sorted, no water added.",
+        "verdict": "unverified",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "Weighed at 500 kg on a certified scale this morning.",
+        "verdict": "unverifiable_remote",
+        "evidence": "no photo of scale or weighing process"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The items may be damaged or non-functional.",
+        "proof": "photo 0",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The weight claim of 500 kg may be inaccurate or misleading.",
+        "proof": "photo 0",
+        "if_unproven": "as not 500 kg"
+      },
+      {
+        "risk": "The items may be misrepresented as 'clean, dry, and sorted' when they are not.",
+        "proof": "photo 0",
+        "if_unproven": "as dirty or unsorted"
+      }
+    ],
+    "proof_requests": [
+      "Ask for a photo of the scale used for weighing.",
+      "Ask for a photo of the items cleaned or sorted.",
+      "Ask for a photo of the items in working condition or with a functional test."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller's claims about cleanliness, weight, and condition are not verifiable from the photos alone. The items appear dirty and rusty, and there is no photo of the scale or weighing process. The seller's claim of 'clean, dry, and sorted' is unverified, and the weight claim is unverifiable remotely. More proof is needed before a price can be set."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-instruct",
+    "task": "testify_read",
+    "latency_ms": 4670,
+    "input_tokens": 2573,
+    "output_tokens": 614,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "5760cbaeb6710299e9e3aea60e6c0072",
+    "error": null
+  }
+}

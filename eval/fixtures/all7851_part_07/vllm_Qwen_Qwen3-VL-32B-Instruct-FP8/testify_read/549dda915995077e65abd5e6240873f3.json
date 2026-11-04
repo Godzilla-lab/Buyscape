@@ -1,0 +1,87 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Black iPhone with triple camera module and Apple logo on back. Pink sticker with '87BH' visible.",
+      "Photo 1: iPhone screen showing 'Battery Health & Charging' with 'Maximum Capacity' at 89%.",
+      "Photo 2: Same as photo 0, showing back of phone with '87BH' sticker.",
+      "All photos show a hand holding the phone, with watermark 'DEETECH GADGETZ' and 'POSTED ON JIJI'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "iPhone 14 Pro Max",
+      "brand": "Apple",
+      "model": "iPhone 14 Pro Max",
+      "read_from": [
+        "photo 0 back camera module shape and Apple logo",
+        "photo 2 back camera module shape and Apple logo"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "iPhone 14 Pro Max 128gb",
+        "verdict": "unverified",
+        "evidence": "Model is visually confirmed as iPhone 14 Pro Max from camera module and design, but storage capacity (128GB) is not visible in any photo. No screen shot of settings or storage info."
+      },
+      {
+        "claim": "Esim Unlocked",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo of settings or carrier info to confirm eSIM or unlock status. Cannot verify remotely."
+      },
+      {
+        "claim": "Direct",
+        "verdict": "unverifiable_remote",
+        "evidence": "Meaning unclear; possibly 'direct from source' or 'not second-hand'. No proof in photos."
+      },
+      {
+        "claim": "87BH",
+        "verdict": "supported",
+        "evidence": "Pink sticker with '87BH' visible in photo 0 and photo 2."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Storage capacity is not 128GB (could be 256GB or 512GB)",
+        "proof": "Photo of Settings > General > About > Capacity",
+        "if_unproven": "Priced as 128GB, but if higher, value increases. If lower, value decreases. Priced at worst case: 128GB."
+      },
+      {
+        "risk": "Phone is not eSIM unlocked or has carrier lock",
+        "proof": "Photo of Settings > General > About > Carrier or SIM status",
+        "if_unproven": "Priced as locked, which reduces value. Unlocked phones command higher prices."
+      },
+      {
+        "risk": "Battery health is 89% but may degrade further or have performance throttling",
+        "proof": "Photo of Battery Health screen showing 'Peak Performance Capability' status",
+        "if_unproven": "Priced as degraded battery, which reduces value. If throttled, further devaluation."
+      },
+      {
+        "risk": "Phone is not genuine or is a clone/replica",
+        "proof": "Photo of serial number from Settings > General > About, and IMEI check via official Apple website",
+        "if_unproven": "Priced as genuine, but if fake, value is zero. High risk."
+      }
+    ],
+    "proof_requests": [
+      "Photo of Settings > General > About > Capacity to confirm 128GB storage",
+      "Photo of Settings > General > About > Carrier or SIM status to confirm eSIM unlocked",
+      "Photo of Settings > Battery Health > Peak Performance Capability to confirm no throttling",
+      "Photo of Settings > General > About > Serial Number for verification"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Model is confirmed as iPhone 14 Pro Max, but critical claims like storage capacity, unlock status, and battery performance are unverified. Risks include incorrect storage, carrier lock, and potential fake. Must request proof before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 71667,
+    "input_tokens": 2788,
+    "output_tokens": 875,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "549dda915995077e65abd5e6240873f3",
+    "error": null
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a used car engine on a concrete ground, surrounded by other engines and parts.",
+      "The engine has visible wear, grime, and some missing components (e.g., intake manifold, possibly timing cover).",
+      "There is a label or sticker on the front of the engine block, partially visible, with text that appears to include 'TOYOTA' and possibly '2JZ' or similar, but it is blurry and partially obscured.",
+      "The engine has a large intake manifold area, suggesting it may be a V6 or inline-6, but no clear model designation is readable.",
+      "The surrounding area looks like a scrapyard or auto parts market with multiple engines and parts scattered around."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used Toyota engine",
+      "brand": "Toyota",
+      "model": null,
+      "read_from": [
+        "photo 0 label (partially visible 'TOYOTA')"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "We sale all type of toyota engine and parts",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows one engine that appears to be Toyota, but no proof of 'all types' or other parts being available. The claim is broad and cannot be verified from one photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine may be damaged or non-functional (e.g., internal wear, cracked block, seized components)",
+        "proof": "Close-up of engine block, cylinder head, and internal components (e.g., crankshaft, pistons) via disassembly or inspection video.",
+        "if_unproven": "priced as not working or severely worn"
+      },
+      {
+        "risk": "Engine model or compatibility not confirmed (e.g., wrong model for buyer's vehicle)",
+        "proof": "Clear, close-up photo of engine block label or casting number, or VIN tag if present.",
+        "if_unproven": "priced as unknown model, lower value"
+      },
+      {
+        "risk": "Engine may have been salvaged from a wrecked or accident-damaged vehicle",
+        "proof": "Photo of vehicle body or frame from which engine was removed, or documentation of vehicle history.",
+        "if_unproven": "priced as salvage, lower value"
+      }
+    ],
+    "proof_requests": [
+      "Clear close-up photo of the engine block label or casting number to confirm model.",
+      "Photo or video showing the engine running or being tested (if possible).",
+      "Photo of the vehicle from which the engine was removed, if available."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The engine appears to be a used Toyota, but the exact model is unreadable and critical for pricing. Without proof of model, condition, and history, a reliable price cannot be assigned. The seller's claim of 'all types' is unverifiable from one photo."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 53990,
+    "input_tokens": 1777,
+    "output_tokens": 647,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "7f22b7ce12bd4764abb48531128e44ca",
+    "error": null
+  }
+}

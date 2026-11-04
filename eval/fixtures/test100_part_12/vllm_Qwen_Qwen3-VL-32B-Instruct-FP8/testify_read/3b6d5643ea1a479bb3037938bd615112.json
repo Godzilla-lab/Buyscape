@@ -1,0 +1,101 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Front view of a silver HP laptop with black keyboard and screen. HP logo visible on bezel. Watermark 'EFFECTZ TECH PRO' across keyboard.",
+      "Photo 1: Same front view, slightly different angle. 'Folio' visible on top right corner of screen bezel.",
+      "Photo 2: Back of laptop lid, showing HP logo, two white stickers. One sticker has 'K0276', the other has 'HP EliteBook Folio' and 'S/N: 8232366' and '14.0\"'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "EliteBook Folio 1040 G1",
+      "read_from": [
+        "photo 2 sticker"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP elitebook folio 1040 g1",
+        "verdict": "supported",
+        "evidence": "Photo 2 sticker clearly reads 'HP EliteBook Folio' and '1040 G1'."
+      },
+      {
+        "claim": "14 inches ips bright view display",
+        "verdict": "unverified",
+        "evidence": "Photo 2 sticker says '14.0\"' but does not specify IPS or Bright View. Screen is off in all photos."
+      },
+      {
+        "claim": "intel core i5",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible CPU label or system information. Cannot be confirmed from photos."
+      },
+      {
+        "claim": "4gb ram",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible RAM label or system information. Cannot be confirmed from photos."
+      },
+      {
+        "claim": "256gb",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible storage label or system information. Cannot be confirmed from photos."
+      },
+      {
+        "claim": "backlit keyboard",
+        "verdict": "unverified",
+        "evidence": "Keyboard is not lit in any photo. No indicator of backlighting."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Laptop may not power on or have functional display",
+        "proof": "Video or photo showing the laptop turned on with display working.",
+        "if_unproven": "Priced as not working."
+      },
+      {
+        "risk": "RAM and storage may not match claimed specs (4GB RAM, 256GB SSD)",
+        "proof": "Photo of BIOS screen or system information showing RAM and storage details.",
+        "if_unproven": "Priced as having unknown or lower specs."
+      },
+      {
+        "risk": "Keyboard backlight may not work",
+        "proof": "Photo or video showing keyboard lit in dark environment.",
+        "if_unproven": "Priced as non-backlit."
+      },
+      {
+        "risk": "Screen may not be IPS or Bright View as claimed",
+        "proof": "Photo showing screen from multiple angles with color and brightness consistency, or system specs.",
+        "if_unproven": "Priced as standard display."
+      },
+      {
+        "risk": "Laptop may have physical damage not visible in photos (e.g., hinge, ports, screen cracks)",
+        "proof": "Close-up photos of all edges, hinges, ports, and screen surface.",
+        "if_unproven": "Priced with assumption of minor wear, but potential for hidden damage."
+      }
+    ],
+    "proof_requests": [
+      "Video or photo of the laptop turned on with display working.",
+      "Photo of BIOS or system information showing CPU, RAM, and storage details.",
+      "Photo or video showing keyboard backlighting in dark.",
+      "Close-up photos of all edges, hinges, ports, and screen surface.",
+      "Photo of screen from multiple angles to verify display quality."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is confirmed from the sticker in photo 2, but key specifications (CPU, RAM, storage, display type, backlight) cannot be verified from current photos. Functional and physical condition risks require additional proof before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 40065,
+    "input_tokens": 2954,
+    "output_tokens": 941,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "3b6d5643ea1a479bb3037938bd615112",
+    "error": null
+  }
+}

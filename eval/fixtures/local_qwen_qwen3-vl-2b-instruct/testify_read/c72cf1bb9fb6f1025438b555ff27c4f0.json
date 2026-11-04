@@ -1,0 +1,69 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-instruct",
+  "response": {
+    "observations": [
+      "Photo 0: Front view of a motorcycle's dashboard with gauges, handlebars, and a side mirror. The brand name 'Kawasaki' is visible on the fuel tank in photo 1.",
+      "Photo 1: A black motorcycle with a textured wall in the background. The fuel tank has the 'Kawasaki' logo.",
+      "Photo 2: The rear wheel of a motorcycle with a red stripe, a disc brake, and a chrome exhaust pipe. The motorcycle is on a concrete surface."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "motorcycle",
+      "brand": "Kawasaki",
+      "model": "ZZR",
+      "read_from": [
+        "photo 1",
+        "photo 2"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Kawasaki zzr power bike up for sales",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "Working fine",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "Bought new 6 months ago. Gears and brakes perfect, no rust, all parts original.",
+        "verdict": "supported",
+        "evidence": "photo 1"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The motorcycle may have been modified or altered in some way, even if the seller claims it is original.",
+        "proof": "The exhaust pipe in photo 2 appears to be a different model or style than the one typically seen on a Kawasaki ZZR, and the brake disc is not the standard type.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The motorcycle may have been used for off-road or rough terrain, which could have caused damage.",
+        "proof": "The rear wheel in photo 2 has a red stripe, which is not typical for a standard Kawasaki ZZR.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Can you provide a photo of the original Kawasaki ZZR model with the same red stripe on the rear wheel?",
+      "Can you provide a photo of the original Kawasaki ZZR model with the same exhaust pipe?"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller's claims are supported by the photos, but the model and originality of the motorcycle cannot be confirmed. The photos show a Kawasaki ZZR, but the details of the exhaust pipe and the red stripe on the rear wheel are not consistent with the standard model. The seller cannot provide proof of the originality of the motorcycle, so a price cannot be determined."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-instruct",
+    "task": "testify_read",
+    "latency_ms": 30356,
+    "input_tokens": 2803,
+    "output_tokens": 599,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "c72cf1bb9fb6f1025438b555ff27c4f0",
+    "error": null
+  }
+}

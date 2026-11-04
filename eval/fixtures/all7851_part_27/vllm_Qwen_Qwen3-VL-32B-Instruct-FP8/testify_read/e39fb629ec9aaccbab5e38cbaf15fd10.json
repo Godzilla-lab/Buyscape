@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Open laptop showing Dell G7 logo on screen, keyboard with green backlight, and Dell logo on bezel. The laptop is on a wooden surface with a blue light underneath.",
+      "Photo 1: Windows Task Manager showing CPU details: Intel(R) Core(TM) i7-10750H CPU @ 2.60GHz, 6 cores, 12 logical processors, 12MB L3 cache. Base speed 2.59 GHz.",
+      "Photo 2: Windows Task Manager showing Memory: 16.0 GB total, 15.8 GB available, 2 slots used, SO-DIMM form factor. Memory speed 2833 MT/s."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Dell",
+      "model": "G7 7700",
+      "read_from": [
+        "photo 0 screen (G7 logo)",
+        "photo 1 Task Manager (i7-10750H CPU)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Dell g7 7700",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows G7 logo on screen, and photo 1 shows i7-10750H CPU which is consistent with G7 7700 model."
+      },
+      {
+        "claim": "intel core i7-10750h (6 cores, 12mb cache, up to 5.0ghz)",
+        "verdict": "supported",
+        "evidence": "Photo 1 Task Manager shows Intel(R) Core(TM) i7-10750H CPU @ 2.60GHz, 6 cores, 12 logical processors, 12MB L3 cache. Base speed 2.59 GHz. The 5.0GHz boost is not visible but is standard for this CPU model."
+      },
+      {
+        "claim": "17.3-inch fhd (1920x1080)",
+        "verdict": "unverified",
+        "evidence": "Screen size and resolution are not visible in any photo. The screen shows a logo, but no resolution or size indicators. The model G7 7700 typically has a 17.3-inch FHD screen, but this cannot be confirmed from photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Screen damage or dead pixels",
+        "proof": "A close-up photo of the screen showing the entire display area, especially corners and edges, under bright light.",
+        "if_unproven": "priced as potentially having screen defects"
+      },
+      {
+        "risk": "Battery health or non-functioning battery",
+        "proof": "A photo or video showing the battery percentage and health in Windows settings, or a test of battery life while unplugged.",
+        "if_unproven": "priced as if battery is not working or degraded"
+      },
+      {
+        "risk": "Physical damage to chassis or keyboard",
+        "proof": "A full 360-degree photo of the laptop showing all sides, hinges, and keyboard for scratches, dents, or wear.",
+        "if_unproven": "priced as potentially having cosmetic damage"
+      },
+      {
+        "risk": "GPU or cooling system issues",
+        "proof": "A video or photo showing GPU temperature under load (e.g., during gaming or benchmark), or a photo of the cooling vents and fans.",
+        "if_unproven": "priced as potentially having thermal throttling or GPU failure"
+      }
+    ],
+    "proof_requests": [
+      "A close-up photo of the entire screen under bright light to check for dead pixels or damage.",
+      "A photo of the battery health and percentage in Windows settings.",
+      "A 360-degree photo of the laptop showing all sides, hinges, and keyboard.",
+      "A video or photo showing GPU temperature under load."
+    ],
+    "decision": "price",
+    "reason": "The laptop is identifiable as a Dell G7 7700 with an i7-10750H CPU and 16GB RAM, confirmed by photos. The screen size and resolution are unverified but typical for the model. Hidden risks like screen damage, battery health, and physical wear are noted, but the item can be priced at its worst case (e.g., battery not working, screen defects) based on available evidence."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 82061,
+    "input_tokens": 2823,
+    "output_tokens": 992,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "e39fb629ec9aaccbab5e38cbaf15fd10",
+    "error": null
+  }
+}

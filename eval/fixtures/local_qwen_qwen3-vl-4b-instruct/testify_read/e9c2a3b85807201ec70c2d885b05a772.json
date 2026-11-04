@@ -1,0 +1,67 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-instruct",
+  "response": {
+    "observations": [
+      "Photo 0: Engine with visible hoses, belts, and a yellow dipstick handle. Watermark 'NZ JAPANESE AUTOS'.",
+      "Photo 1: Engine with black air intake manifold and various hoses. Watermark 'NZ JAPANESE AUTOS'.",
+      "Photo 2: Engine cover with 'VE' and Toyota logo, some green markings. Watermark 'NZ JAPANESE AUTOS'."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "engine",
+      "read_from": [
+        "photo 2 plate"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Complete engine with compressor and all the operators for toyota venza,camry, sienna, Hylander...",
+        "verdict": "unverified",
+        "evidence": "Photos show an engine, but no clear view of the compressor or 'all operators'. The 'operators' claim is vague and unverifiable from the images."
+      },
+      {
+        "claim": "Tokunbo, direct from Belgium. Tested and working, no knock, low mileage, never opened.",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photos show the origin, testing, or mileage. The 'Tokunbo' claim is not verifiable from the images."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine is not from the claimed models or is not complete.",
+        "proof": "Photo 2: The 'VE' marking on the engine cover. This is a Toyota engine code, but the specific model (e.g., 2.4L, 3.5L) is not visible. The 'VE' code is common to several Toyota models, including Camry, Venza, and Sienna, but without a model number, it's unverifiable.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Engine is not tested or has hidden damage.",
+        "proof": "Photo 0: The engine is dirty and has visible wear. No test results or diagnostic tools are shown. The 'tested and working' claim is not verifiable.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Engine is not from Belgium or is not 'Tokunbo'.",
+        "proof": "Photo 0, 1, 2: No visible country of origin or 'Tokunbo' markings. The watermark 'NZ JAPANESE AUTOS' suggests a seller, not a country of origin.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Ask for the engine model number (e.g., 2.4L, 3.5L) to confirm compatibility with the listed models.",
+      "Ask for a test report or diagnostic results to verify 'tested and working'.",
+      "Ask for proof of origin (e.g., shipping documents or import paperwork) to confirm 'direct from Belgium'."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The engine's identity and claims are unverifiable from the photos alone. The seller's claims about origin, testing, and completeness cannot be confirmed without additional proof."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-instruct",
+    "task": "testify_read",
+    "latency_ms": 4056,
+    "input_tokens": 2809,
+    "output_tokens": 707,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "e9c2a3b85807201ec70c2d885b05a772",
+    "error": null
+  }
+}

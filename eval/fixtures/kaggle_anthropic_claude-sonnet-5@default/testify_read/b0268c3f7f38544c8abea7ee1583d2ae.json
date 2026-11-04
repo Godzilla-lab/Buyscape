@@ -1,0 +1,97 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows a split-type air conditioner: wall-mounted indoor unit resting on top of an outdoor condenser/compressor unit, both removed from installation and placed on a tiled floor against a wall.",
+      "Indoor unit front grille is open/raised, blades visible, casing has visible dust and grime.",
+      "Outdoor unit fan grille is intact, unit has some pinkish/red handwriting or marker scrawled on the casing, partly illegible.",
+      "A label area is visible on the indoor unit but no brand or model text is legible in the photo.",
+      "Pipes/wires are seen coiled near the outdoor unit, not connected to any wall or structure.",
+      "No remote control, receipt, warranty card, or nameplate close-up is shown in the photo."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "split-unit inverter air conditioner (indoor + outdoor unit)",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Faulty inverter AC available for sale (listing title)",
+        "verdict": "unverified",
+        "evidence": "No fault symptoms visible in photo 0; unit is static and not shown running."
+      },
+      {
+        "claim": "No fault at all, the motor was never opened",
+        "verdict": "contradicted",
+        "evidence": "This directly contradicts the seller's own listing title which states 'Faulty inverter AC'."
+      },
+      {
+        "claim": "Barely used, bought new last year",
+        "verdict": "unverifiable_remote",
+        "evidence": "No purchase date, box, or usage indicator visible in photo 0."
+      },
+      {
+        "claim": "Receipt and warranty card available",
+        "verdict": "unverifiable_remote",
+        "evidence": "No receipt or warranty card shown in the photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Unit may not power on or cool at all, given the seller's own title says 'faulty'",
+        "proof": "A video clip of the unit running with cold air blowing from the indoor vent and the outdoor fan/compressor running",
+        "if_unproven": "priced as non-working"
+      },
+      {
+        "risk": "Refrigerant gas may be low or fully discharged",
+        "proof": "Clip showing the gas pressure gauge reading during a technician test, or a cooling test after running for 10+ minutes",
+        "if_unproven": "priced as not working / needs regas"
+      },
+      {
+        "risk": "Compressor or motor internal fault despite claim it was 'never opened'",
+        "proof": "Close-up photos of the compressor nameplate and casing seals showing no tampering, plus a running test clip",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Missing accessories (remote control, mounting brackets, installation pipes)",
+        "proof": "Photo showing remote control and full set of pipes/brackets included",
+        "if_unproven": "priced as incomplete set"
+      },
+      {
+        "risk": "Physical/corrosion damage not clear from this angle",
+        "proof": "Close-up photos of all sides of both indoor and outdoor units, including the back and coil fins",
+        "if_unproven": "priced as cosmetically worn, worst case"
+      },
+      {
+        "risk": "Brand and model unconfirmed, affecting comparable pricing",
+        "proof": "Clear close-up photo of the nameplate/model sticker on indoor unit",
+        "if_unproven": "priced as generic unbranded split AC of visible size"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the nameplate/model sticker on the indoor unit",
+      "Video clip of the unit running (indoor cold air + outdoor fan/compressor operating)",
+      "Photo of the receipt and warranty card mentioned by the seller",
+      "Photo of included remote control and installation pipes/brackets",
+      "Close-up photos of the outdoor unit coil and compressor area, and the scribbled marking on the casing"
+    ],
+    "decision": "price",
+    "reason": "The seller's title explicitly states the AC is faulty while the body claims no fault, a direct contradiction with no running demonstration shown, so the item must be priced at the worst case as a non-working split AC pending proof of operation."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 24140,
+    "input_tokens": 3008,
+    "output_tokens": 2225,
+    "cost_usd": 0.028266,
+    "replayed": false,
+    "fixture_key": "b0268c3f7f38544c8abea7ee1583d2ae",
+    "error": null
+  }
+}

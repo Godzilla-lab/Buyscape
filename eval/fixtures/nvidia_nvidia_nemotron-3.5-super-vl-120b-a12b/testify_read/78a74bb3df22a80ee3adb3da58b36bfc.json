@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black rectangular power bank with orange edges and 'NEWAGE' embossed vertically on the back.",
+      "Four small LED indicator dots are visible near the top of photo 0.",
+      "Photo 1 shows the port edge with labels OUT1, TYPE-C, and OUT2 next to USB-A and USB-C ports.",
+      "Photo 2 shows the side edge with an orange LED indicator light.",
+      "No capacity marking (mAh or Wh) is visible in any photo."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "power bank",
+      "brand": "NEWAGE",
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Brand is New Age",
+        "verdict": "supported",
+        "evidence": "photo 0 shows 'NEWAGE' embossed on the device"
+      },
+      {
+        "claim": "Capacity is 22500 MHA",
+        "verdict": "unverifiable_remote",
+        "evidence": "No capacity marking is visible in any photo; battery capacity cannot be confirmed remotely"
+      },
+      {
+        "claim": "Item is a power bank",
+        "verdict": "supported",
+        "evidence": "photos show USB output ports, Type-C port, and LED indicators typical of a power bank"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual battery capacity may be lower than claimed or unmarked",
+        "proof": "Photo showing any mAh or Wh rating printed on the device",
+        "if_unproven": "as an unknown-capacity used power bank"
+      },
+      {
+        "risk": "Battery cells may be degraded or dead",
+        "proof": "Video showing the power bank charging a phone and retaining charge",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "One or more output ports may not function",
+        "proof": "Video demonstrating OUT1, OUT2, and TYPE-C ports all charging devices",
+        "if_unproven": "as having faulty ports"
+      },
+      {
+        "risk": "LED battery indicators may not work",
+        "proof": "Video showing the LED indicators lighting up when pressed",
+        "if_unproven": "as having non-functional indicators"
+      }
+    ],
+    "proof_requests": [
+      "Photo showing any capacity marking (mAh or Wh) on the power bank",
+      "Video showing all ports (OUT1, OUT2, TYPE-C) successfully charging a device",
+      "Video showing the LED battery indicators lighting up"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a NEWAGE power bank from photo 0, but capacity and functionality are unverified, so it can be priced at its worst case as seen."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 21699,
+    "input_tokens": 3505,
+    "output_tokens": 3102,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "78a74bb3df22a80ee3adb3da58b36bfc",
+    "error": null
+  }
+}

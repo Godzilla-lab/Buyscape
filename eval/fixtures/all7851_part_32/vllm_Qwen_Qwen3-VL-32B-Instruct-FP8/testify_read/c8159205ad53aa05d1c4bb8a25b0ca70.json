@@ -1,0 +1,88 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Front three-quarter view of a silver sedan. Honda emblem visible on grille. Headlights and front bumper appear intact. Front tire looks worn, possibly underinflated. Water stains or dirt on hood.",
+      "Photo 1: Rear three-quarter view. Honda emblem on trunk. Nigerian license plate: 'MC 518L'. Rear bumper and taillights appear intact. Rear tire also looks worn. Black mesh cover on rear side panel, possibly for a fuel cap or speaker.",
+      "Photo 2: Rear three-quarter view from other side. 'CIVIC' badge visible on left side of trunk. Paint appears mostly intact but with minor scuffs and dirt. Rear window tinted. Side mirror and door handles intact. Rear tire appears worn. No visible damage to body panels.",
+      "All photos show the car parked on a paved surface with a concrete wall in the background. No interior or engine bay shown. No signs of recent repair or accident damage from exterior views."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "sedan",
+      "brand": "Honda",
+      "model": "Civic",
+      "read_from": [
+        "photo 0 grille emblem",
+        "photo 2 trunk badge"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Engine, Ac, legs very good.",
+        "verdict": "unverified",
+        "evidence": "No photos of engine bay, AC vents, or suspension components. Cannot verify condition from exterior shots alone."
+      },
+      {
+        "claim": "The gearbox is a bit faulty",
+        "verdict": "unverified",
+        "evidence": "No photos of transmission or drivetrain. Cannot verify fault from exterior views."
+      },
+      {
+        "claim": "You can travel anywhere in Nigeria with...",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a subjective claim about reliability. Cannot be proven or disproven from photos alone."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine not working or in poor condition",
+        "proof": "Photo of engine bay with clear view of components, oil level, belts, and any leaks or damage.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "AC not functioning",
+        "proof": "Photo of AC controls and vents, or a video showing AC blowing cold air.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Gearbox fault is severe or undisclosed",
+        "proof": "Video of car driving, showing shifting behavior, or photo of transmission fluid and condition.",
+        "if_unproven": "priced as not working or with major repair needed"
+      },
+      {
+        "risk": "Hidden body damage or rust under paint",
+        "proof": "Photos of undercarriage, wheel arches, and door sills, especially in areas prone to rust.",
+        "if_unproven": "priced as having potential hidden damage"
+      },
+      {
+        "risk": "Tires are worn beyond safe limit",
+        "proof": "Close-up photos of tire tread depth on all four tires.",
+        "if_unproven": "priced as needing immediate tire replacement"
+      }
+    ],
+    "proof_requests": [
+      "Photos of engine bay showing condition of engine, belts, hoses, and oil level.",
+      "Video of car driving, showing smooth gear shifts and AC operation.",
+      "Close-up photos of all four tires showing tread depth.",
+      "Photos of undercarriage, especially around suspension and wheel arches.",
+      "Photo of interior showing AC controls and vents."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The car is identifiable as a Honda Civic, but critical claims about engine, AC, and gearbox cannot be verified from exterior photos. Hidden risks like engine condition, AC functionality, and transmission fault are unproven and would significantly affect value. Price cannot be determined without proof of these components."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 68607,
+    "input_tokens": 2162,
+    "output_tokens": 872,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "c8159205ad53aa05d1c4bb8a25b0ca70",
+    "error": null
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: White MacBook Pro box with 'MacBook Pro' printed at the bottom. Image on box shows a laptop with a colorful abstract screen and a silver chassis.",
+      "Photo 1: Same box from a slightly different angle, showing the same image and design.",
+      "Photo 2: Back of the box with specifications: '16GB unified memory', '512GB SSD', '14-inch MacBook Pro with Apple M2 Pro chip'. Also shows serial number, barcode, and regulatory labels. Text is clear and legible.",
+      "All photos show the box only; no laptop is visible.",
+      "Watermark 'POSTED ON JIJI MICHAEL BANKY3W' is present on all photos."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "14-inch MacBook Pro",
+      "brand": "Apple",
+      "model": "M2 Pro",
+      "read_from": [
+        "photo 2 back of box: '14-inch MacBook Pro with Apple M2 Pro chip'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "MacBook Pro 2023 M2 pro",
+        "verdict": "supported",
+        "evidence": "Photo 2: '14-inch MacBook Pro with Apple M2 Pro chip' is clearly printed on the box back."
+      },
+      {
+        "claim": "Apple M2 pro chip",
+        "verdict": "supported",
+        "evidence": "Photo 2: '14-inch MacBook Pro with Apple M2 Pro chip' is clearly printed on the box back."
+      },
+      {
+        "claim": "16gb LPDDR5 RAM",
+        "verdict": "supported",
+        "evidence": "Photo 2: '16GB unified memory' is printed on the box back. Unified memory in M2 Pro models is LPDDR5."
+      },
+      {
+        "claim": "512GB SSD",
+        "verdict": "supported",
+        "evidence": "Photo 2: '512GB SSD' is printed on the box back."
+      },
+      {
+        "claim": "Touch ID",
+        "verdict": "unverifiable_remote",
+        "evidence": "The box does not show the laptop, so Touch ID cannot be visually confirmed. It is standard on M2 Pro models, but not proven from photos."
+      },
+      {
+        "claim": "CC: 355",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible charge cycle count in photos. This is a software metric, not visible on the box."
+      },
+      {
+        "claim": "Maximum Health:...",
+        "verdict": "unverifiable_remote",
+        "evidence": "Battery health is a software metric not visible on the box. Cannot be confirmed remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The laptop may be non-functional or have hardware issues (e.g., screen, battery, keyboard).",
+        "proof": "A video or photo of the laptop turned on, showing the screen, keyboard, and battery health in System Report.",
+        "if_unproven": "Priced as not working or with unknown functionality."
+      },
+      {
+        "risk": "The laptop may be stolen or have a blacklisted serial number.",
+        "proof": "A screenshot of the serial number checked on Apple's website or a verification from a trusted reseller.",
+        "if_unproven": "Priced as high-risk, with potential for legal or warranty issues."
+      },
+      {
+        "risk": "The battery may be degraded (charge cycle count 355 is high for a 2023 model).",
+        "proof": "A screenshot of the battery health from System Report showing cycle count and maximum capacity.",
+        "if_unproven": "Priced as if battery is degraded (e.g., 80% or less capacity)."
+      },
+      {
+        "risk": "The item may be a fake or repackaged unit (box only, no laptop shown).",
+        "proof": "A photo or video of the actual laptop inside the box, powered on and showing the model name and serial number.",
+        "if_unproven": "Priced as if the laptop is not present or is a fake."
+      }
+    ],
+    "proof_requests": [
+      "Photo or video of the actual laptop inside the box, powered on, showing the screen, keyboard, and battery health.",
+      "Screenshot of the serial number checked on Apple's website.",
+      "Screenshot of the battery health and charge cycle count from System Report."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identified as a 14-inch MacBook Pro with M2 Pro chip, 16GB RAM, and 512GB SSD based on the box. However, the laptop itself is not shown, and critical claims like battery health, charge cycles, and functionality cannot be verified. Risks include non-functionality, stolen device, or fake product. Proof of the actual laptop and its condition is required before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 94789,
+    "input_tokens": 2810,
+    "output_tokens": 1108,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "56cbcb9b75124037663c5287e04d893c",
+    "error": null
+  }
+}

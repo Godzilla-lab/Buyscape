@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0 shows a large Konica Minolta bizhub PRO multifunction color laser printer/copier with a control panel and paper output area.",
+      "The front lower label in photo 0 reads \u201cbizhub PRO\u201d and \u201cC754e\u201d.",
+      "The seller\u2019s text says \u201cKonica Minolta Bizhub Pro C754e\u201d and also mentions \u201cThe model is C854e\u201d.",
+      "Photo 0 does not clearly show \u201cC854e\u201d; the visible model marking appears to be C754e.",
+      "There is visible plastic wrap/packing material around the machine in photo 0, suggesting it may have been recently moved or stored.",
+      "No close-up photo of the toner/consumables status, error screen, counters, or any test print."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": null,
+      "brand": "Konica Minolta",
+      "model": "bizhub PRO C754e",
+      "read_from": [
+        "photo 0 front lower model marking"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "The Konica Minolta Bizhub Pro C754e is a large, full colour, laser multifunctional printer.",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows a Konica Minolta bizhub PRO color MFP-style unit (bizhub PRO branding and C754e marking visible)."
+      },
+      {
+        "claim": "The model is C854e.",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 front lower marking reads \u201cbizhub PRO C754e\u201d, not C854e."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Wrong model listed (C854e vs C754e). This affects parts, firmware, and market value.",
+        "proof": "A clear photo of the model nameplate/label (including exact model code) and the system information page showing the model.",
+        "if_unproven": "Price as the worst-case mismatch: treat as not reliably identified and price at the lower end for the visible/likely model (C754e) with reduced confidence."
+      },
+      {
+        "risk": "Not confirmed working condition (no power-on, no error display, no test print).",
+        "proof": "Video/clip of power-on to the home screen plus a short test print/copy showing output.",
+        "if_unproven": "Price as not working / unknown condition."
+      },
+      {
+        "risk": "High usage/counter unknown (toner/DRUM/maintenance cycles may be near end-of-life).",
+        "proof": "Photo of the counters page (total prints/copies) and maintenance/consumables status screen.",
+        "if_unproven": "Price as high-usage: assume consumables/maintenance may be needed soon."
+      },
+      {
+        "risk": "Missing or faulty consumables (toner, drums, fuser, waste toner bottle) not shown.",
+        "proof": "Close-up photos of toner/drum compartments and waste toner bottle status; also a photo of any \u201creplace\u201d or \u201cempty\u201d indicators.",
+        "if_unproven": "Price as needing consumables (assume at least one consumable replacement)."
+      },
+      {
+        "risk": "Paper path/feed issues or jams (common for used MFPs; not visible from one exterior photo).",
+        "proof": "Video of feeding from tray and completing a full print/copy without jams.",
+        "if_unproven": "Price as potential feed/jam issues (worst-case: requires servicing)."
+      }
+    ],
+    "proof_requests": [
+      "Clear close-up photo of the exact model label (showing C754e or C854e) and the serial number.",
+      "Photo/screenshot of the system information page (model + firmware) and counters (total prints/copies).",
+      "Video clip: power on \u2192 home screen \u2192 run a short test print/copy (preferably black + color) showing no errors.",
+      "Photos of consumables status: toner levels, drum units, fuser/waste toner bottle indicators."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo identifies the unit as Konica Minolta bizhub PRO C754e, contradicting the seller\u2019s claim of C854e. However, with only one exterior photo and no proof of working status, counters, or consumables, a reliable worst-case price cannot be set without the decisive test/counter evidence."
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_read",
+    "latency_ms": 7143,
+    "input_tokens": 2139,
+    "output_tokens": 979,
+    "cost_usd": 0.001652,
+    "replayed": false,
+    "fixture_key": "646a24e78a6c0b6616d08efd36967d6a",
+    "error": null
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the front of a retail box for a New Age power bank.",
+      "The box displays 'NEW AGE' branding and '22500mAh' capacity.",
+      "The box mentions 'POLYMER POWER BANK', 'LED Lighting', and '5V/2.4A' output.",
+      "The actual power bank is not visible; only the packaging is shown.",
+      "The box shows some minor wear and softening at the edges."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "power bank",
+      "brand": "New Age",
+      "model": "22500mAh Polymer Power Bank",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "New Age 22500mAh Polymer Power Bank",
+        "verdict": "supported",
+        "evidence": "The brand and capacity are clearly printed on the box in photo 0."
+      },
+      {
+        "claim": "high-capacity",
+        "verdict": "supported",
+        "evidence": "22500mAh is a high capacity for a portable power bank as shown on the box in photo 0."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different item.",
+        "proof": "A photo or video of the actual power bank outside of the packaging.",
+        "if_unproven": "priced as zero value"
+      },
+      {
+        "risk": "The device may be a counterfeit product.",
+        "proof": "A photo of the back of the device showing the serial number and manufacturer's security hologram.",
+        "if_unproven": "priced as a generic/unbranded power bank"
+      },
+      {
+        "risk": "The device may be used or have physical damage not visible from the box.",
+        "proof": "Clear photos of all sides of the actual power bank, especially the charging ports.",
+        "if_unproven": "priced as non-functional or heavily used"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual power bank outside the box.",
+      "Photo of the back of the power bank showing the printed specifications and any security stickers.",
+      "Photo of the USB ports to check for wear or damage."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail packaging is shown in the photo. Without seeing the actual device, it is impossible to verify its condition, authenticity, or even its presence."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 16558,
+    "input_tokens": 2367,
+    "output_tokens": 3622,
+    "cost_usd": 0.012049,
+    "replayed": false,
+    "fixture_key": "e0f6d59a68033e75821121ff88f455da",
+    "error": null
+  }
+}

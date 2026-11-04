@@ -1,0 +1,74 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Front view of a large solar panel.",
+      "Monocrystalline cells with a half-cut design (horizontal dividing line).",
+      "No manufacturer labels, brand names, or specification stickers are visible in the photo.",
+      "Image contains a watermark 'MEKA SOLAR'.",
+      "The panel appears to be in a warehouse or shop setting."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "FALA",
+        "verdict": "unverified",
+        "evidence": "No brand name is visible on the frame or cells in photo 0."
+      },
+      {
+        "claim": "650w panel",
+        "verdict": "unverified",
+        "evidence": "The technical specification sticker, which confirms wattage, is not shown."
+      },
+      {
+        "claim": "Bifacial",
+        "verdict": "unverified",
+        "evidence": "The rear of the panel is not visible to confirm if it has glass or cells on the back."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The actual wattage may be significantly lower than 650W.",
+        "proof": "A clear photo of the technical specification sticker on the back of the panel.",
+        "if_unproven": "as a standard 450W panel"
+      },
+      {
+        "risk": "The panel may not be bifacial.",
+        "proof": "A photo of the rear side of the panel showing the cell structure.",
+        "if_unproven": "as a monofacial panel"
+      },
+      {
+        "risk": "The panel may have internal cell damage or low output.",
+        "proof": "A video showing a multimeter test of Open Circuit Voltage (Voc) and Short Circuit Current (Isc) in direct sunlight.",
+        "if_unproven": "as non-functional/scrap"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the technical specification sticker on the back of the panel.",
+      "Photo of the rear side of the panel.",
+      "Video of a multimeter test showing the panel's output in sunlight."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The brand and wattage (650W) are the primary drivers of value for this item and cannot be verified from the single front-facing photo. A photo of the manufacturer's specification label is required."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 10498,
+    "input_tokens": 2390,
+    "output_tokens": 2082,
+    "cost_usd": 0.007441,
+    "replayed": false,
+    "fixture_key": "cdc73c82b7d12ca049813a38f5782475",
+    "error": null
+  }
+}

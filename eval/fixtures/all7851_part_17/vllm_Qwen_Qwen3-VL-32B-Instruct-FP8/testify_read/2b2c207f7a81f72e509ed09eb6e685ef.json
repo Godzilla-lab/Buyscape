@@ -1,0 +1,98 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: A pink iPhone with a white label on the back. The label shows 'Apple iPhone 16 MYR5C/A 256GB', serial number '359068550451313', and other details including 'Color: Pink', 'Model: MYR5C/A', 'Storage: 256GB', 'Original Device', '100% Working Phone'. The phone has a dual-camera setup in a pill-shaped module. A green sticker with '952' is on the top right.",
+      "Photo 1: Same phone from a slightly different angle, showing the same label and camera setup.",
+      "Photo 2: Side view of the phone showing the bottom edge with a USB-C port, speaker grilles, and microphone holes. The phone has a pink finish. The side buttons are not visible.",
+      "No front view or screen is shown. No proof of Face ID, True Tone, or battery health is visible. No proof of dual physical SIM is visible."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "iPhone 16",
+      "brand": "Apple",
+      "model": "MYR5C/A",
+      "read_from": [
+        "photo 0 label",
+        "photo 1 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "iPhone 16",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 1 label clearly state 'Apple iPhone 16 MYR5C/A 256GB'."
+      },
+      {
+        "claim": "256gb",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 1 label state 'Storage: 256GB'."
+      },
+      {
+        "claim": "dual physical sim",
+        "verdict": "unverifiable_remote",
+        "evidence": "No SIM tray or internal hardware is visible. The model MYR5C/A is a dual-SIM model, but this cannot be confirmed remotely without seeing the SIM tray or settings."
+      },
+      {
+        "claim": "Face ID",
+        "verdict": "unverifiable_remote",
+        "evidence": "No front view or screen is shown. Face ID cannot be verified without seeing the notch or testing it."
+      },
+      {
+        "claim": "True Tone",
+        "verdict": "unverifiable_remote",
+        "evidence": "No screen is visible. True Tone is a display feature that cannot be verified remotely without seeing the screen or testing it."
+      },
+      {
+        "claim": "battery 86%",
+        "verdict": "unverified",
+        "evidence": "No battery health screen or diagnostic is shown. The claim cannot be verified from the photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery health is not 86% as claimed",
+        "proof": "A screenshot of the battery health settings showing the actual percentage.",
+        "if_unproven": "Priced as if battery is degraded (e.g., 70-80% or lower), which reduces value."
+      },
+      {
+        "risk": "Phone is not genuine or is a clone",
+        "proof": "A clear shot of the front screen with the Apple logo and settings menu, or a video showing the phone turning on and displaying the lock screen.",
+        "if_unproven": "Priced as a potential clone or non-genuine device, which significantly reduces value."
+      },
+      {
+        "risk": "Phone has physical damage not visible in photos",
+        "proof": "A full 360-degree video or multiple close-up photos showing all edges, corners, and the front screen.",
+        "if_unproven": "Priced as if there may be hidden scratches, dents, or screen damage, which reduces value."
+      },
+      {
+        "risk": "No dual physical SIM functionality",
+        "proof": "A video showing the SIM tray being opened and both SIM slots being used, or a screenshot of the settings showing dual SIM active.",
+        "if_unproven": "Priced as a single-SIM device, which reduces value in markets where dual SIM is essential."
+      }
+    ],
+    "proof_requests": [
+      "A clear front view of the phone showing the screen and notch.",
+      "A video or screenshot of the battery health settings.",
+      "A video showing the SIM tray being opened and both SIM slots being used.",
+      "A 360-degree video or close-up photos of all edges and corners.",
+      "A video of the phone turning on and displaying the lock screen."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and storage are confirmed, but critical claims like Face ID, True Tone, battery health, and dual SIM cannot be verified from the current photos. Hidden risks like battery degradation, physical damage, or non-genuine status cannot be ruled out without further proof. The item cannot be priced accurately without these verifications."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 30588,
+    "input_tokens": 2968,
+    "output_tokens": 1097,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "2b2c207f7a81f72e509ed09eb6e685ef",
+    "error": null
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black car battery with a purple and black label.",
+      "The brand 'PROMISE' is visible in white text on the top and front label.",
+      "The label includes 'MAINTENANCE FREE BATTERY' and 'KOREA TECH' text.",
+      "A serial number '6A16260110078' is embossed on the top cover.",
+      "Another code '8BA041051' is visible on the side.",
+      "The battery terminals are visible: one is covered with a grey cap, the other is exposed and shows some corrosion or residue.",
+      "The battery appears dusty and used, despite the seller's claim of being unused for a month.",
+      "There is a watermark 'POSTED ON JIJI DAMTOLA FAGBEMI' across the image."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car battery",
+      "brand": "PROMISE",
+      "model": "75Ah",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "PROMISE 75Ah car battery",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows the brand 'PROMISE' and the label 'MAINTENANCE FREE BATTERY' with '75Ah' implied by the seller's text and common model naming; no conflicting model info visible."
+      },
+      {
+        "claim": "it was purchased a month ago and haven't been used",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows dust and minor corrosion on terminals, suggesting possible exposure or storage; no proof of purchase date or usage status. The condition does not confirm 'unused'."
+      },
+      {
+        "claim": "Slightly negotiable",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a pricing statement, not a physical claim; cannot be verified from photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery may be dead or have low charge despite being unused",
+        "proof": "A voltage test reading or a video showing the battery being tested with a multimeter.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Terminal corrosion may indicate prior use or poor storage, affecting performance",
+        "proof": "Close-up of both terminals and the battery casing to assess corrosion extent and internal condition.",
+        "if_unproven": "priced as potentially degraded"
+      },
+      {
+        "risk": "Battery may be counterfeit or not genuine PROMISE brand",
+        "proof": "Clear shot of the label with hologram or QR code (if any), and a shot of the bottom or side with manufacturing date or batch code.",
+        "if_unproven": "priced as unverified brand"
+      }
+    ],
+    "proof_requests": [
+      "Video or photo of the battery being tested with a multimeter to confirm voltage.",
+      "Close-up of both terminals and casing to assess corrosion and physical condition.",
+      "Photo of the bottom or side showing manufacturing date or batch code.",
+      "Proof of purchase (if available) to verify age."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The battery's condition and claims of being unused cannot be confirmed from the current photo. Dust and terminal residue suggest possible use or storage issues. Voltage and physical condition must be verified before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 65633,
+    "input_tokens": 1579,
+    "output_tokens": 767,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "e23d52c0479ecededa0563addc2df9e5",
+    "error": null
+  }
+}

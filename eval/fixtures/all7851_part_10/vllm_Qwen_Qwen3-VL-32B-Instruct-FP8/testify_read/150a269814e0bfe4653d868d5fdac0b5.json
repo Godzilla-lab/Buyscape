@@ -1,0 +1,126 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Closed silver laptop with a large black 'N' logo and text 'BONE TECH SOLUTIONS' on the lid. No visible brand or model on the lid.",
+      "Photo 1: Open laptop showing Windows desktop. HP logo visible on the bottom bezel of the screen. Keyboard has 'ZBOOK' printed on the lower left. Touchpad is present. A sticker with 'Intel Core i5' is visible on the lower right of the palm rest.",
+      "Photo 2: Same as photo 1, but with a slightly different angle. The screen shows a clear image, and the keyboard and touchpad are visible. The 'ZBOOK' branding is again visible on the lower left of the keyboard area.",
+      "The screen appears to be working and displays a full HD resolution image.",
+      "The keyboard has a circular trackpoint (pointing stick) in the center, typical of HP ZBook models.",
+      "No visible damage to the screen or keyboard in the photos.",
+      "The laptop is silver with a textured palm rest and a black keyboard."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "ZBook 14 G7",
+      "read_from": [
+        "photo 1 screen bezel",
+        "photo 2 keyboard area"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP ZBook 14 G7",
+        "verdict": "supported",
+        "evidence": "HP logo on screen bezel (photo 1 and 2), 'ZBOOK' printed on keyboard (photo 1 and 2)"
+      },
+      {
+        "claim": "Core i5",
+        "verdict": "supported",
+        "evidence": "Intel Core i5 sticker visible on palm rest (photo 1 and 2)"
+      },
+      {
+        "claim": "8gb",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo of system specs or task manager showing RAM. Cannot verify from photos alone."
+      },
+      {
+        "claim": "256gb",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo of system specs or disk management showing storage. Cannot verify from photos alone."
+      },
+      {
+        "claim": "Backlight",
+        "verdict": "supported",
+        "evidence": "Keyboard is illuminated in photos 1 and 2, indicating backlight is active."
+      },
+      {
+        "claim": "Face ID",
+        "verdict": "unverified",
+        "evidence": "No visible IR camera or Windows Hello indicator. Cannot confirm from photos."
+      },
+      {
+        "claim": "Bluetooth",
+        "verdict": "unverified",
+        "evidence": "No visible Bluetooth indicator or system settings photo. Cannot confirm from photos."
+      },
+      {
+        "claim": "Full HD",
+        "verdict": "supported",
+        "evidence": "Screen displays clear, sharp image with high resolution (photo 1 and 2)."
+      },
+      {
+        "claim": "No single fault",
+        "verdict": "unverified",
+        "evidence": "Photos show no visible damage, but internal faults (e.g., battery, ports, cooling) cannot be assessed remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "RAM is not 8GB",
+        "proof": "Photo of system properties or task manager showing 8GB RAM",
+        "if_unproven": "priced as having less than 8GB RAM"
+      },
+      {
+        "risk": "Storage is not 256GB",
+        "proof": "Photo of disk management or system properties showing 256GB SSD",
+        "if_unproven": "priced as having less than 256GB storage"
+      },
+      {
+        "risk": "Face ID not functional",
+        "proof": "Video or photo showing Windows Hello face login working",
+        "if_unproven": "priced as lacking face ID"
+      },
+      {
+        "risk": "Bluetooth not working",
+        "proof": "Photo of Bluetooth settings showing active connection or device pairing",
+        "if_unproven": "priced as lacking Bluetooth"
+      },
+      {
+        "risk": "Battery health is poor or not included",
+        "proof": "Photo of battery health report or battery in use without charger",
+        "if_unproven": "priced as battery not included or degraded"
+      },
+      {
+        "risk": "Internal hardware faults (e.g., cooling, ports, hinges)",
+        "proof": "Video showing all ports working, fan operation, and hinge movement",
+        "if_unproven": "priced as potentially faulty internally"
+      }
+    ],
+    "proof_requests": [
+      "Photo of system properties showing 8GB RAM and 256GB SSD",
+      "Video or photo showing Windows Hello face login working",
+      "Photo of Bluetooth settings showing active connection",
+      "Photo of battery health report or battery in use",
+      "Video showing all ports working and hinge movement"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and core specs (CPU, backlight, screen) are supported by photos, but critical claims like RAM, storage, Face ID, Bluetooth, and internal condition cannot be verified remotely. The item cannot be priced accurately without proof of these claims."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 96203,
+    "input_tokens": 2804,
+    "output_tokens": 1175,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "150a269814e0bfe4653d868d5fdac0b5",
+    "error": null
+  }
+}

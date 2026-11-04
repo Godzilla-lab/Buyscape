@@ -1,0 +1,89 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: Black UPS unit with 'BLUE GATE' branding embossed on top front, blue vertical strip with power button and three indicator LEDs, standing on tiled floor.",
+      "Photo 1: Same unit from a side/top angle showing power cable with UK-style 3-pin plug, unit resting on its side, no model number, capacity (VA/W) rating, or label visible.",
+      "No rating label, serial sticker, or specification plate is visible in either photo.",
+      "Unit shows some surface wear/scuffing on casing but no visible cracks or damage.",
+      "Unit is not shown powered on or under load in any photo.",
+      "Seller's new message is text only, no new photo or video provided."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "UPS (uninterruptible power supply)",
+      "brand": "Blue Gate",
+      "model": null,
+      "read_from": [
+        "photo 0 casing text",
+        "photo 1 casing text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "UPS available",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 1 show a physical UPS unit"
+      },
+      {
+        "claim": "Battery is new, holds charge for 8 hours",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo or clip shows the unit running on battery, a timer, or battery receipt/invoice; seller's verbal reassurance is not visual proof"
+      },
+      {
+        "claim": "Never repaired",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo of internal casing/screws or service history provided; seller's word alone does not settle this"
+      },
+      {
+        "claim": "I tested it myself yesterday, everything I said is true",
+        "verdict": "unverifiable_remote",
+        "evidence": "No video, timer, or dated proof of the test was sent; a seller's assurance is not evidence"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery runtime could be far less than claimed 8 hours, or battery could be old/dead",
+        "proof": "Video clip of unit running a load (e.g., lamp or fan) on battery power with a visible timer, or a dated receipt for battery replacement",
+        "if_unproven": "priced as battery not holding charge / needing replacement"
+      },
+      {
+        "risk": "No VA/Watt capacity rating visible, so unclear what loads it can support",
+        "proof": "Clear photo of the rating label/sticker (usually on the back or bottom) showing VA/W output",
+        "if_unproven": "priced at the low end of typical capacity for this form factor"
+      },
+      {
+        "risk": "Unit could have hidden internal repairs or non-original parts despite 'never repaired' claim",
+        "proof": "Photo of opened casing showing untouched seals/screws, or original purchase receipt",
+        "if_unproven": "priced as possibly repaired/refurbished"
+      },
+      {
+        "risk": "Unit not demonstrated powering on or functioning at all",
+        "proof": "Video clip of unit being switched on with LEDs lighting and audible beep/fan",
+        "if_unproven": "priced as non-functional until shown working"
+      }
+    ],
+    "proof_requests": [
+      "Video clip of the UPS running a load on battery power with a visible clock/timer to support the 8-hour claim",
+      "Clear photo of the rating/specification label (VA/W output) usually on the back or base",
+      "Video of the unit powering on from mains showing LED indicators and any audible signals",
+      "Photo of the battery itself or compartment if accessible, and any purchase receipt for 'new' battery claim"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "A verbal reassurance with no new photo or video does not change the evidence; the rating label needed even for a worst-case price is still missing, and the runtime and repair claims remain unverifiable from photos alone."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 10198,
+    "input_tokens": 4907,
+    "output_tokens": 1255,
+    "cost_usd": 0.019205,
+    "replayed": false,
+    "fixture_key": "8df05ca4133740862fc4eb452cf6ae01",
+    "error": null
+  }
+}

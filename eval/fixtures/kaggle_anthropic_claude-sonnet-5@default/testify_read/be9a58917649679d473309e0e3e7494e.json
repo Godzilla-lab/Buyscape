@@ -1,0 +1,95 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black DSLR camera body with a Canon-branded strap (text 'Canon' and 'EOS' visible on strap).",
+      "A lens is attached with a Canon-branded lens cap; no focal-length markings (e.g. '18-55mm') are legible on the lens barrel itself.",
+      "A Canon-branded battery charger is visible with its power cable coiled beside the camera.",
+      "No loose battery or 'extra battery' is visible anywhere in the frame.",
+      "The camera's top-plate mode dial and body are visible but no model-number sticker or engraving (e.g. '2000D') is legible in this image.",
+      "No LCD screen, lens mount, or shutter/sensor area is shown, so functional condition cannot be assessed."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "DSLR camera with kit lens, charger, and strap",
+      "brand": "Canon",
+      "model": null,
+      "read_from": [
+        "photo 0 strap text 'Canon'/'EOS'",
+        "photo 0 lens cap text 'Canon'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Canon 2000D",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo 0 confirms Canon/EOS branding on strap and lens cap, but no model number '2000D' is legible on the body."
+      },
+      {
+        "claim": "18-55 lens",
+        "verdict": "unverifiable_remote",
+        "evidence": "Lens is present with Canon cap in photo 0, but no focal-length text (18-55mm) is visible on the barrel."
+      },
+      {
+        "claim": "Charger included",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows a Canon-branded charger with cable."
+      },
+      {
+        "claim": "Battery and extra battery included",
+        "verdict": "unverified",
+        "evidence": "No battery is visible in photo 0; only the charger is shown."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Camera body model may not actually be the 2000D (could be a cheaper/older EOS model), which changes price tier significantly.",
+        "proof": "Close-up photo of the model name/sticker on the camera body (usually near the viewfinder or on the base/serial sticker).",
+        "if_unproven": "priced as unidentified base Canon EOS entry-level DSLR, lowest tier of that line"
+      },
+      {
+        "risk": "Lens may not be the kit 18-55mm (could be a different or non-functional lens).",
+        "proof": "Close-up photo of the lens barrel showing focal length and model text (e.g. 'EF-S 18-55mm').",
+        "if_unproven": "priced as generic unspecified kit lens, condition unknown"
+      },
+      {
+        "risk": "No battery visible, so the claimed 'battery and extra battery' may not exist or may be degraded/dead.",
+        "proof": "Photo showing both batteries alongside the camera, ideally with charge indicator or charging screen.",
+        "if_unproven": "priced as camera without working battery (battery cost added separately)"
+      },
+      {
+        "risk": "Camera may not power on, autofocus, or have a functional shutter/sensor (dust, scratches, fungus in lens, shutter count unknown).",
+        "proof": "Video clip of camera powering on, taking a photo, and displaying it on screen; also a photo through the lens showing no visible fungus/scratches.",
+        "if_unproven": "priced as not confirmed working, worst case non-functional"
+      },
+      {
+        "risk": "LCD screen and body cosmetic condition (cracks, dead pixels) not shown.",
+        "proof": "Photo of the rear LCD screen powered on, and close-up of body corners/mount.",
+        "if_unproven": "priced assuming visible wear/damage until shown otherwise"
+      }
+    ],
+    "proof_requests": [
+      "Clear close-up of the model number sticker/engraving on the camera body.",
+      "Close-up of the lens barrel showing 'EF-S 18-55mm' or equivalent text.",
+      "Photo of both batteries next to the camera.",
+      "Video of the camera powering on and taking a test shot, shown on the LCD.",
+      "Photo through the lens opening to check for fungus, dust, or scratches."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo confirms only generic Canon/EOS branding; the specific model (2000D) that sets the price tier, the lens focal length, and the claimed extra battery are all unreadable or unseen, so no worst-case price can be anchored without a clearer model/lens shot."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 24257,
+    "input_tokens": 2525,
+    "output_tokens": 2261,
+    "cost_usd": 0.024501,
+    "replayed": false,
+    "fixture_key": "be9a58917649679d473309e0e3e7494e",
+    "error": null
+  }
+}

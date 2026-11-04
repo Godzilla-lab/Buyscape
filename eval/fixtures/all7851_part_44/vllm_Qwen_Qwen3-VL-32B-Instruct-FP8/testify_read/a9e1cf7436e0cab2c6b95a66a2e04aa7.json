@@ -1,0 +1,66 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a blue M.2 SSD held in hand, with a white label containing text and barcodes.",
+      "Photo 1 is a clearer view of the same SSD, showing the label with 'X400 SSD M.2 2280 512GB', 'SanDisk' logo, and other markings.",
+      "Photo 2 shows three M.2 SSDs held together; the one on the right matches the one in photos 0 and 1, while the other two are different brands/models (one with Samsung logo, one with no visible brand).",
+      "The label in photo 1 clearly shows 'SanDisk' and 'X400 SSD M.2 2280 512GB'.",
+      "The seller's text 'Tokumbo Health 98 percentage' is not visible in any photo and appears to be a separate claim."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "M.2 SSD",
+      "brand": "SanDisk",
+      "model": "X400 SSD M.2 2280 512GB",
+      "read_from": [
+        "photo 1 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Health 98 percentage",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows the SSD's health status; this is a software metric that requires testing or a diagnostic tool. The photos do not show any software interface or SMART data."
+      },
+      {
+        "claim": "Tokumbo",
+        "verdict": "unverified",
+        "evidence": "This appears to be a seller identifier or name, not a product claim. No photo confirms or denies it."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The SSD may be used or have hidden wear, affecting performance or lifespan.",
+        "proof": "A screenshot from a disk utility showing SMART data, including wear level, power-on hours, and health percentage.",
+        "if_unproven": "priced as used with unknown wear, which may reduce value."
+      },
+      {
+        "risk": "The SSD may be counterfeit or rebranded.",
+        "proof": "A close-up of the PCB and chips, showing manufacturer markings, or a test video showing it working in a system with benchmark results.",
+        "if_unproven": "priced as unverified, which may reduce value due to authenticity risk."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of SMART data from a disk utility showing health, wear level, and power-on hours.",
+      "Close-up photo of the PCB and chips on the SSD.",
+      "Video of the SSD installed and working in a system, with benchmark results."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a SanDisk X400 512GB M.2 SSD, but critical claims like '98% health' cannot be verified from photos alone. Hidden risks like wear level and authenticity require proof before pricing can be determined accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 52170,
+    "input_tokens": 3077,
+    "output_tokens": 677,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "a9e1cf7436e0cab2c6b95a66a2e04aa7",
+    "error": null
+  }
+}

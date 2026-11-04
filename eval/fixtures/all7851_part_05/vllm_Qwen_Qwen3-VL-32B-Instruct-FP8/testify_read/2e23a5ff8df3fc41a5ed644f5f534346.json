@@ -1,0 +1,99 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a silver laptop with a black keyboard and a brushed metal palm rest.",
+      "The HP logo is visible below the screen.",
+      "The model name 'Folio 9480m' is visible on the top right corner of the screen bezel.",
+      "An Intel Core i5 sticker is visible on the lower right of the palm rest.",
+      "The keyboard has white lettering on black keys, and there is no visible backlighting in the photo.",
+      "The screen is off and reflects the surroundings.",
+      "The laptop is placed on a blue surface, possibly a plastic chair or container."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "EliteBook Folio 9480m",
+      "read_from": [
+        "photo 0 screen bezel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP EliteBook Folio 9480m",
+        "verdict": "supported",
+        "evidence": "Photo 0: model name 'Folio 9480m' is visible on the screen bezel."
+      },
+      {
+        "claim": "Core i5",
+        "verdict": "supported",
+        "evidence": "Photo 0: Intel Core i5 sticker is visible on the palm rest."
+      },
+      {
+        "claim": "128GB SSD",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal components or system information visible. Cannot confirm storage type or size from photo."
+      },
+      {
+        "claim": "8GB RAM",
+        "verdict": "unverifiable_remote",
+        "evidence": "No system information or internal components visible. Cannot confirm RAM amount from photo."
+      },
+      {
+        "claim": "Keyboard light",
+        "verdict": "contradicted",
+        "evidence": "Photo 0: keyboard has no visible backlighting; keys are unlit in the image, and no indicator of backlighting is present."
+      },
+      {
+        "claim": "Silver color",
+        "verdict": "supported",
+        "evidence": "Photo 0: the chassis and palm rest are silver with a brushed metal finish."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Internal components may not match claimed specs (128GB SSD, 8GB RAM)",
+        "proof": "Photo of BIOS screen or system information showing storage and RAM details, or a photo of the internal drive and RAM slots.",
+        "if_unproven": "Priced as lower-spec or non-functional until proven, as unverified specs reduce value."
+      },
+      {
+        "risk": "Screen damage or dead pixels not visible in photo",
+        "proof": "Photo of screen with white and black screens to check for dead pixels or cracks.",
+        "if_unproven": "Priced as potentially defective screen, reducing value."
+      },
+      {
+        "risk": "Battery health or non-functionality",
+        "proof": "Video or photo showing battery charging and runtime, or battery health report.",
+        "if_unproven": "Priced as if battery is dead or degraded, reducing value."
+      },
+      {
+        "risk": "Keyboard backlighting not working despite claim",
+        "proof": "Photo or video showing keyboard lit in dark conditions.",
+        "if_unproven": "Priced as without backlight, reducing value."
+      }
+    ],
+    "proof_requests": [
+      "Photo of BIOS or system information showing RAM and storage details.",
+      "Photo of screen with white and black backgrounds to check for dead pixels or damage.",
+      "Photo or video of keyboard backlighting in dark conditions.",
+      "Photo or video of battery charging and runtime, or battery health report."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and CPU are confirmed, but key specs (SSD, RAM) and the keyboard backlight claim are unverifiable from the photo. Hidden risks like screen damage and battery health also affect value. Proof is needed to price accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 72128,
+    "input_tokens": 1700,
+    "output_tokens": 893,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "2e23a5ff8df3fc41a5ed644f5f534346",
+    "error": null
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Close-up of a used automotive engine component, appears to be a plastic/metal air intake or sensor housing with hoses attached",
+      "A wiring harness connector with multiple colored wires (red, blue, white, black) is visible hanging loose",
+      "Watermark reading 'FAMOUS AUTO PARTS' overlaid on the image",
+      "No visible brand name, part number, or vehicle make/model stamped or printed on the part itself",
+      "Surface shows grime, oxidation, and wear consistent with a used/salvaged part",
+      "No full engine bay or vehicle context shown to confirm what vehicle this part belongs to"
+    ],
+    "identity": {
+      "status": "unknown",
+      "kind": "used engine air intake/sensor housing assembly with wiring connector",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 (no legible brand/model/part number visible, only reseller watermark 'FAMOUS AUTO PARTS')"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "We offer all our clients 5 star service",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo or data can confirm service quality; this is a marketing statement, not a product fact."
+      },
+      {
+        "claim": "Implied working/compatible auto part (by omission, typical for such listings)",
+        "verdict": "unverified",
+        "evidence": "No test, no vehicle fitment shown, no functional check visible in photo 0."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Unknown vehicle make/model/engine this part fits, which drives price heavily",
+        "proof": "Photo of the part's stamped part number/OEM code, or a wider shot of the engine bay with visible vehicle badge/VIN plate",
+        "if_unproven": "priced as an unidentified generic used part, lowest plausible tier"
+      },
+      {
+        "risk": "Electrical connector/sensor functionality unknown (could be faulty sensor e.g. MAF/MAP)",
+        "proof": "Video of sensor being tested with multimeter or on a running engine",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Missing mounting hardware, clips, or associated sub-parts not visible in frame",
+        "proof": "Full 360-degree photos of the part including all mounting points",
+        "if_unproven": "priced as incomplete"
+      },
+      {
+        "risk": "Hidden cracks, corrosion, or damage on underside/hidden faces not shown",
+        "proof": "Additional photos from top, bottom, and side angles",
+        "if_unproven": "priced as damaged/worst case"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of any stamped part number or OEM code on the housing",
+      "Wider photo showing the vehicle (make/model/badge) this part was removed from",
+      "Photo or video testing the electrical connector/sensor function",
+      "Additional angles (top, bottom, sides) to check for cracks or missing hardware"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The part cannot be matched to a specific vehicle or verified as functional from the single photo, and auto part prices vary drastically by vehicle fitment, so even a worst-case price is not meaningful without identifying the compatible vehicle/part number."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 20915,
+    "input_tokens": 2005,
+    "output_tokens": 1743,
+    "cost_usd": 0.018281,
+    "replayed": false,
+    "fixture_key": "b3e56fc272d11a53ed89633e59f03865",
+    "error": null
+  }
+}

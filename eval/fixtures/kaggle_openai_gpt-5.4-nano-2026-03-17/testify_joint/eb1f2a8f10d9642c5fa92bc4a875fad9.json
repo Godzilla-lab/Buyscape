@@ -1,0 +1,77 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0 shows a standing fan with a wall/ceiling-style mounting/charging-looking unit attached to the side (black circular base with a cable).",
+      "Photo 1 shows a close view of the fan head and center hub; the hub has a visible logo/label that appears to read 'Qasa'.",
+      "No clear model number, battery capacity, or charger specifications are readable in the photos.",
+      "No photo shows the fan running, battery indicator, or runtime measurement."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "rechargeable standing fan",
+      "brand": "Qasa",
+      "model": null,
+      "read_from": [
+        "photo 1 fan hub label (appears to read 'Qasa')"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Used Qasa rechargeable fan for sale.",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows a fan hub label that appears to read 'Qasa' and the setup looks like a rechargeable/charging arrangement."
+      },
+      {
+        "claim": "Lasts up to 2 hours when fully charged and longer when on low...",
+        "verdict": "unverified",
+        "evidence": "No photo/video shows the fan running on battery with a timer or battery indicator."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery health/capacity may be weak, so runtime may be far less than claimed.",
+        "proof": "Ask for a short video of the fan running on battery from full charge with a visible timer (or battery indicator) showing at least 1\u20132 hours.",
+        "if_unproven": "Price as not meeting the claimed runtime (worst case: treat as low/unknown runtime)."
+      },
+      {
+        "risk": "Fan may not be truly rechargeable (could be mainly mains-powered with a non-working/weak battery).",
+        "proof": "Ask for a clip showing it running after unplugging from mains/charger for several minutes.",
+        "if_unproven": "Price as not reliably rechargeable (worst case: assume it needs power to run)."
+      },
+      {
+        "risk": "Fan size/airflow performance (e.g., blade diameter) is not clearly readable; could be smaller than expected.",
+        "proof": "Ask for a photo with a measuring tape across the blade diameter (or a clear label/spec sheet).",
+        "if_unproven": "Price as a generic rechargeable standing fan without confirmed size."
+      },
+      {
+        "risk": "Condition issues (wobble, noise, broken blades, weak oscillation) can\u2019t be confirmed from still photos.",
+        "proof": "Ask for a video of the fan running at low and high speeds, including oscillation if available, showing no abnormal noise/vibration.",
+        "if_unproven": "Price as average used condition (worst case: assume possible minor wear affecting performance)."
+      }
+    ],
+    "proof_requests": [
+      "Video: fan running on battery after unplugging, with a visible timer and battery/charge indicator (or charger unplug moment).",
+      "Video: run on low speed and high speed for a few minutes each (showing no wobble/noise).",
+      "Photo: blade diameter measurement (tape measure) or any readable spec label/model on the fan/charger.",
+      "Photo: charger/battery label showing capacity (Ah/Wh) and voltage, if present."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photos suggest a Qasa rechargeable standing fan, but the key pricing driver (battery runtime and whether it truly runs on recharge) is not provable from the images. Without proof, a reliable worst-case price cannot be confidently selected from the comparables.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_joint",
+    "latency_ms": 5623,
+    "input_tokens": 2014,
+    "output_tokens": 830,
+    "cost_usd": 0.00144,
+    "replayed": false,
+    "fixture_key": "eb1f2a8f10d9642c5fa92bc4a875fad9",
+    "error": null
+  }
+}

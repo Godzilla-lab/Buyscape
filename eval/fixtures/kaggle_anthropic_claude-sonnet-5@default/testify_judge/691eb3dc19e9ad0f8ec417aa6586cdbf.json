@@ -1,0 +1,66 @@
+{
+  "task": "testify_judge",
+  "prompt_version": "testify_judge.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "claims": [
+      {
+        "claim": "Wooden foreign pallets",
+        "verdict": "unverified",
+        "evidence": "Photo 2 shows 'EPAL' stamped blocks consistent with European (foreign) standard pallets, but photos 0/1 show a different, dirtier stack with only a partially legible stamp, and photo 3 shows a separate newer-looking pallet with no visible stamp at all. No single shot confirms all units on offer are the same foreign-certified batch."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Mixed lot quality: stacks in photos 0/1 look weathered/dirty vs. cleaner EPAL stack in photo 2 vs. single newer pallet in photo 3 \u2014 may not be one uniform batch.",
+        "proof": "Wide shot showing all pallets being sold together with stamps visible on each, plus a count.",
+        "if_unproven": "priced as the lowest-quality visible batch (photo 0/1 condition)"
+      },
+      {
+        "risk": "Unknown total quantity for sale.",
+        "proof": "Seller statement with a clear count, confirmed by a photo showing the full lot with pallets countable.",
+        "if_unproven": "priced per-unit at worst case, no bulk discount assumed"
+      },
+      {
+        "risk": "Wood condition (rot, moisture, insect damage) not visible at this resolution.",
+        "proof": "Close-up photos/video of wood grain, cut edges, and undersides of several pallets.",
+        "if_unproven": "priced as low-grade/damaged stock"
+      },
+      {
+        "risk": "Heat-treatment/chemical treatment (ISPM-15 compliance) unconfirmed despite EPAL stamp sighting.",
+        "proof": "Clear close-up of the stamped block showing full ISPM-15/HT mark, not just partial 'EPAL' text.",
+        "if_unproven": "priced as untreated/non-compliant"
+      },
+      {
+        "risk": "Nail/fastener condition (rust, protruding nails) not visible.",
+        "proof": "Close-up of corners and nail heads on multiple pallets.",
+        "if_unproven": "priced as needing repair"
+      },
+      {
+        "risk": "Load capacity/structural integrity of the pallets unknown.",
+        "proof": "Video of a pallet being lifted or stood on to show flex/strength.",
+        "if_unproven": "priced as standard light-duty, not heavy-duty"
+      }
+    ],
+    "proof_requests": [
+      "Full lot photo with all pallets visible and countable",
+      "Close-up of stamped blocks on each distinct stack (full ISPM-15/EPAL mark)",
+      "Close-up of wood grain, undersides, and corners for rot/insect/nail condition",
+      "Confirmation of exact quantity being sold as one unit"
+    ],
+    "decision": "price",
+    "reason": "The witness confirms the item is wooden pallets, so it can be priced, but visible inconsistencies across photos (dirty vs. clean stacks, unstamped single unit) and unverifiable treatment/condition claims mean it must be priced at worst-case low-grade, mixed-quality stock until closer proof is shown."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_judge",
+    "latency_ms": 14855,
+    "input_tokens": 1640,
+    "output_tokens": 1347,
+    "cost_usd": 0.014732,
+    "replayed": false,
+    "fixture_key": "691eb3dc19e9ad0f8ec417aa6586cdbf",
+    "error": null
+  }
+}

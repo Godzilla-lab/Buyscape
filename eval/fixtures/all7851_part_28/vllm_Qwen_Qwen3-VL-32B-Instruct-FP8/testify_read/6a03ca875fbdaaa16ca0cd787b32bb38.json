@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a smartphone in an open box, screen on, displaying time '01:17' and date 'Thu 5 Mar'. The phone has a notch and a blue wallpaper. The box appears white with a cutout for the phone. A watermark 'LIBERTY ELECTRONICS' is visible.",
+      "Photo 1 shows the back of the same phone, held in its box, next to a second identical box. The phone is blue with a dual-camera setup and an Apple logo. The second box has a white sticker with a '+' symbol. The background shows a store interior with shelves and a person in a purple shirt.",
+      "The phone's design matches the iPhone 14 or 15 series, not the iPhone 16, which has a different camera module and design.",
+      "No visible branding or model text on the phone or box in either photo.",
+      "The seller claims it is an 'iPhone 16 128gb' with 'battery health 95%' and 'cycle count-118', but these details are not visible in the photos."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "smartphone",
+      "brand": "Apple",
+      "model": null,
+      "read_from": [
+        "photo 0 screen (Apple interface)",
+        "photo 1 back (Apple logo)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "iPhone 16 128gb",
+        "verdict": "contradicted",
+        "evidence": "Photo 1 shows a dual-camera setup and design consistent with iPhone 14/15, not iPhone 16, which has a triple-camera setup and different rear design. No 'iPhone 16' text is visible on the device or box."
+      },
+      {
+        "claim": "battery health 95%",
+        "verdict": "unverifiable_remote",
+        "evidence": "Battery health is not visible in any photo. The seller's claim cannot be verified remotely."
+      },
+      {
+        "claim": "cycle count-118",
+        "verdict": "unverifiable_remote",
+        "evidence": "Cycle count is not visible in any photo. The seller's claim cannot be verified remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The phone is not an iPhone 16 as claimed, but an older model (likely iPhone 14 or 15).",
+        "proof": "A clear photo of the phone's rear camera module and side profile, or a screenshot of the Settings > Battery > Battery Health page showing the model name.",
+        "if_unproven": "Priced as an older model (iPhone 14/15), not iPhone 16, which significantly reduces value."
+      },
+      {
+        "risk": "Battery health is not 95% as claimed; it may be lower, affecting performance and lifespan.",
+        "proof": "A screenshot from the phone's Settings > Battery > Battery Health showing the actual battery health percentage and cycle count.",
+        "if_unproven": "Priced as if battery health is unknown, which may be 80% or lower, reducing value."
+      },
+      {
+        "risk": "The phone may be used or refurbished, not 'open box' as claimed.",
+        "proof": "A photo of the original box with model and serial number, or a screenshot of the phone's Settings > General > About showing the model number and serial number.",
+        "if_unproven": "Priced as used/refurbished, not new/open box, reducing value."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of Settings > Battery > Battery Health showing model name, battery health %, and cycle count.",
+      "Photo of the phone's box showing model name and serial number.",
+      "Photo of the phone's Settings > General > About showing model number and serial number.",
+      "Clear photo of the rear camera module and side profile to confirm model."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller claims the phone is an iPhone 16, but the photos show a design consistent with iPhone 14 or 15. Battery health and cycle count are not visible and cannot be verified remotely. Without proof of model and battery condition, the item cannot be accurately priced. The risks of misrepresentation and hidden defects are high."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 74974,
+    "input_tokens": 2297,
+    "output_tokens": 956,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "6a03ca875fbdaaa16ca0cd787b32bb38",
+    "error": null
+  }
+}

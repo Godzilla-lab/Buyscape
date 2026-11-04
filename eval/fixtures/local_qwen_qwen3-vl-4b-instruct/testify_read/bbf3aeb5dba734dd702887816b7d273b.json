@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-instruct",
+  "response": {
+    "observations": [
+      "White front-loading washing machine with LG logo and 'INVERTER DirectDrive 7kg' text on the control panel.",
+      "Sticker on the left side lists features: 'Less Noise, Less Vibration, More Durability'.",
+      "Sticker on the right side says 'DC MOTOR 10 YEAR WARRANTY'.",
+      "Machine has visible rust stains on the lower front panel and around the door frame.",
+      "Control panel has a rotary dial and several buttons with program labels like 'Cotton', 'Synthetic', 'Delicate', 'Baby Care', 'Quick 30', 'Spin', 'Temp'.",
+      "The machine is placed on a concrete floor with a blue-painted wall in the background."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "washing machine",
+      "brand": "LG",
+      "model": "DirectDrive 7kg",
+      "read_from": [
+        "photo 0 screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "LG DirectDrive 7kg washing machine for sale.",
+        "verdict": "supported",
+        "evidence": "photo 0 screen"
+      },
+      {
+        "claim": "Barely used, bought new last year.",
+        "verdict": "unverified",
+        "evidence": "photo 0 shows rust stains and general wear, but no clear evidence of usage or age."
+      },
+      {
+        "claim": "No fault at all, the motor was never opened.",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visual evidence of motor condition or internal components; no photos of the motor or internal parts."
+      },
+      {
+        "claim": "Receipt and warranty card available.",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photos of receipt or warranty card; seller claims availability but no visual proof."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Hidden rust or corrosion affecting structural integrity or electrical components.",
+        "proof": "photo 0 shows rust stains on the lower front panel and around the door frame.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Motor condition unknown; no proof of motor being untouched or functioning properly.",
+        "proof": "photo 0 does not show the motor or internal components.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Warranty card or receipt not visible or not verifiable remotely.",
+        "proof": "photo 0 does not show receipt or warranty card.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Ask for photos of the motor and internal components to verify condition.",
+      "Ask for photos of the receipt and warranty card to verify authenticity.",
+      "Ask for a video or photo showing the machine in operation to verify functionality."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller's claims about the machine's condition and documentation cannot be verified remotely without additional proof. The visible rust and lack of internal component photos raise concerns about the machine's condition."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-instruct",
+    "task": "testify_read",
+    "latency_ms": 4670,
+    "input_tokens": 2517,
+    "output_tokens": 689,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "bbf3aeb5dba734dd702887816b7d273b",
+    "error": null
+  }
+}

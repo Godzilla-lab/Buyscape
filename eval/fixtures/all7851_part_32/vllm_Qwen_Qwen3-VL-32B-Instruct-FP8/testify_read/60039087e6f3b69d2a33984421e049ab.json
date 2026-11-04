@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the iPhone's battery screen with 87% charge, last charged to 100% 2h ago, and daily usage stats. The time is 10:18. The screen has a watermark 'POSTED ON JIJI TRUSTEDTECH HUB'.",
+      "Photo 1 shows the back of a silver iPhone with a triple-camera module in a square bump, Apple logo, and a small white sticker with 'Open' handwritten on it. The phone appears to be an iPhone 12 Pro or later model.",
+      "Photo 2 shows the front of the phone with a black screen, visible notch, and silver bezel. The screen has some smudges and minor scratches. The background shows wooden shelves with electronic equipment."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "iPhone 12 Pro",
+      "brand": "Apple",
+      "model": "iPhone 12 Pro",
+      "read_from": [
+        "photo 1 camera module and design",
+        "photo 0 screen interface (iOS 14+ style)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "London Used iPhone 12 pro",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows the triple-camera module and design consistent with iPhone 12 Pro. Photo 0 shows iOS interface with notch and battery screen, consistent with iPhone 12 Pro. The seller's text is consistent with the visual evidence."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery health is not shown; the battery percentage alone does not indicate health or degradation.",
+        "proof": "Photo of the battery health percentage in Settings > Battery > Battery Health.",
+        "if_unproven": "priced as having degraded battery (e.g., below 80%)"
+      },
+      {
+        "risk": "Screen damage or dead pixels not visible in current photos.",
+        "proof": "Video or photo showing the screen displaying full white, full black, and color patterns to check for dead pixels or cracks.",
+        "if_unproven": "priced as having possible screen damage"
+      },
+      {
+        "risk": "Water damage or internal issues not visible from exterior photos.",
+        "proof": "Photo of the SIM tray, charging port, and speaker grills to check for corrosion or moisture indicators.",
+        "if_unproven": "priced as possibly water-damaged"
+      },
+      {
+        "risk": "The phone may be locked to a carrier or have iCloud activation lock.",
+        "proof": "Photo of the phone's settings showing 'Find My' status and carrier lock status, or a video showing the phone being turned on and unlocked.",
+        "if_unproven": "priced as possibly locked"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the battery health percentage in Settings > Battery > Battery Health.",
+      "Video or photo showing the screen displaying full white, full black, and color patterns.",
+      "Photo of the SIM tray, charging port, and speaker grills.",
+      "Photo of the phone's settings showing 'Find My' status and carrier lock status."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The phone is identified as an iPhone 12 Pro based on visual evidence, but critical hidden risks such as battery health, screen condition, water damage, and activation lock cannot be assessed from the current photos. These risks significantly affect the price and must be verified before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 63064,
+    "input_tokens": 2924,
+    "output_tokens": 759,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "60039087e6f3b69d2a33984421e049ab",
+    "error": null
+  }
+}

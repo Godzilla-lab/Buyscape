@@ -1,0 +1,99 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "agent:claude",
+  "response": {
+    "observations": [
+      "Photo 0: front of a black DSLR body with 'Canon', 'EOS 5D' and 'Mark II' badges and a Canon body cap on the mount; no lens.",
+      "Photo 1: back of the body, rear LCD is off, eyecup fitted, buttons and dials look intact, 'Canon' printed under the screen.",
+      "Photo 2: underside plate reads 'Canon DS126201, DC 8.1V, Made in Japan' with serial number 3761814763; the battery door is open and no battery is shown.",
+      "The body looks clean in all three photos with no visible scratches, but the shots are small, evenly lit studio-style photos with a dealer watermark.",
+      "No photo shows the camera powered on, a shutter count, the sensor, a battery, a charger or a lens."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "full-frame DSLR camera body (body only)",
+      "brand": "Canon",
+      "model": "EOS 5D Mark II",
+      "read_from": [
+        "photo 0 front badge",
+        "photo 2 underside plate DS126201"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Canon EOS 5D Mark II full-frame DSLR",
+        "verdict": "supported",
+        "evidence": "Photo 0 badges 'EOS 5D Mark II'; photo 2 plate DS126201."
+      },
+      {
+        "claim": "Like new",
+        "verdict": "unverified",
+        "evidence": "Body looks clean in small photos 0 to 2, but no close-ups of corners, grip rubber, mount or LCD, and no shutter count."
+      },
+      {
+        "claim": "Never repaired or opened",
+        "verdict": "unverifiable_remote",
+        "evidence": "Internal repair history cannot be seen in photos."
+      },
+      {
+        "claim": "Works perfectly",
+        "verdict": "unverified",
+        "evidence": "The LCD is off in photo 1; no clip of it powering on, focusing and taking a shot."
+      },
+      {
+        "claim": "Original receipt and warranty available",
+        "verdict": "unverified",
+        "evidence": "No receipt or warranty card is shown; for a camera of this age a live warranty is unlikely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Camera does not power on or shutter, AF or LCD faulty",
+        "proof": "Clip of the camera powering on, taking a shot and showing it on the rear screen",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "High shutter count, near the end of shutter life",
+        "proof": "Screenshot of the shutter count read from the camera, with the serial 3761814763 visible",
+        "if_unproven": "as high shutter count"
+      },
+      {
+        "risk": "Scratched or dirty sensor, or damaged mirror",
+        "proof": "Photo of the open mount with the body cap off, plus a test shot of a plain sky at f/16",
+        "if_unproven": "as sensor needing cleaning or repair"
+      },
+      {
+        "risk": "Battery and charger not included",
+        "proof": "Photo of the battery and charger with the camera",
+        "if_unproven": "as body only, without battery or charger"
+      },
+      {
+        "risk": "Photos may not be of the seller's own unit",
+        "proof": "Photo of the camera next to a handwritten code with today's date, showing the serial plate",
+        "if_unproven": "held for agent inspection before money moves"
+      }
+    ],
+    "proof_requests": [
+      "Clip of the camera powering on and taking a shot, with a handwritten code in shot",
+      "Shutter count screenshot with the serial plate visible",
+      "Photo of the mount and sensor with the body cap off",
+      "Photo of the battery, charger and any accessories included",
+      "Photo of the receipt or warranty card if it exists"
+    ],
+    "decision": "price",
+    "reason": "Brand and model are read off the front badge in photo 0 and the plate in photo 2, so it can be priced as a Canon EOS 5D Mark II body only, at its worst case as not working and without battery or charger until the proofs arrive."
+  },
+  "meta": {
+    "provider": "sitting",
+    "model": "agent:claude",
+    "task": "testify_read",
+    "latency_ms": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "7fbdcd74ce43cb141764bcbcf49dace0",
+    "error": null
+  }
+}

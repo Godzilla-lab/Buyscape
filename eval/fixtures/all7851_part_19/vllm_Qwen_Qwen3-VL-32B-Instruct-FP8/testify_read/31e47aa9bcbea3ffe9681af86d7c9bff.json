@@ -1,0 +1,80 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Front view of a smartphone with a notch, displaying time 11:42 and date Thu 29 Oct. Screen is on, showing iOS-style interface with lock icon and Wi-Fi signal. Watermark 'POSTED ON JIJI DANIEL ATANEVU' is visible.",
+      "Photo 1: Side view of the phone held in hand, showing volume buttons and power button. The phone has a blue casing with visible wear and small scratches.",
+      "Photo 2: Back view of the phone showing a severely cracked and broken blue glass back. The Apple logo is visible, and the dual-camera module is intact but surrounded by cracks. The back glass is shattered with multiple large cracks and missing pieces, exposing the internal structure near the bottom."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "iPhone",
+      "brand": "Apple",
+      "model": "iPhone 12",
+      "read_from": [
+        "photo 2: Apple logo and dual-camera module layout consistent with iPhone 12"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "back camera doesn't work",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo or video shows the camera in use. The camera module is physically intact in photo 2, but functionality cannot be confirmed remotely."
+      },
+      {
+        "claim": "SIM slot not working",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows the SIM tray or any attempt to insert a SIM card. The side view in photo 1 shows the SIM tray slot, but no proof of functionality."
+      },
+      {
+        "claim": "broken back glass",
+        "verdict": "supported",
+        "evidence": "Photo 2 clearly shows the back glass is shattered with multiple cracks and missing pieces."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Internal damage from broken back glass affecting battery, motherboard, or other components",
+        "proof": "Close-up photo of the internal components near the broken back glass, especially around the bottom where the glass is missing.",
+        "if_unproven": "priced as having potential internal damage, which could lead to failure or safety issues"
+      },
+      {
+        "risk": "Water or dust ingress due to broken back glass",
+        "proof": "Photo showing the internal components or a moisture indicator inside the phone.",
+        "if_unproven": "priced as potentially water-damaged, which reduces value and reliability"
+      },
+      {
+        "risk": "Back camera not working despite appearing intact",
+        "proof": "Video or photo showing the camera taking a picture or recording a video.",
+        "if_unproven": "priced as not working, since functionality cannot be confirmed"
+      },
+      {
+        "risk": "SIM slot not working despite appearing intact",
+        "proof": "Photo or video showing a SIM card being inserted and the phone recognizing it.",
+        "if_unproven": "priced as not working, since functionality cannot be confirmed"
+      }
+    ],
+    "proof_requests": [
+      "Video or photo showing the back camera taking a picture or recording a video.",
+      "Photo or video showing a SIM card being inserted and the phone recognizing it.",
+      "Close-up photo of the internal components near the broken back glass, especially around the bottom.",
+      "Photo showing the moisture indicator inside the phone."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The phone is identifiable as an iPhone 12 with a broken back glass, which is supported by photo 2. However, critical claims about camera and SIM functionality cannot be verified remotely, and there are hidden risks of internal damage and water ingress. Without proof of functionality and internal condition, a worst-case price cannot be confidently assigned."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 63545,
+    "input_tokens": 2785,
+    "output_tokens": 824,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "31e47aa9bcbea3ffe9681af86d7c9bff",
+    "error": null
+  }
+}

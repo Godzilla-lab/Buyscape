@@ -1,0 +1,98 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Front view of a silver Dell laptop, screen off, keyboard visible, Dell logo on bezel, Intel sticker on palm rest.",
+      "Photo 1: Back view of the laptop, showing 'Latitude 7490' label near bottom edge, Dell logo on lid, stickers including one with 'I7 8TH GEN' text.",
+      "Photo 2: Top-down view of closed laptop lid, Dell logo visible, no other markings.",
+      "All photos show a hand holding the laptop, suggesting it is being presented for sale.",
+      "The laptop appears to be in used condition with minor scuffs and smudges."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Dell",
+      "model": "Latitude 7490",
+      "read_from": [
+        "photo 1 bottom edge label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Dell latitude 7490 8th gen",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows 'Latitude 7490' label and a sticker with 'I7 8TH GEN' text."
+      },
+      {
+        "claim": "I7 2.11ghz",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows the CPU model or clock speed; the sticker in photo 1 says 'I7 8TH GEN' but not the exact model or 2.11GHz."
+      },
+      {
+        "claim": "256gig ssd",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows internal storage or BIOS/OS screen confirming SSD size."
+      },
+      {
+        "claim": "8gig ram",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows RAM details; internal components not visible."
+      },
+      {
+        "claim": "Keyboard light",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows keyboard but no backlight is visible; no photo shows keyboard lit."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The laptop may not have the advertised 8th gen i7 CPU, or the clock speed may not be 2.11GHz.",
+        "proof": "A photo of the BIOS screen or system information showing the exact CPU model and speed.",
+        "if_unproven": "Priced as if CPU is not 8th gen i7 or speed is lower, which reduces value."
+      },
+      {
+        "risk": "The advertised 256GB SSD may not exist or may be a smaller drive or HDD.",
+        "proof": "A photo of the BIOS or Windows Disk Management showing the drive size and type.",
+        "if_unproven": "Priced as if storage is not 256GB SSD, which reduces value."
+      },
+      {
+        "risk": "The 8GB RAM may be less or not installed.",
+        "proof": "A photo of the BIOS or system information showing RAM size.",
+        "if_unproven": "Priced as if RAM is less than 8GB, which reduces value."
+      },
+      {
+        "risk": "Keyboard backlight may not work or is not present.",
+        "proof": "A photo of the keyboard with backlight turned on in a dark room.",
+        "if_unproven": "Priced as if keyboard has no backlight, which reduces value."
+      },
+      {
+        "risk": "Laptop may have hidden damage or non-functional components (e.g., screen, ports, battery).",
+        "proof": "A video showing the laptop turning on, screen working, ports tested, and battery charging.",
+        "if_unproven": "Priced as if laptop may not work or has defects, which reduces value."
+      }
+    ],
+    "proof_requests": [
+      "Photo of BIOS or system information showing exact CPU model and speed.",
+      "Photo of BIOS or Windows Disk Management showing SSD size and type.",
+      "Photo of BIOS or system information showing RAM size.",
+      "Photo of keyboard with backlight turned on in a dark room.",
+      "Video showing laptop turning on, screen working, ports tested, and battery charging."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is confirmed as Dell Latitude 7490, but key specifications (CPU speed, SSD, RAM, keyboard light) are unverifiable from current photos. Hidden risks include non-functional components and incorrect specs. Proof is needed to price accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 82052,
+    "input_tokens": 2802,
+    "output_tokens": 1009,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "2fb3ce1d23aaf850784a77b125ed960c",
+    "error": null
+  }
+}

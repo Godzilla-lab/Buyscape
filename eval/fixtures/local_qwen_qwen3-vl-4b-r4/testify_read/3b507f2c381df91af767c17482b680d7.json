@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-r4",
+  "response": {
+    "observations": [
+      "Blue plastic industrial drum with a black plastic lid.",
+      "A metal D-ring handle is attached to the side.",
+      "A white label is affixed to the drum.",
+      "The label identifies the contents as 'BIPHENYL HYDROXIDE - BPUP' and 'INDIA CHEMICALS'.",
+      "The label indicates a capacity of 50kg and a volume of 250L.",
+      "The drum shows some surface wear and minor scuffs."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "industrial plastic drum",
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Plastic buckets",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "80 liters",
+        "verdict": "contradicted",
+        "evidence": "photo 1 label shows 250L capacity"
+      },
+      {
+        "claim": "empty plastic containers",
+        "verdict": "unverified",
+        "evidence": "photos show the exterior only; contents are not visible"
+      },
+      {
+        "claim": "blue barrel",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The drum may be expired or past its safe storage date.",
+        "proof": "A clear photo of the manufacturing or expiry date stamped on the metal collar or the bottom of the drum.",
+        "if_unproven": "as expired/scrap value"
+      },
+      {
+        "risk": "The drum may be leaking or structurally compromised.",
+        "proof": "A video showing the drum being filled with water and the seal holding under pressure.",
+        "if_unproven": "as leaking/scrap"
+      },
+      {
+        "risk": "The label may be a generic sticker rather than the original manufacturer's label.",
+        "proof": "A photo of the manufacturer's label on the bottom of the drum.",
+        "if_unproven": "as generic/unbranded"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the manufacturing or expiry date stamped on the metal collar.",
+      "Photo of the bottom of the drum showing the manufacturer's label.",
+      "Video of the drum being filled with water to test the seal."
+    ],
+    "decision": "price",
+    "reason": "The item is known from the photos. What they cannot prove is priced at its worst case until the proof asked for below arrives."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-r4",
+    "task": "testify_read",
+    "latency_ms": 3392,
+    "input_tokens": 2277,
+    "output_tokens": 420,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "3b507f2c381df91af767c17482b680d7",
+    "error": null
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the 'About' section of an iPhone settings menu, displaying 256 GB capacity and 238.79 GB available. The modem firmware is 1.70.01. The top of the screen shows a notch with a pill-shaped cutout, typical of recent iPhones.",
+      "Photo 1 and Photo 2 show the back of a dark blue iPhone with a triple-camera system arranged in a square module, with a large square cutout below the camera module, likely for a MagSafe accessory or case.",
+      "The phone has a flat-edged design, consistent with iPhone 13 or later models.",
+      "No brand or model name is visible on the phone's body or screen in any photo.",
+      "The seller claims it is an 'iPhone 17pro', which does not exist as of now (as of 2024, the latest is iPhone 15 series)."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "iPhone with triple-camera system and flat edges",
+      "brand": "Apple",
+      "model": null,
+      "read_from": [
+        "photo 0 screen",
+        "photo 1 back",
+        "photo 2 back"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "iPhone 17pro",
+        "verdict": "contradicted",
+        "evidence": "No iPhone 17pro exists; the photos show a device consistent with iPhone 13/14/15 series based on design and firmware version 1.70.01 (which is for iPhone 13/14/15)."
+      },
+      {
+        "claim": "256gb",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows 'Capacity: 256 GB'."
+      },
+      {
+        "claim": "Esim unlocked",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows the carrier or activation status; the 'SEID' and 'EID' fields in photo 0 are present, but no proof of unlock status is visible."
+      },
+      {
+        "claim": "excellent battery health",
+        "verdict": "unverified",
+        "evidence": "No photo shows the battery health percentage or condition; the 'About' screen does not display battery health."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The phone may be a different model than claimed (e.g., iPhone 13 Pro or 14 Pro, not 17 Pro)",
+        "proof": "A clear photo of the model name on the back or in the settings (e.g., 'iPhone 13 Pro' under 'About' or on the back plate).",
+        "if_unproven": "Priced as a lower-tier model (e.g., iPhone 13 Pro) due to the non-existent 'iPhone 17 Pro' claim."
+      },
+      {
+        "risk": "Battery health may be poor despite claim of 'excellent'",
+        "proof": "A screenshot of the battery health percentage from the 'Battery Health' section in settings.",
+        "if_unproven": "Priced as having degraded battery (e.g., 70-80% health), which reduces value."
+      },
+      {
+        "risk": "Phone may be locked to a carrier or have activation lock",
+        "proof": "A screenshot showing 'No SIM restrictions' or 'Activation Lock: Off' in settings, or a video of the phone being activated with a new SIM.",
+        "if_unproven": "Priced as potentially locked, which reduces value significantly."
+      },
+      {
+        "risk": "Physical damage or wear not visible in photos",
+        "proof": "A full 360-degree video or close-up photos of all edges, screen, and back for scratches, cracks, or dents.",
+        "if_unproven": "Priced as having possible hidden damage, reducing value."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of the 'Battery Health' section showing percentage and condition.",
+      "Screenshot of the 'About' section showing the exact model name (e.g., iPhone 13 Pro).",
+      "Video or photos showing the phone being activated with a new SIM to confirm unlock status.",
+      "Close-up photos of the front screen and all edges for damage."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller claims an iPhone 17 Pro, which does not exist, and the model cannot be confirmed from the photos. Battery health and unlock status are unverified. Without proof of model, battery condition, and unlock status, a reliable price cannot be assigned."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 86905,
+    "input_tokens": 2791,
+    "output_tokens": 1032,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "3f2fceec1fde3ffcb2fa270040986b95",
+    "error": null
+  }
+}

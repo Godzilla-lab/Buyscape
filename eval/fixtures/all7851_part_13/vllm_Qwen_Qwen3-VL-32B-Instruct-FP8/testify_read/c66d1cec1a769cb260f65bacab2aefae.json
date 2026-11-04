@@ -1,0 +1,96 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the front panel of a small form factor desktop with 'OptiPlex 3050' and 'DELL' branding clearly visible.",
+      "Photo 1 shows the internal components, including a blue plastic cover over the motherboard, a fan labeled 'FOXCONN', and various connectors and chips.",
+      "Photo 2 shows the rear I/O panel with multiple USB ports (some labeled 'SS'), HDMI, DisplayPort, Ethernet, and a service tag sticker with 'SERVICE TAG: X2P9R2' and 'EXPRESS SERVICE CODE: 62322A0T4'.",
+      "The unit appears to be in a workshop or repair environment, with other computer parts and cables visible in the background.",
+      "No screen or monitor is shown; the item is presented as a bare desktop unit."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "desktop computer",
+      "brand": "Dell",
+      "model": "OptiPlex 3050",
+      "read_from": [
+        "photo 0 front panel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Dell Optiplex 3050",
+        "verdict": "supported",
+        "evidence": "Photo 0 clearly shows 'OptiPlex 3050' and 'DELL' on the front panel."
+      },
+      {
+        "claim": "Core i5 6th generation 3.1GHz",
+        "verdict": "unverifiable_remote",
+        "evidence": "No CPU label or sticker is visible in any photo. The internal photo (photo 1) shows the motherboard but not the CPU. The model is consistent with 6th gen i5, but cannot be confirmed remotely."
+      },
+      {
+        "claim": "8GB ram",
+        "verdict": "unverifiable_remote",
+        "evidence": "RAM slots are visible in photo 1, but no RAM sticks are installed or labeled. Cannot confirm capacity remotely."
+      },
+      {
+        "claim": "256gb ssd hard drive",
+        "verdict": "unverifiable_remote",
+        "evidence": "No SSD is visible in the photos. The internal photo (photo 1) shows an empty drive bay or no drive installed. Cannot confirm presence or size remotely."
+      },
+      {
+        "claim": "Windows 11pro",
+        "verdict": "unverifiable_remote",
+        "evidence": "No screen or boot-up image is shown. Cannot verify OS remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "CPU is not a 6th generation Core i5 or is damaged",
+        "proof": "Photo of the CPU socket or CPU label inside the case, or a system information screenshot.",
+        "if_unproven": "priced as unknown CPU, which may be lower than advertised"
+      },
+      {
+        "risk": "RAM is not 8GB or is faulty",
+        "proof": "Photo of the installed RAM sticks showing brand and capacity, or a system information screenshot.",
+        "if_unproven": "priced as no RAM or unknown RAM, which may be lower than advertised"
+      },
+      {
+        "risk": "No SSD installed or SSD is not 256GB",
+        "proof": "Photo of the installed SSD showing brand and capacity, or a system information screenshot.",
+        "if_unproven": "priced as no SSD or unknown SSD, which may be lower than advertised"
+      },
+      {
+        "risk": "Unit does not boot or has hardware failure",
+        "proof": "Video of the unit powering on and booting into Windows 11 Pro, or a system diagnostic report.",
+        "if_unproven": "priced as non-working or untested, which may be lower than advertised"
+      },
+      {
+        "risk": "Unit is not genuine Dell OptiPlex 3050 or has been modified",
+        "proof": "Photo of the service tag sticker with serial number and Dell verification, or a Dell system information screenshot.",
+        "if_unproven": "priced as unverified model, which may be lower than advertised"
+      }
+    ],
+    "proof_requests": [
+      "Video of the unit powering on and booting into Windows 11 Pro.",
+      "Photo of the installed CPU, RAM, and SSD showing brand and specifications.",
+      "Photo of the service tag sticker and system information screenshot (e.g., from Windows System Info or BIOS)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is confirmed as Dell OptiPlex 3050, but critical specifications (CPU, RAM, SSD, OS) cannot be verified from the photos. Hidden risks include missing or incorrect components, which affect value. Proof is needed to price accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 87294,
+    "input_tokens": 2806,
+    "output_tokens": 1052,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "c66d1cec1a769cb260f65bacab2aefae",
+    "error": null
+  }
+}

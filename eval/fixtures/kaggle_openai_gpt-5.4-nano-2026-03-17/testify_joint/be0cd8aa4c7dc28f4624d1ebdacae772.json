@@ -1,0 +1,85 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photos show a cooking gas cylinder with a top valve/neck and a curved protective handle/guard.",
+      "Photo 0 shows a yellow/tan cylinder body with visible wear/dents and a valve area; a label/sticker is present but not clearly readable.",
+      "Photos 1 and 2 show a blue cylinder body with the same style of top valve/neck; the cylinder appears worn with scuffs.",
+      "No clear, readable capacity marking (e.g., 12.5kg) is visible in the photos provided.",
+      "No clear evidence of a recent pressure test/certification stamp is readable in the photos."
+    ],
+    "identity": {
+      "status": "unknown",
+      "kind": "cooking gas cylinder (capacity not readable)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 cylinder body/valve area",
+        "photo 1 cylinder body/valve area",
+        "photo 2 cylinder body/valve area"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "12.5kg standard Cooking Gas Cylinder",
+        "verdict": "unverified",
+        "evidence": "Capacity marking is not clearly readable in photo 0/1/2."
+      },
+      {
+        "claim": "Recently tested and certified, no leak",
+        "verdict": "unverifiable_remote",
+        "evidence": "No readable test/certification stamp or leak-test proof is visible in the photos."
+      },
+      {
+        "claim": "the valve is new",
+        "verdict": "unverified",
+        "evidence": "Valve condition is visible but cannot confirm it is 'new' from photos 0/1/2."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Capacity may not be 12.5kg (price depends heavily on cylinder size).",
+        "proof": "Ask for a clear close-up photo of the cylinder\u2019s stamped/printed capacity (e.g., '12.5kg') and serial/markings on the body/neck.",
+        "if_unproven": "Price as the worst-case match among the comparables (treat as not confirmed 12.5kg)."
+      },
+      {
+        "risk": "Leak/test status may be untrue; cylinder could leak or have valve issues.",
+        "proof": "Ask for a short video of a proper leak test (soap-bubble check at valve/connection) and/or a recent inspection sticker close-up.",
+        "if_unproven": "Price as not proven leak-free (worst case: assume needs inspection/repair)."
+      },
+      {
+        "risk": "Photos show different cylinder colors (yellow vs blue), which may indicate different cylinders or repainting; could be bait-and-switch.",
+        "proof": "Ask for one continuous video showing the same cylinder from valve top to base, including any markings/serial number, and confirm it matches the listing.",
+        "if_unproven": "Price at the lowest comparable level until identity is confirmed."
+      },
+      {
+        "risk": "Cylinder condition (dents/rust/impact) may affect safety and re-certification cost.",
+        "proof": "Ask for close-up photos of the base ring, valve guard area, and any dents/rust spots with good lighting.",
+        "if_unproven": "Price as used/worn with possible re-certification needs."
+      }
+    ],
+    "proof_requests": [
+      "Clear close-up photo of the stamped/printed capacity showing '12.5kg' (and any serial/inspection markings).",
+      "Close-up photo of the valve and any inspection/test sticker (readable).",
+      "Short video leak test: apply soap solution around the valve/neck and show no bubbles.",
+      "One continuous video confirming the exact same cylinder (including serial/capacity markings) from top valve to bottom."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photos do not clearly show the cylinder capacity (12.5kg) or any readable certification/leak-test evidence, and the color difference raises identity uncertainty. Without those, a worst-case price cannot be confidently matched to the correct cylinder size and condition.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_joint",
+    "latency_ms": 6184,
+    "input_tokens": 3910,
+    "output_tokens": 911,
+    "cost_usd": 0.004774,
+    "replayed": false,
+    "fixture_key": "be0cd8aa4c7dc28f4624d1ebdacae772",
+    "error": null
+  }
+}

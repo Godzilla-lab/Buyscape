@@ -1,0 +1,88 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "A red and black dual-burner gas stove with 'Rinnai' branding on the front.",
+      "A metallic gas cylinder with a red 'CEPSA' label and a blue regulator.",
+      "The stove top shows significant carbon buildup and signs of heavy use around the burners.",
+      "The cylinder appears to be made of stainless steel or aluminum and has a blue gas regulator attached.",
+      "An orange gas hose connects the regulator to the stove.",
+      "A watermark 'POSTED ON JIJI KEVIN VIDEOS GAMES AND' is visible across the images."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "dual burner gas stove and gas cylinder",
+      "brand": "Rinnai, CEPSA",
+      "model": null,
+      "read_from": [
+        "photo 0 stove front",
+        "photo 1 cylinder label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Original foreign stainless steel gas cylinder",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows the CEPSA brand (Spanish) and the cylinder has the characteristic appearance of a stainless steel import."
+      },
+      {
+        "claim": "12.5kg",
+        "verdict": "unverified",
+        "evidence": "The weight stamp is not visible in the provided photos."
+      },
+      {
+        "claim": "original dual burner",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows a Rinnai branded stove with two burner heads."
+      },
+      {
+        "claim": "with automatic",
+        "verdict": "unverified",
+        "evidence": "The automatic ignition cannot be confirmed without a video of the stove being lit."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The cylinder may be expired or near its re-test date, making it unsafe or illegal to refill.",
+        "proof": "A clear photo of the date stamp on the cylinder shroud or base.",
+        "if_unproven": "as expired/scrap value"
+      },
+      {
+        "risk": "The stove burners may be partially blocked or the internal valves may leak.",
+        "proof": "A video showing both burners lit with a steady blue flame.",
+        "if_unproven": "as non-functional"
+      },
+      {
+        "risk": "The automatic ignition system (piezo) may be faulty.",
+        "proof": "A video showing the stove igniting via the control knobs without a match.",
+        "if_unproven": "as manual ignition only"
+      },
+      {
+        "risk": "The regulator and hose may be degraded or leaking.",
+        "proof": "A video of a soap-bubble leak test on the regulator and hose connections.",
+        "if_unproven": "as needing replacement"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the weight and expiry date stamps on the cylinder.",
+      "Video of the stove being lit using the automatic ignition.",
+      "Video showing the flame quality on both burners."
+    ],
+    "decision": "price",
+    "reason": "The items are identifiable by brand and type. They are priced at the worst-case scenario for safety (expired cylinder) and functionality (non-working stove) until the requested proofs are provided."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 22726,
+    "input_tokens": 4607,
+    "output_tokens": 4815,
+    "cost_usd": 0.016748,
+    "replayed": false,
+    "fixture_key": "613a15bd84f33de7299bf59c012e3dc6",
+    "error": null
+  }
+}

@@ -1,0 +1,108 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a hand holding a dark blue iPhone with a single rear camera and flash; a back label is visible with text resembling 'iPhone SE 2022'.",
+      "Photo 1 shows the same dark blue iPhone held beside a red iPhone; the back label on the blue phone is visible again in front of a 'SEADOT GROUP' wall logo.",
+      "Photo 2 shows both phones held together inside a glass display case with iPhone boxes in the background.",
+      "Only the rear casings are shown; the screen, settings, SIM tray, and power-on state are not visible in any photo."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "iPhone SE 2022",
+      "brand": "Apple",
+      "model": "iPhone SE 2022",
+      "read_from": [
+        "photo 0 back label",
+        "photo 1 back label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "iPhone SE 2022",
+        "verdict": "supported",
+        "evidence": "photo 0 back label and photo 1 back label"
+      },
+      {
+        "claim": "5G",
+        "verdict": "unverified",
+        "evidence": "not visible in photos"
+      },
+      {
+        "claim": "256GB",
+        "verdict": "unverified",
+        "evidence": "storage capacity not clearly readable on label in photos"
+      },
+      {
+        "claim": "physical sim Esim",
+        "verdict": "unverified",
+        "evidence": "SIM tray and cellular settings not shown"
+      },
+      {
+        "claim": "Mint",
+        "verdict": "unverified",
+        "evidence": "only rear casing shown; screen and edges not inspected"
+      },
+      {
+        "claim": "available for pickup",
+        "verdict": "unverifiable_remote",
+        "evidence": "seller's location claim cannot be checked remotely"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "iCloud activation lock or Find My enabled",
+        "proof": "video of home screen and Settings showing Find My iPhone off",
+        "if_unproven": "as iCloud locked (parts only)"
+      },
+      {
+        "risk": "Battery health degraded or non-genuine replacement",
+        "proof": "screenshot of Settings > Battery > Battery Health",
+        "if_unproven": "as unknown or degraded battery"
+      },
+      {
+        "risk": "Touch ID / home button not working",
+        "proof": "video of unlocking with enrolled fingerprint",
+        "if_unproven": "as Touch ID not working"
+      },
+      {
+        "risk": "Cellular / SIM functionality faulty",
+        "proof": "video with physical SIM inserted showing network signal",
+        "if_unproven": "as no cellular service"
+      },
+      {
+        "risk": "Actual storage lower than 256GB",
+        "proof": "screenshot of Settings > General > About showing capacity",
+        "if_unproven": "as 64GB base model"
+      },
+      {
+        "risk": "Screen or body damage not visible in rear-only photos",
+        "proof": "close-up video of screen on and all edges/corners",
+        "if_unproven": "as fair condition with possible hidden damage"
+      }
+    ],
+    "proof_requests": [
+      "Video of phone powered on, home screen, and Settings > General > About to confirm model, storage, and iOS version",
+      "Screenshot of Settings > Battery > Battery Health",
+      "Video of unlocking with Touch ID",
+      "Video with SIM inserted showing carrier signal",
+      "Video confirming Find My iPhone is off and no activation lock"
+    ],
+    "decision": "price",
+    "reason": "The model is readable as iPhone SE 2022 from the back label in photos 0 and 1, so a worst-case price can be set despite unverified condition, storage, battery, and lock status."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 23435,
+    "input_tokens": 2922,
+    "output_tokens": 4927,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "72d57df447a0cc259e85227275b0166a",
+    "error": null
+  }
+}

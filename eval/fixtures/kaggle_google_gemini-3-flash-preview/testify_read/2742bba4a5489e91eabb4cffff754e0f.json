@@ -1,0 +1,90 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Single tire shown from a top-down tread perspective.",
+      "The tread shows visible wear, particularly on the outer ribs.",
+      "Sidewall markings (brand, model, size, DOT code) are not visible.",
+      "Watermark 'NJ VENTURE' is visible on the image.",
+      "Part of another tire is visible to the left."
+    ],
+    "identity": {
+      "status": "unknown",
+      "kind": "tire",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "295 40 r20",
+        "verdict": "unverified",
+        "evidence": "The sidewall markings are not visible in photo 0."
+      },
+      {
+        "claim": "Tread is still 90 percent",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows significant smoothing and wear on the tread surface; a 90% tread tire would have much deeper, sharper grooves."
+      },
+      {
+        "claim": "no patch",
+        "verdict": "unverifiable_remote",
+        "evidence": "Requires a photo of the inner liner of the tire."
+      },
+      {
+        "claim": "no bulge",
+        "verdict": "unverifiable_remote",
+        "evidence": "Requires clear photos of both sidewalls, preferably inflated."
+      },
+      {
+        "claim": "Removed from a 2023 car",
+        "verdict": "unverifiable_remote",
+        "evidence": "Requires the DOT date code from the sidewall to verify manufacture date."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Identity and size mismatch",
+        "proof": "Photo of the sidewall showing brand, model, and size markings.",
+        "if_unproven": "as a generic budget tire of a smaller, common size"
+      },
+      {
+        "risk": "Tire is aged/expired",
+        "proof": "Photo of the 4-digit DOT date code on the sidewall.",
+        "if_unproven": "as an expired tire (over 6 years old)"
+      },
+      {
+        "risk": "Hidden internal repairs",
+        "proof": "Photo of the inside of the tire carcass.",
+        "if_unproven": "as having multiple patches"
+      },
+      {
+        "risk": "Sidewall structural damage",
+        "proof": "Photos of both the inner and outer sidewalls.",
+        "if_unproven": "as having minor sidewall damage"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the sidewall showing the brand, model, and size (e.g., 295/40R20).",
+      "Photo of the 4-digit DOT date code.",
+      "Photo of the inside of the tire to check for patches.",
+      "Photos of both sidewalls."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The single photo provided does not show the sidewall, so the brand, model, size, and age cannot be verified. Furthermore, the tread wear appears significantly worse than the 90% claimed."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 8797,
+    "input_tokens": 2382,
+    "output_tokens": 2041,
+    "cost_usd": 0.007314,
+    "replayed": false,
+    "fixture_key": "2742bba4a5489e91eabb4cffff754e0f",
+    "error": null
+  }
+}

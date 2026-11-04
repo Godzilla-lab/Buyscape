@@ -1,0 +1,84 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black touch screen POS terminal on a stand",
+      "A black receipt printer is visible on the left side",
+      "A handheld barcode scanner on a stand is visible on the right side",
+      "The terminal screen displays a grid-based interface with colored buttons",
+      "A watermark reads \"HIPHEN SOLUTIONS POSTED ON JIJI\"",
+      "No readable brand or model name appears on the terminal itself"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "POS terminal bundle with receipt printer and barcode scanner",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "15\" Touch Screen POS Terminal",
+        "verdict": "unverified",
+        "evidence": "photo 0 shows a terminal but its screen size cannot be measured remotely"
+      },
+      {
+        "claim": "Pre-Loaded Professional Point of Sale software",
+        "verdict": "unverified",
+        "evidence": "photo 0 shows software on the screen but cannot confirm it is pre-loaded or professional"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "POS terminal does not power on or the touch screen is defective",
+        "proof": "video of the terminal booting and responding to touch",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Receipt printer is defective",
+        "proof": "video of a test print",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Barcode scanner is defective",
+        "proof": "video of a successful barcode scan",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "POS software is not installed, is unlicensed, or is a trial version",
+        "proof": "screen recording of the software interface and license status",
+        "if_unproven": "as without software"
+      },
+      {
+        "risk": "Power cables or adapters are missing",
+        "proof": "photo of all included cables and power adapters",
+        "if_unproven": "as missing accessories"
+      }
+    ],
+    "proof_requests": [
+      "Video of the POS terminal powering on and the touch screen responding",
+      "Video of the receipt printer printing a test receipt",
+      "Video of the barcode scanner scanning a barcode",
+      "Screen recording of the POS software running",
+      "Photo of all power cables and accessories included"
+    ],
+    "decision": "price",
+    "reason": "The bundle is identifiable from photo 0 as a POS terminal with printer and scanner, so it can be priced at worst case as untested equipment."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 23498,
+    "input_tokens": 1585,
+    "output_tokens": 2536,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "62b799bcf6a1bcd70f9d667eb35a2c9b",
+    "error": null
+  }
+}

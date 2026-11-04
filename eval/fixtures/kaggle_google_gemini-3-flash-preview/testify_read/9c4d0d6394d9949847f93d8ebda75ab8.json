@@ -1,0 +1,74 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows an industrial plastic crusher with a grey hopper, blue belt guard, and a large electric motor.",
+      "Photo 1 shows a similar machine wrapped in plastic with '10HP' handwritten on the side.",
+      "Photo 2 shows a similar machine wrapped in plastic with '25HP' handwritten on the side.",
+      "A watermark 'MACO MACHINES' is present on all photos, likely a dealer name.",
+      "The motor nameplate in photo 0 is visible but the text is illegible."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "plastic bottle crushing machine",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Brand new",
+        "verdict": "unverified",
+        "evidence": "The plastic wrapping in photos 1 and 2 suggests new stock, but is not proof of age or condition."
+      },
+      {
+        "claim": "15hp",
+        "verdict": "contradicted",
+        "evidence": "Photo 1 shows a 10HP unit and Photo 2 shows a 25HP unit; the seller's text does not match the visual evidence of the stock shown."
+      },
+      {
+        "claim": "plastic bottle crushing machine",
+        "verdict": "supported",
+        "evidence": "The machine design is consistent with an industrial granulator/crusher."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The motor power (HP) is lower than the 15HP claimed.",
+        "proof": "A clear photo of the motor's metal nameplate.",
+        "if_unproven": "as a 10HP model (the lowest power shown in the photos)."
+      },
+      {
+        "risk": "Internal crushing blades are missing or damaged.",
+        "proof": "A photo of the internal crushing chamber showing the blades.",
+        "if_unproven": "as requiring a full set of replacement blades."
+      },
+      {
+        "risk": "The motor is non-functional or burnt out.",
+        "proof": "A video of the machine running.",
+        "if_unproven": "as not working."
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the motor nameplate for the specific unit being sold.",
+      "Photo of the internal crushing blades.",
+      "Video of the machine powered on and running."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller claims a 15HP machine, but the photos show units marked as 10HP and 25HP. The horsepower is a critical factor in pricing this machinery and must be verified via the motor nameplate."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 11746,
+    "input_tokens": 4538,
+    "output_tokens": 2638,
+    "cost_usd": 0.010183,
+    "replayed": false,
+    "fixture_key": "9c4d0d6394d9949847f93d8ebda75ab8",
+    "error": null
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a large office photocopier wrapped in clear plastic sheeting.",
+      "The front of the machine in photo 0 reads 'SHARP AR-M207'.",
+      "Photo 1 shows the same wrapped machine from the side with a 'digital' sticker and partial 'SHARP AR-M207' text.",
+      "Photo 2 shows the top and side of the same wrapped Sharp AR-M207.",
+      "The machine sits on a wooden pallet; no power cord, paper trays, or control panel display are clearly visible.",
+      "No meter reading, page count, or test operation is shown in any photo."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "photocopier",
+      "brand": "Sharp",
+      "model": "AR-M207",
+      "read_from": [
+        "photo 0",
+        "photo 1",
+        "photo 2"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "London use",
+        "verdict": "unverifiable_remote",
+        "evidence": "No shipping label, plug type, or origin marking visible in photos."
+      },
+      {
+        "claim": "Low page count, under 20,000 copies",
+        "verdict": "unverified",
+        "evidence": "No meter or counter display visible in any photo."
+      },
+      {
+        "claim": "New drum and toner just fitted",
+        "verdict": "unverified",
+        "evidence": "Internal components hidden by plastic wrapping."
+      },
+      {
+        "claim": "no paper jam",
+        "verdict": "unverified",
+        "evidence": "Machine not powered or tested in photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Machine may not power on or may be non-functional",
+        "proof": "Video of the photocopier powering on and producing a test copy",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Actual page count may exceed 20,000 copies",
+        "proof": "Photo of the meter/counter screen showing total page count",
+        "if_unproven": "as high-mileage unit"
+      },
+      {
+        "risk": "Drum and toner may not be new",
+        "proof": "Photo of the drum/toner unit or purchase receipt for new consumables",
+        "if_unproven": "as consumables due for replacement"
+      },
+      {
+        "risk": "Paper feed or fuser may be faulty",
+        "proof": "Video of a successful multi-page copy job",
+        "if_unproven": "as needing repair"
+      }
+    ],
+    "proof_requests": [
+      "Video of the photocopier powering on and producing a copy",
+      "Photo of the meter/counter screen showing total page count",
+      "Photo of the drum and toner unit or receipt for new consumables"
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identifiable as a Sharp AR-M207 photocopier from the photos, so it can be priced at its worst case with unproven claims treated as false.",
+    "price_pick": {
+      "low": 0,
+      "high": 2
+    }
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_joint",
+    "latency_ms": 28076,
+    "input_tokens": 3579,
+    "output_tokens": 5481,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "7c903de1174bde22d59a83a4015ca1cf",
+    "error": null
+  }
+}

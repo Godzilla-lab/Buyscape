@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Front view of a smartphone showing the lock screen with 'Galaxy S21' and 'Secured by Knox' text. The screen is on, but no further UI is visible. The phone is on a stand with 'MOBILE' written on it.",
+      "Photo 1: Back view of the phone, blue color, with a triple camera module. A sticker is affixed to the back with text: 'SAMSUN', 'SM-S21', '128GB', '256GB', 'BLACK', IMEI number, and barcode. The sticker appears to be a seller's label, not original packaging.",
+      "Photo 2: Bottom edge of the phone showing USB-C port, speaker grille, and microphone. The metal frame around the bottom edge is visibly scratched and worn. The screen is off, showing the same 'Galaxy S21' boot screen as in photo 0.",
+      "The phone appears to be a Samsung Galaxy S21 based on screen text and design. The sticker in photo 1 lists 'SM-S21' which is the model code for Galaxy S21, and '256GB' storage, matching the seller's claim.",
+      "The bottom frame shows significant wear and scratches, suggesting prior use or damage."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "Samsung Galaxy S21",
+      "brand": "Samsung",
+      "model": "SM-S21",
+      "read_from": [
+        "photo 0 screen",
+        "photo 1 sticker"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Samsung S21 5G",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows 'Galaxy S21' on screen; photo 1 sticker shows 'SM-S21', which is the model code for Galaxy S21. The 5G claim is unverified but typical for this model; no visible evidence contradicts it."
+      },
+      {
+        "claim": "Battery full",
+        "verdict": "unverifiable_remote",
+        "evidence": "No battery percentage or charging status visible. The screen is on, but no indication of battery level. Cannot verify remotely."
+      },
+      {
+        "claim": "Internal storage 256GB",
+        "verdict": "supported",
+        "evidence": "Photo 1 sticker clearly lists '256GB' under the model code."
+      },
+      {
+        "claim": "In good...",
+        "verdict": "contradicted",
+        "evidence": "Photo 2 shows significant scratches and wear on the bottom metal frame. This contradicts the claim of being 'in good' condition unless 'good' is interpreted as functional only, which is not specified."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery health is degraded or not full as claimed",
+        "proof": "A screenshot showing battery percentage and health status, or a video of the phone charging and discharging.",
+        "if_unproven": "priced as not fully functional or with degraded battery, which reduces value."
+      },
+      {
+        "risk": "Phone has been repaired or has hidden damage (e.g., cracked screen, water damage, or internal issues)",
+        "proof": "A video showing the phone being turned on, used, and all functions working, including camera, speakers, and touchscreen. Also, a close-up of the screen for cracks and a check for water damage indicators.",
+        "if_unproven": "priced as potentially damaged or with unknown functionality, reducing value."
+      },
+      {
+        "risk": "Sticker in photo 1 is fake or mislabeled, and the phone is not 256GB or not a genuine S21",
+        "proof": "A photo of the phone's settings screen showing 'About phone' with model number and storage details, or a video of the phone being used to verify specs.",
+        "if_unproven": "priced as unverified model or storage, which could be a lower-tier model or counterfeit."
+      }
+    ],
+    "proof_requests": [
+      "Video of the phone being turned on, showing battery percentage and health, and all functions working.",
+      "Photo of the 'About phone' settings screen showing model number and storage capacity.",
+      "Close-up of the screen for cracks or damage.",
+      "Check for water damage indicators (if possible)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The phone is identified as a Samsung Galaxy S21 with 256GB storage, but the claim of 'in good condition' is contradicted by visible wear on the frame. Battery status and overall functionality cannot be verified remotely. Hidden risks like battery health, screen damage, or water damage must be proven before pricing. Without proof, the item cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 86685,
+    "input_tokens": 3040,
+    "output_tokens": 1050,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "365133040867873a21fbf1ecb5884b59",
+    "error": null
+  }
+}

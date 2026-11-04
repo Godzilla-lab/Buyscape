@@ -1,0 +1,69 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows two solar panels leaning against a wall in a rough, unfinished space with debris on the ground.",
+      "One panel is white-backed with a black junction box and a short black cable attached; the other is a dark blue photovoltaic panel with a silver frame and visible grid lines.",
+      "The white panel has text at the bottom left: 'BERM 180', which may be a model or part number.",
+      "The dark blue panel has a watermark 'IZUTECH SOLAR ENERGY' overlaid on the image.",
+      "The panels appear to be new or lightly used, but there is no visible damage or wear.",
+      "No other equipment (like inverters or charge controllers) is visible in the photo."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel",
+      "brand": "Izutech",
+      "model": "BERM 180",
+      "read_from": [
+        "photo 0 bottom left text",
+        "photo 0 watermark"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Izutech solar energy specialize in all solar equipment such as: Inverter, panels, charge...",
+        "verdict": "unverified",
+        "evidence": "The photo shows only solar panels. No inverters or charge controllers are visible. The watermark 'IZUTECH SOLAR ENERGY' supports the brand claim, but not the full range of products."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The panel may be damaged or defective, especially the white-backed panel with the junction box, which could have internal wiring issues.",
+        "proof": "Close-up of the junction box and cable connections, and a backside view of the white panel to check for cracks or corrosion.",
+        "if_unproven": "priced as potentially non-functional or with hidden defects"
+      },
+      {
+        "risk": "The model 'BERM 180' may not be a real or standard model, or may be mislabeled.",
+        "proof": "Clear, close-up shot of the label or nameplate on the white panel.",
+        "if_unproven": "priced as unknown model, which may affect value"
+      },
+      {
+        "risk": "The panels may be second-hand or used, despite appearing new, with hidden wear or reduced efficiency.",
+        "proof": "Close-up of the cell surface for micro-cracks, discoloration, or hot spots; also, a photo of the panel's serial number or manufacturer label.",
+        "if_unproven": "priced as used or potentially degraded"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of the junction box and cable connections on the white panel.",
+      "Clear shot of the label or nameplate on the white panel to confirm model and specs.",
+      "Close-up of the front surface of the dark blue panel to check for cell damage or discoloration.",
+      "Photo of the back of the white panel to check for damage or corrosion."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a solar panel, but critical details like model authenticity, condition, and functionality cannot be confirmed from the current photo. Hidden risks related to damage, labeling, and performance require additional proof before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 60849,
+    "input_tokens": 1705,
+    "output_tokens": 718,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "d62f34e7bdd6b55634935f375c402abe",
+    "error": null
+  }
+}

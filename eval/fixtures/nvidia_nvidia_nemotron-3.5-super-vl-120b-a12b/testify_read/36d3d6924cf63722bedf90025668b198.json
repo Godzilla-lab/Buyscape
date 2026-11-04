@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Red/orange gas cylinder standing on concrete ground",
+      "Body label shows \"CALOR\" branding",
+      "Body label shows \"47kg Propane\"",
+      "Top collar stamped \"UKFP 92\" and \"PROPERTY OF\"",
+      "Cylinder shows wear, scratches, and dirt",
+      "Cylinder is not blue",
+      "Branding is not Total"
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "gas cylinder",
+      "brand": "CALOR",
+      "model": "47kg Propane",
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "50kg gas cylinder",
+        "verdict": "contradicted",
+        "evidence": "photo 0 label reads \"47kg Propane\""
+      },
+      {
+        "claim": "direct London tokunbo",
+        "verdict": "unverifiable_remote",
+        "evidence": "photo 0 shows UK marking \"UKFP 92\" but origin and used-import status cannot be confirmed remotely"
+      },
+      {
+        "claim": "Total gas",
+        "verdict": "contradicted",
+        "evidence": "photo 0 shows \"CALOR\" branding, not Total"
+      },
+      {
+        "claim": "blue colour",
+        "verdict": "contradicted",
+        "evidence": "photo 0 shows a red/orange cylinder"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Cylinder may not hold gas or may leak at the valve",
+        "proof": "Video of the valve assembly and a pressure or leak test",
+        "if_unproven": "as not working / unsafe to fill"
+      },
+      {
+        "risk": "Cylinder may be out of test date or require recertification before filling",
+        "proof": "Close-up photo of the collar date stamp and test markings",
+        "if_unproven": "as requiring recertification before use"
+      },
+      {
+        "risk": "\"PROPERTY OF\" marking may mean the cylinder belongs to another supplier and is not legally transferable",
+        "proof": "Seller proof of ownership or transfer documents",
+        "if_unproven": "as potentially not sellable"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the top collar date and test stamps",
+      "Video of the valve and any pressure or leak test",
+      "Seller proof of ownership for the cylinder"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable from photo 0 as a used 47kg Calor propane cylinder; the seller's claims about weight, brand, and color are contradicted, so it is priced at worst case as a used cylinder of uncertain serviceability."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 11038,
+    "input_tokens": 1617,
+    "output_tokens": 2344,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "36d3d6924cf63722bedf90025668b198",
+    "error": null
+  }
+}

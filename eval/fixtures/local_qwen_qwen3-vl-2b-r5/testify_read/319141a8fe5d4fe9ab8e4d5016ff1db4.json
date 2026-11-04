@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r5",
+  "response": {
+    "observations": [
+      "Large solar panel with a 3x3 cell grid.",
+      "The panel is housed in a white metal frame.",
+      "The glass surface is reflective, showing a blue sky and a watermark 'NAGOTECE SOLAR'.",
+      "The panel is leaning against a wall in what appears to be a shop or warehouse.",
+      "A watermark 'CAMON 30' and '25mm 6/188 V/144s ISO 500' is visible at the bottom of the image."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel",
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "600watts",
+        "verdict": "unverified",
+        "evidence": "The wattage is not visible on the panel or its frame in the photo."
+      },
+      {
+        "claim": "144cell",
+        "verdict": "supported",
+        "evidence": "The 3x3 cell grid is visible in photo 0."
+      },
+      {
+        "claim": "Canadian",
+        "verdict": "unverifiable_remote",
+        "evidence": "Origin cannot be determined from the photo."
+      },
+      {
+        "claim": "used",
+        "verdict": "unverified",
+        "evidence": "The panel appears clean, but its history is not shown."
+      },
+      {
+        "claim": "Battery is new, holds charge for 8 hours. Never repaired.",
+        "verdict": "unverified",
+        "evidence": "No photo shows this; it is the seller's word only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The panel may be a lower wattage model (e.g., 300W) rather than 600W.",
+        "proof": "A clear photo of the manufacturer's label on the back of the panel.",
+        "if_unproven": "as a 300W panel"
+      },
+      {
+        "risk": "The panel may be non-functional or have significant cell damage.",
+        "proof": "A video showing a multimeter reading of the open-circuit voltage (Voc) in direct sunlight.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The panel may be a counterfeit or clone brand.",
+        "proof": "A photo of the manufacturer's label showing the brand and model.",
+        "if_unproven": "as a generic unbranded panel"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of any label, sticker or metal plate showing the brand and model.",
+      "Photo of the manufacturer's label on the back of the panel.",
+      "Photo of the panel in a well-lit environment to check for cell damage or cracks.",
+      "Video of a multimeter test showing the open-circuit voltage (Voc)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "What the item is shows, but not the model that sets its price: no photo shows it clearly enough to read. The shot asked for first would settle it."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r5",
+    "task": "testify_read",
+    "latency_ms": 2326,
+    "input_tokens": 1426,
+    "output_tokens": 540,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "319141a8fe5d4fe9ab8e4d5016ff1db4",
+    "error": null
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo shows a stacked pile of used tires in what appears to be a storage/shop area",
+      "Multiple tires of different tread patterns and brands are mixed together",
+      "No visible size markings, DOT codes, or brand names are legible on any tire sidewall",
+      "A watermark 'KWEANTHONY' is overlaid on the image",
+      "Tread wear varies across the stack; some tires show more wear than others, exact depth not measurable from this angle",
+      "No single tire is isolated as 'the item for sale' - it's unclear if buyer is purchasing one tire, a set, or from this bulk stock"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used tires (bulk stock, mixed sizes/brands)",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Dealing on Belgium tires",
+        "verdict": "unverifiable_remote",
+        "evidence": "No markings, import stickers, or documentation visible in photo 0 to confirm origin as Belgium-sourced; this is a common trade term in Nigeria for used/European tires but cannot be confirmed from the image alone"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Tire size (rim diameter, width, profile) unknown - this is the primary price driver for tires",
+        "proof": "Close-up photo of sidewall showing size code (e.g., 205/55R16) for the specific tire being sold",
+        "if_unproven": "cannot be priced at all without size; treated as missing critical data"
+      },
+      {
+        "risk": "Actual tread depth and wear level of the specific tire for sale",
+        "proof": "Close-up photo of tread with a coin or ruler for scale, plus full 360-degree sidewall view",
+        "if_unproven": "priced as low tread / near end-of-life"
+      },
+      {
+        "risk": "Sidewall damage, bulges, repairs, or dry rot not visible in a stacked pile",
+        "proof": "Clear photos of full sidewall (both sides) and inner surface of the specific tire",
+        "if_unproven": "priced as having possible structural defect"
+      },
+      {
+        "risk": "Brand/manufacturer unverified - affects value significantly among used tire buyers",
+        "proof": "Clear photo of brand name and model embossed on sidewall",
+        "if_unproven": "priced as unbranded/generic used tire"
+      },
+      {
+        "risk": "True origin (Belgium vs. other/local used stock) cannot be confirmed, affecting buyer trust and resale value",
+        "proof": "Import documentation, shipping container photo, or customs paperwork",
+        "if_unproven": "origin claim ignored for pricing purposes; priced as generic used tire"
+      },
+      {
+        "risk": "Quantity and whether listing is for one tire, a pair, or a full set of four",
+        "proof": "Seller to specify exact quantity and show the specific tires set aside for the buyer, not just general stock",
+        "if_unproven": "cannot be priced without clarity on unit count"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the sidewall size code (e.g., 185/65R15) for the specific tire(s) being offered",
+      "Photo of the brand/model name embossed on the tire sidewall",
+      "Close-up tread photos with a coin/ruler for depth reference",
+      "Full sidewall photos (inner and outer) of the actual tire(s) for sale, not the general stock pile",
+      "Confirmation of exact quantity being sold (single tire, pair, or set of four)",
+      "Any documentation supporting 'Belgium' origin, if this matters to the buyer's valuation"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo shows an undifferentiated bulk pile of used tires with no readable size, brand, or individual tire condition, and the seller's 'Belgium tires' claim cannot be checked from the image; size and brand are essential for any tire price so a worst-case price cannot yet be set."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 21744,
+    "input_tokens": 1982,
+    "output_tokens": 1842,
+    "cost_usd": 0.019225,
+    "replayed": false,
+    "fixture_key": "8a405f7bd47b43feab87664897b06257",
+    "error": null
+  }
+}

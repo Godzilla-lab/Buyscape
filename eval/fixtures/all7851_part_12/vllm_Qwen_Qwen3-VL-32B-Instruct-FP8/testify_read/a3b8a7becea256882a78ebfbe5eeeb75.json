@@ -1,0 +1,90 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Open laptop showing screen with Windows desktop, Dell logo below screen, G7 label above keyboard, backlit keyboard with blue lighting, trackpad with blue border, visible dust and smudges on palm rest.",
+      "Photo 1: Closed laptop lid with Dell logo in blue, black matte finish, minor scuffs and marks on surface.",
+      "Photo 2: Bottom of laptop showing vents, rubber feet, and a label with regulatory info and serial number. The label is partially obscured by watermark.",
+      "No ports, RAM, SSD, or battery are visible.",
+      "No proof of GPU or CPU model from photos."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "gaming laptop",
+      "brand": "Dell",
+      "model": "G7 7588",
+      "read_from": [
+        "photo 0 keyboard above: G7",
+        "photo 0 screen bezel: DELL",
+        "photo 1 lid: DELL logo"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Dell g7 7588 gaming laptop gtx 1060",
+        "verdict": "unverified",
+        "evidence": "Model G7 is visible in photo 0, but '7588' and 'GTX 1060' are not readable in any photo. The GPU cannot be confirmed visually."
+      },
+      {
+        "claim": "intel core i7-8750h, 2.20...",
+        "verdict": "unverifiable_remote",
+        "evidence": "CPU model is not visible in any photo. Cannot be confirmed from images alone."
+      },
+      {
+        "claim": "direct us used, excellent condition",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows dust, smudges, and wear on palm rest and keyboard. Photo 1 shows scuffs on lid. 'Excellent condition' is not supported by visible wear."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "GPU is not GTX 1060 or is faulty",
+        "proof": "Photo of GPU label or system information screen showing GPU model.",
+        "if_unproven": "priced as lower-end GPU or not working"
+      },
+      {
+        "risk": "CPU is not i7-8750H or is damaged",
+        "proof": "Photo of system information screen showing CPU model or BIOS screen.",
+        "if_unproven": "priced as lower-end CPU or not working"
+      },
+      {
+        "risk": "Battery is dead or degraded",
+        "proof": "Video of battery health check or power usage test.",
+        "if_unproven": "priced as no battery or degraded battery"
+      },
+      {
+        "risk": "Screen has dead pixels or burn-in",
+        "proof": "Photo of screen with solid white and black backgrounds.",
+        "if_unproven": "priced as screen with defects"
+      },
+      {
+        "risk": "RAM or storage is not as advertised",
+        "proof": "Photo of system information screen showing RAM and storage details.",
+        "if_unproven": "priced as unknown or lower capacity"
+      }
+    ],
+    "proof_requests": [
+      "Photo of system information screen showing CPU, GPU, RAM, and storage.",
+      "Photo of screen with solid white and black backgrounds to check for defects.",
+      "Video of battery health check or power usage test.",
+      "Photo of GPU label or BIOS screen to confirm GTX 1060.",
+      "Photo of bottom label with full serial number and model number."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identified as Dell G7, but key specs like GPU, CPU, and storage are not visible in photos. The condition claim is contradicted by visible wear. Risks like GPU, CPU, battery, and screen defects cannot be assessed without further proof. Price cannot be determined without verification of core components."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 72425,
+    "input_tokens": 2808,
+    "output_tokens": 880,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "a3b8a7becea256882a78ebfbe5eeeb75",
+    "error": null
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 is a collage showing multiple roofing sheets in different colors (black, red, blue, orange) and profiles, including a wavy step tile design and a corrugated design. One inset shows a building with pink roofing installed.",
+      "Photo 0 includes text overlay: 'TGS BUILDING/TILCOR', 'OVEN BAKED', 'NOW AVAILABLE in Long Span, Step Tiles, Metcoppo', and 'Features: Standard Guage // Stronger & Durable // Colour Perfection'.",
+      "Photo 1 shows a long red roofing sheet being processed on a machine in a factory setting, with other sheets stacked nearby. The sheet has a step tile profile.",
+      "The watermark 'TGS BUILDING/TILCOR' appears in both photos.",
+      "No visible brand or model name is readable on the sheets themselves; all branding is in watermarks or text overlays."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "oven baked aluminium roofing sheet",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Oven baked Aluminium roofing sheet of 0.65, 0.55, 0.45 guage",
+        "verdict": "unverified",
+        "evidence": "The gauge is not visible in any photo. The text overlay in photo 0 says 'Standard Guage' but does not specify the exact gauge."
+      },
+      {
+        "claim": "comes in different design of Steps...",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows multiple designs including step tiles, and photo 1 shows a step tile profile being produced."
+      },
+      {
+        "claim": "Oven baked",
+        "verdict": "supported",
+        "evidence": "Text overlay in photo 0 explicitly states 'OVEN BAKED'."
+      },
+      {
+        "claim": "Stronger & Durable // Colour Perfection",
+        "verdict": "unverifiable_remote",
+        "evidence": "These are subjective quality claims not verifiable from photos alone."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual gauge may be lower than advertised (0.45, 0.55, 0.65)",
+        "proof": "Close-up photo of the sheet edge with a ruler or caliper showing the thickness, or a certificate of material specification.",
+        "if_unproven": "priced as lower gauge (e.g., 0.45mm) which is cheaper"
+      },
+      {
+        "risk": "Material may not be aluminium or may be substandard alloy",
+        "proof": "Lab test report or certificate of material composition, or a close-up showing the material's surface texture and reaction to a magnet (aluminium is non-magnetic).",
+        "if_unproven": "priced as generic metal roofing, not premium aluminium"
+      },
+      {
+        "risk": "Coating may not be oven-baked or may be thin, leading to premature fading or chipping",
+        "proof": "Close-up of the coating surface under magnification, or a scratch test showing coating durability.",
+        "if_unproven": "priced as standard painted roofing, not oven-baked"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the sheet edge with a ruler to confirm gauge.",
+      "Certificate or lab report confirming the material is aluminium and the coating is oven-baked.",
+      "Close-up of the coating surface showing texture and thickness, or a scratch test result."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as oven-baked aluminium roofing sheet, but critical claims like gauge and material authenticity cannot be verified from current photos. Without proof of gauge and material quality, the item cannot be priced accurately and risks being undervalued or misrepresented."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 67900,
+    "input_tokens": 2106,
+    "output_tokens": 849,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "c78d65ea46d4249b53dde57938cffe51",
+    "error": null
+  }
+}

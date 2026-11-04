@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black Xbox console with stickers on top, an Xbox controller, and a Dell monitor displaying the Xbox home screen with several game tiles.",
+      "Photo 1 shows the same setup with the monitor displaying a soccer match video game.",
+      "Photo 2 shows the monitor displaying the EA Sports FC26 loading screen.",
+      "The Xbox logo is visible on the console front and controller in all photos.",
+      "No model name such as Series X, Series S, or One X is readable on the console in any photo."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "Xbox console",
+      "brand": "Xbox",
+      "model": null,
+      "read_from": [
+        "photo 0 console logo",
+        "photo 1 console logo",
+        "photo 2 console logo"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Xbox series 1x",
+        "verdict": "unverified",
+        "evidence": "No readable model label in photos 0-2; 'series 1x' is not a valid Xbox model name."
+      },
+      {
+        "claim": "6 games installed",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows game tiles but cannot confirm six installed titles or that they are transferable."
+      },
+      {
+        "claim": "Fc 26",
+        "verdict": "supported",
+        "evidence": "Photo 2 shows EA Sports FC26 on the monitor."
+      },
+      {
+        "claim": "far cry 3, modern warfare 3, dishonored 2 and tomb...",
+        "verdict": "unverified",
+        "evidence": "None of these titles appear in the photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Console is Xbox One X rather than Series X, or another model with different value",
+        "proof": "Clear photo of the console model label or system settings screen",
+        "if_unproven": "priced as Xbox One X"
+      },
+      {
+        "risk": "Advertised games are not installed or are account-locked",
+        "proof": "Screenshot of My games & apps showing all six titles installed",
+        "if_unproven": "priced as console only with no games"
+      },
+      {
+        "risk": "Console has hidden hardware faults",
+        "proof": "Video of console booting and running a game",
+        "if_unproven": "priced as untested"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the console's model label or system information screen",
+      "Screenshot of the installed games library showing all six titles",
+      "Short video of the console booting and playing a game"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The exact Xbox model cannot be read from the photos and the seller's 'series 1x' is not a valid model; since Series X and One X have different market values, no reliable price is possible without proof of the model."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 52542,
+    "input_tokens": 2268,
+    "output_tokens": 5690,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "9fc737af54989791977f9a6d5de7d661",
+    "error": null
+  }
+}

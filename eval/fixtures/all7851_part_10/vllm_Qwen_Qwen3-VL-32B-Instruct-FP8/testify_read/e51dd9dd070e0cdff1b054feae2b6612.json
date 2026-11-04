@@ -1,0 +1,73 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows multiple yellow boxes stacked on a wooden pallet.",
+      "Boxes are labeled 'FADDO' with a lion logo and text 'TALL TUBULAR BATTERY FOR SOLAR USE'.",
+      "Capacity '22000 20AH' is visible on the side of the boxes.",
+      "Boxes are secured with white plastic straps and have white handles.",
+      "A portion of a solar panel is visible on the left edge of the photo.",
+      "The floor is tiled, and a person is partially visible in the background.",
+      "Watermark 'SAMMY BEST SOLAR' is overlaid on the image."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "tall tubular solar battery",
+      "brand": "FADDO",
+      "model": "22000 20AH",
+      "read_from": [
+        "photo 0 box label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "We have solar panels, inverters and batteries of different sizes",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows only batteries; no inverters or solar panels are visible. The seller's text claims more items, but no proof is provided."
+      },
+      {
+        "claim": "SAMMY BEST SOLAR ENERGY",
+        "verdict": "unverifiable_remote",
+        "evidence": "The watermark 'SAMMY BEST SOLAR' is visible, but it does not confirm the business's legitimacy or full name. No official documentation or proof of business is shown."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery may be counterfeit or not as advertised (e.g., capacity or brand misrepresented)",
+        "proof": "Close-up photo of the battery label showing serial number, barcode, and manufacturer details, or a photo of the actual battery inside the box.",
+        "if_unproven": "priced as potentially counterfeit or lower quality"
+      },
+      {
+        "risk": "Battery may be damaged or used despite being in sealed boxes",
+        "proof": "Photo of the battery inside the box, showing condition and seals.",
+        "if_unproven": "priced as possibly used or damaged"
+      },
+      {
+        "risk": "Seller may not have the other claimed products (inverters, solar panels)",
+        "proof": "Photos of the inverters and solar panels as advertised, with clear branding and specifications.",
+        "if_unproven": "priced only for the visible batteries, not the full system"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual battery inside the box, showing condition and seals.",
+      "Close-up of the battery label with serial number and barcode.",
+      "Photos of the solar panels and inverters as advertised, with clear branding and specifications."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as FADDO 22000 20AH tall tubular solar batteries, but critical risks remain unproven: authenticity, condition, and whether other advertised products exist. Without proof, pricing cannot be determined accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 55329,
+    "input_tokens": 2014,
+    "output_tokens": 682,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "e51dd9dd070e0cdff1b054feae2b6612",
+    "error": null
+  }
+}

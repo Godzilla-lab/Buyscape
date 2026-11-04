@@ -1,0 +1,87 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail box for a MeWe Blender & Grinder.",
+      "Brand 'MeWe' and model 'MWBLD-HSB01BK-1800' are clearly visible on the box.",
+      "Box claims 1800W power, 2L jar, and an extra 6-edge blade.",
+      "A 12-month warranty badge and SON logo are on the box.",
+      "The actual blender and accessories are not visible, only the packaging.",
+      "The background suggests a retail or warehouse environment."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "blender and grinder",
+      "brand": "MeWe",
+      "model": "MWBLD-HSB01BK-1800",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "12 Months Warranty",
+        "verdict": "supported",
+        "evidence": "photo 0 box badge"
+      },
+      {
+        "claim": "Extra 6-Edge Blade",
+        "verdict": "supported",
+        "evidence": "photo 0 box text"
+      },
+      {
+        "claim": "2Litre Jar",
+        "verdict": "supported",
+        "evidence": "photo 0 box text"
+      },
+      {
+        "claim": "600ml Jar",
+        "verdict": "unverified",
+        "evidence": "Box shows a second jar but capacity is not stated in text"
+      },
+      {
+        "claim": "Unbreakable",
+        "verdict": "unverified",
+        "evidence": "Not stated on the visible part of the box"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different item.",
+        "proof": "Photo of the box opened showing all contents.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The motor may be defective or non-functional.",
+        "proof": "Video of the blender motor running.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The jars or blades may be used or damaged.",
+        "proof": "Close-up photos of the actual jars and blades.",
+        "if_unproven": "as heavily used"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual blender and all accessories outside of the box.",
+      "Video of the motor running.",
+      "Photo of the base plate of the actual unit to confirm model number."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail packaging is shown. Without seeing the actual item and its condition, it cannot be verified as present, new, or functional."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 8111,
+    "input_tokens": 2371,
+    "output_tokens": 1792,
+    "cost_usd": 0.006561,
+    "replayed": false,
+    "fixture_key": "6dc56962bcee8bfc5d34884feea5dab6",
+    "error": null
+  }
+}

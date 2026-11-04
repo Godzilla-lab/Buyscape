@@ -1,0 +1,74 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows a single long steel channel/beam resting on stacked steel plates, with workers walking nearby at what looks like a scrap/steel yard.",
+      "Photo 1 shows a large bundle of used galvanized pipes, some threaded ends, stacked together.",
+      "Photo 2 shows multiple rusted steel I-beams or H-beams stacked against a brick wall outdoors.",
+      "All three photos carry a 'SALYEK STEEL LIMITED - POSTED ON JIJI' watermark, suggesting a dealer's stock photos rather than a single item for sale.",
+      "No scale, ruler, tape measure, or weighing equipment visible in any photo.",
+      "No visible grade stamps, size markings, or length markers on any of the steel pieces."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "mixed used/scrap structural steel (channel beam, pipes, I/H-beams)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0",
+        "photo 1",
+        "photo 2"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "I buy various scrap metals with good value",
+        "verdict": "contradicted",
+        "evidence": "Photos 0-2 show stacked steel plates, pipes, and beams being displayed as stock for sale (with a dealer watermark 'SALYEK STEEL LIMITED'), not a buying request or scrap intake point."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Quantity/weight of material on offer is unknown (scrap and structural steel are priced by weight or length, not by photo)",
+        "proof": "A photo of the items on a weighing scale, or a written tonnage/length manifest from the seller",
+        "if_unproven": "cannot be priced at all, since no worst-case per-unit weight can be assumed"
+      },
+      {
+        "risk": "Grade/type of steel (mild steel scrap vs. reusable structural beam vs. galvanized pipe) is unclear, which changes value per kg drastically",
+        "proof": "Close-up photo of any stamped grade marking or mill certificate",
+        "if_unproven": "priced at lowest-grade mixed scrap rate"
+      },
+      {
+        "risk": "Condition of pipes and beams (rust depth, bends, cuts, missing sections) cannot be judged from a distance",
+        "proof": "Close-up photos of each distinct lot showing full length and any damage",
+        "if_unproven": "priced as heavily corroded/scrap-grade, not reusable structural stock"
+      },
+      {
+        "risk": "Unclear whether this listing is for buying scrap from the public (a service) or selling stacked steel stock (a product); the mismatch could indicate a recycled/generic ad not tied to an actual item for sale",
+        "proof": "A photo/video of the specific item in question, taken by the seller on request, with a handwritten note/date",
+        "if_unproven": "treated as unverifiable stock photos, not a specific item being offered"
+      }
+    ],
+    "proof_requests": [
+      "Please specify which exact item is being offered (beam, pipe bundle, or plates) and its weight in kg/tons or length in meters.",
+      "Please provide a close-up photo of the actual lot being sold, with a tape measure or scale, taken today with a timestamp.",
+      "Please clarify if this is scrap being bought from the public or inventory being sold, since the text and photos conflict."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photos show generic stacked steel scrap/stock from a dealer with no weight, length, or specific-lot detail, and the seller's text (buying scrap) contradicts the photos (selling stock); without a weight or quantity figure no price, not even a worst-case one, can be set."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 27028,
+    "input_tokens": 3839,
+    "output_tokens": 2180,
+    "cost_usd": 0.026319,
+    "replayed": false,
+    "fixture_key": "58bde8142aec96061aa8fad84e599b04",
+    "error": null
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: Front of a black DSLR body with 'Canon' logo and 'EOS 5D Mark II' label on front, no lens attached (body cap on), watermarks 'POSTED ON JIJI' and 'CDICSON BUSINESS WORLD'.",
+      "Photo 1: Rear view, 'Canon' logo below LCD screen, screen appears blank/off, no visible battery or memory card compartment open, on/off switch visible.",
+      "Photo 2: Bottom plate shows manufacturer label 'Canon DS126201, DC 8.1V, CANON INC, MADE IN JAPAN', serial number '3761814763' - DS126201 is the known internal model code for the Canon EOS 5D Mark II.",
+      "No lens, battery, charger, strap, memory card, or box visible in any photo.",
+      "No photo shows the camera powered on, a live shutter count, or a test image."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DSLR camera body",
+      "brand": "Canon",
+      "model": "EOS 5D Mark II (DS126201)",
+      "read_from": [
+        "photo 0",
+        "photo 2"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "The brand is Sony.",
+        "verdict": "contradicted",
+        "evidence": "Photos 0, 1, and 2 all clearly show 'Canon' branding and the Canon-specific model plate (DS126201); no Sony markings anywhere."
+      },
+      {
+        "claim": "The Canon EOS 5D Mark II is a full-frame DSLR camera known for its 21.1-megapixel sensor.",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a generic fact about the model line, confirmed by the model plate in photo 2, but it says nothing about this specific unit's sensor condition or functionality, which cannot be seen in any photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "No lens is included, which materially changes the value of the listing.",
+        "proof": "A photo showing a lens bundled with the body, or explicit confirmation this is body-only.",
+        "if_unproven": "priced as body only, no lens"
+      },
+      {
+        "risk": "Functionality (power-on, shutter actuation, sensor/mirror condition, autofocus, LCD) is unverified; the rear screen appears off in photo 1.",
+        "proof": "A video or photo of the camera powered on, displaying menu/live view, and a photo of the shutter count from the menu or a test shot.",
+        "if_unproven": "priced as not confirmed working"
+      },
+      {
+        "risk": "No accessories (battery, charger, strap, memory card, box) shown, which affects completeness and resale value.",
+        "proof": "Photo of accessories included with the sale.",
+        "if_unproven": "priced as body only, no accessories"
+      },
+      {
+        "risk": "Physical condition such as lens mount wear, sensor dust/scratches, or body dents cannot be assessed from these three angles alone.",
+        "proof": "Close-up photos of the lens mount, sensor (mirror up), and body corners/edges.",
+        "if_unproven": "priced assuming cosmetic wear consistent with heavy use"
+      },
+      {
+        "risk": "Mismatched brand claim in the listing text ('Sony') raises doubt about whether this listing was carelessly copied from another template, which could extend to other unverified claims about the item.",
+        "proof": "Seller clarification or corrected listing confirming all details match the photographed Canon unit.",
+        "if_unproven": "treated as a listing error, not altering identity (photos override text), but flagged as a trust concern"
+      }
+    ],
+    "proof_requests": [
+      "Photo/video of the camera powered on showing a live view or menu screen.",
+      "Photo of the shutter count from the camera's menu system.",
+      "Photo of the lens mount and sensor area (mirror lifted).",
+      "Photo of any included accessories: battery, charger, strap, memory card, box.",
+      "Confirmation from seller correcting the 'Sony' brand text error."
+    ],
+    "decision": "price",
+    "reason": "The photos, especially the model plate in photo 2, consistently and clearly identify this as a Canon EOS 5D Mark II body; the text's 'Sony' claim is a contradicted listing error that does not override photographic evidence. Price it at worst case as a body-only, functionally unverified unit with no accessories shown."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 35542,
+    "input_tokens": 3066,
+    "output_tokens": 3273,
+    "cost_usd": 0.035703,
+    "replayed": false,
+    "fixture_key": "1f04042283b03e0e63647cd262d897e9",
+    "error": null
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Two large white rectangular batteries stacked vertically in a metal rack.",
+      "Each battery has a black label with 'CAESAR ENERGY' in large white letters.",
+      "Label text includes: '[12V 220AH @ C20, 25\u00b0C, Weight 67 kg]', 'TUBULAR TECHNOLOGY', 'SOLAR BATTERIES', 'Long Backup', 'Low Maintenance'.",
+      "A small image of a battery with 'CAESAR' on it is on the label.",
+      "The label also says 'MADE IN INDIA'.",
+      "The batteries are connected with thick cables; some wires are visible at the top and sides.",
+      "The metal rack is dark brown and shows signs of wear or rust.",
+      "The background is a textured light-colored wall.",
+      "A watermark 'OLAYIWOLA POPOOLA' is overlaid on the image."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "solar battery",
+      "brand": "CAESAR ENERGY",
+      "model": "12V 220AH Tubular Technology Solar Battery",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Weak Solar battery for sale",
+        "verdict": "unverified",
+        "evidence": "The seller calls it 'weak', but no visual evidence of damage, leakage, or physical weakness is visible. The batteries appear intact and undamaged in the photo."
+      },
+      {
+        "claim": "12V 220AH @ C20, 25\u00b0C, Weight 67 kg",
+        "verdict": "supported",
+        "evidence": "This specification is clearly printed on the label in photo 0."
+      },
+      {
+        "claim": "Tubular Technology Solar Batteries",
+        "verdict": "supported",
+        "evidence": "This is printed on the label in photo 0."
+      },
+      {
+        "claim": "Long Backup, Low Maintenance",
+        "verdict": "unverifiable_remote",
+        "evidence": "These are performance claims that cannot be verified from a photo alone. They are stated on the label but require testing to confirm."
+      },
+      {
+        "claim": "Made in India",
+        "verdict": "supported",
+        "evidence": "This is printed on the label in photo 0."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery may be damaged internally or have reduced capacity despite appearing intact",
+        "proof": "A video showing the battery being charged and discharged, or a multimeter test showing voltage and internal resistance.",
+        "if_unproven": "priced as potentially non-functional or with reduced capacity"
+      },
+      {
+        "risk": "Battery may be old or have been used extensively, leading to reduced lifespan",
+        "proof": "A photo of the battery's date of manufacture or serial number, or a video of the battery in use with a load.",
+        "if_unproven": "priced as used with unknown age and condition"
+      },
+      {
+        "risk": "The 'weak' claim may indicate a defect not visible in the photo, such as sulfation or internal short",
+        "proof": "A video of the battery being tested under load or a professional battery tester reading.",
+        "if_unproven": "priced as potentially defective"
+      }
+    ],
+    "proof_requests": [
+      "Video of the battery being tested under load or with a multimeter to verify voltage and health.",
+      "Photo of the battery's date of manufacture or serial number.",
+      "Close-up of the terminals and connections to check for corrosion or damage."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The batteries are identifiable by brand and model, and the specifications are supported. However, the seller's claim of 'weak' cannot be verified visually, and there are hidden risks related to internal condition and age that must be proven before pricing. Without proof of functionality and condition, the item cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 70671,
+    "input_tokens": 1773,
+    "output_tokens": 884,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "0ba23c3042dd2fb1f3ce2bff4bd81b52",
+    "error": null
+  }
+}

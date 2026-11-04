@@ -1,0 +1,98 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-r4",
+  "response": {
+    "observations": [
+      "Photo 0 shows a large pile of used car batteries in a storage area.",
+      "Photo 1 shows a single battery with a label reading 'GREEN ENERGY AUTOMOTIVE GE 60-12 540A (EN)' and 'MADE IN ITALY'.",
+      "The battery in photo 1 has a red positive terminal cap and a black negative terminal.",
+      "The label in photo 1 is partially covered by a blue plastic wrapper.",
+      "The seller's text mentions 'Direct second hand battery' and 'Available in stock'.",
+      "The seller's text claims the battery is 'new' and 'Never repaired'.",
+      "The seller's text mentions 'good warranty'.",
+      "The seller's text mentions 'holds charge for 8 hours'.",
+      "The seller's text mentions 'Available in stock'.",
+      "The seller's text mentions '2 photos follow'.",
+      "The seller's text mentions 'Battery is new, holds charge for 8 hours. Never repaired.'"
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car battery",
+      "brand": "Green Energy",
+      "model": "GE 60-12",
+      "read_from": [
+        "photo 1 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Direct second hand battery",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows a large pile of used batteries."
+      },
+      {
+        "claim": "Available in stock",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows a large pile, but the seller's text is from a single photo."
+      },
+      {
+        "claim": "Battery is new",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows used batteries; photo 1 shows a used battery with a wrapper."
+      },
+      {
+        "claim": "holds charge for 8 hours",
+        "verdict": "unverifiable_remote",
+        "evidence": "Requires a multimeter test or load test not shown."
+      },
+      {
+        "claim": "Never repaired",
+        "verdict": "unverified",
+        "evidence": "The physical condition in photo 1 is not sufficient to confirm no repairs have been done."
+      },
+      {
+        "claim": "good warranty",
+        "verdict": "unverifiable_remote",
+        "evidence": "Warranty terms are not visible on the battery."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The battery may be dead or have a very low capacity.",
+        "proof": "A video showing a multimeter reading of the battery voltage.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The battery may be sulfated or have internal damage.",
+        "proof": "A load test showing the battery can hold a full charge.",
+        "if_unproven": "as scrap"
+      },
+      {
+        "risk": "The battery may be a different capacity than the one shown.",
+        "proof": "A clear photo of the label showing the Ah (Ampere-hour) rating.",
+        "if_unproven": "as the lowest capacity model in the pile"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of any label, sticker or metal plate showing the brand and model.",
+      "Video of a multimeter test showing the battery voltage.",
+      "Photo of the label showing the Ah (Ampere-hour) rating.",
+      "Video of a load test on the battery."
+    ],
+    "decision": "price",
+    "reason": "The item is known from the photos. What they cannot prove is priced at its worst case until the proof asked for below arrives."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-r4",
+    "task": "testify_read",
+    "latency_ms": 3382,
+    "input_tokens": 2062,
+    "output_tokens": 636,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "22d9ae14f8c669871d2739fffebc1f4e",
+    "error": null
+  }
+}

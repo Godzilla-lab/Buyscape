@@ -1,0 +1,94 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Red/black portable generator with 'KEMAGE' logo clearly visible on front panel and control panel (photo 0)",
+      "Control panel shows a voltmeter, circuit breaker switches, two AC 220V sockets, a DC 12V outlet, and an engine on/off switch",
+      "Unit sits on a two-wheel trolley frame with red wheels, has carrying handles, and a visible 12V battery mounted underneath for electric start",
+      "Fuel tank cap and a small data/warning sticker are visible on top but the text is too small/unreadable to confirm capacity or specs",
+      "Background shows unrelated boxed appliances and a 'Stantech Electronics' watermark, suggesting this may be a shop/catalog photo rather than a photo of the specific unit being sold",
+      "No visible rating plate showing kVA, wattage, or serial number legible in the image"
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "petrol/diesel portable generator",
+      "brand": "Kemage",
+      "model": null,
+      "read_from": [
+        "photo 0 front panel logo",
+        "photo 0 control panel label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Kamage (Kemage) generator 8.5kva",
+        "verdict": "unverified",
+        "evidence": "Brand 'KEMAGE' is readable in photo 0, but no kVA rating plate or sticker is legible in the image to confirm 8.5kva"
+      },
+      {
+        "claim": "4 months use",
+        "verdict": "unverifiable_remote",
+        "evidence": "No way to confirm age or usage hours from a single static photo; no run-time meter or dated proof shown"
+      },
+      {
+        "claim": "100% copper wire coil",
+        "verdict": "unverifiable_remote",
+        "evidence": "Internal winding/coil is not visible in any photo; this claim cannot be checked without opening the unit or seeing a manufacturer spec sheet"
+      },
+      {
+        "claim": "Still on warranty",
+        "verdict": "unverifiable_remote",
+        "evidence": "No warranty card, receipt, or proof-of-purchase shown in the photo"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual output capacity (kVA) may differ from claimed 8.5kva, which significantly changes price bracket",
+        "proof": "Clear close-up photo of the rating plate/sticker on the generator body showing kVA/wattage and model number",
+        "if_unproven": "priced as unknown/lowest plausible capacity for a Kemage-branded unit of this size"
+      },
+      {
+        "risk": "Generator may not start or run; no load test shown",
+        "proof": "Video clip of the generator starting and running under load with visible voltmeter reading",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Coil material (copper vs aluminum) cannot be verified visually and affects longevity/value",
+        "proof": "Manufacturer spec sheet or photo of coil winding during an open inspection",
+        "if_unproven": "priced as standard/unverified winding, not premium copper"
+      },
+      {
+        "risk": "Photo may be a generic catalog/stock image rather than the actual unit for sale, masking true condition (scratches, rust, wear, missing parts)",
+        "proof": "Fresh photos of the actual unit from multiple angles with timestamp or handwritten seller note visible",
+        "if_unproven": "priced as used with unknown cosmetic condition, worst case"
+      },
+      {
+        "risk": "Claimed '4 months use' and 'on warranty' cannot be substantiated, affecting resale value expectations",
+        "proof": "Photo of purchase receipt, warranty card, or box with visible purchase date",
+        "if_unproven": "priced as used with no warranty"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the rating plate/sticker showing kVA, model number, and serial number",
+      "Video of the generator starting and running under some load, showing the voltmeter",
+      "Photo of the purchase receipt or warranty card showing purchase date",
+      "Additional photos of the unit from other angles (sides, rear, underside) showing actual cosmetic condition"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The brand is identifiable but the kVA rating that sets the price bracket is not legible in the photo, and all condition/usage/warranty claims are unverifiable from a single catalog-style image, so even a worst-case price cannot be anchored without a clear capacity label shot."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 26339,
+    "input_tokens": 2528,
+    "output_tokens": 2289,
+    "cost_usd": 0.024787,
+    "replayed": false,
+    "fixture_key": "74130f56ce88fbc4f7f54ed104ecbe91",
+    "error": null
+  }
+}

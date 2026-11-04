@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Three photos show a dark gray iPhone held in hand, with a white sticker covering most of the back.",
+      "The sticker has a barcode and text: 'iPhone 15' is visible on photo 1 and photo 2.",
+      "The phone has a triple-lens camera module in a square bump, consistent with iPhone 15 Pro or iPhone 15 Pro Max.",
+      "The phone is being held in front of a 'SEADOT GROUP' sign with a marble background in photos 0 and 2.",
+      "Photo 1 shows the phone in front of a glass display cabinet with multiple iPhone boxes, some with visible 'iPhone 15' branding.",
+      "No front view, screen, or ports are visible.",
+      "No signs of damage are visible on the back, but the sticker obscures the serial number and Apple logo.",
+      "The seller claims 'Direct mint Canada used iPhone 15 128GB with 98% bh'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "iPhone 15",
+      "brand": "Apple",
+      "model": "iPhone 15",
+      "read_from": [
+        "photo 1 sticker",
+        "photo 2 sticker"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Direct mint Canada used iPhone 15 128GB with 98% bh",
+        "verdict": "unverified",
+        "evidence": "The model 'iPhone 15' is visible on the sticker in photo 1 and photo 2. The '98% bh' (battery health) and '128GB' storage are not visible in any photo. The 'Direct mint Canada' claim cannot be verified remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery health is not 98% as claimed",
+        "proof": "A screenshot of the iPhone's battery health from Settings > Battery > Battery Health, showing the 'Maximum Capacity' percentage.",
+        "if_unproven": "Priced as if battery health is unknown, likely lower than 98%, which reduces value."
+      },
+      {
+        "risk": "Storage capacity is not 128GB",
+        "proof": "A screenshot of the iPhone's Settings > General > About, showing the model and storage capacity.",
+        "if_unproven": "Priced as if storage is unknown, which could be 256GB or 512GB, but without proof, assumed to be the lower end of the range or not as advertised."
+      },
+      {
+        "risk": "Phone is not genuine or has been tampered with (e.g., fake sticker, repainted, or non-original parts)",
+        "proof": "A clear photo of the back without the sticker, showing the Apple logo, serial number, and model number (e.g., A2882 for iPhone 15). Also, a photo of the front screen and ports.",
+        "if_unproven": "Priced as if authenticity is questionable, which reduces value significantly."
+      },
+      {
+        "risk": "Phone has hidden damage (screen cracks, water damage, or internal issues)",
+        "proof": "A video or photo showing the front screen, bezels, and ports, with the screen turned on and displaying content. Also, a photo of the SIM tray and charging port.",
+        "if_unproven": "Priced as if damage is possible, which reduces value."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of battery health from Settings > Battery > Battery Health.",
+      "Screenshot of Settings > General > About showing model and storage capacity.",
+      "Photo of the back without the sticker, showing Apple logo and serial number.",
+      "Photo of the front screen turned on, showing bezels and ports.",
+      "Photo of the SIM tray and charging port."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identified as iPhone 15 from the sticker, but critical claims like battery health, storage capacity, and authenticity cannot be verified from the photos. Hidden risks such as damage or tampering are not visible. Proof is needed to confirm the claims and assess the true condition before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 73122,
+    "input_tokens": 2793,
+    "output_tokens": 917,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "e44c69fb92a02f2822b612c313119556",
+    "error": null
+  }
+}

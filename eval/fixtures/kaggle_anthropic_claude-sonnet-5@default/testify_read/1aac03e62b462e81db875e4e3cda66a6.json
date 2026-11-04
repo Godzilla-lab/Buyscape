@@ -1,0 +1,84 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Multiple stacks of used tires at an open-air market stall, photographed from a distance",
+      "Tires show spray-paint markings (numbers, letters, 'YES', 'NO') typical of used-tire sorting/grading, not manufacturer markings",
+      "No sidewall text, size code, brand name, or DOT date code is legible in any of the three photos",
+      "Visible wear varies tire to tire: some show cracking, discoloration, uneven tread; none show a clear unworn tread",
+      "Background shows alloy rims for sale and other stock, confirming this is a tire/rim market stall, not a single item listing",
+      "A person is visible in the background in photo 0 and photo 2, otherwise no scale reference for tire size"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used car tire (bulk stock, specific tire not isolated)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 wide stall view",
+        "photo 1 wide stall view",
+        "photo 2 wide stall view"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "\"First grade Belgium tires\"",
+        "verdict": "unverifiable_remote",
+        "evidence": "No sidewall markings, country-of-origin stamps, or brand/model text are legible in any photo to confirm origin or grade"
+      },
+      {
+        "claim": "Implied: tires are in good/usable condition",
+        "verdict": "contradicted",
+        "evidence": "Photo 1 and photo 2 show visible tread wear, surface cracking, and discoloration consistent with aged used tires"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Tire size (rim diameter/width) not known \u2014 this is the single largest price driver and cannot be guessed from a wide shot",
+        "proof": "Close-up photo of the sidewall showing the size code (e.g. 205/55R16) and brand name",
+        "if_unproven": "cannot be priced at all, since worst-case and best-case price bands for tires differ enormously by size"
+      },
+      {
+        "risk": "Actual tread depth / remaining life not verifiable from a distance",
+        "proof": "Close-up photo of tread face with a coin or ruler for scale",
+        "if_unproven": "priced as low/minimum tread (near end of life)"
+      },
+      {
+        "risk": "Manufacture date / age (dry rot risk) unknown",
+        "proof": "Close-up of DOT code on sidewall",
+        "if_unproven": "priced as old stock, higher dry-rot risk"
+      },
+      {
+        "risk": "No single tire is identified as 'the' item \u2014 unclear if buyer is pricing one tire, a set of 4, or a specific stack",
+        "proof": "Seller specifies which stack/tire(s) in a photo with a marker or points to one tire",
+        "if_unproven": "cannot be priced as a discrete item"
+      },
+      {
+        "risk": "'Belgium' origin claim cannot be checked; could be any used import",
+        "proof": "Sidewall brand/country stamp close-up",
+        "if_unproven": "priced as generic unbranded used tire, not as a premium European import"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of one sidewall showing size code, brand name, and DOT date",
+      "Photo of tread face with a coin/ruler for depth scale",
+      "Confirmation of exactly which tire(s) or how many units are being sold/priced"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "No tire size, brand, or model is legible in any photo, and size is the dominant price factor for tires; without a readable sidewall shot even a worst-case price cannot be set."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 24682,
+    "input_tokens": 3398,
+    "output_tokens": 2042,
+    "cost_usd": 0.024025,
+    "replayed": false,
+    "fixture_key": "1aac03e62b462e81db875e4e3cda66a6",
+    "error": null
+  }
+}

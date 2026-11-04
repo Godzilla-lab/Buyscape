@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail packaging for a Black+Decker Heavy Weight Dry Iron.",
+      "The brand 'BLACK+DECKER' is clearly visible on the box.",
+      "The model number 'F550-B5' is printed on the bottom right of the box in photo 0.",
+      "The box specifies 1200W power and a weight of 2.7kg.",
+      "The actual iron is not shown in the photo; only the box is visible."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "dry iron",
+      "brand": "BLACK+DECKER",
+      "model": "F550-B5",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Brand : Black & Decker",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "Color : Black",
+        "verdict": "supported",
+        "evidence": "photo 0 (box art)"
+      },
+      {
+        "claim": "Power : 1200W",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "Base Plate Type : Gold Coated Non-Stick Sole...",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The actual iron is not pictured; the box may be empty or contain a different item.",
+        "proof": "Photo of the iron outside the box.",
+        "if_unproven": "as missing/scrap"
+      },
+      {
+        "risk": "The iron may be non-functional or have electrical issues.",
+        "proof": "Video of the iron plugged in with the indicator light on.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The soleplate may be scratched or the body damaged.",
+        "proof": "Close-up photos of the iron's body and soleplate.",
+        "if_unproven": "as heavily damaged"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual iron out of the box.",
+      "Close-up photo of the soleplate to check for scratches.",
+      "Video of the iron powered on showing the indicator light."
+    ],
+    "decision": "price",
+    "reason": "The model is clearly identified from the packaging, allowing for a worst-case valuation, although the absence of the actual item in the photos is a significant risk."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 13840,
+    "input_tokens": 2374,
+    "output_tokens": 3287,
+    "cost_usd": 0.011048,
+    "replayed": false,
+    "fixture_key": "c2c0df2a7e5826379903fe9fc41d2a3c",
+    "error": null
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a solar panel leaning against a wall, with a white backside and black front with grid of photovoltaic cells.",
+      "Photo 1 is a close-up of the label on the back of the solar panel.",
+      "The label in photo 1 clearly shows the brand 'CanadianSolar' and model 'CS3U-350M'.",
+      "The label lists technical specifications: Nominal Maximum Power (Pmax) 350 W, Open Circuit Voltage (Voc) 41.2 V, Short Circuit Current (Isc) 9.51 A, etc.",
+      "The label includes certification marks: CE, DVE, and a QR code for installation manual.",
+      "The seller's text mentions solar panels, inverters, and batteries, but only the solar panel is shown in the photos."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "solar panel",
+      "brand": "CanadianSolar",
+      "model": "CS3U-350M",
+      "read_from": [
+        "photo 1 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "We have solar panels, inverters and batteries of different sizes that can power either an entire...",
+        "verdict": "unverified",
+        "evidence": "Only the solar panel is shown in the photos; inverters and batteries are not visible. The claim about powering an entire home or facility is not verifiable from the photos."
+      },
+      {
+        "claim": "solar panels of different sizes",
+        "verdict": "unverified",
+        "evidence": "Only one solar panel is shown. No other sizes are visible in the photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The solar panel may be damaged or defective, such as cracked cells, delamination, or internal wiring issues not visible from the exterior.",
+        "proof": "A close-up photo of the front surface showing the photovoltaic cells, and a photo of the junction box and wiring on the back.",
+        "if_unproven": "priced as potentially defective, with reduced value"
+      },
+      {
+        "risk": "The panel may not be in working condition or may have been previously installed and damaged.",
+        "proof": "A video showing the panel under sunlight with a multimeter reading voltage output, or a photo of the panel connected to a load or inverter.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The label may be fake or misapplied, and the panel is not actually a CanadianSolar CS3U-350M.",
+        "proof": "A photo of the panel's serial number and a verification from the manufacturer's website or a third-party certification body.",
+        "if_unproven": "priced as unverified brand/model, with lower value"
+      }
+    ],
+    "proof_requests": [
+      "A close-up photo of the front surface of the solar panel showing the photovoltaic cells for any cracks or damage.",
+      "A photo of the junction box and wiring on the back of the panel.",
+      "A video or photo showing the panel under sunlight with a multimeter reading voltage output.",
+      "A photo of the serial number and a verification from the manufacturer's website."
+    ],
+    "decision": "price",
+    "reason": "The solar panel is clearly identified as a CanadianSolar CS3U-350M from the label in photo 1. While there are hidden risks such as physical damage or non-functionality, these are priced at their worst case (as potentially defective or not working) until proven otherwise. The seller's claims about inverters and batteries are unverified but do not affect the pricing of the visible solar panel."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 66862,
+    "input_tokens": 2281,
+    "output_tokens": 817,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "0832f948fe62b6a76e107d71e68fae0f",
+    "error": null
+  }
+}

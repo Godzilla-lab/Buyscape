@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail packaging for a Maxmech MMA-200 welding machine.",
+      "The box identifies the item as a 4.8KVA welding machine.",
+      "The box is positioned on a shelf with other similar boxes, suggesting a retail or storage environment.",
+      "The actual welding machine is not visible; only the box is shown.",
+      "The seller's description appears to be a technical specification summary."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "welding machine",
+      "brand": "MAXMECH",
+      "model": "MMA-200",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Designed for MMA/Stick Welding",
+        "verdict": "supported",
+        "evidence": "photo 0 box text"
+      },
+      {
+        "claim": "uses modern Insulated Gate Bipolar Transistor technology",
+        "verdict": "unverified",
+        "evidence": "The box text is too blurry to confirm IGBT branding, and the machine's internals cannot be inspected."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, lower-value item.",
+        "proof": "A photo of the actual welding machine outside of the box.",
+        "if_unproven": "priced as an empty box"
+      },
+      {
+        "risk": "The machine may be used, refurbished, or physically damaged.",
+        "proof": "Clear photos of the machine's casing, terminals, and the rating plate.",
+        "if_unproven": "priced as heavily used and damaged"
+      },
+      {
+        "risk": "The machine may not function or may have internal electrical faults.",
+        "proof": "A video of the machine powered on and striking a welding arc.",
+        "if_unproven": "priced as not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual welding machine outside the box.",
+      "Photo of the rating plate on the back or bottom of the machine.",
+      "Video of the machine powered on and welding.",
+      "Photos of included accessories like the electrode holder and earth clamp."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail box is shown. The presence, physical condition, and functionality of the actual welding machine cannot be verified from a photo of the packaging alone."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 20865,
+    "input_tokens": 2399,
+    "output_tokens": 4465,
+    "cost_usd": 0.014594,
+    "replayed": false,
+    "fixture_key": "255a34f883b6c2250eb0a9a8004216a0",
+    "error": null
+  }
+}

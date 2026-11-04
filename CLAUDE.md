@@ -66,10 +66,28 @@ money moves. The promise is "nothing hidden gets priced", not "we see inside".
                         --reasoner google/gemini-3.8-flash
     uv run buyscape run --preset balanced --budget-usd 0.5 stop once real spend hits the cap
     uv run buyscape fetch-buyscrap            cache the tenant's own adverts with photos
+    uv run buyscape fetch-shops               new prices from the tenant's shops (Pointek, Slot, Jumia), for the share-of-new route
     uv run buyscape run --preset balanced --set buyscrap
     uv run buyscape spend                     every run's cost and the cost per item
     uv run buyscape testify-convert           build the Testify benchmark items, free
     uv run buyscape testify-fetch             cache Jiji small goods and material lots, from a home connection
+    uv run buyscape testify-fetch --for-training --region kano   more cities as training data, never benchmark
+    uv run buyscape testify-fetch --for-training --more-words --region lagos   also the makers and models the market names, for far more adverts
+    uv run buyscape testify-crawl --region lagos --pages 100   whole Jiji categories paged through, every kind in them, training only
+    uv run buyscape data-pack                 every advert we hold in one folder with its photos, labels, reads and a datasheet; a public version with links and labels only, free
+    uv run buyscape testify-select --n 3000   choose what the teacher reads: clean, every category and price, most useful first, free
+    uv run buyscape testify-label --market lagos --key-env GEMINI_API_1   check each item's photos, free tier
+    uv run buyscape testify-construct         items with the plate taken away, and unpriceable photos, free
+    uv run buyscape testify-truths            true claims a photo shows and their false twins, free
+    uv run buyscape testify --model ... --split dev --variants clean,lie,truth,contra --condition witness_judge
+    uv run buyscape testify --model nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b --split dev   score a model
+    uv run buyscape testify-export --model human:ada --split dev --no-lies   a person sits the test at /office/testify
+    uv run buyscape testify --model kaggle:google/gemini-3-flash-preview --split train --no-lies --reads-only   a teacher reads the training pool
+    uv run buyscape testify-label --model kaggle:google/gemini-3.5-flash-lite --split train   the same photo check on the training pool
+    uv run buyscape testify-judge --split dev --split test   judge the answers the word rules mark wrong, same thing in other words, free
+    uv run buyscape testify-ocr               read every advert's photos once with the local OCR, free
+    uv run buyscape testify-train-build       the fine-tuning set from those reads, never committed
+    uv run buyscape testify-train-build --record-picks nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b   a teacher picks the price step first, free
     uv run buyscape ui                        seller page at /, back office at /office, staff questions at /office/questions, test bench at /bench
     uv run --group dev pytest
 
@@ -98,6 +116,20 @@ replay, and the run says so rather than failing silently.
 
 ## Working rules
 
+- **Anything a seller sends must work.** The trained model is not for the
+  benchmark's 52 kinds. Train on every category the market and BuyScrap trade:
+  e-waste (laptops, TVs, monitors, ACs, washing machines, UPS, circuit boards),
+  phones, car parts, scrap cars, industrial machines, furniture, glass and every
+  material lot. Test on kinds it never trained on. Where it cannot name or price
+  an item it says so (rule 8); it never guesses.
+- **The right data, not just more.** Training data is chosen for what the
+  model gets wrong: second-hand adverts with several others for the same item
+  (the price step learns from those), photos where a label or plate can be
+  read, items with and without a brand in view, bundles, rare kinds, faulty
+  and scrap items, and final sale prices above all. Variety is the point:
+  every kind, every price level, working and broken, sampled at random across
+  a listing rather than its first pages. Crawl wide, then choose what the
+  teacher reads: the read is the costly step.
 - **Never deploy without an explicit yes.** Draft deploys count as deploys.
 - **No em dashes or en dashes in any shipped text**, code comments included.
 - Anything tenant-specific belongs in `tenants/`, never in code. If onboarding a

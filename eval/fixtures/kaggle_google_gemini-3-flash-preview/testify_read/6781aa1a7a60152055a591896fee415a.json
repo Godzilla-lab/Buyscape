@@ -1,0 +1,87 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Yellow and black cordless drill in a cardboard box.",
+      "Brand 'INGCO' is clearly visible on the tool body and both batteries.",
+      "Two 20V Max lithium-ion batteries are included.",
+      "One battery charger is present in the box.",
+      "A small translucent plastic accessory box is visible.",
+      "The technical specification sticker on the side of the drill is present but the text is too blurry to read."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "cordless drill",
+      "brand": "Ingco",
+      "model": null,
+      "read_from": [
+        "photo 0 body"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Brand : Ingco",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "Color : Black and yellow",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "Voltage : 20V",
+        "verdict": "supported",
+        "evidence": "photo 0 batteries"
+      },
+      {
+        "claim": "No-load speed : 0-400/0-1500/min",
+        "verdict": "unverified",
+        "evidence": "The specification sticker on the drill in photo 0 is illegible."
+      },
+      {
+        "claim": "Max.torque :...",
+        "verdict": "unverifiable_remote",
+        "evidence": "The claim is incomplete and the sticker is unreadable."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The motor or trigger may be faulty.",
+        "proof": "A video of the drill running through its speed ranges.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The batteries may be end-of-life and unable to hold a charge.",
+        "proof": "A video showing the drill operating under load or the charger indicating a full charge.",
+        "if_unproven": "as batteries needing replacement"
+      },
+      {
+        "risk": "The model may lack a hammer function or brushless motor, affecting value.",
+        "proof": "A clear photo of the specification sticker on the side of the drill.",
+        "if_unproven": "as the most basic entry-level 20V model"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the specification sticker on the side of the drill body.",
+      "Video of the drill operating with both batteries to confirm functionality.",
+      "Photo of the charger's plug type to ensure compatibility with local outlets."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The specific model number is unreadable on the side label. This is necessary to distinguish between standard drill/drivers and more expensive hammer or brushless models."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 13539,
+    "input_tokens": 2387,
+    "output_tokens": 2839,
+    "cost_usd": 0.009711,
+    "replayed": false,
+    "fixture_key": "6781aa1a7a60152055a591896fee415a",
+    "error": null
+  }
+}

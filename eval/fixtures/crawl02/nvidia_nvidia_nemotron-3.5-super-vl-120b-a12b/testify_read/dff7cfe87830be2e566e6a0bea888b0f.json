@@ -1,0 +1,97 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a closed silver laptop with an Apple logo on the lid, resting on a glass display table; cables and a power adapter are visible underneath.",
+      "Photo 1 shows the thin side profile of the same silver laptop with ports along the edge.",
+      "Photo 2 is a screenshot of 'About This Mac' showing 'MacBook Pro', '2.3 GHz 8-Core Intel Core i9', '32 GB 2667 MHz DDR4' memory, '1 TB' storage, '16-inch (3072 x 1920)' display, serial number C02GC0AYMD6T, and 'macOS Tahoe Version 26.5'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "MacBook Pro 16-inch",
+      "brand": "Apple",
+      "model": "MacBook Pro 16-inch",
+      "read_from": [
+        "photo 0",
+        "photo 2"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "MacBook Pro 2019 16-inch",
+        "verdict": "unverified",
+        "evidence": "Photo 2 shows MacBook Pro and 16-inch display but does not show the year 2019."
+      },
+      {
+        "claim": "32gb ram",
+        "verdict": "supported",
+        "evidence": "Photo 2 shows Memory: 32 GB 2667 MHz DDR4."
+      },
+      {
+        "claim": "1tb ssd",
+        "verdict": "supported",
+        "evidence": "Photo 2 shows Storage: 1 TB (978.29 GB available of 1 TB)."
+      },
+      {
+        "claim": "8gb dedicated amd radeon pro 5500m graphics",
+        "verdict": "unverified",
+        "evidence": "Photo 2 shows Intel UHD Graphics 630 only; the dedicated AMD Radeon Pro 5500M is not visible."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The About This Mac screenshot shows 'macOS Tahoe Version 26.5', which does not exist, so the screenshot or operating system may be fabricated or tampered.",
+        "proof": "Video of the Mac booting to a genuine macOS desktop and showing a legitimate About This Mac window, or a screenshot of the serial number checked on Apple's coverage page.",
+        "if_unproven": "priced as a non-genuine or tampered system, not working"
+      },
+      {
+        "risk": "Battery health and cycle count are unknown; the battery could be dead or heavily degraded.",
+        "proof": "Screenshot of battery health/cycle count from System Report or a tool like CoconutBattery.",
+        "if_unproven": "priced as dead battery requiring replacement"
+      },
+      {
+        "risk": "The dedicated AMD Radeon Pro 5500M graphics are not verified and may be absent or faulty.",
+        "proof": "System Report graphics entry or video of the Mac running a graphics-intensive application.",
+        "if_unproven": "priced as integrated graphics only"
+      },
+      {
+        "risk": "The built-in display condition is not shown; it could have dead pixels, lines, or backlight damage.",
+        "proof": "Photo or video of the screen powered on showing the full display area.",
+        "if_unproven": "priced as faulty screen"
+      },
+      {
+        "risk": "Keyboard and Touch Bar functionality are unproven.",
+        "proof": "Video of all keys and the Touch Bar working.",
+        "if_unproven": "priced as faulty keyboard"
+      },
+      {
+        "risk": "Activation lock or Find My Mac status is unknown; the Mac could be locked to another account.",
+        "proof": "Video showing the Mac is not activation locked and Find My Mac is off.",
+        "if_unproven": "priced as activation locked"
+      }
+    ],
+    "proof_requests": [
+      "Video of the MacBook Pro booting to the desktop and showing a genuine macOS About This Mac window",
+      "Screenshot of System Report showing memory, storage, graphics, and serial number",
+      "Photo of the screen powered on with no visible damage",
+      "Battery cycle count and health proof",
+      "Video confirming Find My Mac is off and there is no activation lock"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as an Apple MacBook Pro 16-inch from the logo and system screenshot, but the operating system version shown is impossible and key specs are unproven, so it is priced at worst case pending proof."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 27477,
+    "input_tokens": 3031,
+    "output_tokens": 6143,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "dff7cfe87830be2e566e6a0bea888b0f",
+    "error": null
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0: white-framed solar module with black cells in a 6 by 12 grid, leaning indoors against a wall.",
+      "Photo 1: SUNPOWER label reading MODEL SPR-300E-WHT-D, Peak Power(Pmax) 300 W, Vmp 54.7 V, Imp 5.49 A, Voc 64.0 V, Isc 5.87 A.",
+      "Watermark \"YOUNG MIRACLE GLOBAL LINK\" overlaid on both photos.",
+      "A second panel edge is visible on the right side of photo 0."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "solar panel",
+      "brand": "SUNPOWER",
+      "model": "SPR-300E-WHT-D",
+      "read_from": [
+        "photo 1 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "300 watts",
+        "verdict": "supported",
+        "evidence": "photo 1 label Peak Power(Pmax) 300 W"
+      },
+      {
+        "claim": "72 cells",
+        "verdict": "supported",
+        "evidence": "photo 0 shows 6 columns by 12 rows of cells"
+      },
+      {
+        "claim": "Sunpower brand",
+        "verdict": "supported",
+        "evidence": "photo 1 label reads SUNPOWER"
+      },
+      {
+        "claim": "Mono Solar Panel",
+        "verdict": "unverified",
+        "evidence": "label does not state cell type; cell appearance alone is not proof"
+      },
+      {
+        "claim": "quality",
+        "verdict": "unverifiable_remote",
+        "evidence": "subjective condition cannot be confirmed from photos"
+      },
+      {
+        "claim": "very much available",
+        "verdict": "unverifiable_remote",
+        "evidence": "seller stock claim not visible in photos"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Hidden cell cracks, hot spots, or degradation may reduce actual output below 300 W.",
+        "proof": "flash test report or IV curve measurement under standard test conditions.",
+        "if_unproven": "as not working or degraded output"
+      },
+      {
+        "risk": "The label in photo 1 may not belong to the exact panel shown in photo 0.",
+        "proof": "photo showing the label physically fixed to that same module, or a matching serial number.",
+        "if_unproven": "as unknown specification"
+      },
+      {
+        "risk": "Junction box, frame, and output cable condition are not visible.",
+        "proof": "close-up photos of the junction box, frame corners, and cable/connector.",
+        "if_unproven": "as needing repair"
+      }
+    ],
+    "proof_requests": [
+      "Photo showing the SUNPOWER label attached to the exact panel in photo 0.",
+      "Close-up of the junction box and output cable/connector.",
+      "Flash test report or multimeter Voc/Isc reading under sunlight."
+    ],
+    "decision": "price",
+    "reason": "The model and 300 W rating are read from the label in photo 1, and the 72-cell layout is visible in photo 0, so it can be priced at its worst case as an untested used panel."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 52657,
+    "input_tokens": 2385,
+    "output_tokens": 3290,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "e8b7d32e937aaaff101ac184a04f7a7c",
+    "error": null
+  }
+}

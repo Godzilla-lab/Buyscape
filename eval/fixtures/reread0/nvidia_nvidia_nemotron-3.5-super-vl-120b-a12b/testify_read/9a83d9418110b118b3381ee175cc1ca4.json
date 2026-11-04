@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Black rectangular battery with two top terminals, one with a red protective cover.",
+      "Label reads 'DEKA POWER AMERICA STANDARD HIGH-PERFORMANCE GEL BATTERY'.",
+      "Label includes a charging instruction table that is too blurry to read.",
+      "Recycling symbol and caution text are visible.",
+      "Seller claims 100Ah capacity and 6-hour runtime; neither is visible on the label."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "gel battery",
+      "brand": "DEKA",
+      "model": null,
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Used 100ahs Deka Solar Battery",
+        "verdict": "unverified",
+        "evidence": "DEKA brand is visible in photo 0, but the 100Ah capacity and 'solar' description are not readable on the label."
+      },
+      {
+        "claim": "If fully charged, can last you for 6 hours without Sun",
+        "verdict": "unverifiable_remote",
+        "evidence": "Runtime performance cannot be judged from a still photo of a used battery."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery may not hold a charge or may be dead.",
+        "proof": "Video showing voltage under load or powering a device.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Actual capacity may not be 100Ah.",
+        "proof": "Clear close-up of the label specification table.",
+        "if_unproven": "at unknown or lower capacity"
+      },
+      {
+        "risk": "Age and cycle count are unknown.",
+        "proof": "Photo of the manufacture date code sticker.",
+        "if_unproven": "as an old or end-of-life unit"
+      },
+      {
+        "risk": "Case cracks, terminal corrosion, or electrolyte leaks.",
+        "proof": "Close-up photos of the battery case and terminals.",
+        "if_unproven": "as physically damaged"
+      }
+    ],
+    "proof_requests": [
+      "Clear close-up of the label specification table to confirm capacity and voltage.",
+      "Video of the battery under load or a multimeter voltage reading.",
+      "Photo of the manufacture date code."
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a used Deka gel battery, but its capacity and working condition are unproven, so it can be priced at the worst case of a non-functional battery with unknown specs."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 19617,
+    "input_tokens": 1850,
+    "output_tokens": 2650,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "9a83d9418110b118b3381ee175cc1ca4",
+    "error": null
+  }
+}

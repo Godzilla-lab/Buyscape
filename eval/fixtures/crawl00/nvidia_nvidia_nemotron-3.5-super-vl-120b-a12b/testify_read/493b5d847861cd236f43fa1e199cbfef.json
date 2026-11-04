@@ -1,0 +1,73 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a dark blue solar panel with silver frame standing vertically next to a man; watermark reads BASOL ENERGY SERVICES.",
+      "Photo 1 shows the white back of a panel being stacked on top of identical panels; another panel leans in the background.",
+      "Photo 2 shows the front of a panel on the stack with dark blue cells and white grid lines.",
+      "No brand, model, or wattage label is readable in any photo."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "230w",
+        "verdict": "unverified",
+        "evidence": "No specification label or wattage marking is visible in photos 0, 1, or 2."
+      },
+      {
+        "claim": "foreign use",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photos show physical condition only; usage history cannot be determined remotely."
+      },
+      {
+        "claim": "from Korea",
+        "verdict": "unverified",
+        "evidence": "No brand, origin marking, or Korean text is readable in photos 0, 1, or 2."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual wattage is not 230W",
+        "proof": "Close-up photo of the specification label on the back of the panel",
+        "if_unproven": "as unrated or lower-wattage used panel"
+      },
+      {
+        "risk": "Cells are cracked, delaminated, or electrically degraded",
+        "proof": "Close-up of panel surface and back, or video of output under load with a multimeter",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Origin is not Korea",
+        "proof": "Readable brand or origin label, or purchase documentation",
+        "if_unproven": "as unknown-origin used panel"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of the specification label on the back of the panel",
+      "Video showing the panel producing voltage and current under sunlight or load",
+      "Close-up of any brand or model marking on the frame or junction box"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a used solar panel, but wattage, origin, and functionality are unproven, so it can be priced at worst case pending proof."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 19676,
+    "input_tokens": 3384,
+    "output_tokens": 2603,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "493b5d847861cd236f43fa1e199cbfef",
+    "error": null
+  }
+}

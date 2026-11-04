@@ -1,0 +1,97 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows an open silver laptop wrapped in clear plastic, displaying a Windows 11 desktop, with an HP logo below the screen and ELITEBOOK text on the palm rest.",
+      "Photo 1 shows the closed lid wrapped in plastic with an HP logo and a handwritten yellow sticker listing HP Elitebook 840 G6, 8GB RAM, 256GB SSD, Core i5, and 14 inch.",
+      "Photo 2 shows the laptop from the side still wrapped in plastic, with ELITEBOOK text visible and side ports and vents exposed."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "Elitebook 840 G6",
+      "read_from": [
+        "photo 1 sticker",
+        "photo 0 chassis",
+        "photo 2 chassis"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP Elitebook 840 G6",
+        "verdict": "supported",
+        "evidence": "photo 1 sticker and ELITEBOOK text on photo 0 and photo 2 chassis"
+      },
+      {
+        "claim": "Intel Core i5",
+        "verdict": "unverified",
+        "evidence": "photo 0 Intel sticker present but specific tier not clearly legible; photo 1 sticker is seller claim only"
+      },
+      {
+        "claim": "256GB SSD storage",
+        "verdict": "unverified",
+        "evidence": "photo 1 sticker states it but internal storage cannot be confirmed remotely"
+      },
+      {
+        "claim": "8gb RAM",
+        "verdict": "unverified",
+        "evidence": "photo 1 sticker states it but memory cannot be confirmed remotely"
+      },
+      {
+        "claim": "14inches Screen",
+        "verdict": "unverified",
+        "evidence": "visual estimate only, no measurement shown"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery health and runtime unknown",
+        "proof": "screenshot of Windows battery report or cycle count",
+        "if_unproven": "as needing battery replacement"
+      },
+      {
+        "risk": "Actual RAM and SSD capacity or functionality may differ from sticker",
+        "proof": "screenshot of system information showing installed RAM and drive size",
+        "if_unproven": "as lower specification or faulty storage"
+      },
+      {
+        "risk": "Screen defects such as dead pixels or backlight issues hidden by plastic wrap",
+        "proof": "video of screen displaying solid red, green, blue, and white colors",
+        "if_unproven": "as screen defective"
+      },
+      {
+        "risk": "Keyboard and trackpad functionality untested while wrapped",
+        "proof": "video of typing and trackpad use",
+        "if_unproven": "as input defective"
+      },
+      {
+        "risk": "Power charger not shown and may be missing",
+        "proof": "photo of the charger and it powering the laptop",
+        "if_unproven": "as no charger included"
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of Windows Settings > About to verify processor, RAM, and model",
+      "Screenshot of battery health report",
+      "Video of screen showing solid colors to check for dead pixels",
+      "Photo of the power charger"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as an HP Elitebook 840 G6 from the chassis and sticker, but internal specs and condition risks remain unverified, so it can be priced at worst case pending proof."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 62459,
+    "input_tokens": 2932,
+    "output_tokens": 4925,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "0e4c95ada8d29ac8f64662dd01badfd7",
+    "error": null
+  }
+}

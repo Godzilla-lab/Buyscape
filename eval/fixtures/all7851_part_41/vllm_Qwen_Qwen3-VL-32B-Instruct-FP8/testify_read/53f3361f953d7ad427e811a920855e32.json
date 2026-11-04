@@ -1,0 +1,80 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Three photos show a single car headlight unit, partially wrapped in plastic, lying on a concrete floor.",
+      "The headlight has a modern design with a clear lens, an amber turn signal section, and a black housing.",
+      "The unit appears to be from a luxury vehicle, likely Mercedes-Benz, based on the shape and the watermark 'A1 MERCEDES GLOBAL' visible in all photos.",
+      "There is visible damage to the plastic wrapping and some scuffing on the housing, especially near the base.",
+      "No visible branding or model numbers are readable on the headlight itself in any photo.",
+      "The seller mentions 'ML350 w166 tokumbo headlights charger' \u2014 'tokumbo' may be a misspelling or local term for 'tokunbo' (imported used goods), and 'charger' is likely a misstatement or error, as headlights do not charge."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "car headlight",
+      "brand": "Mercedes-Benz",
+      "model": null,
+      "read_from": [
+        "photo 0 watermark",
+        "photo 1 watermark",
+        "photo 2 watermark"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "ML350 w166",
+        "verdict": "unverified",
+        "evidence": "The model designation 'ML350 w166' is not visible on the headlight in any photo. The watermark 'A1 MERCEDES GLOBAL' suggests Mercedes-Benz origin, but the specific model cannot be confirmed visually."
+      },
+      {
+        "claim": "tokumbo",
+        "verdict": "unverifiable_remote",
+        "evidence": "The term 'tokumbo' refers to imported used goods, which cannot be verified remotely without provenance or inspection. The condition appears used, but no documentation or history is visible."
+      },
+      {
+        "claim": "headlights charger",
+        "verdict": "contradicted",
+        "evidence": "Headlights do not charge; this is a likely misstatement. The item is a headlight assembly, not a charging device. No charging components are visible."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The headlight may be damaged or non-functional (e.g., cracked lens, broken bulb housing, or electrical issues).",
+        "proof": "A close-up shot showing the internal components, bulb sockets, and lens integrity, ideally with the unit powered on to test lights.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The headlight may not fit the specified ML350 W166 model, or may be from a different model/year.",
+        "proof": "A clear photo of the part number or VIN tag on the back of the headlight, or a side-by-side comparison with a known ML350 W166 headlight.",
+        "if_unproven": "priced as generic Mercedes headlight, not model-specific"
+      },
+      {
+        "risk": "The item may be stolen or have a compromised origin, especially if imported as 'tokumbo'.",
+        "proof": "Proof of origin or import documentation, or a certificate of authenticity from a reputable dealer.",
+        "if_unproven": "priced with lower confidence, as risk of legal or warranty issues"
+      }
+    ],
+    "proof_requests": [
+      "A close-up photo of the back of the headlight showing any part numbers or model identifiers.",
+      "A photo of the headlight with the lights turned on to verify functionality.",
+      "A photo showing the full set (if available) or confirmation that this is a left or right unit.",
+      "Documentation or proof of origin if claiming 'tokumbo' or imported status."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a Mercedes-Benz headlight, but the specific model (ML350 W166) cannot be confirmed from the photos. The claim of 'charger' is contradicted. Key risks include fitment, functionality, and origin. Without proof of model, condition, and functionality, a worst-case price cannot be confidently assigned."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 75170,
+    "input_tokens": 3232,
+    "output_tokens": 913,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "53f3361f953d7ad427e811a920855e32",
+    "error": null
+  }
+}

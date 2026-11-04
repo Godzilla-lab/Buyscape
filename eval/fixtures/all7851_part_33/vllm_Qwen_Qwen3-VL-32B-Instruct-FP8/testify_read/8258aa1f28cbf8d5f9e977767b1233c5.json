@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the back of a 2.5-inch hard drive or SSD with a metal casing and four screws. A small white label is visible near the top with numbers and a QR code.",
+      "Photo 1 shows the front of the same drive with a large label. The brand 'Union Memory' and model 'UM311b' are clearly visible. The capacity is listed as '1.92TB'. The label also shows 'SATA 6Gb/s', part number 'P/N:100300914', firmware 'F/W:S13C3117', and various compliance marks (CE, FCC, etc.).",
+      "The drive appears to be in good physical condition with no visible dents or damage. The casing is metallic and clean.",
+      "The seller's text claims '1.9TB' capacity, but the label in photo 1 shows '1.92TB'.",
+      "The seller claims '100% health', which cannot be verified from photos alone."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "SSD",
+      "brand": "Union Memory",
+      "model": "UM311b",
+      "read_from": [
+        "photo 1 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Union Memory UM311b 1.9TB",
+        "verdict": "supported",
+        "evidence": "Photo 1 label shows 'Union Memory' and 'UM311b'. The capacity is listed as '1.92TB', which is close to 1.9TB and likely rounded; this is common in marketing. The model and brand are clearly readable."
+      },
+      {
+        "claim": "Sata III 6Gb/s",
+        "verdict": "supported",
+        "evidence": "Photo 1 label clearly states 'SATA 6Gb/s'."
+      },
+      {
+        "claim": "100% health",
+        "verdict": "unverifiable_remote",
+        "evidence": "Health status cannot be determined from photos. Requires diagnostic software or testing."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The drive may be faulty or have bad sectors.",
+        "proof": "A video or screenshot showing the drive being tested with diagnostic software (e.g., CrystalDiskInfo, HD Tune) to confirm health and read/write speeds.",
+        "if_unproven": "priced as potentially not working or with reduced value due to unknown health."
+      },
+      {
+        "risk": "The drive may have been previously used and has high wear or low remaining lifespan.",
+        "proof": "A screenshot of the drive's SMART data showing total bytes written, power-on hours, and other health metrics.",
+        "if_unproven": "priced as used with unknown wear, which may reduce value."
+      },
+      {
+        "risk": "The capacity may be misrepresented or the drive may be a rebranded or counterfeit unit.",
+        "proof": "A video showing the drive connected to a computer and the actual capacity reported by the operating system (e.g., Windows Disk Management or macOS Disk Utility).",
+        "if_unproven": "priced as potentially misrepresented, which may reduce value."
+      }
+    ],
+    "proof_requests": [
+      "A video or screenshot showing the drive being tested with diagnostic software to confirm health and performance.",
+      "A screenshot of the drive's SMART data to show usage and wear.",
+      "A video or screenshot showing the drive connected to a computer and the actual capacity reported by the OS."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a Union Memory UM311b SSD with 1.92TB capacity and SATA 6Gb/s interface. However, the seller's claim of '100% health' cannot be verified remotely, and there are hidden risks related to the drive's actual condition, wear, and authenticity. These risks must be proven before a reliable price can be assigned."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 68283,
+    "input_tokens": 2293,
+    "output_tokens": 879,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "8258aa1f28cbf8d5f9e977767b1233c5",
+    "error": null
+  }
+}

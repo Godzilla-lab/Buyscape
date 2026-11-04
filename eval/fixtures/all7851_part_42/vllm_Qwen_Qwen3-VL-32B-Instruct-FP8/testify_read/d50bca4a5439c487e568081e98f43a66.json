@@ -1,0 +1,75 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a used car engine with a black valve cover.",
+      "The valve cover has a silver badge with 'i-VTEC' written vertically in white letters.",
+      "The engine appears dirty and used, with visible grime, oil residue, and some rust on lower components.",
+      "There are various hoses, wires, and metal parts visible, including a blue anodized fitting.",
+      "The engine block has some visible casting marks and a partial 'HONDA' logo on the right side of the valve cover.",
+      "The engine is resting on a dark, possibly asphalt or concrete, surface.",
+      "A watermark 'AUTO ENGINES GEARBOX POSTED ON Jiji' is visible across the image."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "Honda i-VTEC engine",
+      "brand": "Honda",
+      "model": "i-VTEC",
+      "read_from": [
+        "photo 0 valve cover badge",
+        "photo 0 engine block casting"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Foreign used honda engine",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows a Honda engine with 'i-VTEC' badge and 'HONDA' casting on the block."
+      },
+      {
+        "claim": "gear box , parts sold with guarantee",
+        "verdict": "unverifiable_remote",
+        "evidence": "No gearbox or parts are visible in photo 0. No proof of guarantee is shown."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine may be damaged or non-functional (e.g., internal wear, seized components, oil leaks)",
+        "proof": "Close-up of oil pan, cylinder head, and internal components; test run video or compression test results.",
+        "if_unproven": "priced as not working or severely worn"
+      },
+      {
+        "risk": "Engine may have been salvaged from a wrecked or accident-damaged vehicle",
+        "proof": "Photos of the engine bay or vehicle it was removed from, or documentation of its history.",
+        "if_unproven": "priced as unknown history, lower value"
+      },
+      {
+        "risk": "Engine may have been improperly stored or exposed to water, leading to corrosion or contamination",
+        "proof": "Close-up of cylinder bores, crankshaft, and internal components; inspection of oil and coolant condition.",
+        "if_unproven": "priced as potentially contaminated or corroded"
+      }
+    ],
+    "proof_requests": [
+      "Photos of the engine from all angles, including oil pan, cylinder head, and internal components.",
+      "Photos of the engine bay or vehicle it was removed from, if available.",
+      "Proof of guarantee (e.g., written terms, warranty card).",
+      "Video of the engine running, if possible."
+    ],
+    "decision": "price",
+    "reason": "The engine is identifiable as a Honda i-VTEC from visible branding. While the seller claims it is sold with a guarantee and includes parts like a gearbox, these are not visible in the photo and cannot be verified remotely. The engine's condition is unknown, so it is priced at its worst case (as potentially non-functional or severely worn) until further proof is provided."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 59991,
+    "input_tokens": 2001,
+    "output_tokens": 719,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "d50bca4a5439c487e568081e98f43a66",
+    "error": null
+  }
+}

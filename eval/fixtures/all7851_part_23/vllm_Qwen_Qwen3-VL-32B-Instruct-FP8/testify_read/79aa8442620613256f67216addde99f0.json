@@ -1,0 +1,96 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a product box for a hair dryer.",
+      "The brand 'MAX' is visible in a logo on the box and on the dryer image.",
+      "Model number '8802' is printed on the box.",
+      "The box claims '6500W ind power' and 'Hair dryer Professional'.",
+      "Features listed include: large wind, wind shield, valve configuration, wind comb and nozzle as gift, 3 in 1, flexible fourth gear set, dry care formula, streamlined handle, easy to grasp.",
+      "The box also states 'The product has passed the international certification'.",
+      "Accessories shown: two nozzles, a comb, and a brush.",
+      "The box has a watermark: 'BLESSED KINGS SALON & SPA'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "hand held hair dryer",
+      "brand": "MAX",
+      "model": "8802",
+      "read_from": [
+        "photo 0 box top left logo",
+        "photo 0 box text 'MODEL:8802'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "High quality Max hand held dryer",
+        "verdict": "unverified",
+        "evidence": "The box claims 'Professional' and 'international certification', but no proof of quality or certification is visible. The term 'high quality' is subjective and not verifiable from the photo alone."
+      },
+      {
+        "claim": "6500W ind power",
+        "verdict": "unverified",
+        "evidence": "The power rating is stated on the box, but there is no visible proof of actual wattage or testing. The term 'ind power' is unclear and may be a misprint or translation error."
+      },
+      {
+        "claim": "The product has passed the international certification",
+        "verdict": "unverifiable_remote",
+        "evidence": "No certification marks, logos, or documents are visible. The claim cannot be verified remotely."
+      },
+      {
+        "claim": "Wind shield, Valve Configuration, Wind Comb and Nozzle as gift for free",
+        "verdict": "supported",
+        "evidence": "These accessories are shown in the image on the box, and the text explicitly states they are included as gifts."
+      },
+      {
+        "claim": "3 in 1 Hair dryer Professional",
+        "verdict": "supported",
+        "evidence": "The '3 IN 1' badge is visible on the box, and the product is labeled 'Hair dryer Professional'."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The hair dryer may not be functional or may be counterfeit.",
+        "proof": "A photo of the actual hair dryer unit, not just the box, showing the power cord, switch, and any labels or serial numbers.",
+        "if_unproven": "priced as not working or counterfeit"
+      },
+      {
+        "risk": "The 6500W power rating may be false or misleading.",
+        "proof": "A photo of the actual product's label or rating plate showing the true wattage and voltage.",
+        "if_unproven": "priced as lower wattage or non-functional"
+      },
+      {
+        "risk": "The 'international certification' claim may be false.",
+        "proof": "A photo of any certification marks (e.g., CE, UL, SABS) on the product or its packaging.",
+        "if_unproven": "priced as uncertified or unsafe"
+      },
+      {
+        "risk": "The accessories may not be included or may be damaged.",
+        "proof": "A photo of the actual accessories inside the box or laid out separately.",
+        "if_unproven": "priced as missing accessories"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual hair dryer unit, showing the power cord, switch, and any labels.",
+      "Photo of the product's rating plate or label showing wattage and voltage.",
+      "Photo of the accessories inside the box or laid out separately.",
+      "Photo of any certification marks on the product or packaging."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a MAX brand hair dryer model 8802, but critical claims about power, certification, and functionality cannot be verified from the box alone. The actual product and its accessories must be shown to assess condition, authenticity, and completeness."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 78317,
+    "input_tokens": 1751,
+    "output_tokens": 972,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "79aa8442620613256f67216addde99f0",
+    "error": null
+  }
+}

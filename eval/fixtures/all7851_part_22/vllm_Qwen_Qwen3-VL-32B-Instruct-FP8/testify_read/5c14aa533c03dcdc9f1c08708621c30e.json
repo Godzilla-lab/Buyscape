@@ -1,0 +1,103 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Open laptop showing Windows desktop, silver chassis, black keyboard, HP logo on screen bezel, 'ELITEBOOK' engraved on palm rest, Intel Evo badge on lower right corner. Screen shows 14-inch FHD resolution based on aspect ratio and content.",
+      "Photo 1: Closed laptop lid with HP logo centered, silver finish, visible ventilation grille at bottom edge. Background shows glass display case with 'ONE' branding.",
+      "Photo 2: Laptop being held open, screen showing HP logo and 'Windows 11' boot screen. Keyboard layout matches EliteBook design, 'ELITEBOOK' engraved on palm rest, Intel Evo badge visible. Fingerprint sensor is not clearly visible in any photo.",
+      "All photos show a clean, well-lit environment, likely a retail or showroom setting. No visible damage or wear."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "EliteBook 840 G8",
+      "read_from": [
+        "seller's text",
+        "photo 0: 'ELITEBOOK' engraved on palm rest",
+        "photo 2: 'ELITEBOOK' engraved on palm rest"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP Elitebook 840 G8",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 2 show 'ELITEBOOK' engraved on the palm rest, consistent with the model name. Seller's text matches."
+      },
+      {
+        "claim": "Core i7 11th Gen",
+        "verdict": "unverifiable_remote",
+        "evidence": "No system information screen, BIOS, or sticker showing CPU model. Intel Evo badge is present (photo 0 and 2), which implies 11th Gen or later, but not specific to i7."
+      },
+      {
+        "claim": "512gb SSD",
+        "verdict": "unverifiable_remote",
+        "evidence": "No disk management or system info screen visible. Cannot confirm storage size from photos."
+      },
+      {
+        "claim": "16gb Ram",
+        "verdict": "unverifiable_remote",
+        "evidence": "No system information or task manager screen visible. Cannot confirm RAM amount."
+      },
+      {
+        "claim": "Fingerprint unlock",
+        "verdict": "unverified",
+        "evidence": "No visible fingerprint sensor in any photo. The Intel Evo badge (photo 0 and 2) suggests biometric login support, but no direct proof of fingerprint reader."
+      },
+      {
+        "claim": "14inches FHD display",
+        "verdict": "supported",
+        "evidence": "Photo 0 and 2 show a 14-inch screen based on bezel size and content scaling. FHD resolution is plausible given the clarity and Windows 11 interface, but not directly verifiable."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "CPU is not Core i7 11th Gen (could be i5 or lower)",
+        "proof": "Photo of system information screen or BIOS showing CPU model",
+        "if_unproven": "priced as lower-tier CPU (e.g., i5), reducing value"
+      },
+      {
+        "risk": "RAM is less than 16GB (e.g., 8GB)",
+        "proof": "Photo of system information screen or task manager showing installed RAM",
+        "if_unproven": "priced as 8GB RAM, reducing value"
+      },
+      {
+        "risk": "SSD is less than 512GB (e.g., 256GB)",
+        "proof": "Photo of disk management or system info showing storage capacity",
+        "if_unproven": "priced as 256GB SSD, reducing value"
+      },
+      {
+        "risk": "Fingerprint sensor is missing or non-functional",
+        "proof": "Close-up photo of the right side of the touchpad showing fingerprint sensor, or video of fingerprint login",
+        "if_unproven": "priced as no fingerprint sensor, reducing value"
+      },
+      {
+        "risk": "Laptop is not genuine or has been refurbished with non-original parts",
+        "proof": "Photo of serial number sticker on bottom chassis, or full system info with serial number and warranty status",
+        "if_unproven": "priced as unverified provenance, reducing value"
+      }
+    ],
+    "proof_requests": [
+      "Photo of system information screen (Windows + R, then 'msinfo32') showing CPU, RAM, and storage details.",
+      "Close-up photo of the bottom chassis showing the serial number sticker.",
+      "Photo or video of the fingerprint sensor area and a demonstration of fingerprint login.",
+      "Photo of the BIOS screen showing CPU model and RAM configuration."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identifiable as HP EliteBook 840 G8 from the engraved name, but key specifications (CPU, RAM, SSD, fingerprint sensor) cannot be verified from the photos. Without proof of these claims, the item cannot be priced accurately and risks being undervalued or misrepresented."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 90989,
+    "input_tokens": 2806,
+    "output_tokens": 1142,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "5c14aa533c03dcdc9f1c08708621c30e",
+    "error": null
+  }
+}

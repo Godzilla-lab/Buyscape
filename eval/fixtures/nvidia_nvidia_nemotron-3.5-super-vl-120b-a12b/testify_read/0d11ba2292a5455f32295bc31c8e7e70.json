@@ -1,0 +1,73 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0: A framed photovoltaic panel with blue cells and white busbars standing upright on a floor.",
+      "Photo 1: A framed photovoltaic panel with dark cells leaning against a wall.",
+      "Both images carry a watermark reading \"EMMY WORLD SOLAR LINK\" and \"POSTED ON JIJI\".",
+      "No brand logo, model number, or wattage label is legible on either panel in the photos."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Longi",
+        "verdict": "unverified",
+        "evidence": "No brand logo or nameplate visible in photo 0 or photo 1."
+      },
+      {
+        "claim": "450watts",
+        "verdict": "unverified",
+        "evidence": "No specification label visible in photo 0 or photo 1."
+      },
+      {
+        "claim": "Solar panel",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 1 show photovoltaic modules."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The panel's actual wattage is not 450W.",
+        "proof": "Photo of the rear nameplate showing rated power, voltage, and current.",
+        "if_unproven": "as a used panel of unknown output."
+      },
+      {
+        "risk": "The panel does not generate power.",
+        "proof": "Video of a multimeter measuring open-circuit voltage and short-circuit current in sunlight.",
+        "if_unproven": "as not working."
+      },
+      {
+        "risk": "The panel is not a Longi product.",
+        "proof": "Close-up photo of any branding on the frame or junction box.",
+        "if_unproven": "as an unknown-make panel."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the back label with model number and wattage.",
+      "Video of open-circuit voltage and short-circuit current measured outdoors in daylight.",
+      "Close-up of the frame and junction box for a brand logo."
+    ],
+    "decision": "price",
+    "reason": "The photos show a solar panel, so it can be priced at its worst case as an unverified used unit; the seller's brand and wattage claims cannot be confirmed from the images."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 19314,
+    "input_tokens": 2553,
+    "output_tokens": 2503,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "0d11ba2292a5455f32295bc31c8e7e70",
+    "error": null
+  }
+}

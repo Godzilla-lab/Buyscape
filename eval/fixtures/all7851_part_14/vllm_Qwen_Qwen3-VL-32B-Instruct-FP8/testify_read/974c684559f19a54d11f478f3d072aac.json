@@ -1,0 +1,98 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Front view of a silver laptop with black keyboard, HP logo on bezel, Windows 11 desktop visible, 'EliteBook' text on palm rest, Intel sticker on lower right corner. Another laptop is partially visible behind it.",
+      "Photo 1: Front view of the same laptop, screen on with Windows 11 blue wallpaper, HP logo centered on bezel, 'EliteBook' text on palm rest, Intel sticker visible. Keyboard has black keys with white lettering, trackpad is silver.",
+      "Photo 2: Closed lid of the laptop, silver finish, HP logo (three horizontal bars) centered. Background shows another laptop screen and marble surface.",
+      "All photos show a watermark 'POSTED ON JIJI GADGETBAY'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "EliteBook 840 G6",
+      "read_from": [
+        "photo 0 keyboard area: 'ELITEBOOK' text",
+        "photo 1 keyboard area: 'ELITEBOOK' text",
+        "photo 2 lid: HP logo (three bars)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Top Grade American Used HP Elitebook 840 G6",
+        "verdict": "supported",
+        "evidence": "Photos 0, 1, and 2 show the HP EliteBook branding and design consistent with the 840 G6 model. The 'EliteBook' text is visible on the palm rest in photos 0 and 1, and the HP logo on the lid in photo 2 matches the 840 G6 design."
+      },
+      {
+        "claim": "Core i5 (8th Gen)",
+        "verdict": "unverified",
+        "evidence": "Photo 1 shows an Intel sticker, but the specific generation or model (e.g., i5-8250U) is not legible. The sticker is too blurry to read the exact CPU model."
+      },
+      {
+        "claim": "16GB RAM",
+        "verdict": "unverifiable_remote",
+        "evidence": "No system information screen or BIOS is shown. RAM cannot be verified from photos alone."
+      },
+      {
+        "claim": "256GB SSD",
+        "verdict": "unverifiable_remote",
+        "evidence": "No disk management or system information screen is shown. Storage capacity cannot be verified from photos alone."
+      },
+      {
+        "claim": "Backlit keyboard",
+        "verdict": "unverified",
+        "evidence": "Photos 0 and 1 show the keyboard in ambient light; no backlight is visible. No photo shows the keyboard in dark conditions to confirm backlighting."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "CPU is not 8th Gen Core i5 or is a lower-tier model",
+        "proof": "Photo of the system information screen showing CPU model, or a clear shot of the Intel sticker with readable text.",
+        "if_unproven": "priced as if CPU is unknown or lower tier, which reduces value"
+      },
+      {
+        "risk": "RAM is less than 16GB or not functioning properly",
+        "proof": "Photo of the system information screen showing installed RAM, or a screenshot of Task Manager or BIOS showing 16GB.",
+        "if_unproven": "priced as if RAM is 8GB or less, which reduces value"
+      },
+      {
+        "risk": "SSD is not 256GB or is failing",
+        "proof": "Photo of the system information screen showing storage capacity, or a screenshot of Disk Management or BIOS showing 256GB SSD.",
+        "if_unproven": "priced as if SSD is 128GB or smaller, or not working, which reduces value"
+      },
+      {
+        "risk": "Keyboard is not backlit",
+        "proof": "Photo of the keyboard in a dark room with backlight turned on.",
+        "if_unproven": "priced as if no backlight, which reduces value"
+      },
+      {
+        "risk": "Laptop has physical damage or wear not visible in photos",
+        "proof": "Close-up photos of the hinges, screen bezel, keyboard, and underside for scratches, dents, or wear.",
+        "if_unproven": "priced as if in good condition, but risk of hidden damage reduces value"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the system information screen showing CPU, RAM, and storage details.",
+      "Photo of the keyboard with backlight turned on in a dark room.",
+      "Close-up photos of the laptop's hinges, screen bezel, keyboard, and underside for damage.",
+      "Photo of the Intel sticker with readable text."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identifiable as HP EliteBook 840 G6, but key specifications (CPU, RAM, SSD, backlight) cannot be verified from the current photos. Hidden risks related to specs and physical condition affect pricing. Proof is needed to confirm claims and assess true value."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 93067,
+    "input_tokens": 2803,
+    "output_tokens": 1128,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "974c684559f19a54d11f478f3d072aac",
+    "error": null
+  }
+}

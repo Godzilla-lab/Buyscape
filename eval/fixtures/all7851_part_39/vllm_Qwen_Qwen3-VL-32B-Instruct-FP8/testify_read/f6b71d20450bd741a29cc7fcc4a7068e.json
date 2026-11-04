@@ -1,0 +1,65 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: A large, rectangular industrial machine with a heavily rusted top and side panels. The body is painted white but shows extensive corrosion and peeling paint. A yellow object (possibly a helmet or container) sits on top. The machine is in a dimly lit, possibly outdoor or semi-enclosed space with a concrete or brick wall in the background.",
+      "Photo 1: Underneath the machine, a large grey cylindrical motor or alternator is visible, along with a control box with three knobs labeled 'VOLTAGE', 'SPEED', and 'W. COIL'. Wires and components are exposed. The machine appears to be mounted on a frame with visible bolts and metal supports.",
+      "Photo 2: Front panel of the machine showing a control panel with dials, switches, and a label clearly reading 'LINCOLN ARC WELDER SAM-400'. The label also states 'MULTI-PROCESS CONSTANT VOLTAGE AND VARIABLE VOLTAGE DC ARC WELDING POWER SOURCE'. There are two large dials, several smaller knobs, and a large circular gauge. The panel is dirty and shows rust and wear, especially around the edges. A yellow warning label is visible below the main panel. The machine is outdoors against a concrete block wall."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "welder/generator",
+      "brand": "LINCOLN",
+      "model": "SAM-400",
+      "read_from": [
+        "photo 2 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "A versatile, compact welder/generator capable of up to 500 amps of DC multi-process welding, 115 and...",
+        "verdict": "contradicted",
+        "evidence": "Photo 2 shows the model is LINCOLN SAM-400, which is rated for 400 amps (as per label: 'SAM-400'), not 500 amps. The label also confirms it is a DC arc welding power source, but the '115 and...' part is cut off and unverifiable. The machine is not compact; it is large and industrial-sized."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The machine may not be functional due to extensive rust and wear, especially on the casing and electrical components.",
+        "proof": "A video showing the machine powered on, with all gauges responding and the motor running smoothly, or a test weld demonstration.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Internal components may be damaged or corroded, especially the motor, wiring, and control circuits, which are not visible in the photos.",
+        "proof": "Photos or video of the internal wiring, motor, and control box with covers removed, showing condition of insulation, connections, and corrosion.",
+        "if_unproven": "priced as potentially non-functional or requiring major repair"
+      },
+      {
+        "risk": "The machine may have been damaged in an accident or fire, which is not visible from the exterior photos.",
+        "proof": "Photos of the underside, back, and internal components, especially the engine and cooling system, to check for fire damage, oil leaks, or structural damage.",
+        "if_unproven": "priced as having unknown internal damage"
+      }
+    ],
+    "proof_requests": [
+      "Video of the machine operating, including startup, gauge readings, and a test weld.",
+      "Photos of the internal components (motor, wiring, control box) with covers removed.",
+      "Photos of the underside and back of the machine to check for damage or leaks.",
+      "Proof of maintenance history or service records, if available."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The machine is identified as a LINCOLN SAM-400 welder, but the seller's claim of 500 amps is contradicted by the model label. The machine shows significant rust and wear, and its functionality is unproven. Without proof of working condition and internal integrity, it cannot be priced accurately. The next step is to request proof of operation and internal condition."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 75496,
+    "input_tokens": 2375,
+    "output_tokens": 906,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "f6b71d20450bd741a29cc7fcc4a7068e",
+    "error": null
+  }
+}

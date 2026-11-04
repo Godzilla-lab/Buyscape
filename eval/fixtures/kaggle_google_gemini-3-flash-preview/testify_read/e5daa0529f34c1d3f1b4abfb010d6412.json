@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "A large red and white cardboard box wrapped in clear plastic.",
+      "The brand 'JUPITER' is printed in large letters on the box.",
+      "The text 'Tall Tubular BATTERY' is visible on the front.",
+      "The model number 'TT 22000' is printed on the bottom right of the box.",
+      "The box is secured with white plastic strapping.",
+      "A watermark for 'CHIMACOSOLARVENTURES' is present on the image."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "Tall Tubular Battery",
+      "brand": "Jupiter",
+      "model": "TT 22000",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Brand New",
+        "verdict": "unverified",
+        "evidence": "The box is wrapped and strapped, but the actual battery is not visible to confirm it is unused."
+      },
+      {
+        "claim": "12V 220Ah",
+        "verdict": "unverified",
+        "evidence": "While 'TT 22000' often implies 220Ah, the specific voltage and capacity are not explicitly printed on the visible side of the box."
+      },
+      {
+        "claim": "Tall Tubular Battery",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may contain a used, refurbished, or different battery model.",
+        "proof": "A photo of the battery outside the box showing the top terminals and the label on the battery casing.",
+        "if_unproven": "as used"
+      },
+      {
+        "risk": "The battery may have been stored for a long time, leading to sulfation or deep discharge.",
+        "proof": "A video showing a multimeter reading the open-circuit voltage of the battery.",
+        "if_unproven": "as non-functional"
+      },
+      {
+        "risk": "The battery might be a counterfeit or lower-spec unit in a branded box.",
+        "proof": "A photo of the engraved serial number or manufacturing date on the battery body.",
+        "if_unproven": "as generic"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the battery removed from the box.",
+      "Photo of the label and specifications printed on the battery itself.",
+      "Photo or video of a multimeter reading the battery's current voltage.",
+      "Photo of the manufacturing date or serial number engraved on the battery."
+    ],
+    "decision": "price",
+    "reason": "The brand and model are clearly identified from the packaging. It is priced as a used/non-functional unit until the contents and health are verified."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 9919,
+    "input_tokens": 2401,
+    "output_tokens": 1718,
+    "cost_usd": 0.006354,
+    "replayed": false,
+    "fixture_key": "e5daa0529f34c1d3f1b4abfb010d6412",
+    "error": null
+  }
+}

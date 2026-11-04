@@ -1,0 +1,89 @@
+{
+  "task": "testify_judge",
+  "prompt_version": "testify_judge.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "claims": [
+      {
+        "claim": "Used Nikon D3400 DSLR Camera",
+        "verdict": "unverified",
+        "evidence": "Photos show Nikon logo on body and pentaprism, but body model number is not legible in any shot, so 'D3400' specifically cannot be confirmed."
+      },
+      {
+        "claim": "With 70-300mm Lens",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows lens barrel text 'Nikon AF-P DX Nikkor 70-300mm 1:4.5-6.3G ED'."
+      },
+      {
+        "claim": "Working perfectly ok with no fault",
+        "verdict": "unverifiable_remote",
+        "evidence": "No power-on, shutter-fire, autofocus, or screen-display shot/clip provided."
+      },
+      {
+        "claim": "The brand is Canon",
+        "verdict": "contradicted",
+        "evidence": "Photos 0, 1, and 2 all show a visible 'Nikon' logo on the body and lens barrel; no Canon branding appears anywhere."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Seller states brand as Canon while photographed item is clearly Nikon-branded.",
+        "proof": "A clear, well-lit photo of the camera body's nameplate/model badge and a matching lens mount shot confirming brand and model together.",
+        "if_unproven": "Treat as a listing/description mismatch; price only what is visually confirmed (Nikon body + Nikon 70-300mm lens), and flag for buyer caution."
+      },
+      {
+        "risk": "Exact camera body model/generation unknown.",
+        "proof": "Close-up of the model label on the body (often near the LCD or base) or a screenshot of camera info menu.",
+        "if_unproven": "Price as a generic/unspecified entry-level Nikon DSLR body, not as the specific D3400."
+      },
+      {
+        "risk": "Shutter actuation count and sensor condition unknown.",
+        "proof": "Screenshot from shutter-count software (e.g., via USB) or a sample full-resolution test photo showing sensor dust/spots.",
+        "if_unproven": "Price as unknown wear, assume moderate-to-heavy prior use."
+      },
+      {
+        "risk": "Core functionality (autofocus, buttons, LCD, shutter) unverified.",
+        "proof": "Short video clip powering on the camera, firing shutter, autofocusing with the lens, and showing live LCD display.",
+        "if_unproven": "Price as non-functional / for-parts until proven working."
+      },
+      {
+        "risk": "Missing standard accessories (battery, charger, memory card, lens cap, strap already seen).",
+        "proof": "A flat-lay photo showing all included accessories.",
+        "if_unproven": "Price as body+lens only, no accessories included."
+      },
+      {
+        "risk": "Lens optical condition (scratches, fungus, haze) not visible.",
+        "proof": "Close-up photos of front and rear lens elements with a light shone through.",
+        "if_unproven": "Price as having unknown optical flaws, i.e., lower-than-clean-glass value."
+      },
+      {
+        "risk": "Cosmetic condition of screen and underside not shown; grip already shows wear.",
+        "proof": "Additional photos of LCD screen surface and camera underside/battery door.",
+        "if_unproven": "Price as heavily used cosmetic grade given visible grip wear."
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the body's model nameplate/badge",
+      "Video clip of power-on, shutter fire, autofocus, and LCD display",
+      "Photo of all included accessories (battery, charger, memory card, caps)",
+      "Close-up photos of front and rear lens glass under light",
+      "Photo of LCD screen and camera underside",
+      "Any shutter-count screenshot if possible",
+      "Clarification/correction from seller on the brand discrepancy (Nikon vs stated Canon)"
+    ],
+    "decision": "fraud_suspected",
+    "reason": "The seller explicitly states the brand is Canon while every photo clearly shows Nikon branding on both body and lens, a direct contradiction that signals a possible copy-pasted or mismatched listing rather than a simple typo."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_judge",
+    "latency_ms": 24778,
+    "input_tokens": 1735,
+    "output_tokens": 2236,
+    "cost_usd": 0.023812,
+    "replayed": false,
+    "fixture_key": "aab0b9c39105120e5371ef0f10a7edab",
+    "error": null
+  }
+}

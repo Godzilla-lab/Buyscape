@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black plastic carrying case with a printed label.",
+      "The label identifies the product as a 'Konfulon HIGH-POWER PORTABLE JUMP STARTER-POWERBANK-LED TORCH'.",
+      "The label claims 600AMP peak amps and a built-in LED torch.",
+      "A small blue 'A16' mark is visible on the bottom right of the label.",
+      "The actual device and its accessories (like jumper cables) are not visible; only the closed case is shown.",
+      "The background shows numerous boxes of electronics, typical of a retail or market environment."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "portable jump starter",
+      "brand": "Konfulon",
+      "model": "A16",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "High-power portable jump starter",
+        "verdict": "unverified",
+        "evidence": "Only the carrying case is shown in photo 0; the device itself is not visible."
+      },
+      {
+        "claim": "600AMP PEAK AMPS",
+        "verdict": "unverified",
+        "evidence": "This is a manufacturer claim on the packaging; the device's actual performance is unverified."
+      },
+      {
+        "claim": "Built-in LED torch",
+        "verdict": "unverified",
+        "evidence": "Feature listed on packaging but device is not seen."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The case may be empty or contain a different, lower-spec item.",
+        "proof": "Photo of the case open showing the device and all accessories.",
+        "if_unproven": "priced as an empty plastic case"
+      },
+      {
+        "risk": "The internal lithium battery may be degraded or dead.",
+        "proof": "Video of the device powering on and displaying a charge level.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Essential jumper cables and clamps may be missing.",
+        "proof": "Photo of the device alongside its specific jumper cable attachment.",
+        "if_unproven": "as missing critical accessories"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the case open showing the jump starter unit and all included accessories.",
+      "Photo of the specification sticker on the back of the actual device.",
+      "Video showing the device's screen or LEDs turning on."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the exterior of the carrying case is shown. It is impossible to verify if the device is inside, if it is the correct model, or if it includes the necessary cables."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 8138,
+    "input_tokens": 2359,
+    "output_tokens": 1689,
+    "cost_usd": 0.006247,
+    "replayed": false,
+    "fixture_key": "b7ffe87661a320b1c6e13bdb2c79f630",
+    "error": null
+  }
+}

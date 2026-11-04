@@ -1,0 +1,90 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Two framed solar panels stand side by side on a tiled floor",
+      "Left panel has black cells; right panel has blue cells",
+      "Both panels have silver aluminum frames",
+      "Right panel shows a junction box and black output cables with connectors",
+      "A watermark reads \"UNIQUE SOLAR ENTERPRISES\" across the image",
+      "No brand name, model number, or wattage label is legible on either panel"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panels",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Jinko solar brand",
+        "verdict": "unverifiable_remote",
+        "evidence": "No Jinko logo or nameplate is readable in photo 0"
+      },
+      {
+        "claim": "580 watt",
+        "verdict": "unverifiable_remote",
+        "evidence": "No specification label showing wattage is visible in photo 0"
+      },
+      {
+        "claim": "high voltage",
+        "verdict": "unverifiable_remote",
+        "evidence": "No electrical ratings are visible in photo 0"
+      },
+      {
+        "claim": "half cut",
+        "verdict": "unverified",
+        "evidence": "Cell cutting pattern is not clearly confirmable in photo 0"
+      },
+      {
+        "claim": "mono panels",
+        "verdict": "unverified",
+        "evidence": "Left panel appears monocrystalline while right panel appears polycrystalline; both cannot be confirmed as mono from photo 0"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Hidden cracks, hot spots, or internal defects",
+        "proof": "Close-up photos of cell surfaces or an electroluminescence test image",
+        "if_unproven": "as damaged or not working"
+      },
+      {
+        "risk": "Actual wattage is lower than 580W",
+        "proof": "Photo of the rear nameplate on each panel",
+        "if_unproven": "as unknown or lower wattage panels"
+      },
+      {
+        "risk": "Brand is not Jinko",
+        "proof": "Photo showing the brand logo or nameplate",
+        "if_unproven": "as generic unbranded panels"
+      },
+      {
+        "risk": "The two panels are mismatched technologies",
+        "proof": "Datasheet or close-up comparison of cell structure",
+        "if_unproven": "as a mismatched pair"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the rear nameplate/label on each panel showing brand, model, and wattage",
+      "Close-up photos of the cell surfaces on both panels to check for cracks or discoloration",
+      "Photo or video showing open-circuit voltage and short-circuit current readings with a multimeter"
+    ],
+    "decision": "price",
+    "reason": "The goods are identifiable as used solar panels, so unproven claims are priced at worst case while proof is requested."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 81626,
+    "input_tokens": 1800,
+    "output_tokens": 3872,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "0b7079797417c22e35dec3a55e8e1f1c",
+    "error": null
+  }
+}

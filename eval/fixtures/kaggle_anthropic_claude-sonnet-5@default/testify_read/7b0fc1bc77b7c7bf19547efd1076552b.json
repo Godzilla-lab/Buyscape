@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows a yellow gas cylinder with a partially legible label and some handwritten/painted marks near the neck; no kg or test-date stamp is clearly readable.",
+      "Photo 1 shows a different, blue gas cylinder with a visible brand mark reading 'BERADISCO' on the body.",
+      "Photo 2 shows the same blue cylinder from another angle, valve and collar visible, but no capacity or date-of-manufacture stamp is legible.",
+      "The listing text claims a single '12.5kg standard Cooking Gas Cylinder' but two visually different cylinders (different color, different brand) appear across the three photos.",
+      "No gas level, weight scale, or regulator/hose is shown in any photo.",
+      "Surface shows scuffs, paint wear, and some rust-colored staining near the base and neck in both cylinders."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "12.5kg cooking gas cylinder",
+      "brand": "BERADISCO (visible on blue cylinder only, photo 1)",
+      "model": null,
+      "read_from": [
+        "photo 1 body"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "12.5kg standard Cooking Gas Cylinder",
+        "verdict": "unverified",
+        "evidence": "No capacity stamp or scale reading is legible in any photo; also two different cylinders appear in the set, making it unclear which one (or both) is being sold."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Two different cylinders (yellow vs blue 'BERADISCO') shown under one listing \u2014 unclear if buyer receives one or the mismatch is a listing error.",
+        "proof": "A single photo showing both cylinders together, or a clear statement/photo confirming which one is for sale.",
+        "if_unproven": "priced as the lower-value/less certain item, and purchase withheld until clarified"
+      },
+      {
+        "risk": "Cylinder capacity (12.5kg) not visible on body stamp or neck ring.",
+        "proof": "Close-up photo of the stamped capacity/tare weight and manufacture/test date ring on the cylinder neck.",
+        "if_unproven": "priced as unverified capacity, worst case treated as a smaller/non-standard size"
+      },
+      {
+        "risk": "Valve condition and leak-tightness cannot be assessed from photos.",
+        "proof": "Close-up photo/video of the valve with soapy-water leak test or a working regulator attached.",
+        "if_unproven": "priced as valve condition unknown/needs replacement"
+      },
+      {
+        "risk": "Cylinder may be empty, underfilled, or expired for recertification (LPG cylinders need periodic revalidation).",
+        "proof": "Photo of weighing scale with cylinder, and close-up of last test/recertification stamp.",
+        "if_unproven": "priced as empty and unrecertified"
+      },
+      {
+        "risk": "Internal/external corrosion or dents not visible from current angles (only top/neck shown).",
+        "proof": "Full side and base photos in good light showing the entire body for dents or rust-through.",
+        "if_unproven": "priced as having visible wear, worst case moderate corrosion"
+      }
+    ],
+    "proof_requests": [
+      "Clarify and photograph which single cylinder is actually for sale (yellow or blue).",
+      "Close-up of the capacity/tare-weight stamp and test-date ring on the cylinder neck.",
+      "Photo of the cylinder on a weighing scale to confirm current gas content.",
+      "Full-body side photos in good lighting showing base and seams for corrosion/dents.",
+      "Video of valve with regulator attached showing no hiss/leak."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The listing shows two visually distinct cylinders under one description, and no photo confirms the stated 12.5kg capacity, fill level, or valve/body condition, so even a worst-case price cannot be set until the mismatch is resolved and key stamps are shown."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 19395,
+    "input_tokens": 3934,
+    "output_tokens": 1702,
+    "cost_usd": 0.021697,
+    "replayed": false,
+    "fixture_key": "7b0fc1bc77b7c7bf19547efd1076552b",
+    "error": null
+  }
+}

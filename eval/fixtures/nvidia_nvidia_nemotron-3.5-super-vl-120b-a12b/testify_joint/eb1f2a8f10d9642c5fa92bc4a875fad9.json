@@ -1,0 +1,82 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 and photo 1 show a black standing fan on a tiled floor against a white wall.",
+      "The center hub reads 'QASA' in both photos.",
+      "The stand has a control panel with buttons and a small display.",
+      "A power cord is visible running from the base.",
+      "The fan has five blades and a grille guard.",
+      "No battery compartment, charging port, or recharge indicator is visible in either photo."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "standing fan",
+      "brand": "QASA",
+      "model": null,
+      "read_from": [
+        "photo 0 center hub",
+        "photo 1 center hub"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Used Qasa rechargeable fan",
+        "verdict": "unverified",
+        "evidence": "QASA brand is readable on the hub in photo 0 and photo 1, but rechargeable status cannot be confirmed; a power cord is visible and no battery evidence is shown."
+      },
+      {
+        "claim": "Lasts up to 2 hours when fully charged",
+        "verdict": "unverifiable_remote",
+        "evidence": "Battery runtime cannot be tested from photos."
+      },
+      {
+        "claim": "longer when on low",
+        "verdict": "unverifiable_remote",
+        "evidence": "Speed-dependent runtime cannot be tested from photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The fan may not be rechargeable or the battery may be dead; it may only work plugged in.",
+        "proof": "Video of the fan running unplugged, or a close-up of the charging port and battery compartment.",
+        "if_unproven": "price as an ordinary used plug-in standing fan"
+      },
+      {
+        "risk": "Motor or speed controls may be faulty.",
+        "proof": "Video of the fan running on all speed settings.",
+        "if_unproven": "price as not working"
+      },
+      {
+        "risk": "Hidden damage to blades, grille, or stand.",
+        "proof": "Close-up photos of the blades, grille, and stand joints.",
+        "if_unproven": "price with a deduction for possible damage"
+      }
+    ],
+    "proof_requests": [
+      "Video of the fan running unplugged to prove it is rechargeable",
+      "Video of the fan running on all speeds",
+      "Close-up of the control panel and any charging port"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a Qasa standing fan from the photos, so it can be priced at its worst case with the rechargeable claim treated as unproven.",
+    "price_pick": {
+      "low": 0,
+      "high": 1
+    }
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_joint",
+    "latency_ms": 14638,
+    "input_tokens": 2223,
+    "output_tokens": 2369,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "eb1f2a8f10d9642c5fa92bc4a875fad9",
+    "error": null
+  }
+}

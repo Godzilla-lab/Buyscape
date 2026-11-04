@@ -1,0 +1,74 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "A light blue, top-freezer refrigerator with two doors and vertical handles.",
+      "The brand 'Haier THERMOCOOL' is visible on a gold oval badge on the top door.",
+      "A circular sticker on the bottom door says 'Haier THERMOCOOL' and '2 YEARS WARRANTY CABINET & COMPRESSOR'.",
+      "The refrigerator is outdoors on a paved surface with some moss and a fence in the background.",
+      "No visible damage to the exterior, but no interior or back view is shown.",
+      "The seller claims it is 'Fully Functional' and 'Volume: 300L'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "refrigerator",
+      "brand": "Haier",
+      "model": "THERMOCOOL",
+      "read_from": [
+        "photo 0 badge on top door",
+        "photo 0 sticker on bottom door"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Fully Functional",
+        "verdict": "unverified",
+        "evidence": "No photo shows the refrigerator running, interior, or any signs of operation. No proof of functionality is visible."
+      },
+      {
+        "claim": "Volume: 300L",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal photos or model specifications are visible. The volume cannot be confirmed from the exterior."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The refrigerator may not be working or may have internal damage.",
+        "proof": "A video or photo showing the refrigerator running, with interior lights on and cooling visible.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The stated volume of 300L may be inaccurate or misleading.",
+        "proof": "An interior photo showing the full depth, width, and height of both compartments, or a model specification sheet.",
+        "if_unproven": "priced as smaller capacity, likely 200-250L"
+      },
+      {
+        "risk": "Hidden damage to the compressor, condenser, or internal components.",
+        "proof": "A photo of the back of the refrigerator showing the compressor, fan, and condenser coils, and a video of the compressor running.",
+        "if_unproven": "priced with reduced value for potential repair needs"
+      }
+    ],
+    "proof_requests": [
+      "Video or photo of the refrigerator running with interior lights on.",
+      "Photo of the back of the refrigerator showing the compressor and condenser.",
+      "Interior photos of both freezer and fridge compartments.",
+      "Model number or specification sheet if available."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The brand and model are identifiable, but functionality and volume claims cannot be verified from the single photo. Hidden risks like internal damage or non-functionality require proof before pricing. Without proof, the item cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 54500,
+    "input_tokens": 2019,
+    "output_tokens": 655,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "0ffbaf37a69360c4ba8ebc2c9bfaa854",
+    "error": null
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Black tower-style UPS with BLUE GATE embossed on the top front panel.",
+      "Blue vertical strip with a circular power button and three indicator lights (green, amber, red).",
+      "UK-style 3-pin power cord plugged into the top of the unit.",
+      "No model number, capacity rating, or serial number is legible in either photo.",
+      "Unit is resting on a tiled floor; photos show front and side angles only."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "tower UPS",
+      "brand": "BLUE GATE",
+      "model": null,
+      "read_from": [
+        "photo 0 top panel",
+        "photo 1 side panel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "UPS available",
+        "verdict": "supported",
+        "evidence": "photo 0 and photo 1 show a Blue Gate UPS"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery may be dead or unable to hold charge",
+        "proof": "video of the UPS running a load on battery mode with mains disconnected",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Unit may not power on or provide output power",
+        "proof": "video showing front panel indicators and a connected device receiving power",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Capacity (VA/W) and exact model unknown; no rating label visible",
+        "proof": "close-up photo of the specification label on the rear or bottom",
+        "if_unproven": "as unknown capacity / base model"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the rating/specification label showing model number and VA capacity",
+      "Video of the UPS powering on and supplying power to a device",
+      "Video of the UPS running on battery with mains disconnected"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The brand is visible but the model and capacity label are unreadable, so no worst-case price can be set without knowing the VA rating."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 32679,
+    "input_tokens": 2859,
+    "output_tokens": 3412,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "4b248ace781508ac5a4c2ce7dd56e639",
+    "error": null
+  }
+}

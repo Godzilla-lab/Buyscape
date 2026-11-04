@@ -1,0 +1,98 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Silver laptop open, angled to show keyboard, trackpad, and right-side ports. HP logo visible on bezel. Intel sticker on palm rest. Screen off.",
+      "Photo 1: Closed laptop lid, silver, with HP logo centered. Handwritten note on top-left corner: 'HP 450 G6, 256 SSD, 8GB, Core i5, 8th Gen'.",
+      "Photo 2: Front view of open laptop, screen off, HP logo on bezel, keyboard and trackpad visible. Intel sticker on bottom-right of palm rest.",
+      "All photos show a clean, silver HP laptop with no visible damage. Watermarks from 'VICKY COMPUTERS EMAB' and 'POSTED ON JIJI' are present."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "ProBook 450 G6",
+      "read_from": [
+        "photo 1 handwritten note",
+        "photo 0 and 2 HP logo"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP ProBook 450 G6",
+        "verdict": "supported",
+        "evidence": "Photo 1 handwritten note explicitly states 'HP 450 G6'."
+      },
+      {
+        "claim": "256 SSD",
+        "verdict": "unverified",
+        "evidence": "Photo 1 note says '256 SSD', but no internal photo or system info to confirm. Cannot verify remotely."
+      },
+      {
+        "claim": "8GB SSD",
+        "verdict": "contradicted",
+        "evidence": "Seller says '8GB SSD' \u2014 this is a clear error. SSD is storage, not RAM. RAM is typically 8GB. Photo 1 note says '8GB', but does not specify if RAM or SSD. The claim as written is incorrect."
+      },
+      {
+        "claim": "Core i5 / 8th gen",
+        "verdict": "unverified",
+        "evidence": "Photo 1 note says 'Core i5, 8th Gen', but no system info or sticker confirms this. Intel sticker visible in photos 0 and 2, but no model number or generation shown."
+      },
+      {
+        "claim": "In excellent condition",
+        "verdict": "unverified",
+        "evidence": "Photos show no visible damage, but no close-ups of screen, hinges, or ports. No proof of functionality or internal condition."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "RAM is not 8GB or SSD is not 256GB as claimed",
+        "proof": "Photo of BIOS or system information screen showing exact RAM and SSD specs.",
+        "if_unproven": "Priced as lower-spec model (e.g., 4GB RAM or 128GB SSD), which reduces value significantly."
+      },
+      {
+        "risk": "Processor is not Intel Core i5 8th Gen",
+        "proof": "Photo of system information screen showing CPU model.",
+        "if_unproven": "Priced as lower-tier CPU (e.g., Core i3 or 7th Gen), which reduces value."
+      },
+      {
+        "risk": "Screen has dead pixels, scratches, or backlight issues",
+        "proof": "Photo of screen with white background and close-up of bezel and hinges.",
+        "if_unproven": "Priced as screen with potential defects, reducing value."
+      },
+      {
+        "risk": "Battery does not hold charge or is degraded",
+        "proof": "Video of battery health check or power usage test.",
+        "if_unproven": "Priced as battery not working or degraded, reducing value."
+      },
+      {
+        "risk": "Laptop does not power on or has hardware faults",
+        "proof": "Video of laptop powering on, booting to desktop, and running basic tasks.",
+        "if_unproven": "Priced as non-working, which is a major devaluation."
+      }
+    ],
+    "proof_requests": [
+      "Photo of system information screen showing exact CPU, RAM, and SSD specs.",
+      "Video of laptop powering on and booting to desktop.",
+      "Photo of screen with white background to check for dead pixels or damage.",
+      "Photo of battery health or power usage test.",
+      "Photo of ports and hinges in close-up."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identified as HP ProBook 450 G6 from the handwritten note, but key specs (RAM, SSD, CPU) are unverified. The claim of '8GB SSD' is contradicted by standard terminology. Functionality and condition are unproven. Without proof of specs and working state, the item cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 85769,
+    "input_tokens": 2593,
+    "output_tokens": 1068,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "2779bf4cd26c87a73144c7e79c790b43",
+    "error": null
+  }
+}

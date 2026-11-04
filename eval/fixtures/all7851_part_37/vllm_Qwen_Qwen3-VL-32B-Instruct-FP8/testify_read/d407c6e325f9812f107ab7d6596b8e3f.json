@@ -1,0 +1,95 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Front view of a silver laptop with black keyboard and screen. HP logo visible on bezel. 'PROBOOK' text visible on palm rest. Intel sticker on lower right. Hand holding laptop.",
+      "Photo 1: Similar front view, slightly different angle. HP logo on screen bezel. Intel sticker visible. 'PROBOOK' text on palm rest. Screen is off.",
+      "Photo 2: Bottom view of laptop. Silver chassis with ventilation grilles. Small label with text and QR code, but unreadable. No visible model number or serial plate. Hand holding laptop."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "ProBook 440 G6",
+      "read_from": [
+        "seller's words"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP ProBook 440 G6",
+        "verdict": "supported",
+        "evidence": "Seller's words and 'PROBOOK' text visible on palm rest in photo 0 and photo 1. HP logo visible on screen bezel in both photos."
+      },
+      {
+        "claim": "Intel Core i5 8th generation",
+        "verdict": "unverified",
+        "evidence": "Intel sticker visible in photo 0 and photo 1, but no text readable to confirm generation or model. No BIOS or system info shown."
+      },
+      {
+        "claim": "256GB SSD",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal components shown. No system information or disk utility screenshot. Cannot verify storage type or size remotely."
+      },
+      {
+        "claim": "8GB RAM",
+        "verdict": "unverifiable_remote",
+        "evidence": "No system information or BIOS screenshot. RAM not visible in photos. Cannot verify remotely."
+      },
+      {
+        "claim": "Backlit keyboard",
+        "verdict": "unverified",
+        "evidence": "Keyboard shown in photos 0 and 1 is off. No photo shows keyboard illuminated. Cannot confirm backlighting."
+      },
+      {
+        "claim": "Direct UK",
+        "verdict": "unverifiable_remote",
+        "evidence": "No proof of origin. No receipts, labels, or documentation shown. Cannot verify remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Laptop may be non-functional or have hardware issues (e.g., dead pixels, screen damage, battery failure)",
+        "proof": "Video showing laptop powered on, screen working, keyboard responsive, and battery charging.",
+        "if_unproven": "Priced as not working or with major defects."
+      },
+      {
+        "risk": "RAM or SSD may not match claimed specs (e.g., 4GB RAM instead of 8GB, HDD instead of SSD)",
+        "proof": "Screenshot of system information (e.g., Windows System Info or BIOS) showing RAM and storage details.",
+        "if_unproven": "Priced as lower-spec model (e.g., 4GB RAM, HDD)."
+      },
+      {
+        "risk": "Keyboard backlighting may not work",
+        "proof": "Photo or video showing keyboard illuminated in dark environment.",
+        "if_unproven": "Priced as non-backlit keyboard."
+      },
+      {
+        "risk": "Laptop may be stolen or have warranty issues",
+        "proof": "Serial number and proof of purchase (receipt or invoice) from UK.",
+        "if_unproven": "Priced as unverified origin, with risk of legal issues."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of system information showing CPU, RAM, and storage details.",
+      "Video of laptop powered on with screen and keyboard working.",
+      "Photo or video showing keyboard backlighting.",
+      "Serial number and proof of purchase (receipt or invoice) from UK."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identifiable from seller's words and visible branding, but key claims (CPU generation, RAM, SSD, backlight) cannot be verified from photos alone. Hidden risks include non-functionality, incorrect specs, and origin fraud. Proof is needed to price accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 72239,
+    "input_tokens": 2801,
+    "output_tokens": 930,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "d407c6e325f9812f107ab7d6596b8e3f",
+    "error": null
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows two retail boxes for a Blue Gate UPS stacked on top of each other.",
+      "The boxes are labeled 'BLUE GATE Line Interactive UPS BG1530 Elite Pro'.",
+      "The actual UPS units are not visible in the photo; only the packaging is shown.",
+      "The boxes appear to be in good condition, placed on a concrete floor against a blue wall.",
+      "There is a watermark 'OLWELL COMPUTERS LTD NG' across the center of the image."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "UPS",
+      "brand": "Blue Gate",
+      "model": "BG1530 Elite Pro",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Bluegate BG 1530 Elite Pro",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "1530VA/918W",
+        "verdict": "unverified",
+        "evidence": "The model number suggests 1530VA, but the specific wattage is not visible on the front of the box."
+      },
+      {
+        "claim": "line-interactive",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "AVR",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The boxes may be empty or contain a different, older, or damaged unit.",
+        "proof": "A photo of the actual UPS units outside of their boxes.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The internal lead-acid batteries may be depleted or dead from long-term storage or previous use.",
+        "proof": "A video showing the UPS powering a significant load (like a PC) while disconnected from mains power.",
+        "if_unproven": "as requiring immediate battery replacement"
+      },
+      {
+        "risk": "The units may be used or refurbished rather than new, despite the boxes.",
+        "proof": "Clear photos of the units from all angles, specifically the rear outlets and the serial number sticker.",
+        "if_unproven": "as heavily used"
+      }
+    ],
+    "proof_requests": [
+      "Photos of the actual UPS units removed from the boxes.",
+      "A photo of the specification sticker on the back or side of the actual unit.",
+      "A video of the unit turned on and supporting a load without being plugged into the wall."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail boxes are shown. I cannot verify the existence, physical condition, or authenticity of the UPS units without seeing them outside of the packaging."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 12795,
+    "input_tokens": 2377,
+    "output_tokens": 2722,
+    "cost_usd": 0.009354,
+    "replayed": false,
+    "fixture_key": "8516d6644f0e02f0fac875055c395527",
+    "error": null
+  }
+}

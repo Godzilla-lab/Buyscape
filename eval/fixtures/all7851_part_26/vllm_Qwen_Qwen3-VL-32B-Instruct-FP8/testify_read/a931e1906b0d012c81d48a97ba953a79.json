@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black Lenovo ThinkPad laptop open, displaying a Windows desktop with a blue abstract wallpaper. The keyboard has a red TrackPoint, and the 'ThinkPad' logo is visible on the palm rest. A sticker on the lower left corner reads 'Intel Core i7 vPro'.",
+      "Photo 1 shows the closed lid of the same laptop, with the 'ThinkPad' logo near the top and the 'Lenovo' logo near the bottom. The laptop is being held by a hand.",
+      "Both photos have a watermark: 'POSTED ON JIJI RELIABLE COMPUTERS'.",
+      "No visible damage to the chassis in either photo.",
+      "No ports, screen edges, or internal components are visible."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Lenovo",
+      "model": "ThinkPad P15",
+      "read_from": [
+        "photo 0 keyboard area: 'ThinkPad' logo",
+        "photo 1 lid: 'ThinkPad' and 'Lenovo' logos"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Lenovo thinkpad p15 workstation",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 1 show the ThinkPad logo and Lenovo branding, consistent with a ThinkPad P15. The design matches known P15 models."
+      },
+      {
+        "claim": "6gb dedicated nvidia quadro rtx 3000",
+        "verdict": "unverifiable_remote",
+        "evidence": "No GPU or internal components are visible. The claim cannot be verified from photos alone."
+      },
+      {
+        "claim": "intel core i7vpro || 10th...",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows a sticker labeled 'Intel Core i7 vPro' on the lower left of the palm rest. The '10th' generation is not visible but is plausible for a P15 model."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "GPU may not be NVIDIA Quadro RTX 3000 with 6GB VRAM",
+        "proof": "Photo of the system information screen or GPU specifications from Device Manager or a benchmark tool.",
+        "if_unproven": "priced as having a lower-end or non-Quadro GPU"
+      },
+      {
+        "risk": "CPU may not be 10th generation Intel Core i7 vPro",
+        "proof": "Photo of the system information screen showing CPU model and generation.",
+        "if_unproven": "priced as having a lower-generation or non-vPro CPU"
+      },
+      {
+        "risk": "Laptop may have physical damage or screen issues not visible in photos",
+        "proof": "Close-up photos of the screen edges, hinges, ports, and underside.",
+        "if_unproven": "priced as having potential cosmetic or functional defects"
+      },
+      {
+        "risk": "Battery may be degraded or non-functional",
+        "proof": "Video showing battery health or runtime under load.",
+        "if_unproven": "priced as having a non-functional or low-capacity battery"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the system information screen showing CPU model and GPU details.",
+      "Close-up photos of the screen edges, hinges, ports, and underside.",
+      "Video showing battery health or runtime under load.",
+      "Photo of the BIOS or device manager showing GPU specifications."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identifiable as a Lenovo ThinkPad P15, and the CPU claim is supported by a visible sticker. However, the GPU claim cannot be verified, and critical hidden risks (GPU, battery, physical condition) require additional proof before pricing can be determined accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 66961,
+    "input_tokens": 2299,
+    "output_tokens": 847,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "a931e1906b0d012c81d48a97ba953a79",
+    "error": null
+  }
+}

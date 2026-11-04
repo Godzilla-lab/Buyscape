@@ -1,0 +1,70 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Multiple red rectangular deep-cycle batteries stacked on a concrete floor.",
+      "The batteries appear dusty and heavily used, consistent with scrap or 'condemned' status.",
+      "Rope handles are visible on several units.",
+      "Labels are present on the top and sides of the units, but the text is too blurry to read specific ratings or brands.",
+      "A watermark 'POSTED ON JIJI' and 'MR. G' is overlaid on the image.",
+      "The photo includes a person's foot in a sandal at the bottom."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "scrap inverter batteries",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "dead inverter battery",
+        "verdict": "unverified",
+        "evidence": "The electrical state cannot be confirmed from a photo, though the storage condition suggests they are no longer in use."
+      },
+      {
+        "claim": "Scrap battery",
+        "verdict": "supported",
+        "evidence": "The physical condition and haphazard stacking in photo 0 are typical for scrap lead-acid batteries."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Unknown capacity (Ah rating)",
+        "proof": "A clear, close-up photo of the manufacturer's label on each battery showing the Ah (Ampere-hour) rating.",
+        "if_unproven": "priced as the lowest standard capacity (e.g., 100Ah)."
+      },
+      {
+        "risk": "Casing damage or acid leaks",
+        "proof": "Photos of all sides and the bottom of the batteries to check for cracks or white sulfate deposits.",
+        "if_unproven": "priced as leaking/damaged units which may require special handling."
+      },
+      {
+        "risk": "Internal lead plates removed",
+        "proof": "A photo of the batteries on a scale to verify weight matches the expected weight for the model.",
+        "if_unproven": "priced as empty casings."
+      }
+    ],
+    "proof_requests": [
+      "Clear photos of the labels on all batteries to identify the brand and Ah capacity.",
+      "Photos of the battery terminals to check for excessive corrosion or melting.",
+      "Confirmation of the total number of units available."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The scrap value of inverter batteries is strictly dependent on their capacity (Ah) and weight, neither of which can be determined from the blurry labels in the current photo."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 13179,
+    "input_tokens": 2379,
+    "output_tokens": 2396,
+    "cost_usd": 0.008377,
+    "replayed": false,
+    "fixture_key": "9b99edec8c67b2b457e1ba3e51fed866",
+    "error": null
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-instruct",
+  "response": {
+    "observations": [
+      "A black Panasonic Lumix G7 mirrorless camera with a lens attached, resting on a blue textured surface.",
+      "A second photo shows the camera with its flip-out screen open, revealing a message: 'Please set the clock'.",
+      "A battery and a charger are visible next to the camera.",
+      "The camera is in good condition, with no visible scratches or fungus on the lens.",
+      "The camera has a silver shutter button and a top-mounted mode dial.",
+      "The camera is not in use, and the screen is not powered on."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "mirrorless camera",
+      "brand": "Panasonic",
+      "model": "Lumix G7",
+      "read_from": [
+        "photo 0 screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Neatly used Lumix G7 mirrorless camera.",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "With 2 batteries and a charger.",
+        "verdict": "supported",
+        "evidence": "photo 1"
+      },
+      {
+        "claim": "Shutter count under 5,000, no fungus or scratch on the lens.",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "Original battery and charger, never repaired.",
+        "verdict": "supported",
+        "evidence": "photo 1"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The shutter count may be inaccurate or the camera may have been tampered with.",
+        "proof": "The camera's shutter count is not visible in the photos.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The camera may have been repaired or modified.",
+        "proof": "The camera is not in use, and the screen is not powered on.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The battery and charger may not be original.",
+        "proof": "The battery is not labeled with the camera's model number.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Can you provide a certificate of authenticity for the battery and charger?",
+      "Can you show the camera's shutter count?"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller's claims are supported by the photos, but the shutter count and the authenticity of the battery and charger cannot be confirmed. The camera's model is clearly visible in the photos, so the identity is confirmed. The risks are unproven, so the price cannot be determined without further proof."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-instruct",
+    "task": "testify_read",
+    "latency_ms": 31244,
+    "input_tokens": 2107,
+    "output_tokens": 612,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "a6be734f811863c70a7d9e565b9afa3a",
+    "error": null
+  }
+}

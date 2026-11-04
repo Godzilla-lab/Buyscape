@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0 shows a UPS with the brand text \u201cBLUE GATE\u201d on the front panel.",
+      "Photo 0 shows a front power button and several indicator LEDs (exact labels not fully readable).",
+      "Photo 1 shows the UPS from the side/rear area with two-pin plug/cord connection visible at the top.",
+      "No visible model number, battery capacity (Ah), or watt/VA rating on the photos provided."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "UPS (uninterruptible power supply)",
+      "brand": "BLUE GATE",
+      "model": null,
+      "read_from": [
+        "photo 0 front panel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "UPS available",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 1 clearly show a UPS unit."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Unknown battery health/remaining runtime; UPS may not hold charge even if it powers on.",
+        "proof": "Ask for a video showing the UPS running on battery after unplugging mains (e.g., 5\u201310 minutes) with the battery/indicator LEDs changing, plus a runtime estimate.",
+        "if_unproven": "Price it as battery not reliable / short runtime (worst case: treat as needing battery replacement)."
+      },
+      {
+        "risk": "Unknown capacity (VA/W) and number/type of outlets; affects what loads it can run.",
+        "proof": "Ask for a clear photo of the label/sticker showing VA/W rating and model number (usually on the back/bottom).",
+        "if_unproven": "Price it at the lowest likely usable capacity for a generic small UPS (worst case for value)."
+      },
+      {
+        "risk": "Possible fault: inverter/charger may be weak; indicators may look normal but output may be unstable.",
+        "proof": "Ask for a photo/video of the UPS output under load (e.g., connect a small lamp or phone charger and show it stays on when mains is removed).",
+        "if_unproven": "Price it as not fully working for reliable backup (worst case: treat as needs repair)."
+      },
+      {
+        "risk": "Missing accessories/cables (battery leads, power cable, manual) or incorrect power cord.",
+        "proof": "Ask for a photo showing everything included: power cable, any manuals, and all output sockets.",
+        "if_unproven": "Price it assuming only the unit is included (worst case: buyer may need to source missing parts)."
+      }
+    ],
+    "proof_requests": [
+      "Clear close-up photo of the UPS rating label (VA/W, input/output, model number, serial if present) on back/bottom.",
+      "Video: UPS switched on and then mains unplugged to show it runs on battery (with indicator LEDs).",
+      "Video/photo: UPS connected to a small load (lamp/phone charger) to confirm stable output during battery mode.",
+      "Photo of included items: power cable/plug type and all ports/outlets."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photos confirm it is a BLUE GATE UPS, but the key pricing factors (battery condition/runtime and exact VA/W capacity/model) are not readable. Without those, a safe worst-case price cannot be determined."
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_read",
+    "latency_ms": 4877,
+    "input_tokens": 3116,
+    "output_tokens": 742,
+    "cost_usd": 0.001551,
+    "replayed": false,
+    "fixture_key": "4b248ace781508ac5a4c2ce7dd56e639",
+    "error": null
+  }
+}

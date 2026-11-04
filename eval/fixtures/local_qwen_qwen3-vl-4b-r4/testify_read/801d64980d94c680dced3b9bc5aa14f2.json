@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-r4",
+  "response": {
+    "observations": [
+      "Large, thick-walled rubber tyres.",
+      "Brand 'MICHELIN' is embossed on the sidewall in photos 2 and 3.",
+      "The tyres are stored outdoors on a gravel surface.",
+      "A bottle of motor oil is visible inside the centre of one tyre in photos 0, 1, 2, and 3.",
+      "The tread appears to be in good condition with no visible deep cuts or excessive wear.",
+      "The tyres are stacked on top of each other."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "tyre",
+      "brand": "Michelin",
+      "read_from": [
+        "photo 2",
+        "photo 3"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Fender Tyre for Marine use",
+        "verdict": "unverified",
+        "evidence": "The Michelin brand is common for marine tyres, but the specific model and size are not clearly legible in the provided photos."
+      },
+      {
+        "claim": "Tread is still 90 percent",
+        "verdict": "unverified",
+        "evidence": "The photos show the tread, but the depth cannot be measured to confirm 90% remaining."
+      },
+      {
+        "claim": "no patch, no bulge",
+        "verdict": "unverified",
+        "evidence": "The interior of the tyre is not shown in any photo."
+      },
+      {
+        "claim": "Removed from a 2023 car",
+        "verdict": "unverifiable_remote",
+        "evidence": "No manufacturing date or DOT code is visible in the photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The tyre may be expired (old rubber degrades over time).",
+        "proof": "A clear photo of the 4-digit DOT code on the sidewall.",
+        "if_unproven": "as expired/scrap"
+      },
+      {
+        "risk": "The tyre may be a different size or model than the one claimed.",
+        "proof": "A clear photo of the sidewall showing the size (e.g., 12.00R20).",
+        "if_unproven": "as the smallest size shown"
+      },
+      {
+        "risk": "The tyre may have hidden structural damage or dry rot.",
+        "proof": "A video showing the tyre being inflated and a close-up of the inner liner.",
+        "if_unproven": "as damaged"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of any label, sticker or metal plate showing the brand and model.",
+      "Clear photo of the sidewall showing the size (e.g., 12.00R20) and the 4-digit DOT code.",
+      "Photo of the tyre's inner liner to check for dry rot or damage."
+    ],
+    "decision": "price",
+    "reason": "The item is known from the photos. What they cannot prove is priced at its worst case until the proof asked for below arrives."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-r4",
+    "task": "testify_read",
+    "latency_ms": 15471,
+    "input_tokens": 3782,
+    "output_tokens": 523,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "801d64980d94c680dced3b9bc5aa14f2",
+    "error": null
+  }
+}

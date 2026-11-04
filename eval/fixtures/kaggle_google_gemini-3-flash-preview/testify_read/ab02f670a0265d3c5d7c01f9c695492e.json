@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail packaging (box) for a QASA standing fan.",
+      "The box identifies the model as QSF-18YOGA II.",
+      "The box states it is an 18-inch standing fan with 5 blades.",
+      "The actual fan is not visible; only the box is shown.",
+      "The setting appears to be a shop or warehouse."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "standing fan",
+      "brand": "QASA",
+      "model": "QSF-18YOGA II",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "18inches",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "yoga",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "qasa",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "standing fan",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, used, or damaged item.",
+        "proof": "Photo of the actual fan out of the box.",
+        "if_unproven": "as missing item"
+      },
+      {
+        "risk": "The fan may be non-functional or have motor issues.",
+        "proof": "Video of the fan powered on and oscillating.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Internal components like the base or screws may be missing.",
+        "proof": "Photo of all unassembled parts or the fully assembled unit.",
+        "if_unproven": "as incomplete"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual fan outside of the box.",
+      "Video of the fan plugged in and working.",
+      "Photo of the open box showing all included components."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail box is shown. I cannot verify the condition, completeness, or even the presence of the fan itself without seeing the actual item."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 6401,
+    "input_tokens": 2378,
+    "output_tokens": 1469,
+    "cost_usd": 0.005596,
+    "replayed": false,
+    "fixture_key": "ab02f670a0265d3c5d7c01f9c695492e",
+    "error": null
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a red-capped engine with visible 'H' logo on the oil cap, suggesting Honda branding.",
+      "The engine is surrounded by other engines and parts in a cluttered yard or workshop.",
+      "Photo 1 shows a close-up of the front of the engine, including belts, pulleys, and the intake manifold.",
+      "Photo 2 shows a wider view with multiple engines, including the red-capped one in the foreground and others in the background.",
+      "The red engine has a red valve cover with some text, possibly 'HONDA', but it is partially obscured and not clearly readable.",
+      "The engine appears used, with visible grime, oil stains, and wear.",
+      "No visible model number or engine code is readable on any part of the engine in any photo.",
+      "The seller claims 'Home of Honda engine' and '3 months guarantee'."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used Honda engine with gearbox",
+      "brand": "Honda",
+      "model": null,
+      "read_from": [
+        "photo 0 oil cap (H logo)",
+        "photo 0 valve cover (partial text)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Home of Honda engine",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows a red engine with 'H' logo on oil cap and partial 'HONDA' text on valve cover, consistent with Honda branding."
+      },
+      {
+        "claim": "all engine and gearbox is sold with 3 months guarantee",
+        "verdict": "unverifiable_remote",
+        "evidence": "No proof of guarantee in photos; claim is based on seller's word only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine may be damaged or not functional",
+        "proof": "Video or photo of engine running, or close-up of internal components like cylinder head or crankshaft.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Engine model not identifiable, affecting value",
+        "proof": "Clear photo of engine code or model number on the block or valve cover.",
+        "if_unproven": "priced at lowest common Honda engine value"
+      },
+      {
+        "risk": "Gearbox may be damaged or mismatched",
+        "proof": "Close-up of gearbox casing with model number or serial number, and photo of input/output shafts.",
+        "if_unproven": "priced as gearbox not included or damaged"
+      },
+      {
+        "risk": "Engine has been in an accident or has water damage",
+        "proof": "Photo of engine block for cracks, rust, or water lines; photo of oil for milky appearance.",
+        "if_unproven": "priced as potentially damaged"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of engine model number or code on the block or valve cover.",
+      "Video or photo of engine running to verify functionality.",
+      "Close-up of gearbox casing with model number or serial number.",
+      "Photo of oil condition and engine block for signs of damage or water ingress."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The engine is identifiable as Honda by branding, but the model is unreadable and critical for pricing. Functionality, gearbox condition, and damage risks cannot be assessed from current photos. Proof is needed to determine the correct model and condition before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 61481,
+    "input_tokens": 2783,
+    "output_tokens": 756,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "90e7d931f03d45b652da82934846f589",
+    "error": null
+  }
+}

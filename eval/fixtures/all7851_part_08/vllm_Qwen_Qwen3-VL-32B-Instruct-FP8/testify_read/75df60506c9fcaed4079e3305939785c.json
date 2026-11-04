@@ -1,0 +1,86 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Back of a green iPhone with visible cracks on the glass back, especially near the bottom right. The Apple logo is centered, and the dual-camera module is in the top left. The back glass appears to be replaced or damaged, with a visible seam or misalignment near the middle.",
+      "Photo 1: Front of the iPhone showing the lock screen with time 02:44 and date Thu 22 Oct. The screen has a small crack or scratch in the bottom right corner. The phone is powered on and responsive.",
+      "Photo 2: iPhone screen showing 'Parts & Service' page with message 'A new battery was detected'. The phone is in iOS settings, indicating it is functional and the battery replacement is recorded by Apple's system."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "iPhone 12",
+      "brand": "Apple",
+      "model": "iPhone 12",
+      "read_from": [
+        "photo 0: dual-camera module and design match iPhone 12",
+        "photo 2: 'Parts & Service' screen with battery detection message, consistent with iPhone 12"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "iPhone12 64gb",
+        "verdict": "unverified",
+        "evidence": "The model is confirmed as iPhone 12 from design and screen, but storage capacity (64GB) is not visible in any photo. No settings screen shows storage info."
+      },
+      {
+        "claim": "Changed battery",
+        "verdict": "supported",
+        "evidence": "Photo 2 shows 'Parts & Service' screen with message 'A new battery was detected', confirming battery replacement."
+      },
+      {
+        "claim": "Little crack on the screen",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows a small crack or scratch in the bottom right corner of the screen."
+      },
+      {
+        "claim": "Broken back glasses",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows visible cracks and misalignment on the back glass, especially near the bottom right and center."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Screen damage beyond the visible crack (e.g., touch issues, dead pixels, or internal damage)",
+        "proof": "A video showing screen touch responsiveness and a close-up of the cracked area under different lighting to check for internal damage.",
+        "if_unproven": "priced as having functional screen with minor cosmetic damage"
+      },
+      {
+        "risk": "Back glass replacement with non-original or low-quality material affecting durability or wireless charging",
+        "proof": "A close-up of the back glass seam and a test video showing wireless charging functionality.",
+        "if_unproven": "priced as having non-original back glass, which may reduce value"
+      },
+      {
+        "risk": "Water damage or internal damage from previous drops, not visible in photos",
+        "proof": "A video showing the phone being powered on, charging, and running apps, plus a close-up of the charging port and speaker grills for signs of moisture.",
+        "if_unproven": "priced as potentially having hidden internal damage"
+      },
+      {
+        "risk": "Storage capacity is not 64GB as claimed (could be 128GB or less, or the phone is not genuine)",
+        "proof": "A screenshot of the 'About This iPhone' page showing storage capacity and model number.",
+        "if_unproven": "priced as unknown storage, which may be less than 64GB"
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of 'About This iPhone' showing storage capacity and model number.",
+      "Video showing screen touch responsiveness and close-up of the crack under different lighting.",
+      "Video showing wireless charging and close-up of back glass seam.",
+      "Video showing charging port and speaker grills for moisture signs."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is confirmed as iPhone 12, and battery replacement and screen/back glass damage are supported. However, storage capacity is unverified, and hidden risks like internal damage, screen functionality, and back glass quality affect pricing. Proof is needed to confirm storage and assess hidden risks before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 77138,
+    "input_tokens": 3243,
+    "output_tokens": 936,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "75df60506c9fcaed4079e3305939785c",
+    "error": null
+  }
+}

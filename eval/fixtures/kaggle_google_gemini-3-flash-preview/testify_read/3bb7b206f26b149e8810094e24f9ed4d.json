@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail box for a 'Privilege' brand solar fan.",
+      "The box specifies a 12-inch size.",
+      "Text on the box claims 5W power consumption and 5-10 hours of battery life.",
+      "The box indicates that 2 ball bulbs, a built-in battery, and a solar panel are included.",
+      "The photo shows the box in a stack, likely in a shop or warehouse, but the actual contents are not visible."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "solar fan",
+      "brand": "Privilege",
+      "model": "12\"",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "5w save electricity",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "the battery supports the fan for 5-10 hours",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "2 ball bulbs are included",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain different/damaged items.",
+        "proof": "Photo of the actual fan, solar panel, and bulbs outside of the box.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The internal battery may be degraded and unable to hold a charge.",
+        "proof": "Video of the fan running on battery power for a timed interval.",
+        "if_unproven": "as battery dead"
+      },
+      {
+        "risk": "The solar panel or charging circuit may be non-functional.",
+        "proof": "Photo showing the charging indicator light active while connected to the solar panel in sunlight.",
+        "if_unproven": "as not charging"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual fan, solar panel, and bulbs outside of the box.",
+      "Video of the fan operating on battery power.",
+      "Photo of the charging indicator lit while the solar panel is connected."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail packaging is shown. I cannot verify the presence, condition, or functionality of the actual items without seeing them outside the box."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 7887,
+    "input_tokens": 2367,
+    "output_tokens": 1674,
+    "cost_usd": 0.006206,
+    "replayed": false,
+    "fixture_key": "3bb7b206f26b149e8810094e24f9ed4d",
+    "error": null
+  }
+}

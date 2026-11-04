@@ -1,0 +1,75 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail packaging for a Mercury UPS.",
+      "The box is clearly marked with the brand 'Mercury' and model 'Elite3000 Pro'.",
+      "The box shows some minor wear and a small tear on the left side.",
+      "The actual UPS unit is not visible; only the box is shown."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "UPS",
+      "brand": "Mercury",
+      "model": "Elite3000 Pro",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Mercury elite 3000va pro 3kva ups",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "rating 3000va",
+        "verdict": "supported",
+        "evidence": "photo 0 box (model name)"
+      },
+      {
+        "claim": "voltage 220vac",
+        "verdict": "unverified",
+        "evidence": "Requires a photo of the specification sticker on the back of the unit."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, used, or damaged item.",
+        "proof": "Photo of the actual UPS unit outside the box.",
+        "if_unproven": "priced as a non-functional unit"
+      },
+      {
+        "risk": "The internal batteries may be dead or missing.",
+        "proof": "Video of the UPS powering a load while disconnected from mains.",
+        "if_unproven": "priced as requiring battery replacement"
+      },
+      {
+        "risk": "The unit may have internal electronic faults.",
+        "proof": "Video of the unit powered on and passing self-test.",
+        "if_unproven": "priced as non-functional"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual UPS unit out of the box.",
+      "Photo of the specification sticker on the back of the unit.",
+      "Video of the unit powered on and working under load."
+    ],
+    "decision": "price",
+    "reason": "The model is identified from the packaging. It is priced at the worst-case (non-functional) because the actual unit is not shown and its condition is unverified."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 35014,
+    "input_tokens": 2410,
+    "output_tokens": 7491,
+    "cost_usd": 0.023678,
+    "replayed": false,
+    "fixture_key": "3cf639966ebb15366f50786fdb91f661",
+    "error": null
+  }
+}

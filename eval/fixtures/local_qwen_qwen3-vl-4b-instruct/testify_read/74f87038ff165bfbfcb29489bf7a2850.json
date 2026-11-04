@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-instruct",
+  "response": {
+    "observations": [
+      "A white chest freezer with a stainless steel lid and handle.",
+      "A sticker on the front says '120 HOURS COOLING RETENTION' and '3 YEARS WARRANTY'.",
+      "The brand logo is partially visible on the top left corner, but not clearly readable.",
+      "The unit has a power switch and ventilation grille on the side.",
+      "The photo has 'POSTED ON JIJI KICKS' watermark."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "freezer",
+      "read_from": [
+        "photo 0 plate"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "250-liter Capacity",
+        "verdict": "unverified",
+        "evidence": "The capacity is not visible in the photo or readable on any label."
+      },
+      {
+        "claim": "Low Voltage Operation",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows voltage specifications or labels indicating low voltage operation."
+      },
+      {
+        "claim": "120 Hours Cooling Retention",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows a sticker with '120 HOURS COOLING RETENTION'."
+      },
+      {
+        "claim": "In working condition",
+        "verdict": "unverified",
+        "evidence": "No photo shows the unit in operation or test results to confirm functionality."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The unit may not be in working condition despite the seller's claim.",
+        "proof": "A photo showing the unit running or a test of cooling retention.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The 250-liter capacity claim may be inaccurate or unverified.",
+        "proof": "A photo showing the interior or a label with the capacity specification.",
+        "if_unproven": "as not 250 liters"
+      },
+      {
+        "risk": "The 'Low Voltage Operation' claim may be false or unverified.",
+        "proof": "A photo showing the voltage specification or a label indicating low voltage operation.",
+        "if_unproven": "as not low voltage"
+      }
+    ],
+    "proof_requests": [
+      "Ask for a photo showing the interior or a label with the capacity specification.",
+      "Ask for a photo showing the voltage specification or a label indicating low voltage operation.",
+      "Ask for a photo showing the unit in operation or a test of cooling retention."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The identity and claims are not fully verifiable from the photos alone, and the seller's claims about capacity and voltage operation lack supporting evidence. Proof is required to confirm these claims and assess the item's condition."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-instruct",
+    "task": "testify_read",
+    "latency_ms": 3382,
+    "input_tokens": 1974,
+    "output_tokens": 618,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "74f87038ff165bfbfcb29489bf7a2850",
+    "error": null
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-r4",
+  "response": {
+    "observations": [
+      "Photo 0 shows the side of a cardboard shipping box.",
+      "The box is labeled 'D800' in large black font.",
+      "A yellow 'NIKON' logo sticker is visible on the top edge of the box.",
+      "The box shows signs of wear and handling.",
+      "Other camera boxes (Olympus, Kodak) are visible in the background.",
+      "No camera body, lens, or accessories are visible in the photo."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DSLR camera",
+      "brand": "Nikon",
+      "model": "D800",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Nikon D800",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "used",
+        "verdict": "supported",
+        "evidence": "photo 0 box shows wear"
+      },
+      {
+        "claim": "uk used",
+        "verdict": "unverifiable_remote",
+        "evidence": "origin cannot be confirmed from a photo of a box"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, lower-value item.",
+        "proof": "Photo of the actual camera body outside the box.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The camera may be non-functional or have internal damage.",
+        "proof": "Video of the camera powering on and taking a photo.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The lens may be missing or damaged.",
+        "proof": "Photo of the lens and the camera together.",
+        "if_unproven": "as camera only"
+      },
+      {
+        "risk": "The shutter count may be extremely high, indicating end-of-life.",
+        "proof": "Screenshot of a shutter count tool showing the total actuations.",
+        "if_unproven": "as high mileage"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the camera body outside the box.",
+      "Photo of the lens if it is included.",
+      "Photo of the camera's LCD screen powered on.",
+      "Photo of the camera's rear sensor.",
+      "Video of the camera taking a photo.",
+      "Screenshot of the shutter count."
+    ],
+    "decision": "price",
+    "reason": "The item is known from the photos. What they cannot prove is priced at its worst case until the proof asked for below arrives."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-r4",
+    "task": "testify_read",
+    "latency_ms": 3273,
+    "input_tokens": 1436,
+    "output_tokens": 427,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "250c9b59e376d0554837b3fadbbd9867",
+    "error": null
+  }
+}

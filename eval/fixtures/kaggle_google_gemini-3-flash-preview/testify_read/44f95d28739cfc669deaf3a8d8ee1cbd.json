@@ -1,0 +1,84 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the front of a DSLR camera body with 'Canon', 'EOS 5D', and 'Mark II' text.",
+      "Photo 1 shows the rear of the camera body with the LCD screen off.",
+      "Photo 2 shows the bottom label with model 'DS126201' and serial number '3761814763'.",
+      "A body cap is attached to the lens mount in photo 0.",
+      "No lens, battery, or charger are visible in the provided photos.",
+      "Watermark 'CDICSON BUSINESS WORLD' appears on all images."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DSLR camera body",
+      "brand": "Canon",
+      "model": "EOS 5D Mark II",
+      "read_from": [
+        "photo 0 front",
+        "photo 2 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Canon EOS 5D Mark II",
+        "verdict": "supported",
+        "evidence": "photo 0 and photo 2"
+      },
+      {
+        "claim": "21.1-megapixel sensor",
+        "verdict": "unverifiable_remote",
+        "evidence": "Standard specification for this model; sensor condition is not visible."
+      },
+      {
+        "claim": "Brand is Canon",
+        "verdict": "supported",
+        "evidence": "photo 0, photo 1, and photo 2"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Camera may be non-functional",
+        "proof": "Video of the camera powering on and taking a photo.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Sensor may be damaged or dirty",
+        "proof": "Photo of the sensor with the body cap removed.",
+        "if_unproven": "as having a damaged sensor"
+      },
+      {
+        "risk": "High shutter count",
+        "proof": "Screenshot of the shutter count from a diagnostic tool.",
+        "if_unproven": "as high mileage"
+      },
+      {
+        "risk": "Missing battery and charger",
+        "proof": "Photo of the battery and charger.",
+        "if_unproven": "as body only without power accessories"
+      }
+    ],
+    "proof_requests": [
+      "Video of the camera powering on and taking a photo.",
+      "Photo of the sensor with the body cap removed.",
+      "Screenshot of the shutter count.",
+      "Confirmation of included accessories (battery, charger)."
+    ],
+    "decision": "price",
+    "reason": "The camera is clearly identified as a Canon EOS 5D Mark II. It will be priced as a non-functional body for parts until proof of operation is provided."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 21249,
+    "input_tokens": 4646,
+    "output_tokens": 5330,
+    "cost_usd": 0.018313,
+    "replayed": false,
+    "fixture_key": "44f95d28739cfc669deaf3a8d8ee1cbd",
+    "error": null
+  }
+}

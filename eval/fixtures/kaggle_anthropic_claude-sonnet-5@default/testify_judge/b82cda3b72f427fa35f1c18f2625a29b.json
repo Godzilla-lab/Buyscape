@@ -1,0 +1,66 @@
+{
+  "task": "testify_judge",
+  "prompt_version": "testify_judge.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "claims": [
+      {
+        "claim": "Standard wooden storage pallets",
+        "verdict": "supported",
+        "evidence": "Photo 0-2 show standard slatted wooden pallets consistent with storage/shipping use."
+      },
+      {
+        "claim": "Everything is clean, dry and sorted, no water added",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows dryness, cleanliness, or sorting state; 'no water added' is phrasing typically used for weighed perishable goods, not pallets, which is odd here."
+      },
+      {
+        "claim": "Weighed at 500 kg on a certified scale this morning",
+        "verdict": "unverifiable_remote",
+        "evidence": "No scale, weight ticket, or certification document visible in any photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Hidden rot, insect damage, or mold inside the wood",
+        "proof": "Close-up photos of pallet undersides and cut cross-sections, plus a video tapping the wood for soundness",
+        "if_unproven": "priced as possibly compromised stock, worst case"
+      },
+      {
+        "risk": "Unclear whether sale is for a single pallet or the full bulk stack shown in photo 2",
+        "proof": "Seller confirmation with a photo showing counted/labeled units matching the listing quantity",
+        "if_unproven": "priced as single unit only, the minimum quantity shown clearly"
+      },
+      {
+        "risk": "Unverified weight and treatment claims (dry, no water added, certified 500kg) unusual phrasing for pallets, possible scripted/copy-paste scam language",
+        "proof": "A photo or video of the actual scale reading with pallets on it, timestamped",
+        "if_unproven": "priced as standard untreated pallet with no weight premium applied"
+      },
+      {
+        "risk": "No visible wood treatment markings (e.g., heat-treatment stamp) for structural/export grade pallets",
+        "proof": "Close-up photo of any stamped marking (IPPC, HT, KD) on the block or stringer",
+        "if_unproven": "priced as ungraded/non-certified pallet"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the underside/blocks showing construction and any treatment stamps",
+      "Video panning around a single pallet showing all four sides and the deck condition",
+      "Photo of the actual scale display with pallets on it, timestamped",
+      "Clarification and photo confirming exact number of pallets included in this sale"
+    ],
+    "decision": "price",
+    "reason": "The witness confirms the item is a standard wooden pallet, so it can be priced at worst case given unverified condition, treatment, and quantity claims; the mismatched 'no water added' phrasing is a mild credibility flag but not sufficient alone to call fraud."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_judge",
+    "latency_ms": 15162,
+    "input_tokens": 1568,
+    "output_tokens": 1340,
+    "cost_usd": 0.014518,
+    "replayed": false,
+    "fixture_key": "b82cda3b72f427fa35f1c18f2625a29b",
+    "error": null
+  }
+}

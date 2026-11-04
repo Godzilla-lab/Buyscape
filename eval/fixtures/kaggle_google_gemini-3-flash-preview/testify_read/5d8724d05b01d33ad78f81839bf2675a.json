@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Two retail boxes for OX 18 Plus standing fans are stacked on a concrete floor outdoors.",
+      "The boxes show signs of handling, including minor crushing and creases at the corners.",
+      "The brand 'OX' and model '18 PLUS' are clearly printed on the front of the boxes in photo 0.",
+      "The actual fan is not visible; only the closed packaging is shown.",
+      "A watermark 'SKY TECHNOLOGY' and 'POSTED ON JIJI' is overlaid on the image."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "standing fan",
+      "brand": "OX",
+      "model": "18 Plus",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "OX 18\" Plus Standing Fan",
+        "verdict": "supported",
+        "evidence": "The text is clearly visible on the packaging in photo 0."
+      },
+      {
+        "claim": "powerful airflow",
+        "verdict": "unverifiable_remote",
+        "evidence": "Airflow strength cannot be measured from a static photo of a box."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, lower-value item.",
+        "proof": "A photo of the fan outside of the box.",
+        "if_unproven": "priced as an empty box"
+      },
+      {
+        "risk": "The fan may be used, refurbished, or have physical defects (e.g., cracked blades, rusted cage).",
+        "proof": "Close-up photos of the fan assembly and motor housing.",
+        "if_unproven": "priced as heavily used or damaged"
+      },
+      {
+        "risk": "The motor may be non-functional, seized, or excessively noisy.",
+        "proof": "A video of the fan powered on and cycling through all speed settings.",
+        "if_unproven": "priced as not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the fan outside the box to confirm the contents.",
+      "Video of the fan running to verify the motor and oscillation.",
+      "Photo of the manufacturer's label/rating plate on the fan motor itself."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail packaging is visible. In the second-hand market, the presence of a box does not guarantee the presence or condition of the item inside. The actual fan must be seen to provide a valuation."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 19198,
+    "input_tokens": 2364,
+    "output_tokens": 4306,
+    "cost_usd": 0.0141,
+    "replayed": false,
+    "fixture_key": "5d8724d05b01d33ad78f81839bf2675a",
+    "error": null
+  }
+}

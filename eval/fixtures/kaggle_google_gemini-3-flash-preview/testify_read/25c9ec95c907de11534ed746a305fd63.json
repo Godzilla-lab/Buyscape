@@ -1,0 +1,74 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Single solar panel shown on a plain white background.",
+      "Dark cells with rounded corners suggest monocrystalline construction.",
+      "Watermark 'TMK ENERGIES' and 'POSTED ON JIJI' visible on the image.",
+      "No brand, model, or technical specifications are visible on the panel face.",
+      "The image appears to be a stock photo or a professional product shot rather than a photo of the specific item for sale."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "270W Solar Panel",
+        "verdict": "unverified",
+        "evidence": "No specification label or backplate is shown to confirm wattage."
+      },
+      {
+        "claim": "Monocrystalline",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows dark cells with rounded corners, which is the standard appearance for monocrystalline panels."
+      },
+      {
+        "claim": "4 Busbar PV Cells",
+        "verdict": "unverified",
+        "evidence": "The image resolution is insufficient to count the busbars on the cells."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The wattage may be significantly lower than the 270W claimed.",
+        "proof": "A clear photo of the manufacturer's specification label on the back of the panel.",
+        "if_unproven": "as a generic 100W panel"
+      },
+      {
+        "risk": "The photo provided is a stock image and may not represent the actual condition of the item.",
+        "proof": "A photo of the actual panel in a real-world environment (e.g., leaning against a wall or on the ground).",
+        "if_unproven": "as having significant cosmetic or structural wear"
+      },
+      {
+        "risk": "The panel may be non-functional or have internal cell damage (micro-cracks).",
+        "proof": "A video showing a multimeter reading of the open-circuit voltage (Voc) in sunlight.",
+        "if_unproven": "as non-functional"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the specification label/sticker on the back of the panel.",
+      "Photos of the actual panel being sold, showing the frame and the glass surface clearly.",
+      "A photo or video showing the output voltage measured with a multimeter."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The provided image is a generic product shot. Without a photo of the specification label, the wattage and brand are unverified, making an accurate valuation impossible."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 8132,
+    "input_tokens": 2416,
+    "output_tokens": 1579,
+    "cost_usd": 0.005945,
+    "replayed": false,
+    "fixture_key": "25c9ec95c907de11534ed746a305fd63",
+    "error": null
+  }
+}

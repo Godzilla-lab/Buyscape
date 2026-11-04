@@ -1,0 +1,99 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a hand holding an iPhone with a visible screen displaying iOS home screen with app icons, time 10:58, and date Monday 25. The phone is in a clear protective case. The background shows stacked white boxes, some with Apple logos.",
+      "Photo 1 shows the back of the same phone, which is blue, with a dual-camera system. A white sticker is affixed to the back with printed text: 'DNT (IPHONE 14), DMT, STORAGE: 256GB, CONDITION: EXCELLENT, TESTED: 100%, iCloud: 100%, BATTERY: EXCELLENT, SIM: OK, IMEI: [blurred], IMEI: [blurred]'.",
+      "The sticker on photo 1 confirms the model as iPhone 14 and storage as 256GB.",
+      "The phone appears to be in good physical condition with no visible cracks or dents in the photos.",
+      "The screen in photo 0 shows no visible damage, but the protective case may obscure minor scratches.",
+      "The seller claims 'Very mint !! Uk used !! iPhone 14 !! 256gb !! physical sim !!'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "iPhone 14",
+      "brand": "Apple",
+      "model": "iPhone 14",
+      "read_from": [
+        "photo 1 sticker"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Very mint",
+        "verdict": "unverified",
+        "evidence": "Photos show no obvious damage, but close-up shots of screen, edges, and camera module are needed to verify 'mint' condition. The protective case may hide scratches."
+      },
+      {
+        "claim": "Uk used",
+        "verdict": "unverifiable_remote",
+        "evidence": "No proof of origin in the photos. The seller's claim cannot be verified remotely."
+      },
+      {
+        "claim": "iPhone 14",
+        "verdict": "supported",
+        "evidence": "Photo 1 sticker clearly states 'IPHONE 14'."
+      },
+      {
+        "claim": "256gb",
+        "verdict": "supported",
+        "evidence": "Photo 1 sticker states 'STORAGE: 256GB'."
+      },
+      {
+        "claim": "physical sim",
+        "verdict": "unverified",
+        "evidence": "The sticker says 'SIM: OK', but does not specify physical SIM vs. eSIM. A photo of the SIM tray or settings showing SIM type is needed."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Screen damage or scratches not visible due to protective case",
+        "proof": "Close-up photo of the screen without the case, showing edges and corners.",
+        "if_unproven": "priced as having minor scratches or damage"
+      },
+      {
+        "risk": "Battery health not verified beyond sticker claim",
+        "proof": "Screenshot from Settings > Battery > Battery Health showing actual battery condition.",
+        "if_unproven": "priced as having degraded battery (e.g., <80%)"
+      },
+      {
+        "risk": "iCloud lock or activation lock not confirmed",
+        "proof": "Screenshot showing the phone is unlocked and ready for activation, or proof of iCloud sign-out.",
+        "if_unproven": "priced as potentially locked (reducing value significantly)"
+      },
+      {
+        "risk": "Physical SIM tray not functional or missing",
+        "proof": "Photo of the SIM tray being opened and inserted, or a screenshot of settings showing physical SIM support.",
+        "if_unproven": "priced as eSIM-only (which may not meet buyer's need)"
+      },
+      {
+        "risk": "IMEI or serial number not verified for authenticity or blacklisting",
+        "proof": "Clear photo of the IMEI/serial number on the sticker or in settings, and verification via Apple or Nigerian telecom database.",
+        "if_unproven": "priced as potentially blacklisted or fake"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the screen without the case, showing edges and corners.",
+      "Screenshot from Settings > Battery > Battery Health.",
+      "Screenshot showing the phone is unlocked and ready for activation.",
+      "Photo of the SIM tray being opened and inserted, or screenshot of settings showing physical SIM support.",
+      "Clear photo of the IMEI/serial number on the sticker or in settings."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and storage are confirmed, but critical claims like 'mint' condition, physical SIM, battery health, and iCloud lock status cannot be verified from current photos. Hidden risks such as screen damage, battery degradation, and iCloud lock significantly affect value and must be proven before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 84106,
+    "input_tokens": 2284,
+    "output_tokens": 1066,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "592e590053a757dfc9d0eccfd531fe48",
+    "error": null
+  }
+}

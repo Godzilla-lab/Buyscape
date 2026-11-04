@@ -1,0 +1,80 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a tyre sidewall with 'MADE IN GERMANY', 'C3R', and a DOT code ending in '1710'; the visible tread edge has a block pattern.",
+      "Photo 1 shows a car tyre held by hand with 'Vector' readable on the sidewall; the tread has multiple sipes and circumferential grooves.",
+      "The claimed size '195/65/R15' is not clearly visible in either photo.",
+      "Photo 0 and photo 1 appear to show different tread patterns and possibly different tyres."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car tyre",
+      "brand": "Vector",
+      "model": null,
+      "read_from": [
+        "photo 1 sidewall"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Grade 1 used tyre",
+        "verdict": "unverified",
+        "evidence": "No tread depth gauge or condition close-up provided"
+      },
+      {
+        "claim": "195/65/R15",
+        "verdict": "unverified",
+        "evidence": "Size marking not clearly readable in photo 0 or photo 1"
+      },
+      {
+        "claim": "used by different vehicles including Honda",
+        "verdict": "unverifiable_remote",
+        "evidence": "General compatibility claim cannot be confirmed from photos"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Tyre may be over-age; photo 0 shows DOT 1710 (2010) but it is unclear if this is the same tyre as photo 1",
+        "proof": "Clear DOT code on the tyre shown in photo 1",
+        "if_unproven": "as over-age scrap tyre"
+      },
+      {
+        "risk": "Size may not be 195/65/R15 as claimed",
+        "proof": "Sidewall size marking on the tyre in photo 1",
+        "if_unproven": "as unknown size tyre"
+      },
+      {
+        "risk": "Internal damage, bead damage, or hidden repairs cannot be seen",
+        "proof": "Video of tyre inflated or interior inspection",
+        "if_unproven": "as damaged tyre"
+      },
+      {
+        "risk": "Photos 0 and 1 may show two different tyres; unclear which is for sale",
+        "proof": "Single photo showing full tyre with matching sidewall and tread",
+        "if_unproven": "as the lower-value of the two shown tyres"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the sidewall of the tyre in photo 1 showing size and DOT code",
+      "Video showing the tyre inflated and holding air",
+      "Confirmation whether photo 0 and photo 1 are the same tyre"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a used Vector car tyre from photo 1; even with unverified age, size, and condition, it can be priced at its worst case as a scrap or damaged tyre."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 83026,
+    "input_tokens": 2390,
+    "output_tokens": 4410,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "6be329818f132c3a3072b4cf6b83ddec",
+    "error": null
+  }
+}

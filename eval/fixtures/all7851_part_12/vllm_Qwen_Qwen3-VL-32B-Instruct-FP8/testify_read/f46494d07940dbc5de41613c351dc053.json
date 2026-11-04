@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a small green circuit board with a black chip and gold connector edge, placed on a surface next to a clear plastic tray.",
+      "Photo 1 is a clearer, top-down view of the same circuit board, showing text on the black chip: 'SKhynix', 'HNB512G1A1B', 'X002 3501', and other smaller markings.",
+      "The item is an mSATA SSD, identifiable by its form factor and connector.",
+      "The chip is labeled with 'SKhynix' (likely SK hynix), and the model number 'HNB512G1A1B' is visible.",
+      "The seller claims it is a 500GB internal SSD, but the model number suggests 512GB (HNB512G1A1B).",
+      "The seller also mentions a 256GB version, but only one item is shown in the photos.",
+      "No power or data cables are shown, and no testing environment is visible."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "internal SSD",
+      "brand": "SK hynix",
+      "model": "HNB512G1A1B",
+      "read_from": [
+        "photo 1 chip"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "500GB Internal SSD",
+        "verdict": "unverified",
+        "evidence": "The model number 'HNB512G1A1B' visible in photo 1 suggests 512GB, not 500GB. The seller's claim of 500GB is not supported by the visible model number."
+      },
+      {
+        "claim": "Working perfectly",
+        "verdict": "unverifiable_remote",
+        "evidence": "No proof of functionality is shown. No photos of the SSD connected to a system, no test results, or any indication of operation. The claim cannot be verified remotely."
+      },
+      {
+        "claim": "Also got a long one with one cut. The long one is 256GB",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo of the 'long one' is provided. The item shown is mSATA, not SATA or 'long' form factor. The 256GB claim cannot be verified without the actual item or photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The SSD may not be functional or may have bad sectors.",
+        "proof": "A video or photo showing the SSD connected to a computer, recognized by the BIOS, and running a disk utility test (e.g., CrystalDiskInfo or similar) to confirm health and capacity.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The capacity may be misrepresented (e.g., 512GB labeled as 500GB, or actual usable capacity is less).",
+        "proof": "A screenshot from a disk utility showing the exact capacity and health status when connected to a system.",
+        "if_unproven": "priced as lower capacity or misrepresented"
+      },
+      {
+        "risk": "The SSD may be a cloned or repurposed drive with hidden data or firmware issues.",
+        "proof": "A full disk wipe and health check report from a trusted tool (e.g., Samsung Magician, Intel SSD Toolbox, or similar) showing no errors or warnings.",
+        "if_unproven": "priced as potentially compromised"
+      }
+    ],
+    "proof_requests": [
+      "A video or photo showing the SSD connected to a computer and recognized by the BIOS or OS.",
+      "A screenshot from a disk utility (e.g., CrystalDiskInfo) showing the full capacity, health, and SMART status.",
+      "A photo of the 256GB 'long one' if available, to verify its form factor and model."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as an SK hynix HNB512G1A1B mSATA SSD, but the seller's claims about capacity and functionality cannot be verified from the photos alone. The risks of non-functionality, misrepresented capacity, or hidden issues require proof before pricing can be determined."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 78787,
+    "input_tokens": 2603,
+    "output_tokens": 949,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "f46494d07940dbc5de41613c351dc053",
+    "error": null
+  }
+}

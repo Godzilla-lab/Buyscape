@@ -1,0 +1,66 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black SSD with a label that includes '256GB' and 'S0KXNYAC56330' as the serial number. The label also has CE and cULus marks.",
+      "Photo 1 shows the same SSD from the other side, revealing multiple Samsung chips, including 'SAMSUNG K9PFE18U7B-HCK0' and 'SAMSUNG 243'.",
+      "The SSD has a 2.5-inch form factor with a SATA connector, typical for older laptops.",
+      "The seller claims it is for a 2012-2013 MacBook Pro Retina (13\u201d or 15\u201d), but the photos show a standard SATA SSD, not the proprietary PCIe-based SSD used in Retina MacBook Pros.",
+      "The label in photo 0 says '256GB', which matches the seller's claim."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "256GB SATA SSD",
+      "brand": "Samsung",
+      "model": null,
+      "read_from": [
+        "photo 0 label",
+        "photo 1 chips"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "256gb SSD",
+        "verdict": "supported",
+        "evidence": "Photo 0 label clearly shows '256GB'."
+      },
+      {
+        "claim": "MacBook Pro 2012 - 2013 Retinal both 13\u2019inch and 15\u2019inches Compatible",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 and 1 show a standard SATA SSD with a 2.5-inch form factor, which is incompatible with 2012-2013 Retina MacBook Pros that use proprietary PCIe-based SSDs. The seller's claim is technically false."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The SSD may be damaged or not functional.",
+        "proof": "A video showing the SSD being powered on and recognized by a computer, or a test with a SATA-to-USB adapter.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The SSD may have bad sectors or reduced capacity.",
+        "proof": "A screenshot of disk utility or CrystalDiskInfo showing full capacity and health status.",
+        "if_unproven": "priced as degraded"
+      }
+    ],
+    "proof_requests": [
+      "Video of the SSD being tested in a computer or with a SATA-to-USB adapter.",
+      "Screenshot of disk utility or CrystalDiskInfo showing full 256GB capacity and health status."
+    ],
+    "decision": "price",
+    "reason": "The item is a 256GB SATA SSD, which is clearly visible in the photos. The seller's claim of compatibility with Retina MacBook Pros is contradicted by the physical form factor. The item can be priced at its worst case (as not working) until functionality is proven."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 52716,
+    "input_tokens": 2298,
+    "output_tokens": 672,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "bfb09de0b1e698b75baa88ff5c331519",
+    "error": null
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a silver Dell laptop keyboard deck and trackpad on a pink surface; the screen is not visible.",
+      "Photo 1 shows Windows system information: System Manufacturer Dell Inc., System Model Inspiron 7573, Processor Intel Core i7-8550U, OS Windows 11 Pro.",
+      "Photo 2 shows Windows About page: Inspiron 7573, 8.00 GB RAM, 238 GB storage, Intel UHD Graphics 620, Pen and touch support with 10 touch points."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Dell",
+      "model": "Inspiron 7573",
+      "read_from": [
+        "photo 1 screen",
+        "photo 2 screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "DELL INSPIRON 15 7573",
+        "verdict": "supported",
+        "evidence": "photo 1 System Model reads Inspiron 7573; photo 2 reads Inspiron 7573"
+      },
+      {
+        "claim": "2-in-1 convertible",
+        "verdict": "unverified",
+        "evidence": "photo 2 shows pen and touch support, but no photo shows the hinge converting or folding back"
+      },
+      {
+        "claim": "Processor: Intel...",
+        "verdict": "supported",
+        "evidence": "photo 1 and photo 2 show Intel Core i7-8550U"
+      },
+      {
+        "claim": "American used",
+        "verdict": "unverifiable_remote",
+        "evidence": "no photo shows country of origin or prior usage history"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Screen condition unknown; screen is not visible in any photo",
+        "proof": "photo of the screen powered on showing no cracks, dead pixels, lines, or backlight issues",
+        "if_unproven": "as screen faulty"
+      },
+      {
+        "risk": "Battery health and runtime unknown",
+        "proof": "screenshot of battery report or cycle count",
+        "if_unproven": "as battery dead or unusable"
+      },
+      {
+        "risk": "Convertible hinge mechanism unproven",
+        "proof": "video of the screen rotating 360 degrees into tablet mode",
+        "if_unproven": "as a standard non-convertible laptop"
+      },
+      {
+        "risk": "Keyboard and trackpad functionality unproven",
+        "proof": "video of typing and trackpad gestures working",
+        "if_unproven": "as input devices faulty"
+      },
+      {
+        "risk": "Storage drive health unknown",
+        "proof": "screenshot of disk health such as CrystalDiskInfo",
+        "if_unproven": "as drive failed"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the screen powered on",
+      "Battery report screenshot",
+      "Video of hinge converting to tablet mode",
+      "Video of keyboard and trackpad working",
+      "Disk health screenshot"
+    ],
+    "decision": "price",
+    "reason": "The model is clearly identified as Dell Inspiron 7573 from system screens, so it can be priced at its worst case pending verification of screen, battery, hinge, and input functions."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 59024,
+    "input_tokens": 2486,
+    "output_tokens": 3105,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "ee8ca72867a7e8f08107499b51b2aa84",
+    "error": null
+  }
+}

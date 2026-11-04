@@ -1,0 +1,90 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: open freezer lid from above, interior tub shows frost residue and some staining/discoloration on the metal walls.",
+      "Photo 1: front view of a white chest freezer with a 'Haier Thermocool' badge and a '2 Years Warranty' sticker on the front panel; visible rust and corrosion along the bottom edge of the cabinet.",
+      "Photo 2: rear view showing the condenser coils, compressor area, and a rating/label plate that is too blurred to read; rust spots are visible at the base near the feet and plug.",
+      "No photo shows the unit powered on, running, or frosting; no photo of a receipt or warranty card."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "chest deep freezer",
+      "brand": "Haier Thermocool",
+      "model": null,
+      "read_from": [
+        "photo 1 badge"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Barely used, bought new last year",
+        "verdict": "contradicted",
+        "evidence": "Photo 1 and photo 2 show visible rust/corrosion at the base, inconsistent with a freezer bought new only a year ago."
+      },
+      {
+        "claim": "No fault at all, motor was never opened",
+        "verdict": "unverifiable_remote",
+        "evidence": "No video or audio of the compressor running; internal motor condition cannot be judged from stills."
+      },
+      {
+        "claim": "Receipt and warranty card available",
+        "verdict": "unverified",
+        "evidence": "No photo of the receipt or warranty card was provided, only a warranty sticker on the body (photo 1)."
+      },
+      {
+        "claim": "Long lasting freezing for up to five (days/hours, unclear)",
+        "verdict": "unverifiable_remote",
+        "evidence": "No test or demonstration shown; this is a performance claim that cannot be judged from photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Freezer may not power on or cool properly",
+        "proof": "A short video showing the unit plugged in, running, and frost forming inside after some minutes",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Rust/corrosion at the base could indicate age, moisture damage, or a prior leak affecting the compressor or coolant lines",
+        "proof": "Close-up photo of the rusted base and the compressor foot, plus confirmation the compressor pan is dry",
+        "if_unproven": "priced as a well-used, visibly corroding unit, not a 'barely used' one"
+      },
+      {
+        "risk": "Exact capacity and model cannot be confirmed",
+        "proof": "Clear, in-focus photo of the rating label on the back (photo 2) showing liters and model number",
+        "if_unproven": "priced as a generic mid-size chest freezer, not matched to a specific premium model"
+      },
+      {
+        "risk": "Ownership documents (receipt, warranty card) may not exist or not transfer",
+        "proof": "Photo of the actual receipt and warranty card with the seller's name/date visible",
+        "if_unproven": "priced as if no transferable warranty exists"
+      }
+    ],
+    "proof_requests": [
+      "Video of the freezer plugged in and running, showing the thermostat light on and frost forming after 10-15 minutes",
+      "Clear photo of the rating label on the back panel showing capacity and model number",
+      "Close-up photo of the rusted base/feet and underside of the compressor area",
+      "Photo of the actual receipt and warranty card"
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identifiable as a Haier Thermocool chest deep freezer, but 'barely used' is contradicted by visible rust, and working condition, exact capacity, and ownership documents are all unverified, so it must be priced at the worst case of a used, unconfirmed-working unit.",
+    "price_pick": {
+      "low": 0,
+      "high": 1
+    }
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 29067,
+    "input_tokens": 4983,
+    "output_tokens": 2587,
+    "cost_usd": 0.032283,
+    "replayed": false,
+    "fixture_key": "24e8eee2dd050cccacb9e0125c246de2",
+    "error": null
+  }
+}

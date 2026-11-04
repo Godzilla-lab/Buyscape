@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows Windows Task Manager with Intel Core i5-10310U, 7.8 GB RAM, SSD, Intel UHD Graphics, and a Dell logo on the bottom bezel",
+      "Photo 1 shows an open dark grey Dell laptop on a desk with shelves of plastic-wrapped laptops in the background",
+      "Photo 2 shows Windows System About identifying the device as Dell Latitude 3410 with Intel Core i5-10310U and 8.00 GB RAM"
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Dell",
+      "model": "Latitude 3410",
+      "read_from": [
+        "photo 2 System About screen",
+        "photo 0 bottom bezel",
+        "photo 1 bottom bezel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Visit our Instagram page for more updates",
+        "verdict": "unverifiable_remote",
+        "evidence": "No Instagram handle or page is shown in the photos"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery health and charge capacity",
+        "proof": "Screenshot of Windows battery report or powercfg output",
+        "if_unproven": "as battery not holding charge"
+      },
+      {
+        "risk": "Screen defects such as dead pixels, lines, or backlight bleed",
+        "proof": "Video displaying solid red, green, blue, and white screens",
+        "if_unproven": "as screen faulty"
+      },
+      {
+        "risk": "Keyboard and trackpad functionality",
+        "proof": "Video of typing and trackpad gestures",
+        "if_unproven": "as keyboard or trackpad not working"
+      },
+      {
+        "risk": "Original charger inclusion and function",
+        "proof": "Photo of the Dell charger plugged in with charging indicator on",
+        "if_unproven": "as no charger included"
+      },
+      {
+        "risk": "Port functionality including USB, HDMI, and charging port",
+        "proof": "Video testing each port with a known working device",
+        "if_unproven": "as ports not working"
+      },
+      {
+        "risk": "SSD health and remaining lifespan",
+        "proof": "Screenshot of CrystalDiskInfo or similar drive health tool",
+        "if_unproven": "as SSD near end of life"
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of Windows battery report",
+      "Video of screen showing solid colors to check for defects",
+      "Photo of original Dell charger connected and charging",
+      "Video testing keyboard, trackpad, and all ports"
+    ],
+    "decision": "price",
+    "reason": "Identified as Dell Latitude 3410 from photo 2 with matching CPU and RAM in photo 0; it can be priced at worst case assuming untested functions fail."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 31630,
+    "input_tokens": 2899,
+    "output_tokens": 3836,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "159e7b9680a10ea8c42ac7266fa44c11",
+    "error": null
+  }
+}

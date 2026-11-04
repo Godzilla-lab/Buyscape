@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a yellow/gold cooking gas cylinder with a protective collar, handwritten markings on the collar, and a partially visible label.",
+      "Photos 1 and 2 show a blue cooking gas cylinder with an oval body logo and a visible valve assembly from above.",
+      "The yellow cylinder and the blue cylinder differ in color and collar design, so they appear to be two different items.",
+      "No test dates, certification stamps, leak-test evidence, or readable brand names are visible in any photo."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "cooking gas cylinder",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "12.5kg standard Cooking Gas Cylinder",
+        "verdict": "unverified",
+        "evidence": "Weight cannot be verified from photos; cylinders appear to be standard size but no capacity marking is legible."
+      },
+      {
+        "claim": "Recently tested and certified",
+        "verdict": "unverifiable_remote",
+        "evidence": "No test date stamp or certification document is visible in the photos."
+      },
+      {
+        "claim": "no leak",
+        "verdict": "unverifiable_remote",
+        "evidence": "Leak status cannot be determined from still photos."
+      },
+      {
+        "claim": "the valve is new",
+        "verdict": "unverified",
+        "evidence": "Photo 2 shows the valve, but its age or condition cannot be confirmed from the image."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Cylinder may be out of test date or unsafe to refill",
+        "proof": "Photo of the hydrostatic test date stamp or certification document on the cylinder",
+        "if_unproven": "as untested cylinder"
+      },
+      {
+        "risk": "Valve may leak or fail",
+        "proof": "Video of a leak test with soap solution applied to the valve",
+        "if_unproven": "as faulty valve"
+      },
+      {
+        "risk": "Seller may deliver a different cylinder than the one photographed",
+        "proof": "Seller confirms which photo shows the exact item for sale",
+        "if_unproven": "as the lower-value cylinder shown"
+      }
+    ],
+    "proof_requests": [
+      "Confirm which cylinder is for sale: the yellow cylinder in photo 0 or the blue cylinder in photos 1-2",
+      "Provide a photo of the cylinder test date or certification stamp",
+      "Provide a video of a leak test on the valve"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Two different cylinders are shown for a single listing, and safety-critical claims cannot be verified remotely, so the exact item and its condition are unclear."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 46504,
+    "input_tokens": 2917,
+    "output_tokens": 4844,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "6c929a64f33f89bb0a156261431db044",
+    "error": null
+  }
+}

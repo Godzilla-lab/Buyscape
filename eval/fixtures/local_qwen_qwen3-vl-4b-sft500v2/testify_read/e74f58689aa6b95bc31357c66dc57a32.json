@@ -1,0 +1,64 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-sft500v2",
+  "response": {
+    "observations": [
+      "Multiple stacks of used car tires in an outdoor yard.",
+      "Tires are covered in significant dirt and mud, obscuring the tread pattern and sidewall markings.",
+      "Some tires have 'YES' and 'VRS' painted on them in orange and white.",
+      "A watermark 'POSTED ON JIJI IKWE ANTHONY' is visible across all photos.",
+      "A red car is partially visible in the background of photo 0.",
+      "The setting appears to be a tire shop or a scrap yard.",
+      "No photo shows a clear, close-up view of a sidewall specification (e.g., 205/55R16)."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used car tires",
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "First grade Belgium tires",
+        "verdict": "unverified",
+        "evidence": "The photos show used tires in a yard; 'first grade' and 'Belgium' are claims not supported by the visual evidence."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Tread depth is insufficient for safe driving.",
+        "proof": "A photo of a single tire with a tread depth gauge or a digital caliper.",
+        "if_unproven": "as having very low tread depth"
+      },
+      {
+        "risk": "Tires may be past their expiration date (DOT code).",
+        "proof": "A close-up photo of the sidewall showing the DOT code and manufacturing date.",
+        "if_unproven": "as expired"
+      },
+      {
+        "risk": "Tires may be damaged internally (bulges, cracks, or separation).",
+        "proof": "A photo of the sidewall showing the manufacturer's logo and a clear view of the tread.",
+        "if_unproven": "as having internal damage"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photos of the sidewalls of several tires to read the brand, size, and DOT code.",
+      "Photos of the tread depth using a gauge or a ruler.",
+      "Photos of the tires with the sidewalls facing up to check for bulges or cracks."
+    ],
+    "decision": "price",
+    "reason": "The item is known from the photos. What they cannot prove is priced at its worst case until the proof asked for below arrives."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-sft500v2",
+    "task": "testify_read",
+    "latency_ms": 3598,
+    "input_tokens": 2384,
+    "output_tokens": 421,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "e74f58689aa6b95bc31357c66dc57a32",
+    "error": null
+  }
+}

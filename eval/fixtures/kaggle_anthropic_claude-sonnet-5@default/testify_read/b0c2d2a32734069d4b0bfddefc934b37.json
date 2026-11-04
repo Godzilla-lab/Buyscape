@@ -1,0 +1,98 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo shows stacked solar panels (appears to be 2-3 panels) resting against a wall on a dirt/concrete floor",
+      "A person's leg and a blue basket are visible at the edge of the frame",
+      "Watermark 'NAGOTECH SOLAR' overlaid on the image",
+      "Bottom of image has camera metadata overlay 'CAMON 30' and exposure info (23mm f/1.88 1/135s ISO50), not a product label",
+      "No manufacturer name plate, spec sticker, or wattage label is legible on the panels themselves",
+      "Panels appear to have visible frames and cells but no close-up of cell condition, cracks, or junction box"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "650 Watts",
+        "verdict": "unverifiable_remote",
+        "evidence": "No spec label or sticker visible in photo 0 to confirm wattage"
+      },
+      {
+        "claim": "144 cell",
+        "verdict": "unverifiable_remote",
+        "evidence": "Cell count cannot be confirmed from the distant, stacked angle in photo 0"
+      },
+      {
+        "claim": "original / direct Canadian",
+        "verdict": "unverifiable_remote",
+        "evidence": "No brand plate, country-of-origin marking, or import documentation visible in photo 0"
+      },
+      {
+        "claim": "used solar panel built to serve u (implying functional)",
+        "verdict": "unverified",
+        "evidence": "No power output test, multimeter reading, or sun-test clip shown"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual wattage may be lower than claimed 650W",
+        "proof": "Close-up photo of the rear nameplate/sticker showing wattage, voltage, and current specs",
+        "if_unproven": "priced as unverified lower-wattage generic panel"
+      },
+      {
+        "risk": "Cell count and panel type (mono/poly) unconfirmed",
+        "proof": "Close-up of individual cells and rear label showing cell count",
+        "if_unproven": "priced as generic unspecified cell-count panel"
+      },
+      {
+        "risk": "Panel may be non-functional or degraded (common with used imports)",
+        "proof": "Video of panel connected to a multimeter under direct sunlight showing voltage/current output",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Hidden micro-cracks, hotspots, or delamination not visible from this angle",
+        "proof": "Close-up photos of each panel's full surface in good light, plus back of panel showing junction box condition",
+        "if_unproven": "priced as cosmetically/functionally unverified, worst case"
+      },
+      {
+        "risk": "Unclear how many panels are actually included in the sale (stack shows multiple)",
+        "proof": "Photo showing each panel separately with a count, or confirmation of quantity in listing",
+        "if_unproven": "priced as a single unit only"
+      },
+      {
+        "risk": "Claim of 'Canadian' origin cannot be verified and may be a generic branding term",
+        "proof": "Photo of any import paperwork, country-of-origin sticker, or recognizable brand logo",
+        "if_unproven": "priced as origin-unverified generic panel"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the rear nameplate/sticker showing brand, wattage, voltage, current, and cell count",
+      "Video of the panel wired to a multimeter under sunlight showing actual voltage/current output",
+      "Clear photo of the full front surface of each panel individually, in good light, to check for cracks or hotspots",
+      "Confirmation and photo count of exactly how many panels are included in this sale"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo shows stacked panels with no legible spec label, brand plate, or output test, so even a worst-case price cannot be set until the wattage/condition claims are checked against a readable nameplate or performance clip."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 17335,
+    "input_tokens": 2030,
+    "output_tokens": 1566,
+    "cost_usd": 0.016529,
+    "replayed": false,
+    "fixture_key": "b0c2d2a32734069d4b0bfddefc934b37",
+    "error": null
+  }
+}

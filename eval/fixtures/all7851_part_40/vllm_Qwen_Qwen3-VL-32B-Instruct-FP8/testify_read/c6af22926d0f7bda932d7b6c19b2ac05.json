@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Three photos show a VARTA battery from different angles, all on a concrete floor.",
+      "The battery is labeled 'VARTA' with 'SILVER Dynamic' branding.",
+      "The label clearly shows '12V 100Ah 830A' on the front and top.",
+      "The model code 'H3' is visible on the front label.",
+      "The battery has a blue negative terminal cap and a red positive terminal cap.",
+      "No visible damage, cracks, or leaks on the casing.",
+      "Watermark 'EAGLE PAWA BATTERIES' and 'POSTED ON JIJI' are overlaid on all photos.",
+      "No signs of corrosion or use on the terminals in the photos."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car battery",
+      "brand": "VARTA",
+      "model": "H3",
+      "read_from": [
+        "photo 0 label",
+        "photo 1 label",
+        "photo 2 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Just 1 month used",
+        "verdict": "unverified",
+        "evidence": "Photos show no signs of use or wear, but no proof of usage duration. No serial number or date code visible to verify age."
+      },
+      {
+        "claim": "100ah",
+        "verdict": "supported",
+        "evidence": "Photo 0, 1, and 2 clearly show '12V 100Ah 830A' on the label."
+      },
+      {
+        "claim": "1 year guarantee",
+        "verdict": "unverifiable_remote",
+        "evidence": "No document, receipt, or label showing warranty terms. Seller's claim only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery may be damaged internally or have reduced capacity despite\u5916\u89c2 appearance.",
+        "proof": "A video showing the battery being charged and discharged, or a load test with a multimeter.",
+        "if_unproven": "priced as potentially degraded or not working"
+      },
+      {
+        "risk": "Battery may have been used for more than 1 month, or the '1 month used' claim is false.",
+        "proof": "Serial number or date code on the battery, or a receipt showing purchase date.",
+        "if_unproven": "priced as used without proven low usage"
+      },
+      {
+        "risk": "Battery may be counterfeit or reconditioned, not genuine VARTA.",
+        "proof": "Close-up of the barcode and serial number, and verification via VARTA's official website or distributor.",
+        "if_unproven": "priced as potentially counterfeit"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of the serial number and barcode on the battery.",
+      "Video of the battery being tested under load or charged.",
+      "Receipt or proof of purchase date to verify '1 month used' claim.",
+      "Proof of warranty (if any) from the seller or distributor."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The battery is identifiable as a genuine VARTA H3 100Ah model, but critical claims about usage duration and warranty are unverified. Internal condition and authenticity cannot be confirmed from photos alone. Proof is needed to price accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 59870,
+    "input_tokens": 2724,
+    "output_tokens": 741,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "c6af22926d0f7bda932d7b6c19b2ac05",
+    "error": null
+  }
+}

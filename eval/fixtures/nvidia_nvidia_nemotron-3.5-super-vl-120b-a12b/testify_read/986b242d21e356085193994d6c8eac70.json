@@ -1,0 +1,75 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows the empty interior of a refrigerator with wire shelves, a thermostat dial, door bins, and a plastic bottle on the bottom shelf.",
+      "Photo 1 shows the exterior of a white compact refrigerator with a beige top handle and a STARSMAN brand badge on the front door.",
+      "The fridge stands on tiled flooring with a dish rack on top and shows surface scuffs."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "small fridge",
+      "brand": "STARSMAN",
+      "model": null,
+      "read_from": [
+        "photo 1 front badge"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Perfectly working fridge",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photos show the unit off and empty; no running compressor, cooling, or temperature test is visible."
+      },
+      {
+        "claim": "with inner freezer",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows the fridge interior but no separate freezer door or compartment is clearly visible."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Fridge does not cool or compressor is faulty",
+        "proof": "Video of the fridge running for several minutes with the thermostat turned, or a photo of a thermometer inside showing cold temperature.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Inner freezer compartment is missing or not working",
+        "proof": "Photo of the freezer compartment interior or its door.",
+        "if_unproven": "priced as a fridge without a working freezer"
+      },
+      {
+        "risk": "Door seal is torn or not airtight",
+        "proof": "Close-up photo of the door gasket all around.",
+        "if_unproven": "priced as needing a new door seal"
+      },
+      {
+        "risk": "Power cord or plug is damaged or missing",
+        "proof": "Photo of the power cord and plug.",
+        "if_unproven": "priced as needing electrical repair"
+      }
+    ],
+    "proof_requests": [
+      "Video of the fridge running with the thermostat adjusted",
+      "Close-up photo of the freezer compartment inside",
+      "Close-up photo of the door seal/gasket",
+      "Photo of the power cord and plug"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a used STARSMAN small fridge; because the seller's working claim cannot be verified remotely, it is priced at the worst case of a non-working unit."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 43752,
+    "input_tokens": 2378,
+    "output_tokens": 3242,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "986b242d21e356085193994d6c8eac70",
+    "error": null
+  }
+}

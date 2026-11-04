@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 is a promotional or stock image, not a photo of a physical item in a domestic setting.",
+      "The brand 'Haisic' is visible on the device and the packaging in photo 0.",
+      "The model 'Power Plus 2' is printed on the box in photo 0.",
+      "The capacity '33000 mAh' is printed on the box in photo 0.",
+      "The box shows built-in charging cables and mentions '365 Days' and 'Fast Charging'.",
+      "There is a watermark 'EMCO HAISIC' and 'POSTED ON JIJI' across the center of the image."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "power bank",
+      "brand": "Haisic",
+      "model": "Power Plus 2",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "33mah",
+        "verdict": "contradicted",
+        "evidence": "The box in photo 0 clearly states 33000 mAh; 33mah is likely a typographical error by the seller."
+      },
+      {
+        "claim": "Haisic powerbank",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows the brand name on both the device and the box."
+      },
+      {
+        "claim": "led light",
+        "verdict": "supported",
+        "evidence": "The device in photo 0 has a circular element on the front consistent with an LED light panel."
+      },
+      {
+        "claim": "multiple charger",
+        "verdict": "supported",
+        "evidence": "The box in photo 0 illustrates built-in cables for different connector types."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The seller is using a stock image; the actual item may not exist or may be in poor condition.",
+        "proof": "A photo of the actual device being sold, ideally next to a handwritten note with the current date.",
+        "if_unproven": "as a non-existent item or potential scam"
+      },
+      {
+        "risk": "The actual battery capacity may be significantly lower than the 33,000 mAh label (common in off-brand power banks).",
+        "proof": "unverifiable_remote",
+        "if_unproven": "as a much lower capacity generic power bank"
+      },
+      {
+        "risk": "The internal battery cells may be degraded or non-functional.",
+        "proof": "A video showing the power bank successfully charging a mobile device.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Real-life photos of the actual power bank being sold, showing all sides.",
+      "A photo of the back or bottom of the actual unit to verify the printed specifications.",
+      "A video of the device powered on and charging a phone."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller has provided a stock image from a marketplace (Jiji) rather than a photo of the actual item. It is impossible to verify the condition, authenticity, or even the existence of the specific unit without real photos."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 12242,
+    "input_tokens": 2383,
+    "output_tokens": 2504,
+    "cost_usd": 0.008703,
+    "replayed": false,
+    "fixture_key": "6d31a81e437be4ba08763d98de486f86",
+    "error": null
+  }
+}

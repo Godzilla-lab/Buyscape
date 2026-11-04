@@ -1,0 +1,84 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail box for a Hisense microwave oven.",
+      "The box identifies the model as H20MOWS14.",
+      "The box specifies a 20L capacity and 700W power output.",
+      "The box features an image of a white microwave with a black glass door and two mechanical knobs.",
+      "The actual appliance is not visible in the photo.",
+      "There is a watermark 'ZEETECH ELECTRONICS' and 'POSTED ON JIJI' on the image.",
+      "The box shows some wear and creasing at the corners."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "microwave oven",
+      "brand": "Hisense",
+      "model": "H20MOWS14",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "20-liter capacity",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "700W power output",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "mechanical knob controls",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The item inside the box may be missing, a different model, or a different color.",
+        "proof": "Photo of the actual unit and its rear rating plate.",
+        "if_unproven": "priced as an empty box"
+      },
+      {
+        "risk": "The unit may have significant cosmetic damage or be heavily used.",
+        "proof": "Photos of the unit from all sides and the interior.",
+        "if_unproven": "priced as heavily used/damaged"
+      },
+      {
+        "risk": "The microwave may be non-functional.",
+        "proof": "Video of the unit heating a cup of water.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Essential components like the glass turntable or rotating ring may be missing.",
+        "proof": "Photo of the interior with the door open.",
+        "if_unproven": "priced as missing parts"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual microwave oven out of the box.",
+      "Photo of the rating plate on the back of the unit to confirm the model.",
+      "Photo of the interior showing the turntable and cleanliness.",
+      "Video of the unit powered on and heating water."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail packaging is visible. Without photos of the actual appliance, its condition and presence cannot be confirmed, making even a worst-case price unreliable."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 35105,
+    "input_tokens": 2412,
+    "output_tokens": 7577,
+    "cost_usd": 0.023937,
+    "replayed": false,
+    "fixture_key": "c8bd96537c5d255f6a40680b839e516c",
+    "error": null
+  }
+}

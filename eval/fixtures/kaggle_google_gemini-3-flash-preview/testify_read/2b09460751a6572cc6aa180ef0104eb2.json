@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 is a stock or promotional image with a pure white background.",
+      "A watermark 'UNIQUE STORE' is visible across the center of photo 0.",
+      "The image displays a green gas cylinder encased in a black protective mesh.",
+      "A silver-colored gas regulator with an attached pressure gauge is shown.",
+      "An orange hose and two small metal clips are pictured."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "gas cylinder set",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "12kg cylinder",
+        "verdict": "unverified",
+        "evidence": "The weight stamp on the cylinder shroud is not visible in the stock photo."
+      },
+      {
+        "claim": "3 yard Regulator Hose",
+        "verdict": "unverifiable_remote",
+        "evidence": "Length cannot be verified from a photo without a reference scale."
+      },
+      {
+        "claim": "clips",
+        "verdict": "supported",
+        "evidence": "Two clips are visible in photo 0."
+      },
+      {
+        "claim": "The regulator shows gas level",
+        "verdict": "supported",
+        "evidence": "A pressure gauge is visible on the regulator in photo 0."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The seller may not possess the item or it may be in different condition (stock photo used).",
+        "proof": "A photo of the actual item in a domestic or shop setting.",
+        "if_unproven": "as a potential scam"
+      },
+      {
+        "risk": "The cylinder may be past its expiry date, making it illegal or dangerous to refill.",
+        "proof": "A photo of the date stamp on the cylinder's handle or shroud.",
+        "if_unproven": "as scrap metal"
+      },
+      {
+        "risk": "The valve or regulator may leak gas.",
+        "proof": "A video of a soapy water test on the connections while under pressure.",
+        "if_unproven": "as faulty"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual item in person, not a stock image.",
+      "Close-up of the expiry date stamped on the cylinder shroud.",
+      "Photo of the weight stamp on the cylinder."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The provided image is a watermarked stock photo. Actual photos are necessary to confirm the item's existence, physical condition, and the mandatory safety expiry date."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 20675,
+    "input_tokens": 2396,
+    "output_tokens": 4239,
+    "cost_usd": 0.013915,
+    "replayed": false,
+    "fixture_key": "2b09460751a6572cc6aa180ef0104eb2",
+    "error": null
+  }
+}

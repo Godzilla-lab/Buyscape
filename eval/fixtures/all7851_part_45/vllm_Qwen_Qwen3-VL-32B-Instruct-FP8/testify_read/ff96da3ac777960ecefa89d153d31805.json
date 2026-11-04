@@ -1,0 +1,89 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a hand holding an iPhone box, open to reveal the back of a black iPhone and the front screen with a green-purple wallpaper. The box is white, typical of Apple packaging. The background shows a sign for 'SEADOT GROUP' with a logo and the tagline 'sincerity is Pride'.",
+      "Photo 1 shows the same iPhone box held in front of a glass storefront with 'SEADOT GROUP' signage. Inside the store, other iPhones are visible on display stands. The same hand with a gold watch is holding the box.",
+      "The iPhone in the box appears to be an iPhone 14 model, based on the triple-camera module on the back (two lenses and a LiDAR sensor) and the notch on the front screen.",
+      "The box is open, suggesting the phone may have been used or unboxed. No serial number or model label is visible on the box or phone.",
+      "The seller claims it is a 'Direct Canada' iPhone 14 128GB with 85% battery health, physical SIM and eSIM support. These claims are not visible in the photos."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "iPhone 14",
+      "brand": "Apple",
+      "model": null,
+      "read_from": [
+        "photo 0 back camera module",
+        "photo 1 front screen notch"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Direct Canada",
+        "verdict": "unverifiable_remote",
+        "evidence": "No proof of origin in photos. The seller's claim cannot be verified remotely."
+      },
+      {
+        "claim": "iPhone 14 128GB",
+        "verdict": "supported",
+        "evidence": "The phone's design matches the iPhone 14 (triple camera module, notch). The 128GB storage is not visible but is a common variant; no contradiction in photos."
+      },
+      {
+        "claim": "physical sim E-sim",
+        "verdict": "unverifiable_remote",
+        "evidence": "No SIM tray or settings screen visible. Cannot confirm from photos."
+      },
+      {
+        "claim": "85% bh (battery health)",
+        "verdict": "unverifiable_remote",
+        "evidence": "No battery health screen or diagnostic data shown. Cannot verify remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Phone may be stolen, blacklisted, or have activation lock",
+        "proof": "Photo of the phone's settings > General > About > IMEI/Serial Number, and a screenshot of the activation lock status.",
+        "if_unproven": "Priced as potentially locked or blacklisted, which reduces value significantly."
+      },
+      {
+        "risk": "Battery health may be lower than claimed (85%)",
+        "proof": "Screenshot of the battery health percentage from Settings > Battery > Battery Health.",
+        "if_unproven": "Priced as if battery health is unknown, which may be worse than 85%."
+      },
+      {
+        "risk": "Phone may be water-damaged or have internal issues",
+        "proof": "Photo of the phone's interior (if opened) or a diagnostic report from Apple or a certified technician.",
+        "if_unproven": "Priced as potentially damaged, reducing value."
+      },
+      {
+        "risk": "Not genuine iPhone 14 or model mismatch",
+        "proof": "Photo of the phone's back with the model number (e.g., A2628 for iPhone 14) or a clear shot of the box label.",
+        "if_unproven": "Priced as a generic iPhone 14, but could be a different model or counterfeit."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of the phone's Settings > General > About showing the model number and IMEI.",
+      "Screenshot of Battery Health percentage.",
+      "Photo of the phone's back showing the model number (if any).",
+      "Photo of the phone's screen showing the activation lock status.",
+      "Photo of the original box with model and serial number."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as an iPhone 14 by design, but critical claims (origin, battery health, activation lock, model accuracy) cannot be verified from the photos. Hidden risks like blacklisting or damage affect pricing. Proof is needed to price accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 76723,
+    "input_tokens": 2294,
+    "output_tokens": 978,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "ff96da3ac777960ecefa89d153d31805",
+    "error": null
+  }
+}

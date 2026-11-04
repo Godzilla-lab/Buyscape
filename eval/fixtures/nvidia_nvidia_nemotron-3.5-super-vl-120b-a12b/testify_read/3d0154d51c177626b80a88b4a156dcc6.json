@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Black desktop thermal receipt printer",
+      "\"HIPHEN SOLUTIONS\" visible on the front casing in photo 0",
+      "Paper exit slot on top, control panel with indicator lights on the left side",
+      "No model number or serial label legible in photo 0",
+      "No power cable, adapter, paper roll, or print output shown"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "thermal receipt printer",
+      "brand": "Hiphen Solutions",
+      "model": null,
+      "read_from": [
+        "photo 0 casing"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "300mm/sec print speed",
+        "verdict": "unverifiable_remote",
+        "evidence": "photo 0 shows the printer but not its operating speed"
+      },
+      {
+        "claim": "by hiphen solutions ltd",
+        "verdict": "supported",
+        "evidence": "photo 0 shows HIPHEN SOLUTIONS on the casing"
+      },
+      {
+        "claim": "print command esc/pos",
+        "verdict": "unverifiable_remote",
+        "evidence": "photo 0 cannot show printer command language support"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "printer may not power on or print at all",
+        "proof": "video of the printer powering on and printing a receipt",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "print speed may be far below 300mm/sec",
+        "proof": "video showing a timed print job",
+        "if_unproven": "as a standard slow receipt printer"
+      },
+      {
+        "risk": "ESC/POS compatibility may be absent",
+        "proof": "screenshot of a test page or ESC/POS command test",
+        "if_unproven": "as ESC/POS incompatible"
+      },
+      {
+        "risk": "print head or mechanism may be worn",
+        "proof": "close-up photo of the print head and roller",
+        "if_unproven": "as needing print head replacement"
+      }
+    ],
+    "proof_requests": [
+      "Video of the printer powering on and printing a receipt",
+      "Close-up photo of the model/serial number label",
+      "Photo of the interface ports and power connector",
+      "Photo showing any included cables or power adapter"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a Hiphen Solutions thermal receipt printer from photo 0; even with unproven speed and command claims, it can be priced at worst case as a non-working unit."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 14366,
+    "input_tokens": 1608,
+    "output_tokens": 1772,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "3d0154d51c177626b80a88b4a156dcc6",
+    "error": null
+  }
+}

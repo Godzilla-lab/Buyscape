@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "A red tubular inverter battery with a label showing 'INDEX INVA TUBULAR' and model 'IT 750'.",
+      "The label states 'The Ultimate Inverter Battery' and 'Capacity (at 27\u00b0C) C20 200 Ah'.",
+      "Manufactured by EXIDE INDUSTRIES LTD, INDIA.",
+      "The battery is placed on a concrete surface, showing some dust and minor wear.",
+      "There are six terminals on top, with visible caps and some residue or corrosion around them.",
+      "The label has a watermark 'F&J ENTERPRISE' and 'POSTED ON JIJI'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "inverter battery",
+      "brand": "INDEX",
+      "model": "IT 750",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Scrap inverter batteries",
+        "verdict": "supported",
+        "evidence": "The seller's words state they are buying scrap inverter batteries, and the photo shows a used battery with visible wear and dust, consistent with scrap condition."
+      },
+      {
+        "claim": "The Ultimate Inverter Battery",
+        "verdict": "unverified",
+        "evidence": "This is a marketing slogan on the label (photo 0), not a verifiable claim about performance or condition."
+      },
+      {
+        "claim": "Capacity (at 27\u00b0C) C20 200 Ah",
+        "verdict": "unverifiable_remote",
+        "evidence": "The label in photo 0 states this, but without testing, the actual capacity cannot be confirmed remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery may be dead or have very low capacity despite label claim",
+        "proof": "A voltage test or load test video showing the battery's actual performance.",
+        "if_unproven": "priced as not working or very low capacity"
+      },
+      {
+        "risk": "Internal damage or sulfation not visible from exterior",
+        "proof": "Close-up of terminals and battery casing for corrosion, cracks, or bulging; or a video of the battery being tested under load.",
+        "if_unproven": "priced as potentially non-functional or low-value scrap"
+      },
+      {
+        "risk": "Battery may be counterfeit or mislabeled",
+        "proof": "Serial number check or factory verification, or a close-up of the label and casing for signs of tampering.",
+        "if_unproven": "priced as suspect, with lower value due to authenticity risk"
+      }
+    ],
+    "proof_requests": [
+      "Video or photo of the battery being tested under load to verify capacity and functionality.",
+      "Close-up of the terminals and casing to check for corrosion, cracks, or bulging.",
+      "Photo of the serial number or any other identifying marks on the battery."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The battery is identifiable as an INDEX IT 750 inverter battery, but its condition and functionality cannot be confirmed from the photo alone. Key risks include low capacity, internal damage, and authenticity. Proof of performance and physical condition is needed before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 59960,
+    "input_tokens": 1775,
+    "output_tokens": 722,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "b9aa735f92ff48308ed13411dd8c68ac",
+    "error": null
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Open laptop showing black screen, keyboard, trackpad, and red TrackPoint. 'Lenovo' logo on bottom left of screen bezel, 'T460s' model label on top right of screen bezel, 'ThinkPad' logo on bottom right of palm rest. Intel Core i5 sticker on bottom left of palm rest.",
+      "Photo 1: Closed laptop lid showing 'ThinkPad' logo on top left. Faint 'T460s' model label near bottom right. Surface has smudges and minor scuffs.",
+      "Photo 2: Same as photo 1, but with clearer view of 'T460s' label on bottom right of lid. 'Lenovo' logo visible on bottom right corner of lid. Surface shows dust and wear."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Lenovo",
+      "model": "ThinkPad T460s",
+      "read_from": [
+        "photo 0 screen bezel",
+        "photo 1 lid",
+        "photo 2 lid"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Lenovo ThinkPad T460s",
+        "verdict": "supported",
+        "evidence": "Model name 'T460s' visible on screen bezel in photo 0 and on lid in photos 1 and 2."
+      },
+      {
+        "claim": "256gb ssd",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows internal components or system information. SSD capacity cannot be confirmed from exterior photos."
+      },
+      {
+        "claim": "8gb Ram",
+        "verdict": "unverifiable_remote",
+        "evidence": "RAM amount cannot be determined from exterior photos. No system specs or BIOS screen shown."
+      },
+      {
+        "claim": "Core i5",
+        "verdict": "supported",
+        "evidence": "Intel Core i5 sticker visible on palm rest in photo 0."
+      },
+      {
+        "claim": "Excellent battery life",
+        "verdict": "unverifiable_remote",
+        "evidence": "Battery health and runtime cannot be assessed from photos. No battery usage data or charge cycles shown."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "SSD may not be 256GB or may be faulty",
+        "proof": "Photo of system information screen showing storage details or a disk management screenshot.",
+        "if_unproven": "priced as having unknown or smaller SSD"
+      },
+      {
+        "risk": "RAM may not be 8GB or may be faulty",
+        "proof": "Photo of system information screen showing installed RAM or a memory diagnostic tool result.",
+        "if_unproven": "priced as having unknown or less than 8GB RAM"
+      },
+      {
+        "risk": "Battery may be degraded or not hold charge",
+        "proof": "Photo of battery health report from Windows or BIOS, or a video showing battery runtime.",
+        "if_unproven": "priced as not working or with poor battery life"
+      },
+      {
+        "risk": "Laptop may have internal damage or liquid damage",
+        "proof": "Photo of internal components (motherboard, keyboard underside, hinges) or a video showing the laptop turning on and running.",
+        "if_unproven": "priced as potentially non-functional or with hidden damage"
+      }
+    ],
+    "proof_requests": [
+      "Photo of system information screen showing installed RAM and storage details.",
+      "Photo or video of battery health report or runtime test.",
+      "Photo of internal components or a video showing the laptop turning on and running.",
+      "Photo of BIOS screen or Windows settings showing model and specs."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is confirmed as Lenovo ThinkPad T460s, but critical specs like RAM, SSD capacity, and battery health cannot be verified from the photos. Hidden risks related to internal condition and functionality require additional proof before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 70577,
+    "input_tokens": 2242,
+    "output_tokens": 894,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "b7b1481d9e67cf3d9483956cd188583b",
+    "error": null
+  }
+}

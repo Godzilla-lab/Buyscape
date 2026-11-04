@@ -1,0 +1,88 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black DSLR camera body held in a hand.",
+      "The word Nikon is visible on the camera pentaprism.",
+      "A lens is mounted with the front lens cap attached.",
+      "A large STARSHOT IMAGE watermark crosses the center of the photo.",
+      "A white light switch is visible on the wall behind the camera."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "DSLR camera with lens",
+      "brand": "Nikon",
+      "model": null,
+      "read_from": [
+        "photo 0 body"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Nikon D810 DSLR Camera",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows Nikon branding but the D810 model is not readable."
+      },
+      {
+        "claim": "24-70mm Lens",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows a mounted lens but the 24-70mm marking is not readable."
+      },
+      {
+        "claim": "Clean and well-maintained",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows the exterior only; internal condition cannot be confirmed."
+      },
+      {
+        "claim": "The brand is Canon",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows Nikon branding on the camera body."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The photo is watermarked STARSHOT IMAGE and may not be an original photo of the item for sale.",
+        "proof": "Original unwatermarked photos of the actual camera and lens from multiple angles.",
+        "if_unproven": "treat as potential fraud; do not pay"
+      },
+      {
+        "risk": "Camera functions such as shutter, sensor, and autofocus cannot be verified from photos.",
+        "proof": "Video of the camera powering on, taking a photo, and reviewing the image.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Lens model, aperture, and optical condition are unconfirmed.",
+        "proof": "Close-up photo of the lens barrel markings and front and rear glass elements.",
+        "if_unproven": "as unknown lens in unknown condition"
+      },
+      {
+        "risk": "Shutter count and sensor wear are unknown.",
+        "proof": "Screenshot of the camera menu showing shutter count or a sample image file.",
+        "if_unproven": "as high wear"
+      }
+    ],
+    "proof_requests": [
+      "Original unwatermarked photos of the actual camera and lens from multiple angles.",
+      "Video showing the camera powering on, firing the shutter, and displaying a photo.",
+      "Close-up of the lens barrel to confirm the 24-70mm model.",
+      "Screenshot of the shutter count from the camera menu."
+    ],
+    "decision": "fraud_suspected",
+    "reason": "The listing photo carries a third-party STARSHOT IMAGE watermark and the seller states Canon while the photo shows Nikon, indicating the listing may not be genuine.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_joint",
+    "latency_ms": 54358,
+    "input_tokens": 2303,
+    "output_tokens": 4746,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "59cf8813653428acc3d1defccf36a7c8",
+    "error": null
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Three photos show a used automatic transmission unit, likely from a car, resting on a concrete floor.",
+      "The unit has a metallic casing with visible bolts, fluid lines, and a central drive shaft.",
+      "In photo 2, text is visible on the center plate: 'TOYOTA' and '13PIN' are legible, along with other numbers and codes.",
+      "The transmission appears to be in used condition with some grime and wear.",
+      "No visible damage to the casing, but internal condition is unknown.",
+      "The seller claims it is for a 2008 Toyota Camry and is automatic with 13-pin."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "automatic transmission",
+      "brand": "Toyota",
+      "model": "13PIN",
+      "read_from": [
+        "photo 2 center plate"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Toyota Camry 2008 automatic gear box 13pin",
+        "verdict": "unverified",
+        "evidence": "The brand 'Toyota' and '13PIN' are visible in photo 2, but there is no visible evidence confirming it is for a 2008 Camry. The model year and vehicle application are not readable from the photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Internal damage or wear that cannot be seen from the exterior",
+        "proof": "A video or photo showing the internal components, or a test run if possible.",
+        "if_unproven": "priced as potentially non-functional or requiring major repair"
+      },
+      {
+        "risk": "Not compatible with a 2008 Toyota Camry despite the seller's claim",
+        "proof": "A photo of the VIN or engine bay of the 2008 Camry it is claimed to fit, or a matching part number from the Camry's manual.",
+        "if_unproven": "priced as a generic Toyota 13-pin transmission, not specifically for Camry"
+      },
+      {
+        "risk": "Transmission is not automatic (despite claim)",
+        "proof": "A clear photo of the gear selector or internal mechanism showing automatic components.",
+        "if_unproven": "priced as manual or unknown type"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the VIN or engine bay of the 2008 Camry it is claimed to fit.",
+      "Video or photo showing the internal components of the transmission.",
+      "Photo of the gear selector or any label indicating it is automatic."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The brand and 13-pin designation are confirmed, but the claim that it is for a 2008 Camry and is automatic cannot be verified from the photos alone. Internal condition and compatibility are hidden risks that must be proven before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 49011,
+    "input_tokens": 2780,
+    "output_tokens": 639,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "4a46687c99928f862e40c0465946030a",
+    "error": null
+  }
+}

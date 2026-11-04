@@ -1,0 +1,93 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the Task Manager open on Windows, displaying CPU info: Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz, 4.00 GB of 16.00 GB memory in use, and 256 GB SSD (C:) with 5.08 GB free.",
+      "Photo 1 shows the laptop open, held in hand, with the ThinkPad logo visible on the lower right of the palm rest. The screen displays the same Task Manager window as photo 0. The keyboard has a red TrackPoint and backlit keys are not visibly lit.",
+      "Photo 2 shows the same laptop with the screen off, held in hand. The ThinkPad logo is visible on the palm rest. The keyboard has a red TrackPoint. The laptop appears to be black with a matte finish. A small white sticker is visible on the palm rest near the hand holding it.",
+      "All photos have a watermark: 'OLABOITECH ENTERPRISES'.",
+      "The laptop is being held in front of a glass display case containing other laptops (Dell, HP)."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Lenovo",
+      "model": "ThinkPad T14 Gen 1",
+      "read_from": [
+        "photo 1 palm rest",
+        "photo 2 palm rest"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Lenovo thinkpad t14 gen 1",
+        "verdict": "supported",
+        "evidence": "ThinkPad logo visible on palm rest in photo 1 and photo 2."
+      },
+      {
+        "claim": "Intel core i5(10th gen)",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows Task Manager with 'Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz', which is a 10th gen i5."
+      },
+      {
+        "claim": "16gb memory & 256gb ssd",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows Task Manager: '4.00 GB of 16.00 GB' memory and '256 GB SSD (C:)'."
+      },
+      {
+        "claim": "Keyboard light",
+        "verdict": "unverified",
+        "evidence": "Photo 1 shows keyboard with keys that may be backlit, but no light is visible. No photo shows the keyboard lit. The claim is not proven."
+      },
+      {
+        "claim": "Windows...",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows Windows Task Manager and desktop, confirming Windows OS."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Keyboard backlight not working or not present",
+        "proof": "A photo showing the keyboard with the backlight turned on in a dark environment.",
+        "if_unproven": "priced as not having keyboard light"
+      },
+      {
+        "risk": "Battery health or condition not shown",
+        "proof": "A screenshot of the battery health report or a video showing battery charge cycles and capacity.",
+        "if_unproven": "priced as unknown battery health, which may reduce value"
+      },
+      {
+        "risk": "Screen condition (scratches, dead pixels, burn-in) not visible",
+        "proof": "A close-up photo of the screen showing a white screen or full-screen test pattern.",
+        "if_unproven": "priced as screen condition unknown, which may reduce value"
+      },
+      {
+        "risk": "Laptop has physical damage or wear not visible in photos",
+        "proof": "A full 360-degree video or close-up photos of all edges, hinges, and bottom casing.",
+        "if_unproven": "priced as possibly damaged, which may reduce value"
+      }
+    ],
+    "proof_requests": [
+      "A photo or video showing the keyboard backlight turned on.",
+      "A screenshot of the battery health report.",
+      "A close-up photo of the screen with a white background to check for dead pixels or damage.",
+      "Photos of the laptop's bottom casing and hinges to check for physical damage."
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a Lenovo ThinkPad T14 Gen 1 with confirmed 10th gen i5, 16GB RAM, and 256GB SSD. The keyboard light claim is unverified but not critical to core functionality. Hidden risks like battery health and screen condition are noted but do not prevent pricing; the item can be priced at its worst case (e.g., no keyboard light, unknown battery health)."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 85484,
+    "input_tokens": 2593,
+    "output_tokens": 1047,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "670afddcc72cea30debaa76127b35ae3",
+    "error": null
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows two mono-crystalline solar panels leaning against an exterior wall, outdoors on a paved area.",
+      "Panels appear to be standard aluminium-framed modules; no visible wattage, brand, or model sticker is legible in the image.",
+      "A faint watermark reading 'IZUTECH SOLAR ENERGY' is overlaid on the photo, apparently the seller's own branding, not a manufacturer label on the panel.",
+      "No close-up of the junction box, back sheet, or rating label is provided.",
+      "No scale reference or size markers to estimate cell count or physical dimensions precisely."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel (mono-crystalline, quantity 2)",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Izutech solar energy specialize in all solar equipment such as inverter, panels, charge controller...",
+        "verdict": "unverifiable_remote",
+        "evidence": "General business description, not tied to a visible attribute of this specific item."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Wattage/power rating unknown, which is the primary price driver for solar panels.",
+        "proof": "Close-up photo of the rating label/nameplate on the back of each panel showing wattage, voltage, and cell count.",
+        "if_unproven": "Cannot even set a worst-case price without this, since comparables range from ~42,000 to 155,000 NGN depending on wattage."
+      },
+      {
+        "risk": "New vs used condition not stated or shown; micro-cracks, hotspots, or discoloration could reduce value.",
+        "proof": "Clear daylight photo of the full panel face and back, plus any visible scratches or cell damage.",
+        "if_unproven": "Price as used/worst condition once wattage is known."
+      },
+      {
+        "risk": "Functionality (actual power output) unverified; panel could be degraded or dead.",
+        "proof": "Video or photo of a multimeter reading open-circuit voltage under sunlight.",
+        "if_unproven": "Price as untested/non-functional until proven."
+      },
+      {
+        "risk": "Quantity and matching specs of the two panels not confirmed (could be mismatched models).",
+        "proof": "Photo showing both nameplates side by side.",
+        "if_unproven": "Price each panel individually at worst case, assume lowest matching spec."
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the rating/nameplate label on each panel (wattage, voltage, cell count).",
+      "Photo or video of a voltage/current test under sunlight to confirm the panels work.",
+      "Clear full-frontal and back shots of both panels to check for cracks or damage.",
+      "Confirmation of brand/model if any markings exist on the frame or junction box."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo shows two unlabeled solar panels with no readable wattage, brand, or model, and wattage is the key attribute that sets price among comparables ranging widely; a nameplate or spec photo is needed before even a worst-case price can be assigned.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 18513,
+    "input_tokens": 2995,
+    "output_tokens": 1641,
+    "cost_usd": 0.018847,
+    "replayed": false,
+    "fixture_key": "5ec7d35bbadd53e921fa1b51e452b25a",
+    "error": null
+  }
+}

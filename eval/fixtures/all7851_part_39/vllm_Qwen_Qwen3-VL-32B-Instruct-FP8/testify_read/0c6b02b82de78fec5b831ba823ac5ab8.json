@@ -1,0 +1,104 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Silver laptop with a 360-degree hinge, keyboard visible, 'SPECTRE' written on the palm rest, Intel Core i7 sticker on the bottom right. Screen is off, reflecting lights and surroundings.",
+      "Photo 1: Same laptop, screen on, showing Windows desktop with icons and taskbar. 'HEWLETT-PACKARD' visible on the bottom bezel. Keyboard and trackpad same as photo 0.",
+      "Photo 2: Laptop closed, showing the back. 'HEWLETT-PACKARD' logo centered on the lid. Hinge and bottom panel visible. No model number or serial visible.",
+      "All photos show a watermark 'PLATINUM COMPUTERS' and 'POSTED ON JIJI'.",
+      "The laptop appears to be a 2-in-1 convertible with a touchscreen, as indicated by the hinge and seller's claim."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "HP Spectre 13 x360 laptop",
+      "brand": "Hewlett-Packard",
+      "model": null,
+      "read_from": [
+        "photo 0 keyboard: 'SPECTRE'",
+        "photo 1 screen bezel: 'HEWLETT-PACKARD'",
+        "photo 2 lid: 'HEWLETT-PACKARD'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP Spectre 13 x360 Laptop",
+        "verdict": "supported",
+        "evidence": "Photo 0: 'SPECTRE' visible on palm rest; photo 1 and 2: 'HEWLETT-PACKARD' visible on bezel and lid. The 360-degree hinge confirms the x360 model type."
+      },
+      {
+        "claim": "Core i7, 6th Generation",
+        "verdict": "unverified",
+        "evidence": "Photo 0: Intel Core i7 sticker visible, but no generation indicated. No system info or BIOS screen shown to confirm 6th gen."
+      },
+      {
+        "claim": "8gb Ram",
+        "verdict": "unverifiable_remote",
+        "evidence": "No system information, BIOS, or task manager screenshot shown. Cannot verify RAM from photos alone."
+      },
+      {
+        "claim": "256g SSD",
+        "verdict": "unverifiable_remote",
+        "evidence": "No disk management or system info shown. Cannot verify storage type or size from photos."
+      },
+      {
+        "claim": "13 inches",
+        "verdict": "supported",
+        "evidence": "The laptop is visibly small, consistent with a 13-inch screen. The model name 'Spectre 13' supports this."
+      },
+      {
+        "claim": "Touchscreen Display",
+        "verdict": "supported",
+        "evidence": "The 360-degree hinge and the seller's claim are consistent with a touchscreen. No direct touch interaction shown, but design implies it."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The CPU is not 6th generation Intel Core i7",
+        "proof": "A screenshot of the system information or BIOS showing the CPU model.",
+        "if_unproven": "Priced as if it were a lower-generation or non-i7 CPU, which reduces value."
+      },
+      {
+        "risk": "RAM is less than 8GB or not working properly",
+        "proof": "A screenshot of the Windows Task Manager or system information showing 8GB RAM.",
+        "if_unproven": "Priced as if it has less than 8GB RAM or is faulty, reducing value."
+      },
+      {
+        "risk": "SSD is not 256GB or is failing",
+        "proof": "A screenshot of Disk Management or system info showing 256GB SSD.",
+        "if_unproven": "Priced as if it has less storage or is faulty, reducing value."
+      },
+      {
+        "risk": "Laptop has physical damage or wear not visible in photos",
+        "proof": "Close-up photos of the screen, hinges, keyboard, and ports for scratches, cracks, or loose parts.",
+        "if_unproven": "Priced as if it has hidden damage, reducing value."
+      },
+      {
+        "risk": "Battery health is poor or not included",
+        "proof": "A screenshot of battery health from Windows or a video showing battery life during use.",
+        "if_unproven": "Priced as if battery is dead or degraded, reducing value."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of system information showing CPU model, RAM, and storage.",
+      "Close-up photos of the screen, keyboard, hinges, and ports for damage.",
+      "Video or photo of the laptop in tablet mode to confirm touchscreen functionality.",
+      "Screenshot of battery health or a video showing battery life."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The laptop is identifiable as an HP Spectre 13 x360, but critical specifications like CPU generation, RAM, and SSD size cannot be verified from the photos. Hidden risks such as physical damage, battery health, and component failure are not visible. Without proof of these, the item cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 91703,
+    "input_tokens": 2803,
+    "output_tokens": 1164,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "0c6b02b82de78fec5b831ba823ac5ab8",
+    "error": null
+  }
+}

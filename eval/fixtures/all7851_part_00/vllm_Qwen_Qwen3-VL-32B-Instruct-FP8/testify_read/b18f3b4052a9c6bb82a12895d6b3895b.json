@@ -1,0 +1,75 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a car engine with a black intake manifold labeled 'S-TEC I 16V'.",
+      "The engine appears to be in a workshop or outdoor setting with dirt and debris around.",
+      "Photo 1 shows the front of the engine with the throttle body, various hoses, and sensors visible.",
+      "The engine has signs of use: grime, oil residue, and some wear on components.",
+      "No visible damage to the block or major components, but no internal inspection is possible.",
+      "The label 'S-TEC I 16V' is clearly visible on the intake manifold in photo 0.",
+      "No brand or model of the vehicle is visible in the photos.",
+      "The seller claims the engine is 'fairly used but like a brand new' and 'imported from...' (incomplete)."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "car engine",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 intake manifold label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "fairly used but like a brand new",
+        "verdict": "unverified",
+        "evidence": "Photos show surface grime and wear; no internal condition or test data is visible. The claim cannot be confirmed remotely."
+      },
+      {
+        "claim": "imported from...",
+        "verdict": "unverifiable_remote",
+        "evidence": "No proof of origin is visible in the photos. The seller's text is incomplete and unverifiable."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "internal wear or damage (e.g., worn bearings, cracked block, seized components)",
+        "proof": "a video of the engine running or a teardown inspection showing internal components",
+        "if_unproven": "priced as not working or severely worn"
+      },
+      {
+        "risk": "engine not matching claimed specifications (e.g., wrong model or displacement)",
+        "proof": "a clear photo of the engine block casting number or VIN tag",
+        "if_unproven": "priced as unknown model, which may be lower value"
+      },
+      {
+        "risk": "missing or damaged parts (e.g., sensors, gaskets, timing components)",
+        "proof": "a full 360-degree photo or video showing all sides and components",
+        "if_unproven": "priced as incomplete or requiring repairs"
+      }
+    ],
+    "proof_requests": [
+      "A video of the engine running or a teardown showing internal components.",
+      "A clear photo of the engine block casting number or VIN tag.",
+      "A full 360-degree photo or video showing all sides and components.",
+      "Proof of origin or import documentation if available."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The engine is identifiable as a car engine with 'S-TEC I 16V' on the intake manifold, but the brand and model are not visible. The seller's claims about condition and origin are unverified or unverifiable. Hidden risks like internal damage or missing parts cannot be assessed from current photos. More proof is needed to price accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 57208,
+    "input_tokens": 2281,
+    "output_tokens": 704,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "b18f3b4052a9c6bb82a12895d6b3895b",
+    "error": null
+  }
+}

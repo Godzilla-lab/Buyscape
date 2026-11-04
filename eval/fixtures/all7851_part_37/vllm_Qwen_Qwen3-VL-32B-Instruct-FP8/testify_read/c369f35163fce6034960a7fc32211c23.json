@@ -1,0 +1,91 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Open laptop showing Windows 11 desktop with blue default wallpaper. Dell logo visible below screen. Keyboard and trackpad appear clean. Intel Core i7 sticker on lower right of palm rest.",
+      "Photo 1: Same open laptop from slightly different angle, same desktop. No visible damage to screen or keyboard.",
+      "Photo 2: Closed laptop lid, silver color, Dell logo centered. Green circular sticker on lower right. No visible dents or scratches from this angle."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Dell",
+      "model": "Latitude 5430",
+      "read_from": [
+        "seller's text",
+        "photo 0 screen bezel (Dell logo)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Clean USA Pre Owned",
+        "verdict": "unverified",
+        "evidence": "Photos show no visible dirt or damage, but 'USA Pre Owned' cannot be verified remotely. No proof of origin or condition history."
+      },
+      {
+        "claim": "Dell Latitude 5430 Laptop",
+        "verdict": "supported",
+        "evidence": "Seller's text and Dell logo visible in photo 0 and 2. Model name not visible in photos, but consistent with branding and design."
+      },
+      {
+        "claim": "12th Generation Intel Core i7 Processor",
+        "verdict": "unverifiable_remote",
+        "evidence": "Intel Core i7 sticker visible in photo 0 and 1, but no indication of generation. Cannot confirm 12th Gen from photos alone."
+      },
+      {
+        "claim": "Intel UHD",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible GPU info. Screen shows Windows 11, but no system specs visible. Cannot confirm Intel UHD graphics."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Processor is not 12th Gen Intel Core i7",
+        "proof": "Photo of system information screen (e.g., Windows About or CPU-Z) showing exact processor model.",
+        "if_unproven": "Priced as lower-generation or non-i7 processor, which reduces value."
+      },
+      {
+        "risk": "Graphics is not Intel UHD",
+        "proof": "Photo of system information screen showing GPU details.",
+        "if_unproven": "Priced as having integrated graphics of unknown type, which may be less valuable."
+      },
+      {
+        "risk": "Laptop has hidden physical damage or wear not visible in photos",
+        "proof": "Full 360-degree video or photos showing all edges, hinges, ports, and underside.",
+        "if_unproven": "Priced as potentially damaged or worn, reducing value."
+      },
+      {
+        "risk": "Battery health is poor or not included",
+        "proof": "Photo of battery health report (e.g., from Windows Battery Report or third-party tool) or video showing battery life during use.",
+        "if_unproven": "Priced as battery not working or degraded, which reduces value."
+      },
+      {
+        "risk": "Laptop does not power on or has software issues",
+        "proof": "Video showing boot process, login, and basic operations (e.g., opening a browser).",
+        "if_unproven": "Priced as not working, which drastically reduces value."
+      }
+    ],
+    "proof_requests": [
+      "Video showing full boot process and basic operations (e.g., opening a browser).",
+      "Photo of system information screen showing exact processor model and GPU.",
+      "Photo of battery health report or video showing battery life during use.",
+      "Full 360-degree photos or video showing all edges, hinges, ports, and underside."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and brand are identifiable, but critical claims about processor generation, graphics, and condition cannot be verified from current photos. Hidden risks like battery health, physical damage, and functionality affect pricing significantly. Proof is needed to price accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 73841,
+    "input_tokens": 2793,
+    "output_tokens": 903,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "c369f35163fce6034960a7fc32211c23",
+    "error": null
+  }
+}

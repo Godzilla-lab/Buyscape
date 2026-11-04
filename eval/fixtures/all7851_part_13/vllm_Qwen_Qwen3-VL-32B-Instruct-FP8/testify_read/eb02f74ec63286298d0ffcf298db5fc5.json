@@ -1,0 +1,92 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a silver all-in-one desktop with a large screen displaying Windows 10. The screen has a 'SONY VAIO' watermark and a 'POSTED ON JIJI' watermark. The device is on a red cabinet with visible cables and a rack in the background.",
+      "Photo 1 shows the same device from a front-left angle. The screen displays a VAIO-themed desktop with the VAIO logo. The brand 'VAIO' is visible on the top bezel, and 'SONY' is on the bottom bezel. The device has a silver frame and a thick bezel.",
+      "Photo 2 shows the system properties window open on the screen. It lists Windows 10, 6GB RAM, and a processor labeled 'Intel(R) Core(TM)2 Duo CPU E8400 @ 3.00GHz'. The screen also shows 'SONY VAIO' in the system info. The device is on a red surface with a keyboard and other items in the background."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "all-in-one desktop PC",
+      "brand": "Sony VAIO",
+      "model": "unspecified",
+      "read_from": [
+        "photo 0 screen",
+        "photo 1 top bezel",
+        "photo 2 screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Sony VAIO all-in-one desktop pc",
+        "verdict": "supported",
+        "evidence": "Photos 0, 1, and 2 show the device with 'VAIO' and 'SONY' branding on the bezel and screen."
+      },
+      {
+        "claim": "intel core 2duo 2.92ghz",
+        "verdict": "contradicted",
+        "evidence": "Photo 2 shows 'Intel(R) Core(TM)2 Duo CPU E8400 @ 3.00GHz' in the system properties window, not 2.92GHz."
+      },
+      {
+        "claim": "6gb ram",
+        "verdict": "supported",
+        "evidence": "Photo 2 shows '6.00 GB' under 'Installed Memory (RAM)' in the system properties window."
+      },
+      {
+        "claim": "webcam",
+        "verdict": "unverified",
+        "evidence": "No webcam is visible in any photo. The screen shows a Windows 10 desktop, but no camera hardware is shown."
+      },
+      {
+        "claim": "nvidia gpu support",
+        "verdict": "unverifiable_remote",
+        "evidence": "The system properties in photo 2 do not show GPU details. No NVIDIA branding or driver info is visible. The seller's claim cannot be verified from the photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The device may not be in working condition or may have hardware issues not visible in photos.",
+        "proof": "A video showing the device powering on, running applications, and displaying no screen flicker or artifacts.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The GPU may not be NVIDIA or may be integrated, contradicting the seller's claim.",
+        "proof": "A screenshot of the device manager or DirectX Diagnostic Tool showing the GPU model.",
+        "if_unproven": "priced as having no dedicated GPU"
+      },
+      {
+        "risk": "The webcam may be non-functional or missing.",
+        "proof": "A video showing the webcam in use, capturing a live feed.",
+        "if_unproven": "priced as no webcam"
+      },
+      {
+        "risk": "The device may have physical damage or wear not visible in the photos, such as scratches, dead pixels, or loose ports.",
+        "proof": "A 360-degree video or close-up photos of the entire device, including ports, bezel, and back panel.",
+        "if_unproven": "priced as having unknown physical condition"
+      }
+    ],
+    "proof_requests": [
+      "A video showing the device powering on, running applications, and displaying no screen issues.",
+      "A screenshot of the device manager or DirectX Diagnostic Tool showing the GPU model.",
+      "A video showing the webcam in use.",
+      "Close-up photos or a 360-degree video of the entire device, including ports and back panel."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The device is identifiable as a Sony VAIO all-in-one desktop, and some claims are supported or contradicted. However, critical claims like GPU type and webcam functionality cannot be verified, and hidden risks like physical damage or non-working components affect pricing. Proof is needed to price accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 84407,
+    "input_tokens": 2179,
+    "output_tokens": 1032,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "eb02f74ec63286298d0ffcf298db5fc5",
+    "error": null
+  }
+}

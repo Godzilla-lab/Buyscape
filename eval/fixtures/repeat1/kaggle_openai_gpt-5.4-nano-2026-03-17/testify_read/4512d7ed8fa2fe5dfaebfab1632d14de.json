@@ -1,0 +1,69 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Multiple stacks of used tires in a warehouse setting.",
+      "Photos show mixed tire sizes/fitments (some appear like passenger/van tires; others look like larger tires), but exact size markings are not readable.",
+      "Tread patterns are visible; some tires show uneven wear/age but overall condition cannot be quantified from these angles.",
+      "No clear brand/model names are readable on the tire sidewalls in the provided photos.",
+      "Seller watermark text appears on images, but it does not confirm tire origin/brand."
+    ],
+    "identity": {
+      "status": "unknown",
+      "kind": null,
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Major distributor of Belgium tires",
+        "verdict": "unverifiable_remote",
+        "evidence": "No Belgium origin, brand, or DOT/manufacturing details are readable on the tire sidewalls in photos 0-2."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Exact tire size/load rating/speed rating is not readable, so the wrong category could be priced.",
+        "proof": "A close-up photo of each tire sidewall showing the full marking (e.g., something like 205/55R16 91V) and DOT code.",
+        "if_unproven": "Price as mixed used tires with unknown size and unknown ratings (worst-case: lower-grade/less desirable fitment)."
+      },
+      {
+        "risk": "Brand/model is not readable; could be low-demand brands or mismatched sets.",
+        "proof": "Close-up photo of the sidewall brand/model text for at least 2 tires (front and one from a different stack).",
+        "if_unproven": "Price as generic used tires (worst-case: no premium brand)."
+      },
+      {
+        "risk": "Condition (tread depth, sidewall cracks, repairs/patches) cannot be confirmed from these wide shots.",
+        "proof": "Clear close-up of tread surface and sidewall (including any cracks/repairs) plus a tread-depth measurement photo (or a gauge reading).",
+        "if_unproven": "Price as not fully verified condition (worst-case: moderate wear and possible minor defects)."
+      },
+      {
+        "risk": "Quantity/assortment is unclear (how many of each size).",
+        "proof": "A photo showing the full count per size (or a list) with each size clearly labeled.",
+        "if_unproven": "Price as an assortment with uncertain quantities (worst-case: smaller usable quantities per size)."
+      }
+    ],
+    "proof_requests": [
+      "For each tire size you want to sell: a close-up sidewall photo showing the full tire code (width/aspect/rim), load index, speed rating, and DOT date.",
+      "A close-up photo of tread depth (ideally with a gauge reading) and sidewall condition (cracks/repairs).",
+      "A photo/list showing how many pieces of each size are available."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photos confirm used tires are present, but the key details needed to price correctly (exact size/ratings, brand/model, and condition) are not readable. Without those, any price would be guesswork."
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_read",
+    "latency_ms": 4890,
+    "input_tokens": 2686,
+    "output_tokens": 728,
+    "cost_usd": 0.001447,
+    "replayed": false,
+    "fixture_key": "4512d7ed8fa2fe5dfaebfab1632d14de",
+    "error": null
+  }
+}

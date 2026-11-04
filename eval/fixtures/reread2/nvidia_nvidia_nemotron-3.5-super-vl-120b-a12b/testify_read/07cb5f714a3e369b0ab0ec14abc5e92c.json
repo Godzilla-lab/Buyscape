@@ -1,0 +1,93 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a green Corolla CL7800E2R gasoline generator on top with AC 230V outlets, DC 12V, AVR, and circuit breakers.",
+      "A battery labeled LY12-QF7-0 is connected to the Corolla generator.",
+      "Below it is a yellow Elepaq/Yadofeng generator with ENG: 5KW visible.",
+      "To the left is a partial black generator with CONSTANT visible.",
+      "No kVA rating is legible on the Corolla panel in photo 0.",
+      "Internal windings are not visible in any photo."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "gasoline generator",
+      "brand": "Corolla",
+      "model": "CL7800E2R",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Corolla petrol generator",
+        "verdict": "supported",
+        "evidence": "photo 0 reads COROLLA GASOLINE GENERATOR CL7800E2R"
+      },
+      {
+        "claim": "4.5kva",
+        "verdict": "unverified",
+        "evidence": "kVA rating not legible on photo 0 panel"
+      },
+      {
+        "claim": "100% copper wire",
+        "verdict": "unverifiable_remote",
+        "evidence": "internal windings not visible in any photo"
+      },
+      {
+        "claim": "1 year warranty",
+        "verdict": "unverifiable_remote",
+        "evidence": "warranty document not shown"
+      },
+      {
+        "claim": "payment on delivery",
+        "verdict": "unverifiable_remote",
+        "evidence": "transaction term not visible in photo"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine may not start or run under load",
+        "proof": "video of generator starting and powering a load",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Alternator may be aluminum or copper-clad, not 100% copper",
+        "proof": "close-up of stator windings or manufacturer spec sheet",
+        "if_unproven": "as non-copper alternator"
+      },
+      {
+        "risk": "Actual output may be below 4.5kVA",
+        "proof": "close-up of rating plate showing kVA/kW",
+        "if_unproven": "at lower unknown capacity"
+      },
+      {
+        "risk": "Warranty may be invalid or absent",
+        "proof": "warranty card or receipt with seller stamp",
+        "if_unproven": "as no warranty"
+      }
+    ],
+    "proof_requests": [
+      "Video of the Corolla generator starting and running under load",
+      "Close-up photo of the rating plate showing kVA/kW",
+      "Photo of the alternator stator windings or copper wire proof",
+      "Warranty card or receipt"
+    ],
+    "decision": "price",
+    "reason": "The Corolla CL7800E2R gasoline generator is identifiable from photo 0, so it can be priced at its worst case while unproven claims are listed as risks."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 25040,
+    "input_tokens": 1853,
+    "output_tokens": 3909,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "07cb5f714a3e369b0ab0ec14abc5e92c",
+    "error": null
+  }
+}

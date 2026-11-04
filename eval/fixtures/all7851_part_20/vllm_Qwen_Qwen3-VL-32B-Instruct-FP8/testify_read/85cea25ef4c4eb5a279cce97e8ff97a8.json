@@ -1,0 +1,96 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 and Photo 1 show multiple electric bicycles in a store setting, with the brand name 'HERO' clearly visible on the frame of each bike.",
+      "The bikes have thick, knobby tires, front suspension forks, and black seats with rear fenders.",
+      "The frames are primarily black with red and blue accents, and the word 'HERO' is printed in large white or blue letters on the downtube.",
+      "The tires have 'MADE IN CHINA' printed on the sidewall.",
+      "The bikes appear to be identical models, arranged in a row, suggesting they are for sale in bulk or as stock.",
+      "The background shows shelves with other goods, indicating a retail or warehouse environment.",
+      "No visible damage or wear is apparent on the bikes in the photos.",
+      "The seller claims the products are 'brand new, imported, genuine and of high standard'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "electric bicycle",
+      "brand": "HERO",
+      "model": null,
+      "read_from": [
+        "photo 0 frame",
+        "photo 1 frame"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Our products are brand new",
+        "verdict": "unverified",
+        "evidence": "Photos show no signs of use, but no proof of being new (e.g., packaging, tags, or serial numbers)."
+      },
+      {
+        "claim": "imported",
+        "verdict": "unverifiable_remote",
+        "evidence": "No import documentation or country of origin label visible. Tires say 'MADE IN CHINA', but that does not confirm import status."
+      },
+      {
+        "claim": "genuine",
+        "verdict": "unverified",
+        "evidence": "Brand name 'HERO' is visible, but no official certification or authenticity proof is shown."
+      },
+      {
+        "claim": "of high standard",
+        "verdict": "unverifiable_remote",
+        "evidence": "No technical specifications, certifications, or quality tests shown. Subjective claim."
+      },
+      {
+        "claim": "We deliver to your door step",
+        "verdict": "unverifiable_remote",
+        "evidence": "No proof of delivery service or logistics capability shown in photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The bikes may be used or refurbished, not brand new",
+        "proof": "Photo showing original packaging, tags, or a receipt with purchase date.",
+        "if_unproven": "priced as used or refurbished, which reduces value"
+      },
+      {
+        "risk": "The bikes may be counterfeit or unauthorized copies of the HERO brand",
+        "proof": "Photo of a serial number or official authenticity label from the manufacturer.",
+        "if_unproven": "priced as unbranded or counterfeit, which reduces value"
+      },
+      {
+        "risk": "Battery or motor may be damaged or not functional",
+        "proof": "Video or photo showing the bike powered on, motor running, and battery indicator lit.",
+        "if_unproven": "priced as not working, which reduces value"
+      },
+      {
+        "risk": "The bikes may not be imported or may be locally assembled with imported parts",
+        "proof": "Photo of import documentation or customs clearance label.",
+        "if_unproven": "priced as locally assembled, which may reduce value"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the bike's original packaging or tags to verify it is brand new.",
+      "Photo of the battery and motor with serial numbers or authenticity labels.",
+      "Video showing the bike powered on and riding to verify functionality.",
+      "Photo of import documentation or customs clearance if claiming 'imported'."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The brand 'HERO' is visible, but key claims like 'brand new', 'genuine', and 'imported' cannot be verified from the photos alone. Hidden risks include possible counterfeiting, non-functionality, or used condition. Without proof, the item cannot be priced accurately and must be evaluated further."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 75316,
+    "input_tokens": 1869,
+    "output_tokens": 907,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "85cea25ef4c4eb5a279cce97e8ff97a8",
+    "error": null
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: black UPS unit with 'BLUE GATE' branding embossed on top, blue vertical strip with power button and three indicator lights (labeled with small icons, not clearly readable)",
+      "Photo 1: same unit from a rear/side angle showing a power cable with a UK-style 3-pin plug, unit resting on tiled floor",
+      "No visible model number, VA/capacity rating, or label with specifications in either photo",
+      "No battery compartment, cables (output sockets), or rear panel with ports/ratings shown",
+      "Unit appears used, with some surface scuffing and dust",
+      "No photo of unit powered on, no display of charge/load, no indication of battery health"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "UPS (uninterruptible power supply)",
+      "brand": "Blue Gate",
+      "model": null,
+      "read_from": [
+        "photo 0 embossed text",
+        "photo 1 embossed text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "UPS available",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 1 show a UPS unit branded Blue Gate"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery health/capacity unknown \u2014 UPS batteries degrade and a unit could fail to hold charge",
+        "proof": "Video of unit powered on, running a load, and sustaining power after mains is cut",
+        "if_unproven": "priced as battery not holding charge / needing replacement"
+      },
+      {
+        "risk": "No VA/wattage rating visible, which determines what it can power and its market value",
+        "proof": "Clear photo of the rating label (usually on side or back) showing VA/Watt capacity",
+        "if_unproven": "priced at the lowest common capacity for unbranded/generic small UPS of this size"
+      },
+      {
+        "risk": "Output sockets and rear panel condition unknown (could be damaged, missing covers, or non-functional ports)",
+        "proof": "Photo of rear panel showing output sockets and any switches",
+        "if_unproven": "priced as if sockets condition unverified/possibly faulty"
+      },
+      {
+        "risk": "Overall functional status (does it turn on, charge, alarm properly) unverified",
+        "proof": "Short video clip powering it on and showing LED behavior per the seller's description",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Age/usage history unknown; UPS units lose battery life over years even if cosmetically fine",
+        "proof": "Any purchase date, sticker date code, or seller statement on age (photo of date label if present)",
+        "if_unproven": "priced as old/near end-of-life stock"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the rating label (VA/Watt, model number) usually on the side or bottom",
+      "Video of the UPS powered on, charging, and holding a connected load after mains is unplugged",
+      "Photo of the rear panel with output sockets and ports",
+      "Any info on age or purchase date of the unit"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The UPS brand is identifiable but no capacity/VA rating, model number, or functional proof is visible in the photos, so even a worst-case price cannot be set without this missing label and power-on evidence."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 13775,
+    "input_tokens": 3764,
+    "output_tokens": 1037,
+    "cost_usd": 0.014739,
+    "replayed": false,
+    "fixture_key": "4b248ace781508ac5a4c2ce7dd56e639",
+    "error": null
+  }
+}

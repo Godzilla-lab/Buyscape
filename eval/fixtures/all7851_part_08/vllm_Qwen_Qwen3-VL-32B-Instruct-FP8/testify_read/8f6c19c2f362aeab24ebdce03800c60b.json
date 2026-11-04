@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Back of a purple Samsung phone with a large camera module and 'SAMSUNG' logo visible. A pink sticky note says 'Dented back, Screen Burn, S22 Ultra 128/12'.",
+      "Photo 1: Front screen showing 'Settings' menu with 'Sign in to your Galaxy' and 'Galaxy AI' options, indicating recent Samsung software. Status bar shows 49% battery and time 4:42.",
+      "Photo 2: Front screen off, showing a dark, reflective surface with visible smudges and fingerprints. No screen burn is visible in this photo."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "Samsung S22 Ultra smartphone",
+      "brand": "Samsung",
+      "model": "S22 Ultra",
+      "read_from": [
+        "photo 0 back panel",
+        "photo 1 screen text 'Galaxy AI' and interface design"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Samsung S22 Ultra 128gb",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows 'SAMSUNG' and camera module consistent with S22 Ultra; photo 1 shows Galaxy AI, a feature of S22 Ultra. The sticky note in photo 0 also says 'S22 Ultra 128/12'."
+      },
+      {
+        "claim": "With trace of screen burn",
+        "verdict": "unverified",
+        "evidence": "Photo 2 shows the screen off, but no visible screen burn is apparent. Photo 1 shows the screen on, but screen burn is not visible in active display. No photo shows the screen with static content to confirm burn-in."
+      },
+      {
+        "claim": "Works fine",
+        "verdict": "unverified",
+        "evidence": "Photo 1 shows the settings menu, indicating the phone is powered on and responsive. However, no functional test (e.g., camera, calls, apps) is shown. No proof of full functionality."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Screen burn may be present but not visible in current photos",
+        "proof": "A photo of the screen displaying a static image (e.g., white screen, clock) for 30 seconds to reveal burn-in.",
+        "if_unproven": "priced as having screen burn, which reduces value"
+      },
+      {
+        "risk": "Phone may have hardware issues (camera, battery, charging) not shown",
+        "proof": "Video or photo showing camera operation, charging, and battery health (e.g., battery percentage over time).",
+        "if_unproven": "priced as potentially faulty, reducing value"
+      },
+      {
+        "risk": "Dented back as noted on sticky note in photo 0",
+        "proof": "Close-up photo of the dent on the back panel.",
+        "if_unproven": "priced as having cosmetic damage, reducing value"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the screen displaying a static white or bright image to check for screen burn.",
+      "Video or photo showing camera operation and charging.",
+      "Close-up photo of the dent on the back panel.",
+      "Photo of the phone's battery health or usage stats."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identifiable as Samsung S22 Ultra, but key claims like screen burn and full functionality are unverified. Hidden risks like screen burn and hardware issues cannot be assessed from current photos. Proof is needed to price accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 63275,
+    "input_tokens": 2784,
+    "output_tokens": 792,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "8f6c19c2f362aeab24ebdce03800c60b",
+    "error": null
+  }
+}

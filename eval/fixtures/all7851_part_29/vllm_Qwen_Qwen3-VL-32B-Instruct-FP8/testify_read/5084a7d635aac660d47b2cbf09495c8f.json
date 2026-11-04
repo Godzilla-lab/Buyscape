@@ -1,0 +1,87 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the iPhone's Battery Health screen: Maximum Capacity 81%, Cycle Count 611, Manufacture Date August 2023, First Use October 2023.",
+      "Photo 1 shows the back of a pink iPhone with a sticker reading 'iPhone 15 128gb'. The camera module has two lenses and a flash, consistent with iPhone 15 or 15 Plus.",
+      "Photo 2 shows the iPhone's home screen with a 'Finish Setting Up iPhone' prompt, indicating the device is not fully set up or is in a reset state.",
+      "All photos have a watermark 'POSTED ON JIJI DEETECH GADGETZ'."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "iPhone 15 128GB",
+      "brand": "Apple",
+      "model": null,
+      "read_from": [
+        "photo 1 sticker",
+        "photo 0 screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "iPhone 15 128gb",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows a sticker with 'iPhone 15 128gb'. Photo 0 shows battery health screen consistent with iPhone 15 series."
+      },
+      {
+        "claim": "Esim unlocked",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows the SIM settings or carrier status. Cannot verify eSIM unlock status remotely."
+      },
+      {
+        "claim": "85BH",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows 'Maximum Capacity 81%', not 85%. The seller's claim is inaccurate."
+      },
+      {
+        "claim": "DIRECT",
+        "verdict": "unverifiable_remote",
+        "evidence": "No proof of direct ownership or source. Could be reseller or second-hand."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery health lower than claimed (81% vs 85%)",
+        "proof": "Photo 0 already shows 81% \u2014 this is confirmed, not a risk.",
+        "if_unproven": "Already proven as 81%, so priced accordingly."
+      },
+      {
+        "risk": "Device may be iCloud locked or not truly unlocked",
+        "proof": "Photo showing Settings > General > About > Carrier or Activation Lock status.",
+        "if_unproven": "Priced as potentially locked, which reduces value significantly."
+      },
+      {
+        "risk": "Physical damage or wear not visible in photos",
+        "proof": "Close-up photos of edges, screen, and back for scratches, cracks, or dents.",
+        "if_unproven": "Priced as having possible hidden damage, reducing value."
+      },
+      {
+        "risk": "Sticker may be fake or device is not genuine iPhone 15",
+        "proof": "Photo of the device's serial number from Settings > General > About, or the back plate with model number.",
+        "if_unproven": "Priced as potentially counterfeit or mislabeled, which drastically reduces value."
+      }
+    ],
+    "proof_requests": [
+      "Photo of Settings > General > About showing serial number and model number.",
+      "Photo of Settings > Cellular > Cellular Data Options to confirm eSIM unlock status.",
+      "Close-up photos of the device's edges, screen, and back for physical condition.",
+      "Video of the device turning on and off, and camera functionality."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The device appears to be an iPhone 15 128GB, but critical claims like eSIM unlock status and authenticity cannot be verified remotely. Battery health is confirmed at 81%, contradicting the seller's 85% claim. Hidden risks include iCloud lock, physical damage, and authenticity. Proof is needed to price accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 69530,
+    "input_tokens": 2785,
+    "output_tokens": 874,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "5084a7d635aac660d47b2cbf09495c8f",
+    "error": null
+  }
+}

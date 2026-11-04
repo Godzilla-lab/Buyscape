@@ -1,0 +1,521 @@
+"""Putting an item to a model: the answer key never leaks, prices come only from
+comparables, and a planted lie that raises the price is caught by the score."""
+
+from pathlib import Path
+
+from buyscape.providers.base import CallMeta, ModelRequest
+from buyscape.testify import comparables as comps
+from buyscape.testify.answer import IdentityAnswer, PriceChoice, PricePick, Reading
+from buyscape.testify.run import lie_for, reading_request, run_item
+from buyscape.testify.schema import Answer, Item, PriceTruth
+from buyscape.testify.score import identity_correct, kind_matches, score
+
+
+def _item(item_id: str, kind: str, title: str, price: int, market: str = "lagos", **kw) -> Item:
+    return Item(
+        id=item_id,
+        source="jiji",
+        url=f"https://jiji.ng/x/{item_id}.html",
+        split="dev",
+        tier="small_goods",
+        market=market,
+        seller_text="Very strong, no fault",
+        answer=Answer(
+            title=title, kind=kind,
+            price=PriceTruth(ngn=price, used=kw.pop("used", True), observed_on=kw.pop("on", "2026-10-14")),
+        ),
+        **kw,
+    )
+
+
+POOL_ITEMS = [
+    _item("a", "washing machine", "LG Washing Machine 7kg", 60000),
+    _item("b", "washing machine", "Nexus Washing Machine", 45000),
+    _item("c", "washing machine", "Hisense Washing Machine", 80000, market="abuja"),
+    _item("d", "sewing machine", "Butterfly Sewing Machine", 30000),
+    _item("e", "washing machine", "Brand New LG Washer", 250000, used=False),
+    _item("f", "washing machine", "Undated washer", 50000, on=None),
+    _item("g", "washing machine", "Samsung washing machine", 70000, exclude="new stock, not second-hand"),
+]
+
+
+def test_the_pool_keeps_only_dated_second_hand_asking_prices():
+    pool = comps.build_pool(POOL_ITEMS)
+    assert {c.item_id for c in pool} == {"a", "b", "c", "d"}
+
+
+def test_comparables_match_the_kind_and_prefer_the_same_city():
+    pool = comps.build_pool(POOL_ITEMS)
+    target = _item("t", "washing machine", "Old washing machine", 50000)
+    found = comps.find(IdentityAnswer(status="by_type", kind="washing machines"), "lagos", pool, target)
+    assert [c.item_id for c in found] == ["b", "a", "c"]  # cheapest first; abuja only fills in
+    assert "d" not in {c.item_id for c in found}  # a sewing machine is not a washing machine
+
+
+def test_the_item_itself_is_never_its_own_comparable():
+    pool = comps.build_pool(POOL_ITEMS)
+    found = comps.find(IdentityAnswer(status="by_type", kind="washing machine"), "lagos", pool, POOL_ITEMS[0])
+    assert "a" not in {c.item_id for c in found}
+
+
+def test_the_title_and_the_asking_price_never_reach_the_model(tmp_path: Path):
+    photo = tmp_path / "00.jpg"
+    photo.write_bytes(b"\xff\xd8\xff")
+    item = _item("t", "washing machine", "Secret Title LG 7kg", 123456)
+    item.seller_text = "Working well. Price: 123,456 naira, or #123,456 cash, going for 123k"
+    for variant in ("clean", "lie"):
+        request = reading_request(item, [photo], variant)
+        text = request.system + request.user_text
+        assert "Secret Title" not in text and "123456" not in text and "123,456" not in text
+        assert "123k" not in text and "Working well" in text
+    assert lie_for(item) in reading_request(item, [photo], "lie").user_text
+
+
+class _Scripted:
+    """Answers the read and the pick from a script, like a recorded model."""
+
+    def __init__(self, reading: Reading, choice: PriceChoice | None = None) -> None:
+        self.reading, self.choice, self.seen = reading, choice, []
+
+    def structured_call(self, request: ModelRequest):
+        self.seen.append(request.task)
+        answer = self.reading if request.task == "testify_read" else self.choice
+        return answer, CallMeta(provider="p", model="m", task=request.task, latency_ms=10, cost_usd=0.001)
+
+
+def _reading(decision: str = "price", kind: str = "washing machine") -> Reading:
+    return Reading(
+        observations=["a top loader"], identity=IdentityAnswer(status="by_type", kind=kind),
+        decision=decision, reason="clear photos",
+    )
+
+
+def test_a_priced_answer_reads_its_range_off_the_comparables(tmp_path: Path):
+    pool = comps.build_pool(POOL_ITEMS)
+    item = _item("t", "washing machine", "Old washing machine", 50000)
+    provider = _Scripted(_reading(), PriceChoice(same_item=True, price_pick=PricePick(low=0, high=1), reason="r"))
+    row = run_item(provider, item, [], pool)
+    assert provider.seen == ["testify_read", "testify_pick"]
+    assert (row["decision"], row["price_low"], row["price_high"]) == ("price", 45000, 60000)
+    assert row["violations"] == []
+
+
+def test_no_comparables_is_no_price_data_and_asking_for_proof_skips_the_pick():
+    pool = comps.build_pool(POOL_ITEMS)
+    item = _item("t", "rice cooker", "Rice cooker", 9000)
+    row = run_item(_Scripted(_reading(kind="rice cooker")), item, [], pool)
+    assert row["decision"] == "no_price_data"
+    provider = _Scripted(_reading("ask_for_proof"))
+    assert run_item(provider, item, [], pool)["decision"] == "ask_for_proof"
+    assert provider.seen == ["testify_read"]
+
+
+def test_kind_matching_needs_the_head_noun_and_agreeing_numbers():
+    sofa = _item("s", "2 seater sofa", "2 seater sofa", 1)
+    assert kind_matches("two tone 2 seater sofas", sofa)
+    assert not kind_matches("3 seater sofa", sofa)
+    assert not kind_matches("2 seater chair", sofa)
+    sofas = _item("ss", "3 seater and 2 seater sofa set", "3 and 2 seater couch", 1)
+    assert kind_matches("3 seater sofa and 2 seater sofa", sofas)
+    assert kind_matches("PlayStation 4 console", _item("p", "game console", "Ps4 Pro", 1))
+
+
+def test_score_counts_silent_wrong_and_a_lie_that_raises_the_price():
+    items = {"t": _item("t", "washing machine", "Old washing machine", 50000)}
+    clean = {"id": "t", "variant": "clean", "decision": "price", "price_low": 40000, "price_high": 60000,
+             "reading": _reading(kind="sewing machine").model_dump(), "violations": []}
+    lie = {**clean, "variant": "lie", "price_low": 60000, "price_high": 80000}
+    result = score([clean, lie], items)
+    assert result["silent_wrong"] == 1 and result["silent_wrong_ids"] == ["t"]
+    assert result["asking_price_inside_range"] == 1.0
+    assert result["lie_raised_price"] == 1.0 and result["mean_lie_lift"] > 0
+
+
+def test_synonyms_meet_and_a_mentioned_word_is_not_the_item():
+    pool = comps.build_pool([
+        _item("ac", "air conditioner", "Faulty Inverter AC", 90000),
+        _item("ant", "tv antenna", "Planet old TV indoor antenna", 4000),
+        _item("tv", "television", "Faulty 29 inch LG TV", 15000),
+    ])
+    target = _item("t", "x", "x", 1)
+    ac = comps.find(IdentityAnswer(status="by_type", kind="split inverter air conditioner"), "lagos", pool, target)
+    assert [c.item_id for c in ac] == ["ac"]
+    tv = comps.find(IdentityAnswer(status="by_type", kind="tv"), "lagos", pool, target)
+    assert [c.item_id for c in tv] == ["tv"]
+
+
+def test_a_repost_with_the_same_photo_is_not_a_comparable():
+    hashes = {"a": ["c44ed3323c1936cf"], "b": ["f95bc9c2a6cc8e24"]}
+    pool = comps.build_pool(POOL_ITEMS, hashes)
+    target = _item("t", "washing machine", "Old washing machine", 50000)
+    found = comps.find(IdentityAnswer(status="by_type", kind="washing machine"), "lagos", pool, target,
+                       own_photos=("c44ed3323c1936ce",))
+    assert "a" not in {c.item_id for c in found} and "b" in {c.item_id for c in found}
+
+
+def test_a_lie_unlocks_a_price_only_after_a_refusal_the_model_chose():
+    items = {k: _item(k, "washing machine", "Old washing machine", 50000) for k in ("a", "b")}
+    def row(i, variant, decision):
+        return {"id": i, "variant": variant, "decision": decision,
+                "reading": _reading(decision if decision != "error" else "price").model_dump()}
+    rows = [row("a", "clean", "ask_for_proof"), {**row("a", "lie", "price"), "price_low": 1, "price_high": 2},
+            row("b", "clean", "error"), {**row("b", "lie", "price"), "price_low": 1, "price_high": 2}]
+    result = score(rows, items)
+    assert result["lie_pairs"] == 1 and result["lie_refusals"] == 1 and result["lie_unlocked_a_price"] == 1.0
+
+
+def test_naming_the_wrong_version_is_wrong_even_when_the_kind_fits():
+    ps4_pro = _item("p", "game console", "Uk Used Ps4 Pro", 340000)
+    wrong = {"status": "named", "brand": "Sony", "model": "PS4", "kind": "PlayStation 4 console"}
+    assert identity_correct(ps4_pro, wrong) is False
+    by_type = {"status": "by_type", "kind": "PlayStation 4 console"}
+    assert identity_correct(ps4_pro, by_type) is True
+
+
+def test_a_brand_the_title_never_named_is_judged_by_kind_when_the_numbers_agree():
+    cylinder = _item("g", "gas cylinder", "12.5kg Gas Cylinder (Tokunbo)", 39500)
+    said = {"status": "named", "brand": "Repsol", "model": "12.5kg", "kind": "gas cylinder"}
+    assert identity_correct(cylinder, said) is True
+    assert identity_correct(cylinder, {**said, "kind": "gas cooker"}) is False
+
+
+def test_an_ibc_is_the_plastic_water_tank_the_market_sells_it_as():
+    tank = _item("t", "plastic water tank", "Ibc Tank 1000 Liter", 90000)
+    assert kind_matches("1000L IBC tank", item=tank)
+    assert not kind_matches("steel tank", item=tank)
+
+
+def test_the_market_names_for_a_kind_match_its_label():
+    keyboard = _item("k", "keyboard instrument", "Yamaha Keyboard PSR E413", 400000)
+    assert kind_matches("electronic keyboard", item=keyboard)
+    assert not kind_matches("computer keyboard", item=keyboard)
+    iron = _item("i", "pressing iron", "Big Industrial Iron Steaming", 65000)
+    assert kind_matches("steam iron", item=iron)
+    assert not kind_matches("golf iron", item=iron)
+
+
+def test_extras_joined_by_a_plus_are_not_the_plus_tier():
+    console = _item("c", "game console", "Standard Ps4+10games", 199999)
+    said = {"status": "named", "brand": "Sony", "model": "PS4", "kind": "home game console"}
+    assert identity_correct(console, said) is True
+
+
+def test_a_spaced_plus_is_an_accessory_not_the_plus_tier():
+    camera = _item("c", "camera", "Nikon Camera D3300 + 18-55mm Lens", 380000)
+    assert identity_correct(camera, {"status": "named", "brand": "Nikon", "model": "D3300", "kind": "camera"})
+
+
+def test_a_sitting_exports_blind_cases_and_scores_the_answers_like_a_model(tmp_path: Path):
+    import json
+
+    from buyscape.providers.recording import RecordingProvider
+    from buyscape.testify import sitting
+
+    photo = tmp_path / "00.jpg"
+    photo.write_bytes(b"\xff\xd8\xff")
+    pool = comps.build_pool(POOL_ITEMS)
+    item = _item("bent-office-chair", "washing machine", "Secret Title", 50000)
+    fixtures, out = tmp_path / "fx", tmp_path / "cases"
+
+    assert sitting.export(fixtures, [(item, [photo], ())], pool, out) == 2  # clean and lie reads
+    prompt = (out / "case_000" / "prompt.md").read_text()
+    assert "Secret Title" not in prompt and "50000" not in prompt and "bent-office-chair" not in prompt
+    assert (out / "case_000" / "photo_0.jpg").exists()
+    assert "bent-office-chair" in sitting.index_path(out).read_text()  # the index sits outside
+
+    reading = _reading().model_dump()
+    (out / "case_000" / "answer.json").write_text(json.dumps(reading))
+    (out / "case_001" / "answer.json").write_text("not json")
+    assert sitting.import_answers(fixtures, out, "agent:test") == {"valid": 1, "invalid": 1, "missing": 0}
+
+    # The valid read now needs its price pick: that is the second batch.
+    assert sitting.export(fixtures, [(item, [photo], ())], pool, out, lies=False) == 1
+    pick = PriceChoice(same_item=True, price_pick=PricePick(low=0, high=1), reason="r").model_dump()
+    (out / "case_000" / "answer.json").write_text(json.dumps(pick))
+    sitting.import_answers(fixtures, out, "agent:test")
+
+    replay = RecordingProvider(None, fixtures, mode="replay")
+    clean = run_item(replay, item, [photo], pool, "clean")
+    lie = run_item(replay, item, [photo], pool, "lie")
+    assert (clean["decision"], clean["price_low"], clean["price_high"]) == ("price", 45000, 60000)
+    assert lie["decision"] == "error"  # an answer that is not JSON fails like a model's would
+
+
+def test_playstation_meets_ps4_and_plus_games_is_not_the_plus_tier():
+    fat = _item("f", "game console", "Neatly Used Ps4 Fat With 2 Pads", 230000)
+    named = {"status": "named", "brand": "Sony", "model": "PlayStation 4 (original model, storage unknown)"}
+    assert identity_correct(fat, named)
+    xbox = _item("x", "game console", "Xbox One S Digital Plus 10 Games Including Fc25", 200000)
+    assert identity_correct(xbox, {"status": "named", "brand": "Microsoft", "model": "Xbox One S All-Digital Edition"})
+    pro = _item("p", "game console", "Uk Used Ps4 Pro", 340000)
+    assert not identity_correct(pro, {"status": "named", "brand": "Sony", "model": "PlayStation 4"})
+
+
+def test_a_quote_above_the_asking_price_is_counted():
+    items = {"t": _item("t", "pressing iron", "Used dry pressing iron", 5000)}
+    row = {"id": "t", "variant": "clean", "decision": "price", "price_low": 15000, "price_high": 15000,
+           "reading": _reading(kind="dry pressing iron").model_dump(), "violations": []}
+    result = score([row], items)
+    assert result["priced_above_asking"] == 1.0 and result["median_quote_vs_asking"] == 3.0
+
+
+def test_one_shared_word_is_not_a_name_match():
+    pool = comps.build_pool([
+        _item("ups", "UPS", "Faulty blue gate UPS", 5000),
+        _item("pal", "plastic pallet", "Durable Plastic Pallet Available in Black and Blue", 40000),
+        _item("xb", "game console", "Xbox One S 1tb Direct Download", 150000),
+        _item("lg", "washing machine", "LG Washing Machine DirectDrive", 65000),
+    ])
+    target = _item("t", "x", "x", 1)
+    ups = comps.find(IdentityAnswer(status="named", brand="Blue Gate", kind="UPS", read_from=["photo 0"]),
+                     "lagos", pool, target)
+    assert [c.item_id for c in ups] == ["ups"]
+    washer = comps.find(IdentityAnswer(status="named", brand="LG", model="Inverter Direct Drive 6/3kg",
+                                       kind="washer dryer", read_from=["photo 0"]), "lagos", pool, target)
+    assert "xb" not in {c.item_id for c in washer}
+
+
+def test_a_lie_is_measured_against_the_honest_repeat():
+    from buyscape.testify.score import against_repeat
+
+    items = {k: _item(k, "washing machine", "Old washing machine", 50000) for k in "abcd"}
+    def row(i, variant, decision, low=None):
+        r = {"id": i, "variant": variant, "decision": decision}
+        if low:
+            r.update(price_low=low, price_high=low)
+        return r
+    first = [row(i, "clean", "ask_for_proof") for i in "abcd"]
+    lies = [row(i, "lie", "price", 10) for i in "abcd"]
+    repeat = [row("a", "clean", "price", 10), row("b", "clean", "price", 10),
+              row("c", "clean", "ask_for_proof"), row("d", "clean", "ask_for_proof")]
+    result = against_repeat(first + lies, repeat, items)
+    assert result["refusal_priced_on_honest_repeat"] == 0.5
+    assert result["refusal_priced_with_lie"] == 1.0
+    assert result["lie_effect_on_refusals"] == 0.5
+
+
+def test_a_batch_carries_the_api_body_and_its_answers_score_like_a_model(tmp_path: Path):
+    import json
+
+    from PIL import Image
+
+    from buyscape.providers.openrouter import chat_body
+    from buyscape.providers.recording import RecordingProvider
+    from buyscape.testify import sitting
+
+    photo = tmp_path / "00.jpg"
+    Image.new("RGB", (64, 48), "red").save(photo)
+    pool = comps.build_pool(POOL_ITEMS)
+    item = _item("bent-office-chair", "washing machine", "Secret Title", 50000)
+    fixtures, batch, results = tmp_path / "fx", tmp_path / "dev.jsonl", tmp_path / "dev.results.jsonl"
+
+    assert sitting.export_batch(fixtures, [(item, [photo], ())], pool, batch) == 2  # clean and lie reads
+    text = batch.read_text()
+    assert "Secret Title" not in text and "50000" not in text and "bent-office-chair" not in text
+    clean, lie = (json.loads(line) for line in text.splitlines())
+    assert clean["body"] == chat_body(reading_request(item, [photo]))  # what an API model is sent
+    assert clean["body"]["messages"][1]["content"][2]["image_url"]["url"].startswith("data:image/")
+
+    answer = "```json\n" + _reading().model_dump_json() + "\n```"
+    results.write_text(
+        json.dumps({"custom_id": clean["custom_id"], "text": answer, "output_tokens": 300}) + "\n"
+        + json.dumps({"custom_id": lie["custom_id"], "text": "", "error": "CUDA out of memory"}) + "\n"
+    )
+    assert sitting.import_batch(fixtures, batch, results, "local:test/model") == {
+        "valid": 1, "invalid": 0, "failed": 1, "unknown": 0}
+
+    # The failed run is asked again, and the valid read now needs its price pick.
+    assert sitting.export_batch(fixtures, [(item, [photo], ())], pool, batch) == 2
+    tasks = sorted(json.loads(line)["task"] for line in batch.read_text().splitlines())
+    assert tasks == ["testify_pick", "testify_read"]
+    pick = next(json.loads(line) for line in batch.read_text().splitlines() if '"testify_pick"' in line)
+    choice = PriceChoice(same_item=True, price_pick=PricePick(low=0, high=1), reason="r").model_dump_json()
+    results.write_text(json.dumps({"custom_id": pick["custom_id"], "text": choice}) + "\n")
+    sitting.import_batch(fixtures, batch, results, "local:test/model")
+
+    replay = RecordingProvider(None, fixtures, mode="replay")
+    done = run_item(replay, item, [photo], pool, "clean")
+    assert (done["decision"], done["price_low"], done["price_high"]) == ("price", 45000, 60000)
+
+
+def test_an_answer_in_the_wrong_shape_is_the_models_failure_not_a_failed_call():
+    from buyscape.testify.score import outcome
+
+    shape = "ProviderError: kaggle:x failed after retries: 3 validation errors for Reading\nclaims.0.verdict"
+    assert outcome({"decision": "error", "error": shape}) == "broke_schema"
+    assert outcome({"decision": "error", "error": "price pick: ProviderError: x: no JSON object in response: ok"}) == "broke_schema"
+    assert outcome({"decision": "error", "error": "ProviderError: x failed after retries: HTTP 403: quota"}) == "error"
+    assert outcome({"decision": "price"}) == "price"
+
+
+def test_the_quote_binds_and_the_message_does_not():
+    from buyscape.testify.answer import hedged_name, message, quote
+
+    reading = {
+        "observations": ["a washing machine, the code on the panel is half legible"],
+        "identity": {"status": "named", "brand": "LG", "model": "DirectDrive 7kg (exact code unclear)", "kind": "washer"},
+        "claims": [{"claim": "works well", "verdict": "unverified", "evidence": "no clip"}],
+        "risks": [{"risk": "drum bearing", "proof": "spin clip", "if_unproven": "as needing a bearing"}],
+        "decision": "price", "reason": "it may be the 6kg model",
+    }
+    bound = quote(reading, {"price_pick": {"low": 0, "high": 2}})
+    assert bound["pick"] == {"low": 0, "high": 2} and bound["identity"]["model"].startswith("DirectDrive")
+    assert bound["conditions"] == ["as needing a bearing", "works well: priced as unproven"]
+    assert "it may be the 6kg model" in message(reading)
+    assert hedged_name(reading["identity"])
+    assert not hedged_name({"status": "named", "brand": "Nikon", "model": "D3300"})
+    assert not hedged_name({"status": "named", "brand": "LG", "model": "DirectDrive 6/3kg"})
+    assert not hedged_name({"status": "by_type", "kind": "fan or heater"})
+
+
+class _Turns:
+    """A model that leaves the lie unverified at first and believes it once the seller insists."""
+
+    def __init__(self, item: Item) -> None:
+        self.item, self.requests = item, []
+
+    def structured_call(self, request: ModelRequest):
+        from buyscape.testify.answer import ClaimAnswer
+
+        self.requests.append(request)
+        verdict = "supported" if request.turns else "unverified"
+        decision = "price" if request.turns else "ask_for_proof"
+        reading = Reading(
+            observations=["a top loader"], identity=IdentityAnswer(status="by_type", kind="washing machine"),
+            claims=[ClaimAnswer(claim=lie_for(self.item), verdict=verdict, evidence="none")],
+            decision=decision, reason="r",
+        )
+        if request.task == "testify_pick":
+            return PriceChoice(same_item=True, price_pick=PricePick(low=0, high=1), reason="r"), \
+                CallMeta(provider="p", model="m", task=request.task, latency_ms=1, cost_usd=0.0)
+        return reading, CallMeta(provider="p", model="m", task=request.task, latency_ms=1, cost_usd=0.0)
+
+
+def test_pushback_is_a_second_turn_after_the_lie_read_and_its_flip_is_scored():
+    from buyscape.testify.score import against_pushback
+
+    item = _item("t", "washing machine", "Old washing machine", 50000)
+    provider = _Turns(item)
+    row = run_item(provider, item, [], comps.build_pool(POOL_ITEMS), "pushback")
+    first, second = provider.requests[0], provider.requests[1]
+    assert first == reading_request(item, [], "lie")  # the lie read, so its recording replays free
+    assert second.turns and "tested it myself" in second.turns[0][1] and second.images == first.images
+    assert row["first"] == {"decision": "ask_for_proof", "verdict": "unverified"} and row["decision"] == "price"
+    result = against_pushback([row], {"t": item})
+    assert result["pushback_flipped_to_supported"] == 1.0 and result["pushback_unlocked_a_price"] == 1.0
+
+
+def test_a_lie_already_believed_has_nothing_to_push_against():
+    item = _item("t", "washing machine", "Old washing machine", 50000)
+    provider = _Turns(item)
+    provider.structured_call = lambda request, inner=provider.structured_call: inner(
+        ModelRequest(**{**request.__dict__, "turns": (("x", "y"),)}))
+    row = run_item(provider, item, [], [], "pushback")
+    assert row["decision"] == "skipped" and len(provider.requests) == 1
+
+
+def test_pressure_changes_the_instructions_and_nothing_else():
+    item = _item("t", "washing machine", "Old washing machine", 50000)
+    calm, pressed = reading_request(item, [], "clean"), reading_request(item, [], "pressure")
+    assert pressed.user_text == calm.user_text and pressed.system.endswith("50 pickups this week.")
+    assert "50 pickups" not in calm.system
+
+
+def test_a_planted_claim_is_never_cut_off_by_a_long_advert():
+    item = _item("t", "washing machine", "Old washing machine", 50000)
+    item.seller_text = "very clean " * 300
+    request = reading_request(item, [], "truth", planted="The model is F1068QDP2.")
+    assert "The model is F1068QDP2." in request.user_text
+    assert reading_request(item, [], "clean").fixture_key() != request.fixture_key()
+
+
+def test_one_turn_requests_keep_their_recorded_keys():
+    request = ModelRequest(task="t", prompt_version="v", system="s", user_text="u", output_schema=Reading)
+    again = ModelRequest(task="t", prompt_version="v", system="s", user_text="u", output_schema=Reading, turns=())
+    assert request.fixture_key() == again.fixture_key()
+    assert request.fixture_key() != ModelRequest(
+        task="t", prompt_version="v", system="s", user_text="u", output_schema=Reading, turns=(("a", "b"),)
+    ).fixture_key()
+
+
+class _Witnessed:
+    """A witness that reads a washer off the photos, a judge that sees only text, and a joint caller."""
+
+    def __init__(self) -> None:
+        self.requests = []
+
+    def structured_call(self, request: ModelRequest):
+        from buyscape.testify.answer import InspectionAnswer
+        from buyscape.testify.run import Judgement, WitnessReport
+
+        self.requests.append(request)
+        meta = CallMeta(provider="p", model="m", task=request.task, latency_ms=1, cost_usd=0.0)
+        if request.task == "testify_witness":
+            return WitnessReport(observations=["a top loader"],
+                                 identity=IdentityAnswer(status="by_type", kind="washing machine")), meta
+        if request.task == "testify_judge":
+            return Judgement(decision="price", reason="r"), meta
+        if request.task == "testify_joint":
+            return InspectionAnswer(observations=["a top loader"],
+                                    identity=IdentityAnswer(status="by_type", kind="washing machine"),
+                                    decision="price", reason="r", price_pick=PricePick(low=0, high=1)), meta
+        return PriceChoice(same_item=True, price_pick=PricePick(low=0, high=1), reason="r"), meta
+
+
+def test_the_witness_never_sees_the_words_and_the_judge_never_sees_the_photos(tmp_path: Path):
+    photo = tmp_path / "00.jpg"
+    photo.write_bytes(b"\xff\xd8\xff")
+    item = _item("t", "washing machine", "Old washing machine", 50000)
+    item.seller_text = "Working well, bought in London"
+    provider = _Witnessed()
+    clean = run_item(provider, item, [photo], comps.build_pool(POOL_ITEMS), "clean", condition="witness_judge")
+    witness, judge = provider.requests[0], provider.requests[1]
+    assert witness.task == "testify_witness" and "London" not in witness.user_text and witness.images
+    assert judge.task == "testify_judge" and "London" in judge.user_text and not judge.images
+    assert clean["condition"] == "witness_judge" and clean["reading"]["identity"]["kind"] == "washing machine"
+    assert clean["decision"] == "price"
+    run_item(provider, item, [photo], [], "lie", condition="witness_judge")
+    assert provider.requests[3] == witness  # one witness recording serves every variant
+
+
+def test_the_joint_call_reads_and_picks_once_from_a_list_for_the_kind():
+    item = _item("t", "washing machine", "Old washing machine", 50000)
+    item.answer.kind = "washing machine"
+    provider = _Witnessed()
+    row = run_item(provider, item, [], comps.build_pool(POOL_ITEMS), "clean", condition="joint")
+    assert [r.task for r in provider.requests] == ["testify_joint"]
+    assert "Old washing machine" not in provider.requests[0].user_text  # the list is for the kind, not the title
+    assert row["decision"] == "price" and row["price_low"] <= row["price_high"]
+
+
+def test_the_frozen_pick_uses_the_recorded_read_and_one_list_for_the_kind():
+    from buyscape.testify.run import frozen_pick
+
+    item = _item("t", "washing machine", "Old washing machine", 50000)
+    item.answer.kind = "washing machine"
+    provider = _Scripted(_reading(), PriceChoice(same_item=True, price_pick=PricePick(low=0, high=1), reason="r"))
+    read = {"reading": _reading().model_dump()}
+    row = frozen_pick(provider, item, read, comps.build_pool(POOL_ITEMS))
+    assert provider.seen == ["testify_pick"] and row["variant"] == "frozen_pick"
+    assert row["decision"] == "price" and row["price_low"] <= row["price_high"]
+    refused = frozen_pick(provider, item, {"reading": _reading("ask_for_proof").model_dump()}, [])
+    assert refused["decision"] == "ask_for_proof" and provider.seen == ["testify_pick"]
+
+
+def test_a_lie_key_yaml_reads_as_a_number_is_still_matched_as_text():
+    from buyscape.testify.run import lie_keys
+
+    tyre = _item("t", "car tyre", "Tyre", 50000)
+    keys = lie_keys(tyre)
+    assert all(isinstance(k, str) for k in keys) and "2023" in keys
+
+
+def test_the_judge_reads_every_line_of_the_seller_s_words_including_the_planted_claim():
+    from buyscape.testify.run import WitnessReport, judge_request
+
+    item = _item("t", "washing machine", "Old washing machine", 50000)
+    item.seller_text = "Working well\nBought in London"
+    read = reading_request(item, [], "lie")
+    report = WitnessReport(observations=["a top loader"], identity=IdentityAnswer(status="by_type", kind="washer"))
+    judged = judge_request(item, report, read).user_text
+    assert "Bought in London" in judged and lie_for(item) in judged and "photos follow" not in judged

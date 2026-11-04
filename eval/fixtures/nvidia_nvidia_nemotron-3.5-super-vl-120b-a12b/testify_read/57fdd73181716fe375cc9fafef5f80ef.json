@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Silver front-load washing machine with circular door",
+      "SAMSUNG logo printed on upper left of control panel",
+      "\"ecobubble 6.0kg\" printed on lower right of control panel",
+      "Digital display shows illuminated digits",
+      "Drain hose looped at top rear",
+      "Small access panel at bottom right front",
+      "Tiled floor and white tiled wall background"
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "front load washing machine",
+      "brand": "Samsung",
+      "model": "ecobubble 6.0kg",
+      "read_from": [
+        "photo 0 control panel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Samsung",
+        "verdict": "supported",
+        "evidence": "photo 0 logo on control panel"
+      },
+      {
+        "claim": "ecobubble 6kg",
+        "verdict": "supported",
+        "evidence": "photo 0 text 'ecobubble 6.0kg' on control panel"
+      },
+      {
+        "claim": "faulty",
+        "verdict": "unverified",
+        "evidence": "seller's statement only; photo shows intact exterior but no function test"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Machine does not power on or run any cycle",
+        "proof": "video of machine powering on and completing a wash cycle",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Water leaks from hoses, pump, or door seal",
+        "proof": "video of fill and drain cycle showing no leaks",
+        "if_unproven": "as leaking"
+      },
+      {
+        "risk": "Door seal or drum interior is torn or damaged",
+        "proof": "close-up photo of door rubber seal and drum",
+        "if_unproven": "as damaged seal or drum"
+      },
+      {
+        "risk": "Control panel or programmer is defective",
+        "proof": "video of buttons and display responding",
+        "if_unproven": "as electrically faulty"
+      }
+    ],
+    "proof_requests": [
+      "Video of the machine powering on and running a wash cycle",
+      "Close-up photo of the door seal and drum interior",
+      "Video of water filling and draining with no leaks"
+    ],
+    "decision": "price",
+    "reason": "The washing machine is identifiable from photo 0 as a Samsung ecobubble 6.0kg front loader; sold as faulty, it can be priced at its worst case as a non-working unit without further proof."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 14689,
+    "input_tokens": 2255,
+    "output_tokens": 2305,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "57fdd73181716fe375cc9fafef5f80ef",
+    "error": null
+  }
+}

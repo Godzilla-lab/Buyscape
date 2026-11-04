@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the front of a retail box for an Ingco brand Rotary Hammer.",
+      "The box is labeled 'INDUSTRIAL' and '3 Functions'.",
+      "Technical icons on the box indicate a 32mm drilling capacity in concrete, 13mm in steel, and 40mm in wood.",
+      "The box appears to be wrapped in clear plastic film.",
+      "The actual tool is not visible; only the packaging is shown.",
+      "A specific model number is not legible on the front of the box."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "rotary hammer",
+      "brand": "Ingco",
+      "model": null,
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "heavy duty set of drillong machine",
+        "verdict": "supported",
+        "evidence": "Photo 0 box is labeled 'INDUSTRIAL'."
+      },
+      {
+        "claim": "use to drill concrete",
+        "verdict": "supported",
+        "evidence": "Photo 0 box is labeled 'ROTARY HAMMER' and shows concrete drilling icons."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, used, or damaged item.",
+        "proof": "A photo of the actual tool outside of the box.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The specific model number is unknown, which determines the power (wattage) and market value.",
+        "proof": "A photo of the specification sticker on the side of the box or the tool's nameplate.",
+        "if_unproven": "as the lowest-spec industrial model"
+      },
+      {
+        "risk": "The tool may be non-functional or a counterfeit.",
+        "proof": "A video of the tool running and a clear shot of the serial number plate.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual rotary hammer outside of the box.",
+      "Clear photo of the model number and specifications plate on the tool.",
+      "Video of the tool being powered on and the chuck rotating."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the packaging is visible, and the specific model number required for pricing is not shown. The actual condition of the tool cannot be verified from a photo of a box."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 13574,
+    "input_tokens": 2388,
+    "output_tokens": 2619,
+    "cost_usd": 0.009051,
+    "replayed": false,
+    "fixture_key": "594fd354947800786e942f28616134bf",
+    "error": null
+  }
+}

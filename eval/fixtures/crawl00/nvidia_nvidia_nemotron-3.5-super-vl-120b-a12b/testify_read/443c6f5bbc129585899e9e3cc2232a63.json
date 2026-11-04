@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0: stack of bare hard drives wrapped in clear plastic; bottom drive label reads Seagate Barracuda 1TB 1000GB",
+      "Photo 1: top drive label reads Seagate Barracuda 1TB; bottom drive label reads Seagate Laptop SSHD 1000GB",
+      "Photo 2: large stack of many bare hard drives wrapped in plastic with a yellow band",
+      "Watermarks read VIBRA GLOBAL LIMITED and POSTED ON Jiji"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "internal hard disk drives",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 label",
+        "photo 1 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "1tb",
+        "verdict": "supported",
+        "evidence": "photo 0 and photo 1 labels read 1TB or 1000GB"
+      },
+      {
+        "claim": "hdd",
+        "verdict": "supported",
+        "evidence": "photo 0, photo 1, and photo 2 show hard disk drives"
+      },
+      {
+        "claim": "laptop hard drive",
+        "verdict": "contradicted",
+        "evidence": "photo 0 and photo 1 top show desktop 3.5-inch Seagate Barracuda drives; only photo 1 bottom is explicitly a laptop SSHD"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "drive may not work or may have bad sectors",
+        "proof": "video of drive connected to a PC showing recognition and SMART health data",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "actual usable capacity may be below 1TB",
+        "proof": "screenshot of Disk Management or drive properties showing 1TB capacity",
+        "if_unproven": "as lower capacity"
+      },
+      {
+        "risk": "interface may not be SATA or may be incompatible with buyer's laptop",
+        "proof": "close-up photo of the connector and label interface line",
+        "if_unproven": "as incompatible"
+      },
+      {
+        "risk": "drives may be 3.5-inch desktop units rather than 2.5-inch laptop units",
+        "proof": "photo of one drive next to a ruler or known 2.5-inch drive for size comparison",
+        "if_unproven": "as desktop 3.5-inch drives"
+      }
+    ],
+    "proof_requests": [
+      "Video of a drive connected to a computer showing it is recognized and SMART health status",
+      "Close-up photo of the label and SATA connector on one drive from the stack",
+      "Photo showing drive thickness or size next to a ruler or known laptop drive"
+    ],
+    "decision": "price",
+    "reason": "The photos identify internal Seagate hard disk drives including 1TB models; since working condition cannot be verified remotely, the worst case is not working."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 16745,
+    "input_tokens": 2902,
+    "output_tokens": 3974,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "443c6f5bbc129585899e9e3cc2232a63",
+    "error": null
+  }
+}

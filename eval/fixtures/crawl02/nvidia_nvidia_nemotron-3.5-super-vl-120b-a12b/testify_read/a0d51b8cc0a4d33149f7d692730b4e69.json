@@ -1,0 +1,85 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a folded black clamshell phone held in a hand with a handwritten note \"Flips 256GB\" on the back cover.",
+      "Photo 1 shows the phone's rear with two cameras, a cover screen, a light purple back panel, and a label reading \"SM-F731B\" and \"MADE IN VIETNAM BY SAMSUNG\".",
+      "Both photos carry a \"BIG TEE TECH\" watermark and \"POSTED ON JIJI\" text."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "foldable smartphone",
+      "brand": "Samsung",
+      "model": "Galaxy Z Flip 5",
+      "read_from": [
+        "photo 1 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Samsung Galaxy Z Flip 5",
+        "verdict": "supported",
+        "evidence": "photo 1 label SM-F731B matches Galaxy Z Flip 5"
+      },
+      {
+        "claim": "256GB storage",
+        "verdict": "unverified",
+        "evidence": "handwritten note in photo 0 only; no system screenshot"
+      },
+      {
+        "claim": "fingerprint sensor is active",
+        "verdict": "unverifiable_remote",
+        "evidence": "biometric function cannot be tested from still photos"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Inner display may be cracked, have lines, or dead pixels",
+        "proof": "video of inner screen powering on and showing full display",
+        "if_unproven": "as screen not working"
+      },
+      {
+        "risk": "Battery may be dead or heavily degraded",
+        "proof": "screenshot of battery health or video of phone booting and staying on",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Fingerprint sensor may not enroll or unlock",
+        "proof": "video of fingerprint unlock working",
+        "if_unproven": "as sensor not working"
+      },
+      {
+        "risk": "Storage may be lower than 256GB",
+        "proof": "screenshot of storage settings showing 256GB",
+        "if_unproven": "as lower capacity"
+      },
+      {
+        "risk": "Phone may be network locked or blacklisted",
+        "proof": "screenshot of network status or SIM test with another carrier",
+        "if_unproven": "as network locked"
+      }
+    ],
+    "proof_requests": [
+      "Video of the inner screen turning on and displaying content",
+      "Screenshot of battery health and storage capacity",
+      "Video of the fingerprint sensor unlocking the phone",
+      "Photo of the IMEI or a SIM test to confirm network lock status"
+    ],
+    "decision": "price",
+    "reason": "The phone is identifiable as a Samsung Galaxy Z Flip 5 from the label in photo 1, so it can be priced at its worst case while unproven claims are listed as risks."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 21905,
+    "input_tokens": 2384,
+    "output_tokens": 3022,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "a0d51b8cc0a4d33149f7d692730b4e69",
+    "error": null
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: A silver laptop with a black keyboard and touchpad, screen on showing Windows 11 desktop with blue default wallpaper. 'EliteBook' is visible on the palm rest. Intel Core i7 sticker on the bottom right of the keyboard deck. Watermark 'KINGSPLACETECH' across the screen.",
+      "Photo 1: Same laptop, screen showing File Explorer window. Keyboard and touchpad visible. Same Intel sticker. Watermark present.",
+      "Photo 2: Closed laptop, silver lid with HP logo embossed in the center. A vertical crack or scratch is visible on the left side of the lid. Watermark present. 'CLUB' text is visible vertically on the right edge of the lid."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "EliteBook Revolve 810 G2",
+      "read_from": [
+        "photo 0 palm rest: 'EliteBook'",
+        "photo 2 lid: HP logo"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "It's a clean Portable, smart HP Elitebook Revolve 810 G2",
+        "verdict": "contradicted",
+        "evidence": "Photo 2 shows a visible crack or deep scratch on the left side of the lid, contradicting 'clean'."
+      },
+      {
+        "claim": "with Intel Core i7 Processor",
+        "verdict": "supported",
+        "evidence": "Photo 0 and Photo 1 show an Intel Core i7 sticker on the keyboard deck."
+      },
+      {
+        "claim": "256gb SSD",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows the internal drive or system information to verify storage capacity."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The visible crack on the lid may indicate structural damage or impact history.",
+        "proof": "Close-up photo of the crack on the lid, showing depth and whether it's a hairline or deep crack.",
+        "if_unproven": "Priced as having cosmetic damage, which reduces value."
+      },
+      {
+        "risk": "The SSD capacity is not confirmed; could be less than 256GB or a slower drive type.",
+        "proof": "Screenshot of Windows Disk Management or System Information showing drive size and type.",
+        "if_unproven": "Priced as having unverified storage, which may be less than advertised."
+      },
+      {
+        "risk": "The laptop may have other hidden damage, such as screen issues, hinge problems, or battery degradation.",
+        "proof": "Video showing the screen from all angles, hinge movement, and battery health check (e.g., battery report).",
+        "if_unproven": "Priced as having unverified functionality, which may reduce value."
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the crack on the lid to assess depth and damage.",
+      "Screenshot of Windows Disk Management or System Information showing SSD size and type.",
+      "Video showing screen from all angles, hinge movement, and battery health report."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identifiable, but the 'clean' claim is contradicted by visible damage on the lid. Storage capacity and other functional aspects are unverified. Proof is needed to assess the true condition and value."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 59230,
+    "input_tokens": 2798,
+    "output_tokens": 754,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "1231167a71b40ac87c5c9d8176e871c3",
+    "error": null
+  }
+}

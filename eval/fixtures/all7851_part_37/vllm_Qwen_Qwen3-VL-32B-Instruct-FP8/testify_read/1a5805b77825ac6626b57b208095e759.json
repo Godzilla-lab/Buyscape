@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black rectangular power bank with a handle on top.",
+      "The front panel has labeled ports: OUT1-C, OUT2-C, IN, IN/OUT, and an ON/OFF button.",
+      "Text 'Fast charging' is printed below the ports.",
+      "The brand name 'PHILLY' is visible in the center.",
+      "Below the brand, '22.5W' is printed, likely indicating power output.",
+      "The item is held against a patterned fabric background.",
+      "There is a watermark 'POSTED ON JIJI AKINYEMI' over the image."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "power bank",
+      "brand": "PHILLY",
+      "model": "50000mAh 22.5W Super Fast Power Bank with 4 Built-in Cables",
+      "read_from": [
+        "photo 0 front panel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Original PHILLY 50000mAh 22.5W Super Fast Power Bank with 4 Built-in Cables",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows the brand 'PHILLY' and '22.5W', but the 50000mAh capacity and the 4 built-in cables are not visible. The cables are not shown in any photo."
+      },
+      {
+        "claim": "22.5W Super Fast Charging",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows '22.5W' printed on the front of the device."
+      },
+      {
+        "claim": "4 Built-in Cables (Type-C, Lightning, etc.)",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows the cables or their ports. The seller's text claims them, but there is no visual proof."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The 50000mAh capacity may be inaccurate or misleading.",
+        "proof": "A close-up photo of the label or back panel showing the full specifications, including capacity.",
+        "if_unproven": "Priced as a lower-capacity power bank, possibly 20000mAh or less."
+      },
+      {
+        "risk": "The 4 built-in cables are not included or are not functional.",
+        "proof": "A photo showing the cables attached or stored within the power bank, with clear view of Type-C, Lightning, and other connectors.",
+        "if_unproven": "Priced as a power bank without built-in cables, which reduces value significantly."
+      },
+      {
+        "risk": "The device may not support 22.5W fast charging in practice.",
+        "proof": "A video or photo showing the power bank charging a device with a 22.5W output confirmed by a power meter or device screen.",
+        "if_unproven": "Priced as a standard power bank without fast charging capability."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the back or side label showing full specifications including 50000mAh capacity.",
+      "Photo showing the 4 built-in cables (Type-C, Lightning, etc.) attached or stored in the device.",
+      "Video or photo of the power bank charging a device with 22.5W output confirmed."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The brand and 22.5W output are visible, but key claims like 50000mAh capacity and 4 built-in cables are not visually confirmed. Without proof, the item cannot be priced accurately and risks being misrepresented."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 68205,
+    "input_tokens": 1949,
+    "output_tokens": 826,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "1a5805b77825ac6626b57b208095e759",
+    "error": null
+  }
+}

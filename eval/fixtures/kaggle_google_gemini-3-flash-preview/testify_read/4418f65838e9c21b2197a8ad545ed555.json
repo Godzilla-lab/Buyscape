@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail packaging (carrying case/box) for a 'POWER plus' cordless drill.",
+      "The box features an illustration of a drill, a battery, and various accessories.",
+      "The text '36.8V BATTERY' is prominent on the box.",
+      "The box mentions 'PRODUCT OF K-TOOLS' and 'HOT SALES PROFESSIONAL'.",
+      "The actual physical tool, battery, and charger are not shown outside the packaging."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "cordless drill",
+      "brand": "POWER plus",
+      "model": "36.8V",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Powerful cordless drill",
+        "verdict": "unverified",
+        "evidence": "The tool itself is not visible to assess condition or power."
+      },
+      {
+        "claim": "36.8 volt lithium-ion battery",
+        "verdict": "supported",
+        "evidence": "Photo 0 box explicitly states '36.8V BATTERY'."
+      },
+      {
+        "claim": "for drilling or screwing in wood, metal",
+        "verdict": "unverified",
+        "evidence": "These are standard functions, but the tool's presence and state are not confirmed."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, used, or damaged item.",
+        "proof": "Photo of the actual drill and all accessories outside the box.",
+        "if_unproven": "as missing or non-functional"
+      },
+      {
+        "risk": "The battery may be dead or unable to hold a charge.",
+        "proof": "Video of the drill operating under load.",
+        "if_unproven": "as having a dead battery"
+      },
+      {
+        "risk": "The charger and accessories shown on the box may be missing.",
+        "proof": "Photo showing the charger and the full set of bits/sockets.",
+        "if_unproven": "as missing charger and accessories"
+      },
+      {
+        "risk": "The 36.8V rating may be a marketing exaggeration common in generic brands.",
+        "proof": "Photo of the technical specification plate on the drill or battery.",
+        "if_unproven": "as a generic low-voltage entry-level drill"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual drill, battery, and charger outside of the box.",
+      "Video of the drill running.",
+      "Photo of the specification plate on the drill and the battery label."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the packaging is shown. It is impossible to verify the contents, condition, or authenticity of the tool from a photo of the box alone."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 8821,
+    "input_tokens": 2366,
+    "output_tokens": 1766,
+    "cost_usd": 0.006481,
+    "replayed": false,
+    "fixture_key": "4418f65838e9c21b2197a8ad545ed555",
+    "error": null
+  }
+}

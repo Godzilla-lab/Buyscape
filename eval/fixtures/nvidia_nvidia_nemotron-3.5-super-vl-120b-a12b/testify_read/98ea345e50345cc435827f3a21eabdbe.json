@@ -1,0 +1,80 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Multiple photovoltaic solar panels stacked outdoors on paved ground.",
+      "Foreground panel has a silver frame and dark cells with visible grid lines; surface is dusty with white residue.",
+      "Watermark text 'K.C SOLAR LIMITED' is overlaid on the foreground panel.",
+      "Other panels are visible behind and to the right, some leaning against stacked wooden crates.",
+      "White sacks lie on the ground to the right.",
+      "No nameplate, wattage label, or model number is readable on any panel."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Seller is K.C Solar Limited",
+        "verdict": "supported",
+        "evidence": "photo 0 watermark reads K.C SOLAR LIMITED"
+      },
+      {
+        "claim": "Deals in all kinds of solar systems",
+        "verdict": "unverifiable_remote",
+        "evidence": "photo 0 shows only panels, no full range"
+      },
+      {
+        "claim": "Panels are functional",
+        "verdict": "unverified",
+        "evidence": "no test or label shown"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Cracked cells or internal damage not visible in the photo",
+        "proof": "Close-up photo of each panel surface in direct sunlight",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Unknown wattage, voltage, or model",
+        "proof": "Photo of the specification label on the back of a panel",
+        "if_unproven": "as lowest-capacity unknown unit"
+      },
+      {
+        "risk": "Delamination, water ingress, or backsheet damage",
+        "proof": "Close-up photo of panel edges and backsheet",
+        "if_unproven": "as defective"
+      },
+      {
+        "risk": "Frame corrosion or broken mounting holes",
+        "proof": "Close-up photo of frame corners and mounting holes",
+        "if_unproven": "as damaged"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the specification label on the back of a panel showing wattage, voltage, and model",
+      "Close-up photo of panel surface in direct sunlight to reveal cracks or hot spots",
+      "Video or photo of a multimeter reading open-circuit voltage"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a solar panel, but no brand, model, or wattage is readable in the photo, and functionality cannot be verified remotely, so even a worst-case price requires the missing spec shot."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 40806,
+    "input_tokens": 1842,
+    "output_tokens": 3218,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "98ea345e50345cc435827f3a21eabdbe",
+    "error": null
+  }
+}

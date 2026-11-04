@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail box for a Tinmo 18-inch solar fan.",
+      "The box identifies the model as TM-72.",
+      "Specifications printed on the box include 7.4V voltage, 10W rated power, and a 12W solar panel.",
+      "The box art displays a pedestal fan, a remote control, a solar panel, and two LED bulbs.",
+      "The actual item is not visible outside of the packaging.",
+      "The box shows minor wear at the edges and corners."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "solar fan",
+      "brand": "TINMO",
+      "model": "TM-72",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Tinmo 18\" solar fan",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "Model TM-72",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "7.4V rechargeable battery",
+        "verdict": "supported",
+        "evidence": "photo 0 box lists DC 7.4V"
+      },
+      {
+        "claim": "10W rated power",
+        "verdict": "supported",
+        "evidence": "photo 0 box lists RETED POWER: 10W"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different/damaged item.",
+        "proof": "Photos of the actual fan and all accessories outside the box.",
+        "if_unproven": "as missing or scrap"
+      },
+      {
+        "risk": "The internal rechargeable battery may be degraded or dead.",
+        "proof": "A video showing the fan running on battery power for several minutes.",
+        "if_unproven": "as battery needs replacement"
+      },
+      {
+        "risk": "The solar panel or charging circuit may be non-functional.",
+        "proof": "A video showing the charging indicator active when the solar panel is connected in sunlight.",
+        "if_unproven": "as solar charging not working"
+      }
+    ],
+    "proof_requests": [
+      "Photos of the actual fan, solar panel, remote, and bulbs outside the box.",
+      "A video of the fan operating on battery power.",
+      "A photo of the rating plate on the back of the fan motor or base.",
+      "A photo of the solar panel surface to check for cracks."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail packaging is shown. The actual condition, presence, and functionality of the fan and its accessories cannot be determined without seeing the items themselves."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 11912,
+    "input_tokens": 2380,
+    "output_tokens": 2489,
+    "cost_usd": 0.008657,
+    "replayed": false,
+    "fixture_key": "d212a8a8809c86a3ddd0248583c083da",
+    "error": null
+  }
+}

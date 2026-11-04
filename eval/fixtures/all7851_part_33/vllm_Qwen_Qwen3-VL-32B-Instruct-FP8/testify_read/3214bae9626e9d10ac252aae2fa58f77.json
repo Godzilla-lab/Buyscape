@@ -1,0 +1,88 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Silver laptop in tent mode, keyboard visible, plastic wrap on screen and body, HP logo not visible, Intel Core i5 sticker on palm rest.",
+      "Photo 1: Laptop screen showing Windows desktop, plastic wrap still on screen, device in tent mode on a black mesh chair.",
+      "Photo 2: Laptop in tent mode, back of screen visible, plastic wrap on screen and body, ports visible on left side, no visible branding or model label.",
+      "All photos show the laptop wrapped in plastic, suggesting it is being sold as new or lightly used.",
+      "No clear view of the bottom, hinges, or any model label.",
+      "The screen appears to be touchscreen as it is being used in tent mode, but no touch interaction is shown."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "EliteBook X360 1030 G4",
+      "read_from": [
+        "seller's text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "UK used HP EliteBook X360 1030 G4",
+        "verdict": "unverified",
+        "evidence": "Brand 'HP' is supported by Intel sticker in photo 0, but model 'EliteBook X360 1030 G4' is not visible in any photo. No model label is readable."
+      },
+      {
+        "claim": "Touchscreen",
+        "verdict": "supported",
+        "evidence": "Photo 1 and 2 show the laptop in tent mode, which is typical for touchscreen devices. The screen is also covered in plastic, which is common for touchscreens."
+      },
+      {
+        "claim": "Core i5, 16GB RAM, 256 SSD",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal components or system specs visible. The Intel Core i5 sticker in photo 0 confirms Intel processor, but not the exact model or RAM/SSD specs."
+      },
+      {
+        "claim": "You can upgrade your...",
+        "verdict": "unverified",
+        "evidence": "Incomplete claim. No context or proof provided in photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Model is not the claimed HP EliteBook X360 1030 G4",
+        "proof": "Photo showing the model label on the bottom or hinge of the laptop.",
+        "if_unproven": "Priced as a generic HP laptop, not the specific model, which could be significantly cheaper."
+      },
+      {
+        "risk": "RAM and SSD specifications are not as claimed (16GB RAM, 256GB SSD)",
+        "proof": "Screenshot of system information or BIOS showing RAM and storage details.",
+        "if_unproven": "Priced as a lower-spec laptop, possibly with 8GB RAM or smaller SSD."
+      },
+      {
+        "risk": "Laptop is not functional or has hidden damage (e.g., hinge, screen, battery)",
+        "proof": "Video showing the laptop turning on, screen working, keyboard input, and hinge movement in all modes.",
+        "if_unproven": "Priced as non-working or with potential defects."
+      },
+      {
+        "risk": "Screen is cracked or has dead pixels under plastic wrap",
+        "proof": "Photo of screen with plastic removed, showing full display under bright light.",
+        "if_unproven": "Priced with screen defect risk, reducing value."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the model label on the bottom or hinge of the laptop.",
+      "Screenshot of system information showing CPU, RAM, and SSD specs.",
+      "Video showing the laptop turning on, screen working, and hinge movement in all modes.",
+      "Photo of the screen with plastic removed, showing full display under bright light."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and internal specifications cannot be verified from the photos. The laptop appears to be in tent mode, supporting touchscreen, but critical details like model label, RAM, SSD, and functionality are unproven. Without proof, the item cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 78353,
+    "input_tokens": 2806,
+    "output_tokens": 933,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "3214bae9626e9d10ac252aae2fa58f77",
+    "error": null
+  }
+}

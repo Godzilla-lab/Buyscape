@@ -1,0 +1,80 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows a yellow/orange gas cylinder with a label partially visible but unreadable, sitting on tiled floor near cardboard boxes.",
+      "Photo 1 shows a different, blue cylinder with a visible logo reading 'BERADISCO' near the base, in a different location (different flooring, different background items).",
+      "Photo 2 shows the same blue cylinder as photo 1 from a slightly different angle, confirming it is a separate unit from the yellow one in photo 0.",
+      "No capacity markings (e.g., '12.5KG') are legible on either cylinder in any photo.",
+      "No visible manufacture/test date stamp on the valve collar in any photo.",
+      "Valve threads and collar show surface rust/wear on both cylinders.",
+      "No regulator, hose, or burner included in any photo."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "12.5kg cooking gas cylinder",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 1 (partial 'BERADISCO' logo, unverified as brand of the listed cylinder)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "12.5kg standard Cooking Gas Cylinder",
+        "verdict": "unverifiable_remote",
+        "evidence": "No capacity stamp or marking is legible in photo 0, 1, or 2."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Two visually different cylinders (yellow in photo 0 vs blue in photos 1-2) are shown for what is described as a single item, raising doubt about which cylinder is actually for sale.",
+        "proof": "A single photo showing both cylinders together, or seller confirmation with a fresh photo of the actual unit to be sold.",
+        "if_unproven": "priced as the lower-value/worse-condition of the two, since the exact item is unclear"
+      },
+      {
+        "risk": "No visible capacity stamp confirms 12.5kg rather than a different standard size (e.g., 6kg or 13kg).",
+        "proof": "Close-up photo of the embossed capacity/weight marking usually near the valve collar or shoulder.",
+        "if_unproven": "priced as unverified capacity, treated as lowest common size claim cannot be upgraded"
+      },
+      {
+        "risk": "No test/inspection date visible, so cylinder could be expired or unsafe to refill.",
+        "proof": "Close-up of the stamped manufacture/last-test date on the collar.",
+        "if_unproven": "priced as expired/untested"
+      },
+      {
+        "risk": "Valve condition and leak-tightness cannot be assessed from photos.",
+        "proof": "Video of valve being opened/closed and a soap-water leak test.",
+        "if_unproven": "priced as not working/leaking"
+      },
+      {
+        "risk": "Surface rust visible could indicate deeper corrosion affecting cylinder integrity.",
+        "proof": "Close-up photos of the base and body seams showing extent of rust.",
+        "if_unproven": "priced as corroded/structurally questionable"
+      }
+    ],
+    "proof_requests": [
+      "Clarify which cylinder (yellow or blue) is actually being sold, with a photo showing both if both are on offer.",
+      "Close-up of the embossed capacity marking (e.g., '12.5KG') on the cylinder shoulder.",
+      "Close-up of the manufacture/last hydro-test date stamp near the valve.",
+      "Video of the valve opening/closing and a leak check.",
+      "Clear photo of the full body showing any dents, bulges, or deep corrosion."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The listing shows two different cylinders under one claimed item with no legible capacity or test-date markings, so even a worst-case price cannot be anchored without knowing which unit is sold and its basic safety/capacity proof."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 18523,
+    "input_tokens": 3916,
+    "output_tokens": 1631,
+    "cost_usd": 0.020983,
+    "replayed": false,
+    "fixture_key": "28f43ba9c4319c472c0edb54252827a3",
+    "error": null
+  }
+}

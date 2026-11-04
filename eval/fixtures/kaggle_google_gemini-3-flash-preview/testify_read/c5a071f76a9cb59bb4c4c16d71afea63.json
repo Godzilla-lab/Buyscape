@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows a cross-section of a twin-core cable with stranded copper-colored conductors.",
+      "The cable in photo 0 has blue and black inner insulation, a metallic braided shield, and a black outer jacket.",
+      "Photo 1 shows two large wooden reels/drums wound with black cable.",
+      "No manufacturer markings, brand names, or technical specifications are legible on the cable jacket or the reels."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "twin core solar cable",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "10mm",
+        "verdict": "unverified",
+        "evidence": "The cross-sectional area is not visible in the photos; no markings on the jacket are legible."
+      },
+      {
+        "claim": "pure copper",
+        "verdict": "unverified",
+        "evidence": "The strands are copper-colored, but pure copper cannot be distinguished from copper-clad aluminum (CCA) in a photo."
+      },
+      {
+        "claim": "Best quality",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The cable may be Copper Clad Aluminum (CCA) rather than pure copper, which has lower conductivity.",
+        "proof": "A close-up photo of a freshly cut strand end to check for a silver/aluminum core.",
+        "if_unproven": "as CCA"
+      },
+      {
+        "risk": "The gauge (thickness) may be less than the claimed 10mm.",
+        "proof": "A photo of the printed text on the cable jacket showing the 'mm2' rating.",
+        "if_unproven": "as 6mm cable"
+      },
+      {
+        "risk": "The cable may not be UV-rated or specifically designed for solar use despite the appearance.",
+        "proof": "A photo of the jacket printing showing the cable type (e.g., PV1-F).",
+        "if_unproven": "as standard armored power cable"
+      }
+    ],
+    "proof_requests": [
+      "A clear, close-up photo of the text printed on the cable jacket showing the brand, size (e.g., 2x10mm2), and voltage/standard ratings.",
+      "A photo of the label or stencil on the side of the wooden reels."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The identity and value of electrical cable depend entirely on the gauge and material (copper vs CCA). Neither can be confirmed without reading the manufacturer's markings on the cable jacket."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 8802,
+    "input_tokens": 3460,
+    "output_tokens": 1666,
+    "cost_usd": 0.006728,
+    "replayed": false,
+    "fixture_key": "c5a071f76a9cb59bb4c4c16d71afea63",
+    "error": null
+  }
+}

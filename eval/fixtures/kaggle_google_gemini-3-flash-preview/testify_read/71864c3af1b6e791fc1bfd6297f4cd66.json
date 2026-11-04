@@ -1,0 +1,74 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Monocrystalline solar panel with a 6x12 cell configuration (72 cells total).",
+      "The panel is leaning against a shelf in what appears to be a warehouse or shop.",
+      "A stack of similar panels is visible underneath the displayed unit.",
+      "Watermark 'UNIQUE SOLAR ENTERPRISES' is present across the center of the image.",
+      "No manufacturer logo, brand name, or specification label is visible on the front of the panel."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Canadian",
+        "verdict": "unverified",
+        "evidence": "No 'Canadian Solar' logo or branding is visible in photo 0."
+      },
+      {
+        "claim": "300watts",
+        "verdict": "unverified",
+        "evidence": "The technical specification label on the back is not shown."
+      },
+      {
+        "claim": "72cell",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows a grid of 6 by 12 cells."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The panel may be a generic or lower-tier brand rather than 'Canadian Solar'.",
+        "proof": "A clear photo of the manufacturer's label on the back of the panel.",
+        "if_unproven": "priced as a generic unbranded panel."
+      },
+      {
+        "risk": "The actual wattage may be lower than 300W, or the panel may be degraded.",
+        "proof": "A photo of the back label showing the 'Pmax' rating and a video of a multimeter test in direct sunlight.",
+        "if_unproven": "priced as a 250W panel."
+      },
+      {
+        "risk": "Internal cell damage (micro-cracks) or bypass diode failure.",
+        "proof": "High-resolution close-up photos of the cells and a photo of the open junction box.",
+        "if_unproven": "priced as used with potential defects."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the specification label on the back of the panel showing brand, model, and wattage.",
+      "Photo of the junction box on the back of the panel.",
+      "Clear, high-resolution photo of the front of the panel to inspect for cell damage or 'snail trails'."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The brand and wattage, which are the primary drivers of value for solar panels, cannot be verified without a photo of the manufacturer's label on the back."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 9923,
+    "input_tokens": 2355,
+    "output_tokens": 2104,
+    "cost_usd": 0.007489,
+    "replayed": false,
+    "fixture_key": "71864c3af1b6e791fc1bfd6297f4cd66",
+    "error": null
+  }
+}

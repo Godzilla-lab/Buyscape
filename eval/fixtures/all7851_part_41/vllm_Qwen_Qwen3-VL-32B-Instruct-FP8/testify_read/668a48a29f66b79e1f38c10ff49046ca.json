@@ -1,0 +1,68 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a warehouse or storage area filled with multiple boxes of sewing machines.",
+      "Boxes are labeled 'BUTTERFLY SEWING MACHINES' and 'MADE IN INDIA'.",
+      "Some boxes are brown cardboard with red text, labeled 'Godfly Sewing Machine Model NO.: JA2-1'.",
+      "Other boxes are colorful (pink, green, white) with butterfly graphics and images of black sewing machines.",
+      "The boxes are stacked high, some wrapped in plastic, indicating bulk or wholesale stock.",
+      "No actual sewing machine is visible outside the boxes.",
+      "The seller's text says 'Butterfly Indian machine', which matches the 'MADE IN INDIA' label on the boxes."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "sewing machine",
+      "brand": "Butterfly",
+      "model": null,
+      "read_from": [
+        "photo 0 box label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Butterfly Indian machine",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows boxes labeled 'BUTTERFLY SEWING MACHINES' and 'MADE IN INDIA'."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The machine may be damaged or defective inside the box.",
+        "proof": "A photo of the actual sewing machine inside the box, showing no damage and all parts present.",
+        "if_unproven": "priced as potentially defective or not working"
+      },
+      {
+        "risk": "The model number is not visible, which may affect pricing and functionality.",
+        "proof": "A close-up photo of the model number on the machine or box label.",
+        "if_unproven": "priced as unknown model, which may be lower value"
+      },
+      {
+        "risk": "The machine may be second-hand or used, not new as implied by packaging.",
+        "proof": "A photo of the machine inside the box, showing no signs of use or wear.",
+        "if_unproven": "priced as possibly used, which reduces value"
+      }
+    ],
+    "proof_requests": [
+      "A photo of the actual sewing machine inside the box, showing the front, back, and all parts.",
+      "A close-up of the model number on the machine or box.",
+      "A photo showing the machine is new and unused, with all accessories included."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a Butterfly sewing machine made in India, but no actual machine is visible. The model number is not readable, and there is no proof of condition. Without seeing the machine inside the box, it cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 48950,
+    "input_tokens": 1766,
+    "output_tokens": 608,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "668a48a29f66b79e1f38c10ff49046ca",
+    "error": null
+  }
+}

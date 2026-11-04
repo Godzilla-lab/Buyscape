@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the back of a silver iPhone with a triple-camera system in a square module, Apple logo centered, and a small white sticker at the bottom with 'J32 2023' written on it.",
+      "Photo 1 shows the front of the same phone with the screen on, displaying the Apple logo during boot-up, indicating the device is powered on.",
+      "The phone has a flat-edged design consistent with iPhone 15 Pro Max.",
+      "No visible damage to the back or front in the photos.",
+      "The seller claims it is an iPhone 15 Pro Max 256GB (note: seller wrote '255gb', likely a typo) UK standard."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "iPhone 15 Pro Max",
+      "brand": "Apple",
+      "model": "iPhone 15 Pro Max",
+      "read_from": [
+        "photo 0: triple-camera module and flat edges consistent with iPhone 15 Pro Max",
+        "photo 1: boot screen with Apple logo, consistent with iPhone"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "iPhone 15 Pro Max",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows the triple-camera module and flat-edged design, which are distinctive of iPhone 15 Pro Max. Photo 1 shows the Apple boot screen, consistent with an iPhone."
+      },
+      {
+        "claim": "255gb",
+        "verdict": "unverified",
+        "evidence": "No photo shows the storage capacity. The model number or settings screen is not visible. '255gb' is likely a typo for 256GB, but cannot be confirmed from photos."
+      },
+      {
+        "claim": "UK standard",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible proof of region or model variant (e.g., IMEI, box, or settings screen). The sticker 'J32 2023' does not indicate region."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Not genuine iPhone or counterfeit",
+        "proof": "Photo of the settings screen showing model number, or a photo of the box with model and region details.",
+        "if_unproven": "priced as potentially counterfeit, which would drastically reduce value"
+      },
+      {
+        "risk": "Storage capacity is not 256GB (as claimed)",
+        "proof": "Photo of the settings screen showing 'General > About' with storage capacity listed.",
+        "if_unproven": "priced as lower storage model (e.g., 128GB or 512GB), which affects value"
+      },
+      {
+        "risk": "Not UK standard (e.g., locked to carrier or different region)",
+        "proof": "Photo of the settings screen showing 'General > About' with model number and IMEI, or a photo of the box with region label.",
+        "if_unproven": "priced as non-UK standard, which may affect compatibility and resale value"
+      },
+      {
+        "risk": "Physical damage not visible in photos (e.g., cracked screen, water damage)",
+        "proof": "Close-up video or photo of the screen, edges, and ports under light, including a water damage indicator check.",
+        "if_unproven": "priced as potentially damaged, which reduces value"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the settings screen showing 'General > About' with model number and storage capacity.",
+      "Photo of the box or original packaging showing region and model.",
+      "Video or close-up photos of the screen, edges, and charging port under light to check for damage.",
+      "Photo of the IMEI or serial number from the device or box."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The device appears to be an iPhone 15 Pro Max based on design, but critical claims like storage capacity, region, and authenticity cannot be verified from current photos. Hidden risks such as counterfeit, wrong storage, or damage affect pricing. Proof is needed to confirm identity and condition before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 72090,
+    "input_tokens": 2278,
+    "output_tokens": 915,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "9c2497c052a8c8ea7d563d1e37c8d597",
+    "error": null
+  }
+}

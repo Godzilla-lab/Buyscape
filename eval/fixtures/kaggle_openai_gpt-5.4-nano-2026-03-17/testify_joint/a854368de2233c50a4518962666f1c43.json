@@ -1,0 +1,89 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photos show multiple wooden pallets stacked indoors.",
+      "Many pallets have circular stamp marks reading \u201cEPAL\u201d on the deck boards.",
+      "Some pallets look light/clean; no obvious broken boards are visible in the provided angles.",
+      "No clear pallet dimensions, grade, or count per lot is shown.",
+      "No photo shows a scale reading or any weighing process."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": null,
+      "brand": "EPAL",
+      "model": null,
+      "read_from": [
+        "photo 1 deck board stamp",
+        "photo 2 deck board stamp"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "It serves as stacking base.",
+        "verdict": "supported",
+        "evidence": "Photos show wooden pallets suitable for stacking/handling."
+      },
+      {
+        "claim": "It available for pickup only in Port Harcourt",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo or document shows location; only seller text."
+      },
+      {
+        "claim": "Everything is clean, dry and sorted, no water added.",
+        "verdict": "unverified",
+        "evidence": "Photos show pallets that appear relatively clean, but cannot confirm dryness, sorting completeness, or whether any water was added."
+      },
+      {
+        "claim": "Weighed at 500 kg on a certified scale this morning.",
+        "verdict": "unverifiable_remote",
+        "evidence": "No scale photo/receipt or weighing video is provided."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Lot weight may not be 500 kg (could be estimated or includes unusable/extra items).",
+        "proof": "A short video of the certified scale reading with the full lot on it (or a receipt/invoice showing the weight).",
+        "if_unproven": "Price as a smaller/unknown quantity lot (worst case: treat as not confirmed weight)."
+      },
+      {
+        "risk": "Pallet condition/grade may be worse than shown (cracks, missing slats, heavy repairs) which affects resale value.",
+        "proof": "Close-up photos of the worst 5 pallets (corners + underside + any broken boards) and a quick walk-around video.",
+        "if_unproven": "Price as mixed/used condition (worst case: not guaranteed \u201cclean/dry/sorted\u201d)."
+      },
+      {
+        "risk": "EPAL authenticity/standard may vary (some stamps could be worn or non-EPAL pallets mixed).",
+        "proof": "Photos showing the full stamp/marking on multiple pallets plus any pallet ID/marking details on the stringers.",
+        "if_unproven": "Price as generic wooden pallets rather than guaranteed EPAL standard."
+      },
+      {
+        "risk": "Count may be unclear; buyers may be charged per kg but need to know how many pallets they get.",
+        "proof": "A photo showing the total number of pallets (or a labeled grid/count) and/or a video panning across the full stack.",
+        "if_unproven": "Price as an unknown-count lot (worst case: fewer pallets than expected)."
+      }
+    ],
+    "proof_requests": [
+      "Send a video of the certified scale showing the lot weight (confirming the 500 kg claim).",
+      "Send close-ups of the worst-condition pallets (corners, underside, any cracks/missing slats).",
+      "Send photos showing EPAL markings/IDs on multiple pallets (not just one or two).",
+      "Send a clear shot/video that shows the full lot so the pallet count/extent is verifiable."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item type (wooden pallets with EPAL stamps) is visible, but the key pricing drivers from the seller\u2019s words\u2014especially the confirmed 500 kg weight and the exact lot quantity/condition\u2014are not verifiable from the photos. Without that, a reliable worst-case price pick from the comparables is not possible.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_joint",
+    "latency_ms": 5712,
+    "input_tokens": 2651,
+    "output_tokens": 895,
+    "cost_usd": 0.001649,
+    "replayed": false,
+    "fixture_key": "a854368de2233c50a4518962666f1c43",
+    "error": null
+  }
+}

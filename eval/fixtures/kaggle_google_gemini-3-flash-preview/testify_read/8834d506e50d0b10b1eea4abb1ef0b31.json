@@ -1,0 +1,73 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Large black industrial UPS cabinet with a front-facing LCD display.",
+      "A four-tier metal rack holding approximately 20 large batteries.",
+      "Batteries feature red and white labels with 'Gamatronic' branding.",
+      "The LCD panel on the UPS appears to be powered on.",
+      "The image has a watermark for 'TPC ENKO NIGERIA LTD' and 'POSTED ON JIJI'.",
+      "The setup is located against a plain yellow wall in a utility-style room."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "Industrial UPS system",
+      "brand": "Gamatronic",
+      "model": null,
+      "read_from": [
+        "photo 0 batteries"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Standart battery back up 30/60 minutes",
+        "verdict": "unverifiable_remote",
+        "evidence": "Backup time depends entirely on the connected load and battery health, which cannot be verified remotely."
+      },
+      {
+        "claim": "2 hours...",
+        "verdict": "unverifiable_remote",
+        "evidence": "Contradicts the previous 30/60 minute claim and depends on load."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Unknown KVA capacity of the UPS unit",
+        "proof": "A clear photo of the manufacturer's specification plate on the back or side of the UPS cabinet.",
+        "if_unproven": "as the lowest capacity model for this chassis size (e.g., 10kVA)"
+      },
+      {
+        "risk": "Battery degradation or failure",
+        "proof": "A video showing the system supporting a significant load (e.g., 5kW) with the mains power disconnected, showing the discharge rate on the display.",
+        "if_unproven": "as having dead batteries requiring full replacement"
+      },
+      {
+        "risk": "Listing may use a representative or stolen photo",
+        "proof": "A photo of the UPS unit with a handwritten note showing the seller's name and today's date.",
+        "if_unproven": "as a high-risk transaction"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the specification plate on the back of the UPS showing the KVA rating and model number.",
+      "Clear photo of a single battery label to confirm the Ah rating and the date of manufacture code.",
+      "A photo of the actual unit with a handwritten note of the current date to verify possession.",
+      "Video of the system running a load test while disconnected from the mains."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The KVA rating, which is the primary driver of value for industrial UPS units, is not visible. Furthermore, the watermarked photo suggests this may be a commercial stock or portfolio image rather than the specific item being sold."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 13939,
+    "input_tokens": 2377,
+    "output_tokens": 2913,
+    "cost_usd": 0.035105,
+    "replayed": false,
+    "fixture_key": "8834d506e50d0b10b1eea4abb1ef0b31",
+    "error": null
+  }
+}

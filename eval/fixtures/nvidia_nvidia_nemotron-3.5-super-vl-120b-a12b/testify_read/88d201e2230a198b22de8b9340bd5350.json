@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a close-up of solar cells with a central label/sticker that is too blurry to read.",
+      "Photo 1 shows a full solar panel with a silver frame, surface reflections, and no readable text.",
+      "The panel appears to use half-cut cell technology based on the cell layout in photo 0.",
+      "No brand name, wattage, or model number is clearly legible in either photo."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Jinko solar panel",
+        "verdict": "unverifiable_remote",
+        "evidence": "Label in photo 0 is present but illegible"
+      },
+      {
+        "claim": "450w",
+        "verdict": "unverifiable_remote",
+        "evidence": "Wattage not readable on label in photo 0"
+      },
+      {
+        "claim": "hybrid",
+        "verdict": "unverified",
+        "evidence": "Not visible in photos; unusual term for a standalone panel"
+      },
+      {
+        "claim": "144 cells",
+        "verdict": "unverifiable_remote",
+        "evidence": "Cell count cannot be confirmed from photo 0"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual wattage may be lower than 450W",
+        "proof": "Clear close-up photo of the label showing wattage and model",
+        "if_unproven": "price as an unbranded solar panel of unknown wattage"
+      },
+      {
+        "risk": "Brand may not be Jinko",
+        "proof": "Clear close-up photo of the label showing brand name",
+        "if_unproven": "price as an unknown or unbranded solar panel"
+      },
+      {
+        "risk": "Panel may not produce electrical power",
+        "proof": "Video of a multimeter measuring open-circuit voltage and short-circuit current",
+        "if_unproven": "price as not working or scrap"
+      },
+      {
+        "risk": "Hidden physical defects such as cracks, hot spots, or delamination",
+        "proof": "Close-up photos of the panel surface in direct sunlight",
+        "if_unproven": "price as damaged"
+      }
+    ],
+    "proof_requests": [
+      "Clear close-up photo of the label/sticker showing brand, model, and wattage",
+      "Photo of the back of the panel showing the junction box and rear label",
+      "Video of a multimeter measuring open-circuit voltage (Voc) and short-circuit current (Isc)"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a solar panel, but the brand, model, and wattage that determine its value are not legible in the photos, so even a worst-case price cannot be set without proof."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 39950,
+    "input_tokens": 2737,
+    "output_tokens": 3323,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "88d201e2230a198b22de8b9340bd5350",
+    "error": null
+  }
+}

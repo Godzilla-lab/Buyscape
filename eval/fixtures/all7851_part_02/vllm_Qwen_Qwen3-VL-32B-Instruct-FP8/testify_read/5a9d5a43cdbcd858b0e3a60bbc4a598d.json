@@ -1,0 +1,92 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: iPhone in box, screen on, showing time 12:36, date Thu Oct 29, with a blue wallpaper. Box has a light blue back with dual camera cutout and Apple logo.",
+      "Photo 1: Back of the iPhone shown, light blue color, dual camera module, Apple logo. Box is visible beside it.",
+      "Photo 2: Similar to photo 0, screen on showing time 12:33, date Thu Oct 29. Box beside it with same design.",
+      "All photos show the phone in its original box, held by a person wearing a dark blue garment with yellow buttons.",
+      "No serial number, model number, or warranty information visible in any photo.",
+      "No accessories (charger, cable, etc.) visible in any photo.",
+      "The phone appears to be an iPhone 15 or similar model, not iPhone 16, based on the dual camera layout and design."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "iPhone",
+      "brand": "Apple",
+      "model": null,
+      "read_from": [
+        "photo 0 screen",
+        "photo 1 back",
+        "photo 2 screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Open Box iPhone 16 128gb available",
+        "verdict": "contradicted",
+        "evidence": "The phone in the photos has a dual-camera setup and design consistent with iPhone 15, not iPhone 16, which has a different camera module and design. No 'iPhone 16' text is visible on the device or box."
+      },
+      {
+        "claim": "Physical + Esim",
+        "verdict": "unverifiable_remote",
+        "evidence": "No SIM tray or eSIM settings screen shown. Cannot verify from photos alone."
+      },
+      {
+        "claim": "Still on Apple warranty",
+        "verdict": "unverifiable_remote",
+        "evidence": "No warranty information, serial number, or Apple ID verification visible. Cannot confirm warranty status remotely."
+      },
+      {
+        "claim": "Battery health...",
+        "verdict": "unverified",
+        "evidence": "No battery health screen or percentage shown in any photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Phone is not an iPhone 16 as claimed, but likely an iPhone 15 or older model.",
+        "proof": "A clear photo of the back of the phone showing the model name or a screenshot of the Settings > General > About section showing the model number.",
+        "if_unproven": "Priced as an iPhone 15 or similar, not iPhone 16, which significantly reduces value."
+      },
+      {
+        "risk": "Phone may be unlocked or have restrictions, or may not be genuine.",
+        "proof": "A photo of the Settings > General > About screen showing the model number, serial number, and carrier status.",
+        "if_unproven": "Priced as potentially locked or non-genuine, which reduces value."
+      },
+      {
+        "risk": "Battery health may be degraded, affecting performance and resale value.",
+        "proof": "A screenshot of the battery health percentage from Settings > Battery > Battery Health.",
+        "if_unproven": "Priced as if battery is degraded (e.g., below 80%), which reduces value."
+      },
+      {
+        "risk": "Warranty claim may be false or expired.",
+        "proof": "A screenshot of the Apple warranty status from apple.com or Apple Support app using the serial number.",
+        "if_unproven": "Priced as out of warranty, which reduces value."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of Settings > General > About showing model number and serial number.",
+      "Screenshot of battery health percentage.",
+      "Screenshot of Apple warranty status using the serial number.",
+      "Photo of the phone's back showing any model engraving or label.",
+      "Photo of the box showing any model or serial number."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The phone in the photos does not match the claimed iPhone 16 model, and critical details like model number, battery health, and warranty status are not visible. Without proof, the item cannot be accurately identified or priced."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 79604,
+    "input_tokens": 2790,
+    "output_tokens": 949,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "5a9d5a43cdbcd858b0e3a60bbc4a598d",
+    "error": null
+  }
+}

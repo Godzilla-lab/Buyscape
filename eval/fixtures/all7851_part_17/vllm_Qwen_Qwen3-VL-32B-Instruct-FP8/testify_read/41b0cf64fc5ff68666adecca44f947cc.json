@@ -1,0 +1,74 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a close-up of an automotive alternator with a label visible on the side.",
+      "The label reads: 'TOYOTA 27000-25040', 'DENSO 104211-47160', '12V 75100', 'MADE IN JAPAN'.",
+      "The alternator has a dusty, used appearance with visible copper windings through the cooling fins.",
+      "A yellow sticker with '833' is affixed to the body.",
+      "Photo 1 shows a wider view of the same alternator from a different angle, confirming the label and the yellow sticker.",
+      "The alternator has mounting brackets, a pulley end, and an electrical connector.",
+      "The background is a green cutting mat with grid lines, suggesting a workshop setting."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "automotive alternator",
+      "brand": "Denso",
+      "model": "104211-47160",
+      "read_from": [
+        "photo 0 label",
+        "photo 1 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Certified Foreign Used Automotive Part",
+        "verdict": "unverifiable_remote",
+        "evidence": "No certification mark or document is visible in the photos. The term 'certified' cannot be verified remotely."
+      },
+      {
+        "claim": "Grade A",
+        "verdict": "unverified",
+        "evidence": "The photos show a used part with dust and wear, but no grading standard is visible. 'Grade A' is a subjective claim not supported by visual evidence."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The alternator may not be functional or may have internal damage not visible in photos.",
+        "proof": "A video showing the alternator spinning and producing voltage under load, or a multimeter test result.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The part may have been damaged in transit or during removal, such as cracked housing or broken diodes.",
+        "proof": "Close-up shots of the housing, diode assembly, and internal components.",
+        "if_unproven": "priced as potentially damaged"
+      },
+      {
+        "risk": "The part may not fit the buyer's vehicle due to mounting or electrical incompatibility.",
+        "proof": "A photo showing the part installed on a vehicle or a comparison with the buyer's current alternator.",
+        "if_unproven": "priced as unverified fitment"
+      }
+    ],
+    "proof_requests": [
+      "Video or photo of the alternator being tested for output voltage and current.",
+      "Close-up of the diode assembly and internal components.",
+      "Photo of the part installed on a vehicle or comparison with the buyer's current alternator."
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a Denso alternator with model number 104211-47160, readable from the label in both photos. While the 'Certified' and 'Grade A' claims are unverifiable or unverified, the item can be priced at its worst case (as not working) based on visible condition and model. Hidden risks are noted and priced conservatively until proven."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 61835,
+    "input_tokens": 2276,
+    "output_tokens": 750,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "41b0cf64fc5ff68666adecca44f947cc",
+    "error": null
+  }
+}

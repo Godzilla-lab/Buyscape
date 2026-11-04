@@ -1,0 +1,99 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: Black DSLR body with clearly visible 'Nikon' logo on the front, mounted with a long zoom lens, resting on a box labeled 'McSteve ... Gadget Store'.",
+      "Photo 1: Top-down view of the same camera showing a lens barrel marked 'Nikon AF-P DX Nikkor 70-300mm 1:4.5-6.3G ED' and a mode dial on the camera body.",
+      "Photo 2: Side view of the camera body again showing 'Nikon' branding near the pop-up flash and a textured grip with some visible wear/scuffing on the hand-grip area.",
+      "No photo shows a power-on screen, LCD display, shutter counter, or any image taken with the camera.",
+      "No clear, unobstructed shot of a model number plate (e.g., 'D3400') on the body is visible in any photo."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "DSLR camera with telephoto zoom lens",
+      "brand": "Nikon",
+      "model": null,
+      "read_from": [
+        "photo 0 body badge",
+        "photo 1 lens barrel text",
+        "photo 2 body badge"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Used Nikon D3400 DSLR Camera With 70-300mm Lens",
+        "verdict": "unverified",
+        "evidence": "Nikon branding and a 70-300mm lens are visible (photos 0-2), but no clear model-number plate confirms 'D3400' specifically."
+      },
+      {
+        "claim": "The brand is Canon",
+        "verdict": "contradicted",
+        "evidence": "All three photos clearly show 'Nikon' branding on the body and lens, not Canon."
+      },
+      {
+        "claim": "working perfectly ok with no fault",
+        "verdict": "unverifiable_remote",
+        "evidence": "No power-on, screen, shutter-fire, or sample-image photo/clip provided to confirm functionality."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Camera may not power on or have sensor/shutter faults despite 'no fault' claim",
+        "proof": "A clip or photo of the camera powered on with the LCD screen active and a test shot displayed",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Seller's own listing text contradicts itself (states Nikon model but also claims 'brand is Canon'), raising doubt about listing accuracy or possible template/copy-paste error",
+        "proof": "A corrected, consistent description from the seller confirming brand and model, ideally with a clear photo of the model badge",
+        "if_unproven": "treated as unconfirmed model, priced as generic entry-level DSLR with lens"
+      },
+      {
+        "risk": "Lens optical condition (fungus, haze, scratches on glass) cannot be seen in these photos",
+        "proof": "A close-up photo through the lens against a light source showing clear glass",
+        "if_unproven": "priced as lens condition unknown/worst case"
+      },
+      {
+        "risk": "Shutter count/actual usage level unknown, affecting remaining lifespan",
+        "proof": "A photo of the shutter count from a diagnostic app or EXIF data screenshot",
+        "if_unproven": "priced as high-use/worst case"
+      },
+      {
+        "risk": "Visible wear/scuffing on the grip (photo 2) could indicate heavier use or prior drops not disclosed",
+        "proof": "Additional close-up photos of all sides of the body showing no cracks or internal damage",
+        "if_unproven": "priced as cosmetically worn, worst case"
+      },
+      {
+        "risk": "Completeness of kit (battery, charger, memory card, strap, box) not confirmed beyond the box shown",
+        "proof": "A photo of all included accessories laid out together",
+        "if_unproven": "priced as body and lens only, no accessories"
+      }
+    ],
+    "proof_requests": [
+      "A video or photo of the camera powered on, showing the LCD screen active and a test shot taken",
+      "A clear photo of the model number plate on the body (bottom or front) to confirm 'D3400' vs another Nikon model",
+      "A close-up of the lens glass (front and rear elements) against light to check for fungus/scratches",
+      "A photo of the shutter count or EXIF data from a sample image",
+      "Confirmation of brand/model consistency from the seller, resolving the Nikon/Canon discrepancy in the text"
+    ],
+    "decision": "price",
+    "reason": "Photos confirm a Nikon-branded entry-level DSLR body with a 70-300mm telephoto lens, but the model cannot be read with certainty, the seller's text contains a brand contradiction (Canon vs Nikon), and no working proof is shown, so it must be priced as an unverified, worst-case functioning entry-level Nikon DSLR with kit-level lens.",
+    "price_pick": {
+      "low": 1,
+      "high": 4
+    }
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 33480,
+    "input_tokens": 5071,
+    "output_tokens": 3111,
+    "cost_usd": 0.037699,
+    "replayed": false,
+    "fixture_key": "c8b9ab948a7f21c20e101ebaee3f3906",
+    "error": null
+  }
+}

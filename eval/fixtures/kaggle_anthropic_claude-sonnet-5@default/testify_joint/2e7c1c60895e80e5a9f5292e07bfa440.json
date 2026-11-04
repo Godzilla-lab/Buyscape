@@ -1,0 +1,87 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows a split-type air conditioner: indoor wall unit sitting on top of an outdoor condenser/compressor unit, both resting on a tiled floor, not yet installed.",
+      "Outdoor unit has faint pink/red text visible on its casing that appears to read 'Sanyo' and 'inverter', but it is partially obscured and hard to fully confirm.",
+      "Outdoor unit shows surface rust spots and grime on the fan grille and casing edges.",
+      "No nameplate, HP/BTU rating, model sticker, or serial number is legible in the photo.",
+      "No remote control, power cable, or copper piping/connections are visible in the shot.",
+      "Unit is disconnected and sitting loose against a wall, not mounted or running, so no operational state can be observed."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "split inverter air conditioner (indoor + outdoor unit)",
+      "brand": "Sanyo",
+      "model": null,
+      "read_from": [
+        "photo 0 outdoor unit casing text (faint, partially legible)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Faulty inverter AC",
+        "verdict": "unverifiable_remote",
+        "evidence": "No power-on test, gas pressure check, or compressor run is shown in the photo; fault type/extent cannot be confirmed remotely, but the unit is priced as non-working per the seller's own description."
+      },
+      {
+        "claim": "Inverter AC (brand Sanyo implied by faint text)",
+        "verdict": "unverified",
+        "evidence": "Text on outdoor unit in photo 0 is too faint/blurred to fully confirm brand and 'inverter' designation."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual capacity (HP/BTU) unknown, which strongly affects scrap/parts value",
+        "proof": "Clear close-up photo of the nameplate/rating sticker on indoor or outdoor unit",
+        "if_unproven": "priced at the lowest common split-AC capacity (1HP-equivalent) worst case"
+      },
+      {
+        "risk": "Compressor may be seized, burnt, or missing entirely (common in 'faulty' AC sales)",
+        "proof": "Photo/video of compressor running or at least intact copper windings/terminals",
+        "if_unproven": "priced as scrap/non-functional compressor"
+      },
+      {
+        "risk": "Missing copper piping, capacitor, PCB board, or remote control reduces resale/repair value",
+        "proof": "Close-up photos of back of indoor unit and compressor wiring area, plus remote",
+        "if_unproven": "priced as incomplete unit, parts-only value"
+      },
+      {
+        "risk": "Rust and corrosion visible on outdoor casing may extend to internal coils/compressor housing",
+        "proof": "Close-up of coil fins and compressor base for corrosion",
+        "if_unproven": "priced as heavily corroded, scrap-grade"
+      },
+      {
+        "risk": "Gas leakage or refrigerant loss (very common cause of 'faulty' listing)",
+        "proof": "Technician gas-pressure check or receipt from refrigerant top-up",
+        "if_unproven": "priced as no refrigerant, non-cooling"
+      }
+    ],
+    "proof_requests": [
+      "Clear close-up of the nameplate/rating label with brand, model, HP/BTU visible",
+      "Close-up of compressor terminals and wiring, and any copper piping present",
+      "Photo of remote control and power cord if included",
+      "Any video showing an attempt to power the unit (even if it fails) to see what 'faulty' means"
+    ],
+    "decision": "price",
+    "reason": "The item is clearly a disused split AC (indoor+outdoor) sold explicitly as faulty with no proof of what is broken, no model/capacity readable, and no functional test possible, so it must be priced at worst case as a non-working, parts/scrap-grade unit.",
+    "price_pick": {
+      "low": 0,
+      "high": 1
+    }
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 31626,
+    "input_tokens": 3346,
+    "output_tokens": 2720,
+    "cost_usd": 0.030339,
+    "replayed": false,
+    "fixture_key": "2e7c1c60895e80e5a9f5292e07bfa440",
+    "error": null
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Front view of a smartphone with a notch, showing iOS home screen with 'Waiting...' on app icons. The time is 07:46, date is Wednesday 1. The phone is held in hand, background shows a glass display cabinet and wooden flooring.",
+      "Photo 1: Side view of the phone, showing volume buttons, power button, and a SIM tray. The phone is light blue/green. A sticker is visible on the back, partially covering the camera area.",
+      "Photo 2: Back view of the phone, showing dual-camera setup in a square module, a flash, and a sticker with text. The sticker includes: 'Apple', '128GB Great A+', 'Battery 85+', '100% Tester', 'Camera Pass', 'Color: Green', 'Testing Pass', 'iCloud Unlocked', 'TAM', 'Denaco'. An orange sticker says 'H 128G'. The phone is light blue/green, matching the side view."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "iPhone 11",
+      "brand": "Apple",
+      "model": "iPhone 11",
+      "read_from": [
+        "photo 2 sticker: 'Apple', '128GB Great A+'",
+        "photo 2 sticker: 'Color: Green' and 'iCloud Unlocked' \u2014 consistent with iPhone 11 design"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "iPhone 11 128gb available now",
+        "verdict": "supported",
+        "evidence": "Photo 2 sticker clearly states 'Apple', '128GB Great A+' and the phone's design matches iPhone 11."
+      },
+      {
+        "claim": "different colors available",
+        "verdict": "unverifiable_remote",
+        "evidence": "Only one color (green) is shown in the photos. The seller claims multiple colors, but no other color is visible."
+      },
+      {
+        "claim": "iCloud Unlocked",
+        "verdict": "supported",
+        "evidence": "Photo 2 sticker explicitly says 'iCloud Unlocked'."
+      },
+      {
+        "claim": "Battery 85+",
+        "verdict": "supported",
+        "evidence": "Photo 2 sticker states 'Battery 85+'."
+      },
+      {
+        "claim": "Camera Pass",
+        "verdict": "supported",
+        "evidence": "Photo 2 sticker states 'Camera Pass'."
+      },
+      {
+        "claim": "100% Tester",
+        "verdict": "unverified",
+        "evidence": "Photo 2 sticker says '100% Tester', but no proof of testing is shown. This is a claim without visual verification."
+      },
+      {
+        "claim": "Sim Unlock",
+        "verdict": "unverified",
+        "evidence": "Photo 2 sticker says 'Sim Unlock', but no proof of SIM unlock status is visible. This is a claim without visual verification."
+      },
+      {
+        "claim": "Lock:OFF",
+        "verdict": "unverified",
+        "evidence": "Photo 2 sticker says 'Lock:OFF', but no proof of screen lock status is visible. This is a claim without visual verification."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The phone may be a refurbished or used unit with hidden damage or software issues not visible in photos.",
+        "proof": "A video showing the phone being turned on, camera functioning, battery health check via Settings, and a full inspection of the screen and body for cracks or scratches.",
+        "if_unproven": "Priced as a used/refurbished unit with potential hidden defects, which may reduce value."
+      },
+      {
+        "risk": "The 'iCloud Unlocked' claim may be false or the phone may be blacklisted.",
+        "proof": "A screenshot of the phone's Settings > General > About > Serial Number, checked via Apple's official website or a trusted IMEI checker.",
+        "if_unproven": "Priced as potentially locked or blacklisted, which would significantly reduce value."
+      },
+      {
+        "risk": "The 'Sim Unlock' claim may be false; the phone may be carrier-locked.",
+        "proof": "A video showing the phone being inserted into a different SIM card and successfully connecting to a network.",
+        "if_unproven": "Priced as potentially carrier-locked, which reduces value for buyers needing network flexibility."
+      },
+      {
+        "risk": "The 'Battery 85+' claim may be inaccurate; battery health may be lower.",
+        "proof": "A screenshot from the phone's Settings > Battery > Battery Health showing the actual battery capacity percentage.",
+        "if_unproven": "Priced as having unknown battery health, which may be worse than claimed."
+      }
+    ],
+    "proof_requests": [
+      "Video showing the phone being turned on, camera working, and battery health check.",
+      "Screenshot of the phone's serial number checked via Apple's official website or IMEI checker to verify iCloud status.",
+      "Video showing the phone being tested with a different SIM card to confirm it is unlocked.",
+      "Screenshot of Battery Health from Settings to verify the 85+ claim."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "While the phone appears to be an iPhone 11 128GB with visible stickers supporting key claims, critical risks remain unproven: iCloud unlock status, SIM unlock status, battery health, and overall functionality. Without proof, the item cannot be priced accurately and carries significant risk for the buyer."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 99377,
+    "input_tokens": 2793,
+    "output_tokens": 1234,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "15ee0ebb702205ee518a9f9aa5ffe67b",
+    "error": null
+  }
+}

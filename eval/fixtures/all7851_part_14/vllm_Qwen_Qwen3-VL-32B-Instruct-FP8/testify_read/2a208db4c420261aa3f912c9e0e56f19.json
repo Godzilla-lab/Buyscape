@@ -1,0 +1,67 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a large stack of orange and black boxes labeled 'AMARON QUANTA HUPS'.",
+      "The boxes are arranged in multiple rows and columns, suggesting bulk inventory.",
+      "Text on the boxes includes 'AMARON QUANTA HUPS', 'DRIVING ROAD', and an image of a house with solar panels.",
+      "A watermark 'ONYI BEST ENTERPRISE' is visible across the photo.",
+      "No solar panels, inverters, or batteries are visible outside the boxes.",
+      "No model numbers or specifications are clearly readable on the boxes."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "batteries",
+      "brand": "Amaron",
+      "model": null,
+      "read_from": [
+        "photo 0 box label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "we have solar panel, inverter and batteries of different sizes",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows only boxes labeled 'AMARON QUANTA HUPS', which are batteries. No solar panels or inverters are visible. The claim about having solar panels and inverters cannot be confirmed from the photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The batteries may be counterfeit or not genuine Amarons.",
+        "proof": "A close-up photo of the box showing the barcode, serial number, and hologram (if any), or a photo of the battery inside the box with its label.",
+        "if_unproven": "priced as potentially counterfeit, which reduces value significantly"
+      },
+      {
+        "risk": "The batteries may be old stock or expired.",
+        "proof": "A photo showing the manufacturing date or expiry date on the box or battery label.",
+        "if_unproven": "priced as possibly expired, which reduces value"
+      },
+      {
+        "risk": "The batteries may be damaged or defective inside the boxes.",
+        "proof": "A photo of the battery inside the box, showing its condition and terminals.",
+        "if_unproven": "priced as potentially damaged, which reduces value"
+      }
+    ],
+    "proof_requests": [
+      "A close-up photo of the box showing the model number, barcode, and manufacturing date.",
+      "A photo of the battery inside the box, showing its condition and label.",
+      "Photos of the solar panels and inverters if available, to verify the claim."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo only shows boxes of Amarons batteries, but the seller claims to have solar panels and inverters as well. Without proof of the other items or details about the batteries (model, date, condition), a price cannot be determined. The risk of counterfeit or expired batteries also requires verification."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 17040,
+    "input_tokens": 1782,
+    "output_tokens": 612,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "2a208db4c420261aa3f912c9e0e56f19",
+    "error": null
+  }
+}

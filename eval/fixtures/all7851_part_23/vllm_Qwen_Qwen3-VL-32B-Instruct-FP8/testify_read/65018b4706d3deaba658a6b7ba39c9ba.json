@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Open laptop with black keyboard and trackpad, screen covered in plastic wrap with visible creases and reflections. The laptop is on a wooden surface. A white box is partially visible in the background.",
+      "Photo 1: Bottom lid of the laptop with Dell logo visible. Handwritten text '7410 i7' and '1653/2568' is written in blue ink over the plastic wrap. The surface is textured, likely carbon fiber pattern.",
+      "Photo 2: Laptop open, screen on showing Windows desktop with blue background and icons. Screen still covered in plastic wrap with creases. Keyboard and trackpad visible. The same wooden surface as in other photos."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Dell",
+      "model": "Latitude 7410",
+      "read_from": [
+        "photo 1 bottom lid with '7410 i7' written on it",
+        "photo 0 and 2 showing the laptop design consistent with Dell Latitude series"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Dell latitude 7410",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows '7410' written on the bottom lid, and the Dell logo is visible. The design in photos 0 and 2 matches Dell Latitude 7410."
+      },
+      {
+        "claim": "10th Gen",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible CPU model or generation label in any photo. The 'i7' written on photo 1 suggests Intel Core i7, but 10th Gen cannot be confirmed without system info or BIOS screen."
+      },
+      {
+        "claim": "Back light keyboard",
+        "verdict": "unverified",
+        "evidence": "No photo shows the keyboard lit in dark conditions. The keyboard appears to be standard black keys with no visible backlighting in the current lighting."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Screen damage or dead pixels",
+        "proof": "Close-up photo of the screen without plastic wrap, showing the display under normal lighting and in dark conditions to check for defects.",
+        "if_unproven": "priced as having potential screen issues"
+      },
+      {
+        "risk": "Keyboard backlight not working",
+        "proof": "Photo of the keyboard in a dark room with backlight activated, or a video clip showing the backlight function.",
+        "if_unproven": "priced as not having backlight"
+      },
+      {
+        "risk": "Battery health or non-functional battery",
+        "proof": "Video clip showing the laptop running unplugged for 5-10 minutes, or a screenshot of battery health from Windows settings.",
+        "if_unproven": "priced as battery may be degraded or non-functional"
+      },
+      {
+        "risk": "Internal damage or non-working components",
+        "proof": "Video of the laptop booting, running a system diagnostic, or showing BIOS screen with full hardware details.",
+        "if_unproven": "priced as potentially having internal faults"
+      }
+    ],
+    "proof_requests": [
+      "Video of the laptop booting and running Windows with keyboard backlight turned on in a dark room.",
+      "Close-up photo of the screen without plastic wrap, showing no dead pixels or damage.",
+      "Photo or video of the BIOS screen showing CPU model and generation.",
+      "Screenshot of battery health from Windows settings or a diagnostic tool."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identifiable as Dell Latitude 7410 from the handwritten label and design, but key claims like 10th Gen CPU and backlight keyboard cannot be verified from current photos. Hidden risks such as screen damage, non-working backlight, and battery health are not visible and must be proven before pricing. The item cannot be priced accurately without further proof."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 69111,
+    "input_tokens": 2781,
+    "output_tokens": 869,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "65018b4706d3deaba658a6b7ba39c9ba",
+    "error": null
+  }
+}

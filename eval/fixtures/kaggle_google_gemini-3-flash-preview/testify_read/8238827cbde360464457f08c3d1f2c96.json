@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Retail packaging for an Itel PowerPulse Series power bank.",
+      "Model A1480 is printed on the box in photo 0.",
+      "Capacity of 30000mAh and 22.5W power delivery are visible on the box.",
+      "Box features icons for Type-C In/Out and 4 ports.",
+      "The actual power bank is not visible; only the front of the box is shown.",
+      "Background shows a retail environment with other boxed electronics."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "power bank",
+      "brand": "Itel",
+      "model": "A1480",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Itel 30000mah power bank",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "fast charging power bank with type c in and out",
+        "verdict": "supported",
+        "evidence": "photo 0 box mentions 22.5W and Type-C In&Out"
+      },
+      {
+        "claim": "provides 8 full [charges]",
+        "verdict": "unverifiable_remote",
+        "evidence": "Depends on the battery capacity of the phone being charged."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, inferior item.",
+        "proof": "Photo of the actual power bank outside of the packaging.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The device may be a counterfeit or clone.",
+        "proof": "Clear photo of the technical specifications and regulatory markings printed on the device itself.",
+        "if_unproven": "as a generic clone"
+      },
+      {
+        "risk": "The battery cells may be degraded or have lower actual capacity than labeled.",
+        "proof": "Video of the device charging a phone while showing its own digital display.",
+        "if_unproven": "as a 10,000mAh unit"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual power bank out of the box showing all ports.",
+      "Photo of the back of the power bank where the model and capacity are printed.",
+      "Photo of the holographic security seal on the box if present."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail packaging is shown. Without photos of the actual device, its existence, condition, and authenticity cannot be confirmed."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 18369,
+    "input_tokens": 2372,
+    "output_tokens": 3611,
+    "cost_usd": 0.012019,
+    "replayed": false,
+    "fixture_key": "8238827cbde360464457f08c3d1f2c96",
+    "error": null
+  }
+}

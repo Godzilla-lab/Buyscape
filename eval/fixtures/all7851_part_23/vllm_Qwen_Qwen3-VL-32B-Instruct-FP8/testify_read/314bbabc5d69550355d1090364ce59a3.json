@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a solar panel with a black frame and a white backsheet, standing upright against a wall.",
+      "The front side has a grid of dark photovoltaic cells with silver busbars.",
+      "The backside is white with three black connectors and a small label near the bottom left.",
+      "Text overlay on the photo reads 'BIG FUTURE SOLAR ENERGY'.",
+      "No brand or model name is visible on the panel or label in the photo.",
+      "The panel appears to be new or lightly used, with no visible cracks or damage.",
+      "The environment is an outdoor or semi-outdoor space with a concrete floor and a window with metal bars behind the panel."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "550watts Canadian solar panel",
+        "verdict": "unverified",
+        "evidence": "No brand or wattage label is visible in photo 0. The text 'BIG FUTURE SOLAR ENERGY' is a watermark, not a brand on the panel."
+      },
+      {
+        "claim": "120c",
+        "verdict": "unverifiable_remote",
+        "evidence": "The meaning of '120c' is unclear; it may refer to voltage, temperature, or a model code, but no such label is visible in the photo."
+      },
+      {
+        "claim": "25 years warranty",
+        "verdict": "unverifiable_remote",
+        "evidence": "No warranty document or label is visible in the photo. Warranty claims cannot be verified remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The panel may not be 550W or from a Canadian brand as claimed.",
+        "proof": "A close-up photo of the label on the back or frame showing the brand, model, and wattage rating.",
+        "if_unproven": "priced as a generic or lower-wattage panel, possibly non-Canadian"
+      },
+      {
+        "risk": "The panel may be damaged or defective, such as microcracks in the cells or faulty connectors.",
+        "proof": "A close-up of the front cells and connectors, and a video showing the panel under sunlight or with a multimeter test.",
+        "if_unproven": "priced as potentially non-functional or lower quality"
+      },
+      {
+        "risk": "The warranty claim is not verifiable and may be false.",
+        "proof": "A copy of the warranty document or a label showing warranty terms.",
+        "if_unproven": "priced as no warranty, reducing value"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the label on the back of the panel showing brand, model, and wattage.",
+      "Photo of the front cells showing any cracks or defects.",
+      "Photo or document showing warranty details.",
+      "Video of the panel under sunlight with a multimeter test to verify output."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The brand, wattage, and warranty claims cannot be verified from the current photo. The panel's identity and condition are uncertain, and critical proof is missing to price it accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 58805,
+    "input_tokens": 1788,
+    "output_tokens": 726,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "314bbabc5d69550355d1090364ce59a3",
+    "error": null
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 is a stock image with a clean white background and a watermark 'COMMERCE UNIQUE STORE'.",
+      "The item is a silver-colored gas cylinder with a red band labeled 'CEPSA BUTANO'.",
+      "The cylinder has an integrated metal handle as part of the top shroud.",
+      "Accessories shown include an orange gas regulator, an orange hose, and two metal hose clamps."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "gas cylinder",
+      "brand": "CEPSA",
+      "model": "Butano",
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "12.5Kg",
+        "verdict": "unverified",
+        "evidence": "The photo does not show the weight stamp on the cylinder collar."
+      },
+      {
+        "claim": "Empty",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      },
+      {
+        "claim": "strong metal materials",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows a metal gas cylinder."
+      },
+      {
+        "claim": "rugged plastic handle",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows a cylinder with an integrated metal shroud handle."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The photo is a stock image and may not represent the actual item's condition.",
+        "proof": "A photo of the actual item in a real-world setting (e.g., on a floor or in a shop).",
+        "if_unproven": "as non-existent or a potential scam"
+      },
+      {
+        "risk": "The cylinder may be past its expiry date, making it unsafe and illegal to refill.",
+        "proof": "A clear photo of the manufacturing or expiry date stamped on the cylinder collar.",
+        "if_unproven": "as scrap metal"
+      },
+      {
+        "risk": "The valve or regulator may be faulty or leaking.",
+        "proof": "A video showing the valve opening/closing and a soap-solution leak test.",
+        "if_unproven": "as faulty/needing repair"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual item in your possession, not a stock image.",
+      "Close-up photo of the weight and expiry date stamps on the cylinder collar.",
+      "Photo of the actual handle to clarify if it is metal or plastic as described."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller provided a watermarked stock photo instead of the actual item. Additionally, the description of a plastic handle contradicts the metal handle shown in the image."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 16472,
+    "input_tokens": 2389,
+    "output_tokens": 3356,
+    "cost_usd": 0.011262,
+    "replayed": false,
+    "fixture_key": "7e8e5422484e99243d3031b0b05102de",
+    "error": null
+  }
+}

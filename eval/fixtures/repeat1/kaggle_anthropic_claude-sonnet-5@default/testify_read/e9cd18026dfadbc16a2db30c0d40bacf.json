@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Two solar panels with silver aluminum frames, monocrystalline-looking cells, standing outdoors leaning against a wall.",
+      "Grass and part of a motorcycle wheel visible in background, suggesting an outdoor compound setting.",
+      "A faint watermark reading 'IZUTECH SOLAR ENERGY' is overlaid on the image itself (added by seller/app), not a manufacturer nameplate on the panel.",
+      "No wattage rating, brand name, or model sticker is legible on either panel.",
+      "No close-up of the junction box, cables, or rear label is provided."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel (pair, monocrystalline, frame-mounted)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 (watermark only shows seller's business name, not a manufacturer brand or model plate)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Izutech solar energy specialize in all solar equipment such as Inverter, panels, charge...",
+        "verdict": "unverifiable_remote",
+        "evidence": "General business description, not tied to a specific verifiable fact about this item."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Wattage/capacity of the panels is unknown, which is the primary price driver for solar panels.",
+        "proof": "Close-up photo of the rear nameplate/sticker showing rated wattage, voltage, and current.",
+        "if_unproven": "cannot be priced at all without this; treated as missing critical spec"
+      },
+      {
+        "risk": "Panels may be used/refurbished with reduced output rather than new.",
+        "proof": "Photo or video of a multimeter/clamp meter reading open-circuit voltage and short-circuit current under sunlight.",
+        "if_unproven": "priced as used with unverified output, i.e. worst case functioning"
+      },
+      {
+        "risk": "Hidden micro-cracks, delamination, or hotspots not visible at this distance.",
+        "proof": "Close-up photos of each cell surface and frame corners, plus a shot of the junction box and cable condition.",
+        "if_unproven": "priced as cosmetically unverified, assume possible defects"
+      },
+      {
+        "risk": "Frame or glass damage from handling/transport not visible in the wide shot.",
+        "proof": "Full-frontal and side-angle photos showing frame edges and glass corners.",
+        "if_unproven": "priced as condition unverified, worst case minor damage assumed"
+      }
+    ],
+    "proof_requests": [
+      "Clear close-up of the rated wattage/specification label on the back of each panel.",
+      "Video showing a multimeter test of voltage/current output in sunlight.",
+      "Close-up shots of cell surfaces, frame corners, and junction box for damage check.",
+      "Photo of both panels laid flat, full view, for condition and matching pair confirmation."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The wattage rating, which sets the price for solar panels, is not legible in the single available photo, so even a worst-case price cannot be established without a nameplate shot."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 17740,
+    "input_tokens": 1993,
+    "output_tokens": 1649,
+    "cost_usd": 0.017317,
+    "replayed": false,
+    "fixture_key": "e9cd18026dfadbc16a2db30c0d40bacf",
+    "error": null
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows the motorcycle instrument cluster with two analog gauges, handlebars, key in the ignition, and a brake fluid reservoir.",
+      "Photo 1 shows the black fuel tank with the word \"Kawasaki\" visible on the side, a black seat, and a textured wall background.",
+      "Photo 2 shows the rear wheel with a red-rim stripe, chain drive, disc brake, swingarm, and exhaust muffler."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "motorcycle",
+      "brand": "Kawasaki",
+      "model": null,
+      "read_from": [
+        "photo 1 tank"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Kawasaki zzr power bike",
+        "verdict": "unverified",
+        "evidence": "Brand Kawasaki is readable in photo 1, but the model ZZR is not readable in any photo; it appears only in the seller's words."
+      },
+      {
+        "claim": "Working fine",
+        "verdict": "unverified",
+        "evidence": "Photos are static; there is no evidence the engine runs or that electrical systems function."
+      },
+      {
+        "claim": "Selling to relocate",
+        "verdict": "unverifiable_remote",
+        "evidence": "Seller's stated motive cannot be checked remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine does not run or has serious mechanical faults",
+        "proof": "Video of a cold start and the engine running under load",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Frame or accident damage not visible in the angled close-ups",
+        "proof": "Full walkaround video showing the frame, forks, subframe, and both sides",
+        "if_unproven": "as damaged"
+      },
+      {
+        "risk": "Missing, forged, or incomplete ownership/registration papers",
+        "proof": "Photo of the original vehicle documents",
+        "if_unproven": "as no papers"
+      },
+      {
+        "risk": "Odometer reading unknown or tampered",
+        "proof": "Clear close-up photo of the odometer display",
+        "if_unproven": "as unknown mileage"
+      },
+      {
+        "risk": "Electrical faults in lights, indicators, or horn",
+        "proof": "Video demonstrating all lights and electrical functions",
+        "if_unproven": "as electrical faults"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the model badge or decals showing \"ZZR\" and engine capacity",
+      "Video of the engine starting and running",
+      "Full walkaround video showing frame, forks, subframe, and overall condition",
+      "Photo of original ownership/registration documents",
+      "Close-up photo of the odometer reading"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The brand Kawasaki is visible on the tank, but the model ZZR is only in the seller's words and not readable in the photos; the model determines the market comparables, so even a worst-case price cannot be set without confirming the exact model."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 15283,
+    "input_tokens": 2912,
+    "output_tokens": 2686,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "83f823153573b5d1d2ef5c3901e198b2",
+    "error": null
+  }
+}

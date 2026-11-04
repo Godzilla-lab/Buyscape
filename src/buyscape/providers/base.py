@@ -24,6 +24,10 @@ class ProviderError(RuntimeError):
     """The provider could not answer. Callers decide whether to fail over."""
 
 
+class QuotaExhausted(ProviderError):
+    """The key's free daily quota is used up. Retrying before tomorrow is pointless."""
+
+
 class MissingFixture(RuntimeError):
     """Replay mode was asked for a call that was never recorded."""
 
@@ -82,6 +86,9 @@ class ModelRequest:
     max_tokens: int = 1500
     temperature: float = 0.0
     image_max_side: int | None = None  # downscale before sending; None keeps the original
+    # Later turns of the same chat, each an (assistant reply, next user message)
+    # pair after the first user turn, which alone carries the photos.
+    turns: tuple[tuple[str, str], ...] = ()
 
     def fixture_key(self) -> str:
         payload = {
@@ -95,6 +102,8 @@ class ModelRequest:
             "max_tokens": self.max_tokens,
             "temperature": self.temperature,
         }
+        if self.turns:  # absent when empty, so every one-turn recording keeps its key
+            payload["turns"] = [list(t) for t in self.turns]
         blob = json.dumps(payload, sort_keys=True).encode()
         return hashlib.sha256(blob).hexdigest()[:32]
 

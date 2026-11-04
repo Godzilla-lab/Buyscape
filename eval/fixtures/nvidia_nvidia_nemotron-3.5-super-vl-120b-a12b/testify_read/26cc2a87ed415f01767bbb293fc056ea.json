@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Two photos show a large framed solar panel standing upright on dirt ground.",
+      "The panel surface is dark with a visible grid of cells and strong reflections.",
+      "A watermark reading \"INNOSON GLOBAL GROUP\" is overlaid across the center of both images.",
+      "A second panel leans against a wall in the background of photo 0.",
+      "No manufacturer label, model number, or wattage rating is legible on the panel frame or back.",
+      "The seller's text lists solar panels, inverters, lithium and tubular batteries, and charge controllers."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0",
+        "photo 1"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "High Quality Solar Panels",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photos show panels but quality cannot be verified remotely."
+      },
+      {
+        "claim": "Inverters, Lithium&Tubular Batteries, Charge controllers available",
+        "verdict": "unverifiable_remote",
+        "evidence": "None of these items appear in the photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Wattage and output rating are unknown",
+        "proof": "Close-up photo of the specification label on the frame or back",
+        "if_unproven": "as unknown capacity"
+      },
+      {
+        "risk": "Panel may not generate electricity",
+        "proof": "Video of open-circuit voltage measured with a multimeter in sunlight",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Hidden cracks, delamination, or hot spots",
+        "proof": "Close-up inspection of the surface in direct sunlight",
+        "if_unproven": "as physically defective"
+      },
+      {
+        "risk": "Age and prior usage are unknown",
+        "proof": "Photo of manufacturing date sticker or original receipt",
+        "if_unproven": "as used with unknown wear"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of the label showing brand, model, and wattage",
+      "Video of the panel in sunlight with a multimeter connected to show voltage",
+      "Close-up of the panel surface in direct light to reveal cracks or defects"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is a solar panel, but the label that determines its value is unreadable, so even a worst-case price cannot be set without that shot."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 17864,
+    "input_tokens": 2145,
+    "output_tokens": 3366,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "26cc2a87ed415f01767bbb293fc056ea",
+    "error": null
+  }
+}

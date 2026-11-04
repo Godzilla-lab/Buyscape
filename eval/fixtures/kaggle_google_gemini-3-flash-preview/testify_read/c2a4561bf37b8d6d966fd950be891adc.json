@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail packaging (box) for a Kenstar rechargeable standing fan.",
+      "The box is secured with two yellow plastic packing straps.",
+      "The model number 'KS-18RE' and '18\"' size are clearly printed on the box.",
+      "The box lists features including a remote control, 11-hour duration, USB port, and solar charging capability.",
+      "The actual fan is not visible; only a product illustration on the box is shown.",
+      "There is a watermark for 'STEVEN RB GLOBAL' and 'JIJI' on the image."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "rechargeable standing fan",
+      "brand": "Kenstar",
+      "model": "KS-18RE",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Kenstar 18\u2032\u2032 Rechargeable Standing Fan | KS-18RE",
+        "verdict": "supported",
+        "evidence": "The brand, size, and model number are clearly printed on the box in photo 0."
+      },
+      {
+        "claim": "A powerful and portable rechargeable fan",
+        "verdict": "unverifiable_remote",
+        "evidence": "Performance and portability cannot be verified from a photo of the box."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, used, or damaged item.",
+        "proof": "A photo of the actual fan outside of the box.",
+        "if_unproven": "Priced as an empty box."
+      },
+      {
+        "risk": "The internal rechargeable battery may be dead or have significantly reduced capacity.",
+        "proof": "A video of the fan running on battery power for several minutes without being plugged in.",
+        "if_unproven": "Priced as a fan with a dead battery."
+      },
+      {
+        "risk": "The motor, oscillation mechanism, or charging circuitry may be non-functional.",
+        "proof": "A video showing the fan blades spinning at all speeds and the unit oscillating while charging.",
+        "if_unproven": "Priced as not working."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual fan outside of the box to confirm presence and physical condition.",
+      "Video of the fan operating on battery power to verify battery health.",
+      "Video showing the fan oscillating and the charging indicator light active."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail box is shown in the photo. Without seeing the actual item, it is impossible to verify if the fan is present, new, or functional."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 19965,
+    "input_tokens": 2369,
+    "output_tokens": 4271,
+    "cost_usd": 0.013997,
+    "replayed": false,
+    "fixture_key": "c2a4561bf37b8d6d966fd950be891adc",
+    "error": null
+  }
+}

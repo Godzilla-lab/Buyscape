@@ -1,0 +1,75 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows the empty interior of a single-door refrigerator with a top freezer shelf, clear door bins, a crisper drawer, and a clean white interior.",
+      "Photo 1 shows a SKYRUN specification plate reading MODEL: BCD-95A, CAPACITY: 89L, NET WEIGHT: 19.5kg, RATED VOLTAGE: 220-240V, 50Hz, TOTAL INPUT POWER: 90W, REFRIGERANT: R600a(26g), with an address in Calabar Free Trade Zone, Nigeria.",
+      "Photo 2 shows the exterior of a silver single-door refrigerator with a SKYRUN logo at the top right and a green soccer-field decal with SKYRUN branding."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "single-door refrigerator",
+      "brand": "SKYRUN",
+      "model": "BCD-95A",
+      "read_from": [
+        "photo 1 specification plate",
+        "photo 2 exterior logo"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "BRAND-NEW-LOOK SKYRUN REFRIGERATOR",
+        "verdict": "supported",
+        "evidence": "photo 0 clean interior and photo 2 clean exterior show a new-like appearance"
+      },
+      {
+        "claim": "SKYRUN single-door refrigerator",
+        "verdict": "supported",
+        "evidence": "photo 1 label reads SKYRUN REFRIGERATOR; photo 2 shows a single door"
+      },
+      {
+        "claim": "Model... (seller text incomplete)",
+        "verdict": "supported",
+        "evidence": "photo 1 plate reads MODEL: BCD-95A"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Refrigerator does not cool or compressor is faulty",
+        "proof": "Video of the unit running with the door open for several minutes, or a thermometer reading inside after operation",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Hidden cosmetic damage, dents, or worn door seal not visible in the photos",
+        "proof": "Close-up photos of all exterior sides, rear panel, door gasket, and base",
+        "if_unproven": "priced as used with possible cosmetic defects"
+      },
+      {
+        "risk": "Specification plate may not belong to this physical unit",
+        "proof": "Photo showing the label physically attached to this refrigerator",
+        "if_unproven": "priced with identity unverified"
+      }
+    ],
+    "proof_requests": [
+      "Video of the refrigerator running with the door open to confirm cooling and compressor operation",
+      "Close-up photos of the exterior sides, back, door seal, and any scratches or dents",
+      "Photo showing the model label affixed to this specific unit"
+    ],
+    "decision": "price",
+    "reason": "The unit is identifiable as a SKYRUN BCD-95A single-door 89L refrigerator from the label in photo 1 and exterior in photo 2, so it can be priced at its worst case (not working, used) while awaiting proof of function."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 23011,
+    "input_tokens": 2925,
+    "output_tokens": 2984,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "6c427dd99f1dafcb8f293a0438a15acd",
+    "error": null
+  }
+}

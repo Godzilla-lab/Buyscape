@@ -1,0 +1,84 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo shows a front-load washer-dryer (2-in-1) with a large circular door and control panel on top.",
+      "Brand name visible on the panel: 'LG' (photo 0).",
+      "Text visible: 'DirectDrive 6/3kg' (photo 0).",
+      "Seller text says 'Samsung' and 'scrap but doesn\u2019t work and needs repair' (seller words, not verifiable from photo).",
+      "No power-on screen/indicator is shown; machine condition (damage/leaks) is not clearly documented beyond general wear."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "washer-dryer (front load, 2-in-1)",
+      "brand": "LG",
+      "model": null,
+      "read_from": [
+        "photo 0 brand logo 'LG'",
+        "photo 0 label 'DirectDrive 6/3kg'",
+        "photo 0 badge 'Washer+Dryer 2 in 1'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "The brand is Samsung.",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows 'LG' logo and 'DirectDrive 6/3kg' panel text, not Samsung."
+      },
+      {
+        "claim": "Washing machine is scrap.",
+        "verdict": "unverified",
+        "evidence": "Photo 0 does not show clear scrap indicators (e.g., missing parts, severe structural damage)."
+      },
+      {
+        "claim": "Doesn\u2019t work and needs repair.",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows no power-on test, error code, or demonstration of non-function."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Wrong brand/model stated by seller (Samsung vs LG), which affects parts availability and repair cost.",
+        "proof": "Ask for a clear photo of the machine's rating plate/model number sticker (usually on the door frame or back) showing brand/model.",
+        "if_unproven": "Price as a non-working LG washer-dryer with unknown exact model (worst-case parts/repair uncertainty)."
+      },
+      {
+        "risk": "Non-working status may be unconfirmed; could be minor issue or could be dead (power board, motor, heater, control).",
+        "proof": "Ask for a short video: plug in, press power, select a short wash, and show any error code/LEDs (even if it fails).",
+        "if_unproven": "Price as not working (worst case) until a test/error code is shown."
+      },
+      {
+        "risk": "Washer-dryer has two systems (wash + dry); dry heater/thermostat may be faulty even if wash works.",
+        "proof": "Ask for a test showing wash cycle completion and a separate dry cycle attempt (or at least heater activation) with any error codes.",
+        "if_unproven": "Price as not fully functional (treat as both wash and dry needing repair)."
+      },
+      {
+        "risk": "Potential water leaks, drum seal issues, or damaged door/latch not visible clearly.",
+        "proof": "Ask for close-up photos of the door seal/gasket and the bottom area for leaks, plus a photo of the drain hose connection.",
+        "if_unproven": "Price as may require seal/hoses repair (worst-case)."
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the rating plate/model number sticker (brand + exact model).",
+      "Power-on video showing LEDs/error codes when attempting a short wash.",
+      "Video showing whether wash cycle starts and drains (even if it stops).",
+      "Close-up photos of door gasket/seal and any visible damage around the door/latch."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo clearly shows an LG washer-dryer (DirectDrive 6/3kg), contradicting the seller\u2019s Samsung claim, and the 'doesn\u2019t work' status is not proven by any power-on/error-code evidence. Missing model number and non-working proof prevents confident worst-case pricing."
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_read",
+    "latency_ms": 6725,
+    "input_tokens": 2723,
+    "output_tokens": 914,
+    "cost_usd": 0.00301,
+    "replayed": false,
+    "fixture_key": "05d7a6bac6ff8dc7f9e8c8bf2d42825a",
+    "error": null
+  }
+}

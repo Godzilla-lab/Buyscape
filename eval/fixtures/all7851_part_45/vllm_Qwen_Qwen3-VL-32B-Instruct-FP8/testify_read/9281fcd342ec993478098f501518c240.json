@@ -1,0 +1,99 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Open laptop showing keyboard, touchpad, and screen. 'acer' logo visible below screen. Windows 7 sticker on palm rest. Watermark 'NICK MARK ENTERPRISE'.",
+      "Photo 1: Closed laptop lid, dark gray with brushed texture. 'acer' logo visible on top right. Watermark 'POSTED ON JIJI' and 'NICK MARK ENTERPRISE'.",
+      "Photo 2: Same as photo 0, but slightly different angle. 'TravelMate' model name visible below screen, just above keyboard. Windows 7 sticker present. Watermark 'NICK MARK ENTERPRISE'.",
+      "All photos show a hand holding the laptop, suggesting it is being presented for sale.",
+      "Background shows shelves with other laptops, some with HP and Lenovo logos, indicating a resale or second-hand store environment.",
+      "No visible damage to screen or keyboard in photos, but no close-up of ports or hinges."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Acer",
+      "model": "TravelMate",
+      "read_from": [
+        "photo 0 screen bezel",
+        "photo 2 screen bezel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Acer Travelmate",
+        "verdict": "supported",
+        "evidence": "Photo 2: 'TravelMate' written below screen, above keyboard. Photo 0: 'acer' logo below screen."
+      },
+      {
+        "claim": "4GB RAM",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows RAM or system specs. Cannot verify from photos alone."
+      },
+      {
+        "claim": "320GB HDD",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows internal drive or system specs. Cannot verify from photos alone."
+      },
+      {
+        "claim": "Windows 10",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 and 2 show Windows 7 sticker on palm rest. No evidence of Windows 10 in photos."
+      },
+      {
+        "claim": "1GB Dedicated Graphics",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows GPU specs or system information. Cannot verify from photos alone."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "RAM is not 4GB as claimed",
+        "proof": "Photo of system properties or BIOS showing RAM amount",
+        "if_unproven": "priced as having less than 4GB RAM, which reduces value"
+      },
+      {
+        "risk": "HDD is not 320GB as claimed",
+        "proof": "Photo of system properties or disk management showing drive size",
+        "if_unproven": "priced as having smaller or larger drive, which affects value"
+      },
+      {
+        "risk": "Graphics card is not dedicated or does not have 1GB VRAM",
+        "proof": "Photo of device manager or GPU specs showing dedicated graphics and VRAM size",
+        "if_unproven": "priced as integrated graphics, which reduces value"
+      },
+      {
+        "risk": "Windows 10 is not installed or is not genuine",
+        "proof": "Photo of Windows 10 desktop or system properties showing OS version",
+        "if_unproven": "priced as Windows 7 or unlicensed, which reduces value"
+      },
+      {
+        "risk": "Laptop has physical damage not visible in photos (e.g., hinge wear, screen dead pixels, keyboard issues)",
+        "proof": "Close-up photos of hinges, screen edges, and keyboard keys",
+        "if_unproven": "priced as having potential hidden damage, which reduces value"
+      }
+    ],
+    "proof_requests": [
+      "Photo of system properties showing RAM, HDD size, and OS version",
+      "Photo of device manager or GPU specs showing dedicated graphics and VRAM",
+      "Close-up photos of hinges, screen edges, and keyboard keys",
+      "Photo of laptop booting up to show Windows 10 desktop"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identifiable as Acer TravelMate, but key claims (RAM, HDD, graphics, OS) cannot be verified from current photos. The Windows 10 claim is contradicted by the Windows 7 sticker. Hidden risks related to specs and physical condition require additional proof before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 80279,
+    "input_tokens": 2769,
+    "output_tokens": 988,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "9281fcd342ec993478098f501518c240",
+    "error": null
+  }
+}

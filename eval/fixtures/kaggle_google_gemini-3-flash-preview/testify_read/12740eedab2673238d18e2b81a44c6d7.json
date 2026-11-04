@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the front of a monocrystalline solar panel with a 6x10 cell configuration.",
+      "Photo 1 is a close-up of a specification label for a CanadianSolar panel.",
+      "The label in photo 1 identifies the model as CS3K-280 with a nominal maximum power of 280W.",
+      "Photo 2 shows the rear of the panel with a junction box, two cables with connectors, and a stack of similar panels.",
+      "The panels are stored indoors on a tiled floor."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "solar panel",
+      "brand": "CanadianSolar",
+      "model": "CS3K-280",
+      "read_from": [
+        "photo 1 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Tobitex Solar Enterprises",
+        "verdict": "unverified",
+        "evidence": "This is the seller's business name; no legal registration is shown."
+      },
+      {
+        "claim": "Deal on all types of Solar equipments",
+        "verdict": "unverified",
+        "evidence": "The photos only show solar panels."
+      },
+      {
+        "claim": "280W capacity",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows 'Nominal Maximum Power (Pmax) 280 W' on the manufacturer label."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The panel may have internal cell damage (micro-cracks) or PID degradation not visible to the eye.",
+        "proof": "A video showing a multimeter test of Open Circuit Voltage (Voc) and Short Circuit Current (Isc) in direct sunlight.",
+        "if_unproven": "as non-functional"
+      },
+      {
+        "risk": "The label might not belong to the specific panel shown or could be a counterfeit reproduction.",
+        "proof": "A single shot showing both the front of the panel and the serial number sticker usually found on the frame or under the glass.",
+        "if_unproven": "as a generic unbranded panel"
+      }
+    ],
+    "proof_requests": [
+      "Video of a multimeter test showing Voc and Isc in clear, midday sunlight.",
+      "Photo of the serial number barcode located on the side of the frame or under the glass.",
+      "Close-up photos of the cell busbars to check for signs of browning or corrosion."
+    ],
+    "decision": "price",
+    "reason": "The brand, model, and technical specifications are clearly legible on the manufacturer's label in photo 1, allowing for a baseline valuation at worst-case performance."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 9344,
+    "input_tokens": 4503,
+    "output_tokens": 1941,
+    "cost_usd": 0.008075,
+    "replayed": false,
+    "fixture_key": "12740eedab2673238d18e2b81a44c6d7",
+    "error": null
+  }
+}

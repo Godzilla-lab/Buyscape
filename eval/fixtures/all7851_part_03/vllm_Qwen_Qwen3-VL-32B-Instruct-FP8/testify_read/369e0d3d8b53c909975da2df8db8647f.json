@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black glass surface cooktop with two circular heating zones outlined in white, placed on a wooden surface. The front edge has a metallic trim, and there is a rope tied around it. Reflections show a person and surroundings.",
+      "Photo 1 shows the same cooktop from a top-down angle, with a textured glass surface and two circular heating zones. The lower heating zone has a faint 'H' marking in the center. The brand 'SIEMENS' is visible at the bottom edge. A blue POS machine is on the table behind it.",
+      "The cooktop appears to be new or lightly used, with some smudges and reflections but no visible cracks or damage.",
+      "The seller's text mentions 'glass surface gas hob', but the photos show an electric induction cooktop, not a gas hob."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "induction cooktop",
+      "brand": "SIEMENS",
+      "model": null,
+      "read_from": [
+        "photo 1 bottom edge"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "glass surface gas hob",
+        "verdict": "contradicted",
+        "evidence": "Photos show an induction cooktop with no gas burners or gas connections; the surface is smooth glass with heating zones, not a gas hob."
+      },
+      {
+        "claim": "maintenance and cleanliness of a glass surface gas hob is easier and more convenient",
+        "verdict": "unverifiable_remote",
+        "evidence": "The claim is about a gas hob, but the item is an induction cooktop. The cleanliness of the glass surface is visible, but the claim's context is mismatched."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The cooktop may not be functional or may have internal damage not visible in photos.",
+        "proof": "A video showing the cooktop powered on and heating one of the zones.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The cooktop may be damaged or cracked, especially along the edges or under the glass surface.",
+        "proof": "Close-up photos of all edges and corners, and a photo taken from underneath if possible.",
+        "if_unproven": "priced as damaged"
+      },
+      {
+        "risk": "The cooktop may be a counterfeit or non-genuine Siemens product.",
+        "proof": "A photo of the model number and serial number on the back or underside, and a close-up of the brand logo.",
+        "if_unproven": "priced as unbranded or counterfeit"
+      }
+    ],
+    "proof_requests": [
+      "Video of the cooktop in operation, showing both heating zones working.",
+      "Close-up photos of the edges, corners, and underside for damage or cracks.",
+      "Photo of the model number and serial number on the back or underside.",
+      "Photo of the power cord and plug, and any control panel or buttons."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identified as a Siemens induction cooktop, contradicting the seller's claim of a gas hob. While the physical condition appears intact, functionality and authenticity cannot be confirmed from the current photos. Proof of operation, model details, and condition of edges are needed before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 61489,
+    "input_tokens": 2074,
+    "output_tokens": 727,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "369e0d3d8b53c909975da2df8db8647f",
+    "error": null
+  }
+}

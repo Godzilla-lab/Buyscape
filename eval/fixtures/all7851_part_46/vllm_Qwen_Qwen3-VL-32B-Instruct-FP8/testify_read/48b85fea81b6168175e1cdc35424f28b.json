@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: A blue laptop open, showing keyboard and screen. HP logo visible on screen bezel. 'ELITEBOOK' and 'HP Sure View' stickers on palm rest. Screen reflects overhead lights with rainbow patterns, suggesting a glossy surface.",
+      "Photo 1: Same laptop closed, held in hand. HP logo visible on lid. Screen reflects lights and surroundings. Watermark 'POSTED ON JIJI JESSICA NDIKEME' overlaid.",
+      "Photo 2: Laptop open from top-down view. Keyboard, trackpad, and stickers visible. 'ELITEBOOK' and 'HP Sure View' stickers on left side of palm rest. Intel Core i7 sticker near bottom right of keyboard. No visible damage to keyboard or trackpad. Watermark present."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "Elite Dragonfly G1",
+      "read_from": [
+        "photo 0 screen bezel (HP logo)",
+        "photo 0 and photo 2 palm rest (ELITEBOOK sticker)",
+        "photo 2 Intel sticker (Core i7)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "hp elite dragonfly g1 \u2013 core i7 8th gen",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 2 show 'ELITEBOOK' sticker, which is part of the Elite Dragonfly G1 series. Photo 2 shows Intel Core i7 sticker, consistent with 8th gen."
+      },
+      {
+        "claim": "intel core i7-8665u \u2013 8th gen processor",
+        "verdict": "unverified",
+        "evidence": "Photo 2 shows Intel Core i7 sticker, but does not specify the exact model (i7-8665U). The sticker is generic for 8th gen i7, but the specific model cannot be confirmed from photos."
+      },
+      {
+        "claim": "4 cores / 8 threads",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a technical specification that cannot be verified from photos alone. Requires system information or BIOS check."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Screen damage or dead pixels",
+        "proof": "Close-up photo of the screen with a white background or pattern to reveal any defects.",
+        "if_unproven": "priced as having potential screen issues"
+      },
+      {
+        "risk": "Battery health or non-functioning battery",
+        "proof": "Video showing battery charge level and usage time, or a battery health report.",
+        "if_unproven": "priced as battery may be degraded or non-functional"
+      },
+      {
+        "risk": "Internal damage or non-working components (e.g., ports, webcam, speakers)",
+        "proof": "Video showing all ports, webcam functionality, and audio output.",
+        "if_unproven": "priced as potentially having non-working internal components"
+      },
+      {
+        "risk": "Incorrect or misrepresented processor model (e.g., not i7-8665U)",
+        "proof": "Screenshot of system information or BIOS showing exact CPU model.",
+        "if_unproven": "priced as possibly not matching the claimed processor"
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of system information or BIOS showing exact CPU model (i7-8665U).",
+      "Video showing all ports, webcam, and audio functionality.",
+      "Close-up photo of screen with white background to check for dead pixels or damage.",
+      "Video showing battery charge level and usage time."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The laptop is identifiable as an HP Elite Dragonfly G1 with an Intel Core i7 8th gen processor, but the exact model (i7-8665U) and key specifications like core count cannot be confirmed from photos. Hidden risks such as screen damage, battery health, and internal component functionality require additional proof before pricing can be determined accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 73140,
+    "input_tokens": 2804,
+    "output_tokens": 896,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "48b85fea81b6168175e1cdc35424f28b",
+    "error": null
+  }
+}

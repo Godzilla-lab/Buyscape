@@ -1,0 +1,85 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0 shows a large rectangular solar panel with dark glass and grid lines; no visible brand/model label.",
+      "Photo 1 shows another view of the same type of solar panel; still no readable nameplate/specs.",
+      "Seller text claims battery performance, but no battery/inverter is shown in the photos."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0",
+        "photo 1"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Battery is new",
+        "verdict": "unverifiable_remote",
+        "evidence": "No battery is shown in photos; no label/test evidence provided."
+      },
+      {
+        "claim": "Battery holds charge for 8 hours",
+        "verdict": "unverifiable_remote",
+        "evidence": "No battery shown and no test result (voltage/load/time) provided."
+      },
+      {
+        "claim": "Never repaired",
+        "verdict": "unverifiable_remote",
+        "evidence": "No battery shown; no inspection/traceable history provided."
+      },
+      {
+        "claim": "I tested it myself yesterday, everything I said is true",
+        "verdict": "unverifiable_remote",
+        "evidence": "No new photos, videos, or test readings were provided to verify the claim."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Panel rating/specs (wattage, voltage, efficiency) are unknown; price depends on these.",
+        "proof": "A clear photo of the panel nameplate showing watt rating (W), Vmp/Voc, Imp/Isc, and model/serial.",
+        "if_unproven": "Price as an unknown-spec used/uncertain panel (worst case: lower wattage and no warranty)."
+      },
+      {
+        "risk": "Item mismatch risk: seller\u2019s claims are about batteries, but photos show only solar panels.",
+        "proof": "Confirm what exactly is being sold (panel vs battery vs inverter) and send photos of the exact item(s) matching the claims.",
+        "if_unproven": "Price only for the solar panel shown; do not price as a battery/inverter."
+      },
+      {
+        "risk": "Condition/damage risk (microcracks, water ingress) cannot be confirmed from these angles.",
+        "proof": "Close-ups of all four corners/edges and junction box; plus backsheet photo.",
+        "if_unproven": "Price as potentially damaged/untested (worst case: reduced performance)."
+      },
+      {
+        "risk": "No warranty/brand verification; counterfeit/non-original panels possible without labels.",
+        "proof": "Photo of brand/logo and full specifications label; any warranty/receipt.",
+        "if_unproven": "Price as generic/unverified brand with no warranty."
+      }
+    ],
+    "proof_requests": [
+      "Send a clear close-up photo of the panel\u2019s label/nameplate (watt rating and model/serial).",
+      "Send photos of the exact battery/inverter being claimed (if included), including label and any test readings.",
+      "Provide the test evidence for the \u201c8 hours\u201d claim (video or screenshot of battery voltage before/after and the load used, with time)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller asserts testing, but without new photos/videos or readable specs, the key details needed to price correctly (panel rating and/or the actual battery being sold) remain unverified."
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_read",
+    "latency_ms": 5261,
+    "input_tokens": 2830,
+    "output_tokens": 634,
+    "cost_usd": 0.001358,
+    "replayed": false,
+    "fixture_key": "0dc03c794c2d4fc90243473ebbbfee45",
+    "error": null
+  }
+}

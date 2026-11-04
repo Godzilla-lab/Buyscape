@@ -1,0 +1,110 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the back of a laptop with 'Latitude 7400' clearly visible on the label.",
+      "The laptop is placed on top of a gray laptop sleeve or case with 'KEFOD GLOBAL SYSTEMS' printed on it.",
+      "Photo 1 shows the laptop open at an angle, with the keyboard illuminated in blue, indicating a backlit keyboard.",
+      "Photo 2 shows the laptop open with the screen on, displaying a Windows 10/11 desktop with a blue abstract wallpaper.",
+      "The Dell logo is visible on the bottom bezel of the screen in photo 2.",
+      "The keyboard appears to be in good condition with no visible damage.",
+      "The screen is on and displaying clearly, with no visible dead pixels or cracks.",
+      "No ports, hinges, or internal components are visible in any photo."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Dell",
+      "model": "Latitude 7400",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Dell latitude 7400",
+        "verdict": "supported",
+        "evidence": "Photo 0: 'Latitude 7400' is clearly printed on the back label."
+      },
+      {
+        "claim": "Intel corei7",
+        "verdict": "unverified",
+        "evidence": "No CPU label or system information visible. Cannot confirm from photos alone."
+      },
+      {
+        "claim": "16gb ram",
+        "verdict": "unverified",
+        "evidence": "No system specs visible. Cannot confirm from photos alone."
+      },
+      {
+        "claim": "512gb ssd",
+        "verdict": "unverified",
+        "evidence": "No storage label or system info visible. Cannot confirm from photos alone."
+      },
+      {
+        "claim": "8th generation",
+        "verdict": "unverified",
+        "evidence": "No CPU generation label visible. Cannot confirm from photos alone."
+      },
+      {
+        "claim": "Keyboard light",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows the keyboard illuminated in blue, indicating backlighting."
+      },
+      {
+        "claim": "Non touch",
+        "verdict": "supported",
+        "evidence": "Photo 2 shows a standard laptop screen with no visible touch indicators or gestures. No touch screen features are visible."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The CPU is not an Intel Core i7 or is not 8th generation",
+        "proof": "A screenshot of the system information (e.g., Windows 'About' page or CPU-Z) showing the exact CPU model and generation.",
+        "if_unproven": "Priced as a lower-spec model, possibly with a 6th or 7th gen CPU, reducing value."
+      },
+      {
+        "risk": "RAM is less than 16GB or not functioning properly",
+        "proof": "A screenshot of the system information showing installed RAM and a memory test result.",
+        "if_unproven": "Priced as 8GB or 12GB RAM, reducing value."
+      },
+      {
+        "risk": "SSD is not 512GB or is failing",
+        "proof": "A screenshot of the disk management or system information showing the exact SSD size and health status (e.g., from CrystalDiskInfo).",
+        "if_unproven": "Priced as a smaller SSD (e.g., 256GB) or as a failing drive, reducing value."
+      },
+      {
+        "risk": "Battery is degraded or not included",
+        "proof": "A photo of the battery being removed or a screenshot of battery health from Windows (e.g., 'PowerCfg -batteryreport').",
+        "if_unproven": "Priced as if battery is included but degraded, reducing value."
+      },
+      {
+        "risk": "Hinges, ports, or internal components are damaged",
+        "proof": "Photos of all ports, hinges, and internal components (if possible) or a video showing full functionality.",
+        "if_unproven": "Priced as if in full working condition, but with hidden damage reducing value."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of system information showing CPU model, generation, RAM, and SSD size.",
+      "Screenshot of battery health report.",
+      "Photos of all ports and hinges, and a video showing the laptop turning on, booting, and running smoothly.",
+      "Proof of warranty or service history if available."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is confirmed as Dell Latitude 7400, and keyboard backlight and non-touch screen are supported. However, key specs like CPU, RAM, and SSD are unverified and critical to pricing. Hidden risks include degraded battery, damaged ports, or incorrect specs. Without proof of these, the item cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 95055,
+    "input_tokens": 2780,
+    "output_tokens": 1108,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "91739ea6b4ac884290a2aeae86964985",
+    "error": null
+  }
+}

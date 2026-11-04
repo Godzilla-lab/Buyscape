@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r5",
+  "response": {
+    "observations": [
+      "Two spare tires stacked on a metal rim.",
+      "The tires are winter tires with deep tread grooves.",
+      "The sidewall of the top tire in photo 1 shows the brand 'ACTIMAX ARCTIC' and size '215/60/R16'.",
+      "The rim is a 5-hole steel rim with a central hole for a lug nut.",
+      "The tread shows significant wear and some surface dirt.",
+      "A watermark 'STACEY DAVIES' is visible on both photos."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "spare tire",
+      "brand": "Actimax",
+      "read_from": [
+        "photo 1 sidewall"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "2units plus rim",
+        "verdict": "supported",
+        "evidence": "photo 0 and photo 1 show two tires on a single rim."
+      },
+      {
+        "claim": "Altimax Arctic Tyre",
+        "verdict": "supported",
+        "evidence": "photo 1 sidewall text reads 'ACTIMAX ARCTIC'."
+      },
+      {
+        "claim": "215/60/R16",
+        "verdict": "supported",
+        "evidence": "photo 1 sidewall text reads '215/60 R16'."
+      },
+      {
+        "claim": "Others available with no Rim carries",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a seller's statement about other units and a condition not shown in the photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The tire may be old stock or have been used for a long time.",
+        "proof": "A photo of the 4-digit DOT code on the sidewall (e.g., 2018).",
+        "if_unproven": "as old stock (over 5 years old)"
+      },
+      {
+        "risk": "The tire may be a different size or brand than claimed.",
+        "proof": "A photo of the sidewall showing the full size and model number.",
+        "if_unproven": "as a generic 215/60/R16 tire"
+      },
+      {
+        "risk": "The tire may be a used or second-hand unit.",
+        "proof": "A photo of the tread depth with a ruler or a video of a tread gauge.",
+        "if_unproven": "as used"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the 4-digit DOT code on the sidewall of the tire.",
+      "Photo of the sidewall showing the full size and model number.",
+      "Photo of the tread depth with a ruler or a video of a tread gauge."
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identified as a spare tire. It can be priced at its worst-case value as old stock and a generic size, assuming the seller's claim of 215/60/R16 is the only one shown."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r5",
+    "task": "testify_read",
+    "latency_ms": 2184,
+    "input_tokens": 2116,
+    "output_tokens": 537,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "63d5bc62b4c3bed54eb7447990680c09",
+    "error": null
+  }
+}

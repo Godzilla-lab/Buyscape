@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a close-up of a laptop motherboard with a white label reading 'MB', 'MO: 73790344', 'SPS: M46739-601', 'Date Code: 7J2250'.",
+      "Photo 1 shows the full motherboard laid on bubble wrap, with a blue PCB, central CPU socket, and various connectors. A label near the bottom right reads 'MODEL: 73790344', 'Rev: 1.0', '2020.12.26', 'MADE IN CHINA'.",
+      "Photo 2 shows a close-up of the left side of the motherboard, with a label reading 'SENSOR', 'LID', 'SPS: M46739-601', 'Date Code: 7J2250'.",
+      "The motherboard has no visible signs of damage or burn marks in the photos.",
+      "The seller claims it is for an HP EliteBook x360 1030/1040 G8 with Intel Core i5-1145G7 and 16GB RAM, but no such components are visible in the photos."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop motherboard",
+      "brand": "HP",
+      "model": "73790344",
+      "read_from": [
+        "photo 0 label",
+        "photo 1 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP EliteBook x360 1030/1040 G8",
+        "verdict": "unverified",
+        "evidence": "The model number 73790344 is visible on the motherboard, which is known to be used in HP EliteBook x360 1030 G8 and 1040 G8 models. However, no direct branding or model name is visible on the board itself."
+      },
+      {
+        "claim": "intel core i5-1145G7 11th generation",
+        "verdict": "unverifiable_remote",
+        "evidence": "The CPU socket is empty; no CPU is installed. The model number 73790344 is compatible with i5-1145G7, but the CPU is not present in the photos."
+      },
+      {
+        "claim": "16GB Motherboard",
+        "verdict": "contradicted",
+        "evidence": "Motherboards do not have RAM installed; RAM is a separate component. The photos show no RAM modules. The claim likely means 'for a 16GB RAM system', which is unverifiable without system specs or a working laptop."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Motherboard is not functional or has hidden damage",
+        "proof": "A video showing the motherboard being powered on and tested with a compatible CPU and RAM, or a test report from a technician.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The motherboard is not compatible with the claimed models or has been mislabeled",
+        "proof": "A photo of the motherboard installed in an HP EliteBook x360 1030/1040 G8 with the system BIOS showing the correct model and serial number.",
+        "if_unproven": "priced as a generic motherboard without model-specific value"
+      },
+      {
+        "risk": "The motherboard has been used in a damaged or faulty laptop and is not in good condition",
+        "proof": "A close-up photo of the CPU socket, power circuitry, and connectors under magnification to check for burn marks, corrosion, or physical damage.",
+        "if_unproven": "priced as potentially damaged"
+      }
+    ],
+    "proof_requests": [
+      "A video or photo of the motherboard being tested with a compatible CPU and RAM, showing it powers on and boots.",
+      "A photo of the motherboard installed in an HP EliteBook x360 1030/1040 G8 with the BIOS screen visible.",
+      "Close-up photos of the CPU socket, power circuitry, and connectors under magnification to check for damage."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The motherboard is identifiable by model number 73790344, which is compatible with HP EliteBook x360 1030/1040 G8, but the CPU and RAM are not present, and functionality is unproven. The claim of 16GB RAM is misleading. Without proof of functionality and compatibility, the item cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 87056,
+    "input_tokens": 2369,
+    "output_tokens": 1049,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "755599dd527d51a8ea0cd3c0773fea1a",
+    "error": null
+  }
+}

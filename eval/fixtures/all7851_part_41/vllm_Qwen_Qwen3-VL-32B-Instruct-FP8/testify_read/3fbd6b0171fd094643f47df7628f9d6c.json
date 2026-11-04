@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a used 4-cylinder petrol engine with visible wear, rust, and grime on the block and components.",
+      "The engine has a black plastic cover on top with two visible sections, likely for valve covers.",
+      "There are two spark plug wells visible on the side of the engine block, confirming 4-cylinder configuration (two per bank).",
+      "A pulley with 'CF1' marked on it is visible on the front of the engine.",
+      "Photo 1 shows a side view of the same engine, with a heat shield or exhaust manifold on the left, and more rust and dirt on the block.",
+      "No visible engine number, VIN, or manufacturer badge is readable in either photo.",
+      "The engine appears to be mounted in a vehicle or on a stand, with surrounding parts like belts and hoses partially visible."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "4-cylinder petrol engine",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 spark plug wells",
+        "photo 0 pulley marking 'CF1'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "4-plug (4-cylinder) petrol engine",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows two spark plug wells, indicating a 4-cylinder engine; the configuration matches a typical inline 4."
+      },
+      {
+        "claim": "commonly referred to by codes such as G4LA",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible code or label matching 'G4LA' in either photo; the seller's claim cannot be verified from the images."
+      },
+      {
+        "claim": "This is a used engine",
+        "verdict": "supported",
+        "evidence": "Photo 0 and 1 show significant grime, rust, and wear on the engine block and components, consistent with use."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Internal damage or wear (e.g., worn bearings, cracked block, blown head gasket)",
+        "proof": "A video or photo showing the engine running, or a close-up of the oil pan, cylinder head, and internal components during disassembly.",
+        "if_unproven": "priced as potentially non-functional or requiring major overhaul"
+      },
+      {
+        "risk": "Engine not matching claimed model (e.g., not G4LA or from a different vehicle)",
+        "proof": "Photo of the engine block stamp or VIN plate, or a clear shot of the engine number.",
+        "if_unproven": "priced as generic 4-cylinder engine, not specific to any model"
+      },
+      {
+        "risk": "Missing or damaged components (e.g., timing chain, sensors, injectors)",
+        "proof": "Full 360-degree photo or video of the engine showing all sides and attached parts.",
+        "if_unproven": "priced as incomplete or requiring additional parts"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the engine block stamp or VIN plate to confirm model and origin.",
+      "Video or photo of the engine running to verify functionality.",
+      "Full 360-degree photos showing all sides and attached components."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The engine is identifiable as a 4-cylinder petrol engine, but the specific model (e.g., G4LA) cannot be confirmed from the photos. Critical risks like internal damage and missing components cannot be assessed remotely. Proof is needed to determine the exact model and condition for accurate pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 62886,
+    "input_tokens": 2744,
+    "output_tokens": 799,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "3fbd6b0171fd094643f47df7628f9d6c",
+    "error": null
+  }
+}

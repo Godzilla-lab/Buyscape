@@ -1,0 +1,110 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Front view of a silver-gray Dell laptop, screen off, held in hand. Dell logo visible below screen. Keyboard appears standard, no visible backlight. Intel sticker on bottom right of palm rest.",
+      "Photo 1: Slightly angled front view, same laptop, screen off. No visible keyboard backlight. Intel sticker present.",
+      "Photo 2: Side view of closed laptop, showing textured black lid with Dell logo. No visible model number or serial plate.",
+      "No photos show the inside of the laptop (e.g., bottom panel, ports, or system info screen).",
+      "No photos show the screen turned on or any performance indicators.",
+      "No photos show the battery or any internal components."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "laptop",
+      "brand": "Dell",
+      "model": null,
+      "read_from": [
+        "photo 0 screen bezel",
+        "photo 2 lid"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Core i7",
+        "verdict": "unverified",
+        "evidence": "Intel sticker visible in photo 0 and photo 1, but no model number or generation visible. Cannot confirm if it is Core i7."
+      },
+      {
+        "claim": "256GB SSD",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal photos or system screen showing storage. Cannot verify from photos alone."
+      },
+      {
+        "claim": "8GB RAM",
+        "verdict": "unverifiable_remote",
+        "evidence": "No system info or internal photos to confirm RAM. Cannot verify from photos alone."
+      },
+      {
+        "claim": "3hrs battery lifespan",
+        "verdict": "unverifiable_remote",
+        "evidence": "No battery usage test or system report shown. Cannot verify from photos alone."
+      },
+      {
+        "claim": "Dell 8th generation",
+        "verdict": "unverified",
+        "evidence": "No visible model number or generation label. '8th generation' is not readable in any photo."
+      },
+      {
+        "claim": "Keyboard light",
+        "verdict": "contradicted",
+        "evidence": "Photos 0 and 1 show keyboard in dark environment with no visible backlight. No indication of backlighting in any photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The laptop may not have a Core i7 processor",
+        "proof": "Photo of the system information screen or the CPU sticker inside the laptop.",
+        "if_unproven": "priced as lower-end processor (e.g., Core i5 or i3)"
+      },
+      {
+        "risk": "The storage may not be 256GB SSD",
+        "proof": "Photo of the system information screen showing storage details or internal drive.",
+        "if_unproven": "priced as HDD or smaller SSD"
+      },
+      {
+        "risk": "The RAM may not be 8GB",
+        "proof": "Photo of the system information screen showing RAM details or internal memory slots.",
+        "if_unproven": "priced as 4GB or less"
+      },
+      {
+        "risk": "Battery life may be less than 3 hours",
+        "proof": "Video or photo of battery usage test showing time on battery.",
+        "if_unproven": "priced as poor battery life (e.g., 1-2 hours)"
+      },
+      {
+        "risk": "Keyboard backlight may not work or not exist",
+        "proof": "Photo of keyboard with backlight turned on in a dark room.",
+        "if_unproven": "priced as no backlight"
+      },
+      {
+        "risk": "Laptop may have physical damage or wear not visible in photos",
+        "proof": "Close-up photos of the screen, hinges, ports, and bottom panel.",
+        "if_unproven": "priced as having potential hidden damage"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the system information screen (Windows > Settings > System > About) showing CPU, RAM, and storage.",
+      "Photo of the keyboard with backlight turned on in a dark room.",
+      "Photo of the bottom panel showing model number or serial number.",
+      "Video or photo of battery usage test showing time on battery.",
+      "Close-up photos of screen, hinges, ports, and bottom panel for damage assessment."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The laptop's key specifications (CPU, RAM, SSD, battery life) cannot be verified from the current photos. The keyboard backlight claim is contradicted by the photos. Without proof of these claims, the item cannot be priced accurately. The model is not readable, and hidden risks like physical damage or incorrect specs affect pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 82516,
+    "input_tokens": 3249,
+    "output_tokens": 1051,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "d2678d07c7237fe0b1f7d434fcf00a10",
+    "error": null
+  }
+}

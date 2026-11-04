@@ -1,0 +1,70 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-r4",
+  "response": {
+    "observations": [
+      "Four red gas cylinders are shown outdoors.",
+      "The brand 'CAL' and weight '47kg' are visible on the side of the cylinder in photo 0.",
+      "The cylinders have protective plastic shrouds on the handles.",
+      "A watermark 'EMMATECH TECHNOLOGY' is present on the image.",
+      "The cylinders appear to be empty as stated by the seller."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "gas cylinder",
+      "brand": "CAL",
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "gas Empty Cylinder",
+        "verdict": "supported",
+        "evidence": "photo 0 shows the cylinders without visible gas residue or pressure markings."
+      },
+      {
+        "claim": "Recently tested and certified, no leak, the valve is new.",
+        "verdict": "unverified",
+        "evidence": "No photo shows this; it is the seller's word only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The cylinders may be expired or past their re-test date, making them unsafe.",
+        "proof": "A clear photo of the manufacture or expiry date stamped on the handle or shroud.",
+        "if_unproven": "as expired/scrap value"
+      },
+      {
+        "risk": "The valves may be damaged, leaking, or incompatible.",
+        "proof": "A close-up photo of the valve and a video of a leak test.",
+        "if_unproven": "as requiring valve replacement"
+      },
+      {
+        "risk": "The cylinders may be empty but contain a different gas type than intended.",
+        "proof": "A photo of the technical specification plate on the cylinder.",
+        "if_unproven": "as empty cylinders of unknown gas type"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the stamped date on the handle or shroud to verify expiry.",
+      "Photo of the technical specification plate showing the gas type and capacity.",
+      "Close-up photo of the valve to check for damage."
+    ],
+    "decision": "price",
+    "reason": "The item is known from the photos. What they cannot prove is priced at its worst case until the proof asked for below arrives."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-r4",
+    "task": "testify_read",
+    "latency_ms": 3214,
+    "input_tokens": 1705,
+    "output_tokens": 381,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "18d3ffde198be0ea2493780a93f6ba01",
+    "error": null
+  }
+}

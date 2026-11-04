@@ -1,0 +1,89 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a silver iPhone with a triple-camera module in a diagonal arrangement, consistent with iPhone 15 Pro Max design.",
+      "The Apple logo is visible on the back, centered below the camera bump.",
+      "The phone is held in a hand, showing the back and part of the side edge.",
+      "The background shows a store shelf with multiple phone boxes and devices, suggesting a retail or resale environment.",
+      "No visible damage to the back panel, but no view of the front screen, ports, or buttons.",
+      "No box, charger, or accessories visible in the photo."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "iPhone 15 Pro Max",
+      "brand": "Apple",
+      "model": null,
+      "read_from": [
+        "photo 0 camera module and design"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "iPhone 15 Pro Max 256GB",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows the back design consistent with iPhone 15 Pro Max, but no model or storage label is visible. The model cannot be confirmed from the photo alone."
+      },
+      {
+        "claim": "physical + eSIM",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo of the SIM tray or settings screen to verify dual SIM capability. Cannot be confirmed remotely."
+      },
+      {
+        "claim": "85% battery health",
+        "verdict": "unverifiable_remote",
+        "evidence": "No screenshot of battery health or diagnostic tool shown. Cannot be verified from photos."
+      },
+      {
+        "claim": "No changed parts, everything working",
+        "verdict": "unverifiable_remote",
+        "evidence": "No proof of functionality (screen, buttons, camera, charging) or internal components shown. Cannot verify remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery health is not 85% or worse than claimed",
+        "proof": "Screenshot of battery health from Settings > Battery > Battery Health",
+        "if_unproven": "Priced as if battery is degraded (e.g., 70% or less), which reduces value significantly."
+      },
+      {
+        "risk": "Phone has been repaired or has non-original parts",
+        "proof": "Close-up of the charging port, SIM tray, and internal components (if possible), or a diagnostic report showing original parts.",
+        "if_unproven": "Priced as if it has been repaired or has non-original parts, which reduces value."
+      },
+      {
+        "risk": "Screen or camera not working",
+        "proof": "Video or photo showing screen turning on, camera recording, and touch responsiveness.",
+        "if_unproven": "Priced as if screen or camera is faulty, which reduces value."
+      },
+      {
+        "risk": "Device is blacklisted or has iCloud lock",
+        "proof": "Screenshot of IMEI check or activation screen showing no lock.",
+        "if_unproven": "Priced as if it is blacklisted or locked, which could render it unusable."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of battery health from Settings > Battery > Battery Health",
+      "Video showing the phone turning on, camera working, and screen responsiveness",
+      "Screenshot of IMEI check or activation screen to confirm no iCloud lock",
+      "Photo of the SIM tray and charging port to verify no repairs",
+      "Photo of the box or original packaging if available"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The phone appears to be an iPhone 15 Pro Max based on design, but critical claims (battery health, working condition, original parts) cannot be verified from the current photo. Without proof of functionality and authenticity, the item cannot be priced accurately and carries significant hidden risks."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 70949,
+    "input_tokens": 1795,
+    "output_tokens": 851,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "389539ae52d6504c9a73d257268b6610",
+    "error": null
+  }
+}

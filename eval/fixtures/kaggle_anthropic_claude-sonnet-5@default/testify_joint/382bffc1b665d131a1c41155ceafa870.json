@@ -1,0 +1,89 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "All three photos show a tire stall yard with multiple stacks of used tires, not a single isolated item.",
+      "Tires are dirty, sun-faded, with chalk/paint marks (price codes written by the seller) on many sidewalls.",
+      "No sidewall text (brand, size, DOT code) is legible in any photo.",
+      "No close-up of tread pattern depth is provided; tires are shown from a distance or at an angle that hides tread wear detail.",
+      "A red car and a shop selling wheel rims are visible in the background, consistent with a roadside tire market, not a private seller's single car.",
+      "No single tire is singled out as 'the item for sale' \u2014 photos appear to be generic stock images of the dealer's yard."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used (tokunbo) car tires",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "First grade Belgium tires",
+        "verdict": "unverifiable_remote",
+        "evidence": "No brand/origin marking readable on any sidewall in photos 0-2."
+      },
+      {
+        "claim": "Tread is still 90 percent",
+        "verdict": "unverifiable_remote",
+        "evidence": "No close-up tread shot; tires shown stacked or from a distance in all three photos."
+      },
+      {
+        "claim": "No patch, no bulge",
+        "verdict": "unverifiable_remote",
+        "evidence": "Sidewalls not shown in sufficient detail or from inner/outer face to check for patches or bulges."
+      },
+      {
+        "claim": "Removed from a 2023 car",
+        "verdict": "unverifiable_remote",
+        "evidence": "No vehicle, receipt, or removal context shown; claim rests on seller's word alone."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual tread depth could be much lower than claimed, affecting safety and value",
+        "proof": "Close-up photo of tread with a coin or tread-depth gauge against the grooves",
+        "if_unproven": "priced as low/worn tread (near legal minimum)"
+      },
+      {
+        "risk": "Tire could have internal patches, plugs, or sidewall bulges not visible in distant shots",
+        "proof": "Close-up photos of each tire's full sidewall (inner and outer) and tread face",
+        "if_unproven": "priced as possibly repaired/damaged stock"
+      },
+      {
+        "risk": "Size and brand are unknown, so the tire may not match a listed comparable's specification",
+        "proof": "Clear photo of sidewall showing brand name and size code (e.g., 205/55R16)",
+        "if_unproven": "priced as generic unbranded tokunbo tire, lowest tier"
+      },
+      {
+        "risk": "Photos may be generic stock/catalogue images of the seller's shop rather than the specific tires being sold",
+        "proof": "A photo of the specific tire(s) being offered with a timestamp or the seller holding them",
+        "if_unproven": "priced as unverified stock photo, lowest tier of comparables"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of the sidewall showing brand name, size, and DOT/date code",
+      "Close-up of tread with a depth gauge or coin for scale",
+      "Photos of the specific tires being sold (not the whole yard), including inner sidewall for patches/bulges"
+    ],
+    "decision": "price",
+    "reason": "Item is identifiable only as generic used tires; all quality and origin claims are unverifiable from the photos, so it must be priced at the worst-case (unverified/low-grade) end of the comparable range.",
+    "price_pick": {
+      "low": 0,
+      "high": 2
+    }
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 25932,
+    "input_tokens": 3953,
+    "output_tokens": 2220,
+    "cost_usd": 0.030106,
+    "replayed": false,
+    "fixture_key": "382bffc1b665d131a1c41155ceafa870",
+    "error": null
+  }
+}

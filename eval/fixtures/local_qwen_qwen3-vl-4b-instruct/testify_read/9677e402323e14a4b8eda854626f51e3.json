@@ -1,0 +1,67 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-instruct",
+  "response": {
+    "observations": [
+      "Photo shows a car headlight assembly with a clear lens, orange turn signal, and black housing.",
+      "Text 'HONDA AND ACURA' is visible on the lower part of the headlight housing.",
+      "The headlight is placed on a cluttered surface with other parts around it.",
+      "No visible cracks or damage on the headlight assembly.",
+      "The headlight appears to be a complete unit with all clips and brackets visible."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "car headlight",
+      "read_from": [
+        "photo 0 screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Body,engine n suspension for all model of honda,acura n toyota cars n suvs",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo 0 shows only a headlight, not body, engine, or suspension parts. No model-specific identifiers are visible."
+      },
+      {
+        "claim": "Original Toyota part, not China copy",
+        "verdict": "unverified",
+        "evidence": "No visible Toyota branding or model-specific identifiers on the headlight. Cannot verify origin remotely."
+      },
+      {
+        "claim": "No crack, all clips and brackets complete",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows no visible cracks on the headlight assembly. Clips and brackets appear intact and attached."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The part is not a Toyota part, but a Honda or Acura part as indicated by the text on the headlight.",
+        "proof": "Photo 0 screen showing 'HONDA AND ACURA' text.",
+        "if_unproven": "Priced as not being a Toyota part."
+      },
+      {
+        "risk": "The part is not original or is a copy, despite seller's claim.",
+        "proof": "Photo 0 screen showing 'HONDA AND ACURA' text, which may indicate it is not a Toyota part.",
+        "if_unproven": "Priced as not original."
+      }
+    ],
+    "proof_requests": [
+      "Ask for a photo of the part with a Toyota logo or model-specific branding."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller claims the part is for Toyota, but the photo shows 'HONDA AND ACURA' text, which contradicts the claim. Without proof of Toyota origin, the claim cannot be verified remotely."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-instruct",
+    "task": "testify_read",
+    "latency_ms": 4477,
+    "input_tokens": 1460,
+    "output_tokens": 556,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "9677e402323e14a4b8eda854626f51e3",
+    "error": null
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Orange tanker truck with 'HOWO' written on the front grille. The truck has a large cylindrical tank, multiple axles, and is covered in an orange netting. The front grille also shows a logo resembling a stylized 'H' or 'A'.",
+      "Photo 1: Rear and side view of the tanker. The tank has a green and black chevron hazard stripe, a red warning label with a flame symbol, and Chinese characters '\u5371\u9669\u54c1' (dangerous goods). The tank is secured with orange netting. The rear axle has dual wheels.",
+      "Photo 2: Front view of the truck, showing 'SINOTRUK' and '371' on the grille. The same orange netting covers the front. The logo below the text is a stylized 'H' or 'A' inside a triangle, consistent with Sinotruk's branding. The truck appears to be parked in a lot with other vehicles nearby.",
+      "All photos show the same truck from different angles. The truck is in a yard with visible debris and uneven ground. The netting suggests it is being transported or stored, not in active use."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "diesel tanker truck",
+      "brand": "Sinotruk",
+      "model": "HOWO 371",
+      "read_from": [
+        "photo 0 front grille: 'HOWO'",
+        "photo 2 front grille: 'SINOTRUK 371'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Howo Diesel Tanker",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 2 show 'HOWO' on the front grille, and the vehicle is a tanker. The brand is Sinotruk, which manufactures HOWO trucks."
+      },
+      {
+        "claim": "25,000 Litres",
+        "verdict": "unverified",
+        "evidence": "No visible capacity marking or plate in any photo. The tank size cannot be confirmed from visual inspection alone."
+      },
+      {
+        "claim": "Direct Tokunbo",
+        "verdict": "unverifiable_remote",
+        "evidence": "The term 'Tokunbo' refers to imported used vehicles, but there is no documentation or proof in the photos to confirm origin or import status. The photos alone cannot verify if it is 'direct' (i.e., not resold)."
+      },
+      {
+        "claim": "Custom duty fully paid",
+        "verdict": "unverifiable_remote",
+        "evidence": "No customs documents, receipts, or official stamps are visible in the photos. This claim cannot be verified remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Tank capacity is not 25,000 litres",
+        "proof": "A clear photo of the tank's capacity plate or a document specifying the volume.",
+        "if_unproven": "priced as a smaller or unknown capacity tanker, which reduces value"
+      },
+      {
+        "risk": "The truck is not in working condition or has mechanical issues",
+        "proof": "A video or photo of the engine running, interior dashboard, and undercarriage inspection.",
+        "if_unproven": "priced as potentially non-functional or requiring repairs"
+      },
+      {
+        "risk": "The truck has not had customs duty paid or is not legally imported",
+        "proof": "A copy of the customs clearance document or import certificate.",
+        "if_unproven": "priced as a high-risk import with potential legal or tax liabilities"
+      },
+      {
+        "risk": "The tank is not properly certified for diesel transport",
+        "proof": "A photo of the tank's safety certification plate or inspection report.",
+        "if_unproven": "priced as unverified for hazardous material transport, which may be illegal or unsafe"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the tank's capacity plate or official document stating 25,000 litres.",
+      "Video of the engine starting and running, and interior dashboard.",
+      "Photo of the undercarriage and suspension system.",
+      "Copy of customs clearance or import certificate.",
+      "Photo of the tank's safety certification or inspection report."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The truck's brand and model are identifiable, but critical claims like capacity, customs status, and working condition cannot be verified from the current photos. Hidden risks related to legal compliance, safety, and functionality must be resolved before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 80125,
+    "input_tokens": 2162,
+    "output_tokens": 997,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "7360ca90f808dbf1f0ba531f7cc40544",
+    "error": null
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 and photo 1 show a hand holding a PlayStation 4 game case labeled 'The Witcher Wild Hunt' with PS4 logo and CD Projekt Red branding.",
+      "Case appears intact, no visible cracks or missing cover art, but the case is only shown closed in both shots.",
+      "No disc is visible in either photo; condition of the disc itself (scratches, readability) cannot be judged.",
+      "Background shows a shop setting with 'Prezin Gadgets' signage and a jiji watermark, consistent with a reseller listing.",
+      "No price, warranty, or additional accessories (manual, poster) are shown."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "PS4 game disc",
+      "brand": "CD Projekt Red",
+      "model": "The Witcher 3: Wild Hunt",
+      "read_from": [
+        "photo 0 cover text",
+        "photo 1 cover text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "The Witcher wild hunt 111 (implying The Witcher 3: Wild Hunt, PS4)",
+        "verdict": "supported",
+        "evidence": "Title and PS4 logo clearly visible on case in photo 0 and photo 1"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Disc could be scratched, unreadable, or missing from the case entirely.",
+        "proof": "A photo of the disc itself out of the case, ideally showing the playing surface.",
+        "if_unproven": "priced as if disc condition is unverified/worst case (assume may not play)"
+      },
+      {
+        "risk": "Case could contain a different or counterfeit disc (case-swap scam is common with used game resale).",
+        "proof": "A photo of the disc label matching the game title, or a video of the disc being inserted and the game booting on a PS4.",
+        "if_unproven": "priced as standard used copy, not verified authentic, no premium for 'mint' condition"
+      },
+      {
+        "risk": "Missing manual or inlay could reduce resale value slightly.",
+        "proof": "A photo of the case interior showing manual/inlay present.",
+        "if_unproven": "priced as base used copy without extras"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the disc itself (playing surface) outside the case.",
+      "Video of the disc being inserted into a PS4 and the game loading to the main menu.",
+      "Photo of the case interior showing manual/inlay."
+    ],
+    "decision": "price",
+    "reason": "The title and platform (PS4, The Witcher 3: Wild Hunt) are clearly identifiable from the cover art in both photos, but the disc itself is never shown, so it must be priced as an unverified used copy at worst case alongside comparable PS4 titles in the same market.",
+    "price_pick": {
+      "low": 1,
+      "high": 6
+    }
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 17313,
+    "input_tokens": 4154,
+    "output_tokens": 1578,
+    "cost_usd": 0.024088,
+    "replayed": false,
+    "fixture_key": "3ed4e1667ea85389d40ede3d42dd6244",
+    "error": null
+  }
+}

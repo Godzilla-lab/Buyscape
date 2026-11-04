@@ -1,0 +1,70 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the interior of a white mini-fridge with door open. The interior has visible stains and discoloration on the bottom shelf and walls. There are two wire shelves, a door shelf with a jar, and a plastic bag with items. The door has a small white plastic shelf and a bottle holder. The fridge sits on a patterned carpet.",
+      "Photo 1 shows the front of the same white fridge. The brand logo is visible on the top right: an oval with text that appears to read 'SUNFROST'. A model number 'MR-120' is visible in the top right corner. There is a colorful square magnet on the door. The surface has scratches and scuffs. The fridge is on the same patterned carpet."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "mini fridge",
+      "brand": "SUNFROST",
+      "model": "MR-120",
+      "read_from": [
+        "photo 1 logo",
+        "photo 1 top right corner"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Neatly used fridge",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows significant interior staining and discoloration, especially on the bottom shelf and walls, which contradicts 'neatly used'."
+      },
+      {
+        "claim": "Price- 60k",
+        "verdict": "unverifiable_remote",
+        "evidence": "Price is stated by seller; cannot verify without market comparison or proof of condition affecting value."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Fridge may not be working or has poor cooling performance",
+        "proof": "Video or photo of the fridge running with temperature display or condensation inside.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Interior stains may be mold or bacterial contamination",
+        "proof": "Close-up photo of the stained areas under bright light to check for mold or residue texture.",
+        "if_unproven": "priced as contaminated, reducing value"
+      },
+      {
+        "risk": "Door seal may be damaged or worn, leading to energy inefficiency",
+        "proof": "Photo of the door seal from the side, showing gaps or cracks.",
+        "if_unproven": "priced as inefficient, reducing value"
+      }
+    ],
+    "proof_requests": [
+      "Video of the fridge running with door closed, showing interior temperature or condensation.",
+      "Close-up photo of the stained interior under bright light to check for mold.",
+      "Photo of the door seal from the side to check for damage or gaps.",
+      "Photo of the power cord and plug to check for damage."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The fridge is identifiable as a SUNFROST MR-120, but the interior condition contradicts the 'neatly used' claim. Key risks like functionality, contamination, and seal integrity cannot be assessed from current photos. Proof is needed to determine if it works and to what condition it is in before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 56629,
+    "input_tokens": 2298,
+    "output_tokens": 690,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "bb01581b23a053e77c627ad5d747f527",
+    "error": null
+  }
+}

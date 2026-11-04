@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Closed silver laptop with Apple logo on the back. The surface shows minor smudges and light reflections. No visible model or serial number.",
+      "Photo 1: Open laptop showing keyboard and trackpad. The keyboard has black keys with white lettering. The bottom edge of the screen shows a faint 'MacBook Pro' label. The screen is on, displaying a colorful background.",
+      "Photo 2: Laptop screen showing macOS login screen with a user icon and 'macuser' label. The bottom bezel clearly shows 'MacBook Pro' text. The screen has visible smudges and reflections. The time on the screen is 6:51."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Apple",
+      "model": "MacBook Pro",
+      "read_from": [
+        "photo 2 screen bezel",
+        "photo 1 bottom edge"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Almost brand-new Apple MacBook Pro 2017",
+        "verdict": "unverified",
+        "evidence": "The model year is not visible in any photo. The 'MacBook Pro' name is visible, but no model identifier (e.g., 15-inch, 13-inch, or 2017 badge) is readable. The condition appears used, with smudges and reflections on the screen and body."
+      },
+      {
+        "claim": "straight from the USA fresh out of the box",
+        "verdict": "unverifiable_remote",
+        "evidence": "No box, receipt, or shipping documentation is shown. The photos show only the device itself. Origin cannot be confirmed remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Device may be stolen or gray market (not genuine Apple product)",
+        "proof": "Photo of the serial number and a verification check via Apple's official website or a trusted reseller.",
+        "if_unproven": "priced as potentially counterfeit or stolen, which would reduce value significantly"
+      },
+      {
+        "risk": "Battery health may be degraded or not original",
+        "proof": "Screenshot of the battery health status from System Information or Apple Diagnostics.",
+        "if_unproven": "priced as if battery is degraded or non-original, reducing value"
+      },
+      {
+        "risk": "Screen may have dead pixels, scratches, or damage not visible in photos",
+        "proof": "Video of the screen displaying full white, full black, and color gradients to check for defects.",
+        "if_unproven": "priced as if screen has minor to moderate defects"
+      },
+      {
+        "risk": "Device may be locked to an Apple ID or have activation lock enabled",
+        "proof": "Proof that the device is unlocked and ready for new user setup (e.g., screenshot of 'Sign in with Apple ID' screen or 'Erase all content and settings' option visible).",
+        "if_unproven": "priced as if activation lock is present, which would prevent use without the original owner's credentials"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the serial number (under the laptop or on the bottom case)",
+      "Video of the screen displaying full white, full black, and color gradients",
+      "Screenshot of battery health from System Information",
+      "Proof that the device is unlocked (e.g., 'Erase all content and settings' option visible)",
+      "Photo of the original box or receipt if available"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model year and condition claims cannot be verified from the current photos. The device appears to be a MacBook Pro, but critical details like serial number, battery health, activation lock status, and screen condition are missing. These factors significantly affect value and usability. Without proof, the item cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 68787,
+    "input_tokens": 2373,
+    "output_tokens": 845,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "b00a8893b55f55894531b2bed9fcd958",
+    "error": null
+  }
+}

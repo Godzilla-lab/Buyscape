@@ -1,0 +1,84 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a closed laptop with a large 'Z' logo on the lid, suggesting it is a Z series device, not an HP EliteBook.",
+      "Photo 1 and 2 show the same open laptop with a hedgehog wallpaper on the screen, a silver chassis, and a keyboard with a 'Z' logo on the bottom left.",
+      "The laptop has a sticker on the bottom right of the keyboard area with 'Intel Core i7' and '10th Gen' visible, confirming the CPU generation.",
+      "The screen bezels are relatively thick, and the keyboard has a diamond pattern on the palm rest.",
+      "The HP logo is visible on the bottom bezel of the screen, but the lid does not show an HP logo.",
+      "The seller claims it is an HP EliteBook 14 G7 Firefly, but the visible 'Z' branding contradicts this."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "laptop",
+      "brand": "Z",
+      "model": null,
+      "read_from": [
+        "photo 0 lid",
+        "photo 1 keyboard area"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP Elitebook 14 G7 firefly laptop",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows a large 'Z' logo on the lid, and no HP logo is visible. The keyboard also has a 'Z' logo, which is inconsistent with HP branding."
+      },
+      {
+        "claim": "Core i7 10th Generation",
+        "verdict": "supported",
+        "evidence": "Photo 1 and 2 show a sticker with 'Intel Core i7' and '10th Gen' clearly visible."
+      },
+      {
+        "claim": "512ssd 32gb ram",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows the internal components or system information to verify storage and RAM. The sticker does not list these specs."
+      },
+      {
+        "claim": "4gb Dedicated Nvidia",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows GPU information or system specs. The screen does not display any GPU details."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The laptop may not be an HP EliteBook as claimed, but a Z-branded device, which could be a different brand or a rebranded unit.",
+        "proof": "A clear shot of the laptop lid showing the brand logo, or a shot of the bottom chassis with model information.",
+        "if_unproven": "Priced as a generic laptop with unknown brand, which is lower than HP EliteBook."
+      },
+      {
+        "risk": "The RAM and SSD specifications may not match the claimed 32GB RAM and 512GB SSD.",
+        "proof": "A screenshot of the Windows system information showing installed RAM and storage, or a photo of the open laptop showing the internal components.",
+        "if_unproven": "Priced as if it has lower specs, such as 8GB RAM and 256GB SSD, which is common in similar laptops."
+      },
+      {
+        "risk": "The dedicated GPU may not be 4GB Nvidia, or may be integrated graphics.",
+        "proof": "A screenshot of the device manager or GPU information in Windows, or a photo of the GPU sticker or specs.",
+        "if_unproven": "Priced as if it has integrated graphics, which reduces value significantly."
+      }
+    ],
+    "proof_requests": [
+      "A clear photo of the laptop lid showing the brand logo and model name.",
+      "A screenshot of the Windows system information showing RAM, storage, and GPU details.",
+      "A photo of the bottom chassis or internal components showing the model and specs.",
+      "A video or photo of the laptop booting up or running a GPU-intensive task to verify performance."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The laptop appears to be a Z-branded device, not an HP EliteBook as claimed, and the internal specs (RAM, SSD, GPU) cannot be verified from the current photos. Without proof of brand and specs, the item cannot be accurately priced."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 72027,
+    "input_tokens": 2801,
+    "output_tokens": 935,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "09007c8cb8a94d4feabfddc59917c504",
+    "error": null
+  }
+}

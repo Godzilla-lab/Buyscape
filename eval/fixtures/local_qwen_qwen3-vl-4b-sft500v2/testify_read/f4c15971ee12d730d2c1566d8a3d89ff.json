@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-sft500v2",
+  "response": {
+    "observations": [
+      "Three orange gas cylinders are shown in a storage area.",
+      "The front cylinder in photo 2 has a label with 'REPIOL' and '12.5kg' clearly visible.",
+      "The label also shows 'Special Valve Type: 12.5kg' and '300\u00b0C'.",
+      "The valve and handle appear intact.",
+      "The cylinders show signs of use, including surface scratches and some rust on the base.",
+      "A red cylinder and a blue cylinder are visible in the background."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "gas cylinder",
+      "brand": "REPIOL",
+      "model": "12.5kg",
+      "read_from": [
+        "photo 2 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "12.5kg",
+        "verdict": "supported",
+        "evidence": "photo 2 label"
+      },
+      {
+        "claim": "Foreign-Used",
+        "verdict": "unverified",
+        "evidence": "The origin is not shown on the label; it is a generic term for used items."
+      },
+      {
+        "claim": "Strong & Reliable!",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a subjective claim about structural integrity and valve performance."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The cylinders may be expired or past their retest date.",
+        "proof": "A clear photo of the date stamp on the valve or the body label.",
+        "if_unproven": "as expired"
+      },
+      {
+        "risk": "The valve may be leaking or the regulator may be damaged.",
+        "proof": "A video showing the valve being opened and closed without gas escaping.",
+        "if_unproven": "as having a faulty valve"
+      },
+      {
+        "risk": "The cylinders may be empty or contain a different gas type.",
+        "proof": "A photo of the cylinder weight or a gas refill receipt.",
+        "if_unproven": "as empty"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the date stamp on the valve or the body label.",
+      "Video of the valve being operated to check for leaks.",
+      "Photo of the cylinder weight or a refill receipt."
+    ],
+    "decision": "price",
+    "reason": "The item is known from the photos. What they cannot prove is priced at its worst case until the proof asked for below arrives."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-sft500v2",
+    "task": "testify_read",
+    "latency_ms": 3598,
+    "input_tokens": 2794,
+    "output_tokens": 417,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "f4c15971ee12d730d2c1566d8a3d89ff",
+    "error": null
+  }
+}

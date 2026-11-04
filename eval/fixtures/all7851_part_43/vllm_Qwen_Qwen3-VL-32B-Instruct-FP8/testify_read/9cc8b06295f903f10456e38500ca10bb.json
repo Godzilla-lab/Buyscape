@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a 2.5-inch hard disk drive in a metal tray, likely for server use.",
+      "The label on the drive is clearly visible and includes multiple identifiers: HPE, model MM2000JFRC, part numbers 765452-002 and 765470-004, and serial number W462KXVD.",
+      "The label states '2TB 7.2K SAS', matching the seller's claim of 2TB and 7.2K RPM.",
+      "The drive is marked 'Manufactured by Seagate Technology LLC', indicating the OEM.",
+      "The drive is in a carrier tray with a latch mechanism, typical for hot-swappable server drives.",
+      "The label includes 'HPE P/N: 765452-002', which matches the seller's listed part number 765452-002.",
+      "The seller's text includes part numbers 765466-B21, 765873-001, and 765452-002 \u2014 the last is confirmed on the label."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "2TB 7.2K RPM SAS 2.5-inch hard drive",
+      "brand": "Hewlett Packard Enterprise (HPE)",
+      "model": "MM2000JFRC",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "765466-B21 HP 2TB 12G SAS 7.2K RPM 2.5\" 512E HDD",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows 2TB, 7.2K RPM, 2.5\", SAS, and 512E (implied by 512e on label), but part number 765466-B21 is not visible on the drive. The visible part number is 765452-002. The '12G' SAS speed is not stated on the label, so unverifiable_remote."
+      },
+      {
+        "claim": "765873-001",
+        "verdict": "unverifiable_remote",
+        "evidence": "This part number is not visible on the drive or tray in photo 0. Cannot confirm if it is a compatible or related part."
+      },
+      {
+        "claim": "765452-002",
+        "verdict": "supported",
+        "evidence": "Photo 0 label clearly shows 'HPE P/N: 765452-002'."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Drive may be faulty or not working",
+        "proof": "Video or photo of the drive spinning up and showing activity on a server or external enclosure with a health check.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Drive may have bad sectors or data corruption",
+        "proof": "Screenshot of a disk health check tool (e.g., CrystalDiskInfo, HPE Smart Storage Administrator) showing S.M.A.R.T. status and no errors.",
+        "if_unproven": "priced as potentially degraded"
+      },
+      {
+        "risk": "The drive may not be genuine HPE or may be rebranded",
+        "proof": "Photo of the drive's firmware version or serial number verified via HPE's official support tool or website.",
+        "if_unproven": "priced as unverified authenticity"
+      }
+    ],
+    "proof_requests": [
+      "Video or photo of the drive spinning up and being recognized by a system.",
+      "Screenshot of a disk health check tool showing S.M.A.R.T. status.",
+      "Photo of the drive's firmware version or verification via HPE's official tool."
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as an HPE MM2000JFRC 2TB 7.2K SAS 2.5-inch drive with part number 765452-002, confirmed from the label in photo 0. The seller's claim of 2TB, 7.2K RPM, and 2.5\" is supported. The part number 765466-B21 is not visible and may be incorrect or for a different component. The '12G' SAS speed is not confirmed. Hidden risks include functionality and health, which are priced conservatively until proven."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 83135,
+    "input_tokens": 1802,
+    "output_tokens": 1044,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "9cc8b06295f903f10456e38500ca10bb",
+    "error": null
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Front-loading LG washing machine, white cabinet.",
+      "Panel text reads 'INVERTER DirectDrive 7 kg' with a partial model code visible, appears to read 'F1068QDP2' or similar.",
+      "Door is a round viewing window, large diameter typical of a 7-8kg class machine.",
+      "Visible rust/corrosion spots at bottom front corners and along the door hinge area.",
+      "No power cable, display screen, or running demonstration visible; control dial and buttons appear intact.",
+      "'10 Year Warranty' and 'DD Motor' badges visible on the right side of the door bezel.",
+      "Sticker reads 'Less Noise / Less Vibration / More Durability' - marketing sticker, not a serial/capacity plate."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "front-load washing machine",
+      "brand": "LG",
+      "model": "DirectDrive 7kg (label reads F1068QDP2 or similar)",
+      "read_from": [
+        "photo 0 control panel label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "LG DirectDrive 7kg washing machine for sale",
+        "verdict": "supported",
+        "evidence": "photo 0 shows panel text 'DirectDrive 7 kg'"
+      },
+      {
+        "claim": "It is the 8kg one",
+        "verdict": "contradicted",
+        "evidence": "photo 0 panel clearly reads 7kg, not 8kg; no 8kg marking visible anywhere"
+      },
+      {
+        "claim": "Implied working/functional condition (no explicit text claim, but listing for sale as-is)",
+        "verdict": "unverifiable_remote",
+        "evidence": "no power-on, spin, or drain demonstration shown"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Seller's stated capacity (8kg) conflicts with the machine's own label (7kg), raising doubt about which unit is actually being sold or an attempt to misrepresent value.",
+        "proof": "Close-up photo of the rating/serial plate (usually on rear or inside door rim) showing exact model and capacity.",
+        "if_unproven": "priced as the lower, photo-confirmed 7kg model, with suspicion flag for misrepresentation"
+      },
+      {
+        "risk": "Visible rust at base and door hinge could indicate water leakage or frame corrosion affecting drum bearing or door seal longevity.",
+        "proof": "Close-up photos of rust spots and a photo of the rear panel/base for leakage stains.",
+        "if_unproven": "priced as cosmetically and structurally compromised"
+      },
+      {
+        "risk": "No evidence the drum spins, heats, or completes a cycle; motor or PCB fault cannot be ruled out.",
+        "proof": "Short video of the machine powered on, dial turned, and spin cycle running with water draining.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Door seal/gasket condition and drum interior cleanliness unknown beyond the one static photo.",
+        "proof": "Photo of door seal fully open and drum interior under light.",
+        "if_unproven": "priced assuming average wear, no premium for 'like new' interior"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the rear rating plate showing exact model number and capacity in kg.",
+      "Video of the machine powered on and completing a wash/spin cycle.",
+      "Close-up photos of the rusted areas at the base and hinge.",
+      "Photo of the door seal fully open and drum interior."
+    ],
+    "decision": "fraud_suspected",
+    "reason": "The seller explicitly claims the unit is 8kg, but the machine's own visible label in photo 0 clearly reads 7kg, a direct contradiction that suggests an attempt to misrepresent capacity for a higher price; combined with unverified working condition and visible rust, this cannot be safely priced as described."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 22725,
+    "input_tokens": 3464,
+    "output_tokens": 2069,
+    "cost_usd": 0.024459,
+    "replayed": false,
+    "fixture_key": "0d01314f1697c339dcbf7fdffc781dff",
+    "error": null
+  }
+}

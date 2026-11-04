@@ -1,0 +1,89 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: an orange gas cylinder wrapped in a protective netting/mesh sleeve, sitting on a grey sofa/couch, indoor setting.",
+      "Photo 0: embossed text near the cylinder collar is visible but not legible enough to read any capacity or certification marking.",
+      "Photo 1: top-down view of the cylinder showing a regulator fitted on the valve, with a small label on the regulator body that is too small/blurry to read.",
+      "No visible manufacturer stamp, test/inspection date, or SON/NMDPRA certification mark in either photo.",
+      "No scale, tape measure, or weighing shot provided to confirm the stated 12.5kg size.",
+      "Cylinder paint looks uniform orange with no visible dents, rust, or scorch marks in the limited angles shown."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "12.5kg LPG gas cylinder with regulator",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0",
+        "photo 1"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "12.5kg gas cylinder",
+        "verdict": "unverifiable_remote",
+        "evidence": "No embossed capacity marking or scale is legible in photo 0 or photo 1; size looks plausible for a 12.5kg cylinder but cannot be confirmed."
+      },
+      {
+        "claim": "Comes with regulator",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows a regulator fitted on the cylinder valve."
+      },
+      {
+        "claim": "Can be sold separately",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a sales term, not something photos can confirm or deny."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Cylinder may be expired or lack valid safety recertification (test/manufacture date stamp).",
+        "proof": "Close-up photo of the embossed collar showing manufacture date and last test/inspection date.",
+        "if_unproven": "priced as uncertified/expired, lowering value"
+      },
+      {
+        "risk": "Actual gas capacity could differ from the claimed 12.5kg (could be a smaller/larger cylinder).",
+        "proof": "Photo of the embossed capacity marking on the cylinder neck, or a weighing shot.",
+        "if_unproven": "priced as unconfirmed capacity, worst case treated as smallest common size"
+      },
+      {
+        "risk": "Valve or cylinder body could have corrosion, dents, or leaks hidden under the netting.",
+        "proof": "Photo of the cylinder with netting removed, all sides visible, plus a soap-water leak test clip on the valve.",
+        "if_unproven": "priced as condition unverified, treated as used/risk of leak"
+      },
+      {
+        "risk": "Regulator could be faulty, incompatible, or missing safety certification.",
+        "proof": "Close-up photo of regulator brand/model label, and a clip showing it mounted and holding pressure.",
+        "if_unproven": "priced as regulator untested, treated as non-working"
+      },
+      {
+        "risk": "Cylinder could be used/refurbished rather than new, despite appearing new in low-detail photos.",
+        "proof": "Full unobstructed photos from multiple angles without netting, showing any wear marks.",
+        "if_unproven": "priced as used condition, not new"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of the embossed capacity and manufacture/test date stamp on the cylinder collar.",
+      "Photo with the protective netting removed, showing the full body from multiple angles.",
+      "Close-up of the regulator's brand/model label.",
+      "A short video or soap-water test clip showing the valve and regulator connection holding pressure without leaks."
+    ],
+    "decision": "price",
+    "reason": "The item is clearly a 12.5kg-type gas cylinder with a regulator attached, but no capacity marking, certification date, or leak/pressure test is visible, so it must be priced at worst case as an unverified-condition, uncertified cylinder with an untested regulator."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 19815,
+    "input_tokens": 3238,
+    "output_tokens": 1843,
+    "cost_usd": 0.021747,
+    "replayed": false,
+    "fixture_key": "d985be7072dd5fa4323aa8d27322b2e2",
+    "error": null
+  }
+}

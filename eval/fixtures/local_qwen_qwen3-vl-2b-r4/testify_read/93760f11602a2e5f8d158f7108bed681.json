@@ -1,0 +1,89 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r4",
+  "response": {
+    "observations": [
+      "Nikon DSLR camera body with a 35mm lens.",
+      "The camera body shows significant dust and surface grime.",
+      "The lens barrel has visible scratches and wear.",
+      "The camera is resting on a white plastic bag with 'McSteve Online Gadget Store' printed on it.",
+      "The shutter count is not visible in the photos.",
+      "The seller's text mentions 'working perfectly ok' and 'no fungus or scratch on the lens'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DSLR camera",
+      "brand": "Nikon",
+      "read_from": [
+        "photo 0 body",
+        "photo 2 lens"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Used Nikon D7200 DSLR Camera",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "35MM Nikkor Nikon Lens",
+        "verdict": "supported",
+        "evidence": "photo 0 lens"
+      },
+      {
+        "claim": "Working perfectly ok",
+        "verdict": "unverified",
+        "evidence": "No photo shows this; it is the seller's word only."
+      },
+      {
+        "claim": "Shutter count under 5,000, no fungus or scratch on the lens. Original battery and charger, never repaired.",
+        "verdict": "unverified",
+        "evidence": "No photo shows this; it is the seller's word only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The camera may not power on or take photos.",
+        "proof": "A video showing the camera powering on and a photo being taken.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The shutter count may be high, indicating the camera is near the end of its life.",
+        "proof": "A screenshot of the shutter count from a recent photo or a third-party tool.",
+        "if_unproven": "as high shutter count (near end of life)"
+      },
+      {
+        "risk": "The lens may have fungus or significant scratches.",
+        "proof": "Close-up photos of the front and rear lens elements.",
+        "if_unproven": "as having fungus or scratches"
+      },
+      {
+        "risk": "The battery and charger may be missing or non-functional.",
+        "proof": "A photo of the battery and charger included in the listing.",
+        "if_unproven": "as missing battery and charger"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of any label, sticker or metal plate showing the brand and model.",
+      "A photo of the shutter count label on the camera body.",
+      "A photo of the lens glass showing fungus or scratches.",
+      "A photo of the battery and charger.",
+      "A video of the camera powering on and taking a photo."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "What the item is shows, but not the model that sets its price: no photo shows it clearly enough to read. The shot asked for first would settle it."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r4",
+    "task": "testify_read",
+    "latency_ms": 6830,
+    "input_tokens": 2821,
+    "output_tokens": 527,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "93760f11602a2e5f8d158f7108bed681",
+    "error": null
+  }
+}

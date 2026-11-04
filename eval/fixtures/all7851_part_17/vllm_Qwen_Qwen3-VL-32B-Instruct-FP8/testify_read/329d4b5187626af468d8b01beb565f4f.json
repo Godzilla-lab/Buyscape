@@ -1,0 +1,86 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a white Panasonic inverter air conditioner outdoor unit, with the brand name 'Panasonic' and 'INVERTER' visible on the front panel.",
+      "Photo 1 shows the same unit from a slightly different angle, with 'Panasonic' and 'INVERTER' again visible on the front and side.",
+      "The unit appears to be in a storage or sales yard with multiple similar units stacked or placed nearby.",
+      "The unit has visible dust and grime, especially on the front grille and casing, suggesting outdoor storage or use.",
+      "No indoor unit is shown in either photo.",
+      "No power cord, remote, or control panel is visible.",
+      "No model number or serial number is visible in either photo.",
+      "The seller claims it is 'tested and confirmed working' and has '100 percent copper coil'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "split system air conditioner",
+      "brand": "Panasonic",
+      "model": null,
+      "read_from": [
+        "photo 0 front panel",
+        "photo 1 front and side panel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Tested and confirmed working",
+        "verdict": "unverified",
+        "evidence": "No photo shows the unit running or any test in progress. No power connection or control interface is visible."
+      },
+      {
+        "claim": "Panasonic inverter Airconditioner",
+        "verdict": "supported",
+        "evidence": "Brand name 'Panasonic' and 'INVERTER' are clearly visible on the unit in photo 0 and photo 1."
+      },
+      {
+        "claim": "100 percent copper coil",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows the internal coil or any certification. The claim cannot be verified from external photos alone."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Unit may not be working despite seller's claim",
+        "proof": "A video or photo of the unit running with the power on, showing the fan spinning and compressor operating.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Coil may not be 100% copper, possibly aluminum or mixed",
+        "proof": "Close-up photo of the internal coil with visible copper tubing, or a certification label showing coil material.",
+        "if_unproven": "priced as mixed or aluminum coil, which reduces value"
+      },
+      {
+        "risk": "Unit may be damaged or have internal wear not visible externally",
+        "proof": "Photo of the indoor unit, control panel, and internal components (if accessible) to check for damage or corrosion.",
+        "if_unproven": "priced as potentially damaged or worn"
+      },
+      {
+        "risk": "Model and capacity unknown, affecting price and suitability",
+        "proof": "Photo of the model number label, usually on the side or back of the outdoor unit.",
+        "if_unproven": "priced as unknown model, which reduces value"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the model number label on the outdoor unit.",
+      "Video or photo of the unit running with power connected.",
+      "Close-up photo of the internal coil to verify copper material.",
+      "Photo of the indoor unit and remote control."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The brand and inverter type are confirmed, but critical claims like working condition and copper coil cannot be verified from current photos. The model number is missing, which affects pricing. The unit's condition and internal components are unknown, posing hidden risks. Proof is needed to price accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 69594,
+    "input_tokens": 2284,
+    "output_tokens": 815,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "329d4b5187626af468d8b01beb565f4f",
+    "error": null
+  }
+}

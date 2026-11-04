@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Bottom panel of a silver laptop with ventilation grilles and hinges. No visible brand or model label.",
+      "Photo 1: Front view of the laptop open, showing a black keyboard with a red TrackPoint, silver palm rest, and a partially visible screen with 'Lenovo' logo at the top bezel. The keyboard appears intact, but the screen is off.",
+      "Photo 2: Closed lid of the laptop, silver, with 'Lenovo' logo on the top left corner and a small sticker on the bottom right. No model number visible.",
+      "All photos have a watermark 'POSTED ON JIJI' and 'SAHEED BALOGUN'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Lenovo",
+      "model": null,
+      "read_from": [
+        "photo 1 screen bezel",
+        "photo 2 lid"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Faulty. Power switch and panel faultu.",
+        "verdict": "unverified",
+        "evidence": "No photo shows the power switch or panel; no visual evidence of fault. The screen is off, but that could be due to power issue or intentional."
+      },
+      {
+        "claim": "Battery, touch screen, backlit keyboard, 8gb ram, 256 ssd all...",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows battery, touch screen, or internal components. Keyboard backlight cannot be confirmed from photos. RAM and SSD specs are not visible."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The laptop may not power on or have a non-functional power switch/panel as claimed.",
+        "proof": "A video showing the power button being pressed and the laptop's response, or a photo of the power switch/panel area with visible damage.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The keyboard may not be backlit, or the touch screen may be non-functional or absent.",
+        "proof": "A video showing the keyboard backlight turning on and the touch screen responding to touch.",
+        "if_unproven": "priced as non-backlit keyboard and no touch screen"
+      },
+      {
+        "risk": "The internal components (8GB RAM, 256GB SSD) may not match the claimed specs.",
+        "proof": "A photo or video showing the BIOS screen or system information with RAM and SSD details, or a photo of the internal components.",
+        "if_unproven": "priced as unknown internal specs"
+      },
+      {
+        "risk": "The laptop may have hidden physical damage or liquid damage not visible in photos.",
+        "proof": "A close-up photo of the hinges, ports, and underside for signs of corrosion or damage.",
+        "if_unproven": "priced with assumption of hidden damage"
+      }
+    ],
+    "proof_requests": [
+      "Video showing the power button being pressed and the laptop's response.",
+      "Video showing the keyboard backlight and touch screen functionality.",
+      "Photo or video of the BIOS or system information screen showing RAM and SSD specs.",
+      "Close-up photo of the laptop's hinges, ports, and underside for damage."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a Lenovo laptop, but critical claims about faults and specifications cannot be verified from the photos. The power switch/panel fault and internal specs (RAM, SSD) are unverified, and functionality of features like backlight and touch screen is unproven. Without proof, the item cannot be priced accurately and carries significant hidden risks."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 66044,
+    "input_tokens": 2169,
+    "output_tokens": 809,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "ca70baac3c164cafb3768c06ee47be4b",
+    "error": null
+  }
+}

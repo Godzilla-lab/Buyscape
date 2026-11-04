@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the 'About' screen of an iPhone with Model Name 'iPhone 13 Pro Max', Model Number 'MLLD3B/A', and Capacity '256 GB'.",
+      "Photo 1 shows the iPhone Storage screen, indicating 15.76 GB of 256 GB used, with system data and apps listed.",
+      "Photo 2 shows the 'Parts & Service History' screen, stating 'A new battery was detected' and 'Camera' and 'Display' service history are 'Unknown' with warning icons.",
+      "The phone is powered on and responsive, with iOS 26.5 shown in Photo 0 (note: iOS 26.5 is not a real version; likely a typo or error).",
+      "The seller claims the screen and battery were bad, but Photo 2 indicates a new battery was detected, and the screen is currently functional enough to display the service history."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "iPhone 13 Pro Max",
+      "brand": "Apple",
+      "model": "iPhone 13 Pro Max",
+      "read_from": [
+        "photo 0 screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "I am selling my iPhone 13 Promax.",
+        "verdict": "supported",
+        "evidence": "Photo 0 screen shows 'Model Name: iPhone 13 Pro Max'."
+      },
+      {
+        "claim": "Straight from the uk.",
+        "verdict": "unverifiable_remote",
+        "evidence": "No proof of origin in photos; seller's claim only."
+      },
+      {
+        "claim": "Screen was bad and battery was bad.",
+        "verdict": "contradicted",
+        "evidence": "Photo 2 shows 'A new battery was detected' and the screen is currently functional to display the service history. The current state contradicts the claim of both being bad."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The screen may have been replaced or repaired, and its quality or functionality is unknown.",
+        "proof": "A video showing the screen under bright light, with touch responsiveness, and no dead pixels or color distortion.",
+        "if_unproven": "priced as potentially defective screen"
+      },
+      {
+        "risk": "The battery, though detected as new, may not be genuine or may have reduced capacity or health.",
+        "proof": "A screenshot of the battery health percentage and cycle count from Settings > Battery > Battery Health.",
+        "if_unproven": "priced as battery health unknown, possibly degraded"
+      },
+      {
+        "risk": "The phone may have been unlocked or has a blacklisted IMEI, especially since it's claimed to be 'straight from the UK'.",
+        "proof": "A screenshot of the IMEI check result from a trusted source (e.g., Apple's website or a Nigerian carrier check) showing the device is not blacklisted and is unlocked.",
+        "if_unproven": "priced as potentially blacklisted or locked"
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of Battery Health percentage and cycle count.",
+      "Video of the screen under bright light, showing touch responsiveness and no defects.",
+      "Screenshot of IMEI check result showing device is unlocked and not blacklisted."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The phone's identity is confirmed as an iPhone 13 Pro Max, but key claims about the screen and battery being bad are contradicted by the current state shown in the photos. Critical risks remain unproven, including battery health, screen quality, and IMEI status. Without proof, the item cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 64811,
+    "input_tokens": 3247,
+    "output_tokens": 810,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "306555ee762c8f9509b3f892e6c8eb69",
+    "error": null
+  }
+}

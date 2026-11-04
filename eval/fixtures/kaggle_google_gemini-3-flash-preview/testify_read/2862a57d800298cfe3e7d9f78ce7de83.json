@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows two retail boxes for Maxmech welding machines stacked on top of each other.",
+      "The top box is labeled 'MAXMECH MMA-200' and '4.8KVA WELDING MACHINE'.",
+      "The bottom box is labeled 'MAXMECH MMA-250' and '6.8KVA WELDING MACHINE'.",
+      "The actual welding machines are not visible, only the cardboard packaging.",
+      "There is a watermark on the photo: 'POSTED ON JIJI' and 'JE-TECH TOOLS AND HARDWARE'.",
+      "No accessories such as welding cables, electrode holders, or earth clamps are shown."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "welding machine",
+      "brand": "MAXMECH",
+      "model": "MMA-200",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "compact inverter-based MMA welder",
+        "verdict": "supported",
+        "evidence": "The text 'MMA-200' and 'WELDING MACHINE' on the box in photo 0, along with the illustration of a small unit, supports this."
+      },
+      {
+        "claim": "suitable for both professional and home",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a subjective marketing claim that cannot be verified through photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Model ambiguity",
+        "proof": "A photo of the specific machine out of the box showing its model plate.",
+        "if_unproven": "priced as the lower-capacity MMA-200 model."
+      },
+      {
+        "risk": "Internal condition and functionality",
+        "proof": "A video of the machine powered on and successfully striking an arc on scrap metal.",
+        "if_unproven": "priced as non-functional/for parts."
+      },
+      {
+        "risk": "Missing essential accessories",
+        "proof": "A photo of the included electrode holder, earth clamp, and power cables.",
+        "if_unproven": "priced as the bare machine unit only."
+      },
+      {
+        "risk": "Item may not be in seller's possession",
+        "proof": "A photo of the machine out of the box with a handwritten note showing the current date and buyer's name.",
+        "if_unproven": "priced as a high-risk transaction/empty box."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual welding machine outside of the box.",
+      "Photo of the model/specification plate on the back or bottom of the machine.",
+      "Photo of all included accessories (cables, clamps, mask).",
+      "A short video showing the machine plugged in, switched on, and the digital display (if any) working."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo only shows retail boxes for two different models (MMA-200 and MMA-250) and carries a third-party watermark. I cannot confirm which model is being sold or if the machine is even present and functional."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 19699,
+    "input_tokens": 2382,
+    "output_tokens": 3923,
+    "cost_usd": 0.01296,
+    "replayed": false,
+    "fixture_key": "2862a57d800298cfe3e7d9f78ce7de83",
+    "error": null
+  }
+}

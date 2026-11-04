@@ -1,0 +1,65 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black rectangular charger held in a hand.",
+      "The label reads brand \u6da6\u5f3a\u4e4b\u661f and production date 2025.6.",
+      "The label reads model 60V5A (20-50Ah), input 220V-50Hz, output 60-73.0V 5A, input power ~454W.",
+      "The label states \u9502\u7535\u6c60\u4e13\u7528\u5145\u7535\u5668 (lithium battery dedicated charger).",
+      "Manufacturer and address are printed in Chinese below the brand."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "lithium battery charger for electric bike",
+      "brand": "\u6da6\u5f3a\u4e4b\u661f",
+      "model": "60V5A (20-50Ah)",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Lithium battery 60v5a charger electric bike",
+        "verdict": "supported",
+        "evidence": "photo 0 label shows 60V5A lithium battery charger"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Charger may not power on or deliver 5A output",
+        "proof": "video showing output voltage/current with a multimeter or connected to a battery",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Output plug may not match the buyer's battery socket",
+        "proof": "close-up photo of the DC output connector",
+        "if_unproven": "as incompatible connector"
+      },
+      {
+        "risk": "Input cable or casing may have hidden damage",
+        "proof": "close-up photos of cable entry and casing corners",
+        "if_unproven": "as damaged"
+      }
+    ],
+    "proof_requests": [
+      "Video of the charger connected to a battery showing charging",
+      "Close-up photo of the output plug"
+    ],
+    "decision": "price",
+    "reason": "The photo label identifies a 60V5A lithium battery charger matching the seller's words, so it can be priced at worst case as untested."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 45169,
+    "input_tokens": 1836,
+    "output_tokens": 1788,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "22cabec8ff207bb5afd03977a8bc9319",
+    "error": null
+  }
+}

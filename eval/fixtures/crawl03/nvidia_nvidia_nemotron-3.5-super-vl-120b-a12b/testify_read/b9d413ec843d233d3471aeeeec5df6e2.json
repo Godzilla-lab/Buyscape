@@ -1,0 +1,90 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows an open silver laptop with an HP logo below the screen and 'ELITEBOOK' visible on the palm rest.",
+      "Photo 1 shows a stack of closed silver laptops with an HP logo on the top lid.",
+      "Photo 2 shows more stacks of closed silver laptops with 'ELITEBOOK' visible on the edge of the top-right unit.",
+      "No photo shows the specific model number '840 G6' or an Intel processor label.",
+      "The seller's watermark 'TRUEFIX GADGETS' appears across all photos."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "EliteBook",
+      "read_from": [
+        "photo 0 palm rest",
+        "photo 0 screen bezel",
+        "photo 1 lid",
+        "photo 2 lid edge"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP EliteBook 840G6",
+        "verdict": "unverified",
+        "evidence": "HP and EliteBook are readable in photos 0, 1, and 2, but '840 G6' is not visible in any photo."
+      },
+      {
+        "claim": "Intel Core i5 8th",
+        "verdict": "unverifiable_remote",
+        "evidence": "Processor cannot be identified from exterior photos."
+      },
+      {
+        "claim": "Direct Foreign Used / FRESH / JUST LANDED",
+        "verdict": "unverifiable_remote",
+        "evidence": "Origin and condition history cannot be verified from photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Laptop does not power on or boot",
+        "proof": "Video of the laptop booting to the Windows desktop",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Model is not an EliteBook 840 G6",
+        "proof": "Clear photo of the bottom label showing 'EliteBook 840 G6'",
+        "if_unproven": "as an unspecified HP EliteBook"
+      },
+      {
+        "risk": "Battery dead or does not hold charge",
+        "proof": "Video of the laptop running unplugged for at least 10 minutes",
+        "if_unproven": "as needing a battery replacement"
+      },
+      {
+        "risk": "Screen has lines, flicker, or backlight issues",
+        "proof": "Video showing a full white and full black screen",
+        "if_unproven": "as screen faulty"
+      },
+      {
+        "risk": "BIOS, Windows, or admin password lock",
+        "proof": "Video showing login to desktop without password prompts",
+        "if_unproven": "as locked"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the bottom label showing the exact model number",
+      "Video of the laptop booting to the Windows desktop",
+      "Video of the laptop running on battery power",
+      "Screenshot of system specifications showing processor and RAM"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photos confirm an HP EliteBook laptop but do not show the specific 840 G6 model number that sets the price, and working condition is unproven."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 21794,
+    "input_tokens": 2927,
+    "output_tokens": 3877,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "b9d413ec843d233d3471aeeeec5df6e2",
+    "error": null
+  }
+}

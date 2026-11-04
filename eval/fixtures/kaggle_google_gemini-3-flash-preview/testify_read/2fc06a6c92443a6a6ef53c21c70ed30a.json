@@ -1,0 +1,75 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail packaging for a Canon LEGRIA HF M56 camcorder.",
+      "The box is being held by a person.",
+      "The actual camcorder is not visible in the photo.",
+      "The box features branding for Canon, Full HD, AVCHD, MP4, and SDXC."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "camcorder",
+      "brand": "Canon",
+      "model": "LEGRIA HF M56",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Canon LEGRIA HF M56",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "Full HD camcorder",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different item.",
+        "proof": "Photo of the actual camcorder outside of the box.",
+        "if_unproven": "as not present"
+      },
+      {
+        "risk": "The device may not power on or the internal battery may be dead.",
+        "proof": "Video of the camcorder powered on and showing a live image on the LCD.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The lens may have scratches or fungus affecting image quality.",
+        "proof": "Close-up photo of the lens glass.",
+        "if_unproven": "as damaged lens"
+      },
+      {
+        "risk": "Essential accessories like the charger or battery may be missing.",
+        "proof": "Photo of all included accessories laid out.",
+        "if_unproven": "as missing accessories"
+      }
+    ],
+    "proof_requests": [
+      "Photos of the actual camcorder from multiple angles.",
+      "A photo of the camcorder powered on with the screen visible.",
+      "A photo of the lens and all included accessories (battery, charger, cables)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the box is shown. I cannot verify the existence, condition, or functionality of the camcorder without seeing the item itself."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 7706,
+    "input_tokens": 2412,
+    "output_tokens": 1563,
+    "cost_usd": 0.005895,
+    "replayed": false,
+    "fixture_key": "2fc06a6c92443a6a6ef53c21c70ed30a",
+    "error": null
+  }
+}

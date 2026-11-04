@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Single image is a promotional/marketing graphic, not a plain photo of a physical item for sale.",
+      "Image has overlaid health-benefit icons (Weight Loss, Better Sleep, Lower Blood Pressure, etc.) typical of stock advertising material.",
+      "Watermark reads 'ROYALSS STORE' and faint text 'POSTED ON...' suggesting this is a catalog/ad image reused across listings.",
+      "Bike shown has a red water bottle, red/black frame, digital display, but no close-up of frame serials, brand nameplate, or wear.",
+      "Background is a bare outdoor wall/floor, inconsistent with a typical home gym setting, consistent with a staged or stock shoot.",
+      "No photo shows actual physical condition (scratches, rust, pedal wear, seat wear) of the specific unit being sold."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "spinning fitness bike (exercise bike)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 (generic marketing image, no legible brand/model plate)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Bought new 6 months ago",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows a purchase date, receipt, or the actual unit in a real-world setting."
+      },
+      {
+        "claim": "Gears and brakes perfect",
+        "verdict": "unverifiable_remote",
+        "evidence": "No video or close-up of the resistance knob, flywheel, or brake pad in use; image is a stock-style ad graphic."
+      },
+      {
+        "claim": "No rust, all parts original",
+        "verdict": "unverifiable_remote",
+        "evidence": "No close-up photos of frame joints, welds, or undercarriage; image shown is generic promotional art."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Photo may not depict the actual item being sold (stock/catalog image reused).",
+        "proof": "A plain, un-edited photo of the actual bike in the seller's home, from multiple angles, including any marks or scuffs.",
+        "if_unproven": "treated as unverified identity/condition, priced at worst case as if used and heavily worn"
+      },
+      {
+        "risk": "Resistance mechanism, pedals, or crank may be loose, worn, or non-functional despite 'perfect' claim.",
+        "proof": "Short video of someone pedaling and adjusting resistance knob.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Seat, handlebar, and digital console condition unknown.",
+        "proof": "Close-up photos of seat padding, handlebar grips, and console display powered on.",
+        "if_unproven": "priced as worn/non-functional console"
+      },
+      {
+        "risk": "Frame stability and rust under paint not visible in stock image.",
+        "proof": "Close-up of frame base, bolts, and underside.",
+        "if_unproven": "priced as having possible rust/structural wear"
+      }
+    ],
+    "proof_requests": [
+      "Real, current photos of the actual bike taken by the seller at its present location, from front, side, and rear.",
+      "A short video showing the bike being pedaled and resistance knob turned.",
+      "Close-up photos of the seat, pedals, crank, and base/frame for wear or rust.",
+      "Photo of any brand/model plate or sticker on the frame."
+    ],
+    "decision": "fraud_suspected",
+    "reason": "The only image supplied is a generic marketing/stock graphic with health-benefit icons and a store watermark rather than an actual photo of the specific used bike, which is inconsistent with the seller's personal condition claims and is a common pattern in misleading listings."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 25586,
+    "input_tokens": 2403,
+    "output_tokens": 2179,
+    "cost_usd": 0.023437,
+    "replayed": false,
+    "fixture_key": "edc8ef3dc35b3e22056c382b189e4a19",
+    "error": null
+  }
+}

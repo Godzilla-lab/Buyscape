@@ -1,0 +1,88 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Indoor and outdoor units of a split-system air conditioner are shown together on a tiled floor.",
+      "The word 'inverter' is printed on the front of the outdoor unit in photo 0.",
+      "There is red marker writing on the outdoor unit that appears to say '44,000' in photo 0.",
+      "The units show signs of use, including dust and minor scuffs.",
+      "No manufacturer nameplate or technical specification sticker is visible on the sides of the units.",
+      "A logo is visible on the top right of the indoor unit but the text is not legible."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "split unit inverter air conditioner",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 outdoor unit"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Faulty inverter AC",
+        "verdict": "contradicted",
+        "evidence": "The seller later states 'No fault at all' in the same description."
+      },
+      {
+        "claim": "No fault at all",
+        "verdict": "contradicted",
+        "evidence": "The seller opens the description stating 'Faulty inverter AC'."
+      },
+      {
+        "claim": "Barely used, bought new last year",
+        "verdict": "unverified",
+        "evidence": "The red marker price '44,000' on the casing is typical of second-hand or scrap yard inventory, not a domestic 'bought new' history."
+      },
+      {
+        "claim": "Motor was never opened",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      },
+      {
+        "claim": "Receipt and warranty card available",
+        "verdict": "unverified",
+        "evidence": "These documents are mentioned but not pictured."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Cooling capacity (HP) is unknown",
+        "proof": "A clear photo of the silver nameplate sticker on the side of the indoor or outdoor unit.",
+        "if_unproven": "priced as a 1HP unit"
+      },
+      {
+        "risk": "Compressor or PCB failure",
+        "proof": "A video of the unit powered on, showing the indoor unit display and the outdoor fan spinning.",
+        "if_unproven": "priced as faulty/scrap"
+      },
+      {
+        "risk": "Missing essential accessories (remote, pipes)",
+        "proof": "A photo showing the remote control and the copper connecting pipes.",
+        "if_unproven": "priced as missing all accessories"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the nameplate/specification sticker on the side of the units to confirm HP and model.",
+      "Photo of the receipt and warranty card mentioned.",
+      "Video of the unit powered on and running.",
+      "Photos of the remote control and copper piping."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller's description is self-contradictory regarding the condition ('Faulty' vs 'No fault'). Additionally, the cooling capacity (HP), which is the primary price driver, cannot be determined from the photos."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 18311,
+    "input_tokens": 2389,
+    "output_tokens": 3330,
+    "cost_usd": 0.011184,
+    "replayed": false,
+    "fixture_key": "b0268c3f7f38544c8abea7ee1583d2ae",
+    "error": null
+  }
+}

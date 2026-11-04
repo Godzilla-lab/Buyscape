@@ -1,0 +1,68 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-instruct",
+  "response": {
+    "observations": [
+      "Photo 0: A large, yellow, heavily used engine block with visible rust and dirt, connected to various hoses and components. A white cylindrical filter is attached to the left side.",
+      "Photo 1: The engine's black valve cover, showing the 'CAT' logo and the number '32' clearly. The cover is bolted to the engine block, which is still yellow and shows signs of wear."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "engine",
+      "brand": "CAT",
+      "model": "32",
+      "read_from": [
+        "photo 1 screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Complete caterpiller c9 engine (parts)",
+        "verdict": "contradicted",
+        "evidence": "Photo 1 shows a CAT 32 engine, not a Caterpillar C9. The 'C9' is not visible in any photo."
+      },
+      {
+        "claim": "Tokunbo, direct from Belgium. Tested and working, no knock, low mileage, never opened.",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photos show the seller, the origin, or any test results. The claim of 'working' and 'never opened' cannot be verified remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The engine is not a Caterpillar C9 as claimed, but a CAT 32, which is a different model and likely not compatible or of the same quality.",
+        "proof": "Photo 1 clearly shows 'CAT 32' on the valve cover.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The engine may have been opened or used, despite the seller's claim of 'never opened'.",
+        "proof": "Photo 0 shows the engine is in a workshop environment with tools and parts around it, suggesting it has been worked on.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The engine may not be 'tested and working' as claimed, and may have mechanical issues.",
+        "proof": "Photo 0 and 1 show signs of wear, rust, and dirt, which may indicate age or use. No test results or certifications are visible.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Ask for a photo of the engine's serial number or model plate to confirm the exact model.",
+      "Ask for a photo of the engine's test report or certificate of working condition.",
+      "Ask for a photo of the engine's original packaging or documentation to confirm it was never opened."
+    ],
+    "decision": "fraud_suspected",
+    "reason": "The seller claims a Caterpillar C9 engine, but the photos show a CAT 32 engine, which is a different model. The seller's claims of 'tested and working' and 'never opened' cannot be verified remotely, and the photos suggest the engine has been used and may not be in working condition. This indicates a high risk of fraud."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-instruct",
+    "task": "testify_read",
+    "latency_ms": 4428,
+    "input_tokens": 1875,
+    "output_tokens": 684,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "c4769bbba091736c0ec79feb0ccb7d95",
+    "error": null
+  }
+}

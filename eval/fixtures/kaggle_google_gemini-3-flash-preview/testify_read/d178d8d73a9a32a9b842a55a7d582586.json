@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows a large cardboard box wrapped in clear plastic film.",
+      "A label on the box identifies the brand as Eaton and the model as 9E10Ki.",
+      "The label lists a serial number (G322L44114), a battery date (11/07/2023), and a delivery date (31/01/2024).",
+      "The box features shipping icons (this side up, fragile, keep dry).",
+      "The actual UPS unit is not visible in the photo."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "UPS",
+      "brand": "Eaton",
+      "model": "9E10Ki",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Eaton 9E 10KVA UPS",
+        "verdict": "supported",
+        "evidence": "The label in photo 0 identifies the model as 9E10Ki, which corresponds to the 10kVA version."
+      },
+      {
+        "claim": "online double conversion",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a technical specification of the model that cannot be verified from a photo of the box."
+      },
+      {
+        "claim": "providing 10KVA",
+        "verdict": "supported",
+        "evidence": "The model number 9E10Ki on the label in photo 0 indicates a 10kVA capacity."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Box contents may not match the label or the box may be empty.",
+        "proof": "A photo of the actual UPS unit outside of the box.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The unit may have internal damage or be non-functional.",
+        "proof": "A video of the unit powered on and passing its internal self-test.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The internal batteries may be depleted, damaged, or missing.",
+        "proof": "A photo of the UPS LCD screen showing battery health and runtime status.",
+        "if_unproven": "as requiring a full battery replacement"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the UPS unit itself, removed from the box.",
+      "Video of the unit powered on showing the front LCD display status.",
+      "Photo of the manufacturer's nameplate on the back of the actual unit to verify the serial number matches the box."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the shipping box is visible. For a high-value technical item, the actual unit must be seen and its functional status verified before a price can be determined."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 15913,
+    "input_tokens": 2405,
+    "output_tokens": 3302,
+    "cost_usd": 0.011109,
+    "replayed": false,
+    "fixture_key": "d178d8d73a9a32a9b842a55a7d582586",
+    "error": null
+  }
+}

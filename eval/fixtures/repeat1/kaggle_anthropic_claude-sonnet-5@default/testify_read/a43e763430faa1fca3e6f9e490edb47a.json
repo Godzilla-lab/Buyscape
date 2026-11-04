@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows two stripped-down car engine assemblies sitting on a dirt/concrete floor, surrounded by other scrap parts and wiring.",
+      "Wiring harnesses, intake manifolds, and valve covers are exposed and disconnected; no engine covers, no mounting in a vehicle, no ancillary parts like alternator/starter visible.",
+      "Text 'FORD' is legible embossed on the intake manifold of the left engine.",
+      "Text on the right engine's manifold is partially visible but not clearly legible.",
+      "No VIN plate, no engine code sticker, no compression/start-up test shown.",
+      "Background shows a cluttered scrapyard/parts shop setting with a person partially visible."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "used car engine assembly (stripped)",
+      "brand": "Ford",
+      "model": null,
+      "read_from": [
+        "photo 0 manifold text 'FORD'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "We also deal on all kinds of car spare parts",
+        "verdict": "unverifiable_remote",
+        "evidence": "General business claim; photo only shows two specific engines, not a verified broad inventory."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine may not run or may have internal damage (cracked block, worn bearings, etc.)",
+        "proof": "Video of engine being started and running, or compression test result",
+        "if_unproven": "priced as non-working/for-parts only"
+      },
+      {
+        "risk": "Missing components (sensors, turbo, wiring harness ends, etc.) could affect usability",
+        "proof": "Close-up photos of all sides including connectors and missing part areas",
+        "if_unproven": "priced as incomplete/parts unit"
+      },
+      {
+        "risk": "Exact model/engine code (e.g., displacement, variant) unknown, affecting compatibility and value",
+        "proof": "Photo of engine code/VIN plate or casting number stamped on block",
+        "if_unproven": "priced at generic 'Ford engine, unspecified model' tier, lowest in range"
+      },
+      {
+        "risk": "Second engine's brand/model unreadable, could be mismatched or mislabeled",
+        "proof": "Clear close-up photo of the second engine's manifold/brand marking",
+        "if_unproven": "excluded from priced identity; only the Ford unit is priced"
+      },
+      {
+        "risk": "Possible flood, fire, or accident damage not visible in a single wide shot",
+        "proof": "Multiple angle photos showing block, oil pan, and wiring condition in daylight",
+        "if_unproven": "priced as worst-case condition (non-verified, possible damage)"
+      }
+    ],
+    "proof_requests": [
+      "Video of the Ford engine starting/running or at least turning over",
+      "Clear photo of engine code/casting number stamped on the block",
+      "Close-up of the second engine's brand/model marking",
+      "Photos from multiple angles (oil pan, rear, wiring harness ends) in good light"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable by type (used Ford engine assembly, brand visible in photo 0) even without a model number, so it can be priced at worst case as an unverified, non-running, parts-only unit; the second engine is excluded from pricing due to illegible branding."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 17953,
+    "input_tokens": 1986,
+    "output_tokens": 1565,
+    "cost_usd": 0.016463,
+    "replayed": false,
+    "fixture_key": "a43e763430faa1fca3e6f9e490edb47a",
+    "error": null
+  }
+}

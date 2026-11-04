@@ -1,0 +1,97 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Black laptop open at an angle, showing keyboard and trackpad. 'Lenovo' logo visible on palm rest. Intel sticker present. Screen is off or reflecting light.",
+      "Photo 1: Laptop open, screen on showing Windows desktop with beach wallpaper. 'Lenovo IdeaPad 110' sticker visible on lower bezel. Intel sticker on palm rest. Keyboard and trackpad visible.",
+      "Photo 2: Closed laptop lid, 'Lenovo' logo visible in silver on black surface. No other markings or labels visible.",
+      "All photos show a watermark: 'POSTED ON JIJI BLESSEDJOHN LAPTOPS AND'.",
+      "No photos show the inside of the laptop (motherboard, RAM, HDD), BIOS screen, or system information."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Lenovo",
+      "model": "IdeaPad 110",
+      "read_from": [
+        "photo 1 lower bezel sticker"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Lenovo IdeaPad 110",
+        "verdict": "supported",
+        "evidence": "Photo 1: 'Lenovo IdeaPad 110' sticker on lower bezel."
+      },
+      {
+        "claim": "Intel inside",
+        "verdict": "supported",
+        "evidence": "Photo 0 and Photo 1: Intel sticker visible on palm rest."
+      },
+      {
+        "claim": "Memory 4gb ram",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows system information, BIOS, or RAM slots. Cannot confirm RAM amount remotely."
+      },
+      {
+        "claim": "storage capacity 1TB HDD",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows disk management, BIOS, or drive bay. Cannot confirm HDD size or type remotely."
+      },
+      {
+        "claim": "Processor speed...",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows processor model or speed. Intel sticker does not specify the CPU."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "RAM is not 4GB or is faulty",
+        "proof": "Photo of system information screen (e.g., Windows Task Manager or BIOS) showing installed RAM.",
+        "if_unproven": "priced as having less than 4GB or non-functional RAM"
+      },
+      {
+        "risk": "Storage is not 1TB HDD or is failing",
+        "proof": "Photo of disk management or BIOS showing drive size and health, or photo of drive bay with 1TB HDD.",
+        "if_unproven": "priced as having smaller or non-functional storage"
+      },
+      {
+        "risk": "Processor is not as claimed or is underclocked",
+        "proof": "Photo of system information screen showing CPU model and speed.",
+        "if_unproven": "priced as having unknown or lower-tier processor"
+      },
+      {
+        "risk": "Laptop has physical damage not visible in photos (e.g., cracked screen, hinge issues, keyboard damage)",
+        "proof": "Close-up photos of screen, hinges, keyboard, and ports from multiple angles.",
+        "if_unproven": "priced as having potential hidden damage"
+      },
+      {
+        "risk": "Battery is dead or degraded",
+        "proof": "Video or photo showing battery health in Windows or BIOS, or laptop running on battery.",
+        "if_unproven": "priced as having non-functional or degraded battery"
+      }
+    ],
+    "proof_requests": [
+      "Photo of system information screen (Windows Task Manager or BIOS) showing RAM, storage, and CPU details.",
+      "Photo of disk management or BIOS showing drive size and health.",
+      "Close-up photos of screen, hinges, keyboard, and ports from multiple angles.",
+      "Video or photo showing laptop running on battery to test battery health."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is confirmed as Lenovo IdeaPad 110, but critical specifications (RAM, storage, processor) are unverifiable from current photos. Hidden risks like faulty components or physical damage cannot be ruled out. Proof is needed to price accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 77112,
+    "input_tokens": 2791,
+    "output_tokens": 945,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "d5786a55d34e824ffa4f0045881320f2",
+    "error": null
+  }
+}

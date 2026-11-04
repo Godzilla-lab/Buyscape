@@ -1,0 +1,89 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the back of a silver iPhone with a triple-camera system in a square module, consistent with iPhone 12 Pro Max design.",
+      "The Apple logo is visible in the center of the back panel.",
+      "The phone is held in a hand, with a glass display cabinet and store interior in the background.",
+      "No visible damage to the back panel, but no view of the front, screen, or ports.",
+      "No model or serial number visible on the phone or packaging.",
+      "The seller claims it is an iPhone 12 Pro Max 128GB, used, from the UK."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "iPhone 12 Pro Max",
+      "brand": "Apple",
+      "model": null,
+      "read_from": [
+        "photo 0 back design"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "iPhone 12 Pro Max",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows the triple-camera module and overall back design consistent with iPhone 12 Pro Max."
+      },
+      {
+        "claim": "128GB",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo of the phone's settings, box, or label showing storage capacity. Cannot be confirmed from current photo."
+      },
+      {
+        "claim": "used",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows signs of use: minor smudges and fingerprints on the back, and the hand holding it appears to be in a retail environment, suggesting it is not new."
+      },
+      {
+        "claim": "UK used",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible proof of origin (e.g., box, receipt, SIM lock status, or IMEI check). Cannot verify from photo alone."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Not genuine iPhone 12 Pro Max (could be a clone or repainted model)",
+        "proof": "Photo of the front screen showing the notch and display, and a close-up of the side buttons and ports, or a screenshot of the Settings > General > About section showing model number.",
+        "if_unproven": "Priced as a generic used phone, not as a genuine iPhone 12 Pro Max."
+      },
+      {
+        "risk": "Storage capacity is not 128GB (could be 64GB or 256GB)",
+        "proof": "Screenshot of Settings > General > About showing storage capacity.",
+        "if_unproven": "Priced as 64GB model, which is lower value."
+      },
+      {
+        "risk": "Phone is locked to a carrier or has iCloud activation lock",
+        "proof": "Screenshot of Settings > General > About showing carrier lock status and a photo of the phone being turned on with no lock screen prompt.",
+        "if_unproven": "Priced as potentially locked, which reduces value significantly."
+      },
+      {
+        "risk": "Physical damage not visible in photo (e.g., cracked screen, water damage, battery health)",
+        "proof": "Photo of the front screen, close-up of the charging port, and a video of the phone turning on and off.",
+        "if_unproven": "Priced as having potential hidden damage, reducing value."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of Settings > General > About showing model number and storage capacity.",
+      "Photo of the front screen and side buttons.",
+      "Video of the phone turning on and off, showing no lock screen.",
+      "Photo of the charging port and SIM tray.",
+      "Photo of the original box or receipt if available."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The phone appears to be an iPhone 12 Pro Max based on design, but critical details like storage capacity, authenticity, and carrier lock status cannot be verified from the current photo. Without proof of these, the item cannot be priced accurately and carries significant hidden risks."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 59039,
+    "input_tokens": 2003,
+    "output_tokens": 895,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "32da8d418ea8c76dc1d48c28a14406f4",
+    "error": null
+  }
+}

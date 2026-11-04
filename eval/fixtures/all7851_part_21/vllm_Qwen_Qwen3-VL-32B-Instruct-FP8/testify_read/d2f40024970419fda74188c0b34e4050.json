@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a purple iPhone with a white sticker on the back. The sticker reads: 'iPhone 14Plus, Capacity: 128G, Country: LLA, Color: Pink, Battery 88%, Condition Grade A, Function TESTED'.",
+      "The phone has a dual-camera setup with a circular flash, consistent with iPhone 14 Plus design.",
+      "Photo 1 shows the bottom edge of the phone with a charging port, speaker grille, and microphone holes.",
+      "Photo 2 shows the right side of the phone with volume buttons and a power button.",
+      "All photos show a hand holding the phone, with a watermark 'DANNY TUNEZ GADGETS' and 'POSTED ON JIJI'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "iPhone 14 Plus",
+      "brand": "Apple",
+      "model": "iPhone 14 Plus",
+      "read_from": [
+        "photo 0 sticker"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "ESIM unlock",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows the phone's settings or carrier status. The sticker does not mention unlock status."
+      },
+      {
+        "claim": "Nice battery health",
+        "verdict": "supported",
+        "evidence": "Photo 0 sticker states 'Battery 88%', which is considered good health for a used phone."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Phone may be blacklisted or not truly unlocked",
+        "proof": "Screenshot of Settings > General > About > Carrier or a carrier unlock verification.",
+        "if_unproven": "priced as potentially locked or blacklisted, which reduces value significantly."
+      },
+      {
+        "risk": "Sticker information may be falsified",
+        "proof": "Photo of the phone's Settings > General > About screen showing model, capacity, and battery health.",
+        "if_unproven": "priced as if sticker is unverified, which may mean lower grade or incorrect specs."
+      },
+      {
+        "risk": "Physical damage not visible in photos",
+        "proof": "Full 360-degree video or close-up photos of all edges, screen, and back.",
+        "if_unproven": "priced as if minor to moderate wear is present, reducing value."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of Settings > General > About showing model, capacity, and battery health.",
+      "Screenshot of carrier unlock status or carrier settings.",
+      "Full 360-degree video or close-up photos of all edges, screen, and back."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and battery health are visible on the sticker, but critical claims like 'ESIM unlock' and the authenticity of the sticker cannot be verified remotely. Hidden risks like blacklisting or physical damage require additional proof before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 52860,
+    "input_tokens": 2772,
+    "output_tokens": 652,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "d2f40024970419fda74188c0b34e4050",
+    "error": null
+  }
+}

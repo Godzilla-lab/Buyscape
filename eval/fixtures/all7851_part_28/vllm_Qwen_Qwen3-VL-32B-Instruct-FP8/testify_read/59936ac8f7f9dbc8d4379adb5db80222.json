@@ -1,0 +1,103 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Closed silver laptop with HP logo on lid. Watermark 'POSTED ON JIJI YUSUF' visible.",
+      "Photo 1: Back of laptop showing ventilation grille, Windows sticker, and a label with regulatory marks. Watermark present.",
+      "Photo 2: Open laptop showing keyboard, trackpad, and screen. Screen is dark and reflective, showing smudges and reflections. Keyboard has black keys with white lettering. Watermark present. A small camera is visible above the screen.",
+      "No visible model number or serial number on any photo.",
+      "No visible signs of damage to the casing, but screen has smudges and reflections indicating possible scratches or dirt."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": null,
+      "read_from": [
+        "photo 0 lid"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Core i5 11 Gen",
+        "verdict": "unverifiable_remote",
+        "evidence": "No CPU label or system information visible in photos. Cannot confirm generation or model."
+      },
+      {
+        "claim": "Face id",
+        "verdict": "unverified",
+        "evidence": "Camera visible above screen in photo 2, but no proof it supports Face ID. No Windows Hello or biometric indicator visible."
+      },
+      {
+        "claim": "Non tourch",
+        "verdict": "unverified",
+        "evidence": "No touch screen indicator visible. Screen appears non-responsive in photo 2, but cannot confirm without testing."
+      },
+      {
+        "claim": "256 SSD",
+        "verdict": "unverifiable_remote",
+        "evidence": "No storage label or system information visible. Cannot confirm SSD size or type."
+      },
+      {
+        "claim": "16 GB",
+        "verdict": "unverifiable_remote",
+        "evidence": "No RAM label or system information visible. Cannot confirm RAM amount."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Laptop may not have the advertised Core i5 11th Gen processor",
+        "proof": "Photo of system information screen (e.g., Windows About or BIOS) showing CPU model.",
+        "if_unproven": "Priced as lower-end or older CPU model, which reduces value."
+      },
+      {
+        "risk": "SSD may be smaller than 256GB or not present (e.g., HDD instead)",
+        "proof": "Photo of system information screen showing storage details or disk management.",
+        "if_unproven": "Priced as HDD or smaller SSD, which reduces value."
+      },
+      {
+        "risk": "RAM may be less than 16GB",
+        "proof": "Photo of system information screen showing installed RAM.",
+        "if_unproven": "Priced as 8GB or lower, which reduces value."
+      },
+      {
+        "risk": "Face ID may not work or not supported",
+        "proof": "Video clip showing Face ID setup and login, or photo of Windows Hello settings.",
+        "if_unproven": "Priced as non-biometric laptop, which reduces value."
+      },
+      {
+        "risk": "Screen may have dead pixels, cracks, or damage not visible in photos",
+        "proof": "Video clip of screen displaying solid colors (white, black, red, green, blue) to check for defects.",
+        "if_unproven": "Priced as screen with potential defects, which reduces value."
+      },
+      {
+        "risk": "Laptop may not power on or have functional keyboard/trackpad",
+        "proof": "Video clip showing laptop turning on, booting, and keyboard/trackpad working.",
+        "if_unproven": "Priced as non-working, which reduces value significantly."
+      }
+    ],
+    "proof_requests": [
+      "Video clip showing laptop turning on, booting, and running Windows with system information visible (CPU, RAM, storage).",
+      "Video clip of screen displaying solid colors to check for defects.",
+      "Photo or video of Windows Hello settings to confirm Face ID support.",
+      "Photo of the bottom label or serial number for model identification.",
+      "Video clip showing keyboard and trackpad functionality."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The laptop's model and key specifications (CPU, RAM, SSD, Face ID) cannot be confirmed from the photos. Without proof of these claims, the item cannot be priced accurately. The risks of misrepresentation are high, and the worst-case pricing would be significantly lower than advertised."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 85128,
+    "input_tokens": 2371,
+    "output_tokens": 1018,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "59936ac8f7f9dbc8d4379adb5db80222",
+    "error": null
+  }
+}

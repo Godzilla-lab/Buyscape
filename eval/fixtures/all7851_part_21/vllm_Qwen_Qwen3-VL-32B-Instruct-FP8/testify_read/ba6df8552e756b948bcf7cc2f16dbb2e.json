@@ -1,0 +1,69 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a stack of rectangular solar panels with a white front and silver metal frame. Three black connectors are visible on the front surface. The panels are leaning against a brick wall on a concrete floor. A small label is visible in the bottom right corner of the front panel.",
+      "Photo 1 is a close-up of a label on the panel. The label shows the brand 'JA SOLAR' at the bottom, with Chinese characters above it. The label includes technical specifications: Peak Power (Pmax) 550W, Open Circuit Voltage (Voc) 46.10V, Short Circuit Current (Isc) 11.40A, Max. Power Voltage (Vmp) 38.20V, Max. Power Current (Imp) 11.20A. It also shows 'Made in China', CE and TUV certification marks, and the manufacturer: 'Shanghai JS Solar Technology Co., Ltd'. The label includes a barcode and serial number: 2150106310040470."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "solar panel",
+      "brand": "JA SOLAR",
+      "model": "550W photovoltaic module",
+      "read_from": [
+        "photo 1 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Top not Canadian solar panel",
+        "verdict": "contradicted",
+        "evidence": "Photo 1 label clearly states 'Made in China' and manufacturer 'Shanghai JS Solar Technology Co., Ltd', which contradicts the claim of being Canadian."
+      },
+      {
+        "claim": "Solid warranty period of 30yrs",
+        "verdict": "unverifiable_remote",
+        "evidence": "No warranty information is visible in the photos. The claim cannot be verified from the provided images."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The panel may not be functional or may have hidden defects such as cracked cells or internal damage.",
+        "proof": "A close-up photo of the front surface of the panel showing the solar cells, and a video of the panel being powered on with a multimeter reading under sunlight.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The warranty claim of 30 years may be false or not transferable.",
+        "proof": "A copy of the warranty document or a screenshot from the manufacturer's website confirming the 30-year warranty for this model.",
+        "if_unproven": "priced as no warranty"
+      },
+      {
+        "risk": "The panel may have been previously used or damaged in transit, which is not visible from the photos.",
+        "proof": "A video showing the panel being unboxed and inspected from all angles, including the back and edges.",
+        "if_unproven": "priced as used or damaged"
+      }
+    ],
+    "proof_requests": [
+      "A close-up photo of the front surface of the panel showing the solar cells.",
+      "A video of the panel being powered on with a multimeter reading under sunlight.",
+      "A copy of the warranty document or a screenshot from the manufacturer's website confirming the 30-year warranty.",
+      "A video showing the panel being unboxed and inspected from all angles, including the back and edges."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a JA SOLAR 550W solar panel, but the claim of being Canadian is contradicted by the 'Made in China' label. The 30-year warranty claim is unverifiable from the photos. Hidden risks such as functionality, damage, and warranty validity require additional proof before pricing can be determined."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 64850,
+    "input_tokens": 2732,
+    "output_tokens": 826,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "ba6df8552e756b948bcf7cc2f16dbb2e",
+    "error": null
+  }
+}

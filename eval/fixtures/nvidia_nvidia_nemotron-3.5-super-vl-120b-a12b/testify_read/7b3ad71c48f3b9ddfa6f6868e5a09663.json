@@ -1,0 +1,87 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a silver two-door refrigerator with the brand \"Hisense\" at the top center and a built-in water dispenser on the upper door.",
+      "Photo 1 shows the empty refrigerator interior with glass shelves, door bins, crisper drawers, and one bottle on a shelf.",
+      "Photo 2 is a duplicate exterior view of photo 0.",
+      "The seller's text claims excellent condition and working order but is cut off after \"with no\"."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "two-door refrigerator with water dispenser",
+      "brand": "Hisense",
+      "model": null,
+      "read_from": [
+        "photo 0 top brand plate",
+        "photo 2 top brand plate"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Refrigerator in Excellent Condition",
+        "verdict": "unverified",
+        "evidence": "Photos show a clean exterior and empty interior but cannot confirm overall condition or function."
+      },
+      {
+        "claim": "excellent working condition",
+        "verdict": "unverified",
+        "evidence": "No photo shows the unit powered on, cooling, or running; compressor sound and temperature cannot be checked remotely."
+      },
+      {
+        "claim": "with no...",
+        "verdict": "unverifiable_remote",
+        "evidence": "Seller's statement is incomplete in the provided text."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Refrigerator does not cool or is not working",
+        "proof": "Video of the unit plugged in and running with the door open, showing cold air or a thermometer reading.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Water dispenser does not work",
+        "proof": "Video of water being dispensed from the door unit.",
+        "if_unproven": "as without a working dispenser"
+      },
+      {
+        "risk": "Lower freezer compartment condition unknown",
+        "proof": "Photo of the freezer interior and an ice or freezing test.",
+        "if_unproven": "as freezer non-functional or unknown"
+      },
+      {
+        "risk": "Door seals are torn or leaking",
+        "proof": "Close-up photo of the door gaskets or a dollar-bill seal test.",
+        "if_unproven": "as needing seal repair"
+      },
+      {
+        "risk": "Compressor is noisy or faulty",
+        "proof": "Video of the unit running with audio.",
+        "if_unproven": "as compressor faulty"
+      }
+    ],
+    "proof_requests": [
+      "Video of the refrigerator running with the door open to prove cooling.",
+      "Video of the water dispenser operating.",
+      "Photo of the lower freezer compartment interior.",
+      "Close-up of the door rubber seals."
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a Hisense two-door refrigerator with water dispenser; because function is unproven, it is priced at the worst case of not working, with proof listed to raise the value."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 76086,
+    "input_tokens": 3289,
+    "output_tokens": 3460,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "7b3ad71c48f3b9ddfa6f6868e5a09663",
+    "error": null
+  }
+}

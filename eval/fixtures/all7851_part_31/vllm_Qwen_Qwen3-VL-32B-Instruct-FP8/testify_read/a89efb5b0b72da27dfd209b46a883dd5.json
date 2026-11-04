@@ -1,0 +1,101 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the back panel of a desktop tower with multiple ports, including USB, Ethernet, and video outputs, and a large vented area. The case is wrapped in plastic.",
+      "Photo 1 and Photo 2 show the same tower wrapped in plastic with a handwritten note taped to it. The note reads: 'DELL PRECISION 7920 TOWER SILVER 4110 CPU 16CORES 32GB - RAM 800GB - SSD RTX GEFORCE 3080 10GB WINDOWS 11 PRO.'",
+      "The tower appears to be a Dell Precision workstation, based on the note and the design of the back panel.",
+      "The note is handwritten and not an official label; it is taped to the plastic wrap.",
+      "The model 'Precision 7920' is visible on the note, but not on the chassis itself in any photo.",
+      "No visible branding or model number on the chassis in photo 0 or 2; only the note provides the model.",
+      "The note claims an RTX 3080 10GB GPU, which is a consumer-grade card, while the Dell Precision 7920 is typically equipped with professional-grade Quadro GPUs. This is a red flag.",
+      "The note also claims Windows 11 Pro, which is not visible in any photo."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "Dell Precision 7920 workstation tower",
+      "brand": "Dell",
+      "model": "Precision 7920",
+      "read_from": [
+        "photo 1 note",
+        "photo 2 note"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Dell Precision 7920",
+        "verdict": "supported",
+        "evidence": "Photo 1 and Photo 2 show a handwritten note stating 'DELL PRECISION 7920 TOWER'."
+      },
+      {
+        "claim": "Intel Xeon 4110 silver 2.1GHz 16 cores",
+        "verdict": "unverified",
+        "evidence": "The note in photo 1 and 2 states 'SILVER 4110 CPU 16CORES', but there is no visible CPU or label to confirm this. The model number is not readable on the chassis."
+      },
+      {
+        "claim": "32gb ram",
+        "verdict": "unverified",
+        "evidence": "The note in photo 1 and 2 states '32GB - RAM', but there is no visible RAM module or label to confirm this. The internal components are not shown."
+      },
+      {
+        "claim": "800gb ssd, 1Tb hdd",
+        "verdict": "unverified",
+        "evidence": "The note in photo 1 and 2 states '800GB - SSD', but there is no visible storage drive or label to confirm this. The internal components are not shown."
+      },
+      {
+        "claim": "Nvidia RTX 3080 10GB",
+        "verdict": "contradicted",
+        "evidence": "The note in photo 1 and 2 states 'RTX GEFORCE 3080 10GB', but the Dell Precision 7920 is a professional workstation and typically uses Quadro GPUs, not consumer GeForce cards. This is inconsistent with the product line. No GPU is visible in any photo."
+      },
+      {
+        "claim": "Windows 11 Pro",
+        "verdict": "unverifiable_remote",
+        "evidence": "The note in photo 1 and 2 states 'WINDOWS 11 PRO', but there is no screen or boot-up image to verify the OS. This cannot be confirmed remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The GPU is claimed to be an RTX 3080, which is a consumer card, but the Dell Precision 7920 is a professional workstation and should have a Quadro GPU. This may be a misrepresentation or a non-genuine configuration.",
+        "proof": "A photo of the internal GPU with its label visible, or a screenshot of the device manager showing the GPU model.",
+        "if_unproven": "Priced as if it has a consumer-grade GPU, which is less valuable for professional workloads."
+      },
+      {
+        "risk": "The CPU, RAM, and storage specifications are not visible and are based solely on a handwritten note, which may be inaccurate or fabricated.",
+        "proof": "Photos of the internal components showing the CPU, RAM modules, and storage drives with their labels visible.",
+        "if_unproven": "Priced as if the specs are not confirmed, which could mean lower performance or mismatched components."
+      },
+      {
+        "risk": "The OS is claimed to be Windows 11 Pro, but there is no proof of installation or license. It may be unlicensed or not installed at all.",
+        "proof": "A screenshot of the desktop showing the Windows 11 Pro version, or a photo of the license sticker.",
+        "if_unproven": "Priced as if the OS is not included or is unlicensed, which reduces value."
+      },
+      {
+        "risk": "The item may be a rebranded or non-genuine Dell Precision 7920, or a different model misrepresented as such.",
+        "proof": "A clear photo of the front or side of the chassis showing the official Dell model label or serial number.",
+        "if_unproven": "Priced as if the model is unconfirmed, which could mean it is not a genuine Precision 7920."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the front or side of the chassis showing the official Dell model label or serial number.",
+      "Photos of the internal components: CPU, RAM modules, and storage drives with labels visible.",
+      "Photo of the GPU with its label visible, or a screenshot of the device manager showing the GPU model.",
+      "Screenshot of the desktop showing Windows 11 Pro version, or photo of the license sticker."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The identity is based on a handwritten note, and key specifications like the GPU, CPU, RAM, and storage are not visible. The claimed RTX 3080 GPU is inconsistent with the professional workstation line, raising suspicion. Without proof of internal components and OS, the item cannot be accurately priced. The seller must provide photos of the internal hardware and OS to verify the claims."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 116522,
+    "input_tokens": 2815,
+    "output_tokens": 1451,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "a89efb5b0b72da27dfd209b46a883dd5",
+    "error": null
+  }
+}

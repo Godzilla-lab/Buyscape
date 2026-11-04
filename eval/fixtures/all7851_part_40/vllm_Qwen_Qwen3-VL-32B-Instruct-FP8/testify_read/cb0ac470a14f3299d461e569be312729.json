@@ -1,0 +1,89 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the back of an Apple iMac with a silver aluminum casing and the Apple logo. It is wrapped in plastic, sitting on a black box or stand in a cluttered environment.",
+      "Photo 1 shows the front of the iMac screen, displaying the macOS desktop with the 'Keyboard Setup Assistant' window open. The screen has red handwritten markings, including 'CORE I5' and '16GB RAM'. The screen is also covered in plastic wrap.",
+      "Photo 2 shows the 'About This Mac' screen, listing: iMac, 3 GHz 6-Core Intel Core i5, Radeon Pro Vega 20 4 GB, 16 GB 2667 MHz DDR4, macOS Sonoma Version 14.0. The serial number is partially visible: C82ZH1EFJWF2. The screen is again covered in plastic wrap, with a red '2' written on it."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "iMac",
+      "brand": "Apple",
+      "model": "iMac (2019 model, 21.5-inch, 3 GHz 6-Core Intel Core i5, Radeon Pro Vega 20)",
+      "read_from": [
+        "photo 2 screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "2019 22inches iMac all in one",
+        "verdict": "supported",
+        "evidence": "Photo 2 shows 'About This Mac' with a 3 GHz 6-Core Intel Core i5 and Radeon Pro Vega 20, which matches the 2019 21.5-inch iMac model. The screen size is listed as 21.5 inches in Apple's specs, so '22 inches' is a minor rounding or approximation."
+      },
+      {
+        "claim": "1tb hdd",
+        "verdict": "unverified",
+        "evidence": "Photo 2 shows 'About This Mac' but does not list storage capacity. The seller's claim of 1TB HDD is not visible in any photo."
+      },
+      {
+        "claim": "16gbram",
+        "verdict": "supported",
+        "evidence": "Photo 2 clearly shows '16 GB 2667 MHz DDR4' under Memory."
+      },
+      {
+        "claim": "i5",
+        "verdict": "supported",
+        "evidence": "Photo 2 shows '3 GHz 6-Core Intel Core i5'."
+      },
+      {
+        "claim": "4gb dedicated graphics",
+        "verdict": "supported",
+        "evidence": "Photo 2 shows 'Radeon Pro Vega 20 4 GB'."
+      },
+      {
+        "claim": "Working perfectly",
+        "verdict": "unverified",
+        "evidence": "Photo 1 shows the macOS desktop and setup assistant, indicating the machine is powered on. However, no functional test (e.g., running applications, full boot cycle, peripherals) is shown. The screen has plastic wrap and red markings, which may affect usability or indicate tampering."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Storage capacity is not confirmed; seller claims 1TB HDD but 'About This Mac' does not show it.",
+        "proof": "Photo of 'About This Mac' showing the storage section, or a screenshot of Disk Utility.",
+        "if_unproven": "Priced as having unknown storage, which may be less than 1TB or an SSD instead of HDD, reducing value."
+      },
+      {
+        "risk": "The machine may have been tampered with or is not genuine; red handwritten markings on screen and plastic wrap may indicate refurbishment or non-standard modifications.",
+        "proof": "Clear photo of the iMac without plastic wrap, showing no tampering, and a video of the machine booting and running applications.",
+        "if_unproven": "Priced as potentially non-genuine or modified, which reduces value."
+      },
+      {
+        "risk": "The iMac may not be fully functional; the 'Keyboard Setup Assistant' suggests it is in initial setup, and no full operation is shown.",
+        "proof": "Video of the iMac booting to desktop, opening applications, and using peripherals (keyboard, mouse).",
+        "if_unproven": "Priced as not working, or with unknown functionality, reducing value."
+      }
+    ],
+    "proof_requests": [
+      "Photo of 'About This Mac' showing the storage capacity.",
+      "Video of the iMac booting and running applications.",
+      "Photo of the iMac without plastic wrap, showing the front and back clearly."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and key specs (CPU, RAM, GPU) are confirmed from Photo 2, but the storage capacity is unverified, and the machine's full functionality and condition are not proven. The plastic wrap and red markings raise concerns about tampering or refurbishment. Without proof of storage and full operation, the item cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 85700,
+    "input_tokens": 2806,
+    "output_tokens": 1111,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "cb0ac470a14f3299d461e569be312729",
+    "error": null
+  }
+}

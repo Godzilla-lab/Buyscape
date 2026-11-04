@@ -1,0 +1,83 @@
+{
+  "task": "testify_judge",
+  "prompt_version": "testify_judge.v2",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "claims": [
+      {
+        "claim": "The item is a DP Compact Portable Rechargeable LED Torch Light.",
+        "verdict": "contradicted",
+        "evidence": "Witness photos show a black solar panel/solar module with a junction/port area and watermark text \u201cLUMETT SOLAR ENERGY NIG.\u201d No torch is shown."
+      },
+      {
+        "claim": "Like new, never repaired or opened, works perfectly.",
+        "verdict": "unverified",
+        "evidence": "Photos only show close-up appearance of the solar module; no functional test (output under sun, charging performance) is shown."
+      },
+      {
+        "claim": "Original receipt and warranty available.",
+        "verdict": "unverified",
+        "evidence": "No receipt/warranty documents are shown in the witness report."
+      },
+      {
+        "claim": "Suitable for homes, security personnel,...",
+        "verdict": "unverifiable_remote",
+        "evidence": "No torch or usage setup is shown; suitability depends on the actual device and specs not visible."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Mismatch of item: seller describes a rechargeable LED torch, but photos show a solar panel/module; wrong item risk affects value heavily.",
+        "proof": "A clear photo/video showing the exact product being sold (torch + model label) OR a clear photo/video showing the solar panel\u2019s full label/specs and that it is the intended item.",
+        "if_unproven": "Price as a solar module only (worst-case: unknown wattage/condition) and treat as untested."
+      },
+      {
+        "risk": "Unknown wattage/ratings (watts, voltage, amperage) and whether it is foldable vs rigid; this drives compatibility and resale value.",
+        "proof": "One shot of the label/sticker with electrical ratings (watts/voltage/current) and a shot showing the full panel layout/dimensions.",
+        "if_unproven": "Price at the lowest tier for an unverified/unknown-capacity portable solar module."
+      },
+      {
+        "risk": "Condition not fully visible (scratches, cracks, delamination, water damage) beyond partial close-ups.",
+        "proof": "Full front and back photos plus close-ups of edges/corners and the junction/port area.",
+        "if_unproven": "Price as damaged/used-worn risk (worst-case: possible reduced performance)."
+      },
+      {
+        "risk": "No proof of working output; solar modules can look fine but underperform.",
+        "proof": "A working test clip: measure output under sunlight (e.g., multimeter reading) or show charging a known battery/controller with a visible meter/app.",
+        "if_unproven": "Price as not working/untested until a functional output test is provided."
+      },
+      {
+        "risk": "Missing accessories/compatibility (controller/inverter, cables, connectors) and whether it can charge a battery directly.",
+        "proof": "Photos of included items: controller/inverter (if any), cables/connectors, and a shot showing the connector type and how it mates to a battery/controller.",
+        "if_unproven": "Price as incomplete/needs additional parts."
+      },
+      {
+        "risk": "Brand/model/serial not verifiable from the visible watermark alone; warranty/receipt claims can\u2019t be confirmed.",
+        "proof": "Photo of serial number/QR/warranty card and the receipt (with sensitive details covered).",
+        "if_unproven": "Price without warranty/receipt value."
+      }
+    ],
+    "proof_requests": [
+      "Confirm the exact item: send a clear photo of the full product being sold (torch or solar panel) with the model name visible.",
+      "Send a close-up photo of the solar module label showing wattage (W), voltage (V), and current (A).",
+      "Send full front + full back photos, including edges/corners and the junction/port area.",
+      "Send a short working test video showing output under sunlight (meter reading) and/or charging a battery with visible results.",
+      "Send photos of any included accessories (controller/inverter, cables, connectors) and show connector compatibility.",
+      "Send photos of receipt/warranty card and serial number/QR (cover personal details)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The witness photos identify a solar module, while the seller claims a rechargeable LED torch; functional specs and working test results are not visible, so a reliable worst-case price cannot be set without key proof."
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_judge",
+    "latency_ms": 6515,
+    "input_tokens": 1096,
+    "output_tokens": 981,
+    "cost_usd": 0.001445,
+    "replayed": false,
+    "fixture_key": "ce60f0f35623af5ae5d4bbf25d6d10f6",
+    "error": null
+  }
+}

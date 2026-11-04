@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail packaging for a Binatone blender.",
+      "The brand 'Binatone' and model 'BLG-620' are printed on the box.",
+      "The box describes the item as a 'BLENDER WITH GRINDER'.",
+      "The box features claims of an 'Unbreakable jug' and '100% Copper motor'.",
+      "The actual blender and grinder are not visible; only the box is shown.",
+      "There is a watermark 'ANYI BLESS SOLAR POSTED ON JIJI' on the image."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "blender with grinder",
+      "brand": "Binatone",
+      "model": "BLG-620",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Electric binatone blender",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "Unbreakable jug",
+        "verdict": "unverified",
+        "evidence": "This is a manufacturer claim on the box; the actual jug is not shown."
+      },
+      {
+        "claim": "Model BLG-620",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, used, or damaged item.",
+        "proof": "A photo of the actual blender and grinder mill outside of the box.",
+        "if_unproven": "priced as non-functional or parts only"
+      },
+      {
+        "risk": "The motor may be non-functional or burnt out.",
+        "proof": "A video of the blender powered on and running.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Essential components like the grinder mill or the jug lid may be missing.",
+        "proof": "A photo showing all parts included in the sale.",
+        "if_unproven": "priced as blender base only"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual blender and grinder mill outside the box.",
+      "Video of the blender plugged in and operating.",
+      "Photo of the identification plate on the bottom of the blender base."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller has only provided a photo of the box. A valuation cannot be performed without seeing the actual item to confirm its existence, condition, and authenticity."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 20167,
+    "input_tokens": 2348,
+    "output_tokens": 4463,
+    "cost_usd": 0.014563,
+    "replayed": false,
+    "fixture_key": "ba39d1dccb4b876115a0eae94dc0ebf7",
+    "error": null
+  }
+}

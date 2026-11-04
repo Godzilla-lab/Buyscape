@@ -1,0 +1,88 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Black tower-style UPS with \"BLUE GATE\" embossed on the front top (photo 0)",
+      "Blue vertical panel with a power button and four indicator lights (photo 0)",
+      "UK 3-pin power cord plugged into the top of the unit (photo 1)",
+      "Same \"BLUE GATE\" marking visible on the side/top edge (photo 1)",
+      "No model number, capacity rating, or serial number visible in either photo",
+      "No battery compartment, interior, or rear ports visible"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "UPS",
+      "brand": "BLUE GATE",
+      "model": null,
+      "read_from": [
+        "photo 0 front",
+        "photo 1 side"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "UPS available",
+        "verdict": "supported",
+        "evidence": "photo 0 and photo 1 show a Blue Gate UPS"
+      },
+      {
+        "claim": "Battery is new",
+        "verdict": "unverifiable_remote",
+        "evidence": "battery age cannot be determined from photos"
+      },
+      {
+        "claim": "holds charge for 8 hours",
+        "verdict": "unverifiable_remote",
+        "evidence": "runtime cannot be verified from photos"
+      },
+      {
+        "claim": "Never repaired",
+        "verdict": "unverifiable_remote",
+        "evidence": "repair history cannot be seen in photos"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery is old or dead",
+        "proof": "video of the UPS running on battery with a load connected",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "UPS does not power on",
+        "proof": "video of the unit turning on and powering a device",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Unit has been opened or internally repaired",
+        "proof": "photos of the battery compartment and interior",
+        "if_unproven": "as possibly repaired"
+      },
+      {
+        "risk": "Missing monitoring cable or software",
+        "proof": "photo of all included cables and rear ports",
+        "if_unproven": "as unit only"
+      }
+    ],
+    "proof_requests": [
+      "Video of the UPS switched on and powering a device from battery",
+      "Photo of the back panel showing ports and any rating label",
+      "Photo of the battery compartment or inside the unit"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a Blue Gate UPS; unverified battery and repair claims are priced as not working."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 19242,
+    "input_tokens": 2874,
+    "output_tokens": 2328,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "f9ecf1e1b27f3ad760ae9a118bee5351",
+    "error": null
+  }
+}

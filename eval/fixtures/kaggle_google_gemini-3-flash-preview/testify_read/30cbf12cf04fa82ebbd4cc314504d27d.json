@@ -1,0 +1,89 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Red and black gasoline generator housed in a silver-colored metal frame.",
+      "Brand 'MAXMECH' and 'GASOLINE GENERATOR' are printed on the top fuel tank section.",
+      "The control panel displays the model 'RFS15000E'.",
+      "The panel features a key-operated engine switch, an analog voltmeter, a circuit breaker, two AC 230V outlets, and DC 12V terminals.",
+      "The unit is partially wrapped in clear protective plastic.",
+      "A 'CAT' branded generator box is visible in the background.",
+      "A watermark for 'C MAX ELECTRONICS' is present on the image."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "gasoline generator",
+      "brand": "MAXMECH",
+      "model": "RFS15000E",
+      "read_from": [
+        "photo 0 top",
+        "photo 0 control panel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "12kva",
+        "verdict": "unverified",
+        "evidence": "The model number RFS15000E is visible, but the actual rated kVA is not shown on a technical specification plate."
+      },
+      {
+        "claim": "maxmech",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "petrol generator",
+        "verdict": "supported",
+        "evidence": "photo 0 'GASOLINE GENERATOR' text"
+      },
+      {
+        "claim": "100% copper wire",
+        "verdict": "unverifiable_remote",
+        "evidence": "Internal alternator windings are not visible in the photo."
+      },
+      {
+        "claim": "1 years warranty",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Mechanical and electrical functionality",
+        "proof": "A video of the generator starting, running smoothly, and powering a significant electrical load.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Alternator winding material (Copper vs Aluminum)",
+        "proof": "A close-up photo of the alternator windings through the cooling vents showing the wire color.",
+        "if_unproven": "as aluminum"
+      },
+      {
+        "risk": "Actual power capacity",
+        "proof": "A clear photo of the manufacturer's technical specification plate, usually located on the side of the alternator or engine.",
+        "if_unproven": "at a lower kVA rating"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the technical specification plate showing the rated kVA and voltage.",
+      "Video of the generator running and powering a load.",
+      "Close-up photo of the alternator windings to verify they are copper."
+    ],
+    "decision": "price",
+    "reason": "The brand and model are clearly identified from the photos, allowing for a valuation at the worst-case scenario (non-functional, aluminum windings) for this specific model."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 14300,
+    "input_tokens": 2370,
+    "output_tokens": 2920,
+    "cost_usd": 0.009945,
+    "replayed": false,
+    "fixture_key": "30cbf12cf04fa82ebbd4cc314504d27d",
+    "error": null
+  }
+}

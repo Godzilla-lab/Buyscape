@@ -1,0 +1,69 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a rectangular solar panel with a white frame and dark blue photovoltaic cells arranged in a grid. The panel is leaning against boxes in a storage area. A watermark 'OJ SOLAR ENERGY' is visible.",
+      "Photo 1 shows a close-up of the label on the junction box. The brand 'KULPOWER' is clearly visible. The label lists electrical characteristics: Maximum Power (Pmax) 200W, Maximum Power Voltage (Vmp) 18.9V, Maximum Power Current (Imp) 10.6A, Open Circuit Voltage (Voc) 22.1V, Short Circuit Current (Isc) 12.38A. Dimensions are 1480x40x26mm. A barcode and a red 'PASS 05' stamp are also visible.",
+      "Photo 2 shows the back of the solar panel, which is white. The junction box with the label and cables is mounted near the top. The panel is again leaning against boxes, with a watermark 'OJ SOLAR ENERGY'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "200W solar panel",
+      "brand": "KULPOWER",
+      "model": "not specified on label",
+      "read_from": [
+        "photo 1 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Kulpower 200w solar panel has maximum power voltage of 18.9v",
+        "verdict": "supported",
+        "evidence": "Photo 1: label clearly shows 'Maximum Power Voltage (Vmp) 18.9V'"
+      },
+      {
+        "claim": "it has maximum power current of...",
+        "verdict": "unverified",
+        "evidence": "Photo 1: label shows 'Maximum Power Current (Imp) 10.6A', but the seller's text is cut off. The value is visible in the photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The panel may be damaged or have microcracks not visible in the photos.",
+        "proof": "A close-up photo of the solar cells showing no cracks, discoloration, or hotspots under sunlight.",
+        "if_unproven": "priced as potentially defective or lower efficiency"
+      },
+      {
+        "risk": "The panel may not be genuine or may have been refurbished with non-original components.",
+        "proof": "A photo of the serial number and barcode scanned, or a certificate of authenticity from the manufacturer.",
+        "if_unproven": "priced as unverified authenticity"
+      },
+      {
+        "risk": "The junction box or cables may be damaged or poorly connected, affecting performance or safety.",
+        "proof": "A close-up photo of the junction box interior and cable connections, showing no corrosion or loose wires.",
+        "if_unproven": "priced as potentially faulty connections"
+      }
+    ],
+    "proof_requests": [
+      "A close-up photo of the solar cells under sunlight to check for cracks or defects.",
+      "A photo of the serial number and barcode being scanned, or a certificate of authenticity.",
+      "A close-up photo of the junction box interior and cable connections."
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a KULPOWER 200W solar panel with clear electrical specifications visible in photo 1. The seller's claims are supported or unverified but not contradicted. Hidden risks exist but are common to all used solar panels; the item can be priced at its worst case (potentially defective) based on visible condition and specifications."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 65989,
+    "input_tokens": 2963,
+    "output_tokens": 797,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "81c4b8aaaa32ef3e5efce1d53711aec1",
+    "error": null
+  }
+}

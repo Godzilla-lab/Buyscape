@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Multiple red cardboard boxes stacked and wrapped in clear plastic.",
+      "Brand name 'ARNOLD' with an eagle head logo is prominent on all boxes.",
+      "Text on the boxes reads '12V 100Ah' and 'Maintenance-free battery'.",
+      "Model number 'CMF 60038 DIN100' is visible on several boxes.",
+      "Text 'KOREAN TECHNOLOGY' and 'MADE IN P.R.C' (China) is printed on the packaging.",
+      "Certification marks for ISO 14001 and ISO 9001 are visible.",
+      "The items appear to be in a retail or warehouse setting."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car battery",
+      "brand": "ARNOLD",
+      "model": "CMF 60038 DIN100",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Maintenance free",
+        "verdict": "supported",
+        "evidence": "Text 'Maintenance-free battery' is printed on the box in photo 0."
+      },
+      {
+        "claim": "high capacity",
+        "verdict": "unverified",
+        "evidence": "100Ah is a high capacity for standard passenger cars, but performance is not proven by the box."
+      },
+      {
+        "claim": "car battery",
+        "verdict": "supported",
+        "evidence": "The DIN100 designation and 12V 100Ah specs are standard for automotive batteries."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, used, or lower-spec battery.",
+        "proof": "A photo of the actual battery outside of the box showing the labels and terminals.",
+        "if_unproven": "as a used battery of unknown health"
+      },
+      {
+        "risk": "The battery may be old stock and have lost its ability to hold a full charge.",
+        "proof": "A clear photo of the manufacturing date code stamped into the plastic casing of the battery.",
+        "if_unproven": "as expired/scrap"
+      },
+      {
+        "risk": "The battery may be defective or discharged below a recoverable level.",
+        "proof": "A video showing a multimeter reading the resting voltage of the battery.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the battery out of the box showing the top and side labels.",
+      "Close-up photo of the manufacturing date code stamped on the battery casing.",
+      "Video of a voltage test using a multimeter."
+    ],
+    "decision": "price",
+    "reason": "The brand, model, and specifications are clearly legible on the retail packaging, allowing for a valuation based on the worst-case scenario for a new-in-box unit of this specific brand."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 6900,
+    "input_tokens": 2349,
+    "output_tokens": 1463,
+    "cost_usd": 0.005563,
+    "replayed": false,
+    "fixture_key": "aeae12aee627b8330ccd50df88dbe0ae",
+    "error": null
+  }
+}

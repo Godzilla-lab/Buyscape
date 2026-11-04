@@ -1,0 +1,85 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r5",
+  "response": {
+    "observations": [
+      "Nikon DSLR camera body with an AF-P DX NIKKOR 18-55mm VR lens.",
+      "The model 'D3400' is clearly printed on the top right of the camera body in photo 1 and on the rear label in photo 2.",
+      "The lens barrel shows significant white residue and dust, suggesting it has been used in dusty environments.",
+      "The rear label in photo 2 identifies the camera as a 'DIGITAL CAMERA D3400 N151F' and states it was 'MADE IN THAILAND'.",
+      "The shutter count is not visible in the photos.",
+      "The lens glass appears to be clean, but the presence of dust on the lens barrel is a significant risk."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DSLR camera",
+      "brand": "Nikon",
+      "model": "D3400",
+      "read_from": [
+        "photo 0 body",
+        "photo 1 body",
+        "photo 2 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Nikon D3400 DSLR Professional Camera",
+        "verdict": "supported",
+        "evidence": "photo 0 and photo 1 show the Nikon logo and D3400 model number on the body."
+      },
+      {
+        "claim": "18 - 55MM lens",
+        "verdict": "supported",
+        "evidence": "photo 0 and photo 2 show the lens specifications on the front and rear."
+      },
+      {
+        "claim": "used",
+        "verdict": "supported",
+        "evidence": "photo 0 shows dust on the lens barrel."
+      },
+      {
+        "claim": "still working",
+        "verdict": "unverified",
+        "evidence": "No photos show the camera powered on or taking a photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The shutter may be near its end of life (Shutter Count).",
+        "proof": "A screenshot of the shutter count from a recent photo or video.",
+        "if_unproven": "as having a high shutter count, likely over 100,000 shots"
+      },
+      {
+        "risk": "The lens may have fungus or significant dust.",
+        "proof": "A clear photo of the front lens glass with the lens cap removed.",
+        "if_unproven": "as having a damaged or dirty lens"
+      },
+      {
+        "risk": "The camera may have internal electronic faults or a dead sensor.",
+        "proof": "A video showing the camera powering on, navigating menus, and taking a clear photo.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of any label, sticker or metal plate showing the brand and model.",
+      "Clear photo of the front lens glass with the lens cap removed.",
+      "Screenshot of the shutter count from a recent photo or video.",
+      "Video of the camera powering on and taking a photo."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "What the item is shows, but not the model that sets its price: no photo shows it clearly enough to read. The shot asked for first would settle it."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r5",
+    "task": "testify_read",
+    "latency_ms": 2243,
+    "input_tokens": 2795,
+    "output_tokens": 575,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "21efe786b276d58b101416cb115c2488",
+    "error": null
+  }
+}

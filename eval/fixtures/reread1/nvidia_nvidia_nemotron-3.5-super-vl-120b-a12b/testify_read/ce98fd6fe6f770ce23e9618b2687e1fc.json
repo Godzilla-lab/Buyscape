@@ -1,0 +1,73 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Multiple batteries sealed in clear plastic wrap and strapped with white bands",
+      "Brand EVERXEED printed on packaging",
+      "Model EXT 22000 printed on packaging",
+      "Type TALL TUBULAR BATTERY printed on packaging",
+      "Features listed: Inside Calcium, More Backup, Quick Recharge, Long Life, Zero Maintenance",
+      "No solar panels or inverters visible in the photo",
+      "Units appear stacked in a storage or shop environment"
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "tall tubular battery",
+      "brand": "EVERXEED",
+      "model": "EXT 22000",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Solar battery available in stock",
+        "verdict": "supported",
+        "evidence": "photo 0 shows multiple tall tubular batteries"
+      },
+      {
+        "claim": "all solar panels and inverters are available",
+        "verdict": "unverifiable_remote",
+        "evidence": "photo 0 shows only batteries; no panels or inverters are visible"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery age or manufacturing date is unknown; sealed plastic may hide old stock",
+        "proof": "photo of the date code or manufacturing sticker on the battery label",
+        "if_unproven": "as aged stock with reduced capacity"
+      },
+      {
+        "risk": "Electrical performance cannot be confirmed from a photo of sealed units",
+        "proof": "video showing a multimeter voltage reading or load test on an unwrapped unit",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Units may be repackaged used batteries rather than new factory-sealed stock",
+        "proof": "close-up photo of battery terminals and factory seal integrity without plastic wrap",
+        "if_unproven": "as used or refurbished"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the manufacturing date sticker on the battery label",
+      "Video of voltage or load test on an unwrapped battery",
+      "Close-up photo of battery terminals and physical condition without plastic"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as an EVERXEED EXT 22000 tall tubular battery from the packaging in photo 0, so it can be priced at its worst case as sealed and untested."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 8399,
+    "input_tokens": 1841,
+    "output_tokens": 1396,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "ce98fd6fe6f770ce23e9618b2687e1fc",
+    "error": null
+  }
+}

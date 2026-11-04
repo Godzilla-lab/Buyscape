@@ -1,0 +1,85 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows multiple white LG air conditioner indoor units stacked together, with visible outdoor units below.",
+      "Each indoor unit has a sticker with '70% ENERGY SAVING', 'Dual Inverter', 'COMPRESSOR', and '10 YEAR WARRANTY' text.",
+      "The LG logo is visible on each indoor unit.",
+      "The outdoor units are dusty and show signs of use; one has a red sticker with 'LG' and a circular logo.",
+      "Units are placed on a concrete floor, possibly in a storage or workshop area.",
+      "No model numbers are visible on the units in the photo.",
+      "The seller claims '1hp' and 'tested okay with warranty'."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "1hp LG dual inverter air conditioner",
+      "brand": "LG",
+      "model": null,
+      "read_from": [
+        "photo 0: LG logo on indoor units",
+        "photo 0: 'Dual Inverter' and '10 YEAR WARRANTY' stickers"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "1hp LG dual inverter Air conditioner",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows LG indoor units with 'Dual Inverter' stickers; '1hp' is a common size for such units, though not explicitly labeled."
+      },
+      {
+        "claim": "tested okay",
+        "verdict": "unverified",
+        "evidence": "No photo shows the unit running or any test results. The condition of the outdoor units suggests use, but no proof of functionality."
+      },
+      {
+        "claim": "with warranty",
+        "verdict": "unverifiable_remote",
+        "evidence": "Sticker says '10 YEAR WARRANTY', but no proof of validity or remaining term. Warranty documents or serial number verification are not shown."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Unit may not be functional despite 'tested okay' claim",
+        "proof": "Video or photo of the unit running with temperature display and airflow.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Warranty may be expired or invalid",
+        "proof": "Copy of warranty card or serial number verification from LG support.",
+        "if_unproven": "priced as no warranty"
+      },
+      {
+        "risk": "Model is not 1hp or not dual inverter as claimed",
+        "proof": "Clear photo of the model number plate on the indoor or outdoor unit.",
+        "if_unproven": "priced as unknown model, possibly lower tier"
+      },
+      {
+        "risk": "Unit is used or damaged (dusty outdoor unit, storage condition)",
+        "proof": "Close-up of outdoor unit fins, fan, and compressor for signs of damage or corrosion.",
+        "if_unproven": "priced as used with potential wear"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the model number plate on the indoor or outdoor unit.",
+      "Video or photo of the unit running with temperature display and airflow.",
+      "Copy of warranty card or proof of warranty validity.",
+      "Close-up of outdoor unit showing condition of fins, fan, and compressor."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as an LG dual inverter air conditioner, but critical details like model number, functionality, and warranty status are unproven. Without proof of these, the price cannot be determined accurately, and risks like non-functionality or expired warranty must be priced conservatively."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 61060,
+    "input_tokens": 1576,
+    "output_tokens": 789,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "611c8d5a81d107edb678716c6d50d800",
+    "error": null
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a used car engine with visible components: alternator, intake manifold, and various hoses and belts. The engine appears dirty and used, with some rust and grime.",
+      "Photo 1 shows the front of the engine block with pulleys, belts, and a rusty crankshaft pulley. The alternator is visible on the right. The engine has signs of wear and oil residue.",
+      "Photo 2 shows the top of the engine with a valve cover that has '16V' and 'VVT-i' embossed on it. The cover is dirty and has some paint chipping. There is also a handwritten '3C' on the cover."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car engine",
+      "brand": "Toyota",
+      "model": "16V VVT-i",
+      "read_from": [
+        "photo 2 valve cover"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Confirmed tokumbo engine. Mount and drive",
+        "verdict": "unverified",
+        "evidence": "The term 'tokumbo' is not visible in any photo; it is a seller term meaning 'used' or 'second-hand' in Nigerian context. The engine appears to be a used Toyota 16V VVT-i, but 'mount and drive' (implying it runs and is ready to install) cannot be verified from photos alone."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine may not run or have internal damage (e.g., seized, blown head gasket, worn bearings).",
+        "proof": "Video of the engine running, or a compression test report.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Engine may have been salvaged from a wrecked or accident-damaged vehicle.",
+        "proof": "VIN or engine number matching a vehicle history report.",
+        "if_unproven": "priced as salvage risk"
+      },
+      {
+        "risk": "Missing or damaged components (e.g., ECU, sensors, timing belt, oil pump).",
+        "proof": "Full view of all engine components, including underside and wiring harness.",
+        "if_unproven": "priced as incomplete"
+      }
+    ],
+    "proof_requests": [
+      "Video of the engine running and idling.",
+      "Photo of the engine number and VIN plate for history check.",
+      "Full view of the engine bay showing all components and wiring."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The engine is identifiable as a Toyota 16V VVT-i from the valve cover in photo 2, but the seller's claim of 'mount and drive' cannot be verified without proof of functionality. Hidden risks like internal damage or missing parts affect pricing and must be confirmed before valuation."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 49732,
+    "input_tokens": 2774,
+    "output_tokens": 626,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "269dd817fad0241123c1355fda55b49a",
+    "error": null
+  }
+}

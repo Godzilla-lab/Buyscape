@@ -1,0 +1,76 @@
+{
+  "task": "testify_judge",
+  "prompt_version": "testify_judge.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "claims": [
+      {
+        "claim": "It serves as stacking base",
+        "verdict": "supported",
+        "evidence": "Photos 0-2 show wooden pallets stacked, consistent with stacking/base use"
+      },
+      {
+        "claim": "Available for pickup only in Port Harcourt",
+        "verdict": "unverifiable_remote",
+        "evidence": "Location cannot be confirmed from photos; no address or geotag shown"
+      },
+      {
+        "claim": "Everything is clean, dry and sorted, no water added",
+        "verdict": "unverifiable_remote",
+        "evidence": "No close-up showing moisture condition of all units; 'no water added' phrasing is unusual for pallets and not shown in any photo"
+      },
+      {
+        "claim": "Weighed at 500 kg on a certified scale this morning",
+        "verdict": "unverifiable_remote",
+        "evidence": "No scale, reading, or weighing event visible in any photo"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Total quantity for sale is unknown, affecting lot value",
+        "proof": "Wide shot showing all stacks with a visible count or seller stating exact unit number on camera",
+        "if_unproven": "price as smallest plausible lot (minimum visible stack)"
+      },
+      {
+        "risk": "Condition issues (cracks, missing boards, nail protrusions) not visible on every unit",
+        "proof": "Close-up photos/video of each stack's top, bottom and sides",
+        "if_unproven": "price as mixed/lower-grade condition"
+      },
+      {
+        "risk": "Mixed authenticity - some pallets may be unmarked or counterfeit EPAL stamps",
+        "proof": "Clear close-up of each stamp showing EPAL oval, IPPC mark, country/plant code",
+        "if_unproven": "price as non-certified generic pallets"
+      },
+      {
+        "risk": "Heat-treatment/ISPM 15 compliance unverified, affecting export-grade value",
+        "proof": "Visible HT stamp alongside EPAL mark in a clear photo",
+        "if_unproven": "price as untreated/non-compliant"
+      },
+      {
+        "risk": "Weight/moisture claims cannot be confirmed remotely and seem template-like for this item type",
+        "proof": "Video of pallets being placed on a certified scale with reading visible",
+        "if_unproven": "exclude weight claim from valuation; price on visual condition only"
+      }
+    ],
+    "proof_requests": [
+      "Wide-angle photo showing all stacks together with a counted total",
+      "Close-up photos of every stamp (EPAL + HT/IPPC marks) on each stack",
+      "Video or photo of the pallets on the scale with the 500kg reading visible",
+      "Close-up shots of pallet undersides and edges for crack/board damage"
+    ],
+    "decision": "price",
+    "reason": "The witness confirms genuine EPAL-stamped wooden pallets, so the item can be priced at worst case for condition, quantity, and certification pending further proof; the seller's unverifiable weight and oddly-phrased moisture claim are flagged but do not amount to clear fraud."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_judge",
+    "latency_ms": 21422,
+    "input_tokens": 1596,
+    "output_tokens": 1850,
+    "cost_usd": 0.019674,
+    "replayed": false,
+    "fixture_key": "2caaeebdb901957cea3a75333095d76f",
+    "error": null
+  }
+}

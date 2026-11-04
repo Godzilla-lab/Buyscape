@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Back of a purple iPhone with triple camera setup and a white sticker covering the serial number and model info. The sticker has text and a barcode, but it's too blurry to read.",
+      "Photo 1: Screen shows 'iPhone Storage' with 256 GB total capacity, 18.48 GB used. The interface is iOS, and the time is 15:11. The phone is held in hand, screen is on and responsive.",
+      "Photo 2: Same back view as photo 0, but from a different angle. The sticker is still unreadable. A black watch is visible on the seller's wrist.",
+      "The phone appears to be an iPhone 14 Pro Max based on the triple camera layout and pill-shaped notch on the screen (photo 1).",
+      "The seller claims the physical parts don\u2019t work anymore, but the screen is on and responsive in photo 1."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "iPhone 14 Pro Max",
+      "brand": "Apple",
+      "model": "iPhone 14 Pro Max",
+      "read_from": [
+        "photo 1 screen (notch shape and iOS interface)",
+        "photo 0 and 2 (triple camera module and design)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "iPhone 14promax 256gb",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows 'iPhone Storage' with 256 GB total capacity. The design (triple camera, pill-shaped notch) matches iPhone 14 Pro Max."
+      },
+      {
+        "claim": "physical eSIM",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows the SIM tray or eSIM settings. The term 'physical eSIM' is ambiguous; likely means it has a physical SIM slot and eSIM capability, which is standard for iPhone 14 Pro Max, but cannot be confirmed from photos."
+      },
+      {
+        "claim": "the physical parts doesn\u2019t work anymore only the...",
+        "verdict": "contradicted",
+        "evidence": "Photo 1 shows the screen is on and responsive, indicating the display and touch functionality are working. The seller\u2019s claim that 'physical parts don\u2019t work' is contradicted by the visible working screen."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The phone may have non-functional hardware such as charging port, speakers, or buttons, which are not visible in the photos.",
+        "proof": "A video showing the phone being charged, volume buttons pressed, speaker output, and side button functionality.",
+        "if_unproven": "priced as non-functional hardware (e.g., for parts or repair)"
+      },
+      {
+        "risk": "The phone may be stolen or blacklisted (IMEI check required).",
+        "proof": "Screenshot of IMEI check from a Nigerian carrier or Apple\u2019s official website.",
+        "if_unproven": "priced as potentially blacklisted, which reduces value significantly"
+      },
+      {
+        "risk": "The sticker on the back may cover important information like model number or serial number, which could be tampered with or fake.",
+        "proof": "Clear photo of the sticker with readable text, or removal of the sticker to show original engraving.",
+        "if_unproven": "priced as unverified model, which may be lower than genuine iPhone 14 Pro Max"
+      }
+    ],
+    "proof_requests": [
+      "Video showing the phone being charged, volume buttons, side button, and speaker working.",
+      "Screenshot of IMEI check from a Nigerian carrier or Apple\u2019s website.",
+      "Clear photo of the sticker on the back with readable text, or photo of the original engraving after sticker removal."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The phone appears to be an iPhone 14 Pro Max with 256GB, and the screen is working, contradicting the seller\u2019s claim that physical parts don\u2019t work. However, critical hardware functionality (charging, buttons, speakers) and IMEI status are unverified. Without proof of these, the item cannot be priced accurately and carries significant risk."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 76065,
+    "input_tokens": 2793,
+    "output_tokens": 925,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "af7a16885051a88911fc2dca6fe26ec8",
+    "error": null
+  }
+}

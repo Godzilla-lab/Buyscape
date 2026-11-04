@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail packaging for a Maxmech MMA-200 welding machine.",
+      "The box indicates it is a 4.8KVA inverter welding machine.",
+      "The actual machine is not visible; only the box is shown in a stack of other boxes.",
+      "A watermark for 'AUSTIN BEST INDUSTRIAL' is visible on the image.",
+      "A box for a larger MMA-300 model is visible below the main item."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "Inverter Welding Machine",
+      "brand": "MAXMECH",
+      "model": "MMA-200",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Maxmech Inverter Welding Machine 200",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "has all the adjustable parameters needed for the MMA welding",
+        "verdict": "unverifiable_remote",
+        "evidence": "The machine's control panel is not visible."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, lower-value item.",
+        "proof": "Photo of the actual machine outside of the box.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The machine may be non-functional or have internal faults.",
+        "proof": "Video of the machine powered on and successfully striking an arc.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Essential accessories like the electrode holder, earth clamp, and cables may be missing.",
+        "proof": "Photo of all included accessories laid out.",
+        "if_unproven": "as machine only without cables"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual welding machine out of the box.",
+      "Photo of the accessories (cables, clamps, mask) included with the sale.",
+      "Video of the machine powered on and striking an arc."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail packaging is shown. It is impossible to verify the presence, physical condition, or functionality of the actual machine without seeing the hardware itself."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 11222,
+    "input_tokens": 2364,
+    "output_tokens": 2115,
+    "cost_usd": 0.007527,
+    "replayed": false,
+    "fixture_key": "1a021d6daed27098d49eeffd0d515476",
+    "error": null
+  }
+}

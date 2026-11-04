@@ -1,0 +1,90 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo shows a small/older flat-screen LG-branded TV with a dark/blank screen.",
+      "Screen appears not to be displaying an image; a circular loading/standby icon is visible on the screen area.",
+      "No clear model number or screen size is readable from the photo.",
+      "No visible remote, stand details, ports, or back label are shown."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "flat-screen TV (scrap/faulty)",
+      "brand": "LG",
+      "model": null,
+      "read_from": [
+        "seller text (not photo)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "This is a scrap LG Flatron TV",
+        "verdict": "unverifiable_remote",
+        "evidence": "Brand/model not clearly readable from the provided photo; seller text only."
+      },
+      {
+        "claim": "Currently not functioning properly",
+        "verdict": "unverified",
+        "evidence": "Photo shows a blank/dark screen with a circular icon, but no confirmed power-on test or fault description."
+      },
+      {
+        "claim": "Sold as is for parts or recycling",
+        "verdict": "unverified",
+        "evidence": "Seller states this, but photo does not confirm condition beyond screen being blank."
+      },
+      {
+        "claim": "Buyer is responsible for pickup",
+        "verdict": "unverified",
+        "evidence": "Seller states this; not shown in photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "TV size/model is unclear; scrap value depends heavily on screen size and panel type.",
+        "proof": "Ask for a photo of the back label showing model number and screen size (inches).",
+        "if_unproven": "Price at the lowest scrap/faulty TV end (worst case: smallest/least valuable panel)."
+      },
+      {
+        "risk": "Fault type unknown (e.g., panel damage vs power supply vs mainboard). Some faults are cheaper to repair than others, affecting scrap/parts value.",
+        "proof": "Ask for a short video showing power-on behavior (logo/boot attempt) and whether there is sound/backlight.",
+        "if_unproven": "Assume worst-case for parts: treat as non-repairable for buyer (scrap/parts only)."
+      },
+      {
+        "risk": "Missing accessories/stand/remote can reduce parts value.",
+        "proof": "Ask for photos of what comes with it (remote, stand/base, power cable) laid out.",
+        "if_unproven": "Assume minimal/no accessories included; price as bare TV for parts."
+      },
+      {
+        "risk": "Physical damage (cracked screen, broken bezel) not clearly visible in the single photo.",
+        "proof": "Ask for close-up photos of the screen corners and bezel from multiple angles.",
+        "if_unproven": "Assume possible damage; keep pricing at the lowest scrap end."
+      }
+    ],
+    "proof_requests": [
+      "Back-label photo showing exact LG model number and screen size (inches).",
+      "Short power-on video: show boot attempt/logo, whether there is sound, and whether backlight works.",
+      "Close-up photos of screen (corners/edges) and bezel for cracks or impact damage.",
+      "Photos of included items: remote, stand/base, and power cable."
+    ],
+    "decision": "price",
+    "reason": "The photo shows an older LG flat-screen TV with a blank/non-working display, consistent with scrap/parts. However, model/size and fault type are not readable, so it must be priced at the worst-case scrap value using the closest cheapest comparable for faulty LG TVs.",
+    "price_pick": {
+      "low": 10000,
+      "high": 10000
+    }
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_joint",
+    "latency_ms": 5543,
+    "input_tokens": 2321,
+    "output_tokens": 841,
+    "cost_usd": 0.002765,
+    "replayed": false,
+    "fixture_key": "839185fb8e0d48e4034d3eee424b74ed",
+    "error": null
+  }
+}

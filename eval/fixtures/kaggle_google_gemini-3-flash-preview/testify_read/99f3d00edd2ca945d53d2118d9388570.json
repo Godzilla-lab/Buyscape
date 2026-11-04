@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the front of a retail box for a MAXI brand standing fan.",
+      "The brand 'MAXI' is printed in large blue letters on the box.",
+      "The model number 'FS45-25MRD' is visible in the bottom right corner of the box.",
+      "The box is stacked among other appliance boxes (CWAY, Inverter Air Conditioner) in what appears to be a shop or warehouse.",
+      "The actual fan is not visible; only the illustration on the packaging is shown.",
+      "The box shows some signs of handling/wear on the edges."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "standing fan",
+      "brand": "MAXI",
+      "model": "FS45-25MRD",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Maxi rechargeable standing fan",
+        "verdict": "supported",
+        "evidence": "photo 0 box shows the brand and a fan with a base typical of rechargeable models."
+      },
+      {
+        "claim": "18inch",
+        "verdict": "unverified",
+        "evidence": "The size is not explicitly visible on the box in the provided photo."
+      },
+      {
+        "claim": "with warranty",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      },
+      {
+        "claim": "payment on delivery",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty, contain a different model, or a damaged unit.",
+        "proof": "Photo of the actual fan outside the box.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The internal rechargeable battery may be degraded or non-functional.",
+        "proof": "Video of the fan running on battery power alone.",
+        "if_unproven": "as a standard non-rechargeable fan"
+      },
+      {
+        "risk": "Mechanical or electrical defects (motor failure, broken blades, or faulty charging circuit).",
+        "proof": "Video of the fan powered on, blades spinning at all speeds, and oscillating.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual fan outside of the box.",
+      "Video of the fan operating on battery power to confirm battery health.",
+      "Photo of the accessories (remote control, charging cable) and the warranty card if applicable."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the product packaging is shown. A price cannot be safely determined without confirming the presence and condition of the actual item inside the box."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 11872,
+    "input_tokens": 2356,
+    "output_tokens": 2319,
+    "cost_usd": 0.008135,
+    "replayed": false,
+    "fixture_key": "99f3d00edd2ca945d53d2118d9388570",
+    "error": null
+  }
+}

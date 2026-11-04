@@ -1,0 +1,80 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0 shows a stack of marketing/sales books with visible covers.",
+      "Readable titles on covers include: \u201cRICH DAD POOR DAD\u201d (orange/black spine area), \u201cTHIS IS MARKETING\u201d (Seth Godin), \u201cSELL LIKE CRAZY\u201d (Sabr Suby), \u201cCRUSHING IT!\u201d (Gary Vaynerchuk), \u201cSELL OR BE SOLD\u201d (Grant Cardone), and \u201cMARKET\u2026\u201d/\u201cMARKETING\u201d related titles (some text partially obscured).",
+      "No photo shows the inside pages, copyright pages, or whether there is writing/highlighting.",
+      "No photo shows edition/year, publisher, or ISBN."
+    ],
+    "identity": {
+      "status": "unknown",
+      "kind": "collection of marketing and sales books",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Sellected collection of books on marketing and sales",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows multiple marketing/sales book covers in one stack."
+      },
+      {
+        "claim": "Original copies, not photocopies or local reprints.",
+        "verdict": "unverified",
+        "evidence": "Photo 0 only shows covers; no ISBN/copyright page or inside-page checks."
+      },
+      {
+        "claim": "No writing inside.",
+        "verdict": "unverified",
+        "evidence": "Photo 0 does not show any interior pages."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Some books may be reprints/photocopies or wrong editions (covers can look similar).",
+        "proof": "A clear photo of each book\u2019s copyright/ISBN page (or ISBN barcode) plus a close-up of the publisher page.",
+        "if_unproven": "Price as worst case: reprint/unknown edition (treat as lower value until ISBN/copyright is verified)."
+      },
+      {
+        "risk": "There may be writing, highlighting, or missing pages inside.",
+        "proof": "Open 2\u20133 random books to show interior pages (including the first pages and one mid-page) with writing clearly visible if present.",
+        "if_unproven": "Price as worst case: may have writing (discount accordingly until interior is confirmed)."
+      },
+      {
+        "risk": "Condition issues not visible from covers (torn pages, water damage, loose binding).",
+        "proof": "Close-up photos of spine condition and edges, plus one photo showing the book opening flat (to check binding).",
+        "if_unproven": "Price as worst case: used with possible wear (no premium for \u201clike new\u201d unless shown)."
+      },
+      {
+        "risk": "Exact number of books and which titles are included is unclear (some cover text is obscured).",
+        "proof": "A photo showing all books laid out individually with titles fully visible, or a list of titles + quantity.",
+        "if_unproven": "Price as worst case: fewer/uncertain titles (avoid assuming the full set)."
+      }
+    ],
+    "proof_requests": [
+      "For each book: photo of the copyright/ISBN page (or barcode) to confirm original edition.",
+      "Open 2\u20133 books and photograph interior pages to confirm \u201cno writing inside.\u201d",
+      "Photos of spines/edges and one book opened flat to check binding and page condition.",
+      "A clear layout photo (or typed list) showing the full set of titles and total number of books."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photos confirm it\u2019s a marketing/sales book stack, but the key value claims (original copies vs reprints and no writing inside) are not verifiable from covers alone, and the exact set/editions are not fully readable.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_joint",
+    "latency_ms": 5020,
+    "input_tokens": 1747,
+    "output_tokens": 851,
+    "cost_usd": 0.001413,
+    "replayed": false,
+    "fixture_key": "84efef5923fd07e3d0b928bab17b5faf",
+    "error": null
+  }
+}

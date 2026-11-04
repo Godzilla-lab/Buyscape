@@ -1,0 +1,92 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 and 1 show 'Nikon' and 'D3300' lettering on the camera body, confirming model.",
+      "Lens barrel reads 'Nikon AF-P ... 18-55mm' consistent with the kit lens claimed.",
+      "No photo shows the rear LCD screen, viewfinder interior, or a live/test image.",
+      "No photo shows battery, charger, memory card, or card slot.",
+      "Front lens element is visible in photo 0 but at an angle and lit with reflections, no clear close-up of glass surface or coating.",
+      "Seller's text is cut off mid-sentence: 'working perfectly ok but the glass...' leaving an apparent defect claim incomplete.",
+      "All three photos appear to be taken in the same shop setting with a 'McSteve' store banner, consistent with a dealer listing."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DSLR camera with kit lens",
+      "brand": "Nikon",
+      "model": "D3300 with 18-55mm lens",
+      "read_from": [
+        "photo 0 body nameplate",
+        "photo 1 body nameplate",
+        "photo 0 lens barrel text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Used Nikon D3300 DSLR camera with 18-55mm lens",
+        "verdict": "supported",
+        "evidence": "Photo 0 and 1 show 'Nikon D3300' on body; lens barrel text visible in photo 0"
+      },
+      {
+        "claim": "working perfectly ok",
+        "verdict": "unverified",
+        "evidence": "No photo shows screen on, a live view, or a sample/test image to confirm sensor or shutter function"
+      },
+      {
+        "claim": "but the glass...",
+        "verdict": "unverifiable_remote",
+        "evidence": "Sentence is cut off; no close-up photo of lens glass front or rear element to assess scratches, fungus, or haze"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Lens glass defect implied by cut-off claim (scratch, fungus, haze, or crack)",
+        "proof": "Close-up photo of front and rear lens elements with light shone through at an angle",
+        "if_unproven": "priced as lens glass damaged/degraded"
+      },
+      {
+        "risk": "Rear LCD screen condition and function unknown",
+        "proof": "Photo of the rear screen powered on showing menu or live view",
+        "if_unproven": "priced as screen not working"
+      },
+      {
+        "risk": "Shutter count and sensor condition unknown",
+        "proof": "Screenshot of shutter count from EXIF/shutter-count tool, or a sample photo taken with the camera",
+        "if_unproven": "priced as heavily used with unknown shutter life"
+      },
+      {
+        "risk": "No battery, charger, or memory card shown; unclear if included",
+        "proof": "Photo of battery, charger, and card included in the sale",
+        "if_unproven": "priced as body and lens only, no accessories"
+      },
+      {
+        "risk": "Autofocus and VR (vibration reduction) function on lens unverified",
+        "proof": "Video clip showing autofocus engaging and VR switch toggled",
+        "if_unproven": "priced as autofocus/VR not confirmed working"
+      }
+    ],
+    "proof_requests": [
+      "Complete the seller's sentence about 'the glass' and provide a close-up photo of the lens glass",
+      "Photo of the rear LCD screen powered on",
+      "A sample photo taken with the camera to confirm sensor/shutter function",
+      "Photo of included battery, charger, and memory card if sold with the camera",
+      "Shutter count screenshot if available"
+    ],
+    "decision": "price",
+    "reason": "The camera and lens are clearly identified by visible nameplates, but the seller's own claim about 'the glass' is cut off and no functional or screen proof is shown, so it must be priced at worst case (possible lens glass defect, unconfirmed working status, no accessories) until further photos are provided."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 27098,
+    "input_tokens": 3938,
+    "output_tokens": 2510,
+    "cost_usd": 0.029817,
+    "replayed": false,
+    "fixture_key": "b705133da5836638574e44daf10e8ef7",
+    "error": null
+  }
+}

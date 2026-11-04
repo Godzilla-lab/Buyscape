@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r5",
+  "response": {
+    "observations": [
+      "Large blue industrial drum.",
+      "Label reads 'MONOETHYLENE GLYCOL' in English, Dutch, and German.",
+      "Label includes hazard symbols for flammable and corrosive substances.",
+      "Manufacture date (MANF DATE) and expiry date (EXP DATE) are visible on the label.",
+      "The drum is shown in a warehouse or outdoor storage area with other similar drums.",
+      "Water droplets are visible on the surface of the drum in photos 0, 1, and 3."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "chemical",
+      "brand": "Unknown",
+      "read_from": [
+        "photo 0 label",
+        "photo 1 label",
+        "photo 3 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Industrial-grade",
+        "verdict": "unverifiable_remote",
+        "evidence": "The label indicates industrial use, but the grade cannot be confirmed from photos."
+      },
+      {
+        "claim": "Monoethylene Glycol (MEG)",
+        "verdict": "supported",
+        "evidence": "photo 0 label"
+      },
+      {
+        "claim": "available in a large blue drum",
+        "verdict": "supported",
+        "evidence": "photo 0, 1, 2, and 3 show large blue drums."
+      },
+      {
+        "claim": "Suitable for a variety of",
+        "verdict": "unverifiable_remote",
+        "evidence": "The text is cut off in the seller's statement."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The drum may be empty or contain a different substance.",
+        "proof": "A photo of the manufacturer's identification number (MID) stamped on the drum.",
+        "if_unproven": "as an empty drum"
+      },
+      {
+        "risk": "The contents may be degraded or contaminated.",
+        "proof": "A photo of the contents inside the drum.",
+        "if_unproven": "as contaminated or expired"
+      },
+      {
+        "risk": "The actual weight and volume of the contents are unknown.",
+        "proof": "A photo of the weight and volume markings on the drum.",
+        "if_unproven": "as a 100kg drum"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the manufacturer's identification number (MID) stamped on the drum.",
+      "Photo of the contents inside the drum.",
+      "Photo of the weight and volume markings on the drum."
+    ],
+    "decision": "price",
+    "reason": "The item is known from the photos. What they cannot prove is priced at its worst case until the proof asked for below arrives."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r5",
+    "task": "testify_read",
+    "latency_ms": 2323,
+    "input_tokens": 3402,
+    "output_tokens": 451,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "9f31b8fe236ff8f91f4f80c7ec163684",
+    "error": null
+  }
+}

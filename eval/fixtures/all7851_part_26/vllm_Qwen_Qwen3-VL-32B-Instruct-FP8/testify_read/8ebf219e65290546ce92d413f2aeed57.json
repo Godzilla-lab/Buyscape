@@ -1,0 +1,105 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Silver laptop with black keyboard, screen on showing Windows 11 default wallpaper. HP logo visible on bezel. Intel Core sticker on palm rest. Held in hand, background has blue lighting and shelves with other gadgets.",
+      "Photo 1: Same angle as photo 0, but keyboard backlight is on, showing blue illumination under keys. Screen still shows Windows 11 wallpaper.",
+      "Photo 2: Laptop shown from a slightly different angle, screen shows Windows login screen. 'EliteBook' text visible on palm rest near touchpad. Intel Core sticker present. Background same as before."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "EliteBook 840 G4",
+      "read_from": [
+        "photo 2 palm rest"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "UK used hp elitebook 840 g4",
+        "verdict": "supported",
+        "evidence": "Model name 'EliteBook' visible on palm rest in photo 2, and seller's text matches."
+      },
+      {
+        "claim": "Intel core i5",
+        "verdict": "unverified",
+        "evidence": "Intel Core sticker visible on palm rest in all photos, but specific model (i5) not readable."
+      },
+      {
+        "claim": "8gb ram",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows RAM or system specs; cannot verify remotely."
+      },
+      {
+        "claim": "256ssd",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows storage or system specs; cannot verify remotely."
+      },
+      {
+        "claim": "Windows 11",
+        "verdict": "supported",
+        "evidence": "Windows 11 default wallpaper visible on screen in photo 0 and 1, and login screen in photo 2."
+      },
+      {
+        "claim": "Keyboard light",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows keyboard backlight illuminated in blue."
+      },
+      {
+        "claim": "7th generation",
+        "verdict": "unverified",
+        "evidence": "No visible proof of CPU generation; Intel sticker does not specify generation."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "RAM may not be 8GB as claimed",
+        "proof": "Photo of system properties or BIOS showing RAM size",
+        "if_unproven": "priced as having less than 8GB RAM"
+      },
+      {
+        "risk": "SSD may not be 256GB or may be faulty",
+        "proof": "Photo of disk management or BIOS showing storage size and health",
+        "if_unproven": "priced as having smaller or no SSD"
+      },
+      {
+        "risk": "CPU may not be 7th gen i5 or may be damaged",
+        "proof": "Photo of system information or CPU-Z showing exact CPU model",
+        "if_unproven": "priced as having unknown or lower-gen CPU"
+      },
+      {
+        "risk": "Laptop may have physical damage not visible in photos",
+        "proof": "Full 360-degree video or close-up photos of all edges, hinges, and screen",
+        "if_unproven": "priced as having potential hidden damage"
+      },
+      {
+        "risk": "Battery may be degraded or non-functional",
+        "proof": "Video showing battery health in Windows or during charge cycle",
+        "if_unproven": "priced as battery not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of system information or BIOS showing exact CPU model, RAM size, and storage size",
+      "Video showing battery health and charge cycle",
+      "Close-up photos of all edges, hinges, and screen for damage",
+      "Photo of Windows disk management or BIOS showing SSD health and size"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "While the model and Windows 11 are confirmed, key specs like RAM, SSD, and CPU generation are unverifiable from current photos. Hidden risks like battery health and physical damage also need proof. Without these, the item cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 80098,
+    "input_tokens": 2803,
+    "output_tokens": 947,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "8ebf219e65290546ce92d413f2aeed57",
+    "error": null
+  }
+}

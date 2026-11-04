@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a white indoor unit of a split air conditioner.",
+      "The brand 'SAMSUNG' is visible in black letters on the front panel.",
+      "The unit has a vertical vent and a small blue digital display at the top right.",
+      "The background shows a concrete floor and part of another appliance with 'LG' visible, suggesting a storage or sales yard.",
+      "No model number or capacity label is visible on the unit.",
+      "The unit appears clean and undamaged in this shot."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "split air conditioner",
+      "brand": "SAMSUNG",
+      "model": null,
+      "read_from": [
+        "photo 0 front panel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Uk used 1hp low voltage Samsung split unit AC",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows a Samsung split unit, but no model or capacity label is visible to confirm 1hp. 'UK used' and 'low voltage' cannot be verified from the photo."
+      },
+      {
+        "claim": "tested okay",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows the unit running or any test evidence. Cannot verify remotely."
+      },
+      {
+        "claim": "with warranty",
+        "verdict": "unverifiable_remote",
+        "evidence": "No warranty document or label is visible. Cannot verify remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The unit may not be 1hp as claimed.",
+        "proof": "Photo of the model label or rating plate showing capacity.",
+        "if_unproven": "priced as lower capacity or unknown capacity, which reduces value."
+      },
+      {
+        "risk": "The unit may not be in working condition despite 'tested okay' claim.",
+        "proof": "Video or photo of the unit running with cooling output and remote control operation.",
+        "if_unproven": "priced as not working, which significantly reduces value."
+      },
+      {
+        "risk": "The unit may not be suitable for Nigerian voltage (220-240V) if 'low voltage' refers to UK 230V, but this is likely compatible.",
+        "proof": "Photo of the outdoor unit's rating plate showing voltage and frequency.",
+        "if_unproven": "priced as potentially incompatible, which reduces value."
+      },
+      {
+        "risk": "The warranty claim is unverifiable and may be false.",
+        "proof": "Photo of the warranty document or proof of purchase.",
+        "if_unproven": "priced as no warranty, which reduces value."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the model label or rating plate on the indoor or outdoor unit.",
+      "Video or photo of the unit running with cooling output and remote control operation.",
+      "Photo of the outdoor unit showing voltage and frequency rating.",
+      "Photo of the warranty document or proof of purchase."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The brand is confirmed as Samsung, but the model, capacity, working condition, and warranty cannot be verified from the current photo. Key risks affect pricing, and additional proof is needed to determine the worst-case value and potential price increase."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 57541,
+    "input_tokens": 1784,
+    "output_tokens": 733,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "3da1c8732570cb84aabb1c4547fdef36",
+    "error": null
+  }
+}

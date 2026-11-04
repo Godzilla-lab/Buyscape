@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r5",
+  "response": {
+    "observations": [
+      "Photo 0 shows a VW engine with an 'FSI TURBO' cover.",
+      "Photo 1 shows the same engine with a visible '1.8L' engine code on the timing cover.",
+      "Photo 2 shows the engine with a belt pulley and alternator, consistent with a VW 1.8L engine.",
+      "The engine is surrounded by other used car parts in a workshop or scrap yard setting.",
+      "Watermarks for 'EZE PORSCHE GLOBAL AUTOS' are present on all photos."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car engine",
+      "brand": "Volkswagen",
+      "read_from": [
+        "photo 0 cover",
+        "photo 1 code"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "FSI TURBO",
+        "verdict": "supported",
+        "evidence": "photo 0 and photo 1"
+      },
+      {
+        "claim": "1.8L",
+        "verdict": "supported",
+        "evidence": "photo 1 code"
+      },
+      {
+        "claim": "car spare parts",
+        "verdict": "unverifiable_remote",
+        "evidence": "The seller's text is generic and cannot be verified from photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The engine may be a used unit with internal damage or high mileage.",
+        "proof": "A video of the engine running or a photo of the engine code stamped on the block.",
+        "if_unproven": "as a used engine with unknown mechanical condition"
+      },
+      {
+        "risk": "The engine may not be a VW 1.8L as claimed.",
+        "proof": "A clear photo of the engine code stamped on the engine block.",
+        "if_unproven": "as a different engine model"
+      },
+      {
+        "risk": "Missing accessories like the alternator or pulleys shown in photo 2.",
+        "proof": "A photo of the entire engine with all components included.",
+        "if_unproven": "as a bare engine without pulleys or alternator"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of any label, sticker or metal plate showing the brand and model.",
+      "Photo of the engine code stamped on the engine block.",
+      "Photo of the engine with all accessories (alternator, pulleys) included.",
+      "Video of the engine running."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "What the item is shows, but not the model that sets its price: no photo shows it clearly enough to read. The shot asked for first would settle it."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r5",
+    "task": "testify_read",
+    "latency_ms": 2252,
+    "input_tokens": 2775,
+    "output_tokens": 455,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "245d2d9bcc86a47511fb63efb73ca950",
+    "error": null
+  }
+}

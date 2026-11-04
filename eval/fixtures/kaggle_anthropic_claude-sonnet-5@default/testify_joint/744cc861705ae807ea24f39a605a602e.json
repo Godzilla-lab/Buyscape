@@ -1,0 +1,81 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows several solar panels stacked at an angle, outdoors on a tiled floor, a person partly visible at left holding a basket.",
+      "Panels show blue speckled (polycrystalline-look) cells, framed in aluminum.",
+      "No manufacturer name, wattage, model number or rating label is visible or legible on any panel.",
+      "A watermark reading 'NAGOTECH SOLAR' and a camera/photo caption ('CAMON 30', exposure data) are overlaid on the image; these are studio/shop marks, not manufacturer markings.",
+      "No battery is shown in this photo at all, despite the seller's claim about a battery."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel (seller claims 650W, 144-cell, Canadian brand)",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Original 650 Watts, 144 cell, Canadian brand solar panel",
+        "verdict": "unverifiable_remote",
+        "evidence": "No nameplate, sticker, or rating label is visible in photo 0 to confirm wattage, cell count, or brand."
+      },
+      {
+        "claim": "Used solar panel, 'built to serve u'",
+        "verdict": "unverified",
+        "evidence": "Panels appear used/weathered in photo 0, but no electrical test (voltage/current under sun) is shown."
+      },
+      {
+        "claim": "Battery is new, holds charge for 8 hours, never repaired",
+        "verdict": "unverifiable_remote",
+        "evidence": "No battery appears anywhere in photo 0; the claim cannot be matched to any item in the image."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual wattage/brand may be much lower than claimed (650W Canadian is a premium, high-price item; without a label this could be a generic lower-wattage poly panel).",
+        "proof": "A clear close-up photo of the panel's rear nameplate/sticker showing brand, wattage, Voc/Isc/Vmp/Imp.",
+        "if_unproven": "Cannot be priced even at worst case, since wattage is the primary price driver and no comparable range can be safely assumed."
+      },
+      {
+        "risk": "Panel output may be degraded (cracked cells, hot spots, broken bypass diodes) from prior use.",
+        "proof": "A video of the panel connected to a multimeter/clamp meter in direct sunlight showing voltage and current readings.",
+        "if_unproven": "Priced as non-functional/worst case until shown working."
+      },
+      {
+        "risk": "The 'new battery, 8-hour backup' claim refers to an item not shown in any photo; it may not exist, be unrelated, or be in poor condition.",
+        "proof": "A photo of the actual battery with its label (brand, Ah, voltage) plus a photo/video of a charge-discharge test or receipt.",
+        "if_unproven": "Battery claim excluded from valuation entirely; if bundled, priced as absent/non-functional until proven."
+      },
+      {
+        "risk": "Stock/generic photo reuse (shop watermark 'NAGOTECH SOLAR') suggests the image may be a catalog shot rather than the specific unit being sold.",
+        "proof": "A fresh photo of the exact panel(s) for sale, taken outdoors in current condition, without watermark, alongside today's date/newspaper for proof of possession.",
+        "if_unproven": "Treated as unverified identity of the specific unit; priced conservatively as a generic used panel of unknown wattage."
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the panel's rear nameplate/rating sticker (brand, wattage, cell count, Voc/Isc).",
+      "Video of the panel under sunlight connected to a multimeter showing actual voltage/current output.",
+      "Photo of the claimed battery with its label and a charge/discharge test or recent receipt.",
+      "A fresh, un-watermarked photo of the specific unit for sale with proof of current possession (e.g., handwritten note with date)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo shows unlabeled panels with no visible wattage, cell count, or brand marking, and the claimed battery is not shown at all, so no worst-case price can be anchored without the nameplate or further proof.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 29984,
+    "input_tokens": 3039,
+    "output_tokens": 2661,
+    "cost_usd": 0.029135,
+    "replayed": false,
+    "fixture_key": "744cc861705ae807ea24f39a605a602e",
+    "error": null
+  }
+}

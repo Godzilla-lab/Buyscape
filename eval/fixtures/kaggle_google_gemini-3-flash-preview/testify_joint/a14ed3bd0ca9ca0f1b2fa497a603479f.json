@@ -1,0 +1,76 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "LG logo is clearly visible in the top left of photo 0.",
+      "Text on the detergent drawer reads 'Inverter DirectDrive 6/3kg'.",
+      "A sticker on the front identifies it as a 'Washer+Dryer 2in1'.",
+      "The control panel is illuminated with an orange ring around the dial and green LEDs on the display.",
+      "There is visible peeling and wear on the '2in1' sticker.",
+      "The machine appears to be a front-loading silver/grey model."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "Washer-dryer",
+      "brand": "LG",
+      "model": "Inverter DirectDrive 6/3kg",
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "LG Washing machine",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "scrap but doesn\u2019t work and needs repair",
+        "verdict": "unverifiable_remote",
+        "evidence": "The photo shows the unit powered on, but functional status cannot be confirmed without a video."
+      },
+      {
+        "claim": "The brand is Samsung",
+        "verdict": "contradicted",
+        "evidence": "photo 0 clearly shows the LG logo and LG-specific branding like 'DirectDrive'."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Internal components (motor, pump, or drum) may be missing or severely damaged.",
+        "proof": "A video of the drum being spun manually and a photo of the rear with the access panel removed.",
+        "if_unproven": "as scrap/non-working"
+      },
+      {
+        "risk": "The control board may be faulty despite the lights being on.",
+        "proof": "A video showing the machine attempting to start a cycle.",
+        "if_unproven": "as non-working"
+      }
+    ],
+    "proof_requests": [
+      "Video of the machine attempting a spin cycle to check for motor and bearing noise.",
+      "Photo of the manufacturer's identification plate (usually on the back or inside the door) for the exact model number.",
+      "Photo of the interior of the drum to check for rust or physical damage."
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identified as an LG 6kg/3kg washer-dryer from the photo. The seller's claim that it is a Samsung is a clear error. Since the seller states it is scrap and non-working, it is priced at the worst-case scenario for a faulty unit of this brand and capacity.",
+    "price_pick": {
+      "low": 1,
+      "high": 2
+    }
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_joint",
+    "latency_ms": 12509,
+    "input_tokens": 2777,
+    "output_tokens": 2529,
+    "cost_usd": 0.008976,
+    "replayed": false,
+    "fixture_key": "a14ed3bd0ca9ca0f1b2fa497a603479f",
+    "error": null
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows a large inventory of boxes stacked in a warehouse or retail space.",
+      "The boxes are branded 'Felicity solar' and 'GEL BATTERY SERIES'.",
+      "An illustration on the boxes shows a battery with an orange top and blue casing.",
+      "A watermark 'EDU SOLAR' is visible across the image.",
+      "No individual battery is shown outside of its packaging.",
+      "The specific capacity (200Ah) and voltage (12V) are not legible on the boxes in the photo."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "deep cycle gel battery",
+      "brand": "Felicity solar",
+      "model": null,
+      "read_from": [
+        "photo 0 boxes"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Solar Felicity",
+        "verdict": "supported",
+        "evidence": "The brand 'Felicity solar' is clearly printed on the boxes in photo 0."
+      },
+      {
+        "claim": "dry cell battery",
+        "verdict": "supported",
+        "evidence": "The boxes specify 'GEL BATTERY SERIES', which is a type of VRLA/dry cell battery."
+      },
+      {
+        "claim": "200ah,/12v",
+        "verdict": "unverified",
+        "evidence": "The text on the boxes is too small and blurry to confirm the capacity or voltage."
+      },
+      {
+        "claim": "very durable",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The boxes may contain a lower capacity battery (e.g., 100Ah or 150Ah).",
+        "proof": "A clear photo of the specification label on the battery itself.",
+        "if_unproven": "priced as a 100Ah model"
+      },
+      {
+        "risk": "The batteries may be counterfeit or clones using Felicity branding.",
+        "proof": "A close-up of the manufacturer's hologram or a scan of the QR code on the battery.",
+        "if_unproven": "priced as a generic/unbranded battery"
+      },
+      {
+        "risk": "The batteries may be old stock with degraded capacity.",
+        "proof": "A photo of the manufacture date stamp on the battery casing.",
+        "if_unproven": "priced as used or end-of-life"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the battery out of the box.",
+      "Clear photo of the specification label on the battery showing Ah, Voltage, and Brand.",
+      "Photo of the manufacture date stamp or serial number on the battery casing."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo shows only a stack of boxes in a warehouse with a third-party watermark. The specific capacity (200Ah) that determines the price cannot be verified, and there is no proof of the actual contents or condition of the batteries."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 13155,
+    "input_tokens": 2365,
+    "output_tokens": 2825,
+    "cost_usd": 0.009657,
+    "replayed": false,
+    "fixture_key": "99247a2e1534a4e3e97397eb5451e1f0",
+    "error": null
+  }
+}

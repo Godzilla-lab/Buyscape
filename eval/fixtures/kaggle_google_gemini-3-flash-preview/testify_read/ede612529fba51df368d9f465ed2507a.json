@@ -1,0 +1,75 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0: A tire wrapped in red plastic with 'ROADX' branding; partial sidewall text '195/' is visible.",
+      "Photo 1: A stack of used tires with varying tread patterns; the bottom tire is wrapped in yellow 'CENTARA' plastic.",
+      "Photo 2: A large inventory of used tires in a warehouse or shop; 'Continental' is visible on one sidewall.",
+      "The seller's text is a generic definition of a tire, providing no specific details on quantity, size, or condition.",
+      "The photos are watermarked 'REWTOLE INTEGRATED SERVICES', suggesting a commercial dealer's stock."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "car tire",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0",
+        "photo 1",
+        "photo 2"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "A Tyre is a ring-shaped component that surrounds a wheel's rim...",
+        "verdict": "supported",
+        "evidence": "Photos 0, 1, and 2 show various tires."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The specific tire size (width, aspect ratio, diameter) is unknown.",
+        "proof": "A clear photo of the sidewall markings (e.g., 205/55R16).",
+        "if_unproven": "priced as a common small size (e.g., 13-inch)."
+      },
+      {
+        "risk": "Condition (new vs. used) is not specified for the items shown.",
+        "proof": "Seller statement and close-up photos of the tread.",
+        "if_unproven": "priced as used."
+      },
+      {
+        "risk": "Manufacturing date (DOT code) is not visible; tires degrade with age.",
+        "proof": "Photo of the 4-digit DOT code on the sidewall.",
+        "if_unproven": "priced as expired/scrap."
+      },
+      {
+        "risk": "Hidden structural damage or internal repairs.",
+        "proof": "Photos of the tire's interior lining.",
+        "if_unproven": "priced as having multiple repairs."
+      }
+    ],
+    "proof_requests": [
+      "Which specific tire or set is for sale?",
+      "Photo of the sidewall showing the full size and brand.",
+      "Photo of the 4-digit DOT code (manufacturing date).",
+      "Close-up photo of the tread depth.",
+      "Photo of the inside of the tire."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The listing displays a general inventory of various tires rather than a specific item. A valuation is not possible without identifying which tire is for sale, its size, and its condition."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 28997,
+    "input_tokens": 4618,
+    "output_tokens": 6525,
+    "cost_usd": 0.021884,
+    "replayed": false,
+    "fixture_key": "ede612529fba51df368d9f465ed2507a",
+    "error": null
+  }
+}

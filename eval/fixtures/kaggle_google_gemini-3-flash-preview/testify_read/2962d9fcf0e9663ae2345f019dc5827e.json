@@ -1,0 +1,85 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows two retail boxes for 'TINMO RECHARGEABLE FAN'.",
+      "The boxes prominently display '25W' and an illustration of a pedestal (standing) fan with blue blades.",
+      "The box text mentions features like 'Night light', 'USB charging interface', and 'Solar panel' compatibility.",
+      "The seller's text describes the item as a 'table fan', which contradicts the standing fan shown on the packaging."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "rechargeable standing fan",
+      "brand": "TINMO",
+      "model": "25W",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "rechargeable table fan",
+        "verdict": "contradicted",
+        "evidence": "The illustration on the box in photo 0 shows a standing/pedestal fan, not a table fan."
+      },
+      {
+        "claim": "provides effective air cooling",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      },
+      {
+        "claim": "25W",
+        "verdict": "supported",
+        "evidence": "The '25W' specification is printed on the box in photo 0."
+      },
+      {
+        "claim": "Can use solar panel to charge",
+        "verdict": "supported",
+        "evidence": "This feature is explicitly stated on the box in photo 0."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The actual item inside the box may not match the packaging or the seller's description.",
+        "proof": "A photo of the actual fan outside of the box.",
+        "if_unproven": "priced as the lowest value model between a table fan and a standing fan"
+      },
+      {
+        "risk": "The fan may be used, damaged, or missing components as only the box is shown.",
+        "proof": "Clear photos of the fan from multiple angles and its accessories.",
+        "if_unproven": "priced as non-functional or for parts"
+      },
+      {
+        "risk": "The internal rechargeable battery may be degraded or dead.",
+        "proof": "A video showing the fan operating on battery power alone.",
+        "if_unproven": "priced as requiring a battery replacement"
+      },
+      {
+        "risk": "Essential accessories like the charging cable or solar panel may be missing.",
+        "proof": "A photo showing all included accessories.",
+        "if_unproven": "priced as the fan unit only"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual fan out of the box to confirm its type (table vs. standing) and condition.",
+      "Video of the fan running on battery power.",
+      "Photo of all included accessories, specifically the charging cable and solar panel."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller's description of a 'table fan' contradicts the standing fan pictured on the box, and no photos of the actual item are provided to verify its existence, condition, or model."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 25254,
+    "input_tokens": 2361,
+    "output_tokens": 5474,
+    "cost_usd": 0.017603,
+    "replayed": false,
+    "fixture_key": "2962d9fcf0e9663ae2345f019dc5827e",
+    "error": null
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Orange-bodied compact camera, front view shows 'Canon Digital IXUS 9...15' partially legible and '10.0 MEGA PIXELS' text (photo 0)",
+      "Lens barrel marked 'CANON ZOOM LENS 5x IS' (photo 0, photo 2)",
+      "Flash window visible next to lens (photo 0)",
+      "Rear LCD screen displays 'Memory card error' message while camera is powered on, held in hand (photo 1)",
+      "Body shows scuffed/worn paint on edges and a dark, possibly corroded patch on lower left side of casing (photo 2)",
+      "Lens assembly is shown extended/zoomed out in photo 2, barrel appears clean but camera body around it is worn",
+      "Wrist strap attached, no memory card, battery, charger, or box visible in any photo"
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "compact digital camera",
+      "brand": "Canon",
+      "model": "Digital IXUS 95 IS",
+      "read_from": [
+        "photo 0 front text 'Canon Digital IXUS 9?15' and '10.0 MEGA PIXELS'",
+        "photo 2 lens ring 'Canon Digital IXUS 9?15'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Used and in good condition",
+        "verdict": "contradicted",
+        "evidence": "photo 1 shows a 'Memory card error' on screen and photo 2 shows worn/possibly corroded casing, inconsistent with 'good condition' as stated"
+      },
+      {
+        "claim": "Built in flash",
+        "verdict": "supported",
+        "evidence": "photo 0 shows a flash window beside the lens"
+      },
+      {
+        "claim": "10mp",
+        "verdict": "supported",
+        "evidence": "photo 0 text reads '10.0 MEGA PIXELS' on the front plate"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Memory card error could indicate a faulty card slot/contacts or a deeper electronics fault rather than just a bad card",
+        "proof": "A video of the camera powering on with a known-good memory card inserted, showing it reaches the shooting screen without error",
+        "if_unproven": "priced as not working (storage function unverified)"
+      },
+      {
+        "risk": "Dark patch on lower-left body in photo 2 could be corrosion from liquid exposure, which often causes hidden internal damage",
+        "proof": "A close-up, well-lit photo of that specific area and the battery compartment interior",
+        "if_unproven": "priced as cosmetic/structural damage present, lowering condition grade"
+      },
+      {
+        "risk": "Zoom lens mechanism and autofocus function not demonstrated in motion",
+        "proof": "A short video of the lens extending/retracting and autofocus engaging on a subject",
+        "if_unproven": "priced as lens/zoom function unverified, treated as potentially faulty"
+      },
+      {
+        "risk": "Battery and charger not shown; without them the camera cannot be used immediately",
+        "proof": "A photo of the included battery and charger alongside the camera",
+        "if_unproven": "priced as accessories missing, buyer must source separately"
+      },
+      {
+        "risk": "Actual image/photo quality (sensor, lens clarity) cannot be judged from product photos alone",
+        "proof": "A sample photo or video taken BY the camera, uploaded unedited",
+        "if_unproven": "priced as image quality unverified, assume lower-tier output"
+      }
+    ],
+    "proof_requests": [
+      "Video of camera powering on with a working memory card, reaching normal shooting screen (no error)",
+      "Close-up photos of the dark/worn patch on the lower-left body and the battery compartment",
+      "Video of lens zooming in/out and autofocus attempting to focus",
+      "Photo of battery and charger included in the sale",
+      "One unedited sample photo taken with the camera to confirm image output"
+    ],
+    "decision": "price",
+    "reason": "Camera is clearly identifiable as a Canon Digital IXUS 95 IS compact with visible flash and 10MP label, but the visible 'Memory card error' and worn/possibly corroded casing contradict the seller's 'good condition' claim, so it must be priced at worst case pending proof of normal function."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 23013,
+    "input_tokens": 3918,
+    "output_tokens": 1954,
+    "cost_usd": 0.027376,
+    "replayed": false,
+    "fixture_key": "4ba302a58f2559b42e669c602ea62707",
+    "error": null
+  }
+}

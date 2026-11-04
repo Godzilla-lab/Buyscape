@@ -1,0 +1,85 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: iPhone being held, screen on, showing camera app in Portrait mode. The front screen appears intact, no visible cracks. The phone has a notch, typical of iPhone Xs Max.",
+      "Photo 1: Settings > About screen clearly shows 'Model Name: iPhone Xs Max', 'Model Number: MT5X2LL/A', and 'iOS Version: 18.6'. Serial number is visible. The phone is powered on and responsive.",
+      "Photo 2: Settings > Battery screen shows battery percentage at 36%, with 'Battery Health & Charging' status as 'Unverified'. Battery usage graph is visible. The phone is still powered on and functional."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "iPhone Xs Max",
+      "brand": "Apple",
+      "model": "iPhone Xs Max",
+      "read_from": [
+        "photo 1 screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "64Gb iPhone Xsmax for sale",
+        "verdict": "unverified",
+        "evidence": "The model is confirmed as iPhone Xs Max (photo 1), but the storage capacity (64GB) is not visible in any photo. The 'About' screen does not show storage capacity."
+      },
+      {
+        "claim": "Broken Glass at the back",
+        "verdict": "unverified",
+        "evidence": "No photo shows the back of the phone. The front screen appears intact in photo 0, but the back glass is not visible."
+      },
+      {
+        "claim": "just changed new battery",
+        "verdict": "unverified",
+        "evidence": "Photo 2 shows 'Battery Health & Charging' as 'Unverified', which may indicate a recent battery replacement or a non-original battery. However, no proof of a new battery is visible."
+      },
+      {
+        "claim": "only portrait camera",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows the camera app with 'PORTRAIT' mode selected and active, indicating the portrait camera is functional. No other camera modes are shown, but the claim is consistent with the photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Back glass is broken, which may affect structural integrity and water resistance",
+        "proof": "A clear photo of the back of the phone showing the glass condition",
+        "if_unproven": "priced as having a broken back glass, which reduces value"
+      },
+      {
+        "risk": "Storage capacity is not 64GB as claimed",
+        "proof": "Photo of the 'About' screen showing the storage capacity section",
+        "if_unproven": "priced as unknown storage, which may be less than 64GB, reducing value"
+      },
+      {
+        "risk": "Battery is not new or is not original, despite claim",
+        "proof": "Photo of 'Battery Health' showing cycle count and maximum capacity percentage, or a receipt for battery replacement",
+        "if_unproven": "priced as battery health unknown, which may be degraded, reducing value"
+      },
+      {
+        "risk": "Phone may be blacklisted or have iCloud lock",
+        "proof": "Screenshot of 'Check Coverage' or 'Activation Lock' status, or a verification from Apple's website using the serial number",
+        "if_unproven": "priced as potentially locked or blacklisted, which reduces value significantly"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the back of the phone to verify the condition of the glass",
+      "Photo of the 'About' screen showing the storage capacity",
+      "Photo of 'Battery Health' showing cycle count and maximum capacity",
+      "Screenshot of 'Check Coverage' or 'Activation Lock' status, or verification from Apple's website"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is confirmed as iPhone Xs Max, but critical claims (storage capacity, back glass condition, battery status) are unverified. Hidden risks like iCloud lock or blacklisting cannot be ruled out without further proof. The item cannot be priced accurately without these details."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 76073,
+    "input_tokens": 3247,
+    "output_tokens": 907,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "8ea43e3ed6d59cb190db6b8b086b3efa",
+    "error": null
+  }
+}

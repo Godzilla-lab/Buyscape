@@ -1,0 +1,85 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Inverter welding machine with a digital display.",
+      "Brand 'TOTAL' is visible on the side and front panel.",
+      "Text on the side panel indicates '200A INVERTER WELDING MACHINE'.",
+      "Features listed on the unit include MMA, LIFT TIG, VRD, and IGBT technology.",
+      "The image appears to be a stock or marketing photo rather than a photo of the actual item for sale.",
+      "A watermark 'MURICH INVESTMENTS' is visible across the center.",
+      "The power plug shown in the bottom right is a US-style 3-pin plug, which is non-standard for Nigeria."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "inverter welding machine",
+      "brand": "TOTAL",
+      "model": "200A MMA/LIFT TIG",
+      "read_from": [
+        "photo 0 side panel",
+        "photo 0 front panel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "IGBT inverter technology",
+        "verdict": "supported",
+        "evidence": "photo 0 text on side and front"
+      },
+      {
+        "claim": "Input voltage: 1~220-240V",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows '110/220V' at the top, but the actual nameplate is not shown."
+      },
+      {
+        "claim": "Frequency: 50/60Hz",
+        "verdict": "supported",
+        "evidence": "photo 0 top right text"
+      },
+      {
+        "claim": "Output current: 15-200A",
+        "verdict": "supported",
+        "evidence": "photo 0 side panel and top text"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The photo is a stock/marketing image, not the actual item.",
+        "proof": "A photo of the actual unit in a real-world setting (e.g., on a floor or table).",
+        "if_unproven": "as fraud_suspected"
+      },
+      {
+        "risk": "Internal components may be damaged or the unit may not power on.",
+        "proof": "A video of the unit powered on and the display functioning.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Essential accessories like electrode holders and earth clamps may be missing.",
+        "proof": "A photo showing all included cables and accessories.",
+        "if_unproven": "as unit only"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual unit being sold, not a marketing image.",
+      "Photo of the technical specification plate on the back or bottom of the machine.",
+      "Video of the machine powered on showing the LCD screen active.",
+      "Photo of all included accessories (cables, clamps, mask)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller has provided a stock/marketing photo instead of a photo of the actual item. I cannot verify the condition, authenticity, or existence of the goods without real photos."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 8067,
+    "input_tokens": 2424,
+    "output_tokens": 1507,
+    "cost_usd": 0.005733,
+    "replayed": false,
+    "fixture_key": "a3729b3c0ee96fd5701103daabe8f1dc",
+    "error": null
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-8b-instruct",
+  "response": {
+    "observations": [
+      "Silver LG washing machine with dryer function, model 'DirectDrive 6/3kg' visible on control panel.",
+      "Sticker on left side says 'Washer+Dryer 2 in 1'.",
+      "Control panel shows illuminated display and buttons, including 'Direct Drive' and 'Inverter' labels.",
+      "Machine has visible dirt and dust on top and around door.",
+      "Floor is tiled and has water stains and debris.",
+      "No receipt or warranty card visible in photo."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "washing machine",
+      "brand": "LG",
+      "model": "DirectDrive 6/3kg",
+      "read_from": [
+        "photo 0 control panel",
+        "photo 0 sticker"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "LG Washing machine scrap but doesn\u2019t work and needs repair.",
+        "verdict": "contradicted",
+        "evidence": "photo 0 shows control panel with illuminated display and buttons, indicating it is powered on and functional."
+      },
+      {
+        "claim": "Barely used, bought new last year. No fault at all, the motor was never opened.",
+        "verdict": "unverified",
+        "evidence": "photo 0 shows visible dirt and dust, but cannot confirm usage or internal condition."
+      },
+      {
+        "claim": "Receipt and warranty card available.",
+        "verdict": "unverified",
+        "evidence": "photo 0 does not show any documents or cards."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The machine may not be functional despite the seller's claim of it being powered on.",
+        "proof": "A video showing the machine starting a cycle or a functional display.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The machine may have hidden faults or damage not visible in the photo.",
+        "proof": "A detailed photo of the interior drum and motor compartment.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The warranty card and receipt may be fake or not valid.",
+        "proof": "A clear photo of the receipt and warranty card.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Video of the machine operating.",
+      "Photo of the interior drum and motor compartment.",
+      "Photo of the receipt and warranty card."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The machine appears functional in the photo, contradicting the seller's claim that it doesn't work. Hidden risks include potential faults and fake documents, which require proof before pricing."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-8b-instruct",
+    "task": "testify_read",
+    "latency_ms": 6512,
+    "input_tokens": 2507,
+    "output_tokens": 596,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "d6da2b5097d0f7ffdec032b6a7bcef7c",
+    "error": null
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "A framed solar panel leans outdoors against stacked corrugated sheets.",
+      "The panel face shows dark cells with white busbars in a grid pattern.",
+      "A watermark reading \"NAGOTECH SOLAR\" is overlaid across the image.",
+      "Bottom edge shows phone camera text \"CAMON 30\" and exposure settings, not panel markings.",
+      "No brand, model, or wattage label is readable on the panel in photo 0."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "direct used Canadian solar panel 350watts 60cell",
+        "verdict": "unverifiable_remote",
+        "evidence": "No label, datasheet, or marking is readable in photo 0; the CAMON 30 text is a phone camera watermark, not the panel brand."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Wattage and model are unknown; the seller's 350W claim cannot be verified",
+        "proof": "Close-up photo of the label on the back of the panel showing brand, model, and rated wattage",
+        "if_unproven": "as an unrated unknown-capacity panel"
+      },
+      {
+        "risk": "Electrical performance is unproven; the panel may not produce power",
+        "proof": "Video of the panel in sunlight connected to a multimeter or charge controller showing voltage and current",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Hidden physical defects such as cracks, hot spots, or delamination",
+        "proof": "Close-up photos of the panel surface, frame, and junction box",
+        "if_unproven": "as physically damaged"
+      },
+      {
+        "risk": "Canadian origin and brand are unproven",
+        "proof": "Label or documentation showing Canadian manufacture or brand",
+        "if_unproven": "as a generic or unknown-origin panel"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the label on the back of the panel showing brand, model, and wattage",
+      "Video of the panel producing power under sunlight with a multimeter reading",
+      "Close-up photos of the panel surface and frame for cracks or defects"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The panel's brand, model, and wattage are not readable in the photo, so the price-setting identity is missing; the seller's 350W Canadian claim cannot be verified remotely."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 18345,
+    "input_tokens": 1611,
+    "output_tokens": 3277,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "de679a77478efdf24ac258e4b1059060",
+    "error": null
+  }
+}

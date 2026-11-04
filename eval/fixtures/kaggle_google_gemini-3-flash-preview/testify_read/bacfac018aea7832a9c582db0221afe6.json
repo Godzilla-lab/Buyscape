@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Four solar panels are installed on a corrugated metal roof ridge.",
+      "The solar cells have rounded corners/diamond patterns, characteristic of monocrystalline panels.",
+      "A watermark 'BENDAN SOLAR ENERGY' is visible across the center of the image.",
+      "No manufacturer labels, logos, or technical specification plates are visible on the panels.",
+      "The photo is taken from a distance, preventing inspection of the surface for micro-cracks."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "300W",
+        "verdict": "unverified",
+        "evidence": "The technical specification label on the back of the panel is not shown."
+      },
+      {
+        "claim": "Suntex",
+        "verdict": "unverified",
+        "evidence": "No brand logo is visible on the panels in photo 0."
+      },
+      {
+        "claim": "monocrystalline",
+        "verdict": "supported",
+        "evidence": "The dark cells with diamond-shaped gaps in photo 0 are typical of monocrystalline silicon."
+      },
+      {
+        "claim": "high-efficiency",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The actual wattage may be significantly lower than the 300W claimed.",
+        "proof": "A clear photo of the manufacturer's specification sticker (backplate) on the rear of a panel.",
+        "if_unproven": "priced as a generic 100W panel"
+      },
+      {
+        "risk": "The photo may be a generic or stolen image from another company, as indicated by the watermark.",
+        "proof": "A photo of the panels with a handwritten note showing the seller's name and the current date.",
+        "if_unproven": "priced as a high-risk or potentially non-existent item"
+      },
+      {
+        "risk": "Internal cell damage or 'snail trails' that reduce output.",
+        "proof": "High-resolution close-up photos of the glass surface of each panel.",
+        "if_unproven": "priced as degraded/low output"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the technical specification label on the back of the panel showing brand and wattage.",
+      "A photo of the panels on the roof with a handwritten note including the date and seller's name to verify possession.",
+      "Close-up photos of the panel surfaces to check for cracks or delamination."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The provided photo is watermarked by a third party and contains no visible branding or technical data to verify the seller's claims of wattage and brand."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 14073,
+    "input_tokens": 2365,
+    "output_tokens": 2543,
+    "cost_usd": 0.008811,
+    "replayed": false,
+    "fixture_key": "bacfac018aea7832a9c582db0221afe6",
+    "error": null
+  }
+}

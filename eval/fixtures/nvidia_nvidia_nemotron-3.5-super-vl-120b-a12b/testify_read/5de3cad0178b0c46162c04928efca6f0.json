@@ -1,0 +1,101 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Silver double-cab pickup truck shown in front, front-three-quarter, and rear views.",
+      "Toyota emblem visible on the front grille in photos 0 and 1.",
+      "\"TACOMA\" badge visible on the left side of the tailgate in photo 2.",
+      "\"V6\" badge visible on the right side of the tailgate in photo 2.",
+      "Handwritten \"No Start 963\" on the rear window in photo 2.",
+      "Black alloy wheels and side steps visible in photo 1.",
+      "Watermarks \"POSTED ON JIJI\" and \"TEEKAYWHEELS\" appear across the photos."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "double cab pickup truck",
+      "brand": "Toyota",
+      "model": "Tacoma",
+      "read_from": [
+        "photo 0 front grille emblem",
+        "photo 2 tailgate badging"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "2024 Toyota Tacoma TRD 4x4",
+        "verdict": "unverified",
+        "evidence": "Toyota emblem and Tacoma badge are readable, but year 2024, TRD trim, and 4x4 are not legible in any photo."
+      },
+      {
+        "claim": "V6 engine",
+        "verdict": "supported",
+        "evidence": "V6 badge visible on the tailgate in photo 2; engine operation itself is not shown."
+      },
+      {
+        "claim": "push to start",
+        "verdict": "unverifiable_remote",
+        "evidence": "No interior, dashboard, or key fob is shown in any photo."
+      },
+      {
+        "claim": "moonroof",
+        "verdict": "unverifiable_remote",
+        "evidence": "No roof interior or moonroof is visible in any photo."
+      },
+      {
+        "claim": "verified duty",
+        "verdict": "unverifiable_remote",
+        "evidence": "No customs documents, title, or duty receipts are shown in any photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine does not start; \"No Start\" is handwritten on the rear window.",
+        "proof": "Video of a cold start and sustained idle.",
+        "if_unproven": "as non-running"
+      },
+      {
+        "risk": "Accident or frame damage not visible from exterior walkaround photos.",
+        "proof": "Undercarriage, frame rail, and paint-meter readings.",
+        "if_unproven": "as structurally damaged or unknown"
+      },
+      {
+        "risk": "Odometer reading unknown; mileage could be high.",
+        "proof": "Dashboard instrument cluster photo showing mileage.",
+        "if_unproven": "as unknown or high mileage"
+      },
+      {
+        "risk": "Customs duty status unverified despite seller claim.",
+        "proof": "Duty payment documents or vehicle title.",
+        "if_unproven": "as duty-unpaid or uncleared"
+      },
+      {
+        "risk": "TRD trim not confirmed; vehicle could be a base model.",
+        "proof": "Close-up of TRD badge or VIN plate.",
+        "if_unproven": "as base trim"
+      }
+    ],
+    "proof_requests": [
+      "Video of the engine starting and running.",
+      "Dashboard instrument cluster showing the odometer.",
+      "Undercarriage and frame photos.",
+      "Customs duty or title documents.",
+      "Close-up of any TRD badge and the VIN plate."
+    ],
+    "decision": "price",
+    "reason": "The vehicle is identifiable as a Toyota Tacoma V6 double cab from badges in the photos; even at worst case\u2014non-running due to the \"No Start\" writing and all seller claims unproven\u2014it can be priced as a non-running Tacoma V6."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 34764,
+    "input_tokens": 3485,
+    "output_tokens": 3660,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "5de3cad0178b0c46162c04928efca6f0",
+    "error": null
+  }
+}

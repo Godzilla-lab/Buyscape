@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Three photos show large stacks of used tires leaning against a wall/doorway, apparently in a tire shop or warehouse.",
+      "Tread patterns differ between tires in the stacks, suggesting a mixed lot of different brands/models rather than a single matching set.",
+      "No sidewall text, size markings, or brand names are legible in any photo.",
+      "No wheel rim is visible in any of the three photos, despite the seller mentioning 'rim'.",
+      "Tires show visible wear, some cracking on sidewalls, and dust/dirt consistent with used/second-hand stock.",
+      "Watermarks ('POSTED ON JIJI', 'IKWE ANTHONY') overlay the images; these are platform/seller marks, not product information."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used car tires (tyre stock, size/brand unreadable)",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Belgium tires",
+        "verdict": "unverifiable_remote",
+        "evidence": "No country-of-origin marking, DOT code, or brand text is legible in photo 0, 1, or 2; 'Belgium' is also a common trade term in Nigeria for used European-import tires, not a verifiable fact from the image."
+      },
+      {
+        "claim": "and rim",
+        "verdict": "contradicted",
+        "evidence": "No rim/wheel is visible in photo 0, photo 1, or photo 2 \u2014 only stacked tires are shown."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual tire size (rim diameter, width, profile) is unknown, which strongly affects value.",
+        "proof": "Close-up photo of a sidewall showing the size code (e.g., 205/55R16) on the specific tire(s) being sold.",
+        "if_unproven": "priced at the low end for an unspecified/common used tire size"
+      },
+      {
+        "risk": "Tread depth and real wear level cannot be judged precisely from a distance/stack shot.",
+        "proof": "Close-up of tread with a depth gauge or coin showing groove depth on each tire offered.",
+        "if_unproven": "priced as heavily worn, near end-of-life"
+      },
+      {
+        "risk": "Age of tires (manufacture date) unknown; old rubber can be unsafe even with tread.",
+        "proof": "Clear photo of the DOT date code on the sidewall.",
+        "if_unproven": "priced as old/unknown-age stock"
+      },
+      {
+        "risk": "It is unclear which exact tires (how many, which size/model) are included in this specific listing versus just being general shop inventory.",
+        "proof": "A photo or video singling out the specific set of tires (and rim, if included) that will be sold to the buyer.",
+        "if_unproven": "priced as a single generic used tire, not a matched set, and rim excluded"
+      },
+      {
+        "risk": "No rim is shown despite being mentioned in the title.",
+        "proof": "A photo clearly showing the rim(s) included in the sale.",
+        "if_unproven": "priced as tires only, no rim included"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the sidewall size/DOT code on the actual tire(s) for sale",
+      "Photo of the rim(s) claimed to be included",
+      "Photo showing tread depth with a gauge or coin",
+      "Confirmation of exact quantity and whether it's a matched set or mixed"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photos show only a generic stack of mixed used tires with no legible size, brand, or age markings, and no rim is visible despite being claimed; the size code that would set even a worst-case price cannot be read from any image."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 20139,
+    "input_tokens": 3380,
+    "output_tokens": 1736,
+    "cost_usd": 0.020961,
+    "replayed": false,
+    "fixture_key": "af3d6a51909a44624a7c0928448bdaf7",
+    "error": null
+  }
+}

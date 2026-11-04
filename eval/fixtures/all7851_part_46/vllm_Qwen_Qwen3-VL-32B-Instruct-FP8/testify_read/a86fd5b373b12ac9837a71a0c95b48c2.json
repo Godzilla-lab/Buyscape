@@ -1,0 +1,97 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the bottom of a laptop with 'Latitude 3501' printed on it.",
+      "The bottom also has a label with model number '3501' and serial number '34P17R145'.",
+      "Photo 1 shows the front of the laptop with a black screen, a Dell logo above the keyboard, and a standard QWERTY keyboard.",
+      "The keyboard appears to be non-backlit; no visible backlighting is present in the photo.",
+      "The laptop is placed on a wooden stand in a well-lit indoor environment.",
+      "The seller claims it is an 'HP ProBook' with 'Core i5', '8GB RAM', '500GB HDD', and a '6th generation keyboard light'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Dell",
+      "model": "Latitude 3501",
+      "read_from": [
+        "photo 0 bottom panel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP ProBook",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows 'Latitude 3501' and Dell branding; HP is not visible anywhere."
+      },
+      {
+        "claim": "Core i5",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible CPU label or system specs in photos; cannot confirm from images alone."
+      },
+      {
+        "claim": "8GB RAM",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible RAM label or system specs; cannot confirm from images alone."
+      },
+      {
+        "claim": "500GB HDD",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible storage label or system specs; cannot confirm from images alone."
+      },
+      {
+        "claim": "6th generation keyboard light",
+        "verdict": "contradicted",
+        "evidence": "Photo 1 shows a standard keyboard with no visible backlighting; no indication of keyboard light."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Incorrect brand claim (HP ProBook instead of Dell Latitude)",
+        "proof": "Photo 0 clearly shows Dell Latitude 3501 branding; seller's claim is false.",
+        "if_unproven": "Priced as a Dell Latitude 3501, not an HP ProBook, which affects value."
+      },
+      {
+        "risk": "CPU not Core i5 (could be lower tier or different brand)",
+        "proof": "Photo of BIOS screen or system information showing CPU model.",
+        "if_unproven": "Priced as a generic laptop with unknown CPU, which reduces value."
+      },
+      {
+        "risk": "RAM not 8GB (could be less or more)",
+        "proof": "Photo of system information or BIOS showing RAM size.",
+        "if_unproven": "Priced as a laptop with unknown RAM, which reduces value."
+      },
+      {
+        "risk": "Storage not 500GB HDD (could be SSD or smaller HDD)",
+        "proof": "Photo of system information or BIOS showing storage type and size.",
+        "if_unproven": "Priced as a laptop with unknown storage, which reduces value."
+      },
+      {
+        "risk": "Keyboard not backlit (contradicted by photo)",
+        "proof": "Photo of keyboard with backlight turned on.",
+        "if_unproven": "Priced as a non-backlit keyboard, which reduces value."
+      }
+    ],
+    "proof_requests": [
+      "Photo of BIOS or system information showing CPU, RAM, and storage details.",
+      "Photo of keyboard with backlight turned on (if claimed to be backlit).",
+      "Photo of the laptop's screen showing the operating system and system specs."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The laptop is clearly a Dell Latitude 3501, contradicting the seller's claim of it being an HP ProBook. Key specifications like CPU, RAM, and storage are unverifiable from current photos. The keyboard light claim is contradicted by the photo. Without proof of specs, the item cannot be accurately priced."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 78754,
+    "input_tokens": 2590,
+    "output_tokens": 944,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "a86fd5b373b12ac9837a71a0c95b48c2",
+    "error": null
+  }
+}

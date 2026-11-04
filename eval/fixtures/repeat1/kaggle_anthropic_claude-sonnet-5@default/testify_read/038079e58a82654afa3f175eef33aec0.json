@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows two clear-lens projector headlamp units (left and right), not taillights, lying on a tiled floor.",
+      "Photo 1 shows a plastic/chrome front grille with a visible oval Toyota emblem in the center.",
+      "No taillight (rear lamp) is visible in either photo.",
+      "No Prado-specific badge, part number, or VIN tag is visible in either photo.",
+      "Items show general wear (dust, scuffed tabs) but no obvious cracks in the lens or grille slats from this angle."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "front grille and pair of headlamp units (SUV)",
+      "brand": "Toyota",
+      "model": null,
+      "read_from": [
+        "photo 1 Toyota emblem"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Prado Jeep front grill and taillight",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows headlights, not taillights; no Prado badge or model-specific marking is visible in either photo, only a generic Toyota emblem in photo 1."
+      },
+      {
+        "claim": "working condition",
+        "verdict": "unverifiable_remote",
+        "evidence": "No power-on test, video, or bulb/connector close-up is shown; condition cannot be judged from static photos."
+      },
+      {
+        "claim": "available in GRA Ikeja",
+        "verdict": "unverifiable_remote",
+        "evidence": "Location claim cannot be confirmed from photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Item mismatch: seller describes a taillight but photos show headlights, so the actual rear lamp (if one exists) is unseen and unpriced.",
+        "proof": "A clear photo of the actual taillight unit(s) being sold.",
+        "if_unproven": "price only the grille and headlights seen; exclude any taillight value"
+      },
+      {
+        "risk": "Fitment uncertain: emblem shown is generic Toyota, not confirmed as Land Cruiser Prado specific grille/headlamp shape or part number.",
+        "proof": "Close-up of OEM part number sticker/stamp on grille or headlamp housing, or a photo matching Prado body lines.",
+        "if_unproven": "price as generic Toyota SUV part, not Prado-specific premium part"
+      },
+      {
+        "risk": "Electrical/working condition unproven (bulbs, wiring, connectors, no cracks in lens).",
+        "proof": "Video of headlamps lighting up when powered, and close-up of connector pins and lens for cracks.",
+        "if_unproven": "price as non-working/for-parts condition"
+      },
+      {
+        "risk": "Mounting tabs or brackets could be broken (common failure point, hard to see in these angles).",
+        "proof": "Close-up photos of all mounting tabs and brackets on both headlamp units and grille.",
+        "if_unproven": "price assuming at least one broken tab per unit"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual taillight(s) being sold, since none are shown.",
+      "Close-up of any part number or Prado badge confirming model fitment.",
+      "Video of headlamps powered on to show they illuminate.",
+      "Close-up photos of mounting tabs/brackets and lens surfaces for cracks or damage."
+    ],
+    "decision": "price",
+    "reason": "The grille and headlamp units are clearly identifiable by type and Toyota brand from the photos, so they can be priced at worst case (unconfirmed Prado fitment, unproven working condition, no visible taillight despite the claim)."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 23632,
+    "input_tokens": 5065,
+    "output_tokens": 2217,
+    "cost_usd": 0.029141,
+    "replayed": false,
+    "fixture_key": "038079e58a82654afa3f175eef33aec0",
+    "error": null
+  }
+}

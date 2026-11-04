@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black car battery with a label reading 'AUTOCRAFT PLATINUM' and a small sticker with a blue wave logo.",
+      "The battery has two terminals with black plastic handles and some red paint marks near the terminals.",
+      "Photo 1 shows the top of the battery with warning labels, including 'DO NOT' and 'EASY TO HANDLE', and a label with '12V 100Ah' and '95 160' visible.",
+      "The battery appears used, with visible dirt, scratches, and some corrosion near the terminals.",
+      "The brand 'AUTOCRAFT' is clearly visible on both photos, and 'PLATINUM' is part of the label name.",
+      "The label in photo 1 shows '12V 100Ah', matching the seller's claim of '100ah battery'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car battery",
+      "brand": "AUTOCRAFT",
+      "model": "PLATINUM",
+      "read_from": [
+        "photo 0 label",
+        "photo 1 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "100ah battery",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows '12V 100Ah' on the label."
+      },
+      {
+        "claim": "Direct tokumbo",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visual proof of 'Direct tokumbo' in the photos; this is a seller claim about source or distribution."
+      },
+      {
+        "claim": "4 months warranty",
+        "verdict": "unverifiable_remote",
+        "evidence": "No warranty document or label visible in the photos; cannot verify from images alone."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery may be old or degraded, affecting performance or lifespan.",
+        "proof": "A close-up of the battery's date code or manufacturing date, or a load test video.",
+        "if_unproven": "priced as used and potentially degraded, with lower value."
+      },
+      {
+        "risk": "Terminal corrosion or internal damage not visible from outside.",
+        "proof": "A video showing the battery being connected to a charger or load tester, or close-up of internal cells if removable.",
+        "if_unproven": "priced as possibly not working or with reduced capacity."
+      },
+      {
+        "risk": "Battery may have been previously used in a vehicle and is not fully charged or functional.",
+        "proof": "A video of the battery being tested with a multimeter or load tester.",
+        "if_unproven": "priced as not working until proven functional."
+      }
+    ],
+    "proof_requests": [
+      "A close-up photo or video of the battery's manufacturing date or date code.",
+      "A video showing the battery being tested with a multimeter or load tester to confirm voltage and health.",
+      "A photo of the warranty document or proof of warranty terms."
+    ],
+    "decision": "price",
+    "reason": "The battery is identifiable as an AUTOCRAFT PLATINUM 12V 100Ah model, and the capacity claim is supported by the label. While warranty and source are unverifiable, the item can be priced at its worst case as used and potentially degraded, with risks noted. The photos show a used condition, and the core identity and capacity are confirmed."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 62290,
+    "input_tokens": 1727,
+    "output_tokens": 768,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "ee62d4bfc874168caacd414053f2720f",
+    "error": null
+  }
+}

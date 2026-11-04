@@ -1,0 +1,97 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: A silver laptop with a black keyboard and trackpad, held open. The bezel below the screen has 'MacBook Pro' printed on it. The screen is off and reflective. The background shows a glass display case with HP boxes and a watermark 'VICKY COMPUTERS EMAB'.",
+      "Photo 1: The back of the same silver laptop, showing the Apple logo. A yellow sticky note is taped to the top left corner with handwritten text: 'MacBook Pro 2018 Core i7 16gb Ram 512 SSD Touch Bar 13 inch'. The laptop is held at an angle, showing the hinge and side ports. The background includes a sign with 'DIRECT LONDON' and more HP boxes.",
+      "Photo 2: The bottom of the laptop, showing the four rubber feet and a label with regulatory markings. The same yellow sticky note is visible. The background is consistent with the previous photo, with HP boxes and the 'VICKY COMPUTERS EMAB' watermark.",
+      "All photos show the same item from different angles. The watermark 'VICKY COMPUTERS EMAB' appears in all photos, suggesting a physical store in Emab Plaza, Wuse 2, Abuja."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "MacBook Pro",
+      "brand": "Apple",
+      "model": "MacBook Pro 2018",
+      "read_from": [
+        "photo 0 screen bezel",
+        "photo 1 yellow sticky note"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "MacBook Pro 2018",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows 'MacBook Pro' on the bezel, and photo 1 has 'MacBook Pro 2018' on the yellow sticky note."
+      },
+      {
+        "claim": "Core i7",
+        "verdict": "unverified",
+        "evidence": "The yellow sticky note in photo 1 and 2 claims 'Core i7', but there is no visible hardware or system information to confirm this. The model year 2018 is consistent with Core i7 options, but not proof."
+      },
+      {
+        "claim": "16gb ram",
+        "verdict": "unverified",
+        "evidence": "The sticky note in photo 1 and 2 claims '16gb Ram', but RAM is not visible. This cannot be verified remotely."
+      },
+      {
+        "claim": "512 SSD",
+        "verdict": "unverified",
+        "evidence": "The sticky note in photo 1 and 2 claims '512 SSD', but the storage is not visible. Cannot be verified remotely."
+      },
+      {
+        "claim": "13 inches",
+        "verdict": "supported",
+        "evidence": "The sticky note in photo 1 and 2 states '13 inch', and the physical size of the laptop in photo 0 is consistent with a 13-inch MacBook Pro."
+      },
+      {
+        "claim": "Touch Bar",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows a narrow strip above the keyboard, which is the Touch Bar. The sticky note also confirms 'Touch Bar'."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The laptop may not have the claimed Core i7 processor, 16GB RAM, or 512GB SSD.",
+        "proof": "A screenshot of the System Report (About This Mac > System Report) showing the processor, RAM, and storage details.",
+        "if_unproven": "Priced as if it has lower specs (e.g., Core i5, 8GB RAM, 256GB SSD), which would significantly reduce value."
+      },
+      {
+        "risk": "The screen may have damage, dead pixels, or backlight issues not visible in photos.",
+        "proof": "A video of the screen turning on, displaying a white screen, and scrolling through different colors and text.",
+        "if_unproven": "Priced as if the screen has defects, which reduces value."
+      },
+      {
+        "risk": "The laptop may have physical damage, such as dents, scratches, or hinge issues, not fully visible in the photos.",
+        "proof": "A 360-degree video or close-up photos of all edges, corners, and hinges.",
+        "if_unproven": "Priced as if it has cosmetic damage, which reduces value."
+      },
+      {
+        "risk": "The battery may be degraded or not original.",
+        "proof": "A screenshot of the battery health information from System Report.",
+        "if_unproven": "Priced as if the battery is degraded (e.g., <80% capacity), which reduces value."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of System Report showing processor, RAM, and storage details.",
+      "Video of the screen turning on and displaying white, black, and color patterns.",
+      "360-degree video or close-up photos of all edges, corners, and hinges.",
+      "Screenshot of battery health information."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a MacBook Pro 2018 with a Touch Bar, and the size is supported. However, critical specifications like processor, RAM, and SSD cannot be verified from the photos alone. Hidden risks include screen defects, physical damage, and battery health. Without proof of these, the item cannot be priced accurately and must be asked for proof."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 98229,
+    "input_tokens": 3262,
+    "output_tokens": 1220,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "c34b998221145c17defb30b4cc9eeb2a",
+    "error": null
+  }
+}

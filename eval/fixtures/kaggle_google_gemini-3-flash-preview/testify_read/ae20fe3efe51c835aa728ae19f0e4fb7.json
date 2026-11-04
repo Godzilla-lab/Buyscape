@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the front of a gold-colored retail box.",
+      "The box is clearly marked 'Nikon' and 'D7100'.",
+      "The actual camera body or any accessories are not visible.",
+      "A watermark for 'CDICSON BUSINESS WORLD' and 'POSTED ON JIJI' is visible on the image."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DSLR camera",
+      "brand": "Nikon",
+      "model": "D7100",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Nikon D7100",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "24.1-megapixel DX-format",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a standard specification for this model, but the camera itself is not shown."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, lower-value item.",
+        "proof": "Photos of the actual camera body and serial number.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The camera may be non-functional or have significant sensor damage.",
+        "proof": "A video of the camera powering on and taking a photo, plus a clear shot of the sensor.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "High shutter count indicating the end of the device's lifespan.",
+        "proof": "A screenshot of a shutter count tool using a recent JPEG from the camera.",
+        "if_unproven": "as heavily used/near end of life"
+      }
+    ],
+    "proof_requests": [
+      "Photos of the actual camera body from all sides.",
+      "Photo of the camera turned on with the screen active.",
+      "Photos of any included lenses, batteries, or chargers.",
+      "A photo of the camera's sensor with the lens/cap removed.",
+      "The current shutter count."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail box is visible. No assessment of the camera's existence, condition, or functionality can be made from a photo of packaging alone."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 7598,
+    "input_tokens": 2420,
+    "output_tokens": 1400,
+    "cost_usd": 0.00541,
+    "replayed": false,
+    "fixture_key": "ae20fe3efe51c835aa728ae19f0e4fb7",
+    "error": null
+  }
+}

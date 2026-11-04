@@ -1,0 +1,66 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Black tower UPS with BLUE GATE embossed on the top front panel",
+      "Blue vertical control strip with power button and three indicator lights",
+      "UK three-pin power plug connected to the top inlet in photo 1",
+      "No model number, capacity rating, or specification label visible in either photo",
+      "Rear panel and battery compartment not shown"
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "UPS",
+      "brand": "BLUE GATE",
+      "model": null,
+      "read_from": [
+        "photo 0 front",
+        "photo 1 top"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "UPS available",
+        "verdict": "supported",
+        "evidence": "photo 0 and photo 1 show a Blue Gate UPS"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery may be dead or unable to hold charge",
+        "proof": "video of the UPS running a load on battery with mains disconnected",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Unit may not power on or supply output despite indicator lights",
+        "proof": "video showing the UPS turning on and powering a connected device",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Capacity or VA rating unknown; model cannot be read from photos",
+        "proof": "photo of the specification label on the rear or base showing model and VA rating",
+        "if_unproven": "priced as lowest-capacity Blue Gate tower UPS"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the specification label on the rear or base showing model number and VA capacity",
+      "Video of the UPS powering on and running a device on battery mode"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The Blue Gate brand is visible but the model and capacity label are missing, and UPS value depends on capacity; functionality also cannot be confirmed from still photos."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 18512,
+    "input_tokens": 2859,
+    "output_tokens": 2295,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "4b248ace781508ac5a4c2ce7dd56e639",
+    "error": null
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows a retail box for a Bona solar panel.",
+      "The box is labeled 'Bona' and 'DC 12V 40W'.",
+      "The box is sealed with tape and appears to be in a warehouse or shop setting.",
+      "The actual solar panel is not visible in the photo."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "solar panel",
+      "brand": "Bona",
+      "model": "40W",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Bona 40W solar panel",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "12V\u201318V mono solar charger",
+        "verdict": "unverified",
+        "evidence": "The panel itself is not visible to confirm the cell type or voltage range beyond the 12V label on the box."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different item.",
+        "proof": "A photo of the solar panel outside of its packaging.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The solar cells may be cracked or the frame damaged.",
+        "proof": "A clear, close-up photo of the front and back of the solar panel.",
+        "if_unproven": "as damaged"
+      },
+      {
+        "risk": "The panel may not produce the advertised electrical output.",
+        "proof": "A video showing a multimeter test of the panel's voltage in direct sunlight.",
+        "if_unproven": "as non-functional"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual solar panel removed from the box.",
+      "Photo of the manufacturer's specification sticker on the back of the panel.",
+      "Video of the panel being tested with a multimeter in sunlight."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the packaging is visible. The solar panel itself must be seen to verify its existence, condition, and that it matches the box description."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 15979,
+    "input_tokens": 2387,
+    "output_tokens": 3504,
+    "cost_usd": 0.011706,
+    "replayed": false,
+    "fixture_key": "25f77245adb41cb6819445c89df525f8",
+    "error": null
+  }
+}

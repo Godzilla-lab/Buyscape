@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "No new photos were provided after the seller reply.",
+      "The only available image remains photo 0 showing solar panels, with no readable wattage/cell-count/brand label visible."
+    ],
+    "identity": {
+      "status": "unknown",
+      "kind": null,
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "It's original 650 Watts 144 cell direct Canadian used solar panel",
+        "verdict": "unverifiable_remote",
+        "evidence": "Seller text only; photo 0 does not show a readable spec label confirming 650W/144-cell or Canadian origin."
+      },
+      {
+        "claim": "Battery is new, holds charge for 8 hours",
+        "verdict": "unverifiable_remote",
+        "evidence": "No battery is shown in photo 0 and no test evidence (meter/runtime) is provided."
+      },
+      {
+        "claim": "Never repaired",
+        "verdict": "unverifiable_remote",
+        "evidence": "No backsheet/repair indicators or documentation shown in photo 0."
+      },
+      {
+        "claim": "\"I tested it myself yesterday, everything I said is true\"",
+        "verdict": "unverifiable_remote",
+        "evidence": "Test claim is not supported by any measurement screenshot/video or new photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Rated wattage/cell count may not match 650W/144-cell; without a label, the true output could be lower.",
+        "proof": "Close-up photo of the panel\u2019s nameplate/spec sticker showing brand/model, rated watts (W), and cell count (or a clear back-of-panel label).",
+        "if_unproven": "Price as used solar panels with unknown/possibly lower rating (worst case: treat as not meeting the stated 650W)."
+      },
+      {
+        "risk": "Battery capacity/performance may be less than claimed; \"8 hours\" depends on load and battery health.",
+        "proof": "Battery label/spec photo (voltage and capacity in Ah/Wh) plus a short video of the battery powering a clearly stated load with runtime measurement.",
+        "if_unproven": "Price as a battery with unknown capacity (worst case: assume reduced/uncertain performance)."
+      },
+      {
+        "risk": "Quantity mismatch: photo 0 appears to show multiple panels, but seller text sounds like a single 650W panel; total value depends on exact count.",
+        "proof": "Photo showing the full included set laid out with an exact count, plus battery quantity/model.",
+        "if_unproven": "Price for the minimum implied item set (worst case: fewer panels than shown)."
+      },
+      {
+        "risk": "Panel condition (cracks, water ingress, junction box issues) not fully assessable from the single angle.",
+        "proof": "Close-ups of junction boxes/connectors and corners/edges; backsheet photo if possible.",
+        "if_unproven": "Price as panels needing inspection (worst case: assume at least one panel may be defective)."
+      }
+    ],
+    "proof_requests": [
+      "Send clear close-up photos of the panel spec/nameplate (brand/model, rated watts, cell count, serial).",
+      "Send photos of the battery itself and its label/spec (voltage and capacity).",
+      "Send proof of the \"8 hours\" test: video or screenshot showing battery connected to a known load with runtime measurement.",
+      "Confirm exact quantity of panels included (count) and battery quantity/model with photos."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller\u2019s assertion of testing is not evidence, and no new photos were provided. With photo 0 lacking readable specs and no battery shown, a worst-case price cannot be set reliably."
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_read",
+    "latency_ms": 5694,
+    "input_tokens": 2258,
+    "output_tokens": 699,
+    "cost_usd": 0.001325,
+    "replayed": false,
+    "fixture_key": "e114826950117c87a804c60b3dcff2a2",
+    "error": null
+  }
+}

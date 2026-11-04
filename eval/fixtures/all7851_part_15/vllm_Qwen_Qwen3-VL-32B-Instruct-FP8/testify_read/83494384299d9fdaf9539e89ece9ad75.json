@@ -1,0 +1,86 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the keyboard and palm rest of a silver laptop. The word 'ELITEBOOK' is visible above the keyboard. A blue 'Intel vPro' sticker is on the palm rest. The keyboard has black keys with white lettering, and the touchpad is large and silver.",
+      "Photo 1 shows the closed lid of the laptop. The HP logo is centered. A yellow sticky note is attached, handwritten: 'HP elitebook 830 G10 core i5 13th gen 16/512GB X360 Touch screen'. An orange sticker with 'G10' is on the top right corner.",
+      "Photo 2 shows the back edge of the closed laptop lid, with the same orange 'G10' sticker visible. The laptop appears to be silver with a matte finish. The hinge area is visible, suggesting a 360-degree rotation capability."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "EliteBook 830 G10",
+      "read_from": [
+        "photo 1 sticky note",
+        "photo 2 orange sticker",
+        "photo 0 'ELITEBOOK' text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP EliteBook 830 G10",
+        "verdict": "supported",
+        "evidence": "Photo 1 sticky note and photo 2 orange sticker both show 'G10', and photo 0 shows 'ELITEBOOK' branding."
+      },
+      {
+        "claim": "Core i5 13th gen",
+        "verdict": "unverified",
+        "evidence": "The claim is written on the sticky note in photo 1, but no hardware label or system information is visible in any photo to confirm the CPU."
+      },
+      {
+        "claim": "16/512GB",
+        "verdict": "unverified",
+        "evidence": "The sticky note in photo 1 states '16/512GB', but no internal components or system specs are visible to verify RAM or storage."
+      },
+      {
+        "claim": "X360 Touch screen",
+        "verdict": "unverified",
+        "evidence": "The sticky note in photo 1 mentions 'X360 Touch screen', and photo 2 shows the hinge which may support 360-degree rotation, but no screen is visible to confirm touch functionality or rotation capability."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The CPU is not a 13th gen Core i5",
+        "proof": "A photo of the system information screen (e.g., Windows About or BIOS) showing the CPU model.",
+        "if_unproven": "priced as a lower-spec model or not working"
+      },
+      {
+        "risk": "The RAM is not 16GB or storage is not 512GB",
+        "proof": "A photo of the system information screen showing installed RAM and storage capacity.",
+        "if_unproven": "priced as a lower-spec model"
+      },
+      {
+        "risk": "The screen is not touch-enabled or does not support 360-degree rotation",
+        "proof": "A video or photo showing the screen being touched and the laptop being rotated to tablet mode.",
+        "if_unproven": "priced as a non-touch, non-convertible laptop"
+      },
+      {
+        "risk": "The laptop has physical damage or wear not visible in photos",
+        "proof": "A full 360-degree video or photo set showing all sides, hinges, ports, and screen bezels.",
+        "if_unproven": "priced with a discount for potential hidden damage"
+      }
+    ],
+    "proof_requests": [
+      "A photo of the system information screen showing CPU, RAM, and storage details.",
+      "A video or photo showing the screen being touched and the laptop rotated to tablet mode.",
+      "A full 360-degree photo set showing all sides, hinges, ports, and screen bezels."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identifiable as HP EliteBook 830 G10 from the photos, but key specifications (CPU, RAM, storage, touch screen, 360-degree rotation) are only claimed on a sticky note and cannot be verified from the current photos. Hidden risks related to specs and physical condition require additional proof before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 84775,
+    "input_tokens": 2799,
+    "output_tokens": 987,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "83494384299d9fdaf9539e89ece9ad75",
+    "error": null
+  }
+}

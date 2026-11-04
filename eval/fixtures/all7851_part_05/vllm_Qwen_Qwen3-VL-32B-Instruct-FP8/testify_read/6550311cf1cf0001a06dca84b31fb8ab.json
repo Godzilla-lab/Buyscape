@@ -1,0 +1,95 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the 'Battery Health' screen of an iPhone.",
+      "The screen indicates 'Maximum Capacity: 90%'.",
+      "The 'Peak Performance Capability' section states the battery is supporting normal peak performance.",
+      "The battery is at 3% charge, and the time is 6:58 PM.",
+      "The screen has visible cracks and scratches, especially at the top right corner.",
+      "There is a watermark 'HOPE IGEMETI' overlaid on the screen.",
+      "The device is in 'No SIM' mode.",
+      "The seller claims 5.5 inch Retina HD, 1080 x 1920, 128GB storage, 2GB RAM, Apple A9 chip."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "iPhone",
+      "brand": "Apple",
+      "model": null,
+      "read_from": [
+        "photo 0 screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "5.5 inch Retina HD, 1080 x 1920",
+        "verdict": "unverifiable_remote",
+        "evidence": "The screen resolution and size are not visible in the photo; only the battery health screen is shown. The seller's text is unverified."
+      },
+      {
+        "claim": "Storage: 128GB (8.84GB Available)",
+        "verdict": "unverifiable_remote",
+        "evidence": "The storage details are not visible in the photo. The seller's text is unverified."
+      },
+      {
+        "claim": "RAM: 2GB",
+        "verdict": "unverifiable_remote",
+        "evidence": "RAM is not visible in the photo. The seller's text is unverified."
+      },
+      {
+        "claim": "Processor: Apple A9 Chip",
+        "verdict": "unverifiable_remote",
+        "evidence": "The processor model is not visible in the photo. The seller's text is unverified."
+      },
+      {
+        "claim": "Battery Health: 90% Maximum Capacity, supports normal peak performance",
+        "verdict": "supported",
+        "evidence": "Photo 0 clearly shows 'Maximum Capacity: 90%' and 'Your battery is currently supporting normal peak performance.'"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Screen damage (cracks and scratches)",
+        "proof": "A clear photo of the entire front screen showing the extent of cracks and scratches.",
+        "if_unproven": "Priced as having visible screen damage, which reduces value."
+      },
+      {
+        "risk": "Device model mismatch (e.g., not iPhone 6s/6s Plus as implied by A9 chip and 5.5 inch screen)",
+        "proof": "A photo of the device's back showing the model number or a screenshot of 'Settings > General > About' showing the model name.",
+        "if_unproven": "Priced as an unknown iPhone model, which may be less valuable than claimed."
+      },
+      {
+        "risk": "Storage and RAM not matching claimed specs",
+        "proof": "A screenshot of 'Settings > General > About' showing the actual storage and model details.",
+        "if_unproven": "Priced as having unverified storage and RAM, which may be lower than claimed."
+      },
+      {
+        "risk": "Battery may degrade further or have hidden issues despite 90% capacity",
+        "proof": "A video or photo showing the battery performance over time or a full battery cycle test.",
+        "if_unproven": "Priced as having a battery with 90% capacity, but with potential for future degradation."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of 'Settings > General > About' to confirm model, storage, and RAM.",
+      "Clear photo of the entire front screen to show the extent of cracks and scratches.",
+      "Photo of the back of the device to confirm model or serial number.",
+      "Video or photo of the device in use to confirm functionality and screen condition."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The device is identifiable as an iPhone, but critical details like model, storage, RAM, and screen condition are not verifiable from the current photo. The screen damage is visible, but the extent and impact on value need confirmation. The seller's claims about specs cannot be verified without additional proof."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 76316,
+    "input_tokens": 1964,
+    "output_tokens": 981,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "6550311cf1cf0001a06dca84b31fb8ab",
+    "error": null
+  }
+}

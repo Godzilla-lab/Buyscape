@@ -1,0 +1,90 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Front view of a black iPhone with a notch, showing the home screen with widgets and app icons. The screen appears to be on and functional. The phone is held in a hand, with a glass display case in the background containing other phone parts or devices.",
+      "Photo 1: Screen shows the 'About' section of iOS settings. Model Name: iPhone, Model Number: Z781, Identifier: iPhone 11, Serial Number visible. Storage: 64GB, iOS Version: 15.7.1. The screen is clear and legible.",
+      "Photo 2: Back view of the phone, black finish, Apple logo centered, dual-camera system in a square module with a ring around the lenses. The phone appears to be in good physical condition with no visible cracks or dents."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "iPhone 11",
+      "brand": "Apple",
+      "model": "iPhone 11",
+      "read_from": [
+        "photo 1 screen: Model Name: iPhone, Identifier: iPhone 11"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Very clean phone",
+        "verdict": "supported",
+        "evidence": "All three photos show the phone with no visible scratches, cracks, or significant wear. The screen and back are clean."
+      },
+      {
+        "claim": "Just buy and used everything is perfectly",
+        "verdict": "unverified",
+        "evidence": "The phone screen is on and displaying content, but there is no proof of full functionality (e.g., camera, speakers, charging, buttons). The claim is not contradicted but not proven either."
+      },
+      {
+        "claim": "face, truetone",
+        "verdict": "unverifiable_remote",
+        "evidence": "Face ID and True Tone are software features that cannot be verified from static photos. No video or demonstration is provided."
+      },
+      {
+        "claim": "battery health 100%",
+        "verdict": "unverifiable_remote",
+        "evidence": "Battery health is not shown in the provided photos. The 'About' screen in photo 1 does not display battery health percentage. This cannot be confirmed remotely."
+      },
+      {
+        "claim": "inbox",
+        "verdict": "unverified",
+        "evidence": "No photos of the box, charger, or accessories are provided. The claim cannot be confirmed from the current images."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery health is not 100% as claimed",
+        "proof": "A screenshot from the iPhone's Battery Health section showing the actual battery condition.",
+        "if_unproven": "priced as battery health unknown, which may be below 100% and affects value"
+      },
+      {
+        "risk": "Phone has been repaired or has non-original parts",
+        "proof": "A close-up of the serial number and IMEI on the device and in the settings, and a check for any mismatch or signs of repair (e.g., misaligned camera module, uneven gaps).",
+        "if_unproven": "priced as potentially repaired, which reduces value"
+      },
+      {
+        "risk": "Face ID or True Tone not working",
+        "proof": "A video showing Face ID unlocking and True Tone adjusting under different lighting conditions.",
+        "if_unproven": "priced as potentially non-functional, which reduces value"
+      },
+      {
+        "risk": "Missing accessories (charger, box, etc.)",
+        "proof": "Photos of the original box, charger, earphones, and any other included items.",
+        "if_unproven": "priced as missing accessories, which reduces value"
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of Battery Health from the iPhone settings.",
+      "Video showing Face ID unlocking and True Tone adjusting.",
+      "Photos of the original box, charger, and all accessories.",
+      "Close-up of the serial number and IMEI to verify authenticity and check for repairs."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The phone is identified as an iPhone 11, and the physical condition appears good. However, critical claims like battery health, Face ID, True Tone, and included accessories cannot be verified from the current photos. These unverified claims and hidden risks affect the price, and additional proof is needed to price accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 81979,
+    "input_tokens": 3245,
+    "output_tokens": 968,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "0c8bdcbeae7078f892ad0be1020bb29c",
+    "error": null
+  }
+}

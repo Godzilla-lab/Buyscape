@@ -1,0 +1,93 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows several flat rectangular panels with grid-like photovoltaic cells stacked/leaning on a concrete floor, outdoors.",
+      "A watermark reading 'NAGOTECH SOLAR' is overlaid on the image, likely a reseller or photo-credit mark, not a brand plate on the panel itself.",
+      "No manufacturer name, model number, wattage rating, or cell-count label is legible on any panel surface.",
+      "No battery of any kind is visible anywhere in the photo, despite the seller's text making specific claims about a battery.",
+      "Camera metadata overlay ('CAMON 30', lens/exposure info) is visible but irrelevant to the item.",
+      "Panels appear to have surface dust/dirt consistent with outdoor storage or prior use."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel (stacked set, battery not shown)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 (no legible brand/model/wattage label)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Original 650 Watts",
+        "verdict": "unverifiable_remote",
+        "evidence": "No wattage sticker or nameplate visible in photo 0."
+      },
+      {
+        "claim": "144 cell",
+        "verdict": "unverifiable_remote",
+        "evidence": "Cell count not countable or labeled clearly in photo 0."
+      },
+      {
+        "claim": "Direct Canadian",
+        "verdict": "unverifiable_remote",
+        "evidence": "No origin marking or import label visible in photo 0."
+      },
+      {
+        "claim": "Used",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows panels with surface dust and wear consistent with prior outdoor use."
+      },
+      {
+        "claim": "Battery is new, holds charge for 8 hours, never repaired",
+        "verdict": "contradicted",
+        "evidence": "No battery is shown anywhere in photo 0; the claim refers to an item not pictured at all."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "True wattage and cell configuration cannot be confirmed, affecting output and price tier.",
+        "proof": "Close-up photo of the panel's rear nameplate/sticker showing wattage, Voc/Isc, and cell count.",
+        "if_unproven": "priced as lowest plausible wattage panel of this visible size"
+      },
+      {
+        "risk": "Panel physical condition (microcracks, delamination, hotspots, broken cells) not assessable from a distant stacked shot.",
+        "proof": "Close-up photos of each panel face in daylight, plus a video showing output on a multimeter under sun.",
+        "if_unproven": "priced as condition unknown / possible defects"
+      },
+      {
+        "risk": "Claimed 'battery, new, holds charge 8 hours' refers to an item not shown in any photo, raising doubt whether a battery is actually included or exists as described.",
+        "proof": "Clear photo of the actual battery with brand/model/label and a load-test video.",
+        "if_unproven": "battery claim disregarded entirely for pricing; treat as not included"
+      },
+      {
+        "risk": "Panel age/degradation and real-world output unknown.",
+        "proof": "Video of panel connected to a charge controller/multimeter in sunlight showing live voltage/current.",
+        "if_unproven": "priced as used, unverified output"
+      }
+    ],
+    "proof_requests": [
+      "Clear close-up of the panel's rear label showing brand, wattage, and cell count.",
+      "Photo or video of the actual battery referenced in the text, including any brand/model markings.",
+      "Daylight test video showing panel voltage/current output on a multimeter.",
+      "Multiple angle photos of each panel face to check for cracks or damage."
+    ],
+    "decision": "fraud_suspected",
+    "reason": "The seller's text describes a battery with specific performance claims that is entirely absent from the single photo provided, which only shows solar panels; this mismatch between description and evidence is a common sign of a copy-pasted or misleading listing and cannot be resolved remotely."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 29261,
+    "input_tokens": 2036,
+    "output_tokens": 2597,
+    "cost_usd": 0.026883,
+    "replayed": false,
+    "fixture_key": "2dfee4039ae348dc73ef559d9982fc55",
+    "error": null
+  }
+}

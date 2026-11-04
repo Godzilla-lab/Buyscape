@@ -1,0 +1,83 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo shows a wall-mounted TV on a decorative TV console/center table unit with shelves/cabinets.",
+      "No visible brand/model labels on the TV or console in the photo.",
+      "Cables are visible; TV screen appears on but there is no clear content/diagnostic screen shown.",
+      "Seller text mentions \u201ccenter table and TV console\u201d and a total pickup price, but the photo shows a TV console with TV attached."
+    ],
+    "identity": {
+      "status": "unknown",
+      "kind": "TV console/center table with TV (exact TV model not readable)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Relocating.",
+        "verdict": "unverified",
+        "evidence": "No photo evidence of relocation; only seller text."
+      },
+      {
+        "claim": "Come carry this center table and TV console for 140k.",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo shows a TV console/center table, but the exact included items and whether TV is included cannot be confirmed from the photo alone; price is not verifiable from images."
+      },
+      {
+        "claim": "sharp deal.",
+        "verdict": "unverifiable_remote",
+        "evidence": "No readable model/condition details to verify value."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Whether the TV itself is included (seller says \u201ccenter table and TV console\u201d, but photo shows a TV mounted). If TV is not included, value drops a lot.",
+        "proof": "Ask for a clear shot showing the full set of items laid out (console + TV + accessories) and confirm in text: \u201cIs the TV included? Which TV model?\u201d",
+        "if_unproven": "Price as console/center table only (TV not guaranteed)."
+      },
+      {
+        "risk": "TV model/size and condition (screen defects, dead pixels, panel issues) are not readable/diagnosable from this single photo.",
+        "proof": "Request a close-up photo of the TV back label/model number + a short video powering on with a test pattern (or YouTube/HD video) showing no lines/flicker.",
+        "if_unproven": "Price as not verified working/unknown condition (worst case)."
+      },
+      {
+        "risk": "Console condition: scratches, water damage, loose hinges/shelves, missing parts/handles are not shown clearly.",
+        "proof": "Request close-up photos of all edges/corners and doors/shelves (open/close) plus a photo of any missing hardware.",
+        "if_unproven": "Price as used with possible cosmetic wear and no guarantee of completeness."
+      },
+      {
+        "risk": "Compatibility/accessories: remote, stand/wall mount hardware, power cable, and any mounting brackets may be missing.",
+        "proof": "Ask for a photo of all accessories laid out (remote, cables, wall bracket/mounting kit).",
+        "if_unproven": "Price assuming accessories may be missing."
+      }
+    ],
+    "proof_requests": [
+      "Confirm in one message: \u201cIs the TV included or only the TV console/center table?\u201d",
+      "Send a close-up photo of the TV back label showing brand + model number (and screen size if available).",
+      "Send a short video: TV power on + clear test screen (no lines/flicker) and show sound working.",
+      "Send close-up photos of the console: all doors/shelves, corners/edges, and any missing parts/handles.",
+      "Send a photo of all accessories: remote, power cable, HDMI (if any), and wall-mount hardware."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo shows a TV console/center table with a TV, but the exact TV model/size and whether the TV is included (plus working condition and completeness) are not verifiable from the single image. Without that, a reliable price pick from the provided comparables (which are for game consoles) is not possible.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_joint",
+    "latency_ms": 6136,
+    "input_tokens": 2398,
+    "output_tokens": 911,
+    "cost_usd": 0.001618,
+    "replayed": false,
+    "fixture_key": "7d2e9ab10579b8af7ad27b3f6113152f",
+    "error": null
+  }
+}

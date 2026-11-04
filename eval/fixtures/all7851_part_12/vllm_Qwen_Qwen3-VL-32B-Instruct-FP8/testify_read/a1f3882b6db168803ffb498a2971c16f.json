@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the back of a light blue Samsung phone with a triple camera setup and the Samsung logo at the bottom.",
+      "Photo 1 shows the device settings screen with 'Galaxy S24+' and model number 'SM-S926U1' visible.",
+      "Photo 2 shows the Settings menu of the phone, indicating it is powered on and functional.",
+      "The phone appears to be in good physical condition with no visible scratches in the photos.",
+      "The seller claims 12GB RAM and 256GB storage, but this is not visible in any photo."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "Samsung Galaxy S24+",
+      "brand": "Samsung",
+      "model": "SM-S926U1",
+      "read_from": [
+        "photo 1 screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Everything working perfect",
+        "verdict": "unverified",
+        "evidence": "Photo 2 shows the Settings menu, indicating the phone is on, but no functional test (e.g., camera, calls, apps) is shown. No proof of full functionality."
+      },
+      {
+        "claim": "Clean, No scratch",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows the back of the phone with no visible scratches or damage."
+      },
+      {
+        "claim": "12GB RAM 256 storage",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows the RAM or storage details. The model SM-S926U1 is a U.S. variant of the S24+ which typically has 8GB RAM, not 12GB. The claim cannot be verified from the photos."
+      },
+      {
+        "claim": "1 nano-sim",
+        "verdict": "unverified",
+        "evidence": "Photo 1 shows 'Available SIM' entries, but does not confirm the number of SIM slots or if it is a single nano-SIM. The model SM-S926U1 is a single SIM variant, but this is not proven by the photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The phone may not have 12GB RAM as claimed; it may be 8GB.",
+        "proof": "Photo of the 'About phone' section showing RAM and storage details.",
+        "if_unproven": "Priced as 8GB model, which is lower than 12GB."
+      },
+      {
+        "risk": "The phone may be locked to a carrier or have activation lock (e.g., Samsung Find My Mobile).",
+        "proof": "Screenshot of 'About phone' showing carrier lock status or proof of factory reset and unlock.",
+        "if_unproven": "Priced as potentially locked, which reduces value."
+      },
+      {
+        "risk": "The phone may have hidden damage or non-functional components (e.g., camera, charging port, screen).",
+        "proof": "Video or photo showing camera operation, charging, and screen responsiveness.",
+        "if_unproven": "Priced as possibly non-functional, which reduces value."
+      }
+    ],
+    "proof_requests": [
+      "Photo of 'About phone' section showing RAM, storage, and carrier lock status.",
+      "Video showing camera, charging, and screen functionality.",
+      "Proof of factory reset and unlock status."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identified as Samsung Galaxy S24+ (SM-S926U1), but key claims like 12GB RAM and full functionality cannot be verified from the photos. Hidden risks such as carrier lock and actual specs affect pricing. Proof is needed to confirm the claims and assess true value."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 66339,
+    "input_tokens": 3250,
+    "output_tokens": 834,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "a1f3882b6db168803ffb498a2971c16f",
+    "error": null
+  }
+}

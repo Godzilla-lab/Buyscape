@@ -1,0 +1,67 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-instruct",
+  "response": {
+    "observations": [
+      "Photo 0: A metallic, cylindrical automotive part with cooling fins and a central bolted section, resting on a concrete floor. Watermark: 'POSTED ON JIJI U-ZION LINKS AUTO'S'.",
+      "Photo 1: Top view of the same part, showing a black circular cap on the top and a mounting bracket with holes. Watermark: 'POSTED ON JIJI U-ZION LINKS AUTO'S'.",
+      "Photo 2: Side view of the part, showing the same cylindrical shape, cooling fins, and a threaded shaft at the bottom. Watermark: 'POSTED ON JIJI U-ZION LINKS AUTO'S'."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "alternator",
+      "read_from": [
+        "photo 0 plate",
+        "photo 1 plate",
+        "photo 2 plate"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Also deals on all kinds of cars spare parts",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photos show other items or the seller's inventory."
+      },
+      {
+        "claim": "Tokunbo, direct from Belgium. Tested and working, no knock, low mileage, never opened.",
+        "verdict": "unverified",
+        "evidence": "Photos show the alternator, but no evidence of testing, mileage, or origin. Watermark suggests a seller, not a brand or model."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The alternator is not working or has been damaged.",
+        "proof": "Photo 0, 1, 2: The part is dusty and shows signs of wear, but no test or functional proof is visible.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The seller is not from Belgium or the part is not 'direct from Belgium'.",
+        "proof": "Photo 0, 1, 2: No visible branding or country of origin. Watermark 'U-ZION LINKS AUTO'S' suggests a Nigerian seller.",
+        "if_unproven": "as not direct from Belgium"
+      },
+      {
+        "risk": "The part has been opened or has high mileage.",
+        "proof": "Photo 0, 1, 2: No visible signs of being opened or mileage indicators. No proof of 'low mileage' or 'never opened'.",
+        "if_unproven": "as not low mileage or never opened"
+      }
+    ],
+    "proof_requests": [
+      "Ask for a photo of the alternator with a test certificate or a functional demonstration."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photos show an alternator, but no proof of its working condition, origin, or mileage. The seller's claims are unsupported by visual evidence."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-instruct",
+    "task": "testify_read",
+    "latency_ms": 3832,
+    "input_tokens": 2796,
+    "output_tokens": 629,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "36efe5ce3ddba33b76c7971757e4dc12",
+    "error": null
+  }
+}

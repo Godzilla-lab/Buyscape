@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail packaging for a Singer HD500 sewing machine.",
+      "The box is closed and placed on a grey floor in front of other cardboard boxes.",
+      "The actual sewing machine is not visible in the photo.",
+      "The box features text 'SINGER | HD500', '32 Stitches', and 'Powerful Performance'.",
+      "There is a watermark 'ABIOLAONIMACHINE' across the center of the image."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "sewing machine",
+      "brand": "Singer",
+      "model": "HD500",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Singer HD500",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "strong heavy duty",
+        "verdict": "unverified",
+        "evidence": "This is a marketing claim on the box; the machine itself is not visible to verify build quality."
+      },
+      {
+        "claim": "built for power",
+        "verdict": "unverified",
+        "evidence": "The machine is not shown in operation."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, inferior model.",
+        "proof": "A photo of the actual machine outside of the box.",
+        "if_unproven": "priced as an empty box"
+      },
+      {
+        "risk": "The machine may be used or refurbished rather than new.",
+        "proof": "Clear photos of the needle plate, feed dogs, and bobbin area for signs of wear.",
+        "if_unproven": "priced as heavily used"
+      },
+      {
+        "risk": "The machine may have electrical or mechanical defects.",
+        "proof": "A video showing the machine powered on and sewing a test strip.",
+        "if_unproven": "priced as not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual sewing machine removed from the box.",
+      "Photo of the manufacturer's identification plate on the machine body.",
+      "Video of the machine sewing through multiple layers of fabric."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail box is visible. In remote second-hand transactions, a photo of a box is not sufficient proof of the item's existence, condition, or authenticity."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 10790,
+    "input_tokens": 2365,
+    "output_tokens": 2265,
+    "cost_usd": 0.007978,
+    "replayed": false,
+    "fixture_key": "d7b698547f9a1b35c209030e9fe1d17c",
+    "error": null
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-instruct",
+  "response": {
+    "observations": [
+      "Stacks of wooden pallets in a warehouse-like setting.",
+      "All pallets have the 'EPAL' logo stamped on them.",
+      "The pallets appear to be made of wood and are stacked in multiple piles.",
+      "Watermarks on photos indicate the seller's name and posting platform."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "wooden pallet",
+      "read_from": [
+        "photo 0 plate",
+        "photo 1 plate",
+        "photo 2 plate"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "It serves as stacking base.",
+        "verdict": "supported",
+        "evidence": "photo 0, 1, 2"
+      },
+      {
+        "claim": "It available for pickup only in Port Harcourt",
+        "verdict": "unverifiable_remote",
+        "evidence": "no photo or text confirms pickup location"
+      },
+      {
+        "claim": "Everything is clean, dry and sorted, no water added.",
+        "verdict": "unverified",
+        "evidence": "photos show no visible water or dirt, but no proof of dryness or sorting"
+      },
+      {
+        "claim": "Weighed at 500 kg on a certified scale this morning.",
+        "verdict": "unverifiable_remote",
+        "evidence": "no photo or text shows the scale or weight verification"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Pallets may be damaged or worn from use.",
+        "proof": "photo 0, 1, 2",
+        "if_unproven": "as damaged or worn"
+      },
+      {
+        "risk": "Pallets may not be EPAL certified or may be counterfeit.",
+        "proof": "photo 0, 1, 2",
+        "if_unproven": "as not EPAL certified"
+      },
+      {
+        "risk": "Seller may not be able to deliver to Rivers, Nigeria.",
+        "proof": "seller's text",
+        "if_unproven": "as not deliverable"
+      }
+    ],
+    "proof_requests": [
+      "Photos of the pallets with the EPAL certification label clearly visible.",
+      "Proof of the scale used and the weight verification.",
+      "Proof of the seller's delivery location and ability to deliver to Rivers."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller's claims about condition and weight lack verifiable proof in the photos. Pickup location is unverifiable. The item is identified as wooden pallets, but the exact condition and certification status are uncertain without further proof."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-instruct",
+    "task": "testify_read",
+    "latency_ms": 13502,
+    "input_tokens": 2174,
+    "output_tokens": 584,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "164ce3f33103443be6de20700f0c5084",
+    "error": null
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: white/pink portable domestic sewing machine, dial stitch selector, brand name partially visible but not clearly readable (looks like 'Riccar'), watermark 'POSTED ON JIJI / MARTEX GLOBAL'.",
+      "Photo 1: different white portable machine, badge reads 'Semco Indigo 6', background shows another machine labeled 'SINGER', same watermark.",
+      "Photo 2: a third, different white portable machine, badge reads 'Novamatic NM 868A', with German/French stitch labels, same watermark.",
+      "All three photos show distinct brands/models of machine, not one single item.",
+      "None of the machines shown resembles a heavy industrial sewing machine (no separate motor, table stand, clutch, or belt typical of industrial units).",
+      "Watermark 'MARTEX GLOBAL' and 'POSTED ON JIJI' suggest these images may be stock/dealer photos reused across listings rather than photos of the specific unit being sold."
+    ],
+    "identity": {
+      "status": "unknown",
+      "kind": "sewing machine",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 (unclear brand plate)",
+        "photo 1 badge 'Semco Indigo 6'",
+        "photo 2 badge 'Novamatic NM 868A'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Industrial electric sewing machine",
+        "verdict": "contradicted",
+        "evidence": "All three photos show compact domestic/portable machines, not industrial-style machines with separate motor/table/clutch."
+      },
+      {
+        "claim": "Japanese made",
+        "verdict": "unverified",
+        "evidence": "No origin marking visible in any photo; brands shown (Semco, Novamatic) are not clearly Japanese; unclear brand in photo 0 unreadable."
+      },
+      {
+        "claim": "Motor runs smooth",
+        "verdict": "unverifiable_remote",
+        "evidence": "No video or audio of machine running in any photo."
+      },
+      {
+        "claim": "All accessories and original manual included",
+        "verdict": "unverified",
+        "evidence": "No accessories or manual shown in any of the three photos."
+      },
+      {
+        "claim": "Never serviced because nothing ever went wrong",
+        "verdict": "unverifiable_remote",
+        "evidence": "Cannot be confirmed from photos; internal condition and service history not visible."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Listing text describes a single 'industrial' machine, but photos show three different household-grade machines (Riccar?, Semco Indigo 6, Novamatic NM 868A) \u2014 unclear which item is actually for sale.",
+        "proof": "A single clear photo of the actual unit being sold, with its brand/model plate visible, matching the listing description.",
+        "if_unproven": "priced as the lowest-value identifiable domestic machine shown, not as an industrial unit"
+      },
+      {
+        "risk": "Watermarks suggest photos may be stock/dealer images reused, not the seller's own unit.",
+        "proof": "A photo of the machine in the seller's actual location/background, with timestamp or a handwritten note, to confirm it is the real item.",
+        "if_unproven": "priced at worst case, treating authenticity of photos as unconfirmed"
+      },
+      {
+        "risk": "No evidence of working motor, stitch quality, or foot pedal function.",
+        "proof": "A short video clip of the machine stitching fabric with pedal/motor engaged.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "No accessories, manual, or power cord visible despite claim of full accessory set.",
+        "proof": "Photo showing accessories, manual, and power cord laid out next to the machine.",
+        "if_unproven": "priced as bare machine without accessories"
+      },
+      {
+        "risk": "Unverifiable service/maintenance history; wear or hidden mechanical faults possible.",
+        "proof": "Close-up photos of bobbin case, belt, and internal gears, plus a running video.",
+        "if_unproven": "priced as needing servicing"
+      }
+    ],
+    "proof_requests": [
+      "Clarify which single machine (from the three shown) is actually for sale, with a brand/model plate photo.",
+      "Provide a video of the machine running (motor + stitching) to confirm functionality.",
+      "Photo of accessories, manual, and power cord together with the machine.",
+      "A fresh, unwatermarked photo taken at the seller's current location to confirm authenticity."
+    ],
+    "decision": "fraud_suspected",
+    "reason": "The listing claims one industrial Japanese sewing machine, but the three photos show three different, unrelated domestic-style machines with reused marketplace watermarks, making it impossible to confirm what item is actually being offered."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 24168,
+    "input_tokens": 3209,
+    "output_tokens": 2248,
+    "cost_usd": 0.028898,
+    "replayed": false,
+    "fixture_key": "b317d702c8fb94e6fb6edc53f6722b15",
+    "error": null
+  }
+}

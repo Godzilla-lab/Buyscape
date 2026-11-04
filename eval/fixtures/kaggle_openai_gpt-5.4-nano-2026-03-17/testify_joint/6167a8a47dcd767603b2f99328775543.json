@@ -1,0 +1,82 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0 shows a DSLR camera body labeled 'Nikon' (not Canon).",
+      "Photo 0 shows two lenses attached/nearby: one appears to be an 18-55mm style zoom; the other looks like a separate lens (exact focal length text not readable).",
+      "No clear model number (e.g., D3xxx/D5xxx) is readable on the camera body in photo 0.",
+      "No visible proof of functionality (screen on, shutter count, autofocus test, video recording) in photo 0."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": null,
+      "brand": "Nikon",
+      "model": null,
+      "read_from": [
+        "photo 0 camera body (brand text 'Nikon')"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "It has 2 lens 18-55mm and 50mm.",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows two lenses, but the exact lens model/focal length text for the second lens (and confirmation of 50mm) is not readable."
+      },
+      {
+        "claim": "Clean and good to shoot videos and snapshots.",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo 0 does not show the camera powered on, video playback/recording, autofocus performance, or sensor/optics condition."
+      },
+      {
+        "claim": "The brand is Canon.",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows the camera body labeled 'Nikon', not Canon."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Brand mismatch: seller says Canon but photo shows Nikon; could be wrong item or bait-and-switch.",
+        "proof": "Ask for a clear photo of the camera front/top showing the exact brand and model name (e.g., 'Canon EOS ...' or 'Nikon D...') plus the lens markings.",
+        "if_unproven": "Price as a generic used DSLR kit with uncertain model/condition (worst case within the provided comparables)."
+      },
+      {
+        "risk": "Exact camera model is unreadable; price varies a lot by model (e.g., D3300 vs D90 vs T6i).",
+        "proof": "Ask for a photo of the model name on the camera body (and the lens focal length markings).",
+        "if_unproven": "Price at the lowest comparable that still matches 'DSLR with 18-55 lens' category, treating it as older/less desirable."
+      },
+      {
+        "risk": "Second lens may not be the claimed 50mm (could be another focal length or a non-matching lens).",
+        "proof": "Ask for close-up photos of both lenses showing the printed focal length (e.g., '18-55mm' and '50mm') and mount compatibility.",
+        "if_unproven": "Price as if only the 18-55 lens is confirmed; treat the second lens as not guaranteed."
+      },
+      {
+        "risk": "Functionality not proven (shutter, autofocus, video, buttons, battery/charger, memory card).",
+        "proof": "Ask for a short video clip: camera powered on, autofocus on a moving subject, and 10\u201320 seconds of video recording + playback.",
+        "if_unproven": "Price as not fully proven/assume worst-case: needs testing (i.e., not priced as 'fully working')."
+      }
+    ],
+    "proof_requests": [
+      "Send a clear photo showing the exact camera brand and model name on the body (not just the lens).",
+      "Send close-up photos of both lenses with the printed focal length markings (confirm 18-55mm and 50mm).",
+      "Send a short powered-on test video: record 10\u201320 seconds and play it back (show autofocus working).",
+      "Send photos of included items: battery, charger, and any memory card (if included)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Photo 0 contradicts the seller\u2019s Canon claim (it shows Nikon), and the exact camera model plus the second lens focal length are not readable. Without those, a safe worst-case price cannot be chosen confidently from the comparables.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_joint",
+    "latency_ms": 6447,
+    "input_tokens": 2446,
+    "output_tokens": 954,
+    "cost_usd": 0.002902,
+    "replayed": false,
+    "fixture_key": "6167a8a47dcd767603b2f99328775543",
+    "error": null
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r5",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black DSLR camera body with 'Nikon' and 'D3400' printed on the top right.",
+      "The camera is shown with a black lens hood.",
+      "A cardboard box is visible in the foreground with 'D3400' and '18-55 VR' printed on it.",
+      "The box appears to be a retail or promotional packaging.",
+      "The actual lens is not visible in the photo.",
+      "The background is a white cloth or paper."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DSLR camera",
+      "brand": "Nikon",
+      "model": "D3400",
+      "read_from": [
+        "photo 0 body"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Nikon d3400",
+        "verdict": "supported",
+        "evidence": "photo 0 body"
+      },
+      {
+        "claim": "18-55mm lens",
+        "verdict": "unverified",
+        "evidence": "The lens is not visible in photo 0."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different item.",
+        "proof": "A photo of the camera body with the lens attached.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The camera may have electronic faults or mechanical issues.",
+        "proof": "A video of the camera powering on and taking a photo.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The lens may be missing, damaged, or have a different focal length.",
+        "proof": "A photo of the lens attached to the camera body.",
+        "if_unproven": "as camera body only"
+      },
+      {
+        "risk": "The shutter may be near the end of its life.",
+        "proof": "A photo of the shutter count on the camera body.",
+        "if_unproven": "as high mileage"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of any label, sticker or metal plate showing the brand and model.",
+      "Photo of the camera body with the lens attached.",
+      "Photo of the lens attached to the camera body.",
+      "Video of the camera powering on and taking a photo.",
+      "Photo of the shutter count on the camera body."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "What the item is shows, but not the model that sets its price: no photo shows it clearly enough to read. The shot asked for first would settle it."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r5",
+    "task": "testify_read",
+    "latency_ms": 2285,
+    "input_tokens": 1408,
+    "output_tokens": 446,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "54eb121248d7610a3b9753ffe06cdcef",
+    "error": null
+  }
+}

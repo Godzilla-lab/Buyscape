@@ -1,0 +1,67 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a cardboard box on a pallet with printed codes 4D/Y91/S/23, CN/C530041, PI: 005, Lithium iron ph, UN 3480, and a lithium battery hazard diamond.",
+      "Photo 1 shows the same box wrapped in clear plastic with similar markings visible.",
+      "Photo 2 shows a white and black rectangular unit with an orange stripe, a Felicitysolar logo, battery level bars, and a power button inside packaging.",
+      "A watermark MIMI SOLAR POSTED ON JIJI appears in all three photos.",
+      "A person's foot in sandals is visible in photos 0 and 1."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "lithium battery",
+      "brand": "Felicitysolar",
+      "model": null,
+      "read_from": [
+        "photo 2 logo",
+        "photo 0 box text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Mimi solar enterprise do in all kind of solar energy,solar panels, inverters, solar chest freezer,...",
+        "verdict": "unverifiable_remote",
+        "evidence": "Seller's text only; photos show one packaged unit and a Felicitysolar-branded device but cannot verify the enterprise's full inventory."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual capacity and voltage are not visible; different sizes look identical in a sealed box.",
+        "proof": "Close-up photo of the specification label on the unit showing model, voltage, and amp-hours.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The unit may not power on or hold a charge because it is sealed and untested.",
+        "proof": "Video of the unit switched on, showing a display or output, and ideally powering a load.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The unit in photo 2 may not match the box in photos 0-1 or may be a different item than advertised.",
+        "proof": "Photo showing the unit's label next to the box markings, or the unit removed from packaging.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of the specification label on the Felicitysolar unit showing model number, voltage, and capacity.",
+      "Video of the unit powering on and displaying voltage or charge level.",
+      "Photo of the unit outside the box to confirm condition and match with box markings."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The brand is visible but the model and capacity that set the price are unreadable, and the sealed unit cannot be tested, so no worst-case price can be set yet."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 43516,
+    "input_tokens": 2918,
+    "output_tokens": 4593,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "5215bda2f3e6877cd523ea9303ad0fbb",
+    "error": null
+  }
+}

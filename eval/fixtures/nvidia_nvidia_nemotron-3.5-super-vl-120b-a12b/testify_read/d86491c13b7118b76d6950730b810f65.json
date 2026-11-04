@@ -1,0 +1,94 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Pile of green corded power tools with tangled cables",
+      "Photo 1 shows BOSCH and GBH 2-26 DRE on a tool label",
+      "Photo 0 shows BOSCH branding on at least one tool",
+      "Tools have side handles and appear to be rotary hammers or hammer drills",
+      "No rating plate or voltage marking is legible in either photo",
+      "Visible chucks do not clearly show 13mm keyless capacity",
+      "Watermark AC-JOE-GLOBAL appears across both photos"
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "corded rotary hammer",
+      "brand": "Bosch",
+      "model": "GBH 2-26 DRE",
+      "read_from": [
+        "photo 1 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "220v",
+        "verdict": "unverifiable_remote",
+        "evidence": "No rating plate visible in photos 0 or 1"
+      },
+      {
+        "claim": "13mm",
+        "verdict": "contradicted",
+        "evidence": "Readable model GBH 2-26 DRE in photo 1 is an SDS-plus rotary hammer, not a 13mm drill"
+      },
+      {
+        "claim": "bosch",
+        "verdict": "supported",
+        "evidence": "BOSCH logo visible in photos 0 and 1"
+      },
+      {
+        "claim": "drilling machine",
+        "verdict": "supported",
+        "evidence": "Tools are drills/rotary hammers in photos 0 and 1"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Tool does not work",
+        "proof": "Video of the tool running under load",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Voltage is not 220V or frequency unsuitable for Lagos",
+        "proof": "Close-up photo of rating plate",
+        "if_unproven": "as wrong voltage for Lagos"
+      },
+      {
+        "risk": "Chuck is SDS-plus, not 13mm keyless",
+        "proof": "Close-up photo of chuck with metric ruler or standard bit",
+        "if_unproven": "as SDS rotary hammer, not 13mm drill"
+      },
+      {
+        "risk": "Lot contains mixed models or different model than pictured",
+        "proof": "Clear photo of model label on each unit offered",
+        "if_unproven": "as lowest-value Bosch rotary hammer in the pile"
+      },
+      {
+        "risk": "Cord, chuck, or body is damaged or worn",
+        "proof": "Close-up photos of cord entry, chuck, and housing",
+        "if_unproven": "as poor cosmetic and mechanical condition"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of rating plate showing voltage and model",
+      "Close-up of chuck showing 13mm capacity or SDS fitting",
+      "Video of each unit drilling into concrete",
+      "Clear photo of model label on every unit in the lot"
+    ],
+    "decision": "price",
+    "reason": "Bosch GBH 2-26 DRE is readable in photo 1, so the item is identifiable; unproven working condition and voltage are priced at worst case."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 31941,
+    "input_tokens": 1865,
+    "output_tokens": 5144,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "d86491c13b7118b76d6950730b810f65",
+    "error": null
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Closed silver laptop with Apple logo on lid. Box labeled 'MacBook Air' visible in background.",
+      "Photo 1: Laptop open, screen off and heavily scratched. Keyboard visible, trackpad intact. No visible model label.",
+      "Photo 2: Close-up of keyboard and trackpad. Keys appear functional, no visible damage to keys or trackpad. No model or serial number visible.",
+      "All photos show a silver Apple laptop, likely a MacBook Pro or Air, but no model identifier is visible on the device itself."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "laptop",
+      "brand": "Apple",
+      "model": null,
+      "read_from": [
+        "photo 0: Apple logo on lid",
+        "photo 1: Apple keyboard layout and design"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Sharp MacBook pro 2015",
+        "verdict": "unverified",
+        "evidence": "No visible model or year identifier on the device. The box in photo 0 says 'MacBook Air', which contradicts 'MacBook Pro'."
+      },
+      {
+        "claim": "bad motherboard",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal photos or diagnostic evidence. Cannot verify from exterior photos."
+      },
+      {
+        "claim": "other things are perfect",
+        "verdict": "contradicted",
+        "evidence": "Photo 1 shows screen with heavy scratches, which is not 'perfect'."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Motherboard is not actually bad or is repairable",
+        "proof": "Internal photo showing motherboard or diagnostic report from Apple service center",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Screen damage is worse than shown or has dead pixels",
+        "proof": "Video clip showing screen turned on with full brightness and color test",
+        "if_unproven": "priced as damaged screen"
+      },
+      {
+        "risk": "Device is not a 2015 MacBook Pro but a different model (e.g., MacBook Air)",
+        "proof": "Photo of model label or serial number on bottom of device or inside lid",
+        "if_unproven": "priced as unknown model, lower value"
+      },
+      {
+        "risk": "Battery is dead or not holding charge",
+        "proof": "Video showing battery health report or charging test",
+        "if_unproven": "priced as battery not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the bottom of the laptop showing model number or serial number",
+      "Video of the screen turned on with full brightness and color test",
+      "Photo or video of the internal motherboard or diagnostic report",
+      "Video showing battery health or charging test"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and year cannot be confirmed from the photos, and the seller's claim of 'MacBook Pro 2015' is contradicted by the 'MacBook Air' box. The 'bad motherboard' claim is unverifiable remotely. The screen is visibly scratched, contradicting 'other things are perfect'. Without proof of model, internal condition, and screen functionality, a worst-case price cannot be determined."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 63338,
+    "input_tokens": 2383,
+    "output_tokens": 737,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "9dfbed064e6c7b041dab6ed26072647b",
+    "error": null
+  }
+}

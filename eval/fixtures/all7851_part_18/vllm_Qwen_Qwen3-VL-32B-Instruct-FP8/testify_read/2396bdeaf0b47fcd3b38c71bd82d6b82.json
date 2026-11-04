@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the back of a dark brown smartphone held in a hand.",
+      "The phone has a vertical camera module with three large lenses, one small lens, and a flash.",
+      "The brand 'SAMSUNG' is visible at the bottom of the back panel.",
+      "There is a white sticker with red text near the top right of the phone, possibly a warranty or service label.",
+      "The phone appears to have some smudges and minor wear on the back.",
+      "A white cable is connected to the bottom of the phone."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "smartphone",
+      "brand": "SAMSUNG",
+      "model": null,
+      "read_from": [
+        "photo 0 back panel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Very clean phone",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows smudges and minor wear on the back, contradicting 'very clean'."
+      },
+      {
+        "claim": "camera needs to be changed",
+        "verdict": "unverified",
+        "evidence": "No photo shows the camera output or functionality; only the physical module is visible."
+      },
+      {
+        "claim": "To replace the camera is just`.",
+        "verdict": "unverifiable_remote",
+        "evidence": "The sentence is incomplete and unclear; no context or cost is provided."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Camera is non-functional or damaged",
+        "proof": "A video or photo showing the camera taking a picture or video, or a close-up of the camera lens for damage.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Phone has internal damage or software issues",
+        "proof": "A video showing the phone turning on, navigating the interface, and using apps.",
+        "if_unproven": "priced as possibly non-functional"
+      },
+      {
+        "risk": "Phone is not the model claimed or is counterfeit",
+        "proof": "Photo of the front screen showing the model name or settings menu, or a close-up of the model number on the back or in the settings.",
+        "if_unproven": "priced as unknown model"
+      }
+    ],
+    "proof_requests": [
+      "Video or photo of the phone turning on and showing the home screen.",
+      "Video or photo of the camera taking a picture or video.",
+      "Close-up of the front screen or settings menu to confirm the model.",
+      "Photo of the phone's charging port and side buttons to check for damage."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The phone's model cannot be confirmed, and the camera's condition is unverified. The claim of being 'very clean' is contradicted by visible smudges. Without proof of functionality and model, a worst-case price cannot be determined."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 56741,
+    "input_tokens": 1785,
+    "output_tokens": 652,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "2396bdeaf0b47fcd3b38c71bd82d6b82",
+    "error": null
+  }
+}

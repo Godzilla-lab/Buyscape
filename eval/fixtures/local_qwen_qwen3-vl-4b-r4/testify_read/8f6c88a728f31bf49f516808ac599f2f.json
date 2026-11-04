@@ -1,0 +1,73 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-r4",
+  "response": {
+    "observations": [
+      "White DSLR camera body with a lens attached.",
+      "The lens has a black cap with 'Canon' printed on it.",
+      "The camera body has 'Canon' branding on the top left and 'EOS 100D' on the top right in photo 2.",
+      "The rear LCD screen is visible in photo 1, but it is dark and shows reflections.",
+      "The camera is being held by a person's hand in all photos.",
+      "Watermark 'CDICSON BUSINESS WORLD' appears on all photos."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DSLR camera",
+      "brand": "Canon",
+      "model": "EOS 100D",
+      "read_from": [
+        "photo 0 top",
+        "photo 2 top"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Canon EOS 100D (Rebel SL1)",
+        "verdict": "supported",
+        "evidence": "The model name is clearly printed on the camera body in photo 2."
+      },
+      {
+        "claim": "ultra-compact, lightweight 18-megapixel APS-C DSLR",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a general description of the model; the photos cannot confirm the megapixel count or the physical size."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The camera may not power on or the LCD screen may be dead.",
+        "proof": "A video showing the camera powering on and the LCD screen displaying a menu or image.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The lens may be a third-party clone rather than the original Canon kit lens.",
+        "proof": "A clear photo of the lens barrel showing the brand name and model number.",
+        "if_unproven": "as a generic lens"
+      },
+      {
+        "risk": "The shutter may be near the end of its life (high shutter count).",
+        "proof": "A screenshot of a shutter count utility showing the total actuations.",
+        "if_unproven": "as high mileage"
+      }
+    ],
+    "proof_requests": [
+      "Video of the camera powering on and the LCD screen working.",
+      "Photo of the lens barrel showing the brand and model.",
+      "Screenshot of the shutter count."
+    ],
+    "decision": "price",
+    "reason": "The model is clearly identified from the photos, so it can be priced at its worst case as a non-working unit."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-r4",
+    "task": "testify_read",
+    "latency_ms": 3643,
+    "input_tokens": 3476,
+    "output_tokens": 439,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "8f6c88a728f31bf49f516808ac599f2f",
+    "error": null
+  }
+}

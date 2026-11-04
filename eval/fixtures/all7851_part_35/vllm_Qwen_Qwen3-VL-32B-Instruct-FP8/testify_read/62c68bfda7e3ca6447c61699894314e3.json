@@ -1,0 +1,74 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a rectangular solar panel with a white frame and dark photovoltaic cells arranged in a grid.",
+      "The panel has 6 columns and 10 rows of cells, totaling 60 cells, matching the seller's claim.",
+      "The cells are monocrystalline, identifiable by their uniform dark color and diamond-shaped corners.",
+      "The panel is standing upright on a blue tiled floor, with a person partially visible on the left side.",
+      "There is a watermark 'YOUNG MIRACLE GLOBAL LINK' across the panel.",
+      "No brand name or model is visible on the front or frame of the panel.",
+      "No backside, junction box, or label is visible in the photo."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "60-cell monocrystalline solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 grid"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "350watts 60cells Canadian used Mono Solar Panel",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows 60 cells and monocrystalline appearance, but no wattage or brand is visible. 'Canadian' and '350watts' cannot be verified from the photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The panel may be damaged or have microcracks not visible in the photo.",
+        "proof": "Close-up photo of the cells under magnification or a video showing the panel being tilted to reveal any cracks or defects.",
+        "if_unproven": "priced as potentially defective"
+      },
+      {
+        "risk": "The panel may not be 350W as claimed; actual wattage could be lower.",
+        "proof": "Photo of the back label or junction box showing the rated power and model.",
+        "if_unproven": "priced as lower wattage (e.g., 250W-300W)"
+      },
+      {
+        "risk": "The panel may be counterfeit or not from a Canadian manufacturer as claimed.",
+        "proof": "Photo of the manufacturer's label or certification marks on the back or frame.",
+        "if_unproven": "priced as generic or unbranded"
+      },
+      {
+        "risk": "The panel may be non-functional or have degraded efficiency due to age or exposure.",
+        "proof": "Video of the panel being tested with a multimeter or solar tester under sunlight.",
+        "if_unproven": "priced as not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the back of the panel showing the label with model, wattage, and manufacturer.",
+      "Video or close-up photo of the junction box and wiring.",
+      "Photo of the panel under sunlight with a multimeter reading voltage and current.",
+      "Proof of origin or certification if claiming 'Canadian' brand."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The panel's identity is confirmed as a 60-cell monocrystalline solar panel, but key claims like wattage, brand, and origin are unverified. Hidden risks include damage, lower power output, and non-functionality. Without proof of these, the item cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 61908,
+    "input_tokens": 2010,
+    "output_tokens": 733,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "62c68bfda7e3ca6447c61699894314e3",
+    "error": null
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Dell laptop screen shows the Dell logo, indicating it powers on. Keyboard and trackpad are visible. Screen has visible scratches and smudges.",
+      "Photo 1: Same laptop from a slightly different angle, screen off, showing more scratches and reflections. Keyboard and trackpad appear intact.",
+      "Photo 2: Laptop shown from the back, with hinge visible, indicating 2-in-1 convertible design. Back panel has stickers and wear. Screen cover has colorful abstract design. No model label visible on back or bottom."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "2-in-1 touchscreen laptop",
+      "brand": "Dell",
+      "model": null,
+      "read_from": [
+        "photo 0 screen",
+        "photo 2 back panel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Dell Latitude 7400 2-in-1 Touchscreen Laptop",
+        "verdict": "unverified",
+        "evidence": "Model name not visible in any photo. Brand 'Dell' is visible on screen (photo 0) and back (photo 2), but no model label is readable. The 2-in-1 design is supported by photo 2 showing the hinge."
+      },
+      {
+        "claim": "Faulty / For Repair",
+        "verdict": "unverified",
+        "evidence": "Screen shows Dell logo (photo 0), suggesting it powers on, but no further boot or functionality is shown. No evidence of what is faulty. Could be screen, motherboard, or software issue."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Screen damage beyond cosmetic scratches (e.g., dead pixels, backlight failure, touch functionality failure)",
+        "proof": "Video showing screen turning on fully, displaying content, and touch response, or close-up of screen under bright light.",
+        "if_unproven": "priced as screen not working or touch not working"
+      },
+      {
+        "risk": "Internal hardware failure (e.g., motherboard, battery, RAM, storage)",
+        "proof": "Video showing full boot to OS, running diagnostics, or showing BIOS screen.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Model is not Latitude 7400, but a lower-end or different model (affects value)",
+        "proof": "Clear photo of the model label on the bottom or hinge, or serial number.",
+        "if_unproven": "priced as generic Dell 2-in-1, lower value"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the model label on the bottom or hinge of the laptop.",
+      "Video showing the laptop booting to the operating system and running a simple task.",
+      "Video showing the touchscreen functionality (if applicable)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a Dell 2-in-1 laptop, but the model is not visible in any photo. The 'faulty' claim is unverified \u2014 while the screen shows the Dell logo, no further functionality is demonstrated. Without proof of model and working condition, a worst-case price cannot be confidently assigned. The next step is to request proof of model and working state."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 58887,
+    "input_tokens": 3252,
+    "output_tokens": 720,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "954873432c941f26ff7252fccb578629",
+    "error": null
+  }
+}

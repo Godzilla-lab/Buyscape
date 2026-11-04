@@ -1,0 +1,85 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows Task Manager on a Dell laptop with Intel Core i5-10310U CPU @ 1.70GHz, 7.8 GB RAM, and an SSD.",
+      "Photo 1 shows an open Dell laptop on a desk in a shop with shelves of wrapped laptops in the background.",
+      "Photo 2 shows Windows System About identifying the device as Dell Latitude 3410 with Intel Core i5-10310U CPU @ 1.70GHz 2.21 GHz and 8.00 GB RAM."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Dell",
+      "model": "Latitude 3410",
+      "read_from": [
+        "photo 2 screen",
+        "photo 0 bezel",
+        "photo 1 bezel",
+        "photo 2 bezel"
+      ]
+    },
+    "claims": [],
+    "risks": [
+      {
+        "risk": "Battery health and runtime cannot be verified from photos.",
+        "proof": "Screenshot of battery report (powercfg /batteryreport) or video showing charge percentage over time.",
+        "if_unproven": "as dead battery"
+      },
+      {
+        "risk": "Screen defects such as dead pixels, flicker, or backlight bleed are not visible.",
+        "proof": "Video of the screen displaying solid red, green, blue, white, and black.",
+        "if_unproven": "as faulty screen"
+      },
+      {
+        "risk": "Keyboard and trackpad functionality cannot be confirmed.",
+        "proof": "Video of typing on all keys and using trackpad gestures.",
+        "if_unproven": "as faulty input"
+      },
+      {
+        "risk": "Charger inclusion and charging port function are unknown.",
+        "proof": "Photo of the charger and video of the laptop charging.",
+        "if_unproven": "as no charger"
+      },
+      {
+        "risk": "USB, HDMI, headphone, and other ports may not work.",
+        "proof": "Video of devices connected to each port.",
+        "if_unproven": "as faulty ports"
+      },
+      {
+        "risk": "Webcam, speakers, microphone, and WiFi may not work.",
+        "proof": "Video of camera app, audio playback, and WiFi connection.",
+        "if_unproven": "as faulty components"
+      },
+      {
+        "risk": "SSD health and remaining lifespan are unknown.",
+        "proof": "Screenshot of CrystalDiskInfo or similar SMART data.",
+        "if_unproven": "as failing storage"
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of battery report (powercfg /batteryreport)",
+      "Video of screen displaying solid red, green, blue, white and black",
+      "Video of keyboard typing and trackpad clicking",
+      "Photo of charger and video of laptop charging",
+      "Video of USB, HDMI and headphone ports working",
+      "Video of webcam, speakers and WiFi working",
+      "Screenshot of SSD health (CrystalDiskInfo or similar)"
+    ],
+    "decision": "price",
+    "reason": "The laptop is identifiable as a Dell Latitude 3410 with an i5-10310U and 8 GB RAM from the System screen, so it can be priced at its worst case as an untested used unit."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 15274,
+    "input_tokens": 2899,
+    "output_tokens": 2692,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "159e7b9680a10ea8c42ac7266fa44c11",
+    "error": null
+  }
+}

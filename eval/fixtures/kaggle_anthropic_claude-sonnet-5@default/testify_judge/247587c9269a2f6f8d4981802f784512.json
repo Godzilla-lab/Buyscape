@@ -1,0 +1,67 @@
+{
+  "task": "testify_judge",
+  "prompt_version": "testify_judge.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "claims": [
+      {
+        "claim": "Izutech solar energy specialize in all solar equipment such as inverter, panels, charge...",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a general business description, not a verifiable fact about the specific panels in the photo; no shop signage, registration, or matching branding visible in the report."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Wattage/power rating of each panel is unknown; no legible nameplate.",
+        "proof": "Close-up photo of the rating label/sticker on the back of each panel showing Wp, Voc, Isc.",
+        "if_unproven": "Cannot be priced from a wattage-based list until rating is confirmed; treat as unknown spec, lowest plausible tier."
+      },
+      {
+        "risk": "Cell condition (micro-cracks, hotspots, delamination) not visible from the front shot.",
+        "proof": "Close-up daylight photos of each cell surface, or an EL/thermal image if available.",
+        "if_unproven": "Priced as potentially damaged/degraded output."
+      },
+      {
+        "risk": "No output test performed; actual power delivery unverified.",
+        "proof": "Video of panel in sunlight connected to a multimeter/charge controller showing voltage and current.",
+        "if_unproven": "Priced as non-functional/unverified output."
+      },
+      {
+        "risk": "Junction box and MC4 connectors/cables condition and presence not shown.",
+        "proof": "Photo of the reverse side showing junction box and connector ends.",
+        "if_unproven": "Priced as missing/damaged connectors, buyer to add cost of replacement."
+      },
+      {
+        "risk": "Frame and edge damage on the back or corners not visible.",
+        "proof": "Photos of the full reverse side and all four edges/corners.",
+        "if_unproven": "Priced as cosmetically/structurally unverified, worst-case minor frame damage assumed."
+      },
+      {
+        "risk": "Age and usage history unknown, affecting expected remaining lifespan.",
+        "proof": "No remote proof possible; seller could provide purchase date/receipt photo as partial evidence.",
+        "if_unproven": "Priced as used/unknown-age stock."
+      }
+    ],
+    "proof_requests": [
+      "Clear close-up photo of the rating label on each panel (Wp, Voc, Isc, model/brand).",
+      "Photos of the full back side of both panels including junction box and connectors.",
+      "Video of the panels under sunlight connected to a multimeter or small load showing live voltage/current.",
+      "Close-up photos of all frame edges and corners for cracks or bends.",
+      "Any purchase receipt or warranty card photo if available."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The witness report confirms the item is solar panels but no wattage, voltage, or brand/model is legible, and this spec is what sets the price tier in any panel price list; without it even a worst-case price cannot be looked up."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_judge",
+    "latency_ms": 22779,
+    "input_tokens": 1500,
+    "output_tokens": 2044,
+    "cost_usd": 0.021422,
+    "replayed": false,
+    "fixture_key": "247587c9269a2f6f8d4981802f784512",
+    "error": null
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows a disassembled car engine (V-type, turbocharged) sitting on a shop floor.",
+      "A black plastic intake cover reads 'Turbo' with a partial logo, but no engine code, VIN, or brand plate is legible.",
+      "Various hoses, wiring, and a serpentine belt are visible; the engine is out of the vehicle and appears used/dirty.",
+      "No chassis, tag, or dealership signage visible that would confirm the seller's claimed brand range."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used turbocharged car engine assembly",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 cover text 'Turbo'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "We also deal on all kinds of car spare parts such as Volkswagen, Audi, Porsche and Bentley",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a general business claim about inventory range, not shown or provable from the single engine photo."
+      },
+      {
+        "claim": "Implied: this engine is one of the listed brands (VW/Audi/Porsche/Bentley)",
+        "verdict": "unverified",
+        "evidence": "No brand plate, engine code sticker, or VIN tag visible in photo 0 to confirm which marque or model this engine belongs to."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Exact make/model/engine code unknown, which drives most of the price difference between VW, Audi, Porsche, and Bentley parts",
+        "proof": "Close-up photo of the engine code plate/sticker (usually on block or cam cover) or a VIN tag from the donor car",
+        "if_unproven": "priced at the lowest-value generic 'used turbo engine, unidentified VAG-type' tier"
+      },
+      {
+        "risk": "Running condition unknown (no start-up, compression, or oil state evidence)",
+        "proof": "Video of engine cranking/running or a compression test reading",
+        "if_unproven": "priced as non-running/for-parts"
+      },
+      {
+        "risk": "Completeness unclear (turbo unit, sensors, ECU, wiring harness may or may not be included)",
+        "proof": "Full 360-degree photos including front, rear, and underside of the engine",
+        "if_unproven": "priced as incomplete/partial assembly"
+      },
+      {
+        "risk": "Mileage/history and reason for removal unknown (accident, flood, high mileage)",
+        "proof": "Donor vehicle documents or odometer photo",
+        "if_unproven": "priced as unknown-history, worst case"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of engine code plate or any sticker with model/part number",
+      "Video of the engine running or being cranked",
+      "Full set of photos from all sides including the turbo unit and wiring harness",
+      "Any documentation (import papers, donor car details) showing origin and mileage"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The engine's brand and model cannot be read from the photo, and price ranges for VW vs Porsche vs Bentley parts are too wide to assign even a worst-case figure without that identification."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 23850,
+    "input_tokens": 2004,
+    "output_tokens": 1982,
+    "cost_usd": 0.020669,
+    "replayed": false,
+    "fixture_key": "328010f0294ccaf59d889da0facd1e2e",
+    "error": null
+  }
+}

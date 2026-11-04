@@ -1,0 +1,103 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a white MacBook Pro box with a printed image of the laptop on top. The box has a sticker with text: 'MacBook Pro A2422 M1 Pro 16GB 512 SSD 20-4-1100'.",
+      "Photo 1 shows the laptop inside the box, closed, with a space gray finish and Apple logo. A handwritten note is taped to the lid, listing specs: 'M1 Pro 16GB 512GB', '14\"', '2021', 'SSD', '100% Original', 'No issues', 'Price: 1.4M NGN'.",
+      "Photo 2 shows the bottom of the box with the charger and USB-C cable in their compartments. The charger is white and rectangular, typical of Apple's 61W or 96W MagSafe 3 chargers. The cable is USB-C to USB-C.",
+      "All photos show a watermark 'POSTED ON JIJI MICHAEL BANKY3W'.",
+      "The box appears to be in good condition, with no visible damage. The laptop is not powered on or shown open."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "MacBook Pro",
+      "brand": "Apple",
+      "model": "M1 Pro",
+      "read_from": [
+        "photo 0 sticker: 'MacBook Pro A2422 M1 Pro 16GB 512 SSD'",
+        "photo 1 handwritten note: 'M1 Pro 16GB 512GB'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "MacBook Pro 2021 M1 Pro",
+        "verdict": "supported",
+        "evidence": "Photo 0 sticker and photo 1 handwritten note both state 'M1 Pro' and '2021'."
+      },
+      {
+        "claim": "Apple M1 Pro chip",
+        "verdict": "supported",
+        "evidence": "Photo 0 sticker and photo 1 handwritten note both state 'M1 Pro'."
+      },
+      {
+        "claim": "16gb LPDDR5 RAM",
+        "verdict": "supported",
+        "evidence": "Photo 0 sticker and photo 1 handwritten note both state '16GB'. LPDDR5 is standard for M1 Pro models, so unverifiable_remote but consistent with model."
+      },
+      {
+        "claim": "512gb SSD",
+        "verdict": "supported",
+        "evidence": "Photo 0 sticker and photo 1 handwritten note both state '512 SSD'."
+      },
+      {
+        "claim": "CC : 184",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible serial number or CC code in photos. Cannot verify from remote images."
+      },
+      {
+        "claim": "Maximum capacity:...",
+        "verdict": "unverified",
+        "evidence": "Incomplete claim in seller's text. No further details provided or visible in photos."
+      },
+      {
+        "claim": "100% Original, No issues",
+        "verdict": "unverifiable_remote",
+        "evidence": "Handwritten note in photo 1 claims '100% Original, No issues', but no proof of authenticity or condition is visible. Cannot verify remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Not genuine Apple product (counterfeit or rebranded)",
+        "proof": "Photo of the laptop's serial number (on the bottom or in System Report) and a verification via Apple's official website.",
+        "if_unproven": "priced as counterfeit or non-genuine, which would drastically reduce value."
+      },
+      {
+        "risk": "Laptop has physical damage or screen issues not visible in photos",
+        "proof": "Video or photo of the laptop open, showing screen, keyboard, ports, and hinges from multiple angles.",
+        "if_unproven": "priced as potentially damaged, which reduces value."
+      },
+      {
+        "risk": "Battery health is poor or not original",
+        "proof": "Screenshot of System Report showing battery cycle count and health percentage.",
+        "if_unproven": "priced as battery degraded, which reduces value."
+      },
+      {
+        "risk": "Charger is not original or damaged",
+        "proof": "Close-up photo of the charger's label showing wattage and serial number, and a photo of the cable ends.",
+        "if_unproven": "priced as non-original or damaged charger, which reduces value."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the laptop's bottom with serial number visible.",
+      "Video or photo of the laptop open, showing screen, keyboard, and ports.",
+      "Screenshot of System Report showing battery health and cycle count.",
+      "Close-up photo of the charger label and cable ends."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "While the model and specs are supported by visible text on the box and handwritten note, critical risks such as authenticity, physical condition, battery health, and charger genuineness cannot be verified remotely. The item cannot be priced accurately without proof of these factors."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 92281,
+    "input_tokens": 2807,
+    "output_tokens": 1151,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "4f924bb3ec0c5b668db65ac8af24b899",
+    "error": null
+  }
+}

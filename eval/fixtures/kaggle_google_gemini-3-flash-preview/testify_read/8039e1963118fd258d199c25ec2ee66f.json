@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Hard plastic carrying case for a power tool.",
+      "Label identifies brand as TOTAL.",
+      "Model number TIDLI20558 is visible on the label in photo 0.",
+      "Label specifies 20V Compact Brushless Cordless Impact Drill.",
+      "Label indicates 2x 2.0Ah batteries and a charger are included in this kit.",
+      "The case is closed; the actual tool and accessories are not visible."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "cordless impact drill",
+      "brand": "TOTAL",
+      "model": "TIDLI20558",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Brushless Motor",
+        "verdict": "supported",
+        "evidence": "photo 0 label"
+      },
+      {
+        "claim": "Mechanical 2-speed gear with Spindle Lock function",
+        "verdict": "supported",
+        "evidence": "photo 0 label"
+      },
+      {
+        "claim": "Auto-lock metal keyless chuck",
+        "verdict": "supported",
+        "evidence": "photo 0 label"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The case may be empty or contain a different, older, or damaged tool.",
+        "proof": "Photo of the case open showing the drill and all accessories.",
+        "if_unproven": "as an empty plastic case"
+      },
+      {
+        "risk": "Batteries may be missing, generic replacements, or unable to hold a charge.",
+        "proof": "Video of the drill operating with each battery showing the power indicator.",
+        "if_unproven": "as tool only, no batteries"
+      },
+      {
+        "risk": "The charger may be missing or non-functional.",
+        "proof": "Photo of the charger and a video showing it charging a battery.",
+        "if_unproven": "as missing charger"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the case open showing the drill, both batteries, and the charger.",
+      "Video of the drill running to confirm the motor and trigger work.",
+      "Photo of the nameplate on the actual drill to confirm it matches the case."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the exterior of the carrying case is shown. The actual drill, batteries, and charger must be seen to verify they exist and match the model on the box."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 7136,
+    "input_tokens": 2397,
+    "output_tokens": 1543,
+    "cost_usd": 0.005828,
+    "replayed": false,
+    "fixture_key": "8039e1963118fd258d199c25ec2ee66f",
+    "error": null
+  }
+}

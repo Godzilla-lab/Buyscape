@@ -1,0 +1,88 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo shows a cluster of roughly 10-12 used plastic/metal paint buckets with handles, some with torn or damaged lids.",
+      "Labels read 'Dulux Trade' and 'Weathershield Masonry Paint' with a printed capacity of '5 L' visible on multiple buckets.",
+      "Buckets show paint residue, scuffing, and torn label edges consistent with site use.",
+      "Only one angle/location shown; no wide shot confirming a count of 51 units.",
+      "No photo of the buckets empty/cleaned for water storage, interior condition, or any that show a 20L capacity marking."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used plastic paint bucket (for water storage)",
+      "brand": "Dulux",
+      "model": null,
+      "read_from": [
+        "photo 0 label 'Dulux Trade'",
+        "photo 0 label '5 L'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Paint rubber size: 20 Litres (L)",
+        "verdict": "contradicted",
+        "evidence": "photo 0 labels clearly print '5 L' on several buckets"
+      },
+      {
+        "claim": "Quantity: 51 pieces",
+        "verdict": "unverifiable_remote",
+        "evidence": "photo 0 shows only about 10-12 buckets in one small stack; no wide shot of full lot"
+      },
+      {
+        "claim": "Condition: Slightly Used",
+        "verdict": "contradicted",
+        "evidence": "photo 0 shows torn lids, paint residue, and scuffed labels on multiple buckets, more than 'slightly used'"
+      },
+      {
+        "claim": "Can be washed and reused for storing water",
+        "verdict": "unverified",
+        "evidence": "no photo of a cleaned/empty interior or a bucket actually holding water"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "True unit size may be 5L, not the claimed 20L, drastically changing per-unit value",
+        "proof": "a clear photo of the capacity marking on a sample of different buckets confirming either 5L or 20L",
+        "if_unproven": "priced as 5L buckets (worst case per visible labels), not 20L"
+      },
+      {
+        "risk": "Actual quantity may be far less than 51 pieces",
+        "proof": "a single wide-angle photo or video showing all 51 buckets laid out and countable",
+        "if_unproven": "priced only for the quantity visibly countable in photo (~10-12), not 51"
+      },
+      {
+        "risk": "Lids/handles may be damaged or missing, affecting reuse value for water storage",
+        "proof": "close-up photos of each bucket's lid and handle integrity",
+        "if_unproven": "priced as damaged/non-sealing lids"
+      },
+      {
+        "risk": "Interior residue may make buckets unsuitable or require heavy cleaning before water storage",
+        "proof": "photo or video of bucket interior after washing",
+        "if_unproven": "priced as needing full cleaning, i.e., lower resale/reuse value"
+      }
+    ],
+    "proof_requests": [
+      "Wide shot showing all 51 buckets together, countable in one frame",
+      "Close-up of the capacity marking (5L vs 20L) on multiple buckets, not just one",
+      "Photo of bucket interiors after washing to assess reuse condition",
+      "Close-up of lids and handles across the batch to check for damage"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo's own labels contradict the seller's stated 20L size (showing 5L), and the claimed quantity of 51 cannot be confirmed from the single partial-stack image, so even a worst-case price cannot be set until size and count are verified."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 17583,
+    "input_tokens": 3698,
+    "output_tokens": 1655,
+    "cost_usd": 0.020787,
+    "replayed": false,
+    "fixture_key": "b4af77399ea3056ccebc5a8a618c8ce9",
+    "error": null
+  }
+}

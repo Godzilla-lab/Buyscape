@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows four views of a silver AC compressor with a black pulley and a white sticker labeled 'BD' on each side.",
+      "Photo 1 shows a single AC compressor on a wooden surface with cardboard packaging. A box behind it has a label reading 'DENSO 457155-6770 COMPRESSOR'.",
+      "Photo 2 shows a pile of used AC compressors and associated hoses, some with visible rust and dirt, suggesting they are second-hand or salvaged parts.",
+      "The seller claims to sell Mercedes-Benz spare parts and accessories, including AC compressors.",
+      "The watermark 'BENZ CHAMBERS LTD' appears on photos 1 and 2, suggesting a business name, but not proof of Mercedes-Benz authenticity."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "AC compressor",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 text overlay",
+        "photo 1 label on box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "All Mercedes Benz spare parts and accessories",
+        "verdict": "unverifiable_remote",
+        "evidence": "No Mercedes-Benz branding or part numbers visible on the compressors. The watermark 'BENZ CHAMBERS LTD' is not proof of authenticity. The Denso label in photo 1 is a generic automotive parts brand, not Mercedes-Benz."
+      },
+      {
+        "claim": "AC compressor",
+        "verdict": "supported",
+        "evidence": "Photo 0 has text overlay 'A C compressor' and shows a compressor unit. Photo 1 shows a compressor with a Denso label. Photo 2 shows multiple compressors."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The compressor is not genuine Mercedes-Benz, but a generic or aftermarket part.",
+        "proof": "A clear shot of the compressor with a Mercedes-Benz part number or OEM label, or a receipt or invoice showing Mercedes-Benz origin.",
+        "if_unproven": "priced as generic/aftermarket, not OEM"
+      },
+      {
+        "risk": "The compressor is used or salvaged, not new or remanufactured.",
+        "proof": "A close-up of the compressor showing wear, rust, or damage, or a photo of the original packaging with a 'new' or 'remanufactured' label.",
+        "if_unproven": "priced as used/salvaged"
+      },
+      {
+        "risk": "The compressor is not compatible with the buyer's vehicle model.",
+        "proof": "A photo of the compressor with a visible part number or a list of compatible Mercedes-Benz models.",
+        "if_unproven": "priced as unverified fitment"
+      }
+    ],
+    "proof_requests": [
+      "A clear photo of the compressor with any part numbers or OEM markings visible.",
+      "A photo of the original packaging or invoice showing Mercedes-Benz branding or part number.",
+      "A photo showing the condition of the compressor (new, used, remanufactured)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as an AC compressor, but the seller's claim of Mercedes-Benz authenticity cannot be verified from the photos. The Denso label suggests it is a generic part, and the pile of used compressors in photo 2 indicates they may be salvaged. Without proof of brand, condition, and compatibility, a price cannot be confidently assigned."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 60830,
+    "input_tokens": 2369,
+    "output_tokens": 760,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "069e8603111172ee03bce131b8632bac",
+    "error": null
+  }
+}

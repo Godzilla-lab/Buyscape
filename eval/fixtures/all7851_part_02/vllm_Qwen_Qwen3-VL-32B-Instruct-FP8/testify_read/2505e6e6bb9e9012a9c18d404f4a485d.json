@@ -1,0 +1,92 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: A Dell all-in-one desktop wrapped in plastic, showing the base with the Dell logo. The unit is outdoors on a perforated metal surface.",
+      "Photo 1: Front view of the same unit, screen off, with a yellow sticky note on the top right corner reading '6th Gen Core i5 256 SSD 8 GB'.",
+      "Photo 2: Similar front view, slightly different angle, showing the Dell logo at the bottom center of the bezel. The yellow note is still visible.",
+      "All photos show the unit wrapped in plastic, suggesting it is being sold as-is or recently unpacked.",
+      "The background in all photos is an outdoor market or yard with vehicles and boxes, indicating a second-hand or informal sales environment."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "all-in-one desktop computer",
+      "brand": "Dell",
+      "model": "OptiPlex 7450",
+      "read_from": [
+        "seller's text: 'Used dell optiplex 7450 All in one desktop computers'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Dell OptiPlex 7450",
+        "verdict": "supported",
+        "evidence": "Seller's text explicitly states the model. The Dell logo is visible in photos 0, 1, and 2, consistent with the brand."
+      },
+      {
+        "claim": "i5 processor",
+        "verdict": "unverified",
+        "evidence": "The yellow sticky note in photos 1 and 2 says '6th Gen Core i5', which supports the claim. However, this is a handwritten note, not a label from the device itself. No internal components or system information are visible."
+      },
+      {
+        "claim": "8GB RAM",
+        "verdict": "unverified",
+        "evidence": "The yellow sticky note in photos 1 and 2 says '8 GB', which supports the claim. But again, this is external text, not verifiable from the device's hardware or BIOS."
+      },
+      {
+        "claim": "256GB storage",
+        "verdict": "unverified",
+        "evidence": "The yellow sticky note in photos 1 and 2 says '256 SSD', which supports the claim. However, no internal drive or system information is visible to confirm this."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The processor may not be a 6th Gen Core i5, or the model may be misrepresented.",
+        "proof": "A photo of the system information screen (e.g., BIOS or Windows System Properties) showing the CPU model, or a photo of the CPU sticker inside the unit.",
+        "if_unproven": "Priced as if the CPU is not specified or lower-end, which could be a 4th or 5th Gen i5 or even a lower-tier processor."
+      },
+      {
+        "risk": "The RAM may not be 8GB, or it may be non-upgradable or faulty.",
+        "proof": "A photo of the RAM slots with installed modules, or a system information screen showing 8GB of installed RAM.",
+        "if_unproven": "Priced as if RAM is less than 8GB or not working, which reduces value significantly."
+      },
+      {
+        "risk": "The storage may not be 256GB SSD, or it may be a slower SATA SSD or even an HDD.",
+        "proof": "A photo of the internal drive bay showing the SSD, or a system information screen showing 256GB SSD.",
+        "if_unproven": "Priced as if storage is HDD or smaller capacity, which reduces value."
+      },
+      {
+        "risk": "The unit may not power on or may have display issues.",
+        "proof": "A video or photo of the unit powered on, showing the desktop or boot screen.",
+        "if_unproven": "Priced as not working, which is a major devaluation."
+      },
+      {
+        "risk": "The unit may have physical damage not visible under plastic wrap, such as cracks or dents.",
+        "proof": "A photo of the unit with the plastic removed, showing all sides and the screen bezel.",
+        "if_unproven": "Priced as if there is minor cosmetic damage, which reduces value."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the system information screen (BIOS or Windows) showing CPU, RAM, and storage details.",
+      "Photo of the unit with plastic removed, showing all sides and screen bezel.",
+      "Video or photo of the unit powered on, showing the desktop or boot screen.",
+      "Photo of the internal components, especially RAM and SSD, if accessible."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identified from the seller's text, but key specifications (CPU, RAM, storage) are based on a handwritten note, which is unverifiable. The unit's working condition and physical state are unknown. Without proof of these, the item cannot be priced accurately and carries significant risk."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 92476,
+    "input_tokens": 2792,
+    "output_tokens": 1125,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "2505e6e6bb9e9012a9c18d404f4a485d",
+    "error": null
+  }
+}

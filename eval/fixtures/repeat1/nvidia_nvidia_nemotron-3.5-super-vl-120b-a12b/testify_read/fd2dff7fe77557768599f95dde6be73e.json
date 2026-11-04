@@ -1,0 +1,85 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a used black automotive alternator with a visible label reading VALEO and other partially legible text.",
+      "Photo 1 shows the side of the alternator with exposed copper windings through cooling vents.",
+      "Photo 2 shows the pulley end and opposite side with more windings visible.",
+      "The unit appears dusty and grime-covered, consistent with a removed part."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car alternator",
+      "brand": "Valeo",
+      "model": null,
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Valeo Alternator",
+        "verdict": "supported",
+        "evidence": "photo 0 label reads VALEO; photos show an alternator"
+      },
+      {
+        "claim": "for Mercedes-Benz M278",
+        "verdict": "unverifiable_remote",
+        "evidence": "engine compatibility cannot be confirmed from photos alone"
+      },
+      {
+        "claim": "439741",
+        "verdict": "unverified",
+        "evidence": "part number on the label is not clearly legible in the photos"
+      },
+      {
+        "claim": "Direct Tokunbo",
+        "verdict": "unverified",
+        "evidence": "origin and prior use cannot be verified from photos"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Internal electrical failure (stator, rotor, diode pack, regulator)",
+        "proof": "bench test video showing charging output",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Worn or noisy bearings",
+        "proof": "video of the pulley rotating smoothly by hand or motor",
+        "if_unproven": "as needing bearing replacement"
+      },
+      {
+        "risk": "Incorrect part number or application",
+        "proof": "clear, legible photo of the full label showing the part number",
+        "if_unproven": "as wrong part"
+      },
+      {
+        "risk": "Physical damage to pulley, mounting ears, or electrical connector",
+        "proof": "close-up photos of all mounting points and the connector",
+        "if_unproven": "as damaged"
+      }
+    ],
+    "proof_requests": [
+      "Clear, well-lit photo of the full label showing brand and part number",
+      "Video of the alternator being bench-tested for output voltage",
+      "Video of the pulley rotating smoothly without noise or play"
+    ],
+    "decision": "price",
+    "reason": "The photos show a used Valeo car alternator, so it can be priced at its worst case as non-working; compatibility and function remain unproven."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 16728,
+    "input_tokens": 2256,
+    "output_tokens": 2441,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "fd2dff7fe77557768599f95dde6be73e",
+    "error": null
+  }
+}

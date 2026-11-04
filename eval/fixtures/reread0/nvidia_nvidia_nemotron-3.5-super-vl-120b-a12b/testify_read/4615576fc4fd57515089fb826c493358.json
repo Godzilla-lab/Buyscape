@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "A stack of used batteries sitting on concrete outdoors",
+      "Top battery has white casing with a label; \"SOLAR\" is visible but brand is not clearly readable",
+      "Middle battery is blue with exposed red and black terminals",
+      "At least two black batteries are stacked beneath the blue one",
+      "Image carries watermarks \"POSTED ON JIJI\" and \"OZEE ENERGY\"",
+      "No inverter is visible in the photo despite seller text mentioning one"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used solar batteries",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "buyer of condemned Battery",
+        "verdict": "unverifiable_remote",
+        "evidence": "seller's text only, not shown in photo"
+      },
+      {
+        "claim": "weak solar battery buyer in Benin City",
+        "verdict": "unverifiable_remote",
+        "evidence": "seller's text only"
+      },
+      {
+        "claim": "Condemned Inverter...",
+        "verdict": "unverifiable_remote",
+        "evidence": "incomplete statement and no inverter appears in the photo"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Batteries may be dead or condemned with no usable capacity",
+        "proof": "video of each battery under load with multimeter reading",
+        "if_unproven": "as non-working scrap"
+      },
+      {
+        "risk": "Brand and capacity are unreadable",
+        "proof": "close-up photos of every battery label",
+        "if_unproven": "as generic unknown-capacity batteries"
+      },
+      {
+        "risk": "Exact quantity and sizes in the stack are unclear",
+        "proof": "photo showing all batteries separated or with a measuring reference",
+        "if_unproven": "as only the clearly visible units"
+      },
+      {
+        "risk": "Case damage, leakage, swelling, or terminal corrosion",
+        "proof": "close-up inspection of each battery case and terminals",
+        "if_unproven": "as damaged scrap condition"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photos of all battery labels to read brand, voltage, and capacity",
+      "Video showing voltage under load for each battery",
+      "Photo of all batteries separated with a size reference",
+      "Photo of batteries weighed on a scale"
+    ],
+    "decision": "price",
+    "reason": "The goods are identifiable as a lot of used lead-acid/solar batteries by type; no brand is readable, so they are priced at worst case as non-working scrap pending proof of capacity or condition."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 23275,
+    "input_tokens": 1843,
+    "output_tokens": 3483,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "4615576fc4fd57515089fb826c493358",
+    "error": null
+  }
+}

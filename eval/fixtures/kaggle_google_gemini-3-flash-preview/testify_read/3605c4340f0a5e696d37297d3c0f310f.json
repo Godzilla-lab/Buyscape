@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Retail packaging for a Krisdonia brand power bank.",
+      "The box identifies the product as a 'PD/DC Laptop Power Bank'.",
+      "The image on the box shows a device with a digital display (showing 100% 20V), two DC-OUT ports, a PD-100W port, and two USB-A ports.",
+      "The brand name 'Krisdonia' is printed in gold lettering on the box.",
+      "A watermark 'POSTED ON JIJI ARAMIDE KAFAYAT' is overlaid on the image.",
+      "The actual power bank is not visible; only the cardboard box is shown.",
+      "The box appears to be sitting on a dark wooden surface."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop power bank",
+      "brand": "Krisdonia",
+      "model": "PD/DC Laptop Power Bank",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Krisdonia PD/DC Laptop Power Bank",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "high-capacity portable battery backup",
+        "verdict": "unverified",
+        "evidence": "The specific capacity (e.g., mAh or Wh) is not visible on the front of the box or the device."
+      },
+      {
+        "claim": "with AC",
+        "verdict": "unverified",
+        "evidence": "The box art shows DC and PD ports; no AC outlet is visible on the pictured device."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, inferior item.",
+        "proof": "A photo of the actual device outside of the packaging.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The battery capacity (mAh) is unknown, which significantly affects value.",
+        "proof": "A photo of the technical specifications label on the back of the box or the device itself.",
+        "if_unproven": "at the lowest capacity model in this range"
+      },
+      {
+        "risk": "The device may be faulty or unable to hold a charge.",
+        "proof": "A video showing the device powering on and successfully charging a laptop.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual power bank outside the box.",
+      "Photo of the specifications label (usually on the back or bottom) showing the mAh/Wh capacity.",
+      "Video of the device charging a laptop to verify the PD/DC output functionality."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail box is shown. Without seeing the actual device and its specific capacity (mAh), it is impossible to verify the item's existence, condition, or correct market value."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 12281,
+    "input_tokens": 2385,
+    "output_tokens": 2589,
+    "cost_usd": 0.00896,
+    "replayed": false,
+    "fixture_key": "3605c4340f0a5e696d37297d3c0f310f",
+    "error": null
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a white Philips iron box held in a hand.",
+      "The box has the Philips logo in blue at the top left.",
+      "Text on the box includes 'Original', 'Fast and efficient - guaranteed', 'Speed shaped soleplate'.",
+      "A small label on the right side of the box shows 'Philips dry iron' and model number 'HD1172'.",
+      "The box appears to be in good condition with no visible damage.",
+      "The iron image on the box is black and silver with a yellow accent.",
+      "The seller's text says 'Irom for sale few weeks used' \u2014 likely a typo for 'Iron for sale, few weeks used'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "electric iron",
+      "brand": "Philips",
+      "model": "HD1172",
+      "read_from": [
+        "photo 0 box label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "few weeks used",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows only the box; no iron or signs of use are visible. The box appears new, which contradicts 'few weeks used' unless the item was used and repacked."
+      },
+      {
+        "claim": "Irom for sale",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows a Philips iron box, confirming the item is an iron."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The iron may be damaged or not working despite being 'few weeks used'.",
+        "proof": "A photo of the actual iron, showing the soleplate, cord, and power switch, and a video of it turning on and steaming.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The box may be empty or contain a non-Philips or counterfeit iron.",
+        "proof": "A photo of the iron inside the box, with the model number visible on the iron itself.",
+        "if_unproven": "priced as counterfeit or not genuine"
+      },
+      {
+        "risk": "The iron may be missing accessories (e.g., water tank, cord, or stand).",
+        "proof": "A photo showing all components laid out together.",
+        "if_unproven": "priced as missing accessories"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual iron inside the box, showing model number on the iron.",
+      "Photo of the iron's soleplate, cord, and power switch.",
+      "Video of the iron turning on and steaming.",
+      "Photo of all accessories included."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identified as a Philips HD1172 iron from the box, but the seller claims it is 'few weeks used' while the box appears new. The actual condition, functionality, and completeness of the iron cannot be verified from the box alone. Proof of the iron's condition and contents is required before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 51962,
+    "input_tokens": 1769,
+    "output_tokens": 677,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "8d0f5563d30086c0db504211b7773e3d",
+    "error": null
+  }
+}

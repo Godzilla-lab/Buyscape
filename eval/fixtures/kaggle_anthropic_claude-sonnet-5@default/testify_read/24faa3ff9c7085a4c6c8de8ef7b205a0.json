@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: stack of 4 used tyres on dirt ground, tread visibly worn with shiny patches, no sidewall text legible",
+      "Photo 1: closer view of same stack, yellow chalk marks on sidewall, tread wear visible but no brand, size, or DOT code readable",
+      "Photo 2: four tyres laid flat side by side, alloy wheels/rims visible in background corners, still no readable sidewall markings or tyre size",
+      "White and silver alloy rims appear in the background of all three photos but are not the main subject and no model/size stamped is visible",
+      "No size (e.g. 225/45R17), load rating, or brand name is legible in any of the three photos",
+      "Ground is bare dirt, consistent with an outdoor storage yard, not a shop setting"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "set of used car tyres (approx. 4-8 pieces) with some alloy wheels/rims in background",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Direct Belgium tyres and wheels (implying imported used/Tokunbo tyres from Belgium)",
+        "verdict": "unverifiable_remote",
+        "evidence": "No import marking, customs sticker, or country-of-origin text visible in any photo; origin claims cannot be confirmed from images alone"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Tyre size unknown, which is the single biggest driver of tyre price",
+        "proof": "Close-up photo of the sidewall showing size code (e.g. 205/55R16) and brand name",
+        "if_unproven": "priced as unidentified generic used tyre, lowest tier until size/brand confirmed"
+      },
+      {
+        "risk": "Tread depth and wear pattern unclear from distance shots",
+        "proof": "Close-up of tread with a coin or ruler against the grooves",
+        "if_unproven": "priced as worn/near end-of-life tread"
+      },
+      {
+        "risk": "Sidewall cracks, bulges or repairs not visible from these angles",
+        "proof": "Full 360-degree sidewall video of each tyre",
+        "if_unproven": "priced as cosmetic/structural risk present, worst case"
+      },
+      {
+        "risk": "Age of tyres (DOT date code) unknown, rubber could be hardened/old despite tread",
+        "proof": "Clear photo of DOT code on sidewall",
+        "if_unproven": "priced as old stock, not fresh"
+      },
+      {
+        "risk": "Wheels/rims shown in background may or may not be included in this sale, and their size/bolt pattern is unreadable",
+        "proof": "Separate clear photo of each rim with size stamp and confirmation of what is included in this specific listing",
+        "if_unproven": "rims excluded from pricing until confirmed included"
+      },
+      {
+        "risk": "Mismatched set (different brands/models bundled as one lot, as suggested by varying tread patterns in photo 2)",
+        "proof": "Individual labeled photos of each tyre's sidewall",
+        "if_unproven": "priced as mismatched/non-matching set, lower than a uniform set"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of each tyre's sidewall showing size, brand, and DOT date code",
+      "Confirmation of exactly how many tyres and how many wheels are included in this specific sale",
+      "Close-up of tread depth with a measuring reference",
+      "Full video pan of each tyre's sidewall for cracks/bulges",
+      "Clear photo of each rim's size stamp if wheels are part of the sale"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The tyre size and brand, which primarily set the price, are not legible in any of the three photos, and it is unclear whether the background wheels are even part of this specific listing; a sidewall close-up is needed before even a worst-case price can be assigned."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 24699,
+    "input_tokens": 3104,
+    "output_tokens": 2100,
+    "cost_usd": 0.027208,
+    "replayed": false,
+    "fixture_key": "24faa3ff9c7085a4c6c8de8ef7b205a0",
+    "error": null
+  }
+}

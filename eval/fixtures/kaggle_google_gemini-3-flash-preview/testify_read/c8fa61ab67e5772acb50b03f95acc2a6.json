@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail packaging for a Maxmech MMA-350 welding machine.",
+      "The box indicates it is a 10.8KVA Manual Metal Arc (MMA) welding machine.",
+      "The box is secured with white plastic shipping straps.",
+      "The actual welding machine is not visible in the photo; only the illustration on the box is shown.",
+      "The top edge of the box shows some wear and minor crushing."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "welding machine",
+      "brand": "Maxmech",
+      "model": "MMA-350",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Maxmech MMA-350 welding machine",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "Manual Metal Arc (MMA) welding machine",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, lower-value item.",
+        "proof": "Photo of the actual machine outside of the box.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The machine may be used, refurbished, or internally damaged.",
+        "proof": "Clear photos of the machine's casing and the specification plate on the unit.",
+        "if_unproven": "as used/damaged"
+      },
+      {
+        "risk": "The machine may not be functional.",
+        "proof": "Video of the machine powered on and striking a test arc.",
+        "if_unproven": "as non-functional/parts only"
+      },
+      {
+        "risk": "Essential accessories like the electrode holder, earth clamp, and cables may be missing.",
+        "proof": "Photo of all included accessories spread out.",
+        "if_unproven": "as bare machine without cables"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual welding machine removed from the box.",
+      "Photo of the specification plate/sticker on the back or side of the machine itself.",
+      "Photo of the included cables, electrode holder, and earth clamp.",
+      "Video showing the machine's digital display powered on."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail packaging is shown. Without visual confirmation of the actual machine and its condition, it is impossible to verify the item exists or determine a reliable price."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 10164,
+    "input_tokens": 2411,
+    "output_tokens": 2174,
+    "cost_usd": 0.007727,
+    "replayed": false,
+    "fixture_key": "c8fa61ab67e5772acb50b03f95acc2a6",
+    "error": null
+  }
+}

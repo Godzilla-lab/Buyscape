@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a teal-colored milling machine with a funnel-shaped hopper on top.",
+      "The machine has a red protective guard on the side and a metal frame base.",
+      "The engine is white and red, with 'KINDAUTO' visible on the side.",
+      "The body of the machine has 'VIKING SUPER' written in raised letters.",
+      "There is a small black plate with text near the top of the machine, but it is too blurry to read.",
+      "The machine is outdoors on a paved surface, with some scattered grains on the ground.",
+      "The seller claims it is a '4 in 1 milling machine with Homaka Engine' and 'still in carton', but no carton is visible in the photo."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "4 in 1 milling machine",
+      "brand": "VIKING",
+      "model": "SUPER 6N40",
+      "read_from": [
+        "photo 0 body: 'VIKING SUPER'",
+        "seller's text: 'VIKING SUPER 6N40'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "New VIKING SUPER 6N40 4 in 1 milling machine",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows the machine with 'VIKING SUPER' on the body, matching the seller's description. The machine appears clean and unused."
+      },
+      {
+        "claim": "with Homaka Engine",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows the engine labeled 'KINDAUTO', not 'Homaka'."
+      },
+      {
+        "claim": "Still in carton",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows the machine fully assembled and outdoors, with no carton visible."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The engine is not Homaka as claimed, but KINDAUTO, which may affect performance or value.",
+        "proof": "A clear photo of the engine label showing the brand name.",
+        "if_unproven": "Priced as a KINDAUTO engine, which may be less valuable than Homaka."
+      },
+      {
+        "risk": "The machine may not be new or may have been used, despite the seller's claim.",
+        "proof": "A photo of the machine's interior components, wear on the frame, or any signs of use.",
+        "if_unproven": "Priced as used, not new."
+      },
+      {
+        "risk": "The '4 in 1' functionality may not be verified or may be incomplete.",
+        "proof": "A video or photo showing the machine operating in all four modes.",
+        "if_unproven": "Priced as a single-function machine, not 4 in 1."
+      }
+    ],
+    "proof_requests": [
+      "A clear photo of the engine label to confirm the brand.",
+      "A photo of the machine's interior or any signs of wear to verify its condition.",
+      "A video or photo showing the machine operating in all four modes."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The machine's identity is clear as a VIKING SUPER 4 in 1 milling machine, but key claims (Homaka engine, new condition, 4 in 1 functionality) are contradicted or unverified. Without proof, the item cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 63967,
+    "input_tokens": 1835,
+    "output_tokens": 769,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "aff1740eb2389c066eebc17929aa87a0",
+    "error": null
+  }
+}

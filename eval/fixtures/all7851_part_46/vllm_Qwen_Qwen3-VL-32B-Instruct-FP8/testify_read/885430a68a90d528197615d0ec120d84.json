@@ -1,0 +1,87 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Silver laptop closed, held in hand, showing back lid with HP logo and a small blue and gray striped logo (possibly HP's 'Elite' branding).",
+      "Photo 1: Back of the laptop showing ventilation grille, screws, and a white sticker with handwritten text. The sticker includes 'EliteBook' and '1040 G7' written in black ink. A pink sticker and a barcode are also visible.",
+      "Photo 2: Laptop open, showing keyboard, trackpad, and screen. The keyboard has 'EliteBook' printed on the palm rest. The screen is off and reflects surroundings. The laptop is silver with black keys.",
+      "All photos show the laptop in a store environment with other laptops visible in the background, including HP and Dell models.",
+      "The seller's text claims: 'Elitebook x360 1040 G7 corei7 512 SSD touchscreen'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "EliteBook x360 1040 G7",
+      "read_from": [
+        "photo 1 sticker",
+        "photo 2 palm rest"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Elitebook x360 1040 G7",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows a white sticker with 'EliteBook 1040 G7' handwritten. Photo 2 shows 'EliteBook' on the palm rest."
+      },
+      {
+        "claim": "corei7",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible CPU label or system information. Cannot be confirmed from photos."
+      },
+      {
+        "claim": "512 SSD",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible storage label or system information. Cannot be confirmed from photos."
+      },
+      {
+        "claim": "touchscreen",
+        "verdict": "unverified",
+        "evidence": "Screen is off and reflects surroundings; no touch interaction shown. No visible touchscreen indicator (e.g., 'touch' label or gesture)."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The laptop may not have a touchscreen as claimed.",
+        "proof": "A video or photo showing the screen being touched or a close-up of a 'touch' label on the bezel or in the specs.",
+        "if_unproven": "Priced as non-touchscreen, which reduces value."
+      },
+      {
+        "risk": "The CPU may not be Core i7.",
+        "proof": "A screenshot of the system information (e.g., Windows About or CPU-Z) showing the processor model.",
+        "if_unproven": "Priced as a lower-tier CPU (e.g., Core i5 or i3), which reduces value."
+      },
+      {
+        "risk": "The SSD capacity may not be 512GB.",
+        "proof": "A screenshot of the disk management or system information showing the storage size.",
+        "if_unproven": "Priced as a smaller SSD (e.g., 256GB), which reduces value."
+      },
+      {
+        "risk": "The laptop may have physical damage or wear not visible in photos.",
+        "proof": "A close-up video or photo of the screen, hinges, keyboard, and ports showing condition.",
+        "if_unproven": "Priced as having potential hidden damage, which reduces value."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of system information showing CPU model and storage capacity.",
+      "Video or photo showing the screen being touched to confirm touchscreen functionality.",
+      "Close-up photos of the screen, keyboard, hinges, and ports to check for damage or wear."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is confirmed as HP EliteBook x360 1040 G7, but key claims (Core i7, 512GB SSD, touchscreen) cannot be verified from the photos. Hidden risks related to specs and condition affect pricing. Proof is needed to confirm these claims and assess true value."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 72832,
+    "input_tokens": 3249,
+    "output_tokens": 930,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "885430a68a90d528197615d0ec120d84",
+    "error": null
+  }
+}

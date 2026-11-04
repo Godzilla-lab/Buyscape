@@ -1,0 +1,92 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Two tires mounted on steel rims, stacked together, in both photos.",
+      "Photo 1 sidewall shows raised lettering 'ALTIMAX ARCTIC'.",
+      "Steel wheels have multiple bolt holes and a center bore; no other tire brand is legible.",
+      "Watermark 'STACEY DAVIES' appears across both images.",
+      "Seller text mentions additional 215/45 R17 tires without rims, not shown in photos."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car tire",
+      "brand": null,
+      "model": "Altimax Arctic",
+      "read_from": [
+        "photo 1 sidewall"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Two tires with rims",
+        "verdict": "supported",
+        "evidence": "photos 0 and 1 show two stacked tire/rim assemblies"
+      },
+      {
+        "claim": "Altimax Arctic",
+        "verdict": "supported",
+        "evidence": "photo 1 sidewall reads Altimax Arctic"
+      },
+      {
+        "claim": "215/60 R16",
+        "verdict": "unverified",
+        "evidence": "size not clearly legible in photos"
+      },
+      {
+        "claim": "Others available with no Rim carries 215/45/R17",
+        "verdict": "unverifiable_remote",
+        "evidence": "not shown in photos"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Tire manufacturing date unknown; rubber may be aged or hardened",
+        "proof": "Close-up photo of the DOT date code stamped on the sidewall",
+        "if_unproven": "price as old tires with unknown remaining life"
+      },
+      {
+        "risk": "Tread depth and wear pattern unknown",
+        "proof": "Close-up photo of tread with depth gauge or wear bars visible",
+        "if_unproven": "price as worn or bald tires"
+      },
+      {
+        "risk": "Steel rim may be bent, cracked, or corroded",
+        "proof": "Video of the rim rotating or close-up of the rim lip and face",
+        "if_unproven": "price as damaged rim"
+      },
+      {
+        "risk": "Tire may not hold air due to bead leak or puncture",
+        "proof": "Video of the tire inflated or a leak test",
+        "if_unproven": "price as non-inflatable tire"
+      },
+      {
+        "risk": "The two tires may not be a matching pair",
+        "proof": "Photo of both tire sidewalls side by side",
+        "if_unproven": "price as a single tire only"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of the DOT date code on the sidewall",
+      "Tread depth close-up with gauge",
+      "Video of rim rotating to check for bends or cracks",
+      "Photo of both sidewalls side by side"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable from photo 1 as Altimax Arctic tires on steel rims; condition risks can be priced at worst case without blocking a valuation."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 22971,
+    "input_tokens": 2325,
+    "output_tokens": 4536,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "63d5bc62b4c3bed54eb7447990680c09",
+    "error": null
+  }
+}

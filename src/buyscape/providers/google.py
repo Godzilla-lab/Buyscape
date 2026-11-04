@@ -15,7 +15,7 @@ import time
 import httpx
 from pydantic import BaseModel, ValidationError
 
-from .base import CallMeta, ModelRequest, ProviderError
+from .base import CallMeta, ModelRequest, ProviderError, QuotaExhausted
 from .openrouter import _extract_json
 
 BASE = "https://generativelanguage.googleapis.com/v1beta/models"
@@ -82,7 +82,10 @@ class GoogleProvider:
                     }
                 ]
             },
-            "contents": [{"role": "user", "parts": self._parts(request)}],
+            "contents": [{"role": "user", "parts": self._parts(request)}] + [
+                turn for reply, said in request.turns
+                for turn in ({"role": "model", "parts": [{"text": reply}]}, {"role": "user", "parts": [{"text": said}]})
+            ],
             "generationConfig": {
                 "temperature": request.temperature,
                 # Gemini 3.x thinks before it answers and the thoughts count
@@ -102,6 +105,8 @@ class GoogleProvider:
             started = time.perf_counter()
             try:
                 resp = self._client.post(url, json=body, headers=headers)
+                if resp.status_code == 429 and "PerDay" in resp.text:
+                    raise QuotaExhausted(f"{self.model}: the free daily quota for this key is used up")
                 if resp.status_code in (429, 503):
                     # The free tier meters requests per minute and sheds load
                     # under demand. Both pass with patience, not with money.
@@ -134,6 +139,8 @@ class GoogleProvider:
                     cost_usd=round(spent, 6),
                     fixture_key=request.fixture_key(),
                 )
+            except QuotaExhausted:
+                raise
             except (httpx.HTTPError, ProviderError, KeyError, ValidationError) as exc:
                 last = exc
                 if attempt < self._max_retries:

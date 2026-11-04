@@ -1,0 +1,93 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Open laptop showing keyboard, trackpad, and black screen. Dell logo visible on palm rest. Intel Core i5 sticker on top right of keyboard deck. Screen bezel has a small orange indicator light on the left side.",
+      "Photo 1: Same angle as photo 0, but screen is on with Dell logo boot screen. Keyboard and trackpad unchanged. Intel sticker still visible.",
+      "Photo 2: Closed laptop lid showing Dell logo in center. Surface is dusty and has smudges. No visible model number or serial plate.",
+      "All photos show a black Dell laptop with a standard business design. No visible damage to casing or screen from these angles. No ports, hinges, or underside shown."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "laptop",
+      "brand": "Dell",
+      "model": null,
+      "read_from": [
+        "photo 0 screen bezel",
+        "photo 1 screen bezel",
+        "photo 2 lid"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Dell Latitude 5400",
+        "verdict": "unverified",
+        "evidence": "No model number visible in any photo. The Dell logo is present, but the specific model cannot be confirmed from the images."
+      },
+      {
+        "claim": "Core i5 8th Gen",
+        "verdict": "unverified",
+        "evidence": "Intel Core i5 sticker visible in photo 0 and photo 1, but no generation or specific model number is readable. The sticker alone does not confirm 8th Gen."
+      },
+      {
+        "claim": "8GB RAM",
+        "verdict": "unverifiable_remote",
+        "evidence": "No way to verify RAM amount from photos. Requires BIOS or system info screen."
+      },
+      {
+        "claim": "256GB SSD",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible drive or system info to confirm storage type or size. Cannot be verified remotely."
+      },
+      {
+        "claim": "Powerful and reliable business-class",
+        "verdict": "unverifiable_remote",
+        "evidence": "Subjective claim. Cannot be verified from photos alone."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Incorrect model or generation",
+        "proof": "Photo of the model label or service tag, typically on the bottom of the laptop or inside the battery compartment.",
+        "if_unproven": "Priced as a generic Dell business laptop, not as a specific Latitude 5400 or 8th Gen i5."
+      },
+      {
+        "risk": "RAM or SSD not as advertised",
+        "proof": "Screenshot of system information (e.g., Windows System Properties or BIOS) showing RAM and storage details.",
+        "if_unproven": "Priced as if RAM and SSD are not confirmed, which may mean lower value or non-functional storage."
+      },
+      {
+        "risk": "Physical damage or wear not visible in photos",
+        "proof": "Photos of all sides, hinges, ports, and underside of the laptop.",
+        "if_unproven": "Priced assuming possible hidden damage, which could reduce value."
+      },
+      {
+        "risk": "Battery health or power issues",
+        "proof": "Video of the laptop powering on, charging, and running for a few minutes.",
+        "if_unproven": "Priced as if battery may be dead or degraded, reducing usability."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the model label or service tag on the bottom of the laptop.",
+      "Screenshot of system information showing RAM and storage details.",
+      "Photos of all sides, hinges, ports, and underside.",
+      "Video of the laptop powering on and running for a few minutes."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and key specifications (RAM, SSD, CPU generation) cannot be confirmed from the current photos. The laptop appears to be a Dell business model, but without proof of the exact model and internal specs, it cannot be priced accurately. Hidden risks like incorrect specs or physical damage must be ruled out."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 75087,
+    "input_tokens": 2172,
+    "output_tokens": 920,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "25ec0b679cde179e44a27234fed0634b",
+    "error": null
+  }
+}

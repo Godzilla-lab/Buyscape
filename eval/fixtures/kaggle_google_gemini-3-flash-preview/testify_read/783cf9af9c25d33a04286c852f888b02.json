@@ -1,0 +1,66 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Close-up of a tire tread with a manufacturer's sticker attached.",
+      "Sticker identifies the brand as Michelin and the model as Pilot Sport 4 SUV.",
+      "Sticker lists the size as 255/50R20 and load/speed rating as 109Y.",
+      "The tread appears deep and unused, though the sticker is worn and partially peeled.",
+      "Watermarks indicate the seller is 'FRANCOBEST ENT' or 'FRANCO GLOBAL ENTERPRISES'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "tire",
+      "brand": "Michelin",
+      "model": "Pilot Sport 4 SUV",
+      "read_from": [
+        "photo 0 sticker"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "255/50r20 michelin premium tire",
+        "verdict": "supported",
+        "evidence": "photo 0 sticker"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The tire may be 'New Old Stock' (expired or near-expiry rubber).",
+        "proof": "A clear photo of the DOT code (4 digits in an oval) on the sidewall.",
+        "if_unproven": "as old stock (over 5 years old)"
+      },
+      {
+        "risk": "Hidden sidewall damage or previous repairs (plugs/patches).",
+        "proof": "Photos of both the inner and outer sidewalls and the interior casing.",
+        "if_unproven": "as a used/repaired tire"
+      },
+      {
+        "risk": "The sticker may not match the tire (mismatched or reapplied).",
+        "proof": "Photo of the size and model name molded into the tire sidewall rubber.",
+        "if_unproven": "as the model shown on the sticker"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the 4-digit DOT date code on the sidewall.",
+      "Photos of the full inner and outer sidewalls showing the molded specifications.",
+      "Photo of the inside of the tire to check for patches."
+    ],
+    "decision": "price",
+    "reason": "The tire is clearly identified by the manufacturer sticker as a Michelin Pilot Sport 4 SUV in size 255/50R20. It can be priced as a single unit at the worst-case value for unverified age."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 11575,
+    "input_tokens": 2359,
+    "output_tokens": 1971,
+    "cost_usd": 0.007092,
+    "replayed": false,
+    "fixture_key": "783cf9af9c25d33a04286c852f888b02",
+    "error": null
+  }
+}

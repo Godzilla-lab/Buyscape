@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: A black Dell laptop is held closed, showing the textured lid with the Dell logo centered. The background shows a shelf with other laptops, including an HP.",
+      "Photo 1: The same laptop is open, showing the keyboard, trackpad, and screen. The screen is off and reflects the surroundings. The Dell logo is visible on the top bezel.",
+      "Photo 2: The bottom of the laptop is shown, with ventilation grilles, rubber feet, and a sticker with a barcode and model information. The sticker is partially obscured but appears to be a Dell service tag or serial number label.",
+      "The laptop appears to be a standard business or consumer model, likely from the Dell Inspiron or Latitude series, based on design and build.",
+      "No charger is visible in any photo.",
+      "The seller claims it is a 'UK used Dell laptop with charger' \u2014 the 'UK used' claim cannot be verified from photos, and the charger is not shown."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "Dell laptop",
+      "brand": "Dell",
+      "model": null,
+      "read_from": [
+        "photo 0 lid",
+        "photo 1 top bezel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "UK used Dell laptop",
+        "verdict": "unverifiable_remote",
+        "evidence": "The origin (UK) cannot be confirmed from photos. The 'used' status is assumed but not proven by condition."
+      },
+      {
+        "claim": "with charger",
+        "verdict": "unverified",
+        "evidence": "No charger is visible in any photo. The claim is unverified."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The laptop may not be functional or may have internal damage (e.g., dead battery, non-working screen, or hardware failure).",
+        "proof": "A video showing the laptop powering on, displaying a working screen, and running the OS.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The charger is not included, despite the seller's claim.",
+        "proof": "A photo or video showing the charger, preferably with the Dell logo and model number matching the laptop.",
+        "if_unproven": "priced as missing charger"
+      },
+      {
+        "risk": "The laptop may have a damaged screen, keyboard, or trackpad.",
+        "proof": "A close-up video of the screen turning on and displaying content, and a test of the keyboard and trackpad.",
+        "if_unproven": "priced as potentially damaged"
+      },
+      {
+        "risk": "The model and specifications are unknown, which affects value.",
+        "proof": "A clear photo of the service tag or serial number sticker on the bottom (photo 2) or a screenshot of the system information (e.g., Windows About page).",
+        "if_unproven": "priced as unknown model/specs"
+      }
+    ],
+    "proof_requests": [
+      "A clear photo or video of the charger, showing the Dell logo and model number.",
+      "A video of the laptop powering on and showing a working screen and keyboard.",
+      "A close-up photo of the service tag on the bottom (photo 2) to read the model number.",
+      "A screenshot of the system information (e.g., Windows About page) to confirm specs."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The laptop is identifiable as a Dell, but the model, functionality, and inclusion of the charger are unproven. The 'UK used' claim is unverifiable. Without proof of working condition and included accessories, the item cannot be priced accurately. The next step is to request proof of the charger, working state, and model details."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 70358,
+    "input_tokens": 2771,
+    "output_tokens": 833,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "6e9fb65dbbe1a39aac592227ddb8e64d",
+    "error": null
+  }
+}

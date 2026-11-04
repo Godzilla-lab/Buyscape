@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail packaging for a portable power station.",
+      "The box identifies the model as 'SL-62'.",
+      "The box text describes it as 'ENERGY STORAGE POWER' and 'SOLAR PORTABLE OUTDOOR ENERGY STORAGE POWER SUPPLY'.",
+      "The actual device is not shown outside of the box.",
+      "No solar panel is visible in the photo.",
+      "A watermark 'FABULOUS SOLAR' is visible on the image."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "portable power station",
+      "brand": null,
+      "model": "SL-62",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "300watts solar generator",
+        "verdict": "unverified",
+        "evidence": "The wattage is not explicitly printed on the visible side of the box."
+      },
+      {
+        "claim": "30ah lithium battery",
+        "verdict": "unverified",
+        "evidence": "The battery capacity is not visible on the packaging."
+      },
+      {
+        "claim": "50w panel",
+        "verdict": "unverified",
+        "evidence": "No solar panel is shown in the provided photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, used, or damaged unit.",
+        "proof": "Photo of the actual unit out of the box and powered on.",
+        "if_unproven": "as a non-functional or missing unit"
+      },
+      {
+        "risk": "The 50W solar panel may not be included or may be of a lower specification.",
+        "proof": "Photo of the solar panel showing its label and connectors.",
+        "if_unproven": "as not included"
+      },
+      {
+        "risk": "Internal battery capacity and inverter wattage may be lower than the seller's claim.",
+        "proof": "Photo of the technical specifications sticker on the back or bottom of the actual unit.",
+        "if_unproven": "at the lowest standard specification for this model"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual power station out of the box.",
+      "Photo of the solar panel included in the deal.",
+      "Photo of the specifications sticker on the back of the device showing capacity and wattage.",
+      "A short video of the device powered on and charging a phone or light."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail box is shown. The actual condition of the power station and the existence of the claimed solar panel cannot be confirmed from the current photo."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 14449,
+    "input_tokens": 2363,
+    "output_tokens": 2766,
+    "cost_usd": 0.00948,
+    "replayed": false,
+    "fixture_key": "4e72bb8a21f91b77839da95c76a1a614",
+    "error": null
+  }
+}

@@ -1,7 +1,10 @@
 # Partnership emails for Nigerian data
 
 Drafts for asking Nigerian companies for data access. Replace everything in
-square brackets before sending. Nothing here has been sent.
+square brackets before sending.
+
+**Sent so far:** Jiji, which accepted on 4 Nov 2026 (see section 5). The rest
+have not been sent.
 
 ## What every email asks for
 
@@ -32,8 +35,10 @@ square brackets before sending. Nothing here has been sent.
 
 Hello [name],
 
-Buyscape, the valuation engine we are building for BuyScrap, now runs on your
-adverts. The next step that would help most is your history of past deals.
+Buyscape is an open valuation engine for second-hand goods, built for any
+business that buys them. BuyScrap is the first we would like to work with, and
+the engine already runs on your adverts. The next step that would help most is
+your history of past deals.
 
 What we would like, for as many past deals as you can find:
 - the photos the seller sent
@@ -194,6 +199,17 @@ Thank you,
 ---
 
 ## 5. Jiji
+
+**Status: accepted, 4 Nov 2026.** Jiji agreed to all of the request below,
+as the owner reports: both ways in (a research export or API, and a polite,
+rate-limited fetch of public adverts) and use in BuyScrap's quotes. What we
+promised stands as the condition of use: we publish advert links and our own
+labels only, never Jiji photos and never seller contact details (phone numbers
+and emails are redacted from everything we keep), and Jiji is credited as the
+data source wherever the data appears. Keep their written reply with this file's
+owner; it is not stored in the repository. The credit is on the Testify card
+(huggingface.co/datasets/godzilla1215/testify) and both Kaggle market datasets,
+and `buyscape data-pack` writes it into every datasheet it builds.
 
 **Subject:** Research data access request: open benchmark for honest AI valuation
 

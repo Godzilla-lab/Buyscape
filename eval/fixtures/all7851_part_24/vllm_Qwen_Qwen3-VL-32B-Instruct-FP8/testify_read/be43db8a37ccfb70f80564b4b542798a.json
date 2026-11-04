@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "A blue laptop with white keys is shown in three photos.",
+      "Photo 0 shows the keyboard and palm rest area with a sticker containing serial and model info: 'COMPUTER LAPTOP HEWLETT PACKARD M/B' and 'CN04314ZY S/SC08942T3F'.",
+      "Photo 1 shows the front view with the HP logo above the screen, a 'Stream' label on the left of the keyboard, and an ENERGY STAR sticker.",
+      "Photo 2 shows the closed lid with the HP logo centered.",
+      "The laptop appears to be an HP Stream model, likely 13-inch based on the seller's claim and form factor.",
+      "No visible damage to the casing or keyboard in the photos.",
+      "The screen is off in all photos, so display condition is unknown."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "Stream",
+      "read_from": [
+        "photo 1 screen bezel (Stream label)",
+        "photo 2 lid (HP logo)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Hp stream 13",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows 'Stream' label on the keyboard bezel and the laptop's size matches a 13-inch form factor."
+      },
+      {
+        "claim": "ENERGY STAR",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows an ENERGY STAR sticker on the left side of the keyboard."
+      },
+      {
+        "claim": "available now at promo price",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a marketing statement; no proof of current availability or pricing is visible in the photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The laptop may not power on or may have a non-functional screen.",
+        "proof": "A video showing the laptop turning on, displaying a desktop, and responding to keyboard input.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The laptop may have internal damage or hardware issues (e.g., battery, ports, keyboard, trackpad).",
+        "proof": "A video showing all ports, keyboard, trackpad, and battery functionality in use.",
+        "if_unproven": "priced as having unknown functionality"
+      },
+      {
+        "risk": "The model or serial number may not match the sticker or seller's claim.",
+        "proof": "A clear photo of the bottom chassis label or BIOS screen showing the exact model and serial number.",
+        "if_unproven": "priced as unverified model"
+      }
+    ],
+    "proof_requests": [
+      "Video of the laptop turning on and showing the desktop.",
+      "Video showing keyboard, trackpad, and ports in use.",
+      "Clear photo of the bottom chassis label or BIOS screen for model verification."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as an HP Stream laptop, and the seller's claims are mostly supported. However, without proof of functionality and exact model verification, the price cannot be determined confidently. The risks of non-functionality or misrepresentation require additional proof before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 61794,
+    "input_tokens": 2636,
+    "output_tokens": 729,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "be43db8a37ccfb70f80564b4b542798a",
+    "error": null
+  }
+}

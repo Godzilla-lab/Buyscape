@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail packaging (box) for an Ingco welding machine.",
+      "The box text identifies it as a 160A Inverter MMA/TIG Lift Welding Machine.",
+      "A product sticker on the box in photo 0 displays the model number ING-UMMA16028.",
+      "The actual welding machine and its accessories are not visible outside the box.",
+      "There is a watermark 'MURICH INVESTMENT' across the center of the image."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "welding machine",
+      "brand": "Ingco",
+      "model": "ING-UMMA16028",
+      "read_from": [
+        "photo 0 sticker"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Ingco MMA 160A Welding Machine",
+        "verdict": "supported",
+        "evidence": "Confirmed by the text and model sticker on the box in photo 0."
+      },
+      {
+        "claim": "designed with IGBT",
+        "verdict": "unverifiable_remote",
+        "evidence": "This refers to internal circuitry that cannot be seen in photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, lower-value item.",
+        "proof": "Photo of the actual machine outside of the box.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The machine may be non-functional or have internal faults.",
+        "proof": "Video of the machine powered on and successfully striking a welding arc.",
+        "if_unproven": "as not working/for parts"
+      },
+      {
+        "risk": "Essential accessories (electrode holder, earth clamp, cables) may be missing.",
+        "proof": "Photo of the machine alongside all included accessories.",
+        "if_unproven": "as the machine unit only without cables"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual welding machine outside of the box to verify condition.",
+      "Photo of all included accessories (cables, clamps, mask, brush).",
+      "Video of the machine powered on and welding."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller has only provided a photo of the box. Without seeing the actual item, its condition, or confirming it is even present, a valuation is not possible."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 13664,
+    "input_tokens": 2403,
+    "output_tokens": 2947,
+    "cost_usd": 0.010042,
+    "replayed": false,
+    "fixture_key": "06bd24a83c58e2ab3728f9e325cd354e",
+    "error": null
+  }
+}

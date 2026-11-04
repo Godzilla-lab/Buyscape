@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a red and silver electric kettle being held in front of multiple boxes labeled 'KETTLE stainless steel'.",
+      "The boxes display images of kettles in red, silver, and blue, with text 'Capacity: 3.5L' and 'TEA & COFFEE'.",
+      "The kettle in hand has a shiny red body, a silver base, a black handle, and a black lid knob.",
+      "The boxes are stacked on a shelf, suggesting a retail or wholesale setting.",
+      "No power cord, plug, or base is visible in the photo.",
+      "The kettle appears to be new and still in its packaging context, but not sealed."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "3.5L stainless steel electric kettle",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 box text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "3.5L stainless steel kettle",
+        "verdict": "supported",
+        "evidence": "Photo 0: boxes clearly state 'Capacity: 3.5L' and 'stainless steel'."
+      },
+      {
+        "claim": "Boil water with this stylish kettle, perfect for tea and coffee",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo 0 shows the kettle and packaging, but no proof of functionality or style beyond appearance. No evidence of boiling or use."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Kettle may not be functional (e.g., no power cord, damaged base, or non-working heating element)",
+        "proof": "Photo of the kettle's base, power cord, plug, and a close-up of the heating element or switch.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Kettle may not be genuine stainless steel or may have a coating that peels or rusts",
+        "proof": "Close-up photo of the kettle's body showing material texture and any signs of wear or coating.",
+        "if_unproven": "priced as lower quality material"
+      },
+      {
+        "risk": "Kettle may not be compatible with Nigerian voltage (220-240V) or plug type (G-type)",
+        "proof": "Photo of the plug and base showing voltage rating and plug type.",
+        "if_unproven": "priced as incompatible"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the kettle's base, power cord, and plug.",
+      "Close-up of the kettle's body material and any labels or markings.",
+      "Photo showing the voltage rating and plug type on the base or cord."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a 3.5L stainless steel electric kettle, but critical functional and compatibility details (power cord, plug, voltage, material authenticity) are missing. Without proof of these, the item cannot be priced accurately and carries significant hidden risks."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 56893,
+    "input_tokens": 1937,
+    "output_tokens": 678,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "b1ada465229d211f227d7ae330b9830e",
+    "error": null
+  }
+}

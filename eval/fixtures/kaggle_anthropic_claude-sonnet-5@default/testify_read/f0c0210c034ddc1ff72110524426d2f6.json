@@ -1,0 +1,84 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photos 0-2 show stacks of wooden pallets outdoors on bare dirt mixed with trash and debris.",
+      "Photo 2 shows several pallet blocks stamped 'EPAL', indicating genuine or branded Euro-pallets.",
+      "Photo 1 shows pallets with darker, rougher blocks that look different in color/texture from the EPAL ones in photo 2, suggesting a mixed batch of pallet types or ages.",
+      "Photo 3 shows a single pallet held up by two hands; it has cracked, split boards, visible staining/discoloration, and no visible stamp or brand mark.",
+      "No photo shows a scale, weighbridge ticket, or any document supporting the 500kg weight claim.",
+      "No close-up of wood grain or block material to confirm 'dry, no water added' claim.",
+      "Ground and surroundings are littered with waste, but this does not by itself indicate pallet condition."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "wooden pallets (mixed batch, some EPAL-stamped Euro pallets)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 2 block stamp 'EPAL'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Everything is clean, dry and sorted, no water added",
+        "verdict": "unverifiable_remote",
+        "evidence": "No close-up or moisture-indicator shot provided in any photo"
+      },
+      {
+        "claim": "Weighed at 500 kg on a certified scale this morning",
+        "verdict": "unverifiable_remote",
+        "evidence": "No scale, ticket, or receipt visible in any of the 4 photos"
+      },
+      {
+        "claim": "Foreign pallets (implying Euro/EPAL standard)",
+        "verdict": "unverified",
+        "evidence": "Photo 2 shows EPAL stamps on some units, but photo 1 and photo 3 show pallets without visible stamps or of different build, so not all units are confirmed as genuine EPAL stock"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual weight may be less than claimed 500kg, affecting price-per-kg value",
+        "proof": "Photo or video of the pallets on a scale with the reading visible",
+        "if_unproven": "priced assuming weight is unconfirmed/lower-bound estimate, not the claimed 500kg"
+      },
+      {
+        "risk": "Batch is mixed quality \u2014 some stamped EPAL (higher grade) and some unstamped/different pallets (lower grade, as seen photo 1 and 3)",
+        "proof": "Clear photos of stamps/markings on every pallet in the stack, or a count of EPAL vs non-EPAL units",
+        "if_unproven": "priced at the lower-grade mixed-lot rate, not pure EPAL rate"
+      },
+      {
+        "risk": "Visible cracks, splits, and staining on the pallet in photo 3 may indicate structural weakness or water damage despite 'dry, no water added' claim",
+        "proof": "Close-up photos of the board joints and block material showing no rot or water staining",
+        "if_unproven": "priced as damaged/lower-grade stock"
+      },
+      {
+        "risk": "No piece count given, only total weight \u2014 pallet sizes/types affect per-unit value",
+        "proof": "Photo or tally showing number of pallets and their individual dimensions",
+        "if_unproven": "priced conservatively using lowest plausible per-pallet weight/count ratio"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the pallets on the certified scale with the weight reading visible",
+      "Close-up photos of stamps/markings (EPAL, IPPC, heat-treatment HT mark) on each pallet or a representative sample",
+      "Photo showing a count of total pallets in the lot",
+      "Close-up of block and board material to check for rot, mold, or water staining"
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identifiable as a mixed lot of wooden pallets, some EPAL-stamped and some not, with visible wear and no proof for the weight or cleanliness claims, so it can be priced at the worst-case mixed/lower-grade, unverified-weight level pending further proof."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 24587,
+    "input_tokens": 4120,
+    "output_tokens": 2158,
+    "cost_usd": 0.026661,
+    "replayed": false,
+    "fixture_key": "f0c0210c034ddc1ff72110524426d2f6",
+    "error": null
+  }
+}

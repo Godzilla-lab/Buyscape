@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows a large stack of used car batteries of mixed brands, sizes, and condition piled on a wooden pallet on a concrete floor.",
+      "Many units show dust, corrosion stains, and worn casings consistent with used/reclaimed batteries.",
+      "Photo 1 is a close-up of a single battery labeled 'GREEN ENERGY AUTOMOTIVE', 'GE 60', 'MADE IN ITALY', '540A (EN)'.",
+      "The top label on the photo 1 battery is torn and peeling, and the terminal caps (red/black) show wear consistent with prior use.",
+      "No charge level, voltage, or load-test reading is visible in either photo.",
+      "It is unclear which specific battery from the pile in photo 0 corresponds to the close-up in photo 1."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car battery",
+      "brand": "Green Energy",
+      "model": "GE 60",
+      "read_from": [
+        "photo 1 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Direct second hand battery available",
+        "verdict": "supported",
+        "evidence": "photo 1 shows visible wear, torn label, and used terminal caps consistent with a second-hand unit"
+      },
+      {
+        "claim": "Good warranty",
+        "verdict": "unverifiable_remote",
+        "evidence": "No warranty card, receipt, or shop signage shown in either photo"
+      },
+      {
+        "claim": "Available in stock",
+        "verdict": "unverifiable_remote",
+        "evidence": "Cannot confirm real-time stock from static photos"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual charge/health of the battery (cold cranking amps, internal cell condition) unknown",
+        "proof": "A clip or photo of a multimeter/load tester reading on this exact unit",
+        "if_unproven": "priced as not holding charge / worst case functional state"
+      },
+      {
+        "risk": "Physical damage (cracks, leakage, swollen casing) hidden under torn label",
+        "proof": "Close-up photos of all four sides and the base of the battery",
+        "if_unproven": "priced as possibly damaged, lowering value"
+      },
+      {
+        "risk": "Mismatch between the battery pictured in photo 1 and the one actually sold from the pile in photo 0",
+        "proof": "A single photo showing the exact unit with a tag or seller holding it, matching the close-up",
+        "if_unproven": "priced as generic used battery, not the specific Green Energy GE60 shown"
+      },
+      {
+        "risk": "Battery age unknown, affecting remaining life expectancy",
+        "proof": "Manufacture date code stamped on the battery body, photographed clearly",
+        "if_unproven": "priced as unknown/old stock, worst case near end-of-life"
+      }
+    ],
+    "proof_requests": [
+      "Video of a load test or multimeter reading showing voltage/CCA on the exact battery being sold",
+      "Close-up photos of all sides of the battery to check for cracks, leaks, or corrosion",
+      "Photo of the manufacture date code",
+      "A clear photo linking the close-up unit to its position in the pile, confirming which one is sold"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a used Green Energy GE60 car battery from the readable label, but no functional proof (charge, load test, date code) is given, so it must be priced at worst-case condition for a second-hand battery of unverified health."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 19340,
+    "input_tokens": 2916,
+    "output_tokens": 1736,
+    "cost_usd": 0.020033,
+    "replayed": false,
+    "fixture_key": "eaecc7a6a3153e4ed53d3de9beac27cb",
+    "error": null
+  }
+}

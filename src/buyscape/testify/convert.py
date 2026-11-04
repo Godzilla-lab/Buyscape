@@ -253,6 +253,7 @@ def buyscrap_items(root: Path) -> list[Item]:
                         kind="wanted" if tier == "not_for_sale" else "asking",
                         used=True,
                         note=f"site category {listing.category}",
+                        observed_on=(getattr(listing, "fetched_at", "") or "")[:10] or None,
                     ),
                 ),
                 risks=risk_seeds(protocol) if protocol else [],
@@ -265,15 +266,18 @@ def buyscrap_items(root: Path) -> list[Item]:
 def wider_items(root: Path, cache: str = "testify") -> list[Item]:
     """Small goods and material lots fetched by `buyscape testify-fetch`.
 
-    From the testify_new cache, which holds dealers' new stock, every item is
-    split `train`: training data for naming an item, never a benchmark item.
+    From the training caches, testify_new (dealers' new stock), testify_train
+    (second-hand adverts fetched for training) and testify_crawl (whole Jiji
+    categories paged through), every item is split `train`: training data,
+    never a benchmark item.
     """
     raw = root / "eval" / "raw" / cache
     training = cache != "testify"
     protocols = load_protocols(root / "protocols")
     items: list[Item] = []
     for row in wider.load(raw):
-        category = "material_lot" if row["tier"] == "material_lot" else "generic"
+        # A crawled advert names its own protocol (phone, laptop, furniture).
+        category = row.get("protocol") or ("material_lot" if row["tier"] == "material_lot" else "generic")
         # Most scrap adverts on Jiji are dealers asking to buy, not sellers.
         wanted = bool(WANTED.search(row["title"]))
         protocol = _protocol_for(category, protocols)
@@ -295,13 +299,17 @@ def wider_items(root: Path, cache: str = "testify") -> list[Item]:
                 answer=Answer(
                     title=row["title"],
                     category=category,
-                    kind=row["kind"],
+                    # A crawled advert's kind is the site's broad category
+                    # ("Home Appliances"): no label, so its title says what it is
+                    # and a fridge still finds fridges to be priced against.
+                    kind=None if cache == "testify_crawl" else row["kind"],
                     identity=Identity(text=row["kind"], source="title"),
                     price=PriceTruth(
                         ngn=row.get("price_ngn"),
                         kind="wanted" if wanted else "asking",
                         used=row.get("is_used"),
                         note=row.get("condition") or "",
+                        observed_on=(row.get("fetched_at") or "")[:10] or None,
                     ),
                 ),
                 risks=risk_seeds(protocol) if protocol else [],
@@ -310,12 +318,45 @@ def wider_items(root: Path, cache: str = "testify") -> list[Item]:
     return items
 
 
+TRAIN_CACHES = ("testify_new", "testify_train", "testify_crawl")
+
+
 def train_items(root: Path, previous: Path | None = None) -> list[Item]:
-    """The new-stock training pool. Kept from the previous file when the
-    cache is not on this machine, like every other source."""
-    if wider.load(root / "eval" / "raw" / "testify_new"):
-        return sorted(wider_items(root, "testify_new"), key=lambda i: i.id)
-    return load_items(previous) if previous else []
+    """The training pool: dealers' new stock, for naming items, and second-hand
+    adverts fetched for training. A cache not on this machine keeps the items
+    it had in the previous file, like every other source."""
+    kept = load_items(previous) if previous else []
+    out: dict[str, Item] = {}
+    for cache in TRAIN_CACHES:
+        if wider.load(root / "eval" / "raw" / cache):
+            items = wider_items(root, cache)
+        else:
+            items = [i for i in kept if (i.photos.cache or "").startswith(f"eval/raw/{cache}/")]
+        for item in items:
+            out.setdefault(item.id, item)
+    return sorted(out.values(), key=lambda i: i.id)
+
+
+def repeats(pool: list[Item], benchmark: list[Item], root: Path) -> set[str]:
+    """Training items that are a benchmark advert again: the same id, or a
+    photo within repost distance of a scored item's photo. Sellers repost the
+    same item in other cities, and a repost in training would leak an answer.
+    Items the photo check left out are never scored, so only their ids count:
+    plain studio shots of different goods can sit within repost distance.
+    """
+    from ..ui.sessions import DUPLICATE_DISTANCE
+    from .comparables import photo_hashes
+
+    ids = {i.id for i in benchmark}
+    bench = photo_hashes(benchmark, root)
+    seen = {int(h, 16) for i in benchmark if not i.exclude for h in bench.get(i.id, [])}
+    mine = photo_hashes(pool, root, cache=root / "eval" / "testify" / "train_photo_hashes.json")
+    out = set()
+    for item in pool:
+        hashes = [int(h, 16) for h in mine.get(item.id, [])]
+        if item.id in ids or any((h ^ s).bit_count() <= DUPLICATE_DISTANCE for h in hashes for s in seen):
+            out.add(item.id)
+    return out
 
 
 def _group(item: Item) -> str:
@@ -329,7 +370,8 @@ def _group(item: Item) -> str:
 def load_items(path: Path) -> list[Item]:
     if not path.exists():
         return []
-    return [Item.model_validate_json(line) for line in path.read_text().splitlines() if line.strip()]
+    # Split on newlines only: str.splitlines also breaks at U+2028 and its kin, which sellers' text carries.
+    return [Item.model_validate_json(line) for line in path.read_text().split("\n") if line.strip()]
 
 
 def all_items(root: Path, previous: Path | None = None) -> list[Item]:
@@ -378,6 +420,7 @@ def apply_reviews(items: dict[str, Item], path: Path) -> None:
 # the hand review on 88 of 100 keep or drop decisions once both were put
 # through the same rule (docs/research/failure-analysis.md).
 LABELLER = "gemini-3.5-flash-lite"
+REAL_TIERS = ("branded_electronics", "small_goods", "material_lot", "not_for_sale")
 
 
 def apply_ai_labels(items: dict[str, Item], path: Path) -> None:
@@ -395,7 +438,8 @@ def apply_ai_labels(items: dict[str, Item], path: Path) -> None:
         if item is None:
             continue
         item.ai_label = label
-        if item.split != "train" and label.get("tier") in Item.model_fields["tier"].annotation.__args__:
+        # Adversarial is the tier for items we plant on purpose; a labeller never assigns it.
+        if item.split != "train" and label.get("tier") in REAL_TIERS:
             item.tier = label["tier"]
         if label.get("kind"):
             item.answer.kind = label["kind"]
@@ -410,4 +454,10 @@ def write(items: list[Item], out: Path) -> None:
         item.seller_text = redact(item.seller_text)
         item.seller_claims = [redact(c) or "" for c in item.seller_claims]
     out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text("".join(json.dumps(i.model_dump(mode="json"), ensure_ascii=False) + "\n" for i in items))
+    out.write_text("".join(jsonl_line(i.model_dump(mode="json")) for i in items))
+
+
+def jsonl_line(row: dict) -> str:
+    """One JSON line that any line reader keeps whole: the Unicode line and paragraph separators,
+    which sellers paste from phones, are written escaped."""
+    return json.dumps(row, ensure_ascii=False).replace("\u2028", "\\u2028").replace("\u2029", "\\u2029") + "\n"

@@ -1,0 +1,69 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Closed MacBook Pro, space gray, with Apple logo. Sticker on top says '2020 i7 / 16GB / 512'. Another sticker with barcode at bottom. Watermark 'POSTED ON JIJI GODWIN SIMON'.",
+      "Photo 1: Bottom of the same laptop, showing four rubber feet and a small white sticker with 'FC' logo. Watermark same as photo 0.",
+      "Photo 2: Laptop open, held in hand, showing keyboard, trackpad, and screen. Keyboard has Touch Bar above it. 'MacBook Pro' visible on bezel below screen. Background shows shelves with many stacked laptops, some wrapped in plastic. Watermark same as before."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "MacBook Pro",
+      "brand": "Apple",
+      "model": "MacBook Pro",
+      "read_from": [
+        "photo 2 screen bezel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "London use MacBook Pro 2020 16gb 1tb core i7 Touch Bar",
+        "verdict": "unverified",
+        "evidence": "Photo 0 sticker says '2020 i7 / 16GB / 512', which contradicts the '1tb' claim. Photo 2 shows Touch Bar. Model and brand confirmed from photo 2. 'London use' is unverifiable_remote."
+      },
+      {
+        "claim": "everything working perfectly fine",
+        "verdict": "unverifiable_remote",
+        "evidence": "No power-on or functional shots. Screen is off in photo 2. No video or audio test shown."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Storage capacity is 512GB, not 1TB as claimed",
+        "proof": "Photo 0 sticker clearly shows '512', not '1TB'.",
+        "if_unproven": "Priced as 512GB model, not 1TB."
+      },
+      {
+        "risk": "Laptop may not be functional or may have hidden defects",
+        "proof": "A video showing the laptop turning on, booting, and running basic functions (e.g., opening apps, checking battery health, keyboard input).",
+        "if_unproven": "Priced as not working, or at least with significant discount for unverified functionality."
+      },
+      {
+        "risk": "Device may be stolen, imported without proper documentation, or have warranty issues",
+        "proof": "Serial number check via Apple's website or a screenshot of the device's System Report showing serial number and warranty status.",
+        "if_unproven": "Priced with discount for potential legal or warranty issues."
+      }
+    ],
+    "proof_requests": [
+      "Video showing the laptop turning on, booting, and running normally.",
+      "Screenshot of System Report or Apple's serial number check showing warranty status and exact model.",
+      "Proof of 1TB storage (if seller insists) \u2014 e.g., disk utility screenshot showing 1TB."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identifiable as a MacBook Pro with Touch Bar, but the storage capacity claimed (1TB) contradicts the sticker (512GB). Functionality is unverified. Without proof of working condition and accurate specs, the item cannot be priced accurately. The background in photo 2 suggests a bulk resale environment, which increases risk of hidden issues."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 59663,
+    "input_tokens": 2791,
+    "output_tokens": 775,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "e5ad6b0664f08bd6181fdefdb72250d4",
+    "error": null
+  }
+}

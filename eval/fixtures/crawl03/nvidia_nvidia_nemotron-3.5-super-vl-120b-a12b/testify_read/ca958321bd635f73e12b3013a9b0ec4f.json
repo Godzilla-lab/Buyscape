@@ -1,0 +1,74 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows the back of a white smartphone with three vertically aligned rear cameras in the upper left corner and a small sensor dot near the top edge.",
+      "Photo 1 shows the front of the same white smartphone with a black screen and a centered punch-hole camera at the top.",
+      "Neither photo shows a readable brand name, model number, or storage capacity.",
+      "Both photos carry a watermark reading 'POSTED ON JIJI DEETECH GADGETZ'."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "smartphone",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Samsung S24 128gb",
+        "verdict": "unverified",
+        "evidence": "No Samsung logo or model number is visible in photo 0 or photo 1."
+      },
+      {
+        "claim": "Direct Foreign used",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photos cannot show import history or prior ownership."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The phone is not a Samsung S24 or is a clone/look-alike.",
+        "proof": "A clear photo of the rear showing the Samsung logo and model text, or a screenshot of Settings > About phone.",
+        "if_unproven": "as an unverified generic smartphone"
+      },
+      {
+        "risk": "Storage is not 128GB.",
+        "proof": "Screenshot of Settings > Storage showing total capacity.",
+        "if_unproven": "as unknown storage"
+      },
+      {
+        "risk": "The phone does not power on or has a dead screen.",
+        "proof": "A video of the phone booting to the home screen.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The phone is network-locked, iCloud/Google locked, or has a bad IMEI.",
+        "proof": "IMEI number and a check result, or a video showing a SIM working and no lock screen.",
+        "if_unproven": "as locked or blacklisted"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the phone's back showing any brand logo and model text.",
+      "Screenshot of Settings > About phone showing model and storage.",
+      "Video of the phone powering on and navigating the home screen.",
+      "IMEI number and network lock status check."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller claims a Samsung S24, but no brand or model is readable in the photos, so the exact model that sets the price cannot be confirmed remotely."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 19369,
+    "input_tokens": 2374,
+    "output_tokens": 2543,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "ca958321bd635f73e12b3013a9b0ec4f",
+    "error": null
+  }
+}

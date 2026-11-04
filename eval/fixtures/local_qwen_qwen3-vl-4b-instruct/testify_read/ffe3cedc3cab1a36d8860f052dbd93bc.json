@@ -1,0 +1,66 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-instruct",
+  "response": {
+    "observations": [
+      "A black office chair with a mesh back, armrests, and a footrest, on a five-star base with casters.",
+      "The chair is positioned in a living room with a purple sofa, a dark wood cabinet, and a yellow rug.",
+      "The chair appears to be in good condition with no visible stains or tears.",
+      "The chair has a modern ergonomic design with a curved back and a separate footrest."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "office chair",
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Bent office chair available for sale.",
+        "verdict": "contradicted",
+        "evidence": "photo 0 shows the chair is not bent; it appears structurally intact and properly aligned."
+      },
+      {
+        "claim": "Bought new last year, no stain, no tear, foam still firm.",
+        "verdict": "unverified",
+        "evidence": "The photos do not show the foam's firmness or confirm the purchase date, so this claim cannot be verified remotely."
+      },
+      {
+        "claim": "From a smoke free home.",
+        "verdict": "unverifiable_remote",
+        "evidence": "There is no visual evidence in the photos to confirm whether the chair was kept in a smoke-free environment."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The chair may have hidden structural damage or wear that is not visible in the photos.",
+        "proof": "A close-up shot of the chair's frame, joints, and base to check for wear or damage.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The foam may have lost its firmness over time, even if not visibly damaged.",
+        "proof": "A photo showing the foam's texture and firmness, or a video demonstrating its support.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Send a close-up photo of the chair's frame and joints to check for wear or damage."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller's claim of the chair being 'bent' is contradicted by the photos, but the claim of 'foam still firm' and 'smoke free home' cannot be verified remotely. Additional proof is needed to confirm the chair's condition and the seller's claims."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-instruct",
+    "task": "testify_read",
+    "latency_ms": 5798,
+    "input_tokens": 2029,
+    "output_tokens": 546,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "ffe3cedc3cab1a36d8860f052dbd93bc",
+    "error": null
+  }
+}

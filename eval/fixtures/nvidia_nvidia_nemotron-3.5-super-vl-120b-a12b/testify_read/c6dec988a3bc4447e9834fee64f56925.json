@@ -1,0 +1,68 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Black tower-style UPS with \"BLUE GATE\" embossed on the top face in photo 0",
+      "Vertical blue panel with a power button and three indicator lights in photo 0",
+      "UK three-pin power plug and cord visible in photo 1",
+      "Same \"BLUE GATE\" marking visible on the side/top in photo 1",
+      "No model number, capacity label, or rating sticker readable in either photo",
+      "Unit rests on a tiled floor; cosmetic scuffs and dust visible"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "UPS",
+      "brand": "BLUE GATE",
+      "model": null,
+      "read_from": [
+        "photo 0 top",
+        "photo 1 side"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "UPS available",
+        "verdict": "supported",
+        "evidence": "photo 0 and photo 1 show a Blue Gate UPS"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery may be dead or unable to hold charge",
+        "proof": "Video of the unit powering on and running a load, or a battery voltage reading",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Actual VA/watt capacity is unknown",
+        "proof": "Close-up photo of the rating label on the rear or bottom",
+        "if_unproven": "as lowest common capacity for this size"
+      },
+      {
+        "risk": "Unit may not power on at all",
+        "proof": "Video of pressing the power button with all indicator lights illuminating",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of any rating or capacity label showing VA/W",
+      "Video of pressing the power button with indicator lights visible",
+      "Video of the UPS powering a lamp or fan"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a Blue Gate UPS from the photos, so it can be priced at its worst case (non-working, unknown capacity) while awaiting proof of operation and capacity."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 37150,
+    "input_tokens": 2875,
+    "output_tokens": 1950,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "c6dec988a3bc4447e9834fee64f56925",
+    "error": null
+  }
+}

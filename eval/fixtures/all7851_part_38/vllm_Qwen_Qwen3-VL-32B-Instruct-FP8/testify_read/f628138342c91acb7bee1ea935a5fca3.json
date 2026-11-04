@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a close-up of a label on a solar panel. The brand 'CanadianSolar' is clearly visible, along with the model type 'CS3K-300M'. The label lists technical specifications including 300W maximum power, voltage, current, and other electrical data. A QR code and certification marks (CE, etc.) are also present.",
+      "Photo 1 shows a full view of a solar panel leaning against a stack of similar panels. The panel has a grid of dark, rectangular solar cells with white borders, typical of monocrystalline panels. The frame is silver aluminum. The panel appears to be in a warehouse or storage area with a concrete floor. The watermark 'DOMINIC SOLAR ENERGY' is visible on the image."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "solar panel",
+      "brand": "CanadianSolar",
+      "model": "CS3K-300M",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "The solar panel is 300W.",
+        "verdict": "supported",
+        "evidence": "Photo 0 label clearly states 'Maximal Maximum Power (Pmax): 300 W'."
+      },
+      {
+        "claim": "The brand is CanadianSolar.",
+        "verdict": "supported",
+        "evidence": "Photo 0 label clearly shows the 'CanadianSolar' logo and name."
+      },
+      {
+        "claim": "The model is CS3K-300M.",
+        "verdict": "supported",
+        "evidence": "Photo 0 label clearly states 'MODEL TYPE: CS3K-300M'."
+      },
+      {
+        "claim": "The seller is Dominic Global Energy Solutions.",
+        "verdict": "unverified",
+        "evidence": "The seller's words state this, but the watermark 'DOMINIC SOLAR ENERGY' in photo 1 is close but not identical. No official proof of the seller's identity is visible in the photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The panel may be damaged or have microcracks not visible in the photos.",
+        "proof": "A close-up, high-resolution photo of the entire front surface of the panel, ideally under bright light or with a magnifying tool, to check for cracks, discoloration, or hotspots.",
+        "if_unproven": "priced as potentially defective, with a discount for hidden damage risk."
+      },
+      {
+        "risk": "The panel may not be functional or may have degraded performance.",
+        "proof": "A video or photo of the panel being tested with a multimeter or solar panel tester to verify voltage and current output under sunlight.",
+        "if_unproven": "priced as not working, since functionality cannot be confirmed remotely."
+      },
+      {
+        "risk": "The panel may be counterfeit or reconditioned, despite the label.",
+        "proof": "A photo of the QR code being scanned, showing the official CanadianSolar product page or serial number verification, or a photo of the back of the panel showing the manufacturer's serial number and date of manufacture.",
+        "if_unproven": "priced as potentially counterfeit, with a significant discount."
+      }
+    ],
+    "proof_requests": [
+      "A close-up, high-resolution photo of the entire front surface of the panel to check for damage.",
+      "A video or photo of the panel being tested with a multimeter or solar panel tester under sunlight.",
+      "A photo of the QR code being scanned, showing the official CanadianSolar product page or serial number verification.",
+      "A photo of the back of the panel showing the serial number and date of manufacture."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a CanadianSolar CS3K-300M 300W solar panel, and the seller's claims are supported by the label in photo 0. However, critical risks such as physical damage, functionality, and authenticity cannot be verified from the current photos. These risks significantly affect the price, and without proof, the item cannot be priced accurately. Therefore, proof is required before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 75315,
+    "input_tokens": 2281,
+    "output_tokens": 923,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "f628138342c91acb7bee1ea935a5fca3",
+    "error": null
+  }
+}

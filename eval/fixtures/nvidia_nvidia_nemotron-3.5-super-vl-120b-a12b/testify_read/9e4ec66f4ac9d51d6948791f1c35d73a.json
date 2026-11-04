@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Multiple rectangular solar panels mounted in rows on a dark shingled roof",
+      "Metal mounting rails and scaffolding visible beneath the panels",
+      "Watermark text \"VC SOLAR ELECTRICAL GLOBAL\" across the center of the image",
+      "No readable brand, model, or wattage label visible on the panels",
+      "Panels shown installed outdoors under an overcast sky"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "500w",
+        "verdict": "unverifiable_remote",
+        "evidence": "photo 0 shows installed panels but no readable rating label"
+      },
+      {
+        "claim": "mono",
+        "verdict": "unverifiable_remote",
+        "evidence": "photo 0 shows panels from a distance; no close-up of cells to confirm monocrystalline"
+      },
+      {
+        "claim": "solar panel",
+        "verdict": "supported",
+        "evidence": "photo 0 shows multiple solar panels mounted on a roof"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual wattage may be lower than 500W",
+        "proof": "Close-up photo of the label on the back of a panel showing rated wattage",
+        "if_unproven": "priced as a lower-capacity or unrated panel"
+      },
+      {
+        "risk": "Panel may not be monocrystalline",
+        "proof": "Close-up photo of the solar cells or a manufacturer datasheet",
+        "if_unproven": "priced as polycrystalline or unknown cell type"
+      },
+      {
+        "risk": "Panel may not produce power",
+        "proof": "Video of the panel connected to a multimeter or charge controller showing voltage and current",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Panels may have physical damage, delamination, or water ingress",
+        "proof": "Close-up photos of panel surfaces, edges, and backsheets",
+        "if_unproven": "priced as damaged or used"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the label on the back of one panel showing wattage, voltage, and model",
+      "Close-up photo of the solar cell surface to confirm monocrystalline",
+      "Video showing the panel producing power under load with a multimeter reading"
+    ],
+    "decision": "price",
+    "reason": "The item is clearly a rooftop solar panel, but the 500W monocrystalline claim and working condition cannot be verified from the photo, so it is priced at worst case as an untested panel of unknown output."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 35851,
+    "input_tokens": 1578,
+    "output_tokens": 3814,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "9e4ec66f4ac9d51d6948791f1c35d73a",
+    "error": null
+  }
+}

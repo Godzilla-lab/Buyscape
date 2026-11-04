@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail box for a Syinix Electric Kettle.",
+      "The box indicates a 2.2 Litre capacity and 2000W power rating.",
+      "The box features the text 'Longer Copper Cord'.",
+      "The actual kettle is not visible; only the box and its printed illustration are shown.",
+      "A watermark 'POSTED ON JIJI SIRJOSH' is visible across the center."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "electric kettle",
+      "brand": "Syinix",
+      "model": null,
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Syinix electric kettle",
+        "verdict": "supported",
+        "evidence": "The brand name and product type are clearly printed on the box in photo 0."
+      },
+      {
+        "claim": "Longer copper cord",
+        "verdict": "supported",
+        "evidence": "This specific feature is printed on the front of the box in photo 0."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, inferior item.",
+        "proof": "A photo of the actual kettle outside of the box.",
+        "if_unproven": "priced as an empty box"
+      },
+      {
+        "risk": "The kettle may be used, damaged, or non-functional despite the new-looking box.",
+        "proof": "A video of the kettle boiling water and the auto-shutoff engaging.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Internal lime scale or physical damage to the heating element.",
+        "proof": "A clear photo of the inside of the kettle.",
+        "if_unproven": "as heavily used"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual kettle outside of the box.",
+      "Photo of the rating plate (usually on the bottom of the kettle or base) to confirm the model number.",
+      "Video of the kettle boiling water to confirm it works.",
+      "Photo of the interior of the kettle to check for scale or rust."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller has only provided a photo of the retail packaging. Without seeing the actual item, its existence, condition, and specific model cannot be verified for pricing."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 12573,
+    "input_tokens": 2361,
+    "output_tokens": 2708,
+    "cost_usd": 0.009305,
+    "replayed": false,
+    "fixture_key": "1e0182668efa5d3e245b365ee530a510",
+    "error": null
+  }
+}

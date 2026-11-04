@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows four large red gas cylinders standing on a concrete floor, no caps on the valves.",
+      "One cylinder has white text reading 'CAL...' and '47kg Pr...' partially visible on photo 0, suggesting a brand name and capacity.",
+      "Surface shows scuffs, paint wear and some rust streaks near the base and neck of the cylinders.",
+      "Valves are exposed, no protective collar caps are fitted, and no visible pressure gauge or regulator attached.",
+      "A watermark 'POSTED ON JIJI EMMATECH TECHNOLOGY' overlays the image, indicating a reposted listing photo.",
+      "No close-up of the valve, test-stamp date, or serial number is provided."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "LPG gas cylinder (47kg)",
+      "brand": "Calor",
+      "model": null,
+      "read_from": [
+        "photo 0 label 'CAL...47kg Pr...'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "It is gas Empty Cylinder",
+        "verdict": "unverifiable_remote",
+        "evidence": "No weight, valve-open/hiss test, or interior shot provided to confirm it is actually empty."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Cylinder may not be truly empty or may have residual pressurized gas, posing safety risk in handling/shipping.",
+        "proof": "A video showing the valve being opened with no hiss, or a weighing scale reading of the cylinder.",
+        "if_unproven": "priced as if potentially not empty (lower value, added risk)"
+      },
+      {
+        "risk": "Test/certification date for the cylinder (expiry stamp) is unknown, affecting legality for refill.",
+        "proof": "Close-up photo of the stamped test date on the cylinder's neck collar.",
+        "if_unproven": "priced as expired/uncertified"
+      },
+      {
+        "risk": "Valve condition and thread integrity cannot be confirmed, may leak or be damaged.",
+        "proof": "Close-up photo or video of the valve opening and closing smoothly.",
+        "if_unproven": "priced as faulty valve"
+      },
+      {
+        "risk": "Corrosion or dents beneath the red paint could weaken the cylinder body.",
+        "proof": "Multiple angle photos showing the base and seams without paint glare.",
+        "if_unproven": "priced as cosmetic-only, structural risk unresolved"
+      },
+      {
+        "risk": "Authenticity of brand (Calor) vs. a repainted/relabeled generic cylinder.",
+        "proof": "Clear photo of the embossed manufacturer mark on the cylinder shoulder.",
+        "if_unproven": "priced as unbranded generic cylinder"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of the valve and test-stamp date on the cylinder neck.",
+      "Video of opening the valve to confirm it is empty (no gas hiss).",
+      "Photo of the embossed brand/manufacturer mark on the shoulder of the cylinder.",
+      "Clear shot of the base and body without glare to check for rust or dents."
+    ],
+    "decision": "price",
+    "reason": "The item is a standard 47kg LPG gas cylinder, identifiable by type and partial brand text, but with no proof of emptiness, valve integrity, or certification date, so it must be priced at the worst-case condition (uncertified, unconfirmed empty, cosmetic wear)."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 20274,
+    "input_tokens": 2416,
+    "output_tokens": 1783,
+    "cost_usd": 0.019503,
+    "replayed": false,
+    "fixture_key": "047205170a31bae8018f29290b68a535",
+    "error": null
+  }
+}

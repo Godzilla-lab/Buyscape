@@ -1,0 +1,68 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-r4",
+  "response": {
+    "observations": [
+      "Photo 0 shows the front passenger side of a dark-colored car with a severely damaged bumper and hood.",
+      "Photo 1 shows the front passenger side with a detached bumper, a damaged hood, and a missing front fender.",
+      "The car is parked on dirt ground with other vehicles visible in the background.",
+      "The engine bay is not visible in either photo.",
+      "The car appears to be in a salvage or scrap condition."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "car",
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "The engine is Tokunbo grade",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      },
+      {
+        "claim": "Selling because the car had an accident and car body is bad",
+        "verdict": "supported",
+        "evidence": "Photos 0 and 1 show significant front-end damage consistent with an accident."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The car may be a high-mileage or heavily damaged salvage unit.",
+        "proof": "A clear photo of the odometer reading.",
+        "if_unproven": "as a high-mileage salvage car"
+      },
+      {
+        "risk": "Essential mechanical components may be missing or non-functional.",
+        "proof": "A photo of the engine bay showing the engine and transmission.",
+        "if_unproven": "as a non-running scrap car"
+      },
+      {
+        "risk": "The car may be a different model than the one shown.",
+        "proof": "A clear photo of the manufacturer's identification plate (VIN plate).",
+        "if_unproven": "as the lowest-value model of this type"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the odometer.",
+      "Photo of the engine and transmission in the engine bay.",
+      "Photo of the VIN plate on the car.",
+      "Photo of the rear of the car."
+    ],
+    "decision": "price",
+    "reason": "The car is clearly in a damaged state. It can be priced as a non-running salvage car at its worst-case value."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-r4",
+    "task": "testify_read",
+    "latency_ms": 3474,
+    "input_tokens": 2285,
+    "output_tokens": 366,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "8f8299561842a9d28d5f8144017108c2",
+    "error": null
+  }
+}

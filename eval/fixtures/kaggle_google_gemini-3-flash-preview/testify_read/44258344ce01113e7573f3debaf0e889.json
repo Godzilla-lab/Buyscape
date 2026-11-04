@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail packaging for an LDNIO PQ50 power bank.",
+      "The box specifies a capacity of 50000mAh and support for 22.5W fast charging.",
+      "The packaging features illustrations of a white device with built-in cables.",
+      "A watermark from the 'Jiji' marketplace with the name 'TECHNOVA' is visible across the center.",
+      "The actual power bank is not shown outside of its box."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "power bank",
+      "brand": "LDNIO",
+      "model": "PQ50",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "LDNIO PQ50",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "50000mAh",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "white design",
+        "verdict": "supported",
+        "evidence": "photo 0 box art"
+      },
+      {
+        "claim": "built-in Type-C",
+        "verdict": "supported",
+        "evidence": "photo 0 box art"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different item.",
+        "proof": "A photo of the actual power bank outside of the box.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The device may be non-functional or a counterfeit.",
+        "proof": "A video of the device charging a phone and a photo of the manufacturer's authenticity scratch-code on the box.",
+        "if_unproven": "as a non-working clone"
+      },
+      {
+        "risk": "The physical condition of the actual unit is unknown.",
+        "proof": "Clear photos of the actual device from multiple angles.",
+        "if_unproven": "as heavily used"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual power bank outside of the box.",
+      "Video of the device charging a mobile phone.",
+      "Photo of the authenticity/security sticker on the packaging."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail box is shown, and the image contains a watermark from a third-party site. Verification of the actual item's existence and condition is required before a reliable price can be determined."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 23986,
+    "input_tokens": 2399,
+    "output_tokens": 5820,
+    "cost_usd": 0.018659,
+    "replayed": false,
+    "fixture_key": "44258344ce01113e7573f3debaf0e889",
+    "error": null
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r5",
+  "response": {
+    "observations": [
+      "Four red gas cylinders are shown in photo 0.",
+      "The brand 'CAL' is visible on the side of the cylinders in photo 0.",
+      "The cylinders appear to be full of gas, as they are not empty.",
+      "A watermark 'EMMATECH TECHNOLOGY' is visible across the center of the image.",
+      "The cylinders are sitting on a concrete floor outdoors."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "gas cylinder",
+      "brand": "CAL",
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "It is gas",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows the cylinders are full of gas."
+      },
+      {
+        "claim": "Empty Cylinder",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows the cylinders are full of gas."
+      },
+      {
+        "claim": "Recently tested and certified, no leak, the valve is new.",
+        "verdict": "unverified",
+        "evidence": "No photo shows this; it is the seller's word only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The cylinders may be expired or past their re-test date.",
+        "proof": "A photo of the manufacture or expiry date stamped on the metal shroud or handle.",
+        "if_unproven": "as expired/scrap value"
+      },
+      {
+        "risk": "The cylinders may be empty or contain a different gas (e.g., LPG).",
+        "proof": "A photo of the weight stamp on the handle or shroud.",
+        "if_unproven": "as empty cylinders"
+      },
+      {
+        "risk": "The valves may be faulty or leaking.",
+        "proof": "A video showing a soap bubble test on the valve while the cylinder is held under water.",
+        "if_unproven": "as valves requiring replacement"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of any label, sticker or metal plate showing the brand and model.",
+      "Photo of the weight stamp on the handle or shroud to confirm the capacity.",
+      "Photo of the expiry or manufacture date stamped on the metal shroud.",
+      "Video of a soap bubble leak test on the valve."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "What the item is shows, but not the model that sets its price: no photo shows it clearly enough to read. The shot asked for first would settle it."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r5",
+    "task": "testify_read",
+    "latency_ms": 2163,
+    "input_tokens": 1705,
+    "output_tokens": 430,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "18d3ffde198be0ea2493780a93f6ba01",
+    "error": null
+  }
+}

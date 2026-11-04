@@ -1,0 +1,75 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Three photos show a used car engine with attached components like alternator, hoses, and belts.",
+      "The engine has a black plastic cover on top with embossed text, partially visible in photo 1 and 2.",
+      "The text on the cover appears to read 'HYUNDAI' and 'D4CB' or similar, suggesting a Hyundai engine model.",
+      "The engine is dirty, with visible grime and wear, and some hoses appear cracked or frayed.",
+      "A yellow oil filter is visible on the right side in all photos.",
+      "No visible damage to the block or major components, but no internal inspection is possible.",
+      "The seller claims 'all engine and gearbox are in good condition' but no gearbox is visible in the photos."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car engine",
+      "brand": "Hyundai",
+      "model": "D4CB",
+      "read_from": [
+        "photo 1 top cover",
+        "photo 2 top cover"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "all engine and gearbox are in good condition",
+        "verdict": "unverifiable_remote",
+        "evidence": "The engine appears externally intact, but internal condition (e.g., cylinder wear, oil sludge, compression) cannot be assessed from photos. The gearbox is not visible at all."
+      },
+      {
+        "claim": "Home of Hyundai engine",
+        "verdict": "supported",
+        "evidence": "The brand 'Hyundai' is visible on the engine cover in photo 1 and 2."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Internal engine damage or wear (e.g., worn bearings, cracked block, head gasket failure)",
+        "proof": "Video or photos of engine running, oil sample, compression test results, or disassembled internal components.",
+        "if_unproven": "priced as potentially non-functional or requiring major repairs"
+      },
+      {
+        "risk": "Gearbox not included or in poor condition",
+        "proof": "Photo or video of the gearbox attached to the engine, or a clear statement from seller confirming its inclusion and condition.",
+        "if_unproven": "priced as gearbox not included or in unknown condition"
+      },
+      {
+        "risk": "Engine has high mileage or is from a salvaged vehicle",
+        "proof": "VIN or engine number trace, service history, or odometer reading from original vehicle.",
+        "if_unproven": "priced as high-mileage or unknown history"
+      }
+    ],
+    "proof_requests": [
+      "Video of the engine running and idling.",
+      "Photo or video of the gearbox attached to the engine.",
+      "Clear photo of the engine number and VIN for verification.",
+      "Proof of recent service or compression test."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The engine is identifiable as a Hyundai D4CB, but its internal condition and the inclusion/condition of the gearbox cannot be verified from the photos. Without proof of functionality and completeness, the item cannot be priced accurately and carries significant hidden risks."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 54456,
+    "input_tokens": 2780,
+    "output_tokens": 685,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "ec04052973d823e562d7beca8e2de0dd",
+    "error": null
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-r4",
+  "response": {
+    "observations": [
+      "Four red gas cylinders are shown outdoors.",
+      "The brand 'CAL' and weight '47kg' are printed on the side of the cylinder in photo 0.",
+      "The cylinders have protective plastic shrouds on the top handles.",
+      "A watermark 'EMMATECH TECHNOLOGY' is visible across the center of the image.",
+      "The cylinders appear to be empty as no gas is visible in the shrouds."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "gas cylinder",
+      "brand": "CAL",
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "gas Empty Cylinder",
+        "verdict": "supported",
+        "evidence": "photo 0 shows the cylinders with protective shrouds and no visible gas."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The cylinders may be expired or past their re-test date, making them unsafe.",
+        "proof": "A clear photo of the manufacture or expiry date stamped on the handle or shroud.",
+        "if_unproven": "as expired/scrap value"
+      },
+      {
+        "risk": "The valves may be seized or leaking.",
+        "proof": "A video showing the valve being opened and closed without leaking.",
+        "if_unproven": "as requiring valve replacement"
+      },
+      {
+        "risk": "The actual capacity may be lower than 47kg if the cylinder is not a standard size.",
+        "proof": "A photo of the technical plate showing the tare weight and capacity.",
+        "if_unproven": "as a smaller capacity cylinder"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the stamped date on the handle or shroud.",
+      "Photo of the technical plate on the cylinder showing the capacity and tare weight.",
+      "Video of the valve being operated."
+    ],
+    "decision": "price",
+    "reason": "The item is known from the photos. What they cannot prove is priced at its worst case until the proof asked for below arrives."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-r4",
+    "task": "testify_read",
+    "latency_ms": 3214,
+    "input_tokens": 1692,
+    "output_tokens": 351,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "047205170a31bae8018f29290b68a535",
+    "error": null
+  }
+}

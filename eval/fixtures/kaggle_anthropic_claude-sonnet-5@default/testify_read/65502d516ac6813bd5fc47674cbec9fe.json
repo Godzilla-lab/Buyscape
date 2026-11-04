@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: a bare 4-cylinder car engine sitting on a metal rack, timing belt and pulleys visible, no engine code or manufacturer badge legible anywhere on the block or valve cover.",
+      "Photo 0: wiring harness connectors dangling, no visible leaks, cracks, or corrosion on visible surfaces, but underside and rear of block not shown.",
+      "Photo 1: a starter motor (and possibly an alternator) sitting on top of a larger plastic-wrapped part, with a watermark reading 'PROMISE AUTO VENTURES'.",
+      "Photo 1: no part numbers, brand stampings, or vehicle fitment labels are legible on the starter or the wrapped item beneath it.",
+      "No odometer, compression tester, dyno screen, or start-up video is shown for either item."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used car engine (photo 0) and used starter motor (photo 1)",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "We sell direct Korean parts",
+        "verdict": "unverifiable_remote",
+        "evidence": "No import documents, customs sticker, or Korean-market badge is visible in either photo; origin cannot be confirmed from images alone."
+      },
+      {
+        "claim": "Implied working condition of engine/starter",
+        "verdict": "unverified",
+        "evidence": "No start-up video, compression test, or bench test clip provided for either part."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine may not run or may have internal damage (cracked block, worn bearings, seized components).",
+        "proof": "Video of the engine cranking and running, plus a compression test reading.",
+        "if_unproven": "priced as non-running/for-parts engine"
+      },
+      {
+        "risk": "Vehicle application (make/model/year) for the engine and starter is unknown, which is the main price driver for used Korean engine parts.",
+        "proof": "Clear photo of the engine ID/stamped code plate and the starter's part number tag.",
+        "if_unproven": "cannot be priced without knowing fitment; treated as unidentified generic engine/starter"
+      },
+      {
+        "risk": "Starter motor may be faulty or mismatched to the engine shown.",
+        "proof": "Bench test video of the starter spinning under load.",
+        "if_unproven": "priced as non-working starter"
+      },
+      {
+        "risk": "Hidden damage to engine underside, oil pan, or rear seal not shown in the single angle provided.",
+        "proof": "Additional photos from the side, rear, and underside of the block.",
+        "if_unproven": "priced assuming possible hidden damage"
+      },
+      {
+        "risk": "Mileage and prior accident/flood history unverifiable.",
+        "proof": "Photo of any accompanying paperwork, mileage sticker, or import tag.",
+        "if_unproven": "priced as unknown-history unit"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the engine's stamped ID/code plate (usually on the block near the bellhousing or front face).",
+      "Video of the engine cranking and idling.",
+      "Photo of the starter motor's part number/tag.",
+      "Bench test video of the starter motor.",
+      "Seller's statement of exact vehicle make, model, and year these parts are pulled from."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Neither the engine nor the starter carries a legible brand, model, or vehicle-fitment marking in the photos, and fitment is the primary price driver for used Korean engine parts; without it, even a worst-case price bracket cannot be set."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 26306,
+    "input_tokens": 2156,
+    "output_tokens": 2348,
+    "cost_usd": 0.027792,
+    "replayed": false,
+    "fixture_key": "65502d516ac6813bd5fc47674cbec9fe",
+    "error": null
+  }
+}

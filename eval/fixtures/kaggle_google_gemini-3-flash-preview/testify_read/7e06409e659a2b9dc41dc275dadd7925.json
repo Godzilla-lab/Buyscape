@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail packaging for an 'Express weld' MMA-400 DC MMA Inverter Welder.",
+      "The box features CE and ISO 9001 certification marks.",
+      "The box appears to be part of a stack in a warehouse or retail environment.",
+      "A watermark 'MAXI TOOLS' is visible across the center of the image.",
+      "The actual welding machine and its accessories are not visible in the photo."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DC MMA Inverter Welder",
+      "brand": "Express weld",
+      "model": "MMA-400",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "400mma welding machine",
+        "verdict": "supported",
+        "evidence": "photo 0 shows 'MMA-400' and 'DC MMA INVERTER WELDER' on the box."
+      },
+      {
+        "claim": "Express",
+        "verdict": "supported",
+        "evidence": "photo 0 shows the brand 'Express weld' on the box."
+      },
+      {
+        "claim": "original",
+        "verdict": "unverifiable_remote",
+        "evidence": "Authenticity cannot be confirmed from a photo of the packaging alone."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, lower-value item.",
+        "proof": "A photo of the actual machine outside of the box.",
+        "if_unproven": "as a missing item"
+      },
+      {
+        "risk": "The machine may be non-functional or damaged.",
+        "proof": "A video of the machine powered on and successfully striking an arc.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Essential accessories like the electrode holder, earth clamp, and cables may be missing.",
+        "proof": "A photo showing all included accessories spread out.",
+        "if_unproven": "as missing all accessories"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual welding machine outside of the box.",
+      "Photo of the technical specification plate on the back or side of the machine.",
+      "Photo of all included accessories (cables, clamps, mask).",
+      "Video of the machine powered on and working."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail box is shown. Without photos of the actual machine and its accessories, it is impossible to verify the item's presence, condition, or completeness."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 12917,
+    "input_tokens": 2368,
+    "output_tokens": 2587,
+    "cost_usd": 0.008945,
+    "replayed": false,
+    "fixture_key": "7e06409e659a2b9dc41dc275dadd7925",
+    "error": null
+  }
+}

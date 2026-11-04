@@ -1,0 +1,95 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Open HP laptop with silver chassis, black keyboard, and black screen. HP logo visible on bezel. 'PROBOOK' text visible below keyboard. Watermark 'OLABOI TECH ENTERPRISES' across keyboard.",
+      "Photo 1: Screenshot of DirectX Diagnostic Tool showing system info. 'System Manufacturer: HP', 'System Model: HP ProBook 640 G4', 'Processor: Intel(R) Core(TM) i5-8350U CPU @ 1.70GHz (8 CPUs), ~1.9GHz', 'Memory: 8192MB'. Watermark 'OLABOI TECH ENTERPRISES' across screen.",
+      "Photo 2: Closed silver laptop lid with HP logo. Watermark 'OLABOI TECH ENTERPRISES' across lid. Another laptop (Dell) visible in background."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "ProBook 640 G4",
+      "read_from": [
+        "photo 1 screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Hp probook 640 g4",
+        "verdict": "supported",
+        "evidence": "Photo 1 screen: 'System Model: HP ProBook 640 G4'"
+      },
+      {
+        "claim": "Intel core i5(8th gen)",
+        "verdict": "supported",
+        "evidence": "Photo 1 screen: 'Processor: Intel(R) Core(TM) i5-8350U CPU @ 1.70GHz' \u2014 i5-8350U is 8th gen"
+      },
+      {
+        "claim": "8gb memory",
+        "verdict": "supported",
+        "evidence": "Photo 1 screen: 'Memory: 8192MB'"
+      },
+      {
+        "claim": "256gb ssd",
+        "verdict": "unverified",
+        "evidence": "Photo 1 shows 8GB RAM and processor, but no storage info. No photo shows disk details or BIOS/Windows disk management."
+      },
+      {
+        "claim": "Screen size 14 inch",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows a 14-inch laptop by typical proportions, but no measurement or label confirms size. No screen bezel label or diagonal measurement shown."
+      },
+      {
+        "claim": "Keyboard...",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows keyboard, but no details on condition, backlight, or layout. No close-up of keys or function row."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "SSD not 256GB or not present \u2014 could be HDD or smaller SSD",
+        "proof": "Photo of BIOS or Windows Disk Management showing drive size and type",
+        "if_unproven": "priced as having no SSD or smaller capacity"
+      },
+      {
+        "risk": "Screen damage or dead pixels not visible in photo 0",
+        "proof": "Photo of screen with white and black screens to check for dead pixels or cracks",
+        "if_unproven": "priced as screen may have defects"
+      },
+      {
+        "risk": "Battery not working or degraded \u2014 not shown",
+        "proof": "Video of laptop running on battery with battery percentage and time shown",
+        "if_unproven": "priced as battery may be dead"
+      },
+      {
+        "risk": "Laptop has physical damage not visible in photos \u2014 e.g., dents, scratches, hinge issues",
+        "proof": "Close-up photos of all edges, hinges, and underside",
+        "if_unproven": "priced as possibly damaged"
+      }
+    ],
+    "proof_requests": [
+      "Photo of BIOS or Windows Disk Management showing SSD size and type",
+      "Photo of screen with white and black screens to check for dead pixels or cracks",
+      "Video of laptop running on battery with battery percentage and time shown",
+      "Close-up photos of all edges, hinges, and underside"
+    ],
+    "decision": "price",
+    "reason": "The model and key specs (CPU, RAM) are confirmed by photo 1. The 256GB SSD and 14-inch screen are unverified but plausible. Hidden risks like screen defects, battery, and physical damage are priced at worst case. The item is identifiable and can be priced based on worst-case assumptions."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 81247,
+    "input_tokens": 2386,
+    "output_tokens": 996,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "ee16edeaa8c0e7c11c0e88d78cb2a63c",
+    "error": null
+  }
+}

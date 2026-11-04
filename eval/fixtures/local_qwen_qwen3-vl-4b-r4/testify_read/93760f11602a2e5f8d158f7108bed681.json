@@ -1,0 +1,91 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-r4",
+  "response": {
+    "observations": [
+      "Nikon DSLR camera body with 'Nikon' logo on the front and 'D7200' model number on the top right",
+      "Nikon lens attached to the camera body",
+      "The lens barrel shows significant dust and grime",
+      "The camera body shows signs of wear and dirt",
+      "The LCD screen is powered on in photo 2, displaying a menu",
+      "The camera is resting on a white paper with 'McSteve Online Gadget Store' printed on it"
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DSLR camera",
+      "brand": "Nikon",
+      "model": "D7200",
+      "read_from": [
+        "photo 0 body",
+        "photo 1 body",
+        "photo 2 body"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Used Nikon D7200 DSLR Camera",
+        "verdict": "supported",
+        "evidence": "photo 0, photo 1, photo 2"
+      },
+      {
+        "claim": "35MM Nikkor Nikon Lens",
+        "verdict": "supported",
+        "evidence": "photo 0, photo 1, photo 2"
+      },
+      {
+        "claim": "Working perfectly ok",
+        "verdict": "unverified",
+        "evidence": "The LCD is powered on in photo 2, but shutter count and sensor condition are not shown"
+      },
+      {
+        "claim": "Shutter count under 5,000, no fungus or scratch on the lens. Original battery and charger, never repaired.",
+        "verdict": "unverified",
+        "evidence": "No photo shows this; it is the seller's word only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "High shutter count (magnified by the seller's claim of 'perfectly ok')",
+        "proof": "A screenshot of a shutter count tool showing the current actuation count",
+        "if_unproven": "as high mileage (over 100,000 actuations)"
+      },
+      {
+        "risk": "Sensor fungus or scratches",
+        "proof": "A clear, high-resolution photo of the sensor with the lens removed",
+        "if_unproven": "as having a damaged sensor"
+      },
+      {
+        "risk": "Lens fungus or scratches",
+        "proof": "A clear, high-resolution photo of the front and rear lens elements",
+        "if_unproven": "as having fungus on the lens"
+      },
+      {
+        "risk": "Battery and charger condition",
+        "proof": "A photo of the battery and charger with a label showing the model and capacity",
+        "if_unproven": "as requiring a replacement battery"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of any label, sticker or metal plate showing the brand and model.",
+      "Screenshot of the shutter count using a tool like 'CameraShutterCount'",
+      "Clear, high-resolution photos of the lens glass (front and rear)",
+      "Photo of the camera sensor with the lens removed",
+      "Photo of the battery and charger"
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identified as a Nikon D7200 with a Nikkor lens. It can be priced at its worst-case condition (high shutter count, sensor fungus, and lens fungus) until the seller provides proof of the shutter count and sensor/lens condition."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-r4",
+    "task": "testify_read",
+    "latency_ms": 3560,
+    "input_tokens": 2821,
+    "output_tokens": 592,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "93760f11602a2e5f8d158f7108bed681",
+    "error": null
+  }
+}

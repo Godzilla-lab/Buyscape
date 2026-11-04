@@ -1,0 +1,106 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a white DAF cab with CHADWICKS branding and an Irish address, DAF 75.310 on the door, a crane mounted behind the cab, and a flatbed.",
+      "Photo 1 shows the front grille with DAF and CF badges, the CHADWICKS logo, and visible rust on the front bumper.",
+      "Photo 2 shows a close-up of the crane hydraulic valve block with multiple hoses and signs of wear."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "crane truck",
+      "brand": "DAF",
+      "model": "CF 75",
+      "read_from": [
+        "photo 0 door",
+        "photo 1 grille"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "DAF CF 75",
+        "verdict": "supported",
+        "evidence": "photo 0 door plate and photo 1 grille"
+      },
+      {
+        "claim": "Automatic",
+        "verdict": "unverified",
+        "evidence": "gearbox not visible in any photo"
+      },
+      {
+        "claim": "HIAB",
+        "verdict": "unverified",
+        "evidence": "crane is visible but brand name is not legible in the photos"
+      },
+      {
+        "claim": "10 tyres",
+        "verdict": "unverified",
+        "evidence": "not all tyres are visible or countable from the angles shown"
+      },
+      {
+        "claim": "everything working",
+        "verdict": "unverifiable_remote",
+        "evidence": "still photos cannot prove mechanical function"
+      },
+      {
+        "claim": "like new",
+        "verdict": "contradicted",
+        "evidence": "photo 1 shows a rusted front bumper; photo 2 shows worn crane components"
+      },
+      {
+        "claim": "perfect condition",
+        "verdict": "contradicted",
+        "evidence": "visible rust and wear in photos 1 and 2"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Automatic transmission may be faulty",
+        "proof": "video of gear selection and the truck being driven",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Engine may not start or have internal faults",
+        "proof": "video of a cold start and idle with exhaust visible",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "HIAB crane may be inoperative or leaking",
+        "proof": "video of the crane extending and lifting a load",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Tyre count or tread may not match the claim",
+        "proof": "clear photos of all ten tyres with tread depth visible",
+        "if_unproven": "priced with unknown tyre condition"
+      },
+      {
+        "risk": "Undisclosed accident or chassis damage",
+        "proof": "underside and chassis rail photos",
+        "if_unproven": "as structurally compromised"
+      }
+    ],
+    "proof_requests": [
+      "Video of the engine starting and running",
+      "Video of the crane operating through its full range",
+      "Video of the truck being driven through all gears",
+      "Clear photos showing all tyres and the odometer"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a DAF CF 75 crane truck from the photos, so it can be priced at its worst-case visible condition even though the working claims are unproven."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 34898,
+    "input_tokens": 2604,
+    "output_tokens": 3441,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "6c787ab0b26ca21f7310daa7c95058e5",
+    "error": null
+  }
+}

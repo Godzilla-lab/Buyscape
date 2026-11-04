@@ -1,0 +1,111 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: A black Dell laptop is open, showing a Windows desktop with a nature wallpaper. The keyboard is visible, and the screen is on. The laptop is placed on a shelf filled with stacked laptops and other electronics. A watermark 'FIRST MANGO TECH' is visible.",
+      "Photo 1: The closed lid of the laptop is shown, with the Dell logo centered. The laptop is held by a hand, and the background shows shelves with stacked laptops. The same watermark is present.",
+      "Photo 2: The bottom of the laptop is shown, held by a hand. There are ventilation grilles, a red dot (possibly a Dell service tag), and a label with barcodes and text. The model number is not clearly readable. The same watermark is present."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "laptop",
+      "brand": "Dell",
+      "model": null,
+      "read_from": [
+        "photo 1 lid logo",
+        "photo 2 bottom label (partially visible)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Dell latitude E5450",
+        "verdict": "unverified",
+        "evidence": "The model number is not clearly readable in photo 2. The Dell logo is visible in photo 1, but no model name is visible on the device itself."
+      },
+      {
+        "claim": "Core i7 5th gen",
+        "verdict": "unverifiable_remote",
+        "evidence": "No CPU information is visible in any photo. The screen shows Windows, but no system specs are displayed."
+      },
+      {
+        "claim": "8gig ram",
+        "verdict": "unverifiable_remote",
+        "evidence": "RAM is not visible in any photo. No system information is shown on screen."
+      },
+      {
+        "claim": "256gig ssd",
+        "verdict": "unverifiable_remote",
+        "evidence": "Storage is not visible. No disk information is shown on screen."
+      },
+      {
+        "claim": "Windows 11pro",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows a Windows desktop, but the version (11 Pro) cannot be confirmed from the screen. The taskbar and start menu look like Windows 11, but no version info is visible."
+      },
+      {
+        "claim": "Excellent battery",
+        "verdict": "unverifiable_remote",
+        "evidence": "No battery status or usage test is shown. The laptop is plugged in or running on battery is not clear."
+      },
+      {
+        "claim": "Keyboard...",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows the keyboard clearly, and it appears intact and functional."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The laptop may not be a Dell Latitude E5450 as claimed.",
+        "proof": "A clear photo of the model label on the bottom or lid, or a screenshot of the system information showing the model.",
+        "if_unproven": "Priced as a generic Dell laptop, not as a specific E5450 model."
+      },
+      {
+        "risk": "The CPU may not be a 5th gen Core i7.",
+        "proof": "A screenshot of the system information (e.g., from Windows Settings or CPU-Z) showing the exact CPU model.",
+        "if_unproven": "Priced as a generic laptop with unknown CPU, which reduces value."
+      },
+      {
+        "risk": "The RAM may not be 8GB or may be faulty.",
+        "proof": "A screenshot of the system information showing installed RAM, or a photo of the RAM slots with the modules visible.",
+        "if_unproven": "Priced as a laptop with unknown RAM, which reduces value."
+      },
+      {
+        "risk": "The SSD may not be 256GB or may be failing.",
+        "proof": "A screenshot of the disk management or system information showing the SSD size and health, or a photo of the SSD if removed.",
+        "if_unproven": "Priced as a laptop with unknown storage, which reduces value."
+      },
+      {
+        "risk": "The battery may not be in 'excellent' condition.",
+        "proof": "A video or photo showing the battery health in Windows (via Powercfg or battery report), or a test of battery life.",
+        "if_unproven": "Priced as a laptop with unknown battery health, which reduces value."
+      },
+      {
+        "risk": "The laptop may have physical damage or wear not visible in photos.",
+        "proof": "A 360-degree video or close-up photos of all edges, hinges, screen bezel, and ports.",
+        "if_unproven": "Priced assuming minor wear, but could be lower if damage is found."
+      }
+    ],
+    "proof_requests": [
+      "A clear photo of the model label on the bottom of the laptop (photo 2 is too blurry).",
+      "A screenshot of the system information showing CPU, RAM, and storage details.",
+      "A screenshot of the battery health report or a video showing battery life test.",
+      "A 360-degree video or close-up photos of the laptop's exterior and ports."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and key specs (CPU, RAM, SSD) cannot be verified from the current photos. The laptop appears to be a Dell, but without proof of the exact model and specifications, it cannot be priced accurately. The battery claim and other details also require verification."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 102164,
+    "input_tokens": 2177,
+    "output_tokens": 1237,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "31b71006170b2dda108df08fc8bff730",
+    "error": null
+  }
+}

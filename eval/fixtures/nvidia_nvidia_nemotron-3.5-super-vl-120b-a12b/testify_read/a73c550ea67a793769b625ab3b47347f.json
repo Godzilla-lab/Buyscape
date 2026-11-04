@@ -1,0 +1,69 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Black and silver electric scooter with step-through frame",
+      "Black seat, rear storage box, side panel with illegible text",
+      "Two mirrors, front disc brake, rear wheel with drum or disc brake",
+      "Watermark across center of photo",
+      "Outdoor concrete setting, building with windows behind, wall-mounted AC unit visible on left"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "electric scooter",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Cleanly used Electric bike for sale",
+        "verdict": "supported",
+        "evidence": "photo 0 shows a used electric scooter"
+      },
+      {
+        "claim": "Runs on 72v 20ah lead acid battery",
+        "verdict": "unverifiable_remote",
+        "evidence": "no battery label or spec plate readable in photo 0"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery may not hold charge or may be dead",
+        "proof": "photo of battery label showing voltage and capacity, plus video of scooter running under its own power",
+        "if_unproven": "as not working with dead battery"
+      },
+      {
+        "risk": "Motor or controller may be faulty",
+        "proof": "video of throttle response and movement under power",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Actual age and mileage unknown",
+        "proof": "photos of odometer and wear points on tires, brakes, and seat",
+        "if_unproven": "as high-mileage older unit"
+      }
+    ],
+    "proof_requests": [
+      "Photo of battery compartment label showing voltage and capacity",
+      "Video of scooter turning on and moving under its own power",
+      "Photo of odometer or mileage indicator if present"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as an electric scooter from photo 0; even with unproven battery and running condition, it can be priced at worst case as a non-running electric scooter."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 8537,
+    "input_tokens": 1606,
+    "output_tokens": 1505,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "a73c550ea67a793769b625ab3b47347f",
+    "error": null
+  }
+}

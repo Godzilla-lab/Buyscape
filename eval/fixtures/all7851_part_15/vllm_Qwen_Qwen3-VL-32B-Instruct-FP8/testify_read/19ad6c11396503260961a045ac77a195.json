@@ -1,0 +1,89 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Front view of a black computer monitor on a blue plastic stool. Screen is off, reflecting surroundings. Watermarks 'POSTED ON JIJI' and 'ATS COMPUTERS &' are visible. No visible brand or model on front.",
+      "Photo 1: Back view of the monitor showing the Dell logo in white circle. Stand is detached and placed in front. Some dust and smudges on the back panel. Watermarks present.",
+      "Photo 2: Similar back view to photo 1, slightly different angle. Dell logo visible. Stand still detached. Watermarks present. A person in green striped shirt is visible in background.",
+      "The monitor appears to be 27 inches based on size relative to stool and stand, but no size label is visible.",
+      "No ports or connectors are visible in any photo. The seller claims multiple HDMI and display ports, but none are shown.",
+      "The screen surface in photo 0 shows smudges and reflections, possibly indicating dust or fingerprints, contradicting 'very clean' claim."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "computer monitor",
+      "brand": "Dell",
+      "model": null,
+      "read_from": [
+        "photo 1 back panel",
+        "photo 2 back panel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Very clean",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows smudges and reflections on screen surface; photo 1 and 2 show dust and smudges on back panel."
+      },
+      {
+        "claim": "27 inches",
+        "verdict": "unverified",
+        "evidence": "No size label visible in any photo; size estimated by comparison to stool and stand, which is not definitive."
+      },
+      {
+        "claim": "Dell computer monitor",
+        "verdict": "supported",
+        "evidence": "Dell logo clearly visible on back panel in photo 1 and photo 2."
+      },
+      {
+        "claim": "multiple hdmi, display etc",
+        "verdict": "unverifiable_remote",
+        "evidence": "No ports or connectors are visible in any photo; cannot confirm presence or number of ports from current images."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Monitor may be non-functional or have dead pixels/defects",
+        "proof": "Video or photo of monitor powered on, showing full screen with test pattern or content.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Missing or damaged stand",
+        "proof": "Photo of stand attached to monitor, or confirmation that stand is included and functional.",
+        "if_unproven": "priced as stand not included or damaged"
+      },
+      {
+        "risk": "Ports may not be as claimed (e.g., no HDMI or display ports)",
+        "proof": "Photo of the back panel showing all ports and connectors with clear labels.",
+        "if_unproven": "priced as no ports or fewer than claimed"
+      },
+      {
+        "risk": "Screen damage (scratches, cracks, dead pixels)",
+        "proof": "Close-up photo of screen surface under bright light, or video showing screen with white screen test.",
+        "if_unproven": "priced as screen damaged"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the back panel showing all ports and connectors with clear labels.",
+      "Video or photo of the monitor powered on, displaying a full screen test pattern.",
+      "Photo of the stand attached to the monitor, or confirmation that stand is included and functional.",
+      "Close-up photo of the screen surface under bright light to check for scratches or dead pixels."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The monitor is identifiable as a Dell brand, but key claims (size, ports, condition) are unverified or contradicted by the photos. Hidden risks such as non-functionality, missing stand, or screen damage cannot be assessed without additional proof. The item cannot be priced accurately without these details."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 70384,
+    "input_tokens": 2784,
+    "output_tokens": 897,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "19ad6c11396503260961a045ac77a195",
+    "error": null
+  }
+}

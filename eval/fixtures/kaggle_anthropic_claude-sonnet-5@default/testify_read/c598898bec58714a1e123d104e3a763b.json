@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: single close-up of a used tyre tread, moderate wear, no size markings or brand name legible on the sidewall or tread.",
+      "Photo 1: a stack of three tyres with differing tread patterns, all show use (dust, slight wear), no readable size/brand/DOT text.",
+      "Photo 2: a set of alloy wheels/rims, one with a center cap reading 'MERCEDES BENZ' (photo 2), stacked with other rim styles \u2014 this is a wheel, not a tyre, and does not match the tyre listing text.",
+      "No tyre size (e.g. 195/65R15), load/speed rating, or manufacturer name is visible in any of the three photos.",
+      "No photo shows a 'new' tyre as claimed in the text; all tyre photos show used stock."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used car tyre (tokumbo), plus unrelated alloy wheel/rim shown in one photo",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 2 center cap (rim only, reads 'MERCEDES BENZ')"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "First grade tokumbo tyres",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photos 0 and 1 show used tyres with visible tread, but 'first grade' is a subjective grading that cannot be confirmed without size, DOT date, and full sidewall condition."
+      },
+      {
+        "claim": "New brand ones are available",
+        "verdict": "unverified",
+        "evidence": "No photo shows a new/unused tyre; all tyre photos (0, 1) show used tyres."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Tyre size unknown, which is the main price driver",
+        "proof": "Clear photo of the sidewall showing size code (e.g. 205/55R16) and brand name",
+        "if_unproven": "cannot be priced at all without this; size swings price heavily"
+      },
+      {
+        "risk": "Tyre age/DOT manufacture date unknown, affecting rubber degradation risk",
+        "proof": "Close-up photo of the DOT code on the sidewall",
+        "if_unproven": "priced as old/worst-case age"
+      },
+      {
+        "risk": "Hidden sidewall damage, bulges, or repairs not visible in tread-only shots",
+        "proof": "Full side profile photo of each tyre's sidewall",
+        "if_unproven": "priced as possibly damaged/lower grade"
+      },
+      {
+        "risk": "Mismatch: photo 2 shows rims, not tyres, creating confusion about what is actually being sold",
+        "proof": "Seller confirmation and separate photos clarifying whether rims are part of this listing or a different item",
+        "if_unproven": "rims excluded from this valuation; treated as unrelated/unverifiable listing"
+      },
+      {
+        "risk": "Exact tread depth and wear percentage not measurable from photos",
+        "proof": "Photo with a tread depth gauge or ruler against the tread",
+        "if_unproven": "priced as lower/worn tread grade"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of each tyre's sidewall showing size code and brand name",
+      "Close-up of the DOT date code on each tyre",
+      "Full sidewall photos showing no bulges, cracks, or repairs",
+      "Clarification on whether the Mercedes-Benz rims in photo 2 are part of this tyre listing or a separate item",
+      "Photo of a tread depth gauge reading on each tyre"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The tyre size and brand, which set the price for tyres, are not visible in any photo, and photo 2 (rims) is inconsistent with the tyre listing, so no worst-case price can be assigned without sidewall/size proof and clarification."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 21268,
+    "input_tokens": 3859,
+    "output_tokens": 1986,
+    "cost_usd": 0.024419,
+    "replayed": false,
+    "fixture_key": "c598898bec58714a1e123d104e3a763b",
+    "error": null
+  }
+}

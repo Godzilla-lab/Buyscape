@@ -1,0 +1,66 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-instruct",
+  "response": {
+    "observations": [
+      "A large, white, rectangular plastic tank with a metal frame and a black lid. The tank is made of a durable plastic material and has a grid-like structure on the sides. There are several similar tanks stacked in the background. A hand is touching the tank on the right side. The tank has a label with 'EMIMALINK CONCEPT NIG' written on it."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "IBC tank",
+      "brand": "EMIMALINK CONCEPT NIG",
+      "model": "not readable",
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "IBC tank for storage of water or any liquid very strong and durable",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "Food grade, used only once for clean water. No crack, no leak, lids complete.",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The tank may not be food-grade or may have been used for non-clean water.",
+        "proof": "The label 'EMIMALINK CONCEPT NIG' is visible, but the model number or specific certification is not readable. The tank is not clearly marked with food-grade certification.",
+        "if_unproven": "as not food-grade"
+      },
+      {
+        "risk": "The tank may have a crack or leak.",
+        "proof": "The tank has visible signs of wear and tear, including rust and scratches on the metal frame. The lid is intact but the tank's surface shows signs of damage.",
+        "if_unproven": "as not leak-proof"
+      },
+      {
+        "risk": "The tank may have been used for non-clean water.",
+        "proof": "The seller claims it is used only once for clean water, but the tank's condition and the lack of visible certification make it difficult to verify.",
+        "if_unproven": "as not suitable for food-grade use"
+      }
+    ],
+    "proof_requests": [
+      "Can you provide a certificate of food-grade certification for this tank?",
+      "Can you show a photo of the tank's interior and confirm it is free of any cracks or leaks?"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The identity of the item is confirmed as an IBC tank, but the model number and specific certification are not readable. The seller's claims are supported by the visual evidence, but the proof of food-grade certification and the absence of visible damage are not confirmed. Therefore, a proof request is necessary to determine the item's suitability for food-grade use and to verify its condition."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-instruct",
+    "task": "testify_read",
+    "latency_ms": 23883,
+    "input_tokens": 1454,
+    "output_tokens": 601,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "6a1220ea6ab551821ce3aabe6a4f4c55",
+    "error": null
+  }
+}

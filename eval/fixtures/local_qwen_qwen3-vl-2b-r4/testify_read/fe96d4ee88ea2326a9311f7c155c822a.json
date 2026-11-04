@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r4",
+  "response": {
+    "observations": [
+      "Large green plastic water tank.",
+      "Brand 'GEEPEI' is stamped on the side in photo 0 and photo 1.",
+      "The tank has a ribbed design and a top-mounted outlet pipe.",
+      "The surface shows some dirt, grime, and minor wear.",
+      "Watermarks 'SULEIMAN ZANNAH' and 'POSTED ON JIJI' are present on both photos."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "water storage tank",
+      "brand": "GEEPEI",
+      "read_from": [
+        "photo 0",
+        "photo 1"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "A fairly used green GEEPEI water storage tank",
+        "verdict": "supported",
+        "evidence": "photo 0 and photo 1 show the brand and the used condition of the tank."
+      },
+      {
+        "claim": "Food grade",
+        "verdict": "unverified",
+        "evidence": "The stamped 'GEEPEI' does not specify the material grade; it could be plastic or metal."
+      },
+      {
+        "claim": "used only once for clean water. No crack, no leak, lids complete.",
+        "verdict": "unverified",
+        "evidence": "No photo shows this; it is the seller's word only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The tank may be a lower-grade plastic (e.g., HDPE) rather than food-grade metal (e.g., galvanized steel).",
+        "proof": "A photo of the stamped material grade (e.g., 'HDPE') on the side of the tank.",
+        "if_unproven": "priced as standard HDPE plastic"
+      },
+      {
+        "risk": "The capacity (liters) is unknown, which is the primary factor in pricing.",
+        "proof": "A photo of the manufacturer's stamped capacity marking on the side of the tank.",
+        "if_unproven": "priced as the smallest common capacity (e.g., 1000L)"
+      },
+      {
+        "risk": "The tank may be empty or have internal damage not visible from the outside.",
+        "proof": "A photo of the tank with a measuring tape across the top rim.",
+        "if_unproven": "priced as empty"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the stamped capacity (e.g., 1000L, 1500L) on the side of the tank.",
+      "Photo of the stamped material grade (e.g., HDPE) on the side of the tank.",
+      "Photo of the tank with a measuring tape across the top rim to confirm capacity."
+    ],
+    "decision": "price",
+    "reason": "The brand and type are clearly identified from the photos. Since the capacity is unknown, it must be priced at the worst-case (smallest common capacity) until the stamp is verified."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r4",
+    "task": "testify_read",
+    "latency_ms": 2298,
+    "input_tokens": 1919,
+    "output_tokens": 528,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "fe96d4ee88ea2326a9311f7c155c822a",
+    "error": null
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo shows a flat-screen LG monitor (screen appears dark/blank) on a stand.",
+      "In front of the monitor is a full-size keyboard.",
+      "Two circular items on the table look like speakers/subwoofers or possibly parts; they are not clearly identified as part of the sale.",
+      "No visible power-on status, no screen content, and no close-up of model/serial labels."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "scrap LG monitor and keyboard",
+      "brand": "LG",
+      "model": null,
+      "read_from": [
+        "photo 0 (LG logo visible on the monitor bezel)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Scrap LG monitor and keyboard available for sale.",
+        "verdict": "supported",
+        "evidence": "photo 0 shows an LG monitor and a keyboard together."
+      },
+      {
+        "claim": "Scrap (implies not working / for parts).",
+        "verdict": "unverified",
+        "evidence": "photo 0 shows a dark screen but provides no proof of failure (no power-on test, no symptoms, no label)."
+      },
+      {
+        "claim": "Location: Magodo Phase 2, Lagos State.",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo evidence of location."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Monitor may be working but just not powered/connected; 'scrap' status is not proven.",
+        "proof": "A short video of the monitor powered on showing a boot screen or any display output (with brightness/OSD visible).",
+        "if_unproven": "Price as not working / for parts."
+      },
+      {
+        "risk": "Exact monitor model/size is unknown; affects scrap value and parts demand.",
+        "proof": "Close-up photo of the monitor label (model number and serial) on the back/side.",
+        "if_unproven": "Price as generic LG monitor (unknown size/model) for parts."
+      },
+      {
+        "risk": "Keyboard condition is unknown (keys may be stuck, missing, or non-functional).",
+        "proof": "Photo of the keyboard brand/model label plus a video typing test (keys registering on a laptop/PC).",
+        "if_unproven": "Price as keyboard not guaranteed working."
+      },
+      {
+        "risk": "The two circular items might be included or might be unrelated; could change what you receive.",
+        "proof": "Confirm in chat whether the circular items are included; send a photo showing the full set laid out with what is for sale.",
+        "if_unproven": "Price only for the monitor + keyboard; ignore other items unless confirmed."
+      }
+    ],
+    "proof_requests": [
+      "Video: power on the LG monitor and show any display/boot output.",
+      "Close-up: monitor back label with model number/serial.",
+      "Keyboard: close-up label (brand/model) and a typing/connection test video showing keys working.",
+      "Confirm whether the two circular items are included in the sale."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photos confirm an LG monitor and a keyboard, but 'scrap' (not working) and the exact model/condition are not proven. Without a power-on/display test and model/label shots, the correct worst-case pricing cannot be set confidently."
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_read",
+    "latency_ms": 5106,
+    "input_tokens": 2279,
+    "output_tokens": 756,
+    "cost_usd": 0.001401,
+    "replayed": false,
+    "fixture_key": "50b495ff3c67a205a691dad7e50c362e",
+    "error": null
+  }
+}

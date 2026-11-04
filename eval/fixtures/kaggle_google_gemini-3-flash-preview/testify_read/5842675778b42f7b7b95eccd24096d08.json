@@ -1,0 +1,73 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Yellow industrial engine block.",
+      "Valve cover in photo 1 is clearly marked 'CAT C9 ACERT'.",
+      "Photo 0 shows open intake ports, indicating the intake manifold is missing.",
+      "An Atlas Copco branded filter is attached in photo 0.",
+      "The engine is surrounded by tools (wrenches, pliers) on the floor in photo 1, suggesting it is being dismantled or repaired.",
+      "A watermark 'DNL EQUIPMENT SALES AND...' is visible across both images."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "diesel engine",
+      "brand": "Caterpillar",
+      "model": "C9 ACERT",
+      "read_from": [
+        "photo 1 valve cover"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Complete",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows missing intake manifold and open ports; seller also includes '(parts)' in the description."
+      },
+      {
+        "claim": "Caterpillar C9 engine",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows the model designation on the valve cover."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine may be seized or have significant internal mechanical failure.",
+        "proof": "A video showing the crankshaft being barred over manually.",
+        "if_unproven": "as a non-running core for parts"
+      },
+      {
+        "risk": "Critical expensive components like the turbocharger or fuel injectors may be missing or faulty.",
+        "proof": "Clear photos of the exhaust side and the top of the head with the valve cover removed.",
+        "if_unproven": "as an incomplete engine block"
+      },
+      {
+        "risk": "The photos may be stolen from another dealer (indicated by the watermark).",
+        "proof": "A photo of the engine with a handwritten note showing the current date and the buyer's name.",
+        "if_unproven": "as a high-risk transaction"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the engine serial number plate.",
+      "Video of the engine being turned over manually.",
+      "Photos of the exhaust side and the rear of the engine.",
+      "Verification photo with a handwritten note to confirm physical possession."
+    ],
+    "decision": "price",
+    "reason": "The item is identified as a Caterpillar C9 ACERT engine. It is priced at its worst case as an incomplete, non-running core due to visible missing parts and the seller's contradictory 'complete (parts)' description."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 15537,
+    "input_tokens": 3421,
+    "output_tokens": 2682,
+    "cost_usd": 0.009756,
+    "replayed": false,
+    "fixture_key": "5842675778b42f7b7b95eccd24096d08",
+    "error": null
+  }
+}

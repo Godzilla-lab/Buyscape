@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Single photo shows a used automatic transmission/gearbox assembly sitting on a dirty workshop floor.",
+      "Background shows other disassembled engine parts and water bottles, consistent with a used-parts yard.",
+      "A watermark reads 'MR QUALITY PARTS' - this is the seller's shop branding, not a part or vehicle brand.",
+      "No vehicle make, model, or part number plate is legible anywhere in the image.",
+      "Surface shows grease, grime, and some corrosion/staining; one bolt area shows wear.",
+      "Torque converter face is visible but its condition (seals, splines) cannot be judged from a static photo."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used automatic transmission/gearbox assembly",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Sell in good condition",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo 0 shows only an exterior, grimy static shot; no way to confirm internal or functional condition."
+      },
+      {
+        "claim": "6 months warranty",
+        "verdict": "unverifiable_remote",
+        "evidence": "No documentation, receipt, or shop signage shown in photo 0 to confirm a warranty policy exists."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Vehicle fitment (make/model/engine code) is unknown, which drives price heavily for a transmission.",
+        "proof": "Close-up photo of the part/tag number stamped or labeled on the transmission casing, or a photo of the donor vehicle.",
+        "if_unproven": "cannot be priced at all without this - fitment-specific pricing is impossible"
+      },
+      {
+        "risk": "Internal gear/clutch pack or torque converter condition unknown; could be worn, damaged, or seized.",
+        "proof": "Video of the transmission being tested/turned on a bench or in a running vehicle, or a borescope/teardown photo.",
+        "if_unproven": "priced as not working / non-functional"
+      },
+      {
+        "risk": "Fluid leaks from seals or gaskets not assessable from a single static photo.",
+        "proof": "Close-up photos of all seal and gasket areas, ideally after wiping clean.",
+        "if_unproven": "priced assuming leaks present, needing reseal"
+      },
+      {
+        "risk": "Mileage or accident history of the donor vehicle is unknown.",
+        "proof": "Photo of VIN tag or donor vehicle registration paperwork.",
+        "if_unproven": "priced as unknown history, high-mileage assumption"
+      }
+    ],
+    "proof_requests": [
+      "Clear close-up of the part number/tag on the transmission case to confirm vehicle fitment.",
+      "Video of the unit being tested (e.g., spun by hand, or bench-tested with power) showing it engages without noise.",
+      "Close-up photos of all seals and the torque converter area for leak/wear signs.",
+      "Any paperwork or photo evidence supporting the 6-month warranty claim."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "A transmission's price depends entirely on which vehicle/engine it fits, and no part number or model is readable in the single photo provided, so even a worst-case price cannot be set."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 18662,
+    "input_tokens": 2879,
+    "output_tokens": 1666,
+    "cost_usd": 0.022418,
+    "replayed": false,
+    "fixture_key": "56785ea31ac9db9554665daf1f6f022e",
+    "error": null
+  }
+}

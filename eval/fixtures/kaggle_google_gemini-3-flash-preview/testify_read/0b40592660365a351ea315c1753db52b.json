@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 is a clean stock image of a red Calor 19kg Propane cylinder with a 'WEBMART STORE' watermark.",
+      "Photo 1 shows a physically present, used red Calor 19kg Propane cylinder with visible scratches, scuffs, and minor rust spots.",
+      "The cylinder in photo 1 has a 'POSTED ON JIJI' and 'WEBMART STORE' watermark.",
+      "The text 'CALOR Gas' and '19kg Propane' is clearly legible on the cylinder body in both photos.",
+      "The valve assembly is visible at the top but the connection type is not clearly detailed."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "gas cylinder",
+      "brand": "Calor Gas",
+      "model": "19kg Propane",
+      "read_from": [
+        "photo 0",
+        "photo 1"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "19kg gas cylinder",
+        "verdict": "supported",
+        "evidence": "photo 1"
+      },
+      {
+        "claim": "For kitchen uses, generator use and industrial use",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      },
+      {
+        "claim": "Limited stock",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The cylinder may be expired or past its mandatory re-test date, making it illegal or unsafe to refill.",
+        "proof": "A clear photo of the date stamp on the metal shroud (collar) or the base ring.",
+        "if_unproven": "as an expired/scrap cylinder"
+      },
+      {
+        "risk": "The cylinder is likely empty despite the seller's description not specifying.",
+        "proof": "A photo of the cylinder on a weighing scale.",
+        "if_unproven": "as empty"
+      },
+      {
+        "risk": "The valve may be damaged or have a leak.",
+        "proof": "A video showing a soapy water test on the valve while open (if full) or a close-up of the threads.",
+        "if_unproven": "as having a faulty valve"
+      },
+      {
+        "risk": "Calor is a UK brand; the valve connection may require a specific adapter not standard to Nigerian LPG regulators.",
+        "proof": "A close-up photo of the valve outlet threads.",
+        "if_unproven": "as requiring an expensive adapter"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the manufacturing or expiry date stamped into the metal collar or base.",
+      "Close-up photo of the valve outlet to confirm connection type and condition.",
+      "Confirmation of whether the cylinder is currently full, partially full, or empty."
+    ],
+    "decision": "price",
+    "reason": "The item is a specific brand and size of gas cylinder. While photo 0 is a stock image, photo 1 shows a real unit in used condition. It can be priced as an empty, used cylinder with the assumption that it may need testing or an adapter for local use."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 11204,
+    "input_tokens": 3497,
+    "output_tokens": 2066,
+    "cost_usd": 0.007947,
+    "replayed": false,
+    "fixture_key": "0b40592660365a351ea315c1753db52b",
+    "error": null
+  }
+}

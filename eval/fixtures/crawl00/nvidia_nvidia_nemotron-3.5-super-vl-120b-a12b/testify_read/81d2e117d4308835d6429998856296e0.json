@@ -1,0 +1,126 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows an open laptop with the screen on, displaying a desktop wallpaper; keyboard, trackpad, and palm-rest stickers are visible.",
+      "Photo 0 right palm-rest sticker reads 'Alpha 17 C7V' with an NVIDIA GeForce RTX logo.",
+      "Photo 0 left palm-rest shows an AMD Ryzen sticker and an NVIDIA GeForce RTX sticker.",
+      "Photos 1 and 2 show the same laptop with the screen off; the same stickers are visible.",
+      "No ports, battery, internal components, or system information screens are shown."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "gaming laptop",
+      "brand": null,
+      "model": "Alpha 17 C7V",
+      "read_from": [
+        "photo 0 sticker",
+        "photo 1 sticker",
+        "photo 2 sticker"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "MSI Alpha17 C7VG",
+        "verdict": "supported",
+        "evidence": "photo 0 sticker reads Alpha 17 C7V"
+      },
+      {
+        "claim": "Ryzen9",
+        "verdict": "unverified",
+        "evidence": "AMD sticker visible but tier not readable"
+      },
+      {
+        "claim": "1tbssd",
+        "verdict": "unverifiable_remote",
+        "evidence": "no storage shown in photos"
+      },
+      {
+        "claim": "16gb",
+        "verdict": "unverifiable_remote",
+        "evidence": "no RAM shown in photos"
+      },
+      {
+        "claim": "8gb",
+        "verdict": "unverifiable_remote",
+        "evidence": "no VRAM or RAM shown in photos"
+      },
+      {
+        "claim": "Nvidia RTX 4070",
+        "verdict": "unverified",
+        "evidence": "RTX sticker visible but model number not readable"
+      },
+      {
+        "claim": "dedicated AMD Redone (TM)610M",
+        "verdict": "unverifiable_remote",
+        "evidence": "claim text is garbled and no such component is visible"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "GPU may not be RTX 4070; only RTX branding is visible",
+        "proof": "close-up of GPU sticker or screenshot of Device Manager/DXDiag",
+        "if_unproven": "as a lower-tier RTX gaming laptop"
+      },
+      {
+        "risk": "CPU may not be Ryzen 9",
+        "proof": "screenshot of system information showing processor model",
+        "if_unproven": "as a lower-spec Ryzen processor"
+      },
+      {
+        "risk": "RAM may not be 16 GB",
+        "proof": "screenshot of system information showing installed memory",
+        "if_unproven": "as 8 GB RAM"
+      },
+      {
+        "risk": "SSD may not be 1 TB or may be missing",
+        "proof": "screenshot of disk management showing drive capacity",
+        "if_unproven": "as no SSD or smaller SSD"
+      },
+      {
+        "risk": "Battery may not hold a charge",
+        "proof": "video of laptop running unplugged or battery health report",
+        "if_unproven": "as dead battery requiring replacement"
+      },
+      {
+        "risk": "Screen may have dead pixels, backlight bleed, or flicker",
+        "proof": "video showing solid red, green, blue, white, and black full-screen images",
+        "if_unproven": "as defective screen"
+      },
+      {
+        "risk": "Keyboard or trackpad may have non-working keys or buttons",
+        "proof": "video typing in a text field and clicking all trackpad buttons",
+        "if_unproven": "as non-functional keyboard or trackpad"
+      },
+      {
+        "risk": "Ports may be damaged or missing",
+        "proof": "video showing all ports with a cable plugged in",
+        "if_unproven": "as having broken or missing ports"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of the right palm-rest sticker to confirm exact model and GPU tier",
+      "Screenshot of Windows About or CPU-Z showing processor, RAM, and GPU",
+      "Screenshot of Disk Management showing SSD capacity",
+      "Video of screen cycling through solid red, green, blue, white, and black images",
+      "Video of laptop running on battery for at least 15 minutes",
+      "Video of keyboard and trackpad testing"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as an Alpha 17 C7V gaming laptop from the sticker in the photos, so it can be priced at its worst case; all seller performance claims are unproven and priced accordingly."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 45736,
+    "input_tokens": 2937,
+    "output_tokens": 6614,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "81d2e117d4308835d6429998856296e0",
+    "error": null
+  }
+}

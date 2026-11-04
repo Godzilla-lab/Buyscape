@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Light green industrial sewing machine on a table in photo 0",
+      "Badge reads \"SINGER Professional\" and \"20U33\" in photo 0",
+      "Thread spool on top of machine",
+      "Workshop background with bags and fabric",
+      "Watermark \"POSTED ON JIJI PIMOH EBENEZER\" across image"
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "industrial sewing machine",
+      "brand": "SINGER",
+      "model": "20U33",
+      "read_from": [
+        "photo 0 badge"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Barely used",
+        "verdict": "unverified",
+        "evidence": "Photo shows a used machine but wear and usage cannot be judged from images"
+      },
+      {
+        "claim": "20u33",
+        "verdict": "supported",
+        "evidence": "Photo 0 badge reads 20U33"
+      },
+      {
+        "claim": "embroidery machine",
+        "verdict": "unverified",
+        "evidence": "Photo shows a sewing machine head; no embroidery arm, hoop, or embroidery-specific parts visible"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Machine does not power on or stitch",
+        "proof": "Video of machine running with needle moving",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Missing presser foot, bobbin, or accessories",
+        "proof": "Close-up of needle area and included accessories",
+        "if_unproven": "as incomplete"
+      },
+      {
+        "risk": "Not actually an embroidery machine, only a standard lockstitch sewing machine",
+        "proof": "Close-up of stitch selector or embroidery attachment if present",
+        "if_unproven": "as standard sewing machine"
+      },
+      {
+        "risk": "Wrong voltage or plug for Lagos power supply",
+        "proof": "Photo of power plug and voltage rating label",
+        "if_unproven": "as needing electrical adaptation"
+      }
+    ],
+    "proof_requests": [
+      "Video of the machine running and stitching fabric",
+      "Close-up photo of the power plug and voltage label",
+      "Close-up photo of the needle, presser foot, and bobbin area",
+      "Photo showing any embroidery attachment or hoop"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a Singer 20U33 industrial sewing machine from the badge in photo 0, so it can be priced at its worst case even though usage and function are unproven."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 13572,
+    "input_tokens": 2045,
+    "output_tokens": 2302,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "3dbab961bc9f252a35b20eae2bb2ddf4",
+    "error": null
+  }
+}

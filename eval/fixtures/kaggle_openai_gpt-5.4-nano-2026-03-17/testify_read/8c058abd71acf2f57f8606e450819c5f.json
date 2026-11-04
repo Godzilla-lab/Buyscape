@@ -1,0 +1,90 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0 shows a \u201cBLUE GATE\u201d UPS with front power/indicator LEDs.",
+      "Photo 1 shows the UPS from the side/front with mains plug visible; no rating label or battery compartment is visible.",
+      "No additional photos or test evidence were provided after the seller\u2019s reply."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "UPS (uninterruptible power supply)",
+      "brand": "BLUE GATE",
+      "model": null,
+      "read_from": [
+        "photo 0 front panel text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "UPS available",
+        "verdict": "supported",
+        "evidence": "Photos show a device labeled \u201cBLUE GATE\u201d with UPS-style front indicators and mains plug (photo 0, photo 1)."
+      },
+      {
+        "claim": "Battery is new",
+        "verdict": "unverified",
+        "evidence": "Seller text only; no battery label/date, receipt, or internal/battery compartment photo (photo 0, photo 1)."
+      },
+      {
+        "claim": "Battery holds charge for 8 hours",
+        "verdict": "unverified",
+        "evidence": "Seller text only; no runtime test video/log or load (watts) shown (photo 0, photo 1)."
+      },
+      {
+        "claim": "Never repaired",
+        "verdict": "unverifiable_remote",
+        "evidence": "Seller text only; no service/warranty seal or internal inspection shown (photo 0, photo 1)."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Unknown UPS capacity (VA/W) and battery size; runtime depends on load and battery capacity.",
+        "proof": "A clear photo of the rating label showing VA/W and battery voltage/capacity (Ah) on the back/bottom.",
+        "if_unproven": "Price it as a generic used UPS with unknown capacity; treat runtime as not guaranteed."
+      },
+      {
+        "risk": "The \u201c8 hours\u201d claim may be under a very light load; battery health could still be poor.",
+        "proof": "Video: charge to full, then mains off with a stated load (watts) and timer reaching the claimed duration.",
+        "if_unproven": "Price it as not proven to reach 8 hours; assume reduced runtime."
+      },
+      {
+        "risk": "Switching to battery and output quality (inverter/AVR) may be faulty even if it powers on.",
+        "proof": "Clip showing mains-off transition (LED/beep change) plus multimeter output voltage under load.",
+        "if_unproven": "Price it as not fully verified for correct switching/output stability."
+      },
+      {
+        "risk": "Prior repair or non-original battery quality not visible externally.",
+        "proof": "Photo of battery compartment/inside or any warranty/service seal and battery label.",
+        "if_unproven": "Price it as potentially repaired/unknown battery quality."
+      },
+      {
+        "risk": "Missing accessories/cables or damaged ports/connectors.",
+        "proof": "Photo of all included items and close-ups of back/top ports/connectors.",
+        "if_unproven": "Price it as sold as-is with only what\u2019s shown; assume missing items/unknown condition."
+      }
+    ],
+    "proof_requests": [
+      "Send clear photos of the back/bottom rating label (VA/W) and battery specs (voltage and Ah).",
+      "Send a short video of the runtime test: charge to full, then mains off with a stated load (watts) and show the timer reaching the claimed duration.",
+      "Send a clip showing mains-off switching and output voltage measurement (multimeter) under load.",
+      "Send a photo of the battery compartment/inside and any battery label or service/warranty seal."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller\u2019s reply asserts the claims, but without new photos or verifiable test evidence, the key pricing factors (VA/W, battery Ah, and verified runtime under load) remain unconfirmed from remote inspection."
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_read",
+    "latency_ms": 4311,
+    "input_tokens": 3999,
+    "output_tokens": 733,
+    "cost_usd": 0.001716,
+    "replayed": false,
+    "fixture_key": "8c058abd71acf2f57f8606e450819c5f",
+    "error": null
+  }
+}

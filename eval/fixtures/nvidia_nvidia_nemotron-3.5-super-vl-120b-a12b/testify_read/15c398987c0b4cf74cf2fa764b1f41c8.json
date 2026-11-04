@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a close-up of an engine block with \"2GR\" cast into the metal and a \"TOYOTA\" label visible near the alternator.",
+      "Photo 1 shows several used V6 engines stacked, with intake manifolds and various hoses and wires attached.",
+      "Photo 2 shows a row of similar used engines in a warehouse setting.",
+      "All engines appear dirty and used; no clean or refurbished condition is shown.",
+      "A watermark \"NIGERIA JAPANESE AUTOS\" appears across the images."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "complete car engine",
+      "brand": "Toyota",
+      "model": "2GR",
+      "read_from": [
+        "photo 0 block casting",
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Complete engine",
+        "verdict": "unverified",
+        "evidence": "Photos show engines but cannot confirm all components are present or that nothing is missing."
+      },
+      {
+        "claim": "Toyota 2GR",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows \"2GR\" cast into the block and \"TOYOTA\" on a label."
+      },
+      {
+        "claim": "Direct Belgium",
+        "verdict": "unverifiable_remote",
+        "evidence": "Origin cannot be verified from photos or remote inspection."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine does not run or has internal damage",
+        "proof": "Video of cold start, idle, and revving, or compression/leak-down test results",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Missing components such as ECU, wiring harness, alternator, or accessories",
+        "proof": "Itemized photo showing every included part laid out",
+        "if_unproven": "as engine block only"
+      },
+      {
+        "risk": "Wrong 2GR variant (e.g., 2GR-FE vs 2GR-FSE vs 2GR-FKS)",
+        "proof": "Clear photo of the full engine identification plate with exact engine code",
+        "if_unproven": "as base 2GR variant"
+      }
+    ],
+    "proof_requests": [
+      "Video of the engine starting and running",
+      "Clear photo of the full engine identification plate",
+      "Photo showing all included components",
+      "Compression test or leak-down test results"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a Toyota 2GR complete engine from the casting and label in photo 0, so it can be priced at its worst case (non-running and incomplete) pending proof."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 6748,
+    "input_tokens": 2904,
+    "output_tokens": 1474,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "15c398987c0b4cf74cf2fa764b1f41c8",
+    "error": null
+  }
+}

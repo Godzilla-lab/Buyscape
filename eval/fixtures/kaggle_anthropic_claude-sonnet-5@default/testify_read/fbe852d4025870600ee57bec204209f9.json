@@ -1,0 +1,95 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Front-load washing machine, white cabinet, brand 'SAMSUNG' printed on top left (photo 0).",
+      "Control panel shows digital display, dial with wash programs, and small text 'ecobubble 9.0kg' under the display (photo 0).",
+      "Dust, mineral deposits, and dried detergent drips visible on lower door frame and base (photo 0).",
+      "No visible cracks, dents, or missing parts on the exterior.",
+      "A '10 Warranty' and '12 Warranty' sticker/badge are shown but these are manufacturer promotional stickers, not proof of active warranty.",
+      "No photo of the rear panel, power cable, or any video/clip showing the machine running or spinning.",
+      "No visible rust, corrosion, or water leakage in the single photo provided."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "front-load washing machine",
+      "brand": "Samsung",
+      "model": "EcoBubble (exact model number not legible)",
+      "read_from": [
+        "photo 0 top panel 'SAMSUNG' logo",
+        "photo 0 control panel text 'ecobubble 9.0kg'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Model: Samsung Eco Bubble",
+        "verdict": "supported",
+        "evidence": "Brand and 'ecobubble' text visible on control panel, photo 0."
+      },
+      {
+        "claim": "Capacity: 9kg",
+        "verdict": "supported",
+        "evidence": "'9.0kg' text visible under display on control panel, photo 0."
+      },
+      {
+        "claim": "Condition: Scrap/for repair",
+        "verdict": "unverified",
+        "evidence": "Seller states this; no internal photo, drum rotation, or fault description shown to confirm extent of the fault."
+      },
+      {
+        "claim": "The power comes on",
+        "verdict": "unverifiable_remote",
+        "evidence": "No video or photo of the display lit or any indicator active; cannot confirm from a single static photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Extent of the electrical/mechanical fault is unknown (motor, PCB, drum bearing, heater, etc.)",
+        "proof": "A power-on video showing the display, door lock engaging, and drum attempting to spin or erroring out.",
+        "if_unproven": "priced as non-functional scrap, not a repairable-only fault"
+      },
+      {
+        "risk": "Drum bearing or tub seal could be seized or leaking, common in 'scrap' Samsung washers",
+        "proof": "Photo/video of the drum manually rotated, and underside/base for water staining.",
+        "if_unproven": "priced as drum/bearing faulty, lowering parts value"
+      },
+      {
+        "risk": "Missing or already-stripped internal components (motor, PCB, heater) before sale",
+        "proof": "Photo of the rear panel removed showing motor and wiring intact.",
+        "if_unproven": "priced as possibly stripped, at lower parts-only value"
+      },
+      {
+        "risk": "Rust or corrosion on drum/tub or chassis not visible from front",
+        "proof": "Photo of rear and underside of unit.",
+        "if_unproven": "priced assuming hidden rust present"
+      },
+      {
+        "risk": "Unclear if unit is complete (hoses, inlet valve, power cable included)",
+        "proof": "Photo showing rear hoses, inlet valve, and power cord included.",
+        "if_unproven": "priced as incomplete, accessories not included"
+      }
+    ],
+    "proof_requests": [
+      "Video of the machine powered on, showing the display lighting up and an attempted wash/spin cycle.",
+      "Photo of the rear panel and underside of the machine.",
+      "Photo of the data/rating plate (usually on rear or side) showing full model number and serial.",
+      "Photo of hoses, power cable, and inlet valve to confirm completeness."
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identifiable as a Samsung EcoBubble 9kg front-load washing machine from the visible branding and panel text, but the seller's own listing frames it as scrap/for repair with no functional proof, so it must be priced at worst case as a non-working unit pending further evidence."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 21901,
+    "input_tokens": 3519,
+    "output_tokens": 1858,
+    "cost_usd": 0.025618,
+    "replayed": false,
+    "fixture_key": "fbe852d4025870600ee57bec204209f9",
+    "error": null
+  }
+}

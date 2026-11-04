@@ -1,0 +1,100 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Front view of a black smartphone with a curved screen, displaying the home screen with weather and app icons. The status bar shows 4:08, 40% battery, and signal strength. The phone is held in a hand against a white corrugated background.",
+      "Photo 1: Back view of the same phone, showing a triple camera module in a vertical arrangement, a small flash, and a red sticker that says '128G RAM'. The Samsung logo is visible at the bottom. The phone appears to be black with a matte finish.",
+      "Photo 2: Screen shows 'Device care' with details: 1d 16h battery life, 106.6 GB available out of 214 GB total storage, 4 GB available out of 8 GB memory. The phone is running Android, and the status bar shows 4:08 and 40% battery.",
+      "The red sticker on the back says '128G RAM', which is a mislabeling \u2014 RAM is not measured in GB for storage, and 128GB is a storage capacity, not RAM. This suggests a possible error or misrepresentation.",
+      "The 'Device care' screen in photo 2 shows 214 GB total storage, which contradicts the seller's claim of 256GB. It also shows 8 GB RAM, contradicting the '128G RAM' sticker.",
+      "The phone appears to be a Samsung Galaxy S22 or similar model based on design, but no model name is visible in any photo.",
+      "The screen is on and responsive in all photos, suggesting the phone is powered on and functional at the time of photo capture."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "Samsung Galaxy S22 smartphone",
+      "brand": "Samsung",
+      "model": null,
+      "read_from": [
+        "photo 0 screen design",
+        "photo 1 back camera module and Samsung logo"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Samsung S22",
+        "verdict": "unverified",
+        "evidence": "No model name is visible in any photo. The design matches the S22, but cannot be confirmed without a visible model label or settings screen."
+      },
+      {
+        "claim": "256GB",
+        "verdict": "contradicted",
+        "evidence": "Photo 2 shows '214 GB' total storage in 'Device care', which contradicts the 256GB claim."
+      },
+      {
+        "claim": "Working perfectly",
+        "verdict": "unverified",
+        "evidence": "The screen is on and responsive, but no functional tests (camera, charging, calls, etc.) are shown. Cannot verify full functionality."
+      },
+      {
+        "claim": "Very clean",
+        "verdict": "unverified",
+        "evidence": "The phone appears clean in photos, but no close-up of screen or body for scratches, smudges, or wear is provided. The back has a sticker and possible minor dust."
+      },
+      {
+        "claim": "Comes with warranty",
+        "verdict": "unverifiable_remote",
+        "evidence": "No warranty document, receipt, or proof of warranty status is shown. Cannot verify remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Incorrect storage capacity (claimed 256GB, shown 214GB)",
+        "proof": "Photo of settings > About phone > Storage capacity",
+        "if_unproven": "Priced as 214GB model, which is lower value than 256GB."
+      },
+      {
+        "risk": "Phone may be faulty or not fully functional",
+        "proof": "Video showing camera, charging, call, and app performance",
+        "if_unproven": "Priced as not working, since 'working perfectly' is unverified."
+      },
+      {
+        "risk": "Sticker says '128G RAM' \u2014 likely a mislabeling, but could indicate tampering or false advertising",
+        "proof": "Photo of the sticker removed or close-up of the back without sticker",
+        "if_unproven": "Priced as is, but buyer may suspect misrepresentation, reducing value."
+      },
+      {
+        "risk": "No warranty proof \u2014 may be expired or non-existent",
+        "proof": "Photo of warranty card or receipt",
+        "if_unproven": "Priced as no warranty, which reduces value."
+      },
+      {
+        "risk": "Model not confirmed as S22 \u2014 could be S22+ or S22 Ultra",
+        "proof": "Photo of settings > About phone > Model number",
+        "if_unproven": "Priced as S22, but if it's a higher model, value is higher; if lower, value is lower. Worst case: priced as S22."
+      }
+    ],
+    "proof_requests": [
+      "Photo of settings > About phone > Model number and storage capacity",
+      "Video showing camera, charging, call, and app performance",
+      "Photo of warranty card or receipt",
+      "Photo of the back without the '128G RAM' sticker"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model cannot be confirmed, storage capacity contradicts the claim, and functionality and warranty are unverified. Without proof of model, storage, and working condition, a worst-case price cannot be reliably assigned. The '128G RAM' sticker adds suspicion of misrepresentation."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 98829,
+    "input_tokens": 2785,
+    "output_tokens": 1225,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "968a4e04f854b2f52a4274d36d048ce6",
+    "error": null
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows three white rectangular batteries stacked on a metal rack.",
+      "The top battery has visible terminals with red and black cables connected.",
+      "The brand name 'BLAVVA' is visible on the front of the top battery, though slightly blurred.",
+      "The batteries appear to be deep-cycle or inverter-type, commonly used with solar or inverter systems.",
+      "The environment looks like a storage or utility area with concrete floor and exposed wiring.",
+      "There is a watermark 'POSTED ON JIJI' and 'MR, G' overlaid on the image."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "inverter battery",
+      "brand": "BLAVVA",
+      "model": null,
+      "read_from": [
+        "photo 0 front label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "We're buyer of dead inverter battery in Lagos.",
+        "verdict": "unverifiable_remote",
+        "evidence": "The seller is offering to buy, not selling. The photo shows batteries, but their condition (dead or not) cannot be confirmed remotely."
+      },
+      {
+        "claim": "Buyer of condemned inverter battery.",
+        "verdict": "unverifiable_remote",
+        "evidence": "The term 'condemned' implies a formal assessment, which cannot be verified from a photo. The batteries may be old or damaged, but not necessarily condemned."
+      },
+      {
+        "claim": "Free pick up...",
+        "verdict": "unverified",
+        "evidence": "No proof of free pickup is visible in the photo. This is a service claim, not a product attribute."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Batteries may be non-functional or have low capacity, even if they appear intact.",
+        "proof": "A voltage test or load test video showing the battery's output under load.",
+        "if_unproven": "priced as dead or non-functional"
+      },
+      {
+        "risk": "Batteries may be damaged internally (e.g., cracked casing, sulfated plates) not visible in photo.",
+        "proof": "Close-up of battery casing for cracks, bulges, or leaks; and underside inspection.",
+        "if_unproven": "priced as potentially damaged"
+      },
+      {
+        "risk": "Seller may be misrepresenting the condition (e.g., selling as 'dead' when they are functional).",
+        "proof": "Video showing the battery being tested with a multimeter or connected to a load.",
+        "if_unproven": "priced at lowest possible value for dead battery"
+      }
+    ],
+    "proof_requests": [
+      "Video or photo showing a voltage test of each battery with a multimeter.",
+      "Close-up of battery casing for signs of damage, leaks, or bulging.",
+      "Photo of the battery label showing full model and capacity (if available).",
+      "Confirmation of whether batteries are truly dead or just old."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller is offering to buy, not sell, and the condition of the batteries cannot be verified from the photo alone. The batteries may be functional or damaged, and without proof of their state, a price cannot be determined. Proof of voltage, physical condition, and model details is needed."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 57854,
+    "input_tokens": 1936,
+    "output_tokens": 731,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "1d729cd1db97093637859030c2dab4ab",
+    "error": null
+  }
+}

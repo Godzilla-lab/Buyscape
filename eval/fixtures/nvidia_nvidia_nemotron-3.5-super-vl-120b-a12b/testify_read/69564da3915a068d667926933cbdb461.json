@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a used V8 automotive engine removed from a vehicle and sitting on concrete.",
+      "Intake manifold, throttle body, alternator, power steering pump, and accessory brackets are visible.",
+      "The engine is dirty with oil and grime; no badging, VIN plate, or engine code is legible in the image.",
+      "A watermark reading \"VICTOR NAZECO\" appears across the center of the photo.",
+      "A separate mechanical component, possibly a transmission, is visible in the bottom left.",
+      "The camera caption \"SPARK 30C\" is visible at the bottom and is not part of the item."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "car engine",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Lexus LX460",
+        "verdict": "unverified",
+        "evidence": "No Lexus badge, model plate, or engine casting number is readable in photo 0."
+      },
+      {
+        "claim": "Japan engine",
+        "verdict": "unverifiable_remote",
+        "evidence": "Origin cannot be determined from photos alone."
+      },
+      {
+        "claim": "car engine",
+        "verdict": "supported",
+        "evidence": "Photo 0 clearly shows an automotive internal combustion engine."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine may be seized, internally damaged, or non-running.",
+        "proof": "Video of the crankshaft turning by hand or a compression/leak-down test.",
+        "if_unproven": "as non-running core"
+      },
+      {
+        "risk": "Engine may not be the claimed Lexus LX460.",
+        "proof": "Clear photo of the engine block casting number or identification plate.",
+        "if_unproven": "as unknown used engine"
+      },
+      {
+        "risk": "Missing ECU, wiring harness, or accessories.",
+        "proof": "Photo showing the complete engine with all included components.",
+        "if_unproven": "as long block only"
+      },
+      {
+        "risk": "Hidden cracks or overheating damage.",
+        "proof": "Borescope inspection of cylinders or cooling system pressure test.",
+        "if_unproven": "as damaged"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of engine block casting number or identification plate.",
+      "Video of the engine cranking or turning over by hand.",
+      "Photo showing all accessories, ECU, and wiring harness included.",
+      "Compression test or leak-down test results."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller claims a Lexus LX460 engine, but no identifying badge, plate, or casting number is legible in the photo, so the model that sets the price cannot be confirmed remotely."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 21631,
+    "input_tokens": 1889,
+    "output_tokens": 2722,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "69564da3915a068d667926933cbdb461",
+    "error": null
+  }
+}

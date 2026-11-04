@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows a large cardboard box for a 'MAXI' brand appliance.",
+      "The box features an illustration of a 4-burner gas cooker with an oven and a glass lid.",
+      "A label on the top right of the box reads 'MAXI' and '5050'.",
+      "The box is sealed with plastic strapping.",
+      "Other appliance boxes, including Polystar and Midea, are visible in the background.",
+      "The actual gas cooker is not visible in the photo."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "4-burner gas cooker",
+      "brand": "MAXI",
+      "model": "50/50",
+      "read_from": [
+        "photo 0 box",
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Maxi 4B Gas Cooker 50/50",
+        "verdict": "supported",
+        "evidence": "The label on the top right of the box in photo 0 identifies the brand as MAXI and the model as 5050."
+      },
+      {
+        "claim": "compact and stylish",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a subjective marketing description."
+      },
+      {
+        "claim": "freestanding",
+        "verdict": "supported",
+        "evidence": "The illustration on the box in photo 0 shows a freestanding unit."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Item is missing or substituted",
+        "proof": "Photo of the cooker outside the box.",
+        "if_unproven": "priced as an empty box"
+      },
+      {
+        "risk": "Physical damage (dents or scratches)",
+        "proof": "Photos of the unit from all sides once unboxed.",
+        "if_unproven": "priced as heavily dented"
+      },
+      {
+        "risk": "Functional defects in burners or oven",
+        "proof": "Video of all burners and the oven ignited.",
+        "if_unproven": "priced as not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the gas cooker outside of the box to verify its existence and condition.",
+      "Photos of the top burners and the oven interior.",
+      "Video showing the ignition of all burners and the oven."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the manufacturer's packaging is shown. The actual cooker must be seen to confirm it is present, matches the description, and is in good physical condition."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 13535,
+    "input_tokens": 2369,
+    "output_tokens": 2815,
+    "cost_usd": 0.009629,
+    "replayed": false,
+    "fixture_key": "9f8f727ebe426a63d8695bd03de6d4ff",
+    "error": null
+  }
+}

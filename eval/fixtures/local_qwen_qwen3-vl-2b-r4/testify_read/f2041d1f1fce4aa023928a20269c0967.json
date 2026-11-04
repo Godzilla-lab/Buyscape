@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r4",
+  "response": {
+    "observations": [
+      "Porsche engine with a large central air intake and a black airbox.",
+      "The engine is mounted on a stand with a long exhaust pipe attached.",
+      "The engine appears to be used, with visible dirt and some wear on the components.",
+      "The engine is not running; it is a static photo.",
+      "The engine is not shown connected to a car or a test stand.",
+      "The seller's text mentions 'direct from Belgium' and 'tested and working' which cannot be verified from photos."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car engine",
+      "brand": "Porsche",
+      "read_from": [
+        "photo 0",
+        "photo 1",
+        "photo 2"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "car spare parts",
+        "verdict": "supported",
+        "evidence": "photo 0 shows a used engine that is a common spare part for Porsche vehicles."
+      },
+      {
+        "claim": "direct from Belgium",
+        "verdict": "unverifiable_remote",
+        "evidence": "The seller cannot prove the origin of the engine."
+      },
+      {
+        "claim": "Tested and working, no knock, low mileage, never opened.",
+        "verdict": "unverified",
+        "evidence": "No photo shows this; it is the seller's word only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The engine may not be compatible with the vehicle it is intended for.",
+        "proof": "A photo of the engine being installed in a car or a test stand.",
+        "if_unproven": "as a generic used engine for a Porsche"
+      },
+      {
+        "risk": "The engine may have internal mechanical faults or high compression.",
+        "proof": "A video of the engine running or a compression test.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The engine may be a used part from a different vehicle than the one being sold.",
+        "proof": "A photo of the engine with the vehicle it is being sold for.",
+        "if_unproven": "as a generic used engine"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the engine installed in a car or on a test stand.",
+      "Video of the engine running.",
+      "Photo of the engine with the vehicle it is being sold for."
+    ],
+    "decision": "price",
+    "reason": "The item is known from the photos. What they cannot prove is priced at its worst case until the proof asked for below arrives."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r4",
+    "task": "testify_read",
+    "latency_ms": 2309,
+    "input_tokens": 2797,
+    "output_tokens": 436,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "f2041d1f1fce4aa023928a20269c0967",
+    "error": null
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the bottom of a black laptop with ventilation grills, a Lenovo logo, and a bright yellow 'HDPR' sticker. A hand holds the laptop on an orange fabric surface.",
+      "Photo 1 shows the front of the laptop open, displaying a black screen, a full keyboard with a red TrackPoint, and the 'ThinkPad' logo on the palm rest. The model 'T490' is visible on the top right of the screen bezel.",
+      "Photo 2 is a close-up of the keyboard area, clearly showing the 'T490' label on the screen bezel above the keyboard. The keys show some wear and dust."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Lenovo",
+      "model": "T490",
+      "read_from": [
+        "photo 1 screen bezel",
+        "photo 2 screen bezel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "brand name: Lenovo T490",
+        "verdict": "supported",
+        "evidence": "Model 'T490' is clearly visible on the screen bezel in photo 1 and photo 2. Lenovo logo is visible on the bottom in photo 0."
+      },
+      {
+        "claim": "processor speed: 10th gen Intel(R) Core i5",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows the processor label, BIOS, or system information. The sticker on the bottom (photo 0) is too blurry to read."
+      },
+      {
+        "claim": "memory: 8gb",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows the RAM modules or system information. The bottom sticker (photo 0) is unreadable."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The laptop may not have the claimed 10th gen Intel Core i5 processor.",
+        "proof": "A photo of the system information screen (e.g., Windows System Properties or BIOS) showing the processor model.",
+        "if_unproven": "priced as having an unknown or lower-tier processor"
+      },
+      {
+        "risk": "The laptop may not have 8GB of RAM.",
+        "proof": "A photo of the system information screen showing installed memory, or a photo of the RAM modules inside the laptop.",
+        "if_unproven": "priced as having less than 8GB RAM"
+      },
+      {
+        "risk": "The laptop may have physical damage or wear not visible in the photos, such as screen dead pixels, hinge issues, or internal damage.",
+        "proof": "A video showing the laptop being powered on, screen display, keyboard function, and hinge movement.",
+        "if_unproven": "priced as potentially non-functional or with hidden defects"
+      },
+      {
+        "risk": "The laptop may be stolen or have a blacklisted serial number.",
+        "proof": "A photo of the full serial number sticker on the bottom (photo 0) and a verification check via Lenovo's website or a trusted reseller.",
+        "if_unproven": "priced as potentially non-genuine or with legal risk"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the system information screen showing processor and RAM details.",
+      "Photo of the full serial number sticker on the bottom of the laptop.",
+      "Video of the laptop powered on, showing screen, keyboard, and hinge movement."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is confirmed as Lenovo T490, but critical claims about processor and RAM are unverifiable from current photos. Hidden risks related to functionality, specifications, and provenance require additional proof before pricing can be determined."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 66043,
+    "input_tokens": 2800,
+    "output_tokens": 836,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "9fa98d5b3497c338074de71de86b660a",
+    "error": null
+  }
+}

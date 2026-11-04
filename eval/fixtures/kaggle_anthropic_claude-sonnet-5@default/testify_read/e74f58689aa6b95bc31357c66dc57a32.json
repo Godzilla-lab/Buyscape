@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photos show open-air stacks of used car tires at a roadside tire stall/market.",
+      "Tires have spray-paint markings (letters/numbers like 'YES', 'MRS', 'NO 10') likely used by sellers to code size or batch, not legible as size or brand.",
+      "Sidewalls are caked with dust/dirt; no readable DOT code, size (e.g. 205/55R16), or manufacturer name in any photo.",
+      "Tread wear varies visibly across tires in the stacks - some look to have moderate tread, others appear more worn, but no close-up allows a reliable reading.",
+      "Background shows alloy rims hanging for sale, confirming this is a tire/rim market stall, not a private seller's own car tires.",
+      "No single tire is isolated or labelled as 'the item for sale' - the photos show general stock, not a specific unit with a clear price-relevant spec."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used car tire (sold from mixed stock)",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "First grade Belgium tires",
+        "verdict": "unverifiable_remote",
+        "evidence": "No country-of-origin marking, DOT code, or grade stamp is legible in any photo; 'first grade' and 'Belgium' are seller assertions only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Tire size (rim diameter/width) unknown, which drives price far more than condition",
+        "proof": "Close-up photo of one sidewall showing the full size code, e.g. 205/55R16",
+        "if_unproven": "cannot be priced at all, size is a precondition for any tire price"
+      },
+      {
+        "risk": "Actual tread depth and wear per tire, hidden by dirt and stacking",
+        "proof": "Close-up of tread face with a coin or gauge for scale on the specific tire being sold",
+        "if_unproven": "priced as heavily worn/near end-of-life"
+      },
+      {
+        "risk": "Country of manufacture / 'Belgium' origin claim unverifiable",
+        "proof": "Clear photo of sidewall text showing 'Made in Belgium' or manufacturer name",
+        "if_unproven": "treated as unknown origin, not premium European stock"
+      },
+      {
+        "risk": "Age of rubber (dry rot risk) not visible",
+        "proof": "Close-up of DOT date code on sidewall",
+        "if_unproven": "priced as old/aged stock"
+      },
+      {
+        "risk": "Sidewall damage (bulges, cracks, repairs) hidden by paint markings and dirt",
+        "proof": "Clean, well-lit photo of full sidewall circumference",
+        "if_unproven": "priced as having possible sidewall damage"
+      },
+      {
+        "risk": "Unclear which specific tire(s) out of the stacked stock the buyer is actually being offered",
+        "proof": "Photo or video isolating the exact unit(s) for sale with a tag or marker",
+        "if_unproven": "cannot be matched to a specific price point"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of the sidewall size code (e.g. 205/55R16) for the specific tire(s) on offer",
+      "Close-up of tread depth on the actual unit(s) being sold, with a coin or ruler for scale",
+      "Close-up of the DOT date code and any 'Made in ...' text on the sidewall",
+      "A photo or video clearly isolating which tire(s) in the stack are the ones for sale"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photos show an undifferentiated stock of dirty, used tires with no visible size, brand, or origin markings, and it is unclear which specific tire(s) are being offered; size alone changes the price bracket entirely, so even a worst-case price cannot be set without it."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 26757,
+    "input_tokens": 3380,
+    "output_tokens": 2128,
+    "cost_usd": 0.024881,
+    "replayed": false,
+    "fixture_key": "e74f58689aa6b95bc31357c66dc57a32",
+    "error": null
+  }
+}

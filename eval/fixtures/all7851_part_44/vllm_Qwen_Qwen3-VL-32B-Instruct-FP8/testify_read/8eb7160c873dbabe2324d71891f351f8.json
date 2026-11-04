@@ -1,0 +1,74 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a red and black gasoline engine wrapped in plastic, with a label reading 'GASOLINE ENGINE 6.5HP' on the red flywheel cover.",
+      "The engine is mounted on a black frame and has a white fuel tank with a yellow 'CAUTION' sticker.",
+      "A black air cleaner is visible with a label 'MARTIN AIR CLEANER'.",
+      "The engine is placed on a cardboard box with 'KAMA' branding visible in red and white.",
+      "Photo 1 shows the side view of the same engine, wrapped in plastic, with a black component (possibly a pump or starter) attached to the engine shaft.",
+      "Photo 2 shows a close-up of a metallic pump or cylinder head attached to the engine, also wrapped in plastic.",
+      "All photos show the item in a warehouse or storage setting, with other boxes and items in the background."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "gasoline engine",
+      "brand": "KAMA",
+      "model": "6.5HP",
+      "read_from": [
+        "photo 0 flywheel cover",
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Kama 6.5HP gasoline engine",
+        "verdict": "supported",
+        "evidence": "Photo 0: 'GASOLINE ENGINE 6.5HP' label on flywheel cover and 'KAMA' branding on box."
+      },
+      {
+        "claim": "commonly used for power equipment like generators or water pumps",
+        "verdict": "unverifiable_remote",
+        "evidence": "The photos show the engine attached to a pump-like component (photo 2), suggesting use as a water pump, but no direct proof of compatibility with generators or other equipment."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine may be non-functional or damaged despite being wrapped",
+        "proof": "A video or photo showing the engine running or a close-up of the carburetor, spark plug, and internal components to confirm no damage or corrosion.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The attached pump may be incompatible or damaged",
+        "proof": "A clear photo or video of the pump's inlet/outlet ports, seals, and impeller to confirm it is intact and functional.",
+        "if_unproven": "priced as non-functional pump"
+      },
+      {
+        "risk": "Engine may be a reconditioned or used unit sold as new",
+        "proof": "A photo of the engine's serial number or a close-up of the engine block showing wear or signs of prior use.",
+        "if_unproven": "priced as used, not new"
+      }
+    ],
+    "proof_requests": [
+      "Video or photo of the engine running to confirm functionality.",
+      "Close-up of the pump's inlet/outlet and impeller to verify condition.",
+      "Photo of the engine's serial number or block to check for signs of prior use."
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a KAMA 6.5HP gasoline engine, with visible branding and model details. While some claims are unverifiable remotely, the core identity is confirmed. Hidden risks (functionality, pump condition, used status) are noted and priced at worst case until proven otherwise."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 62010,
+    "input_tokens": 2576,
+    "output_tokens": 750,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "8eb7160c873dbabe2324d71891f351f8",
+    "error": null
+  }
+}

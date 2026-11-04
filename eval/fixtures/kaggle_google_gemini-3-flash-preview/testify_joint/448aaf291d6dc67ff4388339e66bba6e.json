@@ -1,0 +1,83 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Front-loading laundry appliance.",
+      "LG logo visible on the top left of the control panel in photo 0.",
+      "Detergent drawer is labeled 'Inverter DirectDrive 6/3kg' in photo 0.",
+      "A red sticker on the front reads 'Washer+Dryer 2in1' in photo 0.",
+      "The control panel is powered on, with multiple indicator lights active in photo 0.",
+      "The selection dial is illuminated around the 'Cotton'/'Cotton Eco' area in photo 0.",
+      "The digital display is active in photo 0.",
+      "The exterior cabinet shows some surface grime and a peeling sticker on the left side."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "Washer-dryer",
+      "brand": "LG",
+      "model": "DirectDrive 6/3kg",
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "LG Washing machine",
+        "verdict": "supported",
+        "evidence": "The LG logo and branding are clearly visible in photo 0."
+      },
+      {
+        "claim": "scrap but doesn\u2019t work",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows the unit is powered on, but a static photo cannot confirm if it completes a cycle or has internal faults."
+      },
+      {
+        "claim": "needs repair",
+        "verdict": "unverified",
+        "evidence": "The specific nature of the fault is not shown in the photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Main control board failure despite being powered on.",
+        "proof": "A video showing the machine successfully starting a cycle and drawing water.",
+        "if_unproven": "as non-working"
+      },
+      {
+        "risk": "Seized drum or failed Direct Drive motor.",
+        "proof": "A video showing the drum spinning freely by hand or during a spin cycle.",
+        "if_unproven": "as scrap/parts only"
+      },
+      {
+        "risk": "Leaking tub or damaged door seal.",
+        "proof": "A photo of the door seal and a video of the machine running without leaks.",
+        "if_unproven": "as needing seal replacement"
+      }
+    ],
+    "proof_requests": [
+      "A video of the machine attempting to start a wash cycle.",
+      "A photo of the model identification plate, usually found behind the door or on the back.",
+      "A clear photo of the rubber door seal to check for tears or mold."
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identified as an LG 6kg/3kg washer-dryer. Since the seller explicitly states it is non-working scrap, it can be priced at the worst-case value for a faulty unit of this brand and capacity.",
+    "price_pick": {
+      "low": 1,
+      "high": 2
+    }
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_joint",
+    "latency_ms": 16799,
+    "input_tokens": 2777,
+    "output_tokens": 3474,
+    "cost_usd": 0.01181,
+    "replayed": false,
+    "fixture_key": "448aaf291d6dc67ff4388339e66bba6e",
+    "error": null
+  }
+}

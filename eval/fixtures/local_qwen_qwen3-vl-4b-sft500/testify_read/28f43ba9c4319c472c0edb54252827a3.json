@@ -1,0 +1,69 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-sft500",
+  "response": {
+    "observations": [
+      "Photo 0 shows a yellow gas cylinder with a sticker showing '08033' and 'Shop 90'.",
+      "Photo 1 and 2 show a blue gas cylinder with a 'BERADISCU' logo.",
+      "The top ring of the blue cylinder in photo 2 is visibly cracked.",
+      "The blue cylinder in photo 1 has a small chip on the upper body.",
+      "The yellow cylinder in photo 0 has handwritten markings '12.5kg' and '12.5kg'.",
+      "The photos are watermarked 'POSTED ON JIJI' and 'PETRONJAY BUSINESS'.",
+      "The background shows a tiled floor and cardboard boxes, suggesting a retail or warehouse setting."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "gas cylinder",
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "12.5kg standard Cooking Gas Cylinder",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows handwritten '12.5kg' on the yellow cylinder."
+      },
+      {
+        "claim": "Cooking Gas Cylinder",
+        "verdict": "supported",
+        "evidence": "The items shown are standard gas cylinders for domestic use."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The cylinders may be expired or have a low gas content.",
+        "proof": "A photo of the current expiry date stamped on the cylinder's neck.",
+        "if_unproven": "as expired and empty"
+      },
+      {
+        "risk": "The blue cylinder may be a counterfeit or a different brand than the one claimed.",
+        "proof": "A clear, close-up photo of the manufacturer's stamp on the neck of the blue cylinder.",
+        "if_unproven": "as a generic or unbranded cylinder"
+      },
+      {
+        "risk": "The top ring of the blue cylinder is cracked, which can be a safety hazard.",
+        "proof": "A photo of the ring with a ruler or caliper to measure the crack size.",
+        "if_unproven": "as requiring immediate repair or replacement"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the expiry date stamp on the neck of the blue cylinder.",
+      "Photo of the manufacturer's stamp on the neck of the blue cylinder to verify the brand.",
+      "Photo of the neck of the yellow cylinder to check for the expiry date stamp."
+    ],
+    "decision": "price",
+    "reason": "The items are standard gas cylinders. While the blue one has a cracked ring and the yellow one has handwritten markings, they can be priced as generic cylinders in poor condition."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-sft500",
+    "task": "testify_read",
+    "latency_ms": 3781,
+    "input_tokens": 2775,
+    "output_tokens": 476,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "28f43ba9c4319c472c0edb54252827a3",
+    "error": null
+  }
+}

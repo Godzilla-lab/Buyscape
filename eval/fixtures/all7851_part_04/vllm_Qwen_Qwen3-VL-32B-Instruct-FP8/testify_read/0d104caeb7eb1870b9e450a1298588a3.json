@@ -1,0 +1,98 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a silver laptop from the side, held in hand, with visible ports: USB-A, HDMI, Ethernet, and headphone jack. The keyboard is partially visible, and the screen is dark. The HP logo is visible on the back of the screen.",
+      "Photo 1 shows the closed lid of the laptop, silver in color, with the HP logo centered. A white sticker with specifications is visible in the top right corner.",
+      "The sticker in photo 1 lists: 'Model: 14-df0000ng', 'Processor: Intel Core i5-10210U', 'Memory: 8GB DDR4', 'Storage: 256GB SSD', 'Display: 13.3\" FHD Touchscreen', 'Graphics: Intel UHD Graphics 620', 'OS: Windows 10 Pro'.",
+      "The laptop appears to be in used condition with minor scuffs on the side (photo 0) and some wear on the lid (photo 1).",
+      "No screen or keyboard backlight is visible in the photos. The screen is off, so touch functionality cannot be confirmed visually."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "ProBook 430 G7",
+      "read_from": [
+        "seller's text",
+        "photo 1 sticker: Model 14-df0000ng (which corresponds to HP ProBook 430 G7)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP ProBook 430 G7",
+        "verdict": "supported",
+        "evidence": "Photo 1 sticker shows model 14-df0000ng, which is the HP ProBook 430 G7."
+      },
+      {
+        "claim": "Intel Core i5",
+        "verdict": "supported",
+        "evidence": "Photo 1 sticker lists 'Processor: Intel Core i5-10210U'."
+      },
+      {
+        "claim": "256 SSD 8GB RAM",
+        "verdict": "supported",
+        "evidence": "Photo 1 sticker lists 'Storage: 256GB SSD' and 'Memory: 8GB DDR4'."
+      },
+      {
+        "claim": "Touch screen",
+        "verdict": "supported",
+        "evidence": "Photo 1 sticker lists 'Display: 13.3\" FHD Touchscreen'."
+      },
+      {
+        "claim": "Keyboard light",
+        "verdict": "unverified",
+        "evidence": "No photo shows the keyboard illuminated. The keyboard is visible in photo 0 but not lit. The sticker does not mention backlight."
+      },
+      {
+        "claim": "13.3 inches screen",
+        "verdict": "supported",
+        "evidence": "Photo 1 sticker lists 'Display: 13.3\" FHD Touchscreen'."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Keyboard backlight not working or not present",
+        "proof": "Photo of the keyboard with backlight turned on.",
+        "if_unproven": "priced as no backlight"
+      },
+      {
+        "risk": "Touchscreen not functional",
+        "proof": "Video or photo showing touch interaction on the screen.",
+        "if_unproven": "priced as non-touch"
+      },
+      {
+        "risk": "Laptop not working or has hardware issues (e.g., battery, ports, screen)",
+        "proof": "Video showing the laptop powering on, running, and using all ports and screen.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Sticker specifications falsified or not matching actual hardware",
+        "proof": "Photo of BIOS screen or system information showing actual specs.",
+        "if_unproven": "priced as unverified specs"
+      }
+    ],
+    "proof_requests": [
+      "Video or photo of the keyboard with backlight turned on.",
+      "Video showing the touchscreen being used.",
+      "Video of the laptop powering on, running, and using all ports and screen.",
+      "Photo of BIOS or system information screen to verify specs."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and key specs are confirmed by the sticker in photo 1, but critical claims like keyboard backlight and touchscreen functionality cannot be verified from current photos. Hardware functionality and authenticity of specs also require proof. Without these, the item cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 83483,
+    "input_tokens": 2301,
+    "output_tokens": 1006,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "0d104caeb7eb1870b9e450a1298588a3",
+    "error": null
+  }
+}

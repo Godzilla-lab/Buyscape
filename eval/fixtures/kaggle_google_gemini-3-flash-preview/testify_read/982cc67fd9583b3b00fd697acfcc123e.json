@@ -1,0 +1,68 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows a retail box for a Blue Gate UPS.",
+      "The brand 'BLUE GATE' and model 'BG653i' are clearly visible on the box.",
+      "The box describes the item as a 'Line Interactive UPS With Internal AVR'.",
+      "The box displays a 'BEST UPS PRODUCT 2011' award logo.",
+      "The box is stacked with other electronics packaging like irons and hair clippers.",
+      "A digital watermark 'POWERLINE GLOBAL COMPANY' is present.",
+      "The physical UPS unit is not visible, only the box."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "UPS",
+      "brand": "BLUE GATE",
+      "model": "BG653i",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Ups for back up power",
+        "verdict": "unverified",
+        "evidence": "The photo shows packaging only; the unit's ability to provide backup power is not demonstrated."
+      },
+      {
+        "claim": "get from powerline global",
+        "verdict": "unverified",
+        "evidence": "The watermark matches the seller's name but does not prove ownership or location."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The internal battery may be completely discharged or defective due to age or storage.",
+        "proof": "A video showing the UPS powering a load (e.g., a lamp) while disconnected from the wall outlet.",
+        "if_unproven": "priced as having a dead battery."
+      },
+      {
+        "risk": "The box might be empty or the unit inside might be non-functional.",
+        "proof": "A photo of the actual UPS unit out of the box and powered on.",
+        "if_unproven": "priced as non-functional."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the UPS unit outside of its box.",
+      "Video of the unit powering a device on battery power.",
+      "Photo of the serial number and manufacturing date sticker on the unit."
+    ],
+    "decision": "price",
+    "reason": "The model and brand are clearly identified from the box, allowing for a valuation at the worst-case functional state (non-functional/dead battery)."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 20350,
+    "input_tokens": 2361,
+    "output_tokens": 4409,
+    "cost_usd": 0.014408,
+    "replayed": false,
+    "fixture_key": "982cc67fd9583b3b00fd697acfcc123e",
+    "error": null
+  }
+}

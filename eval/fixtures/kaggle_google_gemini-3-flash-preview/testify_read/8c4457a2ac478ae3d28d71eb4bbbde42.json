@@ -1,0 +1,89 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "A person is holding a black DSLR camera with a large zoom lens.",
+      "The camera body has 'Nikon' printed on the flash housing.",
+      "The lens has '24-70mm' and 'EX DG' printed on the barrel.",
+      "The lens cap has 'SIGMA' embossed on it.",
+      "A watermark 'STARSHOOT IMAGE' is visible across the center of the photo.",
+      "The specific model badge (e.g., D810) is not visible in this angle.",
+      "The camera body shows some wear on the grip texture."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "DSLR camera with 24-70mm lens",
+      "brand": "Nikon",
+      "model": null,
+      "read_from": [
+        "photo 0 body"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Nikon D810 DSLR Camera",
+        "verdict": "unverified",
+        "evidence": "The model badge is not visible in photo 0."
+      },
+      {
+        "claim": "24-70mm Lens",
+        "verdict": "supported",
+        "evidence": "photo 0 lens barrel"
+      },
+      {
+        "claim": "Clean and well-maintained",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The camera model may be a cheaper full-frame or crop-sensor Nikon body.",
+        "proof": "A clear photo of the front of the camera showing the model badge (bottom right of the lens mount).",
+        "if_unproven": "as a Nikon D700"
+      },
+      {
+        "risk": "The lens is a third-party Sigma lens, not a Nikon Nikkor lens, which affects value.",
+        "proof": "Photo 0 already identifies it as Sigma.",
+        "if_unproven": "as a Sigma EX DG lens"
+      },
+      {
+        "risk": "High shutter count indicating the camera is near the end of its mechanical life.",
+        "proof": "A screenshot of the last photo's EXIF data showing the shutter count.",
+        "if_unproven": "as having over 200,000 actuations"
+      },
+      {
+        "risk": "Internal fungus or scratches on the sensor or lens elements.",
+        "proof": "Close-up photos of the sensor (with lens removed) and looking through the lens elements against a light.",
+        "if_unproven": "as having fungus requiring professional cleaning"
+      },
+      {
+        "risk": "The photo may be stolen from a professional studio (watermark 'STARSHOOT IMAGE').",
+        "proof": "A photo of the camera next to a handwritten note with today's date and the buyer's name.",
+        "if_unproven": "as a potential scam"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the front of the camera showing the 'D810' badge.",
+      "Photo of the camera with a handwritten note showing the current date and your name to verify possession.",
+      "Screenshot of the shutter count from the most recent photo taken.",
+      "Clear photos of the camera sensor and the front/rear glass of the lens."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The specific model (D810) cannot be verified from the single photo provided, and the presence of a studio watermark suggests the photo may not belong to the seller. Additionally, the lens is a Sigma brand, not Nikon."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 11567,
+    "input_tokens": 2382,
+    "output_tokens": 2346,
+    "cost_usd": 0.008229,
+    "replayed": false,
+    "fixture_key": "8c4457a2ac478ae3d28d71eb4bbbde42",
+    "error": null
+  }
+}

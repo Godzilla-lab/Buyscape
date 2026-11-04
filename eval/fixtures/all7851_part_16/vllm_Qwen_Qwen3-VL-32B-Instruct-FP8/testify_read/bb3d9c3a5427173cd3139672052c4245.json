@@ -1,0 +1,93 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Open laptop showing Windows 11 desktop with blue default wallpaper. Dell logo visible below screen. Keyboard is black with silver frame. Touchpad is centered. Intel Core i7 sticker on bottom right of palm rest.",
+      "Photo 1: Closed laptop lid from top view. Silver finish. Dell logo centered. No visible model number or serial.",
+      "Photo 2: Back of laptop lid, silver finish. Dell logo centered. No visible model number or serial.",
+      "All photos show a watermark: 'POSTED ON JIJI CL SASHA VENTURES'."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "laptop",
+      "brand": "Dell",
+      "model": null,
+      "read_from": [
+        "photo 0 screen bezel",
+        "photo 1 lid logo",
+        "photo 2 lid logo"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Dell Latitude 7420",
+        "verdict": "unverified",
+        "evidence": "No model number visible in any photo. The Dell logo is present, but no 'Latitude 7420' text or plate is visible."
+      },
+      {
+        "claim": "Core i7",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows an Intel Core i7 sticker on the palm rest."
+      },
+      {
+        "claim": "16GB RAM",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows RAM or system specs. Cannot verify from photos alone."
+      },
+      {
+        "claim": "512GB SSD",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows storage specs or drive. Cannot verify from photos alone."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Incorrect model claim (not Latitude 7420)",
+        "proof": "Photo of the model label or serial number plate, typically on the bottom of the laptop.",
+        "if_unproven": "Priced as a generic Dell laptop, not as a Latitude 7420, which affects value."
+      },
+      {
+        "risk": "RAM not 16GB",
+        "proof": "Screenshot of system information (e.g., Windows Task Manager or System Properties) showing 16GB RAM.",
+        "if_unproven": "Priced as if RAM is less than 16GB, reducing value."
+      },
+      {
+        "risk": "SSD not 512GB",
+        "proof": "Screenshot of Disk Management or system info showing 512GB SSD.",
+        "if_unproven": "Priced as if SSD is smaller, reducing value."
+      },
+      {
+        "risk": "Battery health or condition not shown",
+        "proof": "Photo of battery health report or a video showing battery charge cycles and runtime.",
+        "if_unproven": "Priced assuming average battery health, which may be poor."
+      },
+      {
+        "risk": "Physical damage not visible in photos",
+        "proof": "Close-up photos of all edges, hinges, screen bezel, and bottom case for scratches, dents, or cracks.",
+        "if_unproven": "Priced assuming minimal wear, which may be inaccurate."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the model label or serial number plate on the bottom of the laptop.",
+      "Screenshot of system information showing 16GB RAM and 512GB SSD.",
+      "Photo of battery health report or video showing battery performance.",
+      "Close-up photos of all edges, hinges, and bottom case for damage."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model claim 'Latitude 7420' cannot be verified from the photos, and key specs like RAM and SSD size are unverifiable remotely. Without proof, the item cannot be accurately priced. The photos show a Dell laptop with an Intel Core i7 sticker, but model and storage details are missing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 75657,
+    "input_tokens": 2056,
+    "output_tokens": 894,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "bb3d9c3a5427173cd3139672052c4245",
+    "error": null
+  }
+}

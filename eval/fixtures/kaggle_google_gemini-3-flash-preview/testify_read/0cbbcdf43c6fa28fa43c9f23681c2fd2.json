@@ -1,0 +1,73 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "A single tire with a green manufacturer's label on the tread.",
+      "The label identifies the brand as Bridgestone and the model as Ecopia EP300.",
+      "The tire size is listed on the label as 215/60R16 95V.",
+      "The label includes the text 'MADE IN THAILAND'.",
+      "The tire tread appears new with factory-colored lines (red and yellow) still visible.",
+      "The label is heavily wrinkled and appears to have been handled or reapplied.",
+      "The sidewall of the tire is not visible in the photo."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "tire",
+      "brand": "Bridgestone",
+      "model": "Ecopia EP300",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Bridgestone tire",
+        "verdict": "supported",
+        "evidence": "The label in photo 0 clearly displays the Bridgestone brand name."
+      },
+      {
+        "claim": "non china",
+        "verdict": "supported",
+        "evidence": "The label in photo 0 states 'MADE IN THAILAND'."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The tire may be old stock (expired rubber).",
+        "proof": "A clear photo of the 4-digit DOT code on the tire sidewall.",
+        "if_unproven": "priced as expired/old stock"
+      },
+      {
+        "risk": "The label may not match the actual tire (mismatched or counterfeit label).",
+        "proof": "A photo of the tire sidewall showing the brand, model, and size embossed in the rubber.",
+        "if_unproven": "priced as a generic tire of this size"
+      },
+      {
+        "risk": "Hidden structural damage or punctures.",
+        "proof": "A video showing the interior lining and the condition of both beads.",
+        "if_unproven": "priced as requiring a professional repair"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the DOT code on the sidewall to verify the manufacture date.",
+      "Photo of the sidewall markings to confirm the brand, model, and size match the label.",
+      "Photo of the inner lining of the tire to check for previous repairs or damage."
+    ],
+    "decision": "price",
+    "reason": "The brand, model, and size are clearly identified on the label, allowing for a valuation at the worst-case age and authenticity."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 12995,
+    "input_tokens": 2349,
+    "output_tokens": 2425,
+    "cost_usd": 0.00845,
+    "replayed": false,
+    "fixture_key": "0cbbcdf43c6fa28fa43c9f23681c2fd2",
+    "error": null
+  }
+}

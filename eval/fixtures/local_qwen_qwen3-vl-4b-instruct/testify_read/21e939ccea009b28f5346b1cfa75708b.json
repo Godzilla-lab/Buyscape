@@ -1,0 +1,64 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-instruct",
+  "response": {
+    "observations": [
+      "Three photos show orange gas cylinders, one red, one blue, and one orange with a label.",
+      "Photo 2 shows a label with 'REPIOL' and '12.5kg' clearly visible.",
+      "The cylinders appear used with scratches and dirt.",
+      "Watermark 'POSTED ON JIJI HITHE TECHNOLOGIES' is visible on all photos."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "gas cylinder",
+      "brand": "REPIOL",
+      "model": "12.5kg",
+      "read_from": [
+        "photo 2 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "12.5kg Foreign-Used Gas Cylinders \u2013 Strong & Reliable! Get a durable and high-quality foreign-used...",
+        "verdict": "supported",
+        "evidence": "Photo 2 shows 'REPIOL 12.5kg' label, confirming the weight and foreign origin (brand name suggests foreign origin)."
+      },
+      {
+        "claim": "Recently tested and certified, no leak, the valve is new.",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photos show the valve, no test certificates, no leak test evidence. The claim is not verifiable from the images alone."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The valve may be old or not new as claimed.",
+        "proof": "Photo 0, 1, or 2 showing a close-up of the valve and its condition.",
+        "if_unproven": "as not new"
+      },
+      {
+        "risk": "The cylinder may have been tested for leaks, but the test results are not shown.",
+        "proof": "Photo showing the test certificate or a photo of the cylinder with a leak test mark or label.",
+        "if_unproven": "as not leak-proof"
+      }
+    ],
+    "proof_requests": [
+      "Ask for a photo of the valve and its condition.",
+      "Ask for a photo of the test certificate or a label indicating the leak test."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller claims the valve is new and the cylinder is leak-proof, but no photos or evidence support these claims. Proof is required to verify these claims before pricing."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-instruct",
+    "task": "testify_read",
+    "latency_ms": 4477,
+    "input_tokens": 2807,
+    "output_tokens": 516,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "21e939ccea009b28f5346b1cfa75708b",
+    "error": null
+  }
+}

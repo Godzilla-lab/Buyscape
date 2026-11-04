@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Back of a silver laptop with four rubber feet, held in hand. The Apple logo is not visible, but the design matches a MacBook Pro. The surface has minor smudges and fingerprints.",
+      "Photo 1: Top lid of the same silver laptop, showing the Apple logo. A small white sticker is affixed near the top right corner with handwritten text that appears to say '256GB SSD | 8GB RAM'.",
+      "Photo 2: Laptop open, showing the screen with the Apple logo and loading bar, indicating it is booting. The keyboard is visible with 'MacBook Pro' printed below the screen. The trackpad is large and centered. The screen has a noticeable horizontal blue line or reflection across the top.",
+      "All photos show the same device from different angles, held by a person with a black wristband. The background is a wooden panel with cut-out patterns and the watermark 'CIMLET INNOVATION'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "MacBook Pro",
+      "brand": "Apple",
+      "model": "MacBook Pro M1",
+      "read_from": [
+        "photo 2 screen (text 'MacBook Pro')",
+        "photo 1 sticker (handwritten '256GB SSD | 8GB RAM')",
+        "seller's words ('Apple MacBook pro M1')"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Apple MacBook pro M1",
+        "verdict": "supported",
+        "evidence": "Photo 2 shows 'MacBook Pro' printed below the screen, and the design matches the M1 model. Seller's words and photo 1 sticker support the claim."
+      },
+      {
+        "claim": "Year: 2020",
+        "verdict": "unverifiable_remote",
+        "evidence": "No serial number or model identifier visible in photos to confirm year. The M1 MacBook Pro was released in 2020, so it is plausible, but not confirmed."
+      },
+      {
+        "claim": "13inch screen",
+        "verdict": "supported",
+        "evidence": "The device matches the physical dimensions and design of a 13-inch MacBook Pro. The screen size is consistent with the model shown."
+      },
+      {
+        "claim": "256ssd 8gb ram",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows a sticker with handwritten text '256GB SSD | 8GB RAM'. This directly supports the claim."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Screen defect or damage (horizontal blue line/reflection visible in photo 2)",
+        "proof": "A video or photo showing the screen under different lighting conditions, or a screenshot of the display during normal use.",
+        "if_unproven": "priced as having a screen defect, which reduces value significantly"
+      },
+      {
+        "risk": "Battery health or performance issues (not visible in photos)",
+        "proof": "A screenshot of the system report showing battery cycle count and health, or a video of the laptop running for 10 minutes to show stability.",
+        "if_unproven": "priced as having unknown battery health, which may reduce value"
+      },
+      {
+        "risk": "Unauthorized modification or non-genuine parts (e.g., RAM or SSD not original)",
+        "proof": "A screenshot of the system information showing the exact model and specifications, or a video of the device being powered on and showing the About This Mac screen.",
+        "if_unproven": "priced as potentially non-genuine, which reduces value"
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of 'About This Mac' showing model, year, and exact specs.",
+      "Video of the laptop booting and running normally for 1 minute.",
+      "Photo or video of the screen under different lighting to confirm the blue line is a reflection or a defect.",
+      "Screenshot of battery health and cycle count."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The device appears to be a MacBook Pro M1 with 256GB SSD and 8GB RAM, but critical risks remain unproven: screen defect, battery health, and authenticity of specs. Without proof, the item cannot be priced accurately and must be evaluated further."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 75049,
+    "input_tokens": 2793,
+    "output_tokens": 950,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "8d6e5867d04374a892cfb78b8e67c81e",
+    "error": null
+  }
+}

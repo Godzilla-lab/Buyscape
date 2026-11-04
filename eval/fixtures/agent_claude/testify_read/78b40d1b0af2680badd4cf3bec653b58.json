@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "agent:claude",
+  "response": {
+    "observations": [
+      "Photo 0 shows a silver front-loading washing machine standing in a corner on a tiled floor, plugged in.",
+      "Photo 0 top left reads 'LG' and 'INVERTER DirectDrive 6/3kg'; a red sticker on the front reads 'Washer+Dryer 2in1'; a sticker on the right of the door reads 'Inverter Direct Drive 10 year warranty' (motor badge).",
+      "The programme dial ring is lit orange and the digital display shows digits, so the machine has power and the control panel lights up.",
+      "Clothes are visible inside the drum behind the door glass.",
+      "The front panel and door rim show scuffs and peeling around the red sticker; the base plinth is dented and dirty.",
+      "No rating plate or model code is visible; the back, the drum, the door seal and the inside are not shown.",
+      "No error code is readable on the display at this angle."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "front load washer dryer",
+      "brand": "LG",
+      "model": "Inverter Direct Drive 6/3kg Washer+Dryer 2in1 (model code not shown)",
+      "read_from": [
+        "photo 0 'LG' logo top left",
+        "photo 0 'INVERTER DirectDrive 6/3kg' print on the panel",
+        "photo 0 'Washer+Dryer 2in1' sticker on the front"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "LG washing machine",
+        "verdict": "supported",
+        "evidence": "Photo 0 'LG' logo and 'DirectDrive 6/3kg' on the panel; it is a washer dryer combo."
+      },
+      {
+        "claim": "Scrap, doesn't work and needs repair",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows the panel lit, so it powers on; the fault itself is not shown. Priced as not working in any case."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The fault may be the drum bearings, the direct drive motor or the main control board, leaving only scrap and parts value.",
+        "proof": "A clip of the machine starting a programme, showing the error code on the display and whether the drum turns.",
+        "if_unproven": "as not working, scrap and parts value"
+      },
+      {
+        "risk": "Parts may be missing or damaged inside: motor, control board, pump or heater.",
+        "proof": "A photo of the back with the rear panel off, showing the motor and drum in place.",
+        "if_unproven": "as a shell with missing parts"
+      },
+      {
+        "risk": "Door glass, door seal or door lock may be cracked or torn.",
+        "proof": "A close photo of the open door, seal and lock.",
+        "if_unproven": "as damaged door and seal"
+      },
+      {
+        "risk": "Exact model code unknown.",
+        "proof": "A photo of the rating plate inside the door rim or on the back.",
+        "if_unproven": "as a generic LG 6kg washer dryer for parts"
+      }
+    ],
+    "proof_requests": [
+      "A clip of the machine starting a wash programme, showing the error code and whether the drum turns.",
+      "A photo of the rating plate showing the model code.",
+      "A photo of the open door, seal and drum.",
+      "A photo of the back with the panel off, showing the motor in place, with a handwritten note carrying today's date."
+    ],
+    "decision": "price",
+    "reason": "Brand and range are read off the panel in photo 0 and the seller says it does not work, so it is priced at its worst case as a non-working LG washer dryer for scrap or repair. A clip of the fault code and the motor in place would show what a repair needs."
+  },
+  "meta": {
+    "provider": "sitting",
+    "model": "agent:claude",
+    "task": "testify_read",
+    "latency_ms": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "78b40d1b0af2680badd4cf3bec653b58",
+    "error": null
+  }
+}

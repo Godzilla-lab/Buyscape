@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Yellow and black gasoline generator.",
+      "Brand 'ELEPAQ' and model 'SV6800' visible on the control panel in photo 0.",
+      "Unit is sitting on a cardboard box and partially wrapped in plastic.",
+      "Control panel includes a voltmeter, circuit breaker, and two AC outlets.",
+      "Text 'YAOFENG' and 'MANUFACTURED BY CONSTANT' visible on the front panel."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "gasoline generator",
+      "brand": "ELEPAQ",
+      "model": "SV6800",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "4.5kva",
+        "verdict": "unverified",
+        "evidence": "The model SV6800 is often marketed as 4.5kVA, but the technical specification plate is not visible to confirm."
+      },
+      {
+        "claim": "100% copper wire",
+        "verdict": "unverifiable_remote",
+        "evidence": "Requires physical inspection of the alternator windings."
+      },
+      {
+        "claim": "1 year warranty",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a seller's promise and cannot be verified from photos."
+      },
+      {
+        "claim": "petrol generator",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows 'GASOLINE GENERATOR' on the unit's label."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Windings may be aluminum instead of copper, which is less durable.",
+        "proof": "Clear photo of the alternator windings through the side vents.",
+        "if_unproven": "as aluminum windings"
+      },
+      {
+        "risk": "Actual power output may be lower than the claimed 4.5kVA.",
+        "proof": "Clear photo of the technical specification plate showing rated output in kW or kVA.",
+        "if_unproven": "at 2.5kVA"
+      },
+      {
+        "risk": "The unit may not start or may not produce electricity.",
+        "proof": "Video of the generator starting and powering a known load (e.g., a 1kW heater).",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the technical specification plate showing the rated kVA and kW.",
+      "Video of the generator running and powering a load.",
+      "Close-up photo of the alternator windings through the cooling vents."
+    ],
+    "decision": "price",
+    "reason": "The brand and model are clearly identified. It can be priced at its worst-case scenario (untested, aluminum windings, lower power rating) based on the available photo."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 9584,
+    "input_tokens": 2372,
+    "output_tokens": 1897,
+    "cost_usd": 0.006877,
+    "replayed": false,
+    "fixture_key": "bbff072107906bada352efe23509e3e0",
+    "error": null
+  }
+}

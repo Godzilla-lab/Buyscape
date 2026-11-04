@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-sft500v2",
+  "response": {
+    "observations": [
+      "Photo 0 shows a yellow gas cylinder with a white label and handwritten markings.",
+      "Photo 1 and 2 show a blue gas cylinder with a 'BERADISCU' logo.",
+      "The blue cylinder has a broken or missing handle ring.",
+      "The top valve of the blue cylinder appears corroded.",
+      "The yellow cylinder has a sticker with a red and white design.",
+      "The brand 'BERADISCU' is clearly visible on the blue cylinder in photo 1."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "gas cylinder",
+      "brand": "BERADISCU",
+      "read_from": [
+        "photo 1 logo"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "12.5kg",
+        "verdict": "unverified",
+        "evidence": "The weight is not legible on the cylinder in the provided photos."
+      },
+      {
+        "claim": "standard",
+        "verdict": "unverifiable_remote",
+        "evidence": "Standard refers to the type of valve and regulator, which cannot be confirmed from a photo of the top."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The cylinder may be expired or past its safety date.",
+        "proof": "A clear photo of the stamped date on the cylinder's body.",
+        "if_unproven": "as expired"
+      },
+      {
+        "risk": "The valve may be leaking or damaged.",
+        "proof": "A video showing the valve being tested with soapy water.",
+        "if_unproven": "as having a faulty valve"
+      },
+      {
+        "risk": "The cylinder may be empty or contain a different gas than LPG.",
+        "proof": "A photo of the cylinder's weight stamp or a gas composition test.",
+        "if_unproven": "as empty"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the stamped weight and expiry date on the cylinder.",
+      "Photo of the stamped date on the cylinder.",
+      "Video of the valve being tested for leaks."
+    ],
+    "decision": "price",
+    "reason": "The item is known from the photos. What they cannot prove is priced at its worst case until the proof asked for below arrives."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-sft500v2",
+    "task": "testify_read",
+    "latency_ms": 11437,
+    "input_tokens": 2775,
+    "output_tokens": 378,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "28f43ba9c4319c472c0edb54252827a3",
+    "error": null
+  }
+}

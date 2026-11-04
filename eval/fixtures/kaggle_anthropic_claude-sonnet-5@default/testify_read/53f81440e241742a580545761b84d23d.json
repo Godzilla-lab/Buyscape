@@ -1,0 +1,110 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: Silver double-cab pickup, front view, Toyota logo on grille, third-generation Tacoma-style front fascia (pre-2024 facelift design), parked on gravel lot among other used cars.",
+      "Photo 1: Same truck, front-three-quarter view, visible after-market looking dark alloy wheels, running boards, no TRD badge visible on fender or door.",
+      "Photo 2: Rear view of same truck, tailgate reads a model badge and 'V6' badge, handwritten marker text on the rear window reads 'No Start 963'.",
+      "No interior, dashboard, engine bay, VIN plate, or document photos supplied.",
+      "No moonroof visible in any photo (roof line and rear glass show no sunroof glass or sunroof controls).",
+      "Watermarks 'POSTED ON JIJI' and 'TEEKAYWHEELS' overlay all three photos; these appear to be reseller/lot photos, possibly originally shot at an import auction yard (gravel lot, umbrellas, other cars in background typical of Nigerian bonded/auction yards)."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "pickup truck",
+      "brand": "Toyota",
+      "model": "Tacoma",
+      "read_from": [
+        "photo 0 grille badge",
+        "photo 2 tailgate badge"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "2024 model year",
+        "verdict": "contradicted",
+        "evidence": "Photo 0/1: front grille, headlight and bumper styling match the 2016\u20132023 third-generation Tacoma, not the redesigned 2024 model; no VIN or registration shown to confirm year."
+      },
+      {
+        "claim": "TRD 4x4",
+        "verdict": "unverified",
+        "evidence": "No TRD badge, TRD interior, or 4x4 drivetrain badge visible in any of the 3 photos; only a 'V6' badge is legible in photo 2."
+      },
+      {
+        "claim": "push to start",
+        "verdict": "unverifiable_remote",
+        "evidence": "No interior/dashboard photo provided to show a push-button start or key fob slot."
+      },
+      {
+        "claim": "moonroof",
+        "verdict": "unverifiable_remote",
+        "evidence": "No interior or roof close-up photo; exterior roofline in photo 0/1 shows no visible sunroof glass."
+      },
+      {
+        "claim": "verified duty",
+        "verdict": "unverifiable_remote",
+        "evidence": "No customs duty certificate, plate number, or paperwork photo provided."
+      },
+      {
+        "claim": "foreign used",
+        "verdict": "unverified",
+        "evidence": "No import sticker, foreign plate, or odometer/mileage photo shown to support this."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Vehicle may not start/run at all \u2014 a handwritten note visible on the rear window itself says 'No Start 963', directly contradicting any implied working condition and the 'push to start' claim.",
+        "proof": "A video of the seller starting the engine and letting it idle, with the handwritten note and plate visible in the same shot.",
+        "if_unproven": "priced as a non-running vehicle"
+      },
+      {
+        "risk": "Model year may be misstated; body style matches an older Tacoma generation, not the 2024 redesign.",
+        "proof": "Clear photo of VIN plate and vehicle registration/customs papers showing year of manufacture.",
+        "if_unproven": "priced as the older (pre-2024) generation Tacoma, not as a 2024 model"
+      },
+      {
+        "risk": "TRD trim claim unsupported by any visible badge or interior trim detail.",
+        "proof": "Photo of TRD badge on fender/tailgate or TRD interior trim plate.",
+        "if_unproven": "priced as base/non-TRD trim"
+      },
+      {
+        "risk": "No interior condition, mileage, or electronics (push-start, moonroof) can be verified.",
+        "proof": "Interior dashboard photo showing odometer, start button, and sunroof controls.",
+        "if_unproven": "priced as base trim with unknown/high mileage and no moonroof"
+      },
+      {
+        "risk": "No customs/duty documentation shown despite 'verified duty' claim; could mean unpaid duty or false claim.",
+        "proof": "Photo of customs duty certificate/clearance paper matching chassis number.",
+        "if_unproven": "priced as duty-unverified (higher import-risk)"
+      },
+      {
+        "risk": "Possible accident, flood, or frame damage not visible in these 3 staged exterior shots.",
+        "proof": "Undercarriage, engine bay, and full 360\u00b0 exterior photos.",
+        "if_unproven": "priced as condition-unknown/high-risk"
+      }
+    ],
+    "proof_requests": [
+      "Video of the engine starting and running, showing the handwritten 'No Start' note and the number plate in frame.",
+      "Clear photo of VIN plate and vehicle registration/import papers.",
+      "Interior photos: dashboard, odometer, push-start button, and sunroof/moonroof.",
+      "Photo of TRD badge or trim plate if truly TRD trim.",
+      "Customs duty certificate matching the VIN."
+    ],
+    "decision": "fraud_suspected",
+    "reason": "The photos contain the seller's own handwritten note reading 'No Start' on the truck itself, directly contradicting the listing's implied working/push-to-start condition, and the body style shown does not match a 2024 model year as claimed; these direct contradictions between the photo evidence and the seller's words are signs of misrepresentation."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 39759,
+    "input_tokens": 4632,
+    "output_tokens": 3597,
+    "cost_usd": 0.042075,
+    "replayed": false,
+    "fixture_key": "53f81440e241742a580545761b84d23d",
+    "error": null
+  }
+}

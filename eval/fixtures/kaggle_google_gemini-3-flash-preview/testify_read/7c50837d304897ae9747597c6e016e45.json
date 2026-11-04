@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail box for a Glamstar fan.",
+      "The brand 'GLAMSTAR' and model 'GSF-938R-B' are printed on the box.",
+      "The box describes the item as an '18\" Fan' and 'Rechargeable Floor Fan'.",
+      "The box is wrapped in clear plastic film.",
+      "The background shows a street scene with scaffolding and pedestrians.",
+      "The actual fan is not visible in the photo."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "rechargeable standing fan",
+      "brand": "GLAMSTAR",
+      "model": "GSF-938R-B",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "GLAMSTAR 18\u201d rechargeable battery fan",
+        "verdict": "supported",
+        "evidence": "The brand, size, and rechargeable nature are all printed on the box in photo 0."
+      },
+      {
+        "claim": "high power speed",
+        "verdict": "unverified",
+        "evidence": "The box in photo 0 mentions 'High Speed', but the actual performance cannot be verified from a still photo of a box."
+      },
+      {
+        "claim": "payment on delivery accepted nationwide",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, inferior item.",
+        "proof": "A photo of the actual fan outside of the box.",
+        "if_unproven": "priced as zero value (empty box)"
+      },
+      {
+        "risk": "The rechargeable battery may be dead, missing, or have significantly reduced capacity.",
+        "proof": "A video of the fan running on battery power alone for several minutes.",
+        "if_unproven": "priced as a standard corded fan requiring a new battery"
+      },
+      {
+        "risk": "The motor or oscillation mechanism may be faulty.",
+        "proof": "A video showing the fan blades spinning and the head oscillating.",
+        "if_unproven": "priced as not working/for parts"
+      }
+    ],
+    "proof_requests": [
+      "A photo of the actual fan outside of the box.",
+      "A video showing the fan powered on and the blades spinning.",
+      "A video showing the fan running on battery power while unplugged from the wall."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail packaging is shown. Without seeing the actual item, its existence, condition, and specific model cannot be confirmed for pricing."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 22992,
+    "input_tokens": 2362,
+    "output_tokens": 4446,
+    "cost_usd": 0.014519,
+    "replayed": false,
+    "fixture_key": "7c50837d304897ae9747597c6e016e45",
+    "error": null
+  }
+}

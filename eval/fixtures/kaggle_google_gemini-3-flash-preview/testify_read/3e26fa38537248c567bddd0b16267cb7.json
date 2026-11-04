@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail box for a Blue Gate UPS.",
+      "The box identifies the model as BG653i.",
+      "The box states it is a 'Line Interactive UPS' with 'Internal AVR'.",
+      "The actual UPS unit is not visible; only the packaging is shown.",
+      "The box features a 'Best UPS Product 2011' award logo, suggesting an older model or design.",
+      "There is a watermark from a classifieds site (Jiji) and a dealer name."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "UPS",
+      "brand": "Blue Gate",
+      "model": "BG653i",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Blue Gate BG653i Line Interactive UPS",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "653VA (approximately 390 Watts)",
+        "verdict": "unverified",
+        "evidence": "The wattage and VA rating are not explicitly visible on the front of the box in photo 0."
+      },
+      {
+        "claim": "rugged",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, damaged, or older unit.",
+        "proof": "A photo of the actual UPS unit out of the box, showing its physical condition and the rear label.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The internal lead-acid battery is likely dead or has very low capacity due to age.",
+        "proof": "A video showing the UPS powering a load (like a lamp or monitor) for several minutes while unplugged from the wall.",
+        "if_unproven": "as requiring a full battery replacement"
+      },
+      {
+        "risk": "The unit may have internal circuit faults or blown fuses.",
+        "proof": "A video of the unit being switched on, passing its self-test, and showing a green 'online' status light.",
+        "if_unproven": "as non-working/for parts"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual UPS unit outside of the box.",
+      "Photo of the specification label on the back or bottom of the UPS unit.",
+      "Video of the UPS unit powered on and supporting a load without being plugged into the mains."
+    ],
+    "decision": "price",
+    "reason": "The model is clearly identified from the packaging, which allows for a valuation based on the worst-case scenario of a non-functional unit or an empty box."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 12954,
+    "input_tokens": 2397,
+    "output_tokens": 2534,
+    "cost_usd": 0.0088,
+    "replayed": false,
+    "fixture_key": "3e26fa38537248c567bddd0b16267cb7",
+    "error": null
+  }
+}

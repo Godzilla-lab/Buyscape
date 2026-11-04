@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows an open case containing a melodica (pianica): row of black/white keys, a mouthpiece, a flexible blow-tube, and small colored stickers on some keys.",
+      "Photo 1 shows the closed case from outside; the word \"YAMAHA\" is embossed on the case in a logo plate.",
+      "Photo 1 case is pink with visible dust, scuff marks and surface grime.",
+      "Photo 2 shows the same style case (now appearing grayish/white, likely due to lighting) lying next to a separate, different full-size electronic keyboard with dirty/worn keys and buttons; that keyboard appears to be a different item in the background, not clearly the item for sale.",
+      "No serial number, model plate, or power/battery compartment is visible for either item.",
+      "No image shows the item powered on, making any sound, or being played."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "melodica (pianica)",
+      "brand": "Yamaha",
+      "model": null,
+      "read_from": [
+        "photo 1 case logo"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "\"If you need a keyboard that will fit into your budget, dont worry we've got you covered\"",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a sales pitch about price/availability, not a checkable fact from the photos."
+      },
+      {
+        "claim": "Implied item is a 'keyboard'",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 clearly shows a melodica (blow-tube, mouthpiece, small reed-key instrument), not an electronic keyboard."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Mismatch between advertised 'keyboard' and the actual item shown (a melodica), raising doubt about which item will actually be sent.",
+        "proof": "A clear single photo or video of the exact item to be shipped, with a note from seller confirming it is the melodica in photo 0/1.",
+        "if_unproven": "priced as the melodica only, not as an electronic keyboard"
+      },
+      {
+        "risk": "Melodica playability/airtightness (reeds, leaks, mouthpiece seal) cannot be judged from static photos.",
+        "proof": "A short video of someone blowing into it and playing a scale, showing consistent tone across keys.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Visible dirt, scuffing and worn stickers on keys suggest heavy prior use or improper storage, which could mean sticking keys or reed wear.",
+        "proof": "Close-up photos of each key row and the reed plate/mouthpiece interior.",
+        "if_unproven": "priced as heavily used, cosmetic and functional condition unverified"
+      },
+      {
+        "risk": "The second, unrelated electronic keyboard visible in photo 2 could be mistakenly bundled or cause confusion about what is actually being offered.",
+        "proof": "Seller confirmation and a dedicated photo showing only the item for sale, cropped from other stock.",
+        "if_unproven": "excluded from pricing; only the melodica is priced"
+      }
+    ],
+    "proof_requests": [
+      "A video of the melodica being played across its full key range, showing airtight tone.",
+      "Close-up photos of the reed plate/mouthpiece interior and each key row.",
+      "Confirmation of which exact item is for sale (melodica vs. the keyboard seen in photo 2) with a dedicated photo of only that item."
+    ],
+    "decision": "price",
+    "reason": "The photos clearly identify a used Yamaha-branded melodica by type and logo, but its playability and whether it matches the seller's 'keyboard' claim are unverified, so it must be priced at worst case as a used, functionally unverified melodica."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 24174,
+    "input_tokens": 3630,
+    "output_tokens": 2165,
+    "cost_usd": 0.02891,
+    "replayed": false,
+    "fixture_key": "017953b5542c027ef610103a6a4282c5",
+    "error": null
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Open laptop showing keyboard, trackpad, and screen. Lenovo logo on bezel, ThinkPad logo on palm rest. Intel Core i5 and Iris Xe stickers visible. Red TrackPoint present. Screen is off.",
+      "Photo 1: Side view of the same laptop, showing left edge ports and same stickers. Screen remains off.",
+      "Photo 2: Bottom of laptop showing ventilation grilles, screws, and a white label with serial number and model info. The label reads 'Model: 21E1000000' and 'Type: 21E1'. Windows 10 sticker also visible. The bottom is dusty and shows wear."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Lenovo",
+      "model": "ThinkPad T14 Gen 2",
+      "read_from": [
+        "photo 2 label: Model 21E1000000, Type 21E1 \u2014 matches Lenovo ThinkPad T14 Gen 2 (2021) model numbers",
+        "photo 0: Lenovo and ThinkPad logos visible"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "LENOVO T14 GEN2",
+        "verdict": "supported",
+        "evidence": "Photo 2: Model 21E1000000 and Type 21E1 \u2014 confirmed as ThinkPad T14 Gen 2 (2021) by Lenovo's model numbering."
+      },
+      {
+        "claim": "core i5 11th gen",
+        "verdict": "unverified",
+        "evidence": "Photo 0 and 1: Intel Core i5 sticker visible, but no generation specified. The sticker does not show '11th Gen' or '11th'. The model is consistent with 11th Gen, but not proven."
+      },
+      {
+        "claim": "16gb 256ssd",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal components or system specs visible. Cannot verify RAM or SSD size from photos alone."
+      },
+      {
+        "claim": "backlit keyboard",
+        "verdict": "unverified",
+        "evidence": "Keyboard is shown in ambient light; no backlighting is visible. No photo shows the keyboard lit up."
+      },
+      {
+        "claim": "fingerprint",
+        "verdict": "unverified",
+        "evidence": "No fingerprint reader visible on the trackpad or elsewhere. The trackpad area is plain. No photo shows a fingerprint sensor."
+      },
+      {
+        "claim": "Face ID",
+        "verdict": "unverified",
+        "evidence": "No visible IR camera or facial recognition hardware. The webcam is present above the screen, but no indication of Face ID capability. Not visible in any photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "RAM and SSD configuration may not match claimed 16GB and 256GB SSD",
+        "proof": "Photo of BIOS screen or system information showing RAM and storage details, or a video showing the device booting and displaying specs.",
+        "if_unproven": "Priced as if configuration is unknown \u2014 likely lower than claimed, possibly 8GB RAM or 128GB SSD."
+      },
+      {
+        "risk": "No proof of working condition \u2014 screen, keyboard, ports, battery, OS",
+        "proof": "Video showing the laptop turning on, keyboard backlighting, fingerprint reader, Face ID, and ports in use.",
+        "if_unproven": "Priced as not working \u2014 assumes no functionality until proven otherwise."
+      },
+      {
+        "risk": "Battery health unknown \u2014 may be degraded or non-functional",
+        "proof": "Video showing battery charging and discharging, or battery health report from Windows.",
+        "if_unproven": "Priced as battery not working \u2014 assumes no battery life."
+      },
+      {
+        "risk": "Fingerprint and Face ID features may be non-functional or absent",
+        "proof": "Video showing fingerprint login and facial recognition login.",
+        "if_unproven": "Priced as without biometrics \u2014 assumes no fingerprint or Face ID."
+      }
+    ],
+    "proof_requests": [
+      "Video showing the laptop turning on, booting into Windows, and displaying system specs (RAM, SSD, CPU generation).",
+      "Video showing keyboard backlighting, fingerprint login, and Face ID login.",
+      "Photo or video of the battery health report or charging behavior.",
+      "Photo of the BIOS screen or system information showing exact specs."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is confirmed as Lenovo ThinkPad T14 Gen 2, but critical claims (RAM, SSD, biometrics, working condition) are unverified or unverifiable from current photos. Without proof of functionality and exact specs, the item cannot be priced accurately. The risks are significant and must be resolved before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 87849,
+    "input_tokens": 2797,
+    "output_tokens": 1104,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "28545521648e7cae6095b0a44405b1e0",
+    "error": null
+  }
+}

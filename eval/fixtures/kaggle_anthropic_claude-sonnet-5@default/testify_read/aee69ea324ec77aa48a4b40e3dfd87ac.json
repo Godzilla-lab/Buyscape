@@ -1,0 +1,85 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black DSLR camera body with 'Canon' logo on the front grip and 'Canon EOS 600D' printed on the top right of the body.",
+      "Photo 0 also shows a separate Canon EF-S 18-55mm lens and a neck strap printed 'EOS DIGITAL'.",
+      "Photo 1 shows the rear LCD screen and control buttons (MENU, INFO, SET, AF, WB) consistent with a Canon EOS 600D rear panel layout.",
+      "Photo 2 shows two camera bodies side by side: left one labeled 'Canon EOS 600D', right one labeled 'Canon EOS 700D', plus a separate silver lens marked '28-80mm' and a partial Nikon lens cap visible at top of frame.",
+      "No Sony branding, logo, or model text appears anywhere in any of the three photos.",
+      "No visible shutter count, memory card, battery, or charger in any photo."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DSLR camera",
+      "brand": "Canon",
+      "model": "EOS 600D",
+      "read_from": [
+        "photo 0 body top text",
+        "photo 1 rear panel branding",
+        "photo 2 body label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "The brand is Sony",
+        "verdict": "contradicted",
+        "evidence": "Photo 0, 1, and 2 all show 'Canon' branding and 'EOS 600D' / 'EOS 700D' model text; no Sony markings anywhere."
+      },
+      {
+        "claim": "UK used Canon EOS 600D Digital Camera",
+        "verdict": "unverifiable_remote",
+        "evidence": "Origin ('UK used') cannot be confirmed from photos; no import sticker, region code, or UK-market marking visible."
+      },
+      {
+        "claim": "very neat and sharp",
+        "verdict": "unverified",
+        "evidence": "Cosmetic condition looks reasonable in photos 0-2, but 'sharp' implies working optics/sensor, which cannot be judged from static photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Sensor/shutter functionality and shutter count unknown",
+        "proof": "A test photo taken with the camera, or a shutter-count screenshot from software like EOSInfo",
+        "if_unproven": "priced as not confirmed working"
+      },
+      {
+        "risk": "Lens (18-55mm) focus/zoom/aperture mechanism condition unknown",
+        "proof": "A short video clip showing zoom ring turning and autofocus engaging",
+        "if_unproven": "priced as lens condition unverified, worst case"
+      },
+      {
+        "risk": "Battery, charger, and memory card inclusion unclear",
+        "proof": "A photo showing battery, charger, and card alongside the camera",
+        "if_unproven": "priced as body/lens only, no accessories"
+      },
+      {
+        "risk": "Possible listing mix-up: seller's text says 'Sony' while photos clearly show Canon-branded bodies (600D and 700D) and even a Nikon lens cap visible in photo 2 background",
+        "proof": "A clear, single, unambiguous photo of the exact item being sold with its brand/model fully legible, matching the seller's description",
+        "if_unproven": "cannot be priced until identity is confirmed; treated as a red flag for listing accuracy"
+      }
+    ],
+    "proof_requests": [
+      "A single clear photo of only the exact camera being sold, with brand/model fully legible, matching the text description.",
+      "Confirmation of which camera (600D or 700D, since both appear in photo 2) is actually for sale.",
+      "A photo or screenshot of shutter count or a test image taken with the camera.",
+      "A photo showing included accessories: battery, charger, memory card, strap, caps."
+    ],
+    "decision": "fraud_suspected",
+    "reason": "The seller's text claims the brand is Sony, but every photo clearly shows Canon-branded EOS 600D (and even a second EOS 700D) bodies with no Sony markings at all; this mismatch between description and photos is a strong listing-accuracy red flag that must be resolved before any pricing."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 20548,
+    "input_tokens": 3931,
+    "output_tokens": 1970,
+    "cost_usd": 0.024403,
+    "replayed": false,
+    "fixture_key": "aee69ea324ec77aa48a4b40e3dfd87ac",
+    "error": null
+  }
+}

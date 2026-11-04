@@ -1,0 +1,84 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows six identical boxes of an electric kettle stacked in two columns of three.",
+      "Each box is blue with a picture of a silver and black kettle with a black handle and spout.",
+      "The brand name 'VICALINA' is clearly visible on each box.",
+      "The box indicates '6.5L' capacity with a green label.",
+      "Text on the box includes 'whistling teakettle' and 'Art.No. VK-9145'.",
+      "A German flag logo is present, suggesting a 'Made in Germany' claim, but no country of origin is stated.",
+      "The background shows a retail environment with other appliances and boxes, including one labeled 'ELECTRIC KETTLE'.",
+      "The seller's text mentions 'Kinelco', but the box shows 'VICALINA'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "electric kettle",
+      "brand": "VICALINA",
+      "model": "VK-9145",
+      "read_from": [
+        "photo 0 box front"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "6.5 litres capacity",
+        "verdict": "supported",
+        "evidence": "photo 0: green label with '6.5L' on each box"
+      },
+      {
+        "claim": "Kinelco whistling kettle",
+        "verdict": "contradicted",
+        "evidence": "photo 0: brand shown is 'VICALINA', not 'Kinelco'"
+      },
+      {
+        "claim": "high grade stainless body",
+        "verdict": "unverifiable_remote",
+        "evidence": "photo 0: material not visible; only box image shown"
+      },
+      {
+        "claim": "whistling kettle",
+        "verdict": "supported",
+        "evidence": "photo 0: box text says 'whistling teakettle'"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The kettle may not be new or may be damaged inside the box",
+        "proof": "a photo of the actual kettle outside the box, showing condition and any damage",
+        "if_unproven": "priced as potentially used or damaged"
+      },
+      {
+        "risk": "The kettle may not be functional (e.g., no power, broken whistle)",
+        "proof": "a video or photo of the kettle in operation, showing it boiling and whistling",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The 'Made in Germany' claim may be misleading or false",
+        "proof": "a close-up of the kettle's base or label showing country of origin",
+        "if_unproven": "priced as unverified origin, possibly lower value"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual kettle outside the box, showing all sides and condition",
+      "Video of the kettle in operation, including boiling and whistling",
+      "Close-up of the kettle's base or label to confirm country of origin and model"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a VICALINA VK-9145 electric kettle, but the seller's claim of 'Kinelco' is contradicted by the packaging. The material and functionality cannot be verified from the box alone, and the condition of the actual kettle is unknown. Proof of the kettle's condition, operation, and origin is needed before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 61968,
+    "input_tokens": 1788,
+    "output_tokens": 779,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "a18df329d0ff60d443776268878350a8",
+    "error": null
+  }
+}

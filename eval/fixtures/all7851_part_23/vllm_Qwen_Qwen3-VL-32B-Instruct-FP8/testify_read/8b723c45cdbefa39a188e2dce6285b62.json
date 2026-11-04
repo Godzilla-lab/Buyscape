@@ -1,0 +1,88 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a smartphone with a notch, displaying iOS home screen with widgets and app icons. The time is 02:50, date is Monday 3. The screen is bright and clear, with no visible cracks or damage.",
+      "Photo 1 and Photo 2 show the back of the same phone, light blue color, with Apple logo centered and a dual-camera module in the top left corner. The camera module has two lenses and a flash, arranged vertically.",
+      "The phone appears to be held in a store environment with glass display cases and other phone accessories visible in the background.",
+      "No model name or serial number is visible on the phone or in the photos.",
+      "The seller claims it is an iPhone 16 Plus, 128GB, UK used, network locked."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "smartphone",
+      "brand": "Apple",
+      "model": null,
+      "read_from": [
+        "photo 0 screen",
+        "photo 1 back"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "iPhone 16 Plus",
+        "verdict": "unverified",
+        "evidence": "The phone has a notch and dual-camera setup, which is consistent with iPhone 13/14/15 series, but not iPhone 16 Plus which has a different camera design and no notch. No model name visible in photos."
+      },
+      {
+        "claim": "128GB",
+        "verdict": "unverifiable_remote",
+        "evidence": "Storage capacity cannot be determined from photos. Requires checking settings or box."
+      },
+      {
+        "claim": "UK used",
+        "verdict": "unverifiable_remote",
+        "evidence": "Origin cannot be confirmed from photos. Requires serial number check or box."
+      },
+      {
+        "claim": "Network locked",
+        "verdict": "unverifiable_remote",
+        "evidence": "Cannot verify from photos. Requires SIM test or carrier check."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Incorrect model (not iPhone 16 Plus)",
+        "proof": "Photo of the phone's back with model name visible, or a screenshot of Settings > General > About.",
+        "if_unproven": "Priced as a lower-tier iPhone model (e.g., iPhone 13 or 14), not iPhone 16 Plus."
+      },
+      {
+        "risk": "Storage capacity not 128GB",
+        "proof": "Screenshot of Settings > General > About showing storage capacity.",
+        "if_unproven": "Priced as 64GB or lower, which reduces value."
+      },
+      {
+        "risk": "Not actually UK used or not genuine",
+        "proof": "Photo of the original box with UK branding or serial number check via Apple website.",
+        "if_unproven": "Priced as unknown origin, which reduces value and trust."
+      },
+      {
+        "risk": "Not network locked or locked to wrong carrier",
+        "proof": "Video of SIM insertion and activation attempt, or carrier lock status check via settings.",
+        "if_unproven": "Priced as unlocked or with unknown lock status, which reduces value for buyers needing specific carrier compatibility."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of Settings > General > About showing model name and storage capacity.",
+      "Photo of the original box or serial number.",
+      "Video of SIM insertion and activation attempt to verify network lock status.",
+      "Photo of the phone's back with any model engraving (if present)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The phone's model cannot be confirmed as iPhone 16 Plus from the photos; it visually matches earlier iPhone models. Storage, origin, and network lock status are unverifiable from current images. Without proof, the item cannot be priced accurately and risks being misidentified or misrepresented."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 69858,
+    "input_tokens": 2783,
+    "output_tokens": 867,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "8b723c45cdbefa39a188e2dce6285b62",
+    "error": null
+  }
+}

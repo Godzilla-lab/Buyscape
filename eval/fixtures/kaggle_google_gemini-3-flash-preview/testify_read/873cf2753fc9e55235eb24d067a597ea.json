@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Two tires are shown stacked on a concrete floor.",
+      "Each tire has a Michelin retail label adhered to the tread.",
+      "Labels clearly show 'Michelin', 'Pilot Sport 4 S', and size '275/40 R19 105Y'.",
+      "The tread appears deep and unused, consistent with new tires.",
+      "A watermark 'NWAMBU SAMUEL' is visible across the image."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car tire",
+      "brand": "Michelin",
+      "model": "Pilot Sport 4 S 275/40 R19",
+      "read_from": [
+        "photo 0 labels"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Premium quality tire",
+        "verdict": "supported",
+        "evidence": "The Michelin Pilot Sport 4 S is a recognized high-performance tire model."
+      },
+      {
+        "claim": "with guarantee",
+        "verdict": "unverifiable_remote",
+        "evidence": "Guarantees cannot be confirmed through static images."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The tires may be old stock with degraded rubber (expired DOT).",
+        "proof": "A photo of the 4-digit DOT date code on the sidewall.",
+        "if_unproven": "priced as expired/old stock"
+      },
+      {
+        "risk": "The labels may be fraudulent or applied to a different tire brand.",
+        "proof": "A photo of the Michelin branding embossed directly into the rubber sidewall.",
+        "if_unproven": "priced as a generic budget tire"
+      },
+      {
+        "risk": "The offer may be for a single tire despite two being pictured.",
+        "proof": "A photo of both tires with a handwritten note confirming the pair.",
+        "if_unproven": "priced as a single tire"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the 4-digit DOT date code on the sidewall of both tires.",
+      "Photo of the full sidewall showing the embossed Michelin Pilot Sport 4 S markings.",
+      "Photo of the inside of the tires to verify they are free of patches or repairs."
+    ],
+    "decision": "price",
+    "reason": "The brand and model are clearly visible on the labels. The item can be priced at its worst-case scenario (single, generic, or expired tire) until further proof is provided."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 23860,
+    "input_tokens": 2348,
+    "output_tokens": 4801,
+    "cost_usd": 0.015577,
+    "replayed": false,
+    "fixture_key": "873cf2753fc9e55235eb24d067a597ea",
+    "error": null
+  }
+}

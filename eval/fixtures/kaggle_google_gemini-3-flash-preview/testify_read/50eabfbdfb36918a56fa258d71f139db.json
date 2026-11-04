@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "White microwave oven with a black glass door.",
+      "A sticker on the door identifies it as a Kenwood 20L Microwave Oven with Grill.",
+      "A manual on top of the unit specifies 'MWL110 series'.",
+      "The unit is sitting on a box, possibly in a shop or warehouse setting.",
+      "Only the front of the appliance is visible; the interior and sides are not shown."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "microwave oven with grill",
+      "brand": "Kenwood",
+      "model": "MWL110",
+      "read_from": [
+        "photo 0 manual",
+        "photo 0 door sticker"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Kenwood",
+        "verdict": "supported",
+        "evidence": "photo 0 door sticker and manual"
+      },
+      {
+        "claim": "20litres capacity",
+        "verdict": "supported",
+        "evidence": "photo 0 door sticker"
+      },
+      {
+        "claim": "Combination Microwave oven with grill",
+        "verdict": "unverified",
+        "evidence": "The sticker and manual confirm 'Microwave Oven with Grill', but 'Combination' often implies convection, which is not explicitly stated on the unit."
+      },
+      {
+        "claim": "Grill",
+        "verdict": "supported",
+        "evidence": "photo 0 door sticker and manual"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The magnetron may be faulty, meaning it won't heat food.",
+        "proof": "A video showing the unit powered on and boiling a cup of water.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The grill heating element may be burnt out.",
+        "proof": "A photo or video of the internal grill element glowing red during operation.",
+        "if_unproven": "as a standard microwave without grill function"
+      },
+      {
+        "risk": "The interior may be rusted, dirty, or have a missing glass turntable.",
+        "proof": "A photo of the interior with the door open.",
+        "if_unproven": "as having a damaged interior and missing parts"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the interior with the door open to check the turntable and cavity condition.",
+      "Video of the microwave heating water to prove the magnetron works.",
+      "Photo of the rating plate on the back to confirm the exact model and power specifications.",
+      "Video of the grill element functioning."
+    ],
+    "decision": "price",
+    "reason": "The brand and model are clearly identified from the manual and door sticker, allowing for a baseline price at the worst-case condition (non-functional/damaged interior)."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 10472,
+    "input_tokens": 2367,
+    "output_tokens": 1918,
+    "cost_usd": 0.006938,
+    "replayed": false,
+    "fixture_key": "50eabfbdfb36918a56fa258d71f139db",
+    "error": null
+  }
+}

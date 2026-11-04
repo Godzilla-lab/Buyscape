@@ -1,0 +1,75 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows two large industrial machines in a warehouse, both wrapped in protective plastic and wooden crates.",
+      "The machine on the left has a visible label: 'XGFB-8-3 Washing Filling Capping 3-in-1 Machine' and 'AUTOMATIC BOTTLE WATER MACHINE'.",
+      "The machine on the right is fully covered in plastic wrap, with no visible branding or model.",
+      "Both machines are on wooden pallets, suggesting they are new or unused.",
+      "The seller mentions 'Dingli Bottle water machine' and 'Accurate table water machine', but no such branding is visible in the photos.",
+      "The capacity claim of '3,000' is not specified in units (bottles/hour? liters/day?) and is not visible in the photos.",
+      "The watermark 'SURE INDUSTRIAL POSTED ON JIJI' appears on all photos, indicating the seller's listing platform."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "bottle water filling machine",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 label",
+        "photo 1 label",
+        "photo 2 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "We Have in stock Dingli Bottle water machine and Accurate table water machine.",
+        "verdict": "unverified",
+        "evidence": "No visible branding for 'Dingli' or 'Accurate' in any photo. The visible label reads 'XGFB-8-3 Washing Filling Capping 3-in-1 Machine'."
+      },
+      {
+        "claim": "Capacity 3,000...",
+        "verdict": "unverifiable_remote",
+        "evidence": "No unit specified (e.g., bottles per hour, liters per day). No capacity label visible in photos. Cannot verify from images alone."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The machine may not be the branded 'Dingli' or 'Accurate' models as claimed.",
+        "proof": "A clear photo of the machine's control panel or side plate showing the brand name.",
+        "if_unproven": "Priced as generic machine, not branded, which reduces value."
+      },
+      {
+        "risk": "The machine may be non-functional or not fully assembled.",
+        "proof": "A video or photo showing the machine operating or a close-up of internal components and control panel.",
+        "if_unproven": "Priced as not working or incomplete, which reduces value."
+      },
+      {
+        "risk": "The capacity claim of 3,000 is ambiguous and unverified.",
+        "proof": "A specification sheet or label showing the exact capacity in standard units (e.g., 3,000 bottles per hour).",
+        "if_unproven": "Priced as low-capacity or unknown capacity, which reduces value."
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the machine's control panel or side plate showing the brand name.",
+      "Photo or video of the machine in operation or a close-up of internal components.",
+      "Specification sheet or label showing the exact capacity in standard units."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The machine's brand and capacity claims cannot be verified from the current photos. The visible label shows a different model (XGFB-8-3), and no branding for 'Dingli' or 'Accurate' is visible. Without proof of brand, capacity, and functionality, a reliable price cannot be assigned."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 64889,
+    "input_tokens": 2162,
+    "output_tokens": 793,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "cb45df8cc3d2748b0af1316b4f782ead",
+    "error": null
+  }
+}

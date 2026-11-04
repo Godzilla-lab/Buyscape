@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: single used tire standing on floor, moderate tread depth visible, sidewall mostly in shadow, no readable size or brand text.",
+      "Photo 1: close-up of tread pattern on a tire lying flat, watermark 'D-KACHI ENTERPRISE' overlaid, no size or DOT code visible, a hand is touching the tire.",
+      "Photo 2: two tires stacked, sidewall text reads 'MASTER-GRIP' but no full brand name, size, or date code legible; third tire partly visible in background corner.",
+      "No sidewall size (e.g. 195/65R15), no DOT/date code, no brand logo fully readable in any photo.",
+      "Tread shows some wear but no cracking or bulging visible in the limited angles shown."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used car tire (possibly 'Master-Grip' tread line)",
+      "brand": null,
+      "model": "Master-Grip (partial text only)",
+      "read_from": [
+        "photo 2 sidewall text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Grade/first-grade Tokumbo tires that will last almost like new",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal tread wear data, no age/DOT code, no size shown in any photo; condition and longevity claims cannot be judged from these angles."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Tire size unknown, which is the primary driver of price",
+        "proof": "Clear close-up of the sidewall size code (e.g. 205/55R16)",
+        "if_unproven": "cannot be priced at all without this"
+      },
+      {
+        "risk": "Tire age/DOT date code unknown; old rubber can be unsafe despite good tread",
+        "proof": "Close-up of DOT code on sidewall",
+        "if_unproven": "priced as old/near end-of-life stock"
+      },
+      {
+        "risk": "Internal structural damage (belt separation, prior punctures/plugs) not visible externally",
+        "proof": "Photo of inner sidewall and bead area, and any patch/plug marks",
+        "if_unproven": "priced as unverified condition, worst case"
+      },
+      {
+        "risk": "Exact brand not confirmed (only partial 'Master-Grip' text seen, no manufacturer logo)",
+        "proof": "Full sidewall shot showing manufacturer name and model together",
+        "if_unproven": "treated as unbranded/unknown-brand used tire"
+      },
+      {
+        "risk": "Quantity unclear - seller may be selling a set but only 2-3 tires shown, possibly mismatched sizes/brands",
+        "proof": "Single photo showing all tires together with sizes visible",
+        "if_unproven": "priced per single tire only, not as a matched set"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of sidewall showing full size code (width/profile/rim diameter)",
+      "Close-up of DOT date code for age verification",
+      "Photo of inner sidewall/bead for damage or plug marks",
+      "Single photo showing all tires together with matching brand/size visible"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The tire size, which is the primary determinant of price, is not visible or readable in any photo, and no DOT date or full brand is confirmed, so even a worst-case price cannot be set without this missing information."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 20099,
+    "input_tokens": 2758,
+    "output_tokens": 1750,
+    "cost_usd": 0.019825,
+    "replayed": false,
+    "fixture_key": "66268525df0f64bbbbde9bac5a90926a",
+    "error": null
+  }
+}

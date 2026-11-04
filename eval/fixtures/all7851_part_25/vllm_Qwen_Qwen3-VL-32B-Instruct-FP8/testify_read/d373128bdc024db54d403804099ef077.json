@@ -1,0 +1,75 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: A red and black cardboard box with 'SUNFIT BATTERY' printed in white. Text on box: 'DEEP CYCLE AGM BATTERY', 'GFM100 (12V 100AH)', 'POWERED BY WELL RUN KOREA'. Box is strapped with yellow bands. 'This side Up' is printed on top. A recycling symbol and 'recyclable' are visible. In background: another battery box labeled 'Hi-FORCE' and 'AYG ROYAL 12V 150Ah'.",
+      "Photo 1: Same box from a slightly different angle, showing same text and branding. 'This side Up' and recycling symbol visible. Background shows 'NEVER OVERTHROW \u2022 NEVER DROP \u2022 KEEP AWAY FROM FIRE' on a white box.",
+      "Photo 2: Top view of the same box, showing 'This side Up' and recycling symbol. A person's foot in a black sandal is visible on the right. Box is strapped with yellow bands. Text 'SUNFIT BATTERY' is partially visible on the side."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "deep cycle AGM battery",
+      "brand": "SUNFIT",
+      "model": "GFM100",
+      "read_from": [
+        "photo 0 box label",
+        "photo 1 box label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Premium solar battery",
+        "verdict": "unverified",
+        "evidence": "The box states 'DEEP CYCLE AGM BATTERY' and lists 'SOLAR' as one of its applications, but 'premium' is subjective and not verifiable from photos. The seller's claim of 'premium solar' is not directly supported by visible text."
+      },
+      {
+        "claim": "12V 100AH",
+        "verdict": "supported",
+        "evidence": "Photo 0 and Photo 1 clearly show 'GFM100 (12V 100AH)' on the box."
+      },
+      {
+        "claim": "Powered by Well Run Korea",
+        "verdict": "supported",
+        "evidence": "Photo 0 and Photo 1 show 'POWERED BY WELL RUN KOREA' on the box."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery is not new or is damaged in transit",
+        "proof": "A photo of the battery inside the box, showing terminals, casing, and any dents or leaks.",
+        "if_unproven": "priced as potentially used or damaged, which reduces value"
+      },
+      {
+        "risk": "Battery is counterfeit or not genuine SUNFIT",
+        "proof": "A close-up photo of the battery's label or serial number, or a photo of the battery being unboxed to show the actual product.",
+        "if_unproven": "priced as unverified authenticity, which reduces value"
+      },
+      {
+        "risk": "Battery is not fully charged or has been stored improperly",
+        "proof": "A video or photo of the battery being tested with a multimeter or connected to a load to verify voltage and capacity.",
+        "if_unproven": "priced as potentially degraded, which reduces value"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the battery inside the box, showing terminals and casing.",
+      "Close-up of the battery label or serial number.",
+      "Video or photo of the battery being tested with a multimeter."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a SUNFIT GFM100 12V 100AH deep cycle AGM battery, but critical risks such as condition, authenticity, and functionality cannot be verified from the current photos. Proof of the actual battery and its working state is needed before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 69470,
+    "input_tokens": 2915,
+    "output_tokens": 855,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "d373128bdc024db54d403804099ef077",
+    "error": null
+  }
+}

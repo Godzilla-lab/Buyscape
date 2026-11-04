@@ -1,0 +1,113 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows an HP laptop with screen on, Windows desktop, hp logo on top bezel, resting on a stack of similar laptops.",
+      "Photo 1 shows an HP laptop open with keyboard, trackpad, blue Intel sticker on palm rest, hp logo below screen, and Windows desktop.",
+      "Photo 2 shows several closed HP laptops stacked, with hp logos visible on the lids."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": null,
+      "read_from": [
+        "photo 0 bezel",
+        "photo 1 bezel",
+        "photo 2 lid",
+        "photo 1 palm rest sticker"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Hp Laptop",
+        "verdict": "supported",
+        "evidence": "hp logo on bezel in photo 0, photo 1, and lid in photo 2"
+      },
+      {
+        "claim": "ProBook X360 11 G1 EE",
+        "verdict": "unverified",
+        "evidence": "model name not visible in any photo"
+      },
+      {
+        "claim": "Intel processor",
+        "verdict": "supported",
+        "evidence": "Intel sticker on palm rest in photo 1"
+      },
+      {
+        "claim": "4gb Ram",
+        "verdict": "unverified",
+        "evidence": "not visible in photos"
+      },
+      {
+        "claim": "128SSD",
+        "verdict": "unverified",
+        "evidence": "not visible in photos"
+      },
+      {
+        "claim": "Screen Touch",
+        "verdict": "unverified",
+        "evidence": "cannot be confirmed from still photos"
+      },
+      {
+        "claim": "Window 10",
+        "verdict": "supported",
+        "evidence": "Windows 10-style desktop and taskbar in photo 0 and photo 1"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Laptop may not power on or hold charge",
+        "proof": "video of it booting and running on battery",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "RAM may be less than 4GB",
+        "proof": "screenshot of system properties showing installed RAM",
+        "if_unproven": "as lower or unknown RAM"
+      },
+      {
+        "risk": "SSD may be smaller than 128GB or failing",
+        "proof": "screenshot of disk management showing capacity and health",
+        "if_unproven": "as no working SSD"
+      },
+      {
+        "risk": "Screen may not be touch-enabled",
+        "proof": "video of touch input registering on screen",
+        "if_unproven": "as non-touch screen"
+      },
+      {
+        "risk": "Processor may be slower than stated",
+        "proof": "screenshot of system information showing CPU model",
+        "if_unproven": "as an unspecified Intel processor"
+      },
+      {
+        "risk": "Keyboard, trackpad, or ports may be faulty",
+        "proof": "video testing keyboard, trackpad, and ports",
+        "if_unproven": "as having faulty input or ports"
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of system properties showing RAM, processor, and Windows version",
+      "Screenshot of disk management showing SSD capacity",
+      "Video of the laptop booting, running on battery, and touch screen responding",
+      "Video of keyboard, trackpad, and ports working"
+    ],
+    "decision": "price",
+    "reason": "It is an HP laptop with a visible Windows desktop and Intel sticker, but the exact model, RAM, SSD, touch function, and working condition are unproven, so it is priced at its worst case as an untested HP laptop."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 21884,
+    "input_tokens": 2932,
+    "output_tokens": 3793,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "f2725f2268712cdc294891eb444c5162",
+    "error": null
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0: grey standing two-door fridge-freezer with Hisense logo on the upper door, freezer section at the bottom, wooden cabinet beside it, items on top.",
+      "Photo 1: both doors open, empty fridge compartment with glass shelves, cup and items in the freezer, black bag in the freezer door shelf, white interior appears clean."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "standing fridge and freezer",
+      "brand": "Hisense",
+      "model": null,
+      "read_from": [
+        "photo 0 door"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "clean",
+        "verdict": "supported",
+        "evidence": "photo 0 exterior and photo 1 interior show no visible dirt, stains, or damage"
+      },
+      {
+        "claim": "standing fridge and freezer",
+        "verdict": "supported",
+        "evidence": "photo 0 shows a tall upright unit; photo 1 shows separate fridge and freezer compartments"
+      },
+      {
+        "claim": "very good (working condition)",
+        "verdict": "unverified",
+        "evidence": "photos cannot show compressor operation, cooling, or electrical function"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "compressor or cooling system may not work",
+        "proof": "video of the unit running with doors closed, or an interior thermometer reading",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "freezer may not freeze",
+        "proof": "video showing ice or frozen items inside the freezer compartment",
+        "if_unproven": "as fridge only, freezer not working"
+      },
+      {
+        "risk": "door seals may be torn or leaking",
+        "proof": "close-up photo of door gaskets when closed, or paper-slip test at the seal",
+        "if_unproven": "as needing seal repair"
+      },
+      {
+        "risk": "plug or voltage may not match Nigerian power supply",
+        "proof": "photo of the rating plate and plug type",
+        "if_unproven": "as needing adapter or electrical work"
+      }
+    ],
+    "proof_requests": [
+      "Video of the fridge running with doors closed for at least 10 minutes",
+      "Photo of the rating plate showing voltage and plug type",
+      "Close-up photo of both door seals when closed"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a Hisense standing fridge-freezer; because function is unproven, it can be priced at its worst case as non-working."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 45257,
+    "input_tokens": 2370,
+    "output_tokens": 3271,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "b8740402c6310aefd82ae0f13d9324ab",
+    "error": null
+  }
+}

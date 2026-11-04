@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail box for an Evergood UPS.",
+      "The box indicates a capacity of 1500VA.",
+      "The box features the brand name 'EVERGOOD' and the text 'BESTEFFECT'.",
+      "The actual UPS device is not visible in the photo.",
+      "There is a watermark 'SETRACK DIGITAL SOLUTION' across the center of the image."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "UPS",
+      "brand": "Evergood",
+      "model": "1500VA",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Evergood UPS",
+        "verdict": "supported",
+        "evidence": "The brand name is visible on the box in photo 0."
+      },
+      {
+        "claim": "1.5 KVA UPS",
+        "verdict": "supported",
+        "evidence": "The box in photo 0 specifies 1500VA, which is equivalent to 1.5 KVA."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different item.",
+        "proof": "A photo of the actual UPS unit outside of its packaging.",
+        "if_unproven": "priced as an empty box"
+      },
+      {
+        "risk": "The internal lead-acid batteries may be dead or exhausted.",
+        "proof": "A video showing the UPS powering a significant load (e.g., a desktop PC) while unplugged from the wall.",
+        "if_unproven": "priced as requiring immediate battery replacement"
+      },
+      {
+        "risk": "The unit may have internal electronic faults or damaged outlets.",
+        "proof": "Photos of the rear panel and a video of the unit successfully completing a self-test.",
+        "if_unproven": "priced as non-functional/for parts"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual UPS unit out of the box.",
+      "Photo of the specification sticker on the back or bottom of the unit.",
+      "Video of the unit turned on and supporting a load without being plugged into mains power."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail packaging is shown. Without photos of the actual device, its existence, physical condition, and functional state cannot be verified."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 11527,
+    "input_tokens": 2378,
+    "output_tokens": 2426,
+    "cost_usd": 0.008467,
+    "replayed": false,
+    "fixture_key": "573f345d679baedea4881edfb238b2b6",
+    "error": null
+  }
+}

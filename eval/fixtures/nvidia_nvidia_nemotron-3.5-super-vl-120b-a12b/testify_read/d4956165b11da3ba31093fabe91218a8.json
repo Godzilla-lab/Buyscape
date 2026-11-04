@@ -1,0 +1,84 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "White indoor wall AC unit resting on top of outdoor condenser unit",
+      "Outdoor unit sitting on tiled floor with front grille visible",
+      "Word \"inverter\" printed on outdoor unit casing",
+      "Red handwritten markings on outdoor unit panel",
+      "No clearly readable brand or model number in the photo",
+      "Units appear to be a matched indoor/outdoor split pair",
+      "Located indoors near a wooden door and window sill"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "split inverter air conditioner",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "inverter AC",
+        "verdict": "supported",
+        "evidence": "photo 0 shows \"inverter\" on outdoor unit"
+      },
+      {
+        "claim": "Faulty",
+        "verdict": "unverified",
+        "evidence": "seller's statement only; photo shows no test or damage"
+      },
+      {
+        "claim": "available for sale",
+        "verdict": "unverifiable_remote",
+        "evidence": "seller's statement only"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "extent of fault unknown (compressor, PCB, refrigerant leak, or electrical)",
+        "proof": "video of unit powered on or technician assessment",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "indoor and outdoor units may not be a matched pair",
+        "proof": "photo showing model numbers on both units",
+        "if_unproven": "as unmatched or incomplete set"
+      },
+      {
+        "risk": "refrigerant gas may be missing or leaked",
+        "proof": "pressure test or photo of service ports with gauges",
+        "if_unproven": "as requiring regas"
+      },
+      {
+        "risk": "remote control may be missing",
+        "proof": "photo of remote control",
+        "if_unproven": "without remote"
+      }
+    ],
+    "proof_requests": [
+      "Video of the AC running or attempting to run",
+      "Clear photo of the brand/model label on both units",
+      "Photo of the remote control if included",
+      "Technician diagnosis of the specific fault"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a split inverter air conditioner from the photo; even with the fault unverified, it can be priced at its worst case as non-working."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 119133,
+    "input_tokens": 2222,
+    "output_tokens": 2716,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "d4956165b11da3ba31093fabe91218a8",
+    "error": null
+  }
+}

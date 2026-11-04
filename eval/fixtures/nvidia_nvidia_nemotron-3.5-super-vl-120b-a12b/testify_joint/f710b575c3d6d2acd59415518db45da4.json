@@ -1,0 +1,100 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "White front-loading washing machine",
+      "LG logo visible top left of control panel",
+      "Direct Drive badge visible on right side",
+      "10 year motor warranty badge visible on right side",
+      "Model number area is blacked out",
+      "Rust stains visible near bottom front edge",
+      "Door glass shows drum inside",
+      "Control dial and push buttons visible"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "front load washing machine",
+      "brand": "LG",
+      "model": null,
+      "read_from": [
+        "photo 0 logo",
+        "photo 0 badge"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "LG",
+        "verdict": "supported",
+        "evidence": "photo 0 logo"
+      },
+      {
+        "claim": "DirectDrive",
+        "verdict": "supported",
+        "evidence": "photo 0 badge"
+      },
+      {
+        "claim": "7kg",
+        "verdict": "unverified",
+        "evidence": "capacity not shown in photo"
+      },
+      {
+        "claim": "for sale",
+        "verdict": "unverifiable_remote",
+        "evidence": "listing text only"
+      },
+      {
+        "claim": "Location: Agege, Lagos State",
+        "verdict": "unverifiable_remote",
+        "evidence": "listing text only"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Machine does not power on or complete a cycle",
+        "proof": "video of machine running a wash and spin cycle",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Actual capacity is not 7kg",
+        "proof": "photo of rating plate showing capacity",
+        "if_unproven": "as unknown capacity"
+      },
+      {
+        "risk": "Door seal or drum has hidden tears or damage",
+        "proof": "close-up of door gasket and drum interior",
+        "if_unproven": "as worn or damaged"
+      },
+      {
+        "risk": "Base rust indicates structural or water damage",
+        "proof": "close-up of rusted base and underside",
+        "if_unproven": "as damaged"
+      }
+    ],
+    "proof_requests": [
+      "Video of the machine running a full wash and spin cycle",
+      "Photo of the specification plate showing model and capacity",
+      "Close-up of the door seal and drum",
+      "Close-up of the rusted base area"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as an LG front-load washing machine from photo 0, so it can be priced at its worst case as non-working without further proof.",
+    "price_pick": {
+      "low": 1,
+      "high": 1
+    }
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_joint",
+    "latency_ms": 36676,
+    "input_tokens": 2934,
+    "output_tokens": 3833,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "f710b575c3d6d2acd59415518db45da4",
+    "error": null
+  }
+}

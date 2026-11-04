@@ -52,6 +52,12 @@ TYPE_SEARCH_PAGES = 3
 FAULTY_WORDS = ("faulty", "for parts", "for part", "not working", "spoilt", "spoiled", "dead", "damaged", "cracked")
 
 
+# A tier word names a different model: an iPhone 12 Pro is not an iPhone 12,
+# and a PS4 Slim is not a PS4 Pro. A comparable must carry exactly the tier
+# words the key carries. "Plus" is left out: sellers write "PS4 plus 10 games".
+TIER_WORDS = {"pro", "max", "mini", "ultra", "lite", "slim"}
+
+
 def is_faulty_listing(title: str) -> bool:
     t = f" {title.lower()} "
     return any(w in t for w in FAULTY_WORDS)
@@ -131,11 +137,14 @@ class JijiComps:
         cache_dir: Path,
         exclude_ids: frozenset[str] = frozenset(),
         live: Callable[[str, str, int, bool], list[dict]] | None = None,
+        shop_rows: list[dict] | tuple = (),
     ) -> None:
         """`live(query, category, pages, used)` fetches listings the cache lacks.
 
         None keeps the source offline, which is what an eval run wants: a
-        recorded run must not depend on what Jiji shows today.
+        recorded run must not depend on what Jiji shows today. `shop_rows`
+        adds the new prices cached from the shops the tenant trusts
+        (`shops.load`), each one sourced to its shop.
         """
         self._rows: list[dict] = []
         # A dealer's new stock is never a used-price comp. It is kept apart,
@@ -151,6 +160,7 @@ class JijiComps:
                 if row.get("id") in exclude_ids:
                     continue
                 (self._rows if row.get("is_used") else self._new_rows).append(row)
+        self._new_rows += [r for r in shop_rows if r.get("id") not in exclude_ids]
 
     def fetch(
         self, category: str, model_key: str, limit: int = 12, faulty: bool = False, by_type: bool = False,
@@ -185,6 +195,8 @@ class JijiComps:
                 if not have:
                     continue
                 if want_numeric and not want_numeric.issubset(have):
+                    continue
+                if (want ^ have) & TIER_WORDS:
                     continue
                 if by_type:
                     if is_set_listing(title):
@@ -229,7 +241,7 @@ class JijiComps:
         scored.sort(key=lambda pair: pair[0], reverse=True)
         return [
             Observation(
-                source=self.source_id_new if new else self.source_id,
+                source=row.get("source") or (self.source_id_new if new else self.source_id),
                 kind="asking_new" if new else "asking",
                 amount=float(row["price_ngn"]),
                 currency="NGN",

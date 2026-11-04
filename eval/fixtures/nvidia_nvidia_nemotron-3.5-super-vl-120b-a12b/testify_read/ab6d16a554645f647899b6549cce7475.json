@@ -1,0 +1,92 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Black headlamp with a rectangular battery pack mounted on an elastic head strap",
+      "Strap is printed repeatedly with \"LED LIGHT\" in white letters",
+      "Battery pack shows a blue indicator light and a white sticker marked \"LED\"",
+      "Photo 0 shows the lamp switched on, casting a bright white beam onto a shag carpet",
+      "Photo 1 shows the LED emitter inside the reflector and a coiled cable connecting the pack to the lamp head",
+      "Photo 2 shows the rear of the battery pack and strap adjustment buckles",
+      "No readable brand name or model number appears on the item in any photo",
+      "Watermark \"PEKOAUTOSFLEET\" appears across all three photos"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "headlamp",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "5000mAh battery",
+        "verdict": "unverifiable_remote",
+        "evidence": "No battery capacity label or specification is readable in any photo"
+      },
+      {
+        "claim": "battery powered",
+        "verdict": "supported",
+        "evidence": "Battery pack is clearly visible in photos 0, 1, and 2"
+      },
+      {
+        "claim": "rechargeable",
+        "verdict": "unverifiable_remote",
+        "evidence": "No charging port, charging cable, or rechargeable marking is visible"
+      },
+      {
+        "claim": "super bright",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows the light on, but brightness cannot be measured remotely"
+      },
+      {
+        "claim": "worn on the head",
+        "verdict": "supported",
+        "evidence": "Head strap is visible in all three photos"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual battery capacity may be far below the claimed 5000mAh",
+        "proof": "Close-up photo of the battery cell label showing capacity",
+        "if_unproven": "as unknown-capacity battery"
+      },
+      {
+        "risk": "Item may not be rechargeable or the charging port may be faulty",
+        "proof": "Photo of the charging port and any included charging cable",
+        "if_unproven": "as non-rechargeable or battery-only"
+      },
+      {
+        "risk": "Light may fail after short use or have defective modes",
+        "proof": "Video cycling through all modes and running continuously for several minutes",
+        "if_unproven": "as working only at the moment photo 0 was taken"
+      },
+      {
+        "risk": "Water resistance or build quality is unknown",
+        "proof": "Photo of any IP rating marking or sealed seams",
+        "if_unproven": "as indoor-only use"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of the battery pack label showing capacity and rechargeable markings",
+      "Photo of the charging port and any charging cable",
+      "Video of the headlamp cycling through modes and staying on for at least five minutes"
+    ],
+    "decision": "price",
+    "reason": "The item is clearly a headlamp and is shown switched on, so it can be priced at its worst case with unproven battery claims treated as unverified."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 18056,
+    "input_tokens": 2917,
+    "output_tokens": 3009,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "ab6d16a554645f647899b6549cce7475",
+    "error": null
+  }
+}

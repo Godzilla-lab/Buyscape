@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows two retail boxes for Sonik AC/DC pressing irons.",
+      "The brand 'SONIK' is clearly visible on both boxes.",
+      "The model 'SPI-168DC2' is printed on the bottom box; the top box shows 'SPI-168D' with the rest obscured.",
+      "Box text claims 200-250W power, 5 temperature modes, and a 100% copper cable.",
+      "The actual irons are not visible; only the packaging is shown.",
+      "A '18 Months' warranty seal is printed on the box."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "AC/DC pressing iron",
+      "brand": "SONIK",
+      "model": "SPI-168DC2",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "It's better care for your clothes",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      },
+      {
+        "claim": "Ac/Dc pressing iron",
+        "verdict": "supported",
+        "evidence": "photo 0 box text"
+      },
+      {
+        "claim": "5 temperature mood knob control",
+        "verdict": "supported",
+        "evidence": "photo 0 box text"
+      },
+      {
+        "claim": "copper...",
+        "verdict": "supported",
+        "evidence": "photo 0 box text '100% Copper Cable'"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The iron may be missing, damaged, or a different model than the box indicates.",
+        "proof": "A photo of the actual iron out of the box, showing the model plate and soleplate.",
+        "if_unproven": "as missing or scrap value"
+      },
+      {
+        "risk": "The iron may not heat up or the thermostat may be faulty.",
+        "proof": "A video showing the power indicator light turning on and the soleplate heating up.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The DC (battery/solar) functionality may not work.",
+        "proof": "A video of the iron being powered by and heating from a 12V/24V DC source.",
+        "if_unproven": "as a standard AC-only iron"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual iron out of the box showing the soleplate.",
+      "Photo of the specification plate on the iron itself.",
+      "Video of the iron powered on and heating up.",
+      "Video demonstrating the iron working on a DC power source."
+    ],
+    "decision": "price",
+    "reason": "The brand and model are clearly identified from the packaging, allowing for a valuation at its worst-case condition (unseen/not working)."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 10934,
+    "input_tokens": 2393,
+    "output_tokens": 2268,
+    "cost_usd": 0.008001,
+    "replayed": false,
+    "fixture_key": "702611c1923d75eb49a0595c684adb8f",
+    "error": null
+  }
+}

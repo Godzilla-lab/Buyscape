@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows five red gas cylinders stacked in a corner, with one black cylinder partially visible on the left.",
+      "The cylinders vary in size and condition; some are heavily worn, chipped, and rusted.",
+      "One cylinder on the right has visible text: 'BOC', 'The Linde Group', 'Propane', '11 383', and 'FLAMMABLE GAS'.",
+      "Another cylinder in the center has '48Kg' written on it, suggesting a 48kg capacity, not 25kg.",
+      "A white hose is attached to the top of the central cylinder.",
+      "The bottom of the central cylinder has a label with '11/2023' and '11/2024', possibly indicating inspection or test dates.",
+      "The leftmost cylinder has a faded label with '12.8.23' written on it.",
+      "The smallest cylinder at the bottom center is red and appears to be a smaller size, possibly 12.5kg or 15kg.",
+      "The seller claims '4 25kg cylinders', but the photo shows five cylinders, and none clearly marked as 25kg."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "gas cylinders",
+      "brand": "BOC (on one cylinder)",
+      "model": null,
+      "read_from": [
+        "photo 0: text on right cylinder",
+        "photo 0: '48Kg' on central cylinder"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "4 25kg cylinders for sale",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows five cylinders, none clearly marked as 25kg; one is marked '48Kg', and another has '11 383' which may indicate a different size. The count is also incorrect."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Cylinders may be expired or not fit for use due to wear, rust, or missing inspection stamps.",
+        "proof": "Close-up of inspection date stamps, pressure test labels, and condition of valve and body on each cylinder.",
+        "if_unproven": "Priced as unsafe or non-functional, with significant discount for risk."
+      },
+      {
+        "risk": "Cylinders may be damaged or corroded, posing a safety hazard.",
+        "proof": "Close-up of rust, dents, or cracks on the body and valve area of each cylinder.",
+        "if_unproven": "Priced as damaged, with reduced value for safety concerns."
+      },
+      {
+        "risk": "The '48Kg' cylinder may be a different type (e.g., LPG or industrial gas) and not suitable for domestic use.",
+        "proof": "Clear label or stamp indicating gas type and intended use.",
+        "if_unproven": "Priced as unknown use, with lower value due to uncertainty."
+      }
+    ],
+    "proof_requests": [
+      "Close-up photos of inspection dates and test stamps on each cylinder.",
+      "Close-up of valve and body condition for each cylinder, especially the rusted ones.",
+      "Clear label or stamp showing gas type and capacity for each cylinder.",
+      "Confirm if all cylinders are 25kg or if the '48Kg' one is included in the sale."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller's claim of '4 25kg cylinders' is contradicted by the photo showing five cylinders, one marked '48Kg', and none clearly labeled as 25kg. Safety and condition risks are high due to visible wear and rust. Proof is needed to verify capacity, inspection status, and condition before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 69906,
+    "input_tokens": 1775,
+    "output_tokens": 838,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "2a8998a1f60d176c62ed7cf7be430579",
+    "error": null
+  }
+}

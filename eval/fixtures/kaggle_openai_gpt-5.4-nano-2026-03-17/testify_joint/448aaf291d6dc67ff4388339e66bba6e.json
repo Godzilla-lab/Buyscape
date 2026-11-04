@@ -1,0 +1,75 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0 shows a front-load LG washing machine with a control panel and a large circular door.",
+      "On the left of the panel it reads \u201cDirectDrive 6/3kg\u201d (visible on photo 0).",
+      "A \u201cWasher+Dryer\u201d / \u201c2 in 1\u201d marking is visible on the left side of the door area (photo 0).",
+      "The seller\u2019s photo does not show the machine running, any error code, or any visible damage to the drum/door seal."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": null,
+      "brand": "LG",
+      "model": "DirectDrive 6/3kg (as shown on photo 0)",
+      "read_from": [
+        "photo 0 panel text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "LG Washing machine scrap but doesn\u2019t work and needs repair.",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows the machine but does not show it powered on, any fault/error display, or a test result."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "It may not be truly non-working (could be a minor issue), which would make the scrap/repair assumption too harsh.",
+        "proof": "A short video of the machine plugged in and attempting a wash cycle, showing any error code on the display (or confirming it won\u2019t start).",
+        "if_unproven": "Price as not working / needs repair (worst case)."
+      },
+      {
+        "risk": "\u201c2 in 1 / washer+dryer\u201d may have separate faults (wash works but dryer/heater/vent issues), affecting repair cost.",
+        "proof": "A test showing both wash and dry modes starting (or a clear statement + photo/video of the dryer heating/operation).",
+        "if_unproven": "Price as worst case: both functions may be faulty."
+      },
+      {
+        "risk": "Capacity/model mismatch risk (the photo shows DirectDrive 6/3kg, but seller text may not match the exact variant).",
+        "proof": "A photo of the rating plate/model label (rear or side) showing exact model number and serial.",
+        "if_unproven": "Price based on the visible worst-case scrap listing for an LG faulty/non-working unit."
+      },
+      {
+        "risk": "Hidden physical issues (door seal damage, drum bearing noise, water inlet/drain pump blockage) not visible in one photo.",
+        "proof": "Close-up photos of the door seal/gasket and a quick sound check when it tries to spin (video).",
+        "if_unproven": "Price as if repair may be needed for major components (worst case)."
+      }
+    ],
+    "proof_requests": [
+      "Send a video: plug-in + power on + attempt a wash cycle, showing the display/error code (if any).",
+      "Show whether dryer mode starts (since it\u2019s marked \u201c2 in 1 / washer+dryer\u201d).",
+      "Send a clear photo of the rating plate/model/serial number.",
+      "Close-up photo of the door seal/gasket and any visible leaks or cracks."
+    ],
+    "decision": "price",
+    "reason": "The photo clearly identifies an LG DirectDrive 6/3kg washer+dryer unit, but the \u201cdoesn\u2019t work/needs repair\u201d part is not proven by the photo. So it should be priced at the worst case for a faulty/non-working LG unit using the closest comparables provided.",
+    "price_pick": {
+      "low": 60,
+      "high": 70
+    }
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_joint",
+    "latency_ms": 4578,
+    "input_tokens": 3087,
+    "output_tokens": 796,
+    "cost_usd": 0.004295,
+    "replayed": false,
+    "fixture_key": "448aaf291d6dc67ff4388339e66bba6e",
+    "error": null
+  }
+}

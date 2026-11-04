@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Red LPG gas cylinder shown close-up, sitting on a patterned mat indoors.",
+      "Brand name 'AMAZE' printed in white on the cylinder body (photo 0).",
+      "A small circular certification stamp is visible below the brand name but text is too small/blurry to read.",
+      "Brass valve/regulator fitting visible on top of the cylinder.",
+      "Visible rust and paint chipping on the carrying handle and near the base.",
+      "No burner (cooker top) or 'sitter' (stand/base unit) is visible anywhere in the photo \u2014 only the cylinder itself is shown.",
+      "Image has a 'POSTED ON JIJI' watermark and uploader name overlay, not seller-applied markings on the item."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "LPG gas cylinder",
+      "brand": "AMAZE",
+      "model": null,
+      "read_from": [
+        "photo 0 cylinder body text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Clean gas cylinder",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows rust spots near the base and chipped/worn paint on the handle, not a clean/pristine finish."
+      },
+      {
+        "claim": "Comes with sitter and burner",
+        "verdict": "unverified",
+        "evidence": "Only the cylinder is visible in photo 0; no stand (sitter) or burner/cooker top is shown in any photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Burner and sitter may not actually be included, or may be in poor condition",
+        "proof": "A photo showing the cylinder together with the burner and sitter/stand, with both visible as a set",
+        "if_unproven": "priced as cylinder only, without burner or sitter"
+      },
+      {
+        "risk": "Cylinder may be past its safety recertification/expiry date (common requirement for LPG cylinders)",
+        "proof": "Close-up photo of the stamped manufacture/test date ring near the valve collar",
+        "if_unproven": "priced as expired/unverified certification, lowering resale confidence"
+      },
+      {
+        "risk": "Valve or cylinder body could be leaking or corroded internally, not detectable from a photo",
+        "proof": "A video clip showing the valve being turned and a leak/soap-bubble test, or a working regulator attached",
+        "if_unproven": "priced as not verified working, worst case treated as faulty valve"
+      },
+      {
+        "risk": "Rust at the base/handle could indicate thinning metal or structural weakness",
+        "proof": "Close-up photos of the base and handle from multiple angles under good light",
+        "if_unproven": "priced accounting for cosmetic and possible structural wear"
+      }
+    ],
+    "proof_requests": [
+      "Photo showing the burner and sitter/stand together with the cylinder",
+      "Close-up of the certification/test date stamp on the cylinder collar",
+      "Video of the valve/regulator being connected and tested for leaks",
+      "Additional photos of the cylinder base and handle in better lighting"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller claims a cylinder-plus-burner-plus-sitter set, but only the bare cylinder is shown in the single photo, and condition/certification details needed to price even a worst case are not visible."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 17490,
+    "input_tokens": 2515,
+    "output_tokens": 1646,
+    "cost_usd": 0.02149,
+    "replayed": false,
+    "fixture_key": "2d27e29d1550709efe66f502236d6345",
+    "error": null
+  }
+}

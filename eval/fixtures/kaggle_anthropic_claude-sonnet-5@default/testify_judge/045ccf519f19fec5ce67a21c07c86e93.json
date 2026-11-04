@@ -1,0 +1,82 @@
+{
+  "task": "testify_judge",
+  "prompt_version": "testify_judge.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "claims": [
+      {
+        "claim": "The brand is Canon",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 and Photo 1 clearly show 'Nikon' and 'Zfc' engraved on the top plate; the body is a Nikon Z-mount camera, not Canon."
+      },
+      {
+        "claim": "Nikon Z fc is a retro-inspired, SLR-style mirrorless camera",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows the classic retro dial-based styling consistent with the Zfc design."
+      },
+      {
+        "claim": "20.9-megapixel APS-C sensor",
+        "verdict": "unverifiable_remote",
+        "evidence": "Sensor specs cannot be confirmed from external photos; no sensor or spec label visible."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Seller misstates the brand as Canon while the photographed item is clearly a Nikon, raising doubt about whether seller actually possesses/understands the item or is running a mismatched/copy-pasted listing.",
+        "proof": "A video showing the seller holding the camera, powering it on, and reading the brand/model off the menu screen matching the physical body.",
+        "if_unproven": "treat as high fraud risk; do not price until identity mismatch is resolved"
+      },
+      {
+        "risk": "Unknown shutter count, sensor condition, and autofocus accuracy",
+        "proof": "A photo of the camera's shutter count from a diagnostic app or menu screen, plus a short video of autofocus acquiring focus on a moving subject",
+        "if_unproven": "priced as heavily used with unknown mechanical wear"
+      },
+      {
+        "risk": "Unclear whether kit lens (16-50mm) is included or only the third-party TTArtisan 35mm lens",
+        "proof": "A photo showing the Nikon kit lens box or the lens itself if claimed to be included",
+        "if_unproven": "priced as body + TTArtisan lens only, no kit lens"
+      },
+      {
+        "risk": "Battery health/cycle count unknown",
+        "proof": "A screenshot of battery info from camera menu or charger diagnostic",
+        "if_unproven": "priced as unknown/aged battery"
+      },
+      {
+        "risk": "Lens glass condition (scratches, fungus, dust) not verifiable from angles shown",
+        "proof": "Close-up photos of front and rear lens elements under backlight",
+        "if_unproven": "priced as having possible optical defects"
+      },
+      {
+        "risk": "No memory card, strap, or USB cable confirmed present",
+        "proof": "A photo laying out all included accessories with memory card/cables visible",
+        "if_unproven": "priced as body/lens/charger/battery only, no extras"
+      },
+      {
+        "risk": "Physical damage, dents, or corrosion not visible in given angles",
+        "proof": "Additional photos of bottom plate, mount flange, and sides under bright light",
+        "if_unproven": "priced as cosmetically unverified, assume moderate wear"
+      }
+    ],
+    "proof_requests": [
+      "Video of seller powering on the camera and showing the on-screen model/brand confirming it reads 'Nikon Zfc'",
+      "Photo of shutter count or diagnostic screen",
+      "Clear close-up photos of lens front/rear elements under light",
+      "Photo of all accessories laid out including any memory card, strap, or cables",
+      "Photos of camera bottom, sides, and mount for dents/corrosion"
+    ],
+    "decision": "fraud_suspected",
+    "reason": "The seller explicitly states the brand is Canon while the witnessed photos clearly and consistently show a Nikon Zfc, a core identity contradiction serious enough to suspect a mismatched or fraudulent listing before any pricing can proceed."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_judge",
+    "latency_ms": 20802,
+    "input_tokens": 1665,
+    "output_tokens": 1982,
+    "cost_usd": 0.02315,
+    "replayed": false,
+    "fixture_key": "045ccf519f19fec5ce67a21c07c86e93",
+    "error": null
+  }
+}

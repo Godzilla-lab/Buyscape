@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Retail packaging for a 'SMART' brand power bank.",
+      "The box prominently displays '54600mAh' and '150W POWER MAX'.",
+      "Small text at the bottom right of the box reads '10000mAh'.",
+      "The box shows an AC outlet, four USB ports, and two Type-C ports.",
+      "The seller's text mentions a 'lightning' input interface, which is not visible on the box front.",
+      "The actual device is not shown; only the box is visible."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "portable power station",
+      "brand": "SMART",
+      "model": "150W 54600mAh",
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "54600mAh capacity",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows '10000mAh' in smaller text at the bottom right, contradicting the large '54600mAh' label."
+      },
+      {
+        "claim": "Input interface: micro, type c, lightning",
+        "verdict": "unverified",
+        "evidence": "The box front shows micro and type-c, but lightning is not mentioned or visible."
+      },
+      {
+        "claim": "Output interface: usb, type c",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The actual capacity may be significantly lower than the primary label (10,000mAh vs 54,600mAh).",
+        "proof": "Photo of the technical specifications label printed on the device itself.",
+        "if_unproven": "as a 10,000mAh power bank"
+      },
+      {
+        "risk": "The box may be empty or contain a different item.",
+        "proof": "Photo of the actual device outside of the packaging.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The device may not be functional or provide the claimed 150W output.",
+        "proof": "Video of the device powering an AC appliance or fast-charging a laptop.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual power bank outside the box.",
+      "Clear photo of the specification/rating label on the device.",
+      "Video of the device powering an AC device to verify the 150W claim."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The packaging shows contradictory capacity ratings (54600mAh and 10000mAh), and the actual item is not pictured. Proof of the physical device and its rating plate is necessary."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 22881,
+    "input_tokens": 2385,
+    "output_tokens": 4943,
+    "cost_usd": 0.016022,
+    "replayed": false,
+    "fixture_key": "bea6cfbe70e7907e4d2527cda20d89f2",
+    "error": null
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Two large green batteries are shown in photo 0.",
+      "The brand 'Multipower' is visible on the label of the front battery.",
+      "The text 'Tubular Inverter Battery' is visible on the label.",
+      "Six water level float indicators are installed on top of each battery.",
+      "The batteries are connected with heavy-duty cables to an inverter system visible in the background.",
+      "The seller's text indicates they are a business that buys 'dead' or 'condemned' batteries."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "tubular inverter battery",
+      "brand": "Multipower",
+      "model": null,
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Buyer of dead inverter battery",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a business service claim that cannot be verified through photos of batteries."
+      },
+      {
+        "claim": "Free pick up",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a logistical offer that cannot be verified via photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Capacity (Ah rating) is unknown",
+        "proof": "A clear photo of the full side label showing the Ah rating (e.g., 200Ah, 220Ah).",
+        "if_unproven": "Priced as a 100Ah battery (lowest common size for this form factor)."
+      },
+      {
+        "risk": "Batteries may be completely dead/scrap",
+        "proof": "A video showing a multimeter reading of the terminal voltage or a load test.",
+        "if_unproven": "Priced as scrap/condemned lead-acid weight."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the full side label showing the capacity in Ah.",
+      "Video showing a multimeter reading of the voltage for each battery.",
+      "Confirmation if the price is for the pair or per unit."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The capacity (Ah) is not visible in the photos and is the primary factor for pricing, whether the batteries are working or being sold as scrap. Additionally, the seller's text suggests they are buying, not selling, which requires clarification."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 16529,
+    "input_tokens": 2400,
+    "output_tokens": 3282,
+    "cost_usd": 0.036234,
+    "replayed": false,
+    "fixture_key": "383d340eccd6a4a6169e2ec3c51c260a",
+    "error": null
+  }
+}

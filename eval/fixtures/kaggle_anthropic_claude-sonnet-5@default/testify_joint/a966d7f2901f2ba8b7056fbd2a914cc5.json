@@ -1,0 +1,95 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows a split-type air conditioner: indoor wall unit sitting stacked on top of the outdoor condenser unit, both resting on a tiled floor/balcony, not installed.",
+      "Outdoor unit has faint red marker writing and some printed text (possibly 'Inverter') but no clear, fully legible brand or model number.",
+      "Unit shows dust and grime, scuffed plastic, and no visible remote control, installation pipes, or brackets in the frame.",
+      "No close-up of compressor, wiring, nameplate, or any digital display confirming operation."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "split inverter air conditioner (indoor + outdoor unit)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 (text on outdoor unit is too faint/unclear to confirm brand or model)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Faulty inverter AC (listing title)",
+        "verdict": "unverified",
+        "evidence": "No fault symptoms or testing shown in photo 0; claim is the seller's own label."
+      },
+      {
+        "claim": "No fault at all, motor was never opened",
+        "verdict": "contradicted",
+        "evidence": "Directly contradicts the listing title 'Faulty inverter AC' in the seller's own words."
+      },
+      {
+        "claim": "Barely used, bought new last year",
+        "verdict": "unverifiable_remote",
+        "evidence": "No purchase date, usage logs, or wear comparison visible in photo 0."
+      },
+      {
+        "claim": "Receipt and warranty card available",
+        "verdict": "unverified",
+        "evidence": "No photo of receipt or warranty card provided."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Compressor or motor may not run or may be seized",
+        "proof": "Video of unit powered on with cold air blowing from indoor vent",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Refrigerant gas leak reducing cooling capacity",
+        "proof": "Technician gauge reading or clear cooling performance video",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Internal wiring, PCB or capacitor damage not visible externally",
+        "proof": "Close-up photos of control board and wiring harness",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Self-contradictory 'faulty' vs 'no fault' claim raises doubt about true condition",
+        "proof": "Seller clarification plus a live demonstration video",
+        "if_unproven": "priced at worst case (faulty)"
+      },
+      {
+        "risk": "Missing accessories (remote, mounting brackets, pipes) affecting usability",
+        "proof": "Photo of remote control and installation kit",
+        "if_unproven": "priced as incomplete/non-working set"
+      }
+    ],
+    "proof_requests": [
+      "Video of the AC powered on and blowing cold air",
+      "Close-up photo of the nameplate/model sticker on indoor and outdoor units",
+      "Photo of the receipt and warranty card mentioned",
+      "Photo of remote control and any mounting/installation accessories"
+    ],
+    "decision": "price",
+    "reason": "The item is clearly a split-type inverter AC unit, but the seller's own words contradict each other on fault status and no operational proof is shown, so it must be priced at worst case as a faulty/non-working unit.",
+    "price_pick": {
+      "low": 0,
+      "high": 1
+    }
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 32572,
+    "input_tokens": 3383,
+    "output_tokens": 2849,
+    "cost_usd": 0.031703,
+    "replayed": false,
+    "fixture_key": "a966d7f2901f2ba8b7056fbd2a914cc5",
+    "error": null
+  }
+}

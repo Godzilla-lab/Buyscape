@@ -1,0 +1,73 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Front view of a white LG washer-dryer (2-in-1) with a large circular door.",
+      "Brand text visible on the control panel: \u201cLG\u201d.",
+      "Capacity text visible near the left panel: \u201cDirectDrive 6/3kg\u201d.",
+      "Control panel appears intact; no obvious broken knobs or cracked screen visible.",
+      "No visible power-on status, error codes, or running condition shown.",
+      "Only one photo; no close-ups of model/serial plate, damage points, or inside drum."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "washer-dryer (2-in-1) front-load washing machine",
+      "brand": "LG",
+      "model": null,
+      "read_from": [
+        "photo 0 control panel (LG logo) and DirectDrive 6/3kg text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "LG Washing machine scrap but doesn\u2019t work and needs repair.",
+        "verdict": "unverified",
+        "evidence": "photo 0 shows the machine but provides no proof it is non-working (no power-on test, no error code, no visible damage)."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Whether it is truly non-working vs. just not tested (could be a simple issue like power/door latch).",
+        "proof": "A short video of the machine powered on showing any error code on the display and a failed start attempt (or successful cycle start).",
+        "if_unproven": "Priced as not working / needs repair (worst case)."
+      },
+      {
+        "risk": "Type mismatch: it may be a washer-dryer but the dryer function could be dead even if washing works.",
+        "proof": "Video showing a wash cycle starting and completing, and then a dryer-only cycle attempt (or dryer error).",
+        "if_unproven": "Priced as fully non-working for both functions (worst case)."
+      },
+      {
+        "risk": "Hidden damage (pump, heater, belt, drum bearings) not visible from the front panel.",
+        "proof": "Photos of the back panel (power cord area, drain hose connections) and a close-up of the drum interior + any leaks/water stains; plus a technician\u2019s diagnosis note if available.",
+        "if_unproven": "Priced assuming major repair may be needed."
+      },
+      {
+        "risk": "Model/age uncertainty affects parts availability and repair cost.",
+        "proof": "Clear photo of the model/serial rating plate (usually on the door frame or back) so the exact model can be identified.",
+        "if_unproven": "Priced without model-specific parts certainty."
+      }
+    ],
+    "proof_requests": [
+      "Send a video: power on + attempt to start, showing any error code/display lights.",
+      "Send a video of a wash cycle attempt (even if it fails) and confirm whether water fills and drum spins.",
+      "Send a photo of the model/serial plate (rating label) for exact identification.",
+      "Send photos of the back panel and drain/power connections to check for damage/leaks."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo confirms it\u2019s an LG DirectDrive 6/3kg 2-in-1 washer-dryer, but there\u2019s no evidence it doesn\u2019t work. Without a power-on/error or functional test, the worst-case repair pricing can\u2019t be confidently applied."
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_read",
+    "latency_ms": 5702,
+    "input_tokens": 2723,
+    "output_tokens": 762,
+    "cost_usd": 0.003542,
+    "replayed": false,
+    "fixture_key": "f06c67c283480d7e48e3a7a53aa0e856",
+    "error": null
+  }
+}

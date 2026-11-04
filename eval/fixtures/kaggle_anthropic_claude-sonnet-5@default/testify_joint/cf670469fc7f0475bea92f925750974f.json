@@ -1,0 +1,83 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Single automotive headlamp shown, wrapped in clear plastic.",
+      "Watermark text reads 'HONDA AND ACURA' overlaid on photo.",
+      "Lens appears dark/smoked with an amber-yellow strip on one edge.",
+      "No visible part number, VIN tag, or model-specific marking.",
+      "Background is a bare concrete floor, no other context."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "headlamp (car exterior light assembly)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 watermark text 'HONDA AND ACURA' (brand hint only, no model readable)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Original Toyota part, not China copy",
+        "verdict": "unverifiable_remote",
+        "evidence": "No OEM markings, part number, or Toyota logo visible in photo 0."
+      },
+      {
+        "claim": "No crack, all clips and brackets complete",
+        "verdict": "unverified",
+        "evidence": "Plastic wrap obscures mounting points and rear clips; front lens visible but rear/back not shown."
+      },
+      {
+        "claim": "Parts available for all models of Honda, Acura and Toyota",
+        "verdict": "unverifiable_remote",
+        "evidence": "Only one item photographed; no catalog or stock shot to confirm range of fitment."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Exact vehicle make/model/year this headlamp fits is unknown, and price varies drastically across Honda/Acura models",
+        "proof": "Clear shot of part number sticker or a caption stating exact model/year",
+        "if_unproven": "cannot be priced without fitment confirmation"
+      },
+      {
+        "risk": "Hidden cracks or damage under plastic wrap",
+        "proof": "Unwrapped photo showing full lens and rear housing",
+        "if_unproven": "priced as damaged/non-functional worst case"
+      },
+      {
+        "risk": "OEM vs aftermarket authenticity claim unverified",
+        "proof": "Close-up of embossed logo or OEM part number",
+        "if_unproven": "priced as non-original/aftermarket"
+      },
+      {
+        "risk": "Completeness of clips/brackets not visible due to wrap",
+        "proof": "Photo of rear side showing all mounting clips",
+        "if_unproven": "priced as incomplete/missing hardware"
+      }
+    ],
+    "proof_requests": [
+      "State and show the exact vehicle make, model, and year this headlamp fits (e.g., Honda Accord 2014, Acura TL 2009).",
+      "Photo of the part number or OEM sticker on the headlamp.",
+      "Unwrapped photo of front lens and rear housing to check for cracks or damage.",
+      "Photo showing all mounting clips/brackets intact."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The comparables range nearly 20x by exact Honda/Acura/Toyota model and year, and the single photo gives no model-identifying marks or part number, so even a worst-case price cannot be anchored without fitment confirmation.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 15425,
+    "input_tokens": 2863,
+    "output_tokens": 1347,
+    "cost_usd": 0.015643,
+    "replayed": false,
+    "fixture_key": "cf670469fc7f0475bea92f925750974f",
+    "error": null
+  }
+}

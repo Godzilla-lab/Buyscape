@@ -1,0 +1,89 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: Front view of a black DSLR body with 'Canon', 'EOS', '5D', 'Mark II' badges visible; rear lens mount shown with a body cap on, no lens attached.",
+      "Photo 1: Rear view showing LCD screen (appears blank/off, screen condition not clearly visible), control buttons, viewfinder eyecup, and 'Canon' logo below screen.",
+      "Photo 2: Bottom/side view showing a serial/model plate reading 'Canon DS126201', 'Made in Japan', and a serial number, confirming this is a 5D Mark II body (DS126201 is the Mark II's internal model code).",
+      "No lens, battery, charger, memory card, or strap visible in any photo.",
+      "No photo shows the camera powered on, a live shutter count, or a test image.",
+      "No visible major physical damage (dents, cracks) in the photos provided, but image resolution and angles are limited."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DSLR camera body",
+      "brand": "Canon",
+      "model": "EOS 5D Mark II",
+      "read_from": [
+        "photo 0 front badge",
+        "photo 2 bottom plate (DS126201)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "The Canon EOS 5D Mark II is a full-frame DSLR camera known for its 21.1-megapixel sensor",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a general description of the model line, not a claim about this specific unit's condition; photos confirm the model badge but not sensor function or megapixel count in use."
+      },
+      {
+        "claim": "Implied working camera (no explicit malfunction stated)",
+        "verdict": "unverified",
+        "evidence": "No photo shows the camera powered on, a shutter actuation, or a live preview/image; screen in photo 1 appears blank/off."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Camera may not power on or have a dead sensor/shutter",
+        "proof": "A photo or short clip of the camera powered on, showing a live view or a test shot, plus shutter count via menu screen",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "No lens included, affecting usability and total cost to buyer",
+        "proof": "Photo confirming a lens is included in the sale, or explicit seller statement that it is body-only",
+        "if_unproven": "priced as body-only with no lens value added"
+      },
+      {
+        "risk": "LCD screen condition unknown (cracks, dead pixels, scratches)",
+        "proof": "Close-up photo of the screen powered on with a test image displayed",
+        "if_unproven": "priced as if screen may be faulty"
+      },
+      {
+        "risk": "Shutter count and sensor dust/scratches unknown, critical for an aging full-frame sensor camera",
+        "proof": "Photo of shutter count from camera menu and a test photo showing sensor cleanliness",
+        "if_unproven": "priced at low end assuming high shutter count or sensor issues"
+      },
+      {
+        "risk": "No battery or charger shown, which may need separate purchase",
+        "proof": "Photo showing battery and charger included in the sale",
+        "if_unproven": "priced as accessories not included"
+      }
+    ],
+    "proof_requests": [
+      "Video or photo of the camera powered on with a live preview or test shot",
+      "Photo of the menu screen showing shutter actuation count",
+      "Clear photo confirming whether a lens, battery, and charger are included",
+      "Close-up photo of the LCD screen powered on to check for defects",
+      "Photo of the sensor (mirror up) to check for dust, scratches, or fungus"
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identified as a Canon EOS 5D Mark II body via visible badges and the model plate, but no proof of power-on function, lens inclusion, or screen/sensor condition exists, so it must be priced at worst case as a non-working, lens-less body.",
+    "price_pick": {
+      "low": 0,
+      "high": 7
+    }
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 30475,
+    "input_tokens": 4150,
+    "output_tokens": 2628,
+    "cost_usd": 0.03458,
+    "replayed": false,
+    "fixture_key": "8230d668d722b36f23d66d1332e3b0a0",
+    "error": null
+  }
+}

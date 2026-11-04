@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: a black 12V car battery lying on gravel, top label reads 'SOLITE' with model code 'CMF59015', fitting-date sticker present, terminals are bolt-type, casing is dirty with no visible cracks in this view",
+      "Photo 0 background: scrap metal, gravel pile, and what looks like another battery edge at bottom left",
+      "Photo 1: a different battery partly in a torn cardboard box, terminals visible, no brand or model text legible, sitting on gravel with a person's sandaled foot nearby for scale",
+      "Photo 1 right edge: a third battery visible, black body with red marking, text not legible",
+      "No photos show the batteries connected to a charger, multimeter, or load tester",
+      "No photos show the underside, sides, or rear of any battery for crack/leak inspection",
+      "Seller's own description labels the goods as 'scrap batteries'"
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car battery",
+      "brand": "Solite",
+      "model": "CMF59015",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Scrap batteries for sale",
+        "verdict": "unverifiable_remote",
+        "evidence": "Seller's own framing; photos show no electrical test to confirm whether units are dead, so 'scrap' is taken as the seller's own worst-case description rather than a provable fact"
+      },
+      {
+        "claim": "Implied multiple batteries included (at least the Solite unit and the boxed unit, possibly a third)",
+        "verdict": "unverified",
+        "evidence": "Photo 0 and photo 1 show what appear to be different batteries, but no single photo shows a full lineup or count"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery may be fully dead, sulfated, or internally shorted (common for items labelled 'scrap')",
+        "proof": "Clip of a multimeter or load tester reading on each terminal pair",
+        "if_unproven": "priced as non-working scrap, not as a functional battery"
+      },
+      {
+        "risk": "Case could be cracked, leaking, or missing acid, which is invisible from the top-down angle shown",
+        "proof": "Photos of each battery's sides, bottom, and terminal area close-up",
+        "if_unproven": "priced as scrap/for-parts condition"
+      },
+      {
+        "risk": "Actual number of batteries included in the sale is unclear across the two photos",
+        "proof": "A single photo showing all units together with a count",
+        "if_unproven": "priced per single unit only, the one in photo 0, unless seller confirms others are included"
+      },
+      {
+        "risk": "Model/capacity sticker (CMF59015, 12V) could be mismatched or swapped from a different unit, common in scrap lots",
+        "proof": "Clear, unobstructed close-up of the full label including CCA/Ah rating",
+        "if_unproven": "priced using the visible label as unverified, worst case being a generic small-capacity battery"
+      }
+    ],
+    "proof_requests": [
+      "A load-test or multimeter reading clip for each battery offered",
+      "Close-up photos of the sides and bottom of every battery for crack/leak/corrosion check",
+      "One photo showing all batteries included in the lot together, counted",
+      "A clearer, unobstructed shot of the Solite label's Ah/CCA rating"
+    ],
+    "decision": "price",
+    "reason": "The items are identifiable as a lead-acid car battery (one named: Solite CMF59015, others by type only) explicitly sold as scrap, so they can be priced at worst case as non-working scrap pending any proof of function or condition."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 20836,
+    "input_tokens": 3214,
+    "output_tokens": 1746,
+    "cost_usd": 0.020729,
+    "replayed": false,
+    "fixture_key": "bf89f93aedc708583fb5ba5eadcf6d59",
+    "error": null
+  }
+}

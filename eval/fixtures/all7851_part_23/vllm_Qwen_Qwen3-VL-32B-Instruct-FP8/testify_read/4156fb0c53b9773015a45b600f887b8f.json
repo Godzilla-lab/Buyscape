@@ -1,0 +1,86 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the back of a white iPhone with a sticker labeled 'Apple iPhone 13 128GB', grade A, carrier 'Unlocked', status 'Fully Passed (A)'.",
+      "Photo 0 also shows a red sticker with '128 GB' and a yellow sticker with '60'.",
+      "Photo 1 shows the front of the iPhone with the screen on, displaying a brightness adjustment slider and a watermark 'POSTED ON JIJI ASHIEGBU'.",
+      "Photo 2 shows the 'Battery Health & Charging' screen with 'Maximum Capacity: 100%' and 'Peak Performance Capability' section visible. The screen also shows 'Optimized Battery Charging' and 'ClearEnergy Charging' toggled on.",
+      "All photos show the same hand holding the phone, with a black wristband visible."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "iPhone 13",
+      "brand": "Apple",
+      "model": "iPhone 13",
+      "read_from": [
+        "photo 0 sticker"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "IPHONE 13",
+        "verdict": "supported",
+        "evidence": "Photo 0 sticker clearly reads 'Apple iPhone 13 128GB'."
+      },
+      {
+        "claim": "Face ID and Trutone active",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows Face ID in use or True Tone settings. The screen in photo 1 shows brightness adjustment, which may relate to True Tone, but not proof."
+      },
+      {
+        "claim": "128gb",
+        "verdict": "supported",
+        "evidence": "Photo 0 sticker states '128GB', and a red sticker also says '128 GB'."
+      },
+      {
+        "claim": "battery health solid",
+        "verdict": "supported",
+        "evidence": "Photo 2 shows 'Maximum Capacity: 100%' under Battery Health & Charging, indicating full battery health."
+      },
+      {
+        "claim": "No parts replaced, everything...",
+        "verdict": "unverified",
+        "evidence": "No visual evidence of internal components or repair history. The claim cannot be confirmed from photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The phone may have been repaired or have non-original parts despite the claim of no replacements.",
+        "proof": "A photo of the phone's internal components or a diagnostic report showing no repairs.",
+        "if_unproven": "Priced as potentially having replaced parts, which reduces value."
+      },
+      {
+        "risk": "The phone may be a counterfeit or rebranded device despite the sticker.",
+        "proof": "A photo of the phone's serial number and verification via Apple's official website or a video showing the phone's settings and activation lock status.",
+        "if_unproven": "Priced as potentially counterfeit, which significantly reduces value."
+      },
+      {
+        "risk": "The battery health may be falsified or manipulated (e.g., battery replaced or software trick).",
+        "proof": "A video showing the battery health screen being accessed from the settings menu, or a diagnostic tool report.",
+        "if_unproven": "Priced as battery health unverified, which may reduce value if not 100% genuine."
+      }
+    ],
+    "proof_requests": [
+      "Video showing the phone's settings menu and battery health screen being accessed live.",
+      "Photo of the phone's serial number and verification via Apple's official website.",
+      "Photo or video of the phone's internal components to verify no repairs."
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as an iPhone 13 128GB with 100% battery health as shown in photo 2. The claim of no parts replaced is unverified, and there is a risk of counterfeit or repaired device, but the photos support the core identity and battery health. The item can be priced at its worst case (with unverified repair history and potential counterfeit risk)."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 70652,
+    "input_tokens": 2545,
+    "output_tokens": 912,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "4156fb0c53b9773015a45b600f887b8f",
+    "error": null
+  }
+}

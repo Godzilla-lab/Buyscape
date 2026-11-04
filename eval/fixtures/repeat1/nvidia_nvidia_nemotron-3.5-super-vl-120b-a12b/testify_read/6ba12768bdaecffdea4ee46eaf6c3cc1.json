@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a stainless steel freestanding cooker with four gas burners on grates, two electric hotplates in the center, a raised glass splashback, and control knobs on the front right.",
+      "Photo 1 shows the same cooker with four gas burners lit with blue flames; the electric hotplates are off and the splashback is raised.",
+      "Photo 2 shows the same cooker with the glass lid closed flat, a row of control knobs along the front panel, and an oven door with a glass window below."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "freestanding cooker with 4 gas burners and 2 electric hotplates",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "4 gas burners and 2 burners making 6 burners in total",
+        "verdict": "supported",
+        "evidence": "photo 0 shows four gas burners and two electric hotplates"
+      },
+      {
+        "claim": "All working perfectly",
+        "verdict": "unverified",
+        "evidence": "photo 1 shows gas burners lit, but the oven and electric hotplates are not shown operating"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Oven does not heat or thermostat is faulty",
+        "proof": "video of the oven turned on and reaching temperature",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Two electric hotplates do not heat",
+        "proof": "video of each electric hotplate switched on and heating",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Gas burners have ignition or gas supply faults not visible in still photos",
+        "proof": "video of each gas burner igniting individually and holding a steady flame",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Control knobs or gas valves are stiff, broken, or leaking",
+        "proof": "close-up video of knobs turning and gas connections",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Video of the oven heating up",
+      "Video of both electric hotplates switching on and heating",
+      "Video of each gas burner igniting individually"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a 4-gas-plus-2-electric freestanding cooker, and the unproven \"works perfectly\" claim can be priced at worst case without needing more photos."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 77859,
+    "input_tokens": 2692,
+    "output_tokens": 2212,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "6ba12768bdaecffdea4ee46eaf6c3cc1",
+    "error": null
+  }
+}

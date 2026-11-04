@@ -1,0 +1,88 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black DSLR camera with \"Nikon\" clearly printed on the front above the lens mount",
+      "A lens is mounted on the camera body",
+      "A second lens or lens cap sits to the left of the camera",
+      "A camera strap is attached to the eyelets",
+      "The camera rests on a black circular table",
+      "A watermark \"POSTED BY SAMUEL\" appears across the image",
+      "No model number is legible on the camera body or lens in this photo"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "DSLR camera",
+      "brand": "Nikon",
+      "model": null,
+      "read_from": [
+        "photo 0 front branding"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "The brand is Canon",
+        "verdict": "contradicted",
+        "evidence": "photo 0 shows Nikon branding on camera body and lens cap"
+      },
+      {
+        "claim": "It has 2 lens 18-55mm and 50mm",
+        "verdict": "unverified",
+        "evidence": "only one mounted lens visible; second lens markings not readable"
+      },
+      {
+        "claim": "Clean",
+        "verdict": "unverified",
+        "evidence": "exterior appears tidy but sensor, mirror, and internals cannot be checked from photos"
+      },
+      {
+        "claim": "good to shoot videos and snapshots",
+        "verdict": "unverifiable_remote",
+        "evidence": "camera functions cannot be tested remotely from still photos"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Camera body may not power on, focus, or take photos",
+        "proof": "video of camera turning on, navigating menu, releasing shutter, and showing a captured image",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Mounted lens may have autofocus, aperture, or optical faults",
+        "proof": "video of lens focusing and sample photos taken through it",
+        "if_unproven": "as lens not working"
+      },
+      {
+        "risk": "Second lens may be missing, wrong focal length, or faulty",
+        "proof": "clear photo of both lenses with focal length markings visible",
+        "if_unproven": "as one lens only"
+      },
+      {
+        "risk": "Video recording may not function",
+        "proof": "short video clip recorded by the camera itself",
+        "if_unproven": "as stills camera only"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the camera model number on the front or top plate",
+      "Photo of both lenses side by side with focal length text visible",
+      "Video of the camera powering on, taking a photo, and playing it back"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is visibly a Nikon DSLR, but the model number is not readable in the photo and the model sets the resale price."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 29438,
+    "input_tokens": 1636,
+    "output_tokens": 3788,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "d9331317624cab49fcf1980a1e70a3a9",
+    "error": null
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Three photos show a used car engine on a concrete floor, likely in a workshop or yard.",
+      "The engine has a silver aluminum cover with 'HONDA' embossed in reverse (appears as 'AONOH' when viewed directly).",
+      "The engine is dirty, with visible grime, oil stains, and some rust on metal parts.",
+      "Various hoses, belts, and electrical connectors are attached or partially disconnected.",
+      "A blue bottle with 'WPD' label is visible in the background of photo 0 and photo 1.",
+      "The watermark 'HENRY CAR POSTED ON Jiji' is present on all photos.",
+      "No visible model number or engine code on the visible surfaces.",
+      "The engine appears to be a VTEC or similar Honda design, based on the shape and components."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car engine",
+      "brand": "Honda",
+      "model": null,
+      "read_from": [
+        "photo 0 cover",
+        "photo 1 cover",
+        "photo 2 cover"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "It is a Honda engine.",
+        "verdict": "supported",
+        "evidence": "The 'HONDA' logo is visible in reverse on the engine cover in all three photos."
+      },
+      {
+        "claim": "It is a working engine.",
+        "verdict": "unverified",
+        "evidence": "No test video or proof of operation is provided. The engine appears dismantled and dirty, but no signs of damage are visible."
+      },
+      {
+        "claim": "It is from a specific car model (e.g., Civic, Accord).",
+        "verdict": "unverifiable_remote",
+        "evidence": "No model-specific markings, VIN, or engine code are visible in the photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine may be damaged internally (e.g., blown head gasket, cracked block, worn bearings).",
+        "proof": "A video showing the engine running smoothly, or a compression test report.",
+        "if_unproven": "priced as not working or severely damaged"
+      },
+      {
+        "risk": "Engine may have been salvaged from a wrecked or stolen vehicle.",
+        "proof": "Proof of origin, such as a vehicle registration or salvage certificate.",
+        "if_unproven": "priced as high-risk, with potential legal or mechanical issues"
+      },
+      {
+        "risk": "Engine may be incompatible with the buyer's vehicle.",
+        "proof": "Engine code or VIN stamp visible in a close-up photo, or a matching vehicle model confirmation.",
+        "if_unproven": "priced as generic Honda engine, with lower value due to uncertainty"
+      }
+    ],
+    "proof_requests": [
+      "A close-up photo of the engine code or VIN stamp.",
+      "A video of the engine running and idling smoothly.",
+      "Proof of origin or vehicle history (if available)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The engine is identifiable as Honda, but the model and condition are unverified. Without proof of operation and origin, it cannot be priced accurately. The risks of internal damage or incompatibility are significant and must be resolved before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 62849,
+    "input_tokens": 2167,
+    "output_tokens": 728,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "fc4ba442eba95c1465c0499e13ab84e0",
+    "error": null
+  }
+}

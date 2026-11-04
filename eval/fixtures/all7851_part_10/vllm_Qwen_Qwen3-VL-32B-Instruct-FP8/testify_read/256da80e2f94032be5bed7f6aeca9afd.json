@@ -1,0 +1,87 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Open laptop showing a gaming wallpaper with 'ALIENWARE' logo below the screen, backlit keyboard, pink-trimmed touchpad, and an Intel sticker on the palm rest. Screen displays Windows desktop with taskbar.",
+      "Photo 1: Closed laptop lid with blue Alienware logo and embossed 'M16' text. Surface shows minor scuffs and fingerprints. Hinge area visible.",
+      "Photo 2: Windows Task Manager open, showing 16.0 GB total RAM, 7.4/15.5 GB used. CPU listed as '1.67 GHz' with 5% usage. GPU 0 listed as 'NVIDIA GeForce RTX' with 41\u00b0C temp. GPU 1 listed as 'Intel(R) Arc(TM) Graphics'. Disk 0 is NVMe SSD. Form factor: SODIMM. Memory slots used: 2 of 2.",
+      "All photos have 'DOLF TECHNOLOGIES' watermark and 'POSTED ON JIJI' text."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "gaming laptop",
+      "brand": "Dell Alienware",
+      "model": "m16 R2",
+      "read_from": [
+        "photo 1 lid: 'M16' embossed",
+        "photo 0: 'ALIENWARE' logo below screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Dell Alienware m16 R2 Gaming Laptop",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows 'M16' embossed on lid and photo 0 shows 'ALIENWARE' logo below screen."
+      },
+      {
+        "claim": "16\" QHD 240Hz Display",
+        "verdict": "unverifiable_remote",
+        "evidence": "Screen resolution and refresh rate not visible in photos. No display settings or specs shown."
+      },
+      {
+        "claim": "Core Ultra 7-155H",
+        "verdict": "unverified",
+        "evidence": "Photo 2 shows CPU running at 1.67 GHz, but model name not visible. Cannot confirm 'Core Ultra 7-155H' from Task Manager."
+      },
+      {
+        "claim": "8GB NVIDIA GeForce...",
+        "verdict": "contradicted",
+        "evidence": "Photo 2 shows 'NVIDIA GeForce RTX' with 41\u00b0C temp, but no memory size listed. Task Manager does not show VRAM. '8GB' is not confirmed; likely a misstatement or incomplete claim."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "CPU model not confirmed; could be a different or lower-tier processor than claimed.",
+        "proof": "Photo of System Information or CPU-Z showing exact CPU model.",
+        "if_unproven": "Priced as lower-tier CPU, reducing value."
+      },
+      {
+        "risk": "GPU VRAM not visible; '8GB' claim unverified. Could be 6GB or 12GB RTX model.",
+        "proof": "Photo of GPU properties or GPU-Z showing exact VRAM size.",
+        "if_unproven": "Priced as 6GB VRAM model, reducing value."
+      },
+      {
+        "risk": "Display resolution and refresh rate not confirmed; could be FHD 144Hz instead of QHD 240Hz.",
+        "proof": "Photo of display settings or screen resolution/refresh rate in Windows settings.",
+        "if_unproven": "Priced as lower-tier display, reducing value."
+      },
+      {
+        "risk": "Physical damage or wear not fully shown; scuffs on lid, possible scratches on screen or keyboard.",
+        "proof": "Close-up photos of screen, keyboard, hinges, and all edges for damage.",
+        "if_unproven": "Priced as having moderate wear, reducing value."
+      }
+    ],
+    "proof_requests": [
+      "Photo of System Information or CPU-Z showing exact CPU model.",
+      "Photo of GPU-Z or GPU properties showing VRAM size.",
+      "Photo of display settings showing resolution and refresh rate.",
+      "Close-up photos of screen, keyboard, hinges, and all edges for damage."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identified as Alienware m16 R2, but key specs like CPU model, GPU VRAM, and display settings are unverified. Without proof, the item cannot be priced accurately and risks being misvalued. Physical condition also needs closer inspection."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 82016,
+    "input_tokens": 2804,
+    "output_tokens": 1011,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "256da80e2f94032be5bed7f6aeca9afd",
+    "error": null
+  }
+}

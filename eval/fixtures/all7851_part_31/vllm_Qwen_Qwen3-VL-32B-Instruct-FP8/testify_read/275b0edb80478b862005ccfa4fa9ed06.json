@@ -1,0 +1,92 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Front view of a black smartphone with a reflective screen showing a patterned reflection; no visible brand or model text.",
+      "Photo 1: Back view of a silver smartphone with a triple-camera module in a square bump, Apple logo centered; design matches iPhone 11 Pro Max.",
+      "Photo 2: Screen shows 'Parts & Service' section with 'SERVICE HISTORY' listing 'Battery: Unknown' and 'Display: Unknown'; status bar shows time 7:01, LTE signal, and battery icon.",
+      "All photos have watermark 'POSTED ON JIJI IRABOR JAMEZ'."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "iPhone 11 Pro Max",
+      "brand": "Apple",
+      "model": "iPhone 11 Pro Max",
+      "read_from": [
+        "photo 1 back design (triple camera, square bump, Apple logo)",
+        "photo 2 screen text 'Parts & Service' and 'iPhone' in context"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "iPhone 11 Pro Max",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows the triple-camera module and Apple logo consistent with iPhone 11 Pro Max; photo 2 shows 'iPhone' in the service history screen."
+      },
+      {
+        "claim": "Face ID active",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows Face ID in use or settings; screen is off in photo 0, and photo 2 shows service history, not Face ID status."
+      },
+      {
+        "claim": "Change screen",
+        "verdict": "unverified",
+        "evidence": "Photo 2 shows 'Display: Unknown' in service history, which may indicate a replacement, but no visual proof of damage or replacement parts."
+      },
+      {
+        "claim": "Change battery",
+        "verdict": "unverified",
+        "evidence": "Photo 2 shows 'Battery: Unknown' in service history, which may indicate a replacement, but no visual proof of damage or replacement parts."
+      },
+      {
+        "claim": "The battery is really strong...",
+        "verdict": "unverifiable_remote",
+        "evidence": "No battery health percentage or performance test shown; 'Unknown' status in service history does not confirm strength."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery may be non-original or degraded despite 'strong' claim",
+        "proof": "Photo of Settings > Battery > Battery Health showing percentage and 'Peak Performance Capability'",
+        "if_unproven": "priced as degraded battery (lower value)"
+      },
+      {
+        "risk": "Screen replacement may be non-original or damaged",
+        "proof": "Close-up photo of screen edges and touch responsiveness test video",
+        "if_unproven": "priced as non-original or damaged screen (lower value)"
+      },
+      {
+        "risk": "Device may be iCloud locked or have activation lock",
+        "proof": "Photo of Settings > General > About > Name and serial number, and proof of iCloud sign-out",
+        "if_unproven": "priced as potentially locked (lower value)"
+      },
+      {
+        "risk": "Face ID may not be functional despite claim",
+        "proof": "Video of Face ID unlocking the phone in different lighting conditions",
+        "if_unproven": "priced as Face ID not working (lower value)"
+      }
+    ],
+    "proof_requests": [
+      "Photo of Settings > Battery > Battery Health showing percentage and status.",
+      "Video of Face ID unlocking the phone.",
+      "Photo of Settings > General > About > Name and serial number, and proof of iCloud sign-out.",
+      "Close-up photo of screen edges and touch responsiveness test."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The device appears to be an iPhone 11 Pro Max based on design and screen content, but critical claims (Face ID, battery strength, screen/battery replacements) are unverified or unverifiable from current photos. Hidden risks like battery health, screen quality, and iCloud lock affect pricing and must be proven before valuation."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 73602,
+    "input_tokens": 2790,
+    "output_tokens": 916,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "275b0edb80478b862005ccfa4fa9ed06",
+    "error": null
+  }
+}

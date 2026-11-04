@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r5",
+  "response": {
+    "observations": [
+      "Silver LG DirectDrive 6/3kg washer/dryer front-loading model.",
+      "Control panel features a central rotary dial, digital display, and multiple buttons.",
+      "A red sticker on the left side reads 'Washer+Dryer 2in1'.",
+      "The door is open, showing a red garment inside, but the interior is not fully visible.",
+      "The machine is plugged in, as indicated by the power indicator lights on the control panel.",
+      "The unit shows some surface wear and dirt on the front panel."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "front-loading washer/dryer",
+      "brand": "LG",
+      "read_from": [
+        "photo 0 logo"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "LG Washing machine",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "scrap",
+        "verdict": "unverifiable_remote",
+        "evidence": "The item is shown in a used condition, but its functional state cannot be confirmed remotely."
+      },
+      {
+        "claim": "doesn\u2019t work",
+        "verdict": "unverified",
+        "evidence": "The photo shows the unit powered on, but the internal motor and pump are not visible to confirm operation."
+      },
+      {
+        "claim": "needs repair",
+        "verdict": "unverifiable_remote",
+        "evidence": "The mechanical and electrical condition of the internal components cannot be assessed from a single external photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The internal motor may be seized or non-functional.",
+        "proof": "A video showing the machine running through its full wash and dry cycles.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The internal drum may be leaking or leaking water.",
+        "proof": "A video showing the machine completing a full wash cycle without leaks.",
+        "if_unproven": "as leaking"
+      },
+      {
+        "risk": "The internal drum may be damaged or have a broken pump.",
+        "proof": "A video showing the machine completing a full wash cycle without mechanical failure.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of any label, sticker or metal plate showing the brand and model.",
+      "Video of the machine running through a full wash and dry cycle.",
+      "Photo of the interior of the drum to check for leaks or damage."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "What the item is shows, but not the model that sets its price: no photo shows it clearly enough to read. The shot asked for first would settle it."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r5",
+    "task": "testify_read",
+    "latency_ms": 2662,
+    "input_tokens": 2480,
+    "output_tokens": 467,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "78b40d1b0af2680badd4cf3bec653b58",
+    "error": null
+  }
+}

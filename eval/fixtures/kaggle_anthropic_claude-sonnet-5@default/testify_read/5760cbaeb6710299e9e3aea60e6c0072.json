@@ -1,0 +1,107 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows a collection of used automotive parts leaning against an exterior wall: two CV/axle (drive) shafts with visible boots, one boot appears split or deformed, a steering rack/gear assembly, a starter motor sitting on the ground, and a radiator/AC condenser leaning against the wall.",
+      "A brake caliper is also visible on the ground, not mentioned in the seller's list.",
+      "Parts show surface rust, dirt, and grime on housings and shafts, not a 'clean' uniform look.",
+      "No brand names, part numbers, or vehicle identification plates are legible in the photo.",
+      "No scale, weighing device, or any weight-verification evidence is shown in the photo."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "scrap car parts lot (2 drive shafts, steering rack, radiator/condenser, starter motor)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Two Drive Shafts (Axle Shafts)",
+        "verdict": "supported",
+        "evidence": "photo 0 shows two shaft assemblies with CV boots"
+      },
+      {
+        "claim": "A Steering Rack (or Steering Gear)",
+        "verdict": "supported",
+        "evidence": "photo 0 shows a rack-and-pinion style assembly mounted at top"
+      },
+      {
+        "claim": "A Radiator (or Condenser)",
+        "verdict": "supported",
+        "evidence": "photo 0 shows a finned heat-exchanger unit leaning against the wall; style is more consistent with an AC condenser than a radiator"
+      },
+      {
+        "claim": "A Starter Motor",
+        "verdict": "supported",
+        "evidence": "photo 0 shows a cylindrical motor unit with solenoid on the ground"
+      },
+      {
+        "claim": "Everything is clean, dry and sorted, no water added",
+        "verdict": "contradicted",
+        "evidence": "photo 0 shows visible rust, dirt and grime on multiple parts; 'no water added' is scrap-metal-weight language irrelevant to these solid parts and raises doubt about copied/boilerplate wording"
+      },
+      {
+        "claim": "Weighed at 500 kg on a certified scale this morning",
+        "verdict": "unverifiable_remote",
+        "evidence": "no scale or weighing scene shown in the photo"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Starter motor may not crank/engage (common failure point in scrap units)",
+        "proof": "video of starter spinning a flywheel or bench-test with battery clamps",
+        "if_unproven": "priced as non-working, scrap/parts value only"
+      },
+      {
+        "risk": "Steering rack may have internal wear, leaks, or bent housing",
+        "proof": "video of rack being moved end-to-end with no fluid leakage, plus close-up of boots and rack teeth",
+        "if_unproven": "priced as non-functional, for-parts/rebuild-core value"
+      },
+      {
+        "risk": "Radiator/condenser may be punctured or leaking (fins look slightly disturbed in one corner)",
+        "proof": "pressure/water test video or clear shot of all fins and tank seams without dents",
+        "if_unproven": "priced as leaking/scrap-core value"
+      },
+      {
+        "risk": "One CV boot appears split or deformed, suggesting possible contaminated/worn CV joint",
+        "proof": "close-up photo of each boot and joint, flexed by hand",
+        "if_unproven": "priced as worn/damaged joint"
+      },
+      {
+        "risk": "Claimed 500 kg weight cannot be confirmed and affects scrap-metal value",
+        "proof": "photo of parts on a scale showing the readout",
+        "if_unproven": "priced using visually estimated weight for a lot of this size, not the claimed figure"
+      },
+      {
+        "risk": "Vehicle make/model these parts came from is unknown, affecting whether they can be sold as usable spares vs scrap only",
+        "proof": "photo of any part number, casting mark, or the donor vehicle",
+        "if_unproven": "priced as unidentified generic parts, recycling/scrap tier only"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photos of any stamped part numbers on the steering rack, starter motor, and condenser/radiator",
+      "Video of the starter motor being bench-tested with a battery",
+      "Photo of the parts actually on the certified scale showing the weight reading",
+      "Close-up of each CV boot and joint, and of the radiator/condenser fins and end tanks for dents or leaks"
+    ],
+    "decision": "price",
+    "reason": "The items are identifiable only by type as a mixed lot of used/scrap car parts with no verifiable brand, model, working condition, or confirmed weight, so they must be priced at worst case (non-working, unverified weight, scrap/parts tier) pending the listed proofs."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 26820,
+    "input_tokens": 3586,
+    "output_tokens": 2326,
+    "cost_usd": 0.027273,
+    "replayed": false,
+    "fixture_key": "5760cbaeb6710299e9e3aea60e6c0072",
+    "error": null
+  }
+}

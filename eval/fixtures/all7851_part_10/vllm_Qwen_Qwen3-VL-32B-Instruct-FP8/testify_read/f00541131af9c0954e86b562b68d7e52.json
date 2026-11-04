@@ -1,0 +1,97 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: A copper-colored smartphone with a triple-camera module and a small sensor on the back. A sticker reads '17PM 256'. The phone is held in a hand, with a glass display case and other phones in the background.",
+      "Photo 1: Front view of the same phone showing a lock screen with time '5:00', date 'Wed Oct 28', and a dynamic wallpaper. The notch is visible, and the screen appears to be on.",
+      "Photo 2: Screen shows 'Battery Health' settings: Maximum Capacity 100%, Cycle Count 165, Manufacture Date June 2023, First Use September 2025. The 'First Use' date is in the future, which is impossible."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "smartphone",
+      "brand": "Apple",
+      "model": null,
+      "read_from": [
+        "photo 0: triple-camera module and design",
+        "photo 1: notch and iOS interface",
+        "photo 2: Battery Health screen with iOS UI"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Apple iPhone 17 Pro Max 256GB",
+        "verdict": "unverified",
+        "evidence": "No visible model name or number on the device. The sticker '17PM 256' may imply iPhone 17 Pro Max 256GB, but this is not confirmed by any official label or screen. The design resembles iPhone 15 Pro Max, not iPhone 17 (which does not exist as of 2024)."
+      },
+      {
+        "claim": "UK Used",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible IMEI, serial number, or regional settings to confirm origin. The photos do not show any UK-specific identifiers."
+      },
+      {
+        "claim": "Clean & Premium",
+        "verdict": "unverified",
+        "evidence": "No close-up shots of the screen, edges, or ports to verify condition. The back appears clean, but scratches or damage are not visible."
+      },
+      {
+        "claim": "Battery Health: Normal, 100% Maximum Capacity",
+        "verdict": "supported",
+        "evidence": "Photo 2 clearly shows 'Battery Health: Normal' and 'Maximum Capacity: 100%'."
+      },
+      {
+        "claim": "Manufacture Date: June 2023",
+        "verdict": "supported",
+        "evidence": "Photo 2 shows 'Manufacture Date: June 2023'."
+      },
+      {
+        "claim": "First Use: September 2025",
+        "verdict": "contradicted",
+        "evidence": "Photo 2 shows 'First Use: September 2025', which is in the future. This is impossible and indicates a fake or manipulated screenshot."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Fake or manipulated screenshot showing 'First Use: September 2025'",
+        "proof": "A video or live screenshot showing the settings menu with correct date and time, or a photo of the phone's serial number and IMEI.",
+        "if_unproven": "Priced as potentially fake or tampered, which would reduce value significantly."
+      },
+      {
+        "risk": "Incorrect model claim (iPhone 17 Pro Max does not exist)",
+        "proof": "A photo of the phone's settings > General > About, showing the actual model name and number.",
+        "if_unproven": "Priced as an unknown or possibly counterfeit device, which would lower value."
+      },
+      {
+        "risk": "Hidden physical damage or screen issues",
+        "proof": "Close-up photos of the screen, edges, ports, and camera lenses under bright light.",
+        "if_unproven": "Priced as potentially damaged, which would reduce value."
+      },
+      {
+        "risk": "Unlocked status or carrier lock",
+        "proof": "A photo of the phone's settings > General > About > Carrier or a screenshot of the SIM tray and network settings.",
+        "if_unproven": "Priced as possibly locked, which reduces value for buyers in Nigeria."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the phone's settings > General > About, showing the actual model name and number.",
+      "Video or live screenshot of the settings menu with correct date and time.",
+      "Close-up photos of the screen, edges, ports, and camera lenses under bright light.",
+      "Photo of the SIM tray and network settings to confirm unlocked status."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The 'First Use: September 2025' is impossible and suggests a fake screenshot. The model claim 'iPhone 17 Pro Max' is unverified and likely incorrect. Without proof of the actual model, condition, and authenticity, a reliable price cannot be determined."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 72791,
+    "input_tokens": 2790,
+    "output_tokens": 1105,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "f00541131af9c0954e86b562b68d7e52",
+    "error": null
+  }
+}

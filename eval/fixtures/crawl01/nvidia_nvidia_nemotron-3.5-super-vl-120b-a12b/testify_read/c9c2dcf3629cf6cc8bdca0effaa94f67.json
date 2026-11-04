@@ -1,0 +1,110 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows the back of a dark gray Samsung smartphone with a vertical quad-camera array; \"SAMSUNG\" is printed near the bottom edge.",
+      "Photo 1 shows the same phone held inside a shop with a \"SEADOT GROUP\" sign; a box in the background reads \"Galaxy S24 Ultra 5G\" but is not attached to the phone.",
+      "No screen, IMEI, settings, SIM tray, warranty card, or charging test is visible in either photo."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "smartphone",
+      "brand": "Samsung",
+      "model": null,
+      "read_from": [
+        "photo 0 back"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Brand is Samsung",
+        "verdict": "supported",
+        "evidence": "photo 0 back reads SAMSUNG"
+      },
+      {
+        "claim": "Model is Galaxy S24 Ultra",
+        "verdict": "unverified",
+        "evidence": "not readable on the phone; background box in photo 1 is not the item"
+      },
+      {
+        "claim": "12GB RAM and 256GB storage",
+        "verdict": "unverifiable_remote",
+        "evidence": "no settings screenshot shown"
+      },
+      {
+        "claim": "Dual sim",
+        "verdict": "unverifiable_remote",
+        "evidence": "no SIM tray or network settings shown"
+      },
+      {
+        "claim": "UK variant",
+        "verdict": "unverifiable_remote",
+        "evidence": "no regional marking or paperwork shown"
+      },
+      {
+        "claim": "Active warranty",
+        "verdict": "unverifiable_remote",
+        "evidence": "no warranty card or receipt shown"
+      },
+      {
+        "claim": "Mint condition",
+        "verdict": "unverified",
+        "evidence": "photos show only the back; no functional test"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Phone does not power on or function",
+        "proof": "video of boot, unlock, touchscreen, and cameras",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Model is not Galaxy S24 Ultra",
+        "proof": "photo of Settings > About Phone or box label matching the phone's IMEI",
+        "if_unproven": "as a generic used Samsung smartphone"
+      },
+      {
+        "risk": "Storage or RAM is not 12GB/256GB",
+        "proof": "screenshot of storage and memory settings",
+        "if_unproven": "as lower or unknown specification"
+      },
+      {
+        "risk": "Not UK dual sim or carrier locked",
+        "proof": "photo of SIM tray or network operator settings",
+        "if_unproven": "as single sim or non-UK locked unit"
+      },
+      {
+        "risk": "Warranty is not active",
+        "proof": "warranty card or proof of purchase",
+        "if_unproven": "as no warranty"
+      },
+      {
+        "risk": "IMEI blacklisted or Find My Mobile active",
+        "proof": "IMEI check screenshot showing clean status",
+        "if_unproven": "as blocked or locked"
+      }
+    ],
+    "proof_requests": [
+      "Photo of Settings > About Phone showing model number, storage, and RAM",
+      "Video of the phone powering on, unlocking, and operating the cameras",
+      "Photo of warranty card or original purchase receipt",
+      "Screenshot of IMEI and network/SIM status"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is visibly a Samsung smartphone, but the exact model that sets the price is not readable on the device, and no functional or warranty proof is provided."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 49386,
+    "input_tokens": 2386,
+    "output_tokens": 4619,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "c9c2dcf3629cf6cc8bdca0effaa94f67",
+    "error": null
+  }
+}

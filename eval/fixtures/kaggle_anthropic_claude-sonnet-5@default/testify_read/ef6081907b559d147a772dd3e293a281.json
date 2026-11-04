@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows a blue plastic container with a lid and side carry grooves, resembling a bin or small drum with handle tabs.",
+      "Photo 1 shows two larger blue barrel-style drums without visible lids, standing side by side, with some yellow printed text and a faded label on one of them.",
+      "The drum in photo 1 has visible staining, discoloration and a small rusted metal tag near the top, suggesting prior use.",
+      "Text on the drum in photo 1 is partially visible but too small and blurred to read any brand, capacity or content details.",
+      "The two photos appear to show different items (a lidded bin vs. tall open drums), raising doubt about which item is actually for sale."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "plastic storage drum (barrel)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0",
+        "photo 1"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "A neat drum for sale",
+        "verdict": "contradicted",
+        "evidence": "Photo 1 shows staining, discoloration and a rusted tag, indicating wear rather than 'neat' condition."
+      },
+      {
+        "claim": "Available in blue",
+        "verdict": "supported",
+        "evidence": "Both photo 0 and photo 1 show blue plastic containers."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Mismatch between the two photos (lidded bin vs. open barrel) may mean the buyer receives a different item than expected.",
+        "proof": "A single clear photo of the exact item being sold, showing both its lid (or lack of one) and full body.",
+        "if_unproven": "priced as the lower-value, ambiguous-identity item (plain drum, no lid confirmed)"
+      },
+      {
+        "risk": "Unreadable label text on the drum could indicate prior chemical or industrial use, affecting safety and resale value.",
+        "proof": "A close-up photo of the label/text area in good lighting.",
+        "if_unproven": "priced as an unknown-origin used industrial drum, not food-grade"
+      },
+      {
+        "risk": "No lid visible in photo 1, so leak-proof or sealed status cannot be confirmed.",
+        "proof": "Photo showing the drum's top opening or lid in place.",
+        "if_unproven": "priced as open-top drum without lid"
+      },
+      {
+        "risk": "Structural condition (cracks, dents, base wear) not fully visible.",
+        "proof": "Photos from multiple angles including the base.",
+        "if_unproven": "priced as used with cosmetic and possible structural wear"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the exact drum being sold, including its lid status.",
+      "Close-up of any printed label or text for content/brand verification.",
+      "Photo of the base and overall exterior for structural condition.",
+      "Confirmation of drum capacity (litres) if known."
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a used plastic storage drum by type, but visible wear and an unverified 'neat' claim mean it must be priced at worst-case used condition pending clearer proof photos."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 22373,
+    "input_tokens": 2909,
+    "output_tokens": 1953,
+    "cost_usd": 0.022189,
+    "replayed": false,
+    "fixture_key": "ef6081907b559d147a772dd3e293a281",
+    "error": null
+  }
+}

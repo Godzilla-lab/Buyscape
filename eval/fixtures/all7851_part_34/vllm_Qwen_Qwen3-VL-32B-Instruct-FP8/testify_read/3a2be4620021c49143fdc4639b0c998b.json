@@ -1,0 +1,90 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Four tires stacked vertically, showing tread pattern and sidewall details.",
+      "Photo 0: Tires appear uniform in tread design, stacked outdoors near a tricycle and buildings.",
+      "Photo 1: Close-up of sidewall showing 'GRANDTREK' brand name, size '265/55R19', load index '105', speed rating 'H', and 'MAX. PRESS. 350 kPa (51 PSI)'.",
+      "Photo 2: Close-up of sidewall showing 'ALL-TERRAIN' and 'MADE IN JAPAN' text.",
+      "Tires appear used, with visible wear on tread but no obvious damage or cuts.",
+      "No visible date of manufacture (DOT code) in any photo.",
+      "Seller claims 'Original Dunlop', but brand shown is 'GRANDTREK', which is a Bridgestone brand, not Dunlop."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "265/55R19 all-terrain tires",
+      "brand": "GRANDTREK",
+      "model": "ALL-TERRAIN",
+      "read_from": [
+        "photo 1 sidewall",
+        "photo 2 sidewall"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Original Dunlop",
+        "verdict": "contradicted",
+        "evidence": "Photo 1 and 2 show 'GRANDTREK' and 'ALL-TERRAIN' on the sidewall, which is a Bridgestone brand, not Dunlop."
+      },
+      {
+        "claim": "clean Japanese used",
+        "verdict": "unverified",
+        "evidence": "Photo 2 shows 'MADE IN JAPAN', but 'clean' is subjective; no photo shows interior or full condition. Tread appears worn but no visible damage."
+      },
+      {
+        "claim": "Size 265/55R19",
+        "verdict": "supported",
+        "evidence": "Photo 1 clearly shows '265/55R19' on the sidewall."
+      },
+      {
+        "claim": "Quantity 4 uniform",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows four tires stacked, all with identical tread pattern and sidewall design."
+      },
+      {
+        "claim": "available with warranty",
+        "verdict": "unverifiable_remote",
+        "evidence": "No documentation or proof of warranty shown in photos. Cannot verify remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Tires may be expired or have low remaining tread life",
+        "proof": "Photo showing the DOT code (date of manufacture) and close-up of tread depth on all four tires.",
+        "if_unproven": "Priced as potentially expired or with minimal tread life, reducing value significantly."
+      },
+      {
+        "risk": "Hidden damage or internal structural issues",
+        "proof": "Close-up of tire sidewalls and inner liner from multiple angles, especially checking for bulges, cracks, or cuts.",
+        "if_unproven": "Priced as potentially unsafe or with hidden defects, reducing value."
+      },
+      {
+        "risk": "Not genuine or counterfeit product",
+        "proof": "Clear, high-resolution photo of the entire sidewall showing all markings, including manufacturer code and DOT, to verify authenticity.",
+        "if_unproven": "Priced as potentially counterfeit, which would drastically reduce value."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the DOT code (date of manufacture) on all four tires.",
+      "Close-up of tread depth on all four tires, especially near the shoulder and center.",
+      "Photo showing the full sidewall of one tire, including all markings and manufacturer code.",
+      "Photo of the inner liner and sidewall for signs of damage or bulges."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The tires are identified as GRANDTREK ALL-TERRAIN, not Dunlop, contradicting the seller's claim. While size and quantity are supported, critical risks like age, tread depth, and hidden damage cannot be assessed without additional photos. Warranty is unverifiable remotely. Price cannot be determined until these risks are addressed."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 82323,
+    "input_tokens": 2793,
+    "output_tokens": 944,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "3a2be4620021c49143fdc4639b0c998b",
+    "error": null
+  }
+}

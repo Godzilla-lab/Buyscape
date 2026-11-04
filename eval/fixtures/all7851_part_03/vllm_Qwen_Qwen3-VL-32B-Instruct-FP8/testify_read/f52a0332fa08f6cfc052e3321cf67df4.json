@@ -1,0 +1,85 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a product box for an LED headlamp.",
+      "The brand name 'Ten&JunFit' is visible in a red oval at the top left of the box.",
+      "The model number 'TJ-1906' is printed in a red oval below the product name.",
+      "The box states 'LED HEADLAMP' in large black letters.",
+      "It specifies '3W' power and 'Aluminum cups, Strong light' on the lower left.",
+      "It indicates '3x AA batteries' are required, shown with a battery icon.",
+      "The headlamp image on the box shows a black body with a gold-colored bezel and a green ring around the lens.",
+      "The background appears to be a store or warehouse with shelves and boxes."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "LED headlamp",
+      "brand": "Ten&JunFit",
+      "model": "TJ-1906",
+      "read_from": [
+        "photo 0 box top left",
+        "photo 0 box red oval"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "A head torch is a lightweight, hands-free lighting device worn on the head using an adjustable...",
+        "verdict": "unverifiable_remote",
+        "evidence": "The seller's text is a general definition, not a claim about this specific item. The photo shows the box, not the actual headlamp, so features like weight, adjustability, or hands-free use cannot be verified from the image alone."
+      },
+      {
+        "claim": "3W",
+        "verdict": "supported",
+        "evidence": "Photo 0: '3W' is clearly printed on the box in a red circle on the lower left."
+      },
+      {
+        "claim": "Aluminum cups, Strong light",
+        "verdict": "unverified",
+        "evidence": "Photo 0: The text is on the box, but the actual material and light output cannot be confirmed without seeing the product or testing it."
+      },
+      {
+        "claim": "3x AA batteries",
+        "verdict": "supported",
+        "evidence": "Photo 0: The battery icon and text '3x AA batteries' are visible on the box."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The headlamp may not be functional or may have defective LEDs.",
+        "proof": "A video or photo showing the headlamp turned on and emitting light.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The headlamp may not be made of aluminum as claimed, or the 'strong light' may be misleading.",
+        "proof": "A close-up photo of the headlamp's body showing material texture and a test video of the light output in a dark environment.",
+        "if_unproven": "priced as lower quality or with reduced light output"
+      },
+      {
+        "risk": "The headlamp may not fit securely on the head or may lack adjustability.",
+        "proof": "A photo or video showing the headlamp being worn and adjusted on a person's head.",
+        "if_unproven": "priced as potentially uncomfortable or unstable"
+      }
+    ],
+    "proof_requests": [
+      "A photo or video of the actual headlamp turned on, showing light output.",
+      "A close-up photo of the headlamp's body to verify material and construction.",
+      "A photo or video of the headlamp being worn on a head to verify adjustability and fit."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable by brand and model from the box, but critical functional and quality claims (like light output, material, and adjustability) cannot be verified from the current photo. The headlamp itself is not shown, so its condition and performance are unknown. Proof of functionality and build quality is needed before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 64756,
+    "input_tokens": 1781,
+    "output_tokens": 859,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "f52a0332fa08f6cfc052e3321cf67df4",
+    "error": null
+  }
+}

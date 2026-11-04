@@ -1,0 +1,69 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0: A rectangular solar panel with many small cells; brand/model text on the frame is not clearly readable; there is glare from a light reflection.",
+      "Photo 1: Another front view of the same solar panel; the frame has a watermark-style text overlay, but no clear wattage/model is readable.",
+      "Photo 2: Back/side view showing connectors/cables; no clear brand/model or wattage label is readable.",
+      "Photo 3: Back view of the panel; connectors are visible; no clear wattage/model label is readable."
+    ],
+    "identity": {
+      "status": "unknown",
+      "kind": "solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Thank you for contacting Network Solar venture Please let us know how we can help you. We deal...",
+        "verdict": "unverifiable_remote",
+        "evidence": "Seller text only; photos do not confirm what they deal in or the specific item rating."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Wattage/brand/model is not readable from the photos, so the panel could be lower or higher than the comparable list assumes.",
+        "proof": "A close-up photo of the panel\u2019s label/sticker (usually on the frame back) showing brand, model, and rated wattage (W), plus serial number.",
+        "if_unproven": "Price as the worst-case match among the comparables (i.e., treat it as a lower-watt used panel rather than a higher-watt premium one)."
+      },
+      {
+        "risk": "Condition/health (degradation, micro-cracks, damaged cells) cannot be confirmed from glare photos.",
+        "proof": "A short video while tilting the panel under light to show any cracked cells, plus an IV test report or multimeter reading of open-circuit voltage (Voc) and short-circuit current (Isc).",
+        "if_unproven": "Price as not guaranteed (assume reduced performance) until an IV test or clear cell condition is shown."
+      },
+      {
+        "risk": "Compatibility/connector type and wiring condition (loose terminals, damaged junction box) is not verifiable from the back photos.",
+        "proof": "Close-up of the junction box and terminal area, showing no burn marks and the exact connector type; include a photo of the cable ends.",
+        "if_unproven": "Price as needing basic checking/possible minor repair."
+      },
+      {
+        "risk": "The photos may not correspond to the exact wattage being sold (mismatch risk).",
+        "proof": "Photo of the label with the same watermark/date visible, or a photo of the label next to a handwritten note with today\u2019s date and the seller\u2019s name.",
+        "if_unproven": "Price as a generic used solar panel without confirmed rating."
+      }
+    ],
+    "proof_requests": [
+      "Close-up of the panel\u2019s rating label/sticker (brand + model + rated wattage in W + serial number).",
+      "IV test report (or at least Voc/Isc readings) taken in sunlight or under standard test conditions.",
+      "Close-up of the junction box/terminal area and the exact connector type/cable ends."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is clearly a solar panel, but the key pricing driver (rated wattage/brand/model) is not readable in the provided photos, so a worst-case price pick from the comparables would be guesswork.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_joint",
+    "latency_ms": 5414,
+    "input_tokens": 3570,
+    "output_tokens": 785,
+    "cost_usd": 0.001695,
+    "replayed": false,
+    "fixture_key": "83cc9e5bfe7958043ee276176ba87686",
+    "error": null
+  }
+}

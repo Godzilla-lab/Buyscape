@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: A black rectangular power bank held in hand, showing heavy scratches and scuffs on the surface. The brand 'itel' is visible on the right side.",
+      "Photo 1: The back of the power bank, showing text including '30000mAh', 'RoHS', 'CE', and other regulatory marks. The surface is also scratched.",
+      "Photo 2: The power bank lying flat next to a black cable with a USB-A connector on one end and a micro-USB connector on the other. The power bank's surface shows the same heavy wear as in previous photos.",
+      "No ports are visible in any photo. The seller claims one of three USB ports is not working, but no photo shows the ports or their condition."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "power bank",
+      "brand": "itel",
+      "model": "30000mAh",
+      "read_from": [
+        "photo 0: 'itel' logo",
+        "photo 1: '30000mAh' and regulatory text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "This power bank has been used for a year",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo or data confirms the usage duration. The wear suggests use, but not exactly one year."
+      },
+      {
+        "claim": "One of the 3 USB ports isn't working",
+        "verdict": "unverified",
+        "evidence": "No photo shows the ports or their condition. The seller states this, but no visual proof is provided."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "One of the USB ports is not working",
+        "proof": "A close-up photo of all three USB ports, showing which one is non-functional, or a video demonstrating the working and non-working ports.",
+        "if_unproven": "priced as having one non-working port, reducing value"
+      },
+      {
+        "risk": "Battery capacity is degraded due to one year of use",
+        "proof": "A video or photo showing the power bank charging a device, with a battery level indicator or time elapsed to show actual output.",
+        "if_unproven": "priced as potentially degraded capacity, reducing value"
+      },
+      {
+        "risk": "The power bank may be damaged internally or have safety issues due to heavy surface wear",
+        "proof": "A video showing the power bank being charged and discharged safely, with no overheating or unusual behavior.",
+        "if_unproven": "priced as potentially unsafe or unreliable, reducing value"
+      }
+    ],
+    "proof_requests": [
+      "A clear photo or video showing all three USB ports and which one is not working.",
+      "A video demonstrating the power bank charging a device to verify output and battery health.",
+      "A video showing the power bank being charged to verify input functionality and safety."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as an itel 30000mAh power bank, but critical claims about port functionality and battery health cannot be verified from the photos. The heavy wear raises safety and performance concerns. Without proof of working ports and battery condition, the item cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 60018,
+    "input_tokens": 2582,
+    "output_tokens": 719,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "d07343e6c39d90baf406e90899941c54",
+    "error": null
+  }
+}

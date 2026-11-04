@@ -1,0 +1,73 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the top label of a 3.5-inch hard drive with an HP logo and model information.",
+      "The label reads: '4TB 7200rpm SAS', 'HP MODEL: MB4000FCWDK', 'HP P/N: 695507-004', 'CT: 2CWDK01338W208', 'PN: 92M270-035', 'Date: 16014', 'SN: S1Z1BFJL', 'HDD Manufactured by Seagate Technology LLC', 'DOM: 07/2015'.",
+      "The label also includes 'MADE IN CHINA' and '\u4e2d\u56fd\u5236'.",
+      "Photo 1 shows the bottom side with a green PCB and a black metal casing; a small green LED is visible near the center.",
+      "Photo 2 shows the side profile of the drive, held in hand, with a black plastic carrier or tray attached.",
+      "The drive appears to be in a server tray, suggesting it's a hot-swap drive.",
+      "There is a watermark 'POSTED ON JIJI I.G SERVER TECH' on all photos."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "4TB 3.5\" SAS internal hard drive",
+      "brand": "HP",
+      "model": "MB4000FCWDK",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP 4TB 3.5\" Internal Hard Drive SAS ST4000NM0125",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 label shows HP model MB4000FCWDK, not ST4000NM0125. The ST4000NM0125 is a Seagate model, but the label states 'HDD Manufactured by Seagate Technology LLC', so the drive is a Seagate-made unit under HP branding. The model number on the label is MB4000FCWDK, not ST4000NM0125."
+      },
+      {
+        "claim": "Tested",
+        "verdict": "unverified",
+        "evidence": "No photo shows testing or test results. The claim is not supported by visual evidence."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Drive may not be functional or may have undetected bad sectors or firmware issues.",
+        "proof": "A video or photo showing the drive spinning up and being recognized by a system, or a SMART report or test log.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The drive may have been pulled from a failed server and have latent failures.",
+        "proof": "A full SMART report or a test log from a diagnostic tool.",
+        "if_unproven": "priced as potentially faulty"
+      },
+      {
+        "risk": "The drive may have physical damage not visible in photos, such as scratches on the platters or damaged connectors.",
+        "proof": "Close-up of the connector pins and the drive's platter surface (if opened, but not recommended for buyer).",
+        "if_unproven": "priced as potentially damaged"
+      }
+    ],
+    "proof_requests": [
+      "A video or photo showing the drive being powered on and recognized by a system.",
+      "A SMART report or test log from a diagnostic tool.",
+      "Close-up of the connector pins to check for damage."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model number claimed by the seller (ST4000NM0125) contradicts the label (MB4000FCWDK). The 'Tested' claim is unverified. Without proof of functionality and condition, the item cannot be priced accurately. The drive is a server-grade SAS unit, but its actual working state and history are unknown."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 32301,
+    "input_tokens": 2922,
+    "output_tokens": 895,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "95ac9721265214999dd76c258c0e92a3",
+    "error": null
+  }
+}

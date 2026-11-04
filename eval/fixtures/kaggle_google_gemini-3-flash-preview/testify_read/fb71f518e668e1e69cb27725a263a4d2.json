@@ -1,0 +1,67 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "A single tire wrapped in yellow plastic branded with 'AUSTONE TIRES'.",
+      "A manufacturer's label is affixed to the tread area.",
+      "The label identifies the tire as 'AUSTONE TIRES', 'ATHENA SP-303'.",
+      "The size '255/55R19 111V XL' is clearly printed on the label.",
+      "A '100% QUALITY' and 'WARRANTY' sticker is visible on the tread.",
+      "The sidewalls are completely obscured by the yellow wrapping.",
+      "The tire appears to be in new condition based on the wrapping and label."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car tire",
+      "brand": "Austone",
+      "model": "Athena SP-303",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "255/55r19 Austone Radial tire",
+        "verdict": "supported",
+        "evidence": "The manufacturer label in photo 0 explicitly states the brand, model, and size."
+      },
+      {
+        "claim": "comprehensive warranty",
+        "verdict": "unverifiable_remote",
+        "evidence": "Warranty terms are not provided, and remote buyers cannot easily enforce manufacturer or seller warranties."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The tire may be old stock (expired); rubber degrades over time regardless of use.",
+        "proof": "A clear photo of the 4-digit DOT code located on the sidewall.",
+        "if_unproven": "as expired stock (older than 6 years)"
+      },
+      {
+        "risk": "The wrapping may hide sidewall damage, dry rot, or previous repairs if the tire is not actually new.",
+        "proof": "Photos of both sidewalls with the yellow wrapping completely removed.",
+        "if_unproven": "as a used tire"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the 4-digit DOT code on the sidewall to verify the manufacturing date.",
+      "Photos of the tire unwrapped to inspect the sidewalls for damage or signs of use."
+    ],
+    "decision": "price",
+    "reason": "The brand, model, and size are clearly visible on the manufacturer's label, allowing for a baseline valuation at the worst-case age and condition."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 10401,
+    "input_tokens": 2407,
+    "output_tokens": 2124,
+    "cost_usd": 0.007575,
+    "replayed": false,
+    "fixture_key": "fb71f518e668e1e69cb27725a263a4d2",
+    "error": null
+  }
+}

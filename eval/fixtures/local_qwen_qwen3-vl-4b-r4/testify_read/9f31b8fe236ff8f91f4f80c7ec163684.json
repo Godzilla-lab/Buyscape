@@ -1,0 +1,86 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-r4",
+  "response": {
+    "observations": [
+      "Blue industrial chemical drum.",
+      "Label identifies the contents as MONOETHYLENE GLYCOL.",
+      "Label includes hazard pictograms for flammability and health hazards.",
+      "Label shows manufacturing and expiry dates (MANU DATE: 02/2025, EXP DATE: 02/2025).",
+      "Drum shows some surface rust and wear on the lower portion.",
+      "Two drums are visible in photo 2, suggesting a bulk quantity.",
+      "Water droplets are visible on the drum surface in photos 0 and 1."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "chemical drum",
+      "brand": "Drew Marine Netherlands B.V.",
+      "model": "MEG",
+      "read_from": [
+        "photo 0 label",
+        "photo 1 label",
+        "photo 2 label",
+        "photo 3 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Industrial-grade",
+        "verdict": "unverifiable_remote",
+        "evidence": "The label does not specify the purity grade (e.g., 99.5% or 99.8%)."
+      },
+      {
+        "claim": "Monoethylene Glycol (MEG)",
+        "verdict": "supported",
+        "evidence": "photo 0 label"
+      },
+      {
+        "claim": "large blue drum",
+        "verdict": "supported",
+        "evidence": "photo 0, photo 2"
+      },
+      {
+        "claim": "Suitable for a variety of...",
+        "verdict": "unverifiable_remote",
+        "evidence": "The label does not specify the intended applications."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The drum may be empty or contain a different substance.",
+        "proof": "A photo of the drum's interior showing the liquid level and the substance inside.",
+        "if_unproven": "as an empty drum"
+      },
+      {
+        "risk": "The chemical may have degraded or expired.",
+        "proof": "A photo of the current manufacturing and expiry dates on the label.",
+        "if_unproven": "as expired"
+      },
+      {
+        "risk": "The drum may be leaking or structurally compromised.",
+        "proof": "A video showing the drum being weighed or a close-up of the seams.",
+        "if_unproven": "as leaking"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the inside of the drum showing the liquid level and the substance.",
+      "Photo of the bottom of the drum to check for leaks.",
+      "Photo of the current manufacturing and expiry dates on the label."
+    ],
+    "decision": "price",
+    "reason": "The item is known from the photos. What they cannot prove is priced at its worst case until the proof asked for below arrives."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-r4",
+    "task": "testify_read",
+    "latency_ms": 15471,
+    "input_tokens": 3402,
+    "output_tokens": 475,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "9f31b8fe236ff8f91f4f80c7ec163684",
+    "error": null
+  }
+}

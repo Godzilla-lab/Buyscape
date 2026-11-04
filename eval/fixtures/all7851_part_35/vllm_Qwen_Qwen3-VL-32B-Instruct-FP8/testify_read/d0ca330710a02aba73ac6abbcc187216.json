@@ -1,0 +1,75 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: A silver-colored headlamp with a central large LED and two smaller round LEDs on either side, plus two rectangular arrays of smaller LEDs below. It sits on top of a blue box labeled 'RECHARGEABLE HEADLAMP' with features listed: XPE high, 4\" Side light, All bright, Strobe. Box also shows 'USB CHARGING' icon.",
+      "Photo 1: Same headlamp and box as photo 0, with a blue headband with 'LED' and 'HEADLAMP' printed on it placed to the right. A USB cable is also visible, plugged into the headlamp.",
+      "Photo 2: The headlamp turned on, emitting bright white light from all LEDs. The image is overexposed due to brightness, making details hard to see. The background is dark, likely to show the light output."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "rechargeable headlamp",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 box text",
+        "photo 1 box text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Rechargeable headlamp with USB charging",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 1 show the box with 'USB CHARGING' icon and photo 1 shows a USB cable plugged into the headlamp."
+      },
+      {
+        "claim": "High power LED light with XPE high, 4\" side light, all bright, strobe modes",
+        "verdict": "supported",
+        "evidence": "Photo 0 box lists these features. Photo 2 shows the headlamp lit, supporting 'all bright' and 'high power'."
+      },
+      {
+        "claim": "For engineers, forest guards, electricians, night swimmers, etc.",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a suggested use case, not a physical attribute. Cannot be verified from photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery may be dead or not hold charge",
+        "proof": "Video or photo showing the headlamp being charged and then turned on after charging to confirm functionality.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Headlamp may not be durable or water-resistant as implied by use cases",
+        "proof": "Close-up of the headlamp's seals and materials, or a video showing it being used in wet conditions.",
+        "if_unproven": "priced as non-water-resistant"
+      },
+      {
+        "risk": "USB port may be damaged or non-functional",
+        "proof": "Close-up of the USB port and a video showing charging in progress.",
+        "if_unproven": "priced as non-rechargeable"
+      }
+    ],
+    "proof_requests": [
+      "Video showing the headlamp being charged and turned on after charging.",
+      "Close-up of the USB port and headlamp seals.",
+      "Photo of the headlamp in use, showing light output in a dark environment."
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a rechargeable headlamp with visible features supported by the photos. While some risks exist (battery, durability, USB port), they are common to such items and can be priced at worst case. The photos provide enough to assign a price based on the worst-case scenario for each unproven risk."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 60458,
+    "input_tokens": 2229,
+    "output_tokens": 772,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "d0ca330710a02aba73ac6abbcc187216",
+    "error": null
+  }
+}

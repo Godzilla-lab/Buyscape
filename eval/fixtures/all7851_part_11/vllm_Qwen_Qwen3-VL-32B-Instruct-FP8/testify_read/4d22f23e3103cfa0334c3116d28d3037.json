@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the back of a silver laptop with 'XPS' logo visible, a Windows sticker, and a vertical vent pattern. The model number is not visible.",
+      "Photo 1 shows the front of the laptop open, with a black screen, dark keyboard, and trackpad. The chassis appears to be dark gray or black, not silver.",
+      "Photo 2 shows the same laptop with the screen on, displaying a Windows error message: 'Hard Drive Not Installed'. The screen also shows 'XPS 15 9500' in the top left corner, which contradicts the seller's claim of 'XPS 15 7590'.",
+      "The laptop is being held outdoors, with a busy street and shops in the background, including an Infinix banner."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "laptop",
+      "brand": "Dell",
+      "model": null,
+      "read_from": [
+        "photo 0: 'XPS' logo on back",
+        "photo 2: 'XPS 15 9500' on screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Dell XPS 15 7590",
+        "verdict": "contradicted",
+        "evidence": "Photo 2 shows 'XPS 15 9500' on the screen, which is a different model. The back (photo 0) does not show the model number, so cannot confirm 7590."
+      },
+      {
+        "claim": "Intel Core i7, 9th Gen",
+        "verdict": "unverifiable_remote",
+        "evidence": "No system information or BIOS screen visible to confirm CPU. The screen shows a hard drive error, so system is not booting normally."
+      },
+      {
+        "claim": "16GB DDR4, 512GB",
+        "verdict": "unverifiable_remote",
+        "evidence": "No system information or disk management screen visible. Hard drive error prevents verification."
+      },
+      {
+        "claim": "Premium aluminum +...",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows a silver back with 'XPS' logo, consistent with aluminum, but no close-up of material texture or finish to confirm. Photo 1 shows dark chassis, possibly plastic or coated metal."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Hard drive not installed or failed, preventing normal boot and system verification",
+        "proof": "Photo of BIOS screen or Windows Disk Management showing installed drive and capacity",
+        "if_unproven": "priced as not working or with no storage"
+      },
+      {
+        "risk": "Incorrect model claimed (XPS 15 7590 vs XPS 15 9500 shown on screen)",
+        "proof": "Photo of the model label on the bottom of the laptop or system information screen showing exact model",
+        "if_unproven": "priced as lower-value model (XPS 15 9500) or discounted for uncertainty"
+      },
+      {
+        "risk": "Missing or damaged components (e.g., keyboard, screen, ports) not visible in photos",
+        "proof": "Close-up photos of all ports, keyboard, screen edges, and hinges",
+        "if_unproven": "priced as having potential hidden damage"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the model label on the bottom of the laptop (usually near the hinge or center)",
+      "Photo of the BIOS screen or Windows system information showing exact model, CPU, RAM, and storage",
+      "Photo of the hard drive or SSD installed (if any) or proof of replacement",
+      "Close-up of all ports, keyboard, and screen edges to check for damage"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The screen displays 'XPS 15 9500', contradicting the seller's claim of 'XPS 15 7590'. The hard drive is not installed, preventing verification of CPU, RAM, and storage. Without proof of the correct model and working components, a reliable price cannot be assigned."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 78712,
+    "input_tokens": 2810,
+    "output_tokens": 936,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "4d22f23e3103cfa0334c3116d28d3037",
+    "error": null
+  }
+}

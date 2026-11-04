@@ -1,0 +1,64 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Tire with manufacturer label and red wrapping.",
+      "Label reads: ROADX RXQUEST H/T02 265/70R15 112T.",
+      "Tread appears new/unused.",
+      "Other wrapped tires visible in background."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "tire",
+      "brand": "RoadX",
+      "model": "RXQuest H/T02",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "265 70 r15",
+        "verdict": "supported",
+        "evidence": "photo 0 label"
+      },
+      {
+        "claim": "roadx tire",
+        "verdict": "supported",
+        "evidence": "photo 0 label"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The tire may be old stock (expired).",
+        "proof": "A photo of the DOT code on the sidewall showing the 4-digit date code.",
+        "if_unproven": "as old stock (over 5 years old)"
+      },
+      {
+        "risk": "Hidden sidewall damage or defects.",
+        "proof": "Clear photos of both sidewalls without the wrapping.",
+        "if_unproven": "as having minor sidewall shelf-wear"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the DOT code on the sidewall (4 digits in an oval).",
+      "Photos of both sidewalls clearly showing the full surface."
+    ],
+    "decision": "price",
+    "reason": "The tire is clearly identified by the label in photo 0. It appears new, but without the DOT code, it is priced as old stock."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 6921,
+    "input_tokens": 2356,
+    "output_tokens": 1343,
+    "cost_usd": 0.005207,
+    "replayed": false,
+    "fixture_key": "322a29f0cb553159c332d57cd6bf670b",
+    "error": null
+  }
+}

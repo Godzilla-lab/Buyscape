@@ -1,0 +1,105 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Silver laptop open on a wooden table, screen off, HP logo visible on bezel, Intel Core sticker on palm rest, business-style keyboard, trackpad, and a business card in front.",
+      "Photo 1: Same laptop with screen on, showing Windows 11 blue wallpaper, wrapped in plastic, placed on a shelf with other electronics in the background. 'ELITEBOOK' text visible on palm rest.",
+      "Photo 2: Laptop screen on, showing a desktop with a dramatic wallpaper (child on shoulders in smoke), HP logo on bezel, 'ELITEBOOK' on palm rest, Intel Core sticker, and a hand holding the left side of the laptop.",
+      "All photos show a watermark 'VISION WORLD COMPUTER'.",
+      "No visible damage to the chassis or screen in any photo.",
+      "No ports, battery, or underside shown."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "EliteBook 745 G6",
+      "read_from": [
+        "Photo 1 palm rest: 'ELITEBOOK' text",
+        "Photo 2 palm rest: 'ELITEBOOK' text",
+        "Seller's text: 'HP EliteBook 745 G6'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "UK Used Business HP EliteBook 745 G6",
+        "verdict": "supported",
+        "evidence": "Model name 'EliteBook 745 G6' is stated by seller and 'ELITEBOOK' is visible on palm rest in photo 1 and 2."
+      },
+      {
+        "claim": "AMD Ryzen 5 pro",
+        "verdict": "contradicted",
+        "evidence": "Photo 0, 1, and 2 all show an Intel Core sticker on the palm rest, indicating an Intel processor, not AMD Ryzen 5 Pro."
+      },
+      {
+        "claim": "8gb Ram",
+        "verdict": "unverifiable_remote",
+        "evidence": "No system information or BIOS screen shown; RAM cannot be verified from photos alone."
+      },
+      {
+        "claim": "256gb SSD",
+        "verdict": "unverifiable_remote",
+        "evidence": "No disk management or system info screen shown; SSD size cannot be verified from photos."
+      },
+      {
+        "claim": "with 2gb Dedicated",
+        "verdict": "unverifiable_remote",
+        "evidence": "No GPU information visible; '2gb Dedicated' likely refers to graphics memory, but no proof in photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Processor mismatch: seller claims AMD Ryzen 5 Pro but photos show Intel Core sticker.",
+        "proof": "Photo of BIOS or system information screen showing CPU model.",
+        "if_unproven": "Priced as if Intel processor, not AMD, which may be less valuable or incorrect."
+      },
+      {
+        "risk": "RAM not 8GB as claimed.",
+        "proof": "Photo of system information screen showing installed RAM.",
+        "if_unproven": "Priced as if RAM is less than 8GB or unknown, reducing value."
+      },
+      {
+        "risk": "SSD not 256GB as claimed.",
+        "proof": "Photo of disk management or system info showing SSD size.",
+        "if_unproven": "Priced as if SSD is smaller or unknown, reducing value."
+      },
+      {
+        "risk": "Dedicated GPU not 2GB as claimed.",
+        "proof": "Photo of device manager or GPU info screen showing dedicated VRAM.",
+        "if_unproven": "Priced as if no dedicated GPU or less than 2GB, reducing value."
+      },
+      {
+        "risk": "Battery health or condition unknown.",
+        "proof": "Photo of battery health in Windows settings or BIOS.",
+        "if_unproven": "Priced as if battery is degraded or non-functional, reducing value."
+      },
+      {
+        "risk": "Physical damage or wear not visible in photos.",
+        "proof": "Photo of underside, ports, hinges, and screen edges.",
+        "if_unproven": "Priced as if there may be hidden damage, reducing value."
+      }
+    ],
+    "proof_requests": [
+      "Photo of BIOS or system information screen showing CPU, RAM, and SSD details.",
+      "Photo of device manager or GPU info showing dedicated VRAM.",
+      "Photo of battery health in Windows settings or BIOS.",
+      "Photo of underside, ports, and hinges to check for damage."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller claims an AMD Ryzen 5 Pro processor, but photos show an Intel Core sticker, contradicting the claim. RAM, SSD, and GPU specs cannot be verified. Hidden risks like battery health and physical damage are unproven. Without proof of specs and condition, a worst-case price cannot be determined."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 90295,
+    "input_tokens": 2687,
+    "output_tokens": 1092,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "a28af08ac4e5c95e68e2963127068147",
+    "error": null
+  }
+}

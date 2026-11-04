@@ -1,0 +1,75 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows two used headlight assemblies with clear lenses and black mounting brackets on a tiled floor.",
+      "Photo 1 shows a used front grille with vertical slats, chrome trim, and a Toyota emblem in the center.",
+      "The lamps in photo 0 are front headlights, not taillights.",
+      "No model name such as 'Prado' is visible on the parts themselves."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "front grille and headlight assemblies",
+      "brand": "Toyota",
+      "model": null,
+      "read_from": [
+        "photo 1 emblem"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Prado Jeep front grill",
+        "verdict": "supported",
+        "evidence": "photo 1 shows a front grille with a Toyota emblem"
+      },
+      {
+        "claim": "tailight",
+        "verdict": "contradicted",
+        "evidence": "photo 0 shows headlights (front lamps), not taillights"
+      },
+      {
+        "claim": "in working condition",
+        "verdict": "unverifiable_remote",
+        "evidence": "photos cannot show whether bulbs, ballasts, or wiring function"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Headlights may not illuminate; bulbs, ballasts, or wiring could be faulty.",
+        "proof": "Video or photo of both headlights switched on.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Grille mounting tabs or frame may be cracked or broken.",
+        "proof": "Close-up photos of the backside and mounting points of the grille.",
+        "if_unproven": "as damaged"
+      },
+      {
+        "risk": "Headlight lenses may have internal haze, cracks, or seal leaks not visible in still photos.",
+        "proof": "Close-up photos of lens interiors or a light-on test.",
+        "if_unproven": "as defective"
+      }
+    ],
+    "proof_requests": [
+      "Video of both headlights switched on to confirm they work.",
+      "Close-up photos of the backside and mounting clips of the front grille.",
+      "Clarification whether the buyer wants headlights or taillights, since the photos show headlights."
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a Toyota front grille and headlight assemblies; function cannot be verified remotely so they are priced at the worst case as non-working used parts."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 89260,
+    "input_tokens": 3736,
+    "output_tokens": 3169,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "038079e58a82654afa3f175eef33aec0",
+    "error": null
+  }
+}

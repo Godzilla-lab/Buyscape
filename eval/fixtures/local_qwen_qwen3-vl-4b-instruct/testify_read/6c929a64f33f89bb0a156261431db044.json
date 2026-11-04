@@ -1,0 +1,68 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-instruct",
+  "response": {
+    "observations": [
+      "Photo 0: Yellow gas cylinder with handwritten markings and a sticker with 'Shop 90' and '08033'.",
+      "Photo 1: Blue gas cylinder with 'BERADISCU' logo and some rust.",
+      "Photo 2: Close-up of the blue cylinder's valve and top, showing wear and rust."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "cooking gas cylinder",
+      "read_from": [
+        "photo 0 plate",
+        "photo 1 screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "12.5kg standard Cooking Gas Cylinder",
+        "verdict": "unverified",
+        "evidence": "No photo shows the weight or model number. The seller claims it is 12.5kg, but this is not visible in any photo."
+      },
+      {
+        "claim": "Recently tested and certified, no leak, the valve is new.",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows a test certificate or a valve inspection. The valve appears worn in photo 2."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The cylinder may not be 12.5kg as claimed.",
+        "proof": "A photo showing the cylinder's weight label or a weighing scale reading.",
+        "if_unproven": "Priced as if it is not 12.5kg."
+      },
+      {
+        "risk": "The valve is not new, as it appears worn in photo 2.",
+        "proof": "A close-up photo of the valve showing its condition or a certificate of replacement.",
+        "if_unproven": "Priced as if the valve is not new."
+      },
+      {
+        "risk": "The cylinder may not be certified or tested as claimed.",
+        "proof": "A photo of the certification or test report.",
+        "if_unproven": "Priced as if it is not certified or tested."
+      }
+    ],
+    "proof_requests": [
+      "Ask for a photo of the certification or test report.",
+      "Ask for a photo of the cylinder's weight label or a weighing scale reading.",
+      "Ask for a close-up photo of the valve showing its condition."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller's claims cannot be verified remotely from the photos, and the identity of the cylinder is not confirmed. Proof is required to determine the price."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-instruct",
+    "task": "testify_read",
+    "latency_ms": 4611,
+    "input_tokens": 2788,
+    "output_tokens": 550,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "6c929a64f33f89bb0a156261431db044",
+    "error": null
+  }
+}

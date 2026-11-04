@@ -1,0 +1,80 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a gray multifunction printer with a document on the glass bed.",
+      "The brand 'Konica Minolta' is visible on a yellow label at the top front of the device.",
+      "The model number '357ci' is printed on a silver plate on the front lower part of the machine.",
+      "The control panel includes a small screen and a keypad with colored buttons.",
+      "There is a document with colorful print on the scanner glass, suggesting color scanning or copying capability.",
+      "The machine appears to be in a used condition with some dust and minor wear.",
+      "A watermark 'SUCCINCT COMPUTERS' is overlaid on the photo."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "multifunction printer",
+      "brand": "Konica Minolta",
+      "model": "357ci",
+      "read_from": [
+        "photo 0 top front label",
+        "photo 0 front plate"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Prints from flash",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows a USB port on the right side, which may support flash printing, but no direct evidence of functionality is shown."
+      },
+      {
+        "claim": "Scans to flash",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows a USB port, which may support scanning to flash, but no direct evidence of functionality is shown."
+      },
+      {
+        "claim": "Photocopies both black and white and coloured",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows a colorful document on the scanner glass, indicating color copying capability. The model 357ci is known to support color copying."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The printer may not be functional or may have internal damage not visible in the photo.",
+        "proof": "A video showing the printer powering on, printing a test page, and scanning a document to USB.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The USB port may be non-functional, affecting flash printing and scanning.",
+        "proof": "A close-up of the USB port with a flash drive inserted and a test print or scan to flash shown.",
+        "if_unproven": "priced as lacking flash functionality"
+      },
+      {
+        "risk": "The machine may have toner or drum issues affecting print quality.",
+        "proof": "A printed test page showing full color and black-and-white output quality.",
+        "if_unproven": "priced as low-quality output"
+      }
+    ],
+    "proof_requests": [
+      "Video of the printer powering on and printing a test page.",
+      "Video of scanning a document to a USB flash drive.",
+      "Close-up of the USB port with a flash drive inserted and a test scan to flash.",
+      "Printed test page showing color and black-and-white output quality."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and brand are identifiable, and some claims are supported or unverified, but critical functionality (printing from flash, scanning to flash, and overall working condition) cannot be confirmed from the photo alone. Proof is needed to verify operation and avoid pricing the item at its worst case."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 58784,
+    "input_tokens": 1818,
+    "output_tokens": 736,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "c2f4fae68fad47fbd18385f5d8f8cc29",
+    "error": null
+  }
+}

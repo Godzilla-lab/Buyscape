@@ -1,0 +1,96 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Open laptop showing a 15-inch screen with a Windows desktop, silver chassis, black keyboard, and a Dell VPRO sticker on the palm rest. The screen bezel has 'DELL' branding below the display.",
+      "Photo 1: Similar angle to photo 0, showing the same laptop with the same screen content. A sticker with 'MINI PORT' and a number is visible on the orange surface behind the laptop.",
+      "Photo 2: Closed laptop showing the back of the lid with the Dell logo, and the bottom panel with vents, screws, and a label with model/serial info. A pink sticker is on the top right corner of the lid. The label on the bottom is partially visible but not readable."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "laptop",
+      "brand": "Dell",
+      "model": null,
+      "read_from": [
+        "photo 0 screen bezel",
+        "photo 2 lid"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Dell latitude 5530",
+        "verdict": "unverified",
+        "evidence": "The model name is not visible in any photo. The label on the bottom (photo 2) is too blurry to read. The seller's text claims it, but no photo confirms it."
+      },
+      {
+        "claim": "16gb ram 256gb ssd",
+        "verdict": "unverifiable_remote",
+        "evidence": "Internal specs cannot be verified from photos. No BIOS screen, system info, or disk management screenshot is provided."
+      },
+      {
+        "claim": "intel core i7 12th gen",
+        "verdict": "unverifiable_remote",
+        "evidence": "CPU model cannot be confirmed from photos. No system information or CPU-Z screenshot is provided."
+      },
+      {
+        "claim": "15\" fhd display",
+        "verdict": "supported",
+        "evidence": "The screen size appears to be 15 inches based on proportions and bezel width. The display resolution is not verifiable, but the image quality suggests FHD."
+      },
+      {
+        "claim": "backlit keyboard",
+        "verdict": "unverified",
+        "evidence": "No photo shows the keyboard lit. The keyboard is visible in photos 0 and 1, but lighting conditions do not confirm backlighting."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The laptop is not a Dell Latitude 5530 as claimed",
+        "proof": "A clear photo of the model label on the bottom or a screenshot of the system information showing the model name.",
+        "if_unproven": "Priced as a generic Dell laptop, not a Latitude 5530, which could be significantly cheaper."
+      },
+      {
+        "risk": "RAM and SSD specs are not as advertised (16GB RAM, 256GB SSD)",
+        "proof": "A screenshot of the Windows system information or disk management showing the actual RAM and SSD capacity.",
+        "if_unproven": "Priced as if it has less RAM or a smaller SSD, or as not working if specs are falsified."
+      },
+      {
+        "risk": "CPU is not an Intel Core i7 12th Gen",
+        "proof": "A screenshot of the system information or CPU-Z showing the CPU model.",
+        "if_unproven": "Priced as if it has a lower-tier CPU, which reduces value."
+      },
+      {
+        "risk": "Keyboard is not backlit",
+        "proof": "A photo of the keyboard with backlighting turned on in a dark environment.",
+        "if_unproven": "Priced as a non-backlit keyboard, which reduces value for buyers seeking this feature."
+      },
+      {
+        "risk": "Laptop has physical damage or wear not visible in photos",
+        "proof": "A close-up photo of the screen, hinges, keyboard, and bottom panel showing any scratches, dents, or wear.",
+        "if_unproven": "Priced as if it has minor wear, which may reduce value."
+      }
+    ],
+    "proof_requests": [
+      "A clear photo of the model label on the bottom of the laptop.",
+      "A screenshot of the Windows system information showing RAM, SSD, and CPU details.",
+      "A photo of the keyboard with backlighting turned on.",
+      "Close-up photos of the screen, hinges, and bottom panel to check for damage."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model name is not visible in any photo, and internal specs (RAM, SSD, CPU) cannot be verified. Without proof, the item cannot be accurately priced. The photos support a 15-inch display, but other claims are unverified or unverifiable remotely."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 87488,
+    "input_tokens": 2810,
+    "output_tokens": 1063,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "56841e4da37b76126eb05f1885e80489",
+    "error": null
+  }
+}

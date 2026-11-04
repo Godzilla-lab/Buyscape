@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Retail packaging for a power bank is shown.",
+      "Brand 'ACE ELEC' is printed at the top of the box in photo 0.",
+      "Model 'SpaceX-P2W' is printed on the bottom right of the box in photo 0.",
+      "Capacity '20000mAh' is prominently displayed on the box in photo 0.",
+      "The box mentions 'Intelligent Fast Charging' and a '365 Days Warranty'.",
+      "The actual power bank is not visible, only the illustration on the box."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "power bank",
+      "brand": "ACE ELEC",
+      "model": "SpaceX-P2W",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "20000mah power bank",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "battery cell type: lithium",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      },
+      {
+        "claim": "365 days warranty",
+        "verdict": "unverified",
+        "evidence": "Printed on box but requires proof of purchase/activation for a second-hand buyer."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, lower-quality item.",
+        "proof": "Photo of the actual power bank outside of the packaging.",
+        "if_unproven": "priced as an empty box"
+      },
+      {
+        "risk": "The device may be a counterfeit with significantly lower actual capacity than the label suggests.",
+        "proof": "Clear photo of the technical specifications and regulatory markings printed on the back of the physical device.",
+        "if_unproven": "priced as a generic 5000mAh power bank"
+      },
+      {
+        "risk": "The internal battery may be degraded or non-functional.",
+        "proof": "Video showing the power bank successfully charging a smartphone.",
+        "if_unproven": "priced as not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual power bank out of the box.",
+      "Photo of the back of the power bank showing the printed specifications and serial number.",
+      "Video of the power bank charging a phone."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail box is visible. I cannot confirm the presence, condition, or authenticity of the actual power bank without seeing the device itself."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 7688,
+    "input_tokens": 2365,
+    "output_tokens": 1574,
+    "cost_usd": 0.005905,
+    "replayed": false,
+    "fixture_key": "397582bb05ef69efce7995d68740bbf2",
+    "error": null
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r4",
+  "response": {
+    "observations": [
+      "Photo 0 shows a blue plastic barrel with a black lid and a metal handle.",
+      "Photo 1 shows a close-up of the barrel's label.",
+      "The label identifies the contents as 'BUTANOL + HYDROXYDE - BPJUSP' and 'BUTANOL + HYDROXYDE - BPJUSP'.",
+      "The label lists a capacity of 500 liters.",
+      "The label indicates the contents are 'Reserve in bright light containers' and 'Not for human consumption'.",
+      "The barrel shows significant surface wear, scratches, and scuffs.",
+      "A watermark 'SUNNY EBERE GENUINE POSTED ON JIJI' is present on both images."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "plastic barrel",
+      "brand": "BPJUSP",
+      "model": "500L",
+      "read_from": [
+        "photo 1 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Plastic buckets 80 liters",
+        "verdict": "contradicted",
+        "evidence": "Photo 1 label shows 500L capacity, not 80L."
+      },
+      {
+        "claim": "empty plastic containers",
+        "verdict": "supported",
+        "evidence": "Photo 1 label indicates 'Reserve in bright light containers' and 'Not for human consumption'."
+      },
+      {
+        "claim": "blue barrel",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 1 show blue barrels."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The barrel may be leaking or have structural damage.",
+        "proof": "A video showing the barrel being shaken or a close-up of the rim and threads.",
+        "if_unproven": "as leaking"
+      },
+      {
+        "risk": "The contents may be contaminated or degraded.",
+        "proof": "A photo of the label with the contents removed.",
+        "if_unproven": "as contaminated"
+      },
+      {
+        "risk": "The barrel may be empty but the label may be a cover for a different item.",
+        "proof": "A photo of the barrel with the lid removed.",
+        "if_unproven": "as empty"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of any label, sticker or metal plate showing the brand and model.",
+      "Video of the barrel being shaken to check for leaks.",
+      "Photo of the label with the contents removed to verify the actual substance."
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identified as a 500L BPJUSP barrel from the label in photo 1, so it can be priced at its worst case as an empty, used barrel."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r4",
+    "task": "testify_read",
+    "latency_ms": 2276,
+    "input_tokens": 2277,
+    "output_tokens": 491,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "3b507f2c381df91af767c17482b680d7",
+    "error": null
+  }
+}

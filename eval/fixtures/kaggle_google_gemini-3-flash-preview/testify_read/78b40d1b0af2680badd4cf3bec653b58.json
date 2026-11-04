@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Front-loading washing machine with a silver finish.",
+      "LG logo is visible on the top left.",
+      "Detergent drawer is labeled 'Inverter DirectDrive 6/3kg'.",
+      "A sticker on the front reads 'Washer+Dryer 2in1'.",
+      "The control panel is powered on, showing orange lights around the cycle dial and green lights on the digital display.",
+      "The exterior shows signs of wear, including a peeling sticker on the front left.",
+      "The machine appears to be installed in a kitchen or laundry area with tiled flooring."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "front-loading washer dryer",
+      "brand": "LG",
+      "model": "DirectDrive 6/3kg",
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "LG Washing machine",
+        "verdict": "supported",
+        "evidence": "The LG logo is clearly visible in photo 0."
+      },
+      {
+        "claim": "scrap but doesn\u2019t work",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo 0 shows the unit powered on, which contradicts 'scrap' in terms of electrical life, but does not prove the mechanical cycles work."
+      },
+      {
+        "claim": "needs repair",
+        "verdict": "unverifiable_remote",
+        "evidence": "The internal state and mechanical functionality cannot be determined from a still photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Major internal components (motor, pump, or PCB) may be missing or beyond repair.",
+        "proof": "A photo of the rear of the machine with the access panel removed.",
+        "if_unproven": "as a shell for scrap metal value only"
+      },
+      {
+        "risk": "The drum bearings or spider arm may be broken, a common terminal failure for this model.",
+        "proof": "A video of the drum being spun by hand to check for noise or play.",
+        "if_unproven": "as having a seized or broken drum"
+      },
+      {
+        "risk": "The control board (PCB) may have a fault that prevents cycles from starting despite powering on.",
+        "proof": "A video showing the machine successfully starting a 'Rinse + Spin' cycle.",
+        "if_unproven": "as having a dead mainboard"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the white manufacturer's sticker (usually on the door frame or back) showing the full model number.",
+      "Video of the drum being spun manually.",
+      "Photo of the machine with the top cover removed to check for missing parts."
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identified as an LG 6kg/3kg washer-dryer. Although the seller claims it is non-functional scrap, the photo shows it powers on. It can be priced at the worst-case 'for parts' value."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 14403,
+    "input_tokens": 2356,
+    "output_tokens": 2487,
+    "cost_usd": 0.008639,
+    "replayed": false,
+    "fixture_key": "78b40d1b0af2680badd4cf3bec653b58",
+    "error": null
+  }
+}

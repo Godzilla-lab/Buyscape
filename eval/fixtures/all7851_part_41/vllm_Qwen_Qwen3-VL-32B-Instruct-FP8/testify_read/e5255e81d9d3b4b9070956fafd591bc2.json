@@ -1,0 +1,73 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a factory floor with multiple stacks of corrugated roofing sheets in beige, green, black, and silver colors. A long beige sheet is being processed through a machine. The watermark 'BETCHEL ALUMINIUM' is visible.",
+      "Photo 1 shows a close-up of a machine producing black corrugated sheets. A worker is operating the control panel. The watermark 'BETCHEL ALUMINIUM' is present.",
+      "Photo 2 shows a wider view of the factory with stacks of black and silver roofing sheets, a forklift, and large rolls of material in the background. The watermark 'BETCHEL ALUMINIUM' is visible.",
+      "All photos show industrial machinery and production lines for corrugated metal sheets, consistent with roofing material manufacturing.",
+      "The seller claims 'Aluminum long span roofing sheets' and mentions thickness '0.48'."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "aluminum long span roofing sheets",
+      "brand": "BETCHEL ALUMINIUM",
+      "model": null,
+      "read_from": [
+        "photo 0 watermark",
+        "photo 1 watermark",
+        "photo 2 watermark"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Aluminum long span roofing sheets",
+        "verdict": "supported",
+        "evidence": "Photos show corrugated sheets being produced in a factory setting, consistent with roofing material. The watermark 'BETCHEL ALUMINIUM' suggests aluminum material. The term 'long span' is not visually verifiable but is common for such products."
+      },
+      {
+        "claim": "Thickness 0.48",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows a thickness measurement or gauge indicator. The value '0.48' is not visible on any sheet or machine. Thickness cannot be confirmed from visual inspection alone."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Material is not aluminum but galvanized steel or another metal",
+        "proof": "Close-up photo of the sheet surface showing material properties (e.g., color, sheen, or a label indicating aluminum content).",
+        "if_unproven": "priced as galvanized steel or generic metal roofing, which is cheaper than aluminum."
+      },
+      {
+        "risk": "Thickness is not 0.48mm as claimed",
+        "proof": "Photo of a caliper or micrometer measuring the sheet thickness, or a label showing the gauge.",
+        "if_unproven": "priced as a lower thickness (e.g., 0.4mm or 0.35mm), which reduces value."
+      },
+      {
+        "risk": "Product is not suitable for long span roofing due to structural weakness",
+        "proof": "Engineering specification sheet or structural test report showing load-bearing capacity and span limits.",
+        "if_unproven": "priced as standard roofing sheet, not long span, which reduces value."
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the sheet edge with a caliper measuring thickness to verify 0.48mm.",
+      "Photo of a material label or test certificate confirming aluminum composition.",
+      "Photo of the product specification sheet showing long span capabilities and load ratings."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as aluminum roofing sheets by type, but critical claims like thickness (0.48mm) and material composition cannot be verified from the photos. Without proof of thickness and material, the item cannot be priced accurately, as these directly affect value. The photos show production, but not the specific product details needed for pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 44996,
+    "input_tokens": 2774,
+    "output_tokens": 813,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "e5255e81d9d3b4b9070956fafd591bc2",
+    "error": null
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a stainless steel electric kettle being held in hand, with the brand 'Russell Hobbs' visible on the base.",
+      "The kettle has a black handle and spout, and a transparent water level indicator on the front.",
+      "Photo 1 shows a cream-colored electric kettle, also with 'Russell Hobbs' branding on the base, held in the same hand.",
+      "Both kettles are in a cluttered environment with many other kettles in the background, suggesting a resale or second-hand setting.",
+      "The water level indicator on both kettles shows markings for 0.5L, 1.0L, 1.5L, and MAX 1.7L, matching the seller's stated capacity.",
+      "The kettles appear to be in used condition; minor scratches and smudges are visible on the stainless steel surface in photo 0.",
+      "No power cord is visible connected to either kettle in the photos, and no plug is shown in use.",
+      "The seller's text claims a 'Brushed Stainless Steel' model, but photo 1 shows a cream-colored plastic model, indicating at least two different models are being shown."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "electric kettle",
+      "brand": "Russell Hobbs",
+      "model": null,
+      "read_from": [
+        "photo 0 base",
+        "photo 1 base"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Russell Hobbs Brushed Stainless Steel Electric Kettle",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows a brushed stainless steel kettle with 'Russell Hobbs' branding on the base."
+      },
+      {
+        "claim": "Capacity: Holds 1.7 litres of water",
+        "verdict": "supported",
+        "evidence": "Both photo 0 and photo 1 show water level indicators with a 'MAX 1.7L' marking."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The kettle may not work or may have internal damage (e.g., heating element failure, faulty switch).",
+        "proof": "A video showing the kettle being plugged in, switched on, and boiling water, or a photo of the power cord and plug with a working indicator light.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The kettle may have hidden damage or wear not visible in photos, such as cracks in the base, internal corrosion, or damaged cord insulation.",
+        "proof": "Close-up photos of the base, power cord, plug, and interior of the kettle.",
+        "if_unproven": "priced at worst case condition (used, possibly damaged)"
+      },
+      {
+        "risk": "The seller is showing multiple kettles (stainless steel and cream plastic) as if they are the same item, possibly misleading the buyer.",
+        "proof": "A clear photo showing the model number or a single kettle being offered for sale, not multiple.",
+        "if_unproven": "priced as lower value due to ambiguity"
+      }
+    ],
+    "proof_requests": [
+      "Video or photo of the kettle being plugged in and boiling water to confirm it works.",
+      "Close-up of the base, power cord, and plug to check for damage.",
+      "Photo of the interior of the kettle to check for scale or corrosion.",
+      "Clarification on which model is being sold \u2014 the stainless steel or the cream plastic \u2014 and whether both are available."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "While the brand and capacity are supported by the photos, the item's functionality and condition cannot be confirmed remotely. The presence of multiple kettles in the photos introduces ambiguity. Proof of working condition and clear identification of the specific model being sold are required before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 66817,
+    "input_tokens": 2288,
+    "output_tokens": 843,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "6050de57612e8fd0320c5056f74733b5",
+    "error": null
+  }
+}

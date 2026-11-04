@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Single photo shows a dim, cluttered used-parts shop/garage interior.",
+      "A large metal transmission/gearbox unit stands upright in the foreground, mounted or propped among other parts.",
+      "Wiring harnesses, a radiator, and other engine components are visible around it.",
+      "No brand name, part number, or model code is legible anywhere on the gearbox casing itself.",
+      "A faint overlay at the bottom of the image shows a date/time stamp and some small text that may read 'Infiniti' or similar, but this looks like a camera-app watermark, not a mark stamped on the part.",
+      "No vehicle, engine bay, or chassis is shown to confirm what car this transmission came from."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used automatic transmission/gearbox (salvage auto part)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 (no legible markings on the part itself; only an ambiguous photo-app watermark)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "\"We sale all kinds of Japanese engine and gear\"",
+        "verdict": "unverifiable_remote",
+        "evidence": "No vehicle, VIN plate, or part-stamped origin visible in photo 0; watermark text is not reliable proof of origin."
+      },
+      {
+        "claim": "Implied that this specific gearbox is a working, sellable unit",
+        "verdict": "unverified",
+        "evidence": "No test, no shift-operation clip, no internal view; only a static photo of the housing."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Vehicle/engine fitment unknown \u2014 transmission price varies enormously by make/model, and this cannot be guessed from a casing photo alone.",
+        "proof": "Clear close-up photo of the stamped part number / casing ID plate, or the vehicle (make, model, year) it was pulled from.",
+        "if_unproven": "Cannot be priced at all \u2014 fitment is the primary price driver for a used transmission."
+      },
+      {
+        "risk": "Mechanical condition unknown \u2014 internal gear wear, fluid contamination, or seized components are invisible from outside.",
+        "proof": "Video of the gearbox being rotated/shifted by hand or bench-tested, plus a photo of drained fluid condition.",
+        "if_unproven": "Priced as non-working / for-parts-only."
+      },
+      {
+        "risk": "Completeness unknown \u2014 sensors, solenoids, torque converter, or mounting brackets may be missing.",
+        "proof": "Multiple angle photos showing all connectors, the bellhousing face, and the torque converter (if automatic).",
+        "if_unproven": "Priced as incomplete core unit."
+      },
+      {
+        "risk": "Mileage/accident or flood history unverifiable from a single shop photo.",
+        "proof": "Any paperwork, tags, or seller video showing where/how it was removed.",
+        "if_unproven": "Priced at worst case (unknown history, assume high risk)."
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of any stamped part number or ID plate on the gearbox casing.",
+      "Statement plus photo evidence of the exact vehicle make/model/year this was removed from.",
+      "Video showing the gearbox being manually shifted or bench-tested.",
+      "Additional photos from other angles showing connectors, torque converter, and bellhousing completeness."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The part cannot even be given a worst-case price because transmission values are fitment-specific, and no make/model or part number is legible in the single photo provided."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 25177,
+    "input_tokens": 1988,
+    "output_tokens": 2070,
+    "cost_usd": 0.021517,
+    "replayed": false,
+    "fixture_key": "95d7d4ba668f26d8e91dea0c25b2069e",
+    "error": null
+  }
+}

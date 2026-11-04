@@ -1,0 +1,90 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: A silver/black clamshell laptop, screen closed-ish but display dark/off, viewed from front-left angle on a white backdrop.",
+      "Photo 1: Close-up of open laptop keyboard area. Keys look physically intact, no visible cracks or missing keys.",
+      "Palm-rest stickers visible in photo 1: an Intel 'Core i5' logo, a 'Windows 7' logo, and an Energy Star sticker.",
+      "A barcode/serial sticker is visible at the top-right of the keyboard deck in photo 1 but the text is too small/blurred to read.",
+      "No visible brand or model text is legible on the lid or bezel in photo 0.",
+      "Screen is not shown powered on in either photo, so display condition cannot be judged.",
+      "No photos of the underside, ports, charger, or hinges are provided."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "windows laptop (clamshell, ~15-inch, Core i5 era)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 1 stickers (Core i5, Windows 7 logos)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Battery is bad",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows a battery test, charge indicator, or power-on state; claim is plausible but cannot be confirmed or contradicted from images."
+      },
+      {
+        "claim": "Every other part is Ok",
+        "verdict": "unverified",
+        "evidence": "No photo shows the screen powered on, no boot/BIOS screen, no port or hinge close-ups, so functional condition of screen, keyboard, trackpad, storage, and ports is unconfirmed."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Screen may be cracked, dim, or dead (not just the battery).",
+        "proof": "A photo or clip of the laptop powered on showing a clear, undistorted image on the full screen.",
+        "if_unproven": "priced as screen not working / unverified display"
+      },
+      {
+        "risk": "Battery condition may be worse than 'bad' (e.g., swollen, missing, or laptop won't run even on AC).",
+        "proof": "A clip showing the laptop powering on and running, plus a photo of the battery itself (health %, swelling) or a screenshot of battery status in OS.",
+        "if_unproven": "priced as battery requiring full replacement, worst case"
+      },
+      {
+        "risk": "Exact CPU generation, RAM size, and storage type/capacity are unknown, which materially changes value.",
+        "proof": "A screenshot of System Information / Task Manager / 'About this PC' showing CPU model, RAM, and storage.",
+        "if_unproven": "priced at the lowest plausible spec for a 'Core i5, Windows 7-era' 15-inch laptop"
+      },
+      {
+        "risk": "Storage drive may be missing, faulty, or wiped.",
+        "proof": "A photo of the BIOS/boot screen or OS showing the drive detected and its capacity.",
+        "if_unproven": "priced as storage not confirmed / possibly missing"
+      },
+      {
+        "risk": "Hidden physical damage (dents, cracked hinges, broken ports) not visible from the two angles shown.",
+        "proof": "Close-up photos of the underside, all ports, and both hinges.",
+        "if_unproven": "priced as cosmetic condition unknown, assume moderate wear"
+      },
+      {
+        "risk": "Charger/adapter may not be included or may not match.",
+        "proof": "A photo of the original charger with model number plate.",
+        "if_unproven": "priced as charger not included"
+      }
+    ],
+    "proof_requests": [
+      "Power-on video/photo showing the screen displaying an image clearly.",
+      "Screenshot of System Information (CPU model, RAM, storage) or BIOS screen.",
+      "Close-up photos of ports, hinges, and underside/base of the laptop.",
+      "Photo of the battery itself and/or a battery health screenshot.",
+      "Photo of the charger/adapter if included."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The laptop's identity is only generic (Core i5 era, Windows 7 sticker) with no legible model, CPU generation, RAM, or storage shown, and the screen is never seen powered on, so even a worst-case price cannot be set without the missing specification and power-on proof."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 35597,
+    "input_tokens": 2303,
+    "output_tokens": 3059,
+    "cost_usd": 0.035196,
+    "replayed": false,
+    "fixture_key": "d15a97de219a9b9fe8081dcc6a24c9e7",
+    "error": null
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r4",
+  "response": {
+    "observations": [
+      "Volkswagen engine with a black plastic cover.",
+      "The cover has 'TSI' embossed on the left side.",
+      "The engine is shown from multiple angles in photos 0, 1, and 2.",
+      "The engine is sitting on a dark, gravelly surface.",
+      "A red plastic engine oil filler cap is visible on the left side.",
+      "The engine appears to be used, with some dirt and wear visible on the plastic cover and metal components."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "engine",
+      "brand": "Volkswagen",
+      "read_from": [
+        "photo 0 cover",
+        "photo 1 cover",
+        "photo 2 cover"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Complete engine",
+        "verdict": "supported",
+        "evidence": "All three photos show the engine from different angles, including the oil filler cap and the engine cover."
+      },
+      {
+        "claim": "Volkswagen TSI",
+        "verdict": "supported",
+        "evidence": "The 'TSI' branding is clearly visible on the engine cover in photo 0."
+      },
+      {
+        "claim": "1.4",
+        "verdict": "unverified",
+        "evidence": "The engine displacement is not clearly legible on the cover in any photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The engine may not be a 1.4 TSI as claimed.",
+        "proof": "A clear photo of the engine identification plate (usually on the cover or the engine block).",
+        "if_unproven": "priced as a 1.4 TSI engine"
+      },
+      {
+        "risk": "The engine may be a different model (e.g., 1.6 TDI) than the 1.4 TSI.",
+        "proof": "A photo of the engine identification plate.",
+        "if_unproven": "priced as a 1.6 TDI engine"
+      },
+      {
+        "risk": "The engine may be a used part with internal damage or missing components.",
+        "proof": "A video of the engine being tested or a photo of the engine block with the cover removed.",
+        "if_unproven": "priced as a used engine with unknown condition"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of any label, sticker or metal plate showing the brand and model.",
+      "Photo of the engine identification plate showing the model and displacement.",
+      "Photo of the engine block with the cover removed to check for cracks or missing parts.",
+      "Video of the engine running or a compression test."
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identified as a Volkswagen TSI engine from the photos. It can be priced at its worst-case value as a used 1.4 TSI engine."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r4",
+    "task": "testify_read",
+    "latency_ms": 7311,
+    "input_tokens": 2774,
+    "output_tokens": 501,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "00ac6a91f02f6f6eba0f4b62386010d8",
+    "error": null
+  }
+}

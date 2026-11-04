@@ -1,0 +1,81 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Single photo shows a used (tokumbo) car engine assembly on a concrete floor, removed from a vehicle.",
+      "Engine has visible wiring harness, intake manifold, oil pump area and various hoses/connectors.",
+      "No brand badge, engine code, VIN, or model sticker is legible anywhere in the photo.",
+      "Watermark reads 'TI AUTOMOBILE' but this is a shop watermark, not a proof of origin or condition.",
+      "No oil, coolant, or compression test shown; engine is static, not running."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used car engine assembly",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Direct tokumbo engine (directly imported used engine)",
+        "verdict": "unverifiable_remote",
+        "evidence": "No import documentation, customs sticker, or shipping label visible in photo 0."
+      },
+      {
+        "claim": "Implied working/good condition (standard tokumbo engine listing assumption)",
+        "verdict": "unverified",
+        "evidence": "No start-up video, compression test, or oil check shown in photo 0."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine may not run or may have internal faults (compression, knocking, oil leaks)",
+        "proof": "Video of engine starting and running, plus a compression test reading",
+        "if_unproven": "priced as non-working/parts engine"
+      },
+      {
+        "risk": "Engine may not match the buyer's specific car make/model/trim",
+        "proof": "Clear photo of engine code/block stamp and a shot of the chassis/VIN plate or sticker confirming donor vehicle",
+        "if_unproven": "priced assuming unconfirmed fitment, no premium for exact match"
+      },
+      {
+        "risk": "Missing ancillary parts (turbo, sensors, ECU, starter) not visible or removed",
+        "proof": "Full 360-degree photos including underside and both ends of the engine",
+        "if_unproven": "priced as bare long block only"
+      },
+      {
+        "risk": "Mileage/age of engine unknown, affecting wear",
+        "proof": "Photo of mileage sticker or any accompanying paperwork from country of origin",
+        "if_unproven": "priced as high-mileage/unknown age"
+      }
+    ],
+    "proof_requests": [
+      "Video of the engine cranking and running with sound",
+      "Close-up photo of the engine block casting number or code",
+      "Photo showing which car model/trim this engine was pulled from (e.g., matching chassis plate)",
+      "Photos from all sides including underside to confirm completeness"
+    ],
+    "decision": "price",
+    "reason": "Item is clearly a used car engine (by type), but condition, fitment, and completeness are all unverified, so it must be priced at worst case as a non-running, unconfirmed-fitment bare engine; only one comparable exists in the list.",
+    "price_pick": {
+      "low": 0,
+      "high": 0
+    }
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 14247,
+    "input_tokens": 2285,
+    "output_tokens": 1165,
+    "cost_usd": 0.012667,
+    "replayed": false,
+    "fixture_key": "84423fb9854b41b7b8588c895bd13e0f",
+    "error": null
+  }
+}

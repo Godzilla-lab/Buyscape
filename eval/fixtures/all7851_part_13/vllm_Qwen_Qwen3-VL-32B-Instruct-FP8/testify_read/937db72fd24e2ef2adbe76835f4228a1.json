@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "A black car battery with a handle on top.",
+      "The brand 'RUNALL' is visible on a label on the top and front of the battery.",
+      "The front label includes text: 'CAR BATTERY', 'MF DINTOR 12V 100AH/110', and a red-and-black checkered design.",
+      "The battery has two terminals, one on each end, with silver caps.",
+      "The battery is placed on a dark, possibly rubber, surface with a reflective edge below.",
+      "There is a watermark 'POSTED ON JI EASYDESIGN' over the front label."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car battery",
+      "brand": "RUNALL",
+      "model": "MF DINTOR 12V 100AH/110",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "it is working perfectly",
+        "verdict": "unverified",
+        "evidence": "No visual proof of functionality; no test or load test shown. The battery appears physically intact but no indication of charge or performance."
+      },
+      {
+        "claim": "I want to sell it because i have 2",
+        "verdict": "unverifiable_remote",
+        "evidence": "Seller's statement about ownership; cannot be verified from photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery may be dead or have low charge despite appearing intact.",
+        "proof": "A video or photo showing the battery being tested with a multimeter or connected to a car to start the engine.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Battery may have internal damage or sulfation not visible externally.",
+        "proof": "A close-up of the battery terminals and casing for corrosion or cracks, and a load test video.",
+        "if_unproven": "priced as potentially defective"
+      },
+      {
+        "risk": "The label may be fake or mislabeled; the battery may not be 100AH as claimed.",
+        "proof": "A clear, unobstructed photo of the label without watermark, or a serial number check if available.",
+        "if_unproven": "priced as unverified capacity"
+      }
+    ],
+    "proof_requests": [
+      "Video or photo of the battery being tested with a multimeter or connected to a car to start the engine.",
+      "Close-up of the battery terminals and casing to check for corrosion or damage.",
+      "Clear photo of the label without watermark to verify model and capacity."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The battery is identifiable by brand and model, but its working condition and true capacity cannot be confirmed from the current photo. Without proof of functionality and label verification, it cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 52439,
+    "input_tokens": 1779,
+    "output_tokens": 644,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "937db72fd24e2ef2adbe76835f4228a1",
+    "error": null
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a used car engine on a wet ground, likely in a workshop or yard.",
+      "The engine has a black plastic cover with a visible Ford oval logo on the right side.",
+      "There are handwritten markings on the left side of the cover: '11/16/23'.",
+      "Various hoses, pipes, and metal components are attached to the engine.",
+      "The surface is dirty and oily, with oil puddles on the ground around the engine.",
+      "A watermark 'POSTED ON JIJI AUTO ENGINES, GEAR BOX' is overlaid on the image.",
+      "No visible model number, serial number, or engine code is readable on the engine cover or elsewhere in the photo."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "Ford engine",
+      "brand": "Ford",
+      "model": null,
+      "read_from": [
+        "photo 0 Ford logo"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Ford engine for different year and model",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows a Ford logo on the engine cover."
+      },
+      {
+        "claim": "Ford edge engine",
+        "verdict": "unverified",
+        "evidence": "No visible model designation or markings to confirm it is a Ford Edge engine. The Ford logo is present, but not specific to the Edge model."
+      },
+      {
+        "claim": "gear box sold foreign used",
+        "verdict": "unverifiable_remote",
+        "evidence": "No gearbox is visible in the photo. The claim about the gearbox is not supported by the image."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine may be damaged or not functional",
+        "proof": "A video or photo showing the engine running, or a close-up of the cylinder head, oil pan, and internal components to check for cracks, leaks, or wear.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Engine may not be from a Ford Edge as claimed",
+        "proof": "A clear photo of the engine block with visible casting numbers or VIN tag that can be cross-referenced with Ford Edge models.",
+        "if_unproven": "priced as generic Ford engine, not Edge-specific"
+      },
+      {
+        "risk": "Engine may have hidden mechanical issues (e.g., blown head gasket, worn bearings)",
+        "proof": "A close-up photo of the oil filter, oil pan, and exhaust manifold to check for signs of coolant or oil leaks, or a video of the engine being turned over.",
+        "if_unproven": "priced as high-risk used engine"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the engine block with casting numbers or VIN tag.",
+      "Video or photo of the engine running or being turned over.",
+      "Close-up of oil pan, oil filter, and exhaust manifold to check for leaks or damage.",
+      "Photo of the gearbox if included, with model markings."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The engine is identifiable as Ford by the logo, but the specific model (e.g., Ford Edge) and condition cannot be confirmed from the photo. Hidden mechanical risks and the claim about the gearbox are unproven. More proof is needed to price accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 58497,
+    "input_tokens": 1781,
+    "output_tokens": 744,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "54d8bd4429aed72b02b6390e914ecc9e",
+    "error": null
+  }
+}

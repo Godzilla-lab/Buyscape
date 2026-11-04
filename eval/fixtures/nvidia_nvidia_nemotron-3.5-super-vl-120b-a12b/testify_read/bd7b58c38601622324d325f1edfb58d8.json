@@ -1,0 +1,86 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a cardboard carton of Indomie Instant Noodles held by a hand.",
+      "The box front reads \"Indomie\", \"Instant Noodles\", \"Chicken Flavor\", and \"SUPER PACK\".",
+      "The box displays \"40+ packs\" and \"4 packs Free Inside\".",
+      "Watermarks visible: \"POSTED ON JIJI\", \"CHISOM STORES\", and \"Infinix SMART 7 PLUS\".",
+      "The carton appears wrapped in clear plastic."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "instant noodles carton",
+      "brand": "Indomie",
+      "model": "Super Pack Chicken Flavor",
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Indomie Instant Noodles",
+        "verdict": "supported",
+        "evidence": "photo 0 shows the Indomie logo and product name"
+      },
+      {
+        "claim": "Carton contains 40 packs x 120g",
+        "verdict": "contradicted",
+        "evidence": "photo 0 shows \"40+ packs\" and \"4 packs Free Inside\" on the box"
+      },
+      {
+        "claim": "Wholesale & Bulk Available",
+        "verdict": "unverifiable_remote",
+        "evidence": "seller service claim not visible in the photo"
+      },
+      {
+        "claim": "Flavors",
+        "verdict": "unverified",
+        "evidence": "photo 0 shows only Chicken Flavor on this carton"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual number of sealed packs inside the carton cannot be confirmed from the outside.",
+        "proof": "Video or photo of the opened carton showing all individual packs.",
+        "if_unproven": "as containing fewer than advertised packs"
+      },
+      {
+        "risk": "Expiry date and freshness are not visible.",
+        "proof": "Close-up photo of the printed expiry or best-before date on the box.",
+        "if_unproven": "as near-expired or unsellable stock"
+      },
+      {
+        "risk": "Carton may contain only one flavor despite the seller saying \"Flavors\".",
+        "proof": "Photo showing the variety of flavor sachets inside or the carton side listing mixed flavors.",
+        "if_unproven": "as single-flavor chicken only"
+      },
+      {
+        "risk": "Box seal or packaging may be tampered or damaged.",
+        "proof": "Clear photo of the sealed carton from all sides showing the closure.",
+        "if_unproven": "as opened or repacked stock"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the expiry date printed on the carton.",
+      "Photo or video of the opened carton showing pack count and flavors.",
+      "Photo of the sealed carton from all sides to confirm packaging integrity."
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identifiable as an Indomie instant noodles carton from photo 0, so a worst-case price is possible; proof of pack count, expiry, and seal would raise the value."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 54561,
+    "input_tokens": 1855,
+    "output_tokens": 3354,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "bd7b58c38601622324d325f1edfb58d8",
+    "error": null
+  }
+}

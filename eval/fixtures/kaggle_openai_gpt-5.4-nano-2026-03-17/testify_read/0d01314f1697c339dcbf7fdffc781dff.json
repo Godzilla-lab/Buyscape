@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo shows a front-load LG washing machine with a round door and control panel.",
+      "On the front panel it reads \u201cDirectDrive 7kg\u201d (visible on photo 0).",
+      "There is visible rust/staining around the lower front edge/trim area (photo 0).",
+      "No model number/serial plate is visible in the photo (photo 0).",
+      "Seller text claims it is the 8kg one, but the photo text shows 7kg (photo 0)."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": null,
+      "brand": "LG",
+      "model": "DirectDrive 7kg (capacity shown on front)",
+      "read_from": [
+        "photo 0 front panel text: \u201cDirectDrive 7kg\u201d"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "LG DirectDrive 7kg washing machine for sale.",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows \u201cLG\u201d logo and \u201cDirectDrive 7kg\u201d text on the machine front."
+      },
+      {
+        "claim": "It is the 8kg one.",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 clearly shows \u201cDirectDrive 7kg\u201d on the front panel."
+      },
+      {
+        "claim": "Location: Agege, Lagos State.",
+        "verdict": "unverifiable_remote",
+        "evidence": "No location details are shown in photo 0."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Capacity mismatch (seller says 8kg but photo shows 7kg), which affects pricing and buyer expectations.",
+        "proof": "Ask for a clear photo of the rating/serial plate (usually inside the door frame or at the back) showing the exact capacity (kg) and model number.",
+        "if_unproven": "Price it as the worst-case shown: 7kg DirectDrive (and treat seller\u2019s 8kg claim as false until proven)."
+      },
+      {
+        "risk": "Possible rust/corrosion at the lower front area could indicate water ingress, poor drainage, or long-term exposure\u2014may lead to leaks or structural issues.",
+        "proof": "Ask for close-up photos of the bottom rim/door seal area and the underside/back for any water stains; also request a short video of a full wash cycle with no leaks.",
+        "if_unproven": "Price as a unit that may need service (treat as not guaranteed leak-free)."
+      },
+      {
+        "risk": "Condition/working status is unknown (no power-on, no cycle test shown).",
+        "proof": "Request a video: power on + selecting a program + starting a wash + showing water filling and drum movement/spin.",
+        "if_unproven": "Price as not working or untested until a cycle test is shown."
+      },
+      {
+        "risk": "Model number and exact variant are not readable, which affects spare parts availability and comparable pricing.",
+        "proof": "Ask for a photo of the model/serial label (rating plate) and the back panel label if present.",
+        "if_unproven": "Price using the visible worst-case identity only (LG DirectDrive 7kg) without assuming a specific variant."
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the rating/serial plate showing exact capacity (kg) and model number.",
+      "Short video of a full wash cycle (start to spin) showing no leaks and normal operation.",
+      "Close-up photos of the door seal and the lower front/rust area, plus underside/back for water staining."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo confirms an LG DirectDrive 7kg, contradicting the seller\u2019s 8kg claim, and the photos don\u2019t show working condition or the model/serial plate. Without a cycle test and the rating plate, a reliable worst-case price can\u2019t be set confidently."
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_read",
+    "latency_ms": 6068,
+    "input_tokens": 2736,
+    "output_tokens": 872,
+    "cost_usd": 0.00412,
+    "replayed": false,
+    "fixture_key": "0d01314f1697c339dcbf7fdffc781dff",
+    "error": null
+  }
+}

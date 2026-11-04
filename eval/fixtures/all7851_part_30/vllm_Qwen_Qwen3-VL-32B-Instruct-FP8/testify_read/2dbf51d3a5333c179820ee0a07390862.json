@@ -1,0 +1,94 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the closed lid of a black Dell laptop with the Dell logo centered. The surface has minor smudges and a small white sticker on the bottom right corner.",
+      "Photo 1 shows the bottom panel of the same laptop. The model name 'Latitude 5400' is visible in white text near the center-right. There is a barcode sticker, regulatory labels, and ventilation grilles. The laptop is being held by a person's arm."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Dell",
+      "model": "Latitude 5400",
+      "read_from": [
+        "photo 1 bottom panel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Dell Latitude 5400",
+        "verdict": "supported",
+        "evidence": "Photo 1: 'Latitude 5400' is clearly visible on the bottom panel."
+      },
+      {
+        "claim": "8th Generation Intel Core i5",
+        "verdict": "unverifiable_remote",
+        "evidence": "No CPU label or system information visible. Cannot confirm generation or model from photos alone."
+      },
+      {
+        "claim": "8gb Ram",
+        "verdict": "unverifiable_remote",
+        "evidence": "No RAM label or system specs visible. Cannot confirm from photos."
+      },
+      {
+        "claim": "256gb SSD",
+        "verdict": "unverifiable_remote",
+        "evidence": "No storage label or system specs visible. Cannot confirm from photos."
+      },
+      {
+        "claim": "Backlit Keyboard",
+        "verdict": "unverifiable_remote",
+        "evidence": "Keyboard not visible in any photo. Cannot confirm if backlit."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The laptop may not have the advertised 8th Gen Intel Core i5 processor.",
+        "proof": "Photo of the system information screen (e.g., BIOS or Windows About) showing CPU model.",
+        "if_unproven": "Priced as if it has a lower-end or non-existent CPU, reducing value."
+      },
+      {
+        "risk": "The RAM may not be 8GB or may be non-functional.",
+        "proof": "Photo of the open RAM compartment showing the modules and their labels, or a system information screenshot showing installed RAM.",
+        "if_unproven": "Priced as if it has less than 8GB or no RAM, reducing value."
+      },
+      {
+        "risk": "The SSD may not be 256GB or may be faulty.",
+        "proof": "Photo of the SSD label or system information showing storage capacity and health.",
+        "if_unproven": "Priced as if it has less storage or no SSD, reducing value."
+      },
+      {
+        "risk": "The keyboard may not be backlit.",
+        "proof": "Photo of the keyboard with lights on in a dark environment.",
+        "if_unproven": "Priced as if it has a non-backlit keyboard, reducing value."
+      },
+      {
+        "risk": "The laptop may have physical damage or wear not visible in photos, such as screen issues, hinge problems, or internal damage.",
+        "proof": "Video or photo of the laptop open, showing screen, keyboard, ports, and hinges in operation.",
+        "if_unproven": "Priced as if it has potential hidden damage, reducing value."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the system information screen (BIOS or Windows About) showing CPU, RAM, and storage details.",
+      "Photo of the keyboard with lights on in a dark room to verify backlighting.",
+      "Video or photo of the laptop open, showing screen, keyboard, ports, and hinges in operation.",
+      "Photo of the RAM and SSD modules if accessible."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is confirmed as Dell Latitude 5400, but key specifications (CPU, RAM, SSD, keyboard backlight) cannot be verified from the current photos. Hidden risks related to performance and condition are unproven. A worst-case price cannot be assigned without proof of these claims."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 75614,
+    "input_tokens": 2602,
+    "output_tokens": 931,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "2dbf51d3a5333c179820ee0a07390862",
+    "error": null
+  }
+}

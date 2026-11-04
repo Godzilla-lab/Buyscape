@@ -1,0 +1,91 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Sealed cardboard box with clear packing tape",
+      "Large 'GBM' brand logo on front",
+      "Text reads 'DEEP CYCLE GEL BATTERY'",
+      "Red text 'CONSTANT VOLTAGE CHARGE'",
+      "Watermark 'JOE BEST NIGERIAN LIMITED' across center",
+      "Red oval badge 'KOREAN TECHNOLOGY'",
+      "Application list includes 'Solar system'",
+      "Bottom band reads 'GEL100-12 12V/100AH'",
+      "Top flaps read 'DO NOT ROLL OVER' and 'HANDLE WITH CARE'",
+      "Box rests on indoor tiled floor"
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "12V 100Ah deep cycle gel battery",
+      "brand": "GBM",
+      "model": "GEL100-12",
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "100ah",
+        "verdict": "supported",
+        "evidence": "photo 0 shows '12V/100AH'"
+      },
+      {
+        "claim": "gbm",
+        "verdict": "supported",
+        "evidence": "photo 0 shows 'GBM' logo"
+      },
+      {
+        "claim": "dry cell",
+        "verdict": "contradicted",
+        "evidence": "photo 0 prints 'GEL BATTERY', not dry cell"
+      },
+      {
+        "claim": "solar battery",
+        "verdict": "supported",
+        "evidence": "photo 0 lists 'Solar system' as an application"
+      },
+      {
+        "claim": "12volts",
+        "verdict": "supported",
+        "evidence": "photo 0 shows '12V/100AH'"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The actual battery inside the sealed box is unseen; it may be missing, damaged, used, or a different capacity.",
+        "proof": "Photo or video of the battery label, terminals, and unboxing",
+        "if_unproven": "as not working or empty box"
+      },
+      {
+        "risk": "Battery health and true capacity cannot be confirmed from the box; it may be old stock or unable to hold charge.",
+        "proof": "Video of a load test or multimeter reading under load",
+        "if_unproven": "as dead or 0Ah"
+      },
+      {
+        "risk": "The box may have been opened and resealed; new condition is unproven.",
+        "proof": "Continuous video of the factory seal being broken",
+        "if_unproven": "as used"
+      }
+    ],
+    "proof_requests": [
+      "Video of unboxing showing the actual battery and its label",
+      "Photo of battery terminals and manufacturing date",
+      "Video of voltage or load test"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a GBM GEL100-12 12V/100Ah gel battery in its box from photo 0, so it can be priced at worst case (sealed box, unproven contents) while proof is requested to raise the value."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 42254,
+    "input_tokens": 1839,
+    "output_tokens": 3979,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "680b05e6a16b4cc2e38ded7f001f6351",
+    "error": null
+  }
+}

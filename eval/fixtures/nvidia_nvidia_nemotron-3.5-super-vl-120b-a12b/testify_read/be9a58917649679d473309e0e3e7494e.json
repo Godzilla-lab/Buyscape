@@ -1,0 +1,105 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Canon DSLR camera body with lens cap attached",
+      "Black Canon neck strap with red stripe visible",
+      "Second strap with EOS lettering visible",
+      "Canon lens cap with Canon text",
+      "Canon battery charger with power cable on floor",
+      "Mode dial and hot shoe visible on camera top",
+      "Camera resting on tiled floor",
+      "Lens markings hidden by lens cap",
+      "No 2000D model text readable on body",
+      "No extra battery visible separate from camera"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "DSLR camera",
+      "brand": "Canon",
+      "model": null,
+      "read_from": [
+        "photo 0 strap",
+        "photo 0 lens cap",
+        "photo 0 charger"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Canon 2000D",
+        "verdict": "unverified",
+        "evidence": "model number not readable in photo 0"
+      },
+      {
+        "claim": "18-55 lens",
+        "verdict": "unverified",
+        "evidence": "lens cap covers lens in photo 0"
+      },
+      {
+        "claim": "Charger",
+        "verdict": "supported",
+        "evidence": "Canon charger visible in photo 0"
+      },
+      {
+        "claim": "battery",
+        "verdict": "unverified",
+        "evidence": "charger visible but battery not separately shown"
+      },
+      {
+        "claim": "extra battery",
+        "verdict": "unverified",
+        "evidence": "not visible in photo 0"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Camera model is not 2000D",
+        "proof": "close-up of camera front or top plate showing model name",
+        "if_unproven": "as generic Canon DSLR body"
+      },
+      {
+        "risk": "Lens is not 18-55mm or lens is faulty",
+        "proof": "photo of lens barrel showing focal length and switches",
+        "if_unproven": "as body only"
+      },
+      {
+        "risk": "Camera does not power on or function",
+        "proof": "video of camera turning on, taking a shot, and displaying image",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Extra battery missing or dead",
+        "proof": "photo of second battery",
+        "if_unproven": "without extra battery"
+      },
+      {
+        "risk": "Charger faulty or wrong cable",
+        "proof": "photo of charger label and power plug",
+        "if_unproven": "as charger not working"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of camera model name",
+      "Photo of lens barrel with focal length markings",
+      "Video of camera powering on and taking a photo",
+      "Photo of extra battery",
+      "Photo of charger label and power plug"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a Canon DSLR with charger from photo 0, so it can be priced at worst case even though the 2000D model, lens, and extra battery claims are unproven."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 20946,
+    "input_tokens": 1847,
+    "output_tokens": 3210,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "be9a58917649679d473309e0e3e7494e",
+    "error": null
+  }
+}

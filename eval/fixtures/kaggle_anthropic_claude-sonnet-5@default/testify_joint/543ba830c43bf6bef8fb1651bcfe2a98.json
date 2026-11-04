@@ -1,0 +1,93 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 and 1 show a Nikon DSLR body with 'Nikon' and 'D610' markings visible on the front, no lens attached, mirror box exposed.",
+      "Visible cosmetic wear: scuffed rubber grip, worn red accent stripe, scratches on the mount area and top plate.",
+      "Photo 2 shows the top LCD panel displaying a partial reading ('-3-') and a hot-shoe with dust/grime, mode dial visible.",
+      "No lens, battery, charger, strap, memory card, or bag are visible in any photo.",
+      "No shutter count, sensor, or battery level display is shown.",
+      "Watermark 'POSTED ON JIJI - MUHAMMED TUNJI' overlays all three photos."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DSLR camera body",
+      "brand": "Nikon",
+      "model": "D610",
+      "read_from": [
+        "photo 0",
+        "photo 1"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Used Nikon D610 in good condition",
+        "verdict": "unverified",
+        "evidence": "Photos show cosmetic wear (scuffed grip, scratches); no evidence of internal/functional condition such as shutter count, sensor cleanliness, or power-on test."
+      },
+      {
+        "claim": "May show sign of cosmetic wears",
+        "verdict": "supported",
+        "evidence": "Photo 0/1 show scuff marks and worn grip stripe; photo 2 shows scratches and dust on hot-shoe."
+      },
+      {
+        "claim": "Comes with original battery and...",
+        "verdict": "unverifiable_remote",
+        "evidence": "No battery, charger, or accessories are visible in any of the 3 photos; claim text is also cut off."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Camera may not power on or shutter may be faulty",
+        "proof": "A photo/video of the camera powered on with lens attached, showing live view or a test shot, plus shutter count via a tool like Nikon shutter count checker.",
+        "if_unproven": "priced as non-functional/body-only worst case"
+      },
+      {
+        "risk": "Sensor could have dust, scratches, or fungus affecting image quality",
+        "proof": "A clear close-up photo of the sensor with mirror locked up, or a sample test image showing even exposure.",
+        "if_unproven": "priced assuming sensor condition unknown/worst case"
+      },
+      {
+        "risk": "No lens included despite being a common bundle expectation",
+        "proof": "Photo showing a lens attached or included in the sale bundle.",
+        "if_unproven": "priced as body-only"
+      },
+      {
+        "risk": "Battery and charger claimed but not shown; battery health unknown",
+        "proof": "Photo of the actual battery and charger included, plus a photo of battery health/cycle count if accessible via camera menu.",
+        "if_unproven": "priced as body-only without accessories"
+      },
+      {
+        "risk": "Shutter count unknown, which heavily affects DSLR value",
+        "proof": "A screenshot of shutter count from firmware/EXIF data of a test shot.",
+        "if_unproven": "priced at high-shutter-count worst case"
+      }
+    ],
+    "proof_requests": [
+      "Video of the camera powering on and taking a sample photo with a lens attached.",
+      "Photo of the shutter count (via EXIF data of a test image or on-screen menu).",
+      "Photo of the actual battery, charger, and any other included accessories.",
+      "Clear close-up of the sensor for dust/scratch/fungus check."
+    ],
+    "decision": "price",
+    "reason": "The item is identified as a Nikon D610 body from the visible nameplate, but no lens or accessories are shown, functionality is unverified, and cosmetic wear is confirmed, so it must be priced at worst case as a body-only unit with unproven condition.",
+    "price_pick": {
+      "low": 2,
+      "high": 7
+    }
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 28912,
+    "input_tokens": 4092,
+    "output_tokens": 2500,
+    "cost_usd": 0.033184,
+    "replayed": false,
+    "fixture_key": "543ba830c43bf6bef8fb1651bcfe2a98",
+    "error": null
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: A dark gray, upright refrigerator with a visible Samsung logo on the front. The surface shows some smudges and minor wear. It is placed against a tiled wall with a power socket visible on the left.",
+      "Photo 1: The refrigerator door is open, revealing the interior. The freezer compartment at the top is filled with ice, and the interior light is on. The shelves are mostly empty except for a few containers and a carton. The door has a small shelf with a jar and a carton.",
+      "Photo 2: A similar view to photo 1, showing the same interior. The freezer is still full of ice, and the interior light is on. A label or sticker is visible on the door's inner panel, but the text is not legible. The door shelf has a jar and a carton, and the interior appears slightly yellowed."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "refrigerator",
+      "brand": "Samsung",
+      "model": null,
+      "read_from": [
+        "photo 0 front panel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Neatly used Samsung refrigerator",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows the Samsung brand on the front. Photos 1 and 2 show the interior with some use (ice buildup, minor stains), but no major damage or dirt. The term 'neatly used' is subjective but reasonably supported by the visual condition."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Freezer is heavily frosted, indicating possible defrosting issue or poor insulation.",
+        "proof": "A close-up of the freezer compartment with the door open, showing the extent of frost and whether it is on the walls or the evaporator coils.",
+        "if_unproven": "priced as inefficient or requiring defrosting, which reduces value"
+      },
+      {
+        "risk": "Interior yellowing and possible mold or odor due to age or poor maintenance.",
+        "proof": "A close-up of the interior walls and shelves, especially in shadowed areas, to check for discoloration, stains, or mold.",
+        "if_unproven": "priced as potentially having odor or hygiene issues, reducing value"
+      },
+      {
+        "risk": "Unknown model and age, which affects reliability and energy efficiency.",
+        "proof": "A clear photo of the model label or serial number, ideally from the sticker on the door or back panel.",
+        "if_unproven": "priced as an unknown model, which may be older and less efficient"
+      },
+      {
+        "risk": "Compressor or cooling system may be failing, as indicated by heavy frost buildup.",
+        "proof": "A video of the refrigerator running, showing the compressor operation and listening for unusual noises.",
+        "if_unproven": "priced as possibly not working reliably, reducing value"
+      }
+    ],
+    "proof_requests": [
+      "A close-up photo of the model label or serial number on the refrigerator.",
+      "A video of the refrigerator running, showing the compressor and interior lighting.",
+      "A close-up of the freezer compartment to assess frost buildup and condition of the evaporator.",
+      "A photo of the interior walls and shelves to check for mold or discoloration."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The refrigerator is identifiable as a Samsung, and the 'neatly used' claim is visually supported. However, critical risks such as heavy frost, interior condition, and unknown model affect pricing. Without proof of these, the item cannot be priced accurately and must be assessed further."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 61640,
+    "input_tokens": 2867,
+    "output_tokens": 795,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "994bca5ea267145e9be684517ceb5fa2",
+    "error": null
+  }
+}

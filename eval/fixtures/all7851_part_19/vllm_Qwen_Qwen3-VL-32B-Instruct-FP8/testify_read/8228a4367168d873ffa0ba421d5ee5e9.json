@@ -1,0 +1,102 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Open laptop showing Windows 11 desktop with blue abstract wallpaper. 'Dell Precision' branding visible below screen. Keyboard has backlit keys with purple glow. Stickers on palm rest: Intel Core i7, Windows 7 (likely outdated sticker).",
+      "Photo 1: Same angle as photo 0, screen shows same desktop. Keyboard backlit. No visible damage to screen or casing.",
+      "Photo 2: Screen shows NVIDIA Control Panel, indicating dedicated GPU. 'Dell Precision' branding visible. Keyboard backlit. Stickers same as photo 0. Hand visible on left edge, suggesting photo taken in person."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Dell",
+      "model": "Precision M6600",
+      "read_from": [
+        "seller's words",
+        "photo 0 screen bezel: 'Dell Precision'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Dell precision M6600 workstation",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 2 show 'Dell Precision' branding on screen bezel. Seller's words state model. No contradiction in photos."
+      },
+      {
+        "claim": "Intel core i7",
+        "verdict": "unverified",
+        "evidence": "Photo 0 and photo 1 show Intel Core i7 sticker on palm rest, but this sticker may be from a previous configuration or generic. No system info or BIOS screen shown to confirm current CPU."
+      },
+      {
+        "claim": "24gb ram",
+        "verdict": "unverifiable_remote",
+        "evidence": "No system properties, task manager, or BIOS screen shown. RAM cannot be confirmed from photos alone."
+      },
+      {
+        "claim": "256ssd",
+        "verdict": "unverifiable_remote",
+        "evidence": "No disk management or system info shown. SSD size cannot be confirmed from photos."
+      },
+      {
+        "claim": "Keyboard light",
+        "verdict": "supported",
+        "evidence": "Photos 0, 1, and 2 show keyboard with purple backlighting. Light is visibly active."
+      },
+      {
+        "claim": "3.5gb dedicated...",
+        "verdict": "unverified",
+        "evidence": "Photo 2 shows NVIDIA Control Panel, confirming dedicated GPU. But '3.5gb' is not visible in any photo. Could be 3.5GB VRAM, but no proof. Could be typo for 3.5GB or 3.5GB/s. No GPU model or specs shown."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "RAM is not 24GB as claimed",
+        "proof": "Photo of system properties or task manager showing installed RAM",
+        "if_unproven": "priced as having less than 24GB RAM, likely 8GB or 16GB"
+      },
+      {
+        "risk": "SSD is not 256GB or is failing",
+        "proof": "Photo of disk management or system info showing drive size and health",
+        "if_unproven": "priced as having smaller SSD or no SSD, possibly HDD only"
+      },
+      {
+        "risk": "CPU is not Intel Core i7 or is damaged",
+        "proof": "Photo of BIOS screen or system info showing CPU model and health",
+        "if_unproven": "priced as having lower-tier CPU or non-functional CPU"
+      },
+      {
+        "risk": "GPU VRAM is not 3.5GB or is faulty",
+        "proof": "Photo of GPU properties or NVIDIA Control Panel showing VRAM size and model",
+        "if_unproven": "priced as having lower VRAM or integrated graphics"
+      },
+      {
+        "risk": "Laptop has physical damage not visible in photos",
+        "proof": "Photo of underside, hinges, ports, and screen edges from multiple angles",
+        "if_unproven": "priced as having hidden damage, possibly affecting resale value"
+      }
+    ],
+    "proof_requests": [
+      "Photo of system properties or task manager showing RAM, CPU, and storage details",
+      "Photo of NVIDIA Control Panel or GPU properties showing VRAM size and GPU model",
+      "Photo of BIOS screen or system info confirming CPU model",
+      "Photo of disk management showing SSD size and health",
+      "Photo of underside, hinges, ports, and screen edges to check for damage"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identifiable as Dell Precision M6600, and keyboard backlight is confirmed. However, key specs like RAM, SSD, CPU, and GPU VRAM cannot be verified from current photos. Without proof of these, the item cannot be priced accurately. Hidden risks include incorrect or missing components, which would significantly affect value."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 88054,
+    "input_tokens": 2798,
+    "output_tokens": 1079,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "8228a4367168d873ffa0ba421d5ee5e9",
+    "error": null
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 and Photo 1 show stacks of black console-style units, shape consistent with Sony PlayStation 4 (standard and slimmer Pro-style body) in a retail shop setting with phone boxes on shelves behind.",
+      "Faint PlayStation logo visible on the front unit's top panel in Photo 0.",
+      "Visible scuffs, light scratches and dust/smudge marks on the top surface of the front unit in both photos.",
+      "No controller, power cable, HDMI cable, or power/boot screen is visible in either photo.",
+      "Multiple units (at least 4-5) are stacked together, suggesting a shop display of several consoles rather than a single listing photo.",
+      "'McSteve' shop banner/bag visible in foreground, indicating a retail/reseller listing."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "game console (PS4-style body shown; 'Pro' claimed by seller, not confirmed by visible markings)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 body shape and logo",
+        "photo 1 body shape"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "UK Used Sony PS4 Pro Console",
+        "verdict": "unverified",
+        "evidence": "Body shape in photo 0/1 is consistent with a PS4-family console, but no model label, serial plate, or back-panel port layout is visible to confirm 'Pro' variant specifically versus standard or slim PS4."
+      },
+      {
+        "claim": "with one controller Pad",
+        "verdict": "contradicted",
+        "evidence": "No controller is visible in either photo; only console units are shown."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Console may not power on or may have internal fault (common issue with 'UK used' resale units)",
+        "proof": "Video or photo of console powered on showing PlayStation boot/home screen",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "No controller actually included despite claim",
+        "proof": "Photo showing the controller alongside the console, ideally with console in same frame",
+        "if_unproven": "priced as console only, no controller"
+      },
+      {
+        "risk": "No power cable or HDMI cable shown, which are required accessories",
+        "proof": "Photo of included cables",
+        "if_unproven": "priced as accessories not included"
+      },
+      {
+        "risk": "Cannot confirm whether unit is genuine PS4 Pro vs standard PS4 (different internal specs/value)",
+        "proof": "Photo of rear port panel and bottom/rear model sticker (model number starts with CUH-7xxx for Pro)",
+        "if_unproven": "priced as base-model PS4 risk, not Pro"
+      },
+      {
+        "risk": "Visible scuffs/scratches may indicate heavier wear or prior drop/damage not fully shown",
+        "proof": "Close-up photos of all sides and underside of the unit being sold (not the stack)",
+        "if_unproven": "priced as cosmetically worn, lower grade"
+      },
+      {
+        "risk": "Multiple units in photo create ambiguity about which exact unit is for sale",
+        "proof": "Single clear photo of the exact unit being sold, front and back",
+        "if_unproven": "priced as the most worn-looking unit in the group"
+      }
+    ],
+    "proof_requests": [
+      "Video of the exact console powering on to the home screen",
+      "Photo of the rear port panel and model/serial sticker on the unit being sold",
+      "Photo of the controller included, next to the console",
+      "Photo of power cable and HDMI cable included",
+      "Clear single-unit photos (front, back, top, bottom) of the exact item for sale, not the group stack"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photos show a stack of console units with visible wear but no model sticker, no controller, no cables, and no power-on proof, so even a worst-case price needs confirmation of which single unit is being sold and whether it is genuinely a Pro variant."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 17815,
+    "input_tokens": 3222,
+    "output_tokens": 1613,
+    "cost_usd": 0.019415,
+    "replayed": false,
+    "fixture_key": "93ec550bdbba5f98aa596a60e35c6c71",
+    "error": null
+  }
+}

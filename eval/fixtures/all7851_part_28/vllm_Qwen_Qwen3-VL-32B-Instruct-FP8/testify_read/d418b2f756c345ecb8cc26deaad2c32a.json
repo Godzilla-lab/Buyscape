@@ -1,0 +1,65 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a close-up of a green LCD display on a device labeled 'Hybrid Solar Inverter'. The display shows 'BATT 25.6 V' and 'OUTPUT 220 V', with icons indicating charging and a battery level at 25%. Two indicator lights below the screen are illuminated: 'INV' and 'CHG'.",
+      "Photo 1 shows the full front of a white and blue unit with the brand 'Cworth Energy' printed below the display. The display matches the one in photo 0. A 'CAUTION' sticker is visible at the bottom left.",
+      "Photo 2 shows the inverter mounted on a wall next to a small electrical panel. Below it, on the floor, is a white rectangular box, presumably the lithium battery. The battery has no visible branding or labels in the photo. The setup is in a corner with a concrete wall and tiled floor."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "hybrid solar inverter and lithium battery",
+      "brand": "Cworth Energy",
+      "model": null,
+      "read_from": [
+        "photo 1 front panel",
+        "photo 0 display label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Fully functional 3.5kVA Hybrid inverter and 5kWh lithium battery both Cworth",
+        "verdict": "unverified",
+        "evidence": "The inverter is branded Cworth Energy (photo 1). The display shows it is charging and outputting power (photo 0), suggesting it is operational. However, the battery is not branded in the photos (photo 2), and there is no visible model number or capacity label on either unit. The 3.5kVA and 5kWh specifications are not visible in any photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The battery may not be a 5kWh Cworth unit as claimed, or may be damaged or degraded.",
+        "proof": "A clear photo of the battery's front or side showing the brand, model, and capacity label.",
+        "if_unproven": "priced as a generic unbranded battery, which is lower value"
+      },
+      {
+        "risk": "The inverter may not be a 3.5kVA model; the capacity is not visible on the unit.",
+        "proof": "A photo of the inverter's nameplate or rear panel showing the model number and rated power.",
+        "if_unproven": "priced as a lower-capacity inverter, or as unverified capacity"
+      },
+      {
+        "risk": "The inverter may have internal damage or faults not visible in the photos, despite the display showing normal operation.",
+        "proof": "A video showing the inverter operating under load, or a diagnostic report from the inverter's menu.",
+        "if_unproven": "priced as potentially faulty, with lower value"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the battery's front or side showing brand, model, and capacity.",
+      "Photo of the inverter's nameplate or rear panel showing model number and rated power (kVA).",
+      "Video of the inverter operating under load, or a screenshot of the full menu showing system status and capacity."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The inverter is identifiable as a Cworth Energy unit, but the claimed 3.5kVA capacity and the battery's 5kWh capacity and brand are not visible in the photos. The battery lacks any visible branding. Without proof of these specifications, the item cannot be priced accurately, and hidden risks related to capacity and authenticity affect value."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 67081,
+    "input_tokens": 3243,
+    "output_tokens": 810,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "d418b2f756c345ecb8cc26deaad2c32a",
+    "error": null
+  }
+}

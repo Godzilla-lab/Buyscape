@@ -1,0 +1,100 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows four identical laptops stacked, with the top one open, revealing a black keyboard, silver bezel, and ports on the left side (USB, HDMI, etc.).",
+      "Photo 1 shows the top laptop open from the front, with 'DELL' visible on the bezel above the screen, 'VOSTRO' on the keyboard bezel, and an Intel sticker on the lower right of the palm rest.",
+      "Photo 2 is similar to photo 1, with the same branding visible, and the screen is off.",
+      "All laptops appear to be the same model, with a black chassis and silver trim.",
+      "No internal components, labels, or serial numbers are visible in any photo.",
+      "The seller claims it is a Dell Vostro 3550 with Core i3, 4GB RAM, 250GB HDD, and Windows 7."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Dell",
+      "model": "Vostro 3550",
+      "read_from": [
+        "photo 1 screen bezel",
+        "photo 1 keyboard bezel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Dell Vostro 3550",
+        "verdict": "supported",
+        "evidence": "Photo 1 and 2 show 'DELL' on the screen bezel and 'VOSTRO' on the keyboard bezel, consistent with the model name."
+      },
+      {
+        "claim": "Core i3",
+        "verdict": "unverifiable_remote",
+        "evidence": "No CPU label or system information visible. The Intel sticker is present but does not specify the model."
+      },
+      {
+        "claim": "4GB RAM",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal photos or system specs visible. Cannot confirm RAM amount."
+      },
+      {
+        "claim": "250GB HDD",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal photos or disk information visible. Cannot confirm storage type or size."
+      },
+      {
+        "claim": "Windows 7",
+        "verdict": "unverifiable_remote",
+        "evidence": "Screen is off in all photos; no OS interface visible. Cannot confirm operating system."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The laptop may not have a Core i3 processor",
+        "proof": "A photo of the system information screen or the CPU label inside the laptop.",
+        "if_unproven": "priced as having a lower-end or unknown CPU"
+      },
+      {
+        "risk": "The RAM may be less than 4GB or not functional",
+        "proof": "A photo of the BIOS/UEFI screen showing RAM size or a photo of the RAM slots with installed sticks.",
+        "if_unproven": "priced as having 2GB or less RAM"
+      },
+      {
+        "risk": "The storage may not be a 250GB HDD or may be faulty",
+        "proof": "A photo of the disk management screen or the physical drive inside the laptop.",
+        "if_unproven": "priced as having a smaller or SSD drive, or as not working"
+      },
+      {
+        "risk": "The laptop may not be running Windows 7 or may be unbootable",
+        "proof": "A video or photo of the boot screen or desktop showing Windows 7.",
+        "if_unproven": "priced as not working or with unknown OS"
+      },
+      {
+        "risk": "The laptop may have physical damage or wear not visible in photos",
+        "proof": "A close-up photo of the screen, keyboard, hinges, and ports showing condition.",
+        "if_unproven": "priced as having moderate wear or potential defects"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the BIOS/UEFI screen showing CPU and RAM details.",
+      "Photo of the disk management screen or physical drive.",
+      "Video or photo of the laptop booting into Windows 7.",
+      "Close-up photos of the screen, keyboard, and ports to check for damage.",
+      "Photo of the bottom panel or inside showing the model label or serial number."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identifiable as Dell Vostro 3550, but key specifications (CPU, RAM, storage, OS) cannot be verified from the photos. Without proof of these, the item cannot be priced accurately and carries significant hidden risks."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 82487,
+    "input_tokens": 2754,
+    "output_tokens": 1014,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "5cf3b16d44be487a9a644df10e686ae3",
+    "error": null
+  }
+}

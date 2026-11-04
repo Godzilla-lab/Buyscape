@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Single photo shows a blue industrial gearbox/speed reducer unit sitting on bare ground.",
+      "Output shaft is visible on the right side, unpainted metal, no coupling attached.",
+      "A nameplate is visible on top of the housing but the text is too small/blurred to read.",
+      "A black cable is visible near the base but no separate electric motor unit is visible anywhere in the frame.",
+      "Watermark 'CHIDONBEST INDUSTRIAL' and 'POSTED ON JIJI' overlay the image; these are platform/seller marks, not proof of the item's specs."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "industrial gearbox (speed reducer)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 (nameplate visible but illegible)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Industrial gear box",
+        "verdict": "supported",
+        "evidence": "photo 0 shows a gearbox-style housing with output shaft"
+      },
+      {
+        "claim": "Electric motor 20hp",
+        "verdict": "unverifiable_remote",
+        "evidence": "No motor unit is visible in photo 0; only the gearbox is shown"
+      },
+      {
+        "claim": "Ratio 1:10",
+        "verdict": "unverifiable_remote",
+        "evidence": "Nameplate in photo 0 is present but text is unreadable"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Nameplate details (brand, exact ratio, model, torque rating) cannot be read, so true specification and value are unknown.",
+        "proof": "A close-up, well-lit photo of the nameplate showing all engraved/printed text",
+        "if_unproven": "priced as a generic unbranded industrial gearbox of unknown ratio"
+      },
+      {
+        "risk": "The claimed 20hp electric motor is not shown at all; it may not be included in the sale or may not exist as described.",
+        "proof": "A photo of the actual motor unit including its own nameplate (hp, voltage, brand)",
+        "if_unproven": "priced as gearbox only, with no motor included"
+      },
+      {
+        "risk": "Working condition of the gearbox (internal gear wear, oil seal leaks, shaft play) cannot be assessed from a static photo.",
+        "proof": "A video clip of the unit running under load, or at minimum free hand-rotation of the output shaft showing no excessive play",
+        "if_unproven": "priced as non-working/unverified condition"
+      },
+      {
+        "risk": "Unit appears to be sitting on dirt/outdoor ground, suggesting possible storage exposure (rust, water ingress) not visible from this angle.",
+        "proof": "Photos of the underside, oil fill/drain plugs, and interior oil condition if accessible",
+        "if_unproven": "priced assuming possible corrosion/wear risk"
+      }
+    ],
+    "proof_requests": [
+      "Clear close-up photo of the gearbox nameplate (brand, model, ratio, torque rating).",
+      "Separate photo of the electric motor with its own nameplate showing hp, voltage, and brand.",
+      "Video of the unit running or shaft rotating freely to show working condition.",
+      "Photos from additional angles including underside and oil ports."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The listing bundles a gearbox and a 20hp motor, but only the gearbox is visible and its nameplate is unreadable, so neither the motor's existence/specs nor the gearbox's exact rating can be confirmed, making even a worst-case price impossible without the missing nameplate and motor photos."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 19692,
+    "input_tokens": 2221,
+    "output_tokens": 1884,
+    "cost_usd": 0.020123,
+    "replayed": false,
+    "fixture_key": "9251d72956af75e5430d6540ed199486",
+    "error": null
+  }
+}

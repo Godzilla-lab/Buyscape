@@ -1,0 +1,88 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a white handheld sewing machine in its retail packaging labeled 'Handy Stitch Portable and Cordless'.",
+      "The box claims it 'Sews Through Denim!' and includes a bobbin with thread and needle.",
+      "The device is shown with accessories: two spools of red thread, a needle, a small tool, and a USB cable.",
+      "Photo 1 shows the device in use, held in a hand, stitching fabric. Text overlays mention 'Streamlined Threading Path', 'Precision Single Stitch', and 'Cordless & Battery Powered (4x AA)'.",
+      "The device appears to be a small, white, handheld electric sewing tool, not a full-sized sewing machine.",
+      "The packaging and promotional image suggest it is marketed as a quick repair tool for on-the-spot fixes."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "handheld cordless sewing machine",
+      "brand": "Handy Stitch",
+      "model": null,
+      "read_from": [
+        "photo 0 box",
+        "photo 1 text overlay"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Portable and Cordless",
+        "verdict": "supported",
+        "evidence": "Photo 0 box and photo 1 text both state 'Portable and Cordless' and 'Cordless & Battery Powered (4x AA)'."
+      },
+      {
+        "claim": "Sews through denim",
+        "verdict": "unverified",
+        "evidence": "Photo 0 box claims it 'Sews Through Denim!', but no photo shows denim being sewn. The fabric shown is thin and dark blue, not denim."
+      },
+      {
+        "claim": "Includes bobbin with thread and needle",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows the bobbin, thread spools, and needle included in the set."
+      },
+      {
+        "claim": "Complete starter kit included",
+        "verdict": "supported",
+        "evidence": "Photo 1 text states 'Complete Starter Kit Included' and shows accessories like thread, needle, and tool."
+      },
+      {
+        "claim": "Easy on-the-spot repairs",
+        "verdict": "supported",
+        "evidence": "Photo 1 text states 'EASY ON-THE-SPOT REPAIRS' and shows the device being used on fabric."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Device may not work as advertised (e.g., cannot sew through denim or thick fabric)",
+        "proof": "A video or photo showing the device actively sewing through denim or thick fabric.",
+        "if_unproven": "priced as not working for thick materials"
+      },
+      {
+        "risk": "Battery or power issues (e.g., not charging or weak performance)",
+        "proof": "A video showing the device powered on and stitching fabric, or a photo of the battery compartment with batteries inserted.",
+        "if_unproven": "priced as possibly non-functional"
+      },
+      {
+        "risk": "Missing or damaged components (e.g., needle, bobbin, or USB cable)",
+        "proof": "A close-up photo of all included accessories laid out, showing condition and completeness.",
+        "if_unproven": "priced as possibly incomplete"
+      }
+    ],
+    "proof_requests": [
+      "Video or photo of the device sewing through denim or thick fabric.",
+      "Photo of the device powered on and stitching fabric.",
+      "Close-up photo of all included accessories to confirm completeness and condition."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a Handy Stitch handheld sewing machine, but key performance claims (like sewing through denim) and functional risks (battery, completeness) cannot be verified from current photos. Proof is needed to confirm functionality and completeness before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 67352,
+    "input_tokens": 2017,
+    "output_tokens": 842,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "754626ae08ae29cab4f0f6f46871231a",
+    "error": null
+  }
+}

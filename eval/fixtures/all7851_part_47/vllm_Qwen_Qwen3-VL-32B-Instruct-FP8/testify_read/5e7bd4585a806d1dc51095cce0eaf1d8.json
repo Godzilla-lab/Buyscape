@@ -1,0 +1,122 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a white Dell laptop with the screen on, displaying a Windows desktop with a beach wallpaper.",
+      "The Dell logo is visible below the screen.",
+      "The keyboard is black with white lettering, and the touchpad is large and centered.",
+      "A hand is holding the left side of the laptop, suggesting it is being presented for sale.",
+      "The screen appears to be 14 inches based on proportions and seller claim.",
+      "No visible damage to the screen or keyboard in this shot.",
+      "The laptop is open and powered on, showing the desktop and a context menu.",
+      "There is a watermark 'YUSUF' across the keyboard and touchpad."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "laptop",
+      "brand": "Dell",
+      "model": null,
+      "read_from": [
+        "photo 0 screen (Dell logo below screen)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Dell 5410",
+        "verdict": "unverified",
+        "evidence": "The model number is not visible in photo 0. The Dell logo is present, but no model label is shown."
+      },
+      {
+        "claim": "Intel core i5 10 Gen",
+        "verdict": "unverifiable_remote",
+        "evidence": "No system information or BIOS screen is shown. The Windows desktop does not reveal CPU details."
+      },
+      {
+        "claim": "Face id",
+        "verdict": "unverified",
+        "evidence": "A webcam is visible above the screen, but there is no visible IR sensor or indication of facial recognition hardware. No Windows Hello or login screen shown."
+      },
+      {
+        "claim": "14\" screen",
+        "verdict": "supported",
+        "evidence": "The screen size appears consistent with a 14-inch laptop based on proportions and bezel width. Seller claim matches visual evidence."
+      },
+      {
+        "claim": "256 SSD",
+        "verdict": "unverifiable_remote",
+        "evidence": "No disk management or system information screen shown. Cannot verify storage type or size."
+      },
+      {
+        "claim": "8GB",
+        "verdict": "unverifiable_remote",
+        "evidence": "No system properties or task manager screen shown to confirm RAM amount."
+      },
+      {
+        "claim": "Full HDD",
+        "verdict": "unverifiable_remote",
+        "evidence": "No disk management or system information screen shown. Cannot verify presence of a secondary HDD."
+      },
+      {
+        "claim": "None tourch",
+        "verdict": "unverified",
+        "evidence": "The term 'tourch' likely means 'touch' (as in touch screen). The screen does not appear to be touch-enabled in photo 0, but no interaction is shown. No touch indicator on bezel or screen."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The laptop may not have the advertised Intel Core i5 10th Gen processor.",
+        "proof": "A screenshot of the System Information or Task Manager showing CPU details.",
+        "if_unproven": "priced as having a lower-end or older processor"
+      },
+      {
+        "risk": "The advertised 256GB SSD and 8GB RAM may not be present or may be misrepresented.",
+        "proof": "A screenshot of Disk Management or System Properties showing storage and RAM details.",
+        "if_unproven": "priced as having less storage or RAM, or no SSD"
+      },
+      {
+        "risk": "The 'Full HDD' claim may be false or misleading (e.g., no HDD, or HDD is faulty).",
+        "proof": "A screenshot of Disk Management showing both SSD and HDD, or a photo of the internal drive bay.",
+        "if_unproven": "priced as having no HDD or only SSD"
+      },
+      {
+        "risk": "The 'Face ID' feature may not work or may not be present (no IR sensor visible).",
+        "proof": "A photo of the top bezel showing IR sensors or a screenshot of Windows Hello setup.",
+        "if_unproven": "priced as lacking facial recognition"
+      },
+      {
+        "risk": "The laptop may have physical damage not visible in photo 0 (e.g., scratches, dents, hinge issues).",
+        "proof": "Photos of all sides, hinges, and base of the laptop.",
+        "if_unproven": "priced as having potential cosmetic or structural damage"
+      },
+      {
+        "risk": "The screen may be cracked or have dead pixels not visible in this photo.",
+        "proof": "A photo of the screen with a solid white or black background to check for defects.",
+        "if_unproven": "priced as having potential screen defects"
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of System Information or Task Manager showing CPU, RAM, and storage details.",
+      "Screenshot of Disk Management showing all drives.",
+      "Photo of the top bezel showing webcam and any IR sensors for Face ID.",
+      "Photos of all sides, hinges, and base of the laptop.",
+      "Photo of the screen with a solid white or black background to check for defects.",
+      "Photo of the laptop's label or sticker (if any) showing model number."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model number and key specifications (CPU, RAM, storage, Face ID) cannot be verified from the single photo. The laptop appears to be a Dell, but without proof of the claimed specs, it cannot be priced accurately. The risks include misrepresentation of hardware and potential hidden damage."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 103725,
+    "input_tokens": 1802,
+    "output_tokens": 1244,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "5e7bd4585a806d1dc51095cce0eaf1d8",
+    "error": null
+  }
+}

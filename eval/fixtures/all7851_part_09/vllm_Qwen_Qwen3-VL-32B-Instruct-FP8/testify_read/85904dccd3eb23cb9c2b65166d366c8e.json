@@ -1,0 +1,86 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Front view of an open laptop showing a Windows desktop. The keyboard has a silver frame, black keys, and an Intel sticker. The touchpad is centered. The ASUS logo is visible below the screen. A hand holds the left side. A power adapter is connected. A watermark 'BLUE SKIES TECHNOLOGY HUB' is overlaid.",
+      "Photo 1: Closed laptop lid, purple/silver brushed finish, with the ASUS logo centered. Held by a hand. Background shows shelves with electronics. Watermark present.",
+      "Photo 2: Back of the laptop, purple/silver, showing vents, rubber feet, and a label with regulatory info. A person is partially visible in the background. Watermark present."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "ASUS",
+      "model": "VivoBook 14",
+      "read_from": [
+        "photo 0 screen bezel",
+        "photo 1 lid"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Asus VivoBook 14",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows 'ASUS' on the bezel and 'VivoBook' on the screen bezel (partially visible). Photo 1 shows the ASUS logo on the lid. The model name is consistent with the seller's claim."
+      },
+      {
+        "claim": "7th Generation Intel Pentium",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows an Intel sticker, but the specific generation or model (e.g., Pentium N4200, N5000) is not readable. No CPU label is visible in photo 2."
+      },
+      {
+        "claim": "320GB HDD",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal drive is visible. The storage type and size cannot be confirmed from photos. The seller's claim cannot be verified remotely."
+      },
+      {
+        "claim": "8GB RAM",
+        "verdict": "unverifiable_remote",
+        "evidence": "RAM is not visible. Cannot be confirmed from photos. The seller's claim cannot be verified remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The laptop may not have 8GB RAM or a 320GB HDD as claimed.",
+        "proof": "A photo of the BIOS/UEFI screen showing system information, or a screenshot from Windows Task Manager or System Properties showing RAM and storage details.",
+        "if_unproven": "Priced as having less than 8GB RAM or a smaller/missing HDD, which significantly reduces value."
+      },
+      {
+        "risk": "The CPU may not be a 7th Gen Intel Pentium; it could be a lower or higher generation, or a different brand.",
+        "proof": "A clear photo of the CPU label on the motherboard or a screenshot from CPU-Z or similar software showing the exact CPU model.",
+        "if_unproven": "Priced as having an unknown or lower-tier CPU, which reduces value."
+      },
+      {
+        "risk": "The laptop may have physical damage not visible in photos, such as cracked hinges, screen damage, or keyboard issues.",
+        "proof": "A close-up video or photo of the hinges, screen edges, and keyboard under different lighting angles.",
+        "if_unproven": "Priced as having potential cosmetic or functional damage, which reduces value."
+      },
+      {
+        "risk": "The laptop may not power on or may have software issues (e.g., Windows activation, malware).",
+        "proof": "A video showing the laptop booting up, logging into Windows, and running a simple task (e.g., opening a browser).",
+        "if_unproven": "Priced as not working or with software issues, which reduces value."
+      }
+    ],
+    "proof_requests": [
+      "A screenshot from Windows System Properties or Task Manager showing RAM and storage details.",
+      "A screenshot from CPU-Z or similar software showing the exact CPU model.",
+      "A video showing the laptop booting up and running Windows smoothly.",
+      "Close-up photos of the hinges, screen edges, and keyboard."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identifiable as an ASUS VivoBook 14, but critical specifications (RAM, storage, CPU) cannot be verified from the photos. The risks of misrepresentation are high, and without proof, the item cannot be priced accurately. The seller must provide evidence of the claimed specs and working condition."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 76884,
+    "input_tokens": 2799,
+    "output_tokens": 1007,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "85904dccd3eb23cb9c2b65166d366c8e",
+    "error": null
+  }
+}

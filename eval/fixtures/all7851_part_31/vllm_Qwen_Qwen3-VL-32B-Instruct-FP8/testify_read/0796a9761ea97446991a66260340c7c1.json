@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Front view of a black microwave with a '20L' sticker and 'Midea' logo visible on the door. Two control knobs on the right side. The door has a reflective surface with a printed graphic of a roasted chicken and cooking features.",
+      "Photo 1: Back view of the microwave showing a label with 'Midea' brand, model number 'Midea 20L', rated voltage 230V, frequency 50Hz, output power 700W, and 'Made in China'. There is a warning label about high voltage and grounding.",
+      "Photo 2: Open door view showing the interior with a glass turntable, some visible grime or residue on the bottom, and the interior walls. The door hinge and seal are visible. The microwave is plugged in with a 3-pin plug.",
+      "The microwave appears to be a standard countertop model with mechanical controls, not digital."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "20L microwave oven",
+      "brand": "Midea",
+      "model": "Midea 20L",
+      "read_from": [
+        "photo 0 door",
+        "photo 1 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Midea 20L Microwave for sale",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows 'Midea' logo and '20L' sticker; photo 1 label confirms 'Midea 20L'."
+      },
+      {
+        "claim": "Powers ON, spins, but doesn't heat very hot. Small fixable fault.",
+        "verdict": "unverified",
+        "evidence": "Photos show the microwave plugged in and the turntable visible, but no evidence of operation. No video or photo of it running or heating. The claim of 'doesn't heat very hot' cannot be verified remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The microwave does not heat, which is a core function failure.",
+        "proof": "A video clip showing the microwave running with a food item inside, and a thermometer reading the temperature rise over time.",
+        "if_unproven": "priced as not heating, which reduces value significantly"
+      },
+      {
+        "risk": "Internal damage or component failure (e.g., magnetron, high-voltage diode) causing the heating issue.",
+        "proof": "A photo or video of the internal components (after safe disassembly) or a technician's diagnosis.",
+        "if_unproven": "priced as potentially non-functional or requiring costly repair"
+      },
+      {
+        "risk": "Visible grime or residue inside the cavity may indicate poor maintenance or contamination.",
+        "proof": "A close-up photo of the interior after cleaning, or a video showing the cleaning process.",
+        "if_unproven": "priced as needing cleaning, which may affect hygiene and resale value"
+      }
+    ],
+    "proof_requests": [
+      "Video of the microwave in operation, showing the turntable spinning and a food item being heated (with temperature check if possible).",
+      "Photo of the interior after cleaning to show condition.",
+      "Photo or video of the internal components if the seller has opened it for inspection."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The microwave's core function of heating is unverified. While it powers on and spins, the claim that it 'doesn't heat very hot' cannot be confirmed from photos alone. Without proof of heating capability, the item must be priced as potentially non-functional, which requires further evidence to justify a higher price."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 68580,
+    "input_tokens": 2165,
+    "output_tokens": 796,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "0796a9761ea97446991a66260340c7c1",
+    "error": null
+  }
+}

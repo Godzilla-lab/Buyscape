@@ -1,0 +1,91 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the iPhone's Battery Health screen with Maximum Capacity at 93% and Peak Performance Capability indicating normal performance.",
+      "Photo 1 shows the back of a silver iPhone with the Apple logo and 'iPhone' text visible. There are two handwritten stickers: one says 'OPEN', the other has '7', '32', and '46907'.",
+      "Photo 2 shows the Settings screen of the iPhone, indicating it is set up for first use with 'Finish Setting Up Your iPhone' option visible.",
+      "All photos show a watermark 'POSTED ON JIJI LEXO GADGETS'.",
+      "The phone has a physical home button, consistent with iPhone 7 design.",
+      "The rear camera is single-lens, matching iPhone 7.",
+      "The phone appears to be in a retail environment with other phones visible in glass display cases."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "iPhone 7",
+      "brand": "Apple",
+      "model": "iPhone 7",
+      "read_from": [
+        "photo 1 back panel text 'iPhone'",
+        "photo 0 screen showing iPhone interface and design features",
+        "photo 2 screen showing iPhone Settings interface"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Direct Uk used iPhone 7 32GB physical sim",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows '7' and '32' on sticker, matching iPhone 7 32GB. Physical SIM slot is standard for iPhone 7. Design matches iPhone 7 in all photos."
+      },
+      {
+        "claim": "Battery health above 90",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows 'Maximum Capacity 93%' on Battery Health screen."
+      },
+      {
+        "claim": "Very clean phone",
+        "verdict": "unverified",
+        "evidence": "Photos show no visible damage or dirt, but close-up inspection of screen, edges, and ports is missing. No shot of front screen or side buttons."
+      },
+      {
+        "claim": "Never been used...",
+        "verdict": "contradicted",
+        "evidence": "Photo 2 shows 'Finish Setting Up Your iPhone' screen, indicating it is being set up for first use, which contradicts 'never been used'. Also, battery health at 93% suggests prior use."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Screen damage or scratches not visible in current photos",
+        "proof": "Close-up photo of the front screen, especially around edges and home button area.",
+        "if_unproven": "priced as potentially damaged, reducing value"
+      },
+      {
+        "risk": "Water damage or internal issues not visible",
+        "proof": "Photo of the SIM tray, charging port, and speaker grills to check for corrosion or moisture.",
+        "if_unproven": "priced as potentially water-damaged, reducing value"
+      },
+      {
+        "risk": "Unlocked status not confirmed",
+        "proof": "Screenshot of 'General > About' showing carrier lock status or a photo of the phone connected to a SIM card with network signal.",
+        "if_unproven": "priced as potentially locked, reducing value"
+      },
+      {
+        "risk": "Software issues or jailbreak not visible",
+        "proof": "Video of the phone booting up, opening apps, and making a call.",
+        "if_unproven": "priced as potentially non-functional or unstable"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the front screen showing edges and home button area.",
+      "Photo of the charging port, SIM tray, and speaker grills.",
+      "Screenshot of 'General > About' to confirm model and carrier lock status.",
+      "Video of the phone booting up and making a call."
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as an iPhone 7 32GB with battery health confirmed at 93%. The 'never been used' claim is contradicted by setup screen, but the phone is otherwise consistent with the description. Hidden risks exist but are common in used phones; pricing can proceed at worst-case scenario with noted risks."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 71792,
+    "input_tokens": 2792,
+    "output_tokens": 938,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "c0df0ffa08e2397ddf3a00e94609d291",
+    "error": null
+  }
+}

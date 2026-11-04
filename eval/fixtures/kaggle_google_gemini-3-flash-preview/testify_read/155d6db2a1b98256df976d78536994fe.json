@@ -1,0 +1,87 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Black motorcycle with protective plastic wrapping on the fuel tank, seat, and front forks.",
+      "A crown logo is visible on the headlight cowl, characteristic of the Royal brand.",
+      "The motorcycle is parked on a street next to a blue sedan.",
+      "Side panel has text that appears to be 'ROYAL' but is blurry.",
+      "The bike appears to be a standard commuter or 'okada' style model."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "motorcycle",
+      "brand": "Royal",
+      "model": null,
+      "read_from": [
+        "photo 0 cowl"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Brand new",
+        "verdict": "unverified",
+        "evidence": "Protective plastic is present, but the bike is outdoors on a street rather than in a showroom."
+      },
+      {
+        "claim": "Royal motorcycle",
+        "verdict": "supported",
+        "evidence": "photo 0 cowl logo"
+      },
+      {
+        "claim": "200cc",
+        "verdict": "unverifiable_remote",
+        "evidence": "Engine displacement markings are not visible in the photo."
+      },
+      {
+        "claim": "black color",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The engine may have mechanical issues or not start.",
+        "proof": "Video of a cold start and the engine running.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The motorcycle may be used despite the 'brand new' claim.",
+        "proof": "Clear photo of the odometer.",
+        "if_unproven": "as used"
+      },
+      {
+        "risk": "The engine capacity may be lower (e.g., 150cc) than claimed.",
+        "proof": "Photo of the displacement stamp on the engine cylinder block.",
+        "if_unproven": "as 150cc model"
+      },
+      {
+        "risk": "Missing legal ownership or customs clearance papers.",
+        "proof": "Photos of the vehicle license and customs documentation.",
+        "if_unproven": "as without papers"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the odometer reading.",
+      "Photo of the engine displacement stamp (cc) on the engine block.",
+      "Video of the motorcycle starting and idling.",
+      "Photos of the registration papers and customs clearance documents."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "A single low-resolution photo is insufficient to verify the 'brand new' claim or the engine capacity. For a vehicle, proof of functionality and legal documentation are essential for valuation."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 8534,
+    "input_tokens": 2354,
+    "output_tokens": 1731,
+    "cost_usd": 0.00637,
+    "replayed": false,
+    "fixture_key": "155d6db2a1b98256df976d78536994fe",
+    "error": null
+  }
+}

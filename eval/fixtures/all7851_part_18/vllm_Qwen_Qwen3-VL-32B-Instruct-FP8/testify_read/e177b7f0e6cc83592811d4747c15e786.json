@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a closed dark gray HP laptop with the HP logo centered on the lid.",
+      "The laptop is placed in front of a lit sign that reads 'JAYSMART GLOBAL VENTURES' with a logo above it.",
+      "The laptop appears to be in a showroom or retail setting.",
+      "No visible damage or wear is apparent on the lid from this angle.",
+      "The seller claims the model is HP Probook 430 g2 and processor is Intel Core i3-4005U, but these details are not visible in the photo."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": null,
+      "read_from": [
+        "photo 0 lid"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "brand name: HP Probook 430 g2",
+        "verdict": "unverified",
+        "evidence": "The HP logo is visible in photo 0, but the model name 'Probook 430 g2' is not visible on the device. The seller's text alone is not proof."
+      },
+      {
+        "claim": "processor speed: Intel(R) Core(TM) i3-4005U CPU @...",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal components or system information are visible. This claim cannot be verified from the photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The laptop may not be the claimed model (HP Probook 430 g2)",
+        "proof": "A clear photo of the bottom of the laptop showing the model label, or a screenshot of the system information (e.g., from BIOS or Windows About section).",
+        "if_unproven": "priced as a generic HP laptop, not the specific model, which reduces value."
+      },
+      {
+        "risk": "The processor may not be the claimed Intel Core i3-4005U",
+        "proof": "A screenshot of the system information showing the processor model, or a photo of the motherboard or CPU sticker if accessible.",
+        "if_unproven": "priced as a laptop with unknown processor, which reduces value."
+      },
+      {
+        "risk": "The laptop may have hidden damage or defects (e.g., screen, keyboard, battery, ports)",
+        "proof": "Photos of the open laptop showing the screen, keyboard, ports, and battery indicator, plus a video of the laptop turning on and running.",
+        "if_unproven": "priced as potentially non-functional or with unknown defects, which reduces value."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the bottom of the laptop showing the model label.",
+      "Screenshot of the system information showing the processor and model.",
+      "Photo of the open laptop showing the screen, keyboard, and ports.",
+      "Video of the laptop turning on and running."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and processor claims cannot be verified from the current photo. The laptop is identifiable as an HP laptop, but without proof of the specific model and specs, it cannot be priced accurately. Hidden risks like damage or non-functionality also need verification."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 60588,
+    "input_tokens": 1726,
+    "output_tokens": 716,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "e177b7f0e6cc83592811d4747c15e786",
+    "error": null
+  }
+}

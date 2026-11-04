@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Black UPS unit with 'BLUE GATE' perforated on the side panel.",
+      "Front panel features a purple accent and three LED indicators.",
+      "Rear panel shows three Schuko power outlets, a cooling fan, and RJ45/RJ11 ports.",
+      "The images appear to be professional stock photos with a business watermark.",
+      "No technical specification label or model number is legible in the provided shots."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "UPS",
+      "brand": "Blue Gate",
+      "model": null,
+      "read_from": [
+        "photo 0 side"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Blue Gate",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "1000VA",
+        "verdict": "unverified",
+        "evidence": "The capacity rating is not visible on the unit in any photo."
+      },
+      {
+        "claim": "good working condition",
+        "verdict": "unverified",
+        "evidence": "Functionality cannot be determined from static images."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery health and backup capacity",
+        "proof": "A video showing the UPS supporting a load (e.g., a desktop PC) while the input power is disconnected.",
+        "if_unproven": "as having a dead battery requiring replacement"
+      },
+      {
+        "risk": "Actual power rating (VA)",
+        "proof": "A clear photo of the manufacturer's sticker on the back or bottom of the unit showing the model and VA rating.",
+        "if_unproven": "as the lowest capacity model in this chassis style (650VA)"
+      },
+      {
+        "risk": "Item may not be the one pictured",
+        "proof": "A photo of the actual unit in a domestic or office setting, rather than stock-style photos.",
+        "if_unproven": "as a potential fraud risk"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the specification sticker on the back or bottom of the unit.",
+      "Video of the unit powered on and holding a load without mains power.",
+      "Photo of the actual unit in its current environment to verify it matches the stock photos."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The capacity (VA rating) which determines the price is not visible, and the use of stock photos makes it impossible to verify the condition or existence of the specific unit."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 17734,
+    "input_tokens": 3466,
+    "output_tokens": 4064,
+    "cost_usd": 0.013925,
+    "replayed": false,
+    "fixture_key": "784450aafceb9472982ae0472e879cdb",
+    "error": null
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a used car tire tread with visible wear and a Jiji watermark",
+      "Photo 1 shows the tire sidewall with embossed size 215/65R16",
+      "Photo 1 shows the brand name AVON vertically on the left sidewall",
+      "Photo 1 shows the model name ECOSAVER vertically on the right sidewall",
+      "The tire appears used with tread remaining but no depth gauge is shown"
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car tire",
+      "brand": "Avon",
+      "model": "Ecosaver",
+      "read_from": [
+        "photo 1 sidewall"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Ecosaver",
+        "verdict": "supported",
+        "evidence": "photo 1 sidewall reads ECOSAVER"
+      },
+      {
+        "claim": "205/65",
+        "verdict": "contradicted",
+        "evidence": "photo 1 reads 215/65R16"
+      },
+      {
+        "claim": "Rim 16",
+        "verdict": "supported",
+        "evidence": "photo 1 reads R16"
+      },
+      {
+        "claim": "Used",
+        "verdict": "supported",
+        "evidence": "photos 0 and 1 show worn tread"
+      },
+      {
+        "claim": "Tyre",
+        "verdict": "supported",
+        "evidence": "photos show a car tire"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Tire may not hold air or may have hidden internal damage or repairs",
+        "proof": "Video of the tire inflated and holding pressure, or photo of the interior",
+        "if_unproven": "priced as not serviceable"
+      },
+      {
+        "risk": "Manufacturing age is unknown; rubber may be expired or internally cracked",
+        "proof": "Photo of the DOT date code on the sidewall",
+        "if_unproven": "priced as old rubber with reduced life"
+      },
+      {
+        "risk": "Exact tread depth is unknown; it may be near the legal limit",
+        "proof": "Photo of a tread depth gauge inserted in the grooves",
+        "if_unproven": "priced at minimum remaining tread"
+      },
+      {
+        "risk": "Sidewall damage, bulges, or repairs are not visible in the photos",
+        "proof": "Full 360-degree photos or a video rotating the tire",
+        "if_unproven": "priced with possible sidewall defects"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the DOT date code on the sidewall",
+      "Video of the tire inflated and holding air",
+      "Photo of tread depth measurement with a gauge",
+      "Video or photos showing the full tire circumference and both sidewalls"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as an Avon Ecosaver 215/65R16 from photo 1, so it can be priced at its worst case despite unverified condition."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 22859,
+    "input_tokens": 2578,
+    "output_tokens": 3418,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "a59f1c985859157de36f85728edf63b6",
+    "error": null
+  }
+}

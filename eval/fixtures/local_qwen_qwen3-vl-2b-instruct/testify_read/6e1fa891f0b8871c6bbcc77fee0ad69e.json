@@ -1,0 +1,63 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-instruct",
+  "response": {
+    "observations": [
+      "A black couch with gold legs is shown in three photos. The couch has a tufted, quilted upholstery and is placed on a tiled floor. The seller claims it is a '3 Seaters and 2 Seaters Couch' going for a giveaway price."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "couch",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0",
+        "photo 1",
+        "photo 2"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Used 3 Seaters and 2 Seaters Couch going for giveaway price",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The couch may be a 3-seater only, not a 2-seater as claimed.",
+        "proof": "photo 2 shows a 2-seater couch, while photo 0 shows a 3-seater couch.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The couch may be a 2-seater only, not a 3-seater as claimed.",
+        "proof": "photo 1 shows a 3-seater couch, while photo 2 shows a 2-seater couch.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The couch may be a 3-seater only, not a 2-seater as claimed.",
+        "proof": "photo 0 shows a 3-seater couch, while photo 2 shows a 2-seater couch.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Can you please provide a photo of the 3-seater couch to confirm the model?",
+      "Can you please provide a photo of the 2-seater couch to confirm the model?"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller's claim is ambiguous and the photos show different models. A photo of the 3-seater couch is needed to confirm the model."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-instruct",
+    "task": "testify_read",
+    "latency_ms": 28374,
+    "input_tokens": 2571,
+    "output_tokens": 483,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "6e1fa891f0b8871c6bbcc77fee0ad69e",
+    "error": null
+  }
+}

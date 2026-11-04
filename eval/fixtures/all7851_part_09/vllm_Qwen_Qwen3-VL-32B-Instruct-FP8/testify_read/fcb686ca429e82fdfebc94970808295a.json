@@ -1,0 +1,100 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: A standing air conditioner unit wrapped in plastic, with an outdoor condenser unit beside it, both bearing the LG logo. The indoor unit has a blue sticker with '3 YEARS WARRANTY' and '120 HOURS COOLING RETENTION'. A remote control is attached to the front of the indoor unit.",
+      "Photo 1: Same setup as photo 0, slightly different angle. The LG logo is visible on both units. The remote is still attached to the indoor unit.",
+      "Photo 2: Same setup, another angle. The LG logo is visible on both units. The indoor unit's control panel is covered with plastic. The sticker with warranty and cooling retention claims is visible.",
+      "All units are wrapped in plastic, suggesting new or unused condition.",
+      "The outdoor unit is lying on the ground, not mounted.",
+      "The indoor unit is standing upright on artificial grass next to a concrete surface.",
+      "No model number is visible on any part of the units in any photo.",
+      "The remote control is attached to the indoor unit, but no close-up of the remote is provided."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "standing air conditioner",
+      "brand": "LG",
+      "model": null,
+      "read_from": [
+        "photo 0 indoor unit top left",
+        "photo 0 outdoor unit front",
+        "photo 1 indoor unit top left",
+        "photo 1 outdoor unit front",
+        "photo 2 indoor unit top left",
+        "photo 2 outdoor unit front"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "LG low voltage 2hp standing air conditioner",
+        "verdict": "unverified",
+        "evidence": "The brand LG is visible in all photos, but the '2hp' and 'low voltage' claims are not visible on the unit or its labels. No model number or power rating is readable."
+      },
+      {
+        "claim": "available in large quantities",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a statement about stock availability, which cannot be verified from photos alone."
+      },
+      {
+        "claim": "with the original remote",
+        "verdict": "supported",
+        "evidence": "A remote control is visibly attached to the front of the indoor unit in all three photos, consistent with being included."
+      },
+      {
+        "claim": "3 years warranty",
+        "verdict": "supported",
+        "evidence": "The blue sticker on the indoor unit in all photos clearly states '3 YEARS WARRANTY'."
+      },
+      {
+        "claim": "120 hours cooling retention",
+        "verdict": "supported",
+        "evidence": "The same blue sticker in all photos states '120 HOURS COOLING RETENTION'."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The unit may not be a 2hp model as claimed, or may not be designed for low voltage operation.",
+        "proof": "A clear photo of the model number and technical specifications label on the indoor or outdoor unit.",
+        "if_unproven": "Priced as a generic LG standing AC without confirmed power rating, which may be lower than 2hp."
+      },
+      {
+        "risk": "The unit may be used or refurbished, despite appearing new.",
+        "proof": "Close-up photos of the indoor and outdoor unit labels, serial numbers, and any signs of wear or damage under the plastic wrap.",
+        "if_unproven": "Priced as potentially used or refurbished, which reduces value."
+      },
+      {
+        "risk": "The remote control may be non-functional or not original.",
+        "proof": "A close-up photo of the remote control showing its model number and buttons, and a video of it being used to operate the unit.",
+        "if_unproven": "Priced as if the remote may not work or is not original, reducing value."
+      },
+      {
+        "risk": "The unit may not be compatible with standard Nigerian electrical supply or may require special installation.",
+        "proof": "A photo of the power plug and voltage rating label on the unit.",
+        "if_unproven": "Priced as if compatibility is uncertain, which may require additional costs for installation or voltage conversion."
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the model number and technical specifications label on the indoor and outdoor units.",
+      "Close-up photo of the remote control showing its model number and buttons.",
+      "Photo of the power plug and voltage rating label.",
+      "Video of the unit being turned on and operated with the remote."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The brand is confirmed as LG, but the key claims of '2hp' and 'low voltage' cannot be verified from the current photos. The model number is missing, which is essential for accurate pricing. The unit appears new, but hidden risks like actual power rating, condition, and remote functionality must be confirmed before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 87690,
+    "input_tokens": 3238,
+    "output_tokens": 1088,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "fcb686ca429e82fdfebc94970808295a",
+    "error": null
+  }
+}

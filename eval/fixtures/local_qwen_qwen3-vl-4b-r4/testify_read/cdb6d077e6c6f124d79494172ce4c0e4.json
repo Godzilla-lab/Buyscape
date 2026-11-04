@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-r4",
+  "response": {
+    "observations": [
+      "Nikon DSLR camera body with a camouflage-patterned silicone skin.",
+      "The camera is shown with the LCD screen powered on, displaying the 'SETUP MENU'.",
+      "A small, circular metal badge is visible on the top right of the viewfinder housing in photo 1.",
+      "The camera is shown with a lens, two batteries, and a lens case in photo 2.",
+      "The lens appears to be a small, fixed-focal-length (prime) lens.",
+      "The camera body shows some minor surface wear and scuffs."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DSLR camera",
+      "brand": "Nikon",
+      "read_from": [
+        "photo 0 body",
+        "photo 1 screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Nikon with 2 batteries",
+        "verdict": "supported",
+        "evidence": "photo 2 shows the camera body with two batteries"
+      },
+      {
+        "claim": "450k",
+        "verdict": "unverified",
+        "evidence": "The camera's resolution is not shown in the photos."
+      },
+      {
+        "claim": "50mm lens and 85mm is optional",
+        "verdict": "unverified",
+        "evidence": "Only one lens is shown in photo 2; the 85mm lens is not visible."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The camera may not power on or the LCD may be damaged.",
+        "proof": "A video showing the camera powering on and navigating the menu.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The lens may be a low-quality third-party brand rather than a Nikon lens.",
+        "proof": "A clear photo of the lens markings on the barrel.",
+        "if_unproven": "as a generic prime lens"
+      },
+      {
+        "risk": "The shutter may be near the end of its life (high shutter count).",
+        "proof": "A screenshot of the shutter count from a recent image file.",
+        "if_unproven": "as high mileage"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of any label, sticker or metal plate showing the brand and model.",
+      "Photo of the lens markings on the barrel to confirm the brand and focal length.",
+      "Video of the camera powering on and taking a photo.",
+      "Screenshot of the shutter count."
+    ],
+    "decision": "price",
+    "reason": "The item is known from the photos. What they cannot prove is priced at its worst case until the proof asked for below arrives."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-r4",
+    "task": "testify_read",
+    "latency_ms": 3334,
+    "input_tokens": 2796,
+    "output_tokens": 454,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "cdb6d077e6c6f124d79494172ce4c0e4",
+    "error": null
+  }
+}

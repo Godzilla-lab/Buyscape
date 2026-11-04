@@ -1,0 +1,70 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0 shows a UPS with the brand text \u201cBLUE GATE\u201d on the front.",
+      "Photo 0 shows a front panel with a power button and indicator lights (no display/ratings visible).",
+      "Photo 1 shows the UPS from the side/front and a mains plug connected to the back.",
+      "No visible model number, battery capacity (Ah), or UPS rating (VA/W) on the photos provided."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": null,
+      "brand": "BLUE GATE",
+      "model": null,
+      "read_from": [
+        "photo 0 front panel text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "UPS available",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 1 clearly show a UPS unit."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Unknown UPS capacity (VA/W) and battery health; price depends heavily on rating and whether it can run loads for long.",
+        "proof": "A clear photo of the label/sticker showing VA/W rating and battery specs (Ah/voltage), plus a photo of the model number.",
+        "if_unproven": "Priced as a generic/unknown-capacity UPS with battery condition not guaranteed (worst case: limited runtime)."
+      },
+      {
+        "risk": "Whether it is working properly (output voltage regulation, battery charging, and load test). Photos only show appearance and lights, not performance.",
+        "proof": "Video of it running: plug in, switch on, then connect a small known load (e.g., router + bulb) and show stable output/indicators for 5\u201310 minutes.",
+        "if_unproven": "Priced as not proven working (worst case: needs service)."
+      },
+      {
+        "risk": "Battery may be weak or missing/expired; UPS may beep or shut down under load.",
+        "proof": "Photo of battery compartment (if accessible) or label showing battery type/date, and a runtime test under a stated load.",
+        "if_unproven": "Priced as battery not guaranteed (worst case: short runtime)."
+      },
+      {
+        "risk": "Missing accessories/cables (manual, original power cable, output sockets/cables).",
+        "proof": "Photo showing everything included: power cable, any output cables, and whether manual is present.",
+        "if_unproven": "Priced assuming minimal included items (worst case: only the unit and basic power connection)."
+      }
+    ],
+    "proof_requests": [
+      "Send a clear close-up photo of the UPS rating/model label (VA/W, input/output, battery voltage/Ah, and model number).",
+      "Send a short video showing the UPS switched on and charging indicators, then a load test for 5\u201310 minutes (show the load and UPS behavior).",
+      "Send a photo of the back/side ports and confirm what accessories are included."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photos confirm it is a BLUE GATE UPS, but the key pricing drivers (exact model/rating and whether it performs under load) are not readable or test-proven in the provided images."
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_read",
+    "latency_ms": 6226,
+    "input_tokens": 3130,
+    "output_tokens": 714,
+    "cost_usd": 0.001519,
+    "replayed": false,
+    "fixture_key": "c6dec988a3bc4447e9834fee64f56925",
+    "error": null
+  }
+}

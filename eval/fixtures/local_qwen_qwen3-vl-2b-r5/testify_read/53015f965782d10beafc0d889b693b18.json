@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r5",
+  "response": {
+    "observations": [
+      "Large monocrystalline solar panel.",
+      "The panel is mounted vertically against a wall.",
+      "The brand name 'LONGi' is visible on the top left corner of the frame in photo 0.",
+      "The panel features a 485W rating, consistent with the Hi-MO X10 series.",
+      "The panel is in a showroom or warehouse environment with a broom and chair visible.",
+      "A watermark 'SUNCITY SOLAR ENERGY' is present on the image."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "solar panel",
+      "brand": "LONGi",
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "LONGi 485W solar panel",
+        "verdict": "supported",
+        "evidence": "The brand 'LONGi' and the 485W rating are clearly visible in photo 0."
+      },
+      {
+        "claim": "part of the Hi-MO X10 series",
+        "verdict": "supported",
+        "evidence": "The panel design and the 485W rating are characteristic of the Hi-MO X10 series."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The panel may be a lower-value counterfeit or clone.",
+        "proof": "A clear photo of the manufacturer's label (usually on the back) showing the model number and serial number.",
+        "if_unproven": "as a generic 485W panel"
+      },
+      {
+        "risk": "The panel may have micro-cracks or hot spots on the surface.",
+        "proof": "A clear, close-up photo of the front surface under bright light.",
+        "if_unproven": "as having surface defects"
+      },
+      {
+        "risk": "The panel may be non-functional or have a significantly lower output than claimed.",
+        "proof": "A video showing a multimeter test of the open-circuit voltage (Voc) and short-circuit current (Isc).",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of any label, sticker or metal plate showing the brand and model.",
+      "Photo of the manufacturer's label on the back of the panel.",
+      "Photo of the front surface of the panel.",
+      "Video of a multimeter test showing the panel's output."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "What the item is shows, but not the model that sets its price: no photo shows it clearly enough to read. The shot asked for first would settle it."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r5",
+    "task": "testify_read",
+    "latency_ms": 2380,
+    "input_tokens": 1796,
+    "output_tokens": 465,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "53015f965782d10beafc0d889b693b18",
+    "error": null
+  }
+}

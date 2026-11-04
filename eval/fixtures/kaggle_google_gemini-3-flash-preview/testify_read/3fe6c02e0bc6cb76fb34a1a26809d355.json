@@ -1,0 +1,69 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "A single monocrystalline solar panel (identifiable by the dark cells with clipped corners).",
+      "The panel has a 6x12 cell configuration, totaling 72 cells.",
+      "The panel is held in a cardboard shipping frame.",
+      "A watermark 'CHIBYCO ELECTRICAL' is visible across the center of the image.",
+      "Background shows boxes for 'mopower' and 'MUST' brand power products.",
+      "No technical specifications, brand name, or model number are visible on the front of the panel."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Solar Panels for installation",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows a standard solar panel used in residential or commercial installations."
+      },
+      {
+        "claim": "different sizes available",
+        "verdict": "unverifiable_remote",
+        "evidence": "Only one panel size is shown in the provided photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Unknown wattage and technical specifications",
+        "proof": "A clear photo of the manufacturer's specification sticker on the back of the panel.",
+        "if_unproven": "priced as a low-efficiency 300W panel (the baseline for 72-cell mono panels)."
+      },
+      {
+        "risk": "Internal cell damage or non-functionality",
+        "proof": "A video showing a multimeter test of the Open Circuit Voltage (Voc) and Short Circuit Current (Isc) in direct sunlight.",
+        "if_unproven": "priced as non-functional/scrap."
+      },
+      {
+        "risk": "Generic or low-tier brand",
+        "proof": "A photo of the brand logo or the specification sticker on the back.",
+        "if_unproven": "priced as an unbranded/generic panel."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the specification sticker on the back of the panel showing the model and wattage.",
+      "Video of a multimeter test showing the panel's output in sunlight."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The value of a solar panel is determined by its wattage and brand, which are found on a sticker on the back. Without this, the price range is too wide to provide an accurate valuation."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 11679,
+    "input_tokens": 2351,
+    "output_tokens": 2210,
+    "cost_usd": 0.007805,
+    "replayed": false,
+    "fixture_key": "3fe6c02e0bc6cb76fb34a1a26809d355",
+    "error": null
+  }
+}

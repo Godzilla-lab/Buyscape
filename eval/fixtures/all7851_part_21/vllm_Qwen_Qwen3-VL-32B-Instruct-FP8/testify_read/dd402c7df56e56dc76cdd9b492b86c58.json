@@ -1,0 +1,73 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows two identical units of a split air conditioner, both wrapped in plastic.",
+      "The indoor unit is white with a label that says 'Quick Cooling' and a Midea logo.",
+      "The outdoor unit is visible below, also wrapped, with a blue Midea logo.",
+      "The units appear new and unused, with no visible damage.",
+      "The photo is a composite or duplicated image, with a watermark 'POSTED ON HOME AFFAIRS' overlaid."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "split air conditioner",
+      "brand": "Midea",
+      "model": null,
+      "read_from": [
+        "photo 0 indoor unit label",
+        "photo 0 outdoor unit logo"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "12 Months WARRANTY on our products",
+        "verdict": "unverifiable_remote",
+        "evidence": "No warranty document or label is visible in the photo. The claim cannot be verified from the image alone."
+      },
+      {
+        "claim": "midea 1.5hp & 1hp split air conditioners are available",
+        "verdict": "unverified",
+        "evidence": "The brand Midea is visible in photo 0, but the exact model or horsepower (1hp or 1.5hp) is not readable on the unit. The seller's text claims both are available, but the photo shows only one unit without model details."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The unit may be a refurbished or used product despite appearing new.",
+        "proof": "A close-up shot of the serial number or model label on the indoor or outdoor unit, and a shot of the original packaging or warranty card.",
+        "if_unproven": "priced as potentially used or refurbished, which reduces value."
+      },
+      {
+        "risk": "The unit may not be the advertised 1hp or 1.5hp model.",
+        "proof": "A clear photo of the model number label on the indoor or outdoor unit, which should specify the exact capacity.",
+        "if_unproven": "priced as unknown capacity, which may be lower than advertised and reduces value."
+      },
+      {
+        "risk": "The warranty claim may be false or not transferable.",
+        "proof": "A photo of the warranty certificate or a receipt showing purchase date and warranty terms.",
+        "if_unproven": "priced as no warranty, which reduces value."
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the model number label on the indoor or outdoor unit.",
+      "Photo of the original packaging or warranty card.",
+      "Photo of the serial number and any certification stickers.",
+      "Proof of warranty validity, such as a warranty certificate or receipt."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The brand is identifiable as Midea, but the model and capacity (1hp or 1.5hp) are not visible. The warranty claim cannot be verified. Without proof of model, capacity, and warranty, the item cannot be priced accurately. The photo shows a new-looking unit, but hidden risks like refurbishment or false capacity claims must be ruled out."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 55809,
+    "input_tokens": 1657,
+    "output_tokens": 703,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "dd402c7df56e56dc76cdd9b492b86c58",
+    "error": null
+  }
+}

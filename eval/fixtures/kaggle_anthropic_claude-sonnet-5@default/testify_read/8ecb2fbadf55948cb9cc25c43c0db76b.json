@@ -1,0 +1,91 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Same single photo as before: a vertical stack of five used tires shown from the tread/shoulder angle only",
+      "No new photo was supplied with this reply",
+      "Sidewalls, size code, DOT date stamp, and brand markings remain unseen",
+      "Seller's new message is a verbal reassurance only, with no visual evidence attached"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "car tyre (used, stacked set)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Tread is still 90 percent",
+        "verdict": "unverified",
+        "evidence": "No depth gauge or ruler shown in photo 0; seller's verbal reassurance is not visual proof"
+      },
+      {
+        "claim": "no patch, no bulge",
+        "verdict": "unverifiable_remote",
+        "evidence": "Sidewalls, where patches/bulges are checked, are still not shown in any photo"
+      },
+      {
+        "claim": "Removed from a 2023 car",
+        "verdict": "unverifiable_remote",
+        "evidence": "No DOT/date code or documentation visible in photo 0"
+      },
+      {
+        "claim": "\"I tested it myself yesterday, everything I said is true\"",
+        "verdict": "unverifiable_remote",
+        "evidence": "A seller's spoken assurance is not photographic evidence and cannot be checked remotely"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Tyre size (width/profile/rim diameter) unknown, which drives price heavily",
+        "proof": "Clear close-up photo of the sidewall showing the size code, e.g. 205/55R16",
+        "if_unproven": "cannot be priced at all without size; treat as unknown-size generic used tyre, lowest tier"
+      },
+      {
+        "risk": "Actual manufacture date (DOT code) may show the tyre is older than the '2023 car' claim implies",
+        "proof": "Photo of the DOT code on the sidewall",
+        "if_unproven": "priced as unknown age, worst case aged stock"
+      },
+      {
+        "risk": "Hidden sidewall damage, patches, plugs, or bulges not visible from the tread-only angle",
+        "proof": "Photos of both sidewalls of the specific tyre being sold, flat on the ground",
+        "if_unproven": "priced as if damaged/patched"
+      },
+      {
+        "risk": "Unclear how many tyres are actually for sale and whether they match",
+        "proof": "Seller confirms quantity and photographs the exact tyre(s) being sold laid out individually",
+        "if_unproven": "priced as a single unverified tyre, not a matched set"
+      },
+      {
+        "risk": "Actual tread depth not measurable from this angle/photo quality",
+        "proof": "Close-up photo with a tread depth gauge or coin inserted in the groove",
+        "if_unproven": "priced as minimum legal/worn tread, not 90 percent"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the sidewall showing size code and DOT date stamp",
+      "Photo of both sidewalls of the actual tyre(s) for sale, laid flat",
+      "Photo with a tread depth gauge or coin in the main groove",
+      "Confirmation of exact quantity being sold and whether sizes match"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "A verbal reassurance with no new photo does not settle the size, sidewall condition, or tread depth needed to price the tyre; the same missing shots are still required."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 9494,
+    "input_tokens": 4055,
+    "output_tokens": 1118,
+    "cost_usd": 0.016131,
+    "replayed": false,
+    "fixture_key": "8ecb2fbadf55948cb9cc25c43c0db76b",
+    "error": null
+  }
+}

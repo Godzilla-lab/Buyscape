@@ -1,0 +1,84 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Side view of a black smartphone showing volume buttons, power button, and a charging port. The phone appears to be an iPhone due to the button layout and design.",
+      "Photo 1: Back view of the phone showing a dual-camera system in a square module, Apple logo, and a handwritten sticker that says 'iPhone 12, 64gb' and '26144'. The phone is black.",
+      "Photo 2: Front view of the phone with a black screen. The top of the screen shows a notch, typical of iPhone 12 models. The screen appears to have minor smudges or dust, but no visible crack is apparent in this photo.",
+      "All photos show a watermark 'POSTED ON JIJI STACY MOBIVOLT'.",
+      "The background in all photos shows shelves with boxed electronics, suggesting a retail or repair shop environment."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "iPhone 12",
+      "brand": "Apple",
+      "model": "iPhone 12",
+      "read_from": [
+        "photo 1 sticker",
+        "photo 0 side design",
+        "photo 2 front notch"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Used iPhone 12, 128gb, color blue",
+        "verdict": "contradicted",
+        "evidence": "Photo 1 shows a sticker that says 'iPhone 12, 64gb' and the phone is black, not blue. The color is visibly black in all photos."
+      },
+      {
+        "claim": "little crack at the top of the screen",
+        "verdict": "unverified",
+        "evidence": "Photo 2 shows the front screen, but no crack is visible. The screen appears intact. A closer shot of the top edge is needed to verify."
+      },
+      {
+        "claim": "No parts changed",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal or serial number photos provided. Cannot verify if parts are original without inspection or IMEI check."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Screen crack at the top as claimed",
+        "proof": "Close-up photo of the top edge of the screen showing the notch area.",
+        "if_unproven": "priced as no crack (better condition), but if crack exists, price drops significantly."
+      },
+      {
+        "risk": "Storage capacity mismatch (claimed 128GB, sticker says 64GB)",
+        "proof": "Photo of the phone's settings screen showing storage capacity, or a screenshot of the device info.",
+        "if_unproven": "priced as 64GB, since sticker is visible and more trustworthy than seller's text."
+      },
+      {
+        "risk": "Non-original parts or tampered device",
+        "proof": "Photo of the device's IMEI number from settings or back label, and a photo of the original box or receipt if available.",
+        "if_unproven": "priced as possibly refurbished or non-original, which reduces value."
+      },
+      {
+        "risk": "Water damage or internal issues",
+        "proof": "Photo of the phone's internal condition or a diagnostic report from a trusted repair shop.",
+        "if_unproven": "priced as potentially damaged, which lowers value."
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the top edge of the screen to verify the crack claim.",
+      "Photo of the phone's settings screen showing storage capacity and model.",
+      "Photo of the IMEI number from the device or original box.",
+      "Photo of the phone turned on, showing the home screen and functionality."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller's claim of 128GB and blue color contradicts the visible sticker and color. The crack claim is unverified. Without proof of storage, IMEI, and screen condition, the item cannot be priced accurately. The photos are insufficient to determine the true condition and specifications."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 71042,
+    "input_tokens": 2795,
+    "output_tokens": 891,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "abf1d63d03274cc0186a2923be264c0d",
+    "error": null
+  }
+}

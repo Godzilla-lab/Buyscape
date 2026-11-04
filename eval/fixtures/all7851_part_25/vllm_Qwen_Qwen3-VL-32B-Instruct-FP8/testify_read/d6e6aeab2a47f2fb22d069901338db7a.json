@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: A hand holds a black iPhone with a visible notch and single rear camera. The screen is off, reflecting light. The phone appears to have a slight scratch or smudge near the top of the screen.",
+      "Photo 1: Close-up of the back of the phone showing a sticker with text: 'iPhone XR 64GB', 'Grade: A', 'S/N: GQRGGGB4KXKN', 'Color: BLACK', 'FMI: Off', '25/05/2025', 'Unlocked', '97%', 'Result: 100% Working Phone'. The sticker is worn and partially torn at the top. The phone's back has visible smudges and minor scratches.",
+      "Photo 2: Same sticker as photo 1, slightly different angle. The barcode and serial number are visible. The phone's back shows more smudges and a small horizontal scratch above the sticker."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "iPhone XR",
+      "brand": "Apple",
+      "model": "iPhone XR",
+      "read_from": [
+        "photo 1 sticker",
+        "photo 2 sticker"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Apple iPhone XR \u2013 Clean, Original & UK Used",
+        "verdict": "unverified",
+        "evidence": "The sticker in photo 1 and 2 confirms 'iPhone XR 64GB' and 'Unlocked', but 'Clean' and 'Original' are subjective and not visually verifiable. 'UK Used' is unverifiable_remote as no proof of origin is shown."
+      },
+      {
+        "claim": "No cracks on the screen or body",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows a visible white line or crack at the top of the screen near the notch. Photo 1 and 2 show minor scratches and smudges on the back, contradicting 'no cracks'."
+      },
+      {
+        "claim": "Original screen",
+        "verdict": "unverifiable_remote",
+        "evidence": "No proof of screen authenticity is visible. The sticker says '100% Working Phone' but does not confirm original screen. A screen test or serial number check would be needed."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Screen may be cracked or replaced",
+        "proof": "A close-up photo of the screen showing the top notch area, with the screen turned on to check for dead pixels or display issues.",
+        "if_unproven": "priced as screen may be damaged or non-original"
+      },
+      {
+        "risk": "Phone may be stolen or blacklisted",
+        "proof": "Screenshot of IMEI check from a trusted source (e.g., Apple's website or Nigerian NCC database) showing the phone is not blacklisted.",
+        "if_unproven": "priced as potentially blacklisted or stolen"
+      },
+      {
+        "risk": "Battery health may be lower than claimed 97%",
+        "proof": "Screenshot of battery health from iOS settings or a diagnostic tool.",
+        "if_unproven": "priced as battery health unknown, possibly degraded"
+      },
+      {
+        "risk": "Sticker may be fake or tampered with",
+        "proof": "Photo of the phone's back without the sticker, showing the original finish and any serial number etching.",
+        "if_unproven": "priced as sticker authenticity unverified"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the screen turned on, focusing on the notch area to verify no cracks or display issues.",
+      "Screenshot of IMEI check confirming the phone is not blacklisted.",
+      "Screenshot of battery health from iOS settings.",
+      "Photo of the phone's back without the sticker to verify original finish."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The phone is identified as an iPhone XR from the sticker, but key claims like 'no cracks' are contradicted by visible damage. The screen's authenticity and battery health are unverified, and there is a risk of the sticker being fake. Proof is needed to verify condition, authenticity, and IMEI status before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 71929,
+    "input_tokens": 2787,
+    "output_tokens": 924,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "d6e6aeab2a47f2fb22d069901338db7a",
+    "error": null
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0: One wooden pallet on a concrete floor; visible wear and some discoloration; no clear brand markings besides a watermark overlay.",
+      "Photo 1: Another view of a wooden pallet; similar construction; visible gaps/holes in deck boards; watermark overlay present.",
+      "Photo 2: Stack of multiple wooden pallets in a warehouse; pallets look mixed in condition (some boards look darker/used)."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "wooden storage pallets",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 pallet",
+        "photo 1 pallet",
+        "photo 2 pallet stack"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Standard wooden storage pallets",
+        "verdict": "supported",
+        "evidence": "Photos 0-2 show wooden pallets suitable for storage/handling."
+      },
+      {
+        "claim": "Everything is clean, dry and sorted, no water added.",
+        "verdict": "unverified",
+        "evidence": "Photos show pallets, but cannot confirm dryness, whether any water was added, or whether they are fully sorted across the whole quantity."
+      },
+      {
+        "claim": "Weighed at 500 kg on a certified scale this morning.",
+        "verdict": "unverifiable_remote",
+        "evidence": "No scale ticket/receipt or photo of the certified weighing is provided."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Quantity/weight mismatch (seller may not actually have 500 kg, or includes damaged/low-value pieces).",
+        "proof": "A clear photo/video of the pallets being weighed on the certified scale with the scale reading visible, plus a receipt or scale calibration/ID.",
+        "if_unproven": "Price as a smaller/unknown quantity of used wooden pallets (worst case: not guaranteed 500 kg)."
+      },
+      {
+        "risk": "Condition issues: broken boards, weak stringers, or heavy damage that reduces usability.",
+        "proof": "Close-up clips of the underside and corners of at least 3-5 pallets showing any cracks, missing boards, or repairs.",
+        "if_unproven": "Price as used pallets with possible wear/damage (worst case: not fully intact)."
+      },
+      {
+        "risk": "Moisture/infestation risk (wood pallets can have dampness, mold, or pests not obvious in photos).",
+        "proof": "Moisture meter reading (photo of meter on wood) and a close-up of any dark spots; also show one pallet board surface in bright light.",
+        "if_unproven": "Price as not proven dry/clean (worst case: treat as standard used pallets without a dryness guarantee)."
+      },
+      {
+        "risk": "Potential treatment/legality for export (e.g., HT vs MB) if buyer needs compliant pallets.",
+        "proof": "Photo of the stamp/marking on at least one pallet (IPPC/HT/MB code) on the stringer.",
+        "if_unproven": "Price without compliance assurance (worst case: no proof of HT/IPPC marking)."
+      }
+    ],
+    "proof_requests": [
+      "Send a photo/video of the certified scale weighing showing the total weight reading (for the exact quantity being sold).",
+      "Show close-ups of 3-5 pallets: corners, underside, and any broken/missing boards.",
+      "Provide a moisture/dryness proof (moisture meter reading or clear evidence of dry storage) and close-ups of any dark patches.",
+      "If needed for compliance: photo of the IPPC stamp/marking (HT/MB) on at least one pallet."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photos confirm wooden pallets, but the key pricing drivers (total quantity/weight and condition guarantees like dry/clean/sorted) are not provable from the images or seller text alone.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_joint",
+    "latency_ms": 5018,
+    "input_tokens": 2964,
+    "output_tokens": 880,
+    "cost_usd": 0.004768,
+    "replayed": false,
+    "fixture_key": "10e7c1b99a29a81f3b622b07b890b775",
+    "error": null
+  }
+}

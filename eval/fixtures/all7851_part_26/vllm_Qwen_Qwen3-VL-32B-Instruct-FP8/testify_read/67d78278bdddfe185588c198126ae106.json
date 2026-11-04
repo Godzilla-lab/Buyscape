@@ -1,0 +1,88 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: A hand holds an open iPhone box showing the back of a silver phone with triple camera setup and a sticker labeled '128GB'. The box appears to be original Apple packaging.",
+      "Photo 1: The front of the phone is shown with the lock screen displaying 'Wed 11 Feb' and time '10:16'. The screen is on, showing a blue abstract wallpaper. The notch is visible, consistent with iPhone 15 Pro design.",
+      "Photo 2: The iPhone Storage screen is shown, indicating '15.5 GB of 128 GB used' and '12.5 GB' available. The interface is iOS, with standard Apple icons and layout.",
+      "All photos show the same hand and background, suggesting they were taken in quick succession in the same location."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "iPhone 15 Pro",
+      "brand": "Apple",
+      "model": "iPhone 15 Pro",
+      "read_from": [
+        "photo 0: triple camera module and design consistent with iPhone 15 Pro",
+        "photo 1: notch shape and screen design match iPhone 15 Pro",
+        "photo 2: iOS interface and storage screen layout"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Super Clean grade A London use iPhone 15 Pro 128GB",
+        "verdict": "unverified",
+        "evidence": "Photos show the phone and box, but no proof of 'London use' or 'grade A' condition beyond visual cleanliness. The '128GB' is supported by photo 2."
+      },
+      {
+        "claim": "physical and eSIM unlock",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows settings or carrier information to verify unlock status. Cannot be confirmed remotely."
+      },
+      {
+        "claim": "with face id",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows the notch, which is consistent with Face ID implementation on iPhone 15 Pro. No direct proof of functionality, but design supports it."
+      },
+      {
+        "claim": "true...",
+        "verdict": "unverifiable_remote",
+        "evidence": "Incomplete claim; no context to verify."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Phone may be stolen or blacklisted (especially if 'London use' implies import without proper documentation)",
+        "proof": "Screenshot of Settings > General > About > Serial Number, then check IMEI on Apple's official website or a trusted blacklist checker.",
+        "if_unproven": "priced as potentially blacklisted or stolen, which would reduce value significantly"
+      },
+      {
+        "risk": "Not actually unlocked (physical and eSIM unlock claim not verifiable)",
+        "proof": "Screenshot of Settings > Cellular > Cellular Data Options > Carrier Lock (or similar) showing 'No SIM restrictions' or 'Unlocked'.",
+        "if_unproven": "priced as potentially locked, which would reduce value"
+      },
+      {
+        "risk": "Screen or camera damage not visible in photos",
+        "proof": "Video showing close-up of screen for dead pixels, scratches, or camera functionality (e.g., taking a photo and showing the result).",
+        "if_unproven": "priced as potentially damaged, which would reduce value"
+      },
+      {
+        "risk": "Battery health not shown",
+        "proof": "Screenshot of Settings > Battery > Battery Health showing maximum capacity.",
+        "if_unproven": "priced as potentially degraded battery, which would reduce value"
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of Settings > General > About > Serial Number and IMEI for blacklist check.",
+      "Screenshot of Settings > Cellular > Carrier Lock to verify unlock status.",
+      "Video showing camera functionality and screen close-up for damage.",
+      "Screenshot of Battery Health."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as an iPhone 15 Pro 128GB, but critical claims like unlock status and provenance cannot be verified remotely. Hidden risks such as blacklisting, battery health, and physical damage affect pricing significantly. Proof is needed before pricing can be determined."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 78689,
+    "input_tokens": 2451,
+    "output_tokens": 937,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "67d78278bdddfe185588c198126ae106",
+    "error": null
+  }
+}

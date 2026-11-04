@@ -1,0 +1,92 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "A silver/grey clamshell laptop, lid open, resting on a wooden table.",
+      "Screen is completely dark/black - no image visible, cannot tell if it powers on or if panel is intact.",
+      "Keyboard area shows 'Satellite' text printed on the left palm rest, consistent with a Toshiba Satellite series.",
+      "A Toshiba-style logo area is visible below the screen hinge but is blurry and not fully legible.",
+      "Casing has visible wear, scuffs and dust/smudges on the lid and screen.",
+      "No charger, no underside/label, no ports, and no power-on indicator visible in the single photo.",
+      "A notebook/paper is in the foreground, unrelated to the laptop condition.",
+      "Photo is blurry and taken at an angle, so fine text (model number, specs sticker) cannot be read."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Toshiba",
+      "model": null,
+      "read_from": [
+        "photo 0 palm rest 'Satellite' text",
+        "photo 0 lid/bezel branding (blurry)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Fairly used Toshiba laptop",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo 0 shows visible wear consistent with used condition, but 'fairly' is subjective and cannot be graded remotely."
+      },
+      {
+        "claim": "Has a 'switch issue'",
+        "verdict": "unverified",
+        "evidence": "Seller's own wording; photo 0 shows a dark screen which is consistent with a power/switch problem but does not confirm the specific fault or that it is the only issue."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Laptop may not power on at all, or the 'switch issue' could mean a broken power button, dead motherboard, or failed power circuit.",
+        "proof": "A video clip of the seller pressing the power switch and showing any response (LED, fan, screen).",
+        "if_unproven": "priced as non-functional / not powering on"
+      },
+      {
+        "risk": "Screen condition unknown since it is off in the only photo - could be cracked, have dead pixels, or backlight failure.",
+        "proof": "A photo or clip of the screen powered on showing a full desktop or BIOS screen.",
+        "if_unproven": "priced as screen unverified/possibly faulty"
+      },
+      {
+        "risk": "No specs visible (RAM, storage, CPU, generation) which heavily affect laptop value.",
+        "proof": "A photo of the underside spec sticker or a screenshot of System Properties/BIOS info.",
+        "if_unproven": "priced at base/minimum spec assumption for an old Toshiba Satellite"
+      },
+      {
+        "risk": "No charger/adapter shown; missing charger adds cost for buyer.",
+        "proof": "A photo of the laptop with its original charger/adapter.",
+        "if_unproven": "priced as charger not included"
+      },
+      {
+        "risk": "Battery health/presence unknown - could be swollen, missing, or dead.",
+        "proof": "A photo of the battery compartment or battery removed showing physical condition.",
+        "if_unproven": "priced as battery not working/absent"
+      },
+      {
+        "risk": "Hinge, keyboard keys, or trackpad functionality not demonstrated.",
+        "proof": "A short video showing lid opening/closing smoothly and keys/trackpad responding on-screen.",
+        "if_unproven": "priced assuming possible hinge/input wear typical of heavy used units"
+      }
+    ],
+    "proof_requests": [
+      "Video of pressing the power switch showing any LED, fan spin, or screen response.",
+      "Photo of the underside spec label (model number, serial, RAM/HDD if listed).",
+      "Photo/video of the screen powered on (desktop, BIOS, or even boot logo).",
+      "Photo of the charger/adapter included with sale.",
+      "Clear, well-lit photo of the full lid logo and screen bezel to confirm exact model."
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a used Toshiba Satellite-series laptop with an admitted switch fault and an unconfirmed power/screen state, so it can be priced at its worst case (non-functional, unknown specs, no charger) pending further proof."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 27633,
+    "input_tokens": 2550,
+    "output_tokens": 2405,
+    "cost_usd": 0.025991,
+    "replayed": false,
+    "fixture_key": "1e4f36ba14ae1f0ab7dfe064fef67b1d",
+    "error": null
+  }
+}

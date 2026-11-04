@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Black rectangular car battery with red positive terminal cap and black negative terminal",
+      "Top label has checkered flag design and RUNNALL branding",
+      "Photo 1 label reads CAR BATTERY MF DIN100 (12V 100AH) with an indicator window",
+      "Serial number 361030395 visible on photo 1 label",
+      "Battery case is dusty and shows signs of use",
+      "Handle molded into top cover; terminals protrude from sides"
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car battery",
+      "brand": "RUNNALL",
+      "model": "MF DIN100",
+      "read_from": [
+        "photo 1 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Very strong 100amps battery",
+        "verdict": "unverified",
+        "evidence": "Photo 1 shows 100AH capacity, not 100A cranking; no load test or voltage reading shown to prove strength"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery may not hold or accept charge",
+        "proof": "Video of multimeter showing resting voltage and loaded voltage across terminals",
+        "if_unproven": "as dead battery worth only scrap lead value"
+      },
+      {
+        "risk": "Age and manufacturing date unknown; may be near end of life",
+        "proof": "Photo of date code sticker or stamped date on battery case",
+        "if_unproven": "as old or unknown-age battery"
+      },
+      {
+        "risk": "Case cracks or electrolyte leaks not visible in photos",
+        "proof": "Close-up video of all sides and bottom of the battery case",
+        "if_unproven": "as potentially cracked or leaking"
+      },
+      {
+        "risk": "Terminal corrosion or damage",
+        "proof": "Close-up photos of both terminals and connector posts",
+        "if_unproven": "as corroded terminals"
+      }
+    ],
+    "proof_requests": [
+      "Video showing multimeter voltage across terminals at rest and under load",
+      "Photo of manufacturing date code on the battery case",
+      "Close-up photos of battery case sides and bottom for cracks or leaks"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a used RUNNALL MF DIN100 12V 100AH car battery from photo 1, so it can be priced at its worst case as a non-working battery despite the seller's unproven claim of strength."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 15279,
+    "input_tokens": 2239,
+    "output_tokens": 2386,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "d927695ca20f624aa33ac9af2e15da43",
+    "error": null
+  }
+}

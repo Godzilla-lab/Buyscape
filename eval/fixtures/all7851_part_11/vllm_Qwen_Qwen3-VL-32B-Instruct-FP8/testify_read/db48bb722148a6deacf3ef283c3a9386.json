@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a green rectangular box with a label reading 'EMERGENCY DOOR RELEASE' at the top.",
+      "Below the label is a black panel with text 'Emergency Break Glass' and arrows pointing to 'PRESS HERE' on both sides.",
+      "The device has a small green lever or button above the black panel.",
+      "There is a visible screw at the bottom center of the green casing.",
+      "The surface appears dusty or worn, with some scratches and smudges.",
+      "A watermark 'ICONOX NIG LTD' is overlaid on the image."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "emergency door release break glass",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Emergency Break Glass",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows the text 'Emergency Break Glass' on the black panel."
+      },
+      {
+        "claim": "The Exit Break Glass is a vital component that helps quick evacuation during...",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a functional claim; the photo shows the device but not its operation or installation context."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The device may be non-functional or damaged internally (e.g., broken glass, faulty switch, or wiring).",
+        "proof": "A close-up photo of the internal mechanism after breaking the glass, or a video showing the device in operation.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The glass may be already broken or missing, which would render the device useless.",
+        "proof": "A clear close-up of the glass panel showing no cracks or breaks.",
+        "if_unproven": "priced as broken"
+      },
+      {
+        "risk": "The device may be incompatible with existing door systems or require specific installation hardware not included.",
+        "proof": "Photos of the back or mounting plate showing connection points and required hardware.",
+        "if_unproven": "priced as uninstalled and unverified for compatibility"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of the glass panel to confirm it is intact.",
+      "Photo of the internal mechanism or a video showing the device in operation.",
+      "Photo of the back or mounting plate to show connection points and required hardware."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as an emergency door release break glass, but critical functional and condition risks remain unverified. Without proof of intact glass, internal mechanism, and compatibility, it cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 51118,
+    "input_tokens": 1647,
+    "output_tokens": 604,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "db48bb722148a6deacf3ef283c3a9386",
+    "error": null
+  }
+}

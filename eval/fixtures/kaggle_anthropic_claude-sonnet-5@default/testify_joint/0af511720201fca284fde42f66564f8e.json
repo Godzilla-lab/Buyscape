@@ -1,0 +1,85 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: Silver-and-black retro-styled mirrorless camera body with 'Nikon' logo and 'Z fc' text engraved on top plate, rear cap reads 'Nikon Z mount'.",
+      "Photo 1: Close-up of the same body showing 'Nikon' and 'Z fc' lettering again, plus a manual-focus lens with aperture ring marked in f-stops (f2-f16), no autofocus contacts visible.",
+      "Photo 2: Top-down view showing the camera, a battery labeled 'Nikon Rechargeable Li-ion Battery', a charger labeled 'Nikon Battery Charger', two rear lens caps marked 'Nikon', and a front lens cap marked 'TTArtisan APS-C 35mm f2.0'.",
+      "No Canon logo, Canon lens mount, or Canon packaging appears in any of the three photos.",
+      "No photo shows the camera powered on, a shutter count, or any image sample to verify function."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "SLR-style mirrorless camera",
+      "brand": "Nikon",
+      "model": "Z fc",
+      "read_from": [
+        "photo 0 top plate",
+        "photo 1 top plate",
+        "photo 2 battery and charger labels"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "The brand is Canon.",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 and photo 1 clearly show 'Nikon' engraved on the body; photo 2 shows Nikon-branded battery and charger. No Canon marking appears anywhere."
+      },
+      {
+        "claim": "Nikon Z fc is a retro-inspired, SLR-style mirrorless camera, 20.9MP APS-C.",
+        "verdict": "unverified",
+        "evidence": "Body styling and 'Z fc' text in photos 0-1 match the described retro-SLR look, but the sensor megapixel count cannot be read or confirmed from any photo."
+      },
+      {
+        "claim": "Implied working condition (not explicitly claimed, but usually assumed for a listed camera).",
+        "verdict": "unverifiable_remote",
+        "evidence": "No power-on shot, no sample image, no shutter-count screen shown in any of the 3 photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Listing text and brand label directly contradict the photographed item, a classic sign of a copy-pasted or mismatched ad template.",
+        "proof": "A fresh photo of the camera with a handwritten note/date and the seller's face or ID, matching the exact unit, to confirm this specific body is being sold.",
+        "if_unproven": "treat the whole listing as unreliable; do not price until contradiction is resolved"
+      },
+      {
+        "risk": "Lens bundled is a third-party manual-focus TTArtisan 35mm f2.0, not a Nikon kit zoom, which affects value versus a 'kit lens' expectation.",
+        "proof": "Photo of the lens mount markings and a shot of it attached and focusing on the camera.",
+        "if_unproven": "priced as body-only value since lens contribution is uncertain"
+      },
+      {
+        "risk": "Shutter count / sensor condition / functional state unknown.",
+        "proof": "Video of camera powering on, shutter firing, and a test shot or menu screen showing shutter count.",
+        "if_unproven": "priced as not confirmed working (worst case)"
+      },
+      {
+        "risk": "Possible grey-market or stolen unit, or stock photos lifted from another listing (watermark 'Oyibest Global Resources' suggests reused marketing images).",
+        "proof": "Proof of purchase/receipt or serial number photo matched to a live unboxing video.",
+        "if_unproven": "treated as unverifiable provenance"
+      }
+    ],
+    "proof_requests": [
+      "A new photo/video taken today of this exact camera powered on, with a handwritten paper showing today's date and seller's name/phone visible beside it.",
+      "Confirmation of why the text says 'Canon' when every photo shows 'Nikon' branding \u2014 request a clear explanation or corrected listing.",
+      "Shutter count screen or test image shot through the lens.",
+      "Close-up of the serial number plate matched against any proof of purchase."
+    ],
+    "decision": "fraud_suspected",
+    "reason": "The seller's own words assert the brand is Canon while every photo unambiguously shows Nikon branding, Nikon Z-mount markings, and Nikon battery/charger, a direct and material contradiction on the core identity of the item that signals a mismatched or recycled listing rather than a simple typo.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 26665,
+    "input_tokens": 4652,
+    "output_tokens": 2411,
+    "cost_usd": 0.029861,
+    "replayed": false,
+    "fixture_key": "0af511720201fca284fde42f66564f8e",
+    "error": null
+  }
+}

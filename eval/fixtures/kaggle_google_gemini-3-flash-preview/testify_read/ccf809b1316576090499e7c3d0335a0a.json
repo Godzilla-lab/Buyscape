@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Yellow and black portable petrol generator.",
+      "Control panel clearly displays 'SUMEC FIRMAN' and 'SPG4000'.",
+      "The unit appears to be in a retail or outdoor market environment.",
+      "A watermark 'KAYCEE ELECTRONICS' is visible across the center.",
+      "The generator is resting on top of another yellow unit or large box.",
+      "Pull-start handle and fuel tank are visible."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "petrol generator",
+      "brand": "SUMEC FIRMAN",
+      "model": "SPG4000",
+      "read_from": [
+        "photo 0 control panel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "4.5kva",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows model SPG4000, which is standardly rated at 3.0kVA to 3.3kVA max, not 4.5kVA."
+      },
+      {
+        "claim": "100% copper wire",
+        "verdict": "unverifiable_remote",
+        "evidence": "Requires physical inspection or a scratch test of the alternator windings."
+      },
+      {
+        "claim": "1yeras warranty",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a seller's service promise and cannot be verified from a photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The generator may not start or produce electricity.",
+        "proof": "A video of the generator starting and powering a high-wattage appliance (like a heater).",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The alternator coils may be aluminum instead of copper, leading to shorter lifespan.",
+        "proof": "A close-up photo of the alternator windings through the rear cover.",
+        "if_unproven": "as aluminum"
+      },
+      {
+        "risk": "The unit may be a counterfeit/clone rather than a genuine Sumec Firman.",
+        "proof": "A photo of the 'FIRMAN' logo engraved into the metal of the engine block.",
+        "if_unproven": "as a generic clone"
+      }
+    ],
+    "proof_requests": [
+      "Video of the generator starting and running a load.",
+      "Photo of the specification plate on the side of the alternator.",
+      "Photo of the engine block showing the engraved brand name.",
+      "Photo of the alternator windings."
+    ],
+    "decision": "price",
+    "reason": "The brand and model are clearly identified in the photo. It will be priced as a 3.0kVA unit in non-working condition until proof of functionality is provided."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 9393,
+    "input_tokens": 2371,
+    "output_tokens": 1825,
+    "cost_usd": 0.00666,
+    "replayed": false,
+    "fixture_key": "ccf809b1316576090499e7c3d0335a0a",
+    "error": null
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 and 1: a large monocrystalline, half-cut-cell solar panel with silver aluminum frame, photographed upright in a cluttered shop/warehouse setting in Lagos, Nigeria (per photo timestamp/location overlay).",
+      "Photo 2 and 3: reverse side of a panel, white backsheet, junction box with two MC4-style connector cables, and a small printed specification label near the junction box.",
+      "The specification label in photo 3 is visible but the text (brand, model, wattage, voltage) is too small/blurry to read.",
+      "Watermark 'NETWORK SOLAR VENTURES' and 'POSTED ON JIJI' appear on photos 1-3; this is the seller's branding, not the panel manufacturer's.",
+      "Background shows coils of cable, other panel stacks, and bystanders, consistent with a solar equipment shop.",
+      "Location tag says Lagos, Nigeria, though the buyer's market is Oyo - likely the seller's shop location, not necessarily a red flag by itself."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "monocrystalline half-cut solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0",
+        "photo 1",
+        "photo 2",
+        "photo 3"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Seller intro: 'Thank you for contacting Network Solar venture... We deal...' (message cut off, no specific product claims made)",
+        "verdict": "unverifiable_remote",
+        "evidence": "No specific claim about this item's condition, wattage, or performance is stated in the text."
+      },
+      {
+        "claim": "Implied: item is new/unused solar panel",
+        "verdict": "unverified",
+        "evidence": "Photos show a clean, apparently unused panel with protective packaging materials nearby (photo 3), but no invoice, box label, or seller statement confirming 'new' condition."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Wattage and electrical specifications (Wp, Voc, Isc) are unknown, which drives most of a solar panel's price.",
+        "proof": "A clear, well-lit close-up photo of the specification sticker/label visible in photo 3, fully legible.",
+        "if_unproven": "cannot be priced at all without this; wattage is the primary price determinant for solar panels"
+      },
+      {
+        "risk": "Panel could be used/refurbished rather than new, affecting value significantly.",
+        "proof": "Close-up of any production date stamp, original manufacturer box, or seller statement with proof of purchase/invoice.",
+        "if_unproven": "priced as used/refurbished (worst case)"
+      },
+      {
+        "risk": "Cell or frame micro-cracks, hotspots, or hidden damage not visible in static photos.",
+        "proof": "A short video or multi-angle shots in direct sunlight showing uniform cell color, plus an IV-curve/output test with a multimeter under sun.",
+        "if_unproven": "priced as not verified working, i.e., functional condition unproven"
+      },
+      {
+        "risk": "Junction box and MC4 connectors could be damaged or non-OEM, affecting safety/durability.",
+        "proof": "Close-up of junction box seal and connector pins.",
+        "if_unproven": "priced as unverified connector integrity"
+      },
+      {
+        "risk": "Brand/manufacturer unknown; could be an unbranded or lesser-known OEM panel, which affects resale and warranty value.",
+        "proof": "Legible shot of brand name/logo on frame or label.",
+        "if_unproven": "priced as unbranded/generic panel"
+      }
+    ],
+    "proof_requests": [
+      "Clear, in-focus close-up of the specification label on the back of the panel (wattage, model, Voc, Isc, brand).",
+      "Any manufacturer box, invoice, or warranty card showing brand and purchase date.",
+      "Daylight video showing panel connected to a load/meter to confirm power output.",
+      "Close-up of cell surface and frame corners for crack/damage check."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is clearly a monocrystalline half-cut solar panel, but the wattage/spec label that sets its price class is unreadable in all photos, so even a worst-case price cannot be assigned without it."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 22251,
+    "input_tokens": 3577,
+    "output_tokens": 1976,
+    "cost_usd": 0.023755,
+    "replayed": false,
+    "fixture_key": "7731f4b021806cb51466828ac60cbe7c",
+    "error": null
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail packaging for an Oraimo power bank.",
+      "The brand 'oraimo' and model 'Traveler 4' are clearly printed on the box.",
+      "The capacity is stated as '20000mAh' on the box.",
+      "The box features 'AniFast Technology' and a '365 Days Warranty' seal.",
+      "The actual power bank is not visible; only the front of the box is shown.",
+      "The photo appears to be taken in a retail environment with other electronics visible in the background.",
+      "A watermark 'TOPLIGHT ELECTRONIC' is visible across the center of the image."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "power bank",
+      "brand": "Oraimo",
+      "model": "Traveler 4",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "20,000 mAh",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "oraimo power bank",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "high-capacity portable charger",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, lower-value item.",
+        "proof": "A photo of the actual power bank outside of the packaging.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The product may be a counterfeit, which is common for this brand in this market.",
+        "proof": "A clear photo of the 22-digit authentication scratch code on the back of the box.",
+        "if_unproven": "as a generic/counterfeit unit"
+      },
+      {
+        "risk": "The internal battery cells may be degraded or non-functional.",
+        "proof": "A video showing the device successfully charging a phone and being recharged itself.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the power bank outside the box showing its ports and casing.",
+      "Photo of the back of the box showing the security scratch-off label for authenticity verification.",
+      "Video demonstrating the power bank charging a mobile device."
+    ],
+    "decision": "price",
+    "reason": "The brand and model are clearly identified from the retail packaging, allowing for a price based on the worst-case scenario of an unverified/untested unit."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 11496,
+    "input_tokens": 2370,
+    "output_tokens": 2308,
+    "cost_usd": 0.008109,
+    "replayed": false,
+    "fixture_key": "15ffbb72d0faf75933fd6af202f7105e",
+    "error": null
+  }
+}

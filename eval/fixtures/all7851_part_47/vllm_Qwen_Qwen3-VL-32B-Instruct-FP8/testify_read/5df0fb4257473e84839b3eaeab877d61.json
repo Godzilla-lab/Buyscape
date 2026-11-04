@@ -1,0 +1,101 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the back of a gold iPhone with a triple-camera system and Apple logo. The back glass appears to have a small crack near the top left corner, consistent with the seller's claim of a 'back crack (small)'. There is a white rectangular sticker or residue near the bottom.",
+      "Photo 1 shows a WhatsApp settings screen ('Storage and data') on the phone. The status bar shows 5G connectivity and a battery icon, but no percentage. The interface is dark mode. The bottom navigation bar shows 'You' with a profile picture, indicating the phone is active and logged into an account.",
+      "No model name or capacity is visible in either photo. The seller claims 128GB and gold color, which matches the visual appearance."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "iPhone",
+      "brand": "Apple",
+      "model": null,
+      "read_from": [
+        "photo 0: Apple logo and triple-camera layout"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "128GB",
+        "verdict": "unverified",
+        "evidence": "No photo shows the storage capacity. Photo 1 is WhatsApp settings, not device info. The seller's claim cannot be verified from the photos."
+      },
+      {
+        "claim": "Gold",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows a gold-colored back panel, consistent with the description."
+      },
+      {
+        "claim": "Battery Health 75%",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows battery health. The status bar in photo 1 shows battery icon but no percentage. This claim cannot be verified remotely."
+      },
+      {
+        "claim": "Back crack (small)",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows a small crack near the top left corner of the back glass, matching the description."
+      },
+      {
+        "claim": "Screen original",
+        "verdict": "unverified",
+        "evidence": "No photo shows the front screen. Cannot verify if it is original or replaced."
+      },
+      {
+        "claim": "Face ID & True Tone",
+        "verdict": "unverified",
+        "evidence": "No photo shows Face ID functionality or True Tone settings. These features cannot be confirmed from the provided images."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery health is worse than claimed (75%)",
+        "proof": "Photo of Settings > Battery > Battery Health showing actual percentage.",
+        "if_unproven": "priced as degraded battery (e.g., 50-70% health), which reduces value significantly."
+      },
+      {
+        "risk": "Storage capacity is not 128GB (e.g., 64GB or 256GB)",
+        "proof": "Photo of Settings > General > About > Capacity showing exact storage size.",
+        "if_unproven": "priced as 64GB model, which is lower value than 128GB."
+      },
+      {
+        "risk": "Screen is not original (replaced or damaged)",
+        "proof": "Photo of front screen showing no cracks, and Settings > Display & Brightness > True Tone enabled, with a close-up of the notch area to check for repair signs.",
+        "if_unproven": "priced as screen replaced, which reduces value."
+      },
+      {
+        "risk": "Face ID not working or disabled",
+        "proof": "Video or photo showing Face ID setup or unlock in action.",
+        "if_unproven": "priced as Face ID not working, which reduces value."
+      },
+      {
+        "risk": "Water damage or internal issues",
+        "proof": "Photo of the SIM tray, charging port, and internal inspection (if possible) or a video showing the phone being powered on and off, charging, and camera function.",
+        "if_unproven": "priced as potentially damaged, with lower value."
+      }
+    ],
+    "proof_requests": [
+      "Photo of Settings > General > About showing model and storage capacity.",
+      "Photo of Settings > Battery > Battery Health showing actual percentage.",
+      "Photo of front screen showing no damage and True Tone settings.",
+      "Video or photo showing Face ID unlocking the phone.",
+      "Photo of the charging port and SIM tray to check for water damage or corrosion."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and storage capacity cannot be confirmed from the photos, and critical claims like battery health, screen originality, and Face ID functionality are unverified. Without proof, the item cannot be priced accurately and carries significant hidden risks that affect value."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 84447,
+    "input_tokens": 2559,
+    "output_tokens": 1034,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "5df0fb4257473e84839b3eaeab877d61",
+    "error": null
+  }
+}

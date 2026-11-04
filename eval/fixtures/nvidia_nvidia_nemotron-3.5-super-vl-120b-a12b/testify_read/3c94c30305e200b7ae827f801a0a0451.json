@@ -1,0 +1,75 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a large dark photovoltaic module with white busbars and a white frame, watermarked \"LIBERTY HOME SOLAR ENERGY\".",
+      "Photo 1 shows the rear label of a SUNPOWER module, model SPR-P19-405-COM, rated 405 W.",
+      "The label reads \"Designed in USA, Assembled in China\".",
+      "Both photos carry a Lagos, Ojo location stamp dated 20/01/2023."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "solar panel",
+      "brand": "SUNPOWER",
+      "model": "SPR-P19-405-COM",
+      "read_from": [
+        "photo 1 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "European origin",
+        "verdict": "contradicted",
+        "evidence": "photo 1 label reads Designed in USA, Assembled in China"
+      },
+      {
+        "claim": "Used condition",
+        "verdict": "unverified",
+        "evidence": "photos show the panel but no usage history or age markers"
+      },
+      {
+        "claim": "Solar panel",
+        "verdict": "supported",
+        "evidence": "photo 0 shows a photovoltaic module; photo 1 shows a solar module label"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Module does not produce rated power or any power",
+        "proof": "Video of Voc/Isc measurement in sunlight or output under load",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Hidden physical defects such as cracks, delamination, or hot spots",
+        "proof": "Close-up photos of the full surface or an electroluminescence image",
+        "if_unproven": "as defective"
+      },
+      {
+        "risk": "Age and wear beyond what the photos show",
+        "proof": "Original purchase invoice or installation date",
+        "if_unproven": "as end-of-life"
+      }
+    ],
+    "proof_requests": [
+      "Video of open-circuit voltage and short-circuit current measured in sunlight",
+      "Close-up photos of the entire panel surface for cracks or delamination",
+      "Original purchase documents or installation date"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a SunPower SPR-P19-405-COM 405 W solar panel from the label in photo 1, so it can be priced at its worst case as a used panel with unproven function."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 17134,
+    "input_tokens": 2765,
+    "output_tokens": 2664,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "3c94c30305e200b7ae827f801a0a0451",
+    "error": null
+  }
+}

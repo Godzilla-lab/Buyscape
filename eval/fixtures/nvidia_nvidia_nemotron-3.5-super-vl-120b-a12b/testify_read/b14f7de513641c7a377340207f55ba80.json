@@ -1,0 +1,69 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a metal engine control unit with a label on which BOSCH is readable; part numbers and a QR code are present but not clearly legible.",
+      "Photo 1 shows the plain metal cover side of the same unit with mounting holes and the black connector base; no brand or model is readable on this side.",
+      "A seller watermark reading BLESSED IYKE RANGE ROVER is overlaid on both photos."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "engine control unit (ECU) / engine brain box",
+      "brand": "Bosch",
+      "model": null,
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Engine brain box for Range Rover Velar 2018/2020",
+        "verdict": "unverifiable_remote",
+        "evidence": "The label in photo 0 is too blurry to confirm the part number or vehicle application; the photos do not show the car or a diagnostic readout."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The ECU may not work or may be internally faulty.",
+        "proof": "A video of the unit bench-tested or communicating with a diagnostic scanner.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The part number may not match a 2018/2020 Range Rover Velar.",
+        "proof": "A clear, legible close-up of the full label/part number.",
+        "if_unproven": "as unknown fitment / wrong part"
+      },
+      {
+        "risk": "The ECU may be immobilizer-locked or married to another vehicle and require reprogramming.",
+        "proof": "Proof that it is virgin/unlocked, or a video showing it can be reprogrammed.",
+        "if_unproven": "as locked / needs programming"
+      },
+      {
+        "risk": "Connector pins or housing may be damaged, cracked, or water-damaged.",
+        "proof": "Close-up photos of all connector pins and the housing seams.",
+        "if_unproven": "as damaged"
+      }
+    ],
+    "proof_requests": [
+      "Clear close-up of the full label and part number on the ECU.",
+      "Video of the ECU being bench-tested or communicating with a diagnostic scanner.",
+      "Close-up of the connector pins and housing condition."
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a Bosch engine control unit, but its working condition, exact fitment, and lock status are unproven, so it can be priced at its worst case as a non-working, unconfirmed-fitment ECU."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 23455,
+    "input_tokens": 2381,
+    "output_tokens": 2813,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "b14f7de513641c7a377340207f55ba80",
+    "error": null
+  }
+}

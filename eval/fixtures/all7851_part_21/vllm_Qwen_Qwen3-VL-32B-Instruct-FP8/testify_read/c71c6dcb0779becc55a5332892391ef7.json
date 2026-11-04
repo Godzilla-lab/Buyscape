@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Black iPhone back with Apple logo, single camera, and 'iPhone' text visible. The phone appears to be an iPhone XR based on design (single rear camera, notch on front in photo 1).",
+      "Photo 1: iPhone screen showing Settings menu with iOS interface. Time is 11:42. The notch and rounded corners match iPhone XR design. No model or storage info visible.",
+      "Photo 2: Back of the same phone with two white stickers covering the Apple logo and serial number area. A blue sticker with '256' is visible, possibly indicating storage or a price tag. The phone is held in a hand, with a tiled floor and sandals in the background.",
+      "All photos have a watermark: 'POSTED ON JIJI ECLEAR BT SOLAR ENERGY'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "iPhone XR",
+      "brand": "Apple",
+      "model": "iPhone XR",
+      "read_from": [
+        "photo 0 back: 'iPhone' text and single camera design",
+        "photo 1: notch and iOS interface consistent with iPhone XR"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "iPhone XR 128gb",
+        "verdict": "unverified",
+        "evidence": "The model is supported by design (photo 0 and 1), but storage capacity is not visible. The '256' sticker in photo 2 may indicate 256GB, contradicting the 128GB claim, or it may be unrelated (e.g., price or inventory tag)."
+      },
+      {
+        "claim": "uk use",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible proof of UK origin or usage. No SIM lock info, no UK-specific settings, no IMEI or serial number visible to check region. The seller's claim cannot be verified from photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Storage capacity is not 128GB as claimed (possibly 256GB or different)",
+        "proof": "Photo of Settings > General > About, showing model and storage capacity.",
+        "if_unproven": "Priced as 128GB, but if actually 256GB, value is higher; if lower, value is lower. Without proof, assume 128GB as claimed, but risk of misrepresentation."
+      },
+      {
+        "risk": "Phone is not from UK or has been used in a different region, possibly with regional restrictions or warranty issues",
+        "proof": "Photo of Settings > General > About showing IMEI and model number, then verification via Apple's website or carrier check.",
+        "if_unproven": "Priced as a standard used iPhone XR, but if not UK-locked or region-locked, value may be lower. Assume no regional restrictions until proven otherwise."
+      },
+      {
+        "risk": "Phone has been tampered with or has hidden damage (e.g., cracked screen, water damage, battery issues)",
+        "proof": "Video or photo showing front screen, battery health in Settings, and a full 360-degree view including ports and buttons.",
+        "if_unproven": "Priced as a used phone with average wear, but potential for hidden damage reduces value. Assume average condition until proven otherwise."
+      }
+    ],
+    "proof_requests": [
+      "Photo of Settings > General > About showing model, storage, and IMEI.",
+      "Video or photo showing front screen (no cracks), battery health, and all ports and buttons.",
+      "Photo of the original box or any documentation if available."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identifiable as iPhone XR, but the storage capacity and UK usage claims cannot be verified from current photos. Hidden risks like battery health, screen damage, and regional lock affect pricing. Proof is needed to confirm storage, IMEI, and condition before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 72685,
+    "input_tokens": 3231,
+    "output_tokens": 872,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "c71c6dcb0779becc55a5332892391ef7",
+    "error": null
+  }
+}

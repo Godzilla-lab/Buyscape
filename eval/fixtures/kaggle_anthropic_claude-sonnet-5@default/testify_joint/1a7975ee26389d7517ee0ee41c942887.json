@@ -1,0 +1,81 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows a front-load washing machine with 'LG' logo and 'Inverter DirectDrive 7kg' text, model text partially visible (appears to end in 'QDP2').",
+      "Visible rust staining along the bottom front edge and corners of the cabinet.",
+      "Door, drum interior, and control panel are visible; no readable display showing a power-on state.",
+      "No photo of the back (hoses, plug, drain) or of the drum spinning or water running.",
+      "No visible photo of a full model/serial sticker (usually on the back or inside the door) to confirm exact model number."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "7kg front-load washing machine",
+      "brand": "LG",
+      "model": "DirectDrive 7kg (partial model code visible, appears F10x8QDP2)",
+      "read_from": [
+        "photo 0 front panel badge"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "LG DirectDrive 7kg washing machine",
+        "verdict": "supported",
+        "evidence": "photo 0 shows LG logo and 'DirectDrive 7kg' text on the front panel"
+      },
+      {
+        "claim": "Implied working/for sale as functional item",
+        "verdict": "unverifiable_remote",
+        "evidence": "no photo or clip shows the machine powered on, spinning, or draining"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Unknown working condition (motor, spin, drain pump)",
+        "proof": "short video of machine powered on, filling, spinning and draining",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Rust visible on cabinet may extend to internal drum tub or electronics",
+        "proof": "close-up photo of rust areas and open top panel showing internal condition",
+        "if_unproven": "priced as cosmetic/structural risk, worst case treated as faulty"
+      },
+      {
+        "risk": "No confirmation of original hoses, plug, or power cable included",
+        "proof": "photo of back of unit showing hoses, cable, and plug",
+        "if_unproven": "priced as missing accessories"
+      },
+      {
+        "risk": "Exact model number unclear, affecting resale comparability",
+        "proof": "clear photo of the rating/model sticker (usually inside door rim or on back)",
+        "if_unproven": "priced as generic LG 7kg model"
+      }
+    ],
+    "proof_requests": [
+      "Video of the machine running a wash cycle (power on, spin, drain)",
+      "Photo of the back of the unit showing hoses, plug, and condition",
+      "Close-up of the rating plate/model sticker",
+      "Photo inside the drum and door seal for rust or damage"
+    ],
+    "decision": "price",
+    "reason": "Brand and capacity are confirmed from the photo, but no proof of working condition exists and visible rust raises risk, so it must be priced at worst case against comparable LG and faulty washing machines.",
+    "price_pick": {
+      "low": 1,
+      "high": 2
+    }
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 23171,
+    "input_tokens": 3980,
+    "output_tokens": 1995,
+    "cost_usd": 0.024357,
+    "replayed": false,
+    "fixture_key": "1a7975ee26389d7517ee0ee41c942887",
+    "error": null
+  }
+}

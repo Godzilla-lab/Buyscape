@@ -1,0 +1,69 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r5",
+  "response": {
+    "observations": [
+      "Large solar panel standing vertically against a wall.",
+      "Silver aluminum frame with a white top rail.",
+      "Blue solar cells arranged in a 3x3 grid.",
+      "Two black mounting brackets attached to the frame.",
+      "Watermark 'Jiji' and 'Jiji.ng' visible across the center.",
+      "No brand name, model number, or specification label is visible on the front of the panel."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel",
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Original 550w mono solar panels",
+        "verdict": "unverified",
+        "evidence": "No specification label is visible in photo 0 to confirm wattage or cell type."
+      },
+      {
+        "claim": "Battery is new, holds charge for 8 hours. Never repaired.",
+        "verdict": "unverified",
+        "evidence": "No battery is visible in the photo; the claim is the seller's word only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The panel may be a lower wattage model or a non-550W unit.",
+        "proof": "A clear photo of the manufacturer's specification label on the back of the panel.",
+        "if_unproven": "as a 350W panel"
+      },
+      {
+        "risk": "The panel may be non-functional or have internal cell damage.",
+        "proof": "A video showing a multimeter reading of the open-circuit voltage (Voc) in direct sunlight.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The panel may be a poly-fused cell (PFC) rather than monocrystalline (mono).",
+        "proof": "A photo of the cell surface showing the characteristic diamond pattern of monocrystalline cells.",
+        "if_unproven": "as poly-fused cell"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of any label, sticker or metal plate showing the brand and model.",
+      "Photo of the specification label on the back of the panel.",
+      "Photo of the cell surface to confirm it is monocrystalline.",
+      "Video of a multimeter test showing the panel's voltage output."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "What the item is shows, but not the model that sets its price: no photo shows it clearly enough to read. The shot asked for first would settle it."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r5",
+    "task": "testify_read",
+    "latency_ms": 2646,
+    "input_tokens": 1444,
+    "output_tokens": 446,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "04c2d48980bd6fa59bcb6faf75a1c988",
+    "error": null
+  }
+}

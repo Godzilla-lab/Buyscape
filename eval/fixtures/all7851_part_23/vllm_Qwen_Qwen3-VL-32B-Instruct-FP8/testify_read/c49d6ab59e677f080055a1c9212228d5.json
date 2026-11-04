@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a white inverter with 'Microtek' branding on the front left corner and a control panel with indicators and switches. The model number 'SDL-1648' is visible on the front panel.",
+      "Photo 1 shows the rear of the inverter with AC output sockets, a fan grille, and battery terminals with red and black cables connected. The brand 'Microtek' is visible on the top right of the rear panel.",
+      "Photo 2 is a closer view of the rear panel, showing 'AC OUTPUT 210-220V \u00b110%' label near the sockets. The same red and black cables are connected to the battery terminals.",
+      "The inverter appears to be placed on a dark fabric-covered surface, possibly a sofa or ottoman.",
+      "The lighting is dim and blue-toned, likely from a phone flash or ambient light, causing reflections and shadows."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "inverter",
+      "brand": "Microtek",
+      "model": "SDL-1648",
+      "read_from": [
+        "photo 0 front panel",
+        "photo 1 rear panel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Used inverter microtek 1.6kva 24v",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows 'Microtek' brand and model 'SDL-1648' which is a 1.6kVA 24V model as per known specifications. The rear panel in photo 2 shows 210-220V output, consistent with 24V input inverter."
+      },
+      {
+        "claim": "Supply faulty but charging battery",
+        "verdict": "unverified",
+        "evidence": "No photo shows the inverter in operation or any indicator lights. The seller's claim cannot be confirmed from the images alone."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Inverter not supplying power despite charging battery",
+        "proof": "A video or photo showing the inverter's indicator lights during operation, or a test with a load connected to the AC output.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Internal damage or component failure not visible externally",
+        "proof": "A video showing the inverter being powered on and tested with a load, or a close-up of the circuit board if accessible.",
+        "if_unproven": "priced at lower end of used range"
+      },
+      {
+        "risk": "Battery not included or not functional",
+        "proof": "Photo of the battery connected to the inverter, showing its condition and charge level.",
+        "if_unproven": "priced without battery"
+      }
+    ],
+    "proof_requests": [
+      "Video or photo of the inverter powered on with indicator lights showing, and a load connected to the AC output.",
+      "Photo of the battery connected to the inverter, showing its condition and charge level.",
+      "Close-up of the front panel indicators during operation."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The inverter's model and brand are confirmed, but the seller's claim that it is 'supply faulty but charging battery' cannot be verified from the photos. The operational status and battery condition are critical for pricing and must be proven before a price can be assigned."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 60150,
+    "input_tokens": 2793,
+    "output_tokens": 756,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "c49d6ab59e677f080055a1c9212228d5",
+    "error": null
+  }
+}

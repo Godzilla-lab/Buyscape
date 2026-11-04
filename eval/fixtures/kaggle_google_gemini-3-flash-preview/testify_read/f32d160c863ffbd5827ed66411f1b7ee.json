@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 is a digital marketing graphic or stock image, not a photograph of a physical item.",
+      "The brand 'TOTAL' is visible on the side and front panel of the machine in the graphic.",
+      "The text '180A' and 'MMA' are prominently displayed.",
+      "Technical specs '220-240V~50/60Hz' are written at the top.",
+      "Features such as 'IGBT Inverter Technology', 'LED display', 'Arc-force', 'Anti Sticking', and 'Hot Start' are listed as icons.",
+      "A watermark for 'MURICH INVESTMENTS' is visible across the center of the image."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "Inverter MMA welding machine",
+      "brand": "TOTAL",
+      "model": "180A MMA",
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Input Voltage: 1~220-240V",
+        "verdict": "supported",
+        "evidence": "Text at the top of the graphic in photo 0."
+      },
+      {
+        "claim": "Frequency: 50/60Hz",
+        "verdict": "supported",
+        "evidence": "Text at the top of the graphic in photo 0."
+      },
+      {
+        "claim": "Current output: 15-180A",
+        "verdict": "supported",
+        "evidence": "The '180A' label in photo 0."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The image is a stock graphic; the actual condition of the second-hand unit is unknown.",
+        "proof": "A photo of the actual physical unit being sold.",
+        "if_unproven": "as non-functional"
+      },
+      {
+        "risk": "Welding cables (electrode holder and earth clamp) may be missing or damaged.",
+        "proof": "A photo of the included accessories and cables.",
+        "if_unproven": "as unit only, no cables"
+      },
+      {
+        "risk": "The internal IGBT components may be failed or repaired poorly.",
+        "proof": "A video of the machine powered on and successfully striking an arc.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual physical welding machine in its current environment.",
+      "Photo of the specification plate on the actual unit to confirm the exact model number.",
+      "Photo of all accessories included in the sale (cables, clamps, etc.).",
+      "Video showing the machine powered on and the LED display functioning."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller has provided a stock marketing image instead of a photo of the actual item. No assessment of condition or authenticity is possible without seeing the real unit."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 14321,
+    "input_tokens": 2397,
+    "output_tokens": 3249,
+    "cost_usd": 0.010946,
+    "replayed": false,
+    "fixture_key": "f32d160c863ffbd5827ed66411f1b7ee",
+    "error": null
+  }
+}

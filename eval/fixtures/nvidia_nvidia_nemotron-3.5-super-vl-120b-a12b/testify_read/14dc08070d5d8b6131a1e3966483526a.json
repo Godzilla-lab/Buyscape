@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "One rectangular solar panel leaning against a painted interior wall.",
+      "Dark photovoltaic cells arranged in rows and columns with white grid lines.",
+      "Dark frame around the panel edges.",
+      "Watermark text \"INNOSON GLOBAL GROUP\" overlaid across the center of the image.",
+      "No readable brand name, model number, or wattage label on the visible front.",
+      "Rear side, junction box, and output cables are not shown.",
+      "Room has tiled flooring and a window frame at the right edge."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Solar Energy Solution (seller offers a solar product)",
+        "verdict": "supported",
+        "evidence": "photo 0 shows a photovoltaic solar panel"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Unknown wattage and electrical specifications",
+        "proof": "Close-up photo of the specification label on the frame or back",
+        "if_unproven": "priced as an unrated unknown-capacity panel"
+      },
+      {
+        "risk": "Panel may not generate power (dead cells, internal faults)",
+        "proof": "Video of the panel connected to a multimeter or load showing electrical output",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Hidden physical damage (microcracks, delamination, frame corrosion)",
+        "proof": "Close-up photos of the cell surface, edges, and corners",
+        "if_unproven": "priced as physically defective"
+      },
+      {
+        "risk": "Missing or damaged junction box and cables",
+        "proof": "Photo of the back of the panel showing the junction box and connectors",
+        "if_unproven": "priced as incomplete"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the specification label showing wattage, voltage, and model",
+      "Photo of the back of the panel showing the junction box and cables",
+      "Video of the panel producing electrical output under light"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The panel's wattage and model are not visible, and these specifications determine the price; without them even a worst-case price cannot be set."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 28760,
+    "input_tokens": 1833,
+    "output_tokens": 3584,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "14dc08070d5d8b6131a1e3966483526a",
+    "error": null
+  }
+}

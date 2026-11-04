@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a white product box for a solar light.",
+      "The box has the brand 'SMS Sunmate Solar' printed on it with a sun and solar panel logo.",
+      "The box displays an image of a rectangular solar panel and a red/orange LED light unit with a mounting bracket.",
+      "A remote control is also shown on the box.",
+      "The box states 'New Design' and '2 YEARS WARRANTY'.",
+      "The product is described as a '200W Solar Street/Flood Light' in the seller's words.",
+      "The box is placed on a cardboard surface, possibly in a warehouse or storage area."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "solar street/flood light",
+      "brand": "SMS Sunmate Solar",
+      "model": null,
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "200W Solar Street/Flood Light",
+        "verdict": "unverified",
+        "evidence": "The power rating '200W' is not visible on the box in photo 0. The box shows the product type but not the wattage."
+      },
+      {
+        "claim": "Solar Powered \u2013 uses sunlight to recharge during the day",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows a solar panel and the brand name 'SMS Sunmate Solar', which implies solar power. The product type is consistent with solar operation."
+      },
+      {
+        "claim": "2 YEARS WARRANTY",
+        "verdict": "supported",
+        "evidence": "Photo 0 clearly shows a '2 YEARS WARRANTY' badge on the box."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The actual power output may be less than 200W, or the product may not be a 200W model at all.",
+        "proof": "A clear photo of the product label or box showing the wattage specification.",
+        "if_unproven": "priced as a lower-wattage unit or as unverified power, which reduces value."
+      },
+      {
+        "risk": "The product may be damaged or non-functional (e.g., broken solar panel, dead battery, or faulty LEDs).",
+        "proof": "A photo of the actual product (not the box) showing the solar panel, light unit, and any visible damage or wear.",
+        "if_unproven": "priced as potentially non-working or with unknown condition, reducing value."
+      },
+      {
+        "risk": "The remote control may be missing or non-functional.",
+        "proof": "A photo of the actual remote control and its buttons, or a video showing it in use.",
+        "if_unproven": "priced as if remote is not included or non-functional, reducing value."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual product (solar panel and light unit) showing condition and any labels.",
+      "Photo of the product label or box showing the wattage (200W or otherwise).",
+      "Photo of the remote control and its buttons.",
+      "Video or photo showing the light turning on and the solar panel charging."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The product brand is identifiable, but the key claim of '200W' is not visible on the box. The actual product condition, functionality, and remote control status are unknown. Without proof of wattage and working condition, the item cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 61581,
+    "input_tokens": 2012,
+    "output_tokens": 776,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "47a1297485d4caba7012c28e842a8ff8",
+    "error": null
+  }
+}

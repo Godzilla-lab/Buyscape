@@ -1,0 +1,91 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows laptop internals: motherboard, cooling fan, two DDR4 RAM slots with blue sticks, WLAN card, and a hand holding the open chassis.",
+      "Photo 1 shows the bottom case of a silver laptop with \"Latitude 5310\" printed near the center, regulatory labels, and a barcode sticker.",
+      "Photo 2 is a close-up of the same bottom case confirming \"Latitude 5310\" and a partial service tag label.",
+      "Seller watermark \"TC ANAYO GLOBAL VENTURES\" appears on all photos."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop base unit",
+      "brand": "Dell",
+      "model": "Latitude 5310",
+      "read_from": [
+        "photo 1 bottom case",
+        "photo 2 bottom case close-up"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Direct uk used",
+        "verdict": "unverifiable_remote",
+        "evidence": "No shipping documents or UK origin marks visible in photos"
+      },
+      {
+        "claim": "dell 5310",
+        "verdict": "supported",
+        "evidence": "photo 1 and photo 2 show Latitude 5310 on bottom case"
+      },
+      {
+        "claim": "core i5 10th generation",
+        "verdict": "unverified",
+        "evidence": "CPU not visible or readable in photo 0 motherboard shot"
+      },
+      {
+        "claim": "board",
+        "verdict": "unverified",
+        "evidence": "Photos show a laptop chassis with motherboard, but it is unclear if screen, battery, or charger are included"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "CPU model and generation unknown",
+        "proof": "Photo of CPU label or system information screen",
+        "if_unproven": "priced as unknown/entry specification"
+      },
+      {
+        "risk": "RAM capacity and storage unknown",
+        "proof": "Photo of RAM stick labels and storage drive",
+        "if_unproven": "priced as no RAM/storage"
+      },
+      {
+        "risk": "Battery absent or dead",
+        "proof": "Photo of battery or power-on test",
+        "if_unproven": "priced as no battery"
+      },
+      {
+        "risk": "Screen/display not included or broken",
+        "proof": "Photo of screen working",
+        "if_unproven": "priced as base unit without screen"
+      },
+      {
+        "risk": "Item does not power on",
+        "proof": "Video of boot to BIOS or OS",
+        "if_unproven": "priced as not working"
+      }
+    ],
+    "proof_requests": [
+      "Video of the item powering on and showing system specifications",
+      "Photo of the CPU label and RAM stick capacity",
+      "Photo showing whether screen, battery, and charger are included"
+    ],
+    "decision": "price",
+    "reason": "The model is clearly a Dell Latitude 5310 from the case labeling, so it can be priced at its worst case as an untested base unit with unverified specs."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 54146,
+    "input_tokens": 3030,
+    "output_tokens": 3178,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "4b1caa2e3e483bc5bb1365109a10e8c4",
+    "error": null
+  }
+}

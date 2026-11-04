@@ -1,0 +1,85 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r5",
+  "response": {
+    "observations": [
+      "Nikon DSLR camera body with an 18-55mm AF-P DX NIKKOR lens.",
+      "The camera body shows significant surface wear and dirt, particularly on the top and rear panels.",
+      "The lens barrel shows some surface scratches and wear.",
+      "The LCD screen is off in photo 1 and appears dirty in photo 2.",
+      "The shutter count is not visible in the photos.",
+      "The seller's text claims the camera is 'working perfectly ok'.",
+      "The background shows a retail or storage environment with other electronics boxes."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DSLR camera",
+      "brand": "Nikon",
+      "read_from": [
+        "photo 0 body",
+        "photo 1 body",
+        "photo 2 body"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Used Nikon D90 DSLR Camera",
+        "verdict": "supported",
+        "evidence": "photo 0 body"
+      },
+      {
+        "claim": "18-55MM lens",
+        "verdict": "supported",
+        "evidence": "photo 0 lens barrel"
+      },
+      {
+        "claim": "working perfectly ok",
+        "verdict": "unverified",
+        "evidence": "No photo shows this; it is the seller's word only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The camera may not power on or the LCD may be dead.",
+        "proof": "A video showing the camera powering on and the screen displaying a live image.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The shutter may be near the end of its life (high shutter count).",
+        "proof": "A screenshot of the shutter count from a recent photo or video.",
+        "if_unproven": "as high mileage"
+      },
+      {
+        "risk": "The lens may have fungus, scratches, or internal defects.",
+        "proof": "Close-up photos of the front and rear lens elements.",
+        "if_unproven": "as having a damaged lens"
+      },
+      {
+        "risk": "The camera may have a faulty sensor or mirror-film system.",
+        "proof": "A clear photo of the sensor with the lens removed.",
+        "if_unproven": "as having a faulty sensor"
+      }
+    ],
+    "proof_requests": [
+      "Video of the camera powering on and taking a photo.",
+      "Screenshot of the shutter count.",
+      "Close-up photos of the lens glass.",
+      "Photo of the sensor with the lens removed."
+    ],
+    "decision": "price",
+    "reason": "The item is known from the photos. What they cannot prove is priced at its worst case until the proof asked for below arrives."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r5",
+    "task": "testify_read",
+    "latency_ms": 2563,
+    "input_tokens": 2790,
+    "output_tokens": 462,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "840a4d8ebca3031e862f5b40d5ccd1b8",
+    "error": null
+  }
+}

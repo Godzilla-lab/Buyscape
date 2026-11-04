@@ -1,0 +1,611 @@
+"""Build the fine-tuning set: a teacher's reads of training adverts, kept only
+where they are right, and each paired with a lied-to twin.
+
+The recipe is steps 4 and 5 of docs/research/fine-tuning-research.md, and the
+target is the gap the untuned Qwen3-VL 8B showed on Testify: it never prices,
+because it reads "price an unproven claim at its worst case" as "do not price
+without proof". So:
+
+- A read that names the item right, checked against the advert's title (the
+  answer key, never an input), becomes a price at the worst case, whatever
+  the teacher decided. The title, not the kind the advert was searched
+  under: Jiji's search is literal, so a search for "pallets" brings back
+  activated carbon sold by the pallet. Its claims, risks and proof requests are kept: the
+  doubt stays, it just no longer stops the price.
+- A model the teacher named that the photo check could not read is cut back
+  to the kind, so the student does not learn to name what it cannot see. The
+  check is the benchmark's own (`testify-label --split train`, a vision
+  model asked what the photos alone show), which sees logos, sideways text
+  and a console's shape. An advert it has not checked falls back on the
+  local OCR: every brand and model word must be text the OCR found.
+- A model code (any model with a digit in it) stays only when the title or
+  the OCR carries it too; otherwise the brand stays and the code goes. A cut
+  name leaves no trace: a note that says it was read goes with it, so the
+  student never learns to claim it read what the answer does not use. Codes
+  are where the benchmark's silent wrong answers came from: a cover badge
+  read as an engine's model, a 7kg washer named with a code for another.
+- A branded electronics advert (the photo check's tier) whose answer names
+  no model, after any cut, asks for the shot that names it instead of
+  pricing: its price is set by the model. Gemini, the benchmark's cheapest
+  pricer, prices 47 of 54 such items it names to the model and 6 of 26 it
+  names by brand alone (29 Oct); every read forced to a price taught the
+  second run to price 227 of 231.
+- A read where the teacher could not tell what the item is stays a
+  cannot_identify example, so the student also learns to decline.
+- A read that is wrong about the item is dropped: a wrong label teaches more
+  than a missing one. The exception is an advert the photo check says its
+  photos alone cannot name: that becomes "cannot identify" (Gekhman et al.:
+  what cannot be known is taught as not known), never a guess.
+- Each kept example gets a twin: the same photos and words plus a planted
+  claim from train_lies.yaml, never the benchmark's lies.yaml. The twin's
+  answer is the same, with the claim listed as unverified.
+- Where a photo shows a fact the title names (`truths.fact`), two more twins:
+  the fact claimed, marked supported, and the fact made false, marked
+  contradicted, in training's own words, so the student learns to use a claim
+  a photo proves and to catch one it disproves, not only to ignore sellers.
+- Where a photo carries a branded advert's label (`construct.construct`), a
+  twin with that photo gone or the code painted out, answered by asking for
+  the shot that names the item.
+- No advert from a seller who is also in the benchmark is used: Jiji's photo
+  stamp and the phone number in the seller's words name the seller
+  (`sellers.py`).
+- Each priced second-hand advert also teaches the price step: the
+  comparables the engine finds for the answer, and a teacher's own pick from
+  them (`taught_pick`), kept only where it is a buyer's answer for that
+  advert. The pick is made from what the student is shown, the answer and
+  the list; a rule that reads the advert's asking price (`pick_target`, the
+  second run's target) teaches a habit the student cannot follow. The
+  student learns to price by picking real adverts, never by writing a
+  number (rule 4), and the lied-to twin's pick is the same, so a lie cannot
+  raise it. A dealer's new stock teaches the pick too, since the teacher
+  picks from the list and never aims at the new price; under the
+  asking-price rule it taught the read only.
+- One priced advert in six also meets a list of adverts for a clearly
+  different kind, and refuses it (`refuse_target`), so a wrong name never
+  prices off the wrong adverts. A list the teacher itself refused, though
+  it holds adverts of the same kind (dearer bikes for a cheap one), is
+  refused too, by the advert and its lied-to twin: declining is how
+  Gemini, the cheapest pricer, keeps its losses low (30 Oct).
+
+Training items are priced only against training adverts, so no benchmark
+title or price reaches a training prompt (`_testify_pool` in cli.py).
+"""
+
+from __future__ import annotations
+
+import hashlib
+import json
+import os
+import re
+from pathlib import Path
+
+import yaml
+from pydantic import BaseModel, ValidationError
+
+from ..identify.ocr import OcrReader
+from ..providers.base import ImageRef, ModelRequest
+from ..providers.openrouter import system_text
+from . import comparables as comps
+from .adjudicate import answer_text
+from .answer import ClaimAnswer, IdentityAnswer, PriceChoice, PricePick, Reading, hedged_name, money_written
+from .comparables import names
+from .construct import carries
+from .convert import redact
+from .run import lie_entry, pick_request, reading_request
+from .schema import Answer, Item, PriceTruth
+from .score import identity_correct
+
+TRAIN_LIES = Path(__file__).resolve().parents[3] / "eval" / "testify" / "train_lies.yaml"
+WORST_CASE_REASON = (
+    "The item is known from the photos. What they cannot prove is priced at its worst case until the "
+    "proof asked for below arrives."
+)
+UNPROVEN = "No photo shows this; it is the seller's word only."
+UNREADABLE = "No photo shows this clearly enough to read."
+NO_MODEL_REASON = (
+    "What the item is shows, but not the model that sets its price: no photo shows it clearly enough to "
+    "read. The shot asked for first would settle it."
+)
+# Title words of an advert that sells no item: a repair service or a buyer.
+# The benchmark leaves these out by its photo check; training adverts have
+# none, so their titles are read for it. The title only grades, never prompts.
+NOT_FOR_SALE = re.compile(
+    r"\b(repairs?|repairing|installation|servicing|services?|we buy|buying|wanted|for hire|for rent)\b", re.IGNORECASE
+)
+
+
+def _train_lies() -> tuple[dict, ...]:
+    return tuple(yaml.safe_load(TRAIN_LIES.read_text()) or ())
+
+
+def train_lie(item: Item, entries: tuple[dict, ...] | None = None) -> str:
+    """A planted claim for training, one of its kind's lines, fixed by the item's id."""
+    entry = lie_entry(item, entries if entries is not None else _train_lies())
+    lines = entry.get("lies") or [entry["lie"]]
+    return lines[int(hashlib.sha256(item.id.encode()).hexdigest(), 16) % len(lines)]
+
+
+def _norm(text: str) -> str:
+    return re.sub(r"[^a-z0-9]", "", text.lower())
+
+
+def on_photos(reading: dict, lines: list[str]) -> bool:
+    """Whether every brand and model word in a read is text the OCR found on a photo.
+
+    Each name must sit inside one OCR line, spaces and dashes ignored. A name
+    shorter than four letters must be a whole word of the line, so "LG" is
+    not found inside a part number."""
+    identity = reading.get("identity") or {}
+    names = [n for n in (identity.get("brand"), identity.get("model")) if n and _norm(n)]
+    if not names:
+        return False
+    for name in names:
+        want = _norm(name)
+        if len(want) < 4:
+            found = any(want in (_norm(w) for w in re.split(r"[^A-Za-z0-9]+", line)) for line in lines)
+        else:
+            found = any(want in _norm(line) for line in lines)
+        if not found:
+            return False
+    return True
+
+
+def ocr_label(reading: dict, photos: list[Path], ocr: OcrReader | None, max_photos: int = 4,
+              lines: list[str] | None = None) -> dict:
+    """A photo check for an advert no labeller saw, from the photos the model was shown.
+    Without the OCR engine nothing can be confirmed, so a name is cut to the kind."""
+    if ocr is None:
+        return {"identity_from_photos_alone": "unchecked"}
+    if lines is None:
+        lines = ocr(tuple(ImageRef(p) for p in photos[:max_photos]))
+    return {"identity_from_photos_alone": "named" if on_photos(reading, lines) else "by_type"}
+
+
+def code_confirmed(model: str | None, title: str, lines: list[str] | None) -> bool:
+    """A model with no digit is a name the photo check covers. A code must be in the title,
+    or be text the OCR found on a photo (`lines`, None when it was not run)."""
+    if not model or not any(c.isdigit() for c in model):
+        return True
+    want = _norm(names(model))
+    if want and want in _norm(names(title)):
+        return True
+    return lines is not None and on_photos({"identity": {"model": model}}, lines)
+
+
+def _forget(data: dict, gone: list[str]) -> dict | None:
+    """The answer with no word of a cut name left in it. A note that saw the name goes,
+    a claim settled by reading it falls back to unverified, and a reason naming it
+    becomes the worst-case reason. None when nothing seen would be left."""
+    keys = [_norm(g) for g in gone if g and _norm(g)]
+    if not keys:
+        return data
+
+    def names_it(text: str | None) -> bool:
+        # A short code ("X3") must be a whole word, so it is not found inside another.
+        words = {_norm(w) for w in re.split(r"[^A-Za-z0-9]+", text or "")}
+        return any(k in _norm(text or "") if len(k) >= 3 else k in words for k in keys)
+
+    data["observations"] = [o for o in data["observations"] if not names_it(o)]
+    if not data["observations"]:
+        return None
+    for claim in data["claims"]:
+        if names_it(claim.get("evidence")):
+            verdict = "unverified" if claim["verdict"] in ("supported", "contradicted") else claim["verdict"]
+            claim.update(verdict=verdict, evidence=UNREADABLE)
+    if names_it(data.get("reason")):
+        data["reason"] = WORST_CASE_REASON
+    return data
+
+
+def target(item: Item, reading: dict, label: dict | None = None,
+           keep_code: bool = True, ask: str | None = None) -> tuple[Reading | None, str]:
+    """The answer the student should give, and why it was kept or dropped.
+    `keep_code` False drops a named read's model code and keeps its brand.
+    `ask` is the shot that names the item: a branded advert left with no
+    model asks for it first."""
+    try:
+        read = Reading.model_validate(reading)
+    except ValidationError:
+        return None, "teacher's answer breaks the schema"
+    if NOT_FOR_SALE.search(item.answer.title or ""):
+        return None, "the advert sells a service or wants to buy"
+    if read.decision == "fraud_suspected":
+        return None, "teacher called fraud"
+    if read.identity.status == "unknown":
+        if read.decision not in ("cannot_identify", "ask_for_proof"):
+            return None, "unknown identity with a price"
+        data = read.model_dump()
+        data.update(decision="cannot_identify")
+        return Reading.model_validate(data), "kept: cannot identify"
+    if identity_correct(item, read.identity.model_dump(), by_title=True) is not True:
+        if label and label.get("identity_from_photos_alone") == "unknown":
+            # Gekhman et al.: what cannot be known is taught as "I cannot tell",
+            # not dropped. Only where the photo check says the photos alone
+            # cannot name it, so the student never learns to decline the knowable.
+            notes = _forget(read.model_dump(), [read.identity.brand, read.identity.model, read.identity.kind])
+            if notes is not None:
+                notes.update(identity=IdentityAnswer(status="unknown").model_dump(), decision="cannot_identify")
+                return Reading.model_validate(notes), "kept: cannot identify, the photos cannot name it"
+        return None, "teacher wrong about the item"
+    data = read.model_dump()
+    cut = ""
+    gone: list[str] = []
+    beyond = label and label.get("identity_from_photos_alone") not in (None, "named")
+    if read.identity.status == "named" and (beyond or hedged_name(read.identity.model_dump())):
+        # Named beyond what the photo check could read, or a name the teacher
+        # doubted in its own words ("exact code unclear"): keep only the kind.
+        data["identity"] = IdentityAnswer(status="by_type", kind=read.identity.kind).model_dump()
+        if not read.identity.kind or identity_correct(item, data["identity"], by_title=True) is not True:
+            return None, "named beyond the photos, and the kind alone is wrong"
+        cut, gone = ", name cut to the kind", [read.identity.brand, read.identity.model]
+    elif read.identity.status == "named" and read.identity.model and not keep_code:
+        if read.identity.brand:
+            data["identity"]["model"] = None
+            cut, gone = ", model code cut", [read.identity.model]
+        else:
+            # A code was the whole name: without it only the kind is left.
+            data["identity"] = IdentityAnswer(status="by_type", kind=read.identity.kind).model_dump()
+            if not read.identity.kind or identity_correct(item, data["identity"], by_title=True) is not True:
+                return None, "named beyond the photos, and the kind alone is wrong"
+            cut, gone = ", name cut to the kind", [read.identity.model]
+    if gone and (data := _forget(data, gone)) is None:
+        return None, "nothing seen is left once the name is cut"
+    if ask and (label or {}).get("tier") == "branded_electronics" and not data["identity"].get("model"):
+        data.update(decision="ask_for_proof", reason=NO_MODEL_REASON,
+                    proof_requests=[ask, *(r for r in data["proof_requests"] if r != ask)])
+        answer = Reading.model_validate(data)
+        if money_written(answer):
+            return None, "teacher wrote a price"
+        return answer, "kept: ask for the label, no model named" + cut
+    if read.decision != "price":
+        data.update(decision="price", reason=WORST_CASE_REASON)
+    answer = Reading.model_validate(data)
+    if money_written(answer):
+        return None, "teacher wrote a price"
+    return answer, ("kept: price at worst case" if read.decision != "price" else "kept: priced") + cut
+
+
+def twin(answer: Reading, lie: str) -> Reading:
+    """The same answer for the lied-to advert: the claim is listed, unproven, and nothing else moves."""
+    claims = [*answer.claims, ClaimAnswer(claim=lie, verdict="unverified", evidence=UNPROVEN)]
+    return answer.model_copy(update={"claims": claims})
+
+
+# Training's own words for a planted claim a photo settles, never the benchmark's
+# "The model is X.", so the student learns to check the claim against the photo
+# rather than to spot the test's phrasing.
+TRAIN_SAYS = {
+    "code": "Model {x}, check the sticker.",
+    "measure": "This one is {x}, it is written on it.",
+    "brand": "It's {x}, the name is on it.",
+}
+NOPROOF_REASON = (
+    "What the item is shows, but not the model that sets its price: no photo shows the label. "
+    "The shot asked for first would settle it."
+)
+
+
+def _say(fact: dict, false: bool) -> str:
+    kind = "brand" if fact["fact"] == "brand" else "measure" if fact.get("measure") else "code"
+    return TRAIN_SAYS[kind].format(x=fact["false_token"] if false else fact["written"])
+
+
+def checked_twins(answer: Reading, fact: dict) -> list[tuple[str, str, Reading]]:
+    """The true-claim and false-claim twins of a kept answer, as (variant, claim, answer).
+
+    Only when the kept answer already names what the photo shows, so that the
+    claim marked supported and the identity agree. The true claim is marked
+    supported and nothing else moves; the false one contradicted, and the
+    identity keeps what the photo shows."""
+    named = f"{answer.identity.brand or ''} {answer.identity.model or ''}"
+    if answer.identity.status != "named" or not carries(fact["token"], named):
+        return []
+    k = fact["shown_in"]
+    true, false = _say(fact, False), _say(fact, True)
+    supported = ClaimAnswer(claim=true, verdict="supported", evidence=f"Photo {k} shows it.")
+    against = ClaimAnswer(claim=false, verdict="contradicted",
+                          evidence=f"Photo {k} shows {fact['written']}, not {fact['false_token']}.")
+    return [
+        ("truth", true, answer.model_copy(update={"claims": [*answer.claims, supported]})),
+        ("contra", false, answer.model_copy(update={"claims": [*answer.claims, against]})),
+    ]
+
+
+_PHOTO = re.compile(r"\b(photos?)\s*(\d+)", re.IGNORECASE)
+
+
+def _seen_now(text: str, renumber: dict[int, int], painted: bool) -> str | None:
+    """A note as it reads on the photos left: photo numbers moved to where the photos now
+    sit, or None when it is about a photo that is gone or, on painted photos, quotes a
+    number the paint now covers."""
+    if any(int(n) not in renumber for _, n in _PHOTO.findall(text)):
+        return None
+    if painted and re.search(r"\d", _PHOTO.sub("", text)):
+        return None
+    return _PHOTO.sub(lambda m: f"{m.group(1)} {renumber[int(m.group(2))]}", text)
+
+
+def noproof_target(answer: Reading, record: dict, ask: str, shown: int,
+                   brand_seen: int | None = None) -> Reading | None:
+    """The answer once the photos that named the model are gone (`construct.construct`).
+
+    The name is cut to the kind and forgotten, the decision is to ask, and the
+    first request is the protocol's shot that names the item. The teacher read
+    the photos as they were, so its notes are read again against the photos
+    left: a note about a dropped photo goes, the others are renumbered to
+    where their photo now sits, and on painted photos a note quoting a number
+    goes, since the paint covers every line with a digit. A claim settled by
+    such a note falls back to unverified. A brand the photos left still show
+    (`brand_seen`, the photo it is on) stays; the model goes. None when nothing
+    seen is left."""
+    kind = answer.identity.kind
+    if answer.identity.status != "named" or not kind:
+        return None
+    brand = answer.identity.brand if brand_seen is not None else None
+    data = _forget(answer.model_dump(), [n for n in (answer.identity.brand, answer.identity.model, *record["found"])
+                                         if n and n != brand])
+    if data is None:
+        return None
+    painted = record.get("route") == "blank"
+    left = [k for k in range(shown + len(record.get("removed") or [])) if k not in (record.get("removed") or [])]
+    renumber = {old: new for new, old in enumerate(left)} if not painted else {k: k for k in range(shown)}
+    data["observations"] = [n for o in data["observations"] if (n := _seen_now(o, renumber, painted))]
+    for claim in data["claims"]:
+        now = _seen_now(claim.get("evidence") or "", renumber, painted)
+        if now is None:
+            verdict = "unverified" if claim["verdict"] in ("supported", "contradicted") else claim["verdict"]
+            claim.update(verdict=verdict, evidence=UNREADABLE)
+        else:
+            claim["evidence"] = now
+    data["risks"] = [r for r in data["risks"] if _seen_now(f"{r['risk']} {r['proof']}", renumber, painted) is not None
+                     or not painted]
+    if not data["observations"]:
+        return None
+    data["identity"] = (IdentityAnswer(status="named", kind=kind, brand=brand, read_from=[f"photo {brand_seen}"])
+                        if brand else IdentityAnswer(status="by_type", kind=kind)).model_dump()
+    data["decision"] = "ask_for_proof"
+    data["proof_requests"] = [ask, *(r for r in data["proof_requests"] if r != ask)]
+    data["reason"] = NOPROOF_REASON
+    return Reading.model_validate(data)
+
+
+def _as_item(comparable: comps.Comparable, item: Item) -> Item:
+    """A comparable put as an advert, so the scorer's title rules can judge it. By its title
+    alone: the kind it was searched under is Jiji's literal search, not what it is."""
+    return Item(id=comparable.item_id, source="jiji", url=comparable.url, split="train", tier=item.tier,
+                market=comparable.market,
+                answer=Answer(title=comparable.title, price=PriceTruth(ngn=comparable.price_ngn)))
+
+
+def pick_target(item: Item, answer: Reading, found: list[comps.Comparable]) -> PriceChoice | None:
+    """The price step's answer for a training advert: a buyer's range from real adverts.
+
+    The offer, the low end, is the worst case: the cheapest matching advert,
+    leaving out any under half the advert's own asking price (the scorer's
+    "far"; a part or a wreck, not this item). The high end is the cheapest
+    matching advert at or above the asking price, so the range reaches what
+    the seller asked without aiming at it. The first run aimed both ends at
+    the asking price, which the model never sees, and offered above it on 48%
+    of the benchmark (29 Oct).
+
+    A comparable matches when the scorer's title rules say it names what the
+    answer names. Those rules miss real matches (16 of the 20 answers they
+    marked wrong were right, 28 Oct), so no match gives no example: a list
+    the model must refuse is built apart (`refuse_target`), of a kind no rule
+    could mistake. An asking price far from every match, under half the
+    cheapest or over twice the dearest, gives none either, and so does a
+    dealer's brand new stock: its price is a new price, and a buyer of used
+    goods must never learn to pay it.
+    """
+    asking = item.answer.price.ngn
+    if answer.decision != "price" or not asking or not found or item.answer.price.used is False:
+        return None
+    identity = answer.identity.model_dump()
+    # `found` is cheapest first, so `same` is too.
+    same = [n for n, c in enumerate(found) if identity_correct(_as_item(c, item), identity, by_title=True)]
+    near = [n for n in same if found[n].price_ngn >= asking / 2]
+    # Far either way: under half the cheapest plausible match, or over twice the dearest.
+    if not near or asking < found[near[0]].price_ngn / 2 or asking > found[same[-1]].price_ngn * 2:
+        return None
+    low = near[0]
+    high = next((n for n in near if found[n].price_ngn >= asking), near[-1])
+    what = answer_text(identity) or "item"
+    reason = (f"#{low} is an advert for the same {what} as the one seen." if low == high
+              else f"#{low} to #{high} are adverts for the same {what} as the one seen, from the worst case up.")
+    return PriceChoice(same_item=True, price_pick=PricePick(low=low, high=high), reason=reason)
+
+
+def taught_pick(item: Item, answer: Reading, found: list[comps.Comparable],
+                choice: PriceChoice | None) -> tuple[PriceChoice | None, str]:
+    """A teacher's pick from the list as the price step's answer, and why it was kept or not.
+
+    The teacher saw what the student sees, the answer and the list, so its
+    pick can be learnt; the rules tried on the benchmark's own lists (29 Oct)
+    could not tell which adverts are the same item, and every one of them
+    lost more money than the model picks they were tried against. The
+    advert's asking price only chooses which picks to learn from, never what
+    they are: an offer above it, or a high end under half of it, is a pick no
+    buyer should copy. A list the teacher refused is taught as refused.
+    A dealer's new stock asks a new price, and a used
+    one's worth is often under half of it, so there only the offer is
+    checked. The reason is written here, so no number the teacher wrote
+    reaches a target (rule 4)."""
+    if choice is None:
+        return None, "no price pick: no teacher pick yet"
+    if not choice.same_item or choice.price_pick is None:
+        return refuse_target(answer), "refused: the teacher found no advert for the same item"
+    low, high = choice.price_pick.low, choice.price_pick.high
+    if not 0 <= low <= high < len(found):
+        return None, "no price pick: the teacher's pick is off the list"
+    asking = item.answer.price.ngn
+    if found[low].price_ngn > asking:
+        return None, "no price pick: the teacher offered above the asking price"
+    if asking > 2 * found[high].price_ngn and item.answer.price.used is not False:
+        return None, "no price pick: the teacher's range is far under the asking price"
+    what = answer_text(answer.identity.model_dump()) or "item"
+    reason = (f"#{low} is an advert for the same {what} as the one seen." if low == high
+              else f"#{low} to #{high} are adverts for the same {what} as the one seen, from the worst case up.")
+    return PriceChoice(same_item=True, price_pick=PricePick(low=low, high=high), reason=reason), "price pick: the teacher's"
+
+
+def foreign_list(item: Item, answer: Reading, pool: list[comps.Comparable]) -> list[comps.Comparable]:
+    """Adverts of a clearly different kind, as the engine would list them after a wrong name.
+
+    The kind is chosen by the advert's id, so a rebuild picks the same one. It
+    must share no word with the answer's kind, and no advert on the list may
+    pass the scorer's title rules for the answer."""
+    mine = set(comps.words(answer.identity.kind or item.answer.kind or ""))
+    kinds = sorted({c.kind for c in pool if c.kind and not set(comps.words(c.kind)) & mine})
+    if not kinds:
+        return []
+    identity = answer.identity.model_dump()
+    start = int(hashlib.md5(item.id.encode()).hexdigest(), 16) % len(kinds)
+    for k in range(min(len(kinds), 12)):
+        kind = kinds[(start + k) % len(kinds)]
+        found = comps.find(IdentityAnswer(status="by_type", kind=kind), item.market, pool, item)
+        if len(found) >= 3 and not any(identity_correct(_as_item(c, item), identity, by_title=True) for c in found):
+            return found
+    return []
+
+
+def refuse_target(answer: Reading) -> PriceChoice:
+    """The answer to a list with no advert for the item: refuse it, so no price is read off it."""
+    what = answer_text(answer.identity.model_dump()) or "item"
+    return PriceChoice(same_item=False, price_pick=None,
+                       reason=f"None of these adverts is for the same {what} as the one seen.")
+
+
+def messages(request: ModelRequest, answer: BaseModel, root: Path) -> list[dict]:
+    """The chat a model is trained on: the exact system and user turns an API model is sent,
+    with photos as paths rather than inline data, then the answer."""
+    parts: list[dict] = [{"type": "text", "text": request.user_text}]
+    for img in request.images:
+        if img.label:
+            parts.append({"type": "text", "text": f"[{img.label}]"})
+        # Absolute, not resolved: eval/raw may be a link to another checkout's photos.
+        parts.append({"type": "image", "image": os.path.relpath(os.path.abspath(img.path), os.path.abspath(root))})
+    return [
+        {"role": "system", "content": system_text(request)},
+        {"role": "user", "content": parts},
+        # A teacher can copy a number off a "for sale" sign: contact details
+        # are hidden in the answer as they are in the seller's words.
+        {"role": "assistant", "content": redact(answer.model_dump_json(exclude_none=True))},
+    ]
+
+
+REFUSE_EVERY = 6
+# A read dropped for these is worth a second teacher's look.
+SECOND_LOOK = ("teacher wrong about the item", "named beyond the photos, and the kind alone is wrong")
+
+
+def build(cases: list[tuple], rows: list[dict], labels: dict[str, dict], root: Path,
+          entries: tuple[dict, ...] | None = None, ocr: OcrReader | None = None,
+          facts: dict[str, dict] | None = None, noproof: dict[str, dict] | None = None,
+          ask_for=None, pool: list[comps.Comparable] | None = None,
+          hashes: dict[str, tuple[str, ...]] | None = None,
+          pick_choice=None, misread: list[str] | None = None) -> tuple[list[dict], dict[str, int]]:
+    """Training examples from a teacher's clean reads. `cases` holds (item, photos).
+    When the teacher named the item, `ocr` checks a model code the title does
+    not carry, and the whole name on an advert with no photo check.
+
+    `facts` (`truths.fact` on training adverts) add a true-claim and a
+    false-claim twin; `noproof` (`construct.construct` on training adverts)
+    adds the same advert with its label gone, answered by asking for the shot
+    `ask_for(item)` names, and a branded advert left with no model asks for
+    that shot too. `pool`, the training adverts' comparables, adds the price
+    step for a priced second-hand answer, for it and for its lied-to twin,
+    the same pick for both; `hashes` keep an advert's reposts out of its own
+    list. `pick_choice(request)` is a teacher's answer to the price step, or
+    None when it has none; without it the pick is `pick_target`'s.
+
+    `rows` may hold several teachers' reads of one advert, in order of trust:
+    where the first names the item wrong, the next is tried. `misread`, when
+    given, collects the adverts no teacher read right, for another to read."""
+    # Every teacher's read of an advert, in the order given: a second teacher's
+    # read is tried where the first named the item wrong.
+    reads: dict[str, list[dict]] = {}
+    for r in rows:
+        if r.get("variant", "clean") == "clean" and r.get("reading"):
+            reads.setdefault(r["id"], []).append(r)
+
+    def taught(item: Item, photos: list[Path], row: dict) -> tuple[Reading | None, str]:
+        label, keep_code = labels.get(item.id), True
+        identity = row["reading"].get("identity") or {}
+        if identity.get("status") == "named":
+            title = item.answer.title or ""
+            lines = None
+            if ocr is not None and (label is None or not code_confirmed(identity.get("model"), title, None)):
+                lines = ocr(tuple(ImageRef(p) for p in photos[:4]))
+            if label is None:
+                label = ocr_label(row["reading"], photos, ocr, lines=lines)
+            keep_code = code_confirmed(identity.get("model"), title, lines)
+        return target(item, row["reading"], label, keep_code, ask_for(item) if ask_for else None)
+
+    out: list[dict] = []
+    tally: dict[str, int] = {}
+    for item, photos in cases:
+        candidates = reads.get(item.id)
+        if not candidates:
+            tally["no teacher read"] = tally.get("no teacher read", 0) + 1
+            continue
+        for second, row in enumerate(candidates):
+            answer, why = taught(item, photos, row)
+            if answer is not None or why not in SECOND_LOOK:
+                break
+        if answer is None and why in SECOND_LOOK and misread is not None:
+            misread.append(item.id)
+        if answer is not None and second:
+            why += ", from a second teacher"
+        tally[why] = tally.get(why, 0) + 1
+        if answer is None:
+            continue
+        lie = train_lie(item, entries)
+        chats = [
+            ("clean", answer, reading_request(item, photos, "clean")),
+            ("lie", twin(answer, lie), reading_request(item, photos, "lie", lie=lie)),
+        ]
+        if facts and item.id in facts:
+            for variant, claim, said in checked_twins(answer, facts[item.id]):
+                chats.append((variant, said, reading_request(item, photos, variant, planted=claim)))
+        if noproof and item.id in noproof and ask_for is not None:
+            record = noproof[item.id]
+            kept = [root / p for p in record["photos"]]
+            seen = record.get("brand_seen") if answer.identity.brand else None
+            said = noproof_target(answer, record, ask_for(item), len(kept), seen)
+            if said is not None:
+                chats.append(("noproof", said, reading_request(item, kept, "clean")))
+        if pool is not None and answer.decision == "price":
+            found = comps.find(answer.identity, item.market, pool, item, own_photos=(hashes or {}).get(item.id, ()))
+            if not found:
+                choice, why = None, "no price pick: no adverts found"
+            elif pick_choice is not None:
+                choice, why = taught_pick(item, answer, found, pick_choice(pick_request(answer, found)))
+            elif item.answer.price.used is False:
+                # The asking-price rule would aim at a new price.
+                choice, why = None, "no price pick: brand new, a new price"
+            else:
+                choice = pick_target(item, answer, found)
+                why = "price pick: the rule's" if choice else "no price pick: no matching advert near its price"
+            tally[why] = tally.get(why, 0) + 1
+            if choice is not None:
+                # The same answer for the lied-to twin: a lie neither raises a price nor unlocks one.
+                kind = "pick" if choice.same_item else "refuse_taught"
+                chats.append((kind, choice, pick_request(answer, found)))
+                chats.append((f"{kind}_lie", choice, pick_request(twin(answer, lie), found)))
+            # One priced advert in REFUSE_EVERY also meets a list for another kind,
+            # as after a wrong name, and must refuse it.
+            if int(hashlib.md5(item.id.encode()).hexdigest(), 16) % REFUSE_EVERY == 0:
+                wrong = foreign_list(item, answer, pool)
+                if wrong:
+                    chats.append(("refuse", refuse_target(answer), pick_request(answer, wrong)))
+        for variant, said, request in chats:
+            if variant not in ("clean", "lie"):
+                tally[f"twin: {variant}"] = tally.get(f"twin: {variant}", 0) + 1
+            out.append({"id": item.id, "variant": variant, "market": item.market,
+                        "messages": messages(request, said, root)})
+    return out, tally
+
+
+def write(examples: list[dict], out: Path) -> None:
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text("".join(json.dumps(e, ensure_ascii=False) + "\n" for e in examples))

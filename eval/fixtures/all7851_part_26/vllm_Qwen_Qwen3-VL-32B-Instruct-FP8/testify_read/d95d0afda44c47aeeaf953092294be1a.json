@@ -1,0 +1,91 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: A closed laptop wrapped in plastic, held by a hand with a gold watch. The laptop is dark gray or black. The background shows a glass display case with bags and electronics.",
+      "Photo 1: A close-up of an orange sticky note on the laptop's edge. Handwritten text reads: 'HP Zbook G5', 'Core i7, 8-6', '16gb Ram', '512 SSD', '4gb Nvidia', 'th', 'Bae'. The note is partially smudged and hard to read in places.",
+      "Photo 2: Top view of the same laptop, still wrapped in plastic. The HP logo (three horizontal bars) is visible in the center. The laptop appears to be a dark gray or black color. The background shows a glass door or window with reflections."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "Zbook G5",
+      "read_from": [
+        "photo 1 sticky note",
+        "photo 2 HP logo"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP Zbook G5",
+        "verdict": "supported",
+        "evidence": "Photo 1 sticky note and photo 2 HP logo"
+      },
+      {
+        "claim": "16gb ram",
+        "verdict": "unverified",
+        "evidence": "Photo 1 sticky note; no internal components visible"
+      },
+      {
+        "claim": "512 ssd",
+        "verdict": "unverified",
+        "evidence": "Photo 1 sticky note; no internal components visible"
+      },
+      {
+        "claim": "4 gb nvidia",
+        "verdict": "unverified",
+        "evidence": "Photo 1 sticky note; no internal components visible"
+      },
+      {
+        "claim": "core i7 / 8 th generation",
+        "verdict": "unverified",
+        "evidence": "Photo 1 sticky note; no internal components visible"
+      },
+      {
+        "claim": "In excellent condition",
+        "verdict": "unverifiable_remote",
+        "evidence": "No open laptop or internal view; only exterior wrapped in plastic"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The laptop may not have the advertised specifications (RAM, SSD, GPU, CPU)",
+        "proof": "A photo of the system information screen (e.g., Windows About or BIOS) showing the exact CPU, RAM, and storage details, or a photo of the open laptop with the components visible.",
+        "if_unproven": "Priced as a generic laptop without confirmed specs, which could be significantly lower."
+      },
+      {
+        "risk": "The laptop may be damaged or non-functional despite being wrapped",
+        "proof": "A video or photo of the laptop powered on, showing the boot process and desktop, or a photo of the screen and keyboard in use.",
+        "if_unproven": "Priced as not working or with unknown functionality, which reduces value."
+      },
+      {
+        "risk": "The laptop may be stolen or have a blacklisted serial number",
+        "proof": "A photo of the serial number sticker (usually on the bottom of the laptop) and a verification check via HP's website or a trusted service.",
+        "if_unproven": "Priced with a discount for potential legal or warranty issues."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the laptop open, showing the screen, keyboard, and internal components (if possible).",
+      "Photo of the system information screen (Windows About or BIOS) showing CPU, RAM, and storage details.",
+      "Video of the laptop booting up and running.",
+      "Photo of the serial number sticker on the bottom of the laptop."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identifiable from the sticky note and logo, but the key specifications (RAM, SSD, GPU, CPU) and condition cannot be verified from the current photos. The laptop is wrapped, so its functionality and true state are unknown. Proof of specs and working condition is required before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 75213,
+    "input_tokens": 2803,
+    "output_tokens": 916,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "d95d0afda44c47aeeaf953092294be1a",
+    "error": null
+  }
+}

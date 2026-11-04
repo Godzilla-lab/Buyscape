@@ -1,0 +1,73 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "agent:claude",
+  "response": {
+    "observations": [
+      "Photo 0: front of a small black tower UPS with a blue front strip, one power button and three indicator lights; 'BLUE GATE' moulded at the top.",
+      "Photo 0: the indicator lights are not lit, so the unit is shown switched off.",
+      "Photo 1: side and top view; a single-battery desktop size unit, side vents, a mains cable with a round three-pin plug resting on top.",
+      "Photo 1: dust on the top surface and scuffs on the case; used condition.",
+      "No photo of the rear panel, output sockets or rating label, so the capacity and model are not readable.",
+      "Nothing shows the unit powered on, the battery or any backup run."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "desktop UPS (small single-battery tower)",
+      "brand": "Blue Gate",
+      "model": null,
+      "read_from": [
+        "photo 0 front logo 'BLUE GATE'",
+        "photo 1 front logo"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "UPS available",
+        "verdict": "supported",
+        "evidence": "Photos 0 and 1 show a Blue Gate desktop UPS."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery dead or weak, no backup when mains drops",
+        "proof": "A clip of it running a load, then the mains plug pulled while the load stays on",
+        "if_unproven": "as needing a new battery"
+      },
+      {
+        "risk": "Unit does not power on or the inverter is faulty",
+        "proof": "A clip of it switched on with the indicator lights lit and something plugged in running",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Capacity smaller than a buyer expects",
+        "proof": "A photo of the rating label on the back or underside showing the VA rating and model",
+        "if_unproven": "as the smallest Blue Gate desktop capacity"
+      },
+      {
+        "risk": "Output sockets damaged or missing",
+        "proof": "A photo of the rear panel",
+        "if_unproven": "as damaged sockets"
+      }
+    ],
+    "proof_requests": [
+      "A clip of the UPS powering a load, then the mains pulled to show it holds on battery",
+      "A photo of the rating label showing model and VA capacity",
+      "A photo of the rear panel and output sockets"
+    ],
+    "decision": "price",
+    "reason": "Photo 0 shows a Blue Gate small desktop UPS, which can be priced at its worst case: smallest capacity, battery dead and not working until a clip shows it holding a load on battery."
+  },
+  "meta": {
+    "provider": "sitting",
+    "model": "agent:claude",
+    "task": "testify_read",
+    "latency_ms": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "4b248ace781508ac5a4c2ce7dd56e639",
+    "error": null
+  }
+}

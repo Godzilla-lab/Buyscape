@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the device care screen of a foldable phone, indicating 97% battery, 6% storage used (62GB/1TB), and 44% memory used (7GB/16GB).",
+      "Photo 1 shows the 'About phone' screen with 'Product name: Galaxy Z Fold7', model name 'SM-F966B/DS', and serial number 'R5C7T041A3'.",
+      "Photo 2 shows 'Battery information' with battery health at 100%, battery cycle count at 14, and manufacture dates: Main battery 06 June 2025, Sub battery 25 May 2025.",
+      "The device is a foldable smartphone, likely in a folded state, with visible crease and hinge area.",
+      "The screen displays Samsung UI, confirming it is a Samsung device.",
+      "The 'First used date' is shown as 08 December 2025, which is in the future relative to the current date (assumed to be 2024)."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "foldable smartphone",
+      "brand": "Samsung",
+      "model": "Galaxy Z Fold7",
+      "read_from": [
+        "photo 1 screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Working perfectly",
+        "verdict": "unverified",
+        "evidence": "Photos show the device is powered on and displaying menus, but no functional test (e.g., camera, calls, apps) is shown. The 'Device care' screen says 'Great!' but this is not proof of full functionality."
+      },
+      {
+        "claim": "not up to 2 years",
+        "verdict": "contradicted",
+        "evidence": "Photo 2 shows 'First used date: 08 December 2025', which is in the future. This is impossible and suggests the device is either new or the date is falsified. The manufacture date is also 2025, which contradicts the claim of being under 2 years old if the current date is 2024."
+      },
+      {
+        "claim": "Carton and receipt still available",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo of carton or receipt is provided. Cannot verify from current images."
+      },
+      {
+        "claim": "1TB and 16GB",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows 'Storage: 6% used, 62GB/1TB' and 'Memory: 44% used, 7GB/16GB', confirming 1TB storage and 16GB RAM."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Device is not genuine or has been tampered with (e.g., date falsified, battery replaced)",
+        "proof": "Photo of the device's IMEI sticker or a video showing the device being powered on and used in real-time with current date/time visible.",
+        "if_unproven": "priced as potentially counterfeit or tampered, which would significantly reduce value."
+      },
+      {
+        "risk": "Battery health is not truly 100% or the device is not functional as claimed",
+        "proof": "Video showing the device being used for calls, camera, and apps, and a screenshot of battery health from a trusted app or diagnostic tool.",
+        "if_unproven": "priced as potentially degraded battery or non-functional, reducing value."
+      },
+      {
+        "risk": "The device is new or recently manufactured (2025) but being sold as 'not up to 2 years' \u2014 possibly a scam or misrepresentation",
+        "proof": "Photo of the original box with manufacturing date and serial number matching, or a video showing the device being unboxed and first used.",
+        "if_unproven": "priced as potentially misrepresented or fraudulent, which would lower value."
+      }
+    ],
+    "proof_requests": [
+      "Video showing the device being used in real-time with current date/time visible.",
+      "Photo of the original box and receipt.",
+      "Screenshot of battery health from a trusted diagnostic app.",
+      "Photo of the IMEI sticker on the device."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The device appears to be a Samsung Galaxy Z Fold7 with 1TB storage and 16GB RAM, but the 'First used date' is in the future, contradicting the seller's claim of being under 2 years old. This raises suspicion of tampering or fraud. Functional claims are unverified, and the authenticity of the device and its history cannot be confirmed without further proof."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 82491,
+    "input_tokens": 3245,
+    "output_tokens": 1047,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "1a7a3b4bdfc7458e93c2018cd8a2a673",
+    "error": null
+  }
+}

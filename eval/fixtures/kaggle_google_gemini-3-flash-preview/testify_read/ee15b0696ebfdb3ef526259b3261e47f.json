@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows two retail boxes for HP DeskJet 2320 printers.",
+      "The boxes are stacked vertically.",
+      "The text 'Plug and print, copy, and scan' is prominent on the packaging.",
+      "The model 'DeskJet 2320' is printed on the front of both boxes.",
+      "The HP logo is visible in the top left corner of the boxes.",
+      "Small print on the box indicates the use of 305 ink cartridges.",
+      "There is a watermark for 'ORIGITY TECHNOLOGIES' and 'POSTED ON JIJI'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "printer",
+      "brand": "HP",
+      "model": "DeskJet 2320",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Print, Scan, Copy",
+        "verdict": "supported",
+        "evidence": "photo 0 box text"
+      },
+      {
+        "claim": "Duplex printing",
+        "verdict": "unverified",
+        "evidence": "The box does not mention duplexing; this model typically supports manual duplexing only."
+      },
+      {
+        "claim": "USB and Wifi Connectivity",
+        "verdict": "contradicted",
+        "evidence": "The HP DeskJet 2320 is a USB-only model; the box does not list Wifi as a feature."
+      },
+      {
+        "claim": "uses 305 ink cartridge",
+        "verdict": "supported",
+        "evidence": "photo 0 box small print"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Item presence and condition",
+        "proof": "A photo of the actual printer outside of the box.",
+        "if_unproven": "priced as a used unit in unknown condition"
+      },
+      {
+        "risk": "Ink cartridge levels",
+        "proof": "A printed status report or a photo of the ink levels from the software.",
+        "if_unproven": "priced as having no ink"
+      },
+      {
+        "risk": "Internal mechanical failure",
+        "proof": "A video of the printer performing a test print.",
+        "if_unproven": "priced as non-functional/for parts"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual printer out of the box to confirm condition.",
+      "Photo of the back of the printer showing the ports.",
+      "A test print page showing the current ink levels and print quality."
+    ],
+    "decision": "price",
+    "reason": "The model is clearly identified from the packaging. Although only boxes are shown and the seller's claim of Wifi is likely incorrect for this model, it can be priced at its worst-case value as a used, non-Wifi unit."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 16010,
+    "input_tokens": 2368,
+    "output_tokens": 3583,
+    "cost_usd": 0.011933,
+    "replayed": false,
+    "fixture_key": "ee15b0696ebfdb3ef526259b3261e47f",
+    "error": null
+  }
+}

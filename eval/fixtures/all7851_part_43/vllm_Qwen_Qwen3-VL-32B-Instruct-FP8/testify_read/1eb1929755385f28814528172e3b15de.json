@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a front-loading washing machine, white in color, with a circular door and control panel on the left.",
+      "The brand 'Hotpoint' is visible on the door frame, just below the door.",
+      "The control panel has a large dial, several buttons, and a small digital display.",
+      "The machine is placed in a room with other appliances nearby, including a Samsung unit to the right.",
+      "There is a watermark 'POSTED ON JI CHIBEST MERCHANT LTD' across the center of the image.",
+      "The machine appears to be in used condition with some visible wear and minor scuffs on the top and side edges."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "front-loading washing machine",
+      "brand": "Hotpoint",
+      "model": "9Kg 1600 Spin",
+      "read_from": [
+        "photo 0 door frame",
+        "seller's text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Hotpoint 9Kg 1600 Spin Washing Machine - White",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows the brand 'Hotpoint' on the door frame, and the machine is white. The 9Kg and 1600 Spin are stated by the seller and are common specifications for this model type."
+      },
+      {
+        "claim": "Dimensions (CM) H85 x W59.5 x D60.5",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows the full dimensions or a measuring tool. The seller's text provides the dimensions, but they cannot be verified from the image."
+      },
+      {
+        "claim": "Energy Rating B",
+        "verdict": "unverifiable_remote",
+        "evidence": "No energy rating label is visible in photo 0. The seller's text claims it, but there is no visual proof."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Machine may not be functional or may have internal damage (e.g., drum, motor, pump)",
+        "proof": "Video or photo of the machine running a cycle, showing water intake, spinning, and drainage.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Hidden damage or wear not visible in the photo (e.g., rust inside drum, damaged door seal, electrical faults)",
+        "proof": "Close-up photo of the drum interior, door seal, and underside of the machine.",
+        "if_unproven": "priced as having hidden damage"
+      },
+      {
+        "risk": "Model or capacity may be misrepresented (e.g., not 9kg or 1600 RPM)",
+        "proof": "Photo of the model label or rating plate on the machine, preferably on the back or inside the door.",
+        "if_unproven": "priced as unknown capacity or spin speed"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the model label or rating plate on the machine.",
+      "Video or photo of the machine running a full wash cycle.",
+      "Close-up photo of the drum interior and door seal.",
+      "Photo showing the full dimensions with a measuring tape."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The brand and general type are identifiable, but critical claims like dimensions, energy rating, and functionality cannot be verified from the current photo. Hidden risks such as internal damage or misrepresentation of capacity and spin speed require additional proof before pricing can be determined."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 59222,
+    "input_tokens": 1596,
+    "output_tokens": 785,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "1eb1929755385f28814528172e3b15de",
+    "error": null
+  }
+}

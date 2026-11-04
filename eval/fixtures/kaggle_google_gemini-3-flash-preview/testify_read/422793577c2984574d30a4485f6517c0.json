@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail packaging for a blender.",
+      "The brand 'VICTORIA JAPAN' and model 'VT-SB 9588' are printed on the box.",
+      "The box claims a power rating of '8800W' and a capacity of '2.5L'.",
+      "The box displays 'BERLIN GERMANY' alongside the 'VICTORIA JAPAN' branding.",
+      "A 'SON' (Standards Organisation of Nigeria) logo is visible on the box.",
+      "The actual blender, jar, and accessories are not shown outside of the box."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "blender",
+      "brand": "VICTORIA JAPAN",
+      "model": "VT-SB 9588",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Original Victoria Japan blender",
+        "verdict": "unverified",
+        "evidence": "Only the box is shown; the actual item is not visible to verify authenticity."
+      },
+      {
+        "claim": "8800watts",
+        "verdict": "supported",
+        "evidence": "This wattage is printed prominently on the box in photo 0."
+      },
+      {
+        "claim": "Berlin Germany",
+        "verdict": "unverified",
+        "evidence": "Printed on the box, though it contradicts the 'Japan' brand name."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, lower-value item.",
+        "proof": "A photo of the actual blender and all accessories outside of the box.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The blender may be used, damaged, or a refurbished unit.",
+        "proof": "Close-up photos of the motor base drive socket and the internal blades.",
+        "if_unproven": "as heavily used"
+      },
+      {
+        "risk": "The motor may be non-functional or the 8800W claim may be misleading marketing.",
+        "proof": "A video of the blender running with water and a photo of the technical rating plate on the bottom of the unit.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the blender and jar outside of the box.",
+      "Photo of the rating plate/sticker on the bottom of the motor base.",
+      "Video of the blender plugged in and operating.",
+      "Photo of the internal blades and the coupling on top of the motor base."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail box is shown. Without seeing the actual item, its existence, condition, and specifications cannot be confirmed."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 14417,
+    "input_tokens": 2389,
+    "output_tokens": 2851,
+    "cost_usd": 0.009747,
+    "replayed": false,
+    "fixture_key": "422793577c2984574d30a4485f6517c0",
+    "error": null
+  }
+}

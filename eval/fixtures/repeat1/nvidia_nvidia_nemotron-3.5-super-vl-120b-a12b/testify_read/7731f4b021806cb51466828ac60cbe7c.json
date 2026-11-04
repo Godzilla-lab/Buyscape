@@ -1,0 +1,69 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photos 0 and 1 show the front of a framed photovoltaic solar panel with dark cells, white grid lines, and a white aluminum frame; glare covers part of the surface.",
+      "Photos 2 and 3 show the white backsheet of the same panel with a central junction box and two black MC4 output cables.",
+      "A watermark reading \"NETWORK SOLAR VENTURES\" appears across photos 0, 1, 2, and 3.",
+      "A date stamp reads 2025/08/07 14:54, Lagos, Nigeria.",
+      "No brand name, model number, or wattage label is readable in any photo.",
+      "A person in a red checkered shirt is visible in the background of photos 0 and 1."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Seller is Network Solar Venture",
+        "verdict": "supported",
+        "evidence": "Watermark in photos 0, 1, 2, and 3"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Wattage and electrical specifications are unreadable",
+        "proof": "Close-up photo of the specification label on the back of the panel",
+        "if_unproven": "priced as unknown wattage / lowest market tier"
+      },
+      {
+        "risk": "Panel may not produce electricity",
+        "proof": "Video of the panel in sunlight with a multimeter connected to the MC4 leads showing voltage and current",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Hidden cell cracks, hot spots, or delamination under glare",
+        "proof": "Close-up video of the cell surface in even, diffuse light",
+        "if_unproven": "as physically damaged"
+      },
+      {
+        "risk": "Age and prior usage unknown",
+        "proof": "Photo of manufacturing date sticker or original purchase receipt",
+        "if_unproven": "as used with unknown lifespan"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the specification label on the back showing wattage, model, and electrical ratings",
+      "Video of the panel outdoors in sunlight with a multimeter connected to the MC4 cables"
+    ],
+    "decision": "price",
+    "reason": "The photos clearly show a framed solar panel; it can be priced at its worst case as non-working with unknown wattage, while the label and output tests would raise the value."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 39933,
+    "input_tokens": 2936,
+    "output_tokens": 4209,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "7731f4b021806cb51466828ac60cbe7c",
+    "error": null
+  }
+}

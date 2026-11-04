@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r4",
+  "response": {
+    "observations": [
+      "Pink gas cylinder with a brass valve and handle.",
+      "The cylinder has significant surface rust and dirt, especially on the top and sides.",
+      "The brand 'DIVINE SUCCESS' is printed on the side in photo 0.",
+      "A handwritten number '3404' is visible on the side in photo 2.",
+      "The valve is shown in photo 1, but the specific gas type (LPG, CNG, or others) cannot be determined from the photo alone.",
+      "The cylinder is sitting on a tiled floor in a domestic-looking environment."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "gas cylinder",
+      "brand": "Divine Success",
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Used 3kg gas cylinder",
+        "verdict": "supported",
+        "evidence": "The handwritten number '3404' on the side of the cylinder in photo 2 is consistent with a 3kg capacity."
+      },
+      {
+        "claim": "Recently tested and certified, no leak, the valve is new.",
+        "verdict": "unverified",
+        "evidence": "No photo shows this; it is the seller's word only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The cylinder may be expired or past its re-test date.",
+        "proof": "A clear photo of the manufacture or expiry date stamped on the metal shroud or handle.",
+        "if_unproven": "as expired/scrap value"
+      },
+      {
+        "risk": "The valve may be faulty or unable to seal properly.",
+        "proof": "A video showing the valve being opened and closed with a hand pump.",
+        "if_unproven": "as having a faulty valve"
+      },
+      {
+        "risk": "The cylinder may be empty or contain a different gas than claimed.",
+        "proof": "A photo of the weight stamp on the shroud or handle.",
+        "if_unproven": "as empty"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of any label, sticker or metal plate showing the brand and model.",
+      "Photo of the manufacture or expiry date stamped on the cylinder shroud.",
+      "Photo of the valve being tested or opened.",
+      "Photo of the weight stamp on the shroud/handle."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "What the item is shows, but not the model that sets its price: no photo shows it clearly enough to read. The shot asked for first would settle it."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r4",
+    "task": "testify_read",
+    "latency_ms": 6910,
+    "input_tokens": 2576,
+    "output_tokens": 449,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "84e50c7a6fefdf5f54c59a39c03adbf8",
+    "error": null
+  }
+}

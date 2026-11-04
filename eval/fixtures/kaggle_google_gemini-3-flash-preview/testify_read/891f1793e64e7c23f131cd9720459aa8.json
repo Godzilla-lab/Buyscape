@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail box for a Panasonic NI-113EW dry iron.",
+      "The box text specifies 'Automatic Dry Iron' and 'POWERFUL 1000W'.",
+      "The box features a picture of a white and purple iron.",
+      "The actual iron is not visible outside of the packaging.",
+      "The box shows minor wear and tear at the edges.",
+      "There is a watermark for 'CRYSTA LINE' on the image."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "dry iron",
+      "brand": "Panasonic",
+      "model": "NI-113EW",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Automatic Panasonic dry iron",
+        "verdict": "supported",
+        "evidence": "The brand and type are clearly printed on the box in photo 0."
+      },
+      {
+        "claim": "with 1000w",
+        "verdict": "supported",
+        "evidence": "The 1000W power rating is printed on the box in photo 0."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different item.",
+        "proof": "A photo of the actual iron outside of the box.",
+        "if_unproven": "priced as an empty box"
+      },
+      {
+        "risk": "The heating element or thermostat may be faulty.",
+        "proof": "A video showing the iron plugged in with the indicator light active.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The non-stick soleplate may be scratched, burnt, or worn.",
+        "proof": "A clear photo of the soleplate (underside) of the iron.",
+        "if_unproven": "as having a damaged soleplate"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual iron outside the box.",
+      "Photo of the soleplate to check for scratches or burns.",
+      "Video of the iron plugged in to confirm the power light works."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail packaging is shown. The actual iron must be seen to confirm its existence, model match, and physical condition."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 11946,
+    "input_tokens": 2354,
+    "output_tokens": 2491,
+    "cost_usd": 0.00865,
+    "replayed": false,
+    "fixture_key": "891f1793e64e7c23f131cd9720459aa8",
+    "error": null
+  }
+}

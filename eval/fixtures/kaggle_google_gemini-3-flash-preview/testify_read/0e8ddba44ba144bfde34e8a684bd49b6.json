@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail packaging for an Oraimo power bank.",
+      "The box is branded 'oraimo' and identifies the model as 'PowerJet 501'.",
+      "The box states a capacity of '50000mAh' and '85W ULTRA FAST CHARGING'.",
+      "The packaging mentions compatibility with Apple, Samsung, HP, and Lenovo for charging laptops and phones.",
+      "The actual power bank is not visible in the photo; only the box is shown.",
+      "There are watermarks for 'JIJI' and 'MADAM VSONIC' on the image."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "power bank",
+      "brand": "Oraimo",
+      "model": "PowerJet 501",
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Oraimo 50000mAh 85W fast charging PowerBank",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "Powejet 501",
+        "verdict": "supported",
+        "evidence": "photo 0 (spelled PowerJet 501)"
+      },
+      {
+        "claim": "Charge for laptop and phones",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, inferior item.",
+        "proof": "A photo of the actual power bank outside of its packaging.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The item may be a counterfeit or 'clone' version.",
+        "proof": "A clear photo of the security scratch-off code on the box and the product serial number.",
+        "if_unproven": "as a generic/counterfeit unit"
+      },
+      {
+        "risk": "The internal battery cells may be degraded or the charging ports damaged.",
+        "proof": "A video showing the device successfully charging a laptop and being charged itself.",
+        "if_unproven": "as non-functional"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual power bank out of the box.",
+      "Photo of the ports and the LED display while active.",
+      "Photo of the authentication/security label on the packaging."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller has only provided a photo of the retail box. The presence, physical condition, and authenticity of the actual power bank cannot be confirmed without seeing the unit itself."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 18833,
+    "input_tokens": 2375,
+    "output_tokens": 3680,
+    "cost_usd": 0.012228,
+    "replayed": false,
+    "fixture_key": "0e8ddba44ba144bfde34e8a684bd49b6",
+    "error": null
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows the front of a black smartphone with a punch-hole selfie camera, an Android home screen, Google apps, time 3:36, a weather widget reading 84\u00b0, and a DEETECH GADGETZ watermark.",
+      "Photo 1 shows the back of a dark gray smartphone with a vertical quad-camera array on the upper left, a SAMSUNG logo near the bottom center, small illegible regulatory text below the logo, an orange handwritten sticker near the camera, and watermarks reading POSTED ON JIJI and DEETECH GADGETZ."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "smartphone",
+      "brand": "Samsung",
+      "model": null,
+      "read_from": [
+        "photo 1"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Samsung S24 ultra 256gb",
+        "verdict": "unverified",
+        "evidence": "Samsung brand is readable in photo 1, but the S24 Ultra model and 256gb storage appear only on a handwritten sticker, not on the device itself."
+      },
+      {
+        "claim": "Unlocked",
+        "verdict": "unverifiable_remote",
+        "evidence": "SIM lock status cannot be determined from photos."
+      },
+      {
+        "claim": "used",
+        "verdict": "unverified",
+        "evidence": "Photos show a pre-owned device, but actual condition and usage history cannot be confirmed remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The phone may not be an S24 Ultra; the handwritten sticker could be wrong or swapped.",
+        "proof": "Clear photo of Settings > About Phone showing the model number.",
+        "if_unproven": "price as an unidentified Samsung smartphone at worst case."
+      },
+      {
+        "risk": "Storage may not be 256GB.",
+        "proof": "Screenshot of storage settings showing total capacity.",
+        "if_unproven": "price as base or unknown storage."
+      },
+      {
+        "risk": "Phone may be SIM-locked to a carrier despite the claim.",
+        "proof": "Video of a different carrier SIM working or screenshot of unlock status.",
+        "if_unproven": "price as locked."
+      },
+      {
+        "risk": "Phone may not power on or may have hidden defects in screen, cameras, or battery.",
+        "proof": "Video of boot-up, camera test, and battery health.",
+        "if_unproven": "price as not working."
+      },
+      {
+        "risk": "Phone may be blacklisted or stolen.",
+        "proof": "IMEI number for a blacklist check.",
+        "if_unproven": "price as blacklisted."
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of Settings > About Phone showing model number and storage capacity",
+      "Video showing the phone powering on, both cameras working, and a different SIM card being accepted",
+      "IMEI number to verify blacklist status"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The Samsung brand is visible, but the exact model and storage are only on a handwritten sticker, so the item cannot be identified precisely enough to price even at worst case."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 16244,
+    "input_tokens": 2376,
+    "output_tokens": 3190,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "b7598ec9a51dc5d14f4294779b1f5790",
+    "error": null
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a stack of many used black car batteries on wooden pallets against a yellow wall.",
+      "Photo 1 shows a close-up of one used black car battery.",
+      "Photo 1 label reads \"GREEN ENERGY AUTOMOTIVE\", \"GE 60\", and \"MADE IN ITALY\".",
+      "Photo 1 has a red positive terminal cover and a black negative terminal.",
+      "Both photos carry a \"POSTED ON JIJI EARINE\" watermark.",
+      "Photo 0 batteries are dusty and of mixed brands; no other model is clearly readable across the stack."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car battery",
+      "brand": "GREEN ENERGY",
+      "model": "GE 60",
+      "read_from": [
+        "photo 1 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Direct second hand battery",
+        "verdict": "supported",
+        "evidence": "photo 0 and photo 1 show used batteries"
+      },
+      {
+        "claim": "good warranty",
+        "verdict": "unverifiable_remote",
+        "evidence": "no warranty document visible in photos"
+      },
+      {
+        "claim": "Available in stock",
+        "verdict": "supported",
+        "evidence": "photo 0 shows multiple batteries in stock"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery may not hold charge or start an engine",
+        "proof": "video of load test or cranking the specific battery",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Battery age is unknown",
+        "proof": "photo of the manufacturing date code sticker",
+        "if_unproven": "as old or near end of life"
+      },
+      {
+        "risk": "Warranty may be invalid or not transferable",
+        "proof": "photo or scan of the warranty card or receipt",
+        "if_unproven": "as no warranty"
+      },
+      {
+        "risk": "The photographed battery may not be the exact unit sold",
+        "proof": "video showing the specific unit among the stock",
+        "if_unproven": "as unspecified stock unit"
+      }
+    ],
+    "proof_requests": [
+      "Video of the specific battery under load test or cranking",
+      "Photo of the manufacturing date code on the battery",
+      "Photo of the warranty document"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a used GREEN ENERGY GE 60 car battery from photo 1 and can be priced at its worst case as not working."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 15091,
+    "input_tokens": 2152,
+    "output_tokens": 2477,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "eaecc7a6a3153e4ed53d3de9beac27cb",
+    "error": null
+  }
+}

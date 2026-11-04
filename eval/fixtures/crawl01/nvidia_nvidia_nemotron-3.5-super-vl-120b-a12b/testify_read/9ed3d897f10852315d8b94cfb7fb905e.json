@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows the front of a gold/titanium smartphone with a black screen, held in a hand; reflections and watermarks are visible on the display.",
+      "Photo 1 shows the back of the same smartphone with a triple-lens camera array in the upper left, a flash and sensor on the right of the bump, and a faint rear logo; the finish is gold/titanium.",
+      "No model number, storage capacity, or \u201ciPhone 17 Pro\u201d text appears on the device in either photo."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "smartphone",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "iPhone 17 pro",
+        "verdict": "unverified",
+        "evidence": "No model text visible on the phone in photo 0 or photo 1."
+      },
+      {
+        "claim": "256gb",
+        "verdict": "unverified",
+        "evidence": "No storage label or settings screen visible in the photos."
+      },
+      {
+        "claim": "uk",
+        "verdict": "unverified",
+        "evidence": "No regional marking, plug, or network settings visible in the photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The phone is not an iPhone 17 Pro; it may be an older iPhone, another brand, or a clone.",
+        "proof": "Photo of Settings > General > About showing the exact model name.",
+        "if_unproven": "as a non-Apple smartphone of unknown model"
+      },
+      {
+        "risk": "Storage is not 256 GB.",
+        "proof": "Screenshot of Settings showing total capacity.",
+        "if_unproven": "as unknown or base storage"
+      },
+      {
+        "risk": "Phone does not power on or has screen/touch defects.",
+        "proof": "Video of the phone booting to the home screen and a touch test.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Device is iCloud locked, carrier locked, or has a bad IMEI.",
+        "proof": "Screenshot of activation lock status and IMEI check.",
+        "if_unproven": "as locked or blacklisted"
+      }
+    ],
+    "proof_requests": [
+      "Photo of Settings > General > About showing model name and storage capacity",
+      "Video of the phone powering on, displaying the home screen, and responding to touch",
+      "Screenshot of network/carrier settings and IMEI to confirm UK/unlocked status"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model, storage, and condition cannot be confirmed from the photos, and the claimed iPhone 17 Pro is unverifiable, so even a worst-case price cannot be set without proof."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 26459,
+    "input_tokens": 2452,
+    "output_tokens": 4892,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "9ed3d897f10852315d8b94cfb7fb905e",
+    "error": null
+  }
+}

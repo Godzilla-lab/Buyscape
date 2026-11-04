@@ -1,0 +1,87 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Outdoor condenser unit wrapped in clear plastic",
+      "SAMSUNG logo visible on outdoor unit casing",
+      "Indoor unit visible above outdoor unit, also wrapped",
+      "Split-system air conditioner configuration",
+      "Fan grille and casing visible on outdoor unit",
+      "No model number, capacity plate, or energy label legible in the photo"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "split air conditioner",
+      "brand": "Samsung",
+      "model": null,
+      "read_from": [
+        "photo 0 outdoor unit badge"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Low power consumption",
+        "verdict": "unverified",
+        "evidence": "No energy efficiency label or rating visible in photo 0"
+      },
+      {
+        "claim": "Korean products",
+        "verdict": "unverified",
+        "evidence": "Samsung is a Korean brand, but country of manufacture for this unit cannot be confirmed from the photo"
+      },
+      {
+        "claim": "Copper compressor",
+        "verdict": "unverified",
+        "evidence": "Compressor internals and nameplate not visible in photo 0"
+      },
+      {
+        "claim": "Air conditioner",
+        "verdict": "supported",
+        "evidence": "Indoor and outdoor split AC units visible in photo 0"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Unit may not work or may be damaged",
+        "proof": "Video of the air conditioner running and cooling",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Compressor is not copper",
+        "proof": "Photo of compressor nameplate or specification sheet",
+        "if_unproven": "priced as unknown/non-copper compressor"
+      },
+      {
+        "risk": "Cooling capacity or model unknown",
+        "proof": "Clear photo of the model/serial plate on the outdoor unit",
+        "if_unproven": "priced as unknown capacity"
+      },
+      {
+        "risk": "No refrigerant gas included",
+        "proof": "Seller confirmation or installation receipt showing gas charge",
+        "if_unproven": "priced as uncharged"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the model and serial plate on the outdoor unit",
+      "Video of the air conditioner running",
+      "Photo of the compressor nameplate"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a Samsung split air conditioner, but the model number and capacity plate are unreadable, and capacity sets the price; working condition and compressor type also cannot be verified remotely."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 12996,
+    "input_tokens": 1571,
+    "output_tokens": 2354,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "9993e00243cd9fca202d247ba84e1310",
+    "error": null
+  }
+}

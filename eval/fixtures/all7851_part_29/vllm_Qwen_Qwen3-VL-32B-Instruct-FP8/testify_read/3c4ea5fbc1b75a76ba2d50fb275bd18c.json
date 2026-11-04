@@ -1,0 +1,93 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Silver laptop open on a glass display counter, showing keyboard and trackpad. HP logo visible on palm rest. Background shows shelves with other laptops and electronics.",
+      "Photo 1: Same laptop closed, showing silver lid with HP logo. Displayed on glass counter with other laptops in background.",
+      "Photo 2: Close-up of the palm rest area showing an Intel sticker: 'Intel Core i5 vPro 8th Gen'. Keyboard keys visible, including function keys and arrow keys.",
+      "All photos have a watermark: 'IDYL COMPUTERS & GADGETS POSTED ON JIJI'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "ProBook 650 G5",
+      "read_from": [
+        "seller's words: 'Hp probook 650g5'",
+        "photo 1: HP logo on lid",
+        "photo 2: Intel sticker indicating 8th Gen Core i5, consistent with ProBook 650 G5 model"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Hp probook 650g5",
+        "verdict": "supported",
+        "evidence": "Seller's words and HP logo on lid (photo 1) and Intel sticker (photo 2) consistent with ProBook 650 G5 model."
+      },
+      {
+        "claim": "Intel corei5",
+        "verdict": "supported",
+        "evidence": "Photo 2 shows Intel sticker: 'Intel Core i5 vPro 8th Gen'."
+      },
+      {
+        "claim": "8gb ram",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible RAM label or system information. Cannot be confirmed from photos."
+      },
+      {
+        "claim": "256ssd",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible SSD label or system information. Cannot be confirmed from photos."
+      },
+      {
+        "claim": "8th generation",
+        "verdict": "supported",
+        "evidence": "Photo 2 shows Intel sticker: '8th Gen'."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "RAM is not 8GB as claimed",
+        "proof": "Photo of system information screen (e.g., Windows Task Manager or BIOS) showing RAM size.",
+        "if_unproven": "priced as having less than 8GB RAM, which reduces value."
+      },
+      {
+        "risk": "SSD is not 256GB as claimed",
+        "proof": "Photo of system information screen showing storage capacity or label on the SSD drive.",
+        "if_unproven": "priced as having smaller or no SSD, which reduces value."
+      },
+      {
+        "risk": "Laptop is not functional or has hidden damage",
+        "proof": "Video of the laptop powering on, booting, and running basic operations (e.g., opening a browser or file explorer).",
+        "if_unproven": "priced as not working, which significantly reduces value."
+      },
+      {
+        "risk": "Battery is dead or degraded",
+        "proof": "Video showing battery health in Windows settings or BIOS, or a test of battery life during use.",
+        "if_unproven": "priced as having no battery or poor battery life, which reduces value."
+      }
+    ],
+    "proof_requests": [
+      "Video of the laptop powering on and running Windows.",
+      "Photo or video of system information showing RAM and storage details.",
+      "Photo or video of battery health or a battery life test.",
+      "Photo of the laptop's serial number or service tag (if visible)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and CPU generation are confirmed, but critical specs like RAM and SSD size cannot be verified from photos. Functionality, battery health, and hidden damage are also unproven. These unverified claims and hidden risks must be resolved before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 72420,
+    "input_tokens": 2793,
+    "output_tokens": 896,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "3c4ea5fbc1b75a76ba2d50fb275bd18c",
+    "error": null
+  }
+}

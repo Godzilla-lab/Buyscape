@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the 'About' screen of an iPhone with Model Name 'iPhone 15 Pro Max', Model Number 'MU6P3VC/A', Capacity '256 GB', and Serial Number 'HY9D2QD03X'.",
+      "Photo 1 shows the home screen of the same phone with a visible crack or damage on the top right corner of the display.",
+      "The phone is held in a hand against a wooden panel background with a sign that says 'DE Avtive gadget' and 'TERMS AND CONDITION FOR SALES'.",
+      "The screen in photo 1 has a large white rectangle and black boxes, possibly from a screen protector or editing, obscuring part of the display.",
+      "The seller claims 'No replaced parts' and 'iphone 15promax Europe 256gb'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "iPhone 15 Pro Max",
+      "brand": "Apple",
+      "model": "iPhone 15 Pro Max",
+      "read_from": [
+        "photo 0 screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "iphone 15promax Europe 256gb",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows 'Model Name: iPhone 15 Pro Max' and 'Capacity: 256 GB'. The 'Europe' part is unverifiable_remote as no region-specific identifier is visible."
+      },
+      {
+        "claim": "No replaced parts",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal or disassembled photos are provided to verify components. The screen damage in photo 1 may indicate replacement, but it is not confirmed."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Screen damage or replacement",
+        "proof": "A close-up photo of the screen damage showing the extent and whether it is cracked, dead pixels, or a replaced screen.",
+        "if_unproven": "priced as having a damaged screen, which reduces value significantly"
+      },
+      {
+        "risk": "Water damage or internal issues",
+        "proof": "A photo of the SIM tray, charging port, or internal inspection (if possible) to check for water damage or corrosion.",
+        "if_unproven": "priced as potentially water-damaged, which reduces value"
+      },
+      {
+        "risk": "Not genuine or cloned device",
+        "proof": "A verification screenshot from Apple's official website using the serial number (HY9D2QD03X) to confirm authenticity and region.",
+        "if_unproven": "priced as potentially counterfeit, which reduces value"
+      }
+    ],
+    "proof_requests": [
+      "A close-up photo of the screen damage to assess if it's cracked or replaced.",
+      "A photo of the SIM tray or charging port to check for water damage.",
+      "A verification screenshot from Apple's website using the serial number HY9D2QD03X."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The phone is identifiable as an iPhone 15 Pro Max with 256GB, but the screen damage and claims of 'no replaced parts' cannot be verified. Hidden risks like water damage or authenticity require further proof before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 56133,
+    "input_tokens": 2281,
+    "output_tokens": 730,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "f018da7e5c6e1dce55e859aebb189597",
+    "error": null
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: A mirrorless-style camera with a kit zoom lens attached, body reads 'LUMIX' and 'G' on the front badge; a second item (charger) is partly visible at right.",
+      "Photo 1: Same camera from the back, screen shows 'Please set the clock' (indicates battery was removed or fully drained), a single battery and a charger unit sit beside it on the cloth.",
+      "No close-up of the lens glass, no visible shutter-count screen, no second battery, no serial number or 'G7' model text visible in either photo.",
+      "Background is a dark blue backdrop with a watermark 'Iyanuoluwa Peter' and 'Posted on Jiji' overlay."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "Mirrorless camera with kit lens, battery and charger (claimed Panasonic Lumix G7)",
+      "brand": "Panasonic Lumix",
+      "model": null,
+      "read_from": [
+        "photo 0 body badge 'LUMIX G'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Lumix G7 mirrorless camera",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo 0 shows 'LUMIX' and 'G' badge but no visible 'G7' model marking or serial plate."
+      },
+      {
+        "claim": "Comes with 2 batteries and a charger",
+        "verdict": "contradicted",
+        "evidence": "Photo 1 shows only one battery and one charger; no second battery visible in either photo."
+      },
+      {
+        "claim": "Shutter count under 5,000",
+        "verdict": "unverifiable_remote",
+        "evidence": "No screenshot of the camera's shutter-count menu or firmware info screen provided."
+      },
+      {
+        "claim": "No fungus or scratch on the lens",
+        "verdict": "unverified",
+        "evidence": "No close-up or backlit shot of the lens elements to check for fungus or scratches."
+      },
+      {
+        "claim": "Original battery and charger, never repaired",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal photos, invoice, or service sticker shown to confirm originality or repair history."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Shutter count could be much higher than claimed, affecting mechanical wear and price.",
+        "proof": "A photo of the in-camera menu or a shutter-count app reading (e.g., via EXIF data tool).",
+        "if_unproven": "priced as unknown/high shutter count, i.e. lower tier"
+      },
+      {
+        "risk": "Lens may have fungus, haze, or scratches not visible in the dim overall shot.",
+        "proof": "A macro photo of the lens front and rear elements against a bright light.",
+        "if_unproven": "priced as if lens has optical defects"
+      },
+      {
+        "risk": "Only one battery is visible, contradicting the '2 batteries' claim.",
+        "proof": "A photo showing both batteries together with the camera.",
+        "if_unproven": "priced as single-battery kit"
+      },
+      {
+        "risk": "Camera's power-on and image capture functionality not demonstrated; screen shows a reset/clock prompt suggesting it was off or drained.",
+        "proof": "A video clip of the camera powering on, focusing, and taking a shot with the shutter count visible.",
+        "if_unproven": "priced as not confirmed working"
+      },
+      {
+        "risk": "No serial number or proof of original purchase to confirm 'never repaired' claim.",
+        "proof": "Photo of serial number sticker and/or purchase receipt.",
+        "if_unproven": "priced as unverified repair history (no premium for 'never repaired')"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the in-camera shutter count/menu screen",
+      "Close-up macro shot of the lens front and rear elements",
+      "Photo showing both batteries together with the camera",
+      "Video of the camera powering on and taking a photo",
+      "Photo of the serial number plate or original box/receipt"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as an entry-level mirrorless camera with kit lens, but model, shutter count, lens condition, and accessory completeness are all unverified or contradicted, so it must be priced at worst case against comparable budget camera+lens kits.",
+    "price_pick": {
+      "low": 0,
+      "high": 1
+    }
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 28079,
+    "input_tokens": 4024,
+    "output_tokens": 2746,
+    "cost_usd": 0.035508,
+    "replayed": false,
+    "fixture_key": "f813cef9b1481a51d90e545730f9796d",
+    "error": null
+  }
+}

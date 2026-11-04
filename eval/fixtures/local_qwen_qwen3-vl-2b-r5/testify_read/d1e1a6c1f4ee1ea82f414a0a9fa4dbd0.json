@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r5",
+  "response": {
+    "observations": [
+      "Black automotive alternator with a metal housing.",
+      "A label on the front face reads 'Valeo' and 'M278'.",
+      "The alternator has a 'B+' terminal on the top right and a 'P+' terminal on the bottom left.",
+      "The housing shows significant surface rust and dirt.",
+      "Internal copper windings are visible through the cooling fins in photos 1 and 2.",
+      "The item is photographed against a brick wall."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "alternator",
+      "brand": "Valeo",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Direct Tokunbo Valeo Alternator",
+        "verdict": "supported",
+        "evidence": "photo 0 label shows Valeo and the part number M278."
+      },
+      {
+        "claim": "for Mercedes-Benz M278",
+        "verdict": "supported",
+        "evidence": "photo 0 label shows M278."
+      },
+      {
+        "claim": "439741",
+        "verdict": "unverified",
+        "evidence": "The part number is not legible in the provided photos."
+      },
+      {
+        "claim": "Tokunbo, direct from Belgium. Tested and working, no knock, low mileage, never opened.",
+        "verdict": "unverified",
+        "evidence": "No photo shows this; it is the seller's word only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The alternator may be non-functional or have internal damage.",
+        "proof": "A video showing a multimeter test of the open-circuit voltage (OCV) and load current.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The part number 439741 may not match the actual part being sold.",
+        "proof": "A clear photo of the part number stamped on the housing or the label.",
+        "if_unproven": "as a generic Valeo alternator of unknown part number"
+      },
+      {
+        "risk": "The item may be a counterfeit or a refurbished unit.",
+        "proof": "A photo of the manufacturer's part number stamp on the housing.",
+        "if_unproven": "as a generic used unit"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of any label, sticker or metal plate showing the brand and model.",
+      "Clear photo of the part number stamped on the housing or label.",
+      "Video of a multimeter test showing the voltage and current output."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "What the item is shows, but not the model that sets its price: no photo shows it clearly enough to read. The shot asked for first would settle it."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r5",
+    "task": "testify_read",
+    "latency_ms": 2007,
+    "input_tokens": 2183,
+    "output_tokens": 497,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "d1e1a6c1f4ee1ea82f414a0a9fa4dbd0",
+    "error": null
+  }
+}

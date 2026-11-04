@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a stainless steel LG refrigerator with a top freezer and bottom fridge section, featuring a digital control panel on the upper door and a '10 year' warranty sticker in Korean.",
+      "The fridge has visible scratches, smudges, and a small dent near the top right corner of the upper door.",
+      "The brand 'LG' is visible on the top left of the upper door, and 'Dios' is visible on the top right.",
+      "Photo 1 shows the interior of the fridge compartment, which appears dirty with visible grime and residue on the shelves and walls. There is a plastic bag with items inside, possibly for demonstration.",
+      "The interior light is on, but the overall condition suggests lack of cleaning or maintenance."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "double-door refrigerator",
+      "brand": "LG",
+      "model": "Dios",
+      "read_from": [
+        "photo 0 top left: LG",
+        "photo 0 top right: Dios"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Fairly used fridge",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows visible wear and tear such as scratches and smudges, consistent with a used appliance."
+      },
+      {
+        "claim": "Chilling perfectly",
+        "verdict": "unverifiable_remote",
+        "evidence": "No functional test is shown; the interior photo (photo 1) does not confirm cooling performance. The light is on, but temperature or cooling efficiency cannot be assessed remotely."
+      },
+      {
+        "claim": "First grade double doors chiller",
+        "verdict": "unverified",
+        "evidence": "The term 'first grade' is subjective and not verifiable from photos. The fridge is a double-door model, which is supported by photo 0."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Interior contamination or mold due to visible grime and residue",
+        "proof": "A clean, empty interior shot with all shelves removed, showing no stains, mold, or odors.",
+        "if_unproven": "priced as potentially contaminated, reducing value due to hygiene concerns"
+      },
+      {
+        "risk": "Mechanical or electrical faults not visible in photos",
+        "proof": "A video showing the fridge running, with door seals tested, compressor sound, and temperature display functioning.",
+        "if_unproven": "priced as possibly not working, reducing value significantly"
+      },
+      {
+        "risk": "Hidden damage to internal components or cooling system",
+        "proof": "A video or photo of the back of the fridge showing no damage to coils, condenser, or wiring.",
+        "if_unproven": "priced as potentially damaged, reducing value"
+      }
+    ],
+    "proof_requests": [
+      "Video of the fridge running with door seals tested and temperature display working.",
+      "Clean, empty interior shot with all shelves removed.",
+      "Photo of the back of the fridge showing coils and wiring."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The fridge's identity is clear (LG Dios double-door), but critical functional and condition claims (like 'chilling perfectly') and hidden risks (interior hygiene, mechanical faults) cannot be verified from current photos. Proof is needed to price accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 61538,
+    "input_tokens": 2545,
+    "output_tokens": 732,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "02e3a622e835afb5e19277b8bba1a273",
+    "error": null
+  }
+}

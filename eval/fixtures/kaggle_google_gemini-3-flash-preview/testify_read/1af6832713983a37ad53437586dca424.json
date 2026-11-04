@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail box for a Blue Gate UPS.",
+      "The box identifies the model as 'BG1530 Elite Pro'.",
+      "The box text includes 'Line Interactive UPS'.",
+      "The actual UPS device is not visible in the photo, only the box.",
+      "The background suggests a busy outdoor market environment."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "UPS",
+      "brand": "Blue Gate",
+      "model": "BG1530 Elite Pro",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "1.5kva",
+        "verdict": "supported",
+        "evidence": "The model number BG1530 on the box in photo 0 is the standard designation for a 1.5kVA unit."
+      },
+      {
+        "claim": "bluegate",
+        "verdict": "supported",
+        "evidence": "The brand 'BLUE GATE' is clearly visible on the box in photo 0."
+      },
+      {
+        "claim": "available in stock",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different item.",
+        "proof": "A photo of the actual UPS unit outside of the box.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The unit may not function or the internal batteries may be exhausted.",
+        "proof": "A video of the unit powering a device while disconnected from mains power.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual UPS unit removed from the box.",
+      "Video of the unit powering a load while unplugged to test battery and inverter function.",
+      "Photo of the specification sticker on the back of the actual unit."
+    ],
+    "decision": "price",
+    "reason": "The model is clearly identified from the packaging, so it can be priced at its worst case (missing or non-functional)."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 19716,
+    "input_tokens": 2354,
+    "output_tokens": 4273,
+    "cost_usd": 0.013996,
+    "replayed": false,
+    "fixture_key": "1af6832713983a37ad53437586dca424",
+    "error": null
+  }
+}

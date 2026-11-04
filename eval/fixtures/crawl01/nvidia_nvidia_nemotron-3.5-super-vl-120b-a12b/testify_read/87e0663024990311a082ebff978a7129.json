@@ -1,0 +1,80 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows the back of a white smartphone with a dual-camera array and an Apple logo; seller overlay reads \"iPhone 13 128G 85% CN iOS17.6\".",
+      "Photo 1 shows the iOS About screen: Model Name iPhone 13, Model Number MLVD3CH/A, iOS 17.6, Capacity 128 GB.",
+      "Photo 2 shows Battery Health & Charging: Maximum Capacity 85%, with a Peak Performance Capability notice about an unexpected shutdown."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "smartphone",
+      "brand": "Apple",
+      "model": "iPhone 13",
+      "read_from": [
+        "photo 0 logo",
+        "photo 1 screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "First apple product with cinematic",
+        "verdict": "unverifiable_remote",
+        "evidence": "Seller's phrase only; no proof in photos."
+      },
+      {
+        "claim": "iPhone 13, 128 GB, 85% battery, iOS 17.6 (photo 0 overlay)",
+        "verdict": "supported",
+        "evidence": "Photo 1 confirms iPhone 13, 128 GB, iOS 17.6; photo 2 confirms 85% battery."
+      },
+      {
+        "claim": "CN / China variant (photo 0 overlay)",
+        "verdict": "unverifiable_remote",
+        "evidence": "Model number MLVD3CH/A is visible in photo 1, but region meaning cannot be confirmed from the photo alone."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery may need replacement; unexpected shutdown message indicates degraded performance.",
+        "proof": "Battery cycle count or Apple service screenshot.",
+        "if_unproven": "as needing battery replacement."
+      },
+      {
+        "risk": "iCloud activation lock or Find My status unknown.",
+        "proof": "Video of the setup screen or Settings showing Find My off.",
+        "if_unproven": "as iCloud locked/parts only."
+      },
+      {
+        "risk": "Front screen, charging port, and buttons not shown; hidden damage or non-original parts possible.",
+        "proof": "Clear photos of front display, ports, and side buttons.",
+        "if_unproven": "as damaged/unknown condition."
+      },
+      {
+        "risk": "China model may have no local warranty or region-limited features.",
+        "proof": "Warranty status check or seller confirmation.",
+        "if_unproven": "as grey import/no warranty."
+      }
+    ],
+    "proof_requests": [
+      "Video of the phone booting to the home screen with Find My turned off",
+      "Photos of the front screen, charging port, and side buttons",
+      "Battery cycle count or Apple diagnostic screenshot"
+    ],
+    "decision": "price",
+    "reason": "The phone is identifiable as an Apple iPhone 13 128GB from photo 1, so it can be priced at its worst case despite unproven functionality and condition."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 125605,
+    "input_tokens": 2898,
+    "output_tokens": 4371,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "87e0663024990311a082ebff978a7129",
+    "error": null
+  }
+}

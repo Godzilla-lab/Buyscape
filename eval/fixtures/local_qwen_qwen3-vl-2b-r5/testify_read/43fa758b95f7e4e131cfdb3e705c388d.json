@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r5",
+  "response": {
+    "observations": [
+      "Photo 0 shows a blue plastic barrel with a black lid and a metal handle, standing on a concrete floor with other barrels in the background.",
+      "Photo 1 shows a close-up of a white label on the barrel's side.",
+      "The label identifies the contents as 'BUTANOL + HYDROXYDE - BPJUSP' and lists a capacity of '25 KG/25KG'.",
+      "The label also states 'MADE IN INDIA' and 'NET WEIGHT 25 KG'.",
+      "The barrel shows some surface wear and scuffing."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "plastic barrel",
+      "brand": "BPJUSP",
+      "model": "25 KG",
+      "read_from": [
+        "photo 1 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Plastic buckets 80 liters",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows a 25 kg capacity, not 80 liters."
+      },
+      {
+        "claim": "empty plastic containers",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 1 show empty barrels."
+      },
+      {
+        "claim": "blue barrel",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 1."
+      },
+      {
+        "claim": "Food grade, used only once for clean water. No crack, no leak, lids complete.",
+        "verdict": "unverified",
+        "evidence": "No photo shows this; it is the seller's word only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The barrel may be empty or contain a different substance than claimed.",
+        "proof": "A photo of the empty barrel with a weighing scale showing the weight.",
+        "if_unproven": "as empty"
+      },
+      {
+        "risk": "The contents may be contaminated or the seal may be compromised.",
+        "proof": "A photo of the interior of the barrel and a video of the seal being opened.",
+        "if_unproven": "as contaminated or leaking"
+      },
+      {
+        "risk": "The label may be a template or the actual contents may not match the label.",
+        "proof": "A photo of the label on the actual barrel being sold.",
+        "if_unproven": "as a generic empty barrel"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the empty barrel with a weighing scale showing the weight.",
+      "Photo of the interior of the barrel.",
+      "Photo of the label on the actual barrel being sold to confirm contents and weight."
+    ],
+    "decision": "price",
+    "reason": "The item is known from the photos. What they cannot prove is priced at its worst case until the proof asked for below arrives."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r5",
+    "task": "testify_read",
+    "latency_ms": 2292,
+    "input_tokens": 2296,
+    "output_tokens": 490,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "43fa758b95f7e4e131cfdb3e705c388d",
+    "error": null
+  }
+}

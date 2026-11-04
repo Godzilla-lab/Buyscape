@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0: Rear view of a grey/silver refrigerator with a Hisense energy label on the upper left, exposed compressor and mechanical components at the bottom, barcode stickers, and a warning triangle sticker.",
+      "Photo 1: Front view of a grey/silver single-door refrigerator with the Hisense logo on the door and an integrated top handle.",
+      "Photo 2: Interior with the door open, showing empty wire and glass shelves, door bins, a temperature control dial, and a small container on a lower shelf."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "single-door refrigerator",
+      "brand": "Hisense",
+      "model": null,
+      "read_from": [
+        "photo 1 front logo",
+        "photo 0 energy label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Hisense single-door refrigerator",
+        "verdict": "supported",
+        "evidence": "Hisense logo visible on the front in photo 1 and on the energy label in photo 0; single door shown in photo 1 and interior in photo 2."
+      },
+      {
+        "claim": "colour: grey/silver",
+        "verdict": "supported",
+        "evidence": "Exterior appears grey/silver in photo 0 and photo 1."
+      },
+      {
+        "claim": "type: single-door",
+        "verdict": "supported",
+        "evidence": "One door visible in photo 1 and photo 2."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Refrigerator does not cool or compressor is faulty",
+        "proof": "Video of the unit powered on and cooling, with a thermometer inside after running for at least two hours.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Door seal or gasket is torn and not sealing properly",
+        "proof": "Close-up photo of the closed door gasket or a paper-slip test along the seal.",
+        "if_unproven": "as needing seal replacement"
+      },
+      {
+        "risk": "Power plug or cord is damaged, or voltage rating is unsuitable",
+        "proof": "Photo of the power plug and the electrical rating label.",
+        "if_unproven": "as needing electrical repair"
+      },
+      {
+        "risk": "Interior has odor, mold, or hidden damage not visible in still photos",
+        "proof": "Video of the door being opened showing a clean interior with no odor or mold.",
+        "if_unproven": "as needing deep clean"
+      }
+    ],
+    "proof_requests": [
+      "Video of the refrigerator powered on and cooling",
+      "Close-up of the door seal when closed",
+      "Photo of the power plug and rating label",
+      "Photo of the top interior freezer section if present"
+    ],
+    "decision": "price",
+    "reason": "The item is clearly a used Hisense single-door refrigerator; brand and type are visible in the photos, so it can be priced at its worst case as non-working pending proof of function."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 14288,
+    "input_tokens": 3169,
+    "output_tokens": 2181,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "6c253040185830f582ff0b7475538253",
+    "error": null
+  }
+}

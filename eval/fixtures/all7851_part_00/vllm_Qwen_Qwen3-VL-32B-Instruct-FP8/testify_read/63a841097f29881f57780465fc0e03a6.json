@@ -1,0 +1,65 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a rectangular solar panel with a white frame and dark blue photovoltaic cells arranged in a grid.",
+      "The panel has 6 columns and 10 rows of cells, totaling 60 cells, matching the seller's claim.",
+      "The surface appears clean and intact, with no visible cracks or damage in the cells.",
+      "There is a watermark 'NAGOTECH SOLAR' overlaid on the image, suggesting a seller or distributor brand, not the panel's manufacturer.",
+      "No brand name or model is visible on the panel itself in the photo.",
+      "The panel is standing upright on a concrete surface, possibly outdoors or in a workshop area."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "350watts 60-cell solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "It's a 350watts Canadian used solar panel with 60cell",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows 60 cells, which supports the '60cell' claim. The '350watts' claim cannot be verified from the photo alone as there is no visible rating label. The 'Canadian' claim is unverifiable remotely as no country of origin or brand is visible."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The panel may not be 350 watts as claimed; it could be lower output or mislabeled.",
+        "proof": "A clear photo of the back label or nameplate showing the rated power, model, and manufacturer.",
+        "if_unproven": "priced as lower wattage (e.g., 250-300W) or as unverified wattage, which reduces value."
+      },
+      {
+        "risk": "The panel may be damaged or have microcracks not visible in the current photo.",
+        "proof": "A close-up photo of the cells under bright light or a video panning across the surface to reveal hidden defects.",
+        "if_unproven": "priced as potentially defective, reducing value."
+      },
+      {
+        "risk": "The panel may not be from Canada or may be misrepresented as 'Canadian' for higher perceived value.",
+        "proof": "Documentation or label showing country of origin or manufacturer details.",
+        "if_unproven": "priced as generic or unknown origin, which reduces value."
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the back label or nameplate showing wattage, model, and manufacturer.",
+      "Close-up photo of the cells under bright light to check for microcracks or damage.",
+      "Photo of any documentation or packaging indicating country of origin or brand."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The panel's wattage and origin cannot be verified from the current photo, and there are hidden risks related to performance and authenticity. Without proof of the 350W rating and manufacturer details, the item cannot be accurately priced."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 54160,
+    "input_tokens": 1820,
+    "output_tokens": 680,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "63a841097f29881f57780465fc0e03a6",
+    "error": null
+  }
+}

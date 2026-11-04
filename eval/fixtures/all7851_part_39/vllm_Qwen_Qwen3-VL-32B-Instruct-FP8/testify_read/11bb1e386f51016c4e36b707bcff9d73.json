@@ -1,0 +1,75 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a silver Samsung top-freezer refrigerator with a visible brand logo on the top door.",
+      "Photo 1 shows the refrigerator with both doors open, revealing the interior: freezer on top with 'Ice Max 2x' label, refrigerator section below with shelves and drawers, and door bins. The interior is filled with purple plastic bags, likely for display or protection.",
+      "Photo 2 shows a clear view of the refrigerator's rating label, which includes the model number RT22HAR4DSA, voltage, power, dimensions, and other specifications. The label also states 'MADE IN THAILAND, ASSEMBLED IN NIGERIA BY NHDAL'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "refrigerator",
+      "brand": "SAMSUNG",
+      "model": "RT22HAR4DSA",
+      "read_from": [
+        "photo 0 top door",
+        "photo 2 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "quality refrigerator that combines modern design, efficient cooling, and energy-saving",
+        "verdict": "unverifiable_remote",
+        "evidence": "The photos show the design and some specs (like 100W rated input), but performance claims like 'efficient cooling' and 'energy-saving' cannot be verified from photos alone."
+      },
+      {
+        "claim": "modern design",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows a sleek silver finish and modern top-freezer design. Photo 1 shows interior features like 'Ice Max 2x' and 'Easy Slide' drawers, which suggest modern features."
+      },
+      {
+        "claim": "frost free",
+        "verdict": "supported",
+        "evidence": "Photo 2 label explicitly states 'FROST FREE, REFRIGERATOR-FREEZER TYPE'."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The refrigerator may not be in working condition or may have internal damage not visible in photos.",
+        "proof": "A video showing the refrigerator running, with doors closing properly, lights turning on, and cooling function operating.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The interior may have odors, mold, or residue not visible in the photos due to the purple plastic bags.",
+        "proof": "A close-up video or photo of the interior without the plastic bags, showing the actual condition of shelves, drawers, and walls.",
+        "if_unproven": "priced as having potential odor or contamination"
+      },
+      {
+        "risk": "The refrigerator may have been assembled in Nigeria with parts of unknown quality or origin, potentially affecting durability.",
+        "proof": "A photo or video of the serial number and any assembly tags, or a statement from the seller about the origin of components.",
+        "if_unproven": "priced as potentially lower quality due to local assembly"
+      }
+    ],
+    "proof_requests": [
+      "Video of the refrigerator running with doors closing and lights on.",
+      "Close-up photos or video of the interior without the purple plastic bags.",
+      "Photo of the serial number and any other assembly or warranty tags."
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a Samsung RT22HAR4DSA refrigerator with clear photos of the exterior, interior, and model label. While some performance claims are unverifiable, the model and condition are sufficient to price it at its worst case (e.g., not working or with hidden interior issues). Risks are noted and priced conservatively."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 66648,
+    "input_tokens": 2780,
+    "output_tokens": 795,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "11bb1e386f51016c4e36b707bcff9d73",
+    "error": null
+  }
+}

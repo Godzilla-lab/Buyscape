@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Closed silver HP laptop with pink sticky note reading 'HP elitebook 840 G6 256/8gb ram' and yellow sticky note with 'JQ2'. HP logo visible on lid.",
+      "Photo 1: Open laptop showing black screen, silver chassis, black keyboard, HP logo below screen, 'ELITEBOOK' text on palm rest, Intel sticker on lower right.",
+      "Photo 2: Same open laptop with screen on, showing reflection of person taking photo, screen has visible smudges and fingerprints, no clear content displayed.",
+      "All photos show wooden table background, consistent lighting, no visible damage to casing or keyboard from these angles.",
+      "No ports, hinges, or underside visible in any photo."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "EliteBook 840 G6",
+      "read_from": [
+        "photo 0 pink sticky note",
+        "photo 1 palm rest text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP laptops and probook cleen and neat",
+        "verdict": "supported",
+        "evidence": "Photos show clean silver laptop with no visible dents or major scratches; keyboard and chassis appear intact. 'Cleen and neat' is subjective but visually plausible."
+      },
+      {
+        "claim": "HP elitebook 840 G6 256/8gb ram",
+        "verdict": "unverified",
+        "evidence": "Model name 'EliteBook 840 G6' is written on pink sticky note in photo 0 and visible on palm rest in photo 1. RAM and storage specs are written on sticky note but cannot be verified remotely without system info or BIOS check."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Screen damage or dead pixels not visible in photos",
+        "proof": "Close-up video or photo of screen displaying full white, full black, and color gradients to check for dead pixels, cracks, or backlight issues.",
+        "if_unproven": "Priced as having potential screen defect, which reduces value."
+      },
+      {
+        "risk": "Internal hardware not working (RAM, SSD, battery, ports)",
+        "proof": "Video showing laptop booting, running system diagnostics, and connecting to peripherals (USB, HDMI, etc.).",
+        "if_unproven": "Priced as possibly non-functional or with hidden hardware failure."
+      },
+      {
+        "risk": "Battery health or non-functional battery",
+        "proof": "Video showing laptop running on battery and battery percentage during use, or battery health report.",
+        "if_unproven": "Priced as if battery is dead or degraded, reducing value."
+      },
+      {
+        "risk": "Sticky note specs are false or mislabeled",
+        "proof": "Photo of BIOS or system information screen showing exact model, RAM, and storage details.",
+        "if_unproven": "Priced as if model or specs are incorrect, which could be a downgrade."
+      }
+    ],
+    "proof_requests": [
+      "Video of laptop booting and running system diagnostics.",
+      "Photo or video of BIOS/system info screen showing model, RAM, and storage.",
+      "Close-up video of screen displaying full white, black, and color gradients.",
+      "Video showing laptop running on battery and battery health."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identifiable from the sticky note and palm rest text, but critical specs (RAM, storage) and functional status (screen, battery, ports) cannot be verified from current photos. Hidden risks like screen defects or non-working hardware affect pricing significantly. Proof is needed to price accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 66762,
+    "input_tokens": 3231,
+    "output_tokens": 824,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "6fe2c3a4e2b15638d78118408e438112",
+    "error": null
+  }
+}

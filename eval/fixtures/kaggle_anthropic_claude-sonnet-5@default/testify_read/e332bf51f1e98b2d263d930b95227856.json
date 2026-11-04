@@ -1,0 +1,84 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 and 1 show a white, slim game console wrapped in clear plastic, held by a hand near a window.",
+      "A circular Xbox logo (the Xbox button) is visible on the top-left corner of the console in both photos.",
+      "The front face of the console, where a disc slot would be on a standard Xbox One S, is partly obscured by the plastic wrap and the angle of the shot.",
+      "No power brick, HDMI cable, controller, retail box, or barcode/serial label is visible in either photo.",
+      "No photo shows the console powered on or connected to a display.",
+      "Background shows unrelated items (hard drives, other electronics) in what looks like a shop/display case with 'BLESSED OBI VENTURES' watermark."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "game console (Xbox One family)",
+      "brand": "Xbox",
+      "model": null,
+      "read_from": [
+        "photo 0 logo",
+        "photo 1 logo"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Microsoft Xbox One S All-Digital Edition Console (Disc-free)",
+        "verdict": "unverified",
+        "evidence": "The Xbox logo confirms the brand/family, but the front disc-slot area that distinguishes All-Digital from standard One S is not clearly visible in either photo; plastic wrap and camera angle obscure it."
+      },
+      {
+        "claim": "Implied working condition (no explicit claim, but console is being sold as a working unit)",
+        "verdict": "unverifiable_remote",
+        "evidence": "No power-on, boot screen, or controller-pairing shot is shown in either photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Cannot confirm whether this is the All-Digital Edition (no disc drive, lower market value) or a standard Xbox One S (with disc drive, higher market value) \u2014 this changes which comparable price list applies.",
+        "proof": "A clear, unobstructed photo of the front panel showing presence or absence of the disc slot, unwrapped.",
+        "if_unproven": "cannot be priced at all without this, since the model/trim itself is unreadable, not just its condition"
+      },
+      {
+        "risk": "Console may not power on or may have internal faults (overheating, drive failure, disc read errors if applicable).",
+        "proof": "A video of the console powering on to the home dashboard, or a photo of it displaying the Xbox boot logo on a screen.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Missing accessories (power cable, HDMI cable, controller) that are usually bundled and affect resale value.",
+        "proof": "A photo laying out all included accessories next to the console.",
+        "if_unproven": "priced as console-only, no accessories"
+      },
+      {
+        "risk": "Storage capacity (common Xbox One S/All-Digital variants: 500GB vs 1TB) is not stated or shown, which affects price tier.",
+        "proof": "A photo of the rear/bottom label showing capacity, or the box if available.",
+        "if_unproven": "priced at the lowest common capacity tier"
+      },
+      {
+        "risk": "No serial number or authenticity check possible; cannot rule out a refurbished, grey-market, or modded unit.",
+        "proof": "A clear photo of the serial/barcode sticker, usually on the underside of the console.",
+        "if_unproven": "priced as unverified/grey-market risk, not premium"
+      }
+    ],
+    "proof_requests": [
+      "Clear, unwrapped photo of the front panel to confirm presence/absence of a disc slot.",
+      "Video of the console powering on and reaching the dashboard.",
+      "Photo of the rear/bottom label showing storage capacity and serial number.",
+      "Photo of all included accessories (cables, controller) laid out together."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photos confirm an Xbox-branded console but cannot settle whether it is the All-Digital Edition or a standard disc-based Xbox One S, and this model difference changes which price list applies, so even a worst-case price cannot be set without a clearer front-panel shot."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 27520,
+    "input_tokens": 2660,
+    "output_tokens": 2437,
+    "cost_usd": 0.026499,
+    "replayed": false,
+    "fixture_key": "e332bf51f1e98b2d263d930b95227856",
+    "error": null
+  }
+}

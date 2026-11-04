@@ -1,0 +1,84 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "An upright freezer with a silver/grey finish.",
+      "The brand 'SHARP' is printed on the top right of the door.",
+      "A 'SHARP J-TECH INVERTER' sticker is visible in the center of the door.",
+      "An energy efficiency label (rated A) is on the top right corner, but the model text is blurry.",
+      "The unit is standing on a styrofoam base outdoors.",
+      "A large cardboard box for an 'LG FREEZER' is visible to the left.",
+      "The interior of the freezer is not shown.",
+      "The back and sides of the unit are not shown."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "upright freezer",
+      "brand": "Sharp",
+      "model": null,
+      "read_from": [
+        "photo 0 door"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "220 litres",
+        "verdict": "unverified",
+        "evidence": "The capacity is not legible on the energy sticker or any rating plate."
+      },
+      {
+        "claim": "Sharp",
+        "verdict": "supported",
+        "evidence": "photo 0 door"
+      },
+      {
+        "claim": "upright freezer",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "very good and well to cool",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Internal condition (missing or broken drawers/shelves)",
+        "proof": "A photo of the freezer with the door open.",
+        "if_unproven": "as having no internal fittings"
+      },
+      {
+        "risk": "Cooling system failure or compressor issues",
+        "proof": "A video of the unit powered on and showing frost on the cooling elements.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Inaccurate capacity or model specifications",
+        "proof": "A clear photo of the manufacturer's rating plate, usually found on the back or inside.",
+        "if_unproven": "as the smallest/base model of this type"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the manufacturer's rating plate (back or inside).",
+      "Photo of the interior with the door open.",
+      "Video of the unit plugged in and cooling."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model number is unreadable and the interior condition is completely hidden. These details are necessary to distinguish between different Sharp inverter models and verify the seller's capacity claim."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 14484,
+    "input_tokens": 2401,
+    "output_tokens": 2792,
+    "cost_usd": 0.009576,
+    "replayed": false,
+    "fixture_key": "e7fd0a01b39b74909e19c90153e39600",
+    "error": null
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Black boxy thermal receipt printer with a top paper exit slot",
+      "White label on the top left corner, text is illegible",
+      "Faint \"HIPHEN SOLUTIONS\" watermark visible across the front of photo 0",
+      "No readable model number, serial number, or interface ports visible",
+      "No power adapter, cable, or paper roll shown in the photo"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "thermal receipt printer",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "80mm thermal receipt printer by Hiphen Solutions",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows a receipt printer but no readable brand label; paper width cannot be confirmed from the image"
+      },
+      {
+        "claim": "high speed",
+        "verdict": "unverifiable_remote",
+        "evidence": "Print speed cannot be tested or confirmed from a still photo"
+      },
+      {
+        "claim": "print command esc/pos",
+        "verdict": "unverifiable_remote",
+        "evidence": "Protocol compatibility cannot be verified from a photo"
+      },
+      {
+        "claim": "restaurant use",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo shows the device only, not the usage environment"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Printer may not power on or print at all",
+        "proof": "Video of the unit powering on and printing a test receipt",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Paper width may not be 80mm",
+        "proof": "Close-up of the label or a photo showing an installed paper roll with width marked",
+        "if_unproven": "as unknown-width printer"
+      },
+      {
+        "risk": "ESC/POS compatibility unconfirmed",
+        "proof": "Screenshot or photo of a self-test page showing ESC/POS support",
+        "if_unproven": "as non-ESC/POS"
+      },
+      {
+        "risk": "Missing power adapter, interface cable, or paper roll",
+        "proof": "Photo showing all accessories included with the unit",
+        "if_unproven": "as unit only"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the top label to read brand and model",
+      "Video of the printer powering on and printing a receipt",
+      "Photo of the power adapter, cable, and any paper roll included"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a thermal receipt printer from photo 0; because all functional claims are unproven, it is priced at its worst case as a non-working unit."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 12795,
+    "input_tokens": 1605,
+    "output_tokens": 2122,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "e590f733ec799ef6113ace60848cd59e",
+    "error": null
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo shows a cluttered workshop/yard scene with multiple used automotive metal components",
+      "Foreground object appears to be a transmission or gearbox assembly, heavily oxidized/dirty",
+      "Additional similar metal parts (possibly another transmission or engine block) visible in background",
+      "No brand name, part number, or VIN tag legible on any component",
+      "A watermark reading 'POST... UZION LINKS AUTOS' is visible on the image, likely a reseller watermark not tied to the part itself",
+      "Ground and parts show heavy grease/oil staining consistent with a used-parts yard"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used car transmission/gearbox assembly (exact vehicle fitment unknown)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Also deals on all kinds of car spare parts",
+        "verdict": "unverifiable_remote",
+        "evidence": "General business claim about seller's inventory, not specific to the item in photo 0; no way to confirm scope of stock remotely"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Unknown vehicle make/model fitment for the transmission, which drives price heavily",
+        "proof": "Close-up photo of any casting number, part number tag, or VIN sticker on the unit",
+        "if_unproven": "priced as generic/unidentified used transmission, lowest tier until fitment confirmed"
+      },
+      {
+        "risk": "Unknown working condition (shifts, no internal damage, fluid not burnt)",
+        "proof": "Video of unit being tested on a bench rig or in a running vehicle, or at least a compression/shift test clip",
+        "if_unproven": "priced as not working / for parts only"
+      },
+      {
+        "risk": "Corrosion/rust visible may indicate long outdoor storage affecting seals and internals",
+        "proof": "Close-up photos of seals, input/output shafts, and mounting bolts for rust extent",
+        "if_unproven": "priced assuming seals degraded, needs reseal"
+      },
+      {
+        "risk": "Mismatched or incomplete unit (missing sensors, bolts, torque converter)",
+        "proof": "Full 360-degree photos showing all connectors, sensors, and mounting points",
+        "if_unproven": "priced as incomplete core unit"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of any part/casting number or tag on the transmission housing",
+      "Video showing the unit (preferably installed/running) shifting through gears",
+      "Full photo set from multiple angles showing connectors, sensors, and completeness",
+      "Confirmation of which vehicle make/model/year this transmission was pulled from"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is a used transmission/gearbox but no part number, vehicle fitment, or working condition can be read from the single photo, so even a worst-case price requires knowing the fitment first."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 14500,
+    "input_tokens": 1987,
+    "output_tokens": 1137,
+    "cost_usd": 0.012185,
+    "replayed": false,
+    "fixture_key": "7178efed31f59dc968653d653dd013a5",
+    "error": null
+  }
+}

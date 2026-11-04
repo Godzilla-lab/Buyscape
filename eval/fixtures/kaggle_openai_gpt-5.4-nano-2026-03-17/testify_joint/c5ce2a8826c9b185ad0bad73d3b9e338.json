@@ -1,0 +1,75 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0 shows a UPS with the text \u201cBLUE GATE\u201d on the front.",
+      "Photo 0 shows a front panel with a power button and indicator LEDs (no clear status shown).",
+      "Photo 1 shows the UPS from the side/front with a mains plug connected to the back.",
+      "Photo 1 does not show the battery compartment, model number label, or any runtime/load test."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": null,
+      "brand": "BLUE GATE",
+      "model": null,
+      "read_from": [
+        "photo 0 front panel text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "UPS available",
+        "verdict": "supported",
+        "evidence": "Photos 0 and 1 show a UPS unit."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Working status is unverified (no proof of output, battery backup time, or load test).",
+        "proof": "A short video showing the UPS switched on, then unplugging mains while powering a small load (e.g., a lamp/phone charger) and showing LEDs remain on.",
+        "if_unproven": "Price as not proven/assume faulty or not reliably working (worst case), matching the lowest faulty comparable."
+      },
+      {
+        "risk": "Battery health/charge capacity is unknown (common failure point for UPS).",
+        "proof": "A runtime test clip: fully charge, then unplug and show how long it runs before beeping/shutdown.",
+        "if_unproven": "Price as weak battery / unreliable runtime (worst case)."
+      },
+      {
+        "risk": "No clear model/specs (battery voltage/capacity) visible; could affect value.",
+        "proof": "Photo of the label/sticker on the back/bottom showing model number and battery specs.",
+        "if_unproven": "Price at the lowest comparable for faulty units due to missing specs."
+      },
+      {
+        "risk": "Accessories/cables/charger components not shown (only mains plug visible).",
+        "proof": "Photo of everything included: power cable, any manual, and any missing parts list.",
+        "if_unproven": "Price as incomplete/unknown inclusions (worst case)."
+      }
+    ],
+    "proof_requests": [
+      "Video: UPS ON + unplug mains while powering a small load; show LEDs and that output continues.",
+      "Runtime test: fully charge first, then unplug and show minutes until shutdown/beep.",
+      "Clear photo of the UPS label/sticker (model number + battery specs).",
+      "Photo of what is included in the package (power cable, any accessories/manual)."
+    ],
+    "decision": "price",
+    "reason": "The photos clearly show a BLUE GATE UPS, but there is no verifiable evidence it works or how long it runs; so it must be priced at the worst case using the faulty comparables.",
+    "price_pick": {
+      "low": 5,
+      "high": 8
+    }
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_joint",
+    "latency_ms": 5262,
+    "input_tokens": 3369,
+    "output_tokens": 672,
+    "cost_usd": 0.001514,
+    "replayed": false,
+    "fixture_key": "c5ce2a8826c9b185ad0bad73d3b9e338",
+    "error": null
+  }
+}

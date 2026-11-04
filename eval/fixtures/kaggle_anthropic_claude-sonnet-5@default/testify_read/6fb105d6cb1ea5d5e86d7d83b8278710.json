@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows a single automotive headlight assembly, chrome/silver housing with clear lens and projector-style bulb area.",
+      "A faint watermark reading 'BENZ' appears in the lower portion of the image, likely a seller or shop stamp, not a manufacturer plate on the part itself.",
+      "Background shows other unidentified metal/plastic parts on a dirty floor, suggesting a used parts yard.",
+      "Only one headlight unit is visible, though the seller's text claims a 'set' (implying a pair).",
+      "No visible part number, OEM sticker, or connector detail that would confirm make/model fitment.",
+      "Lens appears intact with no visible cracks, but overall surface clarity and any yellowing/fogging are hard to judge from this single angle."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "car headlight assembly (seller claims fitment for Mercedes-Benz GLK 2012)",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "GLK 2012 set of non charger head light",
+        "verdict": "unverifiable_remote",
+        "evidence": "No part number, OEM tag, or connector visible in photo 0 to confirm GLK fitment or year."
+      },
+      {
+        "claim": "Set (pair) of headlights",
+        "verdict": "contradicted",
+        "evidence": "Only one headlight unit is visible in photo 0."
+      },
+      {
+        "claim": "Non charger (implying no ballast/HID electronics issue, or possibly 'non-chargeable' battery-unrelated term)",
+        "verdict": "unverified",
+        "evidence": "No internal or connector view provided to confirm bulb type or electronic components."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Only one headlight may actually be for sale despite 'set' wording, affecting total value.",
+        "proof": "Photo showing both left and right headlights together, each clearly visible.",
+        "if_unproven": "priced as a single unit only"
+      },
+      {
+        "risk": "Fitment to a 2012 GLK cannot be confirmed without model/part number.",
+        "proof": "Close-up photo of the OEM sticker or part number usually found on the back or side of the housing.",
+        "if_unproven": "priced as generic unverified-fitment headlight, not confirmed GLK-specific"
+      },
+      {
+        "risk": "Lens clarity, cracks, or internal moisture damage not fully visible.",
+        "proof": "Multiple angle photos including the back, connector, and a lit-up test shot.",
+        "if_unproven": "priced as cosmetic-only, condition unverified"
+      },
+      {
+        "risk": "Functionality (bulb, wiring, adjuster mechanism) unknown.",
+        "proof": "Video clip of the headlight powered on and adjuster moving.",
+        "if_unproven": "priced as non-working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of both headlights together if sold as a set/pair.",
+      "Close-up of any part number or OEM sticker on the housing back.",
+      "Photo or video of the headlight powered on to confirm function.",
+      "Rear/connector view to assess wiring and bulb type."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller claims a 'set' and specific GLK 2012 fitment, but only a single headlight is shown with no part number or connector visible, so even a worst-case price cannot be set without confirming quantity and fitment."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 20479,
+    "input_tokens": 1919,
+    "output_tokens": 1783,
+    "cost_usd": 0.018509,
+    "replayed": false,
+    "fixture_key": "6fb105d6cb1ea5d5e86d7d83b8278710",
+    "error": null
+  }
+}

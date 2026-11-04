@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail box for a Maxmech Electric Drill.",
+      "Model ED 1100-16M is printed on the box.",
+      "Box specifications: 1100W, 1000r/min, 16mm chuck capacity.",
+      "The actual drill is not visible, only a graphic on the packaging.",
+      "A watermark for 'EMMATECH TECHNOLOGY' on Jiji is visible."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "electric drill",
+      "brand": "MAXMECH",
+      "model": "ED 1100-16M",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "It is electric drill machine",
+        "verdict": "supported",
+        "evidence": "photo 0 box text and illustration"
+      },
+      {
+        "claim": "Original",
+        "verdict": "unverifiable_remote",
+        "evidence": "Text on box cannot be verified as authentic remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, inferior item.",
+        "proof": "Photo of the actual drill outside of the box.",
+        "if_unproven": "priced as missing"
+      },
+      {
+        "risk": "The drill may be used, refurbished, or physically damaged.",
+        "proof": "Close-up photos of the drill body, chuck, and power cord.",
+        "if_unproven": "priced as heavily used"
+      },
+      {
+        "risk": "The motor or trigger mechanism may be faulty.",
+        "proof": "Video of the drill plugged in and running through its speed range.",
+        "if_unproven": "priced as not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual drill outside the box.",
+      "Video of the drill powered on and rotating.",
+      "Photo of the manufacturer's plate on the drill itself to confirm model and specs."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the packaging is shown. I cannot verify the existence, condition, or authenticity of the actual tool without seeing it."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 7254,
+    "input_tokens": 2373,
+    "output_tokens": 1439,
+    "cost_usd": 0.005503,
+    "replayed": false,
+    "fixture_key": "21d9376fd6eb55c0df228a930c594e6d",
+    "error": null
+  }
+}

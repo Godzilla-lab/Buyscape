@@ -1,0 +1,80 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Silver HP laptop lid with HP logo. A small white sticker on the top left corner reads 'HP 840 G8 i5 11th gen 8/256GB'.",
+      "Photo 1: Open laptop showing keyboard, trackpad, and screen. 'ELITEBOOK' is visible on the palm rest. Keyboard is black with white lettering. Screen is off, reflecting the keyboard. Stickers for Intel Core and Windows are visible on the lower right of the palm rest.",
+      "Photo 2: Bottom of the laptop, silver, with a vent and regulatory labels. No visible model number or serial number is readable. A small black sticker is present near the center."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "EliteBook 840 G8",
+      "read_from": [
+        "photo 0 sticker",
+        "photo 1 palm rest text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP EliteBook 840 G8",
+        "verdict": "supported",
+        "evidence": "Photo 0 sticker and photo 1 palm rest text both show 'HP 840 G8' and 'ELITEBOOK'."
+      },
+      {
+        "claim": "Core i5 11th Gen",
+        "verdict": "unverified",
+        "evidence": "Photo 1 shows an Intel sticker, but the generation is not readable. The sticker on photo 0 says 'i5 11th gen', but it is a small sticker and could be added by seller."
+      },
+      {
+        "claim": "8gb Ram",
+        "verdict": "unverified",
+        "evidence": "No visible RAM or system information. The sticker on photo 0 says '8/256GB', which may mean 8GB RAM, but cannot be confirmed from photos."
+      },
+      {
+        "claim": "256gb Rom SSD",
+        "verdict": "unverified",
+        "evidence": "No visible storage information. The sticker on photo 0 says '8/256GB', which may mean 256GB SSD, but cannot be confirmed from photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "RAM and SSD specifications may be incorrect or upgraded/downgraded",
+        "proof": "Photo of the BIOS screen or system information showing RAM and storage details, or a photo of the internal components with labels.",
+        "if_unproven": "priced as having unknown or lower specs, which reduces value"
+      },
+      {
+        "risk": "Laptop may not be functional or may have hidden damage (e.g., screen, battery, ports)",
+        "proof": "Video showing the laptop turning on, booting, and running basic functions, including checking battery health and all ports.",
+        "if_unproven": "priced as not working or with unknown functionality, which reduces value"
+      },
+      {
+        "risk": "Sticker on photo 0 may be fake or added by seller",
+        "proof": "Photo of the laptop's serial number or model label on the bottom or inside the lid, or a photo of the BIOS screen showing model and specs.",
+        "if_unproven": "priced as unverified model, which reduces value"
+      }
+    ],
+    "proof_requests": [
+      "Video of the laptop turning on and running, showing BIOS or system information with model, CPU, RAM, and storage details.",
+      "Photo of the serial number or model label on the bottom or inside the lid.",
+      "Photo of the internal components if possible, or confirmation of RAM and SSD specs."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identifiable from the sticker and palm rest text, but key specifications (CPU generation, RAM, SSD) are unverified. The sticker may be added by the seller. Hidden risks include incorrect specs and unknown functionality. Proof is needed to confirm specs and working condition before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 74765,
+    "input_tokens": 2794,
+    "output_tokens": 885,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "7d37c2180a6f7d3f47e99144ee324af4",
+    "error": null
+  }
+}

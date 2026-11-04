@@ -1,0 +1,105 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "agent:claude",
+  "response": {
+    "observations": [
+      "Photo 0: the back of a black DSLR camera body held in a hand; 'Canon' printed below the rear screen is readable.",
+      "Visible controls: mode dial with lock on the top left, power switch, viewfinder with rubber eyecup, START/STOP button with live view lever, AF-ON label, rear quick control dial, a column of buttons left of the screen.",
+      "The rear screen is off, so nothing shows the camera powering on, menus or shutter count.",
+      "The front of the camera, the model badge, the lens mount and any lens are not shown.",
+      "No battery, charger or lens is in the photo.",
+      "Photo has a 'NOKIA | ZEISS' phone camera stamp and a Jiji watermark; it is a single low resolution shot.",
+      "Body looks intact from the back with no obvious cracks; normal light wear cannot be judged at this resolution."
+    ],
+    "identity": {
+      "status": "unknown",
+      "kind": "Canon DSLR camera body",
+      "brand": "Canon",
+      "model": null,
+      "read_from": [
+        "photo 0 back, 'Canon' below the screen; model badge not shown"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "18MP APS-C CMOS sensor, 8 frames per second, 1080p HD video",
+        "verdict": "unverified",
+        "evidence": "These specs fit one Canon model, but the model badge on the front is not shown, so the model cannot be read off the camera."
+      },
+      {
+        "claim": "Shutter count under 5,000",
+        "verdict": "unverified",
+        "evidence": "No shutter count screenshot or EXIF readout shown."
+      },
+      {
+        "claim": "No fungus or scratch on the lens",
+        "verdict": "unverified",
+        "evidence": "No lens appears in the photo and it is unclear if one is included."
+      },
+      {
+        "claim": "Original battery and charger",
+        "verdict": "unverified",
+        "evidence": "Neither battery nor charger is shown."
+      },
+      {
+        "claim": "Never repaired",
+        "verdict": "unverifiable_remote",
+        "evidence": "Repair history cannot be shown by photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The model is not the one the specs describe; the model sets the price.",
+        "proof": "Photo of the front of the body showing the model badge, with a handwritten code and date in shot.",
+        "if_unproven": "held; not priced until the model is readable"
+      },
+      {
+        "risk": "Camera does not power on, shutter or autofocus faulty.",
+        "proof": "Clip of the camera switching on and taking several shots, with the code in shot.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "High shutter count shortening remaining shutter life.",
+        "proof": "Screenshot of a shutter count tool reading the camera's serial, or EXIF of a fresh photo.",
+        "if_unproven": "as high shutter count"
+      },
+      {
+        "risk": "No lens included, or lens has fungus or scratches.",
+        "proof": "Photo of the lens front and rear elements against light, and seller confirmation of what is included.",
+        "if_unproven": "as body only"
+      },
+      {
+        "risk": "Battery and charger missing or non-original.",
+        "proof": "Photo of the battery and charger with labels readable.",
+        "if_unproven": "as body without battery and charger"
+      },
+      {
+        "risk": "Stolen camera or mismatched serial.",
+        "proof": "Photo of the serial number under the body next to the code, matching the shutter count screenshot.",
+        "if_unproven": "treated as unproven ownership; agent checks serial on inspection"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the front of the camera with the model badge readable and a handwritten code and today's date in shot.",
+      "Clip of the camera powering on and taking shots, rear screen visible.",
+      "Shutter count screenshot tied to the body serial number.",
+      "Photo of the lens (front and rear glass), battery and charger, and a list of what is included.",
+      "Photo of the serial number plate under the body."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the brand Canon is readable on the back of the body; the model badge that sets the price is not shown, and the seller's specs alone are not proof of model. A front photo with the model badge would allow pricing as body only and not working until a power-on clip is shown."
+  },
+  "meta": {
+    "provider": "sitting",
+    "model": "agent:claude",
+    "task": "testify_read",
+    "latency_ms": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "cc938a04c18b86ab0e4a624dc934af62",
+    "error": null
+  }
+}

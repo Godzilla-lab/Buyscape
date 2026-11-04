@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Single photo shows one automotive headlight/headlamp assembly, still wrapped in clear plastic.",
+      "Lamp has a dark (smoked or black-trim) housing with an amber/yellow strip on one side, likely a turn-signal section.",
+      "A semi-transparent watermark reads 'HONDA AND ACURA' and 'POSTED ON JIJI' overlaid on the image.",
+      "Item sits on a rough concrete or stone surface, no packaging box, no part-number label, no vehicle tag visible.",
+      "No other angles, no part number plate, no engine or suspension part shown despite the seller's broad claim."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "car headlight/headlamp assembly",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 (watermark text only, not a part marking)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Body, engine and suspension parts for all models of Honda, Acura and Toyota cars and SUVs",
+        "verdict": "unverifiable_remote",
+        "evidence": "Only one headlight is shown; no engine or suspension parts, and no indication of which specific models it fits."
+      },
+      {
+        "claim": "Item is genuine Honda/Acura (implied by watermark text)",
+        "verdict": "unverified",
+        "evidence": "Watermark is seller-added text, not a manufacturer mark on the part itself; no OEM logo or part number visible in photo 0."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Unknown vehicle fitment (make/model/year) \u2014 critical for pricing a headlight",
+        "proof": "Clear photo of the part number sticker/label on the back of the headlight, or a photo showing it next to the vehicle it fits",
+        "if_unproven": "cannot be priced as a specific fitment; must be treated as unidentified generic part"
+      },
+      {
+        "risk": "Hidden lens cracks, fog, or moisture damage under plastic wrap",
+        "proof": "Unwrapped close-up photo of the lens and housing from multiple angles",
+        "if_unproven": "priced as damaged/non-mint condition"
+      },
+      {
+        "risk": "Aftermarket vs OEM authenticity",
+        "proof": "Photo of brand/manufacturer stamp or box with part number",
+        "if_unproven": "priced as aftermarket/unbranded"
+      },
+      {
+        "risk": "Missing wiring harness, bulbs, or mounting brackets",
+        "proof": "Photo showing the back of the unit with connectors and bulb sockets",
+        "if_unproven": "priced as incomplete (lamp only)"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the part number or OEM label on the back of the headlight",
+      "Unwrapped photos of the lens and housing from front, side, and back",
+      "Photo confirming which car model/year this specific headlight fits",
+      "Photos of any of the other claimed parts (engine, suspension) actually in stock"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The single photo shows only a wrapped headlight with no readable part number or vehicle fitment, which is the key fact that sets its price; a worst-case price cannot be assigned without knowing what it fits."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 20767,
+    "input_tokens": 2045,
+    "output_tokens": 1891,
+    "cost_usd": 0.019841,
+    "replayed": false,
+    "fixture_key": "6998c3df5f3e2c1283af493fb2eeddb6",
+    "error": null
+  }
+}

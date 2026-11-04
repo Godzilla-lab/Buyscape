@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black oval portable speaker with a silver handle; a small badge reads 'harman/kardon'.",
+      "Photo 1 shows the same speaker from a similar angle; the 'harman/kardon' badge is visible again.",
+      "Photo 2 shows a side profile of the speaker and handle; no text is visible.",
+      "The seller claims it is an 'Onyx Studio 8' in 'perfect condition, just like new'."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "portable Bluetooth speaker",
+      "brand": "harman/kardon",
+      "model": null,
+      "read_from": [
+        "photo 0 badge",
+        "photo 1 badge"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Onyx Studio 8",
+        "verdict": "unverified",
+        "evidence": "model number is not visible in any photo; only the harman/kardon brand badge can be read"
+      },
+      {
+        "claim": "Perfect condition, just like new",
+        "verdict": "unverifiable_remote",
+        "evidence": "photos show the exterior only; there is no power-on test or close-up of ports, buttons, or hidden wear"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "It may be a different Onyx Studio model (e.g., Studio 6 or 7) rather than Studio 8",
+        "proof": "clear photo of the model or serial label on the unit",
+        "if_unproven": "priced as a lower-tier Harman/Kardon Onyx Studio speaker"
+      },
+      {
+        "risk": "It may not power on, hold a charge, or connect via Bluetooth",
+        "proof": "video of the speaker powering on, pairing via Bluetooth, and playing audio",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Hidden cosmetic damage such as grille tears, handle cracks, or scuffs",
+        "proof": "close-up photos of all sides, the base, handle joints, and ports",
+        "if_unproven": "priced as heavily used with visible wear"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the model/serial label (usually on the bottom or back)",
+      "Video of the speaker powering on, connecting via Bluetooth, and playing sound",
+      "Close-up photos of the grille, handle, buttons, ports, and base"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The exact model is not readable in the photos, so the item cannot be identified with certainty even at a worst-case price; the seller's Onyx Studio 8 claim is unproven."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 49418,
+    "input_tokens": 2729,
+    "output_tokens": 3944,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "cd31c8c7ae6f169d74961dbce62e7a48",
+    "error": null
+  }
+}

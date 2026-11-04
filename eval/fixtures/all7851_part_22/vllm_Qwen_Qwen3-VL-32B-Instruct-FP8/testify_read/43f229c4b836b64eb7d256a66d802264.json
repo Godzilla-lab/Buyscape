@@ -1,0 +1,92 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Closed laptop with dark gray lid, HP Victus logo (V-shaped) visible, 'VICTUS' text near hinge, small white sticker on left hinge, wooden table background with decorative wall and flower pot.",
+      "Photo 1: Same closed laptop, slightly different angle, same details as photo 0, white sticker with handwritten text (partially legible: '13600H', 'RTX 4060', '16GB', '512GB') on left hinge.",
+      "Photo 2: Laptop open, showing blue Windows login screen with 'user' and 'Welcome' text, keyboard with 'VICTUS' logo on left side, trackpad, stickers on bottom right of keyboard: Intel Core i7 and NVIDIA GeForce RTX 4060 logos.",
+      "All photos have 'POSTED ON JIJI' and 'GIMLET INNOVATION' watermark."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "gaming laptop",
+      "brand": "HP",
+      "model": "Victus 16",
+      "read_from": [
+        "photo 0 lid: 'VICTUS' text near hinge",
+        "photo 2 keyboard: 'VICTUS' logo on left side"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP victus 16 gaming laptop",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 2 show 'VICTUS' branding on lid and keyboard, consistent with HP Victus 16 model."
+      },
+      {
+        "claim": "Core i7 13th generation",
+        "verdict": "unverified",
+        "evidence": "Photo 2 shows Intel Core i7 sticker, but no visible indication of 13th generation. Photo 1 sticker says '13600H', which is a 13th gen CPU, but this is handwritten and not official."
+      },
+      {
+        "claim": "512ssd 16gb Ram",
+        "verdict": "unverified",
+        "evidence": "Photo 1 sticker says '512GB' and '16GB', but this is handwritten and not official. No system info or disk management screenshot shown."
+      },
+      {
+        "claim": "8gb Dedicated Nvidia rtx 4060",
+        "verdict": "supported",
+        "evidence": "Photo 2 shows NVIDIA GeForce RTX 4060 sticker on keyboard. The '8GB' is not visible in photos, but RTX 4060 typically has 8GB VRAM, so this is likely accurate."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "CPU is not 13th generation (could be 12th or 14th)",
+        "proof": "System information screenshot showing CPU model (e.g., from Windows About or CPU-Z).",
+        "if_unproven": "Priced as if CPU is not 13th gen, which reduces value."
+      },
+      {
+        "risk": "RAM or SSD not as claimed (e.g., 16GB RAM could be 8GB+8GB, or SSD could be slower type)",
+        "proof": "System information screenshot showing RAM and SSD details (e.g., from Windows Disk Management or Task Manager).",
+        "if_unproven": "Priced as if RAM or SSD is not as claimed, which reduces value."
+      },
+      {
+        "risk": "Laptop has physical damage or wear not visible in photos (e.g., scratches, dents, hinge issues)",
+        "proof": "Close-up photos of all sides, hinges, ports, and screen edges.",
+        "if_unproven": "Priced as if in poor condition, which reduces value."
+      },
+      {
+        "risk": "Screen has dead pixels, burn-in, or backlight issues",
+        "proof": "Screen test video or photo showing full white and black screens.",
+        "if_unproven": "Priced as if screen has defects, which reduces value."
+      },
+      {
+        "risk": "Battery health is poor or not original",
+        "proof": "Battery information screenshot (e.g., from Windows Power Management or HWInfo).",
+        "if_unproven": "Priced as if battery is degraded, which reduces value."
+      }
+    ],
+    "proof_requests": [
+      "System information screenshot showing CPU model, RAM, and SSD details.",
+      "Screen test video or photo showing full white and black screens.",
+      "Battery information screenshot.",
+      "Close-up photos of all sides, hinges, ports, and screen edges."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The laptop is identifiable as an HP Victus 16, and some claims (like RTX 4060) are supported by visible stickers. However, critical claims like CPU generation, RAM, and SSD are based on handwritten notes and not verifiable from photos alone. Hidden risks like physical damage, screen issues, and battery health cannot be assessed remotely. Without proof, the item cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 92175,
+    "input_tokens": 2805,
+    "output_tokens": 1126,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "43f229c4b836b64eb7d256a66d802264",
+    "error": null
+  }
+}

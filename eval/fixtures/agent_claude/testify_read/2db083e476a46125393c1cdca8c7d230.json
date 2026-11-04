@@ -1,0 +1,85 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "agent:claude",
+  "response": {
+    "observations": [
+      "Photo 0: front of a black DSLR body with a body cap fitted and no lens; 'Canon', 'EOS 5D' and 'Mark II' are printed on the front.",
+      "Photo 1: back of the body with the rear LCD switched off, eyecup fitted, MENU, INFO, AF-ON buttons, quick control dial and ON/OFF switch; no visible cracks or heavy wear.",
+      "Photo 2: underside with a label reading 'Canon DS126201', 'DC 8.1V', 'Made in Japan' and a serial number 3761814763; the battery door is open and no battery is visible.",
+      "All three photos are clean studio shots on a white background with the dealer watermark 'CDICSON BUSINESS WORLD' and 'POSTED ON JIJI'.",
+      "No photo shows the camera powered on, a shutter count, a battery, a charger or a lens.",
+      "The seller's text is only a generic product description of the 5D Mark II, with no condition statement."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "full frame DSLR camera, body only",
+      "brand": "Canon",
+      "model": "EOS 5D Mark II",
+      "read_from": [
+        "photo 0 front badge 'Canon EOS 5D Mark II'",
+        "photo 2 base label 'DS126201' and serial"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "The Canon EOS 5D Mark II",
+        "verdict": "supported",
+        "evidence": "Photo 0 front badges and photo 2 base label DS126201 agree."
+      },
+      {
+        "claim": "Full frame DSLR with 21.1 megapixel sensor",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is the model's published specification; it cannot be checked from photos, but follows from the model shown."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Camera does not power on, shutter or sensor faulty",
+        "proof": "A clip of the camera switched on, taking a shot and showing the image on the rear screen",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "High shutter count near end of life",
+        "proof": "A screenshot of the shutter count read from a test image",
+        "if_unproven": "as high shutter count, worn"
+      },
+      {
+        "risk": "No battery or charger included",
+        "proof": "A photo of the battery fitted and the charger",
+        "if_unproven": "as body only, no battery or charger"
+      },
+      {
+        "risk": "Scratched or damaged sensor or mirror under the body cap",
+        "proof": "A photo with the body cap off showing the mirror box, and a test shot of a plain sky at small aperture",
+        "if_unproven": "as needing sensor cleaning or repair"
+      },
+      {
+        "risk": "Dealer stock photos rather than the actual unit offered",
+        "proof": "A photo of the camera beside a handwritten note with today's date and the seller's name, showing the base serial",
+        "if_unproven": "as condition unconfirmed, worst grade"
+      }
+    ],
+    "proof_requests": [
+      "A clip of the camera powered on, taking a shot and reviewing it on the screen",
+      "A shutter count screenshot",
+      "A photo of the actual unit with a handwritten dated note and the base serial visible",
+      "A photo of the mirror box with the body cap off",
+      "Photos of the battery and charger if included"
+    ],
+    "decision": "price",
+    "reason": "The model is read clearly from the front badges in photo 0 and the base label in photo 2, so it can be priced as a body only at its worst case, not proven working. A working clip, shutter count and battery and charger photos would raise it."
+  },
+  "meta": {
+    "provider": "sitting",
+    "model": "agent:claude",
+    "task": "testify_read",
+    "latency_ms": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "2db083e476a46125393c1cdca8c7d230",
+    "error": null
+  }
+}

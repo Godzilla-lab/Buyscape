@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a yellow plastic bottle with a black nozzle cap.",
+      "The label clearly reads 'LOCTITE AA 326' in large red and black text.",
+      "The label also shows 'CONT. NET. 50ML' at the bottom.",
+      "The label includes a QR code, a part number '25744', and manufacturing and expiry dates: 'MHT3856D982' and 'BY20260612'.",
+      "The Henkel logo is visible at the bottom right of the label.",
+      "The bottle appears full and undamaged, with no visible leaks or cracks."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "50ml bottle of Loctite AA 326 Structural Adhesive",
+      "brand": "Loctite",
+      "model": "AA 326",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "50ml bottle of Loctite AA 326 Structural Adhesive",
+        "verdict": "supported",
+        "evidence": "Photo 0 label clearly shows 'LOCTITE AA 326' and 'CONT. NET. 50ML'."
+      },
+      {
+        "claim": "It is a yellow, medium-viscosity adhesive",
+        "verdict": "unverified",
+        "evidence": "The bottle is yellow, but viscosity cannot be determined from the photo alone. The label mentions 'Fast Curing' but not viscosity."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The adhesive may be expired or near expiry",
+        "proof": "A clear close-up of the expiry date on the label (currently visible as 'BY20260612') to confirm it is not expired.",
+        "if_unproven": "Priced as expired or near expiry, which reduces value."
+      },
+      {
+        "risk": "The bottle may be tampered with or refilled",
+        "proof": "A close-up of the seal around the nozzle and the bottle cap to check for tampering or resealing.",
+        "if_unproven": "Priced as potentially tampered, which reduces value."
+      },
+      {
+        "risk": "The product may be counterfeit",
+        "proof": "A close-up of the QR code and the Henkel logo to verify authenticity, and scanning the QR code if possible.",
+        "if_unproven": "Priced as potentially counterfeit, which reduces value."
+      }
+    ],
+    "proof_requests": [
+      "Close-up of the expiry date to confirm it is not expired.",
+      "Close-up of the seal around the nozzle and cap to check for tampering.",
+      "Scan the QR code or provide a close-up of the Henkel logo and QR code for authenticity verification."
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identifiable as Loctite AA 326, 50ml, with visible branding and volume. While some claims (like viscosity) are unverified and risks (expiry, tampering, authenticity) exist, they are common to such products and can be priced at worst case. The item can be priced based on its identity and visible condition."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 61516,
+    "input_tokens": 1789,
+    "output_tokens": 726,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "061922920ada724282f09f93cae2c230",
+    "error": null
+  }
+}

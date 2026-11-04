@@ -1,0 +1,107 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: close-up of an engine bay/engine showing valve cover, wiring harness, serpentine belt, alternator; no visible model plate or engine code.",
+      "Photo 1: engine wrapped in plastic for shipping, intake manifold and throttle body visible, no legible code or VIN tag.",
+      "Photo 2: top engine cover with a hand-written/embossed 'V6' marking visible, but no specific engine code (e.g. 2GR, 1MZ) readable.",
+      "No AC compressor, turbo, or separate operator parts clearly visible or labeled in any photo.",
+      "No odometer, dipstick, startup video, or documentation (customs/import papers) visible in any photo.",
+      "Background shows a cluttered yard with other engines wrapped in plastic, consistent with a used-parts dealer, not a dedicated clean shop."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "Toyota V6 complete engine (claimed fit: Venza/Camry/Sienna/Highlander)",
+      "brand": "Toyota",
+      "model": null,
+      "read_from": [
+        "photo 2 top cover 'V6' marking"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Complete engine with compressor and all the operators",
+        "verdict": "unverified",
+        "evidence": "No compressor or distinct 'operator' parts (e.g. power steering pump, alternator set) clearly identifiable as a complete kit in any photo."
+      },
+      {
+        "claim": "Fits Toyota Venza, Camry, Sienna, Highlander",
+        "verdict": "unverifiable_remote",
+        "evidence": "No engine code visible to confirm which generation/variant of these models it matches; fitment varies by year."
+      },
+      {
+        "claim": "Tokunbo, direct from Belgium",
+        "verdict": "unverifiable_remote",
+        "evidence": "No shipping labels, customs tags, or documentation shown in any photo."
+      },
+      {
+        "claim": "Tested and working, no knock",
+        "verdict": "unverifiable_remote",
+        "evidence": "No startup video, compression test, or audio provided."
+      },
+      {
+        "claim": "Low mileage",
+        "verdict": "unverifiable_remote",
+        "evidence": "No odometer, service sticker, or mileage tag visible."
+      },
+      {
+        "claim": "Never opened",
+        "verdict": "unverifiable_remote",
+        "evidence": "No seal, bolt-torque marks, or factory marks shown to confirm it has not been disassembled."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine may not run or may knock despite claim",
+        "proof": "A clear video of the engine being started and idling, with audible sound.",
+        "if_unproven": "priced as not working / non-running"
+      },
+      {
+        "risk": "Exact engine code/displacement unknown, affecting correct model-year fitment",
+        "proof": "Close-up photo of the engine code/VIN stamp on the block (usually near bellhousing or front of block).",
+        "if_unproven": "priced as generic unverified Toyota V6 without confirmed fitment"
+      },
+      {
+        "risk": "'Complete with compressor and all operators' may be overstated; parts could be missing",
+        "proof": "Full-engine photo showing AC compressor, power steering pump, and alternator all attached and labeled.",
+        "if_unproven": "priced as incomplete (bare long block equivalent)"
+      },
+      {
+        "risk": "Mileage claim unverifiable, could be high-mileage unit",
+        "proof": "Photo of odometer or Belgian import paperwork showing mileage at time of removal.",
+        "if_unproven": "priced as high-mileage/unknown condition"
+      },
+      {
+        "risk": "Import origin claim (Belgium) unverifiable, could affect trust in condition story",
+        "proof": "Photo of shipping manifest, customs clearance, or container tag.",
+        "if_unproven": "priced without origin premium"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the engine code/stamp on the block (to confirm exact variant, e.g. 2GR-FE, 1MZ-FE, etc.).",
+      "Video of the engine running/idling with sound.",
+      "Photo showing the AC compressor, power steering pump, and alternator all mounted and intact.",
+      "Photo of any import/customs documentation or shipping tag confirming origin and mileage."
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a used Toyota V6 complete engine by type, but all seller claims (working condition, mileage, completeness, origin) are unverifiable from photos alone, so it must be priced at worst case as an unverified, possibly incomplete, non-running V6 unit.",
+    "price_pick": {
+      "low": 1,
+      "high": 6
+    }
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 32906,
+    "input_tokens": 5168,
+    "output_tokens": 3021,
+    "cost_usd": 0.036993,
+    "replayed": false,
+    "fixture_key": "6462496956ea78207688eb2e80aa44e2",
+    "error": null
+  }
+}

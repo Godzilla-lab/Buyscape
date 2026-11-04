@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows BIOS System Information: 64 GB DDR3 RAM at 1600 MHz, 4 active channels, 4 DIMMs populated on CPU1, 4 empty slots on CPU2, manufacture date 02/22/2014, ownership date 02/28/2014.",
+      "Photo 1 shows Processor 1 details: Intel Xeon E5-2670 v2 @ 2.50GHz, 10 cores, 30664 ID, 25600 kB L3 cache, HT supported, 64-bit technology.",
+      "Photo 2 shows the front of a Dell Precision T7610 tower with visible Dell logo, DVD drive, USB ports, and 'DELL PRECISION T7610' label on the side panel.",
+      "All photos have a watermark 'GIGAXYSAFE TECHNOLOGIES'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "Dell Precision T7610 workstation",
+      "brand": "Dell",
+      "model": "Precision T7610",
+      "read_from": [
+        "photo 2 side panel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "This Dell Precision T7610 Tower comes equipped with 2x E5-2670 v2 processors",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 and Photo 1 show only one processor (CPU1) is populated; CPU2 slots are empty. Photo 1 confirms Processor 1 is E5-2670 v2, but no evidence of a second CPU."
+      },
+      {
+        "claim": "runs at a speed...",
+        "verdict": "unverifiable_remote",
+        "evidence": "The seller's text is cut off; no specific speed is stated. Photo 1 shows 2.50GHz base clock, but actual speed depends on load and turbo, which cannot be verified remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Second CPU is not installed, despite seller's claim of 2x E5-2670 v2",
+        "proof": "Photo showing both CPU sockets populated with processors, or a BIOS screen confirming CPU2 is active.",
+        "if_unproven": "Priced as single-CPU system, which is significantly less valuable than dual-CPU."
+      },
+      {
+        "risk": "System may not be fully functional or may have hidden hardware issues (e.g., RAM, power supply, cooling)",
+        "proof": "Video or photo of the system powering on, running a diagnostic, or showing all components operational.",
+        "if_unproven": "Priced as non-working or with unknown functionality, which reduces value."
+      },
+      {
+        "risk": "Missing or non-functional storage drives (SATA/SAS slots are empty in BIOS)",
+        "proof": "Photo or video showing installed hard drives or SSDs, or confirmation of storage capacity and health.",
+        "if_unproven": "Priced as having no storage, which is a major functional limitation."
+      }
+    ],
+    "proof_requests": [
+      "Photo or video showing the second CPU installed and recognized in BIOS.",
+      "Photo or video of the system powering on and booting into an OS.",
+      "Photo or video showing installed storage drives (HDD/SSD) and their capacity.",
+      "Photo of the rear panel showing all ports and connections."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller claims a dual-CPU system, but photos show only one CPU installed. Without proof of the second CPU and system functionality, the item cannot be priced accurately. The current evidence supports a single-CPU configuration, which is a major price determinant."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 67980,
+    "input_tokens": 2797,
+    "output_tokens": 842,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "0501f085f95240ae220147deb7aedb6a",
+    "error": null
+  }
+}

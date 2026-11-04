@@ -1,0 +1,108 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a silver laptop open with the Apple logo on the screen during boot, black keyboard, large trackpad, resting inside a white box.",
+      "Photo 1 shows a closed white box with \"MacBook Pro\" printed on the front and an image of a laptop on the lid.",
+      "Photo 2 shows the closed silver laptop with an Apple logo on the lid inside the same white box; a handwritten green sticker on the lid partially lists specs including what appears to be \"MacBook Pro M3\", \"512GB\", \"18GB\", and \"Battery Health: 82%\".",
+      "All photos carry the watermark \"POSTED ON JIJI MICHAEL BANKY3W\"."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "MacBook Pro laptop",
+      "brand": "Apple",
+      "model": "MacBook Pro",
+      "read_from": [
+        "photo 1 box",
+        "photo 2 lid"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Macbook pro 2023 m3 pro",
+        "verdict": "unverified",
+        "evidence": "Photo 1 box reads MacBook Pro; 2023 and M3 Pro are not readable from any photo."
+      },
+      {
+        "claim": "apple m3 pro chip",
+        "verdict": "unverified",
+        "evidence": "Not readable from any photo."
+      },
+      {
+        "claim": "18gb lpddr5 ram",
+        "verdict": "unverified",
+        "evidence": "Not readable from any photo."
+      },
+      {
+        "claim": "512gb ssd",
+        "verdict": "unverified",
+        "evidence": "Sticker in photo 2 may show 512GB but is blurry and not legible enough to confirm."
+      },
+      {
+        "claim": "touch id",
+        "verdict": "unverified",
+        "evidence": "Touch ID sensor is not clearly visible in any photo."
+      },
+      {
+        "claim": "cc: 82",
+        "verdict": "unverified",
+        "evidence": "Sticker in photo 2 may show 82 but context is unclear."
+      },
+      {
+        "claim": "battery health:...",
+        "verdict": "unverifiable_remote",
+        "evidence": "Seller text is incomplete; photo sticker is not legible enough to confirm battery health."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery health is below claimed 82% or degraded.",
+        "proof": "Screenshot of macOS System Information > Power showing cycle count and battery health.",
+        "if_unproven": "as battery needing replacement."
+      },
+      {
+        "risk": "Chip, RAM, or SSD are lower than M3 Pro / 18GB / 512GB.",
+        "proof": "Screenshot of About This Mac showing processor, memory, and storage.",
+        "if_unproven": "as a lower-spec MacBook Pro."
+      },
+      {
+        "risk": "Device is iCloud locked, MDM enrolled, or has a firmware password.",
+        "proof": "Video of unlocking to desktop and signing out of Find My/iCloud.",
+        "if_unproven": "as locked or non-usable."
+      },
+      {
+        "risk": "Box contains a different laptop or is empty.",
+        "proof": "Video of opening the box and matching the laptop serial to the box.",
+        "if_unproven": "as box only or mismatched contents."
+      },
+      {
+        "risk": "Hidden physical damage to screen, keyboard, trackpad, or ports.",
+        "proof": "Close-up video of all exterior angles, keyboard, trackpad, and ports.",
+        "if_unproven": "as damaged."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of About This Mac showing chip, memory, and serial number.",
+      "Screenshot of battery health and cycle count.",
+      "Video booting to desktop with iCloud signed out.",
+      "Clear close-up of the green sticker text.",
+      "Video of unboxing and serial match."
+    ],
+    "decision": "price",
+    "reason": "The photos show an Apple MacBook Pro that boots to the logo, so a worst-case price for a used MacBook Pro that powers on can be set; unverified specs and battery are priced down until proven."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 152707,
+    "input_tokens": 2941,
+    "output_tokens": 5910,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "646df508bf8058c391c2bb47b37b16b4",
+    "error": null
+  }
+}

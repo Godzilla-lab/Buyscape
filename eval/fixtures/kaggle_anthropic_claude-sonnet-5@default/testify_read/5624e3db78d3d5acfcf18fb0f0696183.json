@@ -1,0 +1,80 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Single photo shows a bare engine block sitting on the ground at what looks like an outdoor used-parts yard.",
+      "Other engines, wheel hubs, and scrap parts are visible in the background, consistent with a parts market.",
+      "No gearbox is visible attached to or beside the engine in this photo.",
+      "No engine code, VIN plate, or identification tag is legible in the image.",
+      "No visible fluid leaks, cracks, or corrosion can be judged clearly due to dirt and lighting."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "car engine (claimed Honda Accord 2004 engine and gearbox)",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Honda Accord 2004 engine",
+        "verdict": "unverifiable_remote",
+        "evidence": "No VIN, plate, or engine code visible in photo 0 to confirm make/model/year."
+      },
+      {
+        "claim": "KA24 engine code",
+        "verdict": "contradicted",
+        "evidence": "KA24 is a Nissan engine family designation, not used in Honda Accord engines; this naming is internally inconsistent with the Honda Accord claim."
+      },
+      {
+        "claim": "Includes gearbox",
+        "verdict": "unverified",
+        "evidence": "No gearbox is visible in photo 0; only the engine block is shown."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine may not run or may have internal damage (compression, timing, bearings).",
+        "proof": "Video clip of the engine being started and running, with sound.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Mismatch between claimed Honda Accord fitment and KA24 (Nissan) code suggests wrong or mislabeled part, risking non-fitment.",
+        "proof": "Clear photo of the engine ID tag/stamped code and chassis plate from the donor car.",
+        "if_unproven": "priced as unverified fitment, treated as generic/unmatched engine risk"
+      },
+      {
+        "risk": "Gearbox condition and presence unconfirmed.",
+        "proof": "Separate photo of the gearbox with visible casing and any stamped codes.",
+        "if_unproven": "priced as engine-only, gearbox excluded"
+      },
+      {
+        "risk": "Engine could be incomplete (missing sensors, wiring harness, alternator, etc.) despite being sold as a full unit.",
+        "proof": "Multiple angle photos showing complete wiring harness, sensors, and accessories attached.",
+        "if_unproven": "priced as partial/stripped unit"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the engine's stamped code or ID plate to resolve the Honda vs KA24 (Nissan) naming conflict.",
+      "Photo of the actual gearbox being sold, separate from the engine.",
+      "Video of the engine running to confirm it is not dead/non-functional.",
+      "Wide photo showing the full engine with all accessories (alternator, starter, intake, wiring) attached."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller's own description is internally inconsistent (Honda Accord paired with a Nissan KA24 code), and the single photo shows no identifying plate or code, so even a worst-case price cannot be safely anchored to the claimed identity without a clearer ID shot."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 22875,
+    "input_tokens": 1923,
+    "output_tokens": 2103,
+    "cost_usd": 0.021717,
+    "replayed": false,
+    "fixture_key": "5624e3db78d3d5acfcf18fb0f0696183",
+    "error": null
+  }
+}

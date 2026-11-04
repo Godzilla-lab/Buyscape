@@ -1,0 +1,112 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Open laptop showing Windows 11 desktop, Dell logo below screen, AMD A9 sticker on palm rest, keyboard and trackpad visible, screen bezel wide, webcam centered above screen.",
+      "Photo 1: Closed laptop lid with Dell logo, stacked on other laptops, textured black finish, side ports partially visible.",
+      "Photo 2: Same as photo 0, identical angle and content, likely duplicate.",
+      "All photos show a watermark 'NICKMARK ENTERPRISE' and 'POSTED ON JIJI'.",
+      "No visible model number or serial plate in any photo.",
+      "Screen displays Windows 11 default wallpaper, taskbar visible, no signs of damage on screen.",
+      "Keyboard appears intact, no visible liquid damage or missing keys.",
+      "AMD A9 sticker present, but no indication of generation or exact model.",
+      "No photos of ports, battery, or underside."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "laptop",
+      "brand": "Dell",
+      "model": null,
+      "read_from": [
+        "photo 0 screen bezel",
+        "photo 1 lid"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Dell Inspiron 3595",
+        "verdict": "unverified",
+        "evidence": "No model number visible in any photo; brand is confirmed as Dell, but model cannot be read."
+      },
+      {
+        "claim": "AMD A9 7th Gen",
+        "verdict": "unverified",
+        "evidence": "AMD A9 sticker visible in photo 0 and 2, but no indication of generation; 7th Gen is not verifiable from photos."
+      },
+      {
+        "claim": "4GB RAM",
+        "verdict": "unverifiable_remote",
+        "evidence": "No system information visible; RAM cannot be confirmed from photos alone."
+      },
+      {
+        "claim": "128GB SSD",
+        "verdict": "unverifiable_remote",
+        "evidence": "No disk management or system info visible; storage type and size cannot be confirmed remotely."
+      },
+      {
+        "claim": "Windows 11",
+        "verdict": "supported",
+        "evidence": "Photo 0 and 2 show Windows 11 default wallpaper and taskbar, confirming OS."
+      },
+      {
+        "claim": "15.6inch",
+        "verdict": "unverified",
+        "evidence": "Screen size not readable; no scale or reference object; common size for this model, but not confirmed."
+      },
+      {
+        "claim": "Processor 3.1ghz",
+        "verdict": "unverifiable_remote",
+        "evidence": "No system specs visible; clock speed cannot be confirmed from photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Incorrect model or generation (e.g., not Inspiron 3595 or not 7th Gen A9)",
+        "proof": "Photo of the model label or serial plate, typically on the bottom or inside the lid.",
+        "if_unproven": "Priced as a generic Dell laptop with AMD A9, not as a specific model, which may reduce value."
+      },
+      {
+        "risk": "RAM is less than 4GB or not 4GB (e.g., 2GB or 8GB)",
+        "proof": "Screenshot of system properties or task manager showing RAM amount.",
+        "if_unproven": "Priced as if RAM is 4GB, but if less, value drops significantly."
+      },
+      {
+        "risk": "Storage is not 128GB SSD (e.g., HDD or smaller SSD)",
+        "proof": "Screenshot of Disk Management or system info showing storage type and size.",
+        "if_unproven": "Priced as if 128GB SSD, but if HDD or smaller, value drops."
+      },
+      {
+        "risk": "Battery health is poor or not working",
+        "proof": "Video showing battery charge cycle or battery health check in Windows.",
+        "if_unproven": "Priced assuming battery is functional, but if dead or degraded, value drops."
+      },
+      {
+        "risk": "Hidden physical damage (e.g., cracked screen, liquid damage, bent chassis)",
+        "proof": "Close-up photos of screen edges, keyboard, ports, and underside.",
+        "if_unproven": "Priced assuming no hidden damage, but if present, value drops."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the model label or serial plate (usually on the bottom of the laptop).",
+      "Screenshot of system properties showing RAM, processor, and storage details.",
+      "Close-up photos of the underside, ports, and screen edges.",
+      "Video showing battery health or charge cycle."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and key specs (RAM, storage, processor generation) cannot be confirmed from the photos. Without proof of these, the item cannot be accurately priced. The photos show a Dell laptop with Windows 11 and an AMD A9 sticker, but critical details are missing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 95616,
+    "input_tokens": 2810,
+    "output_tokens": 1137,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "6b65ac5c8745573d16b54667be26c688",
+    "error": null
+  }
+}

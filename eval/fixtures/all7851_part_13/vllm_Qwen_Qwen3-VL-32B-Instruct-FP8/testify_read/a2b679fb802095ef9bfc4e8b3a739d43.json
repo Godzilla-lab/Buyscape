@@ -1,0 +1,99 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a closed silver laptop with an HP logo on the lid, placed on a wooden desk. A red sticker with handwritten text is visible on the top right corner of the lid. The background includes a salon-style chair and a yellow stool.",
+      "Photo 1 shows the same laptop open, displaying a black screen. The keyboard is visible with black keys and a silver frame. The HP logo is centered below the screen. The word 'ELITEBOOK' is visible on the lower left of the keyboard deck. A sticker with Intel and Windows logos is on the lower right of the palm rest.",
+      "The laptop appears to be in used condition with minor scuffs and smudges on the lid and palm rest.",
+      "No ports, hinges, or underside are visible in either photo.",
+      "The seller's text claims it is an HP EliteBook 840 G5 with Core i5, 256GB SSD, 8GB RAM, and a backlit keyboard."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "EliteBook 840 G5",
+      "read_from": [
+        "photo 1 keyboard deck: 'ELITEBOOK'",
+        "photo 1 screen bezel: 'hp' logo",
+        "photo 0 lid: 'hp' logo"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP EliteBook 840 G5",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows 'ELITEBOOK' on the keyboard deck and HP logo on the screen bezel; photo 0 shows HP logo on lid. The model name is consistent with the visible branding."
+      },
+      {
+        "claim": "core i5",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible CPU label or system information. The Intel sticker on photo 1 does not specify the processor model."
+      },
+      {
+        "claim": "256SSD",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible drive or system information. The SSD capacity cannot be confirmed from photos."
+      },
+      {
+        "claim": "8GB RAM",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible RAM or system information. RAM size cannot be confirmed from photos."
+      },
+      {
+        "claim": "keyboard light",
+        "verdict": "unverified",
+        "evidence": "Photo 1 shows the keyboard in ambient light; no backlight is visible. No photo shows the keyboard illuminated. The claim cannot be confirmed."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The laptop may not have the claimed Core i5 processor",
+        "proof": "A photo of the BIOS screen or system information showing the CPU model, or a screenshot from Windows System Properties.",
+        "if_unproven": "Priced as if it has a lower-end processor, which reduces value."
+      },
+      {
+        "risk": "The SSD may not be 256GB or may be faulty",
+        "proof": "A photo of the drive label or a screenshot from Disk Management showing the drive size and health.",
+        "if_unproven": "Priced as if it has a smaller or non-functional drive, reducing value."
+      },
+      {
+        "risk": "The RAM may not be 8GB or may be faulty",
+        "proof": "A photo of the RAM sticks or a screenshot from System Properties showing installed RAM.",
+        "if_unproven": "Priced as if it has less RAM or is not working, reducing value."
+      },
+      {
+        "risk": "The keyboard backlight may not work",
+        "proof": "A photo or video showing the keyboard illuminated in a dark environment.",
+        "if_unproven": "Priced as if the keyboard has no backlight, reducing value."
+      },
+      {
+        "risk": "The laptop may have physical damage or non-functional ports",
+        "proof": "Photos of the laptop's underside, hinges, ports, and screen edges to check for damage or wear.",
+        "if_unproven": "Priced as if it has hidden damage, reducing value."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the BIOS screen or Windows System Properties showing CPU, RAM, and drive details.",
+      "Photo or video of the keyboard with backlight turned on.",
+      "Photos of the laptop's underside, ports, and hinges.",
+      "Photo of the drive label or Disk Management screenshot showing SSD size and health."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identifiable as HP EliteBook 840 G5, but key specifications (CPU, RAM, SSD) and the keyboard backlight cannot be verified from the current photos. Hidden risks related to hardware authenticity and condition affect pricing. Proof is needed to confirm claims and assess true value."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 72548,
+    "input_tokens": 2289,
+    "output_tokens": 1077,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "a2b679fb802095ef9bfc4e8b3a739d43",
+    "error": null
+  }
+}

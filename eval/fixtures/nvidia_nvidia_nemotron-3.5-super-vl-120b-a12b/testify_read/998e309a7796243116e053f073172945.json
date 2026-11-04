@@ -1,0 +1,92 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black LG-branded LCD monitor with a thick bezel, screen off, sitting on a round metal tray.",
+      "A black dusty desktop keyboard sits in front of the monitor on a stand.",
+      "No remote control is visible anywhere in the photo.",
+      "The monitor model number is not legible; only the LG logo at the bottom center is clear.",
+      "The background shows a plastic chair and tiled floor."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "desktop monitor and keyboard",
+      "brand": "LG",
+      "model": null,
+      "read_from": [
+        "photo 0 monitor logo"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Scrap LG monitor and keyboard",
+        "verdict": "supported",
+        "evidence": "photo 0 shows an LG monitor and keyboard"
+      },
+      {
+        "claim": "No dead pixel, no line on the screen",
+        "verdict": "unverified",
+        "evidence": "screen is off in photo 0"
+      },
+      {
+        "claim": "remote included",
+        "verdict": "contradicted",
+        "evidence": "no remote visible in photo 0"
+      },
+      {
+        "claim": "Never repaired",
+        "verdict": "unverifiable_remote",
+        "evidence": "cannot be determined from photos"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Monitor screen may have dead pixels, lines, or backlight failure despite seller claim.",
+        "proof": "video of monitor powered on showing full white, black, and gray test screens",
+        "if_unproven": "screen not working"
+      },
+      {
+        "risk": "Monitor may not power on at all.",
+        "proof": "photo or video of monitor turned on with power LED and OSD visible",
+        "if_unproven": "monitor not working"
+      },
+      {
+        "risk": "Keyboard may have dead keys or liquid damage.",
+        "proof": "video of each key being pressed or close-up of key switches",
+        "if_unproven": "keyboard not working"
+      },
+      {
+        "risk": "No remote is actually included.",
+        "proof": "photo of the remote control",
+        "if_unproven": "sold without remote"
+      },
+      {
+        "risk": "Case or stand may be cracked or broken given 'scrap' condition.",
+        "proof": "close-up photos of monitor casing, stand, and keyboard underside",
+        "if_unproven": "heavy wear / scrap condition"
+      }
+    ],
+    "proof_requests": [
+      "Video of the monitor turned on displaying a white screen to check for dead pixels and lines",
+      "Photo of the remote control if included",
+      "Close-up of the monitor model label on the back",
+      "Video of the keyboard being tested"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as an LG desktop monitor and keyboard from photo 0; condition claims are unproven, so it is priced at worst case as non-working scrap."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 28071,
+    "input_tokens": 2167,
+    "output_tokens": 2729,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "998e309a7796243116e053f073172945",
+    "error": null
+  }
+}

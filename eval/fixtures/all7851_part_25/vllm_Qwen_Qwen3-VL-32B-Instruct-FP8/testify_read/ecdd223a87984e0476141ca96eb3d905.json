@@ -1,0 +1,107 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Black laptop open on artificial grass, screen on showing a document or settings page. Keyboard visible, trackpad present. Right side ports visible: USB-A, HDMI, and possibly a USB-C. Watermark 'EXTRANET GLOBAL' across image.",
+      "Photo 1: Same laptop, screen showing Windows 'System > About' page. Dell logo visible below screen. Text on screen includes 'Device name: DELL-7330', 'Processor: Intel(R) Core(TM) i7-1265U', 'Installed RAM: 16.0 GB', 'System type: 64-bit Operating System, x64-based processor'. Screen is bright, keyboard and trackpad visible. Watermark present.",
+      "Photo 2: Laptop from a different angle, held by a hand, showing silver chassis. Screen displays same 'System > About' page. Dell logo visible below screen. Keyboard layout appears to be QWERTY with standard keys. Watermark present."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Dell",
+      "model": "Latitude 7330",
+      "read_from": [
+        "photo 1 screen: 'Device name: DELL-7330'",
+        "photo 2 screen: 'Device name: DELL-7330'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Dell latitude 7330 12th gen",
+        "verdict": "supported",
+        "evidence": "Photo 1 and photo 2 show 'Device name: DELL-7330' on the Windows 'About' screen, and the processor is Intel i7-1265U, which is 12th gen."
+      },
+      {
+        "claim": "Intel i7-1265u",
+        "verdict": "supported",
+        "evidence": "Photo 1 and photo 2 clearly show 'Processor: Intel(R) Core(TM) i7-1265U' on the screen."
+      },
+      {
+        "claim": "16gig ram",
+        "verdict": "supported",
+        "evidence": "Photo 1 and photo 2 show 'Installed RAM: 16.0 GB'."
+      },
+      {
+        "claim": "512gig ssd",
+        "verdict": "unverified",
+        "evidence": "The 'About' screen in photo 1 and photo 2 does not show storage capacity. No other photo shows the drive or its size. The seller claims 512GB SSD, but it is not visible in the photos."
+      },
+      {
+        "claim": "Keyboard lite",
+        "verdict": "unverified",
+        "evidence": "The term 'Keyboard lite' is not defined by the seller. The keyboard appears standard in photos 0, 1, and 2. No visual evidence confirms or denies a 'lite' version."
+      },
+      {
+        "claim": "Touch screen",
+        "verdict": "unverified",
+        "evidence": "The screen is on and displaying content, but there is no visible interaction (e.g., finger touch) or on-screen indicator (like a touch cursor) to confirm it is a touch screen. The 'About' screen does not list touch capability."
+      },
+      {
+        "claim": "Face...",
+        "verdict": "unverifiable_remote",
+        "evidence": "The claim is incomplete. It likely refers to facial recognition (Windows Hello), but there is no visible IR camera or confirmation in the photos. The 'About' screen does not list this feature."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Storage capacity is not confirmed; seller claims 512GB SSD but it is not visible in the photos.",
+        "proof": "Photo of the 'This PC' or 'Disk Management' window showing the drive size, or a photo of the SSD label if removed.",
+        "if_unproven": "Priced as having unknown storage, which could be less than 512GB, reducing value."
+      },
+      {
+        "risk": "Touch screen functionality is not proven; the screen may not be touch-enabled.",
+        "proof": "Video or photo showing a finger interacting with the screen (e.g., swiping, tapping) or a screenshot of the 'Display' settings showing 'Touch' enabled.",
+        "if_unproven": "Priced as non-touch screen, which reduces value for buyers expecting touch functionality."
+      },
+      {
+        "risk": "Facial recognition (Windows Hello) is not confirmed; the IR camera may be missing or non-functional.",
+        "proof": "Photo showing the IR camera above the screen, or a video demonstrating facial login.",
+        "if_unproven": "Priced as lacking facial recognition, reducing value for buyers who need this feature."
+      },
+      {
+        "risk": "Battery health and condition are unknown; the laptop may have a degraded battery.",
+        "proof": "Photo of the battery health report (e.g., from Windows Power Management or third-party tool) or a video showing battery life during use.",
+        "if_unproven": "Priced assuming average or poor battery health, which reduces value."
+      },
+      {
+        "risk": "Physical damage or wear not visible in photos; scratches, dents, or hinge issues may exist.",
+        "proof": "Close-up photos of the chassis, hinges, screen bezel, and keyboard for signs of damage.",
+        "if_unproven": "Priced assuming minor wear, but hidden damage could reduce value."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the 'This PC' or 'Disk Management' window showing the SSD size.",
+      "Video or photo demonstrating touch screen functionality.",
+      "Photo or video showing facial recognition login or the IR camera.",
+      "Photo of the battery health report.",
+      "Close-up photos of the laptop's body, hinges, and keyboard for damage."
+    ],
+    "decision": "price",
+    "reason": "The model, processor, and RAM are confirmed from the 'About' screen. The item is identifiable as a Dell Latitude 7330. The unverified claims (SSD size, touch screen, facial recognition) and hidden risks (battery, physical damage) are noted, but the item can be priced at its worst case (e.g., non-touch, unknown SSD, no facial recognition, average battery) based on the visible evidence. The photos are sufficient to assign an identity and assess the worst-case value."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 111564,
+    "input_tokens": 2809,
+    "output_tokens": 1426,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "ecdd223a87984e0476141ca96eb3d905",
+    "error": null
+  }
+}

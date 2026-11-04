@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail packaging for a Mini DC UPS.",
+      "The box clearly displays the model number 'POE-432E'.",
+      "The box indicates a capacity of 10000mAh.",
+      "The seller's text identifies the model as 'POE-430P'.",
+      "The actual device is not visible; only the box is shown."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "Mini DC UPS",
+      "brand": null,
+      "model": "POE-432E",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "POE-430P",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows the model on the box is POE-432E."
+      },
+      {
+        "claim": "10000mAh",
+        "verdict": "supported",
+        "evidence": "Photo 0 box text."
+      },
+      {
+        "claim": "Reliable Power Backup Solution",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, lower-spec item.",
+        "proof": "A photo of the actual device outside of the box.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The internal lithium batteries may be degraded or non-functional.",
+        "proof": "A video showing the device powering a router or similar load while disconnected from mains power.",
+        "if_unproven": "as non-functional"
+      },
+      {
+        "risk": "The model mismatch (430P vs 432E) suggests the seller may not have the item pictured.",
+        "proof": "A photo of the device's rear specification label.",
+        "if_unproven": "as the lowest value generic equivalent"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual UPS device out of the box.",
+      "Photo of the specification label on the back of the device to confirm the model and capacity.",
+      "A video demonstrating the device holding a charge and powering a device."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "There is a direct contradiction between the seller's text (POE-430P) and the model shown on the box (POE-432E). Furthermore, the actual item is not visible, making it impossible to verify its condition or existence."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 12807,
+    "input_tokens": 2374,
+    "output_tokens": 2654,
+    "cost_usd": 0.009149,
+    "replayed": false,
+    "fixture_key": "c316f5a270d6dd76d944cb0b0c47c2f1",
+    "error": null
+  }
+}

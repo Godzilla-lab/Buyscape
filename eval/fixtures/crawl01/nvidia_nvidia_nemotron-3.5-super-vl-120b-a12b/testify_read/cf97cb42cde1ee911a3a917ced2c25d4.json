@@ -1,0 +1,113 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a white box with \"MacBook Pro\" printed on the lower front edge and a laptop image on the lid.",
+      "Photo 1 shows the same box from a slightly different angle.",
+      "Photo 2 shows a closed silver laptop with an Apple logo on the lid, sitting inside a white box.",
+      "All photos carry the watermark \"POSTED ON JIJI MICHAEL BANKY3W\".",
+      "No screen, keyboard, ports, serial number, or system information is visible."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "MacBook Pro laptop",
+      "brand": "Apple",
+      "model": "MacBook Pro",
+      "read_from": [
+        "photo 0 box text",
+        "photo 2 lid logo"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Macbook pro 2021 m1 pro",
+        "verdict": "unverified",
+        "evidence": "Photos show a MacBook Pro box and laptop, but not the year or chip."
+      },
+      {
+        "claim": "m1 pro chip",
+        "verdict": "unverified",
+        "evidence": "Internals not visible in any photo."
+      },
+      {
+        "claim": "16gb ram",
+        "verdict": "unverified",
+        "evidence": "Not visible in any photo."
+      },
+      {
+        "claim": "512gb ssd",
+        "verdict": "unverified",
+        "evidence": "Not visible in any photo."
+      },
+      {
+        "claim": "touch id",
+        "verdict": "unverified",
+        "evidence": "Laptop is closed in photo 2; keyboard area not shown."
+      },
+      {
+        "claim": "cc: 106",
+        "verdict": "unverified",
+        "evidence": "Cycle count requires a system software screenshot."
+      },
+      {
+        "claim": "bh: 94%",
+        "verdict": "unverified",
+        "evidence": "Battery health requires a system software screenshot."
+      },
+      {
+        "claim": "extremely neat",
+        "verdict": "supported",
+        "evidence": "Photo 2 shows a clean exterior lid."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The laptop may not be an M1 Pro model; it could be an older Intel or base M1 MacBook Pro.",
+        "proof": "Screenshot of macOS System Information showing chip and model year.",
+        "if_unproven": "as a lower-spec MacBook Pro"
+      },
+      {
+        "risk": "RAM and storage may be lower than 16GB/512GB.",
+        "proof": "Screenshot of macOS System Information showing memory and storage.",
+        "if_unproven": "as base configuration"
+      },
+      {
+        "risk": "Battery health and cycle count may be worse than claimed.",
+        "proof": "Screenshot of battery health/cycle count from System Report or coconutBattery.",
+        "if_unproven": "as worn or unknown battery"
+      },
+      {
+        "risk": "Touch ID may be absent or non-functional.",
+        "proof": "Close-up photo of the keyboard and Touch ID button.",
+        "if_unproven": "as a model without Touch ID"
+      },
+      {
+        "risk": "The unit may not power on or may have hidden faults.",
+        "proof": "Video of the laptop booting to the desktop and running.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of macOS System Information (chip, memory, storage, serial number).",
+      "Screenshot of battery health and cycle count.",
+      "Photo of the keyboard and Touch ID area.",
+      "Video of the laptop turning on and booting."
+    ],
+    "decision": "price",
+    "reason": "The item is visibly an Apple MacBook Pro in its box, but every performance and condition claim is unverifiable from photos, so it must be priced at worst case pending proof."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 47573,
+    "input_tokens": 2945,
+    "output_tokens": 6050,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "cf97cb42cde1ee911a3a917ced2c25d4",
+    "error": null
+  }
+}

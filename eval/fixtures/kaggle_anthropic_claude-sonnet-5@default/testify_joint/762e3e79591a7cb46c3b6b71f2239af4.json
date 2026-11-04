@@ -1,0 +1,83 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: single used tire, side profile, moderate tread depth, textured pattern, no sidewall text visible",
+      "Photo 1: close-up of tread face, brand/model markings obscured by watermark 'D-KACHI ENTERPRISE' and 'POSTED ON JIJI'",
+      "Photo 2: two tires stacked, sidewall shows text 'MASTER-GRIP' partially visible, no tire size numbers readable, no DOT date code visible",
+      "No rim, no size markings (e.g. 195/65R15), no manufacture date code visible in any photo",
+      "Tread appears to have decent depth but no way to assess internal sidewall cracking, bulges, or repair patches from these angles"
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car tire (used/Tokunbo)",
+      "brand": null,
+      "model": "Master-Grip",
+      "read_from": [
+        "photo 2"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "This is a 'girst grade' (first grade) Tokunbo tire",
+        "verdict": "unverifiable_remote",
+        "evidence": "No way to assess internal tire grading or history from photos; only external tread visible"
+      },
+      {
+        "claim": "Will last almost like new brand ones",
+        "verdict": "unverifiable_remote",
+        "evidence": "Lifespan claim cannot be confirmed from static photos; depends on rubber age, usage history, and internal condition not shown"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Tire size unknown, which is the single biggest price driver for tires",
+        "proof": "Clear photo of sidewall showing size code, e.g. 205/55R16",
+        "if_unproven": "cannot be priced at all without this, as comparables range from budget sizes to premium large sizes"
+      },
+      {
+        "risk": "Tire age (manufacture date) unknown; old rubber can be unsafe even with good tread",
+        "proof": "Close-up of DOT date code stamped on sidewall (4-digit week/year code)",
+        "if_unproven": "priced as old stock, worst case near end of usable life"
+      },
+      {
+        "risk": "Hidden sidewall damage, bulges, or repairs not visible from these angles",
+        "proof": "Full 360-degree sidewall video or photos of both sides of each tire",
+        "if_unproven": "priced as having possible sidewall defects"
+      },
+      {
+        "risk": "Quantity being sold is unclear (one shown alone in photo 0, two stacked in photo 2)",
+        "proof": "Seller confirmation of exact number of tires included in this listing/price",
+        "if_unproven": "priced as single unit unless proven otherwise"
+      },
+      {
+        "risk": "Brand/manufacturer not confirmed, only a model name 'Master-Grip' partially visible",
+        "proof": "Clear photo of full sidewall showing brand logo alongside model name",
+        "if_unproven": "treated as unbranded/generic Tokunbo tire for pricing"
+      }
+    ],
+    "proof_requests": [
+      "Photo of sidewall clearly showing tire size (width/aspect/rim diameter)",
+      "Photo of sidewall DOT code showing manufacture week/year",
+      "Confirmation of exact quantity of tires included at the stated price",
+      "Full sidewall photos of each tire (both faces) to check for cracks, bulges, or patch repairs"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Tire size is not visible or stated anywhere in the photos or text, and size is the primary driver of price among the comparables shown (ranging from small economy sizes to large premium sizes), so no worst-case price can be anchored without it.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 22945,
+    "input_tokens": 3775,
+    "output_tokens": 1975,
+    "cost_usd": 0.0273,
+    "replayed": false,
+    "fixture_key": "762e3e79591a7cb46c3b6b71f2239af4",
+    "error": null
+  }
+}

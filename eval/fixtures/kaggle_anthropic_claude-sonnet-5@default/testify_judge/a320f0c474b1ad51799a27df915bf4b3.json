@@ -1,0 +1,72 @@
+{
+  "task": "testify_judge",
+  "prompt_version": "testify_judge.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "claims": [
+      {
+        "claim": "Cleanly used Electric bike for sale",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows intact paint and no visible damage, but 'cleanly used' implies mechanical/battery condition which the photo cannot confirm."
+      },
+      {
+        "claim": "Runs on 72v 20ah lead acid battery",
+        "verdict": "unverifiable_remote",
+        "evidence": "No battery label, compartment, or spec plate visible in the photo; battery type and capacity cannot be confirmed from the image."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery health and real capacity may be degraded or mismatched to claimed 72v 20ah spec",
+        "proof": "Close-up photo of battery label/serial plus a video of voltage/charge test under load",
+        "if_unproven": "price as weak/near end-of-life lead acid battery"
+      },
+      {
+        "risk": "Unknown mileage and age of scooter and battery",
+        "proof": "Photo of odometer/dashboard display and any purchase/warranty document with date",
+        "if_unproven": "price as high-mileage, older unit"
+      },
+      {
+        "risk": "Missing keys, charger, and documents",
+        "proof": "Photo showing keys, charger, and ownership documents together with the scooter",
+        "if_unproven": "price as incomplete set, no accessories included"
+      },
+      {
+        "risk": "Hidden mechanical issues (brakes, motor, suspension)",
+        "proof": "Short video of the scooter being ridden or at least powered on and moving",
+        "if_unproven": "price as unverified mechanical condition, assume needs servicing"
+      },
+      {
+        "risk": "Identity/brand/model unknown, affects parts availability and resale value",
+        "proof": "Clear photo of nameplate, VIN, or brand logo on body panel",
+        "if_unproven": "price as generic/unbranded unit"
+      },
+      {
+        "risk": "Tire and brake wear not inspectable from a single angle",
+        "proof": "Close-up photos of both tires and brake pads/discs",
+        "if_unproven": "price assuming tires/brakes need replacement soon"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of battery label/spec plate",
+      "Video of scooter starting and running, showing speed/odometer if present",
+      "Photo of keys, charger, and any documents together with the unit",
+      "Close-up of nameplate/VIN/brand marking",
+      "Close-up photos of tires and brakes from multiple angles"
+    ],
+    "decision": "price",
+    "reason": "The witness confirms it is an electric scooter in apparently intact external condition, so it can be priced at worst case for battery, mileage, and completeness until further proof is supplied."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_judge",
+    "latency_ms": 13455,
+    "input_tokens": 1581,
+    "output_tokens": 1195,
+    "cost_usd": 0.013094,
+    "replayed": false,
+    "fixture_key": "a320f0c474b1ad51799a27df915bf4b3",
+    "error": null
+  }
+}

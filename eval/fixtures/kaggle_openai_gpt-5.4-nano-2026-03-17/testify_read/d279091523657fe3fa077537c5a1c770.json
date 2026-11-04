@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0 still shows an AC unit with a front label area, but the brand/model/capacity text is not clearly readable in the provided image.",
+      "No power-on video, error code, or remote/display reading is provided.",
+      "No receipt/warranty card is shown in the photo."
+    ],
+    "identity": {
+      "status": "unknown",
+      "kind": "split AC (outdoor/indoor unit not fully confirmable from one photo)",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "No o, I tested it myself yesterday, everything I said is true.",
+        "verdict": "unverified",
+        "evidence": "No new photo/video or error-code evidence was provided to confirm the test result."
+      },
+      {
+        "claim": "Seller\u2019s earlier claim: Faulty inverter AC.",
+        "verdict": "unverified",
+        "evidence": "Photo 0 does not show inverter status or the specific fault."
+      },
+      {
+        "claim": "Seller\u2019s earlier claim: Barely used, bought new last year; receipt and warranty card available.",
+        "verdict": "unverifiable_remote",
+        "evidence": "Receipt/warranty card not shown; no date/model proof in photo 0."
+      },
+      {
+        "claim": "Seller\u2019s earlier claim: No fault at all, motor never opened.",
+        "verdict": "contradicted",
+        "evidence": "Seller\u2019s earlier first line says it is faulty; these two statements conflict, and the photo does not resolve which is correct."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The actual fault is unknown; \u201ctested\u201d could mean it powers but doesn\u2019t cool, or it fails intermittently.",
+        "proof": "Video of power-on and cooling performance for 15\u201320 minutes, plus any error code displayed/remote screen.",
+        "if_unproven": "Priced as not reliably working / needs diagnosis and possible major repair."
+      },
+      {
+        "risk": "Inverter status and capacity (BTU) are not readable, which drives Lagos pricing and repair cost.",
+        "proof": "Close-up photo of the rating plate showing inverter/non-inverter marking and BTU/capacity + model/serial.",
+        "if_unproven": "Priced at worst-case resale value for an unknown-capacity unit."
+      },
+      {
+        "risk": "The unit shown may not be the complete matching set (if split), or may be only one component.",
+        "proof": "Photos of both indoor and outdoor units (if split), including their rating plates and the connecting ports/pipes.",
+        "if_unproven": "Priced as incomplete/uncertain setup."
+      },
+      {
+        "risk": "Compressor/gas leak issues may not show until load is applied.",
+        "proof": "After power-on, show sustained cold air output; if possible, technician gauge reading (pressure) or thermometer reading.",
+        "if_unproven": "Priced as likely to require gas/compressor service."
+      }
+    ],
+    "proof_requests": [
+      "Send a clear close-up of the rating plate (model number, serial, BTU/capacity, inverter/non-inverter marking).",
+      "Send a short video: power-on + compressor start sound + cooling for 15\u201320 minutes (or show temperature drop).",
+      "If split: send photos of both indoor and outdoor units with their rating plates.",
+      "Send photos of the receipt and warranty card (showing date and model)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller\u2019s reply is not supported by new remote evidence. Without readable model/capacity/inverter markings and a power-on/cooling test proof, a safe price can\u2019t be set; the earlier \u201cfaulty\u201d vs \u201cno fault\u201d conflict also remains unresolved."
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_read",
+    "latency_ms": 4151,
+    "input_tokens": 3268,
+    "output_tokens": 707,
+    "cost_usd": 0.001215,
+    "replayed": false,
+    "fixture_key": "d279091523657fe3fa077537c5a1c770",
+    "error": null
+  }
+}

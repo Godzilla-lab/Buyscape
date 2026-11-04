@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows the tread face of a used black rubber tire with multiple circumferential grooves and sipes.",
+      "No sidewall, brand, model, size molding, or DOT code is visible in the photo.",
+      "A second tire is partially visible at the left edge.",
+      "Watermark text reads POSTED ON JIJI and N.J. VENTURE."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "car tire",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "295 40 r20 size",
+        "verdict": "unverifiable_remote",
+        "evidence": "Sidewall not shown in photo 0"
+      },
+      {
+        "claim": "tukubo brand",
+        "verdict": "unverifiable_remote",
+        "evidence": "No branding visible in photo 0"
+      },
+      {
+        "claim": "It is a tire",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows tire tread"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual size may not be 295/40 R20",
+        "proof": "Sidewall shot showing molded tire size",
+        "if_unproven": "as wrong-size or unknown-size tire"
+      },
+      {
+        "risk": "Brand may not be Tukubo or may be unbranded",
+        "proof": "Sidewall shot showing brand name",
+        "if_unproven": "as unbranded or unknown-brand tire"
+      },
+      {
+        "risk": "Tread depth and age unknown; may be worn or expired",
+        "proof": "Close-up of tread wear bars and DOT date code",
+        "if_unproven": "as worn or expired tire"
+      },
+      {
+        "risk": "Hidden punctures, repairs, or bead damage",
+        "proof": "Full tire view including sidewall and bead, or inflation test video",
+        "if_unproven": "as damaged or unrepairable tire"
+      }
+    ],
+    "proof_requests": [
+      "Sidewall photo showing molded size, brand, model, and DOT date code",
+      "Close-up of tread depth and wear indicators",
+      "Video of tire holding air or full bead and sidewall inspection"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a used car tire from the tread photo; unverified size, brand, and condition are priced at worst case as an unverified used tire."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 16225,
+    "input_tokens": 1852,
+    "output_tokens": 2952,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "d1e51fac32c4ef907f8e5cb0b3716082",
+    "error": null
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 and Photo 1 show the same HP desktop tower from slightly different angles.",
+      "The front panel has a diagonal ribbed design, with the HP logo at the bottom right.",
+      "There is a small Intel sticker on the lower left of the front panel.",
+      "The front I/O panel includes USB ports and audio jacks.",
+      "The unit is placed on a plastic-wrapped box, surrounded by other desktops in a storage or resale environment.",
+      "No internal components, screen, or labels showing model number are visible."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "desktop computer",
+      "brand": "HP",
+      "model": null,
+      "read_from": [
+        "photo 0 front panel",
+        "photo 1 front panel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Pentium Gold 500g HHD 4gig Ram 8th generation",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal components or labels are visible to confirm CPU, RAM, or HDD specifications. The Intel sticker does not specify the model or generation."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The CPU is not a Pentium Gold or 8th generation as claimed.",
+        "proof": "A photo of the motherboard or CPU label inside the case, or a screenshot of the system information (e.g., from BIOS or Windows System Properties).",
+        "if_unproven": "priced as a generic low-end desktop with unknown CPU, likely underperforming for the claimed specs."
+      },
+      {
+        "risk": "The RAM is not 4GB or is faulty.",
+        "proof": "A photo of the RAM sticks inside the case, or a system information screenshot showing installed RAM.",
+        "if_unproven": "priced as if RAM is missing or insufficient, reducing value."
+      },
+      {
+        "risk": "The HDD is not 500GB or is failing.",
+        "proof": "A photo of the drive inside the case, or a screenshot of disk management showing drive size and health.",
+        "if_unproven": "priced as if HDD is smaller or non-functional."
+      },
+      {
+        "risk": "The unit is not working or has hidden damage.",
+        "proof": "A video of the desktop powering on and booting into the OS, or a photo of the power supply and internal condition.",
+        "if_unproven": "priced as not working, significantly reducing value."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the internal components showing the CPU, RAM, and HDD.",
+      "Screenshot of system information (e.g., from Windows 'About' or BIOS).",
+      "Video of the desktop powering on and booting.",
+      "Photo of the motherboard or any internal labels."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as an HP desktop, but the seller's claims about CPU, RAM, and HDD cannot be verified from the photos. Without proof of internal specs and functionality, the item cannot be priced accurately and carries significant hidden risks."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 57330,
+    "input_tokens": 2735,
+    "output_tokens": 691,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "b9368173eeda8335cb2cf0c1cc2fd639",
+    "error": null
+  }
+}

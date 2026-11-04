@@ -66,6 +66,46 @@ REASONING_HEADROOM = 4096
 _FENCE = re.compile(r"```(?:json)?\s*(.*?)```", re.DOTALL)
 
 
+def content(request: ModelRequest) -> list[dict]:
+    """The user turn: the request's text, then each photo after its label."""
+    parts: list[dict] = [{"type": "text", "text": request.user_text}]
+    for img in request.images:
+        if img.label:
+            parts.append({"type": "text", "text": f"[{img.label}]"})
+        parts.append({"type": "image_url", "image_url": {"url": img.data_url(request.image_max_side)}})
+    return parts
+
+
+def system_text(request: ModelRequest) -> str:
+    """The system turn: the task's instructions, then the answer's JSON Schema."""
+    schema = request.output_schema.model_json_schema()
+    return (
+        f"{request.system}\n\n"
+        "Reply with a single JSON object and nothing else. It must validate "
+        f"against this JSON Schema:\n{json.dumps(schema)}"
+    )
+
+
+def chat_body(request: ModelRequest) -> dict:
+    """The chat request every OpenAI-style server is sent, less the model name.
+
+    A batch run on someone's own GPU is sent the same body, so a model scores
+    the same wherever it runs.
+    """
+    messages = [
+        {"role": "system", "content": system_text(request)},
+        {"role": "user", "content": content(request)},
+    ]
+    for reply, said in request.turns:
+        messages += [{"role": "assistant", "content": reply}, {"role": "user", "content": said}]
+    return {
+        "messages": messages,
+        "max_tokens": request.max_tokens,
+        "temperature": request.temperature,
+        "response_format": {"type": "json_object"},
+    }
+
+
 def _extract_json(text: str) -> dict:
     """Models wrap JSON in prose or fences more often than they should."""
     text = text.strip()
@@ -99,6 +139,13 @@ class OpenRouterProvider:
     ENDPOINTS: dict[str, tuple[str, str]] = {
         "openrouter": (API_URL, "OPENROUTER_API_KEY"),
         "xai": (XAI_URL, "XAI_API_KEY"),
+        # NVIDIA's API catalogue serves open vision models on a free developer tier.
+        "nvidia": ("https://integrate.api.nvidia.com/v1/chat/completions", "NVIDIA_API_KEY"),
+        # Kaggle Benchmarks' model proxy: frontier models on a free daily quota.
+        # Its address and a two-hour key come from `kaggle benchmarks auth`.
+        "kaggle": ("", "MODEL_PROXY_API_KEY"),
+        # An open model served by vLLM on a rented GPU, beside the reads: VLLM_URL, default this machine.
+        "vllm": ("", "VLLM_API_KEY"),
     }
 
     def __init__(
@@ -117,6 +164,10 @@ class OpenRouterProvider:
         self.vendor = vendor
         self.name = f"{vendor}:{model}"
         self._url, env_var = self.ENDPOINTS[vendor]
+        if vendor == "kaggle":
+            self._url = os.environ.get("MODEL_PROXY_URL", "").rstrip("/") + "/openapi/chat/completions"
+        if vendor == "vllm":
+            self._url = os.environ.get("VLLM_URL", "http://127.0.0.1:8000").rstrip("/") + "/v1/chat/completions"
         self._key = api_key or os.environ.get(env_var, "")
         if not self._key:
             raise ProviderError(f"{env_var} is not set")
@@ -127,14 +178,7 @@ class OpenRouterProvider:
         self._sleep = time.sleep
 
     def _content(self, request: ModelRequest) -> list[dict]:
-        parts: list[dict] = [{"type": "text", "text": request.user_text}]
-        for img in request.images:
-            if img.label:
-                parts.append({"type": "text", "text": f"[{img.label}]"})
-            parts.append(
-                {"type": "image_url", "image_url": {"url": img.data_url(request.image_max_side)}}
-            )
-        return parts
+        return content(request)
 
     def _cost(self, prompt_tokens: int, completion_tokens: int) -> float:
         rate_in, rate_out = PRICES.get(self.model, (0.0, 0.0))
@@ -143,22 +187,7 @@ class OpenRouterProvider:
         )
 
     def structured_call(self, request: ModelRequest) -> tuple[BaseModel, CallMeta]:
-        schema = request.output_schema.model_json_schema()
-        system = (
-            f"{request.system}\n\n"
-            "Reply with a single JSON object and nothing else. It must validate "
-            f"against this JSON Schema:\n{json.dumps(schema)}"
-        )
-        body = {
-            "model": self.model,
-            "messages": [
-                {"role": "system", "content": system},
-                {"role": "user", "content": self._content(request)},
-            ],
-            "max_tokens": request.max_tokens,
-            "temperature": request.temperature,
-            "response_format": {"type": "json_object"},
-        }
+        body = {"model": self.model, **chat_body(request)}
         if self._url == API_URL:
             # OpenRouter returns the amount it actually billed. That number,
             # not the list table, is what a spending cap must be measured on.
@@ -166,6 +195,12 @@ class OpenRouterProvider:
             if self.model in REASONING_MODELS:
                 body["reasoning"] = {"effort": REASONING_EFFORT, "exclude": True}
                 body["max_tokens"] = request.max_tokens + REASONING_HEADROOM
+        if self.vendor == "kaggle":
+            # The proxy refuses JSON mode, and Claude refuses a temperature;
+            # the system prompt still asks for the JSON object alone.
+            body.pop("response_format")
+            if self.model.startswith("anthropic/"):
+                body.pop("temperature")
         headers = {
             "Authorization": f"Bearer {self._key}",
             "Content-Type": "application/json",
@@ -190,6 +225,9 @@ class OpenRouterProvider:
                 prompt_tokens = int(usage.get("prompt_tokens") or 0)
                 completion_tokens = int(usage.get("completion_tokens") or 0)
                 billed = usage.get("cost")
+                if isinstance(billed, dict):
+                    # Kaggle's proxy reports its quota spent in nanodollars.
+                    billed = sum(float(v) for v in billed.values()) / 1e9
                 spent += (
                     round(float(billed), 6)
                     if billed is not None
@@ -217,7 +255,9 @@ class OpenRouterProvider:
                 if outages > self._network_retries:
                     break
                 self._sleep(min(2.0 * 2 ** (outages - 1), 32.0))
-            except (httpx.HTTPError, ProviderError, KeyError, ValidationError) as exc:
+            # TypeError and IndexError: a 200 reply with no answer in it ("choices": null), which
+            # Kaggle's proxy sends now and then; on 2 Nov one took a whole test run down.
+            except (httpx.HTTPError, ProviderError, KeyError, TypeError, IndexError, ValidationError) as exc:
                 last = exc
                 failures += 1
                 if failures > self._max_retries:

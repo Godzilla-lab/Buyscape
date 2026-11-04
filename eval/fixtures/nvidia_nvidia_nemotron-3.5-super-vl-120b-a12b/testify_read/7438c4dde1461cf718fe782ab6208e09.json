@@ -1,0 +1,90 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 1 shows a silver single-door refrigerator with \"Hisense\" printed at the top center.",
+      "Photo 0 shows the empty interior with glass shelves, an ice tray, a top \"FRESH ZONE\" compartment, and a door-mounted dispenser on the right.",
+      "Neither photo shows a model number plate or a capacity label.",
+      "Both photos carry a \"POSTED ON JIJI JESSICA EKE\" watermark."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "single door refrigerator",
+      "brand": "Hisense",
+      "model": null,
+      "read_from": [
+        "photo 1"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Hisense brand",
+        "verdict": "supported",
+        "evidence": "photo 1 shows the Hisense logo on the front."
+      },
+      {
+        "claim": "93L capacity",
+        "verdict": "unverifiable_remote",
+        "evidence": "no capacity label is visible in either photo."
+      },
+      {
+        "claim": "Single Door",
+        "verdict": "supported",
+        "evidence": "photo 1 shows one door with no separate freezer door."
+      },
+      {
+        "claim": "model REF093DR",
+        "verdict": "unverifiable_remote",
+        "evidence": "the model number is not readable in either photo."
+      },
+      {
+        "claim": "Barely Used / Excellent Condition",
+        "verdict": "unverified",
+        "evidence": "the interior looks clean in photo 0, but usage history and exterior wear cannot be confirmed remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Refrigerator does not cool or compressor is faulty.",
+        "proof": "a video of the unit running with a visible temperature reading or thermometer inside.",
+        "if_unproven": "as not working."
+      },
+      {
+        "risk": "Actual capacity is not 93L.",
+        "proof": "a photo of the manufacturer capacity label inside the fridge.",
+        "if_unproven": "as an unknown or smaller capacity unit."
+      },
+      {
+        "risk": "Model is not REF093DR.",
+        "proof": "a photo of the model plate or rating label.",
+        "if_unproven": "as a generic Hisense single door refrigerator."
+      },
+      {
+        "risk": "Exterior has dents, scratches, or rust not shown in the front photo.",
+        "proof": "close-up photos of all exterior sides, back, and top.",
+        "if_unproven": "as fair or average condition."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the capacity and model label inside the refrigerator.",
+      "Video of the refrigerator running and cooling.",
+      "Exterior photos of the sides, back, and top for condition."
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a Hisense single door refrigerator from photo 1; unverified claims are priced at their worst case as seen."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 18881,
+    "input_tokens": 2634,
+    "output_tokens": 3100,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "7438c4dde1461cf718fe782ab6208e09",
+    "error": null
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Retail packaging for an Oraimo power bank.",
+      "The box is held by a person's hand.",
+      "Text on the box identifies the model as PowerNova B31 / OPB-1302.",
+      "Box states a capacity of 30000mAh and 15W Type-C Fast Charging.",
+      "A '365 Days Warranty' seal is visible on the box.",
+      "The actual power bank is not visible in the photo; only the front of the box is shown."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "power bank",
+      "brand": "Oraimo",
+      "model": "PowerNova B31 (OPB-1302)",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "30000mAh capacity",
+        "verdict": "unverified",
+        "evidence": "Stated on the box in photo 0, but the device itself is not shown."
+      },
+      {
+        "claim": "15W Type-C Fast Charging",
+        "verdict": "unverified",
+        "evidence": "Stated on the box in photo 0."
+      },
+      {
+        "claim": "365 Days Warranty",
+        "verdict": "unverifiable_remote",
+        "evidence": "Warranty validity depends on the original purchase date and a valid receipt, which are not provided."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, lower-value item.",
+        "proof": "A photo of the actual power bank outside of the packaging.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The item may be a counterfeit (common for this brand in Lagos).",
+        "proof": "A photo of the security scratch-off code on the back of the box for online verification.",
+        "if_unproven": "as a generic or counterfeit unit"
+      },
+      {
+        "risk": "The internal battery may be degraded or the ports may be damaged.",
+        "proof": "A video showing the device successfully charging a phone and being charged itself.",
+        "if_unproven": "as non-functional"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual power bank out of the box.",
+      "Photo of the back of the box showing the authentication scratch label.",
+      "Video of the device charging a phone to confirm the ports and display work."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail packaging is shown. Without seeing the actual device, its condition, or its authenticity, it is impossible to determine if the item exists or is functional."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 11564,
+    "input_tokens": 2357,
+    "output_tokens": 2368,
+    "cost_usd": 0.008282,
+    "replayed": false,
+    "fixture_key": "b7377b656fefb4e3e349d3ea3796fb3f",
+    "error": null
+  }
+}

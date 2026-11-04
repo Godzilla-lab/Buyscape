@@ -1,0 +1,80 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r5",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black DSLR camera body with 'Nikon' and 'D3400' printed on the top right.",
+      "The camera is shown with a lens mount, but no lens is attached.",
+      "A Nikon branded carrying case is visible in the background.",
+      "A cardboard box is visible in the foreground with 'D3400' and '18-55 VR' printed on it.",
+      "The box appears to be in good condition.",
+      "The background shows a white cloth and a watermark for 'Jiji.ng'.",
+      "A watermark for 'NOKIA | ZEISS' is present in the bottom left of the image."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DSLR camera",
+      "brand": "Nikon",
+      "model": "D3400",
+      "read_from": [
+        "photo 0 body",
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Nikon d3400",
+        "verdict": "supported",
+        "evidence": "photo 0 body"
+      },
+      {
+        "claim": "18-55mm lens",
+        "verdict": "unverified",
+        "evidence": "The lens is not shown in the photo."
+      },
+      {
+        "claim": "Shutter count under 5,000, no fungus or scratch on the lens. Original battery and charger, never repaired.",
+        "verdict": "unverified",
+        "evidence": "No photo shows this; it is the seller's word only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The lens is not shown, so the actual lens quality and condition are unknown.",
+        "proof": "A photo of the lens attached to the camera body.",
+        "if_unproven": "as a generic lens"
+      },
+      {
+        "risk": "The shutter count is unknown, which affects the camera's remaining shutter life.",
+        "proof": "A screenshot of the shutter count from a recent photo or video taken with the camera.",
+        "if_unproven": "as having a high shutter count"
+      },
+      {
+        "risk": "The camera may have electronic faults or mechanical issues.",
+        "proof": "A video showing the camera powering on, the LCD screen working, and a successful autofocus test.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of any label, sticker or metal plate showing the brand and model.",
+      "Photo of the lens attached to the camera body.",
+      "Screenshot of the shutter count from a recent photo.",
+      "Video of the camera powering on and taking a photo."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "What the item is shows, but not the model that sets its price: no photo shows it clearly enough to read. The shot asked for first would settle it."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r5",
+    "task": "testify_read",
+    "latency_ms": 2285,
+    "input_tokens": 1435,
+    "output_tokens": 510,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "8fab44c56b4ae33bc3ac701505da8726",
+    "error": null
+  }
+}

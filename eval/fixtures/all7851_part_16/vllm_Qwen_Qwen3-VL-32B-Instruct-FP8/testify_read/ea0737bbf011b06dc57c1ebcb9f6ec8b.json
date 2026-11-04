@@ -1,0 +1,91 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Open silver laptop with black keyboard, Dell logo on screen bezel, Intel Core i5 sticker on palm rest. Screen is off, reflecting surroundings. Watermark 'JTECHGENIUS CONCEPTS NIG' visible.",
+      "Photo 1: Closed laptop lid, silver, with Dell logo in center. Partially wrapped in clear plastic tape. Watermark present.",
+      "Photo 2: Bottom of laptop, gray, with 'Inspiron' written on left side. Black label with regulatory info and Windows sticker. Ventilation grilles and rubber feet visible. Watermark present."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Dell",
+      "model": "Inspiron",
+      "read_from": [
+        "photo 2 bottom panel",
+        "photo 0 screen bezel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Intel core i5 10th generation",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows Intel Core i5 sticker, which typically denotes 10th gen for this era; no conflicting info in photos."
+      },
+      {
+        "claim": "8gb ram",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows RAM or system specs; cannot confirm from visuals alone."
+      },
+      {
+        "claim": "256gb ssd",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows storage or system specs; cannot confirm from visuals alone."
+      },
+      {
+        "claim": "UK USED",
+        "verdict": "unverified",
+        "evidence": "No visible proof of origin or usage history; seller's claim only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "RAM is not 8GB or is faulty",
+        "proof": "Photo of system information screen or open RAM compartment showing 8GB modules.",
+        "if_unproven": "priced as having less than 8GB or non-functional RAM"
+      },
+      {
+        "risk": "SSD is not 256GB or is faulty",
+        "proof": "Photo of system information screen or open drive bay showing 256GB SSD.",
+        "if_unproven": "priced as having less than 256GB or non-functional SSD"
+      },
+      {
+        "risk": "Screen damage or dead pixels",
+        "proof": "Photo of screen turned on, displaying solid colors or test pattern.",
+        "if_unproven": "priced as having screen defects"
+      },
+      {
+        "risk": "Battery not working or degraded",
+        "proof": "Video of laptop running on battery with battery percentage and time shown.",
+        "if_unproven": "priced as battery not included or non-functional"
+      },
+      {
+        "risk": "Laptop not turning on or has hardware faults",
+        "proof": "Video of laptop powering on, booting to desktop, and running basic operations.",
+        "if_unproven": "priced as not working"
+      }
+    ],
+    "proof_requests": [
+      "Video of laptop powering on and booting to desktop.",
+      "Photo of system information screen showing RAM and storage details.",
+      "Photo of screen turned on with solid color test.",
+      "Video of laptop running on battery with battery status visible."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and brand are identifiable, but critical specs (RAM, SSD) and functionality (power, screen, battery) are unverifiable from current photos. Hidden risks affect pricing significantly and must be proven before a price can be assigned."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 64449,
+    "input_tokens": 2798,
+    "output_tokens": 811,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "ea0737bbf011b06dc57c1ebcb9f6ec8b",
+    "error": null
+  }
+}

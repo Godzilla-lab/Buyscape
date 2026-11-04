@@ -1,0 +1,74 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0 shows a single car tire tread face with visible wear and some scuffing/uneven-looking tread wear.",
+      "Sidewall text/brand/model and DOT/age markings are not readable in the provided photo.",
+      "The seller\u2019s text mentions size '295 40 r20' and 'tukubo', but the photo does not clearly confirm brand/model or exact size."
+    ],
+    "identity": {
+      "status": "unknown",
+      "kind": "car tire",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "295 40 r20 tukubo tire",
+        "verdict": "unverified",
+        "evidence": "Photo 0 does not show readable sidewall markings (brand/model/size) to confirm '295/40/R20' or 'tukubo'."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Tire size may not be 295/40 R20 (could be different width/aspect or rim size).",
+        "proof": "A clear photo of the sidewall showing the full size marking (e.g., '295/40R20') and any load/speed rating.",
+        "if_unproven": "Priced as a used tire of unknown exact size (worst-case fit risk), so value is reduced until size is confirmed."
+      },
+      {
+        "risk": "Brand/model 'tukubo' may be incorrect or the tire may be a different make.",
+        "proof": "A clear photo of the sidewall brand/name and any model lettering.",
+        "if_unproven": "Priced as an unverified/unknown brand used tire."
+      },
+      {
+        "risk": "Condition/remaining tread depth is unknown; photo suggests wear but depth is not measurable.",
+        "proof": "Close-up photos plus a tread depth measurement (mm) at multiple grooves (center and shoulders).",
+        "if_unproven": "Priced as worn used tire (not new), assuming moderate-to-low remaining tread."
+      },
+      {
+        "risk": "Age/DOT and dry-rot risk unknown.",
+        "proof": "A clear photo of the DOT code/age on the sidewall.",
+        "if_unproven": "Priced as older used tire until age is confirmed."
+      },
+      {
+        "risk": "Repairs, punctures, or sidewall damage not visible from tread-only photo.",
+        "proof": "Photos of both sidewalls and the inner liner (if possible), plus any patch/repair areas.",
+        "if_unproven": "Priced as not guaranteed (worst-case: may have hidden issues)."
+      }
+    ],
+    "proof_requests": [
+      "Clear sidewall photo showing the full size marking (295/40R20) and load/speed rating.",
+      "Clear sidewall photo showing brand/model text (to confirm 'tukubo').",
+      "DOT/age code photo.",
+      "Tread depth measurements (mm) at center and both shoulders.",
+      "Photos of both sidewalls (inner and outer) and any visible damage/repairs."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo shows a used tire with visible wear, but the key details needed to price correctly in Lagos (exact size/brand and remaining tread/age) are not readable. Request sidewall/DOT and tread depth proof before pricing."
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_read",
+    "latency_ms": 4532,
+    "input_tokens": 1900,
+    "output_tokens": 748,
+    "cost_usd": 0.001315,
+    "replayed": false,
+    "fixture_key": "372f4e55cf95672db91e96e67249f0e9",
+    "error": null
+  }
+}

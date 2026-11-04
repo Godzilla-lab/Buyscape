@@ -1,0 +1,73 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-instruct",
+  "response": {
+    "observations": [
+      "White inverter AC unit, indoor and outdoor units visible.",
+      "Outdoor unit has 'inverter' label and red handwritten number '3470'.",
+      "Unit appears dusty and slightly worn, not new.",
+      "No visible damage or open motor, but no clear brand or model visible."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "inverter AC",
+      "read_from": [
+        "photo 0 screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Faulty inverter AC available for sale.",
+        "verdict": "unverified",
+        "evidence": "No photo shows any visible fault or damage; seller claims it's faulty but no proof is visible."
+      },
+      {
+        "claim": "Barely used, bought new last year. No fault at all, the motor was never opened.",
+        "verdict": "unverified",
+        "evidence": "No photo shows the motor or internal components; no proof of usage or condition."
+      },
+      {
+        "claim": "Receipt and warranty card available.",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows receipt or warranty card; seller claims they are available but no visual proof."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The AC is faulty despite seller's claim.",
+        "proof": "Photo showing the unit in operation or with error codes.",
+        "if_unproven": "Priced as not working."
+      },
+      {
+        "risk": "The unit is not as described (e.g., not 'barely used' or 'no fault').",
+        "proof": "Photo showing the motor or internal components, or a test run.",
+        "if_unproven": "Priced as not working."
+      },
+      {
+        "risk": "The seller is lying about the warranty or receipt.",
+        "proof": "Photo of the receipt or warranty card.",
+        "if_unproven": "Priced as no warranty."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the motor or internal components to verify 'no fault'.",
+      "Photo of the receipt or warranty card to verify claim.",
+      "Photo of the unit in operation or with error codes to verify 'faulty'."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller's claims cannot be verified remotely without additional photos or proof. The unit's condition and warranty status are critical to pricing, and no visual evidence supports the claims."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-instruct",
+    "task": "testify_read",
+    "latency_ms": 5798,
+    "input_tokens": 2166,
+    "output_tokens": 556,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "b0268c3f7f38544c8abea7ee1583d2ae",
+    "error": null
+  }
+}

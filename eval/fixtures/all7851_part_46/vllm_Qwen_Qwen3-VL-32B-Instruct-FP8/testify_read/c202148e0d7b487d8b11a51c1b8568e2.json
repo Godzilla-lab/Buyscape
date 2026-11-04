@@ -1,0 +1,87 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a large rectangular solar panel with a dark blue/black surface and a grid of thin white lines (busbars and cells).",
+      "The panel has a white frame and a visible horizontal metal bar or support in the middle.",
+      "Reflections on the surface show a room with shelves, a red container, and a white gas cylinder.",
+      "There is a watermark 'POSTED ON JIJI GODSWILL JOHN' across the panel.",
+      "No brand name, model, or rating label is visible on the panel itself in the photo.",
+      "The seller claims it is a 450W mono Canadian solar panel."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "450W solar panel",
+        "verdict": "unverified",
+        "evidence": "No power rating label is visible in photo 0. The claim cannot be confirmed from the image."
+      },
+      {
+        "claim": "mono (monocrystalline)",
+        "verdict": "unverified",
+        "evidence": "The cell structure appears uniform, which is typical of monocrystalline panels, but there is no label or certification to confirm. The photo does not show cell edges or backside details that would confirm monocrystalline vs polycrystalline."
+      },
+      {
+        "claim": "Canadian",
+        "verdict": "unverifiable_remote",
+        "evidence": "No brand or country of origin is visible on the panel. 'Canadian' likely refers to Canadian Solar, but there is no visible logo or text to confirm. The seller's claim cannot be verified remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Panel is not 450W as claimed",
+        "proof": "Photo of the label or nameplate on the back or frame of the panel showing the rated power.",
+        "if_unproven": "priced as lower wattage (e.g., 300W or 350W) or as unknown wattage, which reduces value significantly."
+      },
+      {
+        "risk": "Panel is not monocrystalline",
+        "proof": "Close-up photo of the cell edges or backside showing the uniform dark color and rounded corners typical of monocrystalline cells, or a label specifying 'mono'.",
+        "if_unproven": "priced as polycrystalline or unknown type, which is less valuable."
+      },
+      {
+        "risk": "Panel is not from Canadian Solar or is counterfeit",
+        "proof": "Photo of the brand name or logo on the panel, preferably on the frame or label, and ideally a serial number or certification mark.",
+        "if_unproven": "priced as generic or unknown brand, which reduces value."
+      },
+      {
+        "risk": "Panel is damaged or has microcracks",
+        "proof": "Close-up photo of the surface under direct light or with a magnifying tool to check for cracks, discoloration, or hotspots.",
+        "if_unproven": "priced as potentially damaged, which reduces value."
+      },
+      {
+        "risk": "Panel is not in working condition",
+        "proof": "Video or photo of the panel being tested with a multimeter or solar tester to show voltage and current output under sunlight.",
+        "if_unproven": "priced as not working, which reduces value to scrap or parts."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the label or nameplate on the back or frame of the panel showing brand, model, and rated power (Wattage).",
+      "Close-up photo of the cell edges or backside to confirm monocrystalline structure.",
+      "Photo of the brand logo or certification mark.",
+      "Video or photo of the panel being tested under sunlight with a multimeter or solar tester.",
+      "Photo of the panel from the back to check for any damage or corrosion."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller's claims about wattage, type, and brand cannot be verified from the current photo. The panel's identity and condition are uncertain, and without proof, it cannot be priced accurately. The risks of misrepresentation or damage are high, requiring additional evidence before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 79925,
+    "input_tokens": 1811,
+    "output_tokens": 962,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "c202148e0d7b487d8b11a51c1b8568e2",
+    "error": null
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the back of a silver iPhone with a triple-camera module and Apple logo. A pink sticker reads 'D-FU, 100bh, 18 m, 14pm, 128gb'.",
+      "Photo 1 shows the front of the same phone with a black screen, held in hand. The screen appears to have minor smudges or dust.",
+      "The phone has a flat-edged design consistent with iPhone 14 Pro Max.",
+      "No visible cracks or major damage on the back or front in the photos.",
+      "The sticker text suggests 'D-FU' (likely meaning 'Direct from USA'), '100bh' (possibly '100% battery health'), '18 m' (possibly 18 months old), '14pm' (iPhone 14 Pro Max), '128gb' (storage).",
+      "No model number or serial number visible in the photos."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "iPhone 14 Pro Max",
+      "brand": "Apple",
+      "model": null,
+      "read_from": [
+        "photo 0 sticker"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "iPhone 14 Pro Max 128gb",
+        "verdict": "supported",
+        "evidence": "Photo 0 sticker reads '14pm, 128gb' and the phone's design matches iPhone 14 Pro Max."
+      },
+      {
+        "claim": "100BH (100% battery health)",
+        "verdict": "unverifiable_remote",
+        "evidence": "No battery health data visible. Cannot verify without diagnostic tool or software check."
+      },
+      {
+        "claim": "Esim unlocked",
+        "verdict": "unverifiable_remote",
+        "evidence": "No proof of unlock status. Cannot verify without carrier check or activation test."
+      },
+      {
+        "claim": "Direct U.s used",
+        "verdict": "unverified",
+        "evidence": "Sticker says 'D-FU' which may mean 'Direct from USA', but no proof of origin or import documentation."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery health is not 100% as claimed",
+        "proof": "Screenshot of battery health from Settings > Battery > Battery Health on the device.",
+        "if_unproven": "Priced as degraded battery (e.g., 80% or lower), which reduces value significantly."
+      },
+      {
+        "risk": "Phone is not truly unlocked or has carrier restrictions",
+        "proof": "Screenshot of carrier status or activation lock screen during setup, or proof of successful activation on a different carrier.",
+        "if_unproven": "Priced as locked or with activation lock, which reduces value and may prevent resale."
+      },
+      {
+        "risk": "Device has hidden damage or malfunction (e.g., screen, camera, charging port)",
+        "proof": "Video showing screen responsiveness, camera functionality, charging, and speaker output.",
+        "if_unproven": "Priced as potentially non-functional or with defects, reducing value."
+      },
+      {
+        "risk": "Sticker information is fabricated or misleading",
+        "proof": "Photo of the device's serial number and model number from Settings > General > About, or from the back if engraved.",
+        "if_unproven": "Priced as unverified, with lower confidence in model and storage."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of battery health from the device settings.",
+      "Screenshot of carrier status or activation lock screen.",
+      "Video showing screen, camera, charging, and speaker functionality.",
+      "Photo of the device's serial number and model number from Settings > General > About."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and storage are supported by the sticker and design, but critical claims like battery health, unlock status, and functionality cannot be verified from current photos. Hidden risks like battery degradation, carrier lock, and hidden damage affect pricing significantly. Proof is needed before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 76853,
+    "input_tokens": 2290,
+    "output_tokens": 910,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "719a4caf767deaa55b714100127f17f7",
+    "error": null
+  }
+}

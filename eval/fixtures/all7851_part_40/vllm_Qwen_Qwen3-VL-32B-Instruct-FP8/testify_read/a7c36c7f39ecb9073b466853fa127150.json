@@ -1,0 +1,80 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Silver laptop open, screen on showing a dark, blue-toned desktop wallpaper with figures. Keyboard and trackpad visible. Watermark 'POSTED ON JIJI IPF GLOBAL' across screen.",
+      "Photo 1: Screenshot of DirectX Diagnostic Tool showing system info: System Manufacturer: HP, System Model: HP ZBook Studio 16 inch G9 Mobile Workstation PC, Processor: 12th Gen Intel(R) Core(TM) i9-12900HK (20 CPUs), Memory: 32768MB RAM, Windows 11 Pro 64-bit.",
+      "Photo 2: Side view of the same laptop, showing keyboard, trackpad, and part of the screen. Watermark 'POSTED ON JIJI IPF GLOBAL' visible. No visible damage to chassis or keyboard."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "ZBook Studio 16 G9",
+      "read_from": [
+        "photo 1 screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Uk Used Hp Zbook Studio 16 G9 Workstation",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows 'System Model: HP ZBook Studio 16 inch G9 Mobile Workstation PC'."
+      },
+      {
+        "claim": "Intel Core i9 12900HK /12th Gen, 14 Cores 20 CPU",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows 'Processor: 12th Gen Intel(R) Core(TM) i9-12900HK (20 CPUs)'. Note: '20 CPUs' refers to 20 threads, not 20 cores; the i9-12900HK has 14 cores (6P+8E) and 20 threads. The claim is technically accurate in context."
+      },
+      {
+        "claim": "1tb",
+        "verdict": "unverified",
+        "evidence": "No photo shows storage capacity. The DirectX tool does not report disk size. The seller claims 1TB, but it is not visible in the provided photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Storage capacity is not confirmed; may be less than 1TB or not SSD.",
+        "proof": "Photo of Disk Management or BIOS showing drive size and type (SSD/HDD).",
+        "if_unproven": "Priced as if storage is 512GB or lower, or HDD, which reduces value."
+      },
+      {
+        "risk": "Battery health is unknown; may be degraded.",
+        "proof": "Screenshot of battery health from Windows Power Management or third-party tool (e.g., HWInfo).",
+        "if_unproven": "Priced as if battery is not functional or has low capacity, reducing value."
+      },
+      {
+        "risk": "Screen condition not fully visible; may have dead pixels, scratches, or backlight issues.",
+        "proof": "Photo of screen with white and black screens to check for dead pixels or uneven backlighting.",
+        "if_unproven": "Priced as if screen has minor defects, reducing value."
+      },
+      {
+        "risk": "Keyboard or trackpad may have hidden damage or sticky keys.",
+        "proof": "Close-up photo of keyboard and trackpad with fingers pressing keys to show responsiveness.",
+        "if_unproven": "Priced as if keyboard/trackpad are functional but may have minor issues."
+      }
+    ],
+    "proof_requests": [
+      "Photo of Disk Management or BIOS showing storage size and type (SSD/HDD).",
+      "Screenshot of battery health.",
+      "Photo of screen with white and black screens to check for dead pixels or backlight issues.",
+      "Close-up photo of keyboard and trackpad with fingers pressing keys."
+    ],
+    "decision": "price",
+    "reason": "The model and processor are confirmed via photo 1. The 1TB claim is unverified but can be priced conservatively. Hidden risks like battery, screen, and storage are noted and priced at worst case. The item is identifiable and can be priced based on worst-case assumptions."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 78197,
+    "input_tokens": 2353,
+    "output_tokens": 946,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "a7c36c7f39ecb9073b466853fa127150",
+    "error": null
+  }
+}

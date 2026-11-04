@@ -1,0 +1,85 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: A silver laptop is open, displaying a Windows desktop with a scenic wallpaper. The laptop is placed on top of a stack of similar closed laptops. The keyboard is black with white lettering, and the trackpad is silver. A watermark 'DOLF TECHNOLOGIES' is visible.",
+      "Photo 1: The back of the same silver laptop is shown, with the HP logo centered. The laptop is again on top of a stack of closed laptops. The same watermark is present.",
+      "Photo 2: A close-up of the laptop screen showing the Windows Task Manager. The CPU section clearly reads '11th Gen Intel(R) Core(TM) i5-1145G7 @ 2.60GHz'. The keyboard is visible below the screen. The watermark is present."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop computer",
+      "brand": "HP",
+      "model": "EliteBook 840 G8",
+      "read_from": [
+        "photo 2 screen",
+        "seller's words"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP EliteBook 840 G8 14\" FHD Laptop Computer",
+        "verdict": "supported",
+        "evidence": "Photo 2 screen shows the CPU model i5-1145G7, which is consistent with the HP EliteBook 840 G8. The seller's words state the model, and the HP logo is visible in photo 1."
+      },
+      {
+        "claim": "11th Gen Quad Core i5-1145G7",
+        "verdict": "supported",
+        "evidence": "Photo 2 screen clearly shows '11th Gen Intel(R) Core(TM) i5-1145G7 @ 2.60GHz'."
+      },
+      {
+        "claim": "16GB DDR4 RAM",
+        "verdict": "unverified",
+        "evidence": "Photo 2 shows Task Manager with '4.2/15.7 GB' memory usage, which suggests 16GB total RAM, but this is not definitive. The exact RAM amount is not explicitly shown."
+      },
+      {
+        "claim": "256GB SSD",
+        "verdict": "unverified",
+        "evidence": "Photo 2 shows 'Disk 0 (C:) SSD (NVMe)', but the capacity is not visible. The seller's words state 256GB, but this is not confirmed in the photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "RAM capacity is not confirmed to be 16GB",
+        "proof": "A screenshot of the system information or disk management showing the exact RAM amount.",
+        "if_unproven": "priced as having less than 16GB RAM, which would lower the value."
+      },
+      {
+        "risk": "SSD capacity is not confirmed to be 256GB",
+        "proof": "A screenshot of the disk management or system information showing the exact SSD capacity.",
+        "if_unproven": "priced as having less than 256GB SSD, which would lower the value."
+      },
+      {
+        "risk": "Laptop may have physical damage not visible in photos, such as scratches, dents, or screen issues",
+        "proof": "A close-up video or photo of the entire laptop, including the screen, keyboard, and body, from all angles.",
+        "if_unproven": "priced as having potential cosmetic or functional damage, which would lower the value."
+      },
+      {
+        "risk": "Battery health is unknown",
+        "proof": "A screenshot of the battery health information from Windows or a battery testing tool.",
+        "if_unproven": "priced as having degraded battery health, which would lower the value."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of system information showing exact RAM and SSD capacity.",
+      "Close-up video or photos of the laptop from all angles, including screen, keyboard, and body.",
+      "Screenshot of battery health information."
+    ],
+    "decision": "price",
+    "reason": "The laptop model and CPU are confirmed from the photos. The RAM and SSD claims are unverified but can be reasonably assumed based on the seller's words and the visible Task Manager data. The item can be priced at its worst case (e.g., less than 16GB RAM or less than 256GB SSD) until proof is provided. Hidden risks like physical damage and battery health are noted and priced conservatively."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 79803,
+    "input_tokens": 2814,
+    "output_tokens": 1002,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "ba8629fece247e66a4ad9baf39419fbe",
+    "error": null
+  }
+}

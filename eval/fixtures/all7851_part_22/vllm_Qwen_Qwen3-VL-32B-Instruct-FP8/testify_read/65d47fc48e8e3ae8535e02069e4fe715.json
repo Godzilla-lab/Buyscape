@@ -1,0 +1,90 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black box with 'X300' and 'Co-engineered with ZEISS' printed on it, and a white phone inside with a circular camera module and 'VIVO' branding visible.",
+      "Photo 1 shows the phone's screen displaying 'About phone' with 'vivo X300', '4.21 GHz Dimensity 9500 Octa-core', 'Phone storage 512 GB', 'RAM 16 GB + 16 GB', and 'Battery 6040 mAh'.",
+      "Photo 2 shows the back of the phone in the box, with a white rear panel, circular camera module with ZEISS branding, and a barcode sticker.",
+      "The phone appears to be new in box, with no visible damage or wear.",
+      "The seller claims 'global variant', '16GB RAM + 512GB UFS 4.1', 'MediaTek Dimensity 9500', and '200MP' camera."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "smartphone",
+      "brand": "vivo",
+      "model": "X300",
+      "read_from": [
+        "photo 0 box",
+        "photo 1 screen",
+        "photo 2 phone back"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "global variant",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible IMEI, region-specific markings, or software language settings to confirm global variant. The box and phone do not indicate region."
+      },
+      {
+        "claim": "16GB RAM + 512GB UFS 4.1",
+        "verdict": "supported",
+        "evidence": "Photo 1 screen shows 'RAM 16 GB + 16 GB' and 'Phone storage 512 GB'. UFS 4.1 is not visible but is a known spec for this model; however, the storage type is not confirmed in the photo."
+      },
+      {
+        "claim": "MediaTek Dimensity 9500",
+        "verdict": "supported",
+        "evidence": "Photo 1 screen clearly shows '4.21 GHz Dimensity 9500 Octa-core'."
+      },
+      {
+        "claim": "200MP camera",
+        "verdict": "unverified",
+        "evidence": "Photo 0 and 2 show a circular camera module with ZEISS branding, but no megapixel count is visible. The claim is not contradicted but not proven by the photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "phone may be a repackaged or refurbished unit, not new",
+        "proof": "a clear shot of the phone's IMEI sticker on the battery compartment or SIM tray, and a video showing the phone being powered on and off with no signs of wear or previous use.",
+        "if_unproven": "priced as used/refurbished, which reduces value significantly"
+      },
+      {
+        "risk": "RAM configuration may be misleading (16GB + 16GB is not standard; likely 16GB total with virtual RAM)",
+        "proof": "a screenshot from the phone's settings showing actual RAM usage and available memory, or a benchmark test result.",
+        "if_unproven": "priced as having 16GB RAM, but with potential performance issues if virtual RAM is used"
+      },
+      {
+        "risk": "storage type may not be UFS 4.1 (could be UFS 3.1 or slower)",
+        "proof": "a benchmark test result (e.g., AndroBench) showing read/write speeds consistent with UFS 4.1.",
+        "if_unproven": "priced as UFS 4.1, but if slower, value drops"
+      },
+      {
+        "risk": "camera may not be 200MP (could be 50MP or 100MP with pixel binning)",
+        "proof": "a photo taken with the phone's main camera showing the full resolution, or a camera settings menu screenshot showing 200MP mode.",
+        "if_unproven": "priced as 200MP, but if lower, value drops"
+      }
+    ],
+    "proof_requests": [
+      "A clear photo of the IMEI sticker on the phone's battery compartment or SIM tray.",
+      "A video showing the phone being powered on and off, with a full tour of the device including ports, buttons, and screen.",
+      "A screenshot from the phone's settings showing RAM usage and available memory.",
+      "A benchmark test result (e.g., AndroBench) showing storage read/write speeds.",
+      "A photo taken with the phone's main camera showing the full resolution, or a camera settings menu screenshot showing 200MP mode."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The phone is identified as a vivo X300, and some specs are supported by the screen shot. However, critical claims like 'global variant', 'UFS 4.1', and '200MP' are not fully verifiable from the photos, and there are hidden risks regarding the phone's condition and actual specs. Proof is needed to confirm these and avoid pricing it at a higher value than warranted."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 92723,
+    "input_tokens": 2811,
+    "output_tokens": 1178,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "65d47fc48e8e3ae8535e02069e4fe715",
+    "error": null
+  }
+}

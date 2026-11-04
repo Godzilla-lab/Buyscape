@@ -1,0 +1,101 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Closed silver laptop with HP logo on lid. A sticker is visible on the bottom right corner, but text is unreadable. Watermark 'POSTED ON JIJI SAMSOC COMM' and 'HUAWEI P30 LEICA TRIPLE CAMERA' at bottom.",
+      "Photo 1: Laptop open, showing silver keyboard and trackpad. Screen is off. HP logo visible on bezel. Watermark same as photo 0.",
+      "Photo 2: Same angle as photo 1, but screen is on, showing a dark blue desktop background with reflections. Keyboard appears to have backlighting, as keys are illuminated. Watermark same as previous photos."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "Pavilion 14",
+      "read_from": [
+        "photo 0 lid logo",
+        "seller's text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP Pavilion 14",
+        "verdict": "supported",
+        "evidence": "HP logo visible on lid in photo 0, and seller's text matches known model name."
+      },
+      {
+        "claim": "Core i5 8th gen",
+        "verdict": "unverified",
+        "evidence": "No visible CPU label or system information. Cannot be confirmed from photos."
+      },
+      {
+        "claim": "8GB RAM",
+        "verdict": "unverified",
+        "evidence": "No visible RAM label or system specs. Cannot be confirmed from photos."
+      },
+      {
+        "claim": "256GB SSD",
+        "verdict": "unverified",
+        "evidence": "No visible storage label or system specs. Cannot be confirmed from photos."
+      },
+      {
+        "claim": "keyboard light",
+        "verdict": "supported",
+        "evidence": "Photo 2 shows illuminated keys, indicating backlighting is active."
+      },
+      {
+        "claim": "it's a smart laptop suitable for...",
+        "verdict": "unverifiable_remote",
+        "evidence": "Subjective claim; cannot be verified from photos or text alone."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "CPU is not 8th gen Core i5 or is damaged",
+        "proof": "Photo of BIOS screen or system information showing CPU model.",
+        "if_unproven": "priced as lower-end or non-functional CPU"
+      },
+      {
+        "risk": "RAM is less than 8GB or not functional",
+        "proof": "Photo of system information showing RAM size and health.",
+        "if_unproven": "priced as 4GB or non-functional RAM"
+      },
+      {
+        "risk": "SSD is not 256GB or is failing",
+        "proof": "Photo of system information showing storage size and health.",
+        "if_unproven": "priced as smaller or failing SSD"
+      },
+      {
+        "risk": "screen has dead pixels or damage not visible in photos",
+        "proof": "Video or photo of screen displaying full white and full black patterns.",
+        "if_unproven": "priced as screen with potential defects"
+      },
+      {
+        "risk": "laptop has physical damage not visible in photos (e.g., hinge, ports)",
+        "proof": "Photo showing all sides, ports, and hinges in detail.",
+        "if_unproven": "priced as potentially damaged"
+      }
+    ],
+    "proof_requests": [
+      "Photo of BIOS or system information screen showing CPU, RAM, and storage details.",
+      "Video or photo of screen displaying full white and full black patterns to check for dead pixels.",
+      "Photo showing all sides, ports, and hinges of the laptop.",
+      "Photo of the sticker on the bottom of the laptop (if any) for model and serial number."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identifiable as HP Pavilion 14, and keyboard backlighting is confirmed. However, critical specs like CPU, RAM, and SSD cannot be verified from current photos. Hidden risks include potential hardware discrepancies and screen defects. Proof is needed to price accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 74684,
+    "input_tokens": 2801,
+    "output_tokens": 923,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "70636ed07a18299a81aed8998f85253a",
+    "error": null
+  }
+}

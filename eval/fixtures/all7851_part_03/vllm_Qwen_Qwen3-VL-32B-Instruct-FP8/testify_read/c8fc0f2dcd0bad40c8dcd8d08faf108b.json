@@ -1,0 +1,80 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Open laptop with 'VICTUS' branding visible below the keyboard. Screen shows a nature wallpaper with desktop icons. Stickers on palm rest include 'HP Victus Gaming Laptop' and 'Your Gaming Adventure Awaits'. Intel and NVIDIA logos visible on lower right corner. A yellow ProyeBank payment sign is to the left.",
+      "Photo 1: Windows Task Manager open, showing CPU at 1.32 GHz, Memory at 12.4/15.6 GB (79%), Disk 0 (C:) as SSD (NVMe), GPU 0 as NVIDIA GeForce RTX, GPU 1 as Intel(R) UHD Graphics. WiFi section shows Realtek 8852BE-VT Wireless LAN WiFi 6 PCI-E NIC.",
+      "Photo 2: Task Manager GPU tab showing NVIDIA GeForce RTX... at 34% utilization, 45\u00b0C, and Intel(R) UHD Graphics at 15% utilization. Shared GPU memory 1.8/7.8 GB. Driver version 32.0.101.7084, dated 15/01/2026. DirectX version 12 (FL 12.1)."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "gaming laptop",
+      "brand": "HP",
+      "model": "Victus 15",
+      "read_from": [
+        "photo 0: 'VICTUS' below keyboard and 'HP Victus Gaming Laptop' sticker"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "13th gen Intel Core i5-13420H processor",
+        "verdict": "unverified",
+        "evidence": "Task Manager shows CPU frequency (1.32 GHz, 1.48 GHz) but does not display the model name. No CPU-Z or system info screenshot is provided."
+      },
+      {
+        "claim": "16GB RAM",
+        "verdict": "contradicted",
+        "evidence": "Photo 1 and Photo 2 show 15.6 GB total memory, with 12.4\u201312.6 GB in use. This indicates 16 GB is not fully available, likely due to system reserved memory or a 16 GB module with 4.4 GB reserved for graphics, but the total installed RAM is not confirmed as 16 GB. The 15.6 GB is consistent with 16 GB installed, but not definitive."
+      },
+      {
+        "claim": "512GB PCIe NVMe SSD",
+        "verdict": "supported",
+        "evidence": "Photo 1 and Photo 2 show 'Disk 0 (C:) SSD (NVMe)' with 0% usage, indicating an NVMe SSD is present. Capacity is not shown, but the type matches the claim."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "CPU model is not confirmed; could be a different 13th gen i5 or even a non-gaming variant.",
+        "proof": "Screenshot of CPU-Z or System Information showing the exact CPU model (i5-13420H).",
+        "if_unproven": "Priced as a generic 13th gen i5 laptop, which may be lower than the i5-13420H value."
+      },
+      {
+        "risk": "RAM is not confirmed as 16 GB; could be 16 GB with reserved memory or a 12 GB module.",
+        "proof": "Screenshot of System Information or Task Manager showing total installed RAM, or a memory diagnostic tool output.",
+        "if_unproven": "Priced as 12\u201314 GB RAM laptop, which is lower than 16 GB value."
+      },
+      {
+        "risk": "GPU model is not fully visible; could be RTX 3050, 3050 Ti, or 4050, which affects price significantly.",
+        "proof": "Screenshot of GPU-Z or Device Manager showing the full GPU model name.",
+        "if_unproven": "Priced as a mid-range RTX 3050, which may be lower than if it were a 4050."
+      },
+      {
+        "risk": "SSD capacity is not shown; could be less than 512 GB.",
+        "proof": "Screenshot of Disk Management or Task Manager showing the total size of Disk 0 (C:).",
+        "if_unproven": "Priced as a 512 GB SSD, but if it's smaller, the price must be adjusted downward."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of CPU-Z or System Information showing the exact CPU model.",
+      "Screenshot of System Information or Task Manager showing total installed RAM.",
+      "Screenshot of GPU-Z or Device Manager showing the full GPU model.",
+      "Screenshot of Disk Management showing the total size of the C: drive."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The laptop is identifiable as an HP Victus 15, but critical specifications like CPU model, exact RAM amount, GPU model, and SSD capacity are not fully verifiable from the current photos. Without proof, the item cannot be priced accurately, and risks of misrepresentation affect value."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 97811,
+    "input_tokens": 2807,
+    "output_tokens": 1168,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "c8fc0f2dcd0bad40c8dcd8d08faf108b",
+    "error": null
+  }
+}

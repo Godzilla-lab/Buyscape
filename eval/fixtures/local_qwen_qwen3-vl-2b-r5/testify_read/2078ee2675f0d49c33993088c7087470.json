@@ -1,0 +1,88 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r5",
+  "response": {
+    "observations": [
+      "Large blue industrial drum.",
+      "Label reads 'MONOETHYLENE GLYCOL' in English, German, Dutch, and French.",
+      "Label includes hazard symbols for toxicity and flammability.",
+      "Manufacture date (MANF DATE) and expiry date (EXP DATE) are visible on the label.",
+      "The drum is shown in a warehouse or outdoor setting with other similar drums.",
+      "Water droplets are visible on the surface of the drum in photos 0, 1, and 3."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "chemical",
+      "brand": "Unknown",
+      "read_from": [
+        "photo 0 label",
+        "photo 1 label",
+        "photo 3 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Industrial-grade",
+        "verdict": "unverifiable_remote",
+        "evidence": "The label does not specify the grade."
+      },
+      {
+        "claim": "Monoethylene Glycol (MEG)",
+        "verdict": "supported",
+        "evidence": "photo 0 label"
+      },
+      {
+        "claim": "Large blue drum",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "Suitable for a variety of...",
+        "verdict": "unverifiable_remote",
+        "evidence": "The text is cut off in the photos."
+      },
+      {
+        "claim": "Food grade, used only once for clean water. No crack, no leak, lids complete.",
+        "verdict": "unverified",
+        "evidence": "No photo shows this; it is the seller's word only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The drum may be empty or contain a different substance.",
+        "proof": "A photo of the internal volume markings or a weighing of the contents.",
+        "if_unproven": "as empty"
+      },
+      {
+        "risk": "The contents may be degraded or contaminated.",
+        "proof": "A photo of the manufacturer's date code on the bottom of the drum.",
+        "if_unproven": "as expired/scrap value"
+      },
+      {
+        "risk": "The drum may have structural damage or rust not visible in the photos.",
+        "proof": "Close-up photos of the bottom and the inside of the drum.",
+        "if_unproven": "as damaged"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the bottom of the drum showing the volume and weight.",
+      "Photo of the internal condition of the drum.",
+      "Photo of the date code on the bottom of the drum."
+    ],
+    "decision": "price",
+    "reason": "The item is known from the photos. What they cannot prove is priced at its worst case until the proof asked for below arrives."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r5",
+    "task": "testify_read",
+    "latency_ms": 2323,
+    "input_tokens": 3421,
+    "output_tokens": 468,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "2078ee2675f0d49c33993088c7087470",
+    "error": null
+  }
+}

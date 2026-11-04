@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo shows a Nikon DSLR camera body on a table.",
+      "Two lenses are visible: one looks like a zoom lens (appears similar to 18-55mm style) and another looks like a prime lens (appears similar to 50mm style).",
+      "No Canon branding is visible in the photo.",
+      "No model number/label is clearly readable on the camera body or lenses."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": null,
+      "brand": "Nikon",
+      "model": null,
+      "read_from": [
+        "photo 0 camera body front text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "It has 2 lens 18-55mm and 50mm.",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows two lenses, but the exact focal lengths (18-55mm and 50mm) are not readable."
+      },
+      {
+        "claim": "Clean and good to shoot videos and snapshots.",
+        "verdict": "unverified",
+        "evidence": "Photo 0 does not show sensor condition, shutter count, autofocus performance, or video functionality."
+      },
+      {
+        "claim": "The brand is Canon.",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows a Nikon camera body (Nikon text visible), not Canon."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Brand mismatch / wrong listing: seller says Canon but photos show Nikon; could be a different system or bait-and-switch.",
+        "proof": "Ask for a clear photo of the camera model name/number on the body (e.g., on the front/top) and lens markings showing focal length (18-55 and 50).",
+        "if_unproven": "Price as a Nikon DSLR kit with unknown exact models and assume average condition; do not price as Canon."
+      },
+      {
+        "risk": "Exact lens focal lengths may not be 18-55mm and 50mm (could be different ranges or third-party lenses).",
+        "proof": "Request close-up photos of both lenses\u2019 front ring/label showing focal length and mount compatibility.",
+        "if_unproven": "Price as a generic 2-lens Nikon DSLR kit (worst-case: lenses not confirmed to be the stated focal lengths)."
+      },
+      {
+        "risk": "Functional condition unknown (shutter, autofocus, lens focus, video output, buttons/ports).",
+        "proof": "Request a short video clip showing live view autofocus and recording, plus a photo of the rear screen showing menu/settings.",
+        "if_unproven": "Price as not guaranteed working/untested; treat as worst-case until tested."
+      },
+      {
+        "risk": "Missing accessories (battery, charger, memory card, straps, caps) can materially change value.",
+        "proof": "Ask for a full contents photo laid out: battery, charger, both lens caps, body cap (if any), strap, USB/AV cables, and memory card.",
+        "if_unproven": "Price assuming minimal accessories (battery/charger not guaranteed)."
+      }
+    ],
+    "proof_requests": [
+      "Send a clear close-up photo of the camera model name/number on the body (not just the brand).",
+      "Send close-up photos of both lenses showing the exact focal length markings (18-55 and 50) and whether they are original/third-party.",
+      "Send a short test video (live view + autofocus + recording) to confirm video works.",
+      "Send a photo of everything included (battery, charger, caps, strap, memory card)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo contradicts the seller\u2019s Canon claim (it shows Nikon), and the exact lens focal lengths and functionality are not verifiable from the single image. Proof is needed before a reliable price."
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_read",
+    "latency_ms": 5628,
+    "input_tokens": 1655,
+    "output_tokens": 857,
+    "cost_usd": 0.001402,
+    "replayed": false,
+    "fixture_key": "d9331317624cab49fcf1980a1e70a3a9",
+    "error": null
+  }
+}

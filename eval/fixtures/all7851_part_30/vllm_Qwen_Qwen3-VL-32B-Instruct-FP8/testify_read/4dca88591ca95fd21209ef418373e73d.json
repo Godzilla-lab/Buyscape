@@ -1,0 +1,88 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the front of an iPhone with the screen on, displaying iOS home screen with app icons. The notch design is visible, consistent with iPhone 11 or later models.",
+      "Photo 1 shows the back of the phone, which is greenish-blue (likely 'Green' as claimed, though appears more mint or greenish-teal in lighting). The dual-camera system in a square module is visible, consistent with iPhone 11.",
+      "The Apple logo is centered on the back, and the phone has rounded edges and a glass back.",
+      "No visible cracks or major damage on the front or back in these photos.",
+      "The phone is being held in a hand, with a background that includes a wall with blue and red lettering and a watermark 'POSTED ON JIJI TECH_DYNASTY'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "iPhone 11",
+      "brand": "Apple",
+      "model": "iPhone 11",
+      "read_from": [
+        "photo 0 screen (iOS interface and notch design)",
+        "photo 1 back (dual-camera square module and Apple logo)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "iPhone 11",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 1 show the front and back design consistent with iPhone 11: notch, dual-camera square module, and Apple logo."
+      },
+      {
+        "claim": "64gb",
+        "verdict": "unverifiable_remote",
+        "evidence": "Storage capacity cannot be read from photos. No settings screen or box shown."
+      },
+      {
+        "claim": "Green",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows the back of the phone in a greenish-blue/mint color, which matches Apple's 'Green' color for iPhone 11."
+      },
+      {
+        "claim": "Clean",
+        "verdict": "unverified",
+        "evidence": "No visible damage in photos, but no close-up shots of screen, edges, or ports to confirm cleanliness. Scratches or smudges may be present but not visible."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Phone may be faulty or not working (e.g., screen, battery, camera, or software issues)",
+        "proof": "Video or photo showing the phone powering on, camera working, and charging port functioning.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Storage capacity is not 64GB (could be 128GB or 256GB, or even a lower model)",
+        "proof": "Photo of the Settings > General > About screen showing storage capacity.",
+        "if_unproven": "priced as 64GB, but with lower value if capacity is less"
+      },
+      {
+        "risk": "Phone may be stolen, blacklisted, or have iCloud lock",
+        "proof": "Photo of the Settings > General > About screen showing IMEI and serial number, and a screenshot of the phone being unlocked with a non-Apple ID or showing 'Activation Lock' status.",
+        "if_unproven": "priced as potentially locked or blacklisted, which reduces value"
+      },
+      {
+        "risk": "Hidden physical damage (scratches, cracks, water damage, or bent frame)",
+        "proof": "Close-up photos of the screen, edges, charging port, and camera lenses.",
+        "if_unproven": "priced as having possible hidden damage"
+      }
+    ],
+    "proof_requests": [
+      "Photo of Settings > General > About screen showing model, storage, and serial number.",
+      "Video showing the phone turning on, camera working, and charging.",
+      "Close-up photos of the screen, edges, and charging port for damage inspection.",
+      "Screenshot or photo confirming iCloud status (if unlocked)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and color are supported by the photos, but critical claims like storage capacity and condition cannot be verified remotely. Hidden risks like iCloud lock, physical damage, or faulty components affect pricing and must be proven before a price can be assigned."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 74094,
+    "input_tokens": 2277,
+    "output_tokens": 930,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "4dca88591ca95fd21209ef418373e73d",
+    "error": null
+  }
+}

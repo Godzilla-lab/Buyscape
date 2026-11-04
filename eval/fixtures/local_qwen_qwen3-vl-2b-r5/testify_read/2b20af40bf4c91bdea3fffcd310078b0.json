@@ -1,0 +1,80 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r5",
+  "response": {
+    "observations": [
+      "Black plastic carrying case with a handle and wheels.",
+      "A yellow welding machine is visible inside the case in photo 2.",
+      "The machine has 'WELDARC 180i' and 'VIM' printed on its casing.",
+      "A manual and a coiled cable are included in the case.",
+      "The case exterior shows some surface wear and scuffs."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "welding machine",
+      "brand": "VIM",
+      "model": "Weldarc 180i",
+      "read_from": [
+        "photo 0 label",
+        "photo 1 label",
+        "photo 2 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Rated Output: 180 Amps",
+        "verdict": "unverified",
+        "evidence": "The technical specification plate is not visible in the provided photos."
+      },
+      {
+        "claim": "Weight: 6.5 kg",
+        "verdict": "unverified",
+        "evidence": "The weight is not visible in the photos."
+      },
+      {
+        "claim": "Single-phase",
+        "verdict": "unverified",
+        "evidence": "The power supply type is not visible in the photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The machine may be non-functional or have internal damage.",
+        "proof": "A video showing the machine powered on and successfully welding a metal plate.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The internal components (welding torch, electrode holder) may be missing or damaged.",
+        "proof": "A photo of the internal components of the machine.",
+        "if_unproven": "as missing all internal parts"
+      },
+      {
+        "risk": "The power supply may be faulty or have a damaged output terminal.",
+        "proof": "A photo of the power supply unit and a multimeter test showing a stable voltage output.",
+        "if_unproven": "as having a faulty power supply"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of any label, sticker or metal plate showing the brand and model.",
+      "Photo of the technical specification plate on the back or side of the machine.",
+      "Video of the machine powered on and welding.",
+      "Photo of the internal components of the machine.",
+      "Photo of the power supply unit."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "What the item is shows, but not the model that sets its price: no photo shows it clearly enough to read. The shot asked for first would settle it."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r5",
+    "task": "testify_read",
+    "latency_ms": 2243,
+    "input_tokens": 2200,
+    "output_tokens": 451,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "2b20af40bf4c91bdea3fffcd310078b0",
+    "error": null
+  }
+}

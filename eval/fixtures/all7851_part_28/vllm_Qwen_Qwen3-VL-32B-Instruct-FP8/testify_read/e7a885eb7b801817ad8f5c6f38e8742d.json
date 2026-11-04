@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a metal paint can with a white label and blue/red accents.",
+      "The label clearly reads 'Interthane 990 Aluminium Part A'.",
+      "Product code PHA906 is visible.",
+      "Content is listed as 1.25L.",
+      "Batch number TB9005RG and a date code 'NOV/2019' are visible.",
+      "The can has a metal handle attached to the rim.",
+      "The can is placed on a concrete or tiled surface, outdoors, with some greenery in the background.",
+      "There is a watermark 'BASTECH GLOBAL TECHNICAL' across the label."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "paint",
+      "brand": "Interthane",
+      "model": "990 Aluminium Part A",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Interthane 990 Aluminium is a two-component acrylic polyurethane finish known for its metallic...",
+        "verdict": "supported",
+        "evidence": "Photo 0 label shows 'Interthane 990 Aluminium Part A', indicating it is part of a two-component system. The product is known in the market as a polyurethane finish for aluminium, often with metallic properties."
+      },
+      {
+        "claim": "Content is 1.25L",
+        "verdict": "supported",
+        "evidence": "Photo 0 label clearly states 'Content 1.25L'."
+      },
+      {
+        "claim": "Product Code PHA906",
+        "verdict": "supported",
+        "evidence": "Photo 0 label shows 'Product Code PHA906'."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The paint may be expired or degraded due to age (batch date is NOV/2019).",
+        "proof": "A close-up of the label showing the full expiry date or a photo of the paint's consistency and color when opened.",
+        "if_unproven": "priced as expired or unusable"
+      },
+      {
+        "risk": "The can may be damaged or compromised, leading to contamination or loss of product.",
+        "proof": "A full view of the can showing any dents, rust, or leaks, and a photo of the seal integrity.",
+        "if_unproven": "priced as potentially compromised"
+      },
+      {
+        "risk": "The product may be counterfeit or mislabeled.",
+        "proof": "A photo of the can's bottom or side with manufacturer details, or a comparison with an authentic can from a trusted source.",
+        "if_unproven": "priced as potentially counterfeit"
+      }
+    ],
+    "proof_requests": [
+      "A photo of the full can showing the bottom or side with manufacturer details.",
+      "A photo of the paint's condition when opened (color, consistency, no sediment).",
+      "A close-up of the label showing the full expiry date or shelf life information."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The product identity is clear, but critical risks such as expiration, condition, and authenticity cannot be confirmed from the current photo. These risks significantly affect value and usability, so proof is required before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 55277,
+    "input_tokens": 1801,
+    "output_tokens": 734,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "e7a885eb7b801817ad8f5c6f38e8742d",
+    "error": null
+  }
+}

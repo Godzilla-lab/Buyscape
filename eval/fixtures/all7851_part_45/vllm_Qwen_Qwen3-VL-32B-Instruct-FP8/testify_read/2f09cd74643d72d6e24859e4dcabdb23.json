@@ -1,0 +1,96 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the front of a black, compact device with a textured top surface. The front panel has 'Wyse 3040' printed on it, an Intel Atom x5 sticker, a Dell logo, a power button, a 3.5mm audio jack, a USB 2.0 port, and a USB 3.0 port.",
+      "Photo 1 is a diagonal view of the same device, showing the textured top and front panel with the same labels and ports as photo 0.",
+      "Photo 2 is a composite image showing the front and back of the device. The front matches photo 0. The back shows a 3.5mm audio jack, HDMI port, DisplayPort, two USB 2.0 ports, and an Ethernet port. The back also has a watermark 'ICTNG COMMUNICATIONS LTD'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "thin client",
+      "brand": "Dell",
+      "model": "Wyse 3040",
+      "read_from": [
+        "photo 0 front panel",
+        "photo 1 front panel",
+        "photo 2 front panel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Dell Wyse 3040",
+        "verdict": "supported",
+        "evidence": "Photo 0, photo 1, and photo 2 all show 'Wyse 3040' and 'Dell' branding on the front panel."
+      },
+      {
+        "claim": "Atom x5-Z8350",
+        "verdict": "unverified",
+        "evidence": "Photo 0 and photo 1 show an 'Intel Atom x5' sticker, but the specific model 'Z8350' is not readable. The sticker does not specify the exact model."
+      },
+      {
+        "claim": "2GB RAM",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible label or indicator of RAM size. This can only be verified by opening the device or checking system information, which is not possible remotely."
+      },
+      {
+        "claim": "8GB storage",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible label or indicator of storage capacity. This can only be verified by checking system information or opening the device."
+      },
+      {
+        "claim": "1.44GHz",
+        "verdict": "unverified",
+        "evidence": "The Intel Atom x5 sticker is visible, but the clock speed is not readable. The seller's claim of 1.44GHz is not confirmed by the photos."
+      },
+      {
+        "claim": "Without PSU",
+        "verdict": "supported",
+        "evidence": "No power supply unit is visible in any of the photos. The seller explicitly states it is without PSU, and no PSU is shown."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "RAM may not be 2GB as claimed",
+        "proof": "A photo showing the system information screen or the internal RAM module with its label visible.",
+        "if_unproven": "priced as having unknown or less than 2GB RAM"
+      },
+      {
+        "risk": "Storage may not be 8GB as claimed",
+        "proof": "A photo showing the system information screen or the internal storage module with its label visible.",
+        "if_unproven": "priced as having unknown or less than 8GB storage"
+      },
+      {
+        "risk": "CPU may not be Atom x5-Z8350 or may not run at 1.44GHz",
+        "proof": "A photo showing the system information screen with CPU details or the CPU label inside the device.",
+        "if_unproven": "priced as having unknown or lower-spec CPU"
+      },
+      {
+        "risk": "Device may be non-functional or have hidden damage",
+        "proof": "A video showing the device powering on and booting, or a photo of the device with a connected monitor displaying the desktop.",
+        "if_unproven": "priced as possibly non-working"
+      }
+    ],
+    "proof_requests": [
+      "A photo or video showing the device powered on and booting to confirm functionality.",
+      "A photo of the system information screen showing CPU, RAM, and storage details.",
+      "A photo of the internal components if possible, to verify RAM and storage modules."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and brand are confirmed, but key specifications like RAM, storage, and CPU model are not verifiable from the photos. The device's functionality is also unproven. Without proof of these claims, the item cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 87451,
+    "input_tokens": 2158,
+    "output_tokens": 1039,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "2f09cd74643d72d6e24859e4dcabdb23",
+    "error": null
+  }
+}

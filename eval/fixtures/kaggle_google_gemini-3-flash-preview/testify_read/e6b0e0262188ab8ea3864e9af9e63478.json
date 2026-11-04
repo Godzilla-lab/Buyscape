@@ -1,0 +1,69 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "A single tire tread is shown from a high angle.",
+      "Colored lines (green and white) are visible on the tread surface, often indicating a new tire.",
+      "The sidewall of the tire is not visible.",
+      "Brand, model, size, and manufacture date are not visible in the photo."
+    ],
+    "identity": {
+      "status": "unknown",
+      "kind": "car tire",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Brand New",
+        "verdict": "unverified",
+        "evidence": "The tread lines suggest it is unused, but the manufacture date (DOT code) is not visible to confirm it isn't old stock."
+      },
+      {
+        "claim": "non china",
+        "verdict": "unverifiable_remote",
+        "evidence": "The country of manufacture is stamped on the sidewall, which is not shown."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Unknown tire size",
+        "proof": "A photo of the sidewall showing the size (e.g., 205/55R16).",
+        "if_unproven": "priced as the smallest/cheapest common passenger car size."
+      },
+      {
+        "risk": "Expired or old stock",
+        "proof": "A photo of the 4-digit DOT code on the sidewall.",
+        "if_unproven": "priced as expired/unsafe rubber."
+      },
+      {
+        "risk": "Unknown brand and quality",
+        "proof": "A photo of the sidewall showing the brand name and country of manufacture.",
+        "if_unproven": "priced as a generic budget tire."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the full sidewall showing the brand and model.",
+      "Photo of the tire size (e.g., 195/65R15).",
+      "Photo of the DOT code (4 digits in an oval) to check the age.",
+      "Photo of the 'Made in' stamp."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo shows only the tread. Without the size, brand, and manufacture date from the sidewall, it is impossible to identify or price the item."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 5817,
+    "input_tokens": 2348,
+    "output_tokens": 1083,
+    "cost_usd": 0.004423,
+    "replayed": false,
+    "fixture_key": "e6b0e0262188ab8ea3864e9af9e63478",
+    "error": null
+  }
+}

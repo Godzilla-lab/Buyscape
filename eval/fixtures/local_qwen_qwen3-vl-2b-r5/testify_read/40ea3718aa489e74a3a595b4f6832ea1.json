@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r5",
+  "response": {
+    "observations": [
+      "Red gas cylinder with a metal collar.",
+      "The collar has embossed text: 'UKPP 32' and 'PROPERTY OF COMFORT GAS'.",
+      "The main body has a white rectangular label with 'CALOR' and '47kg Prop'.",
+      "The cylinder shows significant surface wear and dirt.",
+      "A watermark 'POSTED ON JIJI NWOBODO PETER' is visible across the center.",
+      "No expiry date or manufacturing date is visible on the collar or body."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "gas cylinder",
+      "brand": "Calor",
+      "model": "47kg Prop",
+      "read_from": [
+        "photo 0 collar",
+        "photo 0 body"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "50kg",
+        "verdict": "unverified",
+        "evidence": "The collar in photo 0 reads 'UKPP 32', which is the standard for 32kg cylinders, not 50kg."
+      },
+      {
+        "claim": "direct London tokunbo",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a geographical claim that cannot be verified from a photo."
+      },
+      {
+        "claim": "Total gas",
+        "verdict": "unverified",
+        "evidence": "The brand 'Total' is not visible on the collar or body in photo 0."
+      },
+      {
+        "claim": "Recently tested and certified, no leak, the valve is new.",
+        "verdict": "unverified",
+        "evidence": "No photo shows this; it is the seller's word only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The cylinder may be past its expiry date or near the end of its service life.",
+        "proof": "A clear photo of the manufacturing or expiry date stamped on the collar or the metal shroud.",
+        "if_unproven": "as expired/scrap value"
+      },
+      {
+        "risk": "The cylinder may be a 32kg rather than a 50kg unit.",
+        "proof": "A photo of the collar showing the 'UKPP' code and the weight specification.",
+        "if_unproven": "as a 32kg cylinder"
+      },
+      {
+        "risk": "The valve may be faulty or leaking.",
+        "proof": "A video showing a soap bubble test on the valve while under pressure.",
+        "if_unproven": "as requiring a valve replacement"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the collar showing the 'UKPP' code and the weight specification.",
+      "Photo of the expiry or manufacturing date stamped on the collar or shroud.",
+      "Photo of the valve with a soap bubble leak test."
+    ],
+    "decision": "price",
+    "reason": "The item is known from the photos. What they cannot prove is priced at its worst case until the proof asked for below arrives."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r5",
+    "task": "testify_read",
+    "latency_ms": 2325,
+    "input_tokens": 1596,
+    "output_tokens": 516,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "40ea3718aa489e74a3a595b4f6832ea1",
+    "error": null
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black DSLR camera body without a lens; front reads 'Canon', 'EOS', '5D', and 'Mark II'; mirror box and sensor area visible inside mount.",
+      "Photo 1 shows the top of the camera with mode dial, hot shoe, and rear control buttons; 'WB' and 'AF-DRIVE' text visible near grip.",
+      "Photo 2 shows the back of the camera with a dark LCD screen; 'Canon' logo visible below the screen; buttons on left and right grips."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DSLR camera body",
+      "brand": "Canon",
+      "model": "EOS 5D Mark II",
+      "read_from": [
+        "photo 0",
+        "photo 2"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Canon EOS 5D Mark II",
+        "verdict": "supported",
+        "evidence": "photo 0 front badges read EOS, 5D, Mark II; photo 2 reads Canon below screen"
+      },
+      {
+        "claim": "full-frame DSLR",
+        "verdict": "unverified",
+        "evidence": "sensor size not visible in any photo"
+      },
+      {
+        "claim": "professional photography camera",
+        "verdict": "unverified",
+        "evidence": "classification not visible in photos"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Camera does not power on or shutter/buttons/dials are broken",
+        "proof": "video or photo showing camera powered on with menu on LCD and shutter firing",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Sensor has scratches, fungus, or heavy dust",
+        "proof": "close-up photo of sensor illuminated with a light source",
+        "if_unproven": "as sensor damaged or needing cleaning"
+      },
+      {
+        "risk": "Shutter count is high or mechanism is worn",
+        "proof": "screenshot of shutter count from camera menu",
+        "if_unproven": "as high shutter count or unknown wear"
+      },
+      {
+        "risk": "LCD screen is cracked or non-functional",
+        "proof": "photo of screen powered on displaying image or menu",
+        "if_unproven": "as screen not working"
+      }
+    ],
+    "proof_requests": [
+      "Video or photo of camera powered on showing menu and shutter firing",
+      "Close-up photo of the sensor with light shining on it",
+      "Screenshot of shutter count from the camera menu"
+    ],
+    "decision": "price",
+    "reason": "The item is clearly a Canon EOS 5D Mark II body from visible badges, but functionality and condition cannot be confirmed remotely, so it is priced at worst case as not working."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 74091,
+    "input_tokens": 2751,
+    "output_tokens": 3259,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "42637fd7c88ca6134827d11181265a92",
+    "error": null
+  }
+}

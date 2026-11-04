@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a close-up of a tire with visible sidewall text: 'MICHELIN', '235/60 R17', and 'RADIAL TUBELESS'.",
+      "The tire appears to be new or lightly used, with no visible damage or wear on the tread.",
+      "Photo 1 and Photo 2 show stacked tires with similar tread patterns, suggesting multiple units of the same model.",
+      "The tires are stored in what looks like a tire shop or warehouse, with other tires and yellow-wrapped bundles in the background.",
+      "No visible damage, cuts, or bulges on the sidewalls in any photo.",
+      "The seller claims 'Belgium tire all sizes available in stock all sizes both SUVs', but no country of origin is visible on the tire."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car tire",
+      "brand": "Michelin",
+      "model": "235/60 R17",
+      "read_from": [
+        "photo 0 sidewall"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Belgium tire",
+        "verdict": "unverifiable_remote",
+        "evidence": "No country of origin is visible on the tire in any photo. The seller's claim cannot be verified from the images."
+      },
+      {
+        "claim": "all sizes available in stock",
+        "verdict": "unverified",
+        "evidence": "Only one size (235/60 R17) is visible in the photos. Other sizes are not shown, so availability cannot be confirmed."
+      },
+      {
+        "claim": "all sizes both SUVs",
+        "verdict": "unverified",
+        "evidence": "The tire shown is a 235/60 R17, which is common for sedans or compact SUVs, but not necessarily for all SUVs. No SUV-specific tire is shown."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "tire may be counterfeit or not genuine Michelin",
+        "proof": "A clear shot of the tire's sidewall showing the full brand name, model, and DOT code, ideally with a close-up of the Michelin logo and manufacturing details.",
+        "if_unproven": "priced as potentially counterfeit, which would reduce value significantly"
+      },
+      {
+        "risk": "tire may be used or have hidden damage not visible in photos",
+        "proof": "A 360-degree video or close-up photos of the entire sidewall and tread, including the inner rim area, to check for cuts, bulges, or uneven wear.",
+        "if_unproven": "priced as possibly used or damaged, reducing value"
+      },
+      {
+        "risk": "tire may be imported from a non-Belgium source despite seller's claim",
+        "proof": "A clear photo of the DOT code or manufacturing label that includes country of origin, or a certificate of origin.",
+        "if_unproven": "priced as unverified origin, which may affect perceived quality and price"
+      }
+    ],
+    "proof_requests": [
+      "A clear, close-up photo of the tire's sidewall showing the full brand, model, and DOT code.",
+      "A 360-degree video or multiple angles of the tire to check for hidden damage.",
+      "Proof of origin or import documentation if claiming 'Belgium tire'."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The tire is identifiable as Michelin 235/60 R17, but key claims about origin and availability of other sizes cannot be verified. Hidden risks like counterfeit or hidden damage require additional proof before pricing can be determined accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 67048,
+    "input_tokens": 2777,
+    "output_tokens": 815,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "424ae4e9d662bb6252d40823f92759c7",
+    "error": null
+  }
+}

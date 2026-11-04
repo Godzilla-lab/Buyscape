@@ -1,0 +1,80 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0: stack of framed solar panels leaning against an exterior wall, watermark \"FRANK SOLAR ENTERPRISES\", timestamp 05/02/2025 15:19",
+      "Photo 1: CanadianSolar label showing model CS6W-650MB-AG, 650 W, timestamp 05/02/2025 14:52, same watermark",
+      "No inverter or batteries appear in either photo"
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "solar panel",
+      "brand": "CanadianSolar",
+      "model": "CS6W-650MB-AG",
+      "read_from": [
+        "photo 1 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "seller has solar panels",
+        "verdict": "supported",
+        "evidence": "photo 0 shows stacked solar panels"
+      },
+      {
+        "claim": "seller has inverters and batteries",
+        "verdict": "unverified",
+        "evidence": "not visible in photos"
+      },
+      {
+        "claim": "different sizes available",
+        "verdict": "unverified",
+        "evidence": "photo 0 panels appear uniform; no size comparison shown"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Panels may have physical damage (cracks, broken cells, frame bends) not visible from this distance",
+        "proof": "close-up photos of panel surfaces, corners, and frames",
+        "if_unproven": "as damaged with unknown output"
+      },
+      {
+        "risk": "The label in photo 1 may not be attached to the panels in photo 0",
+        "proof": "photo showing the label on one of the stacked panels",
+        "if_unproven": "as unknown model/specification"
+      },
+      {
+        "risk": "Electrical output cannot be verified from a label photo; panels may be degraded",
+        "proof": "flash test or video of output under sunlight",
+        "if_unproven": "as not working or degraded"
+      },
+      {
+        "risk": "Claimed inverter and batteries may not exist or may be faulty",
+        "proof": "photos of inverter and batteries with branding and condition",
+        "if_unproven": "as not included or non-functional"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photos of the solar panel surfaces and frames",
+      "Photo showing the CanadianSolar label attached to one panel in the stack",
+      "Count of panels in the stack",
+      "Photos of any inverter and batteries if included in the sale"
+    ],
+    "decision": "price",
+    "reason": "The panel model is readable from the label in photo 1, so the item can be identified and priced at its worst case despite unproven condition and performance."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 20171,
+    "input_tokens": 2378,
+    "output_tokens": 2994,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "fee2a5038ef26da95595b4a8ad712dc9",
+    "error": null
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Blue plastic carrying case with printed label",
+      "TOTAL brand logo clearly visible on photo 0",
+      "Box text reads COMPACT BRUSHLESS CORDLESS IMPACT DRILL",
+      "20V rating shown on box",
+      "580+ battery badge visible",
+      "LOCK SPINDLE and IMPACT SPINDLE LOCK badges visible",
+      "Image of cordless drill/driver with battery attached",
+      "2 x 2.0Ah x2 battery indication",
+      "Charger image shown",
+      "MADE IN CHINA and NEWAY TECHNOLOGY (SUZHOU) CO., LIMITED text visible",
+      "Barcode and regulatory marks present"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "cordless impact drill",
+      "brand": "TOTAL",
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Brushless Motor",
+        "verdict": "supported",
+        "evidence": "photo 0 box text reads COMPACT BRUSHLESS CORDLESS IMPACT DRILL"
+      },
+      {
+        "claim": "Mechanical 2-speed gear with Spindle Lock function",
+        "verdict": "unverified",
+        "evidence": "photo 0 shows LOCK SPINDLE badge but 2-speed gear text is not legible"
+      },
+      {
+        "claim": "Auto-lock metal keyless chuck",
+        "verdict": "unverified",
+        "evidence": "photo 0 shows drill image but chuck material and lock type cannot be confirmed"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Tool may not function (motor, chuck, gears)",
+        "proof": "video of drill running under load",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Batteries may be missing, wrong capacity, or dead",
+        "proof": "close-up of battery labels showing 2.0Ah",
+        "if_unproven": "as bare tool with no batteries"
+      },
+      {
+        "risk": "Charger may be missing or wrong plug/voltage for Lagos",
+        "proof": "photo of charger input label and plug",
+        "if_unproven": "as bare tool only"
+      },
+      {
+        "risk": "Item may be used or box may be resealed",
+        "proof": "video of box seals and case condition",
+        "if_unproven": "as used/open-box"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of battery labels showing capacity",
+      "Photo of charger input voltage and plug type",
+      "Video of drill operating under load",
+      "Photo of box seals and case corners"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a TOTAL 20V cordless impact drill; box printing supports brushless and spindle lock claims, but function and accessories are unproven, so it can be priced at worst case."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 22452,
+    "input_tokens": 1608,
+    "output_tokens": 3260,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "8039e1963118fd258d199c25ec2ee66f",
+    "error": null
+  }
+}

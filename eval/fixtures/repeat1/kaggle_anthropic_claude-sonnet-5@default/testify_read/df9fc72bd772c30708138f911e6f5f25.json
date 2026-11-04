@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo shows roughly six to eight blue plastic drums with lids, some lids open showing a lighter blue inner color.",
+      "Drums are sitting on bare dirt/mud ground, outdoors, suggesting a storage yard or dealer lot.",
+      "No visible capacity markings, brand labels, or liter numbers on any drum.",
+      "A semi-transparent watermark reading something like 'SUNNY ... GENUINE' overlays the image; this is a seller/shop watermark, not an inspection stamp.",
+      "Some drums show surface scuffing and dirt stains but no visible cracks or holes in this low resolution.",
+      "Only plastic drums are visible in the photo; no steel drums are shown despite being mentioned in the text."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "plastic storage drum/barrel with lid",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Container drums, water storage drums, plastic barrel, plastic drum and kegs",
+        "verdict": "unverified",
+        "evidence": "Photo 0 only shows blue lidded plastic drums; no kegs or other drum types are visible to confirm the full range."
+      },
+      {
+        "claim": "Upright steel or...",
+        "verdict": "unverifiable_remote",
+        "evidence": "No steel drums appear anywhere in photo 0; claim is cut off and cannot be checked against this image."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Capacity/volume of each drum is unknown (e.g. 60L, 120L, 200L), which is the main price driver for drums.",
+        "proof": "A photo showing a printed liter marking on the drum body, or a tape measure against one drum for height/diameter.",
+        "if_unproven": "price at the smallest common capacity as worst case"
+      },
+      {
+        "risk": "Condition could be used/reconditioned rather than new, with possible cracks, prior chemical residue, or weakened lid seals not visible at this resolution.",
+        "proof": "Close-up photos of the drum walls, base, and lid gasket, plus a shot of any interior residue.",
+        "if_unproven": "price as used/reconditioned, not new"
+      },
+      {
+        "risk": "Food-grade vs industrial-grade plastic cannot be confirmed from a photo, affecting suitability and price for water storage.",
+        "proof": "A photo of a food-grade or recycling-code stamp molded into the drum (commonly on the base or side).",
+        "if_unproven": "price as non-food-grade/industrial use only"
+      },
+      {
+        "risk": "Lid seal integrity (airtight/leak-proof) is an implied but unproven feature.",
+        "proof": "A video clip of the lid being closed and the drum turned upside down briefly, or filled with water and checked for leaks.",
+        "if_unproven": "price as not leak-tested/not sealed"
+      },
+      {
+        "risk": "Steel drum variant mentioned in text is not shown, so its existence/condition is unverifiable.",
+        "proof": "A separate photo of the actual steel drum(s) on offer.",
+        "if_unproven": "excluded from pricing until shown"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of any liter/capacity marking or stamp on one drum.",
+      "Close-up of the drum base for a food-grade/recycling code stamp.",
+      "Photo or short video showing the lid closed and the drum tipped to check for leaks.",
+      "Photo of the steel drum(s) referenced in the text, if actually available."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The drums are identifiable by type, but the capacity that mainly sets their price is not visible or readable in the single photo, so even a worst-case price cannot be set without it."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 23545,
+    "input_tokens": 1939,
+    "output_tokens": 2132,
+    "cost_usd": 0.025198,
+    "replayed": false,
+    "fixture_key": "df9fc72bd772c30708138f911e6f5f25",
+    "error": null
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Three photos show a large cardboard box with a smaller box on top, both branded 'Emel'.",
+      "The top box is labeled 'CLUTCH MOTOR EM2504+HB' and shows an image of a motor unit, not a full sewing machine.",
+      "The larger box has text 'INDUSTRIAL SEWING MACHINE' and 'MADE IN CHINA'.",
+      "The boxes are visibly worn, with scuff marks, tape, and water stains.",
+      "The seller claims it is a 'New sewing machine', but the photos show only packaging, not the machine itself.",
+      "No serial number, model number, or machine body is visible in any photo."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "industrial sewing machine",
+      "brand": "Emel",
+      "model": "EM2504+HB",
+      "read_from": [
+        "photo 0 top box label",
+        "photo 1 top box label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "A New sewing machine",
+        "verdict": "unverified",
+        "evidence": "Photos show only packaging; no machine is visible. The boxes are worn, suggesting prior handling or storage."
+      },
+      {
+        "claim": "Industrial sewing machine",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 2 show 'INDUSTRIAL SEWING MACHINE' printed on the large box."
+      },
+      {
+        "claim": "Emel brand",
+        "verdict": "supported",
+        "evidence": "Photo 0, photo 1, and photo 2 show the 'Emel' logo on both boxes."
+      },
+      {
+        "claim": "Model EM2504+HB",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 1 show 'EM2504+HB' on the top box label."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The machine may be used or damaged, not new as claimed.",
+        "proof": "A clear photo of the actual sewing machine inside the box, showing no signs of wear or damage.",
+        "if_unproven": "priced as used or damaged, which reduces value significantly."
+      },
+      {
+        "risk": "The machine may be missing parts or incomplete.",
+        "proof": "A photo of the full machine with all components (motor, needle, presser foot, etc.) assembled or laid out.",
+        "if_unproven": "priced as incomplete, which reduces value."
+      },
+      {
+        "risk": "The machine may not work or may be defective.",
+        "proof": "A video or photo showing the machine powered on and operating smoothly.",
+        "if_unproven": "priced as not working, which reduces value to scrap or parts-only price."
+      },
+      {
+        "risk": "The box may contain only the motor (EM2504+HB) and not a full sewing machine.",
+        "proof": "A photo showing the full sewing machine assembly, not just the motor unit.",
+        "if_unproven": "priced as motor-only, which is much less valuable than a full machine."
+      }
+    ],
+    "proof_requests": [
+      "A clear photo of the actual sewing machine inside the box, showing the full unit.",
+      "A photo or video of the machine powered on and operating.",
+      "A photo showing all included parts and accessories.",
+      "A photo of the machine's serial number or model label on the body."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is claimed to be a new industrial sewing machine, but only the packaging is visible. The boxes are worn, and the machine itself is not shown. Without proof of the machine's condition, completeness, and functionality, a price cannot be determined. The model is identified from the box, but the actual product must be verified."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 69786,
+    "input_tokens": 2770,
+    "output_tokens": 868,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "8fac34272226179e0806eedb150948f8",
+    "error": null
+  }
+}

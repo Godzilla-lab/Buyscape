@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black portable light with a handle, two side-mounted spotlights, and a front panel with two large LED bulbs.",
+      "Photo 1 shows the same light with icons indicating solar charging, battery level, and USB-C input.",
+      "Photo 2 shows the product box labeled 'Hurry-bolt MULTIFUNCTIONAL PORTABLE LAMP' with model number 'HNB-7718-3W'.",
+      "The box depicts the light with red accents, while the actual light in photos 0 and 1 is black.",
+      "The seller's text claims it is a multi-functional LED solar light, portable, rechargeable, flashlight, and emergency light."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "multifunctional portable lamp",
+      "brand": "Hurry-bolt",
+      "model": "HNB-7718-3W",
+      "read_from": [
+        "photo 2 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Multi functional led solar light",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows solar charging icon; photo 2 box shows 'MULTIFUNCTIONAL PORTABLE LAMP' and LED bulbs visible in photo 0."
+      },
+      {
+        "claim": "bright outdoor portable rechargeable flashlight emergency light",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows portable design with handle; photo 1 shows rechargeable via USB-C and solar; photo 2 box shows outdoor use (tent image) and emergency light use case."
+      },
+      {
+        "claim": "rechargeable",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows USB-C and battery icons, indicating rechargeability."
+      },
+      {
+        "claim": "solar light",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows solar panel icon connected to battery, indicating solar charging capability."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The actual light may not have solar charging capability despite the icon in photo 1.",
+        "proof": "A close-up photo of the solar panel on the device or a video showing it charging via solar.",
+        "if_unproven": "priced as not solar-rechargeable"
+      },
+      {
+        "risk": "The device may be non-functional or have dead LEDs or batteries.",
+        "proof": "A video showing the light turned on and operating, including all modes (spotlights, front panel, USB output if any).",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The product may be a counterfeit or not the model shown on the box (HNB-7718-3W).",
+        "proof": "A close-up photo of the device's label or serial number matching the box model.",
+        "if_unproven": "priced as unbranded or generic"
+      }
+    ],
+    "proof_requests": [
+      "Video showing the light turned on and operating in all modes.",
+      "Close-up photo of the solar panel on the device or proof of solar charging.",
+      "Close-up of the device's label or serial number to confirm model HNB-7718-3W."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a Hurry-bolt HNB-7718-3W multifunctional portable lamp, and the seller's claims are supported by the photos. However, critical functional risks (solar charging, operational status, authenticity) cannot be verified remotely and must be proven before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 80738,
+    "input_tokens": 2379,
+    "output_tokens": 805,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "0f0e06e919d61abc0baab7d0dc32b438",
+    "error": null
+  }
+}

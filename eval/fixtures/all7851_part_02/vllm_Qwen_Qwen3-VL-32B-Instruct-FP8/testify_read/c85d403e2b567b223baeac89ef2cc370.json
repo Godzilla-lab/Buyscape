@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Three photos show a used car engine from different angles, lying on a concrete surface.",
+      "The engine has a black plastic valve cover with visible wear, dirt, and some white residue or paint on it.",
+      "There are four visible fuel injectors on top of the engine.",
+      "The intake manifold is black plastic, and the exhaust manifold is rusty metal.",
+      "The engine block is metallic and shows signs of oil residue and grime.",
+      "Various hoses, wires, and connectors are attached, some appearing aged or cracked.",
+      "No visible branding or model numbers on the engine block or valve cover in any photo.",
+      "The seller's text includes a location in Mushin, Lagos, but no mention of the engine's make, model, or condition beyond the photos."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "car engine",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "The engine is for sale in Mushin, Lagos.",
+        "verdict": "supported",
+        "evidence": "Seller's text states location: 'Destiny block 13 shop 7 Aguiyi Ironsi int\u2019l trade center (paramo) Ladipo mushin Lagos'."
+      },
+      {
+        "claim": "The engine is in working condition.",
+        "verdict": "unverified",
+        "evidence": "No test video or proof of operation is provided. The photos show physical condition only."
+      },
+      {
+        "claim": "The engine is from a specific car model.",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible branding, model number, or VIN on the engine in any photo. Cannot be identified from photos alone."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The engine may be damaged internally (e.g., blown head gasket, cracked block, seized pistons).",
+        "proof": "A video of the engine running, or a compression test video.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The engine may have been salvaged from a wrecked or stolen vehicle.",
+        "proof": "VIN or engine number matching a legitimate vehicle history report.",
+        "if_unproven": "priced as high-risk, with potential legal or mechanical issues"
+      },
+      {
+        "risk": "The engine may be incompatible with the buyer\u2019s vehicle due to unknown make/model.",
+        "proof": "Clear photo of the engine block with visible casting number or model stamp.",
+        "if_unproven": "priced as generic used engine, lower value due to uncertainty"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the engine block showing casting number or model stamp.",
+      "Video of the engine running or a compression test.",
+      "Proof of origin (VIN or vehicle history report)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The engine cannot be identified by brand or model from the photos, and its working condition is unverified. Without proof of identity and functionality, it cannot be priced accurately. The risks of internal damage or incompatibility are high until proven otherwise."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 59013,
+    "input_tokens": 2165,
+    "output_tokens": 706,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "c85d403e2b567b223baeac89ef2cc370",
+    "error": null
+  }
+}

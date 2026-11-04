@@ -1,0 +1,80 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows three items: a boxy grey thermal receipt printer with a paper slot, a black handheld barcode scanner on a stand, and a black cash drawer with bill and coin trays.",
+      "The cash drawer carries a watermark reading \"HIPHENS SOLUTIONS\" and \"BASED ON JIJI\", which appears to be a seller/marketplace mark rather than a product brand.",
+      "No 15\" touch screen POS terminal is visible anywhere in photo 0.",
+      "No readable brand or model name appears on the printer, scanner, or drawer."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "POS hardware bundle (receipt printer, barcode scanner, cash drawer)",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Bundle includes 1 x 15\" Touch Screen POS Terminal",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows only a receipt printer, barcode scanner, and cash drawer; no POS terminal is visible."
+      },
+      {
+        "claim": "Bundle includes 1 x 80mm USB Thermal Receipt Printer",
+        "verdict": "unverified",
+        "evidence": "A receipt printer is visible in photo 0, but its 80mm width and USB interface cannot be confirmed from the image."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The claimed POS terminal may not be included or may not function.",
+        "proof": "A photo of the POS terminal, ideally powered on and showing the screen.",
+        "if_unproven": "as not included"
+      },
+      {
+        "risk": "The receipt printer may not print, feed paper, or connect via USB.",
+        "proof": "A video of the printer printing a test receipt.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The barcode scanner may not scan or communicate with a POS system.",
+        "proof": "A video of the scanner reading a barcode and sending data.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The cash drawer may not open, or its trays may be damaged.",
+        "proof": "A video of the drawer opening and closing.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Unknown wear, damage, or missing power cables and adapters on all items.",
+        "proof": "Close-up photos of each item including ports, cables, and power supplies.",
+        "if_unproven": "as poor condition with missing accessories"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the 15\" touch screen POS terminal claimed in the bundle",
+      "Video of the receipt printer printing a receipt",
+      "Video of the barcode scanner scanning a barcode",
+      "Video of the cash drawer opening",
+      "Close-up photos of all ports, cables, and power adapters"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller claims a 15\" touch screen POS terminal is included, but photo 0 shows only a receipt printer, barcode scanner, and cash drawer; without seeing the terminal, the bundle cannot be priced."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 37966,
+    "input_tokens": 1588,
+    "output_tokens": 3577,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "ae2f3a6c23ef5cc263abb5e63c3cf0f1",
+    "error": null
+  }
+}

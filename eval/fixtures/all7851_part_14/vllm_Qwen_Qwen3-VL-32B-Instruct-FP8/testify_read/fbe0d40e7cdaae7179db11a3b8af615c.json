@@ -1,0 +1,93 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the back of a white iPhone with a dual-camera setup and Apple logo, consistent with iPhone 11 design.",
+      "Photo 1 shows the iPhone's Battery Health & Charging screen with Maximum Capacity at 93%.",
+      "The phone appears to be in good physical condition with no visible cracks or dents in the photos.",
+      "No model number or serial number is visible in either photo.",
+      "The seller claims it is an iPhone 11 from the UK, white, 10/10 cleanliness, no faults, no changed parts, physical SIM."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "iPhone 11",
+      "brand": "Apple",
+      "model": null,
+      "read_from": [
+        "photo 0: back design with dual-camera and Apple logo"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "iPhone 11 UK used, white",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows a white iPhone with the dual-camera layout and Apple logo consistent with iPhone 11. The seller's claim of 'UK used' is unverifiable_remote as no region-specific identifiers are visible."
+      },
+      {
+        "claim": "cleanliness: 10/10",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows no visible dirt or damage, but close-up shots of screen, ports, and edges are missing to confirm 10/10 cleanliness."
+      },
+      {
+        "claim": "no faults",
+        "verdict": "unverified",
+        "evidence": "Photo 1 shows battery health at 93%, which is acceptable, but no functional tests (e.g., camera, speakers, charging) are shown. No faults cannot be confirmed without full operational proof."
+      },
+      {
+        "claim": "no changed parts",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal shots or serial number check is available. Cannot verify if parts are original without diagnostic or IMEI verification."
+      },
+      {
+        "claim": "physical sim",
+        "verdict": "unverified",
+        "evidence": "No photo of the SIM tray or settings showing SIM type. The presence of a physical SIM slot is assumed based on iPhone 11 design, but not proven."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery health may be lower than 93% or degraded further",
+        "proof": "A video showing battery usage over time or a diagnostic tool reading battery health.",
+        "if_unproven": "Priced as having 93% battery health, but if unproven, it may be priced as degraded or with reduced lifespan."
+      },
+      {
+        "risk": "Phone may have been repaired or have non-original parts",
+        "proof": "A photo of the IMEI number and a diagnostic check (e.g., via Apple's website or a repair shop) to verify originality.",
+        "if_unproven": "Priced as if parts are original, but if unproven, priced as potentially refurbished or with replaced parts."
+      },
+      {
+        "risk": "Screen or camera may have hidden damage or faults",
+        "proof": "A video showing screen responsiveness, camera functionality, and edge-to-edge display quality.",
+        "if_unproven": "Priced as functional, but if unproven, priced as potentially defective."
+      },
+      {
+        "risk": "Phone may be blacklisted or have iCloud lock",
+        "proof": "A screenshot of the phone's settings showing 'Find My iPhone' turned off and a verification of IMEI status via Apple or a carrier.",
+        "if_unproven": "Priced as unlocked and clean, but if unproven, priced as potentially locked or blacklisted."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the front screen showing no cracks or dead pixels.",
+      "Photo of the SIM tray and settings showing physical SIM support.",
+      "Video of the phone in use: camera, speakers, charging, and screen responsiveness.",
+      "Photo of the IMEI number and a verification of iCloud status.",
+      "Photo of the box or original accessories if available."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as an iPhone 11 by design, but critical claims like 'no faults', 'no changed parts', and 'physical SIM' cannot be verified with current photos. Hidden risks such as iCloud lock, battery degradation, or non-original parts affect pricing. More proof is needed to price accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 81661,
+    "input_tokens": 2597,
+    "output_tokens": 1007,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "fbe0d40e7cdaae7179db11a3b8af615c",
+    "error": null
+  }
+}

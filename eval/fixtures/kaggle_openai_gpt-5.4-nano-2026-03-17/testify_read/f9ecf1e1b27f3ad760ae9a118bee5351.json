@@ -1,0 +1,91 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0 shows a UPS with the brand text \u201cBLUE GATE\u201d on the front.",
+      "Photo 0 shows a front panel with power button and multiple indicator LEDs (exact labels not readable).",
+      "Photo 1 shows the UPS from the side/front and a mains plug at the top; no battery compartment is visible.",
+      "No runtime test screen, battery health label, model number, or capacity (VA/W) is visible in the photos."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "UPS (uninterruptible power supply)",
+      "brand": "BLUE GATE",
+      "model": null,
+      "read_from": [
+        "photo 0 front panel text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "UPS available",
+        "verdict": "supported",
+        "evidence": "Photos show a device labeled \u201cBLUE GATE\u201d with UPS-style front indicators and mains plug (photo 0, photo 1)."
+      },
+      {
+        "claim": "Battery is new",
+        "verdict": "unverified",
+        "evidence": "No battery age/date sticker, replacement receipt, or internal/battery label is shown (photo 0, photo 1)."
+      },
+      {
+        "claim": "Battery holds charge for 8 hours",
+        "verdict": "unverified",
+        "evidence": "No runtime test video/log or load specification is shown (photo 0, photo 1)."
+      },
+      {
+        "claim": "Never repaired",
+        "verdict": "unverifiable_remote",
+        "evidence": "No warranty seal, service sticker, or internal inspection is shown; photos only show the exterior (photo 0, photo 1)."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Unknown UPS capacity (VA/W) and battery size; runtime depends heavily on load and battery capacity.",
+        "proof": "A clear photo of the rating label showing VA/W and battery voltage/capacity (e.g., 12V/24V and Ah) on the back/bottom.",
+        "if_unproven": "Price it as a generic used UPS with unknown capacity; treat as worst-case for runtime (not guaranteed 8 hours)."
+      },
+      {
+        "risk": "Battery health may be degraded even if it \u201ccharges\u201d; the 8-hour claim could be under a very light load.",
+        "proof": "A video showing a full charge test: UPS on battery mode with a stated load (watts) and timer reaching the claimed duration.",
+        "if_unproven": "Price it as not proven to reach 8 hours; assume reduced runtime."
+      },
+      {
+        "risk": "Whether the UPS switches to battery correctly and whether the inverter output is stable (voltage waveform/AVR issues).",
+        "proof": "A short clip showing: mains off \u2192 UPS switches to battery (beep/LED change), and a multimeter reading of output voltage under load.",
+        "if_unproven": "Price it as not fully verified for correct switching/output quality."
+      },
+      {
+        "risk": "Possible prior repair or battery replacement quality (non-original cells, poor connections) not visible externally.",
+        "proof": "Photo of the inside (battery compartment) or a clear view of any warranty/service seals and the battery label.",
+        "if_unproven": "Price it as potentially repaired/unknown battery quality until proven otherwise."
+      },
+      {
+        "risk": "Missing accessories/cables (e.g., manual, proper power cable) or damaged ports.",
+        "proof": "Photo of all included items and close-ups of ports/connectors on the back/top.",
+        "if_unproven": "Price it as sold as-is with only what\u2019s shown; assume missing items/unknown condition."
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the UPS rating label (VA/W) and battery specs (voltage and Ah) on the back/bottom.",
+      "Video test: charge to full, then mains off with a stated load (watts) and timer to show runtime.",
+      "Video showing battery-mode switching and output voltage reading (multimeter) under load.",
+      "Photo of battery compartment/inside or any battery label + any warranty/service seal."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photos confirm it\u2019s a BLUE GATE UPS, but the key pricing drivers (capacity/VA, battery Ah, and verified runtime under load) are not visible, so a worst-case price can\u2019t be set confidently without the missing labels and test proof."
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_read",
+    "latency_ms": 5805,
+    "input_tokens": 3130,
+    "output_tokens": 995,
+    "cost_usd": 0.00187,
+    "replayed": false,
+    "fixture_key": "f9ecf1e1b27f3ad760ae9a118bee5351",
+    "error": null
+  }
+}

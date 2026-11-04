@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: an orange gas cylinder wrapped in black protective netting, standing on pavement in a street/market setting.",
+      "Photo 0: brass valve visible at top, cylinder appears unused/glossy with no dents or rust.",
+      "Photo 0: a stylized logo/mark (dark triangular shape) printed on the body, but no readable brand name or capacity text.",
+      "Photo 1: close-up of the cylinder's neck/valve area, showing the brass valve fitting and a handwritten 'MX' mark in black marker, but no stamped capacity, manufacturer plate, country-of-origin mark, or manufacture/test date visible.",
+      "No regulator, hose, or gas burner shown to test fitting or function.",
+      "Background shows an outdoor market scene, consistent with a street vendor or reseller setting."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "LPG gas cylinder",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "12kg cylinder",
+        "verdict": "unverifiable_remote",
+        "evidence": "No capacity stamp or embossed kg marking visible in photo 0 or photo 1; size looks plausible for a 12kg cylinder but cannot be confirmed from the image."
+      },
+      {
+        "claim": "Foreign (implying imported, possibly higher quality) cylinder",
+        "verdict": "unverifiable_remote",
+        "evidence": "No country-of-origin stamp, import marking, or manufacturer plate visible in either photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual water/gas capacity not confirmed; could be mislabeled or a different size than 12kg.",
+        "proof": "Close-up photo of the stamped capacity/kg marking usually embossed near the neck or base of the cylinder.",
+        "if_unproven": "priced as an unverified-capacity cylinder, not guaranteed 12kg"
+      },
+      {
+        "risk": "Valve thread/fitting standard may not match local Nigerian LPG regulators (common issue with 'foreign' cylinders).",
+        "proof": "Clear close-up of valve threads or a video showing a standard regulator being screwed on.",
+        "if_unproven": "priced as needing a compatibility check/adapter, not guaranteed plug-and-play"
+      },
+      {
+        "risk": "No visible manufacture or last-test date stamp, which affects safety and resale/refill eligibility.",
+        "proof": "Photo of the stamped manufacture/test date on the cylinder collar or body.",
+        "if_unproven": "priced as unknown age, treated as needing re-certification"
+      },
+      {
+        "risk": "Cylinder could be refurbished/repainted rather than genuinely new, despite glossy 'unused' look.",
+        "proof": "Photo of original purchase receipt, import paperwork, or un-retouched surface under netting showing no weld repairs/rust spots.",
+        "if_unproven": "priced as possibly refurbished, not confirmed new"
+      },
+      {
+        "risk": "Leak or valve damage not detectable from static photos.",
+        "proof": "Video of a soap-bubble leak test or pressure test with gas connected.",
+        "if_unproven": "priced as not verified functional, worst case treated as potentially leaking"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of the stamped capacity (kg) and manufacturer/country marking on the cylinder neck or shoulder.",
+      "Close-up of the valve threads or a video showing a standard regulator attaching correctly.",
+      "Photo of the manufacture/test date stamp.",
+      "Video of a leak/pressure test with gas connected, if available.",
+      "Any purchase receipt or import documentation supporting the 'foreign' claim."
+    ],
+    "decision": "price",
+    "reason": "This is a standard LPG cylinder identifiable by type; although capacity, origin, and fitting compatibility are unverified from the photos, it can still be priced at a conservative worst-case level pending the proofs listed."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 29291,
+    "input_tokens": 3207,
+    "output_tokens": 2514,
+    "cost_usd": 0.031554,
+    "replayed": false,
+    "fixture_key": "f1f5a573f372cd6ede9a6c50c596b700",
+    "error": null
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a green RAM module with a white label. The label includes a barcode, CE mark, and text: 'MTA18ASF2G72DZ-2G6E1 32GB 2666MHz PC4-21300R-12'. The module is placed next to other RAM sticks in a server tray.",
+      "Photo 1 is similar to photo 0, showing the same RAM module from a slightly different angle. The label text is consistent with photo 0.",
+      "Photo 2 shows a hand holding the same green RAM module. The label is visible, and a second smaller label is present on the right side with 'HYNIX' and 'HMA82GR7CJR4N-VK' printed. The module has 288 pins, typical for server RAM. In the background, multiple other RAM modules are visible, some with blue labels, likely in a server chassis."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "server RAM module",
+      "brand": "Micron",
+      "model": "MTA18ASF2G72DZ-2G6E1",
+      "read_from": [
+        "photo 0 label",
+        "photo 1 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "32gb Ram pc4 2666v for server DL380 G10 G9",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 1 show the label '32GB 2666MHz PC4-21300R-12', which matches the claim. The module is a server-grade RAM (RDIMM) with 288 pins, compatible with HP DL380 G9/G10 servers as per standard compatibility lists."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The RAM may be faulty or not functional.",
+        "proof": "A video showing the RAM being tested in a server with a POST or diagnostic tool, or a screenshot of a memory test (e.g., MemTest86) passing.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The RAM may be counterfeit or rebranded.",
+        "proof": "A close-up of the chip markings on the RAM module, showing the actual manufacturer (e.g., Hynix, Micron) and part numbers, or a serial number check via official tools.",
+        "if_unproven": "priced as potentially counterfeit"
+      },
+      {
+        "risk": "The module may not be compatible with the buyer's specific server configuration.",
+        "proof": "A photo of the server's system board or BIOS screen showing the installed RAM and its recognized specifications.",
+        "if_unproven": "priced as unverified compatibility"
+      }
+    ],
+    "proof_requests": [
+      "Video or photo of the RAM being tested in a server with a successful POST or diagnostic test.",
+      "Close-up of the chip markings on the RAM module to verify authenticity.",
+      "Photo of the server's BIOS or system information showing the RAM is recognized and functioning."
+    ],
+    "decision": "price",
+    "reason": "The RAM module is clearly identified as a 32GB PC4-2666MHz server RAM (Micron MTA18ASF2G72DZ-2G6E1) compatible with HP DL380 G9/G10. The seller's claim is supported by visible label text. Hidden risks include functionality, authenticity, and compatibility, which are priced conservatively until proven."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 62686,
+    "input_tokens": 1934,
+    "output_tokens": 803,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "efdff82641ff9bae798b0d4b9b4ff9d0",
+    "error": null
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Multiple stacks of used tires piled on bare ground at an outdoor tire stall, rims/wheel covers visible in background shop",
+      "Many tires have spray-painted size/grade codes (e.g. 'N10', 'VRS') on the sidewalls, used by sellers for sorting, not manufacturer markings",
+      "Tread surfaces show visible wear and dirt/mud residue; no tire is isolated for close inspection",
+      "No sidewall text (brand, size, DOT date code) is legible in any of the three photos",
+      "No visible cracks, bulges, or repairs can be confirmed or ruled out at this resolution",
+      "A shop attendant and parked cars are visible in background, consistent with a roadside tire market in Nigeria"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used/second-hand car tires (mixed sizes, bulk lot)",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "\"First grade Belgium tires\" (implying premium quality, imported second-hand stock from Belgium)",
+        "verdict": "unverifiable_remote",
+        "evidence": "No import documentation, country-of-origin sticker, or sidewall marking is visible in any photo to confirm origin or grading"
+      },
+      {
+        "claim": "Implied good/usable condition ('first grade')",
+        "verdict": "unverified",
+        "evidence": "Tread and sidewalls are only shown from a distance in piles; no close-up of tread depth, cracking, or punctures is provided"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Tire size (width/profile/rim diameter) unknown, which is the main price driver",
+        "proof": "Clear photo of sidewall text showing size code, e.g. 205/55R16",
+        "if_unproven": "cannot be priced without size; treated as unknown-spec lot"
+      },
+      {
+        "risk": "Tread depth may be low (worn past safe legal limit)",
+        "proof": "Close-up of tread with a coin or tread-depth gauge against it",
+        "if_unproven": "priced as low/minimum tread (near end-of-life)"
+      },
+      {
+        "risk": "Tire age (dry rot risk) unknown since used/imported tires can be old despite looking intact",
+        "proof": "Close-up of DOT date code on sidewall (4-digit week/year stamp)",
+        "if_unproven": "priced as old/high-age stock"
+      },
+      {
+        "risk": "Hidden sidewall cracks, bulges, or internal patches not visible in wide shots",
+        "proof": "Close-up photos of each sidewall and an inside-tire shot",
+        "if_unproven": "priced as possibly damaged/patched"
+      },
+      {
+        "risk": "Stock may be mixed grade despite 'first grade' label (lot shows many different codes/sizes stacked together)",
+        "proof": "Seller sorts and photographs the specific tire(s) being sold individually with size and condition visible",
+        "if_unproven": "priced at the lot's lowest visible grade, not the claimed grade"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the sidewall showing the size code and brand name, if any, for the specific tire(s) being sold",
+      "Close-up of the tread with a coin or gauge for depth reference",
+      "Close-up of the DOT date code on the sidewall",
+      "Photos of both sidewalls and the inner tire surface for cracks, bulges, or repairs"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The lot cannot be priced because the tire size, the single biggest price factor, is not legible in any photo, and the 'first grade' condition claim cannot be checked without close-up tread, sidewall, and date-code shots."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 27381,
+    "input_tokens": 3380,
+    "output_tokens": 2161,
+    "cost_usd": 0.025211,
+    "replayed": false,
+    "fixture_key": "e74f58689aa6b95bc31357c66dc57a32",
+    "error": null
+  }
+}

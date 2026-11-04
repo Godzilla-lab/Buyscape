@@ -1,0 +1,66 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail packaging for a Flanek Electric Kettle.",
+      "The brand 'FLANEK' and model 'FL-8805' are printed on the box.",
+      "The box indicates a 2.3L capacity and 1500W power consumption.",
+      "The actual kettle is not visible in the photo, only the box.",
+      "Multiple boxes are visible in the background, suggesting a retail or bulk sale context."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "electric kettle",
+      "brand": "FLANEK",
+      "model": "FL-8805",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "2.3liter capacity",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "suitable for boiling water",
+        "verdict": "unverifiable_remote",
+        "evidence": "Requires a functional test to confirm it heats and holds water."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, lower-value item.",
+        "proof": "A photo of the actual kettle outside of the box.",
+        "if_unproven": "priced as a generic unbranded kettle"
+      },
+      {
+        "risk": "The kettle may be non-functional or the automatic shut-off may fail.",
+        "proof": "A video showing the kettle boiling water and automatically switching off.",
+        "if_unproven": "priced as not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual kettle outside the box.",
+      "Photo of the manufacturer's label/rating plate on the bottom of the kettle.",
+      "Video of the kettle boiling water and turning off automatically."
+    ],
+    "decision": "price",
+    "reason": "The brand and model are clearly identified from the packaging, which allows for a valuation at the worst-case scenario (non-functional or generic) until the actual item is shown."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 10883,
+    "input_tokens": 2407,
+    "output_tokens": 2270,
+    "cost_usd": 0.008013,
+    "replayed": false,
+    "fixture_key": "98b66d95f544eebbf1e1e6ebe722b26a",
+    "error": null
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo shows a stack of two or three polycrystalline solar panels leaning on a cart, outdoors, daylight.",
+      "No visible brand name, model number, wattage sticker, or cell-count label on the panels themselves.",
+      "A watermark reading 'NAGOTECH SOLAR' and camera EXIF text (CAMON 30) appear on the image; this is a photo-studio/reseller watermark, not a panel label.",
+      "Frames show some wear/dust consistent with used panels; no close-up of junction box, back label, or cell damage is visible.",
+      "Cannot count cells precisely from this distance to confirm a 144-cell layout."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Original 650 Watts",
+        "verdict": "unverifiable_remote",
+        "evidence": "No wattage sticker or nameplate visible in photo 0."
+      },
+      {
+        "claim": "144 cell",
+        "verdict": "unverifiable_remote",
+        "evidence": "Cell grid is visible but not countable at this resolution/angle in photo 0."
+      },
+      {
+        "claim": "Direct Canadian (brand: Canadian Solar)",
+        "verdict": "unverifiable_remote",
+        "evidence": "No logo or brand label readable in photo 0."
+      },
+      {
+        "claim": "Used, built to serve",
+        "verdict": "unverified",
+        "evidence": "Panels appear used (frame wear) but no performance test, output reading, or close-up of cracks/hotspots shown."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual wattage may be lower than the claimed 650W",
+        "proof": "Clear photo of the rear nameplate/sticker showing rated wattage and model",
+        "if_unproven": "priced as the lowest comparable wattage/brand panel of similar visible size"
+      },
+      {
+        "risk": "Panel may be a non-Canadian or rebranded/counterfeit unit",
+        "proof": "Close-up of brand logo and QR/serial code on the back of the panel",
+        "if_unproven": "priced as a generic unbranded used panel, not as genuine Canadian Solar"
+      },
+      {
+        "risk": "Cell count (144 vs fewer) unverified, affecting voltage/wattage class",
+        "proof": "Close-up photo counting cell rows/columns clearly",
+        "if_unproven": "priced at lower-cell-count class comparable"
+      },
+      {
+        "risk": "Hidden physical damage (microcracks, hotspots, broken diodes) typical of used panels",
+        "proof": "Multi-angle photos including back junction box and a multimeter/clamp reading of open-circuit voltage under sun",
+        "if_unproven": "priced as not fully functional"
+      },
+      {
+        "risk": "Output performance not demonstrated",
+        "proof": "Video of panel connected to a load/multimeter showing current and voltage under sunlight",
+        "if_unproven": "priced as not working/unverified output"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the rear nameplate showing brand, model, wattage, and cell count.",
+      "Close-up photo of the cell grid so rows/columns can be counted.",
+      "Video or photo of a multimeter reading open-circuit voltage and short-circuit current under sunlight.",
+      "Photo of the junction box and connectors for damage/corrosion."
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable only as a used solar panel of unverified brand, wattage, and cell count; since no claim can be confirmed from the photo, it must be priced at the low end of comparable used Canadian-type panels, capped at the nearest matching 144-cell class listing as an upper bound.",
+    "price_pick": {
+      "low": 0,
+      "high": 7
+    }
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 31330,
+    "input_tokens": 3015,
+    "output_tokens": 2710,
+    "cost_usd": 0.03313,
+    "replayed": false,
+    "fixture_key": "a2ab3cff2d32b345b31e4c9b6fa63bdf",
+    "error": null
+  }
+}

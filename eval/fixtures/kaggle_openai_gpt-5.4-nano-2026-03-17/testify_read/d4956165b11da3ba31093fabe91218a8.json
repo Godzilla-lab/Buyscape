@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo shows a window/portable-style air conditioner unit (single body) on tiled floor.",
+      "Brand text appears to read 'airvoltor' on the front label area (partially visible).",
+      "A capacity marking appears to include '7000' on the front right label area (partially visible).",
+      "No clear view of power cord, remote, or model/serial plate details.",
+      "Seller says it is faulty, but the photo does not show the fault condition (no screen/error, no running test)."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": null,
+      "brand": "airvoltor",
+      "model": null,
+      "read_from": [
+        "photo 0 front label area"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Faulty inverter AC available for sale.",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows an AC unit but does not show it running, any error code, or any inverter-specific label clearly."
+      },
+      {
+        "claim": "Location: Oshodi, Lagos State.",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo evidence of location."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Whether it is truly an inverter AC (inverter vs non-inverter affects parts and value).",
+        "proof": "A clear close-up photo of the rating plate/label showing 'Inverter' (or model number) and the full brand/model text.",
+        "if_unproven": "Priced as a non-inverter faulty AC."
+      },
+      {
+        "risk": "Fault type is unknown (compressor, fan motor, PCB, gas leak, capacitor, etc.).",
+        "proof": "Video of power-on with the unit connected (showing any lights, error codes, and whether compressor/fan starts), plus a technician test report if available.",
+        "if_unproven": "Priced as not working / needs major repair."
+      },
+      {
+        "risk": "Capacity (e.g., 7000) is only partially readable; wrong capacity changes market price.",
+        "proof": "Clear photo of the full capacity marking on the label (e.g., '7000' and unit type) or the model number.",
+        "if_unproven": "Priced at the lowest likely capacity shown/assumed from the partial marking."
+      },
+      {
+        "risk": "Missing accessories/parts (remote control, mounting kit, filters, or damaged fins) can reduce usability.",
+        "proof": "Photos of included items: remote (if any), power cord condition, and close-ups of front/back fins for bends or leaks.",
+        "if_unproven": "Priced as incomplete/unknown accessories."
+      }
+    ],
+    "proof_requests": [
+      "Send a clear close-up of the rating plate showing brand, full model number, and whether it is 'Inverter'.",
+      "Send a short video of the AC being powered on (show lights/error codes and whether compressor and indoor/outdoor fans run).",
+      "Send close-up photos of the power cord/plug and the front & side fins (check for bends/leaks).",
+      "Confirm what exactly is faulty (e.g., not cooling, not starting, trips breaker) in one message."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo shows an AC unit but does not prove inverter status, capacity details, or the specific fault. Without a power-on/error/fault description, the worst-case repair cost is unknown, so a reliable price cannot be set yet."
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_read",
+    "latency_ms": 5460,
+    "input_tokens": 2359,
+    "output_tokens": 791,
+    "cost_usd": 0.002762,
+    "replayed": false,
+    "fixture_key": "d4956165b11da3ba31093fabe91218a8",
+    "error": null
+  }
+}

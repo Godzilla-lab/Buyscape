@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Open MSI laptop showing Windows desktop with purple flowers wallpaper. Keyboard has red backlighting. 'msi' logo visible below screen. Intel Core sticker on palm rest. Watermark 'TUFF GONG COMPUTERS LTD' across image.",
+      "Photo 1: Closed laptop lid with glossy black finish. Red dragon logo (MSI) and 'msi' text visible. Yellow sticker and white label with text. Watermark present.",
+      "Photo 2: Bottom of laptop showing ventilation grilles, red accents, and regulatory labels. No visible model number or serial. Watermark present."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "MSI",
+      "model": "unreadable",
+      "read_from": [
+        "photo 0 screen bezel",
+        "photo 1 lid"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "MSI core i7 16gb 512ssd keyboard light 6gb nvidia graphics card",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows Intel sticker (likely Core i7) and red keyboard backlighting. No visible SSD or GPU specs. Photo 2 shows no model or specs. Claims about 16GB RAM, 512GB SSD, and 6GB NVIDIA GPU cannot be verified from photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "RAM is not 16GB as claimed",
+        "proof": "Photo showing system information or BIOS screen with RAM details, or a photo of the RAM slots with installed modules.",
+        "if_unproven": "priced as having less than 16GB RAM"
+      },
+      {
+        "risk": "SSD is not 512GB as claimed",
+        "proof": "Photo of disk management or system information showing storage capacity, or a photo of the SSD drive itself.",
+        "if_unproven": "priced as having smaller SSD"
+      },
+      {
+        "risk": "NVIDIA graphics card does not have 6GB VRAM",
+        "proof": "Photo of device manager or GPU information screen showing exact model and VRAM, or a photo of the GPU label.",
+        "if_unproven": "priced as having less than 6GB VRAM"
+      },
+      {
+        "risk": "Laptop is not genuine MSI or has been modified",
+        "proof": "Photo of the model name on the bottom label or inside the lid, or a photo of the BIOS screen showing manufacturer and model.",
+        "if_unproven": "priced as unbranded or lower-tier"
+      }
+    ],
+    "proof_requests": [
+      "Photo of system information screen showing CPU, RAM, and storage details.",
+      "Photo of GPU information screen or device manager showing NVIDIA model and VRAM.",
+      "Photo of the bottom label or inside lid showing exact model name.",
+      "Photo of BIOS screen showing manufacturer and model."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as an MSI laptop, but critical specifications (RAM, SSD, GPU) cannot be verified from the photos. Without proof of the claimed specs, the item cannot be priced accurately and must be evaluated further."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 59736,
+    "input_tokens": 2789,
+    "output_tokens": 716,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "1462072774cbc0db6724fc96119b27b1",
+    "error": null
+  }
+}

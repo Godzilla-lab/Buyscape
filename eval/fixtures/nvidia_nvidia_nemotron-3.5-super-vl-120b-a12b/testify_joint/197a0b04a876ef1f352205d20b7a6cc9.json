@@ -1,0 +1,99 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black Sigma lens with zoom ring markings 12, 15, 17, 24 and aperture markings 4, 5.6, 8, 11, 16, 22; an AF/M switch is visible and the rear mount is covered by a cap.",
+      "Photo 1 shows the front element with a petal lens hood attached; glass reflects light and no cracks are visible.",
+      "Photo 2 shows side text reading \"LENS MADE IN JAPAN\" and serial number \"016378\"; a gold ring is visible near the mount."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "Sigma 12-24mm camera lens",
+      "brand": "Sigma",
+      "model": "12-24mm",
+      "read_from": [
+        "photo 0",
+        "photo 2"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Sigma 12-24 mm lens",
+        "verdict": "supported",
+        "evidence": "photo 0 shows SIGMA branding and 12-24 focal range markings"
+      },
+      {
+        "claim": "for Canon camera",
+        "verdict": "unverifiable_remote",
+        "evidence": "rear mount is covered by a cap in photo 0; no mount marking is visible"
+      },
+      {
+        "claim": "US used",
+        "verdict": "unverified",
+        "evidence": "photo 2 shows \"LENS MADE IN JAPAN\"; history of use is not shown"
+      },
+      {
+        "claim": "looks new",
+        "verdict": "unverified",
+        "evidence": "photos show a used lens with visible wear; \"new\" is subjective"
+      },
+      {
+        "claim": "perfect working condition",
+        "verdict": "unverifiable_remote",
+        "evidence": "optics and autofocus cannot be tested from photos"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Wrong lens mount (not Canon EF)",
+        "proof": "photo of the lens mount contacts and mount throat",
+        "if_unproven": "as wrong mount or unusable"
+      },
+      {
+        "risk": "Optical defects such as fungus, haze, separation, or scratches",
+        "proof": "photo looking through front and rear elements toward a bright light",
+        "if_unproven": "as optically defective"
+      },
+      {
+        "risk": "Autofocus failure",
+        "proof": "video of the lens focusing on a Canon camera body",
+        "if_unproven": "as manual focus only or broken AF"
+      },
+      {
+        "risk": "Zoom or focus ring stiffness or damage",
+        "proof": "video of the rings turning smoothly",
+        "if_unproven": "as mechanically stiff or damaged"
+      },
+      {
+        "risk": "Aperture blade oiliness or non-function",
+        "proof": "photo of the aperture blades stopped down",
+        "if_unproven": "as sticky aperture"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the lens mount (rear) to confirm Canon EF fit",
+      "Photo looking through the lens at a bright light to check for fungus or haze",
+      "Video of autofocus and aperture operation on a Canon body"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a Sigma 12-24mm lens from the markings in the photos, so it can be priced at its worst case despite unproven working condition.",
+    "price_pick": {
+      "low": 0,
+      "high": 6
+    }
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_joint",
+    "latency_ms": 40031,
+    "input_tokens": 2966,
+    "output_tokens": 5270,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "197a0b04a876ef1f352205d20b7a6cc9",
+    "error": null
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a clean light-colored wooden pallet on a concrete floor.",
+      "Photo 1 shows the same clean wooden pallet from a slightly different angle.",
+      "Photo 2 shows a stack of darker, weathered wooden pallets outdoors with red tarps and tanks in the background.",
+      "No brand, model, or markings are legible on any pallet in any photo.",
+      "Seller text claims the lot is clean, dry, sorted, and weighed at 500 kg on a certified scale."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "wooden pallet",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Everything is clean, dry and sorted, no water added.",
+        "verdict": "unverified",
+        "evidence": "Photos 0-1 show clean pallets but photo 2 shows weathered pallets; dryness and sorting cannot be verified remotely."
+      },
+      {
+        "claim": "Weighed at 500 kg on a certified scale this morning.",
+        "verdict": "unverifiable_remote",
+        "evidence": "No scale, weight display, or weighing process is visible in any photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual total weight differs from the claimed 500 kg.",
+        "proof": "Video of the full pallet lot on a certified scale showing the weight.",
+        "if_unproven": "as unverified weight"
+      },
+      {
+        "risk": "The lot includes weathered or damaged pallets like those in photo 2.",
+        "proof": "Close-up photos of every pallet in the lot, especially the darker ones.",
+        "if_unproven": "as used or weathered condition"
+      },
+      {
+        "risk": "Quantity of pallets does not match the claimed weight.",
+        "proof": "Count of individual pallets and their individual weights.",
+        "if_unproven": "as fewer or lighter pallets"
+      }
+    ],
+    "proof_requests": [
+      "Video of all pallets on a certified scale showing 500 kg",
+      "Close-up photos of each pallet, especially the darker ones in photo 2",
+      "Total count of pallets in the lot"
+    ],
+    "decision": "price",
+    "reason": "Wooden pallets are identifiable by type from the photos and can be priced at worst case using the listed pallet comparables.",
+    "price_pick": {
+      "low": 0,
+      "high": 1
+    }
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_joint",
+    "latency_ms": 21992,
+    "input_tokens": 3148,
+    "output_tokens": 3222,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "0f4e46173adefcf75646a18caa3fdcfa",
+    "error": null
+  }
+}

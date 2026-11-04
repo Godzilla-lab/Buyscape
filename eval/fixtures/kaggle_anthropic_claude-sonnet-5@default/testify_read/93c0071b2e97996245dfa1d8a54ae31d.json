@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 and 1 show a bare automotive engine assembly, likely removed from a vehicle, sitting on a workshop floor.",
+      "Visible components: aluminum cylinder head with four black ignition coil packs (suggesting a 4-cylinder layout), valve cover with an 'ENGINE OIL' cap, serpentine belt, pulleys, alternator, and various hoses/sensors.",
+      "No manufacturer badge, part-number sticker, or casting number is legible in either photo.",
+      "A watermark reading 'EMMY GOLD AUTO SPARE' and 'POSTED ON JIJI' appears on both photos \u2014 this is the seller's shop branding, not an engine marking.",
+      "No wiring harness, intake manifold, or ECU is clearly visible, so it is unclear if the engine is sold complete.",
+      "No photo shows the engine running, a compression test, or an odometer/mileage sticker."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "4-cylinder used engine (long block)",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Hyundai Kia engine",
+        "verdict": "unverifiable_remote",
+        "evidence": "No badge, sticker, or casting number reading 'Hyundai' or 'Kia' is visible in photo 0 or photo 1."
+      },
+      {
+        "claim": "4 cylinder",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows four ignition coil packs in a row, consistent with 4 cylinders, but no engine code or displacement marking is visible to confirm the exact model."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine make/model cannot be confirmed, which determines fitment and price tier",
+        "proof": "Close-up photo of the engine code/casting number stamped on the block (usually near the block-to-transmission mating surface) or a legible manufacturer sticker",
+        "if_unproven": "priced as a generic unidentified 4-cylinder used engine, lowest tier for that size class"
+      },
+      {
+        "risk": "Running condition unknown \u2014 could be a dead or heavily worn unit",
+        "proof": "Video clip of the engine starting and idling, or a compression test reading",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Mileage/history unknown",
+        "proof": "Odometer photo from donor vehicle or mileage sticker on engine",
+        "if_unproven": "priced as high-mileage/unknown history"
+      },
+      {
+        "risk": "Completeness uncertain \u2014 intake manifold, ECU, wiring harness, turbo (if applicable) may be missing",
+        "proof": "Full 360-degree photo set showing intake side, harness connectors, and manifold",
+        "if_unproven": "priced as bare long block only, missing ancillaries"
+      },
+      {
+        "risk": "Internal wear/sludge not visible from outside",
+        "proof": "Photo/video of oil on dipstick or inside valve cover when opened",
+        "if_unproven": "priced assuming unknown internal condition, no premium for 'clean' claim"
+      }
+    ],
+    "proof_requests": [
+      "Clear close-up of the engine code or casting number stamped on the block",
+      "Video of the engine starting and running to confirm it works",
+      "Photo showing the intake manifold side and whether wiring harness/ECU are included",
+      "Any documentation or sticker showing mileage/donor vehicle"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photos show a plausible 4-cylinder engine but no legible brand/model marking, and the exact Hyundai/Kia model is essential to price this correctly since values vary widely across their engine range; a close-up of the engine code is needed before even a worst-case price can be set."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 22100,
+    "input_tokens": 3671,
+    "output_tokens": 1977,
+    "cost_usd": 0.027112,
+    "replayed": false,
+    "fixture_key": "93c0071b2e97996245dfa1d8a54ae31d",
+    "error": null
+  }
+}

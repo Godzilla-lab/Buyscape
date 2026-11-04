@@ -1,0 +1,65 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the back of a black TV with a label that reads 'MAXI' and '43 inches'.",
+      "The label includes 'MAXI' as the brand and '43 inches' as the size.",
+      "The TV appears to be in a used condition with visible dust and wear.",
+      "The label also shows 'MODEL: 43A1' and 'SERIAL NO: 123456789'.",
+      "The TV is described as 'SCRAP / FOR PARTS' and 'Screen damaged - not worth repairing'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "43 inch TV",
+      "brand": "MAXI",
+      "model": "43A1",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Maxi 43 inches TV for sale as SCRAP / FOR PARTS",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows the brand 'MAXI' and size '43 inches' on the label."
+      },
+      {
+        "claim": "Screen damaged - not worth repairing",
+        "verdict": "unverified",
+        "evidence": "No photo of the screen is provided; only the back is shown."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Screen damage severity and whether it affects other components",
+        "proof": "Photo of the front screen showing the damage and any cracks, dead pixels, or backlight issues.",
+        "if_unproven": "Priced as scrap only, with no value for functional parts."
+      },
+      {
+        "risk": "Internal components may be damaged or missing",
+        "proof": "Photo of the inside of the TV showing the circuit board, power supply, and other internal parts.",
+        "if_unproven": "Priced as scrap, assuming no usable internal parts."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the front screen showing the damage.",
+      "Photo of the internal components if possible."
+    ],
+    "decision": "price",
+    "reason": "The TV is identified as a MAXI 43A1 model from the label in photo 0. The seller claims it is for scrap/parts with a damaged screen, which is unverified due to lack of front view. However, the item is clearly a 43-inch TV, and its condition as scrap is consistent with the description. It can be priced at its worst case as scrap, with the risks noted."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 49380,
+    "input_tokens": 1447,
+    "output_tokens": 568,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "a7ab505299d13879a1382e5b58c5d6d4",
+    "error": null
+  }
+}

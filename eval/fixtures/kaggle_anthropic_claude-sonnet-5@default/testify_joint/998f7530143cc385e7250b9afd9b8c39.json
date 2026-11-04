@@ -1,0 +1,72 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Single photo shows a small white cylindrical washing machine with a clear branded sticker reading \"NeXus\" on the front.",
+      "No model number, capacity label, or plate visible.",
+      "Machine appears to be a compact/portable single-tub type (not a front-load or large top-load automatic like the comparables).",
+      "Item is surrounded by clothes and shoes in what looks like a storage room, not a shop or testing area.",
+      "No power cord plugged in, no on/off indication, no visible damage or rust close-up."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "washing machine",
+      "brand": "NeXus",
+      "model": null,
+      "read_from": [
+        "photo 0 front label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "The brand is Midea",
+        "verdict": "contradicted",
+        "evidence": "photo 0 clearly shows a 'NeXus' brand sticker, not Midea"
+      },
+      {
+        "claim": "Washing machine available at Abulegba (location)",
+        "verdict": "unverifiable_remote",
+        "evidence": "no location marker visible in photo"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Seller misstates brand, raising doubt about the rest of the listing's accuracy (capacity, condition, functionality).",
+        "proof": "Clear photo of the rating plate/serial sticker and a photo matching seller's claimed brand",
+        "if_unproven": "priced as unknown/mismatched brand, worst case"
+      },
+      {
+        "risk": "Machine may not power on or spin (no demonstration shown).",
+        "proof": "Video of machine running a cycle with water",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Type mismatch: this looks like a small single-tub/portable washer, not a full automatic like the comparables listed.",
+        "proof": "Wider photo showing full machine size and tub type (single vs twin vs full auto)",
+        "if_unproven": "cannot be matched to comparable listings reliably"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the rating/serial plate showing actual brand and model",
+      "Video of the machine powered on and completing a wash/spin cycle",
+      "Wider shot showing full machine dimensions and control panel for type confirmation"
+    ],
+    "decision": "fraud_suspected",
+    "reason": "The seller claims the brand is Midea, but the only photo shows a different, clearly readable brand (NeXus) on the unit itself, which is a direct and unexplained contradiction that undermines trust in the rest of the listing.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 14885,
+    "input_tokens": 2898,
+    "output_tokens": 1287,
+    "cost_usd": 0.015113,
+    "replayed": false,
+    "fixture_key": "998f7530143cc385e7250b9afd9b8c39",
+    "error": null
+  }
+}

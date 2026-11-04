@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Black uninterruptible power supply (UPS).",
+      "Front panel shows 'MAXI' branding, a power button, and three indicator LEDs for fault, battery, and AC power.",
+      "Rear panel features two UK-style three-pin sockets and two IEC C13 sockets.",
+      "A specification label is visible on the side/top of the unit.",
+      "The unit appears dusty and shows signs of use.",
+      "Power cord is attached."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "UPS",
+      "brand": "MAXI",
+      "model": "DS1.2K",
+      "read_from": [
+        "photo 1 screen",
+        "photo 2 plate"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Input: 220Vac-240Vac, 50/60Hz, 7.3A Max",
+        "verdict": "supported",
+        "evidence": "photo 2 plate"
+      },
+      {
+        "claim": "Output: 220Vac-240Vac, 50/60Hz",
+        "verdict": "supported",
+        "evidence": "photo 2 plate"
+      },
+      {
+        "claim": "Protective Class I",
+        "verdict": "supported",
+        "evidence": "photo 2 plate"
+      },
+      {
+        "claim": "Icc: 3kA",
+        "verdict": "supported",
+        "evidence": "photo 2 plate"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Internal batteries (24V system) may be dead or have very low capacity.",
+        "proof": "A video showing the UPS powering a significant load (e.g., a desktop PC or lamp) while unplugged from the wall for at least 5 minutes.",
+        "if_unproven": "as having dead batteries requiring replacement"
+      },
+      {
+        "risk": "The charging circuit or inverter may be faulty.",
+        "proof": "A video showing the unit turning on, charging (AC LED on), and switching to battery mode (Battery LED on) when the wall plug is pulled.",
+        "if_unproven": "as not working/for parts"
+      }
+    ],
+    "proof_requests": [
+      "Video of the unit powered on and switching to battery mode under load.",
+      "Photo of the unit with the AC power disconnected while a device is plugged into it and running."
+    ],
+    "decision": "price",
+    "reason": "The brand and model are clearly identified from the photos, allowing for a valuation based on its worst-case condition (dead batteries/non-functional)."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 6845,
+    "input_tokens": 4541,
+    "output_tokens": 1419,
+    "cost_usd": 0.006528,
+    "replayed": false,
+    "fixture_key": "bc1276fcc77fb9cb4e393cc461ed9721",
+    "error": null
+  }
+}

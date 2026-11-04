@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-r4",
+  "response": {
+    "observations": [
+      "Black DSLR camera with a lens attached.",
+      "The camera body has 'Canon' branding on the top and 'EOS' on the strap.",
+      "A Canon battery charger is visible with a cable connected.",
+      "A Canon battery is shown next to the charger.",
+      "A lens cap with 'Canon' is visible.",
+      "The camera is resting on a tiled floor."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DSLR camera",
+      "brand": "Canon",
+      "read_from": [
+        "photo 0 body",
+        "photo 0 strap"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Canon 2000D",
+        "verdict": "unverified",
+        "evidence": "The model name is not legible in the photo."
+      },
+      {
+        "claim": "18-55 lens",
+        "verdict": "unverified",
+        "evidence": "The lens is present but its focal length is not readable."
+      },
+      {
+        "claim": "Charger, battery and extra battery",
+        "verdict": "supported",
+        "evidence": "All three items are visible in photo 0."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The camera may not power on or the image sensor may be dirty.",
+        "proof": "A photo of the camera powered on showing the menu screen.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The lens may have fungus, scratches, or high internal haze.",
+        "proof": "Clear photos of the front and rear glass elements.",
+        "if_unproven": "as having optical defects"
+      },
+      {
+        "risk": "The shutter may be near the end of its life (high shutter count).",
+        "proof": "A screenshot of the shutter count from a recent image file.",
+        "if_unproven": "as high mileage"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of any label, sticker or metal plate showing the brand and model.",
+      "Photo of the camera powered on showing the LCD screen.",
+      "Photo of the lens glass to check for fungus or scratches.",
+      "Photo of the camera's rear LCD screen showing the shutter count."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "What the item is shows, but not the model that sets its price: no photo shows it clearly enough to read. The shot asked for first would settle it."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-r4",
+    "task": "testify_read",
+    "latency_ms": 11273,
+    "input_tokens": 1786,
+    "output_tokens": 416,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "be9a58917649679d473309e0e3e7494e",
+    "error": null
+  }
+}

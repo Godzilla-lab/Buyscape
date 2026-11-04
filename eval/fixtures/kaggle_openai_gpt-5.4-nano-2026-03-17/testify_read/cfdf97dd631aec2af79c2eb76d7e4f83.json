@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0 shows a Nikon DSLR camera body with two attached/nearby lenses on a table.",
+      "The lens on the left appears to be a zoom lens with a front element and textured focus/zoom ring; the other lens appears to be a larger prime lens.",
+      "Brand name 'Nikon' is readable on the camera body (photo 0).",
+      "No clear model number (e.g., D3xxx/D5xxx/D7xxx) is readable from photo 0.",
+      "No clear lens markings (e.g., '18-55mm' or '50mm') are readable from photo 0."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DSLR camera kit with 2 lenses",
+      "brand": "Nikon",
+      "model": null,
+      "read_from": [
+        "photo 0 camera body"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "It has 2 lens 18-55mm and 50mm.",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows two lenses, but the lens focal-length markings (18-55mm and 50mm) are not clearly readable."
+      },
+      {
+        "claim": "Clean and good to shoot videos and snapshots.",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo 0 does not show sensor condition, shutter count, autofocus performance, video capability, or any test footage."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Exact camera model is unknown; pricing varies a lot by Nikon DSLR generation (and whether it supports video well).",
+        "proof": "Ask for a photo of the camera model name/number on the body (e.g., D3xxx/D5xxx/D7xxx) and the lens mount area/label if present.",
+        "if_unproven": "Price as a generic Nikon DSLR kit with unknown model and assume worst-case for video performance (as not proven)."
+      },
+      {
+        "risk": "Lens focal lengths (18-55mm and 50mm) are not confirmed from the photo; could be different lenses or non-matching brands.",
+        "proof": "Ask for close-up photos of each lens showing the printed focal length (e.g., '18-55mm' and '50mm') and lens model/series.",
+        "if_unproven": "Price as a Nikon DSLR kit with 2 unverified lenses (worst-case: treat as lower-value/unknown lenses)."
+      },
+      {
+        "risk": "Condition issues not visible: fungus/haze on glass, scratches, broken mounts, or worn focus/zoom mechanics.",
+        "proof": "Ask for close-up shots of both lens elements against light (front and rear glass) and a short video showing zoom/focus movement.",
+        "if_unproven": "Price as not-fully-verified condition (worst-case: assume possible wear and no guarantee of smooth operation)."
+      },
+      {
+        "risk": "Functionality not proven: shutter count, autofocus accuracy, exposure issues, and whether video works properly.",
+        "proof": "Ask for a short recorded clip (screen recording or live video) showing autofocus and video recording, plus a photo of the camera's shutter count screen/menu.",
+        "if_unproven": "Price as not working/untested for video and performance (worst-case: assume needs servicing)."
+      },
+      {
+        "risk": "Missing accessories (battery, charger, memory card, straps) can reduce value significantly.",
+        "proof": "Ask for a full contents photo laid out (battery, charger, cables, memory card, strap, lens caps, hood).",
+        "if_unproven": "Price as kit with only what is shown (worst-case: assume missing charger/battery or caps)."
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the camera model number/name on the body (photo of the exact label).",
+      "Close-up photos of each lens showing printed focal length and lens model (18-55mm and 50mm confirmation).",
+      "Front and rear glass close-ups for both lenses (against light) to check fungus/haze/scratches.",
+      "Short test video showing autofocus and smooth zoom/focus, plus a still photo sample.",
+      "Photo of included accessories (battery, charger, memory card, lens caps/hood)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo confirms a Nikon DSLR body and two lenses, but the key details that determine price (exact Nikon model and exact lens focal lengths/condition) are not readable or test-proven. Request the decisive close-ups and a quick functionality test before pricing."
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_read",
+    "latency_ms": 7630,
+    "input_tokens": 1664,
+    "output_tokens": 1024,
+    "cost_usd": 0.001613,
+    "replayed": false,
+    "fixture_key": "cfdf97dd631aec2af79c2eb76d7e4f83",
+    "error": null
+  }
+}

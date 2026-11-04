@@ -96,6 +96,17 @@ def _band(table: dict[str, list[float]], category: str | None) -> tuple[float, f
     return (min(low, high), max(low, high))
 
 
+class DealCosts(BaseModel):
+    """What a refusal and a request for proof cost this business, for scoring a valuer in money.
+
+    Set by the business, never guessed in code. Until both are set, a money
+    score is shown across a range of costs instead of at one."""
+
+    lost_deal: float | None = Field(None, ge=0, description="What a pickup that does not happen costs, in the tenant's currency.")
+    proof_dropoff: float | None = Field(None, ge=0, le=1, description="The share of sellers lost when asked for one more photo.")
+    offer: str = Field("low", description="Which end of a range is offered first: low or mid.")
+
+
 class Tenant(BaseModel):
     tenant: str
     display_name: str = ""
@@ -113,8 +124,14 @@ class Tenant(BaseModel):
     # category. Used only when the used market is too thin to price from and
     # dealers' new stock of the same thing is listed.
     resale_fraction: dict[str, list[float]] = Field(default_factory=dict)
+    # The shops whose new prices this business trusts for that share of new,
+    # cached by `buyscape fetch-shops`; and, for a shop whose search is closed
+    # to crawlers, the categories to read whole, each to the business's own.
+    shops: list[str] = Field(default_factory=list)
+    shop_categories: dict[str, dict[str, str]] = Field(default_factory=dict)
     # Written by staff in the back office, kept in <tenant>.questions.yaml.
     questions: list[TenantQuestion] = Field(default_factory=list)
+    deal_costs: DealCosts = Field(default_factory=DealCosts)
 
     def minimum_for(self, category: str | None) -> float | None:
         """A price this business has published in its own words.

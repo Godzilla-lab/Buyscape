@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "A single tire is shown from a perspective that highlights the tread pattern.",
+      "A manufacturer's label is attached to the tread.",
+      "Label text reads: 'MICHELIN', 'PRIMACY SUV+', '245/60R18', '105V'.",
+      "The tread appears to have full depth, suggesting it is unused or very lightly used.",
+      "A watermark 'LAGOS BEST TIRES' is visible across the center of the image.",
+      "The sidewalls, where the manufacture date and structural markings are located, are not visible."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "tire",
+      "brand": "Michelin",
+      "model": "Primacy SUV+ 245/60R18 105V",
+      "read_from": [
+        "photo 0 sticker"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Excellent condition",
+        "verdict": "unverified",
+        "evidence": "The tread looks deep, but the absence of sidewall photos means age and structural integrity cannot be confirmed."
+      },
+      {
+        "claim": "Michelin Primacy SUV+",
+        "verdict": "supported",
+        "evidence": "The brand and model are clearly printed on the tread sticker in photo 0."
+      },
+      {
+        "claim": "quiet and comfortable touring tires",
+        "verdict": "unverifiable_remote",
+        "evidence": "This describes the intended performance characteristics of the model, which cannot be verified remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Tire age (DOT code)",
+        "proof": "A photo of the 4-digit DOT code on the sidewall.",
+        "if_unproven": "Priced as old stock or expired (more than 6 years old)."
+      },
+      {
+        "risk": "Sidewall damage or hidden repairs",
+        "proof": "Photos of both the inner and outer sidewalls.",
+        "if_unproven": "Priced as having a professional repair or patch."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the 4-digit DOT code on the sidewall to verify the year of manufacture.",
+      "Clear photos of the inner and outer sidewalls to check for bulges, cracks, or patches.",
+      "Confirmation of the quantity of tires available at the stated price."
+    ],
+    "decision": "price",
+    "reason": "The tire is clearly identified by brand, model, and size from the sticker. It can be priced at a worst-case value for a used tire of unknown age."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 23805,
+    "input_tokens": 2371,
+    "output_tokens": 5433,
+    "cost_usd": 0.017485,
+    "replayed": false,
+    "fixture_key": "d9ec3994f8970c4c4df71159c4e6c926",
+    "error": null
+  }
+}

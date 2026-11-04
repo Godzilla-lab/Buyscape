@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: Black UPS unit with 'BLUE GATE' embossed branding on top, blue vertical strip with power button and three indicator lights (A, C, I or similar labels), sitting on tiled floor.",
+      "Photo 1: Same unit viewed from side/top, showing a power cord with UK-style 3-pin plug attached, rear vents visible, no label showing model number, capacity (VA/W), or battery specs.",
+      "No display screen, no sticker with voltage/capacity rating, no visible serial or model number in either photo.",
+      "Unit shows some surface wear/dust but no visible cracks or damage.",
+      "No photo of rear ports (output sockets), battery compartment, or unit powered on/charging."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "UPS (uninterruptible power supply)",
+      "brand": "Blue Gate",
+      "model": null,
+      "read_from": [
+        "photo 0 top embossed text",
+        "photo 1 top embossed text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "UPS available",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photos show the physical unit exists, but no evidence of functionality, battery health, or power output."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery may be dead or near end-of-life (common failure point in used UPS units)",
+        "proof": "Video of unit powered on, running load, with battery indicator/runtime shown after unplugging from mains",
+        "if_unproven": "priced as not holding charge / battery replacement needed"
+      },
+      {
+        "risk": "Unknown VA/Watt capacity, which drives price significantly",
+        "proof": "Clear photo of rating label/sticker (often on bottom or back) showing VA/W specs",
+        "if_unproven": "priced at low-end generic small-capacity UPS"
+      },
+      {
+        "risk": "Unknown age and usage history",
+        "proof": "Photo of manufacture date sticker or seller statement with proof of purchase date",
+        "if_unproven": "priced as old/well-used stock"
+      },
+      {
+        "risk": "Output sockets/ports condition unknown (could be broken or missing covers)",
+        "proof": "Photo of rear/side panel showing output sockets clearly",
+        "if_unproven": "priced assuming sockets may be faulty"
+      },
+      {
+        "risk": "No confirmation unit powers on or regulates voltage correctly",
+        "proof": "Short video clip showing unit switched on, LED status, and a device plugged in and running",
+        "if_unproven": "priced as non-functional"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the rating label/sticker showing VA/Watt capacity and model number",
+      "Video of the UPS powered on with a load connected, showing it running on battery after mains is unplugged",
+      "Photo of rear panel showing output sockets",
+      "Any info on battery age/replacement history"
+    ],
+    "decision": "price",
+    "reason": "Item is clearly identifiable by type and brand (Blue Gate UPS) from the photos, but capacity, battery health, and functionality are unverifiable, so it must be priced at worst case as a small/unknown-capacity, unproven-working used UPS."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 12504,
+    "input_tokens": 3764,
+    "output_tokens": 1011,
+    "cost_usd": 0.014479,
+    "replayed": false,
+    "fixture_key": "4b248ace781508ac5a4c2ce7dd56e639",
+    "error": null
+  }
+}

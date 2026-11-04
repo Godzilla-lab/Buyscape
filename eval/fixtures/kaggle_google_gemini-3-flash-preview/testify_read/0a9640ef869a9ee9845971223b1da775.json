@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Large solar panel with monocrystalline half-cut cells leaning against a wall.",
+      "Manufacturer label is visible in photo 1, appearing to be attached to the front glass.",
+      "Label identifies the brand as CanadianSolar and the model as CS6W-630MS.",
+      "Label specifies 630W nominal power and 'Made in Canada'.",
+      "Photo 1 has a digital date stamp of 18/06/2025.",
+      "Both photos carry a 'FRANK SOLAR ENTERPRISES' watermark.",
+      "The panel frame appears to be aluminum."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "solar panel",
+      "brand": "CanadianSolar",
+      "model": "CS6W-630MS",
+      "read_from": [
+        "photo 1 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "we have solar panel, inverter and batteries of different sizes",
+        "verdict": "unverifiable_remote",
+        "evidence": "Only one solar panel is shown in the provided photos; no inverters or batteries are visible."
+      },
+      {
+        "claim": "Brand: CanadianSolar",
+        "verdict": "supported",
+        "evidence": "photo 1 label"
+      },
+      {
+        "claim": "Model: CS6W-630MS",
+        "verdict": "supported",
+        "evidence": "photo 1 label"
+      },
+      {
+        "claim": "Power: 630W",
+        "verdict": "supported",
+        "evidence": "photo 1 label"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The panel may be a generic unit with a counterfeit brand sticker, as the label is on the front glass and claims Canadian origin for a high-wattage model typically produced in Asia.",
+        "proof": "A clear photo of the manufacturer's specification label permanently fixed to the rear backsheet.",
+        "if_unproven": "priced as a generic unbranded solar panel"
+      },
+      {
+        "risk": "The panel may have internal cell damage or micro-cracks that are not visible but significantly reduce power output.",
+        "proof": "A video showing a multimeter test of the Open Circuit Voltage (Voc) in clear sunlight.",
+        "if_unproven": "priced as non-working or for parts"
+      },
+      {
+        "risk": "The photos may not be current or original due to the future date stamp (2025) on the image.",
+        "proof": "A photo of the panel next to a current newspaper or a device showing today's date.",
+        "if_unproven": "priced as a high-risk transaction"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the specification label on the back of the panel.",
+      "Video of a multimeter test showing the voltage output (Voc) in sunlight.",
+      "Photo of the panel with a handwritten note showing today's date to verify possession."
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identified by the label in the photo, allowing for a baseline price. However, significant risks regarding authenticity and condition mean it must be priced at the lowest tier for generic/untested equipment until further proof is provided."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 20455,
+    "input_tokens": 3506,
+    "output_tokens": 4402,
+    "cost_usd": 0.014959,
+    "replayed": false,
+    "fixture_key": "0a9640ef869a9ee9845971223b1da775",
+    "error": null
+  }
+}

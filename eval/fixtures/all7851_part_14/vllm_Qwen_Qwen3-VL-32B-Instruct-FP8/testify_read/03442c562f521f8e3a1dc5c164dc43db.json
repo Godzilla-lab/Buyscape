@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a single green server RAM module with a white label from SK hynix and a Huawei sticker below it. The label reads '32GB 2Rx4 PC4-2400T - R82 - 11'.",
+      "Photo 1 shows a hand holding multiple green RAM modules, with a server motherboard and HP monitor in the background. Text overlay says '34GB PC4 2133p, 2400T, 2933y'.",
+      "Photo 2 shows the same RAM module from photo 0 from the opposite side, revealing SK hynix chips and circuitry. No label is visible.",
+      "The RAM modules appear to be server-grade ECC Registered DIMMs, with 288-pin connectors and notches indicating server compatibility.",
+      "The Huawei sticker on photo 0 suggests the RAM may be from a Huawei server, but the module itself is SK hynix branded."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "server RAM module",
+      "brand": "SK hynix",
+      "model": "32GB 2Rx4 PC4-2400T - R82 - 11",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "32GB DDR4 Server RAM",
+        "verdict": "supported",
+        "evidence": "Photo 0 label clearly states '32GB 2Rx4 PC4-2400T', which is DDR4 server RAM."
+      },
+      {
+        "claim": "Designed for enterprise environments",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a functional claim; the photos show the module but not its performance or use case. The label and form factor suggest enterprise use, but cannot be proven remotely."
+      },
+      {
+        "claim": "34GB PC4 2133p, 2400T, 2933y",
+        "verdict": "contradicted",
+        "evidence": "Photo 1 text overlay says '34GB', but the module in photo 0 is clearly labeled '32GB'. The '34GB' is likely a typo or misstatement. The '2400T' matches the module, but '2133p' and '2933y' are not visible on the module and may be incorrect."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Module may be faulty or not functional",
+        "proof": "A video or photo showing the RAM installed and recognized in a server BIOS or operating system.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "RAM may be counterfeit or rebranded",
+        "proof": "Close-up of the chip markings and serial numbers, and a test report or verification from a trusted source.",
+        "if_unproven": "priced as lower grade or counterfeit"
+      },
+      {
+        "risk": "Huawei sticker may indicate repurposed or decommissioned server parts, which may have wear or limited lifespan",
+        "proof": "Proof of origin or server model from which it was removed, or a test report showing no wear.",
+        "if_unproven": "priced as used or repurposed"
+      }
+    ],
+    "proof_requests": [
+      "Video or photo of the RAM installed and recognized in a server BIOS or OS.",
+      "Close-up of the chip markings and serial numbers for verification.",
+      "Proof of origin or server model if possible."
+    ],
+    "decision": "price",
+    "reason": "The RAM module is clearly identified as SK hynix 32GB PC4-2400T server RAM from the label in photo 0. The 34GB claim in photo 1 is contradicted. The item can be priced at its worst case (as not working or counterfeit) until proof of functionality and authenticity is provided."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 23842,
+    "input_tokens": 3184,
+    "output_tokens": 887,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "03442c562f521f8e3a1dc5c164dc43db",
+    "error": null
+  }
+}

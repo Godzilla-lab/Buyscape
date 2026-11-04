@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Two photos show multiple Samsung split-type air conditioners stacked outdoors.",
+      "The indoor units are white with a blue accent strip and 'SAMSUNG' logo visible on the top front.",
+      "The outdoor units are beige/gray with a large fan grille and 'SAMSUNG' logo in a blue oval.",
+      "Units appear to be used, with some dust and minor scuffs visible on the casing.",
+      "No model numbers or serial numbers are visible in either photo.",
+      "The seller claims 'new model air conditioners' but also says they are 'tokunbo/fairly used'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "split-type air conditioner",
+      "brand": "SAMSUNG",
+      "model": null,
+      "read_from": [
+        "photo 0 indoor unit top front",
+        "photo 0 outdoor unit front",
+        "photo 1 indoor unit top front",
+        "photo 1 outdoor unit front"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "New model air conditioners",
+        "verdict": "unverified",
+        "evidence": "Photos show used units with dust and wear; no proof of 'new model' status. Seller also claims 'tokunbo/fairly used', contradicting 'new'."
+      },
+      {
+        "claim": "We are dealers of tokunbo/fairly used air conditioners",
+        "verdict": "supported",
+        "evidence": "Units show signs of use (dust, scuffs); consistent with 'tokunbo/fairly used'."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Unit may not be functional or may have internal damage (e.g., compressor, refrigerant leak)",
+        "proof": "Video of unit running with indoor and outdoor fans operating, and temperature drop in a room.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Model is outdated or low-efficiency, affecting value",
+        "proof": "Clear photo of model number on indoor or outdoor unit label.",
+        "if_unproven": "priced as generic used Samsung AC, lower tier"
+      },
+      {
+        "risk": "Hidden damage to fan, coils, or electrical components",
+        "proof": "Close-up of outdoor unit fan, condenser coils, and electrical connections.",
+        "if_unproven": "priced with assumption of moderate wear"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of model number on indoor or outdoor unit label.",
+      "Video of unit running with both indoor and outdoor fans operating.",
+      "Close-up of outdoor unit fan, condenser coils, and electrical connections.",
+      "Photo of indoor unit filter and interior components."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The brand is identifiable as Samsung, but the model number is missing, which is critical for pricing. The 'new model' claim is unverified and contradicted by the 'tokunbo' description and visible wear. Functional and internal condition risks cannot be assessed without further proof. Price cannot be determined without model and working condition verification."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 55638,
+    "input_tokens": 2004,
+    "output_tokens": 688,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "88b4918addbd2bb0117b1d334620df76",
+    "error": null
+  }
+}

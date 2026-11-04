@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "A black motorcycle is shown in an outdoor area with a sandy ground.",
+      "The brand 'QLINK' is printed on the fuel tank (photo 0).",
+      "The seat, fuel tank, and parts of the engine are covered in protective plastic wrapping (photo 0).",
+      "The bike has alloy wheels and a front disc brake system (photo 0).",
+      "There is no license plate visible on the front (photo 0).",
+      "The image contains a watermark: 'POSTED ON JIJI EZE PATRICK'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "motorcycle",
+      "brand": "QLINK",
+      "model": null,
+      "read_from": [
+        "photo 0 tank"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Brand new",
+        "verdict": "unverified",
+        "evidence": "Protective plastic is present, but the odometer and overall mechanical condition are not shown to confirm it is unused."
+      },
+      {
+        "claim": "200cc",
+        "verdict": "unverified",
+        "evidence": "No engine displacement markings are legible in the provided photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The engine displacement may be lower than 200cc (e.g., 125cc or 150cc).",
+        "proof": "A close-up photo of the engine displacement stamp on the cylinder block.",
+        "if_unproven": "as a 125cc model"
+      },
+      {
+        "risk": "The motorcycle may be a refurbished or used unit despite the plastic wrapping.",
+        "proof": "A photo of the odometer reading.",
+        "if_unproven": "as a used vehicle"
+      },
+      {
+        "risk": "The mechanical condition is unknown; the engine may not start or run correctly.",
+        "proof": "A video of the engine starting and idling.",
+        "if_unproven": "as non-running/for parts"
+      },
+      {
+        "risk": "The vehicle may lack legal ownership or customs documentation.",
+        "proof": "Photos of the customs papers or registration documents.",
+        "if_unproven": "as having no documentation"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the odometer.",
+      "Close-up of the engine displacement stamp.",
+      "Video of the engine running.",
+      "Photos of the vehicle's papers."
+    ],
+    "decision": "price",
+    "reason": "The brand is identified as QLINK. While the model and specific engine size are unverified, the motorcycle can be priced at its worst-case value as a used, non-running 125cc unit without papers."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 27410,
+    "input_tokens": 2365,
+    "output_tokens": 5725,
+    "cost_usd": 0.018357,
+    "replayed": false,
+    "fixture_key": "4bc5368cb103e9c8f4b77fcdae94db2c",
+    "error": null
+  }
+}

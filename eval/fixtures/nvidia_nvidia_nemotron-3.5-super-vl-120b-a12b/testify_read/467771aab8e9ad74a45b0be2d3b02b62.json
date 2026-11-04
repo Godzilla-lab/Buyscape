@@ -1,0 +1,86 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Black desktop thermal receipt printer shown from rear-left angle",
+      "Rear panel shows USB Type-B, Ethernet RJ45, and a third data port",
+      "Rocker power switch visible on right side",
+      "No readable brand or model name on the visible surfaces",
+      "Watermark text across rear panel reads HIPHENSOLUTIONS"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "thermal receipt printer",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "80mm Thermal Receipt Printer",
+        "verdict": "unverified",
+        "evidence": "photo 0 shows a receipt printer but paper width cannot be confirmed from the image"
+      },
+      {
+        "claim": "High Speed",
+        "verdict": "unverifiable_remote",
+        "evidence": "print speed cannot be judged from a still photo"
+      },
+      {
+        "claim": "Auto Cutter",
+        "verdict": "unverified",
+        "evidence": "cutter mechanism is not visible in photo 0"
+      },
+      {
+        "claim": "3-In-1 interfaces",
+        "verdict": "supported",
+        "evidence": "photo 0 shows USB, Ethernet, and a third port on the rear panel"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Printer does not power on or print",
+        "proof": "Video of the printer powering on and printing a test receipt",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Auto cutter is missing or broken",
+        "proof": "Close-up photo or video of the cutter mechanism in operation",
+        "if_unproven": "as without a working auto cutter"
+      },
+      {
+        "risk": "Not all three interfaces function",
+        "proof": "Video showing each port connected and communicating",
+        "if_unproven": "as having only one working interface"
+      },
+      {
+        "risk": "Missing power cable, interface cable, or paper roll",
+        "proof": "Photo of all accessories included with the unit",
+        "if_unproven": "as unit only"
+      }
+    ],
+    "proof_requests": [
+      "Video of the printer powering on and printing a receipt",
+      "Close-up of the rear interface labels and ports",
+      "Photo of included cables and paper roll"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a thermal receipt printer from photo 0, so it can be priced at its worst case even though operation is unproven."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 20503,
+    "input_tokens": 1586,
+    "output_tokens": 2763,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "467771aab8e9ad74a45b0be2d3b02b62",
+    "error": null
+  }
+}

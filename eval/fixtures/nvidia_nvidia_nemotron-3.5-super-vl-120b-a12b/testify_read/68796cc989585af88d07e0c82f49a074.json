@@ -1,0 +1,89 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Rectangular photovoltaic module with white aluminum frame",
+      "6 columns by 10 rows of dark solar cells (60 cells)",
+      "White backsheet visible around cell edges",
+      "Seller watermark \"CHARLES DON SOLAR\" across center",
+      "\"POSTED ON JIJI\" watermark visible",
+      "Panel leaning against a wall with other frames stacked to the right",
+      "No readable brand name, model number, or wattage label visible on the front"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Charles Don Solar enterprise do in all kinds of solar energy",
+        "verdict": "unverifiable_remote",
+        "evidence": "Seller's business description cannot be verified from the item photo"
+      },
+      {
+        "claim": "solar panel",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows a solar panel"
+      },
+      {
+        "claim": "inverter",
+        "verdict": "unverified",
+        "evidence": "No inverter is shown in photo 0"
+      },
+      {
+        "claim": "solar chest",
+        "verdict": "unverified",
+        "evidence": "No solar chest is shown in photo 0"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Wattage and model unknown",
+        "proof": "Photo of the rear specification label showing brand, model, and wattage",
+        "if_unproven": "as unknown-output panel"
+      },
+      {
+        "risk": "Cell cracks, hot spots, or delamination not visible",
+        "proof": "Close-up photo of the cell surface under even light",
+        "if_unproven": "as physically damaged"
+      },
+      {
+        "risk": "Junction box or output cables missing or broken",
+        "proof": "Photo of the rear junction box and output leads",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Age and degradation unknown",
+        "proof": "Photo of the manufacture date sticker",
+        "if_unproven": "as used with reduced output"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the rear label showing model and wattage",
+      "Close-up photo of the cell surface to check for cracks or discoloration",
+      "Photo of the rear junction box and output cables",
+      "Video of the panel outdoors in sunlight with a multimeter reading open-circuit voltage"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a solar panel, but its wattage and model are not visible, and those specifications set the market price; no worst-case price can be assigned without them."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 28486,
+    "input_tokens": 1843,
+    "output_tokens": 3256,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "68796cc989585af88d07e0c82f49a074",
+    "error": null
+  }
+}

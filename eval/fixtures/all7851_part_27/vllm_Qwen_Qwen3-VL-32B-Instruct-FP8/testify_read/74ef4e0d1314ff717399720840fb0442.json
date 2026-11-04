@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a front-loading washing machine with a silver finish.",
+      "The brand 'LG' is visible on the top left corner of the machine.",
+      "The model name 'ThinQ' is visible on the control panel.",
+      "The machine has a 'Washer+Dryer 2in1' sticker on the lower left.",
+      "The capacity is labeled as 'DirectDrive 9/6kg' \u2014 9kg wash, 6kg dry.",
+      "The control panel has a digital display showing '18:00' and various program buttons.",
+      "The door is covered with plastic wrap, suggesting it is new or recently serviced.",
+      "A white tape is stuck on the lower right of the door.",
+      "The machine is placed in a kitchen or utility area with items on a shelf above it.",
+      "Watermark 'RAYHAN SERVICE POSTED ON JUJ' is visible on the door."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "front-loading washing machine",
+      "brand": "LG",
+      "model": "ThinQ",
+      "read_from": [
+        "photo 0 top left: LG logo",
+        "photo 0 control panel: ThinQ"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Do you have a faulty washing machine you want to fix. Call now to schedule a repair service...",
+        "verdict": "unverifiable_remote",
+        "evidence": "The seller is offering repair service, not selling the machine. The photo shows a machine that appears new or well-maintained, not faulty. No evidence of fault or repair work shown."
+      },
+      {
+        "claim": "Washer+Dryer 2in1",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows a red sticker with 'Washer+Dryer 2in1' on the lower left."
+      },
+      {
+        "claim": "DirectDrive 9/6kg",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows 'DirectDrive 9/6kg' on the top left of the machine."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The machine may not be for sale, but rather being used to advertise repair services.",
+        "proof": "A clear statement from the seller confirming whether the machine is for sale or just for demonstration.",
+        "if_unproven": "Priced as not for sale \u2014 no value to buyer."
+      },
+      {
+        "risk": "The machine may be used or refurbished, despite appearing new (plastic wrap may be reused).",
+        "proof": "Photo of the machine's serial number and a close-up of the interior drum to check for wear.",
+        "if_unproven": "Priced as used, with lower value due to potential wear."
+      },
+      {
+        "risk": "The machine may not function as advertised (e.g., dryer function not working).",
+        "proof": "Video of the machine running in both wash and dry cycles.",
+        "if_unproven": "Priced as not working \u2014 no dryer function assumed."
+      }
+    ],
+    "proof_requests": [
+      "Confirm whether the machine is for sale or just for demonstration.",
+      "Provide a photo of the serial number and interior drum.",
+      "Provide a video of the machine running in wash and dry modes."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller's words suggest a repair service, not a sale. The machine appears new but may be a demo unit. Without confirmation of sale and proof of functionality, a price cannot be assigned. The plastic wrap and watermark suggest it may not be a genuine sale listing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 65851,
+    "input_tokens": 1934,
+    "output_tokens": 811,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "74ef4e0d1314ff717399720840fb0442",
+    "error": null
+  }
+}

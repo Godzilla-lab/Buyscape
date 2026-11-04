@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail packaging for a DuraVolt 16\" DC Standing Fan.",
+      "The model number DSF-163 dc and Item No: LA033EN are printed on the box.",
+      "The box lists features: tripod design, metal blades, 18W power, and optional AC/DC adapter.",
+      "The actual fan is not shown; only the box is visible.",
+      "The seller's text is a generic description of DC fans."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "standing fan",
+      "brand": "DuraVolt",
+      "model": "DSF-163 dc",
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "16\" DC Standing Fan",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "Metal blades",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "Powered with a potential of fixed value such as the voltage of a battery",
+        "verdict": "supported",
+        "evidence": "photo 0 shows 12V DC input and battery/solar compatibility"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, used, or damaged item.",
+        "proof": "Photo of the actual fan outside of the box.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The fan may not be functional.",
+        "proof": "Video of the fan powered on and spinning.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The AC/DC adapter, which the box says is 'optional', may not be included.",
+        "proof": "Photo of all included accessories and cables.",
+        "if_unproven": "as without adapter"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual fan out of the box.",
+      "Video of the fan working.",
+      "Photo of all included accessories, specifically the power adapter."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller has only provided a photo of the box. I cannot value the item without seeing the actual fan to verify its condition and presence."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 7660,
+    "input_tokens": 2365,
+    "output_tokens": 1665,
+    "cost_usd": 0.006177,
+    "replayed": false,
+    "fixture_key": "38b2022a0531822304ec815e15d73e7d",
+    "error": null
+  }
+}

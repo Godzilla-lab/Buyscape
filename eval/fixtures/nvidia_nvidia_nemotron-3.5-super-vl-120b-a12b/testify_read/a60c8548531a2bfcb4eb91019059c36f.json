@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Stack of multiple yellow manual pallet trucks wrapped in cardboard and tape",
+      "Photo 1 shows a white label on the yellow frame reading JIAMING, 2000KG, with a CE mark",
+      "Visible parts include forks, handle frame, hydraulic pump assembly, load wheels, and steer wheels",
+      "Units are stored indoors against a blue wall, appear used, and are stacked together"
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "pallet truck",
+      "brand": "JIAMING",
+      "model": null,
+      "read_from": [
+        "photo 1 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "2TON PALLET TRUCK is available",
+        "verdict": "supported",
+        "evidence": "photo 1 label reads 2000KG"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "hydraulic pump may leak or fail to lift",
+        "proof": "video of pumping the handle to raise and lower the forks under load",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "load wheels and steer wheels may be worn, cracked, or missing",
+        "proof": "close-up video rotating all wheels",
+        "if_unproven": "as needing wheel replacement"
+      },
+      {
+        "risk": "forks may be bent, cracked, or worn under the cardboard wrapping",
+        "proof": "close-up photos of fork tips, heels, and underside",
+        "if_unproven": "as damaged forks"
+      },
+      {
+        "risk": "not every unit in the stack is 2000KG / 2 ton",
+        "proof": "clear photo of the capacity label on each unit",
+        "if_unproven": "as mixed or unknown capacity"
+      }
+    ],
+    "proof_requests": [
+      "Video of the handle pumping to raise and lower the forks",
+      "Close-up photo of the JIAMING 2000KG label on every unit in the stack",
+      "Close-up video of all wheels turning",
+      "Photos of fork tips and underside"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a JIAMING 2000KG pallet truck from the label in photo 1, which supports the seller's 2-ton claim; it can be priced at its worst case pending proof of function."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 14145,
+    "input_tokens": 2909,
+    "output_tokens": 1713,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "a60c8548531a2bfcb4eb91019059c36f",
+    "error": null
+  }
+}

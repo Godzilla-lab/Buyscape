@@ -1,0 +1,98 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 and 1 show a Nikon DSLR body with 'Nikon D3300' printed clearly on the body front and on the retail box ('D3300 18-55 VR II Kit').",
+      "Photo 0/1 show an 18-55mm VR II kit lens with caps on, sitting beside the body on top of its original box.",
+      "Background shows other shop stock (flash units, selfie stick boxes labeled Godox, TT520, Yongnuo) \u2014 these are not part of this listing, just shop clutter.",
+      "No photo shows the camera powered on, LCD screen, lens mount contacts, shutter count, serial number, or any functional test.",
+      "No accessories (battery, charger, strap, memory card) are visible outside the box."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DSLR camera with kit lens",
+      "brand": "Nikon",
+      "model": "D3300",
+      "read_from": [
+        "photo 0 body and box text",
+        "photo 1 body and box text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "The model is D3400",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 and photo 1 both show 'D3300' printed on the camera body and on the retail box, not D3400."
+      },
+      {
+        "claim": "24.2 MP CMOS DX-format sensor",
+        "verdict": "unverifiable_remote",
+        "evidence": "Generic spec text, not readable from any photo; also attached to the wrong model name."
+      },
+      {
+        "claim": "5 frames per second continuous shooting",
+        "verdict": "unverifiable_remote",
+        "evidence": "No video or burst-test clip provided; cannot be seen in static photos."
+      },
+      {
+        "claim": "11 AF points with 3D",
+        "verdict": "unverifiable_remote",
+        "evidence": "No viewfinder or AF test shot provided."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Seller misstated the model (D3400 claimed vs D3300 visible), raising doubt about the rest of the description's accuracy.",
+        "proof": "A clear photo of the camera's serial number/data plate under the lens mount or battery door matching a specific model.",
+        "if_unproven": "priced as the model actually shown in photos (D3300), not as claimed (D3400)"
+      },
+      {
+        "risk": "No proof the camera powers on, shutter fires, or sensor is clean (dust/fungus not visible in static shots).",
+        "proof": "A power-on photo/video showing live view, a test shot, and a shutter-count reading from camera menu.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Lens is shown with both caps on; optical condition (fungus, scratches, zoom/focus ring smoothness) cannot be judged.",
+        "proof": "Close-up photos/video of front and rear lens elements against light, and a zoom/focus action clip.",
+        "if_unproven": "priced as lens condition unknown/worst case"
+      },
+      {
+        "risk": "Completeness of kit (battery, charger, strap, memory card, manual) not shown outside the box.",
+        "proof": "A photo of all included accessories laid out next to the body and box.",
+        "if_unproven": "priced as body + lens only, no accessories"
+      },
+      {
+        "risk": "Shutter count/usage history unknown, which matters a lot for DSLR pricing.",
+        "proof": "Screenshot of shutter count from a shutter-count checking tool or camera info screen.",
+        "if_unproven": "priced as high-use/unknown wear"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the serial/data plate to confirm true model (D3300 vs D3400).",
+      "Power-on photo or short video showing live view and a test shot.",
+      "Shutter count screenshot or in-camera info screen.",
+      "Close-up of lens elements (front/rear) and a focus/zoom action clip.",
+      "Photo of all accessories included (battery, charger, strap, card, manual)."
+    ],
+    "decision": "price",
+    "reason": "Photos clearly identify the item as a Nikon D3300 body with 18-55mm VR II kit lens in original box, contradicting the seller's D3400 claim; with no proof of function, lens condition, or completeness, it must be priced at worst case against comparable D3300/same-generation kits.",
+    "price_pick": {
+      "low": 0,
+      "high": 3
+    }
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 32030,
+    "input_tokens": 4322,
+    "output_tokens": 2888,
+    "cost_usd": 0.033971,
+    "replayed": false,
+    "fixture_key": "bd7ae090694a41ff8154ae21c6e7dd64",
+    "error": null
+  }
+}

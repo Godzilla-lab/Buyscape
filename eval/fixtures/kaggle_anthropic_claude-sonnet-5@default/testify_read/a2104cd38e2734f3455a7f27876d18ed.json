@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo shows a small storage room/closet containing several large sacks and bundles of clear plastic bottles, some wrapped in cloudy plastic sheeting.",
+      "Loose bottles and bottle caps are scattered on the floor among the bags.",
+      "Lighting is poor/backlit from a window, making it hard to judge cleanliness or bottle condition in detail.",
+      "No scale, weighing receipt, or quantity marker is visible in the photo.",
+      "No brand or model text is visible anywhere; this is a bulk scrap commodity, not a branded item."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "PET bottle scrap (sorted, for recycling, sold by weight)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 (general view of bagged bottles)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "The items are clean and sorted PET bottles",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows bundled bags that appear to contain mixed bottle colors and some loose, unbagged bottles and caps on the floor; cleanliness cannot be judged due to poor lighting and distance."
+      },
+      {
+        "claim": "Ready for weighing and pickup",
+        "verdict": "unverifiable_remote",
+        "evidence": "No scale or weight reading is shown in photo 0; this is a logistics claim that cannot be confirmed from a photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual weight/quantity of PET bottles, which is the primary price driver for scrap plastic, is unknown.",
+        "proof": "A photo or video of the bags on a weighing scale with the reading visible.",
+        "if_unproven": "cannot be priced at all, since scrap plastic is valued per kg, not per piece or by appearance"
+      },
+      {
+        "risk": "Bottles may not be properly sorted by type/color (PET vs HDPE, clear vs colored), which affects recycling value.",
+        "proof": "Close-up photos of the open bags showing bottle types and colors separated.",
+        "if_unproven": "priced as mixed/unsorted grade (lower value)"
+      },
+      {
+        "risk": "Bottles may still have caps, labels, or liquid residue (contamination reduces recycling value).",
+        "proof": "Close-up photo of a sample bag's bottles showing caps/labels removed and bottles empty and rinsed.",
+        "if_unproven": "priced as contaminated/unclean grade"
+      }
+    ],
+    "proof_requests": [
+      "Photo or video of the full lot being weighed on a scale, with the scale reading clearly visible.",
+      "Close-up photos of opened bags showing bottle color sorting and whether caps/labels are removed.",
+      "A wider, well-lit photo of the entire lot from outside the dim room to assess true volume and condition."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "This is scrap PET sold strictly by weight, and no weight, scale reading, or clear quantity indicator is visible in the single photo, so even a worst-case price cannot be set without that missing shot."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 18105,
+    "input_tokens": 2567,
+    "output_tokens": 1563,
+    "cost_usd": 0.017605,
+    "replayed": false,
+    "fixture_key": "a2104cd38e2734f3455a7f27876d18ed",
+    "error": null
+  }
+}

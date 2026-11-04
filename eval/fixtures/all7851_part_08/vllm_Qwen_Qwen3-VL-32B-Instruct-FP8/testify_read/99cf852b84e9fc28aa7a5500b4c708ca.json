@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Front view of a silver laptop with black keyboard, HP logo visible on screen bezel. Keyboard has a circular trackpoint. Watermark 'GOLD TECHNOLOGIES POSTED ON JIJI' is overlaid.",
+      "Photo 1: Screen shows BIOS System Information with 'Product Name: HP EliteBook Folio 9470m', 'Processor Type: Intel(R) Core(TM) i7-3667U CPU', and other system details. HP logo visible on bottom bezel. Watermark present.",
+      "Photo 2: Same BIOS screen as photo 1, but from a wider angle showing the full laptop. Keyboard and trackpad visible. Watermark present."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "EliteBook Folio 9470m",
+      "read_from": [
+        "photo 1 screen",
+        "photo 2 screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP folio9470 Intel core i5 laptop",
+        "verdict": "contradicted",
+        "evidence": "Photo 1 and 2 show 'HP EliteBook Folio 9470m' and 'Intel(R) Core(TM) i7-3667U CPU', not an i5."
+      },
+      {
+        "claim": "with backlight",
+        "verdict": "unverified",
+        "evidence": "No photo shows the keyboard backlight turned on. The keyboard appears to be standard black keys without visible backlighting in the current lighting."
+      },
+      {
+        "claim": "working perfectly great like brand new",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photos show BIOS screen, not the OS or any application. No evidence of functionality beyond BIOS. No video or sound test shown."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Keyboard backlight may not work or is not present",
+        "proof": "Photo of keyboard with backlight turned on in a dark environment",
+        "if_unproven": "priced as no backlight"
+      },
+      {
+        "risk": "Laptop may not boot into operating system or have functional hardware (e.g., screen, touchpad, ports)",
+        "proof": "Video showing boot into Windows or Linux, use of touchpad, keyboard, and external peripherals",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Battery may be dead or degraded",
+        "proof": "Video showing laptop running on battery with battery percentage displayed",
+        "if_unproven": "priced as battery not included or dead"
+      },
+      {
+        "risk": "Screen may have dead pixels, cracks, or brightness issues",
+        "proof": "Photo or video of screen displaying full white and full black screens",
+        "if_unproven": "priced as screen condition unknown"
+      }
+    ],
+    "proof_requests": [
+      "Video showing boot into operating system and use of keyboard, touchpad, and ports",
+      "Photo of keyboard with backlight turned on in a dark room",
+      "Video showing laptop running on battery with battery percentage visible",
+      "Photo of screen displaying full white and full black screens"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identified as HP EliteBook Folio 9470m with an i7 processor, contradicting the seller's claim of an i5. The backlight claim is unverified, and functionality claims are unverifiable remotely. Key risks like battery, screen, and full system operation require proof before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 63327,
+    "input_tokens": 2239,
+    "output_tokens": 803,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "99cf852b84e9fc28aa7a5500b4c708ca",
+    "error": null
+  }
+}

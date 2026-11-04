@@ -1,0 +1,69 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r5",
+  "response": {
+    "observations": [
+      "Photo 0 shows a red gas cylinder with a black valve assembly and a metal handle, standing on a dirt surface next to other cylinders.",
+      "Photo 1 shows a red gas cylinder with a black valve assembly and a metal handle, standing on a dirt surface next to other cylinders.",
+      "The red paint on the cylinder body in photo 1 is heavily chipped and worn.",
+      "The valve assembly in both photos appears to be intact but shows some wear.",
+      "A watermark 'DANIEL DIBO POSTED ON JIJI' is visible across both photos."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "gas cylinder",
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "different gas cylinder for sale",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 1 show multiple cylinders of different colors and sizes."
+      },
+      {
+        "claim": "Recently tested and certified, no leak, the valve is new.",
+        "verdict": "unverified",
+        "evidence": "No photo shows this; it is the seller's word only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The cylinder may be expired or past its re-test date.",
+        "proof": "A clear photo of the manufacturing or expiry date stamped on the handle or collar.",
+        "if_unproven": "as expired/scrap value"
+      },
+      {
+        "risk": "The valve may be faulty or leaking.",
+        "proof": "A video showing a soap bubble test on the valve while under pressure.",
+        "if_unproven": "as requiring a valve replacement"
+      },
+      {
+        "risk": "The cylinder may be empty or contain a different gas than claimed.",
+        "proof": "A photo of the weight stamp on the handle or collar.",
+        "if_unproven": "as empty"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of any label, sticker or metal plate showing the brand and model.",
+      "Photo of the manufacturing or expiry date stamped on the handle or collar.",
+      "Photo of the weight stamp on the handle or collar.",
+      "Video of a soap bubble leak test on the valve.",
+      "Photo of the valve handle to check for rust or damage."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "What the item is shows, but not the model that sets its price: no photo shows it clearly enough to read. The shot asked for first would settle it."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r5",
+    "task": "testify_read",
+    "latency_ms": 7070,
+    "input_tokens": 2284,
+    "output_tokens": 438,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "e68b40fa77b93dfc812d52a695b406eb",
+    "error": null
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows a DSLR body with a lens mounted (lens barrel marked with partial text that looks like a Tamron zoom, not a Canon kit lens), a box in the background, and a separate battery and charger both marked 'Canon'.",
+      "The camera's LCD top panel in photo 0 is blank/unlit, no shutter count or settings visible.",
+      "Photo 1 and 2 show the rear of the body: 'Canon' wordmark is visible near the bottom of the screen bezel, control buttons (MENU, INFO, RATE, play, trash) and a rear scroll dial are visible.",
+      "No model nameplate, serial number sticker, or engraved '5D Mark III' text is visible in any photo.",
+      "Rear screen is off/black in all three photos, so no boot screen, firmware version, or shutter count is shown.",
+      "A lens is physically attached to the body in photo 0, despite the listing title claiming 'body alone'.",
+      "Battery shows a charge indicator printed on its shell (0/50/75/100%) but this is a label, not a live charge reading.",
+      "Background box and accessory inserts (straps, caps, cables) are visible but not clearly tied to this specific unit's model."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "DSLR camera body",
+      "brand": "Canon",
+      "model": null,
+      "read_from": [
+        "photo 0 Canon wordmark on grip",
+        "photo 1 Canon wordmark on screen bezel",
+        "photo 2 Canon wordmark on screen bezel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Canon 5D Mark III body",
+        "verdict": "unverified",
+        "evidence": "Canon brand name is visible in photos 0, 1, 2, but no model number, nameplate, or serial sticker reading '5D Mark III' appears in any photo."
+      },
+      {
+        "claim": "Body alone (no lens)",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows a lens mounted on the body."
+      },
+      {
+        "claim": "Comes with charger",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows a Canon-branded charger beneath the battery."
+      },
+      {
+        "claim": "Comes with battery",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows a Canon-branded battery with charge-level markings."
+      },
+      {
+        "claim": "Implied working condition (standard used listing)",
+        "verdict": "unverifiable_remote",
+        "evidence": "Screen is off/black in all photos; no power-on, shutter count, or image sample shown."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Exact model cannot be confirmed (5D Mark III vs an older/cheaper 5D variant), which materially changes price.",
+        "proof": "Clear close-up photo of the top or front nameplate/engraving showing '5D Mark III' and the serial number sticker on the body or inside the battery door.",
+        "if_unproven": "priced as the lowest-value plausible Canon 5D-series body given visual cues alone"
+      },
+      {
+        "risk": "Shutter count unknown, which is the main value driver for a used pro DSLR body.",
+        "proof": "Photo or screen recording of the menu shutter count screen (or a shutter-count checker app result).",
+        "if_unproven": "priced as high-shutter-count / near end-of-life body"
+      },
+      {
+        "risk": "Body power-on and sensor/autofocus function unverified; screen is off in all photos.",
+        "proof": "Short video clip of the camera powering on, showing live view, and firing the shutter with lens cap off.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Listing says 'body alone' but a lens is shown attached; unclear if lens is included or just staged.",
+        "proof": "Explicit seller confirmation plus a photo of the final bundle (body, battery, charger only, no lens) as it will be shipped.",
+        "if_unproven": "priced as body + charger + battery only, lens excluded"
+      },
+      {
+        "risk": "Physical condition of mount, sensor, and LCD screen (scratches, fungus, dead pixels) cannot be judged from these angles.",
+        "proof": "Close-up photos of the lens mount/sensor (with lens off), and a lit close-up of the rear LCD screen.",
+        "if_unproven": "priced as cosmetically worn, unverified sensor condition"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of the body nameplate/engraving and serial number confirming '5D Mark III'.",
+      "Video of the camera powering on, showing the shutter count in the menu.",
+      "Photo of the lens mount and sensor with the lens removed.",
+      "Confirmation and photo of the exact bundle to be shipped (body, battery, charger, no lens)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The brand is visible but the specific model that sets the price ('5D Mark III') cannot be read from any photo, and the screen/shutter count that would support a working-condition price is not shown, so a worst-case price is not yet determinable."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 30750,
+    "input_tokens": 4746,
+    "output_tokens": 2725,
+    "cost_usd": 0.033583,
+    "replayed": false,
+    "fixture_key": "2ca7e394c980ec17021fcd5dbb42c751",
+    "error": null
+  }
+}

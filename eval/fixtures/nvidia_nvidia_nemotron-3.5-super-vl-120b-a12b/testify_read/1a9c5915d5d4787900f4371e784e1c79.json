@@ -1,0 +1,75 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Used tire lying flat on concrete ground",
+      "Tread pattern visible across full width with moderate wear",
+      "Yellow chalk markings on center tread blocks",
+      "Watermark text \"POSTED ON JIJI\" and \"JIJIVENTURE\" across image",
+      "Sidewall lettering not legible; no brand or size readable",
+      "No rim or wheel visible, tire only"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "car tire",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Tukunbo tire (foreign-used/second-hand)",
+        "verdict": "unverifiable_remote",
+        "evidence": "photo 0 shows a used tire but cannot confirm import status or prior use history"
+      },
+      {
+        "claim": "285 45 r22 (tire size)",
+        "verdict": "unverifiable_remote",
+        "evidence": "photo 0 does not show legible sidewall size markings"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Size is not 285/45 R22 as claimed",
+        "proof": "Close-up photo of sidewall showing embossed size",
+        "if_unproven": "as wrong size and unsellable to this buyer"
+      },
+      {
+        "risk": "Tire is expired or rubber is degraded from age",
+        "proof": "Photo of DOT date code on sidewall",
+        "if_unproven": "as over-age rubber"
+      },
+      {
+        "risk": "Hidden punctures, repairs, or bead damage",
+        "proof": "Video of tire inflated and holding air, or soapy-water leak test",
+        "if_unproven": "as not holding air"
+      },
+      {
+        "risk": "Tread depth below safe or legal limit",
+        "proof": "Close-up of tread wear bars or tread depth gauge reading",
+        "if_unproven": "as bald or worn out"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of sidewall showing brand, size, and DOT date code",
+      "Photo or video showing tire inflated and holding air",
+      "Close-up of tread depth across the face"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The tire's size and brand cannot be read from the photo, so the correct market identity and worst-case value cannot be determined without a sidewall shot."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 22938,
+    "input_tokens": 1838,
+    "output_tokens": 2840,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "1a9c5915d5d4787900f4371e784e1c79",
+    "error": null
+  }
+}

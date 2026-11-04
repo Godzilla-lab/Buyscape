@@ -1,0 +1,81 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows a white LG front-load washing machine with control panel reading 'Inverter DirectDrive 7kg' and a partial model code visible on the panel (hard to fully read, appears to start with 'F1068...').",
+      "Door seal and drum area look intact, drum interior visibly dark/dirty residue inside.",
+      "Visible rust staining along the bottom front edge and near the bottom-left and bottom-right corners of the cabinet.",
+      "No power cord, no indication of machine being plugged in or powered on in this photo.",
+      "Only one photo supplied; no shot of the rear panel, no video of drum spinning, no display lighting up, no serial/model plate close-up."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "front-load washing machine",
+      "brand": "LG",
+      "model": "DirectDrive 7kg (partial model code visible, not fully legible)",
+      "read_from": [
+        "photo 0 control panel label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "LG DirectDrive 7kg washing machine",
+        "verdict": "supported",
+        "evidence": "photo 0 shows 'LG' logo and 'Inverter DirectDrive 7kg' text on the control panel"
+      },
+      {
+        "claim": "It is the 7kg one",
+        "verdict": "supported",
+        "evidence": "photo 0 label reads '7kg'"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Machine may not power on or complete a wash cycle",
+        "proof": "A video of the unit plugged in, powering on, and running through a spin cycle",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Rust along the base could indicate internal corrosion, leak, or drum/bearing damage",
+        "proof": "Close-up photos of the rust areas and the rear panel, plus a photo under the machine for leak staining",
+        "if_unproven": "priced as having a mechanical/leak fault"
+      },
+      {
+        "risk": "Drum could be imbalanced, noisy, or have bearing wear (common on older DirectDrive units)",
+        "proof": "Video clip of a spin cycle with sound",
+        "if_unproven": "priced as faulty motor/drum"
+      },
+      {
+        "risk": "Model/age unknown, affects warranty and part availability",
+        "proof": "Clear close-up photo of the full model/serial plate (usually on rear or inside door)",
+        "if_unproven": "priced as unverified/older stock"
+      }
+    ],
+    "proof_requests": [
+      "Video of the machine powered on and running a spin cycle",
+      "Close-up photo of the full model/serial plate",
+      "Photos of the rear panel and underside for leaks or corrosion",
+      "Photo of the machine's interior drum and detergent drawer without residue"
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identified as an LG DirectDrive 7kg front-load washing machine from the photo, but no functional proof (power-on, spin, no leaks) is given and visible rust raises doubt, so it must be priced at worst case as a faulty unit comparable to similarly-priced faulty/used washers.",
+    "price_pick": {
+      "low": 1,
+      "high": 2
+    }
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 30185,
+    "input_tokens": 3990,
+    "output_tokens": 2678,
+    "cost_usd": 0.031207,
+    "replayed": false,
+    "fixture_key": "71eddc4ed131f150b5c308872832e010",
+    "error": null
+  }
+}

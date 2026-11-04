@@ -1,0 +1,70 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo shows a blue industrial gearbox with a shaft on one side and mounting feet/flange on the body.",
+      "A label/sticker is visible on the gearbox body, but the key specs (ratio/model/HP) are not readable in the provided image.",
+      "No electric motor is visible in the photo (only the gearbox).",
+      "No clear brand/model name is readable from the photo; watermark text is present but not usable as product identity."
+    ],
+    "identity": {
+      "status": "unknown",
+      "kind": "industrial gear box (with shaft)",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Industrial gear box and electric motor 20hp ratio 1:10",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows only a gearbox; no motor is shown, and the ratio/20hp are not readable."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Motor not included or not the stated 20hp (photo shows only gearbox).",
+        "proof": "Ask for a clear photo of the motor nameplate (brand, model, HP/kW, voltage/Hz, RPM) and a photo showing both motor + gearbox together.",
+        "if_unproven": "Price as gearbox only, and treat as not confirmed for 1:10 ratio / not confirmed motor specs."
+      },
+      {
+        "risk": "Gear ratio (1:10) may be different or unknown.",
+        "proof": "Ask for a close-up photo of the gearbox nameplate showing the gear ratio and model/serial number.",
+        "if_unproven": "Price as generic used industrial gearbox with unknown ratio."
+      },
+      {
+        "risk": "Condition/working status (leaks, worn bearings, shaft play) cannot be confirmed from a single exterior photo.",
+        "proof": "Ask for a short video of the gearbox running under load (or at least running freely) plus a photo of any oil level/condition and seals.",
+        "if_unproven": "Price at worst case: assume it may need service (as-is, not guaranteed working)."
+      },
+      {
+        "risk": "Compatibility risk (input/output shaft size, mounting pattern, rotation direction).",
+        "proof": "Ask for measurements: input/output shaft diameter, keyway size, bolt pattern, and direction/rotation; plus a photo of both ends with a ruler/caliper.",
+        "if_unproven": "Price as hard-to-match used gearbox (worst-case compatibility)."
+      }
+    ],
+    "proof_requests": [
+      "Send close-up photos of the gearbox nameplate showing ratio (1:10), model, and serial number.",
+      "Send clear photos of the electric motor nameplate (HP/kW, voltage, RPM, model) and confirm it is included.",
+      "Send a short running video (gearbox + motor if applicable) showing smooth operation and no abnormal noise.",
+      "Provide measurements of shaft diameters/keyway and mounting bolt pattern (with ruler/caliper) for compatibility."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo only shows a gearbox and does not provide readable proof of the stated 1:10 ratio or the included 20hp motor, so a worst-case price cannot be reliably matched to the comparables.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_joint",
+    "latency_ms": 4567,
+    "input_tokens": 2461,
+    "output_tokens": 738,
+    "cost_usd": 0.001415,
+    "replayed": false,
+    "fixture_key": "a8ed3c491b2ecfea6856107acd1acfd4",
+    "error": null
+  }
+}

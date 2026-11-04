@@ -1,0 +1,104 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows an open 2U rack server chassis with eight front drive bays, motherboard, and DIMM slots.",
+      "Photo 1 shows CPU heatsinks, RAM slots, and internal cabling.",
+      "Photo 2 shows the rear panel with eight fans, Ethernet ports, VGA, USB, and serial port.",
+      "All three photos carry the watermark 'I.G SERVER TECH POSTED ON JIJI'.",
+      "No HP, ProLiant, DL380, or G9 text is readable in the photos."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "2U rack server",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0",
+        "photo 1",
+        "photo 2"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP ProLiant DL380 G9",
+        "verdict": "unverified",
+        "evidence": "Not readable in photos; only in seller's words."
+      },
+      {
+        "claim": "2U Server",
+        "verdict": "unverified",
+        "evidence": "Chassis looks rack-mountable but no 2U marking or scale visible."
+      },
+      {
+        "claim": "8Bay",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows eight front drive bays."
+      },
+      {
+        "claim": "2.5\"",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows small form factor bays consistent with 2.5 inch drives."
+      },
+      {
+        "claim": "1tb",
+        "verdict": "unverified",
+        "evidence": "No drive labels or capacity visible."
+      },
+      {
+        "claim": "64gb ram",
+        "verdict": "unverified",
+        "evidence": "DIMM slots visible but no capacity labels readable."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "No drives installed or drives dead",
+        "proof": "Photo of each bay with drive label readable, or storage controller screenshot.",
+        "if_unproven": "priced with no drives"
+      },
+      {
+        "risk": "RAM not 64 GB or not working",
+        "proof": "Photo of DIMM labels or boot screen showing memory count.",
+        "if_unproven": "priced with no RAM"
+      },
+      {
+        "risk": "CPUs missing or dead",
+        "proof": "Photo of CPU sockets or boot screen showing processor model.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Power supplies missing or dead",
+        "proof": "Photo of rear showing installed PSUs or video of unit powering on.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Motherboard or RAID controller faulty",
+        "proof": "Video of POST/BIOS detecting hardware.",
+        "if_unproven": "priced as not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of front drive bays with drives and labels readable",
+      "Photo of RAM sticks with capacity labels readable",
+      "Video of server powering on to BIOS/POST screen",
+      "Photo of rear panel showing installed power supplies"
+    ],
+    "decision": "price",
+    "reason": "The photos identify a 2U 8-bay rack server; brand, model, capacity, and working condition are unproven, so it is priced at worst case as non-working with no drives or RAM."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 17308,
+    "input_tokens": 2221,
+    "output_tokens": 3590,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "6edbd5a4c4ada8f67041cea71b4ee9aa",
+    "error": null
+  }
+}

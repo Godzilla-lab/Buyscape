@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a white steam iron held in hand, with 'PHILIPS' and 'AZUR 60' visible on the side.",
+      "The iron has a temperature dial, a steam control knob, and a coiled cord.",
+      "Photo 1 shows the soleplate from above, with visible scratches, discoloration, and some dark marks, especially on the left side.",
+      "The soleplate has multiple steam holes arranged in rows.",
+      "The background in both photos is an outdoor, unpaved area with people partially visible.",
+      "The watermark 'ROCHVISION APPLIANCES POSTED ON JIJI' is present on both images."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "steam iron",
+      "brand": "PHILIPS",
+      "model": "AZUR 60",
+      "read_from": [
+        "photo 0 side panel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Foreign used Philips iron",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows the brand 'PHILIPS' and model 'AZUR 60' on the iron's body."
+      },
+      {
+        "claim": "fairly used machine in perfect condition",
+        "verdict": "contradicted",
+        "evidence": "Photo 1 shows visible scratches, discoloration, and dark marks on the soleplate, indicating wear and tear inconsistent with 'perfect condition'."
+      },
+      {
+        "claim": "comes with warranty",
+        "verdict": "unverifiable_remote",
+        "evidence": "No warranty document, label, or proof is visible in the photos. The claim cannot be verified remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Internal damage or malfunction (e.g., heating element, steam system)",
+        "proof": "A video showing the iron in operation, including steam output and heating up.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Electrical safety issues (e.g., frayed cord, damaged plug)",
+        "proof": "Close-up photo of the plug and full length of the cord, including any damage or wear.",
+        "if_unproven": "priced as unsafe"
+      },
+      {
+        "risk": "Soleplate damage affecting performance or causing fabric damage",
+        "proof": "Photo 1 already shows damage, but a close-up of the soleplate under direct light to assess depth of scratches and pitting would confirm.",
+        "if_unproven": "priced as damaged"
+      }
+    ],
+    "proof_requests": [
+      "Video of the iron in operation, showing steam output and heating.",
+      "Close-up photo of the plug and full cord to check for damage.",
+      "Close-up of the soleplate under direct light to assess damage depth."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a Philips AZUR 60 steam iron, but the claim of 'perfect condition' is contradicted by visible soleplate damage. The warranty claim is unverifiable. Critical risks like functionality and electrical safety cannot be assessed without additional proof. Therefore, a price cannot be assigned until these are verified."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 58565,
+    "input_tokens": 2282,
+    "output_tokens": 712,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "ec61ce2c28ac1b9e1ddadfe1e5b58468",
+    "error": null
+  }
+}

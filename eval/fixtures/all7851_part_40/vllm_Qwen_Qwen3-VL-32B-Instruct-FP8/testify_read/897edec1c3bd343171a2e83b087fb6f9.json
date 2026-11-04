@@ -1,0 +1,65 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Open MacBook with silver body, black keyboard, and trackpad. The screen is off, reflecting surroundings. 'MacBook Pro' is visible on the bezel below the screen. Watermark 'VICKY COMPUTERS EMAB' is overlaid.",
+      "Photo 1: Closed lid of the laptop showing the Apple logo. The surface is silver with a matte finish. Watermark present.",
+      "Photo 2: Bottom of the laptop showing four rubber feet and a small label with regulatory symbols (CE, etc.). No visible serial number or model identifier. Watermark present."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "MacBook Pro",
+      "brand": "Apple",
+      "model": null,
+      "read_from": [
+        "photo 0 screen bezel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Macbook pro m2 8gb ram 256 gb ssd",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible model identifier, serial number, or system specs in photos. The M2 chip, RAM, and SSD size cannot be confirmed from images alone."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The laptop may not have the M2 chip, 8GB RAM, or 256GB SSD as claimed.",
+        "proof": "A clear photo of the system information screen (Apple > About This Mac) or the bottom label with model number and serial number.",
+        "if_unproven": "Priced as a generic MacBook Pro without confirmed specs, which is lower than M2 8GB/256GB model."
+      },
+      {
+        "risk": "The laptop may be damaged or have hidden defects (e.g., screen issues, keyboard damage, battery health, or water damage).",
+        "proof": "A video showing the laptop turning on, booting into macOS, and displaying system info, plus close-ups of the keyboard, screen, and ports.",
+        "if_unproven": "Priced as potentially non-functional or with unknown defects, which reduces value."
+      },
+      {
+        "risk": "The laptop may be stolen or have an invalid serial number (blacklisted).",
+        "proof": "A photo of the serial number and a verification of its status via Apple\u2019s website (if possible remotely).",
+        "if_unproven": "Priced as high-risk, which reduces value significantly."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the 'About This Mac' screen showing model, chip, RAM, and storage.",
+      "Photo of the bottom label with serial number and model identifier.",
+      "Video of the laptop turning on and booting into macOS.",
+      "Close-up of the keyboard and screen for damage assessment."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a MacBook Pro, but the specific model (M2), RAM, and SSD size cannot be confirmed from the photos. Without proof of specs and condition, the item cannot be priced accurately and carries significant hidden risks."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 48551,
+    "input_tokens": 2583,
+    "output_tokens": 677,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "897edec1c3bd343171a2e83b087fb6f9",
+    "error": null
+  }
+}

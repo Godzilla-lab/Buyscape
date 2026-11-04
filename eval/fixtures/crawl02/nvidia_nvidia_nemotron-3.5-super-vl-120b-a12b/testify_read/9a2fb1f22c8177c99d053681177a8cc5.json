@@ -1,0 +1,92 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a closed silver HP laptop on a wooden desk; the lid has an HP logo and a watermark reading \"VICKY COMPUTERS EMAB\".",
+      "Photo 1 shows the same silver HP laptop open with the screen off; a power cable is plugged into the right side.",
+      "Photo 2 shows the laptop screen on displaying Windows Settings > About; the page lists an Intel Core processor, 8.00 GB RAM, 64-bit OS, and states \"Pen and touch: No pen or touch input\"."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "15 inch laptop",
+      "brand": "HP",
+      "model": null,
+      "read_from": [
+        "photo 0 lid",
+        "photo 1 bezel",
+        "photo 2 bezel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Open box",
+        "verdict": "unverifiable_remote",
+        "evidence": "No box or packaging is visible in any photo."
+      },
+      {
+        "claim": "very clean",
+        "verdict": "unverified",
+        "evidence": "The exterior appears clean in photos 0-2, but internal cleanliness cannot be verified remotely."
+      },
+      {
+        "claim": "touch screen",
+        "verdict": "contradicted",
+        "evidence": "Photo 2 Windows About screen shows \"Pen and touch: No pen or touch input\"."
+      },
+      {
+        "claim": "15 inches",
+        "verdict": "unverified",
+        "evidence": "The laptop appears to be a 15-inch class machine, but screen size is not marked or measurable from the photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery may not hold a charge",
+        "proof": "Screenshot of Windows battery health report or a video of the laptop running unplugged",
+        "if_unproven": "priced as dead battery"
+      },
+      {
+        "risk": "Storage drive may be slow or failing",
+        "proof": "Screenshot of disk health or Device Manager showing the drive",
+        "if_unproven": "priced as failed storage"
+      },
+      {
+        "risk": "Keyboard or trackpad may have faults",
+        "proof": "Video of typing and trackpad gestures",
+        "if_unproven": "priced as faulty input devices"
+      },
+      {
+        "risk": "Screen may have dead pixels or backlight issues",
+        "proof": "Video of full-screen solid red, green, blue, and white images",
+        "if_unproven": "priced as defective screen"
+      },
+      {
+        "risk": "Charger may not be included or may not work",
+        "proof": "Photo of the charger brick and cable",
+        "if_unproven": "priced without charger"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the charger brick and cable",
+      "Video of keyboard, trackpad, and all ports",
+      "Screenshot of battery health report",
+      "Video of full-screen solid colors to test the display"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as an HP 15-inch class laptop that boots to Windows; the touch-screen claim is contradicted by the About screen, so it is priced as a standard non-touch laptop with unverified battery, storage, and peripherals."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 22027,
+    "input_tokens": 3484,
+    "output_tokens": 3173,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "9a2fb1f22c8177c99d053681177a8cc5",
+    "error": null
+  }
+}

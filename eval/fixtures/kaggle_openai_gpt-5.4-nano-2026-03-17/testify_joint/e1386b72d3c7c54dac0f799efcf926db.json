@@ -1,0 +1,89 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0 shows a UPS with the text/logo \u201cBLUE GATE\u201d on the front panel and a blue vertical status/control area with a power button.",
+      "Photo 1 shows the UPS from an angle with the \u201cBLUE GATE\u201d branding visible on the side/front; two-pin plug/cables are visible at the top.",
+      "No photo shows the battery compartment, battery brand/spec label, or any runtime/load test results."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "UPS (uninterruptible power supply)",
+      "brand": "BLUE GATE",
+      "model": null,
+      "read_from": [
+        "photo 0 front panel text",
+        "photo 1 side/front branding"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "UPS available",
+        "verdict": "supported",
+        "evidence": "Photos show a UPS unit branded \u201cBLUE GATE\u201d (photo 0, photo 1)."
+      },
+      {
+        "claim": "Battery is new",
+        "verdict": "unverified",
+        "evidence": "No photo of battery label/date, battery compartment, or proof of replacement."
+      },
+      {
+        "claim": "Battery holds charge for 8 hours",
+        "verdict": "unverified",
+        "evidence": "No runtime test photo/clip; no load specification (wattage/connected device) shown."
+      },
+      {
+        "claim": "Never repaired",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal/battery compartment photos, no inspection of seals/screws, and no service history shown."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery capacity may be overstated; runtime could be much shorter than claimed, especially under load.",
+        "proof": "A video/clip showing the UPS powering a known load (e.g., a specified wattage bulb/fan or small appliance) with a timer from start to shutdown.",
+        "if_unproven": "Price as not proven for long runtime (worst case: treat as faulty/weak battery comparable)."
+      },
+      {
+        "risk": "UPS may not switch to battery correctly (transfer fault) or may have weak inverter output.",
+        "proof": "A clip showing mains unplugged while the UPS continues powering the load, plus the UPS status LEDs during transfer.",
+        "if_unproven": "Price as not working reliably (worst case: faulty UPS comparable)."
+      },
+      {
+        "risk": "Capacity/ratings (VA/W) are unknown; could be a smaller unit than expected, affecting value.",
+        "proof": "Photo of the rating label (VA/W, input/output, battery voltage) on the back/bottom.",
+        "if_unproven": "Price at the lower end for generic Blue Gate UPS units (worst case: smallest/weakest)."
+      },
+      {
+        "risk": "\u201cNever repaired\u201d may be false; unit could have been opened/rewired or have worn components.",
+        "proof": "Photo of opened battery compartment or close-up of internal wiring/condition and any warranty/seal marks (if present).",
+        "if_unproven": "Price as potentially repaired/used (worst case: faulty comparable)."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the UPS rating label (VA/W, input/output, battery voltage) on the back/bottom.",
+      "Video test: connect a known wattage load, unplug mains, show UPS stays on and record runtime until shutdown.",
+      "Photo of the battery compartment/battery label (brand, voltage, date) or a receipt/receipt-like proof of replacement."
+    ],
+    "decision": "price",
+    "reason": "The photos clearly show a BLUE GATE UPS, but the key value claims (new battery, 8-hour runtime, never repaired) are not provable from the images. So it should be priced at the worst case consistent with the available comparables (faulty/weak).",
+    "price_pick": {
+      "low": 5000,
+      "high": 8000
+    }
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_joint",
+    "latency_ms": 6598,
+    "input_tokens": 3383,
+    "output_tokens": 896,
+    "cost_usd": 0.001797,
+    "replayed": false,
+    "fixture_key": "e1386b72d3c7c54dac0f799efcf926db",
+    "error": null
+  }
+}

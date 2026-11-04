@@ -1,0 +1,87 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a hand holding a smartphone with a notch at the top of the screen, displaying iOS home screen with app icons. The phone has a black front bezel and appears to be in working condition.",
+      "Photo 1 shows the back of the same phone, which is silver/white with a single vertical camera module and Apple logo. The design matches the iPhone XS Max.",
+      "The phone has a dual-camera setup arranged vertically with a flash, consistent with iPhone XS Max.",
+      "The seller claims it is an iPhone XS Max, 256GB, with replaced battery, available in white and gold.",
+      "The background in both photos shows a store with shelves of phones and accessories, suggesting a retail environment."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "iPhone XS Max",
+      "brand": "Apple",
+      "model": "iPhone XS Max",
+      "read_from": [
+        "photo 1 back design: vertical dual camera, flash, Apple logo, and overall shape match iPhone XS Max"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "iPhone XS Max",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows the back design with vertical dual camera and Apple logo, matching iPhone XS Max."
+      },
+      {
+        "claim": "256gb",
+        "verdict": "unverifiable_remote",
+        "evidence": "Storage capacity cannot be read from photos; requires checking settings or box."
+      },
+      {
+        "claim": "Replaced battery",
+        "verdict": "unverified",
+        "evidence": "No photo of battery or diagnostic screen; claim cannot be confirmed from images."
+      },
+      {
+        "claim": "Available in white and Gold",
+        "verdict": "unverified",
+        "evidence": "Only white/silver is shown in photo 1; gold variant not visible."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery health or replacement quality",
+        "proof": "Photo of battery health in Settings > Battery > Battery Health, or a diagnostic report.",
+        "if_unproven": "Priced as if battery is degraded or not replaced, reducing value."
+      },
+      {
+        "risk": "Storage capacity not 256GB",
+        "proof": "Screenshot of Settings > General > iPhone Storage showing 256GB capacity.",
+        "if_unproven": "Priced as lower storage model (e.g., 64GB or 128GB), reducing value."
+      },
+      {
+        "risk": "Phone is not genuine or has been tampered with",
+        "proof": "Photo of the serial number on the back or in Settings > General > About, and IMEI check.",
+        "if_unproven": "Priced as potentially counterfeit or blacklisted, reducing value."
+      },
+      {
+        "risk": "Screen or body damage not visible in photos",
+        "proof": "Close-up photos of screen edges, corners, and back for scratches, cracks, or dents.",
+        "if_unproven": "Priced as if minor to moderate damage exists, reducing value."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of Settings > General > iPhone Storage to confirm 256GB capacity.",
+      "Screenshot of Settings > Battery > Battery Health to verify battery condition.",
+      "Photo of the serial number and IMEI for authenticity check.",
+      "Close-up photos of the screen and back for damage inspection."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identifiable as iPhone XS Max from the back design, but key claims like storage capacity, battery condition, and authenticity cannot be verified from current photos. Risks such as incorrect storage, poor battery health, or damage affect pricing and must be confirmed before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 66105,
+    "input_tokens": 2283,
+    "output_tokens": 832,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "9c059879e91065ba5fd68153650d03a3",
+    "error": null
+  }
+}

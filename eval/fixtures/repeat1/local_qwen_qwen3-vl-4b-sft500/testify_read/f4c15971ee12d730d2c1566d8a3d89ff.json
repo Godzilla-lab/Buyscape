@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-sft500",
+  "response": {
+    "observations": [
+      "Three orange gas cylinders are shown in a storage area.",
+      "The cylinders have visible scuffs, scratches, and minor rust on the metal.",
+      "A label on the side of the cylinder in photo 2 identifies the brand as 'REPIOL' and the capacity as '12.5kg'.",
+      "The cylinders are stacked on top of each other.",
+      "A watermark 'POSTED ON JIJI HITHE TECHNOLOGIES' is present on all photos."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "gas cylinder",
+      "brand": "REPIOL",
+      "model": "12.5kg",
+      "read_from": [
+        "photo 2 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "12.5kg",
+        "verdict": "supported",
+        "evidence": "photo 2 label"
+      },
+      {
+        "claim": "Foreign-Used",
+        "verdict": "unverifiable_remote",
+        "evidence": "The origin of the cylinders cannot be determined from the photos."
+      },
+      {
+        "claim": "Strong & Reliable!",
+        "verdict": "unverifiable_remote",
+        "evidence": "Material strength and reliability cannot be verified through a photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The cylinders may be expired or have a 'use by' date that has passed.",
+        "proof": "A clear photo of the manufacturing date stamp on the cylinder.",
+        "if_unproven": "as expired"
+      },
+      {
+        "risk": "The valves may be corroded or leaking.",
+        "proof": "A video showing the valve being opened and closed without gas escaping.",
+        "if_unproven": "as having faulty valves"
+      },
+      {
+        "risk": "The cylinders may be empty or contain a different gas type.",
+        "proof": "A photo of the cylinder with a gas refill sticker or a video of a burner lit.",
+        "if_unproven": "as empty"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the manufacturing date stamp on the cylinder.",
+      "Video of the valve being tested for leaks.",
+      "Photo of the cylinder with a gas refill sticker."
+    ],
+    "decision": "price",
+    "reason": "The item is known from the photos. What they cannot prove is priced at its worst case until the proof asked for below arrives."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-sft500",
+    "task": "testify_read",
+    "latency_ms": 14793,
+    "input_tokens": 2794,
+    "output_tokens": 404,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "f4c15971ee12d730d2c1566d8a3d89ff",
+    "error": null
+  }
+}

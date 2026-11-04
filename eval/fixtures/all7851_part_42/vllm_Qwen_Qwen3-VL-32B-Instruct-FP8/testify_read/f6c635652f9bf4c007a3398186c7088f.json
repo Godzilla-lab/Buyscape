@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the back of a silver Dell power supply unit with a label indicating '750W', '80 PLUS PLATINUM', and '94% Efficiency'.",
+      "The label includes 'MODEL \u578b\u53f7: E750E-S1', 'PART NO: 780-015536-0100', and 'DP/N: 0DXWBW'.",
+      "Photo 1 shows the front of the unit with a fan labeled 'EPP 750W 94% Efficiency' and an orange power switch.",
+      "Photo 2 shows the front with the label flipped, revealing the same '750W' and '80 PLUS PLATINUM' details, and the bottom edge with connectors and a gold-colored metal bracket.",
+      "The unit appears to be in used condition with no visible damage in the photos.",
+      "The seller claims it is for Dell PowerEdge R430/R530/R630 servers and is 'Tested'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "server power supply",
+      "brand": "Dell",
+      "model": "E750E-S1",
+      "read_from": [
+        "photo 0 label: MODEL \u578b\u53f7: E750E-S1",
+        "photo 0 label: DP/N: 0DXWBW"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Dell PowerEdge R430/R530/R630 Server 495W Power Supply",
+        "verdict": "contradicted",
+        "evidence": "Photos show a 750W power supply (label in photo 0 and 2), not 495W. The model E750E-S1 is a 750W unit, not 495W. The 495W claim is false."
+      },
+      {
+        "claim": "Dell P/N: 09338D",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows DP/N: 0DXWBW, not 09338D. The part number on the label does not match the seller's claim."
+      },
+      {
+        "claim": "Tested",
+        "verdict": "unverified",
+        "evidence": "No photo shows the unit being tested or any test results. The claim cannot be verified from the images."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The unit may not be functional despite being claimed 'Tested'.",
+        "proof": "A video or photo showing the power supply powering on and running with a load or a multimeter test.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The unit may have internal damage or wear not visible in photos, such as capacitor bulging or fan failure.",
+        "proof": "Close-up photos of the internal components, especially capacitors and fan, or a video of the fan spinning.",
+        "if_unproven": "priced as potentially faulty"
+      },
+      {
+        "risk": "The unit may not be compatible with the advertised server models (R430/R530/R630) due to incorrect part number or form factor.",
+        "proof": "A photo showing the unit installed in a Dell PowerEdge R430/R530/R630 server, or a compatibility verification from Dell documentation.",
+        "if_unproven": "priced as incompatible"
+      }
+    ],
+    "proof_requests": [
+      "Video or photo of the power supply being tested under load or with a multimeter.",
+      "Close-up photos of the internal components, especially capacitors and fan.",
+      "Photo of the unit installed in a Dell PowerEdge R430/R530/R630 server, or a compatibility verification.",
+      "Confirmation of the correct part number (0DXWBW) and model (E750E-S1) matching the intended server."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller's claims about the power supply's wattage (495W) and part number (09338D) are contradicted by the visible labels (750W, 0DXWBW). The 'Tested' claim is unverified. Without proof of functionality and compatibility, the item cannot be priced accurately. The risks of non-functionality and incompatibility must be resolved before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 84587,
+    "input_tokens": 2967,
+    "output_tokens": 1006,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "f6c635652f9bf4c007a3398186c7088f",
+    "error": null
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Stack of 6 closed black laptops on a white surface. The top one has a small white label near the hinge. Watermark 'POSTED ON JIJI VALCITY DIGITAL' is visible.",
+      "Photo 1: One black laptop open, showing a Windows desktop with a blue background and 'Valcity Digital Services' logo. The keyboard is visible, with a 'ThinkPad' logo on the bottom right of the palm rest. The screen bezel is thick. Watermark present.",
+      "Photo 2: One black laptop closed, standing upright on a stack of 5 others. The lid has a 'ThinkPad' logo on the top left. A black sticker reads 'Cart 7 - LT 18'. Watermark present."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Lenovo",
+      "model": "ThinkPad 11e",
+      "read_from": [
+        "photo 1 screen (ThinkPad logo)",
+        "photo 2 lid (ThinkPad logo)",
+        "seller's text (MODEL: THINKPAD 11e, BRAND: LENOVO)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "MODEL: THINKPAD 11e",
+        "verdict": "supported",
+        "evidence": "Seller's text and ThinkPad logo visible on photo 1 and photo 2. The model 11e is consistent with the small form factor and design."
+      },
+      {
+        "claim": "BRAND: LENOVO",
+        "verdict": "supported",
+        "evidence": "ThinkPad is a Lenovo brand; logo visible on photo 1 and photo 2."
+      },
+      {
+        "claim": "PROCESSOR: INTEL CELERON",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows the system specifications or BIOS. The processor cannot be confirmed from the images alone."
+      },
+      {
+        "claim": "PROCESSOR SPEED: I.90GHz base...",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows system information or BIOS. The speed cannot be confirmed from the images alone."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The laptop may not be functional or may have hardware issues (e.g., screen, battery, keyboard, ports).",
+        "proof": "A video showing the laptop turning on, keyboard typing, screen displaying content, and ports being used.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The processor may not be Intel Celeron or may be slower than claimed.",
+        "proof": "A screenshot of the system information or BIOS showing the processor model and speed.",
+        "if_unproven": "priced as unknown processor, likely lower-end"
+      },
+      {
+        "risk": "The laptop may have physical damage not visible in the photos (e.g., cracked screen, broken hinges, internal damage).",
+        "proof": "Close-up photos of the screen, hinges, keyboard, and ports from multiple angles.",
+        "if_unproven": "priced as having potential hidden damage"
+      },
+      {
+        "risk": "The laptop may have software issues or be infected with malware.",
+        "proof": "A video showing the laptop running smoothly, opening applications, and no error messages.",
+        "if_unproven": "priced as potentially unstable"
+      }
+    ],
+    "proof_requests": [
+      "Video showing the laptop turning on, typing, and running smoothly.",
+      "Screenshot of system information or BIOS showing processor model and speed.",
+      "Close-up photos of the screen, keyboard, ports, and hinges from multiple angles."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and brand are confirmed, but critical claims about the processor and functionality cannot be verified from the photos. Hidden risks related to functionality, hardware condition, and software stability require additional proof before pricing can be determined."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 72946,
+    "input_tokens": 2882,
+    "output_tokens": 877,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "1597504b4cc4287f4bdb7d2feee1b439",
+    "error": null
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Silver/grey 4-door sedan parked on dirt ground",
+      "Severe rear-end collision damage: trunk lid crumpled, rear bumper broken and detached, rear quarter panel dented",
+      "White plastic sheeting covering parts of the rear and side body",
+      "Rear left wheel visible with tire",
+      "No readable badges, emblems, or VIN plates visible in either photo",
+      "Other vehicles visible in background"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "4 door sedan",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "The engine is Tokunbo grade",
+        "verdict": "unverifiable_remote",
+        "evidence": "No engine bay photo or running video provided"
+      },
+      {
+        "claim": "car had an accident",
+        "verdict": "supported",
+        "evidence": "photo 0 and photo 1 show severe rear crash damage"
+      },
+      {
+        "claim": "car body is bad",
+        "verdict": "supported",
+        "evidence": "photo 0 and photo 1 show crumpled trunk, broken bumper, and dented panels"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine may not run or may be damaged despite the Tokunbo claim",
+        "proof": "Video of engine starting and running, plus photo of engine bay",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Frame or structural damage beyond visible body panels",
+        "proof": "Undercarriage photo and photo of chassis rails",
+        "if_unproven": "as structurally damaged"
+      },
+      {
+        "risk": "Missing or stolen parts such as wheels, lights, interior, or airbags",
+        "proof": "Full walkaround video showing all four wheels, lights, and interior",
+        "if_unproven": "as incomplete"
+      },
+      {
+        "risk": "Ownership or customs papers may be missing for an accident car",
+        "proof": "Photo of vehicle registration and customs documents",
+        "if_unproven": "as papers missing"
+      }
+    ],
+    "proof_requests": [
+      "Video of engine starting and running",
+      "Photo of engine bay and VIN/chassis number",
+      "Full walkaround video showing all wheels, lights, and interior",
+      "Photo of vehicle papers and customs documents"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a damaged 4-door sedan; even with an unproven engine and visibly bad body, it can be priced at worst case as an accident-damaged non-runner."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 34253,
+    "input_tokens": 2382,
+    "output_tokens": 2079,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "8f8299561842a9d28d5f8144017108c2",
+    "error": null
+  }
+}

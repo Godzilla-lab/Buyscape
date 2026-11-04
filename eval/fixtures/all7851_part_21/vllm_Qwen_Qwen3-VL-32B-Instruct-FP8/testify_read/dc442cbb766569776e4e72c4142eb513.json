@@ -1,0 +1,102 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a silver and black all-in-one desktop with a screen displaying a sunset scene; a small webcam is visible at the top center of the screen.",
+      "Photo 1 shows a cardboard box with a label for 'Hyp ProOne 600 G2 AiO' with specs: Intel Core i5, 2.40GHz-2.6GHz, 8GB RAM, 106GB hard drive, multi optical drive.",
+      "Photo 2 shows the same all-in-one desktop with Windows 10 interface on screen, accompanied by a black keyboard and mouse.",
+      "The label in photo 1 lists '106GB' for hard drive, which contradicts the seller's claim of '256GB SSD'.",
+      "The seller claims 'Core i5 6100 3.7ghz', but the box label says 'Intel Core i5 2.40GHz-2.6GHz', which is inconsistent.",
+      "The seller mentions 'SSD', but the box label says 'Hard Drive: 106GB', which is likely an HDD, not an SSD.",
+      "The seller claims 'dvd-rw', which matches 'Optical Drive: Multi' on the box label.",
+      "The seller claims 'webcam' and 'cardreader'; webcam is visible in photo 0, but cardreader is not visible in any photo.",
+      "The brand 'Hyp' is visible on the box label in photo 1.",
+      "The model 'ProOne 600 G2 AiO' is visible on the box label in photo 1."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "all-in-one desktop",
+      "brand": "Hyp",
+      "model": "ProOne 600 G2 AiO",
+      "read_from": [
+        "photo 1 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Core i5 6100 3.7ghz",
+        "verdict": "contradicted",
+        "evidence": "Photo 1 label states 'Processor Speed: 2.40GHz-2.6GHz', which contradicts the 3.7GHz claim. The model '6100' is not visible on the box or photos."
+      },
+      {
+        "claim": "8gb ram",
+        "verdict": "supported",
+        "evidence": "Photo 1 label states 'Memory: 8GB - RAM'."
+      },
+      {
+        "claim": "256gb ssd",
+        "verdict": "contradicted",
+        "evidence": "Photo 1 label states 'Hard Drive: 106GB', which contradicts the 256GB SSD claim. The term 'SSD' is not mentioned on the box."
+      },
+      {
+        "claim": "dvd-rw",
+        "verdict": "supported",
+        "evidence": "Photo 1 label states 'Optical Drive: Multi', which typically includes DVD-RW functionality."
+      },
+      {
+        "claim": "webcam",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows a small webcam at the top center of the screen."
+      },
+      {
+        "claim": "cardreader",
+        "verdict": "unverified",
+        "evidence": "No photo shows a card reader; it is not visible on the front or sides of the device in photos 0 or 2."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The hard drive is likely a 106GB HDD, not a 256GB SSD as claimed, which significantly affects performance and value.",
+        "proof": "A photo showing the internal drive or a system information screenshot confirming the drive type and size.",
+        "if_unproven": "priced as HDD, not SSD, which reduces value."
+      },
+      {
+        "risk": "The processor is not the Intel Core i5 6100 3.7GHz as claimed, but a lower-tier i5 with 2.40-2.6GHz speed, which affects performance.",
+        "proof": "A system information screenshot showing the exact CPU model and speed.",
+        "if_unproven": "priced as a lower-tier i5, not the 6100, which reduces value."
+      },
+      {
+        "risk": "The card reader is not visible and may not be present, which affects functionality.",
+        "proof": "A close-up photo of the front or side of the device showing the card reader slot.",
+        "if_unproven": "priced as not having a card reader, which reduces value."
+      },
+      {
+        "risk": "The device may be a refurbished or used unit, not new as implied by the box, which affects condition and value.",
+        "proof": "A photo of the device's serial number or a clear shot of the device's condition, including any wear or damage.",
+        "if_unproven": "priced as used, not new, which reduces value."
+      }
+    ],
+    "proof_requests": [
+      "System information screenshot showing exact CPU model and speed.",
+      "Photo of the internal drive or system information confirming drive type and size.",
+      "Close-up photo of the front or side of the device showing the card reader slot.",
+      "Photo of the device's serial number and condition, including any wear or damage."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller's claims about the processor and storage are contradicted by the box label, and the presence of a card reader is unverified. Without proof of the actual specs and condition, the item cannot be accurately priced. The risks of misrepresentation are significant and must be resolved before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 105992,
+    "input_tokens": 2684,
+    "output_tokens": 1260,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "dc442cbb766569776e4e72c4142eb513",
+    "error": null
+  }
+}

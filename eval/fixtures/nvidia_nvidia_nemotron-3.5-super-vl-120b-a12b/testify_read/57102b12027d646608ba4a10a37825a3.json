@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Black rectangular thermal printer with a top paper exit slot",
+      "White label on the top left with illegible text",
+      "Side port cover visible on the front-left edge",
+      "Watermark text \"HIPHEN SOLUTIONS\" visible across the front",
+      "No legible model number or brand plate in the photo"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "thermal printer",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "80mm Thermal Printer",
+        "verdict": "unverified",
+        "evidence": "photo 0 shows a thermal printer but no width marking or reference object to confirm 80mm"
+      },
+      {
+        "claim": "by hiphen",
+        "verdict": "unverified",
+        "evidence": "photo 0 shows a watermark \"HIPHEN SOLUTIONS\" but it may be seller branding rather than proof of manufacturer brand"
+      },
+      {
+        "claim": "Support Windows software based on ESC/POS command",
+        "verdict": "unverifiable_remote",
+        "evidence": "cannot be determined from photos alone"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Printer does not power on or print",
+        "proof": "video of it powering on and printing a test page",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Paper width is not 80mm",
+        "proof": "photo of an 80mm roll installed or width measured against a ruler",
+        "if_unproven": "as wrong or unknown width"
+      },
+      {
+        "risk": "Connectivity port missing or incompatible",
+        "proof": "close-up photo of the interface ports",
+        "if_unproven": "as missing connectivity"
+      },
+      {
+        "risk": "Print head or rollers worn",
+        "proof": "close-up photo of the print head and roller condition",
+        "if_unproven": "as heavily worn"
+      }
+    ],
+    "proof_requests": [
+      "Video of the printer powering on and printing",
+      "Close-up photo of the ports/connectivity",
+      "Photo showing paper roll width or installed media",
+      "Close-up of the top label to read any model number"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a thermal printer from photo 0, so it can be priced at its worst case (non-working) while unproven claims remain unverified."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 16419,
+    "input_tokens": 1615,
+    "output_tokens": 2292,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "57102b12027d646608ba4a10a37825a3",
+    "error": null
+  }
+}

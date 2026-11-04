@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows a tan/yellow gas cylinder with a torn or faded sticker on the neck, no visible valve attached, stamped text illegible.",
+      "Photo 1 shows a different, blue gas cylinder with 'BERADISCO' logo visible on the body, rust staining around the neck collar, no regulator/valve fitted.",
+      "Photo 2 is a close-up of the same blue cylinder's open neck, confirming absence of a valve or regulator, and visible rust/wear on the collar weld area.",
+      "The three photos appear to show two different cylinders (one tan, one blue), not one consistent item.",
+      "No visible capacity stamp (e.g. '12.5KG') or manufacture/test date stamp legible in any photo."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "12.5kg cooking gas cylinder (LPG)",
+      "brand": "BERADISCO (visible on blue cylinder only)",
+      "model": null,
+      "read_from": [
+        "photo 1 body logo"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "12.5kg standard Cooking Gas Cylinder",
+        "verdict": "unverified",
+        "evidence": "No capacity stamp or marking legible in any photo to confirm 12.5kg size."
+      },
+      {
+        "claim": "Implied single item for sale",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows a tan cylinder while photos 1 and 2 show a different blue cylinder, suggesting two different items or mixed listing photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Missing or absent valve/regulator fitting, which is essential for the cylinder to be usable and safe.",
+        "proof": "Clear photo of the cylinder neck showing a properly fitted valve.",
+        "if_unproven": "priced as not functional/usable (valve missing)"
+      },
+      {
+        "risk": "Unverified actual capacity (could be a different kg size than claimed).",
+        "proof": "Close-up photo of the stamped capacity marking on the cylinder shoulder.",
+        "if_unproven": "priced at lowest plausible standard size"
+      },
+      {
+        "risk": "Cylinder could have expired safety test/inspection date, making it illegal or unsafe to refill.",
+        "proof": "Photo of the stamped manufacture/test date on the collar.",
+        "if_unproven": "priced as expired/unverified compliance"
+      },
+      {
+        "risk": "Rust and corrosion visible around the neck collar of the blue cylinder may indicate structural weakness or leakage risk.",
+        "proof": "Close-up photo of the full body showing extent of rust/dents.",
+        "if_unproven": "priced as cosmetically and structurally compromised"
+      },
+      {
+        "risk": "Two different cylinders shown in one listing, unclear which is actually being sold.",
+        "proof": "A single set of photos showing one consistent cylinder from multiple angles.",
+        "if_unproven": "treated as unresolved identity, blocking confident pricing"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the stamped capacity (kg) and manufacture/test date on the cylinder neck.",
+      "Clear photo confirming which single cylinder is for sale, with valve/regulator attached.",
+      "Full-body photo showing any dents, rust, or weld damage clearly."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photos show two apparently different cylinders and no legible capacity or safety-test stamp, so even a worst-case price cannot be set until the seller clarifies which item is for sale and shows the capacity/date markings."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 22089,
+    "input_tokens": 3916,
+    "output_tokens": 2096,
+    "cost_usd": 0.025633,
+    "replayed": false,
+    "fixture_key": "28f43ba9c4319c472c0edb54252827a3",
+    "error": null
+  }
+}

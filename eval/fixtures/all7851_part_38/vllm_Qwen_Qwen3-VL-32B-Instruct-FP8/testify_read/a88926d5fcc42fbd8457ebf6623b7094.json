@@ -1,0 +1,87 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a red and black motorcycle parked on a dirt roadside, with a visible 'MV' logo on the side panel and '150' below it.",
+      "Photo 1 shows the same motorcycle from the front, with a visible front disc brake and a red front fender.",
+      "The motorcycle has a black seat, black handlebars, and a black rear fender.",
+      "The engine and frame appear to be black, with some visible rust or wear on the exhaust and frame.",
+      "The tires appear worn, especially the front tire, which shows low tread depth.",
+      "The front wheel has a disc brake, and the rear wheel also appears to have a disc brake (visible in photo 0).",
+      "The seller mentions 'Aeon 150 and 125cc' and 'front and back caliper brakes', but the visible branding is 'MV' with '150' below it.",
+      "The motorcycle has a single-cylinder engine, typical of 150cc bikes.",
+      "No visible damage to the bodywork, but the overall condition appears used with signs of wear."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "motorcycle",
+      "brand": "MV",
+      "model": "150",
+      "read_from": [
+        "photo 0 side panel",
+        "photo 1 front view"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Foreign used aeon 150 and 125cc",
+        "verdict": "contradicted",
+        "evidence": "The photos show 'MV' branding with '150' on the side panel (photo 0), not 'Aeon'. The model is clearly MV 150, not Aeon."
+      },
+      {
+        "claim": "front and back caliper brakes",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows a disc brake on the rear wheel, and photo 1 shows a disc brake on the front wheel, both consistent with caliper brakes."
+      },
+      {
+        "claim": "i also sell Hartford",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photos or evidence of Hartford are provided; this is a separate claim not related to the item shown."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine condition and whether it runs",
+        "proof": "A video showing the engine starting and running smoothly, or a close-up of the engine with no visible leaks or damage.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Frame or structural damage not visible in photos",
+        "proof": "A close-up photo of the frame, especially around the engine mounts and swingarm, to check for cracks or bends.",
+        "if_unproven": "priced as potentially structurally compromised"
+      },
+      {
+        "risk": "Tire condition and safety",
+        "proof": "A close-up photo of both tires showing tread depth and sidewall condition.",
+        "if_unproven": "priced as unsafe for long-term use"
+      },
+      {
+        "risk": "Electrical system and lights functionality",
+        "proof": "A video or photo showing the headlight, taillight, and indicators working.",
+        "if_unproven": "priced as potentially non-functional lights"
+      }
+    ],
+    "proof_requests": [
+      "Video of the engine starting and running.",
+      "Close-up photos of the frame and engine mounts.",
+      "Close-up photos of both tires showing tread depth.",
+      "Photo or video of the lights (headlight, taillight, indicators) working."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The motorcycle is identified as an MV 150, contradicting the seller's claim of 'Aeon'. While the brakes are supported, critical risks like engine condition, frame integrity, tire safety, and electrical system functionality cannot be assessed from the current photos. These risks significantly affect the price and must be proven before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 74592,
+    "input_tokens": 2293,
+    "output_tokens": 891,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "a88926d5fcc42fbd8457ebf6623b7094",
+    "error": null
+  }
+}

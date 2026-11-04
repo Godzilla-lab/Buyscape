@@ -1,0 +1,88 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a single black car tire lying on a tiled floor with tread pattern visible; no sidewall brand is clearly readable; a hand appears at the right edge; watermark reads D-KACHI ENTERPRISE.",
+      "Photo 1 shows the same tire and setting as photo 0 with the same watermark.",
+      "Photo 2 shows two tires stacked; the top tire sidewall reads MASTERFORT; the bottom tire shows tread; watermarks read POSTED ON JIJI and D-KACHI ENTERPRISE."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car tire",
+      "brand": "MASTERFORT",
+      "model": null,
+      "read_from": [
+        "photo 2 sidewall"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "first grade Tokunbo tires",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photos show used tires but grade and import status cannot be confirmed remotely."
+      },
+      {
+        "claim": "Tread is still 90 percent",
+        "verdict": "unverified",
+        "evidence": "Photos show tread but no depth measurement or wear indicators are readable."
+      },
+      {
+        "claim": "no patch",
+        "verdict": "unverified",
+        "evidence": "Exterior photos do not show the inner liner or repair marks."
+      },
+      {
+        "claim": "no bulge",
+        "verdict": "supported",
+        "evidence": "Photos 0-2 show a round profile with no visible bulge."
+      },
+      {
+        "claim": "Removed from a 2023 car",
+        "verdict": "unverifiable_remote",
+        "evidence": "No vehicle or removal documentation is visible in the photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Tread depth and tire age cannot be verified; the tire may be worn or old.",
+        "proof": "Close-up photo of the sidewall DOT date code and a tread depth gauge reading.",
+        "if_unproven": "as a worn used tire with unknown remaining life."
+      },
+      {
+        "risk": "Internal damage, patches, or repairs are not visible from the outside.",
+        "proof": "Photo of the tire interior or a video of inflation/submersion test.",
+        "if_unproven": "as potentially damaged or repaired."
+      },
+      {
+        "risk": "Tire size and fitment are unknown.",
+        "proof": "Clear photo of the sidewall size marking.",
+        "if_unproven": "as unknown fitment."
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of sidewall showing size and DOT code.",
+      "Photo of tire interior or video of inflation to check for patches and bulges.",
+      "Tread depth measurement photo."
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a used car tire with the MASTERFORT brand readable on the sidewall; condition claims cannot be verified remotely, so it is priced as an unverified used tire.",
+    "price_pick": {
+      "low": 0,
+      "high": 2
+    }
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_joint",
+    "latency_ms": 24724,
+    "input_tokens": 3186,
+    "output_tokens": 4219,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "294a26329132fda8e3a09fc5ce45dba3",
+    "error": null
+  }
+}

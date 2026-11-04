@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-instruct",
+  "response": {
+    "observations": [
+      "Photo 0: Front view of a silver Toyota pickup truck with a Toyota emblem on the grille, parked on gravel under an overcast sky. A watermark 'POSTED ON JIJI' and 'TEEKAYWHEELS' is visible.",
+      "Photo 1: Side view of the same silver Toyota pickup truck, showing the driver's side door and the 'TRD' badge on the side, parked on gravel under an overcast sky. A watermark 'POSTED ON JIJI' and 'TEEKAYWHEELS' is visible.",
+      "Photo 2: Rear view of the same silver Toyota pickup truck, showing the 'TRD' badge on the tailgate, a black tonneau cover, and handwritten text 'No Start 9/63' on the rear window. A watermark 'POSTED ON JIJI' and 'TEEKAYWHEELS' is visible."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "pickup truck",
+      "brand": "Toyota",
+      "model": "Tacoma",
+      "read_from": [
+        "photo 0 screen",
+        "photo 1 screen",
+        "photo 2 tailgate"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "!!foreign used  2024 toyota tocoma trd 4x4 with v6 engine,push to start,moonroof and verified duty...",
+        "verdict": "contradicted",
+        "evidence": "Photo 2 shows handwritten text 'No Start 9/63' on the rear window, directly contradicting the seller's claim that it 'works perfectly'."
+      },
+      {
+        "claim": "Like new, never repaired or opened, works perfectly.",
+        "verdict": "unverified",
+        "evidence": "The photos show no visible signs of damage or wear, but the handwritten 'No Start 9/63' on the rear window contradicts the 'works perfectly' claim. No proof of 'never repaired or opened' is visible."
+      },
+      {
+        "claim": "Original receipt and warranty available.",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photos show any receipt or warranty documents. The seller's claim cannot be verified remotely from the photos provided."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The vehicle may not start or may have mechanical issues.",
+        "proof": "Photo 2, which shows the handwritten note 'No Start 9/63' on the rear window.",
+        "if_unproven": "Priced as not working."
+      },
+      {
+        "risk": "The vehicle may have been repaired or opened, despite the seller's claim.",
+        "proof": "Photo 2, which shows the handwritten note 'No Start 9/63' on the rear window, suggesting the vehicle may have been repaired or opened.",
+        "if_unproven": "Priced as not working."
+      },
+      {
+        "risk": "The vehicle may not be a 2024 model or may not be a Toyota Tacoma TRD 4x4 with a V6 engine.",
+        "proof": "Photo 0, which shows the Toyota emblem on the grille, and Photo 1, which shows the 'TRD' badge on the side, but no clear model year or engine type is visible.",
+        "if_unproven": "Priced as not working."
+      }
+    ],
+    "proof_requests": [
+      "Ask for a photo of the vehicle's engine compartment to verify the V6 engine.",
+      "Ask for a photo of the vehicle's interior to verify the moonroof.",
+      "Ask for a photo of the vehicle's dashboard to verify the push to start feature.",
+      "Ask for a photo of the vehicle's rear window to verify the 'No Start 9/63' note."
+    ],
+    "decision": "fraud_suspected",
+    "reason": "The seller's claim that the vehicle 'works perfectly' is contradicted by the handwritten note 'No Start 9/63' on the rear window. The photos do not show any proof of the vehicle's condition or the presence of the claimed features, and the seller's claim of 'like new' and 'never repaired or opened' is unverifiable. The presence of the 'No Start 9/63' note suggests the vehicle may not be in working condition, which is a significant risk for the buyer."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-instruct",
+    "task": "testify_read",
+    "latency_ms": 4477,
+    "input_tokens": 3273,
+    "output_tokens": 965,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "2f16a108c3ae61b5be36dd0919dd7b8e",
+    "error": null
+  }
+}

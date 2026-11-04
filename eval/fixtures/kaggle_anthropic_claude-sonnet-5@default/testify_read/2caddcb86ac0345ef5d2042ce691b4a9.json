@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Two photos show a stack of textbook spines: a purple-covered book labeled 'CHEMISTRY for Senior Secondary Schools' (top, publisher name cropped off).",
+      "A black-covered book labeled 'Biology for Senior Secondary Schools', with 'MODERN' visible above 'Biology' in several copies further down the stack.",
+      "Four blue/white spines labeled '...SCHOOL PHYSICS for Senior Secondary Schools' (the word before 'SCHOOL' is cropped, possibly 'New').",
+      "A watermark reads 'POSTED ON JIJI' and 'VURNEL BOOKSHOP' across photo 1, indicating a marketplace listing from a shop account.",
+      "No book covers, title pages, publisher imprints, ISBNs, or page conditions are visible \u2014 only spines are shown.",
+      "No visible wear, tears, or writing, but spine-only view cannot confirm interior condition."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "senior secondary school textbooks (physics, chemistry, biology set)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 spines",
+        "photo 1 spines"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "New school physics, Chemistry and biology are available",
+        "verdict": "unverified",
+        "evidence": "Physics spines show '...SCHOOL PHYSICS' with the preceding word cropped; cannot confirm this is the 'New School Physics' series title."
+      },
+      {
+        "claim": "Implied series match across subjects ('New School' biology)",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 and 1 show the biology spines labeled 'MODERN Biology for Senior Secondary Schools', not 'New School Biology'."
+      },
+      {
+        "claim": "For pick up and Delivery",
+        "verdict": "unverifiable_remote",
+        "evidence": "Logistics claim; cannot be confirmed from photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Condition of books (new vs used, torn pages, writing inside) cannot be seen from spine-only shots.",
+        "proof": "Photo of open book interior and front/back covers for each subject.",
+        "if_unproven": "priced as used/worn condition, not new"
+      },
+      {
+        "risk": "Chemistry book's publisher/series is unreadable (top of stack cropped), so it may not match the 'New School' series implied by seller.",
+        "proof": "Clear photo of the chemistry book's front cover showing title and publisher.",
+        "if_unproven": "priced as a generic unbranded SS chemistry textbook"
+      },
+      {
+        "risk": "Mismatch between claimed 'New School' biology and actual 'Modern Biology' title suggests seller's text may be inaccurate or mixing series.",
+        "proof": "Front cover photo of the biology book confirming actual title/publisher.",
+        "if_unproven": "priced as 'Modern Biology for Senior Secondary Schools', not 'New School Biology'"
+      },
+      {
+        "risk": "Unclear whether listing is for one copy per subject or the full set of multiple physics/biology copies shown.",
+        "proof": "Seller confirmation or photo showing books separated with quantity labeled.",
+        "if_unproven": "priced as single copy per subject, not full lot"
+      }
+    ],
+    "proof_requests": [
+      "Front cover photo of each book (chemistry, physics, biology) showing full title and publisher.",
+      "Photo of the books' interior pages to check for writing, tears, or missing pages.",
+      "Clarification on whether sale is per single book or the entire stack shown."
+    ],
+    "decision": "price",
+    "reason": "The items are identifiable by type as senior secondary school textbooks (physics, chemistry, biology), but condition and exact series/publisher are unverified or partly contradicted, so they must be priced at worst case (used condition, unverified series) pending clearer cover and interior photos."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 25425,
+    "input_tokens": 2695,
+    "output_tokens": 2382,
+    "cost_usd": 0.026051,
+    "replayed": false,
+    "fixture_key": "2caddcb86ac0345ef5d2042ce691b4a9",
+    "error": null
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Front-load washing machine with silver/grey body",
+      "LG logo visible on top left of control panel",
+      "Text reads Inverter Direct Drive with capacity marking near 6kg",
+      "Washer-Dryer 2 in 1 sticker on lower left of door",
+      "Central dial with illuminated orange ring",
+      "Digital display on right with green indicator lights",
+      "Power button and play/pause button visible",
+      "Round glass door with clothes visible inside drum",
+      "Machine on tiled floor against a wall, white hose on right side"
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "washing machine",
+      "brand": "LG",
+      "model": "DirectDrive 6kg",
+      "read_from": [
+        "photo 0 control panel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "LG Washing machine",
+        "verdict": "supported",
+        "evidence": "photo 0 shows LG logo and washing machine"
+      },
+      {
+        "claim": "scrap",
+        "verdict": "unverifiable_remote",
+        "evidence": "condition cannot be judged from photo alone"
+      },
+      {
+        "claim": "doesn't work",
+        "verdict": "unverified",
+        "evidence": "photo shows machine but cannot test operation"
+      },
+      {
+        "claim": "needs repair",
+        "verdict": "unverified",
+        "evidence": "consistent with non-working claim but not provable from photo"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Machine may not power on at all",
+        "proof": "Video of powering on and display lights",
+        "if_unproven": "as completely non-functional scrap"
+      },
+      {
+        "risk": "Drum or motor may be seized or damaged",
+        "proof": "Video of drum spinning or machine running a cycle",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Washer-dryer function may be faulty in both modes",
+        "proof": "Demonstration of wash and dry cycles",
+        "if_unproven": "as scrap with no working functions"
+      },
+      {
+        "risk": "Water inlet, drain pump, or hoses may be leaking or blocked",
+        "proof": "Photos of rear connections and hose condition",
+        "if_unproven": "as needing plumbing repairs"
+      }
+    ],
+    "proof_requests": [
+      "Video showing the machine powering on and any error codes",
+      "Video of the drum rotating during a cycle",
+      "Photos of the back panel, water inlet, and drain hose",
+      "Seller to specify which parts are broken or what error appears"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as an LG DirectDrive washer-dryer from the photo, and the seller admits it does not work, so it can be priced as non-working scrap using comparable faulty washing machines.",
+    "price_pick": {
+      "low": 1,
+      "high": 2
+    }
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_joint",
+    "latency_ms": 84094,
+    "input_tokens": 2935,
+    "output_tokens": 4316,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "5e10d3b9d0dfe00cb6882d2370d476db",
+    "error": null
+  }
+}

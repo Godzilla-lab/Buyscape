@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows a product label on a brown cardboard box.",
+      "The label identifies the contents as an HP LaserJet MFP M442dn.",
+      "Serial number CNB1T13365 and Product Number 8AF71A are clearly legible on the label.",
+      "The label specifies 220-240V power requirements and 'Europe - Multilingual localization'.",
+      "The actual printer is not visible in the provided photo.",
+      "A watermark 'POSTED ON JIJI' and 'ANYI-CHOKS' is present on the image."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "multifunction printer",
+      "brand": "HP",
+      "model": "LaserJet MFP M442dn",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP LaserJet MFP M442dn",
+        "verdict": "supported",
+        "evidence": "photo 0 label"
+      },
+      {
+        "claim": "highly reliable",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      },
+      {
+        "claim": "monochrome A3 multifunction printer",
+        "verdict": "unverified",
+        "evidence": "The label confirms the model number, but technical specifications like A3 capability are not listed on this label."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, lower-value item.",
+        "proof": "A photo of the actual printer outside of the box.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The printer may be used, refurbished, or damaged despite being in a box.",
+        "proof": "Clear photos of the printer's exterior and the internal toner/drum area.",
+        "if_unproven": "as heavily used/damaged"
+      },
+      {
+        "risk": "The printer may have internal mechanical faults or a high page count.",
+        "proof": "A photo of a printed 'Configuration Report' or 'Usage Page' showing the total page count.",
+        "if_unproven": "as non-functional"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual printer unit outside of the box.",
+      "Photo of the printer's display screen while powered on.",
+      "A photo of a printed status or configuration page to verify functionality and page count.",
+      "Photos of the printer with the toner access door open."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only a label on a box is shown. The actual printer must be seen to verify its existence, physical condition, and whether it is new or used."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 11733,
+    "input_tokens": 2401,
+    "output_tokens": 2361,
+    "cost_usd": 0.008283,
+    "replayed": false,
+    "fixture_key": "bdbc82a31eb63717e582ebcee6e23ef4",
+    "error": null
+  }
+}

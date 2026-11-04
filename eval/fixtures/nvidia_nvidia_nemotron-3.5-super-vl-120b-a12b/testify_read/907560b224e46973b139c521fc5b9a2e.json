@@ -1,0 +1,90 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a teal and white steam iron held by a person, with a visible temperature dial, water tank, and coiled power cord.",
+      "Photo 1 shows the iron's soleplate with 'PHILIPS STEAMGLIDE' printed on it and rows of steam holes.",
+      "The seller describes the item as 'Home high power steam pressing iron'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "steam pressing iron",
+      "brand": "Philips",
+      "model": "Steamglide",
+      "read_from": [
+        "photo 1 soleplate"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Philips brand",
+        "verdict": "supported",
+        "evidence": "photo 1 soleplate reads PHILIPS"
+      },
+      {
+        "claim": "Steamglide model",
+        "verdict": "supported",
+        "evidence": "photo 1 soleplate reads STEAMGLIDE"
+      },
+      {
+        "claim": "steam pressing iron",
+        "verdict": "supported",
+        "evidence": "photo 0 water tank and dial; photo 1 steam holes"
+      },
+      {
+        "claim": "high power",
+        "verdict": "unverified",
+        "evidence": "no wattage or rating label visible in either photo"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Iron does not heat or switch on",
+        "proof": "video of the iron plugged in and heating up",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Steam function does not work",
+        "proof": "video of steam coming from the soleplate",
+        "if_unproven": "as dry iron only"
+      },
+      {
+        "risk": "Power cord is cut or damaged",
+        "proof": "full-length photo of the power cord and plug",
+        "if_unproven": "as cord damaged"
+      },
+      {
+        "risk": "Water tank leaks",
+        "proof": "video of the tank filled with water and checked for leaks",
+        "if_unproven": "as leaking tank"
+      },
+      {
+        "risk": "Soleplate is scratched or damaged",
+        "proof": "close-up photo of the soleplate surface",
+        "if_unproven": "as scratched soleplate"
+      }
+    ],
+    "proof_requests": [
+      "Video of the iron switched on and producing steam",
+      "Close-up photo of the soleplate surface",
+      "Full view of the power cord and plug",
+      "Photo of any rating label showing wattage"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a Philips Steamglide steam iron from the photos, so it can be priced at its worst case (untested/not working) pending proof of function."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 20486,
+    "input_tokens": 2367,
+    "output_tokens": 2563,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "907560b224e46973b139c521fc5b9a2e",
+    "error": null
+  }
+}

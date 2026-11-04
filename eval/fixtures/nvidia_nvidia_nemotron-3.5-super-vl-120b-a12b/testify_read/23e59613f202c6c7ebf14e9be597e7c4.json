@@ -1,0 +1,75 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a large rectangular solar panel with dark photovoltaic cells in a grid and a silver frame, leaning against an interior wall on a tiled floor.",
+      "A watermark reading \"INNOSON GLOBAL GROUP\" appears across the center of the panel.",
+      "No battery, no brand plate, no model label, and no rear specification sticker are visible in the photo.",
+      "The seller's text describes a battery, but the photo shows only a solar panel."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Battery is new",
+        "verdict": "unverifiable_remote",
+        "evidence": "No battery appears in photo 0; only a solar panel is shown."
+      },
+      {
+        "claim": "holds charge for 8 hours",
+        "verdict": "unverifiable_remote",
+        "evidence": "No battery or charge test is shown in photo 0."
+      },
+      {
+        "claim": "Never repaired",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo 0 cannot reveal repair history of the panel or any battery."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The photo shows a solar panel while the seller describes a battery; the item for sale may not match the image.",
+        "proof": "A photo of the battery, ideally shown together with the panel.",
+        "if_unproven": "Price only the visible solar panel, as non-working."
+      },
+      {
+        "risk": "Panel wattage, brand, output, and electrical condition cannot be confirmed from a single front view.",
+        "proof": "Close-up of the rear label/sticker and a video of the panel producing power under load or sunlight.",
+        "if_unproven": "As a non-working solar panel of unknown capacity."
+      },
+      {
+        "risk": "Hidden cracks, delamination, or frame damage may not be visible in the full shot.",
+        "proof": "Close-up photos of the corners, edges, and cell surface.",
+        "if_unproven": "As damaged or non-working."
+      }
+    ],
+    "proof_requests": [
+      "Close-up of the panel's rear label showing wattage, brand, and model.",
+      "Photo of the battery the seller describes, ideally next to the panel.",
+      "Video of the panel producing power or the battery holding a charge."
+    ],
+    "decision": "price",
+    "reason": "The item is visibly a solar panel and can be priced at its worst case as non-working; the seller's battery claims are not shown in the photo and cannot be verified remotely."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 15074,
+    "input_tokens": 1848,
+    "output_tokens": 2158,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "23e59613f202c6c7ebf14e9be597e7c4",
+    "error": null
+  }
+}

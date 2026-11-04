@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Large cardboard box for a solar panel.",
+      "Brand 'LOUISIANA ENERGY' and '350W MONO' printed on the box in photo 0.",
+      "Dimensions '1640x890x35' printed on the box.",
+      "The box has several tears and holes at the bottom edge.",
+      "The actual solar panel is not visible; only the packaging is shown."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "solar panel",
+      "brand": "Louisiana Energy",
+      "model": "350W Mono",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Louisana energy solar panel",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "350W Mono",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "good quality",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The panel inside may be cracked or shattered due to the visible damage to the box.",
+        "proof": "Photo of the front glass of the panel out of the box.",
+        "if_unproven": "as damaged/broken"
+      },
+      {
+        "risk": "The box may be empty or contain a different, lower-specification panel.",
+        "proof": "Photo of the technical specification sticker on the back of the actual panel.",
+        "if_unproven": "as generic low-wattage panel"
+      },
+      {
+        "risk": "The panel may not produce the rated power output.",
+        "proof": "Video of a multimeter test showing Open Circuit Voltage (Voc) in direct sunlight.",
+        "if_unproven": "as non-functional"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual solar panel out of the box, showing the glass surface clearly.",
+      "Photo of the specification sticker on the back of the panel.",
+      "Video showing a voltage test with a multimeter in daylight."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the packaging is visible, and it shows signs of damage. I cannot confirm the condition or the actual contents of the box without seeing the panel itself."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 6718,
+    "input_tokens": 2352,
+    "output_tokens": 1426,
+    "cost_usd": 0.005454,
+    "replayed": false,
+    "fixture_key": "04b08bb27a88d33085d38629faebe562",
+    "error": null
+  }
+}

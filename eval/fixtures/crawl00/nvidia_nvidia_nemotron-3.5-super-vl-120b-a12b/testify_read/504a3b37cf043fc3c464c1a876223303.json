@@ -1,0 +1,92 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a hand holding two dark smartphones in front of a glass display case.",
+      "The upper phone's back panel reads \"SAMSUNG\" and \"Galaxy S10e\" with a pink \"OK\" sticker.",
+      "A box in the background reads \"Galaxy A5s\".",
+      "The phones carry stickers and appear in a retail or resale setting.",
+      "A watermark reads \"SEADOT GROUP POSTED ON JIJI\"."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "smartphone",
+      "brand": "Samsung",
+      "model": "Galaxy S10e",
+      "read_from": [
+        "photo 0 back panel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Mint condition",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows stickers and a shop setting but no close-up of screen, body, ports, or buttons to confirm mint."
+      },
+      {
+        "claim": "USA variant",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo 0 shows the model name but not the regional model number or software; cannot confirm USA origin from a back photo alone."
+      },
+      {
+        "claim": "Used",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows phones with stickers in a resale display environment."
+      },
+      {
+        "claim": "Samsung Galaxy S10e",
+        "verdict": "supported",
+        "evidence": "Photo 0 back panel reads \"Galaxy S10e\"."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Phone does not power on or has faulty screen, cameras, or components.",
+        "proof": "Video of the phone booting, navigating menus, and taking photos with each camera.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Not a USA variant (different regional model or firmware).",
+        "proof": "Screenshot of Settings > About Phone showing the model number, e.g. SM-G970U.",
+        "if_unproven": "as a non-USA/international variant"
+      },
+      {
+        "risk": "Carrier locked, blacklisted, or blocked IMEI.",
+        "proof": "IMEI number plus a carrier unlock status or blacklist check result.",
+        "if_unproven": "as locked or blacklisted"
+      },
+      {
+        "risk": "Hidden screen cracks, scratches, or damage to ports and buttons.",
+        "proof": "Close-up photos of the front screen, edges, charging port, speaker grilles, and buttons.",
+        "if_unproven": "as cosmetically and functionally damaged"
+      },
+      {
+        "risk": "Degraded or worn battery health.",
+        "proof": "Battery health screenshot or a battery replacement receipt.",
+        "if_unproven": "as having a degraded battery"
+      }
+    ],
+    "proof_requests": [
+      "Video of the phone powering on, navigating the interface, and testing all cameras.",
+      "Screenshot of Settings > About Phone showing the model number.",
+      "IMEI number and unlock/blacklist status.",
+      "Close-up photos of the front screen, sides, ports, and buttons."
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a Samsung Galaxy S10e from photo 0, so it can be priced at its worst case as a non-working, unverified unit; the seller's mint and USA claims are unproven and would require proof to raise the value."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 57706,
+    "input_tokens": 1624,
+    "output_tokens": 3075,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "504a3b37cf043fc3c464c1a876223303",
+    "error": null
+  }
+}

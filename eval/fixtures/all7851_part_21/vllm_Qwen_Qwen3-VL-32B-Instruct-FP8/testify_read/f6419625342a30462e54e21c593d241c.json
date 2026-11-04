@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Front view of a black front-loading washing machine with door open, showing drum interior. Brand 'HOOVER' visible on top left. '10KG' and 'A+++' energy rating visible. 'DYNAMICNEXT' label on right. Machine sits atop a white Hotpoint washing machine.",
+      "Photo 1: Front view with door closed. Same branding and labels as photo 0. Control panel shows program dial, buttons, and display. Reflections visible on glossy surface.",
+      "Photo 2: Similar front view to photo 1, slightly different angle. Same branding and labels. No visible damage to exterior. Drum interior appears clean.",
+      "All photos show the machine in a stacked setup with a white Hotpoint machine below. No visible damage to the Hoover machine's exterior. No signs of water leakage or major wear. No model number visible on any photo."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "front-loading washing machine",
+      "brand": "Hoover",
+      "model": null,
+      "read_from": [
+        "photo 0 top left",
+        "photo 1 top left",
+        "photo 2 top left"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "High-quality Hoover 10KG Inverter Washing Machine",
+        "verdict": "supported",
+        "evidence": "Photo 0, 1, and 2 show 'HOOVER' brand and '10KG' capacity label on the control panel. 'Inverter' is not visible, but 'DYNAMICNEXT' and '1400 RPM' suggest modern inverter technology."
+      },
+      {
+        "claim": "Direct London Used in excellent working condition",
+        "verdict": "unverifiable_remote",
+        "evidence": "Origin ('Direct London') cannot be verified from photos. 'Excellent working condition' is not proven; no video or proof of operation is provided."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Machine may not be in working condition",
+        "proof": "Video showing the machine running through a full wash cycle, including spin and drainage.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Inverter claim may be false or misleading",
+        "proof": "Photo of the machine's label or manual showing 'Inverter' or 'Inverter Motor' specification.",
+        "if_unproven": "priced as non-inverter model"
+      },
+      {
+        "risk": "Hidden damage or wear inside drum or door seal",
+        "proof": "Close-up photo of the drum interior, door seal, and hinge area showing no mold, cracks, or wear.",
+        "if_unproven": "priced with assumption of minor wear"
+      }
+    ],
+    "proof_requests": [
+      "Video of the machine running a full wash cycle.",
+      "Photo of the model label or manual showing 'Inverter' specification.",
+      "Close-up photo of the drum interior and door seal."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The brand and capacity are confirmed, but critical claims like 'in excellent working condition' and 'inverter' are unproven. Hidden risks like internal damage or non-functionality cannot be assessed without additional proof. Price cannot be determined until these are verified."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 57927,
+    "input_tokens": 3239,
+    "output_tokens": 725,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "f6419625342a30462e54e21c593d241c",
+    "error": null
+  }
+}

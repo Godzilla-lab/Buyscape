@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a used yellow-painted diesel engine block with hoses, filters, and accessories attached.",
+      "Photo 1 shows the top of the engine with a grey valve cover and bolted cylinder head.",
+      "A watermark reads 'DNL EQUIPMENT SALES AND PORT HARCOURT' across both photos.",
+      "No engine dataplate, serial number, or legible brand/model marking is visible in either photo."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "diesel engine (parts)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0",
+        "photo 1"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "It is a Caterpillar C9 engine",
+        "verdict": "unverified",
+        "evidence": "Seller text only; no readable Caterpillar or C9 marking in the photos"
+      },
+      {
+        "claim": "It is complete",
+        "verdict": "unverified",
+        "evidence": "Photos show an engine assembly but cannot confirm all components are present"
+      },
+      {
+        "claim": "It is sold as parts",
+        "verdict": "unverifiable_remote",
+        "evidence": "Condition claim cannot be confirmed remotely without testing or teardown"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine is seized or internally damaged and will not run",
+        "proof": "Video of the crankshaft turning or a compression test",
+        "if_unproven": "as non-running core/scrap"
+      },
+      {
+        "risk": "It is not actually a Caterpillar C9",
+        "proof": "Clear photo of the engine dataplate or model casting",
+        "if_unproven": "as unidentified diesel engine"
+      },
+      {
+        "risk": "Major components such as turbo, injectors, or fuel system are missing",
+        "proof": "Itemized photos of all included parts and accessories",
+        "if_unproven": "as incomplete"
+      },
+      {
+        "risk": "Hidden cracks or internal wear in the block or head",
+        "proof": "Borescope inspection of the cylinders",
+        "if_unproven": "as damaged"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the engine identification plate or model number casting",
+      "Video of the engine cranking or running",
+      "Itemized photos showing every included component and accessory"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a used diesel engine, but the brand and model are not legible in the photos and the seller's C9 claim is unproven, so the price-setting identity is missing."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 142615,
+    "input_tokens": 1928,
+    "output_tokens": 4137,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "5842675778b42f7b7b95eccd24096d08",
+    "error": null
+  }
+}

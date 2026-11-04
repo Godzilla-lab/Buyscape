@@ -1,0 +1,81 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Front-load washing machine, white body, visibly rusted at bottom-left and around the door seal.",
+      "Control panel reads 'LG Inverter DirectDrive 7kg' and a partial model code 'F1068QDP2' is printed on the panel.",
+      "A green sticker reads 'Less Noise, Less Vibration, More Durability' with LG DD Motor logo and '10 year warranty' badge.",
+      "No power cord, drain hose, or control panel lit up; no evidence the unit is plugged in or running.",
+      "Floor and surroundings look like a storage/repair yard, not a home install."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "front-load washing machine",
+      "brand": "LG",
+      "model": "F1068QDP2 (DirectDrive 7kg, partially legible)",
+      "read_from": [
+        "photo 0 control panel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "LG DirectDrive 7kg washing machine",
+        "verdict": "supported",
+        "evidence": "photo 0 shows 'Inverter DirectDrive 7kg' printed on the panel"
+      },
+      {
+        "claim": "It is the 8kg one",
+        "verdict": "contradicted",
+        "evidence": "photo 0 clearly prints '7kg' on the machine's own panel, not 8kg"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Unknown working condition (spin, drain, heating, drum motion)",
+        "proof": "A video clip of the machine running a cycle with water filling, agitating, and draining",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Visible rust on the chassis may indicate internal corrosion or past water leakage affecting electronics/drum bearings",
+        "proof": "Close-up photos of the rear panel, drum interior, and rust extent on the base",
+        "if_unproven": "priced as having internal corrosion risk, discounted accordingly"
+      },
+      {
+        "risk": "Missing accessories (power cable, inlet hose, drain hose) not shown",
+        "proof": "Photo of the full accessory set laid out together",
+        "if_unproven": "priced as incomplete, buyer must source hoses separately"
+      },
+      {
+        "risk": "Capacity mismatch between seller's claim (8kg) and printed label (7kg) suggests seller may be misrepresenting specs or selling a different unit than photographed",
+        "proof": "A photo of the rating plate/serial sticker (usually on the rear or inside the door) confirming actual capacity and model",
+        "if_unproven": "priced as the 7kg model shown, not the 8kg claimed"
+      }
+    ],
+    "proof_requests": [
+      "Video of the machine running a full wash cycle (door closed, spinning, draining).",
+      "Clear photo of the rear rating plate/serial number sticker confirming exact model and capacity.",
+      "Close-up of the rust areas and drum interior for corrosion assessment.",
+      "Photo of power cord and hoses included in the sale."
+    ],
+    "decision": "price",
+    "reason": "The machine is clearly an LG DirectDrive front-load washer, 7kg per its own panel, with no proof of working condition and visible rust, so it should be priced at the low end for an untested, cosmetically worn unit of this type.",
+    "price_pick": {
+      "low": 0,
+      "high": 1
+    }
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 21336,
+    "input_tokens": 3990,
+    "output_tokens": 1944,
+    "cost_usd": 0.02742,
+    "replayed": false,
+    "fixture_key": "88c298e7de714ba5ac754f8133488952",
+    "error": null
+  }
+}

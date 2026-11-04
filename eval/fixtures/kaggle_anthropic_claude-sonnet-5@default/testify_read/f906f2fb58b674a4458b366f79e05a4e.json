@@ -1,0 +1,84 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: a vertical stack of five used tyres on bare ground, tread worn, dust/mud on sidewalls, no legible size or brand markings.",
+      "Photo 1: same stack from a closer angle, yellow chalk marks on tread, still no readable DOT/size code, a white alloy wheel sits to the side on the ground.",
+      "Photo 2: four tyres laid flat side by side, each showing a different tread pattern, suggesting they are not an identical matched set; two or three separate alloy wheels are visible at the top edge of the frame, not mounted to any tyre.",
+      "No brand name, size (e.g. 2xx/4x R1x), or DOT date is legible on any tyre in any photo.",
+      "Watermark 'IKWE ANTHONY' and 'POSTED ON JIJI' overlay the images; these are platform/seller marks, not proof of condition."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used tyre and alloy wheel set (quantity and matching unclear)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0",
+        "photo 1",
+        "photo 2"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Direct Belgium tyres and wheels (implying imported used tyres from Belgium, often used in Nigeria to imply decent remaining tread)",
+        "verdict": "unverifiable_remote",
+        "evidence": "No import paperwork, country-of-origin sticker, or DOT code is visible in any photo; origin cannot be confirmed from images."
+      },
+      {
+        "claim": "Implied 'tyres and wheels' bundle (wheels included)",
+        "verdict": "unverified",
+        "evidence": "Wheels are visible in the background of photo 1 and photo 2 but are not clearly grouped with the tyres as a confirmed matching set for sale."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Tyre size (width/profile/rim diameter) unknown, which drives most of the price",
+        "proof": "A close-up photo of the tyre sidewall showing the size code (e.g. 225/45R17) and DOT date",
+        "if_unproven": "cannot be priced at all without this, treated as unknown-size stock"
+      },
+      {
+        "risk": "Tread depth and wear are only visible from a distance; true remaining tread (mm) unclear",
+        "proof": "A close-up photo with a tread-depth gauge or coin against the grooves on each tyre",
+        "if_unproven": "priced as low/minimum legal tread"
+      },
+      {
+        "risk": "Set may be mismatched (photo 2 shows four distinct tread patterns), reducing usability as a matched axle set",
+        "proof": "A photo showing all four sidewalls with matching brand/size stamped together",
+        "if_unproven": "priced as a mismatched/odd set, not a uniform set"
+      },
+      {
+        "risk": "Sidewall integrity (cracks, bulges, repairs) cannot be confirmed from the angles shown",
+        "proof": "Close-up photos of each full sidewall, inner and outer face",
+        "if_unproven": "priced as possibly compromised, not fully roadworthy"
+      },
+      {
+        "risk": "Whether the alloy wheels shown are actually included in this listing or just background clutter from another lot",
+        "proof": "A photo of the wheels and tyres physically paired/mounted together, or seller's explicit confirmation with a wheel count matching the tyre count",
+        "if_unproven": "priced as tyres only, wheels excluded"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of a tyre sidewall showing the size code and DOT/date code",
+      "Tread-depth measurement shot (coin or gauge) on each tyre",
+      "Confirmation photo showing wheels mounted with these specific tyres if wheels are part of the sale",
+      "Full sidewall shots (inner and outer) of each tyre for crack/repair check"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "No tyre size or brand is legible in any photo, which is the primary driver of tyre pricing, so even a worst-case price cannot be set until a readable sidewall shot is provided."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 23561,
+    "input_tokens": 3086,
+    "output_tokens": 1919,
+    "cost_usd": 0.022203,
+    "replayed": false,
+    "fixture_key": "f906f2fb58b674a4458b366f79e05a4e",
+    "error": null
+  }
+}

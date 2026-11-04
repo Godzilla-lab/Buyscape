@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Single photo shows a dark-brown wooden wall-mounted TV console/stand with open shelves and a cabinet door.",
+      "A flat-screen TV sits on top of the console, with a small decorative blue cup and a framed photo also on the unit.",
+      "Wallpaper backdrop with a damask pattern; floor appears tiled.",
+      "Watermark reads 'POSTED ON JIJI SHITTU KABIRU'.",
+      "No center table is visible anywhere in the photo, despite being mentioned in the seller's text."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "TV console (wall-mounted wood unit)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Item includes a 'center table and TV console' for the stated price",
+        "verdict": "unverifiable_remote",
+        "evidence": "No center table appears in photo 0; only the TV console and TV are shown."
+      },
+      {
+        "claim": "'Sharp deal' (implying good value/condition)",
+        "verdict": "unverified",
+        "evidence": "No close-up of console surface, joints, or table condition to confirm quality."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Center table's existence, size, material, and condition are completely unknown.",
+        "proof": "A clear photo of the center table alone, showing all sides and surface condition.",
+        "if_unproven": "treat the bundle as TV console only, with the table priced at zero/worst case until shown"
+      },
+      {
+        "risk": "TV console may have scratches, water damage, or loose hinges not visible in the single wide shot.",
+        "proof": "Close-up photos of the cabinet door, shelf edges, and back panel.",
+        "if_unproven": "priced as worn/moderate-damage condition"
+      },
+      {
+        "risk": "Whether the TV itself is included in the sale is unclear from the listing text.",
+        "proof": "Seller confirmation in writing (screenshot) stating TV is excluded.",
+        "if_unproven": "TV excluded from valuation; price only the console and (if shown) table"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the center table by itself, all angles.",
+      "Close-up shots of the TV console's cabinet doors, shelf edges, and back panel for damage.",
+      "Confirmation whether the TV is part of the sale or not."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The listing bundles a center table into the price, but no photo of that table exists, so even a worst-case price for the full lot cannot be set until it is shown."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 15961,
+    "input_tokens": 2232,
+    "output_tokens": 1466,
+    "cost_usd": 0.015965,
+    "replayed": false,
+    "fixture_key": "2a43184d805f3fcfe7b272f6a59962ca",
+    "error": null
+  }
+}

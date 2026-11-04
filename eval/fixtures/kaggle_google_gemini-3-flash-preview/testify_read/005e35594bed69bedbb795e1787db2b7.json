@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Orange plastic carrying case for a power tool.",
+      "Label on the case identifies it as an Ingco CIDLI20508 20V Brushless Impact Drill.",
+      "The case is closed; the actual drill, battery, and accessories are not visible.",
+      "The photo contains a watermark 'EMMANUEL MUONEKE'.",
+      "The background shows other tool boxes, suggesting a retail or storage environment."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "impact drill",
+      "brand": "Ingco",
+      "model": "CIDLI20508",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Ingco battery 20volts drilling machine",
+        "verdict": "supported",
+        "evidence": "The label in photo 0 clearly states the brand, voltage, and type of tool."
+      },
+      {
+        "claim": "with accessories",
+        "verdict": "unverified",
+        "evidence": "The case is closed in photo 0, so no accessories are visible."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The case may be empty or contain a different, lower-value item.",
+        "proof": "A photo of the open case showing the drill and its contents.",
+        "if_unproven": "as an empty plastic carrying case"
+      },
+      {
+        "risk": "The battery and charger might be missing or non-functional.",
+        "proof": "A photo of the battery and charger inside the case, and a video of the tool powered on.",
+        "if_unproven": "as a bare tool without battery or charger"
+      },
+      {
+        "risk": "The tool may be used or damaged despite the new-looking box.",
+        "proof": "Close-up photos of the drill's body and chuck to check for wear.",
+        "if_unproven": "as heavily used or non-functional"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the open case showing the drill, battery, charger, and accessories.",
+      "Photo of the rating plate on the actual drill to confirm the model number.",
+      "Video of the drill running to confirm the motor and battery are functional."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo only shows a closed box. Without seeing the actual drill and accessories, it is impossible to verify their existence, condition, or completeness."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 10107,
+    "input_tokens": 2355,
+    "output_tokens": 1985,
+    "cost_usd": 0.007132,
+    "replayed": false,
+    "fixture_key": "005e35594bed69bedbb795e1787db2b7",
+    "error": null
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the backplate of a graphics card with 'GIGABYTE' and 'GEFORCE RTX' printed on it.",
+      "The backplate has a dark gray metallic finish with angular design elements and ventilation grills.",
+      "A barcode sticker is visible on the left side of the backplate.",
+      "Photo 1 shows the front of the graphics card with three black cooling fans, each with a 'GIGABYTE' logo in the center.",
+      "The card has a dark gray/black shroud with a modern, angular design.",
+      "Both photos show the card placed on a wooden surface, with a watermark 'SYSCOTECH LIMITED' overlaid.",
+      "No model number or specific variant (e.g., '3070 Ti') is visible on the card in either photo."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "graphics card",
+      "brand": "GIGABYTE",
+      "model": null,
+      "read_from": [
+        "photo 0 backplate",
+        "photo 1 fan center"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "NVIDIA GeForce RTX 3070 Ti",
+        "verdict": "unverified",
+        "evidence": "The model name is not visible on the card in either photo. The branding 'GEFORCE RTX' is present, but not the specific model '3070 Ti'."
+      },
+      {
+        "claim": "8GB GDDR6X VRAM",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible memory specification on the card. This can only be verified by checking the card's BIOS or through a system test."
+      },
+      {
+        "claim": "256-bit Memory Interface",
+        "verdict": "unverifiable_remote",
+        "evidence": "Not visible on the card. Requires technical verification via software or documentation."
+      },
+      {
+        "claim": "6,144 CUDA Cores",
+        "verdict": "unverifiable_remote",
+        "evidence": "Not visible on the card. Requires technical verification via software or documentation."
+      },
+      {
+        "claim": "PCI Express...",
+        "verdict": "supported",
+        "evidence": "The PCIe connector is visible at the bottom of photo 0, confirming it is a PCIe card."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The card may not be an RTX 3070 Ti, but a different model (e.g., RTX 3070, RTX 3080, or even a lower-tier card).",
+        "proof": "A clear photo of the model label on the card, preferably from the side or top where model numbers are usually printed.",
+        "if_unproven": "Priced as a generic RTX 3070 or lower-tier card, which reduces value significantly."
+      },
+      {
+        "risk": "The card may be non-functional or have hardware issues (e.g., dead VRAM, fan failure, or BIOS corruption).",
+        "proof": "A video showing the card being powered on and running a benchmark or game, or a screenshot of GPU-Z or similar software showing full specs and health.",
+        "if_unproven": "Priced as not working, which drastically reduces value."
+      },
+      {
+        "risk": "The card may be a used or refurbished unit with hidden wear or damage not visible in photos.",
+        "proof": "A close-up photo of the PCB, connectors, and VRM area to check for signs of overheating, corrosion, or physical damage.",
+        "if_unproven": "Priced as used with unknown condition, which reduces value."
+      }
+    ],
+    "proof_requests": [
+      "A clear photo of the model label on the card (side or top).",
+      "A video or screenshot showing the card running in a system with GPU-Z or similar software to verify specs and functionality.",
+      "A close-up photo of the PCB and connectors to check for physical damage or wear."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model name 'RTX 3070 Ti' is not visible on the card in the provided photos, and critical specifications like VRAM, memory interface, and CUDA cores cannot be verified remotely. Without proof of model and functionality, the item cannot be accurately priced."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 79042,
+    "input_tokens": 1884,
+    "output_tokens": 962,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "bc0ee1fa785ff17fc900923d4c465b8e",
+    "error": null
+  }
+}

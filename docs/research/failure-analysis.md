@@ -121,6 +121,53 @@ keeps, mostly bookshop stock it takes for used. So the model check is a
 little lenient: it should be spot-checked by a person before it is trusted
 on the test split.
 
+## Lagos, checked in full
+
+Every Lagos item with photos here was checked the same way on 16 Oct 2026,
+on the sharp photos (`buyscape testify-label --market lagos`). The same rule
+decides. Free on the Google AI Studio free tier; it would cost about 3 dollars
+at list price.
+
+| Lagos | Items |
+|---|---|
+| Checked | 722 |
+| **Kept** | **331** (46%) |
+| Dropped as new stock | 356 |
+| Dropped as a buyer's advert or a service | 16 |
+| Dropped because the photo is not the seller's item | 14 |
+| Dropped for other reasons in the hand review | 5 |
+| Not checked: no photos on this machine | 186 |
+
+Of the 331 kept, 40 are BuyScrap's own adverts and 291 are Jiji. Only 5 Jiji
+material lots survive, which confirms that material lots must come from
+recyclers and BuyScrap. The 186 unchecked are the 178 original phone, laptop
+and appliance cases, whose photos are only on the machine that fetched them,
+and 8 BuyScrap adverts with no photos at all.
+
+The keep or drop agreement with the hand review is still 88 of 100 after the
+photos were sharpened.
+
+## Every city, checked
+
+Abuja, Rivers and Oyo were checked the same way on 16 and 17 October 2026,
+on two free Google AI Studio keys.
+
+| City | Checked | Kept | Dropped as new stock | Buyer adverts | Not the seller's photo | Kept in `dev` |
+|---|---|---|---|---|---|---|
+| Lagos | 722 | 331 (46%) | 356 | 16 | 14 | 75 |
+| Abuja | 447 | 230 (51%) | 197 | 17 | 1 | 65 |
+| Rivers | 350 | 168 (48%) | 175 | 5 | 2 | 48 |
+| Oyo | 299 | 181 (61%) | 107 | 7 | 1 | 43 |
+| **All** | **1,818** | **910 (50%)** | 835 | 45 | 18 | **231** |
+
+About half of what Jiji calls used is a second-hand item for sale. New
+stock is the reason nine times in ten. Oyo keeps the most, perhaps because
+Ibadan has fewer dealer showrooms posting stock as used. Material lots stay
+rare everywhere: 29 kept in four cities, so they must come from recyclers
+and BuyScrap. The 186 Lagos items not checked are the 178 original phone,
+laptop and appliance cases, whose photos are not on this machine, and 8
+BuyScrap adverts with no photos.
+
 ## Next step
 
 Check every remaining item the same way, measure how often an AI reviewer

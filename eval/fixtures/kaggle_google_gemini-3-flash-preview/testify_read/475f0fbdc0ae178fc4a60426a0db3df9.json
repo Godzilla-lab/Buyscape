@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows a red box for a 'Bella Sewing Machine'.",
+      "The image appears to be a digital marketing graphic or stock photo, not a photo of a physical item in a real environment.",
+      "A watermark for 'MINTY'S COUTURE VENTURES' is visible across the center.",
+      "The technical specification table on the side of the box is blank or unreadable.",
+      "The actual sewing machine is only shown as an illustration on the box."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "manual sewing machine",
+      "brand": "Bella",
+      "model": null,
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Bella Manual Sewing Machine",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "brand-new",
+        "verdict": "unverified",
+        "evidence": "Only a stock photo of packaging is shown; the actual item's condition is not visible."
+      },
+      {
+        "claim": "heavy-duty",
+        "verdict": "unverifiable_remote",
+        "evidence": "Mechanical build quality cannot be assessed from a box illustration."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The photo is a stock image, which is a common indicator that the seller does not possess the item.",
+        "proof": "A photo of the actual machine next to a handwritten note with the current date.",
+        "if_unproven": "as fraud_suspected"
+      },
+      {
+        "risk": "The box may be empty or the machine may be missing critical components like the hand crank or base.",
+        "proof": "Photos of the machine outside of the box showing all sides and accessories.",
+        "if_unproven": "as incomplete"
+      },
+      {
+        "risk": "Internal mechanical parts may be seized or damaged.",
+        "proof": "A video of the hand wheel being turned and the needle bar moving.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual sewing machine out of the box.",
+      "Photo of the machine with a handwritten note showing the seller's name and today's date to prove possession.",
+      "Photo of the base and any included accessories (e.g., motor, stand, or case)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller has provided a stock marketing image instead of a photo of the actual item. Possession and condition cannot be verified."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 7278,
+    "input_tokens": 2380,
+    "output_tokens": 1576,
+    "cost_usd": 0.005918,
+    "replayed": false,
+    "fixture_key": "475f0fbdc0ae178fc4a60426a0db3df9",
+    "error": null
+  }
+}

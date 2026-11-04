@@ -1,0 +1,91 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: A black laptop is open, displaying a Windows 11 blue abstract wallpaper. The screen bezel has 'T190' printed at the top. The laptop is placed on a stack of wrapped devices. A watermark 'FIRST MANGO D TECH' is visible.",
+      "Photo 1: The same laptop is shown in a tent mode, with the screen facing forward. The back of the device shows a Dell logo and a Windows sticker. It is surrounded by stacks of wrapped laptops, some with HP logos visible. The screen still shows the Windows 11 wallpaper.",
+      "Photo 2: A hand holds the laptop by its top edge, showing the front bezel with 'T190' and a Dell logo at the bottom. The screen displays the same Windows 11 wallpaper. A sticker with text is visible on the screen, but it is not legible. The background shows more wrapped devices."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "2-in-1 convertible laptop",
+      "brand": "Dell",
+      "model": null,
+      "read_from": [
+        "photo 2 bezel (Dell logo)",
+        "photo 0 screen bezel (T190)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Dell latitude 7390-2in1, X360 convertible",
+        "verdict": "unverified",
+        "evidence": "The Dell logo is visible in photo 2, but the model name 'Latitude 7390' is not readable on any photo. The 'T190' label on the screen bezel (photo 0 and 2) does not match the claimed model."
+      },
+      {
+        "claim": "Core i5, 8th gen",
+        "verdict": "unverifiable_remote",
+        "evidence": "No CPU information is visible in any photo. The system specs cannot be confirmed remotely."
+      },
+      {
+        "claim": "8gig ram, 256gig ssd",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal components or system information are visible. RAM and SSD specs cannot be verified from photos."
+      },
+      {
+        "claim": "windows 11 pro",
+        "verdict": "supported",
+        "evidence": "The screen displays the Windows 11 default wallpaper (photo 0, 1, 2). The Windows 11 Pro sticker is visible on the back in photo 1, but the edition cannot be confirmed without checking system settings."
+      },
+      {
+        "claim": "keyboard...",
+        "verdict": "unverified",
+        "evidence": "The keyboard is not visible in any photo. The device is shown in tablet mode, so the keyboard may be detached or not included."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The device may not be a Dell Latitude 7390 as claimed, but a different model (e.g., T190 is visible on bezel)",
+        "proof": "A clear shot of the model label on the bottom of the laptop or inside the lid.",
+        "if_unproven": "Priced as a generic Dell 2-in-1, not as a Latitude 7390."
+      },
+      {
+        "risk": "The laptop may not have 8GB RAM or 256GB SSD as claimed",
+        "proof": "A screenshot of the system information (e.g., Windows Settings > System > About) showing RAM and storage details.",
+        "if_unproven": "Priced as a lower-spec device, assuming minimal configuration."
+      },
+      {
+        "risk": "The keyboard may be missing or not included",
+        "proof": "A photo showing the keyboard attached or detached, or a clear shot of the keyboard itself.",
+        "if_unproven": "Priced as a tablet-only device, without keyboard."
+      },
+      {
+        "risk": "The device may have physical damage or wear not visible in photos",
+        "proof": "A 360-degree video or close-up photos of all edges, hinges, and ports.",
+        "if_unproven": "Priced with a discount for potential hidden damage."
+      }
+    ],
+    "proof_requests": [
+      "A clear photo of the model label on the bottom of the laptop or inside the lid.",
+      "A screenshot of the system information showing CPU, RAM, and storage details.",
+      "A photo of the keyboard attached or detached, or a clear shot of the keyboard itself.",
+      "A 360-degree video or close-up photos of all edges, hinges, and ports."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model identity is uncertain due to the 'T190' label conflicting with the claimed 'Latitude 7390'. Key specs (RAM, SSD, CPU) and the presence of the keyboard cannot be verified from the photos. The device must be further proven before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 80860,
+    "input_tokens": 2183,
+    "output_tokens": 1096,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "8eef56f95c86b77d5faa86b5ec4ecebb",
+    "error": null
+  }
+}

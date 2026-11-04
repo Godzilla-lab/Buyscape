@@ -1,0 +1,75 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows two handheld electric irons: one dark green, one pinkish-beige, placed in front of a product box labeled 'Mini Iron'.",
+      "The box displays images of the iron being used for steam ironing and dry ironing, with text 'Flat ironing / hanging ironing two-in-one'.",
+      "The pinkish-beige iron has a visible power button and a dial, with a white cord attached.",
+      "A manual is visible to the right, with Chinese text '\u4f7f\u7528\u8bf4\u660e\u4e66' (User Manual) and '\u8ff7\u4f60\u7535\u71a8\u6597 2005' (Mini Electric Iron 2005).",
+      "The green iron appears to have a similar design but lacks visible controls in the photo.",
+      "The box does not show a brand name, only 'Mini Iron' and usage images.",
+      "The manual's model number '2005' does not match the seller's claim of 'Dyd 001'."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "mini electric iron",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 box",
+        "photo 0 manual"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Mini electric iron (lint remover Dyd 001)",
+        "verdict": "unverified",
+        "evidence": "The manual in photo 0 shows model '2005', not 'Dyd 001'. The box does not show a model number or brand. The seller's claim of 'Dyd 001' cannot be confirmed from the photo."
+      },
+      {
+        "claim": "Lint remover",
+        "verdict": "unverifiable_remote",
+        "evidence": "The box and manual do not mention lint removal. The product is labeled as a 'Mini Iron' for steam and dry ironing. No visual evidence of lint removal function is present."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The item may not be a lint remover as claimed, or may not function as advertised.",
+        "proof": "A close-up of the iron's soleplate and any attachments, plus a video demonstrating lint removal function.",
+        "if_unproven": "priced as a basic mini iron without lint removal capability"
+      },
+      {
+        "risk": "The model number 'Dyd 001' may be incorrect or misleading; the manual shows '2005'.",
+        "proof": "A clear photo of the product's label or base showing the model number.",
+        "if_unproven": "priced as an unbranded or generic mini iron"
+      },
+      {
+        "risk": "The green iron may be non-functional or missing parts (controls not visible).",
+        "proof": "A close-up of the green iron's controls and cord connection.",
+        "if_unproven": "priced as potentially non-functional or incomplete"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the model number on the iron itself (base or label).",
+      "Close-up of the green iron's controls and cord.",
+      "Video or photo showing the lint removal function if claimed.",
+      "Photo of the power plug and voltage rating."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller's claimed model 'Dyd 001' contradicts the manual's '2005', and the lint remover function is not visually supported. The green iron's controls are not visible, raising functionality concerns. Without proof of model, function, and condition, a worst-case price cannot be confidently assigned."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 68967,
+    "input_tokens": 1796,
+    "output_tokens": 798,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "74dae61c2b1cd9dfecf70572a50a0d9e",
+    "error": null
+  }
+}

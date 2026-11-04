@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Single tire shown in close-up, tread pattern visible, sidewall text not visible.",
+      "Tread shows moderate to heavy wear with some shine on high points, no visible cracks or bulges in this view.",
+      "Background shows other used tires, suggesting a stock of used ('tukubo') tires for sale.",
+      "Watermark 'POSTED ON JIJI N.J. VENTURE' overlays the image, no brand or size markings legible on tire itself."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used car tire, seller-claimed size 295/40 R20",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "295/40 R20 size",
+        "verdict": "unverifiable_remote",
+        "evidence": "No sidewall markings visible in photo 0 to confirm size; only tread view shown."
+      },
+      {
+        "claim": "'Tukubo' (used/imported second-hand) tire",
+        "verdict": "unverified",
+        "evidence": "Consistent with worn tread appearance in photo 0, but origin/import status cannot be confirmed from image alone."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual tire size may differ from claimed 295/40 R20",
+        "proof": "Clear photo of sidewall showing size and load/speed rating markings",
+        "if_unproven": "priced as generic unverified-size used tire, lowest plausible comparable"
+      },
+      {
+        "risk": "Brand/model unknown, affects resale value significantly",
+        "proof": "Sidewall close-up showing brand logo and model name",
+        "if_unproven": "priced as unbranded/generic used tire"
+      },
+      {
+        "risk": "Tire age (manufacture date) unknown; old rubber can be unsafe despite tread",
+        "proof": "Photo of DOT code on sidewall showing week/year of manufacture",
+        "if_unproven": "priced as high-risk/old stock, worst case"
+      },
+      {
+        "risk": "Hidden sidewall damage, bulges, or repairs not visible from tread-only shot",
+        "proof": "Full sidewall photos from both sides of the tire",
+        "if_unproven": "priced as possibly damaged, worst case"
+      },
+      {
+        "risk": "Only one tire clearly shown; unclear if sale is for single unit or set",
+        "proof": "Photo showing all tires being sold together with count visible",
+        "if_unproven": "priced as single unit only"
+      }
+    ],
+    "proof_requests": [
+      "Clear sidewall photo showing size, brand, and model markings",
+      "Close-up of DOT code for manufacture date",
+      "Photos of both sidewalls for damage/repair check",
+      "Photo confirming quantity included in sale"
+    ],
+    "decision": "price",
+    "reason": "Item is identifiable as a used tire by type; size and brand claims are unverifiable from the photo, so it must be priced as a generic, unbranded, unverified-size used tire at worst case until sidewall and DOT proof are provided."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 18787,
+    "input_tokens": 2510,
+    "output_tokens": 1658,
+    "cost_usd": 0.018441,
+    "replayed": false,
+    "fixture_key": "372f4e55cf95672db91e96e67249f0e9",
+    "error": null
+  }
+}

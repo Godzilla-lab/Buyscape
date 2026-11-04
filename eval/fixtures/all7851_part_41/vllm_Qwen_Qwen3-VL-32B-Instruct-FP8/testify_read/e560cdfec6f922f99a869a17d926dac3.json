@@ -1,0 +1,109 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a screen with 'NVIDIA GeForce MX550' and '2.0 GB' visible, indicating the graphics card and VRAM.",
+      "Photo 1 shows the laptop's palm rest with an Intel Core i5 sticker and an NVIDIA sticker.",
+      "Photo 2 shows the back of the laptop lid with the HP logo, confirming the brand.",
+      "The laptop is silver and appears to be on a stand.",
+      "No model number or serial number is visible in any photo.",
+      "The screen in photo 0 appears to be a task manager or GPU monitoring tool, not a system info screen."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "HP laptop",
+      "brand": "HP",
+      "model": null,
+      "read_from": [
+        "photo 2 lid"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP laptop",
+        "verdict": "supported",
+        "evidence": "photo 2 shows the HP logo on the lid"
+      },
+      {
+        "claim": "15 inch",
+        "verdict": "unverifiable_remote",
+        "evidence": "no screen size visible in any photo"
+      },
+      {
+        "claim": "Core i5 12th generation",
+        "verdict": "unverified",
+        "evidence": "photo 1 shows Intel Core i5 sticker, but no generation info; 12th gen cannot be confirmed from sticker alone"
+      },
+      {
+        "claim": "1TB SSD",
+        "verdict": "unverifiable_remote",
+        "evidence": "no storage info visible in photos"
+      },
+      {
+        "claim": "8GB RAM",
+        "verdict": "unverifiable_remote",
+        "evidence": "no RAM info visible in photos"
+      },
+      {
+        "claim": "2GB Nvidia GeForce MX550 dedicated graphics",
+        "verdict": "supported",
+        "evidence": "photo 0 shows 'NVIDIA GeForce MX550' and '2.0 GB' on screen"
+      },
+      {
+        "claim": "touch screen",
+        "verdict": "unverifiable_remote",
+        "evidence": "no evidence of touch screen in photos"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The laptop may not be 12th generation Core i5",
+        "proof": "Photo of system information screen showing CPU model and generation",
+        "if_unproven": "priced as older generation or unknown generation, which reduces value"
+      },
+      {
+        "risk": "The storage may not be 1TB SSD",
+        "proof": "Photo of disk management or system info showing storage capacity and type",
+        "if_unproven": "priced as unknown storage, which reduces value"
+      },
+      {
+        "risk": "The RAM may not be 8GB",
+        "proof": "Photo of system information screen showing RAM amount",
+        "if_unproven": "priced as unknown RAM, which reduces value"
+      },
+      {
+        "risk": "The screen may not be touch-enabled",
+        "proof": "Video showing finger interaction with screen or photo of touch screen indicator",
+        "if_unproven": "priced as non-touch, which reduces value"
+      },
+      {
+        "risk": "The laptop may have physical damage or wear not visible in photos",
+        "proof": "Full 360-degree video or close-up photos of all sides, hinges, and keyboard",
+        "if_unproven": "priced with assumption of average wear, which may be inaccurate"
+      }
+    ],
+    "proof_requests": [
+      "Photo of system information screen showing CPU model and generation",
+      "Photo of disk management or system info showing storage capacity and type",
+      "Photo of system information screen showing RAM amount",
+      "Video or photo showing touch screen functionality",
+      "Full 360-degree video or close-up photos of all sides, hinges, and keyboard"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The laptop's key specifications such as CPU generation, storage, RAM, and touch screen functionality cannot be confirmed from the current photos. Without proof of these claims, the item cannot be accurately priced. The brand and GPU are confirmed, but the model and other critical specs are missing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 78194,
+    "input_tokens": 2798,
+    "output_tokens": 946,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "e560cdfec6f922f99a869a17d926dac3",
+    "error": null
+  }
+}

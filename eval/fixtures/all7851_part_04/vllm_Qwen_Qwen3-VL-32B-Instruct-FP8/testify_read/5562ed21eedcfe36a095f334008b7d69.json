@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Three photos show the back of a light pink iPhone with a dual-camera setup in a diagonal square module.",
+      "The phone has a white or light pink back with a visible Apple logo in photo 1 and photo 2.",
+      "A small white sticker is affixed to the back near the camera module, handwritten with '15', '128 GB', and '9.9%'.",
+      "The phone appears to be held in a hand against a metal-barred background.",
+      "No front view, screen, or ports are visible.",
+      "No box, accessories, or serial number are shown.",
+      "The sticker's '9.9%' likely refers to condition or battery health, but is not confirmed."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "iPhone 15",
+      "brand": "Apple",
+      "model": "iPhone 15",
+      "read_from": [
+        "photo 0 sticker",
+        "photo 1 sticker",
+        "photo 2 sticker"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Premium USA used iPhone 15 128gb",
+        "verdict": "unverified",
+        "evidence": "The model and storage are written on the sticker in photos 0, 1, and 2. The 'USA used' and 'Premium' claims cannot be verified from photos alone."
+      },
+      {
+        "claim": "Available in different colors",
+        "verdict": "unverifiable_remote",
+        "evidence": "Only one color (pink) is shown. No other colors are visible in the photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The phone may be non-functional or have a dead battery, as no screen or power-on state is shown.",
+        "proof": "A video or photo showing the phone powered on, displaying the home screen or settings.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The phone may be stolen, blacklisted, or have a compromised IMEI, common with imported used phones.",
+        "proof": "A screenshot of the phone's settings showing the IMEI and carrier status, or a verification from a Nigerian network provider.",
+        "if_unproven": "priced as potentially blacklisted"
+      },
+      {
+        "risk": "The '9.9%' on the sticker may refer to battery health, but it is not confirmed. If false, the battery may be degraded.",
+        "proof": "A screenshot from the phone's battery health settings showing the actual battery condition.",
+        "if_unproven": "priced as battery unknown, possibly degraded"
+      },
+      {
+        "risk": "The phone may have physical damage not visible in the photos, such as cracks, dents, or water damage.",
+        "proof": "A full 360-degree video or photos showing all edges, ports, and front screen.",
+        "if_unproven": "priced as possibly damaged"
+      }
+    ],
+    "proof_requests": [
+      "Video or photo of the phone powered on, showing the home screen.",
+      "Screenshot of the phone's settings showing IMEI and battery health.",
+      "Full 360-degree photos or video showing all sides, ports, and screen.",
+      "Proof of origin or import documentation if claiming 'USA used'."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and storage are readable from the sticker, but critical claims like 'Premium', 'USA used', and condition cannot be verified. The phone's functionality, battery health, and physical condition are unknown, which are essential for pricing. Without proof, the item cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 66017,
+    "input_tokens": 2782,
+    "output_tokens": 805,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "5562ed21eedcfe36a095f334008b7d69",
+    "error": null
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-r4",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail packaging for a Singer sewing machine.",
+      "The box is labeled 'SINGER HD4432 Heavy Duty'.",
+      "The box lists '110 Stitch Applications' and 'Enhanced Piercing Power'.",
+      "The actual sewing machine is not visible; only the illustration on the box is shown.",
+      "The box appears to be in good condition, but the contents are not shown."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "table top sewing machine",
+      "brand": "Singer",
+      "model": "HD4432",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Singer table top sewing machine",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "for leather wigs and clothes",
+        "verdict": "unverifiable_remote",
+        "evidence": "The box mentions '110 Stitch Applications' but does not specify suitability for these materials."
+      },
+      {
+        "claim": "All types of sewing",
+        "verdict": "unverifiable_remote",
+        "evidence": "The box mentions '110 Stitch Applications' but does not specify suitability for all types of sewing."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, lower-value item.",
+        "proof": "A photo of the actual machine outside of the box.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The machine may be used, refurbished, or non-functional.",
+        "proof": "A video of the machine powered on and sewing through fabric.",
+        "if_unproven": "as non-working"
+      },
+      {
+        "risk": "Essential accessories like the foot pedal and power cord may be missing.",
+        "proof": "A photo of the machine with all included accessories.",
+        "if_unproven": "as missing all accessories"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual sewing machine outside of the box.",
+      "Photo of the machine powered on and sewing through fabric.",
+      "Photo of all included accessories (foot pedal, power cord, bobbins)."
+    ],
+    "decision": "price",
+    "reason": "The item is known from the photos. What they cannot prove is priced at its worst case until the proof asked for below arrives."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-r4",
+    "task": "testify_read",
+    "latency_ms": 3273,
+    "input_tokens": 1551,
+    "output_tokens": 419,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "c5594cd6a71d608b4b5c8563e923a2f0",
+    "error": null
+  }
+}

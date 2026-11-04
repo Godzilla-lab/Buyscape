@@ -1,0 +1,86 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Open laptop showing Windows 'About' screen with visible specs: Intel Core i7-1165G7, 16GB RAM, 256GB SSD. Screen is active, touch screen not visibly used. Dell logo on keyboard bezel. Silver chassis, black keys, trackpad with two buttons. Watermark 'TECHFLOW COMPUTERS'.",
+      "Photo 1: Same angle as photo 0, slightly rotated. Hand holding laptop. Screen still shows Windows 'About' with same specs. Watermark present.",
+      "Photo 2: Closed laptop from top-down angle. Silver lid with Dell logo. Orange power indicator light visible. Watermark present. No visible damage to lid. No model sticker visible."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Dell",
+      "model": "Latitude 5310",
+      "read_from": [
+        "photo 0 screen",
+        "photo 1 screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Dell latitude 5310",
+        "verdict": "supported",
+        "evidence": "Photo 0 and 1 show 'Dell' on keyboard bezel and screen displays 'Dell Latitude 5310' in Windows About section."
+      },
+      {
+        "claim": "Intel corei7",
+        "verdict": "supported",
+        "evidence": "Photo 0 and 1 show 'Intel Core i7-1165G7' in Windows About section."
+      },
+      {
+        "claim": "16/256",
+        "verdict": "supported",
+        "evidence": "Photo 0 and 1 show '16.0 GB RAM' and '256 GB SSD' in Windows About section."
+      },
+      {
+        "claim": "with touch screen",
+        "verdict": "unverified",
+        "evidence": "Screen is active and appears to be touch-capable (no visible bezel for stylus, but no proof of touch functionality). No finger interaction shown. No on-screen touch interface or gesture shown."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Touch screen functionality not proven",
+        "proof": "Video or photo showing finger interacting with screen (e.g., swiping, tapping) or Windows touch settings enabled.",
+        "if_unproven": "Priced as non-touch screen, which reduces value."
+      },
+      {
+        "risk": "Battery health or condition not shown",
+        "proof": "Photo or video showing battery percentage under load or battery health report from Windows.",
+        "if_unproven": "Priced assuming average battery life, which may be inaccurate."
+      },
+      {
+        "risk": "Physical damage or wear not visible in photos",
+        "proof": "Close-up photos of hinges, screen bezel, keyboard, and bottom chassis for scratches, dents, or liquid damage.",
+        "if_unproven": "Priced assuming minor wear, but could be worse."
+      },
+      {
+        "risk": "Operating system license or activation status",
+        "proof": "Screenshot of Windows activation status or proof of license key.",
+        "if_unproven": "Priced assuming Windows is activated, but may be unlicensed or trial."
+      }
+    ],
+    "proof_requests": [
+      "Video or photo showing touch screen functionality (e.g., finger swiping or tapping on screen).",
+      "Close-up photos of the laptop's hinges, keyboard, and bottom chassis for damage.",
+      "Screenshot of battery health or Windows activation status.",
+      "Photo of the model sticker on the bottom of the laptop (if any)."
+    ],
+    "decision": "price",
+    "reason": "The laptop is identifiable as a Dell Latitude 5310 with confirmed Intel Core i7, 16GB RAM, and 256GB SSD from the Windows About screen. The touch screen claim is unverified but plausible. Hidden risks include unproven touch functionality, battery condition, and physical damage. Priced at worst case for unproven touch and average battery, with risks noted."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 68015,
+    "input_tokens": 2159,
+    "output_tokens": 908,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "34d554e7d50c97e42b1d204b32e90e32",
+    "error": null
+  }
+}

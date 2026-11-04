@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows two dark solar panels with white grid lines leaning indoors, with a watermark reading BIG FUTURE SOLAR ENERGY.",
+      "Photo 1 shows a white specification label with the CanadianSolar logo, MODEL TYPE: CS5-550M, and Nominal Maximum Power (Pmax): 550 W.",
+      "Photo 2 shows one solar panel leaning against wooden planks outdoors, with the same watermark.",
+      "No cracks or physical damage are clearly visible, but the angles limit a full surface inspection."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "solar panel",
+      "brand": "CanadianSolar",
+      "model": "CS5-550M",
+      "read_from": [
+        "photo 1 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "550watts Canadian Solar panel",
+        "verdict": "supported",
+        "evidence": "photo 1 label reads CanadianSolar CS5-550M and 550 W"
+      },
+      {
+        "claim": "120c",
+        "verdict": "unverified",
+        "evidence": "cell count or configuration not visible on the label in photo 1"
+      },
+      {
+        "claim": "25 years warranty",
+        "verdict": "unverifiable_remote",
+        "evidence": "no warranty document or certificate shown in any photo"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Panel may have hidden cracks, hot spots, or delamination not visible in the photos.",
+        "proof": "close-up video of the panel surface in full sun or an electroluminescence test image.",
+        "if_unproven": "as damaged or non-working panel."
+      },
+      {
+        "risk": "Actual power output may be below 550 W due to age or degradation.",
+        "proof": "photo of the serial number sticker plus a video showing Voc and Isc measurements with a multimeter.",
+        "if_unproven": "as not working or unknown output."
+      },
+      {
+        "risk": "25-year warranty claim cannot be verified and may not be transferable.",
+        "proof": "warranty certificate or a screenshot from Canadian Solar validating the serial number.",
+        "if_unproven": "without warranty value."
+      },
+      {
+        "risk": "Manufacturing age is unknown; older stock loses value.",
+        "proof": "clear photo of the date code on the back label.",
+        "if_unproven": "as older used stock."
+      }
+    ],
+    "proof_requests": [
+      "Close-up video of the panel surface in sunlight to check for cracks or hot spots.",
+      "Photo of the serial number and date code on the back label.",
+      "Video showing Voc and Isc measurements with a multimeter.",
+      "Warranty document or Canadian Solar verification screenshot for the serial number."
+    ],
+    "decision": "price",
+    "reason": "The panel is identified as CanadianSolar CS5-550M from the label in photo 1, so it can be priced at its worst case as a used panel with unverified output and no proven warranty."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 33667,
+    "input_tokens": 2683,
+    "output_tokens": 2621,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "6a249cfec539e02f0898e7729c9535c6",
+    "error": null
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows an engine and automatic transmission on a tiled floor with a brick wall background; ROLLS-ROYCE is cast on the side of the engine.",
+      "Photo 1 shows the same engine and gearbox from another angle with wiring, hoses, and the engine cover visible.",
+      "Photo 2 shows a top-down view of the engine with ROLLS-ROYCE clearly cast on the valve cover and a Rolls-Royce emblem on the cover."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "car engine with automatic transmission",
+      "brand": "Rolls-Royce",
+      "model": null,
+      "read_from": [
+        "photo 0 valve cover",
+        "photo 2 valve cover"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Rolls-Royce",
+        "verdict": "supported",
+        "evidence": "photo 0, photo 1, and photo 2 show ROLLS-ROYCE cast on the engine"
+      },
+      {
+        "claim": "Cullinan",
+        "verdict": "unverifiable_remote",
+        "evidence": "no Cullinan badge, VIN, or model plate is visible in any photo"
+      },
+      {
+        "claim": "Complete engine",
+        "verdict": "unverified",
+        "evidence": "photos show the engine and gearbox but cannot confirm all ancillaries are present"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine may be seized or internally damaged",
+        "proof": "video of the crankshaft turning by hand or with a starter, plus compression test",
+        "if_unproven": "as not running"
+      },
+      {
+        "risk": "Missing turbos, ECU, wiring harness, or other ancillaries",
+        "proof": "itemized video showing every included component",
+        "if_unproven": "as incomplete"
+      },
+      {
+        "risk": "Not actually from a Cullinan (could be Phantom, Ghost, or other Rolls-Royce)",
+        "proof": "VIN, registration, or build sheet linking the engine to a Cullinan",
+        "if_unproven": "as a generic Rolls-Royce engine"
+      },
+      {
+        "risk": "Transmission faulty or damaged",
+        "proof": "video of the transmission shifting or operating on a bench",
+        "if_unproven": "as a faulty transmission"
+      },
+      {
+        "risk": "Oil leaks, cracked block, or overheating damage",
+        "proof": "borescope inspection of cylinders and block",
+        "if_unproven": "as needing a rebuild"
+      }
+    ],
+    "proof_requests": [
+      "Video of the engine cranking or turning over by hand",
+      "Itemized video showing all included parts such as turbos, ECU, and wiring harness",
+      "Documentation or VIN proving the engine came from a Cullinan",
+      "Video of the transmission shifting or operating"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a Rolls-Royce engine and gearbox from the cast markings, so it can be priced at worst case as non-running and incomplete; the Cullinan origin cannot be proven from photos alone."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 31252,
+    "input_tokens": 2462,
+    "output_tokens": 3835,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "ca6575b68fdbcb2237bd720bdb569c85",
+    "error": null
+  }
+}

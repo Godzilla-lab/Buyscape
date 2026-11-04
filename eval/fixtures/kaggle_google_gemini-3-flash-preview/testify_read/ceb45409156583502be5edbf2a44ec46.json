@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail packaging for a QASA blender.",
+      "The box identifies the model as QBL-3008 pro5.",
+      "The box claims 'Distinctive 3 cups + 3 blade sets'.",
+      "The actual blender, jars, and accessories are not visible outside the box.",
+      "The box shows some wear at the corners, suggesting it may not be factory-fresh."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "blender and grinder",
+      "brand": "QASA",
+      "model": "QBL-3008 pro5",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "High-speed blender pro5",
+        "verdict": "supported",
+        "evidence": "photo 0 box text"
+      },
+      {
+        "claim": "3 cups + 3 blade sets",
+        "verdict": "unverified",
+        "evidence": "The contents of the box are not shown."
+      },
+      {
+        "claim": "1 Year Warranty",
+        "verdict": "unverifiable_remote",
+        "evidence": "Warranty status for second-hand goods cannot be verified remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or missing the advertised accessories (3 cups/blades).",
+        "proof": "A photo of the blender base and all three jars/attachments outside of the box.",
+        "if_unproven": "priced as missing parts"
+      },
+      {
+        "risk": "The blender motor may be burnt out or non-functional.",
+        "proof": "A video of the blender powered on and rotating.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The jars may be cracked or the blades blunt/rusted.",
+        "proof": "Close-up photos of the interior of each jar and the blade assemblies.",
+        "if_unproven": "priced as heavily used"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual blender and all accessories (3 cups) outside the box.",
+      "Video of the blender running.",
+      "Photos of the blender base's underside/rating plate to confirm model match."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail box is shown. I cannot value the item without seeing the actual condition of the blender and confirming all parts are present."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 7864,
+    "input_tokens": 2349,
+    "output_tokens": 1459,
+    "cost_usd": 0.005552,
+    "replayed": false,
+    "fixture_key": "ceb45409156583502be5edbf2a44ec46",
+    "error": null
+  }
+}

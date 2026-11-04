@@ -1,0 +1,86 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a red and black motorcycle with 'BOXER' written on the fuel tank in gold letters. The engine has 'TECH 100' visible on the side cover.",
+      "The motorcycle has a black seat, visible front and rear suspension, and a chrome exhaust pipe.",
+      "Photo 1 shows the full side view of the motorcycle with a person standing beside it. The bike is parked on uneven ground with grass and dirt.",
+      "Photo 2 shows the front view: round headlight, dual front forks, and front wheel with visible tire wear. The front fender is chrome and shows some scratches.",
+      "The tires appear worn, especially the front tire which has visible tread wear and some dirt buildup.",
+      "The bodywork has minor scratches and paint chips, especially on the fuel tank and side panels.",
+      "No visible license plate or registration documents in the photos.",
+      "The motorcycle appears to be a 100cc model based on the 'TECH 100' label."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "motorcycle",
+      "brand": "Boxer",
+      "model": "Tech 100",
+      "read_from": [
+        "photo 0 fuel tank",
+        "photo 0 engine side cover"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Neatly used boxer bike",
+        "verdict": "supported",
+        "evidence": "The bike is clean overall, with no major damage. The paint is mostly intact with minor scratches, consistent with 'neatly used'."
+      },
+      {
+        "claim": "Complete paperwork",
+        "verdict": "unverifiable_remote",
+        "evidence": "No documents are shown in any photo. The claim cannot be verified from the images alone."
+      },
+      {
+        "claim": "Buy and drive",
+        "verdict": "unverified",
+        "evidence": "No evidence of the bike running or being operational. The condition of the tires and general wear may affect rideability."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine not working or needs repair",
+        "proof": "Video of the engine starting and running, or a close-up of the engine internals and oil level.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Tire condition is worse than shown or unsafe for riding",
+        "proof": "Close-up of both front and rear tires showing tread depth and sidewall condition.",
+        "if_unproven": "priced as having worn tires, reducing value"
+      },
+      {
+        "risk": "Missing or invalid paperwork",
+        "proof": "Photo of the registration certificate, title, and current tax/insurance documents.",
+        "if_unproven": "priced as no paperwork, which may prevent legal use"
+      },
+      {
+        "risk": "Frame or structural damage not visible in photos",
+        "proof": "Close-up of the frame, especially near the engine and rear suspension, to check for cracks or bends.",
+        "if_unproven": "priced as potentially structurally compromised"
+      }
+    ],
+    "proof_requests": [
+      "Video of the engine starting and running.",
+      "Close-up photos of both front and rear tires showing tread depth.",
+      "Photo of the registration and title documents.",
+      "Close-up of the frame and suspension for damage."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The motorcycle is identifiable as a Boxer Tech 100, and appears neat and used. However, critical claims like 'complete paperwork' and 'buy and drive' cannot be verified. Hidden risks include engine condition, tire safety, and structural integrity. Without proof of these, the item cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 66526,
+    "input_tokens": 2149,
+    "output_tokens": 824,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "5ced2a136538cf2809f504407e286cfb",
+    "error": null
+  }
+}

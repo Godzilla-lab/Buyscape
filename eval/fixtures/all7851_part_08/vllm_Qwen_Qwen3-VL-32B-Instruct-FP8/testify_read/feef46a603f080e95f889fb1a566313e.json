@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows 15 hard drives arranged in a grid, all with HP branding and similar labels.",
+      "Photo 1 shows a close-up of one drive with a white label. The label reads: 'HP 1TB 7200rpm SAS', 'HP MODEL: MM1000FBVR', 'HP P/N: 605832-002', 'GPN: 507129-016', 'DOM: 04/2012', 'SN: 9XG1F8J2'.",
+      "Photo 2 shows the circuit board side of the drive, with a green PCB, a central capacitor, and a SAS connector at the bottom.",
+      "All drives appear to be 2.5-inch form factor, consistent with server-grade SAS drives.",
+      "The label in photo 1 includes a handwritten 'CH4' mark, possibly a stock or lot identifier.",
+      "The watermark 'L.G SERVERTECH POSTED ON JIJI' is visible on all photos, indicating a reseller or distributor."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "1TB 2.5-inch SAS hard drive",
+      "brand": "HP",
+      "model": "MM1000FBVR",
+      "read_from": [
+        "photo 1 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP 1TB 7.2K 2.5 SAS HDD",
+        "verdict": "supported",
+        "evidence": "Photo 1 label clearly states '1TB 7200rpm SAS' and the drive is 2.5-inch form factor."
+      },
+      {
+        "claim": "605832-002",
+        "verdict": "supported",
+        "evidence": "Photo 1 label shows 'HP P/N: 605832-002'."
+      },
+      {
+        "claim": "507129-016",
+        "verdict": "supported",
+        "evidence": "Photo 1 label shows 'GPN: 507129-016'."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Drive may be faulty or have bad sectors, as no functional test is shown.",
+        "proof": "A video showing the drive spinning up and being recognized by a system, or a SMART report.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Drive may have been repurposed or rebranded from another manufacturer (e.g., Seagate), as the label states 'HDG Manufactured by Seagate Technology LLC'.",
+        "proof": "A close-up of the PCB or firmware version that confirms the original manufacturer and firmware integrity.",
+        "if_unproven": "priced as generic rebranded drive"
+      },
+      {
+        "risk": "Drive may be used in a server environment and have high wear, especially given the 2012 manufacturing date.",
+        "proof": "A SMART report showing power-on hours, reallocated sectors, and other health metrics.",
+        "if_unproven": "priced as high-mileage used drive"
+      }
+    ],
+    "proof_requests": [
+      "A SMART report or video of the drive being tested in a system.",
+      "A close-up of the PCB or firmware version to confirm original manufacturer and firmware.",
+      "Confirmation of the drive's health and usage history."
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identified as an HP MM1000FBVR 1TB 2.5-inch SAS drive with supported part numbers. While there are risks related to age and condition, the identity is confirmed and the item can be priced at its worst-case condition (as not working or high-mileage) until further proof is provided."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 69675,
+    "input_tokens": 2555,
+    "output_tokens": 864,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "feef46a603f080e95f889fb1a566313e",
+    "error": null
+  }
+}

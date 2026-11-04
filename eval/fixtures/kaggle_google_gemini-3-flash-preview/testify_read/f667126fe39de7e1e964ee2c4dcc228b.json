@@ -1,0 +1,67 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail box for a Marsriva Smart Mini DC UPS.",
+      "The model 'KP7 Pro' is clearly printed on the box.",
+      "Specifications on the box include a 76.8Wh LiFePO4 battery and 100W output.",
+      "The actual device is not visible; only the packaging is shown being held by a hand.",
+      "A watermark for 'TECHNOVA' on Jiji is visible."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "Mini DC UPS",
+      "brand": "MARSRIVA",
+      "model": "KP7 Pro",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Battery: 24,000mAh (76.8Wh) high-capacity LiFePO4 batteries",
+        "verdict": "supported",
+        "evidence": "photo 0 box confirms 76.8Wh; 24,000mAh is the equivalent capacity at 3.2V."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, inferior item.",
+        "proof": "Photo of the actual device outside of the box.",
+        "if_unproven": "cannot be priced"
+      },
+      {
+        "risk": "The internal battery may be degraded or non-functional.",
+        "proof": "Video of the device powering a router or similar load while disconnected from mains power.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Required DC cables and the AC power lead may be missing.",
+        "proof": "Photo of all included accessories spread out.",
+        "if_unproven": "as missing all cables"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual UPS device out of the box showing its condition.",
+      "Photo of the rear ports of the device.",
+      "Photo of all included accessories and cables.",
+      "Video showing the device powered on and functioning."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail packaging is visible. I cannot confirm the presence, condition, or authenticity of the actual device without seeing it."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 11514,
+    "input_tokens": 2401,
+    "output_tokens": 2515,
+    "cost_usd": 0.008745,
+    "replayed": false,
+    "fixture_key": "f667126fe39de7e1e964ee2c4dcc228b",
+    "error": null
+  }
+}

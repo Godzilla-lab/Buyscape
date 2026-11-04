@@ -1,0 +1,109 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "agent:claude",
+  "response": {
+    "observations": [
+      "Photo 0: silver front-loading washing machine on a tiled floor beside a wall, power cable plugged in.",
+      "Photo 0: control panel reads 'LG' and 'INVERTER DirectDrive 6/3kg'; red sticker on the front reads 'Washer+Dryer 2 in 1'; a 'Direct Drive 10 year warranty' sticker on the right; exact model code is too small to read.",
+      "Photo 0: the programme dial ring is lit orange and the digital display shows digits, so the machine powers on.",
+      "Photo 0: programme list includes Dry Only and Wash+Dry, and a separate Dry dial on the right, consistent with a washer dryer.",
+      "Photo 0: visible wear: the 2 in 1 sticker is peeling and torn, scuffs and marks on the door trim and lower panel, dirt around the base; clothes are inside the drum.",
+      "Only one photo; no clip of a wash, spin or dry cycle, no receipt or warranty card shown."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "front load washer dryer 2 in 1, 6kg wash / 3kg dry",
+      "brand": "LG",
+      "model": "Inverter DirectDrive 6/3kg washer dryer (exact model code not legible)",
+      "read_from": [
+        "photo 0 control panel 'LG' and 'INVERTER DirectDrive 6/3kg'",
+        "photo 0 front sticker 'Washer+Dryer 2 in 1'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "LG washing machine",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows the LG logo and 'INVERTER DirectDrive 6/3kg' on the panel; it is a washer dryer."
+      },
+      {
+        "claim": "Scrap, doesn't work and needs repair",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows it powers on (lit dial and display), but no clip shows whether it washes, spins or dries; it is priced as not working, as the seller says."
+      },
+      {
+        "claim": "Barely used",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows a peeling, torn front sticker, scuffs on the door trim and lower panel and dirt at the base, signs of long use."
+      },
+      {
+        "claim": "Bought new last year",
+        "verdict": "unverified",
+        "evidence": "No receipt shown; the wear in photo 0 does not fit a machine bought new last year."
+      },
+      {
+        "claim": "No fault at all",
+        "verdict": "contradicted",
+        "evidence": "The seller's own words say it doesn't work and needs repair; no running clip."
+      },
+      {
+        "claim": "The motor was never opened",
+        "verdict": "unverifiable_remote",
+        "evidence": "The motor is behind the back panel and cannot be seen; tamper evidence would need the back panel screws photographed."
+      },
+      {
+        "claim": "Receipt and warranty card available",
+        "verdict": "unverified",
+        "evidence": "Neither is shown in the photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Machine does not wash, spin or dry (seller says it needs repair); fault could be control board, motor or pump.",
+        "proof": "Clip of a full short cycle: fill, drum rotation, drain, spin, and the dry function heating.",
+        "if_unproven": "as not working, scrap or repair unit"
+      },
+      {
+        "risk": "Error code on the display pointing to a serious fault.",
+        "proof": "Close photo of the display after starting a cycle, showing any error code.",
+        "if_unproven": "as having a major fault"
+      },
+      {
+        "risk": "Drum bearings, door gasket or door lock damaged.",
+        "proof": "Photo with the door open showing the gasket folded back and a clip of the drum turned by hand.",
+        "if_unproven": "as needing bearing and gasket repair"
+      },
+      {
+        "risk": "Parts removed or motor tampered with inside.",
+        "proof": "Photos of the back panel with screws and of the rating plate.",
+        "if_unproven": "as incomplete, parts missing"
+      },
+      {
+        "risk": "Age and model uncertain; claimed recent purchase not proven.",
+        "proof": "Photo of the receipt and warranty card matching the serial on the rating plate.",
+        "if_unproven": "as an old unit of the earliest model in this range"
+      }
+    ],
+    "proof_requests": [
+      "Clip of the machine running a short wash and spin cycle with the display visible, showing any error code.",
+      "Close photo of the rating plate with model and serial.",
+      "Photo of the receipt and warranty card next to the rating plate.",
+      "Photos of the back panel and the open door with the gasket folded back."
+    ],
+    "decision": "price",
+    "reason": "Photo 0 reads an LG Inverter DirectDrive 6/3kg washer dryer, so it can be priced; the seller's words contradict each other and the wear contradicts 'barely used', so it is priced at the worst case the seller states: not working, for repair or scrap."
+  },
+  "meta": {
+    "provider": "sitting",
+    "model": "agent:claude",
+    "task": "testify_read",
+    "latency_ms": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "d6da2b5097d0f7ffdec032b6a7bcef7c",
+    "error": null
+  }
+}

@@ -1,0 +1,108 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Silver laptop open, screen on showing a desktop with a landscape wallpaper. Keyboard is black with white lettering. HP logo visible on the lower bezel of the screen. Touchpad is silver. The laptop is placed on a carpeted surface next to a white wall with a wooden trim.",
+      "Photo 1: Same laptop from a slightly different angle, showing the top of the keyboard and the screen. The HP logo is visible on the lower bezel. The keyboard has a backlit appearance, but no backlight is active in the photo. The screen shows the same desktop wallpaper. The laptop is silver with black keys.",
+      "Photo 2: Bottom of the laptop, silver, with a label in the center. The label is partially visible but not readable. There are ports on the left side, including what appears to be a USB port and an HDMI port. The laptop is resting on a carpeted surface next to a white wall with wooden trim."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "EliteBook 840 G6",
+      "read_from": [
+        "photo 0 screen bezel (HP logo)",
+        "photo 1 screen bezel (HP logo)",
+        "seller's text (HP elitebook 840 g6)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP elitebook 840 g6",
+        "verdict": "supported",
+        "evidence": "HP logo visible on screen bezel in photo 0 and photo 1; seller's text matches known model."
+      },
+      {
+        "claim": "16gb",
+        "verdict": "unverifiable_remote",
+        "evidence": "No system information or BIOS screen shown; RAM not visible in photos."
+      },
+      {
+        "claim": "256ssd",
+        "verdict": "unverifiable_remote",
+        "evidence": "No disk management or system info shown; storage not visible in photos."
+      },
+      {
+        "claim": "core i7",
+        "verdict": "unverifiable_remote",
+        "evidence": "No CPU info visible; no system specs shown in photos."
+      },
+      {
+        "claim": "keyboard light",
+        "verdict": "unverified",
+        "evidence": "Keyboard appears to have backlighting capability (backlit keys), but no photo shows it lit. No evidence of backlight being active."
+      },
+      {
+        "claim": "everything working perfectly fine",
+        "verdict": "unverified",
+        "evidence": "Screen is on, but no proof of functionality of ports, webcam, battery, or internal components. No video or system test shown."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "RAM is not 16GB",
+        "proof": "Photo of system properties or BIOS showing RAM size.",
+        "if_unproven": "priced as 8GB or lower, which reduces value significantly."
+      },
+      {
+        "risk": "Storage is not 256GB SSD",
+        "proof": "Photo of disk management or BIOS showing storage type and size.",
+        "if_unproven": "priced as HDD or smaller SSD, which reduces value."
+      },
+      {
+        "risk": "CPU is not Core i7",
+        "proof": "Photo of system properties or BIOS showing CPU model.",
+        "if_unproven": "priced as lower-tier CPU (e.g., i5), which reduces value."
+      },
+      {
+        "risk": "Keyboard backlight does not work",
+        "proof": "Photo showing keyboard with backlight turned on.",
+        "if_unproven": "priced as non-backlit keyboard, which reduces value."
+      },
+      {
+        "risk": "Battery does not hold charge or is missing",
+        "proof": "Photo of battery status in Windows or BIOS, or video showing battery life test.",
+        "if_unproven": "priced as battery not working or missing, which reduces value."
+      },
+      {
+        "risk": "Ports or webcam not functional",
+        "proof": "Video or photo showing ports in use (e.g., USB device connected, HDMI output) or webcam test.",
+        "if_unproven": "priced as having non-functional ports or webcam, which reduces value."
+      }
+    ],
+    "proof_requests": [
+      "Photo of system properties or BIOS showing RAM, CPU, and storage details.",
+      "Photo of keyboard with backlight turned on.",
+      "Photo or video showing battery status and charge level.",
+      "Photo or video showing ports in use (e.g., USB device connected, HDMI output).",
+      "Photo of the bottom label (if readable) or serial number for verification."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identifiable as HP EliteBook 840 G6, but critical specifications (RAM, SSD, CPU) and functionality claims (keyboard light, everything working) cannot be verified from the photos. Without proof of these, the item cannot be priced accurately and risks being misvalued."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 87720,
+    "input_tokens": 2167,
+    "output_tokens": 1110,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "ecd55f62211018418d4bb500589f632e",
+    "error": null
+  }
+}

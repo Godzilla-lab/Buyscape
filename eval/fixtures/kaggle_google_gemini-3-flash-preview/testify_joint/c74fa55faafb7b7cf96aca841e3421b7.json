@@ -1,0 +1,75 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Multiple stacks of used tires in an outdoor market environment.",
+      "Photo 0 and Photo 2 are identical images.",
+      "Handwritten markings such as 'YES', 'NO', and 'OK' are visible on several tire sidewalls.",
+      "Tread patterns vary significantly between stacks, indicating different brands and purposes.",
+      "Background shows a large inventory of alloy rims and additional tire stacks.",
+      "No specific brand names, models, or size specifications (e.g., 205/55R16) are legible on any tire sidewall."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used tires",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0",
+        "photo 1"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "First grade",
+        "verdict": "unverified",
+        "evidence": "Requires close-up inspection of tread depth and sidewall condition for each specific tire."
+      },
+      {
+        "claim": "Belgium tires",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a local trade term for imported used tires; the specific port of origin cannot be confirmed from photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Incorrect size for the buyer's vehicle.",
+        "proof": "A clear photo of the sidewall showing the size markings (e.g., 195/65 R15).",
+        "if_unproven": "priced as the smallest/cheapest standard passenger car size."
+      },
+      {
+        "risk": "Tires are expired or dangerously old.",
+        "proof": "A photo of the 4-digit DOT date code on the sidewall.",
+        "if_unproven": "priced as expired/scrap value."
+      },
+      {
+        "risk": "Hidden structural damage such as bulges or internal patches.",
+        "proof": "A photo of the tire's interior casing and a video of it inflated on a rim.",
+        "if_unproven": "priced as having internal defects."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the sidewall showing the tire size for the specific tires being sold.",
+      "Photo of the 4-digit DOT manufacturing date code.",
+      "Close-up photo of the tread depth using a coin or gauge for scale.",
+      "Photo of the inside of the tire to check for previous repairs or patches."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photos show a general yard inventory rather than a specific set of tires. Because tire value is determined by size, brand, and age (DOT code), none of which are visible, even a worst-case price cannot be accurately assigned.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_joint",
+    "latency_ms": 21547,
+    "input_tokens": 4909,
+    "output_tokens": 4974,
+    "cost_usd": 0.017376,
+    "replayed": false,
+    "fixture_key": "c74fa55faafb7b7cf96aca841e3421b7",
+    "error": null
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a carton label reading MARKS: UGOCHUKWU, GEARBOX, TYPE: WP060-20-B, RATIO: 20:1, COLOR: GREEN COLOR",
+      "Photo 1 shows a green gearbox inside an open carton, wrapped in clear plastic with a yellow sticker",
+      "The brand name Radicom is not visible in either photo",
+      "The gearbox is sealed in plastic, so its internal condition and function cannot be inspected"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "gearbox",
+      "brand": null,
+      "model": "WP060-20-B",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Radicom gear box",
+        "verdict": "unverified",
+        "evidence": "Brand Radicom is not visible in photo 0 label or photo 1"
+      },
+      {
+        "claim": "size 60",
+        "verdict": "supported",
+        "evidence": "Photo 0 label reads TYPE: WP060-20-B"
+      },
+      {
+        "claim": "for production of fufu and different machine etc",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photos show only the gearbox, not its application"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The gearbox may be damaged or non-functional inside sealed plastic",
+        "proof": "Video of the gearbox running or the output shaft turning by hand",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The brand may not be Radicom",
+        "proof": "Close-up photo of the manufacturer nameplate on the gearbox",
+        "if_unproven": "as an unbranded gearbox"
+      },
+      {
+        "risk": "The ratio or model on the gearbox itself may not match the carton label",
+        "proof": "Close-up photo of the gearbox nameplate showing WP060-20-B and 20:1",
+        "if_unproven": "as unknown specification"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the gearbox nameplate or brand plate",
+      "Video of the gearbox running with the output shaft turning",
+      "Clear photo of the full specification label on the gearbox body"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a green WP060-20-B gearbox, ratio 20:1, packed in a carton; even with unproven brand and untested function, it can be priced at its worst case."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 29911,
+    "input_tokens": 1868,
+    "output_tokens": 4013,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "a7a9c288c0ac4e6679002fe2f499c974",
+    "error": null
+  }
+}

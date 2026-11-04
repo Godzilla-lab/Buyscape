@@ -1,0 +1,99 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Dark gray laptop with HP logo visible on lid, backlit keyboard illuminated in blue, placed on plastic sheet on tiled floor.",
+      "Photo 1: Laptop open, screen on showing a colorful wallpaper, backlit keyboard visible, Jiji watermark present.",
+      "Photo 2: Side view of laptop, screen partially closed, backlit keyboard visible, Jiji watermark in corner.",
+      "No visible model label or serial number in any photo.",
+      "No clear view of ports, hinges, or underside.",
+      "No power adapter or accessories shown."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": null,
+      "read_from": [
+        "photo 0 lid logo"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "product- hp",
+        "verdict": "supported",
+        "evidence": "HP logo visible on lid in photo 0."
+      },
+      {
+        "claim": "model- spectre x360 15",
+        "verdict": "unverified",
+        "evidence": "No model label visible in any photo. Logo only confirms HP brand, not specific model."
+      },
+      {
+        "claim": "ram- 16gb",
+        "verdict": "unverifiable_remote",
+        "evidence": "No system information or BIOS screen shown. Cannot verify RAM from photos alone."
+      },
+      {
+        "claim": "storage -...",
+        "verdict": "unverifiable_remote",
+        "evidence": "Storage type and size not visible. No disk management or system info shown."
+      },
+      {
+        "claim": "u.S used laptop",
+        "verdict": "unverified",
+        "evidence": "Photos show a used laptop, but 'u.S' is unclear\u2014possibly 'U.S.' meaning USA origin. No proof of origin or condition beyond surface wear."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Model is not Spectre x360 15 as claimed",
+        "proof": "Photo of model label or serial number on bottom of laptop or inside lid.",
+        "if_unproven": "Priced as generic HP laptop, not Spectre x360 15, which affects value."
+      },
+      {
+        "risk": "RAM is not 16GB",
+        "proof": "Screenshot of system information or BIOS showing RAM details.",
+        "if_unproven": "Priced as lower RAM configuration, e.g., 8GB, reducing value."
+      },
+      {
+        "risk": "Storage is not as claimed (e.g., SSD vs HDD, size)",
+        "proof": "Screenshot of disk management or system info showing storage type and size.",
+        "if_unproven": "Priced as lower-tier storage, e.g., 256GB HDD, reducing value."
+      },
+      {
+        "risk": "Laptop has hidden damage (hinges, screen, ports)",
+        "proof": "Close-up of hinges, ports, and screen edges from multiple angles.",
+        "if_unproven": "Priced as potentially damaged, reducing value."
+      },
+      {
+        "risk": "Battery health is poor or not included",
+        "proof": "Screenshot of battery health or video showing battery charging and runtime.",
+        "if_unproven": "Priced as battery not working or degraded, reducing value."
+      }
+    ],
+    "proof_requests": [
+      "Photo of model label or serial number on bottom of laptop.",
+      "Screenshot of system information showing RAM and storage details.",
+      "Close-up of all ports and hinges.",
+      "Video of laptop turning on, keyboard, screen, and battery charging.",
+      "Photo of power adapter if included."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and specifications cannot be verified from current photos. The laptop is identified as HP by logo, but the claimed model (Spectre x360 15) and specs (16GB RAM, storage) are unverified. Hidden risks include incorrect model, lower specs, and physical damage. Proof is needed to price accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 71577,
+    "input_tokens": 2414,
+    "output_tokens": 911,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "0c21e3f1abf6c0bfb321f553e7f6d1d4",
+    "error": null
+  }
+}

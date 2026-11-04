@@ -1,0 +1,65 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a solar panel leaning against a wall, with a silver aluminum frame and dark blue photovoltaic cells arranged in a grid.",
+      "The panel has a watermark 'INNOSON GLOBAL GROUP' overlaid on the image.",
+      "The panel appears to be in good physical condition with no visible cracks or damage to the cells.",
+      "The frame is intact, and the panel is standing upright with other similar panels visible to the left and right.",
+      "No brand or model label is visible on the front or frame of the panel in the photo."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "High Quality Solar Panels",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows a clean, intact panel, but no certification, brand, or model is visible to verify quality. The watermark 'INNOSON GLOBAL GROUP' is a seller watermark, not a product brand."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Panel may be damaged or defective internally (e.g., microcracks, delamination, or poor cell performance) not visible in the photo.",
+        "proof": "A close-up photo of the panel's backside showing the junction box and wiring, and a video of the panel under sunlight with a multimeter reading voltage and current.",
+        "if_unproven": "priced as potentially defective or low-efficiency"
+      },
+      {
+        "risk": "Panel may be counterfeit or rebranded with no warranty or performance guarantee.",
+        "proof": "Photo of the panel's label or nameplate showing brand, model, power rating, and certification (e.g., IEC, CE, TUV).",
+        "if_unproven": "priced as unbranded or generic, with lower value"
+      },
+      {
+        "risk": "Panel may not be suitable for the buyer's system (e.g., voltage mismatch, size, or compatibility with inverters).",
+        "proof": "Photo of the panel's nameplate or label showing voltage, current, and power rating.",
+        "if_unproven": "priced as unknown specification, reducing value"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the back of the solar panel showing the nameplate with brand, model, power rating, and certifications.",
+      "Close-up photo of the junction box and wiring.",
+      "Video of the panel under sunlight with a multimeter reading voltage and current.",
+      "Photo of the panel's frame and edges to check for damage or corrosion."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a solar panel, but critical details like brand, model, power rating, and certifications are missing. Without proof of these, the quality and value cannot be determined, and hidden risks like internal damage or counterfeit status affect pricing. The seller's claim of 'High Quality' is unverified."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 56680,
+    "input_tokens": 1786,
+    "output_tokens": 666,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "723f13599c1a8afef98c02668e546af9",
+    "error": null
+  }
+}

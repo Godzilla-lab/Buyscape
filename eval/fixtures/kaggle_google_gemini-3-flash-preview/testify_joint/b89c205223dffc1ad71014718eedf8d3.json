@@ -1,0 +1,71 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Four-cylinder petrol engine shown in a storage or shop environment.",
+      "The valve cover in photo 0 has 'HYUNDAI' and 'KIA' embossed on it.",
+      "Four black ignition coils are visible on top of the engine.",
+      "An alternator and various pulleys are attached to the front of the block.",
+      "The oil filler cap is positioned on the right side of the valve cover.",
+      "A yellow dipstick handle is visible near the center."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "4-cylinder engine",
+      "brand": "Hyundai / Kia",
+      "model": null,
+      "read_from": [
+        "photo 0 valve cover"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Hyundai kia engine",
+        "verdict": "supported",
+        "evidence": "The logos for both brands are clearly visible on the valve cover in photo 0."
+      },
+      {
+        "claim": "4cylinder",
+        "verdict": "supported",
+        "evidence": "Four distinct ignition coils are visible in photo 0, confirming a 4-cylinder configuration."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Internal mechanical condition is unknown (e.g., seized, low compression, or sludge).",
+        "proof": "A video of the engine being hand-cranked or a compression test report.",
+        "if_unproven": "as not working (scrap or core value)"
+      },
+      {
+        "risk": "Exact displacement and vehicle compatibility are unverified (e.g., 2.0L vs 2.4L).",
+        "proof": "A clear photo of the engine model code (e.g., G4KD) stamped on the engine block.",
+        "if_unproven": "as the lowest-value 4-cylinder variant"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the engine model code stamped on the metal of the engine block.",
+      "Video showing the engine being turned over by hand to ensure it is not seized.",
+      "Photo of the engine with the oil cap removed to check for sludge buildup."
+    ],
+    "decision": "price",
+    "reason": "The engine is identifiable as a Hyundai/Kia 4-cylinder unit from the manufacturer markings and visible components. It can be priced using the range for similar engines, though it must be valued at the low end due to unverified internal condition.",
+    "price_pick": {
+      "low": 3,
+      "high": 8
+    }
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_joint",
+    "latency_ms": 26540,
+    "input_tokens": 4425,
+    "output_tokens": 5242,
+    "cost_usd": 0.017938,
+    "replayed": false,
+    "fixture_key": "b89c205223dffc1ad71014718eedf8d3",
+    "error": null
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Black UPS unit with a blue vertical accent on the front panel.",
+      "Brand 'BLUE GATE' is embossed on the front (Photo 0, 1).",
+      "Front panel features a power button and three LED indicators.",
+      "Attached power cord with a standard 3-pin plug is visible (Photo 1).",
+      "The unit shows signs of use, including dust and minor surface scuffs.",
+      "No specification sticker or model number is visible in the provided shots."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "UPS",
+      "brand": "BLUE GATE",
+      "model": null,
+      "read_from": [
+        "photo 0 front",
+        "photo 1 front"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "UPS available",
+        "verdict": "supported",
+        "evidence": "photo 0 shows a Blue Gate UPS unit."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Unknown capacity (VA rating)",
+        "proof": "A photo of the specification sticker on the back or bottom of the unit.",
+        "if_unproven": "priced as the lowest capacity model (650VA)"
+      },
+      {
+        "risk": "Dead or degraded internal battery",
+        "proof": "A video showing the UPS powering a load (like a lamp) while the main power cord is unplugged.",
+        "if_unproven": "as not working/requiring battery replacement"
+      },
+      {
+        "risk": "Blown internal fuse or circuitry failure",
+        "proof": "A photo of the unit powered on with the 'Line' or 'Battery' LED lit.",
+        "if_unproven": "as scrap/not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the specification label on the back or bottom showing the VA rating and model number.",
+      "Video of the unit turned on and supporting a load while unplugged from the wall socket."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The brand is clear, but the capacity (VA rating) which determines the price is not visible. A photo of the rear label is needed to identify the model."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 6857,
+    "input_tokens": 3414,
+    "output_tokens": 1295,
+    "cost_usd": 0.005592,
+    "replayed": false,
+    "fixture_key": "4b248ace781508ac5a4c2ce7dd56e639",
+    "error": null
+  }
+}

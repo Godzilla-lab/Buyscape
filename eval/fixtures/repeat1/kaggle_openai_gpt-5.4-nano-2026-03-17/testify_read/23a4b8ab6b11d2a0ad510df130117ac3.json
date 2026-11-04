@@ -1,0 +1,74 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0 shows a rectangular solar PV panel with a grid of blue cells and a white frame.",
+      "No visible brand/model text is readable on the panel in the photo.",
+      "No label/rating plate (watts, voltage, current, cell count) is visible in the photo.",
+      "The panel appears to be a used/installed unit (no obvious new packaging; surface looks like it has been handled)."
+    ],
+    "identity": {
+      "status": "unknown",
+      "kind": "solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "It's original 650 Watts 144 cell direct Canadian used solar panel",
+        "verdict": "unverified",
+        "evidence": "Photo 0 does not show a rating label or any readable text confirming wattage (650W) or cell count (144) or origin (Canadian)."
+      },
+      {
+        "claim": "Built to serve u",
+        "verdict": "unverifiable_remote",
+        "evidence": "Seller text is vague; photo 0 does not show performance/testing."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Wattage/cell count may not match the claimed 650W/144 cells (could be a different size/rating).",
+        "proof": "A clear close-up photo of the panel\u2019s junction box label/rating plate showing Wp, Voc, Isc, and cell count/model.",
+        "if_unproven": "Price as a generic used solar panel with unknown rating (worst-case: lower wattage than claimed)."
+      },
+      {
+        "risk": "Used condition may include microcracks, delamination, or damaged cells that reduce output.",
+        "proof": "Photos of the full panel front and back (including frame corners) plus an IV curve test or at least a power test reading under sun.",
+        "if_unproven": "Price as not guaranteed to meet rated output (worst-case: reduced performance)."
+      },
+      {
+        "risk": "Electrical condition may be faulty (bypass diode failure, open circuit, loose connections).",
+        "proof": "Continuity check of output leads and a multimeter reading of Voc/Isc (or a proper solar tester/IV test).",
+        "if_unproven": "Price as not working/uncertain until tested."
+      },
+      {
+        "risk": "Compatibility risk: connector type and cable length may not match the buyer\u2019s system.",
+        "proof": "Photo of the junction box and connector type (MC4 or other) and a shot showing cable length and polarity markings.",
+        "if_unproven": "Price assuming buyer may need adapters/cabling."
+      }
+    ],
+    "proof_requests": [
+      "Clear close-up of the rating label/junction box sticker showing: brand/model, Wp (watts), Voc, Isc, and cell count.",
+      "Full front and full back photos (including corners and any visible damage).",
+      "A power test/IV curve screenshot or measured Voc/Isc readings under test conditions.",
+      "Photo of the junction box and connector type (e.g., MC4) plus cable length."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo shows a solar panel, but it does not provide readable rating details to confirm the claimed 650W/144-cell specification or electrical condition. Without the label and a test, the correct worst-case pricing cannot be set confidently."
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_read",
+    "latency_ms": 5302,
+    "input_tokens": 1451,
+    "output_tokens": 766,
+    "cost_usd": 0.001248,
+    "replayed": false,
+    "fixture_key": "23a4b8ab6b11d2a0ad510df130117ac3",
+    "error": null
+  }
+}

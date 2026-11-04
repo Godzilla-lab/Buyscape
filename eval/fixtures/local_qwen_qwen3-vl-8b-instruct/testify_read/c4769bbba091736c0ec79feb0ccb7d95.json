@@ -1,0 +1,80 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-8b-instruct",
+  "response": {
+    "observations": [
+      "Photo 0: Large yellow engine block with visible wear and grime. A white fuel filter is attached. A label with 'CATERPILLAR' is visible on the top of the engine. Text overlay: 'DNL EQUIPMENT SALES AND POSTED ON JI'.",
+      "Photo 1: Top view of engine with black plastic cover. 'CAT' logo is visible on the cover. Text overlay: 'DNL EQUIPMENT SALES AND POSTED ON JI'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "engine",
+      "brand": "Caterpillar",
+      "model": "C9",
+      "read_from": [
+        "photo 0 label",
+        "photo 1 cover"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Complete Caterpillar C9 engine (parts)",
+        "verdict": "supported",
+        "evidence": "photo 0 label, photo 1 cover"
+      },
+      {
+        "claim": "Tokunbo, direct from Belgium",
+        "verdict": "unverifiable_remote",
+        "evidence": "no photo or text confirms origin or import status"
+      },
+      {
+        "claim": "Tested and working, no knock, low mileage, never opened",
+        "verdict": "unverified",
+        "evidence": "no photo or text shows test results, mileage, or that it was never opened"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The engine is not actually a complete unit but a collection of parts.",
+        "proof": "photo showing all components assembled as a single unit with no missing parts.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The engine has high mileage or has been previously used.",
+        "proof": "photo showing engine serial number or service history.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The engine has a knock or mechanical issues.",
+        "proof": "photo showing engine running smoothly or test report.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The engine is not from Belgium or is not a genuine Caterpillar C9.",
+        "proof": "photo showing import documentation or original packaging.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo showing all parts assembled as a single unit.",
+      "Photo showing engine serial number or service history.",
+      "Photo showing engine running smoothly or test report.",
+      "Photo showing import documentation or original packaging."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller's claims about the engine's condition and origin cannot be verified from the photos. The engine appears to be a used unit with visible wear, and there is no proof of its working condition, mileage, or origin. The price must be based on the worst-case scenario until proof is provided."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-8b-instruct",
+    "task": "testify_read",
+    "latency_ms": 7685,
+    "input_tokens": 1875,
+    "output_tokens": 650,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "c4769bbba091736c0ec79feb0ccb7d95",
+    "error": null
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Single dim indoor photo of a standing fan taken from the front, looking into the wire blade guard.",
+      "Motor hub visible in center of guard, appears dusty/rusted with discoloration.",
+      "Blades not clearly visible through the guard, possibly folded or obscured by shadow.",
+      "No stand, base, pole, cord, or plug visible in the frame.",
+      "No brand name, label, or model sticker is legible anywhere in the photo.",
+      "Background shows a cluttered room with other household items, poor lighting with glare."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "electric standing fan",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 (no legible brand or model text)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "This is a scrap electric standing fan that is currently not functioning properly",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo 0 shows only the front guard; no power-on test, no visible damage to motor or wiring that confirms or contradicts non-function."
+      },
+      {
+        "claim": "Sold as is for parts or recycling",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows disassembly, missing parts, or scrap condition beyond general dust/rust."
+      },
+      {
+        "claim": "Buyer is responsible for pickup",
+        "verdict": "unverifiable_remote",
+        "evidence": "Logistics statement, not a condition claim; nothing in photo confirms or denies."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Stand, pole, and base may be missing or broken, significantly affecting scrap/parts value",
+        "proof": "A full-length photo showing the entire fan from base to head",
+        "if_unproven": "priced as head-only unit without stand"
+      },
+      {
+        "risk": "Cord and plug may be cut, damaged, or missing, which matters for parts value",
+        "proof": "A close-up photo of the power cord and plug",
+        "if_unproven": "priced as without usable cord"
+      },
+      {
+        "risk": "Blades may be cracked, bent, or missing under the guard",
+        "proof": "A photo with the guard opened or removed showing the blades directly",
+        "if_unproven": "priced as blades not confirmed present/intact"
+      },
+      {
+        "risk": "Motor may be seized, burnt, or stripped of copper winding, common in 'scrap' listings",
+        "proof": "A photo or short video of the motor attempting to spin, or motor housing opened",
+        "if_unproven": "priced as non-functional motor, scrap/recycling grade only"
+      },
+      {
+        "risk": "Rust/corrosion visible on hub may indicate water damage or long outdoor storage, reducing even scrap value",
+        "proof": "Wider, well-lit photo of the full motor housing and guard",
+        "if_unproven": "priced at lower end of scrap range"
+      }
+    ],
+    "proof_requests": [
+      "A full-length photo showing the entire fan including base, pole, and head together",
+      "A clear photo of the power cord and plug condition",
+      "A photo or short video attempting to power on the fan, or showing the motor/blades directly with guard removed"
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identifiable as a standing fan by type, and the seller explicitly frames it as scrap/non-functioning, so it can be priced at worst-case scrap/parts value even though several condition details (stand, cord, motor, blades) are not visible."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 18579,
+    "input_tokens": 3014,
+    "output_tokens": 1453,
+    "cost_usd": 0.017399,
+    "replayed": false,
+    "fixture_key": "dffda286af6f7c9549d3ae163c9716c0",
+    "error": null
+  }
+}

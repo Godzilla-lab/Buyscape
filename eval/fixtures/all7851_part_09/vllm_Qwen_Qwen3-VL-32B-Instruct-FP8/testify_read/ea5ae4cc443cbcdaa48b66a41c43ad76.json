@@ -1,0 +1,69 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: A blue laptop with a textured, crocodile-skin-like cover is held open, showing a black screen and keyboard. The keyboard appears to have some keys missing or damaged. The laptop is outdoors on a dirt ground with vehicles in the background.",
+      "Photo 1: The laptop screen displays the Windows 'About' settings page. The device name is 'EMEKE', and the model is listed as 'Dell Latitude E7450'. The system shows 8.00 GB RAM, Intel Core i5-5300U CPU, 128 MB graphics card, and 239 GB storage. The screen is clear and functional.",
+      "Photo 2: The closed laptop is shown from the top, displaying the same blue textured cover. The surface has visible scratches and wear. The background is the same outdoor dirt area with vehicles."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Dell",
+      "model": "Latitude E7450",
+      "read_from": [
+        "photo 1 screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Dell latitude e7450",
+        "verdict": "supported",
+        "evidence": "Photo 1 screen clearly shows 'Dell Latitude E7450' under Device specifications."
+      },
+      {
+        "claim": "Only the keyboard is faulty",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows the keyboard with possible missing or damaged keys, but no functional test is shown. The screen works (photo 1), but keyboard functionality is not demonstrated."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Keyboard may be non-functional or have multiple faulty keys beyond what is visible",
+        "proof": "A video showing the keyboard being typed on, or a close-up photo of each key with labels indicating which keys are not working.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The laptop may have hidden hardware issues (e.g., battery, ports, cooling, or internal damage) not visible in photos",
+        "proof": "A video showing the laptop powering on, charging, connecting to peripherals, and running for a few minutes without overheating.",
+        "if_unproven": "priced as potentially non-functional or with unknown defects"
+      },
+      {
+        "risk": "The textured blue cover may be a non-original skin or case, possibly hiding damage to the original chassis",
+        "proof": "A photo of the bottom of the laptop showing the original Dell label or serial number, or a photo of the laptop without the cover.",
+        "if_unproven": "priced as having unknown condition of original body"
+      }
+    ],
+    "proof_requests": [
+      "Video of the keyboard being used to type, showing which keys are faulty.",
+      "Video of the laptop powering on, charging, and running for a few minutes.",
+      "Photo of the bottom of the laptop showing the original Dell label or serial number."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is confirmed as Dell Latitude E7450 from the screen, but the claim that 'only the keyboard is faulty' is unverified. The keyboard's condition and functionality cannot be confirmed from photos alone. Hidden risks include unknown hardware issues and the condition of the original chassis under the cover. Proof is needed to assess the true condition and price accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 66631,
+    "input_tokens": 2876,
+    "output_tokens": 764,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "ea5ae4cc443cbcdaa48b66a41c43ad76",
+    "error": null
+  }
+}

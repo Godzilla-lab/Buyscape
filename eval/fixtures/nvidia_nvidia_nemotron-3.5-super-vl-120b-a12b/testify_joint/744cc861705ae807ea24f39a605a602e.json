@@ -1,0 +1,76 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Large framed photovoltaic module lying flat with white frame and blue cells visible",
+      "Watermark \"NAGOTECH SOLAR\" across the center of the image",
+      "Camera watermark \"CAMON 30\" at bottom left and exposure settings at bottom right",
+      "No readable brand label, wattage rating, or cell count visible on the panel in the photo",
+      "No battery is visible in the photo",
+      "Person standing nearby holding a blue basin"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "original 650 Watts 144 cell direct Canadian used solar panel",
+        "verdict": "unverifiable_remote",
+        "evidence": "No label, spec sheet, or branding readable on the panel in photo 0"
+      },
+      {
+        "claim": "Battery is new, holds charge for 8 hours. Never repaired.",
+        "verdict": "unverifiable_remote",
+        "evidence": "No battery appears in photo 0"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual wattage, cell count, and brand are unproven; the panel may be lower specification than claimed",
+        "proof": "Close-up photo of the manufacturer label on the panel frame or backsheet",
+        "if_unproven": "as an unverified used panel of unknown wattage"
+      },
+      {
+        "risk": "Battery is not shown and may not be included, may not hold charge, or may be faulty",
+        "proof": "Photo of the battery and a video of it charging and discharging under load",
+        "if_unproven": "panel only, with no battery value"
+      },
+      {
+        "risk": "Physical defects such as cell cracks, delamination, or junction box damage are not visible",
+        "proof": "Close-up video of the cell surface, panel edges, and junction box",
+        "if_unproven": "as damaged or non-working"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of the manufacturer label showing wattage, cell count, and brand",
+      "Photo of the battery if it is part of the sale",
+      "Video of the panel output under sunlight or a load test"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a used solar panel from photo 0, so it can be priced at its worst case even though the seller's wattage, brand, and battery claims cannot be verified remotely.",
+    "price_pick": {
+      "low": 0,
+      "high": 7
+    }
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_joint",
+    "latency_ms": 26172,
+    "input_tokens": 2503,
+    "output_tokens": 3599,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "744cc861705ae807ea24f39a605a602e",
+    "error": null
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "White front-loading washing machine",
+      "LG logo top left of control panel",
+      "Inverter DirectDrive 7kg printed below logo",
+      "Control dial, buttons and digital display visible",
+      "Rust stains along bottom front edge",
+      "Seller text claims 8kg but machine panel shows 7kg"
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "front load washing machine",
+      "brand": "LG",
+      "model": "DirectDrive 7kg",
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "LG DirectDrive 7kg washing machine",
+        "verdict": "supported",
+        "evidence": "photo 0 shows LG logo and DirectDrive 7kg text on the panel"
+      },
+      {
+        "claim": "It is the 8kg one",
+        "verdict": "contradicted",
+        "evidence": "photo 0 shows 7kg printed on the machine"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Machine may not power on or run any cycle",
+        "proof": "video of it running a wash or spin cycle",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Hidden drum, motor or bearing faults",
+        "proof": "video of spin cycle to check noise and movement",
+        "if_unproven": "as faulty"
+      },
+      {
+        "risk": "Water inlet or drain leaks",
+        "proof": "video of water filling and pumping out",
+        "if_unproven": "as leaking"
+      }
+    ],
+    "proof_requests": [
+      "Video of the machine powering on and completing a spin cycle",
+      "Close-up photo of the rating plate or serial label",
+      "Video of water entering and draining from the machine"
+    ],
+    "decision": "price",
+    "reason": "The machine is identifiable as an LG DirectDrive 7kg front loader from photo 0, and the seller's 8kg claim is contradicted by the visible 7kg marking; it can be priced at worst case as a non-working 7kg LG washer.",
+    "price_pick": {
+      "low": 1,
+      "high": 1
+    }
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_joint",
+    "latency_ms": 19232,
+    "input_tokens": 2942,
+    "output_tokens": 3669,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "88c298e7de714ba5ac754f8133488952",
+    "error": null
+  }
+}

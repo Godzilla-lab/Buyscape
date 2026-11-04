@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows what appears to be 2-3 solar panels leaning together against an outdoor wall, standing on tiled/paved ground.",
+      "Panels have aluminum frames, blue-black cells arranged in a grid, with a visible split/half-cut cell pattern typical of higher-wattage monocrystalline panels.",
+      "A junction box with cables is visible on the back of the front panel.",
+      "No manufacturer label, model sticker, or wattage rating is legible anywhere in the photo.",
+      "Frames show no obvious dents; glass surface shows reflections but no visible cracks in this resolution.",
+      "Background is an outdoor compound wall, not a shop or warehouse setting."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "mono solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Original 550w mono solar panels",
+        "verdict": "unverifiable_remote",
+        "evidence": "No wattage/spec sticker or brand label is visible or legible in photo 0; cell pattern is consistent with mono half-cut cells but wattage cannot be confirmed from this image."
+      },
+      {
+        "claim": "Mono (monocrystalline)",
+        "verdict": "unverified",
+        "evidence": "Cell color and diamond-cut corners in photo 0 are visually consistent with monocrystalline cells, but this is not conclusive proof."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual rated wattage may be lower than claimed 550w",
+        "proof": "Clear close-up photo of the rating label/sticker on the back of the panel showing Wp, Voc, Isc",
+        "if_unproven": "priced as lowest plausible wattage for this panel size/appearance, not as 550w"
+      },
+      {
+        "risk": "Panel output/performance could be degraded or non-functional (hidden cell cracks, delamination, broken bypass diodes)",
+        "proof": "Video of a multimeter or clamp meter reading voltage/current while panel is in direct sunlight",
+        "if_unproven": "priced as not verified working, i.e. at salvage/non-working risk discount"
+      },
+      {
+        "risk": "Physical condition of frame, back sheet, and junction box could hide cracks or water damage not visible in this single front-angle photo",
+        "proof": "Close-up photos of all four corners, the back sheet, and the junction box/cables",
+        "if_unproven": "priced assuming possible cosmetic/structural defects"
+      },
+      {
+        "risk": "Unclear how many panels are actually included in the sale (2 or 3 appear stacked)",
+        "proof": "A photo with panels separated and counted, plus a written count in the listing",
+        "if_unproven": "priced per single panel only, as quantity is unconfirmed"
+      },
+      {
+        "risk": "'Original' / unused claim cannot be confirmed; panel could be used, pulled from a prior installation",
+        "proof": "Photo of original packaging, invoice, or retailer tag",
+        "if_unproven": "priced as used/second-hand condition regardless of claim"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the rating label on the back of the panel showing brand, model, and Wp rating",
+      "Video of a multimeter test under sunlight showing voltage and current output",
+      "Photos of all four corners and the back sheet for frame/cell damage",
+      "A photo showing the exact number of panels being sold, laid out separately"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The wattage claim that primarily sets the price cannot be read from any label in the photo, and cell/frame condition plus panel count are also unconfirmed, so no reliable worst-case price can be set without the rating label and a basic output test."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 24445,
+    "input_tokens": 2037,
+    "output_tokens": 1984,
+    "cost_usd": 0.020755,
+    "replayed": false,
+    "fixture_key": "0e4886cdea14c8ea34a205b4f577ca4f",
+    "error": null
+  }
+}

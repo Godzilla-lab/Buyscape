@@ -1,0 +1,75 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Front view of a white double-door fridge with freezer on top. Brand 'AEON' is visible on both doors. A sticker on the lower door shows 'FAST COOLING', 'KEEP FRESH', 'ENERGY SAVVY'.",
+      "Photo 1: Back view of the fridge. Condenser coils are visible. A label with 'AEON' and a barcode is present. A handwritten label 'C5H10' is taped on the top left. Compressor and wiring are visible at the bottom.",
+      "Photo 2: Interior view with lower door open. Three glass shelves, one crisper drawer, and three door bins are visible. The interior is clean and empty. The freezer door is closed."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "double door fridge with top freezer",
+      "brand": "AEON",
+      "model": "C5H10",
+      "read_from": [
+        "photo 0 front door",
+        "photo 1 back label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "super-fast freezing & chilling",
+        "verdict": "unverified",
+        "evidence": "The sticker in photo 0 says 'FAST COOLING', but performance cannot be verified from photos alone."
+      },
+      {
+        "claim": "double door fridge with freezer compartment at the top",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 2 show a top-freezer, double-door fridge."
+      },
+      {
+        "claim": "still...",
+        "verdict": "unverifiable_remote",
+        "evidence": "Incomplete claim. No context to verify."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The fridge may not be working or may have compressor issues.",
+        "proof": "A video showing the fridge running, with the compressor humming and lights on inside.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Hidden damage or wear inside the freezer compartment.",
+        "proof": "Photo of the freezer interior with door open.",
+        "if_unproven": "priced as having unknown freezer condition"
+      },
+      {
+        "risk": "The model 'C5H10' may not be a genuine AEON model or may be a rebranded unit.",
+        "proof": "Close-up of the back label showing full model number and serial number, or a factory sticker.",
+        "if_unproven": "priced as unverified model"
+      }
+    ],
+    "proof_requests": [
+      "Video of the fridge running with compressor active and interior lights on.",
+      "Photo of the freezer compartment interior with door open.",
+      "Close-up of the back label showing full model and serial number."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as an AEON C5H10 double-door fridge with top freezer. However, critical risks remain unproven: whether it works, the condition of the freezer, and authenticity of the model. These affect pricing and must be verified before assigning a price."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 56910,
+    "input_tokens": 3459,
+    "output_tokens": 688,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "312631cdde4b2e9ddc89ef9b5b677d4c",
+    "error": null
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Black tower-style UPS with \"BLUE GATE\" embossed at the top front (photo 0, photo 1)",
+      "Vertical blue panel with a circular power button and three indicator lights (photo 0)",
+      "UK three-pin power plug and cord plugged into the top (photo 1)",
+      "No model number, capacity rating, or serial label visible in either photo",
+      "Seller text: \"UPS available\""
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "UPS",
+      "brand": "BLUE GATE",
+      "model": null,
+      "read_from": [
+        "photo 0",
+        "photo 1"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "UPS available",
+        "verdict": "supported",
+        "evidence": "photo 0 and photo 1 show a Blue Gate UPS"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery may be dead or unable to hold charge",
+        "proof": "Video of the UPS powering a load with mains power disconnected",
+        "if_unproven": "as not working / dead battery"
+      },
+      {
+        "risk": "Output capacity (VA) unknown; could be a small or large unit",
+        "proof": "Close-up of the rating label on the rear or bottom",
+        "if_unproven": "as lowest common capacity for this form factor"
+      },
+      {
+        "risk": "Internal circuitry or AVR may be faulty",
+        "proof": "Clip showing it switching to battery and regulating output",
+        "if_unproven": "as faulty electronics"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of any rating label showing VA capacity",
+      "Video of the UPS running a lamp or fan when unplugged from the wall",
+      "Photo of the rear panel showing outlets and input specs"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a Blue Gate UPS from the photos, so it can be priced at its worst case (non-working, unknown capacity) pending proof of battery and capacity."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 70565,
+    "input_tokens": 2859,
+    "output_tokens": 1891,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "4b248ace781508ac5a4c2ce7dd56e639",
+    "error": null
+  }
+}

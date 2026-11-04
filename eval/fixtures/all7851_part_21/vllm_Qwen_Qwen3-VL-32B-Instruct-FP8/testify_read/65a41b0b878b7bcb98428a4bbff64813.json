@@ -1,0 +1,93 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Laptop open, screen shows MSI Creator Z16 Hiroshi Fujiwara Limited Edition wallpaper. Keyboard visible, stickers on palm rest: Intel Core i7 and NVIDIA GeForce RTX. MSI logo on bottom right of keyboard deck.",
+      "Photo 1: Laptop closed, dark blue lid with MSI logo and circular design. Held by hand, background appears to be a store or showroom.",
+      "Photo 2: Same as photo 0, screen shows same wallpaper with 'Creator Z16' and 'Hiroshi Fujiwara Limited Edition' text. Stickers on palm rest same as photo 0.",
+      "All photos have 'POSTED ON JIJI COGORN' watermark.",
+      "No visible damage or wear in photos. Screen appears clean, keyboard keys intact."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "MSI",
+      "model": "Creator Z16 Hiroshi Fujiwara Limited Edition",
+      "read_from": [
+        "photo 0 screen",
+        "photo 2 screen"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "MSI Creator Z16 Hiroshi Limited edition",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 2 screen display 'Creator Z16' and 'HIROSHI FUJIWARA LIMITED EDITION' text."
+      },
+      {
+        "claim": "Core i7 11th Gen",
+        "verdict": "unverified",
+        "evidence": "Photo 0 and photo 2 show Intel Core i7 sticker, but no generation specified. Cannot confirm 11th Gen from sticker alone."
+      },
+      {
+        "claim": "512gb SSD",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows internal components or system information. Cannot verify SSD size remotely."
+      },
+      {
+        "claim": "32gb Ram",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows system specs or RAM details. Cannot verify remotely."
+      },
+      {
+        "claim": "Nvidia GeForce RTX...",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 2 show NVIDIA GeForce RTX sticker on palm rest."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "RAM and SSD specifications not verifiable",
+        "proof": "Screenshot of Windows System Information or Device Manager showing RAM and storage details.",
+        "if_unproven": "Priced as if RAM is less than 32GB or SSD is less than 512GB, which reduces value."
+      },
+      {
+        "risk": "Core i7 generation not confirmed",
+        "proof": "Screenshot of CPU-Z or system properties showing exact CPU model.",
+        "if_unproven": "Priced as if it is not 11th Gen, which may be less valuable."
+      },
+      {
+        "risk": "Battery health or condition not shown",
+        "proof": "Photo of battery health in Windows or BIOS, or a video showing battery charge cycle count.",
+        "if_unproven": "Priced as if battery is degraded or not original."
+      },
+      {
+        "risk": "Hidden physical damage or screen issues",
+        "proof": "Close-up photo of screen under different lighting, and underside of laptop showing ports and hinges.",
+        "if_unproven": "Priced as if there may be scratches, dead pixels, or hinge wear."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of Windows System Information showing RAM and storage details.",
+      "Screenshot of CPU-Z or system properties showing exact CPU model.",
+      "Photo of battery health or charge cycle count.",
+      "Close-up photo of screen under different lighting and underside of laptop."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identifiable from screen text, but key specifications like RAM, SSD size, and CPU generation cannot be verified from current photos. Hidden risks like battery health and physical damage also need proof. Without this, the item cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 77725,
+    "input_tokens": 2800,
+    "output_tokens": 906,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "65a41b0b878b7bcb98428a4bbff64813",
+    "error": null
+  }
+}

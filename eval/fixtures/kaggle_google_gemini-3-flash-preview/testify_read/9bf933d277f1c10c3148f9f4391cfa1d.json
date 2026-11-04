@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail box for an IWIN ENERGY rechargeable solar fan.",
+      "The box identifies the model as IW8068.",
+      "Text on the box claims it is an 18-inch fan with a 12V 7AH battery and 9 speeds.",
+      "The box shows a remote control, rolling casters, and AC/DC capability.",
+      "The actual fan is not visible in the photo; only the packaging is shown.",
+      "The box is placed on wooden steps in an outdoor or semi-outdoor setting."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "rechargeable standing fan",
+      "brand": "IWIN ENERGY",
+      "model": "IW8068",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Iwin rechargeable standing fan",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows the brand 'IWIN ENERGY' and the description 'RECHARGEABLE SOLAR FAN' on the box."
+      },
+      {
+        "claim": "with remote controller",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows an illustration of a remote and mentions it as a feature."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, lower-value item.",
+        "proof": "A photo of the actual fan outside of the packaging.",
+        "if_unproven": "priced as an empty box"
+      },
+      {
+        "risk": "The internal 12V 7AH battery may be dead or unable to hold a charge.",
+        "proof": "A video showing the fan running on battery power for at least 10 minutes.",
+        "if_unproven": "priced as requiring a battery replacement"
+      },
+      {
+        "risk": "The fan motor or charging circuit may be non-functional.",
+        "proof": "A video showing the fan blades spinning at various speeds and the charging indicator active.",
+        "if_unproven": "priced as not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual fan out of the box.",
+      "Video of the fan operating on battery power.",
+      "Photo of the remote control and any included accessories like the power cord or solar panel."
+    ],
+    "decision": "price",
+    "reason": "The brand and model are clearly identified from the packaging, allowing for a valuation based on the worst-case scenario (non-functional/missing item)."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 12572,
+    "input_tokens": 2376,
+    "output_tokens": 2620,
+    "cost_usd": 0.009048,
+    "replayed": false,
+    "fixture_key": "9bf933d277f1c10c3148f9f4391cfa1d",
+    "error": null
+  }
+}

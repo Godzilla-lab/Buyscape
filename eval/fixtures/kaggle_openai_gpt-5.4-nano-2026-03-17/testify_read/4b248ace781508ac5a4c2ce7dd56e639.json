@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0 shows a UPS with the brand text \u201cBLUE GATE\u201d on the front panel.",
+      "Photo 0 shows a power button and several indicator LEDs on the front.",
+      "Photo 1 shows the UPS from the side/front with a mains plug connected to the wall.",
+      "Photo 1 shows \u201cBLUE GATE\u201d printed on the casing near the front."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "UPS (uninterruptible power supply)",
+      "brand": "BLUE GATE",
+      "model": null,
+      "read_from": [
+        "photo 0 front panel text",
+        "photo 1 front casing text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "UPS available",
+        "verdict": "supported",
+        "evidence": "Photos show a device labeled \u201cBLUE GATE\u201d with UPS-style front indicators and a mains plug connected (photo 0, photo 1)."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery health/capacity is unknown (UPS may not hold load or may shut down under power).",
+        "proof": "A short video of the UPS running on battery: unplug from wall, show LEDs/any battery indicator staying on for several minutes while powering a small load (e.g., router + bulb).",
+        "if_unproven": "Priced as worst case: battery not reliable / not holding charge (treat as needing battery replacement)."
+      },
+      {
+        "risk": "Output rating (VA/W) and number/type of outlets are not visible, so it may not suit the buyer\u2019s load.",
+        "proof": "Photo of the label/sticker showing model number and specs (VA/W, input/output voltage, frequency, outlet ratings).",
+        "if_unproven": "Priced as a lower-capacity/unknown-spec UPS (worst-case for buyer compatibility)."
+      },
+      {
+        "risk": "Whether it is fully functional (alarm faults, inverter issues, or charging faults) is not confirmed by photos.",
+        "proof": "Power-on test: show it charging from wall (battery/charge LED behavior) and then switch to battery with a load; include any fault/alarm indicators.",
+        "if_unproven": "Priced as not fully proven functional (worst case: may have faults)."
+      },
+      {
+        "risk": "Physical condition/hidden damage (internal swelling, loose components) cannot be assessed from exterior photos.",
+        "proof": "Photo of the back and sides plus a close-up of any vents/ports; also ask for a quick shake/inspection and confirm no burning smell.",
+        "if_unproven": "Priced as average used condition with potential hidden issues."
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the UPS rating label/sticker (model number, VA/W, input/output, battery type/voltage).",
+      "Video test: unplug from wall and show it running on battery for a few minutes with a small load; show LED status throughout.",
+      "Photo of the back panel (ports/outlets) and any fault/alarm indicators during power-on."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photos confirm it is a BLUE GATE UPS, but the key pricing drivers (model/specs and battery health/working status) are not readable or test-proven. Without those, a safe worst-case price cannot be determined."
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_read",
+    "latency_ms": 4516,
+    "input_tokens": 3116,
+    "output_tokens": 750,
+    "cost_usd": 0.001561,
+    "replayed": false,
+    "fixture_key": "4b248ace781508ac5a4c2ce7dd56e639",
+    "error": null
+  }
+}

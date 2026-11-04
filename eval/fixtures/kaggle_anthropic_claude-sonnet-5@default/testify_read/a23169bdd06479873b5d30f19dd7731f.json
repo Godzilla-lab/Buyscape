@@ -1,0 +1,89 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Three photos show orange LPG gas cylinders, one specifically offered for sale (closest, orange, with brass valve and plastic carry handle)",
+      "Background shows a red cylinder in mesh netting, a blue cylinder, and a gas burner/stove top, suggesting a shop or storage area with multiple units",
+      "Photo 2 shows a clear brand marking 'REPSOL' and partial Spanish-language safety text, plus a printed capacity marking that reads 'Butano 12,5' (kg)",
+      "Visible wear: scuffed orange paint, scratches, small rust specks near the base, and a visible dent/crease near the top handle area in photo 0",
+      "No regulator, hose, or burner included in the listing photos for the item itself",
+      "No visible manufacture/test date stamp, no weighing scale shot, and no shot confirming the cylinder is pressurized or empty",
+      "Valve looks intact with a brass fitting, but no close-up of threads or seal condition is given"
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "12.5kg LPG gas cylinder",
+      "brand": "Repsol",
+      "model": null,
+      "read_from": [
+        "photo 2 label/branding"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Foreign-Used Gas Cylinder",
+        "verdict": "supported",
+        "evidence": "photo 2 shows Repsol branding and Spanish-language text, consistent with a foreign-manufactured cylinder"
+      },
+      {
+        "claim": "12.5kg capacity",
+        "verdict": "supported",
+        "evidence": "photo 2 shows a printed capacity marking reading 'Butano 12,5'"
+      },
+      {
+        "claim": "Strong & Reliable",
+        "verdict": "unverifiable_remote",
+        "evidence": "no way to test structural integrity, valve seal, or pressure rating from photos alone"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Cylinder may be past its safety recertification/expiry date (LPG cylinders require periodic testing)",
+        "proof": "Close-up photo of the stamped manufacture/test date on the cylinder collar or shoulder",
+        "if_unproven": "priced as due for recertification / not verified safe"
+      },
+      {
+        "risk": "Valve or threads may be worn, leaking, or damaged",
+        "proof": "Close-up photo or short video of the valve being opened/closed, plus soap-bubble leak test",
+        "if_unproven": "priced as valve condition unknown, assume needs inspection"
+      },
+      {
+        "risk": "Internal corrosion or rust not visible from outside",
+        "proof": "Photo of interior via empty cylinder inspection or a recent hydrostatic test certificate",
+        "if_unproven": "priced as condition unknown, worst case"
+      },
+      {
+        "risk": "Cylinder may be sold empty despite 'gas cylinder' listing implying contents",
+        "proof": "Photo of a weighing scale showing gross weight, or a fill receipt",
+        "if_unproven": "priced as empty, no gas included"
+      },
+      {
+        "risk": "Visible dent near the top could indicate impact damage affecting safety",
+        "proof": "Multiple angle close-ups of the dented area and any associated paint cracking",
+        "if_unproven": "priced as cosmetic-to-structural damage unresolved, worst case"
+      }
+    ],
+    "proof_requests": [
+      "Clear close-up of the manufacture/test date stamp on the cylinder collar",
+      "Video of the valve opening/closing and a leak test with soapy water",
+      "Photo of the cylinder on a scale showing tare and gross weight",
+      "Multiple angles of the dented area near the top handle"
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identifiable as a 12.5kg Repsol-branded foreign-used LPG cylinder with visible wear and no proof of recent safety testing or valve integrity, so it can be priced at worst case pending further proof."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 21720,
+    "input_tokens": 3963,
+    "output_tokens": 1949,
+    "cost_usd": 0.024225,
+    "replayed": false,
+    "fixture_key": "a23169bdd06479873b5d30f19dd7731f",
+    "error": null
+  }
+}

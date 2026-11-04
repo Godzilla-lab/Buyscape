@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Outdoor tire yard with multiple stacks of used tires of varying sizes and tread patterns",
+      "Background shows corrugated metal stalls/container shops typical of a tire market",
+      "A blue plastic chair sits in the foreground, not part of the item for sale",
+      "No single tire is isolated, labeled, or photographed close-up",
+      "No brand name, size marking, or DOT/tread-wear code is legible on any tire",
+      "Watermark 'IKWE ANTHONY' overlays the image, likely the seller's name, not product info"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used car tyres (stock yard, multiple sizes/brands)",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Belgium Tyre available",
+        "verdict": "unverifiable_remote",
+        "evidence": "No tire in photo 0 shows a brand, country-of-origin marking, or size; 'Belgium tyre' is a common Nigerian market term for used European tires and cannot be confirmed from this wide shot."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual tire size (rim diameter, width, profile) unknown, which drives price heavily",
+        "proof": "Close-up photo of the sidewall showing size code (e.g., 205/55R16) for the specific tire being offered",
+        "if_unproven": "cannot be priced without this; size is a primary price driver"
+      },
+      {
+        "risk": "Tread depth and wear level not visible at this distance",
+        "proof": "Close-up of tread face with a coin or ruler for scale",
+        "if_unproven": "priced as heavily worn / lowest grade"
+      },
+      {
+        "risk": "Brand/model of the specific tire (e.g., Michelin, Continental) unknown",
+        "proof": "Close-up of sidewall text showing brand name",
+        "if_unproven": "priced as generic unbranded used tire"
+      },
+      {
+        "risk": "Age of tire (manufacture date) unknown, affects rubber hardness/safety",
+        "proof": "Close-up of DOT code on sidewall showing week/year of manufacture",
+        "if_unproven": "priced as old stock / unknown age"
+      },
+      {
+        "risk": "Buyer cannot tell which exact tire(s) in the stacks correspond to the one being sold",
+        "proof": "Seller points to or photographs the specific unit(s) for sale",
+        "if_unproven": "cannot assign a single price to an unspecified item in a mixed stock pile"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the sidewall of the specific tire for sale, showing size code and brand",
+      "Close-up of tread depth with a coin/ruler for scale",
+      "Close-up of DOT/manufacture date code",
+      "A photo or video showing exactly which tire(s) in the yard are being offered"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo shows a generic tire-yard scene with many mixed, unidentified tires; without a close-up of the specific tire's size, brand, tread, and age, no worst-case price can be assigned since size alone changes the price bracket entirely."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 17060,
+    "input_tokens": 1980,
+    "output_tokens": 1546,
+    "cost_usd": 0.01942,
+    "replayed": false,
+    "fixture_key": "7dc3e7a8721ba08f911a02c238929416",
+    "error": null
+  }
+}

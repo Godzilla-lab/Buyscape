@@ -1,0 +1,87 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the back of a dark green smartphone with a dual-camera module in the top-left corner.",
+      "A white sticker is affixed to the back, with printed text including 'HMM APPLE iPhone 13 128GB', 'USA', 'SIM UNLOCKED', '100% WORKING PHONES', 'iOS Version', 'Battery Life', and a date '2026/08/26'.",
+      "The sticker also includes a barcode and a QR code.",
+      "The phone appears to be held in a hand, with a reflective surface in the background.",
+      "The text 'K-MARKETINGGLOBALTECH' is watermarked across the image."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "iPhone 13",
+      "brand": "Apple",
+      "model": "iPhone 13",
+      "read_from": [
+        "photo 0 sticker"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Apple iPhone 13 128GB",
+        "verdict": "supported",
+        "evidence": "Photo 0 sticker clearly states 'APPLE iPhone 13 128GB'."
+      },
+      {
+        "claim": "100% WORKING PHONES",
+        "verdict": "unverified",
+        "evidence": "The sticker says '100% WORKING PHONES' but there is no visual proof of functionality. No screen, buttons, or operation shown."
+      },
+      {
+        "claim": "SIM UNLOCKED",
+        "verdict": "unverified",
+        "evidence": "Sticker says 'SIM UNLOCKED' but no proof of network compatibility or carrier testing is visible."
+      },
+      {
+        "claim": "6.1-inch Super Retina XDR display",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a known specification for iPhone 13, but no photo shows the screen or front of the device to verify it."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The phone may be non-functional or have hardware issues.",
+        "proof": "A video or photo showing the phone powered on, displaying the home screen, and responding to touch.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The phone may be stolen, blacklisted, or have a compromised IMEI.",
+        "proof": "A screenshot of the phone's settings showing 'About' with IMEI, serial number, and carrier status, or a check via a Nigerian carrier blacklist tool.",
+        "if_unproven": "priced as potentially blacklisted or stolen"
+      },
+      {
+        "risk": "The battery may be degraded or not genuine.",
+        "proof": "A screenshot of the battery health percentage from the phone's settings.",
+        "if_unproven": "priced as battery health unknown"
+      },
+      {
+        "risk": "The phone may be a counterfeit or refurbished unit misrepresented as new.",
+        "proof": "A close-up photo of the front bezel, charging port, and side buttons to check for build quality and authenticity.",
+        "if_unproven": "priced as potentially counterfeit"
+      }
+    ],
+    "proof_requests": [
+      "Video or photo of the phone powered on, showing the home screen and responsiveness.",
+      "Screenshot of the 'About' section in settings showing IMEI, serial number, and battery health.",
+      "Close-up of the front and side of the phone to verify build quality.",
+      "Proof of SIM unlock: a photo of the phone connected to a Nigerian network."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identified from the sticker, but critical claims about functionality, unlock status, and authenticity cannot be verified from the current photo. Hidden risks such as non-functionality, blacklisting, and battery health affect pricing and must be proven before a price can be assigned."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 76632,
+    "input_tokens": 1869,
+    "output_tokens": 866,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "f1612934b315df24386f8191d6b267e8",
+    "error": null
+  }
+}

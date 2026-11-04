@@ -1,0 +1,68 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo shows multiple water tanks outdoors: black ribbed vertical tanks on the left, white caged IBC totes in the center, a black tank with a white logo on the right, a black flexible tank in the foreground, and another white caged tank bottom right.",
+      "No single tank is isolated or labeled as the item for sale.",
+      "Seller's words do not specify capacity, condition, or which tank is being sold."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "water tank",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "We use it to store water in our house and different places",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo shows tanks but cannot prove usage history, condition, or which tank is referenced."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The specific tank being sold is not identified; the photo shows multiple types and sizes.",
+        "proof": "Seller specifies which tank is for sale or provides a photo of the single item alone.",
+        "if_unproven": "as the least valuable tank type visible"
+      },
+      {
+        "risk": "Condition and leaks cannot be confirmed from a still photo.",
+        "proof": "Video of the tank being filled and inspected, or close-up of valves, seams, and outlet.",
+        "if_unproven": "as not working or leaking"
+      },
+      {
+        "risk": "Capacity is unconfirmed; the white caged tanks appear to be 1000 litres but markings are not legible.",
+        "proof": "Close-up of any capacity marking or label on the tank.",
+        "if_unproven": "as unknown capacity"
+      }
+    ],
+    "proof_requests": [
+      "Which specific tank is for sale, and a photo of it alone",
+      "Video showing the tank holds water without leaking",
+      "Close-up of any capacity or brand marking"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a water tank by type, and a comparable 1000-litre plastic tank exists; condition and capacity are unproven so it is priced at worst case.",
+    "price_pick": {
+      "low": 0,
+      "high": 0
+    }
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_joint",
+    "latency_ms": 23814,
+    "input_tokens": 1815,
+    "output_tokens": 3115,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "f6e945d7aa873d63002bccafc4154219",
+    "error": null
+  }
+}

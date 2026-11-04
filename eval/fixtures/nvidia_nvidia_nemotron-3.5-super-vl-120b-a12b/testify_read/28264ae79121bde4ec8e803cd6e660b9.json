@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a JUKI industrial lockstitch sewing machine on a white table with metal stand, foot pedal, and illuminated red power switch.",
+      "Photo 1 shows the same machine from the side with a thread stand and debris on the floor.",
+      "Photo 2 shows a close-up of the head with the JUKI logo, a red motor underneath, and visible cracks/wear on the table surface.",
+      "No receipt is visible in any photo.",
+      "The machine shows signs of use, including table surface wear and general shop setting."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "industrial sewing machine",
+      "brand": "JUKI",
+      "model": null,
+      "read_from": [
+        "photo 0 head logo",
+        "photo 2 head logo"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "O fresh machine",
+        "verdict": "unverified",
+        "evidence": "photo 2 shows table cracks and visible wear, so fresh condition is not proven"
+      },
+      {
+        "claim": "Working perfectly",
+        "verdict": "unverified",
+        "evidence": "no stitching demonstration or power-on test shown in any photo"
+      },
+      {
+        "claim": "with receipt",
+        "verdict": "unverified",
+        "evidence": "no receipt appears in any of the three photos"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Machine may not sew or may have motor, belt, or control faults.",
+        "proof": "video of the machine stitching a piece of fabric with the motor running.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Receipt may not exist or may not match this machine.",
+        "proof": "photo of the receipt showing the item and seller details.",
+        "if_unproven": "no receipt, lower resale and warranty value"
+      },
+      {
+        "risk": "Internal mechanical wear (hook timing, gears, feed dogs) not visible in photos.",
+        "proof": "close-up video of the needle bar, presser foot, and hook area while running.",
+        "if_unproven": "as-is with potential repair costs"
+      }
+    ],
+    "proof_requests": [
+      "Video of the machine stitching fabric",
+      "Photo of the receipt",
+      "Close-up of any model or serial plate if legible"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a used JUKI industrial sewing machine; unproven working condition does not prevent pricing at the worst case of non-working."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 18481,
+    "input_tokens": 2242,
+    "output_tokens": 2200,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "28264ae79121bde4ec8e803cd6e660b9",
+    "error": null
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Teal-colored industrial alternator.",
+      "Top-mounted control box features a voltmeter, a circuit breaker, and an output indicator light.",
+      "A nameplate is attached to the side of the main body, but the text is illegible due to distance and blur.",
+      "A wooden shipping crate in the background is marked 'MAXTEC' and '100% COPPER'.",
+      "The unit appears clean with no visible signs of wear or grease, suggesting it may be unused.",
+      "Watermark 'ZUBEST INDUSTRIAL AND' is visible across the center."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "alternator",
+      "brand": "Maxtec",
+      "model": null,
+      "read_from": [
+        "photo 0 plate",
+        "photo 0 crate"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "40kva alternator",
+        "verdict": "unverified",
+        "evidence": "The nameplate in photo 0 is too blurry to confirm the kVA rating."
+      },
+      {
+        "claim": "new one",
+        "verdict": "unverified",
+        "evidence": "The item looks clean and is next to a crate, but there is no proof of its history or internal condition."
+      },
+      {
+        "claim": "100% copper",
+        "verdict": "unverifiable_remote",
+        "evidence": "Internal windings cannot be inspected through photos; the crate text is seller-provided packaging."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The actual kVA rating may be lower than 40kVA.",
+        "proof": "A clear, close-up photo of the nameplate showing the 'kVA' or 'kW' rating.",
+        "if_unproven": "priced as a 30kVA unit"
+      },
+      {
+        "risk": "The windings may be aluminum or copper-clad aluminum instead of 100% copper.",
+        "proof": "A technical specification sheet or a video showing the internal windings through the vents.",
+        "if_unproven": "priced as aluminum windings"
+      },
+      {
+        "risk": "The unit may have internal electrical faults or fail to produce the rated voltage.",
+        "proof": "A video of the alternator running under load with a multimeter showing the output.",
+        "if_unproven": "priced as non-functional/parts"
+      }
+    ],
+    "proof_requests": [
+      "A sharp, readable close-up photo of the metal nameplate on the side of the alternator.",
+      "A photo of the internal windings visible through the side cooling vents.",
+      "A video of the alternator coupled to an engine and generating power."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The kVA rating, which is the primary factor for pricing this item, cannot be read from the provided photo."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 12679,
+    "input_tokens": 2359,
+    "output_tokens": 2379,
+    "cost_usd": 0.008316,
+    "replayed": false,
+    "fixture_key": "4402899bb8edd0153a6d20b7755943fe",
+    "error": null
+  }
+}

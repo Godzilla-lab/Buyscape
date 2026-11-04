@@ -1,0 +1,75 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a single car tire lying flat on concrete.",
+      "Tread has circumferential grooves and sipes typical of a passenger tire.",
+      "Another tire is partially visible at the left edge.",
+      "Watermark text \u201cPOSTED ON JIJI\u201d and \u201cN.J. VENTURE\u201d crosses the tread.",
+      "No sidewall size markings or brand name are legible in the photo.",
+      "Tread appears worn but no cuts, bulges, or repairs are visible from this angle."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "car tire",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "295 40 r20 size",
+        "verdict": "unverified",
+        "evidence": "Sidewall size lettering is not legible in photo 0."
+      },
+      {
+        "claim": "tukubo (Tokunbo / used imported)",
+        "verdict": "unverifiable_remote",
+        "evidence": "Origin and usage history cannot be determined from a photo."
+      },
+      {
+        "claim": "sellable tire",
+        "verdict": "unverified",
+        "evidence": "Photo shows external tread only; no inflation or internal check."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual size is not 295/40 R20",
+        "proof": "Clear photo of the sidewall showing raised size lettering",
+        "if_unproven": "as wrong-size or scrap tire"
+      },
+      {
+        "risk": "Age exceeds safe limit or tread is below legal limit",
+        "proof": "Photo of the DOT code and a tread-depth measurement",
+        "if_unproven": "as expired or bald tire"
+      },
+      {
+        "risk": "Hidden puncture, repair, or bead damage",
+        "proof": "Video of the tire inflated and holding air",
+        "if_unproven": "as not holding air"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the tire sidewall showing size and brand markings",
+      "Photo of the DOT code on the sidewall",
+      "Video of the tire inflated and holding air"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The claimed size and brand cannot be read from the photo, and tire value depends on exact size and condition, so no worst-case price is possible without a sidewall shot."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 19582,
+    "input_tokens": 1836,
+    "output_tokens": 3130,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "372f4e55cf95672db91e96e67249f0e9",
+    "error": null
+  }
+}

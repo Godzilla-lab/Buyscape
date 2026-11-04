@@ -1,0 +1,70 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a set of kitchenware items arranged on a white surface.",
+      "The set includes a tall stainless steel thermos with a yellow body and a silver lid, a yellow and grey insulated mug with an orange handle and lid, a yellow bowl with a stainless steel interior and two handles, and a matching yellow lid with a white spoon resting on it.",
+      "A product box labeled 'Master Chef' is visible in the background, showing images of similar items in pink, golden, and blue colors.",
+      "The thermos has a tag attached that says 'SINCE 189' and 'Master Chef'.",
+      "The insulated mug has 'Master Chef' printed on its body.",
+      "The bowl has a faint logo or text on its side, but it is not clearly readable.",
+      "The box indicates the set is available in multiple colors and includes a 3-year warranty."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "Master Chef kitchenware set",
+      "brand": "Master Chef",
+      "model": null,
+      "read_from": [
+        "photo 0 box",
+        "photo 0 thermos tag",
+        "photo 0 mug body"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "It comes in set as seen",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows all items together: thermos, insulated mug, bowl, lid, spoon, and box, matching the description."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The items may be used or have hidden damage not visible in the photo.",
+        "proof": "A close-up shot of each item showing the interior, base, and seams for scratches, dents, or stains.",
+        "if_unproven": "priced as possibly used or damaged"
+      },
+      {
+        "risk": "The thermos or mug may not be functional (e.g., leaks, poor insulation).",
+        "proof": "A video clip showing the thermos or mug being filled with hot liquid and left for 24 hours, then checked for temperature retention and leaks.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The set may not include all components shown (e.g., spoon or lid missing).",
+        "proof": "A clear shot of all components laid out individually with labels or count.",
+        "if_unproven": "priced as incomplete"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photos of each item showing interior, base, and seams.",
+      "Video clip of thermos/mug tested for insulation and leaks.",
+      "Photo of all components laid out individually with labels."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The set is identifiable as Master Chef kitchenware, and the seller's claim of a complete set is supported by the photo. However, hidden risks such as damage, functionality, and completeness cannot be verified remotely and must be proven before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 54307,
+    "input_tokens": 1694,
+    "output_tokens": 659,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "59b885022025c1f20110576b015c76f0",
+    "error": null
+  }
+}

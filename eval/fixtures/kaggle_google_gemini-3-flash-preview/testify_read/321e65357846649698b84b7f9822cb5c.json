@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail packaging for a '5 SPEED MINI DRILL PRESS'.",
+      "The box features an illustration of a green benchtop drill press.",
+      "Text on the box specifies a 1/2 inch chuck size and a 1/3 HP motor.",
+      "The actual machine is not visible; only the cardboard box is shown.",
+      "The seller's text describes the item as being for 'sealing of items', which is a function unrelated to a drill press."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "mini drill press",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Use for sealing of items",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows a drill press, which is a tool for boring holes, not for sealing."
+      },
+      {
+        "claim": "5 Speed",
+        "verdict": "unverified",
+        "evidence": "This is printed on the box, but the item itself is not visible."
+      },
+      {
+        "claim": "1/3 HP Motor",
+        "verdict": "unverified",
+        "evidence": "This is printed on the box, but the item itself is not visible."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different item entirely.",
+        "proof": "A photo of the actual machine outside of the packaging.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The motor or mechanical components may be seized or non-functional.",
+        "proof": "A video showing the machine plugged in and the spindle rotating.",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual drill press outside of the box.",
+      "Video of the machine running to confirm the motor and belt system work.",
+      "Photo of the manufacturer's specification plate on the motor or housing."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller's description is completely incorrect for the item shown on the box, and the item itself is not visible. A price cannot be determined for a tool based only on its packaging when the seller's claims are contradictory."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 17082,
+    "input_tokens": 2348,
+    "output_tokens": 3693,
+    "cost_usd": 0.012253,
+    "replayed": false,
+    "fixture_key": "321e65357846649698b84b7f9822cb5c",
+    "error": null
+  }
+}

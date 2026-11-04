@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail box for a Kinelco electric kettle.",
+      "Brand 'KINELCO' and model 'KN-103' are clearly visible on the box.",
+      "Box states '5.5L Capacity' and 'Automatic Switch-Off'.",
+      "The kettle pictured on the box has a stainless steel body and a blue base.",
+      "The actual item is not visible, only the packaging."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "electric kettle",
+      "brand": "KINELCO",
+      "model": "KN-103",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Capacity: 5.5L",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "360 degree rotational base",
+        "verdict": "unverified",
+        "evidence": "Not explicitly stated on the visible part of the box."
+      },
+      {
+        "claim": "Stainless Steel of the body",
+        "verdict": "supported",
+        "evidence": "photo 0 box image"
+      },
+      {
+        "claim": "Automatically turns off",
+        "verdict": "supported",
+        "evidence": "photo 0 box text"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, used, or damaged item.",
+        "proof": "Photo of the actual kettle outside the box.",
+        "if_unproven": "as missing item"
+      },
+      {
+        "risk": "The heating element or automatic shut-off mechanism may be faulty.",
+        "proof": "Video of the kettle boiling water and switching off automatically.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The power base might be missing or damaged.",
+        "proof": "Photo of the kettle with its power base.",
+        "if_unproven": "as incomplete"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual kettle outside the box.",
+      "Photo of the power base.",
+      "Video showing the kettle working and automatically switching off."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail packaging is shown. Without photos of the actual kettle and its base, the condition, presence, and functionality of the item cannot be confirmed."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 7731,
+    "input_tokens": 2390,
+    "output_tokens": 1490,
+    "cost_usd": 0.005665,
+    "replayed": false,
+    "fixture_key": "2d8d28a8661ef61d0629c47e4d39fd27",
+    "error": null
+  }
+}

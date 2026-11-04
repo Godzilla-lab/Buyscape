@@ -1,0 +1,61 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-instruct",
+  "response": {
+    "observations": [
+      "Photo shows multiple car engines, some with visible damage or wear, piled together.",
+      "One engine has a visible 'MOTOR' label on its side.",
+      "A person is partially visible in the background, standing near the engines."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "car engine",
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "We also deals on all kinds of car spare parts",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows engines, but no other spare parts are visible. No text confirms the claim."
+      },
+      {
+        "claim": "Tokunbo, direct from Belgium. Tested and working, no knock, low mileage, never opened.",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows the seller's name, origin, or proof of testing or condition. No visible labels or markings confirm 'Tokunbo' or 'Belgium'."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine condition and authenticity",
+        "proof": "Photo 0 shows engines with visible wear, damage, or dirt, which contradicts 'tested and working, no knock, low mileage, never opened'.",
+        "if_unproven": "Priced as not working."
+      },
+      {
+        "risk": "Origin and seller legitimacy",
+        "proof": "No photo shows 'Tokunbo' or 'Belgium' markings or documentation. No proof of direct sourcing or testing.",
+        "if_unproven": "Priced as unverified origin and untested."
+      }
+    ],
+    "proof_requests": [
+      "Ask for photos of the engine with clear labels showing 'Tokunbo' or 'Belgium' origin.",
+      "Ask for a test report or certificate confirming 'no knock, low mileage, never opened'."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller's claims cannot be verified remotely from the photos. The engine's condition and origin are unproven, and without proof, the worst-case price must be assumed."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-instruct",
+    "task": "testify_read",
+    "latency_ms": 3832,
+    "input_tokens": 1418,
+    "output_tokens": 479,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "ea219dd8dee3b226f9aee7d7426b2138",
+    "error": null
+  }
+}

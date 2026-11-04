@@ -1,0 +1,80 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Front view of a smartphone with a notch, displaying iOS home screen with app icons. The screen appears to be on and functional. A watermark 'DENACO COMMUNICATION' is visible.",
+      "Photo 1: Back view of the phone with a sticker that reads 'Apple iPhone 12 64GB Great A+', 'Battery 85+', '100% Tester', 'Camera Pass', 'Icloud Unlocked', 'Sim Unlock', 'Lock OFF', 'Color: Black', 'Testing Pass'. The phone has a dual-camera setup in a square module. The back is black and glossy. The same watermark is present.",
+      "Photo 2: Side profile of the phone showing volume buttons, power button, and a USB-C port. The phone has a dark blue or black finish. The watermark is again visible."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "iPhone 12",
+      "brand": "Apple",
+      "model": "iPhone 12",
+      "read_from": [
+        "photo 1 sticker"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Nice, neat, no crack, no scratches",
+        "verdict": "unverified",
+        "evidence": "Photos show the phone from front, back, and side, but close-up shots of edges, corners, and screen for scratches or cracks are missing. The back sticker may obscure some surface details."
+      },
+      {
+        "claim": "Battery very strong",
+        "verdict": "supported",
+        "evidence": "Photo 1 sticker states 'Battery 85+', which indicates good battery health for a used device."
+      },
+      {
+        "claim": "Buy from trusted seller and get what u paid",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a subjective statement about the seller's trustworthiness and cannot be verified from photos or text alone."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Hidden screen damage or scratches not visible in current photos",
+        "proof": "Close-up photos of the screen edges, corners, and bezels under direct light.",
+        "if_unproven": "Priced as having potential screen damage, which reduces value."
+      },
+      {
+        "risk": "Water damage or internal issues not visible externally",
+        "proof": "Proof of water damage check (e.g., SIM tray indicator, internal inspection video) or diagnostic report.",
+        "if_unproven": "Priced as potentially having internal damage, which reduces value."
+      },
+      {
+        "risk": "Sticker information may be falsified or not reflect actual device state",
+        "proof": "Proof of device serial number check via Apple's website or a video showing the device settings > General > About screen.",
+        "if_unproven": "Priced as potentially misrepresented, which reduces value."
+      },
+      {
+        "risk": "iCloud lock may not be truly unlocked (despite sticker claim)",
+        "proof": "Video showing successful sign-in with a new Apple ID or proof of iCloud unlock via official Apple verification.",
+        "if_unproven": "Priced as potentially iCloud-locked, which reduces value significantly."
+      }
+    ],
+    "proof_requests": [
+      "Close-up photos of the screen edges and corners under direct light to check for scratches or cracks.",
+      "Video showing the device settings > General > About screen to verify serial number and model.",
+      "Proof of iCloud unlock (e.g., video of successful sign-in with a new Apple ID).",
+      "Diagnostic report or video showing water damage indicators."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The device is identified as an iPhone 12 from the sticker in photo 1, and some claims like battery health are supported. However, critical risks such as hidden screen damage, water damage, and iCloud lock status cannot be confirmed from current photos. The sticker's claims need verification to avoid pricing based on potentially false information. Therefore, proof is required before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 70326,
+    "input_tokens": 2789,
+    "output_tokens": 875,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "6a6a8a1a79a85ab944508e792d90c2e6",
+    "error": null
+  }
+}

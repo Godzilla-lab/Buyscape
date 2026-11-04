@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Black DSLR camera body with 'Nikon' and 'D7100' clearly visible on the front.",
+      "The camera is shown in front of a Nikon D7100 retail box in photo 0.",
+      "Photo 1 shows the camera body with the body cap removed, exposing the mirror and sensor area.",
+      "The seller's text claims the brand is Canon.",
+      "No batteries or silicone case are visible in the photos."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DSLR camera body",
+      "brand": "Nikon",
+      "model": "D7100",
+      "read_from": [
+        "photo 0 body",
+        "photo 1 body"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "working perfectly fine",
+        "verdict": "unverified",
+        "evidence": "Requires a video of the camera operating or sample photos."
+      },
+      {
+        "claim": "selling with 2 batteries",
+        "verdict": "unverified",
+        "evidence": "Batteries are not visible in the photos."
+      },
+      {
+        "claim": "silicone case",
+        "verdict": "unverified",
+        "evidence": "The case is not visible in the photos."
+      },
+      {
+        "claim": "The brand is Canon",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows Nikon branding on the camera body."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "High shutter count",
+        "proof": "A screenshot of the shutter count from the last image's EXIF data.",
+        "if_unproven": "priced as near end-of-life"
+      },
+      {
+        "risk": "Sensor damage or debris",
+        "proof": "A clear photo of the sensor and a sample image shot at f/22.",
+        "if_unproven": "as requiring professional cleaning"
+      },
+      {
+        "risk": "LCD screen or button malfunction",
+        "proof": "Photos of the back of the camera and a video of the menu being navigated.",
+        "if_unproven": "as non-functional"
+      }
+    ],
+    "proof_requests": [
+      "Clarification on the brand discrepancy (Nikon vs Canon).",
+      "Photo of the back of the camera showing the LCD screen.",
+      "Photo of the 2 batteries and silicone case.",
+      "A recent photo file to check the shutter count."
+    ],
+    "decision": "fraud_suspected",
+    "reason": "The seller's text identifies the camera as a Canon, while the photos clearly show a Nikon D7100. This fundamental error is a common sign of a scam using stolen images."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 27288,
+    "input_tokens": 3437,
+    "output_tokens": 6823,
+    "cost_usd": 0.022187,
+    "replayed": false,
+    "fixture_key": "f27b9543688c7be135457dc70910d0da",
+    "error": null
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black Dell laptop open, with the screen off. The Dell logo is visible below the screen. The keyboard is standard with a Windows key. A sticker on the palm rest reads 'Inspiron 3480' (not 3482 as claimed). There is an Intel logo sticker on the right side of the palm rest.",
+      "Photo 1 shows the closed lid of the same laptop, with a textured black finish and the Dell logo in the center. The laptop appears to be held by a hand, resting on a wooden surface.",
+      "The sticker in photo 0 clearly says 'Inspiron 3480', not '3482' as stated in the seller's words.",
+      "No internal components (RAM, SSD, CPU) are visible. No screen is shown on. No battery indicator or power button state is visible."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Dell",
+      "model": "Inspiron 3480",
+      "read_from": [
+        "photo 0 sticker"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Dell Inspiron 3482",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 sticker clearly reads 'Inspiron 3480', not 3482."
+      },
+      {
+        "claim": "Intel pentium",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows an Intel sticker, but the specific processor model (Pentium) is not readable. No system information is visible."
+      },
+      {
+        "claim": "4GB RAM",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal components or system specs visible. Cannot verify RAM amount remotely."
+      },
+      {
+        "claim": "128GB SSD",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal components or system specs visible. Cannot verify storage type or size remotely."
+      },
+      {
+        "claim": "Windows 11",
+        "verdict": "unverifiable_remote",
+        "evidence": "Screen is off in photo 0. No OS interface visible. Cannot verify operating system remotely."
+      },
+      {
+        "claim": "Long lasting battery",
+        "verdict": "unverifiable_remote",
+        "evidence": "No battery status, charge level, or usage test shown. Cannot verify battery life remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Incorrect model (claimed 3482, sticker shows 3480)",
+        "proof": "Photo of the service tag or system information screen showing the exact model number.",
+        "if_unproven": "Priced as a 3480, which may be less valuable than a 3482 if the latter has better specs or is rarer."
+      },
+      {
+        "risk": "RAM is not 4GB (could be less or more)",
+        "proof": "Photo of the BIOS screen or system properties showing installed RAM.",
+        "if_unproven": "Priced as if RAM is 4GB, but if less, value drops significantly."
+      },
+      {
+        "risk": "Storage is not 128GB SSD (could be HDD or smaller SSD)",
+        "proof": "Photo of the BIOS screen or system properties showing storage type and size.",
+        "if_unproven": "Priced as if 128GB SSD, but if HDD or smaller, value drops."
+      },
+      {
+        "risk": "Not running Windows 11 (could be Windows 10 or unlicensed)",
+        "proof": "Photo of the desktop or system properties showing OS version.",
+        "if_unproven": "Priced as if Windows 11 is installed and licensed, but if not, value drops."
+      },
+      {
+        "risk": "Battery is not long lasting (could be degraded)",
+        "proof": "Video of battery health check or usage test showing runtime.",
+        "if_unproven": "Priced as if battery is good, but if degraded, value drops."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the service tag or system information screen showing the exact model number.",
+      "Photo of the BIOS screen or system properties showing installed RAM and storage type/size.",
+      "Photo of the desktop or system properties showing OS version.",
+      "Video of battery health check or usage test showing runtime."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model number on the sticker contradicts the seller's claim (3480 vs 3482). Key specs (RAM, SSD, OS, battery) cannot be verified from the photos. Without proof of these, the item cannot be priced accurately. The model discrepancy alone may affect value, and internal specs are critical for pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 85506,
+    "input_tokens": 2276,
+    "output_tokens": 1083,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "978563f86b5edc927256ac13c3377fe3",
+    "error": null
+  }
+}

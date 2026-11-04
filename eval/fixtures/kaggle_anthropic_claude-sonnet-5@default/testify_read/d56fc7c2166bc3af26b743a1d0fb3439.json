@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Front view of a bicycle-style bike with handlebars, a headlight fairing, a front wire basket, and a front wheel/tire.",
+      "Photo is taken at a steep angle showing only the front half of the bike; no rear wheel, hub, motor, or controller is visible.",
+      "No battery pack, charger, display screen, or throttle is visible anywhere in the frame.",
+      "A watermark reads 'SAINT PAUL ENTERPRISE' (photo 0) which appears to be the seller/shop name, not a brand on the item.",
+      "Background shows a tiled floor, a gate, and a wooden shelf; no other identifying marks or labels on the bike itself."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "electric bike (e-bike), front-basket style",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Electric bike",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo 0 shows only a front view with handlebars, headlight, and basket; no motor hub, controller, or electric drivetrain component is visible to confirm it is electric rather than a standard bicycle."
+      },
+      {
+        "claim": "48v Battery and Charger included",
+        "verdict": "unverifiable_remote",
+        "evidence": "No battery pack or charger appears anywhere in photo 0; nothing to inspect or confirm voltage or inclusion."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Item may actually be a standard non-electric bicycle fitted with a headlight/basket, not a true e-bike.",
+        "proof": "A photo showing the rear wheel/hub motor, mid-drive motor, or any wiring/controller box.",
+        "if_unproven": "priced as a standard non-electric bicycle, not an e-bike"
+      },
+      {
+        "risk": "Battery and charger claimed but not shown; may be missing, damaged, or wrong voltage.",
+        "proof": "A photo of the actual battery pack (with label showing voltage/Ah) and the charger together with the bike.",
+        "if_unproven": "priced as bike only, without battery or charger"
+      },
+      {
+        "risk": "Overall frame condition (rust, dents, rear wheel condition, brakes) cannot be judged from a single front-angle shot.",
+        "proof": "Full side view and rear view photos of the bike.",
+        "if_unproven": "priced as average/unknown condition, assume needs servicing"
+      },
+      {
+        "risk": "No proof the bike powers on or that any electric assist functions.",
+        "proof": "A short video of the bike's throttle/pedal-assist engaging and the wheel turning under power.",
+        "if_unproven": "priced as not working/non-functional electric system"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the rear wheel showing a hub motor (or mid-drive motor) and wiring.",
+      "Photo of the battery pack and charger together with visible labels (voltage/Ah).",
+      "A short video showing the bike powering on and moving under electric power.",
+      "Full side and rear photos of the bike for condition assessment."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The single front-angle photo shows no motor, battery, charger, or any electric component, so it cannot be confirmed this is actually an electric bike rather than a plain bicycle with a basket and headlight; this is a category-defining fact, not just a condition detail, so no worst-case price can be set without further proof."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 22969,
+    "input_tokens": 2086,
+    "output_tokens": 2041,
+    "cost_usd": 0.021423,
+    "replayed": false,
+    "fixture_key": "d56fc7c2166bc3af26b743a1d0fb3439",
+    "error": null
+  }
+}

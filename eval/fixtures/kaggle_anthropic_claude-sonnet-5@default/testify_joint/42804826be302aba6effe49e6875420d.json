@@ -1,0 +1,92 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows a DSLR body with 'Canon EOS 600D' printed on the front, paired with a Canon EF-S 18-55mm lens and a 'EOS DIGITAL' strap.",
+      "Photo 1 shows the same body from the back with the flip-out LCD screen closed/folded against the body, so screen operation cannot be seen.",
+      "Photo 2 shows a shop shelf with several cameras: the same 600D+18-55mm kit on the left, a Canon EOS 700D with a different lens in the middle, and what looks like a Nikon body/lens cap on the top shelf - this looks like a dealer's general stock shot, not proof that extra items are included in this sale.",
+      "No shots of the camera powered on, no sample photos, no shutter-count screen, no battery or charger visible in any photo."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DSLR camera with kit lens",
+      "brand": "Canon",
+      "model": "EOS 600D",
+      "read_from": [
+        "photo 0 camera body badge",
+        "photo 2 camera body badge"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "UK used Canon EOS 600D",
+        "verdict": "unverifiable_remote",
+        "evidence": "No import sticker, UK plug charger, or serial/registration shot shown in any photo; origin cannot be confirmed from images."
+      },
+      {
+        "claim": "very neat",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 1 show a cosmetically clean body and lens with no visible scratches, dents, or heavy wear."
+      },
+      {
+        "claim": "sharp",
+        "verdict": "unverified",
+        "evidence": "No sample image, no powered-on screen, no video of focus/shutter action in any photo; 'sharp' (image quality) cannot be judged from stock photos alone."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Sensor/image quality defects (dead pixels, fungus, dust on sensor) not visible from exterior shots",
+        "proof": "A sample photo taken with the camera, or a clear shot through the lens/sensor with light behind it",
+        "if_unproven": "priced as not confirmed working, i.e. at worst-case low end"
+      },
+      {
+        "risk": "Shutter actuation count unknown on a used DSLR, affecting remaining mechanical life",
+        "proof": "A photo of the shutter count shown via EOS utility or a shutter-count app/menu screen",
+        "if_unproven": "priced as high-mileage/worst case"
+      },
+      {
+        "risk": "LCD screen shown closed/folded in photo 1, functionality unverified",
+        "proof": "A photo or clip of the screen powered on and displaying a live image or menu",
+        "if_unproven": "priced as screen not working"
+      },
+      {
+        "risk": "Battery, charger, and memory card not shown; may not be included",
+        "proof": "A photo of the battery, charger, and card included in the sale",
+        "if_unproven": "priced as accessories not included, body+lens only"
+      },
+      {
+        "risk": "Photo 2 shows other cameras (700D, Nikon) on the same shelf, unclear if any extra lens/body is part of this specific listing",
+        "proof": "A photo of only the items included in this exact sale, laid out together",
+        "if_unproven": "priced as only the 600D body + 18-55mm lens shown in photo 0/1"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the camera powered on with a live preview or playback image on the LCD screen",
+      "Photo of the shutter count via a menu screen or EOS utility connection",
+      "Photo of the battery, charger, and memory card included",
+      "A sample photo taken with the camera to confirm sensor/lens sharpness",
+      "Confirmation shot that only the 600D body + 18-55mm lens (not the other shelf items) are part of this sale"
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identified as a Canon EOS 600D body with an 18-55mm kit lens from the badge visible in photo 0, but no proof of sensor, shutter, or screen function exists, so it must be priced at worst case against the cheapest comparable Canon DSLR kits; no exact 600D comparable is listed, so the two lowest Canon DSLR listings bracket the worst-case range for this older, unverified-function body.",
+    "price_pick": {
+      "low": 1,
+      "high": 3
+    }
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 30840,
+    "input_tokens": 4609,
+    "output_tokens": 2576,
+    "cost_usd": 0.034978,
+    "replayed": false,
+    "fixture_key": "42804826be302aba6effe49e6875420d",
+    "error": null
+  }
+}

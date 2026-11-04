@@ -1,0 +1,86 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Single tire shown upright on brick/paved ground, outdoor tire shop setting with tire stacks in background.",
+      "Tread pattern is visible and appears lightly worn, asymmetric groove design.",
+      "Sidewall facing the camera shows no legible brand, size, or DOT markings - only a semi-transparent watermark reading 'CLEARTECH WHEELS' which is the seller's shop branding, not tire info.",
+      "No visible 'RFT', 'ROF', 'SSR', or other run-flat sidewall markings.",
+      "Only one tire is shown; quantity being sold is not confirmed by photo."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "car tire (used)",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Run-Flat tires",
+        "verdict": "unverifiable_remote",
+        "evidence": "No sidewall run-flat code (RFT/ROF/SSR/ZP) is legible in photo 0; the facing sidewall text is unreadable."
+      },
+      {
+        "claim": "Fits Mercedes Benz, BMW, Audi, Volkswagen etc",
+        "verdict": "unverifiable_remote",
+        "evidence": "No tire size (e.g. 225/45R17) is visible in photo 0 to confirm fitment to any of these vehicles."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Tire size unknown, which drives both price and vehicle fitment",
+        "proof": "Clear close-up photo of the sidewall showing size code (e.g. 225/45R17) and load/speed rating",
+        "if_unproven": "cannot be priced at all without this"
+      },
+      {
+        "risk": "Brand/model unknown (Pirelli-style tread pattern suspected but not confirmed)",
+        "proof": "Close-up of sidewall logo/brand name",
+        "if_unproven": "priced as generic unbranded used tire, worst case"
+      },
+      {
+        "risk": "Run-flat construction unverified",
+        "proof": "Close-up of sidewall showing RFT/ROF/SSR/ZP marking",
+        "if_unproven": "priced as standard (non run-flat) tire"
+      },
+      {
+        "risk": "Tire age/manufacture date unknown (old stock may be unsafe despite tread)",
+        "proof": "Close-up of DOT date code on sidewall (4-digit week/year stamp)",
+        "if_unproven": "priced as old/unknown-age stock, worst case"
+      },
+      {
+        "risk": "Hidden sidewall damage, bulges, or repairs not visible from this single front-facing angle",
+        "proof": "Photos of both full sidewalls and tread from multiple angles",
+        "if_unproven": "priced as possibly damaged, worst case"
+      },
+      {
+        "risk": "Quantity unclear (single tire vs set of 2/4)",
+        "proof": "Photo or statement confirming number of tires included in this listing/price",
+        "if_unproven": "priced as single unit only"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the sidewall showing tire size, brand, and load/speed rating",
+      "Close-up photo of the DOT date code for manufacture year",
+      "Close-up of any run-flat marking (RFT/ROF/SSR/ZP) on the sidewall",
+      "Photo of the opposite sidewall and full tread for damage check",
+      "Confirmation of how many tires are included in this sale"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The tire's size and brand are not legible in the only photo provided, and in the tire market these two facts alone determine price range far more than condition does, so even a worst-case price cannot be set without them."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 19154,
+    "input_tokens": 2005,
+    "output_tokens": 1810,
+    "cost_usd": 0.018951,
+    "replayed": false,
+    "fixture_key": "8d3d1e686f5a4ff4c39b172435ba4213",
+    "error": null
+  }
+}

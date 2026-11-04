@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Black car battery sitting inside a cardboard box.",
+      "Label clearly displays 'Everstart' brand and 'CMF55066' model number.",
+      "Technical specifications on label: 12V, 50AH(20HR), 83MIN(RC), 430A(EN).",
+      "'MADE IN KOREA' is printed on the label and embossed on the plastic casing.",
+      "Red and black protective caps are on the terminals.",
+      "The 'Fitting Date' grid on the label is unmarked.",
+      "A circular state-of-charge indicator (magic eye) is visible on the top left."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "Car battery",
+      "brand": "Everstart",
+      "model": "CMF55066",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Brand: Everstart",
+        "verdict": "supported",
+        "evidence": "photo 0 label"
+      },
+      {
+        "claim": "Model: CMF 55066",
+        "verdict": "supported",
+        "evidence": "photo 0 label"
+      },
+      {
+        "claim": "Country: Made in Korea",
+        "verdict": "supported",
+        "evidence": "photo 0 label and embossed casing"
+      },
+      {
+        "claim": "Type: Sealed Calcium",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows a sealed maintenance-free design, but the specific 'Calcium' chemistry text is not legible."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery may be discharged or have high internal resistance (dead cells).",
+        "proof": "A video showing a multimeter reading the voltage and a load test result.",
+        "if_unproven": "as a scrap/core battery"
+      },
+      {
+        "risk": "Battery may be old stock; lead-acid batteries degrade even when unused.",
+        "proof": "A clear photo of the manufacturing date code heat-stamped into the plastic casing.",
+        "if_unproven": "as old stock"
+      },
+      {
+        "risk": "Hidden physical damage such as side-wall bulging or leaks.",
+        "proof": "Photos of all four sides and the bottom of the battery out of the box.",
+        "if_unproven": "as having potential casing leaks"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the manufacturing date code stamped on the plastic casing.",
+      "Video showing a multimeter reading the current voltage.",
+      "Photos of the battery from all sides, out of the box."
+    ],
+    "decision": "price",
+    "reason": "The brand and model are clearly identified from the label in photo 0. The item can be priced at its worst-case value (scrap/used) until health and age are proven."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 10355,
+    "input_tokens": 2416,
+    "output_tokens": 1927,
+    "cost_usd": 0.006989,
+    "replayed": false,
+    "fixture_key": "f04c499178fd4147c93b977242c5c659",
+    "error": null
+  }
+}

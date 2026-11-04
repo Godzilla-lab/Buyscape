@@ -1,0 +1,102 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0: Rear of a black smartphone with an Apple logo and a vertical dual-camera module in the upper left.",
+      "Photo 1: Same rear view from a slightly different angle; Apple logo and dual cameras visible.",
+      "Photo 2: Front of the same smartphone with the screen off; a pill-shaped Dynamic Island is visible at the top center.",
+      "All three photos carry \"POSTED ON JIJI\" and \"BLUTECH SOLUTION\" watermarks."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "smartphone",
+      "brand": "Apple",
+      "model": null,
+      "read_from": [
+        "photo 0",
+        "photo 1"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "iPhone 16plus",
+        "verdict": "unverified",
+        "evidence": "Photos show an iPhone but do not display the model name or number."
+      },
+      {
+        "claim": "128gb storage",
+        "verdict": "unverified",
+        "evidence": "No storage capacity is visible in the photos."
+      },
+      {
+        "claim": "factory unlocked",
+        "verdict": "unverified",
+        "evidence": "Lock status cannot be seen in the photos."
+      },
+      {
+        "claim": "eSIM",
+        "verdict": "unverified",
+        "evidence": "eSIM support cannot be confirmed from the photos."
+      },
+      {
+        "claim": "BH 92",
+        "verdict": "unverified",
+        "evidence": "Battery health percentage is not shown in any photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The phone is not an iPhone 16 Plus",
+        "proof": "Screenshot of Settings > General > About showing the model name",
+        "if_unproven": "price as an older iPhone model"
+      },
+      {
+        "risk": "Storage is not 128 GB",
+        "proof": "Screenshot of Settings > General > About showing total capacity",
+        "if_unproven": "price as lower storage"
+      },
+      {
+        "risk": "Battery health is not 92%",
+        "proof": "Screenshot of Settings > Battery > Battery Health",
+        "if_unproven": "price as worn or unknown battery"
+      },
+      {
+        "risk": "The phone is carrier locked",
+        "proof": "Screenshot of Settings > General > About showing No SIM restrictions",
+        "if_unproven": "price as carrier locked"
+      },
+      {
+        "risk": "iCloud or activation lock is active",
+        "proof": "Video of the phone unlocked to the home screen",
+        "if_unproven": "price as locked or non-functional"
+      },
+      {
+        "risk": "Hidden physical or liquid damage",
+        "proof": "Close-up photos of all edges, ports, and liquid contact indicators",
+        "if_unproven": "price as damaged"
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of Settings > General > About",
+      "Screenshot of Settings > Battery > Battery Health",
+      "Video of phone unlocked to home screen",
+      "Close-up photos of all sides, ports, and SIM tray"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photos show an iPhone but do not confirm the model, storage, battery health, or lock status; the exact model drives the price and cannot be read from the images."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 31633,
+    "input_tokens": 2915,
+    "output_tokens": 5098,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "2c58833cea0b7979e398726a780dbf8f",
+    "error": null
+  }
+}

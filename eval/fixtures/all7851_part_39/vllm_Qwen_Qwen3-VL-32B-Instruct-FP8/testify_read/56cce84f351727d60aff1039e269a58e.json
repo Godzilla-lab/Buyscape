@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a dark gray thermal receipt printer with a printed receipt emerging from the top. The brand 'EPSON' is visible on the front panel.",
+      "Photo 1 shows the back of the same printer, with the brand 'EPSON' visible on the top. There are ports and labels, including a white label with text and a barcode, but the text is too blurry to read.",
+      "The receipt in photo 0 has text and a logo, indicating the printer is capable of printing.",
+      "The printer appears to be a compact, box-shaped device, typical of point-of-sale receipt printers.",
+      "No visible damage or wear is apparent in either photo."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "thermal receipt printer",
+      "brand": "EPSON",
+      "model": null,
+      "read_from": [
+        "photo 0 front panel",
+        "photo 1 top panel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Print method: Thermal line printing",
+        "verdict": "supported",
+        "evidence": "The device is a thermal receipt printer, which uses thermal line printing. This is standard for such devices and consistent with the appearance and receipt output shown in photo 0."
+      },
+      {
+        "claim": "Paper size roll paper: 79.50 \u00b1 0.50 (W) mm x dia 83.00 mm, 57.50 \u00b1...",
+        "verdict": "unverifiable_remote",
+        "evidence": "The paper size is not visible in the photos. The receipt in photo 0 is too small and partially cut off to measure. The label on the back (photo 1) is too blurry to read. The seller's text is unverified by visual evidence."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Printer may not be functional or may have internal damage not visible in photos.",
+        "proof": "A video showing the printer powering on, printing a test receipt, and cutting the paper.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Model number is not visible, which affects pricing and compatibility.",
+        "proof": "Clear photo of the model label on the back or side of the printer.",
+        "if_unproven": "priced at lowest common model in the EPSON thermal printer range"
+      },
+      {
+        "risk": "Missing or damaged ports (USB, serial, etc.) that affect connectivity.",
+        "proof": "Close-up photo of all ports on the back and side of the printer.",
+        "if_unproven": "priced as having unknown connectivity options"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the model label on the printer (preferably from the back or side).",
+      "Video showing the printer powering on and printing a test receipt.",
+      "Close-up photo of all ports on the back and side of the printer."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The brand is confirmed as EPSON, but the model is unreadable and critical for pricing. The paper size claim is unverifiable. Functionality and port condition are hidden risks. Without proof of model and working condition, a worst-case price cannot be confidently assigned."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 60316,
+    "input_tokens": 2156,
+    "output_tokens": 721,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "56cce84f351727d60aff1039e269a58e",
+    "error": null
+  }
+}

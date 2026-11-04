@@ -1,0 +1,73 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows three blue M.2 NVMe SSDs held in a hand.",
+      "The top SSD has 'Netac' branding visible on its surface.",
+      "The bottom SSD has a white label with text and a QR code.",
+      "The label on the bottom SSD reads 'NAND NVME5000-256G' and '512GB' (likely a typo or misprint).",
+      "The label also includes 'PHANTOM SERIES', 'CE', 'RoHS', and a barcode.",
+      "The SSDs appear to be in used condition, with visible wear and a small sticker on the label.",
+      "The background shows a cluttered environment with cables and a window frame."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "M.2 NVMe SSD",
+      "brand": "Netac",
+      "model": "NVME5000-256G",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Netac nv7000-q m.2 nvme ssd (pcie gen4 x4)",
+        "verdict": "contradicted",
+        "evidence": "The label in photo 0 reads 'NVME5000-256G', not 'nv7000-q'. The model name does not match the seller's claim."
+      },
+      {
+        "claim": "speeds up to 7,100mb/s read and 6,200mb/s write",
+        "verdict": "unverifiable_remote",
+        "evidence": "No performance data is visible in the photo. The claim cannot be verified from the image alone."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The SSD may be used or refurbished with unknown wear or data history.",
+        "proof": "A close-up of the SSD's PCB and NAND chips, or a screenshot of a health check tool (e.g., CrystalDiskInfo) showing wear level and SMART data.",
+        "if_unproven": "priced as used with unknown condition, which may reduce value"
+      },
+      {
+        "risk": "The model may not be the claimed 'nv7000-q' but a different model (NVME5000), which may have lower performance or different specifications.",
+        "proof": "A clear photo of the model name on the SSD or its packaging, or a screenshot of the official product page for the NVME5000-256G.",
+        "if_unproven": "priced as a lower-tier or different model, reducing value"
+      },
+      {
+        "risk": "The capacity may be misrepresented (label says '512GB' but model name says '256G').",
+        "proof": "A photo of the SSD connected to a computer with disk management or a tool showing actual capacity.",
+        "if_unproven": "priced as potentially mislabeled, which may reduce value"
+      }
+    ],
+    "proof_requests": [
+      "A clear photo of the SSD's model name and specifications on the label or packaging.",
+      "A screenshot of the SSD's capacity and health status when connected to a computer.",
+      "A photo of the SSD's PCB and NAND chips to confirm it is not a cloned or repurposed drive."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model name on the label contradicts the seller's claim, and key performance and capacity details cannot be verified from the current photo. The item's true identity and condition require further proof before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 66591,
+    "input_tokens": 1961,
+    "output_tokens": 796,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "429230dfc61c11fe4c41e7f9f4408d1f",
+    "error": null
+  }
+}

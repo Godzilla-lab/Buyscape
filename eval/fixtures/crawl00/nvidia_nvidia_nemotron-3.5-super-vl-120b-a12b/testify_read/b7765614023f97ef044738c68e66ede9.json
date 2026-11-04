@@ -1,0 +1,70 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 1 shows a Western Digital WD Scorpio Blue label with model WD2500BEVT and 250 GB capacity printed on it.",
+      "Photo 0 and photo 2 show multiple 2.5 inch laptop hard drives stacked and fanned out on a blue cloth.",
+      "All visible drives have WD branding and SATA connectors.",
+      "A watermark reads POSTED ON JIJI JERRY IDOKO across the images."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "2.5 inch internal hard drive",
+      "brand": "Western Digital",
+      "model": "WD2500BEVT",
+      "read_from": [
+        "photo 1 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "250gb Hard drive",
+        "verdict": "supported",
+        "evidence": "photo 1 label reads 250 GB and model WD2500BEVT"
+      },
+      {
+        "claim": "2.5 inch",
+        "verdict": "supported",
+        "evidence": "photo 1 shows a 2.5 inch laptop drive form factor; model WD2500BEVT is a 2.5 inch drive"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Drive may not power on or may have bad sectors",
+        "proof": "video of the drive connected to a computer, detected in BIOS/Device Manager, with a SMART health report",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "SATA connector or PCB may be damaged",
+        "proof": "close-up photo of the SATA data/power connector and circuit board",
+        "if_unproven": "as physically damaged"
+      },
+      {
+        "risk": "Drive may contain previous owner's data",
+        "proof": "seller confirmation or screenshot showing the drive has been securely wiped",
+        "if_unproven": "as a data-bearing used drive"
+      }
+    ],
+    "proof_requests": [
+      "Video of the drive spinning up and being recognized by a computer",
+      "Screenshot of SMART health status (e.g., CrystalDiskInfo)",
+      "Close-up photo of the SATA connector and PCB"
+    ],
+    "decision": "price",
+    "reason": "The model WD2500BEVT is clearly readable in photo 1, confirming a 250 GB 2.5 inch WD Scorpio Blue drive; functionality cannot be verified from photos so it is priced as not working."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 26606,
+    "input_tokens": 2244,
+    "output_tokens": 2435,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "b7765614023f97ef044738c68e66ede9",
+    "error": null
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Three photos show two identical boxes of an electric iron.",
+      "The boxes are labeled 'Boscon' brand, model 'BOS-IR8001', 300W, with 'Electric Iron' clearly printed.",
+      "The boxes are sealed and appear new, with no visible damage or signs of use.",
+      "The packaging includes claims: 'The ironing surface is wider and faster', 'Heating quickly, ironing is flat', 'Safe and easy to use', 'Pure copper wire', 'BS plug'.",
+      "Photo 0 shows a hand holding one box, with another box stacked below; both boxes are identical.",
+      "Photos 1 and 2 are duplicates, showing the same two boxes from a slightly different angle.",
+      "No actual iron is visible \u2014 only the packaging."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "electric iron",
+      "brand": "Boscon",
+      "model": "BOS-IR8001",
+      "read_from": [
+        "photo 0 box front",
+        "photo 1 box side"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Brand new",
+        "verdict": "supported",
+        "evidence": "Boxes are sealed and show no signs of tampering or use; no iron is visible, so condition is assumed new based on packaging."
+      },
+      {
+        "claim": "Inverter Iron",
+        "verdict": "contradicted",
+        "evidence": "The packaging clearly labels it as 'ELECTRIC IRON', not 'Inverter Iron'. The term 'inverter' is not present on any visible part of the box. This is likely a misnomer or error by the seller."
+      },
+      {
+        "claim": "300W",
+        "verdict": "supported",
+        "evidence": "The '300W' is clearly printed on the front and side of the box in photo 0 and photo 1."
+      },
+      {
+        "claim": "Pure copper wire",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a claim on the packaging, but cannot be verified without opening the box or seeing the internal wiring. The photos do not show the inside."
+      },
+      {
+        "claim": "BS plug",
+        "verdict": "unverifiable_remote",
+        "evidence": "The plug is not visible in any photo. The claim is printed on the box, but cannot be confirmed remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The iron may be defective or not working despite being new",
+        "proof": "A video or photo of the iron being powered on and heating up, or a close-up of the heating element and plug.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The iron may not be genuine Boscon or may be counterfeit",
+        "proof": "A close-up of the iron's body with the brand and model engraved or printed, or a serial number, and a photo of the plug type.",
+        "if_unproven": "priced as possibly counterfeit, which reduces value"
+      },
+      {
+        "risk": "The plug may not be compatible with Nigerian outlets (BS plug may not fit standard Nigerian sockets)",
+        "proof": "A clear photo of the plug showing its shape and pin configuration, or a photo of the plug inserted into a Nigerian socket.",
+        "if_unproven": "priced as incompatible, which reduces value"
+      }
+    ],
+    "proof_requests": [
+      "A photo or video of the actual iron inside the box, showing the brand and model on the body.",
+      "A close-up photo of the plug to confirm it fits Nigerian sockets.",
+      "A video of the iron being turned on and heating up to confirm it works."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a Boscon BOS-IR8001 300W electric iron, but critical risks remain unproven: whether it works, whether the plug is compatible, and whether it is genuine. The seller's claim of 'Inverter Iron' is contradicted by the packaging. Without proof of functionality and compatibility, the item cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 71704,
+    "input_tokens": 2772,
+    "output_tokens": 936,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "8f726a916236914b670f2c0d720835fa",
+    "error": null
+  }
+}

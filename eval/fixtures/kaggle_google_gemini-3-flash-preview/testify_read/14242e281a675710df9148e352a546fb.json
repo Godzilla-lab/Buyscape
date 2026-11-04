@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Black thermal receipt printer.",
+      "Brand 'Xprinter' is visible on a label at the bottom left of the device.",
+      "Control panel features Power, Error, and Paper LEDs and a Feed button.",
+      "A warning sticker regarding the paper cutter is present on the top cover.",
+      "Visible dust and debris in the seams and on the surface of the casing.",
+      "No power adapter or interface cables (USB/Serial/LAN) are shown.",
+      "The device is not powered on in the photos; no test print is provided."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "thermal receipt printer",
+      "brand": "Xprinter",
+      "model": null,
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Very neat",
+        "verdict": "contradicted",
+        "evidence": "Photos 0 and 1 show significant dust accumulation in the crevices and on the body."
+      },
+      {
+        "claim": "Working perfectly",
+        "verdict": "unverified",
+        "evidence": "There are no photos of the device powered on or a sample receipt showing print quality."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Unknown interface and model specifications",
+        "proof": "Photo of the manufacturer's sticker on the bottom or back of the unit.",
+        "if_unproven": "as the base USB-only model"
+      },
+      {
+        "risk": "Missing power supply and data cables",
+        "proof": "Photo showing the power brick and connection cables.",
+        "if_unproven": "as missing all cables"
+      },
+      {
+        "risk": "Print head damage (missing lines or faint text)",
+        "proof": "Photo of a self-test print (produced by holding the FEED button while turning it on).",
+        "if_unproven": "as non-functional"
+      },
+      {
+        "risk": "Faulty auto-cutter",
+        "proof": "Video showing the printer successfully cutting paper after a print job.",
+        "if_unproven": "as having a broken cutter"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the sticker on the bottom or back showing the model number.",
+      "Photo of a self-test print to verify print head integrity.",
+      "Photo of the power adapter and any included cables.",
+      "Photo of the device powered on with the 'Power' LED lit."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The specific model number is not visible, which determines if the unit has LAN or Bluetooth capabilities that significantly affect value. Furthermore, there is no evidence of functionality or print quality."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 12957,
+    "input_tokens": 3472,
+    "output_tokens": 2467,
+    "cost_usd": 0.009137,
+    "replayed": false,
+    "fixture_key": "14242e281a675710df9148e352a546fb",
+    "error": null
+  }
+}

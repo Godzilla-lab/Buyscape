@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the front of a hair dryer box with 'SONAR' brand, model 'SN-1269', and '4000W' power rating. The box claims '12 in 1' and 'Professional Hair Dryer'.",
+      "Photo 1 shows the box partially opened with the hair dryer and accessories inside, wrapped in plastic. The dryer is black with a gold accent. The box is upright, showing the side with 'SONAR' and 'SN-1269'.",
+      "Photo 2 shows the back of the box with multilingual text listing features: 3 temperature settings, 2 speed settings, 'Cool Shot', professional diffuser, and 4000W power. Voltage is listed as 220-240V, 50-60Hz.",
+      "The box has a watermark 'POSTED ON JIJI' and 'FAITHLY VENTURES'.",
+      "No photos show the hair dryer turned on or in use. No close-up of the plug or internal components."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "hair dryer",
+      "brand": "SONAR",
+      "model": "SN-1269",
+      "read_from": [
+        "photo 0 box front",
+        "photo 1 box side",
+        "photo 2 box back"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Original Sonar SN-1269 12-in-1 Professional Hair Dryer 4000W Powerful & Stable!",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows the brand, model, and 4000W power. The '12 in 1' is visible on the box. Photo 2 confirms 4000W and professional features."
+      },
+      {
+        "claim": "Salon quality",
+        "verdict": "unverifiable_remote",
+        "evidence": "No way to verify salon quality from photos alone. It is a marketing claim."
+      },
+      {
+        "claim": "4000W Powerful & Stable",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 2 both show '4000W' on the box. The 'Powerful and Stable' is a marketing phrase, but the power rating is confirmed."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The hair dryer may not be functional or may have internal damage.",
+        "proof": "A video or photo of the hair dryer turned on, showing airflow and heat, and a close-up of the plug and cord for damage.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The voltage (220-240V) may not be compatible with Nigerian outlets (which are 230V, 50Hz), but this is generally compatible. However, the plug type may not fit Nigerian sockets.",
+        "proof": "A close-up photo of the plug to confirm it is compatible with Nigerian outlets (Type G or Type D).",
+        "if_unproven": "priced with plug compatibility risk, may require adapter"
+      },
+      {
+        "risk": "The '12 in 1' accessories may be missing or damaged.",
+        "proof": "A clear photo of all accessories laid out and in good condition.",
+        "if_unproven": "priced as missing or damaged accessories"
+      }
+    ],
+    "proof_requests": [
+      "A video or photo of the hair dryer turned on, showing airflow and heat.",
+      "A close-up photo of the plug to confirm compatibility with Nigerian outlets.",
+      "A clear photo of all accessories laid out and in good condition."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a SONAR SN-1269 hair dryer, and the power and model claims are supported. However, functionality, plug compatibility, and accessory condition cannot be verified from current photos. These risks affect pricing and must be proven before a price can be assigned."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 74142,
+    "input_tokens": 2796,
+    "output_tokens": 904,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "6febba4163685351e59e62964cb0f868",
+    "error": null
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r4",
+  "response": {
+    "observations": [
+      "Four red gas cylinders are shown outdoors on a concrete surface.",
+      "The cylinders have a red metal handle and a valve assembly on top.",
+      "The brand 'CAL' is printed on the side of the front cylinder in photo 0.",
+      "The text '47kg Pr' is visible on the side of the front cylinder in photo 0.",
+      "The cylinders appear to be in good cosmetic condition with no visible rust or significant dents.",
+      "A watermark 'EMMATECH TECHNOLOGY' is present across the center of the image."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "gas cylinder",
+      "brand": "CAL",
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "It is gas",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "Empty Cylinder",
+        "verdict": "unverified",
+        "evidence": "The cylinders are shown without any visible markings or labels indicating the current weight or remaining gas level."
+      },
+      {
+        "claim": "Recently tested and certified, no leak, the valve is new.",
+        "verdict": "unverified",
+        "evidence": "No photo shows this; it is the seller's word only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The cylinders may be expired or past their re-test date.",
+        "proof": "A clear photo of the manufacture or expiry date stamped on the handle or the base of the cylinder.",
+        "if_unproven": "as expired/scrap value"
+      },
+      {
+        "risk": "The cylinders may be filled with a different gas (e.g., LPG) rather than the intended gas type.",
+        "proof": "A photo of the gas label on the cylinder showing the specific gas type (e.g., LPG, CNG).",
+        "if_unproven": "as LPG cylinders"
+      },
+      {
+        "risk": "The actual weight and remaining gas capacity are unknown.",
+        "proof": "A photo of the weight stamp on the handle or base of the cylinder.",
+        "if_unproven": "as the lowest weight for this model"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the weight stamp on the handle or base of the cylinders.",
+      "Photo of the gas label on the cylinders to confirm the gas type.",
+      "Photo of the expiry or manufacture date stamped on the handle."
+    ],
+    "decision": "price",
+    "reason": "The item is known from the photos. What they cannot prove is priced at its worst case until the proof asked for below arrives."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r4",
+    "task": "testify_read",
+    "latency_ms": 7311,
+    "input_tokens": 1705,
+    "output_tokens": 457,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "18d3ffde198be0ea2493780a93f6ba01",
+    "error": null
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a product box labeled 'BOTTLE WARMER' with an orange and white design.",
+      "The box features an image of a white and gray device with a digital display and buttons.",
+      "Text on the box lists '4 FUNCTIONS': Defrost, Warm milk, Heat food, Steam sterilize.",
+      "The box also states 'Safe Material' and 'Keep Milk Warm in 24 Hours'.",
+      "The brand or model is not visible on the box or device image.",
+      "The box is placed on a white, fluffy surface, possibly a rug or blanket.",
+      "A watermark 'C. HAVEN KIDDIES' is visible on the photo."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "4-in-1 bottle warmer",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "4in1 bottle warmer, defrost, warm milk, heat food and steam sterilize",
+        "verdict": "supported",
+        "evidence": "Photo 0: the box explicitly lists '4 FUNCTIONS' as Defrost, Warm milk, Heat food, Steam sterilize."
+      },
+      {
+        "claim": "Safe Material",
+        "verdict": "unverified",
+        "evidence": "Photo 0: the box states 'Safe Material' but no proof of material or certification is visible."
+      },
+      {
+        "claim": "Keep Milk Warm in 24 Hours",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo 0: the claim is on the box, but no test or evidence is visible to verify this function remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The device may not perform all advertised functions (defrost, heat food, steam sterilize) as claimed.",
+        "proof": "A video or photo showing the device in operation for each of the four functions.",
+        "if_unproven": "priced as a basic bottle warmer only, not as a 4-in-1 device."
+      },
+      {
+        "risk": "The device may be damaged or non-functional (e.g., broken display, no power).",
+        "proof": "A photo of the actual device outside the box, showing the display and buttons, and a photo of it plugged in and powered on.",
+        "if_unproven": "priced as not working."
+      },
+      {
+        "risk": "The product may be counterfeit or not as described (e.g., no steam sterilization feature).",
+        "proof": "A close-up photo of the device's control panel and any labels or model numbers, and a video demonstrating steam sterilization.",
+        "if_unproven": "priced as a generic bottle warmer without premium features."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual device outside the box, showing the display and buttons.",
+      "Photo of the device plugged in and powered on.",
+      "Video or photo demonstrating the steam sterilization function.",
+      "Close-up of any model or brand markings on the device."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a 4-in-1 bottle warmer by the box, but the actual device is not shown. Key claims like 'steam sterilize' and 'keep milk warm in 24 hours' cannot be verified remotely. The device's functionality and condition are unknown, so proof is needed before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 61846,
+    "input_tokens": 1929,
+    "output_tokens": 773,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "1cada8755dbc9575ce78c9b9defa53ae",
+    "error": null
+  }
+}

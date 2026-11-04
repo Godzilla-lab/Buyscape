@@ -1,0 +1,77 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0 shows a Yamaha electronic keyboard with a built-in speaker grille on the right side.",
+      "The control panel display area is visible but the screen content is not readable.",
+      "A model label on the front panel appears to read 'PSR-550' (partially visible).",
+      "No clear photo of the full keyboard brand/model name plate, ports, or power/adapter."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": null,
+      "brand": "Yamaha",
+      "model": "PSR-550",
+      "read_from": [
+        "photo 0 front panel label (appears as 'PSR-550')"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "PSR 550 working perfectly",
+        "verdict": "unverified",
+        "evidence": "Photo 0 does not show a powered-on screen, audio output, or any test/recording."
+      },
+      {
+        "claim": "The model is PSR650.",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 appears to show 'PSR-550' on the front label, not PSR-650."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Model mismatch: seller says PSR650 but the photo appears to show PSR-550; wrong model affects price and features.",
+        "proof": "Ask for a clear close-up photo of the model nameplate/label showing the exact model (PSR-550 vs PSR-650) and the full front panel.",
+        "if_unproven": "Price as the worst-case matching what\u2019s visible in the photo (PSR-550), and treat any mismatch as a reason to not pay a PSR-650 price."
+      },
+      {
+        "risk": "Not actually working (keys/speakers/sound, display, and buttons may be faulty).",
+        "proof": "Ask for a short video: power on, show the display, play a few notes, and demonstrate volume/speaker output (or headphone output).",
+        "if_unproven": "Price as not guaranteed working (worst case: needs repair / limited functionality)."
+      },
+      {
+        "risk": "Missing accessories (power adapter, sustain pedal, stand) or damaged ports/cables.",
+        "proof": "Ask for photos of: included items list, the power adapter (or charging/power input), sustain pedal (if any), and close-ups of all ports.",
+        "if_unproven": "Price assuming accessories may be missing and/or ports may need checking."
+      },
+      {
+        "risk": "Cosmetic damage not fully visible (scratches, broken speaker grille, loose panel).",
+        "proof": "Ask for additional photos from multiple angles: speaker grille close-up, both sides, and the underside/hinges/stands (if any).",
+        "if_unproven": "Price at the lower end of the comparable range for used keyboards."
+      }
+    ],
+    "proof_requests": [
+      "Clear close-up photo of the exact model label/nameplate (must show PSR-550 or PSR-650 clearly).",
+      "Short video test: power on + display visible + play keys + show volume working (and speaker sound).",
+      "Photo of the power adapter/charger (or proof of how it powers) and close-up of power/ports.",
+      "Photos of included accessories (sustain pedal/stand) and underside/any damage."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo suggests PSR-550 while the seller text says PSR650, and the 'working perfectly' claim is not verifiable from a single non-powered photo. Proof is needed to confirm the exact model and functionality before pricing confidently.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_joint",
+    "latency_ms": 6158,
+    "input_tokens": 2625,
+    "output_tokens": 830,
+    "cost_usd": 0.001563,
+    "replayed": false,
+    "fixture_key": "7a81e3f2a79fd99fb670469c49043685",
+    "error": null
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a car engine with four black ignition coils mounted in a row on the valve cover.",
+      "Photo 1 shows the same engine from a slightly different angle, with the alternator, serpentine belt, and pulleys visible.",
+      "No legible brand badge, logo, or model number is visible on the engine block or valve cover in either photo.",
+      "Watermarks read 'EMMY GOLD AUTO SPARE' and 'POSTED ON JIJI'.",
+      "The engine appears to be an inline four-cylinder based on the coil layout and cylinder head shape."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "4-cylinder car engine",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Hyundai",
+        "verdict": "unverifiable_remote",
+        "evidence": "No Hyundai badge or casting is legible in photo 0 or photo 1."
+      },
+      {
+        "claim": "Kia",
+        "verdict": "unverifiable_remote",
+        "evidence": "No Kia badge or casting is legible in photo 0 or photo 1."
+      },
+      {
+        "claim": "engine",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 1 clearly show an internal combustion engine."
+      },
+      {
+        "claim": "4cylinder",
+        "verdict": "supported",
+        "evidence": "Four ignition coils are visible in a row on the valve cover in photo 0 and photo 1."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Internal mechanical condition (seized, blown head gasket, internal damage)",
+        "proof": "Video of the engine turning freely by hand or running, or a compression test result.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Completeness (missing ECU, wiring harness, sensors, manifolds, or ancillaries)",
+        "proof": "Itemized photo showing every part included with the engine.",
+        "if_unproven": "as engine block only, missing ancillaries"
+      },
+      {
+        "risk": "Actual make (may not be Hyundai or Kia)",
+        "proof": "Close-up of engine block casting number or manufacturer badge.",
+        "if_unproven": "as unknown make 4-cylinder engine"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of engine block casting or manufacturer badge to confirm make",
+      "Video of the engine running or turning freely by hand",
+      "Photo showing all included parts such as harness, ECU, sensors, and manifolds"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a 4-cylinder car engine from the photos, and the seller's make claims cannot be verified remotely, so it can be priced at its worst case as an unproven, possibly incomplete engine of unknown make."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 9279,
+    "input_tokens": 2728,
+    "output_tokens": 1933,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "93c0071b2e97996245dfa1d8a54ae31d",
+    "error": null
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Retail packaging for a power bank is shown.",
+      "The brand 'NEW AGE' is printed on the box.",
+      "The capacity '22500' is prominently displayed.",
+      "Text 'POLYMER POWER BANK' is at the bottom.",
+      "Specifications '5V/3A' and 'LED Lighting' are visible.",
+      "A '12 months warranty' badge is on the box.",
+      "The actual power bank is not visible, only the box illustration.",
+      "A watermark 'POSTED ON JIJI MADAM VSONIC' is present."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "power bank",
+      "brand": "New Age",
+      "model": "22500mAh",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "NEW AGE",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "22500mAh",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "Polymer PowerBank",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different item.",
+        "proof": "A photo of the actual power bank outside of the packaging.",
+        "if_unproven": "priced as an empty box"
+      },
+      {
+        "risk": "The device may be non-functional or have a degraded battery.",
+        "proof": "A video showing the power bank charging a phone and being charged itself.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The item could be a counterfeit product.",
+        "proof": "A photo of the authenticity scratch-off security code on the box.",
+        "if_unproven": "priced as a generic or counterfeit unit"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual power bank outside the box.",
+      "Photo of the back of the box showing the full model number and specs.",
+      "Photo of the authenticity scratch-off label.",
+      "Video of the device charging a mobile phone."
+    ],
+    "decision": "price",
+    "reason": "The brand and capacity are clearly identified from the retail packaging, allowing for a valuation at the worst-case scenario of a non-functional or unverified unit."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 14862,
+    "input_tokens": 2355,
+    "output_tokens": 3317,
+    "cost_usd": 0.011128,
+    "replayed": false,
+    "fixture_key": "5899fad014cff1d385746dab50d819d1",
+    "error": null
+  }
+}

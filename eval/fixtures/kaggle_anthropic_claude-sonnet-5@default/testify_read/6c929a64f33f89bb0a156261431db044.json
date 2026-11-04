@@ -1,0 +1,94 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows a yellow/orange cylinder with a worn, scratched body and a weathered sticker near the valve guard.",
+      "Photo 1 shows a different, blue cylinder with a visible logo reading 'BERADISCO' and a brass valve fitting, with some surface rust on the handle/guard.",
+      "Photo 2 shows the same blue cylinder from a closer angle, valve fitting appears used (dull brass, slight grime), not visibly new.",
+      "No weight/size stamp (e.g. '12.5KG') is legible on either cylinder in any photo.",
+      "No test/certification sticker or stamped inspection date is legible in any photo.",
+      "The two cylinders shown differ in color and branding, suggesting the photos may not all be of the same item."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "12.5kg cooking gas cylinder",
+      "brand": "BERADISCO",
+      "model": null,
+      "read_from": [
+        "photo 1 logo on blue cylinder body"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "12.5kg standard cooking gas cylinder",
+        "verdict": "unverifiable_remote",
+        "evidence": "No kg stamp or size marking legible in any photo"
+      },
+      {
+        "claim": "Recently tested and certified",
+        "verdict": "unverified",
+        "evidence": "No certification sticker, tag, or inspection stamp visible in any photo"
+      },
+      {
+        "claim": "No leak",
+        "verdict": "unverifiable_remote",
+        "evidence": "Leak testing cannot be confirmed from static photos; requires a soap-bubble or pressure test video"
+      },
+      {
+        "claim": "The valve is new",
+        "verdict": "unverified",
+        "evidence": "Valve fitting in photo 1 and photo 2 shows a dull brass finish with some grime, not clearly a new/shiny valve, but condition is inconclusive from these angles"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Photos appear to show two different cylinders (yellow in photo 0, blue 'BERADISCO' in photos 1-2), so it's unclear which one is actually for sale",
+        "proof": "A single photo set showing only the one cylinder being sold, from multiple angles, with consistent background",
+        "if_unproven": "priced as the lower-value/less certain item, with the mismatch treated as a major defect in listing trust"
+      },
+      {
+        "risk": "No visible kg/size stamp to confirm it is genuinely 12.5kg (common cylinders range from 3kg to 50kg)",
+        "proof": "Close-up photo of the stamped collar/shoulder showing the tare weight and water capacity markings",
+        "if_unproven": "priced at the smallest plausible standard size claimed, i.e. worst case for value"
+      },
+      {
+        "risk": "No leak/pressure test proof despite claim",
+        "proof": "Video of a soap-bubble leak test on the valve and seams, or a shop receipt/certificate with date and cylinder serial number",
+        "if_unproven": "priced as untested, i.e. as a cylinder with unknown seal integrity"
+      },
+      {
+        "risk": "Valve condition unclear; could be old and merely cleaned rather than genuinely new",
+        "proof": "Close-up photo of the valve showing brand markings and manufacture date stamped on it",
+        "if_unproven": "priced as having the original/old valve, not a new one"
+      },
+      {
+        "risk": "Body corrosion/dents not fully visible (only top portions shown in all 3 photos, no full-body or base shot)",
+        "proof": "Full-length photos from at least two sides and a base shot showing the full cylinder and any rust/dents",
+        "if_unproven": "priced as having unknown body condition, treated as worst case (significant surface wear)"
+      }
+    ],
+    "proof_requests": [
+      "Clarify and photograph the single actual cylinder being sold, ruling out the mismatch between photo 0 and photos 1-2",
+      "Close-up of the stamped tare weight/capacity on the cylinder collar",
+      "Video of a leak test (soap bubbles on valve and seams) or a dated certification document/receipt",
+      "Close-up of the valve showing any manufacturer markings or date stamp to support 'new valve' claim",
+      "Full-body photos from multiple sides and the base to assess rust, dents, or structural damage"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photos show what appear to be two different cylinders (yellow vs. blue 'BERADISCO'), with no legible size stamp, no certification evidence, and an unclear valve condition, so even a worst-case price cannot be set without first confirming which single item is actually for sale and seeing its size markings."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 26096,
+    "input_tokens": 3936,
+    "output_tokens": 2375,
+    "cost_usd": 0.031622,
+    "replayed": false,
+    "fixture_key": "6c929a64f33f89bb0a156261431db044",
+    "error": null
+  }
+}

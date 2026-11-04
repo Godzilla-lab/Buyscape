@@ -1,0 +1,88 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0, 1, 2 show stacks of used tires inside a roadside shed/shop, shot from a distance.",
+      "Tires are piled many-deep; no single tire is isolated or shown as 'the item for sale'.",
+      "Sidewalls show faded paint marks (chalk/paint dashes) typical of used-tire sorting, but no brand name is legible on any sidewall.",
+      "In photo 1 and 2 a partial size code 'P22...' is visible on one tire but the rest of the digits are cut off/unreadable.",
+      "No DOT date code, no tread-depth gauge or coin, no close-up of any single tire's full sidewall or tread face is shown.",
+      "Watermark 'POSTED ON JIJI / IKWE ANTHONY' overlays all three images; this is a stock/catalog shot of the seller's shop, not of a specific unit."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used (tokunbo) car tire, size and brand not legible",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 1 partial 'P22...' size marking (incomplete)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Major distributor of Belgium tires",
+        "verdict": "unverifiable_remote",
+        "evidence": "No brand name, country-of-origin marking, or distributor certificate is visible in any photo; this is a seller self-description."
+      },
+      {
+        "claim": "Tread is still 90 percent, no patch, no bulge",
+        "verdict": "unverified",
+        "evidence": "Photos are distant group shots; no close-up of tread depth, no coin/gauge reference, no isolated sidewall to check for patches or bulges."
+      },
+      {
+        "claim": "Removed from a 2023 car",
+        "verdict": "unverifiable_remote",
+        "evidence": "No DOT date code, invoice, or removal photo/video shown; cannot confirm vehicle age or removal date from a stack of tires."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Tire size/diameter/load rating unknown, which is the main price driver",
+        "proof": "Clear close-up photo of the full sidewall showing size code (e.g., 205/55R16) and load/speed index for the specific tire being sold",
+        "if_unproven": "cannot be priced even at worst case without this"
+      },
+      {
+        "risk": "Actual tread depth could be much lower than claimed",
+        "proof": "Close-up photo of tread groove with a coin or tread-depth gauge inserted",
+        "if_unproven": "priced as low/near-legal-limit tread"
+      },
+      {
+        "risk": "Manufacture age (rubber hardening/dry rot) unknown",
+        "proof": "Photo of DOT date code on sidewall (last 4 digits = week/year)",
+        "if_unproven": "priced as old stock, not confirmed fresh"
+      },
+      {
+        "risk": "Hidden sidewall bulges, cracks, or repairs obscured by stacking",
+        "proof": "Individual photo/video of each candidate tire rolled out showing full sidewall and inner face",
+        "if_unproven": "priced as possibly damaged"
+      },
+      {
+        "risk": "Which exact tire(s) in the pile the buyer would receive is unclear (shop inventory shot, not a single listed item)",
+        "proof": "Seller points to/photographs the specific unit(s) reserved for this buyer",
+        "if_unproven": "cannot assign a single item's worst case without this"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the sidewall of the exact tire(s) for sale showing full size code and brand name",
+      "Photo of the DOT date code on the same tire(s)",
+      "Close-up of tread with a coin or gauge for depth verification",
+      "Photo/video of the tire rolled out to show the entire sidewall and inner liner for bulges/patches"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photos show a general shop stock of unidentified-size, unbranded used tires with no close-up of any specific unit, so even a worst-case price cannot be set until a clear sidewall photo reveals the size/brand of the actual tire(s) offered."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 28155,
+    "input_tokens": 3415,
+    "output_tokens": 2456,
+    "cost_usd": 0.028231,
+    "replayed": false,
+    "fixture_key": "8adb5d8b8916fe3af70f92c4ad58d2df",
+    "error": null
+  }
+}

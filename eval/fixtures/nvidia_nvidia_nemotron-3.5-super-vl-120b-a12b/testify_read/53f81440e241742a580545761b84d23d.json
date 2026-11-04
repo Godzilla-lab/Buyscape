@@ -1,0 +1,121 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Silver Toyota pickup truck, crew cab with short bed",
+      "Front grille shows Toyota emblem; hexagonal mesh grille (photos 0 and 1)",
+      "Tailgate badge reads TACOMA on left and V6 on right (photo 2)",
+      "Rear window has handwritten text No Start 963 (photo 2)",
+      "Black tonneau cover over cargo bed (photo 2)",
+      "Side running boards and black wheel arch cladding visible (photo 1)",
+      "Watermarks POSTED ON JIJI and TEEKAYWHEELS appear on all photos"
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "pickup truck",
+      "brand": "Toyota",
+      "model": "Tacoma",
+      "read_from": [
+        "photo 0 front grille emblem",
+        "photo 2 tailgate badges"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "2024 Toyota Tacoma",
+        "verdict": "unverified",
+        "evidence": "Tacoma badge visible in photo 2; year 2024 not shown anywhere"
+      },
+      {
+        "claim": "TRD trim",
+        "verdict": "unverified",
+        "evidence": "No TRD badge visible in any photo"
+      },
+      {
+        "claim": "4x4",
+        "verdict": "unverified",
+        "evidence": "Exterior photos cannot confirm four-wheel drive"
+      },
+      {
+        "claim": "V6 engine",
+        "verdict": "supported",
+        "evidence": "V6 badge on tailgate in photo 2"
+      },
+      {
+        "claim": "push to start",
+        "verdict": "unverified",
+        "evidence": "Interior not shown in photos"
+      },
+      {
+        "claim": "moonroof",
+        "verdict": "unverified",
+        "evidence": "Roof interior not shown in photos"
+      },
+      {
+        "claim": "verified duty",
+        "verdict": "unverifiable_remote",
+        "evidence": "Customs documents not in photos"
+      },
+      {
+        "claim": "foreign used",
+        "verdict": "unverifiable_remote",
+        "evidence": "Import status cannot be confirmed from photos"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine does not start; No Start written on rear window",
+        "proof": "Video of engine cranking and running",
+        "if_unproven": "as not running"
+      },
+      {
+        "risk": "Trim is not TRD; no TRD badge visible",
+        "proof": "Photo of TRD badge or VIN/build sheet",
+        "if_unproven": "as base or SR/SR5 trim, not TRD"
+      },
+      {
+        "risk": "Drivetrain is 2WD not 4x4",
+        "proof": "Photo of 4WD badge, transfer case, or undercarriage",
+        "if_unproven": "as two-wheel drive"
+      },
+      {
+        "risk": "Odometer reading and actual mileage unknown",
+        "proof": "Dashboard photo showing mileage",
+        "if_unproven": "as unknown or high mileage"
+      },
+      {
+        "risk": "Push-to-start and moonroof absent",
+        "proof": "Interior photos showing start button and moonroof",
+        "if_unproven": "as without those features"
+      },
+      {
+        "risk": "Customs duty not verified; import documents missing",
+        "proof": "Customs clearance or duty payment documents",
+        "if_unproven": "as duty-unverified with potential import issues"
+      }
+    ],
+    "proof_requests": [
+      "Video of the engine starting and running",
+      "Dashboard photo showing the odometer reading",
+      "Photo of any TRD badge or the VIN plate",
+      "Interior photos showing the push-to-start button and moonroof",
+      "Customs duty or vehicle clearance documents"
+    ],
+    "decision": "price",
+    "reason": "The vehicle is identifiable as a Toyota Tacoma V6 pickup from badges visible in the photos, so a worst-case price can be set despite unverified claims and the No Start notation."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 92793,
+    "input_tokens": 3469,
+    "output_tokens": 4551,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "53f81440e241742a580545761b84d23d",
+    "error": null
+  }
+}

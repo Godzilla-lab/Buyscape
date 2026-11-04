@@ -1,0 +1,75 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Three photos show stacks of used tires piled under a corrugated-metal roof, roadside/stall setting.",
+      "Tires show visible dirt, grime, and worn/scuffed sidewalls; several have faint chalk/paint marks (numbers, arrows) typical of used-tire sorting, not new-stock branding.",
+      "No tire brand name, DOT code, or size marking is legible in any photo; sidewalls are too dusty/blurred to read.",
+      "A watermark 'POSTED ON JIJI / IKWE ANTHONY' overlays all three images, consistent with a reused stock listing rather than a single item for sale.",
+      "Tread patterns vary across the stacks, indicating mixed makes/models/sizes rather than one uniform product.",
+      "No photo shows a single tire isolated with full sidewall or tread detail close-up."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used car tires (mixed sizes/brands, bulk stock)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 general stock",
+        "photo 1 general stock",
+        "photo 2 general stock"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Major distributor of Belgium tires",
+        "verdict": "unverifiable_remote",
+        "evidence": "No brand, country-of-origin marking, or distributor signage/certificate visible in any photo; tires appear used and dirty, not new stock from a named manufacturer."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "True size and brand of any given tire (needed for per-unit pricing) is unknown.",
+        "proof": "Close-up photo of a single tire's sidewall showing brand, size (e.g. 205/55R16) and DOT/date code.",
+        "if_unproven": "priced as generic unbranded used tire, lowest tier"
+      },
+      {
+        "risk": "Tread depth and remaining life not verifiable from distance/stacked photos.",
+        "proof": "Close-up of tread with a coin or ruler for depth reference.",
+        "if_unproven": "priced as minimum legal/worn tread"
+      },
+      {
+        "risk": "Hidden sidewall damage, bulges, repairs, or cracking from age/UV exposure.",
+        "proof": "Full 360\u00b0 video of a single tire's sidewall and inner surface.",
+        "if_unproven": "priced as cosmetic/structural risk present, i.e. lowest grade"
+      },
+      {
+        "risk": "Claim of 'Belgium' origin could be a generic marketing term not reflecting actual import source.",
+        "proof": "Photo of import/customs documentation or a tire sidewall showing 'Made in Belgium'.",
+        "if_unproven": "treated as unverified origin claim, no price premium applied"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of one specific tire's sidewall showing brand, size, and DOT code.",
+      "Tread depth photo with measuring tool or coin for scale.",
+      "Video walk-around of a single tire being sold, not the whole stock pile.",
+      "Any documentation supporting 'major distributor' or Belgian origin claim."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The listing shows a bulk, mixed stock of used tires with no readable size, brand, or tread-depth detail for any single item, so even a worst-case per-unit price cannot be set without a clear sidewall/tread shot."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 22815,
+    "input_tokens": 3383,
+    "output_tokens": 1852,
+    "cost_usd": 0.022127,
+    "replayed": false,
+    "fixture_key": "4512d7ed8fa2fe5dfaebfab1632d14de",
+    "error": null
+  }
+}

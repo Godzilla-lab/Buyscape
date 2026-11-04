@@ -1,0 +1,90 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows a large flat-screen TV leaning against a wall, screen powered off and reflective.",
+      "No brand logo, model number, or label visible anywhere on the frame or back.",
+      "No remote control visible in the photo.",
+      "No power cable, stand, or back panel shown.",
+      "No scale reference (tape measure, door frame, etc.) to confirm the stated 55-inch size."
+    ],
+    "identity": {
+      "status": "unknown",
+      "kind": "flat-screen TV",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "55-inch Samsung Smart TV",
+        "verdict": "unverifiable_remote",
+        "evidence": "No logo, label, or size marker visible in photo 0; brand and size cannot be confirmed from the image."
+      },
+      {
+        "claim": "No dead pixel, no line on the screen",
+        "verdict": "unverified",
+        "evidence": "Screen is off in photo 0; no powered-on shot to check for lines or dead pixels."
+      },
+      {
+        "claim": "Remote included",
+        "verdict": "unverified",
+        "evidence": "No remote visible in the photo."
+      },
+      {
+        "claim": "Never repaired",
+        "verdict": "unverifiable_remote",
+        "evidence": "No back panel or screw/seal photo to check for tampering."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Screen functionality unknown (no power-on test)",
+        "proof": "A photo or short video of the TV powered on, showing a clear picture or menu screen.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Brand/model unconfirmed, affects comparable pricing tier",
+        "proof": "Close-up photo of the brand logo or the rating label on the back of the TV.",
+        "if_unproven": "priced as a generic unbranded 55-inch LED TV"
+      },
+      {
+        "risk": "Actual screen size unconfirmed",
+        "proof": "Photo with a tape measure against the screen or the model label showing size.",
+        "if_unproven": "priced at the lower bound of plausible size range shown in photo"
+      },
+      {
+        "risk": "Remote control existence/condition unconfirmed",
+        "proof": "Photo of the remote next to the TV.",
+        "if_unproven": "priced as remote not included"
+      },
+      {
+        "risk": "Hidden back panel damage or repair signs",
+        "proof": "Photo of the back panel, ports, and screws.",
+        "if_unproven": "priced as possibly repaired/damaged"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of the brand logo or rear label showing model number and size.",
+      "Photo or video of the TV powered on and displaying an image.",
+      "Photo of the remote control alongside the TV.",
+      "Photo of the back panel showing ports and condition."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The brand and model, which set the price tier, are unreadable in the single photo, and the screen is off so working condition cannot even be assumed at a worst-case generic price without knowing the actual size/brand."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 18744,
+    "input_tokens": 3452,
+    "output_tokens": 1795,
+    "cost_usd": 0.021695,
+    "replayed": false,
+    "fixture_key": "d91b8102838380548d048771b36d0b2a",
+    "error": null
+  }
+}

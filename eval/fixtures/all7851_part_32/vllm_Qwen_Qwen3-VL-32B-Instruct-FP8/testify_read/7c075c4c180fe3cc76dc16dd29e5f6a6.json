@@ -1,0 +1,110 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Open laptop showing Windows Update screen, silver chassis, black keyboard, trackpad, and Intel Core i5 sticker on palm rest. Screen has a watermark 'POSTED ON JIJI GODWIN SIMON'.",
+      "Photo 1: Side view of the laptop, showing the keyboard, trackpad, and right side ports. The screen is off. Background shows shelves with stacked electronics, likely a store or repair shop.",
+      "Photo 2: Closed laptop lid showing the HP logo in the center. Silver finish. Watermark 'POSTED ON JIJI GODWIN SIMON' visible.",
+      "The laptop appears to be in a retail or repair environment, not a home setting.",
+      "No visible damage to the exterior in the photos.",
+      "The screen is on in photo 0, indicating the laptop powers on."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "EliteBook 830 G6",
+      "read_from": [
+        "photo 0 screen (Windows Update screen shows 'HP EliteBook 830 G6' in system info section)",
+        "photo 2 lid (HP logo)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP elitebook 830 g6",
+        "verdict": "supported",
+        "evidence": "Photo 0 screen shows 'HP EliteBook 830 G6' in the Windows Update system info section."
+      },
+      {
+        "claim": "8gb 256ssd",
+        "verdict": "unverifiable_remote",
+        "evidence": "No system information screen showing RAM or storage. Cannot verify from photos alone."
+      },
+      {
+        "claim": "core i5",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows an Intel Core i5 sticker on the palm rest."
+      },
+      {
+        "claim": "silver color",
+        "verdict": "supported",
+        "evidence": "Photos 0, 1, and 2 show a silver chassis and lid."
+      },
+      {
+        "claim": "keyboard light",
+        "verdict": "unverified",
+        "evidence": "No photo shows the keyboard illuminated. No visible backlit keys in the current lighting."
+      },
+      {
+        "claim": "Face ID",
+        "verdict": "unverified",
+        "evidence": "No visible front-facing camera or fingerprint sensor. No proof of Face ID functionality in photos."
+      },
+      {
+        "claim": "very good battery life",
+        "verdict": "unverifiable_remote",
+        "evidence": "Battery life cannot be assessed from photos. No proof of actual usage or battery health."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "RAM and storage may not be 8GB and 256GB SSD as claimed",
+        "proof": "Photo of the system information screen showing RAM and storage details, or a screenshot from Device Manager or Disk Management.",
+        "if_unproven": "Priced as if lower specs (e.g., 4GB RAM or 128GB SSD), which would reduce value significantly."
+      },
+      {
+        "risk": "Keyboard backlight not functional or not present",
+        "proof": "Photo of the keyboard with backlight turned on in a dark environment.",
+        "if_unproven": "Priced as if no backlight, which reduces value for buyers seeking this feature."
+      },
+      {
+        "risk": "Face ID (Windows Hello) not functional or not present",
+        "proof": "Photo of the front camera or fingerprint sensor, or a screenshot showing Windows Hello setup or login screen.",
+        "if_unproven": "Priced as if no biometric login, which reduces value for buyers seeking security features."
+      },
+      {
+        "risk": "Battery health degraded or not as claimed",
+        "proof": "Screenshot of battery health report from Windows Power Management or third-party tool (e.g., HWInfo, BatteryInfoView).",
+        "if_unproven": "Priced as if battery is degraded (e.g., 50% health), which reduces value."
+      },
+      {
+        "risk": "Laptop has physical damage not visible in photos (e.g., hinge wear, screen dead pixels, scratches)",
+        "proof": "Close-up photos of the screen, hinges, and body under direct light, including edges and corners.",
+        "if_unproven": "Priced as if minor wear is present, which reduces value."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of system information showing RAM and storage (Device Manager or Settings > System > About).",
+      "Photo of the keyboard with backlight turned on.",
+      "Photo of the front camera or fingerprint sensor, or screenshot of Windows Hello setup.",
+      "Screenshot of battery health report.",
+      "Close-up photos of the screen, hinges, and body under direct light, including edges and corners."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is confirmed as HP EliteBook 830 G6, but critical specifications (RAM, storage, battery health) and features (keyboard light, Face ID) cannot be verified from the current photos. These directly affect the price and must be proven before pricing can be determined."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 91283,
+    "input_tokens": 2170,
+    "output_tokens": 1158,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "7c075c4c180fe3cc76dc16dd29e5f6a6",
+    "error": null
+  }
+}

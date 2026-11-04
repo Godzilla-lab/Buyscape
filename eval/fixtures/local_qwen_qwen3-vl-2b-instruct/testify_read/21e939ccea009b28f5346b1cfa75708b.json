@@ -1,0 +1,63 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-instruct",
+  "response": {
+    "observations": [
+      "Photo 0: An orange gas cylinder with a brass valve, sitting on the floor next to a red gas cylinder. The cylinder has some dirt and wear on the surface. A black plastic bag is in the foreground. The wall is red.",
+      "Photo 1: A stack of gas cylinders, including an orange one in the foreground, a red one behind it, and a blue one to the right. The orange cylinder is in the foreground, and the red one is behind it. The background shows a wall and some household items.",
+      "Photo 2: A close-up of an orange gas cylinder with a handle on top. The cylinder has a label with text and a logo. The label shows 'REPOL' and '12.5kg' and other information. The background shows a wall and some other items."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "gas cylinder",
+      "brand": "REPOL",
+      "model": "12.5kg",
+      "read_from": [
+        "photo 2"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "12.5kg Foreign-Used Gas Cylinders \u2013 Strong & Reliable!",
+        "verdict": "supported",
+        "evidence": "photo 2"
+      },
+      {
+        "claim": "Recently tested and certified, no leak, the valve is new.",
+        "verdict": "contradicted",
+        "evidence": "photo 2"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The cylinder may have a leak or be unsafe due to the wear and tear.",
+        "proof": "photo 2",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The valve may be old or damaged.",
+        "proof": "photo 2",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Can you show the certificate of test and certification?",
+      "Can you show the valve replacement date?"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller claims the cylinder is 12.5kg, foreign-used, and recently tested with no leak and a new valve. However, the photo shows the cylinder has wear and tear and the valve is not clearly new. The seller cannot provide proof of the test or the valve's condition. Therefore, the claim cannot be confirmed and a proof request is necessary."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-instruct",
+    "task": "testify_read",
+    "latency_ms": 23883,
+    "input_tokens": 2807,
+    "output_tokens": 539,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "21e939ccea009b28f5346b1cfa75708b",
+    "error": null
+  }
+}

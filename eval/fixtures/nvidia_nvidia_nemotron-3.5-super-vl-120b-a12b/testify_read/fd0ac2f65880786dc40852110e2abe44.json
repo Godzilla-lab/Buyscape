@@ -1,0 +1,73 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a blue box labeled '40000 Power Bank' next to a black power bank",
+      "The power bank has a digital display showing '49%' in blue digits",
+      "Multiple USB ports are visible on the top edge of the device",
+      "A brown strap is attached to the side of the power bank",
+      "The device appears wrapped in clear plastic",
+      "Box text mentions maintenance mode at 91% and charging speed reduction",
+      "Seller text claims 'Vic powerbank' but the brand is not legible in the photo"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "power bank",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Brand is Vic",
+        "verdict": "unverified",
+        "evidence": "Brand name not readable in photo 0; only '40000 Power Bank' is visible on the box"
+      },
+      {
+        "claim": "Neat and clean",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows the item wrapped in plastic with no visible damage"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual battery capacity may not match the 40000 marking on the box",
+        "proof": "Video of a capacity test or full discharge test",
+        "if_unproven": "as unknown or lower capacity power bank"
+      },
+      {
+        "risk": "Power bank may not output power to charge devices",
+        "proof": "Video of the power bank charging a phone",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Battery cells may be degraded despite the display showing 49%",
+        "proof": "Load test video showing stable output under load",
+        "if_unproven": "as degraded battery"
+      }
+    ],
+    "proof_requests": [
+      "Video of the power bank charging a phone",
+      "Video or photo of a capacity tester reading",
+      "Clear close-up of any brand logo on the device or box"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a power bank from photo 0; it can be priced at worst case (non-working, unverified capacity) while proof is pending."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 22914,
+    "input_tokens": 1833,
+    "output_tokens": 3199,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "fd0ac2f65880786dc40852110e2abe44",
+    "error": null
+  }
+}

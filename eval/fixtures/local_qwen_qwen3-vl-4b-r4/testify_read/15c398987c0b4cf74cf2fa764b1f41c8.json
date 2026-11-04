@@ -1,0 +1,75 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-r4",
+  "response": {
+    "observations": [
+      "Photo 0 shows a close-up of an engine block with '2GR' stamped on the side and a Toyota part number sticker.",
+      "Photo 1 and 2 show multiple engines in a pile, consistent with a scrap yard or warehouse setting.",
+      "The engines appear used, with visible dirt and wear on the components.",
+      "No individual engine is shown in isolation to confirm it is the one being sold."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "engine",
+      "brand": "Toyota",
+      "model": "2GR",
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Complete engine",
+        "verdict": "unverified",
+        "evidence": "Photo 1 and 2 show multiple engines in a pile, but it is not confirmed if the specific engine in photo 0 is included in the sale."
+      },
+      {
+        "claim": "for toyota 2GR engine",
+        "verdict": "supported",
+        "evidence": "The '2GR' stamp is clearly visible on the engine block in photo 0."
+      },
+      {
+        "claim": "direct Belgium",
+        "verdict": "unverifiable_remote",
+        "evidence": "The origin of the engine cannot be determined from the provided photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The engine may be non-functional or have internal damage.",
+        "proof": "A video of the engine running or a compression test result.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The engine may be missing a specific component (e.g., a timing belt or water pump).",
+        "proof": "A photo of the engine with all included parts laid out.",
+        "if_unproven": "as incomplete"
+      },
+      {
+        "risk": "The engine may be a different model than the 2GR.",
+        "proof": "A clear photo of the engine code stamped on the block.",
+        "if_unproven": "as a generic used engine"
+      }
+    ],
+    "proof_requests": [
+      "Video of the engine running to confirm it is functional.",
+      "Photo of the engine with all included parts laid out.",
+      "Clear photo of the engine code stamped on the block."
+    ],
+    "decision": "price",
+    "reason": "The item is known from the photos. What they cannot prove is priced at its worst case until the proof asked for below arrives."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-r4",
+    "task": "testify_read",
+    "latency_ms": 3826,
+    "input_tokens": 2777,
+    "output_tokens": 422,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "15c398987c0b4cf74cf2fa764b1f41c8",
+    "error": null
+  }
+}

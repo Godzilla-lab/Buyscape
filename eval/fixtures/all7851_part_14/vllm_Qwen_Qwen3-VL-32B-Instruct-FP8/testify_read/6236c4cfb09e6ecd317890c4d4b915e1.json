@@ -1,0 +1,86 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a hand holding a small black desktop computer with a diamond-patterned front grille. A blue Intel sticker is visible, labeled 'CORE i5 6th Gen'.",
+      "Photo 1 shows the same unit from a side angle, revealing the front panel with a Dell logo, a silver label, USB ports, audio jacks, and a DVD drive. The model name 'OptiPlex 5060' is visible on the right side of the front panel.",
+      "Photo 2 shows a stack of five identical Dell OptiPlex 5060 units, all with the same front design, Intel stickers, and Dell branding. The units appear to be in used condition with some dust and minor wear."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "desktop computer",
+      "brand": "Dell",
+      "model": "OptiPlex 5060",
+      "read_from": [
+        "photo 1 front panel",
+        "photo 2 front panel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Dell optiplex 5060 core i5 6th generation",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows an Intel sticker labeled 'CORE i5 6th Gen'. Photo 1 and 2 show the model name 'OptiPlex 5060' on the front panel."
+      },
+      {
+        "claim": "8gb ram",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows the RAM modules or system specifications. The RAM amount cannot be confirmed from the exterior."
+      },
+      {
+        "claim": "500gb hdd hard drive",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows the internal drive or its specifications. The drive size cannot be confirmed from the exterior."
+      },
+      {
+        "claim": "windows 11 pro",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows the operating system or any screen. The OS cannot be confirmed remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "RAM may not be 8GB as claimed",
+        "proof": "Photo of the internal RAM slots showing the modules and their capacity labels.",
+        "if_unproven": "priced as having less than 8GB RAM, which reduces value"
+      },
+      {
+        "risk": "Hard drive may not be 500GB or may be faulty",
+        "proof": "Photo of the internal hard drive with its label showing capacity and model, or a screenshot of disk management showing size.",
+        "if_unproven": "priced as having a smaller or unknown drive, or as potentially faulty"
+      },
+      {
+        "risk": "Operating system may not be Windows 11 Pro or may be unlicensed",
+        "proof": "Photo of the desktop screen showing the OS version and activation status, or a screenshot of system information.",
+        "if_unproven": "priced as having no OS or an unlicensed OS, which reduces value"
+      },
+      {
+        "risk": "Unit may have internal damage or be non-functional",
+        "proof": "Video of the unit powering on, showing BIOS and booting into OS, or a photo of the power supply and internal components.",
+        "if_unproven": "priced as potentially non-working, which reduces value"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the internal RAM modules showing capacity labels.",
+      "Photo of the internal hard drive showing its label or a screenshot of disk management.",
+      "Photo or video of the unit powering on and booting into Windows 11 Pro.",
+      "Photo of the system information screen showing RAM, drive, and OS details."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and CPU generation are confirmed, but critical specifications like RAM, hard drive, and OS cannot be verified from the photos. Hidden risks related to internal components and functionality must be resolved before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 71116,
+    "input_tokens": 2803,
+    "output_tokens": 896,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "6236c4cfb09e6ecd317890c4d4b915e1",
+    "error": null
+  }
+}

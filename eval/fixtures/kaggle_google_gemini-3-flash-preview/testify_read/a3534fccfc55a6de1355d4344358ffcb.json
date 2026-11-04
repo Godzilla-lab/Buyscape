@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail packaging for a Canon EOS M50 camera kit.",
+      "The box text indicates it includes an EF-M 15-45mm IS STM lens.",
+      "Icons on the box suggest 24.1 Megapixels, Dual Pixel CMOS AF, 4K video, and Wi-Fi/Bluetooth connectivity.",
+      "A watermark 'BLESSED MOSES STORE' is overlaid on the image.",
+      "The actual camera body, lens, and accessories are not visible outside the box."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "mirrorless camera",
+      "brand": "Canon",
+      "model": "EOS M50",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Canon EOS M50",
+        "verdict": "supported",
+        "evidence": "photo 0 box"
+      },
+      {
+        "claim": "features 4K",
+        "verdict": "supported",
+        "evidence": "photo 0 box icon"
+      },
+      {
+        "claim": "EF-M 15-45 IS STM lens included",
+        "verdict": "unverified",
+        "evidence": "The box mentions it, but the lens itself is not shown."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different item.",
+        "proof": "A photo of the actual camera and lens outside of the box.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The camera may be non-functional or have a high shutter count.",
+        "proof": "A video showing the camera powering on, taking a photo, and a screenshot of the shutter count.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The lens or sensor may have scratches, dust, or fungus.",
+        "proof": "Close-up photos of the camera sensor and both ends of the lens glass.",
+        "if_unproven": "as damaged"
+      }
+    ],
+    "proof_requests": [
+      "Photos of the actual camera body and lens out of the box from multiple angles.",
+      "A photo of the camera screen powered on.",
+      "Photos of the lens glass (front and back) and the camera sensor.",
+      "A photo of all included accessories (battery, charger, strap)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail box is shown. Without photos of the actual camera and lens, their existence and physical condition cannot be verified."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 9981,
+    "input_tokens": 2392,
+    "output_tokens": 2144,
+    "cost_usd": 0.007628,
+    "replayed": false,
+    "fixture_key": "a3534fccfc55a6de1355d4344358ffcb",
+    "error": null
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Black Canon DSLR camera body with body cap on lens mount, no lens attached",
+      "Front branding reads Canon, EOS, 5D, Mark II",
+      "Rear shows LCD screen, control dial, buttons, viewfinder, and power switch",
+      "Bottom label reads Canon DS126201, DC IN 8V, serial 3761814763",
+      "No battery, charger, strap, or lens visible in any photo",
+      "Watermark CDICSON BUSINESS WORLD and POSTED ON JIJI across all images"
+    ],
+    "identity": {
+      "status": "named",
+      "kind": null,
+      "brand": "Canon",
+      "model": "EOS 5D Mark II",
+      "read_from": [
+        "photo 0 front",
+        "photo 2 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Canon EOS 5D Mark II",
+        "verdict": "supported",
+        "evidence": "photo 0 front branding and photo 2 bottom label"
+      },
+      {
+        "claim": "full-frame DSLR camera",
+        "verdict": "unverifiable_remote",
+        "evidence": "sensor format cannot be confirmed from exterior photos"
+      },
+      {
+        "claim": "21.1-megapixel sensor",
+        "verdict": "unverifiable_remote",
+        "evidence": "resolution cannot be confirmed from exterior photos"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Camera does not power on",
+        "proof": "video of power switch being turned and menu appearing on LCD",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Shutter mechanism defective or excessively worn",
+        "proof": "video of shutter firing or shutter actuation count display",
+        "if_unproven": "as shutter faulty"
+      },
+      {
+        "risk": "Sensor scratched, dusty, or damaged",
+        "proof": "photo of image sensor with mirror locked up",
+        "if_unproven": "as sensor damaged"
+      },
+      {
+        "risk": "LCD screen cracked or non-functional",
+        "proof": "video of screen displaying menu or live view",
+        "if_unproven": "as screen broken"
+      },
+      {
+        "risk": "Battery compartment corroded or contacts damaged",
+        "proof": "photo of open battery compartment",
+        "if_unproven": "as needs repair"
+      }
+    ],
+    "proof_requests": [
+      "Video of camera powering on, navigating menus, and firing the shutter",
+      "Photo of battery compartment and contacts",
+      "Photo of image sensor with mirror locked up",
+      "Video of LCD screen displaying settings"
+    ],
+    "decision": "price",
+    "reason": "The camera model is clearly identified from the branding and label in the photos; condition is unproven so it is priced as a non-working body."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 42418,
+    "input_tokens": 2260,
+    "output_tokens": 3469,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "2db083e476a46125393c1cdca8c7d230",
+    "error": null
+  }
+}

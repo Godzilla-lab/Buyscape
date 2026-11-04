@@ -1,0 +1,76 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "4 photos show a monocrystalline, half-cut-cell solar panel with white backsheet and silver aluminium frame, front and back views.",
+      "Photo 3 shows a junction box with two MC4 connectors and a small white specification sticker, but the text on the sticker is too small/blurred to read any wattage, brand or model.",
+      "Watermark 'NETWORK SOLAR VENTURES' appears across photos; location metadata reads 'Lagos, Nigeria' even though the buyer's market is Oyo.",
+      "No cell count, wattage or brand name is legible anywhere in the four images.",
+      "The seller's text describes 'battery is new, holds charge for 8 hours' - this describes a battery, not the solar panel shown in the photos."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel (monocrystalline, half-cut cell)",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Battery is new, holds charge for 8 hours, never repaired",
+        "verdict": "contradicted",
+        "evidence": "All four photos show a solar panel, not a battery; the claim does not match the item pictured, so it cannot be a true description of this listing's goods."
+      },
+      {
+        "claim": "Implied: this is an original/new panel (from seller business name and clean appearance)",
+        "verdict": "unverifiable_remote",
+        "evidence": "No brand/model/wattage sticker is readable in any photo (closest attempt in photo 3 is blurred)."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Wattage and brand cannot be confirmed, so true price tier is unknown",
+        "proof": "A clear close-up photo of the rear specification label showing wattage, model and brand",
+        "if_unproven": "priced at the lowest wattage tier seen in comparable listings for an unbranded/unverified mono panel"
+      },
+      {
+        "risk": "Seller's text talks about a battery, suggesting either a copy-paste error, a mixed listing, or a bait to confuse buyers about what is actually for sale",
+        "proof": "A video or photo set that matches the described battery item, or an explicit correction from seller confirming the panel-only listing",
+        "if_unproven": "treat the listing as unverifiable for any battery-related claim; price only the panel seen in photos"
+      },
+      {
+        "risk": "Condition (new vs used) cannot be confirmed from static photos; panels could be used/refurbished despite clean look",
+        "proof": "A video showing panel output on a multimeter or inverter display under sunlight",
+        "if_unproven": "priced as used/worst-case condition"
+      },
+      {
+        "risk": "Geotag says Lagos while seller claims Oyo-area operation; photos may be stock images from a different batch/location",
+        "proof": "A fresh photo with visible date/location matching Oyo, or a live video call showing the actual panel in seller's shop",
+        "if_unproven": "treat the specific unit's location/availability as unverified"
+      }
+    ],
+    "proof_requests": [
+      "Clear, well-lit close-up of the rear specification label (wattage, Voc, Isc, brand, model, cell count).",
+      "A video or live photo call showing the panel generating current on a multimeter/inverter in daylight.",
+      "Clarification and correct photos if a battery is actually part of this listing, since the text does not match the images.",
+      "Confirmation of current physical location (Oyo) with a fresh timestamped photo."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is clearly a solar panel, but no photo shows a readable wattage/model/brand, which is the detail that sets its price tier, and the seller's text describes an unrelated battery item.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 23581,
+    "input_tokens": 4600,
+    "output_tokens": 1944,
+    "cost_usd": 0.025087,
+    "replayed": false,
+    "fixture_key": "db92f7b7fa9235a1af4f60baee6b41fb",
+    "error": null
+  }
+}

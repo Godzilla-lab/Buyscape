@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Chest freezer with the main lid open.",
+      "Internal sliding glass doors are present under the lid.",
+      "The brand 'Snowsea' is visible on a large front sticker and a small logo on the top left.",
+      "One wire basket is visible inside.",
+      "An energy efficiency rating sticker is on the top right corner.",
+      "The unit appears to be in a retail or warehouse setting with other boxes visible.",
+      "The specification plate on the back or side is not shown."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "chest freezer",
+      "brand": "Snowsea",
+      "model": null,
+      "read_from": [
+        "photo 0 sticker"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Snowsea",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "Chest freezer",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "240L",
+        "verdict": "unverified",
+        "evidence": "The capacity is not legible on any labels or the specification plate in the photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Cooling system or compressor failure",
+        "proof": "A video of the freezer powered on and showing frost or a thermometer reading below zero.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Actual capacity is lower than claimed",
+        "proof": "A clear photo of the manufacturer's specification plate showing the model number and volume.",
+        "if_unproven": "as a 100L model"
+      },
+      {
+        "risk": "Hidden exterior damage or rust on the rear/sides",
+        "proof": "Photos of the back and all sides of the unit.",
+        "if_unproven": "as having significant cosmetic damage"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the manufacturer's specification plate (usually on the back) showing the model and capacity.",
+      "Video of the unit plugged in and running to confirm the compressor works.",
+      "Photos of the back and sides of the freezer."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The brand is confirmed, but the capacity (240L) which determines the price cannot be verified without a photo of the specification plate. The unit's functional state is also unknown."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 11918,
+    "input_tokens": 2352,
+    "output_tokens": 2461,
+    "cost_usd": 0.008559,
+    "replayed": false,
+    "fixture_key": "96993948608d05a1b789b7e72cac1770",
+    "error": null
+  }
+}

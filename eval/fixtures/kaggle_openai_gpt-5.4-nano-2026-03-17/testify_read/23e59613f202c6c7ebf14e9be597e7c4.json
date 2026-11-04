@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0 shows a rectangular solar panel array with many small photovoltaic cells (grid of dark cells with thin white lines).",
+      "No visible brand/model label, watt rating, serial number, or connector details are readable in photo 0.",
+      "No battery is shown in the photo; only the solar panel is visible."
+    ],
+    "identity": {
+      "status": "unknown",
+      "kind": null,
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Battery is new",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo 0 shows only a solar panel; no battery label/condition is visible."
+      },
+      {
+        "claim": "Battery holds charge for 8 hours",
+        "verdict": "unverifiable_remote",
+        "evidence": "No battery capacity (Ah/Wh), voltage, load test, or runtime measurement is shown."
+      },
+      {
+        "claim": "Never repaired",
+        "verdict": "unverifiable_remote",
+        "evidence": "No battery inspection photos (terminals, casing, warranty sticker, or internal signs) are provided."
+      },
+      {
+        "claim": "Solar Energy Solution",
+        "verdict": "unverified",
+        "evidence": "Only a solar panel is shown; the full system components (inverter, charge controller, battery) are not shown."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Panel specifications (wattage, efficiency, cell type) are unknown, so the value cannot be priced reliably.",
+        "proof": "A clear close-up photo of the panel label/sticker showing brand, model, and watt rating (W), plus serial number.",
+        "if_unproven": "Price as a generic used solar panel with unknown wattage (worst-case for value)."
+      },
+      {
+        "risk": "The seller\u2019s battery claims may not match what is being sold (battery not shown).",
+        "proof": "Photos of the exact battery: label with capacity (Ah/Wh), voltage (e.g., 12V/24V/48V), chemistry (LiFePO4/lead-acid), date code, and terminal condition.",
+        "if_unproven": "Price as if no battery is included or battery performance is not proven (worst-case)."
+      },
+      {
+        "risk": "System compatibility risk (panel voltage/current vs charge controller/inverter) if this is meant as a complete setup.",
+        "proof": "Photos of the charge controller and inverter model labels, and the panel connector type; plus a wiring/connection photo.",
+        "if_unproven": "Price as panel-only (not a complete working system)."
+      },
+      {
+        "risk": "Condition risk (scratches, micro-cracks, water ingress) cannot be assessed from one wide shot.",
+        "proof": "Close-up photos of the panel surface (corners and cell lines) and the backsheet/edges; ideally a power-on test reading (IV curve or multimeter voltage under sun).",
+        "if_unproven": "Price as potentially used/with unknown condition (worst-case)."
+      }
+    ],
+    "proof_requests": [
+      "Clear close-up of the solar panel label/sticker (brand, model, watt rating W, serial number).",
+      "Photos of the battery being sold (label with capacity/voltage/chemistry and date code) and terminals.",
+      "A screenshot/photo of a battery runtime test showing load and measured runtime (to support the \u201c8 hours\u201d claim).",
+      "Photos of charge controller and inverter labels (if included) and a wiring/connection photo."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "From photo 0, only a solar panel is visible and its key specs are unreadable; the battery claims cannot be verified because no battery is shown. Without the panel wattage and the exact battery details, a reliable worst-case price cannot be set."
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_read",
+    "latency_ms": 5547,
+    "input_tokens": 1913,
+    "output_tokens": 875,
+    "cost_usd": 0.001476,
+    "replayed": false,
+    "fixture_key": "23e59613f202c6c7ebf14e9be597e7c4",
+    "error": null
+  }
+}

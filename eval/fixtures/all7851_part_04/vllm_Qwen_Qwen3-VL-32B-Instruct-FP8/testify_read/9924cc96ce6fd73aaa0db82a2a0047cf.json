@@ -1,0 +1,76 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a green server motherboard with a large CPU heatsink, multiple RAM slots, and various connectors. A metal bracket and screws are visible below the board.",
+      "Photo 1 is a close-up of a white label on the motherboard showing PN: 715910-003, SPN: 773064-001, CT: PEHMLC1WG6S1A8, REV C1, and 'MADE IN CHINA'.",
+      "Photo 2 shows the RAM slots with two green DIMMs installed, one in each of the two lower slots. The DIMMs appear to be 8GB each, matching the seller's claim of 4GB total (1x8GB and 1x8GB? \u2014 inconsistency noted)."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "server motherboard",
+      "brand": "HP",
+      "model": "ProLiant ML310e Gen8 v2",
+      "read_from": [
+        "photo 1 label: PN 715910-003",
+        "seller's text: 'Hp proliant ml310e gen8 ver2 server motherboard'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Hp proliant ml310e gen8 ver2 server motherboard",
+        "verdict": "supported",
+        "evidence": "Photo 1 label shows PN 715910-003, which corresponds to the HP ProLiant ML310e Gen8 v2 motherboard. Seller's text matches."
+      },
+      {
+        "claim": "model[price hidden]-003",
+        "verdict": "supported",
+        "evidence": "Photo 1 label clearly shows PN: 715910-003."
+      },
+      {
+        "claim": "4gb ddr3 memory (1x8gb and...",
+        "verdict": "contradicted",
+        "evidence": "Photo 2 shows two 8GB DIMMs installed (two green sticks), totaling 16GB, not 4GB. The seller's text says '4gb ddr3 memory (1x8gb and...' \u2014 this is inconsistent. Either a typo or misrepresentation."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The motherboard may be damaged or non-functional (e.g., CPU not included, no power test shown).",
+        "proof": "A video showing the motherboard powered on with a CPU and RAM, or a photo of the CPU socket and RAM slots with no visible damage.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The RAM may be faulty or not compatible with the motherboard.",
+        "proof": "A photo of the RAM labels showing the exact model and speed, or a test video showing the RAM working in the board.",
+        "if_unproven": "priced as non-functional or not included"
+      },
+      {
+        "risk": "The item may be a counterfeit or non-genuine HP part.",
+        "proof": "A photo of the motherboard's serial number or a close-up of the HP logo and part markings, or a verification from HP support.",
+        "if_unproven": "priced as generic or unbranded"
+      }
+    ],
+    "proof_requests": [
+      "A photo of the CPU socket showing if a CPU is installed or if it's empty.",
+      "A photo of the RAM labels showing the exact model and speed.",
+      "A video or photo showing the motherboard powered on with a working CPU and RAM.",
+      "A photo of the HP logo or serial number on the board to verify authenticity."
+    ],
+    "decision": "price",
+    "reason": "The motherboard is identifiable as HP ProLiant ML310e Gen8 v2 by part number 715910-003. The RAM claim is contradicted by the photos (16GB installed, not 4GB). The item is priced at its worst case: as not working, with RAM possibly non-functional or misrepresented. Proof of functionality and authenticity would raise the price."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 73446,
+    "input_tokens": 2004,
+    "output_tokens": 916,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "9924cc96ce6fd73aaa0db82a2a0047cf",
+    "error": null
+  }
+}

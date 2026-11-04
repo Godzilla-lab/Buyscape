@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows a close-up of a gas valve with '07 07' stamped on the side.",
+      "Photo 1 shows a tall, white, vertical cylinder with a protective collar at the top.",
+      "The white cylinder in Photo 1 has visible surface rust on the weld seams and scratches on the body.",
+      "Photo 2 shows two cylinders: one tall black cylinder with a white neck/shoulder and one white cylinder.",
+      "The black and white cylinder is taller than the white cylinder and lacks a protective collar.",
+      "The color coding (black body, white top) is consistent with industrial oxygen cylinders.",
+      "The white cylinder is a standard design for LPG (cooking gas).",
+      "Stamping is visible on the collar of the white cylinder in Photo 1 but is too blurry to read."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "Oxygen cylinder and LPG cylinder",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Industrial Cylinders",
+        "verdict": "supported",
+        "evidence": "Photo 2 shows an oxygen cylinder and a large LPG cylinder, both used in industrial/commercial settings."
+      },
+      {
+        "claim": "Oxygen cylinder 50kg",
+        "verdict": "unverified",
+        "evidence": "The capacity stamps on the shoulder of the black cylinder are not shown in any photo."
+      },
+      {
+        "claim": "Cooking Gas cylinder 22.5kg",
+        "verdict": "unverified",
+        "evidence": "The stamps on the collar in Photo 1 are illegible."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Cylinders may be expired or past their mandatory re-test date.",
+        "proof": "A clear photo of the stamped manufacture or test date on the collar (white) or shoulder (black).",
+        "if_unproven": "as scrap metal value only"
+      },
+      {
+        "risk": "Actual capacity may be smaller than the seller's claim.",
+        "proof": "A clear photo of the stamped Water Capacity (WC) or Tare Weight (TW) on the cylinder.",
+        "if_unproven": "as the smallest standard size (e.g., 12.5kg for the LPG cylinder)"
+      },
+      {
+        "risk": "Valves may be seized, leaking, or have damaged threads.",
+        "proof": "A video showing the valves being operated and a soap-bubble leak test if pressurized.",
+        "if_unproven": "as requiring full valve replacement"
+      }
+    ],
+    "proof_requests": [
+      "Clear, legible photos of the stamped markings on the collar of the white LPG cylinder.",
+      "Clear, legible photos of the stamped markings on the shoulder of the black oxygen cylinder.",
+      "A video showing both valves being opened and closed."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The capacity and expiry dates, which are the primary drivers of value and safety for gas cylinders, are stamped into the metal but are not legible in the provided photos."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 15659,
+    "input_tokens": 4506,
+    "output_tokens": 3252,
+    "cost_usd": 0.012009,
+    "replayed": false,
+    "fixture_key": "6d2e718093c0bd2996757ac75196dfc5",
+    "error": null
+  }
+}

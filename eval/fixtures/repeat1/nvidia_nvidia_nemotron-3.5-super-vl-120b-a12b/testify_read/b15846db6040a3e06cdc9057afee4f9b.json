@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Two-wheeled electric scooter with step-through frame, black seat, and silver rear panel",
+      "Parked on concrete outdoors in front of a building with windows and an air conditioner",
+      "Front headlight, side mirrors, and kickstand visible",
+      "No legible brand or model name on the body panels",
+      "Battery pack not visible or labeled in the image",
+      "Watermark text across the center of the photo"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "electric scooter",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Cleanly used",
+        "verdict": "unverified",
+        "evidence": "photo 0 shows outward appearance but wear and hidden damage cannot be fully assessed"
+      },
+      {
+        "claim": "Runs on 72v 20ah lead acid battery",
+        "verdict": "unverifiable_remote",
+        "evidence": "battery is not visible or labeled in photo 0"
+      },
+      {
+        "claim": "Electric bike for sale (implied runs)",
+        "verdict": "unverified",
+        "evidence": "no video or demonstration of operation in photo 0"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery may be dead, weak, or not the claimed 72v 20ah lead acid type",
+        "proof": "video of the scooter starting and running under its own power, or a battery voltage/load test",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Motor or controller may be faulty",
+        "proof": "video of throttle response and movement",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Charger may be missing or faulty",
+        "proof": "photo of the charger and video of it charging the scooter",
+        "if_unproven": "without charger"
+      },
+      {
+        "risk": "Ownership documents may be missing",
+        "proof": "photo of original purchase or registration papers",
+        "if_unproven": "as no papers"
+      }
+    ],
+    "proof_requests": [
+      "Video of the scooter starting and moving under its own power",
+      "Photo of the battery label showing voltage and capacity",
+      "Photo of the charger",
+      "Photo of ownership documents"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as an electric scooter from photo 0, but the seller's claims about battery and operation cannot be verified remotely, so it must be priced at worst case as non-working."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 19196,
+    "input_tokens": 1590,
+    "output_tokens": 2207,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "b15846db6040a3e06cdc9057afee4f9b",
+    "error": null
+  }
+}

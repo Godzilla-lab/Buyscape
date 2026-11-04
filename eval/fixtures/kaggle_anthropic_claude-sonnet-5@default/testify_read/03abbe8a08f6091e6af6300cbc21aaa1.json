@@ -1,0 +1,84 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo shows a bare engine assembly removed from a vehicle, sitting on a paved surface.",
+      "Timing belt/chain cover, pulleys, intake manifold, and wiring harness connectors are visible.",
+      "A person's legs (jeans) are visible in the background, no vehicle or engine bay context shown.",
+      "A watermark reading something like 'KWARA MOBILE' is overlaid on the image.",
+      "No manufacturer logo, engine code sticker, casting number, or VIN/ID plate is legible anywhere on the block.",
+      "Surfaces show dirt, grease, and wear consistent with a used/removed engine, not a new one."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used car engine (make/model unreadable)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Direct America (implying imported used engine from the US)",
+        "verdict": "unverifiable_remote",
+        "evidence": "No shipping label, customs document, or container photo shown; cannot be confirmed from the engine photo alone."
+      },
+      {
+        "claim": "2 months guarantee",
+        "verdict": "unverifiable_remote",
+        "evidence": "No written warranty card, receipt, or seller shop signage shown in the photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine running condition (compression, leaks, unknown faults) cannot be judged from a static photo.",
+        "proof": "A video clip of the engine running/idling with sound, plus a compression test reading if possible.",
+        "if_unproven": "priced as not confirmed running (worst case, non-functional)"
+      },
+      {
+        "risk": "Make, model, and displacement are not identifiable, which drives most of the price for an engine.",
+        "proof": "Close-up photo of the engine code sticker, casting number on the block, or a VIN/parts tag.",
+        "if_unproven": "cannot be priced without this; treated as unidentified generic unit"
+      },
+      {
+        "risk": "Mileage/usage history of the donor vehicle is unknown.",
+        "proof": "Odometer photo or vehicle history/import paperwork showing mileage.",
+        "if_unproven": "priced as high-mileage/unknown history"
+      },
+      {
+        "risk": "Completeness of accessories (sensors, starter, alternator, turbo if applicable) cannot be fully confirmed from one angle.",
+        "proof": "Additional photos from front, rear, and both sides of the engine.",
+        "if_unproven": "priced as incomplete/partial accessories"
+      },
+      {
+        "risk": "Origin claim ('Direct America') cannot be verified and affects perceived quality/trust.",
+        "proof": "Photo of shipping/import documents or container tag.",
+        "if_unproven": "priced as unverified origin, treated as standard used import"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the engine code sticker or casting number on the block (needed to identify make/model).",
+      "A short video of the engine running with audible sound.",
+      "Photos from the other three sides of the engine (front, rear, opposite side) showing completeness.",
+      "Any import/customs document or shipping tag supporting the 'Direct America' claim.",
+      "Photo of a written warranty/guarantee note from the seller, if one exists."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The engine's make and model are not legible in the single photo, and model is the key factor for pricing an engine; a worst-case price cannot be set without at least an identifiable engine code or casting number."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 22832,
+    "input_tokens": 2082,
+    "output_tokens": 1906,
+    "cost_usd": 0.020065,
+    "replayed": false,
+    "fixture_key": "03abbe8a08f6091e6af6300cbc21aaa1",
+    "error": null
+  }
+}

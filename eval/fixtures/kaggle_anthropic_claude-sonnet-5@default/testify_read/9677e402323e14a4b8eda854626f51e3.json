@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Single photo shows a disassembled front headlight/headlamp assembly lying on a cloth-covered surface.",
+      "Watermark on the photo reads 'HONDA AND ACURA'.",
+      "No visible brand or part-number markings on the lens or housing.",
+      "No wiring, bulbs, or connector shown to judge electrical completeness.",
+      "Background shows other loose parts, suggesting a scrapyard/parts-breaker setting.",
+      "Seller's text claims a generic stock of body, engine and suspension parts for Honda, Acura and Toyota vehicles."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "car headlight assembly",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Original Toyota part, not China copy.",
+        "verdict": "contradicted",
+        "evidence": "photo 0 watermark reads 'HONDA AND ACURA', not Toyota, so the part shown does not match the Toyota claim."
+      },
+      {
+        "claim": "No crack, all clips and brackets complete.",
+        "verdict": "unverified",
+        "evidence": "Only one angle shown; clips/brackets on the rear and mounting points are not visible."
+      },
+      {
+        "claim": "Stocks body, engine and suspension parts for all Honda, Acura and Toyota models.",
+        "verdict": "unverifiable_remote",
+        "evidence": "Only one headlight photo provided; no engine or suspension parts shown."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Mismatch between claimed vehicle make (Toyota) and watermark (Honda/Acura) suggests the photo may be reused or mislabeled.",
+        "proof": "A clear photo of the part with a visible OEM part number or vehicle badge matching the claimed make.",
+        "if_unproven": "priced as unidentified/unverified compatibility, worst case"
+      },
+      {
+        "risk": "Hidden cracks, fog, or scratches on the lens not visible from this single angle.",
+        "proof": "Close-up photos of the lens front, back, and mounting tabs from multiple angles.",
+        "if_unproven": "priced as having cosmetic damage"
+      },
+      {
+        "risk": "Electrical function (bulbs, wiring, adjuster motor) unknown.",
+        "proof": "A video of the headlight powered on showing low/high beam and turn signal working.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Fitment to a specific car model/year not confirmed.",
+        "proof": "Photo of the part number sticker or confirmation of exact make/model/year it fits.",
+        "if_unproven": "priced as generic/unconfirmed fit, worst case"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of any part number or brand marking stamped on the headlight housing.",
+      "Photo of the vehicle make/model this specific headlight was pulled from.",
+      "Video showing the headlight powered on (beams and indicator working).",
+      "Additional photos of the rear housing, connector, and all mounting clips."
+    ],
+    "decision": "fraud_suspected",
+    "reason": "The seller claims an 'Original Toyota part' but the only photo carries a watermark reading 'HONDA AND ACURA', directly contradicting the specific brand claim and suggesting a reused or mismatched image."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 20152,
+    "input_tokens": 2082,
+    "output_tokens": 1826,
+    "cost_usd": 0.019265,
+    "replayed": false,
+    "fixture_key": "9677e402323e14a4b8eda854626f51e3",
+    "error": null
+  }
+}

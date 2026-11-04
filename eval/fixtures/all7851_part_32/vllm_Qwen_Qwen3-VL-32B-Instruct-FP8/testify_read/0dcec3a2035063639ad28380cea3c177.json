@@ -1,0 +1,107 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Back of a black Dell laptop showing vents, hinges, and a label with regulatory info. The Windows logo sticker is visible.",
+      "Photo 1: Front view of the laptop open, showing the screen with Windows 10 desktop, keyboard, and 'Latitude 3340' printed on the bottom left of the keyboard. Dell logo is visible above the screen. Intel Core i3 sticker on the bottom right.",
+      "Photo 2: Closed lid of the laptop showing the Dell logo and a faint horizontal line above it. The laptop is held in hand, showing its thickness and hinge design."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Dell",
+      "model": "Latitude 3340",
+      "read_from": [
+        "photo 1 keyboard label",
+        "photo 1 screen bezel (Dell logo)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Dell latitude 3340",
+        "verdict": "supported",
+        "evidence": "Photo 1: 'Latitude 3340' printed on the keyboard bezel."
+      },
+      {
+        "claim": "4th Generation",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible CPU model or generation indicator. The Intel sticker in photo 1 is too blurry to read the exact model."
+      },
+      {
+        "claim": "webcam",
+        "verdict": "supported",
+        "evidence": "Photo 1: Small black dot above the screen, consistent with a webcam placement."
+      },
+      {
+        "claim": "Bluetooth",
+        "verdict": "unverified",
+        "evidence": "No visible Bluetooth indicator or label. The Windows 10 interface in photo 1 does not show Bluetooth status."
+      },
+      {
+        "claim": "HDMI port",
+        "verdict": "unverified",
+        "evidence": "No side or back view showing ports. HDMI port not visible in any photo."
+      },
+      {
+        "claim": "very strong Battery",
+        "verdict": "unverified",
+        "evidence": "No battery health indicator or usage test shown. No proof of battery life."
+      },
+      {
+        "claim": "charger",
+        "verdict": "unverified",
+        "evidence": "No charger visible in any photo. Seller claims it is included but no visual proof."
+      },
+      {
+        "claim": "free...",
+        "verdict": "unverifiable_remote",
+        "evidence": "Incomplete claim. 'free' of what? No context provided."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery may be degraded or not functional",
+        "proof": "A video showing the laptop running on battery for at least 30 minutes, or a screenshot of battery health from Windows Power Management.",
+        "if_unproven": "priced as not working or with poor battery life"
+      },
+      {
+        "risk": "Missing or non-functional ports (HDMI, Bluetooth)",
+        "proof": "Photo of the side/back showing all ports, with HDMI and Bluetooth indicators clearly visible.",
+        "if_unproven": "priced as lacking HDMI and Bluetooth"
+      },
+      {
+        "risk": "Charger not included or faulty",
+        "proof": "Photo of the charger with its model number and a photo of it plugged in and charging the laptop.",
+        "if_unproven": "priced as charger not included"
+      },
+      {
+        "risk": "CPU generation not 4th as claimed",
+        "proof": "Screenshot of System Information or CPU-Z showing the exact CPU model.",
+        "if_unproven": "priced as unknown generation, possibly lower"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the side/back showing all ports, including HDMI.",
+      "Photo of the charger with model number and a photo of it charging the laptop.",
+      "Screenshot of System Information or CPU-Z showing the CPU model.",
+      "Video of the laptop running on battery for 30 minutes.",
+      "Photo of the BIOS or Windows settings showing Bluetooth status."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is confirmed as Dell Latitude 3340, but critical claims about ports, battery, charger, and CPU generation are unverified or unverifiable from current photos. These affect the price significantly and must be proven before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 75683,
+    "input_tokens": 2374,
+    "output_tokens": 973,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "0dcec3a2035063639ad28380cea3c177",
+    "error": null
+  }
+}

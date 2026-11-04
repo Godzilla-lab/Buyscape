@@ -1,0 +1,98 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0 shows a chest freezer (upright lid) in white/grey body.",
+      "A label on the front panel in photo 0 reads '120 HOURS COOLING RETENTION'.",
+      "No brand/model name is clearly readable in photo 0.",
+      "No visible power-on test, thermometer reading, or running compressor sound is shown.",
+      "No clear capacity marking (e.g., 250L) is readable in photo 0."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "chest freezer (deep freezer)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "250-liter Capacity",
+        "verdict": "unverified",
+        "evidence": "Photo 0 does not show a readable capacity marking."
+      },
+      {
+        "claim": "Low Voltage Operation",
+        "verdict": "unverifiable_remote",
+        "evidence": "No low-voltage spec is readable in photo 0."
+      },
+      {
+        "claim": "120 Hours Cooling Retention",
+        "verdict": "supported",
+        "evidence": "Photo 0 label shows '120 HOURS COOLING RETENTION'."
+      },
+      {
+        "claim": "In working condition",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows the freezer but no power-on/running test."
+      },
+      {
+        "claim": "Barely used, bought new last year. No fault at all, the motor was never opened. Receipt and warranty card available.",
+        "verdict": "unverifiable_remote",
+        "evidence": "No receipt/warranty card or evidence of motor not being opened is shown in photo 0."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Capacity may not be 250L (could be different size), affecting value.",
+        "proof": "Ask for a photo of the rating/capacity plate (inside lid or rear) showing liters/model.",
+        "if_unproven": "Price as a generic used chest freezer with uncertain capacity."
+      },
+      {
+        "risk": "May not be truly working (compressor/thermostat/relay issues not visible).",
+        "proof": "Ask for a short video of it plugged in and running (compressor sound + temperature drop after 10\u201315 minutes).",
+        "if_unproven": "Price as not proven working (worst case: treat as needing service)."
+      },
+      {
+        "risk": "Low-voltage performance may be overstated; it may trip or fail under Rivers power conditions.",
+        "proof": "Ask for a test clip showing it running on a low-voltage/unstable supply (or specify the voltage range on the label).",
+        "if_unproven": "Price as standard operation only (no guaranteed low-voltage tolerance)."
+      },
+      {
+        "risk": "Cooling retention claim may be marketing; actual performance could be lower due to insulation/gasket wear.",
+        "proof": "Ask for a temperature hold test (e.g., set to freeze, then unplug and show temperature over time).",
+        "if_unproven": "Price without assuming the 120-hour retention is achieved in real use."
+      },
+      {
+        "risk": "Condition issues (dents, seal leaks, rust, missing parts) not fully visible from one angle.",
+        "proof": "Ask for close-up photos of the lid gasket/hinge, drain area, and corners/edges.",
+        "if_unproven": "Price as average used condition."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the freezer\u2019s rating plate showing brand/model and exact capacity (liters).",
+      "Video of the freezer plugged in and running (compressor on) plus a thermometer reading after 10\u201315 minutes.",
+      "Close-up photos of the lid gasket and hinge, and the rear/side for any damage or missing parts.",
+      "Photo of receipt/warranty card (if available) or any serial number matching the plate."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo supports only the '120 hours cooling retention' label; capacity, low-voltage capability, and working condition are not verifiable from the single image, so a confident price cannot be set without the key proof.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_joint",
+    "latency_ms": 5413,
+    "input_tokens": 2543,
+    "output_tokens": 961,
+    "cost_usd": 0.003066,
+    "replayed": false,
+    "fixture_key": "d1ea765e99a89839dd45b4d4b9dd9848",
+    "error": null
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows two white split air conditioning units with yellow horizontal stripes on the front panel.",
+      "The brand logo 'LG' is visible on the front of the top unit, near the center.",
+      "The units appear to be installed or stored indoors, with a concrete wall and some pipes or metal structures in the background.",
+      "The top unit has a visible outdoor condenser fan behind it, suggesting it is a split system.",
+      "There is a watermark 'MAX TECHNICAL INVESTMENT' and 'POSTED ON JIJI' on the image.",
+      "No remote control, power cord, or installation accessories are visible.",
+      "The units look used, with some dust and minor wear on the casing."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "split air conditioner",
+      "brand": "LG",
+      "model": null,
+      "read_from": [
+        "photo 0 front panel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Uk used 1hp Lg split unit",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows an LG split unit; the '1hp' is not visible but is a common size for such units and consistent with the visual size. 'UK used' is unverifiable_remote."
+      },
+      {
+        "claim": "Low voltage air conditioner",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible label or specification confirms low voltage operation. The unit appears standard; low voltage is a feature that cannot be confirmed from photos alone."
+      },
+      {
+        "claim": "tested okay",
+        "verdict": "unverified",
+        "evidence": "No proof of testing is shown. No power, no running state, no diagnostic data. The unit is static in photo 0."
+      },
+      {
+        "claim": "with warranty",
+        "verdict": "unverifiable_remote",
+        "evidence": "No warranty document, sticker, or proof is visible. Warranty status cannot be confirmed remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Unit may not be functional or may have internal damage not visible in photos.",
+        "proof": "Video of the unit running with cooling output, or a service report from a technician.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The 'low voltage' claim may be false or misleading; the unit may require standard voltage and fail in low-voltage areas.",
+        "proof": "Label or manual showing voltage specifications (e.g., 220V, 110V, or 100-240V wide range).",
+        "if_unproven": "priced as standard voltage unit, which may not suit low-voltage areas"
+      },
+      {
+        "risk": "The unit may have been improperly installed or dismantled, leading to refrigerant leaks or compressor damage.",
+        "proof": "Close-up of the refrigerant lines, connections, and compressor area, or a service report.",
+        "if_unproven": "priced as potentially damaged"
+      },
+      {
+        "risk": "The 'warranty' claim is likely invalid or expired; no proof provided.",
+        "proof": "Warranty certificate or official documentation from LG or the seller\u2019s service provider.",
+        "if_unproven": "priced as no warranty"
+      }
+    ],
+    "proof_requests": [
+      "Video of the unit running and cooling.",
+      "Close-up photo of the model number and voltage label on the unit.",
+      "Proof of warranty (document or certificate).",
+      "Photo of the outdoor unit and refrigerant lines to check for damage or leaks."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The unit is identifiable as an LG split AC, but critical claims like 'tested okay', 'low voltage', and 'warranty' cannot be verified from the photo alone. Hidden risks include non-functionality, incorrect voltage compatibility, and lack of warranty. A worst-case price cannot be assigned without proof of working condition and specifications."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 73547,
+    "input_tokens": 1571,
+    "output_tokens": 893,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "4f80c915d10a9a310ea4babce737f102",
+    "error": null
+  }
+}

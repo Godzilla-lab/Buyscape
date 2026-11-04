@@ -1,0 +1,73 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail packaging for a UGREEN power bank.",
+      "The box identifies the product as 'Nexode 48000mAh Fast Charging Power Bank'.",
+      "Key specs on the box include '300W', 'PD3.1 140W', and 'Emergency Light'.",
+      "A watermark 'CHIBEN GADGETS' is visible on the image.",
+      "The background shows a retail environment with other boxed electronics.",
+      "The actual power bank is not visible; only the illustration on the box is shown."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "power bank",
+      "brand": "UGREEN",
+      "model": "Nexode 48000mAh 300W",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "UGREEN 300W 48000mAh Power Bank",
+        "verdict": "supported",
+        "evidence": "photo 0 shows these specifications printed on the retail box."
+      },
+      {
+        "claim": "massive, high-capacity portable charger",
+        "verdict": "supported",
+        "evidence": "photo 0 confirms 48000mAh capacity, which is very high for a portable unit."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, inferior item.",
+        "proof": "A photo of the actual device outside of the packaging.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The device may be non-functional or have significant battery degradation.",
+        "proof": "A video showing the device's screen active and charging a high-draw device like a laptop.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The item may be a counterfeit product.",
+        "proof": "A clear photo of the authenticity/security scratch-off code on the box or the laser-etched serial number on the device.",
+        "if_unproven": "as a generic unbranded power bank"
+      }
+    ],
+    "proof_requests": [
+      "Photos of the actual power bank out of the box from multiple angles.",
+      "A photo of the ports and the digital display while the unit is powered on.",
+      "A photo of the technical specifications printed on the bottom or side of the actual device.",
+      "A photo of the authenticity sticker on the packaging."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail box is shown in the photo. For a second-hand electronic item, the actual unit must be visible to verify its existence, physical condition, and authenticity."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 15853,
+    "input_tokens": 2373,
+    "output_tokens": 3297,
+    "cost_usd": 0.011078,
+    "replayed": false,
+    "fixture_key": "37a4b17a7a66b098b4372b5fddc734b5",
+    "error": null
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows two framed solar panels (mono-crystalline cell pattern) leaning against a wall outdoors.",
+      "No brand name, wattage, or model number is legible on either panel in the photo.",
+      "A faint watermark reading something like 'Solar Energy' appears in the corner, but it is a photo watermark, not a label on the panel.",
+      "No battery is visible in the photo at all, despite the seller's text describing a battery."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel (pair, mono-crystalline)",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Izutech solar energy specialize in all solar equipment such as inverter, panels, charge controllers",
+        "verdict": "unverifiable_remote",
+        "evidence": "No shopfront, signage, or business documentation shown in photo 0."
+      },
+      {
+        "claim": "Battery is new, holds charge for 8 hours, never repaired",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows solar panels only, no battery is pictured, so this claim cannot refer to the item shown."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Wattage/output rating of the panels is unknown, which drives most of the price difference in comparables.",
+        "proof": "Close-up photo of the rating label/sticker on the back of each panel showing watts, voltage, and cell count.",
+        "if_unproven": "priced at the lowest unbranded/unspecified wattage tier seen in comparables"
+      },
+      {
+        "risk": "Brand/manufacturer unknown, so no premium (e.g. Canadian Solar, Longi, Jinko) can be assumed.",
+        "proof": "Photo of brand logo or nameplate on panel frame or junction box.",
+        "if_unproven": "priced as generic/unbranded panel, not premium brand"
+      },
+      {
+        "risk": "Condition/output performance not demonstrated; panels could be cracked, delaminated, or underperforming despite cosmetic appearance.",
+        "proof": "Photo/video of panel connected to a multimeter or charge controller showing actual voltage/current output in sunlight.",
+        "if_unproven": "priced as not verified working, i.e. at the lowest comparable tier"
+      },
+      {
+        "risk": "The battery claim in the text does not match the photographed item, suggesting a possible mismatched listing or template reuse from another ad.",
+        "proof": "Photo of the actual battery if one is also for sale, plus a photo of the panel's label to confirm what is actually being sold.",
+        "if_unproven": "treat listing as panels-only; disregard battery claim for pricing"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the rating label on the back of each panel (watts, voltage, cell count).",
+      "Photo of any brand name/logo on the panel frame or junction box.",
+      "Photo or short video of the panel's output reading on a multimeter/charge controller in daylight.",
+      "Clarification and separate photo of the battery being described in the text, if it is part of this sale."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo shows unbranded, unlabeled solar panels with no visible wattage, while the seller's text describes an unrelated battery claim, so neither the item's specs nor its match to the text can be confirmed and no worst-case price tier can be selected without a wattage/label shot.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 21043,
+    "input_tokens": 3019,
+    "output_tokens": 1826,
+    "cost_usd": 0.020745,
+    "replayed": false,
+    "fixture_key": "c7cff39194acc4148596430917abc0ab",
+    "error": null
+  }
+}

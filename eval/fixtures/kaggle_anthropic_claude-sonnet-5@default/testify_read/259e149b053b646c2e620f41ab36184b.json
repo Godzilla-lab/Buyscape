@@ -1,0 +1,86 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Two power banks lying on a concrete floor.",
+      "One unit is fully wrapped in masking/cellotape around its body.",
+      "The other unit is unwrapped, scratched, and shows glue or residue marks on the casing.",
+      "Green and blue charging cables are coiled beside the units, not clearly attached to them.",
+      "No brand name, model number, or capacity label is visible on either unit.",
+      "Photo is taken indoors on bare floor, low light, phone watermark reads 'Shot on AWESOME A70'."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "power bank (scrap/used)",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Battery is new",
+        "verdict": "unverifiable_remote",
+        "evidence": "No battery cell or date code visible in photo 0; casing is sealed."
+      },
+      {
+        "claim": "Holds charge for 8 hours",
+        "verdict": "unverifiable_remote",
+        "evidence": "No usage/output test shown, no load test clip provided."
+      },
+      {
+        "claim": "Never repaired",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows one unit entirely wrapped in tape, consistent with a casing repair or patch job, not an untouched factory unit."
+      },
+      {
+        "claim": "Scrap power banks for sale",
+        "verdict": "supported",
+        "evidence": "Both units show heavy wear, scratches, and taped casing consistent with scrap/used condition."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery cell inside may be dead, swollen, or missing entirely.",
+        "proof": "A photo or video of the opened unit showing the battery cell and any swelling.",
+        "if_unproven": "priced as non-functional scrap"
+      },
+      {
+        "risk": "Tape wrap may be hiding cracked casing or exposed wiring, a safety hazard.",
+        "proof": "Close-up photo with tape removed showing the casing underneath.",
+        "if_unproven": "priced as damaged/unsafe"
+      },
+      {
+        "risk": "Output ports (USB) may be broken or missing, affecting usability even as scrap-for-parts.",
+        "proof": "Close-up photo of the port/connector area on each unit.",
+        "if_unproven": "priced as non-functional"
+      },
+      {
+        "risk": "No way to confirm actual charge-holding duration claimed by seller.",
+        "proof": "A video showing the power bank charging a phone continuously with a timer visible.",
+        "if_unproven": "priced as not holding charge"
+      }
+    ],
+    "proof_requests": [
+      "Remove the tape and photograph the bare casing and any cracks.",
+      "A video of the power bank charging a phone with a visible timer or percentage change.",
+      "Close-up photos of the USB ports/input-output connectors on both units.",
+      "A photo of any printed capacity/model label, if one exists under the tape."
+    ],
+    "decision": "price",
+    "reason": "The items are identifiable only as generic scrap power banks with no brand or model visible, and the seller's performance claims are unverifiable while the 'never repaired' claim is contradicted by visible tape-wrapping, so they must be priced at worst case as non-functional scrap pending the proofs listed."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 21156,
+    "input_tokens": 2493,
+    "output_tokens": 1908,
+    "cost_usd": 0.020907,
+    "replayed": false,
+    "fixture_key": "259e149b053b646c2e620f41ab36184b",
+    "error": null
+  }
+}

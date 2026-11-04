@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Green retail box with clear window labeled 'POWER BANK', 'HIGH SPEED', and 'USB BACKUP POWER'",
+      "Black rectangular power bank with a digital display sitting outside the box",
+      "Vertical text 'HCMH' on the lower right of the power bank",
+      "Watermark 'HUAFEI INTERNATIONAL GROUP' across the center of the image",
+      "Box appears opened; the power bank is not sealed inside",
+      "Background shows a shop pegboard with phone accessories"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "power bank",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Brand New",
+        "verdict": "unverified",
+        "evidence": "Power bank is out of the box; seal and condition cannot be confirmed from photo 0"
+      },
+      {
+        "claim": "SMRRT brand",
+        "verdict": "unverified",
+        "evidence": "SMRRT is not visible in photo 0; device shows HCMH marking instead"
+      },
+      {
+        "claim": "20,000mAh capacity",
+        "verdict": "unverified",
+        "evidence": "Capacity marking is not legible on the box or device in photo 0"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual capacity may be far below 20,000mAh",
+        "proof": "Close-up of capacity printed on the box or device",
+        "if_unproven": "as an unbranded power bank of unknown or low capacity"
+      },
+      {
+        "risk": "Power bank may not hold charge or may be dead",
+        "proof": "Video showing it charging a phone and the digital display responding",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Item may be used despite 'brand new' claim",
+        "proof": "Video of unboxing from sealed retail packaging",
+        "if_unproven": "as used"
+      },
+      {
+        "risk": "Brand may be unknown or misrepresented (HCMH vs SMRRT)",
+        "proof": "Clear photo of the brand logo on the box and device",
+        "if_unproven": "as unbranded or generic"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of any capacity marking on the box or power bank",
+      "Video showing the power bank charging a phone and the display changing",
+      "Video of unboxing from sealed retail packaging",
+      "Clear photo of the brand logo on the box and device"
+    ],
+    "decision": "price",
+    "reason": "The item is visibly a power bank with a digital display, but the claimed brand and 20,000mAh capacity are not legible in the photo and the unit is out of the box, so it is priced at worst case as an untested, unbranded power bank of unknown capacity."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 28806,
+    "input_tokens": 2045,
+    "output_tokens": 4440,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "f939a12b2f363318cfee9bf2808eba9f",
+    "error": null
+  }
+}

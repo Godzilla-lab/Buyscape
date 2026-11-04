@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Two photos show large stacks of used (tokumbo) tires piled outdoors on a stone/tiled surface, under a makeshift shelter.",
+      "Tires have visible tread wear patterns, some discoloration, and paint markings (red, yellow dots) typical of imported used-tire sorting marks.",
+      "No visible brand name, size markings (e.g. 205/55R16), or DOT date codes legible on any sidewall in either photo.",
+      "Foreground tires in both photos appear to be the same or similar stack, shot from slightly different angles.",
+      "Watermark 'IKWE ANTHONY' overlays both images, consistent with a reseller's listing photos rather than manufacturer or original owner photos."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used (tokumbo) car tires, size and brand unknown",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Direct tokumbo tires",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photos show used tires consistent with 'tokumbo' (secondhand import) claim, but no import documentation or origin marking is visible to confirm 'direct' sourcing."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Tire size (width/aspect/rim diameter) unknown, which is the primary price determinant for tires",
+        "proof": "Close-up photo of sidewall showing full size code, e.g. 205/55R16",
+        "if_unproven": "cannot be priced at any worst case without size"
+      },
+      {
+        "risk": "Brand/model of tire unknown (affects value significantly between budget and premium brands)",
+        "proof": "Close-up photo of sidewall brand logo",
+        "if_unproven": "priced as unbranded/generic until shown"
+      },
+      {
+        "risk": "Tread depth insufficient or uneven wear not clear from distance shots",
+        "proof": "Close-up photo with a tread depth gauge or coin inserted in groove",
+        "if_unproven": "priced as low/minimum legal tread"
+      },
+      {
+        "risk": "Tire age (DOT date code) unknown; old rubber can be unsafe regardless of tread",
+        "proof": "Photo of DOT code on sidewall",
+        "if_unproven": "priced as old/high-risk stock"
+      },
+      {
+        "risk": "Hidden sidewall cracks, bulges, or repair patches not visible in wide shots",
+        "proof": "Close-up photos of full sidewall circumference for each tire being sold",
+        "if_unproven": "priced as having defects"
+      },
+      {
+        "risk": "Buyer may not receive the exact tires shown (stock photo of general inventory vs specific set)",
+        "proof": "Photo/video of the actual tires being set aside for this buyer with matching marks",
+        "if_unproven": "priced as unverified match to listing photos"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of sidewall showing full size code (width/aspect/rim diameter)",
+      "Close-up photo of brand name on sidewall",
+      "Close-up of DOT date code",
+      "Tread depth gauge or coin photo on at least 2-3 tires",
+      "Photo of the specific tires set aside for sale, not general stock"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Tire size is unreadable in both photos and is the dominant factor in tire pricing, so even a worst-case price cannot be set without it."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 16584,
+    "input_tokens": 2681,
+    "output_tokens": 1376,
+    "cost_usd": 0.015963,
+    "replayed": false,
+    "fixture_key": "9f8a4330a3afd211147abbc6d80ad268",
+    "error": null
+  }
+}

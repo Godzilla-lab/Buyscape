@@ -1,0 +1,87 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Front view of a Dell laptop with screen off. 'DELL' logo visible on bezel. Keyboard has 'LATITUDE | E6230' printed on the lower left. Intel Core i5 sticker on bottom left. Screen has some smudges and minor dust.",
+      "Photo 1: Similar front view, slightly different angle. Same details as photo 0. Screen still off. Reflections visible on screen surface.",
+      "Photo 2: Closed laptop from top-down angle. Dell logo on lid. Silver trim around edges. Some scuff marks and a small white sticker residue on the top right corner of the lid. Left side ports partially visible.",
+      "No photos show the laptop powered on, no internal components, no charger, no battery, no ports in use, no back or bottom view."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Dell",
+      "model": "Latitude E6230",
+      "read_from": [
+        "photo 0 keyboard",
+        "photo 1 keyboard"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Working perfectly fine",
+        "verdict": "unverified",
+        "evidence": "No photo shows the laptop powered on or in use. No screen activity, no indicator lights, no operating system visible."
+      },
+      {
+        "claim": "No fault",
+        "verdict": "unverified",
+        "evidence": "No internal components shown. No diagnostic tests shown. Only external appearance visible, which shows minor scuffs and dust."
+      },
+      {
+        "claim": "Long lasting battery",
+        "verdict": "unverifiable_remote",
+        "evidence": "No battery is visible. No photos show battery being removed or tested. No runtime demonstration. Battery health cannot be assessed remotely."
+      },
+      {
+        "claim": "Original charger",
+        "verdict": "unverifiable_remote",
+        "evidence": "No charger is shown in any photo. Cannot verify if it is original or included."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Laptop may not power on or have hardware faults",
+        "proof": "Photo of laptop powered on with operating system visible, or video showing boot process.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Battery may be dead or degraded",
+        "proof": "Photo of battery being removed and tested, or video showing laptop running on battery for at least 30 minutes.",
+        "if_unproven": "priced as no battery or battery not working"
+      },
+      {
+        "risk": "Charger may be missing or non-original",
+        "proof": "Photo of charger with Dell branding and model number, plugged into laptop and showing charging indicator.",
+        "if_unproven": "priced as no charger or non-original charger"
+      },
+      {
+        "risk": "Internal components may be faulty (RAM, HDD/SSD, keyboard, screen)",
+        "proof": "Photo or video showing internal components, or diagnostic test results.",
+        "if_unproven": "priced as unknown internal condition"
+      }
+    ],
+    "proof_requests": [
+      "Photo of laptop powered on with operating system visible",
+      "Photo of battery being removed and tested, or video showing battery runtime",
+      "Photo of original charger with Dell branding and model number",
+      "Photo or video showing internal components or diagnostic test results"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identifiable from the keyboard in photos 0 and 1, but critical claims about functionality, battery, and charger cannot be verified from the current photos. The laptop's working condition, battery health, and charger authenticity are unproven and must be confirmed before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 67742,
+    "input_tokens": 3242,
+    "output_tokens": 832,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "28289c30f4a5eee6ef30c4f28605f86a",
+    "error": null
+  }
+}

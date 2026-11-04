@@ -1,0 +1,67 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Close-up of a tire tread with a manufacturer label attached.",
+      "Label identifies the brand as Dunlop and model as Grandtrek PT5.",
+      "Label specifies size 265/60R18 and load/speed rating 110V.",
+      "Tread appears deep and unused, consistent with a new tire.",
+      "Watermark 'FRANCOBEST ENT' suggests a commercial seller.",
+      "Only the tread and a small portion of the shoulder are visible; sidewalls are hidden."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "tire",
+      "brand": "Dunlop",
+      "model": "Grandtrek PT5",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "High Quality performance tires",
+        "verdict": "unverifiable_remote",
+        "evidence": "Quality and performance are subjective and depend on the age and storage conditions of the rubber."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The tire may be old stock (expired rubber).",
+        "proof": "A photo of the sidewall showing the 4-digit DOT manufacture code.",
+        "if_unproven": "priced as expired/old stock"
+      },
+      {
+        "risk": "Hidden sidewall damage or repairs (plugs/patches).",
+        "proof": "Clear photos of both the inner and outer sidewalls.",
+        "if_unproven": "priced as having structural defects"
+      },
+      {
+        "risk": "The listing may be for a single tire despite the plural 'tires' in text.",
+        "proof": "A photo showing all tires offered in a single shot.",
+        "if_unproven": "priced as a single unit"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the 4-digit DOT code on the sidewall to verify the manufacture date.",
+      "Photos of both the inner and outer sidewalls of the tire(s).",
+      "A photo showing all tires included in the sale together."
+    ],
+    "decision": "price",
+    "reason": "The brand, model, and size are clearly legible on the factory label in photo 0, allowing for a baseline valuation even at worst-case (old stock, single unit)."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 8802,
+    "input_tokens": 2347,
+    "output_tokens": 1697,
+    "cost_usd": 0.006265,
+    "replayed": false,
+    "fixture_key": "83873d80b426bd2a287b3b1443c76623",
+    "error": null
+  }
+}

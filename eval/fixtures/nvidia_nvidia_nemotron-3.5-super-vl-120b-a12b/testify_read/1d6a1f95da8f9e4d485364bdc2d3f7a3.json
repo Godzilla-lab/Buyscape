@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0: Open chest freezer with white lid, metallic interior lining, some frost or residue at the bottom.",
+      "Photo 1: White chest freezer front with lid open, oval badge reading Haier THERMOCOOL with 5 YEARS WARRANTY text, control knob bottom right, chipped paint and rust bottom left corner.",
+      "Photo 2: Rear view showing black condenser coil grid, compressor compartment at bottom left, power cord and plug, unreadable rating plate near top rear."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "chest freezer",
+      "brand": "Haier Thermocool",
+      "model": null,
+      "read_from": [
+        "photo 1 badge"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "themocool freezer",
+        "verdict": "supported",
+        "evidence": "photo 1 badge reads Haier THERMOCOOL"
+      },
+      {
+        "claim": "string capacity",
+        "verdict": "unverified",
+        "evidence": "no capacity marking or readable model number in any photo"
+      },
+      {
+        "claim": "long lasting freezing for up to five",
+        "verdict": "unverifiable_remote",
+        "evidence": "freezing duration cannot be tested remotely; badge shows 5 years warranty but validity is unproven"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "freezer does not cool or freeze",
+        "proof": "video of the unit running with a thermometer inside",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "compressor or condenser faulty",
+        "proof": "video of the compressor starting and running",
+        "if_unproven": "as compressor faulty"
+      },
+      {
+        "risk": "no electrical power or faulty cord/plug",
+        "proof": "video of the unit powering on",
+        "if_unproven": "as no power"
+      },
+      {
+        "risk": "interior liner damaged or heavy frost",
+        "proof": "close-up photo of the interior after defrosting",
+        "if_unproven": "as needing interior repair or defrosting"
+      }
+    ],
+    "proof_requests": [
+      "Video of the freezer running with a thermometer inside to confirm cooling",
+      "Close-up photo of the rating plate to read model and capacity",
+      "Video showing the compressor starting and running"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a Haier Thermocool chest freezer from photo 1, so it can be priced at its worst case even without proof of operation."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 12852,
+    "input_tokens": 3304,
+    "output_tokens": 2115,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "1d6a1f95da8f9e4d485364bdc2d3f7a3",
+    "error": null
+  }
+}

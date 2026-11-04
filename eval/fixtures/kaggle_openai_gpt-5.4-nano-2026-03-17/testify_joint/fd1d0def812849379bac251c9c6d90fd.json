@@ -1,0 +1,87 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0 shows a front-load washing machine with LG logo.",
+      "On the front panel it reads \u201cDirectDrive 7kg\u201d (LG DirectDrive 7kg).",
+      "There is visible rust/staining around the lower front area/door frame.",
+      "No photo shows the model number plate, inside drum, drain hose, or power-on test."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": null,
+      "brand": "LG",
+      "model": "DirectDrive 7kg",
+      "read_from": [
+        "photo 0 front panel text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "LG DirectDrive 7kg washing machine for sale.",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows LG and \u201cDirectDrive 7kg\u201d on the front panel."
+      },
+      {
+        "claim": "Barely used, bought new last year.",
+        "verdict": "unverified",
+        "evidence": "No photo of receipt/date, warranty card, or model/serial label to confirm purchase time."
+      },
+      {
+        "claim": "No fault at all, the motor was never opened.",
+        "verdict": "unverified",
+        "evidence": "No power-on video/test, no access/inspection photos of motor area."
+      },
+      {
+        "claim": "Receipt and warranty card available.",
+        "verdict": "unverifiable_remote",
+        "evidence": "Seller text only; no documents shown in photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Rust/staining on the lower front could indicate water leakage, poor drainage, or corrosion that may affect longevity.",
+        "proof": "One close-up photo of the rust area plus a short clip showing the machine running a full cycle and draining (or a leak test with a small water fill).",
+        "if_unproven": "Price as a used unit with possible cosmetic/maintenance issues (worst case: treat as not fully proven to be problem-free)."
+      },
+      {
+        "risk": "\u201cNo fault\u201d not proven remotely\u2014could have issues like weak spin, drainage problems, unusual noise, or error codes.",
+        "proof": "Power-on video showing the display/program selection and a short wash+spin segment (or error-code check).",
+        "if_unproven": "Price as not working/untested risk (worst case for safety: assume it may need service)."
+      },
+      {
+        "risk": "Motor claim (\u201cnever opened\u201d) can\u2019t be verified from the outside; internal repairs could have been done.",
+        "proof": "Photo of the motor/under-panel area if accessible, or a technician inspection report; alternatively a video showing no tampering marks where service would occur.",
+        "if_unproven": "Price as standard used (not guaranteed original/unopened)."
+      },
+      {
+        "risk": "Exact model/serial not confirmed; warranty/compatibility can\u2019t be verified.",
+        "proof": "Photo of the rating/model/serial plate (usually on the door frame or back panel) with readable text.",
+        "if_unproven": "Price without warranty confidence (worst case: no warranty value)."
+      }
+    ],
+    "proof_requests": [
+      "Send a clear photo of the model/serial rating plate (readable).",
+      "Send a short video of the machine running: start a cycle, show the display, then show draining and spin.",
+      "Send close-ups of the rust/staining area and confirm whether there is any current leak (clip while running).",
+      "Show the receipt and warranty card (photos with dates/serial matching the machine)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item identity (LG DirectDrive 7kg) is readable, but key value drivers\u2014working condition, leak/corrosion cause, and warranty proof\u2014are not verifiable from the single photo. Without a power-on/drain/spin test, pricing could be wrong.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_joint",
+    "latency_ms": 5512,
+    "input_tokens": 3108,
+    "output_tokens": 883,
+    "cost_usd": 0.004796,
+    "replayed": false,
+    "fixture_key": "fd1d0def812849379bac251c9c6d90fd",
+    "error": null
+  }
+}

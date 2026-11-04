@@ -1,0 +1,67 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Tire tread with a manufacturer's label attached.",
+      "Label identifies the brand as Michelin and model as Primacy SUV+.",
+      "Size 225/65R17 106H XL TL is printed on the label.",
+      "Tread depth appears to be that of a new tire.",
+      "The sidewalls and the DOT manufacture date code are not visible.",
+      "Watermarks 'FRANCO GLOBAL ENTERPRISES' and 'POSTED ON JIJI' are present."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "tire",
+      "brand": "Michelin",
+      "model": "Primacy SUV+",
+      "read_from": [
+        "photo 0 sticker"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "225/65r17 michelin primacy tire",
+        "verdict": "supported",
+        "evidence": "photo 0 sticker"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The tire may be old stock with degraded rubber (expired).",
+        "proof": "A close-up photo of the DOT code (4 digits in an oval) on the sidewall.",
+        "if_unproven": "as expired stock (over 6 years old)"
+      },
+      {
+        "risk": "Hidden damage, punctures, or repairs on the sidewalls.",
+        "proof": "Photos of both the inner and outer sidewalls.",
+        "if_unproven": "as having minor structural defects"
+      },
+      {
+        "risk": "The sticker may not belong to this specific tire (authenticity).",
+        "proof": "Photo of the embossed brand, model, and size markings on the tire sidewall.",
+        "if_unproven": "as a generic or budget brand tire"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the 4-digit DOT date code on the sidewall.",
+      "Photos of both the inner and outer sidewalls.",
+      "Photo of the embossed brand and model on the sidewall to confirm the sticker is original."
+    ],
+    "decision": "price",
+    "reason": "The brand, model, and size are clearly identified by the manufacturer sticker. It is priced as old/expired stock until the DOT manufacture date is verified."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 12454,
+    "input_tokens": 2359,
+    "output_tokens": 2525,
+    "cost_usd": 0.008755,
+    "replayed": false,
+    "fixture_key": "8bad0e553c096f518d8c2cc140b5bb23",
+    "error": null
+  }
+}

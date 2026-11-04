@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Three photos show a bare internal-combustion engine block, no transmission, no hybrid inverter or motor-generator unit visible.",
+      "Engine sits on wet ground amid other plastic-wrapped engines, consistent with a used/tokunbo parts yard.",
+      "A white sticker on the valve cover reads something like 'FM15D-E2B' with a barcode and '109', plus handwritten teal marker '07/6' or similar.",
+      "No manufacturer logo (Toyota or otherwise) is legible in any photo.",
+      "Injector wiring, timing chain cover, and fuel rail are visible but covered in grime/oil residue typical of a used pull.",
+      "A yellow paint/glue blob and some surface rust/corrosion are visible on mounting brackets.",
+      "No photo shows the engine running, no compression test, no VIN plate, no accompanying wiring harness or ECU."
+    ],
+    "identity": {
+      "status": "unknown",
+      "kind": "used small-displacement petrol engine (possibly 3-cylinder, as claimed)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 sticker",
+        "photo 1 sticker",
+        "photo 2 sticker"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "This is the M15D-FXE / M15A-FXE 1.5-liter, 3-cylinder Atkinson-cycle petrol hybrid engine",
+        "verdict": "unverified",
+        "evidence": "Sticker in photo 0/1/2 shows a code resembling 'FM15D-E2B', not a clearly legible 'M15D-FXE' or 'M15A-FXE', and no Toyota logo or VIN plate is visible to confirm make or exact variant."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine code on sticker does not clearly match the claimed hybrid model code, so this could be a different or lower-value non-hybrid engine.",
+        "proof": "Close-up, in-focus photo of the full engine code sticker and any cast engine ID on the block itself.",
+        "if_unproven": "priced as an unidentified generic small petrol engine, not the specific hybrid variant"
+      },
+      {
+        "risk": "No hybrid motor-generator, inverter, or battery pack is shown, so the 'hybrid' claim may only apply to the ICE portion, which changes resale value versus a complete hybrid powertrain.",
+        "proof": "Photo of the hybrid transaxle/motor unit and inverter if included in the sale.",
+        "if_unproven": "priced as engine-only (ICE block), not a complete hybrid drivetrain"
+      },
+      {
+        "risk": "Running condition is unverifiable from static photos; internal wear, compression loss, or timing issues cannot be seen.",
+        "proof": "Video of the engine cranking/running with audible idle, plus a compression test reading.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Mileage/history unknown; corrosion and surface rust suggest age or exposure to moisture, possibly affecting internals.",
+        "proof": "Odometer photo from donor vehicle or import paperwork showing mileage.",
+        "if_unproven": "priced as high-mileage/unknown history"
+      },
+      {
+        "risk": "Missing accessories (ECU, wiring harness, sensors) that are often needed for installation are not shown.",
+        "proof": "Photo list of all included parts/harness bundled with the engine.",
+        "if_unproven": "priced as bare block only, accessories not included"
+      }
+    ],
+    "proof_requests": [
+      "Clear, well-lit close-up of the full engine code sticker and any stamped/cast engine number on the block.",
+      "Video of the engine cranking or running, with audible sound.",
+      "Photo of the hybrid motor-generator/inverter unit if it is part of the sale.",
+      "Compression test results or oil pressure check if available.",
+      "List/photo of all included accessories (harness, ECU, sensors)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The claimed hybrid Atkinson engine model cannot be confirmed from the blurry sticker alone, and no hybrid drivetrain components are visible, so even a worst-case price cannot be set until the engine code and included parts are clarified."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 36096,
+    "input_tokens": 4921,
+    "output_tokens": 3026,
+    "cost_usd": 0.036943,
+    "replayed": false,
+    "fixture_key": "c1e0b2ba4f65ad447b2962068bf8ef38",
+    "error": null
+  }
+}

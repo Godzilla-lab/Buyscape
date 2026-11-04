@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows a blue electric motor body with a red plastic shaft cover, mounted terminal box, bolted construction, visible wear/paint chipping on housing, sitting on wet concrete ground.",
+      "Photo 1 shows a nameplate partially legible: Chinese text '\u4e09\u76f8\u5f02\u6b65\u7535\u52a8\u673a' (three-phase asynchronous motor), Type 'YE3-90S-4' (partially obscured), rated power '1.1 kW', rated voltage '380V', rated current '2.6A', frequency '50Hz', IP55, speed '1400 r/min', manufacture date '2024.09'.",
+      "Photo 2 is a closer, clearer shot of the same nameplate confirming: 1.1kW, 2.6A, 380V, 50Hz, IP55, 1400 r/min, F-class insulation, manufacture date 2024.09.",
+      "No visible rust on internal windings or shaft; only external casing wear and dirt/grit around the base in photo 2.",
+      "No image of motor running, no load test, no close-up of shaft/bearing condition."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "three-phase induction motor",
+      "brand": null,
+      "model": "YE3-90S-4 (partially legible)",
+      "read_from": [
+        "photo 1 nameplate",
+        "photo 2 nameplate"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Original 2 HP electric motor",
+        "verdict": "contradicted",
+        "evidence": "Nameplate in photo 1 and photo 2 shows rated power 1.1 kW, which is approximately 1.5 HP, not 2 HP as claimed."
+      },
+      {
+        "claim": "Implied 'original' / genuine, unused condition",
+        "verdict": "unverifiable_remote",
+        "evidence": "No proof of origin, purchase receipt, or running test shown; manufacture date stamp (2024.09) suggests recent manufacture but does not confirm it is unused or 'original' as opposed to a used/removed unit."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Motor may not actually run or may have internal winding/bearing faults not visible from static photos.",
+        "proof": "A video clip of the motor running under load or at least spinning freely with audible sound.",
+        "if_unproven": "priced as not working / non-functional"
+      },
+      {
+        "risk": "Power rating is lower than advertised (1.1kW/1.5HP vs claimed 2HP), affecting suitability and value.",
+        "proof": "Full clear nameplate photo confirming kW rating beyond doubt (already fairly visible, but seller's claim still contradicts it).",
+        "if_unproven": "priced per actual nameplate rating (1.1kW/~1.5HP), not the claimed 2HP"
+      },
+      {
+        "risk": "Visible external wear, dirt, and wet ground staining could indicate prior heavy use, exposure to moisture, or improper storage, raising risk of rust/corrosion inside.",
+        "proof": "Close-up photos of shaft, bearing housing, and terminal box interior.",
+        "if_unproven": "priced as used with unknown internal condition"
+      },
+      {
+        "risk": "Partial model number obscured on nameplate, cannot fully confirm exact model variant.",
+        "proof": "A straight-on, well-lit photo of the full nameplate without glare or dirt.",
+        "if_unproven": "priced using the generic 1.1kW three-phase induction motor category"
+      }
+    ],
+    "proof_requests": [
+      "Video of the motor running (plugged in, spinning, with sound) to confirm functionality.",
+      "Clear, glare-free, full nameplate photo to confirm exact model and specs.",
+      "Close-up of shaft, bearings, and terminal box interior for corrosion/wear check."
+    ],
+    "decision": "price",
+    "reason": "The motor type and specs are legible from the nameplate (1.1kW three-phase induction motor), and the seller's '2 HP' claim is contradicted by this data, so it must be priced at the lower, verified rating and treated as unproven for functionality (worst case: not confirmed working)."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 17645,
+    "input_tokens": 3309,
+    "output_tokens": 1617,
+    "cost_usd": 0.019629,
+    "replayed": false,
+    "fixture_key": "11de773b17f8200819ff670fc5e194df",
+    "error": null
+  }
+}

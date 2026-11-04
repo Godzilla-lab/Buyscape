@@ -1,0 +1,93 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: Front view of a black DSLR body with 'Canon', 'EOS', '5D', 'Mark II' badges visible; rear body cap is on, no lens attached.",
+      "Photo 1: Rear view showing LCD screen (appears dark/off, no power-on test shown), viewfinder, and button layout typical of 5D Mark II.",
+      "Photo 2: Bottom plate showing model plate 'Canon DS126201', serial number '3761814763', and standard compliance markings.",
+      "No lens, battery, charger, memory card, or original box visible in any photo.",
+      "No shot of the LCD displaying a shutter count, menu screen, or image to confirm power-on or functionality.",
+      "No close-up of a lens element to verify 'no fungus or scratch' since no lens is pictured at all."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DSLR camera body",
+      "brand": "Canon",
+      "model": "EOS 5D Mark II",
+      "read_from": [
+        "photo 0 front badge",
+        "photo 2 bottom plate (DS126201)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Shutter count under 5,000",
+        "verdict": "unverifiable_remote",
+        "evidence": "No screenshot of shutter count or EXIF data shown in any photo."
+      },
+      {
+        "claim": "No fungus or scratch on the lens",
+        "verdict": "unverifiable_remote",
+        "evidence": "No lens is shown in any photo; body cap is on in photo 0."
+      },
+      {
+        "claim": "Original battery and charger, never repaired",
+        "verdict": "unverifiable_remote",
+        "evidence": "No battery, charger, or internal repair evidence shown in any photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Camera may not power on or may have sensor/mirror/shutter fault",
+        "proof": "Video or photo of camera powered on, showing live view/menu and a test shot",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "No lens included despite claim about lens condition",
+        "proof": "Photo of an actual lens with serial number and glass close-up",
+        "if_unproven": "priced as body only, no lens"
+      },
+      {
+        "risk": "Shutter count claim unverifiable",
+        "proof": "Photo of shutter count via software (e.g., EOSInfo) or displayed on camera screen",
+        "if_unproven": "priced as unknown/high-use shutter"
+      },
+      {
+        "risk": "Battery/charger not shown; may be missing or third-party",
+        "proof": "Photo of battery and charger with Canon branding next to camera",
+        "if_unproven": "priced as accessories not included"
+      },
+      {
+        "risk": "Possible cosmetic/internal damage hidden by body cap or unshown angles (e.g., mount, sensor)",
+        "proof": "Photo of lens mount with cap off, and sensor visibility shot",
+        "if_unproven": "priced as condition unverified, assume wear"
+      }
+    ],
+    "proof_requests": [
+      "Video of the camera powering on and taking a live test shot",
+      "Photo of shutter count from camera menu or diagnostic software",
+      "Photo of the lens (if included) with glass visible and serial number",
+      "Photo of battery and charger together with the camera"
+    ],
+    "decision": "price",
+    "reason": "The body is clearly identified as a Canon EOS 5D Mark II from the badge and bottom plate, but with no lens, no power-on proof, and no shutter-count evidence, it must be priced at worst case as an unverified, body-only unit comparable to lower-tier DSLR listings.",
+    "price_pick": {
+      "low": 0,
+      "high": 4
+    }
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 29687,
+    "input_tokens": 4188,
+    "output_tokens": 2520,
+    "cost_usd": 0.033576,
+    "replayed": false,
+    "fixture_key": "ef1ab1f385469b3faf314d7fdf1a552f",
+    "error": null
+  }
+}

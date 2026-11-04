@@ -1,0 +1,84 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "White standing fan with five grey blades.",
+      "Brand 'D'TRACKER SOLAR FAN' printed on the center hub.",
+      "Retail box behind the fan reads '16\" RECHARGEABLE STAND FAN'.",
+      "Small solar panel with attached cable is present.",
+      "Two LED bulbs and a remote control are shown on the base.",
+      "Control panel on the fan neck features five buttons and several indicator LEDs.",
+      "Watermark 'EBUS TECHNOLOGY' and 'POSTED ON JIJI' visible on the image."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "standing fan",
+      "brand": "D'TRACKER",
+      "model": "16\" RECHARGEABLE STAND FAN",
+      "read_from": [
+        "photo 0 hub",
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "powered by a dedicated solar panel",
+        "verdict": "supported",
+        "evidence": "photo 0 shows a solar panel included with the fan."
+      },
+      {
+        "claim": "16 inch",
+        "verdict": "supported",
+        "evidence": "photo 0 box explicitly states 16\"."
+      },
+      {
+        "claim": "Rechargeable",
+        "verdict": "unverified",
+        "evidence": "The box claims it is rechargeable, but the internal battery's presence or state cannot be confirmed from a still photo."
+      },
+      {
+        "claim": "highly energy-efficient",
+        "verdict": "unverifiable_remote",
+        "evidence": ""
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery health or capacity may be depleted.",
+        "proof": "A video showing the fan running on battery power alone for at least 10 minutes.",
+        "if_unproven": "as battery dead/not holding charge"
+      },
+      {
+        "risk": "Solar panel may not actually charge the unit.",
+        "proof": "A video showing the charging indicator light active when the panel is connected in direct sunlight.",
+        "if_unproven": "as solar panel non-functional"
+      },
+      {
+        "risk": "Motor may be noisy or weak.",
+        "proof": "A video with sound showing the fan operating at all speed settings.",
+        "if_unproven": "as noisy or weak motor"
+      }
+    ],
+    "proof_requests": [
+      "Video of the fan running on battery power alone.",
+      "Video showing the charging indicator light when the solar panel is connected in daylight.",
+      "Photo of the technical specification sticker (usually on the back or bottom) showing battery capacity and voltage."
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identified by brand and type from the photo. It can be priced at its worst-case value (as a non-rechargeable fan with a dead battery) based on the available evidence."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 10690,
+    "input_tokens": 2361,
+    "output_tokens": 2158,
+    "cost_usd": 0.007654,
+    "replayed": false,
+    "fixture_key": "a18f776bdc5ccdfc238e95e23bdc6e23",
+    "error": null
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0 shows a complete engine bay with a visible valve cover reading \u201cDAF 24 VALVE\u201d and \u201cDAF\u201d (also \u201cHEPH AUTOS\u201d watermark).",
+      "Photo 1 shows a large engine assembly with multiple hoses/intake/exhaust openings; engine appears removed from a vehicle and laid out.",
+      "Photo 2 shows the engine laid out with two valve covers/engine covers that both appear to say \u201cDAF\u201d and \u201c24 VALVE\u201d."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": null,
+      "brand": "DAF",
+      "model": "24 VALVE (as readable on the valve cover)",
+      "read_from": [
+        "photo 0 valve cover text",
+        "photo 2 valve cover text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Clean and powerful Trailer Head Engine, in excellent condition and ready for work.",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photos show an engine assembly, but do not prove cleanliness level, power/health, or \u201cready for work\u201d (no running/video, no compression/test results)."
+      },
+      {
+        "claim": "Strong engine.",
+        "verdict": "unverifiable_remote",
+        "evidence": "No dyno/run test or diagnostic readings shown; only static photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Exact engine variant/spec (displacement, fuel type, model code) is not fully readable; pricing can swing a lot by exact DAF engine model.",
+        "proof": "A clear photo of the engine ID plate/serial/model code (or the full label) and the full engine name stamping, plus the gearbox/ECU part numbers if applicable.",
+        "if_unproven": "Price as a generic used DAF trailer head/complete engine with unknown exact spec (worst-case match to the lowest comparable that still looks like a complete engine listing)."
+      },
+      {
+        "risk": "\u201cReady for work\u201d may be false if there are hidden faults (leaks, missing parts, turbo/ECU issues, low compression). Photos can\u2019t confirm.",
+        "proof": "Video of a start-up/run (cold start if possible) and a simple leak check; ideally compression test results.",
+        "if_unproven": "Price as not proven/unknown condition (worst-case: treat as needing inspection/possible repairs)."
+      },
+      {
+        "risk": "Photos may not show whether it is complete (some engines are missing alternator/starter/ancillaries or have damaged wiring/harness).",
+        "proof": "A photo checklist showing all major ancillaries included (starter, alternator, turbo, injectors, sensors, wiring harness, hoses) laid out and counted.",
+        "if_unproven": "Price as complete engine but with unknown completeness; if any key ancillaries are missing, value drops\u2014so keep to the lower end until confirmed."
+      },
+      {
+        "risk": "Potential mismatch with the seller\u2019s \u201cTrailer Head Engine\u201d wording (could be from a different application/vehicle than expected).",
+        "proof": "Photo of the engine mounting/fitment markings and the vehicle it came out of (VIN/registration or chassis photo).",
+        "if_unproven": "Price assuming application may not match perfectly (worst-case: buyer may need extra parts/adapters)."
+      }
+    ],
+    "proof_requests": [
+      "Send a clear close-up photo of the engine ID plate/serial/model code (not just \u201cDAF 24 VALVE\u201d).",
+      "Send a short video of the engine starting and running (showing smoke level and stable idle).",
+      "Confirm what is included: turbo, starter, alternator, injectors, ECU/ECM, wiring harness, sensors\u2014send photos of each included part.",
+      "Send the engine compression test (or at least a mechanic\u2019s diagnostic report) and any recent service/repair receipts."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photos confirm it\u2019s a DAF engine with \u201c24 VALVE\u201d text, but the exact engine model/spec and \u201cready for work\u201d condition cannot be verified remotely from these images alone, so a safe worst-case price cannot be confidently matched to the comparables.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_joint",
+    "latency_ms": 5838,
+    "input_tokens": 3962,
+    "output_tokens": 943,
+    "cost_usd": 0.003816,
+    "replayed": false,
+    "fixture_key": "598b3db8956fd3f53f438d2047dc2b28",
+    "error": null
+  }
+}

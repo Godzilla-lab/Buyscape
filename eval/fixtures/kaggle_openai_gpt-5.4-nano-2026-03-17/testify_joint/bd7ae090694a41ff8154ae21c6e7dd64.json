@@ -1,0 +1,91 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0 shows a Nikon DSLR body labeled \u201cD3300\u201d with an attached lens labeled \u201cAF-S DX NIKKOR 18-55mm\u201d and \u201cVR II Kit\u201d on the box.",
+      "Photo 0 shows the lens front ring text including \u201cVR\u201d and \u201cBLACK\u201d on the box/lens packaging area.",
+      "Photo 1 shows the same Nikon D3300 body and the 18-55mm VR II kit lens on top of the box.",
+      "No photo shows the sensor size/MP, AF point count, or the stated 5fps/CMOS/DX-format details directly."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DSLR camera kit (body + 18-55mm VR lens)",
+      "brand": "Nikon",
+      "model": "D3300",
+      "read_from": [
+        "photo 0 body label (D3300)",
+        "photo 0 box text (D3300 18-55 VR II Kit)",
+        "photo 1 body label (D3300)",
+        "photo 1 box text (D3300 18-55 VR II Kit)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "24.2 MP CMOS DX-format sensor",
+        "verdict": "unverified",
+        "evidence": "Photos show \u201cD3300\u201d and \u201c18-55mm VR II Kit\u201d but do not show sensor specs/MP/CMOS/DX-format."
+      },
+      {
+        "claim": "5 frames per second continuous shooting",
+        "verdict": "unverified",
+        "evidence": "No photo shows shooting specs or menu/benchmark confirming 5fps."
+      },
+      {
+        "claim": "11 AF points with 3D...",
+        "verdict": "unverified",
+        "evidence": "No photo shows AF point configuration or 3D tracking setting."
+      },
+      {
+        "claim": "The model is D3400.",
+        "verdict": "contradicted",
+        "evidence": "Photos show \u201cNikon D3300\u201d on the camera body and box (photo 0 and photo 1), not D3400."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Model mismatch: seller says D3400 but photos show D3300; this can change value and compatibility of accessories/expected performance.",
+        "proof": "Ask for a clear photo of the camera\u2019s model text from the body and the box label (showing D3300 vs D3400) plus the camera\u2019s \u201cAbout/Model\u201d screen in menu.",
+        "if_unproven": "Price as the worst-case matching what\u2019s visible in photos (D3300 kit), not the seller\u2019s D3400 claim."
+      },
+      {
+        "risk": "Lens condition/VR functionality unknown (VR may be faulty; lens may have haze/fungus/scratches).",
+        "proof": "Ask for a short video: zoom 18mm\u219255mm while pressing VR on/off (or show VR icon change) and show lens glass close-ups under light.",
+        "if_unproven": "Price as not guaranteed working/unknown condition for VR and optics."
+      },
+      {
+        "risk": "Camera shutter count, sensor dust, and overall functionality unknown (focus, exposure, buttons, battery/charger).",
+        "proof": "Ask for: (1) a live-view photo of a blank wall at high ISO to reveal dust, (2) a menu screen showing shutter count (if available) or a test shot set, (3) a quick video of autofocus tracking on a moving subject.",
+        "if_unproven": "Price as worst-case: needs testing/possible faults until proven."
+      },
+      {
+        "risk": "Kit completeness unknown (battery, charger, strap, caps, hood).",
+        "proof": "Ask for a laid-out photo of all included items with labels (battery, charger, both lens caps, strap, manuals).",
+        "if_unproven": "Price assuming missing accessories are possible."
+      }
+    ],
+    "proof_requests": [
+      "Send a clear menu screenshot showing the exact camera model (About/Model) and confirm D3300 vs D3400.",
+      "Send lens glass close-ups (front and rear) in bright light for fungus/haze/scratches.",
+      "Send a short VR test video (VR on/off) while zooming 18\u201355mm.",
+      "Send a live-view test shot of a plain wall/sky at high ISO to check sensor dust.",
+      "List and photo all included accessories (battery, charger, caps, strap, memory card if any)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photos clearly show a Nikon D3300 kit, contradicting the seller\u2019s D3400 claim, and the key specs/condition that affect price (functionality, VR, shutter count, completeness) are not verifiable from the provided images alone.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_joint",
+    "latency_ms": 6107,
+    "input_tokens": 3321,
+    "output_tokens": 1087,
+    "cost_usd": 0.002023,
+    "replayed": false,
+    "fixture_key": "bd7ae090694a41ff8154ae21c6e7dd64",
+    "error": null
+  }
+}

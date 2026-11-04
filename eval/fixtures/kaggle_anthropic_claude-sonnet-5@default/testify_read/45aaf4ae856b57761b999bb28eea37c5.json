@@ -1,0 +1,88 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Large flat-screen TV photographed outdoors, leaning on a cardboard box and against a car.",
+      "Box edge visible reads something like 'TV 75\"'.",
+      "Screen bezel/logo area shows text reading 'SAVOX' and 'Google TV' logo, not a Samsung logo.",
+      "Screen is off/dark; no power-on state, no visible picture, no serial or model plate visible.",
+      "Photo is blurry, taken at an angle, with a person's shadow and legs reflected in the screen."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "75-inch flat-screen TV",
+      "brand": "SAVOX (as read from photo, not Samsung as claimed)",
+      "model": null,
+      "read_from": [
+        "photo 0 screen/bezel text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "75\u201d Outdoor Samsung Smart TV",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows 'SAVOX' and 'Google TV' branding on the screen, not Samsung."
+      },
+      {
+        "claim": "It has a power fault only",
+        "verdict": "unverifiable_remote",
+        "evidence": "Screen is off in the photo; no way to confirm power fault is the only issue or that the panel, backlight, and board are otherwise fine."
+      },
+      {
+        "claim": "Outdoor TV (implying weatherproof/outdoor-rated)",
+        "verdict": "unverified",
+        "evidence": "No weatherproofing marks, IP rating, or outdoor housing visible in photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Brand misrepresentation: seller says Samsung but visible branding reads SAVOX, a different (likely lower-value) brand.",
+        "proof": "Clear close-up photo of the brand logo and model/serial sticker on the back of the TV.",
+        "if_unproven": "priced as the unverified/lesser brand (SAVOX), not as Samsung"
+      },
+      {
+        "risk": "Extent of 'power fault' unknown \u2014 could be simple PSU board, or could involve mainboard/backlight failure, drastically changing repair cost.",
+        "proof": "Video of seller attempting to power it on, showing symptoms (no light, clicking, blinking standby light, etc.)",
+        "if_unproven": "priced as non-working unit, worst-case repair cost assumed"
+      },
+      {
+        "risk": "Screen/panel condition cannot be verified since unit is off \u2014 cracks, dead pixels, or water damage from 'outdoor' use not visible.",
+        "proof": "Photo of screen powered on, and close-up photos of panel surface in daylight without glare.",
+        "if_unproven": "priced as condition unknown, assume possible panel damage"
+      },
+      {
+        "risk": "No model number visible to confirm exact size/specs (e.g. true 75\" panel, resolution, smart TV platform).",
+        "proof": "Photo of the rear label with model and serial number.",
+        "if_unproven": "priced at base-tier 75\" smart TV specs only"
+      },
+      {
+        "risk": "Outdoor-rated claim unverified \u2014 ordinary indoor TVs exposed outdoors can have hidden moisture/corrosion damage.",
+        "proof": "Photos of the back casing, ports, and any IP-rating label.",
+        "if_unproven": "priced as standard indoor TV with possible environmental damage risk"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the rear label showing brand, model number, and serial number.",
+      "Video of the seller plugging in the TV and showing the exact power fault symptom.",
+      "Close-up photos of the screen panel in daylight (powered off) to check for cracks or pressure marks.",
+      "Photo of any IP rating or outdoor certification label, if claimed as outdoor-rated.",
+      "Photo of remote control and accessories included."
+    ],
+    "decision": "fraud_suspected",
+    "reason": "The photo shows 'SAVOX' branding on the screen, directly contradicting the seller's claim of a Samsung TV, which is a material misrepresentation affecting price and trust."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 20117,
+    "input_tokens": 3027,
+    "output_tokens": 1821,
+    "cost_usd": 0.021105,
+    "replayed": false,
+    "fixture_key": "45aaf4ae856b57761b999bb28eea37c5",
+    "error": null
+  }
+}

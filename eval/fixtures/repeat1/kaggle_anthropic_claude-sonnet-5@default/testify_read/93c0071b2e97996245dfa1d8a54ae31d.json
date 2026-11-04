@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 and 1 show a bare engine block, apparently removed from a vehicle, sitting on a shop floor.",
+      "Visible parts: 4 ignition coil packs on top of a valve cover, intake manifold area, alternator, drive belt and pulleys, an oil filler cap labeled 'ENGINE OIL'.",
+      "A watermark reads 'POSTED ON JIJI / EMMY GOLD AUTO SPARE' - this is the seller's shop branding, not an engine marking.",
+      "No manufacturer logo, engine code, displacement marking, or VIN/parts plate is legible in either photo.",
+      "No wiring harness, ECU, intake/exhaust manifolds beyond what's shown, or starter motor are visible - engine may be partial.",
+      "No scale reference or background context (no car, no engine bay) to confirm vehicle fitment."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "4-cylinder petrol engine (bare, used, for Hyundai/Kia per seller)",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Hyundai Kia engine",
+        "verdict": "unverifiable_remote",
+        "evidence": "No logo, cast marking, or engine code is readable in photo 0 or photo 1; Hyundai and Kia share many engine platforms so visual confirmation requires a legible code or plate, which is absent."
+      },
+      {
+        "claim": "4 cylinder",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows 4 ignition coil packs in a row, consistent with an inline-4 configuration."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Exact engine code/displacement (e.g. 1.4L G4FA vs 1.6L G4FC vs 2.0L Theta) is unknown, and this drives most of the price difference within 'Hyundai/Kia 4-cylinder' engines.",
+        "proof": "A clear close-up photo of the cast engine code on the block or the ID plate/sticker.",
+        "if_unproven": "priced at the lowest common Hyundai/Kia 4-cylinder engine variant"
+      },
+      {
+        "risk": "Running condition (compression, oil leaks, internal wear, whether it starts) cannot be judged from static photos.",
+        "proof": "A video clip of the engine cranking/running with audible sound, or a compression test reading.",
+        "if_unproven": "priced as non-running / for-parts condition"
+      },
+      {
+        "risk": "Completeness - engine may be missing starter, sensors, turbo (if applicable), or wiring harness needed for a swap.",
+        "proof": "Full 360-degree photo set showing all sides including the back (bellhousing/flywheel) and underside (oil pan, starter mount).",
+        "if_unproven": "priced as incomplete, assuming missing ancillary parts"
+      },
+      {
+        "risk": "Mileage/usage history and reason for removal (accident, flood, mechanical failure) is unknown.",
+        "proof": "Seller-provided donor vehicle documents, mileage photo from odometer, or history of the part.",
+        "if_unproven": "priced as unknown/high-risk history"
+      },
+      {
+        "risk": "Visible residue/staining near the mount area in photo 1 could indicate an oil leak or gasket failure.",
+        "proof": "Close-up photo of the stained area and the oil pan gasket/rear main seal.",
+        "if_unproven": "priced assuming leak repair is needed"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the cast engine code or ID plate on the block (to confirm exact Hyundai/Kia model and displacement).",
+      "Video of the engine running or being cranked, with sound.",
+      "Photos of the back of the engine (bellhousing, flywheel) and underside (oil pan, starter).",
+      "Close-up of the stained/residue area near the mount bracket seen in photo 1."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The seller's 'Hyundai Kia 4-cylinder' description covers a wide range of engine displacements and models with very different values, and no engine code, plate, or logo is legible in either photo to narrow this down, so even a worst-case price cannot be anchored without that identifying shot."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 25974,
+    "input_tokens": 3671,
+    "output_tokens": 2227,
+    "cost_usd": 0.029612,
+    "replayed": false,
+    "fixture_key": "93c0071b2e97996245dfa1d8a54ae31d",
+    "error": null
+  }
+}

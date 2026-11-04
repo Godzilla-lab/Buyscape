@@ -1,0 +1,107 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Red cab-over truck with MACK lettering on grille and hood badge in photo 0",
+      "Number 37 painted on hood in photo 0",
+      "Tipper/dump body mounted behind cab in photo 0",
+      "Front bumper caked with dried mud in photo 0",
+      "Multiple rear tires with visible tread wear and white rims in photo 1",
+      "Rusty hubs and lug nuts visible in photo 1",
+      "Undercarriage shows axle, suspension springs, and rusty frame rails in photo 2",
+      "Tires in photos 1 and 2 show significant use, not new condition"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "tipper truck",
+      "brand": "Mack",
+      "model": null,
+      "read_from": [
+        "photo 0 grille",
+        "photo 0 hood badge"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Mack brand",
+        "verdict": "supported",
+        "evidence": "photo 0 grille and hood badge"
+      },
+      {
+        "claim": "R model",
+        "verdict": "unverified",
+        "evidence": "no model designation visible in any photo"
+      },
+      {
+        "claim": "tipper",
+        "verdict": "supported",
+        "evidence": "photo 0 dump body behind cab"
+      },
+      {
+        "claim": "army axle",
+        "verdict": "unverifiable_remote",
+        "evidence": "photo 2 shows axle but no identifying marks readable"
+      },
+      {
+        "claim": "10 new tires",
+        "verdict": "contradicted",
+        "evidence": "photo 1 and photo 2 show worn tread and dirty rims"
+      },
+      {
+        "claim": "carry go work (runs and drives)",
+        "verdict": "unverified",
+        "evidence": "no engine running or driving shown in photos"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine and transmission may not run",
+        "proof": "video of cold start, idle, and gear engagement",
+        "if_unproven": "as not running"
+      },
+      {
+        "risk": "Tires are used, not new",
+        "proof": "close-up of tire sidewall date codes and tread depth",
+        "if_unproven": "as used tires"
+      },
+      {
+        "risk": "Axle is not an army or special axle",
+        "proof": "clear photo of axle housing stamp or differential tag",
+        "if_unproven": "as standard axle"
+      },
+      {
+        "risk": "Tipper hydraulic lift may not work",
+        "proof": "video of bed raising and lowering",
+        "if_unproven": "as fixed body"
+      },
+      {
+        "risk": "Frame and chassis corrosion",
+        "proof": "full undercarriage walkaround video",
+        "if_unproven": "as worn chassis"
+      }
+    ],
+    "proof_requests": [
+      "Video of engine starting and running",
+      "Close-up photos of tire date codes",
+      "Photo of axle housing identification numbers",
+      "Video of tipper bed operation",
+      "Full undercarriage inspection video"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a used Mack tipper truck from the photos, and even with unproven claims it can be priced at its worst case as a non-running truck with used tires."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 24613,
+    "input_tokens": 2913,
+    "output_tokens": 2697,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "07fc3cc7d78d99219919709bb1c22f4d",
+    "error": null
+  }
+}

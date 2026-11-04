@@ -1,0 +1,84 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a coral/orange smartphone with an Apple logo and a single rear camera lens in a square bump, held against a patterned curtain; watermark reads \"POSTED ON JIJI HARRY BOO\".",
+      "Photo 1 shows the same phone held horizontally, displaying a slim profile against the curtain.",
+      "Photo 2 shows the same phone held vertically, displaying side buttons including volume keys, a mute switch, and a power button."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": null,
+      "brand": "Apple",
+      "model": "iPhone XR",
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "iPhone XR",
+        "verdict": "supported",
+        "evidence": "photo 0 shows the Apple logo and the distinctive single-camera, aluminum-back design of an iPhone XR."
+      },
+      {
+        "claim": "no face ID",
+        "verdict": "unverifiable_remote",
+        "evidence": "the front of the phone, including the notch and face ID sensors, is not shown in any photo."
+      },
+      {
+        "claim": "All working",
+        "verdict": "unverified",
+        "evidence": "no photo or video shows the phone powered on, charging, or functioning."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Face ID hardware missing or not working",
+        "proof": "front photo or video of the screen and face ID setup attempt",
+        "if_unproven": "as face ID broken"
+      },
+      {
+        "risk": "iCloud or activation lock",
+        "proof": "video of the unlock/hello screen or a settings screenshot showing the account is signed out",
+        "if_unproven": "as iCloud locked"
+      },
+      {
+        "risk": "Cracked screen or display fault",
+        "proof": "front photo of the screen",
+        "if_unproven": "as damaged screen"
+      },
+      {
+        "risk": "Battery degraded or not holding charge",
+        "proof": "screenshot of battery health in Settings",
+        "if_unproven": "as poor battery"
+      },
+      {
+        "risk": "Phone does not power on",
+        "proof": "video of the boot sequence",
+        "if_unproven": "as not working"
+      }
+    ],
+    "proof_requests": [
+      "Front photo showing the screen, notch, and face ID sensors",
+      "Video of the phone powering on and a face ID setup attempt",
+      "Screenshot of Settings > General > About to confirm the model"
+    ],
+    "decision": "price",
+    "reason": "The photos show an Apple iPhone consistent with an iPhone XR; it can be priced at its worst case as non-working and locked, with proof needed to raise the value."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 158460,
+    "input_tokens": 3143,
+    "output_tokens": 7296,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "8ebb58a67a0eb6727a42f41132ec493f",
+    "error": null
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Closed HP laptop wrapped in plastic, with a yellow sticky note on the lid. The note reads: 'HP EliteBook 830 G6, i5, 8gb ram, 256 SSD'. The HP logo is visible. The laptop is silver/grey.",
+      "Photo 1: Laptop open, showing keyboard and screen. The screen is covered in plastic, with visible creases and damage at the top right corner. The keyboard is black with a silver touchpad. A blue Intel Core i5 sticker is visible on the palm rest. The laptop is on a white table, with a black office chair in the background.",
+      "Photo 2: Back of the laptop, also wrapped in plastic. A Windows 10 sticker is visible. The bottom panel has ventilation grilles and regulatory labels. The same yellow sticky note is visible on a box in the background, matching the one on the laptop lid.",
+      "All photos show a watermark: 'VISION WORLD COMPUTER'.",
+      "The laptop appears to be in a shop or storage environment, with other electronics in the background."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "EliteBook 830 G6",
+      "read_from": [
+        "photo 0 sticky note",
+        "photo 2 background box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "UK used HP EliteBook 830 G6",
+        "verdict": "supported",
+        "evidence": "Photo 0 sticky note and photo 2 background box both show 'HP EliteBook 830 G6'. The 'UK used' part is unverifiable_remote as no origin proof is visible."
+      },
+      {
+        "claim": "touchscreen",
+        "verdict": "unverified",
+        "evidence": "No photo shows the screen being touched or any touchscreen indicator. The screen is covered in plastic, and no touch gestures are visible. The seller's claim is not contradicted but not proven."
+      },
+      {
+        "claim": "Core i5-8th generation",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows an Intel Core i5 sticker on the palm rest. While it doesn't specify '8th generation', the model (EliteBook 830 G6) is known to use 8th gen i5 processors, and the seller's claim is consistent with the visible sticker."
+      },
+      {
+        "claim": "8gb ram, 256ssd",
+        "verdict": "unverified",
+        "evidence": "No internal photos or system specs are shown. The sticky note in photo 0 lists '8gb ram, 256 SSD', but this is not verifiable from the photos alone. The claim is not contradicted but not proven."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Screen damage or non-touchscreen",
+        "proof": "A close-up video or photo of the screen being touched, or a photo showing the screen's bezel and any touchscreen indicators.",
+        "if_unproven": "Priced as non-touchscreen, with potential screen damage reducing value."
+      },
+      {
+        "risk": "RAM or SSD not as claimed",
+        "proof": "A screenshot of the system information (e.g., Windows System Info or BIOS) showing 8GB RAM and 256GB SSD.",
+        "if_unproven": "Priced as if RAM/SSD may be less or not present, reducing value."
+      },
+      {
+        "risk": "Laptop not working or has hidden defects",
+        "proof": "A video showing the laptop powering on, booting, and running a basic task (e.g., opening a browser).",
+        "if_unproven": "Priced as not working, significantly reducing value."
+      },
+      {
+        "risk": "Water damage or internal wear",
+        "proof": "Photos of the inside of the laptop, including the keyboard, hinges, and ports, to check for corrosion or damage.",
+        "if_unproven": "Priced as potentially damaged, reducing value."
+      }
+    ],
+    "proof_requests": [
+      "Video of the laptop powering on and running.",
+      "Screenshot of system information showing 8GB RAM and 256GB SSD.",
+      "Close-up photo or video of the screen being touched to verify touchscreen.",
+      "Photos of the inside of the laptop, including keyboard, hinges, and ports."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identifiable from the sticky note and background box, but critical claims (touchscreen, RAM/SSD, working condition) are unverified. Hidden risks like screen damage, internal defects, or non-functionality could significantly affect value. Proof is needed to price accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 85325,
+    "input_tokens": 2800,
+    "output_tokens": 1059,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "56f0a46c8e29de0247f068ac44b14f07",
+    "error": null
+  }
+}

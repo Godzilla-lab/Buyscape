@@ -1,0 +1,87 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Three identical brown cardboard boxes stacked vertically.",
+      "The text 'HIGH FREQUENCY ONLINE UPS' is printed on the side of the boxes.",
+      "A 'CE' mark is visible on the top right of the boxes.",
+      "The boxes are secured with yellow plastic strapping.",
+      "No brand name or specific capacity (KVA) is visible on the boxes.",
+      "An HP LaserJet Pro box is partially visible to the left."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "Online UPS",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "BG 3KVA Online UPS",
+        "verdict": "unverified",
+        "evidence": "The brand 'BG' and the '3KVA' capacity rating are not visible on the boxes in photo 0."
+      },
+      {
+        "claim": "double conversion",
+        "verdict": "unverified",
+        "evidence": "This internal specification is not printed on the visible part of the packaging."
+      },
+      {
+        "claim": "high frequency",
+        "verdict": "supported",
+        "evidence": "The text 'HIGH FREQUENCY ONLINE UPS' is clearly printed on the boxes in photo 0."
+      },
+      {
+        "claim": "3 phase input and 3 phase",
+        "verdict": "unverified",
+        "evidence": "Electrical phase specifications are not visible on the packaging."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The actual capacity may be lower than the claimed 3KVA.",
+        "proof": "A photo of the technical specification label on the side of the box or the rear of the unit.",
+        "if_unproven": "priced as a 1KVA online UPS."
+      },
+      {
+        "risk": "The brand may be generic or different from the claimed 'BG'.",
+        "proof": "A photo of the front of the UPS unit showing the brand logo.",
+        "if_unproven": "priced as an unbranded/generic unit."
+      },
+      {
+        "risk": "Internal batteries may be degraded or dead if the units are old stock.",
+        "proof": "A video of the unit powered on and supporting a load while unplugged from the mains.",
+        "if_unproven": "priced as requiring a full battery replacement."
+      },
+      {
+        "risk": "The phase configuration (3-phase) is highly unusual for a 3KVA unit and may be a listing error.",
+        "proof": "A photo of the input/output terminal block or the specification plate.",
+        "if_unproven": "priced as a standard single-phase unit."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the technical specification label on the box or the back of the UPS unit.",
+      "Photo of the front of the UPS unit out of the box showing the brand and display.",
+      "Video of the unit powered on and functioning."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo only shows generic outer packaging. The brand and capacity, which are the primary value drivers, cannot be verified."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 17091,
+    "input_tokens": 2368,
+    "output_tokens": 3530,
+    "cost_usd": 0.011774,
+    "replayed": false,
+    "fixture_key": "8fcd3bacd15cfa1120aad021236c1479",
+    "error": null
+  }
+}

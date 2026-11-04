@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Two black rectangular battery-like objects lie on a concrete floor.",
+      "The top object is mostly covered with yellowish adhesive tape.",
+      "The bottom object is black plastic with scuffs and tape residue.",
+      "Green and blue ropes are wound around both objects.",
+      "A partial USB port is visible at the top left edge.",
+      "No brand, model, or capacity markings are readable.",
+      "A camera watermark reads 'Shot on AWESOME A70'."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "power bank",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Scrap power banks",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows battery-like objects but no readable labels or full ports to confirm they are power banks."
+      },
+      {
+        "claim": "for sale in Ibadan",
+        "verdict": "unverifiable_remote",
+        "evidence": "Seller's text only; location is not shown in the photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The units may be dead and hold no charge.",
+        "proof": "Video of each unit charging a known-good phone.",
+        "if_unproven": "as non-working scrap"
+      },
+      {
+        "risk": "The true capacity is unknown and may be very low.",
+        "proof": "Photo of any printed mAh/Wh label or a capacity tester reading.",
+        "if_unproven": "as unknown-capacity scrap"
+      },
+      {
+        "risk": "Heavy taping may conceal swollen, leaking, or fire-damaged cells.",
+        "proof": "Close-up video of casing seams with tape removed or edges intact.",
+        "if_unproven": "as hazardous scrap"
+      },
+      {
+        "risk": "The lot size is unclear; only two units are visible.",
+        "proof": "Wider photo showing all units for sale together.",
+        "if_unproven": "as two units only"
+      }
+    ],
+    "proof_requests": [
+      "Video of each unit charging a phone",
+      "Close-up of any labels, ports, and taped areas",
+      "Wider shot of the full lot"
+    ],
+    "decision": "price",
+    "reason": "The items are identifiable as power banks by type from photo 0, so a worst-case price as non-working scrap is possible without further proof."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 17552,
+    "input_tokens": 1807,
+    "output_tokens": 2365,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "e4b224fffdab55a43d272869318b8ad2",
+    "error": null
+  }
+}

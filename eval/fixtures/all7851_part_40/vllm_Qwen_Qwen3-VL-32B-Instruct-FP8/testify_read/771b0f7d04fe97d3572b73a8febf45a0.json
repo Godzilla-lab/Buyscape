@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a label from a solar photovoltaic module.",
+      "The label reads 'JinKO Solar' and 'PHOTOVOLTAIC MODULE' with model 'JKM400M-72HL4-V'.",
+      "Rated power is 400W, made in China, with CE and PV Cycle marks.",
+      "Photo 1 shows the front of a solar panel with dark blue cells and a silver frame, standing upright among other panels.",
+      "The panel appears to be in good condition with no visible cracks or damage.",
+      "Watermark 'EMMYDON SOLAR ENERGY' is present on both photos."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "solar panel",
+      "brand": "JinKO",
+      "model": "JKM400M-72HL4-V",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Solar equipment such as solar panels, battery, inverter and charger...",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 1 show a solar panel, which is part of the claimed solar equipment."
+      },
+      {
+        "claim": "400W solar panel",
+        "verdict": "supported",
+        "evidence": "Photo 0 label clearly states 'Maximum Power(Pmax): 400W'."
+      },
+      {
+        "claim": "Made in China",
+        "verdict": "supported",
+        "evidence": "Photo 0 label states 'Made In China'."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Physical damage not visible in photos, such as microcracks in cells or frame corrosion.",
+        "proof": "Close-up photos of the panel surface and frame edges under bright light, including the backsheet and junction box.",
+        "if_unproven": "priced as potentially damaged, which may reduce value"
+      },
+      {
+        "risk": "Panel not functioning or degraded performance due to age or storage conditions.",
+        "proof": "Video of the panel being tested under sunlight with a multimeter or power meter showing output.",
+        "if_unproven": "priced as not working, which may reduce value"
+      },
+      {
+        "risk": "Missing or damaged junction box, connectors, or wiring.",
+        "proof": "Photo of the back of the panel showing the junction box and cable connections.",
+        "if_unproven": "priced as potentially non-functional or requiring repair"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the back of the panel showing the junction box and cables.",
+      "Video or photo of the panel being tested under sunlight with a power meter.",
+      "Close-up photos of the panel edges and frame for signs of damage or corrosion."
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identified as a JinKO JKM400M-72HL4-V 400W solar panel. All seller claims are supported by the label in photo 0. Hidden risks exist but are common to second-hand solar panels; the item can be priced at its worst case (as potentially damaged or non-functional) until further proof is provided."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 59022,
+    "input_tokens": 2282,
+    "output_tokens": 716,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "771b0f7d04fe97d3572b73a8febf45a0",
+    "error": null
+  }
+}

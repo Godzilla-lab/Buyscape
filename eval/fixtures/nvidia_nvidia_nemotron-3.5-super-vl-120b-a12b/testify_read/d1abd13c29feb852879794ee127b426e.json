@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows two paperback books side by side",
+      "Left cover reads THE DISCIPLINED TRADER by Mark Douglas, with DEVELOPING WINNING ATTITUDES at top",
+      "Right cover reads THE CANDLESTICK TRADING BIBLE, INVENTED BY MUNEHISA HOMMA, with candlestick chart graphics and a portrait",
+      "No price tags, barcodes, or condition details are visible on either cover"
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "two paperback trading books",
+      "brand": null,
+      "model": "The Disciplined Trader; The Candlestick Trading Bible",
+      "read_from": [
+        "photo 0 left cover",
+        "photo 0 right cover"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "The candlestick tradings Bible",
+        "verdict": "supported",
+        "evidence": "photo 0 right cover reads THE CANDLESTICK TRADING BIBLE"
+      },
+      {
+        "claim": "The disciplined trader",
+        "verdict": "supported",
+        "evidence": "photo 0 left cover reads THE DISCIPLINED TRADER"
+      },
+      {
+        "claim": "4500 for the candlestick bible",
+        "verdict": "unverifiable_remote",
+        "evidence": "no price tag visible in photo 0"
+      },
+      {
+        "claim": "4000 for the disciplined trader",
+        "verdict": "unverifiable_remote",
+        "evidence": "no price tag visible in photo 0"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Pages may be highlighted, torn, stained, or missing",
+        "proof": "inside-page photos and a page-flip video",
+        "if_unproven": "as damaged reading copy"
+      },
+      {
+        "risk": "Books may be photocopies or counterfeit editions",
+        "proof": "spine, back cover, and publisher page photos",
+        "if_unproven": "as unverified reproduction"
+      },
+      {
+        "risk": "Only one book may be included despite two listed",
+        "proof": "photo showing both books together with a scale reference",
+        "if_unproven": "as single book"
+      }
+    ],
+    "proof_requests": [
+      "Inside pages and copyright page of both books",
+      "Video flipping through both books to confirm completeness",
+      "Spines and back covers of both books"
+    ],
+    "decision": "price",
+    "reason": "Both books are identifiable by title from photo 0, so they can be priced at worst-case used condition despite unproven page condition and edition."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 53950,
+    "input_tokens": 1611,
+    "output_tokens": 4934,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "d1abd13c29feb852879794ee127b426e",
+    "error": null
+  }
+}

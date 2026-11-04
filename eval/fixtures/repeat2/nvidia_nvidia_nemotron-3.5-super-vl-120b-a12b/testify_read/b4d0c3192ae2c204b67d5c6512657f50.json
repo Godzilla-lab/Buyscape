@@ -1,0 +1,81 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a car tire lying flat on a tiled floor with tread pattern visible; a finger points at the sidewall edge; watermark reads D-KACHI ENTERPRISE.",
+      "Photo 1 is a near-duplicate of photo 0 showing the same tire and angle with the same watermark.",
+      "Photo 2 shows two tires stacked; the top tire sidewall has partial raised lettering beginning with \"MASTER\" but the full brand and model are not fully readable; the bottom tire shows tread only."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "car tire",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0",
+        "photo 1",
+        "photo 2"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "first grade",
+        "verdict": "unverified",
+        "evidence": "Photos show external tread only; no grading certificate or inspection report is visible."
+      },
+      {
+        "claim": "Tokumbo tires",
+        "verdict": "unverifiable_remote",
+        "evidence": "Import status and prior use cannot be determined from still photos of a tire."
+      },
+      {
+        "claim": "will last almost like new brand ones",
+        "verdict": "unverifiable_remote",
+        "evidence": "Future durability and remaining life cannot be proven from photos alone."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Tire age or expiry date is unknown; DOT code is not visible.",
+        "proof": "Close-up photo of the sidewall showing the full DOT date code.",
+        "if_unproven": "priced as expired or unsafe"
+      },
+      {
+        "risk": "Internal damage, repairs, or hidden defects are not visible externally.",
+        "proof": "Physical inspection or a video showing the tire flexed and inspected for patches or bulges.",
+        "if_unproven": "priced as structurally unsound"
+      },
+      {
+        "risk": "Remaining tread depth cannot be measured from photos.",
+        "proof": "Photo of a tread depth gauge inserted into the grooves.",
+        "if_unproven": "priced as bald or below legal limit"
+      },
+      {
+        "risk": "Sidewall cracking or dry rot may be hidden by lighting or angle.",
+        "proof": "Close-up sidewall photo in bright, direct light.",
+        "if_unproven": "priced as perished"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of the sidewall showing full brand, model, size, and DOT date code",
+      "Tread depth measurement with a gauge",
+      "Full 360-degree view or video of the tire sidewall and tread"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a car tire from the photos, so it can be priced at its worst case as an ungraded used tire with unknown age and condition."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 13084,
+    "input_tokens": 2238,
+    "output_tokens": 2343,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "b4d0c3192ae2c204b67d5c6512657f50",
+    "error": null
+  }
+}

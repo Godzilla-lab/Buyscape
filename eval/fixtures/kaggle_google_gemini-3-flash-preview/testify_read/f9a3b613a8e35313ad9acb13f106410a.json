@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "A blue alternator (generator head) sitting on sandy ground.",
+      "A nameplate is visible on the side of the unit but the text is unreadable in the photo.",
+      "A control box is mounted on top with an analog meter and switches.",
+      "The unit is not in a carton; it is exposed to dirt and dust.",
+      "There is a watermark 'ROYAL GENERATORS LTD' across the center of the image."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "alternator",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "20kva",
+        "verdict": "unverified",
+        "evidence": "The nameplate in photo 0 is too blurry to read the rating."
+      },
+      {
+        "claim": "brand new",
+        "verdict": "contradicted",
+        "evidence": "The item is sitting directly on dirt and shows signs of handling/scuffs in photo 0."
+      },
+      {
+        "claim": "still in carton",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows the item bare on the ground."
+      },
+      {
+        "claim": "100% copper coil",
+        "verdict": "unverifiable_remote",
+        "evidence": "Internal windings cannot be inspected via photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual power capacity",
+        "proof": "A clear, close-up photo of the manufacturer's nameplate.",
+        "if_unproven": "as a 10kVA unit"
+      },
+      {
+        "risk": "Coil material (Aluminum vs Copper)",
+        "proof": "A close-up photo of the windings through the cooling vents showing the metal color.",
+        "if_unproven": "as aluminum coil"
+      },
+      {
+        "risk": "Internal damage or seized bearings",
+        "proof": "A video showing the shaft being turned freely by hand and a voltage test while running.",
+        "if_unproven": "as non-functional/scrap"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the nameplate showing kVA, Voltage, and Brand.",
+      "Photo of the internal copper windings through the side vents.",
+      "Photo of the original carton mentioned in the description."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The nameplate is unreadable, making it impossible to verify the 20kVA rating or the brand. The seller's claim of it being 'brand new in carton' is visibly contradicted by the photo."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 8966,
+    "input_tokens": 2385,
+    "output_tokens": 1642,
+    "cost_usd": 0.006118,
+    "replayed": false,
+    "fixture_key": "f9a3b613a8e35313ad9acb13f106410a",
+    "error": null
+  }
+}

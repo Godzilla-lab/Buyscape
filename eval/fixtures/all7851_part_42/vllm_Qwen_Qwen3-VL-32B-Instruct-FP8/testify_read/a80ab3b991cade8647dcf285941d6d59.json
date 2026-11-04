@@ -1,0 +1,104 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Closed black Acer laptop on a stand, lid shows 'acer' logo, background has glass cabinet with other laptops.",
+      "Photo 1: Open laptop showing keyboard, screen, and bottom bezel with 'acer' logo. Intel Core i3 sticker visible on bottom left of keyboard deck.",
+      "Photo 2: Hand holding closed laptop from top, showing brushed metal finish and 'acer' logo on lid. Scratches and wear visible on surface.",
+      "All photos show a used laptop with visible signs of wear, including scratches and smudges."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Acer",
+      "model": null,
+      "read_from": [
+        "photo 0 lid",
+        "photo 1 bottom bezel",
+        "photo 2 lid"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "intel core i3 processor",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows an Intel Core i3 sticker on the bottom left of the keyboard deck."
+      },
+      {
+        "claim": "4gb ram",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows RAM or system specs; cannot verify from images alone."
+      },
+      {
+        "claim": "250gb hdd",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows internal drive or disk info; cannot verify from images alone."
+      },
+      {
+        "claim": "15.6\" full hd display",
+        "verdict": "unverified",
+        "evidence": "Screen is off in all photos; size and resolution cannot be confirmed visually. No text or label on screen or bezel confirms 15.6\" or Full HD."
+      },
+      {
+        "claim": "windows 10",
+        "verdict": "unverifiable_remote",
+        "evidence": "No screen shot or OS indicator visible; cannot confirm from photos."
+      },
+      {
+        "claim": "uk used &...",
+        "verdict": "unverifiable_remote",
+        "evidence": "No proof of origin or usage history in photos; seller's text only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "RAM is less than 4GB or not functional",
+        "proof": "Photo of system specs or BIOS screen showing RAM amount and health.",
+        "if_unproven": "priced as 2GB or less, which reduces value significantly"
+      },
+      {
+        "risk": "HDD is faulty or less than 250GB",
+        "proof": "Photo of disk management screen or drive label showing capacity and health.",
+        "if_unproven": "priced as 120GB or smaller, or as not working"
+      },
+      {
+        "risk": "Display is not Full HD or has dead pixels/defects",
+        "proof": "Photo of screen displaying a test pattern or full-screen white with close-up of corners and center.",
+        "if_unproven": "priced as low-resolution or with screen defects"
+      },
+      {
+        "risk": "Laptop does not boot or has hardware issues",
+        "proof": "Video of laptop powering on, showing BIOS and Windows 10 desktop.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Battery is dead or not included",
+        "proof": "Photo of battery in laptop or on desk, and video of laptop running on battery.",
+        "if_unproven": "priced as battery not included or dead"
+      }
+    ],
+    "proof_requests": [
+      "Video of laptop powering on and showing Windows 10 desktop.",
+      "Photo of system specs or BIOS screen showing RAM and storage details.",
+      "Photo of screen displaying a full white test pattern to check for dead pixels.",
+      "Photo of battery and charger, and video of laptop running on battery.",
+      "Photo of drive label or disk management screen showing HDD capacity and health."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The laptop is identifiable as an Acer with an Intel Core i3 processor, but key specs like RAM, HDD, display resolution, and OS cannot be verified from photos. Hidden risks include non-functional hardware, incorrect specs, and screen defects. Without proof of working condition and accurate specs, a worst-case price cannot be assigned confidently."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 78805,
+    "input_tokens": 3050,
+    "output_tokens": 972,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "a80ab3b991cade8647dcf285941d6d59",
+    "error": null
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r5",
+  "response": {
+    "observations": [
+      "Black automotive alternator with a metal housing.",
+      "A label on the front face reads 'Valeo' and 'M278'.",
+      "The alternator has a central mounting bolt and a threaded end for the drive shaft.",
+      "The housing shows significant surface rust and dirt.",
+      "The internal copper windings are visible through the cooling fins in photos 1 and 2.",
+      "A watermark 'FIDEL AUTO GLOBAL LIMITED' is present on all images."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "alternator",
+      "brand": "Valeo",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Direct Tokunbo Valeo Alternator",
+        "verdict": "supported",
+        "evidence": "photo 0 label shows Valeo and the part number M278."
+      },
+      {
+        "claim": "for Mercedes-Benz M278",
+        "verdict": "supported",
+        "evidence": "photo 0 label shows M278."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The alternator may be non-functional or have internal electrical faults.",
+        "proof": "A video showing the alternator successfully charging a battery under load.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The item may be a generic or counterfeit part rather than the original Valeo brand.",
+        "proof": "A clear photo of the manufacturer's identification plate (usually on the back or side).",
+        "if_unproven": "as a generic used alternator"
+      },
+      {
+        "risk": "The internal windings may be burnt or degraded, which is common in used parts.",
+        "proof": "A close-up photo of the internal copper windings.",
+        "if_unproven": "as having internal damage"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of any label, sticker or metal plate showing the brand and model.",
+      "Photo of the identification plate usually found on the back or side of the alternator.",
+      "Video of the alternator being tested to confirm it is producing power."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "What the item is shows, but not the model that sets its price: no photo shows it clearly enough to read. The shot asked for first would settle it."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r5",
+    "task": "testify_read",
+    "latency_ms": 2131,
+    "input_tokens": 2162,
+    "output_tokens": 418,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "fd2dff7fe77557768599f95dde6be73e",
+    "error": null
+  }
+}

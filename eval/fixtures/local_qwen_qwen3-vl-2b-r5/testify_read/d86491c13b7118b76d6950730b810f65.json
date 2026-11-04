@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r5",
+  "response": {
+    "observations": [
+      "Photo 0 shows a pile of green corded electric drills, mostly Bosch, with various models and sizes.",
+      "Photo 1 shows a close-up of several drills, including Bosch, Hitachi, and a green corded drill.",
+      "The drills are shown with their power cords and plugs.",
+      "The background in both photos appears to be a workshop or storage area with other tools.",
+      "No photos show the drills powered on or connected to a power source."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "drill",
+      "brand": "Bosch",
+      "read_from": [
+        "photo 0",
+        "photo 1"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "220v",
+        "verdict": "unverified",
+        "evidence": "The voltage rating is not visible on the labels in the provided photos."
+      },
+      {
+        "claim": "13mm",
+        "verdict": "unverified",
+        "evidence": "The drill bits are not visible in the photos."
+      },
+      {
+        "claim": "bosch",
+        "verdict": "supported",
+        "evidence": "The Bosch logo is visible on the labels in photo 0 and photo 1."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The drills may not be functional or may have internal damage.",
+        "proof": "A video showing all drills powered on and drilling into a piece of wood.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The power cords may be damaged or have frayed insulation.",
+        "proof": "Close-up photos of the cords and plugs.",
+        "if_unproven": "as having damaged cords"
+      },
+      {
+        "risk": "The specific model and power rating (e.g., 1100W vs 1300W) are unknown.",
+        "proof": "A clear photo of the model label on the side of the drill.",
+        "if_unproven": "as the lowest-specification Bosch drill in the pile"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of any label, sticker or metal plate showing the brand and model.",
+      "Video of the drills running and drilling into wood.",
+      "Close-up photos of the power cords and plugs.",
+      "Photo of the model label on the side of the drills."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "What the item is shows, but not the model that sets its price: no photo shows it clearly enough to read. The shot asked for first would settle it."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r5",
+    "task": "testify_read",
+    "latency_ms": 2183,
+    "input_tokens": 1505,
+    "output_tokens": 447,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "d86491c13b7118b76d6950730b810f65",
+    "error": null
+  }
+}

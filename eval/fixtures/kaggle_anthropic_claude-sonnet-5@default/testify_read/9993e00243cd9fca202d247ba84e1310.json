@@ -1,0 +1,86 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Indoor split-AC unit wrapped in plastic, visible brand text 'Samsung' on the front panel (photo 0).",
+      "Outdoor condenser unit sitting on bare ground, also wrapped in plastic, fins and compressor housing covered so coil material is not visible.",
+      "No visible nameplate, capacity (HP/BTU) sticker, or model number sticker on either unit.",
+      "Unit appears used (tokunbo) based on wrapping style and ground staging typical of resale listings, not new-in-box packaging."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "split unit air conditioner",
+      "brand": "Samsung",
+      "model": null,
+      "read_from": [
+        "photo 0 indoor unit front panel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Low power consumption air conditioner",
+        "verdict": "unverifiable_remote",
+        "evidence": "No energy label, wattage sticker, or spec plate visible in photo 0."
+      },
+      {
+        "claim": "Korean products",
+        "verdict": "unverified",
+        "evidence": "Samsung is a Korean brand (logo seen in photo 0), but photo does not confirm this specific unit is genuine/Korean-made vs a rebadged or counterfeit unit."
+      },
+      {
+        "claim": "Copper compressor",
+        "verdict": "unverifiable_remote",
+        "evidence": "Compressor and coil are hidden under plastic wrap in photo 0; copper vs aluminum piping cannot be seen."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Capacity (HP/BTU rating) unknown, which materially changes price tier",
+        "proof": "Clear photo of the nameplate/rating sticker on indoor or outdoor unit",
+        "if_unproven": "priced at the lowest common capacity tier for this unit size as seen"
+      },
+      {
+        "risk": "Cooling function and gas charge unverified (unit not shown running)",
+        "proof": "Video of unit powered on, blowing cold air with compressor audibly running",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Coil material (copper vs aluminum) cannot be confirmed under wrap",
+        "proof": "Close-up photo of condenser coil and pipe with plastic removed",
+        "if_unproven": "priced as aluminum/lower-grade until shown otherwise"
+      },
+      {
+        "risk": "Physical condition of outdoor unit (rust, dents, fin damage) hidden by plastic and low angle",
+        "proof": "Unwrapped photo of outdoor unit from multiple angles",
+        "if_unproven": "priced as cosmetically worn, worst case"
+      },
+      {
+        "risk": "Authenticity of Samsung branding not confirmed beyond a visible logo",
+        "proof": "Photo of serial number/barcode sticker matching Samsung's format",
+        "if_unproven": "priced as generic/unbranded split AC"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the nameplate/rating label showing model number and HP/BTU capacity",
+      "Video of the unit running with visible cold air output and compressor sound",
+      "Close-up unwrapped photo of outdoor unit coil/piping for material check",
+      "Unwrapped full-body photos of both indoor and outdoor units from multiple angles"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The unit's capacity rating, which is the main price-setting spec for a split AC, is not visible or readable in the single photo, so even a worst-case price cannot be set without it."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 18458,
+    "input_tokens": 1949,
+    "output_tokens": 1723,
+    "cost_usd": 0.021128,
+    "replayed": false,
+    "fixture_key": "9993e00243cd9fca202d247ba84e1310",
+    "error": null
+  }
+}

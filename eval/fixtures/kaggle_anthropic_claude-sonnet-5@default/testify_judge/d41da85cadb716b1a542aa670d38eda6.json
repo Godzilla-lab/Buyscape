@@ -1,0 +1,66 @@
+{
+  "task": "testify_judge",
+  "prompt_version": "testify_judge.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "claims": [
+      {
+        "claim": "Seller message is only a greeting ('Thank you for contacting Network Solar venture...We deal...') with no specific product, wattage, price, or condition claims stated.",
+        "verdict": "unverifiable_remote",
+        "evidence": "No claim content to check against photos; message is incomplete/generic."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Rated wattage/voltage/current unknown, which is the primary driver of a solar panel's value.",
+        "proof": "Clear, legible close-up of the panel's rating label/sticker (usually near junction box) showing Wp, Voc, Isc.",
+        "if_unproven": "Cannot assign even a worst-case price without knowing wattage class."
+      },
+      {
+        "risk": "Junction box label illegible, so brand/model/spec sheet cannot be confirmed.",
+        "proof": "Sharp, well-lit photo or video of the junction box label and any printed model number.",
+        "if_unproven": "Treat as unbranded/no-spec until legible."
+      },
+      {
+        "risk": "Cell condition (micro-cracks, hotspots, delamination) not verifiable from these angles/glare.",
+        "proof": "Multiple angle shots without glare, plus an electroluminescence or simple multimeter output test video.",
+        "if_unproven": "Price as used/unknown-condition, worst case possible hidden damage."
+      },
+      {
+        "risk": "Number of panels actually included in sale is unclear (two seen leaning, but could be just one for sale).",
+        "proof": "Seller explicitly states quantity on offer, confirmed by a photo showing all units tagged together.",
+        "if_unproven": "Price as single unit only."
+      },
+      {
+        "risk": "Age/duration of prior use or storage not shown, affecting degradation.",
+        "proof": "Photo of any dated sticker, or seller-provided purchase/import documentation.",
+        "if_unproven": "Treat as used, unknown age, worst-case degradation."
+      },
+      {
+        "risk": "No certification or datasheet shown, so efficiency/output claims cannot be trusted.",
+        "proof": "Photo of datasheet or certification sticker/paper.",
+        "if_unproven": "Price as uncertified generic panel."
+      }
+    ],
+    "proof_requests": [
+      "Clear, close-up, non-glare photo of the rating label on the junction box showing wattage, voltage, and current.",
+      "Photo or video confirming exact number of panels included in this specific sale.",
+      "Any datasheet, certification, or warranty document for the panel(s).",
+      "Video showing a basic multimeter test (open-circuit voltage) to confirm the panel is functional."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The witness confirms it is a solar panel, but the rating label that sets its wattage class and price tier is illegible, so even a worst-case price cannot be assigned until that spec is shown."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_judge",
+    "latency_ms": 18722,
+    "input_tokens": 1755,
+    "output_tokens": 1662,
+    "cost_usd": 0.02013,
+    "replayed": false,
+    "fixture_key": "d41da85cadb716b1a542aa670d38eda6",
+    "error": null
+  }
+}

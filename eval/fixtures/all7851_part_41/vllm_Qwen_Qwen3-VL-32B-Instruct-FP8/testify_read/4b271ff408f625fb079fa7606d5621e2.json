@@ -1,0 +1,67 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: A dark gray laptop with the Alienware alien head logo on the lid, partially open, showing part of the keyboard and a sticker on the top right. Background includes boxes, one labeled 'HP'.",
+      "Photo 1: The laptop open, showing a black screen and keyboard. A barcode sticker and a blue Intel sticker are visible on the top right of the keyboard deck. Background includes a box labeled '18+RGB'.",
+      "Photo 2: The closed laptop lid from the front, showing the Alienware logo, a small NVIDIA sticker, and a rectangular area that appears to be a label or serial plate. A hand is holding the bottom edge. Background includes boxes, one with 'HP' visible.",
+      "No visible model number or serial number is readable in any photo.",
+      "No screen content, no power-on indicators, no ports visible, no internal components shown."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "gaming laptop",
+      "brand": "Dell Alienware",
+      "model": null,
+      "read_from": [
+        "photo 0 lid logo",
+        "photo 2 lid logo and NVIDIA sticker"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Dell Alienware Core i7 11th gen 16gb 1TB SSD RTX 3060 6gb",
+        "verdict": "unverified",
+        "evidence": "No visible specs in photos. The Intel sticker in photo 1 is too small to read, and no model or serial number is visible. The NVIDIA sticker in photo 2 does not specify RTX 3060."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The laptop may not have the advertised Core i7 11th gen processor, 16GB RAM, 1TB SSD, or RTX 3060 GPU.",
+        "proof": "A clear photo of the system information screen (e.g., Windows About or CPU-Z) showing the exact CPU, RAM, storage, and GPU model.",
+        "if_unproven": "Priced as a generic gaming laptop without specific specs, which is significantly lower than the advertised configuration."
+      },
+      {
+        "risk": "The laptop may be non-functional or have hardware issues (e.g., dead screen, no power).",
+        "proof": "A video clip showing the laptop powering on, displaying the BIOS or Windows desktop, and running a simple task.",
+        "if_unproven": "Priced as not working, which drastically reduces value."
+      },
+      {
+        "risk": "The laptop may be stolen or have a blacklisted serial number.",
+        "proof": "A photo of the full serial number (if visible) or a screenshot from a device check tool (e.g., Dell's service tag lookup) confirming it is not blacklisted.",
+        "if_unproven": "Priced with a discount for potential legal or warranty issues."
+      }
+    ],
+    "proof_requests": [
+      "A clear photo or video of the laptop powering on and showing the BIOS or Windows desktop with system specs visible.",
+      "A photo of the full serial number or service tag on the laptop.",
+      "A screenshot from a device check tool confirming the laptop is not blacklisted."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The advertised specifications cannot be verified from the photos. The model and exact components are not readable, and there is no proof of functionality. Without proof, the item cannot be priced accurately and carries significant risk."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 62582,
+    "input_tokens": 2168,
+    "output_tokens": 774,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "4b271ff408f625fb079fa7606d5621e2",
+    "error": null
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "openai/gpt-5.4-nano-2026-03-17",
+  "response": {
+    "observations": [
+      "Photo 0 shows a Nikon DSLR body with a lens mounted.",
+      "The lens appears to be a zoom (front element and barrel indicate zoom), but the exact model text is not readable in the photo.",
+      "No clear view of shutter count, sensor condition, LCD screen, buttons, ports, or any included accessories."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": null,
+      "brand": "Nikon",
+      "model": "D810",
+      "read_from": [
+        "photo 0 (camera body branding shows Nikon; D810 text is not clearly readable, so model is not fully verifiable from the image)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Nikon D810 DSLR Camera + 24-70mm Lens for Sale",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows a Nikon DSLR body and a zoom lens, but the lens model (24-70mm) and the D810 model text are not clearly readable."
+      },
+      {
+        "claim": "Clean and well-maintained Nikon D810 camera",
+        "verdict": "unverifiable_remote",
+        "evidence": "Photo 0 does not show sensor, shutter test, LCD condition, or any wear/defects clearly enough to confirm 'clean and well-maintained'."
+      },
+      {
+        "claim": "The brand is Canon.",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows a Nikon-branded camera body, not Canon."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Wrong camera brand/model (seller text says Canon, photo shows Nikon). This could mean the listing is unreliable or the wrong item is being sold.",
+        "proof": "Ask for a photo of the camera top plate/model label and the lens mount area showing brand/model clearly (and confirm it is Nikon D810).",
+        "if_unproven": "Price as a Nikon DSLR with unknown exact model and unknown lens model; treat as worst-case for unverified specifics."
+      },
+      {
+        "risk": "Lens may not be the claimed 24-70mm (exact lens model not readable).",
+        "proof": "Ask for a close-up photo of the lens barrel text (e.g., '24-70mm' and lens model) and the rear mount.",
+        "if_unproven": "Price as a generic used zoom lens (not guaranteed 24-70mm)."
+      },
+      {
+        "risk": "Condition/functional status unknown (no shutter count, no sensor check, no autofocus test, no button/port test).",
+        "proof": "Ask for a short video showing: autofocus on a moving subject, LCD playback, and a sensor test photo (white wall at f/8).",
+        "if_unproven": "Price as not fully proven/possible faults; assume worst-case typical for used remote sales."
+      },
+      {
+        "risk": "Missing accessories (battery, charger, caps, hood, straps) not shown.",
+        "proof": "Ask for a photo of everything included laid out (battery, charger, caps, hood, manuals).",
+        "if_unproven": "Price assuming minimal/unknown accessories (worst-case: only body+lens)."
+      }
+    ],
+    "proof_requests": [
+      "Send a clear close-up photo of the camera top plate/model label showing 'D810' (or whatever exact model it is).",
+      "Send a clear close-up photo of the lens barrel text showing the exact lens model and focal range (confirm '24-70mm').",
+      "Send a short video test: autofocus lock on a moving object + LCD playback.",
+      "Send a sensor check photo: shoot a blank white wall at f/8 (or similar) to show dust/scratches.",
+      "List and photograph included accessories (battery, charger, front/rear caps, lens hood)."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The photo shows a Nikon DSLR, but the seller text claims Canon and the exact D810 and 24-70mm details are not readable. Without decisive proof of the exact model/lens and working condition, a reliable price cannot be set from the provided comparables.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:openai/gpt-5.4-nano-2026-03-17",
+    "model": "openai/gpt-5.4-nano-2026-03-17",
+    "task": "testify_joint",
+    "latency_ms": 6058,
+    "input_tokens": 2036,
+    "output_tokens": 930,
+    "cost_usd": 0.004126,
+    "replayed": false,
+    "fixture_key": "59cf8813653428acc3d1defccf36a7c8",
+    "error": null
+  }
+}

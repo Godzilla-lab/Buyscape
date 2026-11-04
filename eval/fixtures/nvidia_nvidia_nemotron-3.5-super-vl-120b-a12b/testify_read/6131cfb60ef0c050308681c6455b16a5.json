@@ -1,0 +1,85 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Black Canon DSLR camera body on green surface",
+      "Body cap with raised Canon lettering on lens mount",
+      "Canon branding visible on left side of camera body",
+      "Vertical battery grip attached to bottom of body",
+      "No lens attached",
+      "Watermark text across center reads POSTED ON JJ EMMA OLELEWE",
+      "Battery compartment not visible or open"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "Canon DSLR camera body",
+      "brand": "Canon",
+      "model": null,
+      "read_from": [
+        "photo 0 body",
+        "photo 0 body cap"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Body only",
+        "verdict": "supported",
+        "evidence": "photo 0 shows no lens, only body cap"
+      },
+      {
+        "claim": "Dummy Battery",
+        "verdict": "unverified",
+        "evidence": "battery compartment not shown in photo"
+      },
+      {
+        "claim": "3 good Battries",
+        "verdict": "unverified",
+        "evidence": "no batteries visible in photo"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Camera may not power on or function (shutter, sensor, screen, buttons)",
+        "proof": "video of camera turning on, displaying menu, and taking a photo",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Claimed batteries may be dead or dummy battery may not work",
+        "proof": "photo of all batteries or video of them powering the camera",
+        "if_unproven": "as no working batteries"
+      },
+      {
+        "risk": "Attached battery grip may be defective",
+        "proof": "video of grip buttons and shutter release working",
+        "if_unproven": "as body without working grip"
+      },
+      {
+        "risk": "Shutter count and sensor condition unknown",
+        "proof": "shutter count screenshot from menu and sensor/mirror-up photo",
+        "if_unproven": "as high-use or unknown condition"
+      }
+    ],
+    "proof_requests": [
+      "Video of camera powering on, navigating menu, and taking a photo",
+      "Photo or video showing the three batteries and dummy battery",
+      "Shutter count reading from camera menu",
+      "Close-up of lens mount and sensor area"
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a Canon DSLR body from the photo, so it can be priced at worst case even though functionality and battery claims are unverified."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 22376,
+    "input_tokens": 1609,
+    "output_tokens": 2061,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "6131cfb60ef0c050308681c6455b16a5",
+    "error": null
+  }
+}

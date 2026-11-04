@@ -1,0 +1,66 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail box for a 'Smart Mini DC UPS Pro'.",
+      "The box displays the brand logo (Olax) and specifications '24Watts 20000mAh'.",
+      "A label in the bottom right corner of the box identifies the model as 'OLAX OS PRO'.",
+      "The actual UPS device is not visible in the photo; only the packaging is shown.",
+      "The box is being held in a hand against a background of other boxes."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "mini DC UPS",
+      "brand": "Olax",
+      "model": "OS PRO",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Olax 20,000mah smart mini ups",
+        "verdict": "supported",
+        "evidence": "photo 0 box text and label"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different item.",
+        "proof": "A photo of the actual device outside of the packaging.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The device may be non-functional or have a degraded battery.",
+        "proof": "A video showing the device powering a router or similar load while unplugged.",
+        "if_unproven": "as non-functional"
+      },
+      {
+        "risk": "Essential DC output cables or the charging adapter may be missing.",
+        "proof": "A photo showing all included accessories and cables.",
+        "if_unproven": "as missing all accessories"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual UPS device out of the box.",
+      "Photo of all included cables and accessories.",
+      "Video of the device powered on and supporting a load."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail packaging is shown. The actual device must be seen to verify its presence, condition, and the inclusion of necessary cables before a price can be determined."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 20866,
+    "input_tokens": 2356,
+    "output_tokens": 4868,
+    "cost_usd": 0.015782,
+    "replayed": false,
+    "fixture_key": "a4850629003dae57428a27a928a31b09",
+    "error": null
+  }
+}

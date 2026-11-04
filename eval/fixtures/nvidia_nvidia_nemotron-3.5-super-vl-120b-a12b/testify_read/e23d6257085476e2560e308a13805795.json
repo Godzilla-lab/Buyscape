@@ -1,0 +1,85 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows four sealed cartons labeled Bona Solar DC Refrigerator Model BCD-112 with a spec table showing 12V/24V input, N.W. 27KG, G.W. 30KG, and silver colour.",
+      "Photo 1 shows an unboxed two-door refrigerator with both doors open, empty interior, shelves visible, and a power cord on the floor.",
+      "Photo 2 shows a silver Bona refrigerator standing next to its open carton, with the Bona logo on the upper door and a sticker on the lower door."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "two-door refrigerator",
+      "brand": "Bona",
+      "model": "BCD-112",
+      "read_from": [
+        "photo 0 box label",
+        "photo 2 appliance logo"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Bona BCD-112L refrigerator",
+        "verdict": "supported",
+        "evidence": "photo 0 box reads Bona MODEL: BCD-112; photo 2 shows Bona on the appliance"
+      },
+      {
+        "claim": "AC/DC",
+        "verdict": "unverified",
+        "evidence": "photo 0 box shows 12V/24V input only; AC input rating is not visible"
+      },
+      {
+        "claim": "versatile and compact cooling solution",
+        "verdict": "unverifiable_remote",
+        "evidence": "subjective seller description not provable from photos"
+      },
+      {
+        "claim": "ideal for various uses",
+        "verdict": "unverifiable_remote",
+        "evidence": "incomplete seller sentence, subjective marketing claim"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Refrigerator does not cool or compressor is faulty",
+        "proof": "video of the unit powered on with interior temperature dropping",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Unit is DC-only, not AC/DC as claimed",
+        "proof": "close-up photo of the rating label showing AC input voltage",
+        "if_unproven": "as DC-only"
+      },
+      {
+        "risk": "Cosmetic damage or missing shelves and accessories",
+        "proof": "unboxing video showing all parts and exterior condition",
+        "if_unproven": "as used with missing parts"
+      },
+      {
+        "risk": "Open unit in photo 1 does not match the boxed units in photo 0",
+        "proof": "photo of the serial/model label on the open unit matching the carton",
+        "if_unproven": "as unverified condition"
+      }
+    ],
+    "proof_requests": [
+      "Video of the refrigerator powered on and cooling",
+      "Close-up photo of the rating label showing input voltage",
+      "Photo of the open unit's serial label and all included accessories"
+    ],
+    "decision": "price",
+    "reason": "The Bona BCD-112 refrigerator is identifiable from the box and appliance branding, so it can be priced at its worst case pending proof that it works."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 32616,
+    "input_tokens": 3280,
+    "output_tokens": 3414,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "e23d6257085476e2560e308a13805795",
+    "error": null
+  }
+}

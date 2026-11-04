@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black plastic tank with raised \"STOREX\" lettering and an \"S\" logo above it.",
+      "The tank in photo 0 has horizontal ribs, a top opening, and a lower side opening.",
+      "Photo 1 shows a large black horizontal tank strapped to a motorcycle in a street setting.",
+      "The side of the tank in photo 1 has an embossed marking that is not legible.",
+      "No Storex branding is visible on the tank in photo 1 from this angle.",
+      "Both photos carry \"POSTED ON JIJI\" and \"DAMMY\" watermarks."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "plastic water tank",
+      "brand": "Storex",
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Black",
+        "verdict": "supported",
+        "evidence": "photo 0 and photo 1"
+      },
+      {
+        "claim": "Storex",
+        "verdict": "supported",
+        "evidence": "photo 0 shows STOREX branding"
+      },
+      {
+        "claim": "plastic water tank",
+        "verdict": "supported",
+        "evidence": "photo 0 and photo 1"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Capacity or size in litres is not readable",
+        "proof": "close-up of embossed capacity marking or shot with measuring tape",
+        "if_unproven": "as smallest standard Storex tank"
+      },
+      {
+        "risk": "Tank may have cracks or leaks not visible in photos",
+        "proof": "video of tank filled with water",
+        "if_unproven": "as not holding water"
+      },
+      {
+        "risk": "Photo 0 and photo 1 may not be the same tank",
+        "proof": "seller video showing Storex logo and horizontal orientation on same tank",
+        "if_unproven": "based on photo 0 tank only"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of any embossed capacity marking on the tank",
+      "Video showing the tank filled with water to confirm it holds water without leaks",
+      "Confirmation or video that photo 0 and photo 1 show the same tank"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Storex brand is visible in photo 0, but the capacity marking that determines the price is illegible, so even a worst-case price cannot be set."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 32215,
+    "input_tokens": 2366,
+    "output_tokens": 3270,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "3ba320913bbf32e889c90a882c23111e",
+    "error": null
+  }
+}

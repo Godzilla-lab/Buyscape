@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-4b-r4",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail box for a Canon EOS 60D DSLR camera.",
+      "The box is sitting in a cardboard shipping crate.",
+      "The box shows some wear and minor creasing on the edges.",
+      "The actual camera is not visible; only the illustration on the box is shown.",
+      "The background shows a cluttered retail or storage environment."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DSLR camera",
+      "brand": "Canon",
+      "model": "EOS 60D",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Canon eos 60d dslr camera",
+        "verdict": "supported",
+        "evidence": "photo 0 shows the box for this specific model."
+      },
+      {
+        "claim": "The canon eos 60d is a versatile dslr camera",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a general description of the model's capabilities."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty or contain a different, lower-value item.",
+        "proof": "A photo of the actual camera outside of the box.",
+        "if_unproven": "as an empty box"
+      },
+      {
+        "risk": "The camera may be non-functional or have internal electronic faults.",
+        "proof": "A video of the camera powering on and taking a photo.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The camera may be missing the original lens (typically the 18-55mm kit lens).",
+        "proof": "A photo of the camera with the lens attached.",
+        "if_unproven": "as camera body only"
+      },
+      {
+        "risk": "The shutter may be near the end of its life (high shutter count).",
+        "proof": "A screenshot of the shutter count from a recent image file.",
+        "if_unproven": "as high mileage"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual camera outside the box.",
+      "Photo of the camera with the lens attached.",
+      "Photo of the camera's LCD screen powered on.",
+      "Photo of the camera's rear sensor with the lens removed.",
+      "Screenshot of the shutter count."
+    ],
+    "decision": "price",
+    "reason": "The item is known from the photos. What they cannot prove is priced at its worst case until the proof asked for below arrives."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-4b-r4",
+    "task": "testify_read",
+    "latency_ms": 2873,
+    "input_tokens": 1369,
+    "output_tokens": 433,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "a2268d371d9b6bb09bee20d62c997e8a",
+    "error": null
+  }
+}

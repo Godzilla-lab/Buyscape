@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black electric kettle with a silver band and handle, held in a hand against a green diamond plate background. The brand 'morphy richards' is visible on a label on the body.",
+      "Photo 1 shows the same kettle from a top-down angle, revealing a conical shape, a black handle, a silver spout, and a silver base. The brand label is partially visible on the base.",
+      "The kettle appears to be used, with visible scratches and scuffs on the body and base.",
+      "The power cord is visible in both photos, extending from the base.",
+      "No model number is visible in either photo.",
+      "The seller claims it is a 'Good quality London used electric jug'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "electric kettle",
+      "brand": "morphy richards",
+      "model": null,
+      "read_from": [
+        "photo 0 label",
+        "photo 1 base label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Good quality",
+        "verdict": "unverified",
+        "evidence": "Photos show visible wear and scratches; 'good quality' is subjective and not proven by visual evidence."
+      },
+      {
+        "claim": "London used",
+        "verdict": "unverifiable_remote",
+        "evidence": "Origin cannot be confirmed from photos; no proof of location or usage history."
+      },
+      {
+        "claim": "electric jug",
+        "verdict": "supported",
+        "evidence": "The item is clearly an electric kettle, which is commonly called an 'electric jug' in some regions."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Internal damage or malfunction (e.g., heating element failure, insulation issues)",
+        "proof": "A video showing the kettle boiling water and turning off automatically, or a close-up of the base and cord for damage.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Electrical safety issues (e.g., frayed cord, damaged plug)",
+        "proof": "Close-up photo of the plug and full length of the cord, including any connectors.",
+        "if_unproven": "priced as unsafe"
+      },
+      {
+        "risk": "Lack of model number, which affects value and compatibility with local voltage (230V in Nigeria)",
+        "proof": "Photo of the base or label showing the model number and voltage rating.",
+        "if_unproven": "priced as unknown model, possibly incompatible"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of the base showing the model number and voltage rating.",
+      "Video of the kettle in operation, boiling water and turning off automatically.",
+      "Close-up of the plug and full cord to check for damage."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The brand is identifiable, but the model number is missing, and critical risks like electrical safety and functionality cannot be assessed from current photos. The item cannot be priced accurately without proof of working condition and compatibility."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 54403,
+    "input_tokens": 2271,
+    "output_tokens": 681,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "c893b7f07c7b633cd640a6ddf3a78f89",
+    "error": null
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "A hand holds a blue PS4 game case in both photos.",
+      "The cover reads \"THE WITCHER WILD HUNT\" with a PEGI 18 rating.",
+      "The top of the case shows the PS4 logo.",
+      "The bottom shows \"CD PROJEKT RED\".",
+      "Both photos are nearly identical, taken seconds apart in front of a \"Prezin Gadgets\" sign."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "PS4 game",
+      "brand": "PlayStation",
+      "model": "The Witcher Wild Hunt",
+      "read_from": [
+        "photo 0 cover",
+        "photo 1 cover"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "The item is The Witcher Wild Hunt.",
+        "verdict": "supported",
+        "evidence": "photo 0 and photo 1 cover art"
+      },
+      {
+        "claim": "\"111\" (unspecified attribute).",
+        "verdict": "unverifiable_remote",
+        "evidence": "not shown in either photo; meaning unclear"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The case may contain no disc.",
+        "proof": "photo of the opened case with the disc visible",
+        "if_unproven": "priced as an empty case"
+      },
+      {
+        "risk": "The disc may be scratched or unreadable.",
+        "proof": "close-up photo of the disc surface",
+        "if_unproven": "priced as a damaged disc"
+      },
+      {
+        "risk": "The case may be cracked or broken.",
+        "proof": "photos of all case edges and the back cover",
+        "if_unproven": "priced as a damaged case"
+      },
+      {
+        "risk": "The copy may be counterfeit.",
+        "proof": "close-up of the disc label and case spine",
+        "if_unproven": "priced as potentially non-genuine"
+      },
+      {
+        "risk": "The game may be region-locked.",
+        "proof": "photo of the case spine region code",
+        "if_unproven": "priced as region-unknown"
+      }
+    ],
+    "proof_requests": [
+      "Open the case and photograph the disc inside.",
+      "Photograph the disc surface in bright light.",
+      "Photograph the case spine, back cover, and barcode.",
+      "Photograph the case spine region code."
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a PS4 copy of The Witcher Wild Hunt from the cover in both photos, so a worst-case price can be set despite unverified condition."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 30938,
+    "input_tokens": 2368,
+    "output_tokens": 2916,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "fe8284f47c506229d7c802514caf5e91",
+    "error": null
+  }
+}

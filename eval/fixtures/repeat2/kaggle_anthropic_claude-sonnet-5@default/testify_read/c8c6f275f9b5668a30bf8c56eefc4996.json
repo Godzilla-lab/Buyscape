@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "A red metal gas cylinder with a collar/guard and a valve/regulator fitting on top is shown sitting inside a car trunk.",
+      "The cylinder surface shows visible rust, scratches and worn paint in multiple patches.",
+      "No capacity markings, manufacturer stamp, safety certification sticker, or date-of-manufacture/recertification stamp is legible in the photo.",
+      "Background clutter (car boot, packaging, other items) confirms a casual/home resale setting, not a shop.",
+      "A 'POSTED ON JIJI' watermark with a name overlays the image, consistent with a marketplace listing screenshot."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "LPG gas cylinder (cooking gas cylinder)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 (cylinder body, no legible stamps)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "20kg capacity",
+        "verdict": "unverifiable_remote",
+        "evidence": "No capacity stamp, embossed marking, or size-reference object (e.g., tape measure, known-size item) visible in photo 0."
+      },
+      {
+        "claim": "'Direct tokunbo' (imported, used)",
+        "verdict": "unverifiable_remote",
+        "evidence": "No import documentation, country-of-origin stamp, or certification mark visible in the photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Actual water capacity may be smaller than claimed 20kg (e.g., 12.5kg cylinders are visually similar).",
+        "proof": "Close-up photo of the embossed capacity/tare weight stamp near the collar or on the body.",
+        "if_unproven": "priced as the smallest common capacity consistent with the shape shown"
+      },
+      {
+        "risk": "Cylinder may be past its safety recertification/hydrostatic test date, a serious safety issue for LPG cylinders.",
+        "proof": "Close-up photo of the manufacture date and any recertification stamp near the neck.",
+        "if_unproven": "priced as uncertified/needs retesting"
+      },
+      {
+        "risk": "Valve or regulator thread may be damaged, leaking, or incompatible with standard Nigerian regulators.",
+        "proof": "Close-up photo/video of the valve threads and a demonstration of a regulator being screwed on with no gas smell/hiss.",
+        "if_unproven": "priced as valve condition unverified (worst case: faulty)"
+      },
+      {
+        "risk": "Visible rust/corrosion could indicate wall thinning, weakening structural integrity.",
+        "proof": "Close-up photos of the worst-rusted areas and the cylinder base/seam.",
+        "if_unproven": "priced as corroded/structurally questionable"
+      },
+      {
+        "risk": "Cylinder could be empty, partially full, or completely sealed shut (cannot verify gas content or usability from a photo).",
+        "proof": "Video of the cylinder being weighed or connected to a stove showing gas flow.",
+        "if_unproven": "priced as empty/unverified content"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of the embossed capacity (kg) and manufacture/test date stamp near the cylinder neck",
+      "Close-up of valve threads and condition",
+      "Video showing cylinder being weighed or connected to a regulator with gas flow/smell test",
+      "Wider photo showing the full cylinder outside the cluttered trunk, with a size reference"
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identifiable by type as a used LPG gas cylinder, but capacity, safety certification, valve condition, and corrosion extent are all unverifiable from the single photo, so it must be priced at worst case (smallest likely capacity, uncertified, valve/condition unproven) until the seller supplies close-up proof."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 25717,
+    "input_tokens": 2513,
+    "output_tokens": 2288,
+    "cost_usd": 0.027906,
+    "replayed": false,
+    "fixture_key": "c8c6f275f9b5668a30bf8c56eefc4996",
+    "error": null
+  }
+}

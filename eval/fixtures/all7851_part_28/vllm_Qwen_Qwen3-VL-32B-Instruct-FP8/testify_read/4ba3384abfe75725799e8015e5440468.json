@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a composite image: four solar panels on the left, a white inverter in the center, and four black batteries labeled 'Genus' on the right. The inverter has a small screen and ventilation grills.",
+      "Photo 1 shows a white inverter mounted on a wall with 'MUST' and 'Solar Inverter' visible. Below it, four batteries with orange tops and grey sides are arranged on a metal rack. The batteries have 'G12700' visible on the side.",
+      "Photo 2 shows multiple solar panels installed on a tiled roof. The panels are arranged in two rows, with visible wiring. The surrounding area includes other houses and greenery.",
+      "All photos have a watermark 'NUEL_TECH ENGINEERING'."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "5kva solar power system with inverter, batteries, and solar panels",
+      "brand": "MUST (inverter), Genus (batteries, in photo 0), G12700 (batteries, in photo 1)",
+      "model": "MUST Solar Inverter (photo 1), Genus (photo 0), G12700 (photo 1)",
+      "read_from": [
+        "photo 1 inverter label",
+        "photo 0 battery label",
+        "photo 1 battery side label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "5kva Solar Pack Installation",
+        "verdict": "unverified",
+        "evidence": "The inverter in photo 1 is labeled 'MUST Solar Inverter' but no kVA rating is visible. The seller claims 5kva, but this is not readable in any photo."
+      },
+      {
+        "claim": "5ka Inverter (1pc)",
+        "verdict": "contradicted",
+        "evidence": "The inverter in photo 1 is labeled 'MUST Solar Inverter', and '5ka' is likely a typo for '5kva'. However, the inverter's actual capacity is not visible. The label does not show '5kva'."
+      },
+      {
+        "claim": "420W Mono Solar Panel",
+        "verdict": "unverifiable_remote",
+        "evidence": "The solar panels in photo 2 are visible, but no wattage or model label is readable. The seller claims 420W, but this cannot be verified from the photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Inverter capacity is not 5kva as claimed",
+        "proof": "A clear photo of the inverter's front or side label showing the kVA rating.",
+        "if_unproven": "priced as a lower-capacity inverter, possibly 3kva or 2kva, which reduces value."
+      },
+      {
+        "risk": "Solar panels are not 420W as claimed",
+        "proof": "A close-up photo of the solar panel's label showing the wattage and model.",
+        "if_unproven": "priced as lower-wattage panels, e.g., 300W or 350W, which reduces value."
+      },
+      {
+        "risk": "Batteries are not genuine or are damaged",
+        "proof": "A close-up photo of the battery terminals and casing, showing no corrosion or damage, and a clear view of the model and capacity label.",
+        "if_unproven": "priced as used or lower-quality batteries, which reduces value."
+      },
+      {
+        "risk": "Installation is incomplete or not properly wired",
+        "proof": "A photo showing the full wiring from panels to inverter to batteries, including fuses, breakers, and grounding.",
+        "if_unproven": "priced as a partial or non-functional system, which reduces value."
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the inverter's label showing the kVA rating.",
+      "Close-up photo of the solar panel's label showing wattage and model.",
+      "Close-up photo of the battery labels showing model, capacity, and condition.",
+      "Photo showing the full wiring and connections between panels, inverter, and batteries."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The key components (inverter capacity, panel wattage) are not verifiable from the current photos. The seller's claims cannot be confirmed, and hidden risks related to capacity, authenticity, and installation quality affect pricing. Proof is needed to determine the true value."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 81530,
+    "input_tokens": 2665,
+    "output_tokens": 1002,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "4ba3384abfe75725799e8015e5440468",
+    "error": null
+  }
+}

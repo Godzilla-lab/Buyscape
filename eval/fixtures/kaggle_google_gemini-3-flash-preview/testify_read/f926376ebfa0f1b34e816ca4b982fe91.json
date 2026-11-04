@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows the retail packaging for a Binatone stand fan.",
+      "The box identifies the model as 'ITAL-1660' and mentions '1640 Series'.",
+      "The brand 'Binatone' is clearly visible on the box.",
+      "The actual fan is not visible; only the box is shown.",
+      "The box lists features such as 'Air Freshness', 'Mosquito Repellent', and '65W' power.",
+      "The background shows other boxes, suggesting a retail or storage environment."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "standing fan",
+      "brand": "Binatone",
+      "model": "ITAL-1660",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Binatone 1660",
+        "verdict": "supported",
+        "evidence": "photo 0 box shows Model ITAL-1660"
+      },
+      {
+        "claim": "16inch fan",
+        "verdict": "unverified",
+        "evidence": "The box mentions '1640 Series' but the specific diameter is not clearly legible in the provided photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The fan itself is not shown; the box may be empty, contain a different model, or a damaged unit.",
+        "proof": "A photo of the actual fan out of the box.",
+        "if_unproven": "as missing or not working"
+      },
+      {
+        "risk": "Internal motor damage or electrical faults in a second-hand unit.",
+        "proof": "A video of the fan powered on, showing all speeds and oscillation working.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "Missing parts such as the mosquito repellent oil or air freshener cartridges mentioned on the box.",
+        "proof": "Photo of the accessories and the grille cap removed.",
+        "if_unproven": "as missing accessories"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual fan out of the box.",
+      "Video of the fan plugged in and running through all speed settings.",
+      "Photo of the fan's base and stand to check for cracks or repairs."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only the retail box is shown. Since this is a second-hand transaction, the presence and physical condition of the actual fan cannot be verified from a photo of the packaging alone."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 8799,
+    "input_tokens": 2356,
+    "output_tokens": 1769,
+    "cost_usd": 0.006485,
+    "replayed": false,
+    "fixture_key": "f926376ebfa0f1b34e816ca4b982fe91",
+    "error": null
+  }
+}

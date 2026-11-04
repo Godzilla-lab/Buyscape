@@ -1,0 +1,66 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a close-up of a used car engine with visible components: timing belt, pulleys, intake manifold, and wiring harness. A label 'VSG-4' is visible on the side of the engine block.",
+      "Photo 1 shows multiple engines stored on metal shelves in a workshop or garage. The engines vary in size and design, some with cylinder heads exposed, others with covers intact. The engine in the foreground on the bottom shelf appears similar to the one in photo 0.",
+      "The environment is cluttered with automotive parts, suggesting a used parts or engine reconditioning shop.",
+      "No visible branding or model badges on any engine in either photo, except for the 'VSG-4' label on the engine in photo 0."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used car engine",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 label",
+        "photo 1 context"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Dealers of any kind of Hyundai Kia engines",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible Hyundai or Kia branding on any engine in the photos. The label 'VSG-4' does not confirm brand or model. The seller's claim cannot be verified from the images alone."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine may be damaged or non-functional (e.g., internal wear, seized components, or missing parts)",
+        "proof": "A video showing the engine running or a detailed inspection of the cylinder bores, crankshaft, and internal components.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Engine may not be from Hyundai or Kia as claimed",
+        "proof": "Clear photo of the engine block with visible manufacturer stamp or VIN tag, or a photo of the engine installed in a vehicle with visible make/model.",
+        "if_unproven": "priced as generic used engine, not Hyundai/Kia"
+      },
+      {
+        "risk": "Engine may have been salvaged from a wrecked or accident-damaged vehicle",
+        "proof": "Photo of the vehicle's VIN plate or documentation showing the source vehicle's condition.",
+        "if_unproven": "priced as unknown provenance, lower value"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the engine block showing manufacturer stamp or VIN tag.",
+      "Video of the engine running or a detailed inspection of internal components.",
+      "Photo of the source vehicle or documentation showing the engine's origin and condition."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The engine cannot be identified as Hyundai or Kia from the photos, and its condition and provenance are unknown. Without proof of brand, model, and working condition, a reliable price cannot be determined."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 49712,
+    "input_tokens": 2272,
+    "output_tokens": 638,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "f8b9e1ceafd032cb7418d7b78b6ae7c1",
+    "error": null
+  }
+}

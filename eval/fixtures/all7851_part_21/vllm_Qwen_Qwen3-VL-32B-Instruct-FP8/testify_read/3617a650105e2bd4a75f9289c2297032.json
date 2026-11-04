@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a closed laptop with a rose gold or light pink lid. The HP logo is visible in the center. The surface has minor scuffs and smudges. The laptop is placed on a dark surface with cables and a black device (possibly a router or power strip) in the background.",
+      "Photo 1 shows a screen displaying a lock screen with time '8:41' and date 'Saturday, October 10'. The background is a landscape image with a winding path. The screen appears to be a large monitor or TV, not a laptop screen. There is a red LED light visible at the bottom, possibly from a power adapter or device. The screen is not showing any laptop-specific UI or branding."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": null,
+      "read_from": [
+        "photo 0 lid"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP laptop for sale",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows the HP logo on the lid."
+      },
+      {
+        "claim": "the display IC is faulty",
+        "verdict": "unverified",
+        "evidence": "Photo 1 shows a screen with a lock screen, but it is not clear if this is the laptop's screen or an external monitor. No visible display faults are shown in the photos."
+      },
+      {
+        "claim": "never touched before",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows visible scuffs and smudges on the lid, indicating use. The claim of 'never touched before' is inconsistent with the physical condition shown."
+      },
+      {
+        "claim": "I'm open for business",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a statement of intent, not a verifiable claim about the item's condition or identity."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The displayed screen in photo 1 is not the laptop's screen but an external monitor, meaning the laptop's actual display condition is unknown.",
+        "proof": "A photo of the laptop screen turned on, showing the display directly, with the lid open and the screen visible.",
+        "if_unproven": "priced as not working or with unknown display condition"
+      },
+      {
+        "risk": "The laptop may have other hardware or software issues not visible in the photos.",
+        "proof": "A video showing the laptop powering on, booting, and running basic functions, including keyboard and touchpad operation.",
+        "if_unproven": "priced as non-functional or with unknown functionality"
+      },
+      {
+        "risk": "The 'display IC faulty' claim may be misleading or inaccurate, and the actual display may be functional or repairable.",
+        "proof": "A photo or video showing the laptop screen with visible display faults (e.g., lines, dead pixels, flickering) or a technician's diagnosis.",
+        "if_unproven": "priced as having unknown display issue"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the laptop screen turned on, showing the display directly with the lid open.",
+      "Video of the laptop powering on, booting, and running basic functions.",
+      "Photo or video showing visible display faults if the display IC is indeed faulty."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as an HP laptop, but critical claims about its condition (display IC faulty, never touched) are contradicted or unverified by the photos. The screen shown in photo 1 is likely an external monitor, not the laptop's screen, so the actual display condition is unknown. Without proof of the laptop's screen and functionality, a price cannot be determined."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 66112,
+    "input_tokens": 2284,
+    "output_tokens": 839,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "3617a650105e2bd4a75f9289c2297032",
+    "error": null
+  }
+}

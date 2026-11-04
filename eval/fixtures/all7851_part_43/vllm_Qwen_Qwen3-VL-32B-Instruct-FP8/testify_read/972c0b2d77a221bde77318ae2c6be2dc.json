@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows the side of a brown cardboard box with a white label that clearly reads 'Lenovo ThinkPad L14 Gen 4' and 'Intel Inside'.",
+      "The label includes serial numbers, barcodes, MAC addresses, and compliance IDs (e.g., TP00133C).",
+      "Photo 1 shows the side of the same box with 'Lenovo' in red and 'ThinkPad' in black text.",
+      "Photo 2 shows the top of the box with 'ThinkPad' and a large 'Think' logo with a red dot.",
+      "All photos show the box is unopened and intact, with no visible damage to the box itself.",
+      "The seller's text mentions 'Core i5, 16GB' but no photo confirms the internal specs or RAM."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "Lenovo",
+      "model": "ThinkPad L14 Gen 4",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "The Lenovo ThinkPad L14 Gen 4 (Intel) is a durable, mainstream business laptop.",
+        "verdict": "supported",
+        "evidence": "Photo 0 label confirms the model as ThinkPad L14 Gen 4 with Intel branding."
+      },
+      {
+        "claim": "This Core i5, 16GB...",
+        "verdict": "unverified",
+        "evidence": "No photo shows the internal components or system specs; the claim is not visible in any photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The laptop may not be in working condition or may have been opened and reboxed.",
+        "proof": "A photo of the laptop inside the box, open and powered on, showing the screen and keyboard.",
+        "if_unproven": "priced as not working or possibly refurbished without warranty"
+      },
+      {
+        "risk": "The actual CPU and RAM may not match the claimed 'Core i5, 16GB'.",
+        "proof": "A photo of the system information screen (e.g., Windows About or BIOS) showing the CPU model and installed RAM.",
+        "if_unproven": "priced as unknown specs, which may be lower than advertised"
+      },
+      {
+        "risk": "The box may be a dummy or repackaged unit without the actual laptop inside.",
+        "proof": "A photo showing the laptop being removed from the box, with visible ports, screen, and keyboard.",
+        "if_unproven": "priced as possibly not genuine or missing"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the laptop inside the box, powered on, showing the screen and keyboard.",
+      "Photo of the system information screen showing CPU and RAM details.",
+      "Photo of the laptop being removed from the box to confirm it is present and intact."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is clearly identified from the box label, but critical claims about internal specs (Core i5, 16GB) and the actual condition of the laptop are unverified. Without proof of the laptop's presence and working state, the item cannot be priced accurately."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 59983,
+    "input_tokens": 2795,
+    "output_tokens": 721,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "972c0b2d77a221bde77318ae2c6be2dc",
+    "error": null
+  }
+}

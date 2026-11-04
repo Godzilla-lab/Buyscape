@@ -1,0 +1,87 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Closed laptop lid with a large 'Z' logo and a silver finish. The lid has a watermark 'POSTED ON JIJI CIMLET INNOVATION'.",
+      "Photo 1: Laptop open, showing a Windows desktop with a scenic wallpaper. The keyboard is visible with an 'hp' logo above it. A small sticker is on the bottom right of the palm rest. The screen appears to be on and functional.",
+      "Photo 2: Same as photo 0, closed laptop lid with 'Z' logo and watermark. No visible damage or wear on the lid.",
+      "All photos show the same setup: wooden table, decorative flowers, and a carved wooden backdrop. Watermarks are present on all images."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "ZBook Studio G7",
+      "read_from": [
+        "photo 0 lid: 'Z' logo and context from seller's words",
+        "photo 1: 'hp' logo above keyboard and context from seller's words"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP zbook studio G7 laptop",
+        "verdict": "supported",
+        "evidence": "Photo 0 and photo 1 show the 'Z' logo and 'hp' logo, consistent with HP ZBook Studio G7. Seller's text matches visual evidence."
+      },
+      {
+        "claim": "Intel core i7 10th generation",
+        "verdict": "unverifiable_remote",
+        "evidence": "No visible CPU label or system information in photos. Cannot confirm from images alone."
+      },
+      {
+        "claim": "512ssd drive 16gb ram",
+        "verdict": "unverifiable_remote",
+        "evidence": "No internal components or system specs visible. Cannot confirm from photos."
+      },
+      {
+        "claim": "4gb dedicated...",
+        "verdict": "unverifiable_remote",
+        "evidence": "No GPU or graphics specs visible. Cannot confirm from photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The laptop may not have the advertised Intel Core i7 10th Gen processor",
+        "proof": "A photo of the BIOS screen or system information (e.g., Windows About page) showing the CPU model.",
+        "if_unproven": "Priced as if it has a lower-end or non-existent CPU, reducing value."
+      },
+      {
+        "risk": "The 512GB SSD and 16GB RAM may not be installed or may be misrepresented",
+        "proof": "A photo of the system information screen showing installed RAM and storage, or a screenshot of Disk Management and Task Manager.",
+        "if_unproven": "Priced as if it has less RAM or smaller storage, reducing value."
+      },
+      {
+        "risk": "The 4GB dedicated graphics may not be present or may be misrepresented",
+        "proof": "A photo of the Device Manager or DirectX Diagnostic Tool showing the GPU model and VRAM.",
+        "if_unproven": "Priced as if it has integrated graphics or less VRAM, reducing value."
+      },
+      {
+        "risk": "The laptop may have physical damage or wear not visible in the photos",
+        "proof": "A 360-degree video or close-up photos of the hinges, screen edges, keyboard, and ports.",
+        "if_unproven": "Priced as if it has minor to moderate wear, reducing value."
+      }
+    ],
+    "proof_requests": [
+      "Photo of the BIOS or Windows About page showing CPU model.",
+      "Photo of Task Manager or System Information showing RAM and storage.",
+      "Photo of Device Manager or DirectX Diagnostic Tool showing GPU and VRAM.",
+      "Close-up photos of the laptop's hinges, ports, keyboard, and screen edges."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identifiable as HP ZBook Studio G7 from the logo and seller's description, but key specifications (CPU, RAM, SSD, GPU) cannot be verified from the photos. Without proof of these specs, the item cannot be priced accurately. Hidden risks include misrepresentation of hardware and unseen physical damage."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 76234,
+    "input_tokens": 2798,
+    "output_tokens": 933,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "61ebb32caacbf1b58a133d99a2068bf8",
+    "error": null
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Front view of a black tower UPS.",
+      "APC logo is clearly visible on the front panel.",
+      "Text 'Smart-UPS 1500' is printed on the bottom front panel.",
+      "The 'Online' indicator light is illuminated green.",
+      "One LED in the battery charge column is illuminated green.",
+      "The unit appears to be powered on.",
+      "Watermark 'POSTED ON JIJI INTERSOFT' is present."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "UPS",
+      "brand": "APC",
+      "model": "Smart-UPS 1500",
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Power supply (UPS)",
+        "verdict": "supported",
+        "evidence": "photo 0 shows a standard UPS form factor and APC branding."
+      },
+      {
+        "claim": "1.5 kVA",
+        "verdict": "supported",
+        "evidence": "photo 0 shows '1500' which corresponds to 1500VA or 1.5kVA."
+      },
+      {
+        "claim": "Line-Interactive",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a technical specification of the Smart-UPS series but is not explicitly stated on the exterior."
+      },
+      {
+        "claim": "980 W",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is the standard wattage for this model but is not visible in the photo."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Internal batteries may be depleted or dead.",
+        "proof": "A video of the UPS passing a self-test while disconnected from mains power with a load attached.",
+        "if_unproven": "as having dead batteries"
+      },
+      {
+        "risk": "Damage to rear power outlets or communication ports.",
+        "proof": "A clear photo of the rear panel.",
+        "if_unproven": "as having damaged or non-functional ports"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the white sticker on the rear or bottom showing the exact model number (e.g., SUA1500I) and manufacture date.",
+      "Photo of the rear panel to check the condition of the outlets.",
+      "Video of the unit running on battery power with a device plugged into it."
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identified as an APC Smart-UPS 1500. Since battery health is the primary value driver and cannot be verified from a still photo of a powered-on unit, it is priced assuming the batteries require immediate replacement."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 8886,
+    "input_tokens": 2379,
+    "output_tokens": 1674,
+    "cost_usd": 0.006212,
+    "replayed": false,
+    "fixture_key": "5943033448f439594affd0fc81c5985f",
+    "error": null
+  }
+}

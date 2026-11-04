@@ -1,0 +1,69 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a pile of used tyres on a dirt ground.",
+      "The tyres vary in size and condition; some appear worn, others have visible damage or cracks.",
+      "One tyre in the foreground has a visible brand name 'BRIDGESTONE' on the sidewall.",
+      "Some tyres are stacked, others are lying flat or on their sides.",
+      "The tread depth varies: some tyres show significant wear, others appear to have more tread remaining.",
+      "No rims are visible in the photo.",
+      "The seller mentions 'Belgium tyres and rim' but no evidence of origin or rims is visible."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used car tyres",
+      "brand": "Bridgestone",
+      "model": null,
+      "read_from": [
+        "photo 0 sidewall"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Good Belgium tyres and rim",
+        "verdict": "unverified",
+        "evidence": "Photo 0 shows tyres, some of which appear worn or damaged. No rims are visible. The brand 'Bridgestone' is visible, but there is no visible proof of origin being Belgium. The condition 'good' is subjective and not verifiable from the photo alone."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Tyres may be worn beyond safe tread depth or have internal damage not visible from the outside.",
+        "proof": "Close-up shot of tread depth on each tyre, including a side view to check for sidewall cracks or bulges.",
+        "if_unproven": "Priced as potentially unsafe or unusable, with lower value."
+      },
+      {
+        "risk": "No rims are visible, contradicting the seller's claim of 'tyres and rim'.",
+        "proof": "Photo showing at least one rim included in the sale, preferably mounted or clearly identifiable.",
+        "if_unproven": "Priced as tyres only, with no value for rims."
+      },
+      {
+        "risk": "Origin claim of 'Belgium' is unverifiable; tyres may be from any country.",
+        "proof": "Clear photo of tyre sidewall showing country of origin or manufacturer details.",
+        "if_unproven": "Priced without premium for origin, as origin is not confirmed."
+      }
+    ],
+    "proof_requests": [
+      "Close-up photos of tread depth and sidewall condition for each tyre.",
+      "Photos showing any rims included in the sale, clearly visible and identifiable.",
+      "Clear shot of tyre sidewall showing brand, size, and country of origin.",
+      "Video or photo showing tyres being rotated to check for uneven wear or internal damage."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as used car tyres, with one brand visible (Bridgestone), but the seller's claims about condition, origin, and inclusion of rims are unverified. Without proof of tread depth, rim presence, and origin, the item cannot be priced accurately. The risks of hidden damage and false claims require further evidence before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 55856,
+    "input_tokens": 1769,
+    "output_tokens": 676,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "3b4b5aff67dcb90646c554b818e30096",
+    "error": null
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Front view of a silver laptop with Windows 11 desktop visible. ASUS logo on the bezel below the screen. Stickers on the lower left: Intel, Windows, HDMI. Keyboard is black with silver frame. Touchpad is centered. Watermark 'NICK MARK ENTERPRISE POSTED ON JIJI'.",
+      "Photo 1: Similar front view, slightly different angle. Same screen, keyboard, and stickers. Background shows two other laptops, one dark gray, one silver, both with ASUS logos on the lid.",
+      "Photo 2: Top-down view of three closed laptops. All have ASUS logos on the lid. Left: dark gray, center: silver (same as in photos 0 and 1), right: light silver. All have brushed metal finish. Watermark present."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "laptop",
+      "brand": "ASUS",
+      "model": null,
+      "read_from": [
+        "photo 0 screen bezel",
+        "photo 1 screen bezel",
+        "photo 2 lid"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Intel pentium",
+        "verdict": "unverified",
+        "evidence": "No CPU model visible in photos. Stickers on photo 0 and 1 show Intel logo but not the specific model. Seller's text only."
+      },
+      {
+        "claim": "4GB RAM",
+        "verdict": "unverifiable_remote",
+        "evidence": "No system information visible. Cannot be confirmed from photos. Seller's text only."
+      },
+      {
+        "claim": "500GB HDD",
+        "verdict": "unverifiable_remote",
+        "evidence": "No storage information visible. Cannot be confirmed from photos. Seller's text only."
+      },
+      {
+        "claim": "Windows 11",
+        "verdict": "supported",
+        "evidence": "Photo 0 and 1 show Windows 11 desktop with characteristic blue background and start menu. Taskbar shows Windows 11 design."
+      },
+      {
+        "claim": "Strong battery",
+        "verdict": "unverifiable_remote",
+        "evidence": "No battery status or usage test shown. Cannot be confirmed from photos. Seller's text only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "CPU is not Intel Pentium, possibly older or lower-end model",
+        "proof": "Photo showing the system information screen (e.g., 'About' in Windows Settings) or the CPU sticker on the bottom of the laptop.",
+        "if_unproven": "priced as a generic low-end Intel laptop, not Pentium-specific"
+      },
+      {
+        "risk": "RAM is less than 4GB or not 4GB",
+        "proof": "Photo of the system information screen showing installed RAM.",
+        "if_unproven": "priced as a laptop with unknown RAM, likely lower than 4GB"
+      },
+      {
+        "risk": "Storage is not 500GB HDD, possibly smaller or SSD",
+        "proof": "Photo of the system information screen showing storage capacity and type.",
+        "if_unproven": "priced as a laptop with unknown storage, likely smaller or slower"
+      },
+      {
+        "risk": "Battery is degraded or not functional",
+        "proof": "Video or photo showing battery health in Windows (via Command Prompt or third-party tool) or a battery stress test.",
+        "if_unproven": "priced as a laptop with unknown battery life, likely poor"
+      },
+      {
+        "risk": "Laptop is not in good working condition (e.g., screen flickering, keyboard issues, fan noise)",
+        "proof": "Video showing the laptop in use, including keyboard typing, screen brightness, and fan operation.",
+        "if_unproven": "priced as a laptop with unknown condition, likely with minor to major defects"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the system information screen (Windows Settings > System > About) showing CPU, RAM, and storage details.",
+      "Photo or video of the battery health and usage test.",
+      "Video showing the laptop in use, including keyboard, screen, and fan operation.",
+      "Photo of the bottom of the laptop showing any model or serial number stickers."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The laptop is identifiable as an ASUS model, but critical specifications (CPU, RAM, storage, battery) are not verifiable from the photos. The seller's claims are unverified or unverifiable remotely. Without proof of these specs and condition, a reliable price cannot be determined."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 79795,
+    "input_tokens": 2578,
+    "output_tokens": 1021,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "efe3571783e65e78517f2f7c7e96720b",
+    "error": null
+  }
+}

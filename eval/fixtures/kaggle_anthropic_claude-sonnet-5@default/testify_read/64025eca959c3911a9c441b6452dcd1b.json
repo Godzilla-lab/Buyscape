@@ -1,0 +1,74 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Single photo shows one solar panel leaning against a wall near a glass door",
+      "Panel has dark monocrystalline-style cells with visible cell gridlines and a half-cut cell layout (split by a horizontal bar mid-panel)",
+      "A faint watermark reads 'INNOSON GLOBAL GROUP' across the panel surface - this appears to be a photo-stamp/watermark, not a label on the panel itself",
+      "No visible manufacturer label, wattage sticker, or spec plate on the frame or back of the panel",
+      "No junction box, cables, or back sheet shown",
+      "Only one angle/photo provided, no close-up of any rating label",
+      "Seller text is a generic promotional line ('Contact us for ur Solar Energy Solution') with no specifications given"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "solar panel",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 (general view, no label visible)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Solar Energy Solution (implied the panel is a functional solar product for sale)",
+        "verdict": "unverifiable_remote",
+        "evidence": "No wattage, brand, or spec label visible in photo 0; no performance demonstration shown"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Wattage/power rating unknown, which drives most of the price for a solar panel",
+        "proof": "Close-up photo of the rating label/sticker (usually on the back of the panel) showing Wp, Voc, Isc",
+        "if_unproven": "cannot be priced at all without this, as price ranges for panels of different wattages vary too widely for a single worst-case figure"
+      },
+      {
+        "risk": "Panel could be used, damaged, or have hidden micro-cracks not visible in a single front-angle photo",
+        "proof": "Close-up shots of all four corners, the back junction box, and any visible cracks under raking light",
+        "if_unproven": "priced as used/unverified condition, not new"
+      },
+      {
+        "risk": "Brand/manufacturer unverified, affects resale value and warranty",
+        "proof": "Clear photo of manufacturer nameplate or back label",
+        "if_unproven": "priced as unbranded/generic panel"
+      },
+      {
+        "risk": "Quantity being sold unclear (single unit vs lot) since seller speaks generally of 'solar energy solution'",
+        "proof": "Seller confirms number of units and photos of all units together",
+        "if_unproven": "priced as single unit only, as shown"
+      }
+    ],
+    "proof_requests": [
+      "Close-up photo of the back-of-panel rating label showing wattage (Wp), Voc, Isc, and model number",
+      "Photo of manufacturer brand/nameplate on the frame or back sheet",
+      "Photos of all four corners and back junction box to check for cracks or damage",
+      "Confirmation of how many panels are included in this listing"
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The single photo shows a solar panel but no wattage, brand, or spec label is readable anywhere, and wattage is the primary price driver for solar panels, so even a worst-case price cannot be set without that label."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 14567,
+    "input_tokens": 2532,
+    "output_tokens": 1205,
+    "cost_usd": 0.013923,
+    "replayed": false,
+    "fixture_key": "64025eca959c3911a9c441b6452dcd1b",
+    "error": null
+  }
+}

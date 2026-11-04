@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Side view of a black smartphone showing volume buttons, power button, and a headphone jack at the bottom. The phone has a metallic finish and rounded edges.",
+      "Photo 1: Back view of the phone showing a dual-camera setup in a vertical arrangement, a flash, and the Apple logo. The back is dark, likely space gray, with visible smudges and fingerprints. The 'iPhone' text is faintly visible below the logo.",
+      "Photo 2: Front view of the phone showing the lock screen with time '10:47', date 'Tuesday, 22 September', and battery at 71%. The screen has a notch at the top, but it is small and centered, consistent with iPhone 8 Plus design. The home button is visible at the bottom.",
+      "All photos show the same device from different angles, held in a hand with a metal watch. The background is an outdoor setting with grass and concrete."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "iPhone 8 Plus",
+      "brand": "Apple",
+      "model": "iPhone 8 Plus",
+      "read_from": [
+        "photo 1: 'iPhone' text below the Apple logo",
+        "photo 2: screen design with home button and notch shape consistent with iPhone 8 Plus"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "iPhone 8plus",
+        "verdict": "supported",
+        "evidence": "Photo 1 shows the 'iPhone' text below the Apple logo, and the dual-camera setup and overall design match the iPhone 8 Plus. Photo 2 shows the home button and screen layout consistent with the model."
+      },
+      {
+        "claim": "follow come parts",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photos of any accessories or parts are shown. The phrase is ambiguous and not visually verifiable."
+      },
+      {
+        "claim": "77%BH",
+        "verdict": "supported",
+        "evidence": "Photo 2 shows the battery percentage as 71% on the lock screen. The seller's claim of 77% is close and likely rounded or slightly inaccurate, but the screen shows a high battery level, supporting the general claim."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery health is not verified; 77% may be current charge, not battery capacity.",
+        "proof": "A screenshot of the battery health percentage from Settings > Battery > Battery Health (or equivalent) showing the maximum capacity.",
+        "if_unproven": "Priced as having degraded battery, which reduces value."
+      },
+      {
+        "risk": "Screen damage or dead pixels not visible in photos.",
+        "proof": "A video or photo showing the screen being swiped, tapped, and displaying full color gradients and brightness levels.",
+        "if_unproven": "Priced as potentially having screen issues, which reduces value."
+      },
+      {
+        "risk": "Water damage or internal issues not visible from exterior.",
+        "proof": "A photo or video of the phone being powered on, showing the Apple logo and booting into iOS, and a photo of the SIM tray and charging port to check for corrosion.",
+        "if_unproven": "Priced as potentially non-functional or with hidden damage, which reduces value."
+      },
+      {
+        "risk": "Device may be blacklisted or have iCloud lock.",
+        "proof": "A screenshot of the phone's settings showing the 'Find My iPhone' status as 'Off' and the device being successfully activated without a password prompt.",
+        "if_unproven": "Priced as potentially locked or blacklisted, which reduces value significantly."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of battery health percentage from Settings > Battery > Battery Health.",
+      "Video or photo showing the screen being used (swiping, tapping, full brightness).",
+      "Photo of the phone booting up and showing the Apple logo.",
+      "Screenshot of 'Find My iPhone' status as 'Off' and activation screen without password prompt."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The device is identified as an iPhone 8 Plus, but critical risks such as battery health, screen condition, water damage, and iCloud lock cannot be verified from the current photos. These factors significantly affect the price and must be proven before pricing can be determined."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 78092,
+    "input_tokens": 3085,
+    "output_tokens": 959,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "8e87fa9b69c1188c46bb93da2e789f88",
+    "error": null
+  }
+}

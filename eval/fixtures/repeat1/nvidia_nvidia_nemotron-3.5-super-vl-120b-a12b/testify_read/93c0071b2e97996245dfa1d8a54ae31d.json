@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "response": {
+    "observations": [
+      "Photo 0 shows a used automotive engine with four black ignition coils mounted in a row on the valve cover.",
+      "Photo 1 shows the same engine from a slightly different angle, with alternator, drive belts, and pulleys visible.",
+      "No brand badge, model plate, or VIN is legible in either photo.",
+      "A watermark reads 'EMMY GOLD AUTO SPARE'.",
+      "The engine appears removed from a vehicle and sitting on a floor or stand."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "used 4-cylinder car engine",
+      "brand": null,
+      "model": null,
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Hyundai kia engine",
+        "verdict": "unverifiable_remote",
+        "evidence": "No brand name or logo is legible in photo 0 or photo 1."
+      },
+      {
+        "claim": "4cylinder",
+        "verdict": "unverified",
+        "evidence": "Four ignition coils are visible in photo 0, but cylinder count is not confirmed."
+      },
+      {
+        "claim": "engine",
+        "verdict": "supported",
+        "evidence": "The object is clearly an internal combustion engine in photo 0 and photo 1."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine may not run or may have internal damage.",
+        "proof": "Video of the engine starting and running, or compression test results.",
+        "if_unproven": "as not working."
+      },
+      {
+        "risk": "Brand may not be Hyundai or Kia.",
+        "proof": "Clear photo of engine block casting number or manufacturer plate.",
+        "if_unproven": "as a generic unbranded 4-cylinder engine."
+      },
+      {
+        "risk": "Engine may be incomplete (missing ECU, harness, sensors, accessories).",
+        "proof": "Photo showing the complete engine with all ancillaries and ECU.",
+        "if_unproven": "as a bare engine block."
+      },
+      {
+        "risk": "High mileage or worn internal condition.",
+        "proof": "Service records or borescope photos of cylinders.",
+        "if_unproven": "as high-mileage/worn."
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of any casting number, brand plate, or VIN on the engine block.",
+      "Video of the engine cranking and running.",
+      "Photo showing whether the ECU, wiring harness, and all sensors are included."
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as a used 4-cylinder car engine even though the brand is unreadable, so it can be priced at its worst case as an untested generic engine."
+  },
+  "meta": {
+    "provider": "nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+    "task": "testify_read",
+    "latency_ms": 42528,
+    "input_tokens": 2728,
+    "output_tokens": 2575,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "93c0071b2e97996245dfa1d8a54ae31d",
+    "error": null
+  }
+}

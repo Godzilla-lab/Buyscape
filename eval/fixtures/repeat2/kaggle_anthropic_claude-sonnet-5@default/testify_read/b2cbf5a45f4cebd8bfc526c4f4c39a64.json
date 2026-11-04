@@ -1,0 +1,90 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows a Nikon-branded DSLR body labeled 'D7100' on front, placed in front of an original Nikon box, no lens attached.",
+      "Photo 1 shows the same camera held by hand with the lens mount open (no lens), rear body cap sitting beside it, mirror box visible inside.",
+      "Box in background reads 'Nikon D7100' and shows generic retailer packaging markings.",
+      "No batteries, charger, silicone case, memory card, or LCD screen view are visible in either photo.",
+      "No power-on, shutter-fire, or display screen image is shown to confirm the camera is functional.",
+      "Watermarks 'POSTED ON JIJI' and 'MONSY LUV' are overlaid on both images, consistent with a marketplace listing screenshot."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DSLR camera body",
+      "brand": "Nikon",
+      "model": "D7100",
+      "read_from": [
+        "photo 0 front label",
+        "photo 1 front label and box text"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "The camera is working perfectly fine",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows the camera powered on, a sample image, LCD display, or shutter/mirror actuation; mirror is visible but static in photo 1."
+      },
+      {
+        "claim": "Selling with 2 batteries",
+        "verdict": "unverified",
+        "evidence": "No batteries are visible in either photo."
+      },
+      {
+        "claim": "Selling with a silicone case",
+        "verdict": "unverified",
+        "evidence": "No silicone case is visible in either photo; camera appears bare-bodied."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Camera may not power on or have sensor/shutter faults",
+        "proof": "A photo/video of the camera powered on showing the rear LCD menu, plus a test shot or shutter actuation count readout",
+        "if_unproven": "priced as non-working body"
+      },
+      {
+        "risk": "No lens included, affecting usability and value",
+        "proof": "Photo showing a lens attached or included separately",
+        "if_unproven": "priced as body-only, no lens"
+      },
+      {
+        "risk": "Claimed batteries and silicone case not shown, may not be included at handover",
+        "proof": "Photo of the 2 batteries and silicone case laid out next to the camera",
+        "if_unproven": "priced as body and box only, accessories excluded"
+      },
+      {
+        "risk": "Mirror/shutter mechanism or sensor could have dust, fungus, or damage not visible from outside",
+        "proof": "Close-up photo through the lens mount with shutter open, and a sample photo showing image quality",
+        "if_unproven": "priced assuming unverified internal condition, worst case"
+      },
+      {
+        "risk": "Box could be mismatched or reused from a different unit, not proof of authenticity or completeness",
+        "proof": "Photo of the camera's serial number matching the serial number sticker on the box",
+        "if_unproven": "box excluded from value calculation"
+      }
+    ],
+    "proof_requests": [
+      "Video of the camera powering on and displaying a live view or menu on the LCD screen",
+      "A sample photo taken with the camera to confirm sensor/image quality",
+      "Photo of the 2 batteries and silicone case placed next to the camera",
+      "Photo of serial number on camera body matching the box label",
+      "Confirmation and photo of whether a lens is included or sold separately"
+    ],
+    "decision": "price",
+    "reason": "The item is clearly identified as a Nikon D7100 DSLR body, but no functional proof, lens, or listed accessories (batteries, case) are visible, so it must be priced at worst case as a non-working, lens-less body with box only."
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_read",
+    "latency_ms": 19747,
+    "input_tokens": 2927,
+    "output_tokens": 1693,
+    "cost_usd": 0.019625,
+    "replayed": false,
+    "fixture_key": "b2cbf5a45f4cebd8bfc526c4f4c39a64",
+    "error": null
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Blue laptop open, showing Windows 'About' screen with system specs. Intel Core i7, 16GB RAM, NVIDIA GeForce RTX 5060 Laptop GPU. Screen shows 'Alienware 16 Aurora ACH250' under Device name. Keyboard has 'ALIENWARE' branding on the bottom edge. Intel logo on bottom right of keyboard deck.",
+      "Photo 1: Closed laptop lid, blue, with Alienware logo in center. Watermark 'ARMANIPIPS DIGITAL STORE' and 'POSTED ON JIJI'.",
+      "Photo 2: Close-up of Windows 'About' screen. Device name: 'DESKTOP-NAUJURI', Product name: 'Alienware 16 Aurora ACH250'. Processor: Intel(R) Core(TM) i7-240H @ 2.50 GHz. Installed RAM: 16.0 GB. Graphics card: NVIDIA GeForce RTX 5060 Laptop GPU. Storage: 934 GB. Windows 11 Home. Screen shows 'ALIENWARE' on keyboard bezel.",
+      "All photos show a watermark 'ARMANIPIPS DIGITAL STORE' and 'POSTED ON JIJI'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "gaming laptop",
+      "brand": "Alienware",
+      "model": "16 Aurora ACH250",
+      "read_from": [
+        "photo 2 screen: 'Alienware 16 Aurora ACH250' under Product name"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Alienware 16 aurora",
+        "verdict": "supported",
+        "evidence": "Photo 2: 'Alienware 16 Aurora ACH250' is visible under Product name in Windows About screen."
+      },
+      {
+        "claim": "16\" wqxga, 100%srgb display",
+        "verdict": "unverifiable_remote",
+        "evidence": "No screen resolution or color gamut data visible in photos. Display settings not shown. Cannot verify from current images."
+      },
+      {
+        "claim": "intel core 7 240h \u20145.2ghz (max turbo)",
+        "verdict": "contradicted",
+        "evidence": "Photo 2: Processor listed as 'Intel(R) Core(TM) i7-240H @ 2.50 GHz'. Base clock is 2.50 GHz, not 5.2 GHz. Max turbo is not shown, but 5.2 GHz is not visible in the system info. The model is correct, but the clock speed claim is exaggerated."
+      },
+      {
+        "claim": "16gb ram",
+        "verdict": "supported",
+        "evidence": "Photo 2: 'Installed RAM: 16.0 GB' is clearly visible in Windows About screen."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The laptop may have been reflashed or has a non-genuine OS, affecting warranty or performance.",
+        "proof": "A screenshot of the BIOS/UEFI screen showing the model and serial number, or a full system information tool output (like HWiNFO) showing hardware details.",
+        "if_unproven": "Priced as potentially non-genuine or modified, which may reduce value."
+      },
+      {
+        "risk": "The display resolution and color gamut (WQXGA, 100% sRGB) are not verifiable from photos and may be inaccurate.",
+        "proof": "A screenshot of the display settings showing resolution (e.g., 3840x2400) and color profile, or a calibration report.",
+        "if_unproven": "Priced as unknown display quality, which may reduce value for buyers seeking high-end visuals."
+      },
+      {
+        "risk": "The GPU may be underclocked or have performance issues not visible in Task Manager.",
+        "proof": "A benchmark screenshot (e.g., 3DMark, FurMark) showing GPU performance and temperatures.",
+        "if_unproven": "Priced as potentially underperforming, which may reduce value."
+      },
+      {
+        "risk": "The storage may be a lower-tier SSD or have reduced lifespan.",
+        "proof": "A screenshot of CrystalDiskInfo or similar tool showing SSD health, model, and wear level.",
+        "if_unproven": "Priced as unknown storage condition, which may reduce value."
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of BIOS/UEFI showing model and serial number.",
+      "Screenshot of display settings showing resolution and color profile.",
+      "Benchmark screenshot (e.g., 3DMark) showing GPU performance.",
+      "CrystalDiskInfo screenshot showing SSD health and model."
+    ],
+    "decision": "price",
+    "reason": "The laptop is identifiable as an Alienware 16 Aurora ACH250 with 16GB RAM and Intel Core i7-240H. The 5.2GHz max turbo claim is contradicted by the 2.50GHz base clock shown. Display specs are unverifiable. Risks exist but are common in used laptops; the item can be priced at its worst case (e.g., display not WQXGA, GPU not performing at max) and adjusted upward with proof."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 98852,
+    "input_tokens": 2812,
+    "output_tokens": 1193,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "d3f3371923b8b1f54da668ee7885794f",
+    "error": null
+  }
+}

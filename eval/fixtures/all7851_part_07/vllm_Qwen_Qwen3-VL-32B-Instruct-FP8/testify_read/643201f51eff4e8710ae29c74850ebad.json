@@ -1,0 +1,86 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Closed silver HP laptop lid with HP logo centered. Watermark 'VICKY COMPUTERS EMAB' and 'POSTED ON JIJI' visible.",
+      "Photo 1: Open laptop showing keyboard and screen. Keyboard is silver with black keys. HP logo visible on bezel. Laptop is placed on a shelf with other closed laptops stacked below. Watermark present.",
+      "Photo 2: Close-up of keyboard and touchpad. 'Pavilion' written on lower left of keyboard deck. Sticker on right side says 'HP Pavilion', 'Powerful laptop. Thin and light design.', and 'B6'. Another sticker shows 'CORE i5' with '10th Gen' below it. Watermark present."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "Pavilion",
+      "read_from": [
+        "photo 0: HP logo on lid",
+        "photo 2: 'Pavilion' text on keyboard deck and 'HP Pavilion' sticker"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "HP pavilion 15 touchscreen",
+        "verdict": "unverified",
+        "evidence": "Photos show HP Pavilion laptop, but no clear evidence of screen size (15\") or touchscreen capability. No visible touch indicators or screen interaction shown."
+      },
+      {
+        "claim": "10 Generation",
+        "verdict": "supported",
+        "evidence": "Photo 2 shows sticker with 'CORE i5' and '10th Gen' text, confirming 10th generation processor."
+      },
+      {
+        "claim": "8gb ram",
+        "verdict": "unverifiable_remote",
+        "evidence": "RAM amount cannot be confirmed from photos. No system information or BIOS screen shown."
+      },
+      {
+        "claim": "256 SSD",
+        "verdict": "unverifiable_remote",
+        "evidence": "Storage type and size cannot be confirmed from photos. No disk management or system info shown."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Screen is not touchscreen",
+        "proof": "Photo showing screen being touched or a sticker/label indicating touchscreen capability.",
+        "if_unproven": "priced as non-touchscreen, which reduces value"
+      },
+      {
+        "risk": "RAM is less than 8GB or not 8GB",
+        "proof": "Screenshot of system information or BIOS showing RAM amount.",
+        "if_unproven": "priced as 4GB or lower, which reduces value"
+      },
+      {
+        "risk": "Storage is not 256GB SSD or is HDD",
+        "proof": "Screenshot of disk management or system info showing storage type and size.",
+        "if_unproven": "priced as HDD or smaller SSD, which reduces value"
+      },
+      {
+        "risk": "Laptop has physical damage or wear not visible in photos",
+        "proof": "Full 360-degree video or close-up photos of all edges, hinges, and ports.",
+        "if_unproven": "priced with assumption of minor wear, but could be worse"
+      }
+    ],
+    "proof_requests": [
+      "Screenshot of system information showing RAM and storage details.",
+      "Photo or video showing screen being touched to confirm touchscreen.",
+      "Close-up of the bottom of the laptop showing model number or serial sticker.",
+      "Video showing all sides, hinges, and ports for condition assessment."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identifiable as HP Pavilion, and 10th Gen processor is confirmed. However, key claims like touchscreen, 8GB RAM, and 256GB SSD cannot be verified from current photos. These unverified claims directly affect pricing, and without proof, the item cannot be priced accurately. Additional proof is required to confirm specifications and condition."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 67794,
+    "input_tokens": 2368,
+    "output_tokens": 861,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "643201f51eff4e8710ae29c74850ebad",
+    "error": null
+  }
+}

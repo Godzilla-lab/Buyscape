@@ -1,0 +1,68 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0 shows two power banks lying on a concrete floor.",
+      "One power bank is wrapped heavily in masking/cellotape around its middle, obscuring any label or ports.",
+      "The other power bank has a dark plastic casing with visible scuff marks, a faint logo/button area that is not legible, and a small flashlight-style oval opening.",
+      "Two charging cables (blue and green paracord-style) are coiled near the units, not clearly attached to either unit.",
+      "No screen, LED indicator, or brand/model text is legible on either unit.",
+      "Background is a bare floor, consistent with an informal/scrap sale setting."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "power bank (sold as scrap/for parts)",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Scrap power banks for sale",
+        "verdict": "supported",
+        "evidence": "photo 0 shows visibly worn, taped-up casings consistent with non-retail, salvage-grade units"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery cells may be dead, swollen, or unsafe (fire/leak risk) since internals are hidden under tape",
+        "proof": "A photo of the battery cell removed from the casing, or a video of it holding charge/powering a device",
+        "if_unproven": "priced as non-functional / for-parts only"
+      },
+      {
+        "risk": "Charging ports or output ports may be damaged or missing, cables shown may not even belong to these units",
+        "proof": "A close-up photo of each unit's input/output ports and a clip showing a cable actually plugged in and charging a phone",
+        "if_unproven": "priced as no working ports"
+      },
+      {
+        "risk": "Unknown mAh capacity and age, no model number visible to estimate original spec",
+        "proof": "A clear photo of any printed label/model sticker if one exists under the tape",
+        "if_unproven": "priced at lowest generic scrap-capacity assumption"
+      }
+    ],
+    "proof_requests": [
+      "Remove the tape and photograph the unit's label/ports/cells clearly",
+      "A video showing the power bank attempting to charge a phone, with any LED/indicator response",
+      "A photo of the battery cells themselves (swelling, leakage check)"
+    ],
+    "decision": "no_price_data",
+    "reason": "The items are identifiable as scrap power banks but no comparable listings exist to anchor even a worst-case price, and their internal condition cannot be judged from the photo.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 14848,
+    "input_tokens": 2704,
+    "output_tokens": 1236,
+    "cost_usd": 0.014215,
+    "replayed": false,
+    "fixture_key": "1deec420514ec166df945f131a16c574",
+    "error": null
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Multiple coils of electrical wire in red, green, yellow, and black colors.",
+      "Coils are factory-wrapped in clear plastic with printed labels.",
+      "A label on a green coil in photo 0 clearly shows '2.5mm'.",
+      "The brand name on the labels is not clearly legible due to the angle and plastic wrap.",
+      "Watermark 'OJAN GLOBAL ELECTRICAL' is visible across the center of the image."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "2.5mm electrical wire",
+      "brand": null,
+      "model": null,
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "2.5mm",
+        "verdict": "supported",
+        "evidence": "photo 0 label"
+      },
+      {
+        "claim": "py",
+        "verdict": "unverified",
+        "evidence": "The brand name 'PY' is not clearly legible on the packaging in the provided photo."
+      },
+      {
+        "claim": "copper wire",
+        "verdict": "unverifiable_remote",
+        "evidence": "The internal conductor material is hidden by insulation and cannot be verified remotely."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The wire may be Copper Clad Aluminum (CCA) instead of pure copper.",
+        "proof": "A close-up photo of a stripped wire end showing the color of the metal core.",
+        "if_unproven": "priced as CCA"
+      },
+      {
+        "risk": "The coils may be shorter than the standard 100m length.",
+        "proof": "A clear photo of the label showing the stated length in meters.",
+        "if_unproven": "priced as a short or non-standard coil"
+      },
+      {
+        "risk": "The wire gauge may be undersized despite the 2.5mm label.",
+        "proof": "A photo of the wire conductor being measured with a digital micrometer.",
+        "if_unproven": "priced as undersized wire"
+      }
+    ],
+    "proof_requests": [
+      "Clear close-up photo of the label showing the brand name and coil length.",
+      "Photo of the wire core (stripped end) to verify if it is pure copper or CCA."
+    ],
+    "decision": "price",
+    "reason": "The item is identifiable as 2.5mm electrical wire. It can be priced at the worst-case scenario for generic CCA wire until proof of material and brand authenticity is provided."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 18347,
+    "input_tokens": 2367,
+    "output_tokens": 3767,
+    "cost_usd": 0.012485,
+    "replayed": false,
+    "fixture_key": "76b8cc56b7451bb529e82e0524bf7548",
+    "error": null
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Tire wrapped in green plastic with 'BEARWAY' branding.",
+      "Label on the tire identifies it as BEARWAY BW777.",
+      "Size 225/50R18 95V is clearly printed on the label in photo 0.",
+      "Treadwear 440, Traction A, Temperature A ratings are visible on the label.",
+      "The visible tread pattern appears deep and unused.",
+      "Watermarks 'NJ VENTURE' and 'POSTED ON JIJI' are visible on the image."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "tire",
+      "brand": "Bearway",
+      "model": "BW777",
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "225 50 r18",
+        "verdict": "supported",
+        "evidence": "photo 0 label"
+      },
+      {
+        "claim": "brandnew",
+        "verdict": "unverified",
+        "evidence": "The tread looks unused, but the manufacture date (DOT code) is not visible to confirm age."
+      },
+      {
+        "claim": "bearway tire",
+        "verdict": "supported",
+        "evidence": "photo 0 label"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The tire may be old stock (rubber degrades over time regardless of use).",
+        "proof": "A photo of the 4-digit DOT date code on the sidewall.",
+        "if_unproven": "as old stock (over 5 years old)"
+      },
+      {
+        "risk": "Sidewall damage or manufacturing defects hidden by the green wrapping.",
+        "proof": "Photos of both sidewalls with the wrapping removed.",
+        "if_unproven": "as having minor cosmetic sidewall defects"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the 4-digit DOT manufacture date code on the sidewall.",
+      "Photos of the tire unwrapped to inspect the sidewalls for bulges or cracks."
+    ],
+    "decision": "price",
+    "reason": "The tire's brand, model, and size are clearly visible on the manufacturer's label. It can be priced as a single unit, though the lack of a DOT code means it must be priced as old stock."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 7971,
+    "input_tokens": 2358,
+    "output_tokens": 1434,
+    "cost_usd": 0.005481,
+    "replayed": false,
+    "fixture_key": "2f604fd5642994477c5f90d67234eaa7",
+    "error": null
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a rectangular solar panel with a white frame and grid of dark photovoltaic cells, leaning against a blue wall. The surface is visibly dirty and dusty, with a dark, irregular stain or shadow across the center.",
+      "Photo 1 shows the back of the same panel, which is white and tiled. A label is affixed to it, with text that appears to read 'Canadian Solar' and includes a barcode and certification marks (CE, etc.). A black cable with a connector is attached to the side. The panel appears to be in a workshop or storage area.",
+      "The label in photo 1 is partially legible; the brand 'Canadian Solar' is readable, but the model number and power rating are not clearly visible due to angle and resolution.",
+      "The panel has a white frame and appears to be a standard crystalline silicon type, with visible busbars and grid lines on the front."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "solar panel",
+      "brand": "Canadian Solar",
+      "model": null,
+      "read_from": [
+        "photo 1 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "High-quality Canadian 300W single solar panel",
+        "verdict": "unverified",
+        "evidence": "The brand 'Canadian Solar' is visible in photo 1, but the power rating (300W) is not legible on the label. The 'high-quality' claim cannot be verified from photos alone."
+      },
+      {
+        "claim": "in excellent condition",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 shows significant dirt, dust, and a large dark stain or shadow across the surface, indicating poor condition. The back in photo 1 shows some wear and a small hole or damage near the cable entry point."
+      },
+      {
+        "claim": "Designed for reliable power",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a functional claim that cannot be verified from photos alone. The panel may be damaged or non-functional despite appearance."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The panel may be damaged or non-functional due to visible surface dirt, stains, and potential internal damage.",
+        "proof": "A close-up photo of the label showing the model and power rating, plus a video of the panel under sunlight with a multimeter reading voltage and current.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The 300W power rating is unverified; the actual wattage may be lower.",
+        "proof": "A clear, close-up photo of the label showing the model number and power rating.",
+        "if_unproven": "priced as a lower-wattage panel (e.g., 250W or 270W)"
+      },
+      {
+        "risk": "The panel may have internal damage or broken cells not visible from the outside.",
+        "proof": "A video of the panel under direct sunlight with a thermal camera or a multimeter test showing output.",
+        "if_unproven": "priced as potentially defective"
+      }
+    ],
+    "proof_requests": [
+      "A clear, close-up photo of the label on the back showing the model number and power rating.",
+      "A video of the panel under direct sunlight with a multimeter connected, showing voltage and current output.",
+      "A close-up photo of the front surface to check for cracks or broken cells."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The brand is identifiable as Canadian Solar, but the power rating and condition claims are unverified or contradicted by visible dirt and stains. The panel's functionality and actual wattage cannot be confirmed without further proof. The risks of damage or lower output require additional evidence before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 68428,
+    "input_tokens": 2284,
+    "output_tokens": 843,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "769e44a1c6697eb8fb54c41dc50731ee",
+    "error": null
+  }
+}

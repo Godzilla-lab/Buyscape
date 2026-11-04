@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "A black bicycle with blue fenders is shown in three photos.",
+      "The frame has a white decal with the text 'HIGHWAY DEADLY' visible in photo 0 and photo 2.",
+      "The bike has a front suspension fork, drop handlebars, and disc brakes.",
+      "The tires are black with a yellow sidewall.",
+      "The rear wheel has a derailleur and multiple gears; the chain appears intact.",
+      "The front wheel has a disc brake and a green plastic ring around the hub, possibly a lock or cover.",
+      "The bike is leaning against a wall on a tiled surface.",
+      "There is visible wear on the frame, especially near the seat post and top tube, with chipped paint and scuffs.",
+      "The handlebars have black grips and brake levers; no visible damage to them.",
+      "No visible damage to the wheels or spokes, but the rear hub area has a green object that may be a lock or cover."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "bicycle",
+      "brand": "HIGHWAY DEADLY",
+      "model": null,
+      "read_from": [
+        "photo 0 frame decal",
+        "photo 2 frame decal"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Nice bike, it's in a perfect condition",
+        "verdict": "contradicted",
+        "evidence": "Photo 0 and photo 2 show visible paint chipping and scuffs on the frame, especially near the seat post and top tube, which contradicts 'perfect condition'."
+      },
+      {
+        "claim": "everything is intact",
+        "verdict": "unverified",
+        "evidence": "The chain, wheels, and brakes appear intact, but internal components (e.g., bottom bracket, headset, cables) and full functionality cannot be verified from photos alone."
+      },
+      {
+        "claim": "you can check it out before payment",
+        "verdict": "unverifiable_remote",
+        "evidence": "This is a logistical claim about inspection; cannot be verified from photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Hidden mechanical damage or wear in the drivetrain, brakes, or frame (e.g., cracks, seized bearings, worn cables).",
+        "proof": "Close-up video or photos of the bottom bracket, headset, brake calipers, cable housing, and frame joints under stress or movement.",
+        "if_unproven": "Priced as potentially non-functional or requiring repairs."
+      },
+      {
+        "risk": "The green object on the rear hub may be a lock or cover hiding damage or a missing part.",
+        "proof": "Photo of the rear hub without the green object, showing the axle and freehub body.",
+        "if_unproven": "Priced as possibly compromised or non-standard."
+      },
+      {
+        "risk": "Frame damage not visible in photos, such as cracks or bends, especially near the seat tube or head tube.",
+        "proof": "Photo of the frame from multiple angles, including under light to check for stress lines or dents.",
+        "if_unproven": "Priced as potentially unsafe or structurally compromised."
+      }
+    ],
+    "proof_requests": [
+      "Close-up photos of the bottom bracket, headset, and frame joints.",
+      "Photo of the rear hub without the green object.",
+      "Video of the bike being pedaled or shifted to check for smooth operation.",
+      "Photo of the front and rear brakes engaged to check for alignment and pad wear."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The bike's condition is not fully verifiable from the current photos. Visible wear contradicts the 'perfect condition' claim, and critical mechanical components are not shown. Proof of functionality and structural integrity is needed before pricing."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 69287,
+    "input_tokens": 2784,
+    "output_tokens": 835,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "5a8fa8538c92956396b4fa24ca442835",
+    "error": null
+  }
+}

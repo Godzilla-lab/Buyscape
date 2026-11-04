@@ -1,0 +1,68 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Black UPS with a blue vertical strip on the front panel.",
+      "The brand 'BLUE GATE' is visible at the top of the front panel.",
+      "Front panel features a circular power button and three indicator LEDs.",
+      "A power cable with a standard 3-pin plug is visible in photo 1.",
+      "The casing appears to be in used condition with some surface dust.",
+      "No model number, VA rating, or specification sticker is visible."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "UPS",
+      "brand": "BLUE GATE",
+      "model": null,
+      "read_from": [
+        "photo 0",
+        "photo 1"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "UPS available",
+        "verdict": "supported",
+        "evidence": "photo 0 shows a Blue Gate brand UPS."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The capacity (VA rating) is unknown, which significantly impacts value.",
+        "proof": "A photo of the manufacturer's sticker on the back or bottom of the unit.",
+        "if_unproven": "as the base 650VA model"
+      },
+      {
+        "risk": "The internal lead-acid battery may be dead or have very low runtime.",
+        "proof": "A video showing the UPS powering a load (e.g., a fan or lamp) while the input plug is disconnected.",
+        "if_unproven": "as having a dead battery requiring immediate replacement"
+      },
+      {
+        "risk": "The unit may not power on or have faulty internal circuitry.",
+        "proof": "A photo of the unit with the status LEDs illuminated while plugged in.",
+        "if_unproven": "as non-functional/for parts"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the specification sticker on the back or bottom showing the model and VA rating.",
+      "Photo of the device powered on with indicator lights visible.",
+      "Video demonstrating the battery backup capability under load."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and capacity (VA) are not visible in the photos. Since Blue Gate produces units ranging from 650VA to much larger capacities, a price cannot be determined without identifying the specific model."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 11789,
+    "input_tokens": 3414,
+    "output_tokens": 2120,
+    "cost_usd": 0.008067,
+    "replayed": false,
+    "fixture_key": "4b248ace781508ac5a4c2ce7dd56e639",
+    "error": null
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: Silver laptop open, screen showing Windows System Information window. Watermark 'TECHDYNASTY' visible. Keyboard has black keys, touchpad below. Intel Core i7 sticker on palm rest.",
+      "Photo 1: Same laptop from different angle, screen still showing System Information. Watermark present. Right side ports visible: USB, HDMI, etc.",
+      "Photo 2: Front view of laptop, screen showing System Information. Watermark present. Intel Core i7 sticker visible on palm rest. Model name '840 G6' not visible on device.",
+      "All photos show the same Windows System Information window, which lists: Processor: Intel(R) Core(TM) i7-8550U CPU @ 1.80GHz, Installed Memory (RAM): 16.0 GB, System Type: 64-bit Operating System, x64-based processor, Product Name: HP 840 G6.",
+      "No physical branding (HP logo) visible on the laptop body in any photo.",
+      "No fingerprint scanner or Face ID hardware visible in any photo.",
+      "Screen appears to be 14-inch, typical for this model."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "laptop",
+      "brand": "HP",
+      "model": "840 G6",
+      "read_from": [
+        "photo 2 screen: 'Product Name: HP 840 G6'"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "840 G6 core i7",
+        "verdict": "supported",
+        "evidence": "photo 2 screen: 'Product Name: HP 840 G6' and 'Processor: Intel(R) Core(TM) i7-8550U CPU @ 1.80GHz'"
+      },
+      {
+        "claim": "Ram: 16GB",
+        "verdict": "supported",
+        "evidence": "photo 2 screen: 'Installed Memory (RAM): 16.0 GB'"
+      },
+      {
+        "claim": "ROM:512",
+        "verdict": "unverified",
+        "evidence": "System Information window does not show storage capacity. No SSD or HDD size visible in any photo."
+      },
+      {
+        "claim": "8th Gen",
+        "verdict": "supported",
+        "evidence": "photo 2 screen: 'Processor: Intel(R) Core(TM) i7-8550U CPU @ 1.80GHz' \u2014 the '8' in 8550U indicates 8th Gen."
+      },
+      {
+        "claim": "Face id",
+        "verdict": "unverified",
+        "evidence": "No visible Face ID hardware (e.g., IR camera, notch) in any photo. Screen bezel is uniform, no cutout for Face ID."
+      },
+      {
+        "claim": "Fingerprint Scanner",
+        "verdict": "unverified",
+        "evidence": "No fingerprint scanner visible on keyboard or touchpad in any photo. Touchpad is plain, no sensor visible."
+      },
+      {
+        "claim": "450k",
+        "verdict": "unverifiable_remote",
+        "evidence": "Price claim; cannot verify without market data or proof of transaction."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Storage capacity is not confirmed; seller claims 512GB ROM but no evidence in photos.",
+        "proof": "Photo of Disk Management or System Information showing storage size, or a photo of the SSD label.",
+        "if_unproven": "Priced as having unknown storage, which could be 256GB or less \u2014 lower value."
+      },
+      {
+        "risk": "Fingerprint scanner and Face ID may not be present or functional.",
+        "proof": "Close-up photo of the touchpad or top bezel showing fingerprint sensor or IR camera.",
+        "if_unproven": "Priced as lacking biometric features \u2014 lower value."
+      },
+      {
+        "risk": "Battery health or condition not shown; may be degraded.",
+        "proof": "Photo of battery health report or a video showing battery life under load.",
+        "if_unproven": "Priced as having unknown battery condition \u2014 lower value."
+      },
+      {
+        "risk": "Laptop may have been refurbished or have hidden damage (e.g., screen, hinges).",
+        "proof": "Video showing full 360-degree view, screen test, and hinge movement.",
+        "if_unproven": "Priced as potentially damaged \u2014 lower value."
+      }
+    ],
+    "proof_requests": [
+      "Photo of Disk Management or System Information showing storage capacity.",
+      "Close-up photo of the touchpad and top bezel to confirm fingerprint scanner and Face ID hardware.",
+      "Video showing full 360-degree view, screen test, and hinge movement.",
+      "Photo of battery health report or a video showing battery life under load."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model and core specs are confirmed, but critical claims like storage size, biometric features, and condition are unverified. Without proof, the item cannot be priced accurately due to hidden risks that affect value."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 29466,
+    "input_tokens": 2404,
+    "output_tokens": 1153,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "de5899e77a06b4b03860ec79c57c1ae3",
+    "error": null
+  }
+}

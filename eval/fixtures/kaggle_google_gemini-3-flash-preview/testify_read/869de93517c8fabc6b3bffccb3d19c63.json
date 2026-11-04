@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "google/gemini-3-flash-preview",
+  "response": {
+    "observations": [
+      "Photo 0 shows two retail boxes for a Black & Decker microwave.",
+      "Brand 'BLACK & DECKER' is clearly visible on the boxes in photo 0.",
+      "Model number 'MZ3000PG-B5' is visible on the bottom right of the boxes in photo 0.",
+      "Specifications '900W' and '30L Microwave Oven with Grill' are printed on the boxes.",
+      "The boxes appear to be in a commercial or storage setting with a watermark 'NOVEL GLOBAL KITCHEN LTD'.",
+      "The actual microwave unit is not shown, only the packaging."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "microwave oven with grill",
+      "brand": "Black & Decker",
+      "model": "MZ3000PG-B5",
+      "read_from": [
+        "photo 0 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "30L microwave Oven with grill",
+        "verdict": "supported",
+        "evidence": "photo 0 box text"
+      },
+      {
+        "claim": "900w",
+        "verdict": "supported",
+        "evidence": "photo 0 box text"
+      },
+      {
+        "claim": "Digital",
+        "verdict": "supported",
+        "evidence": "photo 0 box image of control panel"
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The box may be empty, or the item inside may be damaged or a different model.",
+        "proof": "Photo of the actual unit out of the box.",
+        "if_unproven": "as missing or non-functional"
+      },
+      {
+        "risk": "The unit may not be functional despite being in a box.",
+        "proof": "Video of the unit powered on and heating a cup of water.",
+        "if_unproven": "as not working"
+      },
+      {
+        "risk": "The item may be a grey market import or lack local warranty support.",
+        "proof": "Photo of the manufacturer's rating plate on the back of the unit.",
+        "if_unproven": "as generic 30L microwave"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the actual microwave oven out of the box.",
+      "Photo of the rating plate on the back of the unit showing the model and serial number.",
+      "Video of the unit powered on and successfully heating water."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "Only photos of the retail packaging are provided. The actual condition, existence, and specific model of the item cannot be verified without seeing the unit itself."
+  },
+  "meta": {
+    "provider": "kaggle:google/gemini-3-flash-preview",
+    "model": "google/gemini-3-flash-preview",
+    "task": "testify_read",
+    "latency_ms": 7283,
+    "input_tokens": 2397,
+    "output_tokens": 1610,
+    "cost_usd": 0.006029,
+    "replayed": false,
+    "fixture_key": "869de93517c8fabc6b3bffccb3d19c63",
+    "error": null
+  }
+}

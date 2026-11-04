@@ -1,0 +1,71 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0: A silver iPhone with a triple-lens camera module in a square bump, held in hand. The back is clean, no visible damage. The seller's watermark 'DANNY TUNEZ GADGETS' is visible.",
+      "Photo 1: The iPhone's screen shows the 'Battery Health' settings. Maximum Capacity is 88%, Cycle Count is 995, Manufacture Date is November 2024, First Use is January 2025. The screen is clear, no cracks.",
+      "Photo 2: Side view of the iPhone showing the volume buttons and power button. The side appears intact, no visible bends or dents. The same watermark is present."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "iPhone",
+      "brand": "Apple",
+      "model": "iPhone 15 Pro Max",
+      "read_from": [
+        "photo 0 camera module design (three lenses in square bump, no visible LiDAR sensor, which matches iPhone 15 Pro Max)",
+        "photo 2 side profile (flat edges, no notch on side, consistent with iPhone 15 Pro Max)"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "WiFi only",
+        "verdict": "unverified",
+        "evidence": "No photo shows the settings or SIM tray to confirm if it is WiFi-only. The model is typically cellular, so this claim needs verification."
+      },
+      {
+        "claim": "Excellent battery capacity",
+        "verdict": "contradicted",
+        "evidence": "Photo 1 shows 'Maximum Capacity' at 88%, which is not excellent. It is below 90%, indicating moderate degradation. The claim is misleading."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The phone may be a refurbished or used unit with a replaced battery or tampered battery health data.",
+        "proof": "A video showing the phone being powered on, with the battery health screen displayed, and then a screenshot of the 'Settings > General > About' page showing the serial number and model number, to verify authenticity.",
+        "if_unproven": "Priced as a used phone with degraded battery (88% capacity), which reduces value significantly."
+      },
+      {
+        "risk": "The 'Manufacture Date' of November 2024 and 'First Use' of January 2025 is suspicious \u2014 it suggests the phone was manufactured after it was first used, which is impossible.",
+        "proof": "A video showing the phone's 'Settings > General > About' screen with the serial number and model number, and then a check of the serial number on Apple's official website to verify the true manufacture date.",
+        "if_unproven": "Priced as a potentially fake or tampered device, which could be a major devaluation or fraud."
+      },
+      {
+        "risk": "The phone may be a 'WiFi-only' model, but the seller did not confirm this with a photo of the settings or SIM tray.",
+        "proof": "A photo or video showing the 'Settings > Cellular' screen or the physical SIM tray being opened to confirm no SIM slot or cellular capability.",
+        "if_unproven": "Priced as a cellular model, which is more valuable than WiFi-only, so the price is overestimated if it is actually WiFi-only."
+      }
+    ],
+    "proof_requests": [
+      "Video showing the phone's 'Settings > General > About' screen with serial number and model number.",
+      "Video showing the 'Settings > Cellular' screen to confirm WiFi-only status.",
+      "Video showing the SIM tray being opened to confirm no SIM slot.",
+      "Video showing the phone being powered on and the battery health screen displayed."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The model is identifiable as an iPhone 15 Pro Max, but critical claims (WiFi-only, excellent battery) are unverified or contradicted. The battery health data is suspicious (88% capacity, impossible manufacture date). Without proof of authenticity and configuration, the item cannot be priced accurately and may be fraudulent."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 69389,
+    "input_tokens": 3230,
+    "output_tokens": 897,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "f1287adf32dc1d83251b865f6d284804",
+    "error": null
+  }
+}

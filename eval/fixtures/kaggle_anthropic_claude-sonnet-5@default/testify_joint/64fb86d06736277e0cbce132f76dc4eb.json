@@ -1,0 +1,80 @@
+{
+  "task": "testify_joint",
+  "prompt_version": "testify_joint.v1",
+  "model": "anthropic/claude-sonnet-5@default",
+  "response": {
+    "observations": [
+      "Photo 0: Close-up of a black lens barrel, front ring text reads 'AF-S NIKKOR' and '50mm 1:8G', mount area shows 'Nikon' branding, aperture ring visible.",
+      "Photo 1: Same lens held in a hand, text again reads 'AF-S NIKKOR 50mm 1:8G', 'Nikon' engraving visible, watermark 'OLAJIDE AMOS BISHOP' overlaid.",
+      "Photo 2: Lens lying with a lens hood and a second lens cap, same 'AF-S NIKKOR 50mm 1:8G' and 'Nikon' text clearly legible on the barrel.",
+      "No box, no receipt, no serial number plate, no caps shown separately with model info, no test/sample image shown.",
+      "A second lens body appears in the background of photos 0-2, possibly the item being advertised or a different lens entirely."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "camera lens",
+      "brand": "Nikon",
+      "model": "AF-S NIKKOR 50mm f/1.8G",
+      "read_from": [
+        "photo 0",
+        "photo 1",
+        "photo 2"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "American used lens, clean and pure like new",
+        "verdict": "unverifiable_remote",
+        "evidence": "Origin and usage history cannot be confirmed from photos; cosmetic condition looks clean but 'like new' functional claim cannot be tested remotely."
+      },
+      {
+        "claim": "It is the 60mm one",
+        "verdict": "contradicted",
+        "evidence": "All three photos clearly show 'AF-S NIKKOR 50mm 1.8G' engraved on the lens barrel, not 60mm."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Seller's stated focal length (60mm) does not match the engraved focal length (50mm) seen in every photo, suggesting a possible bait-and-switch or mismatched listing.",
+        "proof": "A photo of the exact lens to be shipped, with focal length and serial number clearly legible, matched to a video confirming autofocus and aperture function.",
+        "if_unproven": "treat as misrepresented item; price only the lens as actually shown (50mm f/1.8G), not as a 60mm lens"
+      },
+      {
+        "risk": "Functional condition (autofocus motor, aperture blades, glass clarity/fungus) cannot be verified from static photos.",
+        "proof": "A short video showing autofocus racking, aperture blades closing/opening, and a clear shot through the glass against light.",
+        "if_unproven": "priced as not confirmed working, i.e. worst case functional condition"
+      },
+      {
+        "risk": "No serial number or box shown, so authenticity (genuine Nikon vs third-party clone) cannot be confirmed.",
+        "proof": "Close-up photo of the serial number and mount contacts, compared to Nikon's official serial format.",
+        "if_unproven": "priced as unverified authenticity, not assumed genuine premium stock"
+      },
+      {
+        "risk": "A second lens visible in the background photos is unexplained; unclear if it is included or a different unit altogether, causing confusion about what is actually for sale.",
+        "proof": "A single clear photo of only the item being sold, with all accessories laid out together.",
+        "if_unproven": "price only the single lens matching the engraved 50mm 1.8G, exclude the background item"
+      }
+    ],
+    "proof_requests": [
+      "Please re-confirm the exact focal length and show a clear photo of the engraving alongside the seller's claim of '60mm' \u2014 the photos show '50mm 1.8G'.",
+      "Send a short video of the lens autofocus and aperture blades in action.",
+      "Photo of the serial number and front/rear element close-up for fungus/scratch check.",
+      "Clarify what is included in the sale (hood, caps, second lens visible in background)."
+    ],
+    "decision": "fraud_suspected",
+    "reason": "The seller's core claim that this is a '60mm' lens is directly contradicted by all three photos, which clearly show 'AF-S NIKKOR 50mm 1.8G' engraved on the lens; this mismatch between the advertised model and the photographed model is a classic sign of a misleading or bait-and-switch listing, so a reliable price cannot be assigned until the discrepancy is resolved.",
+    "price_pick": null
+  },
+  "meta": {
+    "provider": "kaggle:anthropic/claude-sonnet-5@default",
+    "model": "anthropic/claude-sonnet-5@default",
+    "task": "testify_joint",
+    "latency_ms": 28635,
+    "input_tokens": 5589,
+    "output_tokens": 2636,
+    "cost_usd": 0.033985,
+    "replayed": false,
+    "fixture_key": "64fb86d06736277e0cbce132f76dc4eb",
+    "error": null
+  }
+}

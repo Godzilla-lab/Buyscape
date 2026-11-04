@@ -1,0 +1,72 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black plastic pedal dustbin wrapped in clear plastic.",
+      "The bin has a red lid and a red pedal at the bottom front.",
+      "A label on the front reads 'CAPTAIN CLEAN' with a cartoon character and text: 'Ergonomically Modern Design', 'Dustproof & Sturdy', 'Easy Functional Foot Pedal Bin'.",
+      "The label also states 'AVAILABLE IN 4 SIZES: 10/20/30/40 Ltr.'",
+      "The bin is placed on a black surface with embossed text 'NO HOT ASHES AND...'.",
+      "The background shows a corrugated metal wall and some plastic sheeting."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "pedal dustbin",
+      "brand": "Captain Clean",
+      "model": null,
+      "read_from": [
+        "photo 0 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Pedal dustbin (waste bin). Specifically, it\u2019s a foot-operated trash can\u2014you press the red pedal at...",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows a red pedal at the base and a label describing it as a 'foot pedal bin'."
+      },
+      {
+        "claim": "Available in 4 sizes: 10/20/30/40 Ltr.",
+        "verdict": "unverified",
+        "evidence": "The label in photo 0 states this, but the actual size of this unit is not specified. The photo does not show a size indicator or capacity marking on the bin itself."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The bin may be damaged or defective under the plastic wrap, such as cracks, dents, or a broken pedal mechanism.",
+        "proof": "A close-up photo of the pedal mechanism and the body of the bin without the plastic wrap, showing the pedal's movement and the bin's surface condition.",
+        "if_unproven": "priced as potentially damaged or non-functional"
+      },
+      {
+        "risk": "The lid may not seal properly or may be loose, compromising the 'dustproof' claim.",
+        "proof": "A photo showing the lid being pressed down or closed, demonstrating a tight seal.",
+        "if_unproven": "priced as possibly not dustproof"
+      },
+      {
+        "risk": "The bin may be a lower capacity than advertised (e.g., 10L instead of 30L or 40L), affecting its value.",
+        "proof": "A photo showing the bin's capacity marking or a comparison with a known object (like a 1L bottle) to estimate volume.",
+        "if_unproven": "priced as smallest available size (10L) until proven otherwise"
+      }
+    ],
+    "proof_requests": [
+      "A photo of the bin without the plastic wrap, showing the pedal mechanism and body condition.",
+      "A photo of the lid being closed to show seal quality.",
+      "A photo showing the capacity marking or a size comparison to confirm the actual volume."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "The item is identifiable as a Captain Clean pedal dustbin, but key details like actual size, condition, and functionality are hidden under plastic wrap. Without proof of these, the price cannot be confidently set, and risks like damage or incorrect size must be accounted for."
+  },
+  "meta": {
+    "provider": "vllm:Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "model": "Qwen/Qwen3-VL-32B-Instruct-FP8",
+    "task": "testify_read",
+    "latency_ms": 60721,
+    "input_tokens": 1750,
+    "output_tokens": 759,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "929bb266216e7f991b4f32ee4987ffe5",
+    "error": null
+  }
+}
