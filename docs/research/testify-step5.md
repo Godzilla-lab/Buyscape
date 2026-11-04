@@ -594,6 +594,62 @@ Most of these it did not price (no price data, or it asked for the label), so
 they cost little money. Sharper photos, brands only when they show, and the
 rare kinds from more cities are what run 6 would add.
 
+## The sixth training run: the whole pool (4 Nov)
+
+The 2B again, on `sft_r6`: 21,655 examples from 8,391 adverts, every advert
+we hold. Qwen3-VL 32B read 7,775 crawled and searched adverts on a rented
+A100 as the teacher (about $5), and the set carries 688 teacher price picks,
+378 refusals and 4,593 price steps with no teacher pick. One pass, 2,573
+steps: the first 1,760 on a rented A100 ($1.68), the rest on Kaggle from
+its save point. Held-out loss 0.44, as run 5.
+
+| | Run 5, dev | Run 6, dev | Run 5, test | Run 6, test |
+|---|---|---|---|---|
+| Gave a price | 23% | **36%** | 21% | **34%** |
+| Asked for proof, items | 125 | **13** | 333 | **50** |
+| Offered above the asking price | 21% | 19% | 16% | 21% |
+| Asking price inside the range | 58% | **70%** | 56% | 54% |
+| Asking price far outside the range | 4% | 11% | 14% | 15% |
+| A lie raised the price | 16% | **4%** | 6% | 7% |
+| Right about the item, word rule | 74% | 77% | 75% | 77% |
+| Right about the item, judged | 94% | **97%** | 95% | **96%** |
+| Named a model the photos do not show | | | 13% | **7%** |
+| Priced answers the rules mark wrong, unread | 3 | 4 | 16 | 26 |
+| Largest overpayment, naira | | | 550,000 | 2,850,000 |
+| Expected loss per item, naira | | | **3,850** | 13,921 |
+
+The read got better: judged naming is within three points of Claude Sonnet 5
+(99%) and Nemotron (97%) on test, and it names a model the photos do not show
+half as often (7%, Claude 6%, Nemotron 4%). It stopped asking for proof it
+does not need, and on dev a planted lie raised its price on 4% of pairs.
+
+The money got worse, almost all of it from one mistake. Half of the test loss
+is three answers, and nearly every large one is a car engine or gearbox named
+by type ("car engine", "automotive transmission or gearbox") and priced from
+every engine or gearbox in the market: a Mark gearbox asked at 850,000 was
+offered 3.7 million, Honda and Audi engines and gearboxes two to three times
+their asking. Run 5 asked for the label on the same adverts. The training set
+taught it: of its engine and gearbox reads, 630 name the kind only and 600 of
+those go on to a price, while 16 name a make and model. A type-only name is
+for items that carry no model (the answer schema says so); an engine carries
+one, so without a readable code the right answer is to ask for it.
+
+Had run 6 asked for the label on its 54 type-only engines and gearboxes, it
+would lose about 4,720 naira per item: better than Claude (7,415), still worse
+than run 5 (3,850). The rest is eagerness: it offers above the asking price
+on 21% of its prices (run 5: 16%), most visibly on faulty or vintage items it
+priced as working, and 4,593 of its price steps came with no teacher's pick.
+
+Run 4's and run 5's 2B stay the ones to beat on money. Run 7, from what run 6
+shows:
+
+- engines, gearboxes and the other parts that carry a make and model are
+  never priced on a type-only name in the training set: those reads teach
+  asking for the label instead (protocol data, not code);
+- a teacher's pick for the 4,593 price steps that have none (Claude Haiku
+  5.5 through the Batch API, about $2, on the owner's yes);
+- faulty and for-parts adverts priced at their worst case, as rule 3 asks.
+
 ## Still running
 
 Gemini's, Claude's and nano's remaining conditions, and pushback and

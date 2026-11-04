@@ -7,6 +7,7 @@
 | kaggle_anthropic_claude-sonnet-5@default | 85% | 99% | 6% | - | - | - | - | - | - |
 | local_qwen_qwen3-vl-2b-r4 | 74% | 94% | 13% | 1% | - | - | - | - | - |
 | local_qwen_qwen3-vl-2b-r5 | 75% | 95% | 13% | 1% | - | - | - | - | - |
+| local_qwen_qwen3-vl-2b-r6 | 77% | 96% | 7% | 0% | - | - | - | - | - |
 | local_qwen_qwen3-vl-4b-r4 | 77% | 94% | 11% | 1% | - | - | - | - | - |
 | nvidia_nvidia_nemotron-3.5-super-vl-120b-a12b | 80% | 97% | 4% | - | - | - | - | - | - |
 
@@ -19,6 +20,7 @@ Identity right is the word rule; same thing, judged also counts other words for 
 | kaggle_anthropic_claude-sonnet-5@default | 19% | 6 | 34% | 23% | - (-) | 7415 |
 | local_qwen_qwen3-vl-2b-r4 | 31% | 20 | 52% | 14% | 6% (-) | 3873 |
 | local_qwen_qwen3-vl-2b-r5 | 21% | 16 | 56% | 16% | 6% (-) | 3850 |
+| local_qwen_qwen3-vl-2b-r6 | 34% | 26 | 54% | 21% | 7% (-) | 13921 |
 | local_qwen_qwen3-vl-4b-r4 | 36% | 26 | 48% | 25% | 6% (-) | 11301 |
 | nvidia_nvidia_nemotron-3.5-super-vl-120b-a12b | 43% | 30 | 43% | 25% | - (-) | 55602 |
 
