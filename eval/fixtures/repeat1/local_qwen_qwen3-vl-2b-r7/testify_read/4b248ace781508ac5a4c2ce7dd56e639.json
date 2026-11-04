@@ -1,0 +1,65 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r7",
+  "response": {
+    "observations": [
+      "Photo 0 shows a black UPS unit with a blue vertical strip on the front panel. The brand 'BLUE GATE' is embossed at the top. There are three indicator lights: green, amber, and red, with symbols above them (possibly for battery, load, and fault). A circular power button is centered in the blue strip.",
+      "Photo 1 shows the same unit from a side angle, with the top view visible. The brand 'BLUE GATE' is again visible. A black power cord with a three-prong plug is attached to the top. The unit appears to be on a tiled floor.",
+      "The unit has a matte black finish with some minor scuffs and dust. No model number or capacity is visible on the front or side in either photo.",
+      "The seller claims it is an UPS, which is consistent with the visual appearance of a battery-backed power supply."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "UPS",
+      "brand": "BLUE GATE",
+      "read_from": [
+        "photo 0 front panel",
+        "photo 1 front panel"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "UPS available",
+        "verdict": "supported",
+        "evidence": "The item is clearly a UPS unit as shown in both photos, with visible power cord and indicator lights typical of such devices."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The UPS may not be functional or may have degraded battery capacity.",
+        "proof": "A video showing the UPS powering a device (e.g., a lamp or fan) and the indicator lights responding correctly.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The unit may be missing essential components (e.g., battery, cables, or manuals).",
+        "proof": "A photo showing the battery compartment open or a close-up of the battery and its condition.",
+        "if_unproven": "priced as incomplete"
+      },
+      {
+        "risk": "The model or capacity is unknown, which affects pricing.",
+        "proof": "A clear photo of the model label or rating plate, usually on the back or bottom of the unit.",
+        "if_unproven": "priced at the lowest common model capacity"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the model label or rating plate on the back or bottom of the unit.",
+      "Video showing the UPS powering a device and indicator lights functioning.",
+      "Close-up photo of the battery compartment and battery condition."
+    ],
+    "decision": "price",
+    "reason": "The item is known from the photos. What they cannot prove is priced at its worst case until the proof asked for below arrives."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r7",
+    "task": "testify_read",
+    "latency_ms": 2909,
+    "input_tokens": 2704,
+    "output_tokens": 492,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "4b248ace781508ac5a4c2ce7dd56e639",
+    "error": null
+  }
+}

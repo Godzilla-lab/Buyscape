@@ -1,0 +1,78 @@
+category: vehicle_part
+version: 1
+display_name: Engine or gearbox
+# An engine or a gearbox carries a make and a code that set its price: a
+# 2.0 TFSI is not a 3.2 V6. Without that code it is never priced by type.
+aliases:
+  - engine
+  - engines
+  - car engine
+  - complete engine
+  - engine block
+  - motor engine
+  - gearbox
+  - gearboxes
+  - gear box
+  - transmission
+  - automatic transmission
+  - manual transmission
+  - engine and gearbox
+  - engines and gearboxes
+  - engine assembly
+  - gearbox assembly
+  - transmission assembly
+shots:
+  - id: code_shot
+    ask: "Write the code {code} on paper and photograph it next to the engine or gearbox."
+    checks: [code_matches, item_in_frame]
+  - id: overview
+    ask: "Two photos showing the whole engine or gearbox from both sides."
+    checks: [whole_item_visible]
+  - id: engine_code
+    ask: "Close-up of the engine or gearbox code: the plate, sticker or number stamped on the block or case."
+    checks: [text_readable]
+    extract: [brand, model, serial]
+  - id: oil_and_ports
+    ask: "Photo of the oil from the dipstick, and of the open ports and connectors."
+    required: false
+    checks: [interior_visible]
+  - id: running_clip
+    ask: "A short clip of it running on a car or a test stand, if it has been tested."
+    kind: clip
+    required: false
+questions:
+  - id: tested
+    ask: "Has it been tested running, and how?"
+    kind: text
+    claim: works
+  - id: complete
+    ask: "Is it complete, with everything attached that it is sold with?"
+    kind: yesno
+    claim: complete
+  - id: origin
+    ask: "Where did it come from: a car in Nigeria, or direct from abroad?"
+    kind: text
+    claim: origin
+claims:
+  - id: works
+    kinds: [works]
+    evidence_slots: [running_clip]
+    worst_case: "assumed it does not run and is bought for parts"
+    pickup_check: "Agent sees it run, or prices it as not working"
+    penalty: 0.5
+  - id: complete
+    kinds: [spec, condition]
+    evidence_slots: [overview, oil_and_ports]
+    worst_case: "assumed parts are missing"
+    pickup_check: "Agent checks every part that was sold with it is there"
+    penalty: 0.3
+  - id: origin
+    kinds: [provenance]
+    evidence_slots: [engine_code]
+    worst_case: "assumed it is a local used part, not direct from abroad"
+    pickup_check: "Agent reads the code on the block against the one quoted"
+    penalty: 0.2
+pickup_protocol:
+  - "Read the code on the block or case against the code quoted. No match, no purchase at that price."
+  - "Pull the dipstick and look at the oil before agreeing a price."
+  - "A part that has not been seen running is bought as not working."

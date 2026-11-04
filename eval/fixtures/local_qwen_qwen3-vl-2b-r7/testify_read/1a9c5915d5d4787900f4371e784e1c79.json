@@ -1,0 +1,62 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r7",
+  "response": {
+    "observations": [
+      "Photo 0 shows a single tire from the side, viewed from the tread side.",
+      "The tire has visible wear and dirt, with some yellow markings on the tread surface.",
+      "The tread pattern is deep and shows signs of use, with uneven wear across the grooves.",
+      "The sidewall is not visible in the photo.",
+      "The tire appears to be a passenger car tire, judging by the tread depth and design."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "tire",
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Tukunbo tire 285 45 r22",
+        "verdict": "unverified",
+        "evidence": "The size '285 45 r22' is not visible in photo 0. The seller's text is not proof; no label or sidewall marking confirms the size."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The tire may be damaged or have internal structural issues (e.g., bulges, cuts, or dry rot) not visible from the tread side.",
+        "proof": "A photo of the sidewall showing the size, brand, and DOT code, plus a close-up of the inner rim area to check for damage.",
+        "if_unproven": "priced as potentially unsafe or unusable"
+      },
+      {
+        "risk": "The tire may be old or have been stored improperly, leading to reduced lifespan or reduced traction.",
+        "proof": "A photo of the DOT code on the sidewall, which includes the manufacturing date (4 digits) and the date code (4 digits).",
+        "if_unproven": "priced as unknown age, which reduces value"
+      },
+      {
+        "risk": "The tire may not be the claimed size (285 45 r22), which would affect fitment and value.",
+        "proof": "A clear photo of the sidewall showing the size and model number.",
+        "if_unproven": "priced as unknown size, which reduces value"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the sidewall showing the size, brand, and DOT code.",
+      "Close-up of the inner rim area to check for damage.",
+      "Photo of the DOT code to verify manufacturing date."
+    ],
+    "decision": "price",
+    "reason": "The item is known from the photos. What they cannot prove is priced at its worst case until the proof asked for below arrives."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r7",
+    "task": "testify_read",
+    "latency_ms": 2498,
+    "input_tokens": 1778,
+    "output_tokens": 456,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "1a9c5915d5d4787900f4371e784e1c79",
+    "error": null
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r7",
+  "response": {
+    "observations": [
+      "Three photos show a used car engine on a paved outdoor surface, likely in a workshop or yard.",
+      "The engine has a black plastic cover with 'PORSCHE' embossed vertically on the side.",
+      "The engine block is black with visible components like the intake manifold, throttle body, and various hoses and belts.",
+      "The engine appears dirty and used, with some grime and wear visible on the components.",
+      "A watermark 'EZE PORSCHE GLOBAL AUTOS' is present on all photos.",
+      "No visible model number or VIN plate is readable on the engine block or cover.",
+      "The seller claims to deal in car spare parts, but the item is clearly a specific engine, not a generic spare part."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car engine",
+      "brand": "PORSCHE",
+      "read_from": [
+        "photo 0 cover",
+        "photo 1 cover",
+        "photo 2 cover"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "We also deals in all kinds of car spare parts",
+        "verdict": "unverifiable_remote",
+        "evidence": "The seller's text is general and not specific to this item. The photos show only one engine, not a full range of spare parts."
+      },
+      {
+        "claim": "Tokunbo, direct from Belgium. Tested and working, no knock, low mileage, never opened.",
+        "verdict": "unverified",
+        "evidence": "No photo shows this; it is the seller's word only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine may be damaged or non-functional",
+        "proof": "A video showing the engine running or a close-up of the cylinder head, oil pan, and internal components to check for cracks or wear.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Engine may not be from the claimed model or may be a counterfeit",
+        "proof": "A clear photo of the engine block with the model number or VIN plate, or a photo of the engine's serial number and casting number.",
+        "if_unproven": "priced as unknown model, which may be lower value"
+      },
+      {
+        "risk": "Engine may have been salvaged from a wrecked or accident-damaged vehicle",
+        "proof": "A photo of the engine's serial number and casting number, or a photo of the vehicle it came from, if available.",
+        "if_unproven": "priced as unknown history, which may reduce value"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of the engine or gearbox code: the plate, sticker or number stamped on the block or case.",
+      "Clear photo of the engine block showing the model number or casting number.",
+      "Video of the engine running or a close-up of the internal components.",
+      "Photo of the engine's serial number and casting number."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "What the item is shows, but not the model that sets its price: no photo shows it clearly enough to read. The shot asked for first would settle it."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r7",
+    "task": "testify_read",
+    "latency_ms": 7505,
+    "input_tokens": 2797,
+    "output_tokens": 568,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "e35aaf04a120a3f70acd57d206c74510",
+    "error": null
+  }
+}

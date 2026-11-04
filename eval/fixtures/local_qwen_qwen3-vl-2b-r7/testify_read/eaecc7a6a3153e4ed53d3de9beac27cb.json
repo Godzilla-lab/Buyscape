@@ -1,0 +1,70 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r7",
+  "response": {
+    "observations": [
+      "Photo 0 shows a stack of approximately 12 to 15 black car batteries on a wooden pallet against a yellow wall.",
+      "The batteries appear dusty and used, with some showing signs of wear or damage.",
+      "Photo 1 is a close-up of a single battery with a blue label and red terminal cap.",
+      "The label in photo 1 clearly reads 'GREEN ENERGY AUTOMOTIVE' and 'GE 60 - 12V 540A (EN)'."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "car battery",
+      "brand": "GREEN ENERGY",
+      "model": "GE 60 - 12V 540A (EN)",
+      "read_from": [
+        "photo 1 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Direct second hand battery available with good warranty",
+        "verdict": "unverifiable_remote",
+        "evidence": "No warranty document or proof is visible in the photos. The term 'direct' is not verifiable from the images."
+      },
+      {
+        "claim": "Available in stock",
+        "verdict": "supported",
+        "evidence": "Photo 0 shows multiple batteries stacked, indicating availability."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Battery may be dead or not hold charge",
+        "proof": "A video showing the battery being tested with a multimeter or a car starting with it.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Battery may have internal damage or sulfation not visible externally",
+        "proof": "A close-up photo of the battery terminals and casing for signs of corrosion or bulging.",
+        "if_unproven": "priced as potentially defective"
+      },
+      {
+        "risk": "Battery may not be genuine or may be a counterfeit",
+        "proof": "A photo of the battery's serial number and a verification from the manufacturer or a trusted source.",
+        "if_unproven": "priced as unverified authenticity"
+      }
+    ],
+    "proof_requests": [
+      "Video of the battery being tested with a multimeter or used in a car.",
+      "Close-up photo of the battery terminals and casing for signs of corrosion or bulging.",
+      "Photo of the battery's serial number and any warranty document."
+    ],
+    "decision": "price",
+    "reason": "The item is known from the photos. What they cannot prove is priced at its worst case until the proof asked for below arrives."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r7",
+    "task": "testify_read",
+    "latency_ms": 2541,
+    "input_tokens": 2048,
+    "output_tokens": 443,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "eaecc7a6a3153e4ed53d3de9beac27cb",
+    "error": null
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r7",
+  "response": {
+    "observations": [
+      "Photo 0 shows an orange gas cylinder with a handle and valve, standing next to a red cylinder with a mesh cage. The orange cylinder has visible scratches and wear.",
+      "Photo 1 shows the same orange cylinder from a slightly different angle, with a red cylinder behind it and a blue cylinder to the right. The orange cylinder appears to be stacked or placed beside the red one.",
+      "Photo 2 is a close-up of the orange cylinder's label. The label is legible and shows '12.5kg' and 'RE POL'. There is also a barcode and other markings. The cylinder shows signs of use, including scratches and minor dents.",
+      "The seller claims '12.5kg Foreign-Used Gas Cylinders \u2013 Strong & Reliable!' and mentions 'Recently tested and certified, no leak, the valve is new.'",
+      "The cylinder in photo 2 appears to be a 12.5kg capacity, as indicated by the label. The brand 'RE POL' is visible on the label.",
+      "The cylinder shows signs of use: scratches, dents, and some discoloration on the paint. The valve appears intact but not clearly inspected for leaks or damage."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "12.5kg gas cylinder",
+      "brand": "RE POL",
+      "model": "12.5kg",
+      "read_from": [
+        "photo 2 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "12.5kg Foreign-Used Gas Cylinders \u2013 Strong & Reliable!",
+        "verdict": "supported",
+        "evidence": "Photo 2 shows '12.5kg' on the label, confirming the capacity. The term 'foreign-used' is not verifiable from photos alone, but the condition (scratches, dents) supports 'used'."
+      },
+      {
+        "claim": "Recently tested and certified, no leak, the valve is new.",
+        "verdict": "unverified",
+        "evidence": "No photo shows this; it is the seller's word only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The cylinder may be damaged internally or have a compromised valve, which could lead to gas leaks or explosion.",
+        "proof": "A close-up video or photo of the valve and cylinder body showing no cracks, dents, or corrosion, and a test for leaks (e.g., soapy water test on the valve).",
+        "if_unproven": "priced as potentially unsafe, with a significant discount for risk"
+      },
+      {
+        "risk": "The cylinder may not be properly certified or may have been tampered with during use.",
+        "proof": "A photo of the cylinder's inspection stamp or certification mark, and a copy of the original purchase or test report.",
+        "if_unproven": "priced as uncertified, with a discount for lack of provenance"
+      },
+      {
+        "risk": "The cylinder may have been previously used for flammable or hazardous materials, posing a safety risk.",
+        "proof": "A photo of the cylinder's serial number and a record of its previous use or contents.",
+        "if_unproven": "priced as potentially hazardous, with a discount for unknown history"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of the rating plate showing the brand, model and capacity.",
+      "Close-up video or photo of the valve and cylinder body showing no damage or corrosion.",
+      "Photo of the inspection stamp or certification mark on the cylinder.",
+      "Photo of the cylinder's serial number and any previous use records."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "What the item is shows, but not the model that sets its price: no photo shows it clearly enough to read. The shot asked for first would settle it."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r7",
+    "task": "testify_read",
+    "latency_ms": 2948,
+    "input_tokens": 2807,
+    "output_tokens": 714,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "21e939ccea009b28f5346b1cfa75708b",
+    "error": null
+  }
+}

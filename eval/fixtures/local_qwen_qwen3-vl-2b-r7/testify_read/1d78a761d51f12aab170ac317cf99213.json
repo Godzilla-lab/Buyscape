@@ -1,0 +1,82 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r7",
+  "response": {
+    "observations": [
+      "Two stacked white plastic IBC tanks with metal frames.",
+      "The tanks show visible dirt, algae, and some discoloration, especially on the lower tank.",
+      "The lower tank has a blue spigot and a white cap on the side.",
+      "The upper tank has a white spigot and a blue cap.",
+      "Both tanks have labels with text and symbols, but the text is not legible.",
+      "The tanks are placed on a concrete floor next to a wall with moss and stains.",
+      "The metal frames show rust and wear, especially at the base and corners.",
+      "The lower tank has a visible label with '22.5kg max' and 'JIT' written on it, but the text is partially obscured.",
+      "The tanks appear to be used and may have been previously filled with water or chemicals."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "IBC tank",
+      "read_from": [
+        "photo 0",
+        "photo 1",
+        "photo 2"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Iron reinforced white plastic tank for sale.",
+        "verdict": "supported",
+        "evidence": "Photo 0, 1, and 2 show IBC tanks with metal frames, consistent with iron reinforcement, and white plastic bodies."
+      },
+      {
+        "claim": "It can be used for fish pond, water storage, diesel...",
+        "verdict": "unverified",
+        "evidence": "The tanks appear clean and intact, but there is no proof of their current condition or suitability for the intended use. The labels are not legible, and the presence of algae and stains suggests prior use."
+      },
+      {
+        "claim": "Food grade, used only once for clean water. No crack, no leak, lids complete.",
+        "verdict": "unverified",
+        "evidence": "No photo shows this; it is the seller's word only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The tanks may have internal contamination or structural damage not visible from the outside.",
+        "proof": "A close-up photo of the inside of the tanks, showing the bottom and walls, and a video of the spigot and cap operation.",
+        "if_unproven": "priced as potentially contaminated or damaged, which reduces value significantly."
+      },
+      {
+        "risk": "The tanks may have been previously used for chemicals or industrial waste, posing health or safety risks.",
+        "proof": "A clear photo of the labels and any warning symbols, and a video showing the tank being filled and drained.",
+        "if_unproven": "priced as potentially hazardous, which reduces value for residential or food-grade use."
+      },
+      {
+        "risk": "The metal frames may be compromised or corroded beyond repair, affecting structural integrity.",
+        "proof": "A close-up photo of the metal frame, especially at the base and corners, showing rust and cracks.",
+        "if_unproven": "priced as potentially unsafe, which reduces value."
+      }
+    ],
+    "proof_requests": [
+      "Close-up of the VIN plate, usually on the dashboard or door.",
+      "Clear photo of the labels on both tanks, especially the warning symbols and capacity.",
+      "Close-up photo of the inside of the tanks, showing the bottom and walls.",
+      "Video of the spigot and cap operation.",
+      "Close-up photo of the metal frame, especially at the base and corners."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "What the item is shows, but not the model that sets its price: no photo shows it clearly enough to read. The shot asked for first would settle it."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r7",
+    "task": "testify_read",
+    "latency_ms": 2886,
+    "input_tokens": 2766,
+    "output_tokens": 666,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "1d78a761d51f12aab170ac317cf99213",
+    "error": null
+  }
+}

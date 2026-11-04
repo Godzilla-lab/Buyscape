@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r7",
+  "response": {
+    "observations": [
+      "Three photos show two engines side by side in a cluttered workshop or garage.",
+      "The engine on the left has a silver valve cover with 'PORSCHE' visible in vertical letters.",
+      "The engine on the right has a black valve cover with 'PORSCHE' visible in vertical letters.",
+      "Both engines have red handwritten markings on the intake manifold: 'F13' and 'F13'.",
+      "The engines appear to be V8 or V10 configurations, with multiple intake runners and complex wiring and hoses.",
+      "The environment is dirty and cluttered, with debris and other parts stacked above the engines.",
+      "No visible model numbers or VINs are readable on the engines.",
+      "The watermark 'EZE PORSCHE GLOBAL AUTOS' is present on all photos, suggesting a seller or brand name, not a genuine Porsche part.",
+      "The seller's text mentions 'all kinds of car spare parts' and 'Tokunbo, direct from Belgium. Tested and working, no knock, low mileage, never opened.'"
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "V8 or V10 car engine",
+      "brand": "PORSCHE",
+      "read_from": [
+        "photo 0 valve cover",
+        "photo 1 valve cover",
+        "photo 2 valve cover"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "We also deals on all kinds of car spare parts",
+        "verdict": "supported",
+        "evidence": "The photos show car engines, which are spare parts, and the seller's text confirms they deal in spare parts."
+      },
+      {
+        "claim": "Tokunbo, direct from Belgium. Tested and working, no knock, low mileage, never opened.",
+        "verdict": "unverified",
+        "evidence": "No photo shows this; it is the seller's word only."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The engines may be non-functional or have hidden mechanical damage (e.g., internal wear, cracked block, seized components).",
+        "proof": "A video showing the engine running, or a close-up of the cylinder head, block, and internal components.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The engines may be stolen or salvaged without proper documentation.",
+        "proof": "Proof of origin, such as a bill of sale, import certificate, or VIN verification.",
+        "if_unproven": "priced as high-risk, with potential legal issues"
+      },
+      {
+        "risk": "The 'F13' markings may be a mislabel or a typo, and the engines may not be from a specific model (e.g., 911, 928, etc.).",
+        "proof": "A clear photo of the engine block or cylinder head with visible model number or VIN.",
+        "if_unproven": "priced as unknown model, which reduces value"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of the engine or gearbox code: the plate, sticker or number stamped on the block or case.",
+      "Clear photo of the engine block or cylinder head showing the model number or VIN.",
+      "Video of the engine running or a close-up of the internal components.",
+      "Proof of origin or import documentation."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "What the item is shows, but not the model that sets its price: no photo shows it clearly enough to read. The shot asked for first would settle it."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r7",
+    "task": "testify_read",
+    "latency_ms": 2498,
+    "input_tokens": 2797,
+    "output_tokens": 647,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "b3234d1bc52e0123291961b04f677f11",
+    "error": null
+  }
+}

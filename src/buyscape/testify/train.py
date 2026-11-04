@@ -198,11 +198,14 @@ def _forget(data: dict, gone: list[str]) -> dict | None:
 
 
 def target(item: Item, reading: dict, label: dict | None = None,
-           keep_code: bool = True, ask: str | None = None) -> tuple[Reading | None, str]:
+           keep_code: bool = True, ask: str | None = None,
+           model_ask: str | None = None) -> tuple[Reading | None, str]:
     """The answer the student should give, and why it was kept or dropped.
     `keep_code` False drops a named read's model code and keeps its brand.
     `ask` is the shot that names the item: a branded advert left with no
-    model asks for it first."""
+    model asks for it first. `model_ask` is the same for any kind whose
+    protocol sets the price by a model (an engine, a gearbox): with no model
+    named it is never priced by type, it asks for that shot."""
     try:
         read = Reading.model_validate(reading)
     except ValidationError:
@@ -250,9 +253,13 @@ def target(item: Item, reading: dict, label: dict | None = None,
             cut, gone = ", name cut to the kind", [read.identity.model]
     if gone and (data := _forget(data, gone)) is None:
         return None, "nothing seen is left once the name is cut"
-    if ask and (label or {}).get("tier") == "branded_electronics" and not data["identity"].get("model"):
+    # On 4 Nov run 6 priced engines and gearboxes named by kind from every
+    # engine in the market (a Mark gearbox asked at 850,000 offered 3.7
+    # million): 600 such reads in its set ended in a price.
+    wanted = (ask if ask and (label or {}).get("tier") == "branded_electronics" else None) or model_ask
+    if wanted and not data["identity"].get("model"):
         data.update(decision="ask_for_proof", reason=NO_MODEL_REASON,
-                    proof_requests=[ask, *(r for r in data["proof_requests"] if r != ask)])
+                    proof_requests=[wanted, *(r for r in data["proof_requests"] if r != wanted)])
         answer = Reading.model_validate(data)
         if money_written(answer):
             return None, "teacher wrote a price"
@@ -503,7 +510,8 @@ def build(cases: list[tuple], rows: list[dict], labels: dict[str, dict], root: P
           facts: dict[str, dict] | None = None, noproof: dict[str, dict] | None = None,
           ask_for=None, pool: list[comps.Comparable] | None = None,
           hashes: dict[str, tuple[str, ...]] | None = None,
-          pick_choice=None, misread: list[str] | None = None) -> tuple[list[dict], dict[str, int]]:
+          pick_choice=None, misread: list[str] | None = None,
+          model_ask=None) -> tuple[list[dict], dict[str, int]]:
     """Training examples from a teacher's clean reads. `cases` holds (item, photos).
     When the teacher named the item, `ocr` checks a model code the title does
     not carry, and the whole name on an advert with no photo check.
@@ -515,7 +523,8 @@ def build(cases: list[tuple], rows: list[dict], labels: dict[str, dict], root: P
     that shot too. `pool`, the training adverts' comparables, adds the price
     step for a priced second-hand answer, for it and for its lied-to twin,
     the same pick for both; `hashes` keep an advert's reposts out of its own
-    list. `pick_choice(request)` is a teacher's answer to the price step, or
+    list. `model_ask(kind)` is the shot that reads the model, for a kind whose
+    protocol prices by model, or None. `pick_choice(request)` is a teacher's answer to the price step, or
     None when it has none; without it the pick is `pick_target`'s.
 
     `rows` may hold several teachers' reads of one advert, in order of trust:
@@ -539,7 +548,8 @@ def build(cases: list[tuple], rows: list[dict], labels: dict[str, dict], root: P
             if label is None:
                 label = ocr_label(row["reading"], photos, ocr, lines=lines)
             keep_code = code_confirmed(identity.get("model"), title, lines)
-        return target(item, row["reading"], label, keep_code, ask_for(item) if ask_for else None)
+        return target(item, row["reading"], label, keep_code, ask_for(item) if ask_for else None,
+                      model_ask(identity.get("kind")) if model_ask else None)
 
     out: list[dict] = []
     tally: dict[str, int] = {}

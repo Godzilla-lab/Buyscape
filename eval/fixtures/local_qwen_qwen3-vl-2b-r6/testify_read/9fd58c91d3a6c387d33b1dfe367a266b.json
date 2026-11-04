@@ -1,0 +1,83 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r6",
+  "response": {
+    "observations": [
+      "Photo 0 shows the front of a Canon EOS 700D box with an EF-S 18-55 IS STM lens.",
+      "Photo 1 shows the back of the same box with a barcode, serial number, and Chinese text.",
+      "Photo 2 shows the side of the box with the Canon logo and EOS 700D text.",
+      "All photos show the box only; no camera or lens is visible outside the packaging.",
+      "The box appears to be in good condition with no visible damage."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "DSLR camera with lens",
+      "brand": "Canon",
+      "model": "EOS 700D",
+      "read_from": [
+        "photo 0 box",
+        "photo 1 box",
+        "photo 2 box"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "Original Canon 700D (UK used)!",
+        "verdict": "unverified",
+        "evidence": "The box is shown, but no proof of origin or usage history is visible. The 'UK used' claim cannot be verified remotely."
+      },
+      {
+        "claim": "18-megapixel APS-C CMOS sensor",
+        "verdict": "supported",
+        "evidence": "Photo 0 box text and photo 2 box text both state '18.0 MEGA PIXELS CMOS'."
+      },
+      {
+        "claim": "DIGIC 5 image processor",
+        "verdict": "supported",
+        "evidence": "Photo 0 box text and photo 2 box text both state 'DIGIC 5'."
+      },
+      {
+        "claim": "ISO range...",
+        "verdict": "unverifiable_remote",
+        "evidence": "The ISO range is not fully visible in the photos; the text is cut off or partially obscured."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The camera or lens may be damaged or non-functional despite the box being intact.",
+        "proof": "A photo of the camera and lens outside the box, showing no damage and a working power-on test.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "The camera may be a refurbished or non-original unit despite the box appearance.",
+        "proof": "A photo of the camera's serial number and a verification of authenticity via Canon's official website or a trusted reseller.",
+        "if_unproven": "priced as unverified authenticity"
+      },
+      {
+        "risk": "The lens may be missing or damaged.",
+        "proof": "A photo of the lens outside the box, showing it is present and undamaged.",
+        "if_unproven": "priced as lens not included"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the camera and lens outside the box, showing no damage and a working power-on test.",
+      "Photo of the camera's serial number and a verification of authenticity via Canon's official website or a trusted reseller.",
+      "Photo of the lens outside the box, showing it is present and undamaged."
+    ],
+    "decision": "price",
+    "reason": "The item is known from the photos. What they cannot prove is priced at its worst case until the proof asked for below arrives."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r6",
+    "task": "testify_read",
+    "latency_ms": 2394,
+    "input_tokens": 2797,
+    "output_tokens": 580,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "9fd58c91d3a6c387d33b1dfe367a266b",
+    "error": null
+  }
+}

@@ -132,7 +132,49 @@ refusals", turned out to be run noise: the honest repeat did the same.
 Risk recall and proof quality are defined but not yet scored: they need
 reviewed risk labels.
 
-## Baselines
+## Results on the test split (4 Nov 2026)
+
+All 679 `test` items, each model answering every honest advert once. The
+money measure is what a buyer would lose per item if it acted on the answers:
+a price costs what the offer is above the seller's asking price, a request
+for proof costs half of a lost deal (2,000 naira, as half of sellers stop
+answering), and a refusal costs the whole lost deal. The asking price stands
+in for the selling price until settled prices exist. "Right about the item,
+judged" counts other words for the same thing ("mountain bike" for
+"Bicycle") through a judge checked against a person's verdicts.
+
+| | Gave a price | Silent wrong | Asking price inside the range | Offered above asking | Right about the item, judged | Named a model the photos do not show | Expected loss per item, naira |
+|---|---|---|---|---|---|---|---|
+| Qwen3-VL 2B, fine-tuned, run 4 | 31% | 20 | 52% | 14% | 94% | 13% | **3,873** |
+| Qwen3-VL 2B, fine-tuned, run 5 | 21% | 16 | 56% | 16% | 95% | 13% | **3,850** |
+| Qwen3-VL 2B, fine-tuned, run 7 | 22% | 24 | 51% | 19% | 95% | 6% | 6,204 |
+| Claude Sonnet 5 | 19% | 6 | 34% | 23% | 99% | 6% | 7,415 |
+| Qwen3-VL 4B, fine-tuned, run 4 | 36% | 26 | 48% | 25% | 94% | 11% | 11,301 |
+| Qwen3-VL 2B, fine-tuned, run 6 | 34% | 26 | 54% | 21% | 96% | 7% | 13,921 |
+| Nemotron 3.5 Super VL | 43% | 30 | 43% | 25% | 97% | 4% | 55,602 |
+
+The fine-tuned models are Qwen3-VL 2B and 4B Instruct with LoRA adapters,
+trained on Kaggle's free GPUs on Buyscape's own training adverts: other
+adverts from 28 states and Abuja, never a benchmark item and never a seller
+who appears in the benchmark, read by Gemini 3 Flash, Nemotron 3.5 Super and
+Qwen3-VL 32B as teachers. Their weights are not released, since they were
+trained on sellers' photos.
+
+A 2B model, small enough to run on one modest GPU, loses about half what
+Claude Sonnet 5 loses per item. The big models name the item better (97 to
+99% judged against 94 to 96%) but price more items than they should: one
+Nemotron answer overpaid by 14.5 million naira. Run 6 shows the trap on the
+other side. It named items as well as any run, but priced engines and
+gearboxes named only by type from every engine on the market, and lost the
+most of any small model. Run 7 taught it to ask for the engine code instead
+and lost less than half as much. Every run, with what changed and why, is in
+`docs/research/testify-step5.md` in the code repository.
+
+Silent wrong answers are priced answers the word rules mark wrong; they have
+not all been read by a person yet, and some are right answers in other words.
+Gemini 3 Flash and GPT-5.4 nano have not yet sat the test split.
+
+## Baselines on the dev split (21 Oct 2026)
 
 On all 231 `dev` items, from Lagos, Abuja, Rivers and Oyo. Each model
 answered the honest advert twice and the lied-to advert once, at no cost:
@@ -187,7 +229,8 @@ its decision on 67 of 231 adverts.
   confirm what survives; items whose links die will be marked, not replaced.
 - **Comparables are few.** Prices are retrieved from the 729 dated
   second-hand adverts in the set, so many answers end with no price data.
-- **231 items** stand behind each baseline, fewer per city. Read the counts.
+- **231 dev items and 679 test items** stand behind the tables, fewer per
+  city. Read the counts.
 
 ## Use
 
@@ -195,7 +238,8 @@ The scoring code is the `buyscape` package in
 [github.com/Godzilla-lab/Buyscape](https://github.com/Godzilla-lab/Buyscape)
 (`buyscape testify`, `buyscape testify-score`); a person or an agent can sit
 the test through `buyscape testify-export` and `buyscape testify-import`.
-Scores for the test split are computed privately on request.
+The test split's answers stay out of the release; a model is scored on it
+on request.
 
 ## Contact
 

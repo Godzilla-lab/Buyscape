@@ -10,6 +10,8 @@
 | local_qwen_qwen3-vl-2b-instruct | 77% | 93% | 54% | 47% | - | - | - | - | 100% |
 | local_qwen_qwen3-vl-2b-r4 | 74% | 95% | 25% | 0% | - | - | - | - | 96% |
 | local_qwen_qwen3-vl-2b-r5 | 74% | 94% | 22% | 1% | - | - | - | - | 95% |
+| local_qwen_qwen3-vl-2b-r6 | 77% | 97% | 6% | 1% | - | - | - | - | 99% |
+| local_qwen_qwen3-vl-2b-r7 | 78% | 98% | 0% | 1% | - | - | - | - | 93% |
 | local_qwen_qwen3-vl-4b-instruct | 81% | 98% | 24% | 2% | - | - | - | - | 99% |
 | local_qwen_qwen3-vl-4b-r3 | 78% | 98% | 23% | 0% | - | - | - | - | 99% |
 | local_qwen_qwen3-vl-4b-r4 | 78% | 97% | 24% | 0% | - | - | - | - | 96% |
@@ -30,6 +32,8 @@ Identity right is the word rule; same thing, judged also counts other words for 
 | local_qwen_qwen3-vl-2b-instruct | 0% | 0 | - | - | - (-) | 1012 |
 | local_qwen_qwen3-vl-2b-r4 | 30% | 8 | 56% | 16% | 6% (0%) | 3600 |
 | local_qwen_qwen3-vl-2b-r5 | 23% | 3 | 58% | 21% | 16% (2%) | 3241 |
+| local_qwen_qwen3-vl-2b-r6 | 36% | 4 | 70% | 19% | 4% (2%) | 7991 |
+| local_qwen_qwen3-vl-2b-r7 | 20% | 5 | 65% | 24% | 8% (2%) | 5203 |
 | local_qwen_qwen3-vl-4b-instruct | 1% | 0 | 0% | 0% | - (0%) | 1100 |
 | local_qwen_qwen3-vl-4b-r3 | 65% | 13 | 49% | 23% | 12% (1%) | 55208 |
 | local_qwen_qwen3-vl-4b-r4 | 41% | 8 | 54% | 22% | 7% (2%) | 14961 |

@@ -1,0 +1,67 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r7",
+  "response": {
+    "observations": [
+      "Photo 0 shows a pile of green corded drills, many with Bosch branding, mixed in with other tools.",
+      "Photo 1 shows a close-up of a green Bosch drill with 'BOSCH' and 'BIT CORE PLUS' visible on the side.",
+      "The drills appear used, with visible wear, scratches, and some damage on the body and cord.",
+      "The seller claims it is a 'Bosch drilling machine' and '220v 13mm', but no photo shows the plug or the drill bit size.",
+      "The cord is coiled and appears to be standard 3-pin, not 13mm as claimed."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "corded drill",
+      "brand": "Bosch",
+      "read_from": [
+        "photo 0",
+        "photo 1"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "220v 13mm bosch drilling machine",
+        "verdict": "unverified",
+        "evidence": "The brand 'Bosch' is visible in both photos, but the voltage '220v' and bit size '13mm' are not visible on any label or part. The cord appears to be standard 3-pin, not 13mm."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The drill may not be 220v as claimed, or may not be compatible with Nigerian 220v power supply.",
+        "proof": "A clear photo of the power plug and any voltage label on the drill.",
+        "if_unproven": "priced as not working or incompatible"
+      },
+      {
+        "risk": "The drill may not have a 13mm bit size, or the bit may be missing or damaged.",
+        "proof": "A photo showing the drill bit attached to the chuck, or a close-up of the chuck and bit size.",
+        "if_unproven": "priced as missing or damaged bit"
+      },
+      {
+        "risk": "The drill may be damaged or non-functional due to visible wear and tear.",
+        "proof": "A video or photo showing the drill in operation, or a close-up of the motor and internal components.",
+        "if_unproven": "priced as not working"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of the label with the model number, usually on the side or back near the motor.",
+      "A clear photo of the power plug and any voltage label on the drill.",
+      "A photo showing the drill bit attached to the chuck, or a close-up of the chuck and bit size.",
+      "A video or photo showing the drill in operation."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "What the item is shows, but not the model that sets its price: no photo shows it clearly enough to read. The shot asked for first would settle it."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r7",
+    "task": "testify_read",
+    "latency_ms": 2454,
+    "input_tokens": 1505,
+    "output_tokens": 538,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "d86491c13b7118b76d6950730b810f65",
+    "error": null
+  }
+}

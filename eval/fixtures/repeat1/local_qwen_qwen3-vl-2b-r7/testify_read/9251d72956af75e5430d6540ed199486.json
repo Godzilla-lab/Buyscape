@@ -1,0 +1,77 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r7",
+  "response": {
+    "observations": [
+      "Blue industrial gear box with a flanged input/output shaft.",
+      "A black manufacturer's identification plate is visible on the side, but the text is illegible.",
+      "The unit is sitting on a dirt or gravel surface.",
+      "A watermark 'CHIDONBEST INDUSTRIAL' is present on the image."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "gear box",
+      "read_from": []
+    },
+    "claims": [
+      {
+        "claim": "Industrial gear box",
+        "verdict": "supported",
+        "evidence": "photo 0"
+      },
+      {
+        "claim": "electric motor",
+        "verdict": "unverified",
+        "evidence": "The seller's text is ambiguous; the photo shows a gearbox, not a motor."
+      },
+      {
+        "claim": "20hp",
+        "verdict": "unverified",
+        "evidence": "The technical specification plate is not legible in photo 0."
+      },
+      {
+        "claim": "ratio 1:10",
+        "verdict": "unverified",
+        "evidence": "The technical specification plate is not legible in photo 0."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The gearbox may be internally damaged or have worn bearings.",
+        "proof": "A video of the gearbox being rotated by hand or a close-up of the internal gears.",
+        "if_unproven": "as non-functional"
+      },
+      {
+        "risk": "The motor may be missing or damaged.",
+        "proof": "A photo of the motor attached to the gearbox.",
+        "if_unproven": "as gearbox only"
+      },
+      {
+        "risk": "The actual power rating may be lower than the claimed 20hp.",
+        "proof": "A clear, legible photo of the manufacturer's specification plate.",
+        "if_unproven": "as a lower capacity gearbox"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of the technical specification plate (usually on the side or back).",
+      "A clear, close-up photo of the manufacturer's plate showing the model and power rating.",
+      "A photo of the motor if it is included in the sale.",
+      "A video showing the gearbox rotating freely."
+    ],
+    "decision": "price",
+    "reason": "The item is known from the photos. What they cannot prove is priced at its worst case until the proof asked for below arrives."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r7",
+    "task": "testify_read",
+    "latency_ms": 2506,
+    "input_tokens": 1570,
+    "output_tokens": 408,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "9251d72956af75e5430d6540ed199486",
+    "error": null
+  }
+}

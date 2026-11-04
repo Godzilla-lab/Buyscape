@@ -355,6 +355,35 @@ def test_a_branded_item_named_without_its_model_asks_for_the_label():
     assert train.target(CAMERA, by_brand, branded)[0].decision == "price"
 
 
+def test_an_engine_named_by_kind_asks_for_its_code_whatever_its_tier():
+    # Run 6 priced type-only engines from every engine in the market (4 Nov).
+    engine = _item("e1", "car engine", "Honda Accord 2004 engine")
+    shot = "Close-up of the engine or gearbox code."
+    said, why = train.target(engine, _read(decision="price", kind="car engine"), {"tier": "small_goods"},
+                             model_ask=shot)
+    assert said.decision == "ask_for_proof" and said.proof_requests[0] == shot and said.reason == train.NO_MODEL_REASON
+    assert why == "kept: ask for the label, no model named"
+    # With no photo check at all, as on crawled adverts, the rule still holds.
+    assert train.target(engine, _read(decision="price", kind="car engine"), model_ask=shot)[0].decision == "ask_for_proof"
+    named = _read(decision="price", status="named", kind="car engine", brand="Honda", model="K24",
+                  read_from=["photo 1 plate"])
+    assert train.target(engine, named, {"identity_from_photos_alone": "named"}, model_ask=shot)[0].decision == "price"
+    # A kind priced by its type keeps its price.
+    assert train.target(FAN, _read(), model_ask=None)[0].decision == "price"
+
+
+def test_the_kind_reaches_the_engine_protocol_and_furniture_keeps_its_type():
+    from buyscape.protocols.schema import load_protocols, resolve
+
+    protocols = load_protocols(Path(__file__).resolve().parents[1] / "protocols")
+    for kind in ("car engine", "automotive transmission or gearbox", "gearbox or transmission assembly",
+                 "used car engines and gearboxes"):
+        assert resolve(protocols, kind).category == "vehicle_part", kind
+    assert not protocols["vehicle_part"].identity_by_type
+    assert resolve(protocols, "2 seater sofa").identity_by_type
+    assert resolve(protocols, "car headlight").category == "generic"
+
+
 def test_the_teachers_pick_is_kept_only_where_a_buyer_would_copy_it():
     from buyscape.testify.answer import PriceChoice, PricePick
 

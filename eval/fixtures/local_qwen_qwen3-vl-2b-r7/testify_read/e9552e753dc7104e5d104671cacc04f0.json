@@ -1,0 +1,79 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r7",
+  "response": {
+    "observations": [
+      "Two hair dryers are shown: one black and one green.",
+      "The black dryer has 'SUPER 10000 1500W' and 'E-KI EVERY GEAR PROFESSIONAL' printed on its body.",
+      "The green dryer is partially wrapped in plastic and appears to be in a used condition.",
+      "Both dryers have coiled power cords and are placed on a patterned fabric surface.",
+      "Photo 2 shows a hand holding the black dryer, indicating it is being presented for sale.",
+      "No visible damage or wear is apparent on the black dryer in the photos, but the green one is wrapped and its condition is not fully visible."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "hair dryer",
+      "brand": "E-KI",
+      "model": "EVERY GEAR PROFESSIONAL",
+      "read_from": [
+        "photo 1 body",
+        "photo 2 body"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "brand new",
+        "verdict": "contradicted",
+        "evidence": "The green hair dryer is wrapped in plastic, and the black one shows no signs of being new; the seller's text contradicts the visual evidence."
+      },
+      {
+        "claim": "fairly used",
+        "verdict": "unverified",
+        "evidence": "The green dryer is wrapped and its condition is not visible; no signs of wear are apparent in the photos, but it may be used."
+      },
+      {
+        "claim": "Selling both together",
+        "verdict": "supported",
+        "evidence": "Both hair dryers are shown in the photos, one black and one green, with their respective cords and packaging."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "The green hair dryer may be damaged or non-functional despite being wrapped.",
+        "proof": "A close-up photo of the green dryer without plastic wrapping, showing the nozzle, handle, and any signs of damage or wear.",
+        "if_unproven": "priced as potentially non-functional or damaged"
+      },
+      {
+        "risk": "The black hair dryer may have internal damage or electrical issues not visible in the photos.",
+        "proof": "A video clip showing the dryer being turned on and tested for airflow and power.",
+        "if_unproven": "priced as possibly not working"
+      },
+      {
+        "risk": "The power cords may be frayed or damaged, posing a safety hazard.",
+        "proof": "A close-up photo of the entire power cord, including the plug and base, showing no fraying or cuts.",
+        "if_unproven": "priced as potentially unsafe"
+      }
+    ],
+    "proof_requests": [
+      "Close-up of the rating plate on the iron to confirm the model and capacity.",
+      "Close-up photo of the green hair dryer without plastic wrapping, showing all parts.",
+      "Video clip showing the black hair dryer being turned on and tested for airflow.",
+      "Close-up photo of the power cord, including the plug and base, to check for damage."
+    ],
+    "decision": "ask_for_proof",
+    "reason": "What the item is shows, but not the model that sets its price: no photo shows it clearly enough to read. The shot asked for first would settle it."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r7",
+    "task": "testify_read",
+    "latency_ms": 2868,
+    "input_tokens": 2896,
+    "output_tokens": 589,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "e9552e753dc7104e5d104671cacc04f0",
+    "error": null
+  }
+}
