@@ -684,7 +684,8 @@ The engines are fixed: of the dev items whose kind reaches the new protocol,
 run 6 priced 19 and asked on 1, run 7 prices 2 and asks for the code on 27,
 and the gearbox and engine overpayments that made run 6's loss are gone from
 the test list. Run 7 loses less than Claude Sonnet 5 and less than half what
-run 6 lost, while naming as well as run 6.
+run 6 lost, while naming as well as run 6. On dev it loses 5,203 naira per item (run 5
+3,241, run 6 7,991).
 
 It did not reach run 5, for two reasons the answers show:
 
