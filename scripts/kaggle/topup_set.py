@@ -1,7 +1,7 @@
 """A short top-up set: every example the fix changed, plus as many unchanged
 ones drawn at random, so the run goes on from run 6 without forgetting.
 
-    python make_topup.py <old sft> <new sft> <out> [--extra 1.0]
+    python topup_set.py <old sft> <new sft> <out> [--extra 1.0]
 
 Changed: in the new set and not in the old with the same answer (by id and
 variant), or in the old and gone from the new (a price step for an advert

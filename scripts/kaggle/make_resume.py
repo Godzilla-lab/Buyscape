@@ -1,10 +1,6 @@
-"""Write a Kaggle notebook that tops up a finished run: a short set taught on
-from that run's adapter (sft_lora --init-adapter), so the result is one adapter.
+"""Write a Kaggle notebook that resumes a training run from its save point.
 
-    python make_topup_nb.py 2b sft_r7top testify-run7 --owner adewumiadenike --sources adewumiadenike/testify-run7,adewumiadenike/testify-run6b --hours 5.5
-
-The dataset holds the short set and init/, the finished run's adapter.
-Built from make_resume.py, whose notes follow.
+    python make_resume.py 2b sft_r6 testify-run6 --owner yourname --hours 11.5
 
 The dataset holds the chats file, the photo archives (eval/raw paths inside)
 and savepoint/ from the machine that trained before. The notebook unpacks the
@@ -19,29 +15,27 @@ import argparse, base64, json
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-SP = HERE.parent
-REPO = Path("/home/user/Buyscape/src/buyscape/testify")
+REPO = HERE.parents[1] / "src" / "buyscape" / "testify"
 
 p = argparse.ArgumentParser()
 p.add_argument("size", choices=("2b", "4b"))
 p.add_argument("data", help="The chats file's stem, as in the save point's recipe: sft_r6")
 p.add_argument("dataset", help="The Kaggle dataset slug holding the chats, photo archives and savepoint/")
-p.add_argument("--owner", default="godzilla1215")
+p.add_argument("--owner", required=True, help="Your Kaggle username.")
 p.add_argument("--hours", type=float, default=11.5)
 p.add_argument("--eval-minutes", type=int, default=100)
 p.add_argument("--settings", default="--image-tokens 320 --max-len 4096", help="Must match the save point's recipe.")
-p.add_argument("--suffix", default="topup")
-p.add_argument("--lr", default="5e-5", help="Lower than the run's own: it goes on from a trained adapter.")
+p.add_argument("--suffix", default="resume1")
 p.add_argument("--sources", default="", help="Comma-separated datasets in place of the default pair, owner/slug each.")
 a = p.parse_args()
 
-t = (SP / "ktrain" / "template.py").read_text()
+t = (HERE / "template.py").read_text()
 subs = {
     "__HOURS__": str(a.hours),
     "__SFT__": base64.b64encode((REPO / "sft_lora.py").read_bytes()).decode(),
     "__VLLM__": base64.b64encode((REPO / "vllm_batch.py").read_bytes()).decode(),
     "__EVAL_S__": str(a.eval_minutes * 60),
-    "__TRAIN_ARGS__": f"--resumable --epochs 1 --lr {a.lr} --init-adapter {{init}}",
+    "__TRAIN_ARGS__": "--resumable --epochs 1",
     "# Testify fine-tune: LoRA on Qwen3-VL 8B Instruct": f"# Testify fine-tune, resumed: LoRA on Qwen3-VL {a.size.upper()} Instruct",
     'find("8b-instruct/**/config.json")': f'find("{a.size}-instruct/**/config.json")',
     'find("sft_2400.jsonl")': f'find("{a.data}.jsonl")',
@@ -100,9 +94,11 @@ print("photo caches", sorted(p.name for p in photos.iterdir()), flush=True)
 if not any(photos.iterdir()):
     print("missing input: photos", flush=True)
     os._exit(2)
-# The finished run's adapter the top-up goes on from.
-init = find("init/adapter_model.safetensors").parent
-print("going on from", init, flush=True)
+# The save point the last machine left, where --resumable looks for it.
+save = find("savepoint/state.json").parent
+(W / "adapter").mkdir(parents=True, exist_ok=True)
+sh(f"rm -rf {W}/adapter/savepoint && cp -r {save} {W}/adapter/savepoint", 600)
+print("resuming from", json.loads((W / "adapter" / "savepoint" / "state.json").read_text())["step"], flush=True)
 '''
 assert t.count(old) == 1, "photos block"
 t = t.replace(old, new)
@@ -129,8 +125,8 @@ if state["step"] < state["plan_steps"]:
 assert t.count(old) == 1, "after train"
 t = t.replace(old, new)
 
-out = HERE / f"{a.size}_{a.data}_{a.suffix}"
-out.mkdir(exist_ok=True)
+out = HERE / "out" / f"{a.size}_{a.data}_{a.suffix}"
+out.mkdir(parents=True, exist_ok=True)
 (out / "run.py").write_text(t)
 slug = f"testify-qwen3-vl-{a.size}-{a.data.replace('_', '-')}-{a.suffix}"
 meta = {
@@ -143,7 +139,7 @@ meta = {
     "kernel_sources": [], "competition_sources": [],
     "model_sources": [f"qwen-lm/qwen-3-vl/transformers/{a.size}-instruct/1"],
     "machine_shape": "NvidiaTeslaT4",
-    "docker_image": json.loads((SP / "ktrain" / "kernel-metadata.json").read_text())["docker_image"],
+    "docker_image": json.loads((HERE / "environment.json").read_text())["docker_image"],
 }
 (out / "kernel-metadata.json").write_text(json.dumps(meta, indent=1))
 compile(t, str(out / "run.py"), "exec")

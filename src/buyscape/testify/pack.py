@@ -37,6 +37,14 @@ KAGGLE_PUBLIC = "godzilla1215/buyscape-market-data-public"
 JIJI_CREDIT = ("Jiji adverts are used with the permission of Jiji Nigeria (jiji.ng), granted on 4 Nov 2026,\n"
                "on our terms: links and our own labels only, never Jiji photos or seller contact details.\n"
                "Credit: Jiji Nigeria, the data source.")
+# Where the public version says the private one can be asked for.
+PRIVATE_ON_REQUEST = (
+    "\n\n## The private version, on request\n\n"
+    "A private version exists for research partners, about 1.2 GB: every advert's photos, the sellers' own\n"
+    "words (phone numbers and emails removed), every teacher read and photo check, and the clean fine-tuning\n"
+    "set built from them, the data behind the fine-tuned model. The photos belong to the sellers and the sites\n"
+    "they were posted on, so it is shared only under a data agreement and the source's terms. To ask for it,\n"
+    "email olamibusari607@gmail.com.")
 
 SOURCES: dict[str, tuple[str, str]] = {
     "testify": ("benchmark", "Jiji search, one phrasing list per kind, the benchmark's cities"),
@@ -274,7 +282,7 @@ def datasheet(s: dict, public: bool = False) -> str:
                "can read there (price, city, condition, date), our own labels, and photo fingerprints for\n"
                "finding reposts. The benchmark's test split shows only its links, so it stays an honest test.\n"
                "Our labels and this table are shared under CC BY-SA 4.0; each advert remains its seller's.\n"
-               + JIJI_CREDIT if public else
+               + JIJI_CREDIT + PRIVATE_ON_REQUEST if public else
                "The photos and the sellers' words belong to the sellers and the site. The public version\n"
                "carries the link, facts anyone can read at the link (price, city, condition, date), our own\n"
                "labels and photo hashes for finding duplicates; never a photo, a title or a seller's words,\n"
@@ -288,7 +296,7 @@ def datasheet(s: dict, public: bool = False) -> str:
                  "`public/` holds the shareable version.")
         files = """| `adverts.csv` | One row per advert: id, role, split, source, link, city, area, kind, title, price, condition, date, photo count and paths |
 | `adverts.jsonl` | The same rows as JSON lines, with the seller's details (phone numbers removed), attributes and photo fingerprints |
-| `photos/<id>/` | The advert's photos as the site served them |
+| `photos/` | One folder per advert, named by its id: the photos as the site served them |
 | `annotations/photo_checks.jsonl` | A model's check of each training advert's photos: what it shows, whether the title matches, any text on the item |
 | `annotations/reads.jsonl` | A teacher model's full read of an advert, the training target for the small model |
 | `manifest.json` | Counts, sizes and checksums of this version |"""
