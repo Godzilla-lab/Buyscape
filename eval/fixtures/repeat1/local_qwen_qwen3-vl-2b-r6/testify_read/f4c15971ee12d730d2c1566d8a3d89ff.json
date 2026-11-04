@@ -1,0 +1,73 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r6",
+  "response": {
+    "observations": [
+      "Three photos show multiple gas cylinders of varying sizes and colors: orange, red, and blue.",
+      "The orange cylinder in the foreground is visibly worn, with scratches, paint chipping, and a handle attached.",
+      "The red cylinder has a protective mesh and a valve with a red cap.",
+      "The blue cylinder has a label with 'FARMA' and '900' visible, suggesting it may be a different brand or model.",
+      "The orange cylinder in photo 2 has a label with 'RE POL' and '12.5kg' clearly visible, along with a barcode and other markings.",
+      "The seller claims '12.5kg Foreign-Used Gas Cylinders \u2013 Strong & Reliable!'",
+      "The photos show a cluttered environment with other items like a broom, plastic bags, and a stove in the background."
+    ],
+    "identity": {
+      "status": "named",
+      "kind": "12.5kg gas cylinder",
+      "brand": "RE POL",
+      "model": "12.5kg",
+      "read_from": [
+        "photo 2 label"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "12.5kg Foreign-Used Gas Cylinders \u2013 Strong & Reliable!",
+        "verdict": "supported",
+        "evidence": "Photo 2 shows a label with '12.5kg' and 'RE POL' on the orange cylinder, confirming the weight and brand. The term 'foreign-used' is unverifiable remotely but plausible given the context and visible wear."
+      },
+      {
+        "claim": "Get a durable and high-quality foreign-used...",
+        "verdict": "unverifiable_remote",
+        "evidence": "Durability and quality cannot be assessed from photos alone; no test or proof of condition is shown."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Cylinder may be expired or not re-qualified for use",
+        "proof": "A clear photo of the inspection date and re-qualification date stamped on the cylinder, or a certificate of inspection.",
+        "if_unproven": "priced as potentially unsafe or non-compliant, which reduces value significantly"
+      },
+      {
+        "risk": "Cylinder may have internal corrosion or damage not visible from exterior",
+        "proof": "A close-up photo of the cylinder's interior or a video showing the valve and base for signs of rust or dents.",
+        "if_unproven": "priced as potentially compromised, reducing value"
+      },
+      {
+        "risk": "Cylinder may not be from a recognized foreign brand or may be counterfeit",
+        "proof": "A photo of the full label with all markings, including country of origin, and a comparison with official RE POL or similar brand documentation.",
+        "if_unproven": "priced as potentially counterfeit or low-quality, reducing value"
+      }
+    ],
+    "proof_requests": [
+      "Clear photo of the inspection and re-qualification dates stamped on the cylinder.",
+      "Close-up photo of the valve and base for signs of corrosion or damage.",
+      "Photo of the full label with all markings, including country of origin and any certification marks."
+    ],
+    "decision": "price",
+    "reason": "The item is known from the photos. What they cannot prove is priced at its worst case until the proof asked for below arrives."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r6",
+    "task": "testify_read",
+    "latency_ms": 2541,
+    "input_tokens": 2794,
+    "output_tokens": 604,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "f4c15971ee12d730d2c1566d8a3d89ff",
+    "error": null
+  }
+}

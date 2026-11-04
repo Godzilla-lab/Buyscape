@@ -1,0 +1,93 @@
+{
+  "task": "testify_read",
+  "prompt_version": "testify_read.v2",
+  "model": "local:qwen/qwen3-vl-2b-r6",
+  "response": {
+    "observations": [
+      "Photo 0: Front view of a silver pickup truck with a hexagonal grille, Toyota emblem, and LED headlights. The truck is on a gravel surface, with a red canopy and trees in the background.",
+      "Photo 1: Side view of the same truck, showing a black front bumper, black side mirrors, and black wheels. The truck appears to be a 4-door pickup. The windshield has handwritten notes: 'No Start' and '963'.",
+      "Photo 2: Rear view of the truck, showing a black tonneau cover, red taillights, and a black rear bumper. The tailgate has 'TOYOTA' and 'V6' visible. The rear windshield also has handwritten notes: 'No Start' and '963'.",
+      "All photos show a watermark 'POSTED ON JIJI' and 'TEEKAYWHEELS'.",
+      "The truck appears to be in used condition with some dirt and wear, especially on the tires and body."
+    ],
+    "identity": {
+      "status": "by_type",
+      "kind": "Toyota Tacoma pickup truck",
+      "brand": "Toyota",
+      "read_from": [
+        "photo 0 grille",
+        "photo 1 side view",
+        "photo 2 tailgate"
+      ]
+    },
+    "claims": [
+      {
+        "claim": "2024 Toyota Tacoma TRD 4x4",
+        "verdict": "unverified",
+        "evidence": "The year 2024 is not visible in any photo. The 'TRD' badge is visible on the tailgate in photo 2, but the model year cannot be confirmed from the photos alone."
+      },
+      {
+        "claim": "V6 engine",
+        "verdict": "supported",
+        "evidence": "The 'V6' badge is visible on the tailgate in photo 2."
+      },
+      {
+        "claim": "Push to start",
+        "verdict": "unverifiable_remote",
+        "evidence": "No photo shows the ignition or engine start. The handwritten note 'No Start' on the windshield in photo 1 suggests the engine may not start, but this is not proof of the 'push to start' feature."
+      },
+      {
+        "claim": "Moonroof",
+        "verdict": "unverified",
+        "evidence": "No photo shows the roof or any part of the roof mechanism. The windshield in photo 1 has handwritten notes, but no indication of a moonroof is visible."
+      },
+      {
+        "claim": "Verified duty",
+        "verdict": "unverifiable_remote",
+        "evidence": "No documentation or proof of import clearance or customs verification is visible in the photos."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Engine not starting (as claimed 'push to start')",
+        "proof": "A video or photo showing the engine starting with a push, or a photo of the key turning and engine cranking.",
+        "if_unproven": "priced as not working"
+      },
+      {
+        "risk": "Missing or damaged moonroof",
+        "proof": "A photo showing the roof mechanism or a clear view of the roof from the side or top.",
+        "if_unproven": "priced as no moonroof"
+      },
+      {
+        "risk": "Vehicle is not 2024 model year",
+        "proof": "A clear photo of the VIN plate or a photo of the dashboard showing the model year.",
+        "if_unproven": "priced as unknown model year, which may be lower value"
+      },
+      {
+        "risk": "Import clearance or 'verified duty' not verified",
+        "proof": "A copy of the import clearance document or customs paper.",
+        "if_unproven": "priced as unverified import, which may reduce value"
+      }
+    ],
+    "proof_requests": [
+      "Photo of the VIN plate or dashboard showing the model year.",
+      "Video or photo of the engine starting with a push.",
+      "Photo of the roof mechanism or a clear view of the roof.",
+      "Copy of the import clearance or customs verification document."
+    ],
+    "decision": "price",
+    "reason": "The item is known from the photos. What they cannot prove is priced at its worst case until the proof asked for below arrives."
+  },
+  "meta": {
+    "provider": "batch",
+    "model": "local:qwen/qwen3-vl-2b-r6",
+    "task": "testify_read",
+    "latency_ms": 2541,
+    "input_tokens": 3256,
+    "output_tokens": 764,
+    "cost_usd": 0.0,
+    "replayed": false,
+    "fixture_key": "53f81440e241742a580545761b84d23d",
+    "error": null
+  }
+}
