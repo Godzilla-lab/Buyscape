@@ -54,6 +54,9 @@ money moves. The promise is "nothing hidden gets priced", not "we see inside".
     sessions/       one folder per seller session from the web page, gitignored
     src/buyscape/ui the seller page, the back office and the bench, on stdlib http
     docs/proof/     case reports and the gate summary per model pair
+    docs/research/  every experiment and plan, indexed in its README.md
+    release/        the public Testify release, as published on Hugging Face
+    scripts/kaggle/ notebooks that train, resume, top up and test the models on Kaggle
     src/buyscape/   the engine
     src/buyscape/media  stills cut from seller clips, plain OpenCV, no model
 
@@ -91,8 +94,22 @@ money moves. The promise is "nothing hidden gets priced", not "we see inside".
     uv run buyscape ui                        seller page at /, back office at /office, staff questions at /office/questions, test bench at /bench
     uv run --group dev pytest
 
-Keys live in `.env` and the run command loads it. Every run appends to
+Keys come from environment variables, or a `.env` file at the root that the
+run command loads; neither is ever committed. Every run appends to
 `docs/proof/spend.jsonl`. Replayed calls cost nothing and are not counted.
+
+## Data rules
+
+- **Public means links and labels only.** Nothing published (Hugging Face,
+  Kaggle's public datasets, a public repository) carries a seller's photo, a
+  seller's own words, or a phone number or email. Jiji agreed to its adverts
+  being used on exactly these terms on 4 Nov 2026, and is credited wherever
+  they appear.
+- **Training data stays private.** The fine-tuning sets, the photo caches and
+  the private market pack are never public; the private pack is shared only
+  under a data agreement and the source's terms.
+- **A tenant's data is the tenant's.** Its prices, questions and settled deals
+  are never published without its written yes.
 
 ## Spending rules
 
