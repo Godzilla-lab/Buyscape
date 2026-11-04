@@ -1,7 +1,10 @@
 # Partnership emails for Nigerian data
 
 Drafts for asking Nigerian companies for data access. Replace everything in
-square brackets before sending. Nothing here has been sent.
+square brackets before sending.
+
+**Sent so far:** Jiji, which accepted on 4 Nov 2026 (see section 5). The rest
+have not been sent.
 
 ## What every email asks for
 
@@ -196,6 +199,13 @@ Thank you,
 ---
 
 ## 5. Jiji
+
+**Status: accepted, 4 Nov 2026.** Jiji agreed to the request below. What we
+promised stands as the condition of use: we publish advert links and our own
+labels only, never Jiji photos and never seller contact details (phone numbers
+and emails are redacted from everything we keep), and Jiji is credited as the
+data source wherever the data appears. Keep their written reply with this file's
+owner; it is not stored in the repository.
 
 **Subject:** Research data access request: open benchmark for honest AI valuation
 
