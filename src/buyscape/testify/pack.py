@@ -288,7 +288,7 @@ def datasheet(s: dict, public: bool = False) -> str:
                  "`public/` holds the shareable version.")
         files = """| `adverts.csv` | One row per advert: id, role, split, source, link, city, area, kind, title, price, condition, date, photo count and paths |
 | `adverts.jsonl` | The same rows as JSON lines, with the seller's details (phone numbers removed), attributes and photo fingerprints |
-| `photos/<id>/` | The advert's photos as the site served them |
+| `photos/` | One folder per advert, named by its id: the photos as the site served them |
 | `annotations/photo_checks.jsonl` | A model's check of each training advert's photos: what it shows, whether the title matches, any text on the item |
 | `annotations/reads.jsonl` | A teacher model's full read of an advert, the training target for the small model |
 | `manifest.json` | Counts, sizes and checksums of this version |"""
