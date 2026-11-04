@@ -650,6 +650,60 @@ shows:
   5.5 through the Batch API, about $2, on the owner's yes);
 - faulty and for-parts adverts priced at their worst case, as rule 3 asks.
 
+## The seventh training run: a type-only name never prices a part with a model (4 Nov)
+
+The fix is data. A new protocol, `protocols/vehicle_part.yaml`, says an engine
+or gearbox sets its price by its code and is never priced by type, and the
+training build now asks, on every advert, whether the kind a reader named
+reaches a protocol that prices by model: if it does and no model is named, the
+answer asks for that protocol's model shot instead of a price. Before, only
+branded electronics that a photo check had seen got this, and the crawled
+adverts had no photo check. Rebuilt, the set (`sft_r7`) changed 1,830
+examples, mostly to asking for the label: laptops (804), engines and gearboxes
+(about 400), air conditioners and washing machines.
+
+Run 7 is run 6 taught on from its adapter (`sft_lora --init-adapter`) at half
+the learning rate, on those 1,830 and 915 unchanged examples drawn at random.
+The examples carry more photos than run 6's, so it ran at 6.4 seconds a chat
+and stopped on Kaggle's time limit at step 286 of 325, the learning rate
+already near zero; held-out loss 0.437.
+
+| Test, 679 items | Run 5 | Run 6 | **Run 7** | Claude Sonnet 5 | Nemotron 3.5 Super |
+|---|---|---|---|---|---|
+| Gave a price | 21% | 34% | 22% | 19% | 43% |
+| Asked for the label | 333 | 50 | 267 | | |
+| Right about the item, judged | 95% | 96% | 95% | 99% | 97% |
+| Named a model the photos do not show | 13% | 7% | **6%** | 6% | 4% |
+| Asking price inside the range | 56% | 54% | 51% | 34% | 43% |
+| Offered above the asking price | 16% | 21% | 19% | 23% | 25% |
+| Priced answers the rules mark wrong, unread | 16 | 26 | 24 | 6 | 30 |
+| Largest overpayment, naira | 550,000 | 2,850,000 | 1,250,000 | 1,500,000 | 14,550,000 |
+| Expected loss per item, naira | **3,850** | 13,921 | 6,204 | 7,415 | 55,602 |
+
+The engines are fixed: of the dev items whose kind reaches the new protocol,
+run 6 priced 19 and asked on 1, run 7 prices 2 and asks for the code on 27,
+and the gearbox and engine overpayments that made run 6's loss are gone from
+the test list. Run 7 loses less than Claude Sonnet 5 and less than half what
+run 6 lost, while naming as well as run 6.
+
+It did not reach run 5, for two reasons the answers show:
+
+- the lesson spread: on dev it also asks for the label on 65 items of kinds
+  with no protocol of their own, where run 6 asked on 10, and each request
+  costs a buyer half a deal;
+- the price step still takes the top of a range: its largest loss is a Nikon
+  DSLR asked at 350,000, named "Nikon" without a model, priced from the one
+  matching advert at 1.6 million. Cameras have no protocol, so nothing made it
+  ask for the model, and its pick ran from the dearest advert, not the
+  cheapest.
+
+Next, in the same spirit: protocols for the branded kinds that still have
+none (cameras, game consoles, televisions, freezers), so they ask for the
+model too, and teacher picks for the 4,593 price steps that have none, so the
+pick learns to start at the worst case (Claude Haiku 5.5 through the Batch
+API, about $2, on the owner's yes). Both go into one full retrain once
+Kaggle's GPU hours reset on 7 Nov.
+
 ## Still running
 
 Gemini's, Claude's and nano's remaining conditions, and pushback and
