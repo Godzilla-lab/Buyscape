@@ -208,3 +208,7 @@ Our labels, lies, schema and scores are released under CC BY 4.0. The
 adverts belong to their sellers and the sites that host them; this release
 carries only their addresses. Phone numbers and emails were removed before
 any label was made.
+
+Jiji adverts are used with the permission of Jiji Nigeria (jiji.ng), granted
+on 4 Nov 2026, on our terms: links and our own labels only, never Jiji photos
+or seller contact details. Credit: Jiji Nigeria, the data source.

@@ -200,12 +200,16 @@ Thank you,
 
 ## 5. Jiji
 
-**Status: accepted, 4 Nov 2026.** Jiji agreed to the request below. What we
+**Status: accepted, 4 Nov 2026.** Jiji agreed to all of the request below,
+as the owner reports: both ways in (a research export or API, and a polite,
+rate-limited fetch of public adverts) and use in BuyScrap's quotes. What we
 promised stands as the condition of use: we publish advert links and our own
 labels only, never Jiji photos and never seller contact details (phone numbers
 and emails are redacted from everything we keep), and Jiji is credited as the
 data source wherever the data appears. Keep their written reply with this file's
-owner; it is not stored in the repository.
+owner; it is not stored in the repository. The credit is on the Testify card
+(huggingface.co/datasets/godzilla1215/testify) and both Kaggle market datasets,
+and `buyscape data-pack` writes it into every datasheet it builds.
 
 **Subject:** Research data access request: open benchmark for honest AI valuation
 

@@ -33,6 +33,11 @@ KAGGLE_PUBLIC = "godzilla1215/buyscape-market-data-public"
 
 # Cache folder under eval/raw: (what it is used for, how it was gathered). In
 # priority order: an advert held by two caches takes the first one's role.
+# Jiji accepted our research data request on 4 Nov 2026, on the terms we offered.
+JIJI_CREDIT = ("Jiji adverts are used with the permission of Jiji Nigeria (jiji.ng), granted on 4 Nov 2026,\n"
+               "on our terms: links and our own labels only, never Jiji photos or seller contact details.\n"
+               "Credit: Jiji Nigeria, the data source.")
+
 SOURCES: dict[str, tuple[str, str]] = {
     "testify": ("benchmark", "Jiji search, one phrasing list per kind, the benchmark's cities"),
     "buyscrap": ("tenant", "the tenant's own adverts on buyscrap.com.ng"),
@@ -268,12 +273,12 @@ def datasheet(s: dict, public: bool = False) -> str:
                "none: no photo, no title, no description. It carries the link to each advert, facts anyone\n"
                "can read there (price, city, condition, date), our own labels, and photo fingerprints for\n"
                "finding reposts. The benchmark's test split shows only its links, so it stays an honest test.\n"
-               "Our labels and this table are shared under CC BY-SA 4.0; each advert remains its seller's."
-               if public else
+               "Our labels and this table are shared under CC BY-SA 4.0; each advert remains its seller's.\n"
+               + JIJI_CREDIT if public else
                "The photos and the sellers' words belong to the sellers and the site. The public version\n"
                "carries the link, facts anyone can read at the link (price, city, condition, date), our own\n"
                "labels and photo hashes for finding duplicates; never a photo, a title or a seller's words,\n"
-               "and nothing that answers the benchmark's test split.")
+               "and nothing that answers the benchmark's test split.\n" + JIJI_CREDIT)
     if public:
         intro = "This is the public version: links and labels only, no photos and no seller's words."
         files = """| `adverts.csv` | One row per advert: id, role, split, source, link, city, area, kind, price, condition, date, photo count, and our photo check where there is one. The benchmark's test split shows only its link |
@@ -470,7 +475,8 @@ def kaggle_metadata(s: dict, slug: str, public: bool) -> dict:
         "keywords": ["business", "africa", "retail and shopping", "e-commerce services",
                      "tabular" if public else "computer vision"],
         "resources": files,
-        "userSpecifiedSources": ("Jiji Nigeria (jiji.ng) adverts read from its public listing pages; "
+        "userSpecifiedSources": ("Jiji Nigeria (jiji.ng) adverts read from its public listing pages, with Jiji's "
+                                 "permission (4 Nov 2026); "
                                  "BuyScrap Nigeria's own adverts; Jumia, Slot and Pointek shop prices. "
                                  "Collected with the Buyscape tools, github.com/Godzilla-lab/Buyscape."),
         "expectedUpdateFrequency": "weekly",
