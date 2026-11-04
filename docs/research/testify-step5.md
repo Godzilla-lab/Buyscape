@@ -615,8 +615,8 @@ its save point. Held-out loss 0.44, as run 5.
 | Right about the item, judged | 94% | **97%** | 95% | **96%** |
 | Named a model the photos do not show | | | 13% | **7%** |
 | Priced answers the rules mark wrong, unread | 3 | 4 | 16 | 26 |
-| Largest overpayment, naira | | | 550,000 | 2,850,000 |
-| Expected loss per item, naira | | | **3,850** | 13,921 |
+| Largest overpayment, naira | 250,000 | 570,000 | 550,000 | 2,850,000 |
+| Expected loss per item, naira | **3,241** | 7,991 | **3,850** | 13,921 |
 
 The read got better: judged naming is within three points of Claude Sonnet 5
 (99%) and Nemotron (97%) on test, and it names a model the photos do not show
