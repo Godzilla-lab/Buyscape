@@ -106,15 +106,18 @@ def encode(example: dict, processor, root: Path, max_tokens: int, max_len: int) 
 
 
 # A save point is only resumed with the recipe it was made with.
-RECIPE = ("model", "rank", "alpha", "lr", "epochs", "accumulate", "image_tokens", "max_len", "held_out", "limit", "data")
+RECIPE = ("model", "rank", "alpha", "lr", "epochs", "accumulate", "image_tokens", "max_len", "held_out", "limit", "data",
+          "init")
 
 
 def recipe(args, model: str) -> dict:
     """What must not change between the sessions of one run. `model` is the base's own
     signature and the data goes by file name, since each machine keeps them in its own folder."""
-    out = {k: getattr(args, k) for k in RECIPE if k not in ("model", "data")}
+    out = {k: getattr(args, k) for k in RECIPE if k not in ("model", "data", "init")}
     out["model"] = model
     out["data"] = Path(str(args.data)).name
+    # A run that goes on from another's adapter; absent in save points made before it existed.
+    out["init"] = Path(str(args.init_adapter)).name if getattr(args, "init_adapter", None) else None
     return out
 
 
@@ -224,6 +227,8 @@ def main() -> None:
     parser.add_argument("--limit", type=int, default=0, help="Use only this many chats, for a quick check.")
     parser.add_argument("--bits", type=int, choices=(16, 4), default=16, help="4 is QLoRA, for a single card.")
     parser.add_argument("--card-gb", type=float, default=12.0, help="Weights per card at 16 bits; the rest trains.")
+    parser.add_argument("--init-adapter", type=Path,
+                        help="Go on from this adapter (a finished run's), same rank and alpha, instead of from zero.")
     parser.add_argument("--resumable", action="store_true",
                         help="Train the whole plan over many sessions, from save points, on any machine.")
     parser.add_argument("--save-minutes", type=float, default=30.0, help="How often a resumable run saves its place.")
@@ -289,6 +294,16 @@ def main() -> None:
         from safetensors.torch import load_file
 
         set_peft_model_state_dict(model, load_file(str(save / "adapter_model.safetensors")))
+    elif args.init_adapter:
+        from peft import set_peft_model_state_dict
+        from safetensors.torch import load_file
+
+        # A top-up: a short set taught on from a finished run, so the result is one adapter on the base.
+        loaded = set_peft_model_state_dict(model, load_file(str(args.init_adapter / "adapter_model.safetensors")))
+        missing = [k for k in getattr(loaded, "unexpected_keys", []) or []]
+        if missing:
+            parser.error(f"the adapter in {args.init_adapter} does not fit: {missing[:3]}")
+        print(f"going on from the adapter in {args.init_adapter}", flush=True)
     trainable = [p for p in model.parameters() if p.requires_grad]
     for param in trainable:
         # The scaler can only unscale float32 gradients.

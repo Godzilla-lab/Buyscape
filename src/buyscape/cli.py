@@ -1570,7 +1570,7 @@ def testify_train_build(
                            for line in labels_path.read_text().splitlines() if line})
     from .identify.ocr import default_reader
 
-    from .protocols.schema import load_protocols
+    from .protocols.schema import load_protocols, resolve
     from .testify import construct, sellers, truths
     from .testify.convert import load_items
     from .testify.label import photos_for
@@ -1635,9 +1635,19 @@ def testify_train_build(
         shot = next((s for s in protocol.shots if {"model", "model_name", "vin"} & set(s.extract)), None)
         return (shot or next(s for s in protocols["generic"].shots if s.id == "label_or_plate")).ask
 
+    def model_ask(kind):
+        # What the reader called it decides, never the site's category: a
+        # headlight listed under car parts is not asked for a VIN.
+        protocol = resolve(protocols, kind) if kind else None
+        if protocol is None or protocol.identity_by_type:
+            return None
+        shot = next((s for s in protocol.shots if {"model", "model_name"} & set(s.extract)), None)
+        return shot.ask if shot else None
+
     def build(pick_choice, misread=None):
         return train.build(kept, rows, labels, ROOT, ocr=ocr, facts=facts, noproof=noproof, ask_for=ask_for,
-                           pool=pool, hashes=hashes, pick_choice=pick_choice, misread=misread)
+                           pool=pool, hashes=hashes, pick_choice=pick_choice, misread=misread,
+                           model_ask=model_ask)
 
     from .providers.base import MissingFixture
 
